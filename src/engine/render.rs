@@ -19,6 +19,7 @@ const HURTBOX: Color = Color::new(105, 240, 174, 255);
 const HITBOX: Color = Color::new(255, 82, 82, 255);
 const HITBOX_FILL: Color = Color::new(255, 82, 82, 82);
 const HITSPARK: Color = Color::new(255, 235, 59, 255);
+const BODY_COLLISION: Color = Color::new(218, 112, 214, 255);
 const UI_TEXT: Color = Color::new(238, 241, 247, 255);
 const UI_MUTED: Color = Color::new(165, 172, 185, 255);
 const HEALTH_BACK: Color = Color::new(60, 62, 70, 255);
@@ -31,6 +32,7 @@ pub fn draw(draw: &mut RaylibDrawHandle<'_>, world: &World) {
     draw_arena(draw);
     draw_fighter(draw, &world.player_one, PLAYER_ONE);
     draw_fighter(draw, &world.player_two, PLAYER_TWO);
+    draw_body_collision(draw, world);
     draw_hit_effects(draw, world);
     draw_hud(draw, world);
     draw_help(draw);
@@ -173,8 +175,8 @@ fn draw_help(draw: &mut RaylibDrawHandle<'_>) {
         UI_TEXT,
     );
     draw.draw_text(
-        "White = body, green = hurtbox, red = punch reach, yellow = active/hit",
-        WINDOW_WIDTH - 590,
+        "White = body, green = hurtbox, red = punch, yellow = hit, magenta = body block",
+        WINDOW_WIDTH - 690,
         WINDOW_HEIGHT - 34,
         18,
         UI_MUTED,
@@ -197,6 +199,28 @@ fn draw_health_bar(draw: &mut RaylibDrawHandle<'_>, x: i32, y: i32, health: i32,
 
     let text = format!("{label} HP {health:03}");
     draw.draw_text(&text, x, y - 24, 20, UI_TEXT);
+}
+
+fn draw_body_collision(draw: &mut RaylibDrawHandle<'_>, world: &World) {
+    if world.body_collision_timer <= 0.0 {
+        return;
+    }
+
+    let p1 = world.player_one.body_rect();
+    let p2 = world.player_two.body_rect();
+    let left_right = p1.right().min(p2.right());
+    let right_left = p1.x.max(p2.x);
+    let x = ((left_right + right_left) * 0.5).round() as i32;
+    let top = p1.y.max(p2.y).round() as i32;
+    let bottom = p1.bottom().min(p2.bottom()).round() as i32;
+
+    draw.draw_line_ex(
+        Vector2::new(x as f32, top as f32),
+        Vector2::new(x as f32, bottom as f32),
+        6.0,
+        BODY_COLLISION,
+    );
+    draw.draw_text("BODY COLLISION", x - 76, top - 24, 18, BODY_COLLISION);
 }
 
 fn draw_hit_effects(draw: &mut RaylibDrawHandle<'_>, world: &World) {

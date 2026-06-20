@@ -115,7 +115,7 @@ impl Fighter {
         self.position.x += self.velocity.x * dt;
         self.position.y += self.velocity.y * dt;
 
-        self.position.x = self.position.x.clamp(ARENA_LEFT, ARENA_RIGHT - WIDTH);
+        self.clamp_to_arena();
         if self.position.y + HEIGHT >= FLOOR_Y {
             self.position.y = FLOOR_Y - HEIGHT;
             self.velocity.y = 0.0;
@@ -135,6 +135,11 @@ impl Fighter {
         } else {
             Facing::Left
         };
+    }
+
+    /// Keeps the fighter inside the horizontal arena bounds.
+    pub fn clamp_to_arena(&mut self) {
+        self.position.x = self.position.x.clamp(ARENA_LEFT, ARENA_RIGHT - WIDTH);
     }
 
     /// Applies basic attack damage.

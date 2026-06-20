@@ -81,3 +81,32 @@ fn hit_feedback_expires_after_short_lifetime() {
 
     assert!(world.hit_effects.is_empty());
 }
+
+#[test]
+fn fighters_cannot_walk_through_each_other() {
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 420.0;
+    world.player_two.position.x = 455.0;
+
+    for _ in 0..30 {
+        world.update(
+            DT,
+            FighterInput {
+                right: true,
+                ..FighterInput::default()
+            },
+            FighterInput {
+                left: true,
+                ..FighterInput::default()
+            },
+        );
+    }
+
+    assert!(
+        !world
+            .player_one
+            .body_rect()
+            .intersects(world.player_two.body_rect())
+    );
+    assert!(world.body_collision_timer > 0.0);
+}

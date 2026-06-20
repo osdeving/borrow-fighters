@@ -38,6 +38,16 @@ impl Rect {
         self.x + self.width * 0.5
     }
 
+    /// Returns the right edge.
+    pub fn right(self) -> f32 {
+        self.x + self.width
+    }
+
+    /// Returns the bottom edge.
+    pub fn bottom(self) -> f32 {
+        self.y + self.height
+    }
+
     /// Returns the center point.
     pub fn center(self) -> Vec2 {
         Vec2::new(self.center_x(), self.y + self.height * 0.5)

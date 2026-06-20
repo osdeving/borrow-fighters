@@ -5,9 +5,11 @@
 
 use crate::combat::collision::hitbox_hits_hurtbox;
 use crate::combat::fighter::{BASIC_DAMAGE, Fighter, FighterInput, PlayerSlot};
+use crate::config::{ARENA_LEFT, ARENA_RIGHT};
 use crate::math::vec2::Vec2;
 
 const HIT_EFFECT_LIFETIME: f32 = 0.35;
+const BODY_COLLISION_EFFECT_LIFETIME: f32 = 0.12;
 
 /// Final result of a greybox match.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -31,6 +33,7 @@ pub struct World {
     pub player_two: Fighter,
     pub outcome: Option<MatchOutcome>,
     pub hit_effects: Vec<HitEffect>,
+    pub body_collision_timer: f32,
 }
 
 impl World {
@@ -41,6 +44,7 @@ impl World {
             player_two: Fighter::new(PlayerSlot::Two, "Java", 676.0),
             outcome: None,
             hit_effects: Vec::new(),
+            body_collision_timer: 0.0,
         };
         world.update_facing();
         world
@@ -48,7 +52,7 @@ impl World {
 
     /// Advances one fixed gameplay step.
     pub fn update(&mut self, dt: f32, player_one: FighterInput, player_two: FighterInput) {
-        self.update_hit_effects(dt);
+        self.update_transient_feedback(dt);
 
         if self.outcome.is_some() {
             return;
@@ -57,17 +61,19 @@ impl World {
         self.update_facing();
         self.player_one.update(dt, player_one);
         self.player_two.update(dt, player_two);
+        self.resolve_body_collision();
         self.update_facing();
         self.resolve_hits();
         self.resolve_outcome();
     }
 
-    fn update_hit_effects(&mut self, dt: f32) {
+    fn update_transient_feedback(&mut self, dt: f32) {
         for effect in &mut self.hit_effects {
             effect.timer -= dt;
             effect.position.y -= 42.0 * dt;
         }
         self.hit_effects.retain(|effect| effect.timer > 0.0);
+        self.body_collision_timer = (self.body_collision_timer - dt).max(0.0);
     }
 
     fn update_facing(&mut self) {
@@ -75,6 +81,72 @@ impl World {
         let p2 = self.player_two.clone();
         self.player_one.face_toward(&p2);
         self.player_two.face_toward(&p1);
+    }
+
+    fn resolve_body_collision(&mut self) {
+        let p1_body = self.player_one.body_rect();
+        let p2_body = self.player_two.body_rect();
+        if !p1_body.intersects(p2_body) {
+            return;
+        }
+
+        let horizontal_overlap = p1_body.right().min(p2_body.right()) - p1_body.x.max(p2_body.x);
+        let vertical_overlap = p1_body.bottom().min(p2_body.bottom()) - p1_body.y.max(p2_body.y);
+        if horizontal_overlap <= 0.0 || vertical_overlap <= 0.0 {
+            return;
+        }
+
+        self.body_collision_timer = BODY_COLLISION_EFFECT_LIFETIME;
+        let player_one_is_left = p1_body.center_x() <= p2_body.center_x();
+        let half_overlap = horizontal_overlap * 0.5;
+
+        if player_one_is_left {
+            self.player_one.position.x -= half_overlap;
+            self.player_two.position.x += half_overlap;
+            if self.player_one.velocity.x > 0.0 {
+                self.player_one.velocity.x = 0.0;
+            }
+            if self.player_two.velocity.x < 0.0 {
+                self.player_two.velocity.x = 0.0;
+            }
+        } else {
+            self.player_one.position.x += half_overlap;
+            self.player_two.position.x -= half_overlap;
+            if self.player_one.velocity.x < 0.0 {
+                self.player_one.velocity.x = 0.0;
+            }
+            if self.player_two.velocity.x > 0.0 {
+                self.player_two.velocity.x = 0.0;
+            }
+        }
+
+        self.player_one.clamp_to_arena();
+        self.player_two.clamp_to_arena();
+        self.resolve_residual_body_overlap(player_one_is_left);
+    }
+
+    fn resolve_residual_body_overlap(&mut self, player_one_is_left: bool) {
+        if !self
+            .player_one
+            .body_rect()
+            .intersects(self.player_two.body_rect())
+        {
+            return;
+        }
+
+        if player_one_is_left {
+            self.player_two.position.x = (self.player_one.body_rect().right())
+                .clamp(ARENA_LEFT, ARENA_RIGHT - self.player_two.body_rect().width);
+            self.player_one.position.x = (self.player_two.position.x
+                - self.player_one.body_rect().width)
+                .clamp(ARENA_LEFT, ARENA_RIGHT - self.player_one.body_rect().width);
+        } else {
+            self.player_one.position.x = (self.player_two.body_rect().right())
+                .clamp(ARENA_LEFT, ARENA_RIGHT - self.player_one.body_rect().width);
+            self.player_two.position.x = (self.player_one.position.x
+                - self.player_two.body_rect().width)
+                .clamp(ARENA_LEFT, ARENA_RIGHT - self.player_two.body_rect().width);
+        }
     }
 
     fn resolve_hits(&mut self) {
