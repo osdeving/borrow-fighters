@@ -8,7 +8,7 @@ use crate::math::{rect::Rect, vec2::Vec2};
 
 const WIDTH: f32 = 36.0;
 const HEIGHT: f32 = 18.0;
-const SPEED: f32 = 520.0;
+pub const PROJECTILE_SPEED: f32 = 340.0;
 pub const PROJECTILE_DAMAGE: i32 = 8;
 
 /// A hadouken-like projectile moving horizontally across the arena.
@@ -38,7 +38,7 @@ impl Projectile {
         Self {
             owner: fighter.slot,
             position: Vec2::new(x, body.y + 36.0),
-            velocity: Vec2::new(direction * SPEED, 0.0),
+            velocity: Vec2::new(direction * PROJECTILE_SPEED, 0.0),
             damage: PROJECTILE_DAMAGE,
             alive: true,
         }

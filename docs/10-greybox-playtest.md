@@ -21,8 +21,8 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Soco fraco/curto.
 - Soco forte/longo.
 - Chute.
-- Fireball horizontal simples.
-- CPU simples para o Player 2.
+- Fireball horizontal simples em velocidade legível.
+- CPU simples e pouco agressiva para o Player 2.
 - Movimento com aceleração/desaceleração.
 - Hurtbox visível.
 - Hitbox/alcance dos golpes visível.
@@ -98,8 +98,8 @@ O Player 2 começa em modo CPU. Quando CPU está ligada, os comandos manuais do 
 4. Chute deve acertar em uma altura mais baixa.
 5. Defesa deve reduzir dano e mostrar feedback azul.
 6. Abaixar deve reduzir a hurtbox visualmente.
-7. Fireball deve andar horizontalmente e causar dano ao acertar.
-8. A CPU do Player 2 deve se aproximar, atacar em alcance e defender fireballs próximas.
+7. Fireball deve andar horizontalmente em velocidade legível e causar dano ao acertar.
+8. A CPU do Player 2 deve se aproximar, hesitar antes de atacar e defender fireballs próximas.
 9. `C` deve alternar entre CPU e controle manual do Player 2.
 10. Pulo com direção pressionada deve sair em diagonal.
 11. A vida deve chegar a zero e encerrar a luta.
@@ -110,7 +110,7 @@ O Player 2 começa em modo CPU. Quando CPU está ligada, os comandos manuais do 
 
 - Os dois personagens ainda compartilham o mesmo kit de golpes.
 - Defesa é um experimento mínimo: reduz dano, mas ainda não tem direção, high/low guard ou pushback.
-- A CPU é um sparring dummy determinístico: aproxima, ataca, solta fireball em média distância e bloqueia projétil próximo.
+- A CPU é um sparring dummy determinístico: aproxima com cautela, ataca depois de delay, solta fireball em média distância e bloqueia projétil próximo.
 - Não há combo, agarrão, especial avançado, hitstun real, knockback ou IA adaptativa.
 - Não há animação final, sprites, áudio, menu, pausa ou IA avançada.
 - O balanceamento ainda não importa.

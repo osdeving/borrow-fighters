@@ -3,7 +3,7 @@
 use borrow_fighters::combat::fighter::{
     FighterInput, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE,
 };
-use borrow_fighters::combat::projectile::PROJECTILE_DAMAGE;
+use borrow_fighters::combat::projectile::{PROJECTILE_DAMAGE, PROJECTILE_SPEED};
 use borrow_fighters::game::ai::BasicCpu;
 use borrow_fighters::game::world::{MIN_BODY_GAP, MatchOutcome, World};
 
@@ -289,6 +289,7 @@ fn projectile_deals_damage_and_disappears() {
     );
 
     assert_eq!(world.projectiles.len(), 1);
+    assert_eq!(world.projectiles[0].velocity.x.abs(), PROJECTILE_SPEED);
 
     for _ in 0..45 {
         world.update(DT, FighterInput::default(), FighterInput::default());
@@ -341,9 +342,15 @@ fn basic_cpu_attacks_when_close() {
     world.player_two.position.x = 580.0;
     let mut cpu = BasicCpu::default();
 
-    let input = cpu.next_player_two_input(&world, DT);
+    let immediate = cpu.next_player_two_input(&world, DT);
+    assert!(!cpu_is_attacking(immediate));
 
-    assert!(input.light_punch || input.heavy_punch || input.kick);
+    let mut attacked = false;
+    for _ in 0..40 {
+        attacked |= cpu_is_attacking(cpu.next_player_two_input(&world, DT));
+    }
+
+    assert!(attacked);
 }
 
 #[test]
@@ -362,6 +369,10 @@ fn basic_cpu_blocks_incoming_projectile() {
     assert!(!input.light_punch);
     assert!(!input.heavy_punch);
     assert!(!input.kick);
+}
+
+fn cpu_is_attacking(input: FighterInput) -> bool {
+    input.light_punch || input.heavy_punch || input.kick
 }
 
 fn assert_body_gap(world: &World) {

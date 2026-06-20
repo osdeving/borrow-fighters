@@ -7,11 +7,13 @@ use crate::combat::fighter::{Fighter, FighterInput, PlayerSlot};
 use crate::game::world::World;
 use crate::math::rect::Rect;
 
-const BACK_AWAY_GAP: f32 = 22.0;
-const LIGHT_ATTACK_GAP: f32 = 46.0;
-const HEAVY_ATTACK_GAP: f32 = 86.0;
-const FIREBALL_GAP: f32 = 220.0;
-const APPROACH_GAP: f32 = 112.0;
+const STARTING_ACTION_COOLDOWN: f32 = 0.45;
+const BACK_AWAY_GAP: f32 = 48.0;
+const LIGHT_ATTACK_GAP: f32 = 42.0;
+const HEAVY_ATTACK_GAP: f32 = 82.0;
+const FIREBALL_MIN_GAP: f32 = 145.0;
+const FIREBALL_MAX_GAP: f32 = 260.0;
+const APPROACH_GAP: f32 = 185.0;
 const PROJECTILE_GUARD_DISTANCE: f32 = 170.0;
 
 /// Deterministic CPU controller for Player 2.
@@ -24,7 +26,7 @@ pub struct BasicCpu {
 impl Default for BasicCpu {
     fn default() -> Self {
         Self {
-            action_cooldown: 0.0,
+            action_cooldown: STARTING_ACTION_COOLDOWN,
             pattern_index: 0,
         }
     }
@@ -72,17 +74,17 @@ impl BasicCpu {
                 1 => input.kick = true,
                 _ => input.heavy_punch = true,
             }
-            self.advance_pattern(0.38);
+            self.advance_pattern(0.82);
         } else if gap <= HEAVY_ATTACK_GAP {
             if self.pattern_index.is_multiple_of(2) {
                 input.heavy_punch = true;
             } else {
                 input.kick = true;
             }
-            self.advance_pattern(0.48);
-        } else if gap <= FIREBALL_GAP {
+            self.advance_pattern(1.05);
+        } else if (FIREBALL_MIN_GAP..=FIREBALL_MAX_GAP).contains(&gap) {
             input.projectile = true;
-            self.advance_pattern(0.72);
+            self.advance_pattern(1.35);
         }
     }
 
