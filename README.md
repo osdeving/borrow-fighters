@@ -94,7 +94,7 @@ As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
 
 ## Rodando o protótipo greybox
 
-O código jogável atual implementa um greybox local para validar o básico: dois personagens, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, fireball, colisão corpo-corpo, hitbox/hurtbox, dano, vida, vitória e restart.
+O código jogável atual implementa um greybox local para validar o básico: dois personagens, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, fireball, CPU simples para o segundo jogador, colisão corpo-corpo, hitbox/hurtbox, dano, vida, vitória e restart.
 
 Requisitos iniciais:
 
@@ -119,7 +119,8 @@ Controles:
 | Soco forte / longo | `H` | `P` ou `Right Shift` |
 | Chute | `V` | `;` ou `/` |
 | Fireball | `G` | `Right Ctrl` ou `KP0` |
+| Alternar P2 CPU/manual | `C` | `C` |
 
-Use `R` para reiniciar a luta.
+O Player 2 começa em modo CPU. Use `C` para alternar entre CPU e controle manual, e `R` para reiniciar a luta.
 
 Guia completo de teste: [`docs/10-greybox-playtest.md`](docs/10-greybox-playtest.md).

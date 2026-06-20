@@ -22,6 +22,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Soco forte/longo.
 - Chute.
 - Fireball horizontal simples.
+- CPU simples para o Player 2.
 - Movimento com aceleração/desaceleração.
 - Hurtbox visível.
 - Hitbox/alcance dos golpes visível.
@@ -68,7 +69,10 @@ O GitHub também roda `Rust Check` no PR para validar formatação, testes e cli
 | Soco forte / longo | `H` | `P` ou `Right Shift` |
 | Chute | `V` | `;` ou `/` |
 | Fireball | `G` | `Right Ctrl` ou `KP0` |
+| Alternar P2 CPU/manual | `C` | `C` |
 | Reiniciar | `R` | `R` |
+
+O Player 2 começa em modo CPU. Quando CPU está ligada, os comandos manuais do Player 2 são ignorados.
 
 ## Como ler a tela
 
@@ -95,17 +99,20 @@ O GitHub também roda `Rust Check` no PR para validar formatação, testes e cli
 5. Defesa deve reduzir dano e mostrar feedback azul.
 6. Abaixar deve reduzir a hurtbox visualmente.
 7. Fireball deve andar horizontalmente e causar dano ao acertar.
-8. Pulo com direção pressionada deve sair em diagonal.
-9. A vida deve chegar a zero e encerrar a luta.
-10. `R` deve reiniciar a partida.
-11. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
+8. A CPU do Player 2 deve se aproximar, atacar em alcance e defender fireballs próximas.
+9. `C` deve alternar entre CPU e controle manual do Player 2.
+10. Pulo com direção pressionada deve sair em diagonal.
+11. A vida deve chegar a zero e encerrar a luta.
+12. `R` deve reiniciar a partida.
+13. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
 
 ## Limitações conhecidas
 
 - Os dois personagens ainda compartilham o mesmo kit de golpes.
 - Defesa é um experimento mínimo: reduz dano, mas ainda não tem direção, high/low guard ou pushback.
-- Não há combo, agarrão, especial avançado, hitstun real ou knockback.
-- Não há animação final, sprites, áudio, menu, pausa ou IA.
+- A CPU é um sparring dummy determinístico: aproxima, ataca, solta fireball em média distância e bloqueia projétil próximo.
+- Não há combo, agarrão, especial avançado, hitstun real, knockback ou IA adaptativa.
+- Não há animação final, sprites, áudio, menu, pausa ou IA avançada.
 - O balanceamento ainda não importa.
 - A colisão é propositalmente simples e axis-aligned.
 - O visual é debug/greybox, não direção de arte final.
@@ -118,6 +125,7 @@ O GitHub também roda `Rust Check` no PR para validar formatação, testes e cli
 - Adicionar knockback simples.
 - Separar melhor estados de ataque/hitstun se o kit atual for aceito.
 - Criar testes para vitória/restart e bordas da arena.
+- Ajustar heurísticas da CPU depois de playtest manual.
 
 ### Próximo passo de gameplay
 

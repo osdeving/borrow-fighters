@@ -31,7 +31,7 @@ const HEALTH_FILL: Color = Color::new(76, 217, 100, 255);
 const HEALTH_DANGER: Color = Color::new(255, 82, 82, 255);
 
 /// Draws the current world state.
-pub fn draw(draw: &mut RaylibDrawHandle<'_>, world: &World) {
+pub fn draw(draw: &mut RaylibDrawHandle<'_>, world: &World, player_two_cpu_enabled: bool) {
     draw.clear_background(BACKGROUND);
     draw_arena(draw);
     draw_projectiles(draw, world);
@@ -39,7 +39,7 @@ pub fn draw(draw: &mut RaylibDrawHandle<'_>, world: &World) {
     draw_fighter(draw, &world.player_two, PLAYER_TWO);
     draw_body_collision(draw, world);
     draw_hit_effects(draw, world);
-    draw_hud(draw, world);
+    draw_hud(draw, world, player_two_cpu_enabled);
     draw_help(draw);
 }
 
@@ -151,7 +151,7 @@ fn draw_fighter(
     }
 }
 
-fn draw_hud(draw: &mut RaylibDrawHandle<'_>, world: &World) {
+fn draw_hud(draw: &mut RaylibDrawHandle<'_>, world: &World, player_two_cpu_enabled: bool) {
     draw.draw_text(
         "Borrow Fighters / Prototype 0.1 Greybox",
         24,
@@ -159,6 +159,14 @@ fn draw_hud(draw: &mut RaylibDrawHandle<'_>, world: &World) {
         20,
         UI_TEXT,
     );
+
+    let mode = if player_two_cpu_enabled {
+        "P2 CPU: ON (C)"
+    } else {
+        "P2 CPU: OFF (C)"
+    };
+    let width = draw.measure_text(mode, 16);
+    draw.draw_text(mode, WINDOW_WIDTH - width - 24, 16, 16, UI_MUTED);
 
     draw_health_bar(draw, 24, 72, world.player_one.health, "Rust");
     draw_health_bar(
@@ -196,7 +204,7 @@ fn draw_help(draw: &mut RaylibDrawHandle<'_>) {
         UI_TEXT,
     );
     draw.draw_text(
-        "P2: arrows or J/L move, Up/I jump, Down/K crouch, U block",
+        "P2: CPU default; C toggles manual. Manual: arrows/JL, Up/I, Down/K, U",
         24,
         WINDOW_HEIGHT - 52,
         16,

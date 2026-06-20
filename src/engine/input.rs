@@ -13,6 +13,7 @@ pub struct LocalInput {
     pub player_one: FighterInput,
     pub player_two: FighterInput,
     pub restart: bool,
+    pub toggle_cpu: bool,
 }
 
 impl LocalInput {
@@ -50,6 +51,7 @@ impl LocalInput {
                     || raylib.is_key_pressed(KeyboardKey::KEY_KP_0),
             },
             restart: raylib.is_key_pressed(KeyboardKey::KEY_R),
+            toggle_cpu: raylib.is_key_pressed(KeyboardKey::KEY_C),
         }
     }
 }
