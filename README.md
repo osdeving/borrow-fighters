@@ -89,3 +89,25 @@ No dia 0, contribuições devem focar em:
 - `main` deve ser protegida no GitHub antes do primeiro trabalho colaborativo real.
 
 As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
+
+## Rodando o protótipo greybox
+
+Requisitos iniciais:
+
+- Rust estável.
+- Dependências nativas exigidas por Raylib/raylib-rs no sistema operacional.
+
+Comandos:
+
+```bash
+cargo run
+```
+
+Controles:
+
+| Jogador | Movimento | Pulo | Ataque |
+|---|---|---|---|
+| Rust | `A` / `D` | `W` | `F` |
+| Java | `←` / `→` | `↑` | `Enter` |
+
+Use `R` para reiniciar a luta.
