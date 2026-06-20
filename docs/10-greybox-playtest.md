@@ -46,6 +46,8 @@ cargo test --all-targets
 cargo clippy --all-targets --all-features -- -D warnings
 ```
 
+O GitHub também roda `Rust Check` no PR para validar formatação, testes e clippy em Linux.
+
 ## Controles
 
 | Ação | Rust / Player 1 | Java / Player 2 |

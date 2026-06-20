@@ -18,6 +18,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Skills iniciais de IA para atlas do repo, Rust/Raylib, gameplay e direção de arte.
 - Primeiro protótipo greybox jogável com Rust + Raylib.
 - Guia de playtest do greybox.
+- Workflow Rust inicial com fmt, testes e clippy.
 
 ### Em aberto
 

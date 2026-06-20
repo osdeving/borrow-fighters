@@ -59,6 +59,7 @@ A ideia é reunir visão, escopo, decisões e backlog antes de iniciar o código
 - [`.github/release.yml`](.github/release.yml): categorias de release notes.
 - [`.github/workflows/docs-check.yml`](.github/workflows/docs-check.yml): validação leve de docs e YAML.
 - [`.github/workflows/pr-title.yml`](.github/workflows/pr-title.yml): validação de título de PR como Conventional Commit.
+- [`.github/workflows/rust-check.yml`](.github/workflows/rust-check.yml): validação Rust com fmt, testes e clippy.
 
 ## Nome provisório
 
