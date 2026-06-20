@@ -1,0 +1,31 @@
+name: Decisao / ADR
+description: Proponha uma decisao que talvez precise de ADR.
+title: "[ADR]: "
+labels: ["type: adr", "status: triage"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto
+      description: Qual problema precisa de decisao?
+    validations:
+      required: true
+  - type: textarea
+    id: decision
+    attributes:
+      label: Decisao proposta
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+  - type: textarea
+    id: consequences
+    attributes:
+      label: Consequencias
+      description: Pontos positivos, negativos e riscos.
+  - type: textarea
+    id: review
+    attributes:
+      label: Quando revisar?

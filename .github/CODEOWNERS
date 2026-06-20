@@ -1,0 +1,16 @@
+# CODEOWNERS
+#
+# Este arquivo e um molde. Antes de ativar "Require review from Code Owners"
+# nas protecoes de branch, substituir ORG e TEAM por usuarios ou times reais.
+#
+# Exemplos:
+#
+# *                     @ORG/core
+# /README.md            @ORG/docs @ORG/core
+# /CONTRIBUTING.md      @ORG/docs @ORG/core
+# /docs/                @ORG/docs
+# /docs/adr/            @ORG/core
+# /docs/07-art-direction.md @ORG/art-direction @ORG/core
+# /assets/references/   @ORG/art-direction
+# /assets/placeholder/  @ORG/art-direction @ORG/prototype
+# /.github/             @ORG/docs @ORG/core

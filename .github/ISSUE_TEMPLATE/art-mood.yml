@@ -1,0 +1,35 @@
+name: Mood / direcao de arte
+description: Proponha mood, referencia visual ou direcao de arte.
+title: "[Arte]: "
+labels: ["type: proposal", "area: art", "status: triage"]
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objetivo visual
+      description: Qual problema visual esta proposta tenta resolver?
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: Referencias
+      description: Links, imagens ou descricoes. Indique fonte e o que esta sendo observado.
+    validations:
+      required: true
+  - type: textarea
+    id: readability
+    attributes:
+      label: Legibilidade de combate
+      description: Como isso ajuda personagem, golpe, impacto ou UI a ficarem mais claros?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Escopo minimo para testar
+  - type: textarea
+    id: risks
+    attributes:
+      label: Riscos
+      description: Pode ficar escuro, detalhado demais, caro de produzir ou perto demais de outra obra?

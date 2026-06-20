@@ -1,0 +1,40 @@
+name: Personagem / mecanica
+description: Proponha personagem com identidade visual e mecanica.
+title: "[Personagem]: "
+labels: ["type: proposal", "area: gameplay", "area: art", "status: triage"]
+body:
+  - type: textarea
+    id: concept
+    attributes:
+      label: Conceito tecnico
+      description: Linguagem, mascote, paradigma, ferramenta ou conceito.
+    validations:
+      required: true
+  - type: textarea
+    id: gameplay
+    attributes:
+      label: Arquetipo de gameplay
+      description: Como esse personagem joga?
+    validations:
+      required: true
+  - type: textarea
+    id: visual
+    attributes:
+      label: Silhueta e visual
+      description: Como reconhecer o personagem rapidamente?
+    validations:
+      required: true
+  - type: textarea
+    id: moves
+    attributes:
+      label: Golpes ou piadas visuais
+      description: Liste ideias e funcao no combate.
+  - type: textarea
+    id: placeholder
+    attributes:
+      label: Placeholder minimo
+      description: Como testar usando caixas, cores e formas simples?
+  - type: textarea
+    id: risks
+    attributes:
+      label: Riscos de escopo

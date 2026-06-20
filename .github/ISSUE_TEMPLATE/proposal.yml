@@ -1,0 +1,48 @@
+name: Proposta pequena
+description: Sugira uma ideia pequena, testavel e alinhada ao momento atual.
+title: "[Proposta]: "
+labels: ["type: proposal", "status: triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use este molde para ideias pequenas. Se a proposta muda direcao tecnica ou criativa, considere tambem um ADR.
+  - type: textarea
+    id: idea
+    attributes:
+      label: Ideia
+      description: O que voce quer propor?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Por que isso ajuda agora?
+      description: Explique como ajuda o prototipo, a visao ou a producao.
+    validations:
+      required: true
+  - type: textarea
+    id: minimum-scope
+    attributes:
+      label: Escopo minimo
+      description: Qual e a menor versao testavel da ideia?
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Riscos
+      description: O que pode aumentar escopo, confundir direcao ou bloquear outras pessoas?
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area principal
+      options:
+        - Gameplay
+        - Arte
+        - Docs
+        - Processo
+        - Release
+        - Outro
+    validations:
+      required: true

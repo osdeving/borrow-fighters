@@ -1,0 +1,33 @@
+name: PR Title
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+
+permissions:
+  pull-requests: read
+
+jobs:
+  conventional-commit-title:
+    name: Conventional Commit title
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          ruby -e '
+            title = ENV.fetch("PR_TITLE")
+            pattern = /\A(?:docs|feat|fix|chore|refactor|test|build|ci|art|release)(?:\([a-z0-9._-]+\))?!?: .+/
+            unless title.match?(pattern)
+              warn "PR title must follow Conventional Commits."
+              warn "Example: docs(governance): define branch strategy"
+              warn "Received: #{title}"
+              exit 1
+            end
+            puts "PR title ok: #{title}"
+          '

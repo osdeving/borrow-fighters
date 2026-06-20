@@ -1,0 +1,272 @@
+# Borrow Fighters .gitignore
+#
+# Regra geral: ignorar lixo local, caches, builds, credenciais e artefatos
+# gerados. Nao ignorar documentacao, assets-fonte, templates, Cargo.lock ou
+# arquivos de configuracao compartilhados do projeto.
+
+###############################################################################
+# OS / filesystem metadata
+###############################################################################
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.stackdump
+*:Zone.Identifier
+
+# Linux
+*~
+.directory
+.Trash-*/
+.nfs*
+
+###############################################################################
+# Editors / IDEs
+###############################################################################
+
+# VS Code / VSCodium
+.vscode/
+.history/
+
+# JetBrains IDEs: RustRover, IntelliJ IDEA, CLion, WebStorm, etc.
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# JetBrains Fleet
+.fleet/
+
+# Vim / Neovim
+*.swp
+*.swo
+*.swn
+*.un~
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list/
+tramp
+.\#*
+
+# Sublime Text
+*.sublime-workspace
+
+# Kate / KDevelop
+*.kate-swp
+.kdev4/
+*.kdev4
+
+# Zed
+.zed/
+
+###############################################################################
+# Local environment / secrets
+###############################################################################
+
+.env
+.env.*
+!.env.example
+!.env.sample
+*.env.local
+
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.agekey
+id_rsa*
+id_ed25519*
+
+secrets/
+private/
+credentials/
+credentials.json
+service-account*.json
+
+###############################################################################
+# Rust / Cargo
+###############################################################################
+
+/target/
+**/target/
+
+# Cargo.lock deve subir para aplicacoes e jogos. Repos de biblioteca podem
+# decidir diferente depois.
+!Cargo.lock
+
+# Cargo local override/config can contain machine-specific paths or tokens.
+.cargo/config
+.cargo/config.toml
+
+# rustfmt backups
+*.rs.bk
+
+# Rust coverage/profiling
+tarpaulin-report.html
+cobertura.xml
+lcov.info
+*.profraw
+*.profdata
+
+###############################################################################
+# Native build artifacts
+###############################################################################
+
+# Object files and static/dynamic libraries
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+
+# Executables and debug symbols
+*.exe
+*.exe~
+*.app
+*.dSYM/
+*.pdb
+*.ilk
+*.exp
+
+# Build systems / generated compile databases
+build/
+dist/
+debug/
+release/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+###############################################################################
+# Game/dev generated output
+###############################################################################
+
+captures/
+screenshots/
+recordings/
+playtest-recordings/
+exports/
+builds/
+packages/
+releases/
+
+###############################################################################
+# Logs, reports, local runtime state
+###############################################################################
+
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+*.pid
+*.pid.lock
+*.seed
+*.trace
+*.dump
+*.dmp
+
+coverage/
+htmlcov/
+.coverage
+.coverage.*
+
+###############################################################################
+# Temporary files / caches
+###############################################################################
+
+tmp/
+temp/
+.tmp/
+.temp/
+cache/
+.cache/
+.sass-cache/
+
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+*.rej
+*.old
+*.save
+*.part
+*.crdownload
+
+###############################################################################
+# Dependency/package manager caches
+###############################################################################
+
+node_modules/
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+vendor/
+
+###############################################################################
+# Archives and packaged binaries
+###############################################################################
+
+*.7z
+*.bz2
+*.gz
+*.rar
+*.tar
+*.tgz
+*.xz
+*.zip
+
+###############################################################################
+# Local notes / scratch space
+###############################################################################
+
+notes/private/
+notes/scratch/
+scratch/
+
+###############################################################################
+# Keep empty project directories tracked when needed
+###############################################################################
+
+!.gitkeep

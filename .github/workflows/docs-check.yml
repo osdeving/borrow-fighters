@@ -1,0 +1,42 @@
+name: Docs Check
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate-docs:
+    name: Validate docs and GitHub YAML
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate GitHub YAML files
+        run: |
+          ruby -e 'require "yaml"; Dir[".github/**/*.yml", ".github/**/*.yaml"].sort.each { |f| YAML.load_file(f); puts "ok #{f}" }'
+
+      - name: Validate local Markdown links
+        run: |
+          ruby -e '
+            bad = []
+            Dir["{README.md,CONTRIBUTING.md,CHANGELOG.md,docs/**/*.md}"].each do |file|
+              text = File.read(file)
+              text.scan(/\[[^\]]+\]\(([^)#]+)(?:#[^)]+)?\)/).flatten.each do |link|
+                next if link =~ %r{^[a-z]+://}
+                path = File.expand_path(link, File.dirname(file))
+                bad << "#{file}: #{link}" unless File.exist?(path)
+              end
+            end
+            if bad.empty?
+              puts "markdown links ok"
+            else
+              warn bad.join("\n")
+              exit 1
+            end
+          '

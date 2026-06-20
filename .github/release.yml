@@ -1,0 +1,30 @@
+changelog:
+  exclude:
+    labels:
+      - status: parked
+    authors:
+      - dependabot
+  categories:
+    - title: Gameplay
+      labels:
+        - area: gameplay
+    - title: Arte e Direcao Visual
+      labels:
+        - area: art
+    - title: Documentacao
+      labels:
+        - area: docs
+        - type: docs
+    - title: Processo e Governanca
+      labels:
+        - area: process
+        - type: release
+    - title: Correcoes
+      labels:
+        - type: bug
+    - title: Mudancas Quebraveis
+      labels:
+        - breaking
+    - title: Outros
+      labels:
+        - "*"
