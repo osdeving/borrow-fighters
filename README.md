@@ -19,6 +19,7 @@ A ideia é reunir visão, escopo, decisões e backlog antes de iniciar o código
 - [`docs/02-prototype-scope.md`](docs/02-prototype-scope.md): escopo do primeiro protótipo.
 - [`docs/03-backlog.md`](docs/03-backlog.md): backlog inicial e t-shirt sizing.
 - [`docs/04-team-briefing.md`](docs/04-team-briefing.md): briefing para reunir colaboradores.
+- [`docs/10-greybox-playtest.md`](docs/10-greybox-playtest.md): como testar o primeiro protótipo greybox.
 
 ### Governança, contribuição e release
 
@@ -58,6 +59,7 @@ A ideia é reunir visão, escopo, decisões e backlog antes de iniciar o código
 - [`.github/release.yml`](.github/release.yml): categorias de release notes.
 - [`.github/workflows/docs-check.yml`](.github/workflows/docs-check.yml): validação leve de docs e YAML.
 - [`.github/workflows/pr-title.yml`](.github/workflows/pr-title.yml): validação de título de PR como Conventional Commit.
+- [`.github/workflows/rust-check.yml`](.github/workflows/rust-check.yml): validação Rust com fmt, testes e clippy.
 
 ## Nome provisório
 
@@ -89,3 +91,29 @@ No dia 0, contribuições devem focar em:
 - `main` deve ser protegida no GitHub antes do primeiro trabalho colaborativo real.
 
 As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
+
+## Rodando o protótipo greybox
+
+O primeiro código jogável está na branch `feature/greybox-vertical-slice` e implementa um greybox local para validar o básico: dois personagens, movimento, pulo, soco, colisão corpo-corpo, hitbox/hurtbox, dano, vida, vitória e restart.
+
+Requisitos iniciais:
+
+- Rust estável.
+- Dependências nativas exigidas por Raylib/raylib-rs no sistema operacional.
+
+Comandos:
+
+```bash
+cargo run
+```
+
+Controles:
+
+| Jogador | Movimento | Pulo | Ataque |
+|---|---|---|---|
+| Rust | `A` / `D` | `W` | `F` |
+| Java | `←` / `→` | `↑` | `Enter` |
+
+Use `R` para reiniciar a luta.
+
+Guia completo de teste: [`docs/10-greybox-playtest.md`](docs/10-greybox-playtest.md).

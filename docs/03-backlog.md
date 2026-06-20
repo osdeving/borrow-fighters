@@ -11,6 +11,12 @@
 
 ## Prototype 0.1 — Two Boxes Fighting
 
+Status do primeiro greybox:
+
+- Criado em `feature/greybox-vertical-slice`.
+- Cobre o núcleo mínimo jogável em debug visual.
+- Ainda não fecha Prototype 0.1 como release; serve para playtest e discussão.
+
 | Item | Tamanho | Prioridade | Observação |
 |---|---:|---:|---|
 | Criar projeto Rust | S | Alta | Cargo project básico |
