@@ -11,6 +11,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Janela Raylib.
 - Loop de jogo com fixed timestep.
 - Arena bitmap placeholder `Terminal Arcade + Compiler Lab`.
+- Tela inicial de preferências com feature flags runtime.
 - Dois lutadores greybox: Rust e Java.
 - Corpo composto por cabeça, tronco e pernas placeholder.
 - Movimento horizontal local.
@@ -24,14 +25,17 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Chute.
 - Fireball horizontal simples em velocidade legível.
 - CPU simples e pouco agressiva para o Player 2.
+- Opção para IA mover/defender sem dar golpes.
+- Opção para Player 1 não receber dano.
 - Movimento com aceleração/desaceleração.
-- Hurtbox visível.
-- Hitbox/alcance dos golpes visível.
+- Hurtbox visível quando debug de combate está ligado.
+- Hitbox/alcance dos golpes visível quando debug de combate está ligado.
 - Dano fixo.
 - Barra de vida com número.
 - Hit spark, block spark e dano flutuante.
 - Condição de vitória.
 - Reinício da partida.
+- HUD, ajuda de controles e debug visual configuráveis.
 - Testes de regras de combate sem abrir janela.
 
 ## Como rodar
@@ -56,6 +60,20 @@ cargo clippy --all-targets --all-features -- -D warnings
 ```
 
 O GitHub também roda `Rust Check` no PR para validar formatação, testes e clippy em Linux.
+
+## Preferências
+
+O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navegar, `Espaço` para ligar/desligar uma opção e `Enter` para começar ou voltar para a luta. Durante a luta, `Esc` volta para essa tela.
+
+| Preferência | Padrão | O que testar |
+|---|---|---|
+| Player 2 usa IA | Ligado | Java deve ser controlado automaticamente. |
+| IA pode dar golpes | Ligado | Quando desligado, Java deve se mover e defender, mas não atacar. |
+| Player 1 recebe dano | Ligado | Quando desligado, Rust não deve perder vida ao ser acertado. |
+| Mostrar HUD | Ligado | Barras de vida e status no topo aparecem/desaparecem. |
+| Mostrar ajuda de controles | Desligado | Texto de controles no rodapé aparece/desaparece. |
+| Mostrar debug de combate | Desligado | Hitboxes, hurtboxes, labels e colisão corpo-corpo aparecem/desaparecem. |
+| Entrada por gamepad | Ligado | Gamepads detectados pelo Raylib podem controlar o jogo. |
 
 ## Controles
 
@@ -94,6 +112,8 @@ O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um c
 | Linha magenta | Colisão corpo-corpo bloqueando passagem |
 | Fundo Terminal Compiler Lab | Arena placeholder, não arte final |
 
+Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `Mostrar debug de combate` ligado. A ajuda de comandos no rodapé aparece somente com `Mostrar ajuda de controles` ligado.
+
 ## O que testar agora
 
 1. Um jogador não deve atravessar o outro.
@@ -105,12 +125,16 @@ O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um c
 7. Abaixar deve reduzir a hurtbox visualmente.
 8. Fireball deve andar horizontalmente em velocidade legível e causar dano ao acertar.
 9. A CPU do Player 2 deve se aproximar, hesitar antes de atacar e defender fireballs próximas.
-10. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB`.
-11. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
-12. `R` ou `Menu` deve reiniciar a partida.
-13. Pulo com direção pressionada deve sair em diagonal.
-14. A vida deve chegar a zero e encerrar a luta.
-15. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
+10. A tela de preferências deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
+11. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
+12. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Rust.
+13. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
+14. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
+15. `R` ou `Menu` deve reiniciar a partida.
+16. `Esc` durante a luta deve voltar para a tela de preferências.
+17. Pulo com direção pressionada deve sair em diagonal.
+18. A vida deve chegar a zero e encerrar a luta.
+19. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
 
 ## Limitações conhecidas
 
@@ -120,7 +144,7 @@ O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um c
 - Defesa é um experimento mínimo: reduz dano, mas ainda não tem direção, high/low guard ou pushback.
 - A CPU é um sparring dummy determinístico: aproxima com cautela, ataca depois de delay, solta fireball em média distância e bloqueia projétil próximo.
 - Não há combo, agarrão, especial avançado, hitstun real, knockback ou IA adaptativa.
-- Não há animação final, sprites, áudio, menu, pausa ou IA avançada.
+- Não há animação final, sprites, áudio, pausa ou IA avançada.
 - O balanceamento ainda não importa.
 - A colisão é propositalmente simples e axis-aligned.
 - O visual é debug/greybox, não direção de arte final.

@@ -4,9 +4,10 @@
 //! without Raylib.
 
 use crate::combat::collision::hitbox_hits_hurtbox;
-use crate::combat::fighter::{ActiveAttack, Fighter, FighterInput, PlayerSlot};
+use crate::combat::fighter::{ActiveAttack, DamageResult, Fighter, FighterInput, PlayerSlot};
 use crate::combat::projectile::Projectile;
 use crate::config::{ARENA_LEFT, ARENA_RIGHT};
+use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
 use crate::math::rect::Rect;
 use crate::math::vec2::Vec2;
 
@@ -58,6 +59,17 @@ impl World {
 
     /// Advances one fixed gameplay step.
     pub fn update(&mut self, dt: f32, player_one: FighterInput, player_two: FighterInput) {
+        self.update_with_flags(dt, player_one, player_two, FeatureFlags::default());
+    }
+
+    /// Advances one fixed gameplay step with runtime feature flags.
+    pub fn update_with_flags(
+        &mut self,
+        dt: f32,
+        player_one: FighterInput,
+        player_two: FighterInput,
+        flags: FeatureFlags,
+    ) {
         self.update_transient_feedback(dt);
 
         if self.outcome.is_some() {
@@ -71,8 +83,8 @@ impl World {
         self.update_projectiles(dt);
         self.resolve_body_collision();
         self.update_facing();
-        self.resolve_hits();
-        self.resolve_projectile_hits();
+        self.resolve_hits(flags);
+        self.resolve_projectile_hits(flags);
         self.resolve_outcome();
     }
 
@@ -149,7 +161,7 @@ impl World {
         }
     }
 
-    fn resolve_hits(&mut self) {
+    fn resolve_hits(&mut self, flags: FeatureFlags) {
         let p1_attack = landed_attack(&self.player_one, &self.player_two);
         let p2_attack = landed_attack(&self.player_two, &self.player_one);
 
@@ -164,7 +176,7 @@ impl World {
         }
 
         if let Some(attack) = p2_attack {
-            let result = self.player_one.take_hit(attack.damage);
+            let result = take_player_one_hit(&mut self.player_one, attack.damage, flags);
             self.player_two.mark_attack_hit();
             self.hit_effects.push(HitEffect::new(
                 self.player_one.hurtbox().center(),
@@ -200,7 +212,7 @@ impl World {
         self.projectiles.retain(|projectile| projectile.alive);
     }
 
-    fn resolve_projectile_hits(&mut self) {
+    fn resolve_projectile_hits(&mut self, flags: FeatureFlags) {
         for projectile in &mut self.projectiles {
             if !projectile.alive {
                 continue;
@@ -218,7 +230,8 @@ impl World {
                     ));
                 }
                 PlayerSlot::Two if projectile_hits_fighter(rect, &self.player_one) => {
-                    let result = self.player_one.take_hit(projectile.damage);
+                    let result =
+                        take_player_one_hit(&mut self.player_one, projectile.damage, flags);
                     projectile.alive = false;
                     self.hit_effects.push(HitEffect::new(
                         self.player_one.hurtbox().center(),
@@ -271,4 +284,15 @@ fn projectile_hits_fighter(projectile: Rect, fighter: &Fighter) -> bool {
         .rects()
         .into_iter()
         .any(|hurtbox| projectile.intersects(hurtbox))
+}
+
+fn take_player_one_hit(player_one: &mut Fighter, damage: i32, flags: FeatureFlags) -> DamageResult {
+    if flags.enabled(FeatureFlag::PlayerOneTakesDamage) {
+        player_one.take_hit(damage)
+    } else {
+        DamageResult {
+            damage: 0,
+            blocked: false,
+        }
+    }
 }

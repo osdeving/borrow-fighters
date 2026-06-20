@@ -5,6 +5,7 @@ use borrow_fighters::combat::fighter::{
 };
 use borrow_fighters::combat::projectile::{PROJECTILE_DAMAGE, PROJECTILE_SPEED};
 use borrow_fighters::game::ai::BasicCpu;
+use borrow_fighters::game::feature_flags::{FeatureFlag, FeatureFlags};
 use borrow_fighters::game::world::{MIN_BODY_GAP, MatchOutcome, World};
 
 const DT: f32 = 1.0 / 60.0;
@@ -127,6 +128,34 @@ fn block_reduces_incoming_damage() {
     assert_eq!(world.player_two.health, 100 - LIGHT_PUNCH_DAMAGE / 4);
     assert_eq!(world.hit_effects.len(), 1);
     assert!(world.hit_effects[0].blocked);
+}
+
+#[test]
+fn player_one_damage_flag_prevents_damage_from_attacks() {
+    let mut flags = FeatureFlags::default();
+    flags.set(FeatureFlag::PlayerOneTakesDamage, false);
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 420.0;
+    world.player_two.position.x = 475.0;
+
+    world.update_with_flags(
+        DT,
+        FighterInput::default(),
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        flags,
+    );
+
+    for _ in 0..20 {
+        world.update_with_flags(DT, FighterInput::default(), FighterInput::default(), flags);
+    }
+
+    assert_eq!(world.player_one.health, 100);
+    assert_eq!(world.hit_effects.len(), 1);
+    assert_eq!(world.hit_effects[0].damage, 0);
+    assert_eq!(world.outcome, None);
 }
 
 #[test]

@@ -50,6 +50,7 @@ A ideia é reunir visão, escopo, decisões e backlog antes de iniciar o código
 - [`docs/adr/0001-stack-rust-raylib.md`](docs/adr/0001-stack-rust-raylib.md): decisão inicial de stack.
 - [`docs/adr/0002-version-control-workflow.md`](docs/adr/0002-version-control-workflow.md): fluxo de branches, PRs e commits.
 - [`docs/adr/0003-code-architecture-rust-raylib.md`](docs/adr/0003-code-architecture-rust-raylib.md): arquitetura inicial de código Rust + Raylib.
+- [`docs/adr/0004-runtime-feature-flags-and-preferences.md`](docs/adr/0004-runtime-feature-flags-and-preferences.md): feature flags runtime e tela de preferências.
 
 ### GitHub
 
@@ -94,7 +95,7 @@ As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
 
 ## Rodando o protótipo greybox
 
-O código jogável atual implementa um greybox local para validar o básico: dois personagens, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, fireball, CPU simples para o segundo jogador, colisão corpo-corpo, hitbox/hurtbox, dano, vida, vitória e restart.
+O código jogável atual implementa um greybox local para validar o básico: tela inicial de ajustes, dois personagens, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, fireball, CPU simples para o segundo jogador, colisão corpo-corpo, hitbox/hurtbox opcional, dano, vida, vitória e restart.
 
 Requisitos iniciais:
 
@@ -106,6 +107,20 @@ Comandos:
 ```bash
 cargo run
 ```
+
+O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navegar, `Espaço` para ligar/desligar uma opção e `Enter` para começar ou voltar para a luta. Durante a luta, `Esc` volta para essa tela.
+
+Preferências disponíveis:
+
+| Preferência | Padrão | Efeito |
+|---|---|---|
+| Player 2 usa IA | Ligado | Controla Java automaticamente. |
+| IA pode dar golpes | Ligado | Quando desligado, a IA ainda se move e defende, mas não ataca. |
+| Player 1 recebe dano | Ligado | Quando desligado, Rust fica invencível para playtest. |
+| Mostrar HUD | Ligado | Exibe vida, título e status no topo. |
+| Mostrar ajuda de controles | Desligado | Exibe comandos no rodapé durante a luta. |
+| Mostrar debug de combate | Desligado | Exibe hitboxes, hurtboxes, labels e colisão corpo-corpo. |
+| Entrada por gamepad | Ligado | Usa controles detectados pelo Raylib quando disponíveis. |
 
 Controles:
 

@@ -8,8 +8,10 @@ use raylib::prelude::*;
 use crate::combat::fighter::{AttackPhase, PlayerSlot};
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
 use crate::engine::assets::GameAssets;
+use crate::game::feature_flags::{FeatureFlag, FeatureFlags, PREFERENCE_FLAGS};
 use crate::game::world::{MatchOutcome, World};
 use crate::math::rect::Rect;
+use crate::scenes::preferences::PreferencesMenu;
 
 const BACKGROUND: Color = Color::new(18, 20, 26, 255);
 const FLOOR: Color = Color::new(72, 76, 88, 255);
@@ -30,31 +32,164 @@ const UI_MUTED: Color = Color::new(165, 172, 185, 255);
 const HEALTH_BACK: Color = Color::new(60, 62, 70, 255);
 const HEALTH_FILL: Color = Color::new(76, 217, 100, 255);
 const HEALTH_DANGER: Color = Color::new(255, 82, 82, 255);
+const PANEL: Color = Color::new(12, 14, 20, 218);
+const PANEL_BORDER: Color = Color::new(122, 132, 150, 255);
+const SELECTED_ROW: Color = Color::new(42, 49, 64, 230);
+
+/// Connected gamepad status reported by Raylib for this frame.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct GamepadStatus {
+    pub player_one: bool,
+    pub player_two: bool,
+}
 
 /// Draws the current world state.
-pub fn draw(
+pub fn draw_fight(
     draw: &mut RaylibDrawHandle<'_>,
     world: &World,
-    player_two_cpu_enabled: bool,
-    player_one_gamepad_connected: bool,
-    player_two_gamepad_connected: bool,
+    flags: FeatureFlags,
+    gamepad_status: GamepadStatus,
     assets: &GameAssets,
 ) {
     draw.clear_background(BACKGROUND);
     draw_arena(draw, assets.arena_background.as_ref());
-    draw_projectiles(draw, world);
-    draw_fighter(draw, &world.player_one, PLAYER_ONE);
-    draw_fighter(draw, &world.player_two, PLAYER_TWO);
-    draw_body_collision(draw, world);
+    let show_debug = flags.enabled(FeatureFlag::ShowCombatDebug);
+
+    draw_projectiles(draw, world, show_debug);
+    draw_fighter(draw, &world.player_one, PLAYER_ONE, show_debug);
+    draw_fighter(draw, &world.player_two, PLAYER_TWO, show_debug);
+    if show_debug {
+        draw_body_collision(draw, world);
+    }
     draw_hit_effects(draw, world);
-    draw_hud(
-        draw,
-        world,
-        player_two_cpu_enabled,
-        player_one_gamepad_connected,
-        player_two_gamepad_connected,
+
+    if flags.enabled(FeatureFlag::ShowHud) {
+        draw_hud(draw, world, flags, gamepad_status);
+    }
+
+    if flags.enabled(FeatureFlag::ShowControlsHelp) {
+        draw_help(draw);
+    }
+}
+
+/// Draws the initial preferences screen.
+pub fn draw_preferences(
+    draw: &mut RaylibDrawHandle<'_>,
+    menu: &PreferencesMenu,
+    flags: FeatureFlags,
+    gamepad_status: GamepadStatus,
+    assets: &GameAssets,
+) {
+    draw.clear_background(BACKGROUND);
+    draw_arena(draw, assets.arena_background.as_ref());
+    draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(0, 0, 0, 138));
+
+    let panel_x = 88;
+    let panel_y = 64;
+    let panel_width = WINDOW_WIDTH - panel_x * 2;
+    let panel_height = WINDOW_HEIGHT - panel_y * 2;
+    draw.draw_rectangle(panel_x, panel_y, panel_width, panel_height, PANEL);
+    draw.draw_rectangle_lines(panel_x, panel_y, panel_width, panel_height, PANEL_BORDER);
+
+    draw.draw_text("Borrow Fighters", panel_x + 32, panel_y + 26, 30, UI_TEXT);
+    draw.draw_text(
+        "Ajustes do prototipo",
+        panel_x + 32,
+        panel_y + 62,
+        18,
+        UI_MUTED,
     );
-    draw_help(draw);
+
+    let status = format!(
+        "Joystick Raylib: P1 {} | P2 {}",
+        connected_label(gamepad_status.player_one),
+        connected_label(gamepad_status.player_two)
+    );
+    let status_width = draw.measure_text(&status, 16);
+    draw.draw_text(
+        &status,
+        panel_x + panel_width - status_width - 32,
+        panel_y + 34,
+        16,
+        UI_MUTED,
+    );
+
+    let row_start_y = panel_y + 90;
+    let row_spacing = 36;
+
+    draw_menu_row(
+        draw,
+        MenuRow {
+            x: panel_x + 32,
+            y: row_start_y,
+            width: panel_width - 64,
+            selected: menu.selected() == 0,
+            label: "Comecar luta",
+            description: "Enter/Menu inicia ou volta para a luta.",
+            checked: None,
+        },
+    );
+
+    for (index, flag) in PREFERENCE_FLAGS.iter().copied().enumerate() {
+        let row = index + 1;
+        draw_menu_row(
+            draw,
+            MenuRow {
+                x: panel_x + 32,
+                y: row_start_y + row as i32 * row_spacing,
+                width: panel_width - 64,
+                selected: menu.selected() == row,
+                label: flag.label(),
+                description: flag.description(),
+                checked: Some(flags.enabled(flag)),
+            },
+        );
+    }
+
+    draw.draw_text(
+        "Setas/W/S navegam | Espaco alterna | Enter comeca | Esc abre ajustes durante a luta",
+        panel_x + 32,
+        panel_y + panel_height - 34,
+        15,
+        UI_MUTED,
+    );
+}
+
+struct MenuRow<'a> {
+    x: i32,
+    y: i32,
+    width: i32,
+    selected: bool,
+    label: &'a str,
+    description: &'a str,
+    checked: Option<bool>,
+}
+
+fn draw_menu_row(draw: &mut RaylibDrawHandle<'_>, row: MenuRow<'_>) {
+    let height = 32;
+    if row.selected {
+        draw.draw_rectangle(row.x, row.y - 2, row.width, height + 4, SELECTED_ROW);
+        draw.draw_rectangle_lines(row.x, row.y - 2, row.width, height + 4, PANEL_BORDER);
+    }
+
+    let label_x = if let Some(enabled) = row.checked {
+        draw_checkbox(draw, row.x + 14, row.y + 6, enabled);
+        row.x + 48
+    } else {
+        draw.draw_text(">", row.x + 18, row.y + 6, 18, UI_TEXT);
+        row.x + 48
+    };
+
+    draw.draw_text(row.label, label_x, row.y + 2, 18, UI_TEXT);
+    draw.draw_text(row.description, label_x, row.y + 20, 12, UI_MUTED);
+}
+
+fn draw_checkbox(draw: &mut RaylibDrawHandle<'_>, x: i32, y: i32, enabled: bool) {
+    let size = 18;
+    draw.draw_rectangle_lines(x, y, size, size, UI_TEXT);
+    if enabled {
+        draw.draw_rectangle(x + 4, y + 4, size - 8, size - 8, HEALTH_FILL);
+    }
 }
 
 fn draw_arena(draw: &mut RaylibDrawHandle<'_>, background: Option<&Texture2D>) {
@@ -119,6 +254,7 @@ fn draw_fighter(
     draw: &mut RaylibDrawHandle<'_>,
     fighter: &crate::combat::fighter::Fighter,
     body_color: Color,
+    show_debug: bool,
 ) {
     let phase = fighter.attack_phase();
     let body = match phase {
@@ -129,12 +265,14 @@ fn draw_fighter(
     };
 
     draw_body_parts(draw, fighter, body);
-    outline_rect(draw, fighter.body_rect(), BODY_OUTLINE);
-    for hurtbox in fighter.hurtboxes().rects() {
-        outline_rect(draw, hurtbox, HURTBOX);
+    if show_debug {
+        outline_rect(draw, fighter.body_rect(), BODY_OUTLINE);
+        for hurtbox in fighter.hurtboxes().rects() {
+            outline_rect(draw, hurtbox, HURTBOX);
+        }
     }
 
-    if let Some(attack_box) = fighter.attack_box() {
+    if show_debug && let Some(attack_box) = fighter.attack_box() {
         draw.draw_rectangle(
             attack_box.x.round() as i32,
             attack_box.y.round() as i32,
@@ -159,10 +297,12 @@ fn draw_fighter(
             GUARD_FILL,
         );
         outline_rect(draw, guard, GUARD);
-        draw.draw_text("BLOCK", guard.x as i32 - 18, guard.y as i32 - 22, 16, GUARD);
+        if show_debug {
+            draw.draw_text("BLOCK", guard.x as i32 - 18, guard.y as i32 - 22, 16, GUARD);
+        }
     }
 
-    if let Some(hitbox) = fighter.active_hitbox() {
+    if show_debug && let Some(hitbox) = fighter.active_hitbox() {
         draw.draw_text(
             "ACTIVE",
             hitbox.x as i32,
@@ -176,7 +316,7 @@ fn draw_fighter(
     let label_y = (fighter.position.y - 22.0) as i32;
     draw.draw_text(fighter.name, label_x, label_y, 16, UI_TEXT);
 
-    if phase != AttackPhase::Idle {
+    if show_debug && phase != AttackPhase::Idle {
         let attack_label = fighter
             .attack_kind()
             .map_or("ATTACK", crate::combat::fighter::AttackKind::label);
@@ -187,7 +327,7 @@ fn draw_fighter(
             AttackPhase::Idle => "",
         };
         draw.draw_text(text, label_x, label_y - 22, 18, HITSPARK);
-    } else if fighter.crouching {
+    } else if show_debug && fighter.crouching {
         draw.draw_text("CROUCH", label_x, label_y - 22, 18, UI_MUTED);
     }
 }
@@ -195,9 +335,8 @@ fn draw_fighter(
 fn draw_hud(
     draw: &mut RaylibDrawHandle<'_>,
     world: &World,
-    player_two_cpu_enabled: bool,
-    player_one_gamepad_connected: bool,
-    player_two_gamepad_connected: bool,
+    flags: FeatureFlags,
+    gamepad_status: GamepadStatus,
 ) {
     draw.draw_text(
         "Borrow Fighters / Prototype 0.1 Greybox",
@@ -208,10 +347,10 @@ fn draw_hud(
     );
 
     let status = format!(
-        "P2 CPU: {} (C/View) | Pad P1: {} | P2: {}",
-        if player_two_cpu_enabled { "ON" } else { "OFF" },
-        connected_label(player_one_gamepad_connected),
-        connected_label(player_two_gamepad_connected)
+        "P2 CPU {} | Pad P1 {} | P2 {}",
+        connected_label(flags.enabled(FeatureFlag::PlayerTwoCpu)),
+        connected_label(gamepad_status.player_one),
+        connected_label(gamepad_status.player_two)
     );
     let width = draw.measure_text(&status, 14);
     draw.draw_text(&status, WINDOW_WIDTH - width - 24, 16, 14, UI_MUTED);
@@ -289,7 +428,7 @@ fn draw_health_bar(draw: &mut RaylibDrawHandle<'_>, x: i32, y: i32, health: i32,
     draw.draw_text(&text, x, y - 24, 20, UI_TEXT);
 }
 
-fn draw_projectiles(draw: &mut RaylibDrawHandle<'_>, world: &World) {
+fn draw_projectiles(draw: &mut RaylibDrawHandle<'_>, world: &World, show_debug: bool) {
     for projectile in &world.projectiles {
         let rect = projectile.rect();
         draw.draw_rectangle(
@@ -299,20 +438,23 @@ fn draw_projectiles(draw: &mut RaylibDrawHandle<'_>, world: &World) {
             rect.height.round() as i32,
             PROJECTILE_FILL,
         );
-        outline_rect(draw, rect, PROJECTILE);
         draw.draw_circle(
             rect.center().x.round() as i32,
             rect.center().y.round() as i32,
             8.0,
             PROJECTILE,
         );
-        draw.draw_text(
-            "FIREBALL",
-            rect.x as i32 - 12,
-            rect.y as i32 - 20,
-            14,
-            PROJECTILE,
-        );
+
+        if show_debug {
+            outline_rect(draw, rect, PROJECTILE);
+            draw.draw_text(
+                "FIREBALL",
+                rect.x as i32 - 12,
+                rect.y as i32 - 20,
+                14,
+                PROJECTILE,
+            );
+        }
     }
 }
 

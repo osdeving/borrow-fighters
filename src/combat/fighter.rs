@@ -416,6 +416,17 @@ impl AttackState {
 }
 
 impl FighterInput {
+    /// Returns this input with offensive actions removed.
+    pub fn without_attacks(self) -> Self {
+        Self {
+            light_punch: false,
+            heavy_punch: false,
+            kick: false,
+            projectile: false,
+            ..self
+        }
+    }
+
     fn requested_attack(self) -> Option<AttackKind> {
         if self.heavy_punch {
             Some(AttackKind::HeavyPunch)

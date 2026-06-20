@@ -31,6 +31,7 @@ borrow-fighters/
 │   ├── config.rs               # Constantes de janela, timestep e debug flags
 │   ├── game/
 │   │   ├── mod.rs              # Estado de partida e regras de fluxo
+│   │   ├── feature_flags.rs    # Flags runtime para experimentos e preferências
 │   │   ├── match_state.rs      # Round, timer, vitória, reinício
 │   │   └── world.rs            # Estado jogável mínimo do protótipo
 │   ├── engine/
@@ -54,6 +55,7 @@ borrow-fighters/
 │   ├── scenes/
 │   │   ├── mod.rs              # Estados de tela
 │   │   ├── boot.rs             # Inicialização e carregamento mínimo
+│   │   ├── preferences.rs      # Tela de ajustes e feature flags de playtest
 │   │   ├── fight.rs            # Cena jogável principal
 │   │   └── victory.rs          # Resultado e reinício
 │   ├── ui/
@@ -111,6 +113,18 @@ No começo, personagens podem ser dados e pequenas funções. Não criar sistema
 ### `scenes/*`
 
 Usar cenas simples para separar fluxo de tela sem criar framework pesado.
+
+### Feature flags runtime
+
+Opções experimentais de gameplay, UI e input devem entrar por `src/game/feature_flags.rs`.
+
+Regras:
+
+- criar um novo `FeatureFlag`;
+- definir label, descrição e default no mesmo módulo;
+- consumir com `FeatureFlags::enabled`, `set` ou `toggle`;
+- evitar booleans soltos em `App`, `World`, render ou IA;
+- registrar ADR quando a flag virar decisão estrutural.
 
 ## Loop de jogo proposto
 

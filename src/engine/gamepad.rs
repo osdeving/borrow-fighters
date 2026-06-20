@@ -56,6 +56,26 @@ pub fn toggle_cpu_pressed(raylib: &RaylibHandle, gamepad: i32) -> bool {
     is_connected(raylib, gamepad) && button_pressed(raylib, gamepad, select_button())
 }
 
+/// Returns true when the gamepad moved menu selection upward this frame.
+pub fn menu_up_pressed(raylib: &RaylibHandle, gamepad: i32) -> bool {
+    is_connected(raylib, gamepad) && button_pressed(raylib, gamepad, dpad_up())
+}
+
+/// Returns true when the gamepad moved menu selection downward this frame.
+pub fn menu_down_pressed(raylib: &RaylibHandle, gamepad: i32) -> bool {
+    is_connected(raylib, gamepad) && button_pressed(raylib, gamepad, dpad_down())
+}
+
+/// Returns true when the gamepad activated a menu row this frame.
+pub fn menu_activate_pressed(raylib: &RaylibHandle, gamepad: i32) -> bool {
+    is_connected(raylib, gamepad) && button_pressed(raylib, gamepad, face_down())
+}
+
+/// Returns true when the gamepad requested starting the fight this frame.
+pub fn menu_start_pressed(raylib: &RaylibHandle, gamepad: i32) -> bool {
+    restart_pressed(raylib, gamepad)
+}
+
 fn button_down(raylib: &RaylibHandle, gamepad: i32, button: GamepadButton) -> bool {
     raylib.is_gamepad_button_down(gamepad, button)
 }
