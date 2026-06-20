@@ -1,0 +1,4 @@
+interface:
+  display_name: "Borrow Fighters Gameplay Design"
+  short_description: "Shape prototype fighting mechanics"
+  default_prompt: "Use $borrow-fighters-gameplay-design to propose or review fighting-game mechanics."

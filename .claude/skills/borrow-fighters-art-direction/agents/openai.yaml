@@ -1,0 +1,4 @@
+interface:
+  display_name: "Borrow Fighters Art Direction"
+  short_description: "Guide moods, sprites, and assets"
+  default_prompt: "Use $borrow-fighters-art-direction to review art, mood, or character concepts."

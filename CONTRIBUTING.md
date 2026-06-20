@@ -15,6 +15,7 @@ Leia:
 3. [`docs/01-mini-gdd.md`](docs/01-mini-gdd.md)
 4. [`docs/05-governance.md`](docs/05-governance.md)
 5. [`docs/07-art-direction.md`](docs/07-art-direction.md), se a contribuição envolver arte, mood ou personagem.
+6. [`docs/08-code-architecture.md`](docs/08-code-architecture.md), se a contribuição envolver código.
 
 ## Contribuições úteis agora
 
@@ -22,6 +23,7 @@ Leia:
 - Sugira cortes de escopo.
 - Proponha personagens com mecânica associada.
 - Proponha moodboards ou direção visual com riscos claros.
+- Para código, siga o esboço de arquitetura antes de criar módulos novos.
 - Evite sugerir sistemas grandes antes do protótipo 0.1.
 - Discuta decisões técnicas via ADR.
 

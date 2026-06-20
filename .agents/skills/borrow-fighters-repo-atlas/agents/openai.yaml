@@ -1,0 +1,4 @@
+interface:
+  display_name: "Borrow Fighters Repo Atlas"
+  short_description: "Navigate project docs and code layout"
+  default_prompt: "Use $borrow-fighters-repo-atlas to orient yourself before changing Borrow Fighters."

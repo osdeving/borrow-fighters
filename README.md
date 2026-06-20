@@ -35,10 +35,20 @@ A ideia é reunir visão, escopo, decisões e backlog antes de iniciar o código
 - [`docs/templates/adr-template.md`](docs/templates/adr-template.md): molde para novas decisões.
 - [`docs/templates/release-checklist.md`](docs/templates/release-checklist.md): checklist de release.
 
+### Código e IA
+
+- [`docs/08-code-architecture.md`](docs/08-code-architecture.md): esboço da arquitetura Rust + Raylib.
+- [`docs/09-ai-collaboration.md`](docs/09-ai-collaboration.md): como Codex, Claude e skills devem navegar o projeto.
+- [`AGENTS.md`](AGENTS.md): instruções persistentes para Codex.
+- [`CLAUDE.md`](CLAUDE.md): instruções persistentes para Claude Code.
+- [`.agents/skills/`](.agents/skills): skills repo-local para Codex.
+- [`.claude/skills/`](.claude/skills): skills de projeto para Claude Code.
+
 ### Decisões registradas
 
 - [`docs/adr/0001-stack-rust-raylib.md`](docs/adr/0001-stack-rust-raylib.md): decisão inicial de stack.
 - [`docs/adr/0002-version-control-workflow.md`](docs/adr/0002-version-control-workflow.md): fluxo de branches, PRs e commits.
+- [`docs/adr/0003-code-architecture-rust-raylib.md`](docs/adr/0003-code-architecture-rust-raylib.md): arquitetura inicial de código Rust + Raylib.
 
 ### GitHub
 

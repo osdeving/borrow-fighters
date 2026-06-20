@@ -1,0 +1,4 @@
+interface:
+  display_name: "Borrow Fighters Rust Gamedev"
+  short_description: "Implement Rust/Raylib gameplay safely"
+  default_prompt: "Use $borrow-fighters-rust-gamedev to plan or implement Rust/Raylib gameplay changes."

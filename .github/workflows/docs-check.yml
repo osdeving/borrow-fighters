@@ -19,13 +19,13 @@ jobs:
 
       - name: Validate GitHub YAML files
         run: |
-          ruby -e 'require "yaml"; Dir[".github/**/*.yml", ".github/**/*.yaml"].sort.each { |f| YAML.load_file(f); puts "ok #{f}" }'
+          ruby -e 'require "yaml"; Dir[".github/**/*.yml", ".github/**/*.yaml", ".agents/**/*.yaml", ".claude/**/*.yaml"].sort.each { |f| YAML.load_file(f); puts "ok #{f}" }'
 
       - name: Validate local Markdown links
         run: |
           ruby -e '
             bad = []
-            Dir["{README.md,CONTRIBUTING.md,CHANGELOG.md,docs/**/*.md}"].each do |file|
+            Dir["{README.md,CONTRIBUTING.md,CHANGELOG.md,AGENTS.md,CLAUDE.md,docs/**/*.md,.agents/**/*.md,.claude/**/*.md}"].each do |file|
               text = File.read(file)
               text.scan(/\[[^\]]+\]\(([^)#]+)(?:#[^)]+)?\)/).flatten.each do |link|
                 next if link =~ %r{^[a-z]+://}

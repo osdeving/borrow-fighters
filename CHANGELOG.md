@@ -13,6 +13,9 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Templates de contribuição para GitHub, arte, personagens, ADR e release.
 - ADR de fluxo de versionamento com Trunk-Based Development adaptado e Conventional Commits.
 - Workflows iniciais para validar documentação, YAML do GitHub e título de PR.
+- Esboço de arquitetura Rust + Raylib sem código de produção.
+- Instruções repo-local para Codex e Claude Code.
+- Skills iniciais de IA para atlas do repo, Rust/Raylib, gameplay e direção de arte.
 
 ### Em aberto
 
