@@ -18,7 +18,7 @@ const ATTACK_ACTIVE_END: f32 = 0.18;
 const HITBOX_WIDTH: f32 = 58.0;
 const HITBOX_HEIGHT: f32 = 34.0;
 const HITBOX_Y_OFFSET: f32 = 30.0;
-const BASIC_DAMAGE: i32 = 12;
+pub const BASIC_DAMAGE: i32 = 12;
 
 /// Identifies a local player slot.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -32,6 +32,15 @@ pub enum PlayerSlot {
 pub enum Facing {
     Left,
     Right,
+}
+
+/// Visible attack phase used by debug rendering.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum AttackPhase {
+    Idle,
+    Startup,
+    Active,
+    Recovery,
 }
 
 /// Input commands for one fighter during one simulation tick.
@@ -163,21 +172,28 @@ impl Fighter {
 
     /// Returns the active hitbox if the current attack is active.
     pub fn active_hitbox(&self) -> Option<Rect> {
-        self.attack.and_then(|attack| {
-            attack.is_active().then(|| {
-                let x = if self.facing == Facing::Right {
-                    self.position.x + WIDTH
-                } else {
-                    self.position.x - HITBOX_WIDTH
-                };
-                Rect::new(
-                    x,
-                    self.position.y + HITBOX_Y_OFFSET,
-                    HITBOX_WIDTH,
-                    HITBOX_HEIGHT,
-                )
-            })
-        })
+        self.attack
+            .and_then(|attack| attack.is_active().then(|| self.attack_box()))
+    }
+
+    /// Returns the attack reach box while the punch animation is running.
+    pub fn attack_box(&self) -> Rect {
+        let x = if self.facing == Facing::Right {
+            self.position.x + WIDTH
+        } else {
+            self.position.x - HITBOX_WIDTH
+        };
+        Rect::new(
+            x,
+            self.position.y + HITBOX_Y_OFFSET,
+            HITBOX_WIDTH,
+            HITBOX_HEIGHT,
+        )
+    }
+
+    /// Returns the current attack phase for debug rendering.
+    pub fn attack_phase(&self) -> AttackPhase {
+        self.attack.map_or(AttackPhase::Idle, AttackState::phase)
     }
 
     /// Returns true when health reached zero.
@@ -189,5 +205,15 @@ impl Fighter {
 impl AttackState {
     fn is_active(self) -> bool {
         self.elapsed >= ATTACK_ACTIVE_START && self.elapsed <= ATTACK_ACTIVE_END
+    }
+
+    fn phase(self) -> AttackPhase {
+        if self.elapsed < ATTACK_ACTIVE_START {
+            AttackPhase::Startup
+        } else if self.elapsed <= ATTACK_ACTIVE_END {
+            AttackPhase::Active
+        } else {
+            AttackPhase::Recovery
+        }
     }
 }

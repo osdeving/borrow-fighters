@@ -3,6 +3,8 @@
 //! Hitboxes, hurtboxes, and fighter bodies use this type so combat logic stays
 //! detached from the renderer.
 
+use crate::math::vec2::Vec2;
+
 /// Axis-aligned rectangle in screen coordinates.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Rect {
@@ -34,5 +36,10 @@ impl Rect {
     /// Returns the horizontal center.
     pub fn center_x(self) -> f32 {
         self.x + self.width * 0.5
+    }
+
+    /// Returns the center point.
+    pub fn center(self) -> Vec2 {
+        Vec2::new(self.center_x(), self.y + self.height * 0.5)
     }
 }
