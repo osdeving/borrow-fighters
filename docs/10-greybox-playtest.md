@@ -2,7 +2,7 @@
 
 ## Status
 
-Branch: `feature/greybox-vertical-slice`.
+Branch de trabalho atual: `feature/projectile-and-smoother-movement`.
 
 Este é o primeiro código jogável do projeto. O objetivo não é parecer bonito; é provar que o loop básico de luta existe e pode ser discutido por gameplay, arte, produção e engenharia.
 
@@ -10,19 +10,33 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 
 - Janela Raylib.
 - Loop de jogo com fixed timestep.
+- Arena bitmap placeholder `Terminal Arcade + Compiler Lab`.
+- Tela inicial de preferências com feature flags runtime.
 - Dois lutadores greybox: Rust e Java.
+- Corpo composto por cabeça, tronco e pernas placeholder.
+- Spritesheet placeholder com poses de idle, andar, abaixar, pular, defender, socos e chute.
 - Movimento horizontal local.
-- Pulo simples.
+- Pulo simples e pulo diagonal com momentum.
+- Abaixar com hurtbox menor.
+- Defesa com redução de dano.
 - Arena com chão e limites.
 - Colisão física corpo-corpo com gap mínimo.
-- Soco básico.
-- Hurtbox visível.
-- Hitbox/alcance do soco visível.
+- Soco fraco/curto.
+- Soco forte/longo.
+- Chute.
+- Fireball horizontal simples em velocidade legível.
+- CPU simples e pouco agressiva para o Player 2.
+- Opção para IA mover/defender sem dar golpes.
+- Opção para Player 1 não receber dano.
+- Movimento com aceleração/desaceleração.
+- Hurtbox visível quando debug de combate está ligado.
+- Hitbox/alcance dos golpes visível quando debug de combate está ligado.
 - Dano fixo.
 - Barra de vida com número.
-- Hit spark e dano flutuante.
+- Hit spark, block spark e dano flutuante.
 - Condição de vitória.
 - Reinício da partida.
+- HUD, ajuda de controles e debug visual configuráveis.
 - Testes de regras de combate sem abrir janela.
 
 ## Como rodar
@@ -48,44 +62,92 @@ cargo clippy --all-targets --all-features -- -D warnings
 
 O GitHub também roda `Rust Check` no PR para validar formatação, testes e clippy em Linux.
 
+## Preferências
+
+O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navegar, `Espaço` para ligar/desligar uma opção e `Enter` para começar ou voltar para a luta. Durante a luta, `Esc` volta para essa tela.
+
+| Preferência | Padrão | O que testar |
+|---|---|---|
+| Player 2 usa IA | Ligado | Java deve ser controlado automaticamente. |
+| IA pode dar golpes | Ligado | Quando desligado, Java deve se mover e defender, mas não atacar. |
+| Player 1 recebe dano | Ligado | Quando desligado, Rust não deve perder vida ao ser acertado. |
+| Mostrar HUD | Ligado | Barras de vida e status no topo aparecem/desaparecem. |
+| Mostrar ajuda de controles | Desligado | Texto de controles no rodapé aparece/desaparece. |
+| Mostrar debug de combate | Desligado | Hitboxes, hurtboxes, labels e colisão corpo-corpo aparecem/desaparecem. |
+| Entrada por gamepad | Ligado | Gamepads detectados pelo Raylib podem controlar o jogo. |
+
 ## Controles
 
-| Ação | Rust / Player 1 | Java / Player 2 |
-|---|---|---|
-| Mover esquerda | `A` | `←` |
-| Mover direita | `D` | `→` |
-| Pular | `W` | `↑` |
-| Soco | `F` | `Enter` |
-| Reiniciar | `R` | `R` |
+| Ação | Rust / Player 1 | Java / Player 2 | Gamepad Xbox |
+|---|---|---|---|
+| Mover esquerda | `A` | `←` ou `J` | Left stick ou D-pad |
+| Mover direita | `D` | `→` ou `L` | Left stick ou D-pad |
+| Pular | `W` | `↑` ou `I` | `A` |
+| Abaixar | `S` | `↓` ou `K` | Left stick para baixo ou D-pad baixo |
+| Defender | `Q` | `U` | `LB` ou `LT` |
+| Soco fraco / curto | `F` | `O` ou `Enter` | `X` |
+| Soco forte / longo | `H` | `P` ou `Right Shift` | `Y` |
+| Chute | `V` | `;` ou `/` | `B` |
+| Fireball | `G` | `Right Ctrl` ou `KP0` | `RB` |
+| Alternar P2 CPU/manual | `C` | `C` | `View` |
+| Reiniciar | `R` | `R` | `Menu` |
+
+O primeiro gamepad conectado controla o Player 1. O segundo gamepad controla o Player 2 quando a CPU estiver desligada. O Player 2 começa em modo CPU; quando CPU está ligada, os comandos manuais do Player 2 são ignorados.
+
+O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um controle Bluetooth estiver pareado mas aparecer `OFF`, confirme se o sistema que executa `cargo run` expõe joystick/gamepad para o Raylib. Em WSL ou ambiente remoto, pode ser necessário testar no host nativo ou encaminhar o dispositivo.
 
 ## Como ler a tela
 
 | Elemento | Significado |
 |---|---|
-| Corpo azul | Rust / Player 1 |
-| Corpo laranja | Java / Player 2 |
+| Partes azuis | Rust / Player 1 |
+| Partes laranja | Java / Player 2 |
+| Braços e pernas do sprite | Pose/ação atual sem depender do debug |
 | Outline branco | Corpo físico do personagem |
-| Caixa verde | Hurtbox, área vulnerável |
-| Caixa vermelha | Alcance do soco |
+| Caixas verdes | Hurtboxes de cabeça, tronco e pernas |
+| Caixa vermelha | Alcance do golpe corpo-a-corpo |
+| Caixa/círculo ciano | Fireball |
 | Corpo amarelo | Ataque em fase ativa |
-| Hit spark amarelo | Soco acertou |
-| `-12` | Dano aplicado |
+| Hit spark amarelo | Golpe acertou |
+| Escudo/spark azul | Defesa reduziu dano |
+| `-8`, `-12`, `-16` | Dano aplicado |
 | Linha magenta | Colisão corpo-corpo bloqueando passagem |
+| Fundo Terminal Compiler Lab | Arena placeholder, não arte final |
+
+Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `Mostrar debug de combate` ligado. A ajuda de comandos no rodapé aparece somente com `Mostrar ajuda de controles` ligado.
 
 ## O que testar agora
 
 1. Um jogador não deve atravessar o outro.
-2. O soco deve tirar vida apenas quando a hitbox ativa encosta na hurtbox.
-3. Cada soco deve aplicar dano uma vez.
-4. A vida deve chegar a zero e encerrar a luta.
-5. `R` deve reiniciar a partida.
-6. O feedback visual deve deixar claro quando houve contato físico e quando houve golpe.
+2. A arena bitmap deve ajudar o mood sem esconder lutadores, hitboxes, hurtboxes ou HUD.
+3. Soco fraco deve ser mais curto e mais rápido.
+4. Soco forte deve alcançar mais longe e causar mais dano.
+5. Chute deve acertar em uma altura mais baixa.
+6. Defesa deve reduzir dano e mostrar feedback azul.
+7. Abaixar deve reduzir a hurtbox visualmente.
+8. Fireball deve andar horizontalmente em velocidade legível e causar dano ao acertar.
+9. A CPU do Player 2 deve se aproximar, hesitar antes de atacar e defender fireballs próximas.
+10. A tela de preferências deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
+11. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
+12. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Rust.
+13. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
+14. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
+15. `R` ou `Menu` deve reiniciar a partida.
+16. `Esc` durante a luta deve voltar para a tela de preferências.
+17. Pulo com direção pressionada deve sair em diagonal.
+18. A vida deve chegar a zero e encerrar a luta.
+19. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
 
 ## Limitações conhecidas
 
-- Só existe um soco básico por personagem.
-- Não há bloqueio, combo, agarrão, especial, hitstun real ou knockback.
-- Não há animação final, sprites, áudio, menu, pausa ou IA.
+- Os dois personagens ainda compartilham o mesmo kit de golpes.
+- A arena bitmap é placeholder gerado por IA e não deve ser tratada como arte final.
+- O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.
+- Fireball no gamepad usa `RB` por enquanto; `RT` pode entrar depois quando tivermos leitura de gatilho com borda de pressionamento.
+- Defesa é um experimento mínimo: reduz dano, mas ainda não tem direção, high/low guard ou pushback.
+- A CPU é um sparring dummy determinístico: aproxima com cautela, ataca depois de delay, solta fireball em média distância e bloqueia projétil próximo.
+- Não há combo, agarrão, especial avançado, hitstun real, knockback ou IA adaptativa.
+- Não há animação final, sprites, áudio, pausa ou IA avançada.
 - O balanceamento ainda não importa.
 - A colisão é propositalmente simples e axis-aligned.
 - O visual é debug/greybox, não direção de arte final.
@@ -96,17 +158,18 @@ O GitHub também roda `Rust Check` no PR para validar formatação, testes e cli
 
 - Refinar sensação de movimento.
 - Adicionar knockback simples.
-- Separar melhor estados de ataque/hitstun se o soco atual for aceito.
+- Separar melhor estados de ataque/hitstun se o kit atual for aceito.
 - Criar testes para vitória/restart e bordas da arena.
+- Ajustar heurísticas da CPU depois de playtest manual.
 
 ### Próximo passo de gameplay
 
-- Decidir se o soco básico comunica bem contato e dano.
+- Decidir se soco fraco, soco forte e chute comunicam alcance/dano diferentes.
+- Decidir se defesa e abaixar entram no Prototype 0.1 final ou ficam como experimento de 0.2.
 - Definir o primeiro diferencial mecânico mínimo de Rust e Java.
-- Escolher se Prototype 0.1 precisa de segundo ataque ou se isso fica para 0.2.
 
 ### Próximo passo de arte
 
-- Usar este greybox para testar silhueta.
+- Usar este greybox para testar silhueta, proporção de braços/pernas e leitura de ataque sem overlays.
 - Propor placeholders melhores sem perder legibilidade das caixas.
 - Começar mood candidato usando `docs/templates/mood-proposal.md`.

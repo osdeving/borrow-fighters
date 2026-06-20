@@ -50,6 +50,7 @@ A ideia é reunir visão, escopo, decisões e backlog antes de iniciar o código
 - [`docs/adr/0001-stack-rust-raylib.md`](docs/adr/0001-stack-rust-raylib.md): decisão inicial de stack.
 - [`docs/adr/0002-version-control-workflow.md`](docs/adr/0002-version-control-workflow.md): fluxo de branches, PRs e commits.
 - [`docs/adr/0003-code-architecture-rust-raylib.md`](docs/adr/0003-code-architecture-rust-raylib.md): arquitetura inicial de código Rust + Raylib.
+- [`docs/adr/0004-runtime-feature-flags-and-preferences.md`](docs/adr/0004-runtime-feature-flags-and-preferences.md): feature flags runtime e tela de preferências.
 
 ### GitHub
 
@@ -94,7 +95,7 @@ As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
 
 ## Rodando o protótipo greybox
 
-O primeiro código jogável está na branch `feature/greybox-vertical-slice` e implementa um greybox local para validar o básico: dois personagens, movimento, pulo, soco, colisão corpo-corpo, hitbox/hurtbox, dano, vida, vitória e restart.
+O código jogável atual implementa um greybox local para validar o básico: tela inicial de ajustes, dois personagens com spritesheet placeholder, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, fireball, CPU simples para o segundo jogador, colisão corpo-corpo, hitbox/hurtbox opcional, dano, vida, vitória e restart.
 
 Requisitos iniciais:
 
@@ -107,13 +108,42 @@ Comandos:
 cargo run
 ```
 
+O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navegar, `Espaço` para ligar/desligar uma opção e `Enter` para começar ou voltar para a luta. Durante a luta, `Esc` volta para essa tela.
+
+Preferências disponíveis:
+
+| Preferência | Padrão | Efeito |
+|---|---|---|
+| Player 2 usa IA | Ligado | Controla Java automaticamente. |
+| IA pode dar golpes | Ligado | Quando desligado, a IA ainda se move e defende, mas não ataca. |
+| Player 1 recebe dano | Ligado | Quando desligado, Rust fica invencível para playtest. |
+| Mostrar HUD | Ligado | Exibe vida, título e status no topo. |
+| Mostrar ajuda de controles | Desligado | Exibe comandos no rodapé durante a luta. |
+| Mostrar debug de combate | Desligado | Exibe hitboxes, hurtboxes, labels e colisão corpo-corpo. |
+| Entrada por gamepad | Ligado | Usa controles detectados pelo Raylib quando disponíveis. |
+
 Controles:
 
-| Jogador | Movimento | Pulo | Ataque |
+| Ação | Rust / Player 1 | Java / Player 2 | Gamepad Xbox |
 |---|---|---|---|
-| Rust | `A` / `D` | `W` | `F` |
-| Java | `←` / `→` | `↑` | `Enter` |
+| Mover | `A` / `D` | `←` / `→` ou `J` / `L` | Left stick ou D-pad |
+| Pular | `W` | `↑` ou `I` | `A` |
+| Abaixar | `S` | `↓` ou `K` | Left stick para baixo ou D-pad baixo |
+| Defender | `Q` | `U` | `LB` ou `LT` |
+| Soco fraco / curto | `F` | `O` ou `Enter` | `X` |
+| Soco forte / longo | `H` | `P` ou `Right Shift` | `Y` |
+| Chute | `V` | `;` ou `/` | `B` |
+| Fireball | `G` | `Right Ctrl` ou `KP0` | `RB` |
+| Alternar P2 CPU/manual | `C` | `C` | `View` |
+| Reiniciar | `R` | `R` | `Menu` |
 
-Use `R` para reiniciar a luta.
+O primeiro gamepad conectado controla o Player 1. O segundo gamepad controla o Player 2 quando a CPU estiver desligada. O Player 2 começa em modo CPU; use `C` ou `View` para alternar CPU/manual.
+
+O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um controle Bluetooth estiver pareado mas aparecer `OFF`, confirme se o sistema que executa `cargo run` expõe joystick/gamepad para o Raylib. Em WSL ou ambiente remoto, pode ser necessário testar no host nativo ou encaminhar o dispositivo.
+
+Assets placeholder:
+
+- [`assets/placeholder/arena-terminal-compiler-lab.png`](assets/placeholder/arena-terminal-compiler-lab.png): fundo de arena atual.
+- [`assets/placeholder/fighter-greybox-spritesheet.png`](assets/placeholder/fighter-greybox-spritesheet.png): poses simples de lutador para testar leitura de movimento e golpes sem debug visual.
 
 Guia completo de teste: [`docs/10-greybox-playtest.md`](docs/10-greybox-playtest.md).

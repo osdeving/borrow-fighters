@@ -19,6 +19,15 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Primeiro protótipo greybox jogável com Rust + Raylib.
 - Guia de playtest do greybox.
 - Workflow Rust inicial com fmt, testes e clippy.
+- HUD greybox reorganizado para evitar sobreposição de texto.
+- Fireball simples e movimento/pulo mais suave no protótipo.
+- Kit greybox tradicional com soco fraco, soco forte, chute, defesa, abaixar e corpo composto por partes.
+- CPU simples para o Player 2, ligada por padrão e alternável com `C`.
+- Tuning inicial de ritmo: golpes e fireball mais lentos, e CPU menos agressiva.
+- Arena bitmap placeholder `Terminal Compiler Lab` e carregamento inicial de texture asset.
+- Suporte inicial a gamepad estilo Xbox para Player 1 e Player 2 manual.
+- Tela inicial de preferências com feature flags para IA, dano do Player 1, HUD, ajuda, debug de combate e gamepad.
+- Spritesheet placeholder de lutador com poses de idle, andar, abaixar, pular, defender, socos e chute.
 
 ### Em aberto
 
