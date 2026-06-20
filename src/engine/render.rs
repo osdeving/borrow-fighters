@@ -208,9 +208,11 @@ fn draw_body_collision(draw: &mut RaylibDrawHandle<'_>, world: &World) {
 
     let p1 = world.player_one.body_rect();
     let p2 = world.player_two.body_rect();
-    let left_right = p1.right().min(p2.right());
-    let right_left = p1.x.max(p2.x);
-    let x = ((left_right + right_left) * 0.5).round() as i32;
+    let x = if p1.center_x() <= p2.center_x() {
+        ((p1.right() + p2.x) * 0.5).round() as i32
+    } else {
+        ((p2.right() + p1.x) * 0.5).round() as i32
+    };
     let top = p1.y.max(p2.y).round() as i32;
     let bottom = p1.bottom().min(p2.bottom()).round() as i32;
 

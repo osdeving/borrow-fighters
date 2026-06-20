@@ -10,6 +10,7 @@ use crate::math::vec2::Vec2;
 
 const HIT_EFFECT_LIFETIME: f32 = 0.35;
 const BODY_COLLISION_EFFECT_LIFETIME: f32 = 0.12;
+pub const MIN_BODY_GAP: f32 = 8.0;
 
 /// Final result of a greybox match.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -86,66 +87,57 @@ impl World {
     fn resolve_body_collision(&mut self) {
         let p1_body = self.player_one.body_rect();
         let p2_body = self.player_two.body_rect();
-        if !p1_body.intersects(p2_body) {
+        let vertical_overlap = p1_body.bottom().min(p2_body.bottom()) - p1_body.y.max(p2_body.y);
+        if vertical_overlap <= 0.0 {
             return;
         }
 
-        let horizontal_overlap = p1_body.right().min(p2_body.right()) - p1_body.x.max(p2_body.x);
-        let vertical_overlap = p1_body.bottom().min(p2_body.bottom()) - p1_body.y.max(p2_body.y);
-        if horizontal_overlap <= 0.0 || vertical_overlap <= 0.0 {
+        let player_one_is_left = p1_body.center_x() <= p2_body.center_x();
+        let current_gap = if player_one_is_left {
+            p2_body.x - p1_body.right()
+        } else {
+            p1_body.x - p2_body.right()
+        };
+
+        if current_gap >= MIN_BODY_GAP {
             return;
         }
 
         self.body_collision_timer = BODY_COLLISION_EFFECT_LIFETIME;
-        let player_one_is_left = p1_body.center_x() <= p2_body.center_x();
-        let half_overlap = horizontal_overlap * 0.5;
-
         if player_one_is_left {
-            self.player_one.position.x -= half_overlap;
-            self.player_two.position.x += half_overlap;
             if self.player_one.velocity.x > 0.0 {
                 self.player_one.velocity.x = 0.0;
             }
             if self.player_two.velocity.x < 0.0 {
                 self.player_two.velocity.x = 0.0;
             }
+            self.place_pair_with_gap(true);
         } else {
-            self.player_one.position.x += half_overlap;
-            self.player_two.position.x -= half_overlap;
             if self.player_one.velocity.x < 0.0 {
                 self.player_one.velocity.x = 0.0;
             }
             if self.player_two.velocity.x > 0.0 {
                 self.player_two.velocity.x = 0.0;
             }
+            self.place_pair_with_gap(false);
         }
-
-        self.player_one.clamp_to_arena();
-        self.player_two.clamp_to_arena();
-        self.resolve_residual_body_overlap(player_one_is_left);
     }
 
-    fn resolve_residual_body_overlap(&mut self, player_one_is_left: bool) {
-        if !self
-            .player_one
-            .body_rect()
-            .intersects(self.player_two.body_rect())
-        {
-            return;
-        }
+    fn place_pair_with_gap(&mut self, player_one_is_left: bool) {
+        let p1_width = self.player_one.body_rect().width;
+        let p2_width = self.player_two.body_rect().width;
+        let total_width = p1_width + MIN_BODY_GAP + p2_width;
+        let center =
+            (self.player_one.body_rect().center_x() + self.player_two.body_rect().center_x()) * 0.5;
+        let left_x = (center - total_width * 0.5).clamp(ARENA_LEFT, ARENA_RIGHT - total_width);
+        let right_x = left_x + p1_width + MIN_BODY_GAP;
 
         if player_one_is_left {
-            self.player_two.position.x = (self.player_one.body_rect().right())
-                .clamp(ARENA_LEFT, ARENA_RIGHT - self.player_two.body_rect().width);
-            self.player_one.position.x = (self.player_two.position.x
-                - self.player_one.body_rect().width)
-                .clamp(ARENA_LEFT, ARENA_RIGHT - self.player_one.body_rect().width);
+            self.player_one.position.x = left_x;
+            self.player_two.position.x = right_x;
         } else {
-            self.player_one.position.x = (self.player_two.body_rect().right())
-                .clamp(ARENA_LEFT, ARENA_RIGHT - self.player_one.body_rect().width);
-            self.player_two.position.x = (self.player_one.position.x
-                - self.player_two.body_rect().width)
-                .clamp(ARENA_LEFT, ARENA_RIGHT - self.player_two.body_rect().width);
+            self.player_two.position.x = left_x;
+            self.player_one.position.x = left_x + p2_width + MIN_BODY_GAP;
         }
     }
 
