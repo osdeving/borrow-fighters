@@ -5,3 +5,4 @@
 
 pub mod collision;
 pub mod fighter;
+pub mod projectile;

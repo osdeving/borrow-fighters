@@ -1,6 +1,7 @@
 //! Exercises testable greybox combat rules without opening a Raylib window.
 
 use borrow_fighters::combat::fighter::FighterInput;
+use borrow_fighters::combat::projectile::PROJECTILE_DAMAGE;
 use borrow_fighters::game::world::{MIN_BODY_GAP, MatchOutcome, World};
 
 const DT: f32 = 1.0 / 60.0;
@@ -133,6 +134,75 @@ fn fighters_keep_body_gap_when_pinned_to_arena_edge() {
     }
 
     assert_body_gap(&world);
+}
+
+#[test]
+fn diagonal_jump_keeps_horizontal_momentum() {
+    let mut world = World::new_greybox();
+
+    world.update(
+        DT,
+        FighterInput {
+            right: true,
+            jump: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    assert!(!world.player_one.grounded);
+    assert!(world.player_one.velocity.x > 0.0);
+    assert!(world.player_one.velocity.y < 0.0);
+}
+
+#[test]
+fn projectile_deals_damage_and_disappears() {
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 300.0;
+    world.player_two.position.x = 560.0;
+
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    assert_eq!(world.projectiles.len(), 1);
+
+    for _ in 0..45 {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    assert_eq!(world.player_two.health, 100 - PROJECTILE_DAMAGE);
+    assert!(world.projectiles.is_empty());
+}
+
+#[test]
+fn projectile_cooldown_prevents_immediate_spam() {
+    let mut world = World::new_greybox();
+    world.player_two.position.x = 820.0;
+
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    assert_eq!(world.projectiles.len(), 1);
 }
 
 fn assert_body_gap(world: &World) {

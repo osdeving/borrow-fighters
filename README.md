@@ -109,10 +109,10 @@ cargo run
 
 Controles:
 
-| Jogador | Movimento | Pulo | Ataque |
-|---|---|---|---|
-| Rust | `A` / `D` | `W` | `F` |
-| Java | `←` / `→` | `↑` | `Enter` |
+| Jogador | Movimento | Pulo | Soco | Fireball |
+|---|---|---|---|---|
+| Rust | `A` / `D` | `W` | `F` | `G` |
+| Java | `←` / `→` | `↑` | `Enter` | `Right Shift` |
 
 Use `R` para reiniciar a luta.
 

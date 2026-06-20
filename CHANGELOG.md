@@ -19,6 +19,8 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Primeiro protótipo greybox jogável com Rust + Raylib.
 - Guia de playtest do greybox.
 - Workflow Rust inicial com fmt, testes e clippy.
+- HUD greybox reorganizado para evitar sobreposição de texto.
+- Fireball simples e movimento/pulo mais suave no protótipo.
 
 ### Em aberto
 

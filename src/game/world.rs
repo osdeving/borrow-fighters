@@ -5,6 +5,7 @@
 
 use crate::combat::collision::hitbox_hits_hurtbox;
 use crate::combat::fighter::{BASIC_DAMAGE, Fighter, FighterInput, PlayerSlot};
+use crate::combat::projectile::Projectile;
 use crate::config::{ARENA_LEFT, ARENA_RIGHT};
 use crate::math::vec2::Vec2;
 
@@ -34,6 +35,7 @@ pub struct World {
     pub player_two: Fighter,
     pub outcome: Option<MatchOutcome>,
     pub hit_effects: Vec<HitEffect>,
+    pub projectiles: Vec<Projectile>,
     pub body_collision_timer: f32,
 }
 
@@ -45,6 +47,7 @@ impl World {
             player_two: Fighter::new(PlayerSlot::Two, "Java", 676.0),
             outcome: None,
             hit_effects: Vec::new(),
+            projectiles: Vec::new(),
             body_collision_timer: 0.0,
         };
         world.update_facing();
@@ -62,9 +65,12 @@ impl World {
         self.update_facing();
         self.player_one.update(dt, player_one);
         self.player_two.update(dt, player_two);
+        self.spawn_projectiles(player_one, player_two);
+        self.update_projectiles(dt);
         self.resolve_body_collision();
         self.update_facing();
         self.resolve_hits();
+        self.resolve_projectile_hits();
         self.resolve_outcome();
     }
 
@@ -169,6 +175,63 @@ impl World {
                 BASIC_DAMAGE,
             ));
         }
+    }
+
+    fn spawn_projectiles(&mut self, player_one: FighterInput, player_two: FighterInput) {
+        if player_one.projectile && self.player_one.can_fire_projectile() {
+            self.projectiles
+                .push(Projectile::from_fighter(&self.player_one));
+            self.player_one.mark_projectile_fired();
+        }
+
+        if player_two.projectile && self.player_two.can_fire_projectile() {
+            self.projectiles
+                .push(Projectile::from_fighter(&self.player_two));
+            self.player_two.mark_projectile_fired();
+        }
+    }
+
+    fn update_projectiles(&mut self, dt: f32) {
+        for projectile in &mut self.projectiles {
+            projectile.update(dt);
+            let rect = projectile.rect();
+            if rect.right() < ARENA_LEFT || rect.x > ARENA_RIGHT {
+                projectile.alive = false;
+            }
+        }
+
+        self.projectiles.retain(|projectile| projectile.alive);
+    }
+
+    fn resolve_projectile_hits(&mut self) {
+        for projectile in &mut self.projectiles {
+            if !projectile.alive {
+                continue;
+            }
+
+            let rect = projectile.rect();
+            match projectile.owner {
+                PlayerSlot::One if rect.intersects(self.player_two.hurtbox()) => {
+                    self.player_two.take_damage(projectile.damage);
+                    projectile.alive = false;
+                    self.hit_effects.push(HitEffect::new(
+                        self.player_two.hurtbox().center(),
+                        projectile.damage,
+                    ));
+                }
+                PlayerSlot::Two if rect.intersects(self.player_one.hurtbox()) => {
+                    self.player_one.take_damage(projectile.damage);
+                    projectile.alive = false;
+                    self.hit_effects.push(HitEffect::new(
+                        self.player_one.hurtbox().center(),
+                        projectile.damage,
+                    ));
+                }
+                _ => {}
+            }
+        }
+
+        self.projectiles.retain(|projectile| projectile.alive);
     }
 
     fn resolve_outcome(&mut self) {

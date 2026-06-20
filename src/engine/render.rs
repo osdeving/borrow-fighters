@@ -20,6 +20,8 @@ const HITBOX: Color = Color::new(255, 82, 82, 255);
 const HITBOX_FILL: Color = Color::new(255, 82, 82, 82);
 const HITSPARK: Color = Color::new(255, 235, 59, 255);
 const BODY_COLLISION: Color = Color::new(218, 112, 214, 255);
+const PROJECTILE: Color = Color::new(80, 220, 255, 255);
+const PROJECTILE_FILL: Color = Color::new(80, 220, 255, 110);
 const UI_TEXT: Color = Color::new(238, 241, 247, 255);
 const UI_MUTED: Color = Color::new(165, 172, 185, 255);
 const HEALTH_BACK: Color = Color::new(60, 62, 70, 255);
@@ -30,6 +32,7 @@ const HEALTH_DANGER: Color = Color::new(255, 82, 82, 255);
 pub fn draw(draw: &mut RaylibDrawHandle<'_>, world: &World) {
     draw.clear_background(BACKGROUND);
     draw_arena(draw);
+    draw_projectiles(draw, world);
     draw_fighter(draw, &world.player_one, PLAYER_ONE);
     draw_fighter(draw, &world.player_two, PLAYER_TWO);
     draw_body_collision(draw, world);
@@ -131,22 +134,19 @@ fn draw_hud(draw: &mut RaylibDrawHandle<'_>, world: &World) {
     draw.draw_text(
         "Borrow Fighters / Prototype 0.1 Greybox",
         24,
-        18,
+        12,
         20,
         UI_TEXT,
     );
 
-    draw_health_bar(draw, 24, 50, world.player_one.health, "Rust");
+    draw_health_bar(draw, 24, 72, world.player_one.health, "Rust");
     draw_health_bar(
         draw,
         WINDOW_WIDTH - 324,
-        50,
+        72,
         world.player_two.health,
         "Java",
     );
-
-    draw.draw_text("Rust", 24, 78, 18, PLAYER_ONE);
-    draw.draw_text("Java", WINDOW_WIDTH - 324, 78, 18, PLAYER_TWO);
 
     if let Some(outcome) = world.outcome {
         let message = match outcome {
@@ -155,30 +155,30 @@ fn draw_hud(draw: &mut RaylibDrawHandle<'_>, world: &World) {
             MatchOutcome::Draw => "Draw - press R",
         };
         let width = draw.measure_text(message, 32);
-        draw.draw_text(message, (WINDOW_WIDTH - width) / 2, 118, 32, UI_TEXT);
+        draw.draw_text(message, (WINDOW_WIDTH - width) / 2, 124, 32, UI_TEXT);
     }
 }
 
 fn draw_help(draw: &mut RaylibDrawHandle<'_>) {
     draw.draw_text(
-        "P1: A/D move, W jump, F attack",
+        "P1: A/D move, W jump, F punch, G fireball",
         24,
-        WINDOW_HEIGHT - 58,
-        18,
+        WINDOW_HEIGHT - 76,
+        16,
         UI_TEXT,
     );
     draw.draw_text(
-        "P2: arrows move/jump, Enter attack",
+        "P2: arrows move/jump, Enter punch, Right Shift fireball",
         24,
-        WINDOW_HEIGHT - 34,
-        18,
+        WINDOW_HEIGHT - 52,
+        16,
         UI_TEXT,
     );
     draw.draw_text(
-        "White = body, green = hurtbox, red = punch, yellow = hit, magenta = body block",
-        WINDOW_WIDTH - 690,
-        WINDOW_HEIGHT - 34,
-        18,
+        "White body | green hurtbox | red punch | cyan fireball | yellow hit | magenta body block",
+        24,
+        WINDOW_HEIGHT - 28,
+        16,
         UI_MUTED,
     );
 }
@@ -199,6 +199,33 @@ fn draw_health_bar(draw: &mut RaylibDrawHandle<'_>, x: i32, y: i32, health: i32,
 
     let text = format!("{label} HP {health:03}");
     draw.draw_text(&text, x, y - 24, 20, UI_TEXT);
+}
+
+fn draw_projectiles(draw: &mut RaylibDrawHandle<'_>, world: &World) {
+    for projectile in &world.projectiles {
+        let rect = projectile.rect();
+        draw.draw_rectangle(
+            rect.x.round() as i32,
+            rect.y.round() as i32,
+            rect.width.round() as i32,
+            rect.height.round() as i32,
+            PROJECTILE_FILL,
+        );
+        outline_rect(draw, rect, PROJECTILE);
+        draw.draw_circle(
+            rect.center().x.round() as i32,
+            rect.center().y.round() as i32,
+            8.0,
+            PROJECTILE,
+        );
+        draw.draw_text(
+            "FIREBALL",
+            rect.x as i32 - 12,
+            rect.y as i32 - 20,
+            14,
+            PROJECTILE,
+        );
+    }
 }
 
 fn draw_body_collision(draw: &mut RaylibDrawHandle<'_>, world: &World) {

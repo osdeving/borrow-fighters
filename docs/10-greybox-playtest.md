@@ -16,6 +16,8 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Arena com chão e limites.
 - Colisão física corpo-corpo com gap mínimo.
 - Soco básico.
+- Fireball horizontal simples.
+- Movimento com aceleração/desaceleração e pulo diagonal.
 - Hurtbox visível.
 - Hitbox/alcance do soco visível.
 - Dano fixo.
@@ -56,6 +58,7 @@ O GitHub também roda `Rust Check` no PR para validar formatação, testes e cli
 | Mover direita | `D` | `→` |
 | Pular | `W` | `↑` |
 | Soco | `F` | `Enter` |
+| Fireball | `G` | `Right Shift` |
 | Reiniciar | `R` | `R` |
 
 ## Como ler a tela
@@ -67,6 +70,7 @@ O GitHub também roda `Rust Check` no PR para validar formatação, testes e cli
 | Outline branco | Corpo físico do personagem |
 | Caixa verde | Hurtbox, área vulnerável |
 | Caixa vermelha | Alcance do soco |
+| Caixa/círculo ciano | Fireball |
 | Corpo amarelo | Ataque em fase ativa |
 | Hit spark amarelo | Soco acertou |
 | `-12` | Dano aplicado |
@@ -77,13 +81,15 @@ O GitHub também roda `Rust Check` no PR para validar formatação, testes e cli
 1. Um jogador não deve atravessar o outro.
 2. O soco deve tirar vida apenas quando a hitbox ativa encosta na hurtbox.
 3. Cada soco deve aplicar dano uma vez.
-4. A vida deve chegar a zero e encerrar a luta.
-5. `R` deve reiniciar a partida.
-6. O feedback visual deve deixar claro quando houve contato físico e quando houve golpe.
+4. Fireball deve andar horizontalmente e causar dano ao acertar.
+5. Pulo com direção pressionada deve sair em diagonal.
+6. A vida deve chegar a zero e encerrar a luta.
+7. `R` deve reiniciar a partida.
+8. O feedback visual deve deixar claro quando houve contato físico e quando houve golpe.
 
 ## Limitações conhecidas
 
-- Só existe um soco básico por personagem.
+- Só existe um soco básico e uma fireball simples por personagem.
 - Não há bloqueio, combo, agarrão, especial, hitstun real ou knockback.
 - Não há animação final, sprites, áudio, menu, pausa ou IA.
 - O balanceamento ainda não importa.

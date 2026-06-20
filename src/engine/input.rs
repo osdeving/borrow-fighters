@@ -24,12 +24,14 @@ impl LocalInput {
                 right: raylib.is_key_down(KeyboardKey::KEY_D),
                 jump: raylib.is_key_pressed(KeyboardKey::KEY_W),
                 attack: raylib.is_key_pressed(KeyboardKey::KEY_F),
+                projectile: raylib.is_key_pressed(KeyboardKey::KEY_G),
             },
             player_two: FighterInput {
                 left: raylib.is_key_down(KeyboardKey::KEY_LEFT),
                 right: raylib.is_key_down(KeyboardKey::KEY_RIGHT),
                 jump: raylib.is_key_pressed(KeyboardKey::KEY_UP),
                 attack: raylib.is_key_pressed(KeyboardKey::KEY_ENTER),
+                projectile: raylib.is_key_pressed(KeyboardKey::KEY_RIGHT_SHIFT),
             },
             restart: raylib.is_key_pressed(KeyboardKey::KEY_R),
         }
