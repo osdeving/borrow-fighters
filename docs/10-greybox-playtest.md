@@ -14,6 +14,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Tela inicial de preferências com feature flags runtime.
 - Dois lutadores greybox: Rust e Java.
 - Corpo composto por cabeça, tronco e pernas placeholder.
+- Spritesheet placeholder com poses de idle, andar, abaixar, pular, defender, socos e chute.
 - Movimento horizontal local.
 - Pulo simples e pulo diagonal com momentum.
 - Abaixar com hurtbox menor.
@@ -101,6 +102,7 @@ O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um c
 |---|---|
 | Partes azuis | Rust / Player 1 |
 | Partes laranja | Java / Player 2 |
+| Braços e pernas do sprite | Pose/ação atual sem depender do debug |
 | Outline branco | Corpo físico do personagem |
 | Caixas verdes | Hurtboxes de cabeça, tronco e pernas |
 | Caixa vermelha | Alcance do golpe corpo-a-corpo |
@@ -140,6 +142,7 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 
 - Os dois personagens ainda compartilham o mesmo kit de golpes.
 - A arena bitmap é placeholder gerado por IA e não deve ser tratada como arte final.
+- O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.
 - Fireball no gamepad usa `RB` por enquanto; `RT` pode entrar depois quando tivermos leitura de gatilho com borda de pressionamento.
 - Defesa é um experimento mínimo: reduz dano, mas ainda não tem direção, high/low guard ou pushback.
 - A CPU é um sparring dummy determinístico: aproxima com cautela, ataca depois de delay, solta fireball em média distância e bloqueia projétil próximo.
@@ -167,6 +170,6 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 
 ### Próximo passo de arte
 
-- Usar este greybox para testar silhueta.
+- Usar este greybox para testar silhueta, proporção de braços/pernas e leitura de ataque sem overlays.
 - Propor placeholders melhores sem perder legibilidade das caixas.
 - Começar mood candidato usando `docs/templates/mood-proposal.md`.

@@ -5,11 +5,14 @@
 
 use raylib::prelude::*;
 
+use crate::engine::sprites::FIGHTER_SPRITESHEET_PATH;
+
 pub const ARENA_BACKGROUND_PATH: &str = "assets/placeholder/arena-terminal-compiler-lab.png";
 
 /// Runtime textures used by the prototype renderer.
 pub struct GameAssets {
     pub arena_background: Option<Texture2D>,
+    pub fighter_spritesheet: Option<Texture2D>,
 }
 
 impl GameAssets {
@@ -17,6 +20,7 @@ impl GameAssets {
     pub fn load(raylib: &mut RaylibHandle, thread: &RaylibThread) -> Self {
         Self {
             arena_background: load_texture_optional(raylib, thread, ARENA_BACKGROUND_PATH),
+            fighter_spritesheet: load_texture_optional(raylib, thread, FIGHTER_SPRITESHEET_PATH),
         }
     }
 }

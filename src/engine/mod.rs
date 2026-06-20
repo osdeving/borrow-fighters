@@ -7,3 +7,4 @@ pub mod assets;
 pub mod gamepad;
 pub mod input;
 pub mod render;
+pub mod sprites;

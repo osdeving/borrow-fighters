@@ -8,6 +8,7 @@ use raylib::prelude::*;
 use crate::combat::fighter::{AttackPhase, PlayerSlot};
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
 use crate::engine::assets::GameAssets;
+use crate::engine::sprites;
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags, PREFERENCE_FLAGS};
 use crate::game::world::{MatchOutcome, World};
 use crate::math::rect::Rect;
@@ -56,8 +57,20 @@ pub fn draw_fight(
     let show_debug = flags.enabled(FeatureFlag::ShowCombatDebug);
 
     draw_projectiles(draw, world, show_debug);
-    draw_fighter(draw, &world.player_one, PLAYER_ONE, show_debug);
-    draw_fighter(draw, &world.player_two, PLAYER_TWO, show_debug);
+    draw_fighter(
+        draw,
+        &world.player_one,
+        PLAYER_ONE,
+        show_debug,
+        assets.fighter_spritesheet.as_ref(),
+    );
+    draw_fighter(
+        draw,
+        &world.player_two,
+        PLAYER_TWO,
+        show_debug,
+        assets.fighter_spritesheet.as_ref(),
+    );
     if show_debug {
         draw_body_collision(draw, world);
     }
@@ -255,6 +268,7 @@ fn draw_fighter(
     fighter: &crate::combat::fighter::Fighter,
     body_color: Color,
     show_debug: bool,
+    spritesheet: Option<&Texture2D>,
 ) {
     let phase = fighter.attack_phase();
     let body = match phase {
@@ -264,7 +278,12 @@ fn draw_fighter(
         AttackPhase::Recovery => dim(body_color, 25),
     };
 
-    draw_body_parts(draw, fighter, body);
+    if let Some(texture) = spritesheet {
+        sprites::draw_fighter_sprite(draw, texture, fighter, body);
+    } else {
+        draw_body_parts(draw, fighter, body);
+    }
+
     if show_debug {
         outline_rect(draw, fighter.body_rect(), BODY_OUTLINE);
         for hurtbox in fighter.hurtboxes().rects() {

@@ -39,6 +39,7 @@ borrow-fighters/
 │   │   ├── clock.rs            # Delta time, fixed timestep e frame pacing
 │   │   ├── input.rs            # Raylib keyboard/gamepad -> comandos do jogo
 │   │   ├── render.rs           # Desenho de primitives/placeholders
+│   │   ├── sprites.rs          # Spritesheets placeholder e seleção de frames
 │   │   ├── assets.rs           # Carregamento futuro de sprites/som
 │   │   └── debug_draw.rs       # Hitbox/hurtbox, eixos e overlays
 │   ├── combat/
