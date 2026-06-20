@@ -36,6 +36,8 @@ pub fn draw(
     draw: &mut RaylibDrawHandle<'_>,
     world: &World,
     player_two_cpu_enabled: bool,
+    player_one_gamepad_connected: bool,
+    player_two_gamepad_connected: bool,
     assets: &GameAssets,
 ) {
     draw.clear_background(BACKGROUND);
@@ -45,7 +47,13 @@ pub fn draw(
     draw_fighter(draw, &world.player_two, PLAYER_TWO);
     draw_body_collision(draw, world);
     draw_hit_effects(draw, world);
-    draw_hud(draw, world, player_two_cpu_enabled);
+    draw_hud(
+        draw,
+        world,
+        player_two_cpu_enabled,
+        player_one_gamepad_connected,
+        player_two_gamepad_connected,
+    );
     draw_help(draw);
 }
 
@@ -184,7 +192,13 @@ fn draw_fighter(
     }
 }
 
-fn draw_hud(draw: &mut RaylibDrawHandle<'_>, world: &World, player_two_cpu_enabled: bool) {
+fn draw_hud(
+    draw: &mut RaylibDrawHandle<'_>,
+    world: &World,
+    player_two_cpu_enabled: bool,
+    player_one_gamepad_connected: bool,
+    player_two_gamepad_connected: bool,
+) {
     draw.draw_text(
         "Borrow Fighters / Prototype 0.1 Greybox",
         24,
@@ -193,13 +207,14 @@ fn draw_hud(draw: &mut RaylibDrawHandle<'_>, world: &World, player_two_cpu_enabl
         UI_TEXT,
     );
 
-    let mode = if player_two_cpu_enabled {
-        "P2 CPU: ON (C)"
-    } else {
-        "P2 CPU: OFF (C)"
-    };
-    let width = draw.measure_text(mode, 16);
-    draw.draw_text(mode, WINDOW_WIDTH - width - 24, 16, 16, UI_MUTED);
+    let status = format!(
+        "P2 CPU: {} (C/View) | Pad P1: {} | P2: {}",
+        if player_two_cpu_enabled { "ON" } else { "OFF" },
+        connected_label(player_one_gamepad_connected),
+        connected_label(player_two_gamepad_connected)
+    );
+    let width = draw.measure_text(&status, 14);
+    draw.draw_text(&status, WINDOW_WIDTH - width - 24, 16, 14, UI_MUTED);
 
     draw_health_bar(draw, 24, 72, world.player_one.health, "Rust");
     draw_health_bar(
@@ -212,9 +227,9 @@ fn draw_hud(draw: &mut RaylibDrawHandle<'_>, world: &World, player_two_cpu_enabl
 
     if let Some(outcome) = world.outcome {
         let message = match outcome {
-            MatchOutcome::Winner(PlayerSlot::One) => "Rust wins - press R",
-            MatchOutcome::Winner(PlayerSlot::Two) => "Java wins - press R",
-            MatchOutcome::Draw => "Draw - press R",
+            MatchOutcome::Winner(PlayerSlot::One) => "Rust wins - press R/Menu",
+            MatchOutcome::Winner(PlayerSlot::Two) => "Java wins - press R/Menu",
+            MatchOutcome::Draw => "Draw - press R/Menu",
         };
         let width = draw.measure_text(message, 32);
         draw.draw_text(message, (WINDOW_WIDTH - width) / 2, 124, 32, UI_TEXT);
@@ -223,33 +238,37 @@ fn draw_hud(draw: &mut RaylibDrawHandle<'_>, world: &World, player_two_cpu_enabl
 
 fn draw_help(draw: &mut RaylibDrawHandle<'_>) {
     draw.draw_text(
-        "P1: A/D move, W jump, S crouch, Q block",
+        "P1: A/D/W/S/Q or Pad LS/DPad, A jump, LB/LT block",
         24,
         WINDOW_HEIGHT - 100,
         16,
         UI_TEXT,
     );
     draw.draw_text(
-        "P1 attacks: F light punch, H heavy punch, V kick, G fireball",
+        "P1 attacks: F/H/V/G or Pad X/Y/B/RB",
         24,
         WINDOW_HEIGHT - 76,
         16,
         UI_TEXT,
     );
     draw.draw_text(
-        "P2: CPU default; C toggles manual. Manual: arrows/JL, Up/I, Down/K, U",
+        "P2: CPU default; C or View toggles manual",
         24,
         WINDOW_HEIGHT - 52,
         16,
         UI_TEXT,
     );
     draw.draw_text(
-        "P2 attacks: O/Enter LP, P/RShift HP, ; or / kick, RCtrl/KP0 fireball",
+        "P2 manual: keyboard or second Pad same layout; Start/R restarts",
         24,
         WINDOW_HEIGHT - 28,
         16,
         UI_MUTED,
     );
+}
+
+fn connected_label(connected: bool) -> &'static str {
+    if connected { "ON" } else { "OFF" }
 }
 
 fn draw_health_bar(draw: &mut RaylibDrawHandle<'_>, x: i32, y: i32, health: i32, label: &str) {

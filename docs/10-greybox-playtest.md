@@ -59,21 +59,23 @@ O GitHub também roda `Rust Check` no PR para validar formatação, testes e cli
 
 ## Controles
 
-| Ação | Rust / Player 1 | Java / Player 2 |
-|---|---|---|
-| Mover esquerda | `A` | `←` ou `J` |
-| Mover direita | `D` | `→` ou `L` |
-| Pular | `W` | `↑` ou `I` |
-| Abaixar | `S` | `↓` ou `K` |
-| Defender | `Q` | `U` |
-| Soco fraco / curto | `F` | `O` ou `Enter` |
-| Soco forte / longo | `H` | `P` ou `Right Shift` |
-| Chute | `V` | `;` ou `/` |
-| Fireball | `G` | `Right Ctrl` ou `KP0` |
-| Alternar P2 CPU/manual | `C` | `C` |
-| Reiniciar | `R` | `R` |
+| Ação | Rust / Player 1 | Java / Player 2 | Gamepad Xbox |
+|---|---|---|---|
+| Mover esquerda | `A` | `←` ou `J` | Left stick ou D-pad |
+| Mover direita | `D` | `→` ou `L` | Left stick ou D-pad |
+| Pular | `W` | `↑` ou `I` | `A` |
+| Abaixar | `S` | `↓` ou `K` | Left stick para baixo ou D-pad baixo |
+| Defender | `Q` | `U` | `LB` ou `LT` |
+| Soco fraco / curto | `F` | `O` ou `Enter` | `X` |
+| Soco forte / longo | `H` | `P` ou `Right Shift` | `Y` |
+| Chute | `V` | `;` ou `/` | `B` |
+| Fireball | `G` | `Right Ctrl` ou `KP0` | `RB` |
+| Alternar P2 CPU/manual | `C` | `C` | `View` |
+| Reiniciar | `R` | `R` | `Menu` |
 
-O Player 2 começa em modo CPU. Quando CPU está ligada, os comandos manuais do Player 2 são ignorados.
+O primeiro gamepad conectado controla o Player 1. O segundo gamepad controla o Player 2 quando a CPU estiver desligada. O Player 2 começa em modo CPU; quando CPU está ligada, os comandos manuais do Player 2 são ignorados.
+
+O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um controle Bluetooth estiver pareado mas aparecer `OFF`, confirme se o sistema que executa `cargo run` expõe joystick/gamepad para o Raylib. Em WSL ou ambiente remoto, pode ser necessário testar no host nativo ou encaminhar o dispositivo.
 
 ## Como ler a tela
 
@@ -103,16 +105,18 @@ O Player 2 começa em modo CPU. Quando CPU está ligada, os comandos manuais do 
 7. Abaixar deve reduzir a hurtbox visualmente.
 8. Fireball deve andar horizontalmente em velocidade legível e causar dano ao acertar.
 9. A CPU do Player 2 deve se aproximar, hesitar antes de atacar e defender fireballs próximas.
-10. `C` deve alternar entre CPU e controle manual do Player 2.
-11. Pulo com direção pressionada deve sair em diagonal.
-12. A vida deve chegar a zero e encerrar a luta.
-13. `R` deve reiniciar a partida.
-14. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
+10. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB`.
+11. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
+12. `R` ou `Menu` deve reiniciar a partida.
+13. Pulo com direção pressionada deve sair em diagonal.
+14. A vida deve chegar a zero e encerrar a luta.
+15. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
 
 ## Limitações conhecidas
 
 - Os dois personagens ainda compartilham o mesmo kit de golpes.
 - A arena bitmap é placeholder gerado por IA e não deve ser tratada como arte final.
+- Fireball no gamepad usa `RB` por enquanto; `RT` pode entrar depois quando tivermos leitura de gatilho com borda de pressionamento.
 - Defesa é um experimento mínimo: reduz dano, mas ainda não tem direção, high/low guard ou pushback.
 - A CPU é um sparring dummy determinístico: aproxima com cautela, ataca depois de delay, solta fireball em média distância e bloqueia projétil próximo.
 - Não há combo, agarrão, especial avançado, hitstun real, knockback ou IA adaptativa.

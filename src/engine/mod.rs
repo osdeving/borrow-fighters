@@ -4,5 +4,6 @@
 //! test without a graphical context.
 
 pub mod assets;
+pub mod gamepad;
 pub mod input;
 pub mod render;

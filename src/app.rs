@@ -68,7 +68,14 @@ impl App {
             }
 
             let mut draw = raylib.begin_drawing(thread);
-            render::draw(&mut draw, &self.world, self.player_two_cpu_enabled, &assets);
+            render::draw(
+                &mut draw,
+                &self.world,
+                self.player_two_cpu_enabled,
+                input.player_one_gamepad_connected,
+                input.player_two_gamepad_connected,
+                &assets,
+            );
         }
     }
 }
