@@ -7,6 +7,7 @@ use raylib::prelude::*;
 
 use crate::combat::fighter::{AttackPhase, PlayerSlot};
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
+use crate::engine::assets::GameAssets;
 use crate::game::world::{MatchOutcome, World};
 use crate::math::rect::Rect;
 
@@ -31,9 +32,14 @@ const HEALTH_FILL: Color = Color::new(76, 217, 100, 255);
 const HEALTH_DANGER: Color = Color::new(255, 82, 82, 255);
 
 /// Draws the current world state.
-pub fn draw(draw: &mut RaylibDrawHandle<'_>, world: &World, player_two_cpu_enabled: bool) {
+pub fn draw(
+    draw: &mut RaylibDrawHandle<'_>,
+    world: &World,
+    player_two_cpu_enabled: bool,
+    assets: &GameAssets,
+) {
     draw.clear_background(BACKGROUND);
-    draw_arena(draw);
+    draw_arena(draw, assets.arena_background.as_ref());
     draw_projectiles(draw, world);
     draw_fighter(draw, &world.player_one, PLAYER_ONE);
     draw_fighter(draw, &world.player_two, PLAYER_TWO);
@@ -43,34 +49,61 @@ pub fn draw(draw: &mut RaylibDrawHandle<'_>, world: &World, player_two_cpu_enabl
     draw_help(draw);
 }
 
-fn draw_arena(draw: &mut RaylibDrawHandle<'_>) {
+fn draw_arena(draw: &mut RaylibDrawHandle<'_>, background: Option<&Texture2D>) {
+    if let Some(texture) = background {
+        draw_arena_background(draw, texture);
+    } else {
+        draw.draw_rectangle(
+            0,
+            FLOOR_Y as i32,
+            WINDOW_WIDTH,
+            WINDOW_HEIGHT - FLOOR_Y as i32,
+            FLOOR,
+        );
+    }
+
+    draw.draw_line(
+        ARENA_LEFT as i32,
+        FLOOR_Y as i32,
+        ARENA_RIGHT as i32,
+        FLOOR_Y as i32,
+        UI_MUTED,
+    );
+    draw.draw_line(
+        ARENA_LEFT as i32,
+        96,
+        ARENA_LEFT as i32,
+        FLOOR_Y as i32,
+        UI_MUTED,
+    );
+    draw.draw_line(
+        ARENA_RIGHT as i32,
+        96,
+        ARENA_RIGHT as i32,
+        FLOOR_Y as i32,
+        UI_MUTED,
+    );
+}
+
+fn draw_arena_background(draw: &mut RaylibDrawHandle<'_>, texture: &Texture2D) {
+    let source = Rectangle::new(0.0, 0.0, texture.width() as f32, texture.height() as f32);
+    let dest = Rectangle::new(0.0, 0.0, WINDOW_WIDTH as f32, WINDOW_HEIGHT as f32);
+    draw.draw_texture_pro(
+        texture,
+        source,
+        dest,
+        Vector2::new(0.0, 0.0),
+        0.0,
+        Color::WHITE,
+    );
+
+    draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(0, 0, 0, 50));
     draw.draw_rectangle(
         0,
         FLOOR_Y as i32,
         WINDOW_WIDTH,
         WINDOW_HEIGHT - FLOOR_Y as i32,
-        FLOOR,
-    );
-    draw.draw_line(
-        ARENA_LEFT as i32,
-        FLOOR_Y as i32,
-        ARENA_RIGHT as i32,
-        FLOOR_Y as i32,
-        UI_MUTED,
-    );
-    draw.draw_line(
-        ARENA_LEFT as i32,
-        96,
-        ARENA_LEFT as i32,
-        FLOOR_Y as i32,
-        UI_MUTED,
-    );
-    draw.draw_line(
-        ARENA_RIGHT as i32,
-        96,
-        ARENA_RIGHT as i32,
-        FLOOR_Y as i32,
-        UI_MUTED,
+        Color::new(0, 0, 0, 34),
     );
 }
 

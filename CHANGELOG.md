@@ -24,6 +24,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Kit greybox tradicional com soco fraco, soco forte, chute, defesa, abaixar e corpo composto por partes.
 - CPU simples para o Player 2, ligada por padrão e alternável com `C`.
 - Tuning inicial de ritmo: golpes e fireball mais lentos, e CPU menos agressiva.
+- Arena bitmap placeholder `Terminal Compiler Lab` e carregamento inicial de texture asset.
 
 ### Em aberto
 

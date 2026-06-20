@@ -10,6 +10,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 
 - Janela Raylib.
 - Loop de jogo com fixed timestep.
+- Arena bitmap placeholder `Terminal Arcade + Compiler Lab`.
 - Dois lutadores greybox: Rust e Java.
 - Corpo composto por cabeça, tronco e pernas placeholder.
 - Movimento horizontal local.
@@ -89,26 +90,29 @@ O Player 2 começa em modo CPU. Quando CPU está ligada, os comandos manuais do 
 | Escudo/spark azul | Defesa reduziu dano |
 | `-8`, `-12`, `-16` | Dano aplicado |
 | Linha magenta | Colisão corpo-corpo bloqueando passagem |
+| Fundo Terminal Compiler Lab | Arena placeholder, não arte final |
 
 ## O que testar agora
 
 1. Um jogador não deve atravessar o outro.
-2. Soco fraco deve ser mais curto e mais rápido.
-3. Soco forte deve alcançar mais longe e causar mais dano.
-4. Chute deve acertar em uma altura mais baixa.
-5. Defesa deve reduzir dano e mostrar feedback azul.
-6. Abaixar deve reduzir a hurtbox visualmente.
-7. Fireball deve andar horizontalmente em velocidade legível e causar dano ao acertar.
-8. A CPU do Player 2 deve se aproximar, hesitar antes de atacar e defender fireballs próximas.
-9. `C` deve alternar entre CPU e controle manual do Player 2.
-10. Pulo com direção pressionada deve sair em diagonal.
-11. A vida deve chegar a zero e encerrar a luta.
-12. `R` deve reiniciar a partida.
-13. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
+2. A arena bitmap deve ajudar o mood sem esconder lutadores, hitboxes, hurtboxes ou HUD.
+3. Soco fraco deve ser mais curto e mais rápido.
+4. Soco forte deve alcançar mais longe e causar mais dano.
+5. Chute deve acertar em uma altura mais baixa.
+6. Defesa deve reduzir dano e mostrar feedback azul.
+7. Abaixar deve reduzir a hurtbox visualmente.
+8. Fireball deve andar horizontalmente em velocidade legível e causar dano ao acertar.
+9. A CPU do Player 2 deve se aproximar, hesitar antes de atacar e defender fireballs próximas.
+10. `C` deve alternar entre CPU e controle manual do Player 2.
+11. Pulo com direção pressionada deve sair em diagonal.
+12. A vida deve chegar a zero e encerrar a luta.
+13. `R` deve reiniciar a partida.
+14. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
 
 ## Limitações conhecidas
 
 - Os dois personagens ainda compartilham o mesmo kit de golpes.
+- A arena bitmap é placeholder gerado por IA e não deve ser tratada como arte final.
 - Defesa é um experimento mínimo: reduz dano, mas ainda não tem direção, high/low guard ou pushback.
 - A CPU é um sparring dummy determinístico: aproxima com cautela, ataca depois de delay, solta fireball em média distância e bloqueia projétil próximo.
 - Não há combo, agarrão, especial avançado, hitstun real, knockback ou IA adaptativa.

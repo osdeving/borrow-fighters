@@ -6,7 +6,7 @@
 use raylib::prelude::*;
 
 use crate::config::{FIXED_TIMESTEP, MAX_FIXED_STEPS_PER_FRAME, MAX_FRAME_TIME, TARGET_FPS};
-use crate::engine::{input::LocalInput, render};
+use crate::engine::{assets::GameAssets, input::LocalInput, render};
 use crate::game::ai::BasicCpu;
 use crate::game::world::World;
 
@@ -33,6 +33,7 @@ impl App {
     /// Runs the Raylib-backed game loop until the window closes.
     pub fn run(mut self, raylib: &mut RaylibHandle, thread: &RaylibThread) {
         raylib.set_target_fps(TARGET_FPS);
+        let assets = GameAssets::load(raylib, thread);
 
         while !raylib.window_should_close() {
             let input = LocalInput::read(raylib);
@@ -67,7 +68,7 @@ impl App {
             }
 
             let mut draw = raylib.begin_drawing(thread);
-            render::draw(&mut draw, &self.world, self.player_two_cpu_enabled);
+            render::draw(&mut draw, &self.world, self.player_two_cpu_enabled, &assets);
         }
     }
 }
