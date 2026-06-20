@@ -131,6 +131,8 @@ Regras recomendadas:
 - exigir histórico linear se o projeto mantiver squash/rebase como padrão.
 - exigir nome de PR compatível com Conventional Commits quando houver automação para isso.
 
+Durante o dia 0, admins podem ter bypass das proteções para evitar bloqueio operacional enquanto ainda não existe equipe de revisão. Quando houver pelo menos duas pessoas ativas no projeto, reavaliar se `enforce_admins` deve ser ligado.
+
 ### Ruleset `protect-release`
 
 Alvo: `release/*`.
@@ -142,6 +144,8 @@ Regras recomendadas:
 - exigir PR para alterações;
 - exigir aprovação do papel Production / Release ou Core Steward;
 - exigir checklist de release preenchido.
+
+Durante o dia 0, admins podem ter bypass desse ruleset pelo mesmo motivo operacional.
 
 ## CODEOWNERS
 
