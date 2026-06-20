@@ -1,6 +1,8 @@
 //! Exercises testable greybox combat rules without opening a Raylib window.
 
-use borrow_fighters::combat::fighter::FighterInput;
+use borrow_fighters::combat::fighter::{
+    FighterInput, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE,
+};
 use borrow_fighters::combat::projectile::PROJECTILE_DAMAGE;
 use borrow_fighters::game::world::{MIN_BODY_GAP, MatchOutcome, World};
 
@@ -15,7 +17,7 @@ fn basic_attack_deals_damage_once_per_swing() {
     world.update(
         DT,
         FighterInput {
-            attack: true,
+            light_punch: true,
             ..FighterInput::default()
         },
         FighterInput::default(),
@@ -25,21 +27,136 @@ fn basic_attack_deals_damage_once_per_swing() {
         world.update(DT, FighterInput::default(), FighterInput::default());
     }
 
-    assert_eq!(world.player_two.health, 88);
+    assert_eq!(world.player_two.health, 100 - LIGHT_PUNCH_DAMAGE);
     assert_eq!(world.hit_effects.len(), 1);
+}
+
+#[test]
+fn heavy_punch_reaches_farther_than_light_punch() {
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 390.0;
+    world.player_two.position.x = 490.0;
+
+    world.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    for _ in 0..20 {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    assert_eq!(world.player_two.health, 100);
+
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 390.0;
+    world.player_two.position.x = 490.0;
+
+    world.update(
+        DT,
+        FighterInput {
+            heavy_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    for _ in 0..24 {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    assert_eq!(world.player_two.health, 100 - HEAVY_PUNCH_DAMAGE);
+}
+
+#[test]
+fn kick_has_its_own_damage() {
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 420.0;
+    world.player_two.position.x = 475.0;
+
+    world.update(
+        DT,
+        FighterInput {
+            kick: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    for _ in 0..24 {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    assert_eq!(world.player_two.health, 100 - KICK_DAMAGE);
+}
+
+#[test]
+fn block_reduces_incoming_damage() {
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 420.0;
+    world.player_two.position.x = 475.0;
+
+    world.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput {
+            block: true,
+            ..FighterInput::default()
+        },
+    );
+
+    for _ in 0..20 {
+        world.update(
+            DT,
+            FighterInput::default(),
+            FighterInput {
+                block: true,
+                ..FighterInput::default()
+            },
+        );
+    }
+
+    assert_eq!(world.player_two.health, 100 - LIGHT_PUNCH_DAMAGE / 4);
+    assert_eq!(world.hit_effects.len(), 1);
+    assert!(world.hit_effects[0].blocked);
+}
+
+#[test]
+fn crouch_reduces_the_vulnerable_body_height() {
+    let mut world = World::new_greybox();
+    let standing_height = world.player_one.hurtbox().height;
+
+    world.update(
+        DT,
+        FighterInput {
+            crouch: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    assert!(world.player_one.crouching);
+    assert!(world.player_one.hurtbox().height < standing_height);
 }
 
 #[test]
 fn match_ends_when_health_reaches_zero() {
     let mut world = World::new_greybox();
-    world.player_two.health = 12;
+    world.player_two.health = LIGHT_PUNCH_DAMAGE;
     world.player_one.position.x = 420.0;
     world.player_two.position.x = 470.0;
 
     world.update(
         DT,
         FighterInput {
-            attack: true,
+            light_punch: true,
             ..FighterInput::default()
         },
         FighterInput::default(),
@@ -64,7 +181,7 @@ fn hit_feedback_expires_after_short_lifetime() {
     world.update(
         DT,
         FighterInput {
-            attack: true,
+            light_punch: true,
             ..FighterInput::default()
         },
         FighterInput::default(),

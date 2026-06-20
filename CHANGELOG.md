@@ -21,6 +21,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Workflow Rust inicial com fmt, testes e clippy.
 - HUD greybox reorganizado para evitar sobreposição de texto.
 - Fireball simples e movimento/pulo mais suave no protótipo.
+- Kit greybox tradicional com soco fraco, soco forte, chute, defesa, abaixar e corpo composto por partes.
 
 ### Em aberto
 

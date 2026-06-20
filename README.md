@@ -94,7 +94,7 @@ As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
 
 ## Rodando o protótipo greybox
 
-O primeiro código jogável está na branch `feature/greybox-vertical-slice` e implementa um greybox local para validar o básico: dois personagens, movimento, pulo, soco, colisão corpo-corpo, hitbox/hurtbox, dano, vida, vitória e restart.
+O código jogável atual implementa um greybox local para validar o básico: dois personagens, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, fireball, colisão corpo-corpo, hitbox/hurtbox, dano, vida, vitória e restart.
 
 Requisitos iniciais:
 
@@ -109,10 +109,16 @@ cargo run
 
 Controles:
 
-| Jogador | Movimento | Pulo | Soco | Fireball |
-|---|---|---|---|---|
-| Rust | `A` / `D` | `W` | `F` | `G` |
-| Java | `←` / `→` | `↑` | `Enter` | `Right Shift` |
+| Ação | Rust / Player 1 | Java / Player 2 |
+|---|---|---|
+| Mover | `A` / `D` | `←` / `→` ou `J` / `L` |
+| Pular | `W` | `↑` ou `I` |
+| Abaixar | `S` | `↓` ou `K` |
+| Defender | `Q` | `U` |
+| Soco fraco / curto | `F` | `O` ou `Enter` |
+| Soco forte / longo | `H` | `P` ou `Right Shift` |
+| Chute | `V` | `;` ou `/` |
+| Fireball | `G` | `Right Ctrl` ou `KP0` |
 
 Use `R` para reiniciar a luta.
 

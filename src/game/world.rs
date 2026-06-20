@@ -4,9 +4,10 @@
 //! without Raylib.
 
 use crate::combat::collision::hitbox_hits_hurtbox;
-use crate::combat::fighter::{BASIC_DAMAGE, Fighter, FighterInput, PlayerSlot};
+use crate::combat::fighter::{ActiveAttack, Fighter, FighterInput, PlayerSlot};
 use crate::combat::projectile::Projectile;
 use crate::config::{ARENA_LEFT, ARENA_RIGHT};
+use crate::math::rect::Rect;
 use crate::math::vec2::Vec2;
 
 const HIT_EFFECT_LIFETIME: f32 = 0.35;
@@ -26,6 +27,7 @@ pub struct HitEffect {
     pub position: Vec2,
     pub timer: f32,
     pub damage: i32,
+    pub blocked: bool,
 }
 
 /// Two-fighter world state for Prototype 0.1.
@@ -148,31 +150,26 @@ impl World {
     }
 
     fn resolve_hits(&mut self) {
-        let p1_hits = self.player_one.active_hitbox().is_some_and(|hitbox| {
-            self.player_one.can_register_hit()
-                && hitbox_hits_hurtbox(hitbox, self.player_two.hurtbox())
-        });
+        let p1_attack = landed_attack(&self.player_one, &self.player_two);
+        let p2_attack = landed_attack(&self.player_two, &self.player_one);
 
-        let p2_hits = self.player_two.active_hitbox().is_some_and(|hitbox| {
-            self.player_two.can_register_hit()
-                && hitbox_hits_hurtbox(hitbox, self.player_one.hurtbox())
-        });
-
-        if p1_hits {
-            self.player_two.take_basic_hit();
+        if let Some(attack) = p1_attack {
+            let result = self.player_two.take_hit(attack.damage);
             self.player_one.mark_attack_hit();
             self.hit_effects.push(HitEffect::new(
                 self.player_two.hurtbox().center(),
-                BASIC_DAMAGE,
+                result.damage,
+                result.blocked,
             ));
         }
 
-        if p2_hits {
-            self.player_one.take_basic_hit();
+        if let Some(attack) = p2_attack {
+            let result = self.player_one.take_hit(attack.damage);
             self.player_two.mark_attack_hit();
             self.hit_effects.push(HitEffect::new(
                 self.player_one.hurtbox().center(),
-                BASIC_DAMAGE,
+                result.damage,
+                result.blocked,
             ));
         }
     }
@@ -211,20 +208,22 @@ impl World {
 
             let rect = projectile.rect();
             match projectile.owner {
-                PlayerSlot::One if rect.intersects(self.player_two.hurtbox()) => {
-                    self.player_two.take_damage(projectile.damage);
+                PlayerSlot::One if projectile_hits_fighter(rect, &self.player_two) => {
+                    let result = self.player_two.take_hit(projectile.damage);
                     projectile.alive = false;
                     self.hit_effects.push(HitEffect::new(
                         self.player_two.hurtbox().center(),
-                        projectile.damage,
+                        result.damage,
+                        result.blocked,
                     ));
                 }
-                PlayerSlot::Two if rect.intersects(self.player_one.hurtbox()) => {
-                    self.player_one.take_damage(projectile.damage);
+                PlayerSlot::Two if projectile_hits_fighter(rect, &self.player_one) => {
+                    let result = self.player_one.take_hit(projectile.damage);
                     projectile.alive = false;
                     self.hit_effects.push(HitEffect::new(
                         self.player_one.hurtbox().center(),
-                        projectile.damage,
+                        result.damage,
+                        result.blocked,
                     ));
                 }
                 _ => {}
@@ -245,11 +244,31 @@ impl World {
 }
 
 impl HitEffect {
-    fn new(position: Vec2, damage: i32) -> Self {
+    fn new(position: Vec2, damage: i32, blocked: bool) -> Self {
         Self {
             position,
             timer: HIT_EFFECT_LIFETIME,
             damage,
+            blocked,
         }
     }
+}
+
+fn landed_attack(attacker: &Fighter, defender: &Fighter) -> Option<ActiveAttack> {
+    attacker.active_attack().filter(|attack| {
+        attacker.can_register_hit()
+            && defender
+                .hurtboxes()
+                .rects()
+                .into_iter()
+                .any(|hurtbox| hitbox_hits_hurtbox(attack.hitbox, hurtbox))
+    })
+}
+
+fn projectile_hits_fighter(projectile: Rect, fighter: &Fighter) -> bool {
+    fighter
+        .hurtboxes()
+        .rects()
+        .into_iter()
+        .any(|hurtbox| projectile.intersects(hurtbox))
 }

@@ -22,6 +22,8 @@ const HITSPARK: Color = Color::new(255, 235, 59, 255);
 const BODY_COLLISION: Color = Color::new(218, 112, 214, 255);
 const PROJECTILE: Color = Color::new(80, 220, 255, 255);
 const PROJECTILE_FILL: Color = Color::new(80, 220, 255, 110);
+const GUARD: Color = Color::new(86, 156, 255, 255);
+const GUARD_FILL: Color = Color::new(86, 156, 255, 90);
 const UI_TEXT: Color = Color::new(238, 241, 247, 255);
 const UI_MUTED: Color = Color::new(165, 172, 185, 255);
 const HEALTH_BACK: Color = Color::new(60, 62, 70, 255);
@@ -85,12 +87,13 @@ fn draw_fighter(
         AttackPhase::Recovery => dim(body_color, 25),
     };
 
-    fill_rect(draw, fighter.body_rect(), body);
+    draw_body_parts(draw, fighter, body);
     outline_rect(draw, fighter.body_rect(), BODY_OUTLINE);
-    outline_rect(draw, fighter.hurtbox(), HURTBOX);
+    for hurtbox in fighter.hurtboxes().rects() {
+        outline_rect(draw, hurtbox, HURTBOX);
+    }
 
-    if phase != AttackPhase::Idle {
-        let attack_box = fighter.attack_box();
+    if let Some(attack_box) = fighter.attack_box() {
         draw.draw_rectangle(
             attack_box.x.round() as i32,
             attack_box.y.round() as i32,
@@ -103,6 +106,19 @@ fn draw_fighter(
             },
         );
         outline_rect(draw, attack_box, HITBOX);
+    }
+
+    if fighter.blocking {
+        let guard = fighter.guard_box();
+        draw.draw_rectangle(
+            guard.x.round() as i32,
+            guard.y.round() as i32,
+            guard.width.round() as i32,
+            guard.height.round() as i32,
+            GUARD_FILL,
+        );
+        outline_rect(draw, guard, GUARD);
+        draw.draw_text("BLOCK", guard.x as i32 - 18, guard.y as i32 - 22, 16, GUARD);
     }
 
     if let Some(hitbox) = fighter.active_hitbox() {
@@ -120,13 +136,18 @@ fn draw_fighter(
     draw.draw_text(fighter.name, label_x, label_y, 16, UI_TEXT);
 
     if phase != AttackPhase::Idle {
+        let attack_label = fighter
+            .attack_kind()
+            .map_or("ATTACK", crate::combat::fighter::AttackKind::label);
         let text = match phase {
-            AttackPhase::Startup => "PUNCH",
+            AttackPhase::Startup => attack_label,
             AttackPhase::Active => "HITBOX",
             AttackPhase::Recovery => "RECOVER",
             AttackPhase::Idle => "",
         };
         draw.draw_text(text, label_x, label_y - 22, 18, HITSPARK);
+    } else if fighter.crouching {
+        draw.draw_text("CROUCH", label_x, label_y - 22, 18, UI_MUTED);
     }
 }
 
@@ -161,21 +182,28 @@ fn draw_hud(draw: &mut RaylibDrawHandle<'_>, world: &World) {
 
 fn draw_help(draw: &mut RaylibDrawHandle<'_>) {
     draw.draw_text(
-        "P1: A/D move, W jump, F punch, G fireball",
+        "P1: A/D move, W jump, S crouch, Q block",
+        24,
+        WINDOW_HEIGHT - 100,
+        16,
+        UI_TEXT,
+    );
+    draw.draw_text(
+        "P1 attacks: F light punch, H heavy punch, V kick, G fireball",
         24,
         WINDOW_HEIGHT - 76,
         16,
         UI_TEXT,
     );
     draw.draw_text(
-        "P2: arrows move/jump, Enter punch, Right Shift fireball",
+        "P2: arrows or J/L move, Up/I jump, Down/K crouch, U block",
         24,
         WINDOW_HEIGHT - 52,
         16,
         UI_TEXT,
     );
     draw.draw_text(
-        "White body | green hurtbox | red punch | cyan fireball | yellow hit | magenta body block",
+        "P2 attacks: O/Enter LP, P/RShift HP, ; or / kick, RCtrl/KP0 fireball",
         24,
         WINDOW_HEIGHT - 28,
         16,
@@ -254,17 +282,30 @@ fn draw_body_collision(draw: &mut RaylibDrawHandle<'_>, world: &World) {
 
 fn draw_hit_effects(draw: &mut RaylibDrawHandle<'_>, world: &World) {
     for effect in &world.hit_effects {
+        let color = if effect.blocked { GUARD } else { HITSPARK };
         let x = effect.position.x.round() as i32;
         let y = effect.position.y.round() as i32;
         let radius = (10.0 + effect.timer * 32.0).round() as i32;
-        draw.draw_circle_lines(x, y, radius as f32, HITSPARK);
-        draw.draw_line(x - radius, y, x + radius, y, HITSPARK);
-        draw.draw_line(x, y - radius, x, y + radius, HITSPARK);
+        draw.draw_circle_lines(x, y, radius as f32, color);
+        draw.draw_line(x - radius, y, x + radius, y, color);
+        draw.draw_line(x, y - radius, x, y + radius, color);
 
         let damage = format!("-{}", effect.damage);
-        draw.draw_text(&damage, x + 14, y - 18, 24, HITSPARK);
-        draw.draw_text("HIT", x - 18, y - 42, 20, HITSPARK);
+        draw.draw_text(&damage, x + 14, y - 18, 24, color);
+        let label = if effect.blocked { "BLOCK" } else { "HIT" };
+        draw.draw_text(label, x - 18, y - 42, 20, color);
     }
+}
+
+fn draw_body_parts(
+    draw: &mut RaylibDrawHandle<'_>,
+    fighter: &crate::combat::fighter::Fighter,
+    color: Color,
+) {
+    let parts = fighter.body_parts();
+    fill_rect(draw, parts.head, lighten(color, 28));
+    fill_rect(draw, parts.torso, color);
+    fill_rect(draw, parts.legs, dim(color, 22));
 }
 
 fn fill_rect(draw: &mut RaylibDrawHandle<'_>, rect: Rect, color: Color) {
