@@ -16,9 +16,10 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Esboço de arquitetura Rust + Raylib sem código de produção.
 - Instruções repo-local para Codex e Claude Code.
 - Skills iniciais de IA para atlas do repo, Rust/Raylib, gameplay e direção de arte.
+- Primeiro protótipo greybox jogável com Rust + Raylib.
+- Guia de playtest do greybox.
 
 ### Em aberto
 
 - Definir organização GitHub e times reais.
-- Ativar rulesets de proteção no GitHub.
 - Definir primeira milestone oficial.

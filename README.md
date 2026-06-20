@@ -19,6 +19,7 @@ A ideia é reunir visão, escopo, decisões e backlog antes de iniciar o código
 - [`docs/02-prototype-scope.md`](docs/02-prototype-scope.md): escopo do primeiro protótipo.
 - [`docs/03-backlog.md`](docs/03-backlog.md): backlog inicial e t-shirt sizing.
 - [`docs/04-team-briefing.md`](docs/04-team-briefing.md): briefing para reunir colaboradores.
+- [`docs/10-greybox-playtest.md`](docs/10-greybox-playtest.md): como testar o primeiro protótipo greybox.
 
 ### Governança, contribuição e release
 
@@ -92,6 +93,8 @@ As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
 
 ## Rodando o protótipo greybox
 
+O primeiro código jogável está na branch `feature/greybox-vertical-slice` e implementa um greybox local para validar o básico: dois personagens, movimento, pulo, soco, colisão corpo-corpo, hitbox/hurtbox, dano, vida, vitória e restart.
+
 Requisitos iniciais:
 
 - Rust estável.
@@ -111,3 +114,5 @@ Controles:
 | Java | `←` / `→` | `↑` | `Enter` |
 
 Use `R` para reiniciar a luta.
+
+Guia completo de teste: [`docs/10-greybox-playtest.md`](docs/10-greybox-playtest.md).
