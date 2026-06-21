@@ -38,7 +38,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Ferramentas locais em `tools/art/` para extrair atlas e gerar manifests.
 - Documentação atualizada para refletir o estado jogável da `main`.
 - Amostra em vídeo sem áudio no README, com capa clicável e disclaimer de arte placeholder.
-- Direção narrativa inicial com O Linker, Rust, Duke, Assembly e arenas brasileiras de ciência/tecnologia.
+- Direção narrativa inicial com O Linker como força cósmica, Ada Lovelace, Rust, Duke, Assembly, frontenzos e arenas brasileiras de ciência/tecnologia.
 
 ### Em aberto
 

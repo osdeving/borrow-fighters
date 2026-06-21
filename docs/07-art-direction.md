@@ -61,6 +61,18 @@ O slice jogável usa arte placeholder, mas já exercita decisões importantes pa
 
 Nada disso é final. O valor desses assets agora é validar proporção, leitura de pose, pivots, altura do projectile, contraste com cenário e necessidades de animação.
 
+## Linguagem visual do Linker
+
+O Linker deve parecer uma força de ligação, não magia genérica. Ele pode aparecer como alinhamento impossível entre cabos, símbolos, partículas, luz, logs, circuitos, reflexos e gestos dos personagens.
+
+Direções visuais:
+
+- Ada Lovelace deve aparecer de forma sutil, quase arqueológica: inscrições, diagramas, retratos parciais, notas, máquinas e sinais esquecidos;
+- Assembly deve parecer fora de fase, com partes do corpo alternando entre matéria, ausência, `0` e `1`;
+- a instabilidade de Assembly deve ser sóbria e inquietante, não glitch cômico;
+- entidades erráticas dos frontenzos podem ter silhuetas menores, deformadas e incompletas;
+- o Linker pode ser legível por cor, símbolo ou movimento, mas nunca deve competir com hit effects e leitura de combate.
+
 ## Arenas brasileiras
 
 Toda proposta de arena deve responder:

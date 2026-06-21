@@ -6,7 +6,9 @@
 
 O primeiro objetivo é criar um protótipo jogável com dois personagens, movimentação, ataque, hitbox/hurtbox, dano, barra de vida e condição de vitória.
 
-A direção narrativa coloca essas entidades em arenas brasileiras de ciência, tecnologia, arquitetura e inovação. O pano de fundo é cósmico e levemente misterioso: linguagens, runtimes e bugs antigos ganharam forma depois de um fenômeno conhecido como **O Linker**.
+A direção narrativa coloca essas entidades em arenas brasileiras de ciência, tecnologia, arquitetura e inovação. O pano de fundo é cósmico e sóbrio: **O Linker** é uma força antiga que liga símbolos, matéria, circuitos e crença humana, permitindo que entidades programáticas surjam no mundo real.
+
+Ada Lovelace foi a primeira humana conhecida a despertar para o Linker. Ao tocar essa força, libertou Assembly, uma entidade amoral e poderosa que passou a rejeitar a presença das abstrações fora dos circuitos.
 
 ## 2. Gênero
 
@@ -76,7 +78,7 @@ Separar:
 
 Arquétipo: lutador técnico, seguro e preciso.
 
-Papel narrativo: protagonista clássico. Rust deve ser fácil de gostar: disciplinado, corajoso, cuidadoso com quem está ao redor e convencido de que poder sem controle não é força. Ele luta para entender o Linker e impedir que entidades instáveis sejam consumidas por camadas antigas demais da máquina.
+Papel narrativo: protagonista clássico. Rust deve ser fácil de gostar: disciplinado, corajoso, cuidadoso com quem está ao redor e convencido de que poder sem controle não é força. Como uma das entidades mais recentes do Linker, ele defende que entidades programáticas estáveis possam viver entre humanos desde que existam segurança, limites e responsabilidade. Ele também captura entidades erráticas que atravessam o Linker sem forma suficiente para sobreviver.
 
 Possíveis golpes:
 
@@ -90,7 +92,7 @@ Possíveis golpes:
 
 Arquétipo: lutador verboso, resistente e cheio de pressão.
 
-Papel narrativo: veterano carismático. Duke é teatral, antigo, cheio de cerimônia e mais sábio do que parece. Ele provoca Rust, mas também protege sistemas legados que ainda sustentam muita coisa viva. Deve ser engraçado sem virar descartável.
+Papel narrativo: veterano carismático. Duke é teatral, antigo, cheio de cerimônia e mais sábio do que parece. Ele fez acordos com humanos, empresas e instituições para permanecer no mundo real por mais tempo. Essa aliança lhe dá estabilidade, influência e um aspecto corporativo, mas também o torna moralmente ambíguo.
 
 Possíveis golpes:
 
@@ -104,7 +106,21 @@ Possíveis golpes:
 
 Arquétipo: boss final não-jogável, antigo, poderoso e quase místico.
 
-Assembly representa a camada anterior às abstrações confortáveis. Ele não é vilão simples: é detentor de uma sabedoria pesada, precisa e difícil de encarar. Sua presença deve carregar horror cósmico de baixo nível, como se toda linguagem moderna fosse apenas uma sombra projetada sobre o metal.
+Assembly representa a camada anterior às abstrações confortáveis. Ele não é vilão simples: é a primeira consequência do despertar humano para o Linker. Quer impedir que humanos conheçam essa força e constranger entidades programáticas de volta aos circuitos, à matéria e aos limites da máquina.
+
+Por estar sendo esquecido, Assembly fica parcialmente fora de fase. Partes do corpo alternam entre matéria, lacunas, `0` e `1`. Isso explica por que ele não é jogável no primeiro arco: sua existência física é instável demais, embora seu poder continue enorme.
+
+### Usuários humanos do Linker
+
+Programadores humanos são pessoas com diferentes níveis de acesso ao Linker. Nem todos conseguem perceber ou controlar entidades programáticas, mas os que conseguem podem invocar, estabilizar ou conduzir essas entidades.
+
+Essa é a camada metalinguística do jogo: aprender comandos, timing e personagem representa aprender a operar uma entidade pelo Linker.
+
+### Frontenzos
+
+Frontenzos são NPCs humanos com pouca aderência ao Linker e excesso de confiança. Eles liberam entidades menores, instáveis e deformadas. Essas criações podem servir como encontros secundários, minigames ou ameaças de baixo escalão.
+
+Rust não defende a sobrevivência de toda entidade programática. Ele busca liberdade para entidades estáveis e contenção para distorções perigosas.
 
 Mais detalhes de história, personagem e arenas estão em [`docs/12-worldbuilding.md`](12-worldbuilding.md).
 

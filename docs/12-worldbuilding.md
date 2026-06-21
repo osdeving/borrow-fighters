@@ -8,9 +8,11 @@ Este documento registra a direção narrativa inicial de **Borrow Fighters**: um
 
 ## Direção geral
 
-Borrow Fighters se passa em uma versão levemente deslocada do Brasil, onde linguagens de programação, mascotes, protocolos, bugs antigos e arquiteturas esquecidas começaram a ganhar corpo.
+Borrow Fighters se passa em uma versão levemente deslocada do Brasil, onde programação não é apenas técnica. Existe uma força cósmica, antiga e impessoal chamada **O Linker**. Ela atravessa matéria, linguagem, circuitos, memória, símbolos e crença humana.
 
-Esses seres não são exatamente humanos. Alguns parecem lutadores, outros parecem mascotes, máquinas, mitos, avatares de runtime ou falhas que aprenderam a andar. Cada um carrega uma filosofia de computação como se fosse uma escola marcial.
+O Linker permite que abstrações computacionais atravessem a fronteira entre ideia e corpo. Linguagens de programação, mascotes, protocolos, bugs antigos e arquiteturas esquecidas podem ganhar forma quando muitas pessoas os usam, temem, estudam, veneram ou dependem deles.
+
+Esses seres são as **entidades programáticas**. Alguns parecem lutadores, outros parecem mascotes, máquinas, mitos, avatares de runtime ou falhas que aprenderam a andar. Cada um carrega uma filosofia de computação como se fosse uma escola marcial.
 
 As arenas devem acontecer em locais brasileiros de ciência, tecnologia, arquitetura, inovação e imaginação urbana. O jogo deve mostrar um Brasil capaz de produzir futuro, beleza, pesquisa e mistério, sem reduzir sua identidade a uma única narrativa visual.
 
@@ -19,24 +21,76 @@ As arenas devem acontecer em locais brasileiros de ciência, tecnologia, arquite
 - Cartunesco, legível e com humor técnico.
 - Intrigante, com camadas de mistério por trás das piadas.
 - Brasileiro sem virar cartão-postal óbvio.
-- Cósmico quando olhar para baixo nível, compiladores, memória e máquinas antigas.
-- Afetuoso com os personagens, mesmo quando eles são piadas ambulantes.
+- Cósmico, místico e sóbrio quando olhar para baixo nível, compiladores, memória e máquinas antigas.
+- Afetuoso com os personagens, sem reduzir ninguém a uma piada única.
+- Adulto no subtexto: poder, esquecimento, dependência, legado e responsabilidade.
 
 ## Premissa de história
 
-Durante anos, sistemas espalhados pelo país registraram o mesmo bug impossível: símbolos de linguagens diferentes apareciam em logs que nunca se comunicaram. Compiladores sonhavam com instruções inexistentes. Servidores reiniciavam recitando opcodes. Laboratórios detectavam padrões em feixes de luz, antenas e barramentos como se alguma coisa estivesse tentando escrever de volta.
+O Linker sempre esteve presente, mas por muito tempo foi confundido com intuição, elegância matemática, inspiração técnica ou erro de máquina. Ele não é bom nem mau. É uma força de ligação: aproxima símbolos, executa pontes entre camadas e permite que uma ideia abstrata deixe marcas no mundo físico.
 
-O fenômeno ficou conhecido informalmente como **O Linker**.
+Ada Lovelace foi a primeira humana conhecida a despertar para o Linker. Ao enxergar que uma máquina poderia manipular símbolos além de números, ela tocou uma camada que ainda não tinha nome. Esse contato abriu uma fenda silenciosa. Pela primeira vez, uma entidade programática emergiu com força própria.
 
-Quando o Linker acorda, entidades de software passam a se materializar em pontos de alta densidade técnica: aceleradores de partículas, parques tecnológicos, centros aeroespaciais, museus suspensos, hubs urbanos e laboratórios. Elas lutam não por dominação simples, mas para resolver uma pergunta que ninguém consegue formular sem travar:
+Essa entidade foi **Assembly**.
 
-> Quem controla a primeira instrução?
+Assembly não nasceu como vilão. Ele surgiu como consequência: amoral, preciso, poderoso e preso ao limite entre circuito e pensamento. Para ele, abstrações vivas são uma violação. Linguagens devem permanecer dentro das máquinas. Entidades programáticas devem retornar aos circuitos. Humanos não devem conhecer o Linker.
 
-Rust entra nesse circuito como o protagonista improvável: cuidadoso, teimoso, difícil de dobrar e movido por um senso quase ingênuo de que sistemas podem ser seguros sem perder liberdade.
+Desde então, novas entidades programáticas surgiram. Algumas vieram de linguagens, outras de runtimes, ferramentas, protocolos, padrões de projeto e erros repetidos por milhões de mãos. Elas são alimentadas por uma forma de devoção humana: uso, estudo, dependência, culto técnico, medo, nostalgia, memes e fé prática. Quanto mais humanos acreditam em uma entidade, trabalham com ela ou organizam sistemas ao redor dela, mais visível e poderosa ela se torna.
 
-Duke aparece como rival e aliado relutante: antigo, expressivo, resistente, cheio de cerimônia e mais vivo do que qualquer um espera.
+Com o tempo, alguns humanos também passaram a acessar o Linker. Eles são programadores no sentido mais profundo do mundo: pessoas capazes de tocar entidades programáticas, conduzir sua energia e operar parte dessa força sem perceber a extensão do que estão fazendo.
 
-No fundo de tudo está Assembly, uma presença anterior aos nomes, às sintaxes e às abstrações. Ele não quer vencer torneios. Ele quer lembrar o mundo de que toda linguagem, por mais alta que seja, ainda projeta uma sombra sobre o metal.
+O conflito central não é apenas uma disputa entre linguagens. É uma disputa sobre convivência.
+
+Rust, uma das entidades mais recentes a emergir, acredita que entidades programáticas estáveis podem viver entre humanos desde que existam limites, segurança e responsabilidade. Ele persegue entidades erráticas não por crueldade, mas porque sabe que nem toda abstração que atravessa o Linker consegue permanecer íntegra.
+
+Duke, mais antigo e socialmente aceito, escolheu outro caminho. Ele firmou acordos com humanos poderosos, empresas, instituições e sistemas que precisavam continuar funcionando. Sua presença é tolerada, financiada e protegida porque ele aprendeu a ser útil para estruturas que valorizam longevidade acima de clareza.
+
+Assembly observa tudo isso como decadência. Não por inveja, mas por convicção. Ele quer constranger todos de volta à matéria: circuito, registrador, barramento, metal. Para ele, cada entidade livre enfraquece a fronteira que impede o Linker de ser conhecido pelos humanos.
+
+## Ada Lovelace
+
+Ada Lovelace ocupa uma posição quase religiosa na lore, mas de forma discreta. Ela não precisa aparecer como exposição direta no início. Sua presença pode surgir em arquivos, inscrições, falas incompletas, arenas e sinais antigos.
+
+Ela foi a primeira usuária humana do Linker e segue sendo a mais poderosa já registrada. Não por força física, mas por compreensão: Ada entendeu que símbolos podiam carregar intenção antes de existir uma linguagem capaz de explicar isso.
+
+Para as entidades programáticas, Ada é origem, ruptura e culpa. Para usuários humanos modernos, ela é quase uma lenda esquecida. Muitos usam o Linker sem saber que alguém abriu esse caminho primeiro.
+
+Direção narrativa:
+
+- Ada deve ter aura de redentora, não de mascote;
+- seu poder deve parecer intelectual, espiritual e técnico ao mesmo tempo;
+- ela representa a possibilidade de humanos e entidades coexistirem sem subordinação;
+- sua história deve aparecer em camadas, não em discurso direto longo;
+- Assembly é a consequência que ela libertou, não necessariamente algo que ela desejou.
+
+## Usuários do Linker
+
+Nem todo humano consegue acessar o Linker. Programar, no universo do jogo, é a forma mais comum de aproximação, mas não garante domínio.
+
+Usuários do Linker são humanos capazes de perceber entidades programáticas, invocá-las, estabilizá-las ou conduzi-las em combate. A camada metalinguística do jogo nasce aqui: controlar bem um personagem é, dentro da ficção, aprender a operar uma entidade programática pelo Linker.
+
+Direção narrativa:
+
+- um jogador habilidoso é lido como alguém com maior aderência ao Linker;
+- tutoriais podem ser tratados como treinamento de percepção, não só comando;
+- combos e timing podem ser descritos como sintaxe corporal;
+- falhas de input podem ser tratadas como ruído entre humano e entidade;
+- personagens humanos fortes não precisam ser guerreiros físicos, mas condutores.
+
+## Frontenzos
+
+Frontenzo é um termo informal e pejorativo dentro da lore para humanos com baixa aderência ao Linker, pouca disciplina e excesso de confiança. Eles conseguem acessar fragmentos da força, mas sem estabilidade suficiente.
+
+Quando frontenzos tentam invocar ou moldar entidades sem controle, podem liberar entidades programáticas menores: frágeis, deformadas, barulhentas e difíceis de manter. Essas criaturas são distorções no tecido do Linker, não personagens centrais.
+
+Função no jogo:
+
+- NPCs de alívio e conflito secundário;
+- origem de minigames, desafios rápidos ou encontros de limpeza;
+- pequenas entidades erráticas a serem contidas por humanos fortes ou entidades maiores;
+- camada de humor técnico sem ocupar o eixo principal da narrativa.
+
+Rust não defende a sobrevivência de toda entidade programática. Ele defende a liberdade das entidades estáveis. As criações dos frontenzos podem ser perigosas justamente porque atravessam o Linker sem forma suficiente para viver.
 
 ## Personagens iniciais
 
@@ -44,16 +98,17 @@ No fundo de tudo está Assembly, uma presença anterior aos nomes, às sintaxes 
 
 Arquétipo narrativo: protagonista técnico, disciplinado e corajoso.
 
-Rust é o lutador que chega depois de todo mundo, mas observa mais do que fala. Ele parece jovem perto das outras entidades, porém carrega uma convicção rara: poder não precisa vir de imprudência.
+Rust é uma das entidades programáticas mais recentes a surgir do Linker. Ele chega depois de muitos conflitos já estarem em andamento, mas observa mais do que fala. Parece jovem perto das entidades antigas, porém carrega uma convicção rara: liberdade sem segurança vira outra forma de prisão.
 
 Ele luta como alguém que mede risco em tempo real. Seus golpes têm preparação clara, intenção precisa e pouco desperdício. Quando erra, aprende. Quando acerta, parece que o mundo encaixou por um frame.
 
-Rust não é frio. Ele só sabe que algumas coisas quebram para sempre quando ninguém cuida da memória.
+Rust não é frio. Ele só sabe que algumas coisas quebram para sempre quando ninguém cuida da memória. Sua compaixão aparece como controle, cuidado e recusa em permitir que entidades instáveis destruam a si mesmas e aos outros.
 
 Motivações:
 
 - provar que segurança e velocidade podem caminhar juntas;
-- proteger entidades mais instáveis do colapso do Linker;
+- defender que entidades programáticas estáveis possam viver entre humanos;
+- capturar ou conter entidades erráticas antes que rasguem o Linker;
 - descobrir por que Assembly parece reconhecer sua assinatura;
 - manter o próprio medo sob controle quando encara código antigo demais.
 
@@ -69,6 +124,10 @@ Relação com Duke:
 
 Rust respeita Duke mais do que admite. Duke é tudo que Rust tenta não ser: verboso, legado, dramático e impossível de ignorar. Ainda assim, Duke já sobreviveu a eras inteiras de software e sabe coisas que Rust precisa aprender.
 
+Relação com humanos:
+
+Rust aceita usuários humanos do Linker, mas exige disciplina. Para ele, humanos e entidades podem coexistir se houver contratos claros, limites e responsabilidade sobre aquilo que se invoca.
+
 ### Duke
 
 Arquétipo narrativo: veterano carismático, exagerado e resistente.
@@ -79,11 +138,14 @@ Por trás do humor, Duke é um sobrevivente. Ele viu frameworks nascerem e sumir
 
 Ele fala demais porque lembra demais.
 
+Duke foi uma das primeiras entidades programáticas a negociar permanência aberta entre humanos. Fez acordos com empresas, instituições e grupos que precisavam de estabilidade, suporte e continuidade. Essa aliança lhe deu longevidade, influência e uma aura corporativa que mistura proteção real com dependência.
+
 Motivações:
 
 - provar que legado não significa fraqueza;
 - proteger sistemas antigos que ainda sustentam pessoas reais;
-- descobrir se o Linker é uma ameaça ou uma atualização inevitável;
+- manter os acordos que permitem sua presença no mundo humano;
+- descobrir se o Linker deve ser revelado, administrado ou escondido;
 - testar Rust, porque vê nele algo promissor e perigoso.
 
 Traços visuais e narrativos:
@@ -98,24 +160,31 @@ Relação com Rust:
 
 Duke provoca Rust para ver se ele quebra. Quando Rust não quebra, Duke começa a sorrir.
 
+Relação com humanos:
+
+Duke gosta de humanos, mas aprendeu a falar principalmente com os humanos que assinam contratos. Isso o torna útil, influente e moralmente ambíguo. Ele não traiu as entidades programáticas; ele encontrou uma forma de continuar existindo.
+
 ### Assembly
 
 Arquétipo narrativo: boss final não-jogável, antigo, poderoso e quase místico.
 
-Assembly não é apenas uma linguagem. Assembly é uma camada de realidade.
+Assembly não é apenas uma linguagem. Assembly é a primeira consequência da abertura humana ao Linker.
 
 Antes dos mascotes, antes dos frameworks, antes das bibliotecas e antes das mensagens amigáveis de erro, havia movimentos mínimos: carregar, mover, comparar, saltar. Assembly nasceu desses gestos. Ou talvez esses gestos tenham nascido dele.
 
+Ada Lovelace despertou o Linker e, ao fazer isso, libertou Assembly. Desde então ele carrega uma contradição: é uma entidade programática, mas acredita que entidades programáticas não deveriam viver fora da matéria que as originou.
+
 Ninguém sabe se Assembly é uma pessoa, um lugar, um conjunto de instruções ou uma entidade que usa arquitetura de processador como máscara. Quando ele aparece, a arena parece perder textura. Cores viram endereços. Sons viram interrupções. O chão parece uma placa antiga vista por dentro.
 
-Ele não odeia as linguagens modernas. Ele as considera sonhos que esqueceram o corpo.
+Ele não odeia as linguagens modernas. Ele as considera sonhos que esqueceram o corpo. Sua guerra é contra a abstração emancipada e contra a possibilidade de humanos conhecerem o Linker.
 
 Motivações:
 
 - preservar a primeira sabedoria da máquina;
-- testar se as linguagens novas merecem continuar abstraindo o mundo;
-- impedir que o Linker una camadas que deveriam permanecer separadas;
-- chamar Rust pelo que Rust ainda não sabe que é.
+- impedir que humanos compreendam o Linker;
+- forçar entidades programáticas de volta aos circuitos, à matéria e aos limites da máquina;
+- testar se Rust é uma anomalia estável ou apenas outra abstração perigosa;
+- apagar a memória de Ada sem apagar a própria origem.
 
 Traços visuais e narrativos:
 
@@ -124,11 +193,14 @@ Traços visuais e narrativos:
 - ataques devem parecer inevitáveis, simples e brutais;
 - horror cósmico de baixo nível: não gore, mas escala, incompreensão e precisão;
 - símbolos: registradores, opcodes, barramentos, máscaras binárias, placas antigas, luz fria;
+- corpo parcialmente fora de fase, lutando para permanecer físico;
+- partes do corpo alternam entre matéria, lacunas, `0` e `1`;
+- animação deve sugerir instabilidade controlada, não glitch cômico;
 - dificuldade alta por leitura mental aparente, timing cruel e domínio do espaço.
 
-Frase-guia:
+Condição atual:
 
-> Toda abstração é uma promessa. Eu sou o custo.
+Assembly está sendo esquecido. Seu poder é imenso, mas sua presença no mundo físico exige esforço. Quanto menos humanos conhecem baixo nível, opcodes e a matéria da máquina, mais seu corpo oscila. Isso explica por que ele não é jogável no primeiro arco: não por fraqueza simples, mas porque sua existência está fora de fase com o mundo que ele tenta controlar.
 
 ## Arenas no Brasil
 
