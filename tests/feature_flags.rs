@@ -11,6 +11,7 @@ fn feature_flags_start_with_playtest_friendly_defaults() {
     assert!(flags.enabled(FeatureFlag::PlayerTwoCpu));
     assert!(flags.enabled(FeatureFlag::CpuCanAttack));
     assert!(flags.enabled(FeatureFlag::PlayerOneTakesDamage));
+    assert!(flags.enabled(FeatureFlag::PlayerTwoTakesDamage));
     assert!(flags.enabled(FeatureFlag::ShowHud));
     assert!(!flags.enabled(FeatureFlag::ShowControlsHelp));
     assert!(!flags.enabled(FeatureFlag::ShowCombatDebug));

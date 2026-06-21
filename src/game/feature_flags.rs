@@ -10,6 +10,7 @@ pub enum FeatureFlag {
     PlayerTwoCpu,
     CpuCanAttack,
     PlayerOneTakesDamage,
+    PlayerTwoTakesDamage,
     ShowHud,
     ShowControlsHelp,
     ShowCombatDebug,
@@ -17,11 +18,12 @@ pub enum FeatureFlag {
 }
 
 /// Every feature flag exposed in the preferences screen.
-pub const PREFERENCE_FLAGS: [FeatureFlag; 8] = [
+pub const PREFERENCE_FLAGS: [FeatureFlag; 9] = [
     FeatureFlag::PlayerOneCpu,
     FeatureFlag::PlayerTwoCpu,
     FeatureFlag::CpuCanAttack,
     FeatureFlag::PlayerOneTakesDamage,
+    FeatureFlag::PlayerTwoTakesDamage,
     FeatureFlag::ShowHud,
     FeatureFlag::ShowControlsHelp,
     FeatureFlag::ShowCombatDebug,
@@ -35,6 +37,7 @@ pub struct FeatureFlags {
     player_two_cpu: bool,
     cpu_can_attack: bool,
     player_one_takes_damage: bool,
+    player_two_takes_damage: bool,
     show_hud: bool,
     show_controls_help: bool,
     show_combat_debug: bool,
@@ -48,6 +51,7 @@ impl Default for FeatureFlags {
             player_two_cpu: true,
             cpu_can_attack: true,
             player_one_takes_damage: true,
+            player_two_takes_damage: true,
             show_hud: true,
             show_controls_help: false,
             show_combat_debug: false,
@@ -64,6 +68,7 @@ impl FeatureFlags {
             FeatureFlag::PlayerTwoCpu => self.player_two_cpu,
             FeatureFlag::CpuCanAttack => self.cpu_can_attack,
             FeatureFlag::PlayerOneTakesDamage => self.player_one_takes_damage,
+            FeatureFlag::PlayerTwoTakesDamage => self.player_two_takes_damage,
             FeatureFlag::ShowHud => self.show_hud,
             FeatureFlag::ShowControlsHelp => self.show_controls_help,
             FeatureFlag::ShowCombatDebug => self.show_combat_debug,
@@ -78,6 +83,7 @@ impl FeatureFlags {
             FeatureFlag::PlayerTwoCpu => self.player_two_cpu = enabled,
             FeatureFlag::CpuCanAttack => self.cpu_can_attack = enabled,
             FeatureFlag::PlayerOneTakesDamage => self.player_one_takes_damage = enabled,
+            FeatureFlag::PlayerTwoTakesDamage => self.player_two_takes_damage = enabled,
             FeatureFlag::ShowHud => self.show_hud = enabled,
             FeatureFlag::ShowControlsHelp => self.show_controls_help = enabled,
             FeatureFlag::ShowCombatDebug => self.show_combat_debug = enabled,
@@ -99,6 +105,7 @@ impl FeatureFlag {
             FeatureFlag::PlayerTwoCpu => "Player 2 usa IA",
             FeatureFlag::CpuCanAttack => "IA pode dar golpes",
             FeatureFlag::PlayerOneTakesDamage => "Player 1 recebe dano",
+            FeatureFlag::PlayerTwoTakesDamage => "Player 2 recebe dano",
             FeatureFlag::ShowHud => "Mostrar HUD",
             FeatureFlag::ShowControlsHelp => "Mostrar ajuda de controles",
             FeatureFlag::ShowCombatDebug => "Mostrar debug de combate",
@@ -114,6 +121,9 @@ impl FeatureFlag {
             FeatureFlag::CpuCanAttack => "Quando desligado, a IA se move e defende, mas nao ataca.",
             FeatureFlag::PlayerOneTakesDamage => {
                 "Quando desligado, Rust fica invencivel para playtest."
+            }
+            FeatureFlag::PlayerTwoTakesDamage => {
+                "Quando desligado, Java fica invencivel para playtest."
             }
             FeatureFlag::ShowHud => "Barras de vida, titulo e status no topo.",
             FeatureFlag::ShowControlsHelp => "Texto de comandos no rodape durante a luta.",

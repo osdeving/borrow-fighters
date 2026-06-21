@@ -172,12 +172,12 @@ impl BasicCpu {
 
     fn choose_action(&mut self, input: &mut FighterInput, gap: f32) {
         let roll = (self.next_roll(100) + (self.pattern_index as u32 * 17)) % 100;
-        if gap <= LIGHT_ATTACK_GAP && roll < self.profile.aggression + 32 {
+        if gap <= LIGHT_ATTACK_GAP && roll < self.profile.aggression + 38 {
             self.choose_close_attack(input, roll);
             let cooldown = self.random_duration(0.74, 1.18);
             self.advance_pattern(cooldown);
         } else if gap <= HEAVY_ATTACK_GAP {
-            if roll < 32 {
+            if roll < 46 {
                 input.kick = true;
             } else if roll < self.profile.aggression + 28 {
                 input.heavy_punch = true;
@@ -202,9 +202,9 @@ impl BasicCpu {
     }
 
     fn choose_close_attack(&mut self, input: &mut FighterInput, roll: u32) {
-        match (self.pattern_index + roll as usize) % 4 {
-            0 => input.light_punch = true,
-            1 => input.kick = true,
+        match (self.pattern_index + roll as usize) % 5 {
+            0 | 3 => input.kick = true,
+            1 => input.light_punch = true,
             2 => input.heavy_punch = true,
             _ => {
                 input.light_punch = true;

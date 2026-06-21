@@ -161,6 +161,34 @@ fn player_one_damage_flag_prevents_damage_from_attacks() {
 }
 
 #[test]
+fn player_two_damage_flag_prevents_damage_from_attacks() {
+    let mut flags = FeatureFlags::default();
+    flags.set(FeatureFlag::PlayerTwoTakesDamage, false);
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 420.0;
+    world.player_two.position.x = 475.0;
+
+    world.update_with_flags(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+        flags,
+    );
+
+    for _ in 0..20 {
+        world.update_with_flags(DT, FighterInput::default(), FighterInput::default(), flags);
+    }
+
+    assert_eq!(world.player_two.health, 100);
+    assert_eq!(world.hit_effects.len(), 1);
+    assert_eq!(world.hit_effects[0].damage, 0);
+    assert_eq!(world.outcome, None);
+}
+
+#[test]
 fn crouch_reduces_the_vulnerable_body_height() {
     let mut world = World::new_greybox();
     let standing_height = world.player_one.hurtbox().height;
@@ -508,6 +536,7 @@ fn basic_cpu_varies_movement_attacks_projectiles_and_defense() {
     assert!(seen.moved, "CPU should walk or reposition");
     assert!(seen.jumped, "CPU should sometimes jump");
     assert!(seen.close_attack, "CPU should use close attacks");
+    assert!(seen.kick, "CPU should visibly use kicks");
     assert!(
         seen.projectile,
         "CPU should sometimes use special/projectile"
@@ -524,6 +553,7 @@ struct CpuActionSet {
     moved: bool,
     jumped: bool,
     close_attack: bool,
+    kick: bool,
     projectile: bool,
     defense: bool,
 }
@@ -533,6 +563,7 @@ impl CpuActionSet {
         self.moved |= input.left || input.right;
         self.jumped |= input.jump;
         self.close_attack |= cpu_is_attacking(input);
+        self.kick |= input.kick;
         self.projectile |= input.projectile;
         self.defense |= input.block || input.crouch;
     }

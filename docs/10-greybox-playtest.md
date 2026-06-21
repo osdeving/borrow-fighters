@@ -10,7 +10,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 
 - Janela Raylib.
 - Loop de jogo com fixed timestep.
-- Arena bitmap placeholder `Terminal Arcade + Compiler Lab`.
+- Arena bitmap placeholder `Java Street`.
 - Tela inicial de preferências com feature flags runtime.
 - Dois lutadores greybox: Rust e Java.
 - Corpo composto por cabeça, tronco e pernas placeholder.
@@ -72,6 +72,7 @@ O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navega
 | Player 2 usa IA | Ligado | Java deve ser controlado automaticamente. |
 | IA pode dar golpes | Ligado | Quando desligado, lutadores controlados por IA devem andar, pular, afastar, aproximar e defender, mas não atacar. |
 | Player 1 recebe dano | Ligado | Quando desligado, Rust não deve perder vida ao ser acertado. |
+| Player 2 recebe dano | Ligado | Quando desligado, Java não deve perder vida ao ser acertado. |
 | Mostrar HUD | Ligado | Barras de vida e status no topo aparecem/desaparecem. |
 | Mostrar ajuda de controles | Desligado | Texto de controles no rodapé aparece/desaparece. |
 | Mostrar debug de combate | Desligado | Hitboxes, hurtboxes, labels e colisão corpo-corpo aparecem/desaparecem. |
@@ -115,7 +116,7 @@ O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um c
 | Escudo/spark azul | Defesa reduziu dano |
 | `-8`, `-12`, `-16` | Dano aplicado |
 | Linha magenta | Colisão corpo-corpo bloqueando passagem |
-| Fundo Terminal Compiler Lab | Arena placeholder, não arte final |
+| Fundo Java Street | Arena placeholder, não arte final |
 
 Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `Mostrar debug de combate` ligado. A ajuda de comandos no rodapé aparece somente com `Mostrar ajuda de controles` ligado.
 
@@ -129,18 +130,19 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 6. Defesa deve reduzir dano e mostrar feedback azul.
 7. Abaixar deve reduzir a hurtbox visualmente.
 8. Fireball deve andar horizontalmente em velocidade legível e causar dano ao acertar.
-9. A CPU do Player 2 deve variar aproximação, afastamento, pulo, ataques, defesa e fireballs.
+9. A CPU do Player 2 deve variar aproximação, afastamento, pulo, socos, chutes, defesa e fireballs.
 10. A tela de preferências deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
 11. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
 12. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
 13. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Rust.
-14. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
-15. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
-16. `R` ou `Menu` deve reiniciar a partida.
-17. `Esc` durante a luta deve voltar para a tela de preferências.
-18. Pulo com direção pressionada deve sair em diagonal.
-19. A vida deve chegar a zero e encerrar a luta.
-20. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
+14. A opção `Player 2 recebe dano` desligada deve impedir perda de vida do Java.
+15. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
+16. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
+17. `R` ou `Menu` deve reiniciar a partida.
+18. `Esc` durante a luta deve voltar para a tela de preferências.
+19. Pulo com direção pressionada deve sair em diagonal.
+20. A vida deve chegar a zero e encerrar a luta.
+21. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
 
 ## Limitações conhecidas
 

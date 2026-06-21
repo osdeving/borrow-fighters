@@ -11,7 +11,7 @@ use crate::engine::sprites::{
     RUST_START_MANIFEST_PATH, SpriteManifest,
 };
 
-pub const ARENA_BACKGROUND_PATH: &str = "assets/placeholder/arena-terminal-compiler-lab.png";
+pub const ARENA_BACKGROUND_PATH: &str = "assets/placeholder/arena-java-street.png";
 
 /// Texture and metadata for one atlas-driven sprite set.
 pub struct SpriteAtlasAsset {

@@ -170,8 +170,8 @@ pub fn draw_preferences(
         UI_MUTED,
     );
 
-    let row_start_y = panel_y + 86;
-    let row_spacing = 34;
+    let row_start_y = panel_y + 80;
+    let row_spacing = 30;
 
     draw_menu_row(
         draw,
@@ -222,7 +222,7 @@ struct MenuRow<'a> {
 }
 
 fn draw_menu_row(draw: &mut RaylibDrawHandle<'_>, row: MenuRow<'_>) {
-    let height = 32;
+    let height = 28;
     if row.selected {
         draw.draw_rectangle(row.x, row.y - 2, row.width, height + 4, SELECTED_ROW);
         draw.draw_rectangle_lines(row.x, row.y - 2, row.width, height + 4, PANEL_BORDER);
@@ -236,8 +236,8 @@ fn draw_menu_row(draw: &mut RaylibDrawHandle<'_>, row: MenuRow<'_>) {
         row.x + 48
     };
 
-    draw.draw_text(row.label, label_x, row.y + 2, 18, UI_TEXT);
-    draw.draw_text(row.description, label_x, row.y + 20, 12, UI_MUTED);
+    draw.draw_text(row.label, label_x, row.y + 1, 17, UI_TEXT);
+    draw.draw_text(row.description, label_x, row.y + 18, 11, UI_MUTED);
 }
 
 fn draw_checkbox(draw: &mut RaylibDrawHandle<'_>, x: i32, y: i32, enabled: bool) {

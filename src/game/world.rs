@@ -194,7 +194,7 @@ impl World {
         let p2_attack = landed_attack(&self.player_two, &self.player_one);
 
         if let Some(attack) = p1_attack {
-            let result = self.player_two.take_hit(attack.damage);
+            let result = take_player_two_hit(&mut self.player_two, attack.damage, flags);
             self.player_one.mark_attack_hit();
             self.hit_effects.push(HitEffect::new(
                 self.player_two.hurtbox().center(),
@@ -249,7 +249,8 @@ impl World {
             let rect = projectile.rect();
             match projectile.owner {
                 PlayerSlot::One if projectile_hits_fighter(rect, &self.player_two) => {
-                    let result = self.player_two.take_hit(projectile.damage);
+                    let result =
+                        take_player_two_hit(&mut self.player_two, projectile.damage, flags);
                     projectile.alive = false;
                     self.hit_effects.push(HitEffect::new(
                         self.player_two.hurtbox().center(),
@@ -317,6 +318,17 @@ fn projectile_hits_fighter(projectile: Rect, fighter: &Fighter) -> bool {
 fn take_player_one_hit(player_one: &mut Fighter, damage: i32, flags: FeatureFlags) -> DamageResult {
     if flags.enabled(FeatureFlag::PlayerOneTakesDamage) {
         player_one.take_hit(damage)
+    } else {
+        DamageResult {
+            damage: 0,
+            blocked: false,
+        }
+    }
+}
+
+fn take_player_two_hit(player_two: &mut Fighter, damage: i32, flags: FeatureFlags) -> DamageResult {
+    if flags.enabled(FeatureFlag::PlayerTwoTakesDamage) {
+        player_two.take_hit(damage)
     } else {
         DamageResult {
             damage: 0,

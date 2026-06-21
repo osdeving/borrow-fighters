@@ -12,7 +12,7 @@ O prototipo greybox passou a ter opcoes de playtest que mudam tanto exibicao qua
 - overlays de debug de combate;
 - Player 1 e Player 2 controlados por IA ou manual;
 - IA com ou sem golpes;
-- Player 1 recebendo ou ignorando dano;
+- Player 1 e Player 2 recebendo ou ignorando dano;
 - entrada por gamepad quando o ambiente suportar.
 
 Essas opcoes podem crescer rapido. Se cada tela ou sistema criar seu proprio booleano, o codigo fica dificil de entender e os contribuidores nao sabem onde registrar novos experimentos.
