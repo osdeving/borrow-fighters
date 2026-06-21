@@ -13,6 +13,7 @@ use crate::combat::fighter::{AttackPhase, Facing, PlayerSlot};
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
 use crate::engine::assets::{GameAssets, SpriteAtlasAsset};
 use crate::engine::sprites;
+use crate::game::arena::ArenaId;
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags, PREFERENCE_FLAGS};
 use crate::game::world::{MatchOutcome, World};
 use crate::math::rect::Rect;
@@ -52,12 +53,13 @@ pub struct GamepadStatus {
 pub fn draw_fight(
     draw: &mut RaylibDrawHandle<'_>,
     world: &World,
+    arena: ArenaId,
     flags: FeatureFlags,
     gamepad_status: GamepadStatus,
     assets: &GameAssets,
 ) {
     draw.clear_background(BACKGROUND);
-    draw_arena(draw, assets.arena_background.as_ref());
+    draw_arena(draw, assets.arenas.get(arena));
     let show_debug = flags.enabled(FeatureFlag::ShowCombatDebug);
     let spawn_intro = world.spawn_intro_active();
 
@@ -127,6 +129,10 @@ pub fn draw_fight(
         draw_hud(draw, world, flags, gamepad_status);
     }
 
+    if let Some(label) = world.countdown_label() {
+        draw_countdown(draw, label, assets);
+    }
+
     if flags.enabled(FeatureFlag::ShowControlsHelp) {
         draw_help(draw);
     }
@@ -136,12 +142,13 @@ pub fn draw_fight(
 pub fn draw_preferences(
     draw: &mut RaylibDrawHandle<'_>,
     menu: &PreferencesMenu,
+    arena: ArenaId,
     flags: FeatureFlags,
     gamepad_status: GamepadStatus,
     assets: &GameAssets,
 ) {
     draw.clear_background(BACKGROUND);
-    draw_arena(draw, assets.arena_background.as_ref());
+    draw_arena(draw, assets.arenas.get(arena));
     draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(0, 0, 0, 138));
 
     let panel_x = 88;
@@ -532,6 +539,74 @@ fn draw_hud(
         };
         let width = draw.measure_text(&message, 32);
         draw.draw_text(&message, (WINDOW_WIDTH - width) / 2, 124, 32, UI_TEXT);
+    }
+}
+
+fn draw_countdown_sprite(draw: &mut RaylibDrawHandle<'_>, texture: &Texture2D) {
+    let source = Rectangle::new(0.0, 0.0, texture.width() as f32, texture.height() as f32);
+
+    let target_height = 120.0;
+    let scale = target_height / source.height;
+
+    let dest_width = source.width * scale;
+    let dest_height = source.height * scale;
+
+    let dest = Rectangle::new(
+        (WINDOW_WIDTH as f32 - dest_width) * 0.5,
+        WINDOW_HEIGHT as f32 * 0.5 - dest_height * 0.5 - 18.0,
+        dest_width,
+        dest_height,
+    );
+
+    draw.draw_texture_pro(
+        texture,
+        source,
+        dest,
+        Vector2::new(0.0, 0.0),
+        0.0,
+        Color::WHITE,
+    );
+}
+
+fn draw_countdown_text(draw: &mut RaylibDrawHandle<'_>, label: &str) {
+    let font_size = if label == "Fight!" { 54 } else { 78 };
+    let width = draw.measure_text(label, font_size);
+    let x = (WINDOW_WIDTH - width) / 2;
+    let y = WINDOW_HEIGHT / 2 - font_size / 2 - 18;
+    let padding_x = 34;
+    let padding_y = 18;
+
+    draw.draw_rectangle(
+        x - padding_x,
+        y - padding_y,
+        width + padding_x * 2,
+        font_size + padding_y * 2,
+        Color::new(0, 0, 0, 142),
+    );
+    draw.draw_rectangle_lines(
+        x - padding_x,
+        y - padding_y,
+        width + padding_x * 2,
+        font_size + padding_y * 2,
+        Color::new(238, 241, 247, 180),
+    );
+    draw.draw_text(label, x + 4, y + 4, font_size, Color::new(0, 0, 0, 190));
+    draw.draw_text(label, x, y, font_size, UI_TEXT);
+}
+
+fn draw_countdown(draw: &mut RaylibDrawHandle<'_>, label: &str, assets: &GameAssets) {
+    let texture = match label {
+        "11" => assets.countdown_11.as_ref(),
+        "10" => assets.countdown_10.as_ref(),
+        "01" => assets.countdown_01.as_ref(),
+        "Fight!" => assets.countdown_fight.as_ref(),
+        _ => None,
+    };
+
+    if let Some(texture) = texture {
+        draw_countdown_sprite(draw, texture);
+    } else {
+        draw_countdown_text(draw, label);
     }
 }
 

@@ -32,6 +32,23 @@ impl CharacterId {
             _ => None,
         }
     }
+
+    /// Returns the stable manifest key used by audio and data files.
+    pub const fn audio_key(self) -> &'static str {
+        match self {
+            Self::Rust => "rust",
+            Self::Duke => "duke",
+        }
+    }
+
+    /// Parses a stable manifest key.
+    pub fn from_audio_key(value: &str) -> Option<Self> {
+        match value {
+            "rust" => Some(Self::Rust),
+            "duke" | "java" => Some(Self::Duke),
+            _ => None,
+        }
+    }
 }
 
 /// Broad gameplay role used for design and lab labeling.

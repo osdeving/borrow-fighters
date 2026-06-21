@@ -74,6 +74,13 @@ pub struct FighterInput {
     pub projectile: bool,
 }
 
+/// Events produced while updating one fighter.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct FighterUpdateEvents {
+    pub close_attack_started: Option<MoveId>,
+    pub close_attack_whiffed: Option<MoveId>,
+}
+
 /// Result of applying a hit to a defender.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct DamageResult {
@@ -166,7 +173,8 @@ impl Fighter {
     }
 
     /// Advances movement, stance, defense, and attack timers.
-    pub fn update(&mut self, dt: f32, input: FighterInput) {
+    pub fn update(&mut self, dt: f32, input: FighterInput) -> FighterUpdateEvents {
+        let mut events = FighterUpdateEvents::default();
         if self.is_defeated() {
             self.velocity = Vec2::ZERO;
             self.crouching = false;
@@ -175,7 +183,7 @@ impl Fighter {
             self.blockstun_timer = 0.0;
             self.whiff_recovery_timer = 0.0;
             self.special_visual_timer = 0.0;
-            return;
+            return events;
         }
 
         self.projectile_cooldown = tick_timer(self.projectile_cooldown, dt);
@@ -201,6 +209,7 @@ impl Fighter {
             && self.attack.is_none()
             && can_start_action
         {
+            events.close_attack_started = Some(spec.id);
             self.attack = Some(AttackState {
                 spec,
                 elapsed: 0.0,
@@ -226,10 +235,13 @@ impl Fighter {
             } else {
                 self.attack = None;
                 if !attack.has_hit {
+                    events.close_attack_whiffed = Some(attack.spec.id);
                     self.start_whiff_recovery(attack.spec);
                 }
             }
         }
+
+        events
     }
 
     /// Updates facing direction to look toward the opponent.
@@ -365,6 +377,7 @@ impl Fighter {
         self.attack.and_then(|attack| {
             attack.is_active().then(|| ActiveAttack {
                 kind: attack.kind(),
+                move_id: attack.spec.id,
                 hitbox: self.attack_box_for(attack.spec),
                 damage: attack.spec.damage,
                 guard_rule: attack.spec.guard_rule,

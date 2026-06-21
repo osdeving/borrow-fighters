@@ -29,6 +29,7 @@ pub enum AttackKind {
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct ActiveAttack {
     pub kind: AttackKind,
+    pub move_id: MoveId,
     pub hitbox: Rect,
     pub damage: i32,
     pub guard_rule: GuardRule,

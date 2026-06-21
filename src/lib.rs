@@ -4,6 +4,7 @@
 //! here so gameplay rules can be tested without opening a window.
 
 pub mod app;
+pub mod audio;
 pub mod characters;
 pub mod cli;
 pub mod combat;

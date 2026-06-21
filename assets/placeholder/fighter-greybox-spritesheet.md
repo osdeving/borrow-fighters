@@ -36,4 +36,4 @@ Mesmo licenciamento do repositório enquanto placeholder interno. Não é arte f
 - Braços e pernas explícitos para leitura de movimento.
 - Golpes visíveis mesmo com `Mostrar debug de combate` desligado.
 - Silhueta neutra tintável para Rust e Java.
-- Baixo detalhe para manter legibilidade sobre a arena atual.
+- Baixo detalhe para manter legibilidade sobre as arenas atuais.

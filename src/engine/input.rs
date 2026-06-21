@@ -90,6 +90,7 @@ fn keyboard_combat_lab(raylib: &RaylibHandle) -> CombatLabInput {
         toggle_hitboxes: raylib.is_key_pressed(KeyboardKey::KEY_B),
         toggle_pivot: raylib.is_key_pressed(KeyboardKey::KEY_P),
         toggle_dummy: raylib.is_key_pressed(KeyboardKey::KEY_D),
+        toggle_background: raylib.is_key_pressed(KeyboardKey::KEY_A),
     }
 }
 

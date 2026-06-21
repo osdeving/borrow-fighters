@@ -12,18 +12,24 @@ use crate::characters::CharacterId;
 use crate::combat::{fighter::Facing, projectile::Projectile};
 use crate::config::{FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
 use crate::engine::{assets::GameAssets, sprites};
+use crate::game::arena::ArenaId;
 use crate::scenes::combat_lab::{CombatLab, CombatLabPose};
 use crate::ui::combat_debug;
 
 use super::{
     BACKGROUND, FighterDrawOptions, PLAYER_ONE, PLAYER_TWO, PROJECTILE, PROJECTILE_FILL, UI_MUTED,
-    draw_fighter, outline_rect,
+    draw_arena, draw_fighter, outline_rect,
 };
 
 /// Draws the isolated Combat Lab scene.
 pub fn draw_combat_lab(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab, assets: &GameAssets) {
     draw.clear_background(BACKGROUND);
-    draw_lab_grid(draw);
+    if lab.show_background() {
+        draw_arena(draw, assets.arenas.get(ArenaId::STARTING_ARENA));
+        draw_lab_grid(draw, Color::new(44, 49, 60, 118));
+    } else {
+        draw_lab_grid(draw, Color::new(44, 49, 60, 255));
+    }
 
     let (body_color, sprite_atlas, projectile_texture) = match lab.character() {
         CharacterId::Rust => (
@@ -55,12 +61,12 @@ pub fn draw_combat_lab(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab, assets:
     combat_debug::draw_combat_lab_debug(draw, lab);
 }
 
-fn draw_lab_grid(draw: &mut RaylibDrawHandle<'_>) {
+fn draw_lab_grid(draw: &mut RaylibDrawHandle<'_>, line_color: Color) {
     for x in (0..=WINDOW_WIDTH).step_by(80) {
-        draw.draw_line(x, 0, x, WINDOW_HEIGHT, Color::new(44, 49, 60, 255));
+        draw.draw_line(x, 0, x, WINDOW_HEIGHT, line_color);
     }
     for y in (0..=WINDOW_HEIGHT).step_by(60) {
-        draw.draw_line(0, y, WINDOW_WIDTH, y, Color::new(44, 49, 60, 255));
+        draw.draw_line(0, y, WINDOW_WIDTH, y, line_color);
     }
     draw.draw_line(0, FLOOR_Y as i32, WINDOW_WIDTH, FLOOR_Y as i32, UI_MUTED);
 }

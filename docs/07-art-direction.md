@@ -47,7 +47,8 @@ Nenhum mood está aprovado como direção final. Propostas devem comparar pelo m
 
 O slice jogável usa arte placeholder, mas já exercita decisões importantes para a direção visual:
 
-- arena atual: `assets/placeholder/arena-java-street.png`, derivada de referência em `assets/references/cenario-java.png`;
+- arena inicial: `assets/placeholder/arena-sirius.png`, derivada de referência em `assets/references/sirius.png`;
+- arenas em rotação: `assets/placeholder/arena-fortaleza.png` e `assets/placeholder/arena-java-street.png`;
 - arena anterior ainda disponível: `assets/placeholder/arena-terminal-compiler-lab.png`;
 - personagens atuais: Rust e Duke em atlas placeholder com manifesto JSON;
 - entrada cinematográfica: manifests separados para Rust e Duke;

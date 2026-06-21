@@ -57,6 +57,29 @@ impl MoveId {
             Self::DukeBoilerplatePoke => 4,
         }
     }
+
+    /// Returns the stable manifest key used by audio and data files.
+    pub const fn audio_key(self) -> &'static str {
+        match self {
+            Self::LightPunch => "light_punch",
+            Self::HeavyPunch => "heavy_punch",
+            Self::Kick => "kick",
+            Self::RustBorrowJab => "rust_borrow_jab",
+            Self::DukeBoilerplatePoke => "duke_boilerplate_poke",
+        }
+    }
+
+    /// Parses a stable manifest key.
+    pub fn from_audio_key(value: &str) -> Option<Self> {
+        match value {
+            "light_punch" => Some(Self::LightPunch),
+            "heavy_punch" => Some(Self::HeavyPunch),
+            "kick" => Some(Self::Kick),
+            "rust_borrow_jab" => Some(Self::RustBorrowJab),
+            "duke_boilerplate_poke" => Some(Self::DukeBoilerplatePoke),
+            _ => None,
+        }
+    }
 }
 
 /// Default close-range move ids used by current prototype characters.

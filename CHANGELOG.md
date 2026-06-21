@@ -53,6 +53,14 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Pushback simples para hit, block e projétil, configurado por `HitReaction` e aplicado pelo runtime de luta.
 - Combat Lab com leitura de vantagem estimada, pushback, distância após pushback e dummy de contato por golpe.
 - Fechamento da Fase 4 com whiff recovery explícito por golpe, debug visual de `WHIFF` e respostas mínimas de contra-jogo documentadas.
+- Motor inicial de áudio por eventos com manifesto JSON, bindings por cue/personagem/golpe e integração Raylib para clips opcionais.
+- Documentação técnica do pipeline de áudio e ADR para eventos de áudio data-driven.
+- Assets CC0 iniciais de áudio para impactos, defesa, whiff, UI, anúncio de luta/vitória e música de menu/combate.
+- Suporte a música de fundo via `Music` streaming do Raylib, com troca automática entre menu e luta.
+- Arenas placeholder Sirius e Fortaleza Tech Coast, com rotação de cenário ao iniciar a próxima luta após uma vitória começando pelo Sirius.
+- Combat Lab com fundo de arena ligado por padrão e atalho `A` para alternar entre cenário e grid limpo.
+- Contagem pré-luta central `11`, `10`, `01`, `Fight!`, bloqueando gameplay até a liberação.
+- Vozes CC0 de contagem pré-luta registradas no manifesto de áudio.
 
 ### Em aberto
 

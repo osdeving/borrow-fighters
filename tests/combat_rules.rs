@@ -1,5 +1,6 @@
 //! Exercises testable greybox combat rules without opening a Raylib window.
 
+use borrow_fighters::audio::AudioCue;
 use borrow_fighters::characters::{CharacterId, character_spec};
 use borrow_fighters::combat::fighter::{
     AttackKind, AttackPhase, Fighter, FighterInput, GuardRule, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE,
@@ -12,7 +13,8 @@ use borrow_fighters::combat::projectile::{
 use borrow_fighters::game::ai::BasicCpu;
 use borrow_fighters::game::feature_flags::{FeatureFlag, FeatureFlags};
 use borrow_fighters::game::world::{
-    MIN_BODY_GAP, MatchOutcome, SPAWN_INTRO_DURATION_SECONDS, World,
+    MIN_BODY_GAP, MatchOutcome, ROUND_COUNTDOWN_STEP_SECONDS, ROUND_COUNTDOWN_TOTAL_SECONDS,
+    SPAWN_INTRO_DURATION_SECONDS, World,
 };
 
 const DT: f32 = 1.0 / 60.0;
@@ -112,6 +114,129 @@ fn kick_has_its_own_damage() {
     }
 
     assert_eq!(world.player_two.health, player_two_health - KICK_DAMAGE);
+}
+
+#[test]
+fn close_attack_queues_audio_events_for_start_and_hit() {
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 420.0;
+    world.player_two.position.x = 470.0;
+
+    world.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    let events = world.take_audio_events();
+    assert!(events.iter().any(|event| {
+        event.cue == AudioCue::FighterAttackStart
+            && event.character == Some(CharacterId::Rust)
+            && event.move_id == Some(MoveId::RustBorrowJab)
+    }));
+
+    for _ in 0..20 {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    let events = world.take_audio_events();
+    assert!(events.iter().any(|event| event.cue == AudioCue::CombatHit));
+    assert!(events.iter().any(|event| {
+        event.cue == AudioCue::FighterHurt && event.character == Some(CharacterId::Duke)
+    }));
+}
+
+#[test]
+fn blocked_close_attack_queues_guard_audio_events() {
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 420.0;
+    world.player_two.position.x = 475.0;
+
+    world.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput {
+            block: true,
+            ..FighterInput::default()
+        },
+    );
+
+    for _ in 0..20 {
+        world.update(
+            DT,
+            FighterInput::default(),
+            FighterInput {
+                block: true,
+                ..FighterInput::default()
+            },
+        );
+    }
+
+    let events = world.take_audio_events();
+    assert!(
+        events
+            .iter()
+            .any(|event| event.cue == AudioCue::CombatBlock)
+    );
+    assert!(events.iter().any(|event| {
+        event.cue == AudioCue::FighterBlock && event.character == Some(CharacterId::Duke)
+    }));
+}
+
+#[test]
+fn no_damage_flag_suppresses_hurt_audio_event() {
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 420.0;
+    world.player_two.position.x = 470.0;
+    let mut flags = FeatureFlags::default();
+    flags.set(FeatureFlag::PlayerTwoTakesDamage, false);
+
+    world.update_with_flags(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+        flags,
+    );
+
+    for _ in 0..20 {
+        world.update_with_flags(DT, FighterInput::default(), FighterInput::default(), flags);
+    }
+
+    let events = world.take_audio_events();
+    assert!(events.iter().any(|event| event.cue == AudioCue::CombatHit));
+    assert!(
+        events
+            .iter()
+            .all(|event| event.cue != AudioCue::FighterHurt)
+    );
+}
+
+#[test]
+fn projectile_cast_queues_audio_event() {
+    let mut world = World::new_greybox();
+
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    let events = world.take_audio_events();
+    assert!(events.iter().any(|event| {
+        event.cue == AudioCue::FighterProjectileCast && event.character == Some(CharacterId::Rust)
+    }));
 }
 
 #[test]
@@ -730,10 +855,11 @@ fn projectile_deals_damage_and_disappears() {
 }
 
 #[test]
-fn spawn_intro_blocks_gameplay_until_finished() {
+fn spawn_intro_and_countdown_block_gameplay_until_finished() {
     let mut world = World::new_greybox_with_intro();
 
     assert!(world.spawn_intro_active());
+    assert!(!world.countdown_active());
     world.update(
         DT,
         FighterInput {
@@ -752,6 +878,31 @@ fn spawn_intro_blocks_gameplay_until_finished() {
     }
 
     assert!(!world.spawn_intro_active());
+    assert!(world.countdown_active());
+    assert_eq!(world.countdown_label(), Some("11"));
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    assert!(world.projectiles.is_empty());
+    assert!(
+        world
+            .take_audio_events()
+            .iter()
+            .any(|event| event.cue == AudioCue::MatchCountdownEleven)
+    );
+
+    let countdown_steps = (ROUND_COUNTDOWN_TOTAL_SECONDS / DT).ceil() as usize + 1;
+    for _ in 0..countdown_steps {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    assert!(!world.countdown_active());
     world.update(
         DT,
         FighterInput {
@@ -762,6 +913,40 @@ fn spawn_intro_blocks_gameplay_until_finished() {
     );
 
     assert_eq!(world.projectiles.len(), 1);
+}
+
+#[test]
+fn countdown_advances_labels_and_audio_events() {
+    let mut world = World::new_greybox_with_intro();
+    let intro_steps = (SPAWN_INTRO_DURATION_SECONDS / DT).ceil() as usize + 1;
+    for _ in 0..intro_steps {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    for (label, cue) in [
+        ("11", AudioCue::MatchCountdownEleven),
+        ("10", AudioCue::MatchCountdownTen),
+        ("01", AudioCue::MatchCountdownOne),
+        ("Fight!", AudioCue::MatchCountdownFight),
+    ] {
+        assert_eq!(world.countdown_label(), Some(label));
+        world.update(DT, FighterInput::default(), FighterInput::default());
+        assert!(
+            world
+                .take_audio_events()
+                .iter()
+                .any(|event| event.cue == cue),
+            "expected countdown cue {cue:?}"
+        );
+
+        let step_steps = (ROUND_COUNTDOWN_STEP_SECONDS / DT).ceil() as usize;
+        for _ in 1..=step_steps {
+            world.update(DT, FighterInput::default(), FighterInput::default());
+        }
+    }
+
+    assert!(!world.countdown_active());
+    assert_eq!(world.countdown_label(), None);
 }
 
 #[test]

@@ -182,6 +182,7 @@ pub struct CombatLabInput {
     pub toggle_hitboxes: bool,
     pub toggle_pivot: bool,
     pub toggle_dummy: bool,
+    pub toggle_background: bool,
 }
 
 /// Isolated move playback state for combat tuning.
@@ -198,6 +199,7 @@ pub struct CombatLab {
     show_hitboxes: bool,
     show_pivot: bool,
     show_dummy: bool,
+    show_background: bool,
 }
 
 impl Default for CombatLab {
@@ -221,6 +223,7 @@ impl CombatLab {
             show_hitboxes: true,
             show_pivot: true,
             show_dummy: false,
+            show_background: true,
         };
         lab.reset_playback();
         lab
@@ -254,6 +257,9 @@ impl CombatLab {
         }
         if input.toggle_dummy {
             self.show_dummy = !self.show_dummy;
+        }
+        if input.toggle_background {
+            self.show_background = !self.show_background;
         }
         if input.pause_toggle {
             self.paused = !self.paused;
@@ -322,6 +328,11 @@ impl CombatLab {
     /// Returns whether the optional contact dummy should be drawn.
     pub const fn show_dummy(&self) -> bool {
         self.show_dummy
+    }
+
+    /// Returns whether the arena background should be drawn behind the lab.
+    pub const fn show_background(&self) -> bool {
+        self.show_background
     }
 
     /// Returns estimated advantage and spacing for the selected move.

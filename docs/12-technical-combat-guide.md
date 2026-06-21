@@ -16,7 +16,10 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Projectile | Projétil horizontal, dano, guard rule, hit reaction, velocidade, spawn e timing do especial | [`src/combat/projectile.rs`](../src/combat/projectile.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs) |
 | Collision | Interseção simples de retângulos | [`src/combat/collision.rs`](../src/combat/collision.rs), [`src/math/rect.rs`](../src/math/rect.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
 | Character data | Registro de personagens e listas de golpes | [`src/characters/mod.rs`](../src/characters/mod.rs) | [`tests/characters.rs`](../tests/characters.rs) |
-| Match runtime | Instancia lutadores a partir de personagens, resolve hits, projéteis e vitória | [`src/game/world.rs`](../src/game/world.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
+| Match runtime | Instancia lutadores a partir de personagens, bloqueia intro/contagem, resolve hits, projéteis e vitória | [`src/game/world.rs`](../src/game/world.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
+| Arena runtime | Identidade e rotação de arenas do protótipo | [`src/game/arena.rs`](../src/game/arena.rs) | [`tests/arena_rotation.rs`](../tests/arena_rotation.rs) |
+| Audio domain | Cues, eventos de gameplay, manifesto JSON e matching de bindings | [`src/audio/mod.rs`](../src/audio/mod.rs) | [`tests/audio_manifest.rs`](../tests/audio_manifest.rs) |
+| Audio Raylib boundary | Carrega clips existentes e toca eventos resolvidos por manifesto | [`src/engine/audio.rs`](../src/engine/audio.rs) | Teste manual via jogo |
 | Combat Lab state | Cena isolada para playback de golpes, pause, frame step e leitura de vantagem | [`src/scenes/combat_lab.rs`](../src/scenes/combat_lab.rs) | [`tests/combat_lab.rs`](../tests/combat_lab.rs) |
 | Combat Lab analysis | Cálculo de vantagem estimada, pushback e dummy de contato | [`src/scenes/combat_lab_analysis.rs`](../src/scenes/combat_lab_analysis.rs) | [`tests/combat_lab.rs`](../tests/combat_lab.rs) |
 | Combat Lab render | Orquestra Raylib da cena isolada, sprites, grid e projéteis | [`src/engine/render/combat_lab.rs`](../src/engine/render/combat_lab.rs) | Teste manual via Combat Lab |
@@ -25,6 +28,14 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Sprite runtime | Manifest JSON, clip selection e desenho por pivot | [`src/engine/sprites/`](../src/engine/sprites) | [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs), [`tests/sprite_selection.rs`](../tests/sprite_selection.rs) |
 
 ## Técnica Atual
+
+### Fluxo de Início de Luta
+
+O início de luta fica em [`src/game/world.rs`](../src/game/world.rs), não no renderer. `World::new_greybox_with_intro` liga primeiro `spawn_intro_timer` para a entrada cinematográfica e também prepara `countdown_timer`.
+
+Enquanto `spawn_intro_active` ou `countdown_active` estiverem ativos, `World::update_with_flags` atualiza apenas timers e feedback transitório; movimento, ataques, projéteis e IA não avançam gameplay. A contagem visual usa os labels `11`, `10`, `01` e `Fight!`, expostos por `World::countdown_label`. Os eventos de áudio correspondentes são `match.countdown.11`, `match.countdown.10`, `match.countdown.01` e `match.countdown.fight`.
+
+O desenho da contagem fica em [`src/engine/render.rs`](../src/engine/render.rs), que só consulta `World::countdown_label`. A troca de arena é decisão de [`src/app.rs`](../src/app.rs): depois que `World::outcome` aparece, a arena atual permanece na pose de vitória e só avança quando uma nova luta é iniciada por restart ou pela tela de preferências.
 
 ### Hitbox e Hurtbox
 
@@ -100,6 +111,40 @@ Os golpes próximos atuais estão em [`src/combat/move_data.rs`](../src/combat/m
 
 O debug visual mostra `WHIFF xx` quando `Mostrar debug de combate` está ligado. O Combat Lab mostra `whiff` no overlay para comparar custo de erro com `rec` em contato.
 
+### Áudio de Combate
+
+O combate não toca arquivos diretamente. O fluxo atual é:
+
+1. [`Fighter::update`](../src/combat/fighter.rs) retorna eventos de início de golpe e whiff.
+2. [`World`](../src/game/world.rs) transforma esses eventos em `AudioEvent` com `PlayerSlot`, `CharacterId` e `MoveId`.
+3. `World` também emite eventos de contagem pré-luta, hit, block, dor, projectile e vitória.
+4. [`App`](../src/app.rs) drena `World::take_audio_events` depois de cada fixed update.
+5. [`src/engine/audio.rs`](../src/engine/audio.rs) resolve bindings em [`assets/audio/audio_manifest.json`](../assets/audio/audio_manifest.json) e toca clips existentes via Raylib.
+
+Cues relevantes para combate:
+
+| Cue | Quando usar |
+|---|---|
+| `match.countdown.11` | primeira etapa da contagem visual binária |
+| `match.countdown.10` | segunda etapa da contagem visual binária |
+| `match.countdown.01` | terceira etapa da contagem visual binária |
+| `match.countdown.fight` | liberação da luta |
+| `fighter.attack.start` | voz/esforço no início do golpe |
+| `fighter.attack.whiff` | som seco quando um golpe termina sem contato |
+| `fighter.projectile.cast` | carga/disparo do especial |
+| `combat.hit` | impacto de golpe próximo |
+| `combat.block` | impacto em defesa |
+| `fighter.hurt` | voz de dano do defensor |
+| `fighter.block` | esforço de defesa do defensor |
+| `projectile.impact` | impacto do projétil |
+
+Ao adicionar golpe novo:
+
+- crie ou reutilize um `MoveId` com `audio_key`;
+- confira se `tests/audio_manifest.rs` aceita a chave;
+- adicione binding no manifesto quando houver clip planejado;
+- documente variações em [`docs/14-audio-pipeline.md`](14-audio-pipeline.md) se criar cue nova.
+
 ### Dados de Personagens
 
 Personagens ficam em [`src/characters/mod.rs`](../src/characters/mod.rs). Cada `CharacterSpec` contém:
@@ -149,6 +194,7 @@ Teclas:
 | Alternar hitbox | `B` |
 | Alternar pivot/eixos | `P` |
 | Alternar dummy de contato | `D` |
+| Alternar fundo de arena | `A` |
 
 Use o Combat Lab para conferir:
 
@@ -206,8 +252,9 @@ Exemplos de sistemas:
 2. Atualize este guia se mudar arquivo, comando, tecla, técnica ou dado relevante.
 3. Atualize [`docs/08-code-architecture.md`](08-code-architecture.md) se mudar árvore ou fronteira.
 4. Atualize [`docs/13-combat-design-roadmap.md`](13-combat-design-roadmap.md) se concluir fase ou mudar backlog.
-5. Atualize [`CHANGELOG.md`](../CHANGELOG.md).
-6. Se a mudança for estrutural e durável, atualize ou crie ADR em [`docs/adr/`](adr/).
+5. Atualize [`docs/14-audio-pipeline.md`](14-audio-pipeline.md) se mudar cue, binding, evento ou manifesto de áudio.
+6. Atualize [`CHANGELOG.md`](../CHANGELOG.md).
+7. Se a mudança for estrutural e durável, atualize ou crie ADR em [`docs/adr/`](adr/).
 
 ## Comandos de Validação
 
