@@ -1,5 +1,8 @@
 //! Defines simple horizontal projectiles for the greybox prototype.
 //!
+//! System: Combat runtime. This module owns projectile state and timing data,
+//! but does not draw effects or resolve full match flow.
+//!
 //! Projectiles are domain data, not render objects, so their collisions can be
 //! tested without opening a Raylib window.
 

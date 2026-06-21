@@ -4,7 +4,7 @@
 
 Em implementação.
 
-Fases 1 e 2 concluídas na branch `gameplay/combat-improvement-plan`; Fase 3 iniciada com `MoveSpec`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab mínimo abre por CLI, e os golpes próximos atuais já saíram de `AttackKind::spec` para uma tabela em `src/combat/move_data.rs`.
+Fases 1, 2 e 3 concluídas em corte mínimo na branch `gameplay/combat-improvement-plan`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab mínimo abre por CLI, golpes próximos usam `MoveSpec`, e Rust/Duke possuem `CharacterSpec` apontando para os golpes atuais.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -274,8 +274,7 @@ src/combat/
 └── tuning.rs         # Helpers e validações de balanceamento
 
 src/characters/
-├── mod.rs            # Registro público de personagens
-├── data.rs           # CharacterSpec, Archetype, CharacterStats
+├── mod.rs            # CharacterSpec mínimo e registro público de personagens
 ├── rust.rs           # Dados iniciais do Rust
 ├── duke.rs           # Dados iniciais do Duke
 └── go.rs             # Protótipo futuro de rushdown
@@ -366,19 +365,20 @@ Critério de aceite:
 
 ### Fase 3 — MoveSpec e CharacterSpec
 
-Status: **em andamento**.
+Status: **concluída em corte mínimo**.
 
 Entregáveis:
 
 - [x] mover dados hard-coded de `AttackKind::spec` para `MoveSpec`;
-- [ ] criar `CharacterSpec` para Rust e Duke;
+- [x] criar `CharacterSpec` para Rust e Duke;
 - [x] manter comportamento atual com dados novos;
 - [x] testes garantindo que dados antigos continuam equivalentes.
 
 Critério de aceite:
 
 - adicionar um golpe novo não exige alterar `Fighter` profundamente.
-- `AttackKind` permanece como camada de compatibilidade runtime até existir `CharacterSpec`.
+- `AttackKind` permanece como camada de compatibilidade runtime até o jogo precisar consumir `CharacterSpec` diretamente.
+- A parte mínima está aceita; a próxima evolução é fazer o runtime consumir `CharacterSpec` de forma mais direta quando houver diferença real entre personagens.
 
 ### Fase 4 — Defesa e contra-jogo
 
@@ -422,7 +422,7 @@ Critério de aceite:
 
 ## Backlog técnico imediato
 
-1. Criar `CharacterSpec` mínimo para Rust e Duke apontando para os `MoveSpec` existentes.
+1. Fazer o runtime consumir `CharacterSpec` diretamente quando Rust e Duke começarem a divergir.
 2. Separar o overlay de combate para `src/ui/combat_debug.rs` se o Combat Lab aumentar a responsabilidade do renderer.
 3. Adicionar estados de pose no Combat Lab: idle, crouch, jump, block, hit e victory.
 4. Só depois criar golpes novos.

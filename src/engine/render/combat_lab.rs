@@ -1,10 +1,14 @@
 //! Draws the isolated Combat Lab scene.
 //!
+//! System: Raylib render boundary. This module draws lab snapshots produced by
+//! `scenes::combat_lab` and does not own combat rules.
+//!
 //! The lab renderer stays next to the Raylib boundary while the lab state stays
 //! testable under `scenes/combat_lab.rs`.
 
 use raylib::prelude::*;
 
+use crate::characters::{CharacterId, character_spec};
 use crate::combat::{
     fighter::{AttackPhase, Facing, Fighter},
     projectile::{PROJECTILE_DAMAGE, Projectile},
@@ -12,7 +16,7 @@ use crate::combat::{
 use crate::config::{FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
 use crate::engine::{assets::GameAssets, sprites};
 use crate::math::rect::Rect;
-use crate::scenes::combat_lab::{CombatLab, CombatLabCharacter, CombatLabMove};
+use crate::scenes::combat_lab::{CombatLab, CombatLabMove};
 
 use super::{
     BACKGROUND, BODY_OUTLINE, FighterDrawOptions, HITBOX, HITBOX_FILL, HITSPARK, HURTBOX, PANEL,
@@ -26,12 +30,12 @@ pub fn draw_combat_lab(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab, assets:
     draw_lab_grid(draw);
 
     let (body_color, sprite_atlas, projectile_texture) = match lab.character() {
-        CombatLabCharacter::Rust => (
+        CharacterId::Rust => (
             PLAYER_ONE,
             assets.rust_fighter.as_ref(),
             assets.rust_projectile.as_ref(),
         ),
-        CombatLabCharacter::Duke => (
+        CharacterId::Duke => (
             PLAYER_TWO,
             assets.duke_fighter.as_ref(),
             assets.duke_projectile.as_ref(),
@@ -189,7 +193,7 @@ fn draw_lab_overlay(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
     draw.draw_text(
         &format!(
             "{} / {} / frame {:03}",
-            lab.character().label(),
+            character_spec(lab.character()).display_name,
             lab.selected_move().label(),
             lab.current_frame().get()
         ),

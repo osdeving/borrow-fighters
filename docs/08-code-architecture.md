@@ -58,7 +58,7 @@ borrow-fighters/
 │   │   ├── move_set.rs         # Tipos runtime e compatibilidade com AttackKind
 │   │   └── projectile.rs       # Estado de projéteis
 │   ├── characters/
-│   │   └── .gitkeep            # Reservado para dados futuros de personagem
+│   │   └── mod.rs              # CharacterSpec e registro inicial de personagens
 │   ├── scenes/
 │   │   ├── mod.rs              # Estados de tela
 │   │   ├── combat_lab.rs       # Laboratório isolado para timing e boxes
@@ -71,6 +71,7 @@ borrow-fighters/
 │       └── vec2.rs             # Vetores 2D se Raylib Vector2 não bastar
 └── tests/
     ├── cli.rs                  # Contrato de argumentos de inicialização
+    ├── characters.rs           # Contrato do registro de personagens
     ├── combat_lab.rs           # Estado testável do Combat Lab
     ├── attack_frame_data.rs    # Timing de golpes em frames
     ├── move_data.rs            # Contrato da tabela MoveSpec
@@ -80,7 +81,7 @@ borrow-fighters/
     └── sprite_selection.rs     # Clip escolhido a partir do estado do lutador
 ```
 
-Os diretórios `characters/`, `scenes/` e `ui/` ainda existem mais como ponto de expansão do que como abstração completa. Novos módulos só devem entrar quando reduzirem responsabilidade real dos arquivos atuais.
+Os diretórios `scenes/` e `ui/` ainda existem mais como ponto de expansão do que como abstração completa. `characters/` já possui o registro mínimo de personagens, mas ainda deve permanecer simples e orientado a dados. Novos módulos só devem entrar quando reduzirem responsabilidade real dos arquivos atuais.
 
 ## Regras de fronteira
 
@@ -155,22 +156,24 @@ No protótipo 0.1:
 
 ## Convenções por arquivo
 
-Todo arquivo Rust novo deve começar com uma descrição curta:
+Todo arquivo Rust novo deve começar com uma descrição curta e declarar a qual sistema pertence:
 
 ```rust
 //! Responsabilidade do módulo em uma frase.
 //!
-//! Explicar aqui apenas o contexto que ajuda alguém a decidir se este é o
-//! arquivo certo para editar.
+//! System: Nome do sistema maior. Explica qual motor/módulo possui este arquivo
+//! e o que não pertence aqui.
 ```
 
 Regras:
 
 - primeira frase deve dizer o que o arquivo faz;
+- a linha `System:` deve ajudar devs e IAs a localizar o módulo maior;
 - evitar comentário óbvio em cada função;
 - documentar itens públicos com `///`;
 - se o arquivo tiver regra de domínio importante, registrar o porquê perto da regra;
 - se uma decisão afetar vários arquivos, abrir ou atualizar ADR.
+- se uma mudança alterar comandos, hotkeys, hitbox/hurtbox, frame data, personagens ou Combat Lab, atualizar [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md).
 
 ## O que evitar no começo
 

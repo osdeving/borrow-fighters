@@ -26,6 +26,7 @@
 | `docs/09-ai-collaboration.md` | AI guidance and skills |
 | `docs/10-greybox-playtest.md` | Current playtest script |
 | `docs/11-sprite-pipeline.md` | Sprite manifest and atlas pipeline |
+| `docs/12-technical-combat-guide.md` | Combat code tracing, hitbox/hurtbox and Combat Lab commands |
 | `docs/13-combat-design-roadmap.md` | Combat design, frame data and Combat Lab roadmap |
 | `docs/adr/` | Architecture Decision Records |
 | `docs/templates/` | Reusable proposal/checklist templates |
@@ -44,7 +45,7 @@
 | `src/game/feature_flags.rs` | Runtime feature flags and preference menu data |
 | `src/combat/` | Hitbox, hurtbox, damage and fighter rules |
 | `src/combat/move_data.rs` | Table-driven MoveSpec data for close-range moves |
-| `src/characters/` | Reserved for future character-specific data/logic |
+| `src/characters/` | CharacterSpec registry and character-to-move mapping |
 | `src/scenes/` | Preference screen and isolated Combat Lab scene state |
 | `src/ui/` | Reserved for future UI components |
 | `src/math/` | Small geometry helpers |

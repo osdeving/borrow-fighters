@@ -1,11 +1,15 @@
 //! Parses startup options for the prototype executable.
 //!
+//! System: Application bootstrap. The CLI selects startup mode before Raylib is
+//! initialized; gameplay commands stay in engine input modules.
+//!
 //! The CLI stays deliberately small until the prototype needs a real command
 //! framework.
 
 use std::fmt::{Display, Formatter};
 
-use crate::scenes::combat_lab::{CombatLabCharacter, CombatLabMove, CombatLabOptions};
+use crate::characters::CharacterId;
+use crate::scenes::combat_lab::{CombatLabMove, CombatLabOptions};
 
 /// Startup mode selected from command-line arguments.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -50,7 +54,7 @@ impl LaunchOptions {
                     let Some(value) = args.next() else {
                         return Err(CliError::new("--character requires a value"));
                     };
-                    lab.character = CombatLabCharacter::from_cli(&value)
+                    lab.character = CharacterId::from_cli(&value)
                         .ok_or_else(|| CliError::new(format!("unknown character '{value}'")))?;
                     if matches!(mode, LaunchMode::CombatLab(_)) {
                         mode = LaunchMode::CombatLab(lab);

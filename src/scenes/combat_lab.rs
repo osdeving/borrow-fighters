@@ -1,8 +1,12 @@
 //! Owns the isolated Combat Lab scene state.
 //!
+//! System: Combat Lab scene. This file owns isolated move playback state and
+//! intentionally keeps Raylib drawing outside the testable lab model.
+//!
 //! The lab reuses combat primitives without match flow so move timing, pivots,
 //! hitboxes, hurtboxes, and projectile spawn can be inspected directly.
 
+use crate::characters::{CharacterId, character_spec};
 use crate::combat::{
     fighter::{AttackKind, Fighter, FighterInput, PlayerSlot},
     frame::FrameCount,
@@ -11,47 +15,6 @@ use crate::combat::{
 use crate::config::{FIXED_TIMESTEP, WINDOW_WIDTH};
 
 const LAB_FIGHTER_X: f32 = 430.0;
-
-/// Character loaded in the Combat Lab.
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-pub enum CombatLabCharacter {
-    #[default]
-    Rust,
-    Duke,
-}
-
-impl CombatLabCharacter {
-    /// Parses a CLI character name.
-    pub fn from_cli(value: &str) -> Option<Self> {
-        match value {
-            "rust" | "rustacean" => Some(Self::Rust),
-            "duke" | "java" => Some(Self::Duke),
-            _ => None,
-        }
-    }
-
-    /// Returns the display name used by the lab overlay.
-    pub const fn label(self) -> &'static str {
-        match self {
-            Self::Rust => "Rust",
-            Self::Duke => "Duke / Java",
-        }
-    }
-
-    const fn fighter_name(self) -> &'static str {
-        match self {
-            Self::Rust => "Rust",
-            Self::Duke => "Java",
-        }
-    }
-
-    const fn slot(self) -> PlayerSlot {
-        match self {
-            Self::Rust => PlayerSlot::One,
-            Self::Duke => PlayerSlot::Two,
-        }
-    }
-}
 
 /// Move selected for isolated playback.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -125,7 +88,7 @@ impl CombatLabMove {
 /// Startup options for the Combat Lab.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct CombatLabOptions {
-    pub character: CombatLabCharacter,
+    pub character: CharacterId,
     pub selected_move: CombatLabMove,
 }
 
@@ -147,7 +110,7 @@ pub struct CombatLabInput {
 /// Isolated move playback state for combat tuning.
 #[derive(Clone, Debug)]
 pub struct CombatLab {
-    character: CombatLabCharacter,
+    character: CharacterId,
     selected_move: CombatLabMove,
     fighter: Fighter,
     projectiles: Vec<Projectile>,
@@ -217,7 +180,7 @@ impl CombatLab {
     }
 
     /// Returns the selected character.
-    pub const fn character(&self) -> CombatLabCharacter {
+    pub const fn character(&self) -> CharacterId {
         self.character
     }
 
@@ -327,8 +290,16 @@ impl CombatLab {
     }
 }
 
-fn fighter_for(character: CombatLabCharacter) -> Fighter {
-    Fighter::new(character.slot(), character.fighter_name(), LAB_FIGHTER_X)
+fn fighter_for(character: CharacterId) -> Fighter {
+    let spec = character_spec(character);
+    Fighter::new(slot_for(character), spec.fighter_name, LAB_FIGHTER_X)
+}
+
+fn slot_for(character: CharacterId) -> PlayerSlot {
+    match character {
+        CharacterId::Rust => PlayerSlot::One,
+        CharacterId::Duke => PlayerSlot::Two,
+    }
 }
 
 fn move_index(selected_move: CombatLabMove) -> usize {

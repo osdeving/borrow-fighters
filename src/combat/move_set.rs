@@ -1,5 +1,8 @@
 //! Defines close-range move runtime types for the greybox prototype.
 //!
+//! System: Combat runtime. This module exposes the attack enum used by fighter
+//! state while delegating tunable values to `move_data`.
+//!
 //! `AttackKind` remains the runtime compatibility enum while move details now
 //! live in table-driven `MoveSpec` data.
 

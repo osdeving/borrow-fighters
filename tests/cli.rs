@@ -1,7 +1,8 @@
 //! Verifies startup argument parsing without opening a Raylib window.
 
+use borrow_fighters::characters::CharacterId;
 use borrow_fighters::cli::{LaunchMode, LaunchOptions};
-use borrow_fighters::scenes::combat_lab::{CombatLabCharacter, CombatLabMove};
+use borrow_fighters::scenes::combat_lab::CombatLabMove;
 
 #[test]
 fn no_args_start_regular_game() {
@@ -29,7 +30,7 @@ fn combat_lab_args_select_character_and_move() {
     let LaunchMode::CombatLab(lab) = options.mode else {
         panic!("expected combat lab mode");
     };
-    assert_eq!(lab.character, CombatLabCharacter::Duke);
+    assert_eq!(lab.character, CharacterId::Duke);
     assert_eq!(lab.selected_move, CombatLabMove::Projectile);
 }
 

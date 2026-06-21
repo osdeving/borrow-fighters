@@ -1,5 +1,8 @@
 //! Defines fighter state, movement, defense, and attack timing.
 //!
+//! System: Combat runtime. This module owns the mutable fighter model used by
+//! matches and tools; data tables live in `move_data` and `characters`.
+//!
 //! Fighters are still greybox primitives, but their body, hurtboxes, and moves
 //! are split enough to test traditional fighting-game verbs without sprites.
 

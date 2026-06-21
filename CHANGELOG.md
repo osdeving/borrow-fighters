@@ -43,6 +43,8 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Frame data de projectile/special com spawn, duração visual e cooldown em frames.
 - Combat Lab mínimo por CLI para inspecionar golpes isolados, frame step, pivot, hurtbox, hitbox e projectile.
 - Tabela inicial `MoveSpec` para golpes próximos, mantendo `AttackKind` como camada runtime de compatibilidade.
+- Registro inicial `CharacterSpec` para Rust e Duke.
+- Guia técnico de combate com rastreio de código, técnica de hitbox/hurtbox, comandos e hotkeys do Combat Lab.
 
 ### Em aberto
 

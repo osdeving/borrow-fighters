@@ -1,5 +1,8 @@
 //! Maps local keyboard and gamepad state into game commands.
 //!
+//! System: Raylib input boundary. This module translates device state into
+//! scene and combat input structs without owning gameplay decisions.
+//!
 //! This module is the input boundary between Raylib and the testable combat
 //! model.
 

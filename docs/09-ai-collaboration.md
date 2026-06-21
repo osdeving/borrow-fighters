@@ -53,7 +53,7 @@ Use /borrow-fighters-gameplay-design para revisar esta ideia de golpe e apontar 
 
 - Produto e escopo: `docs/00-vision.md`, `docs/01-mini-gdd.md`, `docs/02-prototype-scope.md`.
 - Governança: `docs/05-governance.md`, `CONTRIBUTING.md`.
-- Código: `docs/08-code-architecture.md`, `docs/11-sprite-pipeline.md`, ADRs em `docs/adr/`.
+- Código: `docs/08-code-architecture.md`, `docs/12-technical-combat-guide.md`, `docs/11-sprite-pipeline.md`, ADRs em `docs/adr/`.
 - Arte: `docs/07-art-direction.md`, `assets/references/`, `assets/placeholder/`.
 - Release: `docs/06-release-process.md`, `CHANGELOG.md`.
 

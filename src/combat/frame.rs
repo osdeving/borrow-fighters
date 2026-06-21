@@ -1,5 +1,8 @@
 //! Represents fixed-step combat timing in whole frames.
 //!
+//! System: Combat data. This module provides the frame unit used by move specs,
+//! projectiles, tests, and debug overlays.
+//!
 //! Fighting-game tuning should speak in frames first, then convert to seconds
 //! only at the boundary where the fixed update loop advances timers.
 

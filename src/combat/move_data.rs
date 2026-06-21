@@ -1,5 +1,8 @@
 //! Defines table-driven close-range move data.
 //!
+//! System: Combat data. This module stores tunable move specs consumed by
+//! fighters, Combat Lab, and future character specs.
+//!
 //! This is the first step toward character-specific moves while keeping the
 //! current Prototype 0.1 combat behavior unchanged.
 

@@ -1,5 +1,8 @@
 //! Resolves hitbox and hurtbox overlap.
 //!
+//! System: Combat runtime. This module keeps collision checks pure and small so
+//! hit resolution can be tested without Raylib.
+//!
 //! Collision is intentionally axis-aligned for the prototype so combat feedback
 //! can be debugged visually.
 

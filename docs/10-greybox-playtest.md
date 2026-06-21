@@ -161,6 +161,8 @@ Use o Combat Lab para verificar:
 - frame atual, fase e janela ativa do golpe;
 - spawn, altura e trajetória inicial do projectile.
 
+Rastreio técnico do Combat Lab, hitbox/hurtbox e arquivos de combate: [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md).
+
 Controles do lab:
 
 | Ação | Tecla |
