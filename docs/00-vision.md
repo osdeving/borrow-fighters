@@ -34,10 +34,6 @@ Primeiro vem um protótipo jogável. Depois vem polimento.
 
 Cada personagem deve representar uma linguagem ou conceito não apenas visualmente, mas também mecanicamente.
 
-### 5. Brasil como palco de futuro
-
-As arenas principais devem partir de locais brasileiros ligados a tecnologia, ciência, arquitetura, inovação e cultura urbana. O jogo deve tratar o Brasil como cenário de futuro, pesquisa, beleza e mistério, não apenas como ruído de fundo.
-
 ## Público inicial
 
 - Programadores.

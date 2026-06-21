@@ -26,7 +26,6 @@
 | `docs/09-ai-collaboration.md` | AI guidance and skills |
 | `docs/10-greybox-playtest.md` | Current playtest script |
 | `docs/11-sprite-pipeline.md` | Sprite manifest and atlas pipeline |
-| `docs/12-worldbuilding.md` | Story, characters and Brazilian arena direction |
 | `docs/adr/` | Architecture Decision Records |
 | `docs/templates/` | Reusable proposal/checklist templates |
 
