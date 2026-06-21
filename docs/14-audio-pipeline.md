@@ -86,8 +86,8 @@ Música usa `Music` streaming do Raylib, não `Sound`. Por isso [`App`](../src/a
 Cada evento pode carregar:
 
 - `slot`: Player 1 ou Player 2;
-- `character`: `rust`, `duke` ou aliases aceitos;
-- `move`: `light_punch`, `heavy_punch`, `kick`, `rust_borrow_jab`, `duke_boilerplate_poke`;
+- `character`: `rust`, `duke`, `go` ou aliases aceitos;
+- `move`: `light_punch`, `heavy_punch`, `kick`, `rust_borrow_jab`, `duke_boilerplate_poke`, `go_goroutine_jab`;
 - `environment`: reservado para arena, ainda não emitido pelo runtime.
 
 A contagem pré-luta é emitida pelo `World`, não pelo menu. A tela mostra `11`, `10`, `01`, `Fight!`, enquanto os clips atuais usam voz CC0 de "three", "two", "one" e "fight" para manter leitura auditiva imediata.

@@ -80,6 +80,19 @@ fn combat_lab_args_select_static_pose() {
 }
 
 #[test]
+fn combat_lab_args_select_go_character() {
+    let options = LaunchOptions::parse(
+        ["borrow-fighters", "--lab", "combat", "--character", "go"].map(String::from),
+    )
+    .unwrap();
+
+    let LaunchMode::CombatLab(lab) = options.mode else {
+        panic!("expected combat lab mode");
+    };
+    assert_eq!(lab.character, CharacterId::Go);
+}
+
+#[test]
 fn unknown_move_is_rejected() {
     let error = LaunchOptions::parse(
         [

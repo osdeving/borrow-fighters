@@ -157,7 +157,7 @@ fn close_throw_ignores_block() {
 
     assert_eq!(
         world.player_two.health,
-        health - move_spec(MoveId::CloseThrow).damage
+        health - move_spec(MoveId::RustOwnershipThrow).damage
     );
     assert!(!world.player_two.in_blockstun());
     assert!(world.player_two.in_hitstun());

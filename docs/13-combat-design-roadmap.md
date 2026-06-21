@@ -4,7 +4,7 @@
 
 Em implementação.
 
-Fases 1 a 4 concluídas em corte mínimo. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, Rust/Duke possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout, o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`, e Rust/Duke já têm o primeiro corte de golpes próximos específicos por personagem. O kit greybox também já possui sweep, overhead, anti-air, ataques aéreos e throw curto como linguagem tradicional testável.
+Fases 1 a 4 concluídas em corte mínimo. A Fase 5 tem o primeiro corte de identidade por dados: Rust ganhou anti-air/throw mais rápidos e menores; Duke ganhou sweep/overhead/throw mais longos, pesados e puníveis; Go entrou como rushdown greybox testável no Combat Lab. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, personagens possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout, e o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -168,7 +168,7 @@ Golpes candidatos:
 
 ### Go — rushdown de concorrência
 
-Função: personagem futuro de velocidade e pressão.
+Função: personagem de velocidade e pressão, ainda em greybox de dados e sem arte própria.
 
 Plano de jogo:
 
@@ -185,9 +185,12 @@ Fraquezas:
 
 Golpes candidatos:
 
-- `goroutine_dash`: avanço rápido com risco se bloqueado.
+- `goroutine_jab`: checagem muito rápida e curta. **Implementado em corte inicial** como soco fraco de baixo dano.
+- `defer_kick`: chute mais rápido que o genérico, com alcance reduzido. **Implementado em corte inicial**.
+- `channel_overhead`: overhead menos pesado que o de Duke, feito para manter ritmo. **Implementado em corte inicial**.
+- `hopkick`: ataque aéreo de pressão curta. **Implementado em corte inicial**.
+- `goroutine_dash`: avanço rápido com risco se bloqueado, futuro.
 - `channel_cross`: troca de lado futura, só depois do laboratório existir.
-- `defer_kick`: golpe atrasado que quebra ritmo, mas perde para jab no startup.
 
 ### Assembly — boss não-jogável
 
@@ -227,6 +230,7 @@ Entrada proposta:
 ```bash
 cargo run -- --lab combat --character rust
 cargo run -- --lab combat --character duke --move heavy_punch
+cargo run -- --lab combat --character go --move kick
 ```
 
 Atalhos propostos:
@@ -279,7 +283,7 @@ src/characters/
 ├── mod.rs            # CharacterSpec mínimo e registro público de personagens
 ├── rust.rs           # Dados iniciais do Rust
 ├── duke.rs           # Dados iniciais do Duke
-└── go.rs             # Protótipo futuro de rushdown
+└── go.rs             # Dados do Go quando o registro for dividido
 
 src/scenes/
 └── combat_lab.rs     # Cena direta de laboratório de golpes
@@ -374,7 +378,7 @@ Status: **concluída em corte mínimo, com primeiro tuning específico por perso
 Entregáveis:
 
 - [x] mover dados hard-coded de `AttackKind::spec` para `MoveSpec`;
-- [x] criar `CharacterSpec` para Rust e Duke;
+- [x] criar `CharacterSpec` para Rust, Duke e Go;
 - [x] fazer `World`, `Combat Lab` e `Fighter` consumirem nome, vida máxima e loadout vindos de `CharacterSpec`;
 - [x] manter comportamento atual com dados novos;
 - [x] testes garantindo que dados antigos continuam equivalentes.
@@ -384,7 +388,7 @@ Critério de aceite:
 
 - adicionar um golpe novo não exige alterar `Fighter` profundamente.
 - `AttackKind` permanece como camada de compatibilidade runtime para sprites, debug e seleção de ataque.
-- Rust possui `RustBorrowJab` como soco fraco rápido/curto; Duke possui `DukeBoilerplatePoke` como soco forte longo/lento.
+- Rust possui `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` como ferramentas rápidas/curtas; Duke possui `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` como ferramentas longas/pesadas e mais puníveis.
 - A parte mínima está aceita; a próxima evolução é refinar defesa, hitstun/blockstun e contra-jogo.
 
 ### Fase 4 — Defesa e contra-jogo
@@ -422,16 +426,22 @@ Respostas mínimas documentadas:
 
 ### Fase 5 — Identidade dos personagens
 
+Status: **concluída em corte mínimo de dados; aguardando playtest e arte própria**.
+
 Entregáveis:
 
-- Rust all-rounder técnico;
-- Duke midrange/pressure;
-- um protótipo greybox de Go rushdown;
-- matriz de matchups de intenção, sem buscar balanceamento final.
+- [x] Rust all-rounder técnico em dados: `RustBorrowJab`, `RustLifetimeAntiAir`, `RustOwnershipThrow`;
+- [x] Duke midrange/pressure em dados: `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead`, `DukeEnterpriseThrow`;
+- [x] Go rushdown em dados: `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead`, `GoHopkick`;
+- [x] matriz de intenção mecânica em [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md);
+- [x] matriz de matchups de intenção, sem buscar balanceamento final.
 
 Critério de aceite:
 
 - cada personagem vence de uma forma diferente no playtest.
+- Rust deve ganhar por resposta limpa e decisão correta, não por alcance bruto.
+- Duke deve controlar espaço com risco real quando erra.
+- Go deve pressionar com velocidade, mas sofrer por alcance e vida menores.
 
 ### Fase 6 — Proteções contra degeneração
 
@@ -449,8 +459,8 @@ Critério de aceite:
 ## Backlog técnico imediato
 
 1. Usar a leitura de vantagem do Combat Lab para ajustar golpes seguros, puníveis e spacing.
-2. Começar a Fase 5 com matriz de identidade mecânica para Rust, Duke e Go.
-3. Decidir quais golpes tradicionais serão universais e quais viram assinatura por personagem.
+2. Playtestar a matriz Rust x Duke x Go e ajustar valores com base no Combat Lab.
+3. Dar arte placeholder própria ao Go ou manter o personagem apenas como dado até Rust/Duke estabilizarem.
 4. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
 5. Só depois ampliar para novos golpes especiais.
 

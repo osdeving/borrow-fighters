@@ -80,6 +80,7 @@ borrow-fighters/
     ├── combat_lab.rs           # Estado testável do Combat Lab
     ├── attack_frame_data.rs    # Timing de golpes em frames
     ├── move_data.rs            # Contrato da tabela MoveSpec
+    ├── character_identity_tuning.rs # Intenção mecânica de Rust/Duke/Go por dados
     ├── combat_rules.rs         # Regras puras de combate e IA
     ├── traditional_moves.rs    # High/low/throw e ataques aéreos tradicionais
     ├── cpu_traditional_moves.rs # Cobertura da CPU para golpes tradicionais

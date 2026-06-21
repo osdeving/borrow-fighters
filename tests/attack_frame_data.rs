@@ -182,6 +182,22 @@ fn character_specific_moves_use_their_own_frame_data() {
     assert_eq!(duke.attack_phase(), AttackPhase::Startup);
     advance_to_frame(&mut duke, 13);
     assert_eq!(duke.attack_phase(), AttackPhase::Active);
+
+    let mut go = start_character_attack(
+        CharacterId::Go,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(
+        go.attack_frame_data(),
+        Some(move_spec(MoveId::GoGoroutineJab).frames)
+    );
+    advance_to_frame(&mut go, 2);
+    assert_eq!(go.attack_phase(), AttackPhase::Startup);
+    advance_to_frame(&mut go, 3);
+    assert_eq!(go.attack_phase(), AttackPhase::Active);
 }
 
 fn start_attack(input: FighterInput) -> Fighter {

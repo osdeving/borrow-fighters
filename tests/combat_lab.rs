@@ -183,6 +183,22 @@ fn lab_reports_character_specific_close_move_advantage() {
     assert_eq!(duke_advantage.whiff_recovery, FrameCount::new(12));
     assert_eq!(duke_advantage.hit_advantage, -9);
     assert_eq!(duke_advantage.block_advantage, -15);
+
+    let go = CombatLab::new(CombatLabOptions {
+        character: CharacterId::Go,
+        selected_move: CombatLabMove::LightPunch,
+        ..CombatLabOptions::default()
+    });
+    let go_advantage = go.advantage().expect("move playback should be analyzed");
+
+    assert_eq!(go_advantage.contact_frame, FrameCount::new(3));
+    assert_eq!(
+        go_advantage.attacker_recovery_after_contact,
+        FrameCount::new(11)
+    );
+    assert_eq!(go_advantage.whiff_recovery, FrameCount::new(3));
+    assert_eq!(go_advantage.hit_advantage, -1);
+    assert_eq!(go_advantage.block_advantage, -4);
 }
 
 #[test]

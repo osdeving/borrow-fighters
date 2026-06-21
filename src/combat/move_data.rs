@@ -18,7 +18,16 @@ pub const AIR_PUNCH_DAMAGE: i32 = 9;
 pub const AIR_KICK_DAMAGE: i32 = 12;
 pub const CLOSE_THROW_DAMAGE: i32 = 10;
 pub const RUST_BORROW_JAB_DAMAGE: i32 = 7;
+pub const RUST_LIFETIME_ANTI_AIR_DAMAGE: i32 = 12;
+pub const RUST_OWNERSHIP_THROW_DAMAGE: i32 = 9;
 pub const DUKE_BOILERPLATE_POKE_DAMAGE: i32 = 18;
+pub const DUKE_GARBAGE_COLLECTOR_SWEEP_DAMAGE: i32 = 13;
+pub const DUKE_ABSTRACT_FACTORY_OVERHEAD_DAMAGE: i32 = 16;
+pub const DUKE_ENTERPRISE_THROW_DAMAGE: i32 = 12;
+pub const GO_GOROUTINE_JAB_DAMAGE: i32 = 6;
+pub const GO_DEFER_KICK_DAMAGE: i32 = 10;
+pub const GO_CHANNEL_OVERHEAD_DAMAGE: i32 = 12;
+pub const GO_HOPKICK_DAMAGE: i32 = 10;
 pub const LIGHT_ATTACK_WHIFF_RECOVERY: FrameCount = FrameCount::new(4);
 pub const HEAVY_ATTACK_WHIFF_RECOVERY: FrameCount = FrameCount::new(10);
 pub const KICK_WHIFF_RECOVERY: FrameCount = FrameCount::new(8);
@@ -28,7 +37,16 @@ pub const RISING_ANTI_AIR_WHIFF_RECOVERY: FrameCount = FrameCount::new(14);
 pub const AIR_ATTACK_WHIFF_RECOVERY: FrameCount = FrameCount::new(6);
 pub const CLOSE_THROW_WHIFF_RECOVERY: FrameCount = FrameCount::new(16);
 pub const RUST_BORROW_JAB_WHIFF_RECOVERY: FrameCount = FrameCount::new(4);
+pub const RUST_LIFETIME_ANTI_AIR_WHIFF_RECOVERY: FrameCount = FrameCount::new(10);
+pub const RUST_OWNERSHIP_THROW_WHIFF_RECOVERY: FrameCount = FrameCount::new(12);
 pub const DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY: FrameCount = FrameCount::new(12);
+pub const DUKE_GARBAGE_COLLECTOR_SWEEP_WHIFF_RECOVERY: FrameCount = FrameCount::new(16);
+pub const DUKE_ABSTRACT_FACTORY_OVERHEAD_WHIFF_RECOVERY: FrameCount = FrameCount::new(16);
+pub const DUKE_ENTERPRISE_THROW_WHIFF_RECOVERY: FrameCount = FrameCount::new(20);
+pub const GO_GOROUTINE_JAB_WHIFF_RECOVERY: FrameCount = FrameCount::new(3);
+pub const GO_DEFER_KICK_WHIFF_RECOVERY: FrameCount = FrameCount::new(5);
+pub const GO_CHANNEL_OVERHEAD_WHIFF_RECOVERY: FrameCount = FrameCount::new(8);
+pub const GO_HOPKICK_WHIFF_RECOVERY: FrameCount = FrameCount::new(4);
 pub const LIGHT_ATTACK_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(12),
     blockstun: FrameCount::new(8),
@@ -77,6 +95,54 @@ pub const CLOSE_THROW_REACTION: HitReaction = HitReaction {
     hit_pushback: 54.0,
     block_pushback: 0.0,
 };
+pub const RUST_LIFETIME_ANTI_AIR_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(17),
+    blockstun: FrameCount::new(9),
+    hit_pushback: 30.0,
+    block_pushback: 18.0,
+};
+pub const RUST_OWNERSHIP_THROW_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(18),
+    blockstun: FrameCount::ZERO,
+    hit_pushback: 42.0,
+    block_pushback: 0.0,
+};
+pub const DUKE_GARBAGE_COLLECTOR_SWEEP_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(22),
+    blockstun: FrameCount::new(13),
+    hit_pushback: 48.0,
+    block_pushback: 28.0,
+};
+pub const DUKE_ABSTRACT_FACTORY_OVERHEAD_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(20),
+    blockstun: FrameCount::new(13),
+    hit_pushback: 36.0,
+    block_pushback: 22.0,
+};
+pub const DUKE_ENTERPRISE_THROW_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(24),
+    blockstun: FrameCount::ZERO,
+    hit_pushback: 60.0,
+    block_pushback: 0.0,
+};
+pub const GO_LIGHT_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(10),
+    blockstun: FrameCount::new(7),
+    hit_pushback: 18.0,
+    block_pushback: 12.0,
+};
+pub const GO_KICK_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(13),
+    blockstun: FrameCount::new(9),
+    hit_pushback: 24.0,
+    block_pushback: 16.0,
+};
+pub const GO_OVERHEAD_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(15),
+    blockstun: FrameCount::new(10),
+    hit_pushback: 24.0,
+    block_pushback: 16.0,
+};
 
 /// Stable identifier for a close-range move.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -91,7 +157,16 @@ pub enum MoveId {
     AirKick,
     CloseThrow,
     RustBorrowJab,
+    RustLifetimeAntiAir,
+    RustOwnershipThrow,
     DukeBoilerplatePoke,
+    DukeGarbageCollectorSweep,
+    DukeAbstractFactoryOverhead,
+    DukeEnterpriseThrow,
+    GoGoroutineJab,
+    GoDeferKick,
+    GoChannelOverhead,
+    GoHopkick,
 }
 
 impl MoveId {
@@ -107,7 +182,16 @@ impl MoveId {
             Self::AirKick => 7,
             Self::CloseThrow => 8,
             Self::RustBorrowJab => 9,
-            Self::DukeBoilerplatePoke => 10,
+            Self::RustLifetimeAntiAir => 10,
+            Self::RustOwnershipThrow => 11,
+            Self::DukeBoilerplatePoke => 12,
+            Self::DukeGarbageCollectorSweep => 13,
+            Self::DukeAbstractFactoryOverhead => 14,
+            Self::DukeEnterpriseThrow => 15,
+            Self::GoGoroutineJab => 16,
+            Self::GoDeferKick => 17,
+            Self::GoChannelOverhead => 18,
+            Self::GoHopkick => 19,
         }
     }
 
@@ -124,7 +208,16 @@ impl MoveId {
             Self::AirKick => "air_kick",
             Self::CloseThrow => "close_throw",
             Self::RustBorrowJab => "rust_borrow_jab",
+            Self::RustLifetimeAntiAir => "rust_lifetime_anti_air",
+            Self::RustOwnershipThrow => "rust_ownership_throw",
             Self::DukeBoilerplatePoke => "duke_boilerplate_poke",
+            Self::DukeGarbageCollectorSweep => "duke_garbage_collector_sweep",
+            Self::DukeAbstractFactoryOverhead => "duke_abstract_factory_overhead",
+            Self::DukeEnterpriseThrow => "duke_enterprise_throw",
+            Self::GoGoroutineJab => "go_goroutine_jab",
+            Self::GoDeferKick => "go_defer_kick",
+            Self::GoChannelOverhead => "go_channel_overhead",
+            Self::GoHopkick => "go_hopkick",
         }
     }
 
@@ -141,7 +234,16 @@ impl MoveId {
             "air_kick" => Some(Self::AirKick),
             "close_throw" => Some(Self::CloseThrow),
             "rust_borrow_jab" => Some(Self::RustBorrowJab),
+            "rust_lifetime_anti_air" => Some(Self::RustLifetimeAntiAir),
+            "rust_ownership_throw" => Some(Self::RustOwnershipThrow),
             "duke_boilerplate_poke" => Some(Self::DukeBoilerplatePoke),
+            "duke_garbage_collector_sweep" => Some(Self::DukeGarbageCollectorSweep),
+            "duke_abstract_factory_overhead" => Some(Self::DukeAbstractFactoryOverhead),
+            "duke_enterprise_throw" => Some(Self::DukeEnterpriseThrow),
+            "go_goroutine_jab" => Some(Self::GoGoroutineJab),
+            "go_defer_kick" => Some(Self::GoDeferKick),
+            "go_channel_overhead" => Some(Self::GoChannelOverhead),
+            "go_hopkick" => Some(Self::GoHopkick),
             _ => None,
         }
     }
@@ -240,7 +342,7 @@ pub struct MoveSpec {
 }
 
 /// Prototype 0.1 close-range move table.
-pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 11] = [
+pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
     MoveSpec {
         id: MoveId::LightPunch,
         input: MoveInputKind::LightPunch,
@@ -432,6 +534,44 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 11] = [
         whiff_recovery: RUST_BORROW_JAB_WHIFF_RECOVERY,
     },
     MoveSpec {
+        id: MoveId::RustLifetimeAntiAir,
+        input: MoveInputKind::AntiAir,
+        label: "Lifetime AA",
+        frames: AttackFrameData {
+            duration: FrameCount::new(26),
+            active_start: FrameCount::new(6),
+            active_end: FrameCount::new(12),
+        },
+        hitbox: HitboxSpec {
+            width: 62.0,
+            height: 90.0,
+            y_offset: -92.0,
+        },
+        damage: RUST_LIFETIME_ANTI_AIR_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: RUST_LIFETIME_ANTI_AIR_REACTION,
+        whiff_recovery: RUST_LIFETIME_ANTI_AIR_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::RustOwnershipThrow,
+        input: MoveInputKind::Throw,
+        label: "Ownership",
+        frames: AttackFrameData {
+            duration: FrameCount::new(20),
+            active_start: FrameCount::new(5),
+            active_end: FrameCount::new(7),
+        },
+        hitbox: HitboxSpec {
+            width: 42.0,
+            height: 118.0,
+            y_offset: 30.0,
+        },
+        damage: RUST_OWNERSHIP_THROW_DAMAGE,
+        guard_rule: GuardRule::Throw,
+        hit_reaction: RUST_OWNERSHIP_THROW_REACTION,
+        whiff_recovery: RUST_OWNERSHIP_THROW_WHIFF_RECOVERY,
+    },
+    MoveSpec {
         id: MoveId::DukeBoilerplatePoke,
         input: MoveInputKind::HeavyPunch,
         label: "Boilerplate",
@@ -449,6 +589,139 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 11] = [
         guard_rule: GuardRule::Mid,
         hit_reaction: HEAVY_ATTACK_REACTION,
         whiff_recovery: DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::DukeGarbageCollectorSweep,
+        input: MoveInputKind::Sweep,
+        label: "GC Sweep",
+        frames: AttackFrameData {
+            duration: FrameCount::new(38),
+            active_start: FrameCount::new(13),
+            active_end: FrameCount::new(22),
+        },
+        hitbox: HitboxSpec {
+            width: 128.0,
+            height: 32.0,
+            y_offset: 66.0,
+        },
+        damage: DUKE_GARBAGE_COLLECTOR_SWEEP_DAMAGE,
+        guard_rule: GuardRule::Low,
+        hit_reaction: DUKE_GARBAGE_COLLECTOR_SWEEP_REACTION,
+        whiff_recovery: DUKE_GARBAGE_COLLECTOR_SWEEP_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::DukeAbstractFactoryOverhead,
+        input: MoveInputKind::Overhead,
+        label: "Factory OH",
+        frames: AttackFrameData {
+            duration: FrameCount::new(40),
+            active_start: FrameCount::new(15),
+            active_end: FrameCount::new(22),
+        },
+        hitbox: HitboxSpec {
+            width: 96.0,
+            height: 54.0,
+            y_offset: 40.0,
+        },
+        damage: DUKE_ABSTRACT_FACTORY_OVERHEAD_DAMAGE,
+        guard_rule: GuardRule::High,
+        hit_reaction: DUKE_ABSTRACT_FACTORY_OVERHEAD_REACTION,
+        whiff_recovery: DUKE_ABSTRACT_FACTORY_OVERHEAD_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::DukeEnterpriseThrow,
+        input: MoveInputKind::Throw,
+        label: "Enterprise Grab",
+        frames: AttackFrameData {
+            duration: FrameCount::new(30),
+            active_start: FrameCount::new(9),
+            active_end: FrameCount::new(11),
+        },
+        hitbox: HitboxSpec {
+            width: 56.0,
+            height: 124.0,
+            y_offset: 28.0,
+        },
+        damage: DUKE_ENTERPRISE_THROW_DAMAGE,
+        guard_rule: GuardRule::Throw,
+        hit_reaction: DUKE_ENTERPRISE_THROW_REACTION,
+        whiff_recovery: DUKE_ENTERPRISE_THROW_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::GoGoroutineJab,
+        input: MoveInputKind::LightPunch,
+        label: "Goroutine Jab",
+        frames: AttackFrameData {
+            duration: FrameCount::new(14),
+            active_start: FrameCount::new(3),
+            active_end: FrameCount::new(7),
+        },
+        hitbox: HitboxSpec {
+            width: 42.0,
+            height: 30.0,
+            y_offset: 62.0,
+        },
+        damage: GO_GOROUTINE_JAB_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: GO_LIGHT_REACTION,
+        whiff_recovery: GO_GOROUTINE_JAB_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::GoDeferKick,
+        input: MoveInputKind::Kick,
+        label: "Defer Kick",
+        frames: AttackFrameData {
+            duration: FrameCount::new(23),
+            active_start: FrameCount::new(7),
+            active_end: FrameCount::new(13),
+        },
+        hitbox: HitboxSpec {
+            width: 86.0,
+            height: 34.0,
+            y_offset: 106.0,
+        },
+        damage: GO_DEFER_KICK_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: GO_KICK_REACTION,
+        whiff_recovery: GO_DEFER_KICK_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::GoChannelOverhead,
+        input: MoveInputKind::Overhead,
+        label: "Channel OH",
+        frames: AttackFrameData {
+            duration: FrameCount::new(28),
+            active_start: FrameCount::new(10),
+            active_end: FrameCount::new(15),
+        },
+        hitbox: HitboxSpec {
+            width: 70.0,
+            height: 48.0,
+            y_offset: 42.0,
+        },
+        damage: GO_CHANNEL_OVERHEAD_DAMAGE,
+        guard_rule: GuardRule::High,
+        hit_reaction: GO_OVERHEAD_REACTION,
+        whiff_recovery: GO_CHANNEL_OVERHEAD_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::GoHopkick,
+        input: MoveInputKind::AirKick,
+        label: "Hopkick",
+        frames: AttackFrameData {
+            duration: FrameCount::new(20),
+            active_start: FrameCount::new(5),
+            active_end: FrameCount::new(12),
+        },
+        hitbox: HitboxSpec {
+            width: 78.0,
+            height: 42.0,
+            y_offset: 88.0,
+        },
+        damage: GO_HOPKICK_DAMAGE,
+        guard_rule: GuardRule::High,
+        hit_reaction: GO_KICK_REACTION,
+        whiff_recovery: GO_HOPKICK_WHIFF_RECOVERY,
     },
 ];
 

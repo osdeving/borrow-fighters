@@ -8,26 +8,38 @@ use crate::combat::move_data::MoveId;
 
 const RUST_STATS: CharacterStats = CharacterStats { max_health: 100 };
 const DUKE_STATS: CharacterStats = CharacterStats { max_health: 112 };
+const GO_STATS: CharacterStats = CharacterStats { max_health: 92 };
 const RUST_MOVE_IDS: [MoveId; 9] = [
     MoveId::RustBorrowJab,
     MoveId::HeavyPunch,
     MoveId::Kick,
     MoveId::SweepKick,
     MoveId::OverheadPunch,
-    MoveId::RisingAntiAir,
+    MoveId::RustLifetimeAntiAir,
     MoveId::AirPunch,
     MoveId::AirKick,
-    MoveId::CloseThrow,
+    MoveId::RustOwnershipThrow,
 ];
 const DUKE_MOVE_IDS: [MoveId; 9] = [
     MoveId::LightPunch,
     MoveId::DukeBoilerplatePoke,
     MoveId::Kick,
-    MoveId::SweepKick,
-    MoveId::OverheadPunch,
+    MoveId::DukeGarbageCollectorSweep,
+    MoveId::DukeAbstractFactoryOverhead,
     MoveId::RisingAntiAir,
     MoveId::AirPunch,
     MoveId::AirKick,
+    MoveId::DukeEnterpriseThrow,
+];
+const GO_MOVE_IDS: [MoveId; 9] = [
+    MoveId::GoGoroutineJab,
+    MoveId::HeavyPunch,
+    MoveId::GoDeferKick,
+    MoveId::SweepKick,
+    MoveId::GoChannelOverhead,
+    MoveId::RisingAntiAir,
+    MoveId::AirPunch,
+    MoveId::GoHopkick,
     MoveId::CloseThrow,
 ];
 
@@ -37,6 +49,7 @@ pub enum CharacterId {
     #[default]
     Rust,
     Duke,
+    Go,
 }
 
 impl CharacterId {
@@ -45,6 +58,7 @@ impl CharacterId {
         match value {
             "rust" | "rustacean" => Some(Self::Rust),
             "duke" | "java" => Some(Self::Duke),
+            "go" | "golang" | "gopher" => Some(Self::Go),
             _ => None,
         }
     }
@@ -54,6 +68,7 @@ impl CharacterId {
         match self {
             Self::Rust => "rust",
             Self::Duke => "duke",
+            Self::Go => "go",
         }
     }
 
@@ -62,6 +77,7 @@ impl CharacterId {
         match value {
             "rust" => Some(Self::Rust),
             "duke" | "java" => Some(Self::Duke),
+            "go" | "golang" | "gopher" => Some(Self::Go),
             _ => None,
         }
     }
@@ -72,6 +88,7 @@ impl CharacterId {
 pub enum CharacterArchetype {
     AllRounder,
     MidrangePressure,
+    Rushdown,
 }
 
 /// Tunable character-level stats consumed by match setup.
@@ -109,6 +126,14 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             archetype: CharacterArchetype::MidrangePressure,
             stats: DUKE_STATS,
             move_ids: &DUKE_MOVE_IDS,
+        },
+        CharacterId::Go => CharacterSpec {
+            id,
+            display_name: "Go",
+            fighter_name: "Go",
+            archetype: CharacterArchetype::Rushdown,
+            stats: GO_STATS,
+            move_ids: &GO_MOVE_IDS,
         },
     }
 }

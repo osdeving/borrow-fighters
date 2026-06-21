@@ -10,7 +10,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Loop de jogo com fixed timestep.
 - Arenas bitmap placeholder `Sirius`, `Fortaleza Tech Coast` e `Java Street`.
 - Tela inicial de preferências com feature flags runtime.
-- Dois lutadores greybox: Rust e Java.
+- Dois lutadores greybox na luta padrão: Rust e Java.
 - Corpo composto por cabeça, tronco e pernas placeholder.
 - Spritesheet placeholder com poses de idle, andar, abaixar, pular, defender, socos e chute.
 - Movimento horizontal local.
@@ -24,6 +24,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Soco forte/longo.
 - Chute.
 - Varredura baixa, overhead, anti-air, agarrão curto e ataques aéreos.
+- Primeiro corte de identidade mecânica: Rust com respostas mais rápidas/curtas; Duke com ferramentas mais longas/pesadas e mais puníveis; Go como rushdown greybox testável no Combat Lab.
 - Fireball horizontal simples em velocidade legível.
 - CPU de playtest para um ou dois jogadores, com perfis diferentes e acoes variadas.
 - Opção para IA mover/defender sem dar golpes.
@@ -72,6 +73,7 @@ cargo run -- --lab combat --character rust --move light_punch
 cargo run -- --lab combat --character duke --move projectile
 cargo run -- --lab combat --character rust --move sweep
 cargo run -- --lab combat --character duke --move anti-air
+cargo run -- --lab combat --character go --move kick
 ```
 
 Para abrir uma pose estática:
@@ -79,6 +81,7 @@ Para abrir uma pose estática:
 ```bash
 cargo run -- --lab combat --character rust --pose crouch
 cargo run -- --lab combat --character duke --pose victory
+cargo run -- --lab combat --character go --pose jump
 ```
 
 No Combat Lab, `Tab` / `Shift+Tab` alterna golpes, `PageDown` / `PageUp` alterna poses, `Enter` reinicia, `Espaço` pausa, `.` avança um frame quando pausado, `Home` volta ao frame 0, `H` alterna hurtbox, `B` alterna hitbox, `P` alterna pivot/eixos, `D` alterna dummy e `A` alterna o fundo de arena.
@@ -166,19 +169,22 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 12. Abaixar deve reduzir a hurtbox visualmente.
 13. Fireball deve andar horizontalmente em velocidade legível e causar dano ao acertar.
 14. A CPU do Player 2 deve variar aproximação, afastamento, pulo, socos, chutes, varredura, overhead, anti-air, agarrão curto, ataque aéreo, defesa e fireballs.
-15. A tela de preferências deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
-16. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
-17. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
-18. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Rust.
-19. A opção `Player 2 recebe dano` desligada deve impedir perda de vida do Java.
-20. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
-21. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
-22. `R` ou `Menu` deve reiniciar a partida.
-23. `Esc` durante a luta deve voltar para a tela de preferências.
-24. Pulo com direção pressionada deve sair em diagonal.
-25. A vida deve chegar a zero e encerrar a luta.
-26. Ao fim da luta, o cenário deve avançar uma vez no ciclo `Sirius -> Fortaleza Tech Coast -> Java Street -> Sirius`.
-27. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
+15. Rust deve parecer mais responsivo em anti-air e throw.
+16. Duke deve controlar mais espaço com sweep, overhead e poke, mas ficar mais exposto quando erra.
+17. Go no Combat Lab deve parecer mais rápido e curto que os golpes genéricos equivalentes, pagando com menos vida.
+18. A tela de preferências deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
+19. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
+20. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
+21. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Rust.
+22. A opção `Player 2 recebe dano` desligada deve impedir perda de vida do Java.
+23. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
+24. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
+25. `R` ou `Menu` deve reiniciar a partida.
+26. `Esc` durante a luta deve voltar para a tela de preferências.
+27. Pulo com direção pressionada deve sair em diagonal.
+28. A vida deve chegar a zero e encerrar a luta.
+29. Ao iniciar a próxima luta depois de uma vitória, o cenário deve avançar uma vez no ciclo `Sirius -> Fortaleza Tech Coast -> Java Street -> Sirius`.
+30. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
 
 ## Combat Lab
 
@@ -189,6 +195,7 @@ cargo run -- --lab combat --character rust --move light_punch
 cargo run -- --lab combat --character duke --move projectile
 cargo run -- --lab combat --character rust --move overhead
 cargo run -- --lab combat --character duke --move throw
+cargo run -- --lab combat --character go --move light_punch
 ```
 
 Use o Combat Lab para verificar:
@@ -220,7 +227,8 @@ Controles do lab:
 
 ## Limitações conhecidas
 
-- Os dois personagens ainda compartilham a maior parte do kit; Rust e Duke têm apenas primeiros ajustes específicos.
+- A luta padrão ainda abre Rust x Java/Duke; Go existe como personagem greybox de dados no Combat Lab e ainda usa o spritesheet greybox genérico com cor própria.
+- Rust e Duke ainda compartilham parte do kit genérico; o contraste principal já aparece em jab, heavy, anti-air, sweep, overhead e throw.
 - As arenas bitmap são placeholders gerados/derivados de referências e não devem ser tratadas como arte final.
 - O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.
 - Fireball no gamepad usa `RB` por enquanto; `RT` pode entrar depois quando tivermos leitura de gatilho com borda de pressionamento.

@@ -19,10 +19,10 @@ fn rust_spec_points_to_current_prototype_moves() {
             MoveId::Kick,
             MoveId::SweepKick,
             MoveId::OverheadPunch,
-            MoveId::RisingAntiAir,
+            MoveId::RustLifetimeAntiAir,
             MoveId::AirPunch,
             MoveId::AirKick,
-            MoveId::CloseThrow,
+            MoveId::RustOwnershipThrow,
         ]
     );
 }
@@ -41,11 +41,35 @@ fn duke_spec_points_to_current_prototype_moves() {
             MoveId::LightPunch,
             MoveId::DukeBoilerplatePoke,
             MoveId::Kick,
-            MoveId::SweepKick,
-            MoveId::OverheadPunch,
+            MoveId::DukeGarbageCollectorSweep,
+            MoveId::DukeAbstractFactoryOverhead,
             MoveId::RisingAntiAir,
             MoveId::AirPunch,
             MoveId::AirKick,
+            MoveId::DukeEnterpriseThrow,
+        ]
+    );
+}
+
+#[test]
+fn go_spec_points_to_current_prototype_moves() {
+    let go = character_spec(CharacterId::Go);
+
+    assert_eq!(go.display_name, "Go");
+    assert_eq!(go.fighter_name, "Go");
+    assert_eq!(go.archetype, CharacterArchetype::Rushdown);
+    assert_eq!(go.stats.max_health, 92);
+    assert_eq!(
+        go.move_ids,
+        &[
+            MoveId::GoGoroutineJab,
+            MoveId::HeavyPunch,
+            MoveId::GoDeferKick,
+            MoveId::SweepKick,
+            MoveId::GoChannelOverhead,
+            MoveId::RisingAntiAir,
+            MoveId::AirPunch,
+            MoveId::GoHopkick,
             MoveId::CloseThrow,
         ]
     );
@@ -57,5 +81,8 @@ fn character_cli_aliases_are_stable() {
     assert_eq!(CharacterId::from_cli("rustacean"), Some(CharacterId::Rust));
     assert_eq!(CharacterId::from_cli("duke"), Some(CharacterId::Duke));
     assert_eq!(CharacterId::from_cli("java"), Some(CharacterId::Duke));
-    assert_eq!(CharacterId::from_cli("go"), None);
+    assert_eq!(CharacterId::from_cli("go"), Some(CharacterId::Go));
+    assert_eq!(CharacterId::from_cli("golang"), Some(CharacterId::Go));
+    assert_eq!(CharacterId::from_cli("gopher"), Some(CharacterId::Go));
+    assert_eq!(CharacterId::from_audio_key("go"), Some(CharacterId::Go));
 }

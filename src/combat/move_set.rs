@@ -11,14 +11,25 @@ use crate::math::rect::Rect;
 pub use super::move_data::{
     AIR_ATTACK_REACTION, AIR_ATTACK_WHIFF_RECOVERY, AIR_KICK_DAMAGE, AIR_PUNCH_DAMAGE,
     AttackFrameData, CLOSE_THROW_DAMAGE, CLOSE_THROW_REACTION, CLOSE_THROW_WHIFF_RECOVERY,
-    DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_BOILERPLATE_POKE_DAMAGE,
-    DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY, GuardRule, HEAVY_ATTACK_REACTION,
-    HEAVY_ATTACK_WHIFF_RECOVERY, HEAVY_PUNCH_DAMAGE, HitReaction, KICK_DAMAGE, KICK_REACTION,
-    KICK_WHIFF_RECOVERY, LIGHT_ATTACK_REACTION, LIGHT_ATTACK_WHIFF_RECOVERY, LIGHT_PUNCH_DAMAGE,
-    MoveId, MoveInputKind, MoveSpec, OVERHEAD_PUNCH_DAMAGE, OVERHEAD_PUNCH_WHIFF_RECOVERY,
-    OVERHEAD_REACTION, RISING_ANTI_AIR_DAMAGE, RISING_ANTI_AIR_REACTION,
-    RISING_ANTI_AIR_WHIFF_RECOVERY, RUST_BORROW_JAB_DAMAGE, RUST_BORROW_JAB_WHIFF_RECOVERY,
-    SWEEP_KICK_DAMAGE, SWEEP_KICK_WHIFF_RECOVERY, SWEEP_REACTION, move_spec, move_spec_for_input,
+    DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_ABSTRACT_FACTORY_OVERHEAD_DAMAGE,
+    DUKE_ABSTRACT_FACTORY_OVERHEAD_REACTION, DUKE_ABSTRACT_FACTORY_OVERHEAD_WHIFF_RECOVERY,
+    DUKE_BOILERPLATE_POKE_DAMAGE, DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY,
+    DUKE_ENTERPRISE_THROW_DAMAGE, DUKE_ENTERPRISE_THROW_REACTION,
+    DUKE_ENTERPRISE_THROW_WHIFF_RECOVERY, DUKE_GARBAGE_COLLECTOR_SWEEP_DAMAGE,
+    DUKE_GARBAGE_COLLECTOR_SWEEP_REACTION, DUKE_GARBAGE_COLLECTOR_SWEEP_WHIFF_RECOVERY,
+    GO_CHANNEL_OVERHEAD_DAMAGE, GO_CHANNEL_OVERHEAD_WHIFF_RECOVERY, GO_DEFER_KICK_DAMAGE,
+    GO_DEFER_KICK_WHIFF_RECOVERY, GO_GOROUTINE_JAB_DAMAGE, GO_GOROUTINE_JAB_WHIFF_RECOVERY,
+    GO_HOPKICK_DAMAGE, GO_HOPKICK_WHIFF_RECOVERY, GO_KICK_REACTION, GO_LIGHT_REACTION,
+    GO_OVERHEAD_REACTION, GuardRule, HEAVY_ATTACK_REACTION, HEAVY_ATTACK_WHIFF_RECOVERY,
+    HEAVY_PUNCH_DAMAGE, HitReaction, KICK_DAMAGE, KICK_REACTION, KICK_WHIFF_RECOVERY,
+    LIGHT_ATTACK_REACTION, LIGHT_ATTACK_WHIFF_RECOVERY, LIGHT_PUNCH_DAMAGE, MoveId, MoveInputKind,
+    MoveSpec, OVERHEAD_PUNCH_DAMAGE, OVERHEAD_PUNCH_WHIFF_RECOVERY, OVERHEAD_REACTION,
+    RISING_ANTI_AIR_DAMAGE, RISING_ANTI_AIR_REACTION, RISING_ANTI_AIR_WHIFF_RECOVERY,
+    RUST_BORROW_JAB_DAMAGE, RUST_BORROW_JAB_WHIFF_RECOVERY, RUST_LIFETIME_ANTI_AIR_DAMAGE,
+    RUST_LIFETIME_ANTI_AIR_REACTION, RUST_LIFETIME_ANTI_AIR_WHIFF_RECOVERY,
+    RUST_OWNERSHIP_THROW_DAMAGE, RUST_OWNERSHIP_THROW_REACTION,
+    RUST_OWNERSHIP_THROW_WHIFF_RECOVERY, SWEEP_KICK_DAMAGE, SWEEP_KICK_WHIFF_RECOVERY,
+    SWEEP_REACTION, move_spec, move_spec_for_input,
 };
 
 /// Close-range attacks available in the greybox prototype.
@@ -50,15 +61,19 @@ impl AttackKind {
     /// Returns the runtime attack kind represented by a stable move id.
     pub const fn from_move_id(id: MoveId) -> Self {
         match id {
-            MoveId::LightPunch | MoveId::RustBorrowJab => Self::LightPunch,
+            MoveId::LightPunch | MoveId::RustBorrowJab | MoveId::GoGoroutineJab => Self::LightPunch,
             MoveId::HeavyPunch | MoveId::DukeBoilerplatePoke => Self::HeavyPunch,
-            MoveId::Kick => Self::Kick,
-            MoveId::SweepKick => Self::Sweep,
-            MoveId::OverheadPunch => Self::Overhead,
-            MoveId::RisingAntiAir => Self::AntiAir,
+            MoveId::Kick | MoveId::GoDeferKick => Self::Kick,
+            MoveId::SweepKick | MoveId::DukeGarbageCollectorSweep => Self::Sweep,
+            MoveId::OverheadPunch
+            | MoveId::DukeAbstractFactoryOverhead
+            | MoveId::GoChannelOverhead => Self::Overhead,
+            MoveId::RisingAntiAir | MoveId::RustLifetimeAntiAir => Self::AntiAir,
             MoveId::AirPunch => Self::AirPunch,
-            MoveId::AirKick => Self::AirKick,
-            MoveId::CloseThrow => Self::Throw,
+            MoveId::AirKick | MoveId::GoHopkick => Self::AirKick,
+            MoveId::CloseThrow | MoveId::RustOwnershipThrow | MoveId::DukeEnterpriseThrow => {
+                Self::Throw
+            }
         }
     }
 

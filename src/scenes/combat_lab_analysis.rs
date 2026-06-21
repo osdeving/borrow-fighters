@@ -230,6 +230,7 @@ fn dummy_fighter_for(attacker_character: CharacterId) -> Fighter {
     let character = match attacker_character {
         CharacterId::Rust => CharacterId::Duke,
         CharacterId::Duke => CharacterId::Rust,
+        CharacterId::Go => CharacterId::Duke,
     };
     let spec = character_spec(character);
     Fighter::new_with_loadout(

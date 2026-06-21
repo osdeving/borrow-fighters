@@ -15,7 +15,7 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Move runtime | Enum runtime `AttackKind` e compatibilidade com `MoveSpec` | [`src/combat/move_set.rs`](../src/combat/move_set.rs) | [`tests/move_data.rs`](../tests/move_data.rs) |
 | Projectile | Projétil horizontal, dano, guard rule, hit reaction, velocidade, spawn e timing do especial | [`src/combat/projectile.rs`](../src/combat/projectile.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs) |
 | Collision | Interseção simples de retângulos | [`src/combat/collision.rs`](../src/combat/collision.rs), [`src/math/rect.rs`](../src/math/rect.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
-| Character data | Registro de personagens e listas de golpes | [`src/characters/mod.rs`](../src/characters/mod.rs) | [`tests/characters.rs`](../tests/characters.rs) |
+| Character data | Registro de personagens, listas de golpes e identidade de loadout | [`src/characters/mod.rs`](../src/characters/mod.rs) | [`tests/characters.rs`](../tests/characters.rs), [`tests/character_identity_tuning.rs`](../tests/character_identity_tuning.rs) |
 | Match runtime | Instancia lutadores a partir de personagens, bloqueia intro/contagem, resolve hits, projéteis e vitória | [`src/game/world.rs`](../src/game/world.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
 | CPU playtest | Heurística determinística para mover, defender e exercitar golpes básicos/tradicionais | [`src/game/ai.rs`](../src/game/ai.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/cpu_traditional_moves.rs`](../tests/cpu_traditional_moves.rs) |
 | Arena runtime | Identidade e rotação de arenas do protótipo | [`src/game/arena.rs`](../src/game/arena.rs) | [`tests/arena_rotation.rs`](../tests/arena_rotation.rs) |
@@ -80,10 +80,10 @@ Golpes jogáveis atuais usam essas regras assim:
 
 | Golpe | Regra | Resposta mínima |
 |---|---|---|
-| `LightPunch`, `HeavyPunch`, `Kick`, `RustBorrowJab`, `DukeBoilerplatePoke`, `RisingAntiAir` | `Mid` | defender, espaçar, punir whiff |
-| `SweepKick` | `Low` | defender abaixado, pular, ficar fora do alcance |
-| `OverheadPunch`, `AirPunch`, `AirKick` | `High` | defender em pé, andar fora, anti-air contra salto |
-| `CloseThrow` | `Throw` | sair do alcance, pular, interromper startup |
+| `LightPunch`, `HeavyPunch`, `Kick`, `RustBorrowJab`, `RustLifetimeAntiAir`, `DukeBoilerplatePoke`, `GoGoroutineJab`, `GoDeferKick`, `RisingAntiAir` | `Mid` | defender, espaçar, punir whiff |
+| `SweepKick`, `DukeGarbageCollectorSweep` | `Low` | defender abaixado, pular, ficar fora do alcance |
+| `OverheadPunch`, `DukeAbstractFactoryOverhead`, `GoChannelOverhead`, `AirPunch`, `AirKick`, `GoHopkick` | `High` | defender em pé, andar fora, anti-air contra salto |
+| `CloseThrow`, `RustOwnershipThrow`, `DukeEnterpriseThrow` | `Throw` | sair do alcance, pular, interromper startup |
 | Projectile | `Projectile` | defender, pular, aproximar durante cooldown |
 
 `HitReaction` contém `hitstun`, `blockstun`, `hit_pushback` e `block_pushback`. Ao receber um hit, [`Fighter::take_hit`](../src/combat/fighter.rs) calcula se a defesa bloqueia aquele `GuardRule`, aplica dano reduzido quando bloqueado, liga o timer correspondente e retorna um `DamageResult` com dano, bloqueio e pushback:
@@ -109,7 +109,16 @@ Os golpes próximos atuais estão em [`src/combat/move_data.rs`](../src/combat/m
 - `AirKick`
 - `CloseThrow`
 - `RustBorrowJab`
+- `RustLifetimeAntiAir`
+- `RustOwnershipThrow`
 - `DukeBoilerplatePoke`
+- `DukeGarbageCollectorSweep`
+- `DukeAbstractFactoryOverhead`
+- `DukeEnterpriseThrow`
+- `GoGoroutineJab`
+- `GoDeferKick`
+- `GoChannelOverhead`
+- `GoHopkick`
 
 `DEFAULT_CLOSE_RANGE_MOVE_IDS` define a lista padrão genérica usada por construtores e testes que não selecionam personagem. `CharacterSpec.move_ids` define o loadout real de cada personagem.
 
@@ -186,7 +195,9 @@ Personagens ficam em [`src/characters/mod.rs`](../src/characters/mod.rs). Cada `
 - `stats.max_health`: vida máxima usada na criação do `Fighter`;
 - `move_ids`: golpes próximos disponíveis no loadout.
 
-Hoje `Rust` usa `RustBorrowJab` no soco fraco: startup menor, alcance menor e dano menor para funcionar como checagem rápida. `Duke` usa `DukeBoilerplatePoke` no soco forte: alcance e dano maiores, com startup/recovery mais longos para reforçar midrange pesado e punição em whiff. Os demais golpes tradicionais ainda são genéricos no loadout dos dois personagens: `Kick`, `SweepKick`, `OverheadPunch`, `RisingAntiAir`, `AirPunch`, `AirKick` e `CloseThrow`. O `World` cria lutadores via `World::new_with_characters`, consumindo `CharacterSpec` para nome, vida e loadout. O Combat Lab usa o mesmo caminho para testar personagem isolado.
+Hoje `Rust` usa `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` para reforçar leitura técnica: golpes mais rápidos, menores e menos danosos. `Duke` usa `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` para reforçar midrange pressure: mais alcance/dano, startup maior e whiff mais punível. `Go` usa `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead` e `GoHopkick` para validar rushdown em greybox: menos vida, ações mais rápidas e alcance menor. `World::new_with_characters` já aceita qualquer `CharacterId`, mas a luta padrão ainda instancia Rust x Duke; o Combat Lab é o caminho atual para testar Go isolado.
+
+A intenção de gameplay por golpe vive em [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md). Atualize essa matriz quando alterar frame data, alcance, dano, guard rule ou loadout de personagem.
 
 ### Combat Lab
 
@@ -197,6 +208,8 @@ cargo run -- --lab combat --character rust --move light_punch
 cargo run -- --lab combat --character duke --move projectile
 cargo run -- --lab combat --character rust --move sweep
 cargo run -- --lab combat --character duke --move throw
+cargo run -- --lab combat --character go --move kick
+cargo run -- --lab combat --character go --move air_kick
 cargo run -- --lab combat --character rust --pose block
 cargo run -- --lab combat --character duke --pose victory
 ```
@@ -205,7 +218,7 @@ Valores aceitos:
 
 | Flag | Valores |
 |---|---|
-| `--character` | `rust`, `rustacean`, `duke`, `java` |
+| `--character` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |
 | `--move` | `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`, `projectile` |
 | `--pose` | `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory` |
 

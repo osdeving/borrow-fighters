@@ -9,6 +9,7 @@ mod combat_lab;
 
 pub use combat_lab::draw_combat_lab;
 
+use crate::characters::CharacterId;
 use crate::combat::fighter::{AttackPhase, Facing, PlayerSlot};
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
 use crate::engine::assets::{GameAssets, SpriteAtlasAsset};
@@ -23,6 +24,7 @@ const BACKGROUND: Color = Color::new(18, 20, 26, 255);
 const FLOOR: Color = Color::new(72, 76, 88, 255);
 const PLAYER_ONE: Color = Color::new(112, 181, 255, 255);
 const PLAYER_TWO: Color = Color::new(255, 178, 104, 255);
+const PLAYER_GO: Color = Color::new(96, 220, 190, 255);
 const BODY_OUTLINE: Color = Color::new(238, 241, 247, 255);
 const HURTBOX: Color = Color::new(105, 240, 174, 255);
 const HITBOX: Color = Color::new(255, 82, 82, 255);
@@ -62,36 +64,32 @@ pub fn draw_fight(
     draw_arena(draw, assets.arenas.get(arena));
     let show_debug = flags.enabled(FeatureFlag::ShowCombatDebug);
     let spawn_intro = world.spawn_intro_active();
+    let player_one_visuals = character_visuals(world.player_one_character(), assets);
+    let player_two_visuals = character_visuals(world.player_two_character(), assets);
 
-    draw_projectiles(
-        draw,
-        world,
-        show_debug,
-        assets.rust_projectile.as_ref(),
-        assets.duke_projectile.as_ref(),
-    );
+    draw_projectiles(draw, world, show_debug, assets);
     draw_fighter(
         draw,
         &world.player_one,
         FighterDrawOptions {
-            body_color: PLAYER_ONE,
+            body_color: player_one_visuals.body_color,
             show_debug,
             sprite_atlas: fighter_atlas_for_intro(
                 spawn_intro,
-                assets.rust_start.as_ref(),
-                assets.rust_fighter.as_ref(),
+                player_one_visuals.start_atlas,
+                player_one_visuals.fight_atlas,
             ),
             spritesheet: assets.fighter_spritesheet.as_ref(),
             world_elapsed_seconds: fighter_visual_elapsed_seconds(
                 world,
                 spawn_intro,
-                assets.rust_start.is_some(),
+                player_one_visuals.start_atlas.is_some(),
             ),
             forced_clip: forced_fighter_clip(
                 world,
                 PlayerSlot::One,
                 spawn_intro,
-                assets.rust_start.is_some(),
+                player_one_visuals.start_atlas.is_some(),
             ),
         },
     );
@@ -99,24 +97,24 @@ pub fn draw_fight(
         draw,
         &world.player_two,
         FighterDrawOptions {
-            body_color: PLAYER_TWO,
+            body_color: player_two_visuals.body_color,
             show_debug,
             sprite_atlas: fighter_atlas_for_intro(
                 spawn_intro,
-                assets.duke_start.as_ref(),
-                assets.duke_fighter.as_ref(),
+                player_two_visuals.start_atlas,
+                player_two_visuals.fight_atlas,
             ),
             spritesheet: assets.fighter_spritesheet.as_ref(),
             world_elapsed_seconds: fighter_visual_elapsed_seconds(
                 world,
                 spawn_intro,
-                assets.duke_start.is_some(),
+                player_two_visuals.start_atlas.is_some(),
             ),
             forced_clip: forced_fighter_clip(
                 world,
                 PlayerSlot::Two,
                 spawn_intro,
-                assets.duke_start.is_some(),
+                player_two_visuals.start_atlas.is_some(),
             ),
         },
     );
@@ -486,6 +484,36 @@ struct FighterDrawOptions<'a> {
     forced_clip: Option<sprites::FighterSpriteClip>,
 }
 
+struct CharacterVisuals<'a> {
+    body_color: Color,
+    fight_atlas: Option<&'a SpriteAtlasAsset>,
+    start_atlas: Option<&'a SpriteAtlasAsset>,
+    projectile_texture: Option<&'a Texture2D>,
+}
+
+fn character_visuals<'a>(character: CharacterId, assets: &'a GameAssets) -> CharacterVisuals<'a> {
+    match character {
+        CharacterId::Rust => CharacterVisuals {
+            body_color: PLAYER_ONE,
+            fight_atlas: assets.rust_fighter.as_ref(),
+            start_atlas: assets.rust_start.as_ref(),
+            projectile_texture: assets.rust_projectile.as_ref(),
+        },
+        CharacterId::Duke => CharacterVisuals {
+            body_color: PLAYER_TWO,
+            fight_atlas: assets.duke_fighter.as_ref(),
+            start_atlas: assets.duke_start.as_ref(),
+            projectile_texture: assets.duke_projectile.as_ref(),
+        },
+        CharacterId::Go => CharacterVisuals {
+            body_color: PLAYER_GO,
+            fight_atlas: None,
+            start_atlas: None,
+            projectile_texture: None,
+        },
+    }
+}
+
 fn draw_hud(
     draw: &mut RaylibDrawHandle<'_>,
     world: &World,
@@ -683,15 +711,13 @@ fn draw_projectiles(
     draw: &mut RaylibDrawHandle<'_>,
     world: &World,
     show_debug: bool,
-    rust_projectile: Option<&Texture2D>,
-    duke_projectile: Option<&Texture2D>,
+    assets: &GameAssets,
 ) {
     for projectile in &world.projectiles {
         let rect = projectile.rect();
-        let projectile_texture = match projectile.owner {
-            PlayerSlot::One => rust_projectile,
-            PlayerSlot::Two => duke_projectile,
-        };
+        let projectile_texture =
+            character_visuals(world.character_for_slot(projectile.owner), assets)
+                .projectile_texture;
         if let Some(texture) = projectile_texture {
             let facing = if projectile.velocity.x < 0.0 {
                 Facing::Left
