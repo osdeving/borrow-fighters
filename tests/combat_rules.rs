@@ -413,6 +413,20 @@ fn basic_cpu_can_drive_player_one_toward_player_two() {
 }
 
 #[test]
+fn cpu_slots_use_different_opening_profiles() {
+    let world = World::new_greybox();
+    let mut player_one_cpu = BasicCpu::for_slot(world.player_one.slot);
+    let mut player_two_cpu = BasicCpu::for_slot(world.player_two.slot);
+
+    let player_one = player_one_cpu.next_input(&world, world.player_one.slot, DT);
+    let player_two = player_two_cpu.next_input(&world, world.player_two.slot, DT);
+
+    assert_ne!(player_one.jump, player_two.jump);
+    assert!(player_one.right);
+    assert!(player_two.left);
+}
+
+#[test]
 fn basic_cpu_attacks_when_close() {
     let mut world = World::new_greybox();
     world.player_one.position.x = 520.0;
@@ -466,8 +480,62 @@ fn player_one_cpu_blocks_incoming_projectile() {
     assert!(!input.kick);
 }
 
+#[test]
+fn basic_cpu_varies_movement_attacks_projectiles_and_defense() {
+    let mut world = World::new_greybox();
+    let mut cpu = BasicCpu::for_slot(world.player_two.slot);
+    let mut seen = CpuActionSet::default();
+
+    world.player_one.position.x = 340.0;
+    world.player_two.position.x = 650.0;
+    for _ in 0..180 {
+        seen.observe(cpu.next_input(&world, world.player_two.slot, DT));
+    }
+
+    world.player_one.position.x = 520.0;
+    world.player_two.position.x = 580.0;
+    for _ in 0..180 {
+        seen.observe(cpu.next_input(&world, world.player_two.slot, DT));
+    }
+
+    world
+        .projectiles
+        .push(borrow_fighters::combat::projectile::Projectile::from_fighter(&world.player_one));
+    for _ in 0..20 {
+        seen.observe(cpu.next_input(&world, world.player_two.slot, DT));
+    }
+
+    assert!(seen.moved, "CPU should walk or reposition");
+    assert!(seen.jumped, "CPU should sometimes jump");
+    assert!(seen.close_attack, "CPU should use close attacks");
+    assert!(
+        seen.projectile,
+        "CPU should sometimes use special/projectile"
+    );
+    assert!(seen.defense, "CPU should sometimes block, crouch, or evade");
+}
+
 fn cpu_is_attacking(input: FighterInput) -> bool {
     input.light_punch || input.heavy_punch || input.kick
+}
+
+#[derive(Default)]
+struct CpuActionSet {
+    moved: bool,
+    jumped: bool,
+    close_attack: bool,
+    projectile: bool,
+    defense: bool,
+}
+
+impl CpuActionSet {
+    fn observe(&mut self, input: FighterInput) {
+        self.moved |= input.left || input.right;
+        self.jumped |= input.jump;
+        self.close_attack |= cpu_is_attacking(input);
+        self.projectile |= input.projectile;
+        self.defense |= input.block || input.crouch;
+    }
 }
 
 fn assert_body_gap(world: &World) {

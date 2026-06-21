@@ -25,7 +25,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Soco forte/longo.
 - Chute.
 - Fireball horizontal simples em velocidade legível.
-- CPU simples e pouco agressiva para um ou dois jogadores.
+- CPU de playtest para um ou dois jogadores, com perfis diferentes e acoes variadas.
 - Opção para IA mover/defender sem dar golpes.
 - Opção para Player 1 não receber dano.
 - Movimento com aceleração/desaceleração.
@@ -70,7 +70,7 @@ O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navega
 |---|---|---|
 | Player 1 usa IA | Desligado | Rust deve ser controlado automaticamente quando ligado. |
 | Player 2 usa IA | Ligado | Java deve ser controlado automaticamente. |
-| IA pode dar golpes | Ligado | Quando desligado, lutadores controlados por IA devem se mover e defender, mas não atacar. |
+| IA pode dar golpes | Ligado | Quando desligado, lutadores controlados por IA devem andar, pular, afastar, aproximar e defender, mas não atacar. |
 | Player 1 recebe dano | Ligado | Quando desligado, Rust não deve perder vida ao ser acertado. |
 | Mostrar HUD | Ligado | Barras de vida e status no topo aparecem/desaparecem. |
 | Mostrar ajuda de controles | Desligado | Texto de controles no rodapé aparece/desaparece. |
@@ -94,6 +94,8 @@ O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navega
 | Reiniciar | `R` | `R` | `Menu` |
 
 O primeiro gamepad conectado controla o Player 1 quando a IA do Player 1 está desligada. O segundo gamepad controla o Player 2 quando a IA do Player 2 está desligada. O Player 2 começa em modo CPU; quando a CPU de um jogador está ligada, os comandos manuais daquele jogador são ignorados.
+
+Quando ambos os jogadores usam IA, Rust e Java usam perfis diferentes para evitar movimentos espelhados. Rust tende a preservar mais média distância e usar especial com mais frequência; Java tende a pressionar mais de perto. A IA decide em pequenos blocos de tempo e pode andar, afastar, pular, abaixar, bloquear, socar, chutar e soltar especial.
 
 O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um controle Bluetooth estiver pareado mas aparecer `OFF`, confirme se o sistema que executa `cargo run` expõe joystick/gamepad para o Raylib. Em WSL ou ambiente remoto, pode ser necessário testar no host nativo ou encaminhar o dispositivo.
 
@@ -127,7 +129,7 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 6. Defesa deve reduzir dano e mostrar feedback azul.
 7. Abaixar deve reduzir a hurtbox visualmente.
 8. Fireball deve andar horizontalmente em velocidade legível e causar dano ao acertar.
-9. A CPU do Player 2 deve se aproximar, hesitar antes de atacar e defender fireballs próximas.
+9. A CPU do Player 2 deve variar aproximação, afastamento, pulo, ataques, defesa e fireballs.
 10. A tela de preferências deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
 11. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
 12. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
@@ -147,7 +149,7 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 - O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.
 - Fireball no gamepad usa `RB` por enquanto; `RT` pode entrar depois quando tivermos leitura de gatilho com borda de pressionamento.
 - Defesa é um experimento mínimo: reduz dano, mas ainda não tem direção, high/low guard ou pushback.
-- A CPU é um sparring dummy determinístico: aproxima com cautela, ataca depois de delay, solta fireball em média distância e bloqueia projétil próximo.
+- A CPU é um sparring dummy determinístico: decide em pequenos blocos de tempo, usa perfis diferentes por slot, varia movimento/ataque/especial/defesa e reage a projéteis sem ser perfeita.
 - Não há combo, agarrão, especial avançado, hitstun real, knockback ou IA adaptativa.
 - Não há animação final, sprites, áudio, pausa ou IA avançada.
 - O balanceamento ainda não importa.

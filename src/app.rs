@@ -35,8 +35,8 @@ impl Default for App {
     fn default() -> Self {
         Self {
             world: World::new_greybox_with_intro(),
-            player_one_cpu: BasicCpu::default(),
-            player_two_cpu: BasicCpu::default(),
+            player_one_cpu: BasicCpu::for_slot(PlayerSlot::One),
+            player_two_cpu: BasicCpu::for_slot(PlayerSlot::Two),
             feature_flags: FeatureFlags::default(),
             scene: AppScene::Preferences,
             preferences_menu: PreferencesMenu::default(),
@@ -158,8 +158,8 @@ impl App {
 
     fn restart_match(&mut self) {
         self.world = World::new_greybox_with_intro();
-        self.player_one_cpu = BasicCpu::default();
-        self.player_two_cpu = BasicCpu::default();
+        self.player_one_cpu = BasicCpu::for_slot(PlayerSlot::One);
+        self.player_two_cpu = BasicCpu::for_slot(PlayerSlot::Two);
         self.accumulator = 0.0;
     }
 }
