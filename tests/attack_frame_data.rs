@@ -4,6 +4,7 @@ use borrow_fighters::combat::fighter::{
     AttackKind, AttackPhase, Fighter, FighterInput, PlayerSlot,
 };
 use borrow_fighters::combat::frame::FrameCount;
+use borrow_fighters::combat::projectile::PROJECTILE_FRAME_DATA;
 
 const DT: f32 = 1.0 / 60.0;
 
@@ -23,6 +24,51 @@ fn close_attacks_expose_integer_frame_data() {
     assert_eq!(kick.duration, FrameCount::new(28));
     assert_eq!(kick.active_start, FrameCount::new(9));
     assert_eq!(kick.active_end, FrameCount::new(16));
+}
+
+#[test]
+fn projectile_special_exposes_integer_frame_data() {
+    assert_eq!(PROJECTILE_FRAME_DATA.startup, FrameCount::ZERO);
+    assert_eq!(PROJECTILE_FRAME_DATA.spawn_frame, FrameCount::ZERO);
+    assert_eq!(PROJECTILE_FRAME_DATA.visual_duration, FrameCount::new(21));
+    assert_eq!(PROJECTILE_FRAME_DATA.cooldown, FrameCount::new(57));
+}
+
+#[test]
+fn projectile_special_uses_declared_frame_timers() {
+    let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 300.0);
+
+    fighter.mark_projectile_fired();
+
+    assert_eq!(fighter.special_elapsed_frames(), Some(FrameCount::ZERO));
+    assert_eq!(
+        fighter.projectile_cooldown_remaining_frames(),
+        FrameCount::new(57)
+    );
+    assert!(!fighter.can_fire_projectile());
+
+    for _ in 0..20 {
+        fighter.update(DT, FighterInput::default());
+    }
+
+    assert_eq!(fighter.special_elapsed_frames(), Some(FrameCount::new(20)));
+    assert_eq!(
+        fighter.projectile_cooldown_remaining_frames(),
+        FrameCount::new(37)
+    );
+
+    fighter.update(DT, FighterInput::default());
+    assert_eq!(fighter.special_elapsed_frames(), None);
+
+    for _ in 0..36 {
+        fighter.update(DT, FighterInput::default());
+    }
+
+    assert_eq!(
+        fighter.projectile_cooldown_remaining_frames(),
+        FrameCount::ZERO
+    );
+    assert!(fighter.can_fire_projectile());
 }
 
 #[test]

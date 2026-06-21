@@ -4,7 +4,7 @@
 
 Em implementação.
 
-Fase 1 iniciada na branch `gameplay/combat-improvement-plan`: golpes atuais já possuem frame data inteira e overlay de debug exibe frame/fase do ataque.
+Fase 1 concluída na branch `gameplay/combat-improvement-plan`: golpes atuais e projectile já possuem frame data inteira, testes e overlay de debug para leitura de fase/frame.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -330,7 +330,7 @@ BoxTimeline
 
 ### Fase 1 — Medição antes de balancear
 
-Status: **em andamento**.
+Status: **concluída**.
 
 Entregáveis:
 
@@ -339,12 +339,12 @@ Entregáveis:
 - [x] manter conversão clara com fixed timestep;
 - [x] testes para startup/active/recovery dos golpes atuais;
 - [x] overlay mostrando frame atual e fase;
-- [ ] incluir projectile na mesma tabela de frame data.
+- [x] incluir projectile na mesma tabela de frame data.
 
 Critério de aceite:
 
-- LP, HP e chute têm frame data visível e testada.
-- Projectile entra no aceite completo da fase antes de passar para Combat Lab.
+- LP, HP, chute e projectile têm frame data visível e testada.
+- Projectile registra spawn no frame 0, animação visual de 21 frames e cooldown de 57 frames como decisão provisória do Prototype 0.1.
 
 ### Fase 2 — Combat Lab
 
@@ -416,12 +416,11 @@ Critério de aceite:
 
 ## Backlog técnico imediato
 
-1. Criar ADR ou atualizar ADR 0003 quando `MoveSpec`/`CharacterSpec` virarem arquitetura aceita.
-2. Implementar `FrameCount` e testes de fase.
-3. Criar Combat Lab mínimo.
-4. Extrair dados de golpes atuais para tabela.
-5. Adicionar overlay de frame data.
-6. Só depois criar golpes novos.
+1. Criar Combat Lab mínimo.
+2. Extrair dados de golpes atuais para tabela.
+3. Criar ADR ou atualizar ADR 0003 quando `MoveSpec`/`CharacterSpec` virarem arquitetura aceita.
+4. Separar o overlay de combate para `src/ui/combat_debug.rs` se o Combat Lab aumentar a responsabilidade do renderer.
+5. Só depois criar golpes novos.
 
 ## Decisões pendentes
 

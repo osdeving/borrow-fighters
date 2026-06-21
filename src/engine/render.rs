@@ -391,6 +391,24 @@ fn draw_fighter(
     let label_y = (fighter.position.y - 22.0) as i32;
     draw.draw_text(fighter.name, label_x, label_y, 16, UI_TEXT);
 
+    if options.show_debug
+        && let Some(elapsed) = fighter.special_elapsed_frames()
+    {
+        let frame_data = fighter.projectile_frame_data();
+        let frame_text = format!(
+            "SPECIAL F{:02}/{:02}",
+            elapsed.get(),
+            frame_data.visual_duration.get()
+        );
+        let timing_text = format!(
+            "SPAWN {:02} CD {:02}",
+            frame_data.spawn_frame.get(),
+            fighter.projectile_cooldown_remaining_frames().get()
+        );
+        draw.draw_text(&frame_text, label_x, label_y - 24, 14, PROJECTILE);
+        draw.draw_text(&timing_text, label_x, label_y - 40, 12, UI_MUTED);
+    }
+
     if options.show_debug && phase != AttackPhase::Idle {
         let attack_label = fighter
             .attack_kind()

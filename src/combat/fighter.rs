@@ -7,6 +7,7 @@ use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y};
 use crate::math::{rect::Rect, vec2::Vec2};
 
 use super::frame::FrameCount;
+use super::projectile::{PROJECTILE_FRAME_DATA, ProjectileFrameData};
 pub use crate::combat::move_set::{
     ActiveAttack, AttackFrameData, AttackKind, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE,
 };
@@ -24,9 +25,8 @@ const DIAGONAL_JUMP_MIN_SPEED: f32 = 180.0;
 const JUMP_SPEED: f32 = -680.0;
 const GRAVITY: f32 = 1650.0;
 const MAX_FALL_SPEED: f32 = 920.0;
-const PROJECTILE_COOLDOWN: f32 = 0.95;
-const SPECIAL_ANIMATION_DURATION: f32 = 0.34;
 const BLOCK_DAMAGE_DIVISOR: i32 = 4;
+const TIMER_EPSILON: f32 = 0.0001;
 
 pub const BASIC_DAMAGE: i32 = LIGHT_PUNCH_DAMAGE;
 
@@ -135,8 +135,8 @@ impl Fighter {
             return;
         }
 
-        self.projectile_cooldown = (self.projectile_cooldown - dt).max(0.0);
-        self.special_visual_timer = (self.special_visual_timer - dt).max(0.0);
+        self.projectile_cooldown = tick_timer(self.projectile_cooldown, dt);
+        self.special_visual_timer = tick_timer(self.special_visual_timer, dt);
         self.crouching = input.crouch && self.grounded && self.attack.is_none();
         self.blocking = input.block && self.grounded && self.attack.is_none();
         self.update_horizontal_velocity(dt, input);
@@ -229,8 +229,8 @@ impl Fighter {
 
     /// Starts the projectile cooldown after firing.
     pub fn mark_projectile_fired(&mut self) {
-        self.projectile_cooldown = PROJECTILE_COOLDOWN;
-        self.special_visual_timer = SPECIAL_ANIMATION_DURATION;
+        self.projectile_cooldown = PROJECTILE_FRAME_DATA.cooldown.as_seconds();
+        self.special_visual_timer = PROJECTILE_FRAME_DATA.visual_duration.as_seconds();
     }
 
     /// Returns whether this fighter can currently deal a new close hit.
@@ -334,8 +334,25 @@ impl Fighter {
 
     /// Returns elapsed seconds for the current special animation.
     pub fn special_elapsed_seconds(&self) -> Option<f32> {
-        (self.special_visual_timer > 0.0)
-            .then_some(SPECIAL_ANIMATION_DURATION - self.special_visual_timer)
+        (self.special_visual_timer > 0.0).then_some(
+            PROJECTILE_FRAME_DATA.visual_duration.as_seconds() - self.special_visual_timer,
+        )
+    }
+
+    /// Returns elapsed whole frames for the current special animation.
+    pub fn special_elapsed_frames(&self) -> Option<FrameCount> {
+        self.special_elapsed_seconds()
+            .map(FrameCount::from_elapsed_seconds)
+    }
+
+    /// Returns whole-frame data for the projectile special.
+    pub fn projectile_frame_data(&self) -> ProjectileFrameData {
+        PROJECTILE_FRAME_DATA
+    }
+
+    /// Returns remaining cooldown for the projectile special in whole frames.
+    pub fn projectile_cooldown_remaining_frames(&self) -> FrameCount {
+        FrameCount::from_elapsed_seconds(self.projectile_cooldown)
     }
 
     /// Returns the current attack phase for debug rendering.
@@ -507,4 +524,9 @@ fn inset_rect(rect: Rect, amount: f32) -> Rect {
         (rect.width - amount * 2.0).max(1.0),
         (rect.height - amount * 2.0).max(1.0),
     )
+}
+
+fn tick_timer(timer: f32, dt: f32) -> f32 {
+    let next = timer - dt;
+    if next <= TIMER_EPSILON { 0.0 } else { next }
 }

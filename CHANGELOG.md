@@ -40,6 +40,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Amostra em vídeo sem áudio no README, com capa clicável e disclaimer de arte placeholder.
 - Roadmap técnico de combate com pesquisa, arquétipos, Combat Lab e plano de modularização.
 - Frame data inteira para golpes próximos atuais, com testes de startup/active/recovery e overlay de debug.
+- Frame data de projectile/special com spawn, duração visual e cooldown em frames.
 
 ### Em aberto
 
