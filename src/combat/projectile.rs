@@ -20,6 +20,8 @@ pub const PROJECTILE_DAMAGE: i32 = 8;
 pub const PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(16),
     blockstun: FrameCount::new(12),
+    hit_pushback: 30.0,
+    block_pushback: 24.0,
 };
 pub const PROJECTILE_GUARD_RULE: GuardRule = GuardRule::Projectile;
 

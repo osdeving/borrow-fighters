@@ -395,12 +395,12 @@ Entregáveis:
 - [x] bloquear strike/projétil conforme `GuardRule`, com `Throw` explicitamente não bloqueável;
 - [ ] whiff recovery explícito além da duração/recovery atual dos golpes;
 - [x] blockstun/hitstun inicial;
-- [ ] pushback simples.
+- [x] pushback simples para hit/block e projétil.
 
 Critério de aceite:
 
 - cada golpe forte tem pelo menos uma resposta documentada.
-- o corte atual já impede ação durante hitstun/blockstun, mas ainda precisa de pushback e tuning de vantagem.
+- o corte atual já impede ação durante hitstun/blockstun e aplica pushback, mas ainda precisa de tuning de vantagem e whiff recovery explícito.
 
 ### Fase 5 — Identidade dos personagens
 
@@ -430,7 +430,7 @@ Critério de aceite:
 
 ## Backlog técnico imediato
 
-1. Adicionar pushback simples para hit/block e medir vantagem visualmente.
+1. Medir vantagem visualmente no Combat Lab usando stun, recovery e distância após pushback.
 2. Decidir se `Low` entra já com algum golpe real ou se fica reservado para depois.
 3. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
 4. Só depois ampliar para novos personagens ou golpes especiais.

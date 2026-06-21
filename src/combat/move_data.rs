@@ -16,14 +16,20 @@ pub const DUKE_BOILERPLATE_POKE_DAMAGE: i32 = 18;
 pub const LIGHT_ATTACK_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(12),
     blockstun: FrameCount::new(8),
+    hit_pushback: 22.0,
+    block_pushback: 14.0,
 };
 pub const HEAVY_ATTACK_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(18),
     blockstun: FrameCount::new(12),
+    hit_pushback: 38.0,
+    block_pushback: 26.0,
 };
 pub const KICK_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(16),
     blockstun: FrameCount::new(10),
+    hit_pushback: 34.0,
+    block_pushback: 22.0,
 };
 
 /// Stable identifier for a close-range move.
@@ -85,11 +91,13 @@ impl GuardRule {
     }
 }
 
-/// Initial reaction frame counts applied on hit or block.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+/// Initial reaction applied on hit or block.
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct HitReaction {
     pub hitstun: FrameCount,
     pub blockstun: FrameCount,
+    pub hit_pushback: f32,
+    pub block_pushback: f32,
 }
 
 /// Whole-frame timing data for one close-range attack.

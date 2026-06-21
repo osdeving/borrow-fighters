@@ -34,6 +34,8 @@ fn move_specs_preserve_current_tuning_values() {
     assert_eq!(light.hitbox.y_offset, 62.0);
     assert_eq!(light.guard_rule, GuardRule::Mid);
     assert_eq!(light.hit_reaction, LIGHT_ATTACK_REACTION);
+    assert_eq!(light.hit_reaction.hit_pushback, 22.0);
+    assert_eq!(light.hit_reaction.block_pushback, 14.0);
 
     let heavy = move_spec(MoveId::HeavyPunch);
     assert_eq!(heavy.input, MoveInputKind::HeavyPunch);
@@ -47,6 +49,8 @@ fn move_specs_preserve_current_tuning_values() {
     assert_eq!(heavy.hitbox.y_offset, 58.0);
     assert_eq!(heavy.guard_rule, GuardRule::Mid);
     assert_eq!(heavy.hit_reaction, HEAVY_ATTACK_REACTION);
+    assert_eq!(heavy.hit_reaction.hit_pushback, 38.0);
+    assert_eq!(heavy.hit_reaction.block_pushback, 26.0);
 
     let kick = move_spec(MoveId::Kick);
     assert_eq!(kick.input, MoveInputKind::Kick);
@@ -60,6 +64,8 @@ fn move_specs_preserve_current_tuning_values() {
     assert_eq!(kick.hitbox.y_offset, 108.0);
     assert_eq!(kick.guard_rule, GuardRule::Mid);
     assert_eq!(kick.hit_reaction, KICK_REACTION);
+    assert_eq!(kick.hit_reaction.hit_pushback, 34.0);
+    assert_eq!(kick.hit_reaction.block_pushback, 22.0);
 }
 
 #[test]

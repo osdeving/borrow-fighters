@@ -74,10 +74,11 @@ pub struct FighterInput {
 }
 
 /// Result of applying a hit to a defender.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct DamageResult {
     pub damage: i32,
     pub blocked: bool,
+    pub pushback: f32,
 }
 
 /// Composed body or hurtbox pieces for debug drawing and collision checks.
@@ -259,11 +260,12 @@ impl Fighter {
             damage
         };
         self.take_damage(final_damage);
-        self.apply_hit_reaction(hit_reaction, blocked);
+        let pushback = self.apply_hit_reaction(hit_reaction, blocked);
 
         DamageResult {
             damage: final_damage,
             blocked,
+            pushback,
         }
     }
 
@@ -520,17 +522,18 @@ impl Fighter {
         }
     }
 
-    fn apply_hit_reaction(&mut self, hit_reaction: HitReaction, blocked: bool) {
+    fn apply_hit_reaction(&mut self, hit_reaction: HitReaction, blocked: bool) -> f32 {
         self.velocity.x = 0.0;
         if blocked {
             self.blocking = true;
             self.blockstun_timer = hit_reaction.blockstun.as_seconds();
-            return;
+            return hit_reaction.block_pushback;
         }
 
         self.attack = None;
         self.blocking = false;
         self.hitstun_timer = hit_reaction.hitstun.as_seconds();
+        hit_reaction.hit_pushback
     }
 
     fn is_reacting(&self) -> bool {

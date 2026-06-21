@@ -50,6 +50,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Overlay/debug do Combat Lab separado em `src/ui/combat_debug.rs` para reduzir responsabilidade do renderer.
 - Primeiros golpes próximos específicos por personagem: `RustBorrowJab` e `DukeBoilerplatePoke`, resolvidos por loadout sem mudar os controles.
 - Início da Fase 4 de combate com `GuardRule`, `HitReaction`, hitstun/blockstun inicial e debug visual de stun.
+- Pushback simples para hit, block e projétil, configurado por `HitReaction` e aplicado pelo runtime de luta.
 
 ### Em aberto
 

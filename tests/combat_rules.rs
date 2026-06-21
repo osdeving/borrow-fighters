@@ -166,6 +166,7 @@ fn guard_rule_controls_blockability_and_reaction() {
     let blocked = defender.take_hit(20, GuardRule::Mid, LIGHT_ATTACK_REACTION);
     assert_eq!(blocked.damage, 5);
     assert!(blocked.blocked);
+    assert_eq!(blocked.pushback, LIGHT_ATTACK_REACTION.block_pushback);
     assert!(defender.in_blockstun());
     assert!(!defender.in_hitstun());
 
@@ -182,6 +183,7 @@ fn guard_rule_controls_blockability_and_reaction() {
     let thrown = defender.take_hit(20, GuardRule::Throw, LIGHT_ATTACK_REACTION);
     assert_eq!(thrown.damage, 20);
     assert!(!thrown.blocked);
+    assert_eq!(thrown.pushback, LIGHT_ATTACK_REACTION.hit_pushback);
     assert!(defender.in_hitstun());
 }
 
@@ -264,9 +266,69 @@ fn projectile_guard_rule_blocks_like_a_projectile() {
 
     assert!(result.blocked);
     assert_eq!(result.damage, PROJECTILE_DAMAGE / 4);
+    assert_eq!(result.pushback, PROJECTILE_HIT_REACTION.block_pushback);
     assert_eq!(
         defender.blockstun_remaining_frames(),
         PROJECTILE_HIT_REACTION.blockstun
+    );
+}
+
+#[test]
+fn hit_and_block_pushback_move_defender_away_from_attacker() {
+    let mut hit_world = World::new_greybox();
+    hit_world.player_one.position.x = 380.0;
+    hit_world.player_two.position.x = 465.0;
+    let hit_start_x = hit_world.player_two.position.x;
+
+    hit_world.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    for _ in 0..20 {
+        hit_world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    let hit_delta = hit_world.player_two.position.x - hit_start_x;
+    assert!(hit_delta >= LIGHT_ATTACK_REACTION.hit_pushback);
+
+    let mut block_world = World::new_greybox();
+    block_world.player_one.position.x = 380.0;
+    block_world.player_two.position.x = 465.0;
+    let block_start_x = block_world.player_two.position.x;
+
+    block_world.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput {
+            block: true,
+            ..FighterInput::default()
+        },
+    );
+
+    for _ in 0..20 {
+        block_world.update(
+            DT,
+            FighterInput::default(),
+            FighterInput {
+                block: true,
+                ..FighterInput::default()
+            },
+        );
+    }
+
+    let block_delta = block_world.player_two.position.x - block_start_x;
+    assert!(block_delta >= LIGHT_ATTACK_REACTION.block_pushback);
+    assert!(
+        hit_delta > block_delta,
+        "hit pushback should be larger than block pushback"
     );
 }
 

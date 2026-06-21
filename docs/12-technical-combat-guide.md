@@ -63,13 +63,14 @@ O jogo usa fixed timestep de 60 FPS em [`src/config.rs`](../src/config.rs). A li
 - `GuardRule::Throw` já é explicitamente não bloqueável, mas ainda não existe golpe de throw jogável.
 - `Low` exige defesa com block + crouch, mas nenhum golpe baixo real foi ligado ainda.
 
-`HitReaction` contém `hitstun` e `blockstun` em frames. Ao receber um hit, [`Fighter::take_hit`](../src/combat/fighter.rs) calcula se a defesa bloqueia aquele `GuardRule`, aplica dano reduzido quando bloqueado e liga o timer correspondente:
+`HitReaction` contém `hitstun`, `blockstun`, `hit_pushback` e `block_pushback`. Ao receber um hit, [`Fighter::take_hit`](../src/combat/fighter.rs) calcula se a defesa bloqueia aquele `GuardRule`, aplica dano reduzido quando bloqueado, liga o timer correspondente e retorna um `DamageResult` com dano, bloqueio e pushback:
 
 - `hitstun_timer`: interrompe ataque atual, troca clip para `hit` e impede iniciar ação.
 - `blockstun_timer`: mantém o lutador em defesa e impede iniciar ação.
 - ambos são expostos para debug/testes por `hitstun_remaining_frames`, `blockstun_remaining_frames`, `in_hitstun` e `in_blockstun`.
+- `hit_pushback` e `block_pushback`: deslocamento horizontal em pixels aplicado ao defensor, com block pushback menor que hit pushback no tuning atual.
 
-O match runtime em [`src/game/world.rs`](../src/game/world.rs) passa `guard_rule` e `hit_reaction` de `ActiveAttack` ou `Projectile` para o defensor. Feature flags de dano ainda impedem dano e reação quando desativadas.
+O match runtime em [`src/game/world.rs`](../src/game/world.rs) passa `guard_rule` e `hit_reaction` de `ActiveAttack` ou `Projectile` para o defensor. O próprio `World` aplica o pushback, porque é ele quem sabe de qual lado está atacante, defensor e projétil. Depois do deslocamento, `Fighter::clamp_to_arena` mantém o defensor dentro da arena. Feature flags de dano ainda impedem dano, stun e pushback quando desativadas.
 
 ### Dados de Golpes
 

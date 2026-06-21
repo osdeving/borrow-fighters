@@ -227,6 +227,7 @@ impl World {
         let p2_attack = landed_attack(&self.player_two, &self.player_one);
 
         if let Some(attack) = p1_attack {
+            let pushback_direction = pushback_direction(&self.player_one, &self.player_two);
             let result = take_player_two_hit(
                 &mut self.player_two,
                 attack.damage,
@@ -234,6 +235,7 @@ impl World {
                 attack.hit_reaction,
                 flags,
             );
+            apply_pushback(&mut self.player_two, pushback_direction, result.pushback);
             self.player_one.mark_attack_hit();
             self.hit_effects.push(HitEffect::new(
                 self.player_two.hurtbox().center(),
@@ -243,6 +245,7 @@ impl World {
         }
 
         if let Some(attack) = p2_attack {
+            let pushback_direction = pushback_direction(&self.player_two, &self.player_one);
             let result = take_player_one_hit(
                 &mut self.player_one,
                 attack.damage,
@@ -250,6 +253,7 @@ impl World {
                 attack.hit_reaction,
                 flags,
             );
+            apply_pushback(&mut self.player_one, pushback_direction, result.pushback);
             self.player_two.mark_attack_hit();
             self.hit_effects.push(HitEffect::new(
                 self.player_one.hurtbox().center(),
@@ -294,6 +298,7 @@ impl World {
             let rect = projectile.rect();
             match projectile.owner {
                 PlayerSlot::One if projectile_hits_fighter(rect, &self.player_two) => {
+                    let pushback_direction = projectile_pushback_direction(projectile);
                     let result = take_player_two_hit(
                         &mut self.player_two,
                         projectile.damage,
@@ -301,6 +306,7 @@ impl World {
                         projectile.hit_reaction,
                         flags,
                     );
+                    apply_pushback(&mut self.player_two, pushback_direction, result.pushback);
                     projectile.alive = false;
                     self.hit_effects.push(HitEffect::new(
                         self.player_two.hurtbox().center(),
@@ -309,6 +315,7 @@ impl World {
                     ));
                 }
                 PlayerSlot::Two if projectile_hits_fighter(rect, &self.player_one) => {
+                    let pushback_direction = projectile_pushback_direction(projectile);
                     let result = take_player_one_hit(
                         &mut self.player_one,
                         projectile.damage,
@@ -316,6 +323,7 @@ impl World {
                         projectile.hit_reaction,
                         flags,
                     );
+                    apply_pushback(&mut self.player_one, pushback_direction, result.pushback);
                     projectile.alive = false;
                     self.hit_effects.push(HitEffect::new(
                         self.player_one.hurtbox().center(),
@@ -381,6 +389,31 @@ fn projectile_hits_fighter(projectile: Rect, fighter: &Fighter) -> bool {
         .any(|hurtbox| projectile.intersects(hurtbox))
 }
 
+fn pushback_direction(attacker: &Fighter, defender: &Fighter) -> f32 {
+    if attacker.body_rect().center_x() <= defender.body_rect().center_x() {
+        1.0
+    } else {
+        -1.0
+    }
+}
+
+fn projectile_pushback_direction(projectile: &Projectile) -> f32 {
+    if projectile.velocity.x >= 0.0 {
+        1.0
+    } else {
+        -1.0
+    }
+}
+
+fn apply_pushback(defender: &mut Fighter, direction: f32, amount: f32) {
+    if amount <= 0.0 {
+        return;
+    }
+
+    defender.position.x += direction * amount;
+    defender.clamp_to_arena();
+}
+
 fn take_player_one_hit(
     player_one: &mut Fighter,
     damage: i32,
@@ -394,6 +427,7 @@ fn take_player_one_hit(
         DamageResult {
             damage: 0,
             blocked: false,
+            pushback: 0.0,
         }
     }
 }
@@ -411,6 +445,7 @@ fn take_player_two_hit(
         DamageResult {
             damage: 0,
             blocked: false,
+            pushback: 0.0,
         }
     }
 }
