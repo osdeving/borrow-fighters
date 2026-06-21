@@ -253,6 +253,7 @@ Overlay mínimo:
 - fase: startup/active/recovery;
 - dano;
 - advantage estimado;
+- distância estimada após pushback;
 - hitbox ativa ou inativa;
 - pivot local e pivot em tela;
 - posição da mão/pé usada para projectile ou golpe.
@@ -396,11 +397,12 @@ Entregáveis:
 - [ ] whiff recovery explícito além da duração/recovery atual dos golpes;
 - [x] blockstun/hitstun inicial;
 - [x] pushback simples para hit/block e projétil.
+- [x] leitura de vantagem estimada no Combat Lab.
 
 Critério de aceite:
 
 - cada golpe forte tem pelo menos uma resposta documentada.
-- o corte atual já impede ação durante hitstun/blockstun e aplica pushback, mas ainda precisa de tuning de vantagem e whiff recovery explícito.
+- o corte atual já impede ação durante hitstun/blockstun, aplica pushback e mostra vantagem estimada no Combat Lab, mas ainda precisa de tuning de vantagem e whiff recovery explícito.
 
 ### Fase 5 — Identidade dos personagens
 
@@ -430,10 +432,11 @@ Critério de aceite:
 
 ## Backlog técnico imediato
 
-1. Medir vantagem visualmente no Combat Lab usando stun, recovery e distância após pushback.
+1. Usar a leitura de vantagem do Combat Lab para ajustar golpes seguros, puníveis e spacing.
 2. Decidir se `Low` entra já com algum golpe real ou se fica reservado para depois.
-3. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
-4. Só depois ampliar para novos personagens ou golpes especiais.
+3. Adicionar whiff recovery explícito para golpes que errarem fora do contato.
+4. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
+5. Só depois ampliar para novos personagens ou golpes especiais.
 
 ## Decisões pendentes
 

@@ -17,7 +17,8 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Collision | Interseção simples de retângulos | [`src/combat/collision.rs`](../src/combat/collision.rs), [`src/math/rect.rs`](../src/math/rect.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
 | Character data | Registro de personagens e listas de golpes | [`src/characters/mod.rs`](../src/characters/mod.rs) | [`tests/characters.rs`](../tests/characters.rs) |
 | Match runtime | Instancia lutadores a partir de personagens, resolve hits, projéteis e vitória | [`src/game/world.rs`](../src/game/world.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
-| Combat Lab state | Cena isolada para playback de golpes, pause e frame step | [`src/scenes/combat_lab.rs`](../src/scenes/combat_lab.rs) | [`tests/combat_lab.rs`](../tests/combat_lab.rs) |
+| Combat Lab state | Cena isolada para playback de golpes, pause, frame step e leitura de vantagem | [`src/scenes/combat_lab.rs`](../src/scenes/combat_lab.rs) | [`tests/combat_lab.rs`](../tests/combat_lab.rs) |
+| Combat Lab analysis | Cálculo de vantagem estimada, pushback e dummy de contato | [`src/scenes/combat_lab_analysis.rs`](../src/scenes/combat_lab_analysis.rs) | [`tests/combat_lab.rs`](../tests/combat_lab.rs) |
 | Combat Lab render | Orquestra Raylib da cena isolada, sprites, grid e projéteis | [`src/engine/render/combat_lab.rs`](../src/engine/render/combat_lab.rs) | Teste manual via Combat Lab |
 | Combat debug UI | Boxes, pivot, dummy, overlay e texto de timing do laboratório | [`src/ui/combat_debug.rs`](../src/ui/combat_debug.rs) | Teste manual via Combat Lab |
 | Input | Teclado/gamepad para luta, preferências e Combat Lab | [`src/engine/input.rs`](../src/engine/input.rs), [`src/engine/gamepad.rs`](../src/engine/gamepad.rs) | [`tests/cli.rs`](../tests/cli.rs), [`tests/feature_flags.rs`](../tests/feature_flags.rs) |
@@ -136,7 +137,7 @@ Teclas:
 | Alternar hurtbox | `H` |
 | Alternar hitbox | `B` |
 | Alternar pivot/eixos | `P` |
-| Alternar dummy | `D` |
+| Alternar dummy de contato | `D` |
 
 Use o Combat Lab para conferir:
 
@@ -144,7 +145,17 @@ Use o Combat Lab para conferir:
 - se o projectile nasce na altura correta;
 - se o pivot está no chão e no centro esperado;
 - se startup, active e recovery batem com a tabela;
+- se `adv hit/block`, `rec`, `push H/B` e `gap H/B` fazem sentido para o golpe selecionado;
 - se a hurtbox muda de modo previsível quando o estado muda.
+
+No overlay do Combat Lab:
+
+- `adv hit` e `adv block` são estimativas em frames: `stun do defensor - recovery restante do atacante após o contato`;
+- `rec` é o recovery restante do atacante depois do primeiro frame de contato estimado;
+- `cd` aparece em projectile e indica cooldown restante, não recovery de ação;
+- `push H/B` mostra pushback em hit e block;
+- `gap H/B` mostra a distância corpo-corpo estimada depois do pushback;
+- `D` liga um dummy posicionado no ponto em que o golpe selecionado deve conectar, para validar alcance e espaçamento visualmente.
 
 Poses atuais:
 

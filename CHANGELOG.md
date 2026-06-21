@@ -51,6 +51,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Primeiros golpes próximos específicos por personagem: `RustBorrowJab` e `DukeBoilerplatePoke`, resolvidos por loadout sem mudar os controles.
 - Início da Fase 4 de combate com `GuardRule`, `HitReaction`, hitstun/blockstun inicial e debug visual de stun.
 - Pushback simples para hit, block e projétil, configurado por `HitReaction` e aplicado pelo runtime de luta.
+- Combat Lab com leitura de vantagem estimada, pushback, distância após pushback e dummy de contato por golpe.
 
 ### Em aberto
 

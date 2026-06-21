@@ -4,6 +4,7 @@
 //! framework during the prototype.
 
 pub mod combat_lab;
+pub mod combat_lab_analysis;
 pub mod preferences;
 
 /// Top-level screen currently owned by the application loop.

@@ -10,7 +10,7 @@ use crate::combat::{
     fighter::{AttackPhase, Fighter},
     projectile::PROJECTILE_DAMAGE,
 };
-use crate::config::{FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
+use crate::config::{WINDOW_HEIGHT, WINDOW_WIDTH};
 use crate::math::rect::Rect;
 use crate::scenes::combat_lab::{CombatLab, CombatLabMove, CombatLabPose};
 
@@ -29,7 +29,7 @@ const UI_TEXT: Color = Color::new(238, 241, 247, 255);
 pub fn draw_combat_lab_debug(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
     draw_lab_boxes(draw, lab);
     if lab.show_dummy() {
-        draw_lab_dummy(draw);
+        draw_lab_dummy(draw, lab);
     }
     if lab.show_pivot() {
         draw_lab_pivot(draw, lab.fighter());
@@ -72,8 +72,8 @@ fn draw_lab_boxes(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
     }
 }
 
-fn draw_lab_dummy(draw: &mut RaylibDrawHandle<'_>) {
-    let dummy = Rect::new(690.0, FLOOR_Y - 168.0, 76.0, 168.0);
+fn draw_lab_dummy(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
+    let dummy = lab.dummy_body_rect();
     outline_rect(draw, dummy, PANEL_BORDER);
     draw.draw_text(
         "DUMMY",
@@ -110,8 +110,8 @@ fn draw_lab_pivot(draw: &mut RaylibDrawHandle<'_>, fighter: &Fighter) {
 fn draw_lab_overlay(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
     let panel_x = 20;
     let panel_y = 18;
-    let panel_width = 360;
-    let panel_height = 128;
+    let panel_width = 488;
+    let panel_height = 172;
 
     draw.draw_rectangle(panel_x, panel_y, panel_width, panel_height, PANEL);
     draw.draw_rectangle_lines(panel_x, panel_y, panel_width, panel_height, PANEL_BORDER);
@@ -139,10 +139,38 @@ fn draw_lab_overlay(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
     draw.draw_text(
         &lab_toggle_text(lab),
         panel_x + 16,
-        panel_y + 92,
+        panel_y + 132,
         13,
         UI_MUTED,
     );
+    if let Some(advantage) = lab.advantage() {
+        draw.draw_text(
+            &format!(
+                "adv hit {} block {} | rec {}f{}",
+                signed_frames(advantage.hit_advantage),
+                signed_frames(advantage.block_advantage),
+                advantage.attacker_recovery_after_contact.get(),
+                cooldown_suffix(advantage.projectile_cooldown_after_contact)
+            ),
+            panel_x + 16,
+            panel_y + 92,
+            13,
+            UI_MUTED,
+        );
+        draw.draw_text(
+            &format!(
+                "push H/B {:.0}/{:.0} | gap H/B {:.0}/{:.0}",
+                advantage.hit_pushback,
+                advantage.block_pushback,
+                advantage.hit_body_gap_after_pushback,
+                advantage.block_body_gap_after_pushback
+            ),
+            panel_x + 16,
+            panel_y + 112,
+            13,
+            UI_MUTED,
+        );
+    }
     draw.draw_text(
         if lab.paused() { "PAUSED" } else { "PLAYING" },
         panel_x + panel_width - 88,
@@ -220,6 +248,22 @@ fn lab_toggle_text(lab: &CombatLab) -> String {
 
 fn on_off(enabled: bool) -> &'static str {
     if enabled { "ON" } else { "OFF" }
+}
+
+fn signed_frames(frames: i16) -> String {
+    if frames >= 0 {
+        format!("+{}", frames)
+    } else {
+        frames.to_string()
+    }
+}
+
+fn cooldown_suffix(cooldown: crate::combat::frame::FrameCount) -> String {
+    if cooldown == crate::combat::frame::FrameCount::ZERO {
+        String::new()
+    } else {
+        format!(" cd {}f", cooldown.get())
+    }
 }
 
 fn outline_rect(draw: &mut RaylibDrawHandle<'_>, rect: Rect, color: Color) {

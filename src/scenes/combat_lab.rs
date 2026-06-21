@@ -10,9 +10,16 @@ use crate::characters::{CharacterId, character_spec};
 use crate::combat::{
     fighter::{AttackKind, Fighter, FighterInput, PlayerSlot},
     frame::FrameCount,
+    move_data::MoveInputKind,
     projectile::Projectile,
 };
 use crate::config::{FIXED_TIMESTEP, WINDOW_WIDTH};
+use crate::math::rect::Rect;
+
+use super::combat_lab_analysis::{
+    CombatLabAdvantage, CombatLabAnalysisMove, analyze_advantage, contact_dummy_body,
+    default_dummy_body,
+};
 
 const LAB_FIGHTER_X: f32 = 430.0;
 const LAB_JUMP_PREVIEW_HEIGHT: f32 = 92.0;
@@ -64,6 +71,15 @@ impl CombatLabMove {
             Self::HeavyPunch => Some(AttackKind::HeavyPunch),
             Self::Kick => Some(AttackKind::Kick),
             Self::Projectile => None,
+        }
+    }
+
+    const fn analysis_move(self) -> CombatLabAnalysisMove {
+        match self {
+            Self::LightPunch => CombatLabAnalysisMove::Close(MoveInputKind::LightPunch),
+            Self::HeavyPunch => CombatLabAnalysisMove::Close(MoveInputKind::HeavyPunch),
+            Self::Kick => CombatLabAnalysisMove::Close(MoveInputKind::Kick),
+            Self::Projectile => CombatLabAnalysisMove::Projectile,
         }
     }
 
@@ -303,9 +319,30 @@ impl CombatLab {
         self.show_pivot
     }
 
-    /// Returns whether the optional dummy marker should be drawn.
+    /// Returns whether the optional contact dummy should be drawn.
     pub const fn show_dummy(&self) -> bool {
         self.show_dummy
+    }
+
+    /// Returns estimated advantage and spacing for the selected move.
+    pub fn advantage(&self) -> Option<CombatLabAdvantage> {
+        if !self.pose.is_move_playback() {
+            return None;
+        }
+
+        let fighter = fighter_for(self.character);
+        analyze_advantage(self.character, &fighter, self.selected_move.analysis_move())
+    }
+
+    /// Returns the dummy body positioned at the selected move contact point.
+    pub fn dummy_body_rect(&self) -> Rect {
+        if !self.pose.is_move_playback() {
+            return default_dummy_body();
+        }
+
+        let fighter = fighter_for(self.character);
+        contact_dummy_body(self.character, &fighter, self.selected_move.analysis_move())
+            .unwrap_or_else(default_dummy_body)
     }
 
     fn advance_frame(&mut self) {

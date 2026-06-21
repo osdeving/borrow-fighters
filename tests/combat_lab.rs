@@ -1,5 +1,6 @@
 //! Exercises the Combat Lab scene without the Raylib renderer.
 
+use borrow_fighters::characters::CharacterId;
 use borrow_fighters::combat::fighter::AttackPhase;
 use borrow_fighters::combat::frame::FrameCount;
 use borrow_fighters::scenes::combat_lab::{
@@ -142,4 +143,84 @@ fn projectile_move_spawns_projectile_and_special_timing() {
         Some(FrameCount::new(1))
     );
     assert!(!lab.fighter().can_fire_projectile());
+}
+
+#[test]
+fn lab_reports_character_specific_close_move_advantage() {
+    let rust = CombatLab::new(CombatLabOptions {
+        character: CharacterId::Rust,
+        selected_move: CombatLabMove::LightPunch,
+        ..CombatLabOptions::default()
+    });
+    let rust_advantage = rust.advantage().expect("move playback should be analyzed");
+
+    assert_eq!(rust_advantage.contact_frame, FrameCount::new(4));
+    assert_eq!(
+        rust_advantage.attacker_recovery_after_contact,
+        FrameCount::new(12)
+    );
+    assert_eq!(rust_advantage.hit_advantage, 0);
+    assert_eq!(rust_advantage.block_advantage, -4);
+    assert_eq!(rust_advantage.hit_pushback, 22.0);
+    assert_eq!(rust_advantage.block_pushback, 14.0);
+    assert!(
+        rust_advantage.hit_body_gap_after_pushback > rust_advantage.block_body_gap_after_pushback
+    );
+
+    let duke = CombatLab::new(CombatLabOptions {
+        character: CharacterId::Duke,
+        selected_move: CombatLabMove::HeavyPunch,
+        ..CombatLabOptions::default()
+    });
+    let duke_advantage = duke.advantage().expect("move playback should be analyzed");
+
+    assert_eq!(duke_advantage.contact_frame, FrameCount::new(13));
+    assert_eq!(
+        duke_advantage.attacker_recovery_after_contact,
+        FrameCount::new(27)
+    );
+    assert_eq!(duke_advantage.hit_advantage, -9);
+    assert_eq!(duke_advantage.block_advantage, -15);
+}
+
+#[test]
+fn lab_reports_projectile_advantage_without_action_recovery() {
+    let lab = CombatLab::new(CombatLabOptions {
+        selected_move: CombatLabMove::Projectile,
+        ..CombatLabOptions::default()
+    });
+    let advantage = lab.advantage().expect("projectile should be analyzed");
+
+    assert_eq!(advantage.contact_frame, FrameCount::ZERO);
+    assert_eq!(advantage.attacker_recovery_after_contact, FrameCount::ZERO);
+    assert_eq!(
+        advantage.projectile_cooldown_after_contact,
+        FrameCount::new(57)
+    );
+    assert_eq!(advantage.hit_advantage, 16);
+    assert_eq!(advantage.block_advantage, 12);
+}
+
+#[test]
+fn lab_advantage_is_only_for_move_playback() {
+    let lab = CombatLab::new(CombatLabOptions {
+        pose: CombatLabPose::Idle,
+        ..CombatLabOptions::default()
+    });
+
+    assert!(lab.advantage().is_none());
+}
+
+#[test]
+fn lab_contact_dummy_tracks_selected_move_reach() {
+    let light = CombatLab::new(CombatLabOptions {
+        selected_move: CombatLabMove::LightPunch,
+        ..CombatLabOptions::default()
+    });
+    let heavy = CombatLab::new(CombatLabOptions {
+        selected_move: CombatLabMove::HeavyPunch,
+        ..CombatLabOptions::default()
+    });
+
+    assert!(heavy.dummy_body_rect().x > light.dummy_body_rect().x);
 }
