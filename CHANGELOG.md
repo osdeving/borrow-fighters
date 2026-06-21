@@ -42,6 +42,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Frame data inteira para golpes próximos atuais, com testes de startup/active/recovery e overlay de debug.
 - Frame data de projectile/special com spawn, duração visual e cooldown em frames.
 - Combat Lab mínimo por CLI para inspecionar golpes isolados, frame step, pivot, hurtbox, hitbox e projectile.
+- Tabela inicial `MoveSpec` para golpes próximos, mantendo `AttackKind` como camada runtime de compatibilidade.
 
 ### Em aberto
 

@@ -43,6 +43,7 @@
 | `src/game/ai.rs` | Simple CPU behavior for playtest |
 | `src/game/feature_flags.rs` | Runtime feature flags and preference menu data |
 | `src/combat/` | Hitbox, hurtbox, damage and fighter rules |
+| `src/combat/move_data.rs` | Table-driven MoveSpec data for close-range moves |
 | `src/characters/` | Reserved for future character-specific data/logic |
 | `src/scenes/` | Preference screen and isolated Combat Lab scene state |
 | `src/ui/` | Reserved for future UI components |

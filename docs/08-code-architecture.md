@@ -54,7 +54,8 @@ borrow-fighters/
 │   │   ├── fighter.rs          # Estado comum de lutador
 │   │   ├── frame.rs            # Timing de combate em frames inteiros
 │   │   ├── collision.rs        # Resolução hitbox x hurtbox
-│   │   ├── move_set.rs         # Dados de golpes e tempos
+│   │   ├── move_data.rs        # Tabela MoveSpec dos golpes atuais
+│   │   ├── move_set.rs         # Tipos runtime e compatibilidade com AttackKind
 │   │   └── projectile.rs       # Estado de projéteis
 │   ├── characters/
 │   │   └── .gitkeep            # Reservado para dados futuros de personagem
@@ -72,6 +73,7 @@ borrow-fighters/
     ├── cli.rs                  # Contrato de argumentos de inicialização
     ├── combat_lab.rs           # Estado testável do Combat Lab
     ├── attack_frame_data.rs    # Timing de golpes em frames
+    ├── move_data.rs            # Contrato da tabela MoveSpec
     ├── combat_rules.rs         # Regras puras de combate e IA
     ├── feature_flags.rs        # Contrato de flags runtime
     ├── sprite_manifest.rs      # Validação do formato JSON de sprites

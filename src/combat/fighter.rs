@@ -173,7 +173,7 @@ impl Fighter {
         if let Some(mut attack) = self.attack {
             attack.elapsed += dt;
             self.attack =
-                (attack.elapsed_frames() <= attack.kind.spec().frames.duration).then_some(attack);
+                (attack.elapsed_frames() <= attack.kind.frame_data().duration).then_some(attack);
         }
     }
 
@@ -420,18 +420,13 @@ impl Fighter {
 
     fn attack_box_for(&self, kind: AttackKind) -> Rect {
         let body = self.body_rect();
-        let spec = kind.spec();
+        let spec = kind.move_spec().hitbox;
         let x = if self.facing == Facing::Right {
             body.right()
         } else {
-            body.x - spec.hitbox_width
+            body.x - spec.width
         };
-        Rect::new(
-            x,
-            body.y + spec.hitbox_y_offset,
-            spec.hitbox_width,
-            spec.hitbox_height,
-        )
+        Rect::new(x, body.y + spec.y_offset, spec.width, spec.height)
     }
 
     fn body_height(&self) -> f32 {
@@ -449,13 +444,13 @@ impl AttackState {
     }
 
     fn is_active(self) -> bool {
-        let frames = self.kind.spec().frames;
+        let frames = self.kind.frame_data();
         let current = self.elapsed_frames();
         current >= frames.active_start && current <= frames.active_end
     }
 
     fn phase(self) -> AttackPhase {
-        let frames = self.kind.spec().frames;
+        let frames = self.kind.frame_data();
         let current = self.elapsed_frames();
         if current < frames.active_start {
             AttackPhase::Startup
