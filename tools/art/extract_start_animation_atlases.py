@@ -17,50 +17,107 @@ from sprite_atlas_extractor import (
 
 SPAWN_CLIP = {"spawn": {"loop": False}}
 
+RUST_SPAWN_TIMING_MS = {
+    "spawn_00": 130,
+    "spawn_01": 120,
+    "spawn_02": 120,
+    "spawn_03": 110,
+    "spawn_04": 110,
+    "spawn_05": 110,
+    "spawn_06": 120,
+    "spawn_07": 120,
+    "spawn_08": 120,
+    "spawn_09": 125,
+    "spawn_10": 130,
+    "spawn_11": 150,
+    "spawn_12": 140,
+    "spawn_13": 180,
+    "spawn_14": 150,
+    "spawn_15": 130,
+    "spawn_16": 140,
+    "spawn_17": 160,
+    "spawn_18": 180,
+}
+
+DUKE_SPAWN_TIMING_MS = {
+    "spawn_00": 140,
+    "spawn_01": 130,
+    "spawn_02": 130,
+    "spawn_03": 130,
+    "spawn_04": 140,
+    "spawn_05": 140,
+    "spawn_06": 130,
+    "spawn_07": 130,
+    "spawn_08": 150,
+    "spawn_09": 160,
+    "spawn_10": 150,
+    "spawn_11": 150,
+    "spawn_12": 140,
+    "spawn_13": 150,
+    "spawn_14": 160,
+    "spawn_15": 160,
+    "spawn_16": 170,
+    "spawn_17": 180,
+}
+
+
+def rust_spawn_frame(
+    index: int, crop: tuple[int, int, int, int], pivot: tuple[int, int]
+) -> FrameSpec:
+    name = f"spawn_{index:02d}"
+    return FrameSpec(name, "spawn", crop, pivot, RUST_SPAWN_TIMING_MS[name])
+
+
+def duke_spawn_frame(
+    index: int, crop: tuple[int, int, int, int], pivot: tuple[int, int]
+) -> FrameSpec:
+    name = f"spawn_{index:02d}"
+    return FrameSpec(name, "spawn", crop, pivot, DUKE_SPAWN_TIMING_MS[name])
+
 
 RUST_FRAMES: list[FrameSpec] = [
-    FrameSpec("spawn_00", "spawn", (30, 0, 285, 248), (150, 238), 95),
-    FrameSpec("spawn_01", "spawn", (330, 0, 585, 248), (452, 238), 95),
-    FrameSpec("spawn_02", "spawn", (615, 0, 900, 248), (744, 238), 95),
-    FrameSpec("spawn_03", "spawn", (915, 0, 1195, 248), (1048, 238), 95),
-    FrameSpec("spawn_04", "spawn", (1210, 0, 1568, 248), (1348, 238), 95),
-    FrameSpec("spawn_05", "spawn", (20, 248, 300, 500), (142, 490), 95),
-    FrameSpec("spawn_06", "spawn", (305, 248, 590, 500), (430, 490), 95),
-    FrameSpec("spawn_07", "spawn", (605, 248, 890, 500), (730, 490), 95),
-    FrameSpec("spawn_08", "spawn", (915, 248, 1190, 500), (1040, 490), 95),
-    FrameSpec("spawn_09", "spawn", (1220, 248, 1568, 500), (1345, 490), 95),
-    FrameSpec("spawn_10", "spawn", (0, 500, 285, 746), (134, 744), 95),
-    FrameSpec("spawn_11", "spawn", (300, 500, 585, 746), (444, 744), 95),
-    FrameSpec("spawn_12", "spawn", (600, 500, 850, 746), (728, 744), 95),
-    FrameSpec("spawn_13", "spawn", (900, 500, 1110, 746), (1018, 744), 95),
-    FrameSpec("spawn_14", "spawn", (1110, 500, 1568, 762), (1275, 744), 95),
+    rust_spawn_frame(0, (30, 0, 285, 248), (150, 238)),
+    rust_spawn_frame(1, (330, 0, 585, 248), (452, 238)),
+    rust_spawn_frame(2, (615, 0, 900, 248), (744, 238)),
+    rust_spawn_frame(3, (915, 0, 1195, 248), (1048, 238)),
+    rust_spawn_frame(4, (1210, 0, 1568, 248), (1348, 238)),
+    rust_spawn_frame(5, (20, 248, 300, 500), (142, 490)),
+    rust_spawn_frame(6, (305, 248, 590, 500), (430, 490)),
+    rust_spawn_frame(7, (605, 248, 890, 500), (730, 490)),
+    rust_spawn_frame(8, (915, 248, 1190, 500), (1040, 490)),
+    rust_spawn_frame(9, (1220, 248, 1568, 500), (1345, 490)),
+    rust_spawn_frame(10, (0, 500, 285, 746), (134, 744)),
+    rust_spawn_frame(11, (300, 500, 585, 746), (444, 744)),
+    rust_spawn_frame(12, (600, 500, 850, 746), (728, 744)),
+    rust_spawn_frame(13, (900, 500, 1110, 746), (1018, 744)),
+    rust_spawn_frame(14, (1110, 500, 1568, 762), (1275, 744)),
     # Source frame 16 is a standalone thrown notebook and is intentionally skipped.
-    FrameSpec("spawn_15", "spawn", (300, 748, 595, 1003), (440, 988), 95),
-    FrameSpec("spawn_16", "spawn", (600, 748, 900, 1003), (735, 988), 95),
-    FrameSpec("spawn_17", "spawn", (900, 748, 1200, 1003), (1038, 988), 95),
-    FrameSpec("spawn_18", "spawn", (1200, 748, 1518, 1003), (1340, 988), 95),
+    rust_spawn_frame(15, (300, 748, 595, 1003), (440, 988)),
+    rust_spawn_frame(16, (600, 748, 900, 1003), (735, 988)),
+    rust_spawn_frame(17, (900, 748, 1200, 1003), (1038, 988)),
+    rust_spawn_frame(18, (1200, 748, 1518, 1003), (1340, 988)),
 ]
 
 
 DUKE_FRAMES: list[FrameSpec] = [
-    FrameSpec("spawn_00", "spawn", (55, 46, 270, 314), (170, 295), 100),
-    FrameSpec("spawn_01", "spawn", (330, 46, 545, 314), (445, 295), 100),
-    FrameSpec("spawn_02", "spawn", (602, 46, 825, 314), (720, 295), 100),
-    FrameSpec("spawn_03", "spawn", (858, 46, 1100, 314), (990, 295), 100),
-    FrameSpec("spawn_04", "spawn", (1122, 46, 1355, 314), (1248, 295), 100),
-    FrameSpec("spawn_05", "spawn", (1380, 46, 1672, 314), (1518, 295), 100),
-    FrameSpec("spawn_06", "spawn", (30, 315, 370, 628), (170, 590), 100),
-    FrameSpec("spawn_07", "spawn", (315, 315, 660, 628), (440, 590), 100),
-    FrameSpec("spawn_08", "spawn", (602, 315, 870, 628), (735, 590), 100),
-    FrameSpec("spawn_09", "spawn", (845, 315, 1165, 628), (1000, 590), 100),
-    FrameSpec("spawn_10", "spawn", (1100, 315, 1405, 628), (1245, 590), 100),
-    FrameSpec("spawn_11", "spawn", (1360, 315, 1672, 628), (1515, 590), 100),
-    FrameSpec("spawn_12", "spawn", (0, 628, 330, 940), (170, 865), 100),
-    FrameSpec("spawn_13", "spawn", (320, 628, 590, 940), (445, 865), 100),
-    FrameSpec("spawn_14", "spawn", (602, 628, 845, 940), (730, 865), 100),
-    FrameSpec("spawn_15", "spawn", (870, 628, 1115, 940), (1000, 865), 100),
-    FrameSpec("spawn_16", "spawn", (1155, 628, 1390, 940), (1270, 865), 100),
-    FrameSpec("spawn_17", "spawn", (1420, 628, 1672, 940), (1530, 865), 100),
+    duke_spawn_frame(0, (55, 46, 270, 314), (170, 295)),
+    duke_spawn_frame(1, (330, 46, 545, 314), (445, 295)),
+    duke_spawn_frame(2, (602, 46, 825, 314), (720, 295)),
+    duke_spawn_frame(3, (858, 46, 1100, 314), (990, 295)),
+    duke_spawn_frame(4, (1122, 46, 1355, 314), (1248, 295)),
+    duke_spawn_frame(5, (1380, 46, 1672, 314), (1518, 295)),
+    duke_spawn_frame(6, (30, 315, 370, 628), (170, 590)),
+    duke_spawn_frame(7, (315, 315, 660, 628), (440, 590)),
+    duke_spawn_frame(8, (602, 315, 870, 628), (735, 590)),
+    duke_spawn_frame(9, (845, 315, 1165, 628), (1000, 590)),
+    duke_spawn_frame(10, (1100, 315, 1405, 628), (1245, 590)),
+    duke_spawn_frame(11, (1360, 315, 1672, 628), (1515, 590)),
+    duke_spawn_frame(12, (0, 628, 330, 940), (170, 865)),
+    duke_spawn_frame(13, (320, 628, 590, 940), (445, 865)),
+    duke_spawn_frame(14, (602, 628, 845, 940), (730, 865)),
+    duke_spawn_frame(15, (870, 628, 1115, 940), (1000, 865)),
+    duke_spawn_frame(16, (1155, 628, 1390, 940), (1270, 865)),
+    duke_spawn_frame(17, (1420, 628, 1672, 940), (1530, 865)),
 ]
 
 

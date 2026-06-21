@@ -6,7 +6,9 @@ use borrow_fighters::combat::fighter::{
 use borrow_fighters::combat::projectile::{PROJECTILE_DAMAGE, PROJECTILE_SPEED};
 use borrow_fighters::game::ai::BasicCpu;
 use borrow_fighters::game::feature_flags::{FeatureFlag, FeatureFlags};
-use borrow_fighters::game::world::{MIN_BODY_GAP, MatchOutcome, World};
+use borrow_fighters::game::world::{
+    MIN_BODY_GAP, MatchOutcome, SPAWN_INTRO_DURATION_SECONDS, World,
+};
 
 const DT: f32 = 1.0 / 60.0;
 
@@ -345,7 +347,8 @@ fn spawn_intro_blocks_gameplay_until_finished() {
     assert!(world.projectiles.is_empty());
     assert!(world.spawn_intro_elapsed_seconds() > 0.0);
 
-    for _ in 0..120 {
+    let intro_steps = (SPAWN_INTRO_DURATION_SECONDS / DT).ceil() as usize + 1;
+    for _ in 0..intro_steps {
         world.update(DT, FighterInput::default(), FighterInput::default());
     }
 

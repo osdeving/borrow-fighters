@@ -13,7 +13,7 @@ use crate::math::vec2::Vec2;
 
 const HIT_EFFECT_LIFETIME: f32 = 0.35;
 const BODY_COLLISION_EFFECT_LIFETIME: f32 = 0.12;
-pub const SPAWN_INTRO_DURATION_SECONDS: f32 = 1.8;
+pub const SPAWN_INTRO_DURATION_SECONDS: f32 = 2.7;
 pub const MIN_BODY_GAP: f32 = 8.0;
 
 /// Final result of a greybox match.
