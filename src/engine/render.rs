@@ -395,13 +395,35 @@ fn draw_fighter(
         let attack_label = fighter
             .attack_kind()
             .map_or("ATTACK", crate::combat::fighter::AttackKind::label);
-        let text = match phase {
-            AttackPhase::Startup => attack_label,
-            AttackPhase::Active => "HITBOX",
+        let phase_label = match phase {
+            AttackPhase::Startup => "STARTUP",
+            AttackPhase::Active => "ACTIVE",
             AttackPhase::Recovery => "RECOVER",
             AttackPhase::Idle => "",
         };
-        draw.draw_text(text, label_x, label_y - 22, 18, HITSPARK);
+        let frame_text = if let (Some(elapsed), Some(frame_data)) =
+            (fighter.attack_elapsed_frames(), fighter.attack_frame_data())
+        {
+            format!(
+                "{} F{:02}/{:02} {}",
+                attack_label,
+                elapsed.get(),
+                frame_data.duration.get(),
+                phase_label
+            )
+        } else {
+            format!("{attack_label} {phase_label}")
+        };
+        draw.draw_text(&frame_text, label_x, label_y - 24, 14, HITSPARK);
+
+        if let Some(frame_data) = fighter.attack_frame_data() {
+            let active_text = format!(
+                "ACT {:02}-{:02}",
+                frame_data.active_start.get(),
+                frame_data.active_end.get()
+            );
+            draw.draw_text(&active_text, label_x, label_y - 40, 12, UI_MUTED);
+        }
     } else if options.show_debug && fighter.crouching {
         draw.draw_text("CROUCH", label_x, label_y - 22, 18, UI_MUTED);
     }

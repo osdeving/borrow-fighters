@@ -2,7 +2,9 @@
 
 ## Status
 
-Plano técnico inicial. Ainda não é implementação.
+Em implementação.
+
+Fase 1 iniciada na branch `gameplay/combat-improvement-plan`: golpes atuais já possuem frame data inteira e overlay de debug exibe frame/fase do ataque.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -328,17 +330,21 @@ BoxTimeline
 
 ### Fase 1 — Medição antes de balancear
 
+Status: **em andamento**.
+
 Entregáveis:
 
-- converter timings de golpes para frames inteiros;
-- criar `FrameCount`;
-- manter conversão clara com fixed timestep;
-- testes para startup/active/recovery dos golpes atuais;
-- overlay mostrando frame atual e fase.
+- [x] converter timings de golpes para frames inteiros;
+- [x] criar `FrameCount`;
+- [x] manter conversão clara com fixed timestep;
+- [x] testes para startup/active/recovery dos golpes atuais;
+- [x] overlay mostrando frame atual e fase;
+- [ ] incluir projectile na mesma tabela de frame data.
 
 Critério de aceite:
 
-- LP, HP, chute e projectile têm frame data visível e testada.
+- LP, HP e chute têm frame data visível e testada.
+- Projectile entra no aceite completo da fase antes de passar para Combat Lab.
 
 ### Fase 2 — Combat Lab
 

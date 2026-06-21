@@ -5,6 +5,8 @@
 
 use crate::math::rect::Rect;
 
+use super::frame::FrameCount;
+
 pub const LIGHT_PUNCH_DAMAGE: i32 = 8;
 pub const HEAVY_PUNCH_DAMAGE: i32 = 16;
 pub const KICK_DAMAGE: i32 = 12;
@@ -25,11 +27,17 @@ pub struct ActiveAttack {
     pub damage: i32,
 }
 
+/// Whole-frame timing data for one close-range attack.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct AttackFrameData {
+    pub duration: FrameCount,
+    pub active_start: FrameCount,
+    pub active_end: FrameCount,
+}
+
 #[derive(Clone, Copy, Debug)]
 pub(crate) struct AttackSpec {
-    pub duration: f32,
-    pub active_start: f32,
-    pub active_end: f32,
+    pub frames: AttackFrameData,
     pub hitbox_width: f32,
     pub hitbox_height: f32,
     pub hitbox_y_offset: f32,
@@ -51,30 +59,41 @@ impl AttackKind {
         self.spec().damage
     }
 
+    /// Returns whole-frame startup, active, and duration data.
+    pub const fn frame_data(self) -> AttackFrameData {
+        self.spec().frames
+    }
+
     pub(crate) const fn spec(self) -> AttackSpec {
         match self {
             Self::LightPunch => AttackSpec {
-                duration: 0.30,
-                active_start: 0.08,
-                active_end: 0.17,
+                frames: AttackFrameData {
+                    duration: FrameCount::new(18),
+                    active_start: FrameCount::new(5),
+                    active_end: FrameCount::new(10),
+                },
                 hitbox_width: 58.0,
                 hitbox_height: 34.0,
                 hitbox_y_offset: 62.0,
                 damage: LIGHT_PUNCH_DAMAGE,
             },
             Self::HeavyPunch => AttackSpec {
-                duration: 0.58,
-                active_start: 0.18,
-                active_end: 0.34,
+                frames: AttackFrameData {
+                    duration: FrameCount::new(35),
+                    active_start: FrameCount::new(11),
+                    active_end: FrameCount::new(20),
+                },
                 hitbox_width: 96.0,
                 hitbox_height: 42.0,
                 hitbox_y_offset: 58.0,
                 damage: HEAVY_PUNCH_DAMAGE,
             },
             Self::Kick => AttackSpec {
-                duration: 0.46,
-                active_start: 0.14,
-                active_end: 0.28,
+                frames: AttackFrameData {
+                    duration: FrameCount::new(28),
+                    active_start: FrameCount::new(9),
+                    active_end: FrameCount::new(16),
+                },
                 hitbox_width: 100.0,
                 hitbox_height: 36.0,
                 hitbox_y_offset: 108.0,

@@ -6,8 +6,9 @@
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y};
 use crate::math::{rect::Rect, vec2::Vec2};
 
+use super::frame::FrameCount;
 pub use crate::combat::move_set::{
-    ActiveAttack, AttackKind, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE,
+    ActiveAttack, AttackFrameData, AttackKind, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE,
 };
 
 const WIDTH: f32 = 76.0;
@@ -171,7 +172,8 @@ impl Fighter {
 
         if let Some(mut attack) = self.attack {
             attack.elapsed += dt;
-            self.attack = (attack.elapsed < attack.kind.spec().duration).then_some(attack);
+            self.attack =
+                (attack.elapsed_frames() <= attack.kind.spec().frames.duration).then_some(attack);
         }
     }
 
@@ -320,6 +322,16 @@ impl Fighter {
         self.attack.map(|attack| attack.elapsed)
     }
 
+    /// Returns elapsed whole frames for the current close attack animation.
+    pub fn attack_elapsed_frames(&self) -> Option<FrameCount> {
+        self.attack.map(AttackState::elapsed_frames)
+    }
+
+    /// Returns whole-frame data for the current close attack.
+    pub fn attack_frame_data(&self) -> Option<AttackFrameData> {
+        self.attack.map(|attack| attack.kind.frame_data())
+    }
+
     /// Returns elapsed seconds for the current special animation.
     pub fn special_elapsed_seconds(&self) -> Option<f32> {
         (self.special_visual_timer > 0.0)
@@ -415,16 +427,22 @@ impl Fighter {
 }
 
 impl AttackState {
+    fn elapsed_frames(self) -> FrameCount {
+        FrameCount::from_elapsed_seconds(self.elapsed)
+    }
+
     fn is_active(self) -> bool {
-        let spec = self.kind.spec();
-        self.elapsed >= spec.active_start && self.elapsed <= spec.active_end
+        let frames = self.kind.spec().frames;
+        let current = self.elapsed_frames();
+        current >= frames.active_start && current <= frames.active_end
     }
 
     fn phase(self) -> AttackPhase {
-        let spec = self.kind.spec();
-        if self.elapsed < spec.active_start {
+        let frames = self.kind.spec().frames;
+        let current = self.elapsed_frames();
+        if current < frames.active_start {
             AttackPhase::Startup
-        } else if self.elapsed <= spec.active_end {
+        } else if current <= frames.active_end {
             AttackPhase::Active
         } else {
             AttackPhase::Recovery
