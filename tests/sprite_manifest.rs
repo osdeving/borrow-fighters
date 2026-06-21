@@ -1,7 +1,8 @@
 //! Validates runtime sprite manifest loading without opening a window.
 
 use borrow_fighters::engine::sprites::{
-    RUST_FIGHTER_MANIFEST_PATH, SPRITE_SCHEMA, SpriteManifest, frame_for_clip_at,
+    DUKE_FIGHTER_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH, SPRITE_SCHEMA, SpriteManifest,
+    frame_for_clip_at,
 };
 
 #[test]
@@ -14,6 +15,18 @@ fn rust_fighter_manifest_loads() {
     assert!(manifest.clip_named("idle").is_some());
     assert!(manifest.clip_named("kick").is_some());
     assert!(manifest.clip_named("projectile").is_some());
+}
+
+#[test]
+fn duke_fighter_manifest_loads() {
+    let manifest = SpriteManifest::load(DUKE_FIGHTER_MANIFEST_PATH).expect("manifest should load");
+
+    assert_eq!(manifest.schema, SPRITE_SCHEMA);
+    assert_eq!(manifest.image, "duke-fighter-atlas.png");
+    assert_eq!(manifest.frames.len(), 33);
+    assert_eq!(manifest.cell.w, 384);
+    assert!(manifest.clip_named("special").is_some());
+    assert!(manifest.clip_named("taunt").is_some());
 }
 
 #[test]

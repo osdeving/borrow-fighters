@@ -16,6 +16,8 @@ pub enum FighterSpriteClip {
     PunchLight,
     PunchHeavy,
     Kick,
+    Special,
+    Taunt,
 }
 
 impl FighterSpriteClip {
@@ -30,6 +32,8 @@ impl FighterSpriteClip {
             Self::PunchLight => "punch_light",
             Self::PunchHeavy => "punch_heavy",
             Self::Kick => "kick",
+            Self::Special => "special",
+            Self::Taunt => "taunt",
         }
     }
 }
@@ -68,6 +72,10 @@ pub fn fighter_sprite_clip(fighter: &Fighter) -> FighterSpriteClip {
         return FighterSpriteClip::Block;
     }
 
+    if fighter.special_elapsed_seconds().is_some() {
+        return FighterSpriteClip::Special;
+    }
+
     if let Some(kind) = fighter.attack_kind() {
         return match kind {
             AttackKind::LightPunch => FighterSpriteClip::PunchLight,
@@ -89,6 +97,10 @@ pub fn fighter_sprite_clip(fighter: &Fighter) -> FighterSpriteClip {
 
 /// Returns elapsed clip time for the fighter's current visual state.
 pub fn fighter_clip_elapsed_seconds(fighter: &Fighter, world_elapsed_seconds: f32) -> f32 {
+    if let Some(elapsed) = fighter.special_elapsed_seconds() {
+        return elapsed;
+    }
+
     if let Some(elapsed) = fighter.attack_elapsed_seconds() {
         return elapsed;
     }
@@ -121,5 +133,7 @@ pub fn fighter_sprite_frame(fighter: &Fighter) -> FighterSpriteFrame {
         FighterSpriteClip::PunchLight => FighterSpriteFrame::LightPunch,
         FighterSpriteClip::PunchHeavy => FighterSpriteFrame::HeavyPunch,
         FighterSpriteClip::Kick => FighterSpriteFrame::Kick,
+        FighterSpriteClip::Special => FighterSpriteFrame::Idle,
+        FighterSpriteClip::Taunt => FighterSpriteFrame::Idle,
     }
 }

@@ -1,0 +1,1019 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "duke-fighter-atlas.png",
+  "source": "assets/references/duke-sprite.png",
+  "cell": {
+    "w": 384,
+    "h": 256
+  },
+  "default_pivot": {
+    "x": 112,
+    "y": 236
+  },
+  "scale": 1.16,
+  "frames": [
+    {
+      "name": "idle_0",
+      "clip": "idle",
+      "duration_ms": 140,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 38,
+        "y": 38,
+        "w": 122,
+        "h": 170
+      },
+      "trimmed_bounds": {
+        "x": 52,
+        "y": 47,
+        "w": 121,
+        "h": 188
+      },
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "idle_1",
+      "clip": "idle",
+      "duration_ms": 140,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 202,
+        "y": 34,
+        "w": 116,
+        "h": 174
+      },
+      "trimmed_bounds": {
+        "x": 56,
+        "y": 41,
+        "w": 115,
+        "h": 195
+      },
+      "frame": {
+        "x": 384,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "idle_2",
+      "clip": "idle",
+      "duration_ms": 140,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 370,
+        "y": 34,
+        "w": 116,
+        "h": 174
+      },
+      "trimmed_bounds": {
+        "x": 57,
+        "y": 40,
+        "w": 116,
+        "h": 196
+      },
+      "frame": {
+        "x": 768,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "idle_3",
+      "clip": "idle",
+      "duration_ms": 140,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 518,
+        "y": 40,
+        "w": 118,
+        "h": 168
+      },
+      "trimmed_bounds": {
+        "x": 55,
+        "y": 50,
+        "w": 115,
+        "h": 186
+      },
+      "frame": {
+        "x": 1152,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "idle_4",
+      "clip": "idle",
+      "duration_ms": 140,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 654,
+        "y": 38,
+        "w": 118,
+        "h": 170
+      },
+      "trimmed_bounds": {
+        "x": 59,
+        "y": 46,
+        "w": 110,
+        "h": 190
+      },
+      "frame": {
+        "x": 1536,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "walk_0",
+      "clip": "walk",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 20,
+        "y": 272,
+        "w": 132,
+        "h": 162
+      },
+      "trimmed_bounds": {
+        "x": 46,
+        "y": 63,
+        "w": 131,
+        "h": 173
+      },
+      "frame": {
+        "x": 1920,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "walk_1",
+      "clip": "walk",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 164,
+        "y": 270,
+        "w": 126,
+        "h": 162
+      },
+      "trimmed_bounds": {
+        "x": 49,
+        "y": 57,
+        "w": 124,
+        "h": 175
+      },
+      "frame": {
+        "x": 0,
+        "y": 256,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "walk_2",
+      "clip": "walk",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 300,
+        "y": 270,
+        "w": 126,
+        "h": 164
+      },
+      "trimmed_bounds": {
+        "x": 47,
+        "y": 56,
+        "w": 126,
+        "h": 180
+      },
+      "frame": {
+        "x": 384,
+        "y": 256,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "walk_3",
+      "clip": "walk",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 438,
+        "y": 270,
+        "w": 126,
+        "h": 164
+      },
+      "trimmed_bounds": {
+        "x": 45,
+        "y": 56,
+        "w": 128,
+        "h": 179
+      },
+      "frame": {
+        "x": 768,
+        "y": 256,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "walk_4",
+      "clip": "walk",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 578,
+        "y": 272,
+        "w": 126,
+        "h": 163
+      },
+      "trimmed_bounds": {
+        "x": 41,
+        "y": 57,
+        "w": 128,
+        "h": 179
+      },
+      "frame": {
+        "x": 1152,
+        "y": 256,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "crouch_0",
+      "clip": "crouch",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 748,
+        "y": 312,
+        "w": 118,
+        "h": 123
+      },
+      "trimmed_bounds": {
+        "x": 53,
+        "y": 103,
+        "w": 114,
+        "h": 133
+      },
+      "frame": {
+        "x": 1536,
+        "y": 256,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "crouch_1",
+      "clip": "crouch",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 876,
+        "y": 314,
+        "w": 114,
+        "h": 121
+      },
+      "trimmed_bounds": {
+        "x": 48,
+        "y": 106,
+        "w": 113,
+        "h": 130
+      },
+      "frame": {
+        "x": 1920,
+        "y": 256,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "jump_0",
+      "clip": "jump",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 1018,
+        "y": 230,
+        "w": 142,
+        "h": 200
+      },
+      "trimmed_bounds": {
+        "x": 48,
+        "y": 71,
+        "w": 129,
+        "h": 165
+      },
+      "frame": {
+        "x": 0,
+        "y": 512,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "jump_1",
+      "clip": "jump",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 1160,
+        "y": 218,
+        "w": 140,
+        "h": 174
+      },
+      "trimmed_bounds": {
+        "x": 40,
+        "y": 55,
+        "w": 130,
+        "h": 169
+      },
+      "frame": {
+        "x": 384,
+        "y": 512,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "jump_2",
+      "clip": "jump",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 1282,
+        "y": 300,
+        "w": 163,
+        "h": 135
+      },
+      "trimmed_bounds": {
+        "x": 24,
+        "y": 96,
+        "w": 169,
+        "h": 140
+      },
+      "frame": {
+        "x": 768,
+        "y": 512,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "punch_0",
+      "clip": "punch_light",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 10,
+        "y": 490,
+        "w": 132,
+        "h": 160
+      },
+      "trimmed_bounds": {
+        "x": 47,
+        "y": 68,
+        "w": 126,
+        "h": 168
+      },
+      "frame": {
+        "x": 1152,
+        "y": 512,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "punch_1",
+      "clip": "punch_light",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 150,
+        "y": 490,
+        "w": 216,
+        "h": 162
+      },
+      "trimmed_bounds": {
+        "x": 45,
+        "y": 67,
+        "w": 222,
+        "h": 169
+      },
+      "frame": {
+        "x": 1536,
+        "y": 512,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "punch_2",
+      "clip": "punch_heavy",
+      "duration_ms": 110,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 358,
+        "y": 492,
+        "w": 134,
+        "h": 161
+      },
+      "trimmed_bounds": {
+        "x": 49,
+        "y": 64,
+        "w": 131,
+        "h": 172
+      },
+      "frame": {
+        "x": 1920,
+        "y": 512,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "kick_0",
+      "clip": "kick",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 538,
+        "y": 490,
+        "w": 128,
+        "h": 166
+      },
+      "trimmed_bounds": {
+        "x": 44,
+        "y": 60,
+        "w": 124,
+        "h": 176
+      },
+      "frame": {
+        "x": 0,
+        "y": 768,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "kick_1",
+      "clip": "kick",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 688,
+        "y": 492,
+        "w": 190,
+        "h": 164
+      },
+      "trimmed_bounds": {
+        "x": 49,
+        "y": 67,
+        "w": 196,
+        "h": 168
+      },
+      "frame": {
+        "x": 384,
+        "y": 768,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "kick_2",
+      "clip": "kick",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 878,
+        "y": 498,
+        "w": 114,
+        "h": 156
+      },
+      "trimmed_bounds": {
+        "x": 53,
+        "y": 67,
+        "w": 123,
+        "h": 168
+      },
+      "frame": {
+        "x": 768,
+        "y": 768,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "block_0",
+      "clip": "block",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 16,
+        "y": 700,
+        "w": 159,
+        "h": 150
+      },
+      "trimmed_bounds": {
+        "x": 35,
+        "y": 75,
+        "w": 148,
+        "h": 161
+      },
+      "frame": {
+        "x": 1152,
+        "y": 768,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "block_1",
+      "clip": "block",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 176,
+        "y": 696,
+        "w": 150,
+        "h": 154
+      },
+      "trimmed_bounds": {
+        "x": 33,
+        "y": 77,
+        "w": 142,
+        "h": 159
+      },
+      "frame": {
+        "x": 1536,
+        "y": 768,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "hit_0",
+      "clip": "hit",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 1018,
+        "y": 492,
+        "w": 172,
+        "h": 165
+      },
+      "trimmed_bounds": {
+        "x": 24,
+        "y": 65,
+        "w": 167,
+        "h": 169
+      },
+      "frame": {
+        "x": 1920,
+        "y": 768,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "hit_1",
+      "clip": "hit",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 1208,
+        "y": 494,
+        "w": 152,
+        "h": 162
+      },
+      "trimmed_bounds": {
+        "x": 37,
+        "y": 59,
+        "w": 147,
+        "h": 175
+      },
+      "frame": {
+        "x": 0,
+        "y": 1024,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "taunt_0",
+      "clip": "taunt",
+      "duration_ms": 180,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 488,
+        "y": 700,
+        "w": 134,
+        "h": 154
+      },
+      "trimmed_bounds": {
+        "x": 41,
+        "y": 69,
+        "w": 135,
+        "h": 166
+      },
+      "frame": {
+        "x": 384,
+        "y": 1024,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "taunt_1",
+      "clip": "taunt",
+      "duration_ms": 180,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 632,
+        "y": 680,
+        "w": 154,
+        "h": 174
+      },
+      "trimmed_bounds": {
+        "x": 41,
+        "y": 46,
+        "w": 148,
+        "h": 189
+      },
+      "frame": {
+        "x": 768,
+        "y": 1024,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "special_0",
+      "clip": "special",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 0,
+        "y": 890,
+        "w": 205,
+        "h": 174
+      },
+      "trimmed_bounds": {
+        "x": 28,
+        "y": 57,
+        "w": 202,
+        "h": 179
+      },
+      "frame": {
+        "x": 1152,
+        "y": 1024,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "special_1",
+      "clip": "special",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 210,
+        "y": 884,
+        "w": 236,
+        "h": 178
+      },
+      "trimmed_bounds": {
+        "x": 17,
+        "y": 32,
+        "w": 247,
+        "h": 202
+      },
+      "frame": {
+        "x": 1536,
+        "y": 1024,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "special_2",
+      "clip": "special",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 450,
+        "y": 884,
+        "w": 258,
+        "h": 180
+      },
+      "trimmed_bounds": {
+        "x": 13,
+        "y": 32,
+        "w": 276,
+        "h": 203
+      },
+      "frame": {
+        "x": 1920,
+        "y": 1024,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "projectile_0",
+      "clip": "projectile",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 195,
+        "y": 130
+      },
+      "source_crop": {
+        "x": 815,
+        "y": 930,
+        "w": 135,
+        "h": 116
+      },
+      "trimmed_bounds": {
+        "x": 117,
+        "y": 66,
+        "w": 150,
+        "h": 124
+      },
+      "frame": {
+        "x": 0,
+        "y": 1280,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "projectile_1",
+      "clip": "projectile",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 188,
+        "y": 137
+      },
+      "source_crop": {
+        "x": 960,
+        "y": 932,
+        "w": 258,
+        "h": 114
+      },
+      "trimmed_bounds": {
+        "x": 48,
+        "y": 70,
+        "w": 289,
+        "h": 116
+      },
+      "frame": {
+        "x": 384,
+        "y": 1280,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "projectile_2",
+      "clip": "projectile",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 204,
+        "y": 129
+      },
+      "source_crop": {
+        "x": 1220,
+        "y": 1002,
+        "w": 228,
+        "h": 36
+      },
+      "trimmed_bounds": {
+        "x": 72,
+        "y": 116,
+        "w": 240,
+        "h": 24
+      },
+      "frame": {
+        "x": 768,
+        "y": 1280,
+        "w": 384,
+        "h": 256
+      }
+    }
+  ],
+  "clips": [
+    {
+      "name": "idle",
+      "loop": true,
+      "frames": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3",
+        "idle_4"
+      ]
+    },
+    {
+      "name": "walk",
+      "loop": true,
+      "frames": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "walk_4"
+      ]
+    },
+    {
+      "name": "crouch",
+      "loop": false,
+      "frames": [
+        "crouch_0",
+        "crouch_1"
+      ]
+    },
+    {
+      "name": "jump",
+      "loop": false,
+      "frames": [
+        "jump_0",
+        "jump_1",
+        "jump_2"
+      ]
+    },
+    {
+      "name": "punch_light",
+      "loop": false,
+      "frames": [
+        "punch_0",
+        "punch_1"
+      ]
+    },
+    {
+      "name": "punch_heavy",
+      "loop": false,
+      "frames": [
+        "punch_2"
+      ]
+    },
+    {
+      "name": "kick",
+      "loop": false,
+      "frames": [
+        "kick_0",
+        "kick_1",
+        "kick_2"
+      ]
+    },
+    {
+      "name": "block",
+      "loop": true,
+      "frames": [
+        "block_0",
+        "block_1"
+      ]
+    },
+    {
+      "name": "hit",
+      "loop": false,
+      "frames": [
+        "hit_0",
+        "hit_1"
+      ]
+    },
+    {
+      "name": "taunt",
+      "loop": false,
+      "frames": [
+        "taunt_0",
+        "taunt_1"
+      ]
+    },
+    {
+      "name": "special",
+      "loop": false,
+      "frames": [
+        "special_0",
+        "special_1",
+        "special_2"
+      ]
+    },
+    {
+      "name": "projectile",
+      "loop": true,
+      "frames": [
+        "projectile_0",
+        "projectile_1",
+        "projectile_2"
+      ]
+    }
+  ],
+  "notes": [
+    "Extracted from an RGB concept/reference sheet; not a final authored sprite export.",
+    "Labels and checkerboard background are intentionally excluded from runtime assets.",
+    "Future artist-authored files should prefer native alpha and Aseprite or TexturePacker metadata."
+  ]
+}

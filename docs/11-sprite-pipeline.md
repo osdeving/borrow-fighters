@@ -16,6 +16,7 @@ O formato inicial do projeto e `borrow-fighters.sprite.v1`, em JSON.
 Exemplo real:
 
 - `assets/placeholder/rust-fighter.sprite.json`
+- `assets/placeholder/duke-fighter.sprite.json`
 
 Campos principais:
 
@@ -72,4 +73,10 @@ O primeiro corte vive em `src/engine/sprites/`:
 4. `draw.rs` desenha atlas com pivot via Raylib.
 
 O personagem Rust ja pode usar `assets/placeholder/rust-fighter.sprite.json`.
-O Java ainda usa o spritesheet greybox enquanto nao houver arte propria.
+O Player 2/Duke ja pode usar `assets/placeholder/duke-fighter.sprite.json`.
+
+O runtime tambem usa:
+
+- `special` por alguns frames quando o personagem dispara projectile;
+- `taunt` quando o personagem vence a luta;
+- fallback greybox quando um atlas nao carrega.

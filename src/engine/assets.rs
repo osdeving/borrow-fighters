@@ -6,7 +6,8 @@
 use raylib::prelude::*;
 
 use crate::engine::sprites::{
-    FIGHTER_SPRITESHEET_PATH, RUST_FIGHTER_MANIFEST_PATH, RUST_GEAR_PROJECTILE_PATH, SpriteManifest,
+    DUKE_BEAN_PROJECTILE_PATH, DUKE_FIGHTER_MANIFEST_PATH, FIGHTER_SPRITESHEET_PATH,
+    RUST_FIGHTER_MANIFEST_PATH, RUST_GEAR_PROJECTILE_PATH, SpriteManifest,
 };
 
 pub const ARENA_BACKGROUND_PATH: &str = "assets/placeholder/arena-terminal-compiler-lab.png";
@@ -22,7 +23,9 @@ pub struct GameAssets {
     pub arena_background: Option<Texture2D>,
     pub fighter_spritesheet: Option<Texture2D>,
     pub rust_fighter: Option<SpriteAtlasAsset>,
+    pub duke_fighter: Option<SpriteAtlasAsset>,
     pub rust_projectile: Option<Texture2D>,
+    pub duke_projectile: Option<Texture2D>,
 }
 
 impl GameAssets {
@@ -32,7 +35,9 @@ impl GameAssets {
             arena_background: load_texture_optional(raylib, thread, ARENA_BACKGROUND_PATH),
             fighter_spritesheet: load_texture_optional(raylib, thread, FIGHTER_SPRITESHEET_PATH),
             rust_fighter: load_sprite_atlas_optional(raylib, thread, RUST_FIGHTER_MANIFEST_PATH),
+            duke_fighter: load_sprite_atlas_optional(raylib, thread, DUKE_FIGHTER_MANIFEST_PATH),
             rust_projectile: load_texture_optional(raylib, thread, RUST_GEAR_PROJECTILE_PATH),
+            duke_projectile: load_texture_optional(raylib, thread, DUKE_BEAN_PROJECTILE_PATH),
         }
     }
 }

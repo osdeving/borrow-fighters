@@ -37,7 +37,7 @@ fn basic_attack_deals_damage_once_per_swing() {
 fn heavy_punch_reaches_farther_than_light_punch() {
     let mut world = World::new_greybox();
     world.player_one.position.x = 390.0;
-    world.player_two.position.x = 490.0;
+    world.player_two.position.x = 540.0;
 
     world.update(
         DT,
@@ -56,7 +56,7 @@ fn heavy_punch_reaches_farther_than_light_punch() {
 
     let mut world = World::new_greybox();
     world.player_one.position.x = 390.0;
-    world.player_two.position.x = 490.0;
+    world.player_two.position.x = 540.0;
 
     world.update(
         DT,

@@ -56,24 +56,36 @@ pub fn draw_fight(
     draw_arena(draw, assets.arena_background.as_ref());
     let show_debug = flags.enabled(FeatureFlag::ShowCombatDebug);
 
-    draw_projectiles(draw, world, show_debug, assets.rust_projectile.as_ref());
+    draw_projectiles(
+        draw,
+        world,
+        show_debug,
+        assets.rust_projectile.as_ref(),
+        assets.duke_projectile.as_ref(),
+    );
     draw_fighter(
         draw,
         &world.player_one,
-        PLAYER_ONE,
-        show_debug,
-        assets.rust_fighter.as_ref(),
-        assets.fighter_spritesheet.as_ref(),
-        world.elapsed_seconds,
+        FighterDrawOptions {
+            body_color: PLAYER_ONE,
+            show_debug,
+            sprite_atlas: assets.rust_fighter.as_ref(),
+            spritesheet: assets.fighter_spritesheet.as_ref(),
+            world_elapsed_seconds: world.elapsed_seconds,
+            forced_clip: forced_victory_clip(world, PlayerSlot::One),
+        },
     );
     draw_fighter(
         draw,
         &world.player_two,
-        PLAYER_TWO,
-        show_debug,
-        None,
-        assets.fighter_spritesheet.as_ref(),
-        world.elapsed_seconds,
+        FighterDrawOptions {
+            body_color: PLAYER_TWO,
+            show_debug,
+            sprite_atlas: assets.duke_fighter.as_ref(),
+            spritesheet: assets.fighter_spritesheet.as_ref(),
+            world_elapsed_seconds: world.elapsed_seconds,
+            forced_clip: forced_victory_clip(world, PlayerSlot::Two),
+        },
     );
     if show_debug {
         draw_body_collision(draw, world);
@@ -270,44 +282,43 @@ fn draw_arena_background(draw: &mut RaylibDrawHandle<'_>, texture: &Texture2D) {
 fn draw_fighter(
     draw: &mut RaylibDrawHandle<'_>,
     fighter: &crate::combat::fighter::Fighter,
-    body_color: Color,
-    show_debug: bool,
-    sprite_atlas: Option<&SpriteAtlasAsset>,
-    spritesheet: Option<&Texture2D>,
-    world_elapsed_seconds: f32,
+    options: FighterDrawOptions<'_>,
 ) {
     let phase = fighter.attack_phase();
     let body = match phase {
-        AttackPhase::Idle => body_color,
-        AttackPhase::Startup => lighten(body_color, 30),
+        AttackPhase::Idle => options.body_color,
+        AttackPhase::Startup => lighten(options.body_color, 30),
         AttackPhase::Active => Color::new(255, 222, 89, 255),
-        AttackPhase::Recovery => dim(body_color, 25),
+        AttackPhase::Recovery => dim(options.body_color, 25),
     };
 
-    if let Some(sprite_atlas) = sprite_atlas
+    if let Some(sprite_atlas) = options.sprite_atlas
         && sprites::draw_manifest_fighter_sprite(
             draw,
             &sprite_atlas.texture,
             &sprite_atlas.manifest,
             fighter,
-            world_elapsed_seconds,
+            options.world_elapsed_seconds,
+            options.forced_clip,
             Color::WHITE,
         )
     {
-    } else if let Some(texture) = spritesheet {
+    } else if let Some(texture) = options.spritesheet {
         sprites::draw_fighter_sprite(draw, texture, fighter, body);
     } else {
         draw_body_parts(draw, fighter, body);
     }
 
-    if show_debug {
+    if options.show_debug {
         outline_rect(draw, fighter.body_rect(), BODY_OUTLINE);
         for hurtbox in fighter.hurtboxes().rects() {
             outline_rect(draw, hurtbox, HURTBOX);
         }
     }
 
-    if show_debug && let Some(attack_box) = fighter.attack_box() {
+    if options.show_debug
+        && let Some(attack_box) = fighter.attack_box()
+    {
         draw.draw_rectangle(
             attack_box.x.round() as i32,
             attack_box.y.round() as i32,
@@ -332,12 +343,14 @@ fn draw_fighter(
             GUARD_FILL,
         );
         outline_rect(draw, guard, GUARD);
-        if show_debug {
+        if options.show_debug {
             draw.draw_text("BLOCK", guard.x as i32 - 18, guard.y as i32 - 22, 16, GUARD);
         }
     }
 
-    if show_debug && let Some(hitbox) = fighter.active_hitbox() {
+    if options.show_debug
+        && let Some(hitbox) = fighter.active_hitbox()
+    {
         draw.draw_text(
             "ACTIVE",
             hitbox.x as i32,
@@ -351,7 +364,7 @@ fn draw_fighter(
     let label_y = (fighter.position.y - 22.0) as i32;
     draw.draw_text(fighter.name, label_x, label_y, 16, UI_TEXT);
 
-    if show_debug && phase != AttackPhase::Idle {
+    if options.show_debug && phase != AttackPhase::Idle {
         let attack_label = fighter
             .attack_kind()
             .map_or("ATTACK", crate::combat::fighter::AttackKind::label);
@@ -362,9 +375,18 @@ fn draw_fighter(
             AttackPhase::Idle => "",
         };
         draw.draw_text(text, label_x, label_y - 22, 18, HITSPARK);
-    } else if show_debug && fighter.crouching {
+    } else if options.show_debug && fighter.crouching {
         draw.draw_text("CROUCH", label_x, label_y - 22, 18, UI_MUTED);
     }
+}
+
+struct FighterDrawOptions<'a> {
+    body_color: Color,
+    show_debug: bool,
+    sprite_atlas: Option<&'a SpriteAtlasAsset>,
+    spritesheet: Option<&'a Texture2D>,
+    world_elapsed_seconds: f32,
+    forced_clip: Option<sprites::FighterSpriteClip>,
 }
 
 fn draw_hud(
@@ -467,10 +489,15 @@ fn draw_projectiles(
     draw: &mut RaylibDrawHandle<'_>,
     world: &World,
     show_debug: bool,
-    projectile_texture: Option<&Texture2D>,
+    rust_projectile: Option<&Texture2D>,
+    duke_projectile: Option<&Texture2D>,
 ) {
     for projectile in &world.projectiles {
         let rect = projectile.rect();
+        let projectile_texture = match projectile.owner {
+            PlayerSlot::One => rust_projectile,
+            PlayerSlot::Two => duke_projectile,
+        };
         if let Some(texture) = projectile_texture {
             let facing = if projectile.velocity.x < 0.0 {
                 Facing::Left
@@ -512,6 +539,11 @@ fn draw_projectiles(
             );
         }
     }
+}
+
+fn forced_victory_clip(world: &World, slot: PlayerSlot) -> Option<sprites::FighterSpriteClip> {
+    matches!(world.outcome, Some(MatchOutcome::Winner(winner)) if winner == slot)
+        .then_some(sprites::FighterSpriteClip::Taunt)
 }
 
 fn draw_body_collision(draw: &mut RaylibDrawHandle<'_>, world: &World) {

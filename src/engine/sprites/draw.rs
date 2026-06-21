@@ -10,7 +10,10 @@ use crate::{
     engine::sprites::{
         animation::frame_for_clip_at,
         manifest::{SpriteFrame, SpriteManifest},
-        selection::{fighter_clip_elapsed_seconds, fighter_sprite_clip, fighter_sprite_frame},
+        selection::{
+            FighterSpriteClip, fighter_clip_elapsed_seconds, fighter_sprite_clip,
+            fighter_sprite_frame,
+        },
     },
 };
 
@@ -57,10 +60,15 @@ pub fn draw_manifest_fighter_sprite(
     manifest: &SpriteManifest,
     fighter: &Fighter,
     world_elapsed_seconds: f32,
+    forced_clip: Option<FighterSpriteClip>,
     tint: Color,
 ) -> bool {
-    let clip = fighter_sprite_clip(fighter);
-    let clip_time = fighter_clip_elapsed_seconds(fighter, world_elapsed_seconds);
+    let clip = forced_clip.unwrap_or_else(|| fighter_sprite_clip(fighter));
+    let clip_time = if forced_clip.is_some() {
+        world_elapsed_seconds
+    } else {
+        fighter_clip_elapsed_seconds(fighter, world_elapsed_seconds)
+    };
     let Some(frame) = frame_for_clip_at(manifest, clip.as_str(), clip_time) else {
         return false;
     };

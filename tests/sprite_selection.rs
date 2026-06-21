@@ -45,3 +45,36 @@ fn crouch_clip_clamps_to_finished_crouch_pose() {
     assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Crouch);
     assert_eq!(fighter_clip_elapsed_seconds(&fighter, 10.0), 999.0);
 }
+
+#[test]
+fn projectile_fire_uses_special_clip() {
+    let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
+    fighter.mark_projectile_fired();
+
+    assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Special);
+    assert_eq!(fighter_clip_elapsed_seconds(&fighter, 10.0), 0.0);
+}
+
+#[test]
+fn block_input_does_not_override_airborne_jump_clip() {
+    let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
+
+    fighter.update(
+        DT,
+        FighterInput {
+            right: true,
+            jump: true,
+            ..FighterInput::default()
+        },
+    );
+    fighter.update(
+        DT,
+        FighterInput {
+            block: true,
+            ..FighterInput::default()
+        },
+    );
+
+    assert!(!fighter.blocking);
+    assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Jump);
+}

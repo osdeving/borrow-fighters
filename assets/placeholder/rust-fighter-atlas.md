@@ -20,6 +20,8 @@ Este asset esta ligado ao primeiro motor de sprites do runtime para validar:
 - remocao dos labels da imagem original;
 - normalizacao de pivot e baseline;
 - formato de metadata para o motor de sprites.
+- animacao de especial ao disparar projectile.
+- animacao `taunt` quando o personagem vence a luta.
 
 ## Geracao
 

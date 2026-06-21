@@ -6,8 +6,10 @@
 use crate::combat::fighter::{Facing, Fighter, PlayerSlot};
 use crate::math::{rect::Rect, vec2::Vec2};
 
-const WIDTH: f32 = 36.0;
-const HEIGHT: f32 = 18.0;
+const WIDTH: f32 = 44.0;
+const HEIGHT: f32 = 30.0;
+const FRONT_SPAWN_OFFSET: f32 = 66.0;
+const CENTER_Y_FROM_BODY_BOTTOM: f32 = 88.0;
 pub const PROJECTILE_SPEED: f32 = 340.0;
 pub const PROJECTILE_DAMAGE: i32 = 8;
 
@@ -30,14 +32,15 @@ impl Projectile {
             Facing::Right => 1.0,
         };
         let x = if fighter.facing == Facing::Right {
-            body.right() + 8.0
+            body.right() + FRONT_SPAWN_OFFSET
         } else {
-            body.x - WIDTH - 8.0
+            body.x - WIDTH - FRONT_SPAWN_OFFSET
         };
+        let center_y = body.bottom() - CENTER_Y_FROM_BODY_BOTTOM;
 
         Self {
             owner: fighter.slot,
-            position: Vec2::new(x, body.y + 36.0),
+            position: Vec2::new(x, center_y - HEIGHT * 0.5),
             velocity: Vec2::new(direction * PROJECTILE_SPEED, 0.0),
             damage: PROJECTILE_DAMAGE,
             alive: true,

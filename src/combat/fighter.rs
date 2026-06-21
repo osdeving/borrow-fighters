@@ -10,9 +10,9 @@ pub use crate::combat::move_set::{
     ActiveAttack, AttackKind, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE,
 };
 
-const WIDTH: f32 = 52.0;
-const STANDING_HEIGHT: f32 = 96.0;
-const CROUCH_HEIGHT: f32 = 66.0;
+const WIDTH: f32 = 76.0;
+const STANDING_HEIGHT: f32 = 168.0;
+const CROUCH_HEIGHT: f32 = 96.0;
 const MAX_RUN_SPEED: f32 = 280.0;
 const ATTACK_MOVE_SPEED_FACTOR: f32 = 0.55;
 const GROUND_ACCELERATION: f32 = 2200.0;
@@ -24,6 +24,7 @@ const JUMP_SPEED: f32 = -680.0;
 const GRAVITY: f32 = 1650.0;
 const MAX_FALL_SPEED: f32 = 920.0;
 const PROJECTILE_COOLDOWN: f32 = 0.95;
+const SPECIAL_ANIMATION_DURATION: f32 = 0.34;
 const BLOCK_DAMAGE_DIVISOR: i32 = 4;
 
 pub const BASIC_DAMAGE: i32 = LIGHT_PUNCH_DAMAGE;
@@ -93,6 +94,7 @@ pub struct Fighter {
     pub crouching: bool,
     pub blocking: bool,
     projectile_cooldown: f32,
+    special_visual_timer: f32,
     attack: Option<AttackState>,
 }
 
@@ -117,6 +119,7 @@ impl Fighter {
             crouching: false,
             blocking: false,
             projectile_cooldown: 0.0,
+            special_visual_timer: 0.0,
             attack: None,
         }
     }
@@ -127,10 +130,12 @@ impl Fighter {
             self.velocity = Vec2::ZERO;
             self.crouching = false;
             self.blocking = false;
+            self.special_visual_timer = 0.0;
             return;
         }
 
         self.projectile_cooldown = (self.projectile_cooldown - dt).max(0.0);
+        self.special_visual_timer = (self.special_visual_timer - dt).max(0.0);
         self.crouching = input.crouch && self.grounded && self.attack.is_none();
         self.blocking = input.block && self.grounded && self.attack.is_none();
         self.update_horizontal_velocity(dt, input);
@@ -223,6 +228,7 @@ impl Fighter {
     /// Starts the projectile cooldown after firing.
     pub fn mark_projectile_fired(&mut self) {
         self.projectile_cooldown = PROJECTILE_COOLDOWN;
+        self.special_visual_timer = SPECIAL_ANIMATION_DURATION;
     }
 
     /// Returns whether this fighter can currently deal a new close hit.
@@ -254,15 +260,15 @@ impl Fighter {
         let body = self.body_rect();
         if self.crouching {
             FighterBodyParts {
-                head: Rect::new(body.x + 16.0, body.y + 4.0, 22.0, 18.0),
-                torso: Rect::new(body.x + 9.0, body.y + 24.0, 34.0, 26.0),
-                legs: Rect::new(body.x + 5.0, body.y + 52.0, 42.0, 12.0),
+                head: Rect::new(body.x + 21.0, body.y + 6.0, 34.0, 26.0),
+                torso: Rect::new(body.x + 12.0, body.y + 34.0, 52.0, 36.0),
+                legs: Rect::new(body.x + 8.0, body.y + 72.0, 60.0, 20.0),
             }
         } else {
             FighterBodyParts {
-                head: Rect::new(body.x + 14.0, body.y + 4.0, 24.0, 24.0),
-                torso: Rect::new(body.x + 10.0, body.y + 32.0, 32.0, 34.0),
-                legs: Rect::new(body.x + 7.0, body.y + 72.0, 38.0, 20.0),
+                head: Rect::new(body.x + 22.0, body.y + 8.0, 32.0, 42.0),
+                torso: Rect::new(body.x + 12.0, body.y + 54.0, 52.0, 68.0),
+                legs: Rect::new(body.x + 9.0, body.y + 128.0, 58.0, 34.0),
             }
         }
     }
@@ -312,6 +318,12 @@ impl Fighter {
     /// Returns elapsed seconds for the current close attack animation.
     pub fn attack_elapsed_seconds(&self) -> Option<f32> {
         self.attack.map(|attack| attack.elapsed)
+    }
+
+    /// Returns elapsed seconds for the current special animation.
+    pub fn special_elapsed_seconds(&self) -> Option<f32> {
+        (self.special_visual_timer > 0.0)
+            .then_some(SPECIAL_ANIMATION_DURATION - self.special_visual_timer)
     }
 
     /// Returns the current attack phase for debug rendering.
