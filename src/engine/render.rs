@@ -5,10 +5,15 @@
 
 use raylib::prelude::*;
 
+mod combat_lab;
+
+pub use combat_lab::draw_combat_lab;
+
 use crate::combat::fighter::{AttackPhase, Facing, PlayerSlot};
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
 use crate::engine::assets::{GameAssets, SpriteAtlasAsset};
 use crate::engine::sprites;
+use crate::game::arena::ArenaId;
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags, PREFERENCE_FLAGS};
 use crate::game::world::{MatchOutcome, World};
 use crate::math::rect::Rect;
@@ -48,12 +53,13 @@ pub struct GamepadStatus {
 pub fn draw_fight(
     draw: &mut RaylibDrawHandle<'_>,
     world: &World,
+    arena: ArenaId,
     flags: FeatureFlags,
     gamepad_status: GamepadStatus,
     assets: &GameAssets,
 ) {
     draw.clear_background(BACKGROUND);
-    draw_arena(draw, assets.arena_background.as_ref());
+    draw_arena(draw, assets.arenas.get(arena));
     let show_debug = flags.enabled(FeatureFlag::ShowCombatDebug);
     let spawn_intro = world.spawn_intro_active();
 
@@ -123,6 +129,10 @@ pub fn draw_fight(
         draw_hud(draw, world, flags, gamepad_status);
     }
 
+    if let Some(label) = world.countdown_label() {
+        draw_countdown(draw, label, assets);
+    }
+
     if flags.enabled(FeatureFlag::ShowControlsHelp) {
         draw_help(draw);
     }
@@ -132,12 +142,13 @@ pub fn draw_fight(
 pub fn draw_preferences(
     draw: &mut RaylibDrawHandle<'_>,
     menu: &PreferencesMenu,
+    arena: ArenaId,
     flags: FeatureFlags,
     gamepad_status: GamepadStatus,
     assets: &GameAssets,
 ) {
     draw.clear_background(BACKGROUND);
-    draw_arena(draw, assets.arena_background.as_ref());
+    draw_arena(draw, assets.arenas.get(arena));
     draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(0, 0, 0, 138));
 
     let panel_x = 88;
@@ -317,6 +328,7 @@ fn draw_fighter(
         AttackPhase::Startup => lighten(options.body_color, 30),
         AttackPhase::Active => Color::new(255, 222, 89, 255),
         AttackPhase::Recovery => dim(options.body_color, 25),
+        AttackPhase::WhiffRecovery => dim(options.body_color, 45),
     };
 
     if let Some(sprite_atlas) = options.sprite_atlas
@@ -391,17 +403,75 @@ fn draw_fighter(
     let label_y = (fighter.position.y - 22.0) as i32;
     draw.draw_text(fighter.name, label_x, label_y, 16, UI_TEXT);
 
+    if options.show_debug && fighter.in_hitstun() {
+        let stun_text = format!("HITSTUN {:02}", fighter.hitstun_remaining_frames().get());
+        draw.draw_text(&stun_text, label_x, label_y - 24, 14, HITSPARK);
+    } else if options.show_debug && fighter.in_blockstun() {
+        let stun_text = format!(
+            "BLOCKSTUN {:02}",
+            fighter.blockstun_remaining_frames().get()
+        );
+        draw.draw_text(&stun_text, label_x, label_y - 24, 14, GUARD);
+    } else if options.show_debug && fighter.in_whiff_recovery() {
+        let recovery_text = format!(
+            "WHIFF {:02}",
+            fighter.whiff_recovery_remaining_frames().get()
+        );
+        draw.draw_text(&recovery_text, label_x, label_y - 40, 14, UI_MUTED);
+    }
+
+    if options.show_debug
+        && let Some(elapsed) = fighter.special_elapsed_frames()
+    {
+        let frame_data = fighter.projectile_frame_data();
+        let frame_text = format!(
+            "SPECIAL F{:02}/{:02}",
+            elapsed.get(),
+            frame_data.visual_duration.get()
+        );
+        let timing_text = format!(
+            "SPAWN {:02} CD {:02}",
+            frame_data.spawn_frame.get(),
+            fighter.projectile_cooldown_remaining_frames().get()
+        );
+        draw.draw_text(&frame_text, label_x, label_y - 24, 14, PROJECTILE);
+        draw.draw_text(&timing_text, label_x, label_y - 40, 12, UI_MUTED);
+    }
+
     if options.show_debug && phase != AttackPhase::Idle {
         let attack_label = fighter
-            .attack_kind()
-            .map_or("ATTACK", crate::combat::fighter::AttackKind::label);
-        let text = match phase {
-            AttackPhase::Startup => attack_label,
-            AttackPhase::Active => "HITBOX",
+            .attack_move_spec()
+            .map_or("ATTACK", |spec| spec.label);
+        let phase_label = match phase {
+            AttackPhase::Startup => "STARTUP",
+            AttackPhase::Active => "ACTIVE",
             AttackPhase::Recovery => "RECOVER",
+            AttackPhase::WhiffRecovery => "WHIFF",
             AttackPhase::Idle => "",
         };
-        draw.draw_text(text, label_x, label_y - 22, 18, HITSPARK);
+        let frame_text = if let (Some(elapsed), Some(frame_data)) =
+            (fighter.attack_elapsed_frames(), fighter.attack_frame_data())
+        {
+            format!(
+                "{} F{:02}/{:02} {}",
+                attack_label,
+                elapsed.get(),
+                frame_data.duration.get(),
+                phase_label
+            )
+        } else {
+            format!("{attack_label} {phase_label}")
+        };
+        draw.draw_text(&frame_text, label_x, label_y - 24, 14, HITSPARK);
+
+        if let Some(frame_data) = fighter.attack_frame_data() {
+            let active_text = format!(
+                "ACT {:02}-{:02}",
+                frame_data.active_start.get(),
+                frame_data.active_end.get()
+            );
+            draw.draw_text(&active_text, label_x, label_y - 40, 12, UI_MUTED);
+        }
     } else if options.show_debug && fighter.crouching {
         draw.draw_text("CROUCH", label_x, label_y - 22, 18, UI_MUTED);
     }
@@ -440,23 +510,103 @@ fn draw_hud(
     let width = draw.measure_text(&status, 14);
     draw.draw_text(&status, WINDOW_WIDTH - width - 24, 16, 14, UI_MUTED);
 
-    draw_health_bar(draw, 24, 72, world.player_one.health, "Rust");
+    draw_health_bar(
+        draw,
+        24,
+        72,
+        world.player_one.health,
+        world.player_one.max_health,
+        world.player_one.name,
+    );
     draw_health_bar(
         draw,
         WINDOW_WIDTH - 324,
         72,
         world.player_two.health,
-        "Java",
+        world.player_two.max_health,
+        world.player_two.name,
     );
 
     if let Some(outcome) = world.outcome {
         let message = match outcome {
-            MatchOutcome::Winner(PlayerSlot::One) => "Rust wins - press R/Menu",
-            MatchOutcome::Winner(PlayerSlot::Two) => "Java wins - press R/Menu",
-            MatchOutcome::Draw => "Draw - press R/Menu",
+            MatchOutcome::Winner(PlayerSlot::One) => {
+                format!("{} wins - press R/Menu", world.player_one.name)
+            }
+            MatchOutcome::Winner(PlayerSlot::Two) => {
+                format!("{} wins - press R/Menu", world.player_two.name)
+            }
+            MatchOutcome::Draw => "Draw - press R/Menu".to_owned(),
         };
-        let width = draw.measure_text(message, 32);
-        draw.draw_text(message, (WINDOW_WIDTH - width) / 2, 124, 32, UI_TEXT);
+        let width = draw.measure_text(&message, 32);
+        draw.draw_text(&message, (WINDOW_WIDTH - width) / 2, 124, 32, UI_TEXT);
+    }
+}
+
+fn draw_countdown_sprite(draw: &mut RaylibDrawHandle<'_>, texture: &Texture2D) {
+    let source = Rectangle::new(0.0, 0.0, texture.width() as f32, texture.height() as f32);
+
+    let target_height = 120.0;
+    let scale = target_height / source.height;
+
+    let dest_width = source.width * scale;
+    let dest_height = source.height * scale;
+
+    let dest = Rectangle::new(
+        (WINDOW_WIDTH as f32 - dest_width) * 0.5,
+        WINDOW_HEIGHT as f32 * 0.5 - dest_height * 0.5 - 18.0,
+        dest_width,
+        dest_height,
+    );
+
+    draw.draw_texture_pro(
+        texture,
+        source,
+        dest,
+        Vector2::new(0.0, 0.0),
+        0.0,
+        Color::WHITE,
+    );
+}
+
+fn draw_countdown_text(draw: &mut RaylibDrawHandle<'_>, label: &str) {
+    let font_size = if label == "Fight!" { 54 } else { 78 };
+    let width = draw.measure_text(label, font_size);
+    let x = (WINDOW_WIDTH - width) / 2;
+    let y = WINDOW_HEIGHT / 2 - font_size / 2 - 18;
+    let padding_x = 34;
+    let padding_y = 18;
+
+    draw.draw_rectangle(
+        x - padding_x,
+        y - padding_y,
+        width + padding_x * 2,
+        font_size + padding_y * 2,
+        Color::new(0, 0, 0, 142),
+    );
+    draw.draw_rectangle_lines(
+        x - padding_x,
+        y - padding_y,
+        width + padding_x * 2,
+        font_size + padding_y * 2,
+        Color::new(238, 241, 247, 180),
+    );
+    draw.draw_text(label, x + 4, y + 4, font_size, Color::new(0, 0, 0, 190));
+    draw.draw_text(label, x, y, font_size, UI_TEXT);
+}
+
+fn draw_countdown(draw: &mut RaylibDrawHandle<'_>, label: &str, assets: &GameAssets) {
+    let texture = match label {
+        "11" => assets.countdown_11.as_ref(),
+        "10" => assets.countdown_10.as_ref(),
+        "01" => assets.countdown_01.as_ref(),
+        "Fight!" => assets.countdown_fight.as_ref(),
+        _ => None,
+    };
+
+    if let Some(texture) = texture {
+        draw_countdown_sprite(draw, texture);
+    } else {
+        draw_countdown_text(draw, label);
     }
 }
 
@@ -495,11 +645,20 @@ fn connected_label(connected: bool) -> &'static str {
     if connected { "ON" } else { "OFF" }
 }
 
-fn draw_health_bar(draw: &mut RaylibDrawHandle<'_>, x: i32, y: i32, health: i32, label: &str) {
+fn draw_health_bar(
+    draw: &mut RaylibDrawHandle<'_>,
+    x: i32,
+    y: i32,
+    health: i32,
+    max_health: i32,
+    label: &str,
+) {
     let width = 300;
     let height = 18;
-    let fill_width = (width as f32 * (health.max(0) as f32 / 100.0)).round() as i32;
-    let fill = if health <= 24 {
+    let max_health = max_health.max(1);
+    let ratio = health.max(0) as f32 / max_health as f32;
+    let fill_width = (width as f32 * ratio.clamp(0.0, 1.0)).round() as i32;
+    let fill = if health * 4 <= max_health {
         HEALTH_DANGER
     } else {
         HEALTH_FILL

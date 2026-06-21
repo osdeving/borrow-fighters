@@ -24,8 +24,10 @@ Adotar uma arquitetura inicial de **pacote Rust único** com:
 - módulos internos por domínio: `engine`, `game`, `combat`, `characters`, `scenes`, `ui`, `math`;
 - Raylib isolado tanto quanto possível em `engine/*` e na borda de aplicação;
 - regras de combate preferencialmente independentes de Raylib;
+- dados de golpes próximos em tabela simples `MoveSpec` sob `combat`, com `CharacterSpec` em `characters` alimentando nome, vida máxima e loadout dos lutadores, e `AttackKind` como camada runtime de compatibilidade para sprites/debug;
 - loop com input, fixed update e render;
-- documentação de módulo no topo de cada arquivo Rust novo.
+- documentação de módulo no topo de cada arquivo Rust novo, incluindo o sistema maior via `System:`;
+- rastreio técnico de sistemas de combate em `docs/12-technical-combat-guide.md`.
 
 Não adotar workspace multi-crate, ECS genérico, sistema de plugins, scripting ou asset pipeline complexo no protótipo 0.1.
 

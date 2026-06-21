@@ -4,5 +4,6 @@
 //! damage, match outcome, and restart from the app layer.
 
 pub mod ai;
+pub mod arena;
 pub mod feature_flags;
 pub mod world;

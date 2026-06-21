@@ -38,6 +38,29 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Ferramentas locais em `tools/art/` para extrair atlas e gerar manifests.
 - Documentação atualizada para refletir o estado jogável da `main`.
 - Amostra em vídeo sem áudio no README, com capa clicável e disclaimer de arte placeholder.
+- Roadmap técnico de combate com pesquisa, arquétipos, Combat Lab e plano de modularização.
+- Frame data inteira para golpes próximos atuais, com testes de startup/active/recovery e overlay de debug.
+- Frame data de projectile/special com spawn, duração visual e cooldown em frames.
+- Combat Lab mínimo por CLI para inspecionar golpes isolados, frame step, pivot, hurtbox, hitbox e projectile.
+- Tabela inicial `MoveSpec` para golpes próximos, mantendo `AttackKind` como camada runtime de compatibilidade.
+- Registro inicial `CharacterSpec` para Rust e Duke.
+- Guia técnico de combate com rastreio de código, técnica de hitbox/hurtbox, comandos e hotkeys do Combat Lab.
+- Runtime de luta consumindo `CharacterSpec` para nome, vida máxima e loadout de golpes; Duke/Java começa com vida máxima maior.
+- Combat Lab com `--pose` e hotkeys `PageDown`/`PageUp` para inspecionar idle, crouch, jump, block, hit e victory.
+- Overlay/debug do Combat Lab separado em `src/ui/combat_debug.rs` para reduzir responsabilidade do renderer.
+- Primeiros golpes próximos específicos por personagem: `RustBorrowJab` e `DukeBoilerplatePoke`, resolvidos por loadout sem mudar os controles.
+- Início da Fase 4 de combate com `GuardRule`, `HitReaction`, hitstun/blockstun inicial e debug visual de stun.
+- Pushback simples para hit, block e projétil, configurado por `HitReaction` e aplicado pelo runtime de luta.
+- Combat Lab com leitura de vantagem estimada, pushback, distância após pushback e dummy de contato por golpe.
+- Fechamento da Fase 4 com whiff recovery explícito por golpe, debug visual de `WHIFF` e respostas mínimas de contra-jogo documentadas.
+- Motor inicial de áudio por eventos com manifesto JSON, bindings por cue/personagem/golpe e integração Raylib para clips opcionais.
+- Documentação técnica do pipeline de áudio e ADR para eventos de áudio data-driven.
+- Assets CC0 iniciais de áudio para impactos, defesa, whiff, UI, anúncio de luta/vitória e música de menu/combate.
+- Suporte a música de fundo via `Music` streaming do Raylib, com troca automática entre menu e luta.
+- Arenas placeholder Sirius e Fortaleza Tech Coast, com rotação de cenário ao iniciar a próxima luta após uma vitória começando pelo Sirius.
+- Combat Lab com fundo de arena ligado por padrão e atalho `A` para alternar entre cenário e grid limpo.
+- Contagem pré-luta central `11`, `10`, `01`, `Fight!`, bloqueando gameplay até a liberação.
+- Vozes CC0 de contagem pré-luta registradas no manifesto de áudio.
 
 ### Em aberto
 

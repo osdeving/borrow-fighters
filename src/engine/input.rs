@@ -1,5 +1,8 @@
 //! Maps local keyboard and gamepad state into game commands.
 //!
+//! System: Raylib input boundary. This module translates device state into
+//! scene and combat input structs without owning gameplay decisions.
+//!
 //! This module is the input boundary between Raylib and the testable combat
 //! model.
 
@@ -7,6 +10,7 @@ use raylib::prelude::*;
 
 use crate::combat::fighter::FighterInput;
 use crate::engine::gamepad;
+use crate::scenes::combat_lab::CombatLabInput;
 use crate::scenes::preferences::PreferencesInput;
 
 /// Local two-player input for one simulation step.
@@ -15,6 +19,7 @@ pub struct LocalInput {
     pub player_one: FighterInput,
     pub player_two: FighterInput,
     pub preferences: PreferencesInput,
+    pub combat_lab: CombatLabInput,
     pub restart: bool,
     pub toggle_cpu: bool,
     pub open_preferences: bool,
@@ -40,6 +45,7 @@ impl LocalInput {
         let player_two_gamepad_connected =
             gamepad::is_connected(raylib, gamepad::PLAYER_TWO_GAMEPAD);
         let keyboard_preferences = keyboard_preferences(raylib);
+        let combat_lab = keyboard_combat_lab(raylib);
         let gamepad_preferences = if gamepad_input_enabled {
             gamepad_preferences(raylib)
         } else {
@@ -50,6 +56,7 @@ impl LocalInput {
             player_one: merge_fighter_input(keyboard_player_one, gamepad_player_one),
             player_two: merge_fighter_input(keyboard_player_two, gamepad_player_two),
             preferences: merge_preferences_input(keyboard_preferences, gamepad_preferences),
+            combat_lab,
             restart: raylib.is_key_pressed(KeyboardKey::KEY_R)
                 || (gamepad_input_enabled
                     && (gamepad::restart_pressed(raylib, gamepad::PLAYER_ONE_GAMEPAD)
@@ -62,6 +69,28 @@ impl LocalInput {
             player_one_gamepad_connected,
             player_two_gamepad_connected,
         }
+    }
+}
+
+fn keyboard_combat_lab(raylib: &RaylibHandle) -> CombatLabInput {
+    let shift_down = raylib.is_key_down(KeyboardKey::KEY_LEFT_SHIFT)
+        || raylib.is_key_down(KeyboardKey::KEY_RIGHT_SHIFT);
+    let tab_pressed = raylib.is_key_pressed(KeyboardKey::KEY_TAB);
+
+    CombatLabInput {
+        next_move: tab_pressed && !shift_down,
+        previous_move: tab_pressed && shift_down,
+        replay: raylib.is_key_pressed(KeyboardKey::KEY_ENTER),
+        pause_toggle: raylib.is_key_pressed(KeyboardKey::KEY_SPACE),
+        step_frame: raylib.is_key_pressed(KeyboardKey::KEY_PERIOD),
+        reset: raylib.is_key_pressed(KeyboardKey::KEY_HOME),
+        next_pose: raylib.is_key_pressed(KeyboardKey::KEY_PAGE_DOWN),
+        previous_pose: raylib.is_key_pressed(KeyboardKey::KEY_PAGE_UP),
+        toggle_hurtboxes: raylib.is_key_pressed(KeyboardKey::KEY_H),
+        toggle_hitboxes: raylib.is_key_pressed(KeyboardKey::KEY_B),
+        toggle_pivot: raylib.is_key_pressed(KeyboardKey::KEY_P),
+        toggle_dummy: raylib.is_key_pressed(KeyboardKey::KEY_D),
+        toggle_background: raylib.is_key_pressed(KeyboardKey::KEY_A),
     }
 }
 

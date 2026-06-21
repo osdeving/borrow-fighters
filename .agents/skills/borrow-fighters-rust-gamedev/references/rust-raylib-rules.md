@@ -7,10 +7,12 @@ Every Rust source file must start with a module-level summary:
 ```rust
 //! One-sentence responsibility of this module.
 //!
-//! Optional short context explaining why this file exists and what belongs here.
+//! System: Larger system name. Explain which engine/module owns this file and
+//! what does not belong here.
 ```
 
 Use `///` for public items. Keep the first sentence short because rustdoc uses it in summaries.
+When changing combat code, update `docs/12-technical-combat-guide.md` if commands, hotkeys, hitbox/hurtbox, frame data, character data, Combat Lab behavior, or source routing changed.
 
 ## Boundaries
 

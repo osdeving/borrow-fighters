@@ -1,13 +1,21 @@
-//! Defines close-range move data for the greybox prototype.
+//! Defines close-range move runtime types for the greybox prototype.
 //!
-//! The current moves are hard-coded because the prototype needs readable combat
-//! behavior before a data-driven character system.
+//! System: Combat runtime. This module exposes the attack enum used by fighter
+//! state while delegating tunable values to `move_data`.
+//!
+//! `AttackKind` remains the runtime compatibility enum while move details now
+//! live in table-driven `MoveSpec` data.
 
 use crate::math::rect::Rect;
 
-pub const LIGHT_PUNCH_DAMAGE: i32 = 8;
-pub const HEAVY_PUNCH_DAMAGE: i32 = 16;
-pub const KICK_DAMAGE: i32 = 12;
+pub use super::move_data::{
+    AttackFrameData, DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_BOILERPLATE_POKE_DAMAGE,
+    DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY, GuardRule, HEAVY_ATTACK_REACTION,
+    HEAVY_ATTACK_WHIFF_RECOVERY, HEAVY_PUNCH_DAMAGE, HitReaction, KICK_DAMAGE, KICK_REACTION,
+    KICK_WHIFF_RECOVERY, LIGHT_ATTACK_REACTION, LIGHT_ATTACK_WHIFF_RECOVERY, LIGHT_PUNCH_DAMAGE,
+    MoveId, MoveInputKind, MoveSpec, RUST_BORROW_JAB_DAMAGE, RUST_BORROW_JAB_WHIFF_RECOVERY,
+    move_spec, move_spec_for_input,
+};
 
 /// Close-range attacks available in the greybox prototype.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -21,65 +29,58 @@ pub enum AttackKind {
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct ActiveAttack {
     pub kind: AttackKind,
+    pub move_id: MoveId,
     pub hitbox: Rect,
     pub damage: i32,
-}
-
-#[derive(Clone, Copy, Debug)]
-pub(crate) struct AttackSpec {
-    pub duration: f32,
-    pub active_start: f32,
-    pub active_end: f32,
-    pub hitbox_width: f32,
-    pub hitbox_height: f32,
-    pub hitbox_y_offset: f32,
-    pub damage: i32,
+    pub guard_rule: GuardRule,
+    pub hit_reaction: HitReaction,
 }
 
 impl AttackKind {
+    /// Returns the runtime attack kind represented by a stable move id.
+    pub const fn from_move_id(id: MoveId) -> Self {
+        match id {
+            MoveId::LightPunch | MoveId::RustBorrowJab => Self::LightPunch,
+            MoveId::HeavyPunch | MoveId::DukeBoilerplatePoke => Self::HeavyPunch,
+            MoveId::Kick => Self::Kick,
+        }
+    }
+
+    /// Returns the runtime attack kind represented by an input family.
+    pub const fn from_input_kind(input: MoveInputKind) -> Self {
+        match input {
+            MoveInputKind::LightPunch => Self::LightPunch,
+            MoveInputKind::HeavyPunch => Self::HeavyPunch,
+            MoveInputKind::Kick => Self::Kick,
+        }
+    }
+
+    /// Returns the stable move id represented by this runtime attack kind.
+    pub const fn move_id(self) -> MoveId {
+        match self {
+            Self::LightPunch => MoveId::LightPunch,
+            Self::HeavyPunch => MoveId::HeavyPunch,
+            Self::Kick => MoveId::Kick,
+        }
+    }
+
     /// Returns the short label used by debug rendering.
     pub const fn label(self) -> &'static str {
-        match self {
-            Self::LightPunch => "LP",
-            Self::HeavyPunch => "HP",
-            Self::Kick => "KICK",
-        }
+        self.move_spec().label
     }
 
     /// Returns the damage applied by this move before guard reduction.
     pub const fn damage(self) -> i32 {
-        self.spec().damage
+        self.move_spec().damage
     }
 
-    pub(crate) const fn spec(self) -> AttackSpec {
-        match self {
-            Self::LightPunch => AttackSpec {
-                duration: 0.30,
-                active_start: 0.08,
-                active_end: 0.17,
-                hitbox_width: 58.0,
-                hitbox_height: 34.0,
-                hitbox_y_offset: 62.0,
-                damage: LIGHT_PUNCH_DAMAGE,
-            },
-            Self::HeavyPunch => AttackSpec {
-                duration: 0.58,
-                active_start: 0.18,
-                active_end: 0.34,
-                hitbox_width: 96.0,
-                hitbox_height: 42.0,
-                hitbox_y_offset: 58.0,
-                damage: HEAVY_PUNCH_DAMAGE,
-            },
-            Self::Kick => AttackSpec {
-                duration: 0.46,
-                active_start: 0.14,
-                active_end: 0.28,
-                hitbox_width: 100.0,
-                hitbox_height: 36.0,
-                hitbox_y_offset: 108.0,
-                damage: KICK_DAMAGE,
-            },
-        }
+    /// Returns whole-frame startup, active, and duration data.
+    pub const fn frame_data(self) -> AttackFrameData {
+        self.move_spec().frames
+    }
+
+    /// Returns the full table-driven move spec.
+    pub const fn move_spec(self) -> MoveSpec {
+        move_spec(self.move_id())
     }
 }

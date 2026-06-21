@@ -1,13 +1,21 @@
 //! Defines fighter state, movement, defense, and attack timing.
 //!
+//! System: Combat runtime. This module owns the mutable fighter model used by
+//! matches and tools; data tables live in `move_data` and `characters`.
+//!
 //! Fighters are still greybox primitives, but their body, hurtboxes, and moves
 //! are split enough to test traditional fighting-game verbs without sprites.
 
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y};
 use crate::math::{rect::Rect, vec2::Vec2};
 
+use super::frame::FrameCount;
+use super::projectile::{PROJECTILE_FRAME_DATA, ProjectileFrameData};
 pub use crate::combat::move_set::{
-    ActiveAttack, AttackKind, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE,
+    ActiveAttack, AttackFrameData, AttackKind, DEFAULT_CLOSE_RANGE_MOVE_IDS,
+    DUKE_BOILERPLATE_POKE_DAMAGE, GuardRule, HEAVY_PUNCH_DAMAGE, HitReaction, KICK_DAMAGE,
+    LIGHT_PUNCH_DAMAGE, MoveId, MoveInputKind, MoveSpec, RUST_BORROW_JAB_DAMAGE,
+    move_spec_for_input,
 };
 
 const WIDTH: f32 = 76.0;
@@ -23,9 +31,8 @@ const DIAGONAL_JUMP_MIN_SPEED: f32 = 180.0;
 const JUMP_SPEED: f32 = -680.0;
 const GRAVITY: f32 = 1650.0;
 const MAX_FALL_SPEED: f32 = 920.0;
-const PROJECTILE_COOLDOWN: f32 = 0.95;
-const SPECIAL_ANIMATION_DURATION: f32 = 0.34;
 const BLOCK_DAMAGE_DIVISOR: i32 = 4;
+const TIMER_EPSILON: f32 = 0.0001;
 
 pub const BASIC_DAMAGE: i32 = LIGHT_PUNCH_DAMAGE;
 
@@ -50,6 +57,7 @@ pub enum AttackPhase {
     Startup,
     Active,
     Recovery,
+    WhiffRecovery,
 }
 
 /// Input commands for one fighter during one simulation tick.
@@ -66,11 +74,19 @@ pub struct FighterInput {
     pub projectile: bool,
 }
 
+/// Events produced while updating one fighter.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct FighterUpdateEvents {
+    pub close_attack_started: Option<MoveId>,
+    pub close_attack_whiffed: Option<MoveId>,
+}
+
 /// Result of applying a hit to a defender.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct DamageResult {
     pub damage: i32,
     pub blocked: bool,
+    pub pushback: f32,
 }
 
 /// Composed body or hurtbox pieces for debug drawing and collision checks.
@@ -89,18 +105,23 @@ pub struct Fighter {
     pub position: Vec2,
     pub velocity: Vec2,
     pub health: i32,
+    pub max_health: i32,
+    move_ids: &'static [MoveId],
     pub facing: Facing,
     pub grounded: bool,
     pub crouching: bool,
     pub blocking: bool,
     projectile_cooldown: f32,
     special_visual_timer: f32,
+    hitstun_timer: f32,
+    blockstun_timer: f32,
+    whiff_recovery_timer: f32,
     attack: Option<AttackState>,
 }
 
 #[derive(Clone, Copy, Debug)]
 struct AttackState {
-    kind: AttackKind,
+    spec: MoveSpec,
     elapsed: f32,
     has_hit: bool,
 }
@@ -108,51 +129,89 @@ struct AttackState {
 impl Fighter {
     /// Creates a fighter standing on the arena floor.
     pub fn new(slot: PlayerSlot, name: &'static str, x: f32) -> Self {
+        Self::new_with_max_health(slot, name, 100, x)
+    }
+
+    /// Creates a fighter with character-provided maximum health.
+    pub fn new_with_max_health(
+        slot: PlayerSlot,
+        name: &'static str,
+        max_health: i32,
+        x: f32,
+    ) -> Self {
+        Self::new_with_loadout(slot, name, max_health, &DEFAULT_CLOSE_RANGE_MOVE_IDS, x)
+    }
+
+    /// Creates a fighter with character-provided stats and close move ids.
+    pub fn new_with_loadout(
+        slot: PlayerSlot,
+        name: &'static str,
+        max_health: i32,
+        move_ids: &'static [MoveId],
+        x: f32,
+    ) -> Self {
+        let max_health = max_health.max(1);
         Self {
             slot,
             name,
             position: Vec2::new(x, FLOOR_Y - STANDING_HEIGHT),
             velocity: Vec2::ZERO,
-            health: 100,
+            health: max_health,
+            max_health,
+            move_ids,
             facing: Facing::Right,
             grounded: true,
             crouching: false,
             blocking: false,
             projectile_cooldown: 0.0,
             special_visual_timer: 0.0,
+            hitstun_timer: 0.0,
+            blockstun_timer: 0.0,
+            whiff_recovery_timer: 0.0,
             attack: None,
         }
     }
 
     /// Advances movement, stance, defense, and attack timers.
-    pub fn update(&mut self, dt: f32, input: FighterInput) {
+    pub fn update(&mut self, dt: f32, input: FighterInput) -> FighterUpdateEvents {
+        let mut events = FighterUpdateEvents::default();
         if self.is_defeated() {
             self.velocity = Vec2::ZERO;
             self.crouching = false;
             self.blocking = false;
+            self.hitstun_timer = 0.0;
+            self.blockstun_timer = 0.0;
+            self.whiff_recovery_timer = 0.0;
             self.special_visual_timer = 0.0;
-            return;
+            return events;
         }
 
-        self.projectile_cooldown = (self.projectile_cooldown - dt).max(0.0);
-        self.special_visual_timer = (self.special_visual_timer - dt).max(0.0);
-        self.crouching = input.crouch && self.grounded && self.attack.is_none();
-        self.blocking = input.block && self.grounded && self.attack.is_none();
+        self.projectile_cooldown = tick_timer(self.projectile_cooldown, dt);
+        self.special_visual_timer = tick_timer(self.special_visual_timer, dt);
+        self.hitstun_timer = tick_timer(self.hitstun_timer, dt);
+        self.blockstun_timer = tick_timer(self.blockstun_timer, dt);
+        self.whiff_recovery_timer = tick_timer(self.whiff_recovery_timer, dt);
+
+        let action_locked = self.is_action_locked();
+        self.crouching = !action_locked && input.crouch && self.grounded && self.attack.is_none();
+        self.blocking = self.in_blockstun()
+            || (!action_locked && input.block && self.grounded && self.attack.is_none());
         self.update_horizontal_velocity(dt, input);
 
-        let can_start_action = !self.crouching && !self.blocking;
+        let can_start_action = !action_locked && !self.crouching && !self.blocking;
         if input.jump && self.grounded && can_start_action {
             self.velocity.y = JUMP_SPEED;
             self.grounded = false;
             self.apply_diagonal_jump_boost(input);
         }
 
-        if let Some(kind) = input.requested_attack()
+        if let Some(spec) = input.requested_move_spec(self.move_ids)
             && self.attack.is_none()
             && can_start_action
         {
+            events.close_attack_started = Some(spec.id);
             self.attack = Some(AttackState {
-                kind,
+                spec,
                 elapsed: 0.0,
                 has_hit: false,
             });
@@ -171,8 +230,18 @@ impl Fighter {
 
         if let Some(mut attack) = self.attack {
             attack.elapsed += dt;
-            self.attack = (attack.elapsed < attack.kind.spec().duration).then_some(attack);
+            if attack.elapsed_frames() <= attack.spec.frames.duration {
+                self.attack = Some(attack);
+            } else {
+                self.attack = None;
+                if !attack.has_hit {
+                    events.close_attack_whiffed = Some(attack.spec.id);
+                    self.start_whiff_recovery(attack.spec);
+                }
+            }
         }
+
+        events
     }
 
     /// Updates facing direction to look toward the opponent.
@@ -199,19 +268,27 @@ impl Fighter {
         self.health = (self.health - damage).max(0);
     }
 
-    /// Applies incoming damage with the current block state.
-    pub fn take_hit(&mut self, damage: i32) -> DamageResult {
-        let blocked = self.blocking && !self.is_defeated();
+    /// Applies incoming damage and reaction using the given guard rule.
+    pub fn take_hit(
+        &mut self,
+        damage: i32,
+        guard_rule: GuardRule,
+        hit_reaction: HitReaction,
+    ) -> DamageResult {
+        let blocked =
+            !self.is_defeated() && guard_rule.is_blocked_by(self.blocking, self.crouching);
         let final_damage = if blocked {
             (damage / BLOCK_DAMAGE_DIVISOR).max(1)
         } else {
             damage
         };
         self.take_damage(final_damage);
+        let pushback = self.apply_hit_reaction(hit_reaction, blocked);
 
         DamageResult {
             damage: final_damage,
             blocked,
+            pushback,
         }
     }
 
@@ -221,14 +298,15 @@ impl Fighter {
             && self.grounded
             && !self.crouching
             && !self.blocking
+            && !self.is_action_locked()
             && self.attack.is_none()
             && self.projectile_cooldown <= 0.0
     }
 
     /// Starts the projectile cooldown after firing.
     pub fn mark_projectile_fired(&mut self) {
-        self.projectile_cooldown = PROJECTILE_COOLDOWN;
-        self.special_visual_timer = SPECIAL_ANIMATION_DURATION;
+        self.projectile_cooldown = PROJECTILE_FRAME_DATA.cooldown.as_seconds();
+        self.special_visual_timer = PROJECTILE_FRAME_DATA.visual_duration.as_seconds();
     }
 
     /// Returns whether this fighter can currently deal a new close hit.
@@ -298,21 +376,34 @@ impl Fighter {
     pub fn active_attack(&self) -> Option<ActiveAttack> {
         self.attack.and_then(|attack| {
             attack.is_active().then(|| ActiveAttack {
-                kind: attack.kind,
-                hitbox: self.attack_box_for(attack.kind),
-                damage: attack.kind.damage(),
+                kind: attack.kind(),
+                move_id: attack.spec.id,
+                hitbox: self.attack_box_for(attack.spec),
+                damage: attack.spec.damage,
+                guard_rule: attack.spec.guard_rule,
+                hit_reaction: attack.spec.hit_reaction,
             })
         })
     }
 
     /// Returns the attack reach box while an attack animation is running.
     pub fn attack_box(&self) -> Option<Rect> {
-        self.attack.map(|attack| self.attack_box_for(attack.kind))
+        self.attack.map(|attack| self.attack_box_for(attack.spec))
     }
 
     /// Returns the current close attack kind, if any.
     pub fn attack_kind(&self) -> Option<AttackKind> {
-        self.attack.map(|attack| attack.kind)
+        self.attack.map(AttackState::kind)
+    }
+
+    /// Returns the concrete close-range move spec currently being played.
+    pub fn attack_move_spec(&self) -> Option<MoveSpec> {
+        self.attack.map(|attack| attack.spec)
+    }
+
+    /// Returns close-range move ids available to this fighter.
+    pub const fn move_ids(&self) -> &'static [MoveId] {
+        self.move_ids
     }
 
     /// Returns elapsed seconds for the current close attack animation.
@@ -320,15 +411,76 @@ impl Fighter {
         self.attack.map(|attack| attack.elapsed)
     }
 
+    /// Returns elapsed whole frames for the current close attack animation.
+    pub fn attack_elapsed_frames(&self) -> Option<FrameCount> {
+        self.attack.map(AttackState::elapsed_frames)
+    }
+
+    /// Returns whole-frame data for the current close attack.
+    pub fn attack_frame_data(&self) -> Option<AttackFrameData> {
+        self.attack.map(|attack| attack.spec.frames)
+    }
+
     /// Returns elapsed seconds for the current special animation.
     pub fn special_elapsed_seconds(&self) -> Option<f32> {
-        (self.special_visual_timer > 0.0)
-            .then_some(SPECIAL_ANIMATION_DURATION - self.special_visual_timer)
+        (self.special_visual_timer > 0.0).then_some(
+            PROJECTILE_FRAME_DATA.visual_duration.as_seconds() - self.special_visual_timer,
+        )
+    }
+
+    /// Returns elapsed whole frames for the current special animation.
+    pub fn special_elapsed_frames(&self) -> Option<FrameCount> {
+        self.special_elapsed_seconds()
+            .map(FrameCount::from_elapsed_seconds)
+    }
+
+    /// Returns whole-frame data for the projectile special.
+    pub fn projectile_frame_data(&self) -> ProjectileFrameData {
+        PROJECTILE_FRAME_DATA
+    }
+
+    /// Returns remaining cooldown for the projectile special in whole frames.
+    pub fn projectile_cooldown_remaining_frames(&self) -> FrameCount {
+        FrameCount::from_elapsed_seconds(self.projectile_cooldown)
+    }
+
+    /// Returns remaining hitstun in whole frames.
+    pub fn hitstun_remaining_frames(&self) -> FrameCount {
+        FrameCount::from_elapsed_seconds(self.hitstun_timer)
+    }
+
+    /// Returns remaining blockstun in whole frames.
+    pub fn blockstun_remaining_frames(&self) -> FrameCount {
+        FrameCount::from_elapsed_seconds(self.blockstun_timer)
+    }
+
+    /// Returns remaining whiff recovery in whole frames.
+    pub fn whiff_recovery_remaining_frames(&self) -> FrameCount {
+        FrameCount::from_elapsed_seconds(self.whiff_recovery_timer)
+    }
+
+    /// Returns whether the fighter is currently locked by hitstun.
+    pub fn in_hitstun(&self) -> bool {
+        self.hitstun_timer > 0.0
+    }
+
+    /// Returns whether the fighter is currently locked by blockstun.
+    pub fn in_blockstun(&self) -> bool {
+        self.blockstun_timer > 0.0
+    }
+
+    /// Returns whether the fighter is locked after missing a close attack.
+    pub fn in_whiff_recovery(&self) -> bool {
+        self.whiff_recovery_timer > 0.0
     }
 
     /// Returns the current attack phase for debug rendering.
     pub fn attack_phase(&self) -> AttackPhase {
-        self.attack.map_or(AttackPhase::Idle, AttackState::phase)
+        if self.in_whiff_recovery() {
+            AttackPhase::WhiffRecovery
+        } else {
+            self.attack.map_or(AttackPhase::Idle, AttackState::phase)
+        }
     }
 
     /// Returns the defensive box drawn in front of a blocking fighter.
@@ -349,7 +501,7 @@ impl Fighter {
     }
 
     fn update_horizontal_velocity(&mut self, dt: f32, input: FighterInput) {
-        let axis = if self.crouching || self.blocking {
+        let axis = if self.crouching || self.blocking || self.is_action_locked() {
             0.0
         } else {
             input.horizontal_axis()
@@ -389,20 +541,15 @@ impl Fighter {
         }
     }
 
-    fn attack_box_for(&self, kind: AttackKind) -> Rect {
+    fn attack_box_for(&self, spec: MoveSpec) -> Rect {
         let body = self.body_rect();
-        let spec = kind.spec();
+        let spec = spec.hitbox;
         let x = if self.facing == Facing::Right {
             body.right()
         } else {
-            body.x - spec.hitbox_width
+            body.x - spec.width
         };
-        Rect::new(
-            x,
-            body.y + spec.hitbox_y_offset,
-            spec.hitbox_width,
-            spec.hitbox_height,
-        )
+        Rect::new(x, body.y + spec.y_offset, spec.width, spec.height)
     }
 
     fn body_height(&self) -> f32 {
@@ -412,19 +559,57 @@ impl Fighter {
             STANDING_HEIGHT
         }
     }
+
+    fn apply_hit_reaction(&mut self, hit_reaction: HitReaction, blocked: bool) -> f32 {
+        self.velocity.x = 0.0;
+        self.whiff_recovery_timer = 0.0;
+        if blocked {
+            self.blocking = true;
+            self.blockstun_timer = hit_reaction.blockstun.as_seconds();
+            return hit_reaction.block_pushback;
+        }
+
+        self.attack = None;
+        self.blocking = false;
+        self.hitstun_timer = hit_reaction.hitstun.as_seconds();
+        hit_reaction.hit_pushback
+    }
+
+    fn is_reacting(&self) -> bool {
+        self.in_hitstun() || self.in_blockstun()
+    }
+
+    fn is_action_locked(&self) -> bool {
+        self.is_reacting() || self.in_whiff_recovery()
+    }
+
+    fn start_whiff_recovery(&mut self, spec: MoveSpec) {
+        self.velocity.x = 0.0;
+        self.whiff_recovery_timer = spec.whiff_recovery.as_seconds();
+    }
 }
 
 impl AttackState {
+    fn kind(self) -> AttackKind {
+        AttackKind::from_input_kind(self.spec.input)
+    }
+
+    fn elapsed_frames(self) -> FrameCount {
+        FrameCount::from_elapsed_seconds(self.elapsed)
+    }
+
     fn is_active(self) -> bool {
-        let spec = self.kind.spec();
-        self.elapsed >= spec.active_start && self.elapsed <= spec.active_end
+        let frames = self.spec.frames;
+        let current = self.elapsed_frames();
+        current >= frames.active_start && current <= frames.active_end
     }
 
     fn phase(self) -> AttackPhase {
-        let spec = self.kind.spec();
-        if self.elapsed < spec.active_start {
+        let frames = self.spec.frames;
+        let current = self.elapsed_frames();
+        if current < frames.active_start {
             AttackPhase::Startup
-        } else if self.elapsed <= spec.active_end {
+        } else if current <= frames.active_end {
             AttackPhase::Active
         } else {
             AttackPhase::Recovery
@@ -444,16 +629,18 @@ impl FighterInput {
         }
     }
 
-    fn requested_attack(self) -> Option<AttackKind> {
-        if self.heavy_punch {
-            Some(AttackKind::HeavyPunch)
+    fn requested_move_spec(self, move_ids: &[MoveId]) -> Option<MoveSpec> {
+        let input = if self.heavy_punch {
+            MoveInputKind::HeavyPunch
         } else if self.kick {
-            Some(AttackKind::Kick)
+            MoveInputKind::Kick
         } else if self.light_punch {
-            Some(AttackKind::LightPunch)
+            MoveInputKind::LightPunch
         } else {
-            None
-        }
+            return None;
+        };
+
+        move_spec_for_input(move_ids, input)
     }
 
     fn horizontal_axis(self) -> f32 {
@@ -489,4 +676,9 @@ fn inset_rect(rect: Rect, amount: f32) -> Rect {
         (rect.width - amount * 2.0).max(1.0),
         (rect.height - amount * 2.0).max(1.0),
     )
+}
+
+fn tick_timer(timer: f32, dt: f32) -> f32 {
+    let next = timer - dt;
+    if next <= TIMER_EPSILON { 0.0 } else { next }
 }

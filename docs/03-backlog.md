@@ -22,7 +22,7 @@ Status do primeiro greybox:
 | Criar projeto Rust | S | Alta | Feito | Cargo project básico |
 | Configurar Raylib/Raylib-rs | M | Alta | Feito | Validado com checks locais |
 | Criar janela e loop principal | S | Alta | Feito | Primeiro teste visual |
-| Desenhar arena simples | S | Alta | Feito | Arena atual usa bitmap Java Street |
+| Desenhar arena simples | S | Alta | Feito | Arenas Sirius, Fortaleza Tech Coast e Java Street em rotação |
 | Criar entidade Player | M | Alta | Feito | Posição, velocidade, vida e estado |
 | Implementar input local | M | Alta | Feito | Teclado e gamepad quando disponível |
 | Movimento horizontal | M | Alta | Feito | Esquerda/direita com suavização inicial |

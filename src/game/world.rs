@@ -1,10 +1,18 @@
 //! Owns the greybox fight simulation.
 //!
+//! System: Match runtime. This module owns round-level state and consumes
+//! character specs, but delegates combat primitives to `combat/*`.
+//!
 //! This world is intentionally small and deterministic enough to unit test
 //! without Raylib.
 
+use crate::audio::AudioEvent;
+use crate::characters::{CharacterId, character_spec};
 use crate::combat::collision::hitbox_hits_hurtbox;
-use crate::combat::fighter::{ActiveAttack, DamageResult, Fighter, FighterInput, PlayerSlot};
+use crate::combat::fighter::{
+    ActiveAttack, DamageResult, Fighter, FighterInput, FighterUpdateEvents, GuardRule, HitReaction,
+    PlayerSlot,
+};
 use crate::combat::projectile::Projectile;
 use crate::config::{ARENA_LEFT, ARENA_RIGHT};
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
@@ -14,7 +22,11 @@ use crate::math::vec2::Vec2;
 const HIT_EFFECT_LIFETIME: f32 = 0.35;
 const BODY_COLLISION_EFFECT_LIFETIME: f32 = 0.12;
 pub const SPAWN_INTRO_DURATION_SECONDS: f32 = 2.7;
+pub const ROUND_COUNTDOWN_STEP_SECONDS: f32 = 0.75;
+pub const ROUND_COUNTDOWN_TOTAL_SECONDS: f32 = ROUND_COUNTDOWN_STEP_SECONDS * 4.0;
 pub const MIN_BODY_GAP: f32 = 8.0;
+
+const ROUND_COUNTDOWN_LABELS: [&str; 4] = ["11", "10", "01", "Fight!"];
 
 /// Final result of a greybox match.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -37,26 +49,41 @@ pub struct HitEffect {
 pub struct World {
     pub player_one: Fighter,
     pub player_two: Fighter,
+    player_one_character: CharacterId,
+    player_two_character: CharacterId,
     pub outcome: Option<MatchOutcome>,
     pub hit_effects: Vec<HitEffect>,
     pub projectiles: Vec<Projectile>,
     pub body_collision_timer: f32,
     pub elapsed_seconds: f32,
+    audio_events: Vec<AudioEvent>,
     spawn_intro_timer: f32,
+    countdown_timer: f32,
+    countdown_audio_step: Option<usize>,
 }
 
 impl World {
     /// Creates the initial greybox fight.
     pub fn new_greybox() -> Self {
+        Self::new_with_characters(CharacterId::Rust, CharacterId::Duke)
+    }
+
+    /// Creates a greybox fight from explicit character specs.
+    pub fn new_with_characters(player_one: CharacterId, player_two: CharacterId) -> Self {
         let mut world = Self {
-            player_one: Fighter::new(PlayerSlot::One, "Rust", 232.0),
-            player_two: Fighter::new(PlayerSlot::Two, "Java", 676.0),
+            player_one: fighter_from_character(PlayerSlot::One, player_one, 232.0),
+            player_two: fighter_from_character(PlayerSlot::Two, player_two, 676.0),
+            player_one_character: player_one,
+            player_two_character: player_two,
             outcome: None,
             hit_effects: Vec::new(),
             projectiles: Vec::new(),
             body_collision_timer: 0.0,
             elapsed_seconds: 0.0,
+            audio_events: Vec::new(),
             spawn_intro_timer: 0.0,
+            countdown_timer: 0.0,
+            countdown_audio_step: None,
         };
         world.update_facing();
         world
@@ -66,6 +93,7 @@ impl World {
     pub fn new_greybox_with_intro() -> Self {
         let mut world = Self::new_greybox();
         world.spawn_intro_timer = SPAWN_INTRO_DURATION_SECONDS;
+        world.countdown_timer = ROUND_COUNTDOWN_TOTAL_SECONDS;
         world
     }
 
@@ -77,6 +105,48 @@ impl World {
     /// Returns elapsed time inside the current spawn intro.
     pub fn spawn_intro_elapsed_seconds(&self) -> f32 {
         (SPAWN_INTRO_DURATION_SECONDS - self.spawn_intro_timer).max(0.0)
+    }
+
+    /// Returns whether the pre-fight countdown is blocking gameplay.
+    pub fn countdown_active(&self) -> bool {
+        !self.spawn_intro_active() && self.countdown_timer > 0.0
+    }
+
+    /// Returns the visible pre-fight countdown label.
+    pub fn countdown_label(&self) -> Option<&'static str> {
+        if self.countdown_active() {
+            Some(ROUND_COUNTDOWN_LABELS[self.countdown_step_index()])
+        } else {
+            None
+        }
+    }
+
+    /// Returns elapsed time inside the pre-fight countdown.
+    pub fn countdown_elapsed_seconds(&self) -> f32 {
+        (ROUND_COUNTDOWN_TOTAL_SECONDS - self.countdown_timer).max(0.0)
+    }
+
+    /// Returns the character id used by Player 1.
+    pub const fn player_one_character(&self) -> CharacterId {
+        self.player_one_character
+    }
+
+    /// Returns the character id used by Player 2.
+    pub const fn player_two_character(&self) -> CharacterId {
+        self.player_two_character
+    }
+
+    /// Returns the character id assigned to a player slot.
+    pub const fn character_for_slot(&self, slot: PlayerSlot) -> CharacterId {
+        match slot {
+            PlayerSlot::One => self.player_one_character,
+            PlayerSlot::Two => self.player_two_character,
+        }
+    }
+
+    /// Drains audio events generated since the previous call.
+    pub fn take_audio_events(&mut self) -> Vec<AudioEvent> {
+        std::mem::take(&mut self.audio_events)
     }
 
     /// Advances one fixed gameplay step.
@@ -104,9 +174,16 @@ impl World {
             self.spawn_intro_timer = (self.spawn_intro_timer - dt).max(0.0);
             return;
         }
+        if self.countdown_active() {
+            self.queue_countdown_audio_event();
+            self.countdown_timer = (self.countdown_timer - dt).max(0.0);
+            return;
+        }
 
-        self.player_one.update(dt, player_one);
-        self.player_two.update(dt, player_two);
+        let player_one_events = self.player_one.update(dt, player_one);
+        self.queue_fighter_audio_events(PlayerSlot::One, player_one_events);
+        let player_two_events = self.player_two.update(dt, player_two);
+        self.queue_fighter_audio_events(PlayerSlot::Two, player_two_events);
         self.spawn_projectiles(player_one, player_two);
         self.update_projectiles(dt);
         self.resolve_body_collision();
@@ -194,8 +271,17 @@ impl World {
         let p2_attack = landed_attack(&self.player_two, &self.player_one);
 
         if let Some(attack) = p1_attack {
-            let result = take_player_two_hit(&mut self.player_two, attack.damage, flags);
+            let pushback_direction = pushback_direction(&self.player_one, &self.player_two);
+            let result = take_player_two_hit(
+                &mut self.player_two,
+                attack.damage,
+                attack.guard_rule,
+                attack.hit_reaction,
+                flags,
+            );
+            apply_pushback(&mut self.player_two, pushback_direction, result.pushback);
             self.player_one.mark_attack_hit();
+            self.queue_close_hit_audio(PlayerSlot::One, PlayerSlot::Two, attack, result);
             self.hit_effects.push(HitEffect::new(
                 self.player_two.hurtbox().center(),
                 result.damage,
@@ -204,8 +290,17 @@ impl World {
         }
 
         if let Some(attack) = p2_attack {
-            let result = take_player_one_hit(&mut self.player_one, attack.damage, flags);
+            let pushback_direction = pushback_direction(&self.player_two, &self.player_one);
+            let result = take_player_one_hit(
+                &mut self.player_one,
+                attack.damage,
+                attack.guard_rule,
+                attack.hit_reaction,
+                flags,
+            );
+            apply_pushback(&mut self.player_one, pushback_direction, result.pushback);
             self.player_two.mark_attack_hit();
+            self.queue_close_hit_audio(PlayerSlot::Two, PlayerSlot::One, attack, result);
             self.hit_effects.push(HitEffect::new(
                 self.player_one.hurtbox().center(),
                 result.damage,
@@ -219,12 +314,20 @@ impl World {
             self.projectiles
                 .push(Projectile::from_fighter(&self.player_one));
             self.player_one.mark_projectile_fired();
+            self.audio_events.push(AudioEvent::fighter_projectile_cast(
+                PlayerSlot::One,
+                self.player_one_character,
+            ));
         }
 
         if player_two.projectile && self.player_two.can_fire_projectile() {
             self.projectiles
                 .push(Projectile::from_fighter(&self.player_two));
             self.player_two.mark_projectile_fired();
+            self.audio_events.push(AudioEvent::fighter_projectile_cast(
+                PlayerSlot::Two,
+                self.player_two_character,
+            ));
         }
     }
 
@@ -241,6 +344,10 @@ impl World {
     }
 
     fn resolve_projectile_hits(&mut self, flags: FeatureFlags) {
+        let player_one_character = self.player_one_character;
+        let player_two_character = self.player_two_character;
+        let mut audio_events = Vec::new();
+
         for projectile in &mut self.projectiles {
             if !projectile.alive {
                 continue;
@@ -249,9 +356,24 @@ impl World {
             let rect = projectile.rect();
             match projectile.owner {
                 PlayerSlot::One if projectile_hits_fighter(rect, &self.player_two) => {
-                    let result =
-                        take_player_two_hit(&mut self.player_two, projectile.damage, flags);
+                    let pushback_direction = projectile_pushback_direction(projectile);
+                    let result = take_player_two_hit(
+                        &mut self.player_two,
+                        projectile.damage,
+                        projectile.guard_rule,
+                        projectile.hit_reaction,
+                        flags,
+                    );
+                    apply_pushback(&mut self.player_two, pushback_direction, result.pushback);
                     projectile.alive = false;
+                    queue_projectile_hit_audio(
+                        &mut audio_events,
+                        PlayerSlot::One,
+                        player_one_character,
+                        PlayerSlot::Two,
+                        player_two_character,
+                        result,
+                    );
                     self.hit_effects.push(HitEffect::new(
                         self.player_two.hurtbox().center(),
                         result.damage,
@@ -259,9 +381,24 @@ impl World {
                     ));
                 }
                 PlayerSlot::Two if projectile_hits_fighter(rect, &self.player_one) => {
-                    let result =
-                        take_player_one_hit(&mut self.player_one, projectile.damage, flags);
+                    let pushback_direction = projectile_pushback_direction(projectile);
+                    let result = take_player_one_hit(
+                        &mut self.player_one,
+                        projectile.damage,
+                        projectile.guard_rule,
+                        projectile.hit_reaction,
+                        flags,
+                    );
+                    apply_pushback(&mut self.player_one, pushback_direction, result.pushback);
                     projectile.alive = false;
+                    queue_projectile_hit_audio(
+                        &mut audio_events,
+                        PlayerSlot::Two,
+                        player_two_character,
+                        PlayerSlot::One,
+                        player_one_character,
+                        result,
+                    );
                     self.hit_effects.push(HitEffect::new(
                         self.player_one.hurtbox().center(),
                         result.damage,
@@ -272,17 +409,120 @@ impl World {
             }
         }
 
+        self.audio_events.extend(audio_events);
         self.projectiles.retain(|projectile| projectile.alive);
     }
 
     fn resolve_outcome(&mut self) {
+        let previous = self.outcome;
         self.outcome = match (self.player_one.is_defeated(), self.player_two.is_defeated()) {
             (true, true) => Some(MatchOutcome::Draw),
             (true, false) => Some(MatchOutcome::Winner(PlayerSlot::Two)),
             (false, true) => Some(MatchOutcome::Winner(PlayerSlot::One)),
             (false, false) => None,
         };
+        if previous.is_none()
+            && let Some(MatchOutcome::Winner(slot)) = self.outcome
+        {
+            self.audio_events.push(AudioEvent::match_victory(
+                slot,
+                self.character_for_slot(slot),
+            ));
+        }
     }
+
+    fn queue_fighter_audio_events(&mut self, slot: PlayerSlot, events: FighterUpdateEvents) {
+        let character = self.character_for_slot(slot);
+        if let Some(move_id) = events.close_attack_started {
+            self.audio_events
+                .push(AudioEvent::fighter_attack_start(slot, character, move_id));
+        }
+        if let Some(move_id) = events.close_attack_whiffed {
+            self.audio_events
+                .push(AudioEvent::fighter_attack_whiff(slot, character, move_id));
+        }
+    }
+
+    fn queue_countdown_audio_event(&mut self) {
+        let step = self.countdown_step_index();
+        if self.countdown_audio_step == Some(step) {
+            return;
+        }
+
+        self.countdown_audio_step = Some(step);
+        self.audio_events.push(match step {
+            0 => AudioEvent::match_countdown_eleven(),
+            1 => AudioEvent::match_countdown_ten(),
+            2 => AudioEvent::match_countdown_one(),
+            _ => AudioEvent::match_countdown_fight(),
+        });
+    }
+
+    fn queue_close_hit_audio(
+        &mut self,
+        attacker: PlayerSlot,
+        defender: PlayerSlot,
+        attack: ActiveAttack,
+        result: DamageResult,
+    ) {
+        let attacker_character = self.character_for_slot(attacker);
+        let defender_character = self.character_for_slot(defender);
+        if result.blocked {
+            self.audio_events.push(AudioEvent::combat_block(
+                attacker,
+                attacker_character,
+                attack.move_id,
+            ));
+            self.audio_events
+                .push(AudioEvent::fighter_block(defender, defender_character));
+        } else {
+            self.audio_events.push(AudioEvent::combat_hit(
+                attacker,
+                attacker_character,
+                attack.move_id,
+            ));
+            if result.damage > 0 {
+                self.audio_events
+                    .push(AudioEvent::fighter_hurt(defender, defender_character));
+            }
+        }
+    }
+
+    fn countdown_step_index(&self) -> usize {
+        let elapsed = self
+            .countdown_elapsed_seconds()
+            .min(ROUND_COUNTDOWN_TOTAL_SECONDS - f32::EPSILON);
+        (elapsed / ROUND_COUNTDOWN_STEP_SECONDS).floor() as usize
+    }
+}
+
+fn queue_projectile_hit_audio(
+    events: &mut Vec<AudioEvent>,
+    attacker: PlayerSlot,
+    attacker_character: CharacterId,
+    defender: PlayerSlot,
+    defender_character: CharacterId,
+    result: DamageResult,
+) {
+    events.push(AudioEvent::projectile_impact(attacker, attacker_character));
+    if result.blocked {
+        events.push(AudioEvent::fighter_block(defender, defender_character));
+    } else {
+        if result.damage > 0 {
+            events.push(AudioEvent::fighter_hurt(defender, defender_character));
+        }
+    }
+}
+
+fn fighter_from_character(slot: PlayerSlot, character: CharacterId, x: f32) -> Fighter {
+    let spec = character_spec(character);
+    Fighter::new_with_loadout(
+        slot,
+        spec.fighter_name,
+        spec.stats.max_health,
+        spec.move_ids,
+        x,
+    )
 }
 
 impl HitEffect {
@@ -315,24 +555,63 @@ fn projectile_hits_fighter(projectile: Rect, fighter: &Fighter) -> bool {
         .any(|hurtbox| projectile.intersects(hurtbox))
 }
 
-fn take_player_one_hit(player_one: &mut Fighter, damage: i32, flags: FeatureFlags) -> DamageResult {
+fn pushback_direction(attacker: &Fighter, defender: &Fighter) -> f32 {
+    if attacker.body_rect().center_x() <= defender.body_rect().center_x() {
+        1.0
+    } else {
+        -1.0
+    }
+}
+
+fn projectile_pushback_direction(projectile: &Projectile) -> f32 {
+    if projectile.velocity.x >= 0.0 {
+        1.0
+    } else {
+        -1.0
+    }
+}
+
+fn apply_pushback(defender: &mut Fighter, direction: f32, amount: f32) {
+    if amount <= 0.0 {
+        return;
+    }
+
+    defender.position.x += direction * amount;
+    defender.clamp_to_arena();
+}
+
+fn take_player_one_hit(
+    player_one: &mut Fighter,
+    damage: i32,
+    guard_rule: GuardRule,
+    hit_reaction: HitReaction,
+    flags: FeatureFlags,
+) -> DamageResult {
     if flags.enabled(FeatureFlag::PlayerOneTakesDamage) {
-        player_one.take_hit(damage)
+        player_one.take_hit(damage, guard_rule, hit_reaction)
     } else {
         DamageResult {
             damage: 0,
             blocked: false,
+            pushback: 0.0,
         }
     }
 }
 
-fn take_player_two_hit(player_two: &mut Fighter, damage: i32, flags: FeatureFlags) -> DamageResult {
+fn take_player_two_hit(
+    player_two: &mut Fighter,
+    damage: i32,
+    guard_rule: GuardRule,
+    hit_reaction: HitReaction,
+    flags: FeatureFlags,
+) -> DamageResult {
     if flags.enabled(FeatureFlag::PlayerTwoTakesDamage) {
-        player_two.take_hit(damage)
+        player_two.take_hit(damage, guard_rule, hit_reaction)
     } else {
         DamageResult {
             damage: 0,
             blocked: false,
+            pushback: 0.0,
         }
     }
 }

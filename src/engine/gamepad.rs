@@ -1,5 +1,8 @@
 //! Maps Raylib gamepad state into fighter commands.
 //!
+//! System: Raylib input boundary. This module isolates controller button and
+//! axis mapping from combat logic.
+//!
 //! The prototype uses the first connected gamepad for Player 1 and the second
 //! connected gamepad for Player 2 when manual Player 2 control is enabled.
 

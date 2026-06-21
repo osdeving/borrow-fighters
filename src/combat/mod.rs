@@ -5,5 +5,7 @@
 
 pub mod collision;
 pub mod fighter;
+pub mod frame;
+pub mod move_data;
 pub mod move_set;
 pub mod projectile;

@@ -10,7 +10,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 
 - Janela Raylib.
 - Loop de jogo com fixed timestep.
-- Arena bitmap placeholder `Java Street`.
+- Arenas bitmap placeholder `Sirius`, `Fortaleza Tech Coast` e `Java Street`.
 - Tela inicial de preferências com feature flags runtime.
 - Dois lutadores greybox: Rust e Java.
 - Corpo composto por cabeça, tronco e pernas placeholder.
@@ -19,7 +19,8 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Pulo simples e pulo diagonal com momentum.
 - Abaixar com hurtbox menor.
 - Defesa com redução de dano.
-- Arena com chão e limites.
+- Arena com chão, limites e rotação de cenário ao iniciar a próxima luta após uma vitória.
+- Entrada cinematográfica seguida de contagem pré-luta `11`, `10`, `01`, `Fight!`.
 - Colisão física corpo-corpo com gap mínimo.
 - Soco fraco/curto.
 - Soco forte/longo.
@@ -38,6 +39,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Reinício da partida.
 - HUD, ajuda de controles e debug visual configuráveis.
 - Testes de regras de combate sem abrir janela.
+- Combat Lab com reprodução de golpes e poses estáticas de inspeção.
 
 ## Como rodar
 
@@ -62,9 +64,31 @@ cargo clippy --all-targets --all-features -- -D warnings
 
 O GitHub também roda `Rust Check` no PR para validar formatação, testes e clippy em Linux.
 
+## Combat Lab
+
+Para abrir uma cena limpa de inspeção de golpe:
+
+```bash
+cargo run -- --lab combat --character rust --move light_punch
+cargo run -- --lab combat --character duke --move projectile
+```
+
+Para abrir uma pose estática:
+
+```bash
+cargo run -- --lab combat --character rust --pose crouch
+cargo run -- --lab combat --character duke --pose victory
+```
+
+No Combat Lab, `Tab` / `Shift+Tab` alterna golpes, `PageDown` / `PageUp` alterna poses, `Enter` reinicia, `Espaço` pausa, `.` avança um frame quando pausado, `Home` volta ao frame 0, `H` alterna hurtbox, `B` alterna hitbox, `P` alterna pivot/eixos, `D` alterna dummy e `A` alterna o fundo de arena.
+
+O Combat Lab abre com o fundo `Sirius` ligado para validar contraste de golpe/sprite contra cenário. Use `A` para remover o fundo e voltar ao grid limpo.
+
 ## Preferências
 
 O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navegar, `Espaço` para ligar/desligar uma opção e `Enter` para começar ou voltar para a luta. Durante a luta, `Esc` volta para essa tela.
+
+Ao começar uma luta, os personagens entram em cena e depois aparece a contagem central `11`, `10`, `01`, `Fight!`. Enquanto a intro ou a contagem estiver ativa, ataques, movimento e projéteis ficam bloqueados. Depois que alguém vence, o cenário permanece o mesmo durante a pose final; a próxima arena só entra quando a luta seguinte começa com `R`/`Start` ou ao voltar da tela de preferências.
 
 | Preferência | Padrão | O que testar |
 |---|---|---|
@@ -116,7 +140,7 @@ O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um c
 | Escudo/spark azul | Defesa reduziu dano |
 | `-8`, `-12`, `-16` | Dano aplicado |
 | Linha magenta | Colisão corpo-corpo bloqueando passagem |
-| Fundo Java Street | Arena placeholder, não arte final |
+| Fundo Sirius/Fortaleza/Java Street | Arena placeholder, não arte final |
 
 Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `Mostrar debug de combate` ligado. A ajuda de comandos no rodapé aparece somente com `Mostrar ajuda de controles` ligado.
 
@@ -142,12 +166,48 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 18. `Esc` durante a luta deve voltar para a tela de preferências.
 19. Pulo com direção pressionada deve sair em diagonal.
 20. A vida deve chegar a zero e encerrar a luta.
-21. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
+21. Ao fim da luta, o cenário deve avançar uma vez no ciclo `Sirius -> Fortaleza Tech Coast -> Java Street -> Sirius`.
+22. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
+
+## Combat Lab
+
+Para testar um golpe sem iniciar a luta completa:
+
+```bash
+cargo run -- --lab combat --character rust --move light_punch
+cargo run -- --lab combat --character duke --move projectile
+```
+
+Use o Combat Lab para verificar:
+
+- pivot e linha do chão;
+- hurtbox do personagem;
+- hitbox ativa e inativa;
+- frame atual, fase e janela ativa do golpe;
+- spawn, altura e trajetória inicial do projectile.
+
+Rastreio técnico do Combat Lab, hitbox/hurtbox e arquivos de combate: [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md).
+
+Controles do lab:
+
+| Ação | Tecla |
+|---|---|
+| Próximo golpe | `Tab` |
+| Golpe anterior | `Shift+Tab` |
+| Repetir golpe | `Enter` |
+| Pausar/continuar | `Espaço` |
+| Avançar 1 frame | `.` |
+| Voltar ao frame 0 | `Home` |
+| Alternar hurtbox | `H` |
+| Alternar hitbox | `B` |
+| Alternar pivot/eixos | `P` |
+| Alternar dummy | `D` |
+| Alternar fundo de arena | `A` |
 
 ## Limitações conhecidas
 
 - Os dois personagens ainda compartilham o mesmo kit de golpes.
-- A arena bitmap é placeholder gerado por IA e não deve ser tratada como arte final.
+- As arenas bitmap são placeholders gerados/derivados de referências e não devem ser tratadas como arte final.
 - O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.
 - Fireball no gamepad usa `RB` por enquanto; `RT` pode entrar depois quando tivermos leitura de gatilho com borda de pressionamento.
 - Defesa é um experimento mínimo: reduz dano, mas ainda não tem direção, high/low guard ou pushback.

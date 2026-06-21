@@ -3,6 +3,8 @@
 //! Scenes keep application flow explicit without introducing a full screen
 //! framework during the prototype.
 
+pub mod combat_lab;
+pub mod combat_lab_analysis;
 pub mod preferences;
 
 /// Top-level screen currently owned by the application loop.
@@ -10,4 +12,5 @@ pub mod preferences;
 pub enum AppScene {
     Preferences,
     Fight,
+    CombatLab,
 }

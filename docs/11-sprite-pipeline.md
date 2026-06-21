@@ -54,7 +54,7 @@ Campos principais:
 
 Clips extras como `taunt`, `victory`, `defeat` e `projectile` podem existir, mas nao devem bloquear o prototipo.
 
-`spawn` e reservado para entrada cinematografica no inicio da luta. Ele deve ser nao-loopavel e nao deve carregar regra de combate; o jogo apenas pausa os inputs ate a intro terminar.
+`spawn` e reservado para entrada cinematografica no inicio da luta. Ele deve ser nao-loopavel e nao deve carregar regra de combate; o jogo pausa os inputs durante a intro e depois durante a contagem `11`, `10`, `01`, `Fight!`.
 
 ## Aseprite e ferramentas externas
 
@@ -95,6 +95,8 @@ Assets relacionados ao slice atual:
 
 - `assets/placeholder/rust-gear-projectile.png`
 - `assets/placeholder/duke-bean-projectile.png`
+- `assets/placeholder/arena-sirius.png`
+- `assets/placeholder/arena-fortaleza.png`
 - `assets/placeholder/arena-java-street.png`
 - `assets/placeholder/arena-terminal-compiler-lab.png`
 

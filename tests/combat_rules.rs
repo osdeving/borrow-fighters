@@ -1,20 +1,29 @@
 //! Exercises testable greybox combat rules without opening a Raylib window.
 
+use borrow_fighters::audio::AudioCue;
+use borrow_fighters::characters::{CharacterId, character_spec};
 use borrow_fighters::combat::fighter::{
-    FighterInput, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE,
+    AttackKind, AttackPhase, Fighter, FighterInput, GuardRule, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE,
+    PlayerSlot, RUST_BORROW_JAB_DAMAGE,
 };
-use borrow_fighters::combat::projectile::{PROJECTILE_DAMAGE, PROJECTILE_SPEED};
+use borrow_fighters::combat::move_data::{LIGHT_ATTACK_REACTION, MoveId, move_spec};
+use borrow_fighters::combat::projectile::{
+    PROJECTILE_DAMAGE, PROJECTILE_GUARD_RULE, PROJECTILE_HIT_REACTION, PROJECTILE_SPEED,
+};
 use borrow_fighters::game::ai::BasicCpu;
 use borrow_fighters::game::feature_flags::{FeatureFlag, FeatureFlags};
 use borrow_fighters::game::world::{
-    MIN_BODY_GAP, MatchOutcome, SPAWN_INTRO_DURATION_SECONDS, World,
+    MIN_BODY_GAP, MatchOutcome, ROUND_COUNTDOWN_STEP_SECONDS, ROUND_COUNTDOWN_TOTAL_SECONDS,
+    SPAWN_INTRO_DURATION_SECONDS, World,
 };
 
 const DT: f32 = 1.0 / 60.0;
+const KICK_ONLY_MOVES: [MoveId; 1] = [MoveId::Kick];
 
 #[test]
 fn basic_attack_deals_damage_once_per_swing() {
     let mut world = World::new_greybox();
+    let player_two_health = world.player_two.max_health;
     world.player_one.position.x = 420.0;
     world.player_two.position.x = 470.0;
 
@@ -31,13 +40,17 @@ fn basic_attack_deals_damage_once_per_swing() {
         world.update(DT, FighterInput::default(), FighterInput::default());
     }
 
-    assert_eq!(world.player_two.health, 100 - LIGHT_PUNCH_DAMAGE);
+    assert_eq!(
+        world.player_two.health,
+        player_two_health - RUST_BORROW_JAB_DAMAGE
+    );
     assert_eq!(world.hit_effects.len(), 1);
 }
 
 #[test]
 fn heavy_punch_reaches_farther_than_light_punch() {
     let mut world = World::new_greybox();
+    let player_two_health = world.player_two.max_health;
     world.player_one.position.x = 390.0;
     world.player_two.position.x = 540.0;
 
@@ -54,9 +67,10 @@ fn heavy_punch_reaches_farther_than_light_punch() {
         world.update(DT, FighterInput::default(), FighterInput::default());
     }
 
-    assert_eq!(world.player_two.health, 100);
+    assert_eq!(world.player_two.health, player_two_health);
 
     let mut world = World::new_greybox();
+    let player_two_health = world.player_two.max_health;
     world.player_one.position.x = 390.0;
     world.player_two.position.x = 540.0;
 
@@ -73,12 +87,16 @@ fn heavy_punch_reaches_farther_than_light_punch() {
         world.update(DT, FighterInput::default(), FighterInput::default());
     }
 
-    assert_eq!(world.player_two.health, 100 - HEAVY_PUNCH_DAMAGE);
+    assert_eq!(
+        world.player_two.health,
+        player_two_health - HEAVY_PUNCH_DAMAGE
+    );
 }
 
 #[test]
 fn kick_has_its_own_damage() {
     let mut world = World::new_greybox();
+    let player_two_health = world.player_two.max_health;
     world.player_one.position.x = 420.0;
     world.player_two.position.x = 475.0;
 
@@ -95,11 +113,44 @@ fn kick_has_its_own_damage() {
         world.update(DT, FighterInput::default(), FighterInput::default());
     }
 
-    assert_eq!(world.player_two.health, 100 - KICK_DAMAGE);
+    assert_eq!(world.player_two.health, player_two_health - KICK_DAMAGE);
 }
 
 #[test]
-fn block_reduces_incoming_damage() {
+fn close_attack_queues_audio_events_for_start_and_hit() {
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 420.0;
+    world.player_two.position.x = 470.0;
+
+    world.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    let events = world.take_audio_events();
+    assert!(events.iter().any(|event| {
+        event.cue == AudioCue::FighterAttackStart
+            && event.character == Some(CharacterId::Rust)
+            && event.move_id == Some(MoveId::RustBorrowJab)
+    }));
+
+    for _ in 0..20 {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    let events = world.take_audio_events();
+    assert!(events.iter().any(|event| event.cue == AudioCue::CombatHit));
+    assert!(events.iter().any(|event| {
+        event.cue == AudioCue::FighterHurt && event.character == Some(CharacterId::Duke)
+    }));
+}
+
+#[test]
+fn blocked_close_attack_queues_guard_audio_events() {
     let mut world = World::new_greybox();
     world.player_one.position.x = 420.0;
     world.player_two.position.x = 475.0;
@@ -127,9 +178,403 @@ fn block_reduces_incoming_damage() {
         );
     }
 
-    assert_eq!(world.player_two.health, 100 - LIGHT_PUNCH_DAMAGE / 4);
+    let events = world.take_audio_events();
+    assert!(
+        events
+            .iter()
+            .any(|event| event.cue == AudioCue::CombatBlock)
+    );
+    assert!(events.iter().any(|event| {
+        event.cue == AudioCue::FighterBlock && event.character == Some(CharacterId::Duke)
+    }));
+}
+
+#[test]
+fn no_damage_flag_suppresses_hurt_audio_event() {
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 420.0;
+    world.player_two.position.x = 470.0;
+    let mut flags = FeatureFlags::default();
+    flags.set(FeatureFlag::PlayerTwoTakesDamage, false);
+
+    world.update_with_flags(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+        flags,
+    );
+
+    for _ in 0..20 {
+        world.update_with_flags(DT, FighterInput::default(), FighterInput::default(), flags);
+    }
+
+    let events = world.take_audio_events();
+    assert!(events.iter().any(|event| event.cue == AudioCue::CombatHit));
+    assert!(
+        events
+            .iter()
+            .all(|event| event.cue != AudioCue::FighterHurt)
+    );
+}
+
+#[test]
+fn projectile_cast_queues_audio_event() {
+    let mut world = World::new_greybox();
+
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    let events = world.take_audio_events();
+    assert!(events.iter().any(|event| {
+        event.cue == AudioCue::FighterProjectileCast && event.character == Some(CharacterId::Rust)
+    }));
+}
+
+#[test]
+fn block_reduces_incoming_damage() {
+    let mut world = World::new_greybox();
+    let player_two_health = world.player_two.max_health;
+    world.player_one.position.x = 420.0;
+    world.player_two.position.x = 475.0;
+
+    world.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput {
+            block: true,
+            ..FighterInput::default()
+        },
+    );
+
+    for _ in 0..20 {
+        world.update(
+            DT,
+            FighterInput::default(),
+            FighterInput {
+                block: true,
+                ..FighterInput::default()
+            },
+        );
+    }
+
+    assert_eq!(
+        world.player_two.health,
+        player_two_health - RUST_BORROW_JAB_DAMAGE / 4
+    );
     assert_eq!(world.hit_effects.len(), 1);
     assert!(world.hit_effects[0].blocked);
+}
+
+#[test]
+fn guard_rule_controls_blockability_and_reaction() {
+    let mut defender = Fighter::new(PlayerSlot::Two, "Guard", 500.0);
+    defender.update(
+        DT,
+        FighterInput {
+            block: true,
+            ..FighterInput::default()
+        },
+    );
+
+    let blocked = defender.take_hit(20, GuardRule::Mid, LIGHT_ATTACK_REACTION);
+    assert_eq!(blocked.damage, 5);
+    assert!(blocked.blocked);
+    assert_eq!(blocked.pushback, LIGHT_ATTACK_REACTION.block_pushback);
+    assert!(defender.in_blockstun());
+    assert!(!defender.in_hitstun());
+
+    let mut defender = Fighter::new(PlayerSlot::Two, "Throw Target", 500.0);
+    defender.update(
+        DT,
+        FighterInput {
+            block: true,
+            crouch: true,
+            ..FighterInput::default()
+        },
+    );
+
+    let thrown = defender.take_hit(20, GuardRule::Throw, LIGHT_ATTACK_REACTION);
+    assert_eq!(thrown.damage, 20);
+    assert!(!thrown.blocked);
+    assert_eq!(thrown.pushback, LIGHT_ATTACK_REACTION.hit_pushback);
+    assert!(defender.in_hitstun());
+}
+
+#[test]
+fn hitstun_and_blockstun_lock_out_actions_temporarily() {
+    let mut hit = Fighter::new(PlayerSlot::Two, "Hit", 500.0);
+    hit.take_hit(10, GuardRule::Mid, LIGHT_ATTACK_REACTION);
+    assert!(hit.in_hitstun());
+    assert_eq!(
+        hit.hitstun_remaining_frames(),
+        LIGHT_ATTACK_REACTION.hitstun
+    );
+
+    hit.update(
+        DT,
+        FighterInput {
+            heavy_punch: true,
+            projectile: true,
+            right: true,
+            ..FighterInput::default()
+        },
+    );
+
+    assert_eq!(hit.attack_kind(), None);
+    assert!(!hit.can_fire_projectile());
+    assert!(hit.velocity.x.abs() < 0.01);
+
+    for _ in 0..LIGHT_ATTACK_REACTION.hitstun.get() {
+        hit.update(DT, FighterInput::default());
+    }
+
+    assert!(!hit.in_hitstun());
+    hit.update(
+        DT,
+        FighterInput {
+            heavy_punch: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(hit.attack_kind(), Some(AttackKind::HeavyPunch));
+
+    let mut blocked = Fighter::new(PlayerSlot::Two, "Block", 500.0);
+    blocked.update(
+        DT,
+        FighterInput {
+            block: true,
+            ..FighterInput::default()
+        },
+    );
+    blocked.take_hit(10, GuardRule::Mid, LIGHT_ATTACK_REACTION);
+
+    assert!(blocked.in_blockstun());
+    assert!(blocked.blocking);
+    blocked.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(blocked.attack_kind(), None);
+}
+
+#[test]
+fn whiff_recovery_locks_out_actions_after_missing() {
+    let spec = move_spec(MoveId::HeavyPunch);
+    let mut fighter = Fighter::new(PlayerSlot::One, "Whiff", 300.0);
+
+    fighter.update(
+        DT,
+        FighterInput {
+            heavy_punch: true,
+            ..FighterInput::default()
+        },
+    );
+
+    while fighter.attack_elapsed_frames().is_some() {
+        fighter.update(DT, FighterInput::default());
+    }
+
+    assert!(fighter.in_whiff_recovery());
+    assert_eq!(fighter.attack_phase(), AttackPhase::WhiffRecovery);
+    assert_eq!(
+        fighter.whiff_recovery_remaining_frames(),
+        spec.whiff_recovery
+    );
+
+    fighter.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            projectile: true,
+            right: true,
+            ..FighterInput::default()
+        },
+    );
+
+    assert_eq!(fighter.attack_kind(), None);
+    assert!(!fighter.can_fire_projectile());
+    assert!(fighter.velocity.x.abs() < 0.01);
+
+    for _ in 0..spec.whiff_recovery.get() {
+        fighter.update(DT, FighterInput::default());
+    }
+
+    assert!(!fighter.in_whiff_recovery());
+    fighter.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(fighter.attack_kind(), Some(AttackKind::LightPunch));
+}
+
+#[test]
+fn projectile_guard_rule_blocks_like_a_projectile() {
+    let mut defender = Fighter::new(PlayerSlot::Two, "Projectile Target", 500.0);
+    defender.update(
+        DT,
+        FighterInput {
+            block: true,
+            ..FighterInput::default()
+        },
+    );
+
+    let result = defender.take_hit(
+        PROJECTILE_DAMAGE,
+        PROJECTILE_GUARD_RULE,
+        PROJECTILE_HIT_REACTION,
+    );
+
+    assert!(result.blocked);
+    assert_eq!(result.damage, PROJECTILE_DAMAGE / 4);
+    assert_eq!(result.pushback, PROJECTILE_HIT_REACTION.block_pushback);
+    assert_eq!(
+        defender.blockstun_remaining_frames(),
+        PROJECTILE_HIT_REACTION.blockstun
+    );
+}
+
+#[test]
+fn hit_and_block_pushback_move_defender_away_from_attacker() {
+    let mut hit_world = World::new_greybox();
+    hit_world.player_one.position.x = 380.0;
+    hit_world.player_two.position.x = 465.0;
+    let hit_start_x = hit_world.player_two.position.x;
+
+    hit_world.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    for _ in 0..20 {
+        hit_world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    let hit_delta = hit_world.player_two.position.x - hit_start_x;
+    assert!(hit_delta >= LIGHT_ATTACK_REACTION.hit_pushback);
+
+    let mut block_world = World::new_greybox();
+    block_world.player_one.position.x = 380.0;
+    block_world.player_two.position.x = 465.0;
+    let block_start_x = block_world.player_two.position.x;
+
+    block_world.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput {
+            block: true,
+            ..FighterInput::default()
+        },
+    );
+
+    for _ in 0..20 {
+        block_world.update(
+            DT,
+            FighterInput::default(),
+            FighterInput {
+                block: true,
+                ..FighterInput::default()
+            },
+        );
+    }
+
+    let block_delta = block_world.player_two.position.x - block_start_x;
+    assert!(block_delta >= LIGHT_ATTACK_REACTION.block_pushback);
+    assert!(
+        hit_delta > block_delta,
+        "hit pushback should be larger than block pushback"
+    );
+}
+
+#[test]
+fn greybox_world_uses_character_specs_for_match_setup() {
+    let world = World::new_greybox();
+    let rust = character_spec(CharacterId::Rust);
+    let duke = character_spec(CharacterId::Duke);
+
+    assert_eq!(world.player_one_character(), CharacterId::Rust);
+    assert_eq!(world.player_two_character(), CharacterId::Duke);
+    assert_eq!(
+        world.character_for_slot(world.player_one.slot),
+        CharacterId::Rust
+    );
+    assert_eq!(
+        world.character_for_slot(world.player_two.slot),
+        CharacterId::Duke
+    );
+    assert_eq!(world.player_one.name, rust.fighter_name);
+    assert_eq!(world.player_two.name, duke.fighter_name);
+    assert_eq!(world.player_one.max_health, rust.stats.max_health);
+    assert_eq!(world.player_two.max_health, duke.stats.max_health);
+    assert_eq!(world.player_one.move_ids(), rust.move_ids);
+    assert_eq!(world.player_two.move_ids(), duke.move_ids);
+    assert_eq!(world.player_one.health, world.player_one.max_health);
+    assert_eq!(world.player_two.health, world.player_two.max_health);
+}
+
+#[test]
+fn greybox_world_can_swap_character_specs_between_slots() {
+    let world = World::new_with_characters(CharacterId::Duke, CharacterId::Rust);
+
+    assert_eq!(world.player_one_character(), CharacterId::Duke);
+    assert_eq!(world.player_two_character(), CharacterId::Rust);
+    assert_eq!(
+        world.player_one.max_health,
+        character_spec(CharacterId::Duke).stats.max_health
+    );
+    assert_eq!(
+        world.player_two.max_health,
+        character_spec(CharacterId::Rust).stats.max_health
+    );
+}
+
+#[test]
+fn fighter_loadout_blocks_unlisted_close_moves() {
+    let mut fighter =
+        Fighter::new_with_loadout(PlayerSlot::One, "Test", 100, &KICK_ONLY_MOVES, 300.0);
+
+    fighter.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(fighter.attack_kind(), None);
+
+    fighter.update(
+        DT,
+        FighterInput {
+            kick: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(fighter.attack_kind(), Some(AttackKind::Kick));
+    assert_eq!(fighter.move_ids(), &KICK_ONLY_MOVES);
 }
 
 #[test]
@@ -154,7 +599,7 @@ fn player_one_damage_flag_prevents_damage_from_attacks() {
         world.update_with_flags(DT, FighterInput::default(), FighterInput::default(), flags);
     }
 
-    assert_eq!(world.player_one.health, 100);
+    assert_eq!(world.player_one.health, world.player_one.max_health);
     assert_eq!(world.hit_effects.len(), 1);
     assert_eq!(world.hit_effects[0].damage, 0);
     assert_eq!(world.outcome, None);
@@ -182,7 +627,7 @@ fn player_two_damage_flag_prevents_damage_from_attacks() {
         world.update_with_flags(DT, FighterInput::default(), FighterInput::default(), flags);
     }
 
-    assert_eq!(world.player_two.health, 100);
+    assert_eq!(world.player_two.health, world.player_two.max_health);
     assert_eq!(world.hit_effects.len(), 1);
     assert_eq!(world.hit_effects[0].damage, 0);
     assert_eq!(world.outcome, None);
@@ -209,7 +654,7 @@ fn crouch_reduces_the_vulnerable_body_height() {
 #[test]
 fn match_ends_when_health_reaches_zero() {
     let mut world = World::new_greybox();
-    world.player_two.health = LIGHT_PUNCH_DAMAGE;
+    world.player_two.health = RUST_BORROW_JAB_DAMAGE;
     world.player_one.position.x = 420.0;
     world.player_two.position.x = 470.0;
 
@@ -229,6 +674,53 @@ fn match_ends_when_health_reaches_zero() {
     assert_eq!(
         world.outcome,
         Some(MatchOutcome::Winner(world.player_one.slot))
+    );
+}
+
+#[test]
+fn close_attack_tuning_comes_from_character_loadout() {
+    let mut rust = Fighter::new_with_loadout(
+        PlayerSlot::One,
+        "Rust",
+        100,
+        character_spec(CharacterId::Rust).move_ids,
+        300.0,
+    );
+
+    rust.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+    );
+
+    assert_eq!(rust.attack_kind(), Some(AttackKind::LightPunch));
+    assert_eq!(
+        rust.attack_move_spec().map(|spec| spec.id),
+        Some(MoveId::RustBorrowJab)
+    );
+
+    let mut duke = Fighter::new_with_loadout(
+        PlayerSlot::Two,
+        "Java",
+        112,
+        character_spec(CharacterId::Duke).move_ids,
+        500.0,
+    );
+
+    duke.update(
+        DT,
+        FighterInput {
+            heavy_punch: true,
+            ..FighterInput::default()
+        },
+    );
+
+    assert_eq!(duke.attack_kind(), Some(AttackKind::HeavyPunch));
+    assert_eq!(
+        duke.attack_move_spec().map(|spec| spec.id),
+        Some(MoveId::DukeBoilerplatePoke)
     );
 }
 
@@ -335,6 +827,7 @@ fn diagonal_jump_keeps_horizontal_momentum() {
 #[test]
 fn projectile_deals_damage_and_disappears() {
     let mut world = World::new_greybox();
+    let player_two_health = world.player_two.max_health;
     world.player_one.position.x = 300.0;
     world.player_two.position.x = 560.0;
 
@@ -354,15 +847,19 @@ fn projectile_deals_damage_and_disappears() {
         world.update(DT, FighterInput::default(), FighterInput::default());
     }
 
-    assert_eq!(world.player_two.health, 100 - PROJECTILE_DAMAGE);
+    assert_eq!(
+        world.player_two.health,
+        player_two_health - PROJECTILE_DAMAGE
+    );
     assert!(world.projectiles.is_empty());
 }
 
 #[test]
-fn spawn_intro_blocks_gameplay_until_finished() {
+fn spawn_intro_and_countdown_block_gameplay_until_finished() {
     let mut world = World::new_greybox_with_intro();
 
     assert!(world.spawn_intro_active());
+    assert!(!world.countdown_active());
     world.update(
         DT,
         FighterInput {
@@ -381,6 +878,31 @@ fn spawn_intro_blocks_gameplay_until_finished() {
     }
 
     assert!(!world.spawn_intro_active());
+    assert!(world.countdown_active());
+    assert_eq!(world.countdown_label(), Some("11"));
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    assert!(world.projectiles.is_empty());
+    assert!(
+        world
+            .take_audio_events()
+            .iter()
+            .any(|event| event.cue == AudioCue::MatchCountdownEleven)
+    );
+
+    let countdown_steps = (ROUND_COUNTDOWN_TOTAL_SECONDS / DT).ceil() as usize + 1;
+    for _ in 0..countdown_steps {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    assert!(!world.countdown_active());
     world.update(
         DT,
         FighterInput {
@@ -391,6 +913,40 @@ fn spawn_intro_blocks_gameplay_until_finished() {
     );
 
     assert_eq!(world.projectiles.len(), 1);
+}
+
+#[test]
+fn countdown_advances_labels_and_audio_events() {
+    let mut world = World::new_greybox_with_intro();
+    let intro_steps = (SPAWN_INTRO_DURATION_SECONDS / DT).ceil() as usize + 1;
+    for _ in 0..intro_steps {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    for (label, cue) in [
+        ("11", AudioCue::MatchCountdownEleven),
+        ("10", AudioCue::MatchCountdownTen),
+        ("01", AudioCue::MatchCountdownOne),
+        ("Fight!", AudioCue::MatchCountdownFight),
+    ] {
+        assert_eq!(world.countdown_label(), Some(label));
+        world.update(DT, FighterInput::default(), FighterInput::default());
+        assert!(
+            world
+                .take_audio_events()
+                .iter()
+                .any(|event| event.cue == cue),
+            "expected countdown cue {cue:?}"
+        );
+
+        let step_steps = (ROUND_COUNTDOWN_STEP_SECONDS / DT).ceil() as usize;
+        for _ in 1..=step_steps {
+            world.update(DT, FighterInput::default(), FighterInput::default());
+        }
+    }
+
+    assert!(!world.countdown_active());
+    assert_eq!(world.countdown_label(), None);
 }
 
 #[test]

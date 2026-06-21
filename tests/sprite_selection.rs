@@ -1,6 +1,7 @@
 //! Exercises sprite clip selection from gameplay state.
 
-use borrow_fighters::combat::fighter::{Fighter, FighterInput, PlayerSlot};
+use borrow_fighters::combat::fighter::{Fighter, FighterInput, GuardRule, PlayerSlot};
+use borrow_fighters::combat::move_data::LIGHT_ATTACK_REACTION;
 use borrow_fighters::engine::sprites::{
     FighterSpriteClip, fighter_clip_elapsed_seconds, fighter_sprite_clip,
 };
@@ -13,6 +14,7 @@ fn idle_fighter_uses_idle_clip() {
 
     assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Idle);
     assert_eq!(FighterSpriteClip::Spawn.as_str(), "spawn");
+    assert_eq!(FighterSpriteClip::Hit.as_str(), "hit");
 }
 
 #[test]
@@ -53,6 +55,16 @@ fn projectile_fire_uses_special_clip() {
     fighter.mark_projectile_fired();
 
     assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Special);
+    assert_eq!(fighter_clip_elapsed_seconds(&fighter, 10.0), 0.0);
+}
+
+#[test]
+fn hitstun_uses_hit_clip_and_resets_clip_time() {
+    let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
+
+    fighter.take_hit(10, GuardRule::Mid, LIGHT_ATTACK_REACTION);
+
+    assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Hit);
     assert_eq!(fighter_clip_elapsed_seconds(&fighter, 10.0), 0.0);
 }
 

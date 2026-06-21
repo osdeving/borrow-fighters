@@ -1,0 +1,313 @@
+{
+  "version": 1,
+  "music": [
+    {
+      "id": "menu",
+      "file": "assets/audio/music/menu-loop.ogg",
+      "volume": 0.05,
+      "looping": true,
+      "required": true
+    },
+    {
+      "id": "combat",
+      "file": "assets/audio/music/combat-loop.ogg",
+      "volume": 0.10,
+      "looping": true,
+      "required": true
+    }
+  ],
+  "clips": [
+    {
+      "id": "ui.navigate.01",
+      "file": "assets/audio/sfx/ui/navigate-01.ogg",
+      "bus": "ui",
+      "volume": 0.45
+    },
+    {
+      "id": "ui.confirm.01",
+      "file": "assets/audio/sfx/ui/confirm-01.ogg",
+      "bus": "ui",
+      "volume": 0.55
+    },
+    {
+      "id": "ui.back.01",
+      "file": "assets/audio/sfx/ui/back-01.ogg",
+      "bus": "ui",
+      "volume": 0.5
+    },
+    {
+      "id": "sfx.match.start.01",
+      "file": "assets/audio/sfx/match/start-01.ogg",
+      "bus": "voice",
+      "volume": 0.75
+    },
+    {
+      "id": "sfx.match.countdown.11",
+      "file": "assets/audio/sfx/match/countdown-11.ogg",
+      "bus": "voice",
+      "volume": 0.72
+    },
+    {
+      "id": "sfx.match.countdown.10",
+      "file": "assets/audio/sfx/match/countdown-10.ogg",
+      "bus": "voice",
+      "volume": 0.72
+    },
+    {
+      "id": "sfx.match.countdown.01",
+      "file": "assets/audio/sfx/match/countdown-01.ogg",
+      "bus": "voice",
+      "volume": 0.72
+    },
+    {
+      "id": "sfx.match.countdown.fight",
+      "file": "assets/audio/sfx/match/countdown-fight.ogg",
+      "bus": "voice",
+      "volume": 0.76
+    },
+    {
+      "id": "sfx.match.victory.01",
+      "file": "assets/audio/sfx/match/victory-01.ogg",
+      "bus": "voice",
+      "volume": 0.75
+    },
+    {
+      "id": "sfx.combat.hit.light.01",
+      "file": "assets/audio/sfx/combat/hit-light-01.ogg",
+      "bus": "sfx",
+      "volume": 0.78
+    },
+    {
+      "id": "sfx.combat.hit.light.02",
+      "file": "assets/audio/sfx/combat/hit-light-02.ogg",
+      "bus": "sfx",
+      "volume": 0.78
+    },
+    {
+      "id": "sfx.combat.hit.heavy.01",
+      "file": "assets/audio/sfx/combat/hit-heavy-01.ogg",
+      "bus": "sfx",
+      "volume": 0.82
+    },
+    {
+      "id": "sfx.combat.hit.heavy.02",
+      "file": "assets/audio/sfx/combat/hit-heavy-02.ogg",
+      "bus": "sfx",
+      "volume": 0.82
+    },
+    {
+      "id": "sfx.combat.block.01",
+      "file": "assets/audio/sfx/combat/block-01.ogg",
+      "bus": "sfx",
+      "volume": 0.72
+    },
+    {
+      "id": "sfx.combat.block.02",
+      "file": "assets/audio/sfx/combat/block-02.ogg",
+      "bus": "sfx",
+      "volume": 0.72
+    },
+    {
+      "id": "sfx.combat.whiff.01",
+      "file": "assets/audio/sfx/combat/whiff-01.ogg",
+      "bus": "sfx",
+      "volume": 0.48
+    },
+    {
+      "id": "sfx.combat.whiff.02",
+      "file": "assets/audio/sfx/combat/whiff-02.ogg",
+      "bus": "sfx",
+      "volume": 0.48
+    },
+    {
+      "id": "sfx.projectile.impact.01",
+      "file": "assets/audio/sfx/combat/projectile-impact-01.ogg",
+      "bus": "sfx",
+      "volume": 0.82
+    },
+    {
+      "id": "sfx.projectile.impact.02",
+      "file": "assets/audio/sfx/combat/projectile-impact-02.ogg",
+      "bus": "sfx",
+      "volume": 0.82
+    },
+    {
+      "id": "voice.rust.attack.borrow_jab.01",
+      "file": "assets/audio/characters/rust/voice/attack-borrow-jab-01.ogg",
+      "bus": "voice",
+      "volume": 0.42
+    },
+    {
+      "id": "voice.rust.attack.kick.01",
+      "file": "assets/audio/characters/rust/voice/attack-kick-01.ogg",
+      "bus": "voice",
+      "volume": 0.42
+    },
+    {
+      "id": "voice.rust.hurt.01",
+      "file": "assets/audio/characters/rust/voice/hurt-01.ogg",
+      "bus": "voice",
+      "volume": 0.5
+    },
+    {
+      "id": "voice.rust.block.01",
+      "file": "assets/audio/characters/rust/voice/block-01.ogg",
+      "bus": "voice",
+      "volume": 0.5
+    },
+    {
+      "id": "sfx.rust.projectile.cast.01",
+      "file": "assets/audio/characters/rust/sfx/projectile-cast-01.ogg",
+      "bus": "sfx",
+      "volume": 0.58
+    },
+    {
+      "id": "voice.duke.attack.boilerplate_poke.01",
+      "file": "assets/audio/characters/duke/voice/attack-boilerplate-poke-01.ogg",
+      "bus": "voice",
+      "volume": 0.48
+    },
+    {
+      "id": "voice.duke.attack.kick.01",
+      "file": "assets/audio/characters/duke/voice/attack-kick-01.ogg",
+      "bus": "voice",
+      "volume": 0.48
+    },
+    {
+      "id": "voice.duke.hurt.01",
+      "file": "assets/audio/characters/duke/voice/hurt-01.ogg",
+      "bus": "voice",
+      "volume": 0.52
+    },
+    {
+      "id": "voice.duke.block.01",
+      "file": "assets/audio/characters/duke/voice/block-01.ogg",
+      "bus": "voice",
+      "volume": 0.52
+    },
+    {
+      "id": "sfx.duke.projectile.cast.01",
+      "file": "assets/audio/characters/duke/sfx/projectile-cast-01.ogg",
+      "bus": "sfx",
+      "volume": 0.58
+    }
+  ],
+  "bindings": [
+    {
+      "cue": "ui.navigate",
+      "clips": ["ui.navigate.01"]
+    },
+    {
+      "cue": "ui.confirm",
+      "clips": ["ui.confirm.01"]
+    },
+    {
+      "cue": "ui.back",
+      "clips": ["ui.back.01"]
+    },
+    {
+      "cue": "match.start",
+      "clips": ["sfx.match.start.01"]
+    },
+    {
+      "cue": "match.countdown.11",
+      "clips": ["sfx.match.countdown.11"]
+    },
+    {
+      "cue": "match.countdown.10",
+      "clips": ["sfx.match.countdown.10"]
+    },
+    {
+      "cue": "match.countdown.01",
+      "clips": ["sfx.match.countdown.01"]
+    },
+    {
+      "cue": "match.countdown.fight",
+      "clips": ["sfx.match.countdown.fight"]
+    },
+    {
+      "cue": "match.victory",
+      "clips": ["sfx.match.victory.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
+      "move": "rust_borrow_jab",
+      "clips": ["voice.rust.attack.borrow_jab.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
+      "move": "kick",
+      "clips": ["voice.rust.attack.kick.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
+      "move": "duke_boilerplate_poke",
+      "clips": ["voice.duke.attack.boilerplate_poke.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
+      "move": "kick",
+      "clips": ["voice.duke.attack.kick.01"]
+    },
+    {
+      "cue": "fighter.attack.whiff",
+      "clips": ["sfx.combat.whiff.01", "sfx.combat.whiff.02"]
+    },
+    {
+      "cue": "fighter.projectile.cast",
+      "character": "rust",
+      "clips": ["sfx.rust.projectile.cast.01"]
+    },
+    {
+      "cue": "fighter.projectile.cast",
+      "character": "duke",
+      "clips": ["sfx.duke.projectile.cast.01"]
+    },
+    {
+      "cue": "fighter.hurt",
+      "character": "rust",
+      "clips": ["voice.rust.hurt.01"]
+    },
+    {
+      "cue": "fighter.hurt",
+      "character": "duke",
+      "clips": ["voice.duke.hurt.01"]
+    },
+    {
+      "cue": "fighter.block",
+      "character": "rust",
+      "clips": ["voice.rust.block.01"]
+    },
+    {
+      "cue": "fighter.block",
+      "character": "duke",
+      "clips": ["voice.duke.block.01"]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "heavy_punch",
+      "clips": ["sfx.combat.hit.heavy.01", "sfx.combat.hit.heavy.02"]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "duke_boilerplate_poke",
+      "clips": ["sfx.combat.hit.heavy.01", "sfx.combat.hit.heavy.02"]
+    },
+    {
+      "cue": "combat.hit",
+      "clips": ["sfx.combat.hit.light.01", "sfx.combat.hit.light.02"]
+    },
+    {
+      "cue": "combat.block",
+      "clips": ["sfx.combat.block.01", "sfx.combat.block.02"]
+    },
+    {
+      "cue": "projectile.impact",
+      "clips": ["sfx.projectile.impact.01", "sfx.projectile.impact.02"]
+    }
+  ]
+}
