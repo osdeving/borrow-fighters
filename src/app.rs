@@ -5,6 +5,7 @@
 
 use raylib::prelude::*;
 
+use crate::combat::fighter::{FighterInput, PlayerSlot};
 use crate::config::{FIXED_TIMESTEP, MAX_FIXED_STEPS_PER_FRAME, MAX_FRAME_TIME, TARGET_FPS};
 use crate::engine::{
     assets::GameAssets,
@@ -22,6 +23,7 @@ use crate::scenes::{
 /// Top-level application state outside the testable game world.
 pub struct App {
     world: World,
+    player_one_cpu: BasicCpu,
     player_two_cpu: BasicCpu,
     feature_flags: FeatureFlags,
     scene: AppScene,
@@ -33,6 +35,7 @@ impl Default for App {
     fn default() -> Self {
         Self {
             world: World::new_greybox_with_intro(),
+            player_one_cpu: BasicCpu::default(),
             player_two_cpu: BasicCpu::default(),
             feature_flags: FeatureFlags::default(),
             scene: AppScene::Preferences,
@@ -104,22 +107,33 @@ impl App {
             let mut fixed_steps = 0;
 
             while self.accumulator >= FIXED_TIMESTEP && fixed_steps < MAX_FIXED_STEPS_PER_FRAME {
+                let mut player_one = if self.feature_flags.enabled(FeatureFlag::PlayerOneCpu) {
+                    self.player_one_cpu
+                        .next_input(&self.world, PlayerSlot::One, FIXED_TIMESTEP)
+                } else {
+                    input.player_one
+                };
                 let mut player_two = if self.feature_flags.enabled(FeatureFlag::PlayerTwoCpu) {
                     self.player_two_cpu
-                        .next_player_two_input(&self.world, FIXED_TIMESTEP)
+                        .next_input(&self.world, PlayerSlot::Two, FIXED_TIMESTEP)
                 } else {
                     input.player_two
                 };
 
-                if self.feature_flags.enabled(FeatureFlag::PlayerTwoCpu)
-                    && !self.feature_flags.enabled(FeatureFlag::CpuCanAttack)
-                {
-                    player_two = player_two.without_attacks();
-                }
+                player_one = cpu_attack_filtered_input(
+                    player_one,
+                    self.feature_flags,
+                    FeatureFlag::PlayerOneCpu,
+                );
+                player_two = cpu_attack_filtered_input(
+                    player_two,
+                    self.feature_flags,
+                    FeatureFlag::PlayerTwoCpu,
+                );
 
                 self.world.update_with_flags(
                     FIXED_TIMESTEP,
-                    input.player_one,
+                    player_one,
                     player_two,
                     self.feature_flags,
                 );
@@ -144,7 +158,20 @@ impl App {
 
     fn restart_match(&mut self) {
         self.world = World::new_greybox_with_intro();
+        self.player_one_cpu = BasicCpu::default();
         self.player_two_cpu = BasicCpu::default();
         self.accumulator = 0.0;
+    }
+}
+
+fn cpu_attack_filtered_input(
+    input: FighterInput,
+    flags: FeatureFlags,
+    cpu_flag: FeatureFlag,
+) -> FighterInput {
+    if flags.enabled(cpu_flag) && !flags.enabled(FeatureFlag::CpuCanAttack) {
+        input.without_attacks()
+    } else {
+        input
     }
 }

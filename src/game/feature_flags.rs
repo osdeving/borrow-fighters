@@ -6,6 +6,7 @@
 /// Identifies one runtime feature flag.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum FeatureFlag {
+    PlayerOneCpu,
     PlayerTwoCpu,
     CpuCanAttack,
     PlayerOneTakesDamage,
@@ -16,7 +17,8 @@ pub enum FeatureFlag {
 }
 
 /// Every feature flag exposed in the preferences screen.
-pub const PREFERENCE_FLAGS: [FeatureFlag; 7] = [
+pub const PREFERENCE_FLAGS: [FeatureFlag; 8] = [
+    FeatureFlag::PlayerOneCpu,
     FeatureFlag::PlayerTwoCpu,
     FeatureFlag::CpuCanAttack,
     FeatureFlag::PlayerOneTakesDamage,
@@ -29,6 +31,7 @@ pub const PREFERENCE_FLAGS: [FeatureFlag; 7] = [
 /// Runtime feature flag values for the prototype.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct FeatureFlags {
+    player_one_cpu: bool,
     player_two_cpu: bool,
     cpu_can_attack: bool,
     player_one_takes_damage: bool,
@@ -41,6 +44,7 @@ pub struct FeatureFlags {
 impl Default for FeatureFlags {
     fn default() -> Self {
         Self {
+            player_one_cpu: false,
             player_two_cpu: true,
             cpu_can_attack: true,
             player_one_takes_damage: true,
@@ -56,6 +60,7 @@ impl FeatureFlags {
     /// Returns whether a feature flag is enabled.
     pub const fn enabled(self, flag: FeatureFlag) -> bool {
         match flag {
+            FeatureFlag::PlayerOneCpu => self.player_one_cpu,
             FeatureFlag::PlayerTwoCpu => self.player_two_cpu,
             FeatureFlag::CpuCanAttack => self.cpu_can_attack,
             FeatureFlag::PlayerOneTakesDamage => self.player_one_takes_damage,
@@ -69,6 +74,7 @@ impl FeatureFlags {
     /// Sets a feature flag value.
     pub fn set(&mut self, flag: FeatureFlag, enabled: bool) {
         match flag {
+            FeatureFlag::PlayerOneCpu => self.player_one_cpu = enabled,
             FeatureFlag::PlayerTwoCpu => self.player_two_cpu = enabled,
             FeatureFlag::CpuCanAttack => self.cpu_can_attack = enabled,
             FeatureFlag::PlayerOneTakesDamage => self.player_one_takes_damage = enabled,
@@ -89,6 +95,7 @@ impl FeatureFlag {
     /// Short label shown in the preferences screen.
     pub const fn label(self) -> &'static str {
         match self {
+            FeatureFlag::PlayerOneCpu => "Player 1 usa IA",
             FeatureFlag::PlayerTwoCpu => "Player 2 usa IA",
             FeatureFlag::CpuCanAttack => "IA pode dar golpes",
             FeatureFlag::PlayerOneTakesDamage => "Player 1 recebe dano",
@@ -102,6 +109,7 @@ impl FeatureFlag {
     /// Short description shown in the preferences screen.
     pub const fn description(self) -> &'static str {
         match self {
+            FeatureFlag::PlayerOneCpu => "Quando ligado, Rust tambem vira CPU.",
             FeatureFlag::PlayerTwoCpu => "Liga o sparring dummy do Java.",
             FeatureFlag::CpuCanAttack => "Quando desligado, a IA se move e defende, mas nao ataca.",
             FeatureFlag::PlayerOneTakesDamage => {

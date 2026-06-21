@@ -141,9 +141,9 @@ pub fn draw_preferences(
     draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(0, 0, 0, 138));
 
     let panel_x = 88;
-    let panel_y = 64;
+    let panel_y = 48;
     let panel_width = WINDOW_WIDTH - panel_x * 2;
-    let panel_height = WINDOW_HEIGHT - panel_y * 2;
+    let panel_height = WINDOW_HEIGHT - panel_y - 42;
     draw.draw_rectangle(panel_x, panel_y, panel_width, panel_height, PANEL);
     draw.draw_rectangle_lines(panel_x, panel_y, panel_width, panel_height, PANEL_BORDER);
 
@@ -170,8 +170,8 @@ pub fn draw_preferences(
         UI_MUTED,
     );
 
-    let row_start_y = panel_y + 90;
-    let row_spacing = 36;
+    let row_start_y = panel_y + 86;
+    let row_spacing = 34;
 
     draw_menu_row(
         draw,
@@ -431,7 +431,8 @@ fn draw_hud(
     );
 
     let status = format!(
-        "P2 CPU {} | Pad P1 {} | P2 {}",
+        "P1 CPU {} | P2 CPU {} | Pad P1 {} | P2 {}",
+        connected_label(flags.enabled(FeatureFlag::PlayerOneCpu)),
         connected_label(flags.enabled(FeatureFlag::PlayerTwoCpu)),
         connected_label(gamepad_status.player_one),
         connected_label(gamepad_status.player_two)
@@ -475,7 +476,7 @@ fn draw_help(draw: &mut RaylibDrawHandle<'_>) {
         UI_TEXT,
     );
     draw.draw_text(
-        "P2: CPU default; C or View toggles manual",
+        "P2: CPU default; C or View toggles P2 manual",
         24,
         WINDOW_HEIGHT - 52,
         16,

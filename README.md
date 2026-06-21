@@ -97,7 +97,7 @@ As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
 
 ## Rodando o protótipo greybox
 
-O código jogável atual implementa um greybox local para validar o básico: tela inicial de ajustes, dois personagens com spritesheet placeholder, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, fireball, CPU simples para o segundo jogador, colisão corpo-corpo, hitbox/hurtbox opcional, dano, vida, vitória e restart.
+O código jogável atual implementa um greybox local para validar o básico: tela inicial de ajustes, dois personagens com spritesheet placeholder, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, fireball, CPU simples para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, vida, vitória e restart.
 
 Requisitos iniciais:
 
@@ -116,6 +116,7 @@ Preferências disponíveis:
 
 | Preferência | Padrão | Efeito |
 |---|---|---|
+| Player 1 usa IA | Desligado | Controla Rust automaticamente. |
 | Player 2 usa IA | Ligado | Controla Java automaticamente. |
 | IA pode dar golpes | Ligado | Quando desligado, a IA ainda se move e defende, mas não ataca. |
 | Player 1 recebe dano | Ligado | Quando desligado, Rust fica invencível para playtest. |
@@ -139,7 +140,7 @@ Controles:
 | Alternar P2 CPU/manual | `C` | `C` | `View` |
 | Reiniciar | `R` | `R` | `Menu` |
 
-O primeiro gamepad conectado controla o Player 1. O segundo gamepad controla o Player 2 quando a CPU estiver desligada. O Player 2 começa em modo CPU; use `C` ou `View` para alternar CPU/manual.
+O primeiro gamepad conectado controla o Player 1 quando a IA do Player 1 estiver desligada. O segundo gamepad controla o Player 2 quando a IA do Player 2 estiver desligada. O Player 2 começa em modo CPU; use `C` ou `View` para alternar CPU/manual do Player 2 durante a luta.
 
 O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um controle Bluetooth estiver pareado mas aparecer `OFF`, confirme se o sistema que executa `cargo run` expõe joystick/gamepad para o Raylib. Em WSL ou ambiente remoto, pode ser necessário testar no host nativo ou encaminhar o dispositivo.
 

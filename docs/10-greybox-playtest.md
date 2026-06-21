@@ -25,7 +25,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Soco forte/longo.
 - Chute.
 - Fireball horizontal simples em velocidade legível.
-- CPU simples e pouco agressiva para o Player 2.
+- CPU simples e pouco agressiva para um ou dois jogadores.
 - Opção para IA mover/defender sem dar golpes.
 - Opção para Player 1 não receber dano.
 - Movimento com aceleração/desaceleração.
@@ -68,8 +68,9 @@ O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navega
 
 | Preferência | Padrão | O que testar |
 |---|---|---|
+| Player 1 usa IA | Desligado | Rust deve ser controlado automaticamente quando ligado. |
 | Player 2 usa IA | Ligado | Java deve ser controlado automaticamente. |
-| IA pode dar golpes | Ligado | Quando desligado, Java deve se mover e defender, mas não atacar. |
+| IA pode dar golpes | Ligado | Quando desligado, lutadores controlados por IA devem se mover e defender, mas não atacar. |
 | Player 1 recebe dano | Ligado | Quando desligado, Rust não deve perder vida ao ser acertado. |
 | Mostrar HUD | Ligado | Barras de vida e status no topo aparecem/desaparecem. |
 | Mostrar ajuda de controles | Desligado | Texto de controles no rodapé aparece/desaparece. |
@@ -92,7 +93,7 @@ O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navega
 | Alternar P2 CPU/manual | `C` | `C` | `View` |
 | Reiniciar | `R` | `R` | `Menu` |
 
-O primeiro gamepad conectado controla o Player 1. O segundo gamepad controla o Player 2 quando a CPU estiver desligada. O Player 2 começa em modo CPU; quando CPU está ligada, os comandos manuais do Player 2 são ignorados.
+O primeiro gamepad conectado controla o Player 1 quando a IA do Player 1 está desligada. O segundo gamepad controla o Player 2 quando a IA do Player 2 está desligada. O Player 2 começa em modo CPU; quando a CPU de um jogador está ligada, os comandos manuais daquele jogador são ignorados.
 
 O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um controle Bluetooth estiver pareado mas aparecer `OFF`, confirme se o sistema que executa `cargo run` expõe joystick/gamepad para o Raylib. Em WSL ou ambiente remoto, pode ser necessário testar no host nativo ou encaminhar o dispositivo.
 
@@ -128,15 +129,16 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 8. Fireball deve andar horizontalmente em velocidade legível e causar dano ao acertar.
 9. A CPU do Player 2 deve se aproximar, hesitar antes de atacar e defender fireballs próximas.
 10. A tela de preferências deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
-11. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
-12. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Rust.
-13. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
-14. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
-15. `R` ou `Menu` deve reiniciar a partida.
-16. `Esc` durante a luta deve voltar para a tela de preferências.
-17. Pulo com direção pressionada deve sair em diagonal.
-18. A vida deve chegar a zero e encerrar a luta.
-19. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
+11. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
+12. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
+13. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Rust.
+14. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
+15. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
+16. `R` ou `Menu` deve reiniciar a partida.
+17. `Esc` durante a luta deve voltar para a tela de preferências.
+18. Pulo com direção pressionada deve sair em diagonal.
+19. A vida deve chegar a zero e encerrar a luta.
+20. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
 
 ## Limitações conhecidas
 

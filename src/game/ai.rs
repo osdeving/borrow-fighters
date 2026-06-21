@@ -16,7 +16,7 @@ const FIREBALL_MAX_GAP: f32 = 260.0;
 const APPROACH_GAP: f32 = 185.0;
 const PROJECTILE_GUARD_DISTANCE: f32 = 170.0;
 
-/// Deterministic CPU controller for Player 2.
+/// Deterministic CPU controller for one fighter slot.
 #[derive(Clone, Debug)]
 pub struct BasicCpu {
     action_cooldown: f32,
@@ -33,12 +33,11 @@ impl Default for BasicCpu {
 }
 
 impl BasicCpu {
-    /// Returns Player 2 input for one fixed simulation step.
-    pub fn next_player_two_input(&mut self, world: &World, dt: f32) -> FighterInput {
+    /// Returns CPU input for one fixed simulation step.
+    pub fn next_input(&mut self, world: &World, slot: PlayerSlot, dt: f32) -> FighterInput {
         self.action_cooldown = (self.action_cooldown - dt).max(0.0);
 
-        let cpu = &world.player_two;
-        let target = &world.player_one;
+        let (cpu, target) = fighters_for_slot(world, slot);
         if world.outcome.is_some() || cpu.is_defeated() {
             return FighterInput::default();
         }
@@ -65,6 +64,11 @@ impl BasicCpu {
         }
 
         input
+    }
+
+    /// Returns Player 2 input for one fixed simulation step.
+    pub fn next_player_two_input(&mut self, world: &World, dt: f32) -> FighterInput {
+        self.next_input(world, PlayerSlot::Two, dt)
     }
 
     fn choose_action(&mut self, input: &mut FighterInput, gap: f32) {
@@ -94,12 +98,19 @@ impl BasicCpu {
     }
 }
 
+fn fighters_for_slot(world: &World, slot: PlayerSlot) -> (&Fighter, &Fighter) {
+    match slot {
+        PlayerSlot::One => (&world.player_one, &world.player_two),
+        PlayerSlot::Two => (&world.player_two, &world.player_one),
+    }
+}
+
 fn incoming_projectile_threat(world: &World, fighter: &Fighter) -> bool {
     let fighter_body = fighter.body_rect();
     let fighter_center = fighter_body.center_x();
 
     world.projectiles.iter().any(|projectile| {
-        if projectile.owner == PlayerSlot::Two || !projectile.alive {
+        if projectile.owner == fighter.slot || !projectile.alive {
             return false;
         }
 

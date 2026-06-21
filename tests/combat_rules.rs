@@ -402,6 +402,17 @@ fn basic_cpu_moves_toward_player_when_far() {
 }
 
 #[test]
+fn basic_cpu_can_drive_player_one_toward_player_two() {
+    let world = World::new_greybox();
+    let mut cpu = BasicCpu::default();
+
+    let input = cpu.next_input(&world, world.player_one.slot, DT);
+
+    assert!(input.right);
+    assert!(!input.left);
+}
+
+#[test]
 fn basic_cpu_attacks_when_close() {
     let mut world = World::new_greybox();
     world.player_one.position.x = 520.0;
@@ -430,6 +441,24 @@ fn basic_cpu_blocks_incoming_projectile() {
     let mut cpu = BasicCpu::default();
 
     let input = cpu.next_player_two_input(&world, DT);
+
+    assert!(input.block);
+    assert!(!input.light_punch);
+    assert!(!input.heavy_punch);
+    assert!(!input.kick);
+}
+
+#[test]
+fn player_one_cpu_blocks_incoming_projectile() {
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 500.0;
+    world.player_two.position.x = 650.0;
+    world
+        .projectiles
+        .push(borrow_fighters::combat::projectile::Projectile::from_fighter(&world.player_two));
+    let mut cpu = BasicCpu::default();
+
+    let input = cpu.next_input(&world, world.player_one.slot, DT);
 
     assert!(input.block);
     assert!(!input.light_punch);
