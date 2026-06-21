@@ -64,7 +64,8 @@ borrow-fighters/
 │   │   ├── combat_lab.rs       # Laboratório isolado para timing e boxes
 │   │   └── preferences.rs      # Cursor e navegação da tela de ajustes
 │   ├── ui/
-│   │   └── .gitkeep            # Reservado para componentes futuros de UI
+│   │   ├── mod.rs              # API dos overlays de UI/debug
+│   │   └── combat_debug.rs     # Overlay de boxes, pivot e timing do Combat Lab
 │   └── math/
 │       ├── mod.rs              # Tipos geométricos pequenos do jogo
 │       ├── rect.rs             # Retângulos de colisão/hitbox
@@ -81,7 +82,7 @@ borrow-fighters/
     └── sprite_selection.rs     # Clip escolhido a partir do estado do lutador
 ```
 
-Os diretórios `scenes/` e `ui/` ainda existem mais como ponto de expansão do que como abstração completa. `characters/` já possui o registro mínimo de personagens, mas ainda deve permanecer simples e orientado a dados. Novos módulos só devem entrar quando reduzirem responsabilidade real dos arquivos atuais.
+O diretório `scenes/` ainda deve permanecer simples, sem framework de telas. `ui/` já abriga o overlay de debug do Combat Lab, mas ainda não deve virar um sistema genérico antes de haver HUD e menus suficientes para justificar isso. `characters/` já possui o registro mínimo de personagens, mas ainda deve permanecer simples e orientado a dados. Novos módulos só devem entrar quando reduzirem responsabilidade real dos arquivos atuais.
 
 ## Regras de fronteira
 

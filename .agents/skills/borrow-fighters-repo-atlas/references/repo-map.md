@@ -47,7 +47,7 @@
 | `src/combat/move_data.rs` | Table-driven MoveSpec data for close-range moves |
 | `src/characters/` | CharacterSpec registry and character-to-move mapping |
 | `src/scenes/` | Preference screen and isolated Combat Lab scene state |
-| `src/ui/` | Reserved for future UI components |
+| `src/ui/` | Combat debug overlays and UI helpers |
 | `src/math/` | Small geometry helpers |
 | `tests/` | Integration tests for combat, flags and sprites |
 | `tools/art/` | Local asset extraction utilities |

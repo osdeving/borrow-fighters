@@ -4,7 +4,7 @@
 
 Em implementação.
 
-Fases 1, 2 e 3 concluídas em corte mínimo na branch `gameplay/combat-improvement-plan`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, e Rust/Duke possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout.
+Fases 1, 2 e 3 concluídas em corte mínimo na branch `gameplay/combat-improvement-plan`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, Rust/Duke possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout, e o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -322,7 +322,8 @@ BoxTimeline
 - `characters/*` define dados, não resolve colisão.
 - `combat/*` resolve regras puras, não desenha.
 - `game/world.rs` orquestra lutadores, projéteis e resultado, mas não conhece detalhe de sprite.
-- `engine/render.rs` desenha snapshots e deve perder responsabilidades para `ui/combat_debug.rs` quando o laboratório crescer.
+- `engine/render.rs` e `engine/render/combat_lab.rs` desenham snapshots e sprites próximos da borda Raylib.
+- `ui/combat_debug.rs` desenha overlay de frame data, box labels, pivot e medição do Combat Lab.
 - `scenes/combat_lab.rs` usa o mesmo runtime de combate, mas com estado isolado e sem match flow.
 
 ## Fases de execução
@@ -424,10 +425,9 @@ Critério de aceite:
 
 ## Backlog técnico imediato
 
-1. Separar o overlay de combate para `src/ui/combat_debug.rs` se o Combat Lab aumentar a responsabilidade do renderer.
-2. Criar o primeiro `MoveSpec` exclusivo de Rust ou Duke quando houver intenção de gameplay clara.
-3. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
-4. Só depois ampliar para novos personagens ou golpes especiais.
+1. Criar o primeiro `MoveSpec` exclusivo de Rust ou Duke quando houver intenção de gameplay clara.
+2. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
+3. Só depois ampliar para novos personagens ou golpes especiais.
 
 ## Decisões pendentes
 
