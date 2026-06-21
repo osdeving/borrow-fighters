@@ -36,6 +36,27 @@ fn combat_lab_args_select_character_and_move() {
 }
 
 #[test]
+fn combat_lab_args_accept_traditional_move_aliases() {
+    for (raw_move, expected) in [
+        ("sweep", CombatLabMove::Sweep),
+        ("overhead", CombatLabMove::Overhead),
+        ("anti-air", CombatLabMove::AntiAir),
+        ("air_kick", CombatLabMove::AirKick),
+        ("throw", CombatLabMove::Throw),
+    ] {
+        let options = LaunchOptions::parse(
+            ["borrow-fighters", "--lab", "combat", "--move", raw_move].map(String::from),
+        )
+        .unwrap();
+
+        let LaunchMode::CombatLab(lab) = options.mode else {
+            panic!("expected combat lab mode");
+        };
+        assert_eq!(lab.selected_move, expected);
+    }
+}
+
+#[test]
 fn combat_lab_args_select_static_pose() {
     let options = LaunchOptions::parse(
         [

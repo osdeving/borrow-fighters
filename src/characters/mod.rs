@@ -8,11 +8,27 @@ use crate::combat::move_data::MoveId;
 
 const RUST_STATS: CharacterStats = CharacterStats { max_health: 100 };
 const DUKE_STATS: CharacterStats = CharacterStats { max_health: 112 };
-const RUST_MOVE_IDS: [MoveId; 3] = [MoveId::RustBorrowJab, MoveId::HeavyPunch, MoveId::Kick];
-const DUKE_MOVE_IDS: [MoveId; 3] = [
+const RUST_MOVE_IDS: [MoveId; 9] = [
+    MoveId::RustBorrowJab,
+    MoveId::HeavyPunch,
+    MoveId::Kick,
+    MoveId::SweepKick,
+    MoveId::OverheadPunch,
+    MoveId::RisingAntiAir,
+    MoveId::AirPunch,
+    MoveId::AirKick,
+    MoveId::CloseThrow,
+];
+const DUKE_MOVE_IDS: [MoveId; 9] = [
     MoveId::LightPunch,
     MoveId::DukeBoilerplatePoke,
     MoveId::Kick,
+    MoveId::SweepKick,
+    MoveId::OverheadPunch,
+    MoveId::RisingAntiAir,
+    MoveId::AirPunch,
+    MoveId::AirKick,
+    MoveId::CloseThrow,
 ];
 
 /// Stable identifier for playable or testable characters.

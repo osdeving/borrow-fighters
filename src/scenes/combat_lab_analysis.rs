@@ -17,6 +17,7 @@ const CONTACT_OVERLAP: f32 = 1.0;
 const DEFAULT_DUMMY_X: f32 = 690.0;
 const DEFAULT_DUMMY_WIDTH: f32 = 76.0;
 const DEFAULT_DUMMY_HEIGHT: f32 = 168.0;
+const AIR_ATTACK_PREVIEW_HEIGHT: f32 = 92.0;
 
 type ContactAnalysis = (
     FrameCount,
@@ -157,6 +158,8 @@ fn close_attack_contact_box(
     input: MoveInputKind,
     contact_frame: FrameCount,
 ) -> Option<Rect> {
+    prepare_attacker_for_close_move(&mut attacker, input);
+
     for frame in 0..contact_frame.get() {
         attacker.update(
             FIXED_TIMESTEP,
@@ -171,6 +174,13 @@ fn close_attack_contact_box(
     attacker.attack_box()
 }
 
+fn prepare_attacker_for_close_move(attacker: &mut Fighter, input: MoveInputKind) {
+    if matches!(input, MoveInputKind::AirPunch | MoveInputKind::AirKick) {
+        attacker.grounded = false;
+        attacker.position.y -= AIR_ATTACK_PREVIEW_HEIGHT;
+    }
+}
+
 fn input_for_close_move(input: MoveInputKind) -> FighterInput {
     match input {
         MoveInputKind::LightPunch => FighterInput {
@@ -183,6 +193,34 @@ fn input_for_close_move(input: MoveInputKind) -> FighterInput {
         },
         MoveInputKind::Kick => FighterInput {
             kick: true,
+            ..FighterInput::default()
+        },
+        MoveInputKind::Sweep => FighterInput {
+            crouch: true,
+            kick: true,
+            ..FighterInput::default()
+        },
+        MoveInputKind::Overhead => FighterInput {
+            right: true,
+            heavy_punch: true,
+            ..FighterInput::default()
+        },
+        MoveInputKind::AntiAir => FighterInput {
+            crouch: true,
+            heavy_punch: true,
+            ..FighterInput::default()
+        },
+        MoveInputKind::AirPunch => FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        MoveInputKind::AirKick => FighterInput {
+            kick: true,
+            ..FighterInput::default()
+        },
+        MoveInputKind::Throw => FighterInput {
+            block: true,
+            light_punch: true,
             ..FighterInput::default()
         },
     }

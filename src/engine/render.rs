@@ -614,29 +614,36 @@ fn draw_help(draw: &mut RaylibDrawHandle<'_>) {
     draw.draw_text(
         "P1: A/D/W/S/Q or Pad LS/DPad, A jump, LB/LT block",
         24,
-        WINDOW_HEIGHT - 100,
-        16,
+        WINDOW_HEIGHT - 124,
+        15,
         UI_TEXT,
     );
     draw.draw_text(
-        "P1 attacks: F/H/V/G or Pad X/Y/B/RB",
+        "P1 attacks: F LP, H HP, V kick, G special or Pad X/Y/B/RB",
+        24,
+        WINDOW_HEIGHT - 100,
+        15,
+        UI_TEXT,
+    );
+    draw.draw_text(
+        "P1 mods: S+V sweep, S+H anti-air, forward+H overhead, Q+F throw, air F/V",
         24,
         WINDOW_HEIGHT - 76,
-        16,
+        15,
         UI_TEXT,
     );
     draw.draw_text(
         "P2: CPU default; C or View toggles P2 manual",
         24,
         WINDOW_HEIGHT - 52,
-        16,
+        15,
         UI_TEXT,
     );
     draw.draw_text(
         "P2 manual: keyboard or second Pad same layout; Start/R restarts",
         24,
         WINDOW_HEIGHT - 28,
-        16,
+        15,
         UI_MUTED,
     );
 }

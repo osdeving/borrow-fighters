@@ -4,7 +4,7 @@
 
 Em implementação.
 
-Fases 1, 2 e 3 concluídas em corte mínimo na branch `gameplay/combat-improvement-plan`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, Rust/Duke possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout, o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`, e Rust/Duke já têm o primeiro corte de golpes próximos específicos por personagem.
+Fases 1 a 4 concluídas em corte mínimo. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, Rust/Duke possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout, o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`, e Rust/Duke já têm o primeiro corte de golpes próximos específicos por personagem. O kit greybox também já possui sweep, overhead, anti-air, ataques aéreos e throw curto como linguagem tradicional testável.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -404,7 +404,7 @@ Critério de aceite:
 
 - cada golpe forte tem pelo menos uma resposta documentada.
 - o corte atual impede ação durante hitstun/blockstun, aplica pushback, mostra vantagem estimada no Combat Lab e aplica whiff recovery quando golpe próximo erra.
-- `Low` e `Throw` ficam como linguagem de dados reservada; golpes baixos e throws jogáveis devem nascer na Fase 5 ou depois, ligados à identidade dos personagens.
+- `Low`, `High`/overhead, `Throw`, anti-air e ataques aéreos já têm primeiro corte jogável, ainda sem identidade exclusiva por personagem.
 
 Respostas mínimas documentadas:
 
@@ -412,6 +412,11 @@ Respostas mínimas documentadas:
 |---|---|---|
 | `HeavyPunch` genérico | startup 11f, recovery após contato, whiff recovery 10f | andar fora do alcance, bloquear e observar vantagem, pular antes do contato, punir whiff |
 | `Kick` | alcance baixo/médio, active limitado, whiff recovery 8f | defender mid no corte atual, recuar, pular, punir se errar |
+| `SweepKick` | acerta baixo, recovery claro, perde para salto/spacing | defender abaixado, pular, ficar fora do alcance, punir whiff |
+| `OverheadPunch` | vence defesa abaixada, startup/recovery maiores | defender em pé, interromper startup, andar fora, punir se errar |
+| `RisingAntiAir` | cobre alto/frente, pode errar no chão se mal espaçado | baitar e punir recovery, bloquear, atacar por baixo no timing certo |
+| `AirPunch` / `AirKick` | só inicia no ar, trajetória compromete posição | anti-air, andar para fora, defender em pé |
+| `CloseThrow` | ignora defesa, alcance muito curto, whiff recovery alto | sair do alcance, pular, jab antes do active |
 | `DukeBoilerplatePoke` | alcance e dano altos, startup 13f, whiff recovery 12f | ficar fora do alcance, interromper startup com jab rápido, bloquear e recuperar espaço com pushback, punir whiff |
 | Projectile | cooldown 57f e trajetória horizontal | bloquear chip reduzido, pular, aproximar durante cooldown, usar spacing para forçar erro |
 
@@ -445,14 +450,14 @@ Critério de aceite:
 
 1. Usar a leitura de vantagem do Combat Lab para ajustar golpes seguros, puníveis e spacing.
 2. Começar a Fase 5 com matriz de identidade mecânica para Rust, Duke e Go.
-3. Decidir se `Low`, `Throw` ou outra propriedade entra como assinatura de algum personagem.
+3. Decidir quais golpes tradicionais serão universais e quais viram assinatura por personagem.
 4. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
 5. Só depois ampliar para novos golpes especiais.
 
 ## Decisões pendentes
 
-- Qual personagem, se algum, justifica primeiro golpe `Low` jogável?
-- Throws entram como assinatura de personagem ou como sistema universal?
+- Sweep, overhead, anti-air, ataques aéreos e throw continuam universais ou serão diferenciados por personagem?
+- Throws terão throw tech, prioridade própria ou outra resposta defensiva?
 - Projectile deve colidir com projectile?
 - Haverá recurso/meter ou cooldown continua sendo o único custo?
 - Combat Lab entra por CLI flag, tela de preferência ou ambos?

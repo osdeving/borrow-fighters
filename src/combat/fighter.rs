@@ -12,10 +12,11 @@ use crate::math::{rect::Rect, vec2::Vec2};
 use super::frame::FrameCount;
 use super::projectile::{PROJECTILE_FRAME_DATA, ProjectileFrameData};
 pub use crate::combat::move_set::{
-    ActiveAttack, AttackFrameData, AttackKind, DEFAULT_CLOSE_RANGE_MOVE_IDS,
-    DUKE_BOILERPLATE_POKE_DAMAGE, GuardRule, HEAVY_PUNCH_DAMAGE, HitReaction, KICK_DAMAGE,
-    LIGHT_PUNCH_DAMAGE, MoveId, MoveInputKind, MoveSpec, RUST_BORROW_JAB_DAMAGE,
-    move_spec_for_input,
+    AIR_KICK_DAMAGE, AIR_PUNCH_DAMAGE, ActiveAttack, AttackFrameData, AttackKind,
+    CLOSE_THROW_DAMAGE, DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_BOILERPLATE_POKE_DAMAGE, GuardRule,
+    HEAVY_PUNCH_DAMAGE, HitReaction, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE, MoveId, MoveInputKind,
+    MoveSpec, OVERHEAD_PUNCH_DAMAGE, RISING_ANTI_AIR_DAMAGE, RUST_BORROW_JAB_DAMAGE,
+    SWEEP_KICK_DAMAGE, move_spec_for_input,
 };
 
 const WIDTH: f32 = 76.0;
@@ -193,20 +194,25 @@ impl Fighter {
         self.whiff_recovery_timer = tick_timer(self.whiff_recovery_timer, dt);
 
         let action_locked = self.is_action_locked();
+        let requested_move = input.requested_move_spec(self.move_ids, self.facing, self.grounded);
+        let wants_attack = requested_move.is_some();
         self.crouching = !action_locked && input.crouch && self.grounded && self.attack.is_none();
         self.blocking = self.in_blockstun()
-            || (!action_locked && input.block && self.grounded && self.attack.is_none());
+            || (!action_locked
+                && input.block
+                && self.grounded
+                && self.attack.is_none()
+                && !wants_attack);
         self.update_horizontal_velocity(dt, input);
 
-        let can_start_action = !action_locked && !self.crouching && !self.blocking;
-        if input.jump && self.grounded && can_start_action {
+        let can_start_action = !action_locked && !self.blocking && self.attack.is_none();
+        if input.jump && self.grounded && can_start_action && !self.crouching && !wants_attack {
             self.velocity.y = JUMP_SPEED;
             self.grounded = false;
             self.apply_diagonal_jump_boost(input);
         }
 
-        if let Some(spec) = input.requested_move_spec(self.move_ids)
-            && self.attack.is_none()
+        if let Some(spec) = requested_move
             && can_start_action
         {
             events.close_attack_started = Some(spec.id);
@@ -591,7 +597,7 @@ impl Fighter {
 
 impl AttackState {
     fn kind(self) -> AttackKind {
-        AttackKind::from_input_kind(self.spec.input)
+        AttackKind::from_move_id(self.spec.id)
     }
 
     fn elapsed_frames(self) -> FrameCount {
@@ -629,8 +635,36 @@ impl FighterInput {
         }
     }
 
-    fn requested_move_spec(self, move_ids: &[MoveId]) -> Option<MoveSpec> {
-        let input = if self.heavy_punch {
+    fn requested_move_spec(
+        self,
+        move_ids: &[MoveId],
+        facing: Facing,
+        grounded: bool,
+    ) -> Option<MoveSpec> {
+        let input = self.requested_move_kind(facing, grounded)?;
+        move_spec_for_input(move_ids, input)
+    }
+
+    fn requested_move_kind(self, facing: Facing, grounded: bool) -> Option<MoveInputKind> {
+        if !grounded {
+            return if self.kick {
+                Some(MoveInputKind::AirKick)
+            } else if self.light_punch || self.heavy_punch {
+                Some(MoveInputKind::AirPunch)
+            } else {
+                None
+            };
+        }
+
+        let input = if self.block && self.light_punch {
+            MoveInputKind::Throw
+        } else if self.crouch && self.kick {
+            MoveInputKind::Sweep
+        } else if self.crouch && self.heavy_punch {
+            MoveInputKind::AntiAir
+        } else if self.heavy_punch && self.is_forward(facing) {
+            MoveInputKind::Overhead
+        } else if self.heavy_punch {
             MoveInputKind::HeavyPunch
         } else if self.kick {
             MoveInputKind::Kick
@@ -640,7 +674,7 @@ impl FighterInput {
             return None;
         };
 
-        move_spec_for_input(move_ids, input)
+        Some(input)
     }
 
     fn horizontal_axis(self) -> f32 {
@@ -648,6 +682,13 @@ impl FighterInput {
             (true, false) => -1.0,
             (false, true) => 1.0,
             _ => 0.0,
+        }
+    }
+
+    fn is_forward(self, facing: Facing) -> bool {
+        match facing {
+            Facing::Right => self.right && !self.left,
+            Facing::Left => self.left && !self.right,
         }
     }
 }

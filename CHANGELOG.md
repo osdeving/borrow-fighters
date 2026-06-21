@@ -62,6 +62,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Contagem pré-luta central `11`, `10`, `01`, `Fight!`, bloqueando gameplay até a liberação.
 - Vozes CC0 de contagem pré-luta registradas no manifesto de áudio.
 - Direção narrativa inicial com O Linker como força cósmica, Ada Lovelace, Rust, Duke, Assembly, frontenzos e arenas brasileiras de ciência/tecnologia.
+- Primeiro corte de golpes tradicionais: varredura baixa, overhead, anti-air, ataques aéreos e agarrão curto, com testes dedicados em `tests/traditional_moves.rs` e cobertura da CPU em `tests/cpu_traditional_moves.rs`.
 
 ### Em aberto
 

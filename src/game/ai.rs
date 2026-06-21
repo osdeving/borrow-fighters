@@ -101,7 +101,7 @@ impl BasicCpu {
         apply_intent(&mut input, self.intent, target_offset);
 
         if self.action_cooldown <= 0.0 {
-            self.choose_action(&mut input, gap);
+            self.choose_action(&mut input, cpu, target, target_offset, gap);
         }
 
         input
@@ -170,15 +170,50 @@ impl BasicCpu {
         self.intent_timer = self.random_duration(0.22, 0.62);
     }
 
-    fn choose_action(&mut self, input: &mut FighterInput, gap: f32) {
+    fn choose_action(
+        &mut self,
+        input: &mut FighterInput,
+        cpu: &Fighter,
+        target: &Fighter,
+        target_offset: f32,
+        gap: f32,
+    ) {
         let roll = (self.next_roll(100) + (self.pattern_index as u32 * 17)) % 100;
-        if gap <= LIGHT_ATTACK_GAP && roll < self.profile.aggression + 38 {
-            self.choose_close_attack(input, roll);
+
+        if input.jump && cpu.grounded {
+            let cooldown = self.random_duration(0.12, 0.22);
+            self.advance_pattern(cooldown);
+            return;
+        }
+
+        if !cpu.grounded {
+            if gap <= HEAVY_ATTACK_GAP && roll < self.profile.aggression + 34 {
+                if self.chance(50) {
+                    input.kick = true;
+                } else {
+                    input.light_punch = true;
+                }
+                let cooldown = self.random_duration(0.42, 0.72);
+                self.advance_pattern(cooldown);
+            }
+            return;
+        }
+
+        if !target.grounded && gap <= HEAVY_ATTACK_GAP && roll < self.profile.aggression + 35 {
+            input.crouch = true;
+            input.heavy_punch = true;
+            let cooldown = self.random_duration(0.82, 1.20);
+            self.advance_pattern(cooldown);
+        } else if gap <= LIGHT_ATTACK_GAP && roll < self.profile.aggression + 38 {
+            self.choose_close_attack(input, roll, target_offset);
             let cooldown = self.random_duration(0.74, 1.18);
             self.advance_pattern(cooldown);
         } else if gap <= HEAVY_ATTACK_GAP {
-            if roll < 46 {
+            if roll < 34 {
                 input.kick = true;
+            } else if roll < 52 {
+                move_toward(input, target_offset);
+                input.heavy_punch = true;
             } else if roll < self.profile.aggression + 28 {
                 input.heavy_punch = true;
             } else if roll < self.profile.aggression + self.profile.jump_bias + 28 {
@@ -201,16 +236,21 @@ impl BasicCpu {
         }
     }
 
-    fn choose_close_attack(&mut self, input: &mut FighterInput, roll: u32) {
-        match (self.pattern_index + roll as usize) % 5 {
-            0 | 3 => input.kick = true,
+    fn choose_close_attack(&mut self, input: &mut FighterInput, _roll: u32, target_offset: f32) {
+        match self.pattern_index % 6 {
+            0 | 4 => input.kick = true,
             1 => input.light_punch = true,
-            2 => input.heavy_punch = true,
-            _ => {
+            2 => {
+                input.crouch = true;
+                input.kick = true;
+            }
+            3 => {
+                input.block = true;
                 input.light_punch = true;
-                if self.chance(30) {
-                    input.jump = true;
-                }
+            }
+            _ => {
+                move_toward(input, target_offset);
+                input.heavy_punch = true;
             }
         }
     }

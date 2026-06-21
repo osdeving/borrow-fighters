@@ -19,7 +19,7 @@ O slice atual inclui:
 - dois jogadores locais, com Player 2 em CPU por padrão;
 - opção de IA para ambos os jogadores;
 - movimento horizontal, pulo diagonal, abaixar e defesa;
-- soco fraco, soco forte, chute e especial projectile;
+- soco fraco, soco forte, chute, varredura baixa, overhead, anti-air, agarrão curto, ataques aéreos e especial projectile;
 - colisão corpo-corpo;
 - hitbox/hurtbox configuráveis no código;
 - dano, vida, vitória e reinício;

@@ -9,12 +9,16 @@
 use crate::math::rect::Rect;
 
 pub use super::move_data::{
-    AttackFrameData, DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_BOILERPLATE_POKE_DAMAGE,
+    AIR_ATTACK_REACTION, AIR_ATTACK_WHIFF_RECOVERY, AIR_KICK_DAMAGE, AIR_PUNCH_DAMAGE,
+    AttackFrameData, CLOSE_THROW_DAMAGE, CLOSE_THROW_REACTION, CLOSE_THROW_WHIFF_RECOVERY,
+    DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_BOILERPLATE_POKE_DAMAGE,
     DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY, GuardRule, HEAVY_ATTACK_REACTION,
     HEAVY_ATTACK_WHIFF_RECOVERY, HEAVY_PUNCH_DAMAGE, HitReaction, KICK_DAMAGE, KICK_REACTION,
     KICK_WHIFF_RECOVERY, LIGHT_ATTACK_REACTION, LIGHT_ATTACK_WHIFF_RECOVERY, LIGHT_PUNCH_DAMAGE,
-    MoveId, MoveInputKind, MoveSpec, RUST_BORROW_JAB_DAMAGE, RUST_BORROW_JAB_WHIFF_RECOVERY,
-    move_spec, move_spec_for_input,
+    MoveId, MoveInputKind, MoveSpec, OVERHEAD_PUNCH_DAMAGE, OVERHEAD_PUNCH_WHIFF_RECOVERY,
+    OVERHEAD_REACTION, RISING_ANTI_AIR_DAMAGE, RISING_ANTI_AIR_REACTION,
+    RISING_ANTI_AIR_WHIFF_RECOVERY, RUST_BORROW_JAB_DAMAGE, RUST_BORROW_JAB_WHIFF_RECOVERY,
+    SWEEP_KICK_DAMAGE, SWEEP_KICK_WHIFF_RECOVERY, SWEEP_REACTION, move_spec, move_spec_for_input,
 };
 
 /// Close-range attacks available in the greybox prototype.
@@ -23,6 +27,12 @@ pub enum AttackKind {
     LightPunch,
     HeavyPunch,
     Kick,
+    Sweep,
+    Overhead,
+    AntiAir,
+    AirPunch,
+    AirKick,
+    Throw,
 }
 
 /// A currently active offensive shape.
@@ -43,6 +53,12 @@ impl AttackKind {
             MoveId::LightPunch | MoveId::RustBorrowJab => Self::LightPunch,
             MoveId::HeavyPunch | MoveId::DukeBoilerplatePoke => Self::HeavyPunch,
             MoveId::Kick => Self::Kick,
+            MoveId::SweepKick => Self::Sweep,
+            MoveId::OverheadPunch => Self::Overhead,
+            MoveId::RisingAntiAir => Self::AntiAir,
+            MoveId::AirPunch => Self::AirPunch,
+            MoveId::AirKick => Self::AirKick,
+            MoveId::CloseThrow => Self::Throw,
         }
     }
 
@@ -52,6 +68,12 @@ impl AttackKind {
             MoveInputKind::LightPunch => Self::LightPunch,
             MoveInputKind::HeavyPunch => Self::HeavyPunch,
             MoveInputKind::Kick => Self::Kick,
+            MoveInputKind::Sweep => Self::Sweep,
+            MoveInputKind::Overhead => Self::Overhead,
+            MoveInputKind::AntiAir => Self::AntiAir,
+            MoveInputKind::AirPunch => Self::AirPunch,
+            MoveInputKind::AirKick => Self::AirKick,
+            MoveInputKind::Throw => Self::Throw,
         }
     }
 
@@ -61,6 +83,12 @@ impl AttackKind {
             Self::LightPunch => MoveId::LightPunch,
             Self::HeavyPunch => MoveId::HeavyPunch,
             Self::Kick => MoveId::Kick,
+            Self::Sweep => MoveId::SweepKick,
+            Self::Overhead => MoveId::OverheadPunch,
+            Self::AntiAir => MoveId::RisingAntiAir,
+            Self::AirPunch => MoveId::AirPunch,
+            Self::AirKick => MoveId::AirKick,
+            Self::Throw => MoveId::CloseThrow,
         }
     }
 

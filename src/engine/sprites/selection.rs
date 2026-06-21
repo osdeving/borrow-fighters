@@ -86,9 +86,13 @@ pub fn fighter_sprite_clip(fighter: &Fighter) -> FighterSpriteClip {
 
     if let Some(kind) = fighter.attack_kind() {
         return match kind {
-            AttackKind::LightPunch => FighterSpriteClip::PunchLight,
-            AttackKind::HeavyPunch => FighterSpriteClip::PunchHeavy,
-            AttackKind::Kick => FighterSpriteClip::Kick,
+            AttackKind::LightPunch | AttackKind::AirPunch | AttackKind::Throw => {
+                FighterSpriteClip::PunchLight
+            }
+            AttackKind::HeavyPunch | AttackKind::Overhead | AttackKind::AntiAir => {
+                FighterSpriteClip::PunchHeavy
+            }
+            AttackKind::Kick | AttackKind::Sweep | AttackKind::AirKick => FighterSpriteClip::Kick,
         };
     }
 

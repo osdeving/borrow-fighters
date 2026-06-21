@@ -2,8 +2,6 @@
 
 ## Status
 
-Branch de trabalho atual: `feature/projectile-and-smoother-movement`.
-
 Este é o primeiro código jogável do projeto. O objetivo não é parecer bonito; é provar que o loop básico de luta existe e pode ser discutido por gameplay, arte, produção e engenharia.
 
 ## O que já existe
@@ -25,6 +23,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Soco fraco/curto.
 - Soco forte/longo.
 - Chute.
+- Varredura baixa, overhead, anti-air, agarrão curto e ataques aéreos.
 - Fireball horizontal simples em velocidade legível.
 - CPU de playtest para um ou dois jogadores, com perfis diferentes e acoes variadas.
 - Opção para IA mover/defender sem dar golpes.
@@ -71,6 +70,8 @@ Para abrir uma cena limpa de inspeção de golpe:
 ```bash
 cargo run -- --lab combat --character rust --move light_punch
 cargo run -- --lab combat --character duke --move projectile
+cargo run -- --lab combat --character rust --move sweep
+cargo run -- --lab combat --character duke --move anti-air
 ```
 
 Para abrir uma pose estática:
@@ -114,13 +115,18 @@ Ao começar uma luta, os personagens entram em cena e depois aparece a contagem 
 | Soco fraco / curto | `F` | `O` ou `Enter` | `X` |
 | Soco forte / longo | `H` | `P` ou `Right Shift` | `Y` |
 | Chute | `V` | `;` ou `/` | `B` |
+| Varredura baixa | `S` + `V` | `↓`/`K` + `;`/`/` | Baixo + `B` |
+| Anti-air | `S` + `H` | `↓`/`K` + `P`/`Right Shift` | Baixo + `Y` |
+| Overhead | Frente + `H` | Frente + `P`/`Right Shift` | Frente + `Y` |
+| Agarrão curto | `Q` + `F` | `U` + `O`/`Enter` | `LB`/`LT` + `X` |
+| Ataque aéreo | No ar: `F` ou `V` | No ar: `O`/`Enter` ou `;`/`/` | No ar: `X` ou `B` |
 | Fireball | `G` | `Right Ctrl` ou `KP0` | `RB` |
 | Alternar P2 CPU/manual | `C` | `C` | `View` |
 | Reiniciar | `R` | `R` | `Menu` |
 
 O primeiro gamepad conectado controla o Player 1 quando a IA do Player 1 está desligada. O segundo gamepad controla o Player 2 quando a IA do Player 2 está desligada. O Player 2 começa em modo CPU; quando a CPU de um jogador está ligada, os comandos manuais daquele jogador são ignorados.
 
-Quando ambos os jogadores usam IA, Rust e Java usam perfis diferentes para evitar movimentos espelhados. Rust tende a preservar mais média distância e usar especial com mais frequência; Java tende a pressionar mais de perto. A IA decide em pequenos blocos de tempo e pode andar, afastar, pular, abaixar, bloquear, socar, chutar e soltar especial.
+Quando ambos os jogadores usam IA, Rust e Java usam perfis diferentes para evitar movimentos espelhados. Rust tende a preservar mais média distância e usar especial com mais frequência; Java tende a pressionar mais de perto. A IA decide em pequenos blocos de tempo e pode andar, afastar, pular, abaixar, bloquear, socar, chutar, tentar varredura, overhead, anti-air, agarrão curto, ataque aéreo e soltar especial.
 
 O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um controle Bluetooth estiver pareado mas aparecer `OFF`, confirme se o sistema que executa `cargo run` expõe joystick/gamepad para o Raylib. Em WSL ou ambiente remoto, pode ser necessário testar no host nativo ou encaminhar o dispositivo.
 
@@ -151,23 +157,28 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 3. Soco fraco deve ser mais curto e mais rápido.
 4. Soco forte deve alcançar mais longe e causar mais dano.
 5. Chute deve acertar em uma altura mais baixa.
-6. Defesa deve reduzir dano e mostrar feedback azul.
-7. Abaixar deve reduzir a hurtbox visualmente.
-8. Fireball deve andar horizontalmente em velocidade legível e causar dano ao acertar.
-9. A CPU do Player 2 deve variar aproximação, afastamento, pulo, socos, chutes, defesa e fireballs.
-10. A tela de preferências deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
-11. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
-12. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
-13. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Rust.
-14. A opção `Player 2 recebe dano` desligada deve impedir perda de vida do Java.
-15. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
-16. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
-17. `R` ou `Menu` deve reiniciar a partida.
-18. `Esc` durante a luta deve voltar para a tela de preferências.
-19. Pulo com direção pressionada deve sair em diagonal.
-20. A vida deve chegar a zero e encerrar a luta.
-21. Ao fim da luta, o cenário deve avançar uma vez no ciclo `Sirius -> Fortaleza Tech Coast -> Java Street -> Sirius`.
-22. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
+6. Varredura baixa deve exigir defesa abaixada.
+7. Overhead deve exigir defesa em pé.
+8. Agarrão curto deve ignorar defesa, mas errar fora de alcance.
+9. Anti-air deve cobrir região acima/frente do personagem.
+10. Ataques aéreos devem funcionar durante salto sem travar a queda.
+11. Defesa deve reduzir dano e mostrar feedback azul.
+12. Abaixar deve reduzir a hurtbox visualmente.
+13. Fireball deve andar horizontalmente em velocidade legível e causar dano ao acertar.
+14. A CPU do Player 2 deve variar aproximação, afastamento, pulo, socos, chutes, varredura, overhead, anti-air, agarrão curto, ataque aéreo, defesa e fireballs.
+15. A tela de preferências deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
+16. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
+17. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
+18. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Rust.
+19. A opção `Player 2 recebe dano` desligada deve impedir perda de vida do Java.
+20. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
+21. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
+22. `R` ou `Menu` deve reiniciar a partida.
+23. `Esc` durante a luta deve voltar para a tela de preferências.
+24. Pulo com direção pressionada deve sair em diagonal.
+25. A vida deve chegar a zero e encerrar a luta.
+26. Ao fim da luta, o cenário deve avançar uma vez no ciclo `Sirius -> Fortaleza Tech Coast -> Java Street -> Sirius`.
+27. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
 
 ## Combat Lab
 
@@ -176,6 +187,8 @@ Para testar um golpe sem iniciar a luta completa:
 ```bash
 cargo run -- --lab combat --character rust --move light_punch
 cargo run -- --lab combat --character duke --move projectile
+cargo run -- --lab combat --character rust --move overhead
+cargo run -- --lab combat --character duke --move throw
 ```
 
 Use o Combat Lab para verificar:
@@ -185,6 +198,7 @@ Use o Combat Lab para verificar:
 - hitbox ativa e inativa;
 - frame atual, fase e janela ativa do golpe;
 - spawn, altura e trajetória inicial do projectile.
+- high/low/throw obedecendo as regras de defesa.
 
 Rastreio técnico do Combat Lab, hitbox/hurtbox e arquivos de combate: [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md).
 
@@ -206,14 +220,14 @@ Controles do lab:
 
 ## Limitações conhecidas
 
-- Os dois personagens ainda compartilham o mesmo kit de golpes.
+- Os dois personagens ainda compartilham a maior parte do kit; Rust e Duke têm apenas primeiros ajustes específicos.
 - As arenas bitmap são placeholders gerados/derivados de referências e não devem ser tratadas como arte final.
 - O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.
 - Fireball no gamepad usa `RB` por enquanto; `RT` pode entrar depois quando tivermos leitura de gatilho com borda de pressionamento.
-- Defesa é um experimento mínimo: reduz dano, mas ainda não tem direção, high/low guard ou pushback.
+- Defesa é um experimento mínimo: já separa high/low/mid/throw/projectile, mas ainda não tem direção esquerda/direita nem defesa perfeita por timing.
 - A CPU é um sparring dummy determinístico: decide em pequenos blocos de tempo, usa perfis diferentes por slot, varia movimento/ataque/especial/defesa e reage a projéteis sem ser perfeita.
-- Não há combo, agarrão, especial avançado, hitstun real, knockback ou IA adaptativa.
-- Não há animação final, sprites, áudio, pausa ou IA avançada.
+- Não há combo, especial avançado, throw tech, knockdown ou IA adaptativa.
+- Não há arte final, animação final, áudio final, pausa dedicada ou IA avançada.
 - O balanceamento ainda não importa.
 - A colisão é propositalmente simples e axis-aligned.
 - O visual é debug/greybox, não direção de arte final.
@@ -223,15 +237,15 @@ Controles do lab:
 ### Próximo passo técnico
 
 - Refinar sensação de movimento.
-- Adicionar knockback simples.
+- Validar o kit tradicional em playtest e ajustar frame data.
 - Separar melhor estados de ataque/hitstun se o kit atual for aceito.
 - Criar testes para vitória/restart e bordas da arena.
 - Ajustar heurísticas da CPU depois de playtest manual.
 
 ### Próximo passo de gameplay
 
-- Decidir se soco fraco, soco forte e chute comunicam alcance/dano diferentes.
-- Decidir se defesa e abaixar entram no Prototype 0.1 final ou ficam como experimento de 0.2.
+- Decidir se sweep, overhead, anti-air e throw serão universais ou parte da identidade de cada personagem.
+- Decidir se defesa por direção entra cedo ou fica para depois do feeling básico.
 - Definir o primeiro diferencial mecânico mínimo de Rust e Java.
 
 ### Próximo passo de arte
