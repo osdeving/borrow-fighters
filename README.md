@@ -31,6 +31,7 @@ A ideia é reunir visão, escopo, decisões e backlog antes de iniciar o código
 ### Arte, mood e moldes
 
 - [`docs/07-art-direction.md`](docs/07-art-direction.md): direção de arte inicial, moods e critérios visuais.
+- [`docs/11-sprite-pipeline.md`](docs/11-sprite-pipeline.md): formato candidato para atlas, animações, pivots e metadata de sprites.
 - [`docs/templates/mood-proposal.md`](docs/templates/mood-proposal.md): molde para proposta de moodboard.
 - [`docs/templates/character-concept.md`](docs/templates/character-concept.md): molde para personagem e mecânica.
 - [`docs/templates/adr-template.md`](docs/templates/adr-template.md): molde para novas decisões.
@@ -39,6 +40,7 @@ A ideia é reunir visão, escopo, decisões e backlog antes de iniciar o código
 ### Código e IA
 
 - [`docs/08-code-architecture.md`](docs/08-code-architecture.md): esboço da arquitetura Rust + Raylib.
+- [`docs/11-sprite-pipeline.md`](docs/11-sprite-pipeline.md): ponte entre assets de artistas e futuro motor de sprites.
 - [`docs/09-ai-collaboration.md`](docs/09-ai-collaboration.md): como Codex, Claude e skills devem navegar o projeto.
 - [`AGENTS.md`](AGENTS.md): instruções persistentes para Codex.
 - [`CLAUDE.md`](CLAUDE.md): instruções persistentes para Claude Code.
