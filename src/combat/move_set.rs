@@ -9,8 +9,9 @@
 use crate::math::rect::Rect;
 
 pub use super::move_data::{
-    AttackFrameData, DEFAULT_CLOSE_RANGE_MOVE_IDS, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE,
-    LIGHT_PUNCH_DAMAGE, MoveId, MoveSpec, move_spec,
+    AttackFrameData, DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_BOILERPLATE_POKE_DAMAGE,
+    HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE, MoveId, MoveInputKind, MoveSpec,
+    RUST_BORROW_JAB_DAMAGE, move_spec, move_spec_for_input,
 };
 
 /// Close-range attacks available in the greybox prototype.
@@ -33,9 +34,18 @@ impl AttackKind {
     /// Returns the runtime attack kind represented by a stable move id.
     pub const fn from_move_id(id: MoveId) -> Self {
         match id {
-            MoveId::LightPunch => Self::LightPunch,
-            MoveId::HeavyPunch => Self::HeavyPunch,
+            MoveId::LightPunch | MoveId::RustBorrowJab => Self::LightPunch,
+            MoveId::HeavyPunch | MoveId::DukeBoilerplatePoke => Self::HeavyPunch,
             MoveId::Kick => Self::Kick,
+        }
+    }
+
+    /// Returns the runtime attack kind represented by an input family.
+    pub const fn from_input_kind(input: MoveInputKind) -> Self {
+        match input {
+            MoveInputKind::LightPunch => Self::LightPunch,
+            MoveInputKind::HeavyPunch => Self::HeavyPunch,
+            MoveInputKind::Kick => Self::Kick,
         }
     }
 

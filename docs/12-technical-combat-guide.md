@@ -60,10 +60,14 @@ Os golpes próximos atuais estão em [`src/combat/move_data.rs`](../src/combat/m
 - `LightPunch`
 - `HeavyPunch`
 - `Kick`
+- `RustBorrowJab`
+- `DukeBoilerplatePoke`
 
-`DEFAULT_CLOSE_RANGE_MOVE_IDS` define a lista padrão usada pelos personagens atuais. `AttackKind` em [`src/combat/move_set.rs`](../src/combat/move_set.rs) ainda existe como camada runtime de compatibilidade para sprites, debug e estado de ataque.
+`DEFAULT_CLOSE_RANGE_MOVE_IDS` define a lista padrão genérica usada por construtores e testes que não selecionam personagem. `CharacterSpec.move_ids` define o loadout real de cada personagem.
 
-`Fighter` carrega `move_ids` próprios. Se um `MoveId` não estiver no loadout do lutador, o input daquele golpe não inicia ataque. Isso permite diferenciar personagens sem alterar profundamente `Fighter`.
+`Fighter` carrega `move_ids` próprios. Quando um botão de golpe é pressionado, `move_spec_for_input` procura no loadout o primeiro `MoveSpec` com o `MoveInputKind` correspondente. Se não houver `MoveId` compatível, o input daquele golpe não inicia ataque. Isso permite que o mesmo botão resolva para golpes diferentes por personagem sem alterar profundamente `Fighter`.
+
+`AttackKind` em [`src/combat/move_set.rs`](../src/combat/move_set.rs) ainda existe como camada runtime de compatibilidade para sprites, debug e categorias visuais. O dano, a hitbox e o frame data durante uma luta vêm do `MoveSpec` concreto guardado no estado de ataque.
 
 ### Dados de Personagens
 
@@ -75,7 +79,7 @@ Personagens ficam em [`src/characters/mod.rs`](../src/characters/mod.rs). Cada `
 - `stats.max_health`: vida máxima usada na criação do `Fighter`;
 - `move_ids`: golpes próximos disponíveis no loadout.
 
-Hoje `Rust` e `Duke` usam a mesma lista de `MoveId`, mas já divergem em arquétipo e vida máxima. O `World` cria lutadores via `World::new_with_characters`, consumindo `CharacterSpec` para nome, vida e loadout. O Combat Lab usa o mesmo caminho para testar personagem isolado.
+Hoje `Rust` usa `RustBorrowJab` no soco fraco: startup menor, alcance menor e dano menor para funcionar como checagem rápida. `Duke` usa `DukeBoilerplatePoke` no soco forte: alcance e dano maiores, com startup/recovery mais longos para reforçar midrange pesado e punição em whiff. O `World` cria lutadores via `World::new_with_characters`, consumindo `CharacterSpec` para nome, vida e loadout. O Combat Lab usa o mesmo caminho para testar personagem isolado.
 
 ### Combat Lab
 

@@ -3,14 +3,16 @@
 //! System: Combat data. This module stores tunable move specs consumed by
 //! fighters, Combat Lab, and future character specs.
 //!
-//! This is the first step toward character-specific moves while keeping the
-//! current Prototype 0.1 combat behavior unchanged.
+//! Character specs can now select input-compatible move ids with different
+//! timings, reach, and damage while keeping the same prototype controls.
 
 use super::frame::FrameCount;
 
 pub const LIGHT_PUNCH_DAMAGE: i32 = 8;
 pub const HEAVY_PUNCH_DAMAGE: i32 = 16;
 pub const KICK_DAMAGE: i32 = 12;
+pub const RUST_BORROW_JAB_DAMAGE: i32 = 7;
+pub const DUKE_BOILERPLATE_POKE_DAMAGE: i32 = 18;
 
 /// Stable identifier for a close-range move.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -18,6 +20,8 @@ pub enum MoveId {
     LightPunch,
     HeavyPunch,
     Kick,
+    RustBorrowJab,
+    DukeBoilerplatePoke,
 }
 
 impl MoveId {
@@ -26,6 +30,8 @@ impl MoveId {
             Self::LightPunch => 0,
             Self::HeavyPunch => 1,
             Self::Kick => 2,
+            Self::RustBorrowJab => 3,
+            Self::DukeBoilerplatePoke => 4,
         }
     }
 }
@@ -70,7 +76,7 @@ pub struct MoveSpec {
 }
 
 /// Prototype 0.1 close-range move table.
-pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 3] = [
+pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 5] = [
     MoveSpec {
         id: MoveId::LightPunch,
         input: MoveInputKind::LightPunch,
@@ -119,9 +125,50 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 3] = [
         },
         damage: KICK_DAMAGE,
     },
+    MoveSpec {
+        id: MoveId::RustBorrowJab,
+        input: MoveInputKind::LightPunch,
+        label: "Borrow Jab",
+        frames: AttackFrameData {
+            duration: FrameCount::new(16),
+            active_start: FrameCount::new(4),
+            active_end: FrameCount::new(8),
+        },
+        hitbox: HitboxSpec {
+            width: 48.0,
+            height: 30.0,
+            y_offset: 62.0,
+        },
+        damage: RUST_BORROW_JAB_DAMAGE,
+    },
+    MoveSpec {
+        id: MoveId::DukeBoilerplatePoke,
+        input: MoveInputKind::HeavyPunch,
+        label: "Boilerplate",
+        frames: AttackFrameData {
+            duration: FrameCount::new(40),
+            active_start: FrameCount::new(13),
+            active_end: FrameCount::new(22),
+        },
+        hitbox: HitboxSpec {
+            width: 112.0,
+            height: 44.0,
+            y_offset: 60.0,
+        },
+        damage: DUKE_BOILERPLATE_POKE_DAMAGE,
+    },
 ];
 
 /// Returns close-range move data by stable move id.
 pub const fn move_spec(id: MoveId) -> MoveSpec {
     CLOSE_RANGE_MOVE_SPECS[id.index()]
+}
+
+/// Returns the first move in a character loadout that matches an input family.
+pub fn move_spec_for_input(move_ids: &[MoveId], input: MoveInputKind) -> Option<MoveSpec> {
+    move_ids
+        .iter()
+        .copied()
+        .map(move_spec)
+        .find(|spec| spec.input == input)
 }

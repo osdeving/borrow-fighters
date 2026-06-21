@@ -1,9 +1,11 @@
 //! Verifies whole-frame combat timing for close-range attacks.
 
+use borrow_fighters::characters::{CharacterId, character_spec};
 use borrow_fighters::combat::fighter::{
     AttackKind, AttackPhase, Fighter, FighterInput, PlayerSlot,
 };
 use borrow_fighters::combat::frame::FrameCount;
+use borrow_fighters::combat::move_data::{MoveId, move_spec};
 use borrow_fighters::combat::projectile::PROJECTILE_FRAME_DATA;
 
 const DT: f32 = 1.0 / 60.0;
@@ -137,8 +139,56 @@ fn heavy_punch_and_kick_start_on_their_declared_active_frames() {
     assert_eq!(kick.attack_phase(), AttackPhase::Active);
 }
 
+#[test]
+fn character_specific_moves_use_their_own_frame_data() {
+    let mut rust = start_character_attack(
+        CharacterId::Rust,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(
+        rust.attack_frame_data(),
+        Some(move_spec(MoveId::RustBorrowJab).frames)
+    );
+    advance_to_frame(&mut rust, 3);
+    assert_eq!(rust.attack_phase(), AttackPhase::Startup);
+    advance_to_frame(&mut rust, 4);
+    assert_eq!(rust.attack_phase(), AttackPhase::Active);
+
+    let mut duke = start_character_attack(
+        CharacterId::Duke,
+        FighterInput {
+            heavy_punch: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(
+        duke.attack_frame_data(),
+        Some(move_spec(MoveId::DukeBoilerplatePoke).frames)
+    );
+    advance_to_frame(&mut duke, 12);
+    assert_eq!(duke.attack_phase(), AttackPhase::Startup);
+    advance_to_frame(&mut duke, 13);
+    assert_eq!(duke.attack_phase(), AttackPhase::Active);
+}
+
 fn start_attack(input: FighterInput) -> Fighter {
     let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 300.0);
+    fighter.update(DT, input);
+    fighter
+}
+
+fn start_character_attack(character: CharacterId, input: FighterInput) -> Fighter {
+    let spec = character_spec(character);
+    let mut fighter = Fighter::new_with_loadout(
+        PlayerSlot::One,
+        spec.fighter_name,
+        spec.stats.max_health,
+        spec.move_ids,
+        300.0,
+    );
     fighter.update(DT, input);
     fighter
 }

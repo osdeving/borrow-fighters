@@ -415,8 +415,8 @@ fn draw_fighter(
 
     if options.show_debug && phase != AttackPhase::Idle {
         let attack_label = fighter
-            .attack_kind()
-            .map_or("ATTACK", crate::combat::fighter::AttackKind::label);
+            .attack_move_spec()
+            .map_or("ATTACK", |spec| spec.label);
         let phase_label = match phase {
             AttackPhase::Startup => "STARTUP",
             AttackPhase::Active => "ACTIVE",

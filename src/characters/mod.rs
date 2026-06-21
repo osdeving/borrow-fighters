@@ -4,10 +4,16 @@
 //! each character without resolving attacks, drawing sprites, or owning match
 //! state.
 
-use crate::combat::move_data::{DEFAULT_CLOSE_RANGE_MOVE_IDS, MoveId};
+use crate::combat::move_data::MoveId;
 
 const RUST_STATS: CharacterStats = CharacterStats { max_health: 100 };
 const DUKE_STATS: CharacterStats = CharacterStats { max_health: 112 };
+const RUST_MOVE_IDS: [MoveId; 3] = [MoveId::RustBorrowJab, MoveId::HeavyPunch, MoveId::Kick];
+const DUKE_MOVE_IDS: [MoveId; 3] = [
+    MoveId::LightPunch,
+    MoveId::DukeBoilerplatePoke,
+    MoveId::Kick,
+];
 
 /// Stable identifier for playable or testable characters.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -61,7 +67,7 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             fighter_name: "Rust",
             archetype: CharacterArchetype::AllRounder,
             stats: RUST_STATS,
-            move_ids: &DEFAULT_CLOSE_RANGE_MOVE_IDS,
+            move_ids: &RUST_MOVE_IDS,
         },
         CharacterId::Duke => CharacterSpec {
             id,
@@ -69,7 +75,7 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             fighter_name: "Java",
             archetype: CharacterArchetype::MidrangePressure,
             stats: DUKE_STATS,
-            move_ids: &DEFAULT_CLOSE_RANGE_MOVE_IDS,
+            move_ids: &DUKE_MOVE_IDS,
         },
     }
 }

@@ -179,20 +179,20 @@ fn lab_timing_text(lab: &CombatLab) -> String {
                 AttackPhase::Active => "active",
                 AttackPhase::Recovery => "recovery",
             };
-            if let (Some(kind), Some(elapsed), Some(frame_data)) = (
-                fighter.attack_kind(),
+            if let (Some(spec), Some(elapsed), Some(frame_data)) = (
+                fighter.attack_move_spec(),
                 fighter.attack_elapsed_frames(),
                 fighter.attack_frame_data(),
             ) {
                 format!(
                     "{} {:02}/{:02} {} act {:02}-{:02} dmg {}",
-                    kind.label(),
+                    spec.label,
                     elapsed.get(),
                     frame_data.duration.get(),
                     phase,
                     frame_data.active_start.get(),
                     frame_data.active_end.get(),
-                    kind.damage()
+                    spec.damage
                 )
             } else {
                 format!("waiting for {}", lab.selected_move().label())

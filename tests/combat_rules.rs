@@ -2,8 +2,8 @@
 
 use borrow_fighters::characters::{CharacterId, character_spec};
 use borrow_fighters::combat::fighter::{
-    AttackKind, Fighter, FighterInput, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE,
-    PlayerSlot,
+    AttackKind, Fighter, FighterInput, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, PlayerSlot,
+    RUST_BORROW_JAB_DAMAGE,
 };
 use borrow_fighters::combat::move_data::MoveId;
 use borrow_fighters::combat::projectile::{PROJECTILE_DAMAGE, PROJECTILE_SPEED};
@@ -38,7 +38,7 @@ fn basic_attack_deals_damage_once_per_swing() {
 
     assert_eq!(
         world.player_two.health,
-        player_two_health - LIGHT_PUNCH_DAMAGE
+        player_two_health - RUST_BORROW_JAB_DAMAGE
     );
     assert_eq!(world.hit_effects.len(), 1);
 }
@@ -144,7 +144,7 @@ fn block_reduces_incoming_damage() {
 
     assert_eq!(
         world.player_two.health,
-        player_two_health - LIGHT_PUNCH_DAMAGE / 4
+        player_two_health - RUST_BORROW_JAB_DAMAGE / 4
     );
     assert_eq!(world.hit_effects.len(), 1);
     assert!(world.hit_effects[0].blocked);
@@ -294,7 +294,7 @@ fn crouch_reduces_the_vulnerable_body_height() {
 #[test]
 fn match_ends_when_health_reaches_zero() {
     let mut world = World::new_greybox();
-    world.player_two.health = LIGHT_PUNCH_DAMAGE;
+    world.player_two.health = RUST_BORROW_JAB_DAMAGE;
     world.player_one.position.x = 420.0;
     world.player_two.position.x = 470.0;
 
@@ -314,6 +314,53 @@ fn match_ends_when_health_reaches_zero() {
     assert_eq!(
         world.outcome,
         Some(MatchOutcome::Winner(world.player_one.slot))
+    );
+}
+
+#[test]
+fn close_attack_tuning_comes_from_character_loadout() {
+    let mut rust = Fighter::new_with_loadout(
+        PlayerSlot::One,
+        "Rust",
+        100,
+        character_spec(CharacterId::Rust).move_ids,
+        300.0,
+    );
+
+    rust.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+    );
+
+    assert_eq!(rust.attack_kind(), Some(AttackKind::LightPunch));
+    assert_eq!(
+        rust.attack_move_spec().map(|spec| spec.id),
+        Some(MoveId::RustBorrowJab)
+    );
+
+    let mut duke = Fighter::new_with_loadout(
+        PlayerSlot::Two,
+        "Java",
+        112,
+        character_spec(CharacterId::Duke).move_ids,
+        500.0,
+    );
+
+    duke.update(
+        DT,
+        FighterInput {
+            heavy_punch: true,
+            ..FighterInput::default()
+        },
+    );
+
+    assert_eq!(duke.attack_kind(), Some(AttackKind::HeavyPunch));
+    assert_eq!(
+        duke.attack_move_spec().map(|spec| spec.id),
+        Some(MoveId::DukeBoilerplatePoke)
     );
 }
 

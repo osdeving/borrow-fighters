@@ -48,6 +48,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Runtime de luta consumindo `CharacterSpec` para nome, vida máxima e loadout de golpes; Duke/Java começa com vida máxima maior.
 - Combat Lab com `--pose` e hotkeys `PageDown`/`PageUp` para inspecionar idle, crouch, jump, block, hit e victory.
 - Overlay/debug do Combat Lab separado em `src/ui/combat_debug.rs` para reduzir responsabilidade do renderer.
+- Primeiros golpes próximos específicos por personagem: `RustBorrowJab` e `DukeBoilerplatePoke`, resolvidos por loadout sem mudar os controles.
 
 ### Em aberto
 

@@ -12,8 +12,9 @@ use crate::math::{rect::Rect, vec2::Vec2};
 use super::frame::FrameCount;
 use super::projectile::{PROJECTILE_FRAME_DATA, ProjectileFrameData};
 pub use crate::combat::move_set::{
-    ActiveAttack, AttackFrameData, AttackKind, DEFAULT_CLOSE_RANGE_MOVE_IDS, HEAVY_PUNCH_DAMAGE,
-    KICK_DAMAGE, LIGHT_PUNCH_DAMAGE, MoveId,
+    ActiveAttack, AttackFrameData, AttackKind, DEFAULT_CLOSE_RANGE_MOVE_IDS,
+    DUKE_BOILERPLATE_POKE_DAMAGE, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE, MoveId,
+    MoveInputKind, MoveSpec, RUST_BORROW_JAB_DAMAGE, move_spec_for_input,
 };
 
 const WIDTH: f32 = 76.0;
@@ -107,7 +108,7 @@ pub struct Fighter {
 
 #[derive(Clone, Copy, Debug)]
 struct AttackState {
-    kind: AttackKind,
+    spec: MoveSpec,
     elapsed: f32,
     has_hit: bool,
 }
@@ -178,12 +179,12 @@ impl Fighter {
             self.apply_diagonal_jump_boost(input);
         }
 
-        if let Some(kind) = input.requested_attack(self.move_ids)
+        if let Some(spec) = input.requested_move_spec(self.move_ids)
             && self.attack.is_none()
             && can_start_action
         {
             self.attack = Some(AttackState {
-                kind,
+                spec,
                 elapsed: 0.0,
                 has_hit: false,
             });
@@ -203,7 +204,7 @@ impl Fighter {
         if let Some(mut attack) = self.attack {
             attack.elapsed += dt;
             self.attack =
-                (attack.elapsed_frames() <= attack.kind.frame_data().duration).then_some(attack);
+                (attack.elapsed_frames() <= attack.spec.frames.duration).then_some(attack);
         }
     }
 
@@ -330,21 +331,26 @@ impl Fighter {
     pub fn active_attack(&self) -> Option<ActiveAttack> {
         self.attack.and_then(|attack| {
             attack.is_active().then(|| ActiveAttack {
-                kind: attack.kind,
-                hitbox: self.attack_box_for(attack.kind),
-                damage: attack.kind.damage(),
+                kind: attack.kind(),
+                hitbox: self.attack_box_for(attack.spec),
+                damage: attack.spec.damage,
             })
         })
     }
 
     /// Returns the attack reach box while an attack animation is running.
     pub fn attack_box(&self) -> Option<Rect> {
-        self.attack.map(|attack| self.attack_box_for(attack.kind))
+        self.attack.map(|attack| self.attack_box_for(attack.spec))
     }
 
     /// Returns the current close attack kind, if any.
     pub fn attack_kind(&self) -> Option<AttackKind> {
-        self.attack.map(|attack| attack.kind)
+        self.attack.map(AttackState::kind)
+    }
+
+    /// Returns the concrete close-range move spec currently being played.
+    pub fn attack_move_spec(&self) -> Option<MoveSpec> {
+        self.attack.map(|attack| attack.spec)
     }
 
     /// Returns close-range move ids available to this fighter.
@@ -364,7 +370,7 @@ impl Fighter {
 
     /// Returns whole-frame data for the current close attack.
     pub fn attack_frame_data(&self) -> Option<AttackFrameData> {
-        self.attack.map(|attack| attack.kind.frame_data())
+        self.attack.map(|attack| attack.spec.frames)
     }
 
     /// Returns elapsed seconds for the current special animation.
@@ -453,9 +459,9 @@ impl Fighter {
         }
     }
 
-    fn attack_box_for(&self, kind: AttackKind) -> Rect {
+    fn attack_box_for(&self, spec: MoveSpec) -> Rect {
         let body = self.body_rect();
-        let spec = kind.move_spec().hitbox;
+        let spec = spec.hitbox;
         let x = if self.facing == Facing::Right {
             body.right()
         } else {
@@ -474,18 +480,22 @@ impl Fighter {
 }
 
 impl AttackState {
+    fn kind(self) -> AttackKind {
+        AttackKind::from_input_kind(self.spec.input)
+    }
+
     fn elapsed_frames(self) -> FrameCount {
         FrameCount::from_elapsed_seconds(self.elapsed)
     }
 
     fn is_active(self) -> bool {
-        let frames = self.kind.frame_data();
+        let frames = self.spec.frames;
         let current = self.elapsed_frames();
         current >= frames.active_start && current <= frames.active_end
     }
 
     fn phase(self) -> AttackPhase {
-        let frames = self.kind.frame_data();
+        let frames = self.spec.frames;
         let current = self.elapsed_frames();
         if current < frames.active_start {
             AttackPhase::Startup
@@ -509,20 +519,18 @@ impl FighterInput {
         }
     }
 
-    fn requested_attack(self, move_ids: &[MoveId]) -> Option<AttackKind> {
-        let requested = if self.heavy_punch {
-            MoveId::HeavyPunch
+    fn requested_move_spec(self, move_ids: &[MoveId]) -> Option<MoveSpec> {
+        let input = if self.heavy_punch {
+            MoveInputKind::HeavyPunch
         } else if self.kick {
-            MoveId::Kick
+            MoveInputKind::Kick
         } else if self.light_punch {
-            MoveId::LightPunch
+            MoveInputKind::LightPunch
         } else {
             return None;
         };
 
-        move_ids
-            .contains(&requested)
-            .then(|| AttackKind::from_move_id(requested))
+        move_spec_for_input(move_ids, input)
     }
 
     fn horizontal_axis(self) -> f32 {

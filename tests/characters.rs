@@ -13,7 +13,7 @@ fn rust_spec_points_to_current_prototype_moves() {
     assert_eq!(rust.stats.max_health, 100);
     assert_eq!(
         rust.move_ids,
-        &[MoveId::LightPunch, MoveId::HeavyPunch, MoveId::Kick]
+        &[MoveId::RustBorrowJab, MoveId::HeavyPunch, MoveId::Kick]
     );
 }
 
@@ -27,7 +27,11 @@ fn duke_spec_points_to_current_prototype_moves() {
     assert_eq!(duke.stats.max_health, 112);
     assert_eq!(
         duke.move_ids,
-        &[MoveId::LightPunch, MoveId::HeavyPunch, MoveId::Kick]
+        &[
+            MoveId::LightPunch,
+            MoveId::DukeBoilerplatePoke,
+            MoveId::Kick
+        ]
     );
 }
 

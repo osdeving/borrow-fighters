@@ -4,7 +4,7 @@
 
 Em implementação.
 
-Fases 1, 2 e 3 concluídas em corte mínimo na branch `gameplay/combat-improvement-plan`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, Rust/Duke possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout, e o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`.
+Fases 1, 2 e 3 concluídas em corte mínimo na branch `gameplay/combat-improvement-plan`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, Rust/Duke possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout, o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`, e Rust/Duke já têm o primeiro corte de golpes próximos específicos por personagem.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -136,7 +136,7 @@ Fraquezas:
 
 Golpes candidatos:
 
-- `borrow_jab`: jab rápido para checar avanço.
+- `borrow_jab`: jab rápido para checar avanço. **Implementado em corte inicial** como soco fraco mais rápido, curto e de menor dano.
 - `lifetime_step`: avanço curto com recovery punível se mal usado.
 - `gear_projectile`: projectile médio, bom para controlar espaço, mas com cooldown.
 - `ownership_counter`: contra-ataque futuro, só depois de defesa básica estar sólida.
@@ -161,7 +161,7 @@ Fraquezas:
 
 Golpes candidatos:
 
-- `boilerplate_poke`: normal longo, dano médio, recovery claro.
+- `boilerplate_poke`: normal longo, dano médio, recovery claro. **Implementado em corte inicial** como soco forte mais longo, mais danoso e mais lento.
 - `gc_sweep`: chute/varredura lenta que ganha espaço.
 - `bean_projectile`: projectile lento que força movimento, não spam.
 - `enterprise_lock`: pressão futura com custo ou setup.
@@ -367,7 +367,7 @@ Critério de aceite:
 
 ### Fase 3 — MoveSpec e CharacterSpec
 
-Status: **concluída em corte mínimo**.
+Status: **concluída em corte mínimo, com primeiro tuning específico por personagem**.
 
 Entregáveis:
 
@@ -376,12 +376,14 @@ Entregáveis:
 - [x] fazer `World`, `Combat Lab` e `Fighter` consumirem nome, vida máxima e loadout vindos de `CharacterSpec`;
 - [x] manter comportamento atual com dados novos;
 - [x] testes garantindo que dados antigos continuam equivalentes.
+- [x] permitir que o mesmo botão resolva para `MoveSpec` diferente conforme o loadout do personagem.
 
 Critério de aceite:
 
 - adicionar um golpe novo não exige alterar `Fighter` profundamente.
 - `AttackKind` permanece como camada de compatibilidade runtime para sprites, debug e seleção de ataque.
-- A parte mínima está aceita; a próxima evolução é diferenciar os `MoveSpec` por personagem quando houver intenção de gameplay testável.
+- Rust possui `RustBorrowJab` como soco fraco rápido/curto; Duke possui `DukeBoilerplatePoke` como soco forte longo/lento.
+- A parte mínima está aceita; a próxima evolução é refinar defesa, hitstun/blockstun e contra-jogo.
 
 ### Fase 4 — Defesa e contra-jogo
 
@@ -425,7 +427,7 @@ Critério de aceite:
 
 ## Backlog técnico imediato
 
-1. Criar o primeiro `MoveSpec` exclusivo de Rust ou Duke quando houver intenção de gameplay clara.
+1. Separar regras de defesa em `GuardRule` simples e preparar blockstun/hitstun inicial.
 2. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
 3. Só depois ampliar para novos personagens ou golpes especiais.
 
