@@ -83,6 +83,8 @@ Abrir o laboratório:
 ```bash
 cargo run -- --lab combat --character rust --move light_punch
 cargo run -- --lab combat --character duke --move projectile
+cargo run -- --lab combat --character rust --pose block
+cargo run -- --lab combat --character duke --pose victory
 ```
 
 Valores aceitos:
@@ -91,6 +93,9 @@ Valores aceitos:
 |---|---|
 | `--character` | `rust`, `rustacean`, `duke`, `java` |
 | `--move` | `light_punch`, `heavy_punch`, `kick`, `projectile` |
+| `--pose` | `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory` |
+
+`--pose move` é o modo padrão e reproduz o golpe selecionado por `--move`. As outras poses são inspeções estáticas para alinhar sprite, pivot e hurtbox sem depender de uma luta real.
 
 Teclas:
 
@@ -98,6 +103,8 @@ Teclas:
 |---|---|
 | Próximo golpe | `Tab` |
 | Golpe anterior | `Shift+Tab` |
+| Próxima pose | `PageDown` |
+| Pose anterior | `PageUp` |
 | Repetir golpe | `Enter` |
 | Pausar/continuar | `Espaço` |
 | Avançar 1 frame | `.` |
@@ -114,6 +121,16 @@ Use o Combat Lab para conferir:
 - se o pivot está no chão e no centro esperado;
 - se startup, active e recovery batem com a tabela;
 - se a hurtbox muda de modo previsível quando o estado muda.
+
+Poses atuais:
+
+- `move`: reproduz o golpe selecionado;
+- `idle`: pose neutra;
+- `crouch`: aplica estado de abaixar e hurtbox menor;
+- `jump`: posiciona o lutador no ar para conferir corpo/pivot;
+- `block`: aplica estado de defesa;
+- `hit`: força clip visual `hit` quando o manifest possui esse clip;
+- `victory`: força clip visual `taunt`.
 
 ## Cabeçalho de Arquivos
 

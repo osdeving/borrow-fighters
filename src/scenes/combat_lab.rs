@@ -15,6 +15,7 @@ use crate::combat::{
 use crate::config::{FIXED_TIMESTEP, WINDOW_WIDTH};
 
 const LAB_FIGHTER_X: f32 = 430.0;
+const LAB_JUMP_PREVIEW_HEIGHT: f32 = 92.0;
 
 /// Move selected for isolated playback.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -85,11 +86,69 @@ impl CombatLabMove {
     }
 }
 
+/// Static pose or move playback mode selected in the Combat Lab.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum CombatLabPose {
+    #[default]
+    Move,
+    Idle,
+    Crouch,
+    Jump,
+    Block,
+    Hit,
+    Victory,
+}
+
+impl CombatLabPose {
+    /// Ordered pose list used by cycling controls.
+    pub const ALL: [Self; 7] = [
+        Self::Move,
+        Self::Idle,
+        Self::Crouch,
+        Self::Jump,
+        Self::Block,
+        Self::Hit,
+        Self::Victory,
+    ];
+
+    /// Parses a CLI pose name.
+    pub fn from_cli(value: &str) -> Option<Self> {
+        match value {
+            "move" | "attack" | "playback" => Some(Self::Move),
+            "idle" | "stand" | "standing" => Some(Self::Idle),
+            "crouch" | "duck" | "down" => Some(Self::Crouch),
+            "jump" | "air" | "airborne" => Some(Self::Jump),
+            "block" | "guard" => Some(Self::Block),
+            "hit" | "hurt" => Some(Self::Hit),
+            "victory" | "taunt" | "win" => Some(Self::Victory),
+            _ => None,
+        }
+    }
+
+    /// Returns the short label used by the lab overlay.
+    pub const fn label(self) -> &'static str {
+        match self {
+            Self::Move => "move",
+            Self::Idle => "idle",
+            Self::Crouch => "crouch",
+            Self::Jump => "jump",
+            Self::Block => "block",
+            Self::Hit => "hit",
+            Self::Victory => "victory",
+        }
+    }
+
+    const fn is_move_playback(self) -> bool {
+        matches!(self, Self::Move)
+    }
+}
+
 /// Startup options for the Combat Lab.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct CombatLabOptions {
     pub character: CharacterId,
     pub selected_move: CombatLabMove,
+    pub pose: CombatLabPose,
 }
 
 /// Input commands consumed by the Combat Lab scene.
@@ -101,6 +160,8 @@ pub struct CombatLabInput {
     pub pause_toggle: bool,
     pub step_frame: bool,
     pub reset: bool,
+    pub next_pose: bool,
+    pub previous_pose: bool,
     pub toggle_hurtboxes: bool,
     pub toggle_hitboxes: bool,
     pub toggle_pivot: bool,
@@ -112,6 +173,7 @@ pub struct CombatLabInput {
 pub struct CombatLab {
     character: CharacterId,
     selected_move: CombatLabMove,
+    pose: CombatLabPose,
     fighter: Fighter,
     projectiles: Vec<Projectile>,
     current_frame: FrameCount,
@@ -134,6 +196,7 @@ impl CombatLab {
         let mut lab = Self {
             character: options.character,
             selected_move: options.selected_move,
+            pose: options.pose,
             fighter: fighter_for(options.character),
             projectiles: Vec::new(),
             current_frame: FrameCount::ZERO,
@@ -154,6 +217,12 @@ impl CombatLab {
         }
         if input.next_move {
             self.select_next_move();
+        }
+        if input.previous_pose {
+            self.select_previous_pose();
+        }
+        if input.next_pose {
+            self.select_next_pose();
         }
         if input.replay || input.reset {
             self.reset_playback();
@@ -187,6 +256,11 @@ impl CombatLab {
     /// Returns the selected move.
     pub const fn selected_move(&self) -> CombatLabMove {
         self.selected_move
+    }
+
+    /// Returns the selected lab pose or move playback mode.
+    pub const fn pose(&self) -> CombatLabPose {
+        self.pose
     }
 
     /// Returns the isolated fighter.
@@ -235,6 +309,11 @@ impl CombatLab {
     }
 
     fn advance_frame(&mut self) {
+        if !self.pose.is_move_playback() {
+            self.current_frame = FrameCount::new(self.current_frame.get().saturating_add(1));
+            return;
+        }
+
         if self.current_frame == FrameCount::ZERO && self.selected_move == CombatLabMove::Projectile
         {
             self.spawn_projectile();
@@ -270,6 +349,7 @@ impl CombatLab {
         self.fighter = fighter_for(self.character);
         self.projectiles.clear();
         self.current_frame = FrameCount::ZERO;
+        apply_pose_to_fighter(&mut self.fighter, self.pose);
     }
 
     fn select_next_move(&mut self) {
@@ -287,6 +367,46 @@ impl CombatLab {
         };
         self.selected_move = CombatLabMove::ALL[next];
         self.reset_playback();
+    }
+
+    fn select_next_pose(&mut self) {
+        let index = pose_index(self.pose);
+        self.pose = CombatLabPose::ALL[(index + 1) % CombatLabPose::ALL.len()];
+        self.reset_playback();
+    }
+
+    fn select_previous_pose(&mut self) {
+        let index = pose_index(self.pose);
+        let next = if index == 0 {
+            CombatLabPose::ALL.len() - 1
+        } else {
+            index - 1
+        };
+        self.pose = CombatLabPose::ALL[next];
+        self.reset_playback();
+    }
+}
+
+fn apply_pose_to_fighter(fighter: &mut Fighter, pose: CombatLabPose) {
+    if matches!(
+        pose,
+        CombatLabPose::Move | CombatLabPose::Idle | CombatLabPose::Hit | CombatLabPose::Victory
+    ) {
+        return;
+    }
+
+    match pose {
+        CombatLabPose::Crouch => {
+            fighter.crouching = true;
+        }
+        CombatLabPose::Jump => {
+            fighter.grounded = false;
+            fighter.position.y -= LAB_JUMP_PREVIEW_HEIGHT;
+        }
+        CombatLabPose::Block => {
+            fighter.blocking = true;
+        }
+        _ => {}
     }
 }
 
@@ -312,5 +432,12 @@ fn move_index(selected_move: CombatLabMove) -> usize {
     CombatLabMove::ALL
         .iter()
         .position(|candidate| *candidate == selected_move)
+        .unwrap_or(0)
+}
+
+fn pose_index(pose: CombatLabPose) -> usize {
+    CombatLabPose::ALL
+        .iter()
+        .position(|candidate| *candidate == pose)
         .unwrap_or(0)
 }

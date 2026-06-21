@@ -9,7 +9,7 @@
 use std::fmt::{Display, Formatter};
 
 use crate::characters::CharacterId;
-use crate::scenes::combat_lab::{CombatLabMove, CombatLabOptions};
+use crate::scenes::combat_lab::{CombatLabMove, CombatLabOptions, CombatLabPose};
 
 /// Startup mode selected from command-line arguments.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -70,6 +70,16 @@ impl LaunchOptions {
                         mode = LaunchMode::CombatLab(lab);
                     }
                 }
+                "--pose" => {
+                    let Some(value) = args.next() else {
+                        return Err(CliError::new("--pose requires a value"));
+                    };
+                    lab.pose = CombatLabPose::from_cli(&value)
+                        .ok_or_else(|| CliError::new(format!("unknown pose '{value}'")))?;
+                    if matches!(mode, LaunchMode::CombatLab(_)) {
+                        mode = LaunchMode::CombatLab(lab);
+                    }
+                }
                 "--help" | "-h" => {
                     return Err(CliError::new(usage()));
                 }
@@ -102,5 +112,5 @@ impl Display for CliError {
 impl std::error::Error for CliError {}
 
 fn usage() -> &'static str {
-    "Usage:\n  cargo run\n  cargo run -- --lab combat --character rust --move light_punch"
+    "Usage:\n  cargo run\n  cargo run -- --lab combat --character rust --move light_punch\n  cargo run -- --lab combat --character duke --pose block"
 }

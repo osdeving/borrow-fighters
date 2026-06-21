@@ -4,7 +4,7 @@
 
 Em implementação.
 
-Fases 1, 2 e 3 concluídas em corte mínimo na branch `gameplay/combat-improvement-plan`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab mínimo abre por CLI, golpes próximos usam `MoveSpec`, e Rust/Duke possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout.
+Fases 1, 2 e 3 concluídas em corte mínimo na branch `gameplay/combat-improvement-plan`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, e Rust/Duke possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -362,6 +362,7 @@ Critério de aceite:
 
 - conseguimos alinhar mão/pé/projectile sem iniciar uma luta real.
 - Comando atual: `cargo run -- --lab combat --character rust --move light_punch`.
+- Poses atuais: `cargo run -- --lab combat --character rust --pose block`.
 
 ### Fase 3 — MoveSpec e CharacterSpec
 
@@ -423,9 +424,9 @@ Critério de aceite:
 
 ## Backlog técnico imediato
 
-1. Adicionar estados de pose no Combat Lab: idle, crouch, jump, block, hit e victory.
-2. Separar o overlay de combate para `src/ui/combat_debug.rs` se o Combat Lab aumentar a responsabilidade do renderer.
-3. Criar o primeiro `MoveSpec` exclusivo de Rust ou Duke quando houver intenção de gameplay clara.
+1. Separar o overlay de combate para `src/ui/combat_debug.rs` se o Combat Lab aumentar a responsabilidade do renderer.
+2. Criar o primeiro `MoveSpec` exclusivo de Rust ou Duke quando houver intenção de gameplay clara.
+3. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
 4. Só depois ampliar para novos personagens ou golpes especiais.
 
 ## Decisões pendentes

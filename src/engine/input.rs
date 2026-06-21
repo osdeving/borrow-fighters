@@ -84,6 +84,8 @@ fn keyboard_combat_lab(raylib: &RaylibHandle) -> CombatLabInput {
         pause_toggle: raylib.is_key_pressed(KeyboardKey::KEY_SPACE),
         step_frame: raylib.is_key_pressed(KeyboardKey::KEY_PERIOD),
         reset: raylib.is_key_pressed(KeyboardKey::KEY_HOME),
+        next_pose: raylib.is_key_pressed(KeyboardKey::KEY_PAGE_DOWN),
+        previous_pose: raylib.is_key_pressed(KeyboardKey::KEY_PAGE_UP),
         toggle_hurtboxes: raylib.is_key_pressed(KeyboardKey::KEY_H),
         toggle_hitboxes: raylib.is_key_pressed(KeyboardKey::KEY_B),
         toggle_pivot: raylib.is_key_pressed(KeyboardKey::KEY_P),

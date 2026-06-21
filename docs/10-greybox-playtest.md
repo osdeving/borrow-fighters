@@ -38,6 +38,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Reinício da partida.
 - HUD, ajuda de controles e debug visual configuráveis.
 - Testes de regras de combate sem abrir janela.
+- Combat Lab com reprodução de golpes e poses estáticas de inspeção.
 
 ## Como rodar
 
@@ -61,6 +62,24 @@ cargo clippy --all-targets --all-features -- -D warnings
 ```
 
 O GitHub também roda `Rust Check` no PR para validar formatação, testes e clippy em Linux.
+
+## Combat Lab
+
+Para abrir uma cena limpa de inspeção de golpe:
+
+```bash
+cargo run -- --lab combat --character rust --move light_punch
+cargo run -- --lab combat --character duke --move projectile
+```
+
+Para abrir uma pose estática:
+
+```bash
+cargo run -- --lab combat --character rust --pose crouch
+cargo run -- --lab combat --character duke --pose victory
+```
+
+No Combat Lab, `Tab` / `Shift+Tab` alterna golpes, `PageDown` / `PageUp` alterna poses, `Enter` reinicia, `Espaço` pausa, `.` avança um frame quando pausado, `Home` volta ao frame 0, `H` alterna hurtbox, `B` alterna hitbox, `P` alterna pivot/eixos e `D` alterna dummy.
 
 ## Preferências
 

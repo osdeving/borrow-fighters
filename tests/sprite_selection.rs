@@ -13,6 +13,7 @@ fn idle_fighter_uses_idle_clip() {
 
     assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Idle);
     assert_eq!(FighterSpriteClip::Spawn.as_str(), "spawn");
+    assert_eq!(FighterSpriteClip::Hit.as_str(), "hit");
 }
 
 #[test]

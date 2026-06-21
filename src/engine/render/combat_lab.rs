@@ -16,7 +16,7 @@ use crate::combat::{
 use crate::config::{FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
 use crate::engine::{assets::GameAssets, sprites};
 use crate::math::rect::Rect;
-use crate::scenes::combat_lab::{CombatLab, CombatLabMove};
+use crate::scenes::combat_lab::{CombatLab, CombatLabMove, CombatLabPose};
 
 use super::{
     BACKGROUND, BODY_OUTLINE, FighterDrawOptions, HITBOX, HITBOX_FILL, HITSPARK, HURTBOX, PANEL,
@@ -51,7 +51,7 @@ pub fn draw_combat_lab(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab, assets:
             sprite_atlas,
             spritesheet: assets.fighter_spritesheet.as_ref(),
             world_elapsed_seconds: lab.elapsed_seconds(),
-            forced_clip: None,
+            forced_clip: forced_clip_for_pose(lab.pose()),
         },
     );
 
@@ -194,7 +194,7 @@ fn draw_lab_overlay(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
         &format!(
             "{} / {} / frame {:03}",
             character_spec(lab.character()).display_name,
-            lab.selected_move().label(),
+            lab_label(lab),
             lab.current_frame().get()
         ),
         panel_x + 16,
@@ -226,6 +226,10 @@ fn draw_lab_overlay(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
 }
 
 fn lab_timing_text(lab: &CombatLab) -> String {
+    if !matches!(lab.pose(), CombatLabPose::Move) {
+        return format!("pose {} | inspect boxes/pivot", lab.pose().label());
+    }
+
     match lab.selected_move() {
         CombatLabMove::Projectile => {
             let fighter = lab.fighter();
@@ -267,6 +271,25 @@ fn lab_timing_text(lab: &CombatLab) -> String {
                 format!("waiting for {}", lab.selected_move().label())
             }
         }
+    }
+}
+
+fn lab_label(lab: &CombatLab) -> String {
+    match lab.pose() {
+        CombatLabPose::Move => format!("move {}", lab.selected_move().label()),
+        pose => format!("pose {}", pose.label()),
+    }
+}
+
+fn forced_clip_for_pose(pose: CombatLabPose) -> Option<sprites::FighterSpriteClip> {
+    match pose {
+        CombatLabPose::Move => None,
+        CombatLabPose::Idle => Some(sprites::FighterSpriteClip::Idle),
+        CombatLabPose::Crouch => Some(sprites::FighterSpriteClip::Crouch),
+        CombatLabPose::Jump => Some(sprites::FighterSpriteClip::Jump),
+        CombatLabPose::Block => Some(sprites::FighterSpriteClip::Block),
+        CombatLabPose::Hit => Some(sprites::FighterSpriteClip::Hit),
+        CombatLabPose::Victory => Some(sprites::FighterSpriteClip::Taunt),
     }
 }
 
