@@ -45,6 +45,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Tabela inicial `MoveSpec` para golpes próximos, mantendo `AttackKind` como camada runtime de compatibilidade.
 - Registro inicial `CharacterSpec` para Rust e Duke.
 - Guia técnico de combate com rastreio de código, técnica de hitbox/hurtbox, comandos e hotkeys do Combat Lab.
+- Runtime de luta consumindo `CharacterSpec` para nome, vida máxima e loadout de golpes; Duke/Java começa com vida máxima maior.
 
 ### Em aberto
 

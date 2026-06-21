@@ -1,8 +1,11 @@
 //! Exercises testable greybox combat rules without opening a Raylib window.
 
+use borrow_fighters::characters::{CharacterId, character_spec};
 use borrow_fighters::combat::fighter::{
-    FighterInput, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE,
+    AttackKind, Fighter, FighterInput, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE,
+    PlayerSlot,
 };
+use borrow_fighters::combat::move_data::MoveId;
 use borrow_fighters::combat::projectile::{PROJECTILE_DAMAGE, PROJECTILE_SPEED};
 use borrow_fighters::game::ai::BasicCpu;
 use borrow_fighters::game::feature_flags::{FeatureFlag, FeatureFlags};
@@ -11,10 +14,12 @@ use borrow_fighters::game::world::{
 };
 
 const DT: f32 = 1.0 / 60.0;
+const KICK_ONLY_MOVES: [MoveId; 1] = [MoveId::Kick];
 
 #[test]
 fn basic_attack_deals_damage_once_per_swing() {
     let mut world = World::new_greybox();
+    let player_two_health = world.player_two.max_health;
     world.player_one.position.x = 420.0;
     world.player_two.position.x = 470.0;
 
@@ -31,13 +36,17 @@ fn basic_attack_deals_damage_once_per_swing() {
         world.update(DT, FighterInput::default(), FighterInput::default());
     }
 
-    assert_eq!(world.player_two.health, 100 - LIGHT_PUNCH_DAMAGE);
+    assert_eq!(
+        world.player_two.health,
+        player_two_health - LIGHT_PUNCH_DAMAGE
+    );
     assert_eq!(world.hit_effects.len(), 1);
 }
 
 #[test]
 fn heavy_punch_reaches_farther_than_light_punch() {
     let mut world = World::new_greybox();
+    let player_two_health = world.player_two.max_health;
     world.player_one.position.x = 390.0;
     world.player_two.position.x = 540.0;
 
@@ -54,9 +63,10 @@ fn heavy_punch_reaches_farther_than_light_punch() {
         world.update(DT, FighterInput::default(), FighterInput::default());
     }
 
-    assert_eq!(world.player_two.health, 100);
+    assert_eq!(world.player_two.health, player_two_health);
 
     let mut world = World::new_greybox();
+    let player_two_health = world.player_two.max_health;
     world.player_one.position.x = 390.0;
     world.player_two.position.x = 540.0;
 
@@ -73,12 +83,16 @@ fn heavy_punch_reaches_farther_than_light_punch() {
         world.update(DT, FighterInput::default(), FighterInput::default());
     }
 
-    assert_eq!(world.player_two.health, 100 - HEAVY_PUNCH_DAMAGE);
+    assert_eq!(
+        world.player_two.health,
+        player_two_health - HEAVY_PUNCH_DAMAGE
+    );
 }
 
 #[test]
 fn kick_has_its_own_damage() {
     let mut world = World::new_greybox();
+    let player_two_health = world.player_two.max_health;
     world.player_one.position.x = 420.0;
     world.player_two.position.x = 475.0;
 
@@ -95,12 +109,13 @@ fn kick_has_its_own_damage() {
         world.update(DT, FighterInput::default(), FighterInput::default());
     }
 
-    assert_eq!(world.player_two.health, 100 - KICK_DAMAGE);
+    assert_eq!(world.player_two.health, player_two_health - KICK_DAMAGE);
 }
 
 #[test]
 fn block_reduces_incoming_damage() {
     let mut world = World::new_greybox();
+    let player_two_health = world.player_two.max_health;
     world.player_one.position.x = 420.0;
     world.player_two.position.x = 475.0;
 
@@ -127,9 +142,79 @@ fn block_reduces_incoming_damage() {
         );
     }
 
-    assert_eq!(world.player_two.health, 100 - LIGHT_PUNCH_DAMAGE / 4);
+    assert_eq!(
+        world.player_two.health,
+        player_two_health - LIGHT_PUNCH_DAMAGE / 4
+    );
     assert_eq!(world.hit_effects.len(), 1);
     assert!(world.hit_effects[0].blocked);
+}
+
+#[test]
+fn greybox_world_uses_character_specs_for_match_setup() {
+    let world = World::new_greybox();
+    let rust = character_spec(CharacterId::Rust);
+    let duke = character_spec(CharacterId::Duke);
+
+    assert_eq!(world.player_one_character(), CharacterId::Rust);
+    assert_eq!(world.player_two_character(), CharacterId::Duke);
+    assert_eq!(
+        world.character_for_slot(world.player_one.slot),
+        CharacterId::Rust
+    );
+    assert_eq!(
+        world.character_for_slot(world.player_two.slot),
+        CharacterId::Duke
+    );
+    assert_eq!(world.player_one.name, rust.fighter_name);
+    assert_eq!(world.player_two.name, duke.fighter_name);
+    assert_eq!(world.player_one.max_health, rust.stats.max_health);
+    assert_eq!(world.player_two.max_health, duke.stats.max_health);
+    assert_eq!(world.player_one.move_ids(), rust.move_ids);
+    assert_eq!(world.player_two.move_ids(), duke.move_ids);
+    assert_eq!(world.player_one.health, world.player_one.max_health);
+    assert_eq!(world.player_two.health, world.player_two.max_health);
+}
+
+#[test]
+fn greybox_world_can_swap_character_specs_between_slots() {
+    let world = World::new_with_characters(CharacterId::Duke, CharacterId::Rust);
+
+    assert_eq!(world.player_one_character(), CharacterId::Duke);
+    assert_eq!(world.player_two_character(), CharacterId::Rust);
+    assert_eq!(
+        world.player_one.max_health,
+        character_spec(CharacterId::Duke).stats.max_health
+    );
+    assert_eq!(
+        world.player_two.max_health,
+        character_spec(CharacterId::Rust).stats.max_health
+    );
+}
+
+#[test]
+fn fighter_loadout_blocks_unlisted_close_moves() {
+    let mut fighter =
+        Fighter::new_with_loadout(PlayerSlot::One, "Test", 100, &KICK_ONLY_MOVES, 300.0);
+
+    fighter.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(fighter.attack_kind(), None);
+
+    fighter.update(
+        DT,
+        FighterInput {
+            kick: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(fighter.attack_kind(), Some(AttackKind::Kick));
+    assert_eq!(fighter.move_ids(), &KICK_ONLY_MOVES);
 }
 
 #[test]
@@ -154,7 +239,7 @@ fn player_one_damage_flag_prevents_damage_from_attacks() {
         world.update_with_flags(DT, FighterInput::default(), FighterInput::default(), flags);
     }
 
-    assert_eq!(world.player_one.health, 100);
+    assert_eq!(world.player_one.health, world.player_one.max_health);
     assert_eq!(world.hit_effects.len(), 1);
     assert_eq!(world.hit_effects[0].damage, 0);
     assert_eq!(world.outcome, None);
@@ -182,7 +267,7 @@ fn player_two_damage_flag_prevents_damage_from_attacks() {
         world.update_with_flags(DT, FighterInput::default(), FighterInput::default(), flags);
     }
 
-    assert_eq!(world.player_two.health, 100);
+    assert_eq!(world.player_two.health, world.player_two.max_health);
     assert_eq!(world.hit_effects.len(), 1);
     assert_eq!(world.hit_effects[0].damage, 0);
     assert_eq!(world.outcome, None);
@@ -335,6 +420,7 @@ fn diagonal_jump_keeps_horizontal_momentum() {
 #[test]
 fn projectile_deals_damage_and_disappears() {
     let mut world = World::new_greybox();
+    let player_two_health = world.player_two.max_health;
     world.player_one.position.x = 300.0;
     world.player_two.position.x = 560.0;
 
@@ -354,7 +440,10 @@ fn projectile_deals_damage_and_disappears() {
         world.update(DT, FighterInput::default(), FighterInput::default());
     }
 
-    assert_eq!(world.player_two.health, 100 - PROJECTILE_DAMAGE);
+    assert_eq!(
+        world.player_two.health,
+        player_two_health - PROJECTILE_DAMAGE
+    );
     assert!(world.projectiles.is_empty());
 }
 

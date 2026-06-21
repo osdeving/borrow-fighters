@@ -30,6 +30,10 @@ impl MoveId {
     }
 }
 
+/// Default close-range move ids used by current prototype characters.
+pub const DEFAULT_CLOSE_RANGE_MOVE_IDS: [MoveId; 3] =
+    [MoveId::LightPunch, MoveId::HeavyPunch, MoveId::Kick];
+
 /// Input family that starts a move.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum MoveInputKind {

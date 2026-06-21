@@ -118,7 +118,7 @@ Evitar callback/event bus cedo demais.
 
 ### `characters/*`
 
-No começo, personagens podem ser dados e pequenas funções. Não criar sistema de plugins, scripting ou data-driven avançado antes de existir gameplay divertido.
+No começo, personagens devem ser dados e pequenas funções. `CharacterSpec` já alimenta `World`, `Combat Lab` e `Fighter` com nome, vida máxima e loadout de golpes próximos. Não criar sistema de plugins, scripting ou data-driven avançado antes de existir gameplay divertido.
 
 ### `scenes/*`
 

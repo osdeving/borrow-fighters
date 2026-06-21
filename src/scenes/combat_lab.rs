@@ -292,7 +292,13 @@ impl CombatLab {
 
 fn fighter_for(character: CharacterId) -> Fighter {
     let spec = character_spec(character);
-    Fighter::new(slot_for(character), spec.fighter_name, LAB_FIGHTER_X)
+    Fighter::new_with_loadout(
+        slot_for(character),
+        spec.fighter_name,
+        spec.stats.max_health,
+        spec.move_ids,
+        LAB_FIGHTER_X,
+    )
 }
 
 fn slot_for(character: CharacterId) -> PlayerSlot {

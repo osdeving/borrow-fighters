@@ -9,8 +9,8 @@
 use crate::math::rect::Rect;
 
 pub use super::move_data::{
-    AttackFrameData, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE, MoveId, MoveSpec,
-    move_spec,
+    AttackFrameData, DEFAULT_CLOSE_RANGE_MOVE_IDS, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE,
+    LIGHT_PUNCH_DAMAGE, MoveId, MoveSpec, move_spec,
 };
 
 /// Close-range attacks available in the greybox prototype.
@@ -30,6 +30,15 @@ pub struct ActiveAttack {
 }
 
 impl AttackKind {
+    /// Returns the runtime attack kind represented by a stable move id.
+    pub const fn from_move_id(id: MoveId) -> Self {
+        match id {
+            MoveId::LightPunch => Self::LightPunch,
+            MoveId::HeavyPunch => Self::HeavyPunch,
+            MoveId::Kick => Self::Kick,
+        }
+    }
+
     /// Returns the stable move id represented by this runtime attack kind.
     pub const fn move_id(self) -> MoveId {
         match self {

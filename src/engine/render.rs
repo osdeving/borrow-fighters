@@ -484,23 +484,35 @@ fn draw_hud(
     let width = draw.measure_text(&status, 14);
     draw.draw_text(&status, WINDOW_WIDTH - width - 24, 16, 14, UI_MUTED);
 
-    draw_health_bar(draw, 24, 72, world.player_one.health, "Rust");
+    draw_health_bar(
+        draw,
+        24,
+        72,
+        world.player_one.health,
+        world.player_one.max_health,
+        world.player_one.name,
+    );
     draw_health_bar(
         draw,
         WINDOW_WIDTH - 324,
         72,
         world.player_two.health,
-        "Java",
+        world.player_two.max_health,
+        world.player_two.name,
     );
 
     if let Some(outcome) = world.outcome {
         let message = match outcome {
-            MatchOutcome::Winner(PlayerSlot::One) => "Rust wins - press R/Menu",
-            MatchOutcome::Winner(PlayerSlot::Two) => "Java wins - press R/Menu",
-            MatchOutcome::Draw => "Draw - press R/Menu",
+            MatchOutcome::Winner(PlayerSlot::One) => {
+                format!("{} wins - press R/Menu", world.player_one.name)
+            }
+            MatchOutcome::Winner(PlayerSlot::Two) => {
+                format!("{} wins - press R/Menu", world.player_two.name)
+            }
+            MatchOutcome::Draw => "Draw - press R/Menu".to_owned(),
         };
-        let width = draw.measure_text(message, 32);
-        draw.draw_text(message, (WINDOW_WIDTH - width) / 2, 124, 32, UI_TEXT);
+        let width = draw.measure_text(&message, 32);
+        draw.draw_text(&message, (WINDOW_WIDTH - width) / 2, 124, 32, UI_TEXT);
     }
 }
 
@@ -539,11 +551,20 @@ fn connected_label(connected: bool) -> &'static str {
     if connected { "ON" } else { "OFF" }
 }
 
-fn draw_health_bar(draw: &mut RaylibDrawHandle<'_>, x: i32, y: i32, health: i32, label: &str) {
+fn draw_health_bar(
+    draw: &mut RaylibDrawHandle<'_>,
+    x: i32,
+    y: i32,
+    health: i32,
+    max_health: i32,
+    label: &str,
+) {
     let width = 300;
     let height = 18;
-    let fill_width = (width as f32 * (health.max(0) as f32 / 100.0)).round() as i32;
-    let fill = if health <= 24 {
+    let max_health = max_health.max(1);
+    let ratio = health.max(0) as f32 / max_health as f32;
+    let fill_width = (width as f32 * ratio.clamp(0.0, 1.0)).round() as i32;
+    let fill = if health * 4 <= max_health {
         HEALTH_DANGER
     } else {
         HEALTH_FILL

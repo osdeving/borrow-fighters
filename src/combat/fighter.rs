@@ -12,7 +12,8 @@ use crate::math::{rect::Rect, vec2::Vec2};
 use super::frame::FrameCount;
 use super::projectile::{PROJECTILE_FRAME_DATA, ProjectileFrameData};
 pub use crate::combat::move_set::{
-    ActiveAttack, AttackFrameData, AttackKind, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE,
+    ActiveAttack, AttackFrameData, AttackKind, DEFAULT_CLOSE_RANGE_MOVE_IDS, HEAVY_PUNCH_DAMAGE,
+    KICK_DAMAGE, LIGHT_PUNCH_DAMAGE, MoveId,
 };
 
 const WIDTH: f32 = 76.0;
@@ -93,6 +94,8 @@ pub struct Fighter {
     pub position: Vec2,
     pub velocity: Vec2,
     pub health: i32,
+    pub max_health: i32,
+    move_ids: &'static [MoveId],
     pub facing: Facing,
     pub grounded: bool,
     pub crouching: bool,
@@ -112,12 +115,36 @@ struct AttackState {
 impl Fighter {
     /// Creates a fighter standing on the arena floor.
     pub fn new(slot: PlayerSlot, name: &'static str, x: f32) -> Self {
+        Self::new_with_max_health(slot, name, 100, x)
+    }
+
+    /// Creates a fighter with character-provided maximum health.
+    pub fn new_with_max_health(
+        slot: PlayerSlot,
+        name: &'static str,
+        max_health: i32,
+        x: f32,
+    ) -> Self {
+        Self::new_with_loadout(slot, name, max_health, &DEFAULT_CLOSE_RANGE_MOVE_IDS, x)
+    }
+
+    /// Creates a fighter with character-provided stats and close move ids.
+    pub fn new_with_loadout(
+        slot: PlayerSlot,
+        name: &'static str,
+        max_health: i32,
+        move_ids: &'static [MoveId],
+        x: f32,
+    ) -> Self {
+        let max_health = max_health.max(1);
         Self {
             slot,
             name,
             position: Vec2::new(x, FLOOR_Y - STANDING_HEIGHT),
             velocity: Vec2::ZERO,
-            health: 100,
+            health: max_health,
+            max_health,
+            move_ids,
             facing: Facing::Right,
             grounded: true,
             crouching: false,
@@ -151,7 +178,7 @@ impl Fighter {
             self.apply_diagonal_jump_boost(input);
         }
 
-        if let Some(kind) = input.requested_attack()
+        if let Some(kind) = input.requested_attack(self.move_ids)
             && self.attack.is_none()
             && can_start_action
         {
@@ -320,6 +347,11 @@ impl Fighter {
         self.attack.map(|attack| attack.kind)
     }
 
+    /// Returns close-range move ids available to this fighter.
+    pub const fn move_ids(&self) -> &'static [MoveId] {
+        self.move_ids
+    }
+
     /// Returns elapsed seconds for the current close attack animation.
     pub fn attack_elapsed_seconds(&self) -> Option<f32> {
         self.attack.map(|attack| attack.elapsed)
@@ -477,16 +509,20 @@ impl FighterInput {
         }
     }
 
-    fn requested_attack(self) -> Option<AttackKind> {
-        if self.heavy_punch {
-            Some(AttackKind::HeavyPunch)
+    fn requested_attack(self, move_ids: &[MoveId]) -> Option<AttackKind> {
+        let requested = if self.heavy_punch {
+            MoveId::HeavyPunch
         } else if self.kick {
-            Some(AttackKind::Kick)
+            MoveId::Kick
         } else if self.light_punch {
-            Some(AttackKind::LightPunch)
+            MoveId::LightPunch
         } else {
-            None
-        }
+            return None;
+        };
+
+        move_ids
+            .contains(&requested)
+            .then(|| AttackKind::from_move_id(requested))
     }
 
     fn horizontal_axis(self) -> f32 {

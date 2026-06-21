@@ -1,8 +1,12 @@
 //! Owns the greybox fight simulation.
 //!
+//! System: Match runtime. This module owns round-level state and consumes
+//! character specs, but delegates combat primitives to `combat/*`.
+//!
 //! This world is intentionally small and deterministic enough to unit test
 //! without Raylib.
 
+use crate::characters::{CharacterId, character_spec};
 use crate::combat::collision::hitbox_hits_hurtbox;
 use crate::combat::fighter::{ActiveAttack, DamageResult, Fighter, FighterInput, PlayerSlot};
 use crate::combat::projectile::Projectile;
@@ -37,6 +41,8 @@ pub struct HitEffect {
 pub struct World {
     pub player_one: Fighter,
     pub player_two: Fighter,
+    player_one_character: CharacterId,
+    player_two_character: CharacterId,
     pub outcome: Option<MatchOutcome>,
     pub hit_effects: Vec<HitEffect>,
     pub projectiles: Vec<Projectile>,
@@ -48,9 +54,16 @@ pub struct World {
 impl World {
     /// Creates the initial greybox fight.
     pub fn new_greybox() -> Self {
+        Self::new_with_characters(CharacterId::Rust, CharacterId::Duke)
+    }
+
+    /// Creates a greybox fight from explicit character specs.
+    pub fn new_with_characters(player_one: CharacterId, player_two: CharacterId) -> Self {
         let mut world = Self {
-            player_one: Fighter::new(PlayerSlot::One, "Rust", 232.0),
-            player_two: Fighter::new(PlayerSlot::Two, "Java", 676.0),
+            player_one: fighter_from_character(PlayerSlot::One, player_one, 232.0),
+            player_two: fighter_from_character(PlayerSlot::Two, player_two, 676.0),
+            player_one_character: player_one,
+            player_two_character: player_two,
             outcome: None,
             hit_effects: Vec::new(),
             projectiles: Vec::new(),
@@ -77,6 +90,24 @@ impl World {
     /// Returns elapsed time inside the current spawn intro.
     pub fn spawn_intro_elapsed_seconds(&self) -> f32 {
         (SPAWN_INTRO_DURATION_SECONDS - self.spawn_intro_timer).max(0.0)
+    }
+
+    /// Returns the character id used by Player 1.
+    pub const fn player_one_character(&self) -> CharacterId {
+        self.player_one_character
+    }
+
+    /// Returns the character id used by Player 2.
+    pub const fn player_two_character(&self) -> CharacterId {
+        self.player_two_character
+    }
+
+    /// Returns the character id assigned to a player slot.
+    pub const fn character_for_slot(&self, slot: PlayerSlot) -> CharacterId {
+        match slot {
+            PlayerSlot::One => self.player_one_character,
+            PlayerSlot::Two => self.player_two_character,
+        }
     }
 
     /// Advances one fixed gameplay step.
@@ -283,6 +314,17 @@ impl World {
             (false, false) => None,
         };
     }
+}
+
+fn fighter_from_character(slot: PlayerSlot, character: CharacterId, x: f32) -> Fighter {
+    let spec = character_spec(character);
+    Fighter::new_with_loadout(
+        slot,
+        spec.fighter_name,
+        spec.stats.max_health,
+        spec.move_ids,
+        x,
+    )
 }
 
 impl HitEffect {

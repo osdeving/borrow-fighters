@@ -4,7 +4,7 @@
 
 Em implementação.
 
-Fases 1, 2 e 3 concluídas em corte mínimo na branch `gameplay/combat-improvement-plan`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab mínimo abre por CLI, golpes próximos usam `MoveSpec`, e Rust/Duke possuem `CharacterSpec` apontando para os golpes atuais.
+Fases 1, 2 e 3 concluídas em corte mínimo na branch `gameplay/combat-improvement-plan`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab mínimo abre por CLI, golpes próximos usam `MoveSpec`, e Rust/Duke possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -371,14 +371,15 @@ Entregáveis:
 
 - [x] mover dados hard-coded de `AttackKind::spec` para `MoveSpec`;
 - [x] criar `CharacterSpec` para Rust e Duke;
+- [x] fazer `World`, `Combat Lab` e `Fighter` consumirem nome, vida máxima e loadout vindos de `CharacterSpec`;
 - [x] manter comportamento atual com dados novos;
 - [x] testes garantindo que dados antigos continuam equivalentes.
 
 Critério de aceite:
 
 - adicionar um golpe novo não exige alterar `Fighter` profundamente.
-- `AttackKind` permanece como camada de compatibilidade runtime até o jogo precisar consumir `CharacterSpec` diretamente.
-- A parte mínima está aceita; a próxima evolução é fazer o runtime consumir `CharacterSpec` de forma mais direta quando houver diferença real entre personagens.
+- `AttackKind` permanece como camada de compatibilidade runtime para sprites, debug e seleção de ataque.
+- A parte mínima está aceita; a próxima evolução é diferenciar os `MoveSpec` por personagem quando houver intenção de gameplay testável.
 
 ### Fase 4 — Defesa e contra-jogo
 
@@ -422,10 +423,10 @@ Critério de aceite:
 
 ## Backlog técnico imediato
 
-1. Fazer o runtime consumir `CharacterSpec` diretamente quando Rust e Duke começarem a divergir.
+1. Adicionar estados de pose no Combat Lab: idle, crouch, jump, block, hit e victory.
 2. Separar o overlay de combate para `src/ui/combat_debug.rs` se o Combat Lab aumentar a responsabilidade do renderer.
-3. Adicionar estados de pose no Combat Lab: idle, crouch, jump, block, hit e victory.
-4. Só depois criar golpes novos.
+3. Criar o primeiro `MoveSpec` exclusivo de Rust ou Duke quando houver intenção de gameplay clara.
+4. Só depois ampliar para novos personagens ou golpes especiais.
 
 ## Decisões pendentes
 

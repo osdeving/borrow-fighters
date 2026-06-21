@@ -16,6 +16,7 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Projectile | Projétil horizontal, dano, velocidade, spawn e timing do especial | [`src/combat/projectile.rs`](../src/combat/projectile.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs) |
 | Collision | Interseção simples de retângulos | [`src/combat/collision.rs`](../src/combat/collision.rs), [`src/math/rect.rs`](../src/math/rect.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
 | Character data | Registro de personagens e listas de golpes | [`src/characters/mod.rs`](../src/characters/mod.rs) | [`tests/characters.rs`](../tests/characters.rs) |
+| Match runtime | Instancia lutadores a partir de personagens, resolve hits, projéteis e vitória | [`src/game/world.rs`](../src/game/world.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
 | Combat Lab state | Cena isolada para playback de golpes, pause e frame step | [`src/scenes/combat_lab.rs`](../src/scenes/combat_lab.rs) | [`tests/combat_lab.rs`](../tests/combat_lab.rs) |
 | Combat Lab render | Desenho Raylib do laboratório, caixas, pivot e overlay | [`src/engine/render/combat_lab.rs`](../src/engine/render/combat_lab.rs) | Teste manual via Combat Lab |
 | Input | Teclado/gamepad para luta, preferências e Combat Lab | [`src/engine/input.rs`](../src/engine/input.rs), [`src/engine/gamepad.rs`](../src/engine/gamepad.rs) | [`tests/cli.rs`](../tests/cli.rs), [`tests/feature_flags.rs`](../tests/feature_flags.rs) |
@@ -59,13 +60,21 @@ Os golpes próximos atuais estão em [`src/combat/move_data.rs`](../src/combat/m
 - `HeavyPunch`
 - `Kick`
 
-`AttackKind` em [`src/combat/move_set.rs`](../src/combat/move_set.rs) ainda existe como camada runtime de compatibilidade. O próximo passo estrutural é fazer personagens consumirem `MoveSpec` diretamente quando isso reduzir complexidade real.
+`DEFAULT_CLOSE_RANGE_MOVE_IDS` define a lista padrão usada pelos personagens atuais. `AttackKind` em [`src/combat/move_set.rs`](../src/combat/move_set.rs) ainda existe como camada runtime de compatibilidade para sprites, debug e estado de ataque.
+
+`Fighter` carrega `move_ids` próprios. Se um `MoveId` não estiver no loadout do lutador, o input daquele golpe não inicia ataque. Isso permite diferenciar personagens sem alterar profundamente `Fighter`.
 
 ### Dados de Personagens
 
-Personagens ficam em [`src/characters/mod.rs`](../src/characters/mod.rs).
+Personagens ficam em [`src/characters/mod.rs`](../src/characters/mod.rs). Cada `CharacterSpec` contém:
 
-Hoje `Rust` e `Duke` usam a mesma lista de `MoveId` porque o objetivo é manter comportamento idêntico enquanto a arquitetura amadurece. A diferença atual é nome, arquétipo e assets usados pelo renderer.
+- `display_name`: nome para UI/lab;
+- `fighter_name`: nome curto usado pelo lutador;
+- `archetype`: intenção de gameplay;
+- `stats.max_health`: vida máxima usada na criação do `Fighter`;
+- `move_ids`: golpes próximos disponíveis no loadout.
+
+Hoje `Rust` e `Duke` usam a mesma lista de `MoveId`, mas já divergem em arquétipo e vida máxima. O `World` cria lutadores via `World::new_with_characters`, consumindo `CharacterSpec` para nome, vida e loadout. O Combat Lab usa o mesmo caminho para testar personagem isolado.
 
 ### Combat Lab
 

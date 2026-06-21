@@ -4,9 +4,10 @@
 //! each character without resolving attacks, drawing sprites, or owning match
 //! state.
 
-use crate::combat::move_data::MoveId;
+use crate::combat::move_data::{DEFAULT_CLOSE_RANGE_MOVE_IDS, MoveId};
 
-const PROTOTYPE_MOVE_IDS: [MoveId; 3] = [MoveId::LightPunch, MoveId::HeavyPunch, MoveId::Kick];
+const RUST_STATS: CharacterStats = CharacterStats { max_health: 100 };
+const DUKE_STATS: CharacterStats = CharacterStats { max_health: 112 };
 
 /// Stable identifier for playable or testable characters.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -34,6 +35,12 @@ pub enum CharacterArchetype {
     MidrangePressure,
 }
 
+/// Tunable character-level stats consumed by match setup.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct CharacterStats {
+    pub max_health: i32,
+}
+
 /// Static character data used by gameplay tooling.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct CharacterSpec {
@@ -41,6 +48,7 @@ pub struct CharacterSpec {
     pub display_name: &'static str,
     pub fighter_name: &'static str,
     pub archetype: CharacterArchetype,
+    pub stats: CharacterStats,
     pub move_ids: &'static [MoveId],
 }
 
@@ -52,14 +60,16 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             display_name: "Rust",
             fighter_name: "Rust",
             archetype: CharacterArchetype::AllRounder,
-            move_ids: &PROTOTYPE_MOVE_IDS,
+            stats: RUST_STATS,
+            move_ids: &DEFAULT_CLOSE_RANGE_MOVE_IDS,
         },
         CharacterId::Duke => CharacterSpec {
             id,
             display_name: "Duke / Java",
             fighter_name: "Java",
             archetype: CharacterArchetype::MidrangePressure,
-            move_ids: &PROTOTYPE_MOVE_IDS,
+            stats: DUKE_STATS,
+            move_ids: &DEFAULT_CLOSE_RANGE_MOVE_IDS,
         },
     }
 }
