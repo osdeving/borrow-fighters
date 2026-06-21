@@ -32,6 +32,10 @@ Golpes precisam ter feedback visual simples: antecipação, contato, hitstop, fl
 
 O estilo precisa permitir placeholders agora e refinamento depois, sem exigir produção final pesada cedo demais.
 
+### 6. Brasil tecnológico como cenário
+
+As arenas principais devem se inspirar em locais brasileiros de ciência, tecnologia, arquitetura, inovação e cultura urbana. A direção visual deve mostrar Brasil como lugar de futuro, pesquisa, beleza e mistério, sem depender de estereótipos ou exotização.
+
 ## Moods iniciais para explorar
 
 | Mood | Ideia | Risco |
@@ -56,6 +60,39 @@ O slice jogável usa arte placeholder, mas já exercita decisões importantes pa
 - HUD, ajuda e debug visual são opcionais por feature flag.
 
 Nada disso é final. O valor desses assets agora é validar proporção, leitura de pose, pivots, altura do projectile, contraste com cenário e necessidades de animação.
+
+## Arenas brasileiras
+
+Toda proposta de arena deve responder:
+
+- qual lugar brasileiro inspira a arena;
+- qual conceito técnico ou científico ela comunica;
+- como o chão e a profundidade ajudam a luta;
+- quais detalhes podem virar easter eggs sem disputar atenção;
+- qual mistério visual ela acrescenta ao mundo.
+
+Direções iniciais de arena vivem em [`docs/12-worldbuilding.md`](12-worldbuilding.md).
+
+## Easter eggs
+
+Easter eggs são parte da identidade visual do jogo. Eles devem aparecer como detalhes de cenário, cartazes, props, telas, nomes de lojas, logs, pichações fictícias ou animações distantes.
+
+Exemplos possíveis:
+
+- cachorro caramelo ao fundo;
+- cartaz de bebê reborn;
+- placas com trocadilhos de programação;
+- QR code falso que vira `404`;
+- bug report colado em poste;
+- startup fictícia com nome absurdo;
+- referência regional pequena validada por pessoas da região.
+
+Regras:
+
+- não atrapalhar leitura de golpes;
+- não competir com HUD, hit effects ou silhueta dos lutadores;
+- evitar estereótipos como atalho visual;
+- manter fácil de remover se o meme envelhecer mal.
 
 ## Maturidade de arte
 
