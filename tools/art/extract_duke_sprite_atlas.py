@@ -67,6 +67,7 @@ CONFIG = AtlasConfig(
     clips=CLIPS,
     cell_width=384,
     projectile_frame_name="projectile_0",
+    clean_white_body=True,
 )
 
 

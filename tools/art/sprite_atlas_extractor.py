@@ -38,6 +38,7 @@ class AtlasConfig:
     target_pivot: tuple[int, int] = (112, 236)
     scale: float = 1.16
     projectile_frame_name: str = "projectile_0"
+    clean_white_body: bool = False
 
 
 def write_outputs(config: AtlasConfig) -> None:
@@ -104,6 +105,8 @@ def extract_frame(
 
     cell = Image.new("RGBA", (config.cell_width, config.cell_height), (0, 0, 0, 0))
     cell.alpha_composite(sprite, (paste_x, paste_y))
+    if config.clean_white_body and spec.clip != "projectile":
+        cell = clean_white_body(cell, (target_pivot_x, target_pivot_y))
 
     frame_data = {
         "name": spec.name,
@@ -124,6 +127,92 @@ def extract_frame(
         },
     }
     return cell, frame_data
+
+
+def clean_white_body(image: Image.Image, pivot: tuple[int, int]) -> Image.Image:
+    """Softens dark neutral flecks inside the white body area."""
+    rgba = image.copy()
+    pixels = rgba.load()
+    width, height = rgba.size
+    pivot_x, pivot_y = pivot
+    region = (
+        max(0, pivot_x - 116),
+        max(0, pivot_y - 232),
+        min(width, pivot_x + 126),
+        min(height, pivot_y + 16),
+    )
+    replacements: list[tuple[int, int, tuple[int, int, int, int]]] = []
+
+    for y in range(region[1], region[3]):
+        for x in range(region[0], region[2]):
+            r, g, b, a = pixels[x, y]
+            if a < 180 or not is_dark_neutral((r, g, b)):
+                continue
+            if near_transparent_edge(rgba, x, y):
+                continue
+
+            white_neighbors = nearby_white_pixels(rgba, x, y, radius=4)
+            if len(white_neighbors) < 18:
+                continue
+
+            replacements.append((x, y, average_color(white_neighbors, a)))
+
+    for x, y, color in replacements:
+        pixels[x, y] = color
+
+    return rgba
+
+
+def is_dark_neutral(pixel: tuple[int, int, int]) -> bool:
+    r, g, b = pixel
+    luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b
+    spread = max(r, g, b) - min(r, g, b)
+    return luminance < 142 and spread < 42
+
+
+def is_white_body_pixel(pixel: tuple[int, int, int, int]) -> bool:
+    r, g, b, a = pixel
+    if a < 180:
+        return False
+    luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b
+    spread = max(r, g, b) - min(r, g, b)
+    return luminance >= 150 and spread < 64 and r >= 130 and g >= 125 and b >= 105
+
+
+def near_transparent_edge(image: Image.Image, x: int, y: int) -> bool:
+    alpha = image.getchannel("A")
+    width, height = image.size
+    for ny in range(max(0, y - 2), min(height, y + 3)):
+        for nx in range(max(0, x - 2), min(width, x + 3)):
+            if alpha.getpixel((nx, ny)) < 64:
+                return True
+    return False
+
+
+def nearby_white_pixels(
+    image: Image.Image, x: int, y: int, radius: int
+) -> list[tuple[int, int, int]]:
+    pixels = image.load()
+    width, height = image.size
+    white_pixels: list[tuple[int, int, int]] = []
+    for ny in range(max(0, y - radius), min(height, y + radius + 1)):
+        for nx in range(max(0, x - radius), min(width, x + radius + 1)):
+            if nx == x and ny == y:
+                continue
+            r, g, b, a = pixels[nx, ny]
+            if is_white_body_pixel((r, g, b, a)):
+                white_pixels.append((r, g, b))
+    return white_pixels
+
+
+def average_color(
+    colors: list[tuple[int, int, int]], alpha: int
+) -> tuple[int, int, int, int]:
+    count = len(colors)
+    r = round(sum(color[0] for color in colors) / count)
+    g = round(sum(color[1] for color in colors) / count)
+    b = round(sum(color[2] for color in colors) / count)
+    return (r, g, b, alpha)
 
 
 def is_checkerboard_pixel(pixel: tuple[int, int, int]) -> bool:

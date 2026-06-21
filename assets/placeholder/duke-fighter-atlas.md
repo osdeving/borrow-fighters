@@ -9,12 +9,15 @@ Placeholder candidato extraido de referencia.
 - `assets/placeholder/duke-fighter-atlas.png`
 - `assets/placeholder/duke-fighter.sprite.json`
 - `assets/placeholder/duke-bean-projectile.png`
+- `assets/placeholder/duke-fighter-atlas.before-white-cleanup.png`: backup do atlas antes da limpeza do corpo branco.
 
 ## Uso
 
 Atlas limpo com alpha real, frames em celulas padronizadas e metadata de animacao.
 
 Este asset entra no runtime como o primeiro visual atlas-driven do Player 2 enquanto Java/Duke ainda nao tem arte final aprovada.
+
+A extracao aplica uma limpeza conservadora na parte branca do corpo para remover manchas escuras pequenas sem apagar contorno, logo, olho, arma ou efeitos.
 
 ## Geracao
 
