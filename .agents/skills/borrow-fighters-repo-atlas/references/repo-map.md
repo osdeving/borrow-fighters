@@ -26,6 +26,7 @@
 | `docs/09-ai-collaboration.md` | AI guidance and skills |
 | `docs/10-greybox-playtest.md` | Current playtest script |
 | `docs/11-sprite-pipeline.md` | Sprite manifest and atlas pipeline |
+| `docs/13-combat-design-roadmap.md` | Combat design, frame data and Combat Lab roadmap |
 | `docs/adr/` | Architecture Decision Records |
 | `docs/templates/` | Reusable proposal/checklist templates |
 
