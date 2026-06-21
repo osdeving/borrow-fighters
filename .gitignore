@@ -184,6 +184,10 @@ builds/
 packages/
 releases/
 
+# Raw local captures can be large. Curated public clips should live in
+# assets/showcase/ and be added explicitly.
+/assets/references/*.mp4
+
 ###############################################################################
 # Logs, reports, local runtime state
 ###############################################################################

@@ -68,6 +68,12 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 **Borrow Fighters** é um working title. O nome pode mudar conforme identidade visual, escopo e tom do jogo evoluírem.
 
+## Amostra atual
+
+[![Clique para abrir o clipe sem áudio do Prototype 0.1 greybox](assets/showcase/prototype-0.1-greybox-cover.jpg)](assets/showcase/prototype-0.1-greybox.mp4)
+
+_Clique na imagem para abrir o clipe sem áudio. Os sprites, VFX e cenário ainda são placeholders de protótipo: servem como mood, escala e teste de leitura visual, não como alvo final de polimento._
+
 ## Como contribuir
 
 Leia primeiro:
