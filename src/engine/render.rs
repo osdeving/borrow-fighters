@@ -321,6 +321,7 @@ fn draw_fighter(
         AttackPhase::Startup => lighten(options.body_color, 30),
         AttackPhase::Active => Color::new(255, 222, 89, 255),
         AttackPhase::Recovery => dim(options.body_color, 25),
+        AttackPhase::WhiffRecovery => dim(options.body_color, 45),
     };
 
     if let Some(sprite_atlas) = options.sprite_atlas
@@ -404,6 +405,12 @@ fn draw_fighter(
             fighter.blockstun_remaining_frames().get()
         );
         draw.draw_text(&stun_text, label_x, label_y - 24, 14, GUARD);
+    } else if options.show_debug && fighter.in_whiff_recovery() {
+        let recovery_text = format!(
+            "WHIFF {:02}",
+            fighter.whiff_recovery_remaining_frames().get()
+        );
+        draw.draw_text(&recovery_text, label_x, label_y - 40, 14, UI_MUTED);
     }
 
     if options.show_debug
@@ -432,6 +439,7 @@ fn draw_fighter(
             AttackPhase::Startup => "STARTUP",
             AttackPhase::Active => "ACTIVE",
             AttackPhase::Recovery => "RECOVER",
+            AttackPhase::WhiffRecovery => "WHIFF",
             AttackPhase::Idle => "",
         };
         let frame_text = if let (Some(elapsed), Some(frame_data)) =

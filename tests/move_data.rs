@@ -6,8 +6,10 @@ use borrow_fighters::combat::fighter::{
 };
 use borrow_fighters::combat::frame::FrameCount;
 use borrow_fighters::combat::move_data::{
-    CLOSE_RANGE_MOVE_SPECS, GuardRule, HEAVY_ATTACK_REACTION, KICK_REACTION, LIGHT_ATTACK_REACTION,
-    MoveId, MoveInputKind, move_spec, move_spec_for_input,
+    CLOSE_RANGE_MOVE_SPECS, DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY, GuardRule, HEAVY_ATTACK_REACTION,
+    HEAVY_ATTACK_WHIFF_RECOVERY, KICK_REACTION, KICK_WHIFF_RECOVERY, LIGHT_ATTACK_REACTION,
+    LIGHT_ATTACK_WHIFF_RECOVERY, MoveId, MoveInputKind, RUST_BORROW_JAB_WHIFF_RECOVERY, move_spec,
+    move_spec_for_input,
 };
 
 #[test]
@@ -36,6 +38,7 @@ fn move_specs_preserve_current_tuning_values() {
     assert_eq!(light.hit_reaction, LIGHT_ATTACK_REACTION);
     assert_eq!(light.hit_reaction.hit_pushback, 22.0);
     assert_eq!(light.hit_reaction.block_pushback, 14.0);
+    assert_eq!(light.whiff_recovery, LIGHT_ATTACK_WHIFF_RECOVERY);
 
     let heavy = move_spec(MoveId::HeavyPunch);
     assert_eq!(heavy.input, MoveInputKind::HeavyPunch);
@@ -51,6 +54,7 @@ fn move_specs_preserve_current_tuning_values() {
     assert_eq!(heavy.hit_reaction, HEAVY_ATTACK_REACTION);
     assert_eq!(heavy.hit_reaction.hit_pushback, 38.0);
     assert_eq!(heavy.hit_reaction.block_pushback, 26.0);
+    assert_eq!(heavy.whiff_recovery, HEAVY_ATTACK_WHIFF_RECOVERY);
 
     let kick = move_spec(MoveId::Kick);
     assert_eq!(kick.input, MoveInputKind::Kick);
@@ -66,6 +70,7 @@ fn move_specs_preserve_current_tuning_values() {
     assert_eq!(kick.hit_reaction, KICK_REACTION);
     assert_eq!(kick.hit_reaction.hit_pushback, 34.0);
     assert_eq!(kick.hit_reaction.block_pushback, 22.0);
+    assert_eq!(kick.whiff_recovery, KICK_WHIFF_RECOVERY);
 }
 
 #[test]
@@ -82,6 +87,7 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(rust_jab.hitbox.y_offset, 62.0);
     assert_eq!(rust_jab.guard_rule, GuardRule::Mid);
     assert_eq!(rust_jab.hit_reaction, LIGHT_ATTACK_REACTION);
+    assert_eq!(rust_jab.whiff_recovery, RUST_BORROW_JAB_WHIFF_RECOVERY);
 
     let duke_poke = move_spec(MoveId::DukeBoilerplatePoke);
     assert_eq!(duke_poke.input, MoveInputKind::HeavyPunch);
@@ -95,6 +101,10 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(duke_poke.hitbox.y_offset, 60.0);
     assert_eq!(duke_poke.guard_rule, GuardRule::Mid);
     assert_eq!(duke_poke.hit_reaction, HEAVY_ATTACK_REACTION);
+    assert_eq!(
+        duke_poke.whiff_recovery,
+        DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY
+    );
 }
 
 #[test]

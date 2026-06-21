@@ -18,6 +18,15 @@ const DEFAULT_DUMMY_X: f32 = 690.0;
 const DEFAULT_DUMMY_WIDTH: f32 = 76.0;
 const DEFAULT_DUMMY_HEIGHT: f32 = 168.0;
 
+type ContactAnalysis = (
+    FrameCount,
+    FrameCount,
+    FrameCount,
+    FrameCount,
+    HitReaction,
+    Rect,
+);
+
 /// Attack source selected by the Combat Lab for analysis.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum CombatLabAnalysisMove {
@@ -30,6 +39,7 @@ pub enum CombatLabAnalysisMove {
 pub struct CombatLabAdvantage {
     pub contact_frame: FrameCount,
     pub attacker_recovery_after_contact: FrameCount,
+    pub whiff_recovery: FrameCount,
     pub projectile_cooldown_after_contact: FrameCount,
     pub hitstun: FrameCount,
     pub blockstun: FrameCount,
@@ -48,7 +58,7 @@ pub fn analyze_advantage(
     attacker: &Fighter,
     selected_move: CombatLabAnalysisMove,
 ) -> Option<CombatLabAdvantage> {
-    let (contact_frame, recovery, cooldown, reaction, contact_box) =
+    let (contact_frame, recovery, whiff_recovery, cooldown, reaction, contact_box) =
         contact_analysis(attacker.clone(), selected_move)?;
     let dummy = dummy_body_for_contact_box(character, contact_box);
     let gap = horizontal_body_gap(attacker.body_rect(), dummy);
@@ -56,6 +66,7 @@ pub fn analyze_advantage(
     Some(CombatLabAdvantage {
         contact_frame,
         attacker_recovery_after_contact: recovery,
+        whiff_recovery,
         projectile_cooldown_after_contact: cooldown,
         hitstun: reaction.hitstun,
         blockstun: reaction.blockstun,
@@ -75,7 +86,7 @@ pub fn contact_dummy_body(
     attacker: &Fighter,
     selected_move: CombatLabAnalysisMove,
 ) -> Option<Rect> {
-    let (_, _, _, _, contact_box) = contact_analysis(attacker.clone(), selected_move)?;
+    let (_, _, _, _, _, contact_box) = contact_analysis(attacker.clone(), selected_move)?;
 
     Some(dummy_body_for_contact_box(character, contact_box))
 }
@@ -108,7 +119,7 @@ pub fn default_dummy_body() -> Rect {
 fn contact_analysis(
     attacker: Fighter,
     selected_move: CombatLabAnalysisMove,
-) -> Option<(FrameCount, FrameCount, FrameCount, HitReaction, Rect)> {
+) -> Option<ContactAnalysis> {
     match selected_move {
         CombatLabAnalysisMove::Close(input) => {
             let spec = move_spec_for_input(attacker.move_ids(), input)?;
@@ -119,6 +130,7 @@ fn contact_analysis(
             Some((
                 contact_frame,
                 recovery,
+                spec.whiff_recovery,
                 FrameCount::ZERO,
                 spec.hit_reaction,
                 contact_box,
@@ -130,6 +142,7 @@ fn contact_analysis(
 
             Some((
                 frame_data.spawn_frame,
+                FrameCount::ZERO,
                 FrameCount::ZERO,
                 frames_between(frame_data.spawn_frame, frame_data.cooldown),
                 PROJECTILE_HIT_REACTION,

@@ -159,6 +159,7 @@ fn lab_reports_character_specific_close_move_advantage() {
         rust_advantage.attacker_recovery_after_contact,
         FrameCount::new(12)
     );
+    assert_eq!(rust_advantage.whiff_recovery, FrameCount::new(4));
     assert_eq!(rust_advantage.hit_advantage, 0);
     assert_eq!(rust_advantage.block_advantage, -4);
     assert_eq!(rust_advantage.hit_pushback, 22.0);
@@ -179,6 +180,7 @@ fn lab_reports_character_specific_close_move_advantage() {
         duke_advantage.attacker_recovery_after_contact,
         FrameCount::new(27)
     );
+    assert_eq!(duke_advantage.whiff_recovery, FrameCount::new(12));
     assert_eq!(duke_advantage.hit_advantage, -9);
     assert_eq!(duke_advantage.block_advantage, -15);
 }
@@ -193,6 +195,7 @@ fn lab_reports_projectile_advantage_without_action_recovery() {
 
     assert_eq!(advantage.contact_frame, FrameCount::ZERO);
     assert_eq!(advantage.attacker_recovery_after_contact, FrameCount::ZERO);
+    assert_eq!(advantage.whiff_recovery, FrameCount::ZERO);
     assert_eq!(
         advantage.projectile_cooldown_after_contact,
         FrameCount::new(57)

@@ -50,7 +50,7 @@ Essa técnica foi escolhida porque é legível, testável sem Raylib e suficient
 O jogo usa fixed timestep de 60 FPS em [`src/config.rs`](../src/config.rs). A linguagem de tuning do combate deve ser frame, não segundo.
 
 - `FrameCount` fica em [`src/combat/frame.rs`](../src/combat/frame.rs).
-- Golpes próximos usam `AttackFrameData` dentro de `MoveSpec`.
+- Golpes próximos usam `AttackFrameData` e `whiff_recovery` dentro de `MoveSpec`.
 - Projectile/special usa `ProjectileFrameData` em [`src/combat/projectile.rs`](../src/combat/projectile.rs).
 - O Combat Lab mostra frame atual, fase e janela ativa.
 
@@ -88,6 +88,17 @@ Os golpes próximos atuais estão em [`src/combat/move_data.rs`](../src/combat/m
 `Fighter` carrega `move_ids` próprios. Quando um botão de golpe é pressionado, `move_spec_for_input` procura no loadout o primeiro `MoveSpec` com o `MoveInputKind` correspondente. Se não houver `MoveId` compatível, o input daquele golpe não inicia ataque. Isso permite que o mesmo botão resolva para golpes diferentes por personagem sem alterar profundamente `Fighter`.
 
 `AttackKind` em [`src/combat/move_set.rs`](../src/combat/move_set.rs) ainda existe como camada runtime de compatibilidade para sprites, debug e categorias visuais. O dano, a hitbox e o frame data durante uma luta vêm do `MoveSpec` concreto guardado no estado de ataque.
+
+### Whiff Recovery
+
+`MoveSpec.whiff_recovery` define o lockout aplicado quando um golpe próximo termina sem acertar. O fluxo fica em [`Fighter::update`](../src/combat/fighter.rs):
+
+1. ataque inicia e roda `AttackFrameData`;
+2. se [`World`](../src/game/world.rs) registra contato, `mark_attack_hit` impede whiff recovery;
+3. se a duração acaba sem contato, `Fighter` limpa o ataque atual e liga `whiff_recovery_timer`;
+4. enquanto `in_whiff_recovery` estiver ativo, o lutador não anda, não pula, não defende, não inicia outro golpe e não dispara projectile.
+
+O debug visual mostra `WHIFF xx` quando `Mostrar debug de combate` está ligado. O Combat Lab mostra `whiff` no overlay para comparar custo de erro com `rec` em contato.
 
 ### Dados de Personagens
 
@@ -152,6 +163,7 @@ No overlay do Combat Lab:
 
 - `adv hit` e `adv block` são estimativas em frames: `stun do defensor - recovery restante do atacante após o contato`;
 - `rec` é o recovery restante do atacante depois do primeiro frame de contato estimado;
+- `whiff` é o lockout extra quando o golpe termina sem contato;
 - `cd` aparece em projectile e indica cooldown restante, não recovery de ação;
 - `push H/B` mostra pushback em hit e block;
 - `gap H/B` mostra a distância corpo-corpo estimada depois do pushback;

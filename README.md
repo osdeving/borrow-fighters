@@ -106,7 +106,7 @@ As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
 
 ## Rodando o protótipo greybox
 
-O código jogável atual implementa um greybox local para validar o básico: tela inicial de ajustes, dois personagens com spritesheet placeholder, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, fireball, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, vida, vitória e restart.
+O código jogável atual implementa um greybox local para validar o básico: tela inicial de ajustes, dois personagens com spritesheet placeholder, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, fireball, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, stun, pushback, whiff recovery, vida, vitória e restart.
 
 Requisitos iniciais:
 
@@ -129,7 +129,7 @@ cargo run -- --lab combat --character duke --move projectile
 cargo run -- --lab combat --character rust --pose block
 ```
 
-No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp` para alternar pose, `Enter` para repetir, `Espaço` para pausar, `.` para avançar 1 frame quando pausado, `Home` para voltar ao frame 0, `H` para hurtbox, `B` para hitbox, `P` para pivot/eixos e `D` para dummy de contato. O overlay mostra frame data, vantagem estimada, pushback e distância após pushback. Valores aceitos em `--character`: `rust`, `duke` ou `java`. Valores aceitos em `--move`: `light_punch`, `heavy_punch`, `kick` e `projectile`. Valores aceitos em `--pose`: `move`, `idle`, `crouch`, `jump`, `block`, `hit` e `victory`.
+No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp` para alternar pose, `Enter` para repetir, `Espaço` para pausar, `.` para avançar 1 frame quando pausado, `Home` para voltar ao frame 0, `H` para hurtbox, `B` para hitbox, `P` para pivot/eixos e `D` para dummy de contato. O overlay mostra frame data, vantagem estimada, pushback, whiff recovery e distância após pushback. Valores aceitos em `--character`: `rust`, `duke` ou `java`. Valores aceitos em `--move`: `light_punch`, `heavy_punch`, `kick` e `projectile`. Valores aceitos em `--pose`: `move`, `idle`, `crouch`, `jump`, `block`, `hit` e `victory`.
 
 Preferências disponíveis:
 

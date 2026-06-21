@@ -110,7 +110,7 @@ fn draw_lab_pivot(draw: &mut RaylibDrawHandle<'_>, fighter: &Fighter) {
 fn draw_lab_overlay(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
     let panel_x = 20;
     let panel_y = 18;
-    let panel_width = 488;
+    let panel_width = 560;
     let panel_height = 172;
 
     draw.draw_rectangle(panel_x, panel_y, panel_width, panel_height, PANEL);
@@ -146,10 +146,11 @@ fn draw_lab_overlay(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
     if let Some(advantage) = lab.advantage() {
         draw.draw_text(
             &format!(
-                "adv hit {} block {} | rec {}f{}",
+                "adv hit {} block {} | rec {}f whiff {}f{}",
                 signed_frames(advantage.hit_advantage),
                 signed_frames(advantage.block_advantage),
                 advantage.attacker_recovery_after_contact.get(),
+                advantage.whiff_recovery.get(),
                 cooldown_suffix(advantage.projectile_cooldown_after_contact)
             ),
             panel_x + 16,
@@ -206,6 +207,7 @@ fn lab_timing_text(lab: &CombatLab) -> String {
                 AttackPhase::Startup => "startup",
                 AttackPhase::Active => "active",
                 AttackPhase::Recovery => "recovery",
+                AttackPhase::WhiffRecovery => "whiff",
             };
             if let (Some(spec), Some(elapsed), Some(frame_data)) = (
                 fighter.attack_move_spec(),

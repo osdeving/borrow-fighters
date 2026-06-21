@@ -2,10 +2,10 @@
 
 use borrow_fighters::characters::{CharacterId, character_spec};
 use borrow_fighters::combat::fighter::{
-    AttackKind, Fighter, FighterInput, GuardRule, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, PlayerSlot,
-    RUST_BORROW_JAB_DAMAGE,
+    AttackKind, AttackPhase, Fighter, FighterInput, GuardRule, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE,
+    PlayerSlot, RUST_BORROW_JAB_DAMAGE,
 };
-use borrow_fighters::combat::move_data::{LIGHT_ATTACK_REACTION, MoveId};
+use borrow_fighters::combat::move_data::{LIGHT_ATTACK_REACTION, MoveId, move_spec};
 use borrow_fighters::combat::projectile::{
     PROJECTILE_DAMAGE, PROJECTILE_GUARD_RULE, PROJECTILE_HIT_REACTION, PROJECTILE_SPEED,
 };
@@ -245,6 +245,59 @@ fn hitstun_and_blockstun_lock_out_actions_temporarily() {
         },
     );
     assert_eq!(blocked.attack_kind(), None);
+}
+
+#[test]
+fn whiff_recovery_locks_out_actions_after_missing() {
+    let spec = move_spec(MoveId::HeavyPunch);
+    let mut fighter = Fighter::new(PlayerSlot::One, "Whiff", 300.0);
+
+    fighter.update(
+        DT,
+        FighterInput {
+            heavy_punch: true,
+            ..FighterInput::default()
+        },
+    );
+
+    while fighter.attack_elapsed_frames().is_some() {
+        fighter.update(DT, FighterInput::default());
+    }
+
+    assert!(fighter.in_whiff_recovery());
+    assert_eq!(fighter.attack_phase(), AttackPhase::WhiffRecovery);
+    assert_eq!(
+        fighter.whiff_recovery_remaining_frames(),
+        spec.whiff_recovery
+    );
+
+    fighter.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            projectile: true,
+            right: true,
+            ..FighterInput::default()
+        },
+    );
+
+    assert_eq!(fighter.attack_kind(), None);
+    assert!(!fighter.can_fire_projectile());
+    assert!(fighter.velocity.x.abs() < 0.01);
+
+    for _ in 0..spec.whiff_recovery.get() {
+        fighter.update(DT, FighterInput::default());
+    }
+
+    assert!(!fighter.in_whiff_recovery());
+    fighter.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(fighter.attack_kind(), Some(AttackKind::LightPunch));
 }
 
 #[test]

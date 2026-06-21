@@ -13,6 +13,11 @@ pub const HEAVY_PUNCH_DAMAGE: i32 = 16;
 pub const KICK_DAMAGE: i32 = 12;
 pub const RUST_BORROW_JAB_DAMAGE: i32 = 7;
 pub const DUKE_BOILERPLATE_POKE_DAMAGE: i32 = 18;
+pub const LIGHT_ATTACK_WHIFF_RECOVERY: FrameCount = FrameCount::new(4);
+pub const HEAVY_ATTACK_WHIFF_RECOVERY: FrameCount = FrameCount::new(10);
+pub const KICK_WHIFF_RECOVERY: FrameCount = FrameCount::new(8);
+pub const RUST_BORROW_JAB_WHIFF_RECOVERY: FrameCount = FrameCount::new(4);
+pub const DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY: FrameCount = FrameCount::new(12);
 pub const LIGHT_ATTACK_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(12),
     blockstun: FrameCount::new(8),
@@ -127,6 +132,7 @@ pub struct MoveSpec {
     pub damage: i32,
     pub guard_rule: GuardRule,
     pub hit_reaction: HitReaction,
+    pub whiff_recovery: FrameCount,
 }
 
 /// Prototype 0.1 close-range move table.
@@ -148,6 +154,7 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 5] = [
         damage: LIGHT_PUNCH_DAMAGE,
         guard_rule: GuardRule::Mid,
         hit_reaction: LIGHT_ATTACK_REACTION,
+        whiff_recovery: LIGHT_ATTACK_WHIFF_RECOVERY,
     },
     MoveSpec {
         id: MoveId::HeavyPunch,
@@ -166,6 +173,7 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 5] = [
         damage: HEAVY_PUNCH_DAMAGE,
         guard_rule: GuardRule::Mid,
         hit_reaction: HEAVY_ATTACK_REACTION,
+        whiff_recovery: HEAVY_ATTACK_WHIFF_RECOVERY,
     },
     MoveSpec {
         id: MoveId::Kick,
@@ -184,6 +192,7 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 5] = [
         damage: KICK_DAMAGE,
         guard_rule: GuardRule::Mid,
         hit_reaction: KICK_REACTION,
+        whiff_recovery: KICK_WHIFF_RECOVERY,
     },
     MoveSpec {
         id: MoveId::RustBorrowJab,
@@ -202,6 +211,7 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 5] = [
         damage: RUST_BORROW_JAB_DAMAGE,
         guard_rule: GuardRule::Mid,
         hit_reaction: LIGHT_ATTACK_REACTION,
+        whiff_recovery: RUST_BORROW_JAB_WHIFF_RECOVERY,
     },
     MoveSpec {
         id: MoveId::DukeBoilerplatePoke,
@@ -220,6 +230,7 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 5] = [
         damage: DUKE_BOILERPLATE_POKE_DAMAGE,
         guard_rule: GuardRule::Mid,
         hit_reaction: HEAVY_ATTACK_REACTION,
+        whiff_recovery: DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY,
     },
 ];
 

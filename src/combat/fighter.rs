@@ -57,6 +57,7 @@ pub enum AttackPhase {
     Startup,
     Active,
     Recovery,
+    WhiffRecovery,
 }
 
 /// Input commands for one fighter during one simulation tick.
@@ -107,6 +108,7 @@ pub struct Fighter {
     special_visual_timer: f32,
     hitstun_timer: f32,
     blockstun_timer: f32,
+    whiff_recovery_timer: f32,
     attack: Option<AttackState>,
 }
 
@@ -158,6 +160,7 @@ impl Fighter {
             special_visual_timer: 0.0,
             hitstun_timer: 0.0,
             blockstun_timer: 0.0,
+            whiff_recovery_timer: 0.0,
             attack: None,
         }
     }
@@ -170,6 +173,7 @@ impl Fighter {
             self.blocking = false;
             self.hitstun_timer = 0.0;
             self.blockstun_timer = 0.0;
+            self.whiff_recovery_timer = 0.0;
             self.special_visual_timer = 0.0;
             return;
         }
@@ -178,14 +182,15 @@ impl Fighter {
         self.special_visual_timer = tick_timer(self.special_visual_timer, dt);
         self.hitstun_timer = tick_timer(self.hitstun_timer, dt);
         self.blockstun_timer = tick_timer(self.blockstun_timer, dt);
+        self.whiff_recovery_timer = tick_timer(self.whiff_recovery_timer, dt);
 
-        let reacting = self.is_reacting();
-        self.crouching = !reacting && input.crouch && self.grounded && self.attack.is_none();
+        let action_locked = self.is_action_locked();
+        self.crouching = !action_locked && input.crouch && self.grounded && self.attack.is_none();
         self.blocking = self.in_blockstun()
-            || (!reacting && input.block && self.grounded && self.attack.is_none());
+            || (!action_locked && input.block && self.grounded && self.attack.is_none());
         self.update_horizontal_velocity(dt, input);
 
-        let can_start_action = !reacting && !self.crouching && !self.blocking;
+        let can_start_action = !action_locked && !self.crouching && !self.blocking;
         if input.jump && self.grounded && can_start_action {
             self.velocity.y = JUMP_SPEED;
             self.grounded = false;
@@ -216,8 +221,14 @@ impl Fighter {
 
         if let Some(mut attack) = self.attack {
             attack.elapsed += dt;
-            self.attack =
-                (attack.elapsed_frames() <= attack.spec.frames.duration).then_some(attack);
+            if attack.elapsed_frames() <= attack.spec.frames.duration {
+                self.attack = Some(attack);
+            } else {
+                self.attack = None;
+                if !attack.has_hit {
+                    self.start_whiff_recovery(attack.spec);
+                }
+            }
         }
     }
 
@@ -275,7 +286,7 @@ impl Fighter {
             && self.grounded
             && !self.crouching
             && !self.blocking
-            && !self.is_reacting()
+            && !self.is_action_locked()
             && self.attack.is_none()
             && self.projectile_cooldown <= 0.0
     }
@@ -430,6 +441,11 @@ impl Fighter {
         FrameCount::from_elapsed_seconds(self.blockstun_timer)
     }
 
+    /// Returns remaining whiff recovery in whole frames.
+    pub fn whiff_recovery_remaining_frames(&self) -> FrameCount {
+        FrameCount::from_elapsed_seconds(self.whiff_recovery_timer)
+    }
+
     /// Returns whether the fighter is currently locked by hitstun.
     pub fn in_hitstun(&self) -> bool {
         self.hitstun_timer > 0.0
@@ -440,9 +456,18 @@ impl Fighter {
         self.blockstun_timer > 0.0
     }
 
+    /// Returns whether the fighter is locked after missing a close attack.
+    pub fn in_whiff_recovery(&self) -> bool {
+        self.whiff_recovery_timer > 0.0
+    }
+
     /// Returns the current attack phase for debug rendering.
     pub fn attack_phase(&self) -> AttackPhase {
-        self.attack.map_or(AttackPhase::Idle, AttackState::phase)
+        if self.in_whiff_recovery() {
+            AttackPhase::WhiffRecovery
+        } else {
+            self.attack.map_or(AttackPhase::Idle, AttackState::phase)
+        }
     }
 
     /// Returns the defensive box drawn in front of a blocking fighter.
@@ -463,7 +488,7 @@ impl Fighter {
     }
 
     fn update_horizontal_velocity(&mut self, dt: f32, input: FighterInput) {
-        let axis = if self.crouching || self.blocking || self.is_reacting() {
+        let axis = if self.crouching || self.blocking || self.is_action_locked() {
             0.0
         } else {
             input.horizontal_axis()
@@ -524,6 +549,7 @@ impl Fighter {
 
     fn apply_hit_reaction(&mut self, hit_reaction: HitReaction, blocked: bool) -> f32 {
         self.velocity.x = 0.0;
+        self.whiff_recovery_timer = 0.0;
         if blocked {
             self.blocking = true;
             self.blockstun_timer = hit_reaction.blockstun.as_seconds();
@@ -538,6 +564,15 @@ impl Fighter {
 
     fn is_reacting(&self) -> bool {
         self.in_hitstun() || self.in_blockstun()
+    }
+
+    fn is_action_locked(&self) -> bool {
+        self.is_reacting() || self.in_whiff_recovery()
+    }
+
+    fn start_whiff_recovery(&mut self, spec: MoveSpec) {
+        self.velocity.x = 0.0;
+        self.whiff_recovery_timer = spec.whiff_recovery.as_seconds();
     }
 }
 

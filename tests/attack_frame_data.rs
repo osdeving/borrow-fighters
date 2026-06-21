@@ -115,6 +115,16 @@ fn light_punch_phases_follow_frame_data() {
 
     advance_until_attack_finishes(&mut fighter);
     assert_eq!(fighter.attack_elapsed_frames(), None);
+    assert_eq!(fighter.attack_phase(), AttackPhase::WhiffRecovery);
+    assert_eq!(
+        fighter.whiff_recovery_remaining_frames(),
+        move_spec(MoveId::LightPunch).whiff_recovery
+    );
+
+    for _ in 0..move_spec(MoveId::LightPunch).whiff_recovery.get() {
+        fighter.update(DT, FighterInput::default());
+    }
+
     assert_eq!(fighter.attack_phase(), AttackPhase::Idle);
 }
 

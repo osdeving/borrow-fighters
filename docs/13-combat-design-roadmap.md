@@ -254,6 +254,7 @@ Overlay mínimo:
 - dano;
 - advantage estimado;
 - distância estimada após pushback;
+- whiff recovery;
 - hitbox ativa ou inativa;
 - pivot local e pivot em tela;
 - posição da mão/pé usada para projectile ou golpe.
@@ -388,13 +389,13 @@ Critério de aceite:
 
 ### Fase 4 — Defesa e contra-jogo
 
-Status: **iniciada em corte mínimo**.
+Status: **concluída em corte mínimo**.
 
 Entregáveis:
 
 - [x] separar high/low/mid/throw/projectile em `GuardRule`;
 - [x] bloquear strike/projétil conforme `GuardRule`, com `Throw` explicitamente não bloqueável;
-- [ ] whiff recovery explícito além da duração/recovery atual dos golpes;
+- [x] whiff recovery explícito além da duração/recovery atual dos golpes;
 - [x] blockstun/hitstun inicial;
 - [x] pushback simples para hit/block e projétil.
 - [x] leitura de vantagem estimada no Combat Lab.
@@ -402,7 +403,17 @@ Entregáveis:
 Critério de aceite:
 
 - cada golpe forte tem pelo menos uma resposta documentada.
-- o corte atual já impede ação durante hitstun/blockstun, aplica pushback e mostra vantagem estimada no Combat Lab, mas ainda precisa de tuning de vantagem e whiff recovery explícito.
+- o corte atual impede ação durante hitstun/blockstun, aplica pushback, mostra vantagem estimada no Combat Lab e aplica whiff recovery quando golpe próximo erra.
+- `Low` e `Throw` ficam como linguagem de dados reservada; golpes baixos e throws jogáveis devem nascer na Fase 5 ou depois, ligados à identidade dos personagens.
+
+Respostas mínimas documentadas:
+
+| Ferramenta | Risco atual | Respostas de contra-jogo |
+|---|---|---|
+| `HeavyPunch` genérico | startup 11f, recovery após contato, whiff recovery 10f | andar fora do alcance, bloquear e observar vantagem, pular antes do contato, punir whiff |
+| `Kick` | alcance baixo/médio, active limitado, whiff recovery 8f | defender mid no corte atual, recuar, pular, punir se errar |
+| `DukeBoilerplatePoke` | alcance e dano altos, startup 13f, whiff recovery 12f | ficar fora do alcance, interromper startup com jab rápido, bloquear e recuperar espaço com pushback, punir whiff |
+| Projectile | cooldown 57f e trajetória horizontal | bloquear chip reduzido, pular, aproximar durante cooldown, usar spacing para forçar erro |
 
 ### Fase 5 — Identidade dos personagens
 
@@ -433,15 +444,15 @@ Critério de aceite:
 ## Backlog técnico imediato
 
 1. Usar a leitura de vantagem do Combat Lab para ajustar golpes seguros, puníveis e spacing.
-2. Decidir se `Low` entra já com algum golpe real ou se fica reservado para depois.
-3. Adicionar whiff recovery explícito para golpes que errarem fora do contato.
+2. Começar a Fase 5 com matriz de identidade mecânica para Rust, Duke e Go.
+3. Decidir se `Low`, `Throw` ou outra propriedade entra como assinatura de algum personagem.
 4. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
-5. Só depois ampliar para novos personagens ou golpes especiais.
+5. Só depois ampliar para novos golpes especiais.
 
 ## Decisões pendentes
 
-- O jogo terá defesa high/low já no Prototype 0.1 ou só block único por enquanto?
-- Throws entram agora ou só depois de strike/projectile estarem medidos?
+- Qual personagem, se algum, justifica primeiro golpe `Low` jogável?
+- Throws entram como assinatura de personagem ou como sistema universal?
 - Projectile deve colidir com projectile?
 - Haverá recurso/meter ou cooldown continua sendo o único custo?
 - Combat Lab entra por CLI flag, tela de preferência ou ambos?
