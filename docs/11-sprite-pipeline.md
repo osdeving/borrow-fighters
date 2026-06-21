@@ -2,7 +2,8 @@
 
 ## Status
 
-Proposto. O runtime atual ainda nao carrega manifests de sprite.
+Em implementacao. O runtime ja possui um primeiro carregador de manifest para
+testar atlas, clips, duracoes e pivots no personagem Rust.
 
 ## Objetivo
 
@@ -61,14 +62,14 @@ Por enquanto, preferimos um formato pequeno do projeto porque:
 - deixa claro quais dados o jogo precisa;
 - permite gerar metadata a partir de scripts locais.
 
-## Proxima etapa no codigo
+## Implementacao atual
 
-Criar um carregador em `engine/sprites.rs` que:
+O primeiro corte vive em `src/engine/sprites/`:
 
-1. leia o manifest JSON;
-2. carregue o PNG indicado;
-3. selecione clips por estado de gameplay;
-4. avance frames por tempo;
-5. renderize usando pivot em vez de centralizar a textura.
+1. `manifest.rs` le e valida JSON;
+2. `animation.rs` seleciona frames por duracao;
+3. `selection.rs` converte estado de lutador em clip;
+4. `draw.rs` desenha atlas com pivot via Raylib.
 
-Isso deve substituir gradualmente o hardcode atual de `FRAME_WIDTH`, `FRAME_HEIGHT` e `FighterSpriteFrame::index`.
+O personagem Rust ja pode usar `assets/placeholder/rust-fighter.sprite.json`.
+O Java ainda usa o spritesheet greybox enquanto nao houver arte propria.

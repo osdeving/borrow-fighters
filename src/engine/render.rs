@@ -5,9 +5,9 @@
 
 use raylib::prelude::*;
 
-use crate::combat::fighter::{AttackPhase, PlayerSlot};
+use crate::combat::fighter::{AttackPhase, Facing, PlayerSlot};
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
-use crate::engine::assets::GameAssets;
+use crate::engine::assets::{GameAssets, SpriteAtlasAsset};
 use crate::engine::sprites;
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags, PREFERENCE_FLAGS};
 use crate::game::world::{MatchOutcome, World};
@@ -56,20 +56,24 @@ pub fn draw_fight(
     draw_arena(draw, assets.arena_background.as_ref());
     let show_debug = flags.enabled(FeatureFlag::ShowCombatDebug);
 
-    draw_projectiles(draw, world, show_debug);
+    draw_projectiles(draw, world, show_debug, assets.rust_projectile.as_ref());
     draw_fighter(
         draw,
         &world.player_one,
         PLAYER_ONE,
         show_debug,
+        assets.rust_fighter.as_ref(),
         assets.fighter_spritesheet.as_ref(),
+        world.elapsed_seconds,
     );
     draw_fighter(
         draw,
         &world.player_two,
         PLAYER_TWO,
         show_debug,
+        None,
         assets.fighter_spritesheet.as_ref(),
+        world.elapsed_seconds,
     );
     if show_debug {
         draw_body_collision(draw, world);
@@ -268,7 +272,9 @@ fn draw_fighter(
     fighter: &crate::combat::fighter::Fighter,
     body_color: Color,
     show_debug: bool,
+    sprite_atlas: Option<&SpriteAtlasAsset>,
     spritesheet: Option<&Texture2D>,
+    world_elapsed_seconds: f32,
 ) {
     let phase = fighter.attack_phase();
     let body = match phase {
@@ -278,7 +284,17 @@ fn draw_fighter(
         AttackPhase::Recovery => dim(body_color, 25),
     };
 
-    if let Some(texture) = spritesheet {
+    if let Some(sprite_atlas) = sprite_atlas
+        && sprites::draw_manifest_fighter_sprite(
+            draw,
+            &sprite_atlas.texture,
+            &sprite_atlas.manifest,
+            fighter,
+            world_elapsed_seconds,
+            Color::WHITE,
+        )
+    {
+    } else if let Some(texture) = spritesheet {
         sprites::draw_fighter_sprite(draw, texture, fighter, body);
     } else {
         draw_body_parts(draw, fighter, body);
@@ -447,22 +463,43 @@ fn draw_health_bar(draw: &mut RaylibDrawHandle<'_>, x: i32, y: i32, health: i32,
     draw.draw_text(&text, x, y - 24, 20, UI_TEXT);
 }
 
-fn draw_projectiles(draw: &mut RaylibDrawHandle<'_>, world: &World, show_debug: bool) {
+fn draw_projectiles(
+    draw: &mut RaylibDrawHandle<'_>,
+    world: &World,
+    show_debug: bool,
+    projectile_texture: Option<&Texture2D>,
+) {
     for projectile in &world.projectiles {
         let rect = projectile.rect();
-        draw.draw_rectangle(
-            rect.x.round() as i32,
-            rect.y.round() as i32,
-            rect.width.round() as i32,
-            rect.height.round() as i32,
-            PROJECTILE_FILL,
-        );
-        draw.draw_circle(
-            rect.center().x.round() as i32,
-            rect.center().y.round() as i32,
-            8.0,
-            PROJECTILE,
-        );
+        if let Some(texture) = projectile_texture {
+            let facing = if projectile.velocity.x < 0.0 {
+                Facing::Left
+            } else {
+                Facing::Right
+            };
+            let center = rect.center();
+            sprites::draw_projectile_texture(
+                draw,
+                texture,
+                Vector2::new(center.x, center.y),
+                facing,
+                Color::WHITE,
+            );
+        } else {
+            draw.draw_rectangle(
+                rect.x.round() as i32,
+                rect.y.round() as i32,
+                rect.width.round() as i32,
+                rect.height.round() as i32,
+                PROJECTILE_FILL,
+            );
+            draw.draw_circle(
+                rect.center().x.round() as i32,
+                rect.center().y.round() as i32,
+                8.0,
+                PROJECTILE,
+            );
+        }
 
         if show_debug {
             outline_rect(draw, rect, PROJECTILE);

@@ -14,12 +14,12 @@ Placeholder candidato extraido de referencia.
 
 Atlas limpo com alpha real, frames em celulas padronizadas e metadata de animacao.
 
-Este asset ainda nao esta plugado no runtime. Ele existe para validar:
+Este asset esta ligado ao primeiro motor de sprites do runtime para validar:
 
 - limpeza do fundo xadrez pintado;
 - remocao dos labels da imagem original;
 - normalizacao de pivot e baseline;
-- formato de metadata para o futuro motor de sprites.
+- formato de metadata para o motor de sprites.
 
 ## Geracao
 
@@ -48,4 +48,4 @@ O script tambem gera uma previa local em `tmp/art/rust-fighter-atlas-preview.png
 
 - A fonte ainda e uma imagem composta, nao um arquivo autorado em camadas.
 - Alguns efeitos vem grudados aos frames originais e podem exigir redesenho manual depois.
-- O motor atual ainda usa `fighter-greybox-spritesheet.png`; carregar este atlas depende de uma proxima etapa no renderer.
+- O Java ainda usa `fighter-greybox-spritesheet.png` ate existir arte propria.

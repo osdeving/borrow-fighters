@@ -309,6 +309,11 @@ impl Fighter {
         self.attack.map(|attack| attack.kind)
     }
 
+    /// Returns elapsed seconds for the current close attack animation.
+    pub fn attack_elapsed_seconds(&self) -> Option<f32> {
+        self.attack.map(|attack| attack.elapsed)
+    }
+
     /// Returns the current attack phase for debug rendering.
     pub fn attack_phase(&self) -> AttackPhase {
         self.attack.map_or(AttackPhase::Idle, AttackState::phase)

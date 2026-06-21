@@ -40,6 +40,7 @@ pub struct World {
     pub hit_effects: Vec<HitEffect>,
     pub projectiles: Vec<Projectile>,
     pub body_collision_timer: f32,
+    pub elapsed_seconds: f32,
 }
 
 impl World {
@@ -52,6 +53,7 @@ impl World {
             hit_effects: Vec::new(),
             projectiles: Vec::new(),
             body_collision_timer: 0.0,
+            elapsed_seconds: 0.0,
         };
         world.update_facing();
         world
@@ -70,6 +72,7 @@ impl World {
         player_two: FighterInput,
         flags: FeatureFlags,
     ) {
+        self.elapsed_seconds += dt;
         self.update_transient_feedback(dt);
 
         if self.outcome.is_some() {
