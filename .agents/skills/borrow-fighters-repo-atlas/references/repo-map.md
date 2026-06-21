@@ -24,24 +24,29 @@
 | `docs/07-art-direction.md` | Art direction and moods |
 | `docs/08-code-architecture.md` | Rust/Raylib code architecture plan |
 | `docs/09-ai-collaboration.md` | AI guidance and skills |
+| `docs/10-greybox-playtest.md` | Current playtest script |
+| `docs/11-sprite-pipeline.md` | Sprite manifest and atlas pipeline |
 | `docs/adr/` | Architecture Decision Records |
 | `docs/templates/` | Reusable proposal/checklist templates |
 
-## Future Code
+## Code
 
-| Path | Intended purpose |
+| Path | Purpose |
 |---|---|
 | `src/main.rs` | Thin executable entrypoint |
 | `src/lib.rs` | Testable internal game modules |
 | `src/engine/` | Raylib adapters and platform boundary |
+| `src/engine/sprites/` | Sprite manifest loading, animation and drawing |
 | `src/game/` | Match state and world flow |
+| `src/game/ai.rs` | Simple CPU behavior for playtest |
+| `src/game/feature_flags.rs` | Runtime feature flags and preference menu data |
 | `src/combat/` | Hitbox, hurtbox, damage and fighter rules |
-| `src/characters/` | Character-specific data/logic |
-| `src/scenes/` | Boot, fight, victory scenes |
-| `src/ui/` | HUD and debug UI |
+| `src/characters/` | Reserved for future character-specific data/logic |
+| `src/scenes/` | Preference scene state now, future screen flow later |
+| `src/ui/` | Reserved for future UI components |
 | `src/math/` | Small geometry helpers |
-| `examples/` | Future isolated experiments |
-| `tests/` | Future integration tests |
+| `tests/` | Integration tests for combat, flags and sprites |
+| `tools/art/` | Local asset extraction utilities |
 
 ## Assets
 

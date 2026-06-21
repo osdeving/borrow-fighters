@@ -2,12 +2,11 @@
 
 ## Status
 
-Em implementacao. O runtime ja possui um primeiro carregador de manifest para
-testar atlas, clips, duracoes e pivots no personagem Rust.
+Em implementacao. O runtime ja carrega manifests para Rust, Duke, animacoes de entrada, clips de luta, pivots, duracoes por frame e fallback greybox.
 
 ## Objetivo
 
-Permitir que artistas entreguem sprites com dados suficientes para o jogo renderizar animacoes sem hardcode de frame no codigo.
+Permitir que artistas entreguem sprites com dados suficientes para o jogo renderizar animacoes sem hardcode de frame no codigo, mantendo pivots e hurtboxes ajustaveis quando a arte exigir.
 
 ## Formato candidato
 
@@ -77,8 +76,8 @@ O primeiro corte vive em `src/engine/sprites/`:
 3. `selection.rs` converte estado de lutador em clip;
 4. `draw.rs` desenha atlas com pivot via Raylib.
 
-O personagem Rust ja pode usar `assets/placeholder/rust-fighter.sprite.json`.
-O Player 2/Duke ja pode usar `assets/placeholder/duke-fighter.sprite.json`.
+O personagem Rust usa `assets/placeholder/rust-fighter.sprite.json`.
+O Player 2/Duke usa `assets/placeholder/duke-fighter.sprite.json`.
 
 O runtime tambem usa:
 
@@ -91,3 +90,19 @@ As animacoes de entrada atuais vivem em manifests separados para nao misturar fr
 
 - `assets/placeholder/rust-start-atlas.png`
 - `assets/placeholder/duke-start-atlas.png`
+
+Assets relacionados ao slice atual:
+
+- `assets/placeholder/rust-gear-projectile.png`
+- `assets/placeholder/duke-bean-projectile.png`
+- `assets/placeholder/arena-java-street.png`
+- `assets/placeholder/arena-terminal-compiler-lab.png`
+
+As ferramentas locais ficam em `tools/art/` e devem ser tratadas como utilitarios de prototipo, nao como pipeline final.
+
+## Pontos ainda em aberto
+
+- Definir se o formato v1 vira padrao permanente ou ponte para Aseprite JSON.
+- Mover hurtbox/hitbox por frame para dados externos quando a arte estabilizar.
+- Definir escala base dos personagens e tamanho minimo legivel para tela 16:9.
+- Criar criterio visual para aceitar atlas de personagem como "candidato" em vez de placeholder.

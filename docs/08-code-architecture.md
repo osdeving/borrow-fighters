@@ -2,9 +2,9 @@
 
 ## Status
 
-Proposto. Ainda não há código Rust de produção.
+Implementado em corte inicial.
 
-Este documento define o esboço inicial para quando o projeto sair da fase somente documental e criar o primeiro scaffold Rust + Raylib.
+Este documento descreve a arquitetura atual do protótipo Rust + Raylib e mantém algumas intenções futuras. A regra segue sendo evitar transformar o projeto em uma engine antes de provar o combate.
 
 ## Objetivo
 
@@ -18,61 +18,59 @@ Criar uma base simples, testável e extensível para o protótipo 0.1 sem transf
 - [Game Programming Patterns — Game Loop](https://gameprogrammingpatterns.com/game-loop.html): separação entre input, update e render; fixed timestep como candidato para previsibilidade de combate.
 - [Game Programming Patterns — Update Method](https://gameprogrammingpatterns.com/update-method.html): objetos/sistemas atualizados por frame quando houver simulação concorrente simples.
 
-## Estrutura proposta
+## Estrutura atual
 
 ```text
 borrow-fighters/
-├── Cargo.toml                  # Futuro manifesto do pacote Rust
+├── Cargo.toml                  # Manifesto do pacote Rust
 ├── Cargo.lock                  # Deve subir: jogo/aplicação precisa de build reproduzível
 ├── src/
 │   ├── main.rs                 # Binário fino: inicializa janela, cria App e roda loop
 │   ├── lib.rs                  # Módulos testáveis e API interna do jogo
 │   ├── app.rs                  # Orquestra estado global, loop e transições de alto nível
-│   ├── config.rs               # Constantes de janela, timestep e debug flags
+│   ├── config.rs               # Constantes de janela, arena, escala e timestep
 │   ├── game/
 │   │   ├── mod.rs              # Estado de partida e regras de fluxo
+│   │   ├── ai.rs               # CPU simples para playtest
 │   │   ├── feature_flags.rs    # Flags runtime para experimentos e preferências
-│   │   ├── match_state.rs      # Round, timer, vitória, reinício
 │   │   └── world.rs            # Estado jogável mínimo do protótipo
 │   ├── engine/
 │   │   ├── mod.rs              # Adaptadores finos em volta de Raylib
-│   │   ├── clock.rs            # Delta time, fixed timestep e frame pacing
+│   │   ├── assets.rs           # Caminhos e carregamento de texturas
+│   │   ├── gamepad.rs          # Mapeamento básico de gamepad
 │   │   ├── input.rs            # Raylib keyboard/gamepad -> comandos do jogo
-│   │   ├── render.rs           # Desenho de primitives/placeholders
-│   │   ├── sprites.rs          # Spritesheets placeholder e seleção de frames
-│   │   ├── assets.rs           # Carregamento futuro de sprites/som
-│   │   └── debug_draw.rs       # Hitbox/hurtbox, eixos e overlays
+│   │   ├── render.rs           # Desenho de arena, HUD, debug, menu e lutadores
+│   │   └── sprites/
+│   │       ├── animation.rs    # Seleção de frame por duração
+│   │       ├── draw.rs         # Desenho de atlas com pivot
+│   │       ├── manifest.rs     # Leitura/validação de JSON de sprite
+│   │       ├── mod.rs          # API do módulo de sprites
+│   │       └── selection.rs    # Estado de lutador -> clip
 │   ├── combat/
 │   │   ├── mod.rs              # Contratos do sistema de combate
 │   │   ├── fighter.rs          # Estado comum de lutador
-│   │   ├── hitbox.rs           # Áreas ofensivas temporárias
-│   │   ├── hurtbox.rs          # Áreas vulneráveis
 │   │   ├── collision.rs        # Resolução hitbox x hurtbox
-│   │   └── damage.rs           # Dano, hitstun, knockback futuro
+│   │   ├── move_set.rs         # Dados de golpes e tempos
+│   │   └── projectile.rs       # Estado de projéteis
 │   ├── characters/
-│   │   ├── mod.rs              # Registro dos personagens disponíveis
-│   │   ├── rustacean.rs        # Futuro personagem Rust
-│   │   └── duke.rs             # Futuro personagem Java
+│   │   └── .gitkeep            # Reservado para dados futuros de personagem
 │   ├── scenes/
 │   │   ├── mod.rs              # Estados de tela
-│   │   ├── boot.rs             # Inicialização e carregamento mínimo
-│   │   ├── preferences.rs      # Tela de ajustes e feature flags de playtest
-│   │   ├── fight.rs            # Cena jogável principal
-│   │   └── victory.rs          # Resultado e reinício
+│   │   └── preferences.rs      # Cursor e navegação da tela de ajustes
 │   ├── ui/
-│   │   ├── mod.rs              # Elementos de UI
-│   │   └── hud.rs              # Barra de vida, timer e debug labels
+│   │   └── .gitkeep            # Reservado para componentes futuros de UI
 │   └── math/
 │       ├── mod.rs              # Tipos geométricos pequenos do jogo
 │       ├── rect.rs             # Retângulos de colisão/hitbox
 │       └── vec2.rs             # Vetores 2D se Raylib Vector2 não bastar
-├── examples/
-│   └── sandbox.rs              # Futuro exemplo isolado para testar sistemas
 └── tests/
-    └── combat_rules.rs         # Futuro teste de regras puras de combate
+    ├── combat_rules.rs         # Regras puras de combate e IA
+    ├── feature_flags.rs        # Contrato de flags runtime
+    ├── sprite_manifest.rs      # Validação do formato JSON de sprites
+    └── sprite_selection.rs     # Clip escolhido a partir do estado do lutador
 ```
 
-Os arquivos acima são intenção arquitetural, não obrigação imediata. No protótipo 0.1, criar apenas os módulos necessários para fazer dois placeholders lutarem.
+Os diretórios `characters/`, `scenes/` e `ui/` ainda existem mais como ponto de expansão do que como abstração completa. Novos módulos só devem entrar quando reduzirem responsabilidade real dos arquivos atuais.
 
 ## Regras de fronteira
 
@@ -127,7 +125,7 @@ Regras:
 - evitar booleans soltos em `App`, `World`, render ou IA;
 - registrar ADR quando a flag virar decisão estrutural.
 
-## Loop de jogo proposto
+## Loop de jogo atual
 
 Fluxo conceitual:
 
@@ -138,9 +136,9 @@ run fixed update step while needed
 render current state
 ```
 
-Para o protótipo 0.1:
+No protótipo 0.1:
 
-- começar com fixed update simples;
+- usar fixed update simples;
 - limitar número máximo de updates por frame para evitar spiral of death;
 - renderizar placeholders sem interpolação se isso reduzir risco;
 - só adicionar interpolação quando movimento visual exigir.

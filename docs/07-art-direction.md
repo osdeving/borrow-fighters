@@ -43,6 +43,20 @@ O estilo precisa permitir placeholders agora e refinamento depois, sem exigir pr
 
 Nenhum mood está aprovado como direção final. Propostas devem comparar pelo menos uma vantagem e um risco.
 
+## Estado visual atual do protótipo
+
+O slice jogável usa arte placeholder, mas já exercita decisões importantes para a direção visual:
+
+- arena atual: `assets/placeholder/arena-java-street.png`, derivada de referência em `assets/references/cenario-java.png`;
+- arena anterior ainda disponível: `assets/placeholder/arena-terminal-compiler-lab.png`;
+- personagens atuais: Rust e Duke em atlas placeholder com manifesto JSON;
+- entrada cinematográfica: manifests separados para Rust e Duke;
+- projectile Rust: engrenagem separada do sprite do personagem;
+- projectile Duke: bean separado do sprite do personagem;
+- HUD, ajuda e debug visual são opcionais por feature flag.
+
+Nada disso é final. O valor desses assets agora é validar proporção, leitura de pose, pivots, altura do projectile, contraste com cenário e necessidades de animação.
+
 ## Maturidade de arte
 
 | Estado | Significado |
@@ -97,3 +111,5 @@ Usar `docs/templates/mood-proposal.md`.
 - Proporção dos personagens.
 - Nível de exagero visual.
 - Regras de UI durante combate.
+- Critério de aceite para sprite "candidato" versus "placeholder".
+- Como representar Rust, Java e outras linguagens sem copiar mascotes ou logos como arte final.

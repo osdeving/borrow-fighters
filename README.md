@@ -1,14 +1,14 @@
 # Borrow Fighters
 
-Jogo 2D de luta com humor de programação, desenvolvido inicialmente como um projeto **docs-first**.
+Jogo 2D de luta com humor de programação, iniciado como um projeto **docs-first** e agora com um protótipo greybox jogável em Rust + Raylib.
 
-Status: **Dia 0 / Pré-produção / Protótipo**
+Status: **Prototype 0.1 / Greybox jogável / Vertical slice em evolução**
 
 ## Objetivo
 
-Este repositório começa como um espaço de documentação, alinhamento criativo e planejamento técnico.
+Este repositório centraliza documentação, governança, assets placeholder e código do primeiro protótipo jogável.
 
-A ideia é reunir visão, escopo, decisões e backlog antes de iniciar o código de produção.
+A ideia continua sendo evoluir com decisões explícitas, escopo controlado e colaboração aberta entre programação, game design e arte.
 
 ## Índice central
 
@@ -77,13 +77,14 @@ Leia primeiro:
 3. [`CONTRIBUTING.md`](CONTRIBUTING.md)
 4. [`docs/05-governance.md`](docs/05-governance.md)
 
-No dia 0, contribuições devem focar em:
+Neste estágio, contribuições devem focar em:
 
 1. clareza da visão;
 2. redução de escopo;
 3. mecânica central de luta;
 4. identidade dos personagens;
-5. decisões técnicas reversíveis.
+5. sprites, animações, cenários e feedback visual;
+6. decisões técnicas reversíveis.
 
 ## Como o GitHub deve ser usado
 
