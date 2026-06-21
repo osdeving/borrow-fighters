@@ -1,0 +1,533 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "duke-start-atlas.png",
+  "source": "assets/references/duke-start-anim.png",
+  "cell": {
+    "w": 512,
+    "h": 320
+  },
+  "default_pivot": {
+    "x": 160,
+    "y": 292
+  },
+  "scale": 0.92,
+  "frames": [
+    {
+      "name": "spawn_00",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 55,
+        "y": 46,
+        "w": 215,
+        "h": 268
+      },
+      "trimmed_bounds": {
+        "x": 87,
+        "y": 105,
+        "w": 144,
+        "h": 194
+      },
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_01",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 330,
+        "y": 46,
+        "w": 215,
+        "h": 268
+      },
+      "trimmed_bounds": {
+        "x": 83,
+        "y": 106,
+        "w": 169,
+        "h": 192
+      },
+      "frame": {
+        "x": 512,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_02",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 602,
+        "y": 46,
+        "w": 223,
+        "h": 268
+      },
+      "trimmed_bounds": {
+        "x": 67,
+        "y": 111,
+        "w": 138,
+        "h": 190
+      },
+      "frame": {
+        "x": 1024,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_03",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 858,
+        "y": 46,
+        "w": 242,
+        "h": 268
+      },
+      "trimmed_bounds": {
+        "x": 54,
+        "y": 113,
+        "w": 161,
+        "h": 187
+      },
+      "frame": {
+        "x": 1536,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_04",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 1122,
+        "y": 46,
+        "w": 233,
+        "h": 268
+      },
+      "trimmed_bounds": {
+        "x": 80,
+        "y": 116,
+        "w": 168,
+        "h": 183
+      },
+      "frame": {
+        "x": 2048,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_05",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 1380,
+        "y": 46,
+        "w": 292,
+        "h": 268
+      },
+      "trimmed_bounds": {
+        "x": 70,
+        "y": 118,
+        "w": 157,
+        "h": 183
+      },
+      "frame": {
+        "x": 2560,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_06",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 30,
+        "y": 315,
+        "w": 340,
+        "h": 313
+      },
+      "trimmed_bounds": {
+        "x": 64,
+        "y": 80,
+        "w": 280,
+        "h": 200
+      },
+      "frame": {
+        "x": 0,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_07",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 315,
+        "y": 315,
+        "w": 345,
+        "h": 313
+      },
+      "trimmed_bounds": {
+        "x": 65,
+        "y": 82,
+        "w": 297,
+        "h": 203
+      },
+      "frame": {
+        "x": 512,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_08",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 602,
+        "y": 315,
+        "w": 268,
+        "h": 313
+      },
+      "trimmed_bounds": {
+        "x": 38,
+        "y": 84,
+        "w": 247,
+        "h": 198
+      },
+      "frame": {
+        "x": 1024,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_09",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 845,
+        "y": 315,
+        "w": 320,
+        "h": 313
+      },
+      "trimmed_bounds": {
+        "x": 20,
+        "y": 67,
+        "w": 292,
+        "h": 229
+      },
+      "frame": {
+        "x": 1536,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_10",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 1100,
+        "y": 315,
+        "w": 305,
+        "h": 313
+      },
+      "trimmed_bounds": {
+        "x": 37,
+        "y": 93,
+        "w": 270,
+        "h": 199
+      },
+      "frame": {
+        "x": 2048,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_11",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 1360,
+        "y": 315,
+        "w": 312,
+        "h": 313
+      },
+      "trimmed_bounds": {
+        "x": 27,
+        "y": 83,
+        "w": 234,
+        "h": 202
+      },
+      "frame": {
+        "x": 2560,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_12",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 0,
+        "y": 628,
+        "w": 330,
+        "h": 312
+      },
+      "trimmed_bounds": {
+        "x": 37,
+        "y": 91,
+        "w": 242,
+        "h": 191
+      },
+      "frame": {
+        "x": 0,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_13",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 320,
+        "y": 628,
+        "w": 270,
+        "h": 312
+      },
+      "trimmed_bounds": {
+        "x": 58,
+        "y": 98,
+        "w": 179,
+        "h": 184
+      },
+      "frame": {
+        "x": 512,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_14",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 602,
+        "y": 628,
+        "w": 243,
+        "h": 312
+      },
+      "trimmed_bounds": {
+        "x": 65,
+        "y": 95,
+        "w": 142,
+        "h": 181
+      },
+      "frame": {
+        "x": 1024,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_15",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 870,
+        "y": 628,
+        "w": 245,
+        "h": 312
+      },
+      "trimmed_bounds": {
+        "x": 51,
+        "y": 103,
+        "w": 147,
+        "h": 172
+      },
+      "frame": {
+        "x": 1536,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_16",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 1155,
+        "y": 628,
+        "w": 235,
+        "h": 312
+      },
+      "trimmed_bounds": {
+        "x": 54,
+        "y": 100,
+        "w": 136,
+        "h": 178
+      },
+      "frame": {
+        "x": 2048,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_17",
+      "clip": "spawn",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 1420,
+        "y": 628,
+        "w": 252,
+        "h": 312
+      },
+      "trimmed_bounds": {
+        "x": 59,
+        "y": 101,
+        "w": 146,
+        "h": 176
+      },
+      "frame": {
+        "x": 2560,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      }
+    }
+  ],
+  "clips": [
+    {
+      "name": "spawn",
+      "loop": false,
+      "frames": [
+        "spawn_00",
+        "spawn_01",
+        "spawn_02",
+        "spawn_03",
+        "spawn_04",
+        "spawn_05",
+        "spawn_06",
+        "spawn_07",
+        "spawn_08",
+        "spawn_09",
+        "spawn_10",
+        "spawn_11",
+        "spawn_12",
+        "spawn_13",
+        "spawn_14",
+        "spawn_15",
+        "spawn_16",
+        "spawn_17"
+      ]
+    }
+  ],
+  "notes": [
+    "Extracted from an RGB concept/reference sheet; not a final authored sprite export.",
+    "Labels and checkerboard background are intentionally excluded from runtime assets.",
+    "Future artist-authored files should prefer native alpha and Aseprite or TexturePacker metadata."
+  ]
+}

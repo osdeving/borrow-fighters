@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -39,11 +40,16 @@ class AtlasConfig:
     scale: float = 1.16
     projectile_frame_name: str = "projectile_0"
     clean_white_body: bool = False
+    remove_stray_components: bool = True
+    source_processor: Callable[[Image.Image], Image.Image] | None = None
+    cell_processor: Callable[[Image.Image, FrameSpec], Image.Image] | None = None
 
 
 def write_outputs(config: AtlasConfig) -> None:
     """Writes atlas, manifest, projectile crop, and local preview."""
     source = Image.open(config.source_path).convert("RGB")
+    if config.source_processor is not None:
+        source = config.source_processor(source).convert("RGB")
     rows = (len(config.frames) + config.columns - 1) // config.columns
     atlas = Image.new(
         "RGBA",
@@ -67,13 +73,15 @@ def write_outputs(config: AtlasConfig) -> None:
 
     config.atlas_path.parent.mkdir(parents=True, exist_ok=True)
     atlas.save(config.atlas_path)
-    write_projectile_asset(atlas, frame_records, config)
+    if config.projectile_frame_name:
+        write_projectile_asset(atlas, frame_records, config)
     write_manifest(frame_records, config)
     write_preview(atlas, frame_records, config)
 
     print(f"wrote {config.atlas_path.relative_to(ROOT)}")
     print(f"wrote {config.manifest_path.relative_to(ROOT)}")
-    print(f"wrote {config.projectile_path.relative_to(ROOT)}")
+    if config.projectile_frame_name:
+        print(f"wrote {config.projectile_path.relative_to(ROOT)}")
     print(f"wrote {config.preview_path.relative_to(ROOT)}")
 
 
@@ -82,9 +90,9 @@ def extract_frame(
 ) -> tuple[Image.Image, dict[str, Any]]:
     crop_x, crop_y, _, _ = spec.crop
     local_pivot_y = spec.pivot[1] - crop_y
-    keyed = remove_stray_components(
-        key_checkerboard_to_alpha(source.crop(spec.crop)), local_pivot_y
-    )
+    keyed = key_checkerboard_to_alpha(source.crop(spec.crop))
+    if config.remove_stray_components:
+        keyed = remove_stray_components(keyed, local_pivot_y)
     trimmed, trim_box = trim_alpha(keyed)
     width = round(trimmed.width * config.scale)
     height = round(trimmed.height * config.scale)
@@ -107,6 +115,8 @@ def extract_frame(
     cell.alpha_composite(sprite, (paste_x, paste_y))
     if config.clean_white_body and spec.clip != "projectile":
         cell = clean_white_body(cell, (target_pivot_x, target_pivot_y))
+    if config.cell_processor is not None:
+        cell = config.cell_processor(cell, spec)
 
     frame_data = {
         "name": spec.name,

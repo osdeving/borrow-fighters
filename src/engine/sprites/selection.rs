@@ -8,6 +8,7 @@ use crate::combat::fighter::{AttackKind, Fighter};
 /// Visual animation clips expected by the current fighter sprite manifest.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum FighterSpriteClip {
+    Spawn,
     Idle,
     Walk,
     Crouch,
@@ -24,6 +25,7 @@ impl FighterSpriteClip {
     /// Returns the clip name used by sprite manifests.
     pub const fn as_str(self) -> &'static str {
         match self {
+            Self::Spawn => "spawn",
             Self::Idle => "idle",
             Self::Walk => "walk",
             Self::Crouch => "crouch",
@@ -125,6 +127,7 @@ pub fn fighter_clip_elapsed_seconds(fighter: &Fighter, world_elapsed_seconds: f3
 /// Returns the placeholder sprite frame matching the current fighter state.
 pub fn fighter_sprite_frame(fighter: &Fighter) -> FighterSpriteFrame {
     match fighter_sprite_clip(fighter) {
+        FighterSpriteClip::Spawn => FighterSpriteFrame::Idle,
         FighterSpriteClip::Idle => FighterSpriteFrame::Idle,
         FighterSpriteClip::Walk => FighterSpriteFrame::Walk,
         FighterSpriteClip::Crouch => FighterSpriteFrame::Crouch,

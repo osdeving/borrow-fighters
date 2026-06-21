@@ -32,7 +32,7 @@ pub struct App {
 impl Default for App {
     fn default() -> Self {
         Self {
-            world: World::new_greybox(),
+            world: World::new_greybox_with_intro(),
             player_two_cpu: BasicCpu::default(),
             feature_flags: FeatureFlags::default(),
             scene: AppScene::Preferences,
@@ -143,7 +143,7 @@ impl App {
     }
 
     fn restart_match(&mut self) {
-        self.world = World::new_greybox();
+        self.world = World::new_greybox_with_intro();
         self.player_two_cpu = BasicCpu::default();
         self.accumulator = 0.0;
     }

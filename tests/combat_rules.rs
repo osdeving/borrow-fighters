@@ -329,6 +329,40 @@ fn projectile_deals_damage_and_disappears() {
 }
 
 #[test]
+fn spawn_intro_blocks_gameplay_until_finished() {
+    let mut world = World::new_greybox_with_intro();
+
+    assert!(world.spawn_intro_active());
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    assert!(world.projectiles.is_empty());
+    assert!(world.spawn_intro_elapsed_seconds() > 0.0);
+
+    for _ in 0..120 {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    assert!(!world.spawn_intro_active());
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    assert_eq!(world.projectiles.len(), 1);
+}
+
+#[test]
 fn projectile_cooldown_prevents_immediate_spam() {
     let mut world = World::new_greybox();
     world.player_two.position.x = 820.0;

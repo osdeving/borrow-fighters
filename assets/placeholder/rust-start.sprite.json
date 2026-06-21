@@ -1,0 +1,561 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "rust-start-atlas.png",
+  "source": "assets/references/rust-start-anim.png",
+  "cell": {
+    "w": 512,
+    "h": 320
+  },
+  "default_pivot": {
+    "x": 160,
+    "y": 292
+  },
+  "scale": 0.92,
+  "frames": [
+    {
+      "name": "spawn_00",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 30,
+        "y": 0,
+        "w": 255,
+        "h": 248
+      },
+      "trimmed_bounds": {
+        "x": 92,
+        "y": 83,
+        "w": 134,
+        "h": 213
+      },
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_01",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 330,
+        "y": 0,
+        "w": 255,
+        "h": 248
+      },
+      "trimmed_bounds": {
+        "x": 58,
+        "y": 82,
+        "w": 171,
+        "h": 213
+      },
+      "frame": {
+        "x": 512,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_02",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 615,
+        "y": 0,
+        "w": 285,
+        "h": 248
+      },
+      "trimmed_bounds": {
+        "x": 57,
+        "y": 85,
+        "w": 184,
+        "h": 211
+      },
+      "frame": {
+        "x": 1024,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_03",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 915,
+        "y": 0,
+        "w": 280,
+        "h": 248
+      },
+      "trimmed_bounds": {
+        "x": 44,
+        "y": 82,
+        "w": 167,
+        "h": 214
+      },
+      "frame": {
+        "x": 1536,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_04",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 1210,
+        "y": 0,
+        "w": 358,
+        "h": 248
+      },
+      "trimmed_bounds": {
+        "x": 39,
+        "y": 87,
+        "w": 170,
+        "h": 212
+      },
+      "frame": {
+        "x": 2048,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_05",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 20,
+        "y": 248,
+        "w": 280,
+        "h": 252
+      },
+      "trimmed_bounds": {
+        "x": 72,
+        "y": 84,
+        "w": 182,
+        "h": 207
+      },
+      "frame": {
+        "x": 0,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_06",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 305,
+        "y": 248,
+        "w": 285,
+        "h": 252
+      },
+      "trimmed_bounds": {
+        "x": 65,
+        "y": 85,
+        "w": 210,
+        "h": 206
+      },
+      "frame": {
+        "x": 512,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_07",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 605,
+        "y": 248,
+        "w": 285,
+        "h": 252
+      },
+      "trimmed_bounds": {
+        "x": 48,
+        "y": 84,
+        "w": 209,
+        "h": 207
+      },
+      "frame": {
+        "x": 1024,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_08",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 915,
+        "y": 248,
+        "w": 275,
+        "h": 252
+      },
+      "trimmed_bounds": {
+        "x": 45,
+        "y": 83,
+        "w": 200,
+        "h": 211
+      },
+      "frame": {
+        "x": 1536,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_09",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 1220,
+        "y": 248,
+        "w": 348,
+        "h": 252
+      },
+      "trimmed_bounds": {
+        "x": 45,
+        "y": 83,
+        "w": 190,
+        "h": 211
+      },
+      "frame": {
+        "x": 2048,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_10",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 0,
+        "y": 500,
+        "w": 285,
+        "h": 246
+      },
+      "trimmed_bounds": {
+        "x": 58,
+        "y": 72,
+        "w": 219,
+        "h": 205
+      },
+      "frame": {
+        "x": 0,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_11",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 300,
+        "y": 500,
+        "w": 285,
+        "h": 246
+      },
+      "trimmed_bounds": {
+        "x": 39,
+        "y": 79,
+        "w": 208,
+        "h": 198
+      },
+      "frame": {
+        "x": 512,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_12",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 600,
+        "y": 500,
+        "w": 250,
+        "h": 246
+      },
+      "trimmed_bounds": {
+        "x": 42,
+        "y": 82,
+        "w": 182,
+        "h": 194
+      },
+      "frame": {
+        "x": 1024,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_13",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 900,
+        "y": 500,
+        "w": 210,
+        "h": 246
+      },
+      "trimmed_bounds": {
+        "x": 51,
+        "y": 87,
+        "w": 193,
+        "h": 190
+      },
+      "frame": {
+        "x": 1536,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_14",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 1110,
+        "y": 500,
+        "w": 458,
+        "h": 262
+      },
+      "trimmed_bounds": {
+        "x": 8,
+        "y": 84,
+        "w": 359,
+        "h": 224
+      },
+      "frame": {
+        "x": 2048,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_15",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 300,
+        "y": 748,
+        "w": 295,
+        "h": 255
+      },
+      "trimmed_bounds": {
+        "x": 37,
+        "y": 71,
+        "w": 178,
+        "h": 204
+      },
+      "frame": {
+        "x": 0,
+        "y": 960,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_16",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 600,
+        "y": 748,
+        "w": 300,
+        "h": 255
+      },
+      "trimmed_bounds": {
+        "x": 60,
+        "y": 79,
+        "w": 144,
+        "h": 197
+      },
+      "frame": {
+        "x": 512,
+        "y": 960,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_17",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 900,
+        "y": 748,
+        "w": 300,
+        "h": 255
+      },
+      "trimmed_bounds": {
+        "x": 45,
+        "y": 78,
+        "w": 264,
+        "h": 197
+      },
+      "frame": {
+        "x": 1024,
+        "y": 960,
+        "w": 512,
+        "h": 320
+      }
+    },
+    {
+      "name": "spawn_18",
+      "clip": "spawn",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "source_crop": {
+        "x": 1200,
+        "y": 748,
+        "w": 318,
+        "h": 255
+      },
+      "trimmed_bounds": {
+        "x": 31,
+        "y": 80,
+        "w": 142,
+        "h": 194
+      },
+      "frame": {
+        "x": 1536,
+        "y": 960,
+        "w": 512,
+        "h": 320
+      }
+    }
+  ],
+  "clips": [
+    {
+      "name": "spawn",
+      "loop": false,
+      "frames": [
+        "spawn_00",
+        "spawn_01",
+        "spawn_02",
+        "spawn_03",
+        "spawn_04",
+        "spawn_05",
+        "spawn_06",
+        "spawn_07",
+        "spawn_08",
+        "spawn_09",
+        "spawn_10",
+        "spawn_11",
+        "spawn_12",
+        "spawn_13",
+        "spawn_14",
+        "spawn_15",
+        "spawn_16",
+        "spawn_17",
+        "spawn_18"
+      ]
+    }
+  ],
+  "notes": [
+    "Extracted from an RGB concept/reference sheet; not a final authored sprite export.",
+    "Labels and checkerboard background are intentionally excluded from runtime assets.",
+    "Future artist-authored files should prefer native alpha and Aseprite or TexturePacker metadata."
+  ]
+}

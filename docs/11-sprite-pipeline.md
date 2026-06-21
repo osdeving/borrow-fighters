@@ -17,6 +17,8 @@ Exemplo real:
 
 - `assets/placeholder/rust-fighter.sprite.json`
 - `assets/placeholder/duke-fighter.sprite.json`
+- `assets/placeholder/rust-start.sprite.json`
+- `assets/placeholder/duke-start.sprite.json`
 
 Campos principais:
 
@@ -39,6 +41,7 @@ Campos principais:
 
 ## Clips recomendados
 
+- `spawn`
 - `idle`
 - `walk`
 - `crouch`
@@ -51,6 +54,8 @@ Campos principais:
 - `special`
 
 Clips extras como `taunt`, `victory`, `defeat` e `projectile` podem existir, mas nao devem bloquear o prototipo.
+
+`spawn` e reservado para entrada cinematografica no inicio da luta. Ele deve ser nao-loopavel e nao deve carregar regra de combate; o jogo apenas pausa os inputs ate a intro terminar.
 
 ## Aseprite e ferramentas externas
 
@@ -77,6 +82,12 @@ O Player 2/Duke ja pode usar `assets/placeholder/duke-fighter.sprite.json`.
 
 O runtime tambem usa:
 
+- `spawn` durante a entrada inicial de Rust e Duke;
 - `special` por alguns frames quando o personagem dispara projectile;
 - `taunt` quando o personagem vence a luta;
 - fallback greybox quando um atlas nao carrega.
+
+As animacoes de entrada atuais vivem em manifests separados para nao misturar frames cinematograficos grandes com o atlas principal de luta:
+
+- `assets/placeholder/rust-start-atlas.png`
+- `assets/placeholder/duke-start-atlas.png`

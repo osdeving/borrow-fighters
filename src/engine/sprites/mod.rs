@@ -21,6 +21,8 @@ pub use selection::{
 
 pub const FIGHTER_SPRITESHEET_PATH: &str = "assets/placeholder/fighter-greybox-spritesheet.png";
 pub const RUST_FIGHTER_MANIFEST_PATH: &str = "assets/placeholder/rust-fighter.sprite.json";
+pub const RUST_START_MANIFEST_PATH: &str = "assets/placeholder/rust-start.sprite.json";
 pub const RUST_GEAR_PROJECTILE_PATH: &str = "assets/placeholder/rust-gear-projectile.png";
 pub const DUKE_FIGHTER_MANIFEST_PATH: &str = "assets/placeholder/duke-fighter.sprite.json";
+pub const DUKE_START_MANIFEST_PATH: &str = "assets/placeholder/duke-start.sprite.json";
 pub const DUKE_BEAN_PROJECTILE_PATH: &str = "assets/placeholder/duke-bean-projectile.png";

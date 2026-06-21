@@ -12,6 +12,7 @@ fn idle_fighter_uses_idle_clip() {
     let fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
 
     assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Idle);
+    assert_eq!(FighterSpriteClip::Spawn.as_str(), "spawn");
 }
 
 #[test]

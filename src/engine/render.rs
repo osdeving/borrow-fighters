@@ -55,6 +55,7 @@ pub fn draw_fight(
     draw.clear_background(BACKGROUND);
     draw_arena(draw, assets.arena_background.as_ref());
     let show_debug = flags.enabled(FeatureFlag::ShowCombatDebug);
+    let spawn_intro = world.spawn_intro_active();
 
     draw_projectiles(
         draw,
@@ -69,10 +70,23 @@ pub fn draw_fight(
         FighterDrawOptions {
             body_color: PLAYER_ONE,
             show_debug,
-            sprite_atlas: assets.rust_fighter.as_ref(),
+            sprite_atlas: fighter_atlas_for_intro(
+                spawn_intro,
+                assets.rust_start.as_ref(),
+                assets.rust_fighter.as_ref(),
+            ),
             spritesheet: assets.fighter_spritesheet.as_ref(),
-            world_elapsed_seconds: world.elapsed_seconds,
-            forced_clip: forced_victory_clip(world, PlayerSlot::One),
+            world_elapsed_seconds: fighter_visual_elapsed_seconds(
+                world,
+                spawn_intro,
+                assets.rust_start.is_some(),
+            ),
+            forced_clip: forced_fighter_clip(
+                world,
+                PlayerSlot::One,
+                spawn_intro,
+                assets.rust_start.is_some(),
+            ),
         },
     );
     draw_fighter(
@@ -81,10 +95,23 @@ pub fn draw_fight(
         FighterDrawOptions {
             body_color: PLAYER_TWO,
             show_debug,
-            sprite_atlas: assets.duke_fighter.as_ref(),
+            sprite_atlas: fighter_atlas_for_intro(
+                spawn_intro,
+                assets.duke_start.as_ref(),
+                assets.duke_fighter.as_ref(),
+            ),
             spritesheet: assets.fighter_spritesheet.as_ref(),
-            world_elapsed_seconds: world.elapsed_seconds,
-            forced_clip: forced_victory_clip(world, PlayerSlot::Two),
+            world_elapsed_seconds: fighter_visual_elapsed_seconds(
+                world,
+                spawn_intro,
+                assets.duke_start.is_some(),
+            ),
+            forced_clip: forced_fighter_clip(
+                world,
+                PlayerSlot::Two,
+                spawn_intro,
+                assets.duke_start.is_some(),
+            ),
         },
     );
     if show_debug {
@@ -541,7 +568,36 @@ fn draw_projectiles(
     }
 }
 
-fn forced_victory_clip(world: &World, slot: PlayerSlot) -> Option<sprites::FighterSpriteClip> {
+fn fighter_atlas_for_intro<'a>(
+    spawn_intro: bool,
+    start_atlas: Option<&'a SpriteAtlasAsset>,
+    fight_atlas: Option<&'a SpriteAtlasAsset>,
+) -> Option<&'a SpriteAtlasAsset> {
+    if spawn_intro {
+        start_atlas.or(fight_atlas)
+    } else {
+        fight_atlas
+    }
+}
+
+fn fighter_visual_elapsed_seconds(world: &World, spawn_intro: bool, has_start_atlas: bool) -> f32 {
+    if spawn_intro && has_start_atlas {
+        world.spawn_intro_elapsed_seconds()
+    } else {
+        world.elapsed_seconds
+    }
+}
+
+fn forced_fighter_clip(
+    world: &World,
+    slot: PlayerSlot,
+    spawn_intro: bool,
+    has_start_atlas: bool,
+) -> Option<sprites::FighterSpriteClip> {
+    if spawn_intro && has_start_atlas {
+        return Some(sprites::FighterSpriteClip::Spawn);
+    }
+
     matches!(world.outcome, Some(MatchOutcome::Winner(winner)) if winner == slot)
         .then_some(sprites::FighterSpriteClip::Taunt)
 }

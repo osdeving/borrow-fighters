@@ -13,6 +13,7 @@ use crate::math::vec2::Vec2;
 
 const HIT_EFFECT_LIFETIME: f32 = 0.35;
 const BODY_COLLISION_EFFECT_LIFETIME: f32 = 0.12;
+pub const SPAWN_INTRO_DURATION_SECONDS: f32 = 1.8;
 pub const MIN_BODY_GAP: f32 = 8.0;
 
 /// Final result of a greybox match.
@@ -41,6 +42,7 @@ pub struct World {
     pub projectiles: Vec<Projectile>,
     pub body_collision_timer: f32,
     pub elapsed_seconds: f32,
+    spawn_intro_timer: f32,
 }
 
 impl World {
@@ -54,9 +56,27 @@ impl World {
             projectiles: Vec::new(),
             body_collision_timer: 0.0,
             elapsed_seconds: 0.0,
+            spawn_intro_timer: 0.0,
         };
         world.update_facing();
         world
+    }
+
+    /// Creates a greybox fight that starts with the cinematic spawn clips.
+    pub fn new_greybox_with_intro() -> Self {
+        let mut world = Self::new_greybox();
+        world.spawn_intro_timer = SPAWN_INTRO_DURATION_SECONDS;
+        world
+    }
+
+    /// Returns whether the non-interactive spawn animation is still active.
+    pub fn spawn_intro_active(&self) -> bool {
+        self.spawn_intro_timer > 0.0
+    }
+
+    /// Returns elapsed time inside the current spawn intro.
+    pub fn spawn_intro_elapsed_seconds(&self) -> f32 {
+        (SPAWN_INTRO_DURATION_SECONDS - self.spawn_intro_timer).max(0.0)
     }
 
     /// Advances one fixed gameplay step.
@@ -80,6 +100,11 @@ impl World {
         }
 
         self.update_facing();
+        if self.spawn_intro_active() {
+            self.spawn_intro_timer = (self.spawn_intro_timer - dt).max(0.0);
+            return;
+        }
+
         self.player_one.update(dt, player_one);
         self.player_two.update(dt, player_two);
         self.spawn_projectiles(player_one, player_two);

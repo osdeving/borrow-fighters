@@ -1,8 +1,8 @@
 //! Validates runtime sprite manifest loading without opening a window.
 
 use borrow_fighters::engine::sprites::{
-    DUKE_FIGHTER_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH, SPRITE_SCHEMA, SpriteManifest,
-    frame_for_clip_at,
+    DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH,
+    RUST_START_MANIFEST_PATH, SPRITE_SCHEMA, SpriteManifest, frame_for_clip_at,
 };
 
 #[test]
@@ -27,6 +27,34 @@ fn duke_fighter_manifest_loads() {
     assert_eq!(manifest.cell.w, 384);
     assert!(manifest.clip_named("special").is_some());
     assert!(manifest.clip_named("taunt").is_some());
+}
+
+#[test]
+fn rust_start_manifest_loads_spawn_clip() {
+    let manifest = SpriteManifest::load(RUST_START_MANIFEST_PATH).expect("manifest should load");
+    let spawn = manifest
+        .clip_named("spawn")
+        .expect("spawn clip should exist");
+
+    assert_eq!(manifest.image, "rust-start-atlas.png");
+    assert_eq!(manifest.frames.len(), 19);
+    assert!(!spawn.r#loop);
+    assert_eq!(spawn.frames.first().map(String::as_str), Some("spawn_00"));
+    assert_eq!(spawn.frames.last().map(String::as_str), Some("spawn_18"));
+}
+
+#[test]
+fn duke_start_manifest_loads_spawn_clip() {
+    let manifest = SpriteManifest::load(DUKE_START_MANIFEST_PATH).expect("manifest should load");
+    let spawn = manifest
+        .clip_named("spawn")
+        .expect("spawn clip should exist");
+
+    assert_eq!(manifest.image, "duke-start-atlas.png");
+    assert_eq!(manifest.frames.len(), 18);
+    assert!(!spawn.r#loop);
+    assert_eq!(spawn.frames.first().map(String::as_str), Some("spawn_00"));
+    assert_eq!(spawn.frames.last().map(String::as_str), Some("spawn_17"));
 }
 
 #[test]
