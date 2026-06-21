@@ -28,6 +28,7 @@ borrow-fighters/
 │   ├── main.rs                 # Binário fino: inicializa janela, cria App e roda loop
 │   ├── lib.rs                  # Módulos testáveis e API interna do jogo
 │   ├── app.rs                  # Orquestra estado global, loop e transições de alto nível
+│   ├── cli.rs                  # Parser pequeno de argumentos de inicialização
 │   ├── config.rs               # Constantes de janela, arena, escala e timestep
 │   ├── game/
 │   │   ├── mod.rs              # Estado de partida e regras de fluxo
@@ -40,6 +41,8 @@ borrow-fighters/
 │   │   ├── gamepad.rs          # Mapeamento básico de gamepad
 │   │   ├── input.rs            # Raylib keyboard/gamepad -> comandos do jogo
 │   │   ├── render.rs           # Desenho de arena, HUD, debug, menu e lutadores
+│   │   ├── render/
+│   │   │   └── combat_lab.rs   # Desenho da cena isolada de Combat Lab
 │   │   └── sprites/
 │   │       ├── animation.rs    # Seleção de frame por duração
 │   │       ├── draw.rs         # Desenho de atlas com pivot
@@ -49,6 +52,7 @@ borrow-fighters/
 │   ├── combat/
 │   │   ├── mod.rs              # Contratos do sistema de combate
 │   │   ├── fighter.rs          # Estado comum de lutador
+│   │   ├── frame.rs            # Timing de combate em frames inteiros
 │   │   ├── collision.rs        # Resolução hitbox x hurtbox
 │   │   ├── move_set.rs         # Dados de golpes e tempos
 │   │   └── projectile.rs       # Estado de projéteis
@@ -56,6 +60,7 @@ borrow-fighters/
 │   │   └── .gitkeep            # Reservado para dados futuros de personagem
 │   ├── scenes/
 │   │   ├── mod.rs              # Estados de tela
+│   │   ├── combat_lab.rs       # Laboratório isolado para timing e boxes
 │   │   └── preferences.rs      # Cursor e navegação da tela de ajustes
 │   ├── ui/
 │   │   └── .gitkeep            # Reservado para componentes futuros de UI
@@ -64,6 +69,9 @@ borrow-fighters/
 │       ├── rect.rs             # Retângulos de colisão/hitbox
 │       └── vec2.rs             # Vetores 2D se Raylib Vector2 não bastar
 └── tests/
+    ├── cli.rs                  # Contrato de argumentos de inicialização
+    ├── combat_lab.rs           # Estado testável do Combat Lab
+    ├── attack_frame_data.rs    # Timing de golpes em frames
     ├── combat_rules.rs         # Regras puras de combate e IA
     ├── feature_flags.rs        # Contrato de flags runtime
     ├── sprite_manifest.rs      # Validação do formato JSON de sprites

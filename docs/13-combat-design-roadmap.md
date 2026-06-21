@@ -4,7 +4,7 @@
 
 Em implementação.
 
-Fase 1 concluída na branch `gameplay/combat-improvement-plan`: golpes atuais e projectile já possuem frame data inteira, testes e overlay de debug para leitura de fase/frame.
+Fases 1 e 2 concluídas na branch `gameplay/combat-improvement-plan`: golpes atuais e projectile já possuem frame data inteira, e o Combat Lab mínimo abre por CLI para inspecionar golpe, pivot, hurtbox, hitbox e projectile sem iniciar uma luta real.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -348,18 +348,21 @@ Critério de aceite:
 
 ### Fase 2 — Combat Lab
 
+Status: **concluída em corte mínimo**.
+
 Entregáveis:
 
-- CLI flag `--lab combat`;
-- cena limpa sem fundo artístico;
-- um personagem isolado;
-- seleção de golpe;
-- pause, replay e frame step;
-- pivot, hurtbox e hitbox desenhados.
+- [x] CLI flag `--lab combat`;
+- [x] cena limpa sem fundo artístico;
+- [x] um personagem isolado;
+- [x] seleção de golpe;
+- [x] pause, replay e frame step;
+- [x] pivot, hurtbox e hitbox desenhados.
 
 Critério de aceite:
 
 - conseguimos alinhar mão/pé/projectile sem iniciar uma luta real.
+- Comando atual: `cargo run -- --lab combat --character rust --move light_punch`.
 
 ### Fase 3 — MoveSpec e CharacterSpec
 
@@ -416,10 +419,10 @@ Critério de aceite:
 
 ## Backlog técnico imediato
 
-1. Criar Combat Lab mínimo.
-2. Extrair dados de golpes atuais para tabela.
-3. Criar ADR ou atualizar ADR 0003 quando `MoveSpec`/`CharacterSpec` virarem arquitetura aceita.
-4. Separar o overlay de combate para `src/ui/combat_debug.rs` se o Combat Lab aumentar a responsabilidade do renderer.
+1. Extrair dados de golpes atuais para tabela.
+2. Criar ADR ou atualizar ADR 0003 quando `MoveSpec`/`CharacterSpec` virarem arquitetura aceita.
+3. Separar o overlay de combate para `src/ui/combat_debug.rs` se o Combat Lab aumentar a responsabilidade do renderer.
+4. Adicionar estados de pose no Combat Lab: idle, crouch, jump, block, hit e victory.
 5. Só depois criar golpes novos.
 
 ## Decisões pendentes

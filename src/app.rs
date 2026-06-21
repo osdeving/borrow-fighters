@@ -5,6 +5,7 @@
 
 use raylib::prelude::*;
 
+use crate::cli::{LaunchMode, LaunchOptions};
 use crate::combat::fighter::{FighterInput, PlayerSlot};
 use crate::config::{FIXED_TIMESTEP, MAX_FIXED_STEPS_PER_FRAME, MAX_FRAME_TIME, TARGET_FPS};
 use crate::engine::{
@@ -17,6 +18,7 @@ use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
 use crate::game::world::World;
 use crate::scenes::{
     AppScene,
+    combat_lab::{CombatLab, CombatLabInput},
     preferences::{PreferencesAction, PreferencesMenu},
 };
 
@@ -28,24 +30,36 @@ pub struct App {
     feature_flags: FeatureFlags,
     scene: AppScene,
     preferences_menu: PreferencesMenu,
+    combat_lab: CombatLab,
     accumulator: f32,
 }
 
 impl Default for App {
     fn default() -> Self {
+        Self::new(LaunchOptions::default())
+    }
+}
+
+impl App {
+    /// Creates app state for the selected startup mode.
+    pub fn new(options: LaunchOptions) -> Self {
+        let (scene, combat_lab) = match options.mode {
+            LaunchMode::Game => (AppScene::Preferences, CombatLab::default()),
+            LaunchMode::CombatLab(options) => (AppScene::CombatLab, CombatLab::new(options)),
+        };
+
         Self {
             world: World::new_greybox_with_intro(),
             player_one_cpu: BasicCpu::for_slot(PlayerSlot::One),
             player_two_cpu: BasicCpu::for_slot(PlayerSlot::Two),
             feature_flags: FeatureFlags::default(),
-            scene: AppScene::Preferences,
+            scene,
             preferences_menu: PreferencesMenu::default(),
+            combat_lab,
             accumulator: 0.0,
         }
     }
-}
 
-impl App {
     /// Runs the Raylib-backed game loop until the window closes.
     pub fn run(mut self, raylib: &mut RaylibHandle, thread: &RaylibThread) {
         raylib.set_target_fps(TARGET_FPS);
@@ -60,6 +74,17 @@ impl App {
                 player_one: input.player_one_gamepad_connected,
                 player_two: input.player_two_gamepad_connected,
             };
+
+            if self.scene == AppScene::CombatLab {
+                self.update_combat_lab(
+                    raylib.get_frame_time().min(MAX_FRAME_TIME),
+                    input.combat_lab,
+                );
+
+                let mut draw = raylib.begin_drawing(thread);
+                render::draw_combat_lab(&mut draw, &self.combat_lab, &assets);
+                continue;
+            }
 
             if self.scene == AppScene::Preferences {
                 if self
@@ -161,6 +186,26 @@ impl App {
         self.player_one_cpu = BasicCpu::for_slot(PlayerSlot::One);
         self.player_two_cpu = BasicCpu::for_slot(PlayerSlot::Two);
         self.accumulator = 0.0;
+    }
+
+    fn update_combat_lab(&mut self, frame_time: f32, input: CombatLabInput) {
+        self.accumulator += frame_time;
+        let mut fixed_steps = 0;
+
+        while self.accumulator >= FIXED_TIMESTEP && fixed_steps < MAX_FIXED_STEPS_PER_FRAME {
+            let lab_input = if fixed_steps == 0 {
+                input
+            } else {
+                CombatLabInput::default()
+            };
+            self.combat_lab.update(lab_input);
+            self.accumulator -= FIXED_TIMESTEP;
+            fixed_steps += 1;
+        }
+
+        if fixed_steps == MAX_FIXED_STEPS_PER_FRAME {
+            self.accumulator = 0.0;
+        }
     }
 }
 

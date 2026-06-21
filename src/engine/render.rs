@@ -5,6 +5,10 @@
 
 use raylib::prelude::*;
 
+mod combat_lab;
+
+pub use combat_lab::draw_combat_lab;
+
 use crate::combat::fighter::{AttackPhase, Facing, PlayerSlot};
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
 use crate::engine::assets::{GameAssets, SpriteAtlasAsset};

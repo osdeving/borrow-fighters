@@ -36,6 +36,7 @@
 |---|---|
 | `src/main.rs` | Thin executable entrypoint |
 | `src/lib.rs` | Testable internal game modules |
+| `src/cli.rs` | Startup argument parser, including Combat Lab mode |
 | `src/engine/` | Raylib adapters and platform boundary |
 | `src/engine/sprites/` | Sprite manifest loading, animation and drawing |
 | `src/game/` | Match state and world flow |
@@ -43,7 +44,7 @@
 | `src/game/feature_flags.rs` | Runtime feature flags and preference menu data |
 | `src/combat/` | Hitbox, hurtbox, damage and fighter rules |
 | `src/characters/` | Reserved for future character-specific data/logic |
-| `src/scenes/` | Preference scene state now, future screen flow later |
+| `src/scenes/` | Preference screen and isolated Combat Lab scene state |
 | `src/ui/` | Reserved for future UI components |
 | `src/math/` | Small geometry helpers |
 | `tests/` | Integration tests for combat, flags and sprites |

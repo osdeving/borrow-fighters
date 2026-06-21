@@ -144,6 +144,38 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 20. A vida deve chegar a zero e encerrar a luta.
 21. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
 
+## Combat Lab
+
+Para testar um golpe sem iniciar a luta completa:
+
+```bash
+cargo run -- --lab combat --character rust --move light_punch
+cargo run -- --lab combat --character duke --move projectile
+```
+
+Use o Combat Lab para verificar:
+
+- pivot e linha do chão;
+- hurtbox do personagem;
+- hitbox ativa e inativa;
+- frame atual, fase e janela ativa do golpe;
+- spawn, altura e trajetória inicial do projectile.
+
+Controles do lab:
+
+| Ação | Tecla |
+|---|---|
+| Próximo golpe | `Tab` |
+| Golpe anterior | `Shift+Tab` |
+| Repetir golpe | `Enter` |
+| Pausar/continuar | `Espaço` |
+| Avançar 1 frame | `.` |
+| Voltar ao frame 0 | `Home` |
+| Alternar hurtbox | `H` |
+| Alternar hitbox | `B` |
+| Alternar pivot/eixos | `P` |
+| Alternar dummy | `D` |
+
 ## Limitações conhecidas
 
 - Os dois personagens ainda compartilham o mesmo kit de golpes.

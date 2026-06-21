@@ -120,6 +120,15 @@ cargo run
 
 O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navegar, `Espaço` para ligar/desligar uma opção e `Enter` para começar ou voltar para a luta. Durante a luta, `Esc` volta para essa tela.
 
+Para abrir o laboratório de combate direto em uma cena limpa:
+
+```bash
+cargo run -- --lab combat --character rust --move light_punch
+cargo run -- --lab combat --character duke --move projectile
+```
+
+No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `Enter` para repetir, `Espaço` para pausar, `.` para avançar 1 frame quando pausado, `Home` para voltar ao frame 0, `H` para hurtbox, `B` para hitbox, `P` para pivot/eixos e `D` para dummy. Valores aceitos em `--character`: `rust`, `duke` ou `java`. Valores aceitos em `--move`: `light_punch`, `heavy_punch`, `kick` e `projectile`.
+
 Preferências disponíveis:
 
 | Preferência | Padrão | Efeito |
