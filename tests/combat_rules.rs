@@ -2,11 +2,13 @@
 
 use borrow_fighters::characters::{CharacterId, character_spec};
 use borrow_fighters::combat::fighter::{
-    AttackKind, Fighter, FighterInput, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, PlayerSlot,
+    AttackKind, Fighter, FighterInput, GuardRule, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, PlayerSlot,
     RUST_BORROW_JAB_DAMAGE,
 };
-use borrow_fighters::combat::move_data::MoveId;
-use borrow_fighters::combat::projectile::{PROJECTILE_DAMAGE, PROJECTILE_SPEED};
+use borrow_fighters::combat::move_data::{LIGHT_ATTACK_REACTION, MoveId};
+use borrow_fighters::combat::projectile::{
+    PROJECTILE_DAMAGE, PROJECTILE_GUARD_RULE, PROJECTILE_HIT_REACTION, PROJECTILE_SPEED,
+};
 use borrow_fighters::game::ai::BasicCpu;
 use borrow_fighters::game::feature_flags::{FeatureFlag, FeatureFlags};
 use borrow_fighters::game::world::{
@@ -148,6 +150,124 @@ fn block_reduces_incoming_damage() {
     );
     assert_eq!(world.hit_effects.len(), 1);
     assert!(world.hit_effects[0].blocked);
+}
+
+#[test]
+fn guard_rule_controls_blockability_and_reaction() {
+    let mut defender = Fighter::new(PlayerSlot::Two, "Guard", 500.0);
+    defender.update(
+        DT,
+        FighterInput {
+            block: true,
+            ..FighterInput::default()
+        },
+    );
+
+    let blocked = defender.take_hit(20, GuardRule::Mid, LIGHT_ATTACK_REACTION);
+    assert_eq!(blocked.damage, 5);
+    assert!(blocked.blocked);
+    assert!(defender.in_blockstun());
+    assert!(!defender.in_hitstun());
+
+    let mut defender = Fighter::new(PlayerSlot::Two, "Throw Target", 500.0);
+    defender.update(
+        DT,
+        FighterInput {
+            block: true,
+            crouch: true,
+            ..FighterInput::default()
+        },
+    );
+
+    let thrown = defender.take_hit(20, GuardRule::Throw, LIGHT_ATTACK_REACTION);
+    assert_eq!(thrown.damage, 20);
+    assert!(!thrown.blocked);
+    assert!(defender.in_hitstun());
+}
+
+#[test]
+fn hitstun_and_blockstun_lock_out_actions_temporarily() {
+    let mut hit = Fighter::new(PlayerSlot::Two, "Hit", 500.0);
+    hit.take_hit(10, GuardRule::Mid, LIGHT_ATTACK_REACTION);
+    assert!(hit.in_hitstun());
+    assert_eq!(
+        hit.hitstun_remaining_frames(),
+        LIGHT_ATTACK_REACTION.hitstun
+    );
+
+    hit.update(
+        DT,
+        FighterInput {
+            heavy_punch: true,
+            projectile: true,
+            right: true,
+            ..FighterInput::default()
+        },
+    );
+
+    assert_eq!(hit.attack_kind(), None);
+    assert!(!hit.can_fire_projectile());
+    assert!(hit.velocity.x.abs() < 0.01);
+
+    for _ in 0..LIGHT_ATTACK_REACTION.hitstun.get() {
+        hit.update(DT, FighterInput::default());
+    }
+
+    assert!(!hit.in_hitstun());
+    hit.update(
+        DT,
+        FighterInput {
+            heavy_punch: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(hit.attack_kind(), Some(AttackKind::HeavyPunch));
+
+    let mut blocked = Fighter::new(PlayerSlot::Two, "Block", 500.0);
+    blocked.update(
+        DT,
+        FighterInput {
+            block: true,
+            ..FighterInput::default()
+        },
+    );
+    blocked.take_hit(10, GuardRule::Mid, LIGHT_ATTACK_REACTION);
+
+    assert!(blocked.in_blockstun());
+    assert!(blocked.blocking);
+    blocked.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(blocked.attack_kind(), None);
+}
+
+#[test]
+fn projectile_guard_rule_blocks_like_a_projectile() {
+    let mut defender = Fighter::new(PlayerSlot::Two, "Projectile Target", 500.0);
+    defender.update(
+        DT,
+        FighterInput {
+            block: true,
+            ..FighterInput::default()
+        },
+    );
+
+    let result = defender.take_hit(
+        PROJECTILE_DAMAGE,
+        PROJECTILE_GUARD_RULE,
+        PROJECTILE_HIT_REACTION,
+    );
+
+    assert!(result.blocked);
+    assert_eq!(result.damage, PROJECTILE_DAMAGE / 4);
+    assert_eq!(
+        defender.blockstun_remaining_frames(),
+        PROJECTILE_HIT_REACTION.blockstun
+    );
 }
 
 #[test]

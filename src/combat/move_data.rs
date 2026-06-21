@@ -13,6 +13,18 @@ pub const HEAVY_PUNCH_DAMAGE: i32 = 16;
 pub const KICK_DAMAGE: i32 = 12;
 pub const RUST_BORROW_JAB_DAMAGE: i32 = 7;
 pub const DUKE_BOILERPLATE_POKE_DAMAGE: i32 = 18;
+pub const LIGHT_ATTACK_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(12),
+    blockstun: FrameCount::new(8),
+};
+pub const HEAVY_ATTACK_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(18),
+    blockstun: FrameCount::new(12),
+};
+pub const KICK_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(16),
+    blockstun: FrameCount::new(10),
+};
 
 /// Stable identifier for a close-range move.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -48,6 +60,38 @@ pub enum MoveInputKind {
     Kick,
 }
 
+/// How an incoming hit can be guarded.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum GuardRule {
+    High,
+    Mid,
+    Low,
+    Throw,
+    Projectile,
+}
+
+impl GuardRule {
+    /// Returns whether this rule is blocked by the current defensive stance.
+    pub const fn is_blocked_by(self, blocking: bool, crouching: bool) -> bool {
+        if !blocking {
+            return false;
+        }
+
+        match self {
+            Self::High | Self::Mid | Self::Projectile => true,
+            Self::Low => crouching,
+            Self::Throw => false,
+        }
+    }
+}
+
+/// Initial reaction frame counts applied on hit or block.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct HitReaction {
+    pub hitstun: FrameCount,
+    pub blockstun: FrameCount,
+}
+
 /// Whole-frame timing data for one close-range attack.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct AttackFrameData {
@@ -73,6 +117,8 @@ pub struct MoveSpec {
     pub frames: AttackFrameData,
     pub hitbox: HitboxSpec,
     pub damage: i32,
+    pub guard_rule: GuardRule,
+    pub hit_reaction: HitReaction,
 }
 
 /// Prototype 0.1 close-range move table.
@@ -92,6 +138,8 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 5] = [
             y_offset: 62.0,
         },
         damage: LIGHT_PUNCH_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: LIGHT_ATTACK_REACTION,
     },
     MoveSpec {
         id: MoveId::HeavyPunch,
@@ -108,6 +156,8 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 5] = [
             y_offset: 58.0,
         },
         damage: HEAVY_PUNCH_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: HEAVY_ATTACK_REACTION,
     },
     MoveSpec {
         id: MoveId::Kick,
@@ -124,6 +174,8 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 5] = [
             y_offset: 108.0,
         },
         damage: KICK_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: KICK_REACTION,
     },
     MoveSpec {
         id: MoveId::RustBorrowJab,
@@ -140,6 +192,8 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 5] = [
             y_offset: 62.0,
         },
         damage: RUST_BORROW_JAB_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: LIGHT_ATTACK_REACTION,
     },
     MoveSpec {
         id: MoveId::DukeBoilerplatePoke,
@@ -156,6 +210,8 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 5] = [
             y_offset: 60.0,
         },
         damage: DUKE_BOILERPLATE_POKE_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: HEAVY_ATTACK_REACTION,
     },
 ];
 

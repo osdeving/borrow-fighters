@@ -72,6 +72,10 @@ impl FighterSpriteFrame {
 
 /// Returns the sprite clip matching the current fighter state.
 pub fn fighter_sprite_clip(fighter: &Fighter) -> FighterSpriteClip {
+    if fighter.in_hitstun() {
+        return FighterSpriteClip::Hit;
+    }
+
     if fighter.blocking {
         return FighterSpriteClip::Block;
     }
@@ -101,6 +105,10 @@ pub fn fighter_sprite_clip(fighter: &Fighter) -> FighterSpriteClip {
 
 /// Returns elapsed clip time for the fighter's current visual state.
 pub fn fighter_clip_elapsed_seconds(fighter: &Fighter, world_elapsed_seconds: f32) -> f32 {
+    if fighter.in_hitstun() || fighter.in_blockstun() {
+        return 0.0;
+    }
+
     if let Some(elapsed) = fighter.special_elapsed_seconds() {
         return elapsed;
     }

@@ -13,8 +13,9 @@ use super::frame::FrameCount;
 use super::projectile::{PROJECTILE_FRAME_DATA, ProjectileFrameData};
 pub use crate::combat::move_set::{
     ActiveAttack, AttackFrameData, AttackKind, DEFAULT_CLOSE_RANGE_MOVE_IDS,
-    DUKE_BOILERPLATE_POKE_DAMAGE, HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE, MoveId,
-    MoveInputKind, MoveSpec, RUST_BORROW_JAB_DAMAGE, move_spec_for_input,
+    DUKE_BOILERPLATE_POKE_DAMAGE, GuardRule, HEAVY_PUNCH_DAMAGE, HitReaction, KICK_DAMAGE,
+    LIGHT_PUNCH_DAMAGE, MoveId, MoveInputKind, MoveSpec, RUST_BORROW_JAB_DAMAGE,
+    move_spec_for_input,
 };
 
 const WIDTH: f32 = 76.0;
@@ -103,6 +104,8 @@ pub struct Fighter {
     pub blocking: bool,
     projectile_cooldown: f32,
     special_visual_timer: f32,
+    hitstun_timer: f32,
+    blockstun_timer: f32,
     attack: Option<AttackState>,
 }
 
@@ -152,6 +155,8 @@ impl Fighter {
             blocking: false,
             projectile_cooldown: 0.0,
             special_visual_timer: 0.0,
+            hitstun_timer: 0.0,
+            blockstun_timer: 0.0,
             attack: None,
         }
     }
@@ -162,17 +167,24 @@ impl Fighter {
             self.velocity = Vec2::ZERO;
             self.crouching = false;
             self.blocking = false;
+            self.hitstun_timer = 0.0;
+            self.blockstun_timer = 0.0;
             self.special_visual_timer = 0.0;
             return;
         }
 
         self.projectile_cooldown = tick_timer(self.projectile_cooldown, dt);
         self.special_visual_timer = tick_timer(self.special_visual_timer, dt);
-        self.crouching = input.crouch && self.grounded && self.attack.is_none();
-        self.blocking = input.block && self.grounded && self.attack.is_none();
+        self.hitstun_timer = tick_timer(self.hitstun_timer, dt);
+        self.blockstun_timer = tick_timer(self.blockstun_timer, dt);
+
+        let reacting = self.is_reacting();
+        self.crouching = !reacting && input.crouch && self.grounded && self.attack.is_none();
+        self.blocking = self.in_blockstun()
+            || (!reacting && input.block && self.grounded && self.attack.is_none());
         self.update_horizontal_velocity(dt, input);
 
-        let can_start_action = !self.crouching && !self.blocking;
+        let can_start_action = !reacting && !self.crouching && !self.blocking;
         if input.jump && self.grounded && can_start_action {
             self.velocity.y = JUMP_SPEED;
             self.grounded = false;
@@ -232,15 +244,22 @@ impl Fighter {
         self.health = (self.health - damage).max(0);
     }
 
-    /// Applies incoming damage with the current block state.
-    pub fn take_hit(&mut self, damage: i32) -> DamageResult {
-        let blocked = self.blocking && !self.is_defeated();
+    /// Applies incoming damage and reaction using the given guard rule.
+    pub fn take_hit(
+        &mut self,
+        damage: i32,
+        guard_rule: GuardRule,
+        hit_reaction: HitReaction,
+    ) -> DamageResult {
+        let blocked =
+            !self.is_defeated() && guard_rule.is_blocked_by(self.blocking, self.crouching);
         let final_damage = if blocked {
             (damage / BLOCK_DAMAGE_DIVISOR).max(1)
         } else {
             damage
         };
         self.take_damage(final_damage);
+        self.apply_hit_reaction(hit_reaction, blocked);
 
         DamageResult {
             damage: final_damage,
@@ -254,6 +273,7 @@ impl Fighter {
             && self.grounded
             && !self.crouching
             && !self.blocking
+            && !self.is_reacting()
             && self.attack.is_none()
             && self.projectile_cooldown <= 0.0
     }
@@ -334,6 +354,8 @@ impl Fighter {
                 kind: attack.kind(),
                 hitbox: self.attack_box_for(attack.spec),
                 damage: attack.spec.damage,
+                guard_rule: attack.spec.guard_rule,
+                hit_reaction: attack.spec.hit_reaction,
             })
         })
     }
@@ -396,6 +418,26 @@ impl Fighter {
         FrameCount::from_elapsed_seconds(self.projectile_cooldown)
     }
 
+    /// Returns remaining hitstun in whole frames.
+    pub fn hitstun_remaining_frames(&self) -> FrameCount {
+        FrameCount::from_elapsed_seconds(self.hitstun_timer)
+    }
+
+    /// Returns remaining blockstun in whole frames.
+    pub fn blockstun_remaining_frames(&self) -> FrameCount {
+        FrameCount::from_elapsed_seconds(self.blockstun_timer)
+    }
+
+    /// Returns whether the fighter is currently locked by hitstun.
+    pub fn in_hitstun(&self) -> bool {
+        self.hitstun_timer > 0.0
+    }
+
+    /// Returns whether the fighter is currently locked by blockstun.
+    pub fn in_blockstun(&self) -> bool {
+        self.blockstun_timer > 0.0
+    }
+
     /// Returns the current attack phase for debug rendering.
     pub fn attack_phase(&self) -> AttackPhase {
         self.attack.map_or(AttackPhase::Idle, AttackState::phase)
@@ -419,7 +461,7 @@ impl Fighter {
     }
 
     fn update_horizontal_velocity(&mut self, dt: f32, input: FighterInput) {
-        let axis = if self.crouching || self.blocking {
+        let axis = if self.crouching || self.blocking || self.is_reacting() {
             0.0
         } else {
             input.horizontal_axis()
@@ -476,6 +518,23 @@ impl Fighter {
         } else {
             STANDING_HEIGHT
         }
+    }
+
+    fn apply_hit_reaction(&mut self, hit_reaction: HitReaction, blocked: bool) {
+        self.velocity.x = 0.0;
+        if blocked {
+            self.blocking = true;
+            self.blockstun_timer = hit_reaction.blockstun.as_seconds();
+            return;
+        }
+
+        self.attack = None;
+        self.blocking = false;
+        self.hitstun_timer = hit_reaction.hitstun.as_seconds();
+    }
+
+    fn is_reacting(&self) -> bool {
+        self.in_hitstun() || self.in_blockstun()
     }
 }
 

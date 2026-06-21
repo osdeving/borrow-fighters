@@ -395,6 +395,17 @@ fn draw_fighter(
     let label_y = (fighter.position.y - 22.0) as i32;
     draw.draw_text(fighter.name, label_x, label_y, 16, UI_TEXT);
 
+    if options.show_debug && fighter.in_hitstun() {
+        let stun_text = format!("HITSTUN {:02}", fighter.hitstun_remaining_frames().get());
+        draw.draw_text(&stun_text, label_x, label_y - 24, 14, HITSPARK);
+    } else if options.show_debug && fighter.in_blockstun() {
+        let stun_text = format!(
+            "BLOCKSTUN {:02}",
+            fighter.blockstun_remaining_frames().get()
+        );
+        draw.draw_text(&stun_text, label_x, label_y - 24, 14, GUARD);
+    }
+
     if options.show_debug
         && let Some(elapsed) = fighter.special_elapsed_frames()
     {

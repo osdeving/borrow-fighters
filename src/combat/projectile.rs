@@ -6,7 +6,7 @@
 //! Projectiles are domain data, not render objects, so their collisions can be
 //! tested without opening a Raylib window.
 
-use crate::combat::fighter::{Facing, Fighter, PlayerSlot};
+use crate::combat::fighter::{Facing, Fighter, GuardRule, HitReaction, PlayerSlot};
 use crate::math::{rect::Rect, vec2::Vec2};
 
 use super::frame::FrameCount;
@@ -17,6 +17,11 @@ const FRONT_SPAWN_OFFSET: f32 = 66.0;
 const CENTER_Y_FROM_BODY_BOTTOM: f32 = 88.0;
 pub const PROJECTILE_SPEED: f32 = 340.0;
 pub const PROJECTILE_DAMAGE: i32 = 8;
+pub const PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(16),
+    blockstun: FrameCount::new(12),
+};
+pub const PROJECTILE_GUARD_RULE: GuardRule = GuardRule::Projectile;
 
 /// Whole-frame timing data for the current projectile special.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -45,6 +50,8 @@ pub struct Projectile {
     pub position: Vec2,
     pub velocity: Vec2,
     pub damage: i32,
+    pub guard_rule: GuardRule,
+    pub hit_reaction: HitReaction,
     pub alive: bool,
 }
 
@@ -68,6 +75,8 @@ impl Projectile {
             position: Vec2::new(x, center_y - HEIGHT * 0.5),
             velocity: Vec2::new(direction * PROJECTILE_SPEED, 0.0),
             damage: PROJECTILE_DAMAGE,
+            guard_rule: PROJECTILE_GUARD_RULE,
+            hit_reaction: PROJECTILE_HIT_REACTION,
             alive: true,
         }
     }

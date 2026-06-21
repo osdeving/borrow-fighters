@@ -8,7 +8,9 @@
 
 use crate::characters::{CharacterId, character_spec};
 use crate::combat::collision::hitbox_hits_hurtbox;
-use crate::combat::fighter::{ActiveAttack, DamageResult, Fighter, FighterInput, PlayerSlot};
+use crate::combat::fighter::{
+    ActiveAttack, DamageResult, Fighter, FighterInput, GuardRule, HitReaction, PlayerSlot,
+};
 use crate::combat::projectile::Projectile;
 use crate::config::{ARENA_LEFT, ARENA_RIGHT};
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
@@ -225,7 +227,13 @@ impl World {
         let p2_attack = landed_attack(&self.player_two, &self.player_one);
 
         if let Some(attack) = p1_attack {
-            let result = take_player_two_hit(&mut self.player_two, attack.damage, flags);
+            let result = take_player_two_hit(
+                &mut self.player_two,
+                attack.damage,
+                attack.guard_rule,
+                attack.hit_reaction,
+                flags,
+            );
             self.player_one.mark_attack_hit();
             self.hit_effects.push(HitEffect::new(
                 self.player_two.hurtbox().center(),
@@ -235,7 +243,13 @@ impl World {
         }
 
         if let Some(attack) = p2_attack {
-            let result = take_player_one_hit(&mut self.player_one, attack.damage, flags);
+            let result = take_player_one_hit(
+                &mut self.player_one,
+                attack.damage,
+                attack.guard_rule,
+                attack.hit_reaction,
+                flags,
+            );
             self.player_two.mark_attack_hit();
             self.hit_effects.push(HitEffect::new(
                 self.player_one.hurtbox().center(),
@@ -280,8 +294,13 @@ impl World {
             let rect = projectile.rect();
             match projectile.owner {
                 PlayerSlot::One if projectile_hits_fighter(rect, &self.player_two) => {
-                    let result =
-                        take_player_two_hit(&mut self.player_two, projectile.damage, flags);
+                    let result = take_player_two_hit(
+                        &mut self.player_two,
+                        projectile.damage,
+                        projectile.guard_rule,
+                        projectile.hit_reaction,
+                        flags,
+                    );
                     projectile.alive = false;
                     self.hit_effects.push(HitEffect::new(
                         self.player_two.hurtbox().center(),
@@ -290,8 +309,13 @@ impl World {
                     ));
                 }
                 PlayerSlot::Two if projectile_hits_fighter(rect, &self.player_one) => {
-                    let result =
-                        take_player_one_hit(&mut self.player_one, projectile.damage, flags);
+                    let result = take_player_one_hit(
+                        &mut self.player_one,
+                        projectile.damage,
+                        projectile.guard_rule,
+                        projectile.hit_reaction,
+                        flags,
+                    );
                     projectile.alive = false;
                     self.hit_effects.push(HitEffect::new(
                         self.player_one.hurtbox().center(),
@@ -357,9 +381,15 @@ fn projectile_hits_fighter(projectile: Rect, fighter: &Fighter) -> bool {
         .any(|hurtbox| projectile.intersects(hurtbox))
 }
 
-fn take_player_one_hit(player_one: &mut Fighter, damage: i32, flags: FeatureFlags) -> DamageResult {
+fn take_player_one_hit(
+    player_one: &mut Fighter,
+    damage: i32,
+    guard_rule: GuardRule,
+    hit_reaction: HitReaction,
+    flags: FeatureFlags,
+) -> DamageResult {
     if flags.enabled(FeatureFlag::PlayerOneTakesDamage) {
-        player_one.take_hit(damage)
+        player_one.take_hit(damage, guard_rule, hit_reaction)
     } else {
         DamageResult {
             damage: 0,
@@ -368,9 +398,15 @@ fn take_player_one_hit(player_one: &mut Fighter, damage: i32, flags: FeatureFlag
     }
 }
 
-fn take_player_two_hit(player_two: &mut Fighter, damage: i32, flags: FeatureFlags) -> DamageResult {
+fn take_player_two_hit(
+    player_two: &mut Fighter,
+    damage: i32,
+    guard_rule: GuardRule,
+    hit_reaction: HitReaction,
+    flags: FeatureFlags,
+) -> DamageResult {
     if flags.enabled(FeatureFlag::PlayerTwoTakesDamage) {
-        player_two.take_hit(damage)
+        player_two.take_hit(damage, guard_rule, hit_reaction)
     } else {
         DamageResult {
             damage: 0,

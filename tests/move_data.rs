@@ -6,7 +6,8 @@ use borrow_fighters::combat::fighter::{
 };
 use borrow_fighters::combat::frame::FrameCount;
 use borrow_fighters::combat::move_data::{
-    CLOSE_RANGE_MOVE_SPECS, MoveId, MoveInputKind, move_spec, move_spec_for_input,
+    CLOSE_RANGE_MOVE_SPECS, GuardRule, HEAVY_ATTACK_REACTION, KICK_REACTION, LIGHT_ATTACK_REACTION,
+    MoveId, MoveInputKind, move_spec, move_spec_for_input,
 };
 
 #[test]
@@ -31,6 +32,8 @@ fn move_specs_preserve_current_tuning_values() {
     assert_eq!(light.hitbox.width, 58.0);
     assert_eq!(light.hitbox.height, 34.0);
     assert_eq!(light.hitbox.y_offset, 62.0);
+    assert_eq!(light.guard_rule, GuardRule::Mid);
+    assert_eq!(light.hit_reaction, LIGHT_ATTACK_REACTION);
 
     let heavy = move_spec(MoveId::HeavyPunch);
     assert_eq!(heavy.input, MoveInputKind::HeavyPunch);
@@ -42,6 +45,8 @@ fn move_specs_preserve_current_tuning_values() {
     assert_eq!(heavy.hitbox.width, 96.0);
     assert_eq!(heavy.hitbox.height, 42.0);
     assert_eq!(heavy.hitbox.y_offset, 58.0);
+    assert_eq!(heavy.guard_rule, GuardRule::Mid);
+    assert_eq!(heavy.hit_reaction, HEAVY_ATTACK_REACTION);
 
     let kick = move_spec(MoveId::Kick);
     assert_eq!(kick.input, MoveInputKind::Kick);
@@ -53,6 +58,8 @@ fn move_specs_preserve_current_tuning_values() {
     assert_eq!(kick.hitbox.width, 100.0);
     assert_eq!(kick.hitbox.height, 36.0);
     assert_eq!(kick.hitbox.y_offset, 108.0);
+    assert_eq!(kick.guard_rule, GuardRule::Mid);
+    assert_eq!(kick.hit_reaction, KICK_REACTION);
 }
 
 #[test]
@@ -67,6 +74,8 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(rust_jab.hitbox.width, 48.0);
     assert_eq!(rust_jab.hitbox.height, 30.0);
     assert_eq!(rust_jab.hitbox.y_offset, 62.0);
+    assert_eq!(rust_jab.guard_rule, GuardRule::Mid);
+    assert_eq!(rust_jab.hit_reaction, LIGHT_ATTACK_REACTION);
 
     let duke_poke = move_spec(MoveId::DukeBoilerplatePoke);
     assert_eq!(duke_poke.input, MoveInputKind::HeavyPunch);
@@ -78,6 +87,19 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(duke_poke.hitbox.width, 112.0);
     assert_eq!(duke_poke.hitbox.height, 44.0);
     assert_eq!(duke_poke.hitbox.y_offset, 60.0);
+    assert_eq!(duke_poke.guard_rule, GuardRule::Mid);
+    assert_eq!(duke_poke.hit_reaction, HEAVY_ATTACK_REACTION);
+}
+
+#[test]
+fn guard_rules_describe_current_blocking_model() {
+    assert!(GuardRule::Mid.is_blocked_by(true, false));
+    assert!(GuardRule::High.is_blocked_by(true, false));
+    assert!(GuardRule::Projectile.is_blocked_by(true, false));
+    assert!(GuardRule::Low.is_blocked_by(true, true));
+    assert!(!GuardRule::Low.is_blocked_by(true, false));
+    assert!(!GuardRule::Throw.is_blocked_by(true, true));
+    assert!(!GuardRule::Mid.is_blocked_by(false, false));
 }
 
 #[test]

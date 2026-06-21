@@ -9,8 +9,9 @@
 use crate::math::rect::Rect;
 
 pub use super::move_data::{
-    AttackFrameData, DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_BOILERPLATE_POKE_DAMAGE,
-    HEAVY_PUNCH_DAMAGE, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE, MoveId, MoveInputKind, MoveSpec,
+    AttackFrameData, DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_BOILERPLATE_POKE_DAMAGE, GuardRule,
+    HEAVY_ATTACK_REACTION, HEAVY_PUNCH_DAMAGE, HitReaction, KICK_DAMAGE, KICK_REACTION,
+    LIGHT_ATTACK_REACTION, LIGHT_PUNCH_DAMAGE, MoveId, MoveInputKind, MoveSpec,
     RUST_BORROW_JAB_DAMAGE, move_spec, move_spec_for_input,
 };
 
@@ -28,6 +29,8 @@ pub struct ActiveAttack {
     pub kind: AttackKind,
     pub hitbox: Rect,
     pub damage: i32,
+    pub guard_rule: GuardRule,
+    pub hit_reaction: HitReaction,
 }
 
 impl AttackKind {

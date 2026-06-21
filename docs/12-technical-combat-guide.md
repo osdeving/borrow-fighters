@@ -10,10 +10,10 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 
 | Sistema | Responsabilidade | Código principal | Testes |
 |---|---|---|---|
-| Combat runtime | Estado de lutador, movimento, defesa, ataque ativo, dano e hurtbox | [`src/combat/fighter.rs`](../src/combat/fighter.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs) |
-| Combat data | Frame data, dano e hitbox dos golpes próximos | [`src/combat/move_data.rs`](../src/combat/move_data.rs) | [`tests/move_data.rs`](../tests/move_data.rs) |
+| Combat runtime | Estado de lutador, movimento, defesa, ataque ativo, stun, dano e hurtbox | [`src/combat/fighter.rs`](../src/combat/fighter.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs) |
+| Combat data | Frame data, dano, guard rule, hit reaction e hitbox dos golpes próximos | [`src/combat/move_data.rs`](../src/combat/move_data.rs) | [`tests/move_data.rs`](../tests/move_data.rs) |
 | Move runtime | Enum runtime `AttackKind` e compatibilidade com `MoveSpec` | [`src/combat/move_set.rs`](../src/combat/move_set.rs) | [`tests/move_data.rs`](../tests/move_data.rs) |
-| Projectile | Projétil horizontal, dano, velocidade, spawn e timing do especial | [`src/combat/projectile.rs`](../src/combat/projectile.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs) |
+| Projectile | Projétil horizontal, dano, guard rule, hit reaction, velocidade, spawn e timing do especial | [`src/combat/projectile.rs`](../src/combat/projectile.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs) |
 | Collision | Interseção simples de retângulos | [`src/combat/collision.rs`](../src/combat/collision.rs), [`src/math/rect.rs`](../src/math/rect.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
 | Character data | Registro de personagens e listas de golpes | [`src/characters/mod.rs`](../src/characters/mod.rs) | [`tests/characters.rs`](../tests/characters.rs) |
 | Match runtime | Instancia lutadores a partir de personagens, resolve hits, projéteis e vitória | [`src/game/world.rs`](../src/game/world.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
@@ -52,6 +52,24 @@ O jogo usa fixed timestep de 60 FPS em [`src/config.rs`](../src/config.rs). A li
 - Golpes próximos usam `AttackFrameData` dentro de `MoveSpec`.
 - Projectile/special usa `ProjectileFrameData` em [`src/combat/projectile.rs`](../src/combat/projectile.rs).
 - O Combat Lab mostra frame atual, fase e janela ativa.
+
+### Defesa, Guard Rule e Stun
+
+`GuardRule` e `HitReaction` ficam em [`src/combat/move_data.rs`](../src/combat/move_data.rs). O corte atual define a linguagem de defesa antes de implementar todos os tipos de golpe:
+
+- `GuardRule::High`, `Mid`, `Low`, `Throw` e `Projectile` já existem como dados.
+- Golpes próximos atuais usam `GuardRule::Mid`.
+- Projéteis usam `PROJECTILE_GUARD_RULE`, hoje `GuardRule::Projectile`.
+- `GuardRule::Throw` já é explicitamente não bloqueável, mas ainda não existe golpe de throw jogável.
+- `Low` exige defesa com block + crouch, mas nenhum golpe baixo real foi ligado ainda.
+
+`HitReaction` contém `hitstun` e `blockstun` em frames. Ao receber um hit, [`Fighter::take_hit`](../src/combat/fighter.rs) calcula se a defesa bloqueia aquele `GuardRule`, aplica dano reduzido quando bloqueado e liga o timer correspondente:
+
+- `hitstun_timer`: interrompe ataque atual, troca clip para `hit` e impede iniciar ação.
+- `blockstun_timer`: mantém o lutador em defesa e impede iniciar ação.
+- ambos são expostos para debug/testes por `hitstun_remaining_frames`, `blockstun_remaining_frames`, `in_hitstun` e `in_blockstun`.
+
+O match runtime em [`src/game/world.rs`](../src/game/world.rs) passa `guard_rule` e `hit_reaction` de `ActiveAttack` ou `Projectile` para o defensor. Feature flags de dano ainda impedem dano e reação quando desativadas.
 
 ### Dados de Golpes
 
