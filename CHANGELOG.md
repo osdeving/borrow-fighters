@@ -61,6 +61,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Combat Lab com fundo de arena ligado por padrão e atalho `A` para alternar entre cenário e grid limpo.
 - Contagem pré-luta central `11`, `10`, `01`, `Fight!`, bloqueando gameplay até a liberação.
 - Vozes CC0 de contagem pré-luta registradas no manifesto de áudio.
+- Direção narrativa inicial com O Linker como força cósmica, Ada Lovelace, Rust, Duke, Assembly, frontenzos e arenas brasileiras de ciência/tecnologia.
 
 ### Em aberto
 

@@ -6,6 +6,10 @@
 
 O primeiro objetivo é criar um protótipo jogável com dois personagens, movimentação, ataque, hitbox/hurtbox, dano, barra de vida e condição de vitória.
 
+A direção narrativa coloca essas entidades em arenas brasileiras de ciência, tecnologia, arquitetura e inovação. O pano de fundo é cósmico e sóbrio: **O Linker** é uma força antiga que liga símbolos, matéria, circuitos e crença humana, permitindo que entidades programáticas surjam no mundo real.
+
+Ada Lovelace foi a primeira humana conhecida a despertar para o Linker. Ao tocar essa força, libertou Assembly, uma entidade amoral e poderosa que passou a rejeitar a presença das abstrações fora dos circuitos.
+
 ## 2. Gênero
 
 - Jogo de luta 2D.
@@ -74,6 +78,8 @@ Separar:
 
 Arquétipo: lutador técnico, seguro e preciso.
 
+Papel narrativo: protagonista clássico. Rust deve ser fácil de gostar: disciplinado, corajoso, cuidadoso com quem está ao redor e convencido de que poder sem controle não é força. Como uma das entidades mais recentes do Linker, ele defende que entidades programáticas estáveis possam viver entre humanos desde que existam segurança, limites e responsabilidade. Ele também captura entidades erráticas que atravessam o Linker sem forma suficiente para sobreviver.
+
 Possíveis golpes:
 
 - Borrow Check.
@@ -86,6 +92,8 @@ Possíveis golpes:
 
 Arquétipo: lutador verboso, resistente e cheio de pressão.
 
+Papel narrativo: veterano carismático. Duke é teatral, antigo, cheio de cerimônia e mais sábio do que parece. Ele fez acordos com humanos, empresas e instituições para permanecer no mundo real por mais tempo. Essa aliança lhe dá estabilidade, influência e um aspecto corporativo, mas também o torna moralmente ambíguo.
+
 Possíveis golpes:
 
 - System.out.println Barrage.
@@ -94,7 +102,44 @@ Possíveis golpes:
 - NullPointer Trap.
 - Enterprise Combo.
 
-## 8. Vertical slice desejado
+### Assembly
+
+Arquétipo: boss final não-jogável, antigo, poderoso e quase místico.
+
+Assembly representa a camada anterior às abstrações confortáveis. Ele não é vilão simples: é a primeira consequência do despertar humano para o Linker. Quer impedir que humanos conheçam essa força e constranger entidades programáticas de volta aos circuitos, à matéria e aos limites da máquina.
+
+Por estar sendo esquecido, Assembly fica parcialmente fora de fase. Partes do corpo alternam entre matéria, lacunas, `0` e `1`. Isso explica por que ele não é jogável no primeiro arco: sua existência física é instável demais, embora seu poder continue enorme.
+
+### Usuários humanos do Linker
+
+Programadores humanos são pessoas com diferentes níveis de acesso ao Linker. Nem todos conseguem perceber ou controlar entidades programáticas, mas os que conseguem podem invocar, estabilizar ou conduzir essas entidades.
+
+Essa é a camada metalinguística do jogo: aprender comandos, timing e personagem representa aprender a operar uma entidade pelo Linker.
+
+### Frontenzos
+
+Frontenzos são NPCs humanos com pouca aderência ao Linker e excesso de confiança. Eles liberam entidades menores, instáveis e deformadas. Essas criações podem servir como encontros secundários, minigames ou ameaças de baixo escalão.
+
+Rust não defende a sobrevivência de toda entidade programática. Ele busca liberdade para entidades estáveis e contenção para distorções perigosas.
+
+Mais detalhes de história, personagem e arenas estão em [`docs/12-worldbuilding.md`](12-worldbuilding.md).
+
+## 8. Arenas
+
+As arenas principais devem ser inspiradas em locais brasileiros de tecnologia, ciência, arquitetura e inovação.
+
+Direções iniciais:
+
+- MASP, em São Paulo, como portal urbano e arena suspensa;
+- Sirius/LNLS, em Campinas, como altar científico de luz e matéria;
+- Brasília/BioTIC, como cidade planejada e biotecnológica;
+- Fortaleza, como costa tecnológica de energia, formação e sistemas;
+- Curitiba/Vale do Pinhão, como smart city cartunesca;
+- Recife/Porto Digital, como passado e futuro no mesmo commit.
+
+A lista completa de possibilidades e ganchos narrativos vive em [`docs/12-worldbuilding.md`](12-worldbuilding.md).
+
+## 9. Vertical slice desejado
 
 O vertical slice deve demonstrar uma luta curta entre dois personagens com:
 
@@ -107,11 +152,11 @@ O vertical slice deve demonstrar uma luta curta entre dois personagens com:
 - controles responsivos;
 - código modular o suficiente para adicionar novos personagens.
 
-## 9. Fora de escopo inicial
+## 10. Fora de escopo inicial
 
 - Online multiplayer.
 - Menu completo.
-- História.
+- Modo história completo.
 - Vários personagens.
 - Vários cenários.
 - Sistema complexo de combo.
@@ -121,7 +166,7 @@ O vertical slice deve demonstrar uma luta curta entre dois personagens com:
 - Trilha sonora final.
 - Balanceamento refinado.
 
-## 10. Critério de sucesso do primeiro protótipo
+## 11. Critério de sucesso do primeiro protótipo
 
 O primeiro protótipo será considerado bem-sucedido quando:
 

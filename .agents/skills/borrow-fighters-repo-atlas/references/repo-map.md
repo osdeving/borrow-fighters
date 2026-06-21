@@ -27,7 +27,9 @@
 | `docs/10-greybox-playtest.md` | Current playtest script |
 | `docs/11-sprite-pipeline.md` | Sprite manifest and atlas pipeline |
 | `docs/12-technical-combat-guide.md` | Combat code tracing, hitbox/hurtbox and Combat Lab commands |
+| `docs/12-worldbuilding.md` | Story, characters and Brazilian arena direction |
 | `docs/13-combat-design-roadmap.md` | Combat design, frame data and Combat Lab roadmap |
+| `docs/14-audio-pipeline.md` | Audio event and manifest pipeline |
 | `docs/adr/` | Architecture Decision Records |
 | `docs/templates/` | Reusable proposal/checklist templates |
 
