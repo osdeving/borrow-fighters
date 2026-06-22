@@ -21,6 +21,8 @@ const FRAME_COLOR: Color = Color::new(255, 210, 74, 255);
 const TRIM_COLOR: Color = Color::new(105, 240, 174, 255);
 const SOURCE_COLOR: Color = Color::new(86, 156, 255, 255);
 const PIVOT_COLOR: Color = Color::new(255, 82, 82, 255);
+const DUMMY_COLOR: Color = Color::new(255, 178, 104, 174);
+const DUMMY_PIVOT_COLOR: Color = Color::new(255, 178, 104, 255);
 
 /// Draws the sprite viewer scene.
 pub fn draw_sprite_viewer(
@@ -36,7 +38,24 @@ pub fn draw_sprite_viewer(
     draw.draw_line(0, FLOOR_Y as i32, WINDOW_WIDTH, FLOOR_Y as i32, UI_MUTED);
 
     if let Some(texture) = texture {
-        draw_current_sprite(draw, viewer, texture);
+        if viewer.show_dummy() {
+            draw_sprite_instance(
+                draw,
+                viewer,
+                texture,
+                viewer.dummy_screen_rect(),
+                true,
+                DUMMY_COLOR,
+            );
+        }
+        draw_sprite_instance(
+            draw,
+            viewer,
+            texture,
+            viewer.sprite_screen_rect(),
+            false,
+            Color::WHITE,
+        );
     } else {
         draw.draw_text(
             "Atlas texture not loaded",
@@ -48,11 +67,21 @@ pub fn draw_sprite_viewer(
     }
 
     if viewer.show_bounds() {
-        draw_frame_guides(draw, viewer);
+        if viewer.show_dummy() {
+            draw_frame_guides(draw, viewer, viewer.dummy_screen_rect(), true);
+        }
+        draw_frame_guides(draw, viewer, viewer.sprite_screen_rect(), false);
+    }
+
+    if viewer.show_dummy() {
+        draw_dummy_distance(draw, viewer);
     }
 
     if viewer.show_pivot() {
-        draw_pivot(draw, viewer);
+        if viewer.show_dummy() {
+            draw_pivot_at(draw, viewer.dummy_anchor(), DUMMY_PIVOT_COLOR);
+        }
+        draw_pivot_at(draw, viewer.anchor(), PIVOT_COLOR);
     }
 
     draw_info_panel(draw, viewer);
@@ -75,42 +104,74 @@ pub fn draw_sprite_viewer_error(draw: &mut RaylibDrawHandle<'_>, message: &str) 
     draw_wrapped_text(draw, message, 112, 258, WINDOW_WIDTH - 224, 16, UI_MUTED);
 }
 
-fn draw_current_sprite(
+fn draw_sprite_instance(
     draw: &mut RaylibDrawHandle<'_>,
     viewer: &SpriteViewer,
     texture: &Texture2D,
+    screen: ViewerRect,
+    mirrored: bool,
+    tint: Color,
 ) {
     let frame = viewer.current_frame();
-    let source = Rectangle::new(
+    let mut source = Rectangle::new(
         frame.frame.x as f32,
         frame.frame.y as f32,
         frame.frame.w as f32,
         frame.frame.h as f32,
     );
-    let screen = viewer.sprite_screen_rect();
+    if mirrored {
+        source.x += source.width;
+        source.width = -source.width;
+    }
     let dest = Rectangle::new(screen.x, screen.y, screen.width, screen.height);
 
-    draw.draw_texture_pro(
-        texture,
-        source,
-        dest,
-        Vector2::new(0.0, 0.0),
-        0.0,
-        Color::WHITE,
-    );
+    draw.draw_texture_pro(texture, source, dest, Vector2::new(0.0, 0.0), 0.0, tint);
 }
 
-fn draw_frame_guides(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
+fn draw_frame_guides(
+    draw: &mut RaylibDrawHandle<'_>,
+    viewer: &SpriteViewer,
+    screen: ViewerRect,
+    muted: bool,
+) {
     let frame = viewer.current_frame();
-    let screen = viewer.sprite_screen_rect();
-    draw_outline(draw, screen, FRAME_COLOR, 2.0);
+    draw_outline(
+        draw,
+        screen,
+        if muted {
+            Color::new(255, 210, 74, 150)
+        } else {
+            FRAME_COLOR
+        },
+        2.0,
+    );
 
     if let Some(trimmed_bounds) = frame.trimmed_bounds {
-        draw_relative_guide(draw, screen, frame, trimmed_bounds, TRIM_COLOR);
+        draw_relative_guide(
+            draw,
+            screen,
+            frame,
+            trimmed_bounds,
+            if muted {
+                Color::new(105, 240, 174, 130)
+            } else {
+                TRIM_COLOR
+            },
+        );
     }
 
     if let Some(source_crop) = frame.source_crop {
-        draw_relative_guide(draw, screen, frame, source_crop, SOURCE_COLOR);
+        draw_relative_guide(
+            draw,
+            screen,
+            frame,
+            source_crop,
+            if muted {
+                Color::new(86, 156, 255, 130)
+            } else {
+                SOURCE_COLOR
+            },
+        );
     }
 }
 
@@ -132,21 +193,43 @@ fn draw_relative_guide(
     draw_outline(draw, rect, color, 1.0);
 }
 
-fn draw_pivot(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
+fn draw_dummy_distance(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
     let anchor = viewer.anchor();
+    let dummy = viewer.dummy_anchor();
+    let y = (FLOOR_Y + 24.0) as i32;
+    draw.draw_line_ex(
+        Vector2::new(anchor.x, y as f32),
+        Vector2::new(dummy.x, y as f32),
+        2.0,
+        UI_MUTED,
+    );
+    draw.draw_text(
+        &format!("{:.0}px", viewer.dummy_distance()),
+        ((anchor.x + dummy.x) * 0.5).round() as i32 - 24,
+        y + 8,
+        15,
+        UI_MUTED,
+    );
+}
+
+fn draw_pivot_at(
+    draw: &mut RaylibDrawHandle<'_>,
+    anchor: crate::scenes::sprite_viewer::ViewerPoint,
+    color: Color,
+) {
     draw.draw_line_ex(
         Vector2::new(anchor.x - 18.0, anchor.y),
         Vector2::new(anchor.x + 18.0, anchor.y),
         3.0,
-        PIVOT_COLOR,
+        color,
     );
     draw.draw_line_ex(
         Vector2::new(anchor.x, anchor.y - 18.0),
         Vector2::new(anchor.x, anchor.y + 18.0),
         3.0,
-        PIVOT_COLOR,
+        color,
     );
-    draw.draw_circle(anchor.x as i32, anchor.y as i32, 4.0, PIVOT_COLOR);
+    draw.draw_circle(anchor.x as i32, anchor.y as i32, 4.0, color);
 }
 
 fn draw_viewer_grid(draw: &mut RaylibDrawHandle<'_>) {
@@ -213,14 +296,14 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
     );
     draw.draw_text(
         &format!(
-            "anchor {:.1},{:.1} | pivot {},{} | scale {:.2} | frame {}x{}",
+            "anchor {:.1},{:.1} | dummy {:.1}px | pivot {},{} | scale {:.2} | zoom {:.2}",
             anchor.x,
             anchor.y,
+            viewer.dummy_distance(),
             frame.pivot.x,
             frame.pivot.y,
             viewer.scale(),
-            frame.frame.w,
-            frame.frame.h,
+            viewer.zoom(),
         ),
         panel_x + 16,
         panel_y + 66,
@@ -228,7 +311,7 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
         UI_MUTED,
     );
     draw.draw_text(
-        "mouse arrasta | Tab/Shift+Tab clip | ./, frame | Space play | G grid | P pivot | B bounds | R reset",
+        "mouse arrasta | Tab clip | ./, frame | Wheel zoom | 0 zoom | O dummy | F5 reload | F12 shot",
         panel_x + 16,
         panel_y + 92,
         15,
@@ -257,6 +340,14 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
             panel_y + 66,
             14,
             FRAME_COLOR,
+        );
+    } else if let Some(message) = viewer.status_message() {
+        draw.draw_text(
+            &truncate_middle(message, 100),
+            panel_x + 430,
+            panel_y + 66,
+            14,
+            TRIM_COLOR,
         );
     }
 }

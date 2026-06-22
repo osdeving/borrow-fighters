@@ -314,12 +314,17 @@ Teclas:
 | Próximo frame | `.` |
 | Frame anterior | `,` |
 | Pausar/continuar | `Espaço` |
+| Zoom | Mouse wheel |
+| Resetar zoom | `0` |
+| Mostrar/esconder dummy | `O` |
+| Recarregar manifesto e atlas | `F5` |
+| Salvar screenshot | `F12` |
 | Alternar grade | `G` |
 | Alternar pivot | `P` |
 | Alternar bounds | `B` |
 | Resetar posição | `R` |
 
-O corte atual mostra atlas, pivot, frame bounds, `trimmed_bounds` e `source_crop`. Ele ainda não mostra hitbox/hurtbox real nem origem de projectile por frame, porque esses dados ainda não existem em schema. Essa evolução está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
+O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, `trimmed_bounds` e `source_crop`. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. Ele ainda não mostra hitbox/hurtbox real nem origem de projectile por frame, porque esses dados ainda não existem em schema. Essa evolução está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
 
 ## Cabeçalho de Arquivos
 

@@ -71,6 +71,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Issue de follow-up de combate para playtestar a branch de identidade mecânica e decisões restantes.
 - Roadmap do Sprite Combat Viewer para artistas conferirem atlas, pivot, grid, hitbox/hurtbox futura e origem de projectile.
 - Primeiro corte do Sprite Combat Viewer por CLI, carregando manifesto/atlas em runtime, com grid, pivot, bounds, navegação de clips/frames e drag com mouse.
+- Sprite Combat Viewer com dummy espelhado arrastável, distância entre anchors, zoom por mouse wheel, hot reload de manifesto/atlas com `F5` e screenshot com `F12`.
 
 ### Em aberto
 

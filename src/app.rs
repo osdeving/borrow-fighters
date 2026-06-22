@@ -361,21 +361,53 @@ fn run_sprite_viewer(
         }
     };
 
+    let mut texture = load_sprite_viewer_texture(raylib, thread, &mut viewer);
+
+    while !raylib.window_should_close() {
+        let input = read_sprite_viewer_input(raylib);
+        if input.reload_manifest {
+            match viewer.reload_manifest() {
+                Ok(_) => {
+                    texture = load_sprite_viewer_texture(raylib, thread, &mut viewer);
+                }
+                Err(error) => viewer.set_texture_error(error.to_string()),
+            }
+        }
+        let screenshot_requested = input.screenshot_requested;
+        viewer.update(input, raylib.get_frame_time().min(MAX_FRAME_TIME));
+
+        {
+            let mut draw = raylib.begin_drawing(thread);
+            render::draw_sprite_viewer(&mut draw, &viewer, texture.as_ref());
+        }
+
+        if screenshot_requested {
+            let path = "target/sprite-viewer-capture.png";
+            if let Err(error) = std::fs::create_dir_all("target") {
+                viewer.set_texture_error(format!("could not create target directory: {error}"));
+            } else {
+                raylib.take_screenshot(thread, path);
+                viewer.set_status_message(format!("Screenshot salvo em {path}."));
+            }
+        }
+    }
+}
+
+fn load_sprite_viewer_texture(
+    raylib: &mut RaylibHandle,
+    thread: &RaylibThread,
+    viewer: &mut SpriteViewer,
+) -> Option<Texture2D> {
     let texture_path = viewer.image_path().to_string_lossy().to_string();
-    let texture = match raylib.load_texture(thread, &texture_path) {
-        Ok(texture) => Some(texture),
+    match raylib.load_texture(thread, &texture_path) {
+        Ok(texture) => {
+            viewer.set_status_message(format!("Atlas carregado: {texture_path}"));
+            Some(texture)
+        }
         Err(error) => {
             viewer.set_texture_error(format!("could not load texture {texture_path}: {error:?}"));
             None
         }
-    };
-
-    while !raylib.window_should_close() {
-        let input = read_sprite_viewer_input(raylib);
-        viewer.update(input, raylib.get_frame_time().min(MAX_FRAME_TIME));
-
-        let mut draw = raylib.begin_drawing(thread);
-        render::draw_sprite_viewer(&mut draw, &viewer, texture.as_ref());
     }
 }
 
@@ -394,6 +426,11 @@ fn read_sprite_viewer_input(raylib: &RaylibHandle) -> SpriteViewerInput {
         toggle_grid: raylib.is_key_pressed(KeyboardKey::KEY_G),
         toggle_pivot: raylib.is_key_pressed(KeyboardKey::KEY_P),
         toggle_bounds: raylib.is_key_pressed(KeyboardKey::KEY_B),
+        toggle_dummy: raylib.is_key_pressed(KeyboardKey::KEY_O),
+        reload_manifest: raylib.is_key_pressed(KeyboardKey::KEY_F5),
+        reset_zoom: raylib.is_key_pressed(KeyboardKey::KEY_ZERO),
+        screenshot_requested: raylib.is_key_pressed(KeyboardKey::KEY_F12),
+        zoom_delta: raylib.get_mouse_wheel_move(),
         reset_position: raylib.is_key_pressed(KeyboardKey::KEY_R),
         mouse_position: ViewerPoint::new(mouse.x, mouse.y),
         mouse_pressed: raylib.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_LEFT),

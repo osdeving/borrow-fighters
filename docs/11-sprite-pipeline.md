@@ -127,12 +127,17 @@ Atalhos:
 | Proximo frame | `.` |
 | Frame anterior | `,` |
 | Pausar/continuar | `Espaco` |
+| Zoom | Mouse wheel |
+| Resetar zoom | `0` |
+| Mostrar/esconder dummy | `O` |
+| Recarregar manifesto e atlas | `F5` |
+| Salvar screenshot | `F12` |
 | Alternar grade | `G` |
 | Alternar pivot | `P` |
 | Alternar bounds | `B` |
 | Resetar posicao | `R` |
 
-O corte atual e viewer, nao editor. Ele mostra frame bounds, pivot, `trimmed_bounds` e `source_crop`; hitbox, hurtbox e origem de projectile reais ainda precisam de schema data-driven. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
+O corte atual e viewer, nao editor. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, `trimmed_bounds` e `source_crop`; hitbox, hurtbox e origem de projectile reais ainda precisam de schema data-driven. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
 
 ## Pontos ainda em aberto
 

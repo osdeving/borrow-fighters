@@ -15,6 +15,10 @@ use crate::{
 };
 
 const DEFAULT_ANCHOR_X: f32 = 480.0;
+const DEFAULT_DUMMY_ANCHOR_X: f32 = 680.0;
+const ZOOM_MIN: f32 = 0.25;
+const ZOOM_MAX: f32 = 4.0;
+const ZOOM_STEP: f32 = 0.12;
 
 /// Launch data for the standalone sprite viewer.
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -34,6 +38,11 @@ pub struct SpriteViewerInput {
     pub toggle_grid: bool,
     pub toggle_pivot: bool,
     pub toggle_bounds: bool,
+    pub toggle_dummy: bool,
+    pub reload_manifest: bool,
+    pub reset_zoom: bool,
+    pub screenshot_requested: bool,
+    pub zoom_delta: f32,
     pub reset_position: bool,
     pub mouse_position: ViewerPoint,
     pub mouse_pressed: bool,
@@ -87,10 +96,14 @@ pub struct SpriteViewer {
     show_grid: bool,
     show_pivot: bool,
     show_bounds: bool,
+    show_dummy: bool,
+    zoom: f32,
     anchor: ViewerPoint,
-    dragging: bool,
+    dummy_anchor: ViewerPoint,
+    dragging: Option<DragTarget>,
     drag_offset: ViewerPoint,
     texture_error: Option<String>,
+    status_message: Option<String>,
 }
 
 /// Error returned when the viewer cannot load a manifest.
@@ -104,6 +117,12 @@ pub enum SpriteViewerError {
         clip: String,
         path: PathBuf,
     },
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum DragTarget {
+    Main,
+    Dummy,
 }
 
 impl SpriteViewer {
@@ -139,10 +158,14 @@ impl SpriteViewer {
             show_grid: true,
             show_pivot: true,
             show_bounds: true,
+            show_dummy: true,
+            zoom: 1.0,
             anchor: ViewerPoint::new(DEFAULT_ANCHOR_X, FLOOR_Y),
-            dragging: false,
+            dummy_anchor: ViewerPoint::new(DEFAULT_DUMMY_ANCHOR_X, FLOOR_Y),
+            dragging: None,
             drag_offset: ViewerPoint::default(),
             texture_error: None,
+            status_message: None,
         })
     }
 
@@ -174,8 +197,19 @@ impl SpriteViewer {
         if input.toggle_bounds {
             self.show_bounds = !self.show_bounds;
         }
+        if input.toggle_dummy {
+            self.show_dummy = !self.show_dummy;
+        }
         if input.reset_position {
             self.anchor = ViewerPoint::new(DEFAULT_ANCHOR_X, FLOOR_Y);
+            self.dummy_anchor = ViewerPoint::new(DEFAULT_DUMMY_ANCHOR_X, FLOOR_Y);
+        }
+        if input.reset_zoom {
+            self.zoom = 1.0;
+        }
+        if input.zoom_delta.abs() > f32::EPSILON {
+            let factor = 1.0 + input.zoom_delta * ZOOM_STEP;
+            self.zoom = (self.zoom * factor.max(0.25)).clamp(ZOOM_MIN, ZOOM_MAX);
         }
 
         self.update_drag(input);
@@ -185,9 +219,44 @@ impl SpriteViewer {
         }
     }
 
+    /// Reloads the manifest from disk, preserving clip/frame where possible.
+    pub fn reload_manifest(&mut self) -> Result<bool, SpriteViewerError> {
+        let previous_image_path = self.image_path.clone();
+        let previous_clip = self.current_clip_name().to_string();
+        let previous_frame_index = self.frame_index;
+        let manifest = SpriteManifest::load(&self.options.manifest_path).map_err(|source| {
+            SpriteViewerError::Manifest {
+                path: self.options.manifest_path.clone(),
+                source,
+            }
+        })?;
+        let image_path = manifest.image_path(&self.options.manifest_path);
+        let clip_index = select_clip_index(
+            &manifest,
+            Some(previous_clip.as_str()),
+            self.options.initial_clip.as_deref(),
+        );
+        let frame_len = manifest.clips[clip_index].frames.len();
+
+        self.manifest = manifest;
+        self.image_path = image_path;
+        self.clip_index = clip_index;
+        self.frame_index = previous_frame_index.min(frame_len.saturating_sub(1));
+        self.frame_elapsed_ms = 0.0;
+        self.texture_error = None;
+        self.status_message = Some("Manifesto recarregado.".to_string());
+
+        Ok(previous_image_path != self.image_path)
+    }
+
     /// Records a texture loading warning that should be visible in the viewer.
     pub fn set_texture_error(&mut self, message: impl Into<String>) {
         self.texture_error = Some(message.into());
+    }
+
+    /// Records a transient viewer status message.
+    pub fn set_status_message(&mut self, message: impl Into<String>) {
+        self.status_message = Some(message.into());
     }
 
     /// Returns the manifest path passed to the viewer.
@@ -233,12 +302,27 @@ impl SpriteViewer {
 
     /// Returns the runtime scale from the manifest, falling back to 1.0.
     pub fn scale(&self) -> f32 {
+        self.manifest_scale() * self.zoom
+    }
+
+    /// Returns the scale stored in the manifest without the viewer zoom.
+    pub fn manifest_scale(&self) -> f32 {
         self.manifest.scale.unwrap_or(1.0).max(0.1)
+    }
+
+    /// Returns the viewer zoom multiplier.
+    pub const fn zoom(&self) -> f32 {
+        self.zoom
     }
 
     /// Returns the current anchor/pivot target in screen space.
     pub const fn anchor(&self) -> ViewerPoint {
         self.anchor
+    }
+
+    /// Returns the dummy anchor/pivot target in screen space.
+    pub const fn dummy_anchor(&self) -> ViewerPoint {
+        self.dummy_anchor
     }
 
     /// Returns whether the animation is currently playing.
@@ -261,41 +345,101 @@ impl SpriteViewer {
         self.show_bounds
     }
 
+    /// Returns whether the mirrored dummy is visible.
+    pub const fn show_dummy(&self) -> bool {
+        self.show_dummy
+    }
+
     /// Returns a texture loading warning, if one happened.
     pub fn texture_error(&self) -> Option<&str> {
         self.texture_error.as_deref()
     }
 
+    /// Returns the latest viewer status message, if one exists.
+    pub fn status_message(&self) -> Option<&str> {
+        self.status_message.as_deref()
+    }
+
     /// Returns the current sprite frame rectangle in screen space.
     pub fn sprite_screen_rect(&self) -> ViewerRect {
+        self.sprite_screen_rect_at(self.anchor, false)
+    }
+
+    /// Returns the mirrored dummy frame rectangle in screen space.
+    pub fn dummy_screen_rect(&self) -> ViewerRect {
+        self.sprite_screen_rect_at(self.dummy_anchor, true)
+    }
+
+    /// Returns the horizontal distance between main and dummy anchors.
+    pub fn dummy_distance(&self) -> f32 {
+        (self.dummy_anchor.x - self.anchor.x).abs()
+    }
+
+    fn sprite_screen_rect_at(&self, anchor: ViewerPoint, mirrored: bool) -> ViewerRect {
         let frame = self.current_frame();
         let scale = self.scale();
+        let width = frame.frame.w as f32 * scale;
+        let pivot_x = frame.pivot.x as f32 * scale;
+        let x = if mirrored {
+            anchor.x - (width - pivot_x)
+        } else {
+            anchor.x - pivot_x
+        };
         ViewerRect {
-            x: self.anchor.x - frame.pivot.x as f32 * scale,
-            y: self.anchor.y - frame.pivot.y as f32 * scale,
-            width: frame.frame.w as f32 * scale,
+            x,
+            y: anchor.y - frame.pivot.y as f32 * scale,
+            width,
             height: frame.frame.h as f32 * scale,
         }
     }
 
     fn update_drag(&mut self, input: SpriteViewerInput) {
-        if input.mouse_pressed && self.sprite_screen_rect().contains(input.mouse_position) {
-            self.dragging = true;
-            self.drag_offset = ViewerPoint::new(
-                input.mouse_position.x - self.anchor.x,
-                input.mouse_position.y - self.anchor.y,
-            );
+        if input.mouse_pressed {
+            let target =
+                if self.show_dummy && self.dummy_screen_rect().contains(input.mouse_position) {
+                    Some(DragTarget::Dummy)
+                } else if self.sprite_screen_rect().contains(input.mouse_position) {
+                    Some(DragTarget::Main)
+                } else {
+                    None
+                };
+
+            if let Some(target) = target {
+                self.dragging = Some(target);
+                let anchor = self.anchor_for_target(target);
+                self.drag_offset = ViewerPoint::new(
+                    input.mouse_position.x - anchor.x,
+                    input.mouse_position.y - anchor.y,
+                );
+            }
         }
 
-        if self.dragging && input.mouse_down {
-            self.anchor = ViewerPoint::new(
+        if let Some(target) = self.dragging
+            && input.mouse_down
+        {
+            let anchor = ViewerPoint::new(
                 input.mouse_position.x - self.drag_offset.x,
                 input.mouse_position.y - self.drag_offset.y,
             );
+            self.set_anchor_for_target(target, anchor);
         }
 
         if input.mouse_released {
-            self.dragging = false;
+            self.dragging = None;
+        }
+    }
+
+    fn anchor_for_target(&self, target: DragTarget) -> ViewerPoint {
+        match target {
+            DragTarget::Main => self.anchor,
+            DragTarget::Dummy => self.dummy_anchor,
+        }
+    }
+
+    fn set_anchor_for_target(&mut self, target: DragTarget, anchor: ViewerPoint) {
+        match target {
+            DragTarget::Main => self.anchor = anchor,
+            DragTarget::Dummy => self.dummy_anchor = anchor,
         }
     }
 
@@ -378,4 +522,27 @@ fn wrap_index(current: usize, len: usize, direction: i32) -> usize {
     debug_assert!(len > 0);
     let len = len as i32;
     (current as i32 + direction).rem_euclid(len) as usize
+}
+
+fn select_clip_index(
+    manifest: &SpriteManifest,
+    preferred_clip: Option<&str>,
+    fallback_clip: Option<&str>,
+) -> usize {
+    preferred_clip
+        .and_then(|clip| {
+            manifest
+                .clips
+                .iter()
+                .position(|candidate| candidate.name == clip)
+        })
+        .or_else(|| {
+            fallback_clip.and_then(|clip| {
+                manifest
+                    .clips
+                    .iter()
+                    .position(|candidate| candidate.name == clip)
+            })
+        })
+        .unwrap_or(0)
 }

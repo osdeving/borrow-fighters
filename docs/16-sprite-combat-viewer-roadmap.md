@@ -60,6 +60,10 @@ Responsabilidades atuais:
 - desenhar o frame atual do atlas com pivot e escala do manifesto;
 - exibir retangulo do frame, `trimmed_bounds` e `source_crop` quando existirem;
 - permitir arrastar o personagem com mouse para testar encaixe;
+- permitir arrastar um dummy espelhado para comparar escala, distancia e continuidade contra um oponente;
+- aplicar zoom visual com mouse wheel sem alterar o manifesto;
+- recarregar manifesto e atlas com `F5`;
+- salvar screenshot de review em `target/sprite-viewer-capture.png` com `F12`;
 - navegar clips e frames;
 - mostrar path do manifesto, path da imagem, frame atual, pivot, anchor e escala.
 
@@ -73,6 +77,11 @@ Atalhos:
 | Proximo frame | `.` |
 | Frame anterior | `,` |
 | Pausar/continuar | `Espaco` |
+| Zoom | Mouse wheel |
+| Resetar zoom | `0` |
+| Mostrar/esconder dummy | `O` |
+| Recarregar manifesto e atlas | `F5` |
+| Salvar screenshot | `F12` |
 | Alternar grade | `G` |
 | Alternar pivot | `P` |
 | Alternar bounds | `B` |
@@ -96,16 +105,19 @@ Entregas:
 
 - abrir manifesto e atlas em runtime;
 - grid, chao, pivot e bounds;
-- drag com mouse;
+- drag do personagem e dummy com mouse;
+- dummy espelhado com distancia entre anchors;
+- zoom visual por mouse wheel;
+- hot reload manual de manifesto e atlas;
+- screenshot de review;
 - navegacao de clips/frames;
 - testes de estado.
 
 Falta:
 
-- hot reload do manifesto;
-- screenshot/export de imagem de verificacao;
-- zoom e pan de camera;
 - legenda visual mais clara para cada guia.
+- pan de camera quando o personagem ficar maior que a tela;
+- UI clicavel se a lista de comandos ficar grande demais.
 
 ### Fase 2 — Viewer de Combate
 

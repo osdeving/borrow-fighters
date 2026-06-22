@@ -155,7 +155,7 @@ cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.spr
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special
 ```
 
-No Sprite Combat Viewer, use o mouse esquerdo para arrastar o personagem, `Tab` / `Shift+Tab` para alternar clip, `.` / `,` para avançar ou voltar frame, `Espaço` para pausar, `G` para grade, `P` para pivot, `B` para bounds e `R` para resetar posição. O corte atual mostra atlas, pivot, grid, frame bounds e metadata; hitbox/hurtbox real e origem de projectile por frame estão no roadmap em [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md).
+No Sprite Combat Viewer, use o mouse esquerdo para arrastar o personagem ou dummy, `Tab` / `Shift+Tab` para alternar clip, `.` / `,` para avançar ou voltar frame, `Espaço` para pausar, mouse wheel para zoom, `0` para resetar zoom, `O` para mostrar/esconder dummy, `F5` para recarregar manifesto/atlas, `F12` para salvar screenshot em `target/sprite-viewer-capture.png`, `G` para grade, `P` para pivot, `B` para bounds e `R` para resetar posição. O corte atual mostra atlas, pivot, grid, frame bounds e metadata; hitbox/hurtbox real e origem de projectile por frame estão no roadmap em [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md).
 
 Preferências disponíveis:
 
