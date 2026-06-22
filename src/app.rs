@@ -51,7 +51,14 @@ impl App {
     pub fn new(options: LaunchOptions) -> Self {
         let match_options = options.match_options;
         let (scene, combat_lab) = match options.mode {
-            LaunchMode::Game => (AppScene::Preferences, CombatLab::default()),
+            LaunchMode::Game => (
+                if options.start_fight {
+                    AppScene::Fight
+                } else {
+                    AppScene::Preferences
+                },
+                CombatLab::default(),
+            ),
             LaunchMode::CombatLab(options) => (AppScene::CombatLab, CombatLab::new(options)),
         };
 

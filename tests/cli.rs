@@ -10,6 +10,7 @@ fn no_args_start_regular_game() {
 
     assert_eq!(options.mode, LaunchMode::Game);
     assert_eq!(options.match_options, MatchOptions::default());
+    assert!(!options.start_fight);
 }
 
 #[test]
@@ -37,6 +38,19 @@ fn game_args_accept_long_character_flags() {
     )
     .unwrap();
 
+    assert_eq!(options.match_options.player_one, CharacterId::Go);
+    assert_eq!(options.match_options.player_two, CharacterId::Duke);
+}
+
+#[test]
+fn game_args_can_start_directly_in_fight() {
+    let options = LaunchOptions::parse(
+        ["borrow-fighters", "--fight", "--p1", "go", "--p2", "duke"].map(String::from),
+    )
+    .unwrap();
+
+    assert_eq!(options.mode, LaunchMode::Game);
+    assert!(options.start_fight);
     assert_eq!(options.match_options.player_one, CharacterId::Go);
     assert_eq!(options.match_options.player_two, CharacterId::Duke);
 }

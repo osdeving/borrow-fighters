@@ -4,7 +4,7 @@
 
 Em implementação.
 
-Fases 1 a 4 concluídas em corte mínimo. A Fase 5 tem o primeiro corte de identidade por dados: Rust ganhou anti-air/throw mais rápidos e menores; Duke ganhou sweep/overhead/throw mais longos, pesados e puníveis; Go entrou como rushdown greybox testável no Combat Lab e em match real via `--p1`/`--p2`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, personagens possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout, e o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`.
+Fases 1 a 4 concluídas em corte mínimo. A Fase 5 tem o primeiro corte de identidade por dados: Rust ganhou anti-air/throw mais rápidos e menores; Duke ganhou sweep/overhead/throw mais longos, pesados e puníveis; Go entrou como rushdown greybox testável no Combat Lab e em match real via `--fight --p1`/`--p2`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, personagens possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout, e o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -228,7 +228,7 @@ Objetivo:
 Entrada proposta:
 
 ```bash
-cargo run -- --p1 go --p2 duke
+cargo run -- --fight --p1 go --p2 duke
 cargo run -- --lab combat --character rust
 cargo run -- --lab combat --character duke --move heavy_punch
 cargo run -- --lab combat --character go --move kick

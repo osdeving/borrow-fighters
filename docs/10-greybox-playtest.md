@@ -52,10 +52,10 @@ Comando:
 
 ```bash
 cargo run
-cargo run -- --p1 go --p2 duke
+cargo run -- --fight --p1 go --p2 duke
 ```
 
-Use `--p1`/`--player-one` e `--p2`/`--player-two` para iniciar matchups específicos sem tela de seleção. Valores aceitos: `rust`, `duke`, `java`, `go`, `golang` e `gopher`.
+Use `--p1`/`--player-one` e `--p2`/`--player-two` para iniciar matchups específicos sem tela de seleção. Valores aceitos: `rust`, `duke`, `java`, `go`, `golang` e `gopher`. Use `--fight` ou `--skip-menu` para abrir diretamente na luta.
 
 Checks úteis:
 

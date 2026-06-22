@@ -34,7 +34,7 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 
 O início de luta fica em [`src/game/world.rs`](../src/game/world.rs), não no renderer. `World::new_greybox_with_intro` liga primeiro `spawn_intro_timer` para a entrada cinematográfica e também prepara `countdown_timer`.
 
-O matchup inicial vem de [`LaunchOptions.match_options`](../src/cli.rs), que aceita `--p1`/`--player-one` e `--p2`/`--player-two` para a luta normal. [`App`](../src/app.rs) preserva essa escolha no primeiro mundo e em `restart_match`, chamando `World::new_greybox_with_intro_for_characters`.
+O matchup inicial vem de [`LaunchOptions.match_options`](../src/cli.rs), que aceita `--p1`/`--player-one` e `--p2`/`--player-two` para a luta normal. `LaunchOptions.start_fight` vem de `--fight`/`--skip-menu` e permite iniciar direto em `AppScene::Fight`. [`App`](../src/app.rs) preserva essa escolha no primeiro mundo e em `restart_match`, chamando `World::new_greybox_with_intro_for_characters`.
 
 Enquanto `spawn_intro_active` ou `countdown_active` estiverem ativos, `World::update_with_flags` atualiza apenas timers e feedback transitório; movimento, ataques, projéteis e IA não avançam gameplay. A contagem visual usa os labels `11`, `10`, `01` e `Fight!`, expostos por `World::countdown_label`. Os eventos de áudio correspondentes são `match.countdown.11`, `match.countdown.10`, `match.countdown.01` e `match.countdown.fight`.
 
@@ -206,7 +206,7 @@ A intenção de gameplay por golpe vive em [`docs/15-character-combat-matrix.md`
 Abrir o laboratório:
 
 ```bash
-cargo run -- --p1 go --p2 duke
+cargo run -- --fight --p1 go --p2 duke
 cargo run -- --lab combat --character rust --move light_punch
 cargo run -- --lab combat --character duke --move projectile
 cargo run -- --lab combat --character rust --move sweep
@@ -221,6 +221,7 @@ Valores aceitos:
 
 | Flag | Valores |
 |---|---|
+| `--fight`, `--skip-menu` | sem valor; inicia direto na luta normal |
 | `--p1`, `--player-one` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |
 | `--p2`, `--player-two` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |
 | `--character` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |

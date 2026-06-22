@@ -24,6 +24,7 @@ pub enum LaunchMode {
 pub struct LaunchOptions {
     pub mode: LaunchMode,
     pub match_options: MatchOptions,
+    pub start_fight: bool,
 }
 
 /// Match setup selected before the app creates the first world.
@@ -56,9 +57,13 @@ impl LaunchOptions {
         let mut mode = LaunchMode::Game;
         let mut lab = CombatLabOptions::default();
         let mut match_options = MatchOptions::default();
+        let mut start_fight = false;
 
         while let Some(arg) = args.next() {
             match arg.as_str() {
+                "--fight" | "--skip-menu" => {
+                    start_fight = true;
+                }
                 "--lab" => {
                     let Some(kind) = args.next() else {
                         return Err(CliError::new("--lab requires a value"));
@@ -124,6 +129,7 @@ impl LaunchOptions {
         Ok(Self {
             mode,
             match_options,
+            start_fight,
         })
     }
 }
@@ -149,5 +155,5 @@ impl Display for CliError {
 impl std::error::Error for CliError {}
 
 fn usage() -> &'static str {
-    "Usage:\n  cargo run\n  cargo run -- --p1 go --p2 duke\n  cargo run -- --lab combat --character rust --move light_punch\n  cargo run -- --lab combat --character duke --pose block\n  cargo run -- --lab combat --character go --move kick"
+    "Usage:\n  cargo run\n  cargo run -- --fight --p1 go --p2 duke\n  cargo run -- --lab combat --character rust --move light_punch\n  cargo run -- --lab combat --character duke --pose block\n  cargo run -- --lab combat --character go --move kick"
 }

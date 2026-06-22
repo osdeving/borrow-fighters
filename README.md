@@ -123,7 +123,7 @@ Comandos:
 
 ```bash
 cargo run
-cargo run -- --p1 go --p2 duke
+cargo run -- --fight --p1 go --p2 duke
 cargo run -- --player-one rust --player-two go
 ```
 
@@ -131,7 +131,7 @@ O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navega
 
 Ao iniciar uma luta, o jogo roda a entrada dos personagens e depois bloqueia input durante a contagem central `11`, `10`, `01`, `Fight!`. A arena só avança para a próxima rotação quando uma nova luta é iniciada depois de uma vitória, para preservar a pose final no mesmo cenário.
 
-Por padrão, a luta normal inicia `Rust` contra `Duke / Java`. Para testar matchups sem tela de seleção, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang` ou `gopher`. Go ainda usa placeholder greybox na luta normal, mas já consome vida, loadout e frame data próprios.
+Por padrão, a luta normal inicia `Rust` contra `Duke / Java`. Para testar matchups sem tela de seleção, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang` ou `gopher`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pela tela de preferências. Go ainda usa placeholder greybox na luta normal, mas já consome vida, loadout e frame data próprios.
 
 Para abrir o laboratório de combate direto em uma cena limpa:
 

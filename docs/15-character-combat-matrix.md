@@ -91,5 +91,5 @@ Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jo
 
 - Decidir se Rust precisa de uma ferramenta defensiva futura como `ownership_counter`.
 - Decidir se Duke precisa de um especial diferente ou se o projectile genérico ainda basta.
-- Testar Go em match real via `--p1 go`/`--p2 go` antes de criar tela de seleção.
+- Testar Go em match real via `--fight --p1 go`/`--p2 go` antes de criar tela de seleção.
 - Avaliar hitbox/hurtbox por frame quando os sprites finais começarem a limitar o tuning.
