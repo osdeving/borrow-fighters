@@ -26,6 +26,7 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Combat Lab analysis | Cálculo de vantagem estimada, pushback e dummy de contato | [`src/scenes/combat_lab_analysis.rs`](../src/scenes/combat_lab_analysis.rs) | [`tests/combat_lab.rs`](../tests/combat_lab.rs) |
 | Combat Lab render | Orquestra Raylib da cena isolada, sprites, grid e projéteis | [`src/engine/render/combat_lab.rs`](../src/engine/render/combat_lab.rs) | Teste manual via Combat Lab |
 | Combat debug UI | Boxes, pivot, dummy, overlay e texto de timing do laboratório | [`src/ui/combat_debug.rs`](../src/ui/combat_debug.rs) | Teste manual via Combat Lab |
+| Sprite Combat Viewer | Ferramenta isolada para carregar atlas em runtime, ver grid, pivot, bounds e preparar boxes data-driven | [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs) | [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs), teste manual via `--tool sprite-viewer` |
 | Input | Teclado/gamepad para luta, preferências e Combat Lab | [`src/engine/input.rs`](../src/engine/input.rs), [`src/engine/gamepad.rs`](../src/engine/gamepad.rs) | [`tests/cli.rs`](../tests/cli.rs), [`tests/feature_flags.rs`](../tests/feature_flags.rs) |
 | Sprite runtime | Manifest JSON, clip selection e desenho por pivot | [`src/engine/sprites/`](../src/engine/sprites) | [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs), [`tests/sprite_selection.rs`](../tests/sprite_selection.rs) |
 
@@ -239,6 +240,9 @@ Valores aceitos:
 | `--character` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |
 | `--move` | `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`, `projectile` |
 | `--pose` | `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory` |
+| `--tool` | `sprite-viewer` |
+| `--manifest` | caminho para um JSON `borrow-fighters.sprite.v1` |
+| `--clip` | nome de clip presente no manifesto |
 
 `--pose move` é o modo padrão e reproduz o golpe selecionado por `--move`. As outras poses são inspeções estáticas para alinhar sprite, pivot e hurtbox sem depender de uma luta real.
 
@@ -288,6 +292,34 @@ Poses atuais:
 - `block`: aplica estado de defesa;
 - `hit`: força clip visual `hit` quando o manifest possui esse clip;
 - `victory`: força clip visual `taunt`.
+
+### Sprite Combat Viewer
+
+Abrir a ferramenta isolada de sprites:
+
+```bash
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special
+```
+
+O viewer roda fora do loop normal de luta. [`src/app.rs`](../src/app.rs) desvia para esse modo antes de carregar `GameAssets` e áudio. O estado testável fica em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), e o desenho Raylib fica em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs).
+
+Teclas:
+
+| Ação | Tecla |
+|---|---|
+| Arrastar personagem | Mouse esquerdo |
+| Próximo clip | `Tab` |
+| Clip anterior | `Shift+Tab` |
+| Próximo frame | `.` |
+| Frame anterior | `,` |
+| Pausar/continuar | `Espaço` |
+| Alternar grade | `G` |
+| Alternar pivot | `P` |
+| Alternar bounds | `B` |
+| Resetar posição | `R` |
+
+O corte atual mostra atlas, pivot, frame bounds, `trimmed_bounds` e `source_crop`. Ele ainda não mostra hitbox/hurtbox real nem origem de projectile por frame, porque esses dados ainda não existem em schema. Essa evolução está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
 
 ## Cabeçalho de Arquivos
 

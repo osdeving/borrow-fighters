@@ -6,8 +6,10 @@
 use raylib::prelude::*;
 
 mod combat_lab;
+mod sprite_viewer;
 
 pub use combat_lab::draw_combat_lab;
+pub use sprite_viewer::{draw_sprite_viewer, draw_sprite_viewer_error};
 
 use crate::characters::{CharacterId, character_spec};
 use crate::combat::fighter::{AttackPhase, Facing, PlayerSlot};

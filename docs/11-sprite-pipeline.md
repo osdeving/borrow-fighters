@@ -102,9 +102,42 @@ Assets relacionados ao slice atual:
 
 As ferramentas locais ficam em `tools/art/` e devem ser tratadas como utilitarios de prototipo, nao como pipeline final.
 
+## Sprite Combat Viewer
+
+O primeiro viewer isolado de sprites vive em:
+
+- `src/scenes/sprite_viewer.rs`: estado testavel, carregamento de manifesto, clip/frame atual, playback e drag.
+- `src/engine/render/sprite_viewer.rs`: grid, pivot, bounds e desenho do atlas via Raylib.
+- `tests/sprite_viewer.rs`: contrato do estado sem abrir janela.
+
+Abrir o viewer:
+
+```bash
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special
+```
+
+Atalhos:
+
+| Acao | Tecla |
+|---|---|
+| Arrastar personagem | Mouse esquerdo |
+| Proximo clip | `Tab` |
+| Clip anterior | `Shift+Tab` |
+| Proximo frame | `.` |
+| Frame anterior | `,` |
+| Pausar/continuar | `Espaco` |
+| Alternar grade | `G` |
+| Alternar pivot | `P` |
+| Alternar bounds | `B` |
+| Resetar posicao | `R` |
+
+O corte atual e viewer, nao editor. Ele mostra frame bounds, pivot, `trimmed_bounds` e `source_crop`; hitbox, hurtbox e origem de projectile reais ainda precisam de schema data-driven. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
+
 ## Pontos ainda em aberto
 
 - Definir se o formato v1 vira padrao permanente ou ponte para Aseprite JSON.
 - Mover hurtbox/hitbox por frame para dados externos quando a arte estabilizar.
 - Definir escala base dos personagens e tamanho minimo legivel para tela 16:9.
 - Criar criterio visual para aceitar atlas de personagem como "candidato" em vez de placeholder.
+- Decidir se `projectile_origin`, hitbox e hurtbox entram no manifesto de sprite ou em arquivo lateral de personagem.

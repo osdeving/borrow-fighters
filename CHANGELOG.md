@@ -68,6 +68,9 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Seleção mínima de personagens na tela de preferências, ciclando Player 1 e Player 2 entre Rust, Duke e Go.
 - `ProjectileSpec` por personagem: Rust mantém projectile médio, Duke ganha projectile mais pesado/lento e Go ganha burst rápido de curto alcance.
 - `CombatLog` diagnóstico no `World`, registrando round, countdown, ataques, whiffs, hits, projectiles e fim de luta para reproduzir bugs.
+- Issue de follow-up de combate para playtestar a branch de identidade mecânica e decisões restantes.
+- Roadmap do Sprite Combat Viewer para artistas conferirem atlas, pivot, grid, hitbox/hurtbox futura e origem de projectile.
+- Primeiro corte do Sprite Combat Viewer por CLI, carregando manifesto/atlas em runtime, com grid, pivot, bounds, navegação de clips/frames e drag com mouse.
 
 ### Em aberto
 

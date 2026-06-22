@@ -6,6 +6,7 @@
 pub mod combat_lab;
 pub mod combat_lab_analysis;
 pub mod preferences;
+pub mod sprite_viewer;
 
 /// Top-level screen currently owned by the application loop.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -13,4 +14,5 @@ pub enum AppScene {
     Preferences,
     Fight,
     CombatLab,
+    SpriteViewer,
 }

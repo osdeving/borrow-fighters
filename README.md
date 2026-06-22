@@ -33,6 +33,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 - [`docs/07-art-direction.md`](docs/07-art-direction.md): direção de arte inicial, moods e critérios visuais.
 - [`docs/11-sprite-pipeline.md`](docs/11-sprite-pipeline.md): formato candidato para atlas, animações, pivots e metadata de sprites.
+- [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md): roadmap do viewer para artistas conferirem atlas, pivot, grade e boxes.
 - [`docs/templates/mood-proposal.md`](docs/templates/mood-proposal.md): molde para proposta de moodboard.
 - [`docs/templates/character-concept.md`](docs/templates/character-concept.md): molde para personagem e mecânica.
 - [`docs/templates/adr-template.md`](docs/templates/adr-template.md): molde para novas decisões.
@@ -46,6 +47,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`docs/13-combat-design-roadmap.md`](docs/13-combat-design-roadmap.md): plano técnico para golpes, balanceamento e Combat Lab.
 - [`docs/14-audio-pipeline.md`](docs/14-audio-pipeline.md): motor de áudio por eventos, manifesto JSON e convenções de clips.
 - [`docs/15-character-combat-matrix.md`](docs/15-character-combat-matrix.md): matriz de identidade mecânica e tuning inicial de Rust, Duke e Go.
+- [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md): ferramenta isolada para inspecionar sprites e preparar hitbox/hurtbox data-driven.
 - [`docs/09-ai-collaboration.md`](docs/09-ai-collaboration.md): como Codex, Claude e skills devem navegar o projeto.
 - [`AGENTS.md`](AGENTS.md): instruções persistentes para Codex.
 - [`CLAUDE.md`](CLAUDE.md): instruções persistentes para Claude Code.
@@ -145,6 +147,15 @@ cargo run -- --lab combat --character rust --pose block
 ```
 
 No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp` para alternar pose, `Enter` para repetir, `Espaço` para pausar, `.` para avançar 1 frame quando pausado, `Home` para voltar ao frame 0, `H` para hurtbox, `B` para hitbox, `P` para pivot/eixos, `D` para dummy de contato e `A` para mostrar/esconder o fundo de arena. O overlay mostra frame data, vantagem estimada, pushback, whiff recovery e distância após pushback. Valores aceitos em `--character`: `rust`, `rustacean`, `duke`, `java`, `go`, `golang` ou `gopher`. Valores aceitos em `--move`: `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw` e `projectile`. Valores aceitos em `--pose`: `move`, `idle`, `crouch`, `jump`, `block`, `hit` e `victory`.
+
+Para abrir o viewer de sprites direto em uma ferramenta isolada:
+
+```bash
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special
+```
+
+No Sprite Combat Viewer, use o mouse esquerdo para arrastar o personagem, `Tab` / `Shift+Tab` para alternar clip, `.` / `,` para avançar ou voltar frame, `Espaço` para pausar, `G` para grade, `P` para pivot, `B` para bounds e `R` para resetar posição. O corte atual mostra atlas, pivot, grid, frame bounds e metadata; hitbox/hurtbox real e origem de projectile por frame estão no roadmap em [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md).
 
 Preferências disponíveis:
 

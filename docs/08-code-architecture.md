@@ -46,7 +46,8 @@ borrow-fighters/
 │   │   ├── input.rs            # Raylib keyboard/gamepad -> comandos do jogo
 │   │   ├── render.rs           # Desenho de arena, HUD, debug, menu e lutadores
 │   │   ├── render/
-│   │   │   └── combat_lab.rs   # Desenho da cena isolada de Combat Lab
+│   │   │   ├── combat_lab.rs   # Desenho da cena isolada de Combat Lab
+│   │   │   └── sprite_viewer.rs # Desenho da ferramenta isolada de sprites
 │   │   └── sprites/
 │   │       ├── animation.rs    # Seleção de frame por duração
 │   │       ├── draw.rs         # Desenho de atlas com pivot
@@ -66,7 +67,8 @@ borrow-fighters/
 │   ├── scenes/
 │   │   ├── mod.rs              # Estados de tela
 │   │   ├── combat_lab.rs       # Laboratório isolado para timing e boxes
-│   │   └── preferences.rs      # Cursor e navegação da tela de ajustes
+│   │   ├── preferences.rs      # Cursor e navegação da tela de ajustes
+│   │   └── sprite_viewer.rs    # Viewer testável de atlas, pivot e frame bounds
 │   ├── ui/
 │   │   ├── mod.rs              # API dos overlays de UI/debug
 │   │   └── combat_debug.rs     # Overlay de boxes, pivot e timing do Combat Lab
@@ -151,6 +153,8 @@ Detalhes ficam em [`docs/14-audio-pipeline.md`](14-audio-pipeline.md) e [`docs/a
 ### `scenes/*`
 
 Usar cenas simples para separar fluxo de tela sem criar framework pesado.
+
+Ferramentas temporárias e plugáveis também podem entrar em `scenes/*` quando tiverem estado testável sem Raylib. O corte atual é `src/scenes/sprite_viewer.rs`, acionado por `--tool sprite-viewer`, enquanto o desenho fica em `src/engine/render/sprite_viewer.rs`. Esse modo não deve carregar `World`, áudio ou loop de luta normal.
 
 ### Feature flags runtime
 

@@ -137,6 +137,41 @@ fn combat_lab_args_select_go_character() {
 }
 
 #[test]
+fn sprite_viewer_args_select_manifest_and_clip() {
+    let options = LaunchOptions::parse(
+        [
+            "borrow-fighters",
+            "--tool",
+            "sprite-viewer",
+            "--manifest",
+            "assets/placeholder/rust-fighter.sprite.json",
+            "--clip",
+            "idle",
+        ]
+        .map(String::from),
+    )
+    .unwrap();
+
+    let LaunchMode::SpriteViewer(viewer) = options.mode else {
+        panic!("expected sprite viewer mode");
+    };
+    assert_eq!(
+        viewer.manifest_path,
+        std::path::PathBuf::from("assets/placeholder/rust-fighter.sprite.json")
+    );
+    assert_eq!(viewer.initial_clip.as_deref(), Some("idle"));
+}
+
+#[test]
+fn sprite_viewer_requires_manifest() {
+    let error =
+        LaunchOptions::parse(["borrow-fighters", "--tool", "sprite-viewer"].map(String::from))
+            .unwrap_err();
+
+    assert!(error.to_string().contains("requires --manifest"));
+}
+
+#[test]
 fn unknown_move_is_rejected() {
     let error = LaunchOptions::parse(
         [

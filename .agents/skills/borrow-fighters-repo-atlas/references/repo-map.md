@@ -30,6 +30,7 @@
 | `docs/12-worldbuilding.md` | Story, characters and Brazilian arena direction |
 | `docs/13-combat-design-roadmap.md` | Combat design, frame data and Combat Lab roadmap |
 | `docs/14-audio-pipeline.md` | Audio event and manifest pipeline |
+| `docs/16-sprite-combat-viewer-roadmap.md` | Sprite viewer/tooling roadmap for artists and combat alignment |
 | `docs/adr/` | Architecture Decision Records |
 | `docs/templates/` | Reusable proposal/checklist templates |
 
@@ -49,6 +50,7 @@
 | `src/combat/move_data.rs` | Table-driven MoveSpec data for close-range moves |
 | `src/characters/` | CharacterSpec registry and character-to-move mapping |
 | `src/scenes/` | Preference screen and isolated Combat Lab scene state |
+| `src/scenes/sprite_viewer.rs` | Testable standalone sprite viewer state |
 | `src/ui/` | Combat debug overlays and UI helpers |
 | `src/math/` | Small geometry helpers |
 | `tests/` | Integration tests for combat, flags and sprites |

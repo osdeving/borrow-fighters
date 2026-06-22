@@ -23,6 +23,7 @@ use crate::scenes::{
     AppScene,
     combat_lab::{CombatLab, CombatLabInput},
     preferences::{PreferencesAction, PreferencesMenu},
+    sprite_viewer::{SpriteViewer, SpriteViewerInput, SpriteViewerOptions, ViewerPoint},
 };
 
 /// Top-level application state outside the testable game world.
@@ -32,6 +33,7 @@ pub struct App {
     player_two_cpu: BasicCpu,
     feature_flags: FeatureFlags,
     scene: AppScene,
+    sprite_viewer_options: Option<SpriteViewerOptions>,
     preferences_menu: PreferencesMenu,
     combat_lab: CombatLab,
     match_options: MatchOptions,
@@ -51,7 +53,7 @@ impl App {
     /// Creates app state for the selected startup mode.
     pub fn new(options: LaunchOptions) -> Self {
         let match_options = options.match_options;
-        let (scene, combat_lab) = match options.mode {
+        let (scene, combat_lab, sprite_viewer_options) = match options.mode {
             LaunchMode::Game => (
                 if options.start_fight {
                     AppScene::Fight
@@ -59,8 +61,12 @@ impl App {
                     AppScene::Preferences
                 },
                 CombatLab::default(),
+                None,
             ),
-            LaunchMode::CombatLab(options) => (AppScene::CombatLab, CombatLab::new(options)),
+            LaunchMode::CombatLab(options) => (AppScene::CombatLab, CombatLab::new(options), None),
+            LaunchMode::SpriteViewer(options) => {
+                (AppScene::SpriteViewer, CombatLab::default(), Some(options))
+            }
         };
 
         Self {
@@ -72,6 +78,7 @@ impl App {
             player_two_cpu: BasicCpu::for_slot(PlayerSlot::Two),
             feature_flags: FeatureFlags::default(),
             scene,
+            sprite_viewer_options,
             preferences_menu: PreferencesMenu::default(),
             combat_lab,
             match_options,
@@ -85,6 +92,11 @@ impl App {
     /// Runs the Raylib-backed game loop until the window closes.
     pub fn run(mut self, raylib: &mut RaylibHandle, thread: &RaylibThread) {
         raylib.set_target_fps(TARGET_FPS);
+        if let Some(options) = self.sprite_viewer_options.take() {
+            run_sprite_viewer(raylib, thread, options);
+            return;
+        }
+
         let assets = GameAssets::load(raylib, thread);
         let audio_device = RaylibAudio::init_audio_device();
         let mut audio_player = match &audio_device {
@@ -328,5 +340,64 @@ const fn music_track_for_scene(scene: AppScene) -> MusicTrack {
     match scene {
         AppScene::Preferences => MusicTrack::Menu,
         AppScene::Fight | AppScene::CombatLab => MusicTrack::Combat,
+        AppScene::SpriteViewer => MusicTrack::Menu,
+    }
+}
+
+fn run_sprite_viewer(
+    raylib: &mut RaylibHandle,
+    thread: &RaylibThread,
+    options: SpriteViewerOptions,
+) {
+    let mut viewer = match SpriteViewer::load(options) {
+        Ok(viewer) => viewer,
+        Err(error) => {
+            let message = error.to_string();
+            while !raylib.window_should_close() {
+                let mut draw = raylib.begin_drawing(thread);
+                render::draw_sprite_viewer_error(&mut draw, &message);
+            }
+            return;
+        }
+    };
+
+    let texture_path = viewer.image_path().to_string_lossy().to_string();
+    let texture = match raylib.load_texture(thread, &texture_path) {
+        Ok(texture) => Some(texture),
+        Err(error) => {
+            viewer.set_texture_error(format!("could not load texture {texture_path}: {error:?}"));
+            None
+        }
+    };
+
+    while !raylib.window_should_close() {
+        let input = read_sprite_viewer_input(raylib);
+        viewer.update(input, raylib.get_frame_time().min(MAX_FRAME_TIME));
+
+        let mut draw = raylib.begin_drawing(thread);
+        render::draw_sprite_viewer(&mut draw, &viewer, texture.as_ref());
+    }
+}
+
+fn read_sprite_viewer_input(raylib: &RaylibHandle) -> SpriteViewerInput {
+    let tab_pressed = raylib.is_key_pressed(KeyboardKey::KEY_TAB);
+    let shift_down = raylib.is_key_down(KeyboardKey::KEY_LEFT_SHIFT)
+        || raylib.is_key_down(KeyboardKey::KEY_RIGHT_SHIFT);
+    let mouse = raylib.get_mouse_position();
+
+    SpriteViewerInput {
+        next_clip: tab_pressed && !shift_down,
+        previous_clip: tab_pressed && shift_down,
+        next_frame: raylib.is_key_pressed(KeyboardKey::KEY_PERIOD),
+        previous_frame: raylib.is_key_pressed(KeyboardKey::KEY_COMMA),
+        toggle_playback: raylib.is_key_pressed(KeyboardKey::KEY_SPACE),
+        toggle_grid: raylib.is_key_pressed(KeyboardKey::KEY_G),
+        toggle_pivot: raylib.is_key_pressed(KeyboardKey::KEY_P),
+        toggle_bounds: raylib.is_key_pressed(KeyboardKey::KEY_B),
+        reset_position: raylib.is_key_pressed(KeyboardKey::KEY_R),
+        mouse_position: ViewerPoint::new(mouse.x, mouse.y),
+        mouse_pressed: raylib.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_LEFT),
+        mouse_down: raylib.is_mouse_button_down(MouseButton::MOUSE_BUTTON_LEFT),
+        mouse_released: raylib.is_mouse_button_released(MouseButton::MOUSE_BUTTON_LEFT),
     }
 }
