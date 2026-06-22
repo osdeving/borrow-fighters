@@ -637,7 +637,7 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
         UI_MUTED,
     );
     draw.draw_text(
-        "drag sprite/boxes/origin | N seed frame data | Tab clip | [] golpe | =/- scale | Ctrl+S save",
+        "drag boxes/origin | H hurt | J hit | Del remove | N seed | Tab clip | Ctrl+S save",
         panel_x + 16,
         panel_y + 92,
         15,

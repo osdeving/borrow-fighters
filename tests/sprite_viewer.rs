@@ -612,6 +612,74 @@ fn seed_frame_combat_creates_editable_metadata_from_runtime_overlay() {
 }
 
 #[test]
+fn frame_combat_boxes_can_be_added_and_removed_without_json_editing() {
+    let mut viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("tests/fixtures/sprite-viewer-combat.sprite.json"),
+        initial_clip: Some("idle".to_string()),
+        character: None,
+        selected_move: CombatLabMove::LightPunch,
+    })
+    .unwrap();
+
+    viewer.update(
+        SpriteViewerInput {
+            mouse_position: ViewerPoint::new(500.0, 400.0),
+            add_frame_hurtbox: true,
+            add_frame_hitbox: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    let combat = viewer.current_frame().combat.as_ref().unwrap();
+    assert!(viewer.manifest_dirty());
+    assert_eq!(combat.hurtboxes.len(), 2);
+    assert_eq!(combat.hitboxes.len(), 2);
+    assert_eq!(combat.hurtboxes[1].label.as_deref(), Some("body"));
+    assert_eq!(combat.hitboxes[1].label.as_deref(), Some("strike"));
+    assert_eq!(combat.hitboxes[1].w, 44);
+    assert_eq!(combat.hitboxes[1].h, 30);
+
+    viewer.update(
+        SpriteViewerInput {
+            delete_frame_combat: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    let combat = viewer.current_frame().combat.as_ref().unwrap();
+    assert_eq!(combat.hurtboxes.len(), 2);
+    assert_eq!(combat.hitboxes.len(), 1);
+}
+
+#[test]
+fn frame_combat_delete_removes_projectile_origin_under_mouse() {
+    let mut viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("tests/fixtures/sprite-viewer-combat.sprite.json"),
+        initial_clip: Some("idle".to_string()),
+        character: None,
+        selected_move: CombatLabMove::Projectile,
+    })
+    .unwrap();
+
+    viewer.update(
+        SpriteViewerInput {
+            mouse_position: ViewerPoint::new(514.0, 386.0),
+            delete_frame_combat: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    let combat = viewer.current_frame().combat.as_ref().unwrap();
+    assert!(viewer.manifest_dirty());
+    assert!(combat.projectile_origin.is_none());
+    assert_eq!(combat.hurtboxes.len(), 1);
+    assert_eq!(combat.hitboxes.len(), 1);
+}
+
+#[test]
 fn timeline_phase_uses_selected_character_move_data() {
     let viewer = SpriteViewer::load(SpriteViewerOptions {
         manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),

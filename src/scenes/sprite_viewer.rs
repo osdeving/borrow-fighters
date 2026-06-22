@@ -28,6 +28,12 @@ use crate::{
     scenes::combat_lab::CombatLabMove,
 };
 
+mod combat_edit;
+
+use self::combat_edit::{
+    FrameCombatBoxDragMode, clear_empty_frame_combat, default_frame_combat_box, edit_combat_box,
+};
+
 const DEFAULT_ANCHOR_X: f32 = 480.0;
 const DEFAULT_DUMMY_ANCHOR_X: f32 = 680.0;
 const ZOOM_MIN: f32 = 0.25;
@@ -70,6 +76,9 @@ pub struct SpriteViewerInput {
     pub reload_manifest: bool,
     pub save_manifest: bool,
     pub seed_frame_combat: bool,
+    pub add_frame_hurtbox: bool,
+    pub add_frame_hitbox: bool,
+    pub delete_frame_combat: bool,
     pub increase_manifest_scale: bool,
     pub decrease_manifest_scale: bool,
     pub reset_zoom: bool,
@@ -263,15 +272,6 @@ enum DragTarget {
     ProjectileOrigin,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-enum FrameCombatBoxDragMode {
-    Move,
-    TopLeft,
-    TopRight,
-    BottomLeft,
-    BottomRight,
-}
-
 impl SpriteViewer {
     /// Loads a sprite manifest and creates viewer state.
     pub fn load(options: SpriteViewerOptions) -> Result<Self, SpriteViewerError> {
@@ -407,6 +407,15 @@ impl SpriteViewer {
         }
         if input.seed_frame_combat {
             self.seed_current_frame_combat_from_runtime();
+        }
+        if input.add_frame_hurtbox {
+            self.add_frame_combat_box(SpriteFrameCombatBoxKind::Hurtbox);
+        }
+        if input.add_frame_hitbox {
+            self.add_frame_combat_box(SpriteFrameCombatBoxKind::Hitbox);
+        }
+        if input.delete_frame_combat {
+            self.delete_frame_combat_at_mouse();
         }
         if input.reset_position {
             self.anchor = ViewerPoint::new(DEFAULT_ANCHOR_X, FLOOR_Y);
@@ -1126,6 +1135,136 @@ impl SpriteViewer {
         ));
     }
 
+    fn add_frame_combat_box(&mut self, kind: SpriteFrameCombatBoxKind) {
+        self.show_combat_overlay = true;
+        let local = self.frame_cursor().map_or_else(
+            || {
+                let frame = self.current_frame();
+                SpriteCombatPoint {
+                    x: frame.frame.w / 2,
+                    y: frame.frame.h / 2,
+                }
+            },
+            |cursor| SpriteCombatPoint {
+                x: cursor.local_x,
+                y: cursor.local_y,
+            },
+        );
+        let frame_name = self.manifest.clips[self.clip_index].frames[self.frame_index].clone();
+        let Some(frame) = self.manifest.frame_named_mut(&frame_name) else {
+            return;
+        };
+        let combat_box = default_frame_combat_box(frame, local, kind);
+        let combat = frame.combat.get_or_insert_with(SpriteFrameCombat::default);
+        let (label, index) = match kind {
+            SpriteFrameCombatBoxKind::Hurtbox => {
+                combat.hurtboxes.push(combat_box);
+                ("hurtbox", combat.hurtboxes.len() - 1)
+            }
+            SpriteFrameCombatBoxKind::Hitbox => {
+                combat.hitboxes.push(combat_box);
+                ("hitbox", combat.hitboxes.len() - 1)
+            }
+        };
+
+        self.manifest_dirty = true;
+        self.status_message = Some(format!(
+            "{} #{} adicionada em {}. Ctrl+S salva.",
+            label, index, frame.name
+        ));
+    }
+
+    fn delete_frame_combat_at_mouse(&mut self) {
+        let target = self.frame_combat_drag_target(self.mouse_position);
+        let removed = match target {
+            Some(DragTarget::FrameCombatBox { kind, index, .. }) => {
+                self.remove_frame_combat_box(kind, index)
+            }
+            Some(DragTarget::ProjectileOrigin) => self.clear_frame_projectile_origin(),
+            _ => self.remove_last_frame_combat_entry(),
+        };
+
+        if !removed {
+            self.status_message =
+                Some("Nenhuma metadata de combate para remover neste frame.".to_string());
+        }
+    }
+
+    fn remove_last_frame_combat_entry(&mut self) -> bool {
+        let frame_name = self.manifest.clips[self.clip_index].frames[self.frame_index].clone();
+        let Some(frame) = self.manifest.frame_named_mut(&frame_name) else {
+            return false;
+        };
+        let Some(combat) = frame.combat.as_mut() else {
+            return false;
+        };
+
+        let removed = if combat.hitboxes.pop().is_some() {
+            Some("ultima hitbox")
+        } else if combat.hurtboxes.pop().is_some() {
+            Some("ultima hurtbox")
+        } else if combat.projectile_origin.take().is_some() {
+            Some("origem de projectile")
+        } else {
+            None
+        };
+
+        let Some(label) = removed else {
+            return false;
+        };
+        clear_empty_frame_combat(frame);
+        self.manifest_dirty = true;
+        self.status_message = Some(format!("Removida {label} de {}. Ctrl+S salva.", frame.name));
+        true
+    }
+
+    fn remove_frame_combat_box(&mut self, kind: SpriteFrameCombatBoxKind, index: usize) -> bool {
+        let frame_name = self.manifest.clips[self.clip_index].frames[self.frame_index].clone();
+        let Some(frame) = self.manifest.frame_named_mut(&frame_name) else {
+            return false;
+        };
+        let Some(combat) = frame.combat.as_mut() else {
+            return false;
+        };
+        let boxes = match kind {
+            SpriteFrameCombatBoxKind::Hurtbox => &mut combat.hurtboxes,
+            SpriteFrameCombatBoxKind::Hitbox => &mut combat.hitboxes,
+        };
+        if index >= boxes.len() {
+            return false;
+        }
+
+        boxes.remove(index);
+        clear_empty_frame_combat(frame);
+        self.manifest_dirty = true;
+        self.status_message = Some(format!(
+            "{kind:?} #{index} removida de {}. Ctrl+S salva.",
+            frame.name
+        ));
+        true
+    }
+
+    fn clear_frame_projectile_origin(&mut self) -> bool {
+        let frame_name = self.manifest.clips[self.clip_index].frames[self.frame_index].clone();
+        let Some(frame) = self.manifest.frame_named_mut(&frame_name) else {
+            return false;
+        };
+        let Some(combat) = frame.combat.as_mut() else {
+            return false;
+        };
+        if combat.projectile_origin.take().is_none() {
+            return false;
+        }
+
+        clear_empty_frame_combat(frame);
+        self.manifest_dirty = true;
+        self.status_message = Some(format!(
+            "Origem de projectile removida de {}. Ctrl+S salva.",
+            frame.name
+        ));
+        true
+    }
+
     fn screen_rect_to_frame_combat_box(
         &self,
         rect: Rect,
@@ -1515,60 +1654,6 @@ fn frame_box_drag_mode(point: ViewerPoint, rect: ViewerRect) -> Option<FrameComb
     }
 
     None
-}
-
-fn edit_combat_box(
-    combat_box: &mut SpriteCombatBox,
-    mode: FrameCombatBoxDragMode,
-    local: SpriteCombatPoint,
-    local_offset_x: i32,
-    local_offset_y: i32,
-    frame_width: i32,
-    frame_height: i32,
-) {
-    let old_right = combat_box.x + combat_box.w;
-    let old_bottom = combat_box.y + combat_box.h;
-
-    match mode {
-        FrameCombatBoxDragMode::Move => {
-            combat_box.x =
-                (local.x - local_offset_x).clamp(0, frame_width.saturating_sub(combat_box.w));
-            combat_box.y =
-                (local.y - local_offset_y).clamp(0, frame_height.saturating_sub(combat_box.h));
-        }
-        FrameCombatBoxDragMode::TopLeft => {
-            combat_box.x = local.x.clamp(0, old_right - FRAME_COMBAT_BOX_MIN_SIZE);
-            combat_box.y = local.y.clamp(0, old_bottom - FRAME_COMBAT_BOX_MIN_SIZE);
-            combat_box.w = old_right - combat_box.x;
-            combat_box.h = old_bottom - combat_box.y;
-        }
-        FrameCombatBoxDragMode::TopRight => {
-            let next_right = local
-                .x
-                .clamp(combat_box.x + FRAME_COMBAT_BOX_MIN_SIZE, frame_width);
-            combat_box.y = local.y.clamp(0, old_bottom - FRAME_COMBAT_BOX_MIN_SIZE);
-            combat_box.w = next_right - combat_box.x;
-            combat_box.h = old_bottom - combat_box.y;
-        }
-        FrameCombatBoxDragMode::BottomLeft => {
-            let next_bottom = local
-                .y
-                .clamp(combat_box.y + FRAME_COMBAT_BOX_MIN_SIZE, frame_height);
-            combat_box.x = local.x.clamp(0, old_right - FRAME_COMBAT_BOX_MIN_SIZE);
-            combat_box.w = old_right - combat_box.x;
-            combat_box.h = next_bottom - combat_box.y;
-        }
-        FrameCombatBoxDragMode::BottomRight => {
-            let next_right = local
-                .x
-                .clamp(combat_box.x + FRAME_COMBAT_BOX_MIN_SIZE, frame_width);
-            let next_bottom = local
-                .y
-                .clamp(combat_box.y + FRAME_COMBAT_BOX_MIN_SIZE, frame_height);
-            combat_box.w = next_right - combat_box.x;
-            combat_box.h = next_bottom - combat_box.y;
-        }
-    }
 }
 
 fn point_near(point: ViewerPoint, target: ViewerPoint, radius: f32) -> bool {

@@ -91,6 +91,9 @@ Atalhos:
 | Ajustar largura/altura do corpo fisico | `Ctrl+Setas` |
 | Ajustar altura abaixada do corpo fisico | `Ctrl+Shift+Setas` |
 | Gerar rascunho de `frames[].combat` pelo overlay runtime | `N` |
+| Adicionar hurtbox no frame atual | `H` |
+| Adicionar hitbox no frame atual | `J` |
+| Remover box/origem sob o mouse ou ultimo item | `Delete` |
 | Mover hurtbox/hitbox/origem de projectile do frame | Mouse esquerdo nas boxes/alcas |
 | Redimensionar hurtbox/hitbox do frame | Mouse esquerdo nos cantos da box |
 | Salvar manifestos de tuning | `Ctrl+S` |
@@ -107,6 +110,7 @@ Atalhos:
 Codigo principal:
 
 - [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs): estado testavel, manifesto, frame atual, playback e drag.
+- [`src/scenes/sprite_viewer/combat_edit.rs`](../src/scenes/sprite_viewer/combat_edit.rs): helpers puros para criar, redimensionar e limpar boxes de combate do frame.
 - [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs): desenho Raylib da ferramenta e feedback de manifesto sujo.
 - [`src/cli.rs`](../src/cli.rs): modo `--tool sprite-viewer`.
 - [`src/app.rs`](../src/app.rs): desvio para o loop isolado da ferramenta.
@@ -181,6 +185,8 @@ Ja existe:
 - preview simples de trajetoria de projectile com `T`.
 - inspetor de coordenada local/atlas do cursor para preencher `frames[].combat`;
 - geracao de rascunho de `frames[].combat` com `N`, usando o overlay runtime do golpe selecionado;
+- criacao de hurtbox/hitbox no frame atual com `H`/`J`;
+- remocao de box/origem com `Delete`;
 - alcas visuais para mover e redimensionar `frames[].combat.hurtboxes[]` e `frames[].combat.hitboxes[]`;
 - alca visual para mover `frames[].combat.projectile_origin`;
 - sincronizacao manual entre golpe e clip visual com `Enter`.
@@ -196,7 +202,7 @@ Entregas planejadas:
 - overlay comparativo contra greybox de altura alvo;
 - marca de chao, centro, alcance e margem segura;
 - refinamento de selecao para multiplas boxes sobrepostas;
-- comandos para adicionar/remover/renomear boxes sem editar JSON manualmente;
+- comandos para renomear boxes sem editar JSON manualmente;
 - manifesto ou config data-driven para metricas de arena, se a camera deixar de ser fixa;
 - export de screenshot para PR/review de arte.
 

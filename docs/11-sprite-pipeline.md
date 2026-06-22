@@ -170,6 +170,9 @@ Atalhos:
 | Ajustar largura/altura do corpo fisico | `Ctrl+Setas` |
 | Ajustar altura abaixada do corpo fisico | `Ctrl+Shift+Setas` |
 | Gerar rascunho de `frames[].combat` pelo overlay runtime | `N` |
+| Adicionar hurtbox no frame atual | `H` |
+| Adicionar hitbox no frame atual | `J` |
+| Remover box/origem sob o mouse ou ultimo item | `Delete` |
 | Mover hurtbox/hitbox/origem de projectile do frame | Mouse esquerdo nas boxes/alcas |
 | Redimensionar hurtbox/hitbox do frame | Mouse esquerdo nos cantos da box |
 | Salvar manifestos de tuning | `Ctrl+S` |
@@ -183,7 +186,7 @@ Atalhos:
 | Alternar bounds | `B` |
 | Resetar posicao | `R` |
 
-O corte atual e viewer com ajuste controlado de escala, pivot, corpo fisico e metadata visual de `frames[].combat`. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetoria prevista de projectile, timeline visual e metadata opcional de `frames[].combat`. A camada runtime de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go pelo nome do manifesto e tambem permite alternar personagem/golpe sem reiniciar a ferramenta. `N` substitui a metadata do frame atual por um rascunho baseado no overlay runtime; depois o artista/dev ajusta as boxes e a origem com mouse e salva com `Ctrl+S`. `Enter` tenta sincronizar o clip visual com o golpe atual quando o manifesto possui um clip conhecido como `punch_light`, `punch_heavy` ou `special`. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
+O corte atual e viewer com ajuste controlado de escala, pivot, corpo fisico e metadata visual de `frames[].combat`. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetoria prevista de projectile, timeline visual e metadata opcional de `frames[].combat`. A camada runtime de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go pelo nome do manifesto e tambem permite alternar personagem/golpe sem reiniciar a ferramenta. `N` substitui a metadata do frame atual por um rascunho baseado no overlay runtime; depois o artista/dev cria boxes com `H`/`J`, remove com `Delete`, ajusta as boxes e a origem com mouse e salva com `Ctrl+S`. `Enter` tenta sincronizar o clip visual com o golpe atual quando o manifesto possui um clip conhecido como `punch_light`, `punch_heavy` ou `special`. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
 
 ## Pontos ainda em aberto
 

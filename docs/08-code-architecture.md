@@ -70,7 +70,9 @@ borrow-fighters/
 │   │   ├── mod.rs              # Estados de tela
 │   │   ├── combat_lab.rs       # Laboratório isolado para timing e boxes
 │   │   ├── preferences.rs      # Cursor e navegação da tela de ajustes
-│   │   └── sprite_viewer.rs    # Viewer testável de atlas, pivot e frame bounds
+│   │   ├── sprite_viewer.rs    # Viewer testável de atlas, pivot e frame bounds
+│   │   └── sprite_viewer/
+│   │       └── combat_edit.rs  # Helpers puros para editar boxes do viewer
 │   ├── ui/
 │   │   ├── mod.rs              # API dos overlays de UI/debug
 │   │   └── combat_debug.rs     # Overlay de boxes, pivot e timing do Combat Lab

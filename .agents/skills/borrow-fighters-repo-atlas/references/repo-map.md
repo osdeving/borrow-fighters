@@ -57,6 +57,7 @@
 | `src/characters/body_metrics.rs` | Data-driven body width/height metrics per character |
 | `src/scenes/` | Preference screen and isolated Combat Lab scene state |
 | `src/scenes/sprite_viewer.rs` | Testable standalone sprite viewer state |
+| `src/scenes/sprite_viewer/combat_edit.rs` | Pure helpers for creating, resizing and clearing frame-local combat boxes in the viewer |
 | `src/ui/` | Combat debug overlays and UI helpers |
 | `src/math/` | Small geometry helpers |
 | `tests/` | Integration tests for combat, flags and sprites |
