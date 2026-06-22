@@ -447,12 +447,16 @@ Critério de aceite:
 
 ### Fase 6 — Proteções contra degeneração
 
+Status: **iniciada em corte mínimo**.
+
 Entregáveis:
 
 - testes para impedir loop infinito simples;
 - limite de hitstun/cancel se necessário;
 - cooldown e recovery para projectiles;
-- log de eventos de combate para reproduzir bugs.
+- [x] log de eventos de combate para reproduzir bugs.
+
+O primeiro corte adicionou [`src/game/combat_log.rs`](../src/game/combat_log.rs), exposto por `World::combat_log`, registrando round, countdown, ataques, whiffs, hits/blocks, projectiles e fim de luta.
 
 Critério de aceite:
 

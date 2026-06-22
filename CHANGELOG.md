@@ -67,6 +67,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Seleção de matchup por CLI para luta normal com `--p1`/`--player-one` e `--p2`/`--player-two`, além de `--fight`/`--skip-menu` para iniciar direto em match real.
 - Seleção mínima de personagens na tela de preferências, ciclando Player 1 e Player 2 entre Rust, Duke e Go.
 - `ProjectileSpec` por personagem: Rust mantém projectile médio, Duke ganha projectile mais pesado/lento e Go ganha burst rápido de curto alcance.
+- `CombatLog` diagnóstico no `World`, registrando round, countdown, ataques, whiffs, hits, projectiles e fim de luta para reproduzir bugs.
 
 ### Em aberto
 
