@@ -42,7 +42,11 @@ pub fn draw_combat_lab(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab, assets:
             assets.duke_fighter.as_ref(),
             assets.duke_projectile.as_ref(),
         ),
-        CharacterId::Go => (PLAYER_GO, None, None),
+        CharacterId::Go => (
+            PLAYER_GO,
+            assets.go_fighter.as_ref(),
+            assets.go_projectile.as_ref(),
+        ),
     };
 
     draw_fighter(

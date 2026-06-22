@@ -26,3 +26,6 @@ pub const RUST_GEAR_PROJECTILE_PATH: &str = "assets/placeholder/rust-gear-projec
 pub const DUKE_FIGHTER_MANIFEST_PATH: &str = "assets/placeholder/duke-fighter.sprite.json";
 pub const DUKE_START_MANIFEST_PATH: &str = "assets/placeholder/duke-start.sprite.json";
 pub const DUKE_BEAN_PROJECTILE_PATH: &str = "assets/placeholder/duke-bean-projectile.png";
+pub const GO_FIGHTER_MANIFEST_PATH: &str = "assets/placeholder/go-fighter.sprite.json";
+pub const GO_START_MANIFEST_PATH: &str = "assets/placeholder/go-start.sprite.json";
+pub const GO_CHANNEL_PROJECTILE_PATH: &str = "assets/placeholder/go-channel-projectile.png";

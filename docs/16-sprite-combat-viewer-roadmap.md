@@ -190,7 +190,7 @@ Entregas planejadas:
 - O schema de hitbox/hurtbox por frame entra no `borrow-fighters.sprite.v1` ou vira arquivo separado?
 - O viewer deve permitir editar dados ou apenas visualizar e gerar sugestoes?
 - O Combat Lab deve reaproveitar o mesmo estado do viewer ou apenas os mesmos dados?
-- Go deve ganhar atlas placeholder antes de boxes por frame?
+- Go ja possui atlas placeholder; falta revisar boxes por frame e criterios de aceite visual.
 - `raygui` entra como feature opcional ou evitamos dependency feature ate a ferramenta exigir?
 
 ## Criterios de Aceite Para Contribuidores

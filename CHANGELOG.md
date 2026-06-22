@@ -63,7 +63,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Vozes CC0 de contagem pré-luta registradas no manifesto de áudio.
 - Direção narrativa inicial com O Linker como força cósmica, Ada Lovelace, Rust, Duke, Assembly, frontenzos e arenas brasileiras de ciência/tecnologia.
 - Primeiro corte de golpes tradicionais: varredura baixa, overhead, anti-air, ataques aéreos e agarrão curto, com testes dedicados em `tests/traditional_moves.rs` e cobertura da CPU em `tests/cpu_traditional_moves.rs`.
-- Primeiro corte de identidade mecânica por dados: Rust com anti-air/throw mais rápidos e menores; Duke com sweep/overhead/throw mais longos, pesados e puníveis; Go como rushdown greybox no Combat Lab e em match via CLI, registrado em `docs/15-character-combat-matrix.md`.
+- Primeiro corte de identidade mecânica por dados: Rust com anti-air/throw mais rápidos e menores; Duke com sweep/overhead/throw mais longos, pesados e puníveis; Go como rushdown, agora com atlas placeholder no Combat Lab e em match via CLI, registrado em `docs/15-character-combat-matrix.md`.
 - Seleção de matchup por CLI para luta normal com `--p1`/`--player-one` e `--p2`/`--player-two`, além de `--fight`/`--skip-menu` para iniciar direto em match real.
 - Seleção mínima de personagens na tela de preferências, ciclando Player 1 e Player 2 entre Rust, Duke e Go.
 - `ProjectileSpec` por personagem: Rust mantém projectile médio, Duke ganha projectile mais pesado/lento e Go ganha burst rápido de curto alcance.
@@ -78,6 +78,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Sprite Combat Viewer com troca runtime de personagem/golpe e preview simples de trajetória de projectile.
 - Sprite Combat Viewer com inspetor de coordenada local/atlas do cursor e sincronização manual entre golpe e clip visual.
 - Backlog central reforçado com tabela **Agora / Proximo / Depois** para manter proximas frentes, issues e PRs rastreaveis.
+- Go/Gopher com atlas placeholder próprio de luta, entrada cinematográfica e projectile de canais.
 
 ### Em aberto
 

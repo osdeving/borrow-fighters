@@ -24,7 +24,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Soco forte/longo.
 - Chute.
 - Varredura baixa, overhead, anti-air, agarrão curto e ataques aéreos.
-- Primeiro corte de identidade mecânica: Rust com respostas mais rápidas/curtas; Duke com ferramentas mais longas/pesadas e mais puníveis; Go como rushdown greybox testável no Combat Lab, no menu e por CLI.
+- Primeiro corte de identidade mecânica: Rust com respostas mais rápidas/curtas; Duke com ferramentas mais longas/pesadas e mais puníveis; Go como rushdown com atlas placeholder testável no Combat Lab, no menu e por CLI.
 - Fireball horizontal simples com ritmo diferente por personagem.
 - CPU de playtest para um ou dois jogadores, com perfis diferentes e acoes variadas.
 - Opção para IA mover/defender sem dar golpes.
@@ -233,7 +233,7 @@ Controles do lab:
 
 ## Limitações conhecidas
 
-- A luta padrão ainda abre Rust x Java/Duke; Go entra na luta normal quando escolhido no menu ou por CLI e ainda usa o spritesheet greybox genérico com cor própria.
+- A luta padrão ainda abre Rust x Java/Duke; Go entra na luta normal quando escolhido no menu ou por CLI usando atlas placeholder próprio de luta, entrada e projectile.
 - Rust e Duke ainda compartilham parte do kit genérico; o contraste principal já aparece em jab, heavy, anti-air, sweep, overhead e throw.
 - As arenas bitmap são placeholders gerados/derivados de referências e não devem ser tratadas como arte final.
 - O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.

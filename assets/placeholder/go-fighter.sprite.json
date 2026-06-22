@@ -1,0 +1,70 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "go-fighter-atlas.png",
+  "source": "../references/go-sprite-altas.png",
+  "cell": { "w": 384, "h": 256 },
+  "default_pivot": { "x": 112, "y": 236 },
+  "scale": 1.0,
+  "notes": [
+    "AI-generated Go/Gopher atlas candidate for runtime sprite validation.",
+    "Frames use a 6x6 grid with 384x256 cells and consistent grounded pivot.",
+    "Go Gopher is originally by Renee French; this is a project-local derivative candidate, not final art."
+  ],
+  "frames": [
+    { "name": "idle_0", "clip": "idle", "duration_ms": 140, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 0, "y": 0, "w": 384, "h": 256 } },
+    { "name": "idle_1", "clip": "idle", "duration_ms": 140, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 384, "y": 0, "w": 384, "h": 256 } },
+    { "name": "idle_2", "clip": "idle", "duration_ms": 140, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 768, "y": 0, "w": 384, "h": 256 } },
+    { "name": "idle_3", "clip": "idle", "duration_ms": 140, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1152, "y": 0, "w": 384, "h": 256 } },
+    { "name": "idle_4", "clip": "idle", "duration_ms": 140, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1536, "y": 0, "w": 384, "h": 256 } },
+    { "name": "walk_0", "clip": "walk", "duration_ms": 90, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1920, "y": 0, "w": 384, "h": 256 } },
+
+    { "name": "walk_1", "clip": "walk", "duration_ms": 90, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 0, "y": 256, "w": 384, "h": 256 } },
+    { "name": "walk_2", "clip": "walk", "duration_ms": 90, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 384, "y": 256, "w": 384, "h": 256 } },
+    { "name": "walk_3", "clip": "walk", "duration_ms": 90, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 768, "y": 256, "w": 384, "h": 256 } },
+    { "name": "walk_4", "clip": "walk", "duration_ms": 90, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1152, "y": 256, "w": 384, "h": 256 } },
+    { "name": "walk_5", "clip": "walk", "duration_ms": 90, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1536, "y": 256, "w": 384, "h": 256 } },
+    { "name": "crouch_0", "clip": "crouch", "duration_ms": 120, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1920, "y": 256, "w": 384, "h": 256 } },
+
+    { "name": "crouch_1", "clip": "crouch", "duration_ms": 120, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 0, "y": 512, "w": 384, "h": 256 } },
+    { "name": "crouch_2", "clip": "crouch", "duration_ms": 120, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 384, "y": 512, "w": 384, "h": 256 } },
+    { "name": "jump_0", "clip": "jump", "duration_ms": 120, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 768, "y": 512, "w": 384, "h": 256 } },
+    { "name": "jump_1", "clip": "jump", "duration_ms": 120, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1152, "y": 512, "w": 384, "h": 256 } },
+    { "name": "jump_2", "clip": "jump", "duration_ms": 120, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1536, "y": 512, "w": 384, "h": 256 } },
+    { "name": "punch_light_0", "clip": "punch_light", "duration_ms": 80, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1920, "y": 512, "w": 384, "h": 256 } },
+
+    { "name": "punch_light_1", "clip": "punch_light", "duration_ms": 80, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 0, "y": 768, "w": 384, "h": 256 } },
+    { "name": "punch_light_2", "clip": "punch_light", "duration_ms": 80, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 384, "y": 768, "w": 384, "h": 256 } },
+    { "name": "punch_heavy_0", "clip": "punch_heavy", "duration_ms": 110, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 768, "y": 768, "w": 384, "h": 256 } },
+    { "name": "punch_heavy_1", "clip": "punch_heavy", "duration_ms": 110, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1152, "y": 768, "w": 384, "h": 256 } },
+    { "name": "punch_heavy_2", "clip": "punch_heavy", "duration_ms": 110, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1536, "y": 768, "w": 384, "h": 256 } },
+    { "name": "kick_0", "clip": "kick", "duration_ms": 95, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1920, "y": 768, "w": 384, "h": 256 } },
+
+    { "name": "kick_1", "clip": "kick", "duration_ms": 95, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 0, "y": 1024, "w": 384, "h": 256 } },
+    { "name": "kick_2", "clip": "kick", "duration_ms": 95, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 384, "y": 1024, "w": 384, "h": 256 } },
+    { "name": "block_0", "clip": "block", "duration_ms": 120, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 768, "y": 1024, "w": 384, "h": 256 } },
+    { "name": "block_1", "clip": "block", "duration_ms": 120, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1152, "y": 1024, "w": 384, "h": 256 } },
+    { "name": "hit_0", "clip": "hit", "duration_ms": 120, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1536, "y": 1024, "w": 384, "h": 256 } },
+    { "name": "hit_1", "clip": "hit", "duration_ms": 120, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1920, "y": 1024, "w": 384, "h": 256 } },
+
+    { "name": "taunt_0", "clip": "taunt", "duration_ms": 180, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 0, "y": 1280, "w": 384, "h": 256 } },
+    { "name": "taunt_1", "clip": "taunt", "duration_ms": 180, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 384, "y": 1280, "w": 384, "h": 256 } },
+    { "name": "special_0", "clip": "special", "duration_ms": 100, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 768, "y": 1280, "w": 384, "h": 256 }, "combat": { "projectile_origin": { "x": 225, "y": 150 } } },
+    { "name": "special_1", "clip": "special", "duration_ms": 100, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1152, "y": 1280, "w": 384, "h": 256 }, "combat": { "projectile_origin": { "x": 245, "y": 151 } } },
+    { "name": "special_2", "clip": "special", "duration_ms": 100, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1536, "y": 1280, "w": 384, "h": 256 }, "combat": { "projectile_origin": { "x": 260, "y": 150 } } },
+    { "name": "idle_reference", "clip": "idle_reference", "duration_ms": 140, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1920, "y": 1280, "w": 384, "h": 256 } }
+  ],
+  "clips": [
+    { "name": "idle", "loop": true, "frames": ["idle_0", "idle_1", "idle_2", "idle_3", "idle_4"] },
+    { "name": "walk", "loop": true, "frames": ["walk_0", "walk_1", "walk_2", "walk_3", "walk_4", "walk_5"] },
+    { "name": "crouch", "loop": false, "frames": ["crouch_0", "crouch_1", "crouch_2"] },
+    { "name": "jump", "loop": false, "frames": ["jump_0", "jump_1", "jump_2"] },
+    { "name": "punch_light", "loop": false, "frames": ["punch_light_0", "punch_light_1", "punch_light_2"] },
+    { "name": "punch_heavy", "loop": false, "frames": ["punch_heavy_0", "punch_heavy_1", "punch_heavy_2"] },
+    { "name": "kick", "loop": false, "frames": ["kick_0", "kick_1", "kick_2"] },
+    { "name": "block", "loop": true, "frames": ["block_0", "block_1"] },
+    { "name": "hit", "loop": false, "frames": ["hit_0", "hit_1"] },
+    { "name": "taunt", "loop": false, "frames": ["taunt_0", "taunt_1"] },
+    { "name": "special", "loop": false, "frames": ["special_0", "special_1", "special_2"] },
+    { "name": "idle_reference", "loop": true, "frames": ["idle_reference"] }
+  ]
+}

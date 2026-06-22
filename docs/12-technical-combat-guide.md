@@ -206,7 +206,7 @@ Personagens ficam em [`src/characters/mod.rs`](../src/characters/mod.rs). Cada `
 - `move_ids`: golpes próximos disponíveis no loadout;
 - `projectile`: `ProjectileSpec` usado para dano, tamanho, velocidade, cooldown, reação e limite de alcance do especial.
 
-Hoje `Rust` usa `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` para reforçar leitura técnica: golpes mais rápidos, menores e menos danosos. `Duke` usa `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` para reforçar midrange pressure: mais alcance/dano, startup maior e whiff mais punível. `Go` usa `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead` e `GoHopkick` para validar rushdown em greybox: menos vida, ações mais rápidas e alcance menor.
+Hoje `Rust` usa `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` para reforçar leitura técnica: golpes mais rápidos, menores e menos danosos. `Duke` usa `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` para reforçar midrange pressure: mais alcance/dano, startup maior e whiff mais punível. `Go` usa `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead` e `GoHopkick` para validar rushdown com atlas placeholder: menos vida, ações mais rápidas e alcance menor.
 
 Os especiais de projectile ficam em [`src/combat/projectile.rs`](../src/combat/projectile.rs) como `RUST_PROJECTILE_SPEC`, `DUKE_PROJECTILE_SPEC` e `GO_PROJECTILE_SPEC`. `Fighter::projectile_spec` alimenta `Projectile::from_fighter`, o Combat Lab e o overlay técnico, então alterar um spec muda luta real e lab no mesmo caminho.
 

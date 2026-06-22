@@ -57,7 +57,7 @@ Duke deve parecer resistente e inconveniente em média distância. Ele pode ganh
 
 ## Go
 
-Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jogo suporta um personagem que vence por aproximação e sequência curta, sem depender de alcance grande. No momento, Go ainda usa o spritesheet greybox genérico com cor própria no Combat Lab e em match real iniciado pelo menu ou CLI.
+Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jogo suporta um personagem que vence por aproximação e sequência curta, sem depender de alcance grande. No momento, Go usa atlas placeholder próprio de luta, entrada e projectile no Combat Lab e em match real iniciado pelo menu ou CLI.
 
 | Input | MoveId | Intenção | Dano | Startup | Alcance | Whiff | Contra-jogo |
 |---|---|---|---:|---:|---:|---:|---|

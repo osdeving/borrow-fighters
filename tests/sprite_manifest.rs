@@ -1,7 +1,10 @@
 //! Validates runtime sprite manifest loading without opening a window.
 
+use std::path::Path;
+
 use borrow_fighters::engine::sprites::{
-    DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH,
+    DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH, GO_CHANNEL_PROJECTILE_PATH,
+    GO_FIGHTER_MANIFEST_PATH, GO_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH,
     RUST_START_MANIFEST_PATH, SPRITE_SCHEMA, SpriteManifest, frame_for_clip_at,
 };
 
@@ -30,6 +33,19 @@ fn duke_fighter_manifest_loads() {
 }
 
 #[test]
+fn go_fighter_manifest_loads() {
+    let manifest = SpriteManifest::load(GO_FIGHTER_MANIFEST_PATH).expect("manifest should load");
+
+    assert_eq!(manifest.schema, SPRITE_SCHEMA);
+    assert_eq!(manifest.image, "go-fighter-atlas.png");
+    assert_eq!(manifest.frames.len(), 36);
+    assert_eq!(manifest.cell.w, 384);
+    assert!(manifest.clip_named("idle").is_some());
+    assert!(manifest.clip_named("kick").is_some());
+    assert!(manifest.clip_named("special").is_some());
+}
+
+#[test]
 fn rust_start_manifest_loads_spawn_clip() {
     let manifest = SpriteManifest::load(RUST_START_MANIFEST_PATH).expect("manifest should load");
     let spawn = manifest
@@ -55,6 +71,30 @@ fn duke_start_manifest_loads_spawn_clip() {
     assert!(!spawn.r#loop);
     assert_eq!(spawn.frames.first().map(String::as_str), Some("spawn_00"));
     assert_eq!(spawn.frames.last().map(String::as_str), Some("spawn_17"));
+}
+
+#[test]
+fn go_start_manifest_loads_spawn_clip() {
+    let manifest = SpriteManifest::load(GO_START_MANIFEST_PATH).expect("manifest should load");
+    let spawn = manifest
+        .clip_named("spawn")
+        .expect("spawn clip should exist");
+
+    assert_eq!(manifest.image, "go-start-atlas.png");
+    assert_eq!(manifest.frames.len(), 24);
+    assert!(!spawn.r#loop);
+    assert_eq!(spawn.frames.first().map(String::as_str), Some("spawn_00"));
+    assert_eq!(spawn.frames.last().map(String::as_str), Some("spawn_23"));
+}
+
+#[test]
+fn go_runtime_sprite_assets_exist() {
+    let fighter = SpriteManifest::load(GO_FIGHTER_MANIFEST_PATH).expect("manifest should load");
+    let start = SpriteManifest::load(GO_START_MANIFEST_PATH).expect("manifest should load");
+
+    assert!(fighter.image_path(GO_FIGHTER_MANIFEST_PATH).exists());
+    assert!(start.image_path(GO_START_MANIFEST_PATH).exists());
+    assert!(Path::new(GO_CHANNEL_PROJECTILE_PATH).exists());
 }
 
 #[test]

@@ -555,9 +555,9 @@ fn character_visuals<'a>(character: CharacterId, assets: &'a GameAssets) -> Char
         },
         CharacterId::Go => CharacterVisuals {
             body_color: PLAYER_GO,
-            fight_atlas: None,
-            start_atlas: None,
-            projectile_texture: None,
+            fight_atlas: assets.go_fighter.as_ref(),
+            start_atlas: assets.go_start.as_ref(),
+            projectile_texture: assets.go_projectile.as_ref(),
         },
     }
 }

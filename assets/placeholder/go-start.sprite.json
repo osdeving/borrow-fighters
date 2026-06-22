@@ -1,0 +1,74 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "go-start-atlas.png",
+  "source": "../references/go-start-anim.png",
+  "cell": { "w": 256, "h": 256 },
+  "default_pivot": { "x": 80, "y": 236 },
+  "scale": 1.0,
+  "notes": [
+    "AI-generated Go/Gopher spawn intro candidate for runtime sprite validation.",
+    "Frames use a 6x4 grid with 256x256 cells and a stable grounded pivot.",
+    "The animation uses fan-out/fan-in channel visuals to suggest goroutines and parallel execution."
+  ],
+  "frames": [
+    { "name": "spawn_00", "clip": "spawn", "duration_ms": 100, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 0, "y": 0, "w": 256, "h": 256 } },
+    { "name": "spawn_01", "clip": "spawn", "duration_ms": 100, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 256, "y": 0, "w": 256, "h": 256 } },
+    { "name": "spawn_02", "clip": "spawn", "duration_ms": 100, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 512, "y": 0, "w": 256, "h": 256 } },
+    { "name": "spawn_03", "clip": "spawn", "duration_ms": 100, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 768, "y": 0, "w": 256, "h": 256 } },
+    { "name": "spawn_04", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 1024, "y": 0, "w": 256, "h": 256 } },
+    { "name": "spawn_05", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 1280, "y": 0, "w": 256, "h": 256 } },
+
+    { "name": "spawn_06", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 0, "y": 256, "w": 256, "h": 256 } },
+    { "name": "spawn_07", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 256, "y": 256, "w": 256, "h": 256 } },
+    { "name": "spawn_08", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 512, "y": 256, "w": 256, "h": 256 } },
+    { "name": "spawn_09", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 768, "y": 256, "w": 256, "h": 256 } },
+    { "name": "spawn_10", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 1024, "y": 256, "w": 256, "h": 256 } },
+    { "name": "spawn_11", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 1280, "y": 256, "w": 256, "h": 256 } },
+
+    { "name": "spawn_12", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 0, "y": 512, "w": 256, "h": 256 } },
+    { "name": "spawn_13", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 256, "y": 512, "w": 256, "h": 256 } },
+    { "name": "spawn_14", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 512, "y": 512, "w": 256, "h": 256 } },
+    { "name": "spawn_15", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 768, "y": 512, "w": 256, "h": 256 } },
+    { "name": "spawn_16", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 1024, "y": 512, "w": 256, "h": 256 } },
+    { "name": "spawn_17", "clip": "spawn", "duration_ms": 90, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 1280, "y": 512, "w": 256, "h": 256 } },
+
+    { "name": "spawn_18", "clip": "spawn", "duration_ms": 100, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 0, "y": 768, "w": 256, "h": 256 } },
+    { "name": "spawn_19", "clip": "spawn", "duration_ms": 110, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 256, "y": 768, "w": 256, "h": 256 } },
+    { "name": "spawn_20", "clip": "spawn", "duration_ms": 110, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 512, "y": 768, "w": 256, "h": 256 } },
+    { "name": "spawn_21", "clip": "spawn", "duration_ms": 120, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 768, "y": 768, "w": 256, "h": 256 } },
+    { "name": "spawn_22", "clip": "spawn", "duration_ms": 120, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 1024, "y": 768, "w": 256, "h": 256 } },
+    { "name": "spawn_23", "clip": "spawn", "duration_ms": 140, "pivot": { "x": 80, "y": 236 }, "frame": { "x": 1280, "y": 768, "w": 256, "h": 256 } }
+  ],
+  "clips": [
+    {
+      "name": "spawn",
+      "loop": false,
+      "frames": [
+        "spawn_00",
+        "spawn_01",
+        "spawn_02",
+        "spawn_03",
+        "spawn_04",
+        "spawn_05",
+        "spawn_06",
+        "spawn_07",
+        "spawn_08",
+        "spawn_09",
+        "spawn_10",
+        "spawn_11",
+        "spawn_12",
+        "spawn_13",
+        "spawn_14",
+        "spawn_15",
+        "spawn_16",
+        "spawn_17",
+        "spawn_18",
+        "spawn_19",
+        "spawn_20",
+        "spawn_21",
+        "spawn_22",
+        "spawn_23"
+      ]
+    }
+  ]
+}

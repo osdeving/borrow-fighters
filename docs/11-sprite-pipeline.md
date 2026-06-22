@@ -95,6 +95,7 @@ O primeiro corte vive em `src/engine/sprites/`:
 
 O personagem Rust usa `assets/placeholder/rust-fighter.sprite.json`.
 O Player 2/Duke usa `assets/placeholder/duke-fighter.sprite.json`.
+Go usa `assets/placeholder/go-fighter.sprite.json`.
 
 O runtime tambem usa:
 
@@ -107,11 +108,13 @@ As animacoes de entrada atuais vivem em manifests separados para nao misturar fr
 
 - `assets/placeholder/rust-start-atlas.png`
 - `assets/placeholder/duke-start-atlas.png`
+- `assets/placeholder/go-start-atlas.png`
 
 Assets relacionados ao slice atual:
 
 - `assets/placeholder/rust-gear-projectile.png`
 - `assets/placeholder/duke-bean-projectile.png`
+- `assets/placeholder/go-channel-projectile.png`
 - `assets/placeholder/arena-sirius.png`
 - `assets/placeholder/arena-fortaleza.png`
 - `assets/placeholder/arena-java-street.png`
