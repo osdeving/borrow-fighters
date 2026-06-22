@@ -172,6 +172,41 @@ impl Projectile {
         }
     }
 
+    /// Spawns a projectile from a projected sprite-local origin.
+    pub fn from_fighter_with_origin(fighter: &Fighter, origin: Vec2) -> Self {
+        Self::from_fighter_with_spec_and_origin(fighter, fighter.projectile_spec(), origin)
+    }
+
+    /// Spawns a projectile from a projected sprite-local origin and explicit tuning.
+    pub fn from_fighter_with_spec_and_origin(
+        fighter: &Fighter,
+        spec: ProjectileSpec,
+        origin: Vec2,
+    ) -> Self {
+        let direction = match fighter.facing {
+            Facing::Left => -1.0,
+            Facing::Right => 1.0,
+        };
+        let x = match fighter.facing {
+            Facing::Left => origin.x - spec.width,
+            Facing::Right => origin.x,
+        };
+
+        Self {
+            owner: fighter.slot,
+            position: Vec2::new(x, origin.y - spec.height * 0.5),
+            velocity: Vec2::new(direction * spec.speed, 0.0),
+            width: spec.width,
+            height: spec.height,
+            damage: spec.damage,
+            guard_rule: spec.guard_rule,
+            hit_reaction: spec.hit_reaction,
+            alive: true,
+            distance_traveled: 0.0,
+            max_travel: spec.max_travel,
+        }
+    }
+
     /// Advances projectile position.
     pub fn update(&mut self, dt: f32) {
         self.position.x += self.velocity.x * dt;

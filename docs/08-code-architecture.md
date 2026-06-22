@@ -50,6 +50,7 @@ borrow-fighters/
 │   │   │   └── sprite_viewer.rs # Desenho da ferramenta isolada de sprites
 │   │   └── sprites/
 │   │       ├── animation.rs    # Seleção de frame por duração
+│   │       ├── combat.rs       # Projeção de frames[].combat para coordenadas de mundo
 │   │       ├── draw.rs         # Desenho de atlas com pivot
 │   │       ├── manifest.rs     # Leitura/validação de JSON de sprite
 │   │       ├── mod.rs          # API do módulo de sprites
@@ -118,6 +119,8 @@ Deve expor os módulos internos para testes e exemplos. Regras puras de jogo dev
 É a camada de adaptação com Raylib. Ela pode conhecer Raylib. O core de combate deve depender pouco ou nada de Raylib para ficar testável.
 
 `src/engine/audio.rs` segue essa regra: ele carrega `Sound` e chama Raylib, mas recebe eventos e bindings já modelados pelo domínio de áudio.
+
+`src/engine/sprites/combat.rs` tambem fica em `engine` porque depende do formato de sprite, clip, pivot e escala visual. Ele nao depende de Raylib; apenas projeta metadata local do atlas para `Rect`/`Vec2` em coordenadas de mundo para que `game::World` possa usar com fallback.
 
 ### `combat/*`
 

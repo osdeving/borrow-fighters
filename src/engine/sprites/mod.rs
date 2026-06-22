@@ -4,11 +4,16 @@
 //! stays at the engine boundary.
 
 pub mod animation;
+pub mod combat;
 mod draw;
 pub mod manifest;
 mod selection;
 
 pub use animation::frame_for_clip_at;
+pub use combat::{
+    ProjectedSpriteCombat, project_frame_combat, projected_fighter_combat,
+    projected_projectile_origin_for_clip,
+};
 pub use draw::{draw_fighter_sprite, draw_manifest_fighter_sprite, draw_projectile_texture};
 pub use manifest::{
     SPRITE_SCHEMA, SpriteClip, SpriteCombatBox, SpriteCombatPoint, SpriteFrame, SpriteFrameCombat,

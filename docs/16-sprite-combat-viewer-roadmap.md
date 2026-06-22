@@ -184,7 +184,7 @@ Ja existe:
 - alca visual para mover `frames[].combat.projectile_origin`;
 - sincronizacao manual entre golpe e clip visual com `Enter`.
 
-Regra importante: a ferramenta so salva manifestos por comando explicito (`Ctrl+S`). Escala, pivot, corpo fisico e metadata visual de hitbox/hurtbox/origem ja sao editaveis. A luta real ainda nao consome `frames[].combat`.
+Regra importante: a ferramenta so salva manifestos por comando explicito (`Ctrl+S`). Escala, pivot, corpo fisico e metadata visual de hitbox/hurtbox/origem ja sao editaveis. A luta real ja consome `frames[].combat` quando houver hitboxes, hurtboxes ou origem de projectile no frame, com fallback para os dados greybox atuais.
 
 ### Fase 4 — Produtividade Para Artistas
 
@@ -206,13 +206,17 @@ Entregas planejadas:
 - abrir diretamente um `MoveId`/golpe;
 - reproduzir startup/active/recovery com frame data real;
 - comparar visual do sprite contra hitbox/hurtbox de cada frame;
-- validar se projectile nasce da mao correta;
 - salvar notas tecnicas para a issue/PR.
+
+Ja existe:
+
+- [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) projeta `frames[].combat` para mundo com `scale`, `pivot` e `Facing`;
+- [`src/game/world.rs`](../src/game/world.rs) usa hitboxes/hurtboxes de sprite quando presentes, com fallback para `MoveSpec` e `Fighter::hurtboxes`;
+- `projectile_origin` do clip `special` pode definir de onde o projectile nasce;
+- debug visual da luta usa as mesmas boxes projetadas quando `Mostrar debug de combate` esta ligado.
 
 ## Decisoes Em Aberto
 
-- O schema de hitbox/hurtbox por frame entra no `borrow-fighters.sprite.v1` ou vira arquivo separado?
-- O viewer deve permitir editar dados ou apenas visualizar e gerar sugestoes?
 - A edicao visual de boxes deve acontecer no manifesto de sprite ou em arquivo lateral por personagem?
 - O Combat Lab deve reaproveitar o mesmo estado do viewer ou apenas os mesmos dados?
 - Go ja possui atlas placeholder; falta revisar boxes por frame e criterios de aceite visual.

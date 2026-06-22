@@ -11,12 +11,13 @@ use borrow_fighters::combat::projectile::{
     DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, PROJECTILE_DAMAGE, PROJECTILE_GUARD_RULE,
     PROJECTILE_HIT_REACTION, PROJECTILE_SPEED,
 };
+use borrow_fighters::engine::sprites::SpriteManifest;
 use borrow_fighters::game::ai::BasicCpu;
 use borrow_fighters::game::combat_log::CombatLogKind;
 use borrow_fighters::game::feature_flags::{FeatureFlag, FeatureFlags};
 use borrow_fighters::game::world::{
     MIN_BODY_GAP, MatchOutcome, ROUND_COUNTDOWN_STEP_SECONDS, ROUND_COUNTDOWN_TOTAL_SECONDS,
-    SPAWN_INTRO_DURATION_SECONDS, World,
+    SPAWN_INTRO_DURATION_SECONDS, World, WorldSpriteCombatManifests,
 };
 
 const DT: f32 = 1.0 / 60.0;
@@ -92,6 +93,73 @@ fn heavy_punch_reaches_farther_than_light_punch() {
     assert_eq!(
         world.player_two.health,
         player_two_health - HEAVY_PUNCH_DAMAGE
+    );
+}
+
+#[test]
+fn sprite_frame_hitbox_metadata_can_drive_close_hit_resolution() {
+    let mut world = World::new_greybox();
+    let player_two_health = world.player_two.max_health;
+    world.player_one.position.x = 200.0;
+    world.player_two.position.x = 600.0;
+    world.set_sprite_combat_manifests(WorldSpriteCombatManifests {
+        player_one: Some(sprite_combat_manifest(
+            r#""hitboxes": [{ "x": 380, "y": 30, "w": 80, "h": 60, "label": "long_sprite_strike" }]"#,
+        )),
+        player_two: None,
+    });
+
+    world.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    for _ in 0..8 {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    assert_eq!(
+        world.player_two.health,
+        player_two_health - RUST_BORROW_JAB_DAMAGE
+    );
+}
+
+#[test]
+fn sprite_projectile_origin_metadata_overrides_default_spawn_position() {
+    let mut world = World::new_greybox();
+    world.player_one.position.x = 200.0;
+    world.player_two.position.x = 850.0;
+    world.set_sprite_combat_manifests(WorldSpriteCombatManifests {
+        player_one: Some(sprite_combat_manifest(
+            r#""projectile_origin": { "x": 90, "y": 44 }"#,
+        )),
+        player_two: None,
+    });
+
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    let projectile = world.projectiles.first().expect("projectile should spawn");
+    let body = world.player_one.body_rect();
+    let expected_origin_x = body.center_x() - 50.0 + 90.0;
+    let expected_origin_y = body.bottom() - 120.0 + 44.0;
+    assert_eq!(
+        projectile.position.x,
+        expected_origin_x + projectile.velocity.x * DT
+    );
+    assert_eq!(
+        projectile.position.y,
+        expected_origin_y - projectile.height * 0.5
     );
 }
 
@@ -1307,6 +1375,42 @@ fn basic_cpu_varies_movement_attacks_projectiles_and_defense() {
 
 fn cpu_is_attacking(input: FighterInput) -> bool {
     input.light_punch || input.heavy_punch || input.kick
+}
+
+fn sprite_combat_manifest(combat_body: &str) -> SpriteManifest {
+    let json = format!(
+        r#"{{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "missing.png",
+  "cell": {{ "w": 500, "h": 120 }},
+  "default_pivot": {{ "x": 50, "y": 120 }},
+  "frames": [
+    {{
+      "name": "punch_light_0",
+      "clip": "punch_light",
+      "duration_ms": 1000,
+      "pivot": {{ "x": 50, "y": 120 }},
+      "frame": {{ "x": 0, "y": 0, "w": 500, "h": 120 }},
+      "combat": {{ {combat_body} }}
+    }},
+    {{
+      "name": "special_0",
+      "clip": "special",
+      "duration_ms": 1000,
+      "pivot": {{ "x": 50, "y": 120 }},
+      "frame": {{ "x": 0, "y": 0, "w": 500, "h": 120 }},
+      "combat": {{ {combat_body} }}
+    }}
+  ],
+  "clips": [
+    {{ "name": "punch_light", "loop": false, "frames": ["punch_light_0"] }},
+    {{ "name": "special", "loop": false, "frames": ["special_0"] }}
+  ]
+}}"#
+    );
+    let manifest: SpriteManifest = serde_json::from_str(&json).unwrap();
+    manifest.validate().unwrap();
+    manifest
 }
 
 #[derive(Default)]

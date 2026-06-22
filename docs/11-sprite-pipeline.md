@@ -45,7 +45,7 @@ Exemplo de metadata de combate dentro de um frame:
 }
 ```
 
-Esses valores sao medidos em pixels locais do frame do atlas, nao em coordenadas de mundo. A validacao rejeita retangulos vazios, retangulos fora do frame, labels vazias e origem de projectile fora do frame. O schema e experimental: por enquanto ele serve para inspecao no Sprite Combat Viewer e para discutir valores em PR antes de virar fonte final de balanceamento.
+Esses valores sao medidos em pixels locais do frame do atlas, nao em coordenadas de mundo. A validacao rejeita retangulos vazios, retangulos fora do frame, labels vazias e origem de projectile fora do frame. O schema ainda e experimental, mas ja participa do runtime com fallback: hitboxes/hurtboxes presentes no frame substituem as caixas greybox daquele frame; campos ausentes mantem `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`.
 
 ## Convencoes
 
@@ -92,7 +92,8 @@ O primeiro corte vive em `src/engine/sprites/`:
 1. `manifest.rs` le e valida JSON;
 2. `animation.rs` seleciona frames por duracao;
 3. `selection.rs` converte estado de lutador em clip;
-4. `draw.rs` desenha atlas com pivot via Raylib.
+4. `combat.rs` projeta `frames[].combat` para coordenadas de mundo;
+5. `draw.rs` desenha atlas com pivot via Raylib.
 
 O personagem Rust usa `assets/placeholder/rust-fighter.sprite.json`.
 O Player 2/Duke usa `assets/placeholder/duke-fighter.sprite.json`.
@@ -100,7 +101,7 @@ Go usa `assets/placeholder/go-fighter.sprite.json`.
 
 O tamanho em jogo nao deve depender da resolucao do PNG. Ajuste `scale` e `frames[].pivot` no manifesto; o renderer de luta e o Sprite Combat Viewer consomem os mesmos valores. O padrao atual de altura, largura e arena fica em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md).
 
-O corpo fisico de gameplay fica em [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json). Esse arquivo controla `width`, `standing_height` e `crouch_height` por personagem. Ele nao substitui hitbox/hurtbox por golpe, mas define o retangulo base usado por colisao corpo-corpo, hurtboxes compostas e alinhamento do sprite.
+O corpo fisico de gameplay fica em [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json). Esse arquivo controla `width`, `standing_height` e `crouch_height` por personagem. Ele define o retangulo base usado por colisao corpo-corpo, hurtboxes compostas e alinhamento do sprite. `frames[].combat` pode substituir hitbox/hurtbox por frame quando houver metadata revisada.
 
 O runtime tambem usa:
 
@@ -188,4 +189,4 @@ O corte atual e viewer com ajuste controlado de escala, pivot, corpo fisico e me
 - Decidir se hurtbox/hitbox por frame ficam definitivamente no manifesto ou migram para dados externos quando a arte estabilizar.
 - Validar em playtest o padrao inicial de escala definido em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md).
 - Criar criterio visual para aceitar atlas de personagem como "candidato" em vez de placeholder.
-- Decidir se `projectile_origin`, hitbox e hurtbox devem alimentar o balanceamento final ou continuar como metadata de alinhamento visual.
+- Definir criterio de review para `projectile_origin`, hitbox e hurtbox antes de aceitar metadata como balanceamento confiavel.

@@ -2,10 +2,14 @@
 
 use std::path::Path;
 
-use borrow_fighters::engine::sprites::{
-    DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH, GO_CHANNEL_PROJECTILE_PATH,
-    GO_FIGHTER_MANIFEST_PATH, GO_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH,
-    RUST_START_MANIFEST_PATH, SPRITE_SCHEMA, SpriteManifest, frame_for_clip_at,
+use borrow_fighters::{
+    combat::fighter::{Facing, Fighter, PlayerSlot},
+    engine::sprites::{
+        DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH, GO_CHANNEL_PROJECTILE_PATH,
+        GO_FIGHTER_MANIFEST_PATH, GO_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH,
+        RUST_START_MANIFEST_PATH, SPRITE_SCHEMA, SpriteManifest, frame_for_clip_at,
+        project_frame_combat,
+    },
 };
 
 #[test]
@@ -121,6 +125,31 @@ fn manifest_resolves_atlas_next_to_manifest_file() {
     let atlas_path = manifest.image_path(RUST_FIGHTER_MANIFEST_PATH);
 
     assert!(atlas_path.ends_with("assets/placeholder/rust-fighter-atlas.png"));
+}
+
+#[test]
+fn frame_combat_metadata_projects_to_world_space_and_mirrors_with_facing() {
+    let manifest = SpriteManifest::load("tests/fixtures/sprite-viewer-combat.sprite.json")
+        .expect("fixture manifest should load");
+    let frame = manifest.frame_named("idle_0").unwrap();
+    let mut fighter = Fighter::new(PlayerSlot::One, "Test", 200.0);
+
+    let projected = project_frame_combat(&manifest, frame, &fighter).unwrap();
+
+    assert_eq!(projected.frame_name, "idle_0");
+    assert_eq!(projected.hurtboxes[0].x, 198.0);
+    assert_eq!(projected.hurtboxes[0].y, 350.0);
+    assert_eq!(projected.hitboxes[0].x, 250.0);
+    assert_eq!(projected.hitboxes[0].y, 380.0);
+    assert_eq!(projected.projectile_origin.unwrap().x, 272.0);
+    assert_eq!(projected.projectile_origin.unwrap().y, 386.0);
+
+    fighter.facing = Facing::Left;
+    let mirrored = project_frame_combat(&manifest, frame, &fighter).unwrap();
+
+    assert_eq!(mirrored.hurtboxes[0].x, 230.0);
+    assert_eq!(mirrored.hitboxes[0].x, 198.0);
+    assert_eq!(mirrored.projectile_origin.unwrap().x, 204.0);
 }
 
 #[test]

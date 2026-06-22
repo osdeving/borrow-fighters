@@ -15,6 +15,10 @@ use crate::combat::fighter::{
 };
 use crate::combat::projectile::Projectile;
 use crate::config::{ARENA_LEFT, ARENA_RIGHT};
+use crate::engine::sprites::{
+    FighterSpriteClip, ProjectedSpriteCombat, SpriteManifest, projected_fighter_combat,
+    projected_projectile_origin_for_clip,
+};
 use crate::game::combat_log::{CombatLog, CombatLogEvent, CombatLogKind};
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
 use crate::math::rect::Rect;
@@ -45,6 +49,13 @@ pub struct HitEffect {
     pub blocked: bool,
 }
 
+/// Optional sprite manifests used to override combat boxes from frame metadata.
+#[derive(Clone, Debug, Default)]
+pub struct WorldSpriteCombatManifests {
+    pub player_one: Option<SpriteManifest>,
+    pub player_two: Option<SpriteManifest>,
+}
+
 /// Two-fighter world state for Prototype 0.1.
 #[derive(Clone, Debug)]
 pub struct World {
@@ -62,6 +73,7 @@ pub struct World {
     spawn_intro_timer: f32,
     countdown_timer: f32,
     countdown_audio_step: Option<usize>,
+    sprite_combat_manifests: WorldSpriteCombatManifests,
 }
 
 impl World {
@@ -97,6 +109,7 @@ impl World {
             spawn_intro_timer: 0.0,
             countdown_timer: 0.0,
             countdown_audio_step: None,
+            sprite_combat_manifests: WorldSpriteCombatManifests::default(),
         };
         world.record_combat(CombatLogKind::RoundStarted {
             player_one,
@@ -181,6 +194,11 @@ impl World {
             PlayerSlot::One => self.player_one_character,
             PlayerSlot::Two => self.player_two_character,
         }
+    }
+
+    /// Replaces optional sprite combat metadata used by hit/hurt resolution.
+    pub fn set_sprite_combat_manifests(&mut self, manifests: WorldSpriteCombatManifests) {
+        self.sprite_combat_manifests = manifests;
     }
 
     /// Drains audio events generated since the previous call.
@@ -316,8 +334,20 @@ impl World {
     }
 
     fn resolve_hits(&mut self, flags: FeatureFlags) {
-        let p1_attack = landed_attack(&self.player_one, &self.player_two);
-        let p2_attack = landed_attack(&self.player_two, &self.player_one);
+        let p1_sprite_combat = self.sprite_combat_for_slot(PlayerSlot::One);
+        let p2_sprite_combat = self.sprite_combat_for_slot(PlayerSlot::Two);
+        let p1_attack = landed_attack(
+            &self.player_one,
+            &self.player_two,
+            p1_sprite_combat.as_ref(),
+            p2_sprite_combat.as_ref(),
+        );
+        let p2_attack = landed_attack(
+            &self.player_two,
+            &self.player_one,
+            p2_sprite_combat.as_ref(),
+            p1_sprite_combat.as_ref(),
+        );
 
         if let Some(attack) = p1_attack {
             let pushback_direction = pushback_direction(&self.player_one, &self.player_two);
@@ -361,7 +391,7 @@ impl World {
     fn spawn_projectiles(&mut self, player_one: FighterInput, player_two: FighterInput) {
         if player_one.projectile && self.player_one.can_fire_projectile() {
             self.projectiles
-                .push(Projectile::from_fighter(&self.player_one));
+                .push(self.projectile_from_fighter(PlayerSlot::One));
             self.player_one.mark_projectile_fired();
             self.audio_events.push(AudioEvent::fighter_projectile_cast(
                 PlayerSlot::One,
@@ -376,7 +406,7 @@ impl World {
 
         if player_two.projectile && self.player_two.can_fire_projectile() {
             self.projectiles
-                .push(Projectile::from_fighter(&self.player_two));
+                .push(self.projectile_from_fighter(PlayerSlot::Two));
             self.player_two.mark_projectile_fired();
             self.audio_events.push(AudioEvent::fighter_projectile_cast(
                 PlayerSlot::Two,
@@ -405,6 +435,8 @@ impl World {
     fn resolve_projectile_hits(&mut self, flags: FeatureFlags) {
         let player_one_character = self.player_one_character;
         let player_two_character = self.player_two_character;
+        let player_one_sprite_combat = self.sprite_combat_for_slot(PlayerSlot::One);
+        let player_two_sprite_combat = self.sprite_combat_for_slot(PlayerSlot::Two);
         let mut audio_events = Vec::new();
         let mut combat_events = Vec::new();
 
@@ -415,7 +447,13 @@ impl World {
 
             let rect = projectile.rect();
             match projectile.owner {
-                PlayerSlot::One if projectile_hits_fighter(rect, &self.player_two) => {
+                PlayerSlot::One
+                    if projectile_hits_fighter(
+                        rect,
+                        &self.player_two,
+                        player_two_sprite_combat.as_ref(),
+                    ) =>
+                {
                     let pushback_direction = projectile_pushback_direction(projectile);
                     let result = take_player_two_hit(
                         &mut self.player_two,
@@ -448,7 +486,13 @@ impl World {
                         result.blocked,
                     ));
                 }
-                PlayerSlot::Two if projectile_hits_fighter(rect, &self.player_one) => {
+                PlayerSlot::Two
+                    if projectile_hits_fighter(
+                        rect,
+                        &self.player_one,
+                        player_one_sprite_combat.as_ref(),
+                    ) =>
+                {
                     let pushback_direction = projectile_pushback_direction(projectile);
                     let result = take_player_one_hit(
                         &mut self.player_one,
@@ -612,6 +656,40 @@ impl World {
     fn record_combat(&mut self, kind: CombatLogKind) {
         self.combat_log.record(self.elapsed_seconds, kind);
     }
+
+    fn sprite_combat_for_slot(&self, slot: PlayerSlot) -> Option<ProjectedSpriteCombat> {
+        let manifest = match slot {
+            PlayerSlot::One => self.sprite_combat_manifests.player_one.as_ref(),
+            PlayerSlot::Two => self.sprite_combat_manifests.player_two.as_ref(),
+        }?;
+        let fighter = match slot {
+            PlayerSlot::One => &self.player_one,
+            PlayerSlot::Two => &self.player_two,
+        };
+
+        projected_fighter_combat(manifest, fighter, self.elapsed_seconds)
+    }
+
+    fn projectile_from_fighter(&self, slot: PlayerSlot) -> Projectile {
+        let (fighter, manifest) = match slot {
+            PlayerSlot::One => (
+                &self.player_one,
+                self.sprite_combat_manifests.player_one.as_ref(),
+            ),
+            PlayerSlot::Two => (
+                &self.player_two,
+                self.sprite_combat_manifests.player_two.as_ref(),
+            ),
+        };
+        let origin = manifest.and_then(|manifest| {
+            projected_projectile_origin_for_clip(manifest, fighter, FighterSpriteClip::Special, 0.0)
+        });
+
+        match origin {
+            Some(origin) => Projectile::from_fighter_with_origin(fighter, origin),
+            None => Projectile::from_fighter(fighter),
+        }
+    }
 }
 
 fn queue_projectile_hit_audio(
@@ -661,23 +739,78 @@ impl HitEffect {
     }
 }
 
-fn landed_attack(attacker: &Fighter, defender: &Fighter) -> Option<ActiveAttack> {
-    attacker.active_attack().filter(|attack| {
-        attacker.can_register_hit()
-            && defender
-                .hurtboxes()
-                .rects()
-                .into_iter()
-                .any(|hurtbox| hitbox_hits_hurtbox(attack.hitbox, hurtbox))
-    })
+fn landed_attack(
+    attacker: &Fighter,
+    defender: &Fighter,
+    attacker_sprite_combat: Option<&ProjectedSpriteCombat>,
+    defender_sprite_combat: Option<&ProjectedSpriteCombat>,
+) -> Option<ActiveAttack> {
+    let attack = attacker.active_attack()?;
+    if !attacker.can_register_hit() {
+        return None;
+    }
+
+    let sprite_hitboxes = attacker_sprite_combat
+        .map(|combat| combat.hitboxes.as_slice())
+        .filter(|hitboxes| !hitboxes.is_empty());
+
+    if let Some(hitboxes) = sprite_hitboxes {
+        hitboxes
+            .iter()
+            .copied()
+            .find(|hitbox| hitbox_hits_defender(*hitbox, defender, defender_sprite_combat))
+            .map(|hitbox| ActiveAttack { hitbox, ..attack })
+    } else if hitbox_hits_defender(attack.hitbox, defender, defender_sprite_combat) {
+        Some(attack)
+    } else {
+        None
+    }
 }
 
-fn projectile_hits_fighter(projectile: Rect, fighter: &Fighter) -> bool {
-    fighter
-        .hurtboxes()
-        .rects()
-        .into_iter()
-        .any(|hurtbox| projectile.intersects(hurtbox))
+fn hitbox_hits_defender(
+    hitbox: Rect,
+    defender: &Fighter,
+    defender_sprite_combat: Option<&ProjectedSpriteCombat>,
+) -> bool {
+    let sprite_hurtboxes = defender_sprite_combat
+        .map(|combat| combat.hurtboxes.as_slice())
+        .filter(|hurtboxes| !hurtboxes.is_empty());
+
+    if let Some(hurtboxes) = sprite_hurtboxes {
+        hurtboxes
+            .iter()
+            .copied()
+            .any(|hurtbox| hitbox_hits_hurtbox(hitbox, hurtbox))
+    } else {
+        defender
+            .hurtboxes()
+            .rects()
+            .into_iter()
+            .any(|hurtbox| hitbox_hits_hurtbox(hitbox, hurtbox))
+    }
+}
+
+fn projectile_hits_fighter(
+    projectile: Rect,
+    fighter: &Fighter,
+    sprite_combat: Option<&ProjectedSpriteCombat>,
+) -> bool {
+    let sprite_hurtboxes = sprite_combat
+        .map(|combat| combat.hurtboxes.as_slice())
+        .filter(|hurtboxes| !hurtboxes.is_empty());
+
+    if let Some(hurtboxes) = sprite_hurtboxes {
+        hurtboxes
+            .iter()
+            .copied()
+            .any(|hurtbox| projectile.intersects(hurtbox))
+    } else {
+        fighter
+            .hurtboxes()
+            .rects()
+            .into_iter()
+            .any(|hurtbox| projectile.intersects(hurtbox))
+    }
 }
 
 fn pushback_direction(attacker: &Fighter, defender: &Fighter) -> f32 {

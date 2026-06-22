@@ -34,6 +34,7 @@
 | `docs/16-sprite-combat-viewer-roadmap.md` | Sprite viewer/tooling roadmap for artists and combat alignment |
 | `docs/17-visual-scale-and-stage-metrics.md` | Runtime visual scale, fighter size and arena metrics |
 | `docs/adr/` | Architecture Decision Records |
+| `docs/adr/0007-sprite-frame-combat-runtime.md` | Decision for using `frames[].combat` in runtime hit/hurt/projectile origin resolution |
 | `docs/templates/` | Reusable proposal/checklist templates |
 
 ## Code
@@ -46,6 +47,7 @@
 | `src/app.rs` | Top-level scene state machine and Raylib-backed app loop |
 | `src/engine/` | Raylib adapters and platform boundary |
 | `src/engine/sprites/` | Sprite manifest loading, animation and drawing |
+| `src/engine/sprites/combat.rs` | Projects `frames[].combat` metadata to world-space hitboxes/hurtboxes/projectile origins |
 | `src/game/` | Match state and world flow |
 | `src/game/ai.rs` | Simple CPU behavior for playtest |
 | `src/game/feature_flags.rs` | Runtime feature flags and preference menu data |

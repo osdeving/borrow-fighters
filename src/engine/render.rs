@@ -394,28 +394,42 @@ fn draw_fighter(
         draw_body_parts(draw, fighter, body);
     }
 
+    let sprite_combat = options.sprite_atlas.and_then(|sprite_atlas| {
+        sprites::projected_fighter_combat(
+            &sprite_atlas.manifest,
+            fighter,
+            options.world_elapsed_seconds,
+        )
+    });
+
     if options.show_debug {
         outline_rect(draw, fighter.body_rect(), BODY_OUTLINE);
-        for hurtbox in fighter.hurtboxes().rects() {
-            outline_rect(draw, hurtbox, HURTBOX);
+        if let Some(sprite_combat) = sprite_combat
+            .as_ref()
+            .filter(|combat| !combat.hurtboxes.is_empty())
+        {
+            for hurtbox in &sprite_combat.hurtboxes {
+                outline_rect(draw, *hurtbox, HURTBOX);
+            }
+        } else {
+            for hurtbox in fighter.hurtboxes().rects() {
+                outline_rect(draw, hurtbox, HURTBOX);
+            }
         }
     }
 
-    if options.show_debug
-        && let Some(attack_box) = fighter.attack_box()
-    {
-        draw.draw_rectangle(
-            attack_box.x.round() as i32,
-            attack_box.y.round() as i32,
-            attack_box.width.round() as i32,
-            attack_box.height.round() as i32,
-            if phase == AttackPhase::Active {
-                HITBOX_FILL
-            } else {
-                Color::new(255, 82, 82, 34)
-            },
-        );
-        outline_rect(draw, attack_box, HITBOX);
+    if options.show_debug {
+        let sprite_hitboxes = sprite_combat
+            .as_ref()
+            .map(|combat| combat.hitboxes.as_slice())
+            .filter(|hitboxes| !hitboxes.is_empty());
+        if let Some(hitboxes) = sprite_hitboxes {
+            for hitbox in hitboxes {
+                draw_hitbox_debug(draw, *hitbox, phase);
+            }
+        } else if let Some(attack_box) = fighter.attack_box() {
+            draw_hitbox_debug(draw, attack_box, phase);
+        }
     }
 
     if fighter.blocking {
@@ -433,8 +447,16 @@ fn draw_fighter(
         }
     }
 
+    let active_label_hitbox = if phase == AttackPhase::Active {
+        sprite_combat
+            .as_ref()
+            .and_then(|combat| combat.hitboxes.first().copied())
+            .or_else(|| fighter.active_hitbox())
+    } else {
+        None
+    };
     if options.show_debug
-        && let Some(hitbox) = fighter.active_hitbox()
+        && let Some(hitbox) = active_label_hitbox
     {
         draw.draw_text(
             "ACTIVE",
@@ -903,6 +925,21 @@ fn fill_rect(draw: &mut RaylibDrawHandle<'_>, rect: Rect, color: Color) {
         rect.height.round() as i32,
         color,
     );
+}
+
+fn draw_hitbox_debug(draw: &mut RaylibDrawHandle<'_>, hitbox: Rect, phase: AttackPhase) {
+    draw.draw_rectangle(
+        hitbox.x.round() as i32,
+        hitbox.y.round() as i32,
+        hitbox.width.round() as i32,
+        hitbox.height.round() as i32,
+        if phase == AttackPhase::Active {
+            HITBOX_FILL
+        } else {
+            Color::new(255, 82, 82, 34)
+        },
+    );
+    outline_rect(draw, hitbox, HITBOX);
 }
 
 fn outline_rect(draw: &mut RaylibDrawHandle<'_>, rect: Rect, color: Color) {

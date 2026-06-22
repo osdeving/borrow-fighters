@@ -30,7 +30,7 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Combat debug UI | Boxes, pivot, dummy, overlay e texto de timing do laboratório | [`src/ui/combat_debug.rs`](../src/ui/combat_debug.rs) | Teste manual via Combat Lab |
 | Sprite Combat Viewer | Ferramenta isolada para carregar atlas em runtime, ver grid, pivot, bounds e preparar boxes data-driven | [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs) | [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs), teste manual via `--tool sprite-viewer` |
 | Input | Teclado/gamepad para luta, preferências e Combat Lab | [`src/engine/input.rs`](../src/engine/input.rs), [`src/engine/gamepad.rs`](../src/engine/gamepad.rs) | [`tests/cli.rs`](../tests/cli.rs), [`tests/feature_flags.rs`](../tests/feature_flags.rs) |
-| Sprite runtime | Manifest JSON, clip selection e desenho por pivot | [`src/engine/sprites/`](../src/engine/sprites) | [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs), [`tests/sprite_selection.rs`](../tests/sprite_selection.rs) |
+| Sprite runtime | Manifest JSON, clip selection, projeção de `frames[].combat` e desenho por pivot | [`src/engine/sprites/`](../src/engine/sprites), [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) | [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs), [`tests/sprite_selection.rs`](../tests/sprite_selection.rs) |
 
 ## Técnica Atual
 
@@ -72,7 +72,7 @@ Hitboxes:
 - `Fighter::active_attack` só retorna hitbox ofensiva quando o frame atual está dentro da janela ativa.
 - `combat::collision::hitbox_hits_hurtbox` usa interseção AABB.
 
-Essa técnica foi escolhida porque é legível, testável sem Raylib e suficiente para o Prototype 0.1. Quando sprites finais exigirem precisão maior, o primeiro caminho experimental é `frames[].combat` no manifesto de sprite, validado em [`src/engine/sprites/manifest.rs`](../src/engine/sprites/manifest.rs) e inspecionado no Sprite Combat Viewer.
+Essa técnica foi escolhida porque é legível, testável sem Raylib e suficiente para o Prototype 0.1. Quando o frame visual declara `frames[].combat`, o runtime projeta esses dados para coordenadas de mundo em [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs). A resolução da luta usa `frames[].combat.hitboxes[]` e `frames[].combat.hurtboxes[]` quando essas listas existem; se estiverem ausentes ou vazias, volta para `MoveSpec.hitbox` e `Fighter::hurtboxes()`. A decisão está registrada em [`docs/adr/0007-sprite-frame-combat-runtime.md`](adr/0007-sprite-frame-combat-runtime.md).
 
 ### Escala Visual e Pivot
 
@@ -366,7 +366,7 @@ O viewer tambem entende metadata opcional `frames[].combat` no manifesto. Essa m
 }
 ```
 
-Por enquanto, `frames[].combat` e metadata de alinhamento visual para artista/dev revisar no viewer. A luta ainda usa `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec` como fonte de verdade de colisao e balanceamento.
+`frames[].combat` ja pode alimentar a luta real de forma incremental. Quando um frame possui `hitboxes`, elas substituem a hitbox ofensiva calculada por `MoveSpec` naquele frame. Quando um frame possui `hurtboxes`, elas substituem as hurtboxes compostas de `Fighter`. Quando o clip `special` possui `projectile_origin`, o projectile nasce desse ponto projetado para o mundo. Campos ausentes mantem fallback para `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, entao personagens sem metadata continuam jogaveis.
 
 Teclas:
 
@@ -407,7 +407,7 @@ Teclas:
 
 O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtbox atual do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetória prevista de projectile, metadata `frames[].combat` e timeline inferior com fase aproximada de startup/active/recovery quando `--character` e `--move` estao presentes. A coordenada do cursor é a referência prática para preencher `frames[].combat`: `local x,y` entra no JSON do frame; `atlas x,y` serve para conferir a posição no PNG.
 
-O viewer já possui edição visual para essa metadata: `N` substitui a metadata do frame atual por um rascunho vindo do overlay runtime, o mouse move boxes/origem, cantos das boxes redimensionam hurtboxes/hitboxes, e `Ctrl+S` persiste o manifesto. Essa edição fica em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs) e é coberta por [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs). A renderização das alças fica em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs). Mesmo assim, a luta real ainda usa `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`; `frames[].combat` continua sendo metadata visual até a fase de integração com gameplay.
+O viewer já possui edição visual para essa metadata: `N` substitui a metadata do frame atual por um rascunho vindo do overlay runtime, o mouse move boxes/origem, cantos das boxes redimensionam hurtboxes/hitboxes, e `Ctrl+S` persiste o manifesto. Essa edição fica em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs) e é coberta por [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs). A projeção runtime fica em [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs), a resolução de hits fica em [`src/game/world.rs`](../src/game/world.rs), e a renderização das alças fica em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs).
 
 O personagem e o golpe podem ser trocados em runtime com `C`/`Shift+C` e `[`/`]`, sem reabrir o comando. `Enter` tenta selecionar o clip mais provável para o golpe atual. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. A evolução restante está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
 

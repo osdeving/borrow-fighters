@@ -6,7 +6,7 @@
 use raylib::prelude::*;
 
 use crate::audio::{AudioEvent, MusicTrack};
-use crate::characters::{CHARACTER_BODY_METRICS_PATH, CharacterBodyMetricsCatalog};
+use crate::characters::{CHARACTER_BODY_METRICS_PATH, CharacterBodyMetricsCatalog, CharacterId};
 use crate::cli::{LaunchMode, LaunchOptions, MatchOptions};
 use crate::combat::fighter::{FighterInput, PlayerSlot};
 use crate::config::{FIXED_TIMESTEP, MAX_FIXED_STEPS_PER_FRAME, MAX_FRAME_TIME, TARGET_FPS};
@@ -19,7 +19,7 @@ use crate::engine::{
 use crate::game::ai::BasicCpu;
 use crate::game::arena::ArenaId;
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
-use crate::game::world::World;
+use crate::game::world::{World, WorldSpriteCombatManifests};
 use crate::scenes::{
     AppScene,
     combat_lab::{CombatLab, CombatLabInput},
@@ -107,6 +107,7 @@ impl App {
         }
 
         let assets = GameAssets::load(raylib, thread);
+        self.sync_world_sprite_combat(&assets);
         let audio_device = RaylibAudio::init_audio_device();
         let mut audio_player = match &audio_device {
             Ok(audio_device) => AudioPlayer::load(audio_device, AUDIO_MANIFEST_PATH),
@@ -158,7 +159,7 @@ impl App {
                         }
                         PreferencesAction::StartFight => {
                             if self.world.outcome.is_some() || self.match_options_dirty {
-                                self.restart_match();
+                                self.restart_match(&assets);
                             }
                             self.scene = AppScene::Fight;
                             audio_player.play_music(MusicTrack::Combat);
@@ -199,7 +200,7 @@ impl App {
                         );
                     } else {
                         if input.restart {
-                            self.restart_match();
+                            self.restart_match(&assets);
                         }
 
                         if input.toggle_cpu {
@@ -278,7 +279,7 @@ impl App {
         }
     }
 
-    fn restart_match(&mut self) {
+    fn restart_match(&mut self, assets: &GameAssets) {
         if self.advance_arena_on_next_match || self.world.outcome.is_some() {
             self.current_arena = self.current_arena.next();
         }
@@ -292,6 +293,21 @@ impl App {
         self.match_options_dirty = false;
         self.advance_arena_on_next_match = false;
         self.accumulator = 0.0;
+        self.sync_world_sprite_combat(assets);
+    }
+
+    fn sync_world_sprite_combat(&mut self, assets: &GameAssets) {
+        self.world
+            .set_sprite_combat_manifests(WorldSpriteCombatManifests {
+                player_one: fighter_manifest_for_character(
+                    self.world.player_one_character(),
+                    assets,
+                ),
+                player_two: fighter_manifest_for_character(
+                    self.world.player_two_character(),
+                    assets,
+                ),
+            });
     }
 
     fn remember_finished_match(&mut self) {
@@ -341,6 +357,18 @@ fn cycle_character(
         crate::scenes::preferences::CycleDirection::Previous => character.previous(),
         crate::scenes::preferences::CycleDirection::Next => character.next(),
     }
+}
+
+fn fighter_manifest_for_character(
+    character: CharacterId,
+    assets: &GameAssets,
+) -> Option<crate::engine::sprites::SpriteManifest> {
+    match character {
+        CharacterId::Rust => assets.rust_fighter.as_ref(),
+        CharacterId::Duke => assets.duke_fighter.as_ref(),
+        CharacterId::Go => assets.go_fighter.as_ref(),
+    }
+    .map(|atlas| atlas.manifest.clone())
 }
 
 fn play_preferences_audio_feedback<'aud>(
