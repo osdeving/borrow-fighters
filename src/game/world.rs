@@ -91,7 +91,15 @@ impl World {
 
     /// Creates a greybox fight that starts with the cinematic spawn clips.
     pub fn new_greybox_with_intro() -> Self {
-        let mut world = Self::new_greybox();
+        Self::new_greybox_with_intro_for_characters(CharacterId::Rust, CharacterId::Duke)
+    }
+
+    /// Creates an explicit-character fight with cinematic spawn clips.
+    pub fn new_greybox_with_intro_for_characters(
+        player_one: CharacterId,
+        player_two: CharacterId,
+    ) -> Self {
+        let mut world = Self::new_with_characters(player_one, player_two);
         world.spawn_intro_timer = SPAWN_INTRO_DURATION_SECONDS;
         world.countdown_timer = ROUND_COUNTDOWN_TOTAL_SECONDS;
         world

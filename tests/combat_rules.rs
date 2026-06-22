@@ -553,6 +553,23 @@ fn greybox_world_can_swap_character_specs_between_slots() {
 }
 
 #[test]
+fn greybox_intro_world_can_use_explicit_match_characters() {
+    let world = World::new_greybox_with_intro_for_characters(CharacterId::Go, CharacterId::Duke);
+
+    assert_eq!(world.player_one_character(), CharacterId::Go);
+    assert_eq!(world.player_two_character(), CharacterId::Duke);
+    assert_eq!(
+        world.player_one.name,
+        character_spec(CharacterId::Go).fighter_name
+    );
+    assert_eq!(
+        world.player_one.max_health,
+        character_spec(CharacterId::Go).stats.max_health
+    );
+    assert!(world.spawn_intro_active());
+}
+
+#[test]
 fn fighter_loadout_blocks_unlisted_close_moves() {
     let mut fighter =
         Fighter::new_with_loadout(PlayerSlot::One, "Test", 100, &KICK_ONLY_MOVES, 300.0);

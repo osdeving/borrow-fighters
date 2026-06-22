@@ -34,6 +34,8 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 
 O início de luta fica em [`src/game/world.rs`](../src/game/world.rs), não no renderer. `World::new_greybox_with_intro` liga primeiro `spawn_intro_timer` para a entrada cinematográfica e também prepara `countdown_timer`.
 
+O matchup inicial vem de [`LaunchOptions.match_options`](../src/cli.rs), que aceita `--p1`/`--player-one` e `--p2`/`--player-two` para a luta normal. [`App`](../src/app.rs) preserva essa escolha no primeiro mundo e em `restart_match`, chamando `World::new_greybox_with_intro_for_characters`.
+
 Enquanto `spawn_intro_active` ou `countdown_active` estiverem ativos, `World::update_with_flags` atualiza apenas timers e feedback transitório; movimento, ataques, projéteis e IA não avançam gameplay. A contagem visual usa os labels `11`, `10`, `01` e `Fight!`, expostos por `World::countdown_label`. Os eventos de áudio correspondentes são `match.countdown.11`, `match.countdown.10`, `match.countdown.01` e `match.countdown.fight`.
 
 O desenho da contagem fica em [`src/engine/render.rs`](../src/engine/render.rs), que só consulta `World::countdown_label`. A troca de arena é decisão de [`src/app.rs`](../src/app.rs): depois que `World::outcome` aparece, a arena atual permanece na pose de vitória e só avança quando uma nova luta é iniciada por restart ou pela tela de preferências.
@@ -195,7 +197,7 @@ Personagens ficam em [`src/characters/mod.rs`](../src/characters/mod.rs). Cada `
 - `stats.max_health`: vida máxima usada na criação do `Fighter`;
 - `move_ids`: golpes próximos disponíveis no loadout.
 
-Hoje `Rust` usa `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` para reforçar leitura técnica: golpes mais rápidos, menores e menos danosos. `Duke` usa `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` para reforçar midrange pressure: mais alcance/dano, startup maior e whiff mais punível. `Go` usa `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead` e `GoHopkick` para validar rushdown em greybox: menos vida, ações mais rápidas e alcance menor. `World::new_with_characters` já aceita qualquer `CharacterId`, mas a luta padrão ainda instancia Rust x Duke; o Combat Lab é o caminho atual para testar Go isolado.
+Hoje `Rust` usa `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` para reforçar leitura técnica: golpes mais rápidos, menores e menos danosos. `Duke` usa `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` para reforçar midrange pressure: mais alcance/dano, startup maior e whiff mais punível. `Go` usa `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead` e `GoHopkick` para validar rushdown em greybox: menos vida, ações mais rápidas e alcance menor. `World::new_with_characters` e `World::new_greybox_with_intro_for_characters` aceitam qualquer `CharacterId`; a luta padrão ainda instancia Rust x Duke, mas `--p1 go`/`--p2 go` permite testar Go em match real.
 
 A intenção de gameplay por golpe vive em [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md). Atualize essa matriz quando alterar frame data, alcance, dano, guard rule ou loadout de personagem.
 
@@ -204,6 +206,7 @@ A intenção de gameplay por golpe vive em [`docs/15-character-combat-matrix.md`
 Abrir o laboratório:
 
 ```bash
+cargo run -- --p1 go --p2 duke
 cargo run -- --lab combat --character rust --move light_punch
 cargo run -- --lab combat --character duke --move projectile
 cargo run -- --lab combat --character rust --move sweep
@@ -218,6 +221,8 @@ Valores aceitos:
 
 | Flag | Valores |
 |---|---|
+| `--p1`, `--player-one` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |
+| `--p2`, `--player-two` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |
 | `--character` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |
 | `--move` | `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`, `projectile` |
 | `--pose` | `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory` |

@@ -6,7 +6,7 @@
 use raylib::prelude::*;
 
 use crate::audio::{AudioEvent, MusicTrack};
-use crate::cli::{LaunchMode, LaunchOptions};
+use crate::cli::{LaunchMode, LaunchOptions, MatchOptions};
 use crate::combat::fighter::{FighterInput, PlayerSlot};
 use crate::config::{FIXED_TIMESTEP, MAX_FIXED_STEPS_PER_FRAME, MAX_FRAME_TIME, TARGET_FPS};
 use crate::engine::{
@@ -34,6 +34,7 @@ pub struct App {
     scene: AppScene,
     preferences_menu: PreferencesMenu,
     combat_lab: CombatLab,
+    match_options: MatchOptions,
     current_arena: ArenaId,
     advance_arena_on_next_match: bool,
     accumulator: f32,
@@ -48,19 +49,24 @@ impl Default for App {
 impl App {
     /// Creates app state for the selected startup mode.
     pub fn new(options: LaunchOptions) -> Self {
+        let match_options = options.match_options;
         let (scene, combat_lab) = match options.mode {
             LaunchMode::Game => (AppScene::Preferences, CombatLab::default()),
             LaunchMode::CombatLab(options) => (AppScene::CombatLab, CombatLab::new(options)),
         };
 
         Self {
-            world: World::new_greybox_with_intro(),
+            world: World::new_greybox_with_intro_for_characters(
+                match_options.player_one,
+                match_options.player_two,
+            ),
             player_one_cpu: BasicCpu::for_slot(PlayerSlot::One),
             player_two_cpu: BasicCpu::for_slot(PlayerSlot::Two),
             feature_flags: FeatureFlags::default(),
             scene,
             preferences_menu: PreferencesMenu::default(),
             combat_lab,
+            match_options,
             current_arena: ArenaId::STARTING_ARENA,
             advance_arena_on_next_match: false,
             accumulator: 0.0,
@@ -217,7 +223,10 @@ impl App {
         if self.advance_arena_on_next_match || self.world.outcome.is_some() {
             self.current_arena = self.current_arena.next();
         }
-        self.world = World::new_greybox_with_intro();
+        self.world = World::new_greybox_with_intro_for_characters(
+            self.match_options.player_one,
+            self.match_options.player_two,
+        );
         self.player_one_cpu = BasicCpu::for_slot(PlayerSlot::One);
         self.player_two_cpu = BasicCpu::for_slot(PlayerSlot::Two);
         self.advance_arena_on_next_match = false;

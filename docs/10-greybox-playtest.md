@@ -24,7 +24,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Soco forte/longo.
 - Chute.
 - Varredura baixa, overhead, anti-air, agarrão curto e ataques aéreos.
-- Primeiro corte de identidade mecânica: Rust com respostas mais rápidas/curtas; Duke com ferramentas mais longas/pesadas e mais puníveis; Go como rushdown greybox testável no Combat Lab.
+- Primeiro corte de identidade mecânica: Rust com respostas mais rápidas/curtas; Duke com ferramentas mais longas/pesadas e mais puníveis; Go como rushdown greybox testável no Combat Lab e em match via CLI.
 - Fireball horizontal simples em velocidade legível.
 - CPU de playtest para um ou dois jogadores, com perfis diferentes e acoes variadas.
 - Opção para IA mover/defender sem dar golpes.
@@ -52,7 +52,10 @@ Comando:
 
 ```bash
 cargo run
+cargo run -- --p1 go --p2 duke
 ```
+
+Use `--p1`/`--player-one` e `--p2`/`--player-two` para iniciar matchups específicos sem tela de seleção. Valores aceitos: `rust`, `duke`, `java`, `go`, `golang` e `gopher`.
 
 Checks úteis:
 
@@ -171,7 +174,7 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 14. A CPU do Player 2 deve variar aproximação, afastamento, pulo, socos, chutes, varredura, overhead, anti-air, agarrão curto, ataque aéreo, defesa e fireballs.
 15. Rust deve parecer mais responsivo em anti-air e throw.
 16. Duke deve controlar mais espaço com sweep, overhead e poke, mas ficar mais exposto quando erra.
-17. Go no Combat Lab deve parecer mais rápido e curto que os golpes genéricos equivalentes, pagando com menos vida.
+17. Go no Combat Lab e na luta iniciada por `--p1 go` ou `--p2 go` deve parecer mais rápido e curto que os golpes genéricos equivalentes, pagando com menos vida.
 18. A tela de preferências deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
 19. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
 20. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
@@ -227,7 +230,7 @@ Controles do lab:
 
 ## Limitações conhecidas
 
-- A luta padrão ainda abre Rust x Java/Duke; Go existe como personagem greybox de dados no Combat Lab e ainda usa o spritesheet greybox genérico com cor própria.
+- A luta padrão ainda abre Rust x Java/Duke; Go entra na luta normal somente quando escolhido por CLI e ainda usa o spritesheet greybox genérico com cor própria.
 - Rust e Duke ainda compartilham parte do kit genérico; o contraste principal já aparece em jab, heavy, anti-air, sweep, overhead e throw.
 - As arenas bitmap são placeholders gerados/derivados de referências e não devem ser tratadas como arte final.
 - O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.

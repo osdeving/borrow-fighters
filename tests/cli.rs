@@ -1,7 +1,7 @@
 //! Verifies startup argument parsing without opening a Raylib window.
 
 use borrow_fighters::characters::CharacterId;
-use borrow_fighters::cli::{LaunchMode, LaunchOptions};
+use borrow_fighters::cli::{LaunchMode, LaunchOptions, MatchOptions};
 use borrow_fighters::scenes::combat_lab::{CombatLabMove, CombatLabPose};
 
 #[test]
@@ -9,6 +9,36 @@ fn no_args_start_regular_game() {
     let options = LaunchOptions::parse(["borrow-fighters"].map(String::from)).unwrap();
 
     assert_eq!(options.mode, LaunchMode::Game);
+    assert_eq!(options.match_options, MatchOptions::default());
+}
+
+#[test]
+fn game_args_select_match_characters() {
+    let options =
+        LaunchOptions::parse(["borrow-fighters", "--p1", "go", "--p2", "rust"].map(String::from))
+            .unwrap();
+
+    assert_eq!(options.mode, LaunchMode::Game);
+    assert_eq!(options.match_options.player_one, CharacterId::Go);
+    assert_eq!(options.match_options.player_two, CharacterId::Rust);
+}
+
+#[test]
+fn game_args_accept_long_character_flags() {
+    let options = LaunchOptions::parse(
+        [
+            "borrow-fighters",
+            "--player-one",
+            "golang",
+            "--player-two",
+            "java",
+        ]
+        .map(String::from),
+    )
+    .unwrap();
+
+    assert_eq!(options.match_options.player_one, CharacterId::Go);
+    assert_eq!(options.match_options.player_two, CharacterId::Duke);
 }
 
 #[test]
@@ -107,6 +137,14 @@ fn unknown_move_is_rejected() {
     .unwrap_err();
 
     assert!(error.to_string().contains("unknown move"));
+}
+
+#[test]
+fn unknown_match_character_is_rejected() {
+    let error = LaunchOptions::parse(["borrow-fighters", "--p1", "segfault"].map(String::from))
+        .unwrap_err();
+
+    assert!(error.to_string().contains("unknown player one character"));
 }
 
 #[test]
