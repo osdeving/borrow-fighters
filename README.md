@@ -131,7 +131,7 @@ O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navega
 
 Ao iniciar uma luta, o jogo roda a entrada dos personagens e depois bloqueia input durante a contagem central `11`, `10`, `01`, `Fight!`. A arena só avança para a próxima rotação quando uma nova luta é iniciada depois de uma vitória, para preservar a pose final no mesmo cenário.
 
-Por padrão, a luta normal inicia `Rust` contra `Duke / Java`. A tela de preferências já permite ciclar Player 1 e Player 2 entre Rust, Duke e Go. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang` ou `gopher`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pela tela de preferências. Go ainda usa placeholder greybox na luta normal, mas já consome vida, loadout e frame data próprios.
+Por padrão, a luta normal inicia `Rust` contra `Duke / Java`. A tela de preferências já permite ciclar Player 1 e Player 2 entre Rust, Duke e Go. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang` ou `gopher`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pela tela de preferências. Go ainda usa placeholder greybox na luta normal, mas já consome vida, loadout, frame data e projectile próprios.
 
 Para abrir o laboratório de combate direto em uma cena limpa:
 

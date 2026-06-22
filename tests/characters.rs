@@ -2,6 +2,9 @@
 
 use borrow_fighters::characters::{CharacterArchetype, CharacterId, character_spec};
 use borrow_fighters::combat::move_data::MoveId;
+use borrow_fighters::combat::projectile::{
+    DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, RUST_PROJECTILE_SPEC,
+};
 
 #[test]
 fn rust_spec_points_to_current_prototype_moves() {
@@ -95,4 +98,25 @@ fn character_roster_cycles_in_menu_order() {
     assert_eq!(CharacterId::Rust.previous(), CharacterId::Go);
     assert_eq!(CharacterId::Duke.previous(), CharacterId::Rust);
     assert_eq!(CharacterId::Go.previous(), CharacterId::Duke);
+}
+
+#[test]
+fn character_projectiles_follow_archetype_intent() {
+    let rust = character_spec(CharacterId::Rust).projectile;
+    let duke = character_spec(CharacterId::Duke).projectile;
+    let go = character_spec(CharacterId::Go).projectile;
+
+    assert_eq!(rust, RUST_PROJECTILE_SPEC);
+    assert_eq!(duke, DUKE_PROJECTILE_SPEC);
+    assert_eq!(go, GO_PROJECTILE_SPEC);
+
+    assert!(duke.damage > rust.damage);
+    assert!(duke.speed < rust.speed);
+    assert!(duke.frame_data.cooldown > rust.frame_data.cooldown);
+    assert!(duke.width > rust.width);
+
+    assert!(go.damage < rust.damage);
+    assert!(go.speed > rust.speed);
+    assert!(go.frame_data.cooldown < rust.frame_data.cooldown);
+    assert!(go.max_travel.is_some());
 }

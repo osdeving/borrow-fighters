@@ -4,7 +4,10 @@
 //! each character without resolving attacks, drawing sprites, or owning match
 //! state.
 
-use crate::combat::move_data::MoveId;
+use crate::combat::{
+    move_data::MoveId,
+    projectile::{DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, ProjectileSpec, RUST_PROJECTILE_SPEC},
+};
 
 const RUST_STATS: CharacterStats = CharacterStats { max_health: 100 };
 const DUKE_STATS: CharacterStats = CharacterStats { max_health: 112 };
@@ -124,6 +127,7 @@ pub struct CharacterSpec {
     pub archetype: CharacterArchetype,
     pub stats: CharacterStats,
     pub move_ids: &'static [MoveId],
+    pub projectile: ProjectileSpec,
 }
 
 /// Returns the static character spec for the requested character.
@@ -136,6 +140,7 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             archetype: CharacterArchetype::AllRounder,
             stats: RUST_STATS,
             move_ids: &RUST_MOVE_IDS,
+            projectile: RUST_PROJECTILE_SPEC,
         },
         CharacterId::Duke => CharacterSpec {
             id,
@@ -144,6 +149,7 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             archetype: CharacterArchetype::MidrangePressure,
             stats: DUKE_STATS,
             move_ids: &DUKE_MOVE_IDS,
+            projectile: DUKE_PROJECTILE_SPEC,
         },
         CharacterId::Go => CharacterSpec {
             id,
@@ -152,6 +158,7 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             archetype: CharacterArchetype::Rushdown,
             stats: GO_STATS,
             move_ids: &GO_MOVE_IDS,
+            projectile: GO_PROJECTILE_SPEC,
         },
     }
 }

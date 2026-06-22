@@ -8,7 +8,7 @@ use crate::combat::{
     fighter::{Fighter, FighterInput, PlayerSlot},
     frame::FrameCount,
     move_data::{HitReaction, MoveInputKind, move_spec_for_input},
-    projectile::{PROJECTILE_FRAME_DATA, PROJECTILE_HIT_REACTION, Projectile},
+    projectile::Projectile,
 };
 use crate::config::{FIXED_TIMESTEP, FLOOR_Y};
 use crate::math::rect::Rect;
@@ -138,7 +138,8 @@ fn contact_analysis(
             ))
         }
         CombatLabAnalysisMove::Projectile => {
-            let frame_data = PROJECTILE_FRAME_DATA;
+            let projectile_spec = attacker.projectile_spec();
+            let frame_data = projectile_spec.frame_data;
             let projectile = Projectile::from_fighter(&attacker);
 
             Some((
@@ -146,7 +147,7 @@ fn contact_analysis(
                 FrameCount::ZERO,
                 FrameCount::ZERO,
                 frames_between(frame_data.spawn_frame, frame_data.cooldown),
-                PROJECTILE_HIT_REACTION,
+                projectile_spec.hit_reaction,
                 projectile.rect(),
             ))
         }
@@ -233,11 +234,12 @@ fn dummy_fighter_for(attacker_character: CharacterId) -> Fighter {
         CharacterId::Go => CharacterId::Duke,
     };
     let spec = character_spec(character);
-    Fighter::new_with_loadout(
+    Fighter::new_with_projectile_loadout(
         PlayerSlot::Two,
         spec.fighter_name,
         spec.stats.max_health,
         spec.move_ids,
+        spec.projectile,
         DEFAULT_DUMMY_X,
     )
 }

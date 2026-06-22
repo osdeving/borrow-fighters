@@ -66,6 +66,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Primeiro corte de identidade mecânica por dados: Rust com anti-air/throw mais rápidos e menores; Duke com sweep/overhead/throw mais longos, pesados e puníveis; Go como rushdown greybox no Combat Lab e em match via CLI, registrado em `docs/15-character-combat-matrix.md`.
 - Seleção de matchup por CLI para luta normal com `--p1`/`--player-one` e `--p2`/`--player-two`, além de `--fight`/`--skip-menu` para iniciar direto em match real.
 - Seleção mínima de personagens na tela de preferências, ciclando Player 1 e Player 2 entre Rust, Duke e Go.
+- `ProjectileSpec` por personagem: Rust mantém projectile médio, Duke ganha projectile mais pesado/lento e Go ganha burst rápido de curto alcance.
 
 ### Em aberto
 

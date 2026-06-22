@@ -24,8 +24,8 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Soco forte/longo.
 - Chute.
 - Varredura baixa, overhead, anti-air, agarrão curto e ataques aéreos.
-- Primeiro corte de identidade mecânica: Rust com respostas mais rápidas/curtas; Duke com ferramentas mais longas/pesadas e mais puníveis; Go como rushdown greybox testável no Combat Lab e em match via CLI.
-- Fireball horizontal simples em velocidade legível.
+- Primeiro corte de identidade mecânica: Rust com respostas mais rápidas/curtas; Duke com ferramentas mais longas/pesadas e mais puníveis; Go como rushdown greybox testável no Combat Lab, no menu e por CLI.
+- Fireball horizontal simples com ritmo diferente por personagem.
 - CPU de playtest para um ou dois jogadores, com perfis diferentes e acoes variadas.
 - Opção para IA mover/defender sem dar golpes.
 - Opção para Player 1 não receber dano.
@@ -176,18 +176,19 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 14. A CPU do Player 2 deve variar aproximação, afastamento, pulo, socos, chutes, varredura, overhead, anti-air, agarrão curto, ataque aéreo, defesa e fireballs.
 15. Rust deve parecer mais responsivo em anti-air e throw.
 16. Duke deve controlar mais espaço com sweep, overhead e poke, mas ficar mais exposto quando erra.
-17. Go no Combat Lab e na luta iniciada por `--p1 go` ou `--p2 go` deve parecer mais rápido e curto que os golpes genéricos equivalentes, pagando com menos vida.
-18. A tela de preferências deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
-19. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
-20. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
-21. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Rust.
-22. A opção `Player 2 recebe dano` desligada deve impedir perda de vida do Java.
-23. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
-24. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
-25. `R` ou `Menu` deve reiniciar a partida.
-26. `Esc` durante a luta deve voltar para a tela de preferências.
-27. Pulo com direção pressionada deve sair em diagonal.
-28. A vida deve chegar a zero e encerrar a luta.
+17. Go no Combat Lab, no menu ou na luta iniciada por `--p1 go`/`--p2 go` deve parecer mais rápido e curto que os golpes genéricos equivalentes, pagando com menos vida.
+18. Rust, Duke e Go devem ter projectiles com ritmo diferente: Rust médio, Duke pesado/lento, Go rápido/curto.
+19. A tela de preferências deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
+20. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
+21. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
+22. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Player 1.
+23. A opção `Player 2 recebe dano` desligada deve impedir perda de vida do Player 2.
+24. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
+25. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
+26. `R` ou `Menu` deve reiniciar a partida.
+27. `Esc` durante a luta deve voltar para a tela de preferências.
+28. Pulo com direção pressionada deve sair em diagonal.
+29. A vida deve chegar a zero e encerrar a luta.
 29. Ao iniciar a próxima luta depois de uma vitória, o cenário deve avançar uma vez no ciclo `Sirius -> Fortaleza Tech Coast -> Java Street -> Sirius`.
 30. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
 

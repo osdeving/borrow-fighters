@@ -12,7 +12,8 @@ O foco atual é **Prototype 0.1**. Não estamos criando combo tree, meter, throw
 - Alcance é a largura da hitbox em pixels no `MoveSpec`.
 - `whiff` é o lockout extra quando o golpe erra.
 - Um golpe forte precisa ter resposta clara: bloquear, pular, espaçar, interromper startup ou punir whiff.
-- Quando mudar um golpe, atualize [`src/combat/move_data.rs`](../src/combat/move_data.rs), testes e esta matriz.
+- Quando mudar um golpe próximo, atualize [`src/combat/move_data.rs`](../src/combat/move_data.rs), testes e esta matriz.
+- Quando mudar um especial de projectile, atualize [`src/combat/projectile.rs`](../src/combat/projectile.rs), testes e esta matriz.
 
 ## Identidade Atual
 
@@ -56,7 +57,7 @@ Duke deve parecer resistente e inconveniente em média distância. Ele pode ganh
 
 ## Go
 
-Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jogo suporta um personagem que vence por aproximação e sequência curta, sem depender de alcance grande. No momento, Go ainda usa o spritesheet greybox genérico com cor própria no Combat Lab e em match real iniciado por CLI.
+Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jogo suporta um personagem que vence por aproximação e sequência curta, sem depender de alcance grande. No momento, Go ainda usa o spritesheet greybox genérico com cor própria no Combat Lab e em match real iniciado pelo menu ou CLI.
 
 | Input | MoveId | Intenção | Dano | Startup | Alcance | Whiff | Contra-jogo |
 |---|---|---|---:|---:|---:|---:|---|
@@ -69,6 +70,16 @@ Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jo
 | no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
 | no ar + `V` | `GoHopkick` | pressão aérea rápida e curta | 10 | 5f | 78 | 4f | anti-air, defender em pé, recuar |
 | `Q+F` | `CloseThrow` | throw universal enquanto não há assinatura | 10 | 7f | 46 | 16f | sair do alcance, pular |
+
+## Especiais de Projectile
+
+Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ainda é o mesmo botão de especial do protótipo, mas dano, tamanho, velocidade, cooldown, reação e limite de alcance já vêm do `CharacterSpec`.
+
+| Personagem | Spec | Intenção | Dano | Velocidade | Cooldown | Alcance | Contra-jogo |
+|---|---|---|---:|---:|---:|---|---|
+| Rust | `RUST_PROJECTILE_SPEC` | gear honesto de controle médio, sem ganhar por spam | 8 | 340 px/s | 57f | tela inteira | bloquear chip, pular, aproximar no cooldown |
+| Duke / Java | `DUKE_PROJECTILE_SPEC` | bean pesado para ocupar espaço e forçar resposta lenta | 10 | 270 px/s | 72f | tela inteira | pular mais cedo, ganhar terreno durante recovery, punir se Duke erra leitura |
+| Go | `GO_PROJECTILE_SPEC` | burst rápido para cobrir entrada sem virar zoner | 6 | 430 px/s | 44f | 320 px | ficar fora do curto alcance, bloquear pouco dano, desafiar depois do burst |
 
 ## Matchups de Intenção
 
@@ -90,6 +101,6 @@ Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jo
 ## Próximos Cortes
 
 - Decidir se Rust precisa de uma ferramenta defensiva futura como `ownership_counter`.
-- Decidir se Duke precisa de um especial diferente ou se o projectile genérico ainda basta.
-- Testar Go em match real via `--fight --p1 go`/`--p2 go` antes de criar tela de seleção.
+- Playtestar se o `DUKE_PROJECTILE_SPEC` pesado abre espaço sem virar spam lento sem resposta.
+- Playtestar se o `GO_PROJECTILE_SPEC` curto ajuda aproximação sem transformar Go em zoner.
 - Avaliar hitbox/hurtbox por frame quando os sprites finais começarem a limitar o tuning.

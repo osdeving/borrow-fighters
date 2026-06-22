@@ -10,7 +10,7 @@ use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y};
 use crate::math::{rect::Rect, vec2::Vec2};
 
 use super::frame::FrameCount;
-use super::projectile::{PROJECTILE_FRAME_DATA, ProjectileFrameData};
+use super::projectile::{PROJECTILE_SPEC, ProjectileFrameData, ProjectileSpec};
 pub use crate::combat::move_set::{
     AIR_KICK_DAMAGE, AIR_PUNCH_DAMAGE, ActiveAttack, AttackFrameData, AttackKind,
     CLOSE_THROW_DAMAGE, DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_BOILERPLATE_POKE_DAMAGE, GuardRule,
@@ -108,6 +108,7 @@ pub struct Fighter {
     pub health: i32,
     pub max_health: i32,
     move_ids: &'static [MoveId],
+    projectile_spec: ProjectileSpec,
     pub facing: Facing,
     pub grounded: bool,
     pub crouching: bool,
@@ -151,6 +152,18 @@ impl Fighter {
         move_ids: &'static [MoveId],
         x: f32,
     ) -> Self {
+        Self::new_with_projectile_loadout(slot, name, max_health, move_ids, PROJECTILE_SPEC, x)
+    }
+
+    /// Creates a fighter with character-provided close moves and projectile data.
+    pub fn new_with_projectile_loadout(
+        slot: PlayerSlot,
+        name: &'static str,
+        max_health: i32,
+        move_ids: &'static [MoveId],
+        projectile_spec: ProjectileSpec,
+        x: f32,
+    ) -> Self {
         let max_health = max_health.max(1);
         Self {
             slot,
@@ -160,6 +173,7 @@ impl Fighter {
             health: max_health,
             max_health,
             move_ids,
+            projectile_spec,
             facing: Facing::Right,
             grounded: true,
             crouching: false,
@@ -311,8 +325,9 @@ impl Fighter {
 
     /// Starts the projectile cooldown after firing.
     pub fn mark_projectile_fired(&mut self) {
-        self.projectile_cooldown = PROJECTILE_FRAME_DATA.cooldown.as_seconds();
-        self.special_visual_timer = PROJECTILE_FRAME_DATA.visual_duration.as_seconds();
+        let frame_data = self.projectile_spec.frame_data;
+        self.projectile_cooldown = frame_data.cooldown.as_seconds();
+        self.special_visual_timer = frame_data.visual_duration.as_seconds();
     }
 
     /// Returns whether this fighter can currently deal a new close hit.
@@ -412,6 +427,11 @@ impl Fighter {
         self.move_ids
     }
 
+    /// Returns projectile tuning available to this fighter.
+    pub const fn projectile_spec(&self) -> ProjectileSpec {
+        self.projectile_spec
+    }
+
     /// Returns elapsed seconds for the current close attack animation.
     pub fn attack_elapsed_seconds(&self) -> Option<f32> {
         self.attack.map(|attack| attack.elapsed)
@@ -430,7 +450,8 @@ impl Fighter {
     /// Returns elapsed seconds for the current special animation.
     pub fn special_elapsed_seconds(&self) -> Option<f32> {
         (self.special_visual_timer > 0.0).then_some(
-            PROJECTILE_FRAME_DATA.visual_duration.as_seconds() - self.special_visual_timer,
+            self.projectile_spec.frame_data.visual_duration.as_seconds()
+                - self.special_visual_timer,
         )
     }
 
@@ -442,7 +463,7 @@ impl Fighter {
 
     /// Returns whole-frame data for the projectile special.
     pub fn projectile_frame_data(&self) -> ProjectileFrameData {
-        PROJECTILE_FRAME_DATA
+        self.projectile_spec.frame_data
     }
 
     /// Returns remaining cooldown for the projectile special in whole frames.

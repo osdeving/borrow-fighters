@@ -524,11 +524,12 @@ fn queue_projectile_hit_audio(
 
 fn fighter_from_character(slot: PlayerSlot, character: CharacterId, x: f32) -> Fighter {
     let spec = character_spec(character);
-    Fighter::new_with_loadout(
+    Fighter::new_with_projectile_loadout(
         slot,
         spec.fighter_name,
         spec.stats.max_health,
         spec.move_ids,
+        spec.projectile,
         x,
     )
 }

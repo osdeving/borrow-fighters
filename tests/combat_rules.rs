@@ -8,7 +8,8 @@ use borrow_fighters::combat::fighter::{
 };
 use borrow_fighters::combat::move_data::{LIGHT_ATTACK_REACTION, MoveId, move_spec};
 use borrow_fighters::combat::projectile::{
-    PROJECTILE_DAMAGE, PROJECTILE_GUARD_RULE, PROJECTILE_HIT_REACTION, PROJECTILE_SPEED,
+    DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, PROJECTILE_DAMAGE, PROJECTILE_GUARD_RULE,
+    PROJECTILE_HIT_REACTION, PROJECTILE_SPEED,
 };
 use borrow_fighters::game::ai::BasicCpu;
 use borrow_fighters::game::feature_flags::{FeatureFlag, FeatureFlags};
@@ -869,6 +870,53 @@ fn projectile_deals_damage_and_disappears() {
         player_two_health - PROJECTILE_DAMAGE
     );
     assert!(world.projectiles.is_empty());
+}
+
+#[test]
+fn match_projectiles_use_character_specific_specs() {
+    let mut world = World::new_with_characters(CharacterId::Go, CharacterId::Duke);
+
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    assert_eq!(world.projectiles.len(), 1);
+    assert_eq!(world.projectiles[0].damage, GO_PROJECTILE_SPEC.damage);
+    assert_eq!(world.projectiles[0].rect().width, GO_PROJECTILE_SPEC.width);
+    assert_eq!(
+        world.projectiles[0].velocity.x.abs(),
+        GO_PROJECTILE_SPEC.speed
+    );
+    assert_eq!(
+        world.player_one.projectile_cooldown_remaining_frames(),
+        GO_PROJECTILE_SPEC.frame_data.cooldown
+    );
+
+    let mut world = World::new_with_characters(CharacterId::Go, CharacterId::Duke);
+    world.update(
+        DT,
+        FighterInput::default(),
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+    );
+
+    assert_eq!(world.projectiles.len(), 1);
+    assert_eq!(world.projectiles[0].damage, DUKE_PROJECTILE_SPEC.damage);
+    assert_eq!(
+        world.projectiles[0].velocity.x.abs(),
+        DUKE_PROJECTILE_SPEC.speed
+    );
+    assert_eq!(
+        world.player_two.projectile_cooldown_remaining_frames(),
+        DUKE_PROJECTILE_SPEC.frame_data.cooldown
+    );
 }
 
 #[test]
