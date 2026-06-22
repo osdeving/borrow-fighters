@@ -50,7 +50,7 @@ const TIMELINE_INACTIVE: Color = Color::new(68, 76, 92, 220);
 
 /// Draws the sprite viewer scene.
 pub fn draw_sprite_viewer(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl super::DrawTarget,
     viewer: &SpriteViewer,
     texture: Option<&Texture2D>,
 ) {
@@ -126,7 +126,7 @@ pub fn draw_sprite_viewer(
 }
 
 /// Draws a load error for the sprite viewer startup path.
-pub fn draw_sprite_viewer_error(draw: &mut RaylibDrawHandle<'_>, message: &str) {
+pub fn draw_sprite_viewer_error(draw: &mut impl super::DrawTarget, message: &str) {
     draw.clear_background(BACKGROUND);
     draw_viewer_grid(draw);
     draw.draw_rectangle(80, 150, WINDOW_WIDTH - 160, 180, PANEL);
@@ -142,7 +142,7 @@ pub fn draw_sprite_viewer_error(draw: &mut RaylibDrawHandle<'_>, message: &str) 
     draw_wrapped_text(draw, message, 112, 258, WINDOW_WIDTH - 224, 16, UI_MUTED);
 }
 
-fn draw_combat_overlay(draw: &mut RaylibDrawHandle<'_>, overlay: SpriteCombatOverlay) {
+fn draw_combat_overlay(draw: &mut impl super::DrawTarget, overlay: SpriteCombatOverlay) {
     draw_combat_rect(draw, overlay.body, COMBAT_BODY, None);
     draw_combat_rect(draw, overlay.hurtboxes.head, COMBAT_HURTBOX, None);
     draw_combat_rect(draw, overlay.hurtboxes.torso, COMBAT_HURTBOX, None);
@@ -167,7 +167,7 @@ fn draw_combat_overlay(draw: &mut RaylibDrawHandle<'_>, overlay: SpriteCombatOve
 }
 
 fn draw_combat_rect(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl super::DrawTarget,
     rect: Rect,
     outline: Color,
     fill: Option<Color>,
@@ -188,7 +188,10 @@ fn draw_combat_rect(
     );
 }
 
-fn draw_frame_combat_overlay(draw: &mut RaylibDrawHandle<'_>, overlay: &SpriteFrameCombatOverlay) {
+fn draw_frame_combat_overlay(
+    draw: &mut impl super::DrawTarget,
+    overlay: &SpriteFrameCombatOverlay,
+) {
     for hurtbox in &overlay.hurtboxes {
         draw_frame_data_box(
             draw,
@@ -211,7 +214,7 @@ fn draw_frame_combat_overlay(draw: &mut RaylibDrawHandle<'_>, overlay: &SpriteFr
 }
 
 fn draw_frame_data_box(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl super::DrawTarget,
     overlay_box: &SpriteFrameCombatBoxOverlay,
     outline: Color,
     fill: Option<Color>,
@@ -242,7 +245,7 @@ fn draw_frame_data_box(
     }
 }
 
-fn draw_projectile_origin(draw: &mut RaylibDrawHandle<'_>, origin: ViewerPoint, color: Color) {
+fn draw_projectile_origin(draw: &mut impl super::DrawTarget, origin: ViewerPoint, color: Color) {
     draw.draw_circle(origin.x.round() as i32, origin.y.round() as i32, 5.0, color);
     draw.draw_line(
         origin.x.round() as i32 - 10,
@@ -261,7 +264,7 @@ fn draw_projectile_origin(draw: &mut RaylibDrawHandle<'_>, origin: ViewerPoint, 
     draw_handle_square(draw, origin);
 }
 
-fn draw_frame_data_box_handles(draw: &mut RaylibDrawHandle<'_>, rect: ViewerRect) {
+fn draw_frame_data_box_handles(draw: &mut impl super::DrawTarget, rect: ViewerRect) {
     draw_handle_square(draw, ViewerPoint::new(rect.x, rect.y));
     draw_handle_square(draw, ViewerPoint::new(rect.right(), rect.y));
     draw_handle_square(draw, ViewerPoint::new(rect.x, rect.bottom()));
@@ -269,7 +272,7 @@ fn draw_frame_data_box_handles(draw: &mut RaylibDrawHandle<'_>, rect: ViewerRect
     draw_handle_square(draw, rect.center());
 }
 
-fn draw_handle_square(draw: &mut RaylibDrawHandle<'_>, point: ViewerPoint) {
+fn draw_handle_square(draw: &mut impl super::DrawTarget, point: ViewerPoint) {
     let size = 7.0;
     let half = size * 0.5;
     draw.draw_rectangle(
@@ -289,7 +292,7 @@ fn draw_handle_square(draw: &mut RaylibDrawHandle<'_>, point: ViewerPoint) {
 }
 
 fn draw_projectile_trajectory(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl super::DrawTarget,
     trajectory: &crate::scenes::sprite_viewer::SpriteProjectileTrajectory,
 ) {
     draw.draw_line_ex(
@@ -315,7 +318,7 @@ fn draw_projectile_trajectory(
     );
 }
 
-fn draw_frame_cursor(draw: &mut RaylibDrawHandle<'_>, cursor: SpriteFrameCursor) {
+fn draw_frame_cursor(draw: &mut impl super::DrawTarget, cursor: SpriteFrameCursor) {
     let x = cursor.screen_position.x.round() as i32;
     let y = cursor.screen_position.y.round() as i32;
     draw.draw_line(x - 10, y, x + 10, y, CURSOR_COLOR);
@@ -333,7 +336,7 @@ fn draw_frame_cursor(draw: &mut RaylibDrawHandle<'_>, cursor: SpriteFrameCursor)
 }
 
 fn draw_sprite_instance(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl super::DrawTarget,
     viewer: &SpriteViewer,
     texture: &Texture2D,
     screen: ViewerRect,
@@ -357,7 +360,7 @@ fn draw_sprite_instance(
 }
 
 fn draw_frame_guides(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl super::DrawTarget,
     viewer: &SpriteViewer,
     screen: ViewerRect,
     muted: bool,
@@ -404,7 +407,7 @@ fn draw_frame_guides(
 }
 
 fn draw_relative_guide(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl super::DrawTarget,
     screen: ViewerRect,
     frame: &SpriteFrame,
     guide: SpriteRect,
@@ -421,7 +424,7 @@ fn draw_relative_guide(
     draw_outline(draw, rect, color, 1.0);
 }
 
-fn draw_dummy_distance(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
+fn draw_dummy_distance(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
     let anchor = viewer.anchor();
     let dummy = viewer.dummy_anchor();
     let y = (FLOOR_Y + 24.0) as i32;
@@ -441,7 +444,7 @@ fn draw_dummy_distance(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
 }
 
 fn draw_pivot_at(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl super::DrawTarget,
     anchor: crate::scenes::sprite_viewer::ViewerPoint,
     color: Color,
 ) {
@@ -460,7 +463,7 @@ fn draw_pivot_at(
     draw.draw_circle(anchor.x as i32, anchor.y as i32, 4.0, color);
 }
 
-fn draw_viewer_grid(draw: &mut RaylibDrawHandle<'_>) {
+fn draw_viewer_grid(draw: &mut impl super::DrawTarget) {
     for x in (0..=WINDOW_WIDTH).step_by(GRID_MINOR as usize) {
         let color = if x % GRID_MAJOR == 0 {
             GRID_MAJOR_COLOR
@@ -479,7 +482,7 @@ fn draw_viewer_grid(draw: &mut RaylibDrawHandle<'_>) {
     }
 }
 
-fn draw_timeline(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
+fn draw_timeline(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
     let frame_names = viewer.current_clip_frame_names();
     if frame_names.is_empty() {
         return;
@@ -571,7 +574,7 @@ fn timeline_color(phase: Option<SpriteTimelinePhase>) -> Color {
     }
 }
 
-fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
+fn draw_info_panel(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
     let panel_x = 16;
     let panel_y = 16;
     let panel_width = WINDOW_WIDTH - 32;
@@ -750,7 +753,7 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
     }
 }
 
-fn draw_outline(draw: &mut RaylibDrawHandle<'_>, rect: ViewerRect, color: Color, thickness: f32) {
+fn draw_outline(draw: &mut impl super::DrawTarget, rect: ViewerRect, color: Color, thickness: f32) {
     draw.draw_rectangle_lines_ex(
         Rectangle::new(rect.x, rect.y, rect.width, rect.height),
         thickness,
@@ -759,7 +762,7 @@ fn draw_outline(draw: &mut RaylibDrawHandle<'_>, rect: ViewerRect, color: Color,
 }
 
 fn draw_wrapped_text(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl super::DrawTarget,
     text: &str,
     x: i32,
     y: i32,
@@ -775,7 +778,7 @@ fn draw_wrapped_text(
         } else {
             format!("{line} {word}")
         };
-        if draw.measure_text(&candidate, font_size) > max_width && !line.is_empty() {
+        if super::measure_text_width(&candidate, font_size) > max_width && !line.is_empty() {
             draw.draw_text(&line, x, y + offset_y, font_size, color);
             line.clear();
             line.push_str(word);

@@ -45,6 +45,7 @@ borrow-fighters/
 │   │   ├── gamepad.rs          # Mapeamento básico de gamepad
 │   │   ├── input.rs            # Raylib keyboard/gamepad -> comandos do jogo
 │   │   ├── render.rs           # Desenho de arena, HUD, debug, menu e lutadores
+│   │   ├── video_capture.rs    # Captura local do framebuffer via ffmpeg
 │   │   ├── render/
 │   │   │   ├── combat_lab.rs   # Desenho da cena isolada de Combat Lab
 │   │   │   └── sprite_viewer.rs # Desenho da ferramenta isolada de sprites
@@ -121,6 +122,8 @@ Deve expor os módulos internos para testes e exemplos. Regras puras de jogo dev
 É a camada de adaptação com Raylib. Ela pode conhecer Raylib. O core de combate deve depender pouco ou nada de Raylib para ficar testável.
 
 `src/engine/audio.rs` segue essa regra: ele carrega `Sound` e chama Raylib, mas recebe eventos e bindings já modelados pelo domínio de áudio.
+
+`src/engine/video_capture.rs` tambem segue essa fronteira: ele pode conhecer ferramentas do host (`ffmpeg` e PulseAudio) e Raylib para leitura de framebuffer, mas gameplay e cenas só enxergam start/stop/status e envio do frame renderizado.
 
 `src/engine/sprites/combat.rs` tambem fica em `engine` porque depende do formato de sprite, clip, pivot e escala visual. Ele nao depende de Raylib; apenas projeta metadata local do atlas para `Rect`/`Vec2` em coordenadas de mundo para que `game::World` possa usar com fallback.
 

@@ -9,3 +9,4 @@ pub mod gamepad;
 pub mod input;
 pub mod render;
 pub mod sprites;
+pub mod video_capture;

@@ -4,6 +4,7 @@
 //! problems are visible before art production starts.
 
 use raylib::prelude::*;
+use std::ffi::CString;
 
 mod combat_lab;
 mod sprite_viewer;
@@ -45,6 +46,12 @@ const HEALTH_DANGER: Color = Color::new(255, 82, 82, 255);
 const PANEL: Color = Color::new(12, 14, 20, 218);
 const PANEL_BORDER: Color = Color::new(122, 132, 150, 255);
 const SELECTED_ROW: Color = Color::new(42, 49, 64, 230);
+const RECORDING: Color = Color::new(255, 55, 72, 255);
+
+/// Draw target accepted by game renderers, either the window or a render texture.
+pub trait DrawTarget: RaylibDraw {}
+
+impl<T: RaylibDraw> DrawTarget for T {}
 
 /// Connected gamepad status reported by Raylib for this frame.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -53,9 +60,25 @@ pub struct GamepadStatus {
     pub player_two: bool,
 }
 
+/// Draws the off-screen render target into the visible window.
+pub fn draw_render_target_to_window(draw: &mut impl DrawTarget, target: &RenderTexture2D) {
+    let texture = target.texture();
+    let source = Rectangle::new(0.0, 0.0, texture.width() as f32, -(texture.height() as f32));
+    let dest = Rectangle::new(0.0, 0.0, WINDOW_WIDTH as f32, WINDOW_HEIGHT as f32);
+    draw.clear_background(BACKGROUND);
+    draw.draw_texture_pro(
+        texture,
+        source,
+        dest,
+        Vector2::new(0.0, 0.0),
+        0.0,
+        Color::WHITE,
+    );
+}
+
 /// Draws the current world state.
 pub fn draw_fight(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl DrawTarget,
     world: &World,
     arena: ArenaId,
     flags: FeatureFlags,
@@ -139,7 +162,7 @@ pub fn draw_fight(
 }
 
 /// Draws the initial preferences screen.
-pub fn draw_preferences(draw: &mut RaylibDrawHandle<'_>, options: PreferencesDrawOptions<'_>) {
+pub fn draw_preferences(draw: &mut impl DrawTarget, options: PreferencesDrawOptions<'_>) {
     draw.clear_background(BACKGROUND);
     draw_arena(draw, options.assets.arenas.get(options.arena));
     draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(0, 0, 0, 138));
@@ -165,7 +188,7 @@ pub fn draw_preferences(draw: &mut RaylibDrawHandle<'_>, options: PreferencesDra
         connected_label(options.gamepad_status.player_one),
         connected_label(options.gamepad_status.player_two)
     );
-    let status_width = draw.measure_text(&status, 16);
+    let status_width = measure_text_width(&status, 16);
     draw.draw_text(
         &status,
         panel_x + panel_width - status_width - 32,
@@ -218,6 +241,20 @@ pub fn draw_preferences(draw: &mut RaylibDrawHandle<'_>, options: PreferencesDra
         },
     );
 
+    draw_menu_row(
+        draw,
+        MenuRow {
+            x: panel_x + 32,
+            y: row_start_y + PreferencesMenu::RECORDING_ROW as i32 * row_spacing,
+            width: panel_width - 64,
+            selected: options.menu.selected() == PreferencesMenu::RECORDING_ROW,
+            label: "Gravacao local",
+            description: "Espaco inicia/para. F9/F10 tambem funcionam.",
+            checked: Some(options.recording),
+            value: Some(if options.recording { "REC" } else { "parada" }),
+        },
+    );
+
     for (index, flag) in PREFERENCE_FLAGS.iter().copied().enumerate() {
         let row = index + PreferencesMenu::FIRST_FLAG_ROW;
         draw_menu_row(
@@ -242,6 +279,48 @@ pub fn draw_preferences(draw: &mut RaylibDrawHandle<'_>, options: PreferencesDra
         15,
         UI_MUTED,
     );
+    draw.draw_text(
+        "F9 inicia gravacao | F10 para e salva em captures/",
+        panel_x + 32,
+        panel_y + panel_height - 16,
+        13,
+        UI_MUTED,
+    );
+}
+
+/// Draws the global local-recording status over any scene.
+pub fn draw_video_capture_overlay(
+    draw: &mut impl DrawTarget,
+    recording: bool,
+    message: Option<&str>,
+) {
+    if recording {
+        let text = "REC  F10 para";
+        let width = measure_text_width(text, 16);
+        let box_width = width + 48;
+        let x = (WINDOW_WIDTH - box_width) / 2;
+        let y = 14;
+
+        draw.draw_rectangle(x, y, box_width, 28, Color::new(8, 10, 14, 218));
+        draw.draw_rectangle_lines(x, y, box_width, 28, RECORDING);
+        draw.draw_circle(x + 18, y + 14, 6.0, RECORDING);
+        draw.draw_text(text, x + 34, y + 6, 16, UI_TEXT);
+        return;
+    }
+
+    let Some(message) = message else {
+        return;
+    };
+    if !message.starts_with("Falha") && !message.starts_with("Gravacao salva") {
+        return;
+    }
+
+    let text = truncate_middle(message, 92);
+    let width = measure_text_width(&text, 13);
+    let x = WINDOW_WIDTH - width - 20;
+    let y = WINDOW_HEIGHT - 24;
+    draw.draw_rectangle(x - 8, y - 4, width + 16, 22, Color::new(8, 10, 14, 190));
+    draw.draw_text(&text, x, y, 13, UI_MUTED);
 }
 
 /// Data needed by the preferences renderer.
@@ -252,6 +331,7 @@ pub struct PreferencesDrawOptions<'a> {
     pub arena: ArenaId,
     pub flags: FeatureFlags,
     pub gamepad_status: GamepadStatus,
+    pub recording: bool,
     pub assets: &'a GameAssets,
 }
 
@@ -266,7 +346,7 @@ struct MenuRow<'a> {
     value: Option<&'a str>,
 }
 
-fn draw_menu_row(draw: &mut RaylibDrawHandle<'_>, row: MenuRow<'_>) {
+fn draw_menu_row(draw: &mut impl DrawTarget, row: MenuRow<'_>) {
     let height = 28;
     if row.selected {
         draw.draw_rectangle(row.x, row.y - 2, row.width, height + 4, SELECTED_ROW);
@@ -286,7 +366,7 @@ fn draw_menu_row(draw: &mut RaylibDrawHandle<'_>, row: MenuRow<'_>) {
 
     if let Some(value) = row.value {
         let text = format!("< {value} >");
-        let text_width = draw.measure_text(&text, 17);
+        let text_width = measure_text_width(&text, 17);
         draw.draw_text(
             &text,
             row.x + row.width - text_width - 18,
@@ -297,7 +377,7 @@ fn draw_menu_row(draw: &mut RaylibDrawHandle<'_>, row: MenuRow<'_>) {
     }
 }
 
-fn draw_checkbox(draw: &mut RaylibDrawHandle<'_>, x: i32, y: i32, enabled: bool) {
+fn draw_checkbox(draw: &mut impl DrawTarget, x: i32, y: i32, enabled: bool) {
     let size = 18;
     draw.draw_rectangle_lines(x, y, size, size, UI_TEXT);
     if enabled {
@@ -305,7 +385,7 @@ fn draw_checkbox(draw: &mut RaylibDrawHandle<'_>, x: i32, y: i32, enabled: bool)
     }
 }
 
-fn draw_arena(draw: &mut RaylibDrawHandle<'_>, background: Option<&Texture2D>) {
+fn draw_arena(draw: &mut impl DrawTarget, background: Option<&Texture2D>) {
     if let Some(texture) = background {
         draw_arena_background(draw, texture);
     } else {
@@ -341,7 +421,7 @@ fn draw_arena(draw: &mut RaylibDrawHandle<'_>, background: Option<&Texture2D>) {
     );
 }
 
-fn draw_arena_background(draw: &mut RaylibDrawHandle<'_>, texture: &Texture2D) {
+fn draw_arena_background(draw: &mut impl DrawTarget, texture: &Texture2D) {
     let source = Rectangle::new(0.0, 0.0, texture.width() as f32, texture.height() as f32);
     let dest = Rectangle::new(0.0, 0.0, WINDOW_WIDTH as f32, WINDOW_HEIGHT as f32);
     draw.draw_texture_pro(
@@ -364,7 +444,7 @@ fn draw_arena_background(draw: &mut RaylibDrawHandle<'_>, texture: &Texture2D) {
 }
 
 fn draw_fighter(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl DrawTarget,
     fighter: &crate::combat::fighter::Fighter,
     options: FighterDrawOptions<'_>,
 ) {
@@ -585,7 +665,7 @@ fn character_visuals<'a>(character: CharacterId, assets: &'a GameAssets) -> Char
 }
 
 fn draw_hud(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl DrawTarget,
     world: &World,
     flags: FeatureFlags,
     gamepad_status: GamepadStatus,
@@ -605,7 +685,7 @@ fn draw_hud(
         connected_label(gamepad_status.player_one),
         connected_label(gamepad_status.player_two)
     );
-    let width = draw.measure_text(&status, 14);
+    let width = measure_text_width(&status, 14);
     draw.draw_text(&status, WINDOW_WIDTH - width - 24, 16, 14, UI_MUTED);
 
     draw_health_bar(
@@ -635,12 +715,12 @@ fn draw_hud(
             }
             MatchOutcome::Draw => "Draw - press R/Menu".to_owned(),
         };
-        let width = draw.measure_text(&message, 32);
+        let width = measure_text_width(&message, 32);
         draw.draw_text(&message, (WINDOW_WIDTH - width) / 2, 124, 32, UI_TEXT);
     }
 }
 
-fn draw_countdown_sprite(draw: &mut RaylibDrawHandle<'_>, texture: &Texture2D) {
+fn draw_countdown_sprite(draw: &mut impl DrawTarget, texture: &Texture2D) {
     let source = Rectangle::new(0.0, 0.0, texture.width() as f32, texture.height() as f32);
 
     let target_height = 120.0;
@@ -666,9 +746,9 @@ fn draw_countdown_sprite(draw: &mut RaylibDrawHandle<'_>, texture: &Texture2D) {
     );
 }
 
-fn draw_countdown_text(draw: &mut RaylibDrawHandle<'_>, label: &str) {
+fn draw_countdown_text(draw: &mut impl DrawTarget, label: &str) {
     let font_size = if label == "Fight!" { 54 } else { 78 };
-    let width = draw.measure_text(label, font_size);
+    let width = measure_text_width(label, font_size);
     let x = (WINDOW_WIDTH - width) / 2;
     let y = WINDOW_HEIGHT / 2 - font_size / 2 - 18;
     let padding_x = 34;
@@ -692,7 +772,7 @@ fn draw_countdown_text(draw: &mut RaylibDrawHandle<'_>, label: &str) {
     draw.draw_text(label, x, y, font_size, UI_TEXT);
 }
 
-fn draw_countdown(draw: &mut RaylibDrawHandle<'_>, label: &str, assets: &GameAssets) {
+fn draw_countdown(draw: &mut impl DrawTarget, label: &str, assets: &GameAssets) {
     let texture = match label {
         "11" => assets.countdown_11.as_ref(),
         "10" => assets.countdown_10.as_ref(),
@@ -708,7 +788,7 @@ fn draw_countdown(draw: &mut RaylibDrawHandle<'_>, label: &str, assets: &GameAss
     }
 }
 
-fn draw_help(draw: &mut RaylibDrawHandle<'_>) {
+fn draw_help(draw: &mut impl DrawTarget) {
     draw.draw_text(
         "P1: A/D/W/S/Q or Pad LS/DPad, A jump, LB/LT block",
         24,
@@ -738,7 +818,7 @@ fn draw_help(draw: &mut RaylibDrawHandle<'_>) {
         UI_TEXT,
     );
     draw.draw_text(
-        "P2 manual: keyboard or second Pad same layout; Start/R restarts",
+        "P2 manual: keyboard or second Pad same layout; Start/R restarts; F9/F10 records",
         24,
         WINDOW_HEIGHT - 28,
         15,
@@ -750,8 +830,30 @@ fn connected_label(connected: bool) -> &'static str {
     if connected { "ON" } else { "OFF" }
 }
 
+fn measure_text_width(text: &str, font_size: i32) -> i32 {
+    let c_text = CString::new(text).unwrap();
+    unsafe { raylib::ffi::MeasureText(c_text.as_ptr(), font_size) }
+}
+
+fn truncate_middle(text: &str, max_chars: usize) -> String {
+    if text.chars().count() <= max_chars {
+        return text.to_string();
+    }
+    let keep = max_chars.saturating_sub(3) / 2;
+    let start = text.chars().take(keep).collect::<String>();
+    let end = text
+        .chars()
+        .rev()
+        .take(keep)
+        .collect::<String>()
+        .chars()
+        .rev()
+        .collect::<String>();
+    format!("{start}...{end}")
+}
+
 fn draw_health_bar(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl DrawTarget,
     x: i32,
     y: i32,
     health: i32,
@@ -778,7 +880,7 @@ fn draw_health_bar(
 }
 
 fn draw_projectiles(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl DrawTarget,
     world: &World,
     show_debug: bool,
     assets: &GameAssets,
@@ -865,7 +967,7 @@ fn forced_fighter_clip(
         .then_some(sprites::FighterSpriteClip::Taunt)
 }
 
-fn draw_body_collision(draw: &mut RaylibDrawHandle<'_>, world: &World) {
+fn draw_body_collision(draw: &mut impl DrawTarget, world: &World) {
     if world.body_collision_timer <= 0.0 {
         return;
     }
@@ -889,7 +991,7 @@ fn draw_body_collision(draw: &mut RaylibDrawHandle<'_>, world: &World) {
     draw.draw_text("BODY COLLISION", x - 76, top - 24, 18, BODY_COLLISION);
 }
 
-fn draw_hit_effects(draw: &mut RaylibDrawHandle<'_>, world: &World) {
+fn draw_hit_effects(draw: &mut impl DrawTarget, world: &World) {
     for effect in &world.hit_effects {
         let color = if effect.blocked { GUARD } else { HITSPARK };
         let x = effect.position.x.round() as i32;
@@ -907,7 +1009,7 @@ fn draw_hit_effects(draw: &mut RaylibDrawHandle<'_>, world: &World) {
 }
 
 fn draw_body_parts(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl DrawTarget,
     fighter: &crate::combat::fighter::Fighter,
     color: Color,
 ) {
@@ -917,7 +1019,7 @@ fn draw_body_parts(
     fill_rect(draw, parts.legs, dim(color, 22));
 }
 
-fn fill_rect(draw: &mut RaylibDrawHandle<'_>, rect: Rect, color: Color) {
+fn fill_rect(draw: &mut impl DrawTarget, rect: Rect, color: Color) {
     draw.draw_rectangle(
         rect.x.round() as i32,
         rect.y.round() as i32,
@@ -927,7 +1029,7 @@ fn fill_rect(draw: &mut RaylibDrawHandle<'_>, rect: Rect, color: Color) {
     );
 }
 
-fn draw_hitbox_debug(draw: &mut RaylibDrawHandle<'_>, hitbox: Rect, phase: AttackPhase) {
+fn draw_hitbox_debug(draw: &mut impl DrawTarget, hitbox: Rect, phase: AttackPhase) {
     draw.draw_rectangle(
         hitbox.x.round() as i32,
         hitbox.y.round() as i32,
@@ -942,7 +1044,7 @@ fn draw_hitbox_debug(draw: &mut RaylibDrawHandle<'_>, hitbox: Rect, phase: Attac
     outline_rect(draw, hitbox, HITBOX);
 }
 
-fn outline_rect(draw: &mut RaylibDrawHandle<'_>, rect: Rect, color: Color) {
+fn outline_rect(draw: &mut impl DrawTarget, rect: Rect, color: Color) {
     draw.draw_rectangle_lines(
         rect.x.round() as i32,
         rect.y.round() as i32,

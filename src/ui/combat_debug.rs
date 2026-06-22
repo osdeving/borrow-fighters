@@ -23,7 +23,7 @@ const UI_MUTED: Color = Color::new(165, 172, 185, 255);
 const UI_TEXT: Color = Color::new(238, 241, 247, 255);
 
 /// Draws every Combat Lab debug overlay controlled by lab toggles.
-pub fn draw_combat_lab_debug(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
+pub fn draw_combat_lab_debug(draw: &mut impl RaylibDraw, lab: &CombatLab) {
     draw_lab_boxes(draw, lab);
     if lab.show_dummy() {
         draw_lab_dummy(draw, lab);
@@ -34,7 +34,7 @@ pub fn draw_combat_lab_debug(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
     draw_lab_overlay(draw, lab);
 }
 
-fn draw_lab_boxes(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
+fn draw_lab_boxes(draw: &mut impl RaylibDraw, lab: &CombatLab) {
     let fighter = lab.fighter();
     outline_rect(draw, fighter.body_rect(), BODY_OUTLINE);
 
@@ -69,7 +69,7 @@ fn draw_lab_boxes(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
     }
 }
 
-fn draw_lab_dummy(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
+fn draw_lab_dummy(draw: &mut impl RaylibDraw, lab: &CombatLab) {
     let dummy = lab.dummy_body_rect();
     outline_rect(draw, dummy, PANEL_BORDER);
     draw.draw_text(
@@ -81,7 +81,7 @@ fn draw_lab_dummy(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
     );
 }
 
-fn draw_lab_pivot(draw: &mut RaylibDrawHandle<'_>, fighter: &Fighter) {
+fn draw_lab_pivot(draw: &mut impl RaylibDraw, fighter: &Fighter) {
     let body = fighter.body_rect();
     let pivot_x = body.center_x().round() as i32;
     let pivot_y = body.bottom().round() as i32;
@@ -104,7 +104,7 @@ fn draw_lab_pivot(draw: &mut RaylibDrawHandle<'_>, fighter: &Fighter) {
     draw.draw_text("PIVOT", pivot_x + 8, pivot_y - 22, 14, HITSPARK);
 }
 
-fn draw_lab_overlay(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab) {
+fn draw_lab_overlay(draw: &mut impl RaylibDraw, lab: &CombatLab) {
     let panel_x = 20;
     let panel_y = 18;
     let panel_width = 560;
@@ -265,7 +265,7 @@ fn cooldown_suffix(cooldown: crate::combat::frame::FrameCount) -> String {
     }
 }
 
-fn outline_rect(draw: &mut RaylibDrawHandle<'_>, rect: Rect, color: Color) {
+fn outline_rect(draw: &mut impl RaylibDraw, rect: Rect, color: Color) {
     draw.draw_rectangle_lines(
         rect.x.round() as i32,
         rect.y.round() as i32,

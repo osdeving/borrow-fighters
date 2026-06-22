@@ -130,6 +130,32 @@ fn preferences_menu_start_row_enters_fight() {
 }
 
 #[test]
+fn preferences_menu_recording_row_requests_capture_toggle() {
+    let mut flags = FeatureFlags::default();
+    let mut menu = PreferencesMenu::default();
+
+    menu.update(PreferencesInput::default(), &mut flags);
+    for _ in 0..PreferencesMenu::RECORDING_ROW {
+        menu.update(
+            PreferencesInput {
+                down: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        );
+    }
+    let action = menu.update(
+        PreferencesInput {
+            activate: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+
+    assert_eq!(action, PreferencesAction::ToggleRecording);
+}
+
+#[test]
 fn preferences_menu_ignores_first_frame_input() {
     let mut flags = FeatureFlags::default();
     let mut menu = PreferencesMenu::default();

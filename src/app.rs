@@ -9,12 +9,16 @@ use crate::audio::{AudioEvent, MusicTrack};
 use crate::characters::{CHARACTER_BODY_METRICS_PATH, CharacterBodyMetricsCatalog, CharacterId};
 use crate::cli::{LaunchMode, LaunchOptions, MatchOptions};
 use crate::combat::fighter::{FighterInput, PlayerSlot};
-use crate::config::{FIXED_TIMESTEP, MAX_FIXED_STEPS_PER_FRAME, MAX_FRAME_TIME, TARGET_FPS};
+use crate::config::{
+    FIXED_TIMESTEP, MAX_FIXED_STEPS_PER_FRAME, MAX_FRAME_TIME, TARGET_FPS, WINDOW_HEIGHT,
+    WINDOW_WIDTH,
+};
 use crate::engine::{
     assets::GameAssets,
     audio::{AUDIO_MANIFEST_PATH, AudioPlayer},
     input::LocalInput,
     render::{self, GamepadStatus},
+    video_capture::VideoCapture,
 };
 use crate::game::ai::BasicCpu;
 use crate::game::arena::ArenaId;
@@ -26,6 +30,8 @@ use crate::scenes::{
     preferences::{PreferencesAction, PreferencesMenu},
     sprite_viewer::{SpriteViewer, SpriteViewerInput, SpriteViewerOptions, ViewerPoint},
 };
+
+const CAPTURE_SMOKE_SECONDS_ENV: &str = "BORROW_FIGHTERS_CAPTURE_SMOKE_SECONDS";
 
 /// Top-level application state outside the testable game world.
 pub struct App {
@@ -42,6 +48,7 @@ pub struct App {
     match_options_dirty: bool,
     current_arena: ArenaId,
     advance_arena_on_next_match: bool,
+    video_capture: VideoCapture,
     accumulator: f32,
 }
 
@@ -94,6 +101,7 @@ impl App {
             match_options_dirty: false,
             current_arena: ArenaId::STARTING_ARENA,
             advance_arena_on_next_match: false,
+            video_capture: VideoCapture::default(),
             accumulator: 0.0,
         }
     }
@@ -117,13 +125,25 @@ impl App {
             }
         };
         audio_player.play_music(music_track_for_scene(self.scene));
+        let mut frame_target = load_frame_target(raylib, thread);
+        let mut capture_smoke_test = CaptureSmokeTest::from_env();
 
         while !raylib.window_should_close() {
             audio_player.update_streams();
+            update_video_capture_status(&mut self.video_capture);
 
             let input = LocalInput::read(
                 raylib,
                 self.feature_flags.enabled(FeatureFlag::GamepadInput),
+            );
+            handle_video_capture_shortcuts(
+                &mut self.video_capture,
+                input.start_recording,
+                input.stop_recording,
+            );
+            capture_smoke_test.update(
+                raylib.get_frame_time().min(MAX_FRAME_TIME),
+                &mut self.video_capture,
             );
             let gamepad_status = GamepadStatus {
                 player_one: input.player_one_gamepad_connected,
@@ -137,8 +157,16 @@ impl App {
                         input.combat_lab,
                     );
 
-                    let mut draw = raylib.begin_drawing(thread);
-                    render::draw_combat_lab(&mut draw, &self.combat_lab, &assets);
+                    {
+                        let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
+                        render::draw_combat_lab(&mut draw, &self.combat_lab, &assets);
+                        render::draw_video_capture_overlay(
+                            &mut draw,
+                            self.video_capture.is_recording(),
+                            self.video_capture.last_message(),
+                        );
+                    }
+                    finish_frame(raylib, thread, &frame_target, &mut self.video_capture);
                 }
                 AppScene::Preferences => {
                     play_preferences_audio_feedback(&mut audio_player, input.preferences);
@@ -157,6 +185,9 @@ impl App {
                                 cycle_character(self.match_options.player_two, direction);
                             self.match_options_dirty = true;
                         }
+                        PreferencesAction::ToggleRecording => {
+                            toggle_video_capture(&mut self.video_capture);
+                        }
                         PreferencesAction::StartFight => {
                             if self.world.outcome.is_some() || self.match_options_dirty {
                                 self.restart_match(&assets);
@@ -165,27 +196,8 @@ impl App {
                             audio_player.play_music(MusicTrack::Combat);
                         }
                     }
-                    let mut draw = raylib.begin_drawing(thread);
-                    render::draw_preferences(
-                        &mut draw,
-                        render::PreferencesDrawOptions {
-                            menu: &self.preferences_menu,
-                            player_one_character: self.match_options.player_one,
-                            player_two_character: self.match_options.player_two,
-                            arena: self.current_arena,
-                            flags: self.feature_flags,
-                            gamepad_status,
-                            assets: &assets,
-                        },
-                    );
-                }
-                AppScene::Fight => {
-                    if input.open_preferences {
-                        self.scene = AppScene::Preferences;
-                        self.preferences_menu.ignore_next_input();
-                        audio_player.play(&AudioEvent::ui_back());
-                        audio_player.play_music(MusicTrack::Menu);
-                        let mut draw = raylib.begin_drawing(thread);
+                    {
+                        let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
                         render::draw_preferences(
                             &mut draw,
                             render::PreferencesDrawOptions {
@@ -195,9 +207,46 @@ impl App {
                                 arena: self.current_arena,
                                 flags: self.feature_flags,
                                 gamepad_status,
+                                recording: self.video_capture.is_recording(),
                                 assets: &assets,
                             },
                         );
+                        render::draw_video_capture_overlay(
+                            &mut draw,
+                            self.video_capture.is_recording(),
+                            self.video_capture.last_message(),
+                        );
+                    }
+                    finish_frame(raylib, thread, &frame_target, &mut self.video_capture);
+                }
+                AppScene::Fight => {
+                    if input.open_preferences {
+                        self.scene = AppScene::Preferences;
+                        self.preferences_menu.ignore_next_input();
+                        audio_player.play(&AudioEvent::ui_back());
+                        audio_player.play_music(MusicTrack::Menu);
+                        {
+                            let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
+                            render::draw_preferences(
+                                &mut draw,
+                                render::PreferencesDrawOptions {
+                                    menu: &self.preferences_menu,
+                                    player_one_character: self.match_options.player_one,
+                                    player_two_character: self.match_options.player_two,
+                                    arena: self.current_arena,
+                                    flags: self.feature_flags,
+                                    gamepad_status,
+                                    recording: self.video_capture.is_recording(),
+                                    assets: &assets,
+                                },
+                            );
+                            render::draw_video_capture_overlay(
+                                &mut draw,
+                                self.video_capture.is_recording(),
+                                self.video_capture.last_message(),
+                            );
+                        }
+                        finish_frame(raylib, thread, &frame_target, &mut self.video_capture);
                     } else {
                         if input.restart {
                             self.restart_match(&assets);
@@ -263,15 +312,23 @@ impl App {
                             self.accumulator = 0.0;
                         }
 
-                        let mut draw = raylib.begin_drawing(thread);
-                        render::draw_fight(
-                            &mut draw,
-                            &self.world,
-                            self.current_arena,
-                            self.feature_flags,
-                            gamepad_status,
-                            &assets,
-                        );
+                        {
+                            let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
+                            render::draw_fight(
+                                &mut draw,
+                                &self.world,
+                                self.current_arena,
+                                self.feature_flags,
+                                gamepad_status,
+                                &assets,
+                            );
+                            render::draw_video_capture_overlay(
+                                &mut draw,
+                                self.video_capture.is_recording(),
+                                self.video_capture.last_message(),
+                            );
+                        }
+                        finish_frame(raylib, thread, &frame_target, &mut self.video_capture);
                     }
                 }
                 AppScene::SpriteViewer => unreachable!("sprite viewer has a separate app loop"),
@@ -410,8 +467,16 @@ fn run_sprite_viewer(
     };
 
     let mut texture = load_sprite_viewer_texture(raylib, thread, &mut viewer);
+    let mut video_capture = VideoCapture::default();
+    let mut frame_target = load_frame_target(raylib, thread);
 
     while !raylib.window_should_close() {
+        update_video_capture_status(&mut video_capture);
+        handle_video_capture_shortcuts(
+            &mut video_capture,
+            raylib.is_key_pressed(KeyboardKey::KEY_F9),
+            raylib.is_key_pressed(KeyboardKey::KEY_F10),
+        );
         let input = read_sprite_viewer_input(raylib);
         if input.reload_manifest {
             match viewer.reload_manifest() {
@@ -425,9 +490,15 @@ fn run_sprite_viewer(
         viewer.update(input, raylib.get_frame_time().min(MAX_FRAME_TIME));
 
         {
-            let mut draw = raylib.begin_drawing(thread);
+            let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
             render::draw_sprite_viewer(&mut draw, &viewer, texture.as_ref());
+            render::draw_video_capture_overlay(
+                &mut draw,
+                video_capture.is_recording(),
+                video_capture.last_message(),
+            );
         }
+        finish_frame(raylib, thread, &frame_target, &mut video_capture);
 
         if screenshot_requested {
             let path = "target/sprite-viewer-capture.png";
@@ -437,6 +508,118 @@ fn run_sprite_viewer(
                 raylib.take_screenshot(thread, path);
                 viewer.set_status_message(format!("Screenshot salvo em {path}."));
             }
+        }
+    }
+}
+
+fn update_video_capture_status(video_capture: &mut VideoCapture) {
+    if let Err(error) = video_capture.update() {
+        eprintln!("warning: could not update recording status: {error}");
+        video_capture.set_error_message(&error);
+    }
+}
+
+fn finish_frame(
+    raylib: &mut RaylibHandle,
+    thread: &RaylibThread,
+    frame_target: &RenderTexture2D,
+    video_capture: &mut VideoCapture,
+) {
+    if let Err(error) = video_capture.capture_render_texture(frame_target) {
+        eprintln!("warning: could not capture frame: {error}");
+        video_capture.set_error_message(&error);
+    }
+
+    let mut draw = raylib.begin_drawing(thread);
+    render::draw_render_target_to_window(&mut draw, frame_target);
+}
+
+fn load_frame_target(raylib: &mut RaylibHandle, thread: &RaylibThread) -> RenderTexture2D {
+    raylib
+        .load_render_texture(thread, WINDOW_WIDTH as u32, WINDOW_HEIGHT as u32)
+        .expect("render texture for frame capture")
+}
+
+fn handle_video_capture_shortcuts(
+    video_capture: &mut VideoCapture,
+    start_recording: bool,
+    stop_recording: bool,
+) {
+    if start_recording
+        && let Err(error) = video_capture.start(WINDOW_WIDTH as u32, WINDOW_HEIGHT as u32)
+    {
+        eprintln!("warning: could not start recording: {error}");
+        video_capture.set_error_message(&error);
+    }
+
+    if stop_recording && let Err(error) = video_capture.stop() {
+        eprintln!("warning: could not stop recording: {error}");
+        video_capture.set_error_message(&error);
+    }
+}
+
+fn toggle_video_capture(video_capture: &mut VideoCapture) {
+    if video_capture.is_recording() {
+        if let Err(error) = video_capture.stop() {
+            eprintln!("warning: could not stop recording: {error}");
+            video_capture.set_error_message(&error);
+        }
+    } else if let Err(error) = video_capture.start(WINDOW_WIDTH as u32, WINDOW_HEIGHT as u32) {
+        eprintln!("warning: could not start recording: {error}");
+        video_capture.set_error_message(&error);
+    }
+}
+
+#[derive(Debug, Default)]
+struct CaptureSmokeTest {
+    remaining_seconds: f32,
+    started: bool,
+    finished: bool,
+}
+
+impl CaptureSmokeTest {
+    fn from_env() -> Self {
+        let Ok(value) = std::env::var(CAPTURE_SMOKE_SECONDS_ENV) else {
+            return Self::default();
+        };
+        let Ok(seconds) = value.parse::<f32>() else {
+            eprintln!("warning: ignoring invalid {CAPTURE_SMOKE_SECONDS_ENV}={value}");
+            return Self::default();
+        };
+        if seconds <= 0.0 {
+            eprintln!("warning: ignoring non-positive {CAPTURE_SMOKE_SECONDS_ENV}={value}");
+            return Self::default();
+        }
+
+        Self {
+            remaining_seconds: seconds,
+            started: false,
+            finished: false,
+        }
+    }
+
+    fn update(&mut self, frame_time: f32, video_capture: &mut VideoCapture) {
+        if self.finished || self.remaining_seconds <= 0.0 {
+            return;
+        }
+
+        if !self.started {
+            self.started = true;
+            if let Err(error) = video_capture.start(WINDOW_WIDTH as u32, WINDOW_HEIGHT as u32) {
+                eprintln!("warning: could not start smoke recording: {error}");
+                video_capture.set_error_message(&error);
+                self.finished = true;
+                return;
+            }
+        }
+
+        self.remaining_seconds -= frame_time;
+        if self.remaining_seconds <= 0.0 {
+            if let Err(error) = video_capture.stop() {
+                eprintln!("warning: could not stop smoke recording: {error}");
+                video_capture.set_error_message(&error);
+            }
+            self.finished = true;
         }
     }
 }

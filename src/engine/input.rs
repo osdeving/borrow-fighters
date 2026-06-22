@@ -23,6 +23,8 @@ pub struct LocalInput {
     pub restart: bool,
     pub toggle_cpu: bool,
     pub open_preferences: bool,
+    pub start_recording: bool,
+    pub stop_recording: bool,
     pub player_one_gamepad_connected: bool,
     pub player_two_gamepad_connected: bool,
 }
@@ -66,6 +68,8 @@ impl LocalInput {
                     && (gamepad::toggle_cpu_pressed(raylib, gamepad::PLAYER_ONE_GAMEPAD)
                         || gamepad::toggle_cpu_pressed(raylib, gamepad::PLAYER_TWO_GAMEPAD))),
             open_preferences: raylib.is_key_pressed(KeyboardKey::KEY_ESCAPE),
+            start_recording: raylib.is_key_pressed(KeyboardKey::KEY_F9),
+            stop_recording: raylib.is_key_pressed(KeyboardKey::KEY_F10),
             player_one_gamepad_connected,
             player_two_gamepad_connected,
         }

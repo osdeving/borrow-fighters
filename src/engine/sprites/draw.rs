@@ -24,7 +24,7 @@ const PROJECTILE_SCALE: f32 = 0.45;
 
 /// Draws one fighter from the placeholder spritesheet.
 pub fn draw_fighter_sprite(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl RaylibDraw,
     texture: &Texture2D,
     fighter: &Fighter,
     tint: Color,
@@ -55,7 +55,7 @@ pub fn draw_fighter_sprite(
 
 /// Draws one fighter from a sprite manifest and atlas texture.
 pub fn draw_manifest_fighter_sprite(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl RaylibDraw,
     texture: &Texture2D,
     manifest: &SpriteManifest,
     fighter: &Fighter,
@@ -79,7 +79,7 @@ pub fn draw_manifest_fighter_sprite(
 
 /// Draws the current projectile texture centered on a projectile rectangle.
 pub fn draw_projectile_texture(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl RaylibDraw,
     texture: &Texture2D,
     center: Vector2,
     facing: Facing,
@@ -100,7 +100,7 @@ pub fn draw_projectile_texture(
 }
 
 fn draw_manifest_frame(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl RaylibDraw,
     texture: &Texture2D,
     manifest: &SpriteManifest,
     frame: &SpriteFrame,

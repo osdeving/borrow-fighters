@@ -48,6 +48,7 @@
 | `src/engine/` | Raylib adapters and platform boundary |
 | `src/engine/sprites/` | Sprite manifest loading, animation and drawing |
 | `src/engine/sprites/combat.rs` | Projects `frames[].combat` metadata to world-space hitboxes/hurtboxes/projectile origins |
+| `src/engine/video_capture.rs` | Local MP4 capture by piping Raylib framebuffer frames to ffmpeg with PulseAudio audio source |
 | `src/game/` | Match state and world flow |
 | `src/game/ai.rs` | Simple CPU behavior for playtest |
 | `src/game/feature_flags.rs` | Runtime feature flags and preference menu data |

@@ -416,6 +416,34 @@ O viewer já possui edição visual para essa metadata: `N` substitui a metadata
 
 O personagem e o golpe podem ser trocados em runtime com `C`/`Shift+C` e `[`/`]`, sem reabrir o comando. `Enter` tenta selecionar o clip mais provável para o golpe atual. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. A evolução restante está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
 
+## Captura de Gameplay
+
+Atalhos globais:
+
+- `F9`: inicia gravação local da janela atual;
+- `F10`: para a gravação e salva o MP4 em `captures/`.
+- Menu `Ajustes do prototipo` -> `Gravacao local`: inicia/para pelo menu quando teclas de função não chegam ao jogo.
+
+O código fica em [`src/engine/video_capture.rs`](../src/engine/video_capture.rs). A técnica usada é manter a captura fora do gameplay: `App` só detecta os atalhos, desenha a cena normalmente e, quando há gravação ativa, envia o framebuffer renderizado pelo Raylib para `ffmpeg` como `rawvideo`. O áudio vem do PulseAudio e o MP4 é finalizado ao fechar o pipe de vídeo.
+
+O overlay global de REC fica em [`src/engine/render.rs`](../src/engine/render.rs), enquanto os atalhos vêm de [`src/engine/input.rs`](../src/engine/input.rs). No Sprite Combat Viewer, os mesmos atalhos são lidos no loop isolado de [`src/app.rs`](../src/app.rs) para permitir gravar revisão de atlas, pivot, hitbox, hurtbox e projectile origin.
+
+No WSLg, `x11grab` pode produzir vídeo preto em janelas aceleradas. Por isso a captura usa frames internos do Raylib em vez de capturar a janela pelo desktop.
+
+No WSLg, a fonte de áudio padrão atual é `RDPSink.monitor`. Em outro ambiente PulseAudio/PipeWire, descubra a fonte com `pactl list short sources` e rode:
+
+```bash
+BORROW_FIGHTERS_CAPTURE_AUDIO_SOURCE=<fonte> cargo run
+```
+
+Para validar o motor de captura sem depender de automação de teclado, rode:
+
+```bash
+BORROW_FIGHTERS_CAPTURE_SMOKE_SECONDS=8 cargo run -- --fight
+```
+
+Esse hook inicia a gravação automaticamente, para depois do número de segundos informado e usa o mesmo pipeline de `F9`/`F10`: render texture do Raylib, áudio PulseAudio e saída em `captures/`.
+
 ## Cabeçalho de Arquivos
 
 Arquivos Rust novos devem começar com:

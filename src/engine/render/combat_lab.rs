@@ -22,7 +22,7 @@ use super::{
 };
 
 /// Draws the isolated Combat Lab scene.
-pub fn draw_combat_lab(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab, assets: &GameAssets) {
+pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, assets: &GameAssets) {
     draw.clear_background(BACKGROUND);
     if lab.show_background() {
         draw_arena(draw, assets.arenas.get(ArenaId::STARTING_ARENA));
@@ -66,7 +66,7 @@ pub fn draw_combat_lab(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab, assets:
     combat_debug::draw_combat_lab_debug(draw, lab);
 }
 
-fn draw_lab_grid(draw: &mut RaylibDrawHandle<'_>, line_color: Color) {
+fn draw_lab_grid(draw: &mut impl super::DrawTarget, line_color: Color) {
     for x in (0..=WINDOW_WIDTH).step_by(80) {
         draw.draw_line(x, 0, x, WINDOW_HEIGHT, line_color);
     }
@@ -77,7 +77,7 @@ fn draw_lab_grid(draw: &mut RaylibDrawHandle<'_>, line_color: Color) {
 }
 
 fn draw_lab_projectiles(
-    draw: &mut RaylibDrawHandle<'_>,
+    draw: &mut impl super::DrawTarget,
     projectiles: &[Projectile],
     texture: Option<&Texture2D>,
 ) {

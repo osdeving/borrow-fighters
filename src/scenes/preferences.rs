@@ -29,6 +29,7 @@ pub enum PreferencesAction {
     StartFight,
     CyclePlayerOne(CycleDirection),
     CyclePlayerTwo(CycleDirection),
+    ToggleRecording,
 }
 
 /// Stateful preferences screen cursor.
@@ -42,7 +43,8 @@ impl PreferencesMenu {
     pub const START_ROW: usize = 0;
     pub const PLAYER_ONE_CHARACTER_ROW: usize = 1;
     pub const PLAYER_TWO_CHARACTER_ROW: usize = 2;
-    pub const FIRST_FLAG_ROW: usize = 3;
+    pub const RECORDING_ROW: usize = 3;
+    pub const FIRST_FLAG_ROW: usize = 4;
 
     /// Number of selectable rows in the preferences screen.
     pub const fn row_count() -> usize {
@@ -97,6 +99,10 @@ impl PreferencesMenu {
 
             if let Some(action) = self.character_cycle_action(CycleDirection::Next) {
                 return action;
+            }
+
+            if self.selected == Self::RECORDING_ROW {
+                return PreferencesAction::ToggleRecording;
             }
 
             let flag = PREFERENCE_FLAGS[self.selected - Self::FIRST_FLAG_ROW];
