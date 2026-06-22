@@ -74,6 +74,8 @@ Hitboxes:
 
 Essa técnica foi escolhida porque é legível, testável sem Raylib e suficiente para o Prototype 0.1. Quando o frame visual declara `frames[].combat`, o runtime projeta esses dados para coordenadas de mundo em [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs). A resolução da luta usa `frames[].combat.hitboxes[]` e `frames[].combat.hurtboxes[]` quando essas listas existem; se estiverem ausentes ou vazias, volta para `MoveSpec.hitbox` e `Fighter::hurtboxes()`. A decisão está registrada em [`docs/adr/0007-sprite-frame-combat-runtime.md`](adr/0007-sprite-frame-combat-runtime.md).
 
+Rust, Duke e Go ja possuem `combat.projectile_origin` no primeiro frame do clip `special`. Esse ponto e projetado por [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) e usado por [`src/game/world.rs`](../src/game/world.rs) ao criar o projectile, para evitar que o poder nasca desalinhado da mao. Hitboxes/hurtboxes de soco e chute ainda devem ser calibradas no Sprite Combat Viewer antes de virar dado autoritativo.
+
 ### Escala Visual e Pivot
 
 Sprites runtime usam `borrow-fighters.sprite.v1` em [`src/engine/sprites/manifest.rs`](../src/engine/sprites/manifest.rs). O campo `scale` controla o tamanho visual do atlas em jogo; `frames[].pivot` ancora cada frame no corpo do lutador.

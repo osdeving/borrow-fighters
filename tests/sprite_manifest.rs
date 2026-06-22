@@ -50,6 +50,27 @@ fn go_fighter_manifest_loads() {
 }
 
 #[test]
+fn fighter_special_first_frames_declare_projectile_origins() {
+    let cases = [
+        (RUST_FIGHTER_MANIFEST_PATH, "special_0", 216, 148),
+        (DUKE_FIGHTER_MANIFEST_PATH, "special_0", 222, 148),
+        (GO_FIGHTER_MANIFEST_PATH, "special_0", 225, 150),
+    ];
+
+    for (path, frame_name, expected_x, expected_y) in cases {
+        let manifest = SpriteManifest::load(path).expect("manifest should load");
+        let origin = manifest
+            .frame_named(frame_name)
+            .and_then(|frame| frame.combat.as_ref())
+            .and_then(|combat| combat.projectile_origin)
+            .expect("special frame should declare projectile origin");
+
+        assert_eq!(origin.x, expected_x, "{path} {frame_name} origin x");
+        assert_eq!(origin.y, expected_y, "{path} {frame_name} origin y");
+    }
+}
+
+#[test]
 fn rust_start_manifest_loads_spawn_clip() {
     let manifest = SpriteManifest::load(RUST_START_MANIFEST_PATH).expect("manifest should load");
     let spawn = manifest

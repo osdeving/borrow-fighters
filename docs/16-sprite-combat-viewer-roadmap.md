@@ -172,6 +172,7 @@ Ja existe:
 - ajuste e persistencia de `frames[].pivot` do frame atual com `Setas`/`Shift+Setas` e `Ctrl+S`;
 - ajuste e persistencia de corpo fisico por personagem em [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json);
 - `frames[].combat.hurtboxes[]`, `frames[].combat.hitboxes[]` e `frames[].combat.projectile_origin` no schema `borrow-fighters.sprite.v1`;
+- origem de projectile calibrada no primeiro frame do clip `special` de Rust, Duke e Go;
 - validacao em [`src/engine/sprites/manifest.rs`](../src/engine/sprites/manifest.rs);
 - projecao testavel em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs);
 - desenho no viewer em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs);
@@ -212,7 +213,7 @@ Ja existe:
 
 - [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) projeta `frames[].combat` para mundo com `scale`, `pivot` e `Facing`;
 - [`src/game/world.rs`](../src/game/world.rs) usa hitboxes/hurtboxes de sprite quando presentes, com fallback para `MoveSpec` e `Fighter::hurtboxes`;
-- `projectile_origin` do clip `special` pode definir de onde o projectile nasce;
+- `projectile_origin` do clip `special` define de onde o projectile nasce quando o frame possui esse dado;
 - debug visual da luta usa as mesmas boxes projetadas quando `Mostrar debug de combate` esta ligado.
 
 ## Decisoes Em Aberto

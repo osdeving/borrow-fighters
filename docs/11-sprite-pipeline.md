@@ -103,6 +103,8 @@ O tamanho em jogo nao deve depender da resolucao do PNG. Ajuste `scale` e `frame
 
 O corpo fisico de gameplay fica em [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json). Esse arquivo controla `width`, `standing_height` e `crouch_height` por personagem. Ele define o retangulo base usado por colisao corpo-corpo, hurtboxes compostas e alinhamento do sprite. `frames[].combat` pode substituir hitbox/hurtbox por frame quando houver metadata revisada.
 
+No corte atual, Rust, Duke e Go ja declaram `frames[].combat.projectile_origin` no primeiro frame do clip `special`, usado pelo runtime para alinhar o nascimento do projectile com a mao do personagem. Hitboxes e hurtboxes por frame ainda devem ser preenchidas pelo Sprite Combat Viewer antes de substituir alcances de soco/chute em producao.
+
 O runtime tambem usa:
 
 - `spawn` durante a entrada inicial de Rust e Duke;
