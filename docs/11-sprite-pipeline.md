@@ -138,9 +138,11 @@ Atalhos:
 
 | Acao | Tecla |
 |---|---|
+| Inspecionar coordenada local/atlas | Mouse sobre o sprite |
 | Arrastar personagem | Mouse esquerdo |
 | Proximo clip | `Tab` |
 | Clip anterior | `Shift+Tab` |
+| Sincronizar clip com golpe | `Enter` |
 | Proximo personagem de combate | `C` |
 | Personagem de combate anterior | `Shift+C` |
 | Proximo golpe | `]` |
@@ -160,7 +162,7 @@ Atalhos:
 | Alternar bounds | `B` |
 | Resetar posicao | `R` |
 
-O corte atual e viewer, nao editor. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetoria prevista de projectile, timeline visual e metadata opcional de `frames[].combat`. A camada runtime de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go pelo nome do manifesto e tambem permite alternar personagem/golpe sem reiniciar a ferramenta. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
+O corte atual e viewer, nao editor. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetoria prevista de projectile, timeline visual e metadata opcional de `frames[].combat`. A camada runtime de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go pelo nome do manifesto e tambem permite alternar personagem/golpe sem reiniciar a ferramenta. `Enter` tenta sincronizar o clip visual com o golpe atual quando o manifesto possui um clip conhecido como `punch_light`, `punch_heavy` ou `special`. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
 
 ## Pontos ainda em aberto
 

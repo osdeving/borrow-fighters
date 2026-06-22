@@ -46,6 +46,7 @@ pub struct SpriteViewerInput {
     pub previous_character: bool,
     pub next_move: bool,
     pub previous_move: bool,
+    pub sync_clip_to_move: bool,
     pub next_frame: bool,
     pub previous_frame: bool,
     pub toggle_playback: bool,
@@ -118,6 +119,7 @@ pub struct SpriteViewer {
     zoom: f32,
     anchor: ViewerPoint,
     dummy_anchor: ViewerPoint,
+    mouse_position: ViewerPoint,
     dragging: Option<DragTarget>,
     drag_offset: ViewerPoint,
     texture_error: Option<String>,
@@ -144,6 +146,16 @@ pub struct SpriteProjectileTrajectory {
     pub end: ViewerPoint,
     pub samples: Vec<Rect>,
     pub travel_distance: f32,
+}
+
+/// Mouse position converted into current frame-local sprite coordinates.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct SpriteFrameCursor {
+    pub screen_position: ViewerPoint,
+    pub local_x: i32,
+    pub local_y: i32,
+    pub atlas_x: i32,
+    pub atlas_y: i32,
 }
 
 /// One frame-local combat box projected into viewer screen coordinates.
@@ -230,6 +242,7 @@ impl SpriteViewer {
             zoom: 1.0,
             anchor: ViewerPoint::new(DEFAULT_ANCHOR_X, FLOOR_Y),
             dummy_anchor: ViewerPoint::new(DEFAULT_DUMMY_ANCHOR_X, FLOOR_Y),
+            mouse_position: ViewerPoint::default(),
             dragging: None,
             drag_offset: ViewerPoint::default(),
             texture_error: None,
@@ -239,6 +252,8 @@ impl SpriteViewer {
 
     /// Advances animation and applies viewer controls.
     pub fn update(&mut self, input: SpriteViewerInput, delta_seconds: f32) {
+        self.mouse_position = input.mouse_position;
+
         if input.previous_clip {
             self.step_clip(-1);
         }
@@ -256,6 +271,9 @@ impl SpriteViewer {
         }
         if input.next_move {
             self.step_move(1);
+        }
+        if input.sync_clip_to_move {
+            self.sync_clip_to_selected_move();
         }
         if input.previous_frame {
             self.playing = false;
@@ -389,6 +407,30 @@ impl SpriteViewer {
     /// Returns the ordered frame names for the selected clip.
     pub fn current_clip_frame_names(&self) -> &[String] {
         &self.manifest.clips[self.clip_index].frames
+    }
+
+    /// Returns the mouse coordinates inside the current atlas frame, if hovered.
+    pub fn frame_cursor(&self) -> Option<SpriteFrameCursor> {
+        let screen = self.sprite_screen_rect();
+        if !screen.contains(self.mouse_position) {
+            return None;
+        }
+
+        let frame = self.current_frame();
+        let scale_x = screen.width / frame.frame.w as f32;
+        let scale_y = screen.height / frame.frame.h as f32;
+        let local_x = ((self.mouse_position.x - screen.x) / scale_x).floor() as i32;
+        let local_y = ((self.mouse_position.y - screen.y) / scale_y).floor() as i32;
+        let local_x = local_x.clamp(0, frame.frame.w.saturating_sub(1));
+        let local_y = local_y.clamp(0, frame.frame.h.saturating_sub(1));
+
+        Some(SpriteFrameCursor {
+            screen_position: self.mouse_position,
+            local_x,
+            local_y,
+            atlas_x: frame.frame.x + local_x,
+            atlas_y: frame.frame.y + local_y,
+        })
     }
 
     /// Returns the selected runtime combat character, if any.
@@ -830,6 +872,31 @@ impl SpriteViewer {
         ));
     }
 
+    fn sync_clip_to_selected_move(&mut self) {
+        let candidates = preferred_clips_for_move(self.options.selected_move);
+        let Some(index) = candidates.iter().find_map(|candidate| {
+            self.manifest
+                .clips
+                .iter()
+                .position(|clip| clip.name == *candidate)
+        }) else {
+            self.status_message = Some(format!(
+                "Nenhum clip conhecido para {} neste manifesto.",
+                self.options.selected_move.label()
+            ));
+            return;
+        };
+
+        self.clip_index = index;
+        self.frame_index = 0;
+        self.frame_elapsed_ms = 0.0;
+        self.playing = true;
+        self.status_message = Some(format!(
+            "Clip sincronizado: {}.",
+            self.manifest.clips[index].name
+        ));
+    }
+
     fn advance_one_frame(&mut self) -> bool {
         let clip = &self.manifest.clips[self.clip_index];
         if self.frame_index + 1 < clip.frames.len() {
@@ -934,4 +1001,19 @@ fn hitbox_for_move(fighter: &Fighter, spec: MoveSpec) -> Rect {
         Facing::Left => body.x - hitbox.width,
     };
     Rect::new(x, body.y + hitbox.y_offset, hitbox.width, hitbox.height)
+}
+
+fn preferred_clips_for_move(selected_move: CombatLabMove) -> &'static [&'static str] {
+    match selected_move {
+        CombatLabMove::LightPunch => &["punch_light", "light_punch", "punch"],
+        CombatLabMove::HeavyPunch => &["punch_heavy", "heavy_punch", "punch"],
+        CombatLabMove::Kick => &["kick"],
+        CombatLabMove::Sweep => &["sweep", "sweep_kick", "crouch", "kick"],
+        CombatLabMove::Overhead => &["overhead", "punch_heavy"],
+        CombatLabMove::AntiAir => &["anti_air", "rising_anti_air", "punch_heavy"],
+        CombatLabMove::AirPunch => &["air_punch", "jump_punch", "jump", "punch_light"],
+        CombatLabMove::AirKick => &["air_kick", "jump_kick", "jump", "kick"],
+        CombatLabMove::Throw => &["throw", "grab", "punch_light"],
+        CombatLabMove::Projectile => &["special", "projectile"],
+    }
 }

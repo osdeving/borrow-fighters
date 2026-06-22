@@ -424,6 +424,7 @@ fn read_sprite_viewer_input(raylib: &RaylibHandle) -> SpriteViewerInput {
         previous_character: raylib.is_key_pressed(KeyboardKey::KEY_C) && shift_down,
         next_move: raylib.is_key_pressed(KeyboardKey::KEY_RIGHT_BRACKET),
         previous_move: raylib.is_key_pressed(KeyboardKey::KEY_LEFT_BRACKET),
+        sync_clip_to_move: raylib.is_key_pressed(KeyboardKey::KEY_ENTER),
         next_frame: raylib.is_key_pressed(KeyboardKey::KEY_PERIOD),
         previous_frame: raylib.is_key_pressed(KeyboardKey::KEY_COMMA),
         toggle_playback: raylib.is_key_pressed(KeyboardKey::KEY_SPACE),

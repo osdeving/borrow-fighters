@@ -273,6 +273,77 @@ fn projectile_trajectory_preview_tracks_selected_projectile() {
 }
 
 #[test]
+fn frame_cursor_reports_local_and_atlas_coordinates() {
+    let mut viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("tests/fixtures/sprite-viewer-combat.sprite.json"),
+        initial_clip: Some("idle".to_string()),
+        character: None,
+        selected_move: CombatLabMove::LightPunch,
+    })
+    .unwrap();
+
+    viewer.update(
+        SpriteViewerInput {
+            mouse_position: ViewerPoint::new(452.0, 382.0),
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    let cursor = viewer
+        .frame_cursor()
+        .expect("mouse should be inside sprite");
+
+    assert_eq!(cursor.local_x, 22);
+    assert_eq!(cursor.local_y, 40);
+    assert_eq!(cursor.atlas_x, 22);
+    assert_eq!(cursor.atlas_y, 40);
+
+    viewer.update(
+        SpriteViewerInput {
+            mouse_position: ViewerPoint::new(10.0, 10.0),
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    assert!(viewer.frame_cursor().is_none());
+}
+
+#[test]
+fn sync_clip_to_move_selects_first_known_clip_for_move() {
+    let mut viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),
+        initial_clip: Some("idle".to_string()),
+        character: Some(CharacterId::Rust),
+        selected_move: CombatLabMove::Projectile,
+    })
+    .unwrap();
+
+    viewer.update(
+        SpriteViewerInput {
+            sync_clip_to_move: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    assert_eq!(viewer.current_clip_name(), "special");
+
+    viewer.update(
+        SpriteViewerInput {
+            previous_move: true,
+            sync_clip_to_move: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    assert_eq!(viewer.selected_move(), CombatLabMove::Throw);
+    assert_eq!(viewer.current_clip_name(), "punch_light");
+}
+
+#[test]
 fn frame_combat_overlay_projects_manifest_metadata_to_screen_space() {
     let viewer = SpriteViewer::load(SpriteViewerOptions {
         manifest_path: PathBuf::from("tests/fixtures/sprite-viewer-combat.sprite.json"),

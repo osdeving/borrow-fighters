@@ -11,7 +11,7 @@ use crate::{
     math::rect::Rect,
     scenes::sprite_viewer::{
         SpriteCombatOverlay, SpriteFrameCombatBoxOverlay, SpriteFrameCombatOverlay,
-        SpriteTimelinePhase, SpriteViewer, ViewerPoint, ViewerRect,
+        SpriteFrameCursor, SpriteTimelinePhase, SpriteViewer, ViewerPoint, ViewerRect,
     },
 };
 
@@ -25,6 +25,7 @@ const FRAME_COLOR: Color = Color::new(255, 210, 74, 255);
 const TRIM_COLOR: Color = Color::new(105, 240, 174, 255);
 const SOURCE_COLOR: Color = Color::new(86, 156, 255, 255);
 const PIVOT_COLOR: Color = Color::new(255, 82, 82, 255);
+const CURSOR_COLOR: Color = Color::new(255, 255, 255, 230);
 const DUMMY_COLOR: Color = Color::new(255, 178, 104, 174);
 const DUMMY_PIVOT_COLOR: Color = Color::new(255, 178, 104, 255);
 const COMBAT_BODY: Color = Color::new(218, 112, 214, 210);
@@ -91,6 +92,9 @@ pub fn draw_sprite_viewer(
             draw_frame_guides(draw, viewer, viewer.dummy_screen_rect(), true);
         }
         draw_frame_guides(draw, viewer, viewer.sprite_screen_rect(), false);
+    }
+    if let Some(cursor) = viewer.frame_cursor() {
+        draw_frame_cursor(draw, cursor);
     }
 
     if viewer.show_dummy() {
@@ -272,6 +276,23 @@ fn draw_projectile_trajectory(
         trajectory.origin.y.round() as i32 + 12,
         13,
         PROJECTILE_TRAJECTORY,
+    );
+}
+
+fn draw_frame_cursor(draw: &mut RaylibDrawHandle<'_>, cursor: SpriteFrameCursor) {
+    let x = cursor.screen_position.x.round() as i32;
+    let y = cursor.screen_position.y.round() as i32;
+    draw.draw_line(x - 10, y, x + 10, y, CURSOR_COLOR);
+    draw.draw_line(x, y - 10, x, y + 10, CURSOR_COLOR);
+    draw.draw_text(
+        &format!(
+            "local {},{} | atlas {},{}",
+            cursor.local_x, cursor.local_y, cursor.atlas_x, cursor.atlas_y
+        ),
+        x + 12,
+        y + 12,
+        13,
+        CURSOR_COLOR,
     );
 }
 
@@ -575,7 +596,7 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
         UI_MUTED,
     );
     draw.draw_text(
-        "mouse drag | Tab clip | [] golpe | C char | ./, frame | Space pause | T traj | F5 reload",
+        "mouse inspect/drag | Tab clip | Enter sync | [] golpe | C char | ./, frame | T traj",
         panel_x + 16,
         panel_y + 92,
         15,
@@ -658,6 +679,19 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
             panel_y + 88,
             14,
             FRAME_DATA_HURTBOX,
+        );
+    }
+
+    if let Some(cursor) = viewer.frame_cursor() {
+        draw.draw_text(
+            &format!(
+                "cursor local {},{} | atlas {},{}",
+                cursor.local_x, cursor.local_y, cursor.atlas_x, cursor.atlas_y
+            ),
+            panel_x + 430,
+            panel_y + 108,
+            14,
+            CURSOR_COLOR,
         );
     }
 }

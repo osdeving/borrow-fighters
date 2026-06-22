@@ -125,7 +125,7 @@ Falta:
 
 Objetivo: enxergar boxes reais, nao apenas bounds de sprite.
 
-Status: em andamento. O viewer ja projeta a hurtbox atual do corpo, a hitbox do golpe selecionado e a caixa/origem de projectile usando `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`. Ele tambem desenha metadata opcional `frames[].combat` quando o manifesto declara hurtbox, hitbox ou origem de projectile por frame, permite alternar personagem/golpe sem reiniciar e mostra uma trajetoria prevista simples de projectile.
+Status: em andamento. O viewer ja projeta a hurtbox atual do corpo, a hitbox do golpe selecionado e a caixa/origem de projectile usando `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`. Ele tambem desenha metadata opcional `frames[].combat` quando o manifesto declara hurtbox, hitbox ou origem de projectile por frame, permite alternar personagem/golpe sem reiniciar, mostra uma trajetoria prevista simples de projectile e exibe coordenada local/atlas do mouse sobre o frame atual.
 
 Entregas planejadas:
 
@@ -160,6 +160,8 @@ Ja existe:
 - timeline inferior com coloracao aproximada por fase de golpe.
 - alternancia runtime de personagem/golpe com `C`/`Shift+C` e `[`/`]`;
 - preview simples de trajetoria de projectile com `T`.
+- inspetor de coordenada local/atlas do cursor para preencher `frames[].combat`;
+- sincronizacao manual entre golpe e clip visual com `Enter`.
 
 Regra importante: a ferramenta pode sugerir valores, mas nao deve reescrever manifestos automaticamente enquanto o schema nao estiver estabilizado.
 

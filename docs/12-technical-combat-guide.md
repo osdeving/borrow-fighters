@@ -322,9 +322,11 @@ Teclas:
 
 | Ação | Tecla |
 |---|---|
+| Inspecionar coordenada local/atlas | Mouse sobre o sprite |
 | Arrastar personagem | Mouse esquerdo |
 | Próximo clip | `Tab` |
 | Clip anterior | `Shift+Tab` |
+| Sincronizar clip com golpe | `Enter` |
 | Próximo personagem de combate | `C` |
 | Personagem de combate anterior | `Shift+C` |
 | Próximo golpe | `]` |
@@ -344,7 +346,7 @@ Teclas:
 | Alternar bounds | `B` |
 | Resetar posição | `R` |
 
-O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, `trimmed_bounds`, `source_crop`, hurtbox atual do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetória prevista de projectile, metadata `frames[].combat` e timeline inferior com fase aproximada de startup/active/recovery quando `--character` e `--move` estao presentes. O personagem e o golpe podem ser trocados em runtime com `C`/`Shift+C` e `[`/`]`, sem reabrir o comando. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. A evolução restante está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
+O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtbox atual do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetória prevista de projectile, metadata `frames[].combat` e timeline inferior com fase aproximada de startup/active/recovery quando `--character` e `--move` estao presentes. A coordenada do cursor é a referência prática para preencher `frames[].combat`: `local x,y` entra no JSON do frame; `atlas x,y` serve para conferir a posição no PNG. O personagem e o golpe podem ser trocados em runtime com `C`/`Shift+C` e `[`/`]`, sem reabrir o comando. `Enter` tenta selecionar o clip mais provável para o golpe atual. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. A evolução restante está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
 
 ## Cabeçalho de Arquivos
 
