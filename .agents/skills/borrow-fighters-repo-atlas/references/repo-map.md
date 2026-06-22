@@ -30,6 +30,7 @@
 | `docs/12-worldbuilding.md` | Story, characters and Brazilian arena direction |
 | `docs/13-combat-design-roadmap.md` | Combat design, frame data and Combat Lab roadmap |
 | `docs/14-audio-pipeline.md` | Audio event and manifest pipeline |
+| `docs/15-character-combat-matrix.md` | Character identity, archetypes and tuning matrix |
 | `docs/16-sprite-combat-viewer-roadmap.md` | Sprite viewer/tooling roadmap for artists and combat alignment |
 | `docs/adr/` | Architecture Decision Records |
 | `docs/templates/` | Reusable proposal/checklist templates |

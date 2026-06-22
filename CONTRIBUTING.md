@@ -13,9 +13,12 @@ Leia:
 1. [`README.md`](README.md)
 2. [`docs/00-vision.md`](docs/00-vision.md)
 3. [`docs/01-mini-gdd.md`](docs/01-mini-gdd.md)
-4. [`docs/05-governance.md`](docs/05-governance.md)
-5. [`docs/07-art-direction.md`](docs/07-art-direction.md), se a contribuição envolver arte, mood ou personagem.
-6. [`docs/08-code-architecture.md`](docs/08-code-architecture.md), se a contribuição envolver código.
+4. [`docs/03-backlog.md`](docs/03-backlog.md)
+5. [`docs/05-governance.md`](docs/05-governance.md)
+6. [`docs/07-art-direction.md`](docs/07-art-direction.md), se a contribuição envolver arte, mood ou personagem.
+7. [`docs/08-code-architecture.md`](docs/08-code-architecture.md), se a contribuição envolver código.
+
+[`docs/03-backlog.md`](docs/03-backlog.md) e a fonte de verdade para **Agora / Proximo / Depois**. Antes de abrir uma branch, confira esse documento e a issue/PR ligada a frente ativa.
 
 ## Contribuições úteis agora
 
@@ -31,9 +34,10 @@ Leia:
 
 1. Abra uma issue usando o template mais próximo.
 2. Espere triagem quando a mudança afetar escopo, arte, processo ou stack.
-3. Crie uma branch curta a partir de `main`.
-4. Preencha o template de PR.
-5. Atualize docs ou ADR se a mudança alterar direção do projeto.
+3. Confirme se a frente aparece em [`docs/03-backlog.md`](docs/03-backlog.md); se nao aparecer, proponha ou atualize o backlog.
+4. Crie uma branch curta a partir de `main`.
+5. Preencha o template de PR.
+6. Atualize docs ou ADR se a mudança alterar direção do projeto.
 
 ## Modelo de branches
 

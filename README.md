@@ -88,8 +88,11 @@ Leia primeiro:
 
 1. [`docs/00-vision.md`](docs/00-vision.md)
 2. [`docs/01-mini-gdd.md`](docs/01-mini-gdd.md)
-3. [`CONTRIBUTING.md`](CONTRIBUTING.md)
-4. [`docs/05-governance.md`](docs/05-governance.md)
+3. [`docs/03-backlog.md`](docs/03-backlog.md)
+4. [`CONTRIBUTING.md`](CONTRIBUTING.md)
+5. [`docs/05-governance.md`](docs/05-governance.md)
+
+O documento [`docs/03-backlog.md`](docs/03-backlog.md) e a fonte de verdade dos proximos passos. Ele mantem a tabela **Agora / Proximo / Depois** e deve ser atualizado quando uma frente ativa muda, conclui ou entra no fluxo de PR.
 
 Neste estágio, contribuições devem focar em:
 

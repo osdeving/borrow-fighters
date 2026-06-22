@@ -1,5 +1,54 @@
 # 03 — Backlog Inicial
 
+## Fonte de verdade
+
+Este documento e a fonte de verdade para **o que vem agora**.
+
+Roadmaps especializados continuam existindo, mas devem apontar para este backlog quando uma frente virar trabalho ativo:
+
+- combate e balanceamento: [`docs/13-combat-design-roadmap.md`](13-combat-design-roadmap.md);
+- sprites, atlas e ferramenta de inspecao: [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md);
+- arte e mood: [`docs/07-art-direction.md`](07-art-direction.md);
+- audio: [`docs/14-audio-pipeline.md`](14-audio-pipeline.md);
+- processo, PRs e GitHub: [`docs/05-governance.md`](05-governance.md).
+
+Regra operacional:
+
+1. toda frente ativa deve aparecer na tabela **Agora / Proximo / Depois** abaixo;
+2. toda tarefa aceita deve ter issue ou PR relacionado quando sair de ideia para execucao;
+3. toda mudanca que altera comandos, processo, formato de dados, roadmap ou contribuicao deve atualizar este backlog ou o roadmap especializado correspondente;
+4. se uma decisao criar padrao duradouro, registrar ADR.
+
+## Agora / Proximo / Depois
+
+| Janela | Frente | Status | Registro | Proxima acao |
+|---|---|---|---|---|
+| Agora | Sprite Combat Viewer | PR aberto | [PR #16](https://github.com/osdeving/borrow-fighters/pull/16), [issue #15](https://github.com/osdeving/borrow-fighters/issues/15), [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) | Revisar, testar manualmente e mergear a ferramenta na `main`. |
+| Proximo | Calibracao de sprite/hitbox | Planejado | [`docs/11-sprite-pipeline.md`](11-sprite-pipeline.md), [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md) | Usar o viewer para preencher `frames[].combat` primeiro no `special` do Rust e validar origem do projectile. |
+| Proximo | Feeling e balanceamento | Planejado | [`docs/13-combat-design-roadmap.md`](13-combat-design-roadmap.md), [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md) | Playtestar Rust x Duke x Go com Combat Lab e ajustar frame data por dados, nao por achismo. |
+| Proximo | Arte candidata | Planejado | [`docs/07-art-direction.md`](07-art-direction.md), [`docs/11-sprite-pipeline.md`](11-sprite-pipeline.md) | Definir criterio de aceitacao para o primeiro atlas candidato de Rust antes de pedir polimento final. |
+| Depois | Ferramenta visual clicavel | Aberto | [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) | Avaliar `raygui` somente se atalhos e texto ficarem insuficientes. |
+| Depois | Release Prototype 0.1 | Aberto | [`docs/06-release-process.md`](06-release-process.md) | Criar milestone/release checklist quando o slice tiver playtest minimo e assets candidatos. |
+
+## Ritual de manutencao
+
+Antes de abrir branch:
+
+- verificar esta tabela;
+- confirmar se existe issue ou PR para a frente ativa;
+- se nao existir, criar issue pequena ou atualizar este backlog.
+
+Antes de mergear PR:
+
+- atualizar este backlog se a mudanca concluiu, criou ou reordenou trabalho;
+- atualizar o roadmap especializado quando houver detalhe tecnico de uma frente;
+- registrar no [`CHANGELOG.md`](../CHANGELOG.md) mudancas relevantes.
+
+Depois de mergear:
+
+- fechar ou comentar a issue relacionada;
+- decidir explicitamente qual linha da tabela vira o novo **Agora**.
+
 ## Legenda de t-shirt sizing
 
 - **XS**: muito pequeno.

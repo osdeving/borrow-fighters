@@ -77,6 +77,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Sprite Combat Viewer com overlay data-driven de `frames[].combat` e timeline inferior de startup/active/recovery para o golpe selecionado.
 - Sprite Combat Viewer com troca runtime de personagem/golpe e preview simples de trajetória de projectile.
 - Sprite Combat Viewer com inspetor de coordenada local/atlas do cursor e sincronização manual entre golpe e clip visual.
+- Backlog central reforçado com tabela **Agora / Proximo / Depois** para manter proximas frentes, issues e PRs rastreaveis.
 
 ### Em aberto
 
