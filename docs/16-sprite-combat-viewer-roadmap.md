@@ -177,6 +177,7 @@ Ja existe:
 - ajuste e persistencia de corpo fisico por personagem em [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json);
 - `frames[].combat.hurtboxes[]`, `frames[].combat.hitboxes[]` e `frames[].combat.projectile_origin` no schema `borrow-fighters.sprite.v1`;
 - origem de projectile calibrada no primeiro frame do clip `special` de Rust, Duke e Go;
+- hitbox inicial do Rust `Borrow Jab` nos frames `punch_0` e `punch_1`, ainda equivalente ao alcance greybox atual;
 - validacao em [`src/engine/sprites/manifest.rs`](../src/engine/sprites/manifest.rs);
 - projecao testavel em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs);
 - desenho no viewer em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs);

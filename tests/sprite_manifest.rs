@@ -71,6 +71,24 @@ fn fighter_special_first_frames_declare_projectile_origins() {
 }
 
 #[test]
+fn rust_borrow_jab_sprite_hitbox_matches_current_move_reach() {
+    let manifest = SpriteManifest::load(RUST_FIGHTER_MANIFEST_PATH).expect("manifest should load");
+    let fighter = Fighter::new(PlayerSlot::One, "Rust", 200.0);
+    let body = fighter.body_rect();
+
+    for frame_name in ["punch_0", "punch_1"] {
+        let frame = manifest.frame_named(frame_name).unwrap();
+        let projected = project_frame_combat(&manifest, frame, &fighter).unwrap();
+        let hitbox = projected.hitboxes[0];
+
+        assert_eq!(hitbox.x, body.right(), "{frame_name} x");
+        assert_eq!(hitbox.y, body.y + 62.0, "{frame_name} y");
+        assert_eq!(hitbox.width, 48.0, "{frame_name} width");
+        assert_eq!(hitbox.height, 30.0, "{frame_name} height");
+    }
+}
+
+#[test]
 fn rust_start_manifest_loads_spawn_clip() {
     let manifest = SpriteManifest::load(RUST_START_MANIFEST_PATH).expect("manifest should load");
     let spawn = manifest
