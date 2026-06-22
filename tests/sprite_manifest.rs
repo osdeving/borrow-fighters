@@ -3,7 +3,10 @@
 use std::path::Path;
 
 use borrow_fighters::{
-    combat::fighter::{Facing, Fighter, PlayerSlot},
+    combat::{
+        fighter::{Facing, Fighter, PlayerSlot},
+        move_data::{MoveId, move_spec},
+    },
     engine::sprites::{
         DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH, GO_CHANNEL_PROJECTILE_PATH,
         GO_FIGHTER_MANIFEST_PATH, GO_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH,
@@ -71,21 +74,37 @@ fn fighter_special_first_frames_declare_projectile_origins() {
 }
 
 #[test]
-fn rust_borrow_jab_sprite_hitbox_matches_current_move_reach() {
+fn rust_primary_sprite_hitboxes_match_current_move_reach() {
     let manifest = SpriteManifest::load(RUST_FIGHTER_MANIFEST_PATH).expect("manifest should load");
     let fighter = Fighter::new(PlayerSlot::One, "Rust", 200.0);
     let body = fighter.body_rect();
+    let cases: &[(MoveId, &[&str])] = &[
+        (MoveId::RustBorrowJab, &["punch_0", "punch_1"]),
+        (MoveId::HeavyPunch, &["punch_2"]),
+        (MoveId::Kick, &["kick_1", "kick_2"]),
+    ];
 
-    for frame_name in ["punch_0", "punch_1"] {
-        let frame = manifest.frame_named(frame_name).unwrap();
-        let projected = project_frame_combat(&manifest, frame, &fighter).unwrap();
-        let hitbox = projected.hitboxes[0];
+    for (move_id, frame_names) in cases {
+        let spec = move_spec(*move_id);
+        for frame_name in *frame_names {
+            let frame = manifest.frame_named(frame_name).unwrap();
+            let projected = project_frame_combat(&manifest, frame, &fighter).unwrap();
+            let hitbox = projected.hitboxes[0];
 
-        assert_eq!(hitbox.x, body.right(), "{frame_name} x");
-        assert_eq!(hitbox.y, body.y + 62.0, "{frame_name} y");
-        assert_eq!(hitbox.width, 48.0, "{frame_name} width");
-        assert_eq!(hitbox.height, 30.0, "{frame_name} height");
+            assert_eq!(hitbox.x, body.right(), "{frame_name} x");
+            assert_eq!(hitbox.y, body.y + spec.hitbox.y_offset, "{frame_name} y");
+            assert_eq!(hitbox.width, spec.hitbox.width, "{frame_name} width");
+            assert_eq!(hitbox.height, spec.hitbox.height, "{frame_name} height");
+        }
     }
+
+    assert!(
+        manifest
+            .frame_named("kick_0")
+            .and_then(|frame| frame.combat.as_ref())
+            .is_none_or(|combat| combat.hitboxes.is_empty()),
+        "kick_0 remains startup without an active hitbox"
+    );
 }
 
 #[test]
