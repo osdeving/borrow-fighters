@@ -35,6 +35,7 @@ pub struct App {
     preferences_menu: PreferencesMenu,
     combat_lab: CombatLab,
     match_options: MatchOptions,
+    match_options_dirty: bool,
     current_arena: ArenaId,
     advance_arena_on_next_match: bool,
     accumulator: f32,
@@ -74,6 +75,7 @@ impl App {
             preferences_menu: PreferencesMenu::default(),
             combat_lab,
             match_options,
+            match_options_dirty: false,
             current_arena: ArenaId::STARTING_ARENA,
             advance_arena_on_next_match: false,
             accumulator: 0.0,
@@ -119,26 +121,41 @@ impl App {
 
             if self.scene == AppScene::Preferences {
                 play_preferences_audio_feedback(&mut audio_player, input.preferences);
-                if self
+                let preferences_action = self
                     .preferences_menu
-                    .update(input.preferences, &mut self.feature_flags)
-                    == PreferencesAction::StartFight
-                {
-                    if self.world.outcome.is_some() {
-                        self.restart_match();
+                    .update(input.preferences, &mut self.feature_flags);
+                match preferences_action {
+                    PreferencesAction::Stay => {}
+                    PreferencesAction::CyclePlayerOne(direction) => {
+                        self.match_options.player_one =
+                            cycle_character(self.match_options.player_one, direction);
+                        self.match_options_dirty = true;
                     }
-                    self.scene = AppScene::Fight;
-                    audio_player.play_music(MusicTrack::Combat);
+                    PreferencesAction::CyclePlayerTwo(direction) => {
+                        self.match_options.player_two =
+                            cycle_character(self.match_options.player_two, direction);
+                        self.match_options_dirty = true;
+                    }
+                    PreferencesAction::StartFight => {
+                        if self.world.outcome.is_some() || self.match_options_dirty {
+                            self.restart_match();
+                        }
+                        self.scene = AppScene::Fight;
+                        audio_player.play_music(MusicTrack::Combat);
+                    }
                 }
-
                 let mut draw = raylib.begin_drawing(thread);
                 render::draw_preferences(
                     &mut draw,
-                    &self.preferences_menu,
-                    self.current_arena,
-                    self.feature_flags,
-                    gamepad_status,
-                    &assets,
+                    render::PreferencesDrawOptions {
+                        menu: &self.preferences_menu,
+                        player_one_character: self.match_options.player_one,
+                        player_two_character: self.match_options.player_two,
+                        arena: self.current_arena,
+                        flags: self.feature_flags,
+                        gamepad_status,
+                        assets: &assets,
+                    },
                 );
                 continue;
             }
@@ -151,11 +168,15 @@ impl App {
                 let mut draw = raylib.begin_drawing(thread);
                 render::draw_preferences(
                     &mut draw,
-                    &self.preferences_menu,
-                    self.current_arena,
-                    self.feature_flags,
-                    gamepad_status,
-                    &assets,
+                    render::PreferencesDrawOptions {
+                        menu: &self.preferences_menu,
+                        player_one_character: self.match_options.player_one,
+                        player_two_character: self.match_options.player_two,
+                        arena: self.current_arena,
+                        flags: self.feature_flags,
+                        gamepad_status,
+                        assets: &assets,
+                    },
                 );
                 continue;
             }
@@ -236,6 +257,7 @@ impl App {
         );
         self.player_one_cpu = BasicCpu::for_slot(PlayerSlot::One);
         self.player_two_cpu = BasicCpu::for_slot(PlayerSlot::Two);
+        self.match_options_dirty = false;
         self.advance_arena_on_next_match = false;
         self.accumulator = 0.0;
     }
@@ -279,11 +301,21 @@ fn cpu_attack_filtered_input(
     }
 }
 
+fn cycle_character(
+    character: crate::characters::CharacterId,
+    direction: crate::scenes::preferences::CycleDirection,
+) -> crate::characters::CharacterId {
+    match direction {
+        crate::scenes::preferences::CycleDirection::Previous => character.previous(),
+        crate::scenes::preferences::CycleDirection::Next => character.next(),
+    }
+}
+
 fn play_preferences_audio_feedback<'aud>(
     audio_player: &mut AudioPlayer<'aud>,
     input: crate::scenes::preferences::PreferencesInput,
 ) {
-    if input.up || input.down {
+    if input.up || input.down || input.left || input.right {
         audio_player.play(&AudioEvent::ui_navigate());
     }
 

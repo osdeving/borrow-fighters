@@ -9,7 +9,7 @@ mod combat_lab;
 
 pub use combat_lab::draw_combat_lab;
 
-use crate::characters::CharacterId;
+use crate::characters::{CharacterId, character_spec};
 use crate::combat::fighter::{AttackPhase, Facing, PlayerSlot};
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
 use crate::engine::assets::{GameAssets, SpriteAtlasAsset};
@@ -137,16 +137,9 @@ pub fn draw_fight(
 }
 
 /// Draws the initial preferences screen.
-pub fn draw_preferences(
-    draw: &mut RaylibDrawHandle<'_>,
-    menu: &PreferencesMenu,
-    arena: ArenaId,
-    flags: FeatureFlags,
-    gamepad_status: GamepadStatus,
-    assets: &GameAssets,
-) {
+pub fn draw_preferences(draw: &mut RaylibDrawHandle<'_>, options: PreferencesDrawOptions<'_>) {
     draw.clear_background(BACKGROUND);
-    draw_arena(draw, assets.arenas.get(arena));
+    draw_arena(draw, options.assets.arenas.get(options.arena));
     draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(0, 0, 0, 138));
 
     let panel_x = 88;
@@ -167,8 +160,8 @@ pub fn draw_preferences(
 
     let status = format!(
         "Joystick Raylib: P1 {} | P2 {}",
-        connected_label(gamepad_status.player_one),
-        connected_label(gamepad_status.player_two)
+        connected_label(options.gamepad_status.player_one),
+        connected_label(options.gamepad_status.player_two)
     );
     let status_width = draw.measure_text(&status, 16);
     draw.draw_text(
@@ -188,36 +181,76 @@ pub fn draw_preferences(
             x: panel_x + 32,
             y: row_start_y,
             width: panel_width - 64,
-            selected: menu.selected() == 0,
+            selected: options.menu.selected() == 0,
             label: "Comecar luta",
             description: "Enter/Menu inicia ou volta para a luta.",
             checked: None,
+            value: None,
+        },
+    );
+
+    draw_menu_row(
+        draw,
+        MenuRow {
+            x: panel_x + 32,
+            y: row_start_y + PreferencesMenu::PLAYER_ONE_CHARACTER_ROW as i32 * row_spacing,
+            width: panel_width - 64,
+            selected: options.menu.selected() == PreferencesMenu::PLAYER_ONE_CHARACTER_ROW,
+            label: "Personagem Player 1",
+            description: "Esquerda/direita ou Espaco alterna.",
+            checked: None,
+            value: Some(character_spec(options.player_one_character).display_name),
+        },
+    );
+    draw_menu_row(
+        draw,
+        MenuRow {
+            x: panel_x + 32,
+            y: row_start_y + PreferencesMenu::PLAYER_TWO_CHARACTER_ROW as i32 * row_spacing,
+            width: panel_width - 64,
+            selected: options.menu.selected() == PreferencesMenu::PLAYER_TWO_CHARACTER_ROW,
+            label: "Personagem Player 2",
+            description: "Esquerda/direita ou Espaco alterna.",
+            checked: None,
+            value: Some(character_spec(options.player_two_character).display_name),
         },
     );
 
     for (index, flag) in PREFERENCE_FLAGS.iter().copied().enumerate() {
-        let row = index + 1;
+        let row = index + PreferencesMenu::FIRST_FLAG_ROW;
         draw_menu_row(
             draw,
             MenuRow {
                 x: panel_x + 32,
                 y: row_start_y + row as i32 * row_spacing,
                 width: panel_width - 64,
-                selected: menu.selected() == row,
+                selected: options.menu.selected() == row,
                 label: flag.label(),
                 description: flag.description(),
-                checked: Some(flags.enabled(flag)),
+                checked: Some(options.flags.enabled(flag)),
+                value: None,
             },
         );
     }
 
     draw.draw_text(
-        "Setas/W/S navegam | Espaco alterna | Enter comeca | Esc abre ajustes durante a luta",
+        "Setas/W/S navegam | A/D ajusta personagem | Espaco alterna | Enter comeca",
         panel_x + 32,
         panel_y + panel_height - 34,
         15,
         UI_MUTED,
     );
+}
+
+/// Data needed by the preferences renderer.
+pub struct PreferencesDrawOptions<'a> {
+    pub menu: &'a PreferencesMenu,
+    pub player_one_character: CharacterId,
+    pub player_two_character: CharacterId,
+    pub arena: ArenaId,
+    pub flags: FeatureFlags,
+    pub gamepad_status: GamepadStatus,
+    pub assets: &'a GameAssets,
 }
 
 struct MenuRow<'a> {
@@ -228,6 +261,7 @@ struct MenuRow<'a> {
     label: &'a str,
     description: &'a str,
     checked: Option<bool>,
+    value: Option<&'a str>,
 }
 
 fn draw_menu_row(draw: &mut RaylibDrawHandle<'_>, row: MenuRow<'_>) {
@@ -247,6 +281,18 @@ fn draw_menu_row(draw: &mut RaylibDrawHandle<'_>, row: MenuRow<'_>) {
 
     draw.draw_text(row.label, label_x, row.y + 1, 17, UI_TEXT);
     draw.draw_text(row.description, label_x, row.y + 18, 11, UI_MUTED);
+
+    if let Some(value) = row.value {
+        let text = format!("< {value} >");
+        let text_width = draw.measure_text(&text, 17);
+        draw.draw_text(
+            &text,
+            row.x + row.width - text_width - 18,
+            row.y + 1,
+            17,
+            HEALTH_FILL,
+        );
+    }
 }
 
 fn draw_checkbox(draw: &mut RaylibDrawHandle<'_>, x: i32, y: i32, enabled: bool) {

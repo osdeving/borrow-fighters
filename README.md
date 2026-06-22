@@ -127,11 +127,11 @@ cargo run -- --fight --p1 go --p2 duke
 cargo run -- --player-one rust --player-two go
 ```
 
-O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navegar, `Espaço` para ligar/desligar uma opção e `Enter` para começar ou voltar para a luta. Durante a luta, `Esc` volta para essa tela.
+O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navegar, `A/D` ou `←`/`→` para trocar personagem nas linhas de matchup, `Espaço` para ligar/desligar ou ciclar uma opção e `Enter` para começar ou voltar para a luta. Durante a luta, `Esc` volta para essa tela.
 
 Ao iniciar uma luta, o jogo roda a entrada dos personagens e depois bloqueia input durante a contagem central `11`, `10`, `01`, `Fight!`. A arena só avança para a próxima rotação quando uma nova luta é iniciada depois de uma vitória, para preservar a pose final no mesmo cenário.
 
-Por padrão, a luta normal inicia `Rust` contra `Duke / Java`. Para testar matchups sem tela de seleção, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang` ou `gopher`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pela tela de preferências. Go ainda usa placeholder greybox na luta normal, mas já consome vida, loadout e frame data próprios.
+Por padrão, a luta normal inicia `Rust` contra `Duke / Java`. A tela de preferências já permite ciclar Player 1 e Player 2 entre Rust, Duke e Go. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang` ou `gopher`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pela tela de preferências. Go ainda usa placeholder greybox na luta normal, mas já consome vida, loadout e frame data próprios.
 
 Para abrir o laboratório de combate direto em uma cena limpa:
 
@@ -150,11 +150,13 @@ Preferências disponíveis:
 
 | Preferência | Padrão | Efeito |
 |---|---|---|
-| Player 1 usa IA | Desligado | Controla Rust automaticamente. |
-| Player 2 usa IA | Ligado | Controla Java automaticamente. |
+| Personagem Player 1 | Rust | Define o personagem do Player 1 na próxima luta. |
+| Personagem Player 2 | Duke / Java | Define o personagem do Player 2 na próxima luta. |
+| Player 1 usa IA | Desligado | Controla o Player 1 automaticamente. |
+| Player 2 usa IA | Ligado | Controla o Player 2 automaticamente. |
 | IA pode dar golpes | Ligado | Quando desligado, a IA ainda anda, pula, afasta, aproxima e defende, mas não ataca. |
-| Player 1 recebe dano | Ligado | Quando desligado, Rust fica invencível para playtest. |
-| Player 2 recebe dano | Ligado | Quando desligado, Java fica invencível para playtest. |
+| Player 1 recebe dano | Ligado | Quando desligado, o Player 1 fica invencível para playtest. |
+| Player 2 recebe dano | Ligado | Quando desligado, o Player 2 fica invencível para playtest. |
 | Mostrar HUD | Ligado | Exibe vida, título e status no topo. |
 | Mostrar ajuda de controles | Desligado | Exibe comandos no rodapé durante a luta. |
 | Mostrar debug de combate | Desligado | Exibe hitboxes, hurtboxes, labels e colisão corpo-corpo. |

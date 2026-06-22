@@ -53,6 +53,24 @@ pub enum CharacterId {
 }
 
 impl CharacterId {
+    /// Returns the next prototype roster character.
+    pub const fn next(self) -> Self {
+        match self {
+            Self::Rust => Self::Duke,
+            Self::Duke => Self::Go,
+            Self::Go => Self::Rust,
+        }
+    }
+
+    /// Returns the previous prototype roster character.
+    pub const fn previous(self) -> Self {
+        match self {
+            Self::Rust => Self::Go,
+            Self::Duke => Self::Rust,
+            Self::Go => Self::Duke,
+        }
+    }
+
     /// Parses a CLI character name.
     pub fn from_cli(value: &str) -> Option<Self> {
         match value {

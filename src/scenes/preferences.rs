@@ -9,8 +9,17 @@ use crate::game::feature_flags::{FeatureFlags, PREFERENCE_FLAGS};
 pub struct PreferencesInput {
     pub up: bool,
     pub down: bool,
+    pub left: bool,
+    pub right: bool,
     pub activate: bool,
     pub start: bool,
+}
+
+/// Direction used by menu rows that cycle through discrete options.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum CycleDirection {
+    Previous,
+    Next,
 }
 
 /// Result of handling one preferences input frame.
@@ -18,6 +27,8 @@ pub struct PreferencesInput {
 pub enum PreferencesAction {
     Stay,
     StartFight,
+    CyclePlayerOne(CycleDirection),
+    CyclePlayerTwo(CycleDirection),
 }
 
 /// Stateful preferences screen cursor.
@@ -28,9 +39,14 @@ pub struct PreferencesMenu {
 }
 
 impl PreferencesMenu {
+    pub const START_ROW: usize = 0;
+    pub const PLAYER_ONE_CHARACTER_ROW: usize = 1;
+    pub const PLAYER_TWO_CHARACTER_ROW: usize = 2;
+    pub const FIRST_FLAG_ROW: usize = 3;
+
     /// Number of selectable rows in the preferences screen.
     pub const fn row_count() -> usize {
-        PREFERENCE_FLAGS.len() + 1
+        PREFERENCE_FLAGS.len() + Self::FIRST_FLAG_ROW
     }
 
     /// Returns the selected row index.
@@ -66,15 +82,40 @@ impl PreferencesMenu {
             return PreferencesAction::StartFight;
         }
 
+        if input.left {
+            return self.cycle_action(CycleDirection::Previous);
+        }
+
+        if input.right {
+            return self.cycle_action(CycleDirection::Next);
+        }
+
         if input.activate {
-            if self.selected == 0 {
+            if self.selected == Self::START_ROW {
                 return PreferencesAction::StartFight;
             }
 
-            let flag = PREFERENCE_FLAGS[self.selected - 1];
+            if let Some(action) = self.character_cycle_action(CycleDirection::Next) {
+                return action;
+            }
+
+            let flag = PREFERENCE_FLAGS[self.selected - Self::FIRST_FLAG_ROW];
             flags.toggle(flag);
         }
 
         PreferencesAction::Stay
+    }
+
+    fn cycle_action(&self, direction: CycleDirection) -> PreferencesAction {
+        self.character_cycle_action(direction)
+            .unwrap_or(PreferencesAction::Stay)
+    }
+
+    fn character_cycle_action(&self, direction: CycleDirection) -> Option<PreferencesAction> {
+        match self.selected {
+            Self::PLAYER_ONE_CHARACTER_ROW => Some(PreferencesAction::CyclePlayerOne(direction)),
+            Self::PLAYER_TWO_CHARACTER_ROW => Some(PreferencesAction::CyclePlayerTwo(direction)),
+            _ => None,
+        }
     }
 }

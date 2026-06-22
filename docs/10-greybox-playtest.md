@@ -93,14 +93,16 @@ O Combat Lab abre com o fundo `Sirius` ligado para validar contraste de golpe/sp
 
 ## Preferências
 
-O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navegar, `Espaço` para ligar/desligar uma opção e `Enter` para começar ou voltar para a luta. Durante a luta, `Esc` volta para essa tela.
+O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navegar, `A/D` ou `←`/`→` para trocar personagem nas linhas de matchup, `Espaço` para ligar/desligar ou ciclar uma opção e `Enter` para começar ou voltar para a luta. Durante a luta, `Esc` volta para essa tela.
 
 Ao começar uma luta, os personagens entram em cena e depois aparece a contagem central `11`, `10`, `01`, `Fight!`. Enquanto a intro ou a contagem estiver ativa, ataques, movimento e projéteis ficam bloqueados. Depois que alguém vence, o cenário permanece o mesmo durante a pose final; a próxima arena só entra quando a luta seguinte começa com `R`/`Start` ou ao voltar da tela de preferências.
 
 | Preferência | Padrão | O que testar |
 |---|---|---|
-| Player 1 usa IA | Desligado | Rust deve ser controlado automaticamente quando ligado. |
-| Player 2 usa IA | Ligado | Java deve ser controlado automaticamente. |
+| Personagem Player 1 | Rust | A próxima luta deve iniciar com o personagem escolhido para o Player 1. |
+| Personagem Player 2 | Duke / Java | A próxima luta deve iniciar com o personagem escolhido para o Player 2. |
+| Player 1 usa IA | Desligado | O Player 1 deve ser controlado automaticamente quando ligado. |
+| Player 2 usa IA | Ligado | O Player 2 deve ser controlado automaticamente. |
 | IA pode dar golpes | Ligado | Quando desligado, lutadores controlados por IA devem andar, pular, afastar, aproximar e defender, mas não atacar. |
 | Player 1 recebe dano | Ligado | Quando desligado, Rust não deve perder vida ao ser acertado. |
 | Player 2 recebe dano | Ligado | Quando desligado, Java não deve perder vida ao ser acertado. |
@@ -230,7 +232,7 @@ Controles do lab:
 
 ## Limitações conhecidas
 
-- A luta padrão ainda abre Rust x Java/Duke; Go entra na luta normal somente quando escolhido por CLI e ainda usa o spritesheet greybox genérico com cor própria.
+- A luta padrão ainda abre Rust x Java/Duke; Go entra na luta normal quando escolhido no menu ou por CLI e ainda usa o spritesheet greybox genérico com cor própria.
 - Rust e Duke ainda compartilham parte do kit genérico; o contraste principal já aparece em jab, heavy, anti-air, sweep, overhead e throw.
 - As arenas bitmap são placeholders gerados/derivados de referências e não devem ser tratadas como arte final.
 - O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.

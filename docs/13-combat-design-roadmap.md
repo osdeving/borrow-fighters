@@ -4,7 +4,7 @@
 
 Em implementação.
 
-Fases 1 a 4 concluídas em corte mínimo. A Fase 5 tem o primeiro corte de identidade por dados: Rust ganhou anti-air/throw mais rápidos e menores; Duke ganhou sweep/overhead/throw mais longos, pesados e puníveis; Go entrou como rushdown greybox testável no Combat Lab e em match real via `--fight --p1`/`--p2`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, personagens possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout, e o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`.
+Fases 1 a 4 concluídas em corte mínimo. A Fase 5 tem o primeiro corte de identidade por dados: Rust ganhou anti-air/throw mais rápidos e menores; Duke ganhou sweep/overhead/throw mais longos, pesados e puníveis; Go entrou como rushdown greybox testável no Combat Lab, no menu de preferências e em match real via `--fight --p1`/`--p2`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, personagens possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout, e o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -461,7 +461,7 @@ Critério de aceite:
 
 1. Usar a leitura de vantagem do Combat Lab para ajustar golpes seguros, puníveis e spacing.
 2. Playtestar a matriz Rust x Duke x Go e ajustar valores com base no Combat Lab.
-3. Decidir se a próxima interface mínima será seleção de personagem no menu ou se CLI basta durante o Prototype 0.1.
+3. Playtestar se a seleção mínima no menu basta ou se precisa de tela dedicada de personagem.
 4. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
 5. Só depois ampliar para novos golpes especiais.
 

@@ -86,3 +86,13 @@ fn character_cli_aliases_are_stable() {
     assert_eq!(CharacterId::from_cli("gopher"), Some(CharacterId::Go));
     assert_eq!(CharacterId::from_audio_key("go"), Some(CharacterId::Go));
 }
+
+#[test]
+fn character_roster_cycles_in_menu_order() {
+    assert_eq!(CharacterId::Rust.next(), CharacterId::Duke);
+    assert_eq!(CharacterId::Duke.next(), CharacterId::Go);
+    assert_eq!(CharacterId::Go.next(), CharacterId::Rust);
+    assert_eq!(CharacterId::Rust.previous(), CharacterId::Go);
+    assert_eq!(CharacterId::Duke.previous(), CharacterId::Rust);
+    assert_eq!(CharacterId::Go.previous(), CharacterId::Duke);
+}
