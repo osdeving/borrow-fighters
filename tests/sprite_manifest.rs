@@ -82,3 +82,87 @@ fn manifest_resolves_atlas_next_to_manifest_file() {
 
     assert!(atlas_path.ends_with("assets/placeholder/rust-fighter-atlas.png"));
 }
+
+#[test]
+fn frame_combat_metadata_validates() {
+    let manifest: SpriteManifest = serde_json::from_str(
+        r#"
+        {
+          "schema": "borrow-fighters.sprite.v1",
+          "image": "atlas.png",
+          "cell": { "w": 100, "h": 120 },
+          "default_pivot": { "x": 50, "y": 120 },
+          "frames": [
+            {
+              "name": "punch_0",
+              "clip": "punch",
+              "duration_ms": 90,
+              "pivot": { "x": 50, "y": 120 },
+              "frame": { "x": 0, "y": 0, "w": 100, "h": 120 },
+              "combat": {
+                "hurtboxes": [
+                  { "x": 10, "y": 20, "w": 36, "h": 80, "label": "torso" }
+                ],
+                "hitboxes": [
+                  { "x": 60, "y": 36, "w": 30, "h": 24, "label": "fist" }
+                ],
+                "projectile_origin": { "x": 82, "y": 48 }
+              }
+            }
+          ],
+          "clips": [
+            { "name": "punch", "loop": false, "frames": ["punch_0"] }
+          ]
+        }
+        "#,
+    )
+    .expect("manifest json should parse");
+
+    manifest
+        .validate()
+        .expect("combat metadata should validate");
+    let combat = manifest.frames[0]
+        .combat
+        .as_ref()
+        .expect("frame should contain combat metadata");
+
+    assert_eq!(combat.hurtboxes[0].label.as_deref(), Some("torso"));
+    assert_eq!(combat.hitboxes[0].w, 30);
+    assert_eq!(combat.projectile_origin.unwrap().x, 82);
+}
+
+#[test]
+fn frame_combat_metadata_rejects_boxes_outside_frame() {
+    let manifest: SpriteManifest = serde_json::from_str(
+        r#"
+        {
+          "schema": "borrow-fighters.sprite.v1",
+          "image": "atlas.png",
+          "cell": { "w": 100, "h": 120 },
+          "default_pivot": { "x": 50, "y": 120 },
+          "frames": [
+            {
+              "name": "punch_0",
+              "clip": "punch",
+              "duration_ms": 90,
+              "pivot": { "x": 50, "y": 120 },
+              "frame": { "x": 0, "y": 0, "w": 100, "h": 120 },
+              "combat": {
+                "hitboxes": [
+                  { "x": 90, "y": 36, "w": 30, "h": 24, "label": "fist" }
+                ]
+              }
+            }
+          ],
+          "clips": [
+            { "name": "punch", "loop": false, "frames": ["punch_0"] }
+          ]
+        }
+        "#,
+    )
+    .expect("manifest json should parse");
+
+    let error = manifest.validate().unwrap_err();
+
+    assert!(error.to_string().contains("hitbox must be inside"));
+}

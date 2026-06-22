@@ -6,7 +6,9 @@ use borrow_fighters::{
     characters::CharacterId,
     scenes::{
         combat_lab::CombatLabMove,
-        sprite_viewer::{SpriteViewer, SpriteViewerInput, SpriteViewerOptions, ViewerPoint},
+        sprite_viewer::{
+            SpriteTimelinePhase, SpriteViewer, SpriteViewerInput, SpriteViewerOptions, ViewerPoint,
+        },
     },
 };
 
@@ -192,4 +194,52 @@ fn projectile_overlay_exposes_spawn_box_and_origin() {
     assert!(overlay.hitbox.is_none());
     assert!(overlay.projectile.is_some());
     assert!(overlay.projectile_origin.is_some());
+}
+
+#[test]
+fn frame_combat_overlay_projects_manifest_metadata_to_screen_space() {
+    let viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("tests/fixtures/sprite-viewer-combat.sprite.json"),
+        initial_clip: Some("idle".to_string()),
+        character: None,
+        selected_move: CombatLabMove::LightPunch,
+    })
+    .unwrap();
+
+    let overlay = viewer.frame_combat_overlay().unwrap();
+
+    assert_eq!(overlay.hurtboxes.len(), 1);
+    assert_eq!(overlay.hitboxes.len(), 1);
+    assert_eq!(overlay.hurtboxes[0].label.as_deref(), Some("body"));
+    assert_eq!(overlay.hitboxes[0].label.as_deref(), Some("strike"));
+    assert_eq!(overlay.hurtboxes[0].rect.x, 440.0);
+    assert_eq!(overlay.hurtboxes[0].rect.y, 350.0);
+    assert_eq!(
+        overlay.projectile_origin,
+        Some(ViewerPoint::new(514.0, 386.0))
+    );
+}
+
+#[test]
+fn timeline_phase_uses_selected_character_move_data() {
+    let viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),
+        initial_clip: Some("punch_light".to_string()),
+        character: Some(CharacterId::Rust),
+        selected_move: CombatLabMove::LightPunch,
+    })
+    .unwrap();
+
+    assert_eq!(
+        viewer.timeline_phase_for_frame_index(0),
+        Some(SpriteTimelinePhase::Startup)
+    );
+    assert_eq!(
+        viewer.timeline_phase_for_frame_index(4),
+        Some(SpriteTimelinePhase::Active)
+    );
+    assert_eq!(
+        viewer.timeline_phase_for_frame_index(9),
+        Some(SpriteTimelinePhase::Recovery)
+    );
 }

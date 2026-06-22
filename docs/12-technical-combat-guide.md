@@ -59,7 +59,7 @@ Hitboxes:
 - `Fighter::active_attack` só retorna hitbox ofensiva quando o frame atual está dentro da janela ativa.
 - `combat::collision::hitbox_hits_hurtbox` usa interseção AABB.
 
-Essa técnica foi escolhida porque é legível, testável sem Raylib e suficiente para o Prototype 0.1. Quando sprites finais exigirem precisão maior, a evolução provável é `BoxTimeline` por frame no manifesto ou em dados de personagem.
+Essa técnica foi escolhida porque é legível, testável sem Raylib e suficiente para o Prototype 0.1. Quando sprites finais exigirem precisão maior, o primeiro caminho experimental é `frames[].combat` no manifesto de sprite, validado em [`src/engine/sprites/manifest.rs`](../src/engine/sprites/manifest.rs) e inspecionado no Sprite Combat Viewer.
 
 ### Frame Data
 
@@ -304,7 +304,19 @@ cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.spr
 
 O viewer roda fora do loop normal de luta. [`src/app.rs`](../src/app.rs) desvia para esse modo antes de carregar `GameAssets` e áudio. O estado testável fica em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), e o desenho Raylib fica em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs).
 
-`--character` e `--move` ativam a camada de combate no viewer. Sem `--character`, o viewer tenta inferir Rust, Duke ou Go pelo nome do manifesto. A camada atual usa `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, então ela reflete os dados de combate atuais, mas ainda nao e timeline editavel por frame.
+`--character` e `--move` ativam a camada runtime de combate no viewer. Sem `--character`, o viewer tenta inferir Rust, Duke ou Go pelo nome do manifesto. Essa camada usa `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, então ela reflete os dados de combate atuais.
+
+O viewer tambem entende metadata opcional `frames[].combat` no manifesto. Essa metadata e projetada para tela em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), desenhada em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs), e validada em [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs). As coordenadas ficam em pixels locais do frame do atlas:
+
+```json
+"combat": {
+  "hurtboxes": [{ "x": 10, "y": 8, "w": 48, "h": 96, "label": "body" }],
+  "hitboxes": [{ "x": 62, "y": 38, "w": 28, "h": 22, "label": "strike" }],
+  "projectile_origin": { "x": 84, "y": 44 }
+}
+```
+
+Por enquanto, `frames[].combat` e metadata de alinhamento visual para artista/dev revisar no viewer. A luta ainda usa `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec` como fonte de verdade de colisao e balanceamento.
 
 Teclas:
 
@@ -327,7 +339,7 @@ Teclas:
 | Alternar bounds | `B` |
 | Resetar posição | `R` |
 
-O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, `trimmed_bounds`, `source_crop`, hurtbox atual do corpo, hitbox do golpe selecionado e origem/caixa de projectile. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. Ele ainda não mostra hitbox/hurtbox por frame, porque esses dados ainda não existem em schema. Essa evolução está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
+O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, `trimmed_bounds`, `source_crop`, hurtbox atual do corpo, hitbox do golpe selecionado, origem/caixa de projectile, metadata `frames[].combat` e timeline inferior com fase aproximada de startup/active/recovery quando `--character` e `--move` estao presentes. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. A evolução restante está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
 
 ## Cabeçalho de Arquivos
 

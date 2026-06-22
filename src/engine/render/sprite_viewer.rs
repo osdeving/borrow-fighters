@@ -9,7 +9,10 @@ use crate::{
     config::{FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH},
     engine::sprites::{SpriteFrame, SpriteRect},
     math::rect::Rect,
-    scenes::sprite_viewer::{SpriteCombatOverlay, SpriteViewer, ViewerRect},
+    scenes::sprite_viewer::{
+        SpriteCombatOverlay, SpriteFrameCombatBoxOverlay, SpriteFrameCombatOverlay,
+        SpriteTimelinePhase, SpriteViewer, ViewerPoint, ViewerRect,
+    },
 };
 
 use super::{BACKGROUND, PANEL, PANEL_BORDER, UI_MUTED, UI_TEXT};
@@ -30,6 +33,14 @@ const COMBAT_HITBOX: Color = Color::new(255, 82, 82, 235);
 const COMBAT_HITBOX_FILL: Color = Color::new(255, 82, 82, 70);
 const COMBAT_PROJECTILE: Color = Color::new(80, 220, 255, 235);
 const COMBAT_PROJECTILE_FILL: Color = Color::new(80, 220, 255, 70);
+const FRAME_DATA_HURTBOX: Color = Color::new(84, 255, 170, 255);
+const FRAME_DATA_HURTBOX_FILL: Color = Color::new(84, 255, 170, 38);
+const FRAME_DATA_HITBOX: Color = Color::new(255, 96, 96, 255);
+const FRAME_DATA_HITBOX_FILL: Color = Color::new(255, 96, 96, 82);
+const TIMELINE_STARTUP: Color = Color::new(255, 210, 74, 230);
+const TIMELINE_ACTIVE: Color = Color::new(255, 82, 82, 235);
+const TIMELINE_RECOVERY: Color = Color::new(116, 151, 255, 220);
+const TIMELINE_INACTIVE: Color = Color::new(68, 76, 92, 220);
 
 /// Draws the sprite viewer scene.
 pub fn draw_sprite_viewer(
@@ -87,6 +98,9 @@ pub fn draw_sprite_viewer(
     if let Some(overlay) = viewer.combat_overlay() {
         draw_combat_overlay(draw, overlay);
     }
+    if let Some(overlay) = viewer.frame_combat_overlay() {
+        draw_frame_combat_overlay(draw, &overlay);
+    }
 
     if viewer.show_pivot() {
         if viewer.show_dummy() {
@@ -95,6 +109,7 @@ pub fn draw_sprite_viewer(
         draw_pivot_at(draw, viewer.anchor(), PIVOT_COLOR);
     }
 
+    draw_timeline(draw, viewer);
     draw_info_panel(draw, viewer);
 }
 
@@ -135,26 +150,7 @@ fn draw_combat_overlay(draw: &mut RaylibDrawHandle<'_>, overlay: SpriteCombatOve
     }
 
     if let Some(origin) = overlay.projectile_origin {
-        draw.draw_circle(
-            origin.x.round() as i32,
-            origin.y.round() as i32,
-            5.0,
-            COMBAT_PROJECTILE,
-        );
-        draw.draw_line(
-            origin.x.round() as i32 - 10,
-            origin.y.round() as i32,
-            origin.x.round() as i32 + 10,
-            origin.y.round() as i32,
-            COMBAT_PROJECTILE,
-        );
-        draw.draw_line(
-            origin.x.round() as i32,
-            origin.y.round() as i32 - 10,
-            origin.x.round() as i32,
-            origin.y.round() as i32 + 10,
-            COMBAT_PROJECTILE,
-        );
+        draw_projectile_origin(draw, origin, COMBAT_PROJECTILE);
     }
 }
 
@@ -177,6 +173,73 @@ fn draw_combat_rect(
         Rectangle::new(rect.x, rect.y, rect.width, rect.height),
         2.0,
         outline,
+    );
+}
+
+fn draw_frame_combat_overlay(draw: &mut RaylibDrawHandle<'_>, overlay: &SpriteFrameCombatOverlay) {
+    for hurtbox in &overlay.hurtboxes {
+        draw_frame_data_box(
+            draw,
+            hurtbox,
+            FRAME_DATA_HURTBOX,
+            Some(FRAME_DATA_HURTBOX_FILL),
+        );
+    }
+    for hitbox in &overlay.hitboxes {
+        draw_frame_data_box(
+            draw,
+            hitbox,
+            FRAME_DATA_HITBOX,
+            Some(FRAME_DATA_HITBOX_FILL),
+        );
+    }
+    if let Some(origin) = overlay.projectile_origin {
+        draw_projectile_origin(draw, origin, COMBAT_PROJECTILE);
+    }
+}
+
+fn draw_frame_data_box(
+    draw: &mut RaylibDrawHandle<'_>,
+    overlay_box: &SpriteFrameCombatBoxOverlay,
+    outline: Color,
+    fill: Option<Color>,
+) {
+    if let Some(fill) = fill {
+        draw.draw_rectangle(
+            overlay_box.rect.x.round() as i32,
+            overlay_box.rect.y.round() as i32,
+            overlay_box.rect.width.round() as i32,
+            overlay_box.rect.height.round() as i32,
+            fill,
+        );
+    }
+    draw_outline(draw, overlay_box.rect, outline, 3.0);
+    if let Some(label) = overlay_box.label.as_deref() {
+        draw.draw_text(
+            label,
+            overlay_box.rect.x.round() as i32 + 4,
+            overlay_box.rect.y.round() as i32 + 4,
+            13,
+            outline,
+        );
+    }
+}
+
+fn draw_projectile_origin(draw: &mut RaylibDrawHandle<'_>, origin: ViewerPoint, color: Color) {
+    draw.draw_circle(origin.x.round() as i32, origin.y.round() as i32, 5.0, color);
+    draw.draw_line(
+        origin.x.round() as i32 - 10,
+        origin.y.round() as i32,
+        origin.x.round() as i32 + 10,
+        origin.y.round() as i32,
+        color,
+    );
+    draw.draw_line(
+        origin.x.round() as i32,
+        origin.y.round() as i32 - 10,
+        origin.x.round() as i32,
+        origin.y.round() as i32 + 10,
+        color,
     );
 }
 
@@ -327,6 +390,98 @@ fn draw_viewer_grid(draw: &mut RaylibDrawHandle<'_>) {
     }
 }
 
+fn draw_timeline(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
+    let frame_names = viewer.current_clip_frame_names();
+    if frame_names.is_empty() {
+        return;
+    }
+
+    let timeline_x = 16;
+    let timeline_y = WINDOW_HEIGHT - 42;
+    let timeline_width = WINDOW_WIDTH - 32;
+    let timeline_height = 22;
+    let segment_width = timeline_width as f32 / frame_names.len() as f32;
+    let (current_frame, _) = viewer.frame_position();
+
+    draw.draw_rectangle(
+        timeline_x,
+        timeline_y - 18,
+        timeline_width,
+        timeline_height + 28,
+        PANEL,
+    );
+    draw.draw_rectangle_lines(
+        timeline_x,
+        timeline_y - 18,
+        timeline_width,
+        timeline_height + 28,
+        PANEL_BORDER,
+    );
+    draw.draw_text("timeline", timeline_x + 8, timeline_y - 15, 13, UI_MUTED);
+
+    for (index, frame_name) in frame_names.iter().enumerate() {
+        let x = timeline_x as f32 + index as f32 * segment_width;
+        let width = segment_width.max(1.0).ceil();
+        let color = timeline_color(viewer.timeline_phase_for_frame_index(index));
+        draw.draw_rectangle(
+            x.round() as i32,
+            timeline_y,
+            width.round() as i32,
+            timeline_height,
+            color,
+        );
+        draw.draw_rectangle_lines(
+            x.round() as i32,
+            timeline_y,
+            width.round() as i32,
+            timeline_height,
+            PANEL_BORDER,
+        );
+
+        if index == current_frame {
+            draw.draw_rectangle_lines_ex(
+                Rectangle::new(
+                    x,
+                    timeline_y as f32 - 2.0,
+                    width,
+                    timeline_height as f32 + 4.0,
+                ),
+                3.0,
+                UI_TEXT,
+            );
+        }
+
+        if segment_width >= 34.0 {
+            draw.draw_text(
+                &(index + 1).to_string(),
+                x.round() as i32 + 4,
+                timeline_y + 4,
+                12,
+                UI_TEXT,
+            );
+        }
+
+        if index == current_frame {
+            draw.draw_text(
+                &truncate_middle(frame_name, 36),
+                timeline_x + 86,
+                timeline_y - 15,
+                13,
+                UI_TEXT,
+            );
+        }
+    }
+}
+
+fn timeline_color(phase: Option<SpriteTimelinePhase>) -> Color {
+    match phase {
+        Some(SpriteTimelinePhase::Startup) => TIMELINE_STARTUP,
+        Some(SpriteTimelinePhase::Active) => TIMELINE_ACTIVE,
+        Some(SpriteTimelinePhase::Recovery) => TIMELINE_RECOVERY,
+        None => TIMELINE_INACTIVE,
+    }
+}
+
 fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
     let panel_x = 16;
     let panel_y = 16;
@@ -439,6 +594,26 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
             panel_y + 66,
             14,
             TRIM_COLOR,
+        );
+    }
+
+    if let Some(frame_combat) = &frame.combat {
+        let origin = if frame_combat.projectile_origin.is_some() {
+            "origin yes"
+        } else {
+            "origin no"
+        };
+        draw.draw_text(
+            &format!(
+                "frame data: {} hurt / {} hit / {}",
+                frame_combat.hurtboxes.len(),
+                frame_combat.hitboxes.len(),
+                origin,
+            ),
+            panel_x + 430,
+            panel_y + 88,
+            14,
+            FRAME_DATA_HURTBOX,
         );
     }
 }

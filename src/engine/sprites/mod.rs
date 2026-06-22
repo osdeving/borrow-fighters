@@ -11,8 +11,8 @@ mod selection;
 pub use animation::frame_for_clip_at;
 pub use draw::{draw_fighter_sprite, draw_manifest_fighter_sprite, draw_projectile_texture};
 pub use manifest::{
-    SPRITE_SCHEMA, SpriteClip, SpriteFrame, SpriteManifest, SpriteManifestError, SpritePivot,
-    SpriteRect, SpriteSize,
+    SPRITE_SCHEMA, SpriteClip, SpriteCombatBox, SpriteCombatPoint, SpriteFrame, SpriteFrameCombat,
+    SpriteManifest, SpriteManifestError, SpritePivot, SpriteRect, SpriteSize,
 };
 pub use selection::{
     FighterSpriteClip, FighterSpriteFrame, fighter_clip_elapsed_seconds, fighter_sprite_clip,

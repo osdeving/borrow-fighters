@@ -125,7 +125,7 @@ Falta:
 
 Objetivo: enxergar boxes reais, nao apenas bounds de sprite.
 
-Status: iniciada parcialmente. O viewer ja projeta a hurtbox atual do corpo, a hitbox do golpe selecionado e a caixa/origem de projectile usando `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`. Isso ainda e uma leitura do estado atual do combate, nao edicao por frame.
+Status: em andamento. O viewer ja projeta a hurtbox atual do corpo, a hitbox do golpe selecionado e a caixa/origem de projectile usando `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`. Ele tambem desenha metadata opcional `frames[].combat` quando o manifesto declara hurtbox, hitbox ou origem de projectile por frame.
 
 Entregas planejadas:
 
@@ -138,7 +138,7 @@ Entregas planejadas:
 
 Dependencia tecnica:
 
-- decidir onde os boxes por frame vivem: manifesto de sprite, dados de personagem, ou um arquivo lateral.
+- validar se `frames[].combat` no manifesto de sprite e suficiente ou se os dados finais de combate precisam migrar para arquivo lateral de personagem.
 
 ### Fase 3 — Ajuste Data-Driven
 
@@ -146,10 +146,18 @@ Objetivo: permitir que arte e combate sejam ajustados por dados revisaveis no Gi
 
 Entregas planejadas:
 
-- schema de `hurtboxes`, `hitboxes`, `projectile_origin` e talvez `root_motion` por frame;
+- schema opcional de `hurtboxes`, `hitboxes` e `projectile_origin` por frame;
 - validacao de manifesto para boxes fora do frame;
 - import/export manual de offsets;
 - checklist visual de aceitacao de atlas.
+
+Ja existe:
+
+- `frames[].combat.hurtboxes[]`, `frames[].combat.hitboxes[]` e `frames[].combat.projectile_origin` no schema `borrow-fighters.sprite.v1`;
+- validacao em [`src/engine/sprites/manifest.rs`](../src/engine/sprites/manifest.rs);
+- projecao testavel em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs);
+- desenho no viewer em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs);
+- timeline inferior com coloracao aproximada por fase de golpe.
 
 Regra importante: a ferramenta pode sugerir valores, mas nao deve reescrever manifestos automaticamente enquanto o schema nao estiver estabilizado.
 

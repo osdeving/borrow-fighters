@@ -1,0 +1,27 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "missing-atlas.png",
+  "cell": { "w": 100, "h": 120 },
+  "default_pivot": { "x": 50, "y": 120 },
+  "frames": [
+    {
+      "name": "idle_0",
+      "clip": "idle",
+      "duration_ms": 120,
+      "pivot": { "x": 50, "y": 120 },
+      "frame": { "x": 0, "y": 0, "w": 100, "h": 120 },
+      "combat": {
+        "hurtboxes": [
+          { "x": 10, "y": 8, "w": 48, "h": 96, "label": "body" }
+        ],
+        "hitboxes": [
+          { "x": 62, "y": 38, "w": 28, "h": 22, "label": "strike" }
+        ],
+        "projectile_origin": { "x": 84, "y": 44 }
+      }
+    }
+  ],
+  "clips": [
+    { "name": "idle", "loop": true, "frames": ["idle_0"] }
+  ]
+}

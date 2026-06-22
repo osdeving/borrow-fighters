@@ -28,6 +28,23 @@ Campos principais:
 - `default_pivot`: ponto de apoio padrao, normalmente perto do pe no chao.
 - `frames`: retangulos no atlas, duracao e pivot por frame.
 - `clips`: animacoes com lista ordenada de frames e flag `loop`.
+- `frames[].combat`: metadata opcional por frame para `hurtboxes`, `hitboxes` e `projectile_origin`.
+
+Exemplo de metadata de combate dentro de um frame:
+
+```json
+"combat": {
+  "hurtboxes": [
+    { "x": 120, "y": 16, "w": 80, "h": 190, "label": "body" }
+  ],
+  "hitboxes": [
+    { "x": 250, "y": 82, "w": 72, "h": 38, "label": "strike" }
+  ],
+  "projectile_origin": { "x": 286, "y": 92 }
+}
+```
+
+Esses valores sao medidos em pixels locais do frame do atlas, nao em coordenadas de mundo. A validacao rejeita retangulos vazios, retangulos fora do frame, labels vazias e origem de projectile fora do frame. O schema e experimental: por enquanto ele serve para inspecao no Sprite Combat Viewer e para discutir valores em PR antes de virar fonte final de balanceamento.
 
 ## Convencoes
 
@@ -138,12 +155,12 @@ Atalhos:
 | Alternar bounds | `B` |
 | Resetar posicao | `R` |
 
-O corte atual e viewer, nao editor. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado e origem/caixa de projectile. A camada de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go pelo nome do manifesto. Hitbox e hurtbox por frame ainda precisam de schema data-driven. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
+O corte atual e viewer, nao editor. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado, origem/caixa de projectile, timeline visual e metadata opcional de `frames[].combat`. A camada runtime de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go pelo nome do manifesto. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
 
 ## Pontos ainda em aberto
 
 - Definir se o formato v1 vira padrao permanente ou ponte para Aseprite JSON.
-- Mover hurtbox/hitbox por frame para dados externos quando a arte estabilizar.
+- Decidir se hurtbox/hitbox por frame ficam definitivamente no manifesto ou migram para dados externos quando a arte estabilizar.
 - Definir escala base dos personagens e tamanho minimo legivel para tela 16:9.
 - Criar criterio visual para aceitar atlas de personagem como "candidato" em vez de placeholder.
-- Decidir se `projectile_origin`, hitbox e hurtbox entram no manifesto de sprite ou em arquivo lateral de personagem.
+- Decidir se `projectile_origin`, hitbox e hurtbox devem alimentar o balanceamento final ou continuar como metadata de alinhamento visual.

@@ -53,6 +53,34 @@ pub struct SpriteRect {
     pub h: i32,
 }
 
+/// Optional combat metadata for one sprite frame.
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Eq)]
+pub struct SpriteFrameCombat {
+    #[serde(default)]
+    pub hurtboxes: Vec<SpriteCombatBox>,
+    #[serde(default)]
+    pub hitboxes: Vec<SpriteCombatBox>,
+    pub projectile_origin: Option<SpriteCombatPoint>,
+}
+
+/// Frame-local combat rectangle measured in atlas frame pixels.
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
+pub struct SpriteCombatBox {
+    pub x: i32,
+    pub y: i32,
+    pub w: i32,
+    pub h: i32,
+    #[serde(default)]
+    pub label: Option<String>,
+}
+
+/// Frame-local combat point measured in atlas frame pixels.
+#[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq)]
+pub struct SpriteCombatPoint {
+    pub x: i32,
+    pub y: i32,
+}
+
 /// One named frame inside the atlas.
 #[derive(Clone, Debug, Deserialize)]
 pub struct SpriteFrame {
@@ -63,6 +91,7 @@ pub struct SpriteFrame {
     pub source_crop: Option<SpriteRect>,
     pub trimmed_bounds: Option<SpriteRect>,
     pub frame: SpriteRect,
+    pub combat: Option<SpriteFrameCombat>,
 }
 
 /// Ordered animation clip referencing named frames.
@@ -264,6 +293,63 @@ fn validate_frame(frame: &SpriteFrame) -> Result<(), SpriteManifestError> {
     {
         return Err(SpriteManifestError::Invalid(format!(
             "sprite frame '{}' pivot must be inside the frame",
+            frame.name
+        )));
+    }
+
+    if let Some(combat) = &frame.combat {
+        for hurtbox in &combat.hurtboxes {
+            validate_combat_box(frame, "hurtbox", hurtbox)?;
+        }
+        for hitbox in &combat.hitboxes {
+            validate_combat_box(frame, "hitbox", hitbox)?;
+        }
+        if let Some(origin) = combat.projectile_origin
+            && (origin.x < 0
+                || origin.y < 0
+                || origin.x > frame.frame.w
+                || origin.y > frame.frame.h)
+        {
+            return Err(SpriteManifestError::Invalid(format!(
+                "sprite frame '{}' projectile_origin must be inside the frame",
+                frame.name
+            )));
+        }
+    }
+
+    Ok(())
+}
+
+fn validate_combat_box(
+    frame: &SpriteFrame,
+    kind: &str,
+    combat_box: &SpriteCombatBox,
+) -> Result<(), SpriteManifestError> {
+    if combat_box.w <= 0 || combat_box.h <= 0 {
+        return Err(SpriteManifestError::Invalid(format!(
+            "sprite frame '{}' {kind} must have a positive rectangle",
+            frame.name
+        )));
+    }
+
+    if combat_box.x < 0
+        || combat_box.y < 0
+        || combat_box.x + combat_box.w > frame.frame.w
+        || combat_box.y + combat_box.h > frame.frame.h
+    {
+        return Err(SpriteManifestError::Invalid(format!(
+            "sprite frame '{}' {kind} must be inside the frame",
+            frame.name
+        )));
+    }
+
+    if combat_box
+        .label
+        .as_deref()
+        .is_some_and(|label| label.trim().is_empty())
+    {
+        return Err(SpriteManifestError::Invalid(format!(
+            "sprite frame '{}' {kind} label cannot be empty",
             frame.name
         )));
     }

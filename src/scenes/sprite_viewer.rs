@@ -17,7 +17,7 @@ use crate::{
         projectile::Projectile,
     },
     config::FLOOR_Y,
-    engine::sprites::{SpriteFrame, SpriteManifest, SpriteManifestError},
+    engine::sprites::{SpriteCombatBox, SpriteFrame, SpriteManifest, SpriteManifestError},
     math::rect::Rect,
     scenes::combat_lab::CombatLabMove,
 };
@@ -131,6 +131,29 @@ pub struct SpriteCombatOverlay {
     pub projectile_origin: Option<ViewerPoint>,
 }
 
+/// One frame-local combat box projected into viewer screen coordinates.
+#[derive(Clone, Debug, PartialEq)]
+pub struct SpriteFrameCombatBoxOverlay {
+    pub rect: ViewerRect,
+    pub label: Option<String>,
+}
+
+/// Data-driven combat metadata projected from the current sprite frame.
+#[derive(Clone, Debug, PartialEq)]
+pub struct SpriteFrameCombatOverlay {
+    pub hurtboxes: Vec<SpriteFrameCombatBoxOverlay>,
+    pub hitboxes: Vec<SpriteFrameCombatBoxOverlay>,
+    pub projectile_origin: Option<ViewerPoint>,
+}
+
+/// Approximate combat phase used to color the clip timeline.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum SpriteTimelinePhase {
+    Startup,
+    Active,
+    Recovery,
+}
+
 /// Error returned when the viewer cannot load a manifest.
 #[derive(Debug)]
 pub enum SpriteViewerError {
@@ -172,7 +195,8 @@ impl SpriteViewer {
             None => 0,
         };
 
-        let show_combat_overlay = options.character.is_some();
+        let show_combat_overlay = options.character.is_some()
+            || manifest.frames.iter().any(|frame| frame.combat.is_some());
 
         Ok(Self {
             options,
@@ -331,6 +355,11 @@ impl SpriteViewer {
         )
     }
 
+    /// Returns the ordered frame names for the selected clip.
+    pub fn current_clip_frame_names(&self) -> &[String] {
+        &self.manifest.clips[self.clip_index].frames
+    }
+
     /// Returns the runtime scale from the manifest, falling back to 1.0.
     pub fn scale(&self) -> f32 {
         self.manifest_scale() * self.zoom
@@ -459,6 +488,72 @@ impl SpriteViewer {
         })
     }
 
+    /// Returns data-driven frame combat metadata aligned to the current sprite.
+    pub fn frame_combat_overlay(&self) -> Option<SpriteFrameCombatOverlay> {
+        if !self.show_combat_overlay {
+            return None;
+        }
+
+        let frame = self.current_frame();
+        let combat = frame.combat.as_ref()?;
+        let screen = self.sprite_screen_rect();
+
+        Some(SpriteFrameCombatOverlay {
+            hurtboxes: combat
+                .hurtboxes
+                .iter()
+                .map(|combat_box| self.project_frame_combat_box(screen, frame, combat_box))
+                .collect(),
+            hitboxes: combat
+                .hitboxes
+                .iter()
+                .map(|combat_box| self.project_frame_combat_box(screen, frame, combat_box))
+                .collect(),
+            projectile_origin: combat.projectile_origin.map(|origin| {
+                let scale_x = screen.width / frame.frame.w as f32;
+                let scale_y = screen.height / frame.frame.h as f32;
+                ViewerPoint::new(
+                    screen.x + origin.x as f32 * scale_x,
+                    screen.y + origin.y as f32 * scale_y,
+                )
+            }),
+        })
+    }
+
+    /// Returns the approximate combat phase for a visual frame index.
+    pub fn timeline_phase_for_frame_index(&self, index: usize) -> Option<SpriteTimelinePhase> {
+        let frame_number = index as u16;
+        let character = self.options.character?;
+        let spec = character_spec(character);
+
+        if self.options.selected_move == CombatLabMove::Projectile {
+            let frame_data = spec.projectile.frame_data;
+            if frame_number < frame_data.spawn_frame.get() {
+                return Some(SpriteTimelinePhase::Startup);
+            }
+            if frame_number == frame_data.spawn_frame.get() {
+                return Some(SpriteTimelinePhase::Active);
+            }
+            if frame_number <= frame_data.visual_duration.get() {
+                return Some(SpriteTimelinePhase::Recovery);
+            }
+            return None;
+        }
+
+        let input_kind = input_kind_for_move(self.options.selected_move)?;
+        let move_spec = move_spec_for_input(spec.move_ids, input_kind)?;
+        let frames = move_spec.frames;
+        if frame_number < frames.active_start.get() {
+            Some(SpriteTimelinePhase::Startup)
+        } else if frame_number <= frames.active_end.get() {
+            Some(SpriteTimelinePhase::Active)
+        } else if frame_number <= frames.duration.get() {
+            Some(SpriteTimelinePhase::Recovery)
+        } else {
+            None
+        }
+    }
+
     fn sprite_screen_rect_at(&self, anchor: ViewerPoint, mirrored: bool) -> ViewerRect {
         let frame = self.current_frame();
         let scale = self.scale();
@@ -474,6 +569,25 @@ impl SpriteViewer {
             y: anchor.y - frame.pivot.y as f32 * scale,
             width,
             height: frame.frame.h as f32 * scale,
+        }
+    }
+
+    fn project_frame_combat_box(
+        &self,
+        screen: ViewerRect,
+        frame: &SpriteFrame,
+        combat_box: &SpriteCombatBox,
+    ) -> SpriteFrameCombatBoxOverlay {
+        let scale_x = screen.width / frame.frame.w as f32;
+        let scale_y = screen.height / frame.frame.h as f32;
+        SpriteFrameCombatBoxOverlay {
+            rect: ViewerRect {
+                x: screen.x + combat_box.x as f32 * scale_x,
+                y: screen.y + combat_box.y as f32 * scale_y,
+                width: combat_box.w as f32 * scale_x,
+                height: combat_box.h as f32 * scale_y,
+            },
+            label: combat_box.label.clone(),
         }
     }
 
