@@ -72,6 +72,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Roadmap do Sprite Combat Viewer para artistas conferirem atlas, pivot, grid, hitbox/hurtbox futura e origem de projectile.
 - Primeiro corte do Sprite Combat Viewer por CLI, carregando manifesto/atlas em runtime, com grid, pivot, bounds, navegação de clips/frames e drag com mouse.
 - Sprite Combat Viewer com dummy espelhado arrastável, distância entre anchors, zoom por mouse wheel, hot reload de manifesto/atlas com `F5` e screenshot com `F12`.
+- Sprite Combat Viewer com overlay inicial de combate via `--character` e `--move`, mostrando hurtboxes atuais, hitbox do golpe e origem/caixa de projectile.
 
 ### Em aberto
 

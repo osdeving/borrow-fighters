@@ -299,10 +299,12 @@ Abrir a ferramenta isolada de sprites:
 
 ```bash
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
 ```
 
 O viewer roda fora do loop normal de luta. [`src/app.rs`](../src/app.rs) desvia para esse modo antes de carregar `GameAssets` e áudio. O estado testável fica em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), e o desenho Raylib fica em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs).
+
+`--character` e `--move` ativam a camada de combate no viewer. Sem `--character`, o viewer tenta inferir Rust, Duke ou Go pelo nome do manifesto. A camada atual usa `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, então ela reflete os dados de combate atuais, mas ainda nao e timeline editavel por frame.
 
 Teclas:
 
@@ -317,6 +319,7 @@ Teclas:
 | Zoom | Mouse wheel |
 | Resetar zoom | `0` |
 | Mostrar/esconder dummy | `O` |
+| Mostrar/esconder boxes de combate | `M` |
 | Recarregar manifesto e atlas | `F5` |
 | Salvar screenshot | `F12` |
 | Alternar grade | `G` |
@@ -324,7 +327,7 @@ Teclas:
 | Alternar bounds | `B` |
 | Resetar posição | `R` |
 
-O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, `trimmed_bounds` e `source_crop`. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. Ele ainda não mostra hitbox/hurtbox real nem origem de projectile por frame, porque esses dados ainda não existem em schema. Essa evolução está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
+O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, `trimmed_bounds`, `source_crop`, hurtbox atual do corpo, hitbox do golpe selecionado e origem/caixa de projectile. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. Ele ainda não mostra hitbox/hurtbox por frame, porque esses dados ainda não existem em schema. Essa evolução está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
 
 ## Cabeçalho de Arquivos
 

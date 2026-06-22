@@ -427,6 +427,7 @@ fn read_sprite_viewer_input(raylib: &RaylibHandle) -> SpriteViewerInput {
         toggle_pivot: raylib.is_key_pressed(KeyboardKey::KEY_P),
         toggle_bounds: raylib.is_key_pressed(KeyboardKey::KEY_B),
         toggle_dummy: raylib.is_key_pressed(KeyboardKey::KEY_O),
+        toggle_combat_overlay: raylib.is_key_pressed(KeyboardKey::KEY_M),
         reload_manifest: raylib.is_key_pressed(KeyboardKey::KEY_F5),
         reset_zoom: raylib.is_key_pressed(KeyboardKey::KEY_ZERO),
         screenshot_requested: raylib.is_key_pressed(KeyboardKey::KEY_F12),

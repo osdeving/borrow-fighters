@@ -152,10 +152,10 @@ Para abrir o viewer de sprites direto em uma ferramenta isolada:
 
 ```bash
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
 ```
 
-No Sprite Combat Viewer, use o mouse esquerdo para arrastar o personagem ou dummy, `Tab` / `Shift+Tab` para alternar clip, `.` / `,` para avançar ou voltar frame, `Espaço` para pausar, mouse wheel para zoom, `0` para resetar zoom, `O` para mostrar/esconder dummy, `F5` para recarregar manifesto/atlas, `F12` para salvar screenshot em `target/sprite-viewer-capture.png`, `G` para grade, `P` para pivot, `B` para bounds e `R` para resetar posição. O corte atual mostra atlas, pivot, grid, frame bounds e metadata; hitbox/hurtbox real e origem de projectile por frame estão no roadmap em [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md).
+No Sprite Combat Viewer, use o mouse esquerdo para arrastar o personagem ou dummy, `Tab` / `Shift+Tab` para alternar clip, `.` / `,` para avançar ou voltar frame, `Espaço` para pausar, mouse wheel para zoom, `0` para resetar zoom, `O` para mostrar/esconder dummy, `M` para mostrar/esconder boxes de combate, `F5` para recarregar manifesto/atlas, `F12` para salvar screenshot em `target/sprite-viewer-capture.png`, `G` para grade, `P` para pivot, `B` para bounds e `R` para resetar posição. O corte atual mostra atlas, pivot, grid, frame bounds, hurtbox atual, hitbox/origem de projectile para o golpe selecionado e metadata; hitbox/hurtbox por frame ainda está no roadmap em [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md).
 
 Preferências disponíveis:
 

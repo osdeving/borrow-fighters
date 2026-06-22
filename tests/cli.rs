@@ -160,6 +160,33 @@ fn sprite_viewer_args_select_manifest_and_clip() {
         std::path::PathBuf::from("assets/placeholder/rust-fighter.sprite.json")
     );
     assert_eq!(viewer.initial_clip.as_deref(), Some("idle"));
+    assert_eq!(viewer.character, Some(CharacterId::Rust));
+    assert_eq!(viewer.selected_move, CombatLabMove::LightPunch);
+}
+
+#[test]
+fn sprite_viewer_args_accept_character_and_move_for_combat_overlay() {
+    let options = LaunchOptions::parse(
+        [
+            "borrow-fighters",
+            "--tool",
+            "sprite-viewer",
+            "--manifest",
+            "assets/placeholder/duke-fighter.sprite.json",
+            "--character",
+            "duke",
+            "--move",
+            "projectile",
+        ]
+        .map(String::from),
+    )
+    .unwrap();
+
+    let LaunchMode::SpriteViewer(viewer) = options.mode else {
+        panic!("expected sprite viewer mode");
+    };
+    assert_eq!(viewer.character, Some(CharacterId::Duke));
+    assert_eq!(viewer.selected_move, CombatLabMove::Projectile);
 }
 
 #[test]

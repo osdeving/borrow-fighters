@@ -10,8 +10,16 @@ use std::{
 };
 
 use crate::{
+    characters::{CharacterId, character_spec},
+    combat::{
+        fighter::{Facing, Fighter, FighterBodyParts, PlayerSlot},
+        move_data::{MoveInputKind, MoveSpec, move_spec_for_input},
+        projectile::Projectile,
+    },
     config::FLOOR_Y,
     engine::sprites::{SpriteFrame, SpriteManifest, SpriteManifestError},
+    math::rect::Rect,
+    scenes::combat_lab::CombatLabMove,
 };
 
 const DEFAULT_ANCHOR_X: f32 = 480.0;
@@ -25,6 +33,8 @@ const ZOOM_STEP: f32 = 0.12;
 pub struct SpriteViewerOptions {
     pub manifest_path: PathBuf,
     pub initial_clip: Option<String>,
+    pub character: Option<CharacterId>,
+    pub selected_move: CombatLabMove,
 }
 
 /// Input snapshot consumed by the sprite viewer.
@@ -39,6 +49,7 @@ pub struct SpriteViewerInput {
     pub toggle_pivot: bool,
     pub toggle_bounds: bool,
     pub toggle_dummy: bool,
+    pub toggle_combat_overlay: bool,
     pub reload_manifest: bool,
     pub reset_zoom: bool,
     pub screenshot_requested: bool,
@@ -97,6 +108,7 @@ pub struct SpriteViewer {
     show_pivot: bool,
     show_bounds: bool,
     show_dummy: bool,
+    show_combat_overlay: bool,
     zoom: f32,
     anchor: ViewerPoint,
     dummy_anchor: ViewerPoint,
@@ -104,6 +116,19 @@ pub struct SpriteViewer {
     drag_offset: ViewerPoint,
     texture_error: Option<String>,
     status_message: Option<String>,
+}
+
+/// Combat shapes projected into viewer screen coordinates.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct SpriteCombatOverlay {
+    pub character: CharacterId,
+    pub selected_move: CombatLabMove,
+    pub move_label: &'static str,
+    pub body: Rect,
+    pub hurtboxes: FighterBodyParts,
+    pub hitbox: Option<Rect>,
+    pub projectile: Option<Rect>,
+    pub projectile_origin: Option<ViewerPoint>,
 }
 
 /// Error returned when the viewer cannot load a manifest.
@@ -147,6 +172,8 @@ impl SpriteViewer {
             None => 0,
         };
 
+        let show_combat_overlay = options.character.is_some();
+
         Ok(Self {
             options,
             manifest,
@@ -159,6 +186,7 @@ impl SpriteViewer {
             show_pivot: true,
             show_bounds: true,
             show_dummy: true,
+            show_combat_overlay,
             zoom: 1.0,
             anchor: ViewerPoint::new(DEFAULT_ANCHOR_X, FLOOR_Y),
             dummy_anchor: ViewerPoint::new(DEFAULT_DUMMY_ANCHOR_X, FLOOR_Y),
@@ -199,6 +227,9 @@ impl SpriteViewer {
         }
         if input.toggle_dummy {
             self.show_dummy = !self.show_dummy;
+        }
+        if input.toggle_combat_overlay {
+            self.show_combat_overlay = !self.show_combat_overlay;
         }
         if input.reset_position {
             self.anchor = ViewerPoint::new(DEFAULT_ANCHOR_X, FLOOR_Y);
@@ -350,6 +381,11 @@ impl SpriteViewer {
         self.show_dummy
     }
 
+    /// Returns whether combat metrics should be drawn.
+    pub const fn show_combat_overlay(&self) -> bool {
+        self.show_combat_overlay
+    }
+
     /// Returns a texture loading warning, if one happened.
     pub fn texture_error(&self) -> Option<&str> {
         self.texture_error.as_deref()
@@ -373,6 +409,54 @@ impl SpriteViewer {
     /// Returns the horizontal distance between main and dummy anchors.
     pub fn dummy_distance(&self) -> f32 {
         (self.dummy_anchor.x - self.anchor.x).abs()
+    }
+
+    /// Returns combat boxes aligned to the current main anchor.
+    pub fn combat_overlay(&self) -> Option<SpriteCombatOverlay> {
+        if !self.show_combat_overlay {
+            return None;
+        }
+        let character = self.options.character?;
+        let spec = character_spec(character);
+        let mut fighter = Fighter::new_with_projectile_loadout(
+            PlayerSlot::One,
+            spec.fighter_name,
+            spec.stats.max_health,
+            spec.move_ids,
+            spec.projectile,
+            0.0,
+        );
+        fighter.facing = Facing::Right;
+        if matches!(
+            self.options.selected_move,
+            CombatLabMove::Sweep | CombatLabMove::AntiAir
+        ) {
+            fighter.crouching = true;
+        }
+        if matches!(
+            self.options.selected_move,
+            CombatLabMove::AirPunch | CombatLabMove::AirKick
+        ) {
+            fighter.grounded = false;
+            fighter.position.y -= 92.0;
+        }
+        align_fighter_to_anchor(&mut fighter, self.anchor);
+
+        let body = fighter.body_rect();
+        let hurtboxes = fighter.hurtboxes();
+        let (move_label, hitbox, projectile, projectile_origin) =
+            self.combat_attack_shapes(&fighter, spec.move_ids, spec.projectile);
+
+        Some(SpriteCombatOverlay {
+            character,
+            selected_move: self.options.selected_move,
+            move_label,
+            body,
+            hurtboxes,
+            hitbox,
+            projectile,
+            projectile_origin,
+        })
     }
 
     fn sprite_screen_rect_at(&self, anchor: ViewerPoint, mirrored: bool) -> ViewerRect {
@@ -441,6 +525,38 @@ impl SpriteViewer {
             DragTarget::Main => self.anchor = anchor,
             DragTarget::Dummy => self.dummy_anchor = anchor,
         }
+    }
+
+    fn combat_attack_shapes(
+        &self,
+        fighter: &Fighter,
+        move_ids: &[crate::combat::move_data::MoveId],
+        projectile_spec: crate::combat::projectile::ProjectileSpec,
+    ) -> (
+        &'static str,
+        Option<Rect>,
+        Option<Rect>,
+        Option<ViewerPoint>,
+    ) {
+        if self.options.selected_move == CombatLabMove::Projectile {
+            let projectile = Projectile::from_fighter_with_spec(fighter, projectile_spec);
+            let rect = projectile.rect();
+            return (
+                "Projectile",
+                None,
+                Some(rect),
+                Some(ViewerPoint::new(rect.x, rect.y + rect.height * 0.5)),
+            );
+        }
+
+        let Some(input_kind) = input_kind_for_move(self.options.selected_move) else {
+            return ("None", None, None, None);
+        };
+        let Some(spec) = move_spec_for_input(move_ids, input_kind) else {
+            return ("Unmapped", None, None, None);
+        };
+
+        (spec.label, Some(hitbox_for_move(fighter, spec)), None, None)
     }
 
     fn advance_animation(&mut self, delta_seconds: f32) {
@@ -545,4 +661,35 @@ fn select_clip_index(
             })
         })
         .unwrap_or(0)
+}
+
+fn align_fighter_to_anchor(fighter: &mut Fighter, anchor: ViewerPoint) {
+    let body = fighter.body_rect();
+    fighter.position.x += anchor.x - body.center_x();
+    fighter.position.y += anchor.y - body.bottom();
+}
+
+fn input_kind_for_move(selected_move: CombatLabMove) -> Option<MoveInputKind> {
+    match selected_move {
+        CombatLabMove::LightPunch => Some(MoveInputKind::LightPunch),
+        CombatLabMove::HeavyPunch => Some(MoveInputKind::HeavyPunch),
+        CombatLabMove::Kick => Some(MoveInputKind::Kick),
+        CombatLabMove::Sweep => Some(MoveInputKind::Sweep),
+        CombatLabMove::Overhead => Some(MoveInputKind::Overhead),
+        CombatLabMove::AntiAir => Some(MoveInputKind::AntiAir),
+        CombatLabMove::AirPunch => Some(MoveInputKind::AirPunch),
+        CombatLabMove::AirKick => Some(MoveInputKind::AirKick),
+        CombatLabMove::Throw => Some(MoveInputKind::Throw),
+        CombatLabMove::Projectile => None,
+    }
+}
+
+fn hitbox_for_move(fighter: &Fighter, spec: MoveSpec) -> Rect {
+    let body = fighter.body_rect();
+    let hitbox = spec.hitbox;
+    let x = match fighter.facing {
+        Facing::Right => body.right(),
+        Facing::Left => body.x - hitbox.width,
+    };
+    Rect::new(x, body.y + hitbox.y_offset, hitbox.width, hitbox.height)
 }

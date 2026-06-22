@@ -114,7 +114,7 @@ Abrir o viewer:
 
 ```bash
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
 ```
 
 Atalhos:
@@ -130,6 +130,7 @@ Atalhos:
 | Zoom | Mouse wheel |
 | Resetar zoom | `0` |
 | Mostrar/esconder dummy | `O` |
+| Mostrar/esconder boxes de combate | `M` |
 | Recarregar manifesto e atlas | `F5` |
 | Salvar screenshot | `F12` |
 | Alternar grade | `G` |
@@ -137,7 +138,7 @@ Atalhos:
 | Alternar bounds | `B` |
 | Resetar posicao | `R` |
 
-O corte atual e viewer, nao editor. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, `trimmed_bounds` e `source_crop`; hitbox, hurtbox e origem de projectile reais ainda precisam de schema data-driven. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
+O corte atual e viewer, nao editor. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado e origem/caixa de projectile. A camada de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go pelo nome do manifesto. Hitbox e hurtbox por frame ainda precisam de schema data-driven. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
 
 ## Pontos ainda em aberto
 

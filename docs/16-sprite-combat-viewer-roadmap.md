@@ -64,6 +64,7 @@ Responsabilidades atuais:
 - aplicar zoom visual com mouse wheel sem alterar o manifesto;
 - recarregar manifesto e atlas com `F5`;
 - salvar screenshot de review em `target/sprite-viewer-capture.png` com `F12`;
+- aceitar `--character` e `--move` para desenhar hurtbox atual, hitbox do golpe e origem/caixa de projectile com os dados de combate existentes;
 - navegar clips e frames;
 - mostrar path do manifesto, path da imagem, frame atual, pivot, anchor e escala.
 
@@ -80,6 +81,7 @@ Atalhos:
 | Zoom | Mouse wheel |
 | Resetar zoom | `0` |
 | Mostrar/esconder dummy | `O` |
+| Mostrar/esconder boxes de combate | `M` |
 | Recarregar manifesto e atlas | `F5` |
 | Salvar screenshot | `F12` |
 | Alternar grade | `G` |
@@ -123,13 +125,15 @@ Falta:
 
 Objetivo: enxergar boxes reais, nao apenas bounds de sprite.
 
+Status: iniciada parcialmente. O viewer ja projeta a hurtbox atual do corpo, a hitbox do golpe selecionado e a caixa/origem de projectile usando `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`. Isso ainda e uma leitura do estado atual do combate, nao edicao por frame.
+
 Entregas planejadas:
 
-- carregar dois personagens na mesma tela;
+- carregar dois personagens reais na mesma tela;
 - mover personagem e dummy com mouse;
 - alternar personagem/clip/golpe;
-- desenhar hurtbox e hitbox reais do golpe selecionado;
-- mostrar origem de projectile e trajetoria prevista;
+- desenhar hurtbox e hitbox reais do golpe selecionado por frame;
+- mostrar origem de projectile e trajetoria prevista completa;
 - disparar golpe em step frame, sem depender da luta completa.
 
 Dependencia tecnica:

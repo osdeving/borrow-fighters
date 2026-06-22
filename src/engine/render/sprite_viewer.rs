@@ -8,7 +8,8 @@ use raylib::prelude::*;
 use crate::{
     config::{FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH},
     engine::sprites::{SpriteFrame, SpriteRect},
-    scenes::sprite_viewer::{SpriteViewer, ViewerRect},
+    math::rect::Rect,
+    scenes::sprite_viewer::{SpriteCombatOverlay, SpriteViewer, ViewerRect},
 };
 
 use super::{BACKGROUND, PANEL, PANEL_BORDER, UI_MUTED, UI_TEXT};
@@ -23,6 +24,12 @@ const SOURCE_COLOR: Color = Color::new(86, 156, 255, 255);
 const PIVOT_COLOR: Color = Color::new(255, 82, 82, 255);
 const DUMMY_COLOR: Color = Color::new(255, 178, 104, 174);
 const DUMMY_PIVOT_COLOR: Color = Color::new(255, 178, 104, 255);
+const COMBAT_BODY: Color = Color::new(218, 112, 214, 210);
+const COMBAT_HURTBOX: Color = Color::new(105, 240, 174, 230);
+const COMBAT_HITBOX: Color = Color::new(255, 82, 82, 235);
+const COMBAT_HITBOX_FILL: Color = Color::new(255, 82, 82, 70);
+const COMBAT_PROJECTILE: Color = Color::new(80, 220, 255, 235);
+const COMBAT_PROJECTILE_FILL: Color = Color::new(80, 220, 255, 70);
 
 /// Draws the sprite viewer scene.
 pub fn draw_sprite_viewer(
@@ -77,6 +84,10 @@ pub fn draw_sprite_viewer(
         draw_dummy_distance(draw, viewer);
     }
 
+    if let Some(overlay) = viewer.combat_overlay() {
+        draw_combat_overlay(draw, overlay);
+    }
+
     if viewer.show_pivot() {
         if viewer.show_dummy() {
             draw_pivot_at(draw, viewer.dummy_anchor(), DUMMY_PIVOT_COLOR);
@@ -102,6 +113,71 @@ pub fn draw_sprite_viewer_error(draw: &mut RaylibDrawHandle<'_>, message: &str) 
         FRAME_COLOR,
     );
     draw_wrapped_text(draw, message, 112, 258, WINDOW_WIDTH - 224, 16, UI_MUTED);
+}
+
+fn draw_combat_overlay(draw: &mut RaylibDrawHandle<'_>, overlay: SpriteCombatOverlay) {
+    draw_combat_rect(draw, overlay.body, COMBAT_BODY, None);
+    draw_combat_rect(draw, overlay.hurtboxes.head, COMBAT_HURTBOX, None);
+    draw_combat_rect(draw, overlay.hurtboxes.torso, COMBAT_HURTBOX, None);
+    draw_combat_rect(draw, overlay.hurtboxes.legs, COMBAT_HURTBOX, None);
+
+    if let Some(hitbox) = overlay.hitbox {
+        draw_combat_rect(draw, hitbox, COMBAT_HITBOX, Some(COMBAT_HITBOX_FILL));
+    }
+
+    if let Some(projectile) = overlay.projectile {
+        draw_combat_rect(
+            draw,
+            projectile,
+            COMBAT_PROJECTILE,
+            Some(COMBAT_PROJECTILE_FILL),
+        );
+    }
+
+    if let Some(origin) = overlay.projectile_origin {
+        draw.draw_circle(
+            origin.x.round() as i32,
+            origin.y.round() as i32,
+            5.0,
+            COMBAT_PROJECTILE,
+        );
+        draw.draw_line(
+            origin.x.round() as i32 - 10,
+            origin.y.round() as i32,
+            origin.x.round() as i32 + 10,
+            origin.y.round() as i32,
+            COMBAT_PROJECTILE,
+        );
+        draw.draw_line(
+            origin.x.round() as i32,
+            origin.y.round() as i32 - 10,
+            origin.x.round() as i32,
+            origin.y.round() as i32 + 10,
+            COMBAT_PROJECTILE,
+        );
+    }
+}
+
+fn draw_combat_rect(
+    draw: &mut RaylibDrawHandle<'_>,
+    rect: Rect,
+    outline: Color,
+    fill: Option<Color>,
+) {
+    if let Some(fill) = fill {
+        draw.draw_rectangle(
+            rect.x.round() as i32,
+            rect.y.round() as i32,
+            rect.width.round() as i32,
+            rect.height.round() as i32,
+            fill,
+        );
+    }
+    draw.draw_rectangle_lines_ex(
+        Rectangle::new(rect.x, rect.y, rect.width, rect.height),
+        2.0,
+        outline,
+    );
 }
 
 fn draw_sprite_instance(
@@ -263,6 +339,7 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
     let (frame_index, frame_count) = viewer.frame_position();
     let frame = viewer.current_frame();
     let anchor = viewer.anchor();
+    let combat = viewer.combat_overlay();
     let playback = if viewer.playing() {
         "playing"
     } else {
@@ -317,6 +394,20 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
         15,
         UI_MUTED,
     );
+    if let Some(overlay) = combat {
+        draw.draw_text(
+            &format!(
+                "combat: {:?} / {} ({}) | M overlay",
+                overlay.character,
+                overlay.selected_move.label(),
+                overlay.move_label,
+            ),
+            panel_x + 16,
+            panel_y + 112,
+            14,
+            COMBAT_HURTBOX,
+        );
+    }
 
     draw.draw_text(
         &truncate_middle(&manifest, 74),

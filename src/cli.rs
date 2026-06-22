@@ -68,6 +68,7 @@ impl LaunchOptions {
         let mut sprite_viewer_requested = false;
         let mut sprite_viewer_manifest = None;
         let mut sprite_viewer_clip = None;
+        let mut sprite_viewer_character_requested = false;
 
         while let Some(arg) = args.next() {
             match arg.as_str() {
@@ -92,6 +93,7 @@ impl LaunchOptions {
                     };
                     lab.character = CharacterId::from_cli(&value)
                         .ok_or_else(|| CliError::new(format!("unknown character '{value}'")))?;
+                    sprite_viewer_character_requested = true;
                     if matches!(mode, LaunchMode::CombatLab(_)) {
                         mode = LaunchMode::CombatLab(lab);
                     }
@@ -179,9 +181,16 @@ impl LaunchOptions {
                     "--tool sprite-viewer requires --manifest <path>",
                 ));
             };
+            let character = if sprite_viewer_character_requested {
+                Some(lab.character)
+            } else {
+                infer_sprite_viewer_character(&manifest_path)
+            };
             mode = LaunchMode::SpriteViewer(SpriteViewerOptions {
                 manifest_path,
                 initial_clip: sprite_viewer_clip,
+                character,
+                selected_move: lab.selected_move,
             });
         }
 
@@ -214,5 +223,18 @@ impl Display for CliError {
 impl std::error::Error for CliError {}
 
 fn usage() -> &'static str {
-    "Usage:\n  cargo run\n  cargo run -- --fight --p1 go --p2 duke\n  cargo run -- --lab combat --character rust --move light_punch\n  cargo run -- --lab combat --character duke --pose block\n  cargo run -- --lab combat --character go --move kick\n  cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle"
+    "Usage:\n  cargo run\n  cargo run -- --fight --p1 go --p2 duke\n  cargo run -- --lab combat --character rust --move light_punch\n  cargo run -- --lab combat --character duke --pose block\n  cargo run -- --lab combat --character go --move kick\n  cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle --character rust --move projectile"
+}
+
+fn infer_sprite_viewer_character(path: &std::path::Path) -> Option<CharacterId> {
+    let raw = path.to_string_lossy().to_ascii_lowercase();
+    if raw.contains("rust") {
+        Some(CharacterId::Rust)
+    } else if raw.contains("duke") || raw.contains("java") {
+        Some(CharacterId::Duke)
+    } else if raw.contains("go") || raw.contains("gopher") || raw.contains("golang") {
+        Some(CharacterId::Go)
+    } else {
+        None
+    }
 }

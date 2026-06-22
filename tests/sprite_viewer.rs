@@ -2,8 +2,12 @@
 
 use std::path::PathBuf;
 
-use borrow_fighters::scenes::sprite_viewer::{
-    SpriteViewer, SpriteViewerInput, SpriteViewerOptions, ViewerPoint,
+use borrow_fighters::{
+    characters::CharacterId,
+    scenes::{
+        combat_lab::CombatLabMove,
+        sprite_viewer::{SpriteViewer, SpriteViewerInput, SpriteViewerOptions, ViewerPoint},
+    },
 };
 
 #[test]
@@ -11,6 +15,8 @@ fn loads_manifest_and_selects_requested_clip() {
     let viewer = SpriteViewer::load(SpriteViewerOptions {
         manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),
         initial_clip: Some("idle".to_string()),
+        character: Some(CharacterId::Rust),
+        selected_move: CombatLabMove::LightPunch,
     })
     .unwrap();
 
@@ -23,6 +29,8 @@ fn rejects_unknown_initial_clip() {
     let error = SpriteViewer::load(SpriteViewerOptions {
         manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),
         initial_clip: Some("segfault_pose".to_string()),
+        character: Some(CharacterId::Rust),
+        selected_move: CombatLabMove::LightPunch,
     })
     .unwrap_err();
 
@@ -34,6 +42,8 @@ fn dragging_inside_sprite_moves_anchor() {
     let mut viewer = SpriteViewer::load(SpriteViewerOptions {
         manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),
         initial_clip: Some("idle".to_string()),
+        character: Some(CharacterId::Rust),
+        selected_move: CombatLabMove::LightPunch,
     })
     .unwrap();
     let start = viewer.anchor();
@@ -69,6 +79,8 @@ fn mouse_wheel_zoom_changes_sprite_screen_size_and_reset_restores_it() {
     let mut viewer = SpriteViewer::load(SpriteViewerOptions {
         manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),
         initial_clip: Some("idle".to_string()),
+        character: Some(CharacterId::Rust),
+        selected_move: CombatLabMove::LightPunch,
     })
     .unwrap();
     let original_width = viewer.sprite_screen_rect().width;
@@ -97,6 +109,8 @@ fn dummy_can_be_dragged_without_moving_main_anchor() {
     let mut viewer = SpriteViewer::load(SpriteViewerOptions {
         manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),
         initial_clip: Some("idle".to_string()),
+        character: Some(CharacterId::Rust),
+        selected_move: CombatLabMove::LightPunch,
     })
     .unwrap();
     let main_start = viewer.anchor();
@@ -134,6 +148,8 @@ fn reload_preserves_selected_clip_when_manifest_still_contains_it() {
     let mut viewer = SpriteViewer::load(SpriteViewerOptions {
         manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),
         initial_clip: Some("special".to_string()),
+        character: Some(CharacterId::Rust),
+        selected_move: CombatLabMove::Projectile,
     })
     .unwrap();
 
@@ -141,4 +157,39 @@ fn reload_preserves_selected_clip_when_manifest_still_contains_it() {
 
     assert!(!image_changed);
     assert_eq!(viewer.current_clip_name(), "special");
+}
+
+#[test]
+fn combat_overlay_uses_character_move_data() {
+    let viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("assets/placeholder/duke-fighter.sprite.json"),
+        initial_clip: Some("punch_heavy".to_string()),
+        character: Some(CharacterId::Duke),
+        selected_move: CombatLabMove::HeavyPunch,
+    })
+    .unwrap();
+
+    let overlay = viewer.combat_overlay().unwrap();
+
+    assert_eq!(overlay.character, CharacterId::Duke);
+    assert_eq!(overlay.move_label, "Boilerplate");
+    assert!(overlay.hitbox.is_some());
+    assert!(overlay.projectile.is_none());
+}
+
+#[test]
+fn projectile_overlay_exposes_spawn_box_and_origin() {
+    let viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),
+        initial_clip: Some("special".to_string()),
+        character: Some(CharacterId::Rust),
+        selected_move: CombatLabMove::Projectile,
+    })
+    .unwrap();
+
+    let overlay = viewer.combat_overlay().unwrap();
+
+    assert!(overlay.hitbox.is_none());
+    assert!(overlay.projectile.is_some());
+    assert!(overlay.projectile_origin.is_some());
 }
