@@ -11,41 +11,43 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 pub const SPRITE_SCHEMA: &str = "borrow-fighters.sprite.v1";
 
 /// Metadata for one sprite atlas.
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct SpriteManifest {
     pub schema: String,
     pub image: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub source: Option<String>,
     pub cell: SpriteSize,
     pub default_pivot: SpritePivot,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub scale: Option<f32>,
     pub frames: Vec<SpriteFrame>,
     pub clips: Vec<SpriteClip>,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub notes: Vec<String>,
 }
 
 /// Pixel size in a sprite manifest.
-#[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
 pub struct SpriteSize {
     pub w: i32,
     pub h: i32,
 }
 
 /// Pivot point inside one atlas frame.
-#[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
 pub struct SpritePivot {
     pub x: i32,
     pub y: i32,
 }
 
 /// Integer atlas rectangle.
-#[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
 pub struct SpriteRect {
     pub x: i32,
     pub y: i32,
@@ -54,48 +56,53 @@ pub struct SpriteRect {
 }
 
 /// Optional combat metadata for one sprite frame.
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Eq)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
 pub struct SpriteFrameCombat {
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub hurtboxes: Vec<SpriteCombatBox>,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub hitboxes: Vec<SpriteCombatBox>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub projectile_origin: Option<SpriteCombatPoint>,
 }
 
 /// Frame-local combat rectangle measured in atlas frame pixels.
-#[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
 pub struct SpriteCombatBox {
     pub x: i32,
     pub y: i32,
     pub w: i32,
     pub h: i32,
     #[serde(default)]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub label: Option<String>,
 }
 
 /// Frame-local combat point measured in atlas frame pixels.
-#[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
 pub struct SpriteCombatPoint {
     pub x: i32,
     pub y: i32,
 }
 
 /// One named frame inside the atlas.
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct SpriteFrame {
     pub name: String,
     pub clip: String,
     pub duration_ms: u32,
     pub pivot: SpritePivot,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub source_crop: Option<SpriteRect>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub trimmed_bounds: Option<SpriteRect>,
     pub frame: SpriteRect,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub combat: Option<SpriteFrameCombat>,
 }
 
 /// Ordered animation clip referencing named frames.
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct SpriteClip {
     pub name: String,
     pub r#loop: bool,
@@ -110,6 +117,10 @@ pub enum SpriteManifestError {
         source: std::io::Error,
     },
     Json {
+        path: PathBuf,
+        source: serde_json::Error,
+    },
+    JsonWrite {
         path: PathBuf,
         source: serde_json::Error,
     },
@@ -131,6 +142,20 @@ impl SpriteManifest {
             })?;
         manifest.validate()?;
         Ok(manifest)
+    }
+
+    /// Saves a validated manifest to disk using stable pretty JSON.
+    pub fn save(&self, path: impl AsRef<Path>) -> Result<(), SpriteManifestError> {
+        self.validate()?;
+        let path = path.as_ref().to_path_buf();
+        let content = serde_json::to_string_pretty(self).map_err(|source| {
+            SpriteManifestError::JsonWrite {
+                path: path.clone(),
+                source,
+            }
+        })?;
+        fs::write(&path, format!("{content}\n"))
+            .map_err(|source| SpriteManifestError::Io { path, source })
     }
 
     /// Validates required fields, frame uniqueness, and clip references.
@@ -228,6 +253,11 @@ impl SpriteManifest {
         self.frames.iter().find(|frame| frame.name == name)
     }
 
+    /// Returns a mutable frame by name.
+    pub fn frame_named_mut(&mut self, name: &str) -> Option<&mut SpriteFrame> {
+        self.frames.iter_mut().find(|frame| frame.name == name)
+    }
+
     /// Returns a clip by name.
     pub fn clip_named(&self, name: &str) -> Option<&SpriteClip> {
         self.clips.iter().find(|clip| clip.name == name)
@@ -243,6 +273,13 @@ impl Display for SpriteManifestError {
             Self::Json { path, source } => {
                 write!(formatter, "could not parse {}: {source}", path.display())
             }
+            Self::JsonWrite { path, source } => {
+                write!(
+                    formatter,
+                    "could not serialize {}: {source}",
+                    path.display()
+                )
+            }
             Self::Invalid(message) => formatter.write_str(message),
         }
     }
@@ -253,6 +290,7 @@ impl Error for SpriteManifestError {
         match self {
             Self::Io { source, .. } => Some(source),
             Self::Json { source, .. } => Some(source),
+            Self::JsonWrite { source, .. } => Some(source),
             Self::Invalid(_) => None,
         }
     }

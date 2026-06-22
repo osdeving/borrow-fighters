@@ -63,7 +63,8 @@ borrow-fighters/
 │   │   ├── move_set.rs         # Tipos runtime e compatibilidade com AttackKind
 │   │   └── projectile.rs       # Estado de projéteis
 │   ├── characters/
-│   │   └── mod.rs              # CharacterSpec e registro inicial de personagens
+│   │   ├── mod.rs              # CharacterSpec e registro inicial de personagens
+│   │   └── body_metrics.rs     # Manifesto de corpo fisico por personagem
 │   ├── scenes/
 │   │   ├── mod.rs              # Estados de tela
 │   │   ├── combat_lab.rs       # Laboratório isolado para timing e boxes
@@ -136,6 +137,8 @@ Quando combate precisar de feedback sonoro, deve emitir ou encaminhar `AudioEven
 No começo, personagens devem ser dados e pequenas funções. `CharacterSpec` já alimenta `World`, `Combat Lab` e `Fighter` com nome, vida máxima e loadout de golpes próximos. Não criar sistema de plugins, scripting ou data-driven avançado antes de existir gameplay divertido.
 
 Chaves estáveis para assets, como `CharacterId::audio_key`, devem ficar próximas do registro de personagem para evitar strings soltas.
+
+`src/characters/body_metrics.rs` carrega [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json). Esse manifesto e o primeiro corte data-driven de corpo fisico por personagem, separado de arte e de hitbox de golpe.
 
 ### `audio/*`
 

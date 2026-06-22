@@ -16,12 +16,14 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Projectile | Projétil horizontal, dano, guard rule, hit reaction, velocidade, spawn e timing do especial | [`src/combat/projectile.rs`](../src/combat/projectile.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs) |
 | Collision | Interseção simples de retângulos | [`src/combat/collision.rs`](../src/combat/collision.rs), [`src/math/rect.rs`](../src/math/rect.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
 | Character data | Registro de personagens, listas de golpes e identidade de loadout | [`src/characters/mod.rs`](../src/characters/mod.rs) | [`tests/characters.rs`](../tests/characters.rs), [`tests/character_identity_tuning.rs`](../tests/character_identity_tuning.rs) |
+| Character body metrics | Manifesto data-driven para largura, altura em pe e altura abaixada | [`src/characters/body_metrics.rs`](../src/characters/body_metrics.rs), [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json) | [`tests/characters.rs`](../tests/characters.rs) |
 | Match runtime | Instancia lutadores a partir de personagens, bloqueia intro/contagem, resolve hits, projéteis e vitória | [`src/game/world.rs`](../src/game/world.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
 | Combat log | Eventos compactos de diagnóstico para reproduzir bugs de luta | [`src/game/combat_log.rs`](../src/game/combat_log.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
 | CPU playtest | Heurística determinística para mover, defender e exercitar golpes básicos/tradicionais | [`src/game/ai.rs`](../src/game/ai.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/cpu_traditional_moves.rs`](../tests/cpu_traditional_moves.rs) |
 | Arena runtime | Identidade e rotação de arenas do protótipo | [`src/game/arena.rs`](../src/game/arena.rs) | [`tests/arena_rotation.rs`](../tests/arena_rotation.rs) |
 | Audio domain | Cues, eventos de gameplay, manifesto JSON e matching de bindings | [`src/audio/mod.rs`](../src/audio/mod.rs) | [`tests/audio_manifest.rs`](../tests/audio_manifest.rs) |
 | Audio Raylib boundary | Carrega clips existentes e toca eventos resolvidos por manifesto | [`src/engine/audio.rs`](../src/engine/audio.rs) | Teste manual via jogo |
+| App scene state | Maquina de estados de alto nivel para menu, luta e laboratorios | [`src/app.rs`](../src/app.rs), [`src/scenes/mod.rs`](../src/scenes/mod.rs) | Smoke tests via CLI |
 | Combat Lab state | Cena isolada para playback de golpes, pause, frame step e leitura de vantagem | [`src/scenes/combat_lab.rs`](../src/scenes/combat_lab.rs) | [`tests/combat_lab.rs`](../tests/combat_lab.rs) |
 | Combat Lab analysis | Cálculo de vantagem estimada, pushback e dummy de contato | [`src/scenes/combat_lab_analysis.rs`](../src/scenes/combat_lab_analysis.rs) | [`tests/combat_lab.rs`](../tests/combat_lab.rs) |
 | Combat Lab render | Orquestra Raylib da cena isolada, sprites, grid e projéteis | [`src/engine/render/combat_lab.rs`](../src/engine/render/combat_lab.rs) | Teste manual via Combat Lab |
@@ -31,6 +33,17 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Sprite runtime | Manifest JSON, clip selection e desenho por pivot | [`src/engine/sprites/`](../src/engine/sprites) | [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs), [`tests/sprite_selection.rs`](../tests/sprite_selection.rs) |
 
 ## Técnica Atual
+
+### Estado de Cenas
+
+O loop principal em [`src/app.rs`](../src/app.rs) usa `AppScene` de [`src/scenes/mod.rs`](../src/scenes/mod.rs) como maquina de estados simples:
+
+- `Preferences`: tela inicial de ajustes, escolha de personagens e flags;
+- `Fight`: luta normal com fixed timestep, IA, audio events e renderer de arena;
+- `CombatLab`: cena isolada para testar golpes e frame data;
+- `SpriteViewer`: ferramenta de sprite em loop proprio, fora do fluxo normal de luta.
+
+Transicoes novas devem passar por esse enum em vez de espalhar flags soltas no loop. Se a nova tela for ferramenta temporaria, prefira loop isolado como o Sprite Viewer; se fizer parte do jogo, trate como cena normal.
 
 ### Fluxo de Início de Luta
 
@@ -60,6 +73,43 @@ Hitboxes:
 - `combat::collision::hitbox_hits_hurtbox` usa interseção AABB.
 
 Essa técnica foi escolhida porque é legível, testável sem Raylib e suficiente para o Prototype 0.1. Quando sprites finais exigirem precisão maior, o primeiro caminho experimental é `frames[].combat` no manifesto de sprite, validado em [`src/engine/sprites/manifest.rs`](../src/engine/sprites/manifest.rs) e inspecionado no Sprite Combat Viewer.
+
+### Escala Visual e Pivot
+
+Sprites runtime usam `borrow-fighters.sprite.v1` em [`src/engine/sprites/manifest.rs`](../src/engine/sprites/manifest.rs). O campo `scale` controla o tamanho visual do atlas em jogo; `frames[].pivot` ancora cada frame no corpo do lutador.
+
+O desenho fica em [`src/engine/sprites/draw.rs`](../src/engine/sprites/draw.rs). O renderer consulta `manifest.scale` e multiplica frame e pivot pelo mesmo valor. Portanto, escala e pivot salvos no manifesto afetam luta, Combat Lab e Sprite Combat Viewer sem recompilar.
+
+O corpo fisico base fica em [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json), carregado por [`src/characters/body_metrics.rs`](../src/characters/body_metrics.rs). Esse manifesto controla:
+
+- `width`: largura do corpo para colisao corpo-corpo e hurtbox base;
+- `standing_height`: altura em pe;
+- `crouch_height`: altura abaixada.
+
+`FighterBodyMetrics` e consumido por [`Fighter`](../src/combat/fighter.rs). Rust e Duke/Java usam o corpo padrao `76 x 168 / crouch 96`; Go usa corpo mais largo e baixo para combinar melhor com o Gopher placeholder. Se o arquivo falhar ao carregar no app, o jogo usa os defaults do `CharacterSpec` e emite warning.
+
+O padrao de tamanho em tela fica em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md). Em resumo:
+
+- Rust atual e a referencia visual aprovada;
+- humanoides devem ficar em torno de `185` a `210 px` de altura visivel em idle;
+- personagens baixos/largos, como Go, podem ficar entre `150` e `185 px`, desde que hurtbox e alcance continuem legiveis;
+- a arena atual tem `896 px` jogaveis, cerca de `11,8` larguras de corpo padrao.
+
+Use o Sprite Combat Viewer para calibrar:
+
+```bash
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/go-fighter.sprite.json --clip idle --character go --move light_punch
+```
+
+Atalhos de calibracao:
+
+- `=` / `-`: ajusta `scale` do manifesto;
+- `Setas`: move `pivot` do frame atual em 1 px;
+- `Shift+Setas`: move `pivot` em 8 px;
+- `Ctrl+Setas`: ajusta `width` e `standing_height` do corpo fisico;
+- `Ctrl+Shift+Setas`: ajusta `crouch_height`;
+- `Ctrl+S`: salva manifestos de tuning alterados;
+- `F5`: recarrega manifesto e atlas.
 
 ### Frame Data
 

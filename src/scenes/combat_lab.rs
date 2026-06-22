@@ -535,12 +535,13 @@ fn apply_airborne_preview_to_fighter(fighter: &mut Fighter) {
 
 fn fighter_for(character: CharacterId) -> Fighter {
     let spec = character_spec(character);
-    Fighter::new_with_projectile_loadout(
+    Fighter::new_with_projectile_loadout_and_body_metrics(
         slot_for(character),
         spec.fighter_name,
         spec.stats.max_health,
         spec.move_ids,
         spec.projectile,
+        spec.body_metrics,
         LAB_FIGHTER_X,
     )
 }

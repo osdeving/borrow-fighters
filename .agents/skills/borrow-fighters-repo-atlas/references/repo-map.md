@@ -32,6 +32,7 @@
 | `docs/14-audio-pipeline.md` | Audio event and manifest pipeline |
 | `docs/15-character-combat-matrix.md` | Character identity, archetypes and tuning matrix |
 | `docs/16-sprite-combat-viewer-roadmap.md` | Sprite viewer/tooling roadmap for artists and combat alignment |
+| `docs/17-visual-scale-and-stage-metrics.md` | Runtime visual scale, fighter size and arena metrics |
 | `docs/adr/` | Architecture Decision Records |
 | `docs/templates/` | Reusable proposal/checklist templates |
 
@@ -42,6 +43,7 @@
 | `src/main.rs` | Thin executable entrypoint |
 | `src/lib.rs` | Testable internal game modules |
 | `src/cli.rs` | Startup argument parser, including Combat Lab mode |
+| `src/app.rs` | Top-level scene state machine and Raylib-backed app loop |
 | `src/engine/` | Raylib adapters and platform boundary |
 | `src/engine/sprites/` | Sprite manifest loading, animation and drawing |
 | `src/game/` | Match state and world flow |
@@ -50,6 +52,7 @@
 | `src/combat/` | Hitbox, hurtbox, damage and fighter rules |
 | `src/combat/move_data.rs` | Table-driven MoveSpec data for close-range moves |
 | `src/characters/` | CharacterSpec registry and character-to-move mapping |
+| `src/characters/body_metrics.rs` | Data-driven body width/height metrics per character |
 | `src/scenes/` | Preference screen and isolated Combat Lab scene state |
 | `src/scenes/sprite_viewer.rs` | Testable standalone sprite viewer state |
 | `src/ui/` | Combat debug overlays and UI helpers |
@@ -63,3 +66,4 @@
 |---|---|
 | `assets/placeholder/` | Temporary assets for prototype work |
 | `assets/references/` | Visual references and mood inputs |
+| `assets/tuning/` | JSON tuning manifests consumed by gameplay/tooling |

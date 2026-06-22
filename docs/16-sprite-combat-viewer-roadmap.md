@@ -62,6 +62,10 @@ Responsabilidades atuais:
 - permitir arrastar o personagem com mouse para testar encaixe;
 - permitir arrastar um dummy espelhado para comparar escala, distancia e continuidade contra um oponente;
 - aplicar zoom visual com mouse wheel sem alterar o manifesto;
+- ajustar `scale` do manifesto com teclado;
+- mover `pivot` do frame atual com teclado;
+- ajustar `width`, `standing_height` e `crouch_height` do personagem selecionado;
+- salvar manifestos de tuning sob comando explicito;
 - recarregar manifesto e atlas com `F5`;
 - salvar screenshot de review em `target/sprite-viewer-capture.png` com `F12`;
 - aceitar `--character` e `--move` para desenhar hurtbox atual, hitbox do golpe e origem/caixa de projectile com os dados de combate existentes;
@@ -80,6 +84,13 @@ Atalhos:
 | Pausar/continuar | `Espaco` |
 | Zoom | Mouse wheel |
 | Resetar zoom | `0` |
+| Aumentar `scale` do manifesto | `=` |
+| Diminuir `scale` do manifesto | `-` |
+| Mover `pivot` do frame atual | `Setas` |
+| Mover `pivot` em passos maiores | `Shift+Setas` |
+| Ajustar largura/altura do corpo fisico | `Ctrl+Setas` |
+| Ajustar altura abaixada do corpo fisico | `Ctrl+Shift+Setas` |
+| Salvar manifestos de tuning | `Ctrl+S` |
 | Mostrar/esconder dummy | `O` |
 | Mostrar/esconder boxes de combate | `M` |
 | Recarregar manifesto e atlas | `F5` |
@@ -92,7 +103,7 @@ Atalhos:
 Codigo principal:
 
 - [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs): estado testavel, manifesto, frame atual, playback e drag.
-- [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs): desenho Raylib da ferramenta.
+- [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs): desenho Raylib da ferramenta e feedback de manifesto sujo.
 - [`src/cli.rs`](../src/cli.rs): modo `--tool sprite-viewer`.
 - [`src/app.rs`](../src/app.rs): desvio para o loop isolado da ferramenta.
 - [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs): testes do estado sem abrir janela.
@@ -153,6 +164,9 @@ Entregas planejadas:
 
 Ja existe:
 
+- ajuste e persistencia de `scale` do manifesto com `=`/`-` e `Ctrl+S`;
+- ajuste e persistencia de `frames[].pivot` do frame atual com `Setas`/`Shift+Setas` e `Ctrl+S`;
+- ajuste e persistencia de corpo fisico por personagem em [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json);
 - `frames[].combat.hurtboxes[]`, `frames[].combat.hitboxes[]` e `frames[].combat.projectile_origin` no schema `borrow-fighters.sprite.v1`;
 - validacao em [`src/engine/sprites/manifest.rs`](../src/engine/sprites/manifest.rs);
 - projecao testavel em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs);
@@ -163,7 +177,7 @@ Ja existe:
 - inspetor de coordenada local/atlas do cursor para preencher `frames[].combat`;
 - sincronizacao manual entre golpe e clip visual com `Enter`.
 
-Regra importante: a ferramenta pode sugerir valores, mas nao deve reescrever manifestos automaticamente enquanto o schema nao estiver estabilizado.
+Regra importante: a ferramenta so salva manifestos por comando explicito (`Ctrl+S`). Escala, pivot e corpo fisico ja sao editaveis; hitbox/hurtbox ainda devem ser alteradas manualmente no JSON ate termos alcas visuais confiaveis.
 
 ### Fase 4 — Produtividade Para Artistas
 
@@ -173,6 +187,9 @@ Entregas planejadas:
 - preset de escala por personagem;
 - overlay comparativo contra greybox de altura alvo;
 - marca de chao, centro, alcance e margem segura;
+- alcas visuais para redimensionar `frames[].combat.hurtboxes[]` e `frames[].combat.hitboxes[]`;
+- alca visual para mover `frames[].combat.projectile_origin`;
+- manifesto ou config data-driven para metricas de arena, se a camera deixar de ser fixa;
 - export de screenshot para PR/review de arte.
 
 ### Fase 5 — Integracao Com Gameplay
@@ -189,6 +206,7 @@ Entregas planejadas:
 
 - O schema de hitbox/hurtbox por frame entra no `borrow-fighters.sprite.v1` ou vira arquivo separado?
 - O viewer deve permitir editar dados ou apenas visualizar e gerar sugestoes?
+- A edicao visual de boxes deve acontecer no manifesto de sprite ou em arquivo lateral por personagem?
 - O Combat Lab deve reaproveitar o mesmo estado do viewer ou apenas os mesmos dados?
 - Go ja possui atlas placeholder; falta revisar boxes por frame e criterios de aceite visual.
 - `raygui` entra como feature opcional ou evitamos dependency feature ate a ferramenta exigir?

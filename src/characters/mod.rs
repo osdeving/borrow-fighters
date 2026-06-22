@@ -4,7 +4,14 @@
 //! each character without resolving attacks, drawing sprites, or owning match
 //! state.
 
+mod body_metrics;
+
+pub use body_metrics::{
+    CHARACTER_BODY_METRICS_PATH, CharacterBodyMetricsCatalog, CharacterBodyMetricsError,
+};
+
 use crate::combat::{
+    fighter::FighterBodyMetrics,
     move_data::MoveId,
     projectile::{DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, ProjectileSpec, RUST_PROJECTILE_SPEC},
 };
@@ -12,6 +19,13 @@ use crate::combat::{
 const RUST_STATS: CharacterStats = CharacterStats { max_health: 100 };
 const DUKE_STATS: CharacterStats = CharacterStats { max_health: 112 };
 const GO_STATS: CharacterStats = CharacterStats { max_health: 92 };
+const RUST_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
+const DUKE_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
+const GO_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics {
+    width: 92.0,
+    standing_height: 156.0,
+    crouch_height: 88.0,
+};
 const RUST_MOVE_IDS: [MoveId; 9] = [
     MoveId::RustBorrowJab,
     MoveId::HeavyPunch,
@@ -126,6 +140,7 @@ pub struct CharacterSpec {
     pub fighter_name: &'static str,
     pub archetype: CharacterArchetype,
     pub stats: CharacterStats,
+    pub body_metrics: FighterBodyMetrics,
     pub move_ids: &'static [MoveId],
     pub projectile: ProjectileSpec,
 }
@@ -139,6 +154,7 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             fighter_name: "Rust",
             archetype: CharacterArchetype::AllRounder,
             stats: RUST_STATS,
+            body_metrics: RUST_BODY_METRICS,
             move_ids: &RUST_MOVE_IDS,
             projectile: RUST_PROJECTILE_SPEC,
         },
@@ -148,6 +164,7 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             fighter_name: "Java",
             archetype: CharacterArchetype::MidrangePressure,
             stats: DUKE_STATS,
+            body_metrics: DUKE_BODY_METRICS,
             move_ids: &DUKE_MOVE_IDS,
             projectile: DUKE_PROJECTILE_SPEC,
         },
@@ -157,6 +174,7 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             fighter_name: "Go",
             archetype: CharacterArchetype::Rushdown,
             stats: GO_STATS,
+            body_metrics: GO_BODY_METRICS,
             move_ids: &GO_MOVE_IDS,
             projectile: GO_PROJECTILE_SPEC,
         },

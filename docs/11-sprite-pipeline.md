@@ -26,6 +26,7 @@ Campos principais:
 - `source`: imagem ou arquivo de origem.
 - `cell`: tamanho padrao da celula.
 - `default_pivot`: ponto de apoio padrao, normalmente perto do pe no chao.
+- `scale`: escala visual runtime do atlas; o jogo e o viewer usam o mesmo valor.
 - `frames`: retangulos no atlas, duracao e pivot por frame.
 - `clips`: animacoes com lista ordenada de frames e flag `loop`.
 - `frames[].combat`: metadata opcional por frame para `hurtboxes`, `hitboxes` e `projectile_origin`.
@@ -97,6 +98,10 @@ O personagem Rust usa `assets/placeholder/rust-fighter.sprite.json`.
 O Player 2/Duke usa `assets/placeholder/duke-fighter.sprite.json`.
 Go usa `assets/placeholder/go-fighter.sprite.json`.
 
+O tamanho em jogo nao deve depender da resolucao do PNG. Ajuste `scale` e `frames[].pivot` no manifesto; o renderer de luta e o Sprite Combat Viewer consomem os mesmos valores. O padrao atual de altura, largura e arena fica em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md).
+
+O corpo fisico de gameplay fica em [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json). Esse arquivo controla `width`, `standing_height` e `crouch_height` por personagem. Ele nao substitui hitbox/hurtbox por golpe, mas define o retangulo base usado por colisao corpo-corpo, hurtboxes compostas e alinhamento do sprite.
+
 O runtime tambem usa:
 
 - `spawn` durante a entrada inicial de Rust e Duke;
@@ -155,6 +160,13 @@ Atalhos:
 | Pausar/continuar | `Espaco` |
 | Zoom | Mouse wheel |
 | Resetar zoom | `0` |
+| Aumentar `scale` do manifesto | `=` |
+| Diminuir `scale` do manifesto | `-` |
+| Mover `pivot` do frame atual | `Setas` |
+| Mover `pivot` em passos maiores | `Shift+Setas` |
+| Ajustar largura/altura do corpo fisico | `Ctrl+Setas` |
+| Ajustar altura abaixada do corpo fisico | `Ctrl+Shift+Setas` |
+| Salvar manifestos de tuning | `Ctrl+S` |
 | Mostrar/esconder dummy | `O` |
 | Mostrar/esconder boxes de combate | `M` |
 | Mostrar/esconder trajetoria de projectile | `T` |
@@ -165,12 +177,12 @@ Atalhos:
 | Alternar bounds | `B` |
 | Resetar posicao | `R` |
 
-O corte atual e viewer, nao editor. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetoria prevista de projectile, timeline visual e metadata opcional de `frames[].combat`. A camada runtime de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go pelo nome do manifesto e tambem permite alternar personagem/golpe sem reiniciar a ferramenta. `Enter` tenta sincronizar o clip visual com o golpe atual quando o manifesto possui um clip conhecido como `punch_light`, `punch_heavy` ou `special`. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
+O corte atual e viewer com ajuste controlado de escala/pivot/corpo fisico, nao editor final de boxes. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetoria prevista de projectile, timeline visual e metadata opcional de `frames[].combat`. A camada runtime de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go pelo nome do manifesto e tambem permite alternar personagem/golpe sem reiniciar a ferramenta. `Enter` tenta sincronizar o clip visual com o golpe atual quando o manifesto possui um clip conhecido como `punch_light`, `punch_heavy` ou `special`. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
 
 ## Pontos ainda em aberto
 
 - Definir se o formato v1 vira padrao permanente ou ponte para Aseprite JSON.
 - Decidir se hurtbox/hitbox por frame ficam definitivamente no manifesto ou migram para dados externos quando a arte estabilizar.
-- Definir escala base dos personagens e tamanho minimo legivel para tela 16:9.
+- Validar em playtest o padrao inicial de escala definido em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md).
 - Criar criterio visual para aceitar atlas de personagem como "candidato" em vez de placeholder.
 - Decidir se `projectile_origin`, hitbox e hurtbox devem alimentar o balanceamento final ou continuar como metadata de alinhamento visual.

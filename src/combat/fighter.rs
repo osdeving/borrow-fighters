@@ -19,9 +19,12 @@ pub use crate::combat::move_set::{
     SWEEP_KICK_DAMAGE, move_spec_for_input,
 };
 
-const WIDTH: f32 = 76.0;
-const STANDING_HEIGHT: f32 = 168.0;
-const CROUCH_HEIGHT: f32 = 96.0;
+const DEFAULT_WIDTH: f32 = 76.0;
+const DEFAULT_STANDING_HEIGHT: f32 = 168.0;
+const DEFAULT_CROUCH_HEIGHT: f32 = 96.0;
+const MIN_BODY_WIDTH: f32 = 24.0;
+const MIN_STANDING_HEIGHT: f32 = 72.0;
+const MIN_CROUCH_HEIGHT: f32 = 40.0;
 const MAX_RUN_SPEED: f32 = 280.0;
 const ATTACK_MOVE_SPEED_FACTOR: f32 = 0.55;
 const GROUND_ACCELERATION: f32 = 2200.0;
@@ -36,6 +39,32 @@ const BLOCK_DAMAGE_DIVISOR: i32 = 4;
 const TIMER_EPSILON: f32 = 0.0001;
 
 pub const BASIC_DAMAGE: i32 = LIGHT_PUNCH_DAMAGE;
+
+/// Physical body dimensions used by gameplay collision and hurtboxes.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct FighterBodyMetrics {
+    pub width: f32,
+    pub standing_height: f32,
+    pub crouch_height: f32,
+}
+
+impl FighterBodyMetrics {
+    pub const DEFAULT: Self = Self {
+        width: DEFAULT_WIDTH,
+        standing_height: DEFAULT_STANDING_HEIGHT,
+        crouch_height: DEFAULT_CROUCH_HEIGHT,
+    };
+
+    /// Returns metrics clamped to a playable range.
+    pub fn sanitized(self) -> Self {
+        let standing_height = self.standing_height.max(MIN_STANDING_HEIGHT);
+        Self {
+            width: self.width.max(MIN_BODY_WIDTH),
+            standing_height,
+            crouch_height: self.crouch_height.clamp(MIN_CROUCH_HEIGHT, standing_height),
+        }
+    }
+}
 
 /// Identifies a local player slot.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -109,6 +138,7 @@ pub struct Fighter {
     pub max_health: i32,
     move_ids: &'static [MoveId],
     projectile_spec: ProjectileSpec,
+    body_metrics: FighterBodyMetrics,
     pub facing: Facing,
     pub grounded: bool,
     pub crouching: bool,
@@ -164,16 +194,39 @@ impl Fighter {
         projectile_spec: ProjectileSpec,
         x: f32,
     ) -> Self {
+        Self::new_with_projectile_loadout_and_body_metrics(
+            slot,
+            name,
+            max_health,
+            move_ids,
+            projectile_spec,
+            FighterBodyMetrics::DEFAULT,
+            x,
+        )
+    }
+
+    /// Creates a fighter with explicit combat data and body metrics.
+    pub fn new_with_projectile_loadout_and_body_metrics(
+        slot: PlayerSlot,
+        name: &'static str,
+        max_health: i32,
+        move_ids: &'static [MoveId],
+        projectile_spec: ProjectileSpec,
+        body_metrics: FighterBodyMetrics,
+        x: f32,
+    ) -> Self {
         let max_health = max_health.max(1);
+        let body_metrics = body_metrics.sanitized();
         Self {
             slot,
             name,
-            position: Vec2::new(x, FLOOR_Y - STANDING_HEIGHT),
+            position: Vec2::new(x, FLOOR_Y - body_metrics.standing_height),
             velocity: Vec2::ZERO,
             health: max_health,
             max_health,
             move_ids,
             projectile_spec,
+            body_metrics,
             facing: Facing::Right,
             grounded: true,
             crouching: false,
@@ -242,8 +295,8 @@ impl Fighter {
         self.position.y += self.velocity.y * dt;
 
         self.clamp_to_arena();
-        if self.position.y + STANDING_HEIGHT >= FLOOR_Y {
-            self.position.y = FLOOR_Y - STANDING_HEIGHT;
+        if self.position.y + self.body_metrics.standing_height >= FLOOR_Y {
+            self.position.y = FLOOR_Y - self.body_metrics.standing_height;
             self.velocity.y = 0.0;
             self.grounded = true;
         }
@@ -275,7 +328,10 @@ impl Fighter {
 
     /// Keeps the fighter inside the horizontal arena bounds.
     pub fn clamp_to_arena(&mut self) {
-        self.position.x = self.position.x.clamp(ARENA_LEFT, ARENA_RIGHT - WIDTH);
+        self.position.x = self
+            .position
+            .x
+            .clamp(ARENA_LEFT, ARENA_RIGHT - self.body_metrics.width);
     }
 
     /// Applies light-punch damage for legacy tests and callers.
@@ -348,8 +404,8 @@ impl Fighter {
         let height = self.body_height();
         Rect::new(
             self.position.x,
-            self.position.y + (STANDING_HEIGHT - height),
-            WIDTH,
+            self.position.y + (self.body_metrics.standing_height - height),
+            self.body_metrics.width,
             height,
         )
     }
@@ -359,15 +415,15 @@ impl Fighter {
         let body = self.body_rect();
         if self.crouching {
             FighterBodyParts {
-                head: Rect::new(body.x + 21.0, body.y + 6.0, 34.0, 26.0),
-                torso: Rect::new(body.x + 12.0, body.y + 34.0, 52.0, 36.0),
-                legs: Rect::new(body.x + 8.0, body.y + 72.0, 60.0, 20.0),
+                head: relative_rect(body, 0.276, 0.063, 0.447, 0.271),
+                torso: relative_rect(body, 0.158, 0.354, 0.684, 0.375),
+                legs: relative_rect(body, 0.105, 0.750, 0.789, 0.208),
             }
         } else {
             FighterBodyParts {
-                head: Rect::new(body.x + 22.0, body.y + 8.0, 32.0, 42.0),
-                torso: Rect::new(body.x + 12.0, body.y + 54.0, 52.0, 68.0),
-                legs: Rect::new(body.x + 9.0, body.y + 128.0, 58.0, 34.0),
+                head: relative_rect(body, 0.289, 0.048, 0.421, 0.250),
+                torso: relative_rect(body, 0.158, 0.321, 0.684, 0.405),
+                legs: relative_rect(body, 0.118, 0.762, 0.763, 0.202),
             }
         }
     }
@@ -385,7 +441,12 @@ impl Fighter {
     /// Returns the coarse vulnerable area.
     pub fn hurtbox(&self) -> Rect {
         let body = self.body_rect();
-        Rect::new(body.x + 8.0, body.y + 5.0, WIDTH - 16.0, body.height - 8.0)
+        Rect::new(
+            body.x + body.width * 0.105,
+            body.y + 5.0,
+            (body.width * 0.790).max(1.0),
+            body.height - 8.0,
+        )
     }
 
     /// Returns the active hitbox if the current close attack is active.
@@ -430,6 +491,11 @@ impl Fighter {
     /// Returns projectile tuning available to this fighter.
     pub const fn projectile_spec(&self) -> ProjectileSpec {
         self.projectile_spec
+    }
+
+    /// Returns body metrics used by gameplay collision and hurtboxes.
+    pub const fn body_metrics(&self) -> FighterBodyMetrics {
+        self.body_metrics
     }
 
     /// Returns elapsed seconds for the current close attack animation.
@@ -581,9 +647,9 @@ impl Fighter {
 
     fn body_height(&self) -> f32 {
         if self.crouching {
-            CROUCH_HEIGHT
+            self.body_metrics.crouch_height
         } else {
-            STANDING_HEIGHT
+            self.body_metrics.standing_height
         }
     }
 
@@ -737,6 +803,15 @@ fn inset_rect(rect: Rect, amount: f32) -> Rect {
         rect.y + amount,
         (rect.width - amount * 2.0).max(1.0),
         (rect.height - amount * 2.0).max(1.0),
+    )
+}
+
+fn relative_rect(body: Rect, x: f32, y: f32, width: f32, height: f32) -> Rect {
+    Rect::new(
+        body.x + body.width * x,
+        body.y + body.height * y,
+        body.width * width,
+        body.height * height,
     )
 }
 

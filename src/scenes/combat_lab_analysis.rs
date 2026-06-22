@@ -234,12 +234,13 @@ fn dummy_fighter_for(attacker_character: CharacterId) -> Fighter {
         CharacterId::Go => CharacterId::Duke,
     };
     let spec = character_spec(character);
-    Fighter::new_with_projectile_loadout(
+    Fighter::new_with_projectile_loadout_and_body_metrics(
         PlayerSlot::Two,
         spec.fighter_name,
         spec.stats.max_health,
         spec.move_ids,
         spec.projectile,
+        spec.body_metrics,
         DEFAULT_DUMMY_X,
     )
 }

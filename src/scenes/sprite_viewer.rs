@@ -10,9 +10,12 @@ use std::{
 };
 
 use crate::{
-    characters::{CharacterId, character_spec},
+    characters::{
+        CHARACTER_BODY_METRICS_PATH, CharacterBodyMetricsCatalog, CharacterBodyMetricsError,
+        CharacterId, character_spec,
+    },
     combat::{
-        fighter::{Facing, Fighter, FighterBodyParts, PlayerSlot},
+        fighter::{Facing, Fighter, FighterBodyMetrics, FighterBodyParts, PlayerSlot},
         move_data::{MoveInputKind, MoveSpec, move_spec_for_input},
         projectile::Projectile,
     },
@@ -27,6 +30,9 @@ const DEFAULT_DUMMY_ANCHOR_X: f32 = 680.0;
 const ZOOM_MIN: f32 = 0.25;
 const ZOOM_MAX: f32 = 4.0;
 const ZOOM_STEP: f32 = 0.12;
+const MANIFEST_SCALE_MIN: f32 = 0.25;
+const MANIFEST_SCALE_MAX: f32 = 2.0;
+const MANIFEST_SCALE_STEP: f32 = 0.025;
 
 /// Launch data for the standalone sprite viewer.
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -57,9 +63,17 @@ pub struct SpriteViewerInput {
     pub toggle_combat_overlay: bool,
     pub toggle_projectile_trajectory: bool,
     pub reload_manifest: bool,
+    pub save_manifest: bool,
+    pub increase_manifest_scale: bool,
+    pub decrease_manifest_scale: bool,
     pub reset_zoom: bool,
     pub screenshot_requested: bool,
     pub zoom_delta: f32,
+    pub nudge_pivot_x: i32,
+    pub nudge_pivot_y: i32,
+    pub nudge_body_width: i32,
+    pub nudge_standing_height: i32,
+    pub nudge_crouch_height: i32,
     pub reset_position: bool,
     pub mouse_position: ViewerPoint,
     pub mouse_pressed: bool,
@@ -105,6 +119,7 @@ impl ViewerRect {
 pub struct SpriteViewer {
     options: SpriteViewerOptions,
     manifest: SpriteManifest,
+    body_metrics: CharacterBodyMetricsCatalog,
     image_path: PathBuf,
     clip_index: usize,
     frame_index: usize,
@@ -124,6 +139,8 @@ pub struct SpriteViewer {
     drag_offset: ViewerPoint,
     texture_error: Option<String>,
     status_message: Option<String>,
+    manifest_dirty: bool,
+    body_metrics_dirty: bool,
 }
 
 /// Combat shapes projected into viewer screen coordinates.
@@ -188,6 +205,14 @@ pub enum SpriteViewerError {
         path: PathBuf,
         source: SpriteManifestError,
     },
+    ManifestSave {
+        path: PathBuf,
+        source: SpriteManifestError,
+    },
+    BodyMetricsSave {
+        path: PathBuf,
+        source: CharacterBodyMetricsError,
+    },
     UnknownInitialClip {
         clip: String,
         path: PathBuf,
@@ -210,6 +235,8 @@ impl SpriteViewer {
             }
         })?;
         let image_path = manifest.image_path(&options.manifest_path);
+        let body_metrics =
+            CharacterBodyMetricsCatalog::load(CHARACTER_BODY_METRICS_PATH).unwrap_or_default();
         let clip_index = match options.initial_clip.as_deref() {
             Some(clip_name) => manifest
                 .clips
@@ -228,6 +255,7 @@ impl SpriteViewer {
         Ok(Self {
             options,
             manifest,
+            body_metrics,
             image_path,
             clip_index,
             frame_index: 0,
@@ -247,6 +275,8 @@ impl SpriteViewer {
             drag_offset: ViewerPoint::default(),
             texture_error: None,
             status_message: None,
+            manifest_dirty: false,
+            body_metrics_dirty: false,
         })
     }
 
@@ -304,6 +334,30 @@ impl SpriteViewer {
         if input.toggle_projectile_trajectory {
             self.show_projectile_trajectory = !self.show_projectile_trajectory;
         }
+        if input.decrease_manifest_scale {
+            self.adjust_manifest_scale(-MANIFEST_SCALE_STEP);
+        }
+        if input.increase_manifest_scale {
+            self.adjust_manifest_scale(MANIFEST_SCALE_STEP);
+        }
+        if input.nudge_pivot_x != 0 || input.nudge_pivot_y != 0 {
+            self.nudge_current_frame_pivot(input.nudge_pivot_x, input.nudge_pivot_y);
+        }
+        if input.nudge_body_width != 0
+            || input.nudge_standing_height != 0
+            || input.nudge_crouch_height != 0
+        {
+            self.nudge_selected_body_metrics(
+                input.nudge_body_width,
+                input.nudge_standing_height,
+                input.nudge_crouch_height,
+            );
+        }
+        if input.save_manifest
+            && let Err(error) = self.save_manifest()
+        {
+            self.status_message = Some(error.to_string());
+        }
         if input.reset_position {
             self.anchor = ViewerPoint::new(DEFAULT_ANCHOR_X, FLOOR_Y);
             self.dummy_anchor = ViewerPoint::new(DEFAULT_DUMMY_ANCHOR_X, FLOOR_Y);
@@ -348,6 +402,7 @@ impl SpriteViewer {
         self.frame_index = previous_frame_index.min(frame_len.saturating_sub(1));
         self.frame_elapsed_ms = 0.0;
         self.texture_error = None;
+        self.manifest_dirty = false;
         self.status_message = Some("Manifesto recarregado.".to_string());
 
         Ok(previous_image_path != self.image_path)
@@ -458,6 +513,23 @@ impl SpriteViewer {
         self.zoom
     }
 
+    /// Returns true when manifest tuning changed and should be saved.
+    pub const fn manifest_dirty(&self) -> bool {
+        self.manifest_dirty
+    }
+
+    /// Returns true when body metrics changed and should be saved.
+    pub const fn body_metrics_dirty(&self) -> bool {
+        self.body_metrics_dirty
+    }
+
+    /// Returns loaded body metrics for the selected combat character.
+    pub fn selected_body_metrics(&self) -> Option<FighterBodyMetrics> {
+        self.options
+            .character
+            .map(|character| self.body_metrics.body_metrics_for(character))
+    }
+
     /// Returns the current anchor/pivot target in screen space.
     pub const fn anchor(&self) -> ViewerPoint {
         self.anchor
@@ -535,12 +607,13 @@ impl SpriteViewer {
         }
         let character = self.options.character?;
         let spec = character_spec(character);
-        let mut fighter = Fighter::new_with_projectile_loadout(
+        let mut fighter = Fighter::new_with_projectile_loadout_and_body_metrics(
             PlayerSlot::One,
             spec.fighter_name,
             spec.stats.max_health,
             spec.move_ids,
             spec.projectile,
+            self.body_metrics.body_metrics_for(character),
             0.0,
         );
         fighter.facing = Facing::Right;
@@ -587,12 +660,13 @@ impl SpriteViewer {
 
         let character = self.options.character?;
         let spec = character_spec(character);
-        let mut fighter = Fighter::new_with_projectile_loadout(
+        let mut fighter = Fighter::new_with_projectile_loadout_and_body_metrics(
             PlayerSlot::One,
             spec.fighter_name,
             spec.stats.max_health,
             spec.move_ids,
             spec.projectile,
+            self.body_metrics.body_metrics_for(character),
             0.0,
         );
         fighter.facing = Facing::Right;
@@ -783,6 +857,79 @@ impl SpriteViewer {
         }
     }
 
+    fn adjust_manifest_scale(&mut self, delta: f32) {
+        let next = quantize_scale(
+            (self.manifest_scale() + delta).clamp(MANIFEST_SCALE_MIN, MANIFEST_SCALE_MAX),
+        );
+        self.manifest.scale = Some(next);
+        self.manifest_dirty = true;
+        self.status_message = Some(format!("Escala do manifesto: {next:.3}. Ctrl+S salva."));
+    }
+
+    fn nudge_current_frame_pivot(&mut self, delta_x: i32, delta_y: i32) {
+        let frame_name = self.manifest.clips[self.clip_index].frames[self.frame_index].clone();
+        let Some(frame) = self.manifest.frame_named_mut(&frame_name) else {
+            return;
+        };
+
+        frame.pivot.x = (frame.pivot.x + delta_x).clamp(0, frame.frame.w);
+        frame.pivot.y = (frame.pivot.y + delta_y).clamp(0, frame.frame.h);
+        self.manifest_dirty = true;
+        self.status_message = Some(format!(
+            "Pivot de {}: {},{}. Ctrl+S salva.",
+            frame.name, frame.pivot.x, frame.pivot.y
+        ));
+    }
+
+    fn nudge_selected_body_metrics(
+        &mut self,
+        delta_width: i32,
+        delta_standing_height: i32,
+        delta_crouch_height: i32,
+    ) {
+        let Some(character) = self.options.character else {
+            self.status_message = Some("Selecione um personagem para ajustar o corpo.".to_string());
+            return;
+        };
+
+        let current = self.body_metrics.body_metrics_for(character);
+        let next = FighterBodyMetrics {
+            width: current.width + delta_width as f32,
+            standing_height: current.standing_height + delta_standing_height as f32,
+            crouch_height: current.crouch_height + delta_crouch_height as f32,
+        }
+        .sanitized();
+        self.body_metrics.set_body_metrics_for(character, next);
+        self.body_metrics_dirty = true;
+        self.status_message = Some(format!(
+            "Corpo {:?}: w {:.0}, h {:.0}, crouch {:.0}. Ctrl+S salva.",
+            character, next.width, next.standing_height, next.crouch_height
+        ));
+    }
+
+    fn save_manifest(&mut self) -> Result<(), SpriteViewerError> {
+        if self.manifest_dirty {
+            self.manifest
+                .save(&self.options.manifest_path)
+                .map_err(|source| SpriteViewerError::ManifestSave {
+                    path: self.options.manifest_path.clone(),
+                    source,
+                })?;
+        }
+        if self.body_metrics_dirty {
+            self.body_metrics
+                .save(CHARACTER_BODY_METRICS_PATH)
+                .map_err(|source| SpriteViewerError::BodyMetricsSave {
+                    path: PathBuf::from(CHARACTER_BODY_METRICS_PATH),
+                    source,
+                })?;
+        }
+        self.manifest_dirty = false;
+        self.body_metrics_dirty = false;
+        self.status_message = Some("Arquivos de tuning salvos.".to_string());
+        Ok(())
+    }
+
     fn combat_attack_shapes(
         &self,
         fighter: &Fighter,
@@ -923,6 +1070,20 @@ impl Display for SpriteViewerError {
                     path.display()
                 )
             }
+            Self::ManifestSave { path, source } => {
+                write!(
+                    formatter,
+                    "could not save sprite manifest {}: {source}",
+                    path.display()
+                )
+            }
+            Self::BodyMetricsSave { path, source } => {
+                write!(
+                    formatter,
+                    "could not save character body metrics {}: {source}",
+                    path.display()
+                )
+            }
             Self::UnknownInitialClip { clip, path } => {
                 write!(
                     formatter,
@@ -938,6 +1099,8 @@ impl Error for SpriteViewerError {
     fn source(&self) -> Option<&(dyn Error + 'static)> {
         match self {
             Self::Manifest { source, .. } => Some(source),
+            Self::ManifestSave { source, .. } => Some(source),
+            Self::BodyMetricsSave { source, .. } => Some(source),
             Self::UnknownInitialClip { .. } => None,
         }
     }
@@ -947,6 +1110,10 @@ fn wrap_index(current: usize, len: usize, direction: i32) -> usize {
     debug_assert!(len > 0);
     let len = len as i32;
     (current as i32 + direction).rem_euclid(len) as usize
+}
+
+fn quantize_scale(value: f32) -> f32 {
+    (value * 1000.0).round() / 1000.0
 }
 
 fn select_clip_index(

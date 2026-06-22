@@ -1,10 +1,14 @@
 //! Verifies prototype character registry data.
 
-use borrow_fighters::characters::{CharacterArchetype, CharacterId, character_spec};
+use borrow_fighters::characters::{
+    CHARACTER_BODY_METRICS_PATH, CharacterArchetype, CharacterBodyMetricsCatalog, CharacterId,
+    character_spec,
+};
 use borrow_fighters::combat::move_data::MoveId;
 use borrow_fighters::combat::projectile::{
     DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, RUST_PROJECTILE_SPEC,
 };
+use borrow_fighters::game::world::World;
 
 #[test]
 fn rust_spec_points_to_current_prototype_moves() {
@@ -76,6 +80,47 @@ fn go_spec_points_to_current_prototype_moves() {
             MoveId::CloseThrow,
         ]
     );
+}
+
+#[test]
+fn character_body_metrics_manifest_loads_go_as_shorter_wider_body() {
+    let catalog = CharacterBodyMetricsCatalog::load(CHARACTER_BODY_METRICS_PATH)
+        .expect("character body metrics should load");
+    let rust = catalog.body_metrics_for(CharacterId::Rust);
+    let go = catalog.body_metrics_for(CharacterId::Go);
+
+    assert_eq!(rust, character_spec(CharacterId::Rust).body_metrics);
+    assert!(go.width > rust.width);
+    assert!(go.standing_height < rust.standing_height);
+}
+
+#[test]
+fn world_uses_loaded_character_body_metrics() {
+    let catalog = CharacterBodyMetricsCatalog::from_json_str(
+        r#"
+        {
+          "schema": "borrow-fighters.character-body-metrics.v1",
+          "characters": [
+            {
+              "id": "go",
+              "body": {
+                "width": 104.0,
+                "standing_height": 150.0,
+                "crouch_height": 82.0
+              }
+            }
+          ]
+        }
+        "#,
+    )
+    .expect("inline body metrics should parse");
+
+    let world =
+        World::new_with_character_body_metrics(CharacterId::Go, CharacterId::Rust, &catalog);
+
+    assert_eq!(world.player_one.body_metrics().width, 104.0);
+    assert_eq!(world.player_one.body_rect().width, 104.0);
+    assert_eq!(world.player_one.body_rect().height, 150.0);
 }
 
 #[test]

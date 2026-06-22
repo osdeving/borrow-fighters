@@ -4,7 +4,7 @@
   "source": "../references/go-sprite-altas.png",
   "cell": { "w": 384, "h": 256 },
   "default_pivot": { "x": 112, "y": 236 },
-  "scale": 1.0,
+  "scale": 0.88,
   "notes": [
     "AI-generated Go/Gopher atlas candidate for runtime sprite validation.",
     "Frames use a 6x6 grid with 384x256 cells and consistent grounded pivot.",

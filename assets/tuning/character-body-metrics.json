@@ -1,0 +1,29 @@
+{
+  "schema": "borrow-fighters.character-body-metrics.v1",
+  "characters": [
+    {
+      "id": "rust",
+      "body": {
+        "width": 76.0,
+        "standing_height": 168.0,
+        "crouch_height": 96.0
+      }
+    },
+    {
+      "id": "duke",
+      "body": {
+        "width": 76.0,
+        "standing_height": 168.0,
+        "crouch_height": 96.0
+      }
+    },
+    {
+      "id": "go",
+      "body": {
+        "width": 92.0,
+        "standing_height": 156.0,
+        "crouch_height": 88.0
+      }
+    }
+  ]
+}

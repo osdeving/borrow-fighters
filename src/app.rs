@@ -6,6 +6,7 @@
 use raylib::prelude::*;
 
 use crate::audio::{AudioEvent, MusicTrack};
+use crate::characters::{CHARACTER_BODY_METRICS_PATH, CharacterBodyMetricsCatalog};
 use crate::cli::{LaunchMode, LaunchOptions, MatchOptions};
 use crate::combat::fighter::{FighterInput, PlayerSlot};
 use crate::config::{FIXED_TIMESTEP, MAX_FIXED_STEPS_PER_FRAME, MAX_FRAME_TIME, TARGET_FPS};
@@ -36,6 +37,7 @@ pub struct App {
     sprite_viewer_options: Option<SpriteViewerOptions>,
     preferences_menu: PreferencesMenu,
     combat_lab: CombatLab,
+    character_body_metrics: CharacterBodyMetricsCatalog,
     match_options: MatchOptions,
     match_options_dirty: bool,
     current_arena: ArenaId,
@@ -68,11 +70,17 @@ impl App {
                 (AppScene::SpriteViewer, CombatLab::default(), Some(options))
             }
         };
+        let character_body_metrics = CharacterBodyMetricsCatalog::load(CHARACTER_BODY_METRICS_PATH)
+            .unwrap_or_else(|error| {
+                eprintln!("warning: using built-in character body metrics: {error}");
+                CharacterBodyMetricsCatalog::default()
+            });
 
         Self {
-            world: World::new_greybox_with_intro_for_characters(
+            world: World::new_greybox_with_intro_for_characters_and_metrics(
                 match_options.player_one,
                 match_options.player_two,
+                &character_body_metrics,
             ),
             player_one_cpu: BasicCpu::for_slot(PlayerSlot::One),
             player_two_cpu: BasicCpu::for_slot(PlayerSlot::Two),
@@ -81,6 +89,7 @@ impl App {
             sprite_viewer_options,
             preferences_menu: PreferencesMenu::default(),
             combat_lab,
+            character_body_metrics,
             match_options,
             match_options_dirty: false,
             current_arena: ArenaId::STARTING_ARENA,
@@ -120,142 +129,152 @@ impl App {
                 player_two: input.player_two_gamepad_connected,
             };
 
-            if self.scene == AppScene::CombatLab {
-                self.update_combat_lab(
-                    raylib.get_frame_time().min(MAX_FRAME_TIME),
-                    input.combat_lab,
-                );
+            match self.scene {
+                AppScene::CombatLab => {
+                    self.update_combat_lab(
+                        raylib.get_frame_time().min(MAX_FRAME_TIME),
+                        input.combat_lab,
+                    );
 
-                let mut draw = raylib.begin_drawing(thread);
-                render::draw_combat_lab(&mut draw, &self.combat_lab, &assets);
-                continue;
-            }
-
-            if self.scene == AppScene::Preferences {
-                play_preferences_audio_feedback(&mut audio_player, input.preferences);
-                let preferences_action = self
-                    .preferences_menu
-                    .update(input.preferences, &mut self.feature_flags);
-                match preferences_action {
-                    PreferencesAction::Stay => {}
-                    PreferencesAction::CyclePlayerOne(direction) => {
-                        self.match_options.player_one =
-                            cycle_character(self.match_options.player_one, direction);
-                        self.match_options_dirty = true;
+                    let mut draw = raylib.begin_drawing(thread);
+                    render::draw_combat_lab(&mut draw, &self.combat_lab, &assets);
+                }
+                AppScene::Preferences => {
+                    play_preferences_audio_feedback(&mut audio_player, input.preferences);
+                    let preferences_action = self
+                        .preferences_menu
+                        .update(input.preferences, &mut self.feature_flags);
+                    match preferences_action {
+                        PreferencesAction::Stay => {}
+                        PreferencesAction::CyclePlayerOne(direction) => {
+                            self.match_options.player_one =
+                                cycle_character(self.match_options.player_one, direction);
+                            self.match_options_dirty = true;
+                        }
+                        PreferencesAction::CyclePlayerTwo(direction) => {
+                            self.match_options.player_two =
+                                cycle_character(self.match_options.player_two, direction);
+                            self.match_options_dirty = true;
+                        }
+                        PreferencesAction::StartFight => {
+                            if self.world.outcome.is_some() || self.match_options_dirty {
+                                self.restart_match();
+                            }
+                            self.scene = AppScene::Fight;
+                            audio_player.play_music(MusicTrack::Combat);
+                        }
                     }
-                    PreferencesAction::CyclePlayerTwo(direction) => {
-                        self.match_options.player_two =
-                            cycle_character(self.match_options.player_two, direction);
-                        self.match_options_dirty = true;
-                    }
-                    PreferencesAction::StartFight => {
-                        if self.world.outcome.is_some() || self.match_options_dirty {
+                    let mut draw = raylib.begin_drawing(thread);
+                    render::draw_preferences(
+                        &mut draw,
+                        render::PreferencesDrawOptions {
+                            menu: &self.preferences_menu,
+                            player_one_character: self.match_options.player_one,
+                            player_two_character: self.match_options.player_two,
+                            arena: self.current_arena,
+                            flags: self.feature_flags,
+                            gamepad_status,
+                            assets: &assets,
+                        },
+                    );
+                }
+                AppScene::Fight => {
+                    if input.open_preferences {
+                        self.scene = AppScene::Preferences;
+                        self.preferences_menu.ignore_next_input();
+                        audio_player.play(&AudioEvent::ui_back());
+                        audio_player.play_music(MusicTrack::Menu);
+                        let mut draw = raylib.begin_drawing(thread);
+                        render::draw_preferences(
+                            &mut draw,
+                            render::PreferencesDrawOptions {
+                                menu: &self.preferences_menu,
+                                player_one_character: self.match_options.player_one,
+                                player_two_character: self.match_options.player_two,
+                                arena: self.current_arena,
+                                flags: self.feature_flags,
+                                gamepad_status,
+                                assets: &assets,
+                            },
+                        );
+                    } else {
+                        if input.restart {
                             self.restart_match();
                         }
-                        self.scene = AppScene::Fight;
-                        audio_player.play_music(MusicTrack::Combat);
+
+                        if input.toggle_cpu {
+                            self.feature_flags.toggle(FeatureFlag::PlayerTwoCpu);
+                        }
+
+                        self.accumulator += raylib.get_frame_time().min(MAX_FRAME_TIME);
+                        let mut fixed_steps = 0;
+
+                        while self.accumulator >= FIXED_TIMESTEP
+                            && fixed_steps < MAX_FIXED_STEPS_PER_FRAME
+                        {
+                            let mut player_one =
+                                if self.feature_flags.enabled(FeatureFlag::PlayerOneCpu) {
+                                    self.player_one_cpu.next_input(
+                                        &self.world,
+                                        PlayerSlot::One,
+                                        FIXED_TIMESTEP,
+                                    )
+                                } else {
+                                    input.player_one
+                                };
+                            let mut player_two =
+                                if self.feature_flags.enabled(FeatureFlag::PlayerTwoCpu) {
+                                    self.player_two_cpu.next_input(
+                                        &self.world,
+                                        PlayerSlot::Two,
+                                        FIXED_TIMESTEP,
+                                    )
+                                } else {
+                                    input.player_two
+                                };
+
+                            player_one = cpu_attack_filtered_input(
+                                player_one,
+                                self.feature_flags,
+                                FeatureFlag::PlayerOneCpu,
+                            );
+                            player_two = cpu_attack_filtered_input(
+                                player_two,
+                                self.feature_flags,
+                                FeatureFlag::PlayerTwoCpu,
+                            );
+
+                            self.world.update_with_flags(
+                                FIXED_TIMESTEP,
+                                player_one,
+                                player_two,
+                                self.feature_flags,
+                            );
+                            self.remember_finished_match();
+                            audio_player.play_events(self.world.take_audio_events());
+                            self.accumulator -= FIXED_TIMESTEP;
+                            fixed_steps += 1;
+                        }
+
+                        audio_player.set_music_ducking(self.world.countdown_active());
+
+                        if fixed_steps == MAX_FIXED_STEPS_PER_FRAME {
+                            self.accumulator = 0.0;
+                        }
+
+                        let mut draw = raylib.begin_drawing(thread);
+                        render::draw_fight(
+                            &mut draw,
+                            &self.world,
+                            self.current_arena,
+                            self.feature_flags,
+                            gamepad_status,
+                            &assets,
+                        );
                     }
                 }
-                let mut draw = raylib.begin_drawing(thread);
-                render::draw_preferences(
-                    &mut draw,
-                    render::PreferencesDrawOptions {
-                        menu: &self.preferences_menu,
-                        player_one_character: self.match_options.player_one,
-                        player_two_character: self.match_options.player_two,
-                        arena: self.current_arena,
-                        flags: self.feature_flags,
-                        gamepad_status,
-                        assets: &assets,
-                    },
-                );
-                continue;
+                AppScene::SpriteViewer => unreachable!("sprite viewer has a separate app loop"),
             }
-
-            if input.open_preferences {
-                self.scene = AppScene::Preferences;
-                self.preferences_menu.ignore_next_input();
-                audio_player.play(&AudioEvent::ui_back());
-                audio_player.play_music(MusicTrack::Menu);
-                let mut draw = raylib.begin_drawing(thread);
-                render::draw_preferences(
-                    &mut draw,
-                    render::PreferencesDrawOptions {
-                        menu: &self.preferences_menu,
-                        player_one_character: self.match_options.player_one,
-                        player_two_character: self.match_options.player_two,
-                        arena: self.current_arena,
-                        flags: self.feature_flags,
-                        gamepad_status,
-                        assets: &assets,
-                    },
-                );
-                continue;
-            }
-
-            if input.restart {
-                self.restart_match();
-            }
-
-            if input.toggle_cpu {
-                self.feature_flags.toggle(FeatureFlag::PlayerTwoCpu);
-            }
-
-            self.accumulator += raylib.get_frame_time().min(MAX_FRAME_TIME);
-            let mut fixed_steps = 0;
-
-            while self.accumulator >= FIXED_TIMESTEP && fixed_steps < MAX_FIXED_STEPS_PER_FRAME {
-                let mut player_one = if self.feature_flags.enabled(FeatureFlag::PlayerOneCpu) {
-                    self.player_one_cpu
-                        .next_input(&self.world, PlayerSlot::One, FIXED_TIMESTEP)
-                } else {
-                    input.player_one
-                };
-                let mut player_two = if self.feature_flags.enabled(FeatureFlag::PlayerTwoCpu) {
-                    self.player_two_cpu
-                        .next_input(&self.world, PlayerSlot::Two, FIXED_TIMESTEP)
-                } else {
-                    input.player_two
-                };
-
-                player_one = cpu_attack_filtered_input(
-                    player_one,
-                    self.feature_flags,
-                    FeatureFlag::PlayerOneCpu,
-                );
-                player_two = cpu_attack_filtered_input(
-                    player_two,
-                    self.feature_flags,
-                    FeatureFlag::PlayerTwoCpu,
-                );
-
-                self.world.update_with_flags(
-                    FIXED_TIMESTEP,
-                    player_one,
-                    player_two,
-                    self.feature_flags,
-                );
-                self.remember_finished_match();
-                audio_player.play_events(self.world.take_audio_events());
-                self.accumulator -= FIXED_TIMESTEP;
-                fixed_steps += 1;
-            }
-
-            audio_player.set_music_ducking(self.world.countdown_active());
-
-            if fixed_steps == MAX_FIXED_STEPS_PER_FRAME {
-                self.accumulator = 0.0;
-            }
-
-            let mut draw = raylib.begin_drawing(thread);
-            render::draw_fight(
-                &mut draw,
-                &self.world,
-                self.current_arena,
-                self.feature_flags,
-                gamepad_status,
-                &assets,
-            );
         }
     }
 
@@ -263,9 +282,10 @@ impl App {
         if self.advance_arena_on_next_match || self.world.outcome.is_some() {
             self.current_arena = self.current_arena.next();
         }
-        self.world = World::new_greybox_with_intro_for_characters(
+        self.world = World::new_greybox_with_intro_for_characters_and_metrics(
             self.match_options.player_one,
             self.match_options.player_two,
+            &self.character_body_metrics,
         );
         self.player_one_cpu = BasicCpu::for_slot(PlayerSlot::One);
         self.player_two_cpu = BasicCpu::for_slot(PlayerSlot::Two);
@@ -415,6 +435,13 @@ fn read_sprite_viewer_input(raylib: &RaylibHandle) -> SpriteViewerInput {
     let tab_pressed = raylib.is_key_pressed(KeyboardKey::KEY_TAB);
     let shift_down = raylib.is_key_down(KeyboardKey::KEY_LEFT_SHIFT)
         || raylib.is_key_down(KeyboardKey::KEY_RIGHT_SHIFT);
+    let control_down = raylib.is_key_down(KeyboardKey::KEY_LEFT_CONTROL)
+        || raylib.is_key_down(KeyboardKey::KEY_RIGHT_CONTROL);
+    let pivot_step = if shift_down { 8 } else { 1 };
+    let arrow_x = raylib.is_key_pressed(KeyboardKey::KEY_RIGHT) as i32
+        - raylib.is_key_pressed(KeyboardKey::KEY_LEFT) as i32;
+    let arrow_y = raylib.is_key_pressed(KeyboardKey::KEY_DOWN) as i32
+        - raylib.is_key_pressed(KeyboardKey::KEY_UP) as i32;
     let mouse = raylib.get_mouse_position();
 
     SpriteViewerInput {
@@ -435,9 +462,37 @@ fn read_sprite_viewer_input(raylib: &RaylibHandle) -> SpriteViewerInput {
         toggle_combat_overlay: raylib.is_key_pressed(KeyboardKey::KEY_M),
         toggle_projectile_trajectory: raylib.is_key_pressed(KeyboardKey::KEY_T),
         reload_manifest: raylib.is_key_pressed(KeyboardKey::KEY_F5),
+        save_manifest: control_down && raylib.is_key_pressed(KeyboardKey::KEY_S),
+        increase_manifest_scale: raylib.is_key_pressed(KeyboardKey::KEY_EQUAL),
+        decrease_manifest_scale: raylib.is_key_pressed(KeyboardKey::KEY_MINUS),
         reset_zoom: raylib.is_key_pressed(KeyboardKey::KEY_ZERO),
         screenshot_requested: raylib.is_key_pressed(KeyboardKey::KEY_F12),
         zoom_delta: raylib.get_mouse_wheel_move(),
+        nudge_pivot_x: if control_down {
+            0
+        } else {
+            arrow_x * pivot_step
+        },
+        nudge_pivot_y: if control_down {
+            0
+        } else {
+            arrow_y * pivot_step
+        },
+        nudge_body_width: if control_down && !shift_down {
+            arrow_x * pivot_step
+        } else {
+            0
+        },
+        nudge_standing_height: if control_down && !shift_down {
+            -arrow_y * pivot_step
+        } else {
+            0
+        },
+        nudge_crouch_height: if control_down && shift_down {
+            -arrow_y * pivot_step
+        } else {
+            0
+        },
         reset_position: raylib.is_key_pressed(KeyboardKey::KEY_R),
         mouse_position: ViewerPoint::new(mouse.x, mouse.y),
         mouse_pressed: raylib.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_LEFT),

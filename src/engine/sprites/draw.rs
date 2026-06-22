@@ -19,7 +19,7 @@ use crate::{
 
 const GREYBOX_FRAME_WIDTH: f32 = 96.0;
 const GREYBOX_FRAME_HEIGHT: f32 = 128.0;
-const RUNTIME_FIGHTER_SCALE: f32 = 1.0;
+const MIN_RUNTIME_FIGHTER_SCALE: f32 = 0.1;
 const PROJECTILE_SCALE: f32 = 0.45;
 
 /// Draws one fighter from the placeholder spritesheet.
@@ -73,7 +73,7 @@ pub fn draw_manifest_fighter_sprite(
         return false;
     };
 
-    draw_manifest_frame(draw, texture, frame, fighter, tint);
+    draw_manifest_frame(draw, texture, manifest, frame, fighter, tint);
     true
 }
 
@@ -102,18 +102,20 @@ pub fn draw_projectile_texture(
 fn draw_manifest_frame(
     draw: &mut RaylibDrawHandle<'_>,
     texture: &Texture2D,
+    manifest: &SpriteManifest,
     frame: &SpriteFrame,
     fighter: &Fighter,
     tint: Color,
 ) {
+    let runtime_scale = manifest.scale.unwrap_or(1.0).max(MIN_RUNTIME_FIGHTER_SCALE);
     let body = fighter.body_rect();
     let anchor = Vector2::new(body.center_x(), body.bottom());
     let source_width = frame.frame.w as f32;
     let source_height = frame.frame.h as f32;
-    let dest_width = source_width * RUNTIME_FIGHTER_SCALE;
-    let dest_height = source_height * RUNTIME_FIGHTER_SCALE;
-    let pivot_x = frame.pivot.x as f32 * RUNTIME_FIGHTER_SCALE;
-    let pivot_y = frame.pivot.y as f32 * RUNTIME_FIGHTER_SCALE;
+    let dest_width = source_width * runtime_scale;
+    let dest_height = source_height * runtime_scale;
+    let pivot_x = frame.pivot.x as f32 * runtime_scale;
+    let pivot_y = frame.pivot.y as f32 * runtime_scale;
     let mut source = Rectangle::new(
         frame.frame.x as f32,
         frame.frame.y as f32,

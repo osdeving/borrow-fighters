@@ -34,6 +34,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`docs/07-art-direction.md`](docs/07-art-direction.md): direção de arte inicial, moods e critérios visuais.
 - [`docs/11-sprite-pipeline.md`](docs/11-sprite-pipeline.md): formato candidato para atlas, animações, pivots e metadata de sprites.
 - [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md): roadmap do viewer para artistas conferirem atlas, pivot, grade e boxes.
+- [`docs/17-visual-scale-and-stage-metrics.md`](docs/17-visual-scale-and-stage-metrics.md): escala visual alvo de personagens, arena e workflow de calibracao.
 - [`docs/templates/mood-proposal.md`](docs/templates/mood-proposal.md): molde para proposta de moodboard.
 - [`docs/templates/character-concept.md`](docs/templates/character-concept.md): molde para personagem e mecânica.
 - [`docs/templates/adr-template.md`](docs/templates/adr-template.md): molde para novas decisões.
@@ -48,6 +49,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`docs/14-audio-pipeline.md`](docs/14-audio-pipeline.md): motor de áudio por eventos, manifesto JSON e convenções de clips.
 - [`docs/15-character-combat-matrix.md`](docs/15-character-combat-matrix.md): matriz de identidade mecânica e tuning inicial de Rust, Duke e Go.
 - [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md): ferramenta isolada para inspecionar sprites e preparar hitbox/hurtbox data-driven.
+- [`docs/17-visual-scale-and-stage-metrics.md`](docs/17-visual-scale-and-stage-metrics.md): padrao tecnico de tamanho em tela, escala de sprite e largura de arena.
 - [`docs/09-ai-collaboration.md`](docs/09-ai-collaboration.md): como Codex, Claude e skills devem navegar o projeto.
 - [`AGENTS.md`](AGENTS.md): instruções persistentes para Codex.
 - [`CLAUDE.md`](CLAUDE.md): instruções persistentes para Claude Code.
@@ -61,6 +63,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`docs/adr/0003-code-architecture-rust-raylib.md`](docs/adr/0003-code-architecture-rust-raylib.md): arquitetura inicial de código Rust + Raylib.
 - [`docs/adr/0004-runtime-feature-flags-and-preferences.md`](docs/adr/0004-runtime-feature-flags-and-preferences.md): feature flags runtime e tela de preferências.
 - [`docs/adr/0005-data-driven-audio-events.md`](docs/adr/0005-data-driven-audio-events.md): eventos de áudio data-driven com manifesto JSON.
+- [`docs/adr/0006-runtime-sprite-scale-and-scene-state.md`](docs/adr/0006-runtime-sprite-scale-and-scene-state.md): escala visual por manifesto e maquina de estados de cenas.
 
 ### GitHub
 
@@ -158,7 +161,7 @@ cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.spr
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
 ```
 
-No Sprite Combat Viewer, use o mouse para inspecionar coordenadas locais do frame e arrastar personagem/dummy, `Tab` / `Shift+Tab` para alternar clip, `Enter` para sincronizar clip com golpe, `C` / `Shift+C` para alternar personagem de combate, `[` / `]` para alternar golpe, `.` / `,` para avançar ou voltar frame, `Espaço` para pausar, mouse wheel para zoom, `0` para resetar zoom, `O` para mostrar/esconder dummy, `M` para mostrar/esconder boxes de combate, `T` para mostrar/esconder trajetória prevista do projectile, `F5` para recarregar manifesto/atlas, `F12` para salvar screenshot em `target/sprite-viewer-capture.png`, `G` para grade, `P` para pivot, `B` para bounds e `R` para resetar posição. O corte atual mostra atlas, pivot, grid, frame bounds, timeline, coordenada local/atlas do cursor, hurtbox atual, hitbox/origem de projectile para o golpe selecionado e metadata opcional `frames[].combat` por frame. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md).
+No Sprite Combat Viewer, use o mouse para inspecionar coordenadas locais do frame e arrastar personagem/dummy, `Tab` / `Shift+Tab` para alternar clip, `Enter` para sincronizar clip com golpe, `C` / `Shift+C` para alternar personagem de combate, `[` / `]` para alternar golpe, `.` / `,` para avançar ou voltar frame, `Espaço` para pausar, mouse wheel para zoom, `0` para resetar zoom, `=` / `-` para ajustar `scale` do manifesto, `Setas` ou `Shift+Setas` para mover o `pivot` do frame atual, `Ctrl+Setas` para ajustar largura/altura do corpo físico, `Ctrl+Shift+Setas` para ajustar altura abaixada, `Ctrl+S` para salvar manifestos de tuning, `O` para mostrar/esconder dummy, `M` para mostrar/esconder boxes de combate, `T` para mostrar/esconder trajetória prevista do projectile, `F5` para recarregar manifesto/atlas, `F12` para salvar screenshot em `target/sprite-viewer-capture.png`, `G` para grade, `P` para pivot, `B` para bounds e `R` para resetar posição. O corte atual mostra atlas, pivot, grid, frame bounds, timeline, coordenada local/atlas do cursor, hurtbox atual, hitbox/origem de projectile para o golpe selecionado e metadata opcional `frames[].combat` por frame. O padrão de escala fica em [`docs/17-visual-scale-and-stage-metrics.md`](docs/17-visual-scale-and-stage-metrics.md), e o roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md).
 
 Preferências disponíveis:
 

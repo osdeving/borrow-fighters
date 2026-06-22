@@ -7,7 +7,7 @@
 //! without Raylib.
 
 use crate::audio::AudioEvent;
-use crate::characters::{CharacterId, character_spec};
+use crate::characters::{CharacterBodyMetricsCatalog, CharacterId, character_spec};
 use crate::combat::collision::hitbox_hits_hurtbox;
 use crate::combat::fighter::{
     ActiveAttack, DamageResult, Fighter, FighterInput, FighterUpdateEvents, GuardRule, HitReaction,
@@ -72,9 +72,19 @@ impl World {
 
     /// Creates a greybox fight from explicit character specs.
     pub fn new_with_characters(player_one: CharacterId, player_two: CharacterId) -> Self {
+        let body_metrics = CharacterBodyMetricsCatalog::default();
+        Self::new_with_character_body_metrics(player_one, player_two, &body_metrics)
+    }
+
+    /// Creates a fight with explicit character specs and loaded body metrics.
+    pub fn new_with_character_body_metrics(
+        player_one: CharacterId,
+        player_two: CharacterId,
+        body_metrics: &CharacterBodyMetricsCatalog,
+    ) -> Self {
         let mut world = Self {
-            player_one: fighter_from_character(PlayerSlot::One, player_one, 232.0),
-            player_two: fighter_from_character(PlayerSlot::Two, player_two, 676.0),
+            player_one: fighter_from_character(PlayerSlot::One, player_one, body_metrics, 232.0),
+            player_two: fighter_from_character(PlayerSlot::Two, player_two, body_metrics, 676.0),
             player_one_character: player_one,
             player_two_character: player_two,
             outcome: None,
@@ -106,7 +116,21 @@ impl World {
         player_one: CharacterId,
         player_two: CharacterId,
     ) -> Self {
-        let mut world = Self::new_with_characters(player_one, player_two);
+        let body_metrics = CharacterBodyMetricsCatalog::default();
+        Self::new_greybox_with_intro_for_characters_and_metrics(
+            player_one,
+            player_two,
+            &body_metrics,
+        )
+    }
+
+    /// Creates an explicit-character fight with cinematic intro and body metrics.
+    pub fn new_greybox_with_intro_for_characters_and_metrics(
+        player_one: CharacterId,
+        player_two: CharacterId,
+        body_metrics: &CharacterBodyMetricsCatalog,
+    ) -> Self {
+        let mut world = Self::new_with_character_body_metrics(player_one, player_two, body_metrics);
         world.spawn_intro_timer = SPAWN_INTRO_DURATION_SECONDS;
         world.countdown_timer = ROUND_COUNTDOWN_TOTAL_SECONDS;
         world
@@ -608,14 +632,20 @@ fn queue_projectile_hit_audio(
     }
 }
 
-fn fighter_from_character(slot: PlayerSlot, character: CharacterId, x: f32) -> Fighter {
+fn fighter_from_character(
+    slot: PlayerSlot,
+    character: CharacterId,
+    body_metrics: &CharacterBodyMetricsCatalog,
+    x: f32,
+) -> Fighter {
     let spec = character_spec(character);
-    Fighter::new_with_projectile_loadout(
+    Fighter::new_with_projectile_loadout_and_body_metrics(
         slot,
         spec.fighter_name,
         spec.stats.max_health,
         spec.move_ids,
         spec.projectile,
+        body_metrics.body_metrics_for(character),
         x,
     )
 }

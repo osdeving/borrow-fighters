@@ -1,9 +1,10 @@
 //! Verifies the standalone sprite viewer state without opening a window.
 
-use std::path::PathBuf;
+use std::{fs, path::PathBuf};
 
 use borrow_fighters::{
     characters::CharacterId,
+    engine::sprites::SpriteManifest,
     scenes::{
         combat_lab::CombatLabMove,
         sprite_viewer::{
@@ -104,6 +105,90 @@ fn mouse_wheel_zoom_changes_sprite_screen_size_and_reset_restores_it() {
         0.0,
     );
     assert_eq!(viewer.sprite_screen_rect().width, original_width);
+}
+
+#[test]
+fn viewer_can_tune_manifest_scale_and_pivot_then_save() {
+    let mut manifest_path = std::env::temp_dir();
+    manifest_path.push(format!(
+        "borrow-fighters-sprite-viewer-{}-{}.json",
+        std::process::id(),
+        line!()
+    ));
+    fs::copy(
+        "assets/placeholder/rust-fighter.sprite.json",
+        &manifest_path,
+    )
+    .unwrap();
+
+    let mut viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: manifest_path.clone(),
+        initial_clip: Some("idle".to_string()),
+        character: Some(CharacterId::Rust),
+        selected_move: CombatLabMove::LightPunch,
+    })
+    .unwrap();
+    let original_scale = viewer.manifest_scale();
+    let original_pivot = viewer.current_frame().pivot;
+
+    viewer.update(
+        SpriteViewerInput {
+            increase_manifest_scale: true,
+            nudge_pivot_x: 2,
+            nudge_pivot_y: -1,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    assert!(viewer.manifest_dirty());
+    assert!(viewer.manifest_scale() > original_scale);
+    assert_eq!(viewer.current_frame().pivot.x, original_pivot.x + 2);
+    assert_eq!(viewer.current_frame().pivot.y, original_pivot.y - 1);
+
+    viewer.update(
+        SpriteViewerInput {
+            save_manifest: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    assert!(!viewer.manifest_dirty());
+    let saved = SpriteManifest::load(&manifest_path).unwrap();
+    let saved_frame = saved.frame_named("idle_0").unwrap();
+    assert_eq!(saved.scale, Some(viewer.manifest_scale()));
+    assert_eq!(saved_frame.pivot, viewer.current_frame().pivot);
+
+    fs::remove_file(manifest_path).unwrap();
+}
+
+#[test]
+fn viewer_can_tune_selected_character_body_metrics_in_memory() {
+    let mut viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("assets/placeholder/go-fighter.sprite.json"),
+        initial_clip: Some("idle".to_string()),
+        character: Some(CharacterId::Go),
+        selected_move: CombatLabMove::LightPunch,
+    })
+    .unwrap();
+    let original = viewer.selected_body_metrics().unwrap();
+
+    viewer.update(
+        SpriteViewerInput {
+            nudge_body_width: 3,
+            nudge_standing_height: -4,
+            nudge_crouch_height: -2,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    let tuned = viewer.selected_body_metrics().unwrap();
+    assert!(viewer.body_metrics_dirty());
+    assert_eq!(tuned.width, original.width + 3.0);
+    assert_eq!(tuned.standing_height, original.standing_height - 4.0);
+    assert_eq!(tuned.crouch_height, original.crouch_height - 2.0);
 }
 
 #[test]

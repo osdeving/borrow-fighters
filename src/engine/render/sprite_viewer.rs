@@ -539,7 +539,7 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
     let panel_x = 16;
     let panel_y = 16;
     let panel_width = WINDOW_WIDTH - 32;
-    let panel_height = 126;
+    let panel_height = 146;
     draw.draw_rectangle(panel_x, panel_y, panel_width, panel_height, PANEL);
     draw.draw_rectangle_lines(panel_x, panel_y, panel_width, panel_height, PANEL_BORDER);
 
@@ -556,8 +556,13 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
     let manifest = viewer.manifest_path().display().to_string();
     let image = viewer.image_path().display().to_string();
 
+    let dirty_marker = if viewer.manifest_dirty() || viewer.body_metrics_dirty() {
+        " *"
+    } else {
+        ""
+    };
     draw.draw_text(
-        "Sprite Combat Viewer",
+        &format!("Sprite Combat Viewer{dirty_marker}"),
         panel_x + 16,
         panel_y + 14,
         22,
@@ -581,13 +586,13 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
     );
     draw.draw_text(
         &format!(
-            "anchor {:.1},{:.1} | dummy {:.1}px | pivot {},{} | scale {:.2} | zoom {:.2}",
+            "anchor {:.1},{:.1} | dummy {:.1}px | pivot {},{} | manifest scale {:.3} | zoom {:.2}",
             anchor.x,
             anchor.y,
             viewer.dummy_distance(),
             frame.pivot.x,
             frame.pivot.y,
-            viewer.scale(),
+            viewer.manifest_scale(),
             viewer.zoom(),
         ),
         panel_x + 16,
@@ -596,7 +601,7 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
         UI_MUTED,
     );
     draw.draw_text(
-        "mouse inspect/drag | Tab clip | Enter sync | [] golpe | C char | ./, frame | T traj",
+        "mouse drag | Tab clip | [] golpe | =/- scale | arrows pivot | Ctrl+arrows body | Ctrl+S save",
         panel_x + 16,
         panel_y + 92,
         15,
@@ -662,6 +667,19 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
         );
     }
 
+    if let Some(body) = viewer.selected_body_metrics() {
+        draw.draw_text(
+            &format!(
+                "body: w {:.0} / h {:.0} / crouch {:.0}",
+                body.width, body.standing_height, body.crouch_height
+            ),
+            panel_x + 430,
+            panel_y + 88,
+            14,
+            COMBAT_BODY,
+        );
+    }
+
     if let Some(frame_combat) = &frame.combat {
         let origin = if frame_combat.projectile_origin.is_some() {
             "origin yes"
@@ -676,7 +694,7 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
                 origin,
             ),
             panel_x + 430,
-            panel_y + 88,
+            panel_y + 106,
             14,
             FRAME_DATA_HURTBOX,
         );
@@ -689,7 +707,7 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
                 cursor.local_x, cursor.local_y, cursor.atlas_x, cursor.atlas_y
             ),
             panel_x + 430,
-            panel_y + 108,
+            panel_y + 126,
             14,
             CURSOR_COLOR,
         );
