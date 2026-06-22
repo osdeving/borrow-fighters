@@ -75,6 +75,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Sprite Combat Viewer com overlay inicial de combate via `--character` e `--move`, mostrando hurtboxes atuais, hitbox do golpe e origem/caixa de projectile.
 - Schema opcional `frames[].combat` em manifests de sprite para hurtboxes, hitboxes e origem de projectile por frame, com validação e testes.
 - Sprite Combat Viewer com overlay data-driven de `frames[].combat` e timeline inferior de startup/active/recovery para o golpe selecionado.
+- Sprite Combat Viewer com troca runtime de personagem/golpe e preview simples de trajetória de projectile.
 
 ### Em aberto
 

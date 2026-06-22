@@ -197,6 +197,82 @@ fn projectile_overlay_exposes_spawn_box_and_origin() {
 }
 
 #[test]
+fn viewer_can_cycle_character_and_move_at_runtime() {
+    let mut viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),
+        initial_clip: Some("idle".to_string()),
+        character: Some(CharacterId::Rust),
+        selected_move: CombatLabMove::LightPunch,
+    })
+    .unwrap();
+
+    viewer.update(
+        SpriteViewerInput {
+            next_character: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+    assert_eq!(viewer.selected_character(), Some(CharacterId::Duke));
+
+    viewer.update(
+        SpriteViewerInput {
+            previous_character: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+    assert_eq!(viewer.selected_character(), Some(CharacterId::Rust));
+
+    viewer.update(
+        SpriteViewerInput {
+            next_move: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+    assert_eq!(viewer.selected_move(), CombatLabMove::HeavyPunch);
+
+    viewer.update(
+        SpriteViewerInput {
+            previous_move: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+    assert_eq!(viewer.selected_move(), CombatLabMove::LightPunch);
+}
+
+#[test]
+fn projectile_trajectory_preview_tracks_selected_projectile() {
+    let mut viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),
+        initial_clip: Some("special".to_string()),
+        character: Some(CharacterId::Rust),
+        selected_move: CombatLabMove::Projectile,
+    })
+    .unwrap();
+
+    let overlay = viewer.combat_overlay().unwrap();
+    let trajectory = viewer.projectile_trajectory().unwrap();
+
+    assert_eq!(trajectory.samples.len(), 7);
+    assert_eq!(trajectory.origin, overlay.projectile_origin.unwrap());
+    assert!(trajectory.end.x > trajectory.origin.x);
+    assert!(trajectory.travel_distance > 0.0);
+
+    viewer.update(
+        SpriteViewerInput {
+            toggle_projectile_trajectory: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    assert!(viewer.projectile_trajectory().is_none());
+}
+
+#[test]
 fn frame_combat_overlay_projects_manifest_metadata_to_screen_space() {
     let viewer = SpriteViewer::load(SpriteViewerOptions {
         manifest_path: PathBuf::from("tests/fixtures/sprite-viewer-combat.sprite.json"),

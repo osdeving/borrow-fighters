@@ -16,7 +16,7 @@ use crate::{
         move_data::{MoveInputKind, MoveSpec, move_spec_for_input},
         projectile::Projectile,
     },
-    config::FLOOR_Y,
+    config::{FLOOR_Y, WINDOW_WIDTH},
     engine::sprites::{SpriteCombatBox, SpriteFrame, SpriteManifest, SpriteManifestError},
     math::rect::Rect,
     scenes::combat_lab::CombatLabMove,
@@ -42,6 +42,10 @@ pub struct SpriteViewerOptions {
 pub struct SpriteViewerInput {
     pub next_clip: bool,
     pub previous_clip: bool,
+    pub next_character: bool,
+    pub previous_character: bool,
+    pub next_move: bool,
+    pub previous_move: bool,
     pub next_frame: bool,
     pub previous_frame: bool,
     pub toggle_playback: bool,
@@ -50,6 +54,7 @@ pub struct SpriteViewerInput {
     pub toggle_bounds: bool,
     pub toggle_dummy: bool,
     pub toggle_combat_overlay: bool,
+    pub toggle_projectile_trajectory: bool,
     pub reload_manifest: bool,
     pub reset_zoom: bool,
     pub screenshot_requested: bool,
@@ -109,6 +114,7 @@ pub struct SpriteViewer {
     show_bounds: bool,
     show_dummy: bool,
     show_combat_overlay: bool,
+    show_projectile_trajectory: bool,
     zoom: f32,
     anchor: ViewerPoint,
     dummy_anchor: ViewerPoint,
@@ -129,6 +135,15 @@ pub struct SpriteCombatOverlay {
     pub hitbox: Option<Rect>,
     pub projectile: Option<Rect>,
     pub projectile_origin: Option<ViewerPoint>,
+}
+
+/// Predicted projectile path projected into viewer screen coordinates.
+#[derive(Clone, Debug, PartialEq)]
+pub struct SpriteProjectileTrajectory {
+    pub origin: ViewerPoint,
+    pub end: ViewerPoint,
+    pub samples: Vec<Rect>,
+    pub travel_distance: f32,
 }
 
 /// One frame-local combat box projected into viewer screen coordinates.
@@ -211,6 +226,7 @@ impl SpriteViewer {
             show_bounds: true,
             show_dummy: true,
             show_combat_overlay,
+            show_projectile_trajectory: true,
             zoom: 1.0,
             anchor: ViewerPoint::new(DEFAULT_ANCHOR_X, FLOOR_Y),
             dummy_anchor: ViewerPoint::new(DEFAULT_DUMMY_ANCHOR_X, FLOOR_Y),
@@ -228,6 +244,18 @@ impl SpriteViewer {
         }
         if input.next_clip {
             self.step_clip(1);
+        }
+        if input.previous_character {
+            self.step_character(-1);
+        }
+        if input.next_character {
+            self.step_character(1);
+        }
+        if input.previous_move {
+            self.step_move(-1);
+        }
+        if input.next_move {
+            self.step_move(1);
         }
         if input.previous_frame {
             self.playing = false;
@@ -254,6 +282,9 @@ impl SpriteViewer {
         }
         if input.toggle_combat_overlay {
             self.show_combat_overlay = !self.show_combat_overlay;
+        }
+        if input.toggle_projectile_trajectory {
+            self.show_projectile_trajectory = !self.show_projectile_trajectory;
         }
         if input.reset_position {
             self.anchor = ViewerPoint::new(DEFAULT_ANCHOR_X, FLOOR_Y);
@@ -360,6 +391,16 @@ impl SpriteViewer {
         &self.manifest.clips[self.clip_index].frames
     }
 
+    /// Returns the selected runtime combat character, if any.
+    pub const fn selected_character(&self) -> Option<CharacterId> {
+        self.options.character
+    }
+
+    /// Returns the selected runtime move.
+    pub const fn selected_move(&self) -> CombatLabMove {
+        self.options.selected_move
+    }
+
     /// Returns the runtime scale from the manifest, falling back to 1.0.
     pub fn scale(&self) -> f32 {
         self.manifest_scale() * self.zoom
@@ -413,6 +454,11 @@ impl SpriteViewer {
     /// Returns whether combat metrics should be drawn.
     pub const fn show_combat_overlay(&self) -> bool {
         self.show_combat_overlay
+    }
+
+    /// Returns whether projectile trajectory preview is enabled.
+    pub const fn show_projectile_trajectory(&self) -> bool {
+        self.show_projectile_trajectory
     }
 
     /// Returns a texture loading warning, if one happened.
@@ -485,6 +531,60 @@ impl SpriteViewer {
             hitbox,
             projectile,
             projectile_origin,
+        })
+    }
+
+    /// Returns a simple predicted projectile path for the selected character.
+    pub fn projectile_trajectory(&self) -> Option<SpriteProjectileTrajectory> {
+        if !self.show_combat_overlay
+            || !self.show_projectile_trajectory
+            || self.options.selected_move != CombatLabMove::Projectile
+        {
+            return None;
+        }
+
+        let character = self.options.character?;
+        let spec = character_spec(character);
+        let mut fighter = Fighter::new_with_projectile_loadout(
+            PlayerSlot::One,
+            spec.fighter_name,
+            spec.stats.max_health,
+            spec.move_ids,
+            spec.projectile,
+            0.0,
+        );
+        fighter.facing = Facing::Right;
+        align_fighter_to_anchor(&mut fighter, self.anchor);
+
+        let projectile = Projectile::from_fighter_with_spec(&fighter, spec.projectile);
+        let start = projectile.rect();
+        let travel_distance = spec
+            .projectile
+            .max_travel
+            .unwrap_or_else(|| (WINDOW_WIDTH as f32 - start.right() - 32.0).max(0.0));
+        let sample_count = 7;
+        let samples = (0..sample_count)
+            .map(|index| {
+                let t = index as f32 / (sample_count - 1) as f32;
+                Rect::new(
+                    start.x + travel_distance * t,
+                    start.y,
+                    start.width,
+                    start.height,
+                )
+            })
+            .collect::<Vec<_>>();
+        let origin = ViewerPoint::new(start.x, start.y + start.height * 0.5);
+        let end = ViewerPoint::new(
+            start.x + travel_distance + start.width,
+            start.y + start.height * 0.5,
+        );
+
+        Some(SpriteProjectileTrajectory {
+            origin,
+            end,
+            samples,
+            travel_distance,
         })
     }
 
@@ -700,6 +800,34 @@ impl SpriteViewer {
         let len = self.manifest.clips[self.clip_index].frames.len();
         self.frame_index = wrap_index(self.frame_index, len, direction);
         self.frame_elapsed_ms = 0.0;
+    }
+
+    fn step_character(&mut self, direction: i32) {
+        let next = match (self.options.character, direction) {
+            (Some(character), value) if value < 0 => character.previous(),
+            (Some(character), _) => character.next(),
+            (None, value) if value < 0 => CharacterId::default().previous(),
+            (None, _) => CharacterId::default(),
+        };
+        self.options.character = Some(next);
+        self.show_combat_overlay = true;
+        self.status_message = Some(format!(
+            "Personagem de combate: {}.",
+            character_spec(next).display_name
+        ));
+    }
+
+    fn step_move(&mut self, direction: i32) {
+        let current = CombatLabMove::ALL
+            .iter()
+            .position(|candidate| *candidate == self.options.selected_move)
+            .unwrap_or(0);
+        self.options.selected_move =
+            CombatLabMove::ALL[wrap_index(current, CombatLabMove::ALL.len(), direction)];
+        self.status_message = Some(format!(
+            "Golpe selecionado: {}.",
+            self.options.selected_move.label()
+        ));
     }
 
     fn advance_one_frame(&mut self) -> bool {

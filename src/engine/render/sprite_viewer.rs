@@ -33,6 +33,8 @@ const COMBAT_HITBOX: Color = Color::new(255, 82, 82, 235);
 const COMBAT_HITBOX_FILL: Color = Color::new(255, 82, 82, 70);
 const COMBAT_PROJECTILE: Color = Color::new(80, 220, 255, 235);
 const COMBAT_PROJECTILE_FILL: Color = Color::new(80, 220, 255, 70);
+const PROJECTILE_TRAJECTORY: Color = Color::new(80, 220, 255, 150);
+const PROJECTILE_TRAJECTORY_FILL: Color = Color::new(80, 220, 255, 28);
 const FRAME_DATA_HURTBOX: Color = Color::new(84, 255, 170, 255);
 const FRAME_DATA_HURTBOX_FILL: Color = Color::new(84, 255, 170, 38);
 const FRAME_DATA_HITBOX: Color = Color::new(255, 96, 96, 255);
@@ -95,6 +97,9 @@ pub fn draw_sprite_viewer(
         draw_dummy_distance(draw, viewer);
     }
 
+    if let Some(trajectory) = viewer.projectile_trajectory() {
+        draw_projectile_trajectory(draw, &trajectory);
+    }
     if let Some(overlay) = viewer.combat_overlay() {
         draw_combat_overlay(draw, overlay);
     }
@@ -240,6 +245,33 @@ fn draw_projectile_origin(draw: &mut RaylibDrawHandle<'_>, origin: ViewerPoint, 
         origin.x.round() as i32,
         origin.y.round() as i32 + 10,
         color,
+    );
+}
+
+fn draw_projectile_trajectory(
+    draw: &mut RaylibDrawHandle<'_>,
+    trajectory: &crate::scenes::sprite_viewer::SpriteProjectileTrajectory,
+) {
+    draw.draw_line_ex(
+        Vector2::new(trajectory.origin.x, trajectory.origin.y),
+        Vector2::new(trajectory.end.x, trajectory.end.y),
+        2.0,
+        PROJECTILE_TRAJECTORY,
+    );
+    for sample in &trajectory.samples {
+        draw_combat_rect(
+            draw,
+            *sample,
+            PROJECTILE_TRAJECTORY,
+            Some(PROJECTILE_TRAJECTORY_FILL),
+        );
+    }
+    draw.draw_text(
+        &format!("{:.0}px travel", trajectory.travel_distance),
+        trajectory.origin.x.round() as i32 + 12,
+        trajectory.origin.y.round() as i32 + 12,
+        13,
+        PROJECTILE_TRAJECTORY,
     );
 }
 
@@ -543,7 +575,7 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
         UI_MUTED,
     );
     draw.draw_text(
-        "mouse arrasta | Tab clip | ./, frame | Wheel zoom | 0 zoom | O dummy | F5 reload | F12 shot",
+        "mouse drag | Tab clip | [] golpe | C char | ./, frame | Space pause | T traj | F5 reload",
         panel_x + 16,
         panel_y + 92,
         15,
@@ -556,6 +588,18 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
                 overlay.character,
                 overlay.selected_move.label(),
                 overlay.move_label,
+            ),
+            panel_x + 16,
+            panel_y + 112,
+            14,
+            COMBAT_HURTBOX,
+        );
+    } else if let Some(character) = viewer.selected_character() {
+        draw.draw_text(
+            &format!(
+                "combat: {:?} / {} | M overlay",
+                character,
+                viewer.selected_move().label(),
             ),
             panel_x + 16,
             panel_y + 112,

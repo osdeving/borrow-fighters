@@ -420,6 +420,10 @@ fn read_sprite_viewer_input(raylib: &RaylibHandle) -> SpriteViewerInput {
     SpriteViewerInput {
         next_clip: tab_pressed && !shift_down,
         previous_clip: tab_pressed && shift_down,
+        next_character: raylib.is_key_pressed(KeyboardKey::KEY_C) && !shift_down,
+        previous_character: raylib.is_key_pressed(KeyboardKey::KEY_C) && shift_down,
+        next_move: raylib.is_key_pressed(KeyboardKey::KEY_RIGHT_BRACKET),
+        previous_move: raylib.is_key_pressed(KeyboardKey::KEY_LEFT_BRACKET),
         next_frame: raylib.is_key_pressed(KeyboardKey::KEY_PERIOD),
         previous_frame: raylib.is_key_pressed(KeyboardKey::KEY_COMMA),
         toggle_playback: raylib.is_key_pressed(KeyboardKey::KEY_SPACE),
@@ -428,6 +432,7 @@ fn read_sprite_viewer_input(raylib: &RaylibHandle) -> SpriteViewerInput {
         toggle_bounds: raylib.is_key_pressed(KeyboardKey::KEY_B),
         toggle_dummy: raylib.is_key_pressed(KeyboardKey::KEY_O),
         toggle_combat_overlay: raylib.is_key_pressed(KeyboardKey::KEY_M),
+        toggle_projectile_trajectory: raylib.is_key_pressed(KeyboardKey::KEY_T),
         reload_manifest: raylib.is_key_pressed(KeyboardKey::KEY_F5),
         reset_zoom: raylib.is_key_pressed(KeyboardKey::KEY_ZERO),
         screenshot_requested: raylib.is_key_pressed(KeyboardKey::KEY_F12),

@@ -325,6 +325,10 @@ Teclas:
 | Arrastar personagem | Mouse esquerdo |
 | Próximo clip | `Tab` |
 | Clip anterior | `Shift+Tab` |
+| Próximo personagem de combate | `C` |
+| Personagem de combate anterior | `Shift+C` |
+| Próximo golpe | `]` |
+| Golpe anterior | `[` |
 | Próximo frame | `.` |
 | Frame anterior | `,` |
 | Pausar/continuar | `Espaço` |
@@ -332,6 +336,7 @@ Teclas:
 | Resetar zoom | `0` |
 | Mostrar/esconder dummy | `O` |
 | Mostrar/esconder boxes de combate | `M` |
+| Mostrar/esconder trajetória de projectile | `T` |
 | Recarregar manifesto e atlas | `F5` |
 | Salvar screenshot | `F12` |
 | Alternar grade | `G` |
@@ -339,7 +344,7 @@ Teclas:
 | Alternar bounds | `B` |
 | Resetar posição | `R` |
 
-O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, `trimmed_bounds`, `source_crop`, hurtbox atual do corpo, hitbox do golpe selecionado, origem/caixa de projectile, metadata `frames[].combat` e timeline inferior com fase aproximada de startup/active/recovery quando `--character` e `--move` estao presentes. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. A evolução restante está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
+O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, `trimmed_bounds`, `source_crop`, hurtbox atual do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetória prevista de projectile, metadata `frames[].combat` e timeline inferior com fase aproximada de startup/active/recovery quando `--character` e `--move` estao presentes. O personagem e o golpe podem ser trocados em runtime com `C`/`Shift+C` e `[`/`]`, sem reabrir o comando. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. A evolução restante está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
 
 ## Cabeçalho de Arquivos
 

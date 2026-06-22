@@ -141,6 +141,10 @@ Atalhos:
 | Arrastar personagem | Mouse esquerdo |
 | Proximo clip | `Tab` |
 | Clip anterior | `Shift+Tab` |
+| Proximo personagem de combate | `C` |
+| Personagem de combate anterior | `Shift+C` |
+| Proximo golpe | `]` |
+| Golpe anterior | `[` |
 | Proximo frame | `.` |
 | Frame anterior | `,` |
 | Pausar/continuar | `Espaco` |
@@ -148,6 +152,7 @@ Atalhos:
 | Resetar zoom | `0` |
 | Mostrar/esconder dummy | `O` |
 | Mostrar/esconder boxes de combate | `M` |
+| Mostrar/esconder trajetoria de projectile | `T` |
 | Recarregar manifesto e atlas | `F5` |
 | Salvar screenshot | `F12` |
 | Alternar grade | `G` |
@@ -155,7 +160,7 @@ Atalhos:
 | Alternar bounds | `B` |
 | Resetar posicao | `R` |
 
-O corte atual e viewer, nao editor. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado, origem/caixa de projectile, timeline visual e metadata opcional de `frames[].combat`. A camada runtime de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go pelo nome do manifesto. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
+O corte atual e viewer, nao editor. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetoria prevista de projectile, timeline visual e metadata opcional de `frames[].combat`. A camada runtime de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go pelo nome do manifesto e tambem permite alternar personagem/golpe sem reiniciar a ferramenta. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
 
 ## Pontos ainda em aberto
 

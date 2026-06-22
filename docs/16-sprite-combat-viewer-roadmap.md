@@ -125,7 +125,7 @@ Falta:
 
 Objetivo: enxergar boxes reais, nao apenas bounds de sprite.
 
-Status: em andamento. O viewer ja projeta a hurtbox atual do corpo, a hitbox do golpe selecionado e a caixa/origem de projectile usando `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`. Ele tambem desenha metadata opcional `frames[].combat` quando o manifesto declara hurtbox, hitbox ou origem de projectile por frame.
+Status: em andamento. O viewer ja projeta a hurtbox atual do corpo, a hitbox do golpe selecionado e a caixa/origem de projectile usando `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`. Ele tambem desenha metadata opcional `frames[].combat` quando o manifesto declara hurtbox, hitbox ou origem de projectile por frame, permite alternar personagem/golpe sem reiniciar e mostra uma trajetoria prevista simples de projectile.
 
 Entregas planejadas:
 
@@ -158,6 +158,8 @@ Ja existe:
 - projecao testavel em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs);
 - desenho no viewer em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs);
 - timeline inferior com coloracao aproximada por fase de golpe.
+- alternancia runtime de personagem/golpe com `C`/`Shift+C` e `[`/`]`;
+- preview simples de trajetoria de projectile com `T`.
 
 Regra importante: a ferramenta pode sugerir valores, mas nao deve reescrever manifestos automaticamente enquanto o schema nao estiver estabilizado.
 
