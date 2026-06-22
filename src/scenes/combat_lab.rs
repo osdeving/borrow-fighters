@@ -31,15 +31,27 @@ pub enum CombatLabMove {
     LightPunch,
     HeavyPunch,
     Kick,
+    Sweep,
+    Overhead,
+    AntiAir,
+    AirPunch,
+    AirKick,
+    Throw,
     Projectile,
 }
 
 impl CombatLabMove {
     /// Ordered move list used by cycling controls.
-    pub const ALL: [Self; 4] = [
+    pub const ALL: [Self; 10] = [
         Self::LightPunch,
         Self::HeavyPunch,
         Self::Kick,
+        Self::Sweep,
+        Self::Overhead,
+        Self::AntiAir,
+        Self::AirPunch,
+        Self::AirKick,
+        Self::Throw,
         Self::Projectile,
     ];
 
@@ -49,6 +61,12 @@ impl CombatLabMove {
             "light_punch" | "light-punch" | "lp" | "jab" => Some(Self::LightPunch),
             "heavy_punch" | "heavy-punch" | "hp" => Some(Self::HeavyPunch),
             "kick" | "k" => Some(Self::Kick),
+            "sweep" | "sweep_kick" | "sweep-kick" | "low" | "low_kick" => Some(Self::Sweep),
+            "overhead" | "overhead_punch" | "overhead-punch" => Some(Self::Overhead),
+            "anti_air" | "anti-air" | "aa" | "rising_anti_air" => Some(Self::AntiAir),
+            "air_punch" | "air-punch" | "jump_punch" | "jump-punch" => Some(Self::AirPunch),
+            "air_kick" | "air-kick" | "jump_kick" | "jump-kick" => Some(Self::AirKick),
+            "throw" | "grab" | "close_throw" | "close-throw" => Some(Self::Throw),
             "projectile" | "special" | "fireball" => Some(Self::Projectile),
             _ => None,
         }
@@ -60,6 +78,12 @@ impl CombatLabMove {
             Self::LightPunch => "LP",
             Self::HeavyPunch => "HP",
             Self::Kick => "Kick",
+            Self::Sweep => "Sweep",
+            Self::Overhead => "Overhead",
+            Self::AntiAir => "Anti-air",
+            Self::AirPunch => "Air Punch",
+            Self::AirKick => "Air Kick",
+            Self::Throw => "Throw",
             Self::Projectile => "Projectile",
         }
     }
@@ -70,6 +94,12 @@ impl CombatLabMove {
             Self::LightPunch => Some(AttackKind::LightPunch),
             Self::HeavyPunch => Some(AttackKind::HeavyPunch),
             Self::Kick => Some(AttackKind::Kick),
+            Self::Sweep => Some(AttackKind::Sweep),
+            Self::Overhead => Some(AttackKind::Overhead),
+            Self::AntiAir => Some(AttackKind::AntiAir),
+            Self::AirPunch => Some(AttackKind::AirPunch),
+            Self::AirKick => Some(AttackKind::AirKick),
+            Self::Throw => Some(AttackKind::Throw),
             Self::Projectile => None,
         }
     }
@@ -79,6 +109,12 @@ impl CombatLabMove {
             Self::LightPunch => CombatLabAnalysisMove::Close(MoveInputKind::LightPunch),
             Self::HeavyPunch => CombatLabAnalysisMove::Close(MoveInputKind::HeavyPunch),
             Self::Kick => CombatLabAnalysisMove::Close(MoveInputKind::Kick),
+            Self::Sweep => CombatLabAnalysisMove::Close(MoveInputKind::Sweep),
+            Self::Overhead => CombatLabAnalysisMove::Close(MoveInputKind::Overhead),
+            Self::AntiAir => CombatLabAnalysisMove::Close(MoveInputKind::AntiAir),
+            Self::AirPunch => CombatLabAnalysisMove::Close(MoveInputKind::AirPunch),
+            Self::AirKick => CombatLabAnalysisMove::Close(MoveInputKind::AirKick),
+            Self::Throw => CombatLabAnalysisMove::Close(MoveInputKind::Throw),
             Self::Projectile => CombatLabAnalysisMove::Projectile,
         }
     }
@@ -97,8 +133,40 @@ impl CombatLabMove {
                 kick: true,
                 ..FighterInput::default()
             },
+            Self::Sweep => FighterInput {
+                crouch: true,
+                kick: true,
+                ..FighterInput::default()
+            },
+            Self::Overhead => FighterInput {
+                right: true,
+                heavy_punch: true,
+                ..FighterInput::default()
+            },
+            Self::AntiAir => FighterInput {
+                crouch: true,
+                heavy_punch: true,
+                ..FighterInput::default()
+            },
+            Self::AirPunch => FighterInput {
+                light_punch: true,
+                ..FighterInput::default()
+            },
+            Self::AirKick => FighterInput {
+                kick: true,
+                ..FighterInput::default()
+            },
+            Self::Throw => FighterInput {
+                block: true,
+                light_punch: true,
+                ..FighterInput::default()
+            },
             Self::Projectile => FighterInput::default(),
         }
+    }
+
+    const fn starts_airborne(self) -> bool {
+        matches!(self, Self::AirPunch | Self::AirKick)
     }
 }
 
@@ -398,6 +466,9 @@ impl CombatLab {
         self.projectiles.clear();
         self.current_frame = FrameCount::ZERO;
         apply_pose_to_fighter(&mut self.fighter, self.pose);
+        if self.pose.is_move_playback() && self.selected_move.starts_airborne() {
+            apply_airborne_preview_to_fighter(&mut self.fighter);
+        }
     }
 
     fn select_next_move(&mut self) {
@@ -448,8 +519,7 @@ fn apply_pose_to_fighter(fighter: &mut Fighter, pose: CombatLabPose) {
             fighter.crouching = true;
         }
         CombatLabPose::Jump => {
-            fighter.grounded = false;
-            fighter.position.y -= LAB_JUMP_PREVIEW_HEIGHT;
+            apply_airborne_preview_to_fighter(fighter);
         }
         CombatLabPose::Block => {
             fighter.blocking = true;
@@ -458,13 +528,19 @@ fn apply_pose_to_fighter(fighter: &mut Fighter, pose: CombatLabPose) {
     }
 }
 
+fn apply_airborne_preview_to_fighter(fighter: &mut Fighter) {
+    fighter.grounded = false;
+    fighter.position.y -= LAB_JUMP_PREVIEW_HEIGHT;
+}
+
 fn fighter_for(character: CharacterId) -> Fighter {
     let spec = character_spec(character);
-    Fighter::new_with_loadout(
+    Fighter::new_with_projectile_loadout(
         slot_for(character),
         spec.fighter_name,
         spec.stats.max_health,
         spec.move_ids,
+        spec.projectile,
         LAB_FIGHTER_X,
     )
 }
@@ -473,6 +549,7 @@ fn slot_for(character: CharacterId) -> PlayerSlot {
     match character {
         CharacterId::Rust => PlayerSlot::One,
         CharacterId::Duke => PlayerSlot::Two,
+        CharacterId::Go => PlayerSlot::One,
     }
 }
 

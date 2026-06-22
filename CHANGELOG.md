@@ -62,6 +62,12 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Contagem pré-luta central `11`, `10`, `01`, `Fight!`, bloqueando gameplay até a liberação.
 - Vozes CC0 de contagem pré-luta registradas no manifesto de áudio.
 - Direção narrativa inicial com O Linker como força cósmica, Ada Lovelace, Rust, Duke, Assembly, frontenzos e arenas brasileiras de ciência/tecnologia.
+- Primeiro corte de golpes tradicionais: varredura baixa, overhead, anti-air, ataques aéreos e agarrão curto, com testes dedicados em `tests/traditional_moves.rs` e cobertura da CPU em `tests/cpu_traditional_moves.rs`.
+- Primeiro corte de identidade mecânica por dados: Rust com anti-air/throw mais rápidos e menores; Duke com sweep/overhead/throw mais longos, pesados e puníveis; Go como rushdown greybox no Combat Lab e em match via CLI, registrado em `docs/15-character-combat-matrix.md`.
+- Seleção de matchup por CLI para luta normal com `--p1`/`--player-one` e `--p2`/`--player-two`, além de `--fight`/`--skip-menu` para iniciar direto em match real.
+- Seleção mínima de personagens na tela de preferências, ciclando Player 1 e Player 2 entre Rust, Duke e Go.
+- `ProjectileSpec` por personagem: Rust mantém projectile médio, Duke ganha projectile mais pesado/lento e Go ganha burst rápido de curto alcance.
+- `CombatLog` diagnóstico no `World`, registrando round, countdown, ataques, whiffs, hits, projectiles e fim de luta para reproduzir bugs.
 
 ### Em aberto
 

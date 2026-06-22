@@ -4,15 +4,46 @@
 //! each character without resolving attacks, drawing sprites, or owning match
 //! state.
 
-use crate::combat::move_data::MoveId;
+use crate::combat::{
+    move_data::MoveId,
+    projectile::{DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, ProjectileSpec, RUST_PROJECTILE_SPEC},
+};
 
 const RUST_STATS: CharacterStats = CharacterStats { max_health: 100 };
 const DUKE_STATS: CharacterStats = CharacterStats { max_health: 112 };
-const RUST_MOVE_IDS: [MoveId; 3] = [MoveId::RustBorrowJab, MoveId::HeavyPunch, MoveId::Kick];
-const DUKE_MOVE_IDS: [MoveId; 3] = [
+const GO_STATS: CharacterStats = CharacterStats { max_health: 92 };
+const RUST_MOVE_IDS: [MoveId; 9] = [
+    MoveId::RustBorrowJab,
+    MoveId::HeavyPunch,
+    MoveId::Kick,
+    MoveId::SweepKick,
+    MoveId::OverheadPunch,
+    MoveId::RustLifetimeAntiAir,
+    MoveId::AirPunch,
+    MoveId::AirKick,
+    MoveId::RustOwnershipThrow,
+];
+const DUKE_MOVE_IDS: [MoveId; 9] = [
     MoveId::LightPunch,
     MoveId::DukeBoilerplatePoke,
     MoveId::Kick,
+    MoveId::DukeGarbageCollectorSweep,
+    MoveId::DukeAbstractFactoryOverhead,
+    MoveId::RisingAntiAir,
+    MoveId::AirPunch,
+    MoveId::AirKick,
+    MoveId::DukeEnterpriseThrow,
+];
+const GO_MOVE_IDS: [MoveId; 9] = [
+    MoveId::GoGoroutineJab,
+    MoveId::HeavyPunch,
+    MoveId::GoDeferKick,
+    MoveId::SweepKick,
+    MoveId::GoChannelOverhead,
+    MoveId::RisingAntiAir,
+    MoveId::AirPunch,
+    MoveId::GoHopkick,
+    MoveId::CloseThrow,
 ];
 
 /// Stable identifier for playable or testable characters.
@@ -21,14 +52,34 @@ pub enum CharacterId {
     #[default]
     Rust,
     Duke,
+    Go,
 }
 
 impl CharacterId {
+    /// Returns the next prototype roster character.
+    pub const fn next(self) -> Self {
+        match self {
+            Self::Rust => Self::Duke,
+            Self::Duke => Self::Go,
+            Self::Go => Self::Rust,
+        }
+    }
+
+    /// Returns the previous prototype roster character.
+    pub const fn previous(self) -> Self {
+        match self {
+            Self::Rust => Self::Go,
+            Self::Duke => Self::Rust,
+            Self::Go => Self::Duke,
+        }
+    }
+
     /// Parses a CLI character name.
     pub fn from_cli(value: &str) -> Option<Self> {
         match value {
             "rust" | "rustacean" => Some(Self::Rust),
             "duke" | "java" => Some(Self::Duke),
+            "go" | "golang" | "gopher" => Some(Self::Go),
             _ => None,
         }
     }
@@ -38,6 +89,7 @@ impl CharacterId {
         match self {
             Self::Rust => "rust",
             Self::Duke => "duke",
+            Self::Go => "go",
         }
     }
 
@@ -46,6 +98,7 @@ impl CharacterId {
         match value {
             "rust" => Some(Self::Rust),
             "duke" | "java" => Some(Self::Duke),
+            "go" | "golang" | "gopher" => Some(Self::Go),
             _ => None,
         }
     }
@@ -56,6 +109,7 @@ impl CharacterId {
 pub enum CharacterArchetype {
     AllRounder,
     MidrangePressure,
+    Rushdown,
 }
 
 /// Tunable character-level stats consumed by match setup.
@@ -73,6 +127,7 @@ pub struct CharacterSpec {
     pub archetype: CharacterArchetype,
     pub stats: CharacterStats,
     pub move_ids: &'static [MoveId],
+    pub projectile: ProjectileSpec,
 }
 
 /// Returns the static character spec for the requested character.
@@ -85,6 +140,7 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             archetype: CharacterArchetype::AllRounder,
             stats: RUST_STATS,
             move_ids: &RUST_MOVE_IDS,
+            projectile: RUST_PROJECTILE_SPEC,
         },
         CharacterId::Duke => CharacterSpec {
             id,
@@ -93,6 +149,16 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             archetype: CharacterArchetype::MidrangePressure,
             stats: DUKE_STATS,
             move_ids: &DUKE_MOVE_IDS,
+            projectile: DUKE_PROJECTILE_SPEC,
+        },
+        CharacterId::Go => CharacterSpec {
+            id,
+            display_name: "Go",
+            fighter_name: "Go",
+            archetype: CharacterArchetype::Rushdown,
+            stats: GO_STATS,
+            move_ids: &GO_MOVE_IDS,
+            projectile: GO_PROJECTILE_SPEC,
         },
     }
 }

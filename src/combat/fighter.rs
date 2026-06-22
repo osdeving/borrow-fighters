@@ -10,12 +10,13 @@ use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y};
 use crate::math::{rect::Rect, vec2::Vec2};
 
 use super::frame::FrameCount;
-use super::projectile::{PROJECTILE_FRAME_DATA, ProjectileFrameData};
+use super::projectile::{PROJECTILE_SPEC, ProjectileFrameData, ProjectileSpec};
 pub use crate::combat::move_set::{
-    ActiveAttack, AttackFrameData, AttackKind, DEFAULT_CLOSE_RANGE_MOVE_IDS,
-    DUKE_BOILERPLATE_POKE_DAMAGE, GuardRule, HEAVY_PUNCH_DAMAGE, HitReaction, KICK_DAMAGE,
-    LIGHT_PUNCH_DAMAGE, MoveId, MoveInputKind, MoveSpec, RUST_BORROW_JAB_DAMAGE,
-    move_spec_for_input,
+    AIR_KICK_DAMAGE, AIR_PUNCH_DAMAGE, ActiveAttack, AttackFrameData, AttackKind,
+    CLOSE_THROW_DAMAGE, DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_BOILERPLATE_POKE_DAMAGE, GuardRule,
+    HEAVY_PUNCH_DAMAGE, HitReaction, KICK_DAMAGE, LIGHT_PUNCH_DAMAGE, MoveId, MoveInputKind,
+    MoveSpec, OVERHEAD_PUNCH_DAMAGE, RISING_ANTI_AIR_DAMAGE, RUST_BORROW_JAB_DAMAGE,
+    SWEEP_KICK_DAMAGE, move_spec_for_input,
 };
 
 const WIDTH: f32 = 76.0;
@@ -107,6 +108,7 @@ pub struct Fighter {
     pub health: i32,
     pub max_health: i32,
     move_ids: &'static [MoveId],
+    projectile_spec: ProjectileSpec,
     pub facing: Facing,
     pub grounded: bool,
     pub crouching: bool,
@@ -150,6 +152,18 @@ impl Fighter {
         move_ids: &'static [MoveId],
         x: f32,
     ) -> Self {
+        Self::new_with_projectile_loadout(slot, name, max_health, move_ids, PROJECTILE_SPEC, x)
+    }
+
+    /// Creates a fighter with character-provided close moves and projectile data.
+    pub fn new_with_projectile_loadout(
+        slot: PlayerSlot,
+        name: &'static str,
+        max_health: i32,
+        move_ids: &'static [MoveId],
+        projectile_spec: ProjectileSpec,
+        x: f32,
+    ) -> Self {
         let max_health = max_health.max(1);
         Self {
             slot,
@@ -159,6 +173,7 @@ impl Fighter {
             health: max_health,
             max_health,
             move_ids,
+            projectile_spec,
             facing: Facing::Right,
             grounded: true,
             crouching: false,
@@ -193,20 +208,25 @@ impl Fighter {
         self.whiff_recovery_timer = tick_timer(self.whiff_recovery_timer, dt);
 
         let action_locked = self.is_action_locked();
+        let requested_move = input.requested_move_spec(self.move_ids, self.facing, self.grounded);
+        let wants_attack = requested_move.is_some();
         self.crouching = !action_locked && input.crouch && self.grounded && self.attack.is_none();
         self.blocking = self.in_blockstun()
-            || (!action_locked && input.block && self.grounded && self.attack.is_none());
+            || (!action_locked
+                && input.block
+                && self.grounded
+                && self.attack.is_none()
+                && !wants_attack);
         self.update_horizontal_velocity(dt, input);
 
-        let can_start_action = !action_locked && !self.crouching && !self.blocking;
-        if input.jump && self.grounded && can_start_action {
+        let can_start_action = !action_locked && !self.blocking && self.attack.is_none();
+        if input.jump && self.grounded && can_start_action && !self.crouching && !wants_attack {
             self.velocity.y = JUMP_SPEED;
             self.grounded = false;
             self.apply_diagonal_jump_boost(input);
         }
 
-        if let Some(spec) = input.requested_move_spec(self.move_ids)
-            && self.attack.is_none()
+        if let Some(spec) = requested_move
             && can_start_action
         {
             events.close_attack_started = Some(spec.id);
@@ -305,8 +325,9 @@ impl Fighter {
 
     /// Starts the projectile cooldown after firing.
     pub fn mark_projectile_fired(&mut self) {
-        self.projectile_cooldown = PROJECTILE_FRAME_DATA.cooldown.as_seconds();
-        self.special_visual_timer = PROJECTILE_FRAME_DATA.visual_duration.as_seconds();
+        let frame_data = self.projectile_spec.frame_data;
+        self.projectile_cooldown = frame_data.cooldown.as_seconds();
+        self.special_visual_timer = frame_data.visual_duration.as_seconds();
     }
 
     /// Returns whether this fighter can currently deal a new close hit.
@@ -406,6 +427,11 @@ impl Fighter {
         self.move_ids
     }
 
+    /// Returns projectile tuning available to this fighter.
+    pub const fn projectile_spec(&self) -> ProjectileSpec {
+        self.projectile_spec
+    }
+
     /// Returns elapsed seconds for the current close attack animation.
     pub fn attack_elapsed_seconds(&self) -> Option<f32> {
         self.attack.map(|attack| attack.elapsed)
@@ -424,7 +450,8 @@ impl Fighter {
     /// Returns elapsed seconds for the current special animation.
     pub fn special_elapsed_seconds(&self) -> Option<f32> {
         (self.special_visual_timer > 0.0).then_some(
-            PROJECTILE_FRAME_DATA.visual_duration.as_seconds() - self.special_visual_timer,
+            self.projectile_spec.frame_data.visual_duration.as_seconds()
+                - self.special_visual_timer,
         )
     }
 
@@ -436,7 +463,7 @@ impl Fighter {
 
     /// Returns whole-frame data for the projectile special.
     pub fn projectile_frame_data(&self) -> ProjectileFrameData {
-        PROJECTILE_FRAME_DATA
+        self.projectile_spec.frame_data
     }
 
     /// Returns remaining cooldown for the projectile special in whole frames.
@@ -591,7 +618,7 @@ impl Fighter {
 
 impl AttackState {
     fn kind(self) -> AttackKind {
-        AttackKind::from_input_kind(self.spec.input)
+        AttackKind::from_move_id(self.spec.id)
     }
 
     fn elapsed_frames(self) -> FrameCount {
@@ -629,8 +656,36 @@ impl FighterInput {
         }
     }
 
-    fn requested_move_spec(self, move_ids: &[MoveId]) -> Option<MoveSpec> {
-        let input = if self.heavy_punch {
+    fn requested_move_spec(
+        self,
+        move_ids: &[MoveId],
+        facing: Facing,
+        grounded: bool,
+    ) -> Option<MoveSpec> {
+        let input = self.requested_move_kind(facing, grounded)?;
+        move_spec_for_input(move_ids, input)
+    }
+
+    fn requested_move_kind(self, facing: Facing, grounded: bool) -> Option<MoveInputKind> {
+        if !grounded {
+            return if self.kick {
+                Some(MoveInputKind::AirKick)
+            } else if self.light_punch || self.heavy_punch {
+                Some(MoveInputKind::AirPunch)
+            } else {
+                None
+            };
+        }
+
+        let input = if self.block && self.light_punch {
+            MoveInputKind::Throw
+        } else if self.crouch && self.kick {
+            MoveInputKind::Sweep
+        } else if self.crouch && self.heavy_punch {
+            MoveInputKind::AntiAir
+        } else if self.heavy_punch && self.is_forward(facing) {
+            MoveInputKind::Overhead
+        } else if self.heavy_punch {
             MoveInputKind::HeavyPunch
         } else if self.kick {
             MoveInputKind::Kick
@@ -640,7 +695,7 @@ impl FighterInput {
             return None;
         };
 
-        move_spec_for_input(move_ids, input)
+        Some(input)
     }
 
     fn horizontal_axis(self) -> f32 {
@@ -648,6 +703,13 @@ impl FighterInput {
             (true, false) => -1.0,
             (false, true) => 1.0,
             _ => 0.0,
+        }
+    }
+
+    fn is_forward(self, facing: Facing) -> bool {
+        match facing {
+            Facing::Right => self.right && !self.left,
+            Facing::Left => self.left && !self.right,
         }
     }
 }

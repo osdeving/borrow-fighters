@@ -4,7 +4,7 @@
 
 Em implementação.
 
-Fases 1, 2 e 3 concluídas em corte mínimo na branch `gameplay/combat-improvement-plan`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, Rust/Duke possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima e loadout, o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`, e Rust/Duke já têm o primeiro corte de golpes próximos específicos por personagem.
+Fases 1 a 4 concluídas em corte mínimo. A Fase 5 tem o primeiro corte de identidade por dados: Rust ganhou anti-air/throw mais rápidos e menores; Duke ganhou sweep/overhead/throw mais longos, pesados e puníveis; Go entrou como rushdown greybox testável no Combat Lab, no menu de preferências e em match real via `--fight --p1`/`--p2`. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, especiais usam `ProjectileSpec` por personagem, personagens possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima, loadout e projectile, e o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -168,7 +168,7 @@ Golpes candidatos:
 
 ### Go — rushdown de concorrência
 
-Função: personagem futuro de velocidade e pressão.
+Função: personagem de velocidade e pressão, ainda em greybox de dados e sem arte própria.
 
 Plano de jogo:
 
@@ -185,9 +185,12 @@ Fraquezas:
 
 Golpes candidatos:
 
-- `goroutine_dash`: avanço rápido com risco se bloqueado.
+- `goroutine_jab`: checagem muito rápida e curta. **Implementado em corte inicial** como soco fraco de baixo dano.
+- `defer_kick`: chute mais rápido que o genérico, com alcance reduzido. **Implementado em corte inicial**.
+- `channel_overhead`: overhead menos pesado que o de Duke, feito para manter ritmo. **Implementado em corte inicial**.
+- `hopkick`: ataque aéreo de pressão curta. **Implementado em corte inicial**.
+- `goroutine_dash`: avanço rápido com risco se bloqueado, futuro.
 - `channel_cross`: troca de lado futura, só depois do laboratório existir.
-- `defer_kick`: golpe atrasado que quebra ritmo, mas perde para jab no startup.
 
 ### Assembly — boss não-jogável
 
@@ -225,8 +228,10 @@ Objetivo:
 Entrada proposta:
 
 ```bash
+cargo run -- --fight --p1 go --p2 duke
 cargo run -- --lab combat --character rust
 cargo run -- --lab combat --character duke --move heavy_punch
+cargo run -- --lab combat --character go --move kick
 ```
 
 Atalhos propostos:
@@ -279,7 +284,7 @@ src/characters/
 ├── mod.rs            # CharacterSpec mínimo e registro público de personagens
 ├── rust.rs           # Dados iniciais do Rust
 ├── duke.rs           # Dados iniciais do Duke
-└── go.rs             # Protótipo futuro de rushdown
+└── go.rs             # Dados do Go quando o registro for dividido
 
 src/scenes/
 └── combat_lab.rs     # Cena direta de laboratório de golpes
@@ -374,7 +379,7 @@ Status: **concluída em corte mínimo, com primeiro tuning específico por perso
 Entregáveis:
 
 - [x] mover dados hard-coded de `AttackKind::spec` para `MoveSpec`;
-- [x] criar `CharacterSpec` para Rust e Duke;
+- [x] criar `CharacterSpec` para Rust, Duke e Go;
 - [x] fazer `World`, `Combat Lab` e `Fighter` consumirem nome, vida máxima e loadout vindos de `CharacterSpec`;
 - [x] manter comportamento atual com dados novos;
 - [x] testes garantindo que dados antigos continuam equivalentes.
@@ -384,7 +389,7 @@ Critério de aceite:
 
 - adicionar um golpe novo não exige alterar `Fighter` profundamente.
 - `AttackKind` permanece como camada de compatibilidade runtime para sprites, debug e seleção de ataque.
-- Rust possui `RustBorrowJab` como soco fraco rápido/curto; Duke possui `DukeBoilerplatePoke` como soco forte longo/lento.
+- Rust possui `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` como ferramentas rápidas/curtas; Duke possui `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` como ferramentas longas/pesadas e mais puníveis.
 - A parte mínima está aceita; a próxima evolução é refinar defesa, hitstun/blockstun e contra-jogo.
 
 ### Fase 4 — Defesa e contra-jogo
@@ -404,7 +409,7 @@ Critério de aceite:
 
 - cada golpe forte tem pelo menos uma resposta documentada.
 - o corte atual impede ação durante hitstun/blockstun, aplica pushback, mostra vantagem estimada no Combat Lab e aplica whiff recovery quando golpe próximo erra.
-- `Low` e `Throw` ficam como linguagem de dados reservada; golpes baixos e throws jogáveis devem nascer na Fase 5 ou depois, ligados à identidade dos personagens.
+- `Low`, `High`/overhead, `Throw`, anti-air e ataques aéreos já têm primeiro corte jogável, ainda sem identidade exclusiva por personagem.
 
 Respostas mínimas documentadas:
 
@@ -412,30 +417,46 @@ Respostas mínimas documentadas:
 |---|---|---|
 | `HeavyPunch` genérico | startup 11f, recovery após contato, whiff recovery 10f | andar fora do alcance, bloquear e observar vantagem, pular antes do contato, punir whiff |
 | `Kick` | alcance baixo/médio, active limitado, whiff recovery 8f | defender mid no corte atual, recuar, pular, punir se errar |
+| `SweepKick` | acerta baixo, recovery claro, perde para salto/spacing | defender abaixado, pular, ficar fora do alcance, punir whiff |
+| `OverheadPunch` | vence defesa abaixada, startup/recovery maiores | defender em pé, interromper startup, andar fora, punir se errar |
+| `RisingAntiAir` | cobre alto/frente, pode errar no chão se mal espaçado | baitar e punir recovery, bloquear, atacar por baixo no timing certo |
+| `AirPunch` / `AirKick` | só inicia no ar, trajetória compromete posição | anti-air, andar para fora, defender em pé |
+| `CloseThrow` | ignora defesa, alcance muito curto, whiff recovery alto | sair do alcance, pular, jab antes do active |
 | `DukeBoilerplatePoke` | alcance e dano altos, startup 13f, whiff recovery 12f | ficar fora do alcance, interromper startup com jab rápido, bloquear e recuperar espaço com pushback, punir whiff |
 | Projectile | cooldown 57f e trajetória horizontal | bloquear chip reduzido, pular, aproximar durante cooldown, usar spacing para forçar erro |
 
 ### Fase 5 — Identidade dos personagens
 
+Status: **concluída em corte mínimo de dados; aguardando playtest e arte própria**.
+
 Entregáveis:
 
-- Rust all-rounder técnico;
-- Duke midrange/pressure;
-- um protótipo greybox de Go rushdown;
-- matriz de matchups de intenção, sem buscar balanceamento final.
+- [x] Rust all-rounder técnico em dados: `RustBorrowJab`, `RustLifetimeAntiAir`, `RustOwnershipThrow`;
+- [x] Duke midrange/pressure em dados: `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead`, `DukeEnterpriseThrow`;
+- [x] Go rushdown em dados: `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead`, `GoHopkick`;
+- [x] especiais de projectile por personagem via `ProjectileSpec`, com Rust balanceado, Duke mais pesado/lento e Go em burst curto;
+- [x] matriz de intenção mecânica em [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md);
+- [x] matriz de matchups de intenção, sem buscar balanceamento final.
 
 Critério de aceite:
 
 - cada personagem vence de uma forma diferente no playtest.
+- Rust deve ganhar por resposta limpa e decisão correta, não por alcance bruto.
+- Duke deve controlar espaço com risco real quando erra.
+- Go deve pressionar com velocidade, mas sofrer por alcance e vida menores.
 
 ### Fase 6 — Proteções contra degeneração
+
+Status: **iniciada em corte mínimo**.
 
 Entregáveis:
 
 - testes para impedir loop infinito simples;
 - limite de hitstun/cancel se necessário;
 - cooldown e recovery para projectiles;
-- log de eventos de combate para reproduzir bugs.
+- [x] log de eventos de combate para reproduzir bugs.
+
+O primeiro corte adicionou [`src/game/combat_log.rs`](../src/game/combat_log.rs), exposto por `World::combat_log`, registrando round, countdown, ataques, whiffs, hits/blocks, projectiles e fim de luta.
 
 Critério de aceite:
 
@@ -444,15 +465,15 @@ Critério de aceite:
 ## Backlog técnico imediato
 
 1. Usar a leitura de vantagem do Combat Lab para ajustar golpes seguros, puníveis e spacing.
-2. Começar a Fase 5 com matriz de identidade mecânica para Rust, Duke e Go.
-3. Decidir se `Low`, `Throw` ou outra propriedade entra como assinatura de algum personagem.
+2. Playtestar a matriz Rust x Duke x Go e ajustar valores com base no Combat Lab.
+3. Playtestar se a seleção mínima no menu basta ou se precisa de tela dedicada de personagem.
 4. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
 5. Só depois ampliar para novos golpes especiais.
 
 ## Decisões pendentes
 
-- Qual personagem, se algum, justifica primeiro golpe `Low` jogável?
-- Throws entram como assinatura de personagem ou como sistema universal?
+- Sweep, overhead, anti-air, ataques aéreos e throw continuam universais ou serão diferenciados por personagem?
+- Throws terão throw tech, prioridade própria ou outra resposta defensiva?
 - Projectile deve colidir com projectile?
 - Haverá recurso/meter ou cooldown continua sendo o único custo?
 - Combat Lab entra por CLI flag, tela de preferência ou ambos?

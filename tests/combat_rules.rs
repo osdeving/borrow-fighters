@@ -8,9 +8,11 @@ use borrow_fighters::combat::fighter::{
 };
 use borrow_fighters::combat::move_data::{LIGHT_ATTACK_REACTION, MoveId, move_spec};
 use borrow_fighters::combat::projectile::{
-    PROJECTILE_DAMAGE, PROJECTILE_GUARD_RULE, PROJECTILE_HIT_REACTION, PROJECTILE_SPEED,
+    DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, PROJECTILE_DAMAGE, PROJECTILE_GUARD_RULE,
+    PROJECTILE_HIT_REACTION, PROJECTILE_SPEED,
 };
 use borrow_fighters::game::ai::BasicCpu;
+use borrow_fighters::game::combat_log::CombatLogKind;
 use borrow_fighters::game::feature_flags::{FeatureFlag, FeatureFlags};
 use borrow_fighters::game::world::{
     MIN_BODY_GAP, MatchOutcome, ROUND_COUNTDOWN_STEP_SECONDS, ROUND_COUNTDOWN_TOTAL_SECONDS,
@@ -146,6 +148,90 @@ fn close_attack_queues_audio_events_for_start_and_hit() {
     assert!(events.iter().any(|event| event.cue == AudioCue::CombatHit));
     assert!(events.iter().any(|event| {
         event.cue == AudioCue::FighterHurt && event.character == Some(CharacterId::Duke)
+    }));
+}
+
+#[test]
+fn combat_log_records_round_close_attack_hit_and_whiff() {
+    let mut world = World::new_greybox();
+    assert!(world.combat_log().iter().any(|event| {
+        matches!(
+            event.kind,
+            CombatLogKind::RoundStarted {
+                player_one: CharacterId::Rust,
+                player_two: CharacterId::Duke
+            }
+        )
+    }));
+
+    world.clear_combat_log();
+    world.player_one.position.x = 420.0;
+    world.player_two.position.x = 470.0;
+    world.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    assert!(world.combat_log().iter().any(|event| {
+        matches!(
+            event.kind,
+            CombatLogKind::CloseAttackStarted {
+                slot: PlayerSlot::One,
+                character: CharacterId::Rust,
+                move_id: MoveId::RustBorrowJab
+            }
+        )
+    }));
+
+    for _ in 0..20 {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    assert!(world.combat_log().iter().any(|event| {
+        matches!(
+            event.kind,
+            CombatLogKind::CloseAttackResolved {
+                attacker: PlayerSlot::One,
+                defender: PlayerSlot::Two,
+                attacker_character: CharacterId::Rust,
+                defender_character: CharacterId::Duke,
+                move_id: MoveId::RustBorrowJab,
+                damage: RUST_BORROW_JAB_DAMAGE,
+                blocked: false,
+            }
+        )
+    }));
+
+    let mut whiff_world = World::new_greybox();
+    whiff_world.clear_combat_log();
+    whiff_world.player_one.position.x = 300.0;
+    whiff_world.player_two.position.x = 760.0;
+    whiff_world.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    for _ in 0..30 {
+        whiff_world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    assert!(whiff_world.combat_log().iter().any(|event| {
+        matches!(
+            event.kind,
+            CombatLogKind::CloseAttackWhiffed {
+                slot: PlayerSlot::One,
+                character: CharacterId::Rust,
+                move_id: MoveId::RustBorrowJab
+            }
+        )
     }));
 }
 
@@ -553,6 +639,23 @@ fn greybox_world_can_swap_character_specs_between_slots() {
 }
 
 #[test]
+fn greybox_intro_world_can_use_explicit_match_characters() {
+    let world = World::new_greybox_with_intro_for_characters(CharacterId::Go, CharacterId::Duke);
+
+    assert_eq!(world.player_one_character(), CharacterId::Go);
+    assert_eq!(world.player_two_character(), CharacterId::Duke);
+    assert_eq!(
+        world.player_one.name,
+        character_spec(CharacterId::Go).fighter_name
+    );
+    assert_eq!(
+        world.player_one.max_health,
+        character_spec(CharacterId::Go).stats.max_health
+    );
+    assert!(world.spawn_intro_active());
+}
+
+#[test]
 fn fighter_loadout_blocks_unlisted_close_moves() {
     let mut fighter =
         Fighter::new_with_loadout(PlayerSlot::One, "Test", 100, &KICK_ONLY_MOVES, 300.0);
@@ -675,6 +778,15 @@ fn match_ends_when_health_reaches_zero() {
         world.outcome,
         Some(MatchOutcome::Winner(world.player_one.slot))
     );
+    assert!(world.combat_log().iter().any(|event| {
+        matches!(
+            event.kind,
+            CombatLogKind::MatchEnded {
+                winner: Some(PlayerSlot::One),
+                winner_character: Some(CharacterId::Rust)
+            }
+        )
+    }));
 }
 
 #[test]
@@ -852,6 +964,99 @@ fn projectile_deals_damage_and_disappears() {
         player_two_health - PROJECTILE_DAMAGE
     );
     assert!(world.projectiles.is_empty());
+}
+
+#[test]
+fn combat_log_records_projectile_spawn_and_hit() {
+    let mut world = World::new_greybox();
+    world.clear_combat_log();
+    world.player_one.position.x = 300.0;
+    world.player_two.position.x = 560.0;
+
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    assert!(world.combat_log().iter().any(|event| {
+        matches!(
+            event.kind,
+            CombatLogKind::ProjectileSpawned {
+                slot: PlayerSlot::One,
+                character: CharacterId::Rust,
+                damage: PROJECTILE_DAMAGE
+            }
+        )
+    }));
+
+    for _ in 0..45 {
+        world.update(DT, FighterInput::default(), FighterInput::default());
+    }
+
+    assert!(world.combat_log().iter().any(|event| {
+        matches!(
+            event.kind,
+            CombatLogKind::ProjectileResolved {
+                attacker: PlayerSlot::One,
+                defender: PlayerSlot::Two,
+                attacker_character: CharacterId::Rust,
+                defender_character: CharacterId::Duke,
+                damage: PROJECTILE_DAMAGE,
+                blocked: false,
+            }
+        )
+    }));
+}
+
+#[test]
+fn match_projectiles_use_character_specific_specs() {
+    let mut world = World::new_with_characters(CharacterId::Go, CharacterId::Duke);
+
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+        FighterInput::default(),
+    );
+
+    assert_eq!(world.projectiles.len(), 1);
+    assert_eq!(world.projectiles[0].damage, GO_PROJECTILE_SPEC.damage);
+    assert_eq!(world.projectiles[0].rect().width, GO_PROJECTILE_SPEC.width);
+    assert_eq!(
+        world.projectiles[0].velocity.x.abs(),
+        GO_PROJECTILE_SPEC.speed
+    );
+    assert_eq!(
+        world.player_one.projectile_cooldown_remaining_frames(),
+        GO_PROJECTILE_SPEC.frame_data.cooldown
+    );
+
+    let mut world = World::new_with_characters(CharacterId::Go, CharacterId::Duke);
+    world.update(
+        DT,
+        FighterInput::default(),
+        FighterInput {
+            projectile: true,
+            ..FighterInput::default()
+        },
+    );
+
+    assert_eq!(world.projectiles.len(), 1);
+    assert_eq!(world.projectiles[0].damage, DUKE_PROJECTILE_SPEC.damage);
+    assert_eq!(
+        world.projectiles[0].velocity.x.abs(),
+        DUKE_PROJECTILE_SPEC.speed
+    );
+    assert_eq!(
+        world.player_two.projectile_cooldown_remaining_frames(),
+        DUKE_PROJECTILE_SPEC.frame_data.cooldown
+    );
 }
 
 #[test]

@@ -132,6 +132,10 @@ fn keyboard_preferences(raylib: &RaylibHandle) -> PreferencesInput {
         up: raylib.is_key_pressed(KeyboardKey::KEY_UP) || raylib.is_key_pressed(KeyboardKey::KEY_W),
         down: raylib.is_key_pressed(KeyboardKey::KEY_DOWN)
             || raylib.is_key_pressed(KeyboardKey::KEY_S),
+        left: raylib.is_key_pressed(KeyboardKey::KEY_LEFT)
+            || raylib.is_key_pressed(KeyboardKey::KEY_A),
+        right: raylib.is_key_pressed(KeyboardKey::KEY_RIGHT)
+            || raylib.is_key_pressed(KeyboardKey::KEY_D),
         activate: raylib.is_key_pressed(KeyboardKey::KEY_SPACE)
             || raylib.is_key_pressed(KeyboardKey::KEY_ENTER),
         start: raylib.is_key_pressed(KeyboardKey::KEY_ENTER),
@@ -144,6 +148,10 @@ fn gamepad_preferences(raylib: &RaylibHandle) -> PreferencesInput {
             || gamepad::menu_up_pressed(raylib, gamepad::PLAYER_TWO_GAMEPAD),
         down: gamepad::menu_down_pressed(raylib, gamepad::PLAYER_ONE_GAMEPAD)
             || gamepad::menu_down_pressed(raylib, gamepad::PLAYER_TWO_GAMEPAD),
+        left: gamepad::menu_left_pressed(raylib, gamepad::PLAYER_ONE_GAMEPAD)
+            || gamepad::menu_left_pressed(raylib, gamepad::PLAYER_TWO_GAMEPAD),
+        right: gamepad::menu_right_pressed(raylib, gamepad::PLAYER_ONE_GAMEPAD)
+            || gamepad::menu_right_pressed(raylib, gamepad::PLAYER_TWO_GAMEPAD),
         activate: gamepad::menu_activate_pressed(raylib, gamepad::PLAYER_ONE_GAMEPAD)
             || gamepad::menu_activate_pressed(raylib, gamepad::PLAYER_TWO_GAMEPAD),
         start: gamepad::menu_start_pressed(raylib, gamepad::PLAYER_ONE_GAMEPAD)
@@ -169,6 +177,8 @@ fn merge_preferences_input(first: PreferencesInput, second: PreferencesInput) ->
     PreferencesInput {
         up: first.up || second.up,
         down: first.down || second.down,
+        left: first.left || second.left,
+        right: first.right || second.right,
         activate: first.activate || second.activate,
         start: first.start || second.start,
     }

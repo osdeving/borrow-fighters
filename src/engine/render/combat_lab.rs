@@ -17,8 +17,8 @@ use crate::scenes::combat_lab::{CombatLab, CombatLabPose};
 use crate::ui::combat_debug;
 
 use super::{
-    BACKGROUND, FighterDrawOptions, PLAYER_ONE, PLAYER_TWO, PROJECTILE, PROJECTILE_FILL, UI_MUTED,
-    draw_arena, draw_fighter, outline_rect,
+    BACKGROUND, FighterDrawOptions, PLAYER_GO, PLAYER_ONE, PLAYER_TWO, PROJECTILE, PROJECTILE_FILL,
+    UI_MUTED, draw_arena, draw_fighter, outline_rect,
 };
 
 /// Draws the isolated Combat Lab scene.
@@ -42,6 +42,7 @@ pub fn draw_combat_lab(draw: &mut RaylibDrawHandle<'_>, lab: &CombatLab, assets:
             assets.duke_fighter.as_ref(),
             assets.duke_projectile.as_ref(),
         ),
+        CharacterId::Go => (PLAYER_GO, None, None),
     };
 
     draw_fighter(

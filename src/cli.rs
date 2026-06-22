@@ -23,6 +23,24 @@ pub enum LaunchMode {
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct LaunchOptions {
     pub mode: LaunchMode,
+    pub match_options: MatchOptions,
+    pub start_fight: bool,
+}
+
+/// Match setup selected before the app creates the first world.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct MatchOptions {
+    pub player_one: CharacterId,
+    pub player_two: CharacterId,
+}
+
+impl Default for MatchOptions {
+    fn default() -> Self {
+        Self {
+            player_one: CharacterId::Rust,
+            player_two: CharacterId::Duke,
+        }
+    }
 }
 
 /// Error returned for unsupported command-line arguments.
@@ -38,9 +56,14 @@ impl LaunchOptions {
         let _program = args.next();
         let mut mode = LaunchMode::Game;
         let mut lab = CombatLabOptions::default();
+        let mut match_options = MatchOptions::default();
+        let mut start_fight = false;
 
         while let Some(arg) = args.next() {
             match arg.as_str() {
+                "--fight" | "--skip-menu" => {
+                    start_fight = true;
+                }
                 "--lab" => {
                     let Some(kind) = args.next() else {
                         return Err(CliError::new("--lab requires a value"));
@@ -59,6 +82,22 @@ impl LaunchOptions {
                     if matches!(mode, LaunchMode::CombatLab(_)) {
                         mode = LaunchMode::CombatLab(lab);
                     }
+                }
+                "--p1" | "--player-one" => {
+                    let Some(value) = args.next() else {
+                        return Err(CliError::new("--p1 requires a value"));
+                    };
+                    match_options.player_one = CharacterId::from_cli(&value).ok_or_else(|| {
+                        CliError::new(format!("unknown player one character '{value}'"))
+                    })?;
+                }
+                "--p2" | "--player-two" => {
+                    let Some(value) = args.next() else {
+                        return Err(CliError::new("--p2 requires a value"));
+                    };
+                    match_options.player_two = CharacterId::from_cli(&value).ok_or_else(|| {
+                        CliError::new(format!("unknown player two character '{value}'"))
+                    })?;
                 }
                 "--move" => {
                     let Some(value) = args.next() else {
@@ -87,7 +126,11 @@ impl LaunchOptions {
             }
         }
 
-        Ok(Self { mode })
+        Ok(Self {
+            mode,
+            match_options,
+            start_fight,
+        })
     }
 }
 
@@ -112,5 +155,5 @@ impl Display for CliError {
 impl std::error::Error for CliError {}
 
 fn usage() -> &'static str {
-    "Usage:\n  cargo run\n  cargo run -- --lab combat --character rust --move light_punch\n  cargo run -- --lab combat --character duke --pose block"
+    "Usage:\n  cargo run\n  cargo run -- --fight --p1 go --p2 duke\n  cargo run -- --lab combat --character rust --move light_punch\n  cargo run -- --lab combat --character duke --pose block\n  cargo run -- --lab combat --character go --move kick"
 }

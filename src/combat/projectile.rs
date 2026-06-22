@@ -11,19 +11,31 @@ use crate::math::{rect::Rect, vec2::Vec2};
 
 use super::frame::FrameCount;
 
-const WIDTH: f32 = 44.0;
-const HEIGHT: f32 = 30.0;
-const FRONT_SPAWN_OFFSET: f32 = 66.0;
-const CENTER_Y_FROM_BODY_BOTTOM: f32 = 88.0;
-pub const PROJECTILE_SPEED: f32 = 340.0;
-pub const PROJECTILE_DAMAGE: i32 = 8;
-pub const PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
+pub const PROJECTILE_SPEED: f32 = RUST_PROJECTILE_SPEC.speed;
+pub const PROJECTILE_DAMAGE: i32 = RUST_PROJECTILE_SPEC.damage;
+pub const PROJECTILE_HIT_REACTION: HitReaction = RUST_PROJECTILE_SPEC.hit_reaction;
+pub const PROJECTILE_GUARD_RULE: GuardRule = RUST_PROJECTILE_SPEC.guard_rule;
+pub const PROJECTILE_FRAME_DATA: ProjectileFrameData = RUST_PROJECTILE_SPEC.frame_data;
+pub const PROJECTILE_SPEC: ProjectileSpec = RUST_PROJECTILE_SPEC;
+
+const RUST_PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(16),
     blockstun: FrameCount::new(12),
     hit_pushback: 30.0,
     block_pushback: 24.0,
 };
-pub const PROJECTILE_GUARD_RULE: GuardRule = GuardRule::Projectile;
+const DUKE_PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(18),
+    blockstun: FrameCount::new(14),
+    hit_pushback: 38.0,
+    block_pushback: 30.0,
+};
+const GO_PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(12),
+    blockstun: FrameCount::new(8),
+    hit_pushback: 18.0,
+    block_pushback: 14.0,
+};
 
 /// Whole-frame timing data for the current projectile special.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -34,16 +46,80 @@ pub struct ProjectileFrameData {
     pub cooldown: FrameCount,
 }
 
-/// Fireball frame data for Prototype 0.1.
-///
-/// The projectile currently spawns immediately; Combat Lab work will decide if
-/// startup/recovery should become real lockout frames instead of only cooldown.
-pub const PROJECTILE_FRAME_DATA: ProjectileFrameData = ProjectileFrameData {
-    startup: FrameCount::ZERO,
-    spawn_frame: FrameCount::ZERO,
-    visual_duration: FrameCount::new(21),
-    cooldown: FrameCount::new(57),
+/// Tunable projectile data selected by each character spec.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct ProjectileSpec {
+    pub width: f32,
+    pub height: f32,
+    pub front_spawn_offset: f32,
+    pub center_y_from_body_bottom: f32,
+    pub speed: f32,
+    pub damage: i32,
+    pub guard_rule: GuardRule,
+    pub hit_reaction: HitReaction,
+    pub frame_data: ProjectileFrameData,
+    pub max_travel: Option<f32>,
+}
+
+/// Rust keeps the current balanced gear projectile as the default.
+pub const RUST_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
+    width: 44.0,
+    height: 30.0,
+    front_spawn_offset: 66.0,
+    center_y_from_body_bottom: 88.0,
+    speed: 340.0,
+    damage: 8,
+    guard_rule: GuardRule::Projectile,
+    hit_reaction: RUST_PROJECTILE_HIT_REACTION,
+    frame_data: ProjectileFrameData {
+        startup: FrameCount::ZERO,
+        spawn_frame: FrameCount::ZERO,
+        visual_duration: FrameCount::new(21),
+        cooldown: FrameCount::new(57),
+    },
+    max_travel: None,
 };
+
+/// Duke uses a slower, heavier zoning projectile with clearer recovery.
+pub const DUKE_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
+    width: 54.0,
+    height: 34.0,
+    front_spawn_offset: 72.0,
+    center_y_from_body_bottom: 88.0,
+    speed: 270.0,
+    damage: 10,
+    guard_rule: GuardRule::Projectile,
+    hit_reaction: DUKE_PROJECTILE_HIT_REACTION,
+    frame_data: ProjectileFrameData {
+        startup: FrameCount::ZERO,
+        spawn_frame: FrameCount::ZERO,
+        visual_duration: FrameCount::new(25),
+        cooldown: FrameCount::new(72),
+    },
+    max_travel: None,
+};
+
+/// Go gets a fast, short-lived burst so rushdown does not become full zoning.
+pub const GO_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
+    width: 36.0,
+    height: 24.0,
+    front_spawn_offset: 58.0,
+    center_y_from_body_bottom: 84.0,
+    speed: 430.0,
+    damage: 6,
+    guard_rule: GuardRule::Projectile,
+    hit_reaction: GO_PROJECTILE_HIT_REACTION,
+    frame_data: ProjectileFrameData {
+        startup: FrameCount::ZERO,
+        spawn_frame: FrameCount::ZERO,
+        visual_duration: FrameCount::new(16),
+        cooldown: FrameCount::new(44),
+    },
+    max_travel: Some(320.0),
+};
+
+/// Fireball frame data for Prototype 0.1.
+pub const RUST_PROJECTILE_FRAME_DATA: ProjectileFrameData = RUST_PROJECTILE_SPEC.frame_data;
 
 /// A hadouken-like projectile moving horizontally across the arena.
 #[derive(Clone, Debug, PartialEq)]
@@ -51,35 +127,48 @@ pub struct Projectile {
     pub owner: PlayerSlot,
     pub position: Vec2,
     pub velocity: Vec2,
+    pub width: f32,
+    pub height: f32,
     pub damage: i32,
     pub guard_rule: GuardRule,
     pub hit_reaction: HitReaction,
     pub alive: bool,
+    distance_traveled: f32,
+    max_travel: Option<f32>,
 }
 
 impl Projectile {
     /// Spawns a projectile from the front side of a fighter.
     pub fn from_fighter(fighter: &Fighter) -> Self {
+        Self::from_fighter_with_spec(fighter, fighter.projectile_spec())
+    }
+
+    /// Spawns a projectile using explicit projectile tuning.
+    pub fn from_fighter_with_spec(fighter: &Fighter, spec: ProjectileSpec) -> Self {
         let body = fighter.body_rect();
         let direction = match fighter.facing {
             Facing::Left => -1.0,
             Facing::Right => 1.0,
         };
         let x = if fighter.facing == Facing::Right {
-            body.right() + FRONT_SPAWN_OFFSET
+            body.right() + spec.front_spawn_offset
         } else {
-            body.x - WIDTH - FRONT_SPAWN_OFFSET
+            body.x - spec.width - spec.front_spawn_offset
         };
-        let center_y = body.bottom() - CENTER_Y_FROM_BODY_BOTTOM;
+        let center_y = body.bottom() - spec.center_y_from_body_bottom;
 
         Self {
             owner: fighter.slot,
-            position: Vec2::new(x, center_y - HEIGHT * 0.5),
-            velocity: Vec2::new(direction * PROJECTILE_SPEED, 0.0),
-            damage: PROJECTILE_DAMAGE,
-            guard_rule: PROJECTILE_GUARD_RULE,
-            hit_reaction: PROJECTILE_HIT_REACTION,
+            position: Vec2::new(x, center_y - spec.height * 0.5),
+            velocity: Vec2::new(direction * spec.speed, 0.0),
+            width: spec.width,
+            height: spec.height,
+            damage: spec.damage,
+            guard_rule: spec.guard_rule,
+            hit_reaction: spec.hit_reaction,
             alive: true,
+            distance_traveled: 0.0,
+            max_travel: spec.max_travel,
         }
     }
 
@@ -87,10 +176,17 @@ impl Projectile {
     pub fn update(&mut self, dt: f32) {
         self.position.x += self.velocity.x * dt;
         self.position.y += self.velocity.y * dt;
+        self.distance_traveled += self.velocity.x.abs() * dt;
+        if self
+            .max_travel
+            .is_some_and(|max_travel| self.distance_traveled >= max_travel)
+        {
+            self.alive = false;
+        }
     }
 
     /// Returns the collision rectangle.
     pub fn rect(&self) -> Rect {
-        Rect::new(self.position.x, self.position.y, WIDTH, HEIGHT)
+        Rect::new(self.position.x, self.position.y, self.width, self.height)
     }
 }

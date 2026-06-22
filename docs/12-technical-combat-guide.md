@@ -10,13 +10,15 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 
 | Sistema | Responsabilidade | Código principal | Testes |
 |---|---|---|---|
-| Combat runtime | Estado de lutador, movimento, defesa, ataque ativo, stun, dano e hurtbox | [`src/combat/fighter.rs`](../src/combat/fighter.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs) |
-| Combat data | Frame data, dano, guard rule, hit reaction e hitbox dos golpes próximos | [`src/combat/move_data.rs`](../src/combat/move_data.rs) | [`tests/move_data.rs`](../tests/move_data.rs) |
+| Combat runtime | Estado de lutador, movimento, defesa, ataque ativo, stun, dano e hurtbox | [`src/combat/fighter.rs`](../src/combat/fighter.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs), [`tests/traditional_moves.rs`](../tests/traditional_moves.rs) |
+| Combat data | Frame data, dano, guard rule, hit reaction e hitbox dos golpes próximos | [`src/combat/move_data.rs`](../src/combat/move_data.rs) | [`tests/move_data.rs`](../tests/move_data.rs), [`tests/traditional_moves.rs`](../tests/traditional_moves.rs) |
 | Move runtime | Enum runtime `AttackKind` e compatibilidade com `MoveSpec` | [`src/combat/move_set.rs`](../src/combat/move_set.rs) | [`tests/move_data.rs`](../tests/move_data.rs) |
 | Projectile | Projétil horizontal, dano, guard rule, hit reaction, velocidade, spawn e timing do especial | [`src/combat/projectile.rs`](../src/combat/projectile.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs) |
 | Collision | Interseção simples de retângulos | [`src/combat/collision.rs`](../src/combat/collision.rs), [`src/math/rect.rs`](../src/math/rect.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
-| Character data | Registro de personagens e listas de golpes | [`src/characters/mod.rs`](../src/characters/mod.rs) | [`tests/characters.rs`](../tests/characters.rs) |
+| Character data | Registro de personagens, listas de golpes e identidade de loadout | [`src/characters/mod.rs`](../src/characters/mod.rs) | [`tests/characters.rs`](../tests/characters.rs), [`tests/character_identity_tuning.rs`](../tests/character_identity_tuning.rs) |
 | Match runtime | Instancia lutadores a partir de personagens, bloqueia intro/contagem, resolve hits, projéteis e vitória | [`src/game/world.rs`](../src/game/world.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
+| Combat log | Eventos compactos de diagnóstico para reproduzir bugs de luta | [`src/game/combat_log.rs`](../src/game/combat_log.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
+| CPU playtest | Heurística determinística para mover, defender e exercitar golpes básicos/tradicionais | [`src/game/ai.rs`](../src/game/ai.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/cpu_traditional_moves.rs`](../tests/cpu_traditional_moves.rs) |
 | Arena runtime | Identidade e rotação de arenas do protótipo | [`src/game/arena.rs`](../src/game/arena.rs) | [`tests/arena_rotation.rs`](../tests/arena_rotation.rs) |
 | Audio domain | Cues, eventos de gameplay, manifesto JSON e matching de bindings | [`src/audio/mod.rs`](../src/audio/mod.rs) | [`tests/audio_manifest.rs`](../tests/audio_manifest.rs) |
 | Audio Raylib boundary | Carrega clips existentes e toca eventos resolvidos por manifesto | [`src/engine/audio.rs`](../src/engine/audio.rs) | Teste manual via jogo |
@@ -32,6 +34,8 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 ### Fluxo de Início de Luta
 
 O início de luta fica em [`src/game/world.rs`](../src/game/world.rs), não no renderer. `World::new_greybox_with_intro` liga primeiro `spawn_intro_timer` para a entrada cinematográfica e também prepara `countdown_timer`.
+
+O matchup inicial vem de [`LaunchOptions.match_options`](../src/cli.rs), que aceita `--p1`/`--player-one` e `--p2`/`--player-two` para a luta normal. A tela de preferências também pode ciclar Player 1 e Player 2 entre Rust, Duke e Go; [`App`](../src/app.rs) marca essa escolha como pendente e recria o mundo ao começar a próxima luta. `LaunchOptions.start_fight` vem de `--fight`/`--skip-menu` e permite iniciar direto em `AppScene::Fight`. [`App`](../src/app.rs) preserva essa escolha no primeiro mundo e em `restart_match`, chamando `World::new_greybox_with_intro_for_characters`.
 
 Enquanto `spawn_intro_active` ou `countdown_active` estiverem ativos, `World::update_with_flags` atualiza apenas timers e feedback transitório; movimento, ataques, projéteis e IA não avançam gameplay. A contagem visual usa os labels `11`, `10`, `01` e `Fight!`, expostos por `World::countdown_label`. Os eventos de áudio correspondentes são `match.countdown.11`, `match.countdown.10`, `match.countdown.01` e `match.countdown.fight`.
 
@@ -67,13 +71,23 @@ O jogo usa fixed timestep de 60 FPS em [`src/config.rs`](../src/config.rs). A li
 
 ### Defesa, Guard Rule e Stun
 
-`GuardRule` e `HitReaction` ficam em [`src/combat/move_data.rs`](../src/combat/move_data.rs). O corte atual define a linguagem de defesa antes de implementar todos os tipos de golpe:
+`GuardRule` e `HitReaction` ficam em [`src/combat/move_data.rs`](../src/combat/move_data.rs). O corte atual já usa a linguagem mínima de defesa para golpes tradicionais:
 
-- `GuardRule::High`, `Mid`, `Low`, `Throw` e `Projectile` já existem como dados.
-- Golpes próximos atuais usam `GuardRule::Mid`.
-- Projéteis usam `PROJECTILE_GUARD_RULE`, hoje `GuardRule::Projectile`.
-- `GuardRule::Throw` já é explicitamente não bloqueável, mas ainda não existe golpe de throw jogável.
-- `Low` exige defesa com block + crouch, mas nenhum golpe baixo real foi ligado ainda.
+- `GuardRule::Mid` bloqueia com defesa em pé ou abaixada.
+- `GuardRule::Projectile` bloqueia com defesa em pé ou abaixada.
+- `GuardRule::Low` exige defesa + abaixar.
+- `GuardRule::High` exige defesa em pé; defesa abaixada perde para overhead.
+- `GuardRule::Throw` é explicitamente não bloqueável.
+
+Golpes jogáveis atuais usam essas regras assim:
+
+| Golpe | Regra | Resposta mínima |
+|---|---|---|
+| `LightPunch`, `HeavyPunch`, `Kick`, `RustBorrowJab`, `RustLifetimeAntiAir`, `DukeBoilerplatePoke`, `GoGoroutineJab`, `GoDeferKick`, `RisingAntiAir` | `Mid` | defender, espaçar, punir whiff |
+| `SweepKick`, `DukeGarbageCollectorSweep` | `Low` | defender abaixado, pular, ficar fora do alcance |
+| `OverheadPunch`, `DukeAbstractFactoryOverhead`, `GoChannelOverhead`, `AirPunch`, `AirKick`, `GoHopkick` | `High` | defender em pé, andar fora, anti-air contra salto |
+| `CloseThrow`, `RustOwnershipThrow`, `DukeEnterpriseThrow` | `Throw` | sair do alcance, pular, interromper startup |
+| Projectile | `Projectile` | defender, pular, aproximar durante cooldown |
 
 `HitReaction` contém `hitstun`, `blockstun`, `hit_pushback` e `block_pushback`. Ao receber um hit, [`Fighter::take_hit`](../src/combat/fighter.rs) calcula se a defesa bloqueia aquele `GuardRule`, aplica dano reduzido quando bloqueado, liga o timer correspondente e retorna um `DamageResult` com dano, bloqueio e pushback:
 
@@ -91,12 +105,47 @@ Os golpes próximos atuais estão em [`src/combat/move_data.rs`](../src/combat/m
 - `LightPunch`
 - `HeavyPunch`
 - `Kick`
+- `SweepKick`
+- `OverheadPunch`
+- `RisingAntiAir`
+- `AirPunch`
+- `AirKick`
+- `CloseThrow`
 - `RustBorrowJab`
+- `RustLifetimeAntiAir`
+- `RustOwnershipThrow`
 - `DukeBoilerplatePoke`
+- `DukeGarbageCollectorSweep`
+- `DukeAbstractFactoryOverhead`
+- `DukeEnterpriseThrow`
+- `GoGoroutineJab`
+- `GoDeferKick`
+- `GoChannelOverhead`
+- `GoHopkick`
 
 `DEFAULT_CLOSE_RANGE_MOVE_IDS` define a lista padrão genérica usada por construtores e testes que não selecionam personagem. `CharacterSpec.move_ids` define o loadout real de cada personagem.
 
-`Fighter` carrega `move_ids` próprios. Quando um botão de golpe é pressionado, `move_spec_for_input` procura no loadout o primeiro `MoveSpec` com o `MoveInputKind` correspondente. Se não houver `MoveId` compatível, o input daquele golpe não inicia ataque. Isso permite que o mesmo botão resolva para golpes diferentes por personagem sem alterar profundamente `Fighter`.
+`Fighter` carrega `move_ids` próprios. Quando um botão de golpe é pressionado, `FighterInput::requested_move_spec` escolhe o `MoveInputKind` a partir de botão, direção, abaixar, defesa e estado aéreo. Depois `move_spec_for_input` procura no loadout o primeiro `MoveSpec` com aquele input. Se não houver `MoveId` compatível, o input daquele golpe não inicia ataque. Isso permite que o mesmo botão resolva para golpes diferentes por personagem sem alterar profundamente `Fighter`.
+
+### Combat Log
+
+O log de combate fica em [`src/game/combat_log.rs`](../src/game/combat_log.rs) e é preenchido por [`World`](../src/game/world.rs). Ele registra eventos compactos como início de round, countdown, ataque iniciado, whiff, hit/block resolvido, projectile disparado, projectile resolvido e fim de luta.
+
+Use `World::combat_log()` em testes ou ferramentas de debug para inspecionar a sequência atual, e `World::clear_combat_log()` quando um teste quiser isolar uma janela específica. O log é limitado por `COMBAT_LOG_CAPACITY` para não crescer indefinidamente. Ele não substitui `AudioEvent`: áudio é feedback; `CombatLog` é rastreio técnico.
+
+Mapeamento atual de input:
+
+| Input | `MoveInputKind` |
+|---|---|
+| `F` / `X` | `LightPunch` |
+| `H` / `Y` | `HeavyPunch` |
+| `V` / `B` | `Kick` |
+| Abaixar + chute | `Sweep` |
+| Abaixar + soco forte | `AntiAir` |
+| Frente + soco forte | `Overhead` |
+| Defender + soco fraco | `Throw` |
+| No ar + soco fraco/forte | `AirPunch` |
+| No ar + chute | `AirKick` |
 
 `AttackKind` em [`src/combat/move_set.rs`](../src/combat/move_set.rs) ainda existe como camada runtime de compatibilidade para sprites, debug e categorias visuais. O dano, a hitbox e o frame data durante uma luta vêm do `MoveSpec` concreto guardado no estado de ataque.
 
@@ -153,17 +202,29 @@ Personagens ficam em [`src/characters/mod.rs`](../src/characters/mod.rs). Cada `
 - `fighter_name`: nome curto usado pelo lutador;
 - `archetype`: intenção de gameplay;
 - `stats.max_health`: vida máxima usada na criação do `Fighter`;
-- `move_ids`: golpes próximos disponíveis no loadout.
+- `move_ids`: golpes próximos disponíveis no loadout;
+- `projectile`: `ProjectileSpec` usado para dano, tamanho, velocidade, cooldown, reação e limite de alcance do especial.
 
-Hoje `Rust` usa `RustBorrowJab` no soco fraco: startup menor, alcance menor e dano menor para funcionar como checagem rápida. `Duke` usa `DukeBoilerplatePoke` no soco forte: alcance e dano maiores, com startup/recovery mais longos para reforçar midrange pesado e punição em whiff. O `World` cria lutadores via `World::new_with_characters`, consumindo `CharacterSpec` para nome, vida e loadout. O Combat Lab usa o mesmo caminho para testar personagem isolado.
+Hoje `Rust` usa `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` para reforçar leitura técnica: golpes mais rápidos, menores e menos danosos. `Duke` usa `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` para reforçar midrange pressure: mais alcance/dano, startup maior e whiff mais punível. `Go` usa `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead` e `GoHopkick` para validar rushdown em greybox: menos vida, ações mais rápidas e alcance menor.
+
+Os especiais de projectile ficam em [`src/combat/projectile.rs`](../src/combat/projectile.rs) como `RUST_PROJECTILE_SPEC`, `DUKE_PROJECTILE_SPEC` e `GO_PROJECTILE_SPEC`. `Fighter::projectile_spec` alimenta `Projectile::from_fighter`, o Combat Lab e o overlay técnico, então alterar um spec muda luta real e lab no mesmo caminho.
+
+`World::new_with_characters` e `World::new_greybox_with_intro_for_characters` aceitam qualquer `CharacterId`; a luta padrão ainda instancia Rust x Duke, mas o menu de preferências e `--p1`/`--p2` permitem testar Go em match real.
+
+A intenção de gameplay por golpe vive em [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md). Atualize essa matriz quando alterar frame data, alcance, dano, guard rule, projectile ou loadout de personagem.
 
 ### Combat Lab
 
 Abrir o laboratório:
 
 ```bash
+cargo run -- --fight --p1 go --p2 duke
 cargo run -- --lab combat --character rust --move light_punch
 cargo run -- --lab combat --character duke --move projectile
+cargo run -- --lab combat --character rust --move sweep
+cargo run -- --lab combat --character duke --move throw
+cargo run -- --lab combat --character go --move kick
+cargo run -- --lab combat --character go --move air_kick
 cargo run -- --lab combat --character rust --pose block
 cargo run -- --lab combat --character duke --pose victory
 ```
@@ -172,8 +233,11 @@ Valores aceitos:
 
 | Flag | Valores |
 |---|---|
-| `--character` | `rust`, `rustacean`, `duke`, `java` |
-| `--move` | `light_punch`, `heavy_punch`, `kick`, `projectile` |
+| `--fight`, `--skip-menu` | sem valor; inicia direto na luta normal |
+| `--p1`, `--player-one` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |
+| `--p2`, `--player-two` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |
+| `--character` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |
+| `--move` | `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`, `projectile` |
 | `--pose` | `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory` |
 
 `--pose move` é o modo padrão e reproduz o golpe selecionado por `--move`. As outras poses são inspeções estáticas para alinhar sprite, pivot e hurtbox sem depender de uma luta real.

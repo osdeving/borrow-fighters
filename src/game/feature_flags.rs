@@ -116,14 +116,14 @@ impl FeatureFlag {
     /// Short description shown in the preferences screen.
     pub const fn description(self) -> &'static str {
         match self {
-            FeatureFlag::PlayerOneCpu => "Quando ligado, Rust tambem vira CPU.",
-            FeatureFlag::PlayerTwoCpu => "Liga o sparring dummy do Java.",
+            FeatureFlag::PlayerOneCpu => "Quando ligado, o Player 1 tambem vira CPU.",
+            FeatureFlag::PlayerTwoCpu => "Liga o sparring dummy do Player 2.",
             FeatureFlag::CpuCanAttack => "Quando desligado, a IA se move e defende, mas nao ataca.",
             FeatureFlag::PlayerOneTakesDamage => {
-                "Quando desligado, Rust fica invencivel para playtest."
+                "Quando desligado, o Player 1 fica invencivel para playtest."
             }
             FeatureFlag::PlayerTwoTakesDamage => {
-                "Quando desligado, Java fica invencivel para playtest."
+                "Quando desligado, o Player 2 fica invencivel para playtest."
             }
             FeatureFlag::ShowHud => "Barras de vida, titulo e status no topo.",
             FeatureFlag::ShowControlsHelp => "Texto de comandos no rodape durante a luta.",

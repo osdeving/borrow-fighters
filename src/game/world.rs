@@ -15,6 +15,7 @@ use crate::combat::fighter::{
 };
 use crate::combat::projectile::Projectile;
 use crate::config::{ARENA_LEFT, ARENA_RIGHT};
+use crate::game::combat_log::{CombatLog, CombatLogEvent, CombatLogKind};
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
 use crate::math::rect::Rect;
 use crate::math::vec2::Vec2;
@@ -57,6 +58,7 @@ pub struct World {
     pub body_collision_timer: f32,
     pub elapsed_seconds: f32,
     audio_events: Vec<AudioEvent>,
+    combat_log: CombatLog,
     spawn_intro_timer: f32,
     countdown_timer: f32,
     countdown_audio_step: Option<usize>,
@@ -81,17 +83,30 @@ impl World {
             body_collision_timer: 0.0,
             elapsed_seconds: 0.0,
             audio_events: Vec::new(),
+            combat_log: CombatLog::default(),
             spawn_intro_timer: 0.0,
             countdown_timer: 0.0,
             countdown_audio_step: None,
         };
+        world.record_combat(CombatLogKind::RoundStarted {
+            player_one,
+            player_two,
+        });
         world.update_facing();
         world
     }
 
     /// Creates a greybox fight that starts with the cinematic spawn clips.
     pub fn new_greybox_with_intro() -> Self {
-        let mut world = Self::new_greybox();
+        Self::new_greybox_with_intro_for_characters(CharacterId::Rust, CharacterId::Duke)
+    }
+
+    /// Creates an explicit-character fight with cinematic spawn clips.
+    pub fn new_greybox_with_intro_for_characters(
+        player_one: CharacterId,
+        player_two: CharacterId,
+    ) -> Self {
+        let mut world = Self::new_with_characters(player_one, player_two);
         world.spawn_intro_timer = SPAWN_INTRO_DURATION_SECONDS;
         world.countdown_timer = ROUND_COUNTDOWN_TOTAL_SECONDS;
         world
@@ -147,6 +162,16 @@ impl World {
     /// Drains audio events generated since the previous call.
     pub fn take_audio_events(&mut self) -> Vec<AudioEvent> {
         std::mem::take(&mut self.audio_events)
+    }
+
+    /// Returns diagnostic combat events for the current match.
+    pub fn combat_log(&self) -> &[CombatLogEvent] {
+        self.combat_log.events()
+    }
+
+    /// Clears diagnostic combat events collected so far.
+    pub fn clear_combat_log(&mut self) {
+        self.combat_log.clear();
     }
 
     /// Advances one fixed gameplay step.
@@ -318,6 +343,11 @@ impl World {
                 PlayerSlot::One,
                 self.player_one_character,
             ));
+            self.record_combat(CombatLogKind::ProjectileSpawned {
+                slot: PlayerSlot::One,
+                character: self.player_one_character,
+                damage: self.player_one.projectile_spec().damage,
+            });
         }
 
         if player_two.projectile && self.player_two.can_fire_projectile() {
@@ -328,6 +358,11 @@ impl World {
                 PlayerSlot::Two,
                 self.player_two_character,
             ));
+            self.record_combat(CombatLogKind::ProjectileSpawned {
+                slot: PlayerSlot::Two,
+                character: self.player_two_character,
+                damage: self.player_two.projectile_spec().damage,
+            });
         }
     }
 
@@ -347,6 +382,7 @@ impl World {
         let player_one_character = self.player_one_character;
         let player_two_character = self.player_two_character;
         let mut audio_events = Vec::new();
+        let mut combat_events = Vec::new();
 
         for projectile in &mut self.projectiles {
             if !projectile.alive {
@@ -374,6 +410,14 @@ impl World {
                         player_two_character,
                         result,
                     );
+                    combat_events.push(CombatLogKind::ProjectileResolved {
+                        attacker: PlayerSlot::One,
+                        defender: PlayerSlot::Two,
+                        attacker_character: player_one_character,
+                        defender_character: player_two_character,
+                        damage: result.damage,
+                        blocked: result.blocked,
+                    });
                     self.hit_effects.push(HitEffect::new(
                         self.player_two.hurtbox().center(),
                         result.damage,
@@ -399,6 +443,14 @@ impl World {
                         player_one_character,
                         result,
                     );
+                    combat_events.push(CombatLogKind::ProjectileResolved {
+                        attacker: PlayerSlot::Two,
+                        defender: PlayerSlot::One,
+                        attacker_character: player_two_character,
+                        defender_character: player_one_character,
+                        damage: result.damage,
+                        blocked: result.blocked,
+                    });
                     self.hit_effects.push(HitEffect::new(
                         self.player_one.hurtbox().center(),
                         result.damage,
@@ -410,6 +462,9 @@ impl World {
         }
 
         self.audio_events.extend(audio_events);
+        for event in combat_events {
+            self.record_combat(event);
+        }
         self.projectiles.retain(|projectile| projectile.alive);
     }
 
@@ -422,12 +477,25 @@ impl World {
             (false, false) => None,
         };
         if previous.is_none()
-            && let Some(MatchOutcome::Winner(slot)) = self.outcome
+            && let Some(outcome) = self.outcome
         {
-            self.audio_events.push(AudioEvent::match_victory(
-                slot,
-                self.character_for_slot(slot),
-            ));
+            match outcome {
+                MatchOutcome::Winner(slot) => {
+                    let character = self.character_for_slot(slot);
+                    self.audio_events
+                        .push(AudioEvent::match_victory(slot, character));
+                    self.record_combat(CombatLogKind::MatchEnded {
+                        winner: Some(slot),
+                        winner_character: Some(character),
+                    });
+                }
+                MatchOutcome::Draw => {
+                    self.record_combat(CombatLogKind::MatchEnded {
+                        winner: None,
+                        winner_character: None,
+                    });
+                }
+            }
         }
     }
 
@@ -436,10 +504,20 @@ impl World {
         if let Some(move_id) = events.close_attack_started {
             self.audio_events
                 .push(AudioEvent::fighter_attack_start(slot, character, move_id));
+            self.record_combat(CombatLogKind::CloseAttackStarted {
+                slot,
+                character,
+                move_id,
+            });
         }
         if let Some(move_id) = events.close_attack_whiffed {
             self.audio_events
                 .push(AudioEvent::fighter_attack_whiff(slot, character, move_id));
+            self.record_combat(CombatLogKind::CloseAttackWhiffed {
+                slot,
+                character,
+                move_id,
+            });
         }
     }
 
@@ -455,6 +533,9 @@ impl World {
             1 => AudioEvent::match_countdown_ten(),
             2 => AudioEvent::match_countdown_one(),
             _ => AudioEvent::match_countdown_fight(),
+        });
+        self.record_combat(CombatLogKind::CountdownStep {
+            label: ROUND_COUNTDOWN_LABELS[step],
         });
     }
 
@@ -486,6 +567,15 @@ impl World {
                     .push(AudioEvent::fighter_hurt(defender, defender_character));
             }
         }
+        self.record_combat(CombatLogKind::CloseAttackResolved {
+            attacker,
+            defender,
+            attacker_character,
+            defender_character,
+            move_id: attack.move_id,
+            damage: result.damage,
+            blocked: result.blocked,
+        });
     }
 
     fn countdown_step_index(&self) -> usize {
@@ -493,6 +583,10 @@ impl World {
             .countdown_elapsed_seconds()
             .min(ROUND_COUNTDOWN_TOTAL_SECONDS - f32::EPSILON);
         (elapsed / ROUND_COUNTDOWN_STEP_SECONDS).floor() as usize
+    }
+
+    fn record_combat(&mut self, kind: CombatLogKind) {
+        self.combat_log.record(self.elapsed_seconds, kind);
     }
 }
 
@@ -516,11 +610,12 @@ fn queue_projectile_hit_audio(
 
 fn fighter_from_character(slot: PlayerSlot, character: CharacterId, x: f32) -> Fighter {
     let spec = character_spec(character);
-    Fighter::new_with_loadout(
+    Fighter::new_with_projectile_loadout(
         slot,
         spec.fighter_name,
         spec.stats.max_health,
         spec.move_ids,
+        spec.projectile,
         x,
     )
 }

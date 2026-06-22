@@ -30,7 +30,7 @@ Status do primeiro greybox:
 | Direção/facing do personagem | S | Média | Feito | Olhar para adversário |
 | Soco fraco e forte | M | Alta | Feito | Estados separados |
 | Chute | M | Alta | Feito | Usado por jogador e CPU |
-| Especial projectile | M | Alta | Feito | Rust gear e Duke bean placeholder |
+| Especial projectile | M | Alta | Feito | `ProjectileSpec` por personagem para Rust, Duke e Go |
 | Defesa e abaixar | M | Alta | Feito | Inclui leitura visual em sprite |
 | Hurtbox | M | Alta | Feito | Ajustável por estado/personagem no código |
 | Hitbox | L | Alta | Feito | Área ofensiva temporária |

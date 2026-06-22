@@ -6,10 +6,7 @@
 use raylib::prelude::*;
 
 use crate::characters::character_spec;
-use crate::combat::{
-    fighter::{AttackPhase, Fighter},
-    projectile::PROJECTILE_DAMAGE,
-};
+use crate::combat::fighter::{AttackPhase, Fighter};
 use crate::config::{WINDOW_HEIGHT, WINDOW_WIDTH};
 use crate::math::rect::Rect;
 use crate::scenes::combat_lab::{CombatLab, CombatLabMove, CombatLabPose};
@@ -197,7 +194,7 @@ fn lab_timing_text(lab: &CombatLab) -> String {
                 frame_data.visual_duration.get(),
                 frame_data.spawn_frame.get(),
                 fighter.projectile_cooldown_remaining_frames().get(),
-                PROJECTILE_DAMAGE
+                fighter.projectile_spec().damage
             )
         }
         _ => {

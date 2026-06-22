@@ -8,7 +8,7 @@ use crate::combat::{
     fighter::{Fighter, FighterInput, PlayerSlot},
     frame::FrameCount,
     move_data::{HitReaction, MoveInputKind, move_spec_for_input},
-    projectile::{PROJECTILE_FRAME_DATA, PROJECTILE_HIT_REACTION, Projectile},
+    projectile::Projectile,
 };
 use crate::config::{FIXED_TIMESTEP, FLOOR_Y};
 use crate::math::rect::Rect;
@@ -17,6 +17,7 @@ const CONTACT_OVERLAP: f32 = 1.0;
 const DEFAULT_DUMMY_X: f32 = 690.0;
 const DEFAULT_DUMMY_WIDTH: f32 = 76.0;
 const DEFAULT_DUMMY_HEIGHT: f32 = 168.0;
+const AIR_ATTACK_PREVIEW_HEIGHT: f32 = 92.0;
 
 type ContactAnalysis = (
     FrameCount,
@@ -137,7 +138,8 @@ fn contact_analysis(
             ))
         }
         CombatLabAnalysisMove::Projectile => {
-            let frame_data = PROJECTILE_FRAME_DATA;
+            let projectile_spec = attacker.projectile_spec();
+            let frame_data = projectile_spec.frame_data;
             let projectile = Projectile::from_fighter(&attacker);
 
             Some((
@@ -145,7 +147,7 @@ fn contact_analysis(
                 FrameCount::ZERO,
                 FrameCount::ZERO,
                 frames_between(frame_data.spawn_frame, frame_data.cooldown),
-                PROJECTILE_HIT_REACTION,
+                projectile_spec.hit_reaction,
                 projectile.rect(),
             ))
         }
@@ -157,6 +159,8 @@ fn close_attack_contact_box(
     input: MoveInputKind,
     contact_frame: FrameCount,
 ) -> Option<Rect> {
+    prepare_attacker_for_close_move(&mut attacker, input);
+
     for frame in 0..contact_frame.get() {
         attacker.update(
             FIXED_TIMESTEP,
@@ -169,6 +173,13 @@ fn close_attack_contact_box(
     }
 
     attacker.attack_box()
+}
+
+fn prepare_attacker_for_close_move(attacker: &mut Fighter, input: MoveInputKind) {
+    if matches!(input, MoveInputKind::AirPunch | MoveInputKind::AirKick) {
+        attacker.grounded = false;
+        attacker.position.y -= AIR_ATTACK_PREVIEW_HEIGHT;
+    }
 }
 
 fn input_for_close_move(input: MoveInputKind) -> FighterInput {
@@ -185,6 +196,34 @@ fn input_for_close_move(input: MoveInputKind) -> FighterInput {
             kick: true,
             ..FighterInput::default()
         },
+        MoveInputKind::Sweep => FighterInput {
+            crouch: true,
+            kick: true,
+            ..FighterInput::default()
+        },
+        MoveInputKind::Overhead => FighterInput {
+            right: true,
+            heavy_punch: true,
+            ..FighterInput::default()
+        },
+        MoveInputKind::AntiAir => FighterInput {
+            crouch: true,
+            heavy_punch: true,
+            ..FighterInput::default()
+        },
+        MoveInputKind::AirPunch => FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+        MoveInputKind::AirKick => FighterInput {
+            kick: true,
+            ..FighterInput::default()
+        },
+        MoveInputKind::Throw => FighterInput {
+            block: true,
+            light_punch: true,
+            ..FighterInput::default()
+        },
     }
 }
 
@@ -192,13 +231,15 @@ fn dummy_fighter_for(attacker_character: CharacterId) -> Fighter {
     let character = match attacker_character {
         CharacterId::Rust => CharacterId::Duke,
         CharacterId::Duke => CharacterId::Rust,
+        CharacterId::Go => CharacterId::Duke,
     };
     let spec = character_spec(character);
-    Fighter::new_with_loadout(
+    Fighter::new_with_projectile_loadout(
         PlayerSlot::Two,
         spec.fighter_name,
         spec.stats.max_health,
         spec.move_ids,
+        spec.projectile,
         DEFAULT_DUMMY_X,
     )
 }

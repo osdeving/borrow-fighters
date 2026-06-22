@@ -2,6 +2,9 @@
 
 use borrow_fighters::characters::{CharacterArchetype, CharacterId, character_spec};
 use borrow_fighters::combat::move_data::MoveId;
+use borrow_fighters::combat::projectile::{
+    DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, RUST_PROJECTILE_SPEC,
+};
 
 #[test]
 fn rust_spec_points_to_current_prototype_moves() {
@@ -13,7 +16,17 @@ fn rust_spec_points_to_current_prototype_moves() {
     assert_eq!(rust.stats.max_health, 100);
     assert_eq!(
         rust.move_ids,
-        &[MoveId::RustBorrowJab, MoveId::HeavyPunch, MoveId::Kick]
+        &[
+            MoveId::RustBorrowJab,
+            MoveId::HeavyPunch,
+            MoveId::Kick,
+            MoveId::SweepKick,
+            MoveId::OverheadPunch,
+            MoveId::RustLifetimeAntiAir,
+            MoveId::AirPunch,
+            MoveId::AirKick,
+            MoveId::RustOwnershipThrow,
+        ]
     );
 }
 
@@ -30,7 +43,37 @@ fn duke_spec_points_to_current_prototype_moves() {
         &[
             MoveId::LightPunch,
             MoveId::DukeBoilerplatePoke,
-            MoveId::Kick
+            MoveId::Kick,
+            MoveId::DukeGarbageCollectorSweep,
+            MoveId::DukeAbstractFactoryOverhead,
+            MoveId::RisingAntiAir,
+            MoveId::AirPunch,
+            MoveId::AirKick,
+            MoveId::DukeEnterpriseThrow,
+        ]
+    );
+}
+
+#[test]
+fn go_spec_points_to_current_prototype_moves() {
+    let go = character_spec(CharacterId::Go);
+
+    assert_eq!(go.display_name, "Go");
+    assert_eq!(go.fighter_name, "Go");
+    assert_eq!(go.archetype, CharacterArchetype::Rushdown);
+    assert_eq!(go.stats.max_health, 92);
+    assert_eq!(
+        go.move_ids,
+        &[
+            MoveId::GoGoroutineJab,
+            MoveId::HeavyPunch,
+            MoveId::GoDeferKick,
+            MoveId::SweepKick,
+            MoveId::GoChannelOverhead,
+            MoveId::RisingAntiAir,
+            MoveId::AirPunch,
+            MoveId::GoHopkick,
+            MoveId::CloseThrow,
         ]
     );
 }
@@ -41,5 +84,39 @@ fn character_cli_aliases_are_stable() {
     assert_eq!(CharacterId::from_cli("rustacean"), Some(CharacterId::Rust));
     assert_eq!(CharacterId::from_cli("duke"), Some(CharacterId::Duke));
     assert_eq!(CharacterId::from_cli("java"), Some(CharacterId::Duke));
-    assert_eq!(CharacterId::from_cli("go"), None);
+    assert_eq!(CharacterId::from_cli("go"), Some(CharacterId::Go));
+    assert_eq!(CharacterId::from_cli("golang"), Some(CharacterId::Go));
+    assert_eq!(CharacterId::from_cli("gopher"), Some(CharacterId::Go));
+    assert_eq!(CharacterId::from_audio_key("go"), Some(CharacterId::Go));
+}
+
+#[test]
+fn character_roster_cycles_in_menu_order() {
+    assert_eq!(CharacterId::Rust.next(), CharacterId::Duke);
+    assert_eq!(CharacterId::Duke.next(), CharacterId::Go);
+    assert_eq!(CharacterId::Go.next(), CharacterId::Rust);
+    assert_eq!(CharacterId::Rust.previous(), CharacterId::Go);
+    assert_eq!(CharacterId::Duke.previous(), CharacterId::Rust);
+    assert_eq!(CharacterId::Go.previous(), CharacterId::Duke);
+}
+
+#[test]
+fn character_projectiles_follow_archetype_intent() {
+    let rust = character_spec(CharacterId::Rust).projectile;
+    let duke = character_spec(CharacterId::Duke).projectile;
+    let go = character_spec(CharacterId::Go).projectile;
+
+    assert_eq!(rust, RUST_PROJECTILE_SPEC);
+    assert_eq!(duke, DUKE_PROJECTILE_SPEC);
+    assert_eq!(go, GO_PROJECTILE_SPEC);
+
+    assert!(duke.damage > rust.damage);
+    assert!(duke.speed < rust.speed);
+    assert!(duke.frame_data.cooldown > rust.frame_data.cooldown);
+    assert!(duke.width > rust.width);
+
+    assert!(go.damage < rust.damage);
+    assert!(go.speed > rust.speed);
+    assert!(go.frame_data.cooldown < rust.frame_data.cooldown);
+    assert!(go.max_travel.is_some());
 }

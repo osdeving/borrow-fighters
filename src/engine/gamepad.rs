@@ -69,6 +69,16 @@ pub fn menu_down_pressed(raylib: &RaylibHandle, gamepad: i32) -> bool {
     is_connected(raylib, gamepad) && button_pressed(raylib, gamepad, dpad_down())
 }
 
+/// Returns true when the gamepad moved menu option leftward this frame.
+pub fn menu_left_pressed(raylib: &RaylibHandle, gamepad: i32) -> bool {
+    is_connected(raylib, gamepad) && button_pressed(raylib, gamepad, dpad_left())
+}
+
+/// Returns true when the gamepad moved menu option rightward this frame.
+pub fn menu_right_pressed(raylib: &RaylibHandle, gamepad: i32) -> bool {
+    is_connected(raylib, gamepad) && button_pressed(raylib, gamepad, dpad_right())
+}
+
 /// Returns true when the gamepad activated a menu row this frame.
 pub fn menu_activate_pressed(raylib: &RaylibHandle, gamepad: i32) -> bool {
     is_connected(raylib, gamepad) && button_pressed(raylib, gamepad, face_down())
