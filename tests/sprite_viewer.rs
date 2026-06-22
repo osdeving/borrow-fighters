@@ -453,6 +453,165 @@ fn frame_combat_overlay_projects_manifest_metadata_to_screen_space() {
 }
 
 #[test]
+fn frame_combat_hurtbox_can_be_dragged_in_frame_local_coordinates() {
+    let mut viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("tests/fixtures/sprite-viewer-combat.sprite.json"),
+        initial_clip: Some("idle".to_string()),
+        character: None,
+        selected_move: CombatLabMove::LightPunch,
+    })
+    .unwrap();
+
+    viewer.update(
+        SpriteViewerInput {
+            mouse_position: ViewerPoint::new(464.0, 398.0),
+            mouse_pressed: true,
+            mouse_down: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+    viewer.update(
+        SpriteViewerInput {
+            mouse_position: ViewerPoint::new(476.0, 404.0),
+            mouse_down: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    let combat = viewer.current_frame().combat.as_ref().unwrap();
+    assert!(viewer.manifest_dirty());
+    assert_eq!(combat.hurtboxes[0].x, 22);
+    assert_eq!(combat.hurtboxes[0].y, 14);
+    assert_eq!(combat.hurtboxes[0].w, 48);
+    assert_eq!(combat.hurtboxes[0].h, 96);
+}
+
+#[test]
+fn frame_combat_hitbox_corner_can_be_resized() {
+    let mut viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("tests/fixtures/sprite-viewer-combat.sprite.json"),
+        initial_clip: Some("idle".to_string()),
+        character: None,
+        selected_move: CombatLabMove::LightPunch,
+    })
+    .unwrap();
+
+    viewer.update(
+        SpriteViewerInput {
+            mouse_position: ViewerPoint::new(520.0, 402.0),
+            mouse_pressed: true,
+            mouse_down: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+    viewer.update(
+        SpriteViewerInput {
+            mouse_position: ViewerPoint::new(528.0, 410.0),
+            mouse_down: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    let combat = viewer.current_frame().combat.as_ref().unwrap();
+    assert!(viewer.manifest_dirty());
+    assert_eq!(combat.hitboxes[0].x, 62);
+    assert_eq!(combat.hitboxes[0].y, 38);
+    assert_eq!(combat.hitboxes[0].w, 36);
+    assert_eq!(combat.hitboxes[0].h, 30);
+}
+
+#[test]
+fn projectile_origin_can_be_dragged_and_saved() {
+    let mut manifest_path = std::env::temp_dir();
+    manifest_path.push(format!(
+        "borrow-fighters-sprite-viewer-combat-{}-{}.json",
+        std::process::id(),
+        line!()
+    ));
+    fs::copy(
+        "tests/fixtures/sprite-viewer-combat.sprite.json",
+        &manifest_path,
+    )
+    .unwrap();
+
+    let mut viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: manifest_path.clone(),
+        initial_clip: Some("idle".to_string()),
+        character: None,
+        selected_move: CombatLabMove::Projectile,
+    })
+    .unwrap();
+
+    viewer.update(
+        SpriteViewerInput {
+            mouse_position: ViewerPoint::new(514.0, 386.0),
+            mouse_pressed: true,
+            mouse_down: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+    viewer.update(
+        SpriteViewerInput {
+            mouse_position: ViewerPoint::new(520.0, 390.0),
+            mouse_down: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+    viewer.update(
+        SpriteViewerInput {
+            save_manifest: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    assert!(!viewer.manifest_dirty());
+    let saved = SpriteManifest::load(&manifest_path).unwrap();
+    let origin = saved
+        .frame_named("idle_0")
+        .unwrap()
+        .combat
+        .as_ref()
+        .unwrap()
+        .projectile_origin
+        .unwrap();
+    assert_eq!(origin.x, 90);
+    assert_eq!(origin.y, 48);
+
+    fs::remove_file(manifest_path).unwrap();
+}
+
+#[test]
+fn seed_frame_combat_creates_editable_metadata_from_runtime_overlay() {
+    let mut viewer = SpriteViewer::load(SpriteViewerOptions {
+        manifest_path: PathBuf::from("tests/fixtures/sprite-viewer-combat.sprite.json"),
+        initial_clip: Some("idle".to_string()),
+        character: Some(CharacterId::Rust),
+        selected_move: CombatLabMove::LightPunch,
+    })
+    .unwrap();
+
+    viewer.update(
+        SpriteViewerInput {
+            seed_frame_combat: true,
+            ..SpriteViewerInput::default()
+        },
+        0.0,
+    );
+
+    let combat = viewer.current_frame().combat.as_ref().unwrap();
+    assert!(viewer.manifest_dirty());
+    assert!(!combat.hurtboxes.is_empty());
+    assert!(!combat.hitboxes.is_empty());
+}
+
+#[test]
 fn timeline_phase_uses_selected_character_move_data() {
     let viewer = SpriteViewer::load(SpriteViewerOptions {
         manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),

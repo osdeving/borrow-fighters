@@ -463,6 +463,7 @@ fn read_sprite_viewer_input(raylib: &RaylibHandle) -> SpriteViewerInput {
         toggle_projectile_trajectory: raylib.is_key_pressed(KeyboardKey::KEY_T),
         reload_manifest: raylib.is_key_pressed(KeyboardKey::KEY_F5),
         save_manifest: control_down && raylib.is_key_pressed(KeyboardKey::KEY_S),
+        seed_frame_combat: raylib.is_key_pressed(KeyboardKey::KEY_N),
         increase_manifest_scale: raylib.is_key_pressed(KeyboardKey::KEY_EQUAL),
         decrease_manifest_scale: raylib.is_key_pressed(KeyboardKey::KEY_MINUS),
         reset_zoom: raylib.is_key_pressed(KeyboardKey::KEY_ZERO),

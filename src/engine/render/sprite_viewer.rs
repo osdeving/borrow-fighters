@@ -10,8 +10,9 @@ use crate::{
     engine::sprites::{SpriteFrame, SpriteRect},
     math::rect::Rect,
     scenes::sprite_viewer::{
-        SpriteCombatOverlay, SpriteFrameCombatBoxOverlay, SpriteFrameCombatOverlay,
-        SpriteFrameCursor, SpriteTimelinePhase, SpriteViewer, ViewerPoint, ViewerRect,
+        SpriteCombatOverlay, SpriteFrameCombatBoxKind, SpriteFrameCombatBoxOverlay,
+        SpriteFrameCombatOverlay, SpriteFrameCursor, SpriteTimelinePhase, SpriteViewer,
+        ViewerPoint, ViewerRect,
     },
 };
 
@@ -40,6 +41,8 @@ const FRAME_DATA_HURTBOX: Color = Color::new(84, 255, 170, 255);
 const FRAME_DATA_HURTBOX_FILL: Color = Color::new(84, 255, 170, 38);
 const FRAME_DATA_HITBOX: Color = Color::new(255, 96, 96, 255);
 const FRAME_DATA_HITBOX_FILL: Color = Color::new(255, 96, 96, 82);
+const FRAME_DATA_HANDLE: Color = Color::new(255, 255, 255, 245);
+const FRAME_DATA_HANDLE_SHADOW: Color = Color::new(10, 14, 22, 220);
 const TIMELINE_STARTUP: Color = Color::new(255, 210, 74, 230);
 const TIMELINE_ACTIVE: Color = Color::new(255, 82, 82, 235);
 const TIMELINE_RECOVERY: Color = Color::new(116, 151, 255, 220);
@@ -223,9 +226,14 @@ fn draw_frame_data_box(
         );
     }
     draw_outline(draw, overlay_box.rect, outline, 3.0);
+    draw_frame_data_box_handles(draw, overlay_box.rect);
     if let Some(label) = overlay_box.label.as_deref() {
+        let kind = match overlay_box.kind {
+            SpriteFrameCombatBoxKind::Hurtbox => "H",
+            SpriteFrameCombatBoxKind::Hitbox => "A",
+        };
         draw.draw_text(
-            label,
+            &format!("{kind}{} {label}", overlay_box.index + 1),
             overlay_box.rect.x.round() as i32 + 4,
             overlay_box.rect.y.round() as i32 + 4,
             13,
@@ -249,6 +257,34 @@ fn draw_projectile_origin(draw: &mut RaylibDrawHandle<'_>, origin: ViewerPoint, 
         origin.x.round() as i32,
         origin.y.round() as i32 + 10,
         color,
+    );
+    draw_handle_square(draw, origin);
+}
+
+fn draw_frame_data_box_handles(draw: &mut RaylibDrawHandle<'_>, rect: ViewerRect) {
+    draw_handle_square(draw, ViewerPoint::new(rect.x, rect.y));
+    draw_handle_square(draw, ViewerPoint::new(rect.right(), rect.y));
+    draw_handle_square(draw, ViewerPoint::new(rect.x, rect.bottom()));
+    draw_handle_square(draw, ViewerPoint::new(rect.right(), rect.bottom()));
+    draw_handle_square(draw, rect.center());
+}
+
+fn draw_handle_square(draw: &mut RaylibDrawHandle<'_>, point: ViewerPoint) {
+    let size = 7.0;
+    let half = size * 0.5;
+    draw.draw_rectangle(
+        (point.x - half - 1.0).round() as i32,
+        (point.y - half - 1.0).round() as i32,
+        (size + 2.0).round() as i32,
+        (size + 2.0).round() as i32,
+        FRAME_DATA_HANDLE_SHADOW,
+    );
+    draw.draw_rectangle(
+        (point.x - half).round() as i32,
+        (point.y - half).round() as i32,
+        size.round() as i32,
+        size.round() as i32,
+        FRAME_DATA_HANDLE,
     );
 }
 
@@ -601,7 +637,7 @@ fn draw_info_panel(draw: &mut RaylibDrawHandle<'_>, viewer: &SpriteViewer) {
         UI_MUTED,
     );
     draw.draw_text(
-        "mouse drag | Tab clip | [] golpe | =/- scale | arrows pivot | Ctrl+arrows body | Ctrl+S save",
+        "drag sprite/boxes/origin | N seed frame data | Tab clip | [] golpe | =/- scale | Ctrl+S save",
         panel_x + 16,
         panel_y + 92,
         15,

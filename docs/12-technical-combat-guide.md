@@ -386,6 +386,15 @@ Teclas:
 | Pausar/continuar | `Espaço` |
 | Zoom | Mouse wheel |
 | Resetar zoom | `0` |
+| Aumentar `scale` do manifesto | `=` |
+| Diminuir `scale` do manifesto | `-` |
+| Mover `pivot` do frame atual | `Setas` ou `Shift+Setas` |
+| Ajustar largura/altura do corpo físico | `Ctrl+Setas` |
+| Ajustar altura abaixada do corpo físico | `Ctrl+Shift+Setas` |
+| Gerar rascunho de `frames[].combat` pelo overlay runtime | `N` |
+| Mover hurtbox/hitbox/origem de projectile do frame | Mouse esquerdo nas boxes/alças |
+| Redimensionar hurtbox/hitbox do frame | Mouse esquerdo nos cantos da box |
+| Salvar manifestos de tuning | `Ctrl+S` |
 | Mostrar/esconder dummy | `O` |
 | Mostrar/esconder boxes de combate | `M` |
 | Mostrar/esconder trajetória de projectile | `T` |
@@ -396,7 +405,11 @@ Teclas:
 | Alternar bounds | `B` |
 | Resetar posição | `R` |
 
-O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtbox atual do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetória prevista de projectile, metadata `frames[].combat` e timeline inferior com fase aproximada de startup/active/recovery quando `--character` e `--move` estao presentes. A coordenada do cursor é a referência prática para preencher `frames[].combat`: `local x,y` entra no JSON do frame; `atlas x,y` serve para conferir a posição no PNG. O personagem e o golpe podem ser trocados em runtime com `C`/`Shift+C` e `[`/`]`, sem reabrir o comando. `Enter` tenta selecionar o clip mais provável para o golpe atual. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. A evolução restante está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
+O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtbox atual do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetória prevista de projectile, metadata `frames[].combat` e timeline inferior com fase aproximada de startup/active/recovery quando `--character` e `--move` estao presentes. A coordenada do cursor é a referência prática para preencher `frames[].combat`: `local x,y` entra no JSON do frame; `atlas x,y` serve para conferir a posição no PNG.
+
+O viewer já possui edição visual para essa metadata: `N` substitui a metadata do frame atual por um rascunho vindo do overlay runtime, o mouse move boxes/origem, cantos das boxes redimensionam hurtboxes/hitboxes, e `Ctrl+S` persiste o manifesto. Essa edição fica em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs) e é coberta por [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs). A renderização das alças fica em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs). Mesmo assim, a luta real ainda usa `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`; `frames[].combat` continua sendo metadata visual até a fase de integração com gameplay.
+
+O personagem e o golpe podem ser trocados em runtime com `C`/`Shift+C` e `[`/`]`, sem reabrir o comando. `Enter` tenta selecionar o clip mais provável para o golpe atual. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. A evolução restante está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
 
 ## Cabeçalho de Arquivos
 

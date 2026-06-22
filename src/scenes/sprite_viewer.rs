@@ -20,7 +20,10 @@ use crate::{
         projectile::Projectile,
     },
     config::{FLOOR_Y, WINDOW_WIDTH},
-    engine::sprites::{SpriteCombatBox, SpriteFrame, SpriteManifest, SpriteManifestError},
+    engine::sprites::{
+        SpriteCombatBox, SpriteCombatPoint, SpriteFrame, SpriteFrameCombat, SpriteManifest,
+        SpriteManifestError,
+    },
     math::rect::Rect,
     scenes::combat_lab::CombatLabMove,
 };
@@ -33,6 +36,8 @@ const ZOOM_STEP: f32 = 0.12;
 const MANIFEST_SCALE_MIN: f32 = 0.25;
 const MANIFEST_SCALE_MAX: f32 = 2.0;
 const MANIFEST_SCALE_STEP: f32 = 0.025;
+const FRAME_COMBAT_HANDLE_RADIUS: f32 = 8.0;
+const FRAME_COMBAT_BOX_MIN_SIZE: i32 = 2;
 
 /// Launch data for the standalone sprite viewer.
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -64,6 +69,7 @@ pub struct SpriteViewerInput {
     pub toggle_projectile_trajectory: bool,
     pub reload_manifest: bool,
     pub save_manifest: bool,
+    pub seed_frame_combat: bool,
     pub increase_manifest_scale: bool,
     pub decrease_manifest_scale: bool,
     pub reset_zoom: bool,
@@ -111,6 +117,21 @@ impl ViewerRect {
             && point.x <= self.x + self.width
             && point.y >= self.y
             && point.y <= self.y + self.height
+    }
+
+    /// Returns the right edge.
+    pub fn right(self) -> f32 {
+        self.x + self.width
+    }
+
+    /// Returns the bottom edge.
+    pub fn bottom(self) -> f32 {
+        self.y + self.height
+    }
+
+    /// Returns the center point.
+    pub fn center(self) -> ViewerPoint {
+        ViewerPoint::new(self.x + self.width * 0.5, self.y + self.height * 0.5)
     }
 }
 
@@ -178,8 +199,17 @@ pub struct SpriteFrameCursor {
 /// One frame-local combat box projected into viewer screen coordinates.
 #[derive(Clone, Debug, PartialEq)]
 pub struct SpriteFrameCombatBoxOverlay {
+    pub kind: SpriteFrameCombatBoxKind,
+    pub index: usize,
     pub rect: ViewerRect,
     pub label: Option<String>,
+}
+
+/// Identifies which frame-local combat box collection an overlay belongs to.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum SpriteFrameCombatBoxKind {
+    Hurtbox,
+    Hitbox,
 }
 
 /// Data-driven combat metadata projected from the current sprite frame.
@@ -219,10 +249,27 @@ pub enum SpriteViewerError {
     },
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 enum DragTarget {
     Main,
     Dummy,
+    FrameCombatBox {
+        kind: SpriteFrameCombatBoxKind,
+        index: usize,
+        mode: FrameCombatBoxDragMode,
+        local_offset_x: i32,
+        local_offset_y: i32,
+    },
+    ProjectileOrigin,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum FrameCombatBoxDragMode {
+    Move,
+    TopLeft,
+    TopRight,
+    BottomLeft,
+    BottomRight,
 }
 
 impl SpriteViewer {
@@ -357,6 +404,9 @@ impl SpriteViewer {
             && let Err(error) = self.save_manifest()
         {
             self.status_message = Some(error.to_string());
+        }
+        if input.seed_frame_combat {
+            self.seed_current_frame_combat_from_runtime();
         }
         if input.reset_position {
             self.anchor = ViewerPoint::new(DEFAULT_ANCHOR_X, FLOOR_Y);
@@ -718,12 +768,30 @@ impl SpriteViewer {
             hurtboxes: combat
                 .hurtboxes
                 .iter()
-                .map(|combat_box| self.project_frame_combat_box(screen, frame, combat_box))
+                .enumerate()
+                .map(|(index, combat_box)| {
+                    self.project_frame_combat_box(
+                        screen,
+                        frame,
+                        SpriteFrameCombatBoxKind::Hurtbox,
+                        index,
+                        combat_box,
+                    )
+                })
                 .collect(),
             hitboxes: combat
                 .hitboxes
                 .iter()
-                .map(|combat_box| self.project_frame_combat_box(screen, frame, combat_box))
+                .enumerate()
+                .map(|(index, combat_box)| {
+                    self.project_frame_combat_box(
+                        screen,
+                        frame,
+                        SpriteFrameCombatBoxKind::Hitbox,
+                        index,
+                        combat_box,
+                    )
+                })
                 .collect(),
             projectile_origin: combat.projectile_origin.map(|origin| {
                 let scale_x = screen.width / frame.frame.w as f32;
@@ -792,11 +860,15 @@ impl SpriteViewer {
         &self,
         screen: ViewerRect,
         frame: &SpriteFrame,
+        kind: SpriteFrameCombatBoxKind,
+        index: usize,
         combat_box: &SpriteCombatBox,
     ) -> SpriteFrameCombatBoxOverlay {
         let scale_x = screen.width / frame.frame.w as f32;
         let scale_y = screen.height / frame.frame.h as f32;
         SpriteFrameCombatBoxOverlay {
+            kind,
+            index,
             rect: ViewerRect {
                 x: screen.x + combat_box.x as f32 * scale_x,
                 y: screen.y + combat_box.y as f32 * scale_y,
@@ -809,33 +881,61 @@ impl SpriteViewer {
 
     fn update_drag(&mut self, input: SpriteViewerInput) {
         if input.mouse_pressed {
-            let target =
-                if self.show_dummy && self.dummy_screen_rect().contains(input.mouse_position) {
-                    Some(DragTarget::Dummy)
-                } else if self.sprite_screen_rect().contains(input.mouse_position) {
-                    Some(DragTarget::Main)
-                } else {
-                    None
-                };
+            let target = self
+                .frame_combat_drag_target(input.mouse_position)
+                .or_else(|| {
+                    if self.show_dummy && self.dummy_screen_rect().contains(input.mouse_position) {
+                        Some(DragTarget::Dummy)
+                    } else if self.sprite_screen_rect().contains(input.mouse_position) {
+                        Some(DragTarget::Main)
+                    } else {
+                        None
+                    }
+                });
 
             if let Some(target) = target {
                 self.dragging = Some(target);
-                let anchor = self.anchor_for_target(target);
-                self.drag_offset = ViewerPoint::new(
-                    input.mouse_position.x - anchor.x,
-                    input.mouse_position.y - anchor.y,
-                );
+                if matches!(target, DragTarget::Main | DragTarget::Dummy) {
+                    let anchor = self.anchor_for_target(target);
+                    self.drag_offset = ViewerPoint::new(
+                        input.mouse_position.x - anchor.x,
+                        input.mouse_position.y - anchor.y,
+                    );
+                }
             }
         }
 
         if let Some(target) = self.dragging
             && input.mouse_down
         {
-            let anchor = ViewerPoint::new(
-                input.mouse_position.x - self.drag_offset.x,
-                input.mouse_position.y - self.drag_offset.y,
-            );
-            self.set_anchor_for_target(target, anchor);
+            match target {
+                DragTarget::Main | DragTarget::Dummy => {
+                    let anchor = ViewerPoint::new(
+                        input.mouse_position.x - self.drag_offset.x,
+                        input.mouse_position.y - self.drag_offset.y,
+                    );
+                    self.set_anchor_for_target(target, anchor);
+                }
+                DragTarget::FrameCombatBox {
+                    kind,
+                    index,
+                    mode,
+                    local_offset_x,
+                    local_offset_y,
+                } => {
+                    self.drag_frame_combat_box(
+                        kind,
+                        index,
+                        mode,
+                        local_offset_x,
+                        local_offset_y,
+                        input.mouse_position,
+                    );
+                }
+                DragTarget::ProjectileOrigin => {
+                    self.drag_projectile_origin(input.mouse_position);
+                }
+            }
         }
 
         if input.mouse_released {
@@ -847,6 +947,7 @@ impl SpriteViewer {
         match target {
             DragTarget::Main => self.anchor,
             DragTarget::Dummy => self.dummy_anchor,
+            DragTarget::FrameCombatBox { .. } | DragTarget::ProjectileOrigin => self.anchor,
         }
     }
 
@@ -854,7 +955,208 @@ impl SpriteViewer {
         match target {
             DragTarget::Main => self.anchor = anchor,
             DragTarget::Dummy => self.dummy_anchor = anchor,
+            DragTarget::FrameCombatBox { .. } | DragTarget::ProjectileOrigin => {}
         }
+    }
+
+    fn frame_combat_drag_target(&self, point: ViewerPoint) -> Option<DragTarget> {
+        if !self.show_combat_overlay {
+            return None;
+        }
+
+        let overlay = self.frame_combat_overlay()?;
+        if let Some(origin) = overlay.projectile_origin
+            && point_distance(point, origin) <= FRAME_COMBAT_HANDLE_RADIUS
+        {
+            return Some(DragTarget::ProjectileOrigin);
+        }
+
+        overlay
+            .hitboxes
+            .iter()
+            .rev()
+            .chain(overlay.hurtboxes.iter().rev())
+            .find_map(|overlay_box| self.drag_target_for_frame_box(point, overlay_box))
+    }
+
+    fn drag_target_for_frame_box(
+        &self,
+        point: ViewerPoint,
+        overlay_box: &SpriteFrameCombatBoxOverlay,
+    ) -> Option<DragTarget> {
+        let mode = frame_box_drag_mode(point, overlay_box.rect)?;
+        let local = self.screen_to_frame_local_clamped(point);
+        let combat_box = self.current_frame_combat_box(overlay_box.kind, overlay_box.index)?;
+
+        Some(DragTarget::FrameCombatBox {
+            kind: overlay_box.kind,
+            index: overlay_box.index,
+            mode,
+            local_offset_x: local.x - combat_box.x,
+            local_offset_y: local.y - combat_box.y,
+        })
+    }
+
+    fn current_frame_combat_box(
+        &self,
+        kind: SpriteFrameCombatBoxKind,
+        index: usize,
+    ) -> Option<&SpriteCombatBox> {
+        let combat = self.current_frame().combat.as_ref()?;
+        match kind {
+            SpriteFrameCombatBoxKind::Hurtbox => combat.hurtboxes.get(index),
+            SpriteFrameCombatBoxKind::Hitbox => combat.hitboxes.get(index),
+        }
+    }
+
+    fn drag_frame_combat_box(
+        &mut self,
+        kind: SpriteFrameCombatBoxKind,
+        index: usize,
+        mode: FrameCombatBoxDragMode,
+        local_offset_x: i32,
+        local_offset_y: i32,
+        point: ViewerPoint,
+    ) {
+        let local = self.screen_to_frame_local_clamped(point);
+        let frame_name = self.manifest.clips[self.clip_index].frames[self.frame_index].clone();
+        let Some(frame) = self.manifest.frame_named_mut(&frame_name) else {
+            return;
+        };
+        let frame_width = frame.frame.w;
+        let frame_height = frame.frame.h;
+        let combat = frame.combat.get_or_insert_with(SpriteFrameCombat::default);
+        let combat_boxes = match kind {
+            SpriteFrameCombatBoxKind::Hurtbox => &mut combat.hurtboxes,
+            SpriteFrameCombatBoxKind::Hitbox => &mut combat.hitboxes,
+        };
+        let Some(combat_box) = combat_boxes.get_mut(index) else {
+            return;
+        };
+
+        edit_combat_box(
+            combat_box,
+            mode,
+            local,
+            local_offset_x,
+            local_offset_y,
+            frame_width,
+            frame_height,
+        );
+        self.manifest_dirty = true;
+        self.status_message = Some(format!(
+            "{kind:?} #{index}: {},{} {}x{}. Ctrl+S salva.",
+            combat_box.x, combat_box.y, combat_box.w, combat_box.h
+        ));
+    }
+
+    fn drag_projectile_origin(&mut self, point: ViewerPoint) {
+        let local = self.screen_to_frame_local_clamped(point);
+        let frame_name = self.manifest.clips[self.clip_index].frames[self.frame_index].clone();
+        let Some(frame) = self.manifest.frame_named_mut(&frame_name) else {
+            return;
+        };
+        let combat = frame.combat.get_or_insert_with(SpriteFrameCombat::default);
+        combat.projectile_origin = Some(local);
+        self.manifest_dirty = true;
+        self.status_message = Some(format!(
+            "Origem de projectile: {},{}. Ctrl+S salva.",
+            local.x, local.y
+        ));
+    }
+
+    fn screen_to_frame_local_clamped(&self, point: ViewerPoint) -> SpriteCombatPoint {
+        let screen = self.sprite_screen_rect();
+        let frame = self.current_frame();
+        let scale_x = frame.frame.w as f32 / screen.width;
+        let scale_y = frame.frame.h as f32 / screen.height;
+        SpriteCombatPoint {
+            x: ((point.x - screen.x) * scale_x).round() as i32,
+            y: ((point.y - screen.y) * scale_y).round() as i32,
+        }
+        .clamped_to_frame(frame)
+    }
+
+    fn seed_current_frame_combat_from_runtime(&mut self) {
+        self.show_combat_overlay = true;
+        let Some(overlay) = self.combat_overlay() else {
+            self.status_message =
+                Some("Selecione --character para gerar metadata de combate.".to_string());
+            return;
+        };
+
+        let hurtbox_labels = ["head", "torso", "legs"];
+        let hurtboxes = overlay
+            .hurtboxes
+            .rects()
+            .into_iter()
+            .zip(hurtbox_labels)
+            .filter_map(|(rect, label)| self.screen_rect_to_frame_combat_box(rect, Some(label)))
+            .collect::<Vec<_>>();
+
+        let hitboxes = overlay
+            .hitbox
+            .and_then(|hitbox| self.screen_rect_to_frame_combat_box(hitbox, Some("strike")))
+            .into_iter()
+            .collect::<Vec<_>>();
+
+        let projectile_origin = overlay
+            .projectile_origin
+            .map(|origin| self.screen_to_frame_local_clamped(origin));
+
+        if hurtboxes.is_empty() && hitboxes.is_empty() && projectile_origin.is_none() {
+            self.status_message =
+                Some("Overlay runtime nao cruza o frame atual; nada gerado.".to_string());
+            return;
+        }
+
+        let frame_name = self.manifest.clips[self.clip_index].frames[self.frame_index].clone();
+        let Some(frame) = self.manifest.frame_named_mut(&frame_name) else {
+            return;
+        };
+        frame.combat = Some(SpriteFrameCombat {
+            hurtboxes,
+            hitboxes,
+            projectile_origin,
+        });
+        self.manifest_dirty = true;
+        self.status_message = Some(format!(
+            "Metadata de combate gerada para {}. Arraste as boxes e use Ctrl+S.",
+            frame.name
+        ));
+    }
+
+    fn screen_rect_to_frame_combat_box(
+        &self,
+        rect: Rect,
+        label: Option<&str>,
+    ) -> Option<SpriteCombatBox> {
+        let screen = self.sprite_screen_rect();
+        let frame = self.current_frame();
+        let scale_x = frame.frame.w as f32 / screen.width;
+        let scale_y = frame.frame.h as f32 / screen.height;
+        let x0 = ((rect.x - screen.x) * scale_x).floor() as i32;
+        let y0 = ((rect.y - screen.y) * scale_y).floor() as i32;
+        let x1 = ((rect.right() - screen.x) * scale_x).ceil() as i32;
+        let y1 = ((rect.bottom() - screen.y) * scale_y).ceil() as i32;
+        let x0 = x0.clamp(0, frame.frame.w);
+        let y0 = y0.clamp(0, frame.frame.h);
+        let x1 = x1.clamp(0, frame.frame.w);
+        let y1 = y1.clamp(0, frame.frame.h);
+        let width = x1 - x0;
+        let height = y1 - y0;
+
+        if width < FRAME_COMBAT_BOX_MIN_SIZE || height < FRAME_COMBAT_BOX_MIN_SIZE {
+            return None;
+        }
+
+        Some(SpriteCombatBox {
+            x: x0,
+            y: y0,
+            w: width,
+            h: height,
+            label: label.map(ToString::to_string),
+        })
     }
 
     fn adjust_manifest_scale(&mut self, delta: f32) {
@@ -1106,6 +1408,15 @@ impl Error for SpriteViewerError {
     }
 }
 
+impl SpriteCombatPoint {
+    fn clamped_to_frame(self, frame: &SpriteFrame) -> Self {
+        Self {
+            x: self.x.clamp(0, frame.frame.w),
+            y: self.y.clamp(0, frame.frame.h),
+        }
+    }
+}
+
 fn wrap_index(current: usize, len: usize, direction: i32) -> usize {
     debug_assert!(len > 0);
     let len = len as i32;
@@ -1168,6 +1479,106 @@ fn hitbox_for_move(fighter: &Fighter, spec: MoveSpec) -> Rect {
         Facing::Left => body.x - hitbox.width,
     };
     Rect::new(x, body.y + hitbox.y_offset, hitbox.width, hitbox.height)
+}
+
+fn frame_box_drag_mode(point: ViewerPoint, rect: ViewerRect) -> Option<FrameCombatBoxDragMode> {
+    if point_near(
+        point,
+        ViewerPoint::new(rect.x, rect.y),
+        FRAME_COMBAT_HANDLE_RADIUS,
+    ) {
+        return Some(FrameCombatBoxDragMode::TopLeft);
+    }
+    if point_near(
+        point,
+        ViewerPoint::new(rect.right(), rect.y),
+        FRAME_COMBAT_HANDLE_RADIUS,
+    ) {
+        return Some(FrameCombatBoxDragMode::TopRight);
+    }
+    if point_near(
+        point,
+        ViewerPoint::new(rect.x, rect.bottom()),
+        FRAME_COMBAT_HANDLE_RADIUS,
+    ) {
+        return Some(FrameCombatBoxDragMode::BottomLeft);
+    }
+    if point_near(
+        point,
+        ViewerPoint::new(rect.right(), rect.bottom()),
+        FRAME_COMBAT_HANDLE_RADIUS,
+    ) {
+        return Some(FrameCombatBoxDragMode::BottomRight);
+    }
+    if rect.contains(point) {
+        return Some(FrameCombatBoxDragMode::Move);
+    }
+
+    None
+}
+
+fn edit_combat_box(
+    combat_box: &mut SpriteCombatBox,
+    mode: FrameCombatBoxDragMode,
+    local: SpriteCombatPoint,
+    local_offset_x: i32,
+    local_offset_y: i32,
+    frame_width: i32,
+    frame_height: i32,
+) {
+    let old_right = combat_box.x + combat_box.w;
+    let old_bottom = combat_box.y + combat_box.h;
+
+    match mode {
+        FrameCombatBoxDragMode::Move => {
+            combat_box.x =
+                (local.x - local_offset_x).clamp(0, frame_width.saturating_sub(combat_box.w));
+            combat_box.y =
+                (local.y - local_offset_y).clamp(0, frame_height.saturating_sub(combat_box.h));
+        }
+        FrameCombatBoxDragMode::TopLeft => {
+            combat_box.x = local.x.clamp(0, old_right - FRAME_COMBAT_BOX_MIN_SIZE);
+            combat_box.y = local.y.clamp(0, old_bottom - FRAME_COMBAT_BOX_MIN_SIZE);
+            combat_box.w = old_right - combat_box.x;
+            combat_box.h = old_bottom - combat_box.y;
+        }
+        FrameCombatBoxDragMode::TopRight => {
+            let next_right = local
+                .x
+                .clamp(combat_box.x + FRAME_COMBAT_BOX_MIN_SIZE, frame_width);
+            combat_box.y = local.y.clamp(0, old_bottom - FRAME_COMBAT_BOX_MIN_SIZE);
+            combat_box.w = next_right - combat_box.x;
+            combat_box.h = old_bottom - combat_box.y;
+        }
+        FrameCombatBoxDragMode::BottomLeft => {
+            let next_bottom = local
+                .y
+                .clamp(combat_box.y + FRAME_COMBAT_BOX_MIN_SIZE, frame_height);
+            combat_box.x = local.x.clamp(0, old_right - FRAME_COMBAT_BOX_MIN_SIZE);
+            combat_box.w = old_right - combat_box.x;
+            combat_box.h = next_bottom - combat_box.y;
+        }
+        FrameCombatBoxDragMode::BottomRight => {
+            let next_right = local
+                .x
+                .clamp(combat_box.x + FRAME_COMBAT_BOX_MIN_SIZE, frame_width);
+            let next_bottom = local
+                .y
+                .clamp(combat_box.y + FRAME_COMBAT_BOX_MIN_SIZE, frame_height);
+            combat_box.w = next_right - combat_box.x;
+            combat_box.h = next_bottom - combat_box.y;
+        }
+    }
+}
+
+fn point_near(point: ViewerPoint, target: ViewerPoint, radius: f32) -> bool {
+    point_distance(point, target) <= radius
+}
+
+fn point_distance(a: ViewerPoint, b: ViewerPoint) -> f32 {
+    let dx = a.x - b.x;
+    let dy = a.y - b.y;
+    (dx * dx + dy * dy).sqrt()
 }
 
 fn preferred_clips_for_move(selected_move: CombatLabMove) -> &'static [&'static str] {

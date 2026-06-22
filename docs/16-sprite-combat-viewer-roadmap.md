@@ -90,9 +90,13 @@ Atalhos:
 | Mover `pivot` em passos maiores | `Shift+Setas` |
 | Ajustar largura/altura do corpo fisico | `Ctrl+Setas` |
 | Ajustar altura abaixada do corpo fisico | `Ctrl+Shift+Setas` |
+| Gerar rascunho de `frames[].combat` pelo overlay runtime | `N` |
+| Mover hurtbox/hitbox/origem de projectile do frame | Mouse esquerdo nas boxes/alcas |
+| Redimensionar hurtbox/hitbox do frame | Mouse esquerdo nos cantos da box |
 | Salvar manifestos de tuning | `Ctrl+S` |
 | Mostrar/esconder dummy | `O` |
 | Mostrar/esconder boxes de combate | `M` |
+| Mostrar/esconder trajetoria de projectile | `T` |
 | Recarregar manifesto e atlas | `F5` |
 | Salvar screenshot | `F12` |
 | Alternar grade | `G` |
@@ -175,9 +179,12 @@ Ja existe:
 - alternancia runtime de personagem/golpe com `C`/`Shift+C` e `[`/`]`;
 - preview simples de trajetoria de projectile com `T`.
 - inspetor de coordenada local/atlas do cursor para preencher `frames[].combat`;
+- geracao de rascunho de `frames[].combat` com `N`, usando o overlay runtime do golpe selecionado;
+- alcas visuais para mover e redimensionar `frames[].combat.hurtboxes[]` e `frames[].combat.hitboxes[]`;
+- alca visual para mover `frames[].combat.projectile_origin`;
 - sincronizacao manual entre golpe e clip visual com `Enter`.
 
-Regra importante: a ferramenta so salva manifestos por comando explicito (`Ctrl+S`). Escala, pivot e corpo fisico ja sao editaveis; hitbox/hurtbox ainda devem ser alteradas manualmente no JSON ate termos alcas visuais confiaveis.
+Regra importante: a ferramenta so salva manifestos por comando explicito (`Ctrl+S`). Escala, pivot, corpo fisico e metadata visual de hitbox/hurtbox/origem ja sao editaveis. A luta real ainda nao consome `frames[].combat`.
 
 ### Fase 4 — Produtividade Para Artistas
 
@@ -187,8 +194,8 @@ Entregas planejadas:
 - preset de escala por personagem;
 - overlay comparativo contra greybox de altura alvo;
 - marca de chao, centro, alcance e margem segura;
-- alcas visuais para redimensionar `frames[].combat.hurtboxes[]` e `frames[].combat.hitboxes[]`;
-- alca visual para mover `frames[].combat.projectile_origin`;
+- refinamento de selecao para multiplas boxes sobrepostas;
+- comandos para adicionar/remover/renomear boxes sem editar JSON manualmente;
 - manifesto ou config data-driven para metricas de arena, se a camera deixar de ser fixa;
 - export de screenshot para PR/review de arte.
 
