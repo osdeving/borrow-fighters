@@ -21,6 +21,8 @@ fn main() {
         .title(WINDOW_TITLE)
         .build();
     raylib.set_exit_key(None);
+    raylib.enable_cursor();
+    raylib.show_cursor();
 
     App::new(options).run(&mut raylib, &thread);
 }
