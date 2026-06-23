@@ -379,7 +379,7 @@ Status: **concluída em corte mínimo, com primeiro tuning específico por perso
 Entregáveis:
 
 - [x] mover dados hard-coded de `AttackKind::spec` para `MoveSpec`;
-- [x] criar `CharacterSpec` para Rust, Duke, Go e C;
+- [x] criar `CharacterSpec` para Rust, Duke, Go, C e Python;
 - [x] fazer `World`, `Combat Lab` e `Fighter` consumirem nome, vida máxima e loadout vindos de `CharacterSpec`;
 - [x] manter comportamento atual com dados novos;
 - [x] testes garantindo que dados antigos continuam equivalentes.

@@ -33,6 +33,7 @@ const PLAYER_ONE: Color = Color::new(112, 181, 255, 255);
 const PLAYER_TWO: Color = Color::new(255, 178, 104, 255);
 const PLAYER_GO: Color = Color::new(96, 220, 190, 255);
 pub(super) const PLAYER_C: Color = Color::new(126, 194, 255, 255);
+pub(super) const PLAYER_PYTHON: Color = Color::new(255, 210, 92, 255);
 const BODY_OUTLINE: Color = Color::new(238, 241, 247, 255);
 const HURTBOX: Color = Color::new(105, 240, 174, 255);
 const HITBOX: Color = Color::new(255, 82, 82, 255);
@@ -730,6 +731,7 @@ fn character_select_label(character: CharacterId) -> &'static str {
         CharacterId::Duke => "duke.java",
         CharacterId::Go => "gopher.go",
         CharacterId::C => "old.c",
+        CharacterId::Python => "python.py",
     }
 }
 
@@ -743,6 +745,7 @@ mod tests {
         assert_eq!(character_select_label(CharacterId::Rust), "rust.rs");
         assert_eq!(character_select_label(CharacterId::Duke), "duke.java");
         assert_eq!(character_select_label(CharacterId::Go), "gopher.go");
+        assert_eq!(character_select_label(CharacterId::Python), "python.py");
     }
 }
 
@@ -1772,6 +1775,12 @@ fn character_visuals<'a>(character: CharacterId, assets: &'a GameAssets) -> Char
             fight_atlas: assets.c_fighter.as_ref(),
             start_atlas: assets.c_start.as_ref(),
             projectile_texture: assets.c_projectile.as_ref(),
+        },
+        CharacterId::Python => CharacterVisuals {
+            body_color: PLAYER_PYTHON,
+            fight_atlas: assets.python_fighter.as_ref(),
+            start_atlas: None,
+            projectile_texture: assets.python_projectile.as_ref(),
         },
     }
 }

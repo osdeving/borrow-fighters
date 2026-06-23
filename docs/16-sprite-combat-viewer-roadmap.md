@@ -176,7 +176,7 @@ Ja existe:
 - ajuste e persistencia de `frames[].pivot` do frame atual com `Setas`/`Shift+Setas` e `Ctrl+S`;
 - ajuste e persistencia de corpo fisico por personagem em [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json);
 - `frames[].combat.hurtboxes[]`, `frames[].combat.hitboxes[]` e `frames[].combat.projectile_origin` no schema `borrow-fighters.sprite.v1`;
-- origem de projectile calibrada no primeiro frame do clip `special` de Rust, Duke, Go e C;
+- origem de projectile calibrada no primeiro frame do clip `special` de Rust, Duke, Go, C e Python;
 - hitboxes iniciais do Rust `Borrow Jab`, heavy punch e kick, ainda equivalentes ao alcance greybox atual;
 - validacao em [`src/engine/sprites/manifest.rs`](../src/engine/sprites/manifest.rs);
 - projecao testavel em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs);
@@ -227,7 +227,7 @@ Ja existe:
 
 - A edicao visual de boxes deve acontecer no manifesto de sprite ou em arquivo lateral por personagem?
 - O Combat Lab deve reaproveitar o mesmo estado do viewer ou apenas os mesmos dados?
-- Go e C ja possuem atlas placeholder; falta revisar boxes por frame e criterios de aceite visual.
+- Go, C e Python ja possuem atlas placeholder; falta revisar boxes por frame e criterios de aceite visual.
 - `raygui` entra como feature opcional ou evitamos dependency feature ate a ferramenta exigir?
 
 ## Criterios de Aceite Para Contribuidores

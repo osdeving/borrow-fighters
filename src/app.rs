@@ -480,6 +480,7 @@ fn fighter_manifest_for_character(
         CharacterId::Duke => assets.duke_fighter.as_ref(),
         CharacterId::Go => assets.go_fighter.as_ref(),
         CharacterId::C => assets.c_fighter.as_ref(),
+        CharacterId::Python => assets.python_fighter.as_ref(),
     }
     .map(|atlas| atlas.manifest.clone())
 }

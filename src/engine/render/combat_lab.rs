@@ -17,8 +17,8 @@ use crate::scenes::combat_lab::{CombatLab, CombatLabPose};
 use crate::ui::combat_debug;
 
 use super::{
-    BACKGROUND, FighterDrawOptions, PLAYER_C, PLAYER_GO, PLAYER_ONE, PLAYER_TWO, PROJECTILE,
-    PROJECTILE_FILL, UI_MUTED, draw_arena, draw_fighter, outline_rect,
+    BACKGROUND, FighterDrawOptions, PLAYER_C, PLAYER_GO, PLAYER_ONE, PLAYER_PYTHON, PLAYER_TWO,
+    PROJECTILE, PROJECTILE_FILL, UI_MUTED, draw_arena, draw_fighter, outline_rect,
 };
 
 /// Draws the isolated Combat Lab scene.
@@ -51,6 +51,11 @@ pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, asset
             PLAYER_C,
             assets.c_fighter.as_ref(),
             assets.c_projectile.as_ref(),
+        ),
+        CharacterId::Python => (
+            PLAYER_PYTHON,
+            assets.python_fighter.as_ref(),
+            assets.python_projectile.as_ref(),
         ),
     };
 

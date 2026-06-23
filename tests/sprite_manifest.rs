@@ -11,13 +11,11 @@ use borrow_fighters::{
     engine::sprites::{
         C_BITSTREAM_PROJECTILE_PATH, C_FIGHTER_MANIFEST_PATH, C_START_MANIFEST_PATH,
         DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH, GO_CHANNEL_PROJECTILE_PATH,
-        GO_FIGHTER_MANIFEST_PATH, GO_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH,
-        RUST_START_MANIFEST_PATH, SPRITE_SCHEMA, SpriteManifest, frame_for_clip_at,
-        project_frame_combat,
+        GO_FIGHTER_MANIFEST_PATH, GO_START_MANIFEST_PATH, PYTHON_DATA_PROJECTILE_PATH,
+        PYTHON_FIGHTER_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH, RUST_START_MANIFEST_PATH,
+        SPRITE_SCHEMA, SpriteManifest, frame_for_clip_at, project_frame_combat,
     },
 };
-
-const PYTHON_FIGHTER_MANIFEST_PATH: &str = "assets/placeholder/python-fighter.sprite.json";
 
 fn assert_f32_close(actual: f32, expected: f32, context: &str) {
     assert!(
@@ -96,6 +94,14 @@ fn python_fighter_manifest_candidate_loads() {
     assert!(manifest.clip_named("punch_heavy").is_some());
     assert!(manifest.clip_named("taunt").is_some());
     assert!(manifest.clip_named("special").is_some());
+}
+
+#[test]
+fn python_runtime_sprite_assets_exist() {
+    let fighter = SpriteManifest::load(PYTHON_FIGHTER_MANIFEST_PATH).expect("manifest should load");
+
+    assert!(fighter.image_path(PYTHON_FIGHTER_MANIFEST_PATH).exists());
+    assert!(Path::new(PYTHON_DATA_PROJECTILE_PATH).exists());
 }
 
 #[test]

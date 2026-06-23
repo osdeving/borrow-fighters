@@ -98,6 +98,7 @@ Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ai
 | Duke / Java | `DUKE_PROJECTILE_SPEC` | bean pesado para ocupar espaço e forçar resposta lenta | 10 | 270 px/s | 72f | tela inteira | pular mais cedo, ganhar terreno durante recovery, punir se Duke erra leitura |
 | Go | `GO_PROJECTILE_SPEC` | burst rápido para cobrir entrada sem virar zoner | 6 | 430 px/s | 44f | 320 px | ficar fora do curto alcance, bloquear pouco dano, desafiar depois do burst |
 | C | `C_PROJECTILE_SPEC` | bitstream médio/rápido para validar asset separado e origem do especial | 8 | 360 px/s | 56f | tela inteira | bloquear chip, pular, aproximar no cooldown |
+| Python | `PYTHON_PROJECTILE_SPEC` | fluxo de dados rápido/médio para validar atlas novo sem virar zoner completo | 7 | 390 px/s | 50f | tela inteira | bloquear pouco dano, pular, desafiar antes do próximo fluxo |
 
 ## Matchups de Intenção
 

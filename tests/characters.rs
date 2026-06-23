@@ -6,7 +6,8 @@ use borrow_fighters::characters::{
 };
 use borrow_fighters::combat::move_data::MoveId;
 use borrow_fighters::combat::projectile::{
-    C_PROJECTILE_SPEC, DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, RUST_PROJECTILE_SPEC,
+    C_PROJECTILE_SPEC, DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, PYTHON_PROJECTILE_SPEC,
+    RUST_PROJECTILE_SPEC,
 };
 use borrow_fighters::game::world::World;
 
@@ -107,6 +108,30 @@ fn c_spec_points_to_current_prototype_moves() {
 }
 
 #[test]
+fn python_spec_points_to_current_prototype_moves() {
+    let python = character_spec(CharacterId::Python);
+
+    assert_eq!(python.display_name, "Python");
+    assert_eq!(python.fighter_name, "Python");
+    assert_eq!(python.archetype, CharacterArchetype::AllRounder);
+    assert_eq!(python.stats.max_health, 96);
+    assert_eq!(
+        python.move_ids,
+        &[
+            MoveId::LightPunch,
+            MoveId::HeavyPunch,
+            MoveId::Kick,
+            MoveId::SweepKick,
+            MoveId::OverheadPunch,
+            MoveId::RisingAntiAir,
+            MoveId::AirPunch,
+            MoveId::AirKick,
+            MoveId::CloseThrow,
+        ]
+    );
+}
+
+#[test]
 fn character_body_metrics_manifest_loads_go_as_leaner_mascot_body() {
     let catalog = CharacterBodyMetricsCatalog::load(CHARACTER_BODY_METRICS_PATH)
         .expect("character body metrics should load");
@@ -160,8 +185,18 @@ fn character_cli_aliases_are_stable() {
     assert_eq!(CharacterId::from_cli("gopher"), Some(CharacterId::Go));
     assert_eq!(CharacterId::from_cli("c"), Some(CharacterId::C));
     assert_eq!(CharacterId::from_cli("langc"), Some(CharacterId::C));
+    assert_eq!(CharacterId::from_cli("python"), Some(CharacterId::Python));
+    assert_eq!(CharacterId::from_cli("py"), Some(CharacterId::Python));
+    assert_eq!(
+        CharacterId::from_cli("python.py"),
+        Some(CharacterId::Python)
+    );
     assert_eq!(CharacterId::from_audio_key("go"), Some(CharacterId::Go));
     assert_eq!(CharacterId::from_audio_key("c"), Some(CharacterId::C));
+    assert_eq!(
+        CharacterId::from_audio_key("python"),
+        Some(CharacterId::Python)
+    );
 }
 
 #[test]
@@ -169,11 +204,13 @@ fn character_roster_cycles_in_menu_order() {
     assert_eq!(CharacterId::Rust.next(), CharacterId::Duke);
     assert_eq!(CharacterId::Duke.next(), CharacterId::Go);
     assert_eq!(CharacterId::Go.next(), CharacterId::C);
-    assert_eq!(CharacterId::C.next(), CharacterId::Rust);
-    assert_eq!(CharacterId::Rust.previous(), CharacterId::C);
+    assert_eq!(CharacterId::C.next(), CharacterId::Python);
+    assert_eq!(CharacterId::Python.next(), CharacterId::Rust);
+    assert_eq!(CharacterId::Rust.previous(), CharacterId::Python);
     assert_eq!(CharacterId::Duke.previous(), CharacterId::Rust);
     assert_eq!(CharacterId::Go.previous(), CharacterId::Duke);
     assert_eq!(CharacterId::C.previous(), CharacterId::Go);
+    assert_eq!(CharacterId::Python.previous(), CharacterId::C);
 }
 
 #[test]
@@ -182,11 +219,13 @@ fn character_projectiles_follow_archetype_intent() {
     let duke = character_spec(CharacterId::Duke).projectile;
     let go = character_spec(CharacterId::Go).projectile;
     let c = character_spec(CharacterId::C).projectile;
+    let python = character_spec(CharacterId::Python).projectile;
 
     assert_eq!(rust, RUST_PROJECTILE_SPEC);
     assert_eq!(duke, DUKE_PROJECTILE_SPEC);
     assert_eq!(go, GO_PROJECTILE_SPEC);
     assert_eq!(c, C_PROJECTILE_SPEC);
+    assert_eq!(python, PYTHON_PROJECTILE_SPEC);
 
     assert!(duke.damage > rust.damage);
     assert!(duke.speed < rust.speed);
@@ -204,4 +243,10 @@ fn character_projectiles_follow_archetype_intent() {
     assert!(c.width > rust.width);
     assert_eq!(c.height, rust.height);
     assert_eq!(c.max_travel, None);
+
+    assert!(python.damage < rust.damage);
+    assert!(python.speed > c.speed);
+    assert!(python.speed < go.speed);
+    assert!(python.frame_data.cooldown < rust.frame_data.cooldown);
+    assert_eq!(python.max_travel, None);
 }

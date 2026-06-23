@@ -43,6 +43,12 @@ const C_PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
     hit_pushback: world_px(26.0),
     block_pushback: world_px(18.0),
 };
+const PYTHON_PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(14),
+    blockstun: FrameCount::new(10),
+    hit_pushback: world_px(24.0),
+    block_pushback: world_px(18.0),
+};
 
 /// Whole-frame timing data for the current projectile special.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -140,6 +146,25 @@ pub const C_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
         spawn_frame: FrameCount::ZERO,
         visual_duration: FrameCount::new(20),
         cooldown: FrameCount::new(56),
+    },
+    max_travel: None,
+};
+
+/// Python uses a brisk data-stream projectile while the snake stays readable.
+pub const PYTHON_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
+    width: world_px(64.0),
+    height: world_px(30.0),
+    front_spawn_offset: world_px(68.0),
+    center_y_from_body_bottom: world_px(88.0),
+    speed: world_px(390.0),
+    damage: 7,
+    guard_rule: GuardRule::Projectile,
+    hit_reaction: PYTHON_PROJECTILE_HIT_REACTION,
+    frame_data: ProjectileFrameData {
+        startup: FrameCount::ZERO,
+        spawn_frame: FrameCount::ZERO,
+        visual_duration: FrameCount::new(18),
+        cooldown: FrameCount::new(50),
     },
     max_travel: None,
 };

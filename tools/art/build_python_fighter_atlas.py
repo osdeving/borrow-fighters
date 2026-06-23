@@ -14,6 +14,7 @@ SOURCE_PATH = ROOT / "assets/references/python-fighter-atlas-source.png"
 REFERENCE_MANIFEST_PATH = ROOT / "assets/placeholder/c-fighter.sprite.json"
 ATLAS_PATH = ROOT / "assets/placeholder/python-fighter-atlas.png"
 MANIFEST_PATH = ROOT / "assets/placeholder/python-fighter.sprite.json"
+PROJECTILE_PATH = ROOT / "assets/placeholder/python-data-projectile.png"
 
 TARGET_COLUMNS = 6
 CELL_WIDTH = 384
@@ -60,6 +61,7 @@ def main() -> None:
 
     ATLAS_PATH.parent.mkdir(parents=True, exist_ok=True)
     atlas.save(ATLAS_PATH)
+    write_projectile_asset(atlas, frames)
 
     manifest = {
         "schema": "borrow-fighters.sprite.v1",
@@ -83,6 +85,7 @@ def main() -> None:
     MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n")
     print(f"wrote {ATLAS_PATH.relative_to(ROOT)}")
     print(f"wrote {MANIFEST_PATH.relative_to(ROOT)}")
+    print(f"wrote {PROJECTILE_PATH.relative_to(ROOT)}")
 
 
 def extract_source_sprites(source: Image.Image) -> list[Image.Image]:
@@ -300,6 +303,33 @@ def combat_metadata(frame_name: str) -> dict[str, Any] | None:
     if frame_name in special_origins:
         return {"projectile_origin": special_origins[frame_name]}
     return None
+
+
+def write_projectile_asset(atlas: Image.Image, frames: list[dict[str, Any]]) -> None:
+    projectile_frame = next(
+        frame for frame in frames if frame["name"] == "projectile_0"
+    )
+    frame_rect = projectile_frame["frame"]
+    cell = atlas.crop(
+        (
+            frame_rect["x"],
+            frame_rect["y"],
+            frame_rect["x"] + frame_rect["w"],
+            frame_rect["y"] + frame_rect["h"],
+        )
+    )
+    bounds = alpha_bounds(cell)
+    if bounds is None:
+        return
+
+    margin = 8
+    left = max(0, bounds["x"] - margin)
+    top = max(0, bounds["y"] - margin)
+    right = min(CELL_WIDTH, bounds["x"] + bounds["w"] + margin)
+    bottom = min(CELL_HEIGHT, bounds["y"] + bounds["h"] + margin)
+    projectile = cell.crop((left, top, right, bottom))
+    PROJECTILE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    projectile.save(PROJECTILE_PATH)
 
 
 if __name__ == "__main__":

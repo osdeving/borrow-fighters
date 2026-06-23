@@ -2,7 +2,7 @@
 
 ## Status
 
-Em implementacao. O runtime ja carrega manifests para Rust, Duke, Go, C, animacoes de entrada, clips de luta, pivots, duracoes por frame e fallback greybox.
+Em implementacao. O runtime ja carrega manifests para Rust, Duke, Go, C, Python, animacoes de entrada, clips de luta, pivots, duracoes por frame e fallback greybox.
 
 ## Objetivo
 
@@ -102,13 +102,13 @@ O personagem Rust usa `assets/placeholder/rust-fighter.sprite.json`.
 O Player 2/Duke usa `assets/placeholder/duke-fighter.sprite.json`.
 Go usa `assets/placeholder/go-fighter.sprite.json`.
 C usa `assets/placeholder/c-fighter.sprite.json`, extraido dos atlas de referencia `assets/references/langc-03.png` e `assets/references/langc-04.png`.
-Python possui um atlas candidato em `assets/placeholder/python-fighter.sprite.json`, gerado como placeholder visual e ainda nao integrado ao roster jogavel.
+Python usa `assets/placeholder/python-fighter.sprite.json`, gerado como placeholder visual e integrado ao roster jogavel como `python.py`.
 
 O tamanho em jogo nao deve depender da resolucao do PNG. Ajuste `scale` e `frames[].pivot` no manifesto; o renderer de luta e o Sprite Combat Viewer consomem os mesmos valores. O padrao atual de altura, largura e arena fica em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md).
 
 O corpo fisico de gameplay fica em [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json). Esse arquivo controla `width`, `standing_height` e `crouch_height` por personagem. Ele define o retangulo base usado por colisao corpo-corpo, hurtboxes compostas e alinhamento do sprite. `frames[].combat` pode substituir hitbox/hurtbox por frame quando houver metadata revisada.
 
-No corte atual, Rust, Duke, Go e C ja declaram `frames[].combat.projectile_origin` no primeiro frame do clip `special`, usado pelo runtime para alinhar o nascimento do projectile com a mao do personagem. Rust tambem possui `frames[].combat.hitboxes[]` iniciais para `Borrow Jab`, heavy punch e kick, calibradas para reproduzir o alcance atual do `MoveSpec` antes de qualquer ajuste de balanceamento. Outras hitboxes e hurtboxes por frame ainda devem ser preenchidas pelo Sprite Combat Viewer antes de substituir alcances de soco/chute em producao.
+No corte atual, Rust, Duke, Go, C e Python ja declaram `frames[].combat.projectile_origin` no primeiro frame do clip `special`, usado pelo runtime para alinhar o nascimento do projectile com a mao do personagem. Rust tambem possui `frames[].combat.hitboxes[]` iniciais para `Borrow Jab`, heavy punch e kick, calibradas para reproduzir o alcance atual do `MoveSpec` antes de qualquer ajuste de balanceamento. Python possui hitboxes placeholder para o bote da cobra no `punch_light` e para o soco forte no `punch_heavy`; elas ainda precisam de revisao no Sprite Studio antes de virarem balanceamento confiavel. Outras hitboxes e hurtboxes por frame ainda devem ser preenchidas pelo Sprite Combat Viewer antes de substituir alcances de soco/chute em producao.
 
 O runtime tambem usa:
 
@@ -131,6 +131,7 @@ Assets relacionados ao slice atual:
 - `assets/placeholder/go-channel-projectile.png`
 - `assets/placeholder/c-bitstream-projectile.png`
 - `assets/placeholder/python-fighter-atlas.png`
+- `assets/placeholder/python-data-projectile.png`
 - `assets/placeholder/arena-sirius.png`
 - `assets/placeholder/arena-fortaleza.png`
 - `assets/placeholder/arena-java-street.png`
@@ -144,7 +145,7 @@ O atlas candidato de Python e reconstruido por:
 python3 tools/art/build_python_fighter_atlas.py
 ```
 
-Ele repacota `assets/references/python-fighter-atlas-source.png` para a grade runtime do C (`6x16`, celulas `384x256`) e gera `assets/placeholder/python-fighter.sprite.json`.
+Ele repacota `assets/references/python-fighter-atlas-source.png` para a grade runtime do C (`6x16`, celulas `384x256`) e gera `assets/placeholder/python-fighter.sprite.json` e `assets/placeholder/python-data-projectile.png`.
 
 ## Sprite Studio
 

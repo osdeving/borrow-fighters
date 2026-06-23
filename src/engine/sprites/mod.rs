@@ -37,3 +37,5 @@ pub const GO_CHANNEL_PROJECTILE_PATH: &str = "assets/placeholder/go-channel-proj
 pub const C_FIGHTER_MANIFEST_PATH: &str = "assets/placeholder/c-fighter.sprite.json";
 pub const C_START_MANIFEST_PATH: &str = "assets/placeholder/c-start.sprite.json";
 pub const C_BITSTREAM_PROJECTILE_PATH: &str = "assets/placeholder/c-bitstream-projectile.png";
+pub const PYTHON_FIGHTER_MANIFEST_PATH: &str = "assets/placeholder/python-fighter.sprite.json";
+pub const PYTHON_DATA_PROJECTILE_PATH: &str = "assets/placeholder/python-data-projectile.png";

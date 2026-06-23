@@ -57,7 +57,7 @@ Em Ubuntu mais novo, a documentacao oficial do Tauri pode indicar `libwebkit2gtk
 O primeiro corte ja permite:
 
 - abrir manifestos por caminho relativo ao repo ou file picker nativo;
-- usar presets de Rust, Duke, Go e C;
+- usar presets de Rust, Duke, Go, C e Python;
 - carregar o atlas PNG referenciado pelo manifesto;
 - navegar por clips e frames com lista lateral e timeline horizontal;
 - usar barra de menu desktop (`File`, `Edit`, `View`, `Help`) e toolbar de acoes frequentes;

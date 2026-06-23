@@ -11,6 +11,7 @@ O visual é uma personagem adulta original com energia de pesquisadora/engenheir
 - `assets/references/python-fighter-atlas-source.png`
 - `assets/placeholder/python-fighter-atlas.png`
 - `assets/placeholder/python-fighter.sprite.json`
+- `assets/placeholder/python-data-projectile.png`
 
 ## Geração
 
@@ -18,7 +19,7 @@ O visual é uma personagem adulta original com energia de pesquisadora/engenheir
 python3 tools/art/build_python_fighter_atlas.py
 ```
 
-O script usa uma fonte AI-generated já limpa para alpha, detecta as poses principais por componente visual, remove componentes cinza de sobra, repacota para a mesma grade runtime do C (`6x16`, células `384x256`) e gera um manifesto `borrow-fighters.sprite.v1` com 94 frames.
+O script usa uma fonte AI-generated já limpa para alpha, detecta as poses principais por componente visual, remove componentes cinza de sobra, repacota para a mesma grade runtime do C (`6x16`, células `384x256`) e gera um manifesto `borrow-fighters.sprite.v1` com 94 frames. Ele também exporta `python-data-projectile.png` a partir do frame `projectile_0`.
 
 ## Intenção Visual
 
@@ -31,6 +32,6 @@ O script usa uma fonte AI-generated já limpa para alpha, detecta as poses princ
 
 - Ainda é placeholder e não arte final.
 - A fonte gerada trouxe 77 poses principais; alguns frames vizinhos reutilizam poses para preencher o contrato de 94 frames do C.
-- Ainda não está integrada ao roster jogável, menu, CLI, áudio ou balanceamento.
+- Já está integrada ao roster jogável, menu e CLI como `python.py`, mas ainda não possui áudio próprio nem balanceamento final.
 - Hitboxes/hurtboxes por frame precisam ser revisadas no Sprite Studio antes de usar como dado de combate confiável.
 - O visual deve ser revisado por leitura em movimento, escala e aceitação de personagem antes de virar candidato aprovado.
