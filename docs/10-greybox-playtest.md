@@ -189,7 +189,7 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 17. Go no Combat Lab, no menu ou na luta iniciada por `--p1 go`/`--p2 go` deve parecer mais rápido e curto que os golpes genéricos equivalentes, pagando com menos vida.
 18. C no Combat Lab, no menu ou na luta iniciada por `--p1 c`/`--p2 c` deve aparecer na escala correta, com entrada, atlas de luta e projectile carregados.
 19. O projectile do C deve ler claramente como stream de bits, com `0` e `1` visiveis durante a luta.
-20. Python no Combat Lab, no menu ou na luta iniciada por `--p1 python`/`--p2 python` deve aparecer com atlas de luta e projectile carregados; o soco fraco deve ler como bote da cobra e o soco forte como ataque da própria personagem.
+20. Python no Combat Lab, no menu ou na luta iniciada por `--p1 python`/`--p2 python` deve aparecer com atlas de luta, entrada cinematografica e projectile carregados; o soco fraco deve ler como bote da cobra, o soco forte como ataque da própria personagem e a entrada deve mostrar cavalete com grafico de barras colorido.
 21. Rust, Duke, Go, C e Python devem ter projectiles com ritmo diferente: Rust médio, Duke pesado/lento, Go rápido/curto, C médio/rápido, Python rápido/médio.
 22. O submenu `Options` deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
 23. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
@@ -250,10 +250,10 @@ Controles do lab:
 
 ## Limitações conhecidas
 
-- A luta padrão ainda abre rust.rs x duke.java; gopher.go, old.c e python.py entram na luta normal quando escolhidos no menu ou por CLI usando atlas placeholder próprio de luta e projectile.
+- A luta padrão ainda abre rust.rs x duke.java; gopher.go, old.c e python.py entram na luta normal quando escolhidos no menu ou por CLI usando atlas placeholder próprio de luta, entrada e projectile.
 - Rust e Duke ainda compartilham parte do kit genérico; o contraste principal já aparece em jab, heavy, anti-air, sweep, overhead e throw.
 - C ainda compartilha todo o kit próximo genérico; o objetivo imediato dele é validar atlas fluido, escala, pivot, entrada e projectile.
-- Python ainda compartilha o kit próximo genérico; o objetivo imediato dela é validar escala, pivot, bote da cobra, soco forte, taunt e projectile antes de receber frame data própria.
+- Python ainda compartilha o kit próximo genérico; o objetivo imediato dela é validar escala, pivot, entrada com grafico, bote da cobra, soco forte, taunt e projectile antes de receber frame data própria.
 - As arenas bitmap são placeholders gerados/derivados de referências e não devem ser tratadas como arte final.
 - O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.
 - Fireball no gamepad usa `RB` por enquanto; `RT` pode entrar depois quando tivermos leitura de gatilho com borda de pressionamento.

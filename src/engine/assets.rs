@@ -11,8 +11,8 @@ use crate::engine::sprites::{
     DUKE_BEAN_PROJECTILE_PATH, DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH,
     FIGHTER_SPRITESHEET_PATH, GO_CHANNEL_PROJECTILE_PATH, GO_FIGHTER_MANIFEST_PATH,
     GO_START_MANIFEST_PATH, PYTHON_DATA_PROJECTILE_PATH, PYTHON_FIGHTER_MANIFEST_PATH,
-    RUST_FIGHTER_MANIFEST_PATH, RUST_GEAR_PROJECTILE_PATH, RUST_START_MANIFEST_PATH,
-    SpriteManifest,
+    PYTHON_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH, RUST_GEAR_PROJECTILE_PATH,
+    RUST_START_MANIFEST_PATH, SpriteManifest,
 };
 use crate::game::arena::ArenaId;
 
@@ -52,6 +52,7 @@ pub struct GameAssets {
     pub c_fighter: Option<SpriteAtlasAsset>,
     pub c_start: Option<SpriteAtlasAsset>,
     pub python_fighter: Option<SpriteAtlasAsset>,
+    pub python_start: Option<SpriteAtlasAsset>,
     pub rust_projectile: Option<Texture2D>,
     pub duke_projectile: Option<Texture2D>,
     pub go_projectile: Option<Texture2D>,
@@ -106,6 +107,7 @@ impl GameAssets {
                 thread,
                 PYTHON_FIGHTER_MANIFEST_PATH,
             ),
+            python_start: load_sprite_atlas_optional(raylib, thread, PYTHON_START_MANIFEST_PATH),
             rust_projectile: load_texture_optional(raylib, thread, RUST_GEAR_PROJECTILE_PATH),
             duke_projectile: load_texture_optional(raylib, thread, DUKE_BEAN_PROJECTILE_PATH),
             go_projectile: load_texture_optional(raylib, thread, GO_CHANNEL_PROJECTILE_PATH),

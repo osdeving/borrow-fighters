@@ -12,8 +12,9 @@ use borrow_fighters::{
         C_BITSTREAM_PROJECTILE_PATH, C_FIGHTER_MANIFEST_PATH, C_START_MANIFEST_PATH,
         DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH, GO_CHANNEL_PROJECTILE_PATH,
         GO_FIGHTER_MANIFEST_PATH, GO_START_MANIFEST_PATH, PYTHON_DATA_PROJECTILE_PATH,
-        PYTHON_FIGHTER_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH, RUST_START_MANIFEST_PATH,
-        SPRITE_SCHEMA, SpriteManifest, frame_for_clip_at, project_frame_combat,
+        PYTHON_FIGHTER_MANIFEST_PATH, PYTHON_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH,
+        RUST_START_MANIFEST_PATH, SPRITE_SCHEMA, SpriteManifest, frame_for_clip_at,
+        project_frame_combat,
     },
 };
 
@@ -99,8 +100,10 @@ fn python_fighter_manifest_candidate_loads() {
 #[test]
 fn python_runtime_sprite_assets_exist() {
     let fighter = SpriteManifest::load(PYTHON_FIGHTER_MANIFEST_PATH).expect("manifest should load");
+    let start = SpriteManifest::load(PYTHON_START_MANIFEST_PATH).expect("manifest should load");
 
     assert!(fighter.image_path(PYTHON_FIGHTER_MANIFEST_PATH).exists());
+    assert!(start.image_path(PYTHON_START_MANIFEST_PATH).exists());
     assert!(Path::new(PYTHON_DATA_PROJECTILE_PATH).exists());
 }
 
@@ -226,6 +229,21 @@ fn c_start_manifest_loads_spawn_clip() {
     assert!(!spawn.r#loop);
     assert_eq!(spawn.frames.first().map(String::as_str), Some("spawn_00"));
     assert_eq!(spawn.frames.last().map(String::as_str), Some("spawn_06"));
+}
+
+#[test]
+fn python_start_manifest_loads_spawn_clip() {
+    let manifest = SpriteManifest::load(PYTHON_START_MANIFEST_PATH).expect("manifest should load");
+    let spawn = manifest
+        .clip_named("spawn")
+        .expect("spawn clip should exist");
+
+    assert_eq!(manifest.image, "python-start-atlas.png");
+    assert_eq!(manifest.frames.len(), 12);
+    assert_eq!(manifest.cell.w, 512);
+    assert!(!spawn.r#loop);
+    assert_eq!(spawn.frames.first().map(String::as_str), Some("spawn_00"));
+    assert_eq!(spawn.frames.last().map(String::as_str), Some("spawn_11"));
 }
 
 #[test]

@@ -55,7 +55,7 @@ O slice jogável usa arte placeholder, mas já exercita decisões importantes pa
 - arenas em rotação: `assets/placeholder/arena-fortaleza.png` e `assets/placeholder/arena-java-street.png`;
 - arena anterior ainda disponível: `assets/placeholder/arena-terminal-compiler-lab.png`;
 - personagens atuais: Rust, Duke, Go, C e Python em atlas placeholder com manifesto JSON;
-- entrada cinematográfica: manifests separados para Rust, Duke, Go e C;
+- entrada cinematográfica: manifests separados para Rust, Duke, Go, C e Python;
 - projectile Rust: engrenagem separada do sprite do personagem;
 - projectile Duke: bean separado do sprite do personagem;
 - projectile Go: canal/burst separado do sprite do personagem;
@@ -65,7 +65,7 @@ O slice jogável usa arte placeholder, mas já exercita decisões importantes pa
 
 O C veio de dois atlas de referencia em `assets/references/langc-03.png` e `assets/references/langc-04.png`, com fundo chroma key removido por script local. Ele deve ser avaliado como placeholder jogavel de escala, fluidez e leitura, nao como direcao final do personagem.
 
-Python entrou como candidata visual gerada por IA em `assets/references/python-fighter-atlas-source.png` e repacotada por `tools/art/build_python_fighter_atlas.py`. A personagem deve ser tratada como original adulta inspirada por Python, ciencia de dados e visao computacional, nao como retrato de pessoa real. Ela ja pode ser escolhida no roster como `python.py`, mas ainda precisa de revisao de leitura em movimento, escala, boxes e identidade mecanica.
+Python entrou como candidata visual gerada por IA em `assets/references/python-fighter-atlas-source.png` e repacotada por `tools/art/build_python_fighter_atlas.py`. A entrada cinematografica dela vive em `assets/references/python-start-atlas-source.png` e `tools/art/build_python_start_atlas.py`, mostrando a personagem montando um cavalete e apontando um grafico de barras colorido como gag de ciencia de dados. A personagem deve ser tratada como original adulta inspirada por Python, ciencia de dados e visao computacional, nao como retrato de pessoa real. Ela ja pode ser escolhida no roster como `python.py`, mas ainda precisa de revisao de leitura em movimento, escala, boxes e identidade mecanica.
 
 Nada disso é final. O valor desses assets agora é validar proporção, leitura de pose, pivots, altura do projectile, contraste com cenário e necessidades de animação.
 

@@ -152,7 +152,7 @@ O menu principal mantém a primeira tela simples:
 
 Ao iniciar uma luta, o jogo roda a entrada dos personagens e depois bloqueia input durante a contagem central `11`, `10`, `01`, `Fight!`. A arena só avança para a próxima rotação quando uma nova luta é iniciada depois de uma vitória, para preservar a pose final no mesmo cenário.
 
-Por padrão, a luta normal inicia `rust.rs` contra `duke.java`. O submenu `Versus Setup` permite ciclar Player 1 e Player 2 entre rust.rs, duke.java, gopher.go, old.c e python.py. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py` ou `python.py`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pelo menu. Go já possui atlas placeholder próprio para luta, entrada cinematográfica e projectile, além de vida, loadout e frame data próprios. C já possui atlas, entrada e projectile extraídos dos arquivos de referência com chroma key, mas ainda usa loadout genérico até receber identidade mecânica própria. Python já possui atlas de luta e projectile separados, mas ainda usa loadout genérico até a revisão de escala, boxes e identidade mecânica.
+Por padrão, a luta normal inicia `rust.rs` contra `duke.java`. O submenu `Versus Setup` permite ciclar Player 1 e Player 2 entre rust.rs, duke.java, gopher.go, old.c e python.py. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py` ou `python.py`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pelo menu. Go já possui atlas placeholder próprio para luta, entrada cinematográfica e projectile, além de vida, loadout e frame data próprios. C já possui atlas, entrada e projectile extraídos dos arquivos de referência com chroma key, mas ainda usa loadout genérico até receber identidade mecânica própria. Python já possui atlas de luta, entrada cinematográfica com cavalete/gráfico e projectile separados, mas ainda usa loadout genérico até a revisão de escala, boxes e identidade mecânica.
 
 Para abrir o laboratório de combate direto em uma cena limpa:
 
@@ -245,5 +245,6 @@ Assets placeholder:
 - [`assets/placeholder/c-fighter-atlas.png`](assets/placeholder/c-fighter-atlas.png): atlas placeholder jogável do C.
 - [`assets/placeholder/c-start-atlas.png`](assets/placeholder/c-start-atlas.png): entrada cinematográfica placeholder do C.
 - [`assets/placeholder/c-bitstream-projectile.png`](assets/placeholder/c-bitstream-projectile.png): projectile placeholder do C com `0` e `1` legíveis.
+- [`assets/placeholder/python-start-atlas.png`](assets/placeholder/python-start-atlas.png): entrada cinematográfica placeholder da Python com cavalete e gráfico de barras.
 
 Guia completo de teste: [`docs/10-greybox-playtest.md`](docs/10-greybox-playtest.md).

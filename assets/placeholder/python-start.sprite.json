@@ -1,0 +1,367 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "python-start-atlas.png",
+  "source": "assets/references/python-start-atlas-source.png",
+  "cell": {
+    "w": 512,
+    "h": 320
+  },
+  "default_pivot": {
+    "x": 160,
+    "y": 292
+  },
+  "scale": 1.2266666666666666,
+  "notes": [
+    "AI-generated Python spawn intro candidate for runtime sprite validation.",
+    "Original adult fictional character inspired by Python, data science, and arcade fighting games; not a portrait or exact likeness of any real person.",
+    "Source was generated on a chroma-key background, converted to alpha locally, cleaned of generated frame numbers, and repacked into 512x320 runtime cells.",
+    "The spawn animation shows the fighter bringing in an easel, revealing a colorful bar chart, and pointing at the strongest variable relation before returning toward fighting stance.",
+    "The clip is cinematic only and should not carry hitbox or hurtbox gameplay metadata."
+  ],
+  "frames": [
+    {
+      "name": "spawn_00",
+      "clip": "spawn",
+      "duration_ms": 150,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      },
+      "source_crop": {
+        "x": 120,
+        "y": 76,
+        "w": 118,
+        "h": 220
+      },
+      "trimmed_bounds": {
+        "x": 120,
+        "y": 76,
+        "w": 118,
+        "h": 220
+      }
+    },
+    {
+      "name": "spawn_01",
+      "clip": "spawn",
+      "duration_ms": 140,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "frame": {
+        "x": 512,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      },
+      "source_crop": {
+        "x": 144,
+        "y": 92,
+        "w": 152,
+        "h": 204
+      },
+      "trimmed_bounds": {
+        "x": 144,
+        "y": 92,
+        "w": 152,
+        "h": 204
+      }
+    },
+    {
+      "name": "spawn_02",
+      "clip": "spawn",
+      "duration_ms": 150,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "frame": {
+        "x": 1024,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      },
+      "source_crop": {
+        "x": 121,
+        "y": 94,
+        "w": 189,
+        "h": 202
+      },
+      "trimmed_bounds": {
+        "x": 121,
+        "y": 94,
+        "w": 189,
+        "h": 202
+      }
+    },
+    {
+      "name": "spawn_03",
+      "clip": "spawn",
+      "duration_ms": 170,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "frame": {
+        "x": 1536,
+        "y": 0,
+        "w": 512,
+        "h": 320
+      },
+      "source_crop": {
+        "x": 119,
+        "y": 89,
+        "w": 190,
+        "h": 207
+      },
+      "trimmed_bounds": {
+        "x": 119,
+        "y": 89,
+        "w": 190,
+        "h": 207
+      }
+    },
+    {
+      "name": "spawn_04",
+      "clip": "spawn",
+      "duration_ms": 160,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "frame": {
+        "x": 0,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      },
+      "source_crop": {
+        "x": 78,
+        "y": 76,
+        "w": 242,
+        "h": 220
+      },
+      "trimmed_bounds": {
+        "x": 78,
+        "y": 76,
+        "w": 242,
+        "h": 220
+      }
+    },
+    {
+      "name": "spawn_05",
+      "clip": "spawn",
+      "duration_ms": 170,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "frame": {
+        "x": 512,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      },
+      "source_crop": {
+        "x": 82,
+        "y": 87,
+        "w": 244,
+        "h": 209
+      },
+      "trimmed_bounds": {
+        "x": 82,
+        "y": 87,
+        "w": 244,
+        "h": 209
+      }
+    },
+    {
+      "name": "spawn_06",
+      "clip": "spawn",
+      "duration_ms": 160,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "frame": {
+        "x": 1024,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      },
+      "source_crop": {
+        "x": 81,
+        "y": 81,
+        "w": 254,
+        "h": 215
+      },
+      "trimmed_bounds": {
+        "x": 81,
+        "y": 81,
+        "w": 254,
+        "h": 215
+      }
+    },
+    {
+      "name": "spawn_07",
+      "clip": "spawn",
+      "duration_ms": 220,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "frame": {
+        "x": 1536,
+        "y": 320,
+        "w": 512,
+        "h": 320
+      },
+      "source_crop": {
+        "x": 97,
+        "y": 89,
+        "w": 235,
+        "h": 207
+      },
+      "trimmed_bounds": {
+        "x": 97,
+        "y": 89,
+        "w": 235,
+        "h": 207
+      }
+    },
+    {
+      "name": "spawn_08",
+      "clip": "spawn",
+      "duration_ms": 160,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "frame": {
+        "x": 0,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      },
+      "source_crop": {
+        "x": 82,
+        "y": 80,
+        "w": 266,
+        "h": 216
+      },
+      "trimmed_bounds": {
+        "x": 82,
+        "y": 80,
+        "w": 266,
+        "h": 216
+      }
+    },
+    {
+      "name": "spawn_09",
+      "clip": "spawn",
+      "duration_ms": 190,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "frame": {
+        "x": 512,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      },
+      "source_crop": {
+        "x": 84,
+        "y": 86,
+        "w": 259,
+        "h": 210
+      },
+      "trimmed_bounds": {
+        "x": 84,
+        "y": 86,
+        "w": 259,
+        "h": 210
+      }
+    },
+    {
+      "name": "spawn_10",
+      "clip": "spawn",
+      "duration_ms": 220,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "frame": {
+        "x": 1024,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      },
+      "source_crop": {
+        "x": 107,
+        "y": 76,
+        "w": 230,
+        "h": 220
+      },
+      "trimmed_bounds": {
+        "x": 107,
+        "y": 76,
+        "w": 230,
+        "h": 220
+      }
+    },
+    {
+      "name": "spawn_11",
+      "clip": "spawn",
+      "duration_ms": 260,
+      "pivot": {
+        "x": 160,
+        "y": 292
+      },
+      "frame": {
+        "x": 1536,
+        "y": 640,
+        "w": 512,
+        "h": 320
+      },
+      "source_crop": {
+        "x": 69,
+        "y": 91,
+        "w": 268,
+        "h": 205
+      },
+      "trimmed_bounds": {
+        "x": 69,
+        "y": 91,
+        "w": 268,
+        "h": 205
+      }
+    }
+  ],
+  "clips": [
+    {
+      "name": "spawn",
+      "loop": false,
+      "frames": [
+        "spawn_00",
+        "spawn_01",
+        "spawn_02",
+        "spawn_03",
+        "spawn_04",
+        "spawn_05",
+        "spawn_06",
+        "spawn_07",
+        "spawn_08",
+        "spawn_09",
+        "spawn_10",
+        "spawn_11"
+      ]
+    }
+  ]
+}

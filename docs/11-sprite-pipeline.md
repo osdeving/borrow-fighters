@@ -18,9 +18,11 @@ Exemplo real:
 - `assets/placeholder/duke-fighter.sprite.json`
 - `assets/placeholder/rust-start.sprite.json`
 - `assets/placeholder/duke-start.sprite.json`
+- `assets/placeholder/go-start.sprite.json`
 - `assets/placeholder/c-fighter.sprite.json`
 - `assets/placeholder/c-start.sprite.json`
 - `assets/placeholder/python-fighter.sprite.json`
+- `assets/placeholder/python-start.sprite.json`
 
 Campos principais:
 
@@ -102,7 +104,7 @@ O personagem Rust usa `assets/placeholder/rust-fighter.sprite.json`.
 O Player 2/Duke usa `assets/placeholder/duke-fighter.sprite.json`.
 Go usa `assets/placeholder/go-fighter.sprite.json`.
 C usa `assets/placeholder/c-fighter.sprite.json`, extraido dos atlas de referencia `assets/references/langc-03.png` e `assets/references/langc-04.png`.
-Python usa `assets/placeholder/python-fighter.sprite.json`, gerado como placeholder visual e integrado ao roster jogavel como `python.py`.
+Python usa `assets/placeholder/python-fighter.sprite.json`, gerado como placeholder visual e integrado ao roster jogavel como `python.py`. A entrada cinematografica da Python usa `assets/placeholder/python-start.sprite.json`, com cavalete e grafico de barras colorido para reforcar a piada de ciencia de dados.
 
 O tamanho em jogo nao deve depender da resolucao do PNG. Ajuste `scale` e `frames[].pivot` no manifesto; o renderer de luta e o Sprite Combat Viewer consomem os mesmos valores. O padrao atual de altura, largura e arena fica em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md).
 
@@ -112,7 +114,7 @@ No corte atual, Rust, Duke, Go, C e Python ja declaram `frames[].combat.projecti
 
 O runtime tambem usa:
 
-- `spawn` durante a entrada inicial de Rust e Duke;
+- `spawn` durante a entrada inicial de Rust, Duke, Go, C e Python;
 - `special` por alguns frames quando o personagem dispara projectile;
 - `taunt` quando o personagem vence a luta;
 - fallback greybox quando um atlas nao carrega.
@@ -123,6 +125,7 @@ As animacoes de entrada atuais vivem em manifests separados para nao misturar fr
 - `assets/placeholder/duke-start-atlas.png`
 - `assets/placeholder/go-start-atlas.png`
 - `assets/placeholder/c-start-atlas.png`
+- `assets/placeholder/python-start-atlas.png`
 
 Assets relacionados ao slice atual:
 
@@ -131,6 +134,7 @@ Assets relacionados ao slice atual:
 - `assets/placeholder/go-channel-projectile.png`
 - `assets/placeholder/c-bitstream-projectile.png`
 - `assets/placeholder/python-fighter-atlas.png`
+- `assets/placeholder/python-start-atlas.png`
 - `assets/placeholder/python-data-projectile.png`
 - `assets/placeholder/arena-sirius.png`
 - `assets/placeholder/arena-fortaleza.png`
@@ -143,9 +147,12 @@ O atlas candidato de Python e reconstruido por:
 
 ```bash
 python3 tools/art/build_python_fighter_atlas.py
+python3 tools/art/build_python_start_atlas.py
 ```
 
-Ele repacota `assets/references/python-fighter-atlas-source.png` para a grade runtime do C (`6x16`, celulas `384x256`) e gera `assets/placeholder/python-fighter.sprite.json` e `assets/placeholder/python-data-projectile.png`.
+O primeiro script repacota `assets/references/python-fighter-atlas-source.png` para a grade runtime do C (`6x16`, celulas `384x256`) e gera `assets/placeholder/python-fighter.sprite.json` e `assets/placeholder/python-data-projectile.png`.
+
+O atlas de entrada repacota `assets/references/python-start-atlas-source.png` para celulas `512x320`, remove os numeros gerados na folha fonte, gera `assets/placeholder/python-start-atlas.png` e `assets/placeholder/python-start.sprite.json`, e salva uma previa local em `tmp/art/python-start-atlas-preview.png`.
 
 ## Sprite Studio
 

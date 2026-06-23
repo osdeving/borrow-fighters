@@ -1779,7 +1779,7 @@ fn character_visuals<'a>(character: CharacterId, assets: &'a GameAssets) -> Char
         CharacterId::Python => CharacterVisuals {
             body_color: PLAYER_PYTHON,
             fight_atlas: assets.python_fighter.as_ref(),
-            start_atlas: None,
+            start_atlas: assets.python_start.as_ref(),
             projectile_texture: assets.python_projectile.as_ref(),
         },
     }
