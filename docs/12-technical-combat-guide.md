@@ -89,14 +89,14 @@ O corpo fisico base fica em [`assets/tuning/character-body-metrics.json`](../ass
 - `standing_height`: altura em pe;
 - `crouch_height`: altura abaixada.
 
-`FighterBodyMetrics` e consumido por [`Fighter`](../src/combat/fighter.rs). Rust, Duke/Java, Go e C usam o corpo padrao `76 x 168 / crouch 96` neste corte. Go continua nao-humano visualmente, mas o atlas foi normalizado para caber na mesma escala jogavel de Rust/C em vez de ganhar hurtbox larga por causa de proporcao de placeholder. Se o arquivo falhar ao carregar no app, o jogo usa os defaults do `CharacterSpec` e emite warning.
+`FighterBodyMetrics` e consumido por [`Fighter`](../src/combat/fighter.rs). Rust, Duke/Java, Go e C usam o corpo padrao `101,3 x 224 / crouch 128` neste corte, migrado da base anterior por `RESOLUTION_SCALE = 4 / 3`. Go continua nao-humano visualmente, mas o atlas foi normalizado para caber na mesma escala jogavel de Rust/C em vez de ganhar hurtbox larga por causa de proporcao de placeholder. Se o arquivo falhar ao carregar no app, o jogo usa os defaults do `CharacterSpec` e emite warning.
 
 O padrao de tamanho em tela fica em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md). Em resumo:
 
 - Rust atual e a referencia visual aprovada;
-- humanoides devem ficar em torno de `185` a `210 px` de altura visivel em idle;
+- humanoides devem ficar em torno de `247` a `280 px` de altura visivel em idle;
 - personagens nao-humanos, como Go, devem mirar a mesma faixa principal quando a diferenca de tamanho nao for parte do gameplay;
-- a arena atual tem `896 px` jogaveis, cerca de `11,8` larguras de corpo padrao.
+- a arena atual tem `1194,7 px` jogaveis, cerca de `11,8` larguras de corpo padrao.
 
 Use o Sprite Studio para edicao visual confortavel e validacao de runtime. O Sprite Combat Viewer embutido continua disponivel apenas ate a limpeza dedicada:
 

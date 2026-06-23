@@ -14,7 +14,7 @@ use crate::combat::fighter::{
     PlayerSlot,
 };
 use crate::combat::projectile::Projectile;
-use crate::config::{ARENA_LEFT, ARENA_RIGHT};
+use crate::config::{ARENA_LEFT, ARENA_RIGHT, world_px};
 use crate::engine::sprites::{
     FighterSpriteClip, ProjectedSpriteCombat, SpriteManifest, projected_fighter_combat,
     projected_projectile_origin_for_clip,
@@ -29,7 +29,7 @@ const BODY_COLLISION_EFFECT_LIFETIME: f32 = 0.12;
 pub const SPAWN_INTRO_DURATION_SECONDS: f32 = 2.7;
 pub const ROUND_COUNTDOWN_STEP_SECONDS: f32 = 0.75;
 pub const ROUND_COUNTDOWN_TOTAL_SECONDS: f32 = ROUND_COUNTDOWN_STEP_SECONDS * 4.0;
-pub const MIN_BODY_GAP: f32 = 8.0;
+pub const MIN_BODY_GAP: f32 = world_px(8.0);
 
 const ROUND_COUNTDOWN_LABELS: [&str; 4] = ["11", "10", "01", "Fight!"];
 
@@ -95,8 +95,18 @@ impl World {
         body_metrics: &CharacterBodyMetricsCatalog,
     ) -> Self {
         let mut world = Self {
-            player_one: fighter_from_character(PlayerSlot::One, player_one, body_metrics, 232.0),
-            player_two: fighter_from_character(PlayerSlot::Two, player_two, body_metrics, 676.0),
+            player_one: fighter_from_character(
+                PlayerSlot::One,
+                player_one,
+                body_metrics,
+                world_px(232.0),
+            ),
+            player_two: fighter_from_character(
+                PlayerSlot::Two,
+                player_two,
+                body_metrics,
+                world_px(676.0),
+            ),
             player_one_character: player_one,
             player_two_character: player_two,
             outcome: None,
@@ -263,7 +273,7 @@ impl World {
     fn update_transient_feedback(&mut self, dt: f32) {
         for effect in &mut self.hit_effects {
             effect.timer -= dt;
-            effect.position.y -= 42.0 * dt;
+            effect.position.y -= world_px(42.0) * dt;
         }
         self.hit_effects.retain(|effect| effect.timer > 0.0);
         self.body_collision_timer = (self.body_collision_timer - dt).max(0.0);

@@ -10,14 +10,14 @@ use crate::combat::{
     move_data::{HitReaction, MoveInputKind, move_spec_for_input},
     projectile::Projectile,
 };
-use crate::config::{FIXED_TIMESTEP, FLOOR_Y};
+use crate::config::{FIXED_TIMESTEP, FLOOR_Y, world_px};
 use crate::math::rect::Rect;
 
-const CONTACT_OVERLAP: f32 = 1.0;
-const DEFAULT_DUMMY_X: f32 = 690.0;
-const DEFAULT_DUMMY_WIDTH: f32 = 76.0;
-const DEFAULT_DUMMY_HEIGHT: f32 = 168.0;
-const AIR_ATTACK_PREVIEW_HEIGHT: f32 = 92.0;
+const CONTACT_OVERLAP: f32 = world_px(1.0);
+const DEFAULT_DUMMY_X: f32 = world_px(690.0);
+const DEFAULT_DUMMY_WIDTH: f32 = world_px(76.0);
+const DEFAULT_DUMMY_HEIGHT: f32 = world_px(168.0);
+const AIR_ATTACK_PREVIEW_HEIGHT: f32 = world_px(92.0);
 
 type ContactAnalysis = (
     FrameCount,

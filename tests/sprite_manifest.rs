@@ -7,6 +7,7 @@ use borrow_fighters::{
         fighter::{Facing, Fighter, PlayerSlot},
         move_data::{MoveId, move_spec},
     },
+    config::RESOLUTION_SCALE,
     engine::sprites::{
         C_BITSTREAM_PROJECTILE_PATH, C_FIGHTER_MANIFEST_PATH, C_START_MANIFEST_PATH,
         DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH, GO_CHANNEL_PROJECTILE_PATH,
@@ -15,6 +16,13 @@ use borrow_fighters::{
         project_frame_combat,
     },
 };
+
+fn assert_f32_close(actual: f32, expected: f32, context: &str) {
+    assert!(
+        (actual - expected).abs() <= 0.001,
+        "{context}: expected {expected}, got {actual}"
+    );
+}
 
 #[test]
 fn rust_fighter_manifest_loads() {
@@ -46,7 +54,11 @@ fn go_fighter_manifest_loads() {
 
     assert_eq!(manifest.schema, SPRITE_SCHEMA);
     assert_eq!(manifest.image, "go-fighter-atlas.png");
-    assert_eq!(manifest.scale, Some(1.08));
+    assert_f32_close(
+        manifest.scale.expect("Go manifest should declare scale"),
+        1.08 * RESOLUTION_SCALE,
+        "Go manifest scale",
+    );
     assert_eq!(manifest.frames.len(), 36);
     assert_eq!(manifest.cell.w, 384);
     assert!(manifest.clip_named("idle").is_some());
@@ -108,10 +120,22 @@ fn rust_primary_sprite_hitboxes_match_current_move_reach() {
             let projected = project_frame_combat(&manifest, frame, &fighter).unwrap();
             let hitbox = projected.hitboxes[0];
 
-            assert_eq!(hitbox.x, body.right(), "{frame_name} x");
-            assert_eq!(hitbox.y, body.y + spec.hitbox.y_offset, "{frame_name} y");
-            assert_eq!(hitbox.width, spec.hitbox.width, "{frame_name} width");
-            assert_eq!(hitbox.height, spec.hitbox.height, "{frame_name} height");
+            assert_f32_close(hitbox.x, body.right(), &format!("{frame_name} x"));
+            assert_f32_close(
+                hitbox.y,
+                body.y + spec.hitbox.y_offset,
+                &format!("{frame_name} y"),
+            );
+            assert_f32_close(
+                hitbox.width,
+                spec.hitbox.width,
+                &format!("{frame_name} width"),
+            );
+            assert_f32_close(
+                hitbox.height,
+                spec.hitbox.height,
+                &format!("{frame_name} height"),
+            );
         }
     }
 
@@ -263,21 +287,40 @@ fn frame_combat_metadata_projects_to_world_space_and_mirrors_with_facing() {
     let mut fighter = Fighter::new(PlayerSlot::One, "Test", 200.0);
 
     let projected = project_frame_combat(&manifest, frame, &fighter).unwrap();
+    let body = fighter.body_rect();
+    let anchor_x = body.center_x();
+    let anchor_y = body.bottom();
 
     assert_eq!(projected.frame_name, "idle_0");
-    assert_eq!(projected.hurtboxes[0].x, 198.0);
-    assert_eq!(projected.hurtboxes[0].y, 350.0);
-    assert_eq!(projected.hitboxes[0].x, 250.0);
-    assert_eq!(projected.hitboxes[0].y, 380.0);
-    assert_eq!(projected.projectile_origin.unwrap().x, 272.0);
-    assert_eq!(projected.projectile_origin.unwrap().y, 386.0);
+    assert_f32_close(projected.hurtboxes[0].x, anchor_x - 40.0, "hurtbox x");
+    assert_f32_close(projected.hurtboxes[0].y, anchor_y - 112.0, "hurtbox y");
+    assert_f32_close(projected.hitboxes[0].x, anchor_x + 12.0, "hitbox x");
+    assert_f32_close(projected.hitboxes[0].y, anchor_y - 82.0, "hitbox y");
+    assert_f32_close(
+        projected.projectile_origin.unwrap().x,
+        anchor_x + 34.0,
+        "projectile origin x",
+    );
+    assert_f32_close(
+        projected.projectile_origin.unwrap().y,
+        anchor_y - 76.0,
+        "projectile origin y",
+    );
 
     fighter.facing = Facing::Left;
     let mirrored = project_frame_combat(&manifest, frame, &fighter).unwrap();
 
-    assert_eq!(mirrored.hurtboxes[0].x, 230.0);
-    assert_eq!(mirrored.hitboxes[0].x, 198.0);
-    assert_eq!(mirrored.projectile_origin.unwrap().x, 204.0);
+    assert_f32_close(
+        mirrored.hurtboxes[0].x,
+        anchor_x - 8.0,
+        "mirrored hurtbox x",
+    );
+    assert_f32_close(mirrored.hitboxes[0].x, anchor_x - 40.0, "mirrored hitbox x");
+    assert_f32_close(
+        mirrored.projectile_origin.unwrap().x,
+        anchor_x - 34.0,
+        "mirrored projectile origin x",
+    );
 }
 
 #[test]

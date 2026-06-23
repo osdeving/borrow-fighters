@@ -7,7 +7,7 @@ Placeholder candidato derivado de `assets/references/cenario-java.png`.
 ## Arquivos
 
 - `assets/references/cenario-java.png`: referencia original.
-- `assets/placeholder/arena-java-street.png`: versao runtime em 960x540.
+- `assets/placeholder/arena-java-street.png`: fonte placeholder em 960x540, renderizada pela janela runtime em 1280x720.
 
 ## Uso
 
@@ -19,7 +19,7 @@ Arena atual do prototipo greybox. A composicao foi reduzida para a resolucao bas
 
 ## Geracao
 
-A versao runtime foi redimensionada para `960x540` com leve reducao de brilho/contraste para preservar leitura dos lutadores e overlays.
+A fonte placeholder foi redimensionada para `960x540` com leve reducao de brilho/contraste para preservar leitura dos lutadores e overlays. No runtime atual, o renderer desenha essa fonte ocupando a janela `1280x720`.
 
 ## Limitacoes
 

@@ -7,14 +7,15 @@ Placeholder gerado para teste de pipeline visual no protótipo greybox.
 ## Arquivo
 
 - `arena-terminal-compiler-lab.png`
-- Resolução de uso no protótipo: `960x540`.
+- Fonte placeholder: `960x540`.
+- Resolução runtime atual: `1280x720`.
 
 ## Fonte
 
 - Gerado via skill `imagegen` em 2026-06-20.
 - Não usa imagem de referência externa.
 - Não deve ser tratado como arte final.
-- A cópia do repositório foi redimensionada a partir do output gerado para reduzir peso e casar com a janela atual.
+- A cópia do repositório foi redimensionada a partir do output gerado para reduzir peso. No runtime atual, o renderer desenha essa fonte ocupando a janela `1280x720`.
 
 ## Intenção visual
 

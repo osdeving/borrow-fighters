@@ -7,7 +7,7 @@ use raylib::prelude::*;
 
 use crate::characters::character_spec;
 use crate::combat::fighter::{AttackPhase, Fighter};
-use crate::config::{WINDOW_HEIGHT, WINDOW_WIDTH};
+use crate::config::{WINDOW_HEIGHT, WINDOW_WIDTH, screen_px, world_px};
 use crate::math::rect::Rect;
 use crate::scenes::combat_lab::{CombatLab, CombatLabMove, CombatLabPose};
 
@@ -74,9 +74,9 @@ fn draw_lab_dummy(draw: &mut impl RaylibDraw, lab: &CombatLab) {
     outline_rect(draw, dummy, PANEL_BORDER);
     draw.draw_text(
         "DUMMY",
-        dummy.x as i32 + 6,
-        dummy.y as i32 - 24,
-        16,
+        dummy.x as i32 + screen_px(6),
+        dummy.y as i32 - screen_px(24),
+        screen_px(16),
         UI_MUTED,
     );
 }
@@ -100,20 +100,32 @@ fn draw_lab_pivot(draw: &mut impl RaylibDraw, fighter: &Fighter) {
         pivot_y,
         Color::new(255, 235, 59, 120),
     );
-    draw.draw_circle(pivot_x, pivot_y, 5.0, HITSPARK);
-    draw.draw_text("PIVOT", pivot_x + 8, pivot_y - 22, 14, HITSPARK);
+    draw.draw_circle(pivot_x, pivot_y, world_px(5.0), HITSPARK);
+    draw.draw_text(
+        "PIVOT",
+        pivot_x + screen_px(8),
+        pivot_y - screen_px(22),
+        screen_px(14),
+        HITSPARK,
+    );
 }
 
 fn draw_lab_overlay(draw: &mut impl RaylibDraw, lab: &CombatLab) {
-    let panel_x = 20;
-    let panel_y = 18;
-    let panel_width = 560;
-    let panel_height = 172;
+    let panel_x = screen_px(20);
+    let panel_y = screen_px(18);
+    let panel_width = screen_px(560);
+    let panel_height = screen_px(172);
 
     draw.draw_rectangle(panel_x, panel_y, panel_width, panel_height, PANEL);
     draw.draw_rectangle_lines(panel_x, panel_y, panel_width, panel_height, PANEL_BORDER);
 
-    draw.draw_text("Combat Lab", panel_x + 16, panel_y + 12, 22, UI_TEXT);
+    draw.draw_text(
+        "Combat Lab",
+        panel_x + screen_px(16),
+        panel_y + screen_px(12),
+        screen_px(22),
+        UI_TEXT,
+    );
     draw.draw_text(
         &format!(
             "{} / {} / frame {:03}",
@@ -121,23 +133,23 @@ fn draw_lab_overlay(draw: &mut impl RaylibDraw, lab: &CombatLab) {
             lab_label(lab),
             lab.current_frame().get()
         ),
-        panel_x + 16,
-        panel_y + 42,
-        16,
+        panel_x + screen_px(16),
+        panel_y + screen_px(42),
+        screen_px(16),
         UI_TEXT,
     );
     draw.draw_text(
         &lab_timing_text(lab),
-        panel_x + 16,
-        panel_y + 68,
-        14,
+        panel_x + screen_px(16),
+        panel_y + screen_px(68),
+        screen_px(14),
         UI_MUTED,
     );
     draw.draw_text(
         &lab_toggle_text(lab),
-        panel_x + 16,
-        panel_y + 132,
-        13,
+        panel_x + screen_px(16),
+        panel_y + screen_px(132),
+        screen_px(13),
         UI_MUTED,
     );
     if let Some(advantage) = lab.advantage() {
@@ -150,9 +162,9 @@ fn draw_lab_overlay(draw: &mut impl RaylibDraw, lab: &CombatLab) {
                 advantage.whiff_recovery.get(),
                 cooldown_suffix(advantage.projectile_cooldown_after_contact)
             ),
-            panel_x + 16,
-            panel_y + 92,
-            13,
+            panel_x + screen_px(16),
+            panel_y + screen_px(92),
+            screen_px(13),
             UI_MUTED,
         );
         draw.draw_text(
@@ -163,17 +175,17 @@ fn draw_lab_overlay(draw: &mut impl RaylibDraw, lab: &CombatLab) {
                 advantage.hit_body_gap_after_pushback,
                 advantage.block_body_gap_after_pushback
             ),
-            panel_x + 16,
-            panel_y + 112,
-            13,
+            panel_x + screen_px(16),
+            panel_y + screen_px(112),
+            screen_px(13),
             UI_MUTED,
         );
     }
     draw.draw_text(
         if lab.paused() { "PAUSED" } else { "PLAYING" },
-        panel_x + panel_width - 88,
-        panel_y + 16,
-        14,
+        panel_x + panel_width - screen_px(88),
+        panel_y + screen_px(16),
+        screen_px(14),
         HITSPARK,
     );
 }

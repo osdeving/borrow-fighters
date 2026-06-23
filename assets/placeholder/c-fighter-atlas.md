@@ -18,7 +18,7 @@ Placeholder jogavel extraido de atlas com chroma key para validar o personagem C
 python3 tools/art/extract_c_sprite_atlases.py
 ```
 
-O script remove o chroma key magenta das referencias, descarta as legendas desenhadas no atlas original e gera um atlas runtime com alpha real. A grade final usa celulas `384x256`, `scale = 1.16` e clips de luta para idle, walk, crouch, jump, block, hit, knockdown, taunt, victory, socos, chutes, special e projectile.
+O script remove o chroma key magenta das referencias, descarta as legendas desenhadas no atlas original e gera um atlas runtime com alpha real. A grade final usa celulas `384x256`, `scale = 1.5467` no runtime `1280x720` e clips de luta para idle, walk, crouch, jump, block, hit, knockdown, taunt, victory, socos, chutes, special e projectile. Esse `1.5467` preserva o ajuste relativo anterior de `1.16` migrado por `4/3`.
 
 O frame `projectile_0` e substituido por um bitstream placeholder gerado localmente, com glifos `0` e `1` grandes o suficiente para leitura durante a luta.
 

@@ -3,6 +3,7 @@
 use borrow_fighters::characters::CharacterId;
 use borrow_fighters::combat::fighter::AttackPhase;
 use borrow_fighters::combat::frame::FrameCount;
+use borrow_fighters::config::world_px;
 use borrow_fighters::scenes::combat_lab::{
     CombatLab, CombatLabInput, CombatLabMove, CombatLabOptions, CombatLabPose,
 };
@@ -162,8 +163,8 @@ fn lab_reports_character_specific_close_move_advantage() {
     assert_eq!(rust_advantage.whiff_recovery, FrameCount::new(4));
     assert_eq!(rust_advantage.hit_advantage, 0);
     assert_eq!(rust_advantage.block_advantage, -4);
-    assert_eq!(rust_advantage.hit_pushback, 22.0);
-    assert_eq!(rust_advantage.block_pushback, 14.0);
+    assert_eq!(rust_advantage.hit_pushback, world_px(22.0));
+    assert_eq!(rust_advantage.block_pushback, world_px(14.0));
     assert!(
         rust_advantage.hit_body_gap_after_pushback > rust_advantage.block_body_gap_after_pushback
     );

@@ -271,6 +271,7 @@ impl App {
                             self.video_capture.last_message(),
                         );
                     }
+                    self.preferences_menu.tick_visuals();
                     finish_frame(raylib, thread, &frame_target, &mut self.video_capture);
                 }
                 AppScene::Fight => {

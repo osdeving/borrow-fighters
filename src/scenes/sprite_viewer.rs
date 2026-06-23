@@ -19,7 +19,7 @@ use crate::{
         move_data::{MoveInputKind, MoveSpec, move_spec_for_input},
         projectile::Projectile,
     },
-    config::{FLOOR_Y, WINDOW_WIDTH},
+    config::{FLOOR_Y, WINDOW_WIDTH, world_px},
     engine::sprites::{
         SpriteCombatBox, SpriteCombatPoint, SpriteFrame, SpriteFrameCombat, SpriteManifest,
         SpriteManifestError,
@@ -34,15 +34,15 @@ use self::combat_edit::{
     FrameCombatBoxDragMode, clear_empty_frame_combat, default_frame_combat_box, edit_combat_box,
 };
 
-const DEFAULT_ANCHOR_X: f32 = 480.0;
-const DEFAULT_DUMMY_ANCHOR_X: f32 = 680.0;
+const DEFAULT_ANCHOR_X: f32 = world_px(480.0);
+const DEFAULT_DUMMY_ANCHOR_X: f32 = world_px(680.0);
 const ZOOM_MIN: f32 = 0.25;
 const ZOOM_MAX: f32 = 4.0;
 const ZOOM_STEP: f32 = 0.12;
 const MANIFEST_SCALE_MIN: f32 = 0.25;
 const MANIFEST_SCALE_MAX: f32 = 2.0;
 const MANIFEST_SCALE_STEP: f32 = 0.025;
-const FRAME_COMBAT_HANDLE_RADIUS: f32 = 8.0;
+const FRAME_COMBAT_HANDLE_RADIUS: f32 = world_px(8.0);
 const FRAME_COMBAT_BOX_MIN_SIZE: i32 = 2;
 
 /// Launch data for the standalone sprite viewer.
@@ -687,7 +687,7 @@ impl SpriteViewer {
             CombatLabMove::AirPunch | CombatLabMove::AirKick
         ) {
             fighter.grounded = false;
-            fighter.position.y -= 92.0;
+            fighter.position.y -= world_px(92.0);
         }
         align_fighter_to_anchor(&mut fighter, self.anchor);
 
@@ -736,7 +736,7 @@ impl SpriteViewer {
         let travel_distance = spec
             .projectile
             .max_travel
-            .unwrap_or_else(|| (WINDOW_WIDTH as f32 - start.right() - 32.0).max(0.0));
+            .unwrap_or_else(|| (WINDOW_WIDTH as f32 - start.right() - world_px(32.0)).max(0.0));
         let sample_count = 7;
         let samples = (0..sample_count)
             .map(|index| {

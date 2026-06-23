@@ -10,7 +10,7 @@ use raylib::prelude::*;
 
 use crate::characters::CharacterId;
 use crate::combat::{fighter::Facing, projectile::Projectile};
-use crate::config::{FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
+use crate::config::{FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH, screen_px};
 use crate::engine::{assets::GameAssets, sprites};
 use crate::game::arena::ArenaId;
 use crate::scenes::combat_lab::{CombatLab, CombatLabPose};
@@ -72,10 +72,10 @@ pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, asset
 }
 
 fn draw_lab_grid(draw: &mut impl super::DrawTarget, line_color: Color) {
-    for x in (0..=WINDOW_WIDTH).step_by(80) {
+    for x in (0..=WINDOW_WIDTH).step_by(screen_px(80) as usize) {
         draw.draw_line(x, 0, x, WINDOW_HEIGHT, line_color);
     }
-    for y in (0..=WINDOW_HEIGHT).step_by(60) {
+    for y in (0..=WINDOW_HEIGHT).step_by(screen_px(60) as usize) {
         draw.draw_line(0, y, WINDOW_WIDTH, y, line_color);
     }
     draw.draw_line(0, FLOOR_Y as i32, WINDOW_WIDTH, FLOOR_Y as i32, UI_MUTED);

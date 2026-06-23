@@ -3,6 +3,7 @@
 //! The menu changes feature flags only through the central feature flag API.
 
 use crate::game::feature_flags::{FeatureFlags, PREFERENCE_FLAGS};
+use crate::ui::binary_text::DEFAULT_BINARY_REVEAL_FRAMES;
 
 /// Top-level prototype menu pages.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -51,6 +52,7 @@ pub struct PreferencesMenu {
     page: MenuPage,
     selected: usize,
     accepting_input: bool,
+    selection_pulse_frames: u16,
 }
 
 impl PreferencesMenu {
@@ -84,6 +86,16 @@ impl PreferencesMenu {
         self.selected
     }
 
+    /// Remaining frames for the selected-row binary reveal animation.
+    pub const fn selection_pulse_frames(&self) -> u16 {
+        self.selection_pulse_frames
+    }
+
+    /// Advances non-gameplay menu visuals by one rendered frame.
+    pub fn tick_visuals(&mut self) {
+        self.selection_pulse_frames = self.selection_pulse_frames.saturating_sub(1);
+    }
+
     /// Ignores the next frame of input after entering the preferences scene.
     pub fn ignore_next_input(&mut self) {
         self.accepting_input = false;
@@ -111,12 +123,18 @@ impl PreferencesMenu {
             return PreferencesAction::Stay;
         }
 
+        let previous_selected = self.selected;
+
         if input.up {
             self.selected = self.selected.saturating_sub(1);
         }
 
         if input.down {
             self.selected = (self.selected + 1).min(self.page_row_count() - 1);
+        }
+
+        if self.selected != previous_selected {
+            self.restart_selection_pulse();
         }
 
         if input.start {
@@ -220,6 +238,11 @@ impl PreferencesMenu {
     fn enter_page(&mut self, page: MenuPage) {
         self.page = page;
         self.selected = 0;
+        self.restart_selection_pulse();
+    }
+
+    fn restart_selection_pulse(&mut self) {
+        self.selection_pulse_frames = DEFAULT_BINARY_REVEAL_FRAMES;
     }
 
     fn page_row_count(&self) -> usize {

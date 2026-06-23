@@ -4,33 +4,33 @@
     {
       "id": "rust",
       "body": {
-        "width": 76.0,
-        "standing_height": 168.0,
-        "crouch_height": 96.0
+        "width": 101.33333333333333,
+        "standing_height": 224.0,
+        "crouch_height": 128.0
       }
     },
     {
       "id": "duke",
       "body": {
-        "width": 76.0,
-        "standing_height": 168.0,
-        "crouch_height": 96.0
+        "width": 101.33333333333333,
+        "standing_height": 224.0,
+        "crouch_height": 128.0
       }
     },
     {
       "id": "go",
       "body": {
-        "width": 76.0,
-        "standing_height": 168.0,
-        "crouch_height": 96.0
+        "width": 101.33333333333333,
+        "standing_height": 224.0,
+        "crouch_height": 128.0
       }
     },
     {
       "id": "c",
       "body": {
-        "width": 76.0,
-        "standing_height": 168.0,
-        "crouch_height": 96.0
+        "width": 101.33333333333333,
+        "standing_height": 224.0,
+        "crouch_height": 128.0
       }
     }
   ]

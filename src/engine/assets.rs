@@ -23,10 +23,11 @@ pub const COUNTDOWN_11_PATH: &str = "assets/placeholder/countdown-11.png";
 pub const COUNTDOWN_10_PATH: &str = "assets/placeholder/countdown-10.png";
 pub const COUNTDOWN_01_PATH: &str = "assets/placeholder/countdown-01.png";
 pub const COUNTDOWN_FIGHT_PATH: &str = "assets/placeholder/countdown-fight.png";
+pub const MENU_TITLE_PATH: &str = "assets/placeholder/menu-title-borrow-fighters.png";
 const MENU_FONT_CANDIDATES: [&str; 3] = [
     "assets/fonts/menu.ttf",
+    "/usr/share/fonts/truetype/roboto/unhinted/RobotoCondensed-Bold.ttf",
     "/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed-Bold.ttf",
-    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
 ];
 
 /// Texture and metadata for one atlas-driven sprite set.
@@ -39,6 +40,7 @@ pub struct SpriteAtlasAsset {
 pub struct GameAssets {
     pub arenas: ArenaAssets,
     pub menu_font: Option<Font>,
+    pub menu_title: Option<Texture2D>,
     pub fighter_spritesheet: Option<Texture2D>,
     pub rust_fighter: Option<SpriteAtlasAsset>,
     pub rust_start: Option<SpriteAtlasAsset>,
@@ -86,6 +88,7 @@ impl GameAssets {
                 java_street: load_texture_optional(raylib, thread, ARENA_JAVA_STREET_PATH),
             },
             menu_font: load_font_optional(raylib, thread),
+            menu_title: load_texture_optional(raylib, thread, MENU_TITLE_PATH),
             fighter_spritesheet: load_texture_optional(raylib, thread, FIGHTER_SPRITESHEET_PATH),
             rust_fighter: load_sprite_atlas_optional(raylib, thread, RUST_FIGHTER_MANIFEST_PATH),
             rust_start: load_sprite_atlas_optional(raylib, thread, RUST_START_MANIFEST_PATH),

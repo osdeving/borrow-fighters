@@ -5,15 +5,16 @@
 //! without controlling both fighters.
 
 use crate::combat::fighter::{Fighter, FighterInput, PlayerSlot};
+use crate::config::world_px;
 use crate::game::world::World;
 use crate::math::rect::Rect;
 
-const BACK_AWAY_GAP: f32 = 48.0;
-const LIGHT_ATTACK_GAP: f32 = 42.0;
-const HEAVY_ATTACK_GAP: f32 = 82.0;
-const FIREBALL_MIN_GAP: f32 = 145.0;
-const FIREBALL_MAX_GAP: f32 = 295.0;
-const PROJECTILE_GUARD_DISTANCE: f32 = 185.0;
+const BACK_AWAY_GAP: f32 = world_px(48.0);
+const LIGHT_ATTACK_GAP: f32 = world_px(42.0);
+const HEAVY_ATTACK_GAP: f32 = world_px(82.0);
+const FIREBALL_MIN_GAP: f32 = world_px(145.0);
+const FIREBALL_MAX_GAP: f32 = world_px(295.0);
+const PROJECTILE_GUARD_DISTANCE: f32 = world_px(185.0);
 
 /// Deterministic CPU controller for one fighter slot.
 #[derive(Clone, Debug)]
@@ -137,7 +138,7 @@ impl BasicCpu {
             } else {
                 CpuIntent::Crouch
             }
-        } else if gap > self.profile.preferred_gap + 46.0 {
+        } else if gap > self.profile.preferred_gap + world_px(46.0) {
             if roll < self.profile.jump_bias {
                 CpuIntent::JumpToward
             } else if roll < 88 {
@@ -145,7 +146,7 @@ impl BasicCpu {
             } else {
                 CpuIntent::Hold
             }
-        } else if gap < self.profile.preferred_gap - 34.0 {
+        } else if gap < self.profile.preferred_gap - world_px(34.0) {
             if roll < self.profile.retreat_bias {
                 CpuIntent::Retreat
             } else if roll < self.profile.retreat_bias + 18 {
@@ -283,7 +284,7 @@ impl CpuProfile {
         match slot {
             PlayerSlot::One => Self {
                 seed: 0xB0F1_0001,
-                preferred_gap: 165.0,
+                preferred_gap: world_px(165.0),
                 aggression: 38,
                 projectile_bias: 42,
                 jump_bias: 18,
@@ -293,7 +294,7 @@ impl CpuProfile {
             },
             PlayerSlot::Two => Self {
                 seed: 0xD0C0_0002,
-                preferred_gap: 105.0,
+                preferred_gap: world_px(105.0),
                 aggression: 58,
                 projectile_bias: 24,
                 jump_bias: 24,
@@ -328,7 +329,7 @@ fn incoming_projectile_threat(world: &World, fighter: &Fighter) -> bool {
             || projectile.velocity.x < 0.0 && projectile_center > fighter_center;
         let close_enough = (fighter_center - projectile_center).abs() <= PROJECTILE_GUARD_DISTANCE;
         let vertical_threat = projectile_rect.y < fighter_body.bottom()
-            && projectile_rect.bottom() > fighter_body.y + 8.0;
+            && projectile_rect.bottom() > fighter_body.y + world_px(8.0);
 
         moving_toward_fighter && close_enough && vertical_threat
     })

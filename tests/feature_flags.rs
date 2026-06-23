@@ -264,3 +264,25 @@ fn preferences_menu_ignores_first_frame_input() {
     assert_eq!(action, PreferencesAction::Stay);
     assert_eq!(menu.selected(), 0);
 }
+
+#[test]
+fn preferences_menu_restarts_selection_pulse_when_cursor_moves() {
+    let mut flags = FeatureFlags::default();
+    let mut menu = PreferencesMenu::default();
+
+    menu.update(PreferencesInput::default(), &mut flags);
+    assert_eq!(menu.selection_pulse_frames(), 0);
+
+    menu.update(
+        PreferencesInput {
+            down: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+    let pulse_frames = menu.selection_pulse_frames();
+
+    assert!(pulse_frames > 0);
+    menu.tick_visuals();
+    assert!(menu.selection_pulse_frames() < pulse_frames);
+}

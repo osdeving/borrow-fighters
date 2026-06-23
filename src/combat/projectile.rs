@@ -7,6 +7,7 @@
 //! tested without opening a Raylib window.
 
 use crate::combat::fighter::{Facing, Fighter, GuardRule, HitReaction, PlayerSlot};
+use crate::config::world_px;
 use crate::math::{rect::Rect, vec2::Vec2};
 
 use super::frame::FrameCount;
@@ -21,26 +22,26 @@ pub const PROJECTILE_SPEC: ProjectileSpec = RUST_PROJECTILE_SPEC;
 const RUST_PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(16),
     blockstun: FrameCount::new(12),
-    hit_pushback: 30.0,
-    block_pushback: 24.0,
+    hit_pushback: world_px(30.0),
+    block_pushback: world_px(24.0),
 };
 const DUKE_PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(18),
     blockstun: FrameCount::new(14),
-    hit_pushback: 38.0,
-    block_pushback: 30.0,
+    hit_pushback: world_px(38.0),
+    block_pushback: world_px(30.0),
 };
 const GO_PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(12),
     blockstun: FrameCount::new(8),
-    hit_pushback: 18.0,
-    block_pushback: 14.0,
+    hit_pushback: world_px(18.0),
+    block_pushback: world_px(14.0),
 };
 const C_PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(15),
     blockstun: FrameCount::new(10),
-    hit_pushback: 26.0,
-    block_pushback: 18.0,
+    hit_pushback: world_px(26.0),
+    block_pushback: world_px(18.0),
 };
 
 /// Whole-frame timing data for the current projectile special.
@@ -69,11 +70,11 @@ pub struct ProjectileSpec {
 
 /// Rust keeps the current balanced gear projectile as the default.
 pub const RUST_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
-    width: 44.0,
-    height: 30.0,
-    front_spawn_offset: 66.0,
-    center_y_from_body_bottom: 88.0,
-    speed: 340.0,
+    width: world_px(44.0),
+    height: world_px(30.0),
+    front_spawn_offset: world_px(66.0),
+    center_y_from_body_bottom: world_px(88.0),
+    speed: world_px(340.0),
     damage: 8,
     guard_rule: GuardRule::Projectile,
     hit_reaction: RUST_PROJECTILE_HIT_REACTION,
@@ -88,11 +89,11 @@ pub const RUST_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
 
 /// Duke uses a slower, heavier zoning projectile with clearer recovery.
 pub const DUKE_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
-    width: 54.0,
-    height: 34.0,
-    front_spawn_offset: 72.0,
-    center_y_from_body_bottom: 88.0,
-    speed: 270.0,
+    width: world_px(54.0),
+    height: world_px(34.0),
+    front_spawn_offset: world_px(72.0),
+    center_y_from_body_bottom: world_px(88.0),
+    speed: world_px(270.0),
     damage: 10,
     guard_rule: GuardRule::Projectile,
     hit_reaction: DUKE_PROJECTILE_HIT_REACTION,
@@ -107,11 +108,11 @@ pub const DUKE_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
 
 /// Go gets a fast, short-lived burst so rushdown does not become full zoning.
 pub const GO_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
-    width: 36.0,
-    height: 24.0,
-    front_spawn_offset: 58.0,
-    center_y_from_body_bottom: 84.0,
-    speed: 430.0,
+    width: world_px(36.0),
+    height: world_px(24.0),
+    front_spawn_offset: world_px(58.0),
+    center_y_from_body_bottom: world_px(84.0),
+    speed: world_px(430.0),
     damage: 6,
     guard_rule: GuardRule::Projectile,
     hit_reaction: GO_PROJECTILE_HIT_REACTION,
@@ -121,16 +122,16 @@ pub const GO_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
         visual_duration: FrameCount::new(16),
         cooldown: FrameCount::new(44),
     },
-    max_travel: Some(320.0),
+    max_travel: Some(world_px(320.0)),
 };
 
 /// C uses a compact bitstream projectile with moderate speed and recovery.
 pub const C_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
-    width: 78.0,
-    height: 30.0,
-    front_spawn_offset: 72.0,
-    center_y_from_body_bottom: 90.0,
-    speed: 360.0,
+    width: world_px(78.0),
+    height: world_px(30.0),
+    front_spawn_offset: world_px(72.0),
+    center_y_from_body_bottom: world_px(90.0),
+    speed: world_px(360.0),
     damage: 8,
     guard_rule: GuardRule::Projectile,
     hit_reaction: C_PROJECTILE_HIT_REACTION,

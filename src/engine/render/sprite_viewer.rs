@@ -6,7 +6,7 @@
 use raylib::prelude::*;
 
 use crate::{
-    config::{FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH},
+    config::{FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH, screen_px, world_px},
     engine::sprites::{SpriteFrame, SpriteRect},
     math::rect::Rect,
     scenes::sprite_viewer::{
@@ -18,8 +18,8 @@ use crate::{
 
 use super::{BACKGROUND, PANEL, PANEL_BORDER, UI_MUTED, UI_TEXT};
 
-const GRID_MAJOR: i32 = 80;
-const GRID_MINOR: i32 = 20;
+const GRID_MAJOR: i32 = screen_px(80);
+const GRID_MINOR: i32 = screen_px(20);
 const GRID_MAJOR_COLOR: Color = Color::new(54, 60, 72, 210);
 const GRID_MINOR_COLOR: Color = Color::new(36, 41, 52, 190);
 const FRAME_COLOR: Color = Color::new(255, 210, 74, 255);
@@ -83,9 +83,9 @@ pub fn draw_sprite_viewer(
     } else {
         draw.draw_text(
             "Atlas texture not loaded",
-            360,
-            (FLOOR_Y - 120.0) as i32,
-            22,
+            screen_px(360),
+            (FLOOR_Y - world_px(120.0)) as i32,
+            screen_px(22),
             FRAME_COLOR,
         );
     }
@@ -129,17 +129,43 @@ pub fn draw_sprite_viewer(
 pub fn draw_sprite_viewer_error(draw: &mut impl super::DrawTarget, message: &str) {
     draw.clear_background(BACKGROUND);
     draw_viewer_grid(draw);
-    draw.draw_rectangle(80, 150, WINDOW_WIDTH - 160, 180, PANEL);
-    draw.draw_rectangle_lines(80, 150, WINDOW_WIDTH - 160, 180, PANEL_BORDER);
-    draw.draw_text("Sprite Viewer", 112, 184, 28, UI_TEXT);
+    draw.draw_rectangle(
+        screen_px(80),
+        screen_px(150),
+        WINDOW_WIDTH - screen_px(160),
+        screen_px(180),
+        PANEL,
+    );
+    draw.draw_rectangle_lines(
+        screen_px(80),
+        screen_px(150),
+        WINDOW_WIDTH - screen_px(160),
+        screen_px(180),
+        PANEL_BORDER,
+    );
+    draw.draw_text(
+        "Sprite Viewer",
+        screen_px(112),
+        screen_px(184),
+        screen_px(28),
+        UI_TEXT,
+    );
     draw.draw_text(
         "Nao foi possivel abrir o manifesto.",
-        112,
-        224,
-        18,
+        screen_px(112),
+        screen_px(224),
+        screen_px(18),
         FRAME_COLOR,
     );
-    draw_wrapped_text(draw, message, 112, 258, WINDOW_WIDTH - 224, 16, UI_MUTED);
+    draw_wrapped_text(
+        draw,
+        message,
+        screen_px(112),
+        screen_px(258),
+        WINDOW_WIDTH - screen_px(224),
+        screen_px(16),
+        UI_MUTED,
+    );
 }
 
 fn draw_combat_overlay(draw: &mut impl super::DrawTarget, overlay: SpriteCombatOverlay) {
@@ -183,7 +209,7 @@ fn draw_combat_rect(
     }
     draw.draw_rectangle_lines_ex(
         Rectangle::new(rect.x, rect.y, rect.width, rect.height),
-        2.0,
+        world_px(2.0),
         outline,
     );
 }
@@ -228,7 +254,7 @@ fn draw_frame_data_box(
             fill,
         );
     }
-    draw_outline(draw, overlay_box.rect, outline, 3.0);
+    draw_outline(draw, overlay_box.rect, outline, world_px(3.0));
     draw_frame_data_box_handles(draw, overlay_box.rect);
     if let Some(label) = overlay_box.label.as_deref() {
         let kind = match overlay_box.kind {
@@ -237,28 +263,33 @@ fn draw_frame_data_box(
         };
         draw.draw_text(
             &format!("{kind}{} {label}", overlay_box.index + 1),
-            overlay_box.rect.x.round() as i32 + 4,
-            overlay_box.rect.y.round() as i32 + 4,
-            13,
+            overlay_box.rect.x.round() as i32 + screen_px(4),
+            overlay_box.rect.y.round() as i32 + screen_px(4),
+            screen_px(13),
             outline,
         );
     }
 }
 
 fn draw_projectile_origin(draw: &mut impl super::DrawTarget, origin: ViewerPoint, color: Color) {
-    draw.draw_circle(origin.x.round() as i32, origin.y.round() as i32, 5.0, color);
-    draw.draw_line(
-        origin.x.round() as i32 - 10,
+    draw.draw_circle(
+        origin.x.round() as i32,
         origin.y.round() as i32,
-        origin.x.round() as i32 + 10,
+        world_px(5.0),
+        color,
+    );
+    draw.draw_line(
+        origin.x.round() as i32 - screen_px(10),
+        origin.y.round() as i32,
+        origin.x.round() as i32 + screen_px(10),
         origin.y.round() as i32,
         color,
     );
     draw.draw_line(
         origin.x.round() as i32,
-        origin.y.round() as i32 - 10,
+        origin.y.round() as i32 - screen_px(10),
         origin.x.round() as i32,
-        origin.y.round() as i32 + 10,
+        origin.y.round() as i32 + screen_px(10),
         color,
     );
     draw_handle_square(draw, origin);
@@ -273,13 +304,13 @@ fn draw_frame_data_box_handles(draw: &mut impl super::DrawTarget, rect: ViewerRe
 }
 
 fn draw_handle_square(draw: &mut impl super::DrawTarget, point: ViewerPoint) {
-    let size = 7.0;
+    let size = world_px(7.0);
     let half = size * 0.5;
     draw.draw_rectangle(
-        (point.x - half - 1.0).round() as i32,
-        (point.y - half - 1.0).round() as i32,
-        (size + 2.0).round() as i32,
-        (size + 2.0).round() as i32,
+        (point.x - half - world_px(1.0)).round() as i32,
+        (point.y - half - world_px(1.0)).round() as i32,
+        (size + world_px(2.0)).round() as i32,
+        (size + world_px(2.0)).round() as i32,
         FRAME_DATA_HANDLE_SHADOW,
     );
     draw.draw_rectangle(
@@ -298,7 +329,7 @@ fn draw_projectile_trajectory(
     draw.draw_line_ex(
         Vector2::new(trajectory.origin.x, trajectory.origin.y),
         Vector2::new(trajectory.end.x, trajectory.end.y),
-        2.0,
+        world_px(2.0),
         PROJECTILE_TRAJECTORY,
     );
     for sample in &trajectory.samples {
@@ -311,9 +342,9 @@ fn draw_projectile_trajectory(
     }
     draw.draw_text(
         &format!("{:.0}px travel", trajectory.travel_distance),
-        trajectory.origin.x.round() as i32 + 12,
-        trajectory.origin.y.round() as i32 + 12,
-        13,
+        trajectory.origin.x.round() as i32 + screen_px(12),
+        trajectory.origin.y.round() as i32 + screen_px(12),
+        screen_px(13),
         PROJECTILE_TRAJECTORY,
     );
 }
@@ -321,16 +352,16 @@ fn draw_projectile_trajectory(
 fn draw_frame_cursor(draw: &mut impl super::DrawTarget, cursor: SpriteFrameCursor) {
     let x = cursor.screen_position.x.round() as i32;
     let y = cursor.screen_position.y.round() as i32;
-    draw.draw_line(x - 10, y, x + 10, y, CURSOR_COLOR);
-    draw.draw_line(x, y - 10, x, y + 10, CURSOR_COLOR);
+    draw.draw_line(x - screen_px(10), y, x + screen_px(10), y, CURSOR_COLOR);
+    draw.draw_line(x, y - screen_px(10), x, y + screen_px(10), CURSOR_COLOR);
     draw.draw_text(
         &format!(
             "local {},{} | atlas {},{}",
             cursor.local_x, cursor.local_y, cursor.atlas_x, cursor.atlas_y
         ),
-        x + 12,
-        y + 12,
-        13,
+        x + screen_px(12),
+        y + screen_px(12),
+        screen_px(13),
         CURSOR_COLOR,
     );
 }
@@ -374,7 +405,7 @@ fn draw_frame_guides(
         } else {
             FRAME_COLOR
         },
-        2.0,
+        world_px(2.0),
     );
 
     if let Some(trimmed_bounds) = frame.trimmed_bounds {
@@ -421,24 +452,24 @@ fn draw_relative_guide(
         width: guide.w as f32 * scale_x,
         height: guide.h as f32 * scale_y,
     };
-    draw_outline(draw, rect, color, 1.0);
+    draw_outline(draw, rect, color, world_px(1.0));
 }
 
 fn draw_dummy_distance(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
     let anchor = viewer.anchor();
     let dummy = viewer.dummy_anchor();
-    let y = (FLOOR_Y + 24.0) as i32;
+    let y = (FLOOR_Y + world_px(24.0)) as i32;
     draw.draw_line_ex(
         Vector2::new(anchor.x, y as f32),
         Vector2::new(dummy.x, y as f32),
-        2.0,
+        world_px(2.0),
         UI_MUTED,
     );
     draw.draw_text(
         &format!("{:.0}px", viewer.dummy_distance()),
-        ((anchor.x + dummy.x) * 0.5).round() as i32 - 24,
-        y + 8,
-        15,
+        ((anchor.x + dummy.x) * 0.5).round() as i32 - screen_px(24),
+        y + screen_px(8),
+        screen_px(15),
         UI_MUTED,
     );
 }
@@ -449,18 +480,18 @@ fn draw_pivot_at(
     color: Color,
 ) {
     draw.draw_line_ex(
-        Vector2::new(anchor.x - 18.0, anchor.y),
-        Vector2::new(anchor.x + 18.0, anchor.y),
-        3.0,
+        Vector2::new(anchor.x - world_px(18.0), anchor.y),
+        Vector2::new(anchor.x + world_px(18.0), anchor.y),
+        world_px(3.0),
         color,
     );
     draw.draw_line_ex(
-        Vector2::new(anchor.x, anchor.y - 18.0),
-        Vector2::new(anchor.x, anchor.y + 18.0),
-        3.0,
+        Vector2::new(anchor.x, anchor.y - world_px(18.0)),
+        Vector2::new(anchor.x, anchor.y + world_px(18.0)),
+        world_px(3.0),
         color,
     );
-    draw.draw_circle(anchor.x as i32, anchor.y as i32, 4.0, color);
+    draw.draw_circle(anchor.x as i32, anchor.y as i32, world_px(4.0), color);
 }
 
 fn draw_viewer_grid(draw: &mut impl super::DrawTarget) {
@@ -488,28 +519,34 @@ fn draw_timeline(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
         return;
     }
 
-    let timeline_x = 16;
-    let timeline_y = WINDOW_HEIGHT - 42;
-    let timeline_width = WINDOW_WIDTH - 32;
-    let timeline_height = 22;
+    let timeline_x = screen_px(16);
+    let timeline_y = WINDOW_HEIGHT - screen_px(42);
+    let timeline_width = WINDOW_WIDTH - screen_px(32);
+    let timeline_height = screen_px(22);
     let segment_width = timeline_width as f32 / frame_names.len() as f32;
     let (current_frame, _) = viewer.frame_position();
 
     draw.draw_rectangle(
         timeline_x,
-        timeline_y - 18,
+        timeline_y - screen_px(18),
         timeline_width,
-        timeline_height + 28,
+        timeline_height + screen_px(28),
         PANEL,
     );
     draw.draw_rectangle_lines(
         timeline_x,
-        timeline_y - 18,
+        timeline_y - screen_px(18),
         timeline_width,
-        timeline_height + 28,
+        timeline_height + screen_px(28),
         PANEL_BORDER,
     );
-    draw.draw_text("timeline", timeline_x + 8, timeline_y - 15, 13, UI_MUTED);
+    draw.draw_text(
+        "timeline",
+        timeline_x + screen_px(8),
+        timeline_y - screen_px(15),
+        screen_px(13),
+        UI_MUTED,
+    );
 
     for (index, frame_name) in frame_names.iter().enumerate() {
         let x = timeline_x as f32 + index as f32 * segment_width;
@@ -534,21 +571,21 @@ fn draw_timeline(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
             draw.draw_rectangle_lines_ex(
                 Rectangle::new(
                     x,
-                    timeline_y as f32 - 2.0,
+                    timeline_y as f32 - world_px(2.0),
                     width,
-                    timeline_height as f32 + 4.0,
+                    timeline_height as f32 + world_px(4.0),
                 ),
-                3.0,
+                world_px(3.0),
                 UI_TEXT,
             );
         }
 
-        if segment_width >= 34.0 {
+        if segment_width >= world_px(34.0) {
             draw.draw_text(
                 &(index + 1).to_string(),
-                x.round() as i32 + 4,
-                timeline_y + 4,
-                12,
+                x.round() as i32 + screen_px(4),
+                timeline_y + screen_px(4),
+                screen_px(12),
                 UI_TEXT,
             );
         }
@@ -556,9 +593,9 @@ fn draw_timeline(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
         if index == current_frame {
             draw.draw_text(
                 &truncate_middle(frame_name, 36),
-                timeline_x + 86,
-                timeline_y - 15,
-                13,
+                timeline_x + screen_px(86),
+                timeline_y - screen_px(15),
+                screen_px(13),
                 UI_TEXT,
             );
         }
@@ -575,10 +612,10 @@ fn timeline_color(phase: Option<SpriteTimelinePhase>) -> Color {
 }
 
 fn draw_info_panel(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
-    let panel_x = 16;
-    let panel_y = 16;
-    let panel_width = WINDOW_WIDTH - 32;
-    let panel_height = 146;
+    let panel_x = screen_px(16);
+    let panel_y = screen_px(16);
+    let panel_width = WINDOW_WIDTH - screen_px(32);
+    let panel_height = screen_px(146);
     draw.draw_rectangle(panel_x, panel_y, panel_width, panel_height, PANEL);
     draw.draw_rectangle_lines(panel_x, panel_y, panel_width, panel_height, PANEL_BORDER);
 
@@ -602,9 +639,9 @@ fn draw_info_panel(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
     };
     draw.draw_text(
         &format!("Sprite Combat Viewer{dirty_marker}"),
-        panel_x + 16,
-        panel_y + 14,
-        22,
+        panel_x + screen_px(16),
+        panel_y + screen_px(14),
+        screen_px(22),
         UI_TEXT,
     );
     draw.draw_text(
@@ -618,9 +655,9 @@ fn draw_info_panel(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
             frame.name,
             playback,
         ),
-        panel_x + 16,
-        panel_y + 44,
-        16,
+        panel_x + screen_px(16),
+        panel_y + screen_px(44),
+        screen_px(16),
         UI_TEXT,
     );
     draw.draw_text(
@@ -634,16 +671,16 @@ fn draw_info_panel(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
             viewer.manifest_scale(),
             viewer.zoom(),
         ),
-        panel_x + 16,
-        panel_y + 66,
-        16,
+        panel_x + screen_px(16),
+        panel_y + screen_px(66),
+        screen_px(16),
         UI_MUTED,
     );
     draw.draw_text(
         "drag boxes/origin | H hurt | J hit | Del remove | N seed | Tab clip | Ctrl+S save",
-        panel_x + 16,
-        panel_y + 92,
-        15,
+        panel_x + screen_px(16),
+        panel_y + screen_px(92),
+        screen_px(15),
         UI_MUTED,
     );
     if let Some(overlay) = combat {
@@ -654,9 +691,9 @@ fn draw_info_panel(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
                 overlay.selected_move.label(),
                 overlay.move_label,
             ),
-            panel_x + 16,
-            panel_y + 112,
-            14,
+            panel_x + screen_px(16),
+            panel_y + screen_px(112),
+            screen_px(14),
             COMBAT_HURTBOX,
         );
     } else if let Some(character) = viewer.selected_character() {
@@ -666,42 +703,42 @@ fn draw_info_panel(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
                 character,
                 viewer.selected_move().label(),
             ),
-            panel_x + 16,
-            panel_y + 112,
-            14,
+            panel_x + screen_px(16),
+            panel_y + screen_px(112),
+            screen_px(14),
             COMBAT_HURTBOX,
         );
     }
 
     draw.draw_text(
         &truncate_middle(&manifest, 74),
-        panel_x + 430,
-        panel_y + 16,
-        14,
+        panel_x + screen_px(430),
+        panel_y + screen_px(16),
+        screen_px(14),
         UI_MUTED,
     );
     draw.draw_text(
         &truncate_middle(&image, 74),
-        panel_x + 430,
-        panel_y + 36,
-        14,
+        panel_x + screen_px(430),
+        panel_y + screen_px(36),
+        screen_px(14),
         UI_MUTED,
     );
 
     if let Some(error) = viewer.texture_error() {
         draw.draw_text(
             &truncate_middle(error, 100),
-            panel_x + 430,
-            panel_y + 66,
-            14,
+            panel_x + screen_px(430),
+            panel_y + screen_px(66),
+            screen_px(14),
             FRAME_COLOR,
         );
     } else if let Some(message) = viewer.status_message() {
         draw.draw_text(
             &truncate_middle(message, 100),
-            panel_x + 430,
-            panel_y + 66,
-            14,
+            panel_x + screen_px(430),
+            panel_y + screen_px(66),
+            screen_px(14),
             TRIM_COLOR,
         );
     }
@@ -712,9 +749,9 @@ fn draw_info_panel(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
                 "body: w {:.0} / h {:.0} / crouch {:.0}",
                 body.width, body.standing_height, body.crouch_height
             ),
-            panel_x + 430,
-            panel_y + 88,
-            14,
+            panel_x + screen_px(430),
+            panel_y + screen_px(88),
+            screen_px(14),
             COMBAT_BODY,
         );
     }
@@ -732,9 +769,9 @@ fn draw_info_panel(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
                 frame_combat.hitboxes.len(),
                 origin,
             ),
-            panel_x + 430,
-            panel_y + 106,
-            14,
+            panel_x + screen_px(430),
+            panel_y + screen_px(106),
+            screen_px(14),
             FRAME_DATA_HURTBOX,
         );
     }
@@ -745,9 +782,9 @@ fn draw_info_panel(draw: &mut impl super::DrawTarget, viewer: &SpriteViewer) {
                 "cursor local {},{} | atlas {},{}",
                 cursor.local_x, cursor.local_y, cursor.atlas_x, cursor.atlas_y
             ),
-            panel_x + 430,
-            panel_y + 126,
-            14,
+            panel_x + screen_px(430),
+            panel_y + screen_px(126),
+            screen_px(14),
             CURSOR_COLOR,
         );
     }
@@ -782,7 +819,7 @@ fn draw_wrapped_text(
             draw.draw_text(&line, x, y + offset_y, font_size, color);
             line.clear();
             line.push_str(word);
-            offset_y += font_size + 6;
+            offset_y += font_size + screen_px(6);
         } else {
             line = candidate;
         }

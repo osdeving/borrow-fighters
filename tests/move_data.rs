@@ -26,6 +26,7 @@ use borrow_fighters::combat::move_data::{
     RUST_OWNERSHIP_THROW_WHIFF_RECOVERY, SWEEP_KICK_WHIFF_RECOVERY, SWEEP_REACTION, move_spec,
     move_spec_for_input,
 };
+use borrow_fighters::config::world_px;
 
 #[test]
 fn close_range_moves_are_registered_in_table_order() {
@@ -67,13 +68,13 @@ fn move_specs_preserve_current_tuning_values() {
     assert_eq!(light.frames.duration, FrameCount::new(18));
     assert_eq!(light.frames.active_start, FrameCount::new(5));
     assert_eq!(light.frames.active_end, FrameCount::new(10));
-    assert_eq!(light.hitbox.width, 58.0);
-    assert_eq!(light.hitbox.height, 34.0);
-    assert_eq!(light.hitbox.y_offset, 62.0);
+    assert_eq!(light.hitbox.width, world_px(58.0));
+    assert_eq!(light.hitbox.height, world_px(34.0));
+    assert_eq!(light.hitbox.y_offset, world_px(62.0));
     assert_eq!(light.guard_rule, GuardRule::Mid);
     assert_eq!(light.hit_reaction, LIGHT_ATTACK_REACTION);
-    assert_eq!(light.hit_reaction.hit_pushback, 22.0);
-    assert_eq!(light.hit_reaction.block_pushback, 14.0);
+    assert_eq!(light.hit_reaction.hit_pushback, world_px(22.0));
+    assert_eq!(light.hit_reaction.block_pushback, world_px(14.0));
     assert_eq!(light.whiff_recovery, LIGHT_ATTACK_WHIFF_RECOVERY);
 
     let heavy = move_spec(MoveId::HeavyPunch);
@@ -83,13 +84,13 @@ fn move_specs_preserve_current_tuning_values() {
     assert_eq!(heavy.frames.duration, FrameCount::new(35));
     assert_eq!(heavy.frames.active_start, FrameCount::new(11));
     assert_eq!(heavy.frames.active_end, FrameCount::new(20));
-    assert_eq!(heavy.hitbox.width, 96.0);
-    assert_eq!(heavy.hitbox.height, 42.0);
-    assert_eq!(heavy.hitbox.y_offset, 58.0);
+    assert_eq!(heavy.hitbox.width, world_px(96.0));
+    assert_eq!(heavy.hitbox.height, world_px(42.0));
+    assert_eq!(heavy.hitbox.y_offset, world_px(58.0));
     assert_eq!(heavy.guard_rule, GuardRule::Mid);
     assert_eq!(heavy.hit_reaction, HEAVY_ATTACK_REACTION);
-    assert_eq!(heavy.hit_reaction.hit_pushback, 38.0);
-    assert_eq!(heavy.hit_reaction.block_pushback, 26.0);
+    assert_eq!(heavy.hit_reaction.hit_pushback, world_px(38.0));
+    assert_eq!(heavy.hit_reaction.block_pushback, world_px(26.0));
     assert_eq!(heavy.whiff_recovery, HEAVY_ATTACK_WHIFF_RECOVERY);
 
     let kick = move_spec(MoveId::Kick);
@@ -99,13 +100,13 @@ fn move_specs_preserve_current_tuning_values() {
     assert_eq!(kick.frames.duration, FrameCount::new(28));
     assert_eq!(kick.frames.active_start, FrameCount::new(9));
     assert_eq!(kick.frames.active_end, FrameCount::new(16));
-    assert_eq!(kick.hitbox.width, 100.0);
-    assert_eq!(kick.hitbox.height, 36.0);
-    assert_eq!(kick.hitbox.y_offset, 108.0);
+    assert_eq!(kick.hitbox.width, world_px(100.0));
+    assert_eq!(kick.hitbox.height, world_px(36.0));
+    assert_eq!(kick.hitbox.y_offset, world_px(108.0));
     assert_eq!(kick.guard_rule, GuardRule::Mid);
     assert_eq!(kick.hit_reaction, KICK_REACTION);
-    assert_eq!(kick.hit_reaction.hit_pushback, 34.0);
-    assert_eq!(kick.hit_reaction.block_pushback, 22.0);
+    assert_eq!(kick.hit_reaction.hit_pushback, world_px(34.0));
+    assert_eq!(kick.hit_reaction.block_pushback, world_px(22.0));
     assert_eq!(kick.whiff_recovery, KICK_WHIFF_RECOVERY);
 }
 
@@ -167,9 +168,9 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(rust_jab.frames.duration, FrameCount::new(16));
     assert_eq!(rust_jab.frames.active_start, FrameCount::new(4));
     assert_eq!(rust_jab.frames.active_end, FrameCount::new(8));
-    assert_eq!(rust_jab.hitbox.width, 48.0);
-    assert_eq!(rust_jab.hitbox.height, 30.0);
-    assert_eq!(rust_jab.hitbox.y_offset, 62.0);
+    assert_eq!(rust_jab.hitbox.width, world_px(48.0));
+    assert_eq!(rust_jab.hitbox.height, world_px(30.0));
+    assert_eq!(rust_jab.hitbox.y_offset, world_px(62.0));
     assert_eq!(rust_jab.guard_rule, GuardRule::Mid);
     assert_eq!(rust_jab.hit_reaction, LIGHT_ATTACK_REACTION);
     assert_eq!(rust_jab.whiff_recovery, RUST_BORROW_JAB_WHIFF_RECOVERY);
@@ -181,9 +182,9 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(rust_anti_air.frames.duration, FrameCount::new(26));
     assert_eq!(rust_anti_air.frames.active_start, FrameCount::new(6));
     assert_eq!(rust_anti_air.frames.active_end, FrameCount::new(12));
-    assert_eq!(rust_anti_air.hitbox.width, 62.0);
-    assert_eq!(rust_anti_air.hitbox.height, 90.0);
-    assert_eq!(rust_anti_air.hitbox.y_offset, -92.0);
+    assert_eq!(rust_anti_air.hitbox.width, world_px(62.0));
+    assert_eq!(rust_anti_air.hitbox.height, world_px(90.0));
+    assert_eq!(rust_anti_air.hitbox.y_offset, world_px(-92.0));
     assert_eq!(rust_anti_air.guard_rule, GuardRule::Mid);
     assert_eq!(rust_anti_air.hit_reaction, RUST_LIFETIME_ANTI_AIR_REACTION);
     assert_eq!(
@@ -198,9 +199,9 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(rust_throw.frames.duration, FrameCount::new(20));
     assert_eq!(rust_throw.frames.active_start, FrameCount::new(5));
     assert_eq!(rust_throw.frames.active_end, FrameCount::new(7));
-    assert_eq!(rust_throw.hitbox.width, 42.0);
-    assert_eq!(rust_throw.hitbox.height, 118.0);
-    assert_eq!(rust_throw.hitbox.y_offset, 30.0);
+    assert_eq!(rust_throw.hitbox.width, world_px(42.0));
+    assert_eq!(rust_throw.hitbox.height, world_px(118.0));
+    assert_eq!(rust_throw.hitbox.y_offset, world_px(30.0));
     assert_eq!(rust_throw.guard_rule, GuardRule::Throw);
     assert_eq!(rust_throw.hit_reaction, RUST_OWNERSHIP_THROW_REACTION);
     assert_eq!(
@@ -215,9 +216,9 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(duke_poke.frames.duration, FrameCount::new(40));
     assert_eq!(duke_poke.frames.active_start, FrameCount::new(13));
     assert_eq!(duke_poke.frames.active_end, FrameCount::new(22));
-    assert_eq!(duke_poke.hitbox.width, 112.0);
-    assert_eq!(duke_poke.hitbox.height, 44.0);
-    assert_eq!(duke_poke.hitbox.y_offset, 60.0);
+    assert_eq!(duke_poke.hitbox.width, world_px(112.0));
+    assert_eq!(duke_poke.hitbox.height, world_px(44.0));
+    assert_eq!(duke_poke.hitbox.y_offset, world_px(60.0));
     assert_eq!(duke_poke.guard_rule, GuardRule::Mid);
     assert_eq!(duke_poke.hit_reaction, HEAVY_ATTACK_REACTION);
     assert_eq!(
@@ -232,7 +233,7 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(duke_sweep.frames.duration, FrameCount::new(38));
     assert_eq!(duke_sweep.frames.active_start, FrameCount::new(13));
     assert_eq!(duke_sweep.frames.active_end, FrameCount::new(22));
-    assert_eq!(duke_sweep.hitbox.width, 128.0);
+    assert_eq!(duke_sweep.hitbox.width, world_px(128.0));
     assert_eq!(duke_sweep.guard_rule, GuardRule::Low);
     assert_eq!(
         duke_sweep.hit_reaction,
@@ -250,7 +251,7 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(duke_overhead.frames.duration, FrameCount::new(40));
     assert_eq!(duke_overhead.frames.active_start, FrameCount::new(15));
     assert_eq!(duke_overhead.frames.active_end, FrameCount::new(22));
-    assert_eq!(duke_overhead.hitbox.width, 96.0);
+    assert_eq!(duke_overhead.hitbox.width, world_px(96.0));
     assert_eq!(duke_overhead.guard_rule, GuardRule::High);
     assert_eq!(
         duke_overhead.hit_reaction,
@@ -268,7 +269,7 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(duke_throw.frames.duration, FrameCount::new(30));
     assert_eq!(duke_throw.frames.active_start, FrameCount::new(9));
     assert_eq!(duke_throw.frames.active_end, FrameCount::new(11));
-    assert_eq!(duke_throw.hitbox.width, 56.0);
+    assert_eq!(duke_throw.hitbox.width, world_px(56.0));
     assert_eq!(duke_throw.guard_rule, GuardRule::Throw);
     assert_eq!(duke_throw.hit_reaction, DUKE_ENTERPRISE_THROW_REACTION);
     assert_eq!(
@@ -283,7 +284,7 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(go_jab.frames.duration, FrameCount::new(14));
     assert_eq!(go_jab.frames.active_start, FrameCount::new(3));
     assert_eq!(go_jab.frames.active_end, FrameCount::new(7));
-    assert_eq!(go_jab.hitbox.width, 42.0);
+    assert_eq!(go_jab.hitbox.width, world_px(42.0));
     assert_eq!(go_jab.guard_rule, GuardRule::Mid);
     assert_eq!(go_jab.hit_reaction, GO_LIGHT_REACTION);
     assert_eq!(go_jab.whiff_recovery, GO_GOROUTINE_JAB_WHIFF_RECOVERY);
@@ -295,7 +296,7 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(go_kick.frames.duration, FrameCount::new(23));
     assert_eq!(go_kick.frames.active_start, FrameCount::new(7));
     assert_eq!(go_kick.frames.active_end, FrameCount::new(13));
-    assert_eq!(go_kick.hitbox.width, 86.0);
+    assert_eq!(go_kick.hitbox.width, world_px(86.0));
     assert_eq!(go_kick.guard_rule, GuardRule::Mid);
     assert_eq!(go_kick.hit_reaction, GO_KICK_REACTION);
     assert_eq!(go_kick.whiff_recovery, GO_DEFER_KICK_WHIFF_RECOVERY);
@@ -307,7 +308,7 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(go_overhead.frames.duration, FrameCount::new(28));
     assert_eq!(go_overhead.frames.active_start, FrameCount::new(10));
     assert_eq!(go_overhead.frames.active_end, FrameCount::new(15));
-    assert_eq!(go_overhead.hitbox.width, 70.0);
+    assert_eq!(go_overhead.hitbox.width, world_px(70.0));
     assert_eq!(go_overhead.guard_rule, GuardRule::High);
     assert_eq!(go_overhead.hit_reaction, GO_OVERHEAD_REACTION);
     assert_eq!(
@@ -322,7 +323,7 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(go_hopkick.frames.duration, FrameCount::new(20));
     assert_eq!(go_hopkick.frames.active_start, FrameCount::new(5));
     assert_eq!(go_hopkick.frames.active_end, FrameCount::new(12));
-    assert_eq!(go_hopkick.hitbox.width, 78.0);
+    assert_eq!(go_hopkick.hitbox.width, world_px(78.0));
     assert_eq!(go_hopkick.guard_rule, GuardRule::High);
     assert_eq!(go_hopkick.hit_reaction, GO_KICK_REACTION);
     assert_eq!(go_hopkick.whiff_recovery, GO_HOPKICK_WHIFF_RECOVERY);

@@ -6,7 +6,7 @@
 //! Fighters are still greybox primitives, but their body, hurtboxes, and moves
 //! are split enough to test traditional fighting-game verbs without sprites.
 
-use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y};
+use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, world_px};
 use crate::math::{rect::Rect, vec2::Vec2};
 
 use super::frame::FrameCount;
@@ -19,22 +19,22 @@ pub use crate::combat::move_set::{
     SWEEP_KICK_DAMAGE, move_spec_for_input,
 };
 
-const DEFAULT_WIDTH: f32 = 76.0;
-const DEFAULT_STANDING_HEIGHT: f32 = 168.0;
-const DEFAULT_CROUCH_HEIGHT: f32 = 96.0;
-const MIN_BODY_WIDTH: f32 = 24.0;
-const MIN_STANDING_HEIGHT: f32 = 72.0;
-const MIN_CROUCH_HEIGHT: f32 = 40.0;
-const MAX_RUN_SPEED: f32 = 280.0;
+const DEFAULT_WIDTH: f32 = world_px(76.0);
+const DEFAULT_STANDING_HEIGHT: f32 = world_px(168.0);
+const DEFAULT_CROUCH_HEIGHT: f32 = world_px(96.0);
+const MIN_BODY_WIDTH: f32 = world_px(24.0);
+const MIN_STANDING_HEIGHT: f32 = world_px(72.0);
+const MIN_CROUCH_HEIGHT: f32 = world_px(40.0);
+const MAX_RUN_SPEED: f32 = world_px(280.0);
 const ATTACK_MOVE_SPEED_FACTOR: f32 = 0.55;
-const GROUND_ACCELERATION: f32 = 2200.0;
-const AIR_ACCELERATION: f32 = 1350.0;
-const GROUND_DECELERATION: f32 = 2600.0;
-const AIR_DECELERATION: f32 = 700.0;
-const DIAGONAL_JUMP_MIN_SPEED: f32 = 180.0;
-const JUMP_SPEED: f32 = -680.0;
-const GRAVITY: f32 = 1650.0;
-const MAX_FALL_SPEED: f32 = 920.0;
+const GROUND_ACCELERATION: f32 = world_px(2200.0);
+const AIR_ACCELERATION: f32 = world_px(1350.0);
+const GROUND_DECELERATION: f32 = world_px(2600.0);
+const AIR_DECELERATION: f32 = world_px(700.0);
+const DIAGONAL_JUMP_MIN_SPEED: f32 = world_px(180.0);
+const JUMP_SPEED: f32 = world_px(-680.0);
+const GRAVITY: f32 = world_px(1650.0);
+const MAX_FALL_SPEED: f32 = world_px(920.0);
 const BLOCK_DAMAGE_DIVISOR: i32 = 4;
 const TIMER_EPSILON: f32 = 0.0001;
 
@@ -432,9 +432,9 @@ impl Fighter {
     pub fn hurtboxes(&self) -> FighterBodyParts {
         let parts = self.body_parts();
         FighterBodyParts {
-            head: inset_rect(parts.head, 2.0),
-            torso: inset_rect(parts.torso, 2.0),
-            legs: inset_rect(parts.legs, 2.0),
+            head: inset_rect(parts.head, world_px(2.0)),
+            torso: inset_rect(parts.torso, world_px(2.0)),
+            legs: inset_rect(parts.legs, world_px(2.0)),
         }
     }
 
@@ -443,9 +443,9 @@ impl Fighter {
         let body = self.body_rect();
         Rect::new(
             body.x + body.width * 0.105,
-            body.y + 5.0,
+            body.y + world_px(5.0),
             (body.width * 0.790).max(1.0),
-            body.height - 8.0,
+            body.height - world_px(8.0),
         )
     }
 
@@ -579,13 +579,18 @@ impl Fighter {
     /// Returns the defensive box drawn in front of a blocking fighter.
     pub fn guard_box(&self) -> Rect {
         let body = self.body_rect();
-        let width = 12.0;
+        let width = world_px(12.0);
         let x = if self.facing == Facing::Right {
-            body.right() + 4.0
+            body.right() + world_px(4.0)
         } else {
-            body.x - width - 4.0
+            body.x - width - world_px(4.0)
         };
-        Rect::new(x, body.y + 8.0, width, body.height - 16.0)
+        Rect::new(
+            x,
+            body.y + world_px(8.0),
+            width,
+            body.height - world_px(16.0),
+        )
     }
 
     /// Returns true when health reached zero.

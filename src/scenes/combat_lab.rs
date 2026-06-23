@@ -13,7 +13,7 @@ use crate::combat::{
     move_data::MoveInputKind,
     projectile::Projectile,
 };
-use crate::config::{FIXED_TIMESTEP, WINDOW_WIDTH};
+use crate::config::{FIXED_TIMESTEP, WINDOW_WIDTH, world_px};
 use crate::math::rect::Rect;
 
 use super::combat_lab_analysis::{
@@ -22,7 +22,7 @@ use super::combat_lab_analysis::{
 };
 
 const LAB_FIGHTER_X: f32 = 430.0;
-const LAB_JUMP_PREVIEW_HEIGHT: f32 = 92.0;
+const LAB_JUMP_PREVIEW_HEIGHT: f32 = world_px(92.0);
 
 /// Move selected for isolated playback.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]

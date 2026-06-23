@@ -4,11 +4,11 @@
   "source": "../references/go-sprite-altas.png",
   "cell": { "w": 384, "h": 256 },
   "default_pivot": { "x": 112, "y": 236 },
-  "scale": 1.08,
+  "scale": 1.44,
   "notes": [
     "AI-generated Go/Gopher atlas candidate for runtime sprite validation.",
     "Frames use a 6x6 grid with 384x256 cells and consistent grounded pivot.",
-    "The atlas was compressed horizontally around the pivot, cleaned of stray frame islands, and uses scale 1.08 to keep the mascot taller and leaner near Rust/C gameplay proportions.",
+    "The atlas was compressed horizontally around the pivot, cleaned of stray frame islands, and uses scale 1.44 for the 1280x720 runtime while preserving the earlier 1.08 relative tuning.",
     "Go Gopher is originally by Renee French; this is a project-local derivative candidate, not final art."
   ],
   "frames": [

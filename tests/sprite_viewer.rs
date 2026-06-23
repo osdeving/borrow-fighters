@@ -13,6 +13,22 @@ use borrow_fighters::{
     },
 };
 
+fn assert_f32_close(actual: f32, expected: f32, context: &str) {
+    assert!(
+        (actual - expected).abs() <= 0.001,
+        "{context}: expected {expected}, got {actual}"
+    );
+}
+
+fn frame_point(viewer: &SpriteViewer, local_x: f32, local_y: f32) -> ViewerPoint {
+    let screen = viewer.sprite_screen_rect();
+    let frame = viewer.current_frame();
+    ViewerPoint::new(
+        screen.x + local_x * screen.width / frame.frame.w as f32,
+        screen.y + local_y * screen.height / frame.frame.h as f32,
+    )
+}
+
 #[test]
 fn loads_manifest_and_selects_requested_clip() {
     let viewer = SpriteViewer::load(SpriteViewerOptions {
@@ -369,7 +385,7 @@ fn frame_cursor_reports_local_and_atlas_coordinates() {
 
     viewer.update(
         SpriteViewerInput {
-            mouse_position: ViewerPoint::new(452.0, 382.0),
+            mouse_position: frame_point(&viewer, 22.5, 40.5),
             ..SpriteViewerInput::default()
         },
         0.0,
@@ -444,11 +460,26 @@ fn frame_combat_overlay_projects_manifest_metadata_to_screen_space() {
     assert_eq!(overlay.hitboxes.len(), 1);
     assert_eq!(overlay.hurtboxes[0].label.as_deref(), Some("body"));
     assert_eq!(overlay.hitboxes[0].label.as_deref(), Some("strike"));
-    assert_eq!(overlay.hurtboxes[0].rect.x, 440.0);
-    assert_eq!(overlay.hurtboxes[0].rect.y, 350.0);
-    assert_eq!(
-        overlay.projectile_origin,
-        Some(ViewerPoint::new(514.0, 386.0))
+    assert_f32_close(
+        overlay.hurtboxes[0].rect.x,
+        frame_point(&viewer, 10.0, 8.0).x,
+        "hurtbox x",
+    );
+    assert_f32_close(
+        overlay.hurtboxes[0].rect.y,
+        frame_point(&viewer, 10.0, 8.0).y,
+        "hurtbox y",
+    );
+    let origin = overlay.projectile_origin.expect("projectile origin");
+    assert_f32_close(
+        origin.x,
+        frame_point(&viewer, 84.0, 44.0).x,
+        "projectile origin x",
+    );
+    assert_f32_close(
+        origin.y,
+        frame_point(&viewer, 84.0, 44.0).y,
+        "projectile origin y",
     );
 }
 
@@ -464,7 +495,7 @@ fn frame_combat_hurtbox_can_be_dragged_in_frame_local_coordinates() {
 
     viewer.update(
         SpriteViewerInput {
-            mouse_position: ViewerPoint::new(464.0, 398.0),
+            mouse_position: frame_point(&viewer, 24.0, 48.0),
             mouse_pressed: true,
             mouse_down: true,
             ..SpriteViewerInput::default()
@@ -473,7 +504,7 @@ fn frame_combat_hurtbox_can_be_dragged_in_frame_local_coordinates() {
     );
     viewer.update(
         SpriteViewerInput {
-            mouse_position: ViewerPoint::new(476.0, 404.0),
+            mouse_position: frame_point(&viewer, 36.0, 54.0),
             mouse_down: true,
             ..SpriteViewerInput::default()
         },
@@ -500,7 +531,7 @@ fn frame_combat_hitbox_corner_can_be_resized() {
 
     viewer.update(
         SpriteViewerInput {
-            mouse_position: ViewerPoint::new(520.0, 402.0),
+            mouse_position: frame_point(&viewer, 90.0, 60.0),
             mouse_pressed: true,
             mouse_down: true,
             ..SpriteViewerInput::default()
@@ -509,7 +540,7 @@ fn frame_combat_hitbox_corner_can_be_resized() {
     );
     viewer.update(
         SpriteViewerInput {
-            mouse_position: ViewerPoint::new(528.0, 410.0),
+            mouse_position: frame_point(&viewer, 98.0, 68.0),
             mouse_down: true,
             ..SpriteViewerInput::default()
         },
@@ -548,7 +579,7 @@ fn projectile_origin_can_be_dragged_and_saved() {
 
     viewer.update(
         SpriteViewerInput {
-            mouse_position: ViewerPoint::new(514.0, 386.0),
+            mouse_position: frame_point(&viewer, 84.0, 44.0),
             mouse_pressed: true,
             mouse_down: true,
             ..SpriteViewerInput::default()
@@ -557,7 +588,7 @@ fn projectile_origin_can_be_dragged_and_saved() {
     );
     viewer.update(
         SpriteViewerInput {
-            mouse_position: ViewerPoint::new(520.0, 390.0),
+            mouse_position: frame_point(&viewer, 90.0, 48.0),
             mouse_down: true,
             ..SpriteViewerInput::default()
         },
@@ -590,8 +621,8 @@ fn projectile_origin_can_be_dragged_and_saved() {
 #[test]
 fn seed_frame_combat_creates_editable_metadata_from_runtime_overlay() {
     let mut viewer = SpriteViewer::load(SpriteViewerOptions {
-        manifest_path: PathBuf::from("tests/fixtures/sprite-viewer-combat.sprite.json"),
-        initial_clip: Some("idle".to_string()),
+        manifest_path: PathBuf::from("assets/placeholder/rust-fighter.sprite.json"),
+        initial_clip: Some("punch_light".to_string()),
         character: Some(CharacterId::Rust),
         selected_move: CombatLabMove::LightPunch,
     })
@@ -665,7 +696,7 @@ fn frame_combat_delete_removes_projectile_origin_under_mouse() {
 
     viewer.update(
         SpriteViewerInput {
-            mouse_position: ViewerPoint::new(514.0, 386.0),
+            mouse_position: frame_point(&viewer, 84.0, 44.0),
             delete_frame_combat: true,
             ..SpriteViewerInput::default()
         },

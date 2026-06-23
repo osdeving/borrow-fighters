@@ -7,6 +7,7 @@ use raylib::prelude::*;
 
 use crate::{
     combat::fighter::{Facing, Fighter},
+    config::{RESOLUTION_SCALE, world_px},
     engine::sprites::{
         animation::frame_for_clip_at,
         manifest::{SpriteFrame, SpriteManifest},
@@ -20,7 +21,7 @@ use crate::{
 const GREYBOX_FRAME_WIDTH: f32 = 96.0;
 const GREYBOX_FRAME_HEIGHT: f32 = 128.0;
 const MIN_RUNTIME_FIGHTER_SCALE: f32 = 0.1;
-const PROJECTILE_SCALE: f32 = 0.45;
+const PROJECTILE_SCALE: f32 = 0.45 * RESOLUTION_SCALE;
 
 /// Draws one fighter from the placeholder spritesheet.
 pub fn draw_fighter_sprite(
@@ -44,10 +45,10 @@ pub fn draw_fighter_sprite(
     }
 
     let dest = Rectangle::new(
-        body.center_x() - GREYBOX_FRAME_WIDTH * 0.5,
-        body.bottom() - GREYBOX_FRAME_HEIGHT,
-        GREYBOX_FRAME_WIDTH,
-        GREYBOX_FRAME_HEIGHT,
+        body.center_x() - world_px(GREYBOX_FRAME_WIDTH) * 0.5,
+        body.bottom() - world_px(GREYBOX_FRAME_HEIGHT),
+        world_px(GREYBOX_FRAME_WIDTH),
+        world_px(GREYBOX_FRAME_HEIGHT),
     );
 
     draw.draw_texture_pro(texture, source, dest, Vector2::new(0.0, 0.0), 0.0, tint);

@@ -9,7 +9,7 @@ O foco atual é **Prototype 0.1**. Não estamos criando combo tree, meter, throw
 ## Regras de Leitura
 
 - Números são frame data de protótipo, não promessa de balanceamento final.
-- Alcance é a largura da hitbox em pixels no `MoveSpec`.
+- Alcance é a largura base da hitbox, documentada na escala antiga de tuning. No runtime `1280x720`, o `MoveSpec` multiplica esses valores por `RESOLUTION_SCALE = 4 / 3`.
 - `whiff` é o lockout extra quando o golpe erra.
 - Um golpe forte precisa ter resposta clara: bloquear, pular, espaçar, interromper startup ou punir whiff.
 - Quando mudar um golpe próximo, atualize [`src/combat/move_data.rs`](../src/combat/move_data.rs), testes e esta matriz.
@@ -90,7 +90,7 @@ C entrou primeiro como teste de pipeline: dois atlas de referência com chroma k
 
 ## Especiais de Projectile
 
-Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ainda é o mesmo botão de especial do protótipo, mas dano, tamanho, velocidade, cooldown, reação e limite de alcance já vêm do `CharacterSpec`.
+Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ainda é o mesmo botão de especial do protótipo, mas dano, tamanho, velocidade, cooldown, reação e limite de alcance já vêm do `CharacterSpec`. Velocidade e alcance abaixo seguem os valores base de tuning; no runtime `1280x720`, medidas espaciais usam `RESOLUTION_SCALE = 4 / 3`.
 
 | Personagem | Spec | Intenção | Dano | Velocidade | Cooldown | Alcance | Contra-jogo |
 |---|---|---|---:|---:|---:|---|---|

@@ -6,6 +6,8 @@
 //! Character specs can now select input-compatible move ids with different
 //! timings, reach, and damage while keeping the same prototype controls.
 
+use crate::config::world_px;
+
 use super::frame::FrameCount;
 
 pub const LIGHT_PUNCH_DAMAGE: i32 = 8;
@@ -50,98 +52,98 @@ pub const GO_HOPKICK_WHIFF_RECOVERY: FrameCount = FrameCount::new(4);
 pub const LIGHT_ATTACK_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(12),
     blockstun: FrameCount::new(8),
-    hit_pushback: 22.0,
-    block_pushback: 14.0,
+    hit_pushback: world_px(22.0),
+    block_pushback: world_px(14.0),
 };
 pub const HEAVY_ATTACK_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(18),
     blockstun: FrameCount::new(12),
-    hit_pushback: 38.0,
-    block_pushback: 26.0,
+    hit_pushback: world_px(38.0),
+    block_pushback: world_px(26.0),
 };
 pub const KICK_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(16),
     blockstun: FrameCount::new(10),
-    hit_pushback: 34.0,
-    block_pushback: 22.0,
+    hit_pushback: world_px(34.0),
+    block_pushback: world_px(22.0),
 };
 pub const SWEEP_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(20),
     blockstun: FrameCount::new(12),
-    hit_pushback: 42.0,
-    block_pushback: 24.0,
+    hit_pushback: world_px(42.0),
+    block_pushback: world_px(24.0),
 };
 pub const OVERHEAD_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(18),
     blockstun: FrameCount::new(12),
-    hit_pushback: 32.0,
-    block_pushback: 20.0,
+    hit_pushback: world_px(32.0),
+    block_pushback: world_px(20.0),
 };
 pub const RISING_ANTI_AIR_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(18),
     blockstun: FrameCount::new(10),
-    hit_pushback: 28.0,
-    block_pushback: 18.0,
+    hit_pushback: world_px(28.0),
+    block_pushback: world_px(18.0),
 };
 pub const AIR_ATTACK_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(14),
     blockstun: FrameCount::new(10),
-    hit_pushback: 28.0,
-    block_pushback: 18.0,
+    hit_pushback: world_px(28.0),
+    block_pushback: world_px(18.0),
 };
 pub const CLOSE_THROW_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(22),
     blockstun: FrameCount::ZERO,
-    hit_pushback: 54.0,
-    block_pushback: 0.0,
+    hit_pushback: world_px(54.0),
+    block_pushback: world_px(0.0),
 };
 pub const RUST_LIFETIME_ANTI_AIR_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(17),
     blockstun: FrameCount::new(9),
-    hit_pushback: 30.0,
-    block_pushback: 18.0,
+    hit_pushback: world_px(30.0),
+    block_pushback: world_px(18.0),
 };
 pub const RUST_OWNERSHIP_THROW_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(18),
     blockstun: FrameCount::ZERO,
-    hit_pushback: 42.0,
-    block_pushback: 0.0,
+    hit_pushback: world_px(42.0),
+    block_pushback: world_px(0.0),
 };
 pub const DUKE_GARBAGE_COLLECTOR_SWEEP_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(22),
     blockstun: FrameCount::new(13),
-    hit_pushback: 48.0,
-    block_pushback: 28.0,
+    hit_pushback: world_px(48.0),
+    block_pushback: world_px(28.0),
 };
 pub const DUKE_ABSTRACT_FACTORY_OVERHEAD_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(20),
     blockstun: FrameCount::new(13),
-    hit_pushback: 36.0,
-    block_pushback: 22.0,
+    hit_pushback: world_px(36.0),
+    block_pushback: world_px(22.0),
 };
 pub const DUKE_ENTERPRISE_THROW_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(24),
     blockstun: FrameCount::ZERO,
-    hit_pushback: 60.0,
-    block_pushback: 0.0,
+    hit_pushback: world_px(60.0),
+    block_pushback: world_px(0.0),
 };
 pub const GO_LIGHT_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(10),
     blockstun: FrameCount::new(7),
-    hit_pushback: 18.0,
-    block_pushback: 12.0,
+    hit_pushback: world_px(18.0),
+    block_pushback: world_px(12.0),
 };
 pub const GO_KICK_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(13),
     blockstun: FrameCount::new(9),
-    hit_pushback: 24.0,
-    block_pushback: 16.0,
+    hit_pushback: world_px(24.0),
+    block_pushback: world_px(16.0),
 };
 pub const GO_OVERHEAD_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(15),
     blockstun: FrameCount::new(10),
-    hit_pushback: 24.0,
-    block_pushback: 16.0,
+    hit_pushback: world_px(24.0),
+    block_pushback: world_px(16.0),
 };
 
 /// Stable identifier for a close-range move.
@@ -353,9 +355,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(10),
         },
         hitbox: HitboxSpec {
-            width: 58.0,
-            height: 34.0,
-            y_offset: 62.0,
+            width: world_px(58.0),
+            height: world_px(34.0),
+            y_offset: world_px(62.0),
         },
         damage: LIGHT_PUNCH_DAMAGE,
         guard_rule: GuardRule::Mid,
@@ -372,9 +374,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(20),
         },
         hitbox: HitboxSpec {
-            width: 96.0,
-            height: 42.0,
-            y_offset: 58.0,
+            width: world_px(96.0),
+            height: world_px(42.0),
+            y_offset: world_px(58.0),
         },
         damage: HEAVY_PUNCH_DAMAGE,
         guard_rule: GuardRule::Mid,
@@ -391,9 +393,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(16),
         },
         hitbox: HitboxSpec {
-            width: 100.0,
-            height: 36.0,
-            y_offset: 108.0,
+            width: world_px(100.0),
+            height: world_px(36.0),
+            y_offset: world_px(108.0),
         },
         damage: KICK_DAMAGE,
         guard_rule: GuardRule::Mid,
@@ -410,9 +412,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(18),
         },
         hitbox: HitboxSpec {
-            width: 112.0,
-            height: 30.0,
-            y_offset: 66.0,
+            width: world_px(112.0),
+            height: world_px(30.0),
+            y_offset: world_px(66.0),
         },
         damage: SWEEP_KICK_DAMAGE,
         guard_rule: GuardRule::Low,
@@ -429,9 +431,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(18),
         },
         hitbox: HitboxSpec {
-            width: 82.0,
-            height: 50.0,
-            y_offset: 42.0,
+            width: world_px(82.0),
+            height: world_px(50.0),
+            y_offset: world_px(42.0),
         },
         damage: OVERHEAD_PUNCH_DAMAGE,
         guard_rule: GuardRule::High,
@@ -448,9 +450,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(14),
         },
         hitbox: HitboxSpec {
-            width: 70.0,
-            height: 82.0,
-            y_offset: -86.0,
+            width: world_px(70.0),
+            height: world_px(82.0),
+            y_offset: world_px(-86.0),
         },
         damage: RISING_ANTI_AIR_DAMAGE,
         guard_rule: GuardRule::Mid,
@@ -467,9 +469,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(13),
         },
         hitbox: HitboxSpec {
-            width: 72.0,
-            height: 42.0,
-            y_offset: 70.0,
+            width: world_px(72.0),
+            height: world_px(42.0),
+            y_offset: world_px(70.0),
         },
         damage: AIR_PUNCH_DAMAGE,
         guard_rule: GuardRule::High,
@@ -486,9 +488,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(16),
         },
         hitbox: HitboxSpec {
-            width: 88.0,
-            height: 46.0,
-            y_offset: 88.0,
+            width: world_px(88.0),
+            height: world_px(46.0),
+            y_offset: world_px(88.0),
         },
         damage: AIR_KICK_DAMAGE,
         guard_rule: GuardRule::High,
@@ -505,9 +507,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(8),
         },
         hitbox: HitboxSpec {
-            width: 46.0,
-            height: 120.0,
-            y_offset: 30.0,
+            width: world_px(46.0),
+            height: world_px(120.0),
+            y_offset: world_px(30.0),
         },
         damage: CLOSE_THROW_DAMAGE,
         guard_rule: GuardRule::Throw,
@@ -524,9 +526,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(8),
         },
         hitbox: HitboxSpec {
-            width: 48.0,
-            height: 30.0,
-            y_offset: 62.0,
+            width: world_px(48.0),
+            height: world_px(30.0),
+            y_offset: world_px(62.0),
         },
         damage: RUST_BORROW_JAB_DAMAGE,
         guard_rule: GuardRule::Mid,
@@ -543,9 +545,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(12),
         },
         hitbox: HitboxSpec {
-            width: 62.0,
-            height: 90.0,
-            y_offset: -92.0,
+            width: world_px(62.0),
+            height: world_px(90.0),
+            y_offset: world_px(-92.0),
         },
         damage: RUST_LIFETIME_ANTI_AIR_DAMAGE,
         guard_rule: GuardRule::Mid,
@@ -562,9 +564,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(7),
         },
         hitbox: HitboxSpec {
-            width: 42.0,
-            height: 118.0,
-            y_offset: 30.0,
+            width: world_px(42.0),
+            height: world_px(118.0),
+            y_offset: world_px(30.0),
         },
         damage: RUST_OWNERSHIP_THROW_DAMAGE,
         guard_rule: GuardRule::Throw,
@@ -581,9 +583,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(22),
         },
         hitbox: HitboxSpec {
-            width: 112.0,
-            height: 44.0,
-            y_offset: 60.0,
+            width: world_px(112.0),
+            height: world_px(44.0),
+            y_offset: world_px(60.0),
         },
         damage: DUKE_BOILERPLATE_POKE_DAMAGE,
         guard_rule: GuardRule::Mid,
@@ -600,9 +602,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(22),
         },
         hitbox: HitboxSpec {
-            width: 128.0,
-            height: 32.0,
-            y_offset: 66.0,
+            width: world_px(128.0),
+            height: world_px(32.0),
+            y_offset: world_px(66.0),
         },
         damage: DUKE_GARBAGE_COLLECTOR_SWEEP_DAMAGE,
         guard_rule: GuardRule::Low,
@@ -619,9 +621,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(22),
         },
         hitbox: HitboxSpec {
-            width: 96.0,
-            height: 54.0,
-            y_offset: 40.0,
+            width: world_px(96.0),
+            height: world_px(54.0),
+            y_offset: world_px(40.0),
         },
         damage: DUKE_ABSTRACT_FACTORY_OVERHEAD_DAMAGE,
         guard_rule: GuardRule::High,
@@ -638,9 +640,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(11),
         },
         hitbox: HitboxSpec {
-            width: 56.0,
-            height: 124.0,
-            y_offset: 28.0,
+            width: world_px(56.0),
+            height: world_px(124.0),
+            y_offset: world_px(28.0),
         },
         damage: DUKE_ENTERPRISE_THROW_DAMAGE,
         guard_rule: GuardRule::Throw,
@@ -657,9 +659,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(7),
         },
         hitbox: HitboxSpec {
-            width: 42.0,
-            height: 30.0,
-            y_offset: 62.0,
+            width: world_px(42.0),
+            height: world_px(30.0),
+            y_offset: world_px(62.0),
         },
         damage: GO_GOROUTINE_JAB_DAMAGE,
         guard_rule: GuardRule::Mid,
@@ -676,9 +678,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(13),
         },
         hitbox: HitboxSpec {
-            width: 86.0,
-            height: 34.0,
-            y_offset: 106.0,
+            width: world_px(86.0),
+            height: world_px(34.0),
+            y_offset: world_px(106.0),
         },
         damage: GO_DEFER_KICK_DAMAGE,
         guard_rule: GuardRule::Mid,
@@ -695,9 +697,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(15),
         },
         hitbox: HitboxSpec {
-            width: 70.0,
-            height: 48.0,
-            y_offset: 42.0,
+            width: world_px(70.0),
+            height: world_px(48.0),
+            y_offset: world_px(42.0),
         },
         damage: GO_CHANNEL_OVERHEAD_DAMAGE,
         guard_rule: GuardRule::High,
@@ -714,9 +716,9 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
             active_end: FrameCount::new(12),
         },
         hitbox: HitboxSpec {
-            width: 78.0,
-            height: 42.0,
-            y_offset: 88.0,
+            width: world_px(78.0),
+            height: world_px(42.0),
+            y_offset: world_px(88.0),
         },
         damage: GO_HOPKICK_DAMAGE,
         guard_rule: GuardRule::High,

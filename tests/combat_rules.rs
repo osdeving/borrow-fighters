@@ -11,6 +11,7 @@ use borrow_fighters::combat::projectile::{
     DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, PROJECTILE_DAMAGE, PROJECTILE_GUARD_RULE,
     PROJECTILE_HIT_REACTION, PROJECTILE_SPEED,
 };
+use borrow_fighters::config::world_px;
 use borrow_fighters::engine::sprites::SpriteManifest;
 use borrow_fighters::game::ai::BasicCpu;
 use borrow_fighters::game::combat_log::CombatLogKind;
@@ -1304,8 +1305,8 @@ fn basic_cpu_attacks_when_close() {
 #[test]
 fn basic_cpu_blocks_incoming_projectile() {
     let mut world = World::new_greybox();
-    world.player_one.position.x = 500.0;
-    world.player_two.position.x = 650.0;
+    world.player_one.position.x = world_px(500.0);
+    world.player_two.position.x = world_px(650.0);
     world
         .projectiles
         .push(borrow_fighters::combat::projectile::Projectile::from_fighter(&world.player_one));
@@ -1322,8 +1323,8 @@ fn basic_cpu_blocks_incoming_projectile() {
 #[test]
 fn player_one_cpu_blocks_incoming_projectile() {
     let mut world = World::new_greybox();
-    world.player_one.position.x = 500.0;
-    world.player_two.position.x = 650.0;
+    world.player_one.position.x = world_px(500.0);
+    world.player_two.position.x = world_px(650.0);
     world
         .projectiles
         .push(borrow_fighters::combat::projectile::Projectile::from_fighter(&world.player_two));

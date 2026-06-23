@@ -14,8 +14,10 @@ pub use combat_lab::draw_combat_lab;
 pub use sprite_viewer::{draw_sprite_viewer, draw_sprite_viewer_error};
 
 use crate::characters::{CharacterId, character_spec};
-use crate::combat::fighter::{AttackPhase, Facing, Fighter, PlayerSlot};
-use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
+use crate::combat::fighter::{AttackPhase, Facing, PlayerSlot};
+use crate::config::{
+    ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH, screen_px, world_px,
+};
 use crate::engine::assets::{GameAssets, SpriteAtlasAsset};
 use crate::engine::sprites;
 use crate::game::arena::ArenaId;
@@ -23,6 +25,7 @@ use crate::game::feature_flags::{FeatureFlag, FeatureFlags, PREFERENCE_FLAGS};
 use crate::game::world::{MatchOutcome, World};
 use crate::math::rect::Rect;
 use crate::scenes::preferences::{MenuPage, PreferencesMenu};
+use crate::ui::binary_text::{DEFAULT_BINARY_REVEAL_FRAMES, binary_reveal_text_with_seed};
 
 const BACKGROUND: Color = Color::new(18, 20, 26, 255);
 const FLOOR: Color = Color::new(72, 76, 88, 255);
@@ -52,6 +55,9 @@ const RECORDING: Color = Color::new(255, 55, 72, 255);
 const MENU_PANEL_STRONG: Color = Color::new(8, 14, 28, 238);
 const MENU_ACCENT: Color = Color::new(0, 202, 255, 255);
 const MENU_ACCENT_ALT: Color = Color::new(255, 191, 67, 255);
+const MENU_HACK_GREEN: Color = Color::new(95, 255, 174, 255);
+const MENU_CURSOR: Color = Color::new(255, 218, 92, 255);
+const MENU_MAGENTA: Color = Color::new(255, 87, 178, 100);
 const MENU_ROW: Color = Color::new(10, 20, 39, 218);
 const MENU_ROW_SELECTED: Color = Color::new(19, 52, 85, 240);
 
@@ -176,7 +182,7 @@ pub fn draw_preferences(draw: &mut impl DrawTarget, options: PreferencesDrawOpti
     draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(4, 9, 22, 68));
 
     let font = options.assets.menu_font.as_ref();
-    draw_menu_side_fighters(draw, options.assets);
+    draw_menu_backdrop(draw, font);
     draw_menu_chrome(draw, font, &options);
 
     match options.menu.page() {
@@ -195,15 +201,27 @@ pub fn draw_video_capture_overlay(
 ) {
     if recording {
         let text = "REC  F10 para";
-        let width = measure_text_width(text, 16);
-        let box_width = width + 48;
+        let font_size = screen_px(16);
+        let width = measure_text_width(text, font_size);
+        let box_width = width + screen_px(48);
         let x = (WINDOW_WIDTH - box_width) / 2;
-        let y = 14;
+        let y = screen_px(14);
 
-        draw.draw_rectangle(x, y, box_width, 28, Color::new(8, 10, 14, 218));
-        draw.draw_rectangle_lines(x, y, box_width, 28, RECORDING);
-        draw.draw_circle(x + 18, y + 14, 6.0, RECORDING);
-        draw.draw_text(text, x + 34, y + 6, 16, UI_TEXT);
+        draw.draw_rectangle(x, y, box_width, screen_px(28), Color::new(8, 10, 14, 218));
+        draw.draw_rectangle_lines(x, y, box_width, screen_px(28), RECORDING);
+        draw.draw_circle(
+            x + screen_px(18),
+            y + screen_px(14),
+            world_px(6.0),
+            RECORDING,
+        );
+        draw.draw_text(
+            text,
+            x + screen_px(34),
+            y + screen_px(6),
+            font_size,
+            UI_TEXT,
+        );
         return;
     }
 
@@ -215,11 +233,18 @@ pub fn draw_video_capture_overlay(
     }
 
     let text = truncate_middle(message, 92);
-    let width = measure_text_width(&text, 13);
-    let x = WINDOW_WIDTH - width - 20;
-    let y = WINDOW_HEIGHT - 24;
-    draw.draw_rectangle(x - 8, y - 4, width + 16, 22, Color::new(8, 10, 14, 190));
-    draw.draw_text(&text, x, y, 13, UI_MUTED);
+    let font_size = screen_px(13);
+    let width = measure_text_width(&text, font_size);
+    let x = WINDOW_WIDTH - width - screen_px(20);
+    let y = WINDOW_HEIGHT - screen_px(24);
+    draw.draw_rectangle(
+        x - screen_px(8),
+        y - screen_px(4),
+        width + screen_px(16),
+        screen_px(22),
+        Color::new(8, 10, 14, 190),
+    );
+    draw.draw_text(&text, x, y, font_size, UI_MUTED);
 }
 
 /// Data needed by the preferences renderer.
@@ -249,28 +274,245 @@ struct MenuLine<'a> {
     checked: Option<bool>,
 }
 
+#[derive(Clone, Copy)]
+struct MenuTerminal {
+    x: i32,
+    y: i32,
+    width: i32,
+    height: i32,
+    alpha: u8,
+    command_offset: usize,
+    font_size: f32,
+}
+
+const MENU_TERMINAL_COMMANDS: [&str; 36] = [
+    "$ git commit -m \"combo-route\"",
+    "$ make all",
+    "$ cargo test --local",
+    "$ rustup update stable",
+    "$ go mod init arena/linker",
+    "$ go test ./...",
+    "$ mvn -q test",
+    "$ gradle build",
+    "$ npm run build",
+    "$ pnpm install --frozen-lockfile",
+    "$ yarn dlx patch-package",
+    "$ bun test",
+    "$ deno task check",
+    "$ pip install -r tools.txt",
+    "$ poetry lock --no-update",
+    "$ composer install",
+    "$ dotnet restore",
+    "$ nuget locals all -clear",
+    "$ cmake --build build/",
+    "$ zig build test",
+    "$ pkg-config --libs raylib",
+    "$ rg hurtbox src/",
+    "$ ssh -N linker@localhost",
+    "$ gpg --verify release.sig",
+    "$ openssl dgst -sha256 atlas.png",
+    "$ tcpdump -i lo --snapshot-length 64",
+    "$ nmap --top-ports 32 localhost",
+    "$ dig arena.local",
+    "$ whois borrow.invalid",
+    "$ chmod +x ./dash_cancel",
+    "$ curl arena://health",
+    "TRACE 0101 frame-link ok",
+    "BUFFER 0x00F1 guard=true",
+    "SCAN hurtbox overlap",
+    "ASSERT win_condition",
+    "PATCH sprite_manifest",
+];
+
+fn draw_menu_backdrop(draw: &mut impl DrawTarget, font: Option<&Font>) {
+    draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(2, 8, 18, 96));
+
+    let vanish_x = WINDOW_WIDTH / 2;
+    let horizon_y = screen_px(132);
+    for x in (-screen_px(160)..WINDOW_WIDTH + screen_px(160)).step_by(screen_px(80) as usize) {
+        draw.draw_line(
+            x,
+            WINDOW_HEIGHT,
+            vanish_x,
+            horizon_y,
+            Color::new(28, 76, 106, 68),
+        );
+    }
+    for index in 0..11 {
+        let y = horizon_y + screen_px(index * index * 4 + index * 10);
+        if y >= WINDOW_HEIGHT {
+            continue;
+        }
+        let alpha = (34 + index * 8).min(112) as u8;
+        draw.draw_line(0, y, WINDOW_WIDTH, y, Color::new(48, 110, 144, alpha));
+    }
+
+    let terminals = [
+        MenuTerminal {
+            x: screen_px(58),
+            y: screen_px(108),
+            width: screen_px(168),
+            height: screen_px(86),
+            alpha: 42,
+            command_offset: 0,
+            font_size: 8.0,
+        },
+        MenuTerminal {
+            x: screen_px(724),
+            y: screen_px(104),
+            width: screen_px(178),
+            height: screen_px(92),
+            alpha: 44,
+            command_offset: 5,
+            font_size: 8.0,
+        },
+        MenuTerminal {
+            x: screen_px(214),
+            y: screen_px(94),
+            width: screen_px(184),
+            height: screen_px(78),
+            alpha: 34,
+            command_offset: 10,
+            font_size: 7.0,
+        },
+        MenuTerminal {
+            x: screen_px(560),
+            y: screen_px(92),
+            width: screen_px(182),
+            height: screen_px(78),
+            alpha: 34,
+            command_offset: 15,
+            font_size: 7.0,
+        },
+        MenuTerminal {
+            x: screen_px(32),
+            y: screen_px(222),
+            width: screen_px(238),
+            height: screen_px(148),
+            alpha: 72,
+            command_offset: 18,
+            font_size: 9.0,
+        },
+        MenuTerminal {
+            x: screen_px(698),
+            y: screen_px(226),
+            width: screen_px(232),
+            height: screen_px(146),
+            alpha: 70,
+            command_offset: 23,
+            font_size: 9.0,
+        },
+        MenuTerminal {
+            x: screen_px(88),
+            y: screen_px(394),
+            width: screen_px(248),
+            height: screen_px(96),
+            alpha: 52,
+            command_offset: 28,
+            font_size: 8.0,
+        },
+        MenuTerminal {
+            x: screen_px(640),
+            y: screen_px(394),
+            width: screen_px(248),
+            height: screen_px(96),
+            alpha: 52,
+            command_offset: 32,
+            font_size: 8.0,
+        },
+    ];
+    for terminal in terminals {
+        draw_terminal_panel(draw, font, terminal);
+    }
+
+    for index in 0..18 {
+        let x = screen_px(36 + index * 54);
+        let y = screen_px(462 + (index % 4) * 13);
+        let glyphs = if index % 2 == 0 {
+            "01001011"
+        } else {
+            "10110100"
+        };
+        draw_menu_text(draw, font, glyphs, x, y, 9.0, Color::new(68, 230, 173, 48));
+    }
+
+    draw.draw_rectangle(0, 0, WINDOW_WIDTH, screen_px(132), Color::new(0, 0, 0, 84));
+    draw.draw_rectangle(
+        0,
+        WINDOW_HEIGHT - screen_px(54),
+        WINDOW_WIDTH,
+        screen_px(54),
+        Color::new(0, 0, 0, 122),
+    );
+}
+
+fn draw_terminal_panel(draw: &mut impl DrawTarget, font: Option<&Font>, terminal: MenuTerminal) {
+    draw.draw_rectangle(
+        terminal.x + terminal.width / 7,
+        terminal.y + terminal.height / 5,
+        terminal.width,
+        terminal.height,
+        Color::new(0, 0, 0, terminal.alpha / 2),
+    );
+    draw.draw_rectangle(
+        terminal.x,
+        terminal.y,
+        terminal.width,
+        terminal.height,
+        Color::new(1, 8, 18, terminal.alpha),
+    );
+    draw.draw_rectangle_lines(
+        terminal.x,
+        terminal.y,
+        terminal.width,
+        terminal.height,
+        Color::new(0, 202, 255, terminal.alpha.saturating_add(22)),
+    );
+    draw.draw_line(
+        terminal.x + screen_px(8),
+        terminal.y + screen_px(16),
+        terminal.x + terminal.width - screen_px(8),
+        terminal.y + screen_px(16),
+        Color::new(95, 255, 174, terminal.alpha.saturating_add(18)),
+    );
+
+    let rows = ((terminal.height - screen_px(26)) / screen_px(14)).max(1) as usize;
+    for row in 0..rows {
+        let command =
+            MENU_TERMINAL_COMMANDS[(terminal.command_offset + row) % MENU_TERMINAL_COMMANDS.len()];
+        let color = if row % 3 == 0 {
+            Color::new(95, 255, 174, terminal.alpha.saturating_add(72))
+        } else if row % 3 == 1 {
+            Color::new(0, 202, 255, terminal.alpha.saturating_add(48))
+        } else {
+            Color::new(176, 190, 210, terminal.alpha.saturating_add(28))
+        };
+        draw_menu_text(
+            draw,
+            font,
+            command,
+            terminal.x + screen_px(10),
+            terminal.y + screen_px(25) + row as i32 * screen_px(14),
+            terminal.font_size,
+            color,
+        );
+    }
+}
+
 fn draw_menu_chrome(
     draw: &mut impl DrawTarget,
     font: Option<&Font>,
     options: &PreferencesDrawOptions<'_>,
 ) {
+    draw_menu_title_sprite(draw, font, options.assets.menu_title.as_ref());
     draw_centered_menu_text(
         draw,
         font,
-        "BORROW FIGHTERS",
+        "commit your combo  //  borrow checker online",
         WINDOW_WIDTH / 2,
-        34,
-        50.0,
-        UI_TEXT,
-    );
-    draw_centered_menu_text(
-        draw,
-        font,
-        "CODE. COMMIT. COMBO.",
-        WINDOW_WIDTH / 2,
-        89,
-        18.0,
-        MENU_ACCENT,
+        screen_px(128),
+        14.0,
+        MENU_HACK_GREEN,
     );
 
     let status = format!(
@@ -283,10 +525,73 @@ fn draw_menu_chrome(
         draw,
         font,
         &status,
-        WINDOW_WIDTH - width - 28,
-        20,
+        WINDOW_WIDTH - width - screen_px(28),
+        screen_px(24),
         14.0,
         UI_MUTED,
+    );
+}
+
+fn draw_menu_title_sprite(
+    draw: &mut impl DrawTarget,
+    font: Option<&Font>,
+    title: Option<&Texture2D>,
+) {
+    if let Some(title) = title {
+        let target_width = world_px(646.0);
+        let target_height = target_width * title.height() as f32 / title.width() as f32;
+        let dest = Rectangle::new(
+            (WINDOW_WIDTH as f32 - target_width) / 2.0,
+            world_px(-6.0),
+            target_width,
+            target_height,
+        );
+        let source = Rectangle::new(0.0, 0.0, title.width() as f32, title.height() as f32);
+        draw.draw_rectangle(
+            dest.x.round() as i32 + screen_px(56),
+            screen_px(54),
+            (dest.width - world_px(112.0)).round() as i32,
+            screen_px(36),
+            Color::new(0, 0, 0, 66),
+        );
+        draw.draw_texture_pro(
+            title,
+            source,
+            dest,
+            Vector2::new(0.0, 0.0),
+            0.0,
+            Color::WHITE,
+        );
+        return;
+    }
+
+    let title_text = "Borrow Fighters";
+    draw_centered_menu_text(
+        draw,
+        font,
+        title_text,
+        WINDOW_WIDTH / 2 - 3,
+        screen_px(34),
+        58.0,
+        MENU_MAGENTA,
+    );
+    draw_centered_menu_text(
+        draw,
+        font,
+        title_text,
+        WINDOW_WIDTH / 2 + 5,
+        screen_px(41),
+        58.0,
+        Color::new(0, 202, 255, 118),
+    );
+    draw_centered_menu_text(
+        draw,
+        font,
+        title_text,
+        WINDOW_WIDTH / 2,
+        screen_px(30),
+        58.0,
+        UI_TEXT,
     );
 }
 
@@ -296,41 +601,42 @@ fn draw_main_menu(
     options: &PreferencesDrawOptions<'_>,
 ) {
     let panel = MenuPanel {
-        x: 300,
-        y: 128,
-        width: 424,
-        height: 380,
+        x: screen_px(302),
+        y: screen_px(172),
+        width: screen_px(356),
+        height: screen_px(314),
     };
     draw_menu_panel(draw, panel);
+    draw_menu_page_title(draw, font, panel, "BOOT SELECT");
 
     let rows = [
         MenuLine {
             label: "QUICK FIGHT",
-            description: "Inicia a luta com a configuracao atual.",
+            description: "boot fight loop",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "VERSUS SETUP",
-            description: "Escolha personagens antes da luta.",
+            description: "configure players",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "TRAINING",
-            description: "Combat Lab e Sprite Viewer.",
+            description: "inspect hit logic",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "OPTIONS",
-            description: "Flags de prototipo, HUD, CPU e gravacao.",
+            description: "toggle prototype flags",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "EXIT",
-            description: "Fecha o prototipo.",
+            description: "shutdown",
             value: None,
             checked: None,
         },
@@ -343,10 +649,11 @@ fn draw_main_menu(
         options.menu.selected(),
         MenuRowsLayout {
             panel,
-            row_height: 52,
-            start_offset_y: 86,
+            row_height: screen_px(44),
+            start_offset_y: screen_px(58),
             large_labels: true,
-            show_descriptions: false,
+            show_descriptions: true,
+            selection_pulse_frames: options.menu.selection_pulse_frames(),
         },
     );
     draw_menu_footer(draw, font, panel, "Setas/W/S navegam  |  Enter confirma");
@@ -358,10 +665,10 @@ fn draw_versus_menu(
     options: &PreferencesDrawOptions<'_>,
 ) {
     let panel = MenuPanel {
-        x: 270,
-        y: 138,
-        width: 484,
-        height: 382,
+        x: screen_px(270),
+        y: screen_px(138),
+        width: screen_px(484),
+        height: screen_px(382),
     };
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "VERSUS SETUP");
@@ -402,10 +709,11 @@ fn draw_versus_menu(
         options.menu.selected(),
         MenuRowsLayout {
             panel,
-            row_height: 58,
-            start_offset_y: 108,
+            row_height: screen_px(58),
+            start_offset_y: screen_px(108),
             large_labels: false,
             show_descriptions: true,
+            selection_pulse_frames: options.menu.selection_pulse_frames(),
         },
     );
     draw_menu_footer(
@@ -422,10 +730,10 @@ fn draw_training_menu(
     options: &PreferencesDrawOptions<'_>,
 ) {
     let panel = MenuPanel {
-        x: 286,
-        y: 150,
-        width: 452,
-        height: 330,
+        x: screen_px(286),
+        y: screen_px(150),
+        width: screen_px(452),
+        height: screen_px(330),
     };
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "TRAINING");
@@ -458,10 +766,11 @@ fn draw_training_menu(
         options.menu.selected(),
         MenuRowsLayout {
             panel,
-            row_height: 62,
-            start_offset_y: 120,
+            row_height: screen_px(62),
+            start_offset_y: screen_px(120),
             large_labels: false,
             show_descriptions: true,
+            selection_pulse_frames: options.menu.selection_pulse_frames(),
         },
     );
     draw_menu_footer(draw, font, panel, "Esc volta das ferramentas para o menu");
@@ -473,18 +782,18 @@ fn draw_options_menu(
     options: &PreferencesDrawOptions<'_>,
 ) {
     let panel = MenuPanel {
-        x: 176,
-        y: 74,
-        width: 672,
-        height: 448,
+        x: screen_px(176),
+        y: screen_px(74),
+        width: screen_px(672),
+        height: screen_px(448),
     };
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "OPTIONS");
 
-    let row_x = panel.x + 48;
-    let row_width = panel.width - 96;
-    let row_height = 28;
-    let row_y = panel.y + 86;
+    let row_x = panel.x + screen_px(48);
+    let row_width = panel.width - screen_px(96);
+    let row_height = screen_px(28);
+    let row_y = panel.y + screen_px(86);
 
     draw_option_row(
         draw,
@@ -544,8 +853,8 @@ fn draw_options_menu(
         draw,
         font,
         hint,
-        panel.x + 48,
-        panel.y + panel.height - 52,
+        panel.x + screen_px(48),
+        panel.y + panel.height - screen_px(52),
         13.0,
         UI_MUTED,
     );
@@ -559,11 +868,11 @@ fn draw_options_menu(
 
 fn draw_menu_panel(draw: &mut impl DrawTarget, panel: MenuPanel) {
     draw.draw_rectangle(
-        panel.x - 8,
-        panel.y - 8,
-        panel.width + 16,
-        panel.height + 16,
-        Color::new(0, 0, 0, 94),
+        panel.x - screen_px(14),
+        panel.y - screen_px(14),
+        panel.width + screen_px(28),
+        panel.height + screen_px(28),
+        Color::new(0, 0, 0, 118),
     );
     draw.draw_rectangle(
         panel.x,
@@ -572,6 +881,17 @@ fn draw_menu_panel(draw: &mut impl DrawTarget, panel: MenuPanel) {
         panel.height,
         MENU_PANEL_STRONG,
     );
+    for y in (panel.y + screen_px(10)..panel.y + panel.height - screen_px(10))
+        .step_by(screen_px(18) as usize)
+    {
+        draw.draw_line(
+            panel.x + screen_px(10),
+            y,
+            panel.x + panel.width - screen_px(10),
+            y,
+            Color::new(78, 130, 164, 18),
+        );
+    }
     draw.draw_rectangle_lines(
         panel.x,
         panel.y,
@@ -579,19 +899,82 @@ fn draw_menu_panel(draw: &mut impl DrawTarget, panel: MenuPanel) {
         panel.height,
         Color::new(87, 193, 255, 150),
     );
+    draw.draw_rectangle_lines(
+        panel.x + screen_px(5),
+        panel.y + screen_px(5),
+        panel.width - screen_px(10),
+        panel.height - screen_px(10),
+        Color::new(255, 191, 67, 44),
+    );
     draw.draw_line(
-        panel.x + 22,
-        panel.y + 18,
-        panel.x + panel.width - 22,
-        panel.y + 18,
+        panel.x + screen_px(22),
+        panel.y + screen_px(18),
+        panel.x + panel.width - screen_px(22),
+        panel.y + screen_px(18),
         Color::new(87, 193, 255, 128),
     );
     draw.draw_line(
-        panel.x + 22,
-        panel.y + panel.height - 44,
-        panel.x + panel.width - 22,
-        panel.y + panel.height - 44,
+        panel.x + screen_px(22),
+        panel.y + panel.height - screen_px(44),
+        panel.x + panel.width - screen_px(22),
+        panel.y + panel.height - screen_px(44),
         Color::new(87, 193, 255, 80),
+    );
+    draw.draw_rectangle(
+        panel.x - screen_px(4),
+        panel.y - screen_px(4),
+        screen_px(34),
+        screen_px(4),
+        MENU_ACCENT,
+    );
+    draw.draw_rectangle(
+        panel.x - screen_px(4),
+        panel.y - screen_px(4),
+        screen_px(4),
+        screen_px(34),
+        MENU_ACCENT,
+    );
+    draw.draw_rectangle(
+        panel.x + panel.width - screen_px(30),
+        panel.y - screen_px(4),
+        screen_px(34),
+        screen_px(4),
+        MENU_ACCENT_ALT,
+    );
+    draw.draw_rectangle(
+        panel.x + panel.width,
+        panel.y - screen_px(4),
+        screen_px(4),
+        screen_px(34),
+        MENU_ACCENT_ALT,
+    );
+    draw.draw_rectangle(
+        panel.x - screen_px(4),
+        panel.y + panel.height,
+        screen_px(34),
+        screen_px(4),
+        MENU_ACCENT_ALT,
+    );
+    draw.draw_rectangle(
+        panel.x - screen_px(4),
+        panel.y + panel.height - screen_px(30),
+        screen_px(4),
+        screen_px(34),
+        MENU_ACCENT_ALT,
+    );
+    draw.draw_rectangle(
+        panel.x + panel.width - screen_px(30),
+        panel.y + panel.height,
+        screen_px(34),
+        screen_px(4),
+        MENU_ACCENT,
+    );
+    draw.draw_rectangle(
+        panel.x + panel.width,
+        panel.y + panel.height - screen_px(30),
+        screen_px(4),
+        screen_px(34),
+        MENU_ACCENT,
     );
 }
 
@@ -606,8 +989,8 @@ fn draw_menu_page_title(
         font,
         title,
         panel.x + panel.width / 2,
-        panel.y + 44,
-        26.0,
+        panel.y + screen_px(26),
+        21.0,
         UI_TEXT,
     );
 }
@@ -619,8 +1002,8 @@ fn draw_menu_rows(
     selected: usize,
     layout: MenuRowsLayout,
 ) {
-    let row_x = layout.panel.x + 42;
-    let row_width = layout.panel.width - 84;
+    let row_x = layout.panel.x + screen_px(42);
+    let row_width = layout.panel.width - screen_px(84);
     for (index, row) in rows.iter().enumerate() {
         draw_large_menu_row(
             draw,
@@ -629,7 +1012,7 @@ fn draw_menu_rows(
                 x: row_x,
                 y: layout.panel.y + layout.start_offset_y + index as i32 * layout.row_height,
                 width: row_width,
-                height: layout.row_height - 8,
+                height: layout.row_height - screen_px(8),
                 selected: selected == index,
                 label: row.label,
                 description: row.description,
@@ -637,6 +1020,12 @@ fn draw_menu_rows(
                 checked: row.checked,
                 large_label: layout.large_labels,
                 show_description: layout.show_descriptions,
+                animation_frames: if selected == index {
+                    layout.selection_pulse_frames
+                } else {
+                    0
+                },
+                visual_seed: index as u32,
             },
         );
     }
@@ -649,6 +1038,7 @@ struct MenuRowsLayout {
     start_offset_y: i32,
     large_labels: bool,
     show_descriptions: bool,
+    selection_pulse_frames: u16,
 }
 
 struct LargeMenuRow<'a> {
@@ -663,6 +1053,8 @@ struct LargeMenuRow<'a> {
     checked: Option<bool>,
     large_label: bool,
     show_description: bool,
+    animation_frames: u16,
+    visual_seed: u32,
 }
 
 fn draw_large_menu_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: LargeMenuRow<'_>) {
@@ -676,36 +1068,64 @@ fn draw_large_menu_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: Lar
     } else {
         Color::new(92, 113, 144, 160)
     };
+    draw.draw_rectangle(
+        row.x + screen_px(6),
+        row.y + screen_px(7),
+        row.width,
+        row.height,
+        Color::new(0, 0, 0, 86),
+    );
     draw.draw_rectangle(row.x, row.y, row.width, row.height, fill);
     draw.draw_rectangle_lines(row.x, row.y, row.width, row.height, border);
+    draw.draw_line(
+        row.x + screen_px(12),
+        row.y + row.height - screen_px(7),
+        row.x + row.width - screen_px(12),
+        row.y + row.height - screen_px(7),
+        Color::new(255, 255, 255, 24),
+    );
 
     if row.selected {
-        draw.draw_rectangle(row.x, row.y, 5, row.height, MENU_ACCENT_ALT);
+        draw_selected_menu_cursor(draw, row.x, row.y, row.height, row.animation_frames);
+        draw_selected_row_xray(draw, font, &row);
     }
 
     let label_x = if let Some(checked) = row.checked {
-        draw_checkbox(draw, row.x + 18, row.y + row.height / 2 - 9, checked);
-        row.x + 50
-    } else {
-        draw_menu_text(
+        draw_checkbox(
             draw,
-            font,
-            if row.selected { ">" } else { "" },
-            row.x + 18,
-            row.y + row.height / 2 - 13,
-            22.0,
-            MENU_ACCENT,
+            row.x + screen_px(18),
+            row.y + row.height / 2 - screen_px(9),
+            checked,
         );
-        row.x + 50
+        row.x + screen_px(50)
+    } else {
+        row.x + screen_px(50)
     };
 
-    let label_size = if row.large_label { 27.0 } else { 20.0 };
+    let label_size = if row.large_label { 22.0 } else { 20.0 };
     let label_y = if row.show_description {
-        row.y + 5
+        row.y + screen_px(3)
     } else {
-        row.y + row.height / 2 - 15
+        row.y + row.height / 2 - screen_px(15)
     };
-    draw_menu_text(draw, font, row.label, label_x, label_y, label_size, UI_TEXT);
+    let animated_label;
+    let label = if row.animation_frames > 0 {
+        animated_label = binary_reveal_text_with_seed(
+            row.label,
+            row.animation_frames,
+            DEFAULT_BINARY_REVEAL_FRAMES,
+            row.visual_seed,
+        );
+        animated_label.as_str()
+    } else {
+        row.label
+    };
+    let label_color = if row.animation_frames > 0 {
+        MENU_HACK_GREEN
+    } else {
+        UI_TEXT
+    };
+    draw_menu_text(draw, font, label, label_x, label_y, label_size, label_color);
 
     if row.show_description && !row.description.is_empty() {
         draw_menu_text(
@@ -713,8 +1133,8 @@ fn draw_large_menu_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: Lar
             font,
             row.description,
             label_x,
-            row.y + row.height - 17,
-            12.0,
+            row.y + row.height - screen_px(17),
+            11.0,
             UI_MUTED,
         );
     }
@@ -726,12 +1146,125 @@ fn draw_large_menu_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: Lar
             draw,
             font,
             &text,
-            row.x + row.width - text_width - 18,
-            row.y + 9,
+            row.x + row.width - text_width - screen_px(18),
+            row.y + screen_px(9),
             18.0,
             HEALTH_FILL,
         );
     }
+}
+
+fn draw_selected_menu_cursor(
+    draw: &mut impl DrawTarget,
+    row_x: i32,
+    row_y: i32,
+    row_height: i32,
+    animation_frames: u16,
+) {
+    let center_y = row_y + row_height / 2;
+    let flash = if animation_frames > DEFAULT_BINARY_REVEAL_FRAMES / 2 {
+        MENU_HACK_GREEN
+    } else {
+        MENU_CURSOR
+    };
+
+    draw.draw_rectangle(
+        row_x - screen_px(24),
+        center_y - screen_px(4),
+        screen_px(22),
+        screen_px(8),
+        flash,
+    );
+    draw.draw_line(
+        row_x - screen_px(2),
+        center_y - screen_px(14),
+        row_x + screen_px(12),
+        center_y,
+        flash,
+    );
+    draw.draw_line(
+        row_x + screen_px(12),
+        center_y,
+        row_x - screen_px(2),
+        center_y + screen_px(14),
+        flash,
+    );
+    draw.draw_line(
+        row_x - screen_px(18),
+        center_y - screen_px(18),
+        row_x - screen_px(4),
+        center_y - screen_px(4),
+        MENU_ACCENT,
+    );
+    draw.draw_line(
+        row_x - screen_px(18),
+        center_y + screen_px(18),
+        row_x - screen_px(4),
+        center_y + screen_px(4),
+        MENU_ACCENT,
+    );
+    draw.draw_rectangle(row_x, row_y, screen_px(5), row_height, MENU_CURSOR);
+}
+
+fn draw_selected_row_xray(draw: &mut impl DrawTarget, font: Option<&Font>, row: &LargeMenuRow<'_>) {
+    draw.draw_rectangle(
+        row.x + screen_px(6),
+        row.y + screen_px(5),
+        row.width - screen_px(12),
+        row.height - screen_px(10),
+        Color::new(0, 202, 255, 22),
+    );
+    for offset in (screen_px(8)..row.width - screen_px(18)).step_by(screen_px(34) as usize) {
+        draw.draw_line(
+            row.x + offset,
+            row.y + screen_px(6),
+            row.x + offset + screen_px(16),
+            row.y + row.height - screen_px(8),
+            Color::new(95, 255, 174, 38),
+        );
+    }
+
+    if row.animation_frames == 0 {
+        return;
+    }
+
+    let elapsed = DEFAULT_BINARY_REVEAL_FRAMES.saturating_sub(row.animation_frames) as i32;
+    let scan_width = row.width - screen_px(28);
+    let scan_x = row.x + screen_px(14) + scan_width * elapsed / DEFAULT_BINARY_REVEAL_FRAMES as i32;
+    draw.draw_rectangle(
+        scan_x - screen_px(7),
+        row.y + screen_px(3),
+        screen_px(14),
+        row.height - screen_px(6),
+        Color::new(255, 255, 255, 72),
+    );
+    draw.draw_line(
+        scan_x,
+        row.y + screen_px(4),
+        scan_x,
+        row.y + row.height - screen_px(5),
+        MENU_CURSOR,
+    );
+
+    if row.width < screen_px(320) {
+        return;
+    }
+
+    let code = if row.visual_seed.is_multiple_of(2) {
+        "0101 1100 0110"
+    } else {
+        "1010 0011 1001"
+    };
+    let code_width = menu_text_width(font, code, 10.0, 1.0);
+    draw_menu_text(
+        draw,
+        font,
+        code,
+        row.x + row.width - code_width - screen_px(14),
+        row.y + row.height - screen_px(16),
+        10.0,
+        Color::new(95, 255, 174, 132),
+    );
 }
 
 struct OptionRow<'a> {
@@ -751,19 +1284,33 @@ fn draw_option_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: OptionR
     } else {
         Color::new(9, 15, 28, 190)
     };
-    draw.draw_rectangle(row.x, row.y, row.width, row.height - 2, fill);
+    draw.draw_rectangle(row.x, row.y, row.width, row.height - screen_px(2), fill);
     if row.selected {
-        draw.draw_rectangle_lines(row.x, row.y, row.width, row.height - 2, MENU_ACCENT);
+        draw.draw_rectangle_lines(
+            row.x,
+            row.y,
+            row.width,
+            row.height - screen_px(2),
+            MENU_ACCENT,
+        );
     }
 
     let label_x = if let Some(checked) = row.checked {
-        draw_checkbox(draw, row.x + 12, row.y + 5, checked);
-        row.x + 42
+        draw_checkbox(draw, row.x + screen_px(12), row.y + screen_px(5), checked);
+        row.x + screen_px(42)
     } else {
-        row.x + 42
+        row.x + screen_px(42)
     };
 
-    draw_menu_text(draw, font, row.label, label_x, row.y + 5, 15.0, UI_TEXT);
+    draw_menu_text(
+        draw,
+        font,
+        row.label,
+        label_x,
+        row.y + screen_px(5),
+        15.0,
+        UI_TEXT,
+    );
 
     if !row.value.is_empty() {
         let color = if row.value == "ON" || row.value == "REC" {
@@ -776,8 +1323,8 @@ fn draw_option_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: OptionR
             draw,
             font,
             row.value,
-            row.x + row.width - width - 14,
-            row.y + 5,
+            row.x + row.width - width - screen_px(14),
+            row.y + screen_px(5),
             15.0,
             color,
         );
@@ -785,10 +1332,16 @@ fn draw_option_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: OptionR
 }
 
 fn draw_checkbox(draw: &mut impl DrawTarget, x: i32, y: i32, enabled: bool) {
-    let size = 18;
+    let size = screen_px(18);
     draw.draw_rectangle_lines(x, y, size, size, UI_TEXT);
     if enabled {
-        draw.draw_rectangle(x + 4, y + 4, size - 8, size - 8, HEALTH_FILL);
+        draw.draw_rectangle(
+            x + screen_px(4),
+            y + screen_px(4),
+            size - screen_px(8),
+            size - screen_px(8),
+            HEALTH_FILL,
+        );
     }
 }
 
@@ -798,7 +1351,7 @@ fn draw_menu_footer(draw: &mut impl DrawTarget, font: Option<&Font>, panel: Menu
         font,
         text,
         panel.x + panel.width / 2,
-        panel.y + panel.height - 30,
+        panel.y + panel.height - screen_px(30),
         12.0,
         UI_MUTED,
     );
@@ -816,50 +1369,6 @@ fn selected_options_hint(options: &PreferencesDrawOptions<'_>) -> &'static str {
         .description()
 }
 
-fn draw_menu_side_fighters(draw: &mut impl DrawTarget, assets: &GameAssets) {
-    let mut c_fighter = Fighter::new(
-        PlayerSlot::One,
-        character_spec(CharacterId::C).display_name,
-        182.0,
-    );
-    c_fighter.facing = Facing::Right;
-    let c_visuals = character_visuals(CharacterId::C, assets);
-    draw_fighter(
-        draw,
-        &c_fighter,
-        FighterDrawOptions {
-            body_color: c_visuals.body_color,
-            show_debug: false,
-            sprite_atlas: c_visuals.fight_atlas,
-            spritesheet: assets.fighter_spritesheet.as_ref(),
-            world_elapsed_seconds: 0.0,
-            forced_clip: Some(sprites::FighterSpriteClip::Idle),
-        },
-    );
-
-    let mut rust_fighter = Fighter::new(
-        PlayerSlot::Two,
-        character_spec(CharacterId::Rust).display_name,
-        796.0,
-    );
-    rust_fighter.facing = Facing::Left;
-    let rust_visuals = character_visuals(CharacterId::Rust, assets);
-    draw_fighter(
-        draw,
-        &rust_fighter,
-        FighterDrawOptions {
-            body_color: rust_visuals.body_color,
-            show_debug: false,
-            sprite_atlas: rust_visuals.fight_atlas,
-            spritesheet: assets.fighter_spritesheet.as_ref(),
-            world_elapsed_seconds: 0.0,
-            forced_clip: Some(sprites::FighterSpriteClip::Idle),
-        },
-    );
-
-    draw.draw_rectangle(246, 120, 532, 440, Color::new(0, 0, 0, 60));
-}
-
 fn draw_menu_text(
     draw: &mut impl DrawTarget,
     font: Option<&Font>,
@@ -869,6 +1378,7 @@ fn draw_menu_text(
     font_size: f32,
     color: Color,
 ) {
+    let font_size = world_px(font_size);
     if let Some(font) = font {
         draw.draw_text_ex(
             font,
@@ -897,6 +1407,7 @@ fn draw_centered_menu_text(
 }
 
 fn menu_text_width(font: Option<&Font>, text: &str, font_size: f32, spacing: f32) -> i32 {
+    let font_size = world_px(font_size);
     if let Some(font) = font {
         font.measure_text(text, font_size, spacing).x.round() as i32
     } else {
@@ -926,14 +1437,14 @@ fn draw_arena(draw: &mut impl DrawTarget, background: Option<&Texture2D>) {
     );
     draw.draw_line(
         ARENA_LEFT as i32,
-        96,
+        screen_px(96),
         ARENA_LEFT as i32,
         FLOOR_Y as i32,
         UI_MUTED,
     );
     draw.draw_line(
         ARENA_RIGHT as i32,
-        96,
+        screen_px(96),
         ARENA_RIGHT as i32,
         FLOOR_Y as i32,
         UI_MUTED,
@@ -1042,7 +1553,13 @@ fn draw_fighter(
         );
         outline_rect(draw, guard, GUARD);
         if options.show_debug {
-            draw.draw_text("BLOCK", guard.x as i32 - 18, guard.y as i32 - 22, 16, GUARD);
+            draw.draw_text(
+                "BLOCK",
+                (guard.x - world_px(18.0)) as i32,
+                (guard.y - world_px(22.0)) as i32,
+                screen_px(16),
+                GUARD,
+            );
         }
     }
 
@@ -1060,31 +1577,49 @@ fn draw_fighter(
         draw.draw_text(
             "ACTIVE",
             hitbox.x as i32,
-            (hitbox.y - 22.0) as i32,
-            16,
+            (hitbox.y - world_px(22.0)) as i32,
+            screen_px(16),
             HITBOX,
         );
     }
 
     let label_x = fighter.position.x as i32;
-    let label_y = (fighter.position.y - 22.0) as i32;
-    draw.draw_text(fighter.name, label_x, label_y, 16, UI_TEXT);
+    let label_y = (fighter.position.y - world_px(22.0)) as i32;
+    draw.draw_text(fighter.name, label_x, label_y, screen_px(16), UI_TEXT);
 
     if options.show_debug && fighter.in_hitstun() {
         let stun_text = format!("HITSTUN {:02}", fighter.hitstun_remaining_frames().get());
-        draw.draw_text(&stun_text, label_x, label_y - 24, 14, HITSPARK);
+        draw.draw_text(
+            &stun_text,
+            label_x,
+            label_y - screen_px(24),
+            screen_px(14),
+            HITSPARK,
+        );
     } else if options.show_debug && fighter.in_blockstun() {
         let stun_text = format!(
             "BLOCKSTUN {:02}",
             fighter.blockstun_remaining_frames().get()
         );
-        draw.draw_text(&stun_text, label_x, label_y - 24, 14, GUARD);
+        draw.draw_text(
+            &stun_text,
+            label_x,
+            label_y - screen_px(24),
+            screen_px(14),
+            GUARD,
+        );
     } else if options.show_debug && fighter.in_whiff_recovery() {
         let recovery_text = format!(
             "WHIFF {:02}",
             fighter.whiff_recovery_remaining_frames().get()
         );
-        draw.draw_text(&recovery_text, label_x, label_y - 40, 14, UI_MUTED);
+        draw.draw_text(
+            &recovery_text,
+            label_x,
+            label_y - screen_px(40),
+            screen_px(14),
+            UI_MUTED,
+        );
     }
 
     if options.show_debug
@@ -1101,8 +1636,20 @@ fn draw_fighter(
             frame_data.spawn_frame.get(),
             fighter.projectile_cooldown_remaining_frames().get()
         );
-        draw.draw_text(&frame_text, label_x, label_y - 24, 14, PROJECTILE);
-        draw.draw_text(&timing_text, label_x, label_y - 40, 12, UI_MUTED);
+        draw.draw_text(
+            &frame_text,
+            label_x,
+            label_y - screen_px(24),
+            screen_px(14),
+            PROJECTILE,
+        );
+        draw.draw_text(
+            &timing_text,
+            label_x,
+            label_y - screen_px(40),
+            screen_px(12),
+            UI_MUTED,
+        );
     }
 
     if options.show_debug && phase != AttackPhase::Idle {
@@ -1129,7 +1676,13 @@ fn draw_fighter(
         } else {
             format!("{attack_label} {phase_label}")
         };
-        draw.draw_text(&frame_text, label_x, label_y - 24, 14, HITSPARK);
+        draw.draw_text(
+            &frame_text,
+            label_x,
+            label_y - screen_px(24),
+            screen_px(14),
+            HITSPARK,
+        );
 
         if let Some(frame_data) = fighter.attack_frame_data() {
             let active_text = format!(
@@ -1137,10 +1690,22 @@ fn draw_fighter(
                 frame_data.active_start.get(),
                 frame_data.active_end.get()
             );
-            draw.draw_text(&active_text, label_x, label_y - 40, 12, UI_MUTED);
+            draw.draw_text(
+                &active_text,
+                label_x,
+                label_y - screen_px(40),
+                screen_px(12),
+                UI_MUTED,
+            );
         }
     } else if options.show_debug && fighter.crouching {
-        draw.draw_text("CROUCH", label_x, label_y - 22, 18, UI_MUTED);
+        draw.draw_text(
+            "CROUCH",
+            label_x,
+            label_y - screen_px(22),
+            screen_px(18),
+            UI_MUTED,
+        );
     }
 }
 
@@ -1197,9 +1762,9 @@ fn draw_hud(
 ) {
     draw.draw_text(
         "Borrow Fighters / Prototype 0.1 Greybox",
-        24,
-        12,
-        20,
+        screen_px(24),
+        screen_px(12),
+        screen_px(20),
         UI_TEXT,
     );
 
@@ -1210,21 +1775,28 @@ fn draw_hud(
         connected_label(gamepad_status.player_one),
         connected_label(gamepad_status.player_two)
     );
-    let width = measure_text_width(&status, 14);
-    draw.draw_text(&status, WINDOW_WIDTH - width - 24, 16, 14, UI_MUTED);
+    let status_font_size = screen_px(14);
+    let width = measure_text_width(&status, status_font_size);
+    draw.draw_text(
+        &status,
+        WINDOW_WIDTH - width - screen_px(24),
+        screen_px(16),
+        status_font_size,
+        UI_MUTED,
+    );
 
     draw_health_bar(
         draw,
-        24,
-        72,
+        screen_px(24),
+        screen_px(72),
         world.player_one.health,
         world.player_one.max_health,
         world.player_one.name,
     );
     draw_health_bar(
         draw,
-        WINDOW_WIDTH - 324,
-        72,
+        WINDOW_WIDTH - screen_px(324),
+        screen_px(72),
         world.player_two.health,
         world.player_two.max_health,
         world.player_two.name,
@@ -1240,15 +1812,22 @@ fn draw_hud(
             }
             MatchOutcome::Draw => "Draw - press R/Menu".to_owned(),
         };
-        let width = measure_text_width(&message, 32);
-        draw.draw_text(&message, (WINDOW_WIDTH - width) / 2, 124, 32, UI_TEXT);
+        let font_size = screen_px(32);
+        let width = measure_text_width(&message, font_size);
+        draw.draw_text(
+            &message,
+            (WINDOW_WIDTH - width) / 2,
+            screen_px(124),
+            font_size,
+            UI_TEXT,
+        );
     }
 }
 
 fn draw_countdown_sprite(draw: &mut impl DrawTarget, texture: &Texture2D) {
     let source = Rectangle::new(0.0, 0.0, texture.width() as f32, texture.height() as f32);
 
-    let target_height = 120.0;
+    let target_height = world_px(120.0);
     let scale = target_height / source.height;
 
     let dest_width = source.width * scale;
@@ -1256,7 +1835,7 @@ fn draw_countdown_sprite(draw: &mut impl DrawTarget, texture: &Texture2D) {
 
     let dest = Rectangle::new(
         (WINDOW_WIDTH as f32 - dest_width) * 0.5,
-        WINDOW_HEIGHT as f32 * 0.5 - dest_height * 0.5 - 18.0,
+        WINDOW_HEIGHT as f32 * 0.5 - dest_height * 0.5 - world_px(18.0),
         dest_width,
         dest_height,
     );
@@ -1272,12 +1851,16 @@ fn draw_countdown_sprite(draw: &mut impl DrawTarget, texture: &Texture2D) {
 }
 
 fn draw_countdown_text(draw: &mut impl DrawTarget, label: &str) {
-    let font_size = if label == "Fight!" { 54 } else { 78 };
+    let font_size = if label == "Fight!" {
+        screen_px(54)
+    } else {
+        screen_px(78)
+    };
     let width = measure_text_width(label, font_size);
     let x = (WINDOW_WIDTH - width) / 2;
-    let y = WINDOW_HEIGHT / 2 - font_size / 2 - 18;
-    let padding_x = 34;
-    let padding_y = 18;
+    let y = WINDOW_HEIGHT / 2 - font_size / 2 - screen_px(18);
+    let padding_x = screen_px(34);
+    let padding_y = screen_px(18);
 
     draw.draw_rectangle(
         x - padding_x,
@@ -1293,7 +1876,13 @@ fn draw_countdown_text(draw: &mut impl DrawTarget, label: &str) {
         font_size + padding_y * 2,
         Color::new(238, 241, 247, 180),
     );
-    draw.draw_text(label, x + 4, y + 4, font_size, Color::new(0, 0, 0, 190));
+    draw.draw_text(
+        label,
+        x + screen_px(4),
+        y + screen_px(4),
+        font_size,
+        Color::new(0, 0, 0, 190),
+    );
     draw.draw_text(label, x, y, font_size, UI_TEXT);
 }
 
@@ -1316,37 +1905,37 @@ fn draw_countdown(draw: &mut impl DrawTarget, label: &str, assets: &GameAssets) 
 fn draw_help(draw: &mut impl DrawTarget) {
     draw.draw_text(
         "P1: A/D/W/S/Q or Pad LS/DPad, A jump, LB/LT block",
-        24,
-        WINDOW_HEIGHT - 124,
-        15,
+        screen_px(24),
+        WINDOW_HEIGHT - screen_px(124),
+        screen_px(15),
         UI_TEXT,
     );
     draw.draw_text(
         "P1 attacks: F LP, H HP, V kick, G special or Pad X/Y/B/RB",
-        24,
-        WINDOW_HEIGHT - 100,
-        15,
+        screen_px(24),
+        WINDOW_HEIGHT - screen_px(100),
+        screen_px(15),
         UI_TEXT,
     );
     draw.draw_text(
         "P1 mods: S+V sweep, S+H anti-air, forward+H overhead, Q+F throw, air F/V",
-        24,
-        WINDOW_HEIGHT - 76,
-        15,
+        screen_px(24),
+        WINDOW_HEIGHT - screen_px(76),
+        screen_px(15),
         UI_TEXT,
     );
     draw.draw_text(
         "P2: CPU default; C or View toggles P2 manual",
-        24,
-        WINDOW_HEIGHT - 52,
-        15,
+        screen_px(24),
+        WINDOW_HEIGHT - screen_px(52),
+        screen_px(15),
         UI_TEXT,
     );
     draw.draw_text(
         "P2 manual: keyboard or second Pad same layout; Start/R restarts; F9/F10 records",
-        24,
-        WINDOW_HEIGHT - 28,
-        15,
+        screen_px(24),
+        WINDOW_HEIGHT - screen_px(28),
+        screen_px(15),
         UI_MUTED,
     );
 }
@@ -1385,8 +1974,8 @@ fn draw_health_bar(
     max_health: i32,
     label: &str,
 ) {
-    let width = 300;
-    let height = 18;
+    let width = screen_px(300);
+    let height = screen_px(18);
     let max_health = max_health.max(1);
     let ratio = health.max(0) as f32 / max_health as f32;
     let fill_width = (width as f32 * ratio.clamp(0.0, 1.0)).round() as i32;
@@ -1401,7 +1990,7 @@ fn draw_health_bar(
     draw.draw_rectangle_lines(x, y, width, height, UI_TEXT);
 
     let text = format!("{label} HP {health:03}");
-    draw.draw_text(&text, x, y - 24, 20, UI_TEXT);
+    draw.draw_text(&text, x, y - screen_px(24), screen_px(20), UI_TEXT);
 }
 
 fn draw_projectiles(
@@ -1440,7 +2029,7 @@ fn draw_projectiles(
             draw.draw_circle(
                 rect.center().x.round() as i32,
                 rect.center().y.round() as i32,
-                8.0,
+                world_px(8.0),
                 PROJECTILE,
             );
         }
@@ -1449,9 +2038,9 @@ fn draw_projectiles(
             outline_rect(draw, rect, PROJECTILE);
             draw.draw_text(
                 "FIREBALL",
-                rect.x as i32 - 12,
-                rect.y as i32 - 20,
-                14,
+                (rect.x - world_px(12.0)) as i32,
+                (rect.y - world_px(20.0)) as i32,
+                screen_px(14),
                 PROJECTILE,
             );
         }
@@ -1510,10 +2099,16 @@ fn draw_body_collision(draw: &mut impl DrawTarget, world: &World) {
     draw.draw_line_ex(
         Vector2::new(x as f32, top as f32),
         Vector2::new(x as f32, bottom as f32),
-        6.0,
+        world_px(6.0),
         BODY_COLLISION,
     );
-    draw.draw_text("BODY COLLISION", x - 76, top - 24, 18, BODY_COLLISION);
+    draw.draw_text(
+        "BODY COLLISION",
+        x - screen_px(76),
+        top - screen_px(24),
+        screen_px(18),
+        BODY_COLLISION,
+    );
 }
 
 fn draw_hit_effects(draw: &mut impl DrawTarget, world: &World) {
@@ -1521,15 +2116,27 @@ fn draw_hit_effects(draw: &mut impl DrawTarget, world: &World) {
         let color = if effect.blocked { GUARD } else { HITSPARK };
         let x = effect.position.x.round() as i32;
         let y = effect.position.y.round() as i32;
-        let radius = (10.0 + effect.timer * 32.0).round() as i32;
+        let radius = (world_px(10.0) + effect.timer * world_px(32.0)).round() as i32;
         draw.draw_circle_lines(x, y, radius as f32, color);
         draw.draw_line(x - radius, y, x + radius, y, color);
         draw.draw_line(x, y - radius, x, y + radius, color);
 
         let damage = format!("-{}", effect.damage);
-        draw.draw_text(&damage, x + 14, y - 18, 24, color);
+        draw.draw_text(
+            &damage,
+            x + screen_px(14),
+            y - screen_px(18),
+            screen_px(24),
+            color,
+        );
         let label = if effect.blocked { "BLOCK" } else { "HIT" };
-        draw.draw_text(label, x - 18, y - 42, 20, color);
+        draw.draw_text(
+            label,
+            x - screen_px(18),
+            y - screen_px(42),
+            screen_px(20),
+            color,
+        );
     }
 }
 
