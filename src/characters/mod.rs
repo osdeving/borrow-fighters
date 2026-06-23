@@ -63,26 +63,26 @@ const GO_MOVE_IDS: [MoveId; 9] = [
     MoveId::CloseThrow,
 ];
 const C_MOVE_IDS: [MoveId; 9] = [
-    MoveId::LightPunch,
-    MoveId::HeavyPunch,
-    MoveId::Kick,
-    MoveId::SweepKick,
-    MoveId::OverheadPunch,
-    MoveId::RisingAntiAir,
+    MoveId::CPointerJab,
+    MoveId::CUnsafePoke,
+    MoveId::CNullStepKick,
+    MoveId::CSegfaultSweep,
+    MoveId::CStackOverflow,
+    MoveId::CInterruptVector,
     MoveId::AirPunch,
     MoveId::AirKick,
-    MoveId::CloseThrow,
+    MoveId::CUndefinedThrow,
 ];
 const PYTHON_MOVE_IDS: [MoveId; 9] = [
-    MoveId::LightPunch,
-    MoveId::HeavyPunch,
-    MoveId::Kick,
-    MoveId::SweepKick,
-    MoveId::OverheadPunch,
-    MoveId::RisingAntiAir,
+    MoveId::PythonSnakeBite,
+    MoveId::PythonDataStrike,
+    MoveId::PythonHeelKick,
+    MoveId::PythonIndentSweep,
+    MoveId::PythonTracebackOverhead,
+    MoveId::PythonVisionAntiAir,
     MoveId::AirPunch,
     MoveId::AirKick,
-    MoveId::CloseThrow,
+    MoveId::PythonConstrictThrow,
 ];
 
 /// Stable identifier for playable or testable characters.
@@ -115,6 +115,26 @@ impl CharacterId {
             Self::Duke => Self::Rust,
             Self::Go => Self::Duke,
             Self::C => Self::Go,
+            Self::Python => Self::C,
+        }
+    }
+
+    /// Returns the next character exposed in the current public demo menu.
+    pub const fn demo_next(self) -> Self {
+        match self {
+            Self::Rust => Self::Duke,
+            Self::Duke | Self::Go => Self::C,
+            Self::C => Self::Python,
+            Self::Python => Self::Rust,
+        }
+    }
+
+    /// Returns the previous character exposed in the current public demo menu.
+    pub const fn demo_previous(self) -> Self {
+        match self {
+            Self::Rust => Self::Python,
+            Self::Duke => Self::Rust,
+            Self::Go | Self::C => Self::Duke,
             Self::Python => Self::C,
         }
     }
@@ -161,6 +181,8 @@ pub enum CharacterArchetype {
     AllRounder,
     MidrangePressure,
     Rushdown,
+    Fundamentals,
+    AgilePunisher,
 }
 
 /// Tunable character-level stats consumed by match setup.
@@ -219,7 +241,7 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             id,
             display_name: "C",
             fighter_name: "C",
-            archetype: CharacterArchetype::MidrangePressure,
+            archetype: CharacterArchetype::Fundamentals,
             stats: C_STATS,
             body_metrics: C_BODY_METRICS,
             move_ids: &C_MOVE_IDS,
@@ -229,7 +251,7 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             id,
             display_name: "Python",
             fighter_name: "Python",
-            archetype: CharacterArchetype::AllRounder,
+            archetype: CharacterArchetype::AgilePunisher,
             stats: PYTHON_STATS,
             body_metrics: PYTHON_BODY_METRICS,
             move_ids: &PYTHON_MOVE_IDS,

@@ -50,7 +50,7 @@ Transicoes novas devem passar por esse enum em vez de espalhar flags soltas no l
 
 O início de luta fica em [`src/game/world.rs`](../src/game/world.rs), não no renderer. `World::new_greybox_with_intro` liga primeiro `spawn_intro_timer` para a entrada cinematográfica e também prepara `countdown_timer`.
 
-O matchup inicial vem de [`LaunchOptions.match_options`](../src/cli.rs), que aceita `--p1`/`--player-one` e `--p2`/`--player-two` para a luta normal. O submenu `Versus Setup` também pode ciclar Player 1 e Player 2 entre Rust, Duke, Go, C e Python; [`App`](../src/app.rs) marca essa escolha como pendente e recria o mundo ao começar a próxima luta. `LaunchOptions.start_fight` vem de `--fight`/`--skip-menu` e permite iniciar direto em `AppScene::Fight`. [`App`](../src/app.rs) preserva essa escolha no primeiro mundo e em `restart_match`, chamando `World::new_greybox_with_intro_for_characters`.
+O matchup inicial vem de [`LaunchOptions.match_options`](../src/cli.rs), que aceita `--p1`/`--player-one` e `--p2`/`--player-two` para a luta normal. O submenu `Versus Setup` da demo cicla Player 1 e Player 2 entre Rust, Duke/Java, C e Python; Go/Gopher continua no enum e nas ferramentas, mas não entra no ciclo público por enquanto. [`App`](../src/app.rs) marca essa escolha como pendente e recria o mundo ao começar a próxima luta. `LaunchOptions.start_fight` vem de `--fight`/`--skip-menu` e permite iniciar direto em `AppScene::Fight`. [`App`](../src/app.rs) preserva essa escolha no primeiro mundo e em `restart_match`, chamando `World::new_greybox_with_intro_for_characters`.
 
 Enquanto `spawn_intro_active` ou `countdown_active` estiverem ativos, `World::update_with_flags` atualiza apenas timers e feedback transitório; movimento, ataques, projéteis e IA não avançam gameplay. A contagem visual usa os labels `11`, `10`, `01` e `Fight!`, expostos por `World::countdown_label`. Os eventos de áudio correspondentes são `match.countdown.11`, `match.countdown.10`, `match.countdown.01` e `match.countdown.fight`.
 
@@ -89,7 +89,7 @@ O corpo fisico base fica em [`assets/tuning/character-body-metrics.json`](../ass
 - `standing_height`: altura em pe;
 - `crouch_height`: altura abaixada.
 
-`FighterBodyMetrics` e consumido por [`Fighter`](../src/combat/fighter.rs). Rust, Duke/Java, Go, C e Python usam o corpo padrao `101,3 x 224 / crouch 128` neste corte, migrado da base anterior por `RESOLUTION_SCALE = 4 / 3`. Go continua nao-humano visualmente, mas o atlas foi normalizado para caber na mesma escala jogavel de Rust/C em vez de ganhar hurtbox larga por causa de proporcao de placeholder. Python ainda precisa de revisao de escala/pivot no Sprite Studio antes de metricas proprias. Se o arquivo falhar ao carregar no app, o jogo usa os defaults do `CharacterSpec` e emite warning.
+`FighterBodyMetrics` e consumido por [`Fighter`](../src/combat/fighter.rs). Rust, Duke/Java, Go, C e Python usam o corpo padrao `101,3 x 224 / crouch 128` neste corte, migrado da base anterior por `RESOLUTION_SCALE = 4 / 3`. Go continua nao-humano visualmente, mas o atlas foi normalizado para caber na mesma escala jogavel de Rust/C em vez de ganhar hurtbox larga por causa de proporcao de placeholder. Python deve passar pela mesma revisao de escala/pivot dos outros humanoides antes de qualquer metrica propria. Se o arquivo falhar ao carregar no app, o jogo usa os defaults do `CharacterSpec` e emite warning.
 
 O padrao de tamanho em tela fica em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md). Em resumo:
 
@@ -261,11 +261,11 @@ Personagens ficam em [`src/characters/mod.rs`](../src/characters/mod.rs). Cada `
 - `move_ids`: golpes próximos disponíveis no loadout;
 - `projectile`: `ProjectileSpec` usado para dano, tamanho, velocidade, cooldown, reação e limite de alcance do especial.
 
-Hoje `Rust` usa `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` para reforçar leitura técnica: golpes mais rápidos, menores e menos danosos. `Duke` usa `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` para reforçar midrange pressure: mais alcance/dano, startup maior e whiff mais punível. `Go` usa `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead` e `GoHopkick` para validar rushdown com atlas placeholder: menos vida, ações mais rápidas e alcance menor. `C` ja e selecionavel e possui atlas/projectile/entrada proprios, mas ainda usa loadout generico para validar tamanho, leitura e pipeline antes de receber identidade de frame data. `Python` ja e selecionavel e possui atlas/projectile proprios; neste corte ela usa loadout generico enquanto validamos o bote da cobra, o soco forte, escala e boxes.
+Hoje `Rust` usa `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` para reforçar leitura técnica: golpes mais rápidos, menores e menos danosos. `Duke` usa `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` para reforçar midrange pressure: mais alcance/dano, startup maior e whiff mais punível. `Go` usa `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead` e `GoHopkick` para validar rushdown com atlas placeholder: menos vida, ações mais rápidas e alcance menor. `C` usa `CPointerJab`, `CUnsafePoke`, `CNullStepKick`, `CSegfaultSweep`, `CStackOverflow`, `CInterruptVector` e `CUndefinedThrow` para jogar fundamentos com alcance/risco. `Python` usa `PythonSnakeBite`, `PythonDataStrike`, `PythonHeelKick`, `PythonIndentSweep`, `PythonTracebackOverhead`, `PythonVisionAntiAir` e `PythonConstrictThrow` para jogar como punisher ágil de dano moderado.
 
 Os especiais de projectile ficam em [`src/combat/projectile.rs`](../src/combat/projectile.rs) como `RUST_PROJECTILE_SPEC`, `DUKE_PROJECTILE_SPEC`, `GO_PROJECTILE_SPEC`, `C_PROJECTILE_SPEC` e `PYTHON_PROJECTILE_SPEC`. `Fighter::projectile_spec` alimenta `Projectile::from_fighter`, o Combat Lab e o overlay técnico, então alterar um spec muda luta real e lab no mesmo caminho.
 
-`World::new_with_characters` e `World::new_greybox_with_intro_for_characters` aceitam qualquer `CharacterId`; a luta padrão ainda instancia Rust x Duke, mas o submenu `Versus Setup` e `--p1`/`--p2` permitem testar Go, C e Python em match real.
+`World::new_with_characters` e `World::new_greybox_with_intro_for_characters` aceitam qualquer `CharacterId`; a luta padrão ainda instancia Rust x Duke. O submenu `Versus Setup` da demo cicla Rust, Duke/Java, C e Python. Go/Gopher continua testável por `--p1`/`--p2`, Combat Lab e Sprite Viewer, mas fica fora do menu público por enquanto.
 
 A intenção de gameplay por golpe vive em [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md). Atualize essa matriz quando alterar frame data, alcance, dano, guard rule, projectile ou loadout de personagem.
 
@@ -282,7 +282,9 @@ cargo run -- --lab combat --character rust --move sweep
 cargo run -- --lab combat --character duke --move throw
 cargo run -- --lab combat --character go --move kick
 cargo run -- --lab combat --character go --move air_kick
+cargo run -- --lab combat --character c --move heavy_punch
 cargo run -- --lab combat --character c --move projectile
+cargo run -- --lab combat --character python --move light_punch
 cargo run -- --lab combat --character rust --pose block
 cargo run -- --lab combat --character duke --pose victory
 ```
@@ -294,9 +296,9 @@ Valores aceitos:
 | Flag | Valores |
 |---|---|
 | `--fight`, `--skip-menu` | sem valor; inicia direto na luta normal |
-| `--p1`, `--player-one` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang` |
-| `--p2`, `--player-two` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang` |
-| `--character` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang` |
+| `--p1`, `--player-one` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py` |
+| `--p2`, `--player-two` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py` |
+| `--character` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py` |
 | `--move` | `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`, `projectile` |
 | `--pose` | `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory` |
 | `--tool` | `sprite-viewer` |
@@ -363,11 +365,12 @@ Abrir a ferramenta isolada de sprites:
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip special --character c --move projectile
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip punch_light --character python --move light_punch
 ```
 
 O viewer roda fora do loop normal de luta. Pela CLI, [`src/app.rs`](../src/app.rs) desvia para esse modo antes de carregar `GameAssets` e áudio. Pelo menu, `Training -> Sprite Viewer` abre o mesmo loop com o atlas de C em `special/projectile` como ponto de partida, e `Esc` volta ao menu. O estado testável fica em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), e o desenho Raylib fica em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs).
 
-`--character` e `--move` ativam a camada runtime de combate no viewer. Sem `--character`, o viewer tenta inferir Rust, Duke, Go ou C pelo nome do manifesto. Essa camada usa `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, então ela reflete os dados de combate atuais.
+`--character` e `--move` ativam a camada runtime de combate no viewer. Sem `--character`, o viewer tenta inferir Rust, Duke, Go, C ou Python pelo nome do manifesto. Essa camada usa `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, então ela reflete os dados de combate atuais.
 
 O viewer tambem entende metadata opcional `frames[].combat` no manifesto. Essa metadata e projetada para tela em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), desenhada em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs), e validada em [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs). As coordenadas ficam em pixels locais do frame do atlas:
 

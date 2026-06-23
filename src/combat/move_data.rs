@@ -30,6 +30,20 @@ pub const GO_GOROUTINE_JAB_DAMAGE: i32 = 6;
 pub const GO_DEFER_KICK_DAMAGE: i32 = 10;
 pub const GO_CHANNEL_OVERHEAD_DAMAGE: i32 = 12;
 pub const GO_HOPKICK_DAMAGE: i32 = 10;
+pub const C_POINTER_JAB_DAMAGE: i32 = 8;
+pub const C_UNSAFE_POKE_DAMAGE: i32 = 17;
+pub const C_NULL_STEP_KICK_DAMAGE: i32 = 12;
+pub const C_SEGFAULT_SWEEP_DAMAGE: i32 = 14;
+pub const C_STACK_OVERFLOW_DAMAGE: i32 = 15;
+pub const C_INTERRUPT_VECTOR_DAMAGE: i32 = 13;
+pub const C_UNDEFINED_THROW_DAMAGE: i32 = 11;
+pub const PYTHON_SNAKE_BITE_DAMAGE: i32 = 7;
+pub const PYTHON_DATA_STRIKE_DAMAGE: i32 = 15;
+pub const PYTHON_HEEL_KICK_DAMAGE: i32 = 11;
+pub const PYTHON_INDENT_SWEEP_DAMAGE: i32 = 10;
+pub const PYTHON_TRACEBACK_OVERHEAD_DAMAGE: i32 = 13;
+pub const PYTHON_VISION_ANTI_AIR_DAMAGE: i32 = 11;
+pub const PYTHON_CONSTRICT_THROW_DAMAGE: i32 = 10;
 pub const LIGHT_ATTACK_WHIFF_RECOVERY: FrameCount = FrameCount::new(4);
 pub const HEAVY_ATTACK_WHIFF_RECOVERY: FrameCount = FrameCount::new(10);
 pub const KICK_WHIFF_RECOVERY: FrameCount = FrameCount::new(8);
@@ -49,6 +63,20 @@ pub const GO_GOROUTINE_JAB_WHIFF_RECOVERY: FrameCount = FrameCount::new(3);
 pub const GO_DEFER_KICK_WHIFF_RECOVERY: FrameCount = FrameCount::new(5);
 pub const GO_CHANNEL_OVERHEAD_WHIFF_RECOVERY: FrameCount = FrameCount::new(8);
 pub const GO_HOPKICK_WHIFF_RECOVERY: FrameCount = FrameCount::new(4);
+pub const C_POINTER_JAB_WHIFF_RECOVERY: FrameCount = FrameCount::new(5);
+pub const C_UNSAFE_POKE_WHIFF_RECOVERY: FrameCount = FrameCount::new(13);
+pub const C_NULL_STEP_KICK_WHIFF_RECOVERY: FrameCount = FrameCount::new(9);
+pub const C_SEGFAULT_SWEEP_WHIFF_RECOVERY: FrameCount = FrameCount::new(15);
+pub const C_STACK_OVERFLOW_WHIFF_RECOVERY: FrameCount = FrameCount::new(14);
+pub const C_INTERRUPT_VECTOR_WHIFF_RECOVERY: FrameCount = FrameCount::new(12);
+pub const C_UNDEFINED_THROW_WHIFF_RECOVERY: FrameCount = FrameCount::new(18);
+pub const PYTHON_SNAKE_BITE_WHIFF_RECOVERY: FrameCount = FrameCount::new(5);
+pub const PYTHON_DATA_STRIKE_WHIFF_RECOVERY: FrameCount = FrameCount::new(9);
+pub const PYTHON_HEEL_KICK_WHIFF_RECOVERY: FrameCount = FrameCount::new(7);
+pub const PYTHON_INDENT_SWEEP_WHIFF_RECOVERY: FrameCount = FrameCount::new(10);
+pub const PYTHON_TRACEBACK_OVERHEAD_WHIFF_RECOVERY: FrameCount = FrameCount::new(11);
+pub const PYTHON_VISION_ANTI_AIR_WHIFF_RECOVERY: FrameCount = FrameCount::new(9);
+pub const PYTHON_CONSTRICT_THROW_WHIFF_RECOVERY: FrameCount = FrameCount::new(14);
 pub const LIGHT_ATTACK_REACTION: HitReaction = HitReaction {
     hitstun: FrameCount::new(12),
     blockstun: FrameCount::new(8),
@@ -145,6 +173,90 @@ pub const GO_OVERHEAD_REACTION: HitReaction = HitReaction {
     hit_pushback: world_px(24.0),
     block_pushback: world_px(16.0),
 };
+pub const C_LIGHT_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(12),
+    blockstun: FrameCount::new(8),
+    hit_pushback: world_px(24.0),
+    block_pushback: world_px(14.0),
+};
+pub const C_HEAVY_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(18),
+    blockstun: FrameCount::new(12),
+    hit_pushback: world_px(42.0),
+    block_pushback: world_px(28.0),
+};
+pub const C_KICK_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(15),
+    blockstun: FrameCount::new(10),
+    hit_pushback: world_px(32.0),
+    block_pushback: world_px(22.0),
+};
+pub const C_SWEEP_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(21),
+    blockstun: FrameCount::new(13),
+    hit_pushback: world_px(46.0),
+    block_pushback: world_px(26.0),
+};
+pub const C_OVERHEAD_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(18),
+    blockstun: FrameCount::new(12),
+    hit_pushback: world_px(34.0),
+    block_pushback: world_px(20.0),
+};
+pub const C_ANTI_AIR_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(18),
+    blockstun: FrameCount::new(10),
+    hit_pushback: world_px(30.0),
+    block_pushback: world_px(18.0),
+};
+pub const C_THROW_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(23),
+    blockstun: FrameCount::ZERO,
+    hit_pushback: world_px(58.0),
+    block_pushback: world_px(0.0),
+};
+pub const PYTHON_LIGHT_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(11),
+    blockstun: FrameCount::new(8),
+    hit_pushback: world_px(20.0),
+    block_pushback: world_px(13.0),
+};
+pub const PYTHON_HEAVY_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(16),
+    blockstun: FrameCount::new(11),
+    hit_pushback: world_px(30.0),
+    block_pushback: world_px(20.0),
+};
+pub const PYTHON_KICK_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(14),
+    blockstun: FrameCount::new(9),
+    hit_pushback: world_px(28.0),
+    block_pushback: world_px(18.0),
+};
+pub const PYTHON_SWEEP_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(16),
+    blockstun: FrameCount::new(10),
+    hit_pushback: world_px(30.0),
+    block_pushback: world_px(18.0),
+};
+pub const PYTHON_OVERHEAD_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(16),
+    blockstun: FrameCount::new(11),
+    hit_pushback: world_px(28.0),
+    block_pushback: world_px(18.0),
+};
+pub const PYTHON_ANTI_AIR_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(16),
+    blockstun: FrameCount::new(9),
+    hit_pushback: world_px(28.0),
+    block_pushback: world_px(18.0),
+};
+pub const PYTHON_THROW_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(20),
+    blockstun: FrameCount::ZERO,
+    hit_pushback: world_px(48.0),
+    block_pushback: world_px(0.0),
+};
 
 /// Stable identifier for a close-range move.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -169,6 +281,20 @@ pub enum MoveId {
     GoDeferKick,
     GoChannelOverhead,
     GoHopkick,
+    CPointerJab,
+    CUnsafePoke,
+    CNullStepKick,
+    CSegfaultSweep,
+    CStackOverflow,
+    CInterruptVector,
+    CUndefinedThrow,
+    PythonSnakeBite,
+    PythonDataStrike,
+    PythonHeelKick,
+    PythonIndentSweep,
+    PythonTracebackOverhead,
+    PythonVisionAntiAir,
+    PythonConstrictThrow,
 }
 
 impl MoveId {
@@ -194,6 +320,20 @@ impl MoveId {
             Self::GoDeferKick => 17,
             Self::GoChannelOverhead => 18,
             Self::GoHopkick => 19,
+            Self::CPointerJab => 20,
+            Self::CUnsafePoke => 21,
+            Self::CNullStepKick => 22,
+            Self::CSegfaultSweep => 23,
+            Self::CStackOverflow => 24,
+            Self::CInterruptVector => 25,
+            Self::CUndefinedThrow => 26,
+            Self::PythonSnakeBite => 27,
+            Self::PythonDataStrike => 28,
+            Self::PythonHeelKick => 29,
+            Self::PythonIndentSweep => 30,
+            Self::PythonTracebackOverhead => 31,
+            Self::PythonVisionAntiAir => 32,
+            Self::PythonConstrictThrow => 33,
         }
     }
 
@@ -220,6 +360,20 @@ impl MoveId {
             Self::GoDeferKick => "go_defer_kick",
             Self::GoChannelOverhead => "go_channel_overhead",
             Self::GoHopkick => "go_hopkick",
+            Self::CPointerJab => "c_pointer_jab",
+            Self::CUnsafePoke => "c_unsafe_poke",
+            Self::CNullStepKick => "c_null_step_kick",
+            Self::CSegfaultSweep => "c_segfault_sweep",
+            Self::CStackOverflow => "c_stack_overflow",
+            Self::CInterruptVector => "c_interrupt_vector",
+            Self::CUndefinedThrow => "c_undefined_throw",
+            Self::PythonSnakeBite => "python_snake_bite",
+            Self::PythonDataStrike => "python_data_strike",
+            Self::PythonHeelKick => "python_heel_kick",
+            Self::PythonIndentSweep => "python_indent_sweep",
+            Self::PythonTracebackOverhead => "python_traceback_overhead",
+            Self::PythonVisionAntiAir => "python_vision_anti_air",
+            Self::PythonConstrictThrow => "python_constrict_throw",
         }
     }
 
@@ -246,6 +400,20 @@ impl MoveId {
             "go_defer_kick" => Some(Self::GoDeferKick),
             "go_channel_overhead" => Some(Self::GoChannelOverhead),
             "go_hopkick" => Some(Self::GoHopkick),
+            "c_pointer_jab" => Some(Self::CPointerJab),
+            "c_unsafe_poke" => Some(Self::CUnsafePoke),
+            "c_null_step_kick" => Some(Self::CNullStepKick),
+            "c_segfault_sweep" => Some(Self::CSegfaultSweep),
+            "c_stack_overflow" => Some(Self::CStackOverflow),
+            "c_interrupt_vector" => Some(Self::CInterruptVector),
+            "c_undefined_throw" => Some(Self::CUndefinedThrow),
+            "python_snake_bite" => Some(Self::PythonSnakeBite),
+            "python_data_strike" => Some(Self::PythonDataStrike),
+            "python_heel_kick" => Some(Self::PythonHeelKick),
+            "python_indent_sweep" => Some(Self::PythonIndentSweep),
+            "python_traceback_overhead" => Some(Self::PythonTracebackOverhead),
+            "python_vision_anti_air" => Some(Self::PythonVisionAntiAir),
+            "python_constrict_throw" => Some(Self::PythonConstrictThrow),
             _ => None,
         }
     }
@@ -344,7 +512,7 @@ pub struct MoveSpec {
 }
 
 /// Prototype 0.1 close-range move table.
-pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
+pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 34] = [
     MoveSpec {
         id: MoveId::LightPunch,
         input: MoveInputKind::LightPunch,
@@ -724,6 +892,272 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 20] = [
         guard_rule: GuardRule::High,
         hit_reaction: GO_KICK_REACTION,
         whiff_recovery: GO_HOPKICK_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::CPointerJab,
+        input: MoveInputKind::LightPunch,
+        label: "Pointer Jab",
+        frames: AttackFrameData {
+            duration: FrameCount::new(18),
+            active_start: FrameCount::new(5),
+            active_end: FrameCount::new(10),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(64.0),
+            height: world_px(32.0),
+            y_offset: world_px(62.0),
+        },
+        damage: C_POINTER_JAB_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: C_LIGHT_REACTION,
+        whiff_recovery: C_POINTER_JAB_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::CUnsafePoke,
+        input: MoveInputKind::HeavyPunch,
+        label: "Unsafe Poke",
+        frames: AttackFrameData {
+            duration: FrameCount::new(38),
+            active_start: FrameCount::new(12),
+            active_end: FrameCount::new(20),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(108.0),
+            height: world_px(40.0),
+            y_offset: world_px(58.0),
+        },
+        damage: C_UNSAFE_POKE_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: C_HEAVY_REACTION,
+        whiff_recovery: C_UNSAFE_POKE_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::CNullStepKick,
+        input: MoveInputKind::Kick,
+        label: "Null Step",
+        frames: AttackFrameData {
+            duration: FrameCount::new(30),
+            active_start: FrameCount::new(9),
+            active_end: FrameCount::new(16),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(102.0),
+            height: world_px(34.0),
+            y_offset: world_px(110.0),
+        },
+        damage: C_NULL_STEP_KICK_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: C_KICK_REACTION,
+        whiff_recovery: C_NULL_STEP_KICK_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::CSegfaultSweep,
+        input: MoveInputKind::Sweep,
+        label: "Segfault",
+        frames: AttackFrameData {
+            duration: FrameCount::new(36),
+            active_start: FrameCount::new(12),
+            active_end: FrameCount::new(20),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(122.0),
+            height: world_px(30.0),
+            y_offset: world_px(66.0),
+        },
+        damage: C_SEGFAULT_SWEEP_DAMAGE,
+        guard_rule: GuardRule::Low,
+        hit_reaction: C_SWEEP_REACTION,
+        whiff_recovery: C_SEGFAULT_SWEEP_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::CStackOverflow,
+        input: MoveInputKind::Overhead,
+        label: "Stack OH",
+        frames: AttackFrameData {
+            duration: FrameCount::new(36),
+            active_start: FrameCount::new(13),
+            active_end: FrameCount::new(20),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(86.0),
+            height: world_px(52.0),
+            y_offset: world_px(40.0),
+        },
+        damage: C_STACK_OVERFLOW_DAMAGE,
+        guard_rule: GuardRule::High,
+        hit_reaction: C_OVERHEAD_REACTION,
+        whiff_recovery: C_STACK_OVERFLOW_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::CInterruptVector,
+        input: MoveInputKind::AntiAir,
+        label: "Interrupt",
+        frames: AttackFrameData {
+            duration: FrameCount::new(30),
+            active_start: FrameCount::new(7),
+            active_end: FrameCount::new(14),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(74.0),
+            height: world_px(86.0),
+            y_offset: world_px(-88.0),
+        },
+        damage: C_INTERRUPT_VECTOR_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: C_ANTI_AIR_REACTION,
+        whiff_recovery: C_INTERRUPT_VECTOR_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::CUndefinedThrow,
+        input: MoveInputKind::Throw,
+        label: "Undefined",
+        frames: AttackFrameData {
+            duration: FrameCount::new(26),
+            active_start: FrameCount::new(7),
+            active_end: FrameCount::new(9),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(50.0),
+            height: world_px(122.0),
+            y_offset: world_px(30.0),
+        },
+        damage: C_UNDEFINED_THROW_DAMAGE,
+        guard_rule: GuardRule::Throw,
+        hit_reaction: C_THROW_REACTION,
+        whiff_recovery: C_UNDEFINED_THROW_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::PythonSnakeBite,
+        input: MoveInputKind::LightPunch,
+        label: "Snake Bite",
+        frames: AttackFrameData {
+            duration: FrameCount::new(17),
+            active_start: FrameCount::new(4),
+            active_end: FrameCount::new(9),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(66.0),
+            height: world_px(28.0),
+            y_offset: world_px(58.0),
+        },
+        damage: PYTHON_SNAKE_BITE_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: PYTHON_LIGHT_REACTION,
+        whiff_recovery: PYTHON_SNAKE_BITE_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::PythonDataStrike,
+        input: MoveInputKind::HeavyPunch,
+        label: "Data Strike",
+        frames: AttackFrameData {
+            duration: FrameCount::new(31),
+            active_start: FrameCount::new(10),
+            active_end: FrameCount::new(18),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(92.0),
+            height: world_px(40.0),
+            y_offset: world_px(56.0),
+        },
+        damage: PYTHON_DATA_STRIKE_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: PYTHON_HEAVY_REACTION,
+        whiff_recovery: PYTHON_DATA_STRIKE_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::PythonHeelKick,
+        input: MoveInputKind::Kick,
+        label: "Heel Kick",
+        frames: AttackFrameData {
+            duration: FrameCount::new(25),
+            active_start: FrameCount::new(8),
+            active_end: FrameCount::new(14),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(86.0),
+            height: world_px(34.0),
+            y_offset: world_px(108.0),
+        },
+        damage: PYTHON_HEEL_KICK_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: PYTHON_KICK_REACTION,
+        whiff_recovery: PYTHON_HEEL_KICK_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::PythonIndentSweep,
+        input: MoveInputKind::Sweep,
+        label: "Indent Low",
+        frames: AttackFrameData {
+            duration: FrameCount::new(29),
+            active_start: FrameCount::new(9),
+            active_end: FrameCount::new(16),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(98.0),
+            height: world_px(30.0),
+            y_offset: world_px(66.0),
+        },
+        damage: PYTHON_INDENT_SWEEP_DAMAGE,
+        guard_rule: GuardRule::Low,
+        hit_reaction: PYTHON_SWEEP_REACTION,
+        whiff_recovery: PYTHON_INDENT_SWEEP_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::PythonTracebackOverhead,
+        input: MoveInputKind::Overhead,
+        label: "Traceback",
+        frames: AttackFrameData {
+            duration: FrameCount::new(31),
+            active_start: FrameCount::new(11),
+            active_end: FrameCount::new(17),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(78.0),
+            height: world_px(48.0),
+            y_offset: world_px(42.0),
+        },
+        damage: PYTHON_TRACEBACK_OVERHEAD_DAMAGE,
+        guard_rule: GuardRule::High,
+        hit_reaction: PYTHON_OVERHEAD_REACTION,
+        whiff_recovery: PYTHON_TRACEBACK_OVERHEAD_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::PythonVisionAntiAir,
+        input: MoveInputKind::AntiAir,
+        label: "Vision AA",
+        frames: AttackFrameData {
+            duration: FrameCount::new(25),
+            active_start: FrameCount::new(6),
+            active_end: FrameCount::new(12),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(68.0),
+            height: world_px(88.0),
+            y_offset: world_px(-88.0),
+        },
+        damage: PYTHON_VISION_ANTI_AIR_DAMAGE,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: PYTHON_ANTI_AIR_REACTION,
+        whiff_recovery: PYTHON_VISION_ANTI_AIR_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::PythonConstrictThrow,
+        input: MoveInputKind::Throw,
+        label: "Constrict",
+        frames: AttackFrameData {
+            duration: FrameCount::new(24),
+            active_start: FrameCount::new(7),
+            active_end: FrameCount::new(9),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(52.0),
+            height: world_px(118.0),
+            y_offset: world_px(30.0),
+        },
+        damage: PYTHON_CONSTRICT_THROW_DAMAGE,
+        guard_rule: GuardRule::Throw,
+        hit_reaction: PYTHON_THROW_REACTION,
+        whiff_recovery: PYTHON_CONSTRICT_THROW_WHIFF_RECOVERY,
     },
 ];
 

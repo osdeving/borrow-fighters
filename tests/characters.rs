@@ -89,20 +89,20 @@ fn c_spec_points_to_current_prototype_moves() {
 
     assert_eq!(c.display_name, "C");
     assert_eq!(c.fighter_name, "C");
-    assert_eq!(c.archetype, CharacterArchetype::MidrangePressure);
+    assert_eq!(c.archetype, CharacterArchetype::Fundamentals);
     assert_eq!(c.stats.max_health, 104);
     assert_eq!(
         c.move_ids,
         &[
-            MoveId::LightPunch,
-            MoveId::HeavyPunch,
-            MoveId::Kick,
-            MoveId::SweepKick,
-            MoveId::OverheadPunch,
-            MoveId::RisingAntiAir,
+            MoveId::CPointerJab,
+            MoveId::CUnsafePoke,
+            MoveId::CNullStepKick,
+            MoveId::CSegfaultSweep,
+            MoveId::CStackOverflow,
+            MoveId::CInterruptVector,
             MoveId::AirPunch,
             MoveId::AirKick,
-            MoveId::CloseThrow,
+            MoveId::CUndefinedThrow,
         ]
     );
 }
@@ -113,20 +113,20 @@ fn python_spec_points_to_current_prototype_moves() {
 
     assert_eq!(python.display_name, "Python");
     assert_eq!(python.fighter_name, "Python");
-    assert_eq!(python.archetype, CharacterArchetype::AllRounder);
+    assert_eq!(python.archetype, CharacterArchetype::AgilePunisher);
     assert_eq!(python.stats.max_health, 96);
     assert_eq!(
         python.move_ids,
         &[
-            MoveId::LightPunch,
-            MoveId::HeavyPunch,
-            MoveId::Kick,
-            MoveId::SweepKick,
-            MoveId::OverheadPunch,
-            MoveId::RisingAntiAir,
+            MoveId::PythonSnakeBite,
+            MoveId::PythonDataStrike,
+            MoveId::PythonHeelKick,
+            MoveId::PythonIndentSweep,
+            MoveId::PythonTracebackOverhead,
+            MoveId::PythonVisionAntiAir,
             MoveId::AirPunch,
             MoveId::AirKick,
-            MoveId::CloseThrow,
+            MoveId::PythonConstrictThrow,
         ]
     );
 }
@@ -137,12 +137,17 @@ fn character_body_metrics_manifest_loads_go_as_leaner_mascot_body() {
         .expect("character body metrics should load");
     let rust = catalog.body_metrics_for(CharacterId::Rust);
     let go = catalog.body_metrics_for(CharacterId::Go);
+    let python = catalog.body_metrics_for(CharacterId::Python);
 
     assert_eq!(rust, character_spec(CharacterId::Rust).body_metrics);
     assert_eq!(go, character_spec(CharacterId::Go).body_metrics);
+    assert_eq!(python, character_spec(CharacterId::Python).body_metrics);
     assert_eq!(go.width, rust.width);
     assert_eq!(go.standing_height, rust.standing_height);
     assert_eq!(go.crouch_height, rust.crouch_height);
+    assert_eq!(python.width, rust.width);
+    assert_eq!(python.standing_height, rust.standing_height);
+    assert_eq!(python.crouch_height, rust.crouch_height);
 }
 
 #[test]
@@ -211,6 +216,21 @@ fn character_roster_cycles_in_menu_order() {
     assert_eq!(CharacterId::Go.previous(), CharacterId::Duke);
     assert_eq!(CharacterId::C.previous(), CharacterId::Go);
     assert_eq!(CharacterId::Python.previous(), CharacterId::C);
+}
+
+#[test]
+fn demo_roster_cycles_without_go() {
+    assert_eq!(CharacterId::Rust.demo_next(), CharacterId::Duke);
+    assert_eq!(CharacterId::Duke.demo_next(), CharacterId::C);
+    assert_eq!(CharacterId::Go.demo_next(), CharacterId::C);
+    assert_eq!(CharacterId::C.demo_next(), CharacterId::Python);
+    assert_eq!(CharacterId::Python.demo_next(), CharacterId::Rust);
+
+    assert_eq!(CharacterId::Rust.demo_previous(), CharacterId::Python);
+    assert_eq!(CharacterId::Duke.demo_previous(), CharacterId::Rust);
+    assert_eq!(CharacterId::Go.demo_previous(), CharacterId::Duke);
+    assert_eq!(CharacterId::C.demo_previous(), CharacterId::Duke);
+    assert_eq!(CharacterId::Python.demo_previous(), CharacterId::C);
 }
 
 #[test]

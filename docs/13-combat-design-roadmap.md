@@ -4,7 +4,7 @@
 
 Em implementação.
 
-Fases 1 a 4 concluídas em corte mínimo. A Fase 5 tem o primeiro corte de identidade por dados: Rust ganhou anti-air/throw mais rápidos e menores; Duke ganhou sweep/overhead/throw mais longos, pesados e puníveis; Go entrou como rushdown com atlas placeholder testável no Combat Lab, no menu principal e em match real via `--fight --p1`/`--p2`; C entrou como atlas jogável de pipeline, ainda com kit genérico. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI ou `Training -> Combat Lab` com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, especiais usam `ProjectileSpec` por personagem, personagens possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima, loadout e projectile, e o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`.
+Fases 1 a 4 concluídas em corte mínimo. A Fase 5 tem o primeiro corte de identidade por dados: Rust ganhou anti-air/throw mais rápidos e menores; Duke ganhou sweep/overhead/throw mais longos, pesados e puníveis; Go entrou como rushdown mantido para CLI/ferramentas enquanto fica fora do menu público da demo; C ganhou fundamentos de alcance/risco; Python ganhou kit ágil de dano moderado. Golpes atuais e projectile já possuem frame data inteira, o Combat Lab abre por CLI ou `Training -> Combat Lab` com playback de golpes e poses estáticas, golpes próximos usam `MoveSpec`, especiais usam `ProjectileSpec` por personagem, personagens possuem `CharacterSpec` consumido pelo runtime para nome, vida máxima, loadout e projectile, e o overlay de debug do laboratório foi separado em `src/ui/combat_debug.rs`.
 
 Este documento define como evoluir o combate de **Borrow Fighters** de greybox funcional para um sistema mensurável, modular e testável de jogo de luta 2D.
 
@@ -168,7 +168,7 @@ Golpes candidatos:
 
 ### Go — rushdown de concorrência
 
-Função: personagem de velocidade e pressão, ainda em greybox de dados e sem arte própria.
+Função: personagem de velocidade e pressão, mantido como personagem testável por CLI/ferramentas enquanto a arte do Gopher fica fora da demo pública.
 
 Plano de jogo:
 
@@ -191,6 +191,62 @@ Golpes candidatos:
 - `hopkick`: ataque aéreo de pressão curta. **Implementado em corte inicial**.
 - `goroutine_dash`: avanço rápido com risco se bloqueado, futuro.
 - `channel_cross`: troca de lado futura, só depois do laboratório existir.
+
+### C — fundamentos de baixo nível
+
+Função: personagem direto, sólido e um pouco perigoso no whiff.
+
+Plano de jogo:
+
+- alcance honesto;
+- dano levemente acima do genérico;
+- lows/overheads simples;
+- projectile de bitstream para controle médio;
+- riscos claros quando erra poke, sweep ou throw.
+
+Fraquezas:
+
+- whiff recovery maior;
+- pressão simples;
+- precisa de espaçamento para não virar alvo de rushdown.
+
+Golpes implementados:
+
+- `c_pointer_jab`: jab de alcance levemente maior.
+- `c_unsafe_poke`: soco forte longo e punível.
+- `c_null_step_kick`: chute de controle médio.
+- `c_segfault_sweep`: low forte e longo.
+- `c_stack_overflow`: overhead moderado.
+- `c_interrupt_vector`: anti-air honesto.
+- `c_undefined_throw`: throw com pushback forte e whiff maior.
+
+### Python — punisher ágil
+
+Função: personagem rápida que pune erro e troca dano bruto por tempo.
+
+Plano de jogo:
+
+- startup e recovery mais leves;
+- dano moderado;
+- leitura de whiff;
+- projectile rápido/médio;
+- cobra como leitura visual do jab.
+
+Fraquezas:
+
+- vida menor que C/Duke;
+- alcance menor em ferramentas de abertura;
+- não deve ganhar troca direta de dano.
+
+Golpes implementados:
+
+- `python_snake_bite`: jab rápido da cobra.
+- `python_data_strike`: soco forte rápido de dano menor.
+- `python_heel_kick`: chute ágil.
+- `python_indent_sweep`: low rápido e menos danoso.
+- `python_traceback_overhead`: overhead rápido/moderado.
+- `python_vision_anti_air`: anti-air rápido e menor.
+- `python_constrict_throw`: throw moderado com whiff menor.
 
 ### Assembly — boss não-jogável
 
@@ -232,6 +288,8 @@ cargo run -- --fight --p1 go --p2 duke
 cargo run -- --lab combat --character rust
 cargo run -- --lab combat --character duke --move heavy_punch
 cargo run -- --lab combat --character go --move kick
+cargo run -- --lab combat --character c --move heavy_punch
+cargo run -- --lab combat --character python --move light_punch
 ```
 
 Atalhos propostos:
@@ -389,7 +447,7 @@ Critério de aceite:
 
 - adicionar um golpe novo não exige alterar `Fighter` profundamente.
 - `AttackKind` permanece como camada de compatibilidade runtime para sprites, debug e seleção de ataque.
-- Rust possui `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` como ferramentas rápidas/curtas; Duke possui `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` como ferramentas longas/pesadas e mais puníveis.
+- Rust possui `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` como ferramentas rápidas/curtas; Duke possui `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` como ferramentas longas/pesadas e mais puníveis; C possui kit terrestre próprio de fundamentos; Python possui kit terrestre próprio de punição ágil.
 - A parte mínima está aceita; a próxima evolução é refinar defesa, hitstun/blockstun e contra-jogo.
 
 ### Fase 4 — Defesa e contra-jogo
@@ -409,7 +467,7 @@ Critério de aceite:
 
 - cada golpe forte tem pelo menos uma resposta documentada.
 - o corte atual impede ação durante hitstun/blockstun, aplica pushback, mostra vantagem estimada no Combat Lab e aplica whiff recovery quando golpe próximo erra.
-- `Low`, `High`/overhead, `Throw`, anti-air e ataques aéreos já têm primeiro corte jogável, ainda sem identidade exclusiva por personagem.
+- `Low`, `High`/overhead, `Throw`, anti-air e ataques aéreos já têm primeiro corte jogável. Rust, Duke/Java, Go, C e Python possuem identidade própria nos golpes terrestres principais; ataques aéreos universais continuam aceitos no Prototype 0.1.
 
 Respostas mínimas documentadas:
 
@@ -434,7 +492,10 @@ Entregáveis:
 - [x] Rust all-rounder técnico em dados: `RustBorrowJab`, `RustLifetimeAntiAir`, `RustOwnershipThrow`;
 - [x] Duke midrange/pressure em dados: `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead`, `DukeEnterpriseThrow`;
 - [x] Go rushdown em dados: `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead`, `GoHopkick`;
-- [x] especiais de projectile por personagem via `ProjectileSpec`, com Rust balanceado, Duke mais pesado/lento, Go em burst curto e C em bitstream medio/rapido;
+- [x] C fundamentals em dados: `CPointerJab`, `CUnsafePoke`, `CNullStepKick`, `CSegfaultSweep`, `CStackOverflow`, `CInterruptVector`, `CUndefinedThrow`;
+- [x] Python agile punisher em dados: `PythonSnakeBite`, `PythonDataStrike`, `PythonHeelKick`, `PythonIndentSweep`, `PythonTracebackOverhead`, `PythonVisionAntiAir`, `PythonConstrictThrow`;
+- [x] especiais de projectile por personagem via `ProjectileSpec`, com Rust balanceado, Duke mais pesado/lento, Go em burst curto, C em bitstream medio/rapido e Python em fluxo rapido/medio;
+- [x] demo publica ciclando Rust, Duke/Java, C e Python, mantendo Go disponivel por CLI/ferramentas;
 - [x] matriz de intenção mecânica em [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md);
 - [x] matriz de matchups de intenção, sem buscar balanceamento final.
 
@@ -444,6 +505,8 @@ Critério de aceite:
 - Rust deve ganhar por resposta limpa e decisão correta, não por alcance bruto.
 - Duke deve controlar espaço com risco real quando erra.
 - Go deve pressionar com velocidade, mas sofrer por alcance e vida menores.
+- C deve ganhar por alcance e dano sólido sem ficar seguro no erro.
+- Python deve ganhar por punir whiff e agir cedo, não por troca bruta de dano.
 
 ### Fase 6 — Proteções contra degeneração
 
@@ -465,7 +528,7 @@ Critério de aceite:
 ## Backlog técnico imediato
 
 1. Usar a leitura de vantagem do Combat Lab para ajustar golpes seguros, puníveis e spacing.
-2. Playtestar a matriz Rust x Duke x Go x C e ajustar valores com base no Combat Lab.
+2. Playtestar a matriz da demo Rust x Duke x C x Python e manter Go em validação separada por CLI/ferramentas.
 3. Playtestar se a seleção mínima no menu basta ou se precisa de tela dedicada de personagem.
 4. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
 5. Só depois ampliar para novos golpes especiais.

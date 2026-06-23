@@ -39,6 +39,11 @@ const HURTBOX: Color = Color::new(105, 240, 174, 255);
 const HITBOX: Color = Color::new(255, 82, 82, 255);
 const HITBOX_FILL: Color = Color::new(255, 82, 82, 82);
 const HITSPARK: Color = Color::new(255, 235, 59, 255);
+const HIT_FLASH: Color = Color::new(255, 110, 86, 255);
+const HIT_FLASH_FILL: Color = Color::new(255, 69, 58, 58);
+const BLOCK_FLASH: Color = Color::new(154, 205, 255, 255);
+const BLOCK_FLASH_FILL: Color = Color::new(86, 156, 255, 44);
+const ACTIVE_SPRITE_TINT: Color = Color::new(255, 244, 177, 255);
 const BODY_COLLISION: Color = Color::new(218, 112, 214, 255);
 const PROJECTILE: Color = Color::new(80, 220, 255, 255);
 const PROJECTILE_FILL: Color = Color::new(80, 220, 255, 110);
@@ -1504,13 +1509,15 @@ fn draw_fighter(
     options: FighterDrawOptions<'_>,
 ) {
     let phase = fighter.attack_phase();
-    let body = match phase {
+    let phase_body = match phase {
         AttackPhase::Idle => options.body_color,
         AttackPhase::Startup => lighten(options.body_color, 30),
         AttackPhase::Active => Color::new(255, 222, 89, 255),
         AttackPhase::Recovery => dim(options.body_color, 25),
         AttackPhase::WhiffRecovery => dim(options.body_color, 45),
     };
+    let body = fighter_body_color(fighter, phase_body);
+    let sprite_tint = fighter_sprite_tint(fighter, phase);
 
     if let Some(sprite_atlas) = options.sprite_atlas
         && sprites::draw_manifest_fighter_sprite(
@@ -1520,7 +1527,7 @@ fn draw_fighter(
             fighter,
             options.world_elapsed_seconds,
             options.forced_clip,
-            Color::WHITE,
+            sprite_tint,
         )
     {
     } else if let Some(texture) = options.spritesheet {
@@ -1528,6 +1535,8 @@ fn draw_fighter(
     } else {
         draw_body_parts(draw, fighter, body);
     }
+
+    draw_fighter_state_flash(draw, fighter);
 
     let sprite_combat = options.sprite_atlas.and_then(|sprite_atlas| {
         sprites::projected_fighter_combat(
@@ -2180,6 +2189,48 @@ fn draw_body_parts(
     fill_rect(draw, parts.head, lighten(color, 28));
     fill_rect(draw, parts.torso, color);
     fill_rect(draw, parts.legs, dim(color, 22));
+}
+
+fn fighter_body_color(fighter: &crate::combat::fighter::Fighter, phase_color: Color) -> Color {
+    if fighter.in_hitstun() {
+        HIT_FLASH
+    } else if fighter.in_blockstun() {
+        BLOCK_FLASH
+    } else {
+        phase_color
+    }
+}
+
+fn fighter_sprite_tint(fighter: &crate::combat::fighter::Fighter, phase: AttackPhase) -> Color {
+    if fighter.in_hitstun() {
+        HIT_FLASH
+    } else if fighter.in_blockstun() {
+        BLOCK_FLASH
+    } else if phase == AttackPhase::Active {
+        ACTIVE_SPRITE_TINT
+    } else {
+        Color::WHITE
+    }
+}
+
+fn draw_fighter_state_flash(draw: &mut impl DrawTarget, fighter: &crate::combat::fighter::Fighter) {
+    let (fill, outline) = if fighter.in_hitstun() {
+        (HIT_FLASH_FILL, HIT_FLASH)
+    } else if fighter.in_blockstun() {
+        (BLOCK_FLASH_FILL, BLOCK_FLASH)
+    } else {
+        return;
+    };
+
+    let body = fighter.body_rect();
+    let rect = Rect::new(
+        body.x - world_px(8.0),
+        body.y - world_px(6.0),
+        body.width + world_px(16.0),
+        body.height + world_px(12.0),
+    );
+    fill_rect(draw, rect, fill);
+    outline_rect(draw, rect, outline);
 }
 
 fn fill_rect(draw: &mut impl DrawTarget, rect: Rect, color: Color) {

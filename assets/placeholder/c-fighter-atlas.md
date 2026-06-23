@@ -31,11 +31,11 @@ Este asset serve para testar:
 - escala humanoide contra Rust e Duke;
 - origem visual do projectile no clip `special`;
 - leitura clara de `0` e `1` saindo do personagem no projectile;
-- leitura de ataques no Combat Lab antes de criar identidade mecanica propria.
+- leitura de ataques no Combat Lab com o kit proprio de fundamentos de C.
 
 ## Limitacoes
 
 - Ainda e placeholder, nao arte final.
-- O loadout do C ainda usa golpes genericos.
+- O kit terrestre ja possui frame data propria, mas ataques aereos ainda usam os movimentos universais do prototipo.
 - Hitboxes e hurtboxes por frame ainda precisam ser revisadas no Sprite Combat Viewer.
 - O projectile foi separado do sprite para facilitar ajuste de origem, tamanho e velocidade.

@@ -79,6 +79,10 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Sprite Combat Viewer com inspetor de coordenada local/atlas do cursor e sincronização manual entre golpe e clip visual.
 - Backlog central reforçado com tabela **Agora / Proximo / Depois** para manter proximas frentes, issues e PRs rastreaveis.
 - Go/Gopher com atlas placeholder próprio de luta, entrada cinematográfica e projectile de canais.
+- Demo pública ajustada para ciclar Rust, Duke/Java, C e Python no menu, mantendo Go/Gopher disponível por CLI, Combat Lab e Sprite Viewer.
+- Kits terrestres próprios para C e Python, com `MoveId`, frame data, dano, whiff recovery, reações e testes de balanceamento inicial.
+- Feedback visual de hit/block reforçado no renderer com tint nos sprites e flash no corpo durante hitstun/blockstun.
+- Atlases de entrada de Rust e Duke regenerados pelo pipeline para remover componentes isolados que pareciam sobras de frames anteriores.
 
 ### Em aberto
 

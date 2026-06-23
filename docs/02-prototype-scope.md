@@ -20,7 +20,7 @@ O slice atual inclui:
 - opção de IA para ambos os jogadores;
 - movimento horizontal, pulo diagonal, abaixar e defesa;
 - soco fraco, soco forte, chute, varredura baixa, overhead, anti-air, agarrão curto, ataques aéreos e especial projectile;
-- primeiro corte de identidade mecânica: Rust mais técnico/responsivo, Duke mais longo/pesado e Go como rushdown com atlas placeholder no Combat Lab, no menu e em match via CLI, incluindo `ProjectileSpec` por personagem; C entra como atlas jogável de pipeline ainda com kit genérico;
+- primeiro corte de identidade mecânica: Rust mais técnico/responsivo, Duke mais longo/pesado, Go como rushdown mantido para CLI/ferramentas, C como fundamentos de alcance/risco e Python como punisher ágil, incluindo `ProjectileSpec` por personagem;
 - colisão corpo-corpo;
 - hitbox/hurtbox configuráveis no código;
 - dano, vida, vitória e reinício;

@@ -32,6 +32,14 @@
         "standing_height": 224.0,
         "crouch_height": 128.0
       }
+    },
+    {
+      "id": "python",
+      "body": {
+        "width": 101.33333333333333,
+        "standing_height": 224.0,
+        "crouch_height": 128.0
+      }
     }
   ]
 }

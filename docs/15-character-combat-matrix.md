@@ -22,7 +22,8 @@ O foco atual é **Prototype 0.1**. Não estamos criando combo tree, meter, throw
 | Rust | all-rounder técnico | respostas limpas, anti-air confiável, throw rápido, dano moderado | precisa acertar decisões; não deve ganhar por alcance bruto |
 | Duke / Java | midrange pressure | presença longa, golpes pesados, pressão lenta e corporativa | startup/recovery maiores; whiff precisa ser punível |
 | Go | rushdown de concorrência | ações rápidas, pressão curta, ritmo alto | vida menor, alcance menor, sofre contra anti-air e espaço bem controlado |
-| C | low-level fundamentals placeholder | validar atlas fluido, escala humanoide e projectile de bitstream | ainda sem identidade própria; não deve ser tratado como balanceado |
+| C | low-level fundamentals | alcance honesto, dano sólido, pressão simples e punível | startup/whiff maiores; precisa confirmar espaço antes de bater |
+| Python | agile punisher | startup leve, recovery curto, leitura de whiff e ritmo rápido | vida/dano menores; não deve ganhar troca bruta |
 
 ## Rust
 
@@ -58,7 +59,7 @@ Duke deve parecer resistente e inconveniente em média distância. Ele pode ganh
 
 ## Go
 
-Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jogo suporta um personagem que vence por aproximação e sequência curta, sem depender de alcance grande. No momento, Go usa atlas placeholder próprio de luta, entrada e projectile no Combat Lab e em match real iniciado pelo menu ou CLI.
+Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jogo suporta um personagem que vence por aproximação e sequência curta, sem depender de alcance grande. No momento, Go usa atlas placeholder próprio de luta, entrada e projectile no Combat Lab e em match real iniciado por CLI; ele fica fora do ciclo público do menu da demo enquanto a arte do Gopher é reavaliada.
 
 | Input | MoveId | Intenção | Dano | Startup | Alcance | Whiff | Contra-jogo |
 |---|---|---|---:|---:|---:|---:|---|
@@ -74,19 +75,35 @@ Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jo
 
 ## C
 
-C entrou primeiro como teste de pipeline: dois atlas de referência com chroma key, mais frames por animação, entrada cinematográfica curta e projectile separado. A intenção futura pode ir para fundamentos de baixo nível, ponteiros, bitstream e risco de `segfault`, mas este corte ainda usa golpes genéricos para validar escala, pivots, leitura de animação e integração no menu/lab/luta.
+C deve parecer direto, perigoso e um pouco arriscado. Ele tem alcance e dano acima do genérico em várias ferramentas, mas paga em whiff recovery e não deve conseguir pressionar sem acertar espaço. A leitura desejada é low-level fundamentals: ponteiro para checar, poke grande porém inseguro, sweep que ameaça chão e throw com pushback forte.
 
 | Input | MoveId | Intenção | Dano | Startup | Alcance | Whiff | Contra-jogo |
 |---|---|---|---:|---:|---:|---:|---|
-| `F` | `LightPunch` | jab genérico enquanto a assinatura não existe | 8 | 5f | 58 | 4f | ficar fora do alcance, whiff punish |
-| `H` | `HeavyPunch` | golpe pesado genérico | 16 | 11f | 96 | 10f | bloquear, pular, punir whiff |
-| `V` | `Kick` | chute genérico de controle | 12 | 9f | 100 | 8f | bloquear, recuar, punir whiff |
-| `S+V` | `SweepKick` | low universal de teste | 11 | 10f | 112 | 12f | defender abaixado, pular |
-| frente + `H` | `OverheadPunch` | overhead universal de teste | 14 | 12f | 82 | 12f | defender em pé, interromper startup |
-| `S+H` | `RisingAntiAir` | anti-air genérico | 13 | 7f | 70 | 14f | baitar e punir |
+| `F` | `CPointerJab` | jab de ponteiro, alcance um pouco maior e recovery maior | 8 | 5f | 64 | 5f | ficar fora do alcance, whiff punish |
+| `H` | `CUnsafePoke` | poke longo e forte, explicitamente inseguro se lido | 17 | 12f | 108 | 13f | interromper startup, bloquear e recuperar espaço, punir whiff |
+| `V` | `CNullStepKick` | chute estável de controle médio | 12 | 9f | 102 | 9f | bloquear, recuar, punir whiff |
+| `S+V` | `CSegfaultSweep` | low forte e longo que precisa ser espaçado | 14 | 12f | 122 | 15f | defender abaixado, pular, punir whiff |
+| frente + `H` | `CStackOverflow` | overhead sólido, menos lento que Duke e mais punível que Rust | 15 | 13f | 86 | 14f | defender em pé, interromper startup |
+| `S+H` | `CInterruptVector` | anti-air honesto para cobrir salto previsível | 13 | 7f | 74 | 12f | baitar e punir |
 | no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
 | no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
-| `Q+F` | `CloseThrow` | throw universal enquanto não há assinatura | 10 | 7f | 46 | 16f | sair do alcance, pular |
+| `Q+F` | `CUndefinedThrow` | throw de pushback forte, mas mais arriscado no whiff | 11 | 7f | 50 | 18f | sair do alcance, pular, jab |
+
+## Python
+
+Python deve parecer ágil, precisa e oportunista. Ela não vence por dano bruto: vence por chegar antes, punir whiff e voltar a agir mais cedo. O bote da cobra cobre o jab, `Data Strike` dá confirm rápido de soco forte, e os golpes baixos/overhead devem abrir defesa por timing, não por força.
+
+| Input | MoveId | Intenção | Dano | Startup | Alcance | Whiff | Contra-jogo |
+|---|---|---|---:|---:|---:|---:|---|
+| `F` | `PythonSnakeBite` | bote rápido da cobra para checar avanço | 7 | 4f | 66 | 5f | ficar fora do alcance, whiff punish |
+| `H` | `PythonDataStrike` | soco forte rápido, dano menor que heavy genérico | 15 | 10f | 92 | 9f | bloquear, pular, desafiar se previsível |
+| `V` | `PythonHeelKick` | chute ágil para whiff punish curto | 11 | 8f | 86 | 7f | bloquear, recuar, punir se espaçado |
+| `S+V` | `PythonIndentSweep` | low rápido e menos danoso | 10 | 9f | 98 | 10f | defender abaixado, pular |
+| frente + `H` | `PythonTracebackOverhead` | overhead rápido/moderado para abrir crouch | 13 | 11f | 78 | 11f | defender em pé, jab no startup |
+| `S+H` | `PythonVisionAntiAir` | anti-air rápido de leitura, alcance menor | 11 | 6f | 68 | 9f | baitar e punir, atacar por baixo |
+| no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
+| no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
+| `Q+F` | `PythonConstrictThrow` | throw moderado com recovery menor que o universal | 10 | 7f | 52 | 14f | sair do alcance, pular, jab |
 
 ## Especiais de Projectile
 
@@ -107,22 +124,27 @@ Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ai
 | Rust x Duke | Rust tenta responder e punir; Duke tenta dominar média distância. | Duke não pode ganhar neutral só por alcance; Rust não pode anular tudo com anti-air/throw rápido. |
 | Rust x Go | Rust tenta controlar aproximação com respostas limpas; Go tenta entrar antes do Rust estabilizar. | Go não pode virar pressão sem resposta; Rust não pode impedir toda aproximação. |
 | Duke x Go | Duke tenta manter Go fora com alcance; Go tenta punir whiffs e ocupar o corpo-a-corpo. | Se Duke erra e não é punido, Go perde identidade; se Go entra sem risco, Duke perde função. |
-| C x qualquer | C valida leitura visual e integração do atlas sem ainda prometer matchup. | Não tirar conclusão de balanceamento até C receber golpes próprios. |
+| C x Rust | C tenta ganhar alcance e dano sólido; Rust tenta whiff punish e anti-air mais limpo. | C não pode ficar seguro demais no poke; Rust não pode anular todo alcance com jab/throw. |
+| C x Duke | C joga fundamentos contra presença pesada; Duke tem golpes maiores, mas C deve punir melhor whiffs longos. | Se Duke sempre ganha alcance e dano, C vira redundante; se C é mais rápido e mais forte, Duke perde função. |
+| C x Python | C ganha trocas e espaço; Python tenta entrar e sair antes do whiff punish. | Python não pode vencer troca bruta; C não pode prender Python sem risco. |
+| Python x Rust | Python tenta acelerar o ritmo e punir decisão errada; Rust tenta estabilizar com respostas honestas. | Python não pode virar Rust melhor e mais rápido; Rust não pode impedir todo whiff punish. |
+| Python x Duke | Python tenta passar por startup longo; Duke tenta manter presença com dano e pushback. | Se Python entra sem risco, Duke perde arquétipo; se Duke controla tudo, Python não joga. |
 
 ## Critérios de Playtest
 
 1. Rust deve conseguir responder salto com `RustLifetimeAntiAir` sem parecer invencível.
 2. Duke deve controlar mais espaço com sweep/overhead/poke, mas deve sofrer quando erra.
 3. Go deve ser percebido como mais rápido, mas não como mais seguro.
-4. C deve aparecer em escala coerente com Rust/Duke e com projectile saindo de ponto visualmente defensável.
+4. C deve parecer mais sólido e comprido, mas punível quando erra.
 5. O jogador deve conseguir explicar por que tomou dano: low, overhead, throw, anti-air ou projectile.
 6. CPU x CPU deve mostrar diferença de ritmo, sem parecer dois personagens espelhados.
 7. Nenhum golpe deve resolver neutral, defesa e pressão ao mesmo tempo.
+8. Python deve parecer ágil e clara no feedback de hit, sem ganhar por dano bruto.
 
 ## Próximos Cortes
 
 - Decidir se Rust precisa de uma ferramenta defensiva futura como `ownership_counter`.
 - Playtestar se o `DUKE_PROJECTILE_SPEC` pesado abre espaço sem virar spam lento sem resposta.
 - Playtestar se o `GO_PROJECTILE_SPEC` curto ajuda aproximação sem transformar Go em zoner.
-- Criar identidade mecânica real para C antes de balancear matchups.
+- Playtestar C e Python contra Rust/Duke antes de mexer em vida ou dano.
 - Avaliar hitbox/hurtbox por frame quando os sprites finais começarem a limitar o tuning.

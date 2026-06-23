@@ -7,19 +7,33 @@ use borrow_fighters::combat::fighter::{
 };
 use borrow_fighters::combat::frame::FrameCount;
 use borrow_fighters::combat::move_data::{
-    AIR_ATTACK_REACTION, AIR_ATTACK_WHIFF_RECOVERY, CLOSE_RANGE_MOVE_SPECS, CLOSE_THROW_REACTION,
-    CLOSE_THROW_WHIFF_RECOVERY, DUKE_ABSTRACT_FACTORY_OVERHEAD_DAMAGE,
-    DUKE_ABSTRACT_FACTORY_OVERHEAD_REACTION, DUKE_ABSTRACT_FACTORY_OVERHEAD_WHIFF_RECOVERY,
-    DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY, DUKE_ENTERPRISE_THROW_DAMAGE,
-    DUKE_ENTERPRISE_THROW_REACTION, DUKE_ENTERPRISE_THROW_WHIFF_RECOVERY,
-    DUKE_GARBAGE_COLLECTOR_SWEEP_DAMAGE, DUKE_GARBAGE_COLLECTOR_SWEEP_REACTION,
-    DUKE_GARBAGE_COLLECTOR_SWEEP_WHIFF_RECOVERY, GO_CHANNEL_OVERHEAD_DAMAGE,
-    GO_CHANNEL_OVERHEAD_WHIFF_RECOVERY, GO_DEFER_KICK_DAMAGE, GO_DEFER_KICK_WHIFF_RECOVERY,
-    GO_GOROUTINE_JAB_DAMAGE, GO_GOROUTINE_JAB_WHIFF_RECOVERY, GO_HOPKICK_DAMAGE,
-    GO_HOPKICK_WHIFF_RECOVERY, GO_KICK_REACTION, GO_LIGHT_REACTION, GO_OVERHEAD_REACTION,
-    GuardRule, HEAVY_ATTACK_REACTION, HEAVY_ATTACK_WHIFF_RECOVERY, KICK_REACTION,
-    KICK_WHIFF_RECOVERY, LIGHT_ATTACK_REACTION, LIGHT_ATTACK_WHIFF_RECOVERY, MoveId, MoveInputKind,
-    OVERHEAD_PUNCH_WHIFF_RECOVERY, OVERHEAD_REACTION, RISING_ANTI_AIR_REACTION,
+    AIR_ATTACK_REACTION, AIR_ATTACK_WHIFF_RECOVERY, C_ANTI_AIR_REACTION, C_HEAVY_REACTION,
+    C_INTERRUPT_VECTOR_DAMAGE, C_INTERRUPT_VECTOR_WHIFF_RECOVERY, C_KICK_REACTION,
+    C_LIGHT_REACTION, C_NULL_STEP_KICK_DAMAGE, C_NULL_STEP_KICK_WHIFF_RECOVERY,
+    C_OVERHEAD_REACTION, C_POINTER_JAB_DAMAGE, C_POINTER_JAB_WHIFF_RECOVERY,
+    C_SEGFAULT_SWEEP_DAMAGE, C_SEGFAULT_SWEEP_WHIFF_RECOVERY, C_STACK_OVERFLOW_DAMAGE,
+    C_STACK_OVERFLOW_WHIFF_RECOVERY, C_SWEEP_REACTION, C_THROW_REACTION, C_UNDEFINED_THROW_DAMAGE,
+    C_UNDEFINED_THROW_WHIFF_RECOVERY, C_UNSAFE_POKE_DAMAGE, C_UNSAFE_POKE_WHIFF_RECOVERY,
+    CLOSE_RANGE_MOVE_SPECS, CLOSE_THROW_REACTION, CLOSE_THROW_WHIFF_RECOVERY,
+    DUKE_ABSTRACT_FACTORY_OVERHEAD_DAMAGE, DUKE_ABSTRACT_FACTORY_OVERHEAD_REACTION,
+    DUKE_ABSTRACT_FACTORY_OVERHEAD_WHIFF_RECOVERY, DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY,
+    DUKE_ENTERPRISE_THROW_DAMAGE, DUKE_ENTERPRISE_THROW_REACTION,
+    DUKE_ENTERPRISE_THROW_WHIFF_RECOVERY, DUKE_GARBAGE_COLLECTOR_SWEEP_DAMAGE,
+    DUKE_GARBAGE_COLLECTOR_SWEEP_REACTION, DUKE_GARBAGE_COLLECTOR_SWEEP_WHIFF_RECOVERY,
+    GO_CHANNEL_OVERHEAD_DAMAGE, GO_CHANNEL_OVERHEAD_WHIFF_RECOVERY, GO_DEFER_KICK_DAMAGE,
+    GO_DEFER_KICK_WHIFF_RECOVERY, GO_GOROUTINE_JAB_DAMAGE, GO_GOROUTINE_JAB_WHIFF_RECOVERY,
+    GO_HOPKICK_DAMAGE, GO_HOPKICK_WHIFF_RECOVERY, GO_KICK_REACTION, GO_LIGHT_REACTION,
+    GO_OVERHEAD_REACTION, GuardRule, HEAVY_ATTACK_REACTION, HEAVY_ATTACK_WHIFF_RECOVERY,
+    KICK_REACTION, KICK_WHIFF_RECOVERY, LIGHT_ATTACK_REACTION, LIGHT_ATTACK_WHIFF_RECOVERY, MoveId,
+    MoveInputKind, OVERHEAD_PUNCH_WHIFF_RECOVERY, OVERHEAD_REACTION, PYTHON_ANTI_AIR_REACTION,
+    PYTHON_CONSTRICT_THROW_DAMAGE, PYTHON_CONSTRICT_THROW_WHIFF_RECOVERY,
+    PYTHON_DATA_STRIKE_DAMAGE, PYTHON_DATA_STRIKE_WHIFF_RECOVERY, PYTHON_HEAVY_REACTION,
+    PYTHON_HEEL_KICK_DAMAGE, PYTHON_HEEL_KICK_WHIFF_RECOVERY, PYTHON_INDENT_SWEEP_DAMAGE,
+    PYTHON_INDENT_SWEEP_WHIFF_RECOVERY, PYTHON_KICK_REACTION, PYTHON_LIGHT_REACTION,
+    PYTHON_OVERHEAD_REACTION, PYTHON_SNAKE_BITE_DAMAGE, PYTHON_SNAKE_BITE_WHIFF_RECOVERY,
+    PYTHON_SWEEP_REACTION, PYTHON_THROW_REACTION, PYTHON_TRACEBACK_OVERHEAD_DAMAGE,
+    PYTHON_TRACEBACK_OVERHEAD_WHIFF_RECOVERY, PYTHON_VISION_ANTI_AIR_DAMAGE,
+    PYTHON_VISION_ANTI_AIR_WHIFF_RECOVERY, RISING_ANTI_AIR_REACTION,
     RISING_ANTI_AIR_WHIFF_RECOVERY, RUST_BORROW_JAB_WHIFF_RECOVERY, RUST_LIFETIME_ANTI_AIR_DAMAGE,
     RUST_LIFETIME_ANTI_AIR_REACTION, RUST_LIFETIME_ANTI_AIR_WHIFF_RECOVERY,
     RUST_OWNERSHIP_THROW_DAMAGE, RUST_OWNERSHIP_THROW_REACTION,
@@ -30,7 +44,7 @@ use borrow_fighters::config::world_px;
 
 #[test]
 fn close_range_moves_are_registered_in_table_order() {
-    assert_eq!(CLOSE_RANGE_MOVE_SPECS.len(), 20);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS.len(), 34);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[0].id, MoveId::LightPunch);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[1].id, MoveId::HeavyPunch);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[2].id, MoveId::Kick);
@@ -57,6 +71,23 @@ fn close_range_moves_are_registered_in_table_order() {
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[17].id, MoveId::GoDeferKick);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[18].id, MoveId::GoChannelOverhead);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[19].id, MoveId::GoHopkick);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[20].id, MoveId::CPointerJab);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[21].id, MoveId::CUnsafePoke);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[22].id, MoveId::CNullStepKick);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[23].id, MoveId::CSegfaultSweep);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[24].id, MoveId::CStackOverflow);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[25].id, MoveId::CInterruptVector);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[26].id, MoveId::CUndefinedThrow);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[27].id, MoveId::PythonSnakeBite);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[28].id, MoveId::PythonDataStrike);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[29].id, MoveId::PythonHeelKick);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[30].id, MoveId::PythonIndentSweep);
+    assert_eq!(
+        CLOSE_RANGE_MOVE_SPECS[31].id,
+        MoveId::PythonTracebackOverhead
+    );
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[32].id, MoveId::PythonVisionAntiAir);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[33].id, MoveId::PythonConstrictThrow);
 }
 
 #[test]
@@ -327,6 +358,144 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(go_hopkick.guard_rule, GuardRule::High);
     assert_eq!(go_hopkick.hit_reaction, GO_KICK_REACTION);
     assert_eq!(go_hopkick.whiff_recovery, GO_HOPKICK_WHIFF_RECOVERY);
+
+    let c_jab = move_spec(MoveId::CPointerJab);
+    assert_eq!(c_jab.input, MoveInputKind::LightPunch);
+    assert_eq!(c_jab.label, "Pointer Jab");
+    assert_eq!(c_jab.damage, C_POINTER_JAB_DAMAGE);
+    assert_eq!(c_jab.frames.duration, FrameCount::new(18));
+    assert_eq!(c_jab.frames.active_start, FrameCount::new(5));
+    assert_eq!(c_jab.frames.active_end, FrameCount::new(10));
+    assert_eq!(c_jab.hitbox.width, world_px(64.0));
+    assert_eq!(c_jab.guard_rule, GuardRule::Mid);
+    assert_eq!(c_jab.hit_reaction, C_LIGHT_REACTION);
+    assert_eq!(c_jab.whiff_recovery, C_POINTER_JAB_WHIFF_RECOVERY);
+
+    let c_poke = move_spec(MoveId::CUnsafePoke);
+    assert_eq!(c_poke.input, MoveInputKind::HeavyPunch);
+    assert_eq!(c_poke.label, "Unsafe Poke");
+    assert_eq!(c_poke.damage, C_UNSAFE_POKE_DAMAGE);
+    assert_eq!(c_poke.frames.duration, FrameCount::new(38));
+    assert_eq!(c_poke.frames.active_start, FrameCount::new(12));
+    assert_eq!(c_poke.frames.active_end, FrameCount::new(20));
+    assert_eq!(c_poke.hitbox.width, world_px(108.0));
+    assert_eq!(c_poke.guard_rule, GuardRule::Mid);
+    assert_eq!(c_poke.hit_reaction, C_HEAVY_REACTION);
+    assert_eq!(c_poke.whiff_recovery, C_UNSAFE_POKE_WHIFF_RECOVERY);
+
+    let c_kick = move_spec(MoveId::CNullStepKick);
+    assert_eq!(c_kick.input, MoveInputKind::Kick);
+    assert_eq!(c_kick.label, "Null Step");
+    assert_eq!(c_kick.damage, C_NULL_STEP_KICK_DAMAGE);
+    assert_eq!(c_kick.frames.duration, FrameCount::new(30));
+    assert_eq!(c_kick.guard_rule, GuardRule::Mid);
+    assert_eq!(c_kick.hit_reaction, C_KICK_REACTION);
+    assert_eq!(c_kick.whiff_recovery, C_NULL_STEP_KICK_WHIFF_RECOVERY);
+
+    let c_sweep = move_spec(MoveId::CSegfaultSweep);
+    assert_eq!(c_sweep.input, MoveInputKind::Sweep);
+    assert_eq!(c_sweep.label, "Segfault");
+    assert_eq!(c_sweep.damage, C_SEGFAULT_SWEEP_DAMAGE);
+    assert_eq!(c_sweep.hitbox.width, world_px(122.0));
+    assert_eq!(c_sweep.guard_rule, GuardRule::Low);
+    assert_eq!(c_sweep.hit_reaction, C_SWEEP_REACTION);
+    assert_eq!(c_sweep.whiff_recovery, C_SEGFAULT_SWEEP_WHIFF_RECOVERY);
+
+    let c_overhead = move_spec(MoveId::CStackOverflow);
+    assert_eq!(c_overhead.input, MoveInputKind::Overhead);
+    assert_eq!(c_overhead.label, "Stack OH");
+    assert_eq!(c_overhead.damage, C_STACK_OVERFLOW_DAMAGE);
+    assert_eq!(c_overhead.guard_rule, GuardRule::High);
+    assert_eq!(c_overhead.hit_reaction, C_OVERHEAD_REACTION);
+    assert_eq!(c_overhead.whiff_recovery, C_STACK_OVERFLOW_WHIFF_RECOVERY);
+
+    let c_anti_air = move_spec(MoveId::CInterruptVector);
+    assert_eq!(c_anti_air.input, MoveInputKind::AntiAir);
+    assert_eq!(c_anti_air.label, "Interrupt");
+    assert_eq!(c_anti_air.damage, C_INTERRUPT_VECTOR_DAMAGE);
+    assert_eq!(c_anti_air.guard_rule, GuardRule::Mid);
+    assert_eq!(c_anti_air.hit_reaction, C_ANTI_AIR_REACTION);
+    assert_eq!(c_anti_air.whiff_recovery, C_INTERRUPT_VECTOR_WHIFF_RECOVERY);
+
+    let c_throw = move_spec(MoveId::CUndefinedThrow);
+    assert_eq!(c_throw.input, MoveInputKind::Throw);
+    assert_eq!(c_throw.label, "Undefined");
+    assert_eq!(c_throw.damage, C_UNDEFINED_THROW_DAMAGE);
+    assert_eq!(c_throw.guard_rule, GuardRule::Throw);
+    assert_eq!(c_throw.hit_reaction, C_THROW_REACTION);
+    assert_eq!(c_throw.whiff_recovery, C_UNDEFINED_THROW_WHIFF_RECOVERY);
+
+    let python_jab = move_spec(MoveId::PythonSnakeBite);
+    assert_eq!(python_jab.input, MoveInputKind::LightPunch);
+    assert_eq!(python_jab.label, "Snake Bite");
+    assert_eq!(python_jab.damage, PYTHON_SNAKE_BITE_DAMAGE);
+    assert_eq!(python_jab.frames.duration, FrameCount::new(17));
+    assert_eq!(python_jab.guard_rule, GuardRule::Mid);
+    assert_eq!(python_jab.hit_reaction, PYTHON_LIGHT_REACTION);
+    assert_eq!(python_jab.whiff_recovery, PYTHON_SNAKE_BITE_WHIFF_RECOVERY);
+
+    let python_poke = move_spec(MoveId::PythonDataStrike);
+    assert_eq!(python_poke.input, MoveInputKind::HeavyPunch);
+    assert_eq!(python_poke.label, "Data Strike");
+    assert_eq!(python_poke.damage, PYTHON_DATA_STRIKE_DAMAGE);
+    assert_eq!(python_poke.frames.duration, FrameCount::new(31));
+    assert_eq!(python_poke.guard_rule, GuardRule::Mid);
+    assert_eq!(python_poke.hit_reaction, PYTHON_HEAVY_REACTION);
+    assert_eq!(
+        python_poke.whiff_recovery,
+        PYTHON_DATA_STRIKE_WHIFF_RECOVERY
+    );
+
+    let python_kick = move_spec(MoveId::PythonHeelKick);
+    assert_eq!(python_kick.input, MoveInputKind::Kick);
+    assert_eq!(python_kick.label, "Heel Kick");
+    assert_eq!(python_kick.damage, PYTHON_HEEL_KICK_DAMAGE);
+    assert_eq!(python_kick.hit_reaction, PYTHON_KICK_REACTION);
+    assert_eq!(python_kick.whiff_recovery, PYTHON_HEEL_KICK_WHIFF_RECOVERY);
+
+    let python_sweep = move_spec(MoveId::PythonIndentSweep);
+    assert_eq!(python_sweep.input, MoveInputKind::Sweep);
+    assert_eq!(python_sweep.label, "Indent Low");
+    assert_eq!(python_sweep.damage, PYTHON_INDENT_SWEEP_DAMAGE);
+    assert_eq!(python_sweep.guard_rule, GuardRule::Low);
+    assert_eq!(python_sweep.hit_reaction, PYTHON_SWEEP_REACTION);
+    assert_eq!(
+        python_sweep.whiff_recovery,
+        PYTHON_INDENT_SWEEP_WHIFF_RECOVERY
+    );
+
+    let python_overhead = move_spec(MoveId::PythonTracebackOverhead);
+    assert_eq!(python_overhead.input, MoveInputKind::Overhead);
+    assert_eq!(python_overhead.label, "Traceback");
+    assert_eq!(python_overhead.damage, PYTHON_TRACEBACK_OVERHEAD_DAMAGE);
+    assert_eq!(python_overhead.guard_rule, GuardRule::High);
+    assert_eq!(python_overhead.hit_reaction, PYTHON_OVERHEAD_REACTION);
+    assert_eq!(
+        python_overhead.whiff_recovery,
+        PYTHON_TRACEBACK_OVERHEAD_WHIFF_RECOVERY
+    );
+
+    let python_anti_air = move_spec(MoveId::PythonVisionAntiAir);
+    assert_eq!(python_anti_air.input, MoveInputKind::AntiAir);
+    assert_eq!(python_anti_air.label, "Vision AA");
+    assert_eq!(python_anti_air.damage, PYTHON_VISION_ANTI_AIR_DAMAGE);
+    assert_eq!(python_anti_air.guard_rule, GuardRule::Mid);
+    assert_eq!(python_anti_air.hit_reaction, PYTHON_ANTI_AIR_REACTION);
+    assert_eq!(
+        python_anti_air.whiff_recovery,
+        PYTHON_VISION_ANTI_AIR_WHIFF_RECOVERY
+    );
+
+    let python_throw = move_spec(MoveId::PythonConstrictThrow);
+    assert_eq!(python_throw.input, MoveInputKind::Throw);
+    assert_eq!(python_throw.label, "Constrict");
+    assert_eq!(python_throw.damage, PYTHON_CONSTRICT_THROW_DAMAGE);
+    assert_eq!(python_throw.guard_rule, GuardRule::Throw);
+    assert_eq!(python_throw.hit_reaction, PYTHON_THROW_REACTION);
+    assert_eq!(
+        python_throw.whiff_recovery,
+        PYTHON_CONSTRICT_THROW_WHIFF_RECOVERY
+    );
 }
 
 #[test]
@@ -375,6 +544,28 @@ fn loadout_move_selection_prefers_character_specific_specs() {
         MoveId::AirPunch,
         MoveId::GoHopkick,
         MoveId::CloseThrow,
+    ];
+    let c_moves = [
+        MoveId::CPointerJab,
+        MoveId::CUnsafePoke,
+        MoveId::CNullStepKick,
+        MoveId::CSegfaultSweep,
+        MoveId::CStackOverflow,
+        MoveId::CInterruptVector,
+        MoveId::AirPunch,
+        MoveId::AirKick,
+        MoveId::CUndefinedThrow,
+    ];
+    let python_moves = [
+        MoveId::PythonSnakeBite,
+        MoveId::PythonDataStrike,
+        MoveId::PythonHeelKick,
+        MoveId::PythonIndentSweep,
+        MoveId::PythonTracebackOverhead,
+        MoveId::PythonVisionAntiAir,
+        MoveId::AirPunch,
+        MoveId::AirKick,
+        MoveId::PythonConstrictThrow,
     ];
 
     assert_eq!(
@@ -425,6 +616,62 @@ fn loadout_move_selection_prefers_character_specific_specs() {
         move_spec_for_input(&go_moves, MoveInputKind::AirKick),
         Some(move_spec(MoveId::GoHopkick))
     );
+    assert_eq!(
+        move_spec_for_input(&c_moves, MoveInputKind::LightPunch),
+        Some(move_spec(MoveId::CPointerJab))
+    );
+    assert_eq!(
+        move_spec_for_input(&c_moves, MoveInputKind::HeavyPunch),
+        Some(move_spec(MoveId::CUnsafePoke))
+    );
+    assert_eq!(
+        move_spec_for_input(&c_moves, MoveInputKind::Kick),
+        Some(move_spec(MoveId::CNullStepKick))
+    );
+    assert_eq!(
+        move_spec_for_input(&c_moves, MoveInputKind::Sweep),
+        Some(move_spec(MoveId::CSegfaultSweep))
+    );
+    assert_eq!(
+        move_spec_for_input(&c_moves, MoveInputKind::Overhead),
+        Some(move_spec(MoveId::CStackOverflow))
+    );
+    assert_eq!(
+        move_spec_for_input(&c_moves, MoveInputKind::AntiAir),
+        Some(move_spec(MoveId::CInterruptVector))
+    );
+    assert_eq!(
+        move_spec_for_input(&c_moves, MoveInputKind::Throw),
+        Some(move_spec(MoveId::CUndefinedThrow))
+    );
+    assert_eq!(
+        move_spec_for_input(&python_moves, MoveInputKind::LightPunch),
+        Some(move_spec(MoveId::PythonSnakeBite))
+    );
+    assert_eq!(
+        move_spec_for_input(&python_moves, MoveInputKind::HeavyPunch),
+        Some(move_spec(MoveId::PythonDataStrike))
+    );
+    assert_eq!(
+        move_spec_for_input(&python_moves, MoveInputKind::Kick),
+        Some(move_spec(MoveId::PythonHeelKick))
+    );
+    assert_eq!(
+        move_spec_for_input(&python_moves, MoveInputKind::Sweep),
+        Some(move_spec(MoveId::PythonIndentSweep))
+    );
+    assert_eq!(
+        move_spec_for_input(&python_moves, MoveInputKind::Overhead),
+        Some(move_spec(MoveId::PythonTracebackOverhead))
+    );
+    assert_eq!(
+        move_spec_for_input(&python_moves, MoveInputKind::AntiAir),
+        Some(move_spec(MoveId::PythonVisionAntiAir))
+    );
+    assert_eq!(
+        move_spec_for_input(&python_moves, MoveInputKind::Throw),
+        Some(move_spec(MoveId::PythonConstrictThrow))
+    );
 }
 
 #[test]
@@ -469,6 +716,62 @@ fn attack_kind_is_compatibility_layer_over_move_specs() {
     assert_eq!(
         AttackKind::from_move_id(MoveId::GoHopkick),
         AttackKind::AirKick
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::CPointerJab),
+        AttackKind::LightPunch
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::CUnsafePoke),
+        AttackKind::HeavyPunch
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::CNullStepKick),
+        AttackKind::Kick
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::CSegfaultSweep),
+        AttackKind::Sweep
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::CStackOverflow),
+        AttackKind::Overhead
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::CInterruptVector),
+        AttackKind::AntiAir
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::CUndefinedThrow),
+        AttackKind::Throw
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::PythonSnakeBite),
+        AttackKind::LightPunch
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::PythonDataStrike),
+        AttackKind::HeavyPunch
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::PythonHeelKick),
+        AttackKind::Kick
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::PythonIndentSweep),
+        AttackKind::Sweep
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::PythonTracebackOverhead),
+        AttackKind::Overhead
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::PythonVisionAntiAir),
+        AttackKind::AntiAir
+    );
+    assert_eq!(
+        AttackKind::from_move_id(MoveId::PythonConstrictThrow),
+        AttackKind::Throw
     );
     assert_eq!(
         AttackKind::LightPunch.move_spec(),

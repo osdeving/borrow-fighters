@@ -14,7 +14,7 @@ Placeholder candidato extraido de `assets/references/rust-start-anim.png`.
 
 Atlas cinematografico usado no clip `spawn`, antes de liberar os controles no inicio da luta.
 
-O script corrige a continuidade do notebook no frame `spawn_13` e remove da sequencia o frame fonte em que o notebook isolado nao funcionava como pose de personagem.
+O script remove do frame `spawn_13` o notebook isolado que parecia sobra de frame anterior e remove da sequencia o frame fonte em que o notebook isolado nao funcionava como pose de personagem.
 
 ## Geracao
 
@@ -27,5 +27,5 @@ O script tambem gera uma previa local em `tmp/art/rust-start-atlas-preview.png`,
 ## Limitacoes
 
 - A fonte ainda e uma imagem composta, nao um arquivo autorado em camadas.
-- O notebook corrigido e aplicado como patch de celula durante a extracao.
+- O notebook isolado do frame `spawn_13` e removido durante a extracao para preservar continuidade.
 - O clip `spawn` nao deve carregar regra de combate; ele apenas bloqueia gameplay ate a intro terminar.

@@ -466,8 +466,8 @@ fn cycle_character(
     direction: crate::scenes::preferences::CycleDirection,
 ) -> crate::characters::CharacterId {
     match direction {
-        crate::scenes::preferences::CycleDirection::Previous => character.previous(),
-        crate::scenes::preferences::CycleDirection::Next => character.next(),
+        crate::scenes::preferences::CycleDirection::Previous => character.demo_previous(),
+        crate::scenes::preferences::CycleDirection::Next => character.demo_next(),
     }
 }
 

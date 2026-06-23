@@ -61,19 +61,38 @@ impl AttackKind {
     /// Returns the runtime attack kind represented by a stable move id.
     pub const fn from_move_id(id: MoveId) -> Self {
         match id {
-            MoveId::LightPunch | MoveId::RustBorrowJab | MoveId::GoGoroutineJab => Self::LightPunch,
-            MoveId::HeavyPunch | MoveId::DukeBoilerplatePoke => Self::HeavyPunch,
-            MoveId::Kick | MoveId::GoDeferKick => Self::Kick,
-            MoveId::SweepKick | MoveId::DukeGarbageCollectorSweep => Self::Sweep,
+            MoveId::LightPunch
+            | MoveId::RustBorrowJab
+            | MoveId::GoGoroutineJab
+            | MoveId::CPointerJab
+            | MoveId::PythonSnakeBite => Self::LightPunch,
+            MoveId::HeavyPunch
+            | MoveId::DukeBoilerplatePoke
+            | MoveId::CUnsafePoke
+            | MoveId::PythonDataStrike => Self::HeavyPunch,
+            MoveId::Kick | MoveId::GoDeferKick | MoveId::CNullStepKick | MoveId::PythonHeelKick => {
+                Self::Kick
+            }
+            MoveId::SweepKick
+            | MoveId::DukeGarbageCollectorSweep
+            | MoveId::CSegfaultSweep
+            | MoveId::PythonIndentSweep => Self::Sweep,
             MoveId::OverheadPunch
             | MoveId::DukeAbstractFactoryOverhead
-            | MoveId::GoChannelOverhead => Self::Overhead,
-            MoveId::RisingAntiAir | MoveId::RustLifetimeAntiAir => Self::AntiAir,
+            | MoveId::GoChannelOverhead
+            | MoveId::CStackOverflow
+            | MoveId::PythonTracebackOverhead => Self::Overhead,
+            MoveId::RisingAntiAir
+            | MoveId::RustLifetimeAntiAir
+            | MoveId::CInterruptVector
+            | MoveId::PythonVisionAntiAir => Self::AntiAir,
             MoveId::AirPunch => Self::AirPunch,
             MoveId::AirKick | MoveId::GoHopkick => Self::AirKick,
-            MoveId::CloseThrow | MoveId::RustOwnershipThrow | MoveId::DukeEnterpriseThrow => {
-                Self::Throw
-            }
+            MoveId::CloseThrow
+            | MoveId::RustOwnershipThrow
+            | MoveId::DukeEnterpriseThrow
+            | MoveId::CUndefinedThrow
+            | MoveId::PythonConstrictThrow => Self::Throw,
         }
     }
 

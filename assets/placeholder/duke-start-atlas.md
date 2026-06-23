@@ -14,7 +14,7 @@ Placeholder candidato extraido de `assets/references/duke-start-anim.png`.
 
 Atlas cinematografico usado no clip `spawn`, antes de liberar os controles no inicio da luta.
 
-O script restaura mesa e xicara nos frames em que a referencia tinha falhas de continuidade, mantendo os frames de impacto posteriores separados.
+O script restaura mesa e xicara nos frames em que a referencia tinha falhas de continuidade e remove componentes isolados nos frames `spawn_09`/`spawn_10` que pareciam sobras de frame anterior, mantendo os detritos centrais de impacto.
 
 ## Geracao
 

@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+import json
+
 from PIL import Image
 
 from sprite_atlas_extractor import (
@@ -16,6 +18,7 @@ from sprite_atlas_extractor import (
 
 
 SPAWN_CLIP = {"spawn": {"loop": False}}
+START_RUNTIME_SCALE = 1.2266666666666666
 
 RUST_SPAWN_TIMING_MS = {
     "spawn_00": 130,
@@ -122,13 +125,11 @@ DUKE_FRAMES: list[FrameSpec] = [
 
 
 def rust_cell_processor(cell: Image.Image, spec: FrameSpec) -> Image.Image:
-    """Adds the missing notebook to extracted Rust spawn frame 14."""
+    """Removes stray source-frame pieces from extracted Rust spawn cells."""
     result = cell.copy()
 
     if spec.name == "spawn_13":
         result = keep_large_components(result, min_area=8000)
-        source = Image.open(ROOT / "assets/references/rust-start-anim.png").convert("RGB")
-        paste_trimmed_patch(result, source, (1410, 548, 1548, 638), (258, 82), scale=0.48)
 
     if spec.name == "spawn_17":
         result = remove_components_matching(
@@ -178,6 +179,12 @@ def duke_cell_processor(cell: Image.Image, spec: FrameSpec) -> Image.Image:
         result = remove_components_matching(
             result,
             lambda component: component.left >= 300 and component.area < 6000,
+        )
+
+    if spec.name in {"spawn_09", "spawn_10"}:
+        result = remove_components_matching(
+            result,
+            lambda component: component.left >= 250,
         )
 
     return result
@@ -256,6 +263,13 @@ def remove_components_matching(image: Image.Image, should_remove) -> Image.Image
     return cleaned
 
 
+def write_outputs_with_runtime_scale(config: AtlasConfig) -> None:
+    write_outputs(config)
+    data = json.loads(config.manifest_path.read_text())
+    data["scale"] = START_RUNTIME_SCALE
+    config.manifest_path.write_text(json.dumps(data, indent=2) + "\n")
+
+
 RUST_CONFIG = AtlasConfig(
     source_path=ROOT / "assets/references/rust-start-anim.png",
     atlas_path=ROOT / "assets/placeholder/rust-start-atlas.png",
@@ -296,5 +310,5 @@ DUKE_CONFIG = AtlasConfig(
 
 
 if __name__ == "__main__":
-    write_outputs(RUST_CONFIG)
-    write_outputs(DUKE_CONFIG)
+    write_outputs_with_runtime_scale(RUST_CONFIG)
+    write_outputs_with_runtime_scale(DUKE_CONFIG)

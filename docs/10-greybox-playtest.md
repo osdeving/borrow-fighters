@@ -24,7 +24,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Soco forte/longo.
 - Chute.
 - Varredura baixa, overhead, anti-air, agarrão curto e ataques aéreos.
-- Primeiro corte de identidade mecânica: Rust com respostas mais rápidas/curtas; Duke com ferramentas mais longas/pesadas e mais puníveis; Go como rushdown com atlas placeholder testável no Combat Lab, no menu e por CLI; C como atlas novo jogável ainda com kit genérico.
+- Primeiro corte de identidade mecânica: Rust com respostas mais rápidas/curtas; Duke com ferramentas mais longas/pesadas e mais puníveis; Go como rushdown mantido para CLI/ferramentas; C como fundamentos de alcance/risco; Python como punisher ágil de dano moderado.
 - Fireball horizontal simples com ritmo diferente por personagem.
 - CPU de playtest para um ou dois jogadores, com perfis diferentes e acoes variadas.
 - Opção para IA mover/defender sem dar golpes.
@@ -54,9 +54,10 @@ Comando:
 cargo run
 cargo run -- --fight --p1 go --p2 duke
 cargo run -- --fight --p1 c --p2 rust
+cargo run -- --fight --p1 python --p2 duke
 ```
 
-Use `--p1`/`--player-one` e `--p2`/`--player-two` para iniciar matchups específicos sem tela de seleção. Valores aceitos: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang` e `clang`. Use `--fight` ou `--skip-menu` para abrir diretamente na luta.
+Use `--p1`/`--player-one` e `--p2`/`--player-two` para iniciar matchups específicos sem tela de seleção. Valores aceitos: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py` e `python.py`. Use `--fight` ou `--skip-menu` para abrir diretamente na luta. O menu da demo cicla apenas Rust, Duke/Java, C e Python; Go/Gopher fica disponível por CLI e ferramentas enquanto a arte dele fica fora da demo.
 
 Checks úteis:
 
@@ -79,6 +80,7 @@ cargo run -- --lab combat --character rust --move sweep
 cargo run -- --lab combat --character duke --move anti-air
 cargo run -- --lab combat --character go --move kick
 cargo run -- --lab combat --character c --move projectile
+cargo run -- --lab combat --character python --move heavy_punch
 ```
 
 Para abrir uma pose estática:
@@ -88,6 +90,7 @@ cargo run -- --lab combat --character rust --pose crouch
 cargo run -- --lab combat --character duke --pose victory
 cargo run -- --lab combat --character go --pose jump
 cargo run -- --lab combat --character c --pose idle
+cargo run -- --lab combat --character python --pose hit
 ```
 
 No Combat Lab, `Tab` / `Shift+Tab` alterna golpes, `PageDown` / `PageUp` alterna poses, `Enter` reinicia, `Espaço` pausa, `.` avança um frame quando pausado, `Home` volta ao frame 0, `H` alterna hurtbox, `B` alterna hitbox, `P` alterna pivot/eixos, `D` alterna dummy, `A` alterna o fundo de arena e `Esc` volta ao menu quando o lab foi aberto por `Training`.
@@ -186,10 +189,10 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 14. A CPU do Player 2 deve variar aproximação, afastamento, pulo, socos, chutes, varredura, overhead, anti-air, agarrão curto, ataque aéreo, defesa e fireballs.
 15. Rust deve parecer mais responsivo em anti-air e throw.
 16. Duke deve controlar mais espaço com sweep, overhead e poke, mas ficar mais exposto quando erra.
-17. Go no Combat Lab, no menu ou na luta iniciada por `--p1 go`/`--p2 go` deve parecer mais rápido e curto que os golpes genéricos equivalentes, pagando com menos vida.
-18. C no Combat Lab, no menu ou na luta iniciada por `--p1 c`/`--p2 c` deve aparecer na escala correta, com entrada, atlas de luta e projectile carregados.
+17. Go no Combat Lab ou na luta iniciada por `--p1 go`/`--p2 go` deve parecer mais rápido e curto que os golpes genéricos equivalentes, pagando com menos vida; ele não deve aparecer no ciclo do menu da demo.
+18. C no Combat Lab, no menu ou na luta iniciada por `--p1 c`/`--p2 c` deve aparecer na escala correta, com entrada, atlas de luta e projectile carregados, e jogar como fundamentos de alcance maior com whiff mais punível.
 19. O projectile do C deve ler claramente como stream de bits, com `0` e `1` visiveis durante a luta.
-20. Python no Combat Lab, no menu ou na luta iniciada por `--p1 python`/`--p2 python` deve aparecer com atlas de luta, entrada cinematografica e projectile carregados; o soco fraco deve ler como bote da cobra, o soco forte como ataque da própria personagem e a entrada deve mostrar cavalete com grafico de barras colorido.
+20. Python no Combat Lab, no menu ou na luta iniciada por `--p1 python`/`--p2 python` deve aparecer com atlas de luta, entrada cinematografica e projectile carregados; o soco fraco deve ler como bote da cobra, o soco forte como ataque da própria personagem e a personagem deve compensar dano menor com startup/recovery mais leves.
 21. Rust, Duke, Go, C e Python devem ter projectiles com ritmo diferente: Rust médio, Duke pesado/lento, Go rápido/curto, C médio/rápido, Python rápido/médio.
 22. O submenu `Options` deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
 23. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
@@ -250,10 +253,9 @@ Controles do lab:
 
 ## Limitações conhecidas
 
-- A luta padrão ainda abre rust.rs x duke.java; gopher.go, old.c e python.py entram na luta normal quando escolhidos no menu ou por CLI usando atlas placeholder próprio de luta, entrada e projectile.
-- Rust e Duke ainda compartilham parte do kit genérico; o contraste principal já aparece em jab, heavy, anti-air, sweep, overhead e throw.
-- C ainda compartilha todo o kit próximo genérico; o objetivo imediato dele é validar atlas fluido, escala, pivot, entrada e projectile.
-- Python ainda compartilha o kit próximo genérico; o objetivo imediato dela é validar escala, pivot, entrada com grafico, bote da cobra, soco forte, taunt e projectile antes de receber frame data própria.
+- A luta padrão ainda abre rust.rs x duke.java; old.c e python.py entram pela seleção da demo, e gopher.go entra por CLI, Combat Lab ou Sprite Viewer enquanto fica fora do menu público.
+- Rust e Duke ainda compartilham alguns golpes universais, mas já têm ferramentas próprias para definir ritmo.
+- C e Python ainda usam ataques aéreos universais, mas já possuem kit terrestre, throw, projectile, vida e arquétipo próprios.
 - As arenas bitmap são placeholders gerados/derivados de referências e não devem ser tratadas como arte final.
 - O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.
 - Fireball no gamepad usa `RB` por enquanto; `RT` pode entrar depois quando tivermos leitura de gatilho com borda de pressionamento.

@@ -32,6 +32,6 @@ O script usa uma fonte AI-generated já limpa para alpha, detecta as poses princ
 
 - Ainda é placeholder e não arte final.
 - A fonte gerada trouxe 77 poses principais; alguns frames vizinhos reutilizam poses para preencher o contrato de 94 frames do C.
-- Já está integrada ao roster jogável, menu e CLI como `python.py`, mas ainda não possui áudio próprio nem balanceamento final.
+- Já está integrada ao roster jogável, menu e CLI como `python.py`, com kit terrestre próprio de punisher ágil, mas ainda não possui áudio próprio nem balanceamento final de playtest.
 - Hitboxes/hurtboxes por frame precisam ser revisadas no Sprite Studio antes de usar como dado de combate confiável.
 - O visual deve ser revisado por leitura em movimento, escala e aceitação de personagem antes de virar candidato aprovado.

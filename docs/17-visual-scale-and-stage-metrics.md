@@ -34,13 +34,14 @@ Isso da uma arena com cerca de `11,8` larguras de corpo (`1194,7 / 101,3`). Para
 
 O corpo fisico ainda e um retangulo comum para todos os personagens. O sprite pode ultrapassar esse corpo para cabelo, orelha, roupa, efeito e leitura visual, mas a area vulneravel principal deve continuar coerente com a hurtbox.
 
-Para personagens humanoides, como Rust, Duke/Java e C:
+Para personagens humanoides, como Rust, Duke/Java, C e Python:
 
 - altura visivel em idle: `247` a `280 px`;
 - largura visivel em idle: `147` a `200 px`;
 - referencia aprovada: Rust atual aparece com cerca de `164 x 275 px` em idle;
 - Java/Duke atual aparece com cerca de `161 x 251 px` em idle.
 - C atual deve ficar nessa mesma faixa humanoide; a versao inicial usa `scale = 1.5467` no manifesto para compensar o recorte dos atlas de referencia.
+- Python atual usa corpo fisico humanoide padrao e deve ser validada pela mesma faixa antes de qualquer ajuste de hitbox.
 
 Para personagens nao-humanos, como Go/Gopher:
 
@@ -87,6 +88,7 @@ Fluxo recomendado:
 ```bash
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/go-fighter.sprite.json --clip idle --character go --move light_punch
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip idle --character c --move light_punch
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip idle --character python --move light_punch
 ```
 
 No viewer:
@@ -110,6 +112,8 @@ A correcao atual comprime `assets/placeholder/go-fighter-atlas.png` e `assets/pl
 Rust e Duke/Java usam `scale = 1.3333` nos manifestos de luta porque esse e o antigo tamanho efetivo `1.0` migrado pela escala `4/3`. As intros de spawn de Rust/Duke usam `scale = 1.2267`, preservando o ajuste relativo anterior de `0.92`.
 
 O C entrou com corpo fisico humanoide padrao (`101,3 x 224 / crouch 128`) e `assets/placeholder/c-fighter.sprite.json` com `scale = 1.5467`, equivalente ao antigo `1.16` migrado por `4/3`. Esse valor e provisorio: se a silhueta parecer maior ou menor que Rust/Duke em idle, ajuste primeiro `scale` e `pivot` pelo Sprite Combat Viewer antes de mexer em hitbox ou gameplay.
+
+Python entrou com corpo fisico humanoide padrao (`101,3 x 224 / crouch 128`) em `assets/tuning/character-body-metrics.json`. A cobra, cabelo e efeitos podem sair do corpo fisico, mas a parte vulneravel principal deve continuar coerente com a silhueta da personagem.
 
 ## Ainda Em Aberto
 
