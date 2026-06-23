@@ -20,6 +20,7 @@ Exemplo real:
 - `assets/placeholder/duke-start.sprite.json`
 - `assets/placeholder/c-fighter.sprite.json`
 - `assets/placeholder/c-start.sprite.json`
+- `assets/placeholder/python-fighter.sprite.json`
 
 Campos principais:
 
@@ -101,6 +102,7 @@ O personagem Rust usa `assets/placeholder/rust-fighter.sprite.json`.
 O Player 2/Duke usa `assets/placeholder/duke-fighter.sprite.json`.
 Go usa `assets/placeholder/go-fighter.sprite.json`.
 C usa `assets/placeholder/c-fighter.sprite.json`, extraido dos atlas de referencia `assets/references/langc-03.png` e `assets/references/langc-04.png`.
+Python possui um atlas candidato em `assets/placeholder/python-fighter.sprite.json`, gerado como placeholder visual e ainda nao integrado ao roster jogavel.
 
 O tamanho em jogo nao deve depender da resolucao do PNG. Ajuste `scale` e `frames[].pivot` no manifesto; o renderer de luta e o Sprite Combat Viewer consomem os mesmos valores. O padrao atual de altura, largura e arena fica em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md).
 
@@ -128,12 +130,21 @@ Assets relacionados ao slice atual:
 - `assets/placeholder/duke-bean-projectile.png`
 - `assets/placeholder/go-channel-projectile.png`
 - `assets/placeholder/c-bitstream-projectile.png`
+- `assets/placeholder/python-fighter-atlas.png`
 - `assets/placeholder/arena-sirius.png`
 - `assets/placeholder/arena-fortaleza.png`
 - `assets/placeholder/arena-java-street.png`
 - `assets/placeholder/arena-terminal-compiler-lab.png`
 
 As ferramentas locais ficam em `tools/art/` e `tools/sprite-studio/`. Scripts em `tools/art/` devem ser tratados como utilitarios de prototipo. O `tools/sprite-studio/` e o app desktop externo para editar manifestos e reduzir a dependencia do viewer Raylib embutido no jogo.
+
+O atlas candidato de Python e reconstruido por:
+
+```bash
+python3 tools/art/build_python_fighter_atlas.py
+```
+
+Ele repacota `assets/references/python-fighter-atlas-source.png` para a grade runtime do C (`6x16`, celulas `384x256`) e gera `assets/placeholder/python-fighter.sprite.json`.
 
 ## Sprite Studio
 

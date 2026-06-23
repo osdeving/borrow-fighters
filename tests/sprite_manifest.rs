@@ -17,6 +17,8 @@ use borrow_fighters::{
     },
 };
 
+const PYTHON_FIGHTER_MANIFEST_PATH: &str = "assets/placeholder/python-fighter.sprite.json";
+
 fn assert_f32_close(actual: f32, expected: f32, context: &str) {
     assert!(
         (actual - expected).abs() <= 0.001,
@@ -77,6 +79,22 @@ fn c_fighter_manifest_loads() {
     assert!(manifest.clip_named("idle").is_some());
     assert!(manifest.clip_named("punch_light").is_some());
     assert!(manifest.clip_named("kick").is_some());
+    assert!(manifest.clip_named("special").is_some());
+}
+
+#[test]
+fn python_fighter_manifest_candidate_loads() {
+    let manifest =
+        SpriteManifest::load(PYTHON_FIGHTER_MANIFEST_PATH).expect("manifest should load");
+
+    assert_eq!(manifest.schema, SPRITE_SCHEMA);
+    assert_eq!(manifest.image, "python-fighter-atlas.png");
+    assert_eq!(manifest.frames.len(), 94);
+    assert_eq!(manifest.cell.w, 384);
+    assert!(manifest.clip_named("idle").is_some());
+    assert!(manifest.clip_named("punch_light").is_some());
+    assert!(manifest.clip_named("punch_heavy").is_some());
+    assert!(manifest.clip_named("taunt").is_some());
     assert!(manifest.clip_named("special").is_some());
 }
 
