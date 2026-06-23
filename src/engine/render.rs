@@ -13,7 +13,7 @@ mod sprite_viewer;
 pub use combat_lab::draw_combat_lab;
 pub use sprite_viewer::{draw_sprite_viewer, draw_sprite_viewer_error};
 
-use crate::characters::{CharacterId, character_spec};
+use crate::characters::CharacterId;
 use crate::combat::fighter::{AttackPhase, Facing, PlayerSlot};
 use crate::config::{
     ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH, screen_px, world_px,
@@ -673,8 +673,8 @@ fn draw_versus_menu(
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "VERSUS SETUP");
 
-    let player_one = character_spec(options.player_one_character).display_name;
-    let player_two = character_spec(options.player_two_character).display_name;
+    let player_one = character_select_label(options.player_one_character);
+    let player_two = character_select_label(options.player_two_character);
     let rows = [
         MenuLine {
             label: "START FIGHT",
@@ -722,6 +722,28 @@ fn draw_versus_menu(
         panel,
         "A/D ou setas ajustam personagem  |  Esc volta",
     );
+}
+
+fn character_select_label(character: CharacterId) -> &'static str {
+    match character {
+        CharacterId::Rust => "rust.rs",
+        CharacterId::Duke => "duke.java",
+        CharacterId::Go => "gopher.go",
+        CharacterId::C => "old.c",
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn character_select_labels_use_source_file_theme() {
+        assert_eq!(character_select_label(CharacterId::C), "old.c");
+        assert_eq!(character_select_label(CharacterId::Rust), "rust.rs");
+        assert_eq!(character_select_label(CharacterId::Duke), "duke.java");
+        assert_eq!(character_select_label(CharacterId::Go), "gopher.go");
+    }
 }
 
 fn draw_training_menu(

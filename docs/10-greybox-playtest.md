@@ -109,8 +109,8 @@ Ao começar uma luta, os personagens entram em cena e depois aparece a contagem 
 
 | Preferência | Padrão | O que testar |
 |---|---|---|
-| Personagem Player 1 | Rust | A próxima luta deve iniciar com o personagem escolhido para o Player 1. |
-| Personagem Player 2 | Duke / Java | A próxima luta deve iniciar com o personagem escolhido para o Player 2. |
+| Personagem Player 1 | rust.rs | A próxima luta deve iniciar com o personagem escolhido para o Player 1. |
+| Personagem Player 2 | duke.java | A próxima luta deve iniciar com o personagem escolhido para o Player 2. |
 | Player 1 usa IA | Desligado | O Player 1 deve ser controlado automaticamente quando ligado. |
 | Player 2 usa IA | Ligado | O Player 2 deve ser controlado automaticamente. |
 | IA pode dar golpes | Ligado | Quando desligado, lutadores controlados por IA devem andar, pular, afastar, aproximar e defender, mas não atacar. |
@@ -249,7 +249,7 @@ Controles do lab:
 
 ## Limitações conhecidas
 
-- A luta padrão ainda abre Rust x Java/Duke; Go e C entram na luta normal quando escolhidos no menu ou por CLI usando atlas placeholder próprio de luta, entrada e projectile.
+- A luta padrão ainda abre rust.rs x duke.java; gopher.go e old.c entram na luta normal quando escolhidos no menu ou por CLI usando atlas placeholder próprio de luta, entrada e projectile.
 - Rust e Duke ainda compartilham parte do kit genérico; o contraste principal já aparece em jab, heavy, anti-air, sweep, overhead e throw.
 - C ainda compartilha todo o kit próximo genérico; o objetivo imediato dele é validar atlas fluido, escala, pivot, entrada e projectile.
 - As arenas bitmap são placeholders gerados/derivados de referências e não devem ser tratadas como arte final.
