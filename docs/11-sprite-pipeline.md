@@ -133,11 +133,34 @@ Assets relacionados ao slice atual:
 - `assets/placeholder/arena-java-street.png`
 - `assets/placeholder/arena-terminal-compiler-lab.png`
 
-As ferramentas locais ficam em `tools/art/` e devem ser tratadas como utilitarios de prototipo, nao como pipeline final.
+As ferramentas locais ficam em `tools/art/` e `tools/sprite-studio/`. Scripts em `tools/art/` devem ser tratados como utilitarios de prototipo. O `tools/sprite-studio/` e o app desktop externo para editar manifestos e reduzir a dependencia do viewer Raylib embutido no jogo.
+
+## Sprite Studio
+
+O Sprite Studio vive em [`tools/sprite-studio/`](../tools/sprite-studio) e esta documentado em [`docs/18-sprite-studio.md`](18-sprite-studio.md).
+
+Ele usa Tauri 1.8 + React e nao compartilha codigo com o jogo. O contrato entre ferramenta e runtime e somente o artefato salvo em disco:
+
+- o app edita `*.sprite.json`;
+- o app edita `assets/tuning/character-body-metrics.json`;
+- o jogo carrega `*.sprite.json`;
+- o jogo carrega `assets/tuning/character-body-metrics.json`;
+- testes do jogo validam se o manifesto continua aceito.
+
+Comando:
+
+```bash
+cd tools/sprite-studio
+pnpm install
+pnpm build
+pnpm tauri dev
+```
+
+O Studio oferece file picker nativo, menu desktop, paineis colapsaveis, timeline horizontal, tutorial visual (`F1`), edicao de pivot/scale/boxes/origem, snap, guia de escala visual, presets iniciais de boxes, autosave em `target/sprite-studio-autosave/`, backup em `target/sprite-studio-backups/`, validacao do runtime e export de PNG/JSON para review.
 
 ## Sprite Combat Viewer
 
-O primeiro viewer isolado de sprites vive em:
+O viewer Raylib embutido no jogo continua disponivel temporariamente ate a limpeza dedicada que removera a ferramenta antiga. Ele vive em:
 
 - `src/scenes/sprite_viewer.rs`: estado testavel, carregamento de manifesto, clip/frame atual, playback e drag.
 - `src/engine/render/sprite_viewer.rs`: grid, pivot, bounds e desenho do atlas via Raylib.

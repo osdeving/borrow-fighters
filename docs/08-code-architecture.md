@@ -81,20 +81,23 @@ borrow-fighters/
 │       ├── mod.rs              # Tipos geométricos pequenos do jogo
 │       ├── rect.rs             # Retângulos de colisão/hitbox
 │       └── vec2.rs             # Vetores 2D se Raylib Vector2 não bastar
-└── tests/
-    ├── cli.rs                  # Contrato de argumentos de inicialização
-    ├── characters.rs           # Contrato do registro de personagens
-    ├── combat_lab.rs           # Estado testável do Combat Lab
-    ├── attack_frame_data.rs    # Timing de golpes em frames
-    ├── move_data.rs            # Contrato da tabela MoveSpec
-    ├── character_identity_tuning.rs # Intenção mecânica de Rust/Duke/Go/C por dados
-    ├── combat_rules.rs         # Regras puras de combate e IA
-    ├── traditional_moves.rs    # High/low/throw e ataques aéreos tradicionais
-    ├── cpu_traditional_moves.rs # Cobertura da CPU para golpes tradicionais
-    ├── feature_flags.rs        # Contrato de flags runtime
-    ├── audio_manifest.rs       # Contrato do manifesto e roteamento de áudio
-    ├── sprite_manifest.rs      # Validação do formato JSON de sprites
-    └── sprite_selection.rs     # Clip escolhido a partir do estado do lutador
+├── tests/
+│   ├── cli.rs                  # Contrato de argumentos de inicialização
+│   ├── characters.rs           # Contrato do registro de personagens
+│   ├── combat_lab.rs           # Estado testável do Combat Lab
+│   ├── attack_frame_data.rs    # Timing de golpes em frames
+│   ├── move_data.rs            # Contrato da tabela MoveSpec
+│   ├── character_identity_tuning.rs # Intenção mecânica de Rust/Duke/Go/C por dados
+│   ├── combat_rules.rs         # Regras puras de combate e IA
+│   ├── traditional_moves.rs    # High/low/throw e ataques aéreos tradicionais
+│   ├── cpu_traditional_moves.rs # Cobertura da CPU para golpes tradicionais
+│   ├── feature_flags.rs        # Contrato de flags runtime
+│   ├── audio_manifest.rs       # Contrato do manifesto e roteamento de áudio
+│   ├── sprite_manifest.rs      # Validação do formato JSON de sprites
+│   └── sprite_selection.rs     # Clip escolhido a partir do estado do lutador
+└── tools/
+    ├── art/                    # Utilitarios locais de extracao/ajuste de assets
+    └── sprite-studio/          # App Tauri 1.8 + React isolado para editar manifestos de sprite
 ```
 
 O diretório `scenes/` ainda deve permanecer simples, sem framework de telas. `ui/` já abriga o overlay de debug do Combat Lab, mas ainda não deve virar um sistema genérico antes de haver HUD e menus suficientes para justificar isso. `characters/` já possui o registro mínimo de personagens, mas ainda deve permanecer simples e orientado a dados. Novos módulos só devem entrar quando reduzirem responsabilidade real dos arquivos atuais.
@@ -126,6 +129,20 @@ Deve expor os módulos internos para testes e exemplos. Regras puras de jogo dev
 `src/engine/video_capture.rs` tambem segue essa fronteira: ele pode conhecer ferramentas do host (`ffmpeg` e PulseAudio) e Raylib para leitura de framebuffer, mas gameplay e cenas só enxergam start/stop/status e envio do frame renderizado.
 
 `src/engine/sprites/combat.rs` tambem fica em `engine` porque depende do formato de sprite, clip, pivot e escala visual. Ele nao depende de Raylib; apenas projeta metadata local do atlas para `Rect`/`Vec2` em coordenadas de mundo para que `game::World` possa usar com fallback.
+
+### `tools/sprite-studio`
+
+O Sprite Studio e uma ferramenta externa em Tauri 1.8 + React. Ele nao faz parte do pacote Rust do jogo, nao importa structs do runtime e nao deve virar dependencia do `src/`.
+
+Responsabilidades:
+
+- abrir atlas e `*.sprite.json`;
+- editar dados de manifesto;
+- rodar validacao do runtime por comando externo (`cargo test`) sem linkar codigo do jogo;
+- salvar artefatos consumidos pelo jogo;
+- dar UI melhor para artistas e devs ajustarem pivot, escala, hitbox, hurtbox e origem de projectile.
+
+O contrato entre jogo e ferramenta e apenas o arquivo em disco. A decisao esta registrada em [`docs/adr/0008-external-sprite-studio-tooling.md`](adr/0008-external-sprite-studio-tooling.md).
 
 ### `combat/*`
 

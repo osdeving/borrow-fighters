@@ -2,7 +2,9 @@
 
 ## Status
 
-Em implementacao inicial na branch `tooling/sprite-combat-viewer`.
+Implementado como ferramenta Raylib temporaria. O sucessor e o Sprite Studio externo em Tauri + React, documentado em [`docs/18-sprite-studio.md`](18-sprite-studio.md) e decidido em [`docs/adr/0008-external-sprite-studio-tooling.md`](adr/0008-external-sprite-studio-tooling.md).
+
+O Sprite Studio ja possui paridade operacional para abrir, editar, validar e exportar review de manifestos. O viewer Raylib deve ser removido em uma mudanca propria.
 
 Issue de rastreio: [#15](https://github.com/osdeving/borrow-fighters/issues/15).
 
@@ -10,7 +12,7 @@ Issue de rastreio: [#15](https://github.com/osdeving/borrow-fighters/issues/15).
 
 Criar uma ferramenta leve para artistas e devs verificarem sprites, pivots, alinhamento visual, escala e, nas proximas fases, hitbox, hurtbox, origem de projectile e dummy de contato sem entrar no fluxo normal de luta.
 
-O viewer nao deve ser tratado como editor final. Ele e uma ferramenta plugavel de producao para reduzir tentativa e erro ao criar atlas e ajustar manifestos.
+O viewer nao deve ser tratado como editor final. Ele foi uma ferramenta plugavel para reduzir tentativa e erro ao criar atlas e ajustar manifestos. A direcao atual e mover a experiencia de edicao rica para o Sprite Studio externo.
 
 ## Por Que Nao Basta o Combat Lab
 
@@ -27,16 +29,14 @@ O Sprite Combat Viewer fica um nivel antes: ele inspeciona o asset e seus dados.
 
 ## Pesquisa de GUI
 
-Para o primeiro corte, Raylib puro e suficiente: grade, linhas, mouse drag, texto e atalhos de teclado cobrem a inspecao basica.
-
-Se a ferramenta passar a precisar de painel lateral com checkboxes, sliders, listas e inputs editaveis, a opcao candidata e `raygui`, biblioteca immediate-mode criada para o ecossistema raylib. O crate `raylib` 6.0 tambem expoe uma feature `raygui`, entao o caminho tecnico existe sem trocar stack.
+Raylib puro foi suficiente para grade, linhas, mouse drag, texto e atalhos de teclado. A partir do momento em que a ferramenta passou a precisar de painel lateral, checkboxes, sliders, listas, inputs editaveis e fluxo de artista, a decisao mudou para Tauri + React.
 
 Decisao atual:
 
-- usar Raylib puro no corte inicial;
-- evitar `egui`/`imgui` enquanto a ferramenta couber em primitives;
-- avaliar `raygui` na Fase 2 ou 3 se os controles por tecla ficarem insuficientes;
-- nao salvar arquivos automaticamente antes de termos consenso sobre schema de boxes.
+- manter Raylib viewer apenas ate a branch de remocao dedicada;
+- evoluir UI rica no Sprite Studio;
+- nao introduzir `raygui`, `egui` ou `imgui` dentro do jogo neste momento;
+- remover o viewer Raylib quando o Sprite Studio conseguir salvar manifestos aceitos pelo jogo.
 
 Referencias:
 

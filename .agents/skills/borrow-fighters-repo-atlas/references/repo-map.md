@@ -33,6 +33,7 @@
 | `docs/15-character-combat-matrix.md` | Character identity, archetypes and tuning matrix |
 | `docs/16-sprite-combat-viewer-roadmap.md` | Sprite viewer/tooling roadmap for artists and combat alignment |
 | `docs/17-visual-scale-and-stage-metrics.md` | Runtime visual scale, fighter size and arena metrics |
+| `docs/18-sprite-studio.md` | External Tauri + React sprite manifest editor |
 | `docs/adr/` | Architecture Decision Records |
 | `docs/adr/0007-sprite-frame-combat-runtime.md` | Decision for using `frames[].combat` in runtime hit/hurt/projectile origin resolution |
 | `docs/templates/` | Reusable proposal/checklist templates |
@@ -63,6 +64,7 @@
 | `src/math/` | Small geometry helpers |
 | `tests/` | Integration tests for combat, flags and sprites |
 | `tools/art/` | Local asset extraction utilities |
+| `tools/sprite-studio/` | Isolated Tauri + React app for editing sprite manifests |
 
 ## Assets
 
