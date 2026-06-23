@@ -24,8 +24,8 @@ Regra operacional:
 | Janela | Frente | Status | Registro | Proxima acao |
 |---|---|---|---|---|
 | Feito local | Runtime de `frames[].combat` | Feito | [`docs/11-sprite-pipeline.md`](11-sprite-pipeline.md), [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md), [`docs/adr/0007-sprite-frame-combat-runtime.md`](adr/0007-sprite-frame-combat-runtime.md) | Runtime consome hitboxes, hurtboxes e origem de projectile do manifesto com fallback para o greybox. |
-| Agora | Calibracao de sprite/hitbox | Em andamento local | [`docs/11-sprite-pipeline.md`](11-sprite-pipeline.md), [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md), [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) | Rust special, Borrow Jab, heavy punch e kick ja possuem metadata inicial; proximo e revisar hurtboxes por pose e depois Duke/Go. |
-| Proximo | Feeling e balanceamento | Planejado | [`docs/13-combat-design-roadmap.md`](13-combat-design-roadmap.md), [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md) | Playtestar Rust x Duke x Go com Combat Lab e ajustar frame data por dados, nao por achismo. |
+| Agora | Calibracao de sprite/hitbox | Em andamento local | [`docs/11-sprite-pipeline.md`](11-sprite-pipeline.md), [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md), [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) | Rust special, Borrow Jab, heavy punch e kick ja possuem metadata inicial; Go e C ja entram no runtime com atlas/projectile proprios; proximo e revisar hurtboxes por pose e depois Duke/Go/C. |
+| Proximo | Feeling e balanceamento | Planejado | [`docs/13-combat-design-roadmap.md`](13-combat-design-roadmap.md), [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md) | Playtestar Rust x Duke x Go x C com Combat Lab e ajustar frame data por dados, nao por achismo. |
 | Proximo | Arte candidata | Planejado | [`docs/07-art-direction.md`](07-art-direction.md), [`docs/11-sprite-pipeline.md`](11-sprite-pipeline.md) | Definir criterio de aceitacao para o primeiro atlas candidato de Rust antes de pedir polimento final. |
 | Depois | Ferramenta visual clicavel | Aberto | [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) | Avaliar `raygui` somente se atalhos e texto ficarem insuficientes. |
 | Depois | Release Prototype 0.1 | Aberto | [`docs/06-release-process.md`](06-release-process.md) | Criar milestone/release checklist quando o slice tiver playtest minimo e assets candidatos. |
@@ -79,7 +79,7 @@ Status do primeiro greybox:
 | Direção/facing do personagem | S | Média | Feito | Olhar para adversário |
 | Soco fraco e forte | M | Alta | Feito | Estados separados |
 | Chute | M | Alta | Feito | Usado por jogador e CPU |
-| Especial projectile | M | Alta | Feito | `ProjectileSpec` por personagem para Rust, Duke e Go |
+| Especial projectile | M | Alta | Feito | `ProjectileSpec` por personagem para Rust, Duke, Go e C |
 | Defesa e abaixar | M | Alta | Feito | Inclui leitura visual em sprite |
 | Hurtbox | M | Alta | Feito | Ajustável por estado/personagem no código |
 | Hitbox | L | Alta | Feito | Área ofensiva temporária |
@@ -92,7 +92,7 @@ Status do primeiro greybox:
 | Runtime de sprites | M | Média | Feito | Atlas + manifesto JSON v1 |
 | IA de playtest | M | Média | Feito | P1/P2, perfis diferentes, ataques variados |
 | Polimento de timing | M | Alta | Em andamento | Ataques, projectile, spawn e IA ainda precisam tuning |
-| Arte placeholder melhorada | L | Alta | Em andamento | Rust, Duke, entrada e cenário ainda não são finais |
+| Arte placeholder melhorada | L | Alta | Em andamento | Rust, Duke, Go, C, entradas e cenários ainda não são finais |
 
 ## Fora do backlog inicial
 

@@ -9,7 +9,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Janela Raylib.
 - Loop de jogo com fixed timestep.
 - Arenas bitmap placeholder `Sirius`, `Fortaleza Tech Coast` e `Java Street`.
-- Tela inicial de preferências com feature flags runtime.
+- Menu principal com submenus de versus, treino e opções runtime.
 - Dois lutadores greybox na luta padrão: Rust e Java.
 - Corpo composto por cabeça, tronco e pernas placeholder.
 - Spritesheet placeholder com poses de idle, andar, abaixar, pular, defender, socos e chute.
@@ -24,7 +24,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Soco forte/longo.
 - Chute.
 - Varredura baixa, overhead, anti-air, agarrão curto e ataques aéreos.
-- Primeiro corte de identidade mecânica: Rust com respostas mais rápidas/curtas; Duke com ferramentas mais longas/pesadas e mais puníveis; Go como rushdown com atlas placeholder testável no Combat Lab, no menu e por CLI.
+- Primeiro corte de identidade mecânica: Rust com respostas mais rápidas/curtas; Duke com ferramentas mais longas/pesadas e mais puníveis; Go como rushdown com atlas placeholder testável no Combat Lab, no menu e por CLI; C como atlas novo jogável ainda com kit genérico.
 - Fireball horizontal simples com ritmo diferente por personagem.
 - CPU de playtest para um ou dois jogadores, com perfis diferentes e acoes variadas.
 - Opção para IA mover/defender sem dar golpes.
@@ -53,9 +53,10 @@ Comando:
 ```bash
 cargo run
 cargo run -- --fight --p1 go --p2 duke
+cargo run -- --fight --p1 c --p2 rust
 ```
 
-Use `--p1`/`--player-one` e `--p2`/`--player-two` para iniciar matchups específicos sem tela de seleção. Valores aceitos: `rust`, `duke`, `java`, `go`, `golang` e `gopher`. Use `--fight` ou `--skip-menu` para abrir diretamente na luta.
+Use `--p1`/`--player-one` e `--p2`/`--player-two` para iniciar matchups específicos sem tela de seleção. Valores aceitos: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang` e `clang`. Use `--fight` ou `--skip-menu` para abrir diretamente na luta.
 
 Checks úteis:
 
@@ -77,6 +78,7 @@ cargo run -- --lab combat --character duke --move projectile
 cargo run -- --lab combat --character rust --move sweep
 cargo run -- --lab combat --character duke --move anti-air
 cargo run -- --lab combat --character go --move kick
+cargo run -- --lab combat --character c --move projectile
 ```
 
 Para abrir uma pose estática:
@@ -85,17 +87,25 @@ Para abrir uma pose estática:
 cargo run -- --lab combat --character rust --pose crouch
 cargo run -- --lab combat --character duke --pose victory
 cargo run -- --lab combat --character go --pose jump
+cargo run -- --lab combat --character c --pose idle
 ```
 
-No Combat Lab, `Tab` / `Shift+Tab` alterna golpes, `PageDown` / `PageUp` alterna poses, `Enter` reinicia, `Espaço` pausa, `.` avança um frame quando pausado, `Home` volta ao frame 0, `H` alterna hurtbox, `B` alterna hitbox, `P` alterna pivot/eixos, `D` alterna dummy e `A` alterna o fundo de arena.
+No Combat Lab, `Tab` / `Shift+Tab` alterna golpes, `PageDown` / `PageUp` alterna poses, `Enter` reinicia, `Espaço` pausa, `.` avança um frame quando pausado, `Home` volta ao frame 0, `H` alterna hurtbox, `B` alterna hitbox, `P` alterna pivot/eixos, `D` alterna dummy, `A` alterna o fundo de arena e `Esc` volta ao menu quando o lab foi aberto por `Training`.
 
 O Combat Lab abre com o fundo `Sirius` ligado para validar contraste de golpe/sprite contra cenário. Use `A` para remover o fundo e voltar ao grid limpo.
 
-## Preferências
+## Menu Principal
 
-O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navegar, `A/D` ou `←`/`→` para trocar personagem nas linhas de matchup, `Espaço` para ligar/desligar ou ciclar uma opção e `Enter` para começar ou voltar para a luta. Durante a luta, `Esc` volta para essa tela.
+O jogo abre primeiro no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem no submenu `Versus Setup`, e `Esc` para voltar de submenus, luta, Combat Lab ou Sprite Viewer. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar.
 
-Ao começar uma luta, os personagens entram em cena e depois aparece a contagem central `11`, `10`, `01`, `Fight!`. Enquanto a intro ou a contagem estiver ativa, ataques, movimento e projéteis ficam bloqueados. Depois que alguém vence, o cenário permanece o mesmo durante a pose final; a próxima arena só entra quando a luta seguinte começa com `R`/`Start` ou ao voltar da tela de preferências.
+Fluxo atual:
+
+- `Quick Fight`: inicia a luta com a configuração atual.
+- `Versus Setup`: troca Player 1 e Player 2.
+- `Training`: abre `Combat Lab` ou `Sprite Viewer`.
+- `Options`: liga/desliga gravação local, CPU, dano, HUD, ajuda, debug e gamepad.
+
+Ao começar uma luta, os personagens entram em cena e depois aparece a contagem central `11`, `10`, `01`, `Fight!`. Enquanto a intro ou a contagem estiver ativa, ataques, movimento e projéteis ficam bloqueados. Depois que alguém vence, o cenário permanece o mesmo durante a pose final; a próxima arena só entra quando a luta seguinte começa com `R`/`Start` ou ao voltar pelo menu.
 
 | Preferência | Padrão | O que testar |
 |---|---|---|
@@ -177,20 +187,24 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 15. Rust deve parecer mais responsivo em anti-air e throw.
 16. Duke deve controlar mais espaço com sweep, overhead e poke, mas ficar mais exposto quando erra.
 17. Go no Combat Lab, no menu ou na luta iniciada por `--p1 go`/`--p2 go` deve parecer mais rápido e curto que os golpes genéricos equivalentes, pagando com menos vida.
-18. Rust, Duke e Go devem ter projectiles com ritmo diferente: Rust médio, Duke pesado/lento, Go rápido/curto.
-19. A tela de preferências deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
-20. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
-21. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
-22. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Player 1.
-23. A opção `Player 2 recebe dano` desligada deve impedir perda de vida do Player 2.
-24. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
-25. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
-26. `R` ou `Menu` deve reiniciar a partida.
-27. `Esc` durante a luta deve voltar para a tela de preferências.
-28. Pulo com direção pressionada deve sair em diagonal.
-29. A vida deve chegar a zero e encerrar a luta.
-29. Ao iniciar a próxima luta depois de uma vitória, o cenário deve avançar uma vez no ciclo `Sirius -> Fortaleza Tech Coast -> Java Street -> Sirius`.
-30. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
+18. C no Combat Lab, no menu ou na luta iniciada por `--p1 c`/`--p2 c` deve aparecer na escala correta, com entrada, atlas de luta e projectile carregados.
+19. O projectile do C deve ler claramente como stream de bits, com `0` e `1` visiveis durante a luta.
+20. Rust, Duke, Go e C devem ter projectiles com ritmo diferente: Rust médio, Duke pesado/lento, Go rápido/curto, C médio/rápido.
+21. O submenu `Options` deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
+22. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
+23. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
+24. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Player 1.
+25. A opção `Player 2 recebe dano` desligada deve impedir perda de vida do Player 2.
+26. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
+27. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
+28. `R` ou `Menu` deve reiniciar a partida.
+29. `Esc` durante a luta deve voltar para o menu, sem fechar a janela.
+30. `Training > Combat Lab` deve abrir o laboratório e `Esc` deve voltar ao menu.
+31. `Training > Sprite Viewer` deve abrir o viewer e `Esc` deve voltar ao menu.
+32. Pulo com direção pressionada deve sair em diagonal.
+33. A vida deve chegar a zero e encerrar a luta.
+34. Ao iniciar a próxima luta depois de uma vitória, o cenário deve avançar uma vez no ciclo `Sirius -> Fortaleza Tech Coast -> Java Street -> Sirius`.
+35. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
 
 ## Combat Lab
 
@@ -202,6 +216,7 @@ cargo run -- --lab combat --character duke --move projectile
 cargo run -- --lab combat --character rust --move overhead
 cargo run -- --lab combat --character duke --move throw
 cargo run -- --lab combat --character go --move light_punch
+cargo run -- --lab combat --character c --move projectile
 ```
 
 Use o Combat Lab para verificar:
@@ -230,11 +245,13 @@ Controles do lab:
 | Alternar pivot/eixos | `P` |
 | Alternar dummy | `D` |
 | Alternar fundo de arena | `A` |
+| Voltar ao menu quando aberto por `Training` | `Esc` |
 
 ## Limitações conhecidas
 
-- A luta padrão ainda abre Rust x Java/Duke; Go entra na luta normal quando escolhido no menu ou por CLI usando atlas placeholder próprio de luta, entrada e projectile.
+- A luta padrão ainda abre Rust x Java/Duke; Go e C entram na luta normal quando escolhidos no menu ou por CLI usando atlas placeholder próprio de luta, entrada e projectile.
 - Rust e Duke ainda compartilham parte do kit genérico; o contraste principal já aparece em jab, heavy, anti-air, sweep, overhead e throw.
+- C ainda compartilha todo o kit próximo genérico; o objetivo imediato dele é validar atlas fluido, escala, pivot, entrada e projectile.
 - As arenas bitmap são placeholders gerados/derivados de referências e não devem ser tratadas como arte final.
 - O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.
 - Fireball no gamepad usa `RB` por enquanto; `RT` pode entrar depois quando tivermos leitura de gatilho com borda de pressionamento.

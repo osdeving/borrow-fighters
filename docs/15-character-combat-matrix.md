@@ -22,6 +22,7 @@ O foco atual é **Prototype 0.1**. Não estamos criando combo tree, meter, throw
 | Rust | all-rounder técnico | respostas limpas, anti-air confiável, throw rápido, dano moderado | precisa acertar decisões; não deve ganhar por alcance bruto |
 | Duke / Java | midrange pressure | presença longa, golpes pesados, pressão lenta e corporativa | startup/recovery maiores; whiff precisa ser punível |
 | Go | rushdown de concorrência | ações rápidas, pressão curta, ritmo alto | vida menor, alcance menor, sofre contra anti-air e espaço bem controlado |
+| C | low-level fundamentals placeholder | validar atlas fluido, escala humanoide e projectile de bitstream | ainda sem identidade própria; não deve ser tratado como balanceado |
 
 ## Rust
 
@@ -71,6 +72,22 @@ Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jo
 | no ar + `V` | `GoHopkick` | pressão aérea rápida e curta | 10 | 5f | 78 | 4f | anti-air, defender em pé, recuar |
 | `Q+F` | `CloseThrow` | throw universal enquanto não há assinatura | 10 | 7f | 46 | 16f | sair do alcance, pular |
 
+## C
+
+C entrou primeiro como teste de pipeline: dois atlas de referência com chroma key, mais frames por animação, entrada cinematográfica curta e projectile separado. A intenção futura pode ir para fundamentos de baixo nível, ponteiros, bitstream e risco de `segfault`, mas este corte ainda usa golpes genéricos para validar escala, pivots, leitura de animação e integração no menu/lab/luta.
+
+| Input | MoveId | Intenção | Dano | Startup | Alcance | Whiff | Contra-jogo |
+|---|---|---|---:|---:|---:|---:|---|
+| `F` | `LightPunch` | jab genérico enquanto a assinatura não existe | 8 | 5f | 58 | 4f | ficar fora do alcance, whiff punish |
+| `H` | `HeavyPunch` | golpe pesado genérico | 16 | 11f | 96 | 10f | bloquear, pular, punir whiff |
+| `V` | `Kick` | chute genérico de controle | 12 | 9f | 100 | 8f | bloquear, recuar, punir whiff |
+| `S+V` | `SweepKick` | low universal de teste | 11 | 10f | 112 | 12f | defender abaixado, pular |
+| frente + `H` | `OverheadPunch` | overhead universal de teste | 14 | 12f | 82 | 12f | defender em pé, interromper startup |
+| `S+H` | `RisingAntiAir` | anti-air genérico | 13 | 7f | 70 | 14f | baitar e punir |
+| no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
+| no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
+| `Q+F` | `CloseThrow` | throw universal enquanto não há assinatura | 10 | 7f | 46 | 16f | sair do alcance, pular |
+
 ## Especiais de Projectile
 
 Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ainda é o mesmo botão de especial do protótipo, mas dano, tamanho, velocidade, cooldown, reação e limite de alcance já vêm do `CharacterSpec`.
@@ -80,6 +97,7 @@ Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ai
 | Rust | `RUST_PROJECTILE_SPEC` | gear honesto de controle médio, sem ganhar por spam | 8 | 340 px/s | 57f | tela inteira | bloquear chip, pular, aproximar no cooldown |
 | Duke / Java | `DUKE_PROJECTILE_SPEC` | bean pesado para ocupar espaço e forçar resposta lenta | 10 | 270 px/s | 72f | tela inteira | pular mais cedo, ganhar terreno durante recovery, punir se Duke erra leitura |
 | Go | `GO_PROJECTILE_SPEC` | burst rápido para cobrir entrada sem virar zoner | 6 | 430 px/s | 44f | 320 px | ficar fora do curto alcance, bloquear pouco dano, desafiar depois do burst |
+| C | `C_PROJECTILE_SPEC` | bitstream médio/rápido para validar asset separado e origem do especial | 8 | 360 px/s | 56f | tela inteira | bloquear chip, pular, aproximar no cooldown |
 
 ## Matchups de Intenção
 
@@ -88,19 +106,22 @@ Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ai
 | Rust x Duke | Rust tenta responder e punir; Duke tenta dominar média distância. | Duke não pode ganhar neutral só por alcance; Rust não pode anular tudo com anti-air/throw rápido. |
 | Rust x Go | Rust tenta controlar aproximação com respostas limpas; Go tenta entrar antes do Rust estabilizar. | Go não pode virar pressão sem resposta; Rust não pode impedir toda aproximação. |
 | Duke x Go | Duke tenta manter Go fora com alcance; Go tenta punir whiffs e ocupar o corpo-a-corpo. | Se Duke erra e não é punido, Go perde identidade; se Go entra sem risco, Duke perde função. |
+| C x qualquer | C valida leitura visual e integração do atlas sem ainda prometer matchup. | Não tirar conclusão de balanceamento até C receber golpes próprios. |
 
 ## Critérios de Playtest
 
 1. Rust deve conseguir responder salto com `RustLifetimeAntiAir` sem parecer invencível.
 2. Duke deve controlar mais espaço com sweep/overhead/poke, mas deve sofrer quando erra.
 3. Go deve ser percebido como mais rápido, mas não como mais seguro.
-4. O jogador deve conseguir explicar por que tomou dano: low, overhead, throw, anti-air ou projectile.
-5. CPU x CPU deve mostrar diferença de ritmo, sem parecer dois personagens espelhados.
-6. Nenhum golpe deve resolver neutral, defesa e pressão ao mesmo tempo.
+4. C deve aparecer em escala coerente com Rust/Duke e com projectile saindo de ponto visualmente defensável.
+5. O jogador deve conseguir explicar por que tomou dano: low, overhead, throw, anti-air ou projectile.
+6. CPU x CPU deve mostrar diferença de ritmo, sem parecer dois personagens espelhados.
+7. Nenhum golpe deve resolver neutral, defesa e pressão ao mesmo tempo.
 
 ## Próximos Cortes
 
 - Decidir se Rust precisa de uma ferramenta defensiva futura como `ownership_counter`.
 - Playtestar se o `DUKE_PROJECTILE_SPEC` pesado abre espaço sem virar spam lento sem resposta.
 - Playtestar se o `GO_PROJECTILE_SPEC` curto ajuda aproximação sem transformar Go em zoner.
+- Criar identidade mecânica real para C antes de balancear matchups.
 - Avaliar hitbox/hurtbox por frame quando os sprites finais começarem a limitar o tuning.

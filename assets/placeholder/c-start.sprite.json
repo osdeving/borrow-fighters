@@ -1,0 +1,225 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "c-start-atlas.png",
+  "source": "assets/references/langc-03.png",
+  "cell": {
+    "w": 384,
+    "h": 256
+  },
+  "default_pivot": {
+    "x": 112,
+    "y": 236
+  },
+  "scale": 1.16,
+  "frames": [
+    {
+      "name": "spawn_00",
+      "clip": "spawn",
+      "duration_ms": 110,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 90,
+        "y": 0,
+        "w": 161,
+        "h": 195
+      },
+      "trimmed_bounds": {
+        "x": 28,
+        "y": 25,
+        "w": 168,
+        "h": 211
+      },
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "spawn_01",
+      "clip": "spawn",
+      "duration_ms": 135,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 253,
+        "y": 0,
+        "w": 138,
+        "h": 196
+      },
+      "trimmed_bounds": {
+        "x": 41,
+        "y": 25,
+        "w": 142,
+        "h": 220
+      },
+      "frame": {
+        "x": 384,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "spawn_02",
+      "clip": "spawn",
+      "duration_ms": 155,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 411,
+        "y": 0,
+        "w": 127,
+        "h": 196
+      },
+      "trimmed_bounds": {
+        "x": 48,
+        "y": 24,
+        "w": 126,
+        "h": 222
+      },
+      "frame": {
+        "x": 768,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "spawn_03",
+      "clip": "spawn",
+      "duration_ms": 125,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 534,
+        "y": 0,
+        "w": 150,
+        "h": 196
+      },
+      "trimmed_bounds": {
+        "x": 34,
+        "y": 24,
+        "w": 154,
+        "h": 212
+      },
+      "frame": {
+        "x": 1152,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "spawn_04",
+      "clip": "spawn",
+      "duration_ms": 130,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 685,
+        "y": 0,
+        "w": 127,
+        "h": 196
+      },
+      "trimmed_bounds": {
+        "x": 47,
+        "y": 21,
+        "w": 128,
+        "h": 224
+      },
+      "frame": {
+        "x": 0,
+        "y": 256,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "spawn_05",
+      "clip": "spawn",
+      "duration_ms": 150,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 837,
+        "y": 0,
+        "w": 135,
+        "h": 196
+      },
+      "trimmed_bounds": {
+        "x": 42,
+        "y": 24,
+        "w": 137,
+        "h": 212
+      },
+      "frame": {
+        "x": 384,
+        "y": 256,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "spawn_06",
+      "clip": "spawn",
+      "duration_ms": 210,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "source_crop": {
+        "x": 990,
+        "y": 0,
+        "w": 135,
+        "h": 196
+      },
+      "trimmed_bounds": {
+        "x": 42,
+        "y": 24,
+        "w": 138,
+        "h": 212
+      },
+      "frame": {
+        "x": 768,
+        "y": 256,
+        "w": 384,
+        "h": 256
+      }
+    }
+  ],
+  "clips": [
+    {
+      "name": "spawn",
+      "loop": false,
+      "frames": [
+        "spawn_00",
+        "spawn_01",
+        "spawn_02",
+        "spawn_03",
+        "spawn_04",
+        "spawn_05",
+        "spawn_06"
+      ]
+    }
+  ],
+  "notes": [
+    "Extracted from the INTRO row of the C reference sheet; not final authored animation.",
+    "Small generated 0/1 flourishes were added to make the entrance read as C/linker energy.",
+    "This atlas is presentation-only and must not carry combat metadata."
+  ]
+}

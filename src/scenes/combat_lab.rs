@@ -551,6 +551,7 @@ fn slot_for(character: CharacterId) -> PlayerSlot {
         CharacterId::Rust => PlayerSlot::One,
         CharacterId::Duke => PlayerSlot::Two,
         CharacterId::Go => PlayerSlot::One,
+        CharacterId::C => PlayerSlot::Two,
     }
 }
 

@@ -2,7 +2,7 @@
 
 ## Status
 
-Em implementacao. O runtime ja carrega manifests para Rust, Duke, animacoes de entrada, clips de luta, pivots, duracoes por frame e fallback greybox.
+Em implementacao. O runtime ja carrega manifests para Rust, Duke, Go, C, animacoes de entrada, clips de luta, pivots, duracoes por frame e fallback greybox.
 
 ## Objetivo
 
@@ -18,6 +18,8 @@ Exemplo real:
 - `assets/placeholder/duke-fighter.sprite.json`
 - `assets/placeholder/rust-start.sprite.json`
 - `assets/placeholder/duke-start.sprite.json`
+- `assets/placeholder/c-fighter.sprite.json`
+- `assets/placeholder/c-start.sprite.json`
 
 Campos principais:
 
@@ -98,12 +100,13 @@ O primeiro corte vive em `src/engine/sprites/`:
 O personagem Rust usa `assets/placeholder/rust-fighter.sprite.json`.
 O Player 2/Duke usa `assets/placeholder/duke-fighter.sprite.json`.
 Go usa `assets/placeholder/go-fighter.sprite.json`.
+C usa `assets/placeholder/c-fighter.sprite.json`, extraido dos atlas de referencia `assets/references/langc-03.png` e `assets/references/langc-04.png`.
 
 O tamanho em jogo nao deve depender da resolucao do PNG. Ajuste `scale` e `frames[].pivot` no manifesto; o renderer de luta e o Sprite Combat Viewer consomem os mesmos valores. O padrao atual de altura, largura e arena fica em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md).
 
 O corpo fisico de gameplay fica em [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json). Esse arquivo controla `width`, `standing_height` e `crouch_height` por personagem. Ele define o retangulo base usado por colisao corpo-corpo, hurtboxes compostas e alinhamento do sprite. `frames[].combat` pode substituir hitbox/hurtbox por frame quando houver metadata revisada.
 
-No corte atual, Rust, Duke e Go ja declaram `frames[].combat.projectile_origin` no primeiro frame do clip `special`, usado pelo runtime para alinhar o nascimento do projectile com a mao do personagem. Rust tambem possui `frames[].combat.hitboxes[]` iniciais para `Borrow Jab`, heavy punch e kick, calibradas para reproduzir o alcance atual do `MoveSpec` antes de qualquer ajuste de balanceamento. Outras hitboxes e hurtboxes por frame ainda devem ser preenchidas pelo Sprite Combat Viewer antes de substituir alcances de soco/chute em producao.
+No corte atual, Rust, Duke, Go e C ja declaram `frames[].combat.projectile_origin` no primeiro frame do clip `special`, usado pelo runtime para alinhar o nascimento do projectile com a mao do personagem. Rust tambem possui `frames[].combat.hitboxes[]` iniciais para `Borrow Jab`, heavy punch e kick, calibradas para reproduzir o alcance atual do `MoveSpec` antes de qualquer ajuste de balanceamento. Outras hitboxes e hurtboxes por frame ainda devem ser preenchidas pelo Sprite Combat Viewer antes de substituir alcances de soco/chute em producao.
 
 O runtime tambem usa:
 
@@ -117,12 +120,14 @@ As animacoes de entrada atuais vivem em manifests separados para nao misturar fr
 - `assets/placeholder/rust-start-atlas.png`
 - `assets/placeholder/duke-start-atlas.png`
 - `assets/placeholder/go-start-atlas.png`
+- `assets/placeholder/c-start-atlas.png`
 
 Assets relacionados ao slice atual:
 
 - `assets/placeholder/rust-gear-projectile.png`
 - `assets/placeholder/duke-bean-projectile.png`
 - `assets/placeholder/go-channel-projectile.png`
+- `assets/placeholder/c-bitstream-projectile.png`
 - `assets/placeholder/arena-sirius.png`
 - `assets/placeholder/arena-fortaleza.png`
 - `assets/placeholder/arena-java-street.png`
@@ -143,6 +148,7 @@ Abrir o viewer:
 ```bash
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip special --character c --move projectile
 ```
 
 Atalhos:
@@ -186,7 +192,7 @@ Atalhos:
 | Alternar bounds | `B` |
 | Resetar posicao | `R` |
 
-O corte atual e viewer com ajuste controlado de escala, pivot, corpo fisico e metadata visual de `frames[].combat`. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetoria prevista de projectile, timeline visual e metadata opcional de `frames[].combat`. A camada runtime de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go pelo nome do manifesto e tambem permite alternar personagem/golpe sem reiniciar a ferramenta. `N` substitui a metadata do frame atual por um rascunho baseado no overlay runtime; depois o artista/dev cria boxes com `H`/`J`, remove com `Delete`, ajusta as boxes e a origem com mouse e salva com `Ctrl+S`. `Enter` tenta sincronizar o clip visual com o golpe atual quando o manifesto possui um clip conhecido como `punch_light`, `punch_heavy` ou `special`. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
+O corte atual e viewer com ajuste controlado de escala, pivot, corpo fisico e metadata visual de `frames[].combat`. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetoria prevista de projectile, timeline visual e metadata opcional de `frames[].combat`. A camada runtime de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go/C pelo nome do manifesto e tambem permite alternar personagem/golpe sem reiniciar a ferramenta. `N` substitui a metadata do frame atual por um rascunho baseado no overlay runtime; depois o artista/dev cria boxes com `H`/`J`, remove com `Delete`, ajusta as boxes e a origem com mouse e salva com `Ctrl+S`. `Enter` tenta sincronizar o clip visual com o golpe atual quando o manifesto possui um clip conhecido como `punch_light`, `punch_heavy` ou `special`. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
 
 ## Pontos ainda em aberto
 

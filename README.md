@@ -47,7 +47,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`docs/12-technical-combat-guide.md`](docs/12-technical-combat-guide.md): guia técnico de combate, hitbox/hurtbox, Combat Lab e rastreio de código.
 - [`docs/13-combat-design-roadmap.md`](docs/13-combat-design-roadmap.md): plano técnico para golpes, balanceamento e Combat Lab.
 - [`docs/14-audio-pipeline.md`](docs/14-audio-pipeline.md): motor de áudio por eventos, manifesto JSON e convenções de clips.
-- [`docs/15-character-combat-matrix.md`](docs/15-character-combat-matrix.md): matriz de identidade mecânica e tuning inicial de Rust, Duke e Go.
+- [`docs/15-character-combat-matrix.md`](docs/15-character-combat-matrix.md): matriz de identidade mecânica e tuning inicial de Rust, Duke, Go e C.
 - [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md): ferramenta isolada para inspecionar sprites e preparar hitbox/hurtbox data-driven.
 - [`docs/17-visual-scale-and-stage-metrics.md`](docs/17-visual-scale-and-stage-metrics.md): padrao tecnico de tamanho em tela, escala de sprite e largura de arena.
 - [`docs/09-ai-collaboration.md`](docs/09-ai-collaboration.md): como Codex, Claude e skills devem navegar o projeto.
@@ -119,7 +119,7 @@ As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
 
 ## Rodando o protótipo greybox
 
-O código jogável atual implementa um greybox local para validar o básico: tela inicial de ajustes, arenas brasileiras em rotação começando pelo Sirius e trocando apenas no início da próxima luta, intro cinematográfica com contagem `11` / `10` / `01` / `Fight!`, dois personagens com spritesheet placeholder, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, varredura, overhead, anti-air, agarrão curto, ataques aéreos, fireball, primeira identidade mecânica de Rust/Duke/Go por frame data, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, stun, pushback, whiff recovery, vida, vitória e restart.
+O código jogável atual implementa um greybox local para validar o básico: menu principal com submenus de versus, treino e opções, arenas brasileiras em rotação começando pelo Sirius e trocando apenas no início da próxima luta, intro cinematográfica com contagem `11` / `10` / `01` / `Fight!`, personagens com spritesheet placeholder, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, varredura, overhead, anti-air, agarrão curto, ataques aéreos, fireball, primeira identidade mecânica de Rust/Duke/Go por frame data, C como novo atlas jogável ainda em tuning genérico, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, stun, pushback, whiff recovery, vida, vitória e restart.
 
 O runtime também já está preparado para áudio por eventos. O manifesto fica em [`assets/audio/audio_manifest.json`](assets/audio/audio_manifest.json), e o guia técnico fica em [`docs/14-audio-pipeline.md`](docs/14-audio-pipeline.md). O pacote inicial inclui SFX/UI/vozes de anúncio, contagem pré-luta e música de menu/combate com fontes CC0 registradas em [`assets/audio/ATTRIBUTION.md`](assets/audio/ATTRIBUTION.md).
 
@@ -134,13 +134,21 @@ Comandos:
 cargo run
 cargo run -- --fight --p1 go --p2 duke
 cargo run -- --player-one rust --player-two go
+cargo run -- --fight --p1 c --p2 rust
 ```
 
-O jogo abre primeiro uma tela de preferências. Use `Setas` ou `W/S` para navegar, `A/D` ou `←`/`→` para trocar personagem nas linhas de matchup, `Espaço` para ligar/desligar ou ciclar uma opção e `Enter` para começar ou voltar para a luta. Durante a luta, `Esc` volta para essa tela.
+O jogo abre primeiro no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem no submenu `Versus Setup`, e `Esc` para voltar de submenus, luta, Combat Lab ou Sprite Viewer. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar da janela.
+
+O menu principal mantém a primeira tela simples:
+
+- `Quick Fight`: inicia a luta com a configuração atual.
+- `Versus Setup`: escolhe Player 1 e Player 2.
+- `Training`: abre `Combat Lab` ou `Sprite Viewer`.
+- `Options`: liga/desliga gravação local e feature flags de protótipo.
 
 Ao iniciar uma luta, o jogo roda a entrada dos personagens e depois bloqueia input durante a contagem central `11`, `10`, `01`, `Fight!`. A arena só avança para a próxima rotação quando uma nova luta é iniciada depois de uma vitória, para preservar a pose final no mesmo cenário.
 
-Por padrão, a luta normal inicia `Rust` contra `Duke / Java`. A tela de preferências já permite ciclar Player 1 e Player 2 entre Rust, Duke e Go. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang` ou `gopher`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pela tela de preferências. Go já possui atlas placeholder próprio para luta, entrada cinematográfica e projectile, além de vida, loadout e frame data próprios.
+Por padrão, a luta normal inicia `Rust` contra `Duke / Java`. O submenu `Versus Setup` permite ciclar Player 1 e Player 2 entre Rust, Duke, Go e C. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang` ou `clang`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pelo menu. Go já possui atlas placeholder próprio para luta, entrada cinematográfica e projectile, além de vida, loadout e frame data próprios. C já possui atlas, entrada e projectile extraídos dos arquivos de referência com chroma key, mas ainda usa loadout genérico até receber identidade mecânica própria.
 
 Para abrir o laboratório de combate direto em uma cena limpa:
 
@@ -150,21 +158,23 @@ cargo run -- --lab combat --character duke --move projectile
 cargo run -- --lab combat --character rust --move sweep
 cargo run -- --lab combat --character duke --move throw
 cargo run -- --lab combat --character go --move kick
+cargo run -- --lab combat --character c --move projectile
 cargo run -- --lab combat --character rust --pose block
 ```
 
-No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp` para alternar pose, `Enter` para repetir, `Espaço` para pausar, `.` para avançar 1 frame quando pausado, `Home` para voltar ao frame 0, `H` para hurtbox, `B` para hitbox, `P` para pivot/eixos, `D` para dummy de contato e `A` para mostrar/esconder o fundo de arena. O overlay mostra frame data, vantagem estimada, pushback, whiff recovery e distância após pushback. Valores aceitos em `--character`: `rust`, `rustacean`, `duke`, `java`, `go`, `golang` ou `gopher`. Valores aceitos em `--move`: `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw` e `projectile`. Valores aceitos em `--pose`: `move`, `idle`, `crouch`, `jump`, `block`, `hit` e `victory`.
+No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp` para alternar pose, `Enter` para repetir, `Espaço` para pausar, `.` para avançar 1 frame quando pausado, `Home` para voltar ao frame 0, `H` para hurtbox, `B` para hitbox, `P` para pivot/eixos, `D` para dummy de contato, `A` para mostrar/esconder o fundo de arena e `Esc` para voltar ao menu quando aberto pelo submenu `Training`. O overlay mostra frame data, vantagem estimada, pushback, whiff recovery e distância após pushback. Valores aceitos em `--character`: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang` ou `clang`. Valores aceitos em `--move`: `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw` e `projectile`. Valores aceitos em `--pose`: `move`, `idle`, `crouch`, `jump`, `block`, `hit` e `victory`.
 
 Para abrir o viewer de sprites direto em uma ferramenta isolada:
 
 ```bash
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip special --character c --move projectile
 ```
 
-No Sprite Combat Viewer, use o mouse para inspecionar coordenadas locais do frame, arrastar personagem/dummy e ajustar alças de `frames[].combat`. `N` gera um rascunho de metadata a partir do overlay runtime do golpe selecionado, `Tab` / `Shift+Tab` alterna clip, `Enter` sincroniza clip com golpe, `C` / `Shift+C` alterna personagem de combate, `[` / `]` alterna golpe, `.` / `,` avança ou volta frame, `Espaço` pausa, mouse wheel controla zoom, `0` reseta zoom, `=` / `-` ajusta `scale`, `Setas` ou `Shift+Setas` move o `pivot`, `Ctrl+Setas` ajusta largura/altura do corpo físico, `Ctrl+Shift+Setas` ajusta altura abaixada, `Ctrl+S` salva manifestos de tuning, `O` mostra/esconde dummy, `M` mostra/esconde boxes de combate, `T` mostra/esconde trajetória prevista do projectile, `F5` recarrega manifesto/atlas, `F12` salva screenshot em `target/sprite-viewer-capture.png`, `F9`/`F10` gravam um MP4 local, `G` alterna grade, `P` alterna pivot, `B` alterna bounds e `R` reseta posição. O padrão de escala fica em [`docs/17-visual-scale-and-stage-metrics.md`](docs/17-visual-scale-and-stage-metrics.md), e o roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md).
+No Sprite Combat Viewer, use o mouse para inspecionar coordenadas locais do frame, arrastar personagem/dummy e ajustar alças de `frames[].combat`. `N` gera um rascunho de metadata a partir do overlay runtime do golpe selecionado, `Tab` / `Shift+Tab` alterna clip, `Enter` sincroniza clip com golpe, `C` / `Shift+C` alterna personagem de combate, `[` / `]` alterna golpe, `.` / `,` avança ou volta frame, `Espaço` pausa, mouse wheel controla zoom, `0` reseta zoom, `=` / `-` ajusta `scale`, `Setas` ou `Shift+Setas` move o `pivot`, `Ctrl+Setas` ajusta largura/altura do corpo físico, `Ctrl+Shift+Setas` ajusta altura abaixada, `Ctrl+S` salva manifestos de tuning, `O` mostra/esconde dummy, `M` mostra/esconde boxes de combate, `T` mostra/esconde trajetória prevista do projectile, `F5` recarrega manifesto/atlas, `F12` salva screenshot em `target/sprite-viewer-capture.png`, `F9`/`F10` gravam um MP4 local, `G` alterna grade, `P` alterna pivot, `B` alterna bounds, `R` reseta posição e `Esc` volta ao menu quando aberto por `Training`. O padrão de escala fica em [`docs/17-visual-scale-and-stage-metrics.md`](docs/17-visual-scale-and-stage-metrics.md), e o roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md).
 
-Preferências disponíveis:
+Configurações disponíveis em `Versus Setup` e `Options`:
 
 | Preferência | Padrão | Efeito |
 |---|---|---|
@@ -205,7 +215,7 @@ O primeiro gamepad conectado controla o Player 1 quando a IA do Player 1 estiver
 
 Quando ambos os jogadores usam IA, Rust e Java usam perfis diferentes para evitar movimentos espelhados: um tende a jogar mais em média distância e o outro pressiona mais de perto. A IA anda, pula, bloqueia, soca, chuta, tenta varredura, overhead, anti-air, agarrão curto, ataque aéreo e especial, mas ainda é determinística e serve para playtest, não para desafio competitivo.
 
-Captura local: `F9` inicia uma gravação MP4 do framebuffer do jogo com áudio e `F10` para/salva em `captures/`. A tela de ajustes também tem a linha `Gravacao local`, útil quando o ambiente captura mal teclas de função. O corte atual envia frames brutos do Raylib para `ffmpeg` e usa PulseAudio para áudio; no WSLg o áudio padrão é `RDPSink.monitor`. Se a fonte de áudio local tiver outro nome, rode com `BORROW_FIGHTERS_CAPTURE_AUDIO_SOURCE=<fonte> cargo run`.
+Captura local: `F9` inicia uma gravação MP4 do framebuffer do jogo com áudio e `F10` para/salva em `captures/`. O submenu `Options` também tem a linha `Local Recording`, útil quando o ambiente captura mal teclas de função. O corte atual envia frames brutos do Raylib para `ffmpeg` e usa PulseAudio para áudio; no WSLg o áudio padrão é `RDPSink.monitor`. Se a fonte de áudio local tiver outro nome, rode com `BORROW_FIGHTERS_CAPTURE_AUDIO_SOURCE=<fonte> cargo run`.
 
 O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um controle Bluetooth estiver pareado mas aparecer `OFF`, confirme se o sistema que executa `cargo run` expõe joystick/gamepad para o Raylib. Em WSL ou ambiente remoto, pode ser necessário testar no host nativo ou encaminhar o dispositivo.
 
@@ -215,5 +225,8 @@ Assets placeholder:
 - [`assets/placeholder/arena-fortaleza.png`](assets/placeholder/arena-fortaleza.png): arena de rotação.
 - [`assets/placeholder/arena-java-street.png`](assets/placeholder/arena-java-street.png): arena de rotação.
 - [`assets/placeholder/fighter-greybox-spritesheet.png`](assets/placeholder/fighter-greybox-spritesheet.png): poses simples de lutador para testar leitura de movimento e golpes sem debug visual.
+- [`assets/placeholder/c-fighter-atlas.png`](assets/placeholder/c-fighter-atlas.png): atlas placeholder jogável do C.
+- [`assets/placeholder/c-start-atlas.png`](assets/placeholder/c-start-atlas.png): entrada cinematográfica placeholder do C.
+- [`assets/placeholder/c-bitstream-projectile.png`](assets/placeholder/c-bitstream-projectile.png): projectile placeholder do C com `0` e `1` legíveis.
 
 Guia completo de teste: [`docs/10-greybox-playtest.md`](docs/10-greybox-playtest.md).

@@ -20,9 +20,17 @@
     {
       "id": "go",
       "body": {
-        "width": 92.0,
-        "standing_height": 156.0,
-        "crouch_height": 88.0
+        "width": 76.0,
+        "standing_height": 168.0,
+        "crouch_height": 96.0
+      }
+    },
+    {
+      "id": "c",
+      "body": {
+        "width": 76.0,
+        "standing_height": 168.0,
+        "crouch_height": 96.0
       }
     }
   ]

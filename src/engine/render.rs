@@ -3,6 +3,7 @@
 //! Rendering intentionally uses primitive shapes and debug overlays so gameplay
 //! problems are visible before art production starts.
 
+use raylib::core::text::RaylibFont;
 use raylib::prelude::*;
 use std::ffi::CString;
 
@@ -13,7 +14,7 @@ pub use combat_lab::draw_combat_lab;
 pub use sprite_viewer::{draw_sprite_viewer, draw_sprite_viewer_error};
 
 use crate::characters::{CharacterId, character_spec};
-use crate::combat::fighter::{AttackPhase, Facing, PlayerSlot};
+use crate::combat::fighter::{AttackPhase, Facing, Fighter, PlayerSlot};
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH};
 use crate::engine::assets::{GameAssets, SpriteAtlasAsset};
 use crate::engine::sprites;
@@ -21,13 +22,14 @@ use crate::game::arena::ArenaId;
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags, PREFERENCE_FLAGS};
 use crate::game::world::{MatchOutcome, World};
 use crate::math::rect::Rect;
-use crate::scenes::preferences::PreferencesMenu;
+use crate::scenes::preferences::{MenuPage, PreferencesMenu};
 
 const BACKGROUND: Color = Color::new(18, 20, 26, 255);
 const FLOOR: Color = Color::new(72, 76, 88, 255);
 const PLAYER_ONE: Color = Color::new(112, 181, 255, 255);
 const PLAYER_TWO: Color = Color::new(255, 178, 104, 255);
 const PLAYER_GO: Color = Color::new(96, 220, 190, 255);
+pub(super) const PLAYER_C: Color = Color::new(126, 194, 255, 255);
 const BODY_OUTLINE: Color = Color::new(238, 241, 247, 255);
 const HURTBOX: Color = Color::new(105, 240, 174, 255);
 const HITBOX: Color = Color::new(255, 82, 82, 255);
@@ -47,6 +49,11 @@ const PANEL: Color = Color::new(12, 14, 20, 218);
 const PANEL_BORDER: Color = Color::new(122, 132, 150, 255);
 const SELECTED_ROW: Color = Color::new(42, 49, 64, 230);
 const RECORDING: Color = Color::new(255, 55, 72, 255);
+const MENU_PANEL_STRONG: Color = Color::new(8, 14, 28, 238);
+const MENU_ACCENT: Color = Color::new(0, 202, 255, 255);
+const MENU_ACCENT_ALT: Color = Color::new(255, 191, 67, 255);
+const MENU_ROW: Color = Color::new(10, 20, 39, 218);
+const MENU_ROW_SELECTED: Color = Color::new(19, 52, 85, 240);
 
 /// Draw target accepted by game renderers, either the window or a render texture.
 pub trait DrawTarget: RaylibDraw {}
@@ -161,131 +168,23 @@ pub fn draw_fight(
     }
 }
 
-/// Draws the initial preferences screen.
+/// Draws the main menu and nested prototype setup screens.
 pub fn draw_preferences(draw: &mut impl DrawTarget, options: PreferencesDrawOptions<'_>) {
     draw.clear_background(BACKGROUND);
     draw_arena(draw, options.assets.arenas.get(options.arena));
-    draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(0, 0, 0, 138));
+    draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(0, 0, 0, 164));
+    draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(4, 9, 22, 68));
 
-    let panel_x = 88;
-    let panel_y = 48;
-    let panel_width = WINDOW_WIDTH - panel_x * 2;
-    let panel_height = WINDOW_HEIGHT - panel_y - 42;
-    draw.draw_rectangle(panel_x, panel_y, panel_width, panel_height, PANEL);
-    draw.draw_rectangle_lines(panel_x, panel_y, panel_width, panel_height, PANEL_BORDER);
+    let font = options.assets.menu_font.as_ref();
+    draw_menu_side_fighters(draw, options.assets);
+    draw_menu_chrome(draw, font, &options);
 
-    draw.draw_text("Borrow Fighters", panel_x + 32, panel_y + 26, 30, UI_TEXT);
-    draw.draw_text(
-        "Ajustes do prototipo",
-        panel_x + 32,
-        panel_y + 62,
-        18,
-        UI_MUTED,
-    );
-
-    let status = format!(
-        "Joystick Raylib: P1 {} | P2 {}",
-        connected_label(options.gamepad_status.player_one),
-        connected_label(options.gamepad_status.player_two)
-    );
-    let status_width = measure_text_width(&status, 16);
-    draw.draw_text(
-        &status,
-        panel_x + panel_width - status_width - 32,
-        panel_y + 34,
-        16,
-        UI_MUTED,
-    );
-
-    let row_start_y = panel_y + 80;
-    let row_spacing = 30;
-
-    draw_menu_row(
-        draw,
-        MenuRow {
-            x: panel_x + 32,
-            y: row_start_y,
-            width: panel_width - 64,
-            selected: options.menu.selected() == 0,
-            label: "Comecar luta",
-            description: "Enter/Menu inicia ou volta para a luta.",
-            checked: None,
-            value: None,
-        },
-    );
-
-    draw_menu_row(
-        draw,
-        MenuRow {
-            x: panel_x + 32,
-            y: row_start_y + PreferencesMenu::PLAYER_ONE_CHARACTER_ROW as i32 * row_spacing,
-            width: panel_width - 64,
-            selected: options.menu.selected() == PreferencesMenu::PLAYER_ONE_CHARACTER_ROW,
-            label: "Personagem Player 1",
-            description: "Esquerda/direita ou Espaco alterna.",
-            checked: None,
-            value: Some(character_spec(options.player_one_character).display_name),
-        },
-    );
-    draw_menu_row(
-        draw,
-        MenuRow {
-            x: panel_x + 32,
-            y: row_start_y + PreferencesMenu::PLAYER_TWO_CHARACTER_ROW as i32 * row_spacing,
-            width: panel_width - 64,
-            selected: options.menu.selected() == PreferencesMenu::PLAYER_TWO_CHARACTER_ROW,
-            label: "Personagem Player 2",
-            description: "Esquerda/direita ou Espaco alterna.",
-            checked: None,
-            value: Some(character_spec(options.player_two_character).display_name),
-        },
-    );
-
-    draw_menu_row(
-        draw,
-        MenuRow {
-            x: panel_x + 32,
-            y: row_start_y + PreferencesMenu::RECORDING_ROW as i32 * row_spacing,
-            width: panel_width - 64,
-            selected: options.menu.selected() == PreferencesMenu::RECORDING_ROW,
-            label: "Gravacao local",
-            description: "Espaco inicia/para. F9/F10 tambem funcionam.",
-            checked: Some(options.recording),
-            value: Some(if options.recording { "REC" } else { "parada" }),
-        },
-    );
-
-    for (index, flag) in PREFERENCE_FLAGS.iter().copied().enumerate() {
-        let row = index + PreferencesMenu::FIRST_FLAG_ROW;
-        draw_menu_row(
-            draw,
-            MenuRow {
-                x: panel_x + 32,
-                y: row_start_y + row as i32 * row_spacing,
-                width: panel_width - 64,
-                selected: options.menu.selected() == row,
-                label: flag.label(),
-                description: flag.description(),
-                checked: Some(options.flags.enabled(flag)),
-                value: None,
-            },
-        );
+    match options.menu.page() {
+        MenuPage::Main => draw_main_menu(draw, font, &options),
+        MenuPage::Versus => draw_versus_menu(draw, font, &options),
+        MenuPage::Training => draw_training_menu(draw, font, &options),
+        MenuPage::Options => draw_options_menu(draw, font, &options),
     }
-
-    draw.draw_text(
-        "Setas/W/S navegam | A/D ajusta personagem | Espaco alterna | Enter comeca",
-        panel_x + 32,
-        panel_y + panel_height - 34,
-        15,
-        UI_MUTED,
-    );
-    draw.draw_text(
-        "F9 inicia gravacao | F10 para e salva em captures/",
-        panel_x + 32,
-        panel_y + panel_height - 16,
-        13,
-        UI_MUTED,
-    );
 }
 
 /// Draws the global local-recording status over any scene.
@@ -335,44 +234,552 @@ pub struct PreferencesDrawOptions<'a> {
     pub assets: &'a GameAssets,
 }
 
-struct MenuRow<'a> {
+#[derive(Clone, Copy)]
+struct MenuPanel {
     x: i32,
     y: i32,
     width: i32,
+    height: i32,
+}
+
+struct MenuLine<'a> {
+    label: &'a str,
+    description: &'a str,
+    value: Option<&'a str>,
+    checked: Option<bool>,
+}
+
+fn draw_menu_chrome(
+    draw: &mut impl DrawTarget,
+    font: Option<&Font>,
+    options: &PreferencesDrawOptions<'_>,
+) {
+    draw_centered_menu_text(
+        draw,
+        font,
+        "BORROW FIGHTERS",
+        WINDOW_WIDTH / 2,
+        34,
+        50.0,
+        UI_TEXT,
+    );
+    draw_centered_menu_text(
+        draw,
+        font,
+        "CODE. COMMIT. COMBO.",
+        WINDOW_WIDTH / 2,
+        89,
+        18.0,
+        MENU_ACCENT,
+    );
+
+    let status = format!(
+        "PADS  P1 {}  P2 {}",
+        connected_label(options.gamepad_status.player_one),
+        connected_label(options.gamepad_status.player_two)
+    );
+    let width = menu_text_width(font, &status, 14.0, 1.0);
+    draw_menu_text(
+        draw,
+        font,
+        &status,
+        WINDOW_WIDTH - width - 28,
+        20,
+        14.0,
+        UI_MUTED,
+    );
+}
+
+fn draw_main_menu(
+    draw: &mut impl DrawTarget,
+    font: Option<&Font>,
+    options: &PreferencesDrawOptions<'_>,
+) {
+    let panel = MenuPanel {
+        x: 300,
+        y: 128,
+        width: 424,
+        height: 380,
+    };
+    draw_menu_panel(draw, panel);
+
+    let rows = [
+        MenuLine {
+            label: "QUICK FIGHT",
+            description: "Inicia a luta com a configuracao atual.",
+            value: None,
+            checked: None,
+        },
+        MenuLine {
+            label: "VERSUS SETUP",
+            description: "Escolha personagens antes da luta.",
+            value: None,
+            checked: None,
+        },
+        MenuLine {
+            label: "TRAINING",
+            description: "Combat Lab e Sprite Viewer.",
+            value: None,
+            checked: None,
+        },
+        MenuLine {
+            label: "OPTIONS",
+            description: "Flags de prototipo, HUD, CPU e gravacao.",
+            value: None,
+            checked: None,
+        },
+        MenuLine {
+            label: "EXIT",
+            description: "Fecha o prototipo.",
+            value: None,
+            checked: None,
+        },
+    ];
+
+    draw_menu_rows(
+        draw,
+        font,
+        &rows,
+        options.menu.selected(),
+        MenuRowsLayout {
+            panel,
+            row_height: 52,
+            start_offset_y: 86,
+            large_labels: true,
+            show_descriptions: false,
+        },
+    );
+    draw_menu_footer(draw, font, panel, "Setas/W/S navegam  |  Enter confirma");
+}
+
+fn draw_versus_menu(
+    draw: &mut impl DrawTarget,
+    font: Option<&Font>,
+    options: &PreferencesDrawOptions<'_>,
+) {
+    let panel = MenuPanel {
+        x: 270,
+        y: 138,
+        width: 484,
+        height: 382,
+    };
+    draw_menu_panel(draw, panel);
+    draw_menu_page_title(draw, font, panel, "VERSUS SETUP");
+
+    let player_one = character_spec(options.player_one_character).display_name;
+    let player_two = character_spec(options.player_two_character).display_name;
+    let rows = [
+        MenuLine {
+            label: "START FIGHT",
+            description: "Comeca a luta com estes personagens.",
+            value: None,
+            checked: None,
+        },
+        MenuLine {
+            label: "PLAYER 1",
+            description: "Esquerda/direita troca o personagem.",
+            value: Some(player_one),
+            checked: None,
+        },
+        MenuLine {
+            label: "PLAYER 2",
+            description: "Esquerda/direita troca o personagem.",
+            value: Some(player_two),
+            checked: None,
+        },
+        MenuLine {
+            label: "BACK",
+            description: "Volta ao menu principal.",
+            value: None,
+            checked: None,
+        },
+    ];
+
+    draw_menu_rows(
+        draw,
+        font,
+        &rows,
+        options.menu.selected(),
+        MenuRowsLayout {
+            panel,
+            row_height: 58,
+            start_offset_y: 108,
+            large_labels: false,
+            show_descriptions: true,
+        },
+    );
+    draw_menu_footer(
+        draw,
+        font,
+        panel,
+        "A/D ou setas ajustam personagem  |  Esc volta",
+    );
+}
+
+fn draw_training_menu(
+    draw: &mut impl DrawTarget,
+    font: Option<&Font>,
+    options: &PreferencesDrawOptions<'_>,
+) {
+    let panel = MenuPanel {
+        x: 286,
+        y: 150,
+        width: 452,
+        height: 330,
+    };
+    draw_menu_panel(draw, panel);
+    draw_menu_page_title(draw, font, panel, "TRAINING");
+
+    let rows = [
+        MenuLine {
+            label: "COMBAT LAB",
+            description: "Teste golpes, frames, hitboxes e hurtboxes.",
+            value: None,
+            checked: None,
+        },
+        MenuLine {
+            label: "SPRITE VIEWER",
+            description: "Inspecione atlas, pivot, boxes e projetil.",
+            value: None,
+            checked: None,
+        },
+        MenuLine {
+            label: "BACK",
+            description: "Volta ao menu principal.",
+            value: None,
+            checked: None,
+        },
+    ];
+
+    draw_menu_rows(
+        draw,
+        font,
+        &rows,
+        options.menu.selected(),
+        MenuRowsLayout {
+            panel,
+            row_height: 62,
+            start_offset_y: 120,
+            large_labels: false,
+            show_descriptions: true,
+        },
+    );
+    draw_menu_footer(draw, font, panel, "Esc volta das ferramentas para o menu");
+}
+
+fn draw_options_menu(
+    draw: &mut impl DrawTarget,
+    font: Option<&Font>,
+    options: &PreferencesDrawOptions<'_>,
+) {
+    let panel = MenuPanel {
+        x: 176,
+        y: 74,
+        width: 672,
+        height: 448,
+    };
+    draw_menu_panel(draw, panel);
+    draw_menu_page_title(draw, font, panel, "OPTIONS");
+
+    let row_x = panel.x + 48;
+    let row_width = panel.width - 96;
+    let row_height = 28;
+    let row_y = panel.y + 86;
+
+    draw_option_row(
+        draw,
+        font,
+        OptionRow {
+            x: row_x,
+            y: row_y,
+            width: row_width,
+            height: row_height,
+            selected: options.menu.selected() == PreferencesMenu::OPTIONS_RECORDING_ROW,
+            label: "LOCAL RECORDING",
+            value: if options.recording { "REC" } else { "OFF" },
+            checked: Some(options.recording),
+        },
+    );
+
+    for (index, flag) in PREFERENCE_FLAGS.iter().copied().enumerate() {
+        let row = index + PreferencesMenu::OPTIONS_FIRST_FLAG_ROW;
+        draw_option_row(
+            draw,
+            font,
+            OptionRow {
+                x: row_x,
+                y: row_y + row as i32 * row_height,
+                width: row_width,
+                height: row_height,
+                selected: options.menu.selected() == row,
+                label: flag.label(),
+                value: if options.flags.enabled(flag) {
+                    "ON"
+                } else {
+                    "OFF"
+                },
+                checked: Some(options.flags.enabled(flag)),
+            },
+        );
+    }
+
+    let back_row = options.menu.row_count() - 1;
+    draw_option_row(
+        draw,
+        font,
+        OptionRow {
+            x: row_x,
+            y: row_y + back_row as i32 * row_height,
+            width: row_width,
+            height: row_height,
+            selected: options.menu.selected() == back_row,
+            label: "BACK",
+            value: "",
+            checked: None,
+        },
+    );
+
+    let hint = selected_options_hint(options);
+    draw_menu_text(
+        draw,
+        font,
+        hint,
+        panel.x + 48,
+        panel.y + panel.height - 52,
+        13.0,
+        UI_MUTED,
+    );
+    draw_menu_footer(
+        draw,
+        font,
+        panel,
+        "Enter/Espaco alterna  |  F9/F10 gravacao  |  Esc volta",
+    );
+}
+
+fn draw_menu_panel(draw: &mut impl DrawTarget, panel: MenuPanel) {
+    draw.draw_rectangle(
+        panel.x - 8,
+        panel.y - 8,
+        panel.width + 16,
+        panel.height + 16,
+        Color::new(0, 0, 0, 94),
+    );
+    draw.draw_rectangle(
+        panel.x,
+        panel.y,
+        panel.width,
+        panel.height,
+        MENU_PANEL_STRONG,
+    );
+    draw.draw_rectangle_lines(
+        panel.x,
+        panel.y,
+        panel.width,
+        panel.height,
+        Color::new(87, 193, 255, 150),
+    );
+    draw.draw_line(
+        panel.x + 22,
+        panel.y + 18,
+        panel.x + panel.width - 22,
+        panel.y + 18,
+        Color::new(87, 193, 255, 128),
+    );
+    draw.draw_line(
+        panel.x + 22,
+        panel.y + panel.height - 44,
+        panel.x + panel.width - 22,
+        panel.y + panel.height - 44,
+        Color::new(87, 193, 255, 80),
+    );
+}
+
+fn draw_menu_page_title(
+    draw: &mut impl DrawTarget,
+    font: Option<&Font>,
+    panel: MenuPanel,
+    title: &str,
+) {
+    draw_centered_menu_text(
+        draw,
+        font,
+        title,
+        panel.x + panel.width / 2,
+        panel.y + 44,
+        26.0,
+        UI_TEXT,
+    );
+}
+
+fn draw_menu_rows(
+    draw: &mut impl DrawTarget,
+    font: Option<&Font>,
+    rows: &[MenuLine<'_>],
+    selected: usize,
+    layout: MenuRowsLayout,
+) {
+    let row_x = layout.panel.x + 42;
+    let row_width = layout.panel.width - 84;
+    for (index, row) in rows.iter().enumerate() {
+        draw_large_menu_row(
+            draw,
+            font,
+            LargeMenuRow {
+                x: row_x,
+                y: layout.panel.y + layout.start_offset_y + index as i32 * layout.row_height,
+                width: row_width,
+                height: layout.row_height - 8,
+                selected: selected == index,
+                label: row.label,
+                description: row.description,
+                value: row.value,
+                checked: row.checked,
+                large_label: layout.large_labels,
+                show_description: layout.show_descriptions,
+            },
+        );
+    }
+}
+
+#[derive(Clone, Copy)]
+struct MenuRowsLayout {
+    panel: MenuPanel,
+    row_height: i32,
+    start_offset_y: i32,
+    large_labels: bool,
+    show_descriptions: bool,
+}
+
+struct LargeMenuRow<'a> {
+    x: i32,
+    y: i32,
+    width: i32,
+    height: i32,
     selected: bool,
     label: &'a str,
     description: &'a str,
-    checked: Option<bool>,
     value: Option<&'a str>,
+    checked: Option<bool>,
+    large_label: bool,
+    show_description: bool,
 }
 
-fn draw_menu_row(draw: &mut impl DrawTarget, row: MenuRow<'_>) {
-    let height = 28;
+fn draw_large_menu_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: LargeMenuRow<'_>) {
+    let fill = if row.selected {
+        MENU_ROW_SELECTED
+    } else {
+        MENU_ROW
+    };
+    let border = if row.selected {
+        MENU_ACCENT
+    } else {
+        Color::new(92, 113, 144, 160)
+    };
+    draw.draw_rectangle(row.x, row.y, row.width, row.height, fill);
+    draw.draw_rectangle_lines(row.x, row.y, row.width, row.height, border);
+
     if row.selected {
-        draw.draw_rectangle(row.x, row.y - 2, row.width, height + 4, SELECTED_ROW);
-        draw.draw_rectangle_lines(row.x, row.y - 2, row.width, height + 4, PANEL_BORDER);
+        draw.draw_rectangle(row.x, row.y, 5, row.height, MENU_ACCENT_ALT);
     }
 
-    let label_x = if let Some(enabled) = row.checked {
-        draw_checkbox(draw, row.x + 14, row.y + 6, enabled);
-        row.x + 48
+    let label_x = if let Some(checked) = row.checked {
+        draw_checkbox(draw, row.x + 18, row.y + row.height / 2 - 9, checked);
+        row.x + 50
     } else {
-        draw.draw_text(">", row.x + 18, row.y + 6, 18, UI_TEXT);
-        row.x + 48
+        draw_menu_text(
+            draw,
+            font,
+            if row.selected { ">" } else { "" },
+            row.x + 18,
+            row.y + row.height / 2 - 13,
+            22.0,
+            MENU_ACCENT,
+        );
+        row.x + 50
     };
 
-    draw.draw_text(row.label, label_x, row.y + 1, 17, UI_TEXT);
-    draw.draw_text(row.description, label_x, row.y + 18, 11, UI_MUTED);
+    let label_size = if row.large_label { 27.0 } else { 20.0 };
+    let label_y = if row.show_description {
+        row.y + 5
+    } else {
+        row.y + row.height / 2 - 15
+    };
+    draw_menu_text(draw, font, row.label, label_x, label_y, label_size, UI_TEXT);
+
+    if row.show_description && !row.description.is_empty() {
+        draw_menu_text(
+            draw,
+            font,
+            row.description,
+            label_x,
+            row.y + row.height - 17,
+            12.0,
+            UI_MUTED,
+        );
+    }
 
     if let Some(value) = row.value {
         let text = format!("< {value} >");
-        let text_width = measure_text_width(&text, 17);
-        draw.draw_text(
+        let text_width = menu_text_width(font, &text, 18.0, 1.0);
+        draw_menu_text(
+            draw,
+            font,
             &text,
             row.x + row.width - text_width - 18,
-            row.y + 1,
-            17,
+            row.y + 9,
+            18.0,
             HEALTH_FILL,
+        );
+    }
+}
+
+struct OptionRow<'a> {
+    x: i32,
+    y: i32,
+    width: i32,
+    height: i32,
+    selected: bool,
+    label: &'a str,
+    value: &'a str,
+    checked: Option<bool>,
+}
+
+fn draw_option_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: OptionRow<'_>) {
+    let fill = if row.selected {
+        SELECTED_ROW
+    } else {
+        Color::new(9, 15, 28, 190)
+    };
+    draw.draw_rectangle(row.x, row.y, row.width, row.height - 2, fill);
+    if row.selected {
+        draw.draw_rectangle_lines(row.x, row.y, row.width, row.height - 2, MENU_ACCENT);
+    }
+
+    let label_x = if let Some(checked) = row.checked {
+        draw_checkbox(draw, row.x + 12, row.y + 5, checked);
+        row.x + 42
+    } else {
+        row.x + 42
+    };
+
+    draw_menu_text(draw, font, row.label, label_x, row.y + 5, 15.0, UI_TEXT);
+
+    if !row.value.is_empty() {
+        let color = if row.value == "ON" || row.value == "REC" {
+            HEALTH_FILL
+        } else {
+            UI_MUTED
+        };
+        let width = menu_text_width(font, row.value, 15.0, 1.0);
+        draw_menu_text(
+            draw,
+            font,
+            row.value,
+            row.x + row.width - width - 14,
+            row.y + 5,
+            15.0,
+            color,
         );
     }
 }
@@ -382,6 +789,118 @@ fn draw_checkbox(draw: &mut impl DrawTarget, x: i32, y: i32, enabled: bool) {
     draw.draw_rectangle_lines(x, y, size, size, UI_TEXT);
     if enabled {
         draw.draw_rectangle(x + 4, y + 4, size - 8, size - 8, HEALTH_FILL);
+    }
+}
+
+fn draw_menu_footer(draw: &mut impl DrawTarget, font: Option<&Font>, panel: MenuPanel, text: &str) {
+    draw_centered_menu_text(
+        draw,
+        font,
+        text,
+        panel.x + panel.width / 2,
+        panel.y + panel.height - 30,
+        12.0,
+        UI_MUTED,
+    );
+}
+
+fn selected_options_hint(options: &PreferencesDrawOptions<'_>) -> &'static str {
+    if options.menu.selected() == PreferencesMenu::OPTIONS_RECORDING_ROW {
+        return "Gravacao local salva videos em captures/; F9 inicia e F10 para.";
+    }
+    if options.menu.selected() == options.menu.row_count() - 1 {
+        return "Volta para o menu principal.";
+    }
+
+    PREFERENCE_FLAGS[options.menu.selected() - PreferencesMenu::OPTIONS_FIRST_FLAG_ROW]
+        .description()
+}
+
+fn draw_menu_side_fighters(draw: &mut impl DrawTarget, assets: &GameAssets) {
+    let mut c_fighter = Fighter::new(
+        PlayerSlot::One,
+        character_spec(CharacterId::C).display_name,
+        182.0,
+    );
+    c_fighter.facing = Facing::Right;
+    let c_visuals = character_visuals(CharacterId::C, assets);
+    draw_fighter(
+        draw,
+        &c_fighter,
+        FighterDrawOptions {
+            body_color: c_visuals.body_color,
+            show_debug: false,
+            sprite_atlas: c_visuals.fight_atlas,
+            spritesheet: assets.fighter_spritesheet.as_ref(),
+            world_elapsed_seconds: 0.0,
+            forced_clip: Some(sprites::FighterSpriteClip::Idle),
+        },
+    );
+
+    let mut rust_fighter = Fighter::new(
+        PlayerSlot::Two,
+        character_spec(CharacterId::Rust).display_name,
+        796.0,
+    );
+    rust_fighter.facing = Facing::Left;
+    let rust_visuals = character_visuals(CharacterId::Rust, assets);
+    draw_fighter(
+        draw,
+        &rust_fighter,
+        FighterDrawOptions {
+            body_color: rust_visuals.body_color,
+            show_debug: false,
+            sprite_atlas: rust_visuals.fight_atlas,
+            spritesheet: assets.fighter_spritesheet.as_ref(),
+            world_elapsed_seconds: 0.0,
+            forced_clip: Some(sprites::FighterSpriteClip::Idle),
+        },
+    );
+
+    draw.draw_rectangle(246, 120, 532, 440, Color::new(0, 0, 0, 60));
+}
+
+fn draw_menu_text(
+    draw: &mut impl DrawTarget,
+    font: Option<&Font>,
+    text: &str,
+    x: i32,
+    y: i32,
+    font_size: f32,
+    color: Color,
+) {
+    if let Some(font) = font {
+        draw.draw_text_ex(
+            font,
+            text,
+            Vector2::new(x as f32, y as f32),
+            font_size,
+            1.0,
+            color,
+        );
+    } else {
+        draw.draw_text(text, x, y, font_size.round() as i32, color);
+    }
+}
+
+fn draw_centered_menu_text(
+    draw: &mut impl DrawTarget,
+    font: Option<&Font>,
+    text: &str,
+    center_x: i32,
+    y: i32,
+    font_size: f32,
+    color: Color,
+) {
+    let width = menu_text_width(font, text, font_size, 1.0);
+    draw_menu_text(draw, font, text, center_x - width / 2, y, font_size, color);
+}
+
+fn menu_text_width(font: Option<&Font>, text: &str, font_size: f32, spacing: f32) -> i32 {
+    if let Some(font) = font {
+        font.measure_text(text, font_size, spacing).x.round() as i32
+    } else {
+        measure_text_width(text, font_size.round() as i32)
     }
 }
 
@@ -660,6 +1179,12 @@ fn character_visuals<'a>(character: CharacterId, assets: &'a GameAssets) -> Char
             fight_atlas: assets.go_fighter.as_ref(),
             start_atlas: assets.go_start.as_ref(),
             projectile_texture: assets.go_projectile.as_ref(),
+        },
+        CharacterId::C => CharacterVisuals {
+            body_color: PLAYER_C,
+            fight_atlas: assets.c_fighter.as_ref(),
+            start_atlas: assets.c_start.as_ref(),
+            projectile_texture: assets.c_projectile.as_ref(),
         },
     }
 }

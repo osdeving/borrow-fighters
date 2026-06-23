@@ -2,7 +2,7 @@
 
 use borrow_fighters::game::feature_flags::{FeatureFlag, FeatureFlags};
 use borrow_fighters::scenes::preferences::{
-    CycleDirection, PreferencesAction, PreferencesInput, PreferencesMenu,
+    CycleDirection, MenuPage, PreferencesAction, PreferencesInput, PreferencesMenu,
 };
 
 #[test]
@@ -37,7 +37,7 @@ fn preferences_menu_toggles_selected_feature_flag() {
     let mut menu = PreferencesMenu::default();
 
     menu.update(PreferencesInput::default(), &mut flags);
-    for _ in 0..PreferencesMenu::FIRST_FLAG_ROW {
+    for _ in 0..PreferencesMenu::MAIN_OPTIONS_ROW {
         menu.update(
             PreferencesInput {
                 down: true,
@@ -46,6 +46,20 @@ fn preferences_menu_toggles_selected_feature_flag() {
             &mut flags,
         );
     }
+    menu.update(
+        PreferencesInput {
+            activate: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+    menu.update(
+        PreferencesInput {
+            down: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
     let action = menu.update(
         PreferencesInput {
             activate: true,
@@ -64,6 +78,20 @@ fn preferences_menu_cycles_character_rows() {
     let mut menu = PreferencesMenu::default();
 
     menu.update(PreferencesInput::default(), &mut flags);
+    menu.update(
+        PreferencesInput {
+            down: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+    menu.update(
+        PreferencesInput {
+            activate: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
     menu.update(
         PreferencesInput {
             down: true,
@@ -135,7 +163,7 @@ fn preferences_menu_recording_row_requests_capture_toggle() {
     let mut menu = PreferencesMenu::default();
 
     menu.update(PreferencesInput::default(), &mut flags);
-    for _ in 0..PreferencesMenu::RECORDING_ROW {
+    for _ in 0..PreferencesMenu::MAIN_OPTIONS_ROW {
         menu.update(
             PreferencesInput {
                 down: true,
@@ -144,6 +172,13 @@ fn preferences_menu_recording_row_requests_capture_toggle() {
             &mut flags,
         );
     }
+    menu.update(
+        PreferencesInput {
+            activate: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
     let action = menu.update(
         PreferencesInput {
             activate: true,
@@ -153,6 +188,64 @@ fn preferences_menu_recording_row_requests_capture_toggle() {
     );
 
     assert_eq!(action, PreferencesAction::ToggleRecording);
+}
+
+#[test]
+fn preferences_menu_opens_training_tools() {
+    let mut flags = FeatureFlags::default();
+    let mut menu = PreferencesMenu::default();
+
+    menu.update(PreferencesInput::default(), &mut flags);
+    for _ in 0..PreferencesMenu::MAIN_TRAINING_ROW {
+        menu.update(
+            PreferencesInput {
+                down: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        );
+    }
+    assert_eq!(
+        menu.update(
+            PreferencesInput {
+                activate: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        ),
+        PreferencesAction::Stay
+    );
+    assert_eq!(menu.page(), MenuPage::Training);
+
+    assert_eq!(
+        menu.update(
+            PreferencesInput {
+                activate: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        ),
+        PreferencesAction::OpenCombatLab
+    );
+
+    menu.update(PreferencesInput::default(), &mut flags);
+    menu.update(
+        PreferencesInput {
+            down: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+    assert_eq!(
+        menu.update(
+            PreferencesInput {
+                activate: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        ),
+        PreferencesAction::OpenSpriteViewer
+    );
 }
 
 #[test]

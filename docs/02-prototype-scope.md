@@ -15,12 +15,12 @@ O protótipo 0.1 já possui uma versão jogável em Rust + Raylib na `main`.
 O slice atual inclui:
 
 - janela, loop principal e carregamento de assets;
-- tela inicial de preferências com seleção mínima de personagens;
+- menu principal mínimo com submenus de versus, treino e opções;
 - dois jogadores locais, com Player 2 em CPU por padrão;
 - opção de IA para ambos os jogadores;
 - movimento horizontal, pulo diagonal, abaixar e defesa;
 - soco fraco, soco forte, chute, varredura baixa, overhead, anti-air, agarrão curto, ataques aéreos e especial projectile;
-- primeiro corte de identidade mecânica: Rust mais técnico/responsivo, Duke mais longo/pesado e Go como rushdown com atlas placeholder no Combat Lab, no menu e em match via CLI, incluindo `ProjectileSpec` por personagem;
+- primeiro corte de identidade mecânica: Rust mais técnico/responsivo, Duke mais longo/pesado e Go como rushdown com atlas placeholder no Combat Lab, no menu e em match via CLI, incluindo `ProjectileSpec` por personagem; C entra como atlas jogável de pipeline ainda com kit genérico;
 - colisão corpo-corpo;
 - hitbox/hurtbox configuráveis no código;
 - dano, vida, vitória e reinício;
@@ -57,7 +57,7 @@ Ainda não é uma release fechada. O objetivo agora é melhorar leitura visual, 
 - [x] Animação placeholder.
 - [x] Tela simples de vitória.
 - [x] Debug draw de hitbox/hurtbox.
-- [x] Tela de preferências.
+- [x] Menu principal mínimo.
 - [x] IA simples de playtest.
 - [ ] Pausa dedicada.
 
@@ -68,7 +68,7 @@ Ainda não é uma release fechada. O objetivo agora é melhorar leitura visual, 
 - Sprites finais.
 - Áudio final.
 - Vários personagens.
-- Menus completos além da tela de preferências.
+- Menus completos de produto final, como story mode, perfil, loja ou seleção visual completa.
 - Sistema de combo.
 - Story mode.
 - ECS sofisticado.

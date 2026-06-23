@@ -29,7 +29,7 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Combat Lab render | Orquestra Raylib da cena isolada, sprites, grid e projéteis | [`src/engine/render/combat_lab.rs`](../src/engine/render/combat_lab.rs) | Teste manual via Combat Lab |
 | Combat debug UI | Boxes, pivot, dummy, overlay e texto de timing do laboratório | [`src/ui/combat_debug.rs`](../src/ui/combat_debug.rs) | Teste manual via Combat Lab |
 | Sprite Combat Viewer | Ferramenta isolada para carregar atlas em runtime, ver grid, pivot, bounds e preparar boxes data-driven | [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), [`src/scenes/sprite_viewer/combat_edit.rs`](../src/scenes/sprite_viewer/combat_edit.rs), [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs) | [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs), teste manual via `--tool sprite-viewer` |
-| Input | Teclado/gamepad para luta, preferências e Combat Lab | [`src/engine/input.rs`](../src/engine/input.rs), [`src/engine/gamepad.rs`](../src/engine/gamepad.rs) | [`tests/cli.rs`](../tests/cli.rs), [`tests/feature_flags.rs`](../tests/feature_flags.rs) |
+| Input | Teclado/gamepad para luta, menu, Sprite Viewer e Combat Lab | [`src/engine/input.rs`](../src/engine/input.rs), [`src/engine/gamepad.rs`](../src/engine/gamepad.rs) | [`tests/cli.rs`](../tests/cli.rs), [`tests/feature_flags.rs`](../tests/feature_flags.rs) |
 | Sprite runtime | Manifest JSON, clip selection, projeção de `frames[].combat` e desenho por pivot | [`src/engine/sprites/`](../src/engine/sprites), [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) | [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs), [`tests/sprite_selection.rs`](../tests/sprite_selection.rs) |
 
 ## Técnica Atual
@@ -38,22 +38,22 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 
 O loop principal em [`src/app.rs`](../src/app.rs) usa `AppScene` de [`src/scenes/mod.rs`](../src/scenes/mod.rs) como maquina de estados simples:
 
-- `Preferences`: tela inicial de ajustes, escolha de personagens e flags;
+- `Preferences`: menu principal e submenus de versus, treino e opções;
 - `Fight`: luta normal com fixed timestep, IA, audio events e renderer de arena;
 - `CombatLab`: cena isolada para testar golpes e frame data;
 - `SpriteViewer`: ferramenta de sprite em loop proprio, fora do fluxo normal de luta.
 
-Transicoes novas devem passar por esse enum em vez de espalhar flags soltas no loop. Se a nova tela for ferramenta temporaria, prefira loop isolado como o Sprite Viewer; se fizer parte do jogo, trate como cena normal.
+Transicoes novas devem passar por esse enum em vez de espalhar flags soltas no loop. Se a nova tela for ferramenta temporaria, prefira loop isolado como o Sprite Viewer; se fizer parte do jogo, trate como cena normal. `Esc` tem comportamento de voltar dentro do jogo; o bootstrap em [`src/main.rs`](../src/main.rs) desativa a tecla padrão de fechamento do Raylib com `set_exit_key(None)`.
 
 ### Fluxo de Início de Luta
 
 O início de luta fica em [`src/game/world.rs`](../src/game/world.rs), não no renderer. `World::new_greybox_with_intro` liga primeiro `spawn_intro_timer` para a entrada cinematográfica e também prepara `countdown_timer`.
 
-O matchup inicial vem de [`LaunchOptions.match_options`](../src/cli.rs), que aceita `--p1`/`--player-one` e `--p2`/`--player-two` para a luta normal. A tela de preferências também pode ciclar Player 1 e Player 2 entre Rust, Duke e Go; [`App`](../src/app.rs) marca essa escolha como pendente e recria o mundo ao começar a próxima luta. `LaunchOptions.start_fight` vem de `--fight`/`--skip-menu` e permite iniciar direto em `AppScene::Fight`. [`App`](../src/app.rs) preserva essa escolha no primeiro mundo e em `restart_match`, chamando `World::new_greybox_with_intro_for_characters`.
+O matchup inicial vem de [`LaunchOptions.match_options`](../src/cli.rs), que aceita `--p1`/`--player-one` e `--p2`/`--player-two` para a luta normal. O submenu `Versus Setup` também pode ciclar Player 1 e Player 2 entre Rust, Duke, Go e C; [`App`](../src/app.rs) marca essa escolha como pendente e recria o mundo ao começar a próxima luta. `LaunchOptions.start_fight` vem de `--fight`/`--skip-menu` e permite iniciar direto em `AppScene::Fight`. [`App`](../src/app.rs) preserva essa escolha no primeiro mundo e em `restart_match`, chamando `World::new_greybox_with_intro_for_characters`.
 
 Enquanto `spawn_intro_active` ou `countdown_active` estiverem ativos, `World::update_with_flags` atualiza apenas timers e feedback transitório; movimento, ataques, projéteis e IA não avançam gameplay. A contagem visual usa os labels `11`, `10`, `01` e `Fight!`, expostos por `World::countdown_label`. Os eventos de áudio correspondentes são `match.countdown.11`, `match.countdown.10`, `match.countdown.01` e `match.countdown.fight`.
 
-O desenho da contagem fica em [`src/engine/render.rs`](../src/engine/render.rs), que só consulta `World::countdown_label`. A troca de arena é decisão de [`src/app.rs`](../src/app.rs): depois que `World::outcome` aparece, a arena atual permanece na pose de vitória e só avança quando uma nova luta é iniciada por restart ou pela tela de preferências.
+O desenho da contagem fica em [`src/engine/render.rs`](../src/engine/render.rs), que só consulta `World::countdown_label`. A troca de arena é decisão de [`src/app.rs`](../src/app.rs): depois que `World::outcome` aparece, a arena atual permanece na pose de vitória e só avança quando uma nova luta é iniciada por restart ou pelo menu.
 
 ### Hitbox e Hurtbox
 
@@ -74,7 +74,7 @@ Hitboxes:
 
 Essa técnica foi escolhida porque é legível, testável sem Raylib e suficiente para o Prototype 0.1. Quando o frame visual declara `frames[].combat`, o runtime projeta esses dados para coordenadas de mundo em [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs). A resolução da luta usa `frames[].combat.hitboxes[]` e `frames[].combat.hurtboxes[]` quando essas listas existem; se estiverem ausentes ou vazias, volta para `MoveSpec.hitbox` e `Fighter::hurtboxes()`. A decisão está registrada em [`docs/adr/0007-sprite-frame-combat-runtime.md`](adr/0007-sprite-frame-combat-runtime.md).
 
-Rust, Duke e Go ja possuem `combat.projectile_origin` no primeiro frame do clip `special`. Esse ponto e projetado por [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) e usado por [`src/game/world.rs`](../src/game/world.rs) ao criar o projectile, para evitar que o poder nasca desalinhado da mao. Rust `Borrow Jab`, heavy punch e kick ja possuem hitboxes de frame; os valores ainda reproduzem o alcance do `MoveSpec` para migrar com baixo risco. Hitboxes/hurtboxes restantes ainda devem ser calibradas no Sprite Combat Viewer antes de virar dado autoritativo.
+Rust, Duke, Go e C ja possuem `combat.projectile_origin` no primeiro frame do clip `special`. Esse ponto e projetado por [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) e usado por [`src/game/world.rs`](../src/game/world.rs) ao criar o projectile, para evitar que o poder nasca desalinhado da mao. Rust `Borrow Jab`, heavy punch e kick ja possuem hitboxes de frame; os valores ainda reproduzem o alcance do `MoveSpec` para migrar com baixo risco. Hitboxes/hurtboxes restantes ainda devem ser calibradas no Sprite Combat Viewer antes de virar dado autoritativo.
 
 ### Escala Visual e Pivot
 
@@ -88,19 +88,20 @@ O corpo fisico base fica em [`assets/tuning/character-body-metrics.json`](../ass
 - `standing_height`: altura em pe;
 - `crouch_height`: altura abaixada.
 
-`FighterBodyMetrics` e consumido por [`Fighter`](../src/combat/fighter.rs). Rust e Duke/Java usam o corpo padrao `76 x 168 / crouch 96`; Go usa corpo mais largo e baixo para combinar melhor com o Gopher placeholder. Se o arquivo falhar ao carregar no app, o jogo usa os defaults do `CharacterSpec` e emite warning.
+`FighterBodyMetrics` e consumido por [`Fighter`](../src/combat/fighter.rs). Rust, Duke/Java, Go e C usam o corpo padrao `76 x 168 / crouch 96` neste corte. Go continua nao-humano visualmente, mas o atlas foi normalizado para caber na mesma escala jogavel de Rust/C em vez de ganhar hurtbox larga por causa de proporcao de placeholder. Se o arquivo falhar ao carregar no app, o jogo usa os defaults do `CharacterSpec` e emite warning.
 
 O padrao de tamanho em tela fica em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md). Em resumo:
 
 - Rust atual e a referencia visual aprovada;
 - humanoides devem ficar em torno de `185` a `210 px` de altura visivel em idle;
-- personagens baixos/largos, como Go, podem ficar entre `150` e `185 px`, desde que hurtbox e alcance continuem legiveis;
+- personagens nao-humanos, como Go, devem mirar a mesma faixa principal quando a diferenca de tamanho nao for parte do gameplay;
 - a arena atual tem `896 px` jogaveis, cerca de `11,8` larguras de corpo padrao.
 
 Use o Sprite Combat Viewer para calibrar:
 
 ```bash
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/go-fighter.sprite.json --clip idle --character go --move light_punch
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip idle --character c --move light_punch
 ```
 
 Atalhos de calibracao:
@@ -258,11 +259,11 @@ Personagens ficam em [`src/characters/mod.rs`](../src/characters/mod.rs). Cada `
 - `move_ids`: golpes próximos disponíveis no loadout;
 - `projectile`: `ProjectileSpec` usado para dano, tamanho, velocidade, cooldown, reação e limite de alcance do especial.
 
-Hoje `Rust` usa `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` para reforçar leitura técnica: golpes mais rápidos, menores e menos danosos. `Duke` usa `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` para reforçar midrange pressure: mais alcance/dano, startup maior e whiff mais punível. `Go` usa `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead` e `GoHopkick` para validar rushdown com atlas placeholder: menos vida, ações mais rápidas e alcance menor.
+Hoje `Rust` usa `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` para reforçar leitura técnica: golpes mais rápidos, menores e menos danosos. `Duke` usa `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` para reforçar midrange pressure: mais alcance/dano, startup maior e whiff mais punível. `Go` usa `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead` e `GoHopkick` para validar rushdown com atlas placeholder: menos vida, ações mais rápidas e alcance menor. `C` ja e selecionavel e possui atlas/projectile/entrada proprios, mas ainda usa loadout generico para validar tamanho, leitura e pipeline antes de receber identidade de frame data.
 
-Os especiais de projectile ficam em [`src/combat/projectile.rs`](../src/combat/projectile.rs) como `RUST_PROJECTILE_SPEC`, `DUKE_PROJECTILE_SPEC` e `GO_PROJECTILE_SPEC`. `Fighter::projectile_spec` alimenta `Projectile::from_fighter`, o Combat Lab e o overlay técnico, então alterar um spec muda luta real e lab no mesmo caminho.
+Os especiais de projectile ficam em [`src/combat/projectile.rs`](../src/combat/projectile.rs) como `RUST_PROJECTILE_SPEC`, `DUKE_PROJECTILE_SPEC`, `GO_PROJECTILE_SPEC` e `C_PROJECTILE_SPEC`. `Fighter::projectile_spec` alimenta `Projectile::from_fighter`, o Combat Lab e o overlay técnico, então alterar um spec muda luta real e lab no mesmo caminho.
 
-`World::new_with_characters` e `World::new_greybox_with_intro_for_characters` aceitam qualquer `CharacterId`; a luta padrão ainda instancia Rust x Duke, mas o menu de preferências e `--p1`/`--p2` permitem testar Go em match real.
+`World::new_with_characters` e `World::new_greybox_with_intro_for_characters` aceitam qualquer `CharacterId`; a luta padrão ainda instancia Rust x Duke, mas o submenu `Versus Setup` e `--p1`/`--p2` permitem testar Go e C em match real.
 
 A intenção de gameplay por golpe vive em [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md). Atualize essa matriz quando alterar frame data, alcance, dano, guard rule, projectile ou loadout de personagem.
 
@@ -272,24 +273,28 @@ Abrir o laboratório:
 
 ```bash
 cargo run -- --fight --p1 go --p2 duke
+cargo run -- --fight --p1 c --p2 rust
 cargo run -- --lab combat --character rust --move light_punch
 cargo run -- --lab combat --character duke --move projectile
 cargo run -- --lab combat --character rust --move sweep
 cargo run -- --lab combat --character duke --move throw
 cargo run -- --lab combat --character go --move kick
 cargo run -- --lab combat --character go --move air_kick
+cargo run -- --lab combat --character c --move projectile
 cargo run -- --lab combat --character rust --pose block
 cargo run -- --lab combat --character duke --pose victory
 ```
+
+O mesmo laboratório também pode ser aberto pelo menu principal em `Training -> Combat Lab`. Nesse fluxo, `Esc` volta ao menu sem fechar a janela.
 
 Valores aceitos:
 
 | Flag | Valores |
 |---|---|
 | `--fight`, `--skip-menu` | sem valor; inicia direto na luta normal |
-| `--p1`, `--player-one` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |
-| `--p2`, `--player-two` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |
-| `--character` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher` |
+| `--p1`, `--player-one` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang` |
+| `--p2`, `--player-two` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang` |
+| `--character` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang` |
 | `--move` | `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`, `projectile` |
 | `--pose` | `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory` |
 | `--tool` | `sprite-viewer` |
@@ -315,6 +320,7 @@ Teclas:
 | Alternar pivot/eixos | `P` |
 | Alternar dummy de contato | `D` |
 | Alternar fundo de arena | `A` |
+| Voltar ao menu quando aberto por `Training` | `Esc` |
 
 Use o Combat Lab para conferir:
 
@@ -352,11 +358,12 @@ Abrir a ferramenta isolada de sprites:
 ```bash
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip special --character c --move projectile
 ```
 
-O viewer roda fora do loop normal de luta. [`src/app.rs`](../src/app.rs) desvia para esse modo antes de carregar `GameAssets` e áudio. O estado testável fica em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), e o desenho Raylib fica em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs).
+O viewer roda fora do loop normal de luta. Pela CLI, [`src/app.rs`](../src/app.rs) desvia para esse modo antes de carregar `GameAssets` e áudio. Pelo menu, `Training -> Sprite Viewer` abre o mesmo loop com o atlas de C em `special/projectile` como ponto de partida, e `Esc` volta ao menu. O estado testável fica em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), e o desenho Raylib fica em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs).
 
-`--character` e `--move` ativam a camada runtime de combate no viewer. Sem `--character`, o viewer tenta inferir Rust, Duke ou Go pelo nome do manifesto. Essa camada usa `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, então ela reflete os dados de combate atuais.
+`--character` e `--move` ativam a camada runtime de combate no viewer. Sem `--character`, o viewer tenta inferir Rust, Duke, Go ou C pelo nome do manifesto. Essa camada usa `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, então ela reflete os dados de combate atuais.
 
 O viewer tambem entende metadata opcional `frames[].combat` no manifesto. Essa metadata e projetada para tela em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), desenhada em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs), e validada em [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs). As coordenadas ficam em pixels locais do frame do atlas:
 
@@ -409,6 +416,7 @@ Teclas:
 | Alternar pivot | `P` |
 | Alternar bounds | `B` |
 | Resetar posição | `R` |
+| Voltar ao menu quando aberto por `Training` | `Esc` |
 
 O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtbox atual do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetória prevista de projectile, metadata `frames[].combat` e timeline inferior com fase aproximada de startup/active/recovery quando `--character` e `--move` estao presentes. A coordenada do cursor é a referência prática para preencher `frames[].combat`: `local x,y` entra no JSON do frame; `atlas x,y` serve para conferir a posição no PNG.
 
@@ -422,7 +430,7 @@ Atalhos globais:
 
 - `F9`: inicia gravação local da janela atual;
 - `F10`: para a gravação e salva o MP4 em `captures/`.
-- Menu `Ajustes do prototipo` -> `Gravacao local`: inicia/para pelo menu quando teclas de função não chegam ao jogo.
+- Menu `Options` -> `Local Recording`: inicia/para pelo menu quando teclas de função não chegam ao jogo.
 
 O código fica em [`src/engine/video_capture.rs`](../src/engine/video_capture.rs). A técnica usada é manter a captura fora do gameplay: `App` só detecta os atalhos, desenha a cena normalmente e, quando há gravação ativa, envia o framebuffer renderizado pelo Raylib para `ffmpeg` como `rawvideo`. O áudio vem do PulseAudio e o MP4 é finalizado ao fechar o pipe de vídeo.
 

@@ -13,19 +13,20 @@ pub use body_metrics::{
 use crate::combat::{
     fighter::FighterBodyMetrics,
     move_data::MoveId,
-    projectile::{DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, ProjectileSpec, RUST_PROJECTILE_SPEC},
+    projectile::{
+        C_PROJECTILE_SPEC, DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, ProjectileSpec,
+        RUST_PROJECTILE_SPEC,
+    },
 };
 
 const RUST_STATS: CharacterStats = CharacterStats { max_health: 100 };
 const DUKE_STATS: CharacterStats = CharacterStats { max_health: 112 };
 const GO_STATS: CharacterStats = CharacterStats { max_health: 92 };
+const C_STATS: CharacterStats = CharacterStats { max_health: 104 };
 const RUST_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
 const DUKE_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
-const GO_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics {
-    width: 92.0,
-    standing_height: 156.0,
-    crouch_height: 88.0,
-};
+const GO_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
+const C_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
 const RUST_MOVE_IDS: [MoveId; 9] = [
     MoveId::RustBorrowJab,
     MoveId::HeavyPunch,
@@ -59,6 +60,17 @@ const GO_MOVE_IDS: [MoveId; 9] = [
     MoveId::GoHopkick,
     MoveId::CloseThrow,
 ];
+const C_MOVE_IDS: [MoveId; 9] = [
+    MoveId::LightPunch,
+    MoveId::HeavyPunch,
+    MoveId::Kick,
+    MoveId::SweepKick,
+    MoveId::OverheadPunch,
+    MoveId::RisingAntiAir,
+    MoveId::AirPunch,
+    MoveId::AirKick,
+    MoveId::CloseThrow,
+];
 
 /// Stable identifier for playable or testable characters.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -67,6 +79,7 @@ pub enum CharacterId {
     Rust,
     Duke,
     Go,
+    C,
 }
 
 impl CharacterId {
@@ -75,16 +88,18 @@ impl CharacterId {
         match self {
             Self::Rust => Self::Duke,
             Self::Duke => Self::Go,
-            Self::Go => Self::Rust,
+            Self::Go => Self::C,
+            Self::C => Self::Rust,
         }
     }
 
     /// Returns the previous prototype roster character.
     pub const fn previous(self) -> Self {
         match self {
-            Self::Rust => Self::Go,
+            Self::Rust => Self::C,
             Self::Duke => Self::Rust,
             Self::Go => Self::Duke,
+            Self::C => Self::Go,
         }
     }
 
@@ -94,6 +109,7 @@ impl CharacterId {
             "rust" | "rustacean" => Some(Self::Rust),
             "duke" | "java" => Some(Self::Duke),
             "go" | "golang" | "gopher" => Some(Self::Go),
+            "c" | "langc" | "c-lang" | "clang" => Some(Self::C),
             _ => None,
         }
     }
@@ -104,6 +120,7 @@ impl CharacterId {
             Self::Rust => "rust",
             Self::Duke => "duke",
             Self::Go => "go",
+            Self::C => "c",
         }
     }
 
@@ -113,6 +130,7 @@ impl CharacterId {
             "rust" => Some(Self::Rust),
             "duke" | "java" => Some(Self::Duke),
             "go" | "golang" | "gopher" => Some(Self::Go),
+            "c" | "langc" | "c-lang" | "clang" => Some(Self::C),
             _ => None,
         }
     }
@@ -177,6 +195,16 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             body_metrics: GO_BODY_METRICS,
             move_ids: &GO_MOVE_IDS,
             projectile: GO_PROJECTILE_SPEC,
+        },
+        CharacterId::C => CharacterSpec {
+            id,
+            display_name: "C",
+            fighter_name: "C",
+            archetype: CharacterArchetype::MidrangePressure,
+            stats: C_STATS,
+            body_metrics: C_BODY_METRICS,
+            move_ids: &C_MOVE_IDS,
+            projectile: C_PROJECTILE_SPEC,
         },
     }
 }

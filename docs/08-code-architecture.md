@@ -36,7 +36,7 @@ borrow-fighters/
 │   │   ├── mod.rs              # Estado de partida e regras de fluxo
 │   │   ├── arena.rs            # Identidade e rotação das arenas do protótipo
 │   │   ├── ai.rs               # CPU simples para playtest
-│   │   ├── feature_flags.rs    # Flags runtime para experimentos e preferências
+│   │   ├── feature_flags.rs    # Flags runtime para experimentos e menu Options
 │   │   └── world.rs            # Estado jogável, intro/contagem e regras de partida
 │   ├── engine/
 │   │   ├── mod.rs              # Adaptadores finos em volta de Raylib
@@ -70,7 +70,7 @@ borrow-fighters/
 │   ├── scenes/
 │   │   ├── mod.rs              # Estados de tela
 │   │   ├── combat_lab.rs       # Laboratório isolado para timing e boxes
-│   │   ├── preferences.rs      # Cursor e navegação da tela de ajustes
+│   │   ├── preferences.rs      # Cursor e navegação do menu principal/submenus
 │   │   ├── sprite_viewer.rs    # Viewer testável de atlas, pivot e frame bounds
 │   │   └── sprite_viewer/
 │   │       └── combat_edit.rs  # Helpers puros para editar boxes do viewer
@@ -87,7 +87,7 @@ borrow-fighters/
     ├── combat_lab.rs           # Estado testável do Combat Lab
     ├── attack_frame_data.rs    # Timing de golpes em frames
     ├── move_data.rs            # Contrato da tabela MoveSpec
-    ├── character_identity_tuning.rs # Intenção mecânica de Rust/Duke/Go por dados
+    ├── character_identity_tuning.rs # Intenção mecânica de Rust/Duke/Go/C por dados
     ├── combat_rules.rs         # Regras puras de combate e IA
     ├── traditional_moves.rs    # High/low/throw e ataques aéreos tradicionais
     ├── cpu_traditional_moves.rs # Cobertura da CPU para golpes tradicionais

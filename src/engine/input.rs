@@ -142,7 +142,7 @@ fn keyboard_preferences(raylib: &RaylibHandle) -> PreferencesInput {
             || raylib.is_key_pressed(KeyboardKey::KEY_D),
         activate: raylib.is_key_pressed(KeyboardKey::KEY_SPACE)
             || raylib.is_key_pressed(KeyboardKey::KEY_ENTER),
-        start: raylib.is_key_pressed(KeyboardKey::KEY_ENTER),
+        start: false,
     }
 }
 

@@ -54,11 +54,15 @@ O slice jogável usa arte placeholder, mas já exercita decisões importantes pa
 - arena inicial: `assets/placeholder/arena-sirius.png`, derivada de referência em `assets/references/sirius.png`;
 - arenas em rotação: `assets/placeholder/arena-fortaleza.png` e `assets/placeholder/arena-java-street.png`;
 - arena anterior ainda disponível: `assets/placeholder/arena-terminal-compiler-lab.png`;
-- personagens atuais: Rust e Duke em atlas placeholder com manifesto JSON;
-- entrada cinematográfica: manifests separados para Rust e Duke;
+- personagens atuais: Rust, Duke, Go e C em atlas placeholder com manifesto JSON;
+- entrada cinematográfica: manifests separados para Rust, Duke, Go e C;
 - projectile Rust: engrenagem separada do sprite do personagem;
 - projectile Duke: bean separado do sprite do personagem;
+- projectile Go: canal/burst separado do sprite do personagem;
+- projectile C: bitstream separado do sprite do personagem;
 - HUD, ajuda e debug visual são opcionais por feature flag.
+
+O C veio de dois atlas de referencia em `assets/references/langc-03.png` e `assets/references/langc-04.png`, com fundo chroma key removido por script local. Ele deve ser avaliado como placeholder jogavel de escala, fluidez e leitura, nao como direcao final do personagem.
 
 Nada disso é final. O valor desses assets agora é validar proporção, leitura de pose, pivots, altura do projectile, contraste com cenário e necessidades de animação.
 

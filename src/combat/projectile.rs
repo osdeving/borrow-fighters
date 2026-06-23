@@ -36,6 +36,12 @@ const GO_PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
     hit_pushback: 18.0,
     block_pushback: 14.0,
 };
+const C_PROJECTILE_HIT_REACTION: HitReaction = HitReaction {
+    hitstun: FrameCount::new(15),
+    blockstun: FrameCount::new(10),
+    hit_pushback: 26.0,
+    block_pushback: 18.0,
+};
 
 /// Whole-frame timing data for the current projectile special.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -116,6 +122,25 @@ pub const GO_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
         cooldown: FrameCount::new(44),
     },
     max_travel: Some(320.0),
+};
+
+/// C uses a compact bitstream projectile with moderate speed and recovery.
+pub const C_PROJECTILE_SPEC: ProjectileSpec = ProjectileSpec {
+    width: 78.0,
+    height: 30.0,
+    front_spawn_offset: 72.0,
+    center_y_from_body_bottom: 90.0,
+    speed: 360.0,
+    damage: 8,
+    guard_rule: GuardRule::Projectile,
+    hit_reaction: C_PROJECTILE_HIT_REACTION,
+    frame_data: ProjectileFrameData {
+        startup: FrameCount::ZERO,
+        spawn_frame: FrameCount::ZERO,
+        visual_duration: FrameCount::new(20),
+        cooldown: FrameCount::new(56),
+    },
+    max_travel: None,
 };
 
 /// Fireball frame data for Prototype 0.1.

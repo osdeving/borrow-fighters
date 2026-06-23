@@ -4,10 +4,11 @@
   "source": "../references/go-start-anim.png",
   "cell": { "w": 256, "h": 256 },
   "default_pivot": { "x": 80, "y": 236 },
-  "scale": 1.0,
+  "scale": 1.08,
   "notes": [
     "AI-generated Go/Gopher spawn intro candidate for runtime sprite validation.",
     "Frames use a 6x4 grid with 256x256 cells and a stable grounded pivot.",
+    "The atlas was compressed horizontally around the pivot and uses scale 1.08 to match the leaner Go fight silhouette.",
     "The animation uses fan-out/fan-in channel visuals to suggest goroutines and parallel execution."
   ],
   "frames": [

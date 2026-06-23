@@ -14,7 +14,7 @@ Placeholder candidato gerado por IA para validar Go/Gopher no Sprite Combat View
 
 ## Uso
 
-Atlas com alpha real, grade 6x6, celulas `384x256`, pivot padrao `112,236` e clips basicos de luta.
+Atlas com alpha real, grade 6x6, celulas `384x256`, pivot padrao `112,236` e clips basicos de luta. A versao atual foi comprimida horizontalmente em torno do pivot, teve ilhas soltas de frames limpas e usa `scale = 1.08` para preservar o Gopher sem deixar o corpo visual baixo/largo demais perto de Rust e C.
 
 Este asset serve para testar:
 
@@ -35,4 +35,4 @@ Antes de usar em release publica, revisar licenca/atribuicao nos docs de assets.
 
 - Gerado como atlas raster, nao como arquivo em camadas.
 - Ainda precisa de revisao manual de hitbox/hurtbox por frame.
-- Ainda nao esta conectado ao runtime normal do Go; por enquanto deve ser validado pelo Sprite Combat Viewer.
+- Ja esta conectado ao runtime normal do Go, mas continua sendo placeholder de proporcao, leitura e pipeline.

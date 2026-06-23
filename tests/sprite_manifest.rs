@@ -1,6 +1,6 @@
 //! Validates runtime sprite manifest loading without opening a window.
 
-use std::path::Path;
+use std::{fs, path::Path};
 
 use borrow_fighters::{
     combat::{
@@ -8,6 +8,7 @@ use borrow_fighters::{
         move_data::{MoveId, move_spec},
     },
     engine::sprites::{
+        C_BITSTREAM_PROJECTILE_PATH, C_FIGHTER_MANIFEST_PATH, C_START_MANIFEST_PATH,
         DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH, GO_CHANNEL_PROJECTILE_PATH,
         GO_FIGHTER_MANIFEST_PATH, GO_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH,
         RUST_START_MANIFEST_PATH, SPRITE_SCHEMA, SpriteManifest, frame_for_clip_at,
@@ -45,9 +46,24 @@ fn go_fighter_manifest_loads() {
 
     assert_eq!(manifest.schema, SPRITE_SCHEMA);
     assert_eq!(manifest.image, "go-fighter-atlas.png");
+    assert_eq!(manifest.scale, Some(1.08));
     assert_eq!(manifest.frames.len(), 36);
     assert_eq!(manifest.cell.w, 384);
     assert!(manifest.clip_named("idle").is_some());
+    assert!(manifest.clip_named("kick").is_some());
+    assert!(manifest.clip_named("special").is_some());
+}
+
+#[test]
+fn c_fighter_manifest_loads() {
+    let manifest = SpriteManifest::load(C_FIGHTER_MANIFEST_PATH).expect("manifest should load");
+
+    assert_eq!(manifest.schema, SPRITE_SCHEMA);
+    assert_eq!(manifest.image, "c-fighter-atlas.png");
+    assert_eq!(manifest.frames.len(), 94);
+    assert_eq!(manifest.cell.w, 384);
+    assert!(manifest.clip_named("idle").is_some());
+    assert!(manifest.clip_named("punch_light").is_some());
     assert!(manifest.clip_named("kick").is_some());
     assert!(manifest.clip_named("special").is_some());
 }
@@ -57,7 +73,8 @@ fn fighter_special_first_frames_declare_projectile_origins() {
     let cases = [
         (RUST_FIGHTER_MANIFEST_PATH, "special_0", 216, 148),
         (DUKE_FIGHTER_MANIFEST_PATH, "special_0", 222, 148),
-        (GO_FIGHTER_MANIFEST_PATH, "special_0", 225, 150),
+        (GO_FIGHTER_MANIFEST_PATH, "special_0", 180, 150),
+        (C_FIGHTER_MANIFEST_PATH, "special_0", 208, 145),
     ];
 
     for (path, frame_name, expected_x, expected_y) in cases {
@@ -150,6 +167,20 @@ fn go_start_manifest_loads_spawn_clip() {
 }
 
 #[test]
+fn c_start_manifest_loads_spawn_clip() {
+    let manifest = SpriteManifest::load(C_START_MANIFEST_PATH).expect("manifest should load");
+    let spawn = manifest
+        .clip_named("spawn")
+        .expect("spawn clip should exist");
+
+    assert_eq!(manifest.image, "c-start-atlas.png");
+    assert_eq!(manifest.frames.len(), 7);
+    assert!(!spawn.r#loop);
+    assert_eq!(spawn.frames.first().map(String::as_str), Some("spawn_00"));
+    assert_eq!(spawn.frames.last().map(String::as_str), Some("spawn_06"));
+}
+
+#[test]
 fn go_runtime_sprite_assets_exist() {
     let fighter = SpriteManifest::load(GO_FIGHTER_MANIFEST_PATH).expect("manifest should load");
     let start = SpriteManifest::load(GO_START_MANIFEST_PATH).expect("manifest should load");
@@ -157,6 +188,45 @@ fn go_runtime_sprite_assets_exist() {
     assert!(fighter.image_path(GO_FIGHTER_MANIFEST_PATH).exists());
     assert!(start.image_path(GO_START_MANIFEST_PATH).exists());
     assert!(Path::new(GO_CHANNEL_PROJECTILE_PATH).exists());
+}
+
+#[test]
+fn c_runtime_sprite_assets_exist() {
+    let fighter = SpriteManifest::load(C_FIGHTER_MANIFEST_PATH).expect("manifest should load");
+    let start = SpriteManifest::load(C_START_MANIFEST_PATH).expect("manifest should load");
+
+    assert!(fighter.image_path(C_FIGHTER_MANIFEST_PATH).exists());
+    assert!(start.image_path(C_START_MANIFEST_PATH).exists());
+    assert!(Path::new(C_BITSTREAM_PROJECTILE_PATH).exists());
+}
+
+#[test]
+fn c_bitstream_projectile_keeps_readable_runtime_size() {
+    let manifest = SpriteManifest::load(C_FIGHTER_MANIFEST_PATH).expect("manifest should load");
+    let frame = manifest
+        .frame_named("projectile_0")
+        .expect("projectile frame should exist");
+    let bounds = frame
+        .trimmed_bounds
+        .expect("generated projectile should declare trimmed bounds");
+    let (width, height) = png_dimensions(C_BITSTREAM_PROJECTILE_PATH);
+
+    assert!(
+        bounds.w >= 260,
+        "atlas projectile should be visually readable"
+    );
+    assert!(
+        bounds.h >= 70,
+        "atlas projectile should be visually readable"
+    );
+    assert!(
+        width >= 260,
+        "runtime projectile should keep readable 0/1 glyphs"
+    );
+    assert!(
+        height >= 70,
+        "runtime projectile should keep readable 0/1 glyphs"
+    );
 }
 
 #[test]
@@ -256,6 +326,14 @@ fn frame_combat_metadata_validates() {
     assert_eq!(combat.hurtboxes[0].label.as_deref(), Some("torso"));
     assert_eq!(combat.hitboxes[0].w, 30);
     assert_eq!(combat.projectile_origin.unwrap().x, 82);
+}
+
+fn png_dimensions(path: &str) -> (u32, u32) {
+    let bytes = fs::read(path).expect("png should be readable");
+    assert_eq!(&bytes[0..8], b"\x89PNG\r\n\x1a\n");
+    let width = u32::from_be_bytes(bytes[16..20].try_into().unwrap());
+    let height = u32::from_be_bytes(bytes[20..24].try_into().unwrap());
+    (width, height)
 }
 
 #[test]

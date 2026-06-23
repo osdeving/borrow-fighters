@@ -20,6 +20,7 @@ fn main() {
         .size(WINDOW_WIDTH, WINDOW_HEIGHT)
         .title(WINDOW_TITLE)
         .build();
+    raylib.set_exit_key(None);
 
     App::new(options).run(&mut raylib, &thread);
 }

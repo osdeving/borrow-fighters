@@ -32,18 +32,19 @@ Isso da uma arena com cerca de `11,8` larguras de corpo (`896 / 76`). Para o pro
 
 O corpo fisico ainda e um retangulo comum para todos os personagens. O sprite pode ultrapassar esse corpo para cabelo, orelha, roupa, efeito e leitura visual, mas a area vulneravel principal deve continuar coerente com a hurtbox.
 
-Para personagens humanoides, como Rust e Duke/Java:
+Para personagens humanoides, como Rust, Duke/Java e C:
 
 - altura visivel em idle: `185` a `210 px`;
 - largura visivel em idle: `110` a `150 px`;
 - referencia aprovada: Rust atual aparece com cerca de `123 x 206 px` em idle;
 - Java/Duke atual aparece com cerca de `121 x 188 px` em idle.
+- C atual deve ficar nessa mesma faixa humanoide; a versao inicial usa `scale = 1.16` no manifesto para compensar o recorte dos atlas de referencia.
 
-Para personagens baixos/largos ou nao-humanos, como Go/Gopher:
+Para personagens nao-humanos, como Go/Gopher:
 
-- altura visivel em idle: `150` a `185 px`;
-- largura visivel em idle: ate `180 px` enquanto a hurtbox continuar legivel;
-- se a largura passar muito disso, o personagem deve ganhar corpo fisico proprio ou a arte precisa ser redesenhada mais estreita.
+- altura visivel em idle: preferencialmente a mesma faixa principal, `185` a `210 px`, salvo decisao explicita de gameplay;
+- largura visivel em idle: preferencialmente `110` a `150 px`;
+- se a largura passar muito disso, primeiro tente redesenhar/normalizar a arte mais estreita; corpo fisico proprio so deve entrar quando a diferenca for parte real da gameplay.
 
 Golpes, armas, projeteis e VFX podem passar desses limites. O que nao pode acontecer e o corpo base do personagem parecer em uma escala diferente da gameplay.
 
@@ -77,12 +78,13 @@ O corpo fisico de personagem usa outro manifesto:
 - schema: `borrow-fighters.character-body-metrics.v1`;
 - campos por personagem: `width`, `standing_height`, `crouch_height`.
 
-Esse manifesto alimenta a luta normal e o Sprite Combat Viewer. Ele deve ser usado quando a silhueta visual exige corpo diferente, como Go/Gopher. Hitboxes de golpes e origem de projectile continuam em dados de golpe ou `frames[].combat`; corpo fisico nao deve virar substituto para alcance de ataque.
+Esse manifesto alimenta a luta normal e o Sprite Combat Viewer. Ele deve ser usado quando a silhueta visual exige corpo diferente por gameplay, nao como primeira resposta para um sprite mal proporcionado. Hitboxes de golpes e origem de projectile continuam em dados de golpe ou `frames[].combat`; corpo fisico nao deve virar substituto para alcance de ataque.
 
 Fluxo recomendado:
 
 ```bash
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/go-fighter.sprite.json --clip idle --character go --move light_punch
+cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip idle --character c --move light_punch
 ```
 
 No viewer:
@@ -99,9 +101,13 @@ No viewer:
 
 ## Correcoes Aplicadas No Go
 
-O Go ficou grande visualmente porque o Gopher e muito mais largo que o corpo humanoide usado pelo greybox. A correcao atual reduziu `assets/placeholder/go-fighter.sprite.json` para `scale = 0.88` e definiu o corpo fisico do Go em `assets/tuning/character-body-metrics.json` como `width = 92`, `standing_height = 156` e `crouch_height = 88`.
+O Go ficou baixo e largo demais em comparacao com Rust e C. A primeira correcao, com `scale = 0.88` e corpo fisico `92 x 156 / crouch 88`, deixou o personagem legivel, mas ainda reforcava a leitura de mascote pequeno/gordinho.
+
+A correcao atual comprime `assets/placeholder/go-fighter-atlas.png` e `assets/placeholder/go-start-atlas.png` horizontalmente em torno do pivot, remove ilhas soltas de frames no atlas de luta, define `scale = 1.08` nos manifestos do Go e usa corpo fisico padrao `76 x 168 / crouch 96` em `assets/tuning/character-body-metrics.json`. A intencao e preservar a identidade de Gopher sem fazer o personagem parecer baixo/largo ou em outra escala de jogo.
 
 Rust e Duke/Java foram normalizados para `scale = 1.0` porque esse era o tamanho efetivo que o jogo ja mostrava antes do renderer passar a respeitar `scale` do manifesto.
+
+O C entrou com corpo fisico humanoide padrao (`76 x 168 / crouch 96`) e `assets/placeholder/c-fighter.sprite.json` com `scale = 1.16`. Esse valor e provisorio: se a silhueta parecer maior ou menor que Rust/Duke em idle, ajuste primeiro `scale` e `pivot` pelo Sprite Combat Viewer antes de mexer em hitbox ou gameplay.
 
 ## Ainda Em Aberto
 

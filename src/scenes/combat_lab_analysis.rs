@@ -232,6 +232,7 @@ fn dummy_fighter_for(attacker_character: CharacterId) -> Fighter {
         CharacterId::Rust => CharacterId::Duke,
         CharacterId::Duke => CharacterId::Rust,
         CharacterId::Go => CharacterId::Duke,
+        CharacterId::C => CharacterId::Rust,
     };
     let spec = character_spec(character);
     Fighter::new_with_projectile_loadout_and_body_metrics(

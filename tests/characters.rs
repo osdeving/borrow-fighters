@@ -6,7 +6,7 @@ use borrow_fighters::characters::{
 };
 use borrow_fighters::combat::move_data::MoveId;
 use borrow_fighters::combat::projectile::{
-    DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, RUST_PROJECTILE_SPEC,
+    C_PROJECTILE_SPEC, DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, RUST_PROJECTILE_SPEC,
 };
 use borrow_fighters::game::world::World;
 
@@ -83,15 +83,41 @@ fn go_spec_points_to_current_prototype_moves() {
 }
 
 #[test]
-fn character_body_metrics_manifest_loads_go_as_shorter_wider_body() {
+fn c_spec_points_to_current_prototype_moves() {
+    let c = character_spec(CharacterId::C);
+
+    assert_eq!(c.display_name, "C");
+    assert_eq!(c.fighter_name, "C");
+    assert_eq!(c.archetype, CharacterArchetype::MidrangePressure);
+    assert_eq!(c.stats.max_health, 104);
+    assert_eq!(
+        c.move_ids,
+        &[
+            MoveId::LightPunch,
+            MoveId::HeavyPunch,
+            MoveId::Kick,
+            MoveId::SweepKick,
+            MoveId::OverheadPunch,
+            MoveId::RisingAntiAir,
+            MoveId::AirPunch,
+            MoveId::AirKick,
+            MoveId::CloseThrow,
+        ]
+    );
+}
+
+#[test]
+fn character_body_metrics_manifest_loads_go_as_leaner_mascot_body() {
     let catalog = CharacterBodyMetricsCatalog::load(CHARACTER_BODY_METRICS_PATH)
         .expect("character body metrics should load");
     let rust = catalog.body_metrics_for(CharacterId::Rust);
     let go = catalog.body_metrics_for(CharacterId::Go);
 
     assert_eq!(rust, character_spec(CharacterId::Rust).body_metrics);
-    assert!(go.width > rust.width);
-    assert!(go.standing_height < rust.standing_height);
+    assert_eq!(go, character_spec(CharacterId::Go).body_metrics);
+    assert_eq!(go.width, rust.width);
+    assert_eq!(go.standing_height, rust.standing_height);
+    assert_eq!(go.crouch_height, rust.crouch_height);
 }
 
 #[test]
@@ -132,17 +158,22 @@ fn character_cli_aliases_are_stable() {
     assert_eq!(CharacterId::from_cli("go"), Some(CharacterId::Go));
     assert_eq!(CharacterId::from_cli("golang"), Some(CharacterId::Go));
     assert_eq!(CharacterId::from_cli("gopher"), Some(CharacterId::Go));
+    assert_eq!(CharacterId::from_cli("c"), Some(CharacterId::C));
+    assert_eq!(CharacterId::from_cli("langc"), Some(CharacterId::C));
     assert_eq!(CharacterId::from_audio_key("go"), Some(CharacterId::Go));
+    assert_eq!(CharacterId::from_audio_key("c"), Some(CharacterId::C));
 }
 
 #[test]
 fn character_roster_cycles_in_menu_order() {
     assert_eq!(CharacterId::Rust.next(), CharacterId::Duke);
     assert_eq!(CharacterId::Duke.next(), CharacterId::Go);
-    assert_eq!(CharacterId::Go.next(), CharacterId::Rust);
-    assert_eq!(CharacterId::Rust.previous(), CharacterId::Go);
+    assert_eq!(CharacterId::Go.next(), CharacterId::C);
+    assert_eq!(CharacterId::C.next(), CharacterId::Rust);
+    assert_eq!(CharacterId::Rust.previous(), CharacterId::C);
     assert_eq!(CharacterId::Duke.previous(), CharacterId::Rust);
     assert_eq!(CharacterId::Go.previous(), CharacterId::Duke);
+    assert_eq!(CharacterId::C.previous(), CharacterId::Go);
 }
 
 #[test]
@@ -150,10 +181,12 @@ fn character_projectiles_follow_archetype_intent() {
     let rust = character_spec(CharacterId::Rust).projectile;
     let duke = character_spec(CharacterId::Duke).projectile;
     let go = character_spec(CharacterId::Go).projectile;
+    let c = character_spec(CharacterId::C).projectile;
 
     assert_eq!(rust, RUST_PROJECTILE_SPEC);
     assert_eq!(duke, DUKE_PROJECTILE_SPEC);
     assert_eq!(go, GO_PROJECTILE_SPEC);
+    assert_eq!(c, C_PROJECTILE_SPEC);
 
     assert!(duke.damage > rust.damage);
     assert!(duke.speed < rust.speed);
@@ -164,4 +197,11 @@ fn character_projectiles_follow_archetype_intent() {
     assert!(go.speed > rust.speed);
     assert!(go.frame_data.cooldown < rust.frame_data.cooldown);
     assert!(go.max_travel.is_some());
+
+    assert_eq!(c.damage, rust.damage);
+    assert!(c.speed > rust.speed);
+    assert!(c.speed < go.speed);
+    assert!(c.width > rust.width);
+    assert_eq!(c.height, rust.height);
+    assert_eq!(c.max_travel, None);
 }

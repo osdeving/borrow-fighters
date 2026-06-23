@@ -223,7 +223,7 @@ impl Display for CliError {
 impl std::error::Error for CliError {}
 
 fn usage() -> &'static str {
-    "Usage:\n  cargo run\n  cargo run -- --fight --p1 go --p2 duke\n  cargo run -- --lab combat --character rust --move light_punch\n  cargo run -- --lab combat --character duke --pose block\n  cargo run -- --lab combat --character go --move kick\n  cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle --character rust --move projectile"
+    "Usage:\n  cargo run\n  cargo run -- --fight --p1 c --p2 duke\n  cargo run -- --lab combat --character rust --move light_punch\n  cargo run -- --lab combat --character duke --pose block\n  cargo run -- --lab combat --character c --move kick\n  cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip idle --character c --move projectile"
 }
 
 fn infer_sprite_viewer_character(path: &std::path::Path) -> Option<CharacterId> {
@@ -234,6 +234,8 @@ fn infer_sprite_viewer_character(path: &std::path::Path) -> Option<CharacterId> 
         Some(CharacterId::Duke)
     } else if raw.contains("go") || raw.contains("gopher") || raw.contains("golang") {
         Some(CharacterId::Go)
+    } else if raw.contains("langc") || raw.contains("c-fighter") || raw.contains("/c-") {
+        Some(CharacterId::C)
     } else {
         None
     }

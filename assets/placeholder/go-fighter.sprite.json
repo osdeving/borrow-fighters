@@ -4,10 +4,11 @@
   "source": "../references/go-sprite-altas.png",
   "cell": { "w": 384, "h": 256 },
   "default_pivot": { "x": 112, "y": 236 },
-  "scale": 0.88,
+  "scale": 1.08,
   "notes": [
     "AI-generated Go/Gopher atlas candidate for runtime sprite validation.",
     "Frames use a 6x6 grid with 384x256 cells and consistent grounded pivot.",
+    "The atlas was compressed horizontally around the pivot, cleaned of stray frame islands, and uses scale 1.08 to keep the mascot taller and leaner near Rust/C gameplay proportions.",
     "Go Gopher is originally by Renee French; this is a project-local derivative candidate, not final art."
   ],
   "frames": [
@@ -48,9 +49,9 @@
 
     { "name": "taunt_0", "clip": "taunt", "duration_ms": 180, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 0, "y": 1280, "w": 384, "h": 256 } },
     { "name": "taunt_1", "clip": "taunt", "duration_ms": 180, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 384, "y": 1280, "w": 384, "h": 256 } },
-    { "name": "special_0", "clip": "special", "duration_ms": 100, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 768, "y": 1280, "w": 384, "h": 256 }, "combat": { "projectile_origin": { "x": 225, "y": 150 } } },
-    { "name": "special_1", "clip": "special", "duration_ms": 100, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1152, "y": 1280, "w": 384, "h": 256 }, "combat": { "projectile_origin": { "x": 245, "y": 151 } } },
-    { "name": "special_2", "clip": "special", "duration_ms": 100, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1536, "y": 1280, "w": 384, "h": 256 }, "combat": { "projectile_origin": { "x": 260, "y": 150 } } },
+    { "name": "special_0", "clip": "special", "duration_ms": 100, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 768, "y": 1280, "w": 384, "h": 256 }, "combat": { "projectile_origin": { "x": 180, "y": 150 } } },
+    { "name": "special_1", "clip": "special", "duration_ms": 100, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1152, "y": 1280, "w": 384, "h": 256 }, "combat": { "projectile_origin": { "x": 192, "y": 151 } } },
+    { "name": "special_2", "clip": "special", "duration_ms": 100, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1536, "y": 1280, "w": 384, "h": 256 }, "combat": { "projectile_origin": { "x": 201, "y": 150 } } },
     { "name": "idle_reference", "clip": "idle_reference", "duration_ms": 140, "pivot": { "x": 112, "y": 236 }, "frame": { "x": 1920, "y": 1280, "w": 384, "h": 256 } }
   ],
   "clips": [

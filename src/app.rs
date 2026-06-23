@@ -4,6 +4,7 @@
 //! gameplay steps, and delegates drawing to the render module.
 
 use raylib::prelude::*;
+use std::path::PathBuf;
 
 use crate::audio::{AudioEvent, MusicTrack};
 use crate::characters::{CHARACTER_BODY_METRICS_PATH, CharacterBodyMetricsCatalog, CharacterId};
@@ -18,6 +19,7 @@ use crate::engine::{
     audio::{AUDIO_MANIFEST_PATH, AudioPlayer},
     input::LocalInput,
     render::{self, GamepadStatus},
+    sprites::C_FIGHTER_MANIFEST_PATH,
     video_capture::VideoCapture,
 };
 use crate::game::ai::BasicCpu;
@@ -26,7 +28,7 @@ use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
 use crate::game::world::{World, WorldSpriteCombatManifests};
 use crate::scenes::{
     AppScene,
-    combat_lab::{CombatLab, CombatLabInput},
+    combat_lab::{CombatLab, CombatLabInput, CombatLabMove, CombatLabOptions},
     preferences::{PreferencesAction, PreferencesMenu},
     sprite_viewer::{SpriteViewer, SpriteViewerInput, SpriteViewerOptions, ViewerPoint},
 };
@@ -152,48 +154,100 @@ impl App {
 
             match self.scene {
                 AppScene::CombatLab => {
-                    self.update_combat_lab(
-                        raylib.get_frame_time().min(MAX_FRAME_TIME),
-                        input.combat_lab,
-                    );
-
-                    {
-                        let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
-                        render::draw_combat_lab(&mut draw, &self.combat_lab, &assets);
-                        render::draw_video_capture_overlay(
-                            &mut draw,
-                            self.video_capture.is_recording(),
-                            self.video_capture.last_message(),
+                    if input.open_preferences {
+                        self.scene = AppScene::Preferences;
+                        self.preferences_menu.ignore_next_input();
+                        self.accumulator = 0.0;
+                        audio_player.play(&AudioEvent::ui_back());
+                        audio_player.play_music(MusicTrack::Menu);
+                        {
+                            let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
+                            render::draw_preferences(
+                                &mut draw,
+                                render::PreferencesDrawOptions {
+                                    menu: &self.preferences_menu,
+                                    player_one_character: self.match_options.player_one,
+                                    player_two_character: self.match_options.player_two,
+                                    arena: self.current_arena,
+                                    flags: self.feature_flags,
+                                    gamepad_status,
+                                    recording: self.video_capture.is_recording(),
+                                    assets: &assets,
+                                },
+                            );
+                            render::draw_video_capture_overlay(
+                                &mut draw,
+                                self.video_capture.is_recording(),
+                                self.video_capture.last_message(),
+                            );
+                        }
+                    } else {
+                        self.update_combat_lab(
+                            raylib.get_frame_time().min(MAX_FRAME_TIME),
+                            input.combat_lab,
                         );
+
+                        {
+                            let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
+                            render::draw_combat_lab(&mut draw, &self.combat_lab, &assets);
+                            render::draw_video_capture_overlay(
+                                &mut draw,
+                                self.video_capture.is_recording(),
+                                self.video_capture.last_message(),
+                            );
+                        }
                     }
                     finish_frame(raylib, thread, &frame_target, &mut self.video_capture);
                 }
                 AppScene::Preferences => {
-                    play_preferences_audio_feedback(&mut audio_player, input.preferences);
-                    let preferences_action = self
-                        .preferences_menu
-                        .update(input.preferences, &mut self.feature_flags);
-                    match preferences_action {
-                        PreferencesAction::Stay => {}
-                        PreferencesAction::CyclePlayerOne(direction) => {
-                            self.match_options.player_one =
-                                cycle_character(self.match_options.player_one, direction);
-                            self.match_options_dirty = true;
-                        }
-                        PreferencesAction::CyclePlayerTwo(direction) => {
-                            self.match_options.player_two =
-                                cycle_character(self.match_options.player_two, direction);
-                            self.match_options_dirty = true;
-                        }
-                        PreferencesAction::ToggleRecording => {
-                            toggle_video_capture(&mut self.video_capture);
-                        }
-                        PreferencesAction::StartFight => {
-                            if self.world.outcome.is_some() || self.match_options_dirty {
-                                self.restart_match(&assets);
+                    if input.open_preferences && self.preferences_menu.back() {
+                        audio_player.play(&AudioEvent::ui_back());
+                    } else {
+                        play_preferences_audio_feedback(&mut audio_player, input.preferences);
+                        let preferences_action = self
+                            .preferences_menu
+                            .update(input.preferences, &mut self.feature_flags);
+                        match preferences_action {
+                            PreferencesAction::Stay => {}
+                            PreferencesAction::CyclePlayerOne(direction) => {
+                                self.match_options.player_one =
+                                    cycle_character(self.match_options.player_one, direction);
+                                self.match_options_dirty = true;
                             }
-                            self.scene = AppScene::Fight;
-                            audio_player.play_music(MusicTrack::Combat);
+                            PreferencesAction::CyclePlayerTwo(direction) => {
+                                self.match_options.player_two =
+                                    cycle_character(self.match_options.player_two, direction);
+                                self.match_options_dirty = true;
+                            }
+                            PreferencesAction::ToggleRecording => {
+                                toggle_video_capture(&mut self.video_capture);
+                            }
+                            PreferencesAction::OpenCombatLab => {
+                                self.combat_lab = CombatLab::new(CombatLabOptions {
+                                    character: self.match_options.player_one,
+                                    selected_move: CombatLabMove::Projectile,
+                                    ..CombatLabOptions::default()
+                                });
+                                self.scene = AppScene::CombatLab;
+                                self.accumulator = 0.0;
+                                audio_player.play_music(MusicTrack::Combat);
+                            }
+                            PreferencesAction::OpenSpriteViewer => {
+                                run_sprite_viewer(raylib, thread, default_sprite_viewer_options());
+                                if raylib.window_should_close() {
+                                    return;
+                                }
+                                self.preferences_menu.ignore_next_input();
+                                audio_player.play_music(MusicTrack::Menu);
+                            }
+                            PreferencesAction::StartFight => {
+                                if self.world.outcome.is_some() || self.match_options_dirty {
+                                    self.restart_match(&assets);
+                                }
+                                self.scene = AppScene::Fight;
+                                audio_player.play_music(MusicTrack::Combat);
+                            }
+                            PreferencesAction::Exit => return,
                         }
                     }
                     {
@@ -424,6 +478,7 @@ fn fighter_manifest_for_character(
         CharacterId::Rust => assets.rust_fighter.as_ref(),
         CharacterId::Duke => assets.duke_fighter.as_ref(),
         CharacterId::Go => assets.go_fighter.as_ref(),
+        CharacterId::C => assets.c_fighter.as_ref(),
     }
     .map(|atlas| atlas.manifest.clone())
 }
@@ -459,6 +514,9 @@ fn run_sprite_viewer(
         Err(error) => {
             let message = error.to_string();
             while !raylib.window_should_close() {
+                if raylib.is_key_pressed(KeyboardKey::KEY_ESCAPE) {
+                    break;
+                }
                 let mut draw = raylib.begin_drawing(thread);
                 render::draw_sprite_viewer_error(&mut draw, &message);
             }
@@ -471,6 +529,9 @@ fn run_sprite_viewer(
     let mut frame_target = load_frame_target(raylib, thread);
 
     while !raylib.window_should_close() {
+        if raylib.is_key_pressed(KeyboardKey::KEY_ESCAPE) {
+            break;
+        }
         update_video_capture_status(&mut video_capture);
         handle_video_capture_shortcuts(
             &mut video_capture,
@@ -509,6 +570,15 @@ fn run_sprite_viewer(
                 viewer.set_status_message(format!("Screenshot salvo em {path}."));
             }
         }
+    }
+}
+
+fn default_sprite_viewer_options() -> SpriteViewerOptions {
+    SpriteViewerOptions {
+        manifest_path: PathBuf::from(C_FIGHTER_MANIFEST_PATH),
+        initial_clip: Some("special".to_owned()),
+        character: Some(CharacterId::C),
+        selected_move: CombatLabMove::Projectile,
     }
 }
 
