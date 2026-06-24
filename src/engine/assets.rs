@@ -6,6 +6,7 @@
 use raylib::prelude::*;
 use std::path::Path;
 
+use crate::characters::CharacterId;
 use crate::engine::sprites::{
     C_BITSTREAM_PROJECTILE_PATH, C_FIGHTER_MANIFEST_PATH, C_START_MANIFEST_PATH,
     DUKE_BEAN_PROJECTILE_PATH, DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH,
@@ -15,20 +16,40 @@ use crate::engine::sprites::{
     RUST_START_MANIFEST_PATH, SpriteManifest,
 };
 use crate::game::arena::ArenaId;
+use crate::lore::{LORE_BOOK_PATH, LoreBook};
 
 pub const ARENA_SIRIUS_PATH: &str = "assets/placeholder/arena-sirius.png";
 pub const ARENA_FORTALEZA_PATH: &str = "assets/placeholder/arena-fortaleza.png";
 pub const ARENA_JAVA_STREET_PATH: &str = "assets/placeholder/arena-java-street.png";
+pub const ARENA_BIOTIC_PATH: &str = "assets/placeholder/arena-biotic.png";
+pub const ARENA_PORTO_DIGITAL_PATH: &str = "assets/placeholder/arena-porto-digital.png";
+pub const ARENA_VALE_PINHAO_PATH: &str = "assets/placeholder/arena-vale-pinhao.png";
 
 pub const COUNTDOWN_11_PATH: &str = "assets/placeholder/countdown-11.png";
 pub const COUNTDOWN_10_PATH: &str = "assets/placeholder/countdown-10.png";
 pub const COUNTDOWN_01_PATH: &str = "assets/placeholder/countdown-01.png";
 pub const COUNTDOWN_FIGHT_PATH: &str = "assets/placeholder/countdown-fight.png";
 pub const MENU_TITLE_PATH: &str = "assets/placeholder/menu-title-borrow-fighters.png";
+pub const ROSTER_RUST_PATH: &str = "assets/placeholder/roster-rust.png";
+pub const ROSTER_DUKE_PATH: &str = "assets/placeholder/roster-duke.png";
+pub const ROSTER_C_PATH: &str = "assets/placeholder/roster-c.png";
+pub const ROSTER_PYTHON_PATH: &str = "assets/placeholder/roster-python.png";
 const MENU_FONT_CANDIDATES: [&str; 3] = [
     "assets/fonts/menu.ttf",
     "/usr/share/fonts/truetype/roboto/unhinted/RobotoCondensed-Bold.ttf",
     "/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed-Bold.ttf",
+];
+const LORE_FONT_CANDIDATES: [&str; 4] = [
+    "assets/fonts/lore.ttf",
+    "/usr/share/fonts/truetype/noto/NotoSerif-Regular.ttf",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+    "/usr/share/fonts/truetype/freefont/FreeSerif.ttf",
+];
+const LORE_BODY_FONT_CANDIDATES: [&str; 4] = [
+    "assets/fonts/lore-body.ttf",
+    "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    "/usr/share/fonts/truetype/freefont/FreeSans.ttf",
 ];
 
 /// Texture and metadata for one atlas-driven sprite set.
@@ -40,8 +61,12 @@ pub struct SpriteAtlasAsset {
 /// Runtime textures used by the prototype renderer.
 pub struct GameAssets {
     pub arenas: ArenaAssets,
+    pub lore_book: LoreBook,
     pub menu_font: Option<Font>,
+    pub lore_font: Option<Font>,
+    pub lore_body_font: Option<Font>,
     pub menu_title: Option<Texture2D>,
+    pub roster_portraits: RosterPortraitAssets,
     pub fighter_spritesheet: Option<Texture2D>,
     pub rust_fighter: Option<SpriteAtlasAsset>,
     pub rust_start: Option<SpriteAtlasAsset>,
@@ -69,6 +94,30 @@ pub struct ArenaAssets {
     pub sirius: Option<Texture2D>,
     pub fortaleza: Option<Texture2D>,
     pub java_street: Option<Texture2D>,
+    pub biotic: Option<Texture2D>,
+    pub porto_digital: Option<Texture2D>,
+    pub vale_pinhao: Option<Texture2D>,
+}
+
+/// Roster portrait textures loaded at the Raylib boundary.
+pub struct RosterPortraitAssets {
+    pub rust: Option<Texture2D>,
+    pub duke: Option<Texture2D>,
+    pub c: Option<Texture2D>,
+    pub python: Option<Texture2D>,
+}
+
+impl RosterPortraitAssets {
+    /// Returns the portrait for a selected character.
+    pub fn get(&self, character: CharacterId) -> Option<&Texture2D> {
+        match character {
+            CharacterId::Rust => self.rust.as_ref(),
+            CharacterId::Duke => self.duke.as_ref(),
+            CharacterId::C => self.c.as_ref(),
+            CharacterId::Python => self.python.as_ref(),
+            CharacterId::Go => None,
+        }
+    }
 }
 
 impl ArenaAssets {
@@ -78,6 +127,9 @@ impl ArenaAssets {
             ArenaId::Sirius => self.sirius.as_ref(),
             ArenaId::Fortaleza => self.fortaleza.as_ref(),
             ArenaId::JavaStreet => self.java_street.as_ref(),
+            ArenaId::BioTic => self.biotic.as_ref(),
+            ArenaId::PortoDigital => self.porto_digital.as_ref(),
+            ArenaId::ValeDoPinhao => self.vale_pinhao.as_ref(),
         }
     }
 }
@@ -90,9 +142,21 @@ impl GameAssets {
                 sirius: load_texture_optional(raylib, thread, ARENA_SIRIUS_PATH),
                 fortaleza: load_texture_optional(raylib, thread, ARENA_FORTALEZA_PATH),
                 java_street: load_texture_optional(raylib, thread, ARENA_JAVA_STREET_PATH),
+                biotic: load_texture_optional(raylib, thread, ARENA_BIOTIC_PATH),
+                porto_digital: load_texture_optional(raylib, thread, ARENA_PORTO_DIGITAL_PATH),
+                vale_pinhao: load_texture_optional(raylib, thread, ARENA_VALE_PINHAO_PATH),
             },
+            lore_book: LoreBook::load_or_default(LORE_BOOK_PATH),
             menu_font: load_font_optional(raylib, thread),
+            lore_font: load_lore_font_optional(raylib, thread),
+            lore_body_font: load_lore_body_font_optional(raylib, thread),
             menu_title: load_texture_optional(raylib, thread, MENU_TITLE_PATH),
+            roster_portraits: RosterPortraitAssets {
+                rust: load_texture_optional(raylib, thread, ROSTER_RUST_PATH),
+                duke: load_texture_optional(raylib, thread, ROSTER_DUKE_PATH),
+                c: load_texture_optional(raylib, thread, ROSTER_C_PATH),
+                python: load_texture_optional(raylib, thread, ROSTER_PYTHON_PATH),
+            },
             fighter_spritesheet: load_texture_optional(raylib, thread, FIGHTER_SPRITESHEET_PATH),
             rust_fighter: load_sprite_atlas_optional(raylib, thread, RUST_FIGHTER_MANIFEST_PATH),
             rust_start: load_sprite_atlas_optional(raylib, thread, RUST_START_MANIFEST_PATH),
@@ -129,6 +193,34 @@ fn load_font_optional(raylib: &mut RaylibHandle, thread: &RaylibThread) -> Optio
         match raylib.load_font_ex(thread, path, 72, None) {
             Ok(font) => return Some(font),
             Err(error) => eprintln!("warning: could not load menu font {path}: {error:?}"),
+        }
+    }
+
+    None
+}
+
+fn load_lore_font_optional(raylib: &mut RaylibHandle, thread: &RaylibThread) -> Option<Font> {
+    for path in LORE_FONT_CANDIDATES {
+        if !Path::new(path).exists() {
+            continue;
+        }
+        match raylib.load_font_ex(thread, path, 64, None) {
+            Ok(font) => return Some(font),
+            Err(error) => eprintln!("warning: could not load lore font {path}: {error:?}"),
+        }
+    }
+
+    None
+}
+
+fn load_lore_body_font_optional(raylib: &mut RaylibHandle, thread: &RaylibThread) -> Option<Font> {
+    for path in LORE_BODY_FONT_CANDIDATES {
+        if !Path::new(path).exists() {
+            continue;
+        }
+        match raylib.load_font_ex(thread, path, 48, None) {
+            Ok(font) => return Some(font),
+            Err(error) => eprintln!("warning: could not load lore body font {path}: {error:?}"),
         }
     }
 

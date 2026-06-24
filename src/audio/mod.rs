@@ -225,6 +225,12 @@ impl AudioEvent {
 pub enum MusicTrack {
     Menu,
     Combat,
+    CombatChiptuneBattle,
+    CombatRinsTheme,
+    CombatEightBitBattle,
+    CombatConsoleFloor,
+    CombatRandomEncounter,
+    CombatDeterminedPursuit,
 }
 
 impl MusicTrack {
@@ -233,6 +239,12 @@ impl MusicTrack {
         match self {
             Self::Menu => "menu",
             Self::Combat => "combat",
+            Self::CombatChiptuneBattle => "combat-chiptune-battle",
+            Self::CombatRinsTheme => "combat-rins-theme",
+            Self::CombatEightBitBattle => "combat-8bit-battle",
+            Self::CombatConsoleFloor => "combat-console-floor",
+            Self::CombatRandomEncounter => "combat-random-encounter",
+            Self::CombatDeterminedPursuit => "combat-determined-pursuit",
         }
     }
 
@@ -241,6 +253,12 @@ impl MusicTrack {
         match value {
             "menu" => Some(Self::Menu),
             "combat" => Some(Self::Combat),
+            "combat-chiptune-battle" => Some(Self::CombatChiptuneBattle),
+            "combat-rins-theme" => Some(Self::CombatRinsTheme),
+            "combat-8bit-battle" => Some(Self::CombatEightBitBattle),
+            "combat-console-floor" => Some(Self::CombatConsoleFloor),
+            "combat-random-encounter" => Some(Self::CombatRandomEncounter),
+            "combat-determined-pursuit" => Some(Self::CombatDeterminedPursuit),
             _ => None,
         }
     }
@@ -370,12 +388,30 @@ impl AudioBank {
         &self,
         event: &AudioEvent,
     ) -> Option<(usize, &AudioBindingDefinition)> {
+        let index = self.binding_index_for_event(event)?;
+        self.manifest
+            .bindings
+            .get(index)
+            .map(|binding| (index, binding))
+    }
+
+    /// Finds the most specific binding index for an event.
+    pub fn binding_index_for_event(&self, event: &AudioEvent) -> Option<usize> {
         self.manifest
             .bindings
             .iter()
             .enumerate()
             .filter(|(_, binding)| binding_matches_event(binding, event))
             .max_by_key(|(_, binding)| binding.specificity())
+            .map(|(index, _)| index)
+    }
+
+    /// Returns clip ids for a binding index.
+    pub fn binding_clip_ids(&self, binding_index: usize) -> Option<&[String]> {
+        self.manifest
+            .bindings
+            .get(binding_index)
+            .map(|binding| binding.clips.as_slice())
     }
 }
 

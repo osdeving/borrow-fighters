@@ -16,8 +16,10 @@ pub struct AudioPlayer<'aud> {
     bank: AudioBank,
     sounds: HashMap<String, LoadedSound<'aud>>,
     music: HashMap<String, LoadedMusic<'aud>>,
-    binding_cursors: HashMap<usize, usize>,
+    binding_cursors: Vec<usize>,
     current_music: Option<String>,
+    music_ducked: bool,
+    music_volume: f32,
     enabled: bool,
 }
 
@@ -41,8 +43,10 @@ impl<'aud> AudioPlayer<'aud> {
             bank: AudioBank::default(),
             sounds: HashMap::new(),
             music: HashMap::new(),
-            binding_cursors: HashMap::new(),
+            binding_cursors: Vec::new(),
             current_music: None,
+            music_ducked: false,
+            music_volume: 1.0,
             enabled: false,
         }
     }
@@ -108,12 +112,15 @@ impl<'aud> AudioPlayer<'aud> {
             }
         }
 
+        let binding_count = bank.bindings().len();
         Self {
             bank,
             sounds,
             music,
-            binding_cursors: HashMap::new(),
+            binding_cursors: vec![0; binding_count],
             current_music: None,
+            music_ducked: false,
+            music_volume: 1.0,
             enabled: true,
         }
     }
@@ -158,30 +165,65 @@ impl<'aud> AudioPlayer<'aud> {
         let Some(next) = self.music.get(next_id) else {
             return;
         };
-        next.music.set_volume(next.volume);
+        next.music.set_volume(music_output_volume(
+            next.volume,
+            self.music_ducked,
+            self.music_volume,
+        ));
         next.music.set_pitch(next.pitch);
         next.music.play_stream();
         self.current_music = Some(next_id.to_owned());
     }
 
     /// Lowers the active music while a foreground cue needs priority.
-    pub fn set_music_ducking(&self, ducked: bool) {
+    pub fn set_music_ducking(&mut self, ducked: bool) {
         if !self.enabled {
             return;
         }
 
-        let multiplier = if ducked { 0.35 } else { 1.0 };
+        if self.music_ducked == ducked {
+            return;
+        }
+        self.music_ducked = ducked;
 
         if let Some(current) = self
             .current_music
             .as_ref()
             .and_then(|id| self.music.get(id))
         {
-            current
-                .music
-                .set_volume((current.volume * multiplier).clamp(0.0, 1.0));
+            current.music.set_volume(music_output_volume(
+                current.volume,
+                self.music_ducked,
+                self.music_volume,
+            ));
         }
     }
+
+    /// Sets the global music volume multiplier for all streamed tracks.
+    pub fn set_music_volume(&mut self, volume: f32) {
+        if !self.enabled {
+            return;
+        }
+
+        let volume = volume.clamp(0.0, 1.0);
+        if (self.music_volume - volume).abs() <= f32::EPSILON {
+            return;
+        }
+        self.music_volume = volume;
+
+        if let Some(current) = self
+            .current_music
+            .as_ref()
+            .and_then(|id| self.music.get(id))
+        {
+            current.music.set_volume(music_output_volume(
+                current.volume,
+                self.music_ducked,
+                self.music_volume,
+            ));
+        }
+    }
+
     /// Plays every event in order.
     pub fn play_events(&mut self, events: impl IntoIterator<Item = AudioEvent>) {
         for event in events {
@@ -195,14 +237,19 @@ impl<'aud> AudioPlayer<'aud> {
             return;
         }
 
-        let Some((binding_index, binding)) = self.bank.binding_for_event(event) else {
+        let Some(binding_index) = self.bank.binding_index_for_event(event) else {
             return;
         };
-        let clip_ids = binding.clips.clone();
-        let Some(clip_id) = self.next_loaded_clip_id(binding_index, &clip_ids) else {
+        let Some(clip_ids) = self.bank.binding_clip_ids(binding_index) else {
             return;
         };
-        let Some(loaded) = self.sounds.get(&clip_id) else {
+        let Some(cursor) = self.binding_cursors.get_mut(binding_index) else {
+            return;
+        };
+        let Some(clip_id) = next_loaded_clip_id(clip_ids, &self.sounds, cursor) else {
+            return;
+        };
+        let Some(loaded) = self.sounds.get(clip_id) else {
             return;
         };
 
@@ -210,24 +257,6 @@ impl<'aud> AudioPlayer<'aud> {
         loaded.sound.set_pitch(loaded.pitch);
         loaded.sound.set_pan(loaded.pan);
         loaded.sound.play();
-    }
-
-    fn next_loaded_clip_id(&mut self, binding_index: usize, clip_ids: &[String]) -> Option<String> {
-        if clip_ids.is_empty() {
-            return None;
-        }
-
-        let start = *self.binding_cursors.get(&binding_index).unwrap_or(&0);
-        for offset in 0..clip_ids.len() {
-            let index = (start + offset) % clip_ids.len();
-            if self.sounds.contains_key(&clip_ids[index]) {
-                self.binding_cursors
-                    .insert(binding_index, (index + 1) % clip_ids.len());
-                return Some(clip_ids[index].clone());
-            }
-        }
-
-        None
     }
 }
 
@@ -249,5 +278,49 @@ impl<'aud> LoadedMusic<'aud> {
             volume: track.volume.clamp(0.0, 1.0),
             pitch: track.pitch.max(0.01),
         }
+    }
+}
+
+fn next_loaded_clip_id<'clips, 'aud>(
+    clip_ids: &'clips [String],
+    sounds: &HashMap<String, LoadedSound<'aud>>,
+    cursor: &mut usize,
+) -> Option<&'clips str> {
+    if clip_ids.is_empty() {
+        return None;
+    }
+
+    let start = *cursor % clip_ids.len();
+    for offset in 0..clip_ids.len() {
+        let index = (start + offset) % clip_ids.len();
+        let clip_id = clip_ids[index].as_str();
+        if sounds.contains_key(clip_id) {
+            *cursor = (index + 1) % clip_ids.len();
+            return Some(clip_id);
+        }
+    }
+
+    None
+}
+
+fn music_output_volume(volume: f32, ducked: bool, music_volume: f32) -> f32 {
+    let multiplier = if ducked { 0.35 } else { 1.0 };
+    (volume * multiplier * music_volume).clamp(0.0, 1.0)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn music_output_volume_applies_ducking_and_user_volume() {
+        assert_near(music_output_volume(0.5, false, 1.0), 0.5);
+        assert_near(music_output_volume(0.5, false, 0.4), 0.2);
+        assert_near(music_output_volume(0.5, true, 1.0), 0.175);
+        assert_near(music_output_volume(2.0, false, 1.0), 1.0);
+    }
+
+    fn assert_near(actual: f32, expected: f32) {
+        assert!((actual - expected).abs() < 0.0001, "{actual} != {expected}");
     }
 }

@@ -15,7 +15,7 @@ O protótipo 0.1 já possui uma versão jogável em Rust + Raylib na `main`.
 O slice atual inclui:
 
 - janela, loop principal e carregamento de assets;
-- menu principal mínimo com submenus de versus, treino e opções;
+- menu principal mínimo com submenus de versus, treino, lore/roster e opções, incluindo seleção de arena e volume de música;
 - dois jogadores locais, com Player 2 em CPU por padrão;
 - opção de IA para ambos os jogadores;
 - movimento horizontal, pulo diagonal, abaixar e defesa;
@@ -25,11 +25,12 @@ O slice atual inclui:
 - hitbox/hurtbox configuráveis no código;
 - dano, vida, vitória e reinício;
 - flags runtime para HUD, debug, ajuda, gamepad, dano do Player 1 e dano do Player 2;
-- arenas bitmap Sirius, Fortaleza Tech Coast e Java Street com rotação no início da próxima luta após uma vitória;
+- seis arenas bitmap com nome/contexto, seleção manual no menu e rotação no início da próxima luta após uma vitória;
 - entrada cinematográfica com contagem pré-luta `11` / `10` / `01` / `Fight!`;
 - runtime inicial de sprites por atlas + manifesto JSON;
 - animações placeholder de luta, entrada cinematográfica e vitória.
-- motor inicial de áudio por eventos, incluindo música, impactos, UI e contagem pré-luta.
+- motor inicial de áudio por eventos, incluindo música por tela/arena, impactos, UI, contagem pré-luta e vozes de golpes por personagem.
+- livro de história e fichas de roster carregados de `assets/lore/story.json` em runtime.
 
 Ainda não é uma release fechada. O objetivo agora é melhorar leitura visual, timing, feeling e documentação de contribuição para artistas.
 
@@ -67,7 +68,7 @@ Ainda não é uma release fechada. O objetivo agora é melhorar leitura visual, 
 - IA avançada ou competitiva.
 - Sprites finais.
 - Áudio final.
-- Vários personagens.
+- Roster grande ou final de personagens.
 - Menus completos de produto final, como story mode, perfil, loja ou seleção visual completa.
 - Sistema de combo.
 - Story mode.

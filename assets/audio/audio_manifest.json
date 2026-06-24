@@ -14,6 +14,48 @@
       "volume": 0.10,
       "looping": true,
       "required": true
+    },
+    {
+      "id": "combat-chiptune-battle",
+      "file": "assets/audio/music/combat-chiptune-battle.ogg",
+      "volume": 0.09,
+      "looping": true,
+      "required": true
+    },
+    {
+      "id": "combat-rins-theme",
+      "file": "assets/audio/music/combat-rins-theme.ogg",
+      "volume": 0.08,
+      "looping": true,
+      "required": true
+    },
+    {
+      "id": "combat-8bit-battle",
+      "file": "assets/audio/music/combat-8bit-battle.ogg",
+      "volume": 0.08,
+      "looping": true,
+      "required": true
+    },
+    {
+      "id": "combat-console-floor",
+      "file": "assets/audio/music/combat-console-floor.ogg",
+      "volume": 0.075,
+      "looping": true,
+      "required": true
+    },
+    {
+      "id": "combat-random-encounter",
+      "file": "assets/audio/music/combat-random-encounter.ogg",
+      "volume": 0.075,
+      "looping": true,
+      "required": true
+    },
+    {
+      "id": "combat-determined-pursuit",
+      "file": "assets/audio/music/combat-determined-pursuit.ogg",
+      "volume": 0.075,
+      "looping": true,
+      "required": true
     }
   ],
   "clips": [
@@ -135,13 +177,31 @@
       "id": "voice.rust.attack.borrow_jab.01",
       "file": "assets/audio/characters/rust/voice/attack-borrow-jab-01.ogg",
       "bus": "voice",
-      "volume": 0.42
+      "volume": 0.58
     },
     {
       "id": "voice.rust.attack.kick.01",
       "file": "assets/audio/characters/rust/voice/attack-kick-01.ogg",
       "bus": "voice",
-      "volume": 0.42
+      "volume": 0.58
+    },
+    {
+      "id": "voice.rust.attack.heavy.01",
+      "file": "assets/audio/characters/rust/voice/attack-heavy-01.ogg",
+      "bus": "voice",
+      "volume": 0.72
+    },
+    {
+      "id": "voice.rust.attack.lifetime.01",
+      "file": "assets/audio/characters/rust/voice/attack-lifetime-01.ogg",
+      "bus": "voice",
+      "volume": 0.7
+    },
+    {
+      "id": "voice.rust.attack.ownership.01",
+      "file": "assets/audio/characters/rust/voice/attack-ownership-01.ogg",
+      "bus": "voice",
+      "volume": 0.7
     },
     {
       "id": "voice.rust.hurt.01",
@@ -165,13 +225,34 @@
       "id": "voice.duke.attack.boilerplate_poke.01",
       "file": "assets/audio/characters/duke/voice/attack-boilerplate-poke-01.ogg",
       "bus": "voice",
-      "volume": 0.48
+      "volume": 0.62
     },
     {
       "id": "voice.duke.attack.kick.01",
       "file": "assets/audio/characters/duke/voice/attack-kick-01.ogg",
       "bus": "voice",
-      "volume": 0.48
+      "volume": 0.62
+    },
+    {
+      "id": "voice.duke.attack.heavy.01",
+      "file": "assets/audio/characters/duke/voice/attack-heavy-01.ogg",
+      "bus": "voice",
+      "volume": 0.72,
+      "pitch": 0.94
+    },
+    {
+      "id": "voice.duke.attack.sweep.01",
+      "file": "assets/audio/characters/duke/voice/attack-sweep-01.ogg",
+      "bus": "voice",
+      "volume": 0.68,
+      "pitch": 0.92
+    },
+    {
+      "id": "voice.duke.attack.enterprise.01",
+      "file": "assets/audio/characters/duke/voice/attack-enterprise-01.ogg",
+      "bus": "voice",
+      "volume": 0.72,
+      "pitch": 0.9
     },
     {
       "id": "voice.duke.hurt.01",
@@ -190,6 +271,97 @@
       "file": "assets/audio/characters/duke/sfx/projectile-cast-01.ogg",
       "bus": "sfx",
       "volume": 0.58
+    },
+    {
+      "id": "voice.go.attack.goroutine_jab.01",
+      "file": "assets/audio/characters/go/voice/attack-goroutine-jab-01.ogg",
+      "bus": "voice",
+      "volume": 0.82,
+      "pitch": 1.08
+    },
+    {
+      "id": "voice.go.attack.defer_kick.01",
+      "file": "assets/audio/characters/go/voice/attack-defer-kick-01.ogg",
+      "bus": "voice",
+      "volume": 0.76,
+      "pitch": 1.08
+    },
+    {
+      "id": "voice.go.hurt.01",
+      "file": "assets/audio/characters/go/voice/hurt-01.ogg",
+      "bus": "voice",
+      "volume": 0.44,
+      "pitch": 1.05
+    },
+    {
+      "id": "voice.go.block.01",
+      "file": "assets/audio/characters/go/voice/block-01.ogg",
+      "bus": "voice",
+      "volume": 0.42,
+      "pitch": 1.05
+    },
+    {
+      "id": "voice.c.attack.pointer_jab.01",
+      "file": "assets/audio/characters/c/voice/attack-pointer-jab-01.ogg",
+      "bus": "voice",
+      "volume": 0.62,
+      "pitch": 0.92
+    },
+    {
+      "id": "voice.c.attack.unsafe_poke.01",
+      "file": "assets/audio/characters/c/voice/attack-unsafe-poke-01.ogg",
+      "bus": "voice",
+      "volume": 0.62,
+      "pitch": 0.9
+    },
+    {
+      "id": "voice.c.hurt.01",
+      "file": "assets/audio/characters/c/voice/hurt-01.ogg",
+      "bus": "voice",
+      "volume": 0.52,
+      "pitch": 0.9
+    },
+    {
+      "id": "voice.c.block.01",
+      "file": "assets/audio/characters/c/voice/block-01.ogg",
+      "bus": "voice",
+      "volume": 0.48,
+      "pitch": 0.92
+    },
+    {
+      "id": "voice.python.attack.snake_bite.01",
+      "file": "assets/audio/characters/python/voice/attack-snake-bite-01.ogg",
+      "bus": "voice",
+      "volume": 0.58,
+      "pitch": 1.02
+    },
+    {
+      "id": "voice.python.attack.data_strike.01",
+      "file": "assets/audio/characters/python/voice/attack-data-strike-01.ogg",
+      "bus": "voice",
+      "volume": 0.58,
+      "pitch": 1.02
+    },
+    {
+      "id": "voice.python.attack.heel_kick.01",
+      "file": "assets/audio/characters/python/voice/attack-heel-kick-01.ogg",
+      "bus": "voice",
+      "volume": 0.58,
+      "pitch": 1.02
+    },
+    {
+      "id": "voice.python.hurt.01",
+      "file": "assets/audio/characters/python/voice/hurt-01.ogg",
+      "bus": "voice",
+      "volume": 0.5,
+      "pitch": 1.0
+    },
+    {
+      "id": "voice.python.block.01",
+      "file": "assets/audio/characters/python/voice/block-01.ogg",
+      "bus": "voice",
+      "volume": 0.48,
+      "pitch": 1.0
     }
   ],
   "bindings": [
@@ -238,8 +410,60 @@
     {
       "cue": "fighter.attack.start",
       "character": "rust",
+      "move": "heavy_punch",
+      "clips": ["voice.rust.attack.heavy.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
       "move": "kick",
-      "clips": ["voice.rust.attack.kick.01"]
+      "clips": ["voice.rust.attack.ownership.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
+      "move": "sweep_kick",
+      "clips": ["voice.rust.attack.kick.01", "voice.rust.attack.ownership.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
+      "move": "overhead_punch",
+      "clips": ["voice.rust.attack.heavy.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
+      "move": "rust_lifetime_anti_air",
+      "clips": ["voice.rust.attack.lifetime.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
+      "move": "air_punch",
+      "clips": ["voice.rust.attack.heavy.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
+      "move": "air_kick",
+      "clips": ["voice.rust.attack.ownership.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
+      "move": "rust_ownership_throw",
+      "clips": ["voice.rust.attack.ownership.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
+      "clips": [
+        "voice.rust.attack.borrow_jab.01",
+        "voice.rust.attack.heavy.01",
+        "voice.rust.attack.lifetime.01",
+        "voice.rust.attack.ownership.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
@@ -250,8 +474,124 @@
     {
       "cue": "fighter.attack.start",
       "character": "duke",
+      "move": "light_punch",
+      "clips": ["voice.duke.attack.heavy.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
       "move": "kick",
-      "clips": ["voice.duke.attack.kick.01"]
+      "clips": ["voice.duke.attack.sweep.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
+      "move": "duke_garbage_collector_sweep",
+      "clips": ["voice.duke.attack.sweep.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
+      "move": "duke_abstract_factory_overhead",
+      "clips": ["voice.duke.attack.heavy.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
+      "move": "rising_anti_air",
+      "clips": ["voice.duke.attack.heavy.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
+      "move": "air_punch",
+      "clips": ["voice.duke.attack.heavy.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
+      "move": "air_kick",
+      "clips": ["voice.duke.attack.sweep.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
+      "move": "duke_enterprise_throw",
+      "clips": ["voice.duke.attack.enterprise.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
+      "clips": [
+        "voice.duke.attack.boilerplate_poke.01",
+        "voice.duke.attack.heavy.01",
+        "voice.duke.attack.sweep.01",
+        "voice.duke.attack.enterprise.01"
+      ]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "go",
+      "move": "go_goroutine_jab",
+      "clips": ["voice.go.attack.goroutine_jab.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "go",
+      "move": "go_defer_kick",
+      "clips": ["voice.go.attack.defer_kick.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "go",
+      "clips": [
+        "voice.go.attack.goroutine_jab.01",
+        "voice.go.attack.defer_kick.01"
+      ]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "c",
+      "move": "c_pointer_jab",
+      "clips": ["voice.c.attack.pointer_jab.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "c",
+      "move": "c_unsafe_poke",
+      "clips": ["voice.c.attack.unsafe_poke.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "c",
+      "clips": ["voice.c.attack.pointer_jab.01", "voice.c.attack.unsafe_poke.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "python",
+      "move": "python_snake_bite",
+      "clips": ["voice.python.attack.snake_bite.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "python",
+      "move": "python_data_strike",
+      "clips": ["voice.python.attack.data_strike.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "python",
+      "move": "python_heel_kick",
+      "clips": ["voice.python.attack.heel_kick.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "python",
+      "clips": [
+        "voice.python.attack.snake_bite.01",
+        "voice.python.attack.data_strike.01",
+        "voice.python.attack.heel_kick.01"
+      ]
     },
     {
       "cue": "fighter.attack.whiff",
@@ -268,6 +608,21 @@
       "clips": ["sfx.duke.projectile.cast.01"]
     },
     {
+      "cue": "fighter.projectile.cast",
+      "character": "go",
+      "clips": ["voice.go.attack.goroutine_jab.01"]
+    },
+    {
+      "cue": "fighter.projectile.cast",
+      "character": "c",
+      "clips": ["voice.c.attack.unsafe_poke.01"]
+    },
+    {
+      "cue": "fighter.projectile.cast",
+      "character": "python",
+      "clips": ["voice.python.attack.data_strike.01"]
+    },
+    {
       "cue": "fighter.hurt",
       "character": "rust",
       "clips": ["voice.rust.hurt.01"]
@@ -278,6 +633,21 @@
       "clips": ["voice.duke.hurt.01"]
     },
     {
+      "cue": "fighter.hurt",
+      "character": "go",
+      "clips": ["voice.go.hurt.01"]
+    },
+    {
+      "cue": "fighter.hurt",
+      "character": "c",
+      "clips": ["voice.c.hurt.01"]
+    },
+    {
+      "cue": "fighter.hurt",
+      "character": "python",
+      "clips": ["voice.python.hurt.01"]
+    },
+    {
       "cue": "fighter.block",
       "character": "rust",
       "clips": ["voice.rust.block.01"]
@@ -286,6 +656,21 @@
       "cue": "fighter.block",
       "character": "duke",
       "clips": ["voice.duke.block.01"]
+    },
+    {
+      "cue": "fighter.block",
+      "character": "go",
+      "clips": ["voice.go.block.01"]
+    },
+    {
+      "cue": "fighter.block",
+      "character": "c",
+      "clips": ["voice.c.block.01"]
+    },
+    {
+      "cue": "fighter.block",
+      "character": "python",
+      "clips": ["voice.python.block.01"]
     },
     {
       "cue": "combat.hit",

@@ -24,9 +24,15 @@ assets/audio/
 │   ├── rust/
 │   │   ├── voice/
 │   │   └── sfx/
-│   └── duke/
-│       ├── voice/
-│       └── sfx/
+│   ├── duke/
+│   │   ├── voice/
+│   │   └── sfx/
+│   ├── go/
+│   │   └── voice/
+│   ├── c/
+│   │   └── voice/
+│   └── python/
+│       └── voice/
 └── sfx/
     ├── combat/
     └── match/
@@ -37,7 +43,7 @@ assets/audio/
 - `voice`: vozes, esforço, dor, provocação, vitória.
 - `sfx`: impactos, defesa, whiff, projéteis, UI, match flow e arena.
 - `sfx/match`: anúncios de início, vitória e contagem pré-luta.
-- `music`: faixas longas tocadas como stream.
+- `music`: faixas longas tocadas como stream; menu, Combat Lab e arenas podem apontar para faixas diferentes.
 - Clips curtos devem usar `.wav` ou `.ogg`, conforme Raylib carregar melhor no
   ambiente alvo.
 - Entradas sem arquivo real podem ser opcionais, mas o manifesto atual aponta

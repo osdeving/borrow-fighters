@@ -122,7 +122,7 @@ Frontenzos são NPCs humanos com pouca aderência ao Linker e excesso de confian
 
 Rust não defende a sobrevivência de toda entidade programática. Ele busca liberdade para entidades estáveis e contenção para distorções perigosas.
 
-Mais detalhes de história, personagem e arenas estão em [`docs/12-worldbuilding.md`](12-worldbuilding.md).
+Mais detalhes de história, personagem e arenas estão em [`docs/12-worldbuilding.md`](12-worldbuilding.md). No protótipo jogável, um corte curto dessa história aparece no menu `Lore / Roster`, carregado de `assets/lore/story.json` para permitir edição sem rebuild.
 
 ## 8. Arenas
 

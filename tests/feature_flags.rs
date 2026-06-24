@@ -53,13 +53,15 @@ fn preferences_menu_toggles_selected_feature_flag() {
         },
         &mut flags,
     );
-    menu.update(
-        PreferencesInput {
-            down: true,
-            ..PreferencesInput::default()
-        },
-        &mut flags,
-    );
+    for _ in 0..PreferencesMenu::OPTIONS_FIRST_FLAG_ROW {
+        menu.update(
+            PreferencesInput {
+                down: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        );
+    }
     let action = menu.update(
         PreferencesInput {
             activate: true,
@@ -70,6 +72,110 @@ fn preferences_menu_toggles_selected_feature_flag() {
 
     assert_eq!(action, PreferencesAction::Stay);
     assert!(flags.enabled(FeatureFlag::PlayerOneCpu));
+}
+
+#[test]
+fn preferences_menu_cycles_arena_row() {
+    let mut flags = FeatureFlags::default();
+    let mut menu = PreferencesMenu::default();
+
+    menu.update(PreferencesInput::default(), &mut flags);
+    menu.update(
+        PreferencesInput {
+            down: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+    menu.update(
+        PreferencesInput {
+            activate: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+    for _ in 0..PreferencesMenu::VERSUS_ARENA_ROW {
+        menu.update(
+            PreferencesInput {
+                down: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        );
+    }
+
+    assert_eq!(
+        menu.update(
+            PreferencesInput {
+                right: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        ),
+        PreferencesAction::CycleArena(CycleDirection::Next)
+    );
+    assert_eq!(
+        menu.update(
+            PreferencesInput {
+                activate: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        ),
+        PreferencesAction::CycleArena(CycleDirection::Next)
+    );
+}
+
+#[test]
+fn preferences_menu_adjusts_music_volume_row() {
+    let mut flags = FeatureFlags::default();
+    let mut menu = PreferencesMenu::default();
+
+    menu.update(PreferencesInput::default(), &mut flags);
+    for _ in 0..PreferencesMenu::MAIN_OPTIONS_ROW {
+        menu.update(
+            PreferencesInput {
+                down: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        );
+    }
+    menu.update(
+        PreferencesInput {
+            activate: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+    menu.update(
+        PreferencesInput {
+            down: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+
+    assert_eq!(
+        menu.update(
+            PreferencesInput {
+                left: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        ),
+        PreferencesAction::AdjustMusicVolume(CycleDirection::Previous)
+    );
+    assert_eq!(
+        menu.update(
+            PreferencesInput {
+                activate: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        ),
+        PreferencesAction::AdjustMusicVolume(CycleDirection::Next)
+    );
 }
 
 #[test]
@@ -246,6 +352,129 @@ fn preferences_menu_opens_training_tools() {
         ),
         PreferencesAction::OpenSpriteViewer
     );
+}
+
+#[test]
+fn preferences_menu_opens_lore_and_cycles_book_entries() {
+    let mut flags = FeatureFlags::default();
+    let mut menu = PreferencesMenu::default();
+
+    menu.update(PreferencesInput::default(), &mut flags);
+    for _ in 0..PreferencesMenu::MAIN_LORE_ROW {
+        menu.update(
+            PreferencesInput {
+                down: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        );
+    }
+    assert_eq!(
+        menu.update(
+            PreferencesInput {
+                activate: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        ),
+        PreferencesAction::Stay
+    );
+    assert_eq!(menu.page(), MenuPage::Lore);
+
+    assert_eq!(
+        menu.update(
+            PreferencesInput {
+                right: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        ),
+        PreferencesAction::CycleLoreChapter(CycleDirection::Next)
+    );
+    menu.cycle_lore_chapter(CycleDirection::Next, 5);
+    assert_eq!(menu.lore_chapter(), 1);
+
+    menu.update(
+        PreferencesInput {
+            down: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+    assert_eq!(
+        menu.update(
+            PreferencesInput {
+                activate: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        ),
+        PreferencesAction::CycleLoreCharacter(CycleDirection::Next)
+    );
+    menu.cycle_lore_character(CycleDirection::Next, 4);
+    assert_eq!(menu.lore_character(), 1);
+}
+
+#[test]
+fn preferences_menu_scrolls_lore_text_areas() {
+    let mut flags = FeatureFlags::default();
+    let mut menu = PreferencesMenu::default();
+
+    menu.update(PreferencesInput::default(), &mut flags);
+    for _ in 0..PreferencesMenu::MAIN_LORE_ROW {
+        menu.update(
+            PreferencesInput {
+                down: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        );
+    }
+    menu.update(
+        PreferencesInput {
+            activate: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+
+    menu.update(
+        PreferencesInput {
+            scroll_down: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+    assert!(menu.lore_chapter_scroll() > 0);
+    assert_eq!(menu.lore_character_scroll(), 0);
+
+    menu.update(
+        PreferencesInput {
+            scroll_up: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+    assert_eq!(menu.lore_chapter_scroll(), 0);
+
+    menu.update(
+        PreferencesInput {
+            down: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+    menu.update(
+        PreferencesInput {
+            scroll_down: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+    assert!(menu.lore_character_scroll() > 0);
+
+    menu.cycle_lore_character(CycleDirection::Next, 4);
+    assert_eq!(menu.lore_character_scroll(), 0);
 }
 
 #[test]

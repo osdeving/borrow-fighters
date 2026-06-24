@@ -4,7 +4,7 @@
 
 Implementado em corte inicial.
 
-O projeto já possui um motor leve de áudio por eventos, manifesto JSON, música via stream e integração com Raylib. Os arquivos sonoros atuais são assets CC0 de protótipo, ainda sem direção final de mixagem.
+O projeto já possui um motor leve de áudio por eventos, manifesto JSON, música via stream, controle de volume de música no menu e integração com Raylib. Os arquivos sonoros atuais são assets CC0 de protótipo para UI, impactos, música, contagem e vozes de Rust, Duke/Java, Go, C e Python, ainda sem direção final de mixagem.
 
 ## Objetivo
 
@@ -16,7 +16,7 @@ O fluxo desejado é:
 gameplay/UI gera AudioEvent
 AudioBank encontra binding mais específico
 AudioPlayer toca clip carregado via Raylib
-App troca faixa MusicTrack conforme cena
+App troca faixa MusicTrack conforme cena e volume de música
 ```
 
 ## Pesquisa e Decisão
@@ -46,7 +46,7 @@ Decisão para o Prototype 0.1:
 | Domínio de áudio | [`src/audio/mod.rs`](../src/audio/mod.rs) | Define `AudioCue`, `AudioEvent`, schema do manifesto e matching de bindings. |
 | Boundary Raylib | [`src/engine/audio.rs`](../src/engine/audio.rs) | Inicializa banco, carrega clips existentes e chama Raylib para tocar. |
 | Emissão de eventos | [`src/game/world.rs`](../src/game/world.rs) | Emite eventos de contagem pré-luta, ataque, hit, block, dor, projectile e vitória. |
-| Loop do app | [`src/app.rs`](../src/app.rs) | Inicializa dispositivo de áudio, troca música por cena, toca feedback de menu e drena eventos do `World`. |
+| Loop do app | [`src/app.rs`](../src/app.rs) | Inicializa dispositivo de áudio, troca música por cena, aplica volume de música, toca feedback de menu e drena eventos do `World`. |
 | Manifesto | [`assets/audio/audio_manifest.json`](../assets/audio/audio_manifest.json) | Roteia eventos de gameplay para clips. |
 | Convenções de assets | [`assets/audio/README.md`](../assets/audio/README.md) | Explica pastas, buses e placeholders. |
 | Fontes/licenças | [`assets/audio/ATTRIBUTION.md`](../assets/audio/ATTRIBUTION.md) | Registra fontes CC0 dos assets baixados. |
@@ -79,18 +79,26 @@ Decisão para o Prototype 0.1:
 | Track | Quando toca | Arquivo |
 |---|---|---|
 | `menu` | tela de preferências/menu | `assets/audio/music/menu-loop.ogg` |
-| `combat` | luta e Combat Lab | `assets/audio/music/combat-loop.ogg` |
+| `combat` | luta em `Sirius Light Ring` | `assets/audio/music/combat-loop.ogg` |
+| `combat-random-encounter` | luta em `Tech Coast Beacon` | `assets/audio/music/combat-random-encounter.ogg` |
+| `combat-console-floor` | luta em `Java Street Terminal` | `assets/audio/music/combat-console-floor.ogg` |
+| `combat-rins-theme` | luta em `BioTIC Garden` | `assets/audio/music/combat-rins-theme.ogg` |
+| `combat-chiptune-battle` | luta em `Porto Digital Cache` | `assets/audio/music/combat-chiptune-battle.ogg` |
+| `combat-8bit-battle` | luta em `Pinhao Smart Grid` | `assets/audio/music/combat-8bit-battle.ogg` |
+| `combat-determined-pursuit` | `Combat Lab` | `assets/audio/music/combat-determined-pursuit.ogg` |
 
-Música usa `Music` streaming do Raylib, não `Sound`. Por isso [`App`](../src/app.rs) chama `AudioPlayer::update_streams` a cada frame.
+Música usa `Music` streaming do Raylib, não `Sound`. Por isso [`App`](../src/app.rs) chama `AudioPlayer::update_streams` a cada frame. O app troca a faixa em transições de tela e quando uma nova luta muda de arena, e `Options > Music Volume` aplica um multiplicador global apenas sobre música.
 
 Cada evento pode carregar:
 
 - `slot`: Player 1 ou Player 2;
-- `character`: `rust`, `duke`, `go` ou aliases aceitos;
-- `move`: `light_punch`, `heavy_punch`, `kick`, `rust_borrow_jab`, `duke_boilerplate_poke`, `go_goroutine_jab`;
+- `character`: `rust`, `duke`, `go`, `c`, `python` ou aliases aceitos;
+- `move`: `light_punch`, `heavy_punch`, `kick`, `rust_borrow_jab`, `duke_boilerplate_poke`, `go_goroutine_jab`, `go_defer_kick`, `c_pointer_jab`, `c_unsafe_poke`, `python_snake_bite`, `python_data_strike`, `python_heel_kick` e demais chaves estáveis de `MoveId::audio_key`;
 - `environment`: reservado para arena, ainda não emitido pelo runtime.
 
 A contagem pré-luta é emitida pelo `World`, não pelo menu. A tela mostra `11`, `10`, `01`, `Fight!`, enquanto os clips atuais usam voz CC0 de "three", "two", "one" e "fight" para manter leitura auditiva imediata.
+
+As vozes de ataque possuem bindings específicos para golpes de identidade e fallback por personagem para os demais golpes próximos da demo. Rust e Duke/Java também possuem bindings específicos para cada golpe próximo do loadout, usando clips CC0 mais longos para não sumirem atrás da música. [`tests/audio_manifest.rs`](../tests/audio_manifest.rs) garante que Rust, Duke/Java, Go, C e Python conseguem resolver voz de início de golpe e cast de projectile para seus loadouts atuais, que todo binding referencia clip existente e que Rust/Duke não dependem só do fallback genérico.
 
 ## Manifesto
 
@@ -102,9 +110,9 @@ Exemplo reduzido:
   "clips": [
     {
       "id": "voice.rust.attack.borrow_jab.01",
-      "file": "assets/audio/characters/rust/voice/attack-borrow-jab-01.wav",
+      "file": "assets/audio/characters/rust/voice/attack-borrow-jab-01.ogg",
       "bus": "voice",
-      "volume": 0.9
+      "volume": 0.42
     }
   ],
   "music": [
@@ -138,7 +146,7 @@ Campos de `clips`:
 
 Campos de `music`:
 
-- `id`: `menu` ou `combat`;
+- `id`: chave estável conhecida por `MusicTrack`;
 - `file`: caminho relativo ao repositório;
 - `volume`: 0.0 a 1.0;
 - `pitch`: 1.0 é normal;
@@ -156,6 +164,8 @@ Campos de `bindings`:
 O binding mais específico vence. Por exemplo, `fighter.attack.start + rust + rust_borrow_jab` vence um binding genérico só com `fighter.attack.start`.
 
 Quando houver vários clips no mesmo binding, o player alterna entre os clips carregados para evitar repetição idêntica.
+
+No runtime, a fila de eventos do `World` é drenada com `drain(..)` para reter capacidade entre fixed steps. O `AudioPlayer` resolve bindings por índice, alterna clips sem clonar listas ou ids no hot path e só reaplica ducking de música quando o estado muda.
 
 ## Como Adicionar um Som
 
@@ -190,7 +200,7 @@ Clips opcionais não quebram o jogo se o arquivo não existir. Os assets atuais 
 
 ## Próximos Cortes
 
-- Adicionar controle de volume por bus na tela de preferências.
+- Adicionar controle separado por bus de SFX/voice na tela de preferências.
 - Adicionar `environment` real quando houver seleção de arena.
 - Adicionar cooldown de voz se clips repetirem demais em multi-hit.
 - Criar teste de lint para garantir que todo binding referencia clip existente no manifesto.

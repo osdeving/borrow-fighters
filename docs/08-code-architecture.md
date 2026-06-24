@@ -32,6 +32,8 @@ borrow-fighters/
 │   ├── config.rs               # Constantes de janela, arena, escala e timestep
 │   ├── audio/
 │   │   └── mod.rs              # Eventos, manifesto e roteamento data-driven de áudio
+│   ├── lore/
+│   │   └── mod.rs              # Livro de história e fichas de roster carregados de JSON
 │   ├── game/
 │   │   ├── mod.rs              # Estado de partida e regras de fluxo
 │   │   ├── arena.rs            # Identidade e rotação das arenas do protótipo
@@ -93,6 +95,7 @@ borrow-fighters/
 │   ├── cpu_traditional_moves.rs # Cobertura da CPU para golpes tradicionais
 │   ├── feature_flags.rs        # Contrato de flags runtime
 │   ├── audio_manifest.rs       # Contrato do manifesto e roteamento de áudio
+│   ├── lore_book.rs            # Contrato do JSON de história/roster
 │   ├── sprite_manifest.rs      # Validação do formato JSON de sprites
 │   └── sprite_selection.rs     # Clip escolhido a partir do estado do lutador
 └── tools/
@@ -177,6 +180,17 @@ Responsabilidades:
 - manter clips ausentes como opção de pipeline, não como erro fatal de runtime.
 
 Detalhes ficam em [`docs/14-audio-pipeline.md`](14-audio-pipeline.md) e [`docs/adr/0005-data-driven-audio-events.md`](adr/0005-data-driven-audio-events.md).
+
+### `lore/*`
+
+É o domínio testável de história e perfis de roster. Ele carrega [`assets/lore/story.json`](../assets/lore/story.json), fornece fallback do slice e não conhece Raylib, input, combate ou áudio.
+
+Responsabilidades:
+
+- parsear capítulos e fichas de personagem;
+- manter texto editável sem rebuild;
+- expor índices seguros para o menu;
+- validar que ids de personagem continuam compatíveis com `CharacterId`.
 
 ### `scenes/*`
 

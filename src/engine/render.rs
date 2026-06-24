@@ -5,7 +5,7 @@
 
 use raylib::core::text::RaylibFont;
 use raylib::prelude::*;
-use std::ffi::CString;
+use std::{f32::consts::TAU, ffi::CString};
 
 mod combat_lab;
 mod sprite_viewer;
@@ -14,7 +14,8 @@ pub use combat_lab::draw_combat_lab;
 pub use sprite_viewer::{draw_sprite_viewer, draw_sprite_viewer_error};
 
 use crate::characters::CharacterId;
-use crate::combat::fighter::{AttackPhase, Facing, PlayerSlot};
+use crate::combat::fighter::{AttackPhase, Facing, Fighter, PlayerSlot};
+use crate::combat::projectile::Projectile;
 use crate::config::{
     ARENA_LEFT, ARENA_RIGHT, FLOOR_Y, WINDOW_HEIGHT, WINDOW_WIDTH, screen_px, world_px,
 };
@@ -22,7 +23,8 @@ use crate::engine::assets::{GameAssets, SpriteAtlasAsset};
 use crate::engine::sprites;
 use crate::game::arena::ArenaId;
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags, PREFERENCE_FLAGS};
-use crate::game::world::{MatchOutcome, World};
+use crate::game::world::{HIT_EFFECT_LIFETIME, MatchOutcome, World};
+use crate::lore::{LoreBook, LoreChapter, LoreCharacter};
 use crate::math::rect::Rect;
 use crate::scenes::preferences::{MenuPage, PreferencesMenu};
 use crate::ui::binary_text::{DEFAULT_BINARY_REVEAL_FRAMES, binary_reveal_text_with_seed};
@@ -100,17 +102,19 @@ pub fn draw_fight(
     draw: &mut impl DrawTarget,
     world: &World,
     arena: ArenaId,
+    visual_time_seconds: f32,
     flags: FeatureFlags,
     gamepad_status: GamepadStatus,
     assets: &GameAssets,
 ) {
     draw.clear_background(BACKGROUND);
-    draw_arena(draw, assets.arenas.get(arena));
+    draw_arena(draw, arena, assets.arenas.get(arena), visual_time_seconds);
     let show_debug = flags.enabled(FeatureFlag::ShowCombatDebug);
     let spawn_intro = world.spawn_intro_active();
     let player_one_visuals = character_visuals(world.player_one_character(), assets);
     let player_two_visuals = character_visuals(world.player_two_character(), assets);
 
+    draw_fighter_ground_lights(draw, world);
     draw_projectiles(draw, world, show_debug, assets);
     draw_fighter(
         draw,
@@ -183,7 +187,12 @@ pub fn draw_fight(
 /// Draws the main menu and nested prototype setup screens.
 pub fn draw_preferences(draw: &mut impl DrawTarget, options: PreferencesDrawOptions<'_>) {
     draw.clear_background(BACKGROUND);
-    draw_arena(draw, options.assets.arenas.get(options.arena));
+    draw_arena(
+        draw,
+        options.arena,
+        options.assets.arenas.get(options.arena),
+        options.visual_time_seconds,
+    );
     draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(0, 0, 0, 164));
     draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(4, 9, 22, 68));
 
@@ -195,6 +204,7 @@ pub fn draw_preferences(draw: &mut impl DrawTarget, options: PreferencesDrawOpti
         MenuPage::Main => draw_main_menu(draw, font, &options),
         MenuPage::Versus => draw_versus_menu(draw, font, &options),
         MenuPage::Training => draw_training_menu(draw, font, &options),
+        MenuPage::Lore => draw_lore_menu(draw, font, &options),
         MenuPage::Options => draw_options_menu(draw, font, &options),
     }
 }
@@ -253,12 +263,196 @@ pub fn draw_video_capture_overlay(
     draw.draw_text(&text, x, y, font_size, UI_MUTED);
 }
 
+/// Draws the software menu cursor used when the OS cursor is hidden.
+pub fn draw_linker_chip_cursor(
+    draw: &mut impl DrawTarget,
+    mouse_position: Vector2,
+    visual_time_seconds: f32,
+    assets: &GameAssets,
+) {
+    if mouse_position.x < 0.0
+        || mouse_position.y < 0.0
+        || mouse_position.x > WINDOW_WIDTH as f32
+        || mouse_position.y > WINDOW_HEIGHT as f32
+    {
+        return;
+    }
+
+    let chip_size = screen_px(42);
+    let pin_len = screen_px(7);
+    let margin = pin_len + screen_px(4);
+    let x = (mouse_position.x.round() as i32 - chip_size / 2)
+        .clamp(margin, WINDOW_WIDTH - chip_size - margin);
+    let y = (mouse_position.y.round() as i32 - chip_size / 2)
+        .clamp(margin, WINDOW_HEIGHT - chip_size - margin);
+    let pulse_alpha = 28 + ((visual_time_seconds * TAU * 1.4).sin().max(0.0) * 30.0) as u8;
+    let center_x = x + chip_size / 2;
+    let center_y = y + chip_size / 2;
+
+    draw.draw_circle_gradient(
+        center_x,
+        center_y,
+        screen_px(34) as f32,
+        Color::new(0, 202, 255, pulse_alpha),
+        Color::new(0, 202, 255, 0),
+    );
+
+    draw.draw_rectangle(
+        x + screen_px(4),
+        y + screen_px(5),
+        chip_size,
+        chip_size,
+        Color::new(0, 0, 0, 138),
+    );
+
+    let pin_count = 9;
+    let pin_color = Color::new(213, 217, 213, 236);
+    let pin_shadow = Color::new(66, 72, 76, 210);
+    for index in 0..pin_count {
+        let offset = (index + 1) * chip_size / (pin_count + 1);
+        let vertical = y + offset;
+        let horizontal = x + offset;
+
+        draw.draw_line_ex(
+            Vector2::new((x - pin_len + screen_px(1)) as f32, (vertical + 1) as f32),
+            Vector2::new((x + screen_px(1)) as f32, (vertical + 1) as f32),
+            screen_px(1).max(1) as f32,
+            pin_shadow,
+        );
+        draw.draw_line_ex(
+            Vector2::new((x + chip_size - screen_px(1)) as f32, (vertical + 1) as f32),
+            Vector2::new(
+                (x + chip_size + pin_len - screen_px(1)) as f32,
+                (vertical + 1) as f32,
+            ),
+            screen_px(1).max(1) as f32,
+            pin_shadow,
+        );
+        draw.draw_line_ex(
+            Vector2::new((x - pin_len) as f32, vertical as f32),
+            Vector2::new(x as f32, vertical as f32),
+            screen_px(1).max(1) as f32,
+            pin_color,
+        );
+        draw.draw_line_ex(
+            Vector2::new((x + chip_size) as f32, vertical as f32),
+            Vector2::new((x + chip_size + pin_len) as f32, vertical as f32),
+            screen_px(1).max(1) as f32,
+            pin_color,
+        );
+
+        draw.draw_line_ex(
+            Vector2::new((horizontal + 1) as f32, (y - pin_len + screen_px(1)) as f32),
+            Vector2::new((horizontal + 1) as f32, (y + screen_px(1)) as f32),
+            screen_px(1).max(1) as f32,
+            pin_shadow,
+        );
+        draw.draw_line_ex(
+            Vector2::new(
+                (horizontal + 1) as f32,
+                (y + chip_size - screen_px(1)) as f32,
+            ),
+            Vector2::new(
+                (horizontal + 1) as f32,
+                (y + chip_size + pin_len - screen_px(1)) as f32,
+            ),
+            screen_px(1).max(1) as f32,
+            pin_shadow,
+        );
+        draw.draw_line_ex(
+            Vector2::new(horizontal as f32, (y - pin_len) as f32),
+            Vector2::new(horizontal as f32, y as f32),
+            screen_px(1).max(1) as f32,
+            pin_color,
+        );
+        draw.draw_line_ex(
+            Vector2::new(horizontal as f32, (y + chip_size) as f32),
+            Vector2::new(horizontal as f32, (y + chip_size + pin_len) as f32),
+            screen_px(1).max(1) as f32,
+            pin_color,
+        );
+    }
+
+    draw.draw_rectangle_gradient_v(
+        x,
+        y,
+        chip_size,
+        chip_size,
+        Color::new(42, 45, 45, 250),
+        Color::new(12, 14, 15, 250),
+    );
+    draw.draw_rectangle_lines(x, y, chip_size, chip_size, Color::new(185, 190, 188, 190));
+    draw.draw_rectangle_lines(
+        x + screen_px(3),
+        y + screen_px(3),
+        chip_size - screen_px(6),
+        chip_size - screen_px(6),
+        Color::new(255, 255, 255, 24),
+    );
+
+    draw.draw_rectangle(
+        x + screen_px(5),
+        y + screen_px(5),
+        chip_size - screen_px(10),
+        screen_px(2),
+        Color::new(255, 255, 255, 26),
+    );
+    draw.draw_circle_lines(
+        x + screen_px(8),
+        y + chip_size - screen_px(8),
+        screen_px(3) as f32,
+        Color::new(0, 0, 0, 210),
+    );
+    draw.draw_circle(
+        x + screen_px(8),
+        y + chip_size - screen_px(8),
+        screen_px(1) as f32,
+        Color::new(96, 103, 103, 230),
+    );
+    draw.draw_rectangle(
+        x + chip_size - screen_px(8),
+        y + screen_px(7),
+        screen_px(3),
+        screen_px(3),
+        Color::new(95, 255, 174, 110),
+    );
+
+    let label = "Linker";
+    let label_size = 8.5;
+    let label_width = menu_text_width(assets.menu_font.as_ref(), label, label_size, 1.0);
+    draw_menu_text(
+        draw,
+        assets.menu_font.as_ref(),
+        label,
+        center_x - label_width / 2,
+        center_y - screen_px(7),
+        label_size,
+        Color::new(217, 220, 213, 236),
+    );
+
+    let sub_label = "LNK-01";
+    let sub_label_size = 5.5;
+    let sub_label_width =
+        menu_text_width(assets.menu_font.as_ref(), sub_label, sub_label_size, 1.0);
+    draw_menu_text(
+        draw,
+        assets.menu_font.as_ref(),
+        sub_label,
+        center_x - sub_label_width / 2,
+        center_y + screen_px(5),
+        sub_label_size,
+        Color::new(149, 157, 151, 210),
+    );
+}
+
 /// Data needed by the preferences renderer.
 pub struct PreferencesDrawOptions<'a> {
     pub menu: &'a PreferencesMenu,
     pub player_one_character: CharacterId,
     pub player_two_character: CharacterId,
     pub arena: ArenaId,
+    pub music_volume_percent: u8,
+    pub visual_time_seconds: f32,
     pub flags: FeatureFlags,
     pub gamepad_status: GamepadStatus,
     pub recording: bool,
@@ -278,6 +472,35 @@ struct MenuLine<'a> {
     description: &'a str,
     value: Option<&'a str>,
     checked: Option<bool>,
+}
+
+struct WrappedText<'a> {
+    font: Option<&'a Font>,
+    text: &'a str,
+    x: i32,
+    y: i32,
+    max_width: i32,
+    font_size: f32,
+    line_height: f32,
+    color: Color,
+}
+
+#[derive(Clone, Copy)]
+struct ScrollArea {
+    x: i32,
+    y: i32,
+    width: i32,
+    height: i32,
+}
+
+struct ProfileFieldDraw<'a> {
+    label_font: Option<&'a Font>,
+    body_font: Option<&'a Font>,
+    label: &'a str,
+    body: &'a str,
+    x: i32,
+    y: i32,
+    content_width: i32,
 }
 
 #[derive(Clone, Copy)]
@@ -608,9 +831,9 @@ fn draw_main_menu(
 ) {
     let panel = MenuPanel {
         x: screen_px(302),
-        y: screen_px(172),
+        y: screen_px(154),
         width: screen_px(356),
-        height: screen_px(314),
+        height: screen_px(370),
     };
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "BOOT SELECT");
@@ -631,6 +854,12 @@ fn draw_main_menu(
         MenuLine {
             label: "TRAINING",
             description: "inspect hit logic",
+            value: None,
+            checked: None,
+        },
+        MenuLine {
+            label: "LORE / ROSTER",
+            description: "read the linker book",
             value: None,
             checked: None,
         },
@@ -672,15 +901,17 @@ fn draw_versus_menu(
 ) {
     let panel = MenuPanel {
         x: screen_px(270),
-        y: screen_px(138),
+        y: screen_px(112),
         width: screen_px(484),
-        height: screen_px(382),
+        height: screen_px(432),
     };
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "VERSUS SETUP");
 
     let player_one = character_select_label(options.player_one_character);
     let player_two = character_select_label(options.player_two_character);
+    let arena_value = arena_select_label(options.arena);
+    let arena_description = arena_select_description(options.arena);
     let rows = [
         MenuLine {
             label: "START FIGHT",
@@ -701,6 +932,12 @@ fn draw_versus_menu(
             checked: None,
         },
         MenuLine {
+            label: "ARENA",
+            description: &arena_description,
+            value: Some(&arena_value),
+            checked: None,
+        },
+        MenuLine {
             label: "BACK",
             description: "Volta ao menu principal.",
             value: None,
@@ -715,8 +952,8 @@ fn draw_versus_menu(
         options.menu.selected(),
         MenuRowsLayout {
             panel,
-            row_height: screen_px(58),
-            start_offset_y: screen_px(108),
+            row_height: screen_px(56),
+            start_offset_y: screen_px(96),
             large_labels: false,
             show_descriptions: true,
             selection_pulse_frames: options.menu.selection_pulse_frames(),
@@ -726,7 +963,7 @@ fn draw_versus_menu(
         draw,
         font,
         panel,
-        "A/D ou setas ajustam personagem  |  Esc volta",
+        "A/D ou setas ajustam personagem/arena  |  Esc volta",
     );
 }
 
@@ -738,6 +975,14 @@ fn character_select_label(character: CharacterId) -> &'static str {
         CharacterId::C => "old.c",
         CharacterId::Python => "python.py",
     }
+}
+
+fn arena_select_label(arena: ArenaId) -> String {
+    arena.label().to_owned()
+}
+
+fn arena_select_description(arena: ArenaId) -> String {
+    format!("{} - {}", arena.location(), arena.concept())
 }
 
 #[cfg(test)]
@@ -806,6 +1051,256 @@ fn draw_training_menu(
     draw_menu_footer(draw, font, panel, "Esc volta das ferramentas para o menu");
 }
 
+fn draw_lore_menu(
+    draw: &mut impl DrawTarget,
+    font: Option<&Font>,
+    options: &PreferencesDrawOptions<'_>,
+) {
+    let panel = MenuPanel {
+        x: screen_px(54),
+        y: screen_px(78),
+        width: screen_px(852),
+        height: screen_px(428),
+    };
+    let book = &options.assets.lore_book;
+    let lore_font = options.assets.lore_font.as_ref().or(font);
+    let lore_body_font = options
+        .assets
+        .lore_body_font
+        .as_ref()
+        .or(options.assets.lore_font.as_ref())
+        .or(font);
+    let selected_chapter = book.chapter(options.menu.lore_chapter());
+    let selected_character = book.character(options.menu.lore_character());
+
+    draw.draw_rectangle(
+        panel.x + screen_px(12),
+        panel.y + screen_px(14),
+        panel.width,
+        panel.height,
+        Color::new(0, 0, 0, 110),
+    );
+    draw.draw_rectangle(
+        panel.x,
+        panel.y,
+        panel.width,
+        panel.height,
+        Color::new(10, 17, 28, 244),
+    );
+    draw.draw_rectangle_lines(panel.x, panel.y, panel.width, panel.height, MENU_ACCENT);
+    draw.draw_line(
+        panel.x + panel.width / 2,
+        panel.y + screen_px(62),
+        panel.x + panel.width / 2,
+        panel.y + panel.height - screen_px(42),
+        Color::new(138, 161, 184, 112),
+    );
+    for index in 0..8 {
+        let y = panel.y + screen_px(96 + index * 34);
+        draw.draw_line(
+            panel.x + screen_px(34),
+            y,
+            panel.x + panel.width / 2 - screen_px(24),
+            y,
+            Color::new(95, 255, 174, 12),
+        );
+    }
+
+    draw_centered_menu_text(
+        draw,
+        lore_font,
+        &book.title,
+        panel.x + panel.width / 2,
+        panel.y + screen_px(16),
+        24.0,
+        UI_TEXT,
+    );
+    draw_centered_menu_text(
+        draw,
+        font,
+        &book.subtitle,
+        panel.x + panel.width / 2,
+        panel.y + screen_px(48),
+        10.0,
+        UI_MUTED,
+    );
+
+    let chapter_label = lore_chapter_label(book, options.menu.lore_chapter());
+    let character_label = lore_character_label(book, options.menu.lore_character());
+    let controls = [
+        MenuLine {
+            label: "CHAPTER",
+            description: "A/D troca o capitulo do livro.",
+            value: Some(&chapter_label),
+            checked: None,
+        },
+        MenuLine {
+            label: "CHARACTER",
+            description: "A/D troca a ficha do roster.",
+            value: Some(&character_label),
+            checked: None,
+        },
+        MenuLine {
+            label: "BACK",
+            description: "Volta ao menu principal.",
+            value: None,
+            checked: None,
+        },
+    ];
+    let selector_panel = MenuPanel {
+        x: panel.x + screen_px(28),
+        y: panel.y + screen_px(82),
+        width: screen_px(330),
+        height: screen_px(134),
+    };
+    draw_menu_rows(
+        draw,
+        font,
+        &controls,
+        options.menu.selected(),
+        MenuRowsLayout {
+            panel: selector_panel,
+            row_height: screen_px(40),
+            start_offset_y: 0,
+            large_labels: false,
+            show_descriptions: true,
+            selection_pulse_frames: options.menu.selection_pulse_frames(),
+        },
+    );
+
+    let story_area = ScrollArea {
+        x: panel.x + screen_px(38),
+        y: panel.y + screen_px(232),
+        width: screen_px(376),
+        height: panel.height - screen_px(298),
+    };
+    if let Some(chapter) = selected_chapter {
+        let content_width = story_area.width - screen_px(18);
+        let content_height = lore_chapter_content_height(lore_body_font, chapter, content_width);
+        let offset = scroll_offset_px(
+            options.menu.lore_chapter_scroll(),
+            16,
+            content_height,
+            story_area.height,
+        );
+        {
+            let mut clipped = draw.begin_scissor_mode(
+                story_area.x,
+                story_area.y,
+                story_area.width,
+                story_area.height,
+            );
+            draw_lore_chapter_content(
+                &mut clipped,
+                lore_font,
+                lore_body_font,
+                chapter,
+                story_area.x,
+                story_area.y - offset,
+                content_width,
+            );
+        }
+        draw_scrollbar(draw, story_area, content_height, offset);
+    } else {
+        draw_menu_text(
+            draw,
+            lore_font,
+            "Lore file sem capitulos carregados.",
+            story_area.x,
+            story_area.y,
+            15.0,
+            UI_MUTED,
+        );
+    }
+
+    let roster_x = panel.x + panel.width / 2 + screen_px(34);
+    let roster_y = panel.y + screen_px(90);
+    if let Some(character) = selected_character {
+        draw_character_portrait(draw, character, roster_x, roster_y, options.assets);
+        draw_menu_text(
+            draw,
+            font,
+            &character.file_name,
+            roster_x + screen_px(174),
+            roster_y + screen_px(6),
+            16.0,
+            MENU_HACK_GREEN,
+        );
+        draw_menu_text(
+            draw,
+            lore_font,
+            &character.name,
+            roster_x + screen_px(174),
+            roster_y + screen_px(30),
+            24.0,
+            UI_TEXT,
+        );
+        draw_wrapped_menu_text(
+            draw,
+            WrappedText {
+                font: lore_font,
+                text: &character.epithet,
+                x: roster_x + screen_px(174),
+                y: roster_y + screen_px(68),
+                max_width: screen_px(214),
+                font_size: 12.0,
+                line_height: 16.0,
+                color: MENU_ACCENT_ALT,
+            },
+        );
+
+        let profile_area = ScrollArea {
+            x: roster_x,
+            y: roster_y + screen_px(156),
+            width: screen_px(404),
+            height: panel.y + panel.height - screen_px(60) - (roster_y + screen_px(156)),
+        };
+        let profile_width = profile_area.width - screen_px(18);
+        let content_height = lore_profile_content_height(lore_body_font, character, profile_width);
+        let offset = scroll_offset_px(
+            options.menu.lore_character_scroll(),
+            14,
+            content_height,
+            profile_area.height,
+        );
+        {
+            let mut clipped = draw.begin_scissor_mode(
+                profile_area.x,
+                profile_area.y,
+                profile_area.width,
+                profile_area.height,
+            );
+            draw_lore_profile_content(
+                &mut clipped,
+                font,
+                lore_body_font,
+                character,
+                profile_area.x,
+                profile_area.y - offset,
+                profile_width,
+            );
+        }
+        draw_scrollbar(draw, profile_area, content_height, offset);
+    } else {
+        draw_menu_text(
+            draw,
+            lore_font,
+            "Lore file sem personagens carregados.",
+            roster_x,
+            roster_y,
+            15.0,
+            UI_MUTED,
+        );
+    }
+
+    draw_menu_footer(
+        draw,
+        font,
+        panel,
+        "Selecione CHAPTER/CHARACTER  |  roda/PageUp/PageDown rola texto  |  Esc volta",
+    );
+}
+
 fn draw_options_menu(
     draw: &mut impl DrawTarget,
     font: Option<&Font>,
@@ -813,9 +1308,9 @@ fn draw_options_menu(
 ) {
     let panel = MenuPanel {
         x: screen_px(176),
-        y: screen_px(74),
+        y: screen_px(56),
         width: screen_px(672),
-        height: screen_px(448),
+        height: screen_px(526),
     };
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "OPTIONS");
@@ -837,6 +1332,22 @@ fn draw_options_menu(
             label: "LOCAL RECORDING",
             value: if options.recording { "REC" } else { "OFF" },
             checked: Some(options.recording),
+        },
+    );
+
+    let music_volume = format!("{}%", options.music_volume_percent);
+    draw_option_row(
+        draw,
+        font,
+        OptionRow {
+            x: row_x,
+            y: row_y + PreferencesMenu::OPTIONS_MUSIC_VOLUME_ROW as i32 * row_height,
+            width: row_width,
+            height: row_height,
+            selected: options.menu.selected() == PreferencesMenu::OPTIONS_MUSIC_VOLUME_ROW,
+            label: "MUSIC VOLUME",
+            value: &music_volume,
+            checked: None,
         },
     );
 
@@ -1032,8 +1543,14 @@ fn draw_menu_rows(
     selected: usize,
     layout: MenuRowsLayout,
 ) {
-    let row_x = layout.panel.x + screen_px(42);
-    let row_width = layout.panel.width - screen_px(84);
+    let compact_rows = layout.row_height <= screen_px(42);
+    let horizontal_padding = if compact_rows {
+        screen_px(18)
+    } else {
+        screen_px(42)
+    };
+    let row_x = layout.panel.x + horizontal_padding;
+    let row_width = layout.panel.width - horizontal_padding * 2;
     for (index, row) in rows.iter().enumerate() {
         draw_large_menu_row(
             draw,
@@ -1050,7 +1567,7 @@ fn draw_menu_rows(
                 checked: row.checked,
                 large_label: layout.large_labels,
                 show_description: layout.show_descriptions,
-                animation_frames: if selected == index {
+                animation_frames: if selected == index && !compact_rows {
                     layout.selection_pulse_frames
                 } else {
                     0
@@ -1088,6 +1605,7 @@ struct LargeMenuRow<'a> {
 }
 
 fn draw_large_menu_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: LargeMenuRow<'_>) {
+    let compact_row = row.height <= screen_px(36);
     let fill = if row.selected {
         MENU_ROW_SELECTED
     } else {
@@ -1132,9 +1650,15 @@ fn draw_large_menu_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: Lar
         row.x + screen_px(50)
     };
 
-    let label_size = if row.large_label { 22.0 } else { 20.0 };
+    let label_size = if row.large_label {
+        22.0
+    } else if compact_row {
+        16.0
+    } else {
+        20.0
+    };
     let label_y = if row.show_description {
-        row.y + screen_px(3)
+        row.y + screen_px(if compact_row { 5 } else { 3 })
     } else {
         row.y + row.height / 2 - screen_px(15)
     };
@@ -1163,24 +1687,35 @@ fn draw_large_menu_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: Lar
             font,
             row.description,
             label_x,
-            row.y + row.height - screen_px(17),
-            11.0,
+            row.y + row.height - screen_px(if compact_row { 13 } else { 17 }),
+            if compact_row { 8.5 } else { 11.0 },
             UI_MUTED,
         );
     }
 
     if let Some(value) = row.value {
         let text = format!("< {value} >");
-        let text_width = menu_text_width(font, &text, 18.0, 1.0);
-        draw_menu_text(
-            draw,
-            font,
-            &text,
-            row.x + row.width - text_width - screen_px(18),
-            row.y + screen_px(9),
-            18.0,
-            HEALTH_FILL,
-        );
+        let label_width = menu_text_width(font, label, label_size, 1.0);
+        let min_x = label_x + label_width + screen_px(12);
+        let right_x = row.x + row.width - screen_px(12);
+        let mut value_size = if compact_row { 10.0 } else { 18.0 };
+        let available_width = (right_x - min_x).max(screen_px(38));
+        while value_size > 8.0 && menu_text_width(font, &text, value_size, 1.0) > available_width {
+            value_size -= 0.5;
+        }
+        let text_width = menu_text_width(font, &text, value_size, 1.0);
+        {
+            let mut clipped = draw.begin_scissor_mode(min_x, row.y, available_width, row.height);
+            draw_menu_text(
+                &mut clipped,
+                font,
+                &text,
+                right_x - text_width,
+                row.y + screen_px(if compact_row { 11 } else { 9 }),
+                value_size,
+                HEALTH_FILL,
+            );
+        }
     }
 }
 
@@ -1391,12 +1926,313 @@ fn selected_options_hint(options: &PreferencesDrawOptions<'_>) -> &'static str {
     if options.menu.selected() == PreferencesMenu::OPTIONS_RECORDING_ROW {
         return "Gravacao local salva videos em captures/; F9 inicia e F10 para.";
     }
+    if options.menu.selected() == PreferencesMenu::OPTIONS_MUSIC_VOLUME_ROW {
+        return "A/D ou setas esquerda/direita ajustam apenas a musica.";
+    }
     if options.menu.selected() == options.menu.row_count() - 1 {
         return "Volta para o menu principal.";
     }
 
     PREFERENCE_FLAGS[options.menu.selected() - PreferencesMenu::OPTIONS_FIRST_FLAG_ROW]
         .description()
+}
+
+fn lore_chapter_label(book: &LoreBook, selected: usize) -> String {
+    book.chapter(selected)
+        .map(|chapter| chapter.code.clone())
+        .unwrap_or_else(|| "sem capitulos".to_owned())
+}
+
+fn lore_character_label(book: &LoreBook, selected: usize) -> String {
+    book.character(selected)
+        .map(|character| character.file_name.clone())
+        .unwrap_or_else(|| "sem roster".to_owned())
+}
+
+fn draw_character_portrait(
+    draw: &mut impl DrawTarget,
+    character: &LoreCharacter,
+    x: i32,
+    y: i32,
+    assets: &GameAssets,
+) {
+    let size = screen_px(148);
+    draw.draw_rectangle(x, y, size, size, Color::new(4, 9, 16, 228));
+    draw.draw_rectangle_lines(x, y, size, size, Color::new(138, 161, 184, 188));
+
+    let texture = character
+        .character_id()
+        .and_then(|id| assets.roster_portraits.get(id));
+    let Some(texture) = texture else {
+        draw_centered_menu_text(
+            draw,
+            assets.menu_font.as_ref(),
+            &character.file_name,
+            x + size / 2,
+            y + size / 2 - screen_px(8),
+            16.0,
+            UI_MUTED,
+        );
+        return;
+    };
+
+    let padding = screen_px(10);
+    let source = Rectangle::new(0.0, 0.0, texture.width() as f32, texture.height() as f32);
+    let dest = Rectangle::new(
+        (x + padding) as f32,
+        (y + padding) as f32,
+        (size - padding * 2) as f32,
+        (size - padding * 2) as f32,
+    );
+    draw.draw_texture_pro(
+        texture,
+        source,
+        dest,
+        Vector2::new(0.0, 0.0),
+        0.0,
+        Color::WHITE,
+    );
+}
+
+fn lore_chapter_content_height(
+    font: Option<&Font>,
+    chapter: &LoreChapter,
+    content_width: i32,
+) -> i32 {
+    let mut height = screen_px(54);
+    for paragraph in &chapter.body {
+        height +=
+            wrapped_menu_text_height(font, paragraph, content_width, 11.5, 16.0) + screen_px(10);
+    }
+    height
+}
+
+fn draw_lore_chapter_content(
+    draw: &mut impl DrawTarget,
+    title_font: Option<&Font>,
+    body_font: Option<&Font>,
+    chapter: &LoreChapter,
+    x: i32,
+    y: i32,
+    content_width: i32,
+) -> i32 {
+    draw_menu_text(draw, title_font, &chapter.code, x, y, 10.0, MENU_HACK_GREEN);
+    draw_menu_text(
+        draw,
+        title_font,
+        &chapter.title,
+        x,
+        y + screen_px(21),
+        16.0,
+        UI_TEXT,
+    );
+
+    let mut next_y = y + screen_px(54);
+    for paragraph in &chapter.body {
+        next_y = draw_wrapped_menu_text(
+            draw,
+            WrappedText {
+                font: body_font,
+                text: paragraph,
+                x,
+                y: next_y,
+                max_width: content_width,
+                font_size: 11.5,
+                line_height: 16.0,
+                color: Color::new(226, 233, 242, 255),
+            },
+        ) + screen_px(10);
+    }
+    next_y
+}
+
+fn lore_profile_content_height(
+    body_font: Option<&Font>,
+    character: &LoreCharacter,
+    content_width: i32,
+) -> i32 {
+    lore_profile_fields(character)
+        .iter()
+        .map(|(_, body)| profile_field_height(body_font, body, content_width))
+        .sum()
+}
+
+fn draw_lore_profile_content(
+    draw: &mut impl DrawTarget,
+    label_font: Option<&Font>,
+    body_font: Option<&Font>,
+    character: &LoreCharacter,
+    x: i32,
+    y: i32,
+    content_width: i32,
+) -> i32 {
+    let mut next_y = y;
+    for (label, body) in lore_profile_fields(character) {
+        next_y = draw_profile_field(
+            draw,
+            ProfileFieldDraw {
+                label_font,
+                body_font,
+                label,
+                body,
+                x,
+                y: next_y,
+                content_width,
+            },
+        );
+    }
+    next_y
+}
+
+fn lore_profile_fields(character: &LoreCharacter) -> [(&'static str, &str); 6] {
+    [
+        ("CYCLE", character.cycle.as_str()),
+        ("ORIGIN", character.origin.as_str()),
+        ("PROFILE", character.profile.as_str()),
+        ("GOAL", character.goal.as_str()),
+        ("COMBAT", character.combat_style.as_str()),
+        ("LINKER", character.linker_note.as_str()),
+    ]
+}
+
+fn profile_field_height(body_font: Option<&Font>, body: &str, content_width: i32) -> i32 {
+    screen_px(16)
+        + wrapped_menu_text_height(body_font, body, content_width, 10.0, 14.0)
+        + screen_px(12)
+}
+
+fn draw_profile_field(draw: &mut impl DrawTarget, field: ProfileFieldDraw<'_>) -> i32 {
+    draw_menu_text(
+        draw,
+        field.label_font,
+        field.label,
+        field.x,
+        field.y,
+        10.0,
+        MENU_HACK_GREEN,
+    );
+    let next_y = draw_wrapped_menu_text(
+        draw,
+        WrappedText {
+            font: field.body_font,
+            text: field.body,
+            x: field.x,
+            y: field.y + screen_px(16),
+            max_width: field.content_width,
+            font_size: 10.0,
+            line_height: 14.0,
+            color: Color::new(226, 233, 242, 255),
+        },
+    );
+    next_y + screen_px(12)
+}
+
+fn draw_wrapped_menu_text(draw: &mut impl DrawTarget, text: WrappedText<'_>) -> i32 {
+    let mut y = text.y;
+
+    for line in wrap_menu_text_lines(text.font, text.text, text.max_width, text.font_size) {
+        draw_menu_text(
+            draw,
+            text.font,
+            &line,
+            text.x,
+            y,
+            text.font_size,
+            text.color,
+        );
+        y += screen_px(text.line_height.round() as i32);
+    }
+
+    y
+}
+
+fn wrapped_menu_text_height(
+    font: Option<&Font>,
+    text: &str,
+    max_width: i32,
+    font_size: f32,
+    line_height: f32,
+) -> i32 {
+    wrap_menu_text_lines(font, text, max_width, font_size).len() as i32
+        * screen_px(line_height.round() as i32)
+}
+
+fn wrap_menu_text_lines(
+    font: Option<&Font>,
+    text: &str,
+    max_width: i32,
+    font_size: f32,
+) -> Vec<String> {
+    let mut lines = Vec::new();
+    let mut current = String::new();
+
+    for word in text.split_whitespace() {
+        let candidate = if current.is_empty() {
+            word.to_owned()
+        } else {
+            format!("{current} {word}")
+        };
+
+        if menu_text_width(font, &candidate, font_size, 1.0) <= max_width {
+            current = candidate;
+            continue;
+        }
+
+        if !current.is_empty() {
+            lines.push(current);
+        }
+        current = word.to_owned();
+    }
+
+    if !current.is_empty() {
+        lines.push(current);
+    }
+
+    lines
+}
+
+fn scroll_offset_px(
+    scroll_lines: usize,
+    line_height: i32,
+    content_height: i32,
+    viewport_height: i32,
+) -> i32 {
+    let max_offset = (content_height - viewport_height).max(0);
+    let line_height_px = screen_px(line_height).max(1);
+    let safe_lines = scroll_lines.min((i32::MAX / line_height_px) as usize) as i32;
+
+    (safe_lines * line_height_px).min(max_offset)
+}
+
+fn draw_scrollbar(draw: &mut impl DrawTarget, area: ScrollArea, content_height: i32, offset: i32) {
+    if content_height <= area.height {
+        return;
+    }
+
+    let track_width = screen_px(4).max(2);
+    let track_x = area.x + area.width - track_width;
+    let thumb_min_height = screen_px(28);
+    let thumb_height =
+        ((area.height as f32 / content_height as f32) * area.height as f32).round() as i32;
+    let thumb_height = thumb_height.clamp(thumb_min_height, area.height);
+    let max_offset = (content_height - area.height).max(1);
+    let travel = area.height - thumb_height;
+    let thumb_y = area.y + ((offset as f32 / max_offset as f32) * travel as f32).round() as i32;
+
+    draw.draw_rectangle(
+        track_x,
+        area.y,
+        track_width,
+        area.height,
+        Color::new(138, 161, 184, 42),
+    );
+    draw.draw_rectangle(
+        track_x,
+        thumb_y,
+        track_width,
+        thumb_height,
+        Color::new(0, 202, 255, 210),
+    );
 }
 
 fn draw_menu_text(
@@ -1445,7 +2281,12 @@ fn menu_text_width(font: Option<&Font>, text: &str, font_size: f32, spacing: f32
     }
 }
 
-fn draw_arena(draw: &mut impl DrawTarget, background: Option<&Texture2D>) {
+fn draw_arena(
+    draw: &mut impl DrawTarget,
+    arena: ArenaId,
+    background: Option<&Texture2D>,
+    visual_time_seconds: f32,
+) {
     if let Some(texture) = background {
         draw_arena_background(draw, texture);
     } else {
@@ -1457,6 +2298,9 @@ fn draw_arena(draw: &mut impl DrawTarget, background: Option<&Texture2D>) {
             FLOOR,
         );
     }
+
+    draw_arena_background_animation(draw, arena, visual_time_seconds);
+    draw_arena_screen_treatment(draw, visual_time_seconds);
 
     draw.draw_line(
         ARENA_LEFT as i32,
@@ -1481,6 +2325,46 @@ fn draw_arena(draw: &mut impl DrawTarget, background: Option<&Texture2D>) {
     );
 }
 
+fn draw_arena_screen_treatment(draw: &mut impl DrawTarget, visual_time_seconds: f32) {
+    let scanline_step = screen_px(7).max(1) as usize;
+    let scanline_start =
+        screen_px(88) + (visual_time_seconds * 18.0).round() as i32 % scanline_step as i32;
+    let scanline_end = FLOOR_Y as i32;
+    for y in (scanline_start..scanline_end).step_by(scanline_step) {
+        draw.draw_line(0, y, WINDOW_WIDTH, y, Color::new(80, 190, 230, 10));
+    }
+
+    let pulse = pulse01(visual_time_seconds, 0.75, 0.0);
+    let floor_y = FLOOR_Y;
+    draw.draw_line_ex(
+        Vector2::new(ARENA_LEFT, floor_y - world_px(2.0)),
+        Vector2::new(ARENA_RIGHT, floor_y - world_px(2.0)),
+        world_px(3.0),
+        Color::new(80, 220, 255, (24.0 + pulse * 18.0).round() as u8),
+    );
+    draw.draw_line_ex(
+        Vector2::new(ARENA_LEFT, floor_y - world_px(7.0)),
+        Vector2::new(ARENA_RIGHT, floor_y - world_px(7.0)),
+        world_px(1.0),
+        Color::new(255, 218, 92, 20),
+    );
+}
+
+fn draw_arena_background_animation(
+    draw: &mut impl DrawTarget,
+    arena: ArenaId,
+    visual_time_seconds: f32,
+) {
+    match arena {
+        ArenaId::Sirius => draw_sirius_motion(draw, visual_time_seconds),
+        ArenaId::Fortaleza => draw_fortaleza_motion(draw, visual_time_seconds),
+        ArenaId::JavaStreet => draw_java_street_motion(draw, visual_time_seconds),
+        ArenaId::BioTic => draw_biotic_motion(draw, visual_time_seconds),
+        ArenaId::PortoDigital => draw_porto_digital_motion(draw, visual_time_seconds),
+        ArenaId::ValeDoPinhao => draw_vale_pinhao_motion(draw, visual_time_seconds),
+    }
+}
+
 fn draw_arena_background(draw: &mut impl DrawTarget, texture: &Texture2D) {
     let source = Rectangle::new(0.0, 0.0, texture.width() as f32, texture.height() as f32);
     let dest = Rectangle::new(0.0, 0.0, WINDOW_WIDTH as f32, WINDOW_HEIGHT as f32);
@@ -1501,6 +2385,179 @@ fn draw_arena_background(draw: &mut impl DrawTarget, texture: &Texture2D) {
         WINDOW_HEIGHT - FLOOR_Y as i32,
         Color::new(0, 0, 0, 34),
     );
+}
+
+fn draw_sirius_motion(draw: &mut impl DrawTarget, time: f32) {
+    let origin = Vector2::new(WINDOW_WIDTH as f32 * 0.52, FLOOR_Y - world_px(168.0));
+    for index in 0..6 {
+        let phase = fract01(time * 0.09 + index as f32 * 0.17);
+        let x = WINDOW_WIDTH as f32 * (0.50 + phase * 0.42);
+        let y = world_px(24.0 + index as f32 * 12.0);
+        let alpha = (72.0 * (1.0 - (phase - 0.48).abs())).clamp(12.0, 72.0) as u8;
+        draw.draw_line_ex(
+            origin,
+            Vector2::new(x, y),
+            world_px(1.5),
+            Color::new(82, 220, 255, alpha),
+        );
+    }
+
+    let ring = world_px(42.0 + pulse01(time, 0.8, 0.0) * 18.0);
+    draw.draw_circle_lines(
+        (WINDOW_WIDTH as f32 * 0.50).round() as i32,
+        (FLOOR_Y - world_px(38.0)).round() as i32,
+        ring,
+        Color::new(82, 220, 255, 34),
+    );
+}
+
+fn draw_fortaleza_motion(draw: &mut impl DrawTarget, time: f32) {
+    for index in 0..8 {
+        let phase = fract01(time * 0.12 + index as f32 * 0.13);
+        let x = lerp(world_px(40.0), WINDOW_WIDTH as f32 - world_px(90.0), phase);
+        let y = world_px(135.0 + (index % 4) as f32 * 27.0) + (time * 2.5).sin() * world_px(5.0);
+        let alpha = (18.0 + 50.0 * (1.0 - (phase - 0.5).abs() * 2.0).max(0.0)) as u8;
+        draw.draw_circle_lines(
+            x.round() as i32,
+            y.round() as i32,
+            world_px(8.0),
+            Color::new(80, 220, 255, alpha),
+        );
+        draw.draw_line_ex(
+            Vector2::new(x - world_px(16.0), y),
+            Vector2::new(x - world_px(42.0), y + world_px(7.0)),
+            world_px(1.0),
+            Color::new(95, 255, 174, alpha / 2),
+        );
+    }
+}
+
+fn draw_java_street_motion(draw: &mut impl DrawTarget, time: f32) {
+    for index in 0..9 {
+        let phase = fract01(time * 0.22 + index as f32 * 0.19);
+        let x = screen_px(78 + index * 91);
+        let y = lerp(screen_px(110) as f32, FLOOR_Y - world_px(96.0), phase);
+        let alpha = (58.0 * (1.0 - phase)).max(10.0) as u8;
+        let glyph = if index % 2 == 0 { "try" } else { "gc" };
+        draw.draw_text(
+            glyph,
+            x,
+            y.round() as i32,
+            screen_px(12),
+            Color::new(95, 255, 174, alpha),
+        );
+    }
+
+    for index in 0..4 {
+        let x = screen_px(126 + index * 214);
+        let base_y = FLOOR_Y - world_px(26.0);
+        let height = world_px(26.0 + pulse01(time, 0.55, index as f32 * 0.21) * 18.0);
+        draw.draw_line_ex(
+            Vector2::new(x as f32, base_y),
+            Vector2::new(x as f32 + world_px(18.0), base_y - height),
+            world_px(2.0),
+            Color::new(176, 190, 210, 28),
+        );
+    }
+}
+
+fn draw_biotic_motion(draw: &mut impl DrawTarget, time: f32) {
+    for index in 0..5 {
+        let phase = time * 0.45 + index as f32 * 1.27;
+        let center_x = WINDOW_WIDTH as f32 * (0.22 + index as f32 * 0.14);
+        let center_y = world_px(118.0 + (index % 2) as f32 * 32.0);
+        let x = center_x + phase.cos() * world_px(20.0);
+        let y = center_y + phase.sin() * world_px(8.0);
+        draw.draw_circle_gradient(
+            x.round() as i32,
+            y.round() as i32,
+            world_px(12.0),
+            Color::new(80, 220, 255, 54),
+            Color::new(80, 220, 255, 0),
+        );
+        draw.draw_circle(
+            x.round() as i32,
+            y.round() as i32,
+            world_px(3.0),
+            Color::new(238, 241, 247, 96),
+        );
+    }
+
+    for index in 0..4 {
+        let x = screen_px(228 + index * 154);
+        let y = screen_px(182 + (index % 2) * 34);
+        let radius = world_px(12.0 + pulse01(time, 0.7, index as f32 * 0.3) * 12.0);
+        draw.draw_circle_lines(x, y, radius, Color::new(95, 255, 174, 38));
+    }
+}
+
+fn draw_porto_digital_motion(draw: &mut impl DrawTarget, time: f32) {
+    for index in 0..9 {
+        let y = FLOOR_Y - world_px(155.0 - index as f32 * 8.0);
+        let wave = (time * 1.8 + index as f32 * 0.65).sin() * world_px(18.0);
+        draw.draw_line_ex(
+            Vector2::new(world_px(190.0) + wave, y),
+            Vector2::new(WINDOW_WIDTH as f32 - world_px(210.0) + wave * 0.35, y),
+            world_px(1.0),
+            Color::new(80, 220, 255, 24),
+        );
+    }
+
+    for index in 0..5 {
+        let phase = fract01(time * 0.08 + index as f32 * 0.2);
+        let x = lerp(
+            world_px(160.0),
+            WINDOW_WIDTH as f32 - world_px(180.0),
+            phase,
+        );
+        let y = FLOOR_Y - world_px(225.0 + (index % 2) as f32 * 28.0);
+        draw.draw_rectangle(
+            x.round() as i32,
+            y.round() as i32,
+            screen_px(10),
+            screen_px(3),
+            Color::new(255, 191, 67, 48),
+        );
+    }
+}
+
+fn draw_vale_pinhao_motion(draw: &mut impl DrawTarget, time: f32) {
+    for index in 0..16 {
+        let phase = fract01(time * 0.34 + index as f32 * 0.061);
+        let x = screen_px(30 + index * 61);
+        let y = lerp(screen_px(70) as f32, FLOOR_Y - world_px(30.0), phase);
+        draw.draw_line_ex(
+            Vector2::new(x as f32, y),
+            Vector2::new(x as f32 - world_px(7.0), y + world_px(24.0)),
+            world_px(1.0),
+            Color::new(176, 210, 235, 30),
+        );
+    }
+
+    for index in 0..5 {
+        let x = screen_px(148 + index * 168);
+        let y = screen_px(198 + (index % 2) * 46);
+        let alpha = (28.0 + pulse01(time, 0.5, index as f32 * 0.18) * 42.0) as u8;
+        draw.draw_circle_gradient(
+            x,
+            y,
+            world_px(16.0),
+            Color::new(95, 255, 174, alpha),
+            Color::new(95, 255, 174, 0),
+        );
+    }
+}
+
+fn fract01(value: f32) -> f32 {
+    value - value.floor()
+}
+
+fn pulse01(time: f32, speed: f32, offset: f32) -> f32 {
+    ((time * speed + offset).sin() + 1.0) * 0.5
+}
+
+fn lerp(start: f32, end: f32, t: f32) -> f32 {
+    start + (end - start) * t
 }
 
 fn draw_fighter(
@@ -2041,6 +3098,7 @@ fn draw_projectiles(
 ) {
     for projectile in &world.projectiles {
         let rect = projectile.rect();
+        draw_projectile_trail(draw, projectile, rect);
         let projectile_texture =
             character_visuals(world.character_for_slot(projectile.owner), assets)
                 .projectile_texture;
@@ -2084,6 +3142,41 @@ fn draw_projectiles(
                 PROJECTILE,
             );
         }
+    }
+}
+
+fn draw_projectile_trail(draw: &mut impl DrawTarget, projectile: &Projectile, rect: Rect) {
+    let center = rect.center();
+    let trail_direction = if projectile.velocity.x >= 0.0 {
+        -1.0
+    } else {
+        1.0
+    };
+    let owner_color = match projectile.owner {
+        PlayerSlot::One => Color::new(80, 220, 255, 255),
+        PlayerSlot::Two => Color::new(255, 190, 92, 255),
+    };
+
+    draw.draw_line_ex(
+        Vector2::new(center.x + trail_direction * world_px(10.0), center.y),
+        Vector2::new(center.x + trail_direction * world_px(58.0), center.y),
+        world_px(4.0),
+        color_with_alpha(owner_color, 30),
+    );
+
+    for index in 0..4 {
+        let distance = world_px(13.0 + index as f32 * 12.0);
+        let radius = world_px(13.0 - index as f32 * 2.2).max(world_px(4.0));
+        let alpha = [66, 48, 30, 16][index];
+        let x = (center.x + trail_direction * distance).round() as i32;
+        let y = center.y.round() as i32;
+        draw.draw_circle_gradient(
+            x,
+            y,
+            radius,
+            color_with_alpha(owner_color, alpha),
+            color_with_alpha(owner_color, 0),
+        );
     }
 }
 
@@ -2151,15 +3244,68 @@ fn draw_body_collision(draw: &mut impl DrawTarget, world: &World) {
     );
 }
 
+fn draw_fighter_ground_lights(draw: &mut impl DrawTarget, world: &World) {
+    draw_fighter_ground_light(draw, &world.player_one);
+    draw_fighter_ground_light(draw, &world.player_two);
+}
+
+fn draw_fighter_ground_light(draw: &mut impl DrawTarget, fighter: &Fighter) {
+    let (fill, outline, frames) = if fighter.in_hitstun() {
+        (
+            Color::new(255, 90, 70, 58),
+            Color::new(255, 218, 92, 120),
+            fighter.hitstun_remaining_frames().get(),
+        )
+    } else if fighter.in_blockstun() {
+        (
+            Color::new(86, 156, 255, 52),
+            Color::new(154, 205, 255, 110),
+            fighter.blockstun_remaining_frames().get(),
+        )
+    } else {
+        return;
+    };
+
+    let body = fighter.body_rect();
+    let pulse = if frames % 4 < 2 { 1.0 } else { 0.84 };
+    let center_x = body.center_x().round() as i32;
+    let center_y = (FLOOR_Y + world_px(4.0)).round() as i32;
+    let radius_h = (body.width * 0.72 + world_px(34.0)) * pulse;
+    let radius_v = world_px(9.0) * pulse;
+
+    draw.draw_ellipse(center_x, center_y, radius_h, radius_v, fill);
+    draw.draw_ellipse_lines(center_x, center_y, radius_h, radius_v, outline);
+    draw.draw_ellipse_lines(
+        center_x,
+        center_y,
+        radius_h * 0.64,
+        radius_v * 0.58,
+        color_with_alpha(outline, 72),
+    );
+}
+
 fn draw_hit_effects(draw: &mut impl DrawTarget, world: &World) {
     for effect in &world.hit_effects {
-        let color = if effect.blocked { GUARD } else { HITSPARK };
+        let progress = hit_effect_progress(effect.timer);
+        let fade_alpha = ((1.0 - progress) * 255.0).clamp(0.0, 255.0).round() as u8;
+        let color = if effect.blocked {
+            color_with_alpha(GUARD, fade_alpha)
+        } else {
+            color_with_alpha(HITSPARK, fade_alpha)
+        };
         let x = effect.position.x.round() as i32;
         let y = effect.position.y.round() as i32;
-        let radius = (world_px(10.0) + effect.timer * world_px(32.0)).round() as i32;
-        draw.draw_circle_lines(x, y, radius as f32, color);
-        draw.draw_line(x - radius, y, x + radius, y, color);
-        draw.draw_line(x, y - radius, x, y + radius, color);
+        if effect.blocked {
+            draw_block_pulse(
+                draw,
+                effect.position,
+                effect.front_direction,
+                progress,
+                fade_alpha,
+            );
+        } else {
+            draw_hitspark(draw, effect.position, progress, fade_alpha);
+        }
 
         let damage = format!("-{}", effect.damage);
         draw.draw_text(
@@ -2178,6 +3324,102 @@ fn draw_hit_effects(draw: &mut impl DrawTarget, world: &World) {
             color,
         );
     }
+}
+
+fn hit_effect_progress(timer: f32) -> f32 {
+    1.0 - (timer / HIT_EFFECT_LIFETIME).clamp(0.0, 1.0)
+}
+
+fn draw_hitspark(
+    draw: &mut impl DrawTarget,
+    position: crate::math::vec2::Vec2,
+    progress: f32,
+    alpha: u8,
+) {
+    let x = position.x.round() as i32;
+    let y = position.y.round() as i32;
+    let radius = world_px(11.0 + progress * 35.0);
+    let core = Color::new(255, 244, 150, alpha);
+    let edge = Color::new(255, 110, 86, alpha.saturating_sub(28));
+
+    draw.draw_circle_gradient(x, y, radius * 0.48, core, color_with_alpha(edge, 0));
+    draw.draw_circle_lines(
+        x,
+        y,
+        radius,
+        color_with_alpha(core, alpha.saturating_sub(18)),
+    );
+    draw.draw_circle_lines(x, y, radius * 0.48, edge);
+
+    for index in 0..8 {
+        let angle = index as f32 * TAU / 8.0 + progress * 0.7;
+        let inner = radius * 0.16;
+        let outer = radius * (0.62 + (index % 3) as f32 * 0.13);
+        let start = Vector2::new(
+            position.x + angle.cos() * inner,
+            position.y + angle.sin() * inner,
+        );
+        let end = Vector2::new(
+            position.x + angle.cos() * outer,
+            position.y + angle.sin() * outer,
+        );
+        let thickness = if index % 2 == 0 {
+            world_px(3.0)
+        } else {
+            world_px(2.0)
+        };
+        draw.draw_line_ex(start, end, thickness, color_with_alpha(core, alpha));
+    }
+}
+
+fn draw_block_pulse(
+    draw: &mut impl DrawTarget,
+    position: crate::math::vec2::Vec2,
+    front_direction: f32,
+    progress: f32,
+    alpha: u8,
+) {
+    let x = position.x.round() as i32;
+    let y = position.y.round() as i32;
+    let radius = world_px(17.0 + progress * 39.0);
+    let shield = Color::new(154, 205, 255, alpha);
+    let glow = Color::new(86, 156, 255, alpha.saturating_sub(56));
+
+    draw.draw_circle_gradient(
+        x,
+        y,
+        radius * 0.6,
+        color_with_alpha(glow, 52),
+        color_with_alpha(glow, 0),
+    );
+    draw.draw_circle_lines(x, y, radius, shield);
+    draw.draw_circle_lines(
+        x,
+        y,
+        radius * 0.66,
+        color_with_alpha(shield, alpha.saturating_sub(42)),
+    );
+
+    let side_x = x as f32 + radius * 0.46 * front_direction;
+    let back_x = x as f32 - radius * 0.42 * front_direction;
+    draw.draw_line_ex(
+        Vector2::new(side_x, y as f32 - radius * 0.74),
+        Vector2::new(side_x, y as f32 + radius * 0.74),
+        world_px(3.0),
+        shield,
+    );
+    draw.draw_line_ex(
+        Vector2::new(side_x, y as f32 - radius * 0.74),
+        Vector2::new(back_x, y as f32),
+        world_px(2.0),
+        color_with_alpha(shield, alpha.saturating_sub(36)),
+    );
+    draw.draw_line_ex(
+        Vector2::new(side_x, y as f32 + radius * 0.74),
+        Vector2::new(back_x, y as f32),
+        world_px(2.0),
+        color_with_alpha(shield, alpha.saturating_sub(36)),
+    );
 }
 
 fn draw_body_parts(
@@ -2284,4 +3526,8 @@ fn dim(color: Color, amount: u8) -> Color {
         color.b.saturating_sub(amount),
         color.a,
     )
+}
+
+fn color_with_alpha(color: Color, alpha: u8) -> Color {
+    Color::new(color.r, color.g, color.b, alpha)
 }

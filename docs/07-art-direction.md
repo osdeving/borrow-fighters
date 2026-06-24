@@ -52,9 +52,12 @@ Nenhum mood está aprovado como direção final. Propostas devem comparar pelo m
 O slice jogável usa arte placeholder, mas já exercita decisões importantes para a direção visual:
 
 - arena inicial: `assets/placeholder/arena-sirius.png`, derivada de referência em `assets/references/sirius.png`;
-- arenas em rotação: `assets/placeholder/arena-fortaleza.png` e `assets/placeholder/arena-java-street.png`;
+- arenas em rotação: `assets/placeholder/arena-fortaleza.png`, `assets/placeholder/arena-java-street.png`, `assets/placeholder/arena-biotic.png`, `assets/placeholder/arena-porto-digital.png` e `assets/placeholder/arena-vale-pinhao.png`;
 - arena anterior ainda disponível: `assets/placeholder/arena-terminal-compiler-lab.png`;
+- nomes runtime de arena: `Sirius Light Ring` em Campinas, `Tech Coast Beacon` em Fortaleza, `Java Street Terminal` em Sao Paulo, `BioTIC Garden` em Brasilia, `Porto Digital Cache` em Recife e `Pinhao Smart Grid` em Curitiba;
+- VFX leves de cenário: feixes, pacotes de dados, chuva, shimmer, pulsos e scanlines sutis, sempre em baixa opacidade para não competir com HUD, sprites e hit effects;
 - personagens atuais: Rust, Duke, Go, C e Python em atlas placeholder com manifesto JSON;
+- retratos de roster: `assets/placeholder/roster-rust.png`, `assets/placeholder/roster-duke.png`, `assets/placeholder/roster-c.png` e `assets/placeholder/roster-python.png`, derivados dos sprites jogáveis para manter consistência de demo;
 - entrada cinematográfica: manifests separados para Rust, Duke, Go, C e Python;
 - projectile Rust: engrenagem separada do sprite do personagem;
 - projectile Duke: bean separado do sprite do personagem;

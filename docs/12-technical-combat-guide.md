@@ -20,9 +20,10 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Match runtime | Instancia lutadores a partir de personagens, bloqueia intro/contagem, resolve hits, projéteis e vitória | [`src/game/world.rs`](../src/game/world.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
 | Combat log | Eventos compactos de diagnóstico para reproduzir bugs de luta | [`src/game/combat_log.rs`](../src/game/combat_log.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
 | CPU playtest | Heurística determinística para mover, defender e exercitar golpes básicos/tradicionais | [`src/game/ai.rs`](../src/game/ai.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/cpu_traditional_moves.rs`](../tests/cpu_traditional_moves.rs) |
-| Arena runtime | Identidade e rotação de arenas do protótipo | [`src/game/arena.rs`](../src/game/arena.rs) | [`tests/arena_rotation.rs`](../tests/arena_rotation.rs) |
+| Arena runtime | Identidade, contexto, rotação e seleção manual de arenas do protótipo | [`src/game/arena.rs`](../src/game/arena.rs) | [`tests/arena_rotation.rs`](../tests/arena_rotation.rs) |
 | Audio domain | Cues, eventos de gameplay, manifesto JSON e matching de bindings | [`src/audio/mod.rs`](../src/audio/mod.rs) | [`tests/audio_manifest.rs`](../tests/audio_manifest.rs) |
 | Audio Raylib boundary | Carrega clips existentes e toca eventos resolvidos por manifesto | [`src/engine/audio.rs`](../src/engine/audio.rs) | Teste manual via jogo |
+| Lore data | Livro de história e fichas de roster carregados de JSON | [`src/lore/mod.rs`](../src/lore/mod.rs), [`assets/lore/story.json`](../assets/lore/story.json) | [`tests/lore_book.rs`](../tests/lore_book.rs) |
 | App scene state | Maquina de estados de alto nivel para menu, luta e laboratorios | [`src/app.rs`](../src/app.rs), [`src/scenes/mod.rs`](../src/scenes/mod.rs) | Smoke tests via CLI |
 | Combat Lab state | Cena isolada para playback de golpes, pause, frame step e leitura de vantagem | [`src/scenes/combat_lab.rs`](../src/scenes/combat_lab.rs) | [`tests/combat_lab.rs`](../tests/combat_lab.rs) |
 | Combat Lab analysis | Cálculo de vantagem estimada, pushback e dummy de contato | [`src/scenes/combat_lab_analysis.rs`](../src/scenes/combat_lab_analysis.rs) | [`tests/combat_lab.rs`](../tests/combat_lab.rs) |
@@ -39,7 +40,7 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 
 O loop principal em [`src/app.rs`](../src/app.rs) usa `AppScene` de [`src/scenes/mod.rs`](../src/scenes/mod.rs) como maquina de estados simples:
 
-- `Preferences`: menu principal e submenus de versus, treino e opções;
+- `Preferences`: menu principal e submenus de versus, treino, lore/roster e opções;
 - `Fight`: luta normal com fixed timestep, IA, audio events e renderer de arena;
 - `CombatLab`: cena isolada para testar golpes e frame data;
 - `SpriteViewer`: ferramenta de sprite em loop proprio, fora do fluxo normal de luta.
@@ -50,11 +51,11 @@ Transicoes novas devem passar por esse enum em vez de espalhar flags soltas no l
 
 O início de luta fica em [`src/game/world.rs`](../src/game/world.rs), não no renderer. `World::new_greybox_with_intro` liga primeiro `spawn_intro_timer` para a entrada cinematográfica e também prepara `countdown_timer`.
 
-O matchup inicial vem de [`LaunchOptions.match_options`](../src/cli.rs), que aceita `--p1`/`--player-one` e `--p2`/`--player-two` para a luta normal. O submenu `Versus Setup` da demo cicla Player 1 e Player 2 entre Rust, Duke/Java, C e Python; Go/Gopher continua no enum e nas ferramentas, mas não entra no ciclo público por enquanto. [`App`](../src/app.rs) marca essa escolha como pendente e recria o mundo ao começar a próxima luta. `LaunchOptions.start_fight` vem de `--fight`/`--skip-menu` e permite iniciar direto em `AppScene::Fight`. [`App`](../src/app.rs) preserva essa escolha no primeiro mundo e em `restart_match`, chamando `World::new_greybox_with_intro_for_characters`.
+O matchup inicial vem de [`LaunchOptions.match_options`](../src/cli.rs), que aceita `--p1`/`--player-one` e `--p2`/`--player-two` para a luta normal. O submenu `Versus Setup` da demo cicla Player 1 e Player 2 entre Rust, Duke/Java, C e Python; Go/Gopher continua no enum e nas ferramentas, mas não entra no ciclo público por enquanto. O mesmo submenu também permite escolher a arena da próxima luta usando os nomes e locais expostos por [`ArenaId`](../src/game/arena.rs). [`App`](../src/app.rs) marca matchup ou arena como pendente e recria o mundo ao começar a próxima luta. `LaunchOptions.start_fight` vem de `--fight`/`--skip-menu` e permite iniciar direto em `AppScene::Fight`. [`App`](../src/app.rs) preserva essa escolha no primeiro mundo e em `restart_match`, chamando `World::new_greybox_with_intro_for_characters`.
 
 Enquanto `spawn_intro_active` ou `countdown_active` estiverem ativos, `World::update_with_flags` atualiza apenas timers e feedback transitório; movimento, ataques, projéteis e IA não avançam gameplay. A contagem visual usa os labels `11`, `10`, `01` e `Fight!`, expostos por `World::countdown_label`. Os eventos de áudio correspondentes são `match.countdown.11`, `match.countdown.10`, `match.countdown.01` e `match.countdown.fight`.
 
-O desenho da contagem fica em [`src/engine/render.rs`](../src/engine/render.rs), que só consulta `World::countdown_label`. A troca de arena é decisão de [`src/app.rs`](../src/app.rs): depois que `World::outcome` aparece, a arena atual permanece na pose de vitória e só avança quando uma nova luta é iniciada por restart ou pelo menu.
+O desenho da contagem fica em [`src/engine/render.rs`](../src/engine/render.rs), que só consulta `World::countdown_label`. A troca de arena é decisão de [`src/app.rs`](../src/app.rs): depois que `World::outcome` aparece, a arena atual permanece na pose de vitória e só avança quando uma nova luta é iniciada por restart ou pelo menu. Se o jogador escolher uma arena manualmente em `Versus Setup`, essa escolha vale para a próxima luta e desliga o avanço automático naquele restart.
 
 ### Hitbox e Hurtbox
 
@@ -265,7 +266,7 @@ Hoje `Rust` usa `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` pa
 
 Os especiais de projectile ficam em [`src/combat/projectile.rs`](../src/combat/projectile.rs) como `RUST_PROJECTILE_SPEC`, `DUKE_PROJECTILE_SPEC`, `GO_PROJECTILE_SPEC`, `C_PROJECTILE_SPEC` e `PYTHON_PROJECTILE_SPEC`. `Fighter::projectile_spec` alimenta `Projectile::from_fighter`, o Combat Lab e o overlay técnico, então alterar um spec muda luta real e lab no mesmo caminho.
 
-`World::new_with_characters` e `World::new_greybox_with_intro_for_characters` aceitam qualquer `CharacterId`; a luta padrão ainda instancia Rust x Duke. O submenu `Versus Setup` da demo cicla Rust, Duke/Java, C e Python. Go/Gopher continua testável por `--p1`/`--p2`, Combat Lab e Sprite Viewer, mas fica fora do menu público por enquanto.
+`World::new_with_characters` e `World::new_greybox_with_intro_for_characters` aceitam qualquer `CharacterId`; a luta padrão ainda instancia Rust x Duke. O submenu `Versus Setup` da demo cicla Rust, Duke/Java, C e Python para personagens e percorre as arenas com nomes contextualizados. Go/Gopher continua testável por `--p1`/`--p2`, Combat Lab e Sprite Viewer, mas fica fora do menu público por enquanto.
 
 A intenção de gameplay por golpe vive em [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md). Atualize essa matriz quando alterar frame data, alcance, dano, guard rule, projectile ou loadout de personagem.
 

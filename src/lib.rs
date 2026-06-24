@@ -11,6 +11,7 @@ pub mod combat;
 pub mod config;
 pub mod engine;
 pub mod game;
+pub mod lore;
 pub mod math;
 pub mod scenes;
 pub mod ui;

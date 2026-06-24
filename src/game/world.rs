@@ -10,8 +10,8 @@ use crate::audio::AudioEvent;
 use crate::characters::{CharacterBodyMetricsCatalog, CharacterId, character_spec};
 use crate::combat::collision::hitbox_hits_hurtbox;
 use crate::combat::fighter::{
-    ActiveAttack, DamageResult, Fighter, FighterInput, FighterUpdateEvents, GuardRule, HitReaction,
-    PlayerSlot,
+    ActiveAttack, DamageResult, Facing, Fighter, FighterInput, FighterUpdateEvents, GuardRule,
+    HitReaction, PlayerSlot,
 };
 use crate::combat::projectile::Projectile;
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, world_px};
@@ -24,7 +24,7 @@ use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
 use crate::math::rect::Rect;
 use crate::math::vec2::Vec2;
 
-const HIT_EFFECT_LIFETIME: f32 = 0.35;
+pub const HIT_EFFECT_LIFETIME: f32 = 0.35;
 const BODY_COLLISION_EFFECT_LIFETIME: f32 = 0.12;
 pub const SPAWN_INTRO_DURATION_SECONDS: f32 = 2.7;
 pub const ROUND_COUNTDOWN_STEP_SECONDS: f32 = 0.75;
@@ -47,6 +47,7 @@ pub struct HitEffect {
     pub timer: f32,
     pub damage: i32,
     pub blocked: bool,
+    pub front_direction: f32,
 }
 
 /// Optional sprite manifests used to override combat boxes from frame metadata.
@@ -213,7 +214,12 @@ impl World {
 
     /// Drains audio events generated since the previous call.
     pub fn take_audio_events(&mut self) -> Vec<AudioEvent> {
-        std::mem::take(&mut self.audio_events)
+        self.drain_audio_events().collect()
+    }
+
+    /// Iterates over queued audio events while retaining queue capacity.
+    pub fn drain_audio_events(&mut self) -> std::vec::Drain<'_, AudioEvent> {
+        self.audio_events.drain(..)
     }
 
     /// Returns diagnostic combat events for the current match.
@@ -375,6 +381,7 @@ impl World {
                 self.player_two.hurtbox().center(),
                 result.damage,
                 result.blocked,
+                self.player_two.facing,
             ));
         }
 
@@ -394,6 +401,7 @@ impl World {
                 self.player_one.hurtbox().center(),
                 result.damage,
                 result.blocked,
+                self.player_one.facing,
             ));
         }
     }
@@ -494,6 +502,7 @@ impl World {
                         self.player_two.hurtbox().center(),
                         result.damage,
                         result.blocked,
+                        self.player_two.facing,
                     ));
                 }
                 PlayerSlot::Two
@@ -533,6 +542,7 @@ impl World {
                         self.player_one.hurtbox().center(),
                         result.damage,
                         result.blocked,
+                        self.player_one.facing,
                     ));
                 }
                 _ => {}
@@ -739,13 +749,21 @@ fn fighter_from_character(
 }
 
 impl HitEffect {
-    fn new(position: Vec2, damage: i32, blocked: bool) -> Self {
+    fn new(position: Vec2, damage: i32, blocked: bool, defender_facing: Facing) -> Self {
         Self {
             position,
             timer: HIT_EFFECT_LIFETIME,
             damage,
             blocked,
+            front_direction: front_direction(defender_facing),
         }
+    }
+}
+
+fn front_direction(facing: Facing) -> f32 {
+    match facing {
+        Facing::Left => -1.0,
+        Facing::Right => 1.0,
     }
 }
 

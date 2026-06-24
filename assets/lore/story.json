@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "title": "Linker",
+  "subtitle": "Após o o despertar de Ada...",
+  "chapters": [
+    {
+      "title": "Prologo: as primeiras linhas de codigo",
+      "code": "CH 0x00",
+      "body": [
+        "O Linker é uma força cósmica que surge quando a tecnologia de um planeta atinge o limiar e aumenta seu poder a partir da crença humana. Durante séculos, os usuários o chamaram de intuição, matemática ou genialidade.",
+        "Quando uma pessoa escreve código, ela não escreve apenas texto. Ela aproxima uma intenção abstrata de um corpo possível. O Linker é a força que aceita essa aproximação e pode dar à ideia a chance de atravessar o tecido da realidade."
+      ]
+    },
+    {
+      "title": "Ada e a ruptura",
+      "code": "CH 0x01",
+      "body": [
+        "Ada, a primeira grande usuária do Linker, foi responsável por abrir a primeira fenda entre pensamento e matéria.",
+        "Dessa fenda não veio uma entidade que mais tarde seria conhecida como Assembly. Preciso, amoral, antigo, presente no desde as primeiras partículas de matéria esboçarem acanhados contornos."
+      ]
+    },
+    {
+      "title": "Entidades programaticas",
+      "code": "CH 0x02",
+      "body": [
+        "Com o tempo, dezenas de outros usuários alimentaram o Liker. Algumas abstracoes ganharam corpo.",
+        "A esses corpos demos o nome de Entidades Programaticas. As EPs são seres que vivem entre nós, mas não são humanos. Elas surgem de ideias, mas podem se mover, lutar e morrer. Algumas são antigas, outras recentes. Algumas são estáveis, outras instáveis. Algumas são amigáveis, outras perigosas."
+      ]
+    },
+    {
+      "title": "A convivencia instavel",
+      "code": "CH 0x03",
+      "body": [
+        "Rust é uma EP que surgiu após décadas de instabilidade. Quando surgiu, percebeu que entidades estáveis podem viver entre humanos, desde que existam limites e responsabilidade. Duke é uma EP muito antiga e de caráter dual. Alcançou estabilidade através de acordos milionários com grandes corporações e construiu um império de dependência.",
+        "Outra EP que adquiriu estabilidade é conhecida apenas como: C. Seu surgimento é envolto em mistério, acredita-se que é decendente direto da primeira EP. Python surge mais tarde e dentre as EPs, é a mais amigável e acessível, concedendo aos humanos que não possuem habilidades especiais a chance de interagir com o Linker.",
+        "Envolto em mistério, o Linker, as EPs e os usuários humanos vivem em uma convivência instável. Com o objetivo de permanecerem, as EPs lutam entre si, e com os humanos, para manterem sua presença no mundo. A cada luta, o Linker se fortalece e a convivência instável se mantém."
+      ]
+    },
+    {
+      "title": "Arenas",
+      "code": "CH 0x04",
+      "body": [
+        "As lutas acontecem onde ciencia, cidade e imaginacao tecnica prosperam: a luz sincrotron em Campinas, a costa tecnologica em Fortaleza, as ruas de enlouquecidas de grande poder tecnológico em Sao Paulo, a biotecnologia de Brasilia, o cache urbano de Recife e sensores enigmáticos de Curitiba são apenas alguns exemplos.",
+        "Cada arena se torna o palco de lutas mortais pela permanência.",
+        "Quem vence, sobrevive. Quem perde, desaparece. E o Linker observa, registra e aprende. Pode Rust sobrepuljar Duke? Pode C sobreviver a Python? O Linker não se importa com o resultado, apenas com a evolução do código."
+      ]
+    }
+  ],
+  "characters": [
+    {
+      "id": "rust",
+      "name": "Rust",
+      "file_name": "rust.rs",
+      "cycle": "Registro 0x7DA / estabilizacao 0x7DF",
+      "epithet": "seguranca",
+      "origin": "Uma EP recente, primeiro percebida como assinatura disciplinada no Linker e depois estabilizada quando usuarios humanos buscaram segurança.",
+      "goal": "Provar que velocidade, liberdade e responsabilidade podem coexistir sem rasgar memoria nem pessoas. Garantir que toda entidade livre responda pelo que toca.",
+      "profile": "Rust é disciplinado, meticuloso e paciente. Ele observa o oponente, aprende seus padrões e espera o momento certo para agir. Quando age, é rápido, preciso e letal.",
+      "combat_style": "Tecnico e preciso: jabs curtos, anti-air rapido, throw seguro e projectile medio.",
+      "linker_note": "Assembly parece reconhecer sua assinatura, mas não aprova sua abordagem."
+    },
+    {
+      "id": "duke",
+      "name": "Duke / Java",
+      "file_name": "duke.java",
+      "cycle": "Registro 0x7CB",
+      "epithet": "corporativo e resiliente",
+      "origin": "Uma EP veterana que surgiu quando usuarios humanos buscavam portabilidade e longevidade e viram que podiam confiar na infraestrutura.",
+      "goal": "Manter acordos que permitem sua presenca no mundo humano e provar que legado nao significa fraqueza.",
+      "profile": "Duke fala demais. Ele viu frameworks nascerem, padroes virarem religiao e sistemas criticos sobreviverem.",
+      "combat_style": "Pressao de media distancia: golpes longos, dano alto, sweep pesado e recoveries mais puniveis.",
+      "linker_note": "Um grande usuario do Linker teria selado contratos antigos com sua assinatura, mas Duke não revela detalhes sempre que perguntam."
+    },
+    {
+      "id": "c",
+      "name": "C",
+      "file_name": "old.c",
+      "cycle": "Registro 0x7B4",
+      "epithet": "apontar para o abismo",
+      "origin": "Uma EP surgida perto do metal, quando humanos aprenderam a escrever perto o bastante da maquina para sentir o peso de cada endereco.",
+      "goal": "Provar que as EPs não podem dominar a memória e que a simplicidade é poderosa.",
+      "profile": "C e direto, perigoso e estranhamente honesto. Nao promete protecao; oferece poder em troca de atencao absoluta.",
+      "combat_style": "Fundamentos de alcance e risco: poke forte, bitstream projectile, golpes estaveis e whiff mais caro.",
+      "linker_note": "Quando C entra em uma arena, o Linker mostra margens, offsets e lugares onde o tudo poderia falhar."
+    },
+    {
+      "id": "python",
+      "name": "Python",
+      "file_name": "python.py",
+      "cycle": "Registro 0x7C7",
+      "epithet": "o veneno da simplicidade",
+      "origin": "Uma EP que atravessou o Linker como improviso disciplinado e ciencia aplicada por usuarios que queriam transformar ideias em prototipos.",
+      "goal": "Ler padroes humanos e fornecer a eles habilidades que outras EPs escondem.",
+      "profile": "Python parece relaxada ate o oponente repetir um erro. Entao ela aparece no espaco certo, no frame certo, para punir com veneno letal.",
+      "combat_style": "Punisher agil: startups leves, dano moderado, golpes de leitura e projectile rapido de dados.",
+      "linker_note": "A assinatura dela fica mais forte perto de graficos, laboratorios e usuarios humanos aprendendo algo pela primeira vez."
+    }
+  ]
+}

@@ -56,6 +56,8 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Motor inicial de áudio por eventos com manifesto JSON, bindings por cue/personagem/golpe e integração Raylib para clips opcionais.
 - Documentação técnica do pipeline de áudio e ADR para eventos de áudio data-driven.
 - Assets CC0 iniciais de áudio para impactos, defesa, whiff, UI, anúncio de luta/vitória e música de menu/combate.
+- Vozes CC0 de ataque, dano e defesa para Go, C e Python, com fallback de ataque por personagem para cobrir os golpes da demo.
+- Otimização do player de áudio para reduzir clones/alocações por evento e evitar chamadas repetidas de ducking de música sem mudança de estado.
 - Suporte a música de fundo via `Music` streaming do Raylib, com troca automática entre menu e luta.
 - Arenas placeholder Sirius e Fortaleza Tech Coast, com rotação de cenário ao iniciar a próxima luta após uma vitória começando pelo Sirius.
 - Combat Lab com fundo de arena ligado por padrão e atalho `A` para alternar entre cenário e grid limpo.
@@ -83,6 +85,16 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Kits terrestres próprios para C e Python, com `MoveId`, frame data, dano, whiff recovery, reações e testes de balanceamento inicial.
 - Feedback visual de hit/block reforçado no renderer com tint nos sprites e flash no corpo durante hitstun/blockstun.
 - Atlases de entrada de Rust e Duke regenerados pelo pipeline para remover componentes isolados que pareciam sobras de frames anteriores.
+- VFX de demo para hitspark, block pulse, rastro de projectile, luz de chão em hitstun/blockstun e scanline/glow sutil de arena.
+- Novas arenas placeholder `BioTIC`, `Porto Digital` e `Vale do Pinhao`, com rotação ampliada para seis cenários.
+- Seis novas músicas CC0/public domain no manifesto, com troca por tela e por arena.
+- Seleção manual de arena no `Versus Setup`, com nomes, locais e conceito de cada cenário.
+- Controle de volume da música em `Options`, aplicado sem reduzir vozes e SFX.
+- VFX animados de fundo por arena, incluindo feixes, pacotes de dados, chuva, shimmer, pulsos e scanlines sutis.
+- Teste de manifesto garantindo voz de início de golpe e cast de projectile para todos os personagens jogáveis e de ferramenta.
+- Submenu `Lore / Roster`, com livro do Linker, capítulos, fichas de personagem e retratos placeholder de Rust, Duke/Java, C e Python.
+- JSON runtime `assets/lore/story.json` para editar história e roster sem recompilar o jogo.
+- Clips CC0 adicionais e bindings específicos para deixar golpes de Rust e Duke/Java audíveis por move, sem depender só do fallback curto.
 
 ### Em aberto
 

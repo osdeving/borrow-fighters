@@ -6,6 +6,8 @@ Draft criativo. Nada aqui é cânone final.
 
 Este documento registra a direção narrativa inicial de **Borrow Fighters**: um Brasil tecnológico, estranho, bonito e cheio de entidades que nasceram entre máquinas, linguagens, redes e lugares reais.
 
+O corte jogável dessa história no menu vive em [`assets/lore/story.json`](../assets/lore/story.json). Edite esse JSON para ajustar capítulos e fichas exibidos no jogo sem recompilar; este documento continua sendo a direção ampla de lore.
+
 ## Direção geral
 
 Borrow Fighters se passa em uma versão levemente deslocada do Brasil, onde programação não é apenas técnica. Existe uma força cósmica, antiga e impessoal chamada **O Linker**. Ela atravessa matéria, linguagem, circuitos, memória, símbolos e crença humana.

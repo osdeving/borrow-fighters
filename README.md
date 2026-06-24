@@ -122,9 +122,9 @@ As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
 
 ## Rodando o protótipo greybox
 
-O código jogável atual implementa um greybox local para validar o básico: menu principal com submenus de versus, treino e opções, arenas brasileiras em rotação começando pelo Sirius e trocando apenas no início da próxima luta, intro cinematográfica com contagem `11` / `10` / `01` / `Fight!`, personagens com spritesheet placeholder, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, varredura, overhead, anti-air, agarrão curto, ataques aéreos, fireball, primeira identidade mecânica de Rust, Duke/Java, Go, C e Python por frame data, demo pública ciclando Rust, Duke/Java, C e Python sem Go no menu, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, stun, pushback, whiff recovery, feedback visual de hit/block, vida, vitória e restart.
+O código jogável atual implementa um greybox local para validar o básico: menu principal com submenus de versus, treino, lore/roster e opções, arenas brasileiras em rotação começando pelo Sirius e trocando apenas no início da próxima luta, seleção manual de arena, livro de história carregado de JSON, intro cinematográfica com contagem `11` / `10` / `01` / `Fight!`, personagens com spritesheet placeholder, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, varredura, overhead, anti-air, agarrão curto, ataques aéreos, fireball, primeira identidade mecânica de Rust, Duke/Java, Go, C e Python por frame data, demo pública ciclando Rust, Duke/Java, C e Python sem Go no menu, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, stun, pushback, whiff recovery, hitspark, block pulse, trail de projétil, luz de chão em hitstun/blockstun, scanline/glow e animações leves de fundo por arena, vida, vitória e restart.
 
-O runtime também já está preparado para áudio por eventos. O manifesto fica em [`assets/audio/audio_manifest.json`](assets/audio/audio_manifest.json), e o guia técnico fica em [`docs/14-audio-pipeline.md`](docs/14-audio-pipeline.md). O pacote inicial inclui SFX/UI/vozes de anúncio, contagem pré-luta e música de menu/combate com fontes CC0 registradas em [`assets/audio/ATTRIBUTION.md`](assets/audio/ATTRIBUTION.md).
+O runtime também já está preparado para áudio por eventos. O manifesto fica em [`assets/audio/audio_manifest.json`](assets/audio/audio_manifest.json), e o guia técnico fica em [`docs/14-audio-pipeline.md`](docs/14-audio-pipeline.md). O pacote inicial inclui SFX/UI/vozes de anúncio, contagem pré-luta, vozes de golpe por personagem com cobertura específica para Rust e Duke/Java, e músicas de menu, Combat Lab e arenas com fontes CC0 registradas em [`assets/audio/ATTRIBUTION.md`](assets/audio/ATTRIBUTION.md). O volume global da música pode ser ajustado em `Options`.
 
 Requisitos iniciais:
 
@@ -141,18 +141,21 @@ cargo run -- --fight --p1 c --p2 rust
 cargo run -- --fight --p1 python --p2 duke
 ```
 
-O jogo abre primeiro no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem no submenu `Versus Setup`, e `Esc` para voltar de submenus, luta, Combat Lab ou Sprite Viewer. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar da janela.
+O jogo abre primeiro no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem, arena, capítulo, ficha de roster e volume em linhas ajustáveis, e `Esc` para voltar de submenus, luta, Combat Lab ou Sprite Viewer. O menu usa um cursor visual próprio em forma de chip `Linker`; durante a luta o cursor fica oculto para não competir com a ação. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar da janela.
 
 O menu principal mantém a primeira tela simples:
 
 - `Quick Fight`: inicia a luta com a configuração atual.
-- `Versus Setup`: escolhe Player 1 e Player 2.
+- `Versus Setup`: escolhe Player 1, Player 2 e arena.
 - `Training`: abre `Combat Lab` ou `Sprite Viewer`.
+- `Lore / Roster`: abre um livro de programação com capítulos da história e fichas dos personagens.
 - `Options`: liga/desliga gravação local e feature flags de protótipo.
 
 Ao iniciar uma luta, o jogo roda a entrada dos personagens e depois bloqueia input durante a contagem central `11`, `10`, `01`, `Fight!`. A arena só avança para a próxima rotação quando uma nova luta é iniciada depois de uma vitória, para preservar a pose final no mesmo cenário.
 
-Por padrão, a luta normal inicia `rust.rs` contra `duke.java`. O submenu `Versus Setup` permite ciclar Player 1 e Player 2 entre rust.rs, duke.java, old.c e python.py. Go/Gopher continua no repositório, no CLI, no Combat Lab e no Sprite Viewer, mas saiu da seleção pública da demo por enquanto. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py` ou `python.py`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pelo menu. Rust, Duke/Java, Go, C e Python já possuem vida, loadout, frame data e projectile próprios; C joga como fundamentos de alcance/risco e Python como punisher ágil de dano moderado.
+Por padrão, a luta normal inicia `rust.rs` contra `duke.java` no `Sirius Light Ring` em Campinas, SP. O submenu `Versus Setup` permite ciclar Player 1 e Player 2 entre rust.rs, duke.java, old.c e python.py, e escolher a arena pelo nome/contexto/local. Go/Gopher continua no repositório, no CLI, no Combat Lab e no Sprite Viewer, mas saiu da seleção pública da demo por enquanto. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py` ou `python.py`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pelo menu. Rust, Duke/Java, Go, C e Python já possuem vida, loadout, frame data, voz de ataque e projectile próprios; C joga como fundamentos de alcance/risco e Python como punisher ágil de dano moderado.
+
+O submenu `Lore / Roster` lê [`assets/lore/story.json`](assets/lore/story.json) em runtime. Edite esse arquivo para alterar capítulos, perfis, objetivos ou notas de personagem sem recompilar o jogo; reinicie o processo para recarregar o JSON. Com `CHAPTER` ou `CHARACTER` selecionado, use a roda do mouse ou `PageUp` / `PageDown` para rolar textos longos no capítulo ou na ficha. Os retratos atuais do roster são cards placeholder derivados dos sprites jogáveis.
 
 Para abrir o laboratório de combate direto em uma cena limpa:
 
@@ -197,6 +200,8 @@ Configurações disponíveis em `Versus Setup` e `Options`:
 |---|---|---|
 | Personagem Player 1 | rust.rs | Define o personagem do Player 1 na próxima luta. |
 | Personagem Player 2 | duke.java | Define o personagem do Player 2 na próxima luta. |
+| Arena | Sirius Light Ring / Campinas, SP | Define o cenário da próxima luta sem esperar a rotação automática. |
+| Volume da música | 100% | Ajusta apenas a música de fundo em passos de 10%. |
 | Player 1 usa IA | Desligado | Controla o Player 1 automaticamente. |
 | Player 2 usa IA | Ligado | Controla o Player 2 automaticamente. |
 | IA pode dar golpes | Ligado | Quando desligado, a IA ainda anda, pula, afasta, aproxima e defende, mas não ataca. |
@@ -238,9 +243,14 @@ O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um c
 
 Assets placeholder:
 
-- [`assets/placeholder/arena-sirius.png`](assets/placeholder/arena-sirius.png): arena inicial atual.
-- [`assets/placeholder/arena-fortaleza.png`](assets/placeholder/arena-fortaleza.png): arena de rotação.
-- [`assets/placeholder/arena-java-street.png`](assets/placeholder/arena-java-street.png): arena de rotação.
+- [`assets/placeholder/arena-sirius.png`](assets/placeholder/arena-sirius.png): `Sirius Light Ring`, Campinas, SP.
+- [`assets/placeholder/arena-fortaleza.png`](assets/placeholder/arena-fortaleza.png): `Tech Coast Beacon`, Fortaleza, CE.
+- [`assets/placeholder/arena-java-street.png`](assets/placeholder/arena-java-street.png): `Java Street Terminal`, Sao Paulo, SP.
+- [`assets/placeholder/arena-biotic.png`](assets/placeholder/arena-biotic.png): `BioTIC Garden`, Brasilia, DF.
+- [`assets/placeholder/arena-porto-digital.png`](assets/placeholder/arena-porto-digital.png): `Porto Digital Cache`, Recife, PE.
+- [`assets/placeholder/arena-vale-pinhao.png`](assets/placeholder/arena-vale-pinhao.png): `Pinhao Smart Grid`, Curitiba, PR.
+- [`assets/lore/story.json`](assets/lore/story.json): capítulos de história e fichas de roster carregados pelo menu.
+- [`assets/placeholder/roster-rust.png`](assets/placeholder/roster-rust.png), [`assets/placeholder/roster-duke.png`](assets/placeholder/roster-duke.png), [`assets/placeholder/roster-c.png`](assets/placeholder/roster-c.png) e [`assets/placeholder/roster-python.png`](assets/placeholder/roster-python.png): retratos placeholder do roster.
 - [`assets/placeholder/fighter-greybox-spritesheet.png`](assets/placeholder/fighter-greybox-spritesheet.png): poses simples de lutador para testar leitura de movimento e golpes sem debug visual.
 - [`assets/placeholder/c-fighter-atlas.png`](assets/placeholder/c-fighter-atlas.png): atlas placeholder jogável do C.
 - [`assets/placeholder/c-start-atlas.png`](assets/placeholder/c-start-atlas.png): entrada cinematográfica placeholder do C.

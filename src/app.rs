@@ -29,11 +29,13 @@ use crate::game::world::{World, WorldSpriteCombatManifests};
 use crate::scenes::{
     AppScene,
     combat_lab::{CombatLab, CombatLabInput, CombatLabMove, CombatLabOptions},
-    preferences::{PreferencesAction, PreferencesMenu},
+    preferences::{CycleDirection, PreferencesAction, PreferencesMenu},
     sprite_viewer::{SpriteViewer, SpriteViewerInput, SpriteViewerOptions, ViewerPoint},
 };
 
 const CAPTURE_SMOKE_SECONDS_ENV: &str = "BORROW_FIGHTERS_CAPTURE_SMOKE_SECONDS";
+const DEFAULT_MUSIC_VOLUME_PERCENT: u8 = 100;
+const MUSIC_VOLUME_STEP_PERCENT: u8 = 10;
 
 /// Top-level application state outside the testable game world.
 pub struct App {
@@ -49,9 +51,12 @@ pub struct App {
     match_options: MatchOptions,
     match_options_dirty: bool,
     current_arena: ArenaId,
+    arena_selection_dirty: bool,
     advance_arena_on_next_match: bool,
+    music_volume_percent: u8,
     video_capture: VideoCapture,
     accumulator: f32,
+    visual_time_seconds: f32,
 }
 
 impl Default for App {
@@ -102,9 +107,12 @@ impl App {
             match_options,
             match_options_dirty: false,
             current_arena: ArenaId::STARTING_ARENA,
+            arena_selection_dirty: false,
             advance_arena_on_next_match: false,
+            music_volume_percent: DEFAULT_MUSIC_VOLUME_PERCENT,
             video_capture: VideoCapture::default(),
             accumulator: 0.0,
+            visual_time_seconds: 0.0,
         }
     }
 
@@ -126,11 +134,16 @@ impl App {
                 AudioPlayer::disabled()
             }
         };
-        audio_player.play_music(music_track_for_scene(self.scene));
+        audio_player.set_music_volume(self.music_volume_multiplier());
+        audio_player.play_music(music_track_for_scene(self.scene, self.current_arena));
         let mut frame_target = load_frame_target(raylib, thread);
         let mut capture_smoke_test = CaptureSmokeTest::from_env();
 
         while !raylib.window_should_close() {
+            let frame_time = raylib.get_frame_time().min(MAX_FRAME_TIME);
+            self.visual_time_seconds += frame_time;
+            sync_scene_cursor(raylib, cursor_mode_for_scene(self.scene));
+            let mouse_position = raylib.get_mouse_position();
             audio_player.update_streams();
             update_video_capture_status(&mut self.video_capture);
 
@@ -143,10 +156,7 @@ impl App {
                 input.start_recording,
                 input.stop_recording,
             );
-            capture_smoke_test.update(
-                raylib.get_frame_time().min(MAX_FRAME_TIME),
-                &mut self.video_capture,
-            );
+            capture_smoke_test.update(frame_time, &mut self.video_capture);
             let gamepad_status = GamepadStatus {
                 player_one: input.player_one_gamepad_connected,
                 player_two: input.player_two_gamepad_connected,
@@ -160,6 +170,7 @@ impl App {
                         self.accumulator = 0.0;
                         audio_player.play(&AudioEvent::ui_back());
                         audio_player.play_music(MusicTrack::Menu);
+                        sync_scene_cursor(raylib, SceneCursorMode::CustomCi);
                         {
                             let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
                             render::draw_preferences(
@@ -169,6 +180,8 @@ impl App {
                                     player_one_character: self.match_options.player_one,
                                     player_two_character: self.match_options.player_two,
                                     arena: self.current_arena,
+                                    music_volume_percent: self.music_volume_percent,
+                                    visual_time_seconds: self.visual_time_seconds,
                                     flags: self.feature_flags,
                                     gamepad_status,
                                     recording: self.video_capture.is_recording(),
@@ -182,10 +195,7 @@ impl App {
                             );
                         }
                     } else {
-                        self.update_combat_lab(
-                            raylib.get_frame_time().min(MAX_FRAME_TIME),
-                            input.combat_lab,
-                        );
+                        self.update_combat_lab(frame_time, input.combat_lab);
 
                         {
                             let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
@@ -197,7 +207,18 @@ impl App {
                             );
                         }
                     }
-                    finish_frame(raylib, thread, &frame_target, &mut self.video_capture);
+                    finish_frame(
+                        raylib,
+                        thread,
+                        &frame_target,
+                        &mut self.video_capture,
+                        software_cursor_for_scene(
+                            self.scene,
+                            mouse_position,
+                            self.visual_time_seconds,
+                            &assets,
+                        ),
+                    );
                 }
                 AppScene::Preferences => {
                     if input.open_preferences && self.preferences_menu.back() {
@@ -219,6 +240,27 @@ impl App {
                                     cycle_character(self.match_options.player_two, direction);
                                 self.match_options_dirty = true;
                             }
+                            PreferencesAction::CycleArena(direction) => {
+                                self.current_arena = cycle_arena(self.current_arena, direction);
+                                self.arena_selection_dirty = true;
+                                self.advance_arena_on_next_match = false;
+                            }
+                            PreferencesAction::AdjustMusicVolume(direction) => {
+                                self.adjust_music_volume(direction);
+                                audio_player.set_music_volume(self.music_volume_multiplier());
+                            }
+                            PreferencesAction::CycleLoreChapter(direction) => {
+                                self.preferences_menu.cycle_lore_chapter(
+                                    direction,
+                                    assets.lore_book.chapter_count_for_menu(),
+                                );
+                            }
+                            PreferencesAction::CycleLoreCharacter(direction) => {
+                                self.preferences_menu.cycle_lore_character(
+                                    direction,
+                                    assets.lore_book.character_count_for_menu(),
+                                );
+                            }
                             PreferencesAction::ToggleRecording => {
                                 toggle_video_capture(&mut self.video_capture);
                             }
@@ -230,7 +272,7 @@ impl App {
                                 });
                                 self.scene = AppScene::CombatLab;
                                 self.accumulator = 0.0;
-                                audio_player.play_music(MusicTrack::Combat);
+                                audio_player.play_music(MusicTrack::CombatDeterminedPursuit);
                             }
                             PreferencesAction::OpenSpriteViewer => {
                                 run_sprite_viewer(raylib, thread, default_sprite_viewer_options());
@@ -241,11 +283,14 @@ impl App {
                                 audio_player.play_music(MusicTrack::Menu);
                             }
                             PreferencesAction::StartFight => {
-                                if self.world.outcome.is_some() || self.match_options_dirty {
+                                if self.world.outcome.is_some()
+                                    || self.match_options_dirty
+                                    || self.arena_selection_dirty
+                                {
                                     self.restart_match(&assets);
                                 }
                                 self.scene = AppScene::Fight;
-                                audio_player.play_music(MusicTrack::Combat);
+                                audio_player.play_music(music_track_for_arena(self.current_arena));
                             }
                             PreferencesAction::Exit => return,
                         }
@@ -259,6 +304,8 @@ impl App {
                                 player_one_character: self.match_options.player_one,
                                 player_two_character: self.match_options.player_two,
                                 arena: self.current_arena,
+                                music_volume_percent: self.music_volume_percent,
+                                visual_time_seconds: self.visual_time_seconds,
                                 flags: self.feature_flags,
                                 gamepad_status,
                                 recording: self.video_capture.is_recording(),
@@ -272,7 +319,18 @@ impl App {
                         );
                     }
                     self.preferences_menu.tick_visuals();
-                    finish_frame(raylib, thread, &frame_target, &mut self.video_capture);
+                    finish_frame(
+                        raylib,
+                        thread,
+                        &frame_target,
+                        &mut self.video_capture,
+                        software_cursor_for_scene(
+                            self.scene,
+                            mouse_position,
+                            self.visual_time_seconds,
+                            &assets,
+                        ),
+                    );
                 }
                 AppScene::Fight => {
                     if input.open_preferences {
@@ -289,6 +347,8 @@ impl App {
                                     player_one_character: self.match_options.player_one,
                                     player_two_character: self.match_options.player_two,
                                     arena: self.current_arena,
+                                    music_volume_percent: self.music_volume_percent,
+                                    visual_time_seconds: self.visual_time_seconds,
                                     flags: self.feature_flags,
                                     gamepad_status,
                                     recording: self.video_capture.is_recording(),
@@ -301,17 +361,29 @@ impl App {
                                 self.video_capture.last_message(),
                             );
                         }
-                        finish_frame(raylib, thread, &frame_target, &mut self.video_capture);
+                        finish_frame(
+                            raylib,
+                            thread,
+                            &frame_target,
+                            &mut self.video_capture,
+                            software_cursor_for_scene(
+                                self.scene,
+                                mouse_position,
+                                self.visual_time_seconds,
+                                &assets,
+                            ),
+                        );
                     } else {
                         if input.restart {
                             self.restart_match(&assets);
+                            audio_player.play_music(music_track_for_arena(self.current_arena));
                         }
 
                         if input.toggle_cpu {
                             self.feature_flags.toggle(FeatureFlag::PlayerTwoCpu);
                         }
 
-                        self.accumulator += raylib.get_frame_time().min(MAX_FRAME_TIME);
+                        self.accumulator += frame_time;
                         let mut fixed_steps = 0;
 
                         while self.accumulator >= FIXED_TIMESTEP
@@ -356,7 +428,7 @@ impl App {
                                 self.feature_flags,
                             );
                             self.remember_finished_match();
-                            audio_player.play_events(self.world.take_audio_events());
+                            audio_player.play_events(self.world.drain_audio_events());
                             self.accumulator -= FIXED_TIMESTEP;
                             fixed_steps += 1;
                         }
@@ -373,6 +445,7 @@ impl App {
                                 &mut draw,
                                 &self.world,
                                 self.current_arena,
+                                self.visual_time_seconds,
                                 self.feature_flags,
                                 gamepad_status,
                                 &assets,
@@ -383,7 +456,7 @@ impl App {
                                 self.video_capture.last_message(),
                             );
                         }
-                        finish_frame(raylib, thread, &frame_target, &mut self.video_capture);
+                        finish_frame(raylib, thread, &frame_target, &mut self.video_capture, None);
                     }
                 }
                 AppScene::SpriteViewer => unreachable!("sprite viewer has a separate app loop"),
@@ -392,7 +465,9 @@ impl App {
     }
 
     fn restart_match(&mut self, assets: &GameAssets) {
-        if self.advance_arena_on_next_match || self.world.outcome.is_some() {
+        if self.arena_selection_dirty {
+            self.advance_arena_on_next_match = false;
+        } else if self.advance_arena_on_next_match || self.world.outcome.is_some() {
             self.current_arena = self.current_arena.next();
         }
         self.world = World::new_greybox_with_intro_for_characters_and_metrics(
@@ -403,6 +478,7 @@ impl App {
         self.player_one_cpu = BasicCpu::for_slot(PlayerSlot::One);
         self.player_two_cpu = BasicCpu::for_slot(PlayerSlot::Two);
         self.match_options_dirty = false;
+        self.arena_selection_dirty = false;
         self.advance_arena_on_next_match = false;
         self.accumulator = 0.0;
         self.sync_world_sprite_combat(assets);
@@ -447,6 +523,21 @@ impl App {
             self.accumulator = 0.0;
         }
     }
+
+    fn adjust_music_volume(&mut self, direction: CycleDirection) {
+        self.music_volume_percent = match direction {
+            CycleDirection::Previous => self
+                .music_volume_percent
+                .saturating_sub(MUSIC_VOLUME_STEP_PERCENT),
+            CycleDirection::Next => {
+                (self.music_volume_percent + MUSIC_VOLUME_STEP_PERCENT).min(100)
+            }
+        };
+    }
+
+    fn music_volume_multiplier(&self) -> f32 {
+        f32::from(self.music_volume_percent) / 100.0
+    }
 }
 
 fn cpu_attack_filtered_input(
@@ -463,11 +554,18 @@ fn cpu_attack_filtered_input(
 
 fn cycle_character(
     character: crate::characters::CharacterId,
-    direction: crate::scenes::preferences::CycleDirection,
+    direction: CycleDirection,
 ) -> crate::characters::CharacterId {
     match direction {
-        crate::scenes::preferences::CycleDirection::Previous => character.demo_previous(),
-        crate::scenes::preferences::CycleDirection::Next => character.demo_next(),
+        CycleDirection::Previous => character.demo_previous(),
+        CycleDirection::Next => character.demo_next(),
+    }
+}
+
+const fn cycle_arena(arena: ArenaId, direction: CycleDirection) -> ArenaId {
+    match direction {
+        CycleDirection::Previous => arena.previous(),
+        CycleDirection::Next => arena.next(),
     }
 }
 
@@ -489,7 +587,7 @@ fn play_preferences_audio_feedback<'aud>(
     audio_player: &mut AudioPlayer<'aud>,
     input: crate::scenes::preferences::PreferencesInput,
 ) {
-    if input.up || input.down || input.left || input.right {
+    if input.up || input.down || input.left || input.right || input.scroll_up || input.scroll_down {
         audio_player.play(&AudioEvent::ui_navigate());
     }
 
@@ -498,11 +596,66 @@ fn play_preferences_audio_feedback<'aud>(
     }
 }
 
-const fn music_track_for_scene(scene: AppScene) -> MusicTrack {
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum SceneCursorMode {
+    CustomCi,
+    Hidden,
+    SystemVisible,
+}
+
+#[derive(Clone, Copy)]
+struct SoftwareCursorFrame<'a> {
+    position: Vector2,
+    visual_time_seconds: f32,
+    assets: &'a GameAssets,
+}
+
+const fn cursor_mode_for_scene(scene: AppScene) -> SceneCursorMode {
+    match scene {
+        AppScene::Preferences => SceneCursorMode::CustomCi,
+        AppScene::Fight => SceneCursorMode::Hidden,
+        AppScene::CombatLab | AppScene::SpriteViewer => SceneCursorMode::SystemVisible,
+    }
+}
+
+fn software_cursor_for_scene<'a>(
+    scene: AppScene,
+    position: Vector2,
+    visual_time_seconds: f32,
+    assets: &'a GameAssets,
+) -> Option<SoftwareCursorFrame<'a>> {
+    (cursor_mode_for_scene(scene) == SceneCursorMode::CustomCi).then_some(SoftwareCursorFrame {
+        position,
+        visual_time_seconds,
+        assets,
+    })
+}
+
+fn sync_scene_cursor(raylib: &mut RaylibHandle, mode: SceneCursorMode) {
+    raylib.enable_cursor();
+    match mode {
+        SceneCursorMode::CustomCi | SceneCursorMode::Hidden => raylib.hide_cursor(),
+        SceneCursorMode::SystemVisible => raylib.show_cursor(),
+    }
+}
+
+const fn music_track_for_scene(scene: AppScene, arena: ArenaId) -> MusicTrack {
     match scene {
         AppScene::Preferences => MusicTrack::Menu,
-        AppScene::Fight | AppScene::CombatLab => MusicTrack::Combat,
+        AppScene::Fight => music_track_for_arena(arena),
+        AppScene::CombatLab => MusicTrack::CombatDeterminedPursuit,
         AppScene::SpriteViewer => MusicTrack::Menu,
+    }
+}
+
+const fn music_track_for_arena(arena: ArenaId) -> MusicTrack {
+    match arena {
+        ArenaId::Sirius => MusicTrack::Combat,
+        ArenaId::Fortaleza => MusicTrack::CombatRandomEncounter,
+        ArenaId::JavaStreet => MusicTrack::CombatConsoleFloor,
+        ArenaId::BioTic => MusicTrack::CombatRinsTheme,
+        ArenaId::PortoDigital => MusicTrack::CombatChiptuneBattle,
+        ArenaId::ValeDoPinhao => MusicTrack::CombatEightBitBattle,
     }
 }
 
@@ -511,6 +664,7 @@ fn run_sprite_viewer(
     thread: &RaylibThread,
     options: SpriteViewerOptions,
 ) {
+    sync_scene_cursor(raylib, SceneCursorMode::SystemVisible);
     let mut viewer = match SpriteViewer::load(options) {
         Ok(viewer) => viewer,
         Err(error) => {
@@ -561,7 +715,7 @@ fn run_sprite_viewer(
                 video_capture.last_message(),
             );
         }
-        finish_frame(raylib, thread, &frame_target, &mut video_capture);
+        finish_frame(raylib, thread, &frame_target, &mut video_capture, None);
 
         if screenshot_requested {
             let path = "target/sprite-viewer-capture.png";
@@ -596,6 +750,7 @@ fn finish_frame(
     thread: &RaylibThread,
     frame_target: &RenderTexture2D,
     video_capture: &mut VideoCapture,
+    software_cursor: Option<SoftwareCursorFrame<'_>>,
 ) {
     if let Err(error) = video_capture.capture_render_texture(frame_target) {
         eprintln!("warning: could not capture frame: {error}");
@@ -604,6 +759,14 @@ fn finish_frame(
 
     let mut draw = raylib.begin_drawing(thread);
     render::draw_render_target_to_window(&mut draw, frame_target);
+    if let Some(cursor) = software_cursor {
+        render::draw_linker_chip_cursor(
+            &mut draw,
+            cursor.position,
+            cursor.visual_time_seconds,
+            cursor.assets,
+        );
+    }
 }
 
 fn load_frame_target(raylib: &mut RaylibHandle, thread: &RaylibThread) -> RenderTexture2D {

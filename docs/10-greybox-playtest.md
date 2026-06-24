@@ -8,8 +8,10 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 
 - Janela Raylib.
 - Loop de jogo com fixed timestep.
-- Arenas bitmap placeholder `Sirius`, `Fortaleza Tech Coast` e `Java Street`.
+- Arenas bitmap placeholder `Sirius`, `Fortaleza Tech Coast`, `Java Street`, `BioTIC`, `Porto Digital` e `Vale do Pinhao`.
 - Menu principal com submenus de versus, treino e opções runtime.
+- Livro `Lore / Roster` carregado de JSON runtime, com capítulos de história e fichas dos personagens da demo.
+- Seleção manual de arena e volume de música no menu.
 - Dois lutadores greybox na luta padrão: Rust e Java.
 - Corpo composto por cabeça, tronco e pernas placeholder.
 - Spritesheet placeholder com poses de idle, andar, abaixar, pular, defender, socos e chute.
@@ -34,7 +36,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Hitbox/alcance dos golpes visível quando debug de combate está ligado.
 - Dano fixo.
 - Barra de vida com número.
-- Hit spark, block spark e dano flutuante.
+- Hit spark, block spark, dano flutuante, trail de projectile, luz de chão em stun e animações leves de fundo por arena.
 - Condição de vitória.
 - Reinício da partida.
 - HUD, ajuda de controles e debug visual configuráveis.
@@ -99,14 +101,15 @@ O Combat Lab abre com o fundo `Sirius` ligado para validar contraste de golpe/sp
 
 ## Menu Principal
 
-O jogo abre primeiro no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem no submenu `Versus Setup`, e `Esc` para voltar de submenus, luta, Combat Lab ou Sprite Viewer. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar.
+O jogo abre primeiro no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem, arena, capítulo, ficha de roster e volume em linhas ajustáveis, e `Esc` para voltar de submenus, luta, Combat Lab ou Sprite Viewer. O menu usa um cursor visual próprio em forma de chip `Linker`; durante a luta o cursor fica oculto para não competir com a ação. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar.
 
 Fluxo atual:
 
 - `Quick Fight`: inicia a luta com a configuração atual.
-- `Versus Setup`: troca Player 1 e Player 2.
+- `Versus Setup`: troca Player 1, Player 2 e arena.
 - `Training`: abre `Combat Lab` ou `Sprite Viewer`.
-- `Options`: liga/desliga gravação local, CPU, dano, HUD, ajuda, debug e gamepad.
+- `Lore / Roster`: abre o livro do Linker e fichas de Rust, Duke/Java, C e Python.
+- `Options`: ajusta volume da música e liga/desliga gravação local, CPU, dano, HUD, ajuda, debug e gamepad.
 
 Ao começar uma luta, os personagens entram em cena e depois aparece a contagem central `11`, `10`, `01`, `Fight!`. Enquanto a intro ou a contagem estiver ativa, ataques, movimento e projéteis ficam bloqueados. Depois que alguém vence, o cenário permanece o mesmo durante a pose final; a próxima arena só entra quando a luta seguinte começa com `R`/`Start` ou ao voltar pelo menu.
 
@@ -114,6 +117,9 @@ Ao começar uma luta, os personagens entram em cena e depois aparece a contagem 
 |---|---|---|
 | Personagem Player 1 | rust.rs | A próxima luta deve iniciar com o personagem escolhido para o Player 1. |
 | Personagem Player 2 | duke.java | A próxima luta deve iniciar com o personagem escolhido para o Player 2. |
+| Arena | Sirius Light Ring / Campinas, SP | A próxima luta deve iniciar no cenário escolhido. |
+| Lore / Roster | Manual do Linker | Capítulos e fichas devem carregar de `assets/lore/story.json` sem recompilar. |
+| Volume da música | 100% | A música deve baixar/subir em passos de 10% sem afetar SFX e vozes. |
 | Player 1 usa IA | Desligado | O Player 1 deve ser controlado automaticamente quando ligado. |
 | Player 2 usa IA | Ligado | O Player 2 deve ser controlado automaticamente. |
 | IA pode dar golpes | Ligado | Quando desligado, lutadores controlados por IA devem andar, pular, afastar, aproximar e defender, mas não atacar. |
@@ -161,13 +167,15 @@ O HUD mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um c
 | Outline branco | Corpo físico do personagem |
 | Caixas verdes | Hurtboxes de cabeça, tronco e pernas |
 | Caixa vermelha | Alcance do golpe corpo-a-corpo |
-| Caixa/círculo ciano | Fireball |
+| Caixa/círculo ciano com rastro | Fireball |
 | Corpo amarelo | Ataque em fase ativa |
-| Hit spark amarelo | Golpe acertou |
-| Escudo/spark azul | Defesa reduziu dano |
+| Linhas/círculos amarelos no contato | Golpe acertou |
+| Anel/escudo azul no contato | Defesa reduziu dano |
+| Luz de chão vermelha/azul | Lutador em hitstun ou blockstun |
+| Blips/linhas/chuva no fundo | Animação leve de cenário, sem significado de combate |
 | `-8`, `-12`, `-16` | Dano aplicado |
 | Linha magenta | Colisão corpo-corpo bloqueando passagem |
-| Fundo Sirius/Fortaleza/Java Street | Arena placeholder, não arte final |
+| Fundo Sirius/Fortaleza/Java Street/BioTIC/Porto Digital/Vale do Pinhao | Arena placeholder, não arte final |
 
 Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `Mostrar debug de combate` ligado. A ajuda de comandos no rodapé aparece somente com `Mostrar ajuda de controles` ligado.
 
@@ -194,21 +202,27 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 19. O projectile do C deve ler claramente como stream de bits, com `0` e `1` visiveis durante a luta.
 20. Python no Combat Lab, no menu ou na luta iniciada por `--p1 python`/`--p2 python` deve aparecer com atlas de luta, entrada cinematografica e projectile carregados; o soco fraco deve ler como bote da cobra, o soco forte como ataque da própria personagem e a personagem deve compensar dano menor com startup/recovery mais leves.
 21. Rust, Duke, Go, C e Python devem ter projectiles com ritmo diferente: Rust médio, Duke pesado/lento, Go rápido/curto, C médio/rápido, Python rápido/médio.
-22. O submenu `Options` deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
-23. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
-24. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
-24. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Player 1.
-25. A opção `Player 2 recebe dano` desligada deve impedir perda de vida do Player 2.
-26. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
-27. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
-28. `R` ou `Menu` deve reiniciar a partida.
-29. `Esc` durante a luta deve voltar para o menu, sem fechar a janela.
-30. `Training > Combat Lab` deve abrir o laboratório e `Esc` deve voltar ao menu.
-31. `Training > Sprite Viewer` deve abrir o viewer e `Esc` deve voltar ao menu.
-32. Pulo com direção pressionada deve sair em diagonal.
-33. A vida deve chegar a zero e encerrar a luta.
-34. Ao iniciar a próxima luta depois de uma vitória, o cenário deve avançar uma vez no ciclo `Sirius -> Fortaleza Tech Coast -> Java Street -> Sirius`.
-35. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil.
+22. Rust, Duke, Go, C e Python devem emitir voz/esforço no início dos golpes próximos e projectile cast.
+23. Rust e Duke/Java devem ter esforço audível em cada golpe próximo do loadout, sem depender só de fallback curto.
+24. `Lore / Roster` deve mostrar o livro do Linker, trocar capítulo/personagem com A/D e exibir retrato/ficha de Rust, Duke/Java, C e Python.
+25. Editar `assets/lore/story.json` e reiniciar o jogo deve alterar o texto do livro sem recompilar.
+26. `Versus Setup > Arena` deve trocar imediatamente o fundo de menu e iniciar a próxima luta na arena escolhida.
+27. `Options > Music Volume` deve baixar/subir a música em passos de 10%, sem afetar vozes e impactos.
+28. O submenu `Options` deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
+29. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
+30. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
+31. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Player 1.
+32. A opção `Player 2 recebe dano` desligada deve impedir perda de vida do Player 2.
+33. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
+34. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
+35. `R` ou `Menu` deve reiniciar a partida.
+36. `Esc` durante a luta deve voltar para o menu, sem fechar a janela.
+37. `Training > Combat Lab` deve abrir o laboratório e `Esc` deve voltar ao menu.
+38. `Training > Sprite Viewer` deve abrir o viewer e `Esc` deve voltar ao menu.
+39. Pulo com direção pressionada deve sair em diagonal.
+40. A vida deve chegar a zero e encerrar a luta.
+41. Ao iniciar a próxima luta depois de uma vitória, o cenário deve avançar uma vez no ciclo `Sirius Light Ring -> Tech Coast Beacon -> Java Street Terminal -> BioTIC Garden -> Porto Digital Cache -> Pinhao Smart Grid -> Sirius Light Ring`.
+42. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil por hitspark, block pulse, trail e luz de chão em stun.
 
 ## Combat Lab
 

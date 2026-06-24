@@ -25,7 +25,12 @@ use super::{
 pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, assets: &GameAssets) {
     draw.clear_background(BACKGROUND);
     if lab.show_background() {
-        draw_arena(draw, assets.arenas.get(ArenaId::STARTING_ARENA));
+        draw_arena(
+            draw,
+            ArenaId::STARTING_ARENA,
+            assets.arenas.get(ArenaId::STARTING_ARENA),
+            lab.elapsed_seconds(),
+        );
         draw_lab_grid(draw, Color::new(44, 49, 60, 118));
     } else {
         draw_lab_grid(draw, Color::new(44, 49, 60, 255));
