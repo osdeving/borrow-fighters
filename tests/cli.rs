@@ -79,6 +79,24 @@ fn game_args_accept_python_character_aliases() {
 }
 
 #[test]
+fn game_args_accept_cpp_character_aliases() {
+    let options = LaunchOptions::parse(
+        [
+            "borrow-fighters",
+            "--player-one",
+            "cpp",
+            "--player-two",
+            "c++",
+        ]
+        .map(String::from),
+    )
+    .unwrap();
+
+    assert_eq!(options.match_options.player_one, CharacterId::Cpp);
+    assert_eq!(options.match_options.player_two, CharacterId::Cpp);
+}
+
+#[test]
 fn game_args_can_start_directly_in_fight() {
     let options = LaunchOptions::parse(
         ["borrow-fighters", "--fight", "--p1", "go", "--p2", "duke"].map(String::from),
@@ -199,6 +217,26 @@ fn combat_lab_args_select_python_character() {
 }
 
 #[test]
+fn combat_lab_args_select_cpp_character() {
+    let options = LaunchOptions::parse(
+        [
+            "borrow-fighters",
+            "--lab",
+            "combat",
+            "--character",
+            "cpp.cpp",
+        ]
+        .map(String::from),
+    )
+    .unwrap();
+
+    let LaunchMode::CombatLab(lab) = options.mode else {
+        panic!("expected combat lab mode");
+    };
+    assert_eq!(lab.character, CharacterId::Cpp);
+}
+
+#[test]
 fn sprite_viewer_args_select_manifest_and_clip() {
     let options = LaunchOptions::parse(
         [
@@ -264,6 +302,26 @@ fn sprite_viewer_infers_python_from_manifest_path() {
         panic!("expected sprite viewer mode");
     };
     assert_eq!(viewer.character, Some(CharacterId::Python));
+}
+
+#[test]
+fn sprite_viewer_infers_cpp_from_manifest_path() {
+    let options = LaunchOptions::parse(
+        [
+            "borrow-fighters",
+            "--tool",
+            "sprite-viewer",
+            "--manifest",
+            "assets/placeholder/cpp-fighter.sprite.json",
+        ]
+        .map(String::from),
+    )
+    .unwrap();
+
+    let LaunchMode::SpriteViewer(viewer) = options.mode else {
+        panic!("expected sprite viewer mode");
+    };
+    assert_eq!(viewer.character, Some(CharacterId::Cpp));
 }
 
 #[test]

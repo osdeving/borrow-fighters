@@ -441,7 +441,7 @@ fn sync_clip_to_move_selects_first_known_clip_for_move() {
     );
 
     assert_eq!(viewer.selected_move(), CombatLabMove::Throw);
-    assert_eq!(viewer.current_clip_name(), "punch_light");
+    assert_eq!(viewer.current_clip_name(), "throw");
 }
 
 #[test]

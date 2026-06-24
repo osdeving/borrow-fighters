@@ -9,7 +9,7 @@ use borrow_fighters::scenes::preferences::{
 fn feature_flags_start_with_playtest_friendly_defaults() {
     let flags = FeatureFlags::default();
 
-    assert!(!flags.enabled(FeatureFlag::PlayerOneCpu));
+    assert!(flags.enabled(FeatureFlag::PlayerOneCpu));
     assert!(flags.enabled(FeatureFlag::PlayerTwoCpu));
     assert!(flags.enabled(FeatureFlag::CpuCanAttack));
     assert!(flags.enabled(FeatureFlag::PlayerOneTakesDamage));
@@ -71,7 +71,7 @@ fn preferences_menu_toggles_selected_feature_flag() {
     );
 
     assert_eq!(action, PreferencesAction::Stay);
-    assert!(flags.enabled(FeatureFlag::PlayerOneCpu));
+    assert!(!flags.enabled(FeatureFlag::PlayerOneCpu));
 }
 
 #[test]
@@ -332,6 +332,25 @@ fn preferences_menu_opens_training_tools() {
             &mut flags,
         ),
         PreferencesAction::OpenCombatLab
+    );
+
+    menu.update(PreferencesInput::default(), &mut flags);
+    menu.update(
+        PreferencesInput {
+            down: true,
+            ..PreferencesInput::default()
+        },
+        &mut flags,
+    );
+    assert_eq!(
+        menu.update(
+            PreferencesInput {
+                activate: true,
+                ..PreferencesInput::default()
+            },
+            &mut flags,
+        ),
+        PreferencesAction::OpenMoveShowcase
     );
 
     menu.update(PreferencesInput::default(), &mut flags);

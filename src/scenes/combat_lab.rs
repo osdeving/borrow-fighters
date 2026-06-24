@@ -553,6 +553,7 @@ fn slot_for(character: CharacterId) -> PlayerSlot {
         CharacterId::Go => PlayerSlot::One,
         CharacterId::C => PlayerSlot::Two,
         CharacterId::Python => PlayerSlot::One,
+        CharacterId::Cpp => PlayerSlot::Two,
     }
 }
 

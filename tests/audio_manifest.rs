@@ -216,6 +216,7 @@ fn every_character_attack_can_resolve_voice_binding() {
         CharacterId::Go,
         CharacterId::C,
         CharacterId::Python,
+        CharacterId::Cpp,
     ] {
         let spec = character_spec(character);
         for move_id in spec.move_ids {

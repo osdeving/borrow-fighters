@@ -29,12 +29,13 @@ use crate::game::world::{World, WorldSpriteCombatManifests};
 use crate::scenes::{
     AppScene,
     combat_lab::{CombatLab, CombatLabInput, CombatLabMove, CombatLabOptions},
+    move_showcase::{MoveShowcase, MoveShowcaseOptions},
     preferences::{CycleDirection, PreferencesAction, PreferencesMenu},
     sprite_viewer::{SpriteViewer, SpriteViewerInput, SpriteViewerOptions, ViewerPoint},
 };
 
 const CAPTURE_SMOKE_SECONDS_ENV: &str = "BORROW_FIGHTERS_CAPTURE_SMOKE_SECONDS";
-const DEFAULT_MUSIC_VOLUME_PERCENT: u8 = 100;
+const DEFAULT_MUSIC_VOLUME_PERCENT: u8 = 50;
 const MUSIC_VOLUME_STEP_PERCENT: u8 = 10;
 
 /// Top-level application state outside the testable game world.
@@ -47,6 +48,7 @@ pub struct App {
     sprite_viewer_options: Option<SpriteViewerOptions>,
     preferences_menu: PreferencesMenu,
     combat_lab: CombatLab,
+    move_showcase: MoveShowcase,
     character_body_metrics: CharacterBodyMetricsCatalog,
     match_options: MatchOptions,
     match_options_dirty: bool,
@@ -103,6 +105,7 @@ impl App {
             sprite_viewer_options,
             preferences_menu: PreferencesMenu::default(),
             combat_lab,
+            move_showcase: MoveShowcase::default(),
             character_body_metrics,
             match_options,
             match_options_dirty: false,
@@ -126,6 +129,7 @@ impl App {
 
         let assets = GameAssets::load(raylib, thread);
         self.sync_world_sprite_combat(&assets);
+        let software_cursor_enabled = software_cursor_enabled_for_env();
         let audio_device = RaylibAudio::init_audio_device();
         let mut audio_player = match &audio_device {
             Ok(audio_device) => AudioPlayer::load(audio_device, AUDIO_MANIFEST_PATH),
@@ -142,7 +146,7 @@ impl App {
         while !raylib.window_should_close() {
             let frame_time = raylib.get_frame_time().min(MAX_FRAME_TIME);
             self.visual_time_seconds += frame_time;
-            sync_scene_cursor(raylib, cursor_mode_for_scene(self.scene));
+            sync_system_cursor(raylib);
             let mouse_position = raylib.get_mouse_position();
             audio_player.update_streams();
             update_video_capture_status(&mut self.video_capture);
@@ -170,7 +174,7 @@ impl App {
                         self.accumulator = 0.0;
                         audio_player.play(&AudioEvent::ui_back());
                         audio_player.play_music(MusicTrack::Menu);
-                        sync_scene_cursor(raylib, SceneCursorMode::CustomCi);
+                        sync_system_cursor(raylib);
                         {
                             let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
                             render::draw_preferences(
@@ -212,8 +216,71 @@ impl App {
                         thread,
                         &frame_target,
                         &mut self.video_capture,
-                        software_cursor_for_scene(
-                            self.scene,
+                        software_cursor_for_position(
+                            software_cursor_enabled,
+                            mouse_position,
+                            self.visual_time_seconds,
+                            &assets,
+                        ),
+                    );
+                }
+                AppScene::MoveShowcase => {
+                    if input.open_preferences {
+                        self.scene = AppScene::Preferences;
+                        self.preferences_menu.ignore_next_input();
+                        self.accumulator = 0.0;
+                        audio_player.play(&AudioEvent::ui_back());
+                        audio_player.play_music(MusicTrack::Menu);
+                        sync_system_cursor(raylib);
+                        {
+                            let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
+                            render::draw_preferences(
+                                &mut draw,
+                                render::PreferencesDrawOptions {
+                                    menu: &self.preferences_menu,
+                                    player_one_character: self.match_options.player_one,
+                                    player_two_character: self.match_options.player_two,
+                                    arena: self.current_arena,
+                                    music_volume_percent: self.music_volume_percent,
+                                    visual_time_seconds: self.visual_time_seconds,
+                                    flags: self.feature_flags,
+                                    gamepad_status,
+                                    recording: self.video_capture.is_recording(),
+                                    assets: &assets,
+                                },
+                            );
+                            render::draw_video_capture_overlay(
+                                &mut draw,
+                                self.video_capture.is_recording(),
+                                self.video_capture.last_message(),
+                            );
+                        }
+                    } else {
+                        self.update_move_showcase(frame_time, input.combat_lab);
+
+                        {
+                            let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
+                            render::draw_move_showcase(
+                                &mut draw,
+                                &self.move_showcase,
+                                self.current_arena,
+                                self.visual_time_seconds,
+                                &assets,
+                            );
+                            render::draw_video_capture_overlay(
+                                &mut draw,
+                                self.video_capture.is_recording(),
+                                self.video_capture.last_message(),
+                            );
+                        }
+                    }
+                    finish_frame(
+                        raylib,
+                        thread,
+                        &frame_target,
+                        &mut self.video_capture,
+                        software_cursor_for_position(
+                            software_cursor_enabled,
                             mouse_position,
                             self.visual_time_seconds,
                             &assets,
@@ -274,6 +341,14 @@ impl App {
                                 self.accumulator = 0.0;
                                 audio_player.play_music(MusicTrack::CombatDeterminedPursuit);
                             }
+                            PreferencesAction::OpenMoveShowcase => {
+                                self.move_showcase = MoveShowcase::new(MoveShowcaseOptions {
+                                    character: self.match_options.player_one,
+                                });
+                                self.scene = AppScene::MoveShowcase;
+                                self.accumulator = 0.0;
+                                audio_player.play_music(MusicTrack::CombatDeterminedPursuit);
+                            }
                             PreferencesAction::OpenSpriteViewer => {
                                 run_sprite_viewer(raylib, thread, default_sprite_viewer_options());
                                 if raylib.window_should_close() {
@@ -324,8 +399,8 @@ impl App {
                         thread,
                         &frame_target,
                         &mut self.video_capture,
-                        software_cursor_for_scene(
-                            self.scene,
+                        software_cursor_for_position(
+                            software_cursor_enabled,
                             mouse_position,
                             self.visual_time_seconds,
                             &assets,
@@ -366,8 +441,8 @@ impl App {
                             thread,
                             &frame_target,
                             &mut self.video_capture,
-                            software_cursor_for_scene(
-                                self.scene,
+                            software_cursor_for_position(
+                                software_cursor_enabled,
                                 mouse_position,
                                 self.visual_time_seconds,
                                 &assets,
@@ -456,7 +531,18 @@ impl App {
                                 self.video_capture.last_message(),
                             );
                         }
-                        finish_frame(raylib, thread, &frame_target, &mut self.video_capture, None);
+                        finish_frame(
+                            raylib,
+                            thread,
+                            &frame_target,
+                            &mut self.video_capture,
+                            software_cursor_for_position(
+                                software_cursor_enabled,
+                                mouse_position,
+                                self.visual_time_seconds,
+                                &assets,
+                            ),
+                        );
                     }
                 }
                 AppScene::SpriteViewer => unreachable!("sprite viewer has a separate app loop"),
@@ -524,6 +610,26 @@ impl App {
         }
     }
 
+    fn update_move_showcase(&mut self, frame_time: f32, input: CombatLabInput) {
+        self.accumulator += frame_time;
+        let mut fixed_steps = 0;
+
+        while self.accumulator >= FIXED_TIMESTEP && fixed_steps < MAX_FIXED_STEPS_PER_FRAME {
+            let showcase_input = if fixed_steps == 0 {
+                input
+            } else {
+                CombatLabInput::default()
+            };
+            self.move_showcase.update(showcase_input);
+            self.accumulator -= FIXED_TIMESTEP;
+            fixed_steps += 1;
+        }
+
+        if fixed_steps == MAX_FIXED_STEPS_PER_FRAME {
+            self.accumulator = 0.0;
+        }
+    }
+
     fn adjust_music_volume(&mut self, direction: CycleDirection) {
         self.music_volume_percent = match direction {
             CycleDirection::Previous => self
@@ -579,6 +685,7 @@ fn fighter_manifest_for_character(
         CharacterId::Go => assets.go_fighter.as_ref(),
         CharacterId::C => assets.c_fighter.as_ref(),
         CharacterId::Python => assets.python_fighter.as_ref(),
+        CharacterId::Cpp => assets.cpp_fighter.as_ref(),
     }
     .map(|atlas| atlas.manifest.clone())
 }
@@ -596,11 +703,9 @@ fn play_preferences_audio_feedback<'aud>(
     }
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-enum SceneCursorMode {
-    CustomCi,
-    Hidden,
-    SystemVisible,
+fn sync_system_cursor(raylib: &mut RaylibHandle) {
+    raylib.enable_cursor();
+    raylib.show_cursor();
 }
 
 #[derive(Clone, Copy)]
@@ -610,33 +715,27 @@ struct SoftwareCursorFrame<'a> {
     assets: &'a GameAssets,
 }
 
-const fn cursor_mode_for_scene(scene: AppScene) -> SceneCursorMode {
-    match scene {
-        AppScene::Preferences => SceneCursorMode::CustomCi,
-        AppScene::Fight => SceneCursorMode::Hidden,
-        AppScene::CombatLab | AppScene::SpriteViewer => SceneCursorMode::SystemVisible,
+fn software_cursor_enabled_for_env() -> bool {
+    match std::env::var("BORROW_FIGHTERS_SOFTWARE_CURSOR") {
+        Ok(value) => !matches!(
+            value.trim().to_ascii_lowercase().as_str(),
+            "0" | "false" | "off" | "no"
+        ),
+        Err(_) => std::env::var_os("WSL_DISTRO_NAME").is_some(),
     }
 }
 
-fn software_cursor_for_scene<'a>(
-    scene: AppScene,
+fn software_cursor_for_position<'a>(
+    enabled: bool,
     position: Vector2,
     visual_time_seconds: f32,
     assets: &'a GameAssets,
 ) -> Option<SoftwareCursorFrame<'a>> {
-    (cursor_mode_for_scene(scene) == SceneCursorMode::CustomCi).then_some(SoftwareCursorFrame {
+    enabled.then_some(SoftwareCursorFrame {
         position,
         visual_time_seconds,
         assets,
     })
-}
-
-fn sync_scene_cursor(raylib: &mut RaylibHandle, mode: SceneCursorMode) {
-    raylib.enable_cursor();
-    match mode {
-        SceneCursorMode::CustomCi | SceneCursorMode::Hidden => raylib.hide_cursor(),
-        SceneCursorMode::SystemVisible => raylib.show_cursor(),
-    }
 }
 
 const fn music_track_for_scene(scene: AppScene, arena: ArenaId) -> MusicTrack {
@@ -644,6 +743,7 @@ const fn music_track_for_scene(scene: AppScene, arena: ArenaId) -> MusicTrack {
         AppScene::Preferences => MusicTrack::Menu,
         AppScene::Fight => music_track_for_arena(arena),
         AppScene::CombatLab => MusicTrack::CombatDeterminedPursuit,
+        AppScene::MoveShowcase => MusicTrack::CombatDeterminedPursuit,
         AppScene::SpriteViewer => MusicTrack::Menu,
     }
 }
@@ -664,7 +764,7 @@ fn run_sprite_viewer(
     thread: &RaylibThread,
     options: SpriteViewerOptions,
 ) {
-    sync_scene_cursor(raylib, SceneCursorMode::SystemVisible);
+    sync_system_cursor(raylib);
     let mut viewer = match SpriteViewer::load(options) {
         Ok(viewer) => viewer,
         Err(error) => {
@@ -948,5 +1048,18 @@ fn read_sprite_viewer_input(raylib: &RaylibHandle) -> SpriteViewerInput {
         mouse_pressed: raylib.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_LEFT),
         mouse_down: raylib.is_mouse_button_down(MouseButton::MOUSE_BUTTON_LEFT),
         mouse_released: raylib.is_mouse_button_released(MouseButton::MOUSE_BUTTON_LEFT),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn app_starts_with_music_volume_at_half() {
+        let app = App::default();
+
+        assert_eq!(app.music_volume_percent, 50);
+        assert_eq!(app.music_volume_multiplier(), 0.5);
     }
 }

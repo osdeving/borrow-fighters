@@ -47,7 +47,7 @@ pub struct FeatureFlags {
 impl Default for FeatureFlags {
     fn default() -> Self {
         Self {
-            player_one_cpu: false,
+            player_one_cpu: true,
             player_two_cpu: true,
             cpu_can_attack: true,
             player_one_takes_damage: true,

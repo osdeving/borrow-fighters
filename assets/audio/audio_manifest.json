@@ -594,6 +594,15 @@
       ]
     },
     {
+      "cue": "fighter.attack.start",
+      "character": "cpp",
+      "clips": [
+        "voice.c.attack.pointer_jab.01",
+        "voice.c.attack.unsafe_poke.01",
+        "voice.python.attack.heel_kick.01"
+      ]
+    },
+    {
       "cue": "fighter.attack.whiff",
       "clips": ["sfx.combat.whiff.01", "sfx.combat.whiff.02"]
     },
@@ -623,6 +632,11 @@
       "clips": ["voice.python.attack.data_strike.01"]
     },
     {
+      "cue": "fighter.projectile.cast",
+      "character": "cpp",
+      "clips": ["voice.c.attack.unsafe_poke.01"]
+    },
+    {
       "cue": "fighter.hurt",
       "character": "rust",
       "clips": ["voice.rust.hurt.01"]
@@ -648,6 +662,11 @@
       "clips": ["voice.python.hurt.01"]
     },
     {
+      "cue": "fighter.hurt",
+      "character": "cpp",
+      "clips": ["voice.c.hurt.01"]
+    },
+    {
       "cue": "fighter.block",
       "character": "rust",
       "clips": ["voice.rust.block.01"]
@@ -671,6 +690,11 @@
       "cue": "fighter.block",
       "character": "python",
       "clips": ["voice.python.block.01"]
+    },
+    {
+      "cue": "fighter.block",
+      "character": "cpp",
+      "clips": ["voice.c.block.01"]
     },
     {
       "cue": "combat.hit",

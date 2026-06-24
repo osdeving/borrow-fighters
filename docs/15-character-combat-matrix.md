@@ -24,6 +24,7 @@ O foco atual é **Prototype 0.1**. Não estamos criando combo tree, meter, throw
 | Go | rushdown de concorrência | ações rápidas, pressão curta, ritmo alto | vida menor, alcance menor, sofre contra anti-air e espaço bem controlado |
 | C | low-level fundamentals | alcance honesto, dano sólido, pressão simples e punível | startup/whiff maiores; precisa confirmar espaço antes de bater |
 | Python | agile punisher | startup leve, recovery curto, leitura de whiff e ritmo rápido | vida/dano menores; não deve ganhar troca bruta |
+| C++ | agile systems punisher | herda alcance de C com ritmo mais moderno, golpes técnicos e projectile de operadores | vida moderada; precisa escolher espaço, não pode virar C mais segura |
 
 ## Rust
 
@@ -105,6 +106,22 @@ Python deve parecer ágil, precisa e oportunista. Ela não vence por dano bruto:
 | no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
 | `Q+F` | `PythonConstrictThrow` | throw moderado com recovery menor que o universal | 10 | 7f | 52 | 14f | sair do alcance, pular, jab |
 
+## C++
+
+C++ deve parecer filha de C: mais ornamentada, mais rápida em decisões pontuais e ainda presa ao risco de escolher espaço errado. Ela não deve substituir C como fundamentos brutos nem Python como punisher leve; o papel dela é ficar entre os dois, com alcance técnico e recuperação moderada.
+
+| Input | MoveId | Intenção | Dano | Startup | Alcance | Whiff | Contra-jogo |
+|---|---|---|---:|---:|---:|---:|---|
+| `F` | `CppReferenceJab` | jab de referência, rápido e menor que o ponteiro de C | 7 | 4f | 58 | 4f | ficar fora do alcance, whiff punish |
+| `H` | `CppTemplateStrike` | soco forte técnico, mais alcance/dano que Python e menos bruto que C | 16 | 10f | 104 | 10f | bloquear, desafiar antes do ativo, punir whiff |
+| `V` | `CppOperatorKick` | chute de operador para controle médio e whiff punish | 12 | 8f | 102 | 7f | bloquear, recuar, punir se espaçado |
+| `S+V` | `CppVectorSweep` | low de vetor, alcance bom sem dano de C | 11 | 9f | 116 | 11f | defender abaixado, pular |
+| frente + `H` | `CppVirtualOverhead` | overhead técnico e moderado | 14 | 11f | 84 | 11f | defender em pé, jab no startup |
+| `S+H` | `CppExceptionAntiAir` | anti-air de exceção, rápido e menos largo que C | 13 | 6f | 72 | 10f | baitar e punir |
+| no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
+| no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
+| `Q+F` | `CppMoveThrow` | throw moderado com tema de move semantics | 10 | 6f | 50 | 14f | sair do alcance, pular, jab |
+
 ## Especiais de Projectile
 
 Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ainda é o mesmo botão de especial do protótipo, mas dano, tamanho, velocidade, cooldown, reação e limite de alcance já vêm do `CharacterSpec`. Velocidade e alcance abaixo seguem os valores base de tuning; no runtime `1280x720`, medidas espaciais usam `RESOLUTION_SCALE = 4 / 3`.
@@ -116,6 +133,7 @@ Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ai
 | Go | `GO_PROJECTILE_SPEC` | burst rápido para cobrir entrada sem virar zoner | 6 | 430 px/s | 44f | 320 px | ficar fora do curto alcance, bloquear pouco dano, desafiar depois do burst |
 | C | `C_PROJECTILE_SPEC` | bitstream médio/rápido para validar asset separado e origem do especial | 8 | 360 px/s | 56f | tela inteira | bloquear chip, pular, aproximar no cooldown |
 | Python | `PYTHON_PROJECTILE_SPEC` | fluxo de dados rápido/médio para validar atlas novo sem virar zoner completo | 7 | 390 px/s | 50f | tela inteira | bloquear pouco dano, pular, desafiar antes do próximo fluxo |
+| C++ | `CPP_PROJECTILE_SPEC` | burst de operadores `++` rápido/médio, herdando leitura de C sem dano bruto | 7 | 405 px/s | 52f | tela inteira | bloquear pouco dano, pular, aproximar no cooldown |
 
 ## Matchups de Intenção
 
@@ -127,8 +145,10 @@ Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ai
 | C x Rust | C tenta ganhar alcance e dano sólido; Rust tenta whiff punish e anti-air mais limpo. | C não pode ficar seguro demais no poke; Rust não pode anular todo alcance com jab/throw. |
 | C x Duke | C joga fundamentos contra presença pesada; Duke tem golpes maiores, mas C deve punir melhor whiffs longos. | Se Duke sempre ganha alcance e dano, C vira redundante; se C é mais rápido e mais forte, Duke perde função. |
 | C x Python | C ganha trocas e espaço; Python tenta entrar e sair antes do whiff punish. | Python não pode vencer troca bruta; C não pode prender Python sem risco. |
+| C x C++ | C tenta impor risco e alcance bruto; C++ tenta ganhar por tempo, whiff punish e escolhas mais rápidas. | C++ não pode ser C com menos recovery; C não pode perder todo fundamento para a filha. |
 | Python x Rust | Python tenta acelerar o ritmo e punir decisão errada; Rust tenta estabilizar com respostas honestas. | Python não pode virar Rust melhor e mais rápido; Rust não pode impedir todo whiff punish. |
 | Python x Duke | Python tenta passar por startup longo; Duke tenta manter presença com dano e pushback. | Se Python entra sem risco, Duke perde arquétipo; se Duke controla tudo, Python não joga. |
+| Python x C++ | Python tenta ganhar por leveza; C++ tenta controlar espaço com golpes um pouco maiores. | Se C++ acompanha toda a velocidade de Python, Python perde identidade; se Python pune tudo sem risco, C++ vira redundante. |
 
 ## Critérios de Playtest
 
@@ -136,15 +156,16 @@ Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ai
 2. Duke deve controlar mais espaço com sweep/overhead/poke, mas deve sofrer quando erra.
 3. Go deve ser percebido como mais rápido, mas não como mais seguro.
 4. C deve parecer mais sólido e comprido, mas punível quando erra.
-5. O jogador deve conseguir explicar por que tomou dano: low, overhead, throw, anti-air ou projectile.
-6. CPU x CPU deve mostrar diferença de ritmo, sem parecer dois personagens espelhados.
-7. Nenhum golpe deve resolver neutral, defesa e pressão ao mesmo tempo.
-8. Python deve parecer ágil e clara no feedback de hit, sem ganhar por dano bruto.
+5. Python deve parecer ágil e clara no feedback de hit, sem ganhar por dano bruto.
+6. C++ deve parecer herdeira de C com timing mais moderno, sem ganhar por ser mais segura que C e mais forte que Python ao mesmo tempo.
+7. O jogador deve conseguir explicar por que tomou dano: low, overhead, throw, anti-air ou projectile.
+8. CPU x CPU deve mostrar diferença de ritmo, sem parecer dois personagens espelhados.
+9. Nenhum golpe deve resolver neutral, defesa e pressão ao mesmo tempo.
 
 ## Próximos Cortes
 
 - Decidir se Rust precisa de uma ferramenta defensiva futura como `ownership_counter`.
 - Playtestar se o `DUKE_PROJECTILE_SPEC` pesado abre espaço sem virar spam lento sem resposta.
 - Playtestar se o `GO_PROJECTILE_SPEC` curto ajuda aproximação sem transformar Go em zoner.
-- Playtestar C e Python contra Rust/Duke antes de mexer em vida ou dano.
+- Playtestar C, Python e C++ contra Rust/Duke antes de mexer em vida ou dano.
 - Avaliar hitbox/hurtbox por frame quando os sprites finais começarem a limitar o tuning.

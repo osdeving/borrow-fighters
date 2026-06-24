@@ -40,3 +40,5 @@ pub const C_BITSTREAM_PROJECTILE_PATH: &str = "assets/placeholder/c-bitstream-pr
 pub const PYTHON_FIGHTER_MANIFEST_PATH: &str = "assets/placeholder/python-fighter.sprite.json";
 pub const PYTHON_START_MANIFEST_PATH: &str = "assets/placeholder/python-start.sprite.json";
 pub const PYTHON_DATA_PROJECTILE_PATH: &str = "assets/placeholder/python-data-projectile.png";
+pub const CPP_FIGHTER_MANIFEST_PATH: &str = "assets/placeholder/cpp-fighter.sprite.json";
+pub const CPP_PLUSPLUS_PROJECTILE_PATH: &str = "assets/placeholder/cpp-plusplus-projectile.png";

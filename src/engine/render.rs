@@ -8,9 +8,11 @@ use raylib::prelude::*;
 use std::{f32::consts::TAU, ffi::CString};
 
 mod combat_lab;
+mod move_showcase;
 mod sprite_viewer;
 
 pub use combat_lab::draw_combat_lab;
+pub use move_showcase::draw_move_showcase;
 pub use sprite_viewer::{draw_sprite_viewer, draw_sprite_viewer_error};
 
 use crate::characters::CharacterId;
@@ -36,6 +38,7 @@ const PLAYER_TWO: Color = Color::new(255, 178, 104, 255);
 const PLAYER_GO: Color = Color::new(96, 220, 190, 255);
 pub(super) const PLAYER_C: Color = Color::new(126, 194, 255, 255);
 pub(super) const PLAYER_PYTHON: Color = Color::new(255, 210, 92, 255);
+pub(super) const PLAYER_CPP: Color = Color::new(118, 214, 255, 255);
 const BODY_OUTLINE: Color = Color::new(238, 241, 247, 255);
 const HURTBOX: Color = Color::new(105, 240, 174, 255);
 const HITBOX: Color = Color::new(255, 82, 82, 255);
@@ -172,7 +175,7 @@ pub fn draw_fight(
     draw_hit_effects(draw, world);
 
     if flags.enabled(FeatureFlag::ShowHud) {
-        draw_hud(draw, world, flags, gamepad_status);
+        draw_hud(draw, world, flags, gamepad_status, show_debug);
     }
 
     if let Some(label) = world.countdown_label() {
@@ -974,6 +977,7 @@ fn character_select_label(character: CharacterId) -> &'static str {
         CharacterId::Go => "gopher.go",
         CharacterId::C => "old.c",
         CharacterId::Python => "python.py",
+        CharacterId::Cpp => "cpp.cpp",
     }
 }
 
@@ -996,6 +1000,7 @@ mod tests {
         assert_eq!(character_select_label(CharacterId::Duke), "duke.java");
         assert_eq!(character_select_label(CharacterId::Go), "gopher.go");
         assert_eq!(character_select_label(CharacterId::Python), "python.py");
+        assert_eq!(character_select_label(CharacterId::Cpp), "cpp.cpp");
     }
 }
 
@@ -1006,9 +1011,9 @@ fn draw_training_menu(
 ) {
     let panel = MenuPanel {
         x: screen_px(286),
-        y: screen_px(150),
+        y: screen_px(126),
         width: screen_px(452),
-        height: screen_px(330),
+        height: screen_px(390),
     };
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "TRAINING");
@@ -1017,6 +1022,12 @@ fn draw_training_menu(
         MenuLine {
             label: "COMBAT LAB",
             description: "Teste golpes, frames, hitboxes e hurtboxes.",
+            value: None,
+            checked: None,
+        },
+        MenuLine {
+            label: "MOVE SHOWCASE",
+            description: "Player 1 sozinho cicla todos os golpes.",
             value: None,
             checked: None,
         },
@@ -1041,8 +1052,8 @@ fn draw_training_menu(
         options.menu.selected(),
         MenuRowsLayout {
             panel,
-            row_height: screen_px(62),
-            start_offset_y: screen_px(120),
+            row_height: screen_px(56),
+            start_offset_y: screen_px(106),
             large_labels: false,
             show_descriptions: true,
             selection_pulse_frames: options.menu.selection_pulse_frames(),
@@ -2579,12 +2590,12 @@ fn draw_fighter(
     if let Some(sprite_atlas) = options.sprite_atlas
         && sprites::draw_manifest_fighter_sprite(
             draw,
-            &sprite_atlas.texture,
             &sprite_atlas.manifest,
             fighter,
             options.world_elapsed_seconds,
             options.forced_clip,
             sprite_tint,
+            |frame| sprite_atlas.texture_for_frame(frame),
         )
     {
     } else if let Some(texture) = options.spritesheet {
@@ -2676,7 +2687,9 @@ fn draw_fighter(
 
     let label_x = fighter.position.x as i32;
     let label_y = (fighter.position.y - world_px(22.0)) as i32;
-    draw.draw_text(fighter.name, label_x, label_y, screen_px(16), UI_TEXT);
+    if options.show_debug {
+        draw.draw_text(fighter.name, label_x, label_y, screen_px(16), UI_TEXT);
+    }
 
     if options.show_debug && fighter.in_hitstun() {
         let stun_text = format!("HITSTUN {:02}", fighter.hitstun_remaining_frames().get());
@@ -2848,6 +2861,12 @@ fn character_visuals<'a>(character: CharacterId, assets: &'a GameAssets) -> Char
             start_atlas: assets.python_start.as_ref(),
             projectile_texture: assets.python_projectile.as_ref(),
         },
+        CharacterId::Cpp => CharacterVisuals {
+            body_color: PLAYER_CPP,
+            fight_atlas: assets.cpp_fighter.as_ref(),
+            start_atlas: None,
+            projectile_texture: assets.cpp_projectile.as_ref(),
+        },
     }
 }
 
@@ -2856,6 +2875,7 @@ fn draw_hud(
     world: &World,
     flags: FeatureFlags,
     gamepad_status: GamepadStatus,
+    show_debug: bool,
 ) {
     draw.draw_text(
         "Borrow Fighters / Prototype 0.1 Greybox",
@@ -2865,22 +2885,9 @@ fn draw_hud(
         UI_TEXT,
     );
 
-    let status = format!(
-        "P1 CPU {} | P2 CPU {} | Pad P1 {} | P2 {}",
-        connected_label(flags.enabled(FeatureFlag::PlayerOneCpu)),
-        connected_label(flags.enabled(FeatureFlag::PlayerTwoCpu)),
-        connected_label(gamepad_status.player_one),
-        connected_label(gamepad_status.player_two)
-    );
-    let status_font_size = screen_px(14);
-    let width = measure_text_width(&status, status_font_size);
-    draw.draw_text(
-        &status,
-        WINDOW_WIDTH - width - screen_px(24),
-        screen_px(16),
-        status_font_size,
-        UI_MUTED,
-    );
+    if show_debug {
+        draw_hud_debug_status(draw, flags, gamepad_status);
+    }
 
     draw_health_bar(
         draw,
@@ -2919,6 +2926,29 @@ fn draw_hud(
             UI_TEXT,
         );
     }
+}
+
+fn draw_hud_debug_status(
+    draw: &mut impl DrawTarget,
+    flags: FeatureFlags,
+    gamepad_status: GamepadStatus,
+) {
+    let status = format!(
+        "P1 CPU {} | P2 CPU {} | Pad P1 {} | P2 {}",
+        connected_label(flags.enabled(FeatureFlag::PlayerOneCpu)),
+        connected_label(flags.enabled(FeatureFlag::PlayerTwoCpu)),
+        connected_label(gamepad_status.player_one),
+        connected_label(gamepad_status.player_two)
+    );
+    let status_font_size = screen_px(14);
+    let width = measure_text_width(&status, status_font_size);
+    draw.draw_text(
+        &status,
+        WINDOW_WIDTH - width - screen_px(24),
+        screen_px(16),
+        status_font_size,
+        UI_MUTED,
+    );
 }
 
 fn draw_countdown_sprite(draw: &mut impl DrawTarget, texture: &Texture2D) {
@@ -3022,7 +3052,7 @@ fn draw_help(draw: &mut impl DrawTarget) {
         UI_TEXT,
     );
     draw.draw_text(
-        "P2: CPU default; C or View toggles P2 manual",
+        "P1/P2: CPU default; Options toggles P1, C or View toggles P2",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(52),
         screen_px(15),

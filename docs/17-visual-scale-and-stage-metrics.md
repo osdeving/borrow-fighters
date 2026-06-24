@@ -34,7 +34,7 @@ Isso da uma arena com cerca de `11,8` larguras de corpo (`1194,7 / 101,3`). Para
 
 O corpo fisico ainda e um retangulo comum para todos os personagens. O sprite pode ultrapassar esse corpo para cabelo, orelha, roupa, efeito e leitura visual, mas a area vulneravel principal deve continuar coerente com a hurtbox.
 
-Para personagens humanoides, como Rust, Duke/Java, C e Python:
+Para personagens humanoides, como Rust, Duke/Java, C, Python e C++:
 
 - altura visivel em idle: `247` a `280 px`;
 - largura visivel em idle: `147` a `200 px`;
@@ -42,6 +42,7 @@ Para personagens humanoides, como Rust, Duke/Java, C e Python:
 - Java/Duke atual aparece com cerca de `161 x 251 px` em idle.
 - C atual deve ficar nessa mesma faixa humanoide; a versao inicial usa `scale = 1.5467` no manifesto para compensar o recorte dos atlas de referencia.
 - Python atual usa corpo fisico humanoide padrao e deve ser validada pela mesma faixa antes de qualquer ajuste de hitbox.
+- C++ atual usa corpo fisico humanoide padrao, manifesto multi-atlas e deve ser validada pela mesma faixa antes de qualquer ajuste de hitbox.
 
 Para personagens nao-humanos, como Go/Gopher:
 
@@ -90,6 +91,8 @@ cargo run -- --tool sprite-viewer --manifest assets/placeholder/go-fighter.sprit
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip idle --character c --move light_punch
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip idle --character python --move light_punch
 ```
+
+Para C++, prefira validar escala e combate no jogo, Move Showcase ou Combat Lab enquanto o Sprite Studio recebe paridade completa com manifests multi-atlas.
 
 No viewer:
 

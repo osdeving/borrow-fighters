@@ -18,6 +18,12 @@ pub enum FighterSpriteClip {
     PunchLight,
     PunchHeavy,
     Kick,
+    Sweep,
+    Overhead,
+    AntiAir,
+    AirPunch,
+    AirKick,
+    Throw,
     Special,
     Taunt,
 }
@@ -36,6 +42,12 @@ impl FighterSpriteClip {
             Self::PunchLight => "punch_light",
             Self::PunchHeavy => "punch_heavy",
             Self::Kick => "kick",
+            Self::Sweep => "sweep",
+            Self::Overhead => "overhead",
+            Self::AntiAir => "anti_air",
+            Self::AirPunch => "air_punch",
+            Self::AirKick => "air_kick",
+            Self::Throw => "throw",
             Self::Special => "special",
             Self::Taunt => "taunt",
         }
@@ -86,13 +98,15 @@ pub fn fighter_sprite_clip(fighter: &Fighter) -> FighterSpriteClip {
 
     if let Some(kind) = fighter.attack_kind() {
         return match kind {
-            AttackKind::LightPunch | AttackKind::AirPunch | AttackKind::Throw => {
-                FighterSpriteClip::PunchLight
-            }
-            AttackKind::HeavyPunch | AttackKind::Overhead | AttackKind::AntiAir => {
-                FighterSpriteClip::PunchHeavy
-            }
-            AttackKind::Kick | AttackKind::Sweep | AttackKind::AirKick => FighterSpriteClip::Kick,
+            AttackKind::LightPunch => FighterSpriteClip::PunchLight,
+            AttackKind::HeavyPunch => FighterSpriteClip::PunchHeavy,
+            AttackKind::Kick => FighterSpriteClip::Kick,
+            AttackKind::Sweep => FighterSpriteClip::Sweep,
+            AttackKind::Overhead => FighterSpriteClip::Overhead,
+            AttackKind::AntiAir => FighterSpriteClip::AntiAir,
+            AttackKind::AirPunch => FighterSpriteClip::AirPunch,
+            AttackKind::AirKick => FighterSpriteClip::AirKick,
+            AttackKind::Throw => FighterSpriteClip::Throw,
         };
     }
 
@@ -151,6 +165,12 @@ pub fn fighter_sprite_frame(fighter: &Fighter) -> FighterSpriteFrame {
         FighterSpriteClip::PunchLight => FighterSpriteFrame::LightPunch,
         FighterSpriteClip::PunchHeavy => FighterSpriteFrame::HeavyPunch,
         FighterSpriteClip::Kick => FighterSpriteFrame::Kick,
+        FighterSpriteClip::Sweep => FighterSpriteFrame::Kick,
+        FighterSpriteClip::Overhead => FighterSpriteFrame::HeavyPunch,
+        FighterSpriteClip::AntiAir => FighterSpriteFrame::HeavyPunch,
+        FighterSpriteClip::AirPunch => FighterSpriteFrame::LightPunch,
+        FighterSpriteClip::AirKick => FighterSpriteFrame::Kick,
+        FighterSpriteClip::Throw => FighterSpriteFrame::LightPunch,
         FighterSpriteClip::Special => FighterSpriteFrame::Idle,
         FighterSpriteClip::Taunt => FighterSpriteFrame::Idle,
     }

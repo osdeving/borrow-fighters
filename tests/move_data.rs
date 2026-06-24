@@ -44,7 +44,7 @@ use borrow_fighters::config::world_px;
 
 #[test]
 fn close_range_moves_are_registered_in_table_order() {
-    assert_eq!(CLOSE_RANGE_MOVE_SPECS.len(), 34);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS.len(), 41);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[0].id, MoveId::LightPunch);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[1].id, MoveId::HeavyPunch);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[2].id, MoveId::Kick);
@@ -88,6 +88,13 @@ fn close_range_moves_are_registered_in_table_order() {
     );
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[32].id, MoveId::PythonVisionAntiAir);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[33].id, MoveId::PythonConstrictThrow);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[34].id, MoveId::CppReferenceJab);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[35].id, MoveId::CppTemplateStrike);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[36].id, MoveId::CppOperatorKick);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[37].id, MoveId::CppVectorSweep);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[38].id, MoveId::CppVirtualOverhead);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[39].id, MoveId::CppExceptionAntiAir);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[40].id, MoveId::CppMoveThrow);
 }
 
 #[test]

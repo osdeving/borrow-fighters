@@ -9,11 +9,12 @@ use std::path::Path;
 use crate::characters::CharacterId;
 use crate::engine::sprites::{
     C_BITSTREAM_PROJECTILE_PATH, C_FIGHTER_MANIFEST_PATH, C_START_MANIFEST_PATH,
-    DUKE_BEAN_PROJECTILE_PATH, DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH,
-    FIGHTER_SPRITESHEET_PATH, GO_CHANNEL_PROJECTILE_PATH, GO_FIGHTER_MANIFEST_PATH,
-    GO_START_MANIFEST_PATH, PYTHON_DATA_PROJECTILE_PATH, PYTHON_FIGHTER_MANIFEST_PATH,
-    PYTHON_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH, RUST_GEAR_PROJECTILE_PATH,
-    RUST_START_MANIFEST_PATH, SpriteManifest,
+    CPP_FIGHTER_MANIFEST_PATH, CPP_PLUSPLUS_PROJECTILE_PATH, DUKE_BEAN_PROJECTILE_PATH,
+    DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH, FIGHTER_SPRITESHEET_PATH,
+    GO_CHANNEL_PROJECTILE_PATH, GO_FIGHTER_MANIFEST_PATH, GO_START_MANIFEST_PATH,
+    PYTHON_DATA_PROJECTILE_PATH, PYTHON_FIGHTER_MANIFEST_PATH, PYTHON_START_MANIFEST_PATH,
+    RUST_FIGHTER_MANIFEST_PATH, RUST_GEAR_PROJECTILE_PATH, RUST_START_MANIFEST_PATH, SpriteFrame,
+    SpriteManifest,
 };
 use crate::game::arena::ArenaId;
 use crate::lore::{LORE_BOOK_PATH, LoreBook};
@@ -34,6 +35,7 @@ pub const ROSTER_RUST_PATH: &str = "assets/placeholder/roster-rust.png";
 pub const ROSTER_DUKE_PATH: &str = "assets/placeholder/roster-duke.png";
 pub const ROSTER_C_PATH: &str = "assets/placeholder/roster-c.png";
 pub const ROSTER_PYTHON_PATH: &str = "assets/placeholder/roster-python.png";
+pub const ROSTER_CPP_PATH: &str = "assets/placeholder/roster-cpp.png";
 const MENU_FONT_CANDIDATES: [&str; 3] = [
     "assets/fonts/menu.ttf",
     "/usr/share/fonts/truetype/roboto/unhinted/RobotoCondensed-Bold.ttf",
@@ -55,7 +57,24 @@ const LORE_BODY_FONT_CANDIDATES: [&str; 4] = [
 /// Texture and metadata for one atlas-driven sprite set.
 pub struct SpriteAtlasAsset {
     pub manifest: SpriteManifest,
+    pub textures: Vec<SpriteAtlasTexture>,
+}
+
+/// One loaded texture referenced by a sprite manifest.
+pub struct SpriteAtlasTexture {
+    pub image: String,
     pub texture: Texture2D,
+}
+
+impl SpriteAtlasAsset {
+    /// Returns the loaded texture used by a specific manifest frame.
+    pub fn texture_for_frame(&self, frame: &SpriteFrame) -> Option<&Texture2D> {
+        let image = self.manifest.frame_image(frame);
+        self.textures
+            .iter()
+            .find(|texture| texture.image == image)
+            .map(|texture| &texture.texture)
+    }
 }
 
 /// Runtime textures used by the prototype renderer.
@@ -78,11 +97,13 @@ pub struct GameAssets {
     pub c_start: Option<SpriteAtlasAsset>,
     pub python_fighter: Option<SpriteAtlasAsset>,
     pub python_start: Option<SpriteAtlasAsset>,
+    pub cpp_fighter: Option<SpriteAtlasAsset>,
     pub rust_projectile: Option<Texture2D>,
     pub duke_projectile: Option<Texture2D>,
     pub go_projectile: Option<Texture2D>,
     pub c_projectile: Option<Texture2D>,
     pub python_projectile: Option<Texture2D>,
+    pub cpp_projectile: Option<Texture2D>,
     pub countdown_11: Option<Texture2D>,
     pub countdown_10: Option<Texture2D>,
     pub countdown_01: Option<Texture2D>,
@@ -105,6 +126,7 @@ pub struct RosterPortraitAssets {
     pub duke: Option<Texture2D>,
     pub c: Option<Texture2D>,
     pub python: Option<Texture2D>,
+    pub cpp: Option<Texture2D>,
 }
 
 impl RosterPortraitAssets {
@@ -115,6 +137,7 @@ impl RosterPortraitAssets {
             CharacterId::Duke => self.duke.as_ref(),
             CharacterId::C => self.c.as_ref(),
             CharacterId::Python => self.python.as_ref(),
+            CharacterId::Cpp => self.cpp.as_ref(),
             CharacterId::Go => None,
         }
     }
@@ -156,6 +179,7 @@ impl GameAssets {
                 duke: load_texture_optional(raylib, thread, ROSTER_DUKE_PATH),
                 c: load_texture_optional(raylib, thread, ROSTER_C_PATH),
                 python: load_texture_optional(raylib, thread, ROSTER_PYTHON_PATH),
+                cpp: load_texture_optional(raylib, thread, ROSTER_CPP_PATH),
             },
             fighter_spritesheet: load_texture_optional(raylib, thread, FIGHTER_SPRITESHEET_PATH),
             rust_fighter: load_sprite_atlas_optional(raylib, thread, RUST_FIGHTER_MANIFEST_PATH),
@@ -172,11 +196,13 @@ impl GameAssets {
                 PYTHON_FIGHTER_MANIFEST_PATH,
             ),
             python_start: load_sprite_atlas_optional(raylib, thread, PYTHON_START_MANIFEST_PATH),
+            cpp_fighter: load_sprite_atlas_optional(raylib, thread, CPP_FIGHTER_MANIFEST_PATH),
             rust_projectile: load_texture_optional(raylib, thread, RUST_GEAR_PROJECTILE_PATH),
             duke_projectile: load_texture_optional(raylib, thread, DUKE_BEAN_PROJECTILE_PATH),
             go_projectile: load_texture_optional(raylib, thread, GO_CHANNEL_PROJECTILE_PATH),
             c_projectile: load_texture_optional(raylib, thread, C_BITSTREAM_PROJECTILE_PATH),
             python_projectile: load_texture_optional(raylib, thread, PYTHON_DATA_PROJECTILE_PATH),
+            cpp_projectile: load_texture_optional(raylib, thread, CPP_PLUSPLUS_PROJECTILE_PATH),
             countdown_11: load_texture_optional(raylib, thread, COUNTDOWN_11_PATH),
             countdown_10: load_texture_optional(raylib, thread, COUNTDOWN_10_PATH),
             countdown_01: load_texture_optional(raylib, thread, COUNTDOWN_01_PATH),
@@ -239,10 +265,13 @@ fn load_sprite_atlas_optional(
             return None;
         }
     };
-    let texture_path = manifest.image_path(manifest_path);
-    let texture = load_texture_optional(raylib, thread, &texture_path.to_string_lossy())?;
+    let mut textures = Vec::new();
+    for (image, path) in manifest.image_paths(manifest_path) {
+        let texture = load_texture_optional(raylib, thread, &path.to_string_lossy())?;
+        textures.push(SpriteAtlasTexture { image, texture });
+    }
 
-    Some(SpriteAtlasAsset { manifest, texture })
+    Some(SpriteAtlasAsset { manifest, textures })
 }
 
 fn load_texture_optional(

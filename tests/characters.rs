@@ -6,8 +6,8 @@ use borrow_fighters::characters::{
 };
 use borrow_fighters::combat::move_data::MoveId;
 use borrow_fighters::combat::projectile::{
-    C_PROJECTILE_SPEC, DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, PYTHON_PROJECTILE_SPEC,
-    RUST_PROJECTILE_SPEC,
+    C_PROJECTILE_SPEC, CPP_PROJECTILE_SPEC, DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC,
+    PYTHON_PROJECTILE_SPEC, RUST_PROJECTILE_SPEC,
 };
 use borrow_fighters::game::world::World;
 
@@ -132,22 +132,51 @@ fn python_spec_points_to_current_prototype_moves() {
 }
 
 #[test]
+fn cpp_spec_points_to_current_prototype_moves() {
+    let cpp = character_spec(CharacterId::Cpp);
+
+    assert_eq!(cpp.display_name, "C++");
+    assert_eq!(cpp.fighter_name, "C++");
+    assert_eq!(cpp.archetype, CharacterArchetype::AgilePunisher);
+    assert_eq!(cpp.stats.max_health, 98);
+    assert_eq!(
+        cpp.move_ids,
+        &[
+            MoveId::CppReferenceJab,
+            MoveId::CppTemplateStrike,
+            MoveId::CppOperatorKick,
+            MoveId::CppVectorSweep,
+            MoveId::CppVirtualOverhead,
+            MoveId::CppExceptionAntiAir,
+            MoveId::AirPunch,
+            MoveId::AirKick,
+            MoveId::CppMoveThrow,
+        ]
+    );
+}
+
+#[test]
 fn character_body_metrics_manifest_loads_go_as_leaner_mascot_body() {
     let catalog = CharacterBodyMetricsCatalog::load(CHARACTER_BODY_METRICS_PATH)
         .expect("character body metrics should load");
     let rust = catalog.body_metrics_for(CharacterId::Rust);
     let go = catalog.body_metrics_for(CharacterId::Go);
     let python = catalog.body_metrics_for(CharacterId::Python);
+    let cpp = catalog.body_metrics_for(CharacterId::Cpp);
 
     assert_eq!(rust, character_spec(CharacterId::Rust).body_metrics);
     assert_eq!(go, character_spec(CharacterId::Go).body_metrics);
     assert_eq!(python, character_spec(CharacterId::Python).body_metrics);
+    assert_eq!(cpp, character_spec(CharacterId::Cpp).body_metrics);
     assert_eq!(go.width, rust.width);
     assert_eq!(go.standing_height, rust.standing_height);
     assert_eq!(go.crouch_height, rust.crouch_height);
     assert_eq!(python.width, rust.width);
     assert_eq!(python.standing_height, rust.standing_height);
     assert_eq!(python.crouch_height, rust.crouch_height);
+    assert_eq!(cpp.width, rust.width);
+    assert_eq!(cpp.standing_height, rust.standing_height);
+    assert_eq!(cpp.crouch_height, rust.crouch_height);
 }
 
 #[test]
@@ -202,6 +231,10 @@ fn character_cli_aliases_are_stable() {
         CharacterId::from_audio_key("python"),
         Some(CharacterId::Python)
     );
+    assert_eq!(CharacterId::from_cli("cpp"), Some(CharacterId::Cpp));
+    assert_eq!(CharacterId::from_cli("c++"), Some(CharacterId::Cpp));
+    assert_eq!(CharacterId::from_cli("cpp.cpp"), Some(CharacterId::Cpp));
+    assert_eq!(CharacterId::from_audio_key("cpp"), Some(CharacterId::Cpp));
 }
 
 #[test]
@@ -210,12 +243,14 @@ fn character_roster_cycles_in_menu_order() {
     assert_eq!(CharacterId::Duke.next(), CharacterId::Go);
     assert_eq!(CharacterId::Go.next(), CharacterId::C);
     assert_eq!(CharacterId::C.next(), CharacterId::Python);
-    assert_eq!(CharacterId::Python.next(), CharacterId::Rust);
-    assert_eq!(CharacterId::Rust.previous(), CharacterId::Python);
+    assert_eq!(CharacterId::Python.next(), CharacterId::Cpp);
+    assert_eq!(CharacterId::Cpp.next(), CharacterId::Rust);
+    assert_eq!(CharacterId::Rust.previous(), CharacterId::Cpp);
     assert_eq!(CharacterId::Duke.previous(), CharacterId::Rust);
     assert_eq!(CharacterId::Go.previous(), CharacterId::Duke);
     assert_eq!(CharacterId::C.previous(), CharacterId::Go);
     assert_eq!(CharacterId::Python.previous(), CharacterId::C);
+    assert_eq!(CharacterId::Cpp.previous(), CharacterId::Python);
 }
 
 #[test]
@@ -224,13 +259,15 @@ fn demo_roster_cycles_without_go() {
     assert_eq!(CharacterId::Duke.demo_next(), CharacterId::C);
     assert_eq!(CharacterId::Go.demo_next(), CharacterId::C);
     assert_eq!(CharacterId::C.demo_next(), CharacterId::Python);
-    assert_eq!(CharacterId::Python.demo_next(), CharacterId::Rust);
+    assert_eq!(CharacterId::Python.demo_next(), CharacterId::Cpp);
+    assert_eq!(CharacterId::Cpp.demo_next(), CharacterId::Rust);
 
-    assert_eq!(CharacterId::Rust.demo_previous(), CharacterId::Python);
+    assert_eq!(CharacterId::Rust.demo_previous(), CharacterId::Cpp);
     assert_eq!(CharacterId::Duke.demo_previous(), CharacterId::Rust);
     assert_eq!(CharacterId::Go.demo_previous(), CharacterId::Duke);
     assert_eq!(CharacterId::C.demo_previous(), CharacterId::Duke);
     assert_eq!(CharacterId::Python.demo_previous(), CharacterId::C);
+    assert_eq!(CharacterId::Cpp.demo_previous(), CharacterId::Python);
 }
 
 #[test]
@@ -240,12 +277,14 @@ fn character_projectiles_follow_archetype_intent() {
     let go = character_spec(CharacterId::Go).projectile;
     let c = character_spec(CharacterId::C).projectile;
     let python = character_spec(CharacterId::Python).projectile;
+    let cpp = character_spec(CharacterId::Cpp).projectile;
 
     assert_eq!(rust, RUST_PROJECTILE_SPEC);
     assert_eq!(duke, DUKE_PROJECTILE_SPEC);
     assert_eq!(go, GO_PROJECTILE_SPEC);
     assert_eq!(c, C_PROJECTILE_SPEC);
     assert_eq!(python, PYTHON_PROJECTILE_SPEC);
+    assert_eq!(cpp, CPP_PROJECTILE_SPEC);
 
     assert!(duke.damage > rust.damage);
     assert!(duke.speed < rust.speed);
@@ -269,4 +308,10 @@ fn character_projectiles_follow_archetype_intent() {
     assert!(python.speed < go.speed);
     assert!(python.frame_data.cooldown < rust.frame_data.cooldown);
     assert_eq!(python.max_travel, None);
+
+    assert!(cpp.damage < rust.damage);
+    assert!(cpp.speed > python.speed);
+    assert!(cpp.speed < go.speed);
+    assert!(cpp.width > rust.width);
+    assert_eq!(cpp.max_travel, None);
 }

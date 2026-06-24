@@ -2,7 +2,7 @@
 
 use borrow_fighters::characters::CharacterId;
 use borrow_fighters::engine::assets::{
-    ROSTER_C_PATH, ROSTER_DUKE_PATH, ROSTER_PYTHON_PATH, ROSTER_RUST_PATH,
+    ROSTER_C_PATH, ROSTER_CPP_PATH, ROSTER_DUKE_PATH, ROSTER_PYTHON_PATH, ROSTER_RUST_PATH,
 };
 use borrow_fighters::lore::{LORE_BOOK_PATH, LoreBook};
 
@@ -13,7 +13,7 @@ fn repository_lore_book_loads_story_and_roster() {
     assert_eq!(book.version, 1);
     assert!(book.title.contains("Linker"));
     assert!(book.chapters.len() >= 4);
-    assert_eq!(book.characters.len(), 4);
+    assert_eq!(book.characters.len(), 5);
 
     for character in &book.characters {
         assert!(
@@ -51,6 +51,7 @@ fn roster_portrait_assets_exist() {
         ROSTER_DUKE_PATH,
         ROSTER_C_PATH,
         ROSTER_PYTHON_PATH,
+        ROSTER_CPP_PATH,
     ] {
         assert!(std::path::Path::new(path).exists(), "{path} missing");
     }

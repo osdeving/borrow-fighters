@@ -2,7 +2,7 @@
 
 ## Status
 
-Em implementacao. O runtime ja carrega manifests para Rust, Duke, Go, C, Python, animacoes de entrada, clips de luta, pivots, duracoes por frame e fallback greybox.
+Em implementacao. O runtime ja carrega manifests para Rust, Duke, Go, C, Python, C++, animacoes de entrada, clips de luta, pivots, duracoes por frame, multiplos atlas por personagem e fallback greybox.
 
 ## Objetivo
 
@@ -23,6 +23,7 @@ Exemplo real:
 - `assets/placeholder/c-start.sprite.json`
 - `assets/placeholder/python-fighter.sprite.json`
 - `assets/placeholder/python-start.sprite.json`
+- `assets/placeholder/cpp-fighter.sprite.json`
 
 Campos principais:
 
@@ -33,6 +34,7 @@ Campos principais:
 - `default_pivot`: ponto de apoio padrao, normalmente perto do pe no chao.
 - `scale`: escala visual runtime do atlas; o jogo e o viewer usam o mesmo valor.
 - `frames`: retangulos no atlas, duracao e pivot por frame.
+- `frames[].image`: PNG opcional para aquele frame quando o personagem e composto por mais de um atlas; frames sem esse campo usam `image`.
 - `clips`: animacoes com lista ordenada de frames e flag `loop`.
 - `frames[].combat`: metadata opcional por frame para `hurtboxes`, `hitboxes` e `projectile_origin`.
 
@@ -72,6 +74,12 @@ Esses valores sao medidos em pixels locais do frame do atlas, nao em coordenadas
 - `punch_light`
 - `punch_heavy`
 - `kick`
+- `sweep`
+- `overhead`
+- `anti_air`
+- `air_punch`
+- `air_kick`
+- `throw`
 - `hit`
 - `special`
 
@@ -105,16 +113,19 @@ O Player 2/Duke usa `assets/placeholder/duke-fighter.sprite.json`.
 Go usa `assets/placeholder/go-fighter.sprite.json`.
 C usa `assets/placeholder/c-fighter.sprite.json`, extraido dos atlas de referencia `assets/references/langc-03.png` e `assets/references/langc-04.png`.
 Python usa `assets/placeholder/python-fighter.sprite.json`, gerado como placeholder visual e integrado ao roster jogavel como `python.py`. A entrada cinematografica da Python usa `assets/placeholder/python-start.sprite.json`, com cavalete e grafico de barras colorido para reforcar a piada de ciencia de dados.
+C++ usa `assets/placeholder/cpp-fighter.sprite.json`, gerado de `assets/references/cpp-fighter-raster-source.png` e dividido entre `assets/placeholder/cpp-fighter-atlas-a.png` e `assets/placeholder/cpp-fighter-atlas-b.png`. O manifest mantem `image` apontando para o atlas A e usa `frames[].image` nos frames do atlas B.
 
 O tamanho em jogo nao deve depender da resolucao do PNG. Ajuste `scale` e `frames[].pivot` no manifesto; o renderer de luta e o Sprite Combat Viewer consomem os mesmos valores. O padrao atual de altura, largura e arena fica em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md).
 
 O corpo fisico de gameplay fica em [`assets/tuning/character-body-metrics.json`](../assets/tuning/character-body-metrics.json). Esse arquivo controla `width`, `standing_height` e `crouch_height` por personagem. Ele define o retangulo base usado por colisao corpo-corpo, hurtboxes compostas e alinhamento do sprite. `frames[].combat` pode substituir hitbox/hurtbox por frame quando houver metadata revisada.
 
-No corte atual, Rust, Duke, Go, C e Python ja declaram `frames[].combat.projectile_origin` no primeiro frame do clip `special`, usado pelo runtime para alinhar o nascimento do projectile com a mao do personagem. Rust tambem possui `frames[].combat.hitboxes[]` iniciais para `Borrow Jab`, heavy punch e kick, calibradas para reproduzir o alcance atual do `MoveSpec` antes de qualquer ajuste de balanceamento. Python possui hitboxes placeholder para o bote da cobra no `punch_light` e para o soco forte no `punch_heavy`; elas ainda precisam de revisao no Sprite Studio antes de virarem balanceamento confiavel. Outras hitboxes e hurtboxes por frame ainda devem ser preenchidas pelo Sprite Combat Viewer antes de substituir alcances de soco/chute em producao.
+No corte atual, Rust, Duke, Go, C, Python e C++ ja declaram `frames[].combat.projectile_origin` no primeiro frame do clip `special`, usado pelo runtime para alinhar o nascimento do projectile com a mao do personagem. Rust tambem possui `frames[].combat.hitboxes[]` iniciais para `Borrow Jab`, heavy punch e kick, calibradas para reproduzir o alcance atual do `MoveSpec` antes de qualquer ajuste de balanceamento. Python e C++ desenhadas high-res usam clips visuais dos nove golpes, mas os golpes proximos ainda caem no fallback de hitbox do `MoveSpec` ate serem calibrados no Sprite Studio. Outras hitboxes e hurtboxes por frame ainda devem ser preenchidas pelo Sprite Combat Viewer antes de substituir alcances de soco/chute em producao.
 
 O runtime tambem usa:
 
 - `spawn` durante a entrada inicial de Rust, Duke, Go, C e Python;
+- clips proprios para os nove golpes proximos: `punch_light`, `punch_heavy`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick` e `throw`;
+- `hit` enquanto o personagem esta em hitstun;
 - `special` por alguns frames quando o personagem dispara projectile;
 - `taunt` quando o personagem vence a luta;
 - fallback greybox quando um atlas nao carrega.
@@ -134,8 +145,14 @@ Assets relacionados ao slice atual:
 - `assets/placeholder/go-channel-projectile.png`
 - `assets/placeholder/c-bitstream-projectile.png`
 - `assets/placeholder/python-fighter-atlas.png`
+- `assets/placeholder/python-fighter-atlas-backup.png`
+- `assets/references/python-fighter-raster-source.png`
 - `assets/placeholder/python-start-atlas.png`
 - `assets/placeholder/python-data-projectile.png`
+- `assets/placeholder/cpp-fighter-atlas-a.png`
+- `assets/placeholder/cpp-fighter-atlas-b.png`
+- `assets/placeholder/cpp-plusplus-projectile.png`
+- `assets/references/cpp-fighter-raster-source.png`
 - `assets/placeholder/arena-sirius.png`
 - `assets/placeholder/arena-fortaleza.png`
 - `assets/placeholder/arena-java-street.png`
@@ -147,12 +164,18 @@ O atlas candidato de Python e reconstruido por:
 
 ```bash
 python3 tools/art/build_python_fighter_atlas.py
+python3 tools/art/build_python_high_res_fighter_atlas.py
 python3 tools/art/build_python_start_atlas.py
+python3 tools/art/build_cpp_fighter_atlas.py
 ```
 
-O primeiro script repacota `assets/references/python-fighter-atlas-source.png` para a grade runtime do C (`6x16`, celulas `384x256`) e gera `assets/placeholder/python-fighter.sprite.json` e `assets/placeholder/python-data-projectile.png`.
+O primeiro script repacota `assets/references/python-fighter-atlas-source.png` para a grade base do C (`6x16`, celulas `384x256`) e gera `assets/placeholder/python-fighter.sprite.json` e `assets/placeholder/python-data-projectile.png`.
+
+O segundo script usa a pose sheet raster `assets/references/python-fighter-raster-source.png`, remove o chroma key, limpa componentes pequenos e empacota a versao runtime high-res de Python a partir do contrato de clips salvo em `assets/placeholder/python-fighter-backup.sprite.json`. Ele escreve `assets/placeholder/python-fighter-atlas.png` com celulas `768x512`, camisa branca, saia preta e poses proprias para os nove golpes proximos. O backup conserva a versao anterior com os nove clips de golpe para comparacao no Sprite Viewer.
 
 O atlas de entrada repacota `assets/references/python-start-atlas-source.png` para celulas `512x320`, remove os numeros gerados na folha fonte, gera `assets/placeholder/python-start-atlas.png` e `assets/placeholder/python-start.sprite.json`, e salva uma previa local em `tmp/art/python-start-atlas-preview.png`.
+
+O script de C++ reaproveita a estrutura de clips da Python, remove o fundo chroma key de `assets/references/cpp-fighter-raster-source.png`, limpa as linhas de grade da fonte, gera `cpp-fighter-atlas-a.png` e `cpp-fighter-atlas-b.png`, escreve `frames[].image` nos frames do segundo atlas, cria `assets/placeholder/roster-cpp.png` e cria `assets/placeholder/cpp-plusplus-projectile.png`.
 
 ## Sprite Studio
 
@@ -234,7 +257,7 @@ Atalhos:
 | Alternar bounds | `B` |
 | Resetar posicao | `R` |
 
-O corte atual e viewer com ajuste controlado de escala, pivot, corpo fisico e metadata visual de `frames[].combat`. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetoria prevista de projectile, timeline visual e metadata opcional de `frames[].combat`. A camada runtime de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go/C pelo nome do manifesto e tambem permite alternar personagem/golpe sem reiniciar a ferramenta. `N` substitui a metadata do frame atual por um rascunho baseado no overlay runtime; depois o artista/dev cria boxes com `H`/`J`, remove com `Delete`, ajusta as boxes e a origem com mouse e salva com `Ctrl+S`. `Enter` tenta sincronizar o clip visual com o golpe atual quando o manifesto possui um clip conhecido como `punch_light`, `punch_heavy` ou `special`. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
+O corte atual e viewer com ajuste controlado de escala, pivot, corpo fisico e metadata visual de `frames[].combat`. Ele mostra frame bounds, pivot, dummy espelhado, distancia entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtboxes atuais do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetoria prevista de projectile, timeline visual e metadata opcional de `frames[].combat`. A camada runtime de combate usa `--character` e `--move`; quando `--character` nao e passado, o viewer tenta inferir Rust/Duke/Go/C pelo nome do manifesto e tambem permite alternar personagem/golpe sem reiniciar a ferramenta. `N` substitui a metadata do frame atual por um rascunho baseado no overlay runtime; depois o artista/dev cria boxes com `H`/`J`, remove com `Delete`, ajusta as boxes e a origem com mouse e salva com `Ctrl+S`. `Enter` tenta sincronizar o clip visual com o golpe atual quando o manifesto possui um clip conhecido para aquele `--move`, incluindo os nove golpes proximos e `special`. Screenshots de review sao salvas em `target/sprite-viewer-capture.png`. O roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md).
 
 ## Pontos ainda em aberto
 

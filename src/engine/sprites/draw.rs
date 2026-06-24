@@ -55,14 +55,14 @@ pub fn draw_fighter_sprite(
 }
 
 /// Draws one fighter from a sprite manifest and atlas texture.
-pub fn draw_manifest_fighter_sprite(
+pub fn draw_manifest_fighter_sprite<'a>(
     draw: &mut impl RaylibDraw,
-    texture: &Texture2D,
     manifest: &SpriteManifest,
     fighter: &Fighter,
     world_elapsed_seconds: f32,
     forced_clip: Option<FighterSpriteClip>,
     tint: Color,
+    texture_for_frame: impl Fn(&SpriteFrame) -> Option<&'a Texture2D>,
 ) -> bool {
     let clip = forced_clip.unwrap_or_else(|| fighter_sprite_clip(fighter));
     let clip_time = if forced_clip.is_some() {
@@ -71,6 +71,9 @@ pub fn draw_manifest_fighter_sprite(
         fighter_clip_elapsed_seconds(fighter, world_elapsed_seconds)
     };
     let Some(frame) = frame_for_clip_at(manifest, clip.as_str(), clip_time) else {
+        return false;
+    };
+    let Some(texture) = texture_for_frame(frame) else {
         return false;
     };
 

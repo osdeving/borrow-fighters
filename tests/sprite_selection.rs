@@ -34,6 +34,100 @@ fn light_punch_uses_light_punch_clip_and_attack_time() {
 }
 
 #[test]
+fn grounded_attacks_use_dedicated_clips() {
+    let cases = [
+        (
+            FighterInput {
+                heavy_punch: true,
+                ..FighterInput::default()
+            },
+            FighterSpriteClip::PunchHeavy,
+            "punch_heavy",
+        ),
+        (
+            FighterInput {
+                kick: true,
+                ..FighterInput::default()
+            },
+            FighterSpriteClip::Kick,
+            "kick",
+        ),
+        (
+            FighterInput {
+                crouch: true,
+                kick: true,
+                ..FighterInput::default()
+            },
+            FighterSpriteClip::Sweep,
+            "sweep",
+        ),
+        (
+            FighterInput {
+                right: true,
+                heavy_punch: true,
+                ..FighterInput::default()
+            },
+            FighterSpriteClip::Overhead,
+            "overhead",
+        ),
+        (
+            FighterInput {
+                crouch: true,
+                heavy_punch: true,
+                ..FighterInput::default()
+            },
+            FighterSpriteClip::AntiAir,
+            "anti_air",
+        ),
+        (
+            FighterInput {
+                block: true,
+                light_punch: true,
+                ..FighterInput::default()
+            },
+            FighterSpriteClip::Throw,
+            "throw",
+        ),
+    ];
+
+    for (input, expected_clip, expected_name) in cases {
+        let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
+
+        fighter.update(DT, input);
+
+        assert_eq!(fighter_sprite_clip(&fighter), expected_clip);
+        assert_eq!(expected_clip.as_str(), expected_name);
+    }
+}
+
+#[test]
+fn airborne_attacks_use_dedicated_air_clips() {
+    let mut punch = airborne_fighter();
+    punch.update(
+        DT,
+        FighterInput {
+            light_punch: true,
+            ..FighterInput::default()
+        },
+    );
+
+    assert_eq!(fighter_sprite_clip(&punch), FighterSpriteClip::AirPunch);
+    assert_eq!(FighterSpriteClip::AirPunch.as_str(), "air_punch");
+
+    let mut kick = airborne_fighter();
+    kick.update(
+        DT,
+        FighterInput {
+            kick: true,
+            ..FighterInput::default()
+        },
+    );
+
+    assert_eq!(fighter_sprite_clip(&kick), FighterSpriteClip::AirKick);
+    assert_eq!(FighterSpriteClip::AirKick.as_str(), "air_kick");
+}
+
+#[test]
 fn crouch_clip_clamps_to_finished_crouch_pose() {
     let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
 
@@ -90,4 +184,11 @@ fn block_input_does_not_override_airborne_jump_clip() {
 
     assert!(!fighter.blocking);
     assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Jump);
+}
+
+fn airborne_fighter() -> Fighter {
+    let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
+    fighter.grounded = false;
+    fighter.position.y -= 92.0;
+    fighter
 }

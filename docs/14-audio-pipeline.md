@@ -4,7 +4,7 @@
 
 Implementado em corte inicial.
 
-O projeto já possui um motor leve de áudio por eventos, manifesto JSON, música via stream, controle de volume de música no menu e integração com Raylib. Os arquivos sonoros atuais são assets CC0 de protótipo para UI, impactos, música, contagem e vozes de Rust, Duke/Java, Go, C e Python, ainda sem direção final de mixagem.
+O projeto já possui um motor leve de áudio por eventos, manifesto JSON, música via stream, controle de volume de música no menu e integração com Raylib. Os arquivos sonoros atuais são assets CC0 de protótipo para UI, impactos, música, contagem e vozes/fallbacks de Rust, Duke/Java, Go, C, Python e C++, ainda sem direção final de mixagem.
 
 ## Objetivo
 
@@ -92,13 +92,13 @@ Música usa `Music` streaming do Raylib, não `Sound`. Por isso [`App`](../src/a
 Cada evento pode carregar:
 
 - `slot`: Player 1 ou Player 2;
-- `character`: `rust`, `duke`, `go`, `c`, `python` ou aliases aceitos;
+- `character`: `rust`, `duke`, `go`, `c`, `python`, `cpp` ou aliases aceitos;
 - `move`: `light_punch`, `heavy_punch`, `kick`, `rust_borrow_jab`, `duke_boilerplate_poke`, `go_goroutine_jab`, `go_defer_kick`, `c_pointer_jab`, `c_unsafe_poke`, `python_snake_bite`, `python_data_strike`, `python_heel_kick` e demais chaves estáveis de `MoveId::audio_key`;
 - `environment`: reservado para arena, ainda não emitido pelo runtime.
 
 A contagem pré-luta é emitida pelo `World`, não pelo menu. A tela mostra `11`, `10`, `01`, `Fight!`, enquanto os clips atuais usam voz CC0 de "three", "two", "one" e "fight" para manter leitura auditiva imediata.
 
-As vozes de ataque possuem bindings específicos para golpes de identidade e fallback por personagem para os demais golpes próximos da demo. Rust e Duke/Java também possuem bindings específicos para cada golpe próximo do loadout, usando clips CC0 mais longos para não sumirem atrás da música. [`tests/audio_manifest.rs`](../tests/audio_manifest.rs) garante que Rust, Duke/Java, Go, C e Python conseguem resolver voz de início de golpe e cast de projectile para seus loadouts atuais, que todo binding referencia clip existente e que Rust/Duke não dependem só do fallback genérico.
+As vozes de ataque possuem bindings específicos para golpes de identidade e fallback por personagem para os demais golpes próximos da demo. Rust e Duke/Java também possuem bindings específicos para cada golpe próximo do loadout, usando clips CC0 mais longos para não sumirem atrás da música. C++ usa fallback temporário de clips existentes até ganhar pacote de voz próprio. [`tests/audio_manifest.rs`](../tests/audio_manifest.rs) garante que Rust, Duke/Java, Go, C, Python e C++ conseguem resolver voz de início de golpe e cast de projectile para seus loadouts atuais, que todo binding referencia clip existente e que Rust/Duke não dependem só do fallback genérico.
 
 ## Manifesto
 

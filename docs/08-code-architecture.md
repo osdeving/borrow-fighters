@@ -50,6 +50,7 @@ borrow-fighters/
 │   │   ├── video_capture.rs    # Captura local do framebuffer via ffmpeg
 │   │   ├── render/
 │   │   │   ├── combat_lab.rs   # Desenho da cena isolada de Combat Lab
+│   │   │   ├── move_showcase.rs # Desenho limpo do autoplay de golpes
 │   │   │   └── sprite_viewer.rs # Desenho da ferramenta isolada de sprites
 │   │   └── sprites/
 │   │       ├── animation.rs    # Seleção de frame por duração
@@ -72,6 +73,7 @@ borrow-fighters/
 │   ├── scenes/
 │   │   ├── mod.rs              # Estados de tela
 │   │   ├── combat_lab.rs       # Laboratório isolado para timing e boxes
+│   │   ├── move_showcase.rs    # Autoplay testável dos golpes de um personagem
 │   │   ├── preferences.rs      # Cursor e navegação do menu principal/submenus
 │   │   ├── sprite_viewer.rs    # Viewer testável de atlas, pivot e frame bounds
 │   │   └── sprite_viewer/
@@ -87,6 +89,7 @@ borrow-fighters/
 │   ├── cli.rs                  # Contrato de argumentos de inicialização
 │   ├── characters.rs           # Contrato do registro de personagens
 │   ├── combat_lab.rs           # Estado testável do Combat Lab
+│   ├── move_showcase.rs        # Contrato do autoplay de golpes do Training
 │   ├── attack_frame_data.rs    # Timing de golpes em frames
 │   ├── move_data.rs            # Contrato da tabela MoveSpec
 │   ├── character_identity_tuning.rs # Intenção mecânica de Rust/Duke/Go/C por dados
