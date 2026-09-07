@@ -33,7 +33,7 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Sprite Combat Viewer | Ferramenta isolada para carregar atlas em runtime, ver grid, pivot, bounds e preparar boxes data-driven | [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), [`src/scenes/sprite_viewer/combat_edit.rs`](../src/scenes/sprite_viewer/combat_edit.rs), [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs) | [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs), teste manual via `--tool sprite-viewer` |
 | Sprite Studio | App externo Tauri 1.8 + React para editar manifestos sem depender de Raylib | [`tools/sprite-studio`](../tools/sprite-studio) | `pnpm build`; `pnpm tauri build --debug`; desktop requer pre-requisitos Tauri |
 | Input | Teclado/gamepad para luta, menu, Move Showcase, Sprite Viewer e Combat Lab | [`src/engine/input.rs`](../src/engine/input.rs), [`src/engine/gamepad.rs`](../src/engine/gamepad.rs) | [`tests/cli.rs`](../tests/cli.rs), [`tests/feature_flags.rs`](../tests/feature_flags.rs) |
-| Sprite runtime | Manifest JSON, clip selection, projeção de `frames[].combat` e desenho por pivot | [`src/engine/sprites/`](../src/engine/sprites), [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) | [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs), [`tests/sprite_selection.rs`](../tests/sprite_selection.rs) |
+| Sprite runtime | Manifest JSON, seleção de clips, relógios visuais e projeção de metadata baseline | [`src/engine/sprites/`](../src/engine/sprites), [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) | [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs), [`tests/sprite_selection.rs`](../tests/sprite_selection.rs), [`tests/sprite_playback.rs`](../tests/sprite_playback.rs) |
 
 ## Técnica Atual
 
@@ -76,11 +76,19 @@ Hitboxes:
 - `Fighter::active_attack` só retorna hitbox ofensiva quando o frame atual está dentro da janela ativa.
 - `combat::collision::hitbox_hits_hurtbox` usa interseção AABB.
 
-Essa técnica foi escolhida porque é legível, testável sem Raylib e suficiente para o Prototype 0.1. Quando o frame visual declara `frames[].combat`, o runtime projeta esses dados para coordenadas de mundo em [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs). A resolução da luta usa `frames[].combat.hitboxes[]` e `frames[].combat.hurtboxes[]` quando essas listas existem; se estiverem ausentes ou vazias, volta para `MoveSpec.hitbox` e `Fighter::hurtboxes()`. A decisão está registrada em [`docs/adr/0007-sprite-frame-combat-runtime.md`](adr/0007-sprite-frame-combat-runtime.md).
+Essa técnica foi escolhida porque é legível, testável sem Raylib e suficiente para o Prototype 0.1. Quando o frame do manifesto baseline declara `frames[].combat`, o runtime projeta esses dados para coordenadas de mundo em [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs). A resolução da luta usa `frames[].combat.hitboxes[]` e `frames[].combat.hurtboxes[]` quando essas listas existem; se estiverem ausentes ou vazias, volta para `MoveSpec.hitbox` e `Fighter::hurtboxes()`. A decisão inicial está em [`ADR 0007`](adr/0007-sprite-frame-combat-runtime.md); a separação entre arte candidata e metadata baseline está em [`ADR 0010`](adr/0010-reviewed-action-sprite-production.md).
 
 Rust, Duke, Go, C, Python e C++ ja possuem `combat.projectile_origin` no primeiro frame do clip `special`. Esse ponto e projetado por [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) e usado por [`src/game/world.rs`](../src/game/world.rs) ao criar o projectile, para evitar que o poder nasca desalinhado da mao. Os manifests de luta tambem declaram clips runtime para os nove golpes proximos (`punch_light`, `punch_heavy`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`) e para `hit` durante hitstun. Rust `Borrow Jab`, heavy punch e kick ja possuem hitboxes de frame; os valores ainda reproduzem o alcance do `MoveSpec` para migrar com baixo risco. Python e C++ raster high-res ainda usam fallback de `MoveSpec` para hitboxes dos golpes proximos ate uma calibracao propria no Sprite Studio. Hitboxes/hurtboxes restantes devem ser calibradas no Sprite Studio, com o Sprite Combat Viewer Raylib apenas como ferramenta temporaria ate a limpeza dedicada.
 
 ### Escala Visual e Pivot
+
+O opt-in de desenvolvimento `BORROW_FIGHTERS_SPRITE_CANDIDATES=1` procura `assets/candidates/<key>/<key>-fighter.sprite.json`, com `key` igual a `rust`, `duke`, `go`, `c`, `python` ou `cpp`. Apenas candidatos validos, com texturas carregaveis e os 20 clips do jogo atual, substituem o desenho em luta, Move Showcase e Combat Lab. Ausencia/falha/incompletude mantem o baseline do personagem; a lista de clips faltantes aparece no terminal. Conjuntos parciais sao revisados diretamente no Viewer/Studio. A lista e os comandos estao no [pipeline de sprites](11-sprite-pipeline.md#revisao-de-candidatos-no-runtime).
+
+O loader mantem `SpriteAtlasAsset.manifest` para desenho e `combat_manifest` para as boxes e a origem de projectile existentes. `App::sync_world_sprite_combat` usa o segundo, assim como o overlay da luta. Nenhum campo experimental de combate no candidato e promovido por ligar a variavel de ambiente.
+
+`fighter_clip_elapsed_seconds` avanca reacoes desde o impacto e defesa/agachamento/salto desde a entrada no estado. Golpes e especiais mantem seus relogios atuais; `idle`/`walk` usam o tempo global. `fighter_combat_clip_elapsed_seconds` preserva o sampling antigo para nao trocar boxes: zero em stun, ultimo quadro em crouch, tres tempos por velocidade em jump. `crouch_block` tem desenho proprio e consulta a metadata baseline de `block`. A duracao visual do salto deve acompanhar subida, apice e queda reais, sem retunar gravidade ou velocidade.
+
+O resultado da luta forca `victory` ou `defeat` com tempo iniciado no resultado, preservando o primeiro quadro mesmo em partidas longas; empate usa derrota nos dois lados. O renderer desliga efeitos persistentes de dano/guarda/ataque nessas poses, mantendo o estado de combate congelado. `spawn` pode vir do atlas principal e tem prioridade sobre o atlas de entrada separado. Clips antigos continuam com aliases visuais documentados no pipeline.
 
 Sprites runtime usam `borrow-fighters.sprite.v1` em [`src/engine/sprites/manifest.rs`](../src/engine/sprites/manifest.rs). O campo `scale` controla o tamanho visual do atlas em jogo; `frames[].pivot` ancora cada frame no corpo do lutador.
 
@@ -153,6 +161,8 @@ Golpes jogáveis atuais usam essas regras assim:
 - `hitstun_timer`: interrompe ataque atual, troca clip para `hit` e impede iniciar ação.
 - `blockstun_timer`: mantém o lutador em defesa e impede iniciar ação.
 - ambos são expostos para debug/testes por `hitstun_remaining_frames`, `blockstun_remaining_frames`, `in_hitstun` e `in_blockstun`.
+
+Limitacao preexistente: o update calcula `crouching` com `!action_locked`; durante blockstun ele pode limpar o agachamento no tick seguinte ao contato, mesmo com defesa baixa pressionada. A nova arte `crouch_block` acompanha os estados atuais e nao corrige essa regra. Preservar a postura fisica durante stun alteraria hurtbox e interacao com `GuardRule`, portanto exige uma mudanca de gameplay separada.
 - `hit_pushback` e `block_pushback`: deslocamento horizontal em pixels aplicado ao defensor, com block pushback menor que hit pushback no tuning atual.
 
 O match runtime em [`src/game/world.rs`](../src/game/world.rs) passa `guard_rule` e `hit_reaction` de `ActiveAttack` ou `Projectile` para o defensor. O próprio `World` aplica o pushback, porque é ele quem sabe de qual lado está atacante, defensor e projétil. Depois do deslocamento, `Fighter::clamp_to_arena` mantém o defensor dentro da arena. Feature flags de dano ainda impedem dano, stun e pushback quando desativadas.
@@ -317,9 +327,14 @@ cargo run -- --lab combat --character c --move projectile
 cargo run -- --lab combat --character python --move light_punch
 cargo run -- --lab combat --character rust --pose block
 cargo run -- --lab combat --character duke --pose victory
+cargo run -- --lab combat --character rust --pose spawn
+cargo run -- --lab combat --character rust --pose defeat
+cargo run -- --lab combat --character rust --pose crouch_block
 ```
 
 O mesmo laboratório também pode ser aberto pelo menu principal em `Training -> Combat Lab`. Nesse fluxo, `Esc` volta ao menu sem fechar a janela.
+
+`App` fornece ao Lab o mesmo `combat_manifest` baseline usado pelo `World`, incluindo com arte candidata habilitada. O Lab projeta as caixas com o sampling de combate existente e consulta a origem do especial em tempo zero, com fallback para `Fighter`/`Projectile` quando não há metadata. Move Showcase conserva esse baseline ao avançar e repetir golpes. As estimativas de vantagem e o posicionamento automático do dummy continuam calculados por MoveSpec; não são uma simulação de contato com caixas de atlas.
 
 Valores aceitos:
 
@@ -330,12 +345,12 @@ Valores aceitos:
 | `--p2`, `--player-two` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx`, `cpp.cpp` |
 | `--character` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx`, `cpp.cpp` |
 | `--move` | `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`, `projectile` |
-| `--pose` | `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory` |
+| `--pose` | `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory`, `spawn`, `defeat`, `crouch_block` |
 | `--tool` | `sprite-viewer` |
 | `--manifest` | caminho para um JSON `borrow-fighters.sprite.v1` |
 | `--clip` | nome de clip presente no manifesto |
 
-`--pose move` é o modo padrão e reproduz o golpe selecionado por `--move`. As outras poses são inspeções estáticas para alinhar sprite, pivot e hurtbox sem depender de uma luta real.
+`--pose move` é o modo padrão e reproduz o golpe selecionado por `--move`. As outras poses fixam o estado físico e reproduzem o clip para inspecionar desenho, pivot e hurtbox sem depender de uma luta real. Pause, frame step e reinício também funcionam nessas poses.
 
 Teclas:
 
@@ -383,7 +398,10 @@ Poses atuais:
 - `jump`: posiciona o lutador no ar para conferir corpo/pivot;
 - `block`: aplica estado de defesa;
 - `hit`: força clip visual `hit` quando o manifest possui esse clip;
-- `victory`: força clip visual `taunt`.
+- `victory`: força `victory`, com fallback para `taunt`/`idle`;
+- `spawn`: reproduz entrada do atlas principal ou separado;
+- `defeat`: força `defeat`, com fallback para `hit`/`idle`;
+- `crouch_block`: aplica defesa e agachamento e força o clip correspondente, com fallback para `block`/`idle`.
 
 ### Sprite Combat Viewer
 
@@ -412,7 +430,7 @@ O viewer tambem entende metadata opcional `frames[].combat` no manifesto. Essa m
 }
 ```
 
-`frames[].combat` ja pode alimentar a luta real de forma incremental. Quando um frame possui `hitboxes`, elas substituem a hitbox ofensiva calculada por `MoveSpec` naquele frame. Quando um frame possui `hurtboxes`, elas substituem as hurtboxes compostas de `Fighter`. Quando o clip `special` possui `projectile_origin`, o projectile nasce desse ponto projetado para o mundo. Campos ausentes mantem fallback para `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, entao personagens sem metadata continuam jogaveis.
+`frames[].combat` do manifesto baseline ja alimenta a luta real de forma incremental. Quando um frame possui `hitboxes`, elas substituem a hitbox ofensiva calculada por `MoveSpec` naquele frame. Quando um frame possui `hurtboxes`, elas substituem as hurtboxes compostas de `Fighter`. Quando o clip `special` possui `projectile_origin`, o projectile nasce desse ponto projetado para o mundo. Campos ausentes mantem fallback para `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, entao personagens sem metadata continuam jogaveis. Metadata editada em um arquivo candidato continua apenas nesse arquivo; ativar o desenho candidato nao substitui `combat_manifest`.
 
 Teclas:
 

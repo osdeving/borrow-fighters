@@ -128,7 +128,7 @@ fn airborne_attacks_use_dedicated_air_clips() {
 }
 
 #[test]
-fn crouch_clip_clamps_to_finished_crouch_pose() {
+fn crouch_clip_starts_at_the_first_frame() {
     let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
 
     fighter.update(
@@ -140,7 +140,7 @@ fn crouch_clip_clamps_to_finished_crouch_pose() {
     );
 
     assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Crouch);
-    assert_eq!(fighter_clip_elapsed_seconds(&fighter, 10.0), 999.0);
+    assert_eq!(fighter_clip_elapsed_seconds(&fighter, 10.0), 0.0);
 }
 
 #[test]

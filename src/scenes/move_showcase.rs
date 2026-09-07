@@ -4,6 +4,7 @@
 //! without owning combat rules, rendering, or sprite selection.
 
 use crate::characters::CharacterId;
+use crate::engine::sprites::SpriteManifest;
 
 use super::combat_lab::{CombatLab, CombatLabInput, CombatLabMove, CombatLabOptions};
 
@@ -24,6 +25,7 @@ pub struct MoveShowcase {
     character: CharacterId,
     move_index: usize,
     lab: CombatLab,
+    combat_manifest: Option<SpriteManifest>,
     rest_frames_remaining: u32,
     paused: bool,
 }
@@ -41,6 +43,7 @@ impl MoveShowcase {
             character: options.character,
             move_index: 0,
             lab: lab_for(options.character, CombatLabMove::ALL[0]),
+            combat_manifest: None,
             rest_frames_remaining: 0,
             paused: false,
         }
@@ -102,6 +105,12 @@ impl MoveShowcase {
         &self.lab
     }
 
+    /// Keeps baseline metadata attached when autoplay creates the next lab snapshot.
+    pub fn set_combat_manifest(&mut self, manifest: Option<SpriteManifest>) {
+        self.lab.set_combat_manifest(manifest.clone());
+        self.combat_manifest = manifest;
+    }
+
     /// Returns whether autoplay is paused.
     pub const fn paused(&self) -> bool {
         self.paused
@@ -129,11 +138,13 @@ impl MoveShowcase {
     fn select_next_move_with_rest(&mut self) {
         self.move_index = (self.move_index + 1) % CombatLabMove::ALL.len();
         self.lab = lab_for(self.character, self.selected_move());
+        self.lab.set_combat_manifest(self.combat_manifest.clone());
         self.rest_frames_remaining = REST_FRAMES;
     }
 
     fn reset_current_move(&mut self) {
         self.lab = lab_for(self.character, self.selected_move());
+        self.lab.set_combat_manifest(self.combat_manifest.clone());
         self.rest_frames_remaining = 0;
     }
 }

@@ -8,7 +8,7 @@ use crate::{
     engine::sprites::{
         animation::frame_for_clip_at,
         manifest::{SpriteCombatBox, SpriteFrame, SpriteManifest},
-        selection::{FighterSpriteClip, fighter_clip_elapsed_seconds, fighter_sprite_clip},
+        selection::{FighterSpriteClip, fighter_combat_clip_elapsed_seconds, fighter_sprite_clip},
     },
     math::{rect::Rect, vec2::Vec2},
 };
@@ -31,14 +31,18 @@ impl ProjectedSpriteCombat {
     }
 }
 
-/// Returns combat metadata for the fighter's current visual frame.
+/// Returns baseline combat metadata using its existing gameplay sampling clock.
 pub fn projected_fighter_combat(
     manifest: &SpriteManifest,
     fighter: &Fighter,
     world_elapsed_seconds: f32,
 ) -> Option<ProjectedSpriteCombat> {
-    let clip = fighter_sprite_clip(fighter);
-    let clip_time = fighter_clip_elapsed_seconds(fighter, world_elapsed_seconds);
+    // Crouched guard artwork does not implicitly replace the existing guard boxes.
+    let clip = match fighter_sprite_clip(fighter) {
+        FighterSpriteClip::CrouchBlock => FighterSpriteClip::Block,
+        clip => clip,
+    };
+    let clip_time = fighter_combat_clip_elapsed_seconds(fighter, world_elapsed_seconds);
     let frame = frame_for_clip_at(manifest, clip.as_str(), clip_time)?;
 
     project_frame_combat(manifest, frame, fighter).filter(|combat| !combat.is_empty())

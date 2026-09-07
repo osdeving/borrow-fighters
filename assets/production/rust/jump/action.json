@@ -1,0 +1,59 @@
+{
+  "sheet": "jump/source.png",
+  "reviewed": false,
+  "loop": false,
+  "frames": [
+    {
+      "name": "jump_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 512,
+        "h": 768
+      },
+      "pivot": {
+        "x": 274,
+        "y": 675
+      },
+      "duration_ms": 60,
+      "phase": "takeoff"
+    },
+    {
+      "name": "jump_01",
+      "source_rect": {
+        "x": 512,
+        "y": 0,
+        "w": 512,
+        "h": 768
+      },
+      "pivot": {
+        "x": 266,
+        "y": 554
+      },
+      "duration_ms": 340,
+      "phase": "rise"
+    },
+    {
+      "name": "jump_02",
+      "source_rect": {
+        "x": 1024,
+        "y": 0,
+        "w": 512,
+        "h": 768
+      },
+      "pivot": {
+        "x": 269,
+        "y": 630
+      },
+      "duration_ms": 400,
+      "phase": "fall"
+    }
+  ],
+  "review": {
+    "identity": "Three selected jump phases matching master and idle; fourth source landing pose retained only as reference.",
+    "remaining": "Final full-World capture completed in target/sprite-production/rust-motion-final: both facings, rise/fall transition and grounded return to idle inspected. Source translation between rise/fall is corrected with explicit pivots; no physics changed.",
+    "generation": "built-in image_gen; original source-v1.png; prompt.txt",
+    "suggested_scale": 0.47,
+    "selection": "Three selected keys: takeoff, rise and fall. The source includes a fourth landing crouch, omitted because the engine selects idle once grounded. Virtual airborne pivots are calibrated explicitly to align the rise/fall pelvis and head, removing vertical travel already present in the source sheet; only World supplies the jump arc. Total800ms follows existing physics. Source frame3 remains preserved, not exported."
+  }
+}

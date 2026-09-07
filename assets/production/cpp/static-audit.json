@@ -1,0 +1,146 @@
+{
+  "status": "candidate static checks and real Combat Lab capture complete",
+  "clips": 20,
+  "frames": 61,
+  "manifest_sha256": "d7e731fa6307607760d7b9a455d2c451e2089b5b524004bcbe42617ea0be0255",
+  "atlas_dimensions": [
+    3160,
+    3064
+  ],
+  "close_attack_timing": {
+    "punch_light": {
+      "durations_ms": [
+        66,
+        84,
+        116
+      ],
+      "boundaries_ms": [
+        66,
+        150,
+        266
+      ],
+      "matches_baseline": true
+    },
+    "punch_heavy": {
+      "durations_ms": [
+        166,
+        150,
+        234
+      ],
+      "boundaries_ms": [
+        166,
+        316,
+        550
+      ],
+      "matches_baseline": true
+    },
+    "kick": {
+      "durations_ms": [
+        133,
+        133,
+        167
+      ],
+      "boundaries_ms": [
+        133,
+        266,
+        433
+      ],
+      "matches_baseline": true
+    },
+    "sweep": {
+      "durations_ms": [
+        150,
+        150,
+        216
+      ],
+      "boundaries_ms": [
+        150,
+        300,
+        516
+      ],
+      "matches_baseline": true
+    },
+    "overhead": {
+      "durations_ms": [
+        183,
+        133,
+        217
+      ],
+      "boundaries_ms": [
+        183,
+        316,
+        533
+      ],
+      "matches_baseline": true
+    },
+    "anti_air": {
+      "durations_ms": [
+        100,
+        133,
+        217
+      ],
+      "boundaries_ms": [
+        100,
+        233,
+        450
+      ],
+      "matches_baseline": true
+    },
+    "air_punch": {
+      "durations_ms": [
+        83,
+        150,
+        133
+      ],
+      "boundaries_ms": [
+        83,
+        233,
+        366
+      ],
+      "matches_baseline": true
+    },
+    "air_kick": {
+      "durations_ms": [
+        116,
+        167,
+        150
+      ],
+      "boundaries_ms": [
+        116,
+        283,
+        433
+      ],
+      "matches_baseline": true
+    },
+    "throw": {
+      "durations_ms": [
+        100,
+        50,
+        233
+      ],
+      "boundaries_ms": [
+        100,
+        150,
+        383
+      ],
+      "matches_baseline": true
+    }
+  },
+  "source_continuity": {
+    "identity": "reference/master-existing.png",
+    "fixed_polished_reference": "idle/source-v1.png"
+  },
+  "runtime": {
+    "report": "../../candidates/cpp/review/runtime-lab/capture-report.json",
+    "captured_images": 253,
+    "selected_images": 15,
+    "captured_clips": 19,
+    "uncaptured_clips": [
+      "walk"
+    ],
+    "loaded_manifest_matches_candidate": true,
+    "loaded_combat_baseline_image": "cpp-fighter-atlas-a.png",
+    "active_samples_using_contact_frame": 20,
+    "final_art_approved": false
+  }
+}

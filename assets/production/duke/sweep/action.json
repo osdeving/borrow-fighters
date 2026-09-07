@@ -1,0 +1,52 @@
+{
+  "sheet": "sweep/keyed.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "sweep_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 640,
+        "h": 736
+      },
+      "pivot": {
+        "x": 275,
+        "y": 670
+      },
+      "duration_ms": 216,
+      "phase": "startup"
+    },
+    {
+      "name": "sweep_01",
+      "source_rect": {
+        "x": 640,
+        "y": 0,
+        "w": 750,
+        "h": 736
+      },
+      "pivot": {
+        "x": 236,
+        "y": 676
+      },
+      "duration_ms": 167,
+      "phase": "active"
+    },
+    {
+      "name": "sweep_02",
+      "source_rect": {
+        "x": 1390,
+        "y": 0,
+        "w": 658,
+        "h": 736
+      },
+      "pivot": {
+        "x": 262,
+        "y": 659
+      },
+      "duration_ms": 250,
+      "phase": "recovery"
+    }
+  ]
+}

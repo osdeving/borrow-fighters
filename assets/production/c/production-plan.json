@@ -1,0 +1,793 @@
+{
+  "schema": "borrow-fighters.art-production-plan.v1",
+  "character": "c",
+  "status": "20_actions_generated_exported_and_lab_captured_as_candidate",
+  "required_gate": "Rust pilot technical validation received from parent",
+  "fixed_identity_reference": "reference/master-existing.png",
+  "polished_identity_reference_after_generation": "idle/source-v1.png",
+  "identity_description": "Slender elderly man; long untidy white hair, white moustache and brows, aged expressive face, light-blue denim jacket with C badge, white shirt, dark-blue jeans, brown belt/gold buckle, light shoes; blue/white C book remains with character in every action.",
+  "target_standing_height_world": 268,
+  "body_metrics_world": {
+    "width": 101.33333333333333,
+    "standing_height": 224.0,
+    "crouch_height": 128.0
+  },
+  "new_generation_background": "#FF00FF",
+  "cleanup": "tools/art/remove_generated_magenta.py; generic path without --rust-contour",
+  "source_canvas_proposal": [
+    2048,
+    768
+  ],
+  "coordinates": "Measure source standing height and explicit floor/virtual-floor pivot after idle. Do not derive scale from each action alpha bounds. Copy exact combat offsets from contact contract; do not edit combat.",
+  "actions": {
+    "idle": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": true,
+      "proposed_pose_count": 4,
+      "proposed_duration_ms": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "phases": [
+        "guard",
+        "inhale",
+        "settle",
+        "exhale"
+      ]
+    },
+    "walk": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": true,
+      "proposed_pose_count": 4,
+      "proposed_duration_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "phases": [
+        "left_contact",
+        "passing",
+        "right_contact",
+        "passing"
+      ]
+    },
+    "jump": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 4,
+      "proposed_duration_ms": [
+        60,
+        340,
+        300,
+        100
+      ],
+      "phases": [
+        "takeoff",
+        "rise_apex",
+        "fall",
+        "landing_ready"
+      ]
+    },
+    "crouch": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        60,
+        80,
+        120
+      ],
+      "phases": [
+        "bend",
+        "settle",
+        "hold"
+      ]
+    },
+    "block": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        80,
+        80,
+        120
+      ],
+      "phases": [
+        "guard_immediate",
+        "compress",
+        "hold"
+      ]
+    },
+    "crouch_block": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        70,
+        80,
+        120
+      ],
+      "phases": [
+        "low_guard_immediate",
+        "compress",
+        "hold"
+      ]
+    },
+    "hit": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        80,
+        100,
+        120
+      ],
+      "phases": [
+        "impact_immediate",
+        "recoil",
+        "settle"
+      ]
+    },
+    "punch_light": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        83,
+        100,
+        117
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "combat_timing": {
+        "move_id": "CPointerJab",
+        "input": "LightPunch",
+        "duration": 18,
+        "active_start": 5,
+        "active_end_inclusive": 10,
+        "whiff_recovery": 5,
+        "clip": "punch_light"
+      },
+      "contact_contract": {
+        "move_id": "CPointerJab",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 18,
+          "active_start": 5,
+          "active_end": 10
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 83,
+          "recovery_starts": 183,
+          "clip_ends": 300
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -141.33333333333334,
+          "w": 85.33333333333333,
+          "h": 42.666666666666664
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -136.0,
+          "y": -141.33333333333334,
+          "w": 85.33333333333333,
+          "h": 42.666666666666664
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 93.33333333333333,
+          "y": -120.00000000000001
+        }
+      }
+    },
+    "punch_heavy": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        200,
+        150,
+        283
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "combat_timing": {
+        "move_id": "CUnsafePoke",
+        "input": "HeavyPunch",
+        "duration": 38,
+        "active_start": 12,
+        "active_end_inclusive": 20,
+        "whiff_recovery": 13,
+        "clip": "punch_heavy"
+      },
+      "contact_contract": {
+        "move_id": "CUnsafePoke",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 38,
+          "active_start": 12,
+          "active_end": 20
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 200,
+          "recovery_starts": 350,
+          "clip_ends": 633
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -146.66666666666669,
+          "w": 144.0,
+          "h": 53.33333333333333
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -194.66666666666666,
+          "y": -146.66666666666669,
+          "w": 144.0,
+          "h": 53.33333333333333
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 122.66666666666666,
+          "y": -120.00000000000003
+        }
+      }
+    },
+    "kick": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        150,
+        133,
+        217
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "combat_timing": {
+        "move_id": "CNullStepKick",
+        "input": "Kick",
+        "duration": 30,
+        "active_start": 9,
+        "active_end_inclusive": 16,
+        "whiff_recovery": 9,
+        "clip": "kick"
+      },
+      "contact_contract": {
+        "move_id": "CNullStepKick",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 30,
+          "active_start": 9,
+          "active_end": 16
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 150,
+          "recovery_starts": 283,
+          "clip_ends": 500
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -77.33333333333334,
+          "w": 136.0,
+          "h": 45.33333333333333
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -186.66666666666666,
+          "y": -77.33333333333334,
+          "w": 136.0,
+          "h": 45.33333333333333
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 118.66666666666666,
+          "y": -54.66666666666668
+        }
+      }
+    },
+    "sweep": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        200,
+        150,
+        250
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "combat_timing": {
+        "move_id": "CSegfaultSweep",
+        "input": "Sweep",
+        "duration": 36,
+        "active_start": 12,
+        "active_end_inclusive": 20,
+        "whiff_recovery": 15,
+        "clip": "sweep"
+      },
+      "contact_contract": {
+        "move_id": "CSegfaultSweep",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 36,
+          "active_start": 12,
+          "active_end": 20
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 200,
+          "recovery_starts": 350,
+          "clip_ends": 600
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -136.0,
+          "w": 162.66666666666666,
+          "h": 40.0
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -213.33333333333331,
+          "y": -136.0,
+          "w": 162.66666666666666,
+          "h": 40.0
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 132.0,
+          "y": -116.0
+        }
+      }
+    },
+    "overhead": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        216,
+        134,
+        250
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "combat_timing": {
+        "move_id": "CStackOverflow",
+        "input": "Overhead",
+        "duration": 36,
+        "active_start": 13,
+        "active_end_inclusive": 20,
+        "whiff_recovery": 14,
+        "clip": "overhead"
+      },
+      "contact_contract": {
+        "move_id": "CStackOverflow",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 36,
+          "active_start": 13,
+          "active_end": 20
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 216,
+          "recovery_starts": 350,
+          "clip_ends": 600
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -170.66666666666669,
+          "w": 114.66666666666666,
+          "h": 69.33333333333333
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -165.33333333333331,
+          "y": -170.66666666666669,
+          "w": 114.66666666666666,
+          "h": 69.33333333333333
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 108.0,
+          "y": -136.00000000000003
+        }
+      }
+    },
+    "anti_air": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        116,
+        134,
+        250
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "combat_timing": {
+        "move_id": "CInterruptVector",
+        "input": "AntiAir",
+        "duration": 30,
+        "active_start": 7,
+        "active_end_inclusive": 14,
+        "whiff_recovery": 12,
+        "clip": "anti_air"
+      },
+      "contact_contract": {
+        "move_id": "CInterruptVector",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 30,
+          "active_start": 7,
+          "active_end": 14
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 116,
+          "recovery_starts": 250,
+          "clip_ends": 500
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -341.3333333333333,
+          "w": 98.66666666666666,
+          "h": 114.66666666666666
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -149.33333333333331,
+          "y": -341.3333333333333,
+          "w": 98.66666666666666,
+          "h": 114.66666666666666
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 100.0,
+          "y": -284.0
+        }
+      }
+    },
+    "air_punch": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        83,
+        150,
+        133
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "combat_timing": {
+        "move_id": "AirPunch",
+        "input": "AirPunch",
+        "duration": 22,
+        "active_start": 5,
+        "active_end_inclusive": 13,
+        "whiff_recovery": 6,
+        "clip": "air_punch"
+      },
+      "contact_contract": {
+        "move_id": "AirPunch",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 22,
+          "active_start": 5,
+          "active_end": 13
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 83,
+          "recovery_starts": 233,
+          "clip_ends": 366
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -130.66666666666669,
+          "w": 96.0,
+          "h": 56.0
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -146.66666666666666,
+          "y": -130.66666666666669,
+          "w": 96.0,
+          "h": 56.0
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 98.66666666666666,
+          "y": -102.66666666666669
+        }
+      }
+    },
+    "air_kick": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        116,
+        167,
+        150
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "combat_timing": {
+        "move_id": "AirKick",
+        "input": "AirKick",
+        "duration": 26,
+        "active_start": 7,
+        "active_end_inclusive": 16,
+        "whiff_recovery": 6,
+        "clip": "air_kick"
+      },
+      "contact_contract": {
+        "move_id": "AirKick",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 26,
+          "active_start": 7,
+          "active_end": 16
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 116,
+          "recovery_starts": 283,
+          "clip_ends": 433
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -106.66666666666667,
+          "w": 117.33333333333333,
+          "h": 61.33333333333333
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -168.0,
+          "y": -106.66666666666667,
+          "w": 117.33333333333333,
+          "h": 61.33333333333333
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 109.33333333333333,
+          "y": -76.0
+        }
+      }
+    },
+    "throw": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        116,
+        50,
+        267
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "combat_timing": {
+        "move_id": "CUndefinedThrow",
+        "input": "Throw",
+        "duration": 26,
+        "active_start": 7,
+        "active_end_inclusive": 9,
+        "whiff_recovery": 18,
+        "clip": "throw"
+      },
+      "contact_contract": {
+        "move_id": "CUndefinedThrow",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 26,
+          "active_start": 7,
+          "active_end": 9
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 116,
+          "recovery_starts": 166,
+          "clip_ends": 433
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -184.0,
+          "w": 66.66666666666666,
+          "h": 162.66666666666666
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -117.33333333333331,
+          "y": -184.0,
+          "w": 66.66666666666666,
+          "h": 162.66666666666666
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 84.0,
+          "y": -102.66666666666667
+        }
+      }
+    },
+    "special": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        100,
+        100,
+        133
+      ],
+      "phases": [
+        "emission_immediate",
+        "followthrough",
+        "recovery"
+      ],
+      "special_contract": {
+        "spec": "C_PROJECTILE_SPEC",
+        "timing_ticks": {
+          "startup": 0,
+          "spawn_frame": 0,
+          "visual_duration": 20,
+          "cooldown": 56
+        },
+        "projectile_dimensions_world": {
+          "w": 104.0,
+          "h": 40.0
+        },
+        "projectile_speed_world_per_second": 480.0,
+        "emission_origin_source": "World::projectile_for_fighter -> projected_projectile_origin_for_clip(Special,0.0)",
+        "first_emission_origin_right_relative_to_anchor": {
+          "x": 148.48,
+          "y": -140.74666666666667
+        },
+        "all_baseline_origins": [
+          {
+            "frame": "special_0",
+            "baseline_local_origin": {
+              "x": 208,
+              "y": 145
+            },
+            "baseline_pivot": {
+              "x": 112,
+              "y": 236
+            },
+            "baseline_scale": 1.5466666666666666,
+            "right_relative_to_anchor": {
+              "x": 148.48,
+              "y": -140.74666666666667
+            },
+            "left_relative_to_anchor": {
+              "x": -148.48,
+              "y": -140.74666666666667
+            },
+            "used_for_initial_emission_at_elapsed_zero": true
+          }
+        ],
+        "fallback_used_only_without_manifest_origin": {
+          "right_relative_to_anchor": {
+            "x": 146.66666666666666,
+            "y": -120.0
+          }
+        },
+        "drawing_instruction": "Aim the muzzle/emitting hand at first_emission_origin from the first pose; preserve separate existing projectile."
+      }
+    },
+    "spawn": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 4,
+      "proposed_duration_ms": [
+        650,
+        850,
+        245,
+        800
+      ],
+      "phases": [
+        "arrive",
+        "show_book",
+        "point",
+        "guard"
+      ]
+    },
+    "victory": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 3,
+      "proposed_duration_ms": [
+        160,
+        250,
+        500
+      ],
+      "phases": [
+        "raise_book",
+        "point",
+        "hold"
+      ]
+    },
+    "defeat": {
+      "status": "generated_exported_candidate_not_final_art_approved",
+      "reviewed": false,
+      "book_must_remain_visible": true,
+      "loop": false,
+      "proposed_pose_count": 4,
+      "proposed_duration_ms": [
+        120,
+        160,
+        200,
+        600
+      ],
+      "phases": [
+        "recoil",
+        "kneel",
+        "fall",
+        "rest"
+      ]
+    }
+  },
+  "review": "review.md"
+}

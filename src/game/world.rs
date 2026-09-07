@@ -69,6 +69,7 @@ pub struct World {
     pub projectiles: Vec<Projectile>,
     pub body_collision_timer: f32,
     pub elapsed_seconds: f32,
+    outcome_elapsed_seconds: f32,
     audio_events: Vec<AudioEvent>,
     combat_log: CombatLog,
     spawn_intro_timer: f32,
@@ -115,6 +116,7 @@ impl World {
             projectiles: Vec::new(),
             body_collision_timer: 0.0,
             elapsed_seconds: 0.0,
+            outcome_elapsed_seconds: 0.0,
             audio_events: Vec::new(),
             combat_log: CombatLog::default(),
             spawn_intro_timer: 0.0,
@@ -168,6 +170,11 @@ impl World {
     /// Returns elapsed time inside the current spawn intro.
     pub fn spawn_intro_elapsed_seconds(&self) -> f32 {
         (SPAWN_INTRO_DURATION_SECONDS - self.spawn_intro_timer).max(0.0)
+    }
+
+    /// Returns time since the outcome appeared, independent from match length.
+    pub fn outcome_elapsed_seconds(&self) -> f32 {
+        self.outcome_elapsed_seconds
     }
 
     /// Returns whether the pre-fight countdown is blocking gameplay.
@@ -249,6 +256,7 @@ impl World {
         self.update_transient_feedback(dt);
 
         if self.outcome.is_some() {
+            self.outcome_elapsed_seconds += dt;
             return;
         }
 

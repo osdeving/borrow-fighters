@@ -1,0 +1,88 @@
+{
+  "action": "overhead",
+  "source": "overhead/source-v2.png",
+  "sheet": "overhead/keyed.png",
+  "loop": false,
+  "source_body_height_reference_px": 538,
+  "normalization_note": "v2 overhead selected: startup fist above head descends into forward contact. v1 was too low/short; v3 lowered the knuckles below the box. v2 lower knuckles overlap the active box while upper glove extends above it.",
+  "frames": [
+    {
+      "name": "overhead_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 340,
+        "y": 735
+      },
+      "duration_ms": 166,
+      "phase": "startup"
+    },
+    {
+      "name": "overhead_01",
+      "source_rect": {
+        "x": 591,
+        "y": 0,
+        "w": 592,
+        "h": 887
+      },
+      "pivot": {
+        "x": 284,
+        "y": 735
+      },
+      "duration_ms": 100,
+      "phase": "active"
+    },
+    {
+      "name": "overhead_02",
+      "source_rect": {
+        "x": 1183,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 257,
+        "y": 735
+      },
+      "duration_ms": 200,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Built-in image_gen, original narrow Go master and generated idle continuity. Flat magenta extracted without Rust contour mode; isolated matte corner pixels removed where present. Candidate visual only; baseline combat remains authoritative.",
+  "timing_reference": {
+    "move_id": "GoChannelOverhead",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 28,
+      "active_start": 10,
+      "active_end": 15
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 166,
+      "recovery_starts": 266,
+      "clip_ends": 466
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -168.0,
+      "w": 93.33333333333333,
+      "h": 64.0
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -144.0,
+      "y": -168.0,
+      "w": 93.33333333333333,
+      "h": 64.0
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 97.33333333333333,
+      "y": -136.0
+    }
+  }
+}

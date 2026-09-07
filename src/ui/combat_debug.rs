@@ -39,7 +39,7 @@ fn draw_lab_boxes(draw: &mut impl RaylibDraw, lab: &CombatLab) {
     outline_rect(draw, fighter.body_rect(), BODY_OUTLINE);
 
     if lab.show_hurtboxes() {
-        for hurtbox in fighter.hurtboxes().rects() {
+        for hurtbox in lab.hurtboxes() {
             outline_rect(draw, hurtbox, HURTBOX);
         }
     }
@@ -48,7 +48,7 @@ fn draw_lab_boxes(draw: &mut impl RaylibDraw, lab: &CombatLab) {
         return;
     }
 
-    if let Some(attack_box) = fighter.attack_box() {
+    for attack_box in lab.attack_boxes() {
         let active = fighter.active_hitbox().is_some();
         draw.draw_rectangle(
             attack_box.x.round() as i32,

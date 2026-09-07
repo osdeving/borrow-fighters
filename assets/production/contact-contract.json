@@ -1,0 +1,1910 @@
+{
+  "schema": "borrow-fighters.art-contact-contract.v1",
+  "purpose": "Read-only drawing brief from existing baseline gameplay. Not a runtime manifest and not authorization to alter collisions.",
+  "units": "1280x720 runtime world pixels, after config::world_px(value)=value*4/3",
+  "status": "technical_reference_only_no_art_approval",
+  "coordinate_contract": {
+    "anchor": "body_rect().center_x(), body_rect().bottom()",
+    "right_point_to_source": "source.x = pivot.x + world_offset.x / candidate_scale; source.y = pivot.y + world_offset.y / candidate_scale",
+    "right_box_to_source": "source.xy = pivot.xy + world_relative_box.xy / candidate_scale; source.wh = world_relative_box.wh / candidate_scale",
+    "left_mirroring": "For an offset point, x_left=-x_right. For a rectangle, x_left=-(x_right+w); y,w,h unchanged. Runtime mirrors the right-facing drawing.",
+    "airborne_anchor": "The anchor moves with the actual airborne fighter; listed boxes remain relative to that anchor.",
+    "standing_height": "All nine active attacks currently use standing body height, including Sweep: fighter.crouching requires attack.is_none(). Do not lower a hitbox to match a drawing.",
+    "projectile_origin": "Manifest point is the near horizontal projectile edge and its vertical center, not the projectile rectangle center. Align emitting hand/muzzle with the point; projectile sprite stays separate.",
+    "precision": "Baseline local origin/pivot and full JSON scale are preserved, plus derived world offsets without decimal rounding; source coordinates are calculated only after candidate scale/pivot are measured."
+  },
+  "rules": [
+    "Use contact coordinates to place drawn active fists/feet, not to author new combat metadata.",
+    "Preserve every existing special origin in its original baseline manifest; presentation atlas must not replace the combat manifest.",
+    "All five special specs emit at tick0. First drawing already emits; later drawings recover. Cooldown is not animation duration.",
+    "Do not put permanent projectile, opponent, debug boxes, guide arrows, or guide circles into the fighter drawing.",
+    "Keep source rectangles large enough for raised hands, extended feet, accessories, and vapor; never trim to an assumed fixed cell.",
+    "New raster generation uses solid #FF00FF background; inspect processed alpha on dark and light backgrounds.",
+    "Jump art proposal60/340/300/100ms follows approximately0.8s flight with apex near0.4s; physics and landing remain unchanged."
+  ],
+  "characters": {
+    "duke": {
+      "master_reference": "assets/production/duke/reference/master-existing.png",
+      "baseline_combat_manifest": "assets/placeholder/duke-fighter.sprite.json",
+      "baseline_scale": 1.3333333333333333,
+      "body_metrics_world": {
+        "width": 101.33333333333333,
+        "standing_height": 224.0,
+        "crouch_height": 128.0
+      },
+      "close_attacks": {
+        "punch_light": {
+          "move_id": "LightPunch",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 18,
+            "active_start": 5,
+            "active_end": 10
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 83,
+            "recovery_starts": 183,
+            "clip_ends": 300
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -141.33333333333334,
+            "w": 77.33333333333333,
+            "h": 45.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -128.0,
+            "y": -141.33333333333334,
+            "w": 77.33333333333333,
+            "h": 45.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 89.33333333333333,
+            "y": -118.66666666666669
+          }
+        },
+        "punch_heavy": {
+          "move_id": "DukeBoilerplatePoke",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 40,
+            "active_start": 13,
+            "active_end": 22
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 216,
+            "recovery_starts": 383,
+            "clip_ends": 666
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -144.0,
+            "w": 149.33333333333331,
+            "h": 58.666666666666664
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -199.99999999999997,
+            "y": -144.0,
+            "w": 149.33333333333331,
+            "h": 58.666666666666664
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 125.33333333333331,
+            "y": -114.66666666666667
+          }
+        },
+        "kick": {
+          "move_id": "Kick",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 28,
+            "active_start": 9,
+            "active_end": 16
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 150,
+            "recovery_starts": 283,
+            "clip_ends": 466
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -80.0,
+            "w": 133.33333333333331,
+            "h": 48.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -183.99999999999997,
+            "y": -80.0,
+            "w": 133.33333333333331,
+            "h": 48.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 117.33333333333331,
+            "y": -56.0
+          }
+        },
+        "sweep": {
+          "move_id": "DukeGarbageCollectorSweep",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 38,
+            "active_start": 13,
+            "active_end": 22
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 216,
+            "recovery_starts": 383,
+            "clip_ends": 633
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -136.0,
+            "w": 170.66666666666666,
+            "h": 42.666666666666664
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -221.33333333333331,
+            "y": -136.0,
+            "w": 170.66666666666666,
+            "h": 42.666666666666664
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 136.0,
+            "y": -114.66666666666667
+          }
+        },
+        "overhead": {
+          "move_id": "DukeAbstractFactoryOverhead",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 40,
+            "active_start": 15,
+            "active_end": 22
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 250,
+            "recovery_starts": 383,
+            "clip_ends": 666
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -170.66666666666669,
+            "w": 128.0,
+            "h": 72.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -178.66666666666666,
+            "y": -170.66666666666669,
+            "w": 128.0,
+            "h": 72.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 114.66666666666666,
+            "y": -134.66666666666669
+          }
+        },
+        "anti_air": {
+          "move_id": "RisingAntiAir",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 30,
+            "active_start": 7,
+            "active_end": 14
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 116,
+            "recovery_starts": 250,
+            "clip_ends": 500
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -338.66666666666663,
+            "w": 93.33333333333333,
+            "h": 109.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -144.0,
+            "y": -338.66666666666663,
+            "w": 93.33333333333333,
+            "h": 109.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 97.33333333333333,
+            "y": -283.99999999999994
+          }
+        },
+        "air_punch": {
+          "move_id": "AirPunch",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 22,
+            "active_start": 5,
+            "active_end": 13
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 83,
+            "recovery_starts": 233,
+            "clip_ends": 366
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -130.66666666666669,
+            "w": 96.0,
+            "h": 56.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -146.66666666666666,
+            "y": -130.66666666666669,
+            "w": 96.0,
+            "h": 56.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 98.66666666666666,
+            "y": -102.66666666666669
+          }
+        },
+        "air_kick": {
+          "move_id": "AirKick",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 26,
+            "active_start": 7,
+            "active_end": 16
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 116,
+            "recovery_starts": 283,
+            "clip_ends": 433
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -106.66666666666667,
+            "w": 117.33333333333333,
+            "h": 61.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -168.0,
+            "y": -106.66666666666667,
+            "w": 117.33333333333333,
+            "h": 61.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 109.33333333333333,
+            "y": -76.0
+          }
+        },
+        "throw": {
+          "move_id": "DukeEnterpriseThrow",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 30,
+            "active_start": 9,
+            "active_end": 11
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 150,
+            "recovery_starts": 200,
+            "clip_ends": 500
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -186.66666666666669,
+            "w": 74.66666666666666,
+            "h": 165.33333333333331
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -125.33333333333331,
+            "y": -186.66666666666669,
+            "w": 74.66666666666666,
+            "h": 165.33333333333331
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 88.0,
+            "y": -104.00000000000003
+          }
+        }
+      },
+      "special": {
+        "spec": "DUKE_PROJECTILE_SPEC",
+        "timing_ticks": {
+          "startup": 0,
+          "spawn_frame": 0,
+          "visual_duration": 25,
+          "cooldown": 72
+        },
+        "projectile_dimensions_world": {
+          "w": 72.0,
+          "h": 45.33333333333333
+        },
+        "projectile_speed_world_per_second": 360.0,
+        "emission_origin_source": "World::projectile_for_fighter -> projected_projectile_origin_for_clip(Special,0.0)",
+        "first_emission_origin_right_relative_to_anchor": {
+          "x": 146.66666666666666,
+          "y": -117.33333333333333
+        },
+        "all_baseline_origins": [
+          {
+            "frame": "special_0",
+            "baseline_local_origin": {
+              "x": 222,
+              "y": 148
+            },
+            "baseline_pivot": {
+              "x": 112,
+              "y": 236
+            },
+            "baseline_scale": 1.3333333333333333,
+            "right_relative_to_anchor": {
+              "x": 146.66666666666666,
+              "y": -117.33333333333333
+            },
+            "left_relative_to_anchor": {
+              "x": -146.66666666666666,
+              "y": -117.33333333333333
+            },
+            "used_for_initial_emission_at_elapsed_zero": true
+          },
+          {
+            "frame": "special_1",
+            "baseline_local_origin": {
+              "x": 244,
+              "y": 145
+            },
+            "baseline_pivot": {
+              "x": 112,
+              "y": 236
+            },
+            "baseline_scale": 1.3333333333333333,
+            "right_relative_to_anchor": {
+              "x": 176.0,
+              "y": -121.33333333333333
+            },
+            "left_relative_to_anchor": {
+              "x": -176.0,
+              "y": -121.33333333333333
+            },
+            "used_for_initial_emission_at_elapsed_zero": false
+          },
+          {
+            "frame": "special_2",
+            "baseline_local_origin": {
+              "x": 266,
+              "y": 145
+            },
+            "baseline_pivot": {
+              "x": 112,
+              "y": 236
+            },
+            "baseline_scale": 1.3333333333333333,
+            "right_relative_to_anchor": {
+              "x": 205.33333333333331,
+              "y": -121.33333333333333
+            },
+            "left_relative_to_anchor": {
+              "x": -205.33333333333331,
+              "y": -121.33333333333333
+            },
+            "used_for_initial_emission_at_elapsed_zero": false
+          }
+        ],
+        "fallback_used_only_without_manifest_origin": {
+          "right_relative_to_anchor": {
+            "x": 146.66666666666666,
+            "y": -117.33333333333333
+          }
+        },
+        "drawing_instruction": "Aim the muzzle/emitting hand at first_emission_origin from the first pose; preserve separate existing projectile."
+      }
+    },
+    "go": {
+      "master_reference": "assets/production/go/reference/master-existing.png",
+      "baseline_combat_manifest": "assets/placeholder/go-fighter.sprite.json",
+      "baseline_scale": 1.44,
+      "body_metrics_world": {
+        "width": 101.33333333333333,
+        "standing_height": 224.0,
+        "crouch_height": 128.0
+      },
+      "close_attacks": {
+        "punch_light": {
+          "move_id": "GoGoroutineJab",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 14,
+            "active_start": 3,
+            "active_end": 7
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 50,
+            "recovery_starts": 133,
+            "clip_ends": 233
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -141.33333333333334,
+            "w": 56.0,
+            "h": 40.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -106.66666666666666,
+            "y": -141.33333333333334,
+            "w": 56.0,
+            "h": 40.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 78.66666666666666,
+            "y": -121.33333333333334
+          }
+        },
+        "punch_heavy": {
+          "move_id": "HeavyPunch",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 35,
+            "active_start": 11,
+            "active_end": 20
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 183,
+            "recovery_starts": 350,
+            "clip_ends": 583
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -146.66666666666669,
+            "w": 128.0,
+            "h": 56.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -178.66666666666666,
+            "y": -146.66666666666669,
+            "w": 128.0,
+            "h": 56.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 114.66666666666666,
+            "y": -118.66666666666669
+          }
+        },
+        "kick": {
+          "move_id": "GoDeferKick",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 23,
+            "active_start": 7,
+            "active_end": 13
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 116,
+            "recovery_starts": 233,
+            "clip_ends": 383
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -82.66666666666669,
+            "w": 114.66666666666666,
+            "h": 45.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -165.33333333333331,
+            "y": -82.66666666666669,
+            "w": 114.66666666666666,
+            "h": 45.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 108.0,
+            "y": -60.00000000000002
+          }
+        },
+        "sweep": {
+          "move_id": "SweepKick",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 32,
+            "active_start": 10,
+            "active_end": 18
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 166,
+            "recovery_starts": 316,
+            "clip_ends": 533
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -136.0,
+            "w": 149.33333333333331,
+            "h": 40.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -199.99999999999997,
+            "y": -136.0,
+            "w": 149.33333333333331,
+            "h": 40.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 125.33333333333331,
+            "y": -116.0
+          }
+        },
+        "overhead": {
+          "move_id": "GoChannelOverhead",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 28,
+            "active_start": 10,
+            "active_end": 15
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 166,
+            "recovery_starts": 266,
+            "clip_ends": 466
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -168.0,
+            "w": 93.33333333333333,
+            "h": 64.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -144.0,
+            "y": -168.0,
+            "w": 93.33333333333333,
+            "h": 64.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 97.33333333333333,
+            "y": -136.0
+          }
+        },
+        "anti_air": {
+          "move_id": "RisingAntiAir",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 30,
+            "active_start": 7,
+            "active_end": 14
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 116,
+            "recovery_starts": 250,
+            "clip_ends": 500
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -338.66666666666663,
+            "w": 93.33333333333333,
+            "h": 109.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -144.0,
+            "y": -338.66666666666663,
+            "w": 93.33333333333333,
+            "h": 109.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 97.33333333333333,
+            "y": -283.99999999999994
+          }
+        },
+        "air_punch": {
+          "move_id": "AirPunch",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 22,
+            "active_start": 5,
+            "active_end": 13
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 83,
+            "recovery_starts": 233,
+            "clip_ends": 366
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -130.66666666666669,
+            "w": 96.0,
+            "h": 56.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -146.66666666666666,
+            "y": -130.66666666666669,
+            "w": 96.0,
+            "h": 56.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 98.66666666666666,
+            "y": -102.66666666666669
+          }
+        },
+        "air_kick": {
+          "move_id": "GoHopkick",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 20,
+            "active_start": 5,
+            "active_end": 12
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 83,
+            "recovery_starts": 216,
+            "clip_ends": 333
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -106.66666666666667,
+            "w": 104.0,
+            "h": 56.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -154.66666666666666,
+            "y": -106.66666666666667,
+            "w": 104.0,
+            "h": 56.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 102.66666666666666,
+            "y": -78.66666666666667
+          }
+        },
+        "throw": {
+          "move_id": "CloseThrow",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 22,
+            "active_start": 6,
+            "active_end": 8
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 100,
+            "recovery_starts": 150,
+            "clip_ends": 366
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -184.0,
+            "w": 61.33333333333333,
+            "h": 160.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -112.0,
+            "y": -184.0,
+            "w": 61.33333333333333,
+            "h": 160.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 81.33333333333333,
+            "y": -104.0
+          }
+        }
+      },
+      "special": {
+        "spec": "GO_PROJECTILE_SPEC",
+        "timing_ticks": {
+          "startup": 0,
+          "spawn_frame": 0,
+          "visual_duration": 16,
+          "cooldown": 44
+        },
+        "projectile_dimensions_world": {
+          "w": 48.0,
+          "h": 32.0
+        },
+        "projectile_speed_world_per_second": 573.3333333333333,
+        "emission_origin_source": "World::projectile_for_fighter -> projected_projectile_origin_for_clip(Special,0.0)",
+        "first_emission_origin_right_relative_to_anchor": {
+          "x": 97.92,
+          "y": -123.83999999999999
+        },
+        "all_baseline_origins": [
+          {
+            "frame": "special_0",
+            "baseline_local_origin": {
+              "x": 180,
+              "y": 150
+            },
+            "baseline_pivot": {
+              "x": 112,
+              "y": 236
+            },
+            "baseline_scale": 1.44,
+            "right_relative_to_anchor": {
+              "x": 97.92,
+              "y": -123.83999999999999
+            },
+            "left_relative_to_anchor": {
+              "x": -97.92,
+              "y": -123.83999999999999
+            },
+            "used_for_initial_emission_at_elapsed_zero": true
+          },
+          {
+            "frame": "special_1",
+            "baseline_local_origin": {
+              "x": 192,
+              "y": 151
+            },
+            "baseline_pivot": {
+              "x": 112,
+              "y": 236
+            },
+            "baseline_scale": 1.44,
+            "right_relative_to_anchor": {
+              "x": 115.19999999999999,
+              "y": -122.39999999999999
+            },
+            "left_relative_to_anchor": {
+              "x": -115.19999999999999,
+              "y": -122.39999999999999
+            },
+            "used_for_initial_emission_at_elapsed_zero": false
+          },
+          {
+            "frame": "special_2",
+            "baseline_local_origin": {
+              "x": 201,
+              "y": 150
+            },
+            "baseline_pivot": {
+              "x": 112,
+              "y": 236
+            },
+            "baseline_scale": 1.44,
+            "right_relative_to_anchor": {
+              "x": 128.16,
+              "y": -123.83999999999999
+            },
+            "left_relative_to_anchor": {
+              "x": -128.16,
+              "y": -123.83999999999999
+            },
+            "used_for_initial_emission_at_elapsed_zero": false
+          }
+        ],
+        "fallback_used_only_without_manifest_origin": {
+          "right_relative_to_anchor": {
+            "x": 128.0,
+            "y": -112.0
+          }
+        },
+        "drawing_instruction": "Aim the muzzle/emitting hand at first_emission_origin from the first pose; preserve separate existing projectile."
+      }
+    },
+    "c": {
+      "master_reference": "assets/production/c/reference/master-existing.png",
+      "baseline_combat_manifest": "assets/placeholder/c-fighter.sprite.json",
+      "baseline_scale": 1.5466666666666666,
+      "body_metrics_world": {
+        "width": 101.33333333333333,
+        "standing_height": 224.0,
+        "crouch_height": 128.0
+      },
+      "close_attacks": {
+        "punch_light": {
+          "move_id": "CPointerJab",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 18,
+            "active_start": 5,
+            "active_end": 10
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 83,
+            "recovery_starts": 183,
+            "clip_ends": 300
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -141.33333333333334,
+            "w": 85.33333333333333,
+            "h": 42.666666666666664
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -136.0,
+            "y": -141.33333333333334,
+            "w": 85.33333333333333,
+            "h": 42.666666666666664
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 93.33333333333333,
+            "y": -120.00000000000001
+          }
+        },
+        "punch_heavy": {
+          "move_id": "CUnsafePoke",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 38,
+            "active_start": 12,
+            "active_end": 20
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 200,
+            "recovery_starts": 350,
+            "clip_ends": 633
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -146.66666666666669,
+            "w": 144.0,
+            "h": 53.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -194.66666666666666,
+            "y": -146.66666666666669,
+            "w": 144.0,
+            "h": 53.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 122.66666666666666,
+            "y": -120.00000000000003
+          }
+        },
+        "kick": {
+          "move_id": "CNullStepKick",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 30,
+            "active_start": 9,
+            "active_end": 16
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 150,
+            "recovery_starts": 283,
+            "clip_ends": 500
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -77.33333333333334,
+            "w": 136.0,
+            "h": 45.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -186.66666666666666,
+            "y": -77.33333333333334,
+            "w": 136.0,
+            "h": 45.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 118.66666666666666,
+            "y": -54.66666666666668
+          }
+        },
+        "sweep": {
+          "move_id": "CSegfaultSweep",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 36,
+            "active_start": 12,
+            "active_end": 20
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 200,
+            "recovery_starts": 350,
+            "clip_ends": 600
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -136.0,
+            "w": 162.66666666666666,
+            "h": 40.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -213.33333333333331,
+            "y": -136.0,
+            "w": 162.66666666666666,
+            "h": 40.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 132.0,
+            "y": -116.0
+          }
+        },
+        "overhead": {
+          "move_id": "CStackOverflow",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 36,
+            "active_start": 13,
+            "active_end": 20
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 216,
+            "recovery_starts": 350,
+            "clip_ends": 600
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -170.66666666666669,
+            "w": 114.66666666666666,
+            "h": 69.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -165.33333333333331,
+            "y": -170.66666666666669,
+            "w": 114.66666666666666,
+            "h": 69.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 108.0,
+            "y": -136.00000000000003
+          }
+        },
+        "anti_air": {
+          "move_id": "CInterruptVector",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 30,
+            "active_start": 7,
+            "active_end": 14
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 116,
+            "recovery_starts": 250,
+            "clip_ends": 500
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -341.3333333333333,
+            "w": 98.66666666666666,
+            "h": 114.66666666666666
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -149.33333333333331,
+            "y": -341.3333333333333,
+            "w": 98.66666666666666,
+            "h": 114.66666666666666
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 100.0,
+            "y": -284.0
+          }
+        },
+        "air_punch": {
+          "move_id": "AirPunch",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 22,
+            "active_start": 5,
+            "active_end": 13
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 83,
+            "recovery_starts": 233,
+            "clip_ends": 366
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -130.66666666666669,
+            "w": 96.0,
+            "h": 56.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -146.66666666666666,
+            "y": -130.66666666666669,
+            "w": 96.0,
+            "h": 56.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 98.66666666666666,
+            "y": -102.66666666666669
+          }
+        },
+        "air_kick": {
+          "move_id": "AirKick",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 26,
+            "active_start": 7,
+            "active_end": 16
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 116,
+            "recovery_starts": 283,
+            "clip_ends": 433
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -106.66666666666667,
+            "w": 117.33333333333333,
+            "h": 61.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -168.0,
+            "y": -106.66666666666667,
+            "w": 117.33333333333333,
+            "h": 61.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 109.33333333333333,
+            "y": -76.0
+          }
+        },
+        "throw": {
+          "move_id": "CUndefinedThrow",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 26,
+            "active_start": 7,
+            "active_end": 9
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 116,
+            "recovery_starts": 166,
+            "clip_ends": 433
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -184.0,
+            "w": 66.66666666666666,
+            "h": 162.66666666666666
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -117.33333333333331,
+            "y": -184.0,
+            "w": 66.66666666666666,
+            "h": 162.66666666666666
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 84.0,
+            "y": -102.66666666666667
+          }
+        }
+      },
+      "special": {
+        "spec": "C_PROJECTILE_SPEC",
+        "timing_ticks": {
+          "startup": 0,
+          "spawn_frame": 0,
+          "visual_duration": 20,
+          "cooldown": 56
+        },
+        "projectile_dimensions_world": {
+          "w": 104.0,
+          "h": 40.0
+        },
+        "projectile_speed_world_per_second": 480.0,
+        "emission_origin_source": "World::projectile_for_fighter -> projected_projectile_origin_for_clip(Special,0.0)",
+        "first_emission_origin_right_relative_to_anchor": {
+          "x": 148.48,
+          "y": -140.74666666666667
+        },
+        "all_baseline_origins": [
+          {
+            "frame": "special_0",
+            "baseline_local_origin": {
+              "x": 208,
+              "y": 145
+            },
+            "baseline_pivot": {
+              "x": 112,
+              "y": 236
+            },
+            "baseline_scale": 1.5466666666666666,
+            "right_relative_to_anchor": {
+              "x": 148.48,
+              "y": -140.74666666666667
+            },
+            "left_relative_to_anchor": {
+              "x": -148.48,
+              "y": -140.74666666666667
+            },
+            "used_for_initial_emission_at_elapsed_zero": true
+          }
+        ],
+        "fallback_used_only_without_manifest_origin": {
+          "right_relative_to_anchor": {
+            "x": 146.66666666666666,
+            "y": -120.0
+          }
+        },
+        "drawing_instruction": "Aim the muzzle/emitting hand at first_emission_origin from the first pose; preserve separate existing projectile."
+      }
+    },
+    "python": {
+      "master_reference": "assets/production/python/reference/master-existing.png",
+      "baseline_combat_manifest": "assets/placeholder/python-fighter.sprite.json",
+      "baseline_scale": 0.6666666666666666,
+      "body_metrics_world": {
+        "width": 101.33333333333333,
+        "standing_height": 224.0,
+        "crouch_height": 128.0
+      },
+      "close_attacks": {
+        "punch_light": {
+          "move_id": "PythonSnakeBite",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 17,
+            "active_start": 4,
+            "active_end": 9
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 66,
+            "recovery_starts": 166,
+            "clip_ends": 283
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -146.66666666666669,
+            "w": 88.0,
+            "h": 37.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -138.66666666666666,
+            "y": -146.66666666666669,
+            "w": 88.0,
+            "h": 37.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 94.66666666666666,
+            "y": -128.00000000000003
+          }
+        },
+        "punch_heavy": {
+          "move_id": "PythonDataStrike",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 31,
+            "active_start": 10,
+            "active_end": 18
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 166,
+            "recovery_starts": 316,
+            "clip_ends": 516
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -149.33333333333334,
+            "w": 122.66666666666666,
+            "h": 53.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -173.33333333333331,
+            "y": -149.33333333333334,
+            "w": 122.66666666666666,
+            "h": 53.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 112.0,
+            "y": -122.66666666666669
+          }
+        },
+        "kick": {
+          "move_id": "PythonHeelKick",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 25,
+            "active_start": 8,
+            "active_end": 14
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 133,
+            "recovery_starts": 250,
+            "clip_ends": 416
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -80.0,
+            "w": 114.66666666666666,
+            "h": 45.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -165.33333333333331,
+            "y": -80.0,
+            "w": 114.66666666666666,
+            "h": 45.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 108.0,
+            "y": -57.333333333333336
+          }
+        },
+        "sweep": {
+          "move_id": "PythonIndentSweep",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 29,
+            "active_start": 9,
+            "active_end": 16
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 150,
+            "recovery_starts": 283,
+            "clip_ends": 483
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -136.0,
+            "w": 130.66666666666666,
+            "h": 40.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -181.33333333333331,
+            "y": -136.0,
+            "w": 130.66666666666666,
+            "h": 40.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 116.0,
+            "y": -116.0
+          }
+        },
+        "overhead": {
+          "move_id": "PythonTracebackOverhead",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 31,
+            "active_start": 11,
+            "active_end": 17
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 183,
+            "recovery_starts": 300,
+            "clip_ends": 516
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -168.0,
+            "w": 104.0,
+            "h": 64.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -154.66666666666666,
+            "y": -168.0,
+            "w": 104.0,
+            "h": 64.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 102.66666666666666,
+            "y": -136.0
+          }
+        },
+        "anti_air": {
+          "move_id": "PythonVisionAntiAir",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 25,
+            "active_start": 6,
+            "active_end": 12
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 100,
+            "recovery_starts": 216,
+            "clip_ends": 416
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -341.3333333333333,
+            "w": 90.66666666666666,
+            "h": 117.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -141.33333333333331,
+            "y": -341.3333333333333,
+            "w": 90.66666666666666,
+            "h": 117.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 96.0,
+            "y": -282.66666666666663
+          }
+        },
+        "air_punch": {
+          "move_id": "AirPunch",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 22,
+            "active_start": 5,
+            "active_end": 13
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 83,
+            "recovery_starts": 233,
+            "clip_ends": 366
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -130.66666666666669,
+            "w": 96.0,
+            "h": 56.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -146.66666666666666,
+            "y": -130.66666666666669,
+            "w": 96.0,
+            "h": 56.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 98.66666666666666,
+            "y": -102.66666666666669
+          }
+        },
+        "air_kick": {
+          "move_id": "AirKick",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 26,
+            "active_start": 7,
+            "active_end": 16
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 116,
+            "recovery_starts": 283,
+            "clip_ends": 433
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -106.66666666666667,
+            "w": 117.33333333333333,
+            "h": 61.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -168.0,
+            "y": -106.66666666666667,
+            "w": 117.33333333333333,
+            "h": 61.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 109.33333333333333,
+            "y": -76.0
+          }
+        },
+        "throw": {
+          "move_id": "PythonConstrictThrow",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 24,
+            "active_start": 7,
+            "active_end": 9
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 116,
+            "recovery_starts": 166,
+            "clip_ends": 400
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -184.0,
+            "w": 69.33333333333333,
+            "h": 157.33333333333331
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -120.0,
+            "y": -184.0,
+            "w": 69.33333333333333,
+            "h": 157.33333333333331
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 85.33333333333333,
+            "y": -105.33333333333334
+          }
+        }
+      },
+      "special": {
+        "spec": "PYTHON_PROJECTILE_SPEC",
+        "timing_ticks": {
+          "startup": 0,
+          "spawn_frame": 0,
+          "visual_duration": 18,
+          "cooldown": 50
+        },
+        "projectile_dimensions_world": {
+          "w": 85.33333333333333,
+          "h": 40.0
+        },
+        "projectile_speed_world_per_second": 520.0,
+        "emission_origin_source": "World::projectile_for_fighter -> projected_projectile_origin_for_clip(Special,0.0)",
+        "first_emission_origin_right_relative_to_anchor": {
+          "x": 205.33333333333331,
+          "y": -157.33333333333331
+        },
+        "all_baseline_origins": [
+          {
+            "frame": "special_0",
+            "baseline_local_origin": {
+              "x": 532,
+              "y": 236
+            },
+            "baseline_pivot": {
+              "x": 224,
+              "y": 472
+            },
+            "baseline_scale": 0.6666666666666666,
+            "right_relative_to_anchor": {
+              "x": 205.33333333333331,
+              "y": -157.33333333333331
+            },
+            "left_relative_to_anchor": {
+              "x": -205.33333333333331,
+              "y": -157.33333333333331
+            },
+            "used_for_initial_emission_at_elapsed_zero": true
+          }
+        ],
+        "fallback_used_only_without_manifest_origin": {
+          "right_relative_to_anchor": {
+            "x": 141.33333333333331,
+            "y": -117.33333333333333
+          }
+        },
+        "drawing_instruction": "Aim the muzzle/emitting hand at first_emission_origin from the first pose; preserve separate existing projectile."
+      }
+    },
+    "cpp": {
+      "master_reference": "assets/production/cpp/reference/master-existing.png",
+      "baseline_combat_manifest": "assets/placeholder/cpp-fighter.sprite.json",
+      "baseline_scale": 0.6666666666666666,
+      "body_metrics_world": {
+        "width": 101.33333333333333,
+        "standing_height": 224.0,
+        "crouch_height": 128.0
+      },
+      "close_attacks": {
+        "punch_light": {
+          "move_id": "CppReferenceJab",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 16,
+            "active_start": 4,
+            "active_end": 8
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 66,
+            "recovery_starts": 150,
+            "clip_ends": 266
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -144.0,
+            "w": 77.33333333333333,
+            "h": 40.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -128.0,
+            "y": -144.0,
+            "w": 77.33333333333333,
+            "h": 40.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 89.33333333333333,
+            "y": -124.0
+          }
+        },
+        "punch_heavy": {
+          "move_id": "CppTemplateStrike",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 33,
+            "active_start": 10,
+            "active_end": 18
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 166,
+            "recovery_starts": 316,
+            "clip_ends": 550
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -149.33333333333334,
+            "w": 138.66666666666666,
+            "h": 53.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -189.33333333333331,
+            "y": -149.33333333333334,
+            "w": 138.66666666666666,
+            "h": 53.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 120.0,
+            "y": -122.66666666666669
+          }
+        },
+        "kick": {
+          "move_id": "CppOperatorKick",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 26,
+            "active_start": 8,
+            "active_end": 15
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 133,
+            "recovery_starts": 266,
+            "clip_ends": 433
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -80.0,
+            "w": 136.0,
+            "h": 45.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -186.66666666666666,
+            "y": -80.0,
+            "w": 136.0,
+            "h": 45.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 118.66666666666666,
+            "y": -57.333333333333336
+          }
+        },
+        "sweep": {
+          "move_id": "CppVectorSweep",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 31,
+            "active_start": 9,
+            "active_end": 17
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 150,
+            "recovery_starts": 300,
+            "clip_ends": 516
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -136.0,
+            "w": 154.66666666666666,
+            "h": 40.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -205.33333333333331,
+            "y": -136.0,
+            "w": 154.66666666666666,
+            "h": 40.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 128.0,
+            "y": -116.0
+          }
+        },
+        "overhead": {
+          "move_id": "CppVirtualOverhead",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 32,
+            "active_start": 11,
+            "active_end": 18
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 183,
+            "recovery_starts": 316,
+            "clip_ends": 533
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -168.0,
+            "w": 112.0,
+            "h": 69.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -162.66666666666666,
+            "y": -168.0,
+            "w": 112.0,
+            "h": 69.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 106.66666666666666,
+            "y": -133.33333333333334
+          }
+        },
+        "anti_air": {
+          "move_id": "CppExceptionAntiAir",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 27,
+            "active_start": 6,
+            "active_end": 13
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 100,
+            "recovery_starts": 233,
+            "clip_ends": 450
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -341.3333333333333,
+            "w": 96.0,
+            "h": 117.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -146.66666666666666,
+            "y": -341.3333333333333,
+            "w": 96.0,
+            "h": 117.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 98.66666666666666,
+            "y": -282.66666666666663
+          }
+        },
+        "air_punch": {
+          "move_id": "AirPunch",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 22,
+            "active_start": 5,
+            "active_end": 13
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 83,
+            "recovery_starts": 233,
+            "clip_ends": 366
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -130.66666666666669,
+            "w": 96.0,
+            "h": 56.0
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -146.66666666666666,
+            "y": -130.66666666666669,
+            "w": 96.0,
+            "h": 56.0
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 98.66666666666666,
+            "y": -102.66666666666669
+          }
+        },
+        "air_kick": {
+          "move_id": "AirKick",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 26,
+            "active_start": 7,
+            "active_end": 16
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 116,
+            "recovery_starts": 283,
+            "clip_ends": 433
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -106.66666666666667,
+            "w": 117.33333333333333,
+            "h": 61.33333333333333
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -168.0,
+            "y": -106.66666666666667,
+            "w": 117.33333333333333,
+            "h": 61.33333333333333
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 109.33333333333333,
+            "y": -76.0
+          }
+        },
+        "throw": {
+          "move_id": "CppMoveThrow",
+          "source": "src/combat/move_data.rs",
+          "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+          "timing_ticks": {
+            "duration": 23,
+            "active_start": 6,
+            "active_end": 8
+          },
+          "active_end_inclusive": true,
+          "suggested_phase_boundary_ms": {
+            "active_starts": 100,
+            "recovery_starts": 150,
+            "clip_ends": 383
+          },
+          "active_box_right_relative_to_anchor": {
+            "x": 50.666666666666664,
+            "y": -184.0,
+            "w": 66.66666666666666,
+            "h": 157.33333333333331
+          },
+          "active_box_left_relative_to_anchor": {
+            "x": -117.33333333333331,
+            "y": -184.0,
+            "w": 66.66666666666666,
+            "h": 157.33333333333331
+          },
+          "suggested_contact_center_right_relative_to_anchor": {
+            "x": 84.0,
+            "y": -105.33333333333334
+          }
+        }
+      },
+      "special": {
+        "spec": "CPP_PROJECTILE_SPEC",
+        "timing_ticks": {
+          "startup": 0,
+          "spawn_frame": 0,
+          "visual_duration": 18,
+          "cooldown": 52
+        },
+        "projectile_dimensions_world": {
+          "w": 80.0,
+          "h": 42.666666666666664
+        },
+        "projectile_speed_world_per_second": 540.0,
+        "emission_origin_source": "World::projectile_for_fighter -> projected_projectile_origin_for_clip(Special,0.0)",
+        "first_emission_origin_right_relative_to_anchor": {
+          "x": 205.33333333333331,
+          "y": -157.33333333333331
+        },
+        "all_baseline_origins": [
+          {
+            "frame": "special_0",
+            "baseline_local_origin": {
+              "x": 532,
+              "y": 236
+            },
+            "baseline_pivot": {
+              "x": 224,
+              "y": 472
+            },
+            "baseline_scale": 0.6666666666666666,
+            "right_relative_to_anchor": {
+              "x": 205.33333333333331,
+              "y": -157.33333333333331
+            },
+            "left_relative_to_anchor": {
+              "x": -205.33333333333331,
+              "y": -157.33333333333331
+            },
+            "used_for_initial_emission_at_elapsed_zero": true
+          }
+        ],
+        "fallback_used_only_without_manifest_origin": {
+          "right_relative_to_anchor": {
+            "x": 141.33333333333331,
+            "y": -117.33333333333333
+          }
+        },
+        "drawing_instruction": "Aim the muzzle/emitting hand at first_emission_origin from the first pose; preserve separate existing projectile."
+      }
+    }
+  },
+  "source_evidence": [
+    {
+      "path": "src/characters/mod.rs",
+      "sha256": "2cd5d841673f5b79643ab26f4ef2fc0d92c21873034abbc711b078d3732fb23e"
+    },
+    {
+      "path": "src/combat/move_data.rs",
+      "sha256": "2a544c99fb2e693733345496a8a90c543896515de6fe76996ef54e240337efea"
+    },
+    {
+      "path": "src/combat/projectile.rs",
+      "sha256": "41c2f6d511d3f75ca2d0fde98ad8771cd3a4d1081738931740ff5c9baedab81d"
+    },
+    {
+      "path": "src/combat/fighter.rs",
+      "sha256": "57958aedc718d46d69e28393257f64695ff278e7f7d12b3f0028c5b829c57fe8"
+    },
+    {
+      "path": "src/engine/sprites/combat.rs",
+      "sha256": "33ffde8bd1085d86563a67b2fb0cb9e747ddf7b9525005dd2c0aaea3a55296c3"
+    },
+    {
+      "path": "src/game/world.rs",
+      "sha256": "c444bdd0b294e8dc6dc85b3cc2de1703c6cfcc4ab3950ee3967f6b56fa463b57"
+    },
+    {
+      "path": "src/config.rs",
+      "sha256": "7e104219fb1e246f6dd0d0b7fe407f0eea2ec3b290da7449c5237c7f1bd89992"
+    },
+    {
+      "path": "assets/tuning/character-body-metrics.json",
+      "sha256": "7f77453d98681adf5b6b0d8020ca8167dcbb8245ea97363425c5fc9cf309c962"
+    },
+    {
+      "path": "assets/placeholder/duke-fighter.sprite.json",
+      "sha256": "f46c78756f455d3a741bdac37ca66d88711e77b5d048fc8ff7b021ed062d847d"
+    },
+    {
+      "path": "assets/placeholder/go-fighter.sprite.json",
+      "sha256": "b03f5fdca18a7d6f87c46bfef23fae3ce23b99ad218c1abdfa182e26ec1a6027"
+    },
+    {
+      "path": "assets/placeholder/c-fighter.sprite.json",
+      "sha256": "c1cb97c8b4cf1e5f55179a79a8c136537191835c4fde2ea4eb15791fbb3ce19b"
+    },
+    {
+      "path": "assets/placeholder/python-fighter.sprite.json",
+      "sha256": "a593f46d43912b388a8d4d822f185d70e8489d1d180c5d5cdf051f1989385ecb"
+    },
+    {
+      "path": "assets/placeholder/cpp-fighter.sprite.json",
+      "sha256": "20581c2868fbbfb8a5da345ef950171ee2c5299359d04c38b7842265c7ac327e"
+    }
+  ]
+}

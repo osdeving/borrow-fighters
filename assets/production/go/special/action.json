@@ -1,0 +1,56 @@
+{
+  "action": "special",
+  "source": "special/source-v2.png",
+  "sheet": "special/keyed.png",
+  "loop": false,
+  "source_body_height_reference_px": 447,
+  "normalization_note": "v2 compact palm emission chosen to meet the existing origin97.92px forward/123.84px up from frame0. Projectile remains the separate baseline asset; no baked projectile or candidate combat metadata.",
+  "frames": [
+    {
+      "name": "special_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 334,
+        "y": 680
+      },
+      "duration_ms": 80,
+      "phase": "emit"
+    },
+    {
+      "name": "special_01",
+      "source_rect": {
+        "x": 591,
+        "y": 0,
+        "w": 592,
+        "h": 887
+      },
+      "pivot": {
+        "x": 317,
+        "y": 680
+      },
+      "duration_ms": 80,
+      "phase": "recoil"
+    },
+    {
+      "name": "special_02",
+      "source_rect": {
+        "x": 1183,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 272,
+        "y": 681
+      },
+      "duration_ms": 107,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Built-in image_gen, original narrow Go master and generated idle continuity. Flat magenta extracted without Rust contour mode; isolated matte corner pixels removed where present. Candidate visual only; baseline combat remains authoritative."
+}

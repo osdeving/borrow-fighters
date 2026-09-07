@@ -1,0 +1,88 @@
+{
+  "action": "air_punch",
+  "source": "air_punch/source-v2.png",
+  "sheet": "air_punch/keyed.png",
+  "loop": false,
+  "source_body_height_reference_px": 528,
+  "normalization_note": "v2 raises contact from the original below-belt diving punch. Pivots register torso/head to a stable virtual floor across the three source drawings; physics supplies air displacement.",
+  "frames": [
+    {
+      "name": "air_punch_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 350,
+        "y": 700
+      },
+      "duration_ms": 83,
+      "phase": "startup"
+    },
+    {
+      "name": "air_punch_01",
+      "source_rect": {
+        "x": 591,
+        "y": 0,
+        "w": 592,
+        "h": 887
+      },
+      "pivot": {
+        "x": 275,
+        "y": 734
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "air_punch_02",
+      "source_rect": {
+        "x": 1183,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 257,
+        "y": 702
+      },
+      "duration_ms": 133,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Built-in image_gen, original narrow Go master and generated idle continuity. Flat magenta extracted without Rust contour mode; isolated matte corner pixels removed where present. Candidate visual only; baseline combat remains authoritative.",
+  "timing_reference": {
+    "move_id": "AirPunch",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 22,
+      "active_start": 5,
+      "active_end": 13
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 83,
+      "recovery_starts": 233,
+      "clip_ends": 366
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -130.66666666666669,
+      "w": 96.0,
+      "h": 56.0
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -146.66666666666666,
+      "y": -130.66666666666669,
+      "w": 96.0,
+      "h": 56.0
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 98.66666666666666,
+      "y": -102.66666666666669
+    }
+  }
+}

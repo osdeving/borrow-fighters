@@ -1,0 +1,58 @@
+{
+  "source": "overhead/source-v2.png",
+  "sheet": "overhead/keyed.png",
+  "reviewed": false,
+  "loop": false,
+  "status": "generated candidate; source inspected, full runtime review pending",
+  "source_body_height_reference_px": 614,
+  "review_notes": [
+    "Active arm corrected from knee level to forward waist-height stopping point. Knuckles around (+127,-145) world relative to explicit support pivot, within unchanged overhead contact box. First overhead wind-up then low descending hammerfist and recovery. Body hinge deliberate; no collision or timing change."
+  ],
+  "frames": [
+    {
+      "name": "overhead_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 682,
+        "h": 768
+      },
+      "pivot": {
+        "x": 305,
+        "y": 732
+      },
+      "duration_ms": 183,
+      "phase": "startup"
+    },
+    {
+      "name": "overhead_01",
+      "source_rect": {
+        "x": 682,
+        "y": 0,
+        "w": 683,
+        "h": 768
+      },
+      "pivot": {
+        "x": 285,
+        "y": 732
+      },
+      "duration_ms": 117,
+      "phase": "active"
+    },
+    {
+      "name": "overhead_02",
+      "source_rect": {
+        "x": 1365,
+        "y": 0,
+        "w": 683,
+        "h": 768
+      },
+      "pivot": {
+        "x": 352,
+        "y": 735
+      },
+      "duration_ms": 216,
+      "phase": "recovery"
+    }
+  ]
+}

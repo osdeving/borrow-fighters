@@ -1,0 +1,59 @@
+{
+  "source": "air_punch/source-v1.png",
+  "sheet": "air_punch/keyed.png",
+  "reviewed": false,
+  "loop": false,
+  "status": "generated candidate; source inspected, full runtime review pending",
+  "source_body_height_reference_px": 620,
+  "review_notes": [
+    "Virtual pivots align waist near -172 world across the airborne phases; active source torso/waist was drawn 77 pixels lower, so it is corrected by metadata. Head lowers intentionally as torso hinges into dive punch. Active fist near (+97,-98) world, inside unchanged aerial punch box. No landing pose or baked jump trajectory.",
+    "Transparent bottom padding expands keyed canvas to 800px so the active virtual pivot at y=777 remains inside its explicit source cell; original generated source is preserved."
+  ],
+  "frames": [
+    {
+      "name": "air_punch_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 682,
+        "h": 800
+      },
+      "pivot": {
+        "x": 365,
+        "y": 700
+      },
+      "duration_ms": 83,
+      "phase": "startup"
+    },
+    {
+      "name": "air_punch_01",
+      "source_rect": {
+        "x": 682,
+        "y": 0,
+        "w": 683,
+        "h": 800
+      },
+      "pivot": {
+        "x": 298,
+        "y": 777
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "air_punch_02",
+      "source_rect": {
+        "x": 1365,
+        "y": 0,
+        "w": 683,
+        "h": 800
+      },
+      "pivot": {
+        "x": 190,
+        "y": 700
+      },
+      "duration_ms": 133,
+      "phase": "recovery"
+    }
+  ]
+}

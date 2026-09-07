@@ -1,0 +1,52 @@
+{
+  "sheet": "special/keyed.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "special_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 736,
+        "h": 736
+      },
+      "pivot": {
+        "x": 285,
+        "y": 650
+      },
+      "duration_ms": 100,
+      "phase": "emission"
+    },
+    {
+      "name": "special_01",
+      "source_rect": {
+        "x": 736,
+        "y": 0,
+        "w": 630,
+        "h": 736
+      },
+      "pivot": {
+        "x": 219,
+        "y": 650
+      },
+      "duration_ms": 100,
+      "phase": "recoil"
+    },
+    {
+      "name": "special_02",
+      "source_rect": {
+        "x": 1366,
+        "y": 0,
+        "w": 682,
+        "h": 736
+      },
+      "pivot": {
+        "x": 187,
+        "y": 650
+      },
+      "duration_ms": 217,
+      "phase": "recovery"
+    }
+  ]
+}

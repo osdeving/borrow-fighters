@@ -1,0 +1,52 @@
+{
+  "sheet": "kick/keyed.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "kick_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 620,
+        "h": 736
+      },
+      "pivot": {
+        "x": 270,
+        "y": 688
+      },
+      "duration_ms": 150,
+      "phase": "startup"
+    },
+    {
+      "name": "kick_01",
+      "source_rect": {
+        "x": 620,
+        "y": 0,
+        "w": 770,
+        "h": 736
+      },
+      "pivot": {
+        "x": 240,
+        "y": 688
+      },
+      "duration_ms": 133,
+      "phase": "active"
+    },
+    {
+      "name": "kick_02",
+      "source_rect": {
+        "x": 1390,
+        "y": 0,
+        "w": 658,
+        "h": 736
+      },
+      "pivot": {
+        "x": 316,
+        "y": 688
+      },
+      "duration_ms": 183,
+      "phase": "recovery"
+    }
+  ]
+}

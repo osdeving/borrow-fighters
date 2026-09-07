@@ -1,0 +1,58 @@
+{
+  "source": "punch_light/source-v5.png",
+  "sheet": "punch_light/keyed.png",
+  "reviewed": false,
+  "loop": false,
+  "status": "generated candidate; source inspected, full runtime review pending",
+  "source_body_height_reference_px": 620,
+  "review_notes": [
+    "Native Lab showed v4 fist mostly above the existing box. v5 lowers only active arm/hand into the box; source support feet preserved. Active knuckles now approximately(+134,-131) world, most of hand inside the far end of unchanged jab box. Front-support pivot accounts for lunge without increasing physical reach. Source body leans forward/down intentionally; startup/recovery unchanged."
+  ],
+  "frames": [
+    {
+      "name": "punch_light_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 682,
+        "h": 768
+      },
+      "pivot": {
+        "x": 330,
+        "y": 699
+      },
+      "duration_ms": 66,
+      "phase": "startup"
+    },
+    {
+      "name": "punch_light_01",
+      "source_rect": {
+        "x": 682,
+        "y": 0,
+        "w": 730,
+        "h": 768
+      },
+      "pivot": {
+        "x": 348,
+        "y": 699
+      },
+      "duration_ms": 100,
+      "phase": "active"
+    },
+    {
+      "name": "punch_light_02",
+      "source_rect": {
+        "x": 1412,
+        "y": 0,
+        "w": 636,
+        "h": 768
+      },
+      "pivot": {
+        "x": 253,
+        "y": 699
+      },
+      "duration_ms": 117,
+      "phase": "recovery"
+    }
+  ]
+}

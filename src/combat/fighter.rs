@@ -147,6 +147,10 @@ pub struct Fighter {
     special_visual_timer: f32,
     hitstun_timer: f32,
     blockstun_timer: f32,
+    reaction_visual_elapsed: f32,
+    guard_visual_elapsed: f32,
+    crouch_visual_elapsed: f32,
+    jump_visual_elapsed: f32,
     whiff_recovery_timer: f32,
     attack: Option<AttackState>,
 }
@@ -235,6 +239,10 @@ impl Fighter {
             special_visual_timer: 0.0,
             hitstun_timer: 0.0,
             blockstun_timer: 0.0,
+            reaction_visual_elapsed: 0.0,
+            guard_visual_elapsed: 0.0,
+            crouch_visual_elapsed: 0.0,
+            jump_visual_elapsed: 0.0,
             whiff_recovery_timer: 0.0,
             attack: None,
         }
@@ -254,6 +262,12 @@ impl Fighter {
             return events;
         }
 
+        if self.is_reacting() {
+            self.reaction_visual_elapsed += dt;
+        }
+        let was_blocking = self.blocking;
+        let was_crouching = self.crouching;
+        let was_grounded = self.grounded;
         self.projectile_cooldown = tick_timer(self.projectile_cooldown, dt);
         self.special_visual_timer = tick_timer(self.special_visual_timer, dt);
         self.hitstun_timer = tick_timer(self.hitstun_timer, dt);
@@ -264,12 +278,23 @@ impl Fighter {
         let requested_move = input.requested_move_spec(self.move_ids, self.facing, self.grounded);
         let wants_attack = requested_move.is_some();
         self.crouching = !action_locked && input.crouch && self.grounded && self.attack.is_none();
+        self.crouch_visual_elapsed = if self.crouching && was_crouching {
+            self.crouch_visual_elapsed + dt
+        } else {
+            0.0
+        };
         self.blocking = self.in_blockstun()
             || (!action_locked
                 && input.block
                 && self.grounded
                 && self.attack.is_none()
                 && !wants_attack);
+        self.guard_visual_elapsed =
+            if self.blocking && was_blocking && self.crouching == was_crouching {
+                self.guard_visual_elapsed + dt
+            } else {
+                0.0
+            };
         self.update_horizontal_velocity(dt, input);
 
         let can_start_action = !action_locked && !self.blocking && self.attack.is_none();
@@ -300,6 +325,11 @@ impl Fighter {
             self.velocity.y = 0.0;
             self.grounded = true;
         }
+        self.jump_visual_elapsed = if !self.grounded && !was_grounded {
+            self.jump_visual_elapsed + dt
+        } else {
+            0.0
+        };
 
         if let Some(mut attack) = self.attack {
             attack.elapsed += dt;
@@ -547,6 +577,28 @@ impl Fighter {
         FrameCount::from_elapsed_seconds(self.blockstun_timer)
     }
 
+    /// Returns presentation time since the latest hit or blocked impact.
+    ///
+    /// This clock never controls stun duration, collisions, or action availability.
+    pub fn reaction_visual_elapsed_seconds(&self) -> f32 {
+        self.reaction_visual_elapsed
+    }
+
+    /// Returns presentation time since the current held guard began.
+    pub fn guard_visual_elapsed_seconds(&self) -> f32 {
+        self.guard_visual_elapsed
+    }
+
+    /// Returns presentation time since entering the current crouch.
+    pub fn crouch_visual_elapsed_seconds(&self) -> f32 {
+        self.crouch_visual_elapsed
+    }
+
+    /// Returns presentation time since leaving the floor; physics stays authoritative.
+    pub fn jump_visual_elapsed_seconds(&self) -> f32 {
+        self.jump_visual_elapsed
+    }
+
     /// Returns remaining whiff recovery in whole frames.
     pub fn whiff_recovery_remaining_frames(&self) -> FrameCount {
         FrameCount::from_elapsed_seconds(self.whiff_recovery_timer)
@@ -659,6 +711,7 @@ impl Fighter {
     }
 
     fn apply_hit_reaction(&mut self, hit_reaction: HitReaction, blocked: bool) -> f32 {
+        self.reaction_visual_elapsed = 0.0;
         self.velocity.x = 0.0;
         self.whiff_recovery_timer = 0.0;
         if blocked {

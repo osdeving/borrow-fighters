@@ -223,6 +223,8 @@ temp/
 cache/
 .cache/
 .sass-cache/
+__pycache__/
+*.py[cod]
 
 *.tmp
 *.temp

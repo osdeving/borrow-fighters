@@ -1,0 +1,25 @@
+{
+  "method": "generic magenta removal without rust-contour, then remove isolated alpha components smaller than32pixels using8connectivity; selected source sheets preserved",
+  "removed_isolated_pixels": {
+    "idle": 4,
+    "walk": 5,
+    "jump": 2,
+    "crouch": 2,
+    "block": 6,
+    "crouch_block": 1,
+    "hit": 32,
+    "punch_light": 16,
+    "punch_heavy": 7,
+    "kick": 0,
+    "sweep": 16,
+    "overhead": 2,
+    "anti_air": 13,
+    "air_punch": 3,
+    "air_kick": 0,
+    "throw": 7,
+    "special": 4,
+    "spawn": 8,
+    "victory": 9,
+    "defeat": 27
+  }
+}

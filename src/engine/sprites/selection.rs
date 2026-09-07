@@ -3,7 +3,10 @@
 //! Combat stays authoritative; this file only translates visible fighter state
 //! into animation names.
 
-use crate::combat::fighter::{AttackKind, Fighter};
+use crate::{
+    combat::fighter::{AttackKind, Fighter, PlayerSlot},
+    game::world::MatchOutcome,
+};
 
 /// Visual animation clips expected by the current fighter sprite manifest.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -14,6 +17,7 @@ pub enum FighterSpriteClip {
     Crouch,
     Jump,
     Block,
+    CrouchBlock,
     Hit,
     PunchLight,
     PunchHeavy,
@@ -26,9 +30,38 @@ pub enum FighterSpriteClip {
     Throw,
     Special,
     Taunt,
+    Victory,
+    Defeat,
 }
 
 impl FighterSpriteClip {
+    /// Clips required before a candidate can replace a complete fighter atlas.
+    ///
+    /// Legacy atlases may still use visual aliases; partial production belongs
+    /// in the Sprite Viewer until each implemented action has its own clip.
+    pub const REQUIRED: [Self; 20] = [
+        Self::Spawn,
+        Self::Idle,
+        Self::Walk,
+        Self::Crouch,
+        Self::Jump,
+        Self::Block,
+        Self::CrouchBlock,
+        Self::Hit,
+        Self::PunchLight,
+        Self::PunchHeavy,
+        Self::Kick,
+        Self::Sweep,
+        Self::Overhead,
+        Self::AntiAir,
+        Self::AirPunch,
+        Self::AirKick,
+        Self::Throw,
+        Self::Special,
+        Self::Victory,
+        Self::Defeat,
+    ];
+
     /// Returns the clip name used by sprite manifests.
     pub const fn as_str(self) -> &'static str {
         match self {
@@ -38,6 +71,7 @@ impl FighterSpriteClip {
             Self::Crouch => "crouch",
             Self::Jump => "jump",
             Self::Block => "block",
+            Self::CrouchBlock => "crouch_block",
             Self::Hit => "hit",
             Self::PunchLight => "punch_light",
             Self::PunchHeavy => "punch_heavy",
@@ -50,8 +84,27 @@ impl FighterSpriteClip {
             Self::Throw => "throw",
             Self::Special => "special",
             Self::Taunt => "taunt",
+            Self::Victory => "victory",
+            Self::Defeat => "defeat",
         }
     }
+}
+
+/// Selects non-interactive entrance and outcome clips for either player.
+///
+/// Entrance also works when `spawn` lives in the main fighter manifest.
+pub fn match_fighter_sprite_clip(
+    outcome: Option<MatchOutcome>,
+    slot: PlayerSlot,
+    spawn_intro: bool,
+) -> Option<FighterSpriteClip> {
+    if let Some(outcome) = outcome {
+        return Some(match outcome {
+            MatchOutcome::Winner(winner) if winner == slot => FighterSpriteClip::Victory,
+            MatchOutcome::Winner(_) | MatchOutcome::Draw => FighterSpriteClip::Defeat,
+        });
+    }
+    spawn_intro.then_some(FighterSpriteClip::Spawn)
 }
 
 /// Frames in `fighter-greybox-spritesheet.png`.
@@ -89,7 +142,11 @@ pub fn fighter_sprite_clip(fighter: &Fighter) -> FighterSpriteClip {
     }
 
     if fighter.blocking {
-        return FighterSpriteClip::Block;
+        return if fighter.crouching {
+            FighterSpriteClip::CrouchBlock
+        } else {
+            FighterSpriteClip::Block
+        };
     }
 
     if fighter.special_elapsed_seconds().is_some() {
@@ -123,6 +180,35 @@ pub fn fighter_sprite_clip(fighter: &Fighter) -> FighterSpriteClip {
 
 /// Returns elapsed clip time for the fighter's current visual state.
 pub fn fighter_clip_elapsed_seconds(fighter: &Fighter, world_elapsed_seconds: f32) -> f32 {
+    if fighter.in_hitstun() || fighter.in_blockstun() {
+        return fighter.reaction_visual_elapsed_seconds();
+    }
+    if fighter.blocking {
+        return fighter.guard_visual_elapsed_seconds();
+    }
+    if let Some(elapsed) = fighter.special_elapsed_seconds() {
+        return elapsed;
+    }
+    if let Some(elapsed) = fighter.attack_elapsed_seconds() {
+        return elapsed;
+    }
+    if fighter.crouching {
+        return fighter.crouch_visual_elapsed_seconds();
+    }
+    if !fighter.grounded {
+        return fighter.jump_visual_elapsed_seconds();
+    }
+    fighter_combat_clip_elapsed_seconds(fighter, world_elapsed_seconds)
+}
+
+/// Preserves the existing metadata clock independently from presentation fixes.
+///
+/// Advancing reaction, guard, crouch, or jump artwork must not silently switch
+/// collision boxes. Recalibrating metadata timing requires a gameplay review.
+pub(crate) fn fighter_combat_clip_elapsed_seconds(
+    fighter: &Fighter,
+    world_elapsed_seconds: f32,
+) -> f32 {
     if fighter.in_hitstun() || fighter.in_blockstun() {
         return 0.0;
     }
@@ -161,6 +247,7 @@ pub fn fighter_sprite_frame(fighter: &Fighter) -> FighterSpriteFrame {
         FighterSpriteClip::Crouch => FighterSpriteFrame::Crouch,
         FighterSpriteClip::Jump => FighterSpriteFrame::Jump,
         FighterSpriteClip::Block => FighterSpriteFrame::Block,
+        FighterSpriteClip::CrouchBlock => FighterSpriteFrame::Block,
         FighterSpriteClip::Hit => FighterSpriteFrame::Idle,
         FighterSpriteClip::PunchLight => FighterSpriteFrame::LightPunch,
         FighterSpriteClip::PunchHeavy => FighterSpriteFrame::HeavyPunch,
@@ -173,5 +260,7 @@ pub fn fighter_sprite_frame(fighter: &Fighter) -> FighterSpriteFrame {
         FighterSpriteClip::Throw => FighterSpriteFrame::LightPunch,
         FighterSpriteClip::Special => FighterSpriteFrame::Idle,
         FighterSpriteClip::Taunt => FighterSpriteFrame::Idle,
+        FighterSpriteClip::Victory => FighterSpriteFrame::Idle,
+        FighterSpriteClip::Defeat => FighterSpriteFrame::Idle,
     }
 }

@@ -49,3 +49,32 @@ fn showcase_manual_controls_skip_replay_and_pause() {
     assert!(showcase.paused());
     assert_eq!(showcase.lab().current_frame(), paused_frame);
 }
+
+#[test]
+fn showcase_keeps_baseline_metadata_when_manual_and_automatic_playback_replace_the_lab() {
+    let baseline = borrow_fighters::engine::sprites::SpriteManifest::load(
+        "assets/placeholder/rust-fighter.sprite.json",
+    )
+    .unwrap();
+    let mut showcase = MoveShowcase::default();
+    showcase.set_combat_manifest(Some(baseline.clone()));
+    for input in [
+        CombatLabInput::default(),
+        CombatLabInput {
+            next_move: true,
+            ..CombatLabInput::default()
+        },
+        CombatLabInput {
+            replay: true,
+            ..CombatLabInput::default()
+        },
+    ] {
+        showcase.update(input);
+        assert!(showcase.lab().projected_combat().is_some());
+    }
+    for _ in 0..90 {
+        showcase.update(CombatLabInput::default());
+    }
+    assert_eq!(showcase.selected_move(), CombatLabMove::Kick);
+    assert!(showcase.lab().projected_combat().is_some());
+}

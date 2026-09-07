@@ -11,10 +11,10 @@ use crate::engine::sprites::{
     C_BITSTREAM_PROJECTILE_PATH, C_FIGHTER_MANIFEST_PATH, C_START_MANIFEST_PATH,
     CPP_FIGHTER_MANIFEST_PATH, CPP_PLUSPLUS_PROJECTILE_PATH, DUKE_BEAN_PROJECTILE_PATH,
     DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH, FIGHTER_SPRITESHEET_PATH,
-    GO_CHANNEL_PROJECTILE_PATH, GO_FIGHTER_MANIFEST_PATH, GO_START_MANIFEST_PATH,
-    PYTHON_DATA_PROJECTILE_PATH, PYTHON_FIGHTER_MANIFEST_PATH, PYTHON_START_MANIFEST_PATH,
-    RUST_FIGHTER_MANIFEST_PATH, RUST_GEAR_PROJECTILE_PATH, RUST_START_MANIFEST_PATH, SpriteFrame,
-    SpriteManifest,
+    FighterSpriteClip, GO_CHANNEL_PROJECTILE_PATH, GO_FIGHTER_MANIFEST_PATH,
+    GO_START_MANIFEST_PATH, PYTHON_DATA_PROJECTILE_PATH, PYTHON_FIGHTER_MANIFEST_PATH,
+    PYTHON_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH, RUST_GEAR_PROJECTILE_PATH,
+    RUST_START_MANIFEST_PATH, SpriteFrame, SpriteManifest,
 };
 use crate::game::arena::ArenaId;
 use crate::lore::{LORE_BOOK_PATH, LoreBook};
@@ -57,6 +57,8 @@ const LORE_BODY_FONT_CANDIDATES: [&str; 4] = [
 /// Texture and metadata for one atlas-driven sprite set.
 pub struct SpriteAtlasAsset {
     pub manifest: SpriteManifest,
+    /// Reviewed baseline metadata; candidate artwork never changes combat boxes.
+    pub combat_manifest: SpriteManifest,
     pub textures: Vec<SpriteAtlasTexture>,
 }
 
@@ -182,27 +184,83 @@ impl GameAssets {
                 cpp: load_texture_optional(raylib, thread, ROSTER_CPP_PATH),
             },
             fighter_spritesheet: load_texture_optional(raylib, thread, FIGHTER_SPRITESHEET_PATH),
-            rust_fighter: load_sprite_atlas_optional(raylib, thread, RUST_FIGHTER_MANIFEST_PATH),
-            rust_start: load_sprite_atlas_optional(raylib, thread, RUST_START_MANIFEST_PATH),
-            duke_fighter: load_sprite_atlas_optional(raylib, thread, DUKE_FIGHTER_MANIFEST_PATH),
-            duke_start: load_sprite_atlas_optional(raylib, thread, DUKE_START_MANIFEST_PATH),
-            go_fighter: load_sprite_atlas_optional(raylib, thread, GO_FIGHTER_MANIFEST_PATH),
-            go_start: load_sprite_atlas_optional(raylib, thread, GO_START_MANIFEST_PATH),
-            c_fighter: load_sprite_atlas_optional(raylib, thread, C_FIGHTER_MANIFEST_PATH),
-            c_start: load_sprite_atlas_optional(raylib, thread, C_START_MANIFEST_PATH),
-            python_fighter: load_sprite_atlas_optional(
+            rust_fighter: load_fighter_atlas_optional(
                 raylib,
                 thread,
+                CharacterId::Rust,
+                RUST_FIGHTER_MANIFEST_PATH,
+            ),
+            rust_start: load_sprite_atlas_optional(raylib, thread, RUST_START_MANIFEST_PATH),
+            duke_fighter: load_fighter_atlas_optional(
+                raylib,
+                thread,
+                CharacterId::Duke,
+                DUKE_FIGHTER_MANIFEST_PATH,
+            ),
+            duke_start: load_sprite_atlas_optional(raylib, thread, DUKE_START_MANIFEST_PATH),
+            go_fighter: load_fighter_atlas_optional(
+                raylib,
+                thread,
+                CharacterId::Go,
+                GO_FIGHTER_MANIFEST_PATH,
+            ),
+            go_start: load_sprite_atlas_optional(raylib, thread, GO_START_MANIFEST_PATH),
+            c_fighter: load_fighter_atlas_optional(
+                raylib,
+                thread,
+                CharacterId::C,
+                C_FIGHTER_MANIFEST_PATH,
+            ),
+            c_start: load_sprite_atlas_optional(raylib, thread, C_START_MANIFEST_PATH),
+            python_fighter: load_fighter_atlas_optional(
+                raylib,
+                thread,
+                CharacterId::Python,
                 PYTHON_FIGHTER_MANIFEST_PATH,
             ),
             python_start: load_sprite_atlas_optional(raylib, thread, PYTHON_START_MANIFEST_PATH),
-            cpp_fighter: load_sprite_atlas_optional(raylib, thread, CPP_FIGHTER_MANIFEST_PATH),
-            rust_projectile: load_texture_optional(raylib, thread, RUST_GEAR_PROJECTILE_PATH),
-            duke_projectile: load_texture_optional(raylib, thread, DUKE_BEAN_PROJECTILE_PATH),
-            go_projectile: load_texture_optional(raylib, thread, GO_CHANNEL_PROJECTILE_PATH),
-            c_projectile: load_texture_optional(raylib, thread, C_BITSTREAM_PROJECTILE_PATH),
-            python_projectile: load_texture_optional(raylib, thread, PYTHON_DATA_PROJECTILE_PATH),
-            cpp_projectile: load_texture_optional(raylib, thread, CPP_PLUSPLUS_PROJECTILE_PATH),
+            cpp_fighter: load_fighter_atlas_optional(
+                raylib,
+                thread,
+                CharacterId::Cpp,
+                CPP_FIGHTER_MANIFEST_PATH,
+            ),
+            rust_projectile: load_projectile_texture_optional(
+                raylib,
+                thread,
+                CharacterId::Rust,
+                RUST_GEAR_PROJECTILE_PATH,
+            ),
+            duke_projectile: load_projectile_texture_optional(
+                raylib,
+                thread,
+                CharacterId::Duke,
+                DUKE_BEAN_PROJECTILE_PATH,
+            ),
+            go_projectile: load_projectile_texture_optional(
+                raylib,
+                thread,
+                CharacterId::Go,
+                GO_CHANNEL_PROJECTILE_PATH,
+            ),
+            c_projectile: load_projectile_texture_optional(
+                raylib,
+                thread,
+                CharacterId::C,
+                C_BITSTREAM_PROJECTILE_PATH,
+            ),
+            python_projectile: load_projectile_texture_optional(
+                raylib,
+                thread,
+                CharacterId::Python,
+                PYTHON_DATA_PROJECTILE_PATH,
+            ),
+            cpp_projectile: load_projectile_texture_optional(
+                raylib,
+                thread,
+                CharacterId::Cpp,
+                CPP_PLUSPLUS_PROJECTILE_PATH,
+            ),
             countdown_11: load_texture_optional(raylib, thread, COUNTDOWN_11_PATH),
             countdown_10: load_texture_optional(raylib, thread, COUNTDOWN_10_PATH),
             countdown_01: load_texture_optional(raylib, thread, COUNTDOWN_01_PATH),
@@ -253,6 +311,41 @@ fn load_lore_body_font_optional(raylib: &mut RaylibHandle, thread: &RaylibThread
     None
 }
 
+fn load_fighter_atlas_optional(
+    raylib: &mut RaylibHandle,
+    thread: &RaylibThread,
+    character: CharacterId,
+    baseline_path: &str,
+) -> Option<SpriteAtlasAsset> {
+    if std::env::var("BORROW_FIGHTERS_SPRITE_CANDIDATES").as_deref() == Ok("1") {
+        let key = character.audio_key();
+        let candidate_path = format!("assets/candidates/{key}/{key}-fighter.sprite.json");
+        if Path::new(&candidate_path).is_file()
+            && let Ok(combat_manifest) = SpriteManifest::load(baseline_path)
+            && let Some(mut candidate) = load_sprite_atlas_optional(raylib, thread, &candidate_path)
+        {
+            let missing = missing_candidate_clips(&candidate.manifest);
+            if missing.is_empty() {
+                candidate.combat_manifest = combat_manifest;
+                return Some(candidate);
+            }
+            eprintln!(
+                "warning: sprite candidate {candidate_path} is incomplete (missing {}); using {baseline_path}. Review partial candidates in Sprite Viewer.",
+                missing.join(", ")
+            );
+        }
+    }
+    load_sprite_atlas_optional(raylib, thread, baseline_path)
+}
+
+fn missing_candidate_clips(manifest: &SpriteManifest) -> Vec<&'static str> {
+    FighterSpriteClip::REQUIRED
+        .iter()
+        .map(|clip| clip.as_str())
+        .filter(|name| manifest.clip_named(name).is_none())
+        .collect()
+}
+
 fn load_sprite_atlas_optional(
     raylib: &mut RaylibHandle,
     thread: &RaylibThread,
@@ -271,7 +364,29 @@ fn load_sprite_atlas_optional(
         textures.push(SpriteAtlasTexture { image, texture });
     }
 
-    Some(SpriteAtlasAsset { manifest, textures })
+    Some(SpriteAtlasAsset {
+        combat_manifest: manifest.clone(),
+        manifest,
+        textures,
+    })
+}
+
+fn load_projectile_texture_optional(
+    raylib: &mut RaylibHandle,
+    thread: &RaylibThread,
+    character: CharacterId,
+    baseline_path: &str,
+) -> Option<Texture2D> {
+    if std::env::var("BORROW_FIGHTERS_SPRITE_CANDIDATES").as_deref() == Ok("1") {
+        let key = character.audio_key();
+        let candidate_path = format!("assets/candidates/{key}/{key}-projectile.png");
+        if Path::new(&candidate_path).is_file()
+            && let Some(texture) = load_texture_optional(raylib, thread, &candidate_path)
+        {
+            return Some(texture);
+        }
+    }
+    load_texture_optional(raylib, thread, baseline_path)
 }
 
 fn load_texture_optional(
@@ -285,5 +400,31 @@ fn load_texture_optional(
             eprintln!("warning: could not load texture {path}: {error:?}");
             None
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::engine::sprites::SpriteClip;
+
+    #[test]
+    fn partial_candidates_cannot_replace_a_complete_fighter_in_matches() {
+        let mut manifest = SpriteManifest::load(RUST_FIGHTER_MANIFEST_PATH).unwrap();
+        assert_eq!(
+            missing_candidate_clips(&manifest),
+            vec!["spawn", "crouch_block", "victory", "defeat"]
+        );
+        for name in ["spawn", "crouch_block", "victory", "defeat"] {
+            manifest.clips.push(SpriteClip {
+                name: name.to_string(),
+                r#loop: false,
+                frames: manifest.clip_named("idle").unwrap().frames.clone(),
+            });
+        }
+        assert!(missing_candidate_clips(&manifest).is_empty());
+        // Existing fallback artwork is not sufficient coverage for a candidate.
+        manifest.clips.retain(|clip| clip.name != "throw");
+        assert_eq!(missing_candidate_clips(&manifest), vec!["throw"]);
     }
 }

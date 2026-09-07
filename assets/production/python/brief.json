@@ -1,0 +1,289 @@
+{
+  "character": "python",
+  "status": "candidate produced after technical validation of the Rust pilot; 20 clips and 60 selected frames; final artistic approval pending",
+  "reference": "reference/master-existing.png",
+  "identity": "Adult original woman, long wavy black hair, white rolled-sleeve blouse, black pleated skirt, black ankle-strap heels, gold belt buckle and blue/yellow snake accessory. Preserve adult proportions and original outfit.",
+  "actions": {
+    "idle": {
+      "planned_poses": 4,
+      "duration_ms": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "loop": true
+    },
+    "walk": {
+      "planned_poses": 4,
+      "duration_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true
+    },
+    "jump": {
+      "planned_poses": 4,
+      "duration_ms": [
+        60,
+        340,
+        300,
+        100
+      ],
+      "loop": false
+    },
+    "crouch": {
+      "planned_poses": 2,
+      "duration_ms": [
+        100,
+        220
+      ],
+      "loop": false
+    },
+    "block": {
+      "planned_poses": 2,
+      "duration_ms": [
+        100,
+        220
+      ],
+      "loop": false
+    },
+    "crouch_block": {
+      "planned_poses": 2,
+      "duration_ms": [
+        100,
+        220
+      ],
+      "loop": false
+    },
+    "hit": {
+      "planned_poses": 3,
+      "duration_ms": [
+        90,
+        100,
+        130
+      ],
+      "loop": false
+    },
+    "spawn": {
+      "planned_poses": 4,
+      "duration_ms": [
+        600,
+        650,
+        750,
+        650
+      ],
+      "loop": false
+    },
+    "victory": {
+      "planned_poses": 3,
+      "duration_ms": [
+        140,
+        220,
+        600
+      ],
+      "loop": false
+    },
+    "defeat": {
+      "planned_poses": 3,
+      "duration_ms": [
+        140,
+        220,
+        600
+      ],
+      "loop": false
+    },
+    "punch_light": {
+      "planned_poses": 3,
+      "duration_ms": [
+        66,
+        100,
+        117
+      ],
+      "loop": false,
+      "move_id": "PythonSnakeBite",
+      "contact_world": {
+        "x": 94.66666666666666,
+        "y": -128.00000000000003
+      },
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ]
+    },
+    "punch_heavy": {
+      "planned_poses": 3,
+      "duration_ms": [
+        166,
+        150,
+        200
+      ],
+      "loop": false,
+      "move_id": "PythonDataStrike",
+      "contact_world": {
+        "x": 112.0,
+        "y": -122.66666666666669
+      },
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ]
+    },
+    "kick": {
+      "planned_poses": 3,
+      "duration_ms": [
+        133,
+        117,
+        166
+      ],
+      "loop": false,
+      "move_id": "PythonHeelKick",
+      "contact_world": {
+        "x": 108.0,
+        "y": -57.333333333333336
+      },
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ]
+    },
+    "sweep": {
+      "planned_poses": 3,
+      "duration_ms": [
+        150,
+        133,
+        200
+      ],
+      "loop": false,
+      "move_id": "PythonIndentSweep",
+      "contact_world": {
+        "x": 116.0,
+        "y": -116.0
+      },
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ]
+    },
+    "overhead": {
+      "planned_poses": 3,
+      "duration_ms": [
+        183,
+        117,
+        216
+      ],
+      "loop": false,
+      "move_id": "PythonTracebackOverhead",
+      "contact_world": {
+        "x": 102.66666666666666,
+        "y": -136.0
+      },
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ]
+    },
+    "anti_air": {
+      "planned_poses": 3,
+      "duration_ms": [
+        100,
+        116,
+        200
+      ],
+      "loop": false,
+      "move_id": "PythonVisionAntiAir",
+      "contact_world": {
+        "x": 96.0,
+        "y": -282.66666666666663
+      },
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ]
+    },
+    "air_punch": {
+      "planned_poses": 3,
+      "duration_ms": [
+        83,
+        150,
+        133
+      ],
+      "loop": false,
+      "move_id": "AirPunch",
+      "contact_world": {
+        "x": 98.66666666666666,
+        "y": -102.66666666666669
+      },
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ]
+    },
+    "air_kick": {
+      "planned_poses": 3,
+      "duration_ms": [
+        116,
+        167,
+        150
+      ],
+      "loop": false,
+      "move_id": "AirKick",
+      "contact_world": {
+        "x": 109.33333333333333,
+        "y": -76.0
+      },
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ]
+    },
+    "throw": {
+      "planned_poses": 3,
+      "duration_ms": [
+        116,
+        50,
+        234
+      ],
+      "loop": false,
+      "move_id": "PythonConstrictThrow",
+      "contact_world": {
+        "x": 85.33333333333333,
+        "y": -105.33333333333334
+      },
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ]
+    },
+    "special": {
+      "planned_poses": 3,
+      "duration_ms": [
+        100,
+        100,
+        100
+      ],
+      "loop": false,
+      "contact_world": {
+        "x": 205.33333333333331,
+        "y": -157.33333333333331
+      },
+      "note": "First pose already emits from long forward reach; separate original projectile, then recover. No new startup."
+    }
+  },
+  "current_clip_count": 20,
+  "current_frame_count": 60,
+  "current_review": "review.md",
+  "current_candidate": "../../candidates/python/python-fighter.sprite.json",
+  "planning_snapshot_note": "The actions below preserve the initial production brief. Current frame selection, timing, verification scope and artistic limitations are documented in review.md and the exported candidate manifest."
+}

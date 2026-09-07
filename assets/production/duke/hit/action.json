@@ -1,0 +1,52 @@
+{
+  "sheet": "hit/keyed.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "hit_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 704,
+        "h": 768
+      },
+      "pivot": {
+        "x": 430,
+        "y": 673
+      },
+      "duration_ms": 65,
+      "phase": "impact"
+    },
+    {
+      "name": "hit_01",
+      "source_rect": {
+        "x": 704,
+        "y": 0,
+        "w": 650,
+        "h": 768
+      },
+      "pivot": {
+        "x": 386,
+        "y": 673
+      },
+      "duration_ms": 85,
+      "phase": "recoil"
+    },
+    {
+      "name": "hit_02",
+      "source_rect": {
+        "x": 1354,
+        "y": 0,
+        "w": 694,
+        "h": 768
+      },
+      "pivot": {
+        "x": 261,
+        "y": 673
+      },
+      "duration_ms": 170,
+      "phase": "stagger"
+    }
+  ]
+}

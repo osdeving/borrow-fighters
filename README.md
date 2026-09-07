@@ -36,6 +36,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md): roadmap do viewer para artistas conferirem atlas, pivot, grade e boxes.
 - [`docs/17-visual-scale-and-stage-metrics.md`](docs/17-visual-scale-and-stage-metrics.md): escala visual alvo de personagens, arena e workflow de calibracao.
 - [`docs/18-sprite-studio.md`](docs/18-sprite-studio.md): ferramenta Tauri + React para editar manifestos e atlas fora do loop do jogo.
+- [`docs/19-sprite-production-coverage.md`](docs/19-sprite-production-coverage.md): matriz de ações, referências, candidatos e verificações da produção de sprites.
 - [`docs/templates/mood-proposal.md`](docs/templates/mood-proposal.md): molde para proposta de moodboard.
 - [`docs/templates/character-concept.md`](docs/templates/character-concept.md): molde para personagem e mecânica.
 - [`docs/templates/adr-template.md`](docs/templates/adr-template.md): molde para novas decisões.
@@ -69,6 +70,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`docs/adr/0007-sprite-frame-combat-runtime.md`](docs/adr/0007-sprite-frame-combat-runtime.md): metadata de hitbox/hurtbox por frame no runtime.
 - [`docs/adr/0008-external-sprite-studio-tooling.md`](docs/adr/0008-external-sprite-studio-tooling.md): Sprite Studio externo em Tauri + React, isolado do codigo do jogo.
 - [`docs/adr/0009-multi-image-sprite-manifests.md`](docs/adr/0009-multi-image-sprite-manifests.md): manifests de sprite podem compor um personagem a partir de mais de um atlas.
+- [`docs/adr/0010-reviewed-action-sprite-production.md`](docs/adr/0010-reviewed-action-sprite-production.md): produção por ação, exportação explícita e revisão de candidatos sem alterar combate.
 
 ### GitHub
 
@@ -171,11 +173,23 @@ cargo run -- --lab combat --character c --move projectile
 cargo run -- --lab combat --character python --move light_punch
 cargo run -- --lab combat --character cpp --move projectile
 cargo run -- --lab combat --character rust --pose block
+cargo run -- --lab combat --character rust --pose crouch_block
+cargo run -- --lab combat --character rust --pose spawn
+cargo run -- --lab combat --character rust --pose defeat
 ```
 
-No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp` para alternar pose, `Enter` para repetir, `Espaço` para pausar, `.` para avançar 1 frame quando pausado, `Home` para voltar ao frame 0, `H` para hurtbox, `B` para hitbox, `P` para pivot/eixos, `D` para dummy de contato, `A` para mostrar/esconder o fundo de arena e `Esc` para voltar ao menu quando aberto pelo submenu `Training`. O overlay mostra frame data, vantagem estimada, pushback, whiff recovery e distância após pushback. Valores aceitos em `--character`: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` ou `cpp.cpp`. Valores aceitos em `--move`: `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw` e `projectile`. Valores aceitos em `--pose`: `move`, `idle`, `crouch`, `jump`, `block`, `hit` e `victory`.
+No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp` para alternar pose, `Enter` para repetir, `Espaço` para pausar, `.` para avançar 1 frame quando pausado, `Home` para voltar ao frame 0, `H` para hurtbox, `B` para hitbox, `P` para pivot/eixos, `D` para dummy de contato, `A` para mostrar/esconder o fundo de arena e `Esc` para voltar ao menu quando aberto pelo submenu `Training`. O overlay mostra frame data, vantagem estimada, pushback, whiff recovery e distância após pushback. Valores aceitos em `--character`: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` ou `cpp.cpp`. Valores aceitos em `--move`: `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw` e `projectile`. Valores aceitos em `--pose`: `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory`, `spawn`, `defeat` e `crouch_block`. As poses mantêm o corpo parado para inspeção e reproduzem o clip com pause, avanço por frame e reinício.
 
 O `Move Showcase`, em `Training`, usa o personagem escolhido como Player 1 e mostra ele sozinho ciclando todos os golpes em sequência: soco fraco, soco forte, chute, varredura, overhead, anti-air, ataques aéreos, agarrão e projectile. `Tab` / `Shift+Tab` pula golpe, `Enter` repete, `Espaço` pausa e `Esc` volta ao menu.
+
+Os placeholders continuam como padrão. Para revisar um candidato completo sem substituí-los em disco:
+
+```bash
+BORROW_FIGHTERS_SPRITE_CANDIDATES=1 cargo run -- --fight --p1 rust --p2 duke
+BORROW_FIGHTERS_SPRITE_CANDIDATES=1 cargo run -- --lab combat --character rust --pose victory
+```
+
+O opt-in procura `assets/candidates/<personagem>/<personagem>-fighter.sprite.json` e exige os 20 clips do jogo atual; arquivo inválido, incompleto ou ausente mantém o placeholder daquele personagem. Conjuntos parciais são inspecionados diretamente no Sprite Viewer/Studio. Somente a apresentação usa o candidato: `combat_manifest` preserva as boxes, escala de colisão e origem de projéteis baseline. Reações, defesa, agachamento, salto e poses finais têm relógios visuais próprios; regras e timing de combate continuam iguais. Veja [pipeline e comandos](docs/11-sprite-pipeline.md#revisao-de-candidatos-no-runtime) e [cobertura e pendências](docs/19-sprite-production-coverage.md).
 
 Para abrir o viewer de sprites direto em uma ferramenta isolada:
 

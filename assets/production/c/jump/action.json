@@ -1,0 +1,64 @@
+{
+  "action": "jump",
+  "source": "jump/source-v1.png",
+  "sheet": "jump/keyed-v1.png",
+  "loop": false,
+  "reviewed": false,
+  "status": "candidate: source and two-facing previews inspected; real Combat Lab captured; artistic limitations recorded in review.md",
+  "source_body_height_reference_px": 630,
+  "frames": [
+    {
+      "name": "jump_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 670,
+        "h": 768
+      },
+      "pivot": {
+        "x": 365,
+        "y": 695
+      },
+      "duration_ms": 60,
+      "phase": "takeoff"
+    },
+    {
+      "name": "jump_1",
+      "source_rect": {
+        "x": 670,
+        "y": 0,
+        "w": 730,
+        "h": 768
+      },
+      "pivot": {
+        "x": 350,
+        "y": 602
+      },
+      "duration_ms": 340,
+      "phase": "rise_apex"
+    },
+    {
+      "name": "jump_2",
+      "source_rect": {
+        "x": 1400,
+        "y": 0,
+        "w": 648,
+        "h": 768
+      },
+      "pivot": {
+        "x": 270,
+        "y": 633
+      },
+      "duration_ms": 400,
+      "phase": "fall"
+    }
+  ],
+  "review_notes": "World review found source waist translated y370/277/308. Virtual pivots695/602/633 align pelvis/head across poses, removing a second embedded jump arc. Same three poses, scale and60/340/400ms; only World provides physical trajectory. Fall retains slightly bent knees before grounded idle.",
+  "runtime_review": {
+    "report": "../../candidates/c/review/runtime-lab-final/capture-report.json",
+    "loaded_manifest_matches_candidate": true,
+    "clip_captured": true,
+    "final_art_approved": false,
+    "jump_pivot_update": "Lab report predates this jump-only visual calibration; full World recapture follows."
+  }
+}

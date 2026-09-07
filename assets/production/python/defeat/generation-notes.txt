@@ -1,0 +1,1 @@
+First generation attempt returned moderation_blocked at the output stage (sexual category), despite a request for a clothed nonsexual defeated kneeling animation. No output image was returned or saved. The second prompt used a neutral one-knee sports resting posture and ordinary eye-level camera; the fixed adult character and complete outfit were retained.

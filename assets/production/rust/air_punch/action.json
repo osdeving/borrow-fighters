@@ -1,0 +1,82 @@
+{
+  "action": "air_punch",
+  "source": "air_punch/source-v2.png",
+  "sheet": "air_punch/sheet-v2.png",
+  "reviewed": false,
+  "loop": false,
+  "status": "candidate; source poses statically inspected; runtime/two-orientation review pending",
+  "source_body_height_reference_px": 539,
+  "normalization_note": "Approximate upright-body reference; do not scale each frame by its own alpha bounds. Air pivots are virtual standing-floor anchors beneath hips, not boot tips. Ground pivots are proposed and require foot-support review after normalization.",
+  "combat_timing": {
+    "move_id": "AirPunch",
+    "input": "AirPunch",
+    "duration": 22,
+    "active_start": 5,
+    "active_end_inclusive": 13,
+    "whiff_recovery": 6,
+    "clip": "air_punch"
+  },
+  "frames": [
+    {
+      "name": "air_punch_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 490,
+        "h": 768
+      },
+      "pivot": {
+        "x": 285,
+        "y": 650
+      },
+      "duration_ms": 83,
+      "phase": "startup"
+    },
+    {
+      "name": "air_punch_1",
+      "source_rect": {
+        "x": 490,
+        "y": 0,
+        "w": 575,
+        "h": 768
+      },
+      "pivot": {
+        "x": 253,
+        "y": 650
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "air_punch_2",
+      "source_rect": {
+        "x": 1065,
+        "y": 0,
+        "w": 475,
+        "h": 768
+      },
+      "pivot": {
+        "x": 245,
+        "y": 650
+      },
+      "duration_ms": 66,
+      "phase": "recovery"
+    },
+    {
+      "name": "air_punch_3",
+      "source_rect": {
+        "x": 1540,
+        "y": 0,
+        "w": 508,
+        "h": 768
+      },
+      "pivot": {
+        "x": 230,
+        "y": 650
+      },
+      "duration_ms": 67,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "v1 runtime fist was much too high. v2 selected downward air punch: active glove approximately source x885..953,y443..497 maps through unchanged global pivot743,650 and scale268/539 to world x71..104,y-103..-76; captured active box x50.67..145,y-130..-74. Source body also pitches down: active hair top155 versus startup110, rear boot bottom602 versus575. This visible 13..22px shift is NOT concealed by moving pivot. v3 and v4 attempts to restore body height were rejected because generator lowered it further. Runtime review should judge the brief downward body pitch; contact geometry fits without combat changes."
+}

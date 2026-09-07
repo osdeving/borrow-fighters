@@ -75,6 +75,13 @@ C++ entrou como candidata visual raster em `assets/references/cpp-fighter-raster
 
 Nada disso é final. O valor desses assets agora é validar proporção, leitura de pose, pivots, altura do projectile, contraste com cenário e necessidades de animação.
 
+A produção por ação dos seis personagens está registrada na
+[matriz de cobertura](19-sprite-production-coverage.md), com fontes raster e
+referências em [assets/production](../assets/production/README.md). O piloto Rust
+valida geração, alpha, pivôs, timing e uso real dos clips antes de aplicar o
+processo aos demais. Os atlas em `assets/candidates/` são optativos durante a
+revisão; os placeholders continuam preservados como referência e fallback.
+
 ## Linguagem visual do Linker
 
 O Linker deve parecer uma força de ligação, não magia genérica. Ele pode aparecer como alinhamento impossível entre cabos, símbolos, partículas, luz, logs, circuitos, reflexos e gestos dos personagens.

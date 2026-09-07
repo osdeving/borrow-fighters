@@ -63,7 +63,7 @@ Esses valores sao medidos em pixels locais do frame do atlas, nao em coordenadas
 - Animacoes de ataque devem ter duracao por frame.
 - Efeitos reutilizaveis, como projeteis, devem poder virar assets separados.
 
-## Clips recomendados
+## Clips do jogo atual
 
 - `spawn`
 - `idle`
@@ -71,6 +71,7 @@ Esses valores sao medidos em pixels locais do frame do atlas, nao em coordenadas
 - `crouch`
 - `jump`
 - `block`
+- `crouch_block`
 - `punch_light`
 - `punch_heavy`
 - `kick`
@@ -82,8 +83,10 @@ Esses valores sao medidos em pixels locais do frame do atlas, nao em coordenadas
 - `throw`
 - `hit`
 - `special`
+- `victory`
+- `defeat`
 
-Clips extras como `taunt`, `victory`, `defeat` e `projectile` podem existir, mas nao devem bloquear o prototipo.
+Estes 20 clips cobrem os estados e golpes implementados e sao exigidos para ativar um atlas candidato completo. `taunt` continua como compatibilidade para vitoria nos placeholders; `projectile` pode existir como material de efeito separado. A matriz de producao por personagem fica em [19 — Cobertura de producao](19-sprite-production-coverage.md).
 
 `spawn` e reservado para entrada cinematografica no inicio da luta. Ele deve ser nao-loopavel e nao deve carregar regra de combate; o jogo pausa os inputs durante a intro e depois durante a contagem `11`, `10`, `01`, `Fight!`.
 
@@ -123,12 +126,42 @@ No corte atual, Rust, Duke, Go, C, Python e C++ ja declaram `frames[].combat.pro
 
 O runtime tambem usa:
 
-- `spawn` durante a entrada inicial de Rust, Duke, Go, C e Python;
+- `spawn` durante a entrada inicial: prefere o clip no atlas principal, depois o manifesto de entrada separado, e usa `idle` quando nenhum deles tem entrada;
 - clips proprios para os nove golpes proximos: `punch_light`, `punch_heavy`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick` e `throw`;
-- `hit` enquanto o personagem esta em hitstun;
+- `hit` enquanto o personagem esta em hitstun, avancando desde o impacto;
+- `block` em defesa e `crouch_block` quando defesa e agachamento estao ativos;
 - `special` por alguns frames quando o personagem dispara projectile;
-- `taunt` quando o personagem vence a luta;
+- `victory` para o vencedor e `defeat` para o derrotado; empate usa `defeat` nos dois;
 - fallback greybox quando um atlas nao carrega.
+
+Os relogios de apresentacao comecam em zero ao entrar em defesa, agachamento ou salto; um novo impacto reinicia a reacao. Trocar entre defesa em pe e agachada reinicia o clip da nova postura. `idle` e `walk` continuam usando o tempo global; ataques usam o tempo do golpe e `special` usa o timer visual do projectile. O salto percorre os quadros pelas duracoes do manifesto: revisar subida, apice e queda contra a trajetoria real, sem alterar a fisica para encaixar desenhos. O agachamento nao pula mais diretamente ao ultimo quadro.
+
+Entrada usa o tempo da intro. Vitoria e derrota usam `World::outcome_elapsed_seconds`, iniciado quando o resultado aparece e atualizado enquanto o combate permanece congelado. Seus sprites usam anchor vertical no chao, mesmo quando o KO congela um corpo no ar; posicao, velocidade, boxes e debug fisicos conservam o estado do combate. Tint de ataque/dano, flash de reacao, overlay de guarda e luz de stun no chao deixam de cobrir essas poses finais.
+
+Ao espelhar sprites, o recorte de origem conserva `x` e `y`: `DrawTexturePro` do Raylib interpreta largura negativa como flip dentro desse mesmo recorte. Somar a largura a `source.x` leria a celula seguinte ou pixels vazios. Lutadores, projectile e dummy do Sprite Viewer compartilham essa regra.
+
+Fallbacks visuais de manifestos antigos sao explicitos: `victory → taunt → idle`, `defeat → hit → idle`, `crouch_block → block → idle`, `sweep`/`air_kick → kick`, `overhead`/`anti_air → punch_heavy` e `throw`/`air_punch → punch_light`, com `idle` como ultimo recurso. Esses aliases nao emprestam hitboxes de outro golpe.
+
+## Revisao de candidatos no runtime
+
+As fontes por acao ficam em `assets/production/<personagem>/`; o exportador gera `assets/candidates/<personagem>/<personagem>-fighter.sprite.json`. O fluxo e a proveniencia estao em [ADR 0010](adr/0010-reviewed-action-sprite-production.md). Exportar nao substitui placeholders nem ativa arte automaticamente.
+
+Para revisar um conjunto completo em luta ou Combat Lab:
+
+```bash
+BORROW_FIGHTERS_SPRITE_CANDIDATES=1 cargo run -- --fight --p1 rust --p2 duke
+BORROW_FIGHTERS_SPRITE_CANDIDATES=1 cargo run -- --lab combat --character rust --pose defeat
+```
+
+O loader verifica o candidato de cada personagem (`rust`, `duke`, `go`, `c`, `python`, `cpp`) e exige os 20 clips listados acima. Arquivo ausente, invalido, textura ausente ou conjunto incompleto mantem o placeholder daquele personagem; clips faltantes produzem aviso no terminal. Essa verificacao cobre nomes e estrutura, nao aprova os desenhos. Um conjunto parcial deve ser aberto diretamente no Sprite Viewer/Studio, sem mascarar golpes ausentes com `idle` na luta.
+
+O mesmo opt-in permite revisar um efeito separado em `assets/candidates/<key>/<key>-projectile.png`, independentemente do atlas do lutador. Arquivo ausente ou falha de carregamento preservam a textura original do projetil. Specs, origem, colisao e a formula de desenho permanecem iguais: largura e altura do PNG multiplicadas por `0.45 * RESOLUTION_SCALE`. Portanto, o canvas candidato precisa de revisao na escala real; o renderer nao ajusta sua imagem automaticamente a hitbox fisica.
+
+`SpriteAtlasAsset.manifest` define o desenho e suas texturas; `combat_manifest` conserva o manifesto baseline de `assets/placeholder/`. `App` entrega somente `combat_manifest` ao `World`, e o overlay da luta usa os mesmos dados. Assim, escala, pivôs e metadata experimentais do candidato nao mudam alcance, hurtboxes ou origem do projectile. No Sprite Viewer, abrir um candidato mostra os dados desse proprio arquivo; isso nao demonstra que foram ativados na luta.
+
+Combat Lab e Move Showcase recebem o mesmo baseline de `App`. O Lab projeta hitboxes/hurtboxes com o sampling da luta e consulta `special` em tempo zero para a origem do projetil; ausencia de metadata conserva o fallback de `Fighter`/`Projectile`. Estimativas de vantagem e posicionamento automatico do dummy continuam baseados em MoveSpec. O exemplo de captura aceita um terceiro argumento opcional com clips separados por virgula, como `rust target/art/rust-lab-baseline punch_light,punch_heavy,kick,special`; omitir o filtro captura os 19 contextos disponiveis. `walk` continua exigindo ensaio em World.
+
+O sampling de metadata tambem permanece separado: stun usa tempo zero, crouch usa a pose final, jump preserva os tempos `0 / 0.18 / 0.36` por velocidade vertical e `crouch_block` consulta as boxes antigas de `block`. Alterar esses dados ou seu sampling exige revisao de gameplay propria. A limitacao preexistente de agachamento durante blockstun esta descrita no [guia de combate](12-technical-combat-guide.md).
 
 As animacoes de entrada atuais vivem em manifests separados para nao misturar frames cinematograficos grandes com o atlas principal de luta:
 

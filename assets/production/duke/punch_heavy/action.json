@@ -1,0 +1,52 @@
+{
+  "sheet": "punch_heavy/keyed.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "punch_heavy_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 684,
+        "h": 768
+      },
+      "pivot": {
+        "x": 300,
+        "y": 664
+      },
+      "duration_ms": 216,
+      "phase": "startup"
+    },
+    {
+      "name": "punch_heavy_01",
+      "source_rect": {
+        "x": 684,
+        "y": 0,
+        "w": 684,
+        "h": 768
+      },
+      "pivot": {
+        "x": 215,
+        "y": 664
+      },
+      "duration_ms": 167,
+      "phase": "active"
+    },
+    {
+      "name": "punch_heavy_02",
+      "source_rect": {
+        "x": 1368,
+        "y": 0,
+        "w": 680,
+        "h": 768
+      },
+      "pivot": {
+        "x": 277,
+        "y": 664
+      },
+      "duration_ms": 283,
+      "phase": "recovery"
+    }
+  ]
+}

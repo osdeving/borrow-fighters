@@ -1,0 +1,82 @@
+{
+  "action": "overhead",
+  "source": "overhead/source-v5.png",
+  "sheet": "overhead/sheet-v5.png",
+  "reviewed": false,
+  "loop": false,
+  "status": "candidate; source poses statically inspected; runtime/two-orientation review pending",
+  "source_body_height_reference_px": 499,
+  "normalization_note": "Approximate upright-body reference; do not scale each frame by its own alpha bounds. Air pivots are virtual standing-floor anchors beneath hips, not boot tips. Ground pivots are proposed and require foot-support review after normalization.",
+  "combat_timing": {
+    "move_id": "OverheadPunch",
+    "input": "Overhead",
+    "duration": 34,
+    "active_start": 12,
+    "active_end_inclusive": 18,
+    "whiff_recovery": 12,
+    "clip": "overhead"
+  },
+  "frames": [
+    {
+      "name": "overhead_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 525,
+        "h": 768
+      },
+      "pivot": {
+        "x": 310,
+        "y": 662
+      },
+      "duration_ms": 200,
+      "phase": "startup"
+    },
+    {
+      "name": "overhead_1",
+      "source_rect": {
+        "x": 525,
+        "y": 0,
+        "w": 550,
+        "h": 768
+      },
+      "pivot": {
+        "x": 258,
+        "y": 663
+      },
+      "duration_ms": 116,
+      "phase": "active"
+    },
+    {
+      "name": "overhead_2",
+      "source_rect": {
+        "x": 1075,
+        "y": 0,
+        "w": 460,
+        "h": 768
+      },
+      "pivot": {
+        "x": 205,
+        "y": 662
+      },
+      "duration_ms": 125,
+      "phase": "recovery"
+    },
+    {
+      "name": "overhead_3",
+      "source_rect": {
+        "x": 1535,
+        "y": 0,
+        "w": 513,
+        "h": 768
+      },
+      "pivot": {
+        "x": 225,
+        "y": 662
+      },
+      "duration_ms": 125,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "v3 runtime fist above active box. v4 lowered too far near lower edge. v5 selected: active glove around source x899..960,y404..457, mapping with unchanged global pivot783,663 and scale268/499 into world x62..95,y-139..-111; target box world x50.67..160,y-166.67..-101.33. Head/body/feet preserve prior ground placement. Source reviewed; runtime recapture pending."
+}

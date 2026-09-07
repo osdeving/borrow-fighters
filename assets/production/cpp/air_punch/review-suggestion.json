@@ -1,0 +1,5 @@
+{
+  "scale_to_runtime": 0.3889695210449927,
+  "reviewed_for_packing": true,
+  "notes": "Virtual pivots register gold belt at about-160world in all3 poses, rather than registering airborne boots. Body equivalent689px matches the idle. Source active glove projects near(+73.5,-122.5), inside the upper/back portion of the baseline air-punch box. Physics supplies air displacement; no second trajectory. Torso inclines into the punch."
+}

@@ -1,0 +1,115 @@
+{
+  "action": "air_punch",
+  "source": "air_punch/source-v1.png",
+  "sheet": "air_punch/keyed-v1.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "candidate: source, alpha and two-facing previews inspected; corrected Combat Lab captured, artistic limitations recorded in review.md",
+  "source_body_height_reference_px": 689,
+  "suggested_scale_to_runtime": 0.3889695210449927,
+  "frames": [
+    {
+      "name": "air_punch_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 335,
+        "y": 763
+      },
+      "duration_ms": 83,
+      "phase": "startup"
+    },
+    {
+      "name": "air_punch_01",
+      "source_rect": {
+        "x": 591,
+        "y": 0,
+        "w": 592,
+        "h": 887
+      },
+      "pivot": {
+        "x": 257,
+        "y": 834
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "air_punch_02",
+      "source_rect": {
+        "x": 1183,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 281,
+        "y": 787
+      },
+      "duration_ms": 133,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Virtual pivots register gold belt at about-160world in all3 poses, rather than registering airborne boots. Body equivalent689px matches the idle. Source active glove projects near(+73.5,-122.5), inside the upper/back portion of the baseline air-punch box. Physics supplies air displacement; no second trajectory. Torso inclines into the punch.",
+  "timing_reference": {
+    "move_id": "AirPunch",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 22,
+      "active_start": 5,
+      "active_end": 13
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 83,
+      "recovery_starts": 233,
+      "clip_ends": 366
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -130.66666666666669,
+      "w": 96.0,
+      "h": 56.0
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -146.66666666666666,
+      "y": -130.66666666666669,
+      "w": 96.0,
+      "h": 56.0
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 98.66666666666666,
+      "y": -102.66666666666669
+    }
+  },
+  "provenance": {
+    "tool": "built-in image_gen",
+    "identity_reference": "reference/master-existing.png",
+    "continuity_reference": "idle/source-v1.png",
+    "prompt": "air_punch/prompt-v1.txt",
+    "extraction": "remove_generated_magenta.py without --rust-contour"
+  },
+  "active_contact_review": {
+    "source_point": [
+      1037,
+      519
+    ],
+    "world_relative_to_anchor": [
+      73.51523947750363,
+      -122.52539912917271
+    ],
+    "inside_baseline_box": true
+  },
+  "runtime_review": {
+    "report": "../../candidates/cpp/review/runtime-lab/capture-report.json",
+    "loaded_manifest_matches_candidate": true,
+    "clip_captured": true,
+    "combat_uses_baseline_manifest": true,
+    "final_art_approved": false
+  }
+}

@@ -68,6 +68,11 @@ pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, asset
             assets.cpp_projectile.as_ref(),
         ),
     };
+    let sprite_atlas = super::fighter_atlas_for_intro(
+        lab.pose() == CombatLabPose::Spawn,
+        super::character_visuals(lab.character(), assets).start_atlas,
+        sprite_atlas,
+    );
 
     draw_fighter(
         draw,
@@ -138,6 +143,9 @@ fn forced_clip_for_pose(pose: CombatLabPose) -> Option<sprites::FighterSpriteCli
         CombatLabPose::Jump => Some(sprites::FighterSpriteClip::Jump),
         CombatLabPose::Block => Some(sprites::FighterSpriteClip::Block),
         CombatLabPose::Hit => Some(sprites::FighterSpriteClip::Hit),
-        CombatLabPose::Victory => Some(sprites::FighterSpriteClip::Taunt),
+        CombatLabPose::Victory => Some(sprites::FighterSpriteClip::Victory),
+        CombatLabPose::Spawn => Some(sprites::FighterSpriteClip::Spawn),
+        CombatLabPose::Defeat => Some(sprites::FighterSpriteClip::Defeat),
+        CombatLabPose::CrouchBlock => Some(sprites::FighterSpriteClip::CrouchBlock),
     }
 }

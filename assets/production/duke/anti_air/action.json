@@ -1,0 +1,52 @@
+{
+  "sheet": "anti_air/keyed.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "anti_air_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 590,
+        "h": 850
+      },
+      "pivot": {
+        "x": 295,
+        "y": 776
+      },
+      "duration_ms": 116,
+      "phase": "startup"
+    },
+    {
+      "name": "anti_air_01",
+      "source_rect": {
+        "x": 590,
+        "y": 0,
+        "w": 594,
+        "h": 850
+      },
+      "pivot": {
+        "x": 285,
+        "y": 776
+      },
+      "duration_ms": 134,
+      "phase": "active"
+    },
+    {
+      "name": "anti_air_02",
+      "source_rect": {
+        "x": 1184,
+        "y": 0,
+        "w": 590,
+        "h": 850
+      },
+      "pivot": {
+        "x": 258,
+        "y": 776
+      },
+      "duration_ms": 250,
+      "phase": "recovery"
+    }
+  ]
+}

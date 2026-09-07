@@ -129,6 +129,16 @@ impl App {
 
         let assets = GameAssets::load(raylib, thread);
         self.sync_world_sprite_combat(&assets);
+        self.combat_lab
+            .set_combat_manifest(fighter_manifest_for_character(
+                self.combat_lab.character(),
+                &assets,
+            ));
+        self.move_showcase
+            .set_combat_manifest(fighter_manifest_for_character(
+                self.move_showcase.character(),
+                &assets,
+            ));
         let software_cursor_enabled = software_cursor_enabled_for_env();
         let audio_device = RaylibAudio::init_audio_device();
         let mut audio_player = match &audio_device {
@@ -337,6 +347,12 @@ impl App {
                                     selected_move: CombatLabMove::Projectile,
                                     ..CombatLabOptions::default()
                                 });
+                                self.combat_lab.set_combat_manifest(
+                                    fighter_manifest_for_character(
+                                        self.combat_lab.character(),
+                                        &assets,
+                                    ),
+                                );
                                 self.scene = AppScene::CombatLab;
                                 self.accumulator = 0.0;
                                 audio_player.play_music(MusicTrack::CombatDeterminedPursuit);
@@ -345,6 +361,12 @@ impl App {
                                 self.move_showcase = MoveShowcase::new(MoveShowcaseOptions {
                                     character: self.match_options.player_one,
                                 });
+                                self.move_showcase.set_combat_manifest(
+                                    fighter_manifest_for_character(
+                                        self.move_showcase.character(),
+                                        &assets,
+                                    ),
+                                );
                                 self.scene = AppScene::MoveShowcase;
                                 self.accumulator = 0.0;
                                 audio_player.play_music(MusicTrack::CombatDeterminedPursuit);
@@ -687,7 +709,7 @@ fn fighter_manifest_for_character(
         CharacterId::Python => assets.python_fighter.as_ref(),
         CharacterId::Cpp => assets.cpp_fighter.as_ref(),
     }
-    .map(|atlas| atlas.manifest.clone())
+    .map(|atlas| atlas.combat_manifest.clone())
 }
 
 fn play_preferences_audio_feedback<'aud>(

@@ -24,7 +24,7 @@ import {
   resizeRect,
   targetKey,
 } from "./geometry";
-import { validateManifest, visualScaleSummary } from "./validation";
+import { VISUAL_SCALE_TARGET, validateManifest, visualScaleSummary } from "./validation";
 import { HelpCenter } from "./HelpCenter";
 import { MenuBar } from "./MenuBar";
 import { Timeline } from "./Timeline";
@@ -1594,8 +1594,8 @@ function ScalePanel({
           <dd className={summary.heightOk ? "ok" : "warning"}>
             {summary.height.toFixed(1)} px
           </dd>
-          <dt>Target</dt>
-          <dd>110-150 px wide, 185-210 px tall</dd>
+          <dt>Target (idle)</dt>
+          <dd>{VISUAL_SCALE_TARGET.minWidth}-{VISUAL_SCALE_TARGET.maxWidth} px wide, {VISUAL_SCALE_TARGET.minHeight}-{VISUAL_SCALE_TARGET.maxHeight} px tall</dd>
           <dt>Status</dt>
           <dd>{summary.message}</dd>
         </dl>
@@ -1844,12 +1844,12 @@ function renderRect(rect: SpriteRect | undefined, className: string) {
 function renderScaleGuide(frame: SpriteFrame, scale: number) {
   const safeScale = scale > 0 ? scale : 1;
   const targetMin = {
-    w: 110 / safeScale,
-    h: 185 / safeScale,
+    w: VISUAL_SCALE_TARGET.minWidth / safeScale,
+    h: VISUAL_SCALE_TARGET.minHeight / safeScale,
   };
   const targetMax = {
-    w: 150 / safeScale,
-    h: 210 / safeScale,
+    w: VISUAL_SCALE_TARGET.maxWidth / safeScale,
+    h: VISUAL_SCALE_TARGET.maxHeight / safeScale,
   };
   const minRect = {
     x: frame.pivot.x - targetMin.w / 2,

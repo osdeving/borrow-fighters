@@ -131,16 +131,11 @@ pub fn draw_fight(
                 player_one_visuals.fight_atlas,
             ),
             spritesheet: assets.fighter_spritesheet.as_ref(),
-            world_elapsed_seconds: fighter_visual_elapsed_seconds(
-                world,
-                spawn_intro,
-                player_one_visuals.start_atlas.is_some(),
-            ),
-            forced_clip: forced_fighter_clip(
-                world,
+            world_elapsed_seconds: fighter_visual_elapsed_seconds(world),
+            forced_clip: sprites::match_fighter_sprite_clip(
+                world.outcome,
                 PlayerSlot::One,
                 spawn_intro,
-                player_one_visuals.start_atlas.is_some(),
             ),
         },
     );
@@ -156,16 +151,11 @@ pub fn draw_fight(
                 player_two_visuals.fight_atlas,
             ),
             spritesheet: assets.fighter_spritesheet.as_ref(),
-            world_elapsed_seconds: fighter_visual_elapsed_seconds(
-                world,
-                spawn_intro,
-                player_two_visuals.start_atlas.is_some(),
-            ),
-            forced_clip: forced_fighter_clip(
-                world,
+            world_elapsed_seconds: fighter_visual_elapsed_seconds(world),
+            forced_clip: sprites::match_fighter_sprite_clip(
+                world.outcome,
                 PlayerSlot::Two,
                 spawn_intro,
-                player_two_visuals.start_atlas.is_some(),
             ),
         },
     );
@@ -1001,6 +991,58 @@ mod tests {
         assert_eq!(character_select_label(CharacterId::Go), "gopher.go");
         assert_eq!(character_select_label(CharacterId::Python), "python.py");
         assert_eq!(character_select_label(CharacterId::Cpp), "cpp.cpp");
+    }
+
+    #[test]
+    fn main_atlas_spawn_is_preferred_and_legacy_start_is_a_fallback() {
+        let manifest = sprites::SpriteManifest::load(sprites::RUST_FIGHTER_MANIFEST_PATH).unwrap();
+        let mut fight = SpriteAtlasAsset {
+            combat_manifest: manifest.clone(),
+            manifest,
+            textures: Vec::new(),
+        };
+        let start_manifest =
+            sprites::SpriteManifest::load(sprites::RUST_START_MANIFEST_PATH).unwrap();
+        let start = SpriteAtlasAsset {
+            combat_manifest: start_manifest.clone(),
+            manifest: start_manifest,
+            textures: Vec::new(),
+        };
+        assert!(std::ptr::eq(
+            fighter_atlas_for_intro(true, Some(&start), Some(&fight)).unwrap(),
+            &start
+        ));
+        let mut spawn = fight.manifest.clip_named("idle").unwrap().clone();
+        spawn.name = "spawn".to_string();
+        fight.manifest.clips.push(spawn);
+        assert!(std::ptr::eq(
+            fighter_atlas_for_intro(true, Some(&start), Some(&fight)).unwrap(),
+            &fight
+        ));
+        assert!(std::ptr::eq(
+            fighter_atlas_for_intro(true, None, Some(&fight)).unwrap(),
+            &fight
+        ));
+        assert_eq!(
+            sprites::match_fighter_sprite_clip(None, PlayerSlot::One, true),
+            Some(sprites::FighterSpriteClip::Spawn)
+        );
+        assert!(std::ptr::eq(
+            fighter_atlas_for_intro(false, Some(&start), Some(&fight)).unwrap(),
+            &fight
+        ));
+    }
+
+    #[test]
+    fn outcome_render_time_does_not_skip_to_the_end_after_a_long_match() {
+        let mut world = World::new_greybox();
+        world.elapsed_seconds = 60.0;
+        world.player_two.health = 0;
+        let input = crate::combat::fighter::FighterInput::default();
+        world.update(1.0 / 60.0, input, input);
+        assert_eq!(fighter_visual_elapsed_seconds(&world), 0.0);
+        world.update(1.0 / 60.0, input, input);
+        assert_eq!(fighter_visual_elapsed_seconds(&world), 1.0 / 60.0);
     }
 }
 
@@ -2577,6 +2619,10 @@ fn draw_fighter(
     options: FighterDrawOptions<'_>,
 ) {
     let phase = fighter.attack_phase();
+    let outcome_pose = matches!(
+        options.forced_clip,
+        Some(sprites::FighterSpriteClip::Victory | sprites::FighterSpriteClip::Defeat)
+    );
     let phase_body = match phase {
         AttackPhase::Idle => options.body_color,
         AttackPhase::Startup => lighten(options.body_color, 30),
@@ -2584,8 +2630,18 @@ fn draw_fighter(
         AttackPhase::Recovery => dim(options.body_color, 25),
         AttackPhase::WhiffRecovery => dim(options.body_color, 45),
     };
-    let body = fighter_body_color(fighter, phase_body);
-    let sprite_tint = fighter_sprite_tint(fighter, phase);
+    let body = if outcome_pose {
+        options.body_color
+    } else {
+        fighter_body_color(fighter, phase_body)
+    };
+    // Combat freezes at KO; its final attack/reaction must not tint the entire
+    // outcome animation. Only presentation changes here, never the fighter.
+    let sprite_tint = if outcome_pose {
+        Color::WHITE
+    } else {
+        fighter_sprite_tint(fighter, phase)
+    };
 
     if let Some(sprite_atlas) = options.sprite_atlas
         && sprites::draw_manifest_fighter_sprite(
@@ -2604,11 +2660,13 @@ fn draw_fighter(
         draw_body_parts(draw, fighter, body);
     }
 
-    draw_fighter_state_flash(draw, fighter);
+    if !outcome_pose {
+        draw_fighter_state_flash(draw, fighter);
+    }
 
     let sprite_combat = options.sprite_atlas.and_then(|sprite_atlas| {
         sprites::projected_fighter_combat(
-            &sprite_atlas.manifest,
+            &sprite_atlas.combat_manifest,
             fighter,
             options.world_elapsed_seconds,
         )
@@ -2644,7 +2702,7 @@ fn draw_fighter(
         }
     }
 
-    if fighter.blocking {
+    if fighter.blocking && !outcome_pose {
         let guard = fighter.guard_box();
         draw.draw_rectangle(
             guard.x.round() as i32,
@@ -3216,32 +3274,23 @@ fn fighter_atlas_for_intro<'a>(
     fight_atlas: Option<&'a SpriteAtlasAsset>,
 ) -> Option<&'a SpriteAtlasAsset> {
     if spawn_intro {
-        start_atlas.or(fight_atlas)
+        fight_atlas
+            .filter(|atlas| atlas.manifest.clip_named("spawn").is_some())
+            .or_else(|| start_atlas.filter(|atlas| atlas.manifest.clip_named("spawn").is_some()))
+            .or(fight_atlas)
     } else {
         fight_atlas
     }
 }
 
-fn fighter_visual_elapsed_seconds(world: &World, spawn_intro: bool, has_start_atlas: bool) -> f32 {
-    if spawn_intro && has_start_atlas {
+fn fighter_visual_elapsed_seconds(world: &World) -> f32 {
+    if world.outcome.is_some() {
+        world.outcome_elapsed_seconds()
+    } else if world.spawn_intro_active() {
         world.spawn_intro_elapsed_seconds()
     } else {
         world.elapsed_seconds
     }
-}
-
-fn forced_fighter_clip(
-    world: &World,
-    slot: PlayerSlot,
-    spawn_intro: bool,
-    has_start_atlas: bool,
-) -> Option<sprites::FighterSpriteClip> {
-    if spawn_intro && has_start_atlas {
-        return Some(sprites::FighterSpriteClip::Spawn);
-    }
-
-    matches!(world.outcome, Some(MatchOutcome::Winner(winner)) if winner == slot)
-        .then_some(sprites::FighterSpriteClip::Taunt)
 }
 
 fn draw_body_collision(draw: &mut impl DrawTarget, world: &World) {
@@ -3275,6 +3324,9 @@ fn draw_body_collision(draw: &mut impl DrawTarget, world: &World) {
 }
 
 fn draw_fighter_ground_lights(draw: &mut impl DrawTarget, world: &World) {
+    if world.outcome.is_some() {
+        return;
+    }
     draw_fighter_ground_light(draw, &world.player_one);
     draw_fighter_ground_light(draw, &world.player_two);
 }

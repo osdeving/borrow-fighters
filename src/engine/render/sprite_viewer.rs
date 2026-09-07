@@ -375,16 +375,15 @@ fn draw_sprite_instance(
     tint: Color,
 ) {
     let frame = viewer.current_frame();
-    let mut source = Rectangle::new(
-        frame.frame.x as f32,
-        frame.frame.y as f32,
-        frame.frame.w as f32,
-        frame.frame.h as f32,
+    let source = crate::engine::sprites::mirrored_source_rect(
+        Rectangle::new(
+            frame.frame.x as f32,
+            frame.frame.y as f32,
+            frame.frame.w as f32,
+            frame.frame.h as f32,
+        ),
+        mirrored,
     );
-    if mirrored {
-        source.x += source.width;
-        source.width = -source.width;
-    }
     let dest = Rectangle::new(screen.x, screen.y, screen.width, screen.height);
 
     draw.draw_texture_pro(texture, source, dest, Vector2::new(0.0, 0.0), 0.0, tint);

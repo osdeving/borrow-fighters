@@ -7,9 +7,9 @@ use raylib::prelude::*;
 
 use crate::{
     combat::fighter::{Facing, Fighter},
-    config::{RESOLUTION_SCALE, world_px},
+    config::{FLOOR_Y, RESOLUTION_SCALE, world_px},
     engine::sprites::{
-        animation::frame_for_clip_at,
+        animation::frame_for_fighter_clip_at,
         manifest::{SpriteFrame, SpriteManifest},
         selection::{
             FighterSpriteClip, fighter_clip_elapsed_seconds, fighter_sprite_clip,
@@ -32,17 +32,15 @@ pub fn draw_fighter_sprite(
 ) {
     let frame = fighter_sprite_frame(fighter);
     let body = fighter.body_rect();
-    let mut source = Rectangle::new(
-        frame.index() * GREYBOX_FRAME_WIDTH,
-        0.0,
-        GREYBOX_FRAME_WIDTH,
-        GREYBOX_FRAME_HEIGHT,
+    let source = mirrored_source_rect(
+        Rectangle::new(
+            frame.index() * GREYBOX_FRAME_WIDTH,
+            0.0,
+            GREYBOX_FRAME_WIDTH,
+            GREYBOX_FRAME_HEIGHT,
+        ),
+        fighter.facing == Facing::Left,
     );
-
-    if fighter.facing == Facing::Left {
-        source.x += GREYBOX_FRAME_WIDTH;
-        source.width = -GREYBOX_FRAME_WIDTH;
-    }
 
     let dest = Rectangle::new(
         body.center_x() - world_px(GREYBOX_FRAME_WIDTH) * 0.5,
@@ -70,14 +68,15 @@ pub fn draw_manifest_fighter_sprite<'a>(
     } else {
         fighter_clip_elapsed_seconds(fighter, world_elapsed_seconds)
     };
-    let Some(frame) = frame_for_clip_at(manifest, clip.as_str(), clip_time) else {
+    let Some(frame) = frame_for_fighter_clip_at(manifest, clip, clip_time) else {
         return false;
     };
     let Some(texture) = texture_for_frame(frame) else {
         return false;
     };
 
-    draw_manifest_frame(draw, texture, manifest, frame, fighter, tint);
+    let (source, dest) = manifest_frame_geometry(manifest, frame, fighter, clip);
+    draw.draw_texture_pro(texture, source, dest, Vector2::new(0.0, 0.0), 0.0, tint);
     true
 }
 
@@ -91,50 +90,133 @@ pub fn draw_projectile_texture(
 ) {
     let width = texture.width() as f32 * PROJECTILE_SCALE;
     let height = texture.height() as f32 * PROJECTILE_SCALE;
-    let mut source = Rectangle::new(0.0, 0.0, texture.width() as f32, texture.height() as f32);
-
-    if facing == Facing::Left {
-        source.x += texture.width() as f32;
-        source.width = -source.width;
-    }
+    let source = mirrored_source_rect(
+        Rectangle::new(0.0, 0.0, texture.width() as f32, texture.height() as f32),
+        facing == Facing::Left,
+    );
 
     let dest = Rectangle::new(center.x, center.y, width, height);
     let origin = Vector2::new(width * 0.5, height * 0.5);
     draw.draw_texture_pro(texture, source, dest, origin, 0.0, tint);
 }
 
-fn draw_manifest_frame(
-    draw: &mut impl RaylibDraw,
-    texture: &Texture2D,
+/// Mirrors Raylib UVs within the original crop, without sampling the next cell.
+pub(crate) fn mirrored_source_rect(mut source: Rectangle, mirrored: bool) -> Rectangle {
+    // DrawTexturePro interprets negative width as a flip at the same source x.
+    if mirrored {
+        source.width = -source.width;
+    }
+    source
+}
+
+fn manifest_frame_geometry(
     manifest: &SpriteManifest,
     frame: &SpriteFrame,
     fighter: &Fighter,
-    tint: Color,
-) {
+    clip: FighterSpriteClip,
+) -> (Rectangle, Rectangle) {
     let runtime_scale = manifest.scale.unwrap_or(1.0).max(MIN_RUNTIME_FIGHTER_SCALE);
     let body = fighter.body_rect();
-    let anchor = Vector2::new(body.center_x(), body.bottom());
+    // KO freezes the physical body, including an airborne winner. Grounded
+    // outcome artwork gets its own anchor while debug/combat retain that body.
+    let anchor_y = if matches!(clip, FighterSpriteClip::Victory | FighterSpriteClip::Defeat) {
+        FLOOR_Y
+    } else {
+        body.bottom()
+    };
     let source_width = frame.frame.w as f32;
     let source_height = frame.frame.h as f32;
     let dest_width = source_width * runtime_scale;
     let dest_height = source_height * runtime_scale;
     let pivot_x = frame.pivot.x as f32 * runtime_scale;
     let pivot_y = frame.pivot.y as f32 * runtime_scale;
-    let mut source = Rectangle::new(
-        frame.frame.x as f32,
-        frame.frame.y as f32,
-        source_width,
-        source_height,
+    let source = mirrored_source_rect(
+        Rectangle::new(
+            frame.frame.x as f32,
+            frame.frame.y as f32,
+            source_width,
+            source_height,
+        ),
+        fighter.facing == Facing::Left,
     );
 
     let dest_x = if fighter.facing == Facing::Left {
-        source.x += source_width;
-        source.width = -source_width;
-        anchor.x - (dest_width - pivot_x)
+        body.center_x() - (dest_width - pivot_x)
     } else {
-        anchor.x - pivot_x
+        body.center_x() - pivot_x
     };
 
-    let dest = Rectangle::new(dest_x, anchor.y - pivot_y, dest_width, dest_height);
-    draw.draw_texture_pro(texture, source, dest, Vector2::new(0.0, 0.0), 0.0, tint);
+    let dest = Rectangle::new(dest_x, anchor_y - pivot_y, dest_width, dest_height);
+    (source, dest)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::{
+        combat::fighter::{FighterInput, PlayerSlot},
+        engine::sprites::{SpritePivot, SpriteRect},
+    };
+
+    #[test]
+    fn mirroring_preserves_an_offset_atlas_crop_and_a_full_projectile_texture() {
+        for crop in [
+            Rectangle::new(355.0, 3080.0, 275.0, 329.0),
+            Rectangle::new(0.0, 0.0, 64.0, 48.0),
+        ] {
+            let mirrored = mirrored_source_rect(crop, true);
+            assert_eq!(mirrored.x, crop.x);
+            assert_eq!(mirrored.y, crop.y);
+            assert_eq!(mirrored.height, crop.height);
+            assert_eq!(mirrored.width, -crop.width);
+            assert_eq!(mirrored_source_rect(crop, false), crop);
+        }
+    }
+
+    #[test]
+    fn outcome_art_uses_floor_anchor_and_keeps_airborne_combat_body_unchanged() {
+        let mut manifest =
+            SpriteManifest::load("tests/fixtures/sprite-viewer-combat.sprite.json").unwrap();
+        manifest.scale = Some(1.25);
+        let mut frame = manifest.frames[0].clone();
+        frame.frame = SpriteRect {
+            x: 83,
+            y: 47,
+            w: 96,
+            h: 128,
+        };
+        frame.pivot = SpritePivot { x: 25, y: 115 };
+        let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
+        fighter.update(
+            1.0 / 60.0,
+            FighterInput {
+                jump: true,
+                ..FighterInput::default()
+            },
+        );
+        let physical_body = fighter.body_rect();
+        let velocity = fighter.velocity;
+        assert!(physical_body.bottom() < FLOOR_Y);
+
+        for facing in [Facing::Right, Facing::Left] {
+            fighter.facing = facing;
+            for clip in [FighterSpriteClip::Victory, FighterSpriteClip::Defeat] {
+                let (source, dest) = manifest_frame_geometry(&manifest, &frame, &fighter, clip);
+                let pivot_x = if facing == Facing::Left {
+                    96.0 - 25.0
+                } else {
+                    25.0
+                };
+                assert_eq!(dest.x + pivot_x * 1.25, physical_body.center_x());
+                assert_eq!(dest.y + 115.0 * 1.25, FLOOR_Y);
+                assert_eq!((source.x, source.y), (83.0, 47.0));
+            }
+            let (_, jumping) =
+                manifest_frame_geometry(&manifest, &frame, &fighter, FighterSpriteClip::Jump);
+            assert_eq!(jumping.y + 115.0 * 1.25, physical_body.bottom());
+        }
+        assert_eq!(fighter.body_rect(), physical_body);
+        assert_eq!(fighter.velocity, velocity);
+        assert!(!fighter.grounded);
+    }
 }

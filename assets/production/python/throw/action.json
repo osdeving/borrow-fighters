@@ -1,0 +1,58 @@
+{
+  "source": "throw/source-v2.png",
+  "sheet": "throw/keyed.png",
+  "reviewed": false,
+  "loop": false,
+  "status": "generated candidate; source inspected, full runtime review pending",
+  "source_body_height_reference_px": 620,
+  "review_notes": [
+    "Active low clinch corrected from chest-high long reach to short waist/hip level. Palms around (+82 to +100,-120 to -105) world, inside unchanged throw box. No victim baked into own atlas; recovery pulls arms to waist."
+  ],
+  "frames": [
+    {
+      "name": "throw_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 682,
+        "h": 768
+      },
+      "pivot": {
+        "x": 330,
+        "y": 695
+      },
+      "duration_ms": 116,
+      "phase": "startup"
+    },
+    {
+      "name": "throw_01",
+      "source_rect": {
+        "x": 682,
+        "y": 0,
+        "w": 683,
+        "h": 768
+      },
+      "pivot": {
+        "x": 298,
+        "y": 695
+      },
+      "duration_ms": 50,
+      "phase": "active"
+    },
+    {
+      "name": "throw_02",
+      "source_rect": {
+        "x": 1365,
+        "y": 0,
+        "w": 683,
+        "h": 768
+      },
+      "pivot": {
+        "x": 305,
+        "y": 697
+      },
+      "duration_ms": 234,
+      "phase": "recovery"
+    }
+  ]
+}

@@ -14,6 +14,10 @@ use crate::combat::{
     projectile::Projectile,
 };
 use crate::config::{FIXED_TIMESTEP, WINDOW_WIDTH, world_px};
+use crate::engine::sprites::{
+    FighterSpriteClip, ProjectedSpriteCombat, SpriteManifest, projected_fighter_combat,
+    projected_projectile_origin_for_clip,
+};
 use crate::math::rect::Rect;
 
 use super::combat_lab_analysis::{
@@ -181,11 +185,14 @@ pub enum CombatLabPose {
     Block,
     Hit,
     Victory,
+    Spawn,
+    Defeat,
+    CrouchBlock,
 }
 
 impl CombatLabPose {
     /// Ordered pose list used by cycling controls.
-    pub const ALL: [Self; 7] = [
+    pub const ALL: [Self; 10] = [
         Self::Move,
         Self::Idle,
         Self::Crouch,
@@ -193,6 +200,9 @@ impl CombatLabPose {
         Self::Block,
         Self::Hit,
         Self::Victory,
+        Self::Spawn,
+        Self::Defeat,
+        Self::CrouchBlock,
     ];
 
     /// Parses a CLI pose name.
@@ -205,6 +215,9 @@ impl CombatLabPose {
             "block" | "guard" => Some(Self::Block),
             "hit" | "hurt" => Some(Self::Hit),
             "victory" | "taunt" | "win" => Some(Self::Victory),
+            "spawn" | "entrance" => Some(Self::Spawn),
+            "defeat" | "ko" => Some(Self::Defeat),
+            "crouch_block" | "low_guard" => Some(Self::CrouchBlock),
             _ => None,
         }
     }
@@ -219,6 +232,9 @@ impl CombatLabPose {
             Self::Block => "block",
             Self::Hit => "hit",
             Self::Victory => "victory",
+            Self::Spawn => "spawn",
+            Self::Defeat => "defeat",
+            Self::CrouchBlock => "crouch_block",
         }
     }
 
@@ -260,6 +276,7 @@ pub struct CombatLab {
     selected_move: CombatLabMove,
     pose: CombatLabPose,
     fighter: Fighter,
+    combat_manifest: Option<SpriteManifest>,
     projectiles: Vec<Projectile>,
     current_frame: FrameCount,
     paused: bool,
@@ -284,6 +301,7 @@ impl CombatLab {
             selected_move: options.selected_move,
             pose: options.pose,
             fighter: fighter_for(options.character),
+            combat_manifest: None,
             projectiles: Vec::new(),
             current_frame: FrameCount::ZERO,
             paused: false,
@@ -356,6 +374,34 @@ impl CombatLab {
     /// Returns the isolated fighter.
     pub const fn fighter(&self) -> &Fighter {
         &self.fighter
+    }
+
+    /// Supplies baseline metadata for match-equivalent boxes and future projectile spawns.
+    pub fn set_combat_manifest(&mut self, manifest: Option<SpriteManifest>) {
+        self.combat_manifest = manifest;
+    }
+
+    /// Returns baseline metadata with the same sampling clock used by the match.
+    pub fn projected_combat(&self) -> Option<ProjectedSpriteCombat> {
+        self.combat_manifest.as_ref().and_then(|manifest| {
+            projected_fighter_combat(manifest, &self.fighter, self.elapsed_seconds())
+        })
+    }
+
+    /// Returns inspected hurtboxes, falling back when baseline metadata is absent.
+    pub fn hurtboxes(&self) -> Vec<Rect> {
+        self.projected_combat()
+            .map(|combat| combat.hurtboxes)
+            .filter(|boxes| !boxes.is_empty())
+            .unwrap_or_else(|| self.fighter.hurtboxes().rects().to_vec())
+    }
+
+    /// Returns inspected attack boxes; the fighter's attack phase still gates contact.
+    pub fn attack_boxes(&self) -> Vec<Rect> {
+        self.projected_combat()
+            .map(|combat| combat.hitboxes)
+            .filter(|boxes| !boxes.is_empty())
+            .unwrap_or_else(|| self.fighter.attack_box().into_iter().collect())
     }
 
     /// Returns active lab projectiles.
@@ -456,8 +502,18 @@ impl CombatLab {
             return;
         }
 
-        self.projectiles
-            .push(Projectile::from_fighter(&self.fighter));
+        let origin = self.combat_manifest.as_ref().and_then(|manifest| {
+            projected_projectile_origin_for_clip(
+                manifest,
+                &self.fighter,
+                FighterSpriteClip::Special,
+                0.0,
+            )
+        });
+        self.projectiles.push(match origin {
+            Some(origin) => Projectile::from_fighter_with_origin(&self.fighter, origin),
+            None => Projectile::from_fighter(&self.fighter),
+        });
         self.fighter.mark_projectile_fired();
     }
 
@@ -522,6 +578,10 @@ fn apply_pose_to_fighter(fighter: &mut Fighter, pose: CombatLabPose) {
             apply_airborne_preview_to_fighter(fighter);
         }
         CombatLabPose::Block => {
+            fighter.blocking = true;
+        }
+        CombatLabPose::CrouchBlock => {
+            fighter.crouching = true;
             fighter.blocking = true;
         }
         _ => {}

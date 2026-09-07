@@ -1,0 +1,64 @@
+{
+  "action": "crouch_block",
+  "source": "crouch_block/source-v3.png",
+  "sheet": "crouch_block/keyed-v3.png",
+  "loop": false,
+  "reviewed": false,
+  "status": "candidate: source and two-facing previews inspected; real Combat Lab captured; artistic limitations recorded in review.md",
+  "source_body_height_reference_px": 630,
+  "frames": [
+    {
+      "name": "crouch_block_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 682,
+        "h": 768
+      },
+      "pivot": {
+        "x": 330,
+        "y": 608
+      },
+      "duration_ms": 70,
+      "phase": "low_guard_immediate"
+    },
+    {
+      "name": "crouch_block_1",
+      "source_rect": {
+        "x": 682,
+        "y": 0,
+        "w": 683,
+        "h": 768
+      },
+      "pivot": {
+        "x": 282,
+        "y": 608
+      },
+      "duration_ms": 80,
+      "phase": "compress"
+    },
+    {
+      "name": "crouch_block_2",
+      "source_rect": {
+        "x": 1365,
+        "y": 0,
+        "w": 683,
+        "h": 768
+      },
+      "pivot": {
+        "x": 242,
+        "y": 608
+      },
+      "duration_ms": 120,
+      "phase": "hold"
+    }
+  ],
+  "review_notes": "v3 replaces tall low guard with a tightly folded torso/knees. Blue C book guards face immediately; brace and settle remain low. Same uniform source scale; about135\u2013149world px versus former190\u2013205, physical height128 unchanged. Three genuinely different source poses, same durations70/80/120ms.",
+  "runtime_review": {
+    "report": "../../candidates/c/review/runtime-lab-final/capture-report.json",
+    "loaded_manifest_matches_candidate": true,
+    "clip_captured": true,
+    "final_art_approved": false,
+    "low_pose_update": "New compact source; final Lab recapture follows."
+  }
+}

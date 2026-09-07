@@ -2,7 +2,7 @@
 
 ## Status
 
-Padrao de prototipo. Deve ser revisado quando tivermos arte final, camera com zoom ou corpos fisicos por personagem.
+Padrao de prototipo. Deve ser revisado conforme os candidatos de arte passarem por verificacao visual e funcional, ou quando camera/metricas de gameplay mudarem.
 
 ## Objetivo
 
@@ -32,7 +32,7 @@ Isso da uma arena com cerca de `11,8` larguras de corpo (`1194,7 / 101,3`). Para
 
 ## Tamanho Visual Alvo
 
-O corpo fisico ainda e um retangulo comum para todos os personagens. O sprite pode ultrapassar esse corpo para cabelo, orelha, roupa, efeito e leitura visual, mas a area vulneravel principal deve continuar coerente com a hurtbox.
+As metricas fisicas sao carregadas por personagem, mas o roster atual usa o mesmo corpo padrao. O sprite pode ultrapassar esse corpo para cabelo, orelha, roupa, efeito e leitura visual, mas a area vulneravel principal deve continuar coerente com a hurtbox.
 
 Para personagens humanoides, como Rust, Duke/Java, C, Python e C++:
 
@@ -70,11 +70,17 @@ O schema `borrow-fighters.sprite.v1` usa:
 
 - `scale`: escala visual runtime do atlas;
 - `frames[].pivot`: ponto local de apoio por frame;
-- `frames[].combat.hurtboxes[]`: metadata visual opcional para hurtbox por frame;
-- `frames[].combat.hitboxes[]`: metadata visual opcional para hitbox por frame;
+- `frames[].combat.hurtboxes[]`: metadata de combate opcional para hurtbox por frame;
+- `frames[].combat.hitboxes[]`: metadata de combate opcional para hitbox por frame;
 - `frames[].combat.projectile_origin`: ponto local opcional de origem de projectile.
 
-O renderer de luta e o Sprite Combat Viewer consomem o mesmo `scale` e o mesmo `pivot`. Portanto, ajuste salvo no viewer aparece no jogo sem recompilar.
+O renderer e o Sprite Combat Viewer consomem `scale` e `pivot` do manifesto aberto. Para aparecer na luta, esse manifesto precisa ser o selecionado pelo loader e o processo precisa recarregar os assets; salvar no viewer nao troca um jogo ja aberto automaticamente.
+
+Durante a revisao, `BORROW_FIGHTERS_SPRITE_CANDIDATES=1` seleciona `assets/candidates/<personagem>/<personagem>-fighter.sprite.json` somente quando o conjunto tem os 20 clips exigidos e as texturas carregam. Candidatos parciais ficam no Viewer/Studio; luta e Combat Lab preservam o placeholder do personagem. O [pipeline de sprites](11-sprite-pipeline.md#revisao-de-candidatos-no-runtime) descreve os fallbacks e comandos.
+
+O candidato controla apenas o desenho: `SpriteAtlasAsset.combat_manifest` mantem escala, pivôs, boxes e origem do projectile do manifesto baseline para a resolucao de combate e o overlay da luta. Alterar `scale`/`pivot` no candidato pode corrigir alinhamento visual, mas nao desloca a colisao. Use as boxes baseline como referencia para avaliar o novo desenho, registre desalinhamentos e trate qualquer mudanca de combate em uma revisao propria. `frames[].combat` nos placeholders ativos continua sendo dado de gameplay; nao o ajuste como se fosse apenas anotacao.
+
+Confira apoio dos pes nas duas orientacoes, em tamanho real, durante agachamento, salto, reacoes, entrada e fim de luta. Esses clips agora avancam desde o inicio do estado; salto deve acompanhar a trajetoria real, e poses finais usam tempo desde o resultado. Os novos relogios visuais nao alteram corpo fisico, gravidade, velocidade, alcance ou frame data. A separacao e a producao por acao estao registradas no [ADR 0010](adr/0010-reviewed-action-sprite-production.md).
 
 O corpo fisico de personagem usa outro manifesto:
 
@@ -92,7 +98,7 @@ cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip idle --character python --move light_punch
 ```
 
-Para C++, prefira validar escala e combate no jogo, Move Showcase ou Combat Lab enquanto o Sprite Studio recebe paridade completa com manifests multi-atlas.
+Para C++, confira frames dos dois atlas e valide escala e combate no jogo, Move Showcase ou Combat Lab; examinar apenas uma pagina nao cobre o personagem completo.
 
 No viewer:
 
@@ -120,6 +126,6 @@ Python entrou com corpo fisico humanoide padrao (`101,3 x 224 / crouch 128`) em 
 
 ## Ainda Em Aberto
 
-- Criar alcas visuais de hitbox/hurtbox no Sprite Combat Viewer, alem do ajuste atual de `scale` e `pivot`.
+- Calibrar e revisar boxes por acao nas ferramentas existentes antes de promover metadata nova ao combate.
 - Definir se metricas de arena entram em um manifesto proprio ou continuam em `src/config.rs` ate a camera evoluir.
 - Validar a faixa de altura/largura em playtest, nao apenas por comparacao visual.

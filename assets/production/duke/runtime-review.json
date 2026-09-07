@@ -1,0 +1,122 @@
+{
+  "status": "candidate_technically_reviewed_not_final_art_approval",
+  "generator": "built-in imagegen",
+  "actions": 20,
+  "selected_drawings": 61,
+  "generation_calls": 24,
+  "runtime_captures": 267,
+  "runtime_contexts": 19,
+  "runtime_drawings": 57,
+  "uncaptured_clips": [
+    "walk"
+  ],
+  "candidate_manifest": "assets/candidates/duke/duke-fighter.sprite.json",
+  "atlas_sha256": "dd926b5d45f084f081e3e435bd8d8b0795b795feb1937e22c18adfb5990a3179",
+  "loaded_manifest_matches_candidate": true,
+  "source_crop_alpha_audit": "61 crops, all within source, valid pivots, real alpha, transparent margins on all four edges",
+  "timing_audit": "9 of9 close-attack phase boundaries equal baseline contract; cargo test --test sprite_candidates passed2 tests",
+  "combat_metadata": "No new hitboxes, hurtboxes, projectile origins, damage or timings authored",
+  "limitations": [
+    "Images are review artifacts, not assertions of visual correctness.",
+    "Static lab poses advance art time only; they do not simulate match damage, outcome transitions, or a full jump trajectory.",
+    "Combat Lab has no walk pose; walking and match transitions require a separate playtest.",
+    "The lab uses its native facing for this character; no fighter state is modified to mirror it."
+  ],
+  "evidence": [
+    {
+      "action": "idle",
+      "image": "target/art/duke-combat-lab-review/idle-f000-idle.png",
+      "finding": "Nariz, emblema, vapor e apoio preservados; corpo sólido perto da caixa em pé."
+    },
+    {
+      "action": "crouch",
+      "image": "target/art/duke-combat-lab-review/crouch-f012-idle.png",
+      "finding": "Agachamento baixo: cabeça sólida próxima ao teto da caixa; vapor fica acima."
+    },
+    {
+      "action": "jump",
+      "image": "target/art/duke-combat-lab-review/jump-f045-idle.png",
+      "finding": "Último desenho mantém pernas estendidas no ar; o Lab fixa a altura, sem trajetória completa."
+    },
+    {
+      "action": "block",
+      "image": "target/art/duke-combat-lab-review/block-f012-idle.png",
+      "finding": "Palma à frente coincide com a área de defesa; apoio no chão."
+    },
+    {
+      "action": "crouch_block",
+      "image": "target/art/duke-combat-lab-review/crouch_block-f012-idle.png",
+      "finding": "Defesa baixa legível, mas cone da cabeça excede a caixa de128px em cerca de37px."
+    },
+    {
+      "action": "hit",
+      "image": "target/art/duke-combat-lab-review/hit-f006-idle.png",
+      "finding": "Recuo legível com um pé de apoio; sem nova lesão ou rosto humano."
+    },
+    {
+      "action": "punch_light",
+      "image": "target/art/duke-combat-lab-review/punch_light-f006-active.png",
+      "finding": "Luva ativa dentro da caixa e alcance curto preservado."
+    },
+    {
+      "action": "punch_heavy",
+      "image": "target/art/duke-combat-lab-review/punch_heavy-f018-active.png",
+      "finding": "Luva ativa dentro da caixa; braço fino longo diferencia o golpe forte."
+    },
+    {
+      "action": "kick",
+      "image": "target/art/duke-combat-lab-review/kick-f012-active.png",
+      "finding": "Sapato ativo dentro da caixa; apoio permanece no chão."
+    },
+    {
+      "action": "sweep",
+      "image": "target/art/duke-combat-lab-review/sweep-f018-active.png",
+      "finding": "Sola cruza a caixa e mão apoia o corpo; extremidades do sapato ultrapassam ligeiramente a altura da caixa."
+    },
+    {
+      "action": "overhead",
+      "image": "target/art/duke-combat-lab-review/overhead-f018-active.png",
+      "finding": "Luva dentro da caixa; preparação alta e contato descendente curto, próximo de um gancho horizontal."
+    },
+    {
+      "action": "anti_air",
+      "image": "target/art/duke-combat-lab-review/anti_air-f012-active.png",
+      "finding": "Punho elevado dentro da caixa; mão inteira preservada, pés no chão."
+    },
+    {
+      "action": "air_punch",
+      "image": "target/art/duke-combat-lab-review/air_punch-f006-active.png",
+      "finding": "Luva dentro da caixa aérea; pernas recolhidas e núcleo do corpo estável."
+    },
+    {
+      "action": "air_kick",
+      "image": "target/art/duke-combat-lab-review/air_kick-f012-active.png",
+      "finding": "Sola inteira dentro da caixa aérea; perna aponta para frente e para baixo."
+    },
+    {
+      "action": "throw",
+      "image": "target/art/duke-combat-lab-review/throw-f009-active.png",
+      "finding": "Dedos dentro do alcance existente; duas mãos de agarrão distintas, sem vítima embutida."
+    },
+    {
+      "action": "special",
+      "image": "target/art/duke-combat-lab-review/special-f001-idle.png",
+      "finding": "Projétil separado sai pela face do cano no primeiro desenho. Origem original e cooldown intactos."
+    },
+    {
+      "action": "spawn",
+      "image": "target/art/duke-combat-lab-review/spawn-f090-idle.png",
+      "finding": "Gag original do café/mesa preservada. Mesa e fragmentos avançam alguns pixels abaixo da linha dos pés como objetos em primeiro plano."
+    },
+    {
+      "action": "victory",
+      "image": "target/art/duke-combat-lab-review/victory-f030-idle.png",
+      "finding": "Brinde com caneca inteira, vapor e pés apoiados."
+    },
+    {
+      "action": "defeat",
+      "image": "target/art/duke-combat-lab-review/defeat-f045-idle.png",
+      "finding": "Mascote sentado e abatido, mãos de apoio no chão; sem novo estado de combate."
+    }
+  ]
+}
