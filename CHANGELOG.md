@@ -8,6 +8,7 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 
 ### Adicionado
 
+- Navegação dos menus com hover, clique esquerdo para ativar e clique direito para voltar valores ajustáveis.
 - Base inicial de documentação docs-first.
 - Governança proposta para PRs, branches, labels, squads e releases.
 - Templates de contribuição para GitHub, arte, personagens, ADR e release.
@@ -95,6 +96,11 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Submenu `Lore / Roster`, com livro do Linker, capítulos, fichas de personagem e retratos placeholder de Rust, Duke/Java, C e Python.
 - JSON runtime `assets/lore/story.json` para editar história e roster sem recompilar o jogo.
 - Clips CC0 adicionais e bindings específicos para deixar golpes de Rust e Duke/Java audíveis por move, sem depender só do fallback curto.
+
+### Corrigido
+
+- Cursor reposicionado no centro a cada quadro, que deixava o `Linker` parado e impedia alcançar o botão de fechar da janela.
+- Overlay `Linker` residual ao tirar o foco ou mover o mouse para fora da janela.
 
 ### Em aberto
 

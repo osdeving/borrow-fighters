@@ -110,7 +110,7 @@ O Combat Lab abre com o fundo `Sirius` ligado para validar contraste de golpe/sp
 
 ## Menu Principal
 
-O jogo abre primeiro no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem, arena, capítulo, ficha de roster e volume em linhas ajustáveis, e `Esc` para voltar de submenus, luta, Move Showcase, Combat Lab ou Sprite Viewer. O cursor nativo do sistema fica sempre visível para evitar captura instável em Windows, WSL e setups com múltiplos monitores; em WSL, o jogo também desenha um cursor `Linker` dentro da área renderizada como fallback. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar.
+O jogo abre primeiro no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem, arena, capítulo, ficha de roster e volume em linhas ajustáveis, e `Esc` para voltar de submenus, luta, Move Showcase, Combat Lab ou Sprite Viewer. O mouse também navega pelos menus: passe sobre uma linha para selecioná-la, clique com o botão esquerdo para confirmar, alternar uma opção ou avançar um valor, e use o botão direito para voltar valores de personagem, arena, capítulo e volume. O cursor nativo permanece visível e livre para sair da janela; em WSL, o cursor `Linker` acompanha o mouse apenas enquanto a janela está em foco e o ponteiro está dentro dela. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar.
 
 Fluxo atual:
 
@@ -233,6 +233,10 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 41. A vida deve chegar a zero e encerrar a luta.
 42. Ao iniciar a próxima luta depois de uma vitória, o cenário deve avançar uma vez no ciclo `Sirius Light Ring -> Tech Coast Beacon -> Java Street Terminal -> BioTIC Garden -> Porto Digital Cache -> Pinhao Smart Grid -> Sirius Light Ring`.
 43. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil por hitspark, block pulse, trail e luz de chão em stun.
+44. O mouse deve alcançar qualquer ponto da janela e sair dela sem retornar ao centro, tanto no menu quanto na luta. Em WSL, `Linker` acompanha o movimento e desaparece fora da janela ou ao perder foco.
+45. Hover e clique devem navegar por todos os menus, incluindo `Back` e `Exit`; cliques fora das linhas não devem ativar a seleção anterior. O mouse parado não deve impedir navegação por teclado/gamepad.
+46. Clique esquerdo deve avançar personagem, arena, capítulo e volume; clique direito deve voltar esses valores. Flags em `Options` devem alternar com clique esquerdo.
+47. O botão nativo de fechar deve encerrar a janela durante a luta e nas ferramentas. `Esc` seguido de clique em `Exit` deve encerrar pelo menu.
 
 ## Combat Lab
 

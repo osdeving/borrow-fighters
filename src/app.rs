@@ -139,7 +139,7 @@ impl App {
                 self.move_showcase.character(),
                 &assets,
             ));
-        let software_cursor_enabled = software_cursor_enabled_for_env();
+        let software_cursor_requested = software_cursor_enabled_for_env();
         let audio_device = RaylibAudio::init_audio_device();
         let mut audio_player = match &audio_device {
             Ok(audio_device) => AudioPlayer::load(audio_device, AUDIO_MANIFEST_PATH),
@@ -158,6 +158,9 @@ impl App {
             self.visual_time_seconds += frame_time;
             sync_system_cursor(raylib);
             let mouse_position = raylib.get_mouse_position();
+            let software_cursor_enabled = software_cursor_requested
+                && raylib.is_window_focused()
+                && raylib.is_cursor_on_screen();
             audio_player.update_streams();
             update_video_capture_status(&mut self.video_capture);
 
@@ -301,10 +304,19 @@ impl App {
                     if input.open_preferences && self.preferences_menu.back() {
                         audio_player.play(&AudioEvent::ui_back());
                     } else {
-                        play_preferences_audio_feedback(&mut audio_player, input.preferences);
+                        let mut preferences_input = input.preferences;
+                        preferences_input.pointer = crate::engine::input::read_preferences_pointer(
+                            raylib,
+                            &self.preferences_menu,
+                        );
+                        play_preferences_audio_feedback(
+                            &mut audio_player,
+                            preferences_input,
+                            self.preferences_menu.selected(),
+                        );
                         let preferences_action = self
                             .preferences_menu
-                            .update(input.preferences, &mut self.feature_flags);
+                            .update(preferences_input, &mut self.feature_flags);
                         match preferences_action {
                             PreferencesAction::Stay => {}
                             PreferencesAction::CyclePlayerOne(direction) => {
@@ -715,18 +727,36 @@ fn fighter_manifest_for_character(
 fn play_preferences_audio_feedback<'aud>(
     audio_player: &mut AudioPlayer<'aud>,
     input: crate::scenes::preferences::PreferencesInput,
+    selected_row: usize,
 ) {
-    if input.up || input.down || input.left || input.right || input.scroll_up || input.scroll_down {
+    let pointer_selection_changed = input.pointer.moved
+        && input
+            .pointer
+            .hovered_row
+            .is_some_and(|row| row != selected_row);
+    if input.up
+        || input.down
+        || input.left
+        || input.right
+        || input.scroll_up
+        || input.scroll_down
+        || pointer_selection_changed
+        || (input.pointer.previous && input.pointer.hovered_row.is_some())
+    {
         audio_player.play(&AudioEvent::ui_navigate());
     }
 
-    if input.activate || input.start {
+    if input.activate
+        || input.start
+        || (input.pointer.activate && input.pointer.hovered_row.is_some())
+    {
         audio_player.play(&AudioEvent::ui_confirm());
     }
 }
 
 fn sync_system_cursor(raylib: &mut RaylibHandle) {
-    raylib.enable_cursor();
+    // EnableCursor also warps the pointer to the window center in Raylib.
+    // ShowCursor restores the normal cursor without changing its position.
     raylib.show_cursor();
 }
 

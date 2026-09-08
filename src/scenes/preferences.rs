@@ -27,6 +27,16 @@ pub struct PreferencesInput {
     pub scroll_down: bool,
     pub activate: bool,
     pub start: bool,
+    pub pointer: PreferencesPointerInput,
+}
+
+/// Pointer commands already hit-tested against the current menu page.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct PreferencesPointerInput {
+    pub hovered_row: Option<usize>,
+    pub moved: bool,
+    pub activate: bool,
+    pub previous: bool,
 }
 
 /// Direction used by menu rows that cycle through discrete options.
@@ -177,6 +187,19 @@ impl PreferencesMenu {
         }
 
         let previous_selected = self.selected;
+        let keyboard_command =
+            input.up || input.down || input.left || input.right || input.activate || input.start;
+        // Only movement or a fresh click gives the mouse selection control.
+        // A resting pointer must not undo keyboard/gamepad navigation.
+        let pointer_row = input
+            .pointer
+            .hovered_row
+            .filter(|&row| row < self.page_row_count());
+        let pointer_used = !keyboard_command
+            && (input.pointer.moved || input.pointer.activate || input.pointer.previous);
+        if pointer_used && let Some(row) = pointer_row {
+            self.selected = row;
+        }
 
         if input.up {
             self.selected = self.selected.saturating_sub(1);
@@ -212,6 +235,15 @@ impl PreferencesMenu {
 
         if input.activate {
             return self.activate_selected(flags);
+        }
+
+        if pointer_used && pointer_row.is_some() {
+            if input.pointer.activate {
+                return self.activate_selected(flags);
+            }
+            if input.pointer.previous {
+                return self.cycle_action(CycleDirection::Previous);
+            }
         }
 
         PreferencesAction::Stay

@@ -80,6 +80,7 @@ borrow-fighters/
 │   │       └── combat_edit.rs  # Helpers puros para editar boxes do viewer
 │   ├── ui/
 │   │   ├── mod.rs              # API dos overlays de UI/debug
+│   │   ├── menu_layout.rs      # Retângulos compartilhados pelo desenho e cliques dos menus
 │   │   └── combat_debug.rs     # Overlay de boxes, pivot e timing do Combat Lab
 │   └── math/
 │       ├── mod.rs              # Tipos geométricos pequenos do jogo

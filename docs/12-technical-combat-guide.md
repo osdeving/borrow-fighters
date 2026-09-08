@@ -32,7 +32,7 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Combat debug UI | Boxes, pivot, dummy, overlay e texto de timing do laboratório | [`src/ui/combat_debug.rs`](../src/ui/combat_debug.rs) | Teste manual via Combat Lab |
 | Sprite Combat Viewer | Ferramenta isolada para carregar atlas em runtime, ver grid, pivot, bounds e preparar boxes data-driven | [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), [`src/scenes/sprite_viewer/combat_edit.rs`](../src/scenes/sprite_viewer/combat_edit.rs), [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs) | [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs), teste manual via `--tool sprite-viewer` |
 | Sprite Studio | App externo Tauri 1.8 + React para editar manifestos sem depender de Raylib | [`tools/sprite-studio`](../tools/sprite-studio) | `pnpm build`; `pnpm tauri build --debug`; desktop requer pre-requisitos Tauri |
-| Input | Teclado/gamepad para luta, menu, Move Showcase, Sprite Viewer e Combat Lab | [`src/engine/input.rs`](../src/engine/input.rs), [`src/engine/gamepad.rs`](../src/engine/gamepad.rs) | [`tests/cli.rs`](../tests/cli.rs), [`tests/feature_flags.rs`](../tests/feature_flags.rs) |
+| Input | Teclado/gamepad para luta e ferramentas; mouse, teclado e gamepad para menus | [`src/engine/input.rs`](../src/engine/input.rs), [`src/engine/gamepad.rs`](../src/engine/gamepad.rs) | [`tests/cli.rs`](../tests/cli.rs), [`tests/feature_flags.rs`](../tests/feature_flags.rs) |
 | Sprite runtime | Manifest JSON, seleção de clips, relógios visuais e projeção de metadata baseline | [`src/engine/sprites/`](../src/engine/sprites), [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) | [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs), [`tests/sprite_selection.rs`](../tests/sprite_selection.rs), [`tests/sprite_playback.rs`](../tests/sprite_playback.rs) |
 
 ## Técnica Atual
@@ -48,6 +48,14 @@ O loop principal em [`src/app.rs`](../src/app.rs) usa `AppScene` de [`src/scenes
 - `SpriteViewer`: ferramenta de sprite em loop proprio, fora do fluxo normal de luta.
 
 Transicoes novas devem passar por esse enum em vez de espalhar flags soltas no loop. Se a nova tela for ferramenta temporaria, prefira loop isolado como o Sprite Viewer; se fizer parte do jogo, trate como cena normal. `Esc` tem comportamento de voltar dentro do jogo; o bootstrap em [`src/main.rs`](../src/main.rs) desativa a tecla padrão de fechamento do Raylib com `set_exit_key(None)`.
+
+### Mouse e Fechamento da Janela
+
+O compartilhamento da geometria de menus entre desenho e input está registrado na [ADR 0012](adr/0012-shared-menu-pointer-layout.md).
+
+O menu recebe hover, clique esquerdo e clique direito por [`src/engine/input.rs`](../src/engine/input.rs). Desenho e detecção de linhas compartilham a geometria de [`src/ui/menu_layout.rs`](../src/ui/menu_layout.rs). [`PreferencesMenu`](../src/scenes/preferences.rs) usa movimento real do mouse para mudar a seleção; um ponteiro parado não disputa a seleção com teclado/gamepad. Clique esquerdo ativa a linha sob o ponteiro, inclusive `Exit` e `Back`, alterna flags ou avança valores. Clique direito volta valores ajustáveis. Cliques fora das linhas são ignorados, e a proteção de entrada nas transições também cobre o mouse.
+
+O cursor nativo usa `show_cursor()`, que preserva sua posição. Não chamar `enable_cursor()` a cada quadro: no Raylib 6 essa função também centraliza o ponteiro, impedindo o movimento e o acesso ao botão de fechar. O overlay `Linker` em WSL acompanha a posição real e só aparece com a janela em foco e o mouse na área cliente. `Esc` mantém a função de voltar; o botão nativo de fechar e `Exit` encerram o jogo. A navegação por mouse é coberta em [`tests/feature_flags.rs`](../tests/feature_flags.rs); cursor e fechamento exigem também verificação com janela real.
 
 ### Fluxo de Início de Luta
 

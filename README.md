@@ -146,7 +146,7 @@ cargo run -- --fight --p1 python --p2 duke
 cargo run -- --fight --p1 cpp --p2 c
 ```
 
-O jogo abre primeiro no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem, arena, capítulo, ficha de roster e volume em linhas ajustáveis, e `Esc` para voltar de submenus, luta, Move Showcase, Combat Lab ou Sprite Viewer. O cursor nativo do sistema fica sempre visível para evitar captura instável em Windows, WSL e setups com múltiplos monitores; em WSL, o jogo também desenha um cursor `Linker` dentro da área renderizada como fallback. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar da janela.
+O jogo abre primeiro no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem, arena, capítulo, ficha de roster e volume em linhas ajustáveis, e `Esc` para voltar de submenus, luta, Move Showcase, Combat Lab ou Sprite Viewer. O mouse também navega pelos menus: passe sobre uma linha para selecioná-la, clique com o botão esquerdo para confirmar, alternar uma opção ou avançar um valor, e use o botão direito para voltar valores de personagem, arena, capítulo e volume. O cursor nativo permanece visível e livre para sair da janela; em WSL, o cursor `Linker` acompanha o mouse apenas enquanto a janela está em foco e o ponteiro está dentro dela. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar da janela.
 
 O menu principal mantém a primeira tela simples:
 

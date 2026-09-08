@@ -30,6 +30,7 @@ use crate::lore::{LoreBook, LoreChapter, LoreCharacter};
 use crate::math::rect::Rect;
 use crate::scenes::preferences::{MenuPage, PreferencesMenu};
 use crate::ui::binary_text::{DEFAULT_BINARY_REVEAL_FRAMES, binary_reveal_text_with_seed};
+use crate::ui::menu_layout::{MenuBounds as MenuPanel, MenuLayout};
 
 const BACKGROUND: Color = Color::new(18, 20, 26, 255);
 const FLOOR: Color = Color::new(72, 76, 88, 255);
@@ -256,7 +257,7 @@ pub fn draw_video_capture_overlay(
     draw.draw_text(&text, x, y, font_size, UI_MUTED);
 }
 
-/// Draws the software menu cursor used when the OS cursor is hidden.
+/// Draws the WSL fallback pointer while the native cursor remains enabled.
 pub fn draw_linker_chip_cursor(
     draw: &mut impl DrawTarget,
     mouse_position: Vector2,
@@ -265,8 +266,8 @@ pub fn draw_linker_chip_cursor(
 ) {
     if mouse_position.x < 0.0
         || mouse_position.y < 0.0
-        || mouse_position.x > WINDOW_WIDTH as f32
-        || mouse_position.y > WINDOW_HEIGHT as f32
+        || mouse_position.x >= WINDOW_WIDTH as f32
+        || mouse_position.y >= WINDOW_HEIGHT as f32
     {
         return;
     }
@@ -450,14 +451,6 @@ pub struct PreferencesDrawOptions<'a> {
     pub gamepad_status: GamepadStatus,
     pub recording: bool,
     pub assets: &'a GameAssets,
-}
-
-#[derive(Clone, Copy)]
-struct MenuPanel {
-    x: i32,
-    y: i32,
-    width: i32,
-    height: i32,
 }
 
 struct MenuLine<'a> {
@@ -822,12 +815,8 @@ fn draw_main_menu(
     font: Option<&Font>,
     options: &PreferencesDrawOptions<'_>,
 ) {
-    let panel = MenuPanel {
-        x: screen_px(302),
-        y: screen_px(154),
-        width: screen_px(356),
-        height: screen_px(370),
-    };
+    let geometry = MenuLayout::for_page(MenuPage::Main);
+    let panel = geometry.panel;
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "BOOT SELECT");
 
@@ -876,15 +865,18 @@ fn draw_main_menu(
         &rows,
         options.menu.selected(),
         MenuRowsLayout {
-            panel,
-            row_height: screen_px(44),
-            start_offset_y: screen_px(58),
+            geometry,
             large_labels: true,
             show_descriptions: true,
             selection_pulse_frames: options.menu.selection_pulse_frames(),
         },
     );
-    draw_menu_footer(draw, font, panel, "Setas/W/S navegam  |  Enter confirma");
+    draw_menu_footer(
+        draw,
+        font,
+        panel,
+        "Mouse/Setas navegam  |  Clique/Enter confirma",
+    );
 }
 
 fn draw_versus_menu(
@@ -892,12 +884,8 @@ fn draw_versus_menu(
     font: Option<&Font>,
     options: &PreferencesDrawOptions<'_>,
 ) {
-    let panel = MenuPanel {
-        x: screen_px(270),
-        y: screen_px(112),
-        width: screen_px(484),
-        height: screen_px(432),
-    };
+    let geometry = MenuLayout::for_page(MenuPage::Versus);
+    let panel = geometry.panel;
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "VERSUS SETUP");
 
@@ -944,9 +932,7 @@ fn draw_versus_menu(
         &rows,
         options.menu.selected(),
         MenuRowsLayout {
-            panel,
-            row_height: screen_px(56),
-            start_offset_y: screen_px(96),
+            geometry,
             large_labels: false,
             show_descriptions: true,
             selection_pulse_frames: options.menu.selection_pulse_frames(),
@@ -956,7 +942,7 @@ fn draw_versus_menu(
         draw,
         font,
         panel,
-        "A/D ou setas ajustam personagem/arena  |  Esc volta",
+        "Clique/A/D ajusta  |  Botao direito: anterior  |  Esc volta",
     );
 }
 
@@ -1051,12 +1037,8 @@ fn draw_training_menu(
     font: Option<&Font>,
     options: &PreferencesDrawOptions<'_>,
 ) {
-    let panel = MenuPanel {
-        x: screen_px(286),
-        y: screen_px(126),
-        width: screen_px(452),
-        height: screen_px(390),
-    };
+    let geometry = MenuLayout::for_page(MenuPage::Training);
+    let panel = geometry.panel;
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "TRAINING");
 
@@ -1093,9 +1075,7 @@ fn draw_training_menu(
         &rows,
         options.menu.selected(),
         MenuRowsLayout {
-            panel,
-            row_height: screen_px(56),
-            start_offset_y: screen_px(106),
+            geometry,
             large_labels: false,
             show_descriptions: true,
             selection_pulse_frames: options.menu.selection_pulse_frames(),
@@ -1109,12 +1089,8 @@ fn draw_lore_menu(
     font: Option<&Font>,
     options: &PreferencesDrawOptions<'_>,
 ) {
-    let panel = MenuPanel {
-        x: screen_px(54),
-        y: screen_px(78),
-        width: screen_px(852),
-        height: screen_px(428),
-    };
+    let geometry = MenuLayout::for_page(MenuPage::Lore);
+    let panel = geometry.panel;
     let book = &options.assets.lore_book;
     let lore_font = options.assets.lore_font.as_ref().or(font);
     let lore_body_font = options
@@ -1200,21 +1176,13 @@ fn draw_lore_menu(
             checked: None,
         },
     ];
-    let selector_panel = MenuPanel {
-        x: panel.x + screen_px(28),
-        y: panel.y + screen_px(82),
-        width: screen_px(330),
-        height: screen_px(134),
-    };
     draw_menu_rows(
         draw,
         font,
         &controls,
         options.menu.selected(),
         MenuRowsLayout {
-            panel: selector_panel,
-            row_height: screen_px(40),
-            start_offset_y: 0,
+            geometry,
             large_labels: false,
             show_descriptions: true,
             selection_pulse_frames: options.menu.selection_pulse_frames(),
@@ -1359,19 +1327,16 @@ fn draw_options_menu(
     font: Option<&Font>,
     options: &PreferencesDrawOptions<'_>,
 ) {
-    let panel = MenuPanel {
-        x: screen_px(176),
-        y: screen_px(56),
-        width: screen_px(672),
-        height: screen_px(526),
-    };
+    let geometry = MenuLayout::for_page(MenuPage::Options);
+    let panel = geometry.panel;
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "OPTIONS");
 
-    let row_x = panel.x + screen_px(48);
-    let row_width = panel.width - screen_px(96);
-    let row_height = screen_px(28);
-    let row_y = panel.y + screen_px(86);
+    let first_row = geometry.row_bounds(0);
+    let row_x = first_row.x;
+    let row_width = first_row.width;
+    let row_height = first_row.height;
+    let row_y = first_row.y;
 
     draw_option_row(
         draw,
@@ -1394,7 +1359,9 @@ fn draw_options_menu(
         font,
         OptionRow {
             x: row_x,
-            y: row_y + PreferencesMenu::OPTIONS_MUSIC_VOLUME_ROW as i32 * row_height,
+            y: geometry
+                .row_bounds(PreferencesMenu::OPTIONS_MUSIC_VOLUME_ROW)
+                .y,
             width: row_width,
             height: row_height,
             selected: options.menu.selected() == PreferencesMenu::OPTIONS_MUSIC_VOLUME_ROW,
@@ -1411,7 +1378,7 @@ fn draw_options_menu(
             font,
             OptionRow {
                 x: row_x,
-                y: row_y + row as i32 * row_height,
+                y: geometry.row_bounds(row).y,
                 width: row_width,
                 height: row_height,
                 selected: options.menu.selected() == row,
@@ -1432,7 +1399,7 @@ fn draw_options_menu(
         font,
         OptionRow {
             x: row_x,
-            y: row_y + back_row as i32 * row_height,
+            y: geometry.row_bounds(back_row).y,
             width: row_width,
             height: row_height,
             selected: options.menu.selected() == back_row,
@@ -1456,7 +1423,7 @@ fn draw_options_menu(
         draw,
         font,
         panel,
-        "Enter/Espaco alterna  |  F9/F10 gravacao  |  Esc volta",
+        "Clique/Enter alterna  |  Botao direito: anterior  |  Esc volta",
     );
 }
 
@@ -1596,23 +1563,17 @@ fn draw_menu_rows(
     selected: usize,
     layout: MenuRowsLayout,
 ) {
-    let compact_rows = layout.row_height <= screen_px(42);
-    let horizontal_padding = if compact_rows {
-        screen_px(18)
-    } else {
-        screen_px(42)
-    };
-    let row_x = layout.panel.x + horizontal_padding;
-    let row_width = layout.panel.width - horizontal_padding * 2;
+    let compact_rows = layout.geometry.row_step <= screen_px(42);
     for (index, row) in rows.iter().enumerate() {
+        let bounds = layout.geometry.row_bounds(index);
         draw_large_menu_row(
             draw,
             font,
             LargeMenuRow {
-                x: row_x,
-                y: layout.panel.y + layout.start_offset_y + index as i32 * layout.row_height,
-                width: row_width,
-                height: layout.row_height - screen_px(8),
+                x: bounds.x,
+                y: bounds.y,
+                width: bounds.width,
+                height: bounds.height,
                 selected: selected == index,
                 label: row.label,
                 description: row.description,
@@ -1633,9 +1594,7 @@ fn draw_menu_rows(
 
 #[derive(Clone, Copy)]
 struct MenuRowsLayout {
-    panel: MenuPanel,
-    row_height: i32,
-    start_offset_y: i32,
+    geometry: MenuLayout,
     large_labels: bool,
     show_descriptions: bool,
     selection_pulse_frames: u16,
@@ -1902,15 +1861,9 @@ fn draw_option_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: OptionR
     } else {
         Color::new(9, 15, 28, 190)
     };
-    draw.draw_rectangle(row.x, row.y, row.width, row.height - screen_px(2), fill);
+    draw.draw_rectangle(row.x, row.y, row.width, row.height, fill);
     if row.selected {
-        draw.draw_rectangle_lines(
-            row.x,
-            row.y,
-            row.width,
-            row.height - screen_px(2),
-            MENU_ACCENT,
-        );
+        draw.draw_rectangle_lines(row.x, row.y, row.width, row.height, MENU_ACCENT);
     }
 
     let label_x = if let Some(checked) = row.checked {
