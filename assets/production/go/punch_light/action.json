@@ -1,22 +1,30 @@
 {
   "action": "punch_light",
   "source": "punch_light/source-v4.png",
-  "sheet": "punch_light/keyed.png",
+  "sheet": "punch_light/sheet-v1.png",
   "loop": false,
-  "source_body_height_reference_px": 534,
-  "normalization_note": "v4 compact jab selected. v1 reached too far, v2 lost the punch, v3 remained too long. Knuckles approach the far edge of the existing short hitbox; no hitbox changed.",
+  "reviewed": true,
+  "status": "Final generated art reviewed: complete World in both facings, native Lab, Sprite Studio and normal match; evidence in finalization-review.md.",
+  "source_body_height_reference_px": 754,
+  "suggested_scale_to_runtime": 0.35013262599469497,
+  "replacement_contract": "../action-contracts.json#/actions/punch_light",
+  "references": {
+    "new_master": "reference/master.png",
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
   "frames": [
     {
       "name": "punch_light_00",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 591,
-        "h": 887
+        "w": 800,
+        "h": 920
       },
       "pivot": {
-        "x": 315,
-        "y": 721
+        "x": 389,
+        "y": 828
       },
       "duration_ms": 50,
       "phase": "startup"
@@ -24,14 +32,14 @@
     {
       "name": "punch_light_01",
       "source_rect": {
-        "x": 591,
+        "x": 800,
         "y": 0,
-        "w": 592,
-        "h": 887
+        "w": 800,
+        "h": 920
       },
       "pivot": {
-        "x": 239,
-        "y": 721
+        "x": 384,
+        "y": 828
       },
       "duration_ms": 83,
       "phase": "active"
@@ -39,20 +47,21 @@
     {
       "name": "punch_light_02",
       "source_rect": {
-        "x": 1183,
+        "x": 1600,
         "y": 0,
-        "w": 591,
-        "h": 887
+        "w": 800,
+        "h": 920
       },
       "pivot": {
-        "x": 250,
-        "y": 721
+        "x": 332,
+        "y": 828
       },
       "duration_ms": 100,
       "phase": "recovery"
     }
   ],
-  "review_notes": "Built-in image_gen, original narrow Go master and generated idle continuity. Flat magenta extracted without Rust contour mode; isolated matte corner pixels removed where present. Candidate visual only; baseline combat remains authoritative.",
+  "generation_brief": "Compact elbow extension: active knuckles must fit the short baseline box, without moving the whole body to fake reach.",
+  "review_notes": "Short bent-elbow body jab. v1 was too high/long; v2 had no reach; v3 was still high. v4 selects the final compact contact. Explicit crops/pivots are recorded in preparation.json; no timing or combat changes.",
   "timing_reference": {
     "move_id": "GoGoroutineJab",
     "source": "src/combat/move_data.rs",
@@ -84,5 +93,18 @@
       "x": 78.66666666666666,
       "y": -121.33333333333334
     }
+  },
+  "scale_to_runtime": 0.35013262599469497,
+  "runtime_review": {
+    "approved": true,
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "report": "../finalization-review.md",
+    "world_facings_seen": [
+      "Left",
+      "Right"
+    ],
+    "lab_capture": "full set before jump, art unchanged by frame checksum",
+    "normal_match_result_evidence": false
   }
 }

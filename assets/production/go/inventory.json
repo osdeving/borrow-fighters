@@ -1,0 +1,242 @@
+{
+  "schema": "borrow-fighters.replacement-inventory.v1",
+  "character": "go",
+  "status": "Final generated art reviewed: complete World in both facings, native Lab, Sprite Studio and normal match; evidence in finalization-review.md.",
+  "historical_roots": [
+    "assets/production/go-cartoon-archive",
+    "assets/candidates/go-cartoon-archive"
+  ],
+  "historical_art_reused_as_new": false,
+  "required_clip_count": 20,
+  "lots": {
+    "a_movement_guard": {
+      "owner": "root",
+      "actions": [
+        "idle",
+        "walk",
+        "jump",
+        "crouch",
+        "block",
+        "crouch_block",
+        "hit"
+      ],
+      "status": "Final integrated art and native validation complete; see finalization-review.md.",
+      "exclusive_paths": [
+        "idle/",
+        "walk/",
+        "jump/",
+        "crouch/",
+        "block/",
+        "crouch_block/",
+        "hit/"
+      ]
+    },
+    "b_ground_attacks": {
+      "owner": "audit_moves",
+      "actions": [
+        "punch_light",
+        "punch_heavy",
+        "kick",
+        "sweep",
+        "overhead",
+        "throw"
+      ],
+      "status": "Final integrated art and native validation complete; see finalization-review.md.",
+      "exclusive_paths": [
+        "punch_light/",
+        "punch_heavy/",
+        "kick/",
+        "sweep/",
+        "overhead/",
+        "throw/"
+      ]
+    },
+    "c_air_special_outcomes": {
+      "owner": "verification_pipeline",
+      "actions": [
+        "anti_air",
+        "air_punch",
+        "air_kick",
+        "special",
+        "spawn",
+        "victory",
+        "defeat"
+      ],
+      "status": "Final integrated art and native validation complete; see finalization-review.md.",
+      "exclusive_paths": [
+        "anti_air/",
+        "air_punch/",
+        "air_kick/",
+        "special/",
+        "spawn/",
+        "victory/",
+        "defeat/"
+      ]
+    }
+  },
+  "actions": {
+    "idle": {
+      "lot": "a_movement_guard",
+      "status": "Final integrated art and native validation complete.",
+      "loop": true,
+      "frames": 3,
+      "total_ms": 540,
+      "contract": "action-contracts.json#/actions/idle"
+    },
+    "walk": {
+      "lot": "a_movement_guard",
+      "status": "Final integrated art and native validation complete.",
+      "loop": true,
+      "frames": 4,
+      "total_ms": 240,
+      "contract": "action-contracts.json#/actions/walk"
+    },
+    "jump": {
+      "lot": "a_movement_guard",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 800,
+      "contract": "action-contracts.json#/actions/jump"
+    },
+    "crouch": {
+      "lot": "a_movement_guard",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 2,
+      "total_ms": 360,
+      "contract": "action-contracts.json#/actions/crouch"
+    },
+    "block": {
+      "lot": "a_movement_guard",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 300,
+      "contract": "action-contracts.json#/actions/block"
+    },
+    "crouch_block": {
+      "lot": "a_movement_guard",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 300,
+      "contract": "action-contracts.json#/actions/crouch_block"
+    },
+    "hit": {
+      "lot": "a_movement_guard",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 260,
+      "contract": "action-contracts.json#/actions/hit"
+    },
+    "punch_light": {
+      "lot": "b_ground_attacks",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 233,
+      "contract": "action-contracts.json#/actions/punch_light"
+    },
+    "punch_heavy": {
+      "lot": "b_ground_attacks",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 583,
+      "contract": "action-contracts.json#/actions/punch_heavy"
+    },
+    "kick": {
+      "lot": "b_ground_attacks",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 383,
+      "contract": "action-contracts.json#/actions/kick"
+    },
+    "sweep": {
+      "lot": "b_ground_attacks",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 533,
+      "contract": "action-contracts.json#/actions/sweep"
+    },
+    "overhead": {
+      "lot": "b_ground_attacks",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 466,
+      "contract": "action-contracts.json#/actions/overhead"
+    },
+    "throw": {
+      "lot": "b_ground_attacks",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 366,
+      "contract": "action-contracts.json#/actions/throw"
+    },
+    "anti_air": {
+      "lot": "c_air_special_outcomes",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 500,
+      "contract": "action-contracts.json#/actions/anti_air"
+    },
+    "air_punch": {
+      "lot": "c_air_special_outcomes",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 366,
+      "contract": "action-contracts.json#/actions/air_punch"
+    },
+    "air_kick": {
+      "lot": "c_air_special_outcomes",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 333,
+      "contract": "action-contracts.json#/actions/air_kick"
+    },
+    "special": {
+      "lot": "c_air_special_outcomes",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 267,
+      "contract": "action-contracts.json#/actions/special"
+    },
+    "spawn": {
+      "lot": "c_air_special_outcomes",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 2700,
+      "contract": "action-contracts.json#/actions/spawn"
+    },
+    "victory": {
+      "lot": "c_air_special_outcomes",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 860,
+      "contract": "action-contracts.json#/actions/victory"
+    },
+    "defeat": {
+      "lot": "c_air_special_outcomes",
+      "status": "Final integrated art and native validation complete.",
+      "loop": false,
+      "frames": 3,
+      "total_ms": 1040,
+      "contract": "action-contracts.json#/actions/defeat"
+    }
+  },
+  "frame_count_note": "One redundant crouch drawing rejected: two selected keys preserve360ms total. Runtime manifest has60frames.",
+  "selected_frame_count": 60,
+  "original_proposed_frame_count": 61
+}

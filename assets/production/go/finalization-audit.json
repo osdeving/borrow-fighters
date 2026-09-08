@@ -1,0 +1,984 @@
+{
+  "status": "Final generated Go art reviewed in World, Lab, native Sprite Studio and normal match; no unresolved defect from the inspected scope.",
+  "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+  "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+  "clips": 20,
+  "frames": 60,
+  "atlas_dimensions": [
+    2709,
+    2674
+  ],
+  "visible_alpha_frames": 60,
+  "solid_alpha_threshold": 128,
+  "solid_bounds": {
+    "idle_00": {
+      "bounds": [
+        35,
+        15,
+        175,
+        279
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 180
+    },
+    "idle_01": {
+      "bounds": [
+        28,
+        15,
+        168,
+        279
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 180
+    },
+    "idle_02": {
+      "bounds": [
+        21,
+        15,
+        160,
+        279
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 180
+    },
+    "walk_00": {
+      "bounds": [
+        40,
+        22,
+        210,
+        286
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 60
+    },
+    "walk_01": {
+      "bounds": [
+        41,
+        26,
+        209,
+        286
+      ],
+      "top_from_pivot": -260,
+      "bottom_from_pivot": -1,
+      "duration_ms": 60
+    },
+    "walk_02": {
+      "bounds": [
+        65,
+        29,
+        165,
+        284
+      ],
+      "top_from_pivot": -256,
+      "bottom_from_pivot": -2,
+      "duration_ms": 60
+    },
+    "walk_03": {
+      "bounds": [
+        25,
+        31,
+        217,
+        285
+      ],
+      "top_from_pivot": -255,
+      "bottom_from_pivot": -2,
+      "duration_ms": 60
+    },
+    "jump_00": {
+      "bounds": [
+        62,
+        18,
+        187,
+        240
+      ],
+      "top_from_pivot": -258,
+      "bottom_from_pivot": -37,
+      "duration_ms": 60
+    },
+    "jump_01": {
+      "bounds": [
+        40,
+        16,
+        171,
+        223
+      ],
+      "top_from_pivot": -252,
+      "bottom_from_pivot": -46,
+      "duration_ms": 340
+    },
+    "jump_02": {
+      "bounds": [
+        18,
+        26,
+        146,
+        290
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 400
+    },
+    "crouch_00": {
+      "bounds": [
+        48,
+        111,
+        179,
+        274
+      ],
+      "top_from_pivot": -163,
+      "bottom_from_pivot": -1,
+      "duration_ms": 80
+    },
+    "crouch_02": {
+      "bounds": [
+        7,
+        152,
+        125,
+        275
+      ],
+      "top_from_pivot": -123,
+      "bottom_from_pivot": -1,
+      "duration_ms": 280
+    },
+    "block_00": {
+      "bounds": [
+        30,
+        22,
+        180,
+        273
+      ],
+      "top_from_pivot": -251,
+      "bottom_from_pivot": -1,
+      "duration_ms": 70
+    },
+    "block_01": {
+      "bounds": [
+        17,
+        29,
+        176,
+        274
+      ],
+      "top_from_pivot": -245,
+      "bottom_from_pivot": -1,
+      "duration_ms": 80
+    },
+    "block_02": {
+      "bounds": [
+        19,
+        18,
+        158,
+        273
+      ],
+      "top_from_pivot": -255,
+      "bottom_from_pivot": -1,
+      "duration_ms": 150
+    },
+    "crouch_block_00": {
+      "bounds": [
+        51,
+        133,
+        182,
+        257
+      ],
+      "top_from_pivot": -124,
+      "bottom_from_pivot": -1,
+      "duration_ms": 70
+    },
+    "crouch_block_01": {
+      "bounds": [
+        32,
+        124,
+        147,
+        257
+      ],
+      "top_from_pivot": -133,
+      "bottom_from_pivot": -1,
+      "duration_ms": 80
+    },
+    "crouch_block_02": {
+      "bounds": [
+        7,
+        134,
+        129,
+        257
+      ],
+      "top_from_pivot": -123,
+      "bottom_from_pivot": -1,
+      "duration_ms": 150
+    },
+    "hit_00": {
+      "bounds": [
+        44,
+        17,
+        200,
+        277
+      ],
+      "top_from_pivot": -260,
+      "bottom_from_pivot": -1,
+      "duration_ms": 60
+    },
+    "hit_01": {
+      "bounds": [
+        34,
+        39,
+        170,
+        277
+      ],
+      "top_from_pivot": -238,
+      "bottom_from_pivot": -1,
+      "duration_ms": 80
+    },
+    "hit_02": {
+      "bounds": [
+        12,
+        17,
+        150,
+        278
+      ],
+      "top_from_pivot": -261,
+      "bottom_from_pivot": -1,
+      "duration_ms": 120
+    },
+    "punch_light_00": {
+      "bounds": [
+        65,
+        26,
+        220,
+        289
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -2,
+      "duration_ms": 50
+    },
+    "punch_light_01": {
+      "bounds": [
+        30,
+        55,
+        226,
+        290
+      ],
+      "top_from_pivot": -235,
+      "bottom_from_pivot": -1,
+      "duration_ms": 83
+    },
+    "punch_light_02": {
+      "bounds": [
+        44,
+        26,
+        199,
+        289
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -2,
+      "duration_ms": 100
+    },
+    "punch_heavy_00": {
+      "bounds": [
+        75,
+        37,
+        232,
+        301
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 183
+    },
+    "punch_heavy_01": {
+      "bounds": [
+        23,
+        79,
+        274,
+        297
+      ],
+      "top_from_pivot": -218,
+      "bottom_from_pivot": -1,
+      "duration_ms": 167
+    },
+    "punch_heavy_02": {
+      "bounds": [
+        57,
+        37,
+        213,
+        301
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 233
+    },
+    "kick_00": {
+      "bounds": [
+        73,
+        27,
+        207,
+        291
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 116
+    },
+    "kick_01": {
+      "bounds": [
+        56,
+        46,
+        244,
+        291
+      ],
+      "top_from_pivot": -245,
+      "bottom_from_pivot": -1,
+      "duration_ms": 117
+    },
+    "kick_02": {
+      "bounds": [
+        55,
+        27,
+        182,
+        291
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 150
+    },
+    "sweep_00": {
+      "bounds": [
+        51,
+        91,
+        264,
+        292
+      ],
+      "top_from_pivot": -201,
+      "bottom_from_pivot": -1,
+      "duration_ms": 166
+    },
+    "sweep_01": {
+      "bounds": [
+        20,
+        104,
+        276,
+        288
+      ],
+      "top_from_pivot": -182,
+      "bottom_from_pivot": 1,
+      "duration_ms": 150
+    },
+    "sweep_02": {
+      "bounds": [
+        45,
+        37,
+        216,
+        301
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 217
+    },
+    "overhead_00": {
+      "bounds": [
+        87,
+        23,
+        239,
+        316
+      ],
+      "top_from_pivot": -293,
+      "bottom_from_pivot": -1,
+      "duration_ms": 166
+    },
+    "overhead_01": {
+      "bounds": [
+        45,
+        61,
+        243,
+        314
+      ],
+      "top_from_pivot": -254,
+      "bottom_from_pivot": -2,
+      "duration_ms": 100
+    },
+    "overhead_02": {
+      "bounds": [
+        61,
+        51,
+        205,
+        315
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 200
+    },
+    "throw_00": {
+      "bounds": [
+        65,
+        25,
+        224,
+        288
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -2,
+      "duration_ms": 100
+    },
+    "throw_01": {
+      "bounds": [
+        58,
+        30,
+        207,
+        288
+      ],
+      "top_from_pivot": -259,
+      "bottom_from_pivot": -2,
+      "duration_ms": 50
+    },
+    "throw_02": {
+      "bounds": [
+        46,
+        25,
+        189,
+        288
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -2,
+      "duration_ms": 216
+    },
+    "anti_air_00": {
+      "bounds": [
+        44,
+        94,
+        229,
+        358
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 116
+    },
+    "anti_air_01": {
+      "bounds": [
+        46,
+        31,
+        238,
+        360
+      ],
+      "top_from_pivot": -329,
+      "bottom_from_pivot": -1,
+      "duration_ms": 134
+    },
+    "anti_air_02": {
+      "bounds": [
+        35,
+        93,
+        215,
+        360
+      ],
+      "top_from_pivot": -266,
+      "bottom_from_pivot": 0,
+      "duration_ms": 250
+    },
+    "air_punch_00": {
+      "bounds": [
+        23,
+        36,
+        188,
+        288
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -13,
+      "duration_ms": 83
+    },
+    "air_punch_01": {
+      "bounds": [
+        23,
+        63,
+        257,
+        284
+      ],
+      "top_from_pivot": -243,
+      "bottom_from_pivot": -23,
+      "duration_ms": 150
+    },
+    "air_punch_02": {
+      "bounds": [
+        39,
+        42,
+        178,
+        279
+      ],
+      "top_from_pivot": -263,
+      "bottom_from_pivot": -27,
+      "duration_ms": 133
+    },
+    "air_kick_00": {
+      "bounds": [
+        56,
+        29,
+        182,
+        260
+      ],
+      "top_from_pivot": -265,
+      "bottom_from_pivot": -35,
+      "duration_ms": 83
+    },
+    "air_kick_01": {
+      "bounds": [
+        20,
+        40,
+        246,
+        268
+      ],
+      "top_from_pivot": -266,
+      "bottom_from_pivot": -39,
+      "duration_ms": 133
+    },
+    "air_kick_02": {
+      "bounds": [
+        42,
+        32,
+        168,
+        268
+      ],
+      "top_from_pivot": -270,
+      "bottom_from_pivot": -35,
+      "duration_ms": 117
+    },
+    "special_00": {
+      "bounds": [
+        19,
+        50,
+        202,
+        302
+      ],
+      "top_from_pivot": -252,
+      "bottom_from_pivot": -1,
+      "duration_ms": 80
+    },
+    "special_01": {
+      "bounds": [
+        13,
+        42,
+        213,
+        302
+      ],
+      "top_from_pivot": -260,
+      "bottom_from_pivot": -1,
+      "duration_ms": 80
+    },
+    "special_02": {
+      "bounds": [
+        17,
+        39,
+        200,
+        302
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -2,
+      "duration_ms": 107
+    },
+    "spawn_00": {
+      "bounds": [
+        57,
+        11,
+        179,
+        290
+      ],
+      "top_from_pivot": -279,
+      "bottom_from_pivot": -1,
+      "duration_ms": 500
+    },
+    "spawn_01": {
+      "bounds": [
+        56,
+        52,
+        176,
+        290
+      ],
+      "top_from_pivot": -238,
+      "bottom_from_pivot": -1,
+      "duration_ms": 700
+    },
+    "spawn_02": {
+      "bounds": [
+        24,
+        18,
+        160,
+        281
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -2,
+      "duration_ms": 1500
+    },
+    "victory_00": {
+      "bounds": [
+        64,
+        21,
+        188,
+        290
+      ],
+      "top_from_pivot": -268,
+      "bottom_from_pivot": 0,
+      "duration_ms": 160
+    },
+    "victory_01": {
+      "bounds": [
+        47,
+        27,
+        192,
+        291
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 200
+    },
+    "victory_02": {
+      "bounds": [
+        31,
+        26,
+        158,
+        290
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -1,
+      "duration_ms": 500
+    },
+    "defeat_00": {
+      "bounds": [
+        46,
+        22,
+        146,
+        285
+      ],
+      "top_from_pivot": -264,
+      "bottom_from_pivot": -2,
+      "duration_ms": 160
+    },
+    "defeat_01": {
+      "bounds": [
+        17,
+        98,
+        173,
+        272
+      ],
+      "top_from_pivot": -174,
+      "bottom_from_pivot": -1,
+      "duration_ms": 220
+    },
+    "defeat_02": {
+      "bounds": [
+        11,
+        148,
+        159,
+        283
+      ],
+      "top_from_pivot": -136,
+      "bottom_from_pivot": -2,
+      "duration_ms": 660
+    }
+  },
+  "timing": {
+    "idle": {
+      "durations_ms": [
+        180,
+        180,
+        180
+      ],
+      "total_ms": 540,
+      "baseline_total_preserved": true
+    },
+    "walk": {
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60
+      ],
+      "total_ms": 240,
+      "baseline_total_preserved": true
+    },
+    "jump": {
+      "durations_ms": [
+        60,
+        340,
+        400
+      ],
+      "total_ms": 800,
+      "baseline_total_preserved": true
+    },
+    "crouch": {
+      "durations_ms": [
+        80,
+        280
+      ],
+      "total_ms": 360,
+      "baseline_total_preserved": true
+    },
+    "block": {
+      "durations_ms": [
+        70,
+        80,
+        150
+      ],
+      "total_ms": 300,
+      "baseline_total_preserved": true
+    },
+    "crouch_block": {
+      "durations_ms": [
+        70,
+        80,
+        150
+      ],
+      "total_ms": 300,
+      "baseline_total_preserved": true
+    },
+    "hit": {
+      "durations_ms": [
+        60,
+        80,
+        120
+      ],
+      "total_ms": 260,
+      "baseline_total_preserved": true
+    },
+    "punch_light": {
+      "durations_ms": [
+        50,
+        83,
+        100
+      ],
+      "total_ms": 233,
+      "baseline_total_preserved": true
+    },
+    "punch_heavy": {
+      "durations_ms": [
+        183,
+        167,
+        233
+      ],
+      "total_ms": 583,
+      "baseline_total_preserved": true
+    },
+    "kick": {
+      "durations_ms": [
+        116,
+        117,
+        150
+      ],
+      "total_ms": 383,
+      "baseline_total_preserved": true
+    },
+    "sweep": {
+      "durations_ms": [
+        166,
+        150,
+        217
+      ],
+      "total_ms": 533,
+      "baseline_total_preserved": true
+    },
+    "overhead": {
+      "durations_ms": [
+        166,
+        100,
+        200
+      ],
+      "total_ms": 466,
+      "baseline_total_preserved": true
+    },
+    "throw": {
+      "durations_ms": [
+        100,
+        50,
+        216
+      ],
+      "total_ms": 366,
+      "baseline_total_preserved": true
+    },
+    "anti_air": {
+      "durations_ms": [
+        116,
+        134,
+        250
+      ],
+      "total_ms": 500,
+      "baseline_total_preserved": true
+    },
+    "air_punch": {
+      "durations_ms": [
+        83,
+        150,
+        133
+      ],
+      "total_ms": 366,
+      "baseline_total_preserved": true
+    },
+    "air_kick": {
+      "durations_ms": [
+        83,
+        133,
+        117
+      ],
+      "total_ms": 333,
+      "baseline_total_preserved": true
+    },
+    "special": {
+      "durations_ms": [
+        80,
+        80,
+        107
+      ],
+      "total_ms": 267,
+      "baseline_total_preserved": true
+    },
+    "spawn": {
+      "durations_ms": [
+        500,
+        700,
+        1500
+      ],
+      "total_ms": 2700,
+      "baseline_total_preserved": true
+    },
+    "victory": {
+      "durations_ms": [
+        160,
+        200,
+        500
+      ],
+      "total_ms": 860,
+      "baseline_total_preserved": true
+    },
+    "defeat": {
+      "durations_ms": [
+        160,
+        220,
+        660
+      ],
+      "total_ms": 1040,
+      "baseline_total_preserved": true
+    }
+  },
+  "new_combat_fields": 0,
+  "runtime_bytes_unchanged_by_metadata_closure": true,
+  "jump_refinement": {
+    "previous_manifest_sha256": "b865f26b9cd586c27f5ddecfdae47979ca14b55717c50494753432095409550f",
+    "previous_atlas_sha256": "535bda2c604dfaec68fcbf157451c7a55dfc5a69e6adbdf61ffcadfc14972060",
+    "final_manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "final_atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "changed_frames": [
+      "jump_00",
+      "jump_01",
+      "jump_02"
+    ],
+    "unchanged_frames": 57,
+    "compared": [
+      "raw RGBA frame pixels",
+      "frame dimensions",
+      "pivot",
+      "trimmed bounds",
+      "clip",
+      "duration_ms"
+    ]
+  },
+  "world": {
+    "captured_images": 638,
+    "simulation_states": 1845,
+    "loaded_manifest_matches_candidate": true,
+    "moves_seen_per_player": [
+      [
+        "air_kick",
+        "air_punch",
+        "anti_air",
+        "kick",
+        "overhead",
+        "punch_heavy",
+        "punch_light",
+        "special",
+        "sweep",
+        "throw"
+      ],
+      [
+        "air_kick",
+        "air_punch",
+        "anti_air",
+        "kick",
+        "overhead",
+        "punch_heavy",
+        "punch_light",
+        "special",
+        "sweep",
+        "throw"
+      ]
+    ],
+    "returned_to_idle_after_moves": 10,
+    "last_health": [
+      86,
+      86
+    ],
+    "baseline_image": "go-fighter-atlas.png",
+    "video": {
+      "r_frame_rate": "60/1",
+      "duration": "30.750000",
+      "nb_frames": "1845"
+    },
+    "landing": {
+      "tick": 543,
+      "live_tick": 199,
+      "frame": "idle_02",
+      "velocity_y": 0.0,
+      "grounded": true,
+      "body_bottom_y": 616.0,
+      "alpha_bottom_y": 618.0,
+      "alpha_bottom_offset_from_pivot": 2.0
+    }
+  },
+  "lab": {
+    "full_set_before_jump_captures": 269,
+    "full_set_contexts": 19,
+    "final_jump_captures": 10,
+    "final_jump_manifest_matches_candidate": true,
+    "unchanged_non_jump_frames": 57,
+    "walk_reviewed_in_world": true
+  },
+  "native_default_app": {
+    "command": "env -u BORROW_FIGHTERS_SPRITE_CANDIDATES cargo run -- --fight --p1 go --p2 go",
+    "sprite_candidates_env": null,
+    "result": {
+      "go_p1": 53,
+      "go_p2": 0
+    },
+    "assets_at_review": {
+      "assets/candidates/go/go-fighter.sprite.json": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+      "assets/candidates/go/go-fighter-atlas.png": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+      "assets/placeholder/go-channel-projectile.png": "4257c24a9994216a5d3e032884391c1ebd02270ddaee3f44639774043252c8e5",
+      "assets/tuning/character-body-metrics.json": "7f77453d98681adf5b6b0d8020ca8167dcbb8245ea97363425c5fc9cf309c962"
+    },
+    "review": "Actual application recaptured after jump v2 export, CPU versus CPU through result; victory and defeat grounded, new semi-realistic art in both facings. World separately verifies all moves and jump transitions."
+  },
+  "studio": {
+    "full_set_before_jump_frames": 60,
+    "final_jump_recaptured_frames": 3,
+    "final_jump_report": "../../candidates/go/review/refinement-2026-09-07/studio/jump-v2/review-captures.json"
+  },
+  "archive": {
+    "archived_files": 263,
+    "mismatches": [],
+    "contract_inputs": 6,
+    "changed_contract_inputs": []
+  },
+  "tests": [
+    {
+      "command": "cargo test --test sprite_candidates",
+      "passed": 2,
+      "run_by": "verification_pipeline after jump v2 promotion"
+    },
+    {
+      "command": "cargo test --all-targets --all-features",
+      "passed": 234,
+      "run_by": "root after jump v2 promotion; reported to this reviewer"
+    }
+  ],
+  "limitations": [
+    "World capture is sampled every three active ticks and on frame/phase changes; video holds native PNGs between captures, without interpolation.",
+    "Controlled World inputs are not an interactive keyboard playtest. Nearby attacks whiff at scenario spacing; Combat Lab shows their baseline boxes.",
+    "Lab static poses do not simulate outcome transitions or a complete jump; tall Lab poses may overlap its HUD.",
+    "Native Studio review is right-facing; World covers both facings for all ten moves.",
+    "Fine fur and cloth details vary slightly between generated keys; visual conclusions are limited to inspected frames and sequences."
+  ]
+}

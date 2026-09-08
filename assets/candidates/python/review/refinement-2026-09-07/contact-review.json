@@ -1,0 +1,51 @@
+{
+  "measurement": "Manual source landmarks mapped by (global_source_point-global_pivot)*uniform_scale; points are visual contact centers, not complete silhouette extents or generated combat metadata. Runtime rounding may differ by one pixel.",
+  "contacts": [
+    {
+      "action": "kick",
+      "source_point": [
+        1121,
+        419
+      ],
+      "global_pivot": [
+        864,
+        518
+      ],
+      "scale": 0.5414141414141415,
+      "baseline_box": [
+        50.666667,
+        -80,
+        165.333333,
+        -34.666667
+      ],
+      "note": "black shoe/toe contact center; whole shoe inside vertical band",
+      "world_point": [
+        139.14343434343436,
+        -53.6
+      ]
+    },
+    {
+      "action": "sweep",
+      "source_point": [
+        1185,
+        245
+      ],
+      "global_pivot": [
+        797,
+        541
+      ],
+      "scale": 0.432258,
+      "baseline_box": [
+        50.666667,
+        -136,
+        181.333333,
+        -96
+      ],
+      "note": "black sole center; toe remains near upper edge of active box",
+      "world_point": [
+        167.716104,
+        -127.94836799999999
+      ]
+    }
+  ]
+}

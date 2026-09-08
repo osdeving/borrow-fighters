@@ -2,9 +2,9 @@
   "action": "overhead",
   "source": "overhead/source-v5.png",
   "sheet": "overhead/sheet-v5.png",
-  "reviewed": false,
+  "reviewed": true,
   "loop": false,
-  "status": "candidate; source poses statically inspected; runtime/two-orientation review pending",
+  "status": "reviewed visual and functional pilot; see ../finalization-review.md for evidence and limits",
   "source_body_height_reference_px": 499,
   "normalization_note": "Approximate upright-body reference; do not scale each frame by its own alpha bounds. Air pivots are virtual standing-floor anchors beneath hips, not boot tips. Ground pivots are proposed and require foot-support review after normalization.",
   "combat_timing": {
@@ -78,5 +78,6 @@
       "phase": "recovery"
     }
   ],
-  "review_notes": "v3 runtime fist above active box. v4 lowered too far near lower edge. v5 selected: active glove around source x899..960,y404..457, mapping with unchanged global pivot783,663 and scale268/499 into world x62..95,y-139..-111; target box world x50.67..160,y-166.67..-101.33. Head/body/feet preserve prior ground placement. Source reviewed; runtime recapture pending."
+  "review_notes": "v3 runtime fist above active box. v4 lowered too far near lower edge. v5 selected: active glove around source x899..960,y404..457, mapping with unchanged global pivot783,663 and scale268/499 into world x62..95,y-139..-111; target box world x50.67..160,y-166.67..-101.33. Head/body/feet preserve prior ground placement. Source reviewed; Native verification complete; see ../finalization-review.md.",
+  "finalization_review": "../finalization-review.md"
 }

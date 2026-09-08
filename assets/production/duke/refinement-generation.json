@@ -1,0 +1,107 @@
+{
+  "generator": "built-in image_gen",
+  "identity_reference": "reference/master-existing.png",
+  "continuity_reference": "idle/keyed.png",
+  "new_actions": [
+    "walk",
+    "crouch_block",
+    "overhead"
+  ],
+  "new_projectile": "projectile/source-v1.png",
+  "generated_sources": [
+    {
+      "path": "walk/source-v5.png",
+      "prompt": "walk/prompt-v5.txt",
+      "size": [
+        2048,
+        768
+      ],
+      "mode": "RGB",
+      "sha256": "fedaf0379f66521ad63dbe1a7d220973fa7a0024d182cf60e24b97350876e99c"
+    },
+    {
+      "path": "walk/source-v7.png",
+      "prompt": "walk/prompt-v7.txt",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "sha256": "dd2ee3e27820ecf07b5bceb6b7561c47bb7263efbff8d1f720915dffb147748c"
+    },
+    {
+      "path": "walk/source-v6.png",
+      "prompt": "walk/prompt-v6.txt",
+      "size": [
+        1086,
+        1449
+      ],
+      "mode": "RGB",
+      "sha256": "3b9f3cccf2a84617c0247d6603f96e0a0a80758483d9a22f23ed5d2156d2d0c8"
+    },
+    {
+      "path": "crouch_block/source-v2.png",
+      "prompt": "crouch_block/prompt-v2.txt",
+      "size": [
+        2048,
+        768
+      ],
+      "mode": "RGB",
+      "sha256": "3b67d689ea3a969c2788cbb4049a13d9a619257d3c333a6547311f4e92844e11"
+    },
+    {
+      "path": "overhead/source-v6.png",
+      "prompt": "overhead/prompt-v6.txt",
+      "size": [
+        2048,
+        768
+      ],
+      "mode": "RGB",
+      "sha256": "500e34f76a2cd61b3dc5501e22f257992ffb3f96232487809e8657acde360738"
+    },
+    {
+      "path": "overhead/source-v8.png",
+      "prompt": "overhead/prompt-v8.txt",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "sha256": "880ddc991c1178e7c9bad9057d28750b5ea2da862bcd2285659d75ffcc3f8021"
+    },
+    {
+      "path": "projectile/source-v1.png",
+      "prompt": "projectile/prompt-v1.txt",
+      "size": [
+        1373,
+        1146
+      ],
+      "mode": "RGB",
+      "sha256": "9bc65a59ee60d374445b42f2cbdf9f5082a00952777976c444ddfb88cc416d9b"
+    }
+  ],
+  "selection": {
+    "walk": [
+      "source-v5.png",
+      "source-v7.png",
+      "source-v6.png"
+    ],
+    "crouch_block": [
+      "source-v2.png"
+    ],
+    "overhead": [
+      "source-v6.png",
+      "source-v8.png"
+    ],
+    "projectile": [
+      "source-v1.png"
+    ]
+  },
+  "rejections": {
+    "walk": "v2/v3 and parts of v5 repeated the near-leg-forward contact. Isolated v4 supplied true opposite contact; checker extraction damaged its white belly, so v7 re-matted it with magenta. v5 crops0/1, v7 and v6 form the final four poses.",
+    "overhead": "v4/v5/v7 had wrong elbow direction, incorrect fist height or malformed glove. v6 middle contact was too low; only its startup/recovery were retained. Isolated v8 has the required raised elbow and descending glove.",
+    "projectile": "Original reused texture was not repairable by halo removal alone because the yellow muzzle flash was cropped at left. New v1 removes this defect and keeps roasted beans/cream trails."
+  },
+  "alpha": "Generated sources arrived RGB even where true RGBA was requested. Authorized extraction uses repository checker/magenta tools, never --rust-contour; selected white-body extraction was inspected on both backgrounds. Enclosed arm gaps are explicitly seeded in prepare_refinement.py.",
+  "changes": "No src files, combat metadata, physical dimensions, origins, collision or timings changed."
+}

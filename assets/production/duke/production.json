@@ -7,7 +7,8 @@
     "generator": "built-in imagegen",
     "identity_reference": "reference/master-existing.png",
     "combat": "Visual-only candidate; runtime retains baseline combat_manifest.",
-    "scope": "Twenty existing actions; no new mechanics."
+    "scope": "Twenty existing actions; no new mechanics.",
+    "refinement": "Targeted real image_gen revisions; other satisfactory actions reused. Rejected source variants and old action/plan snapshots preserved."
   },
   "actions": {
     "idle": {
@@ -93,67 +94,67 @@
           "source_rect": {
             "x": 0,
             "y": 0,
-            "w": 205,
-            "h": 307
+            "w": 334,
+            "h": 375
           },
           "pivot": {
-            "x": 108,
-            "y": 268
+            "x": 146,
+            "y": 325
           },
           "duration_ms": 112,
-          "phase": "contact"
+          "phase": "near_leg_contact"
         },
         {
           "name": "walk_01",
           "source_rect": {
-            "x": 205,
+            "x": 334,
             "y": 0,
-            "w": 205,
-            "h": 307
+            "w": 334,
+            "h": 375
           },
           "pivot": {
-            "x": 108,
-            "y": 269
+            "x": 146,
+            "y": 325
           },
           "duration_ms": 113,
-          "phase": "passing"
+          "phase": "far_leg_passage"
         },
         {
           "name": "walk_02",
           "source_rect": {
-            "x": 410,
+            "x": 668,
             "y": 0,
-            "w": 205,
-            "h": 307
+            "w": 334,
+            "h": 375
           },
           "pivot": {
-            "x": 98,
-            "y": 268
+            "x": 146,
+            "y": 325
           },
           "duration_ms": 112,
-          "phase": "opposite_contact"
+          "phase": "far_leg_contact"
         },
         {
           "name": "walk_03",
           "source_rect": {
-            "x": 615,
+            "x": 1002,
             "y": 0,
-            "w": 205,
-            "h": 307
+            "w": 334,
+            "h": 375
           },
           "pivot": {
-            "x": 94,
-            "y": 269
+            "x": 146,
+            "y": 325
           },
           "duration_ms": 113,
-          "phase": "opposite_passing"
+          "phase": "near_leg_passage"
         }
       ],
       "provenance": {
         "source_action": "walk/action.json",
-        "source_sheet": "walk/keyed.png",
-        "scale_to_runtime": 0.4,
-        "review": "Four poses with contact/pass geometry; first/third contact silhouettes similar, evaluate stride leg alternation in real movement. Solid cone-to-shoe height normalized to idle; steam retained. Alpha inspected without Rust contour."
+        "source_sheet": "walk/selected-v1.png",
+        "scale_to_runtime": 0.4169435215946844,
+        "review": "Four genuinely different generated poses assembled from v5/v7/v6. v7 preserves opposite-contact v4 with safe magenta matte; checker extraction of v4 damaged white belly and was rejected. Alternating near/far contact and passage. Single-pose sources normalized uniformly0.49, then common runtime scale0.4169435. Original112/113/112/113ms total450ms."
       }
     },
     "crouch": {
@@ -329,8 +330,8 @@
             "h": 320
           },
           "pivot": {
-            "x": 166,
-            "y": 277
+            "x": 154,
+            "y": 284
           },
           "duration_ms": 80,
           "phase": "low_guard"
@@ -344,8 +345,8 @@
             "h": 320
           },
           "pivot": {
-            "x": 146,
-            "y": 277
+            "x": 143,
+            "y": 284
           },
           "duration_ms": 100,
           "phase": "low_absorb"
@@ -360,7 +361,7 @@
           },
           "pivot": {
             "x": 115,
-            "y": 277
+            "y": 284
           },
           "duration_ms": 180,
           "phase": "held_low_guard"
@@ -368,9 +369,9 @@
       ],
       "provenance": {
         "source_action": "crouch_block/action.json",
-        "source_sheet": "crouch_block/keyed.png",
+        "source_sheet": "crouch_block/keyed-v2.png",
         "scale_to_runtime": 0.4169435215946844,
-        "review": "Own low guard/absorb/held sequence; same facial feature sizes and support as idle. Guard frames solid silhouette about395source px ->165world px, taller than128px physical crouch; retain as candidate readability caveat for Lab review, without altering boxes."
+        "review": "New v2 compressed low guard. Original nose/glove/feet scale retained; belly compressed and cone inclined. Original80/100/180ms total360ms."
       }
     },
     "hit": {
@@ -673,12 +674,12 @@
           "source_rect": {
             "x": 0,
             "y": 0,
-            "w": 285,
-            "h": 307
+            "w": 334,
+            "h": 375
           },
           "pivot": {
-            "x": 156,
-            "y": 288
+            "x": 146,
+            "y": 325
           },
           "duration_ms": 250,
           "phase": "startup"
@@ -686,14 +687,14 @@
         {
           "name": "overhead_01",
           "source_rect": {
-            "x": 292,
+            "x": 334,
             "y": 0,
-            "w": 292,
-            "h": 307
+            "w": 334,
+            "h": 375
           },
           "pivot": {
-            "x": 126,
-            "y": 288
+            "x": 146,
+            "y": 325
           },
           "duration_ms": 133,
           "phase": "active"
@@ -701,14 +702,14 @@
         {
           "name": "overhead_02",
           "source_rect": {
-            "x": 584,
+            "x": 668,
             "y": 0,
-            "w": 277,
-            "h": 307
+            "w": 334,
+            "h": 375
           },
           "pivot": {
-            "x": 107,
-            "y": 288
+            "x": 146,
+            "y": 325
           },
           "duration_ms": 283,
           "phase": "recovery"
@@ -716,9 +717,9 @@
       ],
       "provenance": {
         "source_action": "overhead/action.json",
-        "source_sheet": "overhead/keyed.png",
+        "source_sheet": "overhead/selected-v1.png",
         "scale_to_runtime": 0.4169435215946844,
-        "review": "Selected source-v3: v1 incorrectly hit floor; v2 had fist too close; v3 preserves high windup then early descending contact in front of nose with correct reach. Active glove about(+285,-300)source ->(+119,-125)world inside existing box(+50.7,-170.7,128,72). Contact reads a short descending hook; no metadata changed."
+        "review": "New isolated v8 contact has elbow above descending glove inside original box; v6 startup/recovery preserved. Uniform0.53 normalization of isolated contact, then common runtime0.4169435. Original250/133/283ms total666ms."
       }
     },
     "anti_air": {

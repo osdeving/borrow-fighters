@@ -17,6 +17,10 @@ def remove_background(source: Path, destination: Path) -> None:
     rgba = np.array(image)
     rgb = rgba[:, :, :3].astype(np.int16)
     pale = (rgb.min(axis=2) >= 210) & (rgb.max(axis=2) - rgb.min(axis=2) <= 15)
+    # A revised sheet may retain a pale gap beside already extracted alpha.
+    # Treat existing transparency as exterior so those connected remnants can
+    # be removed without touching enclosed costume highlights or shoe soles.
+    pale |= rgba[:, :, 3] == 0
     mask = Image.fromarray(np.where(pale, 255, 0).astype(np.uint8))
     # A one-pixel border connects all background patches touching any edge.
     padded = Image.new("L", (mask.width + 2, mask.height + 2), 255)

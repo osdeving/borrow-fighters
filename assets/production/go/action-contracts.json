@@ -1,0 +1,940 @@
+{
+  "schema": "borrow-fighters.replacement-art-contract.v1",
+  "status": "Baseline contract preserved through final native validation; finalization-review.md records evidence.",
+  "character": "go",
+  "appearance_authority": "New root-approved master/idle in reference; previous Go cartoon identity is superseded by user instruction. No old artwork is a new-art reference.",
+  "coordinate_contract": {
+    "anchor": "body_rect().center_x(), body_rect().bottom()",
+    "right_point_to_source": "source.x = pivot.x + world_offset.x / candidate_scale; source.y = pivot.y + world_offset.y / candidate_scale",
+    "right_box_to_source": "source.xy = pivot.xy + world_relative_box.xy / candidate_scale; source.wh = world_relative_box.wh / candidate_scale",
+    "left_mirroring": "For an offset point, x_left=-x_right. For a rectangle, x_left=-(x_right+w); y,w,h unchanged. Runtime mirrors the right-facing drawing.",
+    "airborne_anchor": "The anchor moves with the actual airborne fighter; listed boxes remain relative to that anchor.",
+    "standing_height": "All nine active attacks currently use standing body height, including Sweep: fighter.crouching requires attack.is_none(). Do not lower a hitbox to match a drawing.",
+    "projectile_origin": "Manifest point is the near horizontal projectile edge and its vertical center, not the projectile rectangle center. Align emitting hand/muzzle with the point; projectile sprite stays separate.",
+    "precision": "Baseline local origin/pivot and full JSON scale are preserved, plus derived world offsets without decimal rounding; source coordinates are calculated only after candidate scale/pivot are measured."
+  },
+  "body_metrics_world": {
+    "width": 101.33333333333333,
+    "standing_height": 224.0,
+    "crouch_height": 128.0
+  },
+  "standing_art_height_world_px_reference": 264,
+  "standing_art_height_note": "Historical visual registration target only; measure new master anatomy and have integrator confirm visual scale. Physical body metrics remain fixed.",
+  "baseline_combat_manifest": "assets/placeholder/go-fighter.sprite.json",
+  "baseline_scale_for_combat_only": 1.44,
+  "source_manifest": "../go-cartoon-archive/review-plan.json",
+  "actions": {
+    "idle": {
+      "lot": "a_movement_guard",
+      "loop": true,
+      "historical_action": "../go-cartoon-archive/idle/action.json",
+      "retained_timing_ms": [
+        180,
+        180,
+        180
+      ],
+      "total_ms": 540,
+      "frame_names": [
+        "idle_00",
+        "idle_01",
+        "idle_02"
+      ],
+      "phases": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "generation_brief": "Three distinct restrained breathing keys from the new approved idle reference, maintaining neutral body scale and ground support.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": false,
+      "contact_reference": null
+    },
+    "walk": {
+      "lot": "a_movement_guard",
+      "loop": true,
+      "historical_action": "../go-cartoon-archive/walk/action.json",
+      "retained_timing_ms": [
+        60,
+        60,
+        60,
+        60
+      ],
+      "total_ms": 240,
+      "frame_names": [
+        "walk_00",
+        "walk_01",
+        "walk_02",
+        "walk_03"
+      ],
+      "phases": [
+        "front_contact",
+        "front_weight_transfer",
+        "rear_foot_closes",
+        "front_foot_advances"
+      ],
+      "generation_brief": "Four genuinely distinct keys with alternating near/far contact and passing support; restrained head bob and coherent opposite arm motion. New anatomy comes from the new master.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": false,
+      "contact_reference": null
+    },
+    "jump": {
+      "lot": "a_movement_guard",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/jump/action.json",
+      "retained_timing_ms": [
+        60,
+        340,
+        400
+      ],
+      "total_ms": 800,
+      "frame_names": [
+        "jump_00",
+        "jump_01",
+        "jump_02"
+      ],
+      "phases": [
+        "takeoff",
+        "rise",
+        "fall"
+      ],
+      "generation_brief": "Takeoff/rise/fall. Register head/torso/waist against one virtual standing anchor; let real World physics provide the arc. Grounded idle must resume at landing.",
+      "anchor_policy": "virtual torso/waist registration; World supplies height",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": false,
+      "contact_reference": null
+    },
+    "crouch": {
+      "lot": "a_movement_guard",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/crouch/action.json",
+      "retained_timing_ms": [
+        80,
+        100,
+        180
+      ],
+      "total_ms": 360,
+      "frame_names": [
+        "crouch_00",
+        "crouch_01",
+        "crouch_02"
+      ],
+      "phases": [
+        "crouch",
+        "crouch",
+        "crouch"
+      ],
+      "generation_brief": "Fold hips/knees/torso at the new master anatomical scale, hold a stable low ready posture. Keep head scale; solid height should fit the128px body and align with crouch_block.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": false,
+      "contact_reference": null
+    },
+    "block": {
+      "lot": "a_movement_guard",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/block/action.json",
+      "retained_timing_ms": [
+        70,
+        80,
+        150
+      ],
+      "total_ms": 300,
+      "frame_names": [
+        "block_00",
+        "block_01",
+        "block_02"
+      ],
+      "phases": [
+        "block",
+        "block",
+        "block"
+      ],
+      "generation_brief": "Readable standing protection, small absorption and return to held guard; planted feet and stable head/torso scale.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": false,
+      "contact_reference": null
+    },
+    "crouch_block": {
+      "lot": "a_movement_guard",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/crouch_block/action.json",
+      "retained_timing_ms": [
+        70,
+        80,
+        150
+      ],
+      "total_ms": 300,
+      "frame_names": [
+        "crouch_block_00",
+        "crouch_block_01",
+        "crouch_block_02"
+      ],
+      "phases": [
+        "crouch_block",
+        "crouch_block",
+        "crouch_block"
+      ],
+      "generation_brief": "Protect head/chest while retaining crouch depth and support; avoid sinking farther than ordinary crouch or scaling the body down.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": false,
+      "contact_reference": null
+    },
+    "hit": {
+      "lot": "a_movement_guard",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/hit/action.json",
+      "retained_timing_ms": [
+        60,
+        80,
+        120
+      ],
+      "total_ms": 260,
+      "frame_names": [
+        "hit_00",
+        "hit_01",
+        "hit_02"
+      ],
+      "phases": [
+        "hit",
+        "hit",
+        "hit"
+      ],
+      "generation_brief": "Distinct recoil, compression and recovery on the same anatomy; no duplicate idle key presented as reaction.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": false,
+      "contact_reference": null
+    },
+    "punch_light": {
+      "lot": "b_ground_attacks",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/punch_light/action.json",
+      "retained_timing_ms": [
+        50,
+        83,
+        100
+      ],
+      "total_ms": 233,
+      "frame_names": [
+        "punch_light_00",
+        "punch_light_01",
+        "punch_light_02"
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "generation_brief": "Compact elbow extension: active knuckles must fit the short baseline box, without moving the whole body to fake reach.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": true,
+      "contact_reference": {
+        "move_id": "GoGoroutineJab",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 14,
+          "active_start": 3,
+          "active_end": 7
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 50,
+          "recovery_starts": 133,
+          "clip_ends": 233
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -141.33333333333334,
+          "w": 56.0,
+          "h": 40.0
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -106.66666666666666,
+          "y": -141.33333333333334,
+          "w": 56.0,
+          "h": 40.0
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 78.66666666666666,
+          "y": -121.33333333333334
+        }
+      }
+    },
+    "punch_heavy": {
+      "lot": "b_ground_attacks",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/punch_heavy/action.json",
+      "retained_timing_ms": [
+        183,
+        167,
+        233
+      ],
+      "total_ms": 583,
+      "frame_names": [
+        "punch_heavy_00",
+        "punch_heavy_01",
+        "punch_heavy_02"
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "generation_brief": "Weight transfer, clear extended fist contact and controlled recovery, preserving ground support.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": true,
+      "contact_reference": {
+        "move_id": "HeavyPunch",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 35,
+          "active_start": 11,
+          "active_end": 20
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 183,
+          "recovery_starts": 350,
+          "clip_ends": 583
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -146.66666666666669,
+          "w": 128.0,
+          "h": 56.0
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -178.66666666666666,
+          "y": -146.66666666666669,
+          "w": 128.0,
+          "h": 56.0
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 114.66666666666666,
+          "y": -118.66666666666669
+        }
+      }
+    },
+    "kick": {
+      "lot": "b_ground_attacks",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/kick/action.json",
+      "retained_timing_ms": [
+        116,
+        117,
+        150
+      ],
+      "total_ms": 383,
+      "frame_names": [
+        "kick_00",
+        "kick_01",
+        "kick_02"
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "generation_brief": "Chamber, anatomically readable low kick and recovery; contact near the low baseline box with the other foot planted.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": true,
+      "contact_reference": {
+        "move_id": "GoDeferKick",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 23,
+          "active_start": 7,
+          "active_end": 13
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 116,
+          "recovery_starts": 233,
+          "clip_ends": 383
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -82.66666666666669,
+          "w": 114.66666666666666,
+          "h": 45.33333333333333
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -165.33333333333331,
+          "y": -82.66666666666669,
+          "w": 114.66666666666666,
+          "h": 45.33333333333333
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 108.0,
+          "y": -60.00000000000002
+        }
+      }
+    },
+    "sweep": {
+      "lot": "b_ground_attacks",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/sweep/action.json",
+      "retained_timing_ms": [
+        166,
+        150,
+        217
+      ],
+      "total_ms": 533,
+      "frame_names": [
+        "sweep_00",
+        "sweep_01",
+        "sweep_02"
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "generation_brief": "Low supported torso and extended sweeping foot meeting the existing elevated active box. The engine uses standing attack body height; do not move the box to the ground.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": true,
+      "contact_reference": {
+        "move_id": "SweepKick",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 32,
+          "active_start": 10,
+          "active_end": 18
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 166,
+          "recovery_starts": 316,
+          "clip_ends": 533
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -136.0,
+          "w": 149.33333333333331,
+          "h": 40.0
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -199.99999999999997,
+          "y": -136.0,
+          "w": 149.33333333333331,
+          "h": 40.0
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 125.33333333333331,
+          "y": -116.0
+        }
+      }
+    },
+    "overhead": {
+      "lot": "b_ground_attacks",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/overhead/action.json",
+      "retained_timing_ms": [
+        166,
+        100,
+        200
+      ],
+      "total_ms": 466,
+      "frame_names": [
+        "overhead_00",
+        "overhead_01",
+        "overhead_02"
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "generation_brief": "Fist visibly raised in preparation then descending into the baseline contact area, followed by recovery.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": true,
+      "contact_reference": {
+        "move_id": "GoChannelOverhead",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 28,
+          "active_start": 10,
+          "active_end": 15
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 166,
+          "recovery_starts": 266,
+          "clip_ends": 466
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -168.0,
+          "w": 93.33333333333333,
+          "h": 64.0
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -144.0,
+          "y": -168.0,
+          "w": 93.33333333333333,
+          "h": 64.0
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 97.33333333333333,
+          "y": -136.0
+        }
+      }
+    },
+    "throw": {
+      "lot": "b_ground_attacks",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/throw/action.json",
+      "retained_timing_ms": [
+        100,
+        50,
+        216
+      ],
+      "total_ms": 366,
+      "frame_names": [
+        "throw_00",
+        "throw_01",
+        "throw_02"
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "generation_brief": "Open hand preparation, compact grasp inside short throw reach and pull/recovery; no opponent baked into the sheet.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": true,
+      "contact_reference": {
+        "move_id": "CloseThrow",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 22,
+          "active_start": 6,
+          "active_end": 8
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 100,
+          "recovery_starts": 150,
+          "clip_ends": 366
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -184.0,
+          "w": 61.33333333333333,
+          "h": 160.0
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -112.0,
+          "y": -184.0,
+          "w": 61.33333333333333,
+          "h": 160.0
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 81.33333333333333,
+          "y": -104.0
+        }
+      }
+    },
+    "anti_air": {
+      "lot": "c_air_special_outcomes",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/anti_air/action.json",
+      "retained_timing_ms": [
+        116,
+        134,
+        250
+      ],
+      "total_ms": 500,
+      "frame_names": [
+        "anti_air_00",
+        "anti_air_01",
+        "anti_air_02"
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "generation_brief": "Rising uppercut with the fist reaching the existing high box. Do not derive action scale from the raised hand or move the entire body upward.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": true,
+      "contact_reference": {
+        "move_id": "RisingAntiAir",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 30,
+          "active_start": 7,
+          "active_end": 14
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 116,
+          "recovery_starts": 250,
+          "clip_ends": 500
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -338.66666666666663,
+          "w": 93.33333333333333,
+          "h": 109.33333333333333
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -144.0,
+          "y": -338.66666666666663,
+          "w": 93.33333333333333,
+          "h": 109.33333333333333
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 97.33333333333333,
+          "y": -283.99999999999994
+        }
+      }
+    },
+    "air_punch": {
+      "lot": "c_air_special_outcomes",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/air_punch/action.json",
+      "retained_timing_ms": [
+        83,
+        150,
+        133
+      ],
+      "total_ms": 366,
+      "frame_names": [
+        "air_punch_00",
+        "air_punch_01",
+        "air_punch_02"
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "generation_brief": "Airborne preparation/contact/recovery with consistent virtual waist/head anchor, fist inside its baseline box.",
+      "anchor_policy": "virtual torso/waist registration; World supplies height",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": true,
+      "contact_reference": {
+        "move_id": "AirPunch",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 22,
+          "active_start": 5,
+          "active_end": 13
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 83,
+          "recovery_starts": 233,
+          "clip_ends": 366
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -130.66666666666669,
+          "w": 96.0,
+          "h": 56.0
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -146.66666666666666,
+          "y": -130.66666666666669,
+          "w": 96.0,
+          "h": 56.0
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 98.66666666666666,
+          "y": -102.66666666666669
+        }
+      }
+    },
+    "air_kick": {
+      "lot": "c_air_special_outcomes",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/air_kick/action.json",
+      "retained_timing_ms": [
+        83,
+        133,
+        117
+      ],
+      "total_ms": 333,
+      "frame_names": [
+        "air_kick_00",
+        "air_kick_01",
+        "air_kick_02"
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ],
+      "generation_brief": "Airborne chamber, extended contact foot at the existing lower box and recovery. Preserve virtual body anchor; correct limb drawing before translating the whole body.",
+      "anchor_policy": "virtual torso/waist registration; World supplies height",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": true,
+      "contact_reference": {
+        "move_id": "GoHopkick",
+        "source": "src/combat/move_data.rs",
+        "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+        "timing_ticks": {
+          "duration": 20,
+          "active_start": 5,
+          "active_end": 12
+        },
+        "active_end_inclusive": true,
+        "suggested_phase_boundary_ms": {
+          "active_starts": 83,
+          "recovery_starts": 216,
+          "clip_ends": 333
+        },
+        "active_box_right_relative_to_anchor": {
+          "x": 50.666666666666664,
+          "y": -106.66666666666667,
+          "w": 104.0,
+          "h": 56.0
+        },
+        "active_box_left_relative_to_anchor": {
+          "x": -154.66666666666666,
+          "y": -106.66666666666667,
+          "w": 104.0,
+          "h": 56.0
+        },
+        "suggested_contact_center_right_relative_to_anchor": {
+          "x": 102.66666666666666,
+          "y": -78.66666666666667
+        }
+      }
+    },
+    "special": {
+      "lot": "c_air_special_outcomes",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/special/action.json",
+      "retained_timing_ms": [
+        80,
+        80,
+        107
+      ],
+      "total_ms": 267,
+      "frame_names": [
+        "special_00",
+        "special_01",
+        "special_02"
+      ],
+      "phases": [
+        "emit",
+        "recoil",
+        "recovery"
+      ],
+      "generation_brief": "Emission is visible in the FIRST key at baseline origin. Emitting hand aligns with(+97.92,-123.84); projectile stays a separate asset, no glow rectangle baked onto the fighter.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": false,
+      "contact_reference": {
+        "spec": "GO_PROJECTILE_SPEC",
+        "timing_ticks": {
+          "startup": 0,
+          "spawn_frame": 0,
+          "visual_duration": 16,
+          "cooldown": 44
+        },
+        "projectile_dimensions_world": {
+          "w": 48.0,
+          "h": 32.0
+        },
+        "projectile_speed_world_per_second": 573.3333333333333,
+        "emission_origin_source": "World::projectile_for_fighter -> projected_projectile_origin_for_clip(Special,0.0)",
+        "first_emission_origin_right_relative_to_anchor": {
+          "x": 97.92,
+          "y": -123.83999999999999
+        },
+        "all_baseline_origins": [
+          {
+            "frame": "special_0",
+            "baseline_local_origin": {
+              "x": 180,
+              "y": 150
+            },
+            "baseline_pivot": {
+              "x": 112,
+              "y": 236
+            },
+            "baseline_scale": 1.44,
+            "right_relative_to_anchor": {
+              "x": 97.92,
+              "y": -123.83999999999999
+            },
+            "left_relative_to_anchor": {
+              "x": -97.92,
+              "y": -123.83999999999999
+            },
+            "used_for_initial_emission_at_elapsed_zero": true
+          },
+          {
+            "frame": "special_1",
+            "baseline_local_origin": {
+              "x": 192,
+              "y": 151
+            },
+            "baseline_pivot": {
+              "x": 112,
+              "y": 236
+            },
+            "baseline_scale": 1.44,
+            "right_relative_to_anchor": {
+              "x": 115.19999999999999,
+              "y": -122.39999999999999
+            },
+            "left_relative_to_anchor": {
+              "x": -115.19999999999999,
+              "y": -122.39999999999999
+            },
+            "used_for_initial_emission_at_elapsed_zero": false
+          },
+          {
+            "frame": "special_2",
+            "baseline_local_origin": {
+              "x": 201,
+              "y": 150
+            },
+            "baseline_pivot": {
+              "x": 112,
+              "y": 236
+            },
+            "baseline_scale": 1.44,
+            "right_relative_to_anchor": {
+              "x": 128.16,
+              "y": -123.83999999999999
+            },
+            "left_relative_to_anchor": {
+              "x": -128.16,
+              "y": -123.83999999999999
+            },
+            "used_for_initial_emission_at_elapsed_zero": false
+          }
+        ],
+        "fallback_used_only_without_manifest_origin": {
+          "right_relative_to_anchor": {
+            "x": 128.0,
+            "y": -112.0
+          }
+        },
+        "drawing_instruction": "Aim the muzzle/emitting hand at first_emission_origin from the first pose; preserve separate existing projectile."
+      }
+    },
+    "spawn": {
+      "lot": "c_air_special_outcomes",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/spawn/action.json",
+      "retained_timing_ms": [
+        500,
+        700,
+        1500
+      ],
+      "total_ms": 2700,
+      "frame_names": [
+        "spawn_00",
+        "spawn_01",
+        "spawn_02"
+      ],
+      "phases": [
+        "adjust",
+        "bow",
+        "ready"
+      ],
+      "generation_brief": "Three new entrance keys leading into the shared idle. Preserve total2700ms unless integrator explicitly revises visual pacing.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": false,
+      "contact_reference": null
+    },
+    "victory": {
+      "lot": "c_air_special_outcomes",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/victory/action.json",
+      "retained_timing_ms": [
+        160,
+        200,
+        500
+      ],
+      "total_ms": 860,
+      "frame_names": [
+        "victory_00",
+        "victory_01",
+        "victory_02"
+      ],
+      "phases": [
+        "relax",
+        "celebrate",
+        "hold"
+      ],
+      "generation_brief": "New identity-appropriate release, celebration and held result, maintaining full limbs/accessories.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": false,
+      "contact_reference": null
+    },
+    "defeat": {
+      "lot": "c_air_special_outcomes",
+      "loop": false,
+      "historical_action": "../go-cartoon-archive/defeat/action.json",
+      "retained_timing_ms": [
+        160,
+        220,
+        660
+      ],
+      "total_ms": 1040,
+      "frame_names": [
+        "defeat_00",
+        "defeat_01",
+        "defeat_02"
+      ],
+      "phases": [
+        "droop",
+        "kneel",
+        "hold"
+      ],
+      "generation_brief": "Reaction, supported descent and held defeated posture at constant anatomical scale; no independent enlargement of a horizontal pose.",
+      "anchor_policy": "ground support registered to body center/bottom; keep one anatomy scale for the whole action",
+      "source_pivots": null,
+      "uniform_source_scale_to_runtime": null,
+      "timing_verified_against_current_MoveSpec": false,
+      "contact_reference": null
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "keyed-v1.png",
+  "scale": 0.3371647509578544,
+  "frames": [
+    {
+      "name": "idle_00",
+      "clip": "idle",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 305,
+        "y": 827
+      },
+      "duration_ms": 180
+    },
+    {
+      "name": "idle_01",
+      "clip": "idle",
+      "frame": {
+        "x": 627,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 285,
+        "y": 827
+      },
+      "duration_ms": 180
+    },
+    {
+      "name": "idle_02",
+      "clip": "idle",
+      "frame": {
+        "x": 1254,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 262,
+        "y": 827
+      },
+      "duration_ms": 180
+    }
+  ],
+  "clips": [
+    {
+      "name": "idle",
+      "loop": true,
+      "frames": [
+        "idle_00",
+        "idle_01",
+        "idle_02"
+      ]
+    }
+  ],
+  "cell": {
+    "w": 627,
+    "h": 836
+  }
+}

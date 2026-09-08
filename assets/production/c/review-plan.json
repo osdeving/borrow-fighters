@@ -5,7 +5,8 @@
     "generator": "built-in imagegen",
     "identity_reference": "reference/master-existing.png",
     "polished_reference": "idle/source-v1.png",
-    "combat": "Visual-only; baseline combat_manifest unchanged."
+    "combat": "Visual-only; baseline combat_manifest unchanged.",
+    "review": "finalization-review.md"
   },
   "actions": {
     "idle": {
@@ -16,7 +17,8 @@
     "walk": {
       "approved": true,
       "scale_to_runtime": 0.4253968253968254,
-      "notes": "Four gait keys, with a strong raised-knee passing pose; flared trousers obscure left/right alternation. Approved for candidate preview export, not final art release."
+      "notes": "v3: near contact, far toe-off, opposite contact and near passing, 400ms unchanged. Complete World reviewed both facings and idle return; root accepted refinement. See walk/review-v3.md and finalization-review.md.",
+      "sheet": "walk/keyed-v3.png"
     },
     "jump": {
       "approved": true,
@@ -50,8 +52,9 @@
     },
     "punch_heavy": {
       "approved": true,
-      "scale_to_runtime": 0.432258064516129,
-      "notes": "v2 lowers book contact; v1 rejected for high contact. Approved for candidate preview export, not final art release."
+      "scale_to_runtime": 0.5153846153846153,
+      "notes": "v3: longer two-hand book strike, retract and settle; timing200/150/283ms retained as200/150/140/143ms. Page contact center inside baseline active band; upper edge around11px above it. v4/v5 too low and v6 too high rejected. Native Lab and complete World reviewed, root accepted refinement.",
+      "sheet": "punch_heavy/keyed-v3.png"
     },
     "kick": {
       "approved": true,
@@ -61,7 +64,8 @@
     "sweep": {
       "approved": true,
       "scale_to_runtime": 0.4253968253968254,
-      "notes": "Raised sweep shin crosses baseline box; sole is higher. Candidate artistic limitation. Approved for candidate preview export, not final art release."
+      "notes": "v3: low support, raised active sole, retract and half-rise, four real generated bodies. Baseline timing200/150/250ms conserved as200/150/125/125ms. Sole center crosses original active band; top of tilted toe approximately18px above it, no claim that full contour is inside. Native Lab and complete World reviewed, root accepted refinement.",
+      "sheet": "sweep/keyed-v3.png"
     },
     "overhead": {
       "approved": true,

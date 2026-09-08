@@ -1,0 +1,2078 @@
+{
+  "schema": "borrow-fighters.sprite-provenance.v1",
+  "character": "go",
+  "production": "../../production/go/production.json",
+  "production_sha256": "b1d4b4a92ce058ea247021a88bff74f4e6e5c15f7345646b86cb1ea92dbef4ab",
+  "production_snapshot": {
+    "schema": "borrow-fighters.production.v1",
+    "character": "go",
+    "scale": 1.0,
+    "provenance": {
+      "status": "candidate",
+      "generator": "built-in image_gen",
+      "identity_reference": "reference/master-existing.png",
+      "footwear_reference": "reference/footwear-existing.png",
+      "continuity_reference": "reference/idle-generated.png",
+      "combat": "Visual only; runtime baseline combat_manifest remains authoritative.",
+      "alpha_processing": "tools/art/remove_generated_magenta.py without --rust-contour; isolated one-pixel matte residue at blank sheet corners was cleared.",
+      "contact_contract": "../contact-contract.json",
+      "refinement": "2026-09-07: targeted image_gen revisions for walk, sweep and air_kick; no regeneration of already satisfactory actions. Versioned originals and rejected sources preserved."
+    },
+    "actions": {
+      "idle": {
+        "sheet": "idle/prepared.png",
+        "reviewed": true,
+        "loop": true,
+        "frames": [
+          {
+            "name": "idle_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 222,
+              "h": 444
+            },
+            "pivot": {
+              "x": 124,
+              "y": 356
+            },
+            "duration_ms": 180,
+            "phase": "idle"
+          },
+          {
+            "name": "idle_01",
+            "source_rect": {
+              "x": 222,
+              "y": 0,
+              "w": 222,
+              "h": 444
+            },
+            "pivot": {
+              "x": 123,
+              "y": 356
+            },
+            "duration_ms": 180,
+            "phase": "idle"
+          },
+          {
+            "name": "idle_02",
+            "source_rect": {
+              "x": 444,
+              "y": 0,
+              "w": 222,
+              "h": 444
+            },
+            "pivot": {
+              "x": 98,
+              "y": 356
+            },
+            "duration_ms": 180,
+            "phase": "idle"
+          }
+        ],
+        "provenance": {
+          "source_action": "idle/action.json",
+          "source_sheet": "idle/keyed.png",
+          "scale_to_runtime": 0.5,
+          "review": "Three selected poses from four generated. Uniform body scale; deep squat pose omitted. Feet at same source ground. Static review completed; final GPU motion review pending."
+        }
+      },
+      "walk": {
+        "sheet": "walk/prepared.png",
+        "reviewed": true,
+        "loop": true,
+        "frames": [
+          {
+            "name": "walk_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 239,
+              "h": 358
+            },
+            "pivot": {
+              "x": 121,
+              "y": 303
+            },
+            "duration_ms": 60,
+            "phase": "front_contact"
+          },
+          {
+            "name": "walk_01",
+            "source_rect": {
+              "x": 239,
+              "y": 0,
+              "w": 239,
+              "h": 358
+            },
+            "pivot": {
+              "x": 134,
+              "y": 303
+            },
+            "duration_ms": 60,
+            "phase": "front_weight_transfer"
+          },
+          {
+            "name": "walk_02",
+            "source_rect": {
+              "x": 478,
+              "y": 0,
+              "w": 239,
+              "h": 358
+            },
+            "pivot": {
+              "x": 115,
+              "y": 304
+            },
+            "duration_ms": 60,
+            "phase": "rear_foot_closes"
+          },
+          {
+            "name": "walk_03",
+            "source_rect": {
+              "x": 717,
+              "y": 0,
+              "w": 239,
+              "h": 358
+            },
+            "pivot": {
+              "x": 103,
+              "y": 304
+            },
+            "duration_ms": 60,
+            "phase": "front_foot_advances"
+          }
+        ],
+        "provenance": {
+          "source_action": "walk/action.json",
+          "source_sheet": "walk/keyed-v5.png",
+          "scale_to_runtime": 0.4664310954063604,
+          "review": "New v5 four distinct guarded shuffle phases: front contact/load, rear foot closes, front foot advances. 60ms each; original total240ms. Uniform264/566 scale from standing silhouette."
+        }
+      },
+      "crouch": {
+        "sheet": "crouch/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "crouch_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 351,
+              "h": 527
+            },
+            "pivot": {
+              "x": 217,
+              "y": 421
+            },
+            "duration_ms": 80,
+            "phase": "crouch"
+          },
+          {
+            "name": "crouch_01",
+            "source_rect": {
+              "x": 352,
+              "y": 0,
+              "w": 352,
+              "h": 527
+            },
+            "pivot": {
+              "x": 184,
+              "y": 424
+            },
+            "duration_ms": 100,
+            "phase": "crouch"
+          },
+          {
+            "name": "crouch_02",
+            "source_rect": {
+              "x": 704,
+              "y": 0,
+              "w": 351,
+              "h": 527
+            },
+            "pivot": {
+              "x": 147,
+              "y": 428
+            },
+            "duration_ms": 180,
+            "phase": "crouch"
+          }
+        ],
+        "provenance": {
+          "source_action": "crouch/action.json",
+          "source_sheet": "crouch/keyed.png",
+          "scale_to_runtime": 0.5945945945945946,
+          "review": "Three progressively folded poses. Scale comes from first upright body, not the shrinking crouch bounds. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "jump": {
+        "sheet": "jump/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "jump_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 302,
+              "h": 454
+            },
+            "pivot": {
+              "x": 177,
+              "y": 396
+            },
+            "duration_ms": 60,
+            "phase": "takeoff"
+          },
+          {
+            "name": "jump_01",
+            "source_rect": {
+              "x": 303,
+              "y": 0,
+              "w": 303,
+              "h": 454
+            },
+            "pivot": {
+              "x": 130,
+              "y": 347
+            },
+            "duration_ms": 340,
+            "phase": "rise"
+          },
+          {
+            "name": "jump_02",
+            "source_rect": {
+              "x": 606,
+              "y": 0,
+              "w": 302,
+              "h": 454
+            },
+            "pivot": {
+              "x": 88,
+              "y": 373
+            },
+            "duration_ms": 400,
+            "phase": "fall"
+          }
+        ],
+        "provenance": {
+          "source_action": "jump/action.json",
+          "source_sheet": "jump/keyed.png",
+          "scale_to_runtime": 0.5116279069767442,
+          "review": "Takeoff then rise/fall. Rise/fall pivots compensate the52px belt displacement in the source. Their heads differ by7sourcepixels after registration; no artificial whole-body jump offset is baked into the frame. Physics supplies the arc. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "block": {
+        "sheet": "block/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "block_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 264,
+              "h": 397
+            },
+            "pivot": {
+              "x": 128,
+              "y": 326
+            },
+            "duration_ms": 70,
+            "phase": "block"
+          },
+          {
+            "name": "block_01",
+            "source_rect": {
+              "x": 265,
+              "y": 0,
+              "w": 265,
+              "h": 397
+            },
+            "pivot": {
+              "x": 122,
+              "y": 327
+            },
+            "duration_ms": 80,
+            "phase": "block"
+          },
+          {
+            "name": "block_02",
+            "source_rect": {
+              "x": 530,
+              "y": 0,
+              "w": 264,
+              "h": 397
+            },
+            "pivot": {
+              "x": 97,
+              "y": 326
+            },
+            "duration_ms": 150,
+            "phase": "block"
+          }
+        ],
+        "provenance": {
+          "source_action": "block/action.json",
+          "source_sheet": "block/keyed.png",
+          "scale_to_runtime": 0.44745762711864406,
+          "review": "Standing guard, crossed-arm absorption and held guard, grounded at the soles. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "crouch_block": {
+        "sheet": "crouch_block/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "crouch_block_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 351,
+              "h": 527
+            },
+            "pivot": {
+              "x": 220,
+              "y": 452
+            },
+            "duration_ms": 70,
+            "phase": "crouch_block"
+          },
+          {
+            "name": "crouch_block_01",
+            "source_rect": {
+              "x": 352,
+              "y": 0,
+              "w": 352,
+              "h": 527
+            },
+            "pivot": {
+              "x": 177,
+              "y": 452
+            },
+            "duration_ms": 80,
+            "phase": "crouch_block"
+          },
+          {
+            "name": "crouch_block_02",
+            "source_rect": {
+              "x": 704,
+              "y": 0,
+              "w": 351,
+              "h": 527
+            },
+            "pivot": {
+              "x": 133,
+              "y": 453
+            },
+            "duration_ms": 150,
+            "phase": "crouch_block"
+          }
+        ],
+        "provenance": {
+          "source_action": "crouch_block/action.json",
+          "source_sheet": "crouch_block/keyed.png",
+          "scale_to_runtime": 0.5945945945945946,
+          "review": "Deep crouching guard v2 selected. Standing-height reference444 is inherited from the crouch sheet whose head size matches this sheet. v1 was a shallow squat and rejected. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "hit": {
+        "sheet": "hit/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "hit_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 298,
+              "h": 426
+            },
+            "pivot": {
+              "x": 206,
+              "y": 353
+            },
+            "duration_ms": 60,
+            "phase": "hit"
+          },
+          {
+            "name": "hit_01",
+            "source_rect": {
+              "x": 298,
+              "y": 0,
+              "w": 271,
+              "h": 426
+            },
+            "pivot": {
+              "x": 166,
+              "y": 353
+            },
+            "duration_ms": 80,
+            "phase": "hit"
+          },
+          {
+            "name": "hit_02",
+            "source_rect": {
+              "x": 596,
+              "y": 0,
+              "w": 283,
+              "h": 426
+            },
+            "pivot": {
+              "x": 129,
+              "y": 351
+            },
+            "duration_ms": 120,
+            "phase": "hit"
+          }
+        ],
+        "provenance": {
+          "source_action": "hit/action.json",
+          "source_sheet": "hit/keyed.png",
+          "scale_to_runtime": 0.48,
+          "review": "Recoil and pain pose, then exhausted recovery. First pose stretches and tilts; normalize using the final upright body, not the widest recoil bounds. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "punch_light": {
+        "sheet": "punch_light/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "punch_light_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 292,
+              "h": 439
+            },
+            "pivot": {
+              "x": 156,
+              "y": 356
+            },
+            "duration_ms": 50,
+            "phase": "startup"
+          },
+          {
+            "name": "punch_light_01",
+            "source_rect": {
+              "x": 293,
+              "y": 0,
+              "w": 293,
+              "h": 439
+            },
+            "pivot": {
+              "x": 118,
+              "y": 356
+            },
+            "duration_ms": 83,
+            "phase": "active"
+          },
+          {
+            "name": "punch_light_02",
+            "source_rect": {
+              "x": 586,
+              "y": 0,
+              "w": 292,
+              "h": 439
+            },
+            "pivot": {
+              "x": 124,
+              "y": 356
+            },
+            "duration_ms": 100,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "punch_light/action.json",
+          "source_sheet": "punch_light/keyed.png",
+          "scale_to_runtime": 0.4943820224719101,
+          "review": "v4 compact jab selected. v1 reached too far, v2 lost the punch, v3 remained too long. Knuckles approach the far edge of the existing short hitbox; no hitbox changed. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "punch_heavy": {
+        "sheet": "punch_heavy/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "punch_heavy_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 326,
+              "h": 482
+            },
+            "pivot": {
+              "x": 179,
+              "y": 377
+            },
+            "duration_ms": 183,
+            "phase": "startup"
+          },
+          {
+            "name": "punch_heavy_01",
+            "source_rect": {
+              "x": 348,
+              "y": 0,
+              "w": 348,
+              "h": 482
+            },
+            "pivot": {
+              "x": 136,
+              "y": 378
+            },
+            "duration_ms": 167,
+            "phase": "active"
+          },
+          {
+            "name": "punch_heavy_02",
+            "source_rect": {
+              "x": 696,
+              "y": 0,
+              "w": 290,
+              "h": 482
+            },
+            "pivot": {
+              "x": 114,
+              "y": 378
+            },
+            "duration_ms": 233,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "punch_heavy/action.json",
+          "source_sheet": "punch_heavy/keyed.png",
+          "scale_to_runtime": 0.5432098765432098,
+          "review": "Heavy weight shift and full extension; source cells use wider explicit bounds so the active fist is never clipped. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "kick": {
+        "sheet": "kick/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "kick_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 270,
+              "h": 405
+            },
+            "pivot": {
+              "x": 144,
+              "y": 333
+            },
+            "duration_ms": 116,
+            "phase": "startup"
+          },
+          {
+            "name": "kick_01",
+            "source_rect": {
+              "x": 270,
+              "y": 0,
+              "w": 270,
+              "h": 405
+            },
+            "pivot": {
+              "x": 111,
+              "y": 333
+            },
+            "duration_ms": 117,
+            "phase": "active"
+          },
+          {
+            "name": "kick_02",
+            "source_rect": {
+              "x": 540,
+              "y": 0,
+              "w": 270,
+              "h": 405
+            },
+            "pivot": {
+              "x": 127,
+              "y": 333
+            },
+            "duration_ms": 150,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "kick/action.json",
+          "source_sheet": "kick/keyed.png",
+          "scale_to_runtime": 0.45674740484429066,
+          "review": "Knee chamber, compact low kick, recovery. The planted foot stays at the ground anchor. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "sweep": {
+        "sheet": "sweep/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "sweep_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 306,
+              "h": 459
+            },
+            "pivot": {
+              "x": 158,
+              "y": 388
+            },
+            "duration_ms": 166,
+            "phase": "startup"
+          },
+          {
+            "name": "sweep_01",
+            "source_rect": {
+              "x": 306,
+              "y": 0,
+              "w": 306,
+              "h": 459
+            },
+            "pivot": {
+              "x": 125,
+              "y": 388
+            },
+            "duration_ms": 150,
+            "phase": "active"
+          },
+          {
+            "name": "sweep_02",
+            "source_rect": {
+              "x": 612,
+              "y": 0,
+              "w": 306,
+              "h": 459
+            },
+            "pivot": {
+              "x": 143,
+              "y": 390
+            },
+            "duration_ms": 217,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "sweep/action.json",
+          "source_sheet": "sweep/keyed-v5.png",
+          "scale_to_runtime": 0.5176470588235295,
+          "review": "New v5 hand-braced low sweep; cream bare foot and blue forearm identity preserved. Active sole overlaps existing elevated sweep box without gameplay changes. Original166/150/217ms."
+        }
+      },
+      "overhead": {
+        "sheet": "overhead/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "overhead_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 290,
+              "h": 435
+            },
+            "pivot": {
+              "x": 167,
+              "y": 361
+            },
+            "duration_ms": 166,
+            "phase": "startup"
+          },
+          {
+            "name": "overhead_01",
+            "source_rect": {
+              "x": 290,
+              "y": 0,
+              "w": 290,
+              "h": 435
+            },
+            "pivot": {
+              "x": 139,
+              "y": 361
+            },
+            "duration_ms": 100,
+            "phase": "active"
+          },
+          {
+            "name": "overhead_02",
+            "source_rect": {
+              "x": 580,
+              "y": 0,
+              "w": 290,
+              "h": 435
+            },
+            "pivot": {
+              "x": 126,
+              "y": 361
+            },
+            "duration_ms": 200,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "overhead/action.json",
+          "source_sheet": "overhead/keyed.png",
+          "scale_to_runtime": 0.49070631970260226,
+          "review": "v2 overhead selected: startup fist above head descends into forward contact. v1 was too low/short; v3 lowered the knuckles below the box. v2 lower knuckles overlap the active box while upper glove extends above it. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "anti_air": {
+        "sheet": "anti_air/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "anti_air_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 296,
+              "h": 444
+            },
+            "pivot": {
+              "x": 166,
+              "y": 390
+            },
+            "duration_ms": 116,
+            "phase": "startup"
+          },
+          {
+            "name": "anti_air_01",
+            "source_rect": {
+              "x": 296,
+              "y": 0,
+              "w": 296,
+              "h": 444
+            },
+            "pivot": {
+              "x": 144,
+              "y": 391
+            },
+            "duration_ms": 134,
+            "phase": "active"
+          },
+          {
+            "name": "anti_air_02",
+            "source_rect": {
+              "x": 592,
+              "y": 0,
+              "w": 296,
+              "h": 444
+            },
+            "pivot": {
+              "x": 128,
+              "y": 390
+            },
+            "duration_ms": 250,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "anti_air/action.json",
+          "source_sheet": "anti_air/keyed.png",
+          "scale_to_runtime": 0.5,
+          "review": "Uniform scale0.5 based on normal body/head size, not raised-fist alpha height. Rising pose stretches body slightly; the overhead fist matches the existing high box. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "air_punch": {
+        "sheet": "air_punch/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "air_punch_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 296,
+              "h": 444
+            },
+            "pivot": {
+              "x": 175,
+              "y": 350
+            },
+            "duration_ms": 83,
+            "phase": "startup"
+          },
+          {
+            "name": "air_punch_01",
+            "source_rect": {
+              "x": 296,
+              "y": 0,
+              "w": 296,
+              "h": 444
+            },
+            "pivot": {
+              "x": 138,
+              "y": 367
+            },
+            "duration_ms": 150,
+            "phase": "active"
+          },
+          {
+            "name": "air_punch_02",
+            "source_rect": {
+              "x": 592,
+              "y": 0,
+              "w": 296,
+              "h": 444
+            },
+            "pivot": {
+              "x": 128,
+              "y": 351
+            },
+            "duration_ms": 133,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "air_punch/action.json",
+          "source_sheet": "air_punch/keyed.png",
+          "scale_to_runtime": 0.5,
+          "review": "v2 raises contact from the original below-belt diving punch. Pivots register torso/head to a stable virtual floor across the three source drawings; physics supplies air displacement. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "air_kick": {
+        "sheet": "air_kick/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "air_kick_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 296,
+              "h": 444
+            },
+            "pivot": {
+              "x": 160,
+              "y": 351
+            },
+            "duration_ms": 83,
+            "phase": "startup"
+          },
+          {
+            "name": "air_kick_01",
+            "source_rect": {
+              "x": 296,
+              "y": 0,
+              "w": 296,
+              "h": 444
+            },
+            "pivot": {
+              "x": 106,
+              "y": 356
+            },
+            "duration_ms": 133,
+            "phase": "active"
+          },
+          {
+            "name": "air_kick_02",
+            "source_rect": {
+              "x": 592,
+              "y": 0,
+              "w": 296,
+              "h": 444
+            },
+            "pivot": {
+              "x": 118,
+              "y": 362
+            },
+            "duration_ms": 117,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "air_kick/action.json",
+          "source_sheet": "air_kick/keyed-v2.png",
+          "scale_to_runtime": 0.5,
+          "review": "New v2 lowers the contact foot into existing air-kick box. Stable virtual-ground pivot follows head/belt; original83/133/117ms unchanged."
+        }
+      },
+      "throw": {
+        "sheet": "throw/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "throw_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 268,
+              "h": 384
+            },
+            "pivot": {
+              "x": 144,
+              "y": 324
+            },
+            "duration_ms": 100,
+            "phase": "startup"
+          },
+          {
+            "name": "throw_01",
+            "source_rect": {
+              "x": 268,
+              "y": 0,
+              "w": 245,
+              "h": 384
+            },
+            "pivot": {
+              "x": 113,
+              "y": 324
+            },
+            "duration_ms": 50,
+            "phase": "active"
+          },
+          {
+            "name": "throw_02",
+            "source_rect": {
+              "x": 536,
+              "y": 0,
+              "w": 255,
+              "h": 384
+            },
+            "pivot": {
+              "x": 115,
+              "y": 324
+            },
+            "duration_ms": 216,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "throw/action.json",
+          "source_sheet": "throw/keyed.png",
+          "scale_to_runtime": 0.43278688524590164,
+          "review": "Open-handed preparation, compact grip and recovery. First crop widened to preserve every finger; grip contact remains near the short throw range. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "special": {
+        "sheet": "special/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "special_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 349,
+              "h": 524
+            },
+            "pivot": {
+              "x": 197,
+              "y": 402
+            },
+            "duration_ms": 80,
+            "phase": "emit"
+          },
+          {
+            "name": "special_01",
+            "source_rect": {
+              "x": 350,
+              "y": 0,
+              "w": 350,
+              "h": 524
+            },
+            "pivot": {
+              "x": 187,
+              "y": 402
+            },
+            "duration_ms": 80,
+            "phase": "recoil"
+          },
+          {
+            "name": "special_02",
+            "source_rect": {
+              "x": 700,
+              "y": 0,
+              "w": 349,
+              "h": 524
+            },
+            "pivot": {
+              "x": 161,
+              "y": 402
+            },
+            "duration_ms": 107,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "special/action.json",
+          "source_sheet": "special/keyed.png",
+          "scale_to_runtime": 0.5906040268456376,
+          "review": "v2 compact palm emission chosen to meet the existing origin97.92px forward/123.84px up from frame0. Projectile remains the separate baseline asset; no baked projectile or candidate combat metadata. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "spawn": {
+        "sheet": "spawn/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "spawn_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 292,
+              "h": 439
+            },
+            "pivot": {
+              "x": 169,
+              "y": 352
+            },
+            "duration_ms": 500,
+            "phase": "adjust"
+          },
+          {
+            "name": "spawn_01",
+            "source_rect": {
+              "x": 293,
+              "y": 0,
+              "w": 293,
+              "h": 439
+            },
+            "pivot": {
+              "x": 126,
+              "y": 354
+            },
+            "duration_ms": 700,
+            "phase": "bow"
+          },
+          {
+            "name": "spawn_02",
+            "source_rect": {
+              "x": 586,
+              "y": 0,
+              "w": 292,
+              "h": 439
+            },
+            "pivot": {
+              "x": 126,
+              "y": 352
+            },
+            "duration_ms": 1500,
+            "phase": "ready"
+          }
+        ],
+        "provenance": {
+          "source_action": "spawn/action.json",
+          "source_sheet": "spawn/keyed.png",
+          "scale_to_runtime": 0.4943820224719101,
+          "review": "Belt adjustment, courteous bow and ready guard. Original fixed identity remains visible throughout the entrance. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "victory": {
+        "sheet": "victory/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "victory_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 257,
+              "h": 386
+            },
+            "pivot": {
+              "x": 135,
+              "y": 335
+            },
+            "duration_ms": 160,
+            "phase": "relax"
+          },
+          {
+            "name": "victory_01",
+            "source_rect": {
+              "x": 258,
+              "y": 0,
+              "w": 258,
+              "h": 386
+            },
+            "pivot": {
+              "x": 117,
+              "y": 335
+            },
+            "duration_ms": 200,
+            "phase": "celebrate"
+          },
+          {
+            "name": "victory_02",
+            "source_rect": {
+              "x": 516,
+              "y": 0,
+              "w": 257,
+              "h": 386
+            },
+            "pivot": {
+              "x": 87,
+              "y": 335
+            },
+            "duration_ms": 500,
+            "phase": "hold"
+          }
+        ],
+        "provenance": {
+          "source_action": "victory/action.json",
+          "source_sheet": "victory/keyed.png",
+          "scale_to_runtime": 0.43564356435643564,
+          "review": "Relax, celebrate and hold a thumbs-up. Scale from upright body, with no shrink for the lifted arm. Explicit visual review for packing; final-art approval remains pending."
+        }
+      },
+      "defeat": {
+        "sheet": "defeat/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "defeat_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 249,
+              "h": 374
+            },
+            "pivot": {
+              "x": 131,
+              "y": 320
+            },
+            "duration_ms": 160,
+            "phase": "droop"
+          },
+          {
+            "name": "defeat_01",
+            "source_rect": {
+              "x": 250,
+              "y": 0,
+              "w": 250,
+              "h": 374
+            },
+            "pivot": {
+              "x": 111,
+              "y": 326
+            },
+            "duration_ms": 220,
+            "phase": "kneel"
+          },
+          {
+            "name": "defeat_02",
+            "source_rect": {
+              "x": 500,
+              "y": 0,
+              "w": 249,
+              "h": 374
+            },
+            "pivot": {
+              "x": 104,
+              "y": 323
+            },
+            "duration_ms": 660,
+            "phase": "hold"
+          }
+        ],
+        "provenance": {
+          "source_action": "defeat/action.json",
+          "source_sheet": "defeat/keyed.png",
+          "scale_to_runtime": 0.4217252396166134,
+          "review": "Disappointment, kneel and defeated seated hold; all are grounded. Scale is inherited from first standing body, not kneeling height. Explicit visual review for packing; final-art approval remains pending."
+        }
+      }
+    }
+  },
+  "sources": [
+    {
+      "path": "../../production/go/idle/prepared.png",
+      "sha256": "adba6b6183fc0d9ed64bf8effff00eb5e32505741930163b547134af427a6012"
+    },
+    {
+      "path": "../../production/go/walk/prepared.png",
+      "sha256": "0cb6b163358fed8cf9fed35f7ed75fde6fca1a5fedc96f104948e6a9adb1b03d"
+    },
+    {
+      "path": "../../production/go/crouch/prepared.png",
+      "sha256": "5d5d8811000f6ef60dbdee6c97fdcc52d8ab6dccdcc68a6ac9badaea21e0b695"
+    },
+    {
+      "path": "../../production/go/jump/prepared.png",
+      "sha256": "cb939e2812b63685e483cd5dac218f715fc27adcdde396af9130194aa42dd687"
+    },
+    {
+      "path": "../../production/go/block/prepared.png",
+      "sha256": "0cd4cd05341ca34066c21ea1a796ea8c17a9d67e8cd4468fa87345e543536597"
+    },
+    {
+      "path": "../../production/go/crouch_block/prepared.png",
+      "sha256": "8fef0884b26c107e5ac18ed482c4419b76df71fb29485b116372b7309bf957b5"
+    },
+    {
+      "path": "../../production/go/hit/prepared.png",
+      "sha256": "521f0889c2201d8364885f55b6a1a08086e24250f9b28abaa9ecfbfd25970842"
+    },
+    {
+      "path": "../../production/go/punch_light/prepared.png",
+      "sha256": "b8f49aa7f56fd329a5f3ef4c03f62c6989981f771f1919ef72b8c9334dda418b"
+    },
+    {
+      "path": "../../production/go/punch_heavy/prepared.png",
+      "sha256": "e4d4ac0bd864e1e3d44980124df05a86e5ef66809799e918ad2b1c4fe496460a"
+    },
+    {
+      "path": "../../production/go/kick/prepared.png",
+      "sha256": "a09ca6edbd459e73bffc2946afdaff88f69e6134287d369d9dfbaf36097a03da"
+    },
+    {
+      "path": "../../production/go/sweep/prepared.png",
+      "sha256": "2db0df02c8fbf3ed7b6ab71f5588e4f4a604b3a3ac1e071f4f5b5c0e44bf5923"
+    },
+    {
+      "path": "../../production/go/overhead/prepared.png",
+      "sha256": "4055503f00099400fbea6d458958aad5ddf12f052bd9f02041973357cf2fdf12"
+    },
+    {
+      "path": "../../production/go/anti_air/prepared.png",
+      "sha256": "2a81f4301a94c5ad3f719ede6a4f3db56df4111eab3235eb61ef883c9fba0043"
+    },
+    {
+      "path": "../../production/go/air_punch/prepared.png",
+      "sha256": "83d4254679b126daa9656fb50ea1124d6369049432b239fc2cdb54866b699d96"
+    },
+    {
+      "path": "../../production/go/air_kick/prepared.png",
+      "sha256": "199c3b80cd4cc3b7eab217da20d58ebc79af6ef536294688069dada4e38d809a"
+    },
+    {
+      "path": "../../production/go/throw/prepared.png",
+      "sha256": "9e4368f15bacdd47c893ba5fc34cf1b01603b528ca346ba14f8919de409e8d1a"
+    },
+    {
+      "path": "../../production/go/special/prepared.png",
+      "sha256": "e76e5959c147da6029008aa5707dfa71a34ba6870cf09892973d0b4ef5a040b2"
+    },
+    {
+      "path": "../../production/go/spawn/prepared.png",
+      "sha256": "3a2fd903c24efcb6b43df5522144d90e9ff3d3db6c061490d683fcf0fc8fe164"
+    },
+    {
+      "path": "../../production/go/victory/prepared.png",
+      "sha256": "9aafdca76a32f2bae1adce2a5aa2ca8109f34b4059f2bead9ca2777d9fb881de"
+    },
+    {
+      "path": "../../production/go/defeat/prepared.png",
+      "sha256": "dd6d8539807aa7285baed303f95b8f3ce8adfffd2bae2364213b4c95b45d0a5f"
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_00",
+      "action": "idle",
+      "sheet": "../../production/go/idle/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 222,
+        "h": 444
+      },
+      "exported_frame": "../../production/go/idle/frames/idle_00.png",
+      "phase": "idle"
+    },
+    {
+      "name": "idle_01",
+      "action": "idle",
+      "sheet": "../../production/go/idle/prepared.png",
+      "source_rect": {
+        "x": 222,
+        "y": 0,
+        "w": 222,
+        "h": 444
+      },
+      "exported_frame": "../../production/go/idle/frames/idle_01.png",
+      "phase": "idle"
+    },
+    {
+      "name": "idle_02",
+      "action": "idle",
+      "sheet": "../../production/go/idle/prepared.png",
+      "source_rect": {
+        "x": 444,
+        "y": 0,
+        "w": 222,
+        "h": 444
+      },
+      "exported_frame": "../../production/go/idle/frames/idle_02.png",
+      "phase": "idle"
+    },
+    {
+      "name": "walk_00",
+      "action": "walk",
+      "sheet": "../../production/go/walk/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 239,
+        "h": 358
+      },
+      "exported_frame": "../../production/go/walk/frames/walk_00.png",
+      "phase": "front_contact"
+    },
+    {
+      "name": "walk_01",
+      "action": "walk",
+      "sheet": "../../production/go/walk/prepared.png",
+      "source_rect": {
+        "x": 239,
+        "y": 0,
+        "w": 239,
+        "h": 358
+      },
+      "exported_frame": "../../production/go/walk/frames/walk_01.png",
+      "phase": "front_weight_transfer"
+    },
+    {
+      "name": "walk_02",
+      "action": "walk",
+      "sheet": "../../production/go/walk/prepared.png",
+      "source_rect": {
+        "x": 478,
+        "y": 0,
+        "w": 239,
+        "h": 358
+      },
+      "exported_frame": "../../production/go/walk/frames/walk_02.png",
+      "phase": "rear_foot_closes"
+    },
+    {
+      "name": "walk_03",
+      "action": "walk",
+      "sheet": "../../production/go/walk/prepared.png",
+      "source_rect": {
+        "x": 717,
+        "y": 0,
+        "w": 239,
+        "h": 358
+      },
+      "exported_frame": "../../production/go/walk/frames/walk_03.png",
+      "phase": "front_foot_advances"
+    },
+    {
+      "name": "crouch_00",
+      "action": "crouch",
+      "sheet": "../../production/go/crouch/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 351,
+        "h": 527
+      },
+      "exported_frame": "../../production/go/crouch/frames/crouch_00.png",
+      "phase": "crouch"
+    },
+    {
+      "name": "crouch_01",
+      "action": "crouch",
+      "sheet": "../../production/go/crouch/prepared.png",
+      "source_rect": {
+        "x": 352,
+        "y": 0,
+        "w": 352,
+        "h": 527
+      },
+      "exported_frame": "../../production/go/crouch/frames/crouch_01.png",
+      "phase": "crouch"
+    },
+    {
+      "name": "crouch_02",
+      "action": "crouch",
+      "sheet": "../../production/go/crouch/prepared.png",
+      "source_rect": {
+        "x": 704,
+        "y": 0,
+        "w": 351,
+        "h": 527
+      },
+      "exported_frame": "../../production/go/crouch/frames/crouch_02.png",
+      "phase": "crouch"
+    },
+    {
+      "name": "jump_00",
+      "action": "jump",
+      "sheet": "../../production/go/jump/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 302,
+        "h": 454
+      },
+      "exported_frame": "../../production/go/jump/frames/jump_00.png",
+      "phase": "takeoff"
+    },
+    {
+      "name": "jump_01",
+      "action": "jump",
+      "sheet": "../../production/go/jump/prepared.png",
+      "source_rect": {
+        "x": 303,
+        "y": 0,
+        "w": 303,
+        "h": 454
+      },
+      "exported_frame": "../../production/go/jump/frames/jump_01.png",
+      "phase": "rise"
+    },
+    {
+      "name": "jump_02",
+      "action": "jump",
+      "sheet": "../../production/go/jump/prepared.png",
+      "source_rect": {
+        "x": 606,
+        "y": 0,
+        "w": 302,
+        "h": 454
+      },
+      "exported_frame": "../../production/go/jump/frames/jump_02.png",
+      "phase": "fall"
+    },
+    {
+      "name": "block_00",
+      "action": "block",
+      "sheet": "../../production/go/block/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 264,
+        "h": 397
+      },
+      "exported_frame": "../../production/go/block/frames/block_00.png",
+      "phase": "block"
+    },
+    {
+      "name": "block_01",
+      "action": "block",
+      "sheet": "../../production/go/block/prepared.png",
+      "source_rect": {
+        "x": 265,
+        "y": 0,
+        "w": 265,
+        "h": 397
+      },
+      "exported_frame": "../../production/go/block/frames/block_01.png",
+      "phase": "block"
+    },
+    {
+      "name": "block_02",
+      "action": "block",
+      "sheet": "../../production/go/block/prepared.png",
+      "source_rect": {
+        "x": 530,
+        "y": 0,
+        "w": 264,
+        "h": 397
+      },
+      "exported_frame": "../../production/go/block/frames/block_02.png",
+      "phase": "block"
+    },
+    {
+      "name": "crouch_block_00",
+      "action": "crouch_block",
+      "sheet": "../../production/go/crouch_block/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 351,
+        "h": 527
+      },
+      "exported_frame": "../../production/go/crouch_block/frames/crouch_block_00.png",
+      "phase": "crouch_block"
+    },
+    {
+      "name": "crouch_block_01",
+      "action": "crouch_block",
+      "sheet": "../../production/go/crouch_block/prepared.png",
+      "source_rect": {
+        "x": 352,
+        "y": 0,
+        "w": 352,
+        "h": 527
+      },
+      "exported_frame": "../../production/go/crouch_block/frames/crouch_block_01.png",
+      "phase": "crouch_block"
+    },
+    {
+      "name": "crouch_block_02",
+      "action": "crouch_block",
+      "sheet": "../../production/go/crouch_block/prepared.png",
+      "source_rect": {
+        "x": 704,
+        "y": 0,
+        "w": 351,
+        "h": 527
+      },
+      "exported_frame": "../../production/go/crouch_block/frames/crouch_block_02.png",
+      "phase": "crouch_block"
+    },
+    {
+      "name": "hit_00",
+      "action": "hit",
+      "sheet": "../../production/go/hit/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 298,
+        "h": 426
+      },
+      "exported_frame": "../../production/go/hit/frames/hit_00.png",
+      "phase": "hit"
+    },
+    {
+      "name": "hit_01",
+      "action": "hit",
+      "sheet": "../../production/go/hit/prepared.png",
+      "source_rect": {
+        "x": 298,
+        "y": 0,
+        "w": 271,
+        "h": 426
+      },
+      "exported_frame": "../../production/go/hit/frames/hit_01.png",
+      "phase": "hit"
+    },
+    {
+      "name": "hit_02",
+      "action": "hit",
+      "sheet": "../../production/go/hit/prepared.png",
+      "source_rect": {
+        "x": 596,
+        "y": 0,
+        "w": 283,
+        "h": 426
+      },
+      "exported_frame": "../../production/go/hit/frames/hit_02.png",
+      "phase": "hit"
+    },
+    {
+      "name": "punch_light_00",
+      "action": "punch_light",
+      "sheet": "../../production/go/punch_light/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 292,
+        "h": 439
+      },
+      "exported_frame": "../../production/go/punch_light/frames/punch_light_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "punch_light_01",
+      "action": "punch_light",
+      "sheet": "../../production/go/punch_light/prepared.png",
+      "source_rect": {
+        "x": 293,
+        "y": 0,
+        "w": 293,
+        "h": 439
+      },
+      "exported_frame": "../../production/go/punch_light/frames/punch_light_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "punch_light_02",
+      "action": "punch_light",
+      "sheet": "../../production/go/punch_light/prepared.png",
+      "source_rect": {
+        "x": 586,
+        "y": 0,
+        "w": 292,
+        "h": 439
+      },
+      "exported_frame": "../../production/go/punch_light/frames/punch_light_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "punch_heavy_00",
+      "action": "punch_heavy",
+      "sheet": "../../production/go/punch_heavy/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 326,
+        "h": 482
+      },
+      "exported_frame": "../../production/go/punch_heavy/frames/punch_heavy_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "punch_heavy_01",
+      "action": "punch_heavy",
+      "sheet": "../../production/go/punch_heavy/prepared.png",
+      "source_rect": {
+        "x": 348,
+        "y": 0,
+        "w": 348,
+        "h": 482
+      },
+      "exported_frame": "../../production/go/punch_heavy/frames/punch_heavy_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "punch_heavy_02",
+      "action": "punch_heavy",
+      "sheet": "../../production/go/punch_heavy/prepared.png",
+      "source_rect": {
+        "x": 696,
+        "y": 0,
+        "w": 290,
+        "h": 482
+      },
+      "exported_frame": "../../production/go/punch_heavy/frames/punch_heavy_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "kick_00",
+      "action": "kick",
+      "sheet": "../../production/go/kick/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 270,
+        "h": 405
+      },
+      "exported_frame": "../../production/go/kick/frames/kick_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "kick_01",
+      "action": "kick",
+      "sheet": "../../production/go/kick/prepared.png",
+      "source_rect": {
+        "x": 270,
+        "y": 0,
+        "w": 270,
+        "h": 405
+      },
+      "exported_frame": "../../production/go/kick/frames/kick_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "kick_02",
+      "action": "kick",
+      "sheet": "../../production/go/kick/prepared.png",
+      "source_rect": {
+        "x": 540,
+        "y": 0,
+        "w": 270,
+        "h": 405
+      },
+      "exported_frame": "../../production/go/kick/frames/kick_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_00",
+      "action": "sweep",
+      "sheet": "../../production/go/sweep/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 306,
+        "h": 459
+      },
+      "exported_frame": "../../production/go/sweep/frames/sweep_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "sweep_01",
+      "action": "sweep",
+      "sheet": "../../production/go/sweep/prepared.png",
+      "source_rect": {
+        "x": 306,
+        "y": 0,
+        "w": 306,
+        "h": 459
+      },
+      "exported_frame": "../../production/go/sweep/frames/sweep_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "sweep_02",
+      "action": "sweep",
+      "sheet": "../../production/go/sweep/prepared.png",
+      "source_rect": {
+        "x": 612,
+        "y": 0,
+        "w": 306,
+        "h": 459
+      },
+      "exported_frame": "../../production/go/sweep/frames/sweep_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "overhead_00",
+      "action": "overhead",
+      "sheet": "../../production/go/overhead/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 290,
+        "h": 435
+      },
+      "exported_frame": "../../production/go/overhead/frames/overhead_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "overhead_01",
+      "action": "overhead",
+      "sheet": "../../production/go/overhead/prepared.png",
+      "source_rect": {
+        "x": 290,
+        "y": 0,
+        "w": 290,
+        "h": 435
+      },
+      "exported_frame": "../../production/go/overhead/frames/overhead_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "overhead_02",
+      "action": "overhead",
+      "sheet": "../../production/go/overhead/prepared.png",
+      "source_rect": {
+        "x": 580,
+        "y": 0,
+        "w": 290,
+        "h": 435
+      },
+      "exported_frame": "../../production/go/overhead/frames/overhead_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "anti_air_00",
+      "action": "anti_air",
+      "sheet": "../../production/go/anti_air/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 296,
+        "h": 444
+      },
+      "exported_frame": "../../production/go/anti_air/frames/anti_air_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "anti_air_01",
+      "action": "anti_air",
+      "sheet": "../../production/go/anti_air/prepared.png",
+      "source_rect": {
+        "x": 296,
+        "y": 0,
+        "w": 296,
+        "h": 444
+      },
+      "exported_frame": "../../production/go/anti_air/frames/anti_air_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "anti_air_02",
+      "action": "anti_air",
+      "sheet": "../../production/go/anti_air/prepared.png",
+      "source_rect": {
+        "x": 592,
+        "y": 0,
+        "w": 296,
+        "h": 444
+      },
+      "exported_frame": "../../production/go/anti_air/frames/anti_air_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "air_punch_00",
+      "action": "air_punch",
+      "sheet": "../../production/go/air_punch/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 296,
+        "h": 444
+      },
+      "exported_frame": "../../production/go/air_punch/frames/air_punch_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "air_punch_01",
+      "action": "air_punch",
+      "sheet": "../../production/go/air_punch/prepared.png",
+      "source_rect": {
+        "x": 296,
+        "y": 0,
+        "w": 296,
+        "h": 444
+      },
+      "exported_frame": "../../production/go/air_punch/frames/air_punch_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "air_punch_02",
+      "action": "air_punch",
+      "sheet": "../../production/go/air_punch/prepared.png",
+      "source_rect": {
+        "x": 592,
+        "y": 0,
+        "w": 296,
+        "h": 444
+      },
+      "exported_frame": "../../production/go/air_punch/frames/air_punch_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "air_kick_00",
+      "action": "air_kick",
+      "sheet": "../../production/go/air_kick/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 296,
+        "h": 444
+      },
+      "exported_frame": "../../production/go/air_kick/frames/air_kick_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "air_kick_01",
+      "action": "air_kick",
+      "sheet": "../../production/go/air_kick/prepared.png",
+      "source_rect": {
+        "x": 296,
+        "y": 0,
+        "w": 296,
+        "h": 444
+      },
+      "exported_frame": "../../production/go/air_kick/frames/air_kick_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "air_kick_02",
+      "action": "air_kick",
+      "sheet": "../../production/go/air_kick/prepared.png",
+      "source_rect": {
+        "x": 592,
+        "y": 0,
+        "w": 296,
+        "h": 444
+      },
+      "exported_frame": "../../production/go/air_kick/frames/air_kick_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_00",
+      "action": "throw",
+      "sheet": "../../production/go/throw/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 268,
+        "h": 384
+      },
+      "exported_frame": "../../production/go/throw/frames/throw_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "throw_01",
+      "action": "throw",
+      "sheet": "../../production/go/throw/prepared.png",
+      "source_rect": {
+        "x": 268,
+        "y": 0,
+        "w": 245,
+        "h": 384
+      },
+      "exported_frame": "../../production/go/throw/frames/throw_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "throw_02",
+      "action": "throw",
+      "sheet": "../../production/go/throw/prepared.png",
+      "source_rect": {
+        "x": 536,
+        "y": 0,
+        "w": 255,
+        "h": 384
+      },
+      "exported_frame": "../../production/go/throw/frames/throw_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "special_00",
+      "action": "special",
+      "sheet": "../../production/go/special/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 349,
+        "h": 524
+      },
+      "exported_frame": "../../production/go/special/frames/special_00.png",
+      "phase": "emit"
+    },
+    {
+      "name": "special_01",
+      "action": "special",
+      "sheet": "../../production/go/special/prepared.png",
+      "source_rect": {
+        "x": 350,
+        "y": 0,
+        "w": 350,
+        "h": 524
+      },
+      "exported_frame": "../../production/go/special/frames/special_01.png",
+      "phase": "recoil"
+    },
+    {
+      "name": "special_02",
+      "action": "special",
+      "sheet": "../../production/go/special/prepared.png",
+      "source_rect": {
+        "x": 700,
+        "y": 0,
+        "w": 349,
+        "h": 524
+      },
+      "exported_frame": "../../production/go/special/frames/special_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "spawn_00",
+      "action": "spawn",
+      "sheet": "../../production/go/spawn/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 292,
+        "h": 439
+      },
+      "exported_frame": "../../production/go/spawn/frames/spawn_00.png",
+      "phase": "adjust"
+    },
+    {
+      "name": "spawn_01",
+      "action": "spawn",
+      "sheet": "../../production/go/spawn/prepared.png",
+      "source_rect": {
+        "x": 293,
+        "y": 0,
+        "w": 293,
+        "h": 439
+      },
+      "exported_frame": "../../production/go/spawn/frames/spawn_01.png",
+      "phase": "bow"
+    },
+    {
+      "name": "spawn_02",
+      "action": "spawn",
+      "sheet": "../../production/go/spawn/prepared.png",
+      "source_rect": {
+        "x": 586,
+        "y": 0,
+        "w": 292,
+        "h": 439
+      },
+      "exported_frame": "../../production/go/spawn/frames/spawn_02.png",
+      "phase": "ready"
+    },
+    {
+      "name": "victory_00",
+      "action": "victory",
+      "sheet": "../../production/go/victory/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 257,
+        "h": 386
+      },
+      "exported_frame": "../../production/go/victory/frames/victory_00.png",
+      "phase": "relax"
+    },
+    {
+      "name": "victory_01",
+      "action": "victory",
+      "sheet": "../../production/go/victory/prepared.png",
+      "source_rect": {
+        "x": 258,
+        "y": 0,
+        "w": 258,
+        "h": 386
+      },
+      "exported_frame": "../../production/go/victory/frames/victory_01.png",
+      "phase": "celebrate"
+    },
+    {
+      "name": "victory_02",
+      "action": "victory",
+      "sheet": "../../production/go/victory/prepared.png",
+      "source_rect": {
+        "x": 516,
+        "y": 0,
+        "w": 257,
+        "h": 386
+      },
+      "exported_frame": "../../production/go/victory/frames/victory_02.png",
+      "phase": "hold"
+    },
+    {
+      "name": "defeat_00",
+      "action": "defeat",
+      "sheet": "../../production/go/defeat/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 249,
+        "h": 374
+      },
+      "exported_frame": "../../production/go/defeat/frames/defeat_00.png",
+      "phase": "droop"
+    },
+    {
+      "name": "defeat_01",
+      "action": "defeat",
+      "sheet": "../../production/go/defeat/prepared.png",
+      "source_rect": {
+        "x": 250,
+        "y": 0,
+        "w": 250,
+        "h": 374
+      },
+      "exported_frame": "../../production/go/defeat/frames/defeat_01.png",
+      "phase": "kneel"
+    },
+    {
+      "name": "defeat_02",
+      "action": "defeat",
+      "sheet": "../../production/go/defeat/prepared.png",
+      "source_rect": {
+        "x": 500,
+        "y": 0,
+        "w": 249,
+        "h": 374
+      },
+      "exported_frame": "../../production/go/defeat/frames/defeat_02.png",
+      "phase": "hold"
+    }
+  ],
+  "atlas_sha256": "129b4afd342ceeae4780932b030b21ffa477d2aac84dffaac0eade3a9a92b678",
+  "manifest_sha256": "f879f257d1cf62d03cfdbdcd34d0b954a29f8cfa6572f135e6e09b223f278890"
+}

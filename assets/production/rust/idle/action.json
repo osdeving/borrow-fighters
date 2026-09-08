@@ -63,5 +63,7 @@
       "duration_ms": 180,
       "phase": "breathing"
     }
-  ]
+  ],
+  "status": "reviewed visual and functional pilot; see ../finalization-review.md for evidence and limits",
+  "finalization_review": "../finalization-review.md"
 }

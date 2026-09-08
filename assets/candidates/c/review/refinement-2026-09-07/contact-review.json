@@ -1,0 +1,51 @@
+{
+  "measurement": "Manual source landmarks mapped by (global_source_point-global_pivot)*uniform_scale; points are visual contact centers, not complete silhouette extents or generated combat metadata. Runtime rounding may differ by one pixel.",
+  "contacts": [
+    {
+      "action": "punch_heavy",
+      "source_point": [
+        1193,
+        306
+      ],
+      "global_pivot": [
+        905,
+        578
+      ],
+      "scale": 0.5153846153846153,
+      "baseline_box": [
+        50.666667,
+        -146.666667,
+        194.666667,
+        -93.333333
+      ],
+      "note": "page leading edge center; upper page edge around11px above box",
+      "world_point": [
+        148.43076923076922,
+        -140.18461538461537
+      ]
+    },
+    {
+      "action": "sweep",
+      "source_point": [
+        1160,
+        268
+      ],
+      "global_pivot": [
+        805,
+        545
+      ],
+      "scale": 0.4253968253968254,
+      "baseline_box": [
+        50.666667,
+        -136,
+        213.333333,
+        -96
+      ],
+      "note": "sole center; raised toe extends around18px above box",
+      "world_point": [
+        151.015873015873,
+        -117.83492063492064
+      ]
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+> Histórico da produção anterior. O estado atual, as correções e a evidência de execução estão no [laudo de finalização de 07/09/2026](finalization-review.md).
+
 # Python — revisão do candidato
 
 Produzidas as **20 ações e 60 quadros selecionados**, com referência fixa da mulher adulta original: cabelo preto, camisa branca completa, saia preta, saltos e cobra azul/amarela. A largura mais esguia é intencional para preservar essa identidade; a altura idle fica próxima de 268 px. A referência antiga de roupa curta/saia azul foi usada apenas para entender o cavalete da entrada.

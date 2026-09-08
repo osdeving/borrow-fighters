@@ -4,6 +4,8 @@
 
 Aceito para o fluxo de produção. As imagens exportadas continuam candidatas até a revisão visual e funcional.
 
+A seleção inicial da arte revisada passa a seguir o [ADR 0011](0011-reviewed-art-default.md). O opt-in descrito abaixo registra a implantação original; produção por ação, revisão, fallback e isolamento da metadata de combate permanecem válidos.
+
 ## Contexto
 
 Os scripts anteriores de Python e C++ distribuem poses de uma folha genérica em vários clips. Esse fluxo foi suficiente para placeholders, mas pode repetir a mesma pose durante preparação, contato e recuperação e compartilhar desenhos entre golpes diferentes. A quantidade de frames no JSON não comprova uma animação própria.

@@ -1,0 +1,72 @@
+{
+  "sheet": "walk/cleaned-v3.png",
+  "reviewed": false,
+  "loop": true,
+  "frames": [
+    {
+      "name": "walk_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 512,
+        "h": 512
+      },
+      "pivot": {
+        "x": 291,
+        "y": 466
+      },
+      "duration_ms": 100,
+      "phase": "contact-near"
+    },
+    {
+      "name": "walk_01",
+      "source_rect": {
+        "x": 512,
+        "y": 0,
+        "w": 512,
+        "h": 512
+      },
+      "pivot": {
+        "x": 241,
+        "y": 466
+      },
+      "duration_ms": 100,
+      "phase": "passing-far"
+    },
+    {
+      "name": "walk_02",
+      "source_rect": {
+        "x": 0,
+        "y": 512,
+        "w": 512,
+        "h": 512
+      },
+      "pivot": {
+        "x": 278,
+        "y": 463
+      },
+      "duration_ms": 100,
+      "phase": "contact-far"
+    },
+    {
+      "name": "walk_03",
+      "source_rect": {
+        "x": 1024,
+        "y": 512,
+        "w": 512,
+        "h": 512
+      },
+      "pivot": {
+        "x": 211,
+        "y": 461
+      },
+      "duration_ms": 100,
+      "phase": "passing-near"
+    }
+  ],
+  "review": {
+    "source": "source-v3.png",
+    "discarded": "v1/v2 rejected: weak alternating step. In v3 cells 2,4 omitted as redundant; four selected keys form contact/pass/contact/pass.",
+    "remaining": "Inspect loop real-time"
+  }
+}

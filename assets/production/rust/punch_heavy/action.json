@@ -2,9 +2,9 @@
   "action": "punch_heavy",
   "source": "punch_heavy/source-v2.png",
   "sheet": "punch_heavy/sheet-v2.png",
-  "reviewed": false,
+  "reviewed": true,
   "loop": false,
-  "status": "candidate; source poses statically inspected; runtime/two-orientation review pending",
+  "status": "reviewed visual and functional pilot; see ../finalization-review.md for evidence and limits",
   "source_body_height_reference_px": 510,
   "normalization_note": "Approximate upright-body reference; do not scale each frame by its own alpha bounds. Air pivots are virtual standing-floor anchors beneath hips, not boot tips. Ground pivots are proposed and require foot-support review after normalization.",
   "combat_timing": {
@@ -78,5 +78,6 @@
       "phase": "recovery"
     }
   ],
-  "review_notes": "Regenerated low contact to preserve baseline world-space combat metadata. Earlier generations remain as rejected alignment candidates. Source static review completed; normalized movement/functional review remains pending."
+  "review_notes": "Regenerated low contact to preserve baseline world-space combat metadata. Earlier generations remain as rejected alignment candidates. Source static review completed; normalized movement/functional review remains pending.",
+  "finalization_review": "../finalization-review.md"
 }

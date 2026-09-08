@@ -1,0 +1,5461 @@
+{
+  "candidate_manifest": "assets/candidates/cpp/cpp-fighter.sprite.json",
+  "captured_clips": [
+    "air_kick",
+    "crouch",
+    "crouch_block",
+    "idle",
+    "jump"
+  ],
+  "character": "cpp",
+  "fixed_timestep_seconds": 0.01666666753590107,
+  "limitations": [
+    "Images are review artifacts, not assertions of visual correctness.",
+    "Static lab poses advance art time only; they do not simulate match damage, outcome transitions, or a full jump trajectory.",
+    "Combat Lab has no walk pose; walking and match transitions require a separate playtest.",
+    "The lab uses its native facing for this character; no fighter state is modified to mirror it.",
+    "Advantage estimates and automatic dummy placement use MoveSpec; drawn boxes and projectile emission use baseline sprite metadata with match-equivalent fallback."
+  ],
+  "loaded_combat_manifest": {
+    "cell": {
+      "h": 512,
+      "w": 768
+    },
+    "clips": [
+      {
+        "frames": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_5",
+          "idle_6"
+        ],
+        "loop": true,
+        "name": "idle"
+      },
+      {
+        "frames": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5",
+          "walk_6"
+        ],
+        "loop": true,
+        "name": "walk"
+      },
+      {
+        "frames": [
+          "crouch_0",
+          "crouch_1",
+          "crouch_2",
+          "crouch_3"
+        ],
+        "loop": false,
+        "name": "crouch"
+      },
+      {
+        "frames": [
+          "jump_0",
+          "jump_1",
+          "jump_2",
+          "jump_3",
+          "jump_4",
+          "jump_5"
+        ],
+        "loop": false,
+        "name": "jump"
+      },
+      {
+        "frames": [
+          "punch_light_0",
+          "punch_light_1",
+          "punch_light_2",
+          "punch_light_3",
+          "punch_light_4"
+        ],
+        "loop": false,
+        "name": "punch_light"
+      },
+      {
+        "frames": [
+          "punch_medium_0",
+          "punch_medium_1",
+          "punch_medium_2",
+          "punch_medium_3",
+          "punch_medium_4",
+          "punch_medium_5"
+        ],
+        "loop": false,
+        "name": "punch_medium"
+      },
+      {
+        "frames": [
+          "punch_heavy_0",
+          "punch_heavy_1",
+          "punch_heavy_2",
+          "punch_heavy_3",
+          "punch_heavy_4",
+          "punch_heavy_5",
+          "punch_heavy_6"
+        ],
+        "loop": false,
+        "name": "punch_heavy"
+      },
+      {
+        "frames": [
+          "kick_light_0",
+          "kick_light_1",
+          "kick_light_2",
+          "kick_light_3",
+          "kick_light_4"
+        ],
+        "loop": false,
+        "name": "kick_light"
+      },
+      {
+        "frames": [
+          "kick_0",
+          "kick_1",
+          "kick_2",
+          "kick_3",
+          "kick_4",
+          "kick_5"
+        ],
+        "loop": false,
+        "name": "kick"
+      },
+      {
+        "frames": [
+          "kick_heavy_0",
+          "kick_heavy_1",
+          "kick_heavy_2",
+          "kick_heavy_3",
+          "kick_heavy_4",
+          "kick_heavy_5",
+          "kick_heavy_6"
+        ],
+        "loop": false,
+        "name": "kick_heavy"
+      },
+      {
+        "frames": [
+          "block_0",
+          "block_1",
+          "block_2",
+          "block_3"
+        ],
+        "loop": true,
+        "name": "block"
+      },
+      {
+        "frames": [
+          "hit_0",
+          "hit_1",
+          "hit_2",
+          "hit_3"
+        ],
+        "loop": false,
+        "name": "hit"
+      },
+      {
+        "frames": [
+          "knockdown_0",
+          "knockdown_1",
+          "knockdown_2",
+          "knockdown_3",
+          "knockdown_4",
+          "knockdown_5"
+        ],
+        "loop": false,
+        "name": "knockdown"
+      },
+      {
+        "frames": [
+          "taunt_0",
+          "taunt_1",
+          "taunt_2",
+          "taunt_3",
+          "taunt_4",
+          "taunt_5"
+        ],
+        "loop": false,
+        "name": "taunt"
+      },
+      {
+        "frames": [
+          "victory_0",
+          "victory_1",
+          "victory_2",
+          "victory_3",
+          "victory_4",
+          "victory_5",
+          "victory_6"
+        ],
+        "loop": false,
+        "name": "victory"
+      },
+      {
+        "frames": [
+          "special_0",
+          "special_1",
+          "special_2",
+          "special_3",
+          "special_4",
+          "special_5"
+        ],
+        "loop": false,
+        "name": "special"
+      },
+      {
+        "frames": [
+          "projectile_0"
+        ],
+        "loop": true,
+        "name": "projectile"
+      },
+      {
+        "frames": [
+          "sweep_0",
+          "sweep_1",
+          "sweep_2"
+        ],
+        "loop": false,
+        "name": "sweep"
+      },
+      {
+        "frames": [
+          "overhead_0",
+          "overhead_1",
+          "overhead_2"
+        ],
+        "loop": false,
+        "name": "overhead"
+      },
+      {
+        "frames": [
+          "anti_air_0",
+          "anti_air_1",
+          "anti_air_2"
+        ],
+        "loop": false,
+        "name": "anti_air"
+      },
+      {
+        "frames": [
+          "air_punch_0",
+          "air_punch_1",
+          "air_punch_2"
+        ],
+        "loop": false,
+        "name": "air_punch"
+      },
+      {
+        "frames": [
+          "air_kick_0",
+          "air_kick_1",
+          "air_kick_2"
+        ],
+        "loop": false,
+        "name": "air_kick"
+      },
+      {
+        "frames": [
+          "throw_0",
+          "throw_1",
+          "throw_2"
+        ],
+        "loop": false,
+        "name": "throw"
+      }
+    ],
+    "default_pivot": {
+      "x": 224,
+      "y": 472
+    },
+    "frames": [
+      {
+        "clip": "idle",
+        "duration_ms": 120,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 0
+        },
+        "name": "idle_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 120,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 0
+        },
+        "name": "idle_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 120,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 0
+        },
+        "name": "idle_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 120,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 0
+        },
+        "name": "idle_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 120,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 0
+        },
+        "name": "idle_4",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 120,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 0
+        },
+        "name": "idle_5",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 120,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 512
+        },
+        "name": "idle_6",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 85,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 512
+        },
+        "name": "walk_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 274,
+          "x": 105,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 274,
+          "x": 105,
+          "y": 61
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 85,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 512
+        },
+        "name": "walk_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 85,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 512
+        },
+        "name": "walk_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 274,
+          "x": 105,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 274,
+          "x": 105,
+          "y": 61
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 85,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 512
+        },
+        "name": "walk_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 85,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 512
+        },
+        "name": "walk_4",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 274,
+          "x": 105,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 274,
+          "x": 105,
+          "y": 61
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 85,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 1024
+        },
+        "name": "walk_5",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 85,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 1024
+        },
+        "name": "walk_6",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 274,
+          "x": 105,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 274,
+          "x": 105,
+          "y": 61
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 110,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 1024
+        },
+        "name": "crouch_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 110,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 1024
+        },
+        "name": "crouch_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        },
+        "trimmed_bounds": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 110,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 1024
+        },
+        "name": "crouch_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        },
+        "trimmed_bounds": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 140,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 1024
+        },
+        "name": "crouch_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        },
+        "trimmed_bounds": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 105,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 1536
+        },
+        "name": "jump_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 105,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 1536
+        },
+        "name": "jump_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 392,
+          "w": 319,
+          "x": 81,
+          "y": 9
+        },
+        "trimmed_bounds": {
+          "h": 392,
+          "w": 319,
+          "x": 81,
+          "y": 9
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 105,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 1536
+        },
+        "name": "jump_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 392,
+          "w": 319,
+          "x": 81,
+          "y": 9
+        },
+        "trimmed_bounds": {
+          "h": 392,
+          "w": 319,
+          "x": 81,
+          "y": 9
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 105,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 1536
+        },
+        "name": "jump_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 392,
+          "w": 319,
+          "x": 81,
+          "y": 9
+        },
+        "trimmed_bounds": {
+          "h": 392,
+          "w": 319,
+          "x": 81,
+          "y": 9
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 105,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 1536
+        },
+        "name": "jump_4",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 392,
+          "w": 319,
+          "x": 81,
+          "y": 9
+        },
+        "trimmed_bounds": {
+          "h": 392,
+          "w": 319,
+          "x": 81,
+          "y": 9
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 120,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 1536
+        },
+        "name": "jump_5",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 105,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 2048
+        },
+        "name": "block_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 105,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 2048
+        },
+        "name": "block_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 294,
+          "x": 93,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 294,
+          "x": 93,
+          "y": 61
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 105,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 2048
+        },
+        "name": "block_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 294,
+          "x": 93,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 294,
+          "x": 93,
+          "y": 61
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 120,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 2048
+        },
+        "name": "block_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 294,
+          "x": 93,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 294,
+          "x": 93,
+          "y": 61
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 110,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 2048
+        },
+        "name": "hit_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 110,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 2048
+        },
+        "name": "hit_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 400,
+          "w": 332,
+          "x": 76,
+          "y": 62
+        },
+        "trimmed_bounds": {
+          "h": 400,
+          "w": 332,
+          "x": 76,
+          "y": 62
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 110,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 2560
+        },
+        "name": "hit_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 400,
+          "w": 332,
+          "x": 76,
+          "y": 62
+        },
+        "trimmed_bounds": {
+          "h": 400,
+          "w": 332,
+          "x": 76,
+          "y": 62
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 130,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 2560
+        },
+        "name": "hit_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "taunt",
+        "duration_ms": 150,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 2560
+        },
+        "name": "taunt_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 231,
+          "x": 121,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 231,
+          "x": 121,
+          "y": 56
+        }
+      },
+      {
+        "clip": "taunt",
+        "duration_ms": 150,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 2560
+        },
+        "name": "taunt_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 318,
+          "x": 82,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 318,
+          "x": 82,
+          "y": 56
+        }
+      },
+      {
+        "clip": "taunt",
+        "duration_ms": 150,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 2560
+        },
+        "name": "taunt_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 231,
+          "x": 121,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 231,
+          "x": 121,
+          "y": 56
+        }
+      },
+      {
+        "clip": "taunt",
+        "duration_ms": 150,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 2560
+        },
+        "name": "taunt_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 179,
+          "x": 144,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 179,
+          "x": 144,
+          "y": 56
+        }
+      },
+      {
+        "clip": "taunt",
+        "duration_ms": 150,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 3072
+        },
+        "name": "taunt_4",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 231,
+          "x": 121,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 231,
+          "x": 121,
+          "y": 56
+        }
+      },
+      {
+        "clip": "taunt",
+        "duration_ms": 180,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 3072
+        },
+        "name": "taunt_5",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 318,
+          "x": 82,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 318,
+          "x": 82,
+          "y": 56
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 75,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 3072
+        },
+        "name": "punch_light_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 75,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 3072
+        },
+        "name": "punch_light_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 75,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 3072
+        },
+        "name": "punch_light_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 75,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 3072
+        },
+        "name": "punch_light_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 3584
+        },
+        "name": "punch_light_4",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_medium",
+        "duration_ms": 80,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 3584
+        },
+        "name": "punch_medium_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_medium",
+        "duration_ms": 80,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 3584
+        },
+        "name": "punch_medium_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_medium",
+        "duration_ms": 80,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 3584
+        },
+        "name": "punch_medium_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 402,
+          "x": 90,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 402,
+          "x": 90,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_medium",
+        "duration_ms": 80,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 3584
+        },
+        "name": "punch_medium_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 402,
+          "x": 90,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 402,
+          "x": 90,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_medium",
+        "duration_ms": 80,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 3584
+        },
+        "name": "punch_medium_4",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_medium",
+        "duration_ms": 100,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 4096
+        },
+        "name": "punch_medium_5",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 4096
+        },
+        "name": "punch_heavy_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 4096
+        },
+        "name": "punch_heavy_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 4096
+        },
+        "name": "punch_heavy_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 402,
+          "x": 90,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 402,
+          "x": 90,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 4096
+        },
+        "name": "punch_heavy_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 402,
+          "x": 90,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 402,
+          "x": 90,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 4096
+        },
+        "name": "punch_heavy_4",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 402,
+          "x": 90,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 402,
+          "x": 90,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 4608
+        },
+        "name": "punch_heavy_5",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 341,
+          "x": 111,
+          "y": 61
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 110,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 4608
+        },
+        "name": "punch_heavy_6",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "kick_light",
+        "duration_ms": 85,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 0
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_light_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "kick_light",
+        "duration_ms": 85,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 0
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_light_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        },
+        "trimmed_bounds": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        }
+      },
+      {
+        "clip": "kick_light",
+        "duration_ms": 85,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 0
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_light_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        },
+        "trimmed_bounds": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        }
+      },
+      {
+        "clip": "kick_light",
+        "duration_ms": 85,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 0
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_light_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "kick_light",
+        "duration_ms": 105,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 0
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_light_4",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 90,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 0
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 90,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 512
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        },
+        "trimmed_bounds": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 90,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 512
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        },
+        "trimmed_bounds": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 90,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 512
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        },
+        "trimmed_bounds": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 90,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 512
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_4",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 110,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 512
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_5",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "kick_heavy",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 512
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_heavy_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "kick_heavy",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 1024
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_heavy_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        },
+        "trimmed_bounds": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        }
+      },
+      {
+        "clip": "kick_heavy",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 1024
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_heavy_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        },
+        "trimmed_bounds": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        }
+      },
+      {
+        "clip": "kick_heavy",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 1024
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_heavy_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        },
+        "trimmed_bounds": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        }
+      },
+      {
+        "clip": "kick_heavy",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 1024
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_heavy_4",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 392,
+          "w": 498,
+          "x": 66,
+          "y": 6
+        },
+        "trimmed_bounds": {
+          "h": 392,
+          "w": 498,
+          "x": 66,
+          "y": 6
+        }
+      },
+      {
+        "clip": "kick_heavy",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 1024
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_heavy_5",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        },
+        "trimmed_bounds": {
+          "h": 403,
+          "w": 358,
+          "x": 109,
+          "y": 60
+        }
+      },
+      {
+        "clip": "kick_heavy",
+        "duration_ms": 115,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 1024
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "kick_heavy_6",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "special",
+        "combat": {
+          "projectile_origin": {
+            "x": 532,
+            "y": 236
+          }
+        },
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 1536
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "special_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 1536
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "special_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 318,
+          "x": 82,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 318,
+          "x": 82,
+          "y": 56
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 1536
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "special_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 397,
+          "w": 339,
+          "x": 119,
+          "y": 66
+        },
+        "trimmed_bounds": {
+          "h": 397,
+          "w": 339,
+          "x": 119,
+          "y": 66
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 1536
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "special_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 397,
+          "w": 339,
+          "x": 119,
+          "y": 66
+        },
+        "trimmed_bounds": {
+          "h": 397,
+          "w": 339,
+          "x": 119,
+          "y": 66
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 95,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 1536
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "special_4",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 318,
+          "x": 82,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 318,
+          "x": 82,
+          "y": 56
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 120,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 1536
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "special_5",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "projectile",
+        "duration_ms": 75,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 2048
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "projectile_0",
+        "pivot": {
+          "x": 408,
+          "y": 264
+        },
+        "source_crop": {
+          "h": 397,
+          "w": 339,
+          "x": 119,
+          "y": 66
+        },
+        "trimmed_bounds": {
+          "h": 397,
+          "w": 339,
+          "x": 119,
+          "y": 66
+        }
+      },
+      {
+        "clip": "knockdown",
+        "duration_ms": 90,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 2048
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "knockdown_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 400,
+          "w": 332,
+          "x": 76,
+          "y": 62
+        },
+        "trimmed_bounds": {
+          "h": 400,
+          "w": 332,
+          "x": 76,
+          "y": 62
+        }
+      },
+      {
+        "clip": "knockdown",
+        "duration_ms": 90,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 2048
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "knockdown_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 400,
+          "w": 332,
+          "x": 76,
+          "y": 62
+        },
+        "trimmed_bounds": {
+          "h": 400,
+          "w": 332,
+          "x": 76,
+          "y": 62
+        }
+      },
+      {
+        "clip": "knockdown",
+        "duration_ms": 90,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 2048
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "knockdown_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        },
+        "trimmed_bounds": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        }
+      },
+      {
+        "clip": "knockdown",
+        "duration_ms": 90,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 2048
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "knockdown_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        },
+        "trimmed_bounds": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        }
+      },
+      {
+        "clip": "knockdown",
+        "duration_ms": 90,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 2048
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "knockdown_4",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 400,
+          "w": 332,
+          "x": 76,
+          "y": 62
+        },
+        "trimmed_bounds": {
+          "h": 400,
+          "w": 332,
+          "x": 76,
+          "y": 62
+        }
+      },
+      {
+        "clip": "knockdown",
+        "duration_ms": 120,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 2560
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "knockdown_5",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 140,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 2560
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "victory_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 140,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 2560
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "victory_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 183,
+          "x": 143,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 183,
+          "x": 143,
+          "y": 56
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 140,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 2560
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "victory_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 183,
+          "x": 143,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 183,
+          "x": 143,
+          "y": 56
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 140,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 2560
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "victory_3",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 318,
+          "x": 82,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 318,
+          "x": 82,
+          "y": 56
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 140,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 2560
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "victory_4",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 183,
+          "x": 143,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 183,
+          "x": 143,
+          "y": 56
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 140,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 3072
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "victory_5",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 231,
+          "x": 121,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 231,
+          "x": 121,
+          "y": 56
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 170,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 3072
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "victory_6",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 183,
+          "x": 143,
+          "y": 56
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 183,
+          "x": 143,
+          "y": 56
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 82,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 3072
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "sweep_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        },
+        "trimmed_bounds": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 82,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 3072
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "sweep_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 288,
+          "w": 459,
+          "x": 77,
+          "y": 173
+        },
+        "trimmed_bounds": {
+          "h": 288,
+          "w": 459,
+          "x": 77,
+          "y": 173
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 82,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 3072
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "sweep_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 288,
+          "w": 459,
+          "x": 77,
+          "y": 173
+        },
+        "trimmed_bounds": {
+          "h": 288,
+          "w": 459,
+          "x": 77,
+          "y": 173
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 92,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 3072
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "overhead_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 92,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 3584
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "overhead_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 347,
+          "x": 69,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 347,
+          "x": 69,
+          "y": 61
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 92,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 3584
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "overhead_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 347,
+          "x": 69,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 347,
+          "x": 69,
+          "y": 61
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 80,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 3584
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "anti_air_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        },
+        "trimmed_bounds": {
+          "h": 292,
+          "w": 238,
+          "x": 118,
+          "y": 171
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 80,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 3584
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "anti_air_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 239,
+          "x": 117,
+          "y": 32
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 239,
+          "x": 117,
+          "y": 32
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 80,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 3584
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "anti_air_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 407,
+          "w": 239,
+          "x": 117,
+          "y": 8
+        },
+        "trimmed_bounds": {
+          "h": 407,
+          "w": 239,
+          "x": 117,
+          "y": 8
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 76,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 3584
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "air_punch_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 392,
+          "w": 319,
+          "x": 81,
+          "y": 9
+        },
+        "trimmed_bounds": {
+          "h": 392,
+          "w": 319,
+          "x": 81,
+          "y": 9
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 76,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 4096
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "air_punch_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 397,
+          "w": 337,
+          "x": 112,
+          "y": 4
+        },
+        "trimmed_bounds": {
+          "h": 397,
+          "w": 337,
+          "x": 112,
+          "y": 4
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 76,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 4096
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "air_punch_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 397,
+          "w": 337,
+          "x": 112,
+          "y": 4
+        },
+        "trimmed_bounds": {
+          "h": 397,
+          "w": 337,
+          "x": 112,
+          "y": 4
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 80,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 1536,
+          "y": 4096
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "air_kick_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 392,
+          "w": 319,
+          "x": 81,
+          "y": 9
+        },
+        "trimmed_bounds": {
+          "h": 392,
+          "w": 319,
+          "x": 81,
+          "y": 9
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 80,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 2304,
+          "y": 4096
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "air_kick_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 392,
+          "w": 498,
+          "x": 66,
+          "y": 6
+        },
+        "trimmed_bounds": {
+          "h": 392,
+          "w": 498,
+          "x": 66,
+          "y": 6
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 80,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3072,
+          "y": 4096
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "air_kick_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 392,
+          "w": 498,
+          "x": 66,
+          "y": 6
+        },
+        "trimmed_bounds": {
+          "h": 392,
+          "w": 498,
+          "x": 66,
+          "y": 6
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 92,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 3840,
+          "y": 4096
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "throw_0",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        },
+        "trimmed_bounds": {
+          "h": 402,
+          "w": 204,
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 92,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 0,
+          "y": 4608
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "throw_1",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 398,
+          "w": 408,
+          "x": 85,
+          "y": 63
+        },
+        "trimmed_bounds": {
+          "h": 398,
+          "w": 408,
+          "x": 85,
+          "y": 63
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 92,
+        "frame": {
+          "h": 512,
+          "w": 768,
+          "x": 768,
+          "y": 4608
+        },
+        "image": "cpp-fighter-atlas-b.png",
+        "name": "throw_2",
+        "pivot": {
+          "x": 224,
+          "y": 472
+        },
+        "source_crop": {
+          "h": 398,
+          "w": 408,
+          "x": 85,
+          "y": 63
+        },
+        "trimmed_bounds": {
+          "h": 398,
+          "w": 408,
+          "x": 85,
+          "y": 63
+        }
+      }
+    ],
+    "image": "cpp-fighter-atlas-a.png",
+    "notes": [
+      "High-resolution raster C++ fighter atlas generated from assets/references/cpp-fighter-raster-source.png. Frames are split across cpp-fighter-atlas-a.png and cpp-fighter-atlas-b.png using per-frame image overrides.",
+      "Close-range attack hitboxes intentionally fall back to MoveSpec until the raster frames are calibrated in Sprite Studio.",
+      "The source pose sheet depicts C++ as a daughter of C through operator/projectile motifs and a compact high-level stance."
+    ],
+    "scale": 0.6666666865348816,
+    "schema": "borrow-fighters.sprite.v1",
+    "source": "assets/references/cpp-fighter-raster-source.png"
+  },
+  "loaded_manifest": {
+    "cell": {
+      "h": 383,
+      "w": 395
+    },
+    "clips": [
+      {
+        "frames": [
+          "idle_0",
+          "idle_1",
+          "idle_2"
+        ],
+        "loop": true,
+        "name": "idle"
+      },
+      {
+        "frames": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3"
+        ],
+        "loop": true,
+        "name": "walk"
+      },
+      {
+        "frames": [
+          "jump_0",
+          "jump_1",
+          "jump_2"
+        ],
+        "loop": false,
+        "name": "jump"
+      },
+      {
+        "frames": [
+          "crouch_0",
+          "crouch_1",
+          "crouch_2"
+        ],
+        "loop": true,
+        "name": "crouch"
+      },
+      {
+        "frames": [
+          "block_0",
+          "block_1",
+          "block_2"
+        ],
+        "loop": true,
+        "name": "block"
+      },
+      {
+        "frames": [
+          "crouch_block_0",
+          "crouch_block_1",
+          "crouch_block_2"
+        ],
+        "loop": true,
+        "name": "crouch_block"
+      },
+      {
+        "frames": [
+          "hit_0",
+          "hit_1",
+          "hit_2"
+        ],
+        "loop": false,
+        "name": "hit"
+      },
+      {
+        "frames": [
+          "punch_light_00",
+          "punch_light_01",
+          "punch_light_02"
+        ],
+        "loop": false,
+        "name": "punch_light"
+      },
+      {
+        "frames": [
+          "punch_heavy_00",
+          "punch_heavy_01",
+          "punch_heavy_02"
+        ],
+        "loop": false,
+        "name": "punch_heavy"
+      },
+      {
+        "frames": [
+          "kick_00",
+          "kick_01",
+          "kick_02"
+        ],
+        "loop": false,
+        "name": "kick"
+      },
+      {
+        "frames": [
+          "sweep_00",
+          "sweep_01",
+          "sweep_02"
+        ],
+        "loop": false,
+        "name": "sweep"
+      },
+      {
+        "frames": [
+          "overhead_00",
+          "overhead_01",
+          "overhead_02"
+        ],
+        "loop": false,
+        "name": "overhead"
+      },
+      {
+        "frames": [
+          "anti_air_00",
+          "anti_air_01",
+          "anti_air_02"
+        ],
+        "loop": false,
+        "name": "anti_air"
+      },
+      {
+        "frames": [
+          "air_punch_00",
+          "air_punch_01",
+          "air_punch_02"
+        ],
+        "loop": false,
+        "name": "air_punch"
+      },
+      {
+        "frames": [
+          "air_kick_00",
+          "air_kick_01",
+          "air_kick_02"
+        ],
+        "loop": false,
+        "name": "air_kick"
+      },
+      {
+        "frames": [
+          "throw_00",
+          "throw_01",
+          "throw_02"
+        ],
+        "loop": false,
+        "name": "throw"
+      },
+      {
+        "frames": [
+          "special_0",
+          "special_1",
+          "special_2"
+        ],
+        "loop": false,
+        "name": "special"
+      },
+      {
+        "frames": [
+          "spawn_0",
+          "spawn_1",
+          "spawn_2"
+        ],
+        "loop": false,
+        "name": "spawn"
+      },
+      {
+        "frames": [
+          "victory_0",
+          "victory_1",
+          "victory_2"
+        ],
+        "loop": false,
+        "name": "victory"
+      },
+      {
+        "frames": [
+          "defeat_0",
+          "defeat_1",
+          "defeat_2"
+        ],
+        "loop": false,
+        "name": "defeat"
+      }
+    ],
+    "default_pivot": {
+      "x": 152,
+      "y": 281
+    },
+    "frames": [
+      {
+        "clip": "idle",
+        "duration_ms": 240,
+        "frame": {
+          "h": 299,
+          "w": 266,
+          "x": 0,
+          "y": 0
+        },
+        "name": "idle_0",
+        "pivot": {
+          "x": 152,
+          "y": 281
+        },
+        "trimmed_bounds": {
+          "h": 273,
+          "w": 140,
+          "x": 72,
+          "y": 11
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 240,
+        "frame": {
+          "h": 299,
+          "w": 265,
+          "x": 395,
+          "y": 0
+        },
+        "name": "idle_1",
+        "pivot": {
+          "x": 151,
+          "y": 281
+        },
+        "trimmed_bounds": {
+          "h": 273,
+          "w": 139,
+          "x": 72,
+          "y": 11
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 240,
+        "frame": {
+          "h": 299,
+          "w": 266,
+          "x": 790,
+          "y": 0
+        },
+        "name": "idle_2",
+        "pivot": {
+          "x": 152,
+          "y": 281
+        },
+        "trimmed_bounds": {
+          "h": 273,
+          "w": 140,
+          "x": 72,
+          "y": 11
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 100,
+        "frame": {
+          "h": 319,
+          "w": 202,
+          "x": 1185,
+          "y": 0
+        },
+        "name": "walk_0",
+        "pivot": {
+          "x": 104,
+          "y": 297
+        },
+        "trimmed_bounds": {
+          "h": 274,
+          "w": 165,
+          "x": 27,
+          "y": 26
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 100,
+        "frame": {
+          "h": 319,
+          "w": 202,
+          "x": 1580,
+          "y": 0
+        },
+        "name": "walk_1",
+        "pivot": {
+          "x": 100,
+          "y": 298
+        },
+        "trimmed_bounds": {
+          "h": 273,
+          "w": 133,
+          "x": 23,
+          "y": 28
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 100,
+        "frame": {
+          "h": 319,
+          "w": 202,
+          "x": 1975,
+          "y": 0
+        },
+        "name": "walk_2",
+        "pivot": {
+          "x": 102,
+          "y": 297
+        },
+        "trimmed_bounds": {
+          "h": 271,
+          "w": 178,
+          "x": 6,
+          "y": 28
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 100,
+        "frame": {
+          "h": 319,
+          "w": 202,
+          "x": 2370,
+          "y": 0
+        },
+        "name": "walk_3",
+        "pivot": {
+          "x": 105,
+          "y": 299
+        },
+        "trimmed_bounds": {
+          "h": 274,
+          "w": 98,
+          "x": 45,
+          "y": 27
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 60,
+        "frame": {
+          "h": 317,
+          "w": 282,
+          "x": 2765,
+          "y": 0
+        },
+        "name": "jump_0",
+        "pivot": {
+          "x": 164,
+          "y": 294
+        },
+        "trimmed_bounds": {
+          "h": 268,
+          "w": 136,
+          "x": 94,
+          "y": 28
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 340,
+        "frame": {
+          "h": 317,
+          "w": 281,
+          "x": 0,
+          "y": 383
+        },
+        "name": "jump_1",
+        "pivot": {
+          "x": 141,
+          "y": 287
+        },
+        "trimmed_bounds": {
+          "h": 189,
+          "w": 121,
+          "x": 75,
+          "y": 26
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 400,
+        "frame": {
+          "h": 317,
+          "w": 282,
+          "x": 395,
+          "y": 383
+        },
+        "name": "jump_2",
+        "pivot": {
+          "x": 118,
+          "y": 293
+        },
+        "trimmed_bounds": {
+          "h": 254,
+          "w": 164,
+          "x": 33,
+          "y": 28
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 180,
+        "frame": {
+          "h": 299,
+          "w": 266,
+          "x": 790,
+          "y": 383
+        },
+        "name": "crouch_0",
+        "pivot": {
+          "x": 136,
+          "y": 286
+        },
+        "trimmed_bounds": {
+          "h": 124,
+          "w": 132,
+          "x": 75,
+          "y": 165
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 180,
+        "frame": {
+          "h": 299,
+          "w": 265,
+          "x": 1185,
+          "y": 383
+        },
+        "name": "crouch_1",
+        "pivot": {
+          "x": 123,
+          "y": 287
+        },
+        "trimmed_bounds": {
+          "h": 120,
+          "w": 131,
+          "x": 61,
+          "y": 169
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 180,
+        "frame": {
+          "h": 299,
+          "w": 266,
+          "x": 1580,
+          "y": 383
+        },
+        "name": "crouch_2",
+        "pivot": {
+          "x": 119,
+          "y": 287
+        },
+        "trimmed_bounds": {
+          "h": 118,
+          "w": 132,
+          "x": 54,
+          "y": 171
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 110,
+        "frame": {
+          "h": 299,
+          "w": 266,
+          "x": 1975,
+          "y": 383
+        },
+        "name": "block_0",
+        "pivot": {
+          "x": 136,
+          "y": 281
+        },
+        "trimmed_bounds": {
+          "h": 265,
+          "w": 150,
+          "x": 62,
+          "y": 19
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 90,
+        "frame": {
+          "h": 299,
+          "w": 265,
+          "x": 2370,
+          "y": 383
+        },
+        "name": "block_1",
+        "pivot": {
+          "x": 133,
+          "y": 281
+        },
+        "trimmed_bounds": {
+          "h": 257,
+          "w": 164,
+          "x": 46,
+          "y": 27
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 140,
+        "frame": {
+          "h": 299,
+          "w": 266,
+          "x": 2765,
+          "y": 383
+        },
+        "name": "block_2",
+        "pivot": {
+          "x": 124,
+          "y": 281
+        },
+        "trimmed_bounds": {
+          "h": 265,
+          "w": 150,
+          "x": 50,
+          "y": 19
+        }
+      },
+      {
+        "clip": "crouch_block",
+        "duration_ms": 110,
+        "frame": {
+          "h": 292,
+          "w": 266,
+          "x": 0,
+          "y": 766
+        },
+        "name": "crouch_block_0",
+        "pivot": {
+          "x": 128,
+          "y": 286
+        },
+        "trimmed_bounds": {
+          "h": 123,
+          "w": 130,
+          "x": 66,
+          "y": 166
+        }
+      },
+      {
+        "clip": "crouch_block",
+        "duration_ms": 90,
+        "frame": {
+          "h": 292,
+          "w": 265,
+          "x": 395,
+          "y": 766
+        },
+        "name": "crouch_block_1",
+        "pivot": {
+          "x": 120,
+          "y": 286
+        },
+        "trimmed_bounds": {
+          "h": 120,
+          "w": 127,
+          "x": 58,
+          "y": 169
+        }
+      },
+      {
+        "clip": "crouch_block",
+        "duration_ms": 140,
+        "frame": {
+          "h": 292,
+          "w": 266,
+          "x": 790,
+          "y": 766
+        },
+        "name": "crouch_block_2",
+        "pivot": {
+          "x": 117,
+          "y": 286
+        },
+        "trimmed_bounds": {
+          "h": 119,
+          "w": 126,
+          "x": 53,
+          "y": 170
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 75,
+        "frame": {
+          "h": 312,
+          "w": 277,
+          "x": 1185,
+          "y": 766
+        },
+        "name": "hit_0",
+        "pivot": {
+          "x": 171,
+          "y": 292
+        },
+        "trimmed_bounds": {
+          "h": 267,
+          "w": 213,
+          "x": 49,
+          "y": 28
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 105,
+        "frame": {
+          "h": 312,
+          "w": 277,
+          "x": 1580,
+          "y": 766
+        },
+        "name": "hit_1",
+        "pivot": {
+          "x": 155,
+          "y": 292
+        },
+        "trimmed_bounds": {
+          "h": 219,
+          "w": 147,
+          "x": 75,
+          "y": 76
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 140,
+        "frame": {
+          "h": 312,
+          "w": 277,
+          "x": 1975,
+          "y": 766
+        },
+        "name": "hit_2",
+        "pivot": {
+          "x": 156,
+          "y": 292
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 149,
+          "x": 73,
+          "y": 26
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 66,
+        "frame": {
+          "h": 286,
+          "w": 266,
+          "x": 2370,
+          "y": 766
+        },
+        "name": "punch_light_00",
+        "pivot": {
+          "x": 152,
+          "y": 278
+        },
+        "trimmed_bounds": {
+          "h": 259,
+          "w": 143,
+          "x": 81,
+          "y": 22
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 84,
+        "frame": {
+          "h": 286,
+          "w": 266,
+          "x": 2765,
+          "y": 766
+        },
+        "name": "punch_light_01",
+        "pivot": {
+          "x": 118,
+          "y": 278
+        },
+        "trimmed_bounds": {
+          "h": 217,
+          "w": 181,
+          "x": 42,
+          "y": 64
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 116,
+        "frame": {
+          "h": 286,
+          "w": 264,
+          "x": 0,
+          "y": 1149
+        },
+        "name": "punch_light_02",
+        "pivot": {
+          "x": 117,
+          "y": 278
+        },
+        "trimmed_bounds": {
+          "h": 256,
+          "w": 141,
+          "x": 48,
+          "y": 25
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 166,
+        "frame": {
+          "h": 286,
+          "w": 263,
+          "x": 395,
+          "y": 1149
+        },
+        "name": "punch_heavy_00",
+        "pivot": {
+          "x": 150,
+          "y": 275
+        },
+        "trimmed_bounds": {
+          "h": 261,
+          "w": 193,
+          "x": 53,
+          "y": 17
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 150,
+        "frame": {
+          "h": 286,
+          "w": 275,
+          "x": 790,
+          "y": 1149
+        },
+        "name": "punch_heavy_01",
+        "pivot": {
+          "x": 109,
+          "y": 275
+        },
+        "trimmed_bounds": {
+          "h": 222,
+          "w": 260,
+          "x": 10,
+          "y": 57
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 234,
+        "frame": {
+          "h": 286,
+          "w": 258,
+          "x": 1185,
+          "y": 1149
+        },
+        "name": "punch_heavy_02",
+        "pivot": {
+          "x": 101,
+          "y": 275
+        },
+        "trimmed_bounds": {
+          "h": 238,
+          "w": 198,
+          "x": 3,
+          "y": 41
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 133,
+        "frame": {
+          "h": 286,
+          "w": 264,
+          "x": 1580,
+          "y": 1149
+        },
+        "name": "kick_00",
+        "pivot": {
+          "x": 122,
+          "y": 280
+        },
+        "trimmed_bounds": {
+          "h": 274,
+          "w": 141,
+          "x": 57,
+          "y": 10
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 133,
+        "frame": {
+          "h": 286,
+          "w": 264,
+          "x": 1975,
+          "y": 1149
+        },
+        "name": "kick_01",
+        "pivot": {
+          "x": 92,
+          "y": 280
+        },
+        "trimmed_bounds": {
+          "h": 267,
+          "w": 229,
+          "x": 18,
+          "y": 17
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 167,
+        "frame": {
+          "h": 286,
+          "w": 268,
+          "x": 2370,
+          "y": 1149
+        },
+        "name": "kick_02",
+        "pivot": {
+          "x": 119,
+          "y": 280
+        },
+        "trimmed_bounds": {
+          "h": 274,
+          "w": 136,
+          "x": 59,
+          "y": 10
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 150,
+        "frame": {
+          "h": 286,
+          "w": 233,
+          "x": 2765,
+          "y": 1149
+        },
+        "name": "sweep_00",
+        "pivot": {
+          "x": 128,
+          "y": 254
+        },
+        "trimmed_bounds": {
+          "h": 184,
+          "w": 163,
+          "x": 38,
+          "y": 73
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 150,
+        "frame": {
+          "h": 286,
+          "w": 327,
+          "x": 0,
+          "y": 1532
+        },
+        "name": "sweep_01",
+        "pivot": {
+          "x": 134,
+          "y": 255
+        },
+        "trimmed_bounds": {
+          "h": 173,
+          "w": 295,
+          "x": 24,
+          "y": 86
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 216,
+        "frame": {
+          "h": 286,
+          "w": 236,
+          "x": 395,
+          "y": 1532
+        },
+        "name": "sweep_02",
+        "pivot": {
+          "x": 105,
+          "y": 259
+        },
+        "trimmed_bounds": {
+          "h": 191,
+          "w": 171,
+          "x": 8,
+          "y": 72
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 183,
+        "frame": {
+          "h": 286,
+          "w": 264,
+          "x": 790,
+          "y": 1532
+        },
+        "name": "overhead_00",
+        "pivot": {
+          "x": 146,
+          "y": 279
+        },
+        "trimmed_bounds": {
+          "h": 273,
+          "w": 137,
+          "x": 78,
+          "y": 9
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 133,
+        "frame": {
+          "h": 286,
+          "w": 264,
+          "x": 1185,
+          "y": 1532
+        },
+        "name": "overhead_01",
+        "pivot": {
+          "x": 107,
+          "y": 279
+        },
+        "trimmed_bounds": {
+          "h": 219,
+          "w": 182,
+          "x": 33,
+          "y": 64
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 217,
+        "frame": {
+          "h": 286,
+          "w": 268,
+          "x": 1580,
+          "y": 1532
+        },
+        "name": "overhead_02",
+        "pivot": {
+          "x": 117,
+          "y": 279
+        },
+        "trimmed_bounds": {
+          "h": 230,
+          "w": 153,
+          "x": 41,
+          "y": 53
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 100,
+        "frame": {
+          "h": 383,
+          "w": 255,
+          "x": 1975,
+          "y": 1532
+        },
+        "name": "anti_air_00",
+        "pivot": {
+          "x": 134,
+          "y": 343
+        },
+        "trimmed_bounds": {
+          "h": 251,
+          "w": 136,
+          "x": 66,
+          "y": 95
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 133,
+        "frame": {
+          "h": 383,
+          "w": 256,
+          "x": 2370,
+          "y": 1532
+        },
+        "name": "anti_air_01",
+        "pivot": {
+          "x": 129,
+          "y": 343
+        },
+        "trimmed_bounds": {
+          "h": 304,
+          "w": 157,
+          "x": 49,
+          "y": 42
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 217,
+        "frame": {
+          "h": 383,
+          "w": 255,
+          "x": 2765,
+          "y": 1532
+        },
+        "name": "anti_air_02",
+        "pivot": {
+          "x": 118,
+          "y": 343
+        },
+        "trimmed_bounds": {
+          "h": 254,
+          "w": 134,
+          "x": 52,
+          "y": 92
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 83,
+        "frame": {
+          "h": 345,
+          "w": 230,
+          "x": 0,
+          "y": 1915
+        },
+        "name": "air_punch_00",
+        "pivot": {
+          "x": 130,
+          "y": 297
+        },
+        "trimmed_bounds": {
+          "h": 253,
+          "w": 122,
+          "x": 64,
+          "y": 25
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 150,
+        "frame": {
+          "h": 345,
+          "w": 230,
+          "x": 395,
+          "y": 1915
+        },
+        "name": "air_punch_01",
+        "pivot": {
+          "x": 100,
+          "y": 324
+        },
+        "trimmed_bounds": {
+          "h": 241,
+          "w": 144,
+          "x": 40,
+          "y": 59
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 133,
+        "frame": {
+          "h": 345,
+          "w": 230,
+          "x": 790,
+          "y": 1915
+        },
+        "name": "air_punch_02",
+        "pivot": {
+          "x": 109,
+          "y": 306
+        },
+        "trimmed_bounds": {
+          "h": 252,
+          "w": 122,
+          "x": 38,
+          "y": 32
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 116,
+        "frame": {
+          "h": 350,
+          "w": 233,
+          "x": 1185,
+          "y": 1915
+        },
+        "name": "air_kick_00",
+        "pivot": {
+          "x": 115,
+          "y": 294
+        },
+        "trimmed_bounds": {
+          "h": 232,
+          "w": 154,
+          "x": 38,
+          "y": 25
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 167,
+        "frame": {
+          "h": 366,
+          "w": 287,
+          "x": 1580,
+          "y": 1915
+        },
+        "name": "air_kick_01",
+        "pivot": {
+          "x": 103,
+          "y": 311
+        },
+        "trimmed_bounds": {
+          "h": 229,
+          "w": 256,
+          "x": 17,
+          "y": 42
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 150,
+        "frame": {
+          "h": 366,
+          "w": 212,
+          "x": 1975,
+          "y": 1915
+        },
+        "name": "air_kick_02",
+        "pivot": {
+          "x": 84,
+          "y": 309
+        },
+        "trimmed_bounds": {
+          "h": 211,
+          "w": 153,
+          "x": 7,
+          "y": 42
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 100,
+        "frame": {
+          "h": 286,
+          "w": 264,
+          "x": 2370,
+          "y": 1915
+        },
+        "name": "throw_00",
+        "pivot": {
+          "x": 150,
+          "y": 279
+        },
+        "trimmed_bounds": {
+          "h": 259,
+          "w": 128,
+          "x": 92,
+          "y": 23
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 50,
+        "frame": {
+          "h": 286,
+          "w": 264,
+          "x": 2765,
+          "y": 1915
+        },
+        "name": "throw_01",
+        "pivot": {
+          "x": 111,
+          "y": 279
+        },
+        "trimmed_bounds": {
+          "h": 240,
+          "w": 181,
+          "x": 46,
+          "y": 42
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 233,
+        "frame": {
+          "h": 286,
+          "w": 268,
+          "x": 0,
+          "y": 2298
+        },
+        "name": "throw_02",
+        "pivot": {
+          "x": 123,
+          "y": 279
+        },
+        "trimmed_bounds": {
+          "h": 266,
+          "w": 137,
+          "x": 51,
+          "y": 16
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 100,
+        "frame": {
+          "h": 347,
+          "w": 395,
+          "x": 395,
+          "y": 2298
+        },
+        "name": "special_0",
+        "pivot": {
+          "x": 185,
+          "y": 315
+        },
+        "trimmed_bounds": {
+          "h": 252,
+          "w": 364,
+          "x": 30,
+          "y": 65
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 100,
+        "frame": {
+          "h": 347,
+          "w": 353,
+          "x": 790,
+          "y": 2298
+        },
+        "name": "special_1",
+        "pivot": {
+          "x": 132,
+          "y": 315
+        },
+        "trimmed_bounds": {
+          "h": 253,
+          "w": 305,
+          "x": 2,
+          "y": 64
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 100,
+        "frame": {
+          "h": 347,
+          "w": 293,
+          "x": 1185,
+          "y": 2298
+        },
+        "name": "special_2",
+        "pivot": {
+          "x": 129,
+          "y": 322
+        },
+        "trimmed_bounds": {
+          "h": 273,
+          "w": 147,
+          "x": 52,
+          "y": 52
+        }
+      },
+      {
+        "clip": "spawn",
+        "duration_ms": 180,
+        "frame": {
+          "h": 303,
+          "w": 270,
+          "x": 1580,
+          "y": 2298
+        },
+        "name": "spawn_0",
+        "pivot": {
+          "x": 150,
+          "y": 285
+        },
+        "trimmed_bounds": {
+          "h": 273,
+          "w": 125,
+          "x": 88,
+          "y": 15
+        }
+      },
+      {
+        "clip": "spawn",
+        "duration_ms": 180,
+        "frame": {
+          "h": 303,
+          "w": 269,
+          "x": 1975,
+          "y": 2298
+        },
+        "name": "spawn_1",
+        "pivot": {
+          "x": 149,
+          "y": 285
+        },
+        "trimmed_bounds": {
+          "h": 273,
+          "w": 148,
+          "x": 63,
+          "y": 15
+        }
+      },
+      {
+        "clip": "spawn",
+        "duration_ms": 180,
+        "frame": {
+          "h": 303,
+          "w": 270,
+          "x": 2370,
+          "y": 2298
+        },
+        "name": "spawn_2",
+        "pivot": {
+          "x": 136,
+          "y": 285
+        },
+        "trimmed_bounds": {
+          "h": 273,
+          "w": 134,
+          "x": 69,
+          "y": 15
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 180,
+        "frame": {
+          "h": 299,
+          "w": 266,
+          "x": 2765,
+          "y": 2298
+        },
+        "name": "victory_0",
+        "pivot": {
+          "x": 148,
+          "y": 282
+        },
+        "trimmed_bounds": {
+          "h": 274,
+          "w": 139,
+          "x": 71,
+          "y": 11
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 220,
+        "frame": {
+          "h": 299,
+          "w": 265,
+          "x": 0,
+          "y": 2681
+        },
+        "name": "victory_1",
+        "pivot": {
+          "x": 147,
+          "y": 281
+        },
+        "trimmed_bounds": {
+          "h": 273,
+          "w": 138,
+          "x": 67,
+          "y": 11
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 800,
+        "frame": {
+          "h": 299,
+          "w": 266,
+          "x": 395,
+          "y": 2681
+        },
+        "name": "victory_2",
+        "pivot": {
+          "x": 150,
+          "y": 281
+        },
+        "trimmed_bounds": {
+          "h": 273,
+          "w": 141,
+          "x": 73,
+          "y": 11
+        }
+      },
+      {
+        "clip": "defeat",
+        "duration_ms": 150,
+        "frame": {
+          "h": 299,
+          "w": 266,
+          "x": 790,
+          "y": 2681
+        },
+        "name": "defeat_0",
+        "pivot": {
+          "x": 148,
+          "y": 275
+        },
+        "trimmed_bounds": {
+          "h": 250,
+          "w": 116,
+          "x": 91,
+          "y": 28
+        }
+      },
+      {
+        "clip": "defeat",
+        "duration_ms": 220,
+        "frame": {
+          "h": 299,
+          "w": 265,
+          "x": 1185,
+          "y": 2681
+        },
+        "name": "defeat_1",
+        "pivot": {
+          "x": 135,
+          "y": 265
+        },
+        "trimmed_bounds": {
+          "h": 156,
+          "w": 165,
+          "x": 42,
+          "y": 112
+        }
+      },
+      {
+        "clip": "defeat",
+        "duration_ms": 630,
+        "frame": {
+          "h": 299,
+          "w": 266,
+          "x": 1580,
+          "y": 2681
+        },
+        "name": "defeat_2",
+        "pivot": {
+          "x": 115,
+          "y": 271
+        },
+        "trimmed_bounds": {
+          "h": 142,
+          "w": 143,
+          "x": 37,
+          "y": 132
+        }
+      }
+    ],
+    "image": "cpp-fighter-atlas.png",
+    "notes": [
+      "Candidate assembled from explicitly reviewed action frames.",
+      "Combat metadata is included only when supplied explicitly in production.json.",
+      "Source rectangles and production provenance: cpp-fighter.provenance.json"
+    ],
+    "scale": 1.0,
+    "schema": "borrow-fighters.sprite.v1",
+    "source": "../../production/cpp/production.json"
+  },
+  "loaded_manifest_matches_candidate": true,
+  "render_size": [
+    1280,
+    720
+  ],
+  "requested_clip_filter": [
+    "air_kick",
+    "crouch",
+    "crouch_block"
+  ],
+  "required_clips_checked": [
+    "spawn",
+    "idle",
+    "walk",
+    "crouch",
+    "jump",
+    "block",
+    "crouch_block",
+    "hit",
+    "punch_light",
+    "punch_heavy",
+    "kick",
+    "sweep",
+    "overhead",
+    "anti_air",
+    "air_punch",
+    "air_kick",
+    "throw",
+    "special",
+    "victory",
+    "defeat"
+  ],
+  "uncaptured_clips": [
+    "spawn",
+    "walk",
+    "block",
+    "hit",
+    "punch_light",
+    "punch_heavy",
+    "kick",
+    "sweep",
+    "overhead",
+    "anti_air",
+    "air_punch",
+    "throw",
+    "special",
+    "victory",
+    "defeat"
+  ],
+  "captures": [
+    {
+      "action": "air_kick",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          282.7519836425781,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          343.9039611816406,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          442.6879577636719,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "air_kick-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "jump_0"
+    },
+    {
+      "action": "air_kick",
+      "attack_boxes": [
+        [
+          531.3333129882812,
+          399.5,
+          117.33333587646484,
+          61.333335876464844
+        ]
+      ],
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        282.1666564941406,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "air_kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          295.5853271484375,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          356.7373046875,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          455.5213317871094,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "air_kick-f006-startup.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.10000000149011612,
+      "sprite_frame": "air_kick_00"
+    },
+    {
+      "action": "air_kick",
+      "attack_boxes": [
+        [
+          531.3333129882812,
+          403.77777099609375,
+          117.33333587646484,
+          61.333335876464844
+        ]
+      ],
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        286.4444274902344,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "air_kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          299.86309814453125,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          361.01507568359375,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          459.7991027832031,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "air_kick-f007-active.png",
+      "lab_tick": 7,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.11666666716337204,
+      "sprite_frame": "air_kick_01"
+    },
+    {
+      "action": "air_kick",
+      "attack_boxes": [
+        [
+          531.3333129882812,
+          434.3333435058594,
+          117.33333587646484,
+          61.333335876464844
+        ]
+      ],
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        317.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "air_kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          330.4186706542969,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          391.5706481933594,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          490.3546447753906,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "air_kick-f012-active.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "air_kick_01"
+    },
+    {
+      "action": "air_kick",
+      "attack_boxes": [
+        [
+          531.3333129882812,
+          480.1666564941406,
+          117.33333587646484,
+          61.333335876464844
+        ]
+      ],
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        362.83331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "air_kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          376.2519836425781,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          437.4039611816406,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          536.18798828125,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "air_kick-f017-recovery.png",
+      "lab_tick": 17,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.28333336114883423,
+      "sprite_frame": "air_kick_02"
+    },
+    {
+      "action": "air_kick",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          405.4186706542969,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          466.5706481933594,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          565.3546752929688,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "air_kick-f045-idle.png",
+      "lab_tick": 45,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "crouch",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "cpp",
+      "clip": "crouch",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          460.6346435546875,
+          498.73065185546875,
+          39.962669372558594,
+          29.354665756225586
+        ],
+        [
+          448.6773376464844,
+          535.9786987304688,
+          63.97867202758789,
+          42.66666793823242
+        ],
+        [
+          443.3066711425781,
+          586.6666870117188,
+          74.61865997314453,
+          21.290666580200195
+        ]
+      ],
+      "image": "crouch-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "crouch",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "crouch_0"
+    },
+    {
+      "action": "crouch",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "cpp",
+      "clip": "crouch",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          460.6346435546875,
+          498.73065185546875,
+          39.962669372558594,
+          29.354665756225586
+        ],
+        [
+          448.6773376464844,
+          535.9786987304688,
+          63.97867202758789,
+          42.66666793823242
+        ],
+        [
+          443.3066711425781,
+          586.6666870117188,
+          74.61865997314453,
+          21.290666580200195
+        ]
+      ],
+      "image": "crouch-f011-idle.png",
+      "lab_tick": 11,
+      "pose": "crouch",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.18333333730697632,
+      "sprite_frame": "crouch_1"
+    },
+    {
+      "action": "crouch",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "cpp",
+      "clip": "crouch",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          460.6346435546875,
+          498.73065185546875,
+          39.962669372558594,
+          29.354665756225586
+        ],
+        [
+          448.6773376464844,
+          535.9786987304688,
+          63.97867202758789,
+          42.66666793823242
+        ],
+        [
+          443.3066711425781,
+          586.6666870117188,
+          74.61865997314453,
+          21.290666580200195
+        ]
+      ],
+      "image": "crouch-f022-idle.png",
+      "lab_tick": 22,
+      "pose": "crouch",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.36666667461395264,
+      "sprite_frame": "crouch_2"
+    },
+    {
+      "action": "crouch_block",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "cpp",
+      "clip": "crouch_block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          460.6346435546875,
+          498.73065185546875,
+          39.962669372558594,
+          29.354665756225586
+        ],
+        [
+          448.6773376464844,
+          535.9786987304688,
+          63.97867202758789,
+          42.66666793823242
+        ],
+        [
+          443.3066711425781,
+          586.6666870117188,
+          74.61865997314453,
+          21.290666580200195
+        ]
+      ],
+      "image": "crouch_block-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "crouch_block",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "crouch_block_0"
+    },
+    {
+      "action": "crouch_block",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "cpp",
+      "clip": "crouch_block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          460.6346435546875,
+          498.73065185546875,
+          39.962669372558594,
+          29.354665756225586
+        ],
+        [
+          448.6773376464844,
+          535.9786987304688,
+          63.97867202758789,
+          42.66666793823242
+        ],
+        [
+          443.3066711425781,
+          586.6666870117188,
+          74.61865997314453,
+          21.290666580200195
+        ]
+      ],
+      "image": "crouch_block-f007-idle.png",
+      "lab_tick": 7,
+      "pose": "crouch_block",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.11666667461395264,
+      "sprite_frame": "crouch_block_1"
+    },
+    {
+      "action": "crouch_block",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "cpp",
+      "clip": "crouch_block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          460.6346435546875,
+          498.73065185546875,
+          39.962669372558594,
+          29.354665756225586
+        ],
+        [
+          448.6773376464844,
+          535.9786987304688,
+          63.97867202758789,
+          42.66666793823242
+        ],
+        [
+          443.3066711425781,
+          586.6666870117188,
+          74.61865997314453,
+          21.290666580200195
+        ]
+      ],
+      "image": "crouch_block-f012-idle.png",
+      "lab_tick": 12,
+      "pose": "crouch_block",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.20000001788139343,
+      "sprite_frame": "crouch_block_2"
+    }
+  ],
+  "full_capture_count": 36,
+  "full_report_local": "target/art/cpp-finalization-lab/capture-report.json",
+  "selected_evidence_only": true
+}

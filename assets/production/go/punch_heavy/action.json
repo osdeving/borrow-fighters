@@ -1,22 +1,30 @@
 {
   "action": "punch_heavy",
-  "source": "punch_heavy/source-v1.png",
-  "sheet": "punch_heavy/keyed.png",
+  "source": "punch_heavy/source-v2.png",
+  "sheet": "punch_heavy/sheet-v1.png",
   "loop": false,
-  "source_body_height_reference_px": 486,
-  "normalization_note": "Heavy weight shift and full extension; source cells use wider explicit bounds so the active fist is never clipped.",
+  "reviewed": true,
+  "status": "Final generated art reviewed: complete World in both facings, native Lab, Sprite Studio and normal match; evidence in finalization-review.md.",
+  "source_body_height_reference_px": 725,
+  "suggested_scale_to_runtime": 0.3641379310344828,
+  "replacement_contract": "../action-contracts.json#/actions/punch_heavy",
+  "references": {
+    "new_master": "reference/master.png",
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
   "frames": [
     {
       "name": "punch_heavy_00",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 600,
-        "h": 887
+        "w": 800,
+        "h": 920
       },
       "pivot": {
-        "x": 330,
-        "y": 694
+        "x": 416,
+        "y": 827
       },
       "duration_ms": 183,
       "phase": "startup"
@@ -24,14 +32,14 @@
     {
       "name": "punch_heavy_01",
       "source_rect": {
-        "x": 600,
+        "x": 800,
         "y": 0,
-        "w": 640,
-        "h": 887
+        "w": 800,
+        "h": 920
       },
       "pivot": {
-        "x": 250,
-        "y": 695
+        "x": 351,
+        "y": 816
       },
       "duration_ms": 167,
       "phase": "active"
@@ -39,20 +47,21 @@
     {
       "name": "punch_heavy_02",
       "source_rect": {
-        "x": 1240,
+        "x": 1600,
         "y": 0,
-        "w": 534,
-        "h": 887
+        "w": 800,
+        "h": 920
       },
       "pivot": {
-        "x": 210,
-        "y": 695
+        "x": 367,
+        "y": 827
       },
       "duration_ms": 233,
       "phase": "recovery"
     }
   ],
-  "review_notes": "Built-in image_gen, original narrow Go master and generated idle continuity. Flat magenta extracted without Rust contour mode; isolated matte corner pixels removed where present. Candidate visual only; baseline combat remains authoritative.",
+  "generation_brief": "Weight transfer, clear extended fist contact and controlled recovery, preserving ground support.",
+  "review_notes": "Low body cross with visible weight transfer. v2 lowered the fist; normal anatomy scale is shared across all three poses. Explicit crops/pivots are recorded in preparation.json; no timing or combat changes.",
   "timing_reference": {
     "move_id": "HeavyPunch",
     "source": "src/combat/move_data.rs",
@@ -84,5 +93,18 @@
       "x": 114.66666666666666,
       "y": -118.66666666666669
     }
+  },
+  "scale_to_runtime": 0.3641379310344828,
+  "runtime_review": {
+    "approved": true,
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "report": "../finalization-review.md",
+    "world_facings_seen": [
+      "Left",
+      "Right"
+    ],
+    "lab_capture": "full set before jump, art unchanged by frame checksum",
+    "normal_match_result_evidence": false
   }
 }

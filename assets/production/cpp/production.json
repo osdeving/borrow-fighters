@@ -78,12 +78,12 @@
           "source_rect": {
             "x": 0,
             "y": 0,
-            "w": 239,
-            "h": 317
+            "w": 202,
+            "h": 319
           },
           "pivot": {
-            "x": 132,
-            "y": 289
+            "x": 104,
+            "y": 297
           },
           "duration_ms": 100,
           "phase": "contact_left"
@@ -91,14 +91,14 @@
         {
           "name": "walk_1",
           "source_rect": {
-            "x": 239,
+            "x": 202,
             "y": 0,
-            "w": 183,
-            "h": 317
+            "w": 202,
+            "h": 319
           },
           "pivot": {
-            "x": 91,
-            "y": 289
+            "x": 100,
+            "y": 298
           },
           "duration_ms": 100,
           "phase": "passing_right"
@@ -106,14 +106,14 @@
         {
           "name": "walk_2",
           "source_rect": {
-            "x": 478,
+            "x": 404,
             "y": 0,
-            "w": 211,
-            "h": 303
+            "w": 202,
+            "h": 319
           },
           "pivot": {
-            "x": 106,
-            "y": 285
+            "x": 102,
+            "y": 297
           },
           "duration_ms": 100,
           "phase": "contact_right"
@@ -121,14 +121,14 @@
         {
           "name": "walk_3",
           "source_rect": {
-            "x": 717,
+            "x": 606,
             "y": 0,
-            "w": 211,
-            "h": 317
+            "w": 202,
+            "h": 319
           },
           "pivot": {
-            "x": 84,
-            "y": 289
+            "x": 105,
+            "y": 299
           },
           "duration_ms": 100,
           "phase": "passing_left"
@@ -136,9 +136,9 @@
       ],
       "provenance": {
         "source_action": "walk/action.json",
-        "source_sheet": "walk/assembled-selected-v4.png",
-        "scale_to_runtime": 0.4123076923076923,
-        "review": "Selected assembly v4 preserves v2 contact0, passing1 and passing3, replacing repeated contact2 with independently generated v3 opposite/plain leading leg contact. V3 complete sheet degraded passing poses, so only corrected generated key2 was selected. Exact source components and rectangles recorded; crop/pack preserves pixels without constructing poses procedurally. Footwear overlap now alternates, though arm counter-swing and gold-stripe leg identity remain subtle. One uniform268/650 anatomical scale, frame2 grounded anchor691 compensates source placement only. Approved only for candidate review export, not final art release."
+        "source_sheet": "walk/assembled-selected-v8.png",
+        "scale_to_runtime": 0.4200626959247649,
+        "review": "Selected v8 packs whole generated v6 keys0/1/2 and v7 key3. The near gold-striped leg leads at contact0; the far plain leg leads at contact2. Passing1 plants the far leg, passing3 plants the near leg with the far boot lifted. Near-arm placement follows the opposite contacts. V5/v6 fourth poses and the regressed v7 contact2 were rejected. Uniform268/638 anatomical scale and source ground pivots708/710/707/712 compensate source placement only. Original100ms per key,400ms loop preserved. Crops exclude the isolated lower-left matte pixel without retouching artwork. Candidate export; finalization evidence is recorded separately."
       }
     },
     "jump": {
@@ -326,11 +326,11 @@
             "x": 0,
             "y": 0,
             "w": 266,
-            "h": 299
+            "h": 292
           },
           "pivot": {
-            "x": 134,
-            "y": 276
+            "x": 128,
+            "y": 286
           },
           "duration_ms": 110,
           "phase": "low_guard"
@@ -341,11 +341,11 @@
             "x": 266,
             "y": 0,
             "w": 265,
-            "h": 299
+            "h": 292
           },
           "pivot": {
-            "x": 125,
-            "y": 276
+            "x": 120,
+            "y": 286
           },
           "duration_ms": 90,
           "phase": "absorb"
@@ -356,11 +356,11 @@
             "x": 532,
             "y": 0,
             "w": 266,
-            "h": 299
+            "h": 292
           },
           "pivot": {
-            "x": 119,
-            "y": 276
+            "x": 117,
+            "y": 286
           },
           "duration_ms": 140,
           "phase": "recover_low_guard"
@@ -368,9 +368,9 @@
       ],
       "provenance": {
         "source_action": "crouch_block/action.json",
-        "source_sheet": "crouch_block/keyed-v4.png",
+        "source_sheet": "crouch_block/keyed-v6.png",
         "scale_to_runtime": 0.3889695210449927,
-        "review": "Selected v4 after v1-v3 kept torso too upright. Deep forward hunker preserves head/limb scale, silhouette about92-95px within128px crouch height. Guard recoil is subtle; bag stays continuous. Approved only for candidate review export, not final art release."
+        "review": "Selected generated v6 changes the rear arm of crouch/source-v2 into a face/chest guard while retaining the crouch body depth. Runtime silhouette about114-118px now matches ordinary crouch113-119px instead of former92-95px guard. Uniform268/689 scale and110/90/140ms timing preserved. Pivots330,735 /309,736 /300,736 register generated support positions; no body rescaling, gameplay change or procedural posture construction. v5 rejected because it raised the torso too far. Crop excludes an isolated matte pixel below all body contours. Candidate export; finalization evidence is recorded separately."
       }
     },
     "hit": {
@@ -848,7 +848,7 @@
             "x": 0,
             "y": 0,
             "w": 233,
-            "h": 366
+            "h": 350
           },
           "pivot": {
             "x": 115,
@@ -890,9 +890,9 @@
       ],
       "provenance": {
         "source_action": "air_kick/action.json",
-        "source_sheet": "air_kick/keyed-v1.png",
+        "source_sheet": "air_kick/keyed-v3.png",
         "scale_to_runtime": 0.4123076923076923,
-        "review": "Source upright anatomical equivalent650px by head/torso scale; one uniform268/650 scale. Virtual pivots register belt at about-160world across the3 poses, with knees changing only limb posture. Active boot contact projects near(+161.2,-56.9), inside the forward/lower edge of the baseline air-kick box. The outermost gold sole extends slightly past that edge and remains an artistic review caveat; gameplay is unchanged. Approved only for candidate review export, not final art release."
+        "review": "Selected v3 redraws the active ankle/boot in dorsiflexion while preserving the downward leg, trunk, startup and recovery. Original uniform268/650 scale, belt-registered virtual pivots and116/167/150ms timing retained. Active sole center around(1205,579) maps to(+160.8,-72.2), within the existing box; lowest heel at648 maps about-43.7, within2px of its lower edge-45.3, reducing the former~15px extension. v2 rejected for raising the entire leg too high. No combat or whole-body translation change. First crop excludes isolated matte pixel below the artwork. Candidate export; finalization evidence is recorded separately."
       }
     },
     "throw": {

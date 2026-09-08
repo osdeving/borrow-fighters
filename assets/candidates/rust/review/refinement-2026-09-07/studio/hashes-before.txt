@@ -1,0 +1,3 @@
+47bc02280fbb12a54a092bde8ae80204bd8ef648717b541cac778724d651e659  assets/candidates/rust/rust-fighter.sprite.json
+e969bf00c9df93c2980b45a24dacc066977ae2d9ebafcd0f982c010650d89f8d  assets/candidates/rust/rust-fighter-atlas.png
+7f77453d98681adf5b6b0d8020ca8167dcbb8245ea97363425c5fc9cf309c962  assets/tuning/character-body-metrics.json

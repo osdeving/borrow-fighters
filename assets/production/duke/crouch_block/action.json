@@ -1,5 +1,5 @@
 {
-  "sheet": "crouch_block/keyed.png",
+  "sheet": "crouch_block/keyed-v2.png",
   "reviewed": true,
   "loop": false,
   "frames": [
@@ -12,8 +12,8 @@
         "h": 768
       },
       "pivot": {
-        "x": 397,
-        "y": 665
+        "x": 370,
+        "y": 681
       },
       "duration_ms": 80,
       "phase": "low_guard"
@@ -27,8 +27,8 @@
         "h": 768
       },
       "pivot": {
-        "x": 350,
-        "y": 665
+        "x": 342,
+        "y": 681
       },
       "duration_ms": 100,
       "phase": "low_absorb"
@@ -43,7 +43,7 @@
       },
       "pivot": {
         "x": 277,
-        "y": 665
+        "y": 681
       },
       "duration_ms": 180,
       "phase": "held_low_guard"

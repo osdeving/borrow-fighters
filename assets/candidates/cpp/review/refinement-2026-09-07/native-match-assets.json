@@ -1,0 +1,18 @@
+{
+  "command": "cargo run -- --fight --p1 cpp --p2 rust",
+  "sprite_candidates_env": null,
+  "character_assets": {
+    "cpp": {
+      "assets/candidates/cpp/cpp-fighter.sprite.json": "129b5e9353ca441cbeff1fb996429f27d795402b7a3410fe66fec6254dd7e09b",
+      "assets/candidates/cpp/cpp-fighter-atlas.png": "8e85e765b6257d590fe9de32aae8887b19e3964db647ca629de5a73811d34bb3"
+    },
+    "rust": {
+      "assets/candidates/rust/rust-fighter.sprite.json": "47bc02280fbb12a54a092bde8ae80204bd8ef648717b541cac778724d651e659",
+      "assets/candidates/rust/rust-fighter-atlas.png": "e969bf00c9df93c2980b45a24dacc066977ae2d9ebafcd0f982c010650d89f8d"
+    }
+  },
+  "result": {
+    "cpp": 49,
+    "rust": 0
+  }
+}

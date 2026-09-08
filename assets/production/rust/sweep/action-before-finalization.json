@@ -1,0 +1,82 @@
+{
+  "action": "sweep",
+  "source": "sweep/source-v2.png",
+  "sheet": "sweep/keyed.png",
+  "reviewed": false,
+  "loop": false,
+  "status": "candidate; source poses statically inspected; runtime/two-orientation review pending",
+  "source_body_height_reference_px": 554,
+  "normalization_note": "Approximate upright-body reference; do not scale each frame by its own alpha bounds. Air pivots are virtual standing-floor anchors beneath hips, not boot tips. Ground pivots are proposed and require foot-support review after normalization.",
+  "combat_timing": {
+    "move_id": "SweepKick",
+    "input": "Sweep",
+    "duration": 32,
+    "active_start": 10,
+    "active_end_inclusive": 18,
+    "whiff_recovery": 12,
+    "clip": "sweep"
+  },
+  "frames": [
+    {
+      "name": "sweep_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 480,
+        "h": 768
+      },
+      "pivot": {
+        "x": 250,
+        "y": 633
+      },
+      "duration_ms": 166,
+      "phase": "startup"
+    },
+    {
+      "name": "sweep_1",
+      "source_rect": {
+        "x": 480,
+        "y": 0,
+        "w": 630,
+        "h": 768
+      },
+      "pivot": {
+        "x": 260,
+        "y": 633
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "sweep_2",
+      "source_rect": {
+        "x": 1110,
+        "y": 0,
+        "w": 460,
+        "h": 768
+      },
+      "pivot": {
+        "x": 203,
+        "y": 634
+      },
+      "duration_ms": 108,
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_3",
+      "source_rect": {
+        "x": 1570,
+        "y": 0,
+        "w": 478,
+        "h": 768
+      },
+      "pivot": {
+        "x": 180,
+        "y": 633
+      },
+      "duration_ms": 109,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Selected v2 rising sweep: the original crouched floor sweep missed the baseline hitbox at y480\u2013520. Its raised ankle/shin intersects that existing box. The game clears crouching during all attacks; physical posture and collision remain unchanged. v3 dropped the foot below contact; v4 raised it further, both rejected. Ground support fixed; hand contact and upright recovery are explicit."
+}

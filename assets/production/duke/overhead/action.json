@@ -1,5 +1,5 @@
 {
-  "sheet": "overhead/keyed.png",
+  "sheet": "overhead/selected-v1.png",
   "reviewed": true,
   "loop": false,
   "frames": [
@@ -8,12 +8,12 @@
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 684,
-        "h": 736
+        "w": 800,
+        "h": 900
       },
       "pivot": {
-        "x": 374,
-        "y": 691
+        "x": 350,
+        "y": 780
       },
       "duration_ms": 250,
       "phase": "startup"
@@ -21,14 +21,14 @@
     {
       "name": "overhead_01",
       "source_rect": {
-        "x": 684,
+        "x": 800,
         "y": 0,
-        "w": 700,
-        "h": 736
+        "w": 800,
+        "h": 900
       },
       "pivot": {
-        "x": 302,
-        "y": 690
+        "x": 350,
+        "y": 780
       },
       "duration_ms": 133,
       "phase": "active"
@@ -36,14 +36,14 @@
     {
       "name": "overhead_02",
       "source_rect": {
-        "x": 1384,
+        "x": 1600,
         "y": 0,
-        "w": 664,
-        "h": 736
+        "w": 800,
+        "h": 900
       },
       "pivot": {
-        "x": 256,
-        "y": 691
+        "x": 350,
+        "y": 780
       },
       "duration_ms": 283,
       "phase": "recovery"

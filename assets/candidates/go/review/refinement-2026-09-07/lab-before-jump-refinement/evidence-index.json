@@ -1,0 +1,271 @@
+{
+  "method": "Native GPU screenshots cropped with no resizing/retouching; forced Lab contexts are separate poses, not World input transitions.",
+  "panels": {
+    "contexts-1.png": [
+      {
+        "image": "punch_light-f000-idle.png",
+        "sprite_frame": "idle_00",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "punch_light-f015-whiffrecovery.png",
+        "sprite_frame": "idle_01",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "punch_light-f022-idle.png",
+        "sprite_frame": "idle_02",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "air_punch-f000-idle.png",
+        "sprite_frame": "jump_00",
+        "crop_rect": [
+          291,
+          173,
+          671,
+          523
+        ]
+      },
+      {
+        "image": "jump-f004-idle.png",
+        "sprite_frame": "jump_01",
+        "crop_rect": [
+          291,
+          173,
+          671,
+          523
+        ]
+      },
+      {
+        "image": "jump-f024-idle.png",
+        "sprite_frame": "jump_02",
+        "crop_rect": [
+          291,
+          173,
+          671,
+          523
+        ]
+      },
+      {
+        "image": "crouch-f000-idle.png",
+        "sprite_frame": "crouch_00",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "crouch-f005-idle.png",
+        "sprite_frame": "crouch_02",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      }
+    ],
+    "contexts-2.png": [
+      {
+        "image": "block-f000-idle.png",
+        "sprite_frame": "block_00",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "block-f005-idle.png",
+        "sprite_frame": "block_01",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "block-f009-idle.png",
+        "sprite_frame": "block_02",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "crouch_block-f000-idle.png",
+        "sprite_frame": "crouch_block_00",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "crouch_block-f005-idle.png",
+        "sprite_frame": "crouch_block_01",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "crouch_block-f009-idle.png",
+        "sprite_frame": "crouch_block_02",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "hit-f000-idle.png",
+        "sprite_frame": "hit_00",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "hit-f004-idle.png",
+        "sprite_frame": "hit_01",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "hit-f009-idle.png",
+        "sprite_frame": "hit_02",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      }
+    ],
+    "contexts-3.png": [
+      {
+        "image": "spawn-f000-idle.png",
+        "sprite_frame": "spawn_00",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "spawn-f030-idle.png",
+        "sprite_frame": "spawn_01",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "spawn-f072-idle.png",
+        "sprite_frame": "spawn_02",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "victory-f000-idle.png",
+        "sprite_frame": "victory_00",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "victory-f010-idle.png",
+        "sprite_frame": "victory_01",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "victory-f022-idle.png",
+        "sprite_frame": "victory_02",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "defeat-f000-idle.png",
+        "sprite_frame": "defeat_00",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "defeat-f010-idle.png",
+        "sprite_frame": "defeat_01",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      },
+      {
+        "image": "defeat-f023-idle.png",
+        "sprite_frame": "defeat_02",
+        "crop_rect": [
+          291,
+          296,
+          671,
+          646
+        ]
+      }
+    ]
+  }
+}

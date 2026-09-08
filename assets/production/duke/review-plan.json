@@ -5,7 +5,8 @@
     "generator": "built-in imagegen",
     "identity_reference": "reference/master-existing.png",
     "combat": "Visual-only candidate; runtime retains baseline combat_manifest.",
-    "scope": "Twenty existing actions; no new mechanics."
+    "scope": "Twenty existing actions; no new mechanics.",
+    "refinement": "Targeted real image_gen revisions; other satisfactory actions reused. Rejected source variants and old action/plan snapshots preserved."
   },
   "actions": {
     "idle": {
@@ -15,8 +16,8 @@
     },
     "walk": {
       "approved": true,
-      "scale_to_runtime": 0.4,
-      "notes": "Four poses with contact/pass geometry; first/third contact silhouettes similar, evaluate stride leg alternation in real movement. Solid cone-to-shoe height normalized to idle; steam retained. Alpha inspected without Rust contour."
+      "scale_to_runtime": 0.4169435215946844,
+      "notes": "Four genuinely different generated poses assembled from v5/v7/v6. v7 preserves opposite-contact v4 with safe magenta matte; checker extraction of v4 damaged white belly and was rejected. Alternating near/far contact and passage. Single-pose sources normalized uniformly0.49, then common runtime scale0.4169435. Original112/113/112/113ms total450ms."
     },
     "crouch": {
       "approved": true,
@@ -36,7 +37,7 @@
     "crouch_block": {
       "approved": true,
       "scale_to_runtime": 0.4169435215946844,
-      "notes": "Own low guard/absorb/held sequence; same facial feature sizes and support as idle. Guard frames solid silhouette about395source px ->165world px, taller than128px physical crouch; retain as candidate readability caveat for Lab review, without altering boxes."
+      "notes": "New v2 compressed low guard. Original nose/glove/feet scale retained; belly compressed and cone inclined. Original80/100/180ms total360ms."
     },
     "hit": {
       "approved": true,
@@ -66,7 +67,7 @@
     "overhead": {
       "approved": true,
       "scale_to_runtime": 0.4169435215946844,
-      "notes": "Selected source-v3: v1 incorrectly hit floor; v2 had fist too close; v3 preserves high windup then early descending contact in front of nose with correct reach. Active glove about(+285,-300)source ->(+119,-125)world inside existing box(+50.7,-170.7,128,72). Contact reads a short descending hook; no metadata changed."
+      "notes": "New isolated v8 contact has elbow above descending glove inside original box; v6 startup/recovery preserved. Uniform0.53 normalization of isolated contact, then common runtime0.4169435. Original250/133/283ms total666ms."
     },
     "anti_air": {
       "approved": true,
@@ -86,7 +87,7 @@
     "throw": {
       "approved": true,
       "scale_to_runtime": 0.3946540880503145,
-      "notes": "Own open/short-grab/pullback poses without fixed victim. Farthest active fingertips approximately+309source px ->+122world px, within the actual far edge+125.3world px. Open hands at torso height; scale normalizes source standing height636px. Timing150/50/300ms follows9–11/30f inclusive."
+      "notes": "Own open/short-grab/pullback poses without fixed victim. Farthest active fingertips approximately+309source px ->+122world px, within the actual far edge+125.3world px. Open hands at torso height; scale normalizes source standing height636px. Timing150/50/300ms follows9\u201311/30f inclusive."
     },
     "special": {
       "approved": true,

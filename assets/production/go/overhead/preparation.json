@@ -1,0 +1,85 @@
+{
+  "operation": "Cropping and transparent margin placement only; one uniform runtime scale per action",
+  "source": "source-v1.png",
+  "source_sha256": "504ccd640940c116f76a512d84be182152bc77ab8cab707e430edc25adbc96b7",
+  "source_size": [
+    1881,
+    836
+  ],
+  "sheet": "sheet-v1.png",
+  "sheet_size": [
+    2400,
+    920
+  ],
+  "scale_to_runtime": 0.37660485021398005,
+  "source_body_height_reference_px": 701,
+  "height_reference_frame": 2,
+  "frames": [
+    {
+      "source_rect_xyxy": [
+        0,
+        0,
+        610,
+        836
+      ],
+      "source_global_pivot": [
+        340,
+        798
+      ],
+      "destination_offset": [
+        95,
+        42
+      ],
+      "prepared_local_pivot": {
+        "x": 435,
+        "y": 840
+      },
+      "duration_ms": 166,
+      "phase": "startup"
+    },
+    {
+      "source_rect_xyxy": [
+        610,
+        0,
+        1270,
+        836
+      ],
+      "source_global_pivot": [
+        957,
+        795
+      ],
+      "destination_offset": [
+        870,
+        42
+      ],
+      "prepared_local_pivot": {
+        "x": 417,
+        "y": 837
+      },
+      "duration_ms": 100,
+      "phase": "active"
+    },
+    {
+      "source_rect_xyxy": [
+        1270,
+        0,
+        1881,
+        836
+      ],
+      "source_global_pivot": [
+        1524,
+        795
+      ],
+      "destination_offset": [
+        1694,
+        42
+      ],
+      "prepared_local_pivot": {
+        "x": 348,
+        "y": 837
+      },
+      "duration_ms": 200,
+      "phase": "recovery"
+    }
+  ]
+}

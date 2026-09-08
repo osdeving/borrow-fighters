@@ -1,0 +1,812 @@
+{
+  "method": "Native AT-SPI action of real clip buttons and Next frame; native X11 window PNG via ImageMagick import. Resize 1px requests repaint in WSL Weston. No manifest or metrics writes. No continuous playback claimed.",
+  "window_id": "0xa00003",
+  "loaded_manifest_matches_candidate": true,
+  "captures": [
+    {
+      "clip": "idle",
+      "frame": "idle_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 103",
+        "Pivot Y 279",
+        "Duration ms 180"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "idle-00.png"
+    },
+    {
+      "clip": "idle",
+      "frame": "idle_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 96",
+        "Pivot Y 279",
+        "Duration ms 180"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "idle-01.png"
+    },
+    {
+      "clip": "idle",
+      "frame": "idle_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 88",
+        "Pivot Y 279",
+        "Duration ms 180"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "idle-02.png"
+    },
+    {
+      "clip": "walk",
+      "frame": "walk_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 115",
+        "Pivot Y 286",
+        "Duration ms 60"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "walk-00.png"
+    },
+    {
+      "clip": "walk",
+      "frame": "walk_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 120",
+        "Pivot Y 286",
+        "Duration ms 60"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "walk-01.png"
+    },
+    {
+      "clip": "walk",
+      "frame": "walk_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 111",
+        "Pivot Y 285",
+        "Duration ms 60"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "walk-02.png"
+    },
+    {
+      "clip": "walk",
+      "frame": "walk_03",
+      "ui_frame_index": 4,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 103",
+        "Pivot Y 286",
+        "Duration ms 60"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "walk-03.png"
+    },
+    {
+      "clip": "jump",
+      "frame": "jump_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 125",
+        "Pivot Y 269",
+        "Duration ms 60"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "jump-00.png"
+    },
+    {
+      "clip": "jump",
+      "frame": "jump_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 99",
+        "Pivot Y 262",
+        "Duration ms 340"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "jump-01.png"
+    },
+    {
+      "clip": "jump",
+      "frame": "jump_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 73",
+        "Pivot Y 277",
+        "Duration ms 400"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "jump-02.png"
+    },
+    {
+      "clip": "crouch",
+      "frame": "crouch_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 103",
+        "Pivot Y 274",
+        "Duration ms 80"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "crouch-00.png"
+    },
+    {
+      "clip": "crouch",
+      "frame": "crouch_02",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 51",
+        "Pivot Y 275",
+        "Duration ms 280"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "crouch-01.png"
+    },
+    {
+      "clip": "block",
+      "frame": "block_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 98",
+        "Pivot Y 273",
+        "Duration ms 70"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "block-00.png"
+    },
+    {
+      "clip": "block",
+      "frame": "block_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 91",
+        "Pivot Y 274",
+        "Duration ms 80"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "block-01.png"
+    },
+    {
+      "clip": "block",
+      "frame": "block_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 84",
+        "Pivot Y 273",
+        "Duration ms 150"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "block-02.png"
+    },
+    {
+      "clip": "crouch_block",
+      "frame": "crouch_block_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 98",
+        "Pivot Y 257",
+        "Duration ms 70"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "crouch_block-00.png"
+    },
+    {
+      "clip": "crouch_block",
+      "frame": "crouch_block_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 79",
+        "Pivot Y 257",
+        "Duration ms 80"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "crouch_block-01.png"
+    },
+    {
+      "clip": "crouch_block",
+      "frame": "crouch_block_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 53",
+        "Pivot Y 257",
+        "Duration ms 150"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "crouch_block-02.png"
+    },
+    {
+      "clip": "hit",
+      "frame": "hit_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 111",
+        "Pivot Y 277",
+        "Duration ms 60"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "hit-00.png"
+    },
+    {
+      "clip": "hit",
+      "frame": "hit_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 94",
+        "Pivot Y 277",
+        "Duration ms 80"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "hit-01.png"
+    },
+    {
+      "clip": "hit",
+      "frame": "hit_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 74",
+        "Pivot Y 278",
+        "Duration ms 120"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "hit-02.png"
+    },
+    {
+      "clip": "punch_light",
+      "frame": "punch_light_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 136",
+        "Pivot Y 290",
+        "Duration ms 50"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "punch_light-00.png"
+    },
+    {
+      "clip": "punch_light",
+      "frame": "punch_light_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 134",
+        "Pivot Y 290",
+        "Duration ms 83"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "punch_light-01.png"
+    },
+    {
+      "clip": "punch_light",
+      "frame": "punch_light_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 116",
+        "Pivot Y 290",
+        "Duration ms 100"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "punch_light-02.png"
+    },
+    {
+      "clip": "punch_heavy",
+      "frame": "punch_heavy_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 151",
+        "Pivot Y 301",
+        "Duration ms 183"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "punch_heavy-00.png"
+    },
+    {
+      "clip": "punch_heavy",
+      "frame": "punch_heavy_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 128",
+        "Pivot Y 297",
+        "Duration ms 167"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "punch_heavy-01.png"
+    },
+    {
+      "clip": "punch_heavy",
+      "frame": "punch_heavy_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 134",
+        "Pivot Y 301",
+        "Duration ms 233"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "punch_heavy-02.png"
+    },
+    {
+      "clip": "kick",
+      "frame": "kick_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 131",
+        "Pivot Y 291",
+        "Duration ms 116"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "kick-00.png"
+    },
+    {
+      "clip": "kick",
+      "frame": "kick_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 125",
+        "Pivot Y 291",
+        "Duration ms 117"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "kick-01.png"
+    },
+    {
+      "clip": "kick",
+      "frame": "kick_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 115",
+        "Pivot Y 291",
+        "Duration ms 150"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "kick-02.png"
+    },
+    {
+      "clip": "sweep",
+      "frame": "sweep_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 143",
+        "Pivot Y 292",
+        "Duration ms 166"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "sweep-00.png"
+    },
+    {
+      "clip": "sweep",
+      "frame": "sweep_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 109",
+        "Pivot Y 286",
+        "Duration ms 150"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "sweep-01.png"
+    },
+    {
+      "clip": "sweep",
+      "frame": "sweep_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 133",
+        "Pivot Y 301",
+        "Duration ms 217"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "sweep-02.png"
+    },
+    {
+      "clip": "overhead",
+      "frame": "overhead_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 164",
+        "Pivot Y 316",
+        "Duration ms 166"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "overhead-00.png"
+    },
+    {
+      "clip": "overhead",
+      "frame": "overhead_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 157",
+        "Pivot Y 315",
+        "Duration ms 100"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "overhead-01.png"
+    },
+    {
+      "clip": "overhead",
+      "frame": "overhead_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 131",
+        "Pivot Y 315",
+        "Duration ms 200"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "overhead-02.png"
+    },
+    {
+      "clip": "throw",
+      "frame": "throw_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 134",
+        "Pivot Y 289",
+        "Duration ms 100"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "throw-00.png"
+    },
+    {
+      "clip": "throw",
+      "frame": "throw_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 125",
+        "Pivot Y 289",
+        "Duration ms 50"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "throw-01.png"
+    },
+    {
+      "clip": "throw",
+      "frame": "throw_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 120",
+        "Pivot Y 289",
+        "Duration ms 216"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "throw-02.png"
+    },
+    {
+      "clip": "anti_air",
+      "frame": "anti_air_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 137",
+        "Pivot Y 358",
+        "Duration ms 116"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "anti_air-00.png"
+    },
+    {
+      "clip": "anti_air",
+      "frame": "anti_air_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 129",
+        "Pivot Y 360",
+        "Duration ms 134"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "anti_air-01.png"
+    },
+    {
+      "clip": "anti_air",
+      "frame": "anti_air_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 131",
+        "Pivot Y 359",
+        "Duration ms 250"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "anti_air-02.png"
+    },
+    {
+      "clip": "air_punch",
+      "frame": "air_punch_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 101",
+        "Pivot Y 300",
+        "Duration ms 83"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_punch-00.png"
+    },
+    {
+      "clip": "air_punch",
+      "frame": "air_punch_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 120",
+        "Pivot Y 306",
+        "Duration ms 150"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_punch-01.png"
+    },
+    {
+      "clip": "air_punch",
+      "frame": "air_punch_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 98",
+        "Pivot Y 305",
+        "Duration ms 133"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_punch-02.png"
+    },
+    {
+      "clip": "air_kick",
+      "frame": "air_kick_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 111",
+        "Pivot Y 294",
+        "Duration ms 83"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_kick-00.png"
+    },
+    {
+      "clip": "air_kick",
+      "frame": "air_kick_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 90",
+        "Pivot Y 306",
+        "Duration ms 133"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_kick-01.png"
+    },
+    {
+      "clip": "air_kick",
+      "frame": "air_kick_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 87",
+        "Pivot Y 302",
+        "Duration ms 117"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_kick-02.png"
+    },
+    {
+      "clip": "special",
+      "frame": "special_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 92",
+        "Pivot Y 302",
+        "Duration ms 80"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "special-00.png"
+    },
+    {
+      "clip": "special",
+      "frame": "special_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 121",
+        "Pivot Y 302",
+        "Duration ms 80"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "special-01.png"
+    },
+    {
+      "clip": "special",
+      "frame": "special_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 94",
+        "Pivot Y 303",
+        "Duration ms 107"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "special-02.png"
+    },
+    {
+      "clip": "spawn",
+      "frame": "spawn_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 117",
+        "Pivot Y 290",
+        "Duration ms 500"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "spawn-00.png"
+    },
+    {
+      "clip": "spawn",
+      "frame": "spawn_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 102",
+        "Pivot Y 290",
+        "Duration ms 700"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "spawn-01.png"
+    },
+    {
+      "clip": "spawn",
+      "frame": "spawn_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 95",
+        "Pivot Y 282",
+        "Duration ms 1500"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "spawn-02.png"
+    },
+    {
+      "clip": "victory",
+      "frame": "victory_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 123",
+        "Pivot Y 289",
+        "Duration ms 160"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "victory-00.png"
+    },
+    {
+      "clip": "victory",
+      "frame": "victory_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 117",
+        "Pivot Y 291",
+        "Duration ms 200"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "victory-01.png"
+    },
+    {
+      "clip": "victory",
+      "frame": "victory_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 95",
+        "Pivot Y 290",
+        "Duration ms 500"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "victory-02.png"
+    },
+    {
+      "clip": "defeat",
+      "frame": "defeat_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 95",
+        "Pivot Y 286",
+        "Duration ms 160"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "defeat-00.png"
+    },
+    {
+      "clip": "defeat",
+      "frame": "defeat_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 97",
+        "Pivot Y 272",
+        "Duration ms 220"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "defeat-01.png"
+    },
+    {
+      "clip": "defeat",
+      "frame": "defeat_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 83",
+        "Pivot Y 284",
+        "Duration ms 660"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "defeat-02.png"
+    }
+  ],
+  "candidate_path": "assets/candidates/go/go-fighter.sprite.json",
+  "ui_data_matches_all_60_frames": true,
+  "png_count": 60,
+  "clip_count": 20,
+  "hashes_before": {
+    "assets/candidates/go/go-fighter.sprite.json": "b865f26b9cd586c27f5ddecfdae47979ca14b55717c50494753432095409550f",
+    "assets/candidates/go/go-fighter-atlas.png": "535bda2c604dfaec68fcbf157451c7a55dfc5a69e6adbdf61ffcadfc14972060",
+    "assets/tuning/character-body-metrics.json": "7f77453d98681adf5b6b0d8020ca8167dcbb8245ea97363425c5fc9cf309c962"
+  },
+  "hashes_after": {
+    "assets/candidates/go/go-fighter.sprite.json": "b865f26b9cd586c27f5ddecfdae47979ca14b55717c50494753432095409550f",
+    "assets/candidates/go/go-fighter-atlas.png": "535bda2c604dfaec68fcbf157451c7a55dfc5a69e6adbdf61ffcadfc14972060",
+    "assets/tuning/character-body-metrics.json": "7f77453d98681adf5b6b0d8020ca8167dcbb8245ea97363425c5fc9cf309c962"
+  },
+  "files_unchanged": true,
+  "review_scope": {
+    "native_file_chooser": true,
+    "native_clip_and_next_frame_buttons": true,
+    "all_frames_inspected": true,
+    "zoom": 1.0,
+    "continuous_playback": false,
+    "left_facing": false,
+    "gameplay_collision_in_studio": false,
+    "saved_tuning": false
+  }
+}

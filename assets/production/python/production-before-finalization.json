@@ -1,0 +1,1185 @@
+{
+  "schema": "borrow-fighters.production.v1",
+  "character": "python",
+  "scale": 1.0,
+  "provenance": {
+    "status": "candidate",
+    "generator": "built-in imagegen",
+    "identity_reference": "reference/master-existing.png",
+    "combat": "Visual-only; baseline combat_manifest retained."
+  },
+  "actions": {
+    "idle": {
+      "sheet": "idle/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 221,
+            "h": 332
+          },
+          "pivot": {
+            "x": 120,
+            "y": 302
+          },
+          "duration_ms": 180,
+          "phase": "idle"
+        },
+        {
+          "name": "idle_01",
+          "source_rect": {
+            "x": 221,
+            "y": 0,
+            "w": 221,
+            "h": 332
+          },
+          "pivot": {
+            "x": 121,
+            "y": 302
+          },
+          "duration_ms": 180,
+          "phase": "idle"
+        },
+        {
+          "name": "idle_02",
+          "source_rect": {
+            "x": 442,
+            "y": 0,
+            "w": 221,
+            "h": 332
+          },
+          "pivot": {
+            "x": 121,
+            "y": 302
+          },
+          "duration_ms": 180,
+          "phase": "idle"
+        },
+        {
+          "name": "idle_03",
+          "source_rect": {
+            "x": 663,
+            "y": 0,
+            "w": 221,
+            "h": 332
+          },
+          "pivot": {
+            "x": 121,
+            "y": 302
+          },
+          "duration_ms": 180,
+          "phase": "idle"
+        }
+      ],
+      "provenance": {
+        "source_action": "idle/action.json",
+        "source_sheet": "idle/keyed.png",
+        "scale_to_runtime": 0.432258,
+        "review": "Four subtle breathing keys, stable feet and face; permanent original reference retained. Alpha inspected. Slender adult silhouette intentionally preserves original proportions; width below the generic humanoid idle guide is documented for review."
+      }
+    },
+    "walk": {
+      "sheet": "walk/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 228,
+            "h": 342
+          },
+          "pivot": {
+            "x": 140,
+            "y": 292
+          },
+          "duration_ms": 100,
+          "phase": "walk"
+        },
+        {
+          "name": "walk_01",
+          "source_rect": {
+            "x": 228,
+            "y": 0,
+            "w": 228,
+            "h": 342
+          },
+          "pivot": {
+            "x": 125,
+            "y": 295
+          },
+          "duration_ms": 100,
+          "phase": "walk"
+        },
+        {
+          "name": "walk_02",
+          "source_rect": {
+            "x": 456,
+            "y": 0,
+            "w": 228,
+            "h": 342
+          },
+          "pivot": {
+            "x": 140,
+            "y": 292
+          },
+          "duration_ms": 100,
+          "phase": "walk"
+        },
+        {
+          "name": "walk_03",
+          "source_rect": {
+            "x": 684,
+            "y": 0,
+            "w": 228,
+            "h": 342
+          },
+          "pivot": {
+            "x": 124,
+            "y": 297
+          },
+          "duration_ms": 100,
+          "phase": "walk"
+        }
+      ],
+      "provenance": {
+        "source_action": "walk/action.json",
+        "source_sheet": "walk/keyed.png",
+        "scale_to_runtime": 0.445183,
+        "review": "Selected v3: all face right, contact/pass/contact/opposite pass. v1 repeated extended stride and v2 included a left-facing pose, preserved as rejected sources. Leg alternation and heel support require review in motion; four source drawings with functional repeated contact silhouette."
+      }
+    },
+    "jump": {
+      "sheet": "jump/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "jump_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 236,
+            "h": 355
+          },
+          "pivot": {
+            "x": 132,
+            "y": 318
+          },
+          "duration_ms": 60,
+          "phase": "takeoff"
+        },
+        {
+          "name": "jump_01",
+          "source_rect": {
+            "x": 237,
+            "y": 0,
+            "w": 236,
+            "h": 355
+          },
+          "pivot": {
+            "x": 119,
+            "y": 302
+          },
+          "duration_ms": 340,
+          "phase": "rise"
+        },
+        {
+          "name": "jump_02",
+          "source_rect": {
+            "x": 474,
+            "y": 0,
+            "w": 237,
+            "h": 355
+          },
+          "pivot": {
+            "x": 113,
+            "y": 318
+          },
+          "duration_ms": 400,
+          "phase": "fall"
+        }
+      ],
+      "provenance": {
+        "source_action": "jump/action.json",
+        "source_sheet": "jump/keyed.png",
+        "scale_to_runtime": 0.4,
+        "review": "Three airborne keys. Pivots calibrated to keep head/waist of rising and falling poses aligned despite source drawing displacement; the World supplies the flight path. No grounded landing pose, whole accessories preserved."
+      }
+    },
+    "crouch": {
+      "sheet": "crouch/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "crouch_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 273,
+            "h": 273
+          },
+          "pivot": {
+            "x": 142,
+            "y": 227
+          },
+          "duration_ms": 100,
+          "phase": "entry"
+        },
+        {
+          "name": "crouch_01",
+          "source_rect": {
+            "x": 273,
+            "y": 0,
+            "w": 273,
+            "h": 273
+          },
+          "pivot": {
+            "x": 116,
+            "y": 234
+          },
+          "duration_ms": 220,
+          "phase": "hold"
+        }
+      ],
+      "provenance": {
+        "source_action": "crouch/action.json",
+        "source_sheet": "crouch/keyed.png",
+        "scale_to_runtime": 0.308046,
+        "review": "Two selected low-posture keys; normalization matches the generated head/hand size to idle instead of fitting each crouch to standing height. Shoe/knee/palm support explicitly reviewed. White blouse and hair retain clean contour."
+      }
+    },
+    "block": {
+      "sheet": "block/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "block_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 335,
+            "h": 335
+          },
+          "pivot": {
+            "x": 213,
+            "y": 298
+          },
+          "duration_ms": 100,
+          "phase": "guard"
+        },
+        {
+          "name": "block_01",
+          "source_rect": {
+            "x": 335,
+            "y": 0,
+            "w": 335,
+            "h": 335
+          },
+          "pivot": {
+            "x": 130,
+            "y": 300
+          },
+          "duration_ms": 220,
+          "phase": "brace"
+        }
+      ],
+      "provenance": {
+        "source_action": "block/action.json",
+        "source_sheet": "block/keyed.png",
+        "scale_to_runtime": 0.377465,
+        "review": "Immediate crossed-forearm guard and braced impact, followed by held guard. Two distinct body responses, stable support on both feet. Head and clothing sizes normalized uniformly from upright reference."
+      }
+    },
+    "crouch_block": {
+      "sheet": "crouch_block/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "crouch_block_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 352,
+            "h": 264
+          },
+          "pivot": {
+            "x": 210,
+            "y": 222
+          },
+          "duration_ms": 100,
+          "phase": "guard"
+        },
+        {
+          "name": "crouch_block_01",
+          "source_rect": {
+            "x": 352,
+            "y": 0,
+            "w": 352,
+            "h": 264
+          },
+          "pivot": {
+            "x": 115,
+            "y": 222
+          },
+          "duration_ms": 220,
+          "phase": "brace"
+        }
+      ],
+      "provenance": {
+        "source_action": "crouch_block/action.json",
+        "source_sheet": "crouch_block/keyed.png",
+        "scale_to_runtime": 0.34359,
+        "review": "Two tight low-guard keys, distinct from standing block. Knees and shoes support the same floor, cloth/snake continuous. Normalization based on head/hand size, not cropped posture height."
+      }
+    },
+    "hit": {
+      "sheet": "hit/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hit_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 293,
+            "h": 330
+          },
+          "pivot": {
+            "x": 181,
+            "y": 300
+          },
+          "duration_ms": 90,
+          "phase": "impact"
+        },
+        {
+          "name": "hit_01",
+          "source_rect": {
+            "x": 295,
+            "y": 0,
+            "w": 295,
+            "h": 330
+          },
+          "pivot": {
+            "x": 142,
+            "y": 302
+          },
+          "duration_ms": 100,
+          "phase": "brace"
+        },
+        {
+          "name": "hit_02",
+          "source_rect": {
+            "x": 590,
+            "y": 0,
+            "w": 294,
+            "h": 330
+          },
+          "pivot": {
+            "x": 116,
+            "y": 302
+          },
+          "duration_ms": 130,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "hit/action.json",
+        "source_sheet": "hit/keyed.png",
+        "scale_to_runtime": 0.430177,
+        "review": "Immediate recoil, forward brace and recovery to ready stance. Supports and full accessories checked, no embedded victim or hit effect."
+      }
+    },
+    "punch_heavy": {
+      "sheet": "punch_heavy/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "punch_heavy_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 303,
+            "h": 341
+          },
+          "pivot": {
+            "x": 131,
+            "y": 310
+          },
+          "duration_ms": 166,
+          "phase": "startup"
+        },
+        {
+          "name": "punch_heavy_01",
+          "source_rect": {
+            "x": 304,
+            "y": 0,
+            "w": 304,
+            "h": 341
+          },
+          "pivot": {
+            "x": 117,
+            "y": 310
+          },
+          "duration_ms": 150,
+          "phase": "active"
+        },
+        {
+          "name": "punch_heavy_02",
+          "source_rect": {
+            "x": 608,
+            "y": 0,
+            "w": 304,
+            "h": 341
+          },
+          "pivot": {
+            "x": 131,
+            "y": 310
+          },
+          "duration_ms": 200,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "punch_heavy/action.json",
+        "source_sheet": "punch_heavy/keyed.png",
+        "scale_to_runtime": 0.444444,
+        "review": "Low cross with pronounced forward lean; active fist around1273,425 at feet-anchor946,698 projects to(+145,-121), inside baseline heavy box. Uniform scale from recovery upright body. Review in Lab pending."
+      }
+    },
+    "kick": {
+      "sheet": "kick/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "kick_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 295,
+            "h": 333
+          },
+          "pivot": {
+            "x": 116,
+            "y": 301
+          },
+          "duration_ms": 133,
+          "phase": "startup"
+        },
+        {
+          "name": "kick_01",
+          "source_rect": {
+            "x": 296,
+            "y": 0,
+            "w": 296,
+            "h": 333
+          },
+          "pivot": {
+            "x": 88,
+            "y": 300
+          },
+          "duration_ms": 117,
+          "phase": "active"
+        },
+        {
+          "name": "kick_02",
+          "source_rect": {
+            "x": 592,
+            "y": 0,
+            "w": 296,
+            "h": 333
+          },
+          "pivot": {
+            "x": 126,
+            "y": 303
+          },
+          "duration_ms": 166,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "kick/action.json",
+        "source_sheet": "kick/keyed.png",
+        "scale_to_runtime": 0.432956,
+        "review": "Low extended leg; ankle/upper shoe crosses the existing shin-height box, with toe extending slightly below it. Support shoe fixed to floor and recovery places both feet down. Uniform action scale, no collision changes."
+      }
+    },
+    "punch_light": {
+      "sheet": "punch_light/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "punch_light_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 295,
+            "h": 332
+          },
+          "pivot": {
+            "x": 143,
+            "y": 302
+          },
+          "duration_ms": 66,
+          "phase": "startup"
+        },
+        {
+          "name": "punch_light_01",
+          "source_rect": {
+            "x": 316,
+            "y": 0,
+            "w": 316,
+            "h": 332
+          },
+          "pivot": {
+            "x": 150,
+            "y": 302
+          },
+          "duration_ms": 100,
+          "phase": "active"
+        },
+        {
+          "name": "punch_light_02",
+          "source_rect": {
+            "x": 632,
+            "y": 0,
+            "w": 275,
+            "h": 332
+          },
+          "pivot": {
+            "x": 109,
+            "y": 302
+          },
+          "duration_ms": 117,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "punch_light/action.json",
+        "source_sheet": "punch_light/keyed.png",
+        "scale_to_runtime": 0.432258,
+        "review": [
+          "Native Lab showed v4 fist mostly above the existing box. v5 lowers only active arm/hand into the box; source support feet preserved. Active knuckles now approximately(+134,-131) world, most of hand inside the far end of unchanged jab box. Front-support pivot accounts for lunge without increasing physical reach. Source body leans forward/down intentionally; startup/recovery unchanged."
+        ]
+      }
+    },
+    "sweep": {
+      "sheet": "sweep/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sweep_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 294,
+            "h": 331
+          },
+          "pivot": {
+            "x": 142,
+            "y": 292
+          },
+          "duration_ms": 150,
+          "phase": "startup"
+        },
+        {
+          "name": "sweep_01",
+          "source_rect": {
+            "x": 319,
+            "y": 0,
+            "w": 319,
+            "h": 331
+          },
+          "pivot": {
+            "x": 116,
+            "y": 289
+          },
+          "duration_ms": 133,
+          "phase": "active"
+        },
+        {
+          "name": "sweep_02",
+          "source_rect": {
+            "x": 638,
+            "y": 0,
+            "w": 270,
+            "h": 331
+          },
+          "pivot": {
+            "x": 116,
+            "y": 300
+          },
+          "duration_ms": 200,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "sweep/action.json",
+        "source_sheet": "sweep/keyed.png",
+        "scale_to_runtime": 0.431562,
+        "review": "Rising sweep preserves the existing elevated low-guard-rule box. Active ankle/lower leg crosses the box; shoe extends above it, a visual caveat also present in Rust. Three distinct crouch/strike/recovery keys. No physical crouch or balance changes."
+      }
+    },
+    "overhead": {
+      "sheet": "overhead/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "overhead_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 298,
+            "h": 335
+          },
+          "pivot": {
+            "x": 133,
+            "y": 320
+          },
+          "duration_ms": 183,
+          "phase": "startup"
+        },
+        {
+          "name": "overhead_01",
+          "source_rect": {
+            "x": 298,
+            "y": 0,
+            "w": 298,
+            "h": 335
+          },
+          "pivot": {
+            "x": 124,
+            "y": 320
+          },
+          "duration_ms": 117,
+          "phase": "active"
+        },
+        {
+          "name": "overhead_02",
+          "source_rect": {
+            "x": 596,
+            "y": 0,
+            "w": 298,
+            "h": 335
+          },
+          "pivot": {
+            "x": 154,
+            "y": 321
+          },
+          "duration_ms": 216,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "overhead/action.json",
+        "source_sheet": "overhead/keyed.png",
+        "scale_to_runtime": 0.436482,
+        "review": [
+          "Active arm corrected from knee level to forward waist-height stopping point. Knuckles around (+127,-145) world relative to explicit support pivot, within unchanged overhead contact box. First overhead wind-up then low descending hammerfist and recovery. Body hinge deliberate; no collision or timing change."
+        ]
+      }
+    },
+    "air_punch": {
+      "sheet": "air_punch/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "air_punch_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 295,
+            "h": 346
+          },
+          "pivot": {
+            "x": 158,
+            "y": 303
+          },
+          "duration_ms": 83,
+          "phase": "startup"
+        },
+        {
+          "name": "air_punch_01",
+          "source_rect": {
+            "x": 295,
+            "y": 0,
+            "w": 295,
+            "h": 346
+          },
+          "pivot": {
+            "x": 129,
+            "y": 336
+          },
+          "duration_ms": 150,
+          "phase": "active"
+        },
+        {
+          "name": "air_punch_02",
+          "source_rect": {
+            "x": 590,
+            "y": 0,
+            "w": 295,
+            "h": 346
+          },
+          "pivot": {
+            "x": 82,
+            "y": 303
+          },
+          "duration_ms": 133,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "air_punch/action.json",
+        "source_sheet": "air_punch/keyed.png",
+        "scale_to_runtime": 0.432258,
+        "review": [
+          "Virtual pivots align waist near -172 world across the airborne phases; active source torso/waist was drawn 77 pixels lower, so it is corrected by metadata. Head lowers intentionally as torso hinges into dive punch. Active fist near (+97,-98) world, inside unchanged aerial punch box. No landing pose or baked jump trajectory."
+        ]
+      }
+    },
+    "air_kick": {
+      "sheet": "air_kick/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "air_kick_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 295,
+            "h": 332
+          },
+          "pivot": {
+            "x": 145,
+            "y": 303
+          },
+          "duration_ms": 116,
+          "phase": "startup"
+        },
+        {
+          "name": "air_kick_01",
+          "source_rect": {
+            "x": 295,
+            "y": 0,
+            "w": 295,
+            "h": 332
+          },
+          "pivot": {
+            "x": 116,
+            "y": 311
+          },
+          "duration_ms": 167,
+          "phase": "active"
+        },
+        {
+          "name": "air_kick_02",
+          "source_rect": {
+            "x": 590,
+            "y": 0,
+            "w": 295,
+            "h": 332
+          },
+          "pivot": {
+            "x": 138,
+            "y": 303
+          },
+          "duration_ms": 150,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "air_kick/action.json",
+        "source_sheet": "air_kick/keyed.png",
+        "scale_to_runtime": 0.432258,
+        "review": [
+          "Virtual waist aligned across phases; active source waist 20 pixels lower compensated by pivot. Extended heel around (+130,-69) world intersects unchanged aerial kick box. Recovery returns to knee chamber; startup/recovery silhouettes similar by design, distinct source drawings preserved. Entire shoe retained."
+        ]
+      }
+    },
+    "anti_air": {
+      "sheet": "anti_air/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "anti_air_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 251,
+            "h": 377
+          },
+          "pivot": {
+            "x": 128,
+            "y": 350
+          },
+          "duration_ms": 100,
+          "phase": "startup"
+        },
+        {
+          "name": "anti_air_01",
+          "source_rect": {
+            "x": 252,
+            "y": 0,
+            "w": 251,
+            "h": 377
+          },
+          "pivot": {
+            "x": 97,
+            "y": 349
+          },
+          "duration_ms": 116,
+          "phase": "active"
+        },
+        {
+          "name": "anti_air_02",
+          "source_rect": {
+            "x": 504,
+            "y": 0,
+            "w": 252,
+            "h": 377
+          },
+          "pivot": {
+            "x": 98,
+            "y": 352
+          },
+          "duration_ms": 200,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "anti_air/action.json",
+        "source_sheet": "anti_air/keyed.png",
+        "scale_to_runtime": 0.425397,
+        "review": [
+          "Raised uppercut hand kept inside source margins. Active knuckles around (+61,-315) world and forearm overlap unchanged anti-air box. Support pivot slightly behind pelvis for rising lean; entire heels remain on shared floor. Startup bends knees; recovery absorbs."
+        ]
+      }
+    },
+    "throw": {
+      "sheet": "throw/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "throw_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 295,
+            "h": 332
+          },
+          "pivot": {
+            "x": 143,
+            "y": 300
+          },
+          "duration_ms": 116,
+          "phase": "startup"
+        },
+        {
+          "name": "throw_01",
+          "source_rect": {
+            "x": 295,
+            "y": 0,
+            "w": 295,
+            "h": 332
+          },
+          "pivot": {
+            "x": 129,
+            "y": 300
+          },
+          "duration_ms": 50,
+          "phase": "active"
+        },
+        {
+          "name": "throw_02",
+          "source_rect": {
+            "x": 590,
+            "y": 0,
+            "w": 295,
+            "h": 332
+          },
+          "pivot": {
+            "x": 132,
+            "y": 301
+          },
+          "duration_ms": 234,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "throw/action.json",
+        "source_sheet": "throw/keyed.png",
+        "scale_to_runtime": 0.432258,
+        "review": [
+          "Active low clinch corrected from chest-high long reach to short waist/hip level. Palms around (+82 to +100,-120 to -105) world, inside unchanged throw box. No victim baked into own atlas; recovery pulls arms to waist."
+        ]
+      }
+    },
+    "special": {
+      "sheet": "special/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "special_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 375,
+            "h": 329
+          },
+          "pivot": {
+            "x": 86,
+            "y": 298
+          },
+          "duration_ms": 100,
+          "phase": "emit"
+        },
+        {
+          "name": "special_01",
+          "source_rect": {
+            "x": 375,
+            "y": 0,
+            "w": 283,
+            "h": 329
+          },
+          "pivot": {
+            "x": 74,
+            "y": 299
+          },
+          "duration_ms": 100,
+          "phase": "recoil"
+        },
+        {
+          "name": "special_02",
+          "source_rect": {
+            "x": 750,
+            "y": 0,
+            "w": 219,
+            "h": 329
+          },
+          "pivot": {
+            "x": 104,
+            "y": 296
+          },
+          "duration_ms": 100,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "special/action.json",
+        "source_sheet": "special/keyed.png",
+        "scale_to_runtime": 0.42857142857142855,
+        "review": "v6 selected after reach/height revisions. Emission is already present at frame0; the single waist snake extends forward while the original separate projectile remains untouched. Uniform body scale264/616. Existing origin(+205.333,-157.333) maps to source point approximately(679.11,328.89) from pivot(200,696), in the first open mouth region. Earlier variants were too long/high or short; all retained. Second pose retracts, third recovers."
+      }
+    },
+    "spawn": {
+      "sheet": "spawn/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "spawn_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 241,
+            "h": 362
+          },
+          "pivot": {
+            "x": 104,
+            "y": 314
+          },
+          "duration_ms": 600,
+          "phase": "carry_easel"
+        },
+        {
+          "name": "spawn_01",
+          "source_rect": {
+            "x": 241,
+            "y": 0,
+            "w": 241,
+            "h": 362
+          },
+          "pivot": {
+            "x": 62,
+            "y": 311
+          },
+          "duration_ms": 650,
+          "phase": "set_easel"
+        },
+        {
+          "name": "spawn_02",
+          "source_rect": {
+            "x": 482,
+            "y": 0,
+            "w": 241,
+            "h": 362
+          },
+          "pivot": {
+            "x": 57,
+            "y": 311
+          },
+          "duration_ms": 750,
+          "phase": "present_chart"
+        },
+        {
+          "name": "spawn_03",
+          "source_rect": {
+            "x": 723,
+            "y": 0,
+            "w": 241,
+            "h": 362
+          },
+          "pivot": {
+            "x": 49,
+            "y": 310
+          },
+          "duration_ms": 650,
+          "phase": "hold"
+        }
+      ],
+      "provenance": {
+        "source_action": "spawn/action.json",
+        "source_sheet": "spawn/keyed.png",
+        "scale_to_runtime": 0.4714285714285714,
+        "review": "Preserves existing easel/chart entrance gag using old source only for props. Current outfit and adult identity remain from fixed master/new idle. One uniform scale from approximately560px standing reference; source first pose is about6percent taller than the other three, retained as candidate variation."
+      }
+    },
+    "victory": {
+      "sheet": "victory/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "victory_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 289,
+            "h": 325
+          },
+          "pivot": {
+            "x": 178,
+            "y": 294
+          },
+          "duration_ms": 140,
+          "phase": "relax"
+        },
+        {
+          "name": "victory_01",
+          "source_rect": {
+            "x": 289,
+            "y": 0,
+            "w": 289,
+            "h": 325
+          },
+          "pivot": {
+            "x": 138,
+            "y": 294
+          },
+          "duration_ms": 220,
+          "phase": "celebrate"
+        },
+        {
+          "name": "victory_02",
+          "source_rect": {
+            "x": 578,
+            "y": 0,
+            "w": 289,
+            "h": 325
+          },
+          "pivot": {
+            "x": 101,
+            "y": 294
+          },
+          "duration_ms": 600,
+          "phase": "hold"
+        }
+      ],
+      "provenance": {
+        "source_action": "victory/action.json",
+        "source_sheet": "victory/keyed.png",
+        "scale_to_runtime": 0.4230769230769231,
+        "review": "v2 removes the extra snake head at the hanging tail while preserving all three victory gestures. Uniform scale from upright body; current full white blouse, black skirt and heels retained."
+      }
+    },
+    "defeat": {
+      "sheet": "defeat/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "defeat_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 273,
+            "h": 307
+          },
+          "pivot": {
+            "x": 140,
+            "y": 282
+          },
+          "duration_ms": 140,
+          "phase": "recoil"
+        },
+        {
+          "name": "defeat_01",
+          "source_rect": {
+            "x": 273,
+            "y": 0,
+            "w": 273,
+            "h": 307
+          },
+          "pivot": {
+            "x": 109,
+            "y": 282
+          },
+          "duration_ms": 220,
+          "phase": "kneel"
+        },
+        {
+          "name": "defeat_02",
+          "source_rect": {
+            "x": 546,
+            "y": 0,
+            "w": 273,
+            "h": 307
+          },
+          "pivot": {
+            "x": 86,
+            "y": 282
+          },
+          "duration_ms": 600,
+          "phase": "hold"
+        }
+      ],
+      "provenance": {
+        "source_action": "defeat/action.json",
+        "source_sheet": "defeat/keyed.png",
+        "scale_to_runtime": 0.4,
+        "review": "Standing loss, one-knee rest and sustained bowed one-knee hold. Same scale from standing pose; kneeling is naturally shorter. First generation produced no image due to output moderation; neutral sports-rest prompt v2 succeeded."
+      }
+    }
+  }
+}

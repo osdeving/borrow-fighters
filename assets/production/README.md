@@ -1,24 +1,38 @@
 # Produção de sprites por ação
 
-Arte raster candidata gerada com a ferramenta integrada `imagegen`, usando os
-personagens existentes como referência fixa. Os recortes em `reference/` são
-**reaproveitados**, não são nova arte. Os placeholders originais permanecem em
-`assets/placeholder/`.
+Arte raster gerada com a ferramenta integrada `imagegen`, com referência fixa por
+personagem. Rust, Duke/Java, Go, C, Python e C++ concluíram o refinamento e a verificação
+visual/funcional: **120 clips, 378 quadros selecionados e dez golpes por personagem**.
+Os [laudos e vídeos atuais](../candidates/README.md) delimitam as evidências e as
+ressalvas de acabamento. Os placeholders originais permanecem em `assets/placeholder/`.
+
+O **novo Go semirrealista foi concluído e verificado**, com 20 clips / 60 quadros.
+O [novo master](go/reference/master.png) e seu [contrato de identidade](go/reference/README.md)
+substituem a identidade rejeitada pelo usuário. A pasta `go-cartoon-archive/`
+preserva integralmente a produção anterior. O [laudo final](go/finalization-review.md)
+inclui a correção de anatomia do salto e sua recaptura no jogo e no Studio.
+
+Os recortes `reference/master-existing.png` dos outros cinco personagens são
+**reaproveitados** das referências originais, não são nova arte.
 
 Cada personagem usa:
 
-- `reference/master-existing.png`: referência permanente de identidade;
+- `reference/master-existing.png`: referência permanente de identidade; o novo Go usa `reference/master.png`;
 - `<ação>/source-vN.png` e `prompt*.txt`: geração original e prompt, inclusive
   variantes rejeitadas quando ajudam a explicar a escolha;
 - `<ação>/action.json`: seleção explícita dos desenhos, retângulos, pivôs e tempos;
-- `<ação>/keyed.png`: preparação do alpha, separada da fonte original;
+- `<ação>/keyed*.png`: preparação do alpha, separada da fonte original;
 - `review-plan.json`: escala uniforme por ação e decisão de revisão;
 - `<ação>/prepared.png`: folha da ação na resolução de runtime;
 - `production.json`: mapeamento explícito consumido pelo exportador.
 
 Os PNGs de trabalho são editáveis como raster, sem camadas de Aseprite inventadas.
 Uma ação pode precisar de nova geração; a ordem de poses nunca é inferida pela
-posição na folha. Cinco projéteis existentes são reaproveitados separadamente. Python recebeu um novo data stream, pois o PNG anterior continha um recorte da personagem caída; sua fonte e preparação ficam em `python/projectile/`. Origem, colisão e regras foram preservadas.
+posição na folha. Rust reaproveita a engrenagem após limpeza de alpha, enquanto C e
+C++ conservam os seus projéteis. Duke recebeu [novos grãos](duke/projectile/README.md)
+e Python recebeu um novo data stream, pois o PNG anterior continha um recorte da
+personagem caída; sua fonte e preparação ficam em `python/projectile/`. Origem,
+colisão e regras foram preservadas. Go reaproveita o canal cyan separado, validado na emissão do primeiro quadro e nas duas orientações.
 
 ## Alpha e escala
 
@@ -59,7 +73,7 @@ acrescentam uma pausa de 400 ms ao fim dos clips não loopáveis apenas para exa
 Essa pausa não faz parte dos dados do jogo. Os fundos e textos dos previews nunca
 entram no PNG runtime.
 
-O jogo carrega candidatos completos com `BORROW_FIGHTERS_SPRITE_CANDIDATES=1`.
+O jogo carrega os conjuntos revisados completos por padrão; `BORROW_FIGHTERS_SPRITE_CANDIDATES=1` continua sendo uma seleção explícita e `0` permite comparar os placeholders.
 Candidatos parciais podem ser inspecionados pelo Viewer/Studio; em partidas, o
 carregador exige os 20 nomes de clips implementados e mantém o placeholder se faltar algum.
 `combat_manifest` conserva o comportamento anterior mesmo quando o desenho muda.

@@ -2,7 +2,7 @@
   "schema": "borrow-fighters.sprite-provenance.v1",
   "character": "cpp",
   "production": "../../production/cpp/production.json",
-  "production_sha256": "f0784b6db6ad1bdc34adaa3a52bc74280922f3a0cea0d1bf1003016a3d838909",
+  "production_sha256": "d81f55325c9a3e67808deced543f0edaed5ffd6eb7bd353570a5e9be25500c16",
   "production_snapshot": {
     "schema": "borrow-fighters.production.v1",
     "character": "cpp",
@@ -83,12 +83,12 @@
             "source_rect": {
               "x": 0,
               "y": 0,
-              "w": 239,
-              "h": 317
+              "w": 202,
+              "h": 319
             },
             "pivot": {
-              "x": 132,
-              "y": 289
+              "x": 104,
+              "y": 297
             },
             "duration_ms": 100,
             "phase": "contact_left"
@@ -96,14 +96,14 @@
           {
             "name": "walk_1",
             "source_rect": {
-              "x": 239,
+              "x": 202,
               "y": 0,
-              "w": 183,
-              "h": 317
+              "w": 202,
+              "h": 319
             },
             "pivot": {
-              "x": 91,
-              "y": 289
+              "x": 100,
+              "y": 298
             },
             "duration_ms": 100,
             "phase": "passing_right"
@@ -111,14 +111,14 @@
           {
             "name": "walk_2",
             "source_rect": {
-              "x": 478,
+              "x": 404,
               "y": 0,
-              "w": 211,
-              "h": 303
+              "w": 202,
+              "h": 319
             },
             "pivot": {
-              "x": 106,
-              "y": 285
+              "x": 102,
+              "y": 297
             },
             "duration_ms": 100,
             "phase": "contact_right"
@@ -126,14 +126,14 @@
           {
             "name": "walk_3",
             "source_rect": {
-              "x": 717,
+              "x": 606,
               "y": 0,
-              "w": 211,
-              "h": 317
+              "w": 202,
+              "h": 319
             },
             "pivot": {
-              "x": 84,
-              "y": 289
+              "x": 105,
+              "y": 299
             },
             "duration_ms": 100,
             "phase": "passing_left"
@@ -141,9 +141,9 @@
         ],
         "provenance": {
           "source_action": "walk/action.json",
-          "source_sheet": "walk/assembled-selected-v4.png",
-          "scale_to_runtime": 0.4123076923076923,
-          "review": "Selected assembly v4 preserves v2 contact0, passing1 and passing3, replacing repeated contact2 with independently generated v3 opposite/plain leading leg contact. V3 complete sheet degraded passing poses, so only corrected generated key2 was selected. Exact source components and rectangles recorded; crop/pack preserves pixels without constructing poses procedurally. Footwear overlap now alternates, though arm counter-swing and gold-stripe leg identity remain subtle. One uniform268/650 anatomical scale, frame2 grounded anchor691 compensates source placement only. Approved only for candidate review export, not final art release."
+          "source_sheet": "walk/assembled-selected-v8.png",
+          "scale_to_runtime": 0.4200626959247649,
+          "review": "Selected v8 packs whole generated v6 keys0/1/2 and v7 key3. The near gold-striped leg leads at contact0; the far plain leg leads at contact2. Passing1 plants the far leg, passing3 plants the near leg with the far boot lifted. Near-arm placement follows the opposite contacts. V5/v6 fourth poses and the regressed v7 contact2 were rejected. Uniform268/638 anatomical scale and source ground pivots708/710/707/712 compensate source placement only. Original100ms per key,400ms loop preserved. Crops exclude the isolated lower-left matte pixel without retouching artwork. Candidate export; finalization evidence is recorded separately."
         }
       },
       "jump": {
@@ -331,11 +331,11 @@
               "x": 0,
               "y": 0,
               "w": 266,
-              "h": 299
+              "h": 292
             },
             "pivot": {
-              "x": 134,
-              "y": 276
+              "x": 128,
+              "y": 286
             },
             "duration_ms": 110,
             "phase": "low_guard"
@@ -346,11 +346,11 @@
               "x": 266,
               "y": 0,
               "w": 265,
-              "h": 299
+              "h": 292
             },
             "pivot": {
-              "x": 125,
-              "y": 276
+              "x": 120,
+              "y": 286
             },
             "duration_ms": 90,
             "phase": "absorb"
@@ -361,11 +361,11 @@
               "x": 532,
               "y": 0,
               "w": 266,
-              "h": 299
+              "h": 292
             },
             "pivot": {
-              "x": 119,
-              "y": 276
+              "x": 117,
+              "y": 286
             },
             "duration_ms": 140,
             "phase": "recover_low_guard"
@@ -373,9 +373,9 @@
         ],
         "provenance": {
           "source_action": "crouch_block/action.json",
-          "source_sheet": "crouch_block/keyed-v4.png",
+          "source_sheet": "crouch_block/keyed-v6.png",
           "scale_to_runtime": 0.3889695210449927,
-          "review": "Selected v4 after v1-v3 kept torso too upright. Deep forward hunker preserves head/limb scale, silhouette about92-95px within128px crouch height. Guard recoil is subtle; bag stays continuous. Approved only for candidate review export, not final art release."
+          "review": "Selected generated v6 changes the rear arm of crouch/source-v2 into a face/chest guard while retaining the crouch body depth. Runtime silhouette about114-118px now matches ordinary crouch113-119px instead of former92-95px guard. Uniform268/689 scale and110/90/140ms timing preserved. Pivots330,735 /309,736 /300,736 register generated support positions; no body rescaling, gameplay change or procedural posture construction. v5 rejected because it raised the torso too far. Crop excludes an isolated matte pixel below all body contours. Candidate export; finalization evidence is recorded separately."
         }
       },
       "hit": {
@@ -853,7 +853,7 @@
               "x": 0,
               "y": 0,
               "w": 233,
-              "h": 366
+              "h": 350
             },
             "pivot": {
               "x": 115,
@@ -895,9 +895,9 @@
         ],
         "provenance": {
           "source_action": "air_kick/action.json",
-          "source_sheet": "air_kick/keyed-v1.png",
+          "source_sheet": "air_kick/keyed-v3.png",
           "scale_to_runtime": 0.4123076923076923,
-          "review": "Source upright anatomical equivalent650px by head/torso scale; one uniform268/650 scale. Virtual pivots register belt at about-160world across the3 poses, with knees changing only limb posture. Active boot contact projects near(+161.2,-56.9), inside the forward/lower edge of the baseline air-kick box. The outermost gold sole extends slightly past that edge and remains an artistic review caveat; gameplay is unchanged. Approved only for candidate review export, not final art release."
+          "review": "Selected v3 redraws the active ankle/boot in dorsiflexion while preserving the downward leg, trunk, startup and recovery. Original uniform268/650 scale, belt-registered virtual pivots and116/167/150ms timing retained. Active sole center around(1205,579) maps to(+160.8,-72.2), within the existing box; lowest heel at648 maps about-43.7, within2px of its lower edge-45.3, reducing the former~15px extension. v2 rejected for raising the entire leg too high. No combat or whole-body translation change. First crop excludes isolated matte pixel below the artwork. Candidate export; finalization evidence is recorded separately."
         }
       },
       "throw": {
@@ -1199,7 +1199,7 @@
     },
     {
       "path": "../../production/cpp/walk/prepared.png",
-      "sha256": "52de8b0333d27943703492ed443000b9fd3e75374d214692e6e10183719e2ad3"
+      "sha256": "295e0b8d9ff4dc627c4208350d4a735636791e193be8d57828648f1240e7429e"
     },
     {
       "path": "../../production/cpp/jump/prepared.png",
@@ -1215,7 +1215,7 @@
     },
     {
       "path": "../../production/cpp/crouch_block/prepared.png",
-      "sha256": "b853977d4d3a5b56eaa814829e4d37bb41b6ce33dbe1915fe974b0173461be20"
+      "sha256": "39d98b075a4fb25ca96df4dba73c680fd448f9913d29e8bc81197afb4bdaca39"
     },
     {
       "path": "../../production/cpp/hit/prepared.png",
@@ -1251,7 +1251,7 @@
     },
     {
       "path": "../../production/cpp/air_kick/prepared.png",
-      "sha256": "e44b1891c8ccd61acfba6f125d572ea85ca92b64b366d332a3fa83aff6beb316"
+      "sha256": "18d418405d382374d4d378c237ddea76cd1355a41380c45d9a69a6fe4944acd4"
     },
     {
       "path": "../../production/cpp/throw/prepared.png",
@@ -1321,8 +1321,8 @@
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 239,
-        "h": 317
+        "w": 202,
+        "h": 319
       },
       "exported_frame": "../../production/cpp/walk/frames/walk_0.png",
       "phase": "contact_left"
@@ -1332,10 +1332,10 @@
       "action": "walk",
       "sheet": "../../production/cpp/walk/prepared.png",
       "source_rect": {
-        "x": 239,
+        "x": 202,
         "y": 0,
-        "w": 183,
-        "h": 317
+        "w": 202,
+        "h": 319
       },
       "exported_frame": "../../production/cpp/walk/frames/walk_1.png",
       "phase": "passing_right"
@@ -1345,10 +1345,10 @@
       "action": "walk",
       "sheet": "../../production/cpp/walk/prepared.png",
       "source_rect": {
-        "x": 478,
+        "x": 404,
         "y": 0,
-        "w": 211,
-        "h": 303
+        "w": 202,
+        "h": 319
       },
       "exported_frame": "../../production/cpp/walk/frames/walk_2.png",
       "phase": "contact_right"
@@ -1358,10 +1358,10 @@
       "action": "walk",
       "sheet": "../../production/cpp/walk/prepared.png",
       "source_rect": {
-        "x": 717,
+        "x": 606,
         "y": 0,
-        "w": 211,
-        "h": 317
+        "w": 202,
+        "h": 319
       },
       "exported_frame": "../../production/cpp/walk/frames/walk_3.png",
       "phase": "passing_left"
@@ -1491,7 +1491,7 @@
         "x": 0,
         "y": 0,
         "w": 266,
-        "h": 299
+        "h": 292
       },
       "exported_frame": "../../production/cpp/crouch_block/frames/crouch_block_0.png",
       "phase": "low_guard"
@@ -1504,7 +1504,7 @@
         "x": 266,
         "y": 0,
         "w": 265,
-        "h": 299
+        "h": 292
       },
       "exported_frame": "../../production/cpp/crouch_block/frames/crouch_block_1.png",
       "phase": "absorb"
@@ -1517,7 +1517,7 @@
         "x": 532,
         "y": 0,
         "w": 266,
-        "h": 299
+        "h": 292
       },
       "exported_frame": "../../production/cpp/crouch_block/frames/crouch_block_2.png",
       "phase": "recover_low_guard"
@@ -1842,7 +1842,7 @@
         "x": 0,
         "y": 0,
         "w": 233,
-        "h": 366
+        "h": 350
       },
       "exported_frame": "../../production/cpp/air_kick/frames/air_kick_00.png",
       "phase": "startup"
@@ -2069,6 +2069,6 @@
       "phase": "hold_defeat"
     }
   ],
-  "atlas_sha256": "39abe963271a3b70b1e9da4482e4b981877ae0af1ec3c2cf8bd78b2381bad527",
-  "manifest_sha256": "d7e731fa6307607760d7b9a455d2c451e2089b5b524004bcbe42617ea0be0255"
+  "atlas_sha256": "8e85e765b6257d590fe9de32aae8887b19e3964db647ca629de5a73811d34bb3",
+  "manifest_sha256": "129b5e9353ca441cbeff1fb996429f27d795402b7a3410fe66fec6254dd7e09b"
 }

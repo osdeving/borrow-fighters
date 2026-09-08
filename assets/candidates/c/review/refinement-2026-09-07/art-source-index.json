@@ -1,0 +1,29 @@
+[
+  {
+    "action": "walk",
+    "frames": 4,
+    "duration_ms": 400,
+    "prior_duration_ms": 400,
+    "source": "walk/source-v3.png",
+    "sheet": "walk/keyed-v3.png",
+    "source_sha256": "64887bbe252372aeb3f6b2f7cf19da8a70436c6fd9739b3309bb0dd9b728131c"
+  },
+  {
+    "action": "sweep",
+    "frames": 4,
+    "duration_ms": 600,
+    "prior_duration_ms": 600,
+    "source": "sweep/source-v3.png",
+    "sheet": "sweep/keyed-v3.png",
+    "source_sha256": "473c573a8ae221f5953667550f6a861dbed41e5838975bd02a4dac8c288a0076"
+  },
+  {
+    "action": "punch_heavy",
+    "frames": 4,
+    "duration_ms": 633,
+    "prior_duration_ms": 633,
+    "source": "punch_heavy/source-v3.png",
+    "sheet": "punch_heavy/keyed-v3.png",
+    "source_sha256": "d63f114d1d883a11c8cca8c0292d012b6d20ce56395b8db450de61c0ca42148d"
+  }
+]

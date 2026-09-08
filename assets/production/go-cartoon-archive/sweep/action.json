@@ -1,0 +1,88 @@
+{
+  "action": "sweep",
+  "source": "sweep/source-v1.png",
+  "sheet": "sweep/keyed-v5.png",
+  "loop": false,
+  "source_body_height_reference_px": 510,
+  "normalization_note": "Raised lateral sweep follows the existing high SweepKick box, which is not floor level. Foot spans the upper part of that box; inspect toes in Lab.",
+  "frames": [
+    {
+      "name": "sweep_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 305,
+        "y": 749
+      },
+      "duration_ms": 166,
+      "phase": "startup"
+    },
+    {
+      "name": "sweep_01",
+      "source_rect": {
+        "x": 591,
+        "y": 0,
+        "w": 592,
+        "h": 887
+      },
+      "pivot": {
+        "x": 242,
+        "y": 749
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "sweep_02",
+      "source_rect": {
+        "x": 1183,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 277,
+        "y": 754
+      },
+      "duration_ms": 217,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Built-in image_gen, original narrow Go master and generated idle continuity. Flat magenta extracted without Rust contour mode; isolated matte corner pixels removed where present. Candidate visual only; baseline combat remains authoritative.",
+  "timing_reference": {
+    "move_id": "SweepKick",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 32,
+      "active_start": 10,
+      "active_end": 18
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 166,
+      "recovery_starts": 316,
+      "clip_ends": 533
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -136.0,
+      "w": 149.33333333333331,
+      "h": 40.0
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -199.99999999999997,
+      "y": -136.0,
+      "w": 149.33333333333331,
+      "h": 40.0
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 125.33333333333331,
+      "y": -116.0
+    }
+  }
+}

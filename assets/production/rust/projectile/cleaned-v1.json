@@ -1,0 +1,37 @@
+{
+  "operation": "local alpha cleanup of reused Rust projectile; no image generation",
+  "source": "source-v1.png",
+  "source_sha256": "20c2c813c02dec034e445d75411db204eab4717b5293d0115a671a2e81144fa6",
+  "output": "cleaned-v1.png",
+  "source_size": [
+    229,
+    108
+  ],
+  "output_size": [
+    237,
+    116
+  ],
+  "symmetric_padding_px": 4,
+  "neutral_threshold_min_rgb": 100,
+  "neutral_threshold_rgb_range_max": 46,
+  "removed_nontransparent_pixels": 3768,
+  "retained_nontransparent_pixels": 13177,
+  "retained_rgb_unchanged": true,
+  "alpha_bounds": [
+    5,
+    4,
+    233,
+    112
+  ],
+  "runtime_scale": 0.6,
+  "source_canvas_runtime_px": [
+    137.4,
+    64.8
+  ],
+  "output_canvas_runtime_px": [
+    142.2,
+    69.6
+  ],
+  "visual_transform": "For every retained source point, (p+padding)-(size+2*padding)/2 = p-size/2. Center and geometry are unchanged at renderer scale0.6.",
+  "combat": "No ProjectileSpec, origin, collision or fighter metadata change."
+}

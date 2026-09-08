@@ -1,24 +1,24 @@
 {
   "action": "walk",
-  "source": "walk/source-v2.png",
-  "sheet": "walk/assembled-selected-v4.png",
+  "source": "walk/source-v6.png",
+  "sheet": "walk/assembled-selected-v8.png",
   "loop": true,
-  "reviewed": false,
-  "status": "candidate: source, alpha and two-facing previews inspected; corrected Combat Lab captured, artistic limitations recorded in review.md",
-  "source_body_height_reference_px": 650,
-  "suggested_scale_to_runtime": 0.4123076923076923,
+  "reviewed": true,
+  "status": "finalization refinement visually approved by primary agent; runtime evidence complete",
+  "source_body_height_reference_px": 638,
+  "suggested_scale_to_runtime": 0.4200626959247649,
   "frames": [
     {
       "name": "walk_0",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 580,
-        "h": 768
+        "w": 480,
+        "h": 760
       },
       "pivot": {
-        "x": 320,
-        "y": 700
+        "x": 247,
+        "y": 708
       },
       "duration_ms": 100,
       "phase": "contact_left"
@@ -26,14 +26,14 @@
     {
       "name": "walk_1",
       "source_rect": {
-        "x": 600,
+        "x": 480,
         "y": 0,
-        "w": 444,
-        "h": 768
+        "w": 480,
+        "h": 760
       },
       "pivot": {
-        "x": 220,
-        "y": 700
+        "x": 238,
+        "y": 710
       },
       "duration_ms": 100,
       "phase": "passing_right"
@@ -41,14 +41,14 @@
     {
       "name": "walk_2",
       "source_rect": {
-        "x": 1200,
+        "x": 960,
         "y": 0,
-        "w": 512,
-        "h": 736
+        "w": 480,
+        "h": 760
       },
       "pivot": {
-        "x": 256,
-        "y": 691
+        "x": 242,
+        "y": 707
       },
       "duration_ms": 100,
       "phase": "contact_right"
@@ -56,75 +56,88 @@
     {
       "name": "walk_3",
       "source_rect": {
-        "x": 1800,
+        "x": 1440,
         "y": 0,
-        "w": 512,
-        "h": 768
+        "w": 480,
+        "h": 760
       },
       "pivot": {
-        "x": 204,
-        "y": 700
+        "x": 250,
+        "y": 712
       },
       "duration_ms": 100,
       "phase": "passing_left"
     }
   ],
-  "review_notes": "Selected assembly v4 preserves v2 contact0, passing1 and passing3, replacing repeated contact2 with independently generated v3 opposite/plain leading leg contact. V3 complete sheet degraded passing poses, so only corrected generated key2 was selected. Exact source components and rectangles recorded; crop/pack preserves pixels without constructing poses procedurally. Footwear overlap now alternates, though arm counter-swing and gold-stripe leg identity remain subtle. One uniform268/650 anatomical scale, frame2 grounded anchor691 compensates source placement only.",
+  "review_notes": "Selected v8 packs whole generated v6 keys0/1/2 and v7 key3. The near gold-striped leg leads at contact0; the far plain leg leads at contact2. Passing1 plants the far leg, passing3 plants the near leg with the far boot lifted. Near-arm placement follows the opposite contacts. V5/v6 fourth poses and the regressed v7 contact2 were rejected. Uniform268/638 anatomical scale and source ground pivots708/710/707/712 compensate source placement only. Original100ms per key,400ms loop preserved. Crops exclude the isolated lower-left matte pixel without retouching artwork.",
   "source_components": [
     {
       "frame": "walk_0",
-      "generated_source": "walk/source-v2.png",
-      "alpha_source": "walk/keyed-v2.png",
+      "generated_source": "walk/source-v6.png",
+      "alpha_source": "walk/keyed-v6.png",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 580,
-        "h": 768
+        "w": 480,
+        "h": 760
       },
-      "operation": "Crop and pack unchanged generated pixels; no painted or procedural pose construction."
+      "operation": "Crop and pack the complete generated key unchanged; no body-part assembly, pose construction or per-key scaling."
     },
     {
       "frame": "walk_1",
-      "generated_source": "walk/source-v2.png",
-      "alpha_source": "walk/keyed-v2.png",
+      "generated_source": "walk/source-v6.png",
+      "alpha_source": "walk/keyed-v6.png",
       "source_rect": {
-        "x": 580,
+        "x": 480,
         "y": 0,
-        "w": 444,
-        "h": 768
+        "w": 480,
+        "h": 760
       },
-      "operation": "Crop and pack unchanged generated pixels; no painted or procedural pose construction."
+      "operation": "Crop and pack the complete generated key unchanged; no body-part assembly, pose construction or per-key scaling."
     },
     {
       "frame": "walk_2",
-      "generated_source": "walk/source-v3.png",
-      "alpha_source": "walk/sheet-v3.png",
+      "generated_source": "walk/source-v6.png",
+      "alpha_source": "walk/keyed-v6.png",
       "source_rect": {
-        "x": 1024,
+        "x": 960,
         "y": 0,
-        "w": 512,
-        "h": 736
+        "w": 480,
+        "h": 760
       },
-      "operation": "Crop and pack unchanged generated pixels; no painted or procedural pose construction."
+      "operation": "Crop and pack the complete generated key unchanged; no body-part assembly, pose construction or per-key scaling."
     },
     {
       "frame": "walk_3",
-      "generated_source": "walk/source-v2.png",
-      "alpha_source": "walk/keyed-v2.png",
+      "generated_source": "walk/source-v7.png",
+      "alpha_source": "walk/keyed-v7.png",
       "source_rect": {
-        "x": 1536,
+        "x": 1439,
         "y": 0,
-        "w": 512,
-        "h": 768
+        "w": 480,
+        "h": 760
       },
-      "operation": "Crop and pack unchanged generated pixels; no painted or procedural pose construction."
+      "operation": "Crop and pack the complete generated key unchanged; no body-part assembly, pose construction or per-key scaling."
     }
   ],
+  "provenance": {
+    "tool": "built-in image_gen",
+    "identity_reference": "reference/master-existing.png",
+    "continuity_reference": "idle/source-v1.png",
+    "prompts": [
+      "walk/prompt-v5.txt",
+      "walk/prompt-v6.txt",
+      "walk/prompt-v7.txt"
+    ],
+    "extraction": "remove_generated_magenta.py without --rust-contour",
+    "assembly": "walk/assemble-selected-v8.py"
+  },
   "runtime_review": {
-    "report": "../../candidates/cpp/review/runtime-lab/capture-report.json",
+    "world_summary": "../../candidates/cpp/review/refinement-2026-09-07/world/capture-summary.json",
+    "lab_summary": "../../candidates/cpp/review/refinement-2026-09-07/lab/capture-summary.json",
     "loaded_manifest_matches_candidate": true,
-    "clip_captured": false,
     "combat_uses_baseline_manifest": true,
-    "final_art_approved": false
+    "final_art_approved": true,
+    "approval_scope": "Primary agent approved these three refinements after native comparison and default-app match; World/Lab capture evidence completed."
   }
 }

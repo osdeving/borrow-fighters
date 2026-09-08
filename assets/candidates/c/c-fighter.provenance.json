@@ -2,7 +2,7 @@
   "schema": "borrow-fighters.sprite-provenance.v1",
   "character": "c",
   "production": "../../production/c/production.json",
-  "production_sha256": "e4db8f7b74744edd5273df57361ec99e7f3cb7760c612621ee6e06be400ada76",
+  "production_sha256": "7304c93ed42ae48a685332fbd520f269c8aaaa847cda2b6172579fd93021793e",
   "production_snapshot": {
     "schema": "borrow-fighters.production.v1",
     "character": "c",
@@ -12,7 +12,8 @@
       "generator": "built-in imagegen",
       "identity_reference": "reference/master-existing.png",
       "polished_reference": "idle/source-v1.png",
-      "combat": "Visual-only; baseline combat_manifest unchanged."
+      "combat": "Visual-only; baseline combat_manifest unchanged.",
+      "review": "finalization-review.md"
     },
     "actions": {
       "idle": {
@@ -83,67 +84,67 @@
             "source_rect": {
               "x": 0,
               "y": 0,
-              "w": 217,
+              "w": 218,
               "h": 327
             },
             "pivot": {
-              "x": 119,
-              "y": 299
+              "x": 124,
+              "y": 298
             },
             "duration_ms": 100,
-            "phase": "left_contact"
+            "phase": "near_contact"
           },
           {
             "name": "walk_1",
             "source_rect": {
-              "x": 219,
-              "y": 0,
-              "w": 219,
-              "h": 327
-            },
-            "pivot": {
-              "x": 108,
-              "y": 297
-            },
-            "duration_ms": 100,
-            "phase": "passing"
-          },
-          {
-            "name": "walk_2",
-            "source_rect": {
-              "x": 438,
-              "y": 0,
-              "w": 217,
-              "h": 327
-            },
-            "pivot": {
-              "x": 115,
-              "y": 299
-            },
-            "duration_ms": 100,
-            "phase": "right_contact"
-          },
-          {
-            "name": "walk_3",
-            "source_rect": {
-              "x": 657,
+              "x": 218,
               "y": 0,
               "w": 218,
               "h": 327
             },
             "pivot": {
-              "x": 113,
+              "x": 117,
+              "y": 296
+            },
+            "duration_ms": 100,
+            "phase": "far_toe_off"
+          },
+          {
+            "name": "walk_2",
+            "source_rect": {
+              "x": 436,
+              "y": 0,
+              "w": 218,
+              "h": 327
+            },
+            "pivot": {
+              "x": 108,
+              "y": 296
+            },
+            "duration_ms": 100,
+            "phase": "far_contact"
+          },
+          {
+            "name": "walk_3",
+            "source_rect": {
+              "x": 654,
+              "y": 0,
+              "w": 218,
+              "h": 327
+            },
+            "pivot": {
+              "x": 85,
               "y": 297
             },
             "duration_ms": 100,
-            "phase": "passing"
+            "phase": "near_passing"
           }
         ],
         "provenance": {
           "source_action": "walk/action.json",
-          "source_sheet": "walk/keyed-v1.png",
+          "source_sheet": "walk/keyed-v3.png",
           "scale_to_runtime": 0.4253968253968254,
-          "review": "Four gait keys, with a strong raised-knee passing pose; flared trousers obscure left/right alternation. Approved for candidate preview export, not final art release."
+          "review": "v3: near contact, far toe-off, opposite contact and near passing, 400ms unchanged. Complete World reviewed both facings and idle return; root accepted refinement. See walk/review-v3.md and finalization-review.md."
         }
       },
       "jump": {
@@ -489,12 +490,12 @@
             "source_rect": {
               "x": 0,
               "y": 0,
-              "w": 281,
-              "h": 332
+              "w": 283,
+              "h": 323
             },
             "pivot": {
-              "x": 143,
-              "y": 301
+              "x": 161,
+              "y": 299
             },
             "duration_ms": 200,
             "phase": "startup"
@@ -502,14 +503,14 @@
           {
             "name": "punch_heavy_1",
             "source_rect": {
-              "x": 324,
+              "x": 363,
               "y": 0,
-              "w": 324,
-              "h": 332
+              "w": 363,
+              "h": 323
             },
             "pivot": {
-              "x": 149,
-              "y": 301
+              "x": 183,
+              "y": 298
             },
             "duration_ms": 150,
             "phase": "active"
@@ -517,24 +518,39 @@
           {
             "name": "punch_heavy_2",
             "source_rect": {
-              "x": 648,
+              "x": 726,
               "y": 0,
-              "w": 280,
-              "h": 332
+              "w": 323,
+              "h": 323
             },
             "pivot": {
-              "x": 134,
-              "y": 301
+              "x": 179,
+              "y": 281
             },
-            "duration_ms": 283,
+            "duration_ms": 140,
+            "phase": "recovery"
+          },
+          {
+            "name": "punch_heavy_3",
+            "source_rect": {
+              "x": 1089,
+              "y": 0,
+              "w": 323,
+              "h": 323
+            },
+            "pivot": {
+              "x": 167,
+              "y": 283
+            },
+            "duration_ms": 143,
             "phase": "recovery"
           }
         ],
         "provenance": {
           "source_action": "punch_heavy/action.json",
-          "source_sheet": "punch_heavy/keyed-v2.png",
-          "scale_to_runtime": 0.432258064516129,
-          "review": "v2 lowers book contact; v1 rejected for high contact. Approved for candidate preview export, not final art release."
+          "source_sheet": "punch_heavy/keyed-v3.png",
+          "scale_to_runtime": 0.5153846153846153,
+          "review": "v3: longer two-hand book strike, retract and settle; timing200/150/283ms retained as200/150/140/143ms. Page contact center inside baseline active band; upper edge around11px above it. v4/v5 too low and v6 too high rejected. Native Lab and complete World reviewed, root accepted refinement."
         }
       },
       "kick": {
@@ -605,12 +621,12 @@
             "source_rect": {
               "x": 0,
               "y": 0,
-              "w": 277,
-              "h": 327
+              "w": 267,
+              "h": 267
             },
             "pivot": {
-              "x": 134,
-              "y": 301
+              "x": 117,
+              "y": 230
             },
             "duration_ms": 200,
             "phase": "startup"
@@ -618,14 +634,14 @@
           {
             "name": "sweep_1",
             "source_rect": {
-              "x": 340,
+              "x": 267,
               "y": 0,
-              "w": 340,
-              "h": 327
+              "w": 267,
+              "h": 267
             },
             "pivot": {
-              "x": 153,
-              "y": 297
+              "x": 76,
+              "y": 232
             },
             "duration_ms": 150,
             "phase": "active"
@@ -633,24 +649,39 @@
           {
             "name": "sweep_2",
             "source_rect": {
-              "x": 680,
+              "x": 534,
               "y": 0,
-              "w": 254,
-              "h": 327
+              "w": 267,
+              "h": 267
+            },
+            "pivot": {
+              "x": 128,
+              "y": 230
+            },
+            "duration_ms": 125,
+            "phase": "recovery"
+          },
+          {
+            "name": "sweep_3",
+            "source_rect": {
+              "x": 801,
+              "y": 0,
+              "w": 267,
+              "h": 267
             },
             "pivot": {
               "x": 111,
-              "y": 302
+              "y": 233
             },
-            "duration_ms": 250,
+            "duration_ms": 125,
             "phase": "recovery"
           }
         ],
         "provenance": {
           "source_action": "sweep/action.json",
-          "source_sheet": "sweep/keyed-v1.png",
+          "source_sheet": "sweep/keyed-v3.png",
           "scale_to_runtime": 0.4253968253968254,
-          "review": "Raised sweep shin crosses baseline box; sole is higher. Candidate artistic limitation. Approved for candidate preview export, not final art release."
+          "review": "v3: low support, raised active sole, retract and half-rise, four real generated bodies. Baseline timing200/150/250ms conserved as200/150/125/125ms. Sole center crosses original active band; top of tilted toe approximately18px above it, no claim that full contour is inside. Native Lab and complete World reviewed, root accepted refinement."
         }
       },
       "overhead": {
@@ -1199,7 +1230,7 @@
     },
     {
       "path": "../../production/c/walk/prepared.png",
-      "sha256": "01f88161fd820f994849845293676770924e3c1198821a67af5568092e8ce6b1"
+      "sha256": "d503ba3e2a8a904f8d6835b42d10850fe690189a68560141b2d92fdd4b369e77"
     },
     {
       "path": "../../production/c/jump/prepared.png",
@@ -1227,7 +1258,7 @@
     },
     {
       "path": "../../production/c/punch_heavy/prepared.png",
-      "sha256": "7c0464d4462c3245359270e832727d7080d6133100b14744d5887f592a7366f4"
+      "sha256": "7c8ad677d2785af9e0ee2d9dfbbff5f90aafe3e8b523e71aa9eaa4030a7b1a28"
     },
     {
       "path": "../../production/c/kick/prepared.png",
@@ -1235,7 +1266,7 @@
     },
     {
       "path": "../../production/c/sweep/prepared.png",
-      "sha256": "e5c0b98582cd3e793016ee7c11fbc2237b80bfb5722908bd91c6d51682002874"
+      "sha256": "421543b6b187761eb68beb97fb5ac6f1f755f04cddd414da60a3bb7df60b33ab"
     },
     {
       "path": "../../production/c/overhead/prepared.png",
@@ -1321,50 +1352,50 @@
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 217,
+        "w": 218,
         "h": 327
       },
       "exported_frame": "../../production/c/walk/frames/walk_0.png",
-      "phase": "left_contact"
+      "phase": "near_contact"
     },
     {
       "name": "walk_1",
       "action": "walk",
       "sheet": "../../production/c/walk/prepared.png",
       "source_rect": {
-        "x": 219,
+        "x": 218,
         "y": 0,
-        "w": 219,
+        "w": 218,
         "h": 327
       },
       "exported_frame": "../../production/c/walk/frames/walk_1.png",
-      "phase": "passing"
+      "phase": "far_toe_off"
     },
     {
       "name": "walk_2",
       "action": "walk",
       "sheet": "../../production/c/walk/prepared.png",
       "source_rect": {
-        "x": 438,
+        "x": 436,
         "y": 0,
-        "w": 217,
+        "w": 218,
         "h": 327
       },
       "exported_frame": "../../production/c/walk/frames/walk_2.png",
-      "phase": "right_contact"
+      "phase": "far_contact"
     },
     {
       "name": "walk_3",
       "action": "walk",
       "sheet": "../../production/c/walk/prepared.png",
       "source_rect": {
-        "x": 657,
+        "x": 654,
         "y": 0,
         "w": 218,
         "h": 327
       },
       "exported_frame": "../../production/c/walk/frames/walk_3.png",
-      "phase": "passing"
+      "phase": "near_passing"
     },
     {
       "name": "jump_0",
@@ -1594,8 +1625,8 @@
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 281,
-        "h": 332
+        "w": 283,
+        "h": 323
       },
       "exported_frame": "../../production/c/punch_heavy/frames/punch_heavy_0.png",
       "phase": "startup"
@@ -1605,10 +1636,10 @@
       "action": "punch_heavy",
       "sheet": "../../production/c/punch_heavy/prepared.png",
       "source_rect": {
-        "x": 324,
+        "x": 363,
         "y": 0,
-        "w": 324,
-        "h": 332
+        "w": 363,
+        "h": 323
       },
       "exported_frame": "../../production/c/punch_heavy/frames/punch_heavy_1.png",
       "phase": "active"
@@ -1618,12 +1649,25 @@
       "action": "punch_heavy",
       "sheet": "../../production/c/punch_heavy/prepared.png",
       "source_rect": {
-        "x": 648,
+        "x": 726,
         "y": 0,
-        "w": 280,
-        "h": 332
+        "w": 323,
+        "h": 323
       },
       "exported_frame": "../../production/c/punch_heavy/frames/punch_heavy_2.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "punch_heavy_3",
+      "action": "punch_heavy",
+      "sheet": "../../production/c/punch_heavy/prepared.png",
+      "source_rect": {
+        "x": 1089,
+        "y": 0,
+        "w": 323,
+        "h": 323
+      },
+      "exported_frame": "../../production/c/punch_heavy/frames/punch_heavy_3.png",
       "phase": "recovery"
     },
     {
@@ -1672,8 +1716,8 @@
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 277,
-        "h": 327
+        "w": 267,
+        "h": 267
       },
       "exported_frame": "../../production/c/sweep/frames/sweep_0.png",
       "phase": "startup"
@@ -1683,10 +1727,10 @@
       "action": "sweep",
       "sheet": "../../production/c/sweep/prepared.png",
       "source_rect": {
-        "x": 340,
+        "x": 267,
         "y": 0,
-        "w": 340,
-        "h": 327
+        "w": 267,
+        "h": 267
       },
       "exported_frame": "../../production/c/sweep/frames/sweep_1.png",
       "phase": "active"
@@ -1696,12 +1740,25 @@
       "action": "sweep",
       "sheet": "../../production/c/sweep/prepared.png",
       "source_rect": {
-        "x": 680,
+        "x": 534,
         "y": 0,
-        "w": 254,
-        "h": 327
+        "w": 267,
+        "h": 267
       },
       "exported_frame": "../../production/c/sweep/frames/sweep_2.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_3",
+      "action": "sweep",
+      "sheet": "../../production/c/sweep/prepared.png",
+      "source_rect": {
+        "x": 801,
+        "y": 0,
+        "w": 267,
+        "h": 267
+      },
+      "exported_frame": "../../production/c/sweep/frames/sweep_3.png",
       "phase": "recovery"
     },
     {
@@ -2069,6 +2126,6 @@
       "phase": "sustained_defeat"
     }
   ],
-  "atlas_sha256": "042ecbaa4264e09a0bfa6a662b6f63cab959b4b46dfc5ffc607068b6b6af7aaa",
-  "manifest_sha256": "0f5142e51296dc760665a94dad807c457b22e9200b124cba9885a5e7153def2e"
+  "atlas_sha256": "4b71ac736d43149552ef76e7b255292249038f66862def48c61622c85ae8c86c",
+  "manifest_sha256": "0e191a41609fa2a1b9f507e47e9d3d7cfeb3b9681e75147426fd831078ed6b81"
 }

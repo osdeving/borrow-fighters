@@ -317,7 +317,7 @@ fn load_fighter_atlas_optional(
     character: CharacterId,
     baseline_path: &str,
 ) -> Option<SpriteAtlasAsset> {
-    if std::env::var("BORROW_FIGHTERS_SPRITE_CANDIDATES").as_deref() == Ok("1") {
+    if reviewed_sprite_art_enabled() {
         let key = character.audio_key();
         let candidate_path = format!("assets/candidates/{key}/{key}-fighter.sprite.json");
         if Path::new(&candidate_path).is_file()
@@ -336,6 +336,14 @@ fn load_fighter_atlas_optional(
         }
     }
     load_sprite_atlas_optional(raylib, thread, baseline_path)
+}
+
+fn reviewed_sprite_art_enabled() -> bool {
+    match std::env::var("BORROW_FIGHTERS_SPRITE_CANDIDATES") {
+        Ok(value) => value == "1",
+        Err(std::env::VarError::NotPresent) => true,
+        Err(std::env::VarError::NotUnicode(_)) => false,
+    }
 }
 
 fn missing_candidate_clips(manifest: &SpriteManifest) -> Vec<&'static str> {
@@ -377,7 +385,7 @@ fn load_projectile_texture_optional(
     character: CharacterId,
     baseline_path: &str,
 ) -> Option<Texture2D> {
-    if std::env::var("BORROW_FIGHTERS_SPRITE_CANDIDATES").as_deref() == Ok("1") {
+    if reviewed_sprite_art_enabled() {
         let key = character.audio_key();
         let candidate_path = format!("assets/candidates/{key}/{key}-projectile.png");
         if Path::new(&candidate_path).is_file()

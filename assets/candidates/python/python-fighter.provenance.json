@@ -2,7 +2,7 @@
   "schema": "borrow-fighters.sprite-provenance.v1",
   "character": "python",
   "production": "../../production/python/production.json",
-  "production_sha256": "3fb690bed6983912e692eeed915ad3bd945a58b26ab5c8efd49a325953c8813d",
+  "production_sha256": "d02a0e4e8f0114999d2db048c31ff639d3823f3d313080363d339d494f467d61",
   "production_snapshot": {
     "schema": "borrow-fighters.production.v1",
     "character": "python",
@@ -11,7 +11,8 @@
       "status": "candidate",
       "generator": "built-in imagegen",
       "identity_reference": "reference/master-existing.png",
-      "combat": "Visual-only; baseline combat_manifest retained."
+      "combat": "Visual-only; baseline combat_manifest retained.",
+      "review": "finalization-review.md"
     },
     "actions": {
       "idle": {
@@ -97,67 +98,67 @@
             "source_rect": {
               "x": 0,
               "y": 0,
-              "w": 228,
-              "h": 342
+              "w": 229,
+              "h": 343
             },
             "pivot": {
-              "x": 140,
-              "y": 292
+              "x": 127,
+              "y": 304
             },
             "duration_ms": 100,
-            "phase": "walk"
+            "phase": "near_contact"
           },
           {
             "name": "walk_01",
             "source_rect": {
-              "x": 228,
+              "x": 229,
               "y": 0,
-              "w": 228,
-              "h": 342
+              "w": 229,
+              "h": 343
             },
             "pivot": {
-              "x": 125,
-              "y": 295
+              "x": 134,
+              "y": 308
             },
             "duration_ms": 100,
-            "phase": "walk"
+            "phase": "far_toe_off"
           },
           {
             "name": "walk_02",
             "source_rect": {
-              "x": 456,
+              "x": 458,
               "y": 0,
-              "w": 228,
-              "h": 342
+              "w": 229,
+              "h": 343
             },
             "pivot": {
-              "x": 140,
-              "y": 292
+              "x": 120,
+              "y": 308
             },
             "duration_ms": 100,
-            "phase": "walk"
+            "phase": "far_contact"
           },
           {
             "name": "walk_03",
             "source_rect": {
-              "x": 684,
+              "x": 687,
               "y": 0,
-              "w": 228,
-              "h": 342
+              "w": 229,
+              "h": 343
             },
             "pivot": {
-              "x": 124,
-              "y": 297
+              "x": 113,
+              "y": 308
             },
             "duration_ms": 100,
-            "phase": "walk"
+            "phase": "near_toe_off"
           }
         ],
         "provenance": {
           "source_action": "walk/action.json",
-          "source_sheet": "walk/keyed.png",
-          "scale_to_runtime": 0.445183,
-          "review": "Selected v3: all face right, contact/pass/contact/opposite pass. v1 repeated extended stride and v2 included a left-facing pose, preserved as rejected sources. Leg alternation and heel support require review in motion; four source drawings with functional repeated contact silhouette."
+          "source_sheet": "walk/keyed-v8.png",
+          "scale_to_runtime": 0.44666666666666666,
+          "review": "v8 preserves fixed Python identity and uses C walk v3 only as leg pose reference. Opposite thigh overlap and arm swing; four whole bodies, near_contact/far_toe_off/far_contact/near_toe_off, 400ms unchanged. v4-v7 rejected for repeated or wrong crossing. Both toe-off keys named honestly. Native World both facings and default-app match reviewed; primary agent accepted walk."
         }
       },
       "jump": {
@@ -469,56 +470,71 @@
         "loop": false,
         "frames": [
           {
-            "name": "kick_00",
+            "name": "kick_0",
             "source_rect": {
               "x": 0,
               "y": 0,
-              "w": 295,
-              "h": 333
+              "w": 392,
+              "h": 294
             },
             "pivot": {
-              "x": 116,
-              "y": 301
+              "x": 176,
+              "y": 280
             },
             "duration_ms": 133,
             "phase": "startup"
           },
           {
-            "name": "kick_01",
+            "name": "kick_1",
             "source_rect": {
-              "x": 296,
+              "x": 392,
               "y": 0,
-              "w": 296,
-              "h": 333
+              "w": 392,
+              "h": 294
             },
             "pivot": {
-              "x": 88,
-              "y": 300
+              "x": 76,
+              "y": 280
             },
             "duration_ms": 117,
             "phase": "active"
           },
           {
-            "name": "kick_02",
+            "name": "kick_2",
             "source_rect": {
-              "x": 592,
+              "x": 784,
               "y": 0,
-              "w": 296,
-              "h": 333
+              "w": 392,
+              "h": 294
             },
             "pivot": {
-              "x": 126,
-              "y": 303
+              "x": 176,
+              "y": 272
             },
-            "duration_ms": 166,
+            "duration_ms": 83,
+            "phase": "recovery"
+          },
+          {
+            "name": "kick_3",
+            "source_rect": {
+              "x": 1176,
+              "y": 0,
+              "w": 392,
+              "h": 294
+            },
+            "pivot": {
+              "x": 119,
+              "y": 274
+            },
+            "duration_ms": 83,
             "phase": "recovery"
           }
         ],
         "provenance": {
           "source_action": "kick/action.json",
-          "source_sheet": "kick/keyed.png",
-          "scale_to_runtime": 0.432956,
-          "review": "Low extended leg; ankle/upper shoe crosses the existing shin-height box, with toe extending slightly below it. Support shoe fixed to floor and recovery places both feet down. Uniform action scale, no collision changes."
+          "source_sheet": "kick/keyed-v5.png",
+          "scale_to_runtime": 0.5414141414141415,
+          "review": "v5 raises black shoe into original active band. Four generated keys, baseline133/117/166ms kept as133/117/83/83ms. Whole shoe lies in vertical contact band; local uneven magenta removed from separate keyed sheet, source intact. Native Lab and full World reviewed; primary agent accepted contact and default-app match."
         }
       },
       "punch_light": {
@@ -587,56 +603,71 @@
         "loop": false,
         "frames": [
           {
-            "name": "sweep_00",
+            "name": "sweep_0",
             "source_rect": {
               "x": 0,
               "y": 0,
-              "w": 294,
-              "h": 331
+              "w": 271,
+              "h": 271
             },
             "pivot": {
-              "x": 142,
-              "y": 292
+              "x": 121,
+              "y": 232
             },
             "duration_ms": 150,
             "phase": "startup"
           },
           {
-            "name": "sweep_01",
+            "name": "sweep_1",
             "source_rect": {
-              "x": 319,
+              "x": 271,
               "y": 0,
-              "w": 319,
-              "h": 331
+              "w": 271,
+              "h": 271
             },
             "pivot": {
-              "x": 116,
-              "y": 289
+              "x": 73,
+              "y": 234
             },
             "duration_ms": 133,
             "phase": "active"
           },
           {
-            "name": "sweep_02",
+            "name": "sweep_2",
             "source_rect": {
-              "x": 638,
+              "x": 542,
               "y": 0,
-              "w": 270,
-              "h": 331
+              "w": 271,
+              "h": 271
             },
             "pivot": {
-              "x": 116,
-              "y": 300
+              "x": 130,
+              "y": 220
             },
-            "duration_ms": 200,
+            "duration_ms": 100,
+            "phase": "recovery"
+          },
+          {
+            "name": "sweep_3",
+            "source_rect": {
+              "x": 813,
+              "y": 0,
+              "w": 271,
+              "h": 271
+            },
+            "pivot": {
+              "x": 126,
+              "y": 217
+            },
+            "duration_ms": 100,
             "phase": "recovery"
           }
         ],
         "provenance": {
           "source_action": "sweep/action.json",
-          "source_sheet": "sweep/keyed.png",
-          "scale_to_runtime": 0.431562,
-          "review": "Rising sweep preserves the existing elevated low-guard-rule box. Active ankle/lower leg crosses the box; shoe extends above it, a visual caveat also present in Rust. Three distinct crouch/strike/recovery keys. No physical crouch or balance changes."
+          "source_sheet": "sweep/keyed-v2.png",
+          "scale_to_runtime": 0.432258,
+          "review": "v2 lowers extended sole toward original active band and adds retract/half-rise recovery, preserving150/133/200ms as150/133/100/100ms. Source identity, low support and snake continuity reviewed; contact center inside baseline box, toe near upper edge. Native Lab and complete World reviewed in both facings; no physical metadata changed."
         }
       },
       "overhead": {
@@ -1195,7 +1226,7 @@
     },
     {
       "path": "../../production/python/walk/prepared.png",
-      "sha256": "c2a0072e86d7e799091876b1fdc5c1effea2dc2e7fef8dbdab6accadb78c69ed"
+      "sha256": "910eafd206aa923737ff3485e8a80a11208791282e7a4095dfdda2aac32bb94a"
     },
     {
       "path": "../../production/python/jump/prepared.png",
@@ -1223,7 +1254,7 @@
     },
     {
       "path": "../../production/python/kick/prepared.png",
-      "sha256": "0f9260a8d4b20f034a5985877d81d91ec8c47b36f0d82b1948ad8c48f031c6d1"
+      "sha256": "5e0e92849409e5400b1178b567db720dbae64d35f7956f1c3c899effa9cc1fc6"
     },
     {
       "path": "../../production/python/punch_light/prepared.png",
@@ -1231,7 +1262,7 @@
     },
     {
       "path": "../../production/python/sweep/prepared.png",
-      "sha256": "1c2358cc17a288ea4d9c8681aed253d738a36d0e5c21170195afa03bbfcf212c"
+      "sha256": "2ccce0cd83627fd301af8fa0473620580e0ccb3a925596ba1cfda0d02cc00543"
     },
     {
       "path": "../../production/python/overhead/prepared.png",
@@ -1330,50 +1361,50 @@
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 228,
-        "h": 342
+        "w": 229,
+        "h": 343
       },
       "exported_frame": "../../production/python/walk/frames/walk_00.png",
-      "phase": "walk"
+      "phase": "near_contact"
     },
     {
       "name": "walk_01",
       "action": "walk",
       "sheet": "../../production/python/walk/prepared.png",
       "source_rect": {
-        "x": 228,
+        "x": 229,
         "y": 0,
-        "w": 228,
-        "h": 342
+        "w": 229,
+        "h": 343
       },
       "exported_frame": "../../production/python/walk/frames/walk_01.png",
-      "phase": "walk"
+      "phase": "far_toe_off"
     },
     {
       "name": "walk_02",
       "action": "walk",
       "sheet": "../../production/python/walk/prepared.png",
       "source_rect": {
-        "x": 456,
+        "x": 458,
         "y": 0,
-        "w": 228,
-        "h": 342
+        "w": 229,
+        "h": 343
       },
       "exported_frame": "../../production/python/walk/frames/walk_02.png",
-      "phase": "walk"
+      "phase": "far_contact"
     },
     {
       "name": "walk_03",
       "action": "walk",
       "sheet": "../../production/python/walk/prepared.png",
       "source_rect": {
-        "x": 684,
+        "x": 687,
         "y": 0,
-        "w": 228,
-        "h": 342
+        "w": 229,
+        "h": 343
       },
       "exported_frame": "../../production/python/walk/frames/walk_03.png",
-      "phase": "walk"
+      "phase": "near_toe_off"
     },
     {
       "name": "jump_00",
@@ -1571,42 +1602,55 @@
       "phase": "recovery"
     },
     {
-      "name": "kick_00",
+      "name": "kick_0",
       "action": "kick",
       "sheet": "../../production/python/kick/prepared.png",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 295,
-        "h": 333
+        "w": 392,
+        "h": 294
       },
-      "exported_frame": "../../production/python/kick/frames/kick_00.png",
+      "exported_frame": "../../production/python/kick/frames/kick_0.png",
       "phase": "startup"
     },
     {
-      "name": "kick_01",
+      "name": "kick_1",
       "action": "kick",
       "sheet": "../../production/python/kick/prepared.png",
       "source_rect": {
-        "x": 296,
+        "x": 392,
         "y": 0,
-        "w": 296,
-        "h": 333
+        "w": 392,
+        "h": 294
       },
-      "exported_frame": "../../production/python/kick/frames/kick_01.png",
+      "exported_frame": "../../production/python/kick/frames/kick_1.png",
       "phase": "active"
     },
     {
-      "name": "kick_02",
+      "name": "kick_2",
       "action": "kick",
       "sheet": "../../production/python/kick/prepared.png",
       "source_rect": {
-        "x": 592,
+        "x": 784,
         "y": 0,
-        "w": 296,
-        "h": 333
+        "w": 392,
+        "h": 294
       },
-      "exported_frame": "../../production/python/kick/frames/kick_02.png",
+      "exported_frame": "../../production/python/kick/frames/kick_2.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "kick_3",
+      "action": "kick",
+      "sheet": "../../production/python/kick/prepared.png",
+      "source_rect": {
+        "x": 1176,
+        "y": 0,
+        "w": 392,
+        "h": 294
+      },
+      "exported_frame": "../../production/python/kick/frames/kick_3.png",
       "phase": "recovery"
     },
     {
@@ -1649,42 +1693,55 @@
       "phase": "recovery"
     },
     {
-      "name": "sweep_00",
+      "name": "sweep_0",
       "action": "sweep",
       "sheet": "../../production/python/sweep/prepared.png",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 294,
-        "h": 331
+        "w": 271,
+        "h": 271
       },
-      "exported_frame": "../../production/python/sweep/frames/sweep_00.png",
+      "exported_frame": "../../production/python/sweep/frames/sweep_0.png",
       "phase": "startup"
     },
     {
-      "name": "sweep_01",
+      "name": "sweep_1",
       "action": "sweep",
       "sheet": "../../production/python/sweep/prepared.png",
       "source_rect": {
-        "x": 319,
+        "x": 271,
         "y": 0,
-        "w": 319,
-        "h": 331
+        "w": 271,
+        "h": 271
       },
-      "exported_frame": "../../production/python/sweep/frames/sweep_01.png",
+      "exported_frame": "../../production/python/sweep/frames/sweep_1.png",
       "phase": "active"
     },
     {
-      "name": "sweep_02",
+      "name": "sweep_2",
       "action": "sweep",
       "sheet": "../../production/python/sweep/prepared.png",
       "source_rect": {
-        "x": 638,
+        "x": 542,
         "y": 0,
-        "w": 270,
-        "h": 331
+        "w": 271,
+        "h": 271
       },
-      "exported_frame": "../../production/python/sweep/frames/sweep_02.png",
+      "exported_frame": "../../production/python/sweep/frames/sweep_2.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_3",
+      "action": "sweep",
+      "sheet": "../../production/python/sweep/prepared.png",
+      "source_rect": {
+        "x": 813,
+        "y": 0,
+        "w": 271,
+        "h": 271
+      },
+      "exported_frame": "../../production/python/sweep/frames/sweep_3.png",
       "phase": "recovery"
     },
     {
@@ -2052,6 +2109,6 @@
       "phase": "hold"
     }
   ],
-  "atlas_sha256": "85ea6ee83c0619333987511a5c00275efdfa36bf2af1d61c33426f0485751dca",
-  "manifest_sha256": "41a54fc3c2a425a197ed23295a039ff014838148204375e4c281ef9e4ac03155"
+  "atlas_sha256": "5544735a6758f52974c2ce35da0204406f2cfcc925b00536993ca0c5e791fa9d",
+  "manifest_sha256": "2015f1052c380dabedfc91a5516adab188b2c331cff4ed7311640af15097edeb"
 }

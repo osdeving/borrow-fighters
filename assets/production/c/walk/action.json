@@ -1,10 +1,10 @@
 {
   "action": "walk",
-  "source": "walk/source-v1.png",
-  "sheet": "walk/keyed-v1.png",
+  "source": "walk/source-v3.png",
+  "sheet": "walk/keyed-v3.png",
   "loop": true,
-  "reviewed": false,
-  "status": "candidate: source and two-facing previews inspected; real Combat Lab captured; artistic limitations recorded in review.md",
+  "reviewed": true,
+  "status": "finalization refinement visually accepted by primary agent; native World/Lab and default application match complete",
   "source_body_height_reference_px": 630,
   "frames": [
     {
@@ -12,67 +12,70 @@
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 510,
+        "w": 512,
         "h": 768
       },
       "pivot": {
-        "x": 280,
-        "y": 702
+        "x": 292,
+        "y": 701
       },
       "duration_ms": 100,
-      "phase": "left_contact"
+      "phase": "near_contact"
     },
     {
       "name": "walk_1",
       "source_rect": {
-        "x": 510,
+        "x": 512,
         "y": 0,
-        "w": 514,
+        "w": 512,
         "h": 768
       },
       "pivot": {
-        "x": 255,
-        "y": 698
+        "x": 276,
+        "y": 696
       },
       "duration_ms": 100,
-      "phase": "passing"
+      "phase": "far_toe_off"
     },
     {
       "name": "walk_2",
       "source_rect": {
         "x": 1024,
         "y": 0,
-        "w": 511,
+        "w": 512,
         "h": 768
       },
       "pivot": {
-        "x": 271,
-        "y": 702
+        "x": 255,
+        "y": 695
       },
       "duration_ms": 100,
-      "phase": "right_contact"
+      "phase": "far_contact"
     },
     {
       "name": "walk_3",
       "source_rect": {
-        "x": 1535,
+        "x": 1536,
         "y": 0,
-        "w": 513,
+        "w": 512,
         "h": 768
       },
       "pivot": {
-        "x": 265,
-        "y": 698
+        "x": 200,
+        "y": 697
       },
       "duration_ms": 100,
-      "phase": "passing"
+      "phase": "near_passing"
     }
   ],
-  "review_notes": "Four gait keys, with a strong raised-knee passing pose; flared trousers obscure left/right alternation.",
+  "review_notes": "v3: near contact, far toe-off, opposite contact and near passing, 400ms unchanged. Complete World reviewed both facings and idle return; root accepted refinement. See walk/review-v3.md and finalization-review.md.",
   "runtime_review": {
-    "report": "../../candidates/c/review/runtime-lab-final/capture-report.json",
+    "world_summary": "../../candidates/c/review/refinement-2026-09-07/world/capture-summary.json",
+    "lab_report": "../../candidates/c/review/refinement-2026-09-07/lab/capture-report.json",
     "loaded_manifest_matches_candidate": true,
-    "clip_captured": false,
-    "final_art_approved": false
+    "combat_uses_baseline_manifest": true,
+    "clip_captured_in_filtered_lab": false,
+    "final_art_approved": true,
+    "approval_scope": "Three refinements accepted by primary agent after contact review and default-app C versus Python match; full World review completed."
   }
 }

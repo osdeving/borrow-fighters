@@ -1,22 +1,30 @@
 {
   "action": "overhead",
-  "source": "overhead/source-v2.png",
-  "sheet": "overhead/keyed.png",
+  "source": "overhead/source-v1.png",
+  "sheet": "overhead/sheet-v1.png",
   "loop": false,
-  "source_body_height_reference_px": 538,
-  "normalization_note": "v2 overhead selected: startup fist above head descends into forward contact. v1 was too low/short; v3 lowered the knuckles below the box. v2 lower knuckles overlap the active box while upper glove extends above it.",
+  "reviewed": true,
+  "status": "Final generated art reviewed: complete World in both facings, native Lab, Sprite Studio and normal match; evidence in finalization-review.md.",
+  "source_body_height_reference_px": 701,
+  "suggested_scale_to_runtime": 0.37660485021398005,
+  "replacement_contract": "../action-contracts.json#/actions/overhead",
+  "references": {
+    "new_master": "reference/master.png",
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
   "frames": [
     {
       "name": "overhead_00",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 591,
-        "h": 887
+        "w": 800,
+        "h": 920
       },
       "pivot": {
-        "x": 340,
-        "y": 735
+        "x": 435,
+        "y": 840
       },
       "duration_ms": 166,
       "phase": "startup"
@@ -24,14 +32,14 @@
     {
       "name": "overhead_01",
       "source_rect": {
-        "x": 591,
+        "x": 800,
         "y": 0,
-        "w": 592,
-        "h": 887
+        "w": 800,
+        "h": 920
       },
       "pivot": {
-        "x": 284,
-        "y": 735
+        "x": 417,
+        "y": 837
       },
       "duration_ms": 100,
       "phase": "active"
@@ -39,20 +47,21 @@
     {
       "name": "overhead_02",
       "source_rect": {
-        "x": 1183,
+        "x": 1600,
         "y": 0,
-        "w": 591,
-        "h": 887
+        "w": 800,
+        "h": 920
       },
       "pivot": {
-        "x": 257,
-        "y": 735
+        "x": 348,
+        "y": 837
       },
       "duration_ms": 200,
       "phase": "recovery"
     }
   ],
-  "review_notes": "Built-in image_gen, original narrow Go master and generated idle continuity. Flat magenta extracted without Rust contour mode; isolated matte corner pixels removed where present. Candidate visual only; baseline combat remains authoritative.",
+  "generation_brief": "Fist visibly raised in preparation then descending into the baseline contact area, followed by recovery.",
+  "review_notes": "Raised windup, descending hammerfist, guard recovery. Body stays the same size despite the raised hand extending above the head. Explicit crops/pivots are recorded in preparation.json; no timing or combat changes.",
   "timing_reference": {
     "move_id": "GoChannelOverhead",
     "source": "src/combat/move_data.rs",
@@ -84,5 +93,18 @@
       "x": 97.33333333333333,
       "y": -136.0
     }
+  },
+  "scale_to_runtime": 0.37660485021398005,
+  "runtime_review": {
+    "approved": true,
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "report": "../finalization-review.md",
+    "world_facings_seen": [
+      "Left",
+      "Right"
+    ],
+    "lab_capture": "full set before jump, art unchanged by frame checksum",
+    "normal_match_result_evidence": false
   }
 }

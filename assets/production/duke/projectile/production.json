@@ -1,0 +1,39 @@
+{
+  "operation": "New real image_gen texture replacing cropped muzzle flare and white halo; local alpha extraction and uniform fit only.",
+  "generator": "built-in image_gen",
+  "source": "source-v1.png",
+  "source_sha256": "9bc65a59ee60d374445b42f2cbdf9f5082a00952777976c444ddfb88cc416d9b",
+  "original_preserved": "source-existing.png",
+  "source_alpha_bounds": [
+    273,
+    184,
+    1023,
+    1001
+  ],
+  "uniform_scale": 0.1419828641370869,
+  "prepared_size": [
+    158,
+    132
+  ],
+  "prepared_cluster_size": [
+    106,
+    116
+  ],
+  "prepared_offset": [
+    26,
+    8
+  ],
+  "alpha_bounds": [
+    26,
+    8,
+    132,
+    124
+  ],
+  "runtime_scale": 0.6,
+  "runtime_canvas_size": [
+    94.8,
+    79.2
+  ],
+  "origin": "Renderer still centers the texture at unchanged ProjectileSpec origin. Symmetric4px additional margin around the original150x124 canvas. No collision, origin, timing or physical-dimension change.",
+  "difference": "The replacement has nine readable beans and a more compact horizontal spread; the cut muzzle explosion is removed. It is a new texture, not claimed as cleanup/reuse."
+}

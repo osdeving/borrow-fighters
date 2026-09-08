@@ -60,7 +60,7 @@ Duke deve parecer resistente e inconveniente em média distância. Ele pode ganh
 
 ## Go
 
-Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jogo suporta um personagem que vence por aproximação e sequência curta, sem depender de alcance grande. No momento, Go usa atlas placeholder próprio de luta, entrada e projectile no Combat Lab e em match real iniciado por CLI; ele fica fora do ciclo público do menu da demo enquanto a arte do Gopher é reavaliada.
+Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jogo suporta um personagem que vence por aproximação e sequência curta, sem depender de alcance grande. Go usa o novo atlas semirrealista de 20 ações no Combat Lab e em partidas iniciadas por CLI, com projétil separado. O baseline placeholder continua responsável pelo contrato de combate e disponível para comparação. Sua presença no ciclo público do menu da demo permanece como antes desta revisão visual.
 
 | Input | MoveId | Intenção | Dano | Startup | Alcance | Whiff | Contra-jogo |
 |---|---|---|---:|---:|---:|---:|---|

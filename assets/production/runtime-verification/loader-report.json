@@ -1,0 +1,112 @@
+[
+  {
+    "fixture": "valid",
+    "environment": null,
+    "expected_manifest": "assets/candidates/rust/rust-fighter.sprite.json",
+    "expected_projectile_width": 237,
+    "exit_code": 0,
+    "summary": [
+      "PASS visual=assets/candidates/rust/rust-fighter.sprite.json frames=71 baseline_combat=true other_character_fallback=true projectile=237x116"
+    ],
+    "log": "valid-unset.log"
+  },
+  {
+    "fixture": "valid",
+    "environment": "1",
+    "expected_manifest": "assets/candidates/rust/rust-fighter.sprite.json",
+    "expected_projectile_width": 237,
+    "exit_code": 0,
+    "summary": [
+      "PASS visual=assets/candidates/rust/rust-fighter.sprite.json frames=71 baseline_combat=true other_character_fallback=true projectile=237x116"
+    ],
+    "log": "valid-1.log"
+  },
+  {
+    "fixture": "valid",
+    "environment": "0",
+    "expected_manifest": "assets/placeholder/rust-fighter.sprite.json",
+    "expected_projectile_width": 229,
+    "exit_code": 0,
+    "summary": [
+      "PASS visual=assets/placeholder/rust-fighter.sprite.json frames=51 baseline_combat=true other_character_fallback=true projectile=229x108"
+    ],
+    "log": "valid-0.log"
+  },
+  {
+    "fixture": "valid",
+    "environment": "unexpected",
+    "expected_manifest": "assets/placeholder/rust-fighter.sprite.json",
+    "expected_projectile_width": 229,
+    "exit_code": 0,
+    "summary": [
+      "PASS visual=assets/placeholder/rust-fighter.sprite.json frames=51 baseline_combat=true other_character_fallback=true projectile=229x108"
+    ],
+    "log": "valid-unexpected.log"
+  },
+  {
+    "fixture": "missing",
+    "environment": null,
+    "expected_manifest": "assets/placeholder/rust-fighter.sprite.json",
+    "expected_projectile_width": 229,
+    "exit_code": 0,
+    "summary": [
+      "PASS visual=assets/placeholder/rust-fighter.sprite.json frames=51 baseline_combat=true other_character_fallback=true projectile=229x108"
+    ],
+    "log": "missing-unset.log"
+  },
+  {
+    "fixture": "invalid-manifest",
+    "environment": null,
+    "expected_manifest": "assets/placeholder/rust-fighter.sprite.json",
+    "expected_projectile_width": 237,
+    "exit_code": 0,
+    "summary": [
+      "PASS visual=assets/placeholder/rust-fighter.sprite.json frames=51 baseline_combat=true other_character_fallback=true projectile=237x116"
+    ],
+    "log": "invalid-manifest-unset.log"
+  },
+  {
+    "fixture": "partial",
+    "environment": null,
+    "expected_manifest": "assets/placeholder/rust-fighter.sprite.json",
+    "expected_projectile_width": 237,
+    "exit_code": 0,
+    "summary": [
+      "PASS visual=assets/placeholder/rust-fighter.sprite.json frames=51 baseline_combat=true other_character_fallback=true projectile=237x116"
+    ],
+    "log": "partial-unset.log"
+  },
+  {
+    "fixture": "missing-texture",
+    "environment": null,
+    "expected_manifest": "assets/placeholder/rust-fighter.sprite.json",
+    "expected_projectile_width": 237,
+    "exit_code": 0,
+    "summary": [
+      "PASS visual=assets/placeholder/rust-fighter.sprite.json frames=51 baseline_combat=true other_character_fallback=true projectile=237x116"
+    ],
+    "log": "missing-texture-unset.log"
+  },
+  {
+    "fixture": "invalid-texture",
+    "environment": null,
+    "expected_manifest": "assets/placeholder/rust-fighter.sprite.json",
+    "expected_projectile_width": 237,
+    "exit_code": 0,
+    "summary": [
+      "PASS visual=assets/placeholder/rust-fighter.sprite.json frames=51 baseline_combat=true other_character_fallback=true projectile=237x116"
+    ],
+    "log": "invalid-texture-unset.log"
+  },
+  {
+    "fixture": "invalid-projectile",
+    "environment": null,
+    "expected_manifest": "assets/candidates/rust/rust-fighter.sprite.json",
+    "expected_projectile_width": 229,
+    "exit_code": 0,
+    "summary": [
+      "PASS visual=assets/candidates/rust/rust-fighter.sprite.json frames=71 baseline_combat=true other_character_fallback=true projectile=229x108"
+    ],
+    "log": "invalid-projectile-unset.log"
+  }
+]

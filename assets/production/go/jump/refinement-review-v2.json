@@ -1,0 +1,159 @@
+{
+  "schema": "borrow-fighters.jump-refinement-review.v1",
+  "character": "go",
+  "selected_source": "source-v2.png",
+  "selected_sheet": "keyed-v2.png",
+  "selected_scale_to_runtime": 0.37,
+  "status": "Selected v2 promoted; final native World, Lab and Sprite Studio recaptures reviewed.",
+  "reason": "Correct visibly undersized jump torso/head relative to new master, idle and aerial attacks.",
+  "generation_tool": "built-in image_gen",
+  "new_generation_count": 2,
+  "generated_sources": [
+    "source-v2.png",
+    "source-v3.png"
+  ],
+  "source_origin": "/home/willams/.codex/generated_images/01a07e09-c526-7212-9572-c208e4496f4e/exec-647e5c56-3ae4-4d24-a660-06811378f6c1.png",
+  "references": [
+    "../reference/master.png",
+    "../idle/source-v1.png",
+    "source-v1.png"
+  ],
+  "v1_usage": "Pose reference only; fixed master/idle define adult character identity/anatomy.",
+  "v3_disposition": "Real generation preserved, rejected by visual comparison because the elongated abdomen is less natural than v2.",
+  "alpha": "True alpha requested; tool returned RGB checkerboard. Authorized generic remove_generated_checkerboard.py removed only connected pale matte/fringe. No --rust-contour, body warping, compositing or per-pose scaling.",
+  "preparation_command": "python3 tools/art/remove_generated_checkerboard.py assets/production/go/jump/source-v2.png assets/production/go/jump/keyed-v2.png",
+  "preserved_v1": "snapshot-before-v2/action.json and registration.json; source-v1.png/keyed-v1.png untouched; prior previews in snapshot-before-v2/review",
+  "source_dimensions": [
+    1881,
+    836
+  ],
+  "timing_ms": [
+    60,
+    340,
+    400
+  ],
+  "total_ms": 800,
+  "frames": [
+    {
+      "name": "jump_00",
+      "duration_ms": 60,
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "source_pivot": {
+        "x": 336,
+        "y": 745
+      },
+      "runtime_pivot": {
+        "x": 124,
+        "y": 276
+      },
+      "runtime_size": [
+        232,
+        309
+      ],
+      "solid_top_from_anchor": -258,
+      "solid_bottom_from_anchor": -37,
+      "upper_30px_silhouette_width": 55,
+      "alpha_bbox": [
+        59,
+        16,
+        189,
+        243
+      ]
+    },
+    {
+      "name": "jump_01",
+      "duration_ms": 340,
+      "source_rect": {
+        "x": 627,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "source_pivot": {
+        "x": 294,
+        "y": 723
+      },
+      "runtime_pivot": {
+        "x": 109,
+        "y": 268
+      },
+      "runtime_size": [
+        232,
+        309
+      ],
+      "solid_top_from_anchor": -252,
+      "solid_bottom_from_anchor": -46,
+      "upper_30px_silhouette_width": 54,
+      "alpha_bbox": [
+        37,
+        13,
+        174,
+        226
+      ]
+    },
+    {
+      "name": "jump_02",
+      "duration_ms": 400,
+      "source_rect": {
+        "x": 1254,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "source_pivot": {
+        "x": 236,
+        "y": 784
+      },
+      "runtime_pivot": {
+        "x": 87,
+        "y": 290
+      },
+      "runtime_size": [
+        232,
+        309
+      ],
+      "solid_top_from_anchor": -264,
+      "solid_bottom_from_anchor": -1,
+      "upper_30px_silhouette_width": 53,
+      "alpha_bbox": [
+        16,
+        23,
+        149,
+        293
+      ]
+    }
+  ],
+  "selection_notes": "V2 at uniform0.37 keeps head band53–55px against idle55. Preparation/apex retain the pivots from the coordinator-reviewed comparison. Descending pivotY changed from~761 to784, about8 rendered pixels upward, putting solid lowest claw at−1. Waist placement differs a few pixels due natural tuck/extension; no physical trajectory was baked in.",
+  "validation": {
+    "three_frames_alpha_and_margins": true,
+    "timings_unchanged": true,
+    "two_facings_light_dark_examined": true,
+    "transition_to_idle_and_air_attacks_examined": true,
+    "no_candidate_export_or_global_plan_mutation": true,
+    "no_runtime_or_gameplay_changes": true
+  },
+  "evidence": [
+    "review/jump.gif",
+    "review/jump-frames.png",
+    "review/transition-v2.png",
+    "review/both-facings-v2.png"
+  ],
+  "hashes": {
+    "source-v1.png": "1d1ec70c17c2b906565bc6b70409d35c6b04f298d78120c7227d351ffc98ffca",
+    "source-v2.png": "aa1007876d838e6913145fb4c9a2f78791149e14c1e14c4dd50ad86bed4abe83",
+    "source-v3.png": "6da4a6e3c9cebb3c4c4a1d2ec1a4cb8fb3b6f8aebdf7838313e72dba632d8b63",
+    "keyed-v2.png": "5b80c5d715a5b07352c40cbbb3a495ff42d51f133e6ee52623242591d9e822cd",
+    "action.json": "d0a2f31b81a91ba7370ccf95c4c4d1290756bcddfe89ba2d08359ab70215c50e"
+  },
+  "runtime_review": {
+    "approved": true,
+    "report": "../finalization-review.md",
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028"
+  }
+}

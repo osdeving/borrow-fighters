@@ -1,0 +1,234 @@
+{
+  "character": "go",
+  "batch": "C",
+  "status": "Final integration and native validation complete; original static handoff checks retained below.",
+  "master": "reference/master.png",
+  "master_sha256": "8fa19c0e7a4183a9e9354351c810abc5610551fd8eb5e9a24c745b17262cf0aa",
+  "generated_source_count": 9,
+  "selected_action_count": 7,
+  "selected_frame_count": 21,
+  "actions": {
+    "anti_air": {
+      "approved": true,
+      "sheet": "anti_air/keyed-v1.png",
+      "source": "anti_air/source-v1.png",
+      "scale_to_runtime": 0.45674740484429066,
+      "notes": "Uniform264/578 from the grounded guard anatomy. The active uppercut straightens the knees/torso and raises the fist above the head; its taller head position is posture extension, not pivot-driven lift. Full glove fits the original high box. Ground anchors784/789/787 follow solid support.",
+      "source_sha256": "1053cc08e69cb71cf0ab2b7bc03caee568622371abb7e53e3c2b9fdcfe46c3ea",
+      "alpha_sha256": "458cab5bb0c85bef109657a34675b4915f4cc607a2bdbb0aedd77a5fdcf086e1",
+      "frames": [
+        {
+          "frame": "anti_air_00",
+          "duration_ms": 116,
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": 0
+        },
+        {
+          "frame": "anti_air_01",
+          "duration_ms": 134,
+          "solid_top_from_anchor": -329,
+          "solid_bottom_from_anchor": 0
+        },
+        {
+          "frame": "anti_air_02",
+          "duration_ms": 250,
+          "solid_top_from_anchor": -266,
+          "solid_bottom_from_anchor": 1
+        }
+      ]
+    },
+    "air_punch": {
+      "approved": true,
+      "sheet": "air_punch/keyed-v1.png",
+      "source": "air_punch/source-v1.png",
+      "scale_to_runtime": 0.38823529411764707,
+      "notes": "Uniform264/680 anatomical equivalent by torso/head comparison with the standing new master, not tucked-leg alpha bounds. Virtual pivots register belt near-150world across all3drawings. Middle torso leans forward, naturally lowering the head while the fist meets the existing low airborne box. Explicit wide middle crop preserves the backward foot crossing the nominal column boundary; no clipped paw.",
+      "source_sha256": "29b17056e5785333bd1a19e28f8b69333b2a5a5d1dc943477fc01ea381168710",
+      "alpha_sha256": "328c95c8f8e410d7ce5c831097fe44ac1843e919964f5b489d0e1e3f67323211",
+      "frames": [
+        {
+          "frame": "air_punch_00",
+          "duration_ms": 83,
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -12
+        },
+        {
+          "frame": "air_punch_01",
+          "duration_ms": 150,
+          "solid_top_from_anchor": -243,
+          "solid_bottom_from_anchor": -22
+        },
+        {
+          "frame": "air_punch_02",
+          "duration_ms": 133,
+          "solid_top_from_anchor": -263,
+          "solid_bottom_from_anchor": -26
+        }
+      ]
+    },
+    "air_kick": {
+      "approved": true,
+      "sheet": "air_kick/keyed-v2.png",
+      "source": "air_kick/source-v2.png",
+      "scale_to_runtime": 0.4,
+      "notes": "Selected v2 after v1 foot reached too far and too low. Built-in generation bends the active knee and dorsiflexes the paw, keeping full adult limb anatomy. Uniform264/660 scale. Virtual pivots follow belt near-150world; active drawing moved slightly horizontally during generation, so pivot826 registers its belt rather than translating the body to fit contact. Toe extremity is about1worldpixel beyond the far border; the solid contact paw is within the box vertically.",
+      "source_sha256": "1096c92cec3bd335e77fcbd6ef4a32a75b4803a48d99b195569e204dbb438a28",
+      "alpha_sha256": "7cc944fddb342b86920cb4555aa2645137b250abf8263434c52ff9c7cfecaa14",
+      "frames": [
+        {
+          "frame": "air_kick_00",
+          "duration_ms": 83,
+          "solid_top_from_anchor": -265,
+          "solid_bottom_from_anchor": -34
+        },
+        {
+          "frame": "air_kick_01",
+          "duration_ms": 133,
+          "solid_top_from_anchor": -266,
+          "solid_bottom_from_anchor": -38
+        },
+        {
+          "frame": "air_kick_02",
+          "duration_ms": 117,
+          "solid_top_from_anchor": -270,
+          "solid_bottom_from_anchor": -34
+        }
+      ]
+    },
+    "special": {
+      "approved": true,
+      "sheet": "special/keyed-v2.png",
+      "source": "special/source-v2.png",
+      "scale_to_runtime": 0.37714285714285717,
+      "notes": "Selected v2 after v1 emitted from an incorrect high palm. The first key already extends a low open palm; subsequent keys recoil and return to guard. Uniform264/700 from normal standing anatomy. Projected original origin lies on the lower outward palm near source(502.64,472.64), with the projectile kept separate. Ground pivots801/801/803 preserve support. First emitting torso settles about12worldpixels below full guard as a drawn commitment pose; no whole-body translation added. Crop excludes a lone matte pixel at lower-left below all art.",
+      "source_sha256": "a190951a1bd1bbb3304fd6519f5441a89c48a2231d022224c901074dc78dcfcb",
+      "alpha_sha256": "b99834b806e158a6e2280346bcee50e87c0e67c4b0e515778eb583507ec0bd64",
+      "frames": [
+        {
+          "frame": "special_00",
+          "duration_ms": 80,
+          "solid_top_from_anchor": -252,
+          "solid_bottom_from_anchor": 0
+        },
+        {
+          "frame": "special_01",
+          "duration_ms": 80,
+          "solid_top_from_anchor": -260,
+          "solid_bottom_from_anchor": 0
+        },
+        {
+          "frame": "special_02",
+          "duration_ms": 107,
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1
+        }
+      ]
+    },
+    "spawn": {
+      "approved": true,
+      "sheet": "spawn/keyed-v1.png",
+      "source": "spawn/source-v1.png",
+      "scale_to_runtime": 0.3723554301833568,
+      "notes": "Three real drawings: sash adjustment, respectful bow, held ready guard. Uniform264/709 from the final ready-guard anatomy. The opening straight-legged posture is naturally about15worldpixels taller than guard; bow folds the torso without scale change. Distinct source foot rows779/779/757 are registered to one ground anchor;500/700/1500ms preserved.",
+      "source_sha256": "db73d3c3ee9714108b9913a23c46d9555c40a7725d6473b2bfb92ca877e26f25",
+      "alpha_sha256": "4c890464f80136b407b9e56247746ca9c436ab9b60df1ef6de1e76a82c819a1b",
+      "frames": [
+        {
+          "frame": "spawn_00",
+          "duration_ms": 500,
+          "solid_top_from_anchor": -279,
+          "solid_bottom_from_anchor": 0
+        },
+        {
+          "frame": "spawn_01",
+          "duration_ms": 700,
+          "solid_top_from_anchor": -238,
+          "solid_bottom_from_anchor": 0
+        },
+        {
+          "frame": "spawn_02",
+          "duration_ms": 1500,
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1
+        }
+      ]
+    },
+    "victory": {
+      "approved": true,
+      "sheet": "victory/keyed-v1.png",
+      "source": "victory/source-v1.png",
+      "scale_to_runtime": 0.36666666666666664,
+      "notes": "Three real drawings: lower guard/exhale, restrained raised fist, held thumbs-up. Uniform264/720 from the final upright body. Feet grounded with anchors789/793/791. Adult small eyes and modeled muzzle preserved; no childish facial redesign.",
+      "source_sha256": "daf9a616c8ad132b71554f02f63007523ccd5d320f43e88f297dd0ef19cab5c7",
+      "alpha_sha256": "edcebd1b6894ec0fabeeaa4afb77e8b382881ad3270242fa780ad072c018543c",
+      "frames": [
+        {
+          "frame": "victory_00",
+          "duration_ms": 160,
+          "solid_top_from_anchor": -268,
+          "solid_bottom_from_anchor": 1
+        },
+        {
+          "frame": "victory_01",
+          "duration_ms": 200,
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": 0
+        },
+        {
+          "frame": "victory_02",
+          "duration_ms": 500,
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": 0
+        }
+      ]
+    },
+    "defeat": {
+      "approved": true,
+      "sheet": "defeat/keyed-v1.png",
+      "source": "defeat/source-v1.png",
+      "scale_to_runtime": 0.3553162853297443,
+      "notes": "Three real drawings: standing slump, one-knee descent, supported kneeling/seated hold. One uniform264/743 anatomy scale from the standing body; final short silhouette comes from folded joints, never enlarged to fill its cell. Ground support anchors804/766/798 follow front paw/hand contacts.",
+      "source_sha256": "f8fc1717b3979cc393751ec31acd37196c2adb74db5ac58f99512b2c6183c39a",
+      "alpha_sha256": "4f17443245832323d6c751edb508d81d8aa0208817aa3e5469d060e5b699d5a1",
+      "frames": [
+        {
+          "frame": "defeat_00",
+          "duration_ms": 160,
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1
+        },
+        {
+          "frame": "defeat_01",
+          "duration_ms": 220,
+          "solid_top_from_anchor": -174,
+          "solid_bottom_from_anchor": 0
+        },
+        {
+          "frame": "defeat_02",
+          "duration_ms": 660,
+          "solid_top_from_anchor": -136,
+          "solid_bottom_from_anchor": -1
+        }
+      ]
+    }
+  },
+  "checks": {
+    "reviewed_dark_and_light_backgrounds": true,
+    "reviewed_both_facings": true,
+    "contact_projection_review": "target/art/go-replacement-batch-c/preview/review/contacts-both-facings.png",
+    "preview_manifest": "target/art/go-replacement-batch-c/preview/go-fighter.sprite.json",
+    "runtime_candidate_go_modified": false,
+    "global_replacement_review_plan_modified": false,
+    "projectile": "Viewed assets/placeholder/go-channel-projectile.png; separate cyan channel effect retained, not baked into any fighter source.",
+    "all21frames_visible_alpha_and_pivots_valid": true,
+    "baseline_phase_boundaries_preserved": true,
+    "historical263files_unchanged": true
+  },
+  "runtime_review": {
+    "approved": true,
+    "report": "finalization-review.md",
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028"
+  },
+  "checks_scope": "Original static producer handoff; runtime integration is documented by runtime_review."
+}

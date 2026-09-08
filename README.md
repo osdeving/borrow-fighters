@@ -71,6 +71,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`docs/adr/0008-external-sprite-studio-tooling.md`](docs/adr/0008-external-sprite-studio-tooling.md): Sprite Studio externo em Tauri + React, isolado do codigo do jogo.
 - [`docs/adr/0009-multi-image-sprite-manifests.md`](docs/adr/0009-multi-image-sprite-manifests.md): manifests de sprite podem compor um personagem a partir de mais de um atlas.
 - [`docs/adr/0010-reviewed-action-sprite-production.md`](docs/adr/0010-reviewed-action-sprite-production.md): produção por ação, exportação explícita e revisão de candidatos sem alterar combate.
+- [`docs/adr/0011-reviewed-art-default.md`](docs/adr/0011-reviewed-art-default.md): seleção dos conjuntos revisados por padrão, mantendo comparação e fallback.
 
 ### GitHub
 
@@ -125,7 +126,7 @@ As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
 
 ## Rodando o protótipo greybox
 
-O código jogável atual implementa um greybox local para validar o básico: menu principal com submenus de versus, treino, lore/roster e opções, arenas brasileiras em rotação começando pelo Sirius e trocando apenas no início da próxima luta, seleção manual de arena, livro de história carregado de JSON, intro cinematográfica com contagem `11` / `10` / `01` / `Fight!`, personagens com spritesheet placeholder, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, varredura, overhead, anti-air, agarrão curto, ataques aéreos, fireball, primeira identidade mecânica de Rust, Duke/Java, Go, C, Python e C++ por frame data, demo pública ciclando Rust, Duke/Java, C, Python e C++ sem Go no menu, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, stun, pushback, whiff recovery, hitspark, block pulse, trail de projétil, luz de chão em hitstun/blockstun, scanline/glow e animações leves de fundo por arena, vida, vitória e restart.
+O código jogável atual implementa um greybox local para validar o básico: menu principal com submenus de versus, treino, lore/roster e opções, arenas brasileiras em rotação começando pelo Sirius e trocando apenas no início da próxima luta, seleção manual de arena, livro de história carregado de JSON, intro cinematográfica com contagem `11` / `10` / `01` / `Fight!`, personagens com atlas de ações revisadas e placeholders preservados, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, varredura, overhead, anti-air, agarrão curto, ataques aéreos, fireball, primeira identidade mecânica de Rust, Duke/Java, Go, C, Python e C++ por frame data, demo pública ciclando Rust, Duke/Java, C, Python e C++ sem Go no menu, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, stun, pushback, whiff recovery, hitspark, block pulse, trail de projétil, luz de chão em hitstun/blockstun, scanline/glow e animações leves de fundo por arena, vida, vitória e restart.
 
 O runtime também já está preparado para áudio por eventos. O manifesto fica em [`assets/audio/audio_manifest.json`](assets/audio/audio_manifest.json), e o guia técnico fica em [`docs/14-audio-pipeline.md`](docs/14-audio-pipeline.md). O pacote inicial inclui SFX/UI/vozes de anúncio, contagem pré-luta, vozes de golpe por personagem com cobertura específica para Rust e Duke/Java, e músicas de menu, Combat Lab e arenas com fontes CC0 registradas em [`assets/audio/ATTRIBUTION.md`](assets/audio/ATTRIBUTION.md). O volume global da música pode ser ajustado em `Options`.
 
@@ -182,14 +183,15 @@ No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp
 
 O `Move Showcase`, em `Training`, usa o personagem escolhido como Player 1 e mostra ele sozinho ciclando todos os golpes em sequência: soco fraco, soco forte, chute, varredura, overhead, anti-air, ataques aéreos, agarrão e projectile. `Tab` / `Shift+Tab` pula golpe, `Enter` repete, `Espaço` pausa e `Esc` volta ao menu.
 
-Os placeholders continuam como padrão. Para revisar um candidato completo sem substituí-los em disco:
+Os atlas revisados completos são a apresentação padrão; os placeholders permanecem em disco como referência e fallback. Para abrir a arte nova ou comparar a anterior:
 
 ```bash
-BORROW_FIGHTERS_SPRITE_CANDIDATES=1 cargo run -- --fight --p1 rust --p2 duke
-BORROW_FIGHTERS_SPRITE_CANDIDATES=1 cargo run -- --lab combat --character rust --pose victory
+cargo run -- --fight --p1 rust --p2 duke
+cargo run -- --lab combat --character rust --pose victory
+BORROW_FIGHTERS_SPRITE_CANDIDATES=0 cargo run -- --fight --p1 rust --p2 duke
 ```
 
-O opt-in procura `assets/candidates/<personagem>/<personagem>-fighter.sprite.json` e exige os 20 clips do jogo atual; arquivo inválido, incompleto ou ausente mantém o placeholder daquele personagem. Conjuntos parciais são inspecionados diretamente no Sprite Viewer/Studio. Somente a apresentação usa o candidato: `combat_manifest` preserva as boxes, escala de colisão e origem de projéteis baseline. Reações, defesa, agachamento, salto e poses finais têm relógios visuais próprios; regras e timing de combate continuam iguais. Veja [pipeline e comandos](docs/11-sprite-pipeline.md#revisao-de-candidatos-no-runtime) e [cobertura e pendências](docs/19-sprite-production-coverage.md).
+O carregador procura `assets/candidates/<personagem>/<personagem>-fighter.sprite.json` e exige os 20 clips do jogo atual; arquivo inválido, incompleto ou ausente mantém o placeholder daquele personagem. Conjuntos parciais são inspecionados diretamente no Sprite Viewer/Studio. A variável com valor `1` continua escolhendo os novos atlas explicitamente; `0` ou um valor inválido seleciona os originais. Somente a apresentação usa a arte revisada: `combat_manifest` preserva as boxes, escala de colisão e origem de projéteis baseline. Reações, defesa, agachamento, salto e poses finais têm relógios visuais próprios; regras e timing de combate continuam iguais. Veja [pipeline e comandos](docs/11-sprite-pipeline.md#revisao-de-candidatos-no-runtime) e [cobertura e pendências](docs/19-sprite-production-coverage.md).
 
 Para abrir o viewer de sprites direto em uma ferramenta isolada:
 

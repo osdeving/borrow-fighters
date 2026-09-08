@@ -24,9 +24,9 @@ Regra operacional:
 | Janela | Frente | Status | Registro | Proxima acao |
 |---|---|---|---|---|
 | Feito local | Runtime de `frames[].combat` | Feito | [`docs/11-sprite-pipeline.md`](11-sprite-pipeline.md), [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md), [`docs/adr/0007-sprite-frame-combat-runtime.md`](adr/0007-sprite-frame-combat-runtime.md) | Runtime consome hitboxes, hurtboxes e origem de projectile do manifesto com fallback para o greybox. |
-| Agora | Calibracao de sprite/hitbox | Em andamento local | [`docs/11-sprite-pipeline.md`](11-sprite-pipeline.md), [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md), [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) | Rust special, Borrow Jab, heavy punch e kick ja possuem metadata inicial; Go, C, Python e C++ ja entram no runtime com atlas/projectile proprios; entradas de Rust/Duke foram limpas de componentes soltos; proximo e revisar hurtboxes por pose e depois Duke/Go/C/Python/C++. |
+| Proximo | Calibracao de sprite/hitbox | Revisão de gameplay separada do acabamento | [`docs/11-sprite-pipeline.md`](11-sprite-pipeline.md), [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md), [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) | A arte refinada preserva caixas, origem e regras baseline por `combat_manifest`; eventual revisão de hurtboxes por pose depende de playtest e não é necessária para justificar os desenhos. |
 | Proximo | Feeling e balanceamento | Planejado | [`docs/13-combat-design-roadmap.md`](13-combat-design-roadmap.md), [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md) | Playtestar a demo Rust x Duke x C x Python x C++ com Combat Lab, mantendo Go fora do menu publico e ajustando frame data por dados, nao por achismo. |
-| Agora | Produção de sprites candidatos por ação | Seis candidatos integrados e verificados; revisão artística final pendente | [`docs/19-sprite-production-coverage.md`](19-sprite-production-coverage.md), [`ADR 0010`](adr/0010-reviewed-action-sprite-production.md) | Refinar as ressalvas de caminhada, continuidade visual e contato registradas nos laudos antes da aprovação artística final. |
+| Feito local | Arte final dos seis lutadores | Acabamento e verificação concluídos | [Laudos e vídeos atuais](../assets/candidates/README.md), [cobertura](19-sprite-production-coverage.md) | 120 clips e 378 quadros, dez golpes por personagem. Go recebeu outra identidade semirrealista. Arte padrão, comparação com env=0, fontes e combate preservados. |
 | Depois | Ferramenta visual clicavel | Aberto | [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) | Avaliar `raygui` somente se atalhos e texto ficarem insuficientes. |
 | Depois | Release Prototype 0.1 | Aberto | [`docs/06-release-process.md`](06-release-process.md) | Criar milestone/release checklist quando o slice tiver playtest minimo e assets candidatos. |
 
@@ -92,16 +92,19 @@ Status do primeiro greybox:
 | Runtime de sprites | M | Média | Feito | Atlas + manifesto JSON v1 |
 | IA de playtest | M | Média | Feito | P1/P2, perfis diferentes, ataques variados |
 | Polimento de timing | M | Alta | Em andamento | Ataques, projectile, spawn e IA ainda precisam tuning |
-| Arte placeholder melhorada | L | Alta | Em andamento | Rust, Duke, Go, C, Python, entradas e cenários ainda não são finais |
+| Arte dos lutadores | L | Alta | Seis concluídos e verificados | Rust, Duke/Java, Go, C, Python e C++ revisados no runtime. Go antigo arquivado. Cenários e VFX de protótipo ficam fora deste escopo. |
 
 ## Fora do backlog inicial
+
+Registro histórico do corte inicial. Arte final e expansão para os seis lutadores
+foram autorizadas posteriormente pelo usuário e constam da frente ativa acima.
 
 | Item | Motivo |
 |---|---|
 | Online multiplayer | Complexidade XL |
 | Sistema de combo | Depende do feeling básico |
 | Vários personagens | Depende da abstração mínima |
-| Arte final | Depende do vertical slice |
+| Arte final | Exclusão inicial superada pela produção autorizada; veja estado atual acima |
 | Trilha sonora | Não prova gameplay |
 | Menu completo | Não prova gameplay |
 | IA avançada | A IA atual é apenas playtest, não desafio competitivo |

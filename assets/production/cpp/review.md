@@ -1,5 +1,7 @@
 # C++ — revisão do candidato
 
+**Atualização de 07/09/2026:** caminhada, defesa baixa e chute aéreo receberam novo acabamento e aprovação visual do agente principal. Consulte o [laudo atual de finalização](finalization-review.md) e a [auditoria atual](finalization-audit.json). O conteúdo abaixo registra o lote anterior e suas limitações históricas; fontes e evidências antigas foram preservadas.
+
 **Estado:** 20 ações e 61 quadros exportados; fontes, alpha, prévias em ambos os sentidos e captura real do Combat Lab revisados. O Lab carregou o candidato e o manifesto de combate baseline do World. Aprovação artística final permanece pendente.
 
 ## Entrega e rastreabilidade

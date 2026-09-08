@@ -1,0 +1,65 @@
+{
+  "action": "crouch_block",
+  "source": "crouch_block/source-v4.png",
+  "sheet": "crouch_block/keyed-v4.png",
+  "loop": true,
+  "reviewed": false,
+  "status": "candidate: source, alpha and two-facing previews inspected; corrected Combat Lab captured, artistic limitations recorded in review.md",
+  "source_body_height_reference_px": 689,
+  "suggested_scale_to_runtime": 0.3889695210449927,
+  "frames": [
+    {
+      "name": "crouch_block_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 683,
+        "h": 768
+      },
+      "pivot": {
+        "x": 345,
+        "y": 710
+      },
+      "duration_ms": 110,
+      "phase": "low_guard"
+    },
+    {
+      "name": "crouch_block_1",
+      "source_rect": {
+        "x": 683,
+        "y": 0,
+        "w": 682,
+        "h": 768
+      },
+      "pivot": {
+        "x": 321,
+        "y": 710
+      },
+      "duration_ms": 90,
+      "phase": "absorb"
+    },
+    {
+      "name": "crouch_block_2",
+      "source_rect": {
+        "x": 1365,
+        "y": 0,
+        "w": 683,
+        "h": 768
+      },
+      "pivot": {
+        "x": 305,
+        "y": 710
+      },
+      "duration_ms": 140,
+      "phase": "recover_low_guard"
+    }
+  ],
+  "review_notes": "Selected v4 after v1-v3 kept torso too upright. Deep forward hunker preserves head/limb scale, silhouette about92-95px within128px crouch height. Guard recoil is subtle; bag stays continuous.",
+  "runtime_review": {
+    "report": "../../candidates/cpp/review/runtime-lab/capture-report.json",
+    "loaded_manifest_matches_candidate": true,
+    "clip_captured": true,
+    "combat_uses_baseline_manifest": true,
+    "final_art_approved": false
+  }
+}

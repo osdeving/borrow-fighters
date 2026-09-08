@@ -2,13 +2,13 @@
 
 ## Status
 
-Documento vivo. Nada aqui é arte final.
+Documento vivo. A produção atual dos sprites e seus laudos estão na [matriz de cobertura](19-sprite-production-coverage.md); as explorações e origens dos placeholders abaixo permanecem como histórico.
 
 Este documento orienta contribuições visuais sem fechar cedo demais a identidade do jogo.
 
 ## Objetivo visual
 
-**Borrow Fighters** deve parecer um jogo de luta 2D cartunesco, legível e engraçado, onde cultura de programação vira forma, cor, gesto e impacto.
+**Borrow Fighters** deve parecer um jogo de luta 2D estilizado, legível e engraçado, onde cultura de programação vira forma, cor, gesto e impacto. O elenco combina mascotes e humanos com volume, materiais e iluminação coerentes no tamanho de jogo.
 
 ## Pilares visuais
 
@@ -49,7 +49,13 @@ Nenhum mood está aprovado como direção final. Propostas devem comparar pelo m
 
 ## Estado visual atual do protótipo
 
-O slice jogável usa arte placeholder, mas já exercita decisões importantes para a direção visual:
+Os seis lutadores têm atlas de ações revisadas em `assets/candidates/`, escolhidos por padrão; `BORROW_FIGHTERS_SPRITE_CANDIDATES=0` permite comparar o baseline preservado. A produção por ação e a validação específica estão na [matriz atual](19-sprite-production-coverage.md). Arenas, retratos e demais elementos fora dessa rodada mantêm seu estado anterior.
+
+Em 7 de setembro de 2026, o usuário rejeitou o Go caricatural e pediu outra versão com mais realismo. O [novo master](../assets/production/go/reference/master.png) fixa um gopher adulto atlético, pelagem azul-ardósia com volume, olhos animais pequenos, focinho natural, calça carvão, faixa e wraps escuros. As 20 ações usam essa identidade; o conjunto antigo está [arquivado](../assets/production/go-cartoon-archive/ARCHIVE.md). Essa substituição visual conserva corpo físico, velocidade, golpes e projétil separados.
+
+## Origem dos placeholders — histórico preservado
+
+O slice anterior exercitou estas decisões com os assets baseline, ainda disponíveis para referência e fallback:
 
 - arena inicial: `assets/placeholder/arena-sirius.png`, derivada de referência em `assets/references/sirius.png`;
 - arenas em rotação: `assets/placeholder/arena-fortaleza.png`, `assets/placeholder/arena-java-street.png`, `assets/placeholder/arena-biotic.png`, `assets/placeholder/arena-porto-digital.png` e `assets/placeholder/arena-vale-pinhao.png`;

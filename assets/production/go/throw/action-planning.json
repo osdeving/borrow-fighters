@@ -1,0 +1,73 @@
+{
+  "action": "throw",
+  "source": null,
+  "sheet": null,
+  "loop": false,
+  "reviewed": false,
+  "status": "planning placeholder; no new image generated, no source geometry approved",
+  "source_body_height_reference_px": null,
+  "suggested_scale_to_runtime": null,
+  "replacement_contract": "../action-contracts.json#/actions/throw",
+  "references": {
+    "new_master": null,
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
+  "frames": [
+    {
+      "name": "throw_00",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 100,
+      "phase": "startup"
+    },
+    {
+      "name": "throw_01",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 50,
+      "phase": "active"
+    },
+    {
+      "name": "throw_02",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 216,
+      "phase": "recovery"
+    }
+  ],
+  "generation_brief": "Open hand preparation, compact grasp inside short throw reach and pull/recovery; no opponent baked into the sheet.",
+  "review_notes": "Fill source rectangles, source pivots and one measured action scale only after viewing real generated pixels. This skeleton is not exportable art.",
+  "timing_reference": {
+    "move_id": "CloseThrow",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 22,
+      "active_start": 6,
+      "active_end": 8
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 100,
+      "recovery_starts": 150,
+      "clip_ends": 366
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -184.0,
+      "w": 61.33333333333333,
+      "h": 160.0
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -112.0,
+      "y": -184.0,
+      "w": 61.33333333333333,
+      "h": 160.0
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 81.33333333333333,
+      "y": -104.0
+    }
+  }
+}

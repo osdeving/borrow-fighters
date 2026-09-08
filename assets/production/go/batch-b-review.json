@@ -1,0 +1,199 @@
+{
+  "status": "Final integration and native validation complete; original static handoff checks retained below.",
+  "generator": "built-in image_gen",
+  "master": "reference/master.png",
+  "candidate_exported": false,
+  "actions": {
+    "punch_light": {
+      "action": "punch_light/action.json",
+      "sheet": "punch_light/sheet-v1.png",
+      "source": "punch_light/source-v4.png",
+      "scale_to_runtime": 0.35013262599469497,
+      "source_body_height_reference_px": 754,
+      "durations_ms": [
+        50,
+        83,
+        100
+      ],
+      "total_ms": 233,
+      "contact_landmark_right_xyxy": [
+        68.626,
+        -135.851,
+        90.684,
+        -122.897
+      ],
+      "contact_box_right": {
+        "x": 50.666666666666664,
+        "y": -141.33333333333334,
+        "w": 56.0,
+        "h": 40.0
+      },
+      "notes": "Short bent-elbow body jab. v1 was too high/long; v2 had no reach; v3 was still high. v4 selects the final compact contact.",
+      "diagnostic": "target/art/go-replacement-b/punch_light.gif",
+      "portable_diagnostic": "punch_light/review/punch_light.gif",
+      "portable_active_panel": "punch_light/review/punch_light-1.png"
+    },
+    "punch_heavy": {
+      "action": "punch_heavy/action.json",
+      "sheet": "punch_heavy/sheet-v1.png",
+      "source": "punch_heavy/source-v2.png",
+      "scale_to_runtime": 0.3641379310344828,
+      "source_body_height_reference_px": 725,
+      "durations_ms": [
+        183,
+        167,
+        233
+      ],
+      "total_ms": 583,
+      "contact_landmark_right_xyxy": [
+        122.35,
+        -130.726,
+        146.748,
+        -108.877
+      ],
+      "contact_box_right": {
+        "x": 50.666666666666664,
+        "y": -146.66666666666669,
+        "w": 128.0,
+        "h": 56.0
+      },
+      "notes": "Low body cross with visible weight transfer. v2 lowered the fist; normal anatomy scale is shared across all three poses.",
+      "diagnostic": "target/art/go-replacement-b/punch_heavy.gif",
+      "portable_diagnostic": "punch_heavy/review/punch_heavy.gif",
+      "portable_active_panel": "punch_heavy/review/punch_heavy-1.png"
+    },
+    "kick": {
+      "action": "kick/action.json",
+      "sheet": "kick/sheet-v1.png",
+      "source": "kick/source-v1.png",
+      "scale_to_runtime": 0.3557951482479784,
+      "source_body_height_reference_px": 742,
+      "durations_ms": [
+        116,
+        117,
+        150
+      ],
+      "total_ms": 383,
+      "contact_landmark_right_xyxy": [
+        101.046,
+        -80.765,
+        118.48,
+        -46.965
+      ],
+      "contact_box_right": {
+        "x": 50.666666666666664,
+        "y": -82.66666666666669,
+        "w": 114.66666666666666,
+        "h": 45.33333333333333
+      },
+      "notes": "Low front kick with readable heel/sole pads, chamber and recoil. Supporting paw stays at the ground anchor.",
+      "diagnostic": "target/art/go-replacement-b/kick.gif",
+      "portable_diagnostic": "kick/review/kick.gif",
+      "portable_active_panel": "kick/review/kick-1.png"
+    },
+    "sweep": {
+      "action": "sweep/action.json",
+      "sheet": "sweep/sheet-v1.png",
+      "source": "sweep/source-v2.png",
+      "scale_to_runtime": 0.3707865168539326,
+      "source_body_height_reference_px": 712,
+      "durations_ms": [
+        166,
+        150,
+        217
+      ],
+      "total_ms": 533,
+      "contact_landmark_right_xyxy": [
+        127.18,
+        -121.618,
+        167.225,
+        -97.517
+      ],
+      "contact_box_right": {
+        "x": 50.666666666666664,
+        "y": -136.0,
+        "w": 149.33333333333331,
+        "h": 40.0
+      },
+      "notes": "Supported elevated sweep; v2 lowers and turns the striking foot to the existing box. Perspective contact plane lies between planted palm and rear claws (about3px above/below runtime ground). v3 was rejected because it weakened fur detail and did not materially improve support.",
+      "diagnostic": "target/art/go-replacement-b/sweep.gif",
+      "portable_diagnostic": "sweep/review/sweep.gif",
+      "portable_active_panel": "sweep/review/sweep-1.png"
+    },
+    "overhead": {
+      "action": "overhead/action.json",
+      "sheet": "overhead/sheet-v1.png",
+      "source": "overhead/source-v1.png",
+      "scale_to_runtime": 0.37660485021398005,
+      "source_body_height_reference_px": 701,
+      "durations_ms": [
+        166,
+        100,
+        200
+      ],
+      "total_ms": 466,
+      "contact_landmark_right_xyxy": [
+        62.14,
+        -138.591,
+        85.489,
+        -113.735
+      ],
+      "contact_box_right": {
+        "x": 50.666666666666664,
+        "y": -168.0,
+        "w": 93.33333333333333,
+        "h": 64.0
+      },
+      "notes": "Raised windup, descending hammerfist, guard recovery. Body stays the same size despite the raised hand extending above the head.",
+      "diagnostic": "target/art/go-replacement-b/overhead.gif",
+      "portable_diagnostic": "overhead/review/overhead.gif",
+      "portable_active_panel": "overhead/review/overhead-1.png"
+    },
+    "throw": {
+      "action": "throw/action.json",
+      "sheet": "throw/sheet-v1.png",
+      "source": "throw/source-v2.png",
+      "scale_to_runtime": 0.3384615384615385,
+      "source_body_height_reference_px": 780,
+      "durations_ms": [
+        100,
+        50,
+        216
+      ],
+      "total_ms": 366,
+      "contact_landmark_right_xyxy": [
+        67.015,
+        -183.108,
+        81.231,
+        -162.462
+      ],
+      "contact_box_right": {
+        "x": 50.666666666666664,
+        "y": -184.0,
+        "w": 61.33333333333333,
+        "h": 160.0
+      },
+      "notes": "Two separated bent-arm grips. v2 lowered and extended the leading grasp into the short throw range; rear support hand naturally sits behind the contact hand.",
+      "diagnostic": "target/art/go-replacement-b/throw.gif",
+      "portable_diagnostic": "throw/review/throw.gif",
+      "portable_active_panel": "throw/review/throw-1.png"
+    }
+  },
+  "validation": {
+    "actions": 6,
+    "frames": 18,
+    "timings_and_phases_preserved": true,
+    "baseline_contracts_unchanged": true,
+    "all_contact_landmarks_inside_baseline_boxes": true,
+    "all_source_crops_have_transparent_padding": true,
+    "static_review": "All18poses inspected at runtime size, plus active poses mirrored on dark and light backgrounds. Sources and intermediate rejected variants preserved.",
+    "gif_note": "GIF preview duration quantizes to10ms; exact combat timing remains in action.json.",
+    "not_run_at_static_handoff": "No runtime exports or Rust changes in this lot; final Lab/World and sprite_candidates tests belong to integrator."
+  },
+  "runtime_review": {
+    "approved": true,
+    "report": "finalization-review.md",
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "sheet": "walk/keyed.png",
+  "sheet": "walk/selected-v1.png",
   "reviewed": true,
   "loop": true,
   "frames": [
@@ -8,60 +8,60 @@
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 512,
-        "h": 768
+        "w": 800,
+        "h": 900
       },
       "pivot": {
-        "x": 270,
-        "y": 670
+        "x": 350,
+        "y": 780
       },
       "duration_ms": 112,
-      "phase": "contact"
+      "phase": "near_leg_contact"
     },
     {
       "name": "walk_01",
       "source_rect": {
-        "x": 512,
+        "x": 800,
         "y": 0,
-        "w": 512,
-        "h": 768
+        "w": 800,
+        "h": 900
       },
       "pivot": {
-        "x": 270,
-        "y": 672
+        "x": 350,
+        "y": 780
       },
       "duration_ms": 113,
-      "phase": "passing"
+      "phase": "far_leg_passage"
     },
     {
       "name": "walk_02",
       "source_rect": {
-        "x": 1024,
+        "x": 1600,
         "y": 0,
-        "w": 512,
-        "h": 768
+        "w": 800,
+        "h": 900
       },
       "pivot": {
-        "x": 245,
-        "y": 669
+        "x": 350,
+        "y": 780
       },
       "duration_ms": 112,
-      "phase": "opposite_contact"
+      "phase": "far_leg_contact"
     },
     {
       "name": "walk_03",
       "source_rect": {
-        "x": 1536,
+        "x": 2400,
         "y": 0,
-        "w": 512,
-        "h": 768
+        "w": 800,
+        "h": 900
       },
       "pivot": {
-        "x": 235,
-        "y": 672
+        "x": 350,
+        "y": 780
       },
       "duration_ms": 113,
-      "phase": "opposite_passing"
+      "phase": "near_leg_passage"
     }
   ]
 }

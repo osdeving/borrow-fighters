@@ -1,0 +1,51 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "keyed-v1.png",
+  "scale": 0.3371647509578544,
+  "frames": [
+    {
+      "name": "crouch_00",
+      "clip": "crouch",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 305,
+        "y": 812
+      },
+      "duration_ms": 80
+    },
+    {
+      "name": "crouch_02",
+      "clip": "crouch",
+      "frame": {
+        "x": 1254,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 150,
+        "y": 815
+      },
+      "duration_ms": 280
+    }
+  ],
+  "clips": [
+    {
+      "name": "crouch",
+      "loop": false,
+      "frames": [
+        "crouch_00",
+        "crouch_02"
+      ]
+    }
+  ],
+  "cell": {
+    "w": 627,
+    "h": 836
+  }
+}

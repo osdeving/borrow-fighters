@@ -1,0 +1,73 @@
+{
+  "action": "kick",
+  "source": null,
+  "sheet": null,
+  "loop": false,
+  "reviewed": false,
+  "status": "planning placeholder; no new image generated, no source geometry approved",
+  "source_body_height_reference_px": null,
+  "suggested_scale_to_runtime": null,
+  "replacement_contract": "../action-contracts.json#/actions/kick",
+  "references": {
+    "new_master": null,
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
+  "frames": [
+    {
+      "name": "kick_00",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 116,
+      "phase": "startup"
+    },
+    {
+      "name": "kick_01",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 117,
+      "phase": "active"
+    },
+    {
+      "name": "kick_02",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 150,
+      "phase": "recovery"
+    }
+  ],
+  "generation_brief": "Chamber, anatomically readable low kick and recovery; contact near the low baseline box with the other foot planted.",
+  "review_notes": "Fill source rectangles, source pivots and one measured action scale only after viewing real generated pixels. This skeleton is not exportable art.",
+  "timing_reference": {
+    "move_id": "GoDeferKick",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 23,
+      "active_start": 7,
+      "active_end": 13
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 116,
+      "recovery_starts": 233,
+      "clip_ends": 383
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -82.66666666666669,
+      "w": 114.66666666666666,
+      "h": 45.33333333333333
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -165.33333333333331,
+      "y": -82.66666666666669,
+      "w": 114.66666666666666,
+      "h": 45.33333333333333
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 108.0,
+      "y": -60.00000000000002
+    }
+  }
+}

@@ -15,8 +15,8 @@
     },
     "walk": {
       "approved": true,
-      "scale_to_runtime": 0.4123076923076923,
-      "notes": "Selected assembly v4 preserves v2 contact0, passing1 and passing3, replacing repeated contact2 with independently generated v3 opposite/plain leading leg contact. V3 complete sheet degraded passing poses, so only corrected generated key2 was selected. Exact source components and rectangles recorded; crop/pack preserves pixels without constructing poses procedurally. Footwear overlap now alternates, though arm counter-swing and gold-stripe leg identity remain subtle. One uniform268/650 anatomical scale, frame2 grounded anchor691 compensates source placement only. Approved only for candidate review export, not final art release."
+      "scale_to_runtime": 0.4200626959247649,
+      "notes": "Selected v8 packs whole generated v6 keys0/1/2 and v7 key3. The near gold-striped leg leads at contact0; the far plain leg leads at contact2. Passing1 plants the far leg, passing3 plants the near leg with the far boot lifted. Near-arm placement follows the opposite contacts. V5/v6 fourth poses and the regressed v7 contact2 were rejected. Uniform268/638 anatomical scale and source ground pivots708/710/707/712 compensate source placement only. Original100ms per key,400ms loop preserved. Crops exclude the isolated lower-left matte pixel without retouching artwork. Candidate export; finalization evidence is recorded separately."
     },
     "jump": {
       "approved": true,
@@ -36,7 +36,7 @@
     "crouch_block": {
       "approved": true,
       "scale_to_runtime": 0.3889695210449927,
-      "notes": "Selected v4 after v1-v3 kept torso too upright. Deep forward hunker preserves head/limb scale, silhouette about92-95px within128px crouch height. Guard recoil is subtle; bag stays continuous. Approved only for candidate review export, not final art release."
+      "notes": "Selected generated v6 changes the rear arm of crouch/source-v2 into a face/chest guard while retaining the crouch body depth. Runtime silhouette about114-118px now matches ordinary crouch113-119px instead of former92-95px guard. Uniform268/689 scale and110/90/140ms timing preserved. Pivots330,735 /309,736 /300,736 register generated support positions; no body rescaling, gameplay change or procedural posture construction. v5 rejected because it raised the torso too far. Crop excludes an isolated matte pixel below all body contours. Candidate export; finalization evidence is recorded separately."
     },
     "hit": {
       "approved": true,
@@ -81,7 +81,7 @@
     "air_kick": {
       "approved": true,
       "scale_to_runtime": 0.4123076923076923,
-      "notes": "Source upright anatomical equivalent650px by head/torso scale; one uniform268/650 scale. Virtual pivots register belt at about-160world across the3 poses, with knees changing only limb posture. Active boot contact projects near(+161.2,-56.9), inside the forward/lower edge of the baseline air-kick box. The outermost gold sole extends slightly past that edge and remains an artistic review caveat; gameplay is unchanged. Approved only for candidate review export, not final art release."
+      "notes": "Selected v3 redraws the active ankle/boot in dorsiflexion while preserving the downward leg, trunk, startup and recovery. Original uniform268/650 scale, belt-registered virtual pivots and116/167/150ms timing retained. Active sole center around(1205,579) maps to(+160.8,-72.2), within the existing box; lowest heel at648 maps about-43.7, within2px of its lower edge-45.3, reducing the former~15px extension. v2 rejected for raising the entire leg too high. No combat or whole-body translation change. First crop excludes isolated matte pixel below the artwork. Candidate export; finalization evidence is recorded separately."
     },
     "throw": {
       "approved": true,

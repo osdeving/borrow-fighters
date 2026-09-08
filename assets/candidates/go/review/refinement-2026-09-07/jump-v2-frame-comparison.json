@@ -1,0 +1,20 @@
+{
+  "previous_manifest_sha256": "b865f26b9cd586c27f5ddecfdae47979ca14b55717c50494753432095409550f",
+  "previous_atlas_sha256": "535bda2c604dfaec68fcbf157451c7a55dfc5a69e6adbdf61ffcadfc14972060",
+  "final_manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+  "final_atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+  "changed_frames": [
+    "jump_00",
+    "jump_01",
+    "jump_02"
+  ],
+  "unchanged_frames": 57,
+  "compared": [
+    "raw RGBA frame pixels",
+    "frame dimensions",
+    "pivot",
+    "trimmed bounds",
+    "clip",
+    "duration_ms"
+  ]
+}

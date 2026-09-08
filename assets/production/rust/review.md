@@ -1,5 +1,7 @@
 # Rust — revisão do piloto candidato
 
+**Histórico do primeiro lote.** Para os refinamentos e capturas da continuação, consulte a [revisão atual](finalization-review.md).
+
 O piloto contém **20 clips e 71 desenhos selecionados**. As fontes foram geradas com a ferramenta de imagem real, uma ação por folha, mantendo o personagem original. Revisões rejeitadas, prompts, recortes explícitos, pivôs e durações permanecem em cada pasta de ação.
 
 - [Atlas e manifesto](../../candidates/rust/rust-fighter.sprite.json)

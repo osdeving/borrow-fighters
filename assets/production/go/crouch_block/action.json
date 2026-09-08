@@ -1,22 +1,30 @@
 {
   "action": "crouch_block",
-  "source": "crouch_block/source-v2.png",
-  "sheet": "crouch_block/keyed.png",
+  "source": "crouch_block/source-v1.png",
+  "sheet": "crouch_block/keyed-v1.png",
   "loop": false,
-  "source_body_height_reference_px": 444,
-  "normalization_note": "Deep crouching guard v2 selected. Standing-height reference444 is inherited from the crouch sheet whose head size matches this sheet. v1 was a shallow squat and rejected.",
+  "reviewed": true,
+  "status": "Final generated art reviewed: complete World in both facings, native Lab, Sprite Studio and normal match; evidence in finalization-review.md.",
+  "source_body_height_reference_px": 783.0,
+  "suggested_scale_to_runtime": 0.3371647509578544,
+  "replacement_contract": "../action-contracts.json#/actions/crouch_block",
+  "references": {
+    "new_master": "reference/master.png",
+    "new_idle": "idle/source-v1.png",
+    "old_pose_art_allowed": false
+  },
   "frames": [
     {
       "name": "crouch_block_00",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 591,
-        "h": 887
+        "w": 627,
+        "h": 836
       },
       "pivot": {
-        "x": 370,
-        "y": 761
+        "x": 290,
+        "y": 762
       },
       "duration_ms": 70,
       "phase": "crouch_block"
@@ -24,14 +32,14 @@
     {
       "name": "crouch_block_01",
       "source_rect": {
-        "x": 591,
+        "x": 627,
         "y": 0,
-        "w": 592,
-        "h": 887
+        "w": 627,
+        "h": 836
       },
       "pivot": {
-        "x": 298,
-        "y": 761
+        "x": 234,
+        "y": 762
       },
       "duration_ms": 80,
       "phase": "crouch_block"
@@ -39,18 +47,28 @@
     {
       "name": "crouch_block_02",
       "source_rect": {
-        "x": 1183,
+        "x": 1254,
         "y": 0,
-        "w": 591,
-        "h": 887
+        "w": 627,
+        "h": 836
       },
       "pivot": {
-        "x": 223,
+        "x": 157,
         "y": 762
       },
       "duration_ms": 150,
       "phase": "crouch_block"
     }
   ],
-  "review_notes": "Built-in image_gen, original narrow Go master and generated idle continuity. Flat magenta extracted without Rust contour mode; isolated matte corner pixels removed where present. Candidate visual only; baseline combat remains authoritative."
+  "generation_brief": "Protect head/chest while retaining crouch depth and support; avoid sinking farther than ordinary crouch or scaling the body down.",
+  "review_notes": "Three low guard/absorb/settle keys generated from the selected crouch hold. Heights approximately 124/133/123 px; 300 ms preserved.",
+  "runtime_review": {
+    "approved": true,
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "report": "../finalization-review.md",
+    "world_facings_seen": [],
+    "lab_capture": "full set before jump, art unchanged by frame checksum",
+    "normal_match_result_evidence": false
+  }
 }

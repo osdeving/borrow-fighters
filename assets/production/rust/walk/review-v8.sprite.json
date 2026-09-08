@@ -1,0 +1,75 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "cleaned-v8.png",
+  "scale": 0.4364820846905538,
+  "frames": [
+    {
+      "name": "walk_00",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 560,
+        "h": 768
+      },
+      "pivot": {
+        "x": 327,
+        "y": 706
+      },
+      "duration_ms": 100
+    },
+    {
+      "name": "walk_01",
+      "frame": {
+        "x": 560,
+        "y": 0,
+        "w": 464,
+        "h": 768
+      },
+      "pivot": {
+        "x": 267,
+        "y": 706
+      },
+      "duration_ms": 100
+    },
+    {
+      "name": "walk_02",
+      "frame": {
+        "x": 1024,
+        "y": 0,
+        "w": 560,
+        "h": 768
+      },
+      "pivot": {
+        "x": 301,
+        "y": 714
+      },
+      "duration_ms": 100
+    },
+    {
+      "name": "walk_03",
+      "frame": {
+        "x": 1584,
+        "y": 0,
+        "w": 464,
+        "h": 768
+      },
+      "pivot": {
+        "x": 191,
+        "y": 708
+      },
+      "duration_ms": 100
+    }
+  ],
+  "clips": [
+    {
+      "name": "walk",
+      "frames": [
+        "walk_00",
+        "walk_01",
+        "walk_02",
+        "walk_03"
+      ],
+      "loop": true
+    }
+  ]
+}

@@ -6,7 +6,8 @@
     "status": "candidate",
     "generator": "built-in imagegen",
     "identity_reference": "reference/master-existing.png",
-    "combat": "Visual-only candidate; runtime retains baseline combat_manifest."
+    "combat": "Visual-only candidate; runtime retains baseline combat_manifest.",
+    "review": "finalization-review.md"
   },
   "actions": {
     "idle": {
@@ -92,12 +93,12 @@
           "source_rect": {
             "x": 0,
             "y": 0,
-            "w": 323,
-            "h": 323
+            "w": 244,
+            "h": 335
           },
           "pivot": {
-            "x": 183,
-            "y": 294
+            "x": 143,
+            "y": 308
           },
           "duration_ms": 100,
           "phase": "contact-near"
@@ -105,14 +106,14 @@
         {
           "name": "walk_01",
           "source_rect": {
-            "x": 323,
+            "x": 244,
             "y": 0,
-            "w": 323,
-            "h": 323
+            "w": 203,
+            "h": 335
           },
           "pivot": {
-            "x": 152,
-            "y": 294
+            "x": 117,
+            "y": 308
           },
           "duration_ms": 100,
           "phase": "passing-far"
@@ -120,14 +121,14 @@
         {
           "name": "walk_02",
           "source_rect": {
-            "x": 646,
+            "x": 488,
             "y": 0,
-            "w": 323,
-            "h": 323
+            "w": 244,
+            "h": 335
           },
           "pivot": {
-            "x": 175,
-            "y": 292
+            "x": 131,
+            "y": 312
           },
           "duration_ms": 100,
           "phase": "contact-far"
@@ -135,14 +136,14 @@
         {
           "name": "walk_03",
           "source_rect": {
-            "x": 969,
+            "x": 732,
             "y": 0,
-            "w": 323,
-            "h": 323
+            "w": 203,
+            "h": 335
           },
           "pivot": {
-            "x": 133,
-            "y": 290
+            "x": 83,
+            "y": 309
           },
           "duration_ms": 100,
           "phase": "passing-near"
@@ -150,9 +151,9 @@
       ],
       "provenance": {
         "source_action": "walk/action.json",
-        "source_sheet": "walk/cleaned-v3.png",
-        "scale_to_runtime": 0.63,
-        "review": "Four selected keys contact/pass each foot; original v3 cells 0,1,3,5. Need movement check after export."
+        "source_sheet": "walk/cleaned-v8.png",
+        "scale_to_runtime": 0.4364820846905538,
+        "review": "v8 four distinct walk keys explicitly alternate near cargo-pocket leg and far plain leg; v4/v5 rejected for repeated contact. Master identity and idle retained as references. Ground pivots and one uniform scale selected from 614px body reference; clip stays400ms. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
       }
     },
     "crouch": {
@@ -210,7 +211,7 @@
         "source_action": "crouch/action.json",
         "source_sheet": "crouch/keyed.png",
         "scale_to_runtime": 0.47,
-        "review": "Source inspected by production agent; root alpha review and common-scale preview. Functional review pending."
+        "review": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
       }
     },
     "jump": {
@@ -326,7 +327,7 @@
         "source_action": "block/action.json",
         "source_sheet": "block/keyed.png",
         "scale_to_runtime": 0.46,
-        "review": "Source inspected by production agent; root alpha review and common-scale preview. Functional review pending."
+        "review": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
       }
     },
     "crouch_block": {
@@ -384,7 +385,7 @@
         "source_action": "crouch_block/action.json",
         "source_sheet": "crouch_block/keyed.png",
         "scale_to_runtime": 0.43,
-        "review": "Source inspected by production agent; root alpha review and common-scale preview. Functional review pending."
+        "review": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
       }
     },
     "hit": {
@@ -442,7 +443,7 @@
         "source_action": "hit/action.json",
         "source_sheet": "hit/keyed.png",
         "scale_to_runtime": 0.47,
-        "review": "Source inspected by production agent; root alpha review and common-scale preview. Functional review pending."
+        "review": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
       }
     },
     "punch_light": {
@@ -732,9 +733,9 @@
       ],
       "provenance": {
         "source_action": "sweep/action.json",
-        "source_sheet": "sweep/keyed.png",
+        "source_sheet": "sweep/keyed-v6.png",
         "scale_to_runtime": 0.47,
-        "review": "Selected v2 rising sweep: the original crouched floor sweep missed the baseline hitbox at y480–520. Its raised ankle/shin intersects that existing box. The game clears crouching during all attacks; physical posture and collision remain unchanged. v3 dropped the foot below contact; v4 raised it further, both rejected. Ground support fixed; hand contact and upright recovery are explicit."
+        "review": "v6 lowers the active sole into the unchanged sweep box after rejecting v5 (sole too low). All four source rectangles, scale .47, ground pivots and combat timing preserved. Magenta extracted; pale pocket between arm and thigh removed by prepare-v6.py. Static contact/identity/alpha inspected; runtime recapture pending."
       }
     },
     "overhead": {
@@ -913,7 +914,7 @@
           },
           "pivot": {
             "x": 126,
-            "y": 323
+            "y": 345
           },
           "duration_ms": 150,
           "phase": "active"
@@ -953,7 +954,7 @@
         "source_action": "air_punch/action.json",
         "source_sheet": "air_punch/keyed.png",
         "scale_to_runtime": 0.497217,
-        "review": "v1 runtime fist was much too high. v2 selected downward air punch: active glove approximately source x885..953,y443..497 maps through unchanged global pivot743,650 and scale268/539 to world x71..104,y-103..-76; captured active box x50.67..145,y-130..-74. Source body also pitches down: active hair top155 versus startup110, rear boot bottom602 versus575. This visible 13..22px shift is NOT concealed by moving pivot. v3 and v4 attempts to restore body height were rejected because generator lowered it further. Runtime review should judge the brief downward body pitch; contact geometry fits without combat changes."
+        "review": "Existing source-v2 artwork recalibrated, not regenerated. Active pose hair and waist were44 source px lower than other poses; only air_punch_1 virtual pivot.y650→694 removes ~22px displacement. Hand remains within baseline box (world y approximately -125..-98 versus -130..-74). All other pivots, scale, timing and combat unchanged. See air_punch/pivot-calibration-2026-09-07.md; runtime recapture pending."
       }
     },
     "air_kick": {
@@ -971,7 +972,7 @@
           },
           "pivot": {
             "x": 139,
-            "y": 313
+            "y": 323
           },
           "duration_ms": 116,
           "phase": "startup"
@@ -986,7 +987,7 @@
           },
           "pivot": {
             "x": 112,
-            "y": 313
+            "y": 323
           },
           "duration_ms": 167,
           "phase": "active"
@@ -1001,7 +1002,7 @@
           },
           "pivot": {
             "x": 94,
-            "y": 313
+            "y": 323
           },
           "duration_ms": 75,
           "phase": "recovery"
@@ -1016,7 +1017,7 @@
           },
           "pivot": {
             "x": 114,
-            "y": 313
+            "y": 323
           },
           "duration_ms": 75,
           "phase": "recovery"
@@ -1024,9 +1025,9 @@
       ],
       "provenance": {
         "source_action": "air_kick/action.json",
-        "source_sheet": "air_kick/keyed.png",
+        "source_sheet": "air_kick/cleaned-v2.png",
         "scale_to_runtime": 0.497217,
-        "review": "Uniform visual calibration of the airborne reference for all four poses: virtual Y650→630 (~10px downward in world), preserving scale and inter-pose offsets. The initial sole missed the unchanged active box by4px. This keeps feet above the physical anchor and brings the active sole into contact; no body, hitbox, trajectory or timing modification."
+        "review": "v2 redraws only the active extended leg and sneaker downward so the sole reaches the original airborne hitbox. All four virtual Y anchors restored from temporary630 to original650: the previous whole-clip downward offset is no longer needed. Scale .497217, X anchors, timing, physics and baseline collision unchanged. Static pose/contact/alpha reviewed; World transition recapture pending."
       }
     },
     "throw": {
@@ -1097,9 +1098,9 @@
       ],
       "provenance": {
         "source_action": "throw/action.json",
-        "source_sheet": "throw/keyed.png",
+        "source_sheet": "throw/cleaned-v2.png",
         "scale_to_runtime": 0.538153,
-        "review": "Four explicit source poses reviewed by producing agent. Runtime body normalized using source_body_height_reference_px; no per-frame automatic fitting."
+        "review": "v2 shortens the active grasp by naturally bending both elbows. Forward hand is inside the original Ownership reach; other hand stays near the chest. Ground anchors, scale and all durations unchanged. Generated RGB checkerboard removed offline; source preserved. Static contact and silhouette reviewed; runtime recapture pending."
       }
     },
     "special": {

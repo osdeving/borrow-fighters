@@ -116,7 +116,9 @@ No viewer:
 
 O Go ficou baixo e largo demais em comparacao com Rust e C. A primeira correcao, com `scale = 0.88` e corpo fisico `92 x 156 / crouch 88`, deixou o personagem legivel, mas ainda reforcava a leitura de mascote pequeno/gordinho.
 
-A correcao atual comprime `assets/placeholder/go-fighter-atlas.png` e `assets/placeholder/go-start-atlas.png` horizontalmente em torno do pivot, remove ilhas soltas de frames no atlas de luta, define `scale = 1.44` nos manifestos do Go e usa corpo fisico padrao `101,3 x 224 / crouch 128` em `assets/tuning/character-body-metrics.json`. A intencao e preservar a identidade de Gopher sem fazer o personagem parecer baixo/largo ou em outra escala de jogo. Esse `1.44` e o antigo `1.08` migrado pela escala `4/3`.
+O novo Go semirrealista usa atlas preparado em escala runtime, com referência visual de 264 px em idle e corpo físico preservado. Ver [master e medidas](../assets/production/go/reference/README.md) e [contratos por ação](../assets/production/go/action-contracts.json). As escalas abaixo descrevem os placeholders preservados e seu contrato de combate.
+
+A correcao histórica comprime `assets/placeholder/go-fighter-atlas.png` e `assets/placeholder/go-start-atlas.png` horizontalmente em torno do pivot, remove ilhas soltas de frames no atlas de luta, define `scale = 1.44` nos manifestos do Go e usa corpo fisico padrao `101,3 x 224 / crouch 128` em `assets/tuning/character-body-metrics.json`. A intencao e preservar a identidade de Gopher sem fazer o personagem parecer baixo/largo ou em outra escala de jogo. Esse `1.44` e o antigo `1.08` migrado pela escala `4/3`.
 
 Rust e Duke/Java usam `scale = 1.3333` nos manifestos de luta porque esse e o antigo tamanho efetivo `1.0` migrado pela escala `4/3`. As intros de spawn de Rust/Duke usam `scale = 1.2267`, preservando o ajuste relativo anterior de `0.92`.
 

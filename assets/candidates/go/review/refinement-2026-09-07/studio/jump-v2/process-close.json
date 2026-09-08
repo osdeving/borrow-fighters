@@ -1,0 +1,9 @@
+{
+  "studio_pid": 3387235,
+  "command": "tools/sprite-studio/src-tauri/target/debug/borrow-fighters-sprite-studio",
+  "signal": "SIGINT",
+  "only_own_process": true,
+  "other_processes_signalled": false,
+  "session_exit_code": 130,
+  "hashes_unchanged_after_close": true
+}

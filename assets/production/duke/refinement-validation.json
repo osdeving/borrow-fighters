@@ -1,0 +1,71 @@
+{
+  "unchanged_actions": [
+    "idle",
+    "crouch",
+    "jump",
+    "block",
+    "hit",
+    "punch_light",
+    "punch_heavy",
+    "kick",
+    "sweep",
+    "anti_air",
+    "air_punch",
+    "air_kick",
+    "throw",
+    "special",
+    "spawn",
+    "victory",
+    "defeat"
+  ],
+  "unchanged_action_count": 17,
+  "timings": {
+    "walk": {
+      "before_ms": 450,
+      "after_ms": 450,
+      "durations_ms": [
+        112,
+        113,
+        112,
+        113
+      ],
+      "phases": [
+        "near_leg_contact",
+        "far_leg_passage",
+        "far_leg_contact",
+        "near_leg_passage"
+      ]
+    },
+    "overhead": {
+      "before_ms": 666,
+      "after_ms": 666,
+      "durations_ms": [
+        250,
+        133,
+        283
+      ],
+      "phases": [
+        "startup",
+        "active",
+        "recovery"
+      ]
+    },
+    "crouch_block": {
+      "before_ms": 360,
+      "after_ms": 360,
+      "durations_ms": [
+        80,
+        100,
+        180
+      ],
+      "phases": [
+        "low_guard",
+        "low_absorb",
+        "held_low_guard"
+      ]
+    }
+  },
+  "test": "cargo test --test sprite_candidates -- --nocapture: 2 passed; 0 failed",
+  "atlas_sha256": "0488acccdb9537f993b53c27ce2a28a2f01e031235f6743aaf010904c37c5634",
+  "phase_note": "The descriptive overhead phase aliases were corrected to canonical startup/active/recovery after captures started. Atlas SHA256 and all timings/pivots/crops remained byte-identical. Phase labels do not drive the runtime animation."
+}

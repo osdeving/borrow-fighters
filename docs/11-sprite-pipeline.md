@@ -144,7 +144,7 @@ Fallbacks visuais de manifestos antigos sao explicitos: `victory → taunt → i
 
 ## Revisao de candidatos no runtime
 
-As fontes por acao ficam em `assets/production/<personagem>/`; o exportador gera `assets/candidates/<personagem>/<personagem>-fighter.sprite.json`. O fluxo e a proveniencia estao em [ADR 0010](adr/0010-reviewed-action-sprite-production.md). Exportar nao substitui placeholders nem ativa arte automaticamente.
+As fontes por acao ficam em `assets/production/<personagem>/`; o exportador gera `assets/candidates/<personagem>/<personagem>-fighter.sprite.json`. O fluxo e a proveniencia estao em [ADR 0010](adr/0010-reviewed-action-sprite-production.md). Os placeholders permanecem preservados. A escolha inicial dos conjuntos completos segue o [ADR 0011](adr/0011-reviewed-art-default.md): sem variavel, a apresentacao usa os atlas revisados; `1` os seleciona explicitamente e `0` (ou valor invalido) permite comparar os originais. Exportar uma revisao futura nao substitui sua revisao artistica e funcional.
 
 Para revisar um conjunto completo em luta ou Combat Lab:
 
@@ -155,7 +155,7 @@ BORROW_FIGHTERS_SPRITE_CANDIDATES=1 cargo run -- --lab combat --character rust -
 
 O loader verifica o candidato de cada personagem (`rust`, `duke`, `go`, `c`, `python`, `cpp`) e exige os 20 clips listados acima. Arquivo ausente, invalido, textura ausente ou conjunto incompleto mantem o placeholder daquele personagem; clips faltantes produzem aviso no terminal. Essa verificacao cobre nomes e estrutura, nao aprova os desenhos. Um conjunto parcial deve ser aberto diretamente no Sprite Viewer/Studio, sem mascarar golpes ausentes com `idle` na luta.
 
-O mesmo opt-in permite revisar um efeito separado em `assets/candidates/<key>/<key>-projectile.png`, independentemente do atlas do lutador. Arquivo ausente ou falha de carregamento preservam a textura original do projetil. Specs, origem, colisao e a formula de desenho permanecem iguais: largura e altura do PNG multiplicadas por `0.45 * RESOLUTION_SCALE`. Portanto, o canvas candidato precisa de revisao na escala real; o renderer nao ajusta sua imagem automaticamente a hitbox fisica.
+A mesma selecao permite carregar um efeito separado em `assets/candidates/<key>/<key>-projectile.png`, independentemente do atlas do lutador. Arquivo ausente ou falha de carregamento preservam a textura original do projetil. Specs, origem, colisao e a formula de desenho permanecem iguais: largura e altura do PNG multiplicadas por `0.45 * RESOLUTION_SCALE`. Portanto, o canvas candidato precisa de revisao na escala real; o renderer nao ajusta sua imagem automaticamente a hitbox fisica.
 
 `SpriteAtlasAsset.manifest` define o desenho e suas texturas; `combat_manifest` conserva o manifesto baseline de `assets/placeholder/`. `App` entrega somente `combat_manifest` ao `World`, e o overlay da luta usa os mesmos dados. Assim, escala, pivôs e metadata experimentais do candidato nao mudam alcance, hurtboxes ou origem do projectile. No Sprite Viewer, abrir um candidato mostra os dados desse proprio arquivo; isso nao demonstra que foram ativados na luta.
 

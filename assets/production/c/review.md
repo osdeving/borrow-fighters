@@ -1,3 +1,5 @@
+> Histórico da produção anterior. O estado atual, as correções e a evidência de execução estão no [laudo de finalização de 07/09/2026](finalization-review.md).
+
 # C — revisão do candidato
 
 Produzidas as 20 ações com imagegen real, uma folha por ação, referência original fixa e idle novo em todas as chamadas seguintes. Resultado exportado: **20 clips, 61 frames, atlas 3488 × 2928, escala runtime 1,0**. O corpo em idle fica próximo de 268 px. O livro C permanece nas poses, incluindo chutes, dano, salto e derrota.

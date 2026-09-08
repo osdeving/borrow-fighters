@@ -1,0 +1,15 @@
+{
+  "command": "env -u BORROW_FIGHTERS_SPRITE_CANDIDATES cargo run -- --fight --p1 go --p2 go",
+  "sprite_candidates_env": null,
+  "result": {
+    "go_p1": 53,
+    "go_p2": 0
+  },
+  "assets_at_review": {
+    "assets/candidates/go/go-fighter.sprite.json": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "assets/candidates/go/go-fighter-atlas.png": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "assets/placeholder/go-channel-projectile.png": "4257c24a9994216a5d3e032884391c1ebd02270ddaee3f44639774043252c8e5",
+    "assets/tuning/character-body-metrics.json": "7f77453d98681adf5b6b0d8020ca8167dcbb8245ea97363425c5fc9cf309c962"
+  },
+  "review": "Actual application recaptured after jump v2 export, CPU versus CPU through result; victory and defeat grounded, new semi-realistic art in both facings. World separately verifies all moves and jump transitions."
+}

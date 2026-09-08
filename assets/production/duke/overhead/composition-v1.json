@@ -1,0 +1,84 @@
+{
+  "operation": "Composition of real generated full poses; no invented/repeated frames or anatomy painting",
+  "runtime_scale": 0.4169435215946844,
+  "frames": [
+    {
+      "source": "keyed-v6.png",
+      "source_rect_xyxy": [
+        0,
+        0,
+        682,
+        768
+      ],
+      "uniform_normalization": 1.0,
+      "source_local_pivot": [
+        327,
+        661
+      ],
+      "destination_offset": [
+        23,
+        119
+      ],
+      "duration_ms": 250,
+      "phase": "startup",
+      "reviewed_background_gap_seeds": [
+        [
+          198,
+          432
+        ]
+      ]
+    },
+    {
+      "source": "keyed-v8.png",
+      "source_rect_xyxy": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "uniform_normalization": 0.53,
+      "source_local_pivot": [
+        490,
+        1274
+      ],
+      "destination_offset": [
+        890,
+        105
+      ],
+      "duration_ms": 133,
+      "phase": "active",
+      "reviewed_background_gap_seeds": [
+        [
+          251,
+          852
+        ]
+      ]
+    },
+    {
+      "source": "keyed-v6.png",
+      "source_rect_xyxy": [
+        1365,
+        0,
+        2048,
+        768
+      ],
+      "uniform_normalization": 1.0,
+      "source_local_pivot": [
+        327,
+        661
+      ],
+      "destination_offset": [
+        1623,
+        119
+      ],
+      "duration_ms": 283,
+      "phase": "recovery",
+      "reviewed_background_gap_seeds": [
+        [
+          1566,
+          432
+        ]
+      ]
+    }
+  ]
+}

@@ -1,115 +1,150 @@
 {
   "character": "go",
   "provenance": {
-    "status": "candidate",
+    "status": "Final generated art reviewed: complete World in both facings, native Lab, Sprite Studio and normal match; evidence in finalization-review.md.",
     "generator": "built-in image_gen",
-    "identity_reference": "reference/master-existing.png",
-    "footwear_reference": "reference/footwear-existing.png",
-    "continuity_reference": "reference/idle-generated.png",
-    "combat": "Visual only; runtime baseline combat_manifest remains authoritative.",
-    "alpha_processing": "tools/art/remove_generated_magenta.py without --rust-contour; isolated one-pixel matte residue at blank sheet corners was cleared.",
-    "contact_contract": "../contact-contract.json"
+    "identity_reference": "reference/master.png",
+    "continuity_reference": "idle/source-v1.png",
+    "combat": "Existing baseline combat_manifest remains authoritative; no gameplay changes.",
+    "export_destination": "assets/candidates/go",
+    "superseded_production": "../go-cartoon-archive",
+    "superseded_candidate": "../../candidates/go-cartoon-archive",
+    "native_review": "finalization-review.md"
   },
   "actions": {
     "idle": {
       "approved": true,
-      "scale_to_runtime": 0.5,
-      "notes": "Three selected poses from four generated. Uniform body scale; deep squat pose omitted. Feet at same source ground. Static review completed; final GPU motion review pending."
+      "scale_to_runtime": 0.3371647509578544,
+      "notes": "Three restrained breathing/guard keys; fixed sole and waist registration at 264 px.",
+      "runtime_review": "finalization-review.md"
     },
     "walk": {
       "approved": true,
-      "scale_to_runtime": 0.55,
-      "notes": "Two distinct martial advancing poses selected from v2. Repeated cells2/3 omitted; v1 repeated the same pair, v3 exaggerated body bob. Short two-phase shuffle; fluidity remains a candidate limitation. Explicit visual review for packing; final-art approval remains pending."
-    },
-    "crouch": {
-      "approved": true,
-      "scale_to_runtime": 0.5945945945945946,
-      "notes": "Three progressively folded poses. Scale comes from first upright body, not the shrinking crouch bounds. Explicit visual review for packing; final-art approval remains pending."
+      "scale_to_runtime": 0.4258064516129032,
+      "notes": "Four real low martial shuffle poses; 240 ms preserved. Separate contact, weight transfer, closing step and advancing lead paw. Uniform anatomical scale; grounded support per pose. World confirmed both facings and grounded return to idle.",
+      "runtime_review": "finalization-review.md"
     },
     "jump": {
       "approved": true,
-      "scale_to_runtime": 0.5116279069767442,
-      "notes": "Takeoff then rise/fall. Rise/fall pivots compensate the52px belt displacement in the source. Their heads differ by7sourcepixels after registration; no artificial whole-body jump offset is baked into the frame. Physics supplies the arc. Explicit visual review for packing; final-art approval remains pending."
+      "sheet": "jump/keyed-v2.png",
+      "scale_to_runtime": 0.37,
+      "notes": "Selected real generated v2 after independent review found v1 anatomically small. Head width53–55px matches idle55px; uniform .37 scale and virtual pivots336,745 /294,723 /236,784. Final sole1px above anchor; 60/340/400ms preserved. See jump/refinement-review-v2.md. Final World and Lab recapture passed.",
+      "runtime_review": "finalization-review.md"
+    },
+    "crouch": {
+      "approved": true,
+      "scale_to_runtime": 0.3371647509578544,
+      "notes": "Selected entry cell 0 and held cell 2. Cell 1 rejected for an invented dark chin detail. Entry 80 ms plus hold 280 ms preserve 360 ms total; hold approximately 123 px tall.",
+      "runtime_review": "finalization-review.md"
     },
     "block": {
       "approved": true,
-      "scale_to_runtime": 0.44745762711864406,
-      "notes": "Standing guard, crossed-arm absorption and held guard, grounded at the soles. Explicit visual review for packing; final-art approval remains pending."
+      "scale_to_runtime": 0.3371647509578544,
+      "notes": "Three standing guard/brace/settle keys. Uniform idle anatomical scale preserves bent-knee compression.",
+      "runtime_review": "finalization-review.md"
     },
     "crouch_block": {
       "approved": true,
-      "scale_to_runtime": 0.5945945945945946,
-      "notes": "Deep crouching guard v2 selected. Standing-height reference444 is inherited from the crouch sheet whose head size matches this sheet. v1 was a shallow squat and rejected. Explicit visual review for packing; final-art approval remains pending."
+      "scale_to_runtime": 0.3371647509578544,
+      "notes": "Three low guard/absorb/settle keys generated from the selected crouch hold. Heights approximately 124/133/123 px; 300 ms preserved.",
+      "runtime_review": "finalization-review.md"
     },
     "hit": {
       "approved": true,
-      "scale_to_runtime": 0.48,
-      "notes": "Recoil and pain pose, then exhausted recovery. First pose stretches and tilts; normalize using the final upright body, not the widest recoil bounds. Explicit visual review for packing; final-art approval remains pending."
+      "scale_to_runtime": 0.3371647509578544,
+      "notes": "Three struck/recoil/guard-recovery keys; grounded sole registration and uniform idle anatomical scale, 260 ms preserved.",
+      "runtime_review": "finalization-review.md"
     },
     "punch_light": {
       "approved": true,
-      "scale_to_runtime": 0.4943820224719101,
-      "notes": "v4 compact jab selected. v1 reached too far, v2 lost the punch, v3 remained too long. Knuckles approach the far edge of the existing short hitbox; no hitbox changed. Explicit visual review for packing; final-art approval remains pending."
+      "sheet": "punch_light/sheet-v1.png",
+      "scale_to_runtime": 0.35013262599469497,
+      "notes": "Short bent-elbow body jab. v1 was too high/long; v2 had no reach; v3 was still high. v4 selects the final compact contact.",
+      "runtime_review": "finalization-review.md"
     },
     "punch_heavy": {
       "approved": true,
-      "scale_to_runtime": 0.5432098765432098,
-      "notes": "Heavy weight shift and full extension; source cells use wider explicit bounds so the active fist is never clipped. Explicit visual review for packing; final-art approval remains pending."
+      "sheet": "punch_heavy/sheet-v1.png",
+      "scale_to_runtime": 0.3641379310344828,
+      "notes": "Low body cross with visible weight transfer. v2 lowered the fist; normal anatomy scale is shared across all three poses.",
+      "runtime_review": "finalization-review.md"
     },
     "kick": {
       "approved": true,
-      "scale_to_runtime": 0.45674740484429066,
-      "notes": "Knee chamber, compact low kick, recovery. The planted foot stays at the ground anchor. Explicit visual review for packing; final-art approval remains pending."
+      "sheet": "kick/sheet-v1.png",
+      "scale_to_runtime": 0.3557951482479784,
+      "notes": "Low front kick with readable heel/sole pads, chamber and recoil. Supporting paw stays at the ground anchor.",
+      "runtime_review": "finalization-review.md"
     },
     "sweep": {
       "approved": true,
-      "scale_to_runtime": 0.5176470588235295,
-      "notes": "Raised lateral sweep follows the existing high SweepKick box, which is not floor level. Foot spans the upper part of that box; inspect toes in Lab. Explicit visual review for packing; final-art approval remains pending."
+      "sheet": "sweep/sheet-v1.png",
+      "scale_to_runtime": 0.3707865168539326,
+      "notes": "Supported elevated sweep; v2 lowers and turns the striking foot to the existing box. Perspective contact plane lies between planted palm and rear claws (about3px above/below runtime ground). v3 was rejected because it weakened fur detail and did not materially improve support.",
+      "runtime_review": "finalization-review.md"
     },
     "overhead": {
       "approved": true,
-      "scale_to_runtime": 0.49070631970260226,
-      "notes": "v2 overhead selected: startup fist above head descends into forward contact. v1 was too low/short; v3 lowered the knuckles below the box. v2 lower knuckles overlap the active box while upper glove extends above it. Explicit visual review for packing; final-art approval remains pending."
-    },
-    "anti_air": {
-      "approved": true,
-      "scale_to_runtime": 0.5,
-      "notes": "Uniform scale0.5 based on normal body/head size, not raised-fist alpha height. Rising pose stretches body slightly; the overhead fist matches the existing high box. Explicit visual review for packing; final-art approval remains pending."
-    },
-    "air_punch": {
-      "approved": true,
-      "scale_to_runtime": 0.5,
-      "notes": "v2 raises contact from the original below-belt diving punch. Pivots register torso/head to a stable virtual floor across the three source drawings; physics supplies air displacement. Explicit visual review for packing; final-art approval remains pending."
-    },
-    "air_kick": {
-      "approved": true,
-      "scale_to_runtime": 0.5,
-      "notes": "Pivots register head/belt to the same virtual floor. Extended foot contacts the upper part of the existing box; toe tip remains above it and is an explicit candidate limitation. Explicit visual review for packing; final-art approval remains pending."
+      "sheet": "overhead/sheet-v1.png",
+      "scale_to_runtime": 0.37660485021398005,
+      "notes": "Raised windup, descending hammerfist, guard recovery. Body stays the same size despite the raised hand extending above the head.",
+      "runtime_review": "finalization-review.md"
     },
     "throw": {
       "approved": true,
-      "scale_to_runtime": 0.43278688524590164,
-      "notes": "Open-handed preparation, compact grip and recovery. First crop widened to preserve every finger; grip contact remains near the short throw range. Explicit visual review for packing; final-art approval remains pending."
+      "sheet": "throw/sheet-v1.png",
+      "scale_to_runtime": 0.3384615384615385,
+      "notes": "Two separated bent-arm grips. v2 lowered and extended the leading grasp into the short throw range; rear support hand naturally sits behind the contact hand.",
+      "runtime_review": "finalization-review.md"
+    },
+    "anti_air": {
+      "approved": true,
+      "sheet": "anti_air/keyed-v1.png",
+      "scale_to_runtime": 0.45674740484429066,
+      "notes": "Uniform264/578 from the grounded guard anatomy. The active uppercut straightens the knees/torso and raises the fist above the head; its taller head position is posture extension, not pivot-driven lift. Full glove fits the original high box. Ground anchors784/789/787 follow solid support.",
+      "runtime_review": "finalization-review.md"
+    },
+    "air_punch": {
+      "approved": true,
+      "sheet": "air_punch/keyed-v1.png",
+      "scale_to_runtime": 0.38823529411764707,
+      "notes": "Uniform264/680 anatomical equivalent by torso/head comparison with the standing new master, not tucked-leg alpha bounds. Virtual pivots register belt near-150world across all3drawings. Middle torso leans forward, naturally lowering the head while the fist meets the existing low airborne box. Explicit wide middle crop preserves the backward foot crossing the nominal column boundary; no clipped paw.",
+      "runtime_review": "finalization-review.md"
+    },
+    "air_kick": {
+      "approved": true,
+      "sheet": "air_kick/keyed-v2.png",
+      "scale_to_runtime": 0.4,
+      "notes": "Selected v2 after v1 foot reached too far and too low. Built-in generation bends the active knee and dorsiflexes the paw, keeping full adult limb anatomy. Uniform264/660 scale. Virtual pivots follow belt near-150world; active drawing moved slightly horizontally during generation, so pivot826 registers its belt rather than translating the body to fit contact. Toe extremity is about1worldpixel beyond the far border; the solid contact paw is within the box vertically.",
+      "runtime_review": "finalization-review.md"
     },
     "special": {
       "approved": true,
-      "scale_to_runtime": 0.5906040268456376,
-      "notes": "v2 compact palm emission chosen to meet the existing origin97.92px forward/123.84px up from frame0. Projectile remains the separate baseline asset; no baked projectile or candidate combat metadata. Explicit visual review for packing; final-art approval remains pending."
+      "sheet": "special/keyed-v2.png",
+      "scale_to_runtime": 0.37714285714285717,
+      "notes": "Selected v2 after v1 emitted from an incorrect high palm. The first key already extends a low open palm; subsequent keys recoil and return to guard. Uniform264/700 from normal standing anatomy. Projected original origin lies on the lower outward palm near source(502.64,472.64), with the projectile kept separate. Ground pivots801/801/803 preserve support. First emitting torso settles about12worldpixels below full guard as a drawn commitment pose; no whole-body translation added. Crop excludes a lone matte pixel at lower-left below all art.",
+      "runtime_review": "finalization-review.md"
     },
     "spawn": {
       "approved": true,
-      "scale_to_runtime": 0.4943820224719101,
-      "notes": "Belt adjustment, courteous bow and ready guard. Original fixed identity remains visible throughout the entrance. Explicit visual review for packing; final-art approval remains pending."
+      "sheet": "spawn/keyed-v1.png",
+      "scale_to_runtime": 0.3723554301833568,
+      "notes": "Three real drawings: sash adjustment, respectful bow, held ready guard. Uniform264/709 from the final ready-guard anatomy. The opening straight-legged posture is naturally about15worldpixels taller than guard; bow folds the torso without scale change. Distinct source foot rows779/779/757 are registered to one ground anchor;500/700/1500ms preserved.",
+      "runtime_review": "finalization-review.md"
     },
     "victory": {
       "approved": true,
-      "scale_to_runtime": 0.43564356435643564,
-      "notes": "Relax, celebrate and hold a thumbs-up. Scale from upright body, with no shrink for the lifted arm. Explicit visual review for packing; final-art approval remains pending."
+      "sheet": "victory/keyed-v1.png",
+      "scale_to_runtime": 0.36666666666666664,
+      "notes": "Three real drawings: lower guard/exhale, restrained raised fist, held thumbs-up. Uniform264/720 from the final upright body. Feet grounded with anchors789/793/791. Adult small eyes and modeled muzzle preserved; no childish facial redesign.",
+      "runtime_review": "finalization-review.md"
     },
     "defeat": {
       "approved": true,
-      "scale_to_runtime": 0.4217252396166134,
-      "notes": "Disappointment, kneel and defeated seated hold; all are grounded. Scale is inherited from first standing body, not kneeling height. Explicit visual review for packing; final-art approval remains pending."
+      "sheet": "defeat/keyed-v1.png",
+      "scale_to_runtime": 0.3553162853297443,
+      "notes": "Three real drawings: standing slump, one-knee descent, supported kneeling/seated hold. One uniform264/743 anatomy scale from the standing body; final short silhouette comes from folded joints, never enlarged to fill its cell. Ground support anchors804/766/798 follow front paw/hand contacts.",
+      "runtime_review": "finalization-review.md"
     }
   }
 }
