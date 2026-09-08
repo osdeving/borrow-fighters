@@ -1,0 +1,144 @@
+{
+  "scope": "Real Raylib App controls and debug visibility; baseline artwork forced during concurrent exports.",
+  "date_utc": "2026-09-08",
+  "isolation": "Xephyr nested X display under an unmapped parent; no host window activation or pointer grab.",
+  "configuration": {
+    "BORROW_FIGHTERS_SPRITE_CANDIDATES": "0",
+    "LIBGL_ALWAYS_SOFTWARE": "1"
+  },
+  "showcase_launch": "cargo run -- --showcase --character rust --move throw --repeat --reverse",
+  "showcase": {
+    "isolated_display": ":96",
+    "host_parent_unmapped": true,
+    "art": "stable baseline forced; controls/debug QA only",
+    "checks": [
+      {
+        "name": "CLI_showcase_and_pause_freeze_frame",
+        "passed": true
+      },
+      {
+        "name": "period_advances_exactly_one_visible_frame",
+        "passed": true
+      },
+      {
+        "name": "home_and_enter_reset_same_paused_frame",
+        "passed": true
+      },
+      {
+        "name": "tab_and_shift_tab_cycle_and_restore",
+        "passed": true
+      },
+      {
+        "name": "L_toggles_repeat_mode",
+        "passed": true
+      },
+      {
+        "name": "X_mirrors_and_restores_actors",
+        "passed": true
+      },
+      {
+        "name": "PageDown_PageUp_cycle_and_restore_character",
+        "passed": true
+      },
+      {
+        "name": "Escape_returns_menu",
+        "passed": true
+      },
+      {
+        "name": "window_close_exits_cleanly",
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "fight": {
+    "isolated_display": ":94",
+    "host_parent_unmapped": true,
+    "art": "stable baseline forced; controls/debug QA only",
+    "checks": [
+      {
+        "name": "debug_initially_off",
+        "passed": true
+      },
+      {
+        "name": "both_CPUs_disabled_by_Options",
+        "passed": true
+      },
+      {
+        "name": "P1_T_signature_deals_damage",
+        "passed": true,
+        "p2_fill_before": 398,
+        "p2_fill_after": 342
+      },
+      {
+        "name": "debug_off_during_hit_has_no_boxes",
+        "passed": true,
+        "counts": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        }
+      },
+      {
+        "name": "P2_backslash_signature_deals_damage",
+        "passed": true,
+        "p1_fill_before": 398,
+        "p1_fill_after": 319
+      },
+      {
+        "name": "debug_off_during_guard_has_no_boxes",
+        "passed": true,
+        "counts": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        }
+      },
+      {
+        "name": "debug_off_during_knockdown_has_no_boxes",
+        "passed": true,
+        "counts": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        }
+      },
+      {
+        "name": "Options_enables_debug",
+        "passed": true
+      },
+      {
+        "name": "debug_on_shows_hurtboxes_and_arena_bounds",
+        "passed": true,
+        "counts": {
+          "hurtbox_green": 1368,
+          "hitbox_red": 0,
+          "arena_left_gray": 395
+        }
+      },
+      {
+        "name": "Options_disables_debug_without_restart",
+        "passed": true,
+        "counts": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        }
+      },
+      {
+        "name": "window_close_exits_cleanly",
+        "passed": true
+      }
+    ],
+    "passed": true,
+    "note": "First showcase phase discarded: harness injected input before asset initialization completed. Fight phase began after rendering; line rasterization checked at x41 (OpenGL integer line center)."
+  },
+  "limitations": [
+    "No physical gamepad tested; RT mapping inspected in code only.",
+    "Audio playback and final reviewed artwork are outside this run.",
+    "Defense-scenario preservation when cycling characters was fixed after this capture and verified by the app unit regression test."
+  ],
+  "harness_trial": "An initial showcase trial injected keys during asset initialization, before a rendered frame, producing black screenshots. Its comparisons were invalid and excluded. The final showcase trial waits for visible title pixels before input. Fight checks came from the already rendered phase. The debug-boundary pixel assertion was corrected from x42 to its observed OpenGL raster column x41; production rendering was unchanged by that assertion correction.",
+  "passed": true,
+  "check_count": 20
+}

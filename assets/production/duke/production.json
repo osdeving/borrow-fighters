@@ -612,56 +612,71 @@
       "loop": false,
       "frames": [
         {
-          "name": "sweep_00",
+          "name": "sweep_mvp_00",
           "source_rect": {
             "x": 0,
             "y": 0,
-            "w": 267,
-            "h": 307
+            "w": 220,
+            "h": 310
           },
           "pivot": {
-            "x": 115,
-            "y": 279
+            "x": 102,
+            "y": 267
           },
           "duration_ms": 216,
           "phase": "startup"
         },
         {
-          "name": "sweep_01",
+          "name": "sweep_mvp_01",
           "source_rect": {
-            "x": 313,
+            "x": 300,
             "y": 0,
-            "w": 313,
-            "h": 307
+            "w": 300,
+            "h": 310
           },
           "pivot": {
-            "x": 98,
-            "y": 282
+            "x": 102,
+            "y": 267
           },
           "duration_ms": 167,
           "phase": "active"
         },
         {
-          "name": "sweep_02",
+          "name": "sweep_mvp_02",
           "source_rect": {
-            "x": 626,
+            "x": 600,
             "y": 0,
-            "w": 274,
-            "h": 307
+            "w": 205,
+            "h": 310
           },
           "pivot": {
-            "x": 109,
-            "y": 275
+            "x": 88,
+            "y": 267
           },
-          "duration_ms": 250,
+          "duration_ms": 125,
+          "phase": "recovery"
+        },
+        {
+          "name": "sweep_mvp_03",
+          "source_rect": {
+            "x": 900,
+            "y": 0,
+            "w": 220,
+            "h": 310
+          },
+          "pivot": {
+            "x": 106,
+            "y": 267
+          },
+          "duration_ms": 125,
           "phase": "recovery"
         }
       ],
       "provenance": {
         "source_action": "sweep/action.json",
-        "source_sheet": "sweep/keyed.png",
-        "scale_to_runtime": 0.4169435215946844,
-        "review": "Own low hand-supported sweeping side kick; raised active sole center about(+394,-278)source ->(+164,-116)world inside existing Sweep box(+50.7,-136,170.7,42.7). Retains current standing-body active rule; no guide arrows or new metadata. Low body still taller than physical crouch due preserved cone anatomy."
+        "source_sheet": "sweep/keyed-mvp-v1.png",
+        "scale_to_runtime": 0.5,
+        "review": "MVP low sweep replaces elevated legacy leg. Active black shoe source center(1080,606) projects to (+173,-14), inside new shin/ankle range floor-42.67..floor. Rear glove/foot provide stable floor support. Four genuine articulated images, uniform 0.5 scale. Prior action.json and prepared sheet preserved under snapshots/2026-09-07-before-mvp. Pose still retains iconic cone and steam above compressed torso."
       }
     },
     "overhead": {
@@ -1184,6 +1199,152 @@
         "source_sheet": "defeat/keyed.png",
         "scale_to_runtime": 0.40614886731391586,
         "review": "Three clearly distinct exhausted-result poses: weakening, sinking, seated slump supported by gloves. No eyes, injuries, stars, added props or gameplay changes. Uniform scale from first visible height; later low silhouette is deliberate body compression. Ground support follows visible feet/hands."
+      }
+    },
+    "signature_special": {
+      "sheet": "signature_special/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "signature_special_mvp_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 250,
+            "h": 384
+          },
+          "pivot": {
+            "x": 118,
+            "y": 312
+          },
+          "duration_ms": 366,
+          "phase": "startup"
+        },
+        {
+          "name": "signature_special_mvp_01",
+          "source_rect": {
+            "x": 255,
+            "y": 0,
+            "w": 255,
+            "h": 384
+          },
+          "pivot": {
+            "x": 105,
+            "y": 312
+          },
+          "duration_ms": 117,
+          "phase": "active"
+        },
+        {
+          "name": "signature_special_mvp_02",
+          "source_rect": {
+            "x": 510,
+            "y": 0,
+            "w": 225,
+            "h": 384
+          },
+          "pivot": {
+            "x": 100,
+            "y": 316
+          },
+          "duration_ms": 192,
+          "phase": "recovery"
+        },
+        {
+          "name": "signature_special_mvp_03",
+          "source_rect": {
+            "x": 765,
+            "y": 0,
+            "w": 230,
+            "h": 384
+          },
+          "pivot": {
+            "x": 105,
+            "y": 312
+          },
+          "duration_ms": 192,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "signature_special/action.json",
+        "source_sheet": "signature_special/keyed-v2.png",
+        "scale_to_runtime": 0.5,
+        "review": "Four actual generated GC Slam poses: raised double fist, descending contact, low follow-through, guard. No projectile alias. Source v2 replaces painted checker matte through imagegen so steam survives generic magenta alpha extraction. Uniform 0.5 scale matches standing silhouette and nose. Active fist center source(880,525) projects to (+75,-50); cyan/gold downward trace extends above contact. All 20 original clips preserved except intentionally corrected sweep."
+      }
+    },
+    "knockdown": {
+      "sheet": "knockdown/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "knockdown_mvp_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 224,
+            "h": 308
+          },
+          "pivot": {
+            "x": 113,
+            "y": 272
+          },
+          "duration_ms": 100,
+          "phase": "fall"
+        },
+        {
+          "name": "knockdown_mvp_01",
+          "source_rect": {
+            "x": 241,
+            "y": 0,
+            "w": 241,
+            "h": 308
+          },
+          "pivot": {
+            "x": 129,
+            "y": 269
+          },
+          "duration_ms": 100,
+          "phase": "land"
+        },
+        {
+          "name": "knockdown_mvp_02",
+          "source_rect": {
+            "x": 482,
+            "y": 0,
+            "w": 230,
+            "h": 308
+          },
+          "pivot": {
+            "x": 95,
+            "y": 270
+          },
+          "duration_ms": 250,
+          "phase": "down"
+        },
+        {
+          "name": "knockdown_mvp_03",
+          "source_rect": {
+            "x": 723,
+            "y": 0,
+            "w": 213,
+            "h": 308
+          },
+          "pivot": {
+            "x": 112,
+            "y": 271
+          },
+          "duration_ms": 150,
+          "phase": "recover"
+        }
+      ],
+      "provenance": {
+        "source_action": "knockdown/action.json",
+        "source_sheet": "knockdown/keyed-v2.png",
+        "scale_to_runtime": 0.56,
+        "review": "Four distinct physical reaction poses: backward loss of balance, landing, low seated recovery, pushing up. First key uses virtual floor below the airborne shoes. Uniform 0.56 scale keeps nose near idle size; mascot deforms on landing. All steam and white torso retained by imagegen magenta-matte revision; generic keyer never uses Rust-specific contour."
       }
     }
   }

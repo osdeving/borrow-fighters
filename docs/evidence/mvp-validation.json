@@ -1,0 +1,66 @@
+{
+  "scope": "Rust, Duke/Java, C, Python, C++; no new Go special or art",
+  "rust_tests_passed": 270,
+  "rust_tests_failed": 0,
+  "art_export_tests_passed": 7,
+  "checks": [
+    "cargo fmt --check",
+    "cargo clippy --all-targets --all-features -- -D warnings",
+    "cargo test --all-targets",
+    "python3 -m unittest discover -s tools/art -p test*.py",
+    "git diff --check",
+    "changed Markdown local links"
+  ],
+  "graphical_showcase_scenarios": 150,
+  "graphical_app_controls_checks": 20,
+  "showcase_test_contacts": 260,
+  "impact_position_test_combinations": 60,
+  "cpu_bouts_completed": 60,
+  "cpu_timeouts": 0,
+  "physical_gamepad_tested": false,
+  "audio_listening_tested": false,
+  "atlas_roster": [
+    {
+      "character": "rust",
+      "clips": 22,
+      "frames": 79,
+      "manifest": "assets/candidates/rust/rust-fighter.sprite.json",
+      "sha256": "8279d643aa5fab2d4167902788fc3450dde8700acf291599eb4666669c634be8"
+    },
+    {
+      "character": "duke",
+      "clips": 22,
+      "frames": 70,
+      "manifest": "assets/candidates/duke/duke-fighter.sprite.json",
+      "sha256": "f20323e990f944d4e3103dd8bac5bb1c5fe0e6907161de006690b27f4bd208ec"
+    },
+    {
+      "character": "c",
+      "clips": 22,
+      "frames": 71,
+      "manifest": "assets/candidates/c/c-fighter.sprite.json",
+      "sha256": "7a1484f438efe701d53a6622800493e3159b21d2abaf8148ed9e633406359cc2"
+    },
+    {
+      "character": "python",
+      "clips": 22,
+      "frames": 70,
+      "manifest": "assets/candidates/python/python-fighter.sprite.json",
+      "sha256": "ee9059de161d569bdadf2e08988f28883bcd75b2f5dbd6ade8a515217c0f4eee"
+    },
+    {
+      "character": "cpp",
+      "clips": 22,
+      "frames": 70,
+      "manifest": "assets/candidates/cpp/cpp-fighter.sprite.json",
+      "sha256": "af19cf1b90f9f12c54881a937e4802b791a5e108975a76d20fb242313b9896f6"
+    },
+    {
+      "character": "go",
+      "clips": 20,
+      "frames": 60,
+      "manifest": "assets/candidates/go/go-fighter.sprite.json",
+      "sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da"
+    }
+  ]
+}

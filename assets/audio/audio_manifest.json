@@ -458,6 +458,12 @@
     {
       "cue": "fighter.attack.start",
       "character": "rust",
+      "move": "rust_borrow_break",
+      "clips": ["voice.rust.attack.heavy.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
       "clips": [
         "voice.rust.attack.borrow_jab.01",
         "voice.rust.attack.heavy.01",
@@ -518,6 +524,12 @@
       "character": "duke",
       "move": "duke_enterprise_throw",
       "clips": ["voice.duke.attack.enterprise.01"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
+      "move": "duke_gc_slam",
+      "clips": ["voice.duke.attack.heavy.01"]
     },
     {
       "cue": "fighter.attack.start",

@@ -44,7 +44,7 @@ use borrow_fighters::config::world_px;
 
 #[test]
 fn close_range_moves_are_registered_in_table_order() {
-    assert_eq!(CLOSE_RANGE_MOVE_SPECS.len(), 41);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS.len(), 46);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[0].id, MoveId::LightPunch);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[1].id, MoveId::HeavyPunch);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[2].id, MoveId::Kick);
@@ -95,6 +95,11 @@ fn close_range_moves_are_registered_in_table_order() {
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[38].id, MoveId::CppVirtualOverhead);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[39].id, MoveId::CppExceptionAntiAir);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[40].id, MoveId::CppMoveThrow);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[41].id, MoveId::RustBorrowBreak);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[42].id, MoveId::DukeGcSlam);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[43].id, MoveId::CPointerLance);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[44].id, MoveId::PythonSerpentSlide);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[45].id, MoveId::CppTemplateArc);
 }
 
 #[test]

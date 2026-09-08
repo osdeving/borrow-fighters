@@ -748,87 +748,87 @@
       }
     },
     {
-      "name": "sweep_0",
+      "name": "sweep_00",
       "clip": "sweep",
       "duration_ms": 166,
       "pivot": {
-        "x": 118,
-        "y": 298
+        "x": 156,
+        "y": 359
       },
       "frame": {
         "x": 1750,
         "y": 1281,
-        "w": 226,
-        "h": 361
+        "w": 278,
+        "h": 419
       },
       "trimmed_bounds": {
-        "x": 35,
-        "y": 114,
+        "x": 53,
+        "y": 166,
+        "w": 177,
+        "h": 194
+      }
+    },
+    {
+      "name": "sweep_01",
+      "clip": "sweep",
+      "duration_ms": 150,
+      "pivot": {
+        "x": 131,
+        "y": 360
+      },
+      "frame": {
+        "x": 2100,
+        "y": 1281,
+        "w": 319,
+        "h": 419
+      },
+      "trimmed_bounds": {
+        "x": 23,
+        "y": 211,
+        "w": 285,
+        "h": 151
+      }
+    },
+    {
+      "name": "sweep_02",
+      "clip": "sweep",
+      "duration_ms": 108,
+      "pivot": {
+        "x": 126,
+        "y": 361
+      },
+      "frame": {
+        "x": 2450,
+        "y": 1281,
+        "w": 254,
+        "h": 419
+      },
+      "trimmed_bounds": {
+        "x": 25,
+        "y": 179,
         "w": 171,
         "h": 186
       }
     },
     {
-      "name": "sweep_1",
-      "clip": "sweep",
-      "duration_ms": 150,
-      "pivot": {
-        "x": 122,
-        "y": 298
-      },
-      "frame": {
-        "x": 2100,
-        "y": 1281,
-        "w": 296,
-        "h": 361
-      },
-      "trimmed_bounds": {
-        "x": 10,
-        "y": 141,
-        "w": 286,
-        "h": 158
-      }
-    },
-    {
-      "name": "sweep_2",
-      "clip": "sweep",
-      "duration_ms": 108,
-      "pivot": {
-        "x": 95,
-        "y": 298
-      },
-      "frame": {
-        "x": 2450,
-        "y": 1281,
-        "w": 216,
-        "h": 361
-      },
-      "trimmed_bounds": {
-        "x": 19,
-        "y": 80,
-        "w": 174,
-        "h": 220
-      }
-    },
-    {
-      "name": "sweep_3",
+      "name": "sweep_03",
       "clip": "sweep",
       "duration_ms": 109,
       "pivot": {
-        "x": 85,
-        "y": 298
+        "x": 123,
+        "y": 359
       },
       "frame": {
         "x": 2800,
         "y": 1281,
-        "w": 225,
-        "h": 361
+        "w": 266,
+        "h": 419
       },
       "trimmed_bounds": {
-        "x": 19,
-        "y": 35,
-        "w": 156,
-        "h": 265
+        "x": 36,
+        "y": 89,
+        "w": 161,
+        "h": 274
       }
     },
     {
@@ -1502,6 +1502,174 @@
         "w": 198,
         "h": 187
       }
+    },
+    {
+      "name": "knockdown_00",
+      "clip": "knockdown",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 182,
+        "y": 325
+      },
+      "frame": {
+        "x": 350,
+        "y": 2989,
+        "w": 265,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 42,
+        "y": 88,
+        "w": 212,
+        "h": 236
+      }
+    },
+    {
+      "name": "knockdown_01",
+      "clip": "knockdown",
+      "duration_ms": 220,
+      "pivot": {
+        "x": 145,
+        "y": 325
+      },
+      "frame": {
+        "x": 700,
+        "y": 2989,
+        "w": 280,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 8,
+        "y": 230,
+        "w": 263,
+        "h": 101
+      }
+    },
+    {
+      "name": "knockdown_02",
+      "clip": "knockdown",
+      "duration_ms": 180,
+      "pivot": {
+        "x": 130,
+        "y": 316
+      },
+      "frame": {
+        "x": 1050,
+        "y": 2989,
+        "w": 235,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 23,
+        "y": 146,
+        "w": 201,
+        "h": 174
+      }
+    },
+    {
+      "name": "knockdown_03",
+      "clip": "knockdown",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 130,
+        "y": 316
+      },
+      "frame": {
+        "x": 1400,
+        "y": 2989,
+        "w": 244,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 45,
+        "y": 78,
+        "w": 161,
+        "h": 240
+      }
+    },
+    {
+      "name": "signature_special_00",
+      "clip": "signature_special",
+      "duration_ms": 200,
+      "pivot": {
+        "x": 142,
+        "y": 309
+      },
+      "frame": {
+        "x": 1750,
+        "y": 2989,
+        "w": 238,
+        "h": 365
+      },
+      "trimmed_bounds": {
+        "x": 55,
+        "y": 37,
+        "w": 151,
+        "h": 275
+      }
+    },
+    {
+      "name": "signature_special_01",
+      "clip": "signature_special",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 133,
+        "y": 310
+      },
+      "frame": {
+        "x": 2100,
+        "y": 2989,
+        "w": 290,
+        "h": 365
+      },
+      "trimmed_bounds": {
+        "x": 42,
+        "y": 44,
+        "w": 230,
+        "h": 270
+      }
+    },
+    {
+      "name": "signature_special_02",
+      "clip": "signature_special",
+      "duration_ms": 166,
+      "pivot": {
+        "x": 104,
+        "y": 309
+      },
+      "frame": {
+        "x": 2450,
+        "y": 2989,
+        "w": 214,
+        "h": 365
+      },
+      "trimmed_bounds": {
+        "x": 17,
+        "y": 39,
+        "w": 151,
+        "h": 273
+      }
+    },
+    {
+      "name": "signature_special_03",
+      "clip": "signature_special",
+      "duration_ms": 167,
+      "pivot": {
+        "x": 128,
+        "y": 309
+      },
+      "frame": {
+        "x": 2800,
+        "y": 2989,
+        "w": 232,
+        "h": 365
+      },
+      "trimmed_bounds": {
+        "x": 34,
+        "y": 37,
+        "w": 156,
+        "h": 275
+      }
     }
   ],
   "clips": [
@@ -1604,10 +1772,10 @@
       "name": "sweep",
       "loop": false,
       "frames": [
-        "sweep_0",
-        "sweep_1",
-        "sweep_2",
-        "sweep_3"
+        "sweep_00",
+        "sweep_01",
+        "sweep_02",
+        "sweep_03"
       ]
     },
     {
@@ -1694,6 +1862,26 @@
         "defeat_00",
         "defeat_01",
         "defeat_02"
+      ]
+    },
+    {
+      "name": "knockdown",
+      "loop": false,
+      "frames": [
+        "knockdown_00",
+        "knockdown_01",
+        "knockdown_02",
+        "knockdown_03"
+      ]
+    },
+    {
+      "name": "signature_special",
+      "loop": false,
+      "frames": [
+        "signature_special_00",
+        "signature_special_01",
+        "signature_special_02",
+        "signature_special_03"
       ]
     }
   ],

@@ -20,6 +20,8 @@ pub fn frame_for_fighter_clip_at(
         FighterSpriteClip::Defeat => &["defeat", "hit", "idle"],
         FighterSpriteClip::Spawn => &["spawn", "idle"],
         FighterSpriteClip::CrouchBlock => &["crouch_block", "block", "idle"],
+        FighterSpriteClip::Knockdown => &["knockdown", "hit", "idle"],
+        FighterSpriteClip::SignatureSpecial => &["signature_special", "punch_heavy", "idle"],
         FighterSpriteClip::Sweep | FighterSpriteClip::AirKick => &[clip.as_str(), "kick", "idle"],
         FighterSpriteClip::Overhead | FighterSpriteClip::AntiAir => {
             &[clip.as_str(), "punch_heavy", "idle"]

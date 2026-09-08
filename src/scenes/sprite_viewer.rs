@@ -1606,6 +1606,7 @@ fn input_kind_for_move(selected_move: CombatLabMove) -> Option<MoveInputKind> {
         CombatLabMove::AirPunch => Some(MoveInputKind::AirPunch),
         CombatLabMove::AirKick => Some(MoveInputKind::AirKick),
         CombatLabMove::Throw => Some(MoveInputKind::Throw),
+        CombatLabMove::SignatureSpecial => Some(MoveInputKind::SignatureSpecial),
         CombatLabMove::Projectile => None,
     }
 }
@@ -1678,5 +1679,6 @@ fn preferred_clips_for_move(selected_move: CombatLabMove) -> &'static [&'static 
         CombatLabMove::AirKick => &["air_kick", "jump_kick", "jump", "kick"],
         CombatLabMove::Throw => &["throw", "grab", "punch_light"],
         CombatLabMove::Projectile => &["special", "projectile"],
+        CombatLabMove::SignatureSpecial => &["signature_special"],
     }
 }

@@ -4,7 +4,8 @@
 //! into animation names.
 
 use crate::{
-    combat::fighter::{AttackKind, Fighter, PlayerSlot},
+    characters::CharacterId,
+    combat::fighter::{AttackKind, Fighter, HitReactionKind, PlayerSlot},
     game::world::MatchOutcome,
 };
 
@@ -19,6 +20,7 @@ pub enum FighterSpriteClip {
     Block,
     CrouchBlock,
     Hit,
+    Knockdown,
     PunchLight,
     PunchHeavy,
     Kick,
@@ -29,6 +31,7 @@ pub enum FighterSpriteClip {
     AirKick,
     Throw,
     Special,
+    SignatureSpecial,
     Taunt,
     Victory,
     Defeat,
@@ -62,6 +65,17 @@ impl FighterSpriteClip {
         Self::Defeat,
     ];
 
+    /// Includes the new combat actions for the five selectable MVP fighters.
+    /// Go retains its previously reviewed atlas until its own production round.
+    pub fn required_for_character(character: CharacterId) -> impl Iterator<Item = Self> {
+        Self::REQUIRED.into_iter().chain(
+            (character != CharacterId::Go)
+                .then_some([Self::Knockdown, Self::SignatureSpecial])
+                .into_iter()
+                .flatten(),
+        )
+    }
+
     /// Returns the clip name used by sprite manifests.
     pub const fn as_str(self) -> &'static str {
         match self {
@@ -73,6 +87,7 @@ impl FighterSpriteClip {
             Self::Block => "block",
             Self::CrouchBlock => "crouch_block",
             Self::Hit => "hit",
+            Self::Knockdown => "knockdown",
             Self::PunchLight => "punch_light",
             Self::PunchHeavy => "punch_heavy",
             Self::Kick => "kick",
@@ -83,6 +98,7 @@ impl FighterSpriteClip {
             Self::AirKick => "air_kick",
             Self::Throw => "throw",
             Self::Special => "special",
+            Self::SignatureSpecial => "signature_special",
             Self::Taunt => "taunt",
             Self::Victory => "victory",
             Self::Defeat => "defeat",
@@ -138,7 +154,10 @@ impl FighterSpriteFrame {
 /// Returns the sprite clip matching the current fighter state.
 pub fn fighter_sprite_clip(fighter: &Fighter) -> FighterSpriteClip {
     if fighter.in_hitstun() {
-        return FighterSpriteClip::Hit;
+        return match fighter.hit_reaction_kind() {
+            HitReactionKind::Hit => FighterSpriteClip::Hit,
+            HitReactionKind::Knockdown => FighterSpriteClip::Knockdown,
+        };
     }
 
     if fighter.blocking {
@@ -164,6 +183,7 @@ pub fn fighter_sprite_clip(fighter: &Fighter) -> FighterSpriteClip {
             AttackKind::AirPunch => FighterSpriteClip::AirPunch,
             AttackKind::AirKick => FighterSpriteClip::AirKick,
             AttackKind::Throw => FighterSpriteClip::Throw,
+            AttackKind::SignatureSpecial => FighterSpriteClip::SignatureSpecial,
         };
     }
 
@@ -249,6 +269,7 @@ pub fn fighter_sprite_frame(fighter: &Fighter) -> FighterSpriteFrame {
         FighterSpriteClip::Block => FighterSpriteFrame::Block,
         FighterSpriteClip::CrouchBlock => FighterSpriteFrame::Block,
         FighterSpriteClip::Hit => FighterSpriteFrame::Idle,
+        FighterSpriteClip::Knockdown => FighterSpriteFrame::Crouch,
         FighterSpriteClip::PunchLight => FighterSpriteFrame::LightPunch,
         FighterSpriteClip::PunchHeavy => FighterSpriteFrame::HeavyPunch,
         FighterSpriteClip::Kick => FighterSpriteFrame::Kick,
@@ -259,6 +280,7 @@ pub fn fighter_sprite_frame(fighter: &Fighter) -> FighterSpriteFrame {
         FighterSpriteClip::AirKick => FighterSpriteFrame::Kick,
         FighterSpriteClip::Throw => FighterSpriteFrame::LightPunch,
         FighterSpriteClip::Special => FighterSpriteFrame::Idle,
+        FighterSpriteClip::SignatureSpecial => FighterSpriteFrame::HeavyPunch,
         FighterSpriteClip::Taunt => FighterSpriteFrame::Idle,
         FighterSpriteClip::Victory => FighterSpriteFrame::Idle,
         FighterSpriteClip::Defeat => FighterSpriteFrame::Idle,

@@ -28,7 +28,7 @@
     "crouch": {
       "approved": true,
       "scale_to_runtime": 0.4253968253968254,
-      "notes": "v2 replaces upright squat with folded torso over tightly bent legs. Same source scale; hold height about140world px, close to128physical, rather than prior190\u2013205. Entry is slightly higher for60ms. No physics changed."
+      "notes": "v2 replaces upright squat with folded torso over tightly bent legs. Same source scale; hold height about140world px, close to128physical, rather than prior190–205. Entry is slightly higher for60ms. No physics changed."
     },
     "block": {
       "approved": true,
@@ -38,7 +38,7 @@
     "crouch_block": {
       "approved": true,
       "scale_to_runtime": 0.4253968253968254,
-      "notes": "v3 replaces tall low guard with a tightly folded torso/knees. Blue C book guards face immediately; brace and settle remain low. Same uniform source scale; about135\u2013149world px versus former190\u2013205, physical height128 unchanged. Three genuinely different source poses, same durations70/80/120ms."
+      "notes": "v3 replaces tall low guard with a tightly folded torso/knees. Blue C book guards face immediately; brace and settle remain low. Same uniform source scale; about135–149world px versus former190–205, physical height128 unchanged. Three genuinely different source poses, same durations70/80/120ms."
     },
     "hit": {
       "approved": true,
@@ -63,9 +63,8 @@
     },
     "sweep": {
       "approved": true,
-      "scale_to_runtime": 0.4253968253968254,
-      "notes": "v3: low support, raised active sole, retract and half-rise, four real generated bodies. Baseline timing200/150/250ms conserved as200/150/125/125ms. Sole center crosses original active band; top of tilted toe approximately18px above it, no claim that full contour is inside. Native Lab and complete World reviewed, root accepted refinement.",
-      "sheet": "sweep/keyed-v3.png"
+      "scale_to_runtime": 0.45,
+      "notes": "New genuine ankle sweep replaces elevated kick: active sneaker source center(1080,582) projects to (+168.75,-14.4), within new floor-42.67..floor band. Book held under rear arm, free palm supports low body, four keys extend/retract/recover. Uniform0.45 keeps head/book scale near existing low poses. Prior action and prepared pixels preserved in before-mvp snapshot."
     },
     "overhead": {
       "approved": true,
@@ -111,6 +110,16 @@
       "approved": true,
       "scale_to_runtime": 0.432258064516129,
       "notes": "v3 selected recoil/kneel/sustained kneeling. v1 grew lying anatomy; v2 changed other poses. No per-frame scale workaround. Approved for candidate preview export, not final art release."
+    },
+    "signature_special": {
+      "approved": true,
+      "scale_to_runtime": 0.5317460317460317,
+      "notes": "Four actual generated Pointer Lance poses, distinct from book projectile. Source v2 lowers pointing arm to lower chest/waist for real contact at height matching new MoveSpec and uses magenta matte. Pointer tip source(1140,393) projects near (+220,-133.5), within initial runtime box. Uniform268/504 matches idle standing height, feet anchored at644; head drops in active key as knee/torso lunge."
+    },
+    "knockdown": {
+      "approved": true,
+      "scale_to_runtime": 0.5317460317460317,
+      "notes": "Four new backward knockdown keys, one secured blue C book throughout, hair/denim/face intact. Downed key lies on left hip/back instead of generic standing hit. Sole and bracing palm define floor. Uniform268/504 scale. Generic border-connected pale matte extraction preserves outlined white hair, shirt and soles; source RGB retained."
     }
   }
 }

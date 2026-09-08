@@ -33,7 +33,7 @@ Rust deve parecer preciso e seguro. Ele não deve ter o maior dano nem o maior a
 | Input | MoveId | Intenção | Dano | Startup | Alcance | Whiff | Contra-jogo |
 |---|---|---|---:|---:|---:|---:|---|
 | `F` | `RustBorrowJab` | checar avanço e interromper golpe lento | 7 | 4f | 48 | 4f | ficar fora do alcance, whiff punish |
-| `H` | `HeavyPunch` | ferramenta média genérica, ainda sem assinatura | 16 | 11f | 96 | 10f | bloquear, pular, punir whiff |
+| `H` | `HeavyPunch` | soco médio genérico, complementar à assinatura | 16 | 11f | 96 | 10f | bloquear, pular, punir whiff |
 | `V` | `Kick` | golpe baixo/médio de controle | 12 | 9f | 100 | 8f | bloquear, recuar, punir whiff |
 | `S+V` | `SweepKick` | low universal de teste | 11 | 10f | 112 | 12f | defender abaixado, pular |
 | frente + `H` | `OverheadPunch` | overhead universal de teste | 14 | 12f | 82 | 12f | defender em pé, interromper startup |
@@ -122,9 +122,44 @@ C++ deve parecer filha de C: mais ornamentada, mais rápida em decisões pontuai
 | no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
 | `Q+F` | `CppMoveThrow` | throw moderado com tema de move semantics | 10 | 6f | 50 | 14f | sair do alcance, pular, jab |
 
+## Especiais de assinatura dos cinco personagens da demo
+
+Use `T` no Player 1, `\` (Backslash) no Player 2 ou `RT` no gamepad. Cada loadout oferece um `MoveInputKind::SignatureSpecial`. Go não recebe ação nem arte nova nesta rodada; os ajustes compartilhados de guarda, postura e recuperação também se aplicam a ele.
+
+Os números abaixo vêm de [MoveSpec](../src/combat/move_data.rs). `Início ativo` e `Fim ativo` são os índices inclusivos dos frames de contato; `Total` inclui startup, atividade e recuperação normal. `Whiff` soma recuperação somente se o golpe não tocar. As medidas espaciais são valores base, multiplicados por 4/3 no runtime.
+
+| Personagem / MoveId | Guarda | Dano | Início ativo | Fim ativo | Total | Alcance | Whiff |
+|---|---|---:|---:|---:|---:|---:|---:|
+| Rust / `RustBorrowBreak` | Mid | 16 | 12f | 17f | 38f | 90 | 14f |
+| Duke / `DukeGcSlam` | High | 20 | 22f | 28f | 52f | 106 | 18f |
+| C / `CPointerLance` | Mid | 18 | 18f | 23f | 46f | 146 | 18f |
+| Python / `PythonSerpentSlide` | Low | 13 | 11f | 16f | 39f | 98 | 16f |
+| C++ / `CppTemplateArc` | Mid | 17 | 9f | 15f | 42f | 82 | 18f |
+
+| Ação | Melhor situação | Resposta e custo |
+|---|---|---|
+| Borrow Break | Duas palmas para interceptar aproximação em média distância | Bloquear em pé ou abaixado; interromper com jab próximo; punir recuperação. Hitbox começa na altura das palmas: offset vertical 24, altura 64. |
+| GC Slam | Duas mãos descendo contra guarda abaixada | Defender em pé ou interromper os 22 frames até contato; maior dano do grupo e startup mais anunciado. |
+| Pointer Lance | Palma estendida contra adversário avançando na borda do alcance | Bloquear ou sair da trajetória; alcance 146 cobra 46 frames totais e 18 extras ao errar. O livro permanece no braço de apoio. |
+| Serpent Slide | Chute baixo para abrir guarda alta, com avanço curto durante a fase ativa | Defender abaixado ou saltar cedo; permanece baixo, avança a 240 pixels base/s durante atividade e provoca queda no acerto terrestre. |
+| Template Arc | Palma em arco diagonal ascendente contra salto em aproximação | Evitar salto previsível, provocar erro e punir os 42 frames totais; não tem invulnerabilidade. |
+
+Todos acertam uma vez por execução e podem ser interrompidos. Mesmo no último frame ativo, o atacante recupera pelo menos 11 frames depois do defensor que bloqueou. Essa vantagem temporal não garante punição a qualquer distância: alcance e pushback continuam relevantes. Os testes confirmam punição com jab após bloqueio próximo de Rust, Duke, C e Python; o caso principal do Template Arc é interceptação aérea.
+
+## Defesa, rasteira e queda
+
+- Médios e projéteis aceitam guarda em pé ou baixa; overheads e ataques aéreos exigem guarda em pé; lows exigem guarda baixa. Defesa continua sendo botão explícito, sem direção obrigatória.
+- A altura da guarda é conservada durante blockstun. Um high que quebra guarda baixa inicia hitstun e elimina o blockstun antigo. Chip para em 1 de vida.
+- Rasteiras mantêm postura abaixada durante toda a ação e sua hitbox cobre canela/pé, aproximadamente os últimos 43 pixels antes do chão. Elas e o slide usam hurtboxes físicas agachadas. O debug mostra a mesma geometria usada pelo `World`.
+- Rasteiras, agarrões e Serpent Slide que atingem um alvo no chão geram knockdown de 36 frames. O período de queda/levantada é protegido contra novos golpes e projéteis.
+- Agarrões exigem alvo no chão, fora de hitstun/blockstun e dos seis frames de proteção após recuperar. Pular, sair do alcance e interromper startup continuam sendo respostas; não há throw tech.
+- Spark e dano flutuante nascem no centro da interseção que confirmou o hit, antes do pushback; rasteira mostra contato na canela/pé e anti-air na região aérea realmente atingida.
+- Ataques mantêm a direção inicial, permitindo escapar com salto por cima. Conjurar projétil impede outro ataque, pulo ou defesa até encerrar a duração da pose; sofrer dano cancela essa pose.
+- As hitboxes de rasteira/assinatura vêm de `MoveSpec`; a metadata anterior continua usada pelos demais ataques. A exceção evita restaurar acidentalmente rasteiras altas a partir do atlas baseline, conforme a [ADR 0013](adr/0013-contextual-showcase-and-mvp-combat.md).
+
 ## Especiais de Projectile
 
-Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ainda é o mesmo botão de especial do protótipo, mas dano, tamanho, velocidade, cooldown, reação e limite de alcance já vêm do `CharacterSpec`. Velocidade e alcance abaixo seguem os valores base de tuning; no runtime `1280x720`, medidas espaciais usam `RESOLUTION_SCALE = 4 / 3`.
+Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input permanece `G`/Right Ctrl/`RB`, separado do botão de assinatura; dano, tamanho, velocidade, cooldown, reação e limite de alcance já vêm do `CharacterSpec`. Velocidade e alcance abaixo seguem os valores base de tuning; no runtime `1280x720`, medidas espaciais usam `RESOLUTION_SCALE = 4 / 3`.
 
 | Personagem | Spec | Intenção | Dano | Velocidade | Cooldown | Alcance | Contra-jogo |
 |---|---|---|---:|---:|---:|---|---|
@@ -161,6 +196,12 @@ Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ai
 7. O jogador deve conseguir explicar por que tomou dano: low, overhead, throw, anti-air ou projectile.
 8. CPU x CPU deve mostrar diferença de ritmo, sem parecer dois personagens espelhados.
 9. Nenhum golpe deve resolver neutral, defesa e pressão ao mesmo tempo.
+
+## Evidência de balanceamento de MVP
+
+A [auditoria preservada em CSV](evidence/mvp-balance/README.md) compara 60 lutas determinísticas antes/depois, com ambos os lados e três distâncias iniciais. O [programa reproduzível](../examples/balance_audit.rs) não carrega atlas e não estima win rate competitivo. A CPU usa os especiais conforme alcance e situação, tenta guarda compatível com high/low e reage de forma falível a agarrões; observa ataques em startup/atividade, sem bloquear automaticamente toda recuperação.
+
+O critério desta rodada é garantir contato válido, defesa possível, recuperação punível, reações legíveis e conclusão de lutas. Vida e dano dos golpes anteriores foram mantidos; não houve ajuste para forçar igualdade de vitórias entre políticas de CPU. O [showcase](10-greybox-playtest.md#move-showcase) complementa a auditoria com contato real, metadata baseline e revisão visual dos dois lados.
 
 ## Próximos Cortes
 

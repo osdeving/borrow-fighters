@@ -664,87 +664,87 @@
       }
     },
     {
-      "name": "sweep_0",
+      "name": "sweep_mvp_00",
       "clip": "sweep",
       "duration_ms": 200,
       "pivot": {
-        "x": 117,
-        "y": 230
+        "x": 92,
+        "y": 191
       },
       "frame": {
         "x": 3052,
         "y": 1098,
-        "w": 267,
-        "h": 267
+        "w": 189,
+        "h": 225
       },
       "trimmed_bounds": {
-        "x": 42,
-        "y": 64,
-        "w": 163,
-        "h": 169
+        "x": 16,
+        "y": 32,
+        "w": 159,
+        "h": 161
       }
     },
     {
-      "name": "sweep_1",
+      "name": "sweep_mvp_01",
       "clip": "sweep",
       "duration_ms": 150,
       "pivot": {
-        "x": 76,
-        "y": 232
+        "x": 92,
+        "y": 195
       },
       "frame": {
         "x": 0,
         "y": 1464,
-        "w": 267,
-        "h": 267
+        "w": 292,
+        "h": 225
       },
       "trimmed_bounds": {
-        "x": 2,
-        "y": 72,
-        "w": 242,
-        "h": 164
+        "x": 9,
+        "y": 45,
+        "w": 273,
+        "h": 153
       }
     },
     {
-      "name": "sweep_2",
+      "name": "sweep_mvp_02",
       "clip": "sweep",
       "duration_ms": 125,
       "pivot": {
-        "x": 128,
-        "y": 230
+        "x": 74,
+        "y": 191
       },
       "frame": {
         "x": 436,
         "y": 1464,
-        "w": 267,
-        "h": 267
+        "w": 176,
+        "h": 225
       },
       "trimmed_bounds": {
-        "x": 53,
-        "y": 66,
-        "w": 157,
-        "h": 167
+        "x": 2,
+        "y": 32,
+        "w": 154,
+        "h": 162
       }
     },
     {
-      "name": "sweep_3",
+      "name": "sweep_mvp_03",
       "clip": "sweep",
       "duration_ms": 125,
       "pivot": {
-        "x": 111,
-        "y": 233
+        "x": 84,
+        "y": 191
       },
       "frame": {
         "x": 872,
         "y": 1464,
-        "w": 267,
-        "h": 267
+        "w": 176,
+        "h": 225
       },
       "trimmed_bounds": {
-        "x": 38,
-        "y": 14,
-        "w": 173,
-        "h": 222
+        "x": 16,
+        "y": 16,
+        "w": 132,
+        "h": 176
       }
     },
     {
@@ -1334,6 +1334,174 @@
         "w": 157,
         "h": 208
       }
+    },
+    {
+      "name": "signature_special_mvp_00",
+      "clip": "signature_special",
+      "duration_ms": 300,
+      "pivot": {
+        "x": 123,
+        "y": 300
+      },
+      "frame": {
+        "x": 3052,
+        "y": 2562,
+        "w": 245,
+        "h": 319
+      },
+      "trimmed_bounds": {
+        "x": 32,
+        "y": 25,
+        "w": 186,
+        "h": 277
+      }
+    },
+    {
+      "name": "signature_special_mvp_01",
+      "clip": "signature_special",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 121,
+        "y": 300
+      },
+      "frame": {
+        "x": 0,
+        "y": 2928,
+        "w": 362,
+        "h": 319
+      },
+      "trimmed_bounds": {
+        "x": 13,
+        "y": 70,
+        "w": 332,
+        "h": 232
+      }
+    },
+    {
+      "name": "signature_special_mvp_02",
+      "clip": "signature_special",
+      "duration_ms": 183,
+      "pivot": {
+        "x": 93,
+        "y": 300
+      },
+      "frame": {
+        "x": 436,
+        "y": 2928,
+        "w": 213,
+        "h": 319
+      },
+      "trimmed_bounds": {
+        "x": 9,
+        "y": 27,
+        "w": 168,
+        "h": 275
+      }
+    },
+    {
+      "name": "signature_special_mvp_03",
+      "clip": "signature_special",
+      "duration_ms": 184,
+      "pivot": {
+        "x": 132,
+        "y": 300
+      },
+      "frame": {
+        "x": 872,
+        "y": 2928,
+        "w": 245,
+        "h": 319
+      },
+      "trimmed_bounds": {
+        "x": 50,
+        "y": 24,
+        "w": 162,
+        "h": 278
+      }
+    },
+    {
+      "name": "knockdown_mvp_00",
+      "clip": "knockdown",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 128,
+        "y": 294
+      },
+      "frame": {
+        "x": 1308,
+        "y": 2928,
+        "w": 245,
+        "h": 330
+      },
+      "trimmed_bounds": {
+        "x": 16,
+        "y": 37,
+        "w": 223,
+        "h": 259
+      }
+    },
+    {
+      "name": "knockdown_mvp_01",
+      "clip": "knockdown",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 106,
+        "y": 294
+      },
+      "frame": {
+        "x": 1744,
+        "y": 2928,
+        "w": 271,
+        "h": 330
+      },
+      "trimmed_bounds": {
+        "x": 9,
+        "y": 136,
+        "w": 259,
+        "h": 159
+      }
+    },
+    {
+      "name": "knockdown_mvp_02",
+      "clip": "knockdown",
+      "duration_ms": 250,
+      "pivot": {
+        "x": 133,
+        "y": 298
+      },
+      "frame": {
+        "x": 2180,
+        "y": 2928,
+        "w": 277,
+        "h": 330
+      },
+      "trimmed_bounds": {
+        "x": 7,
+        "y": 181,
+        "w": 266,
+        "h": 119
+      }
+    },
+    {
+      "name": "knockdown_mvp_03",
+      "clip": "knockdown",
+      "duration_ms": 150,
+      "pivot": {
+        "x": 104,
+        "y": 294
+      },
+      "frame": {
+        "x": 2616,
+        "y": 2928,
+        "w": 239,
+        "h": 330
+      },
+      "trimmed_bounds": {
+        "x": 16,
+        "y": 142,
+        "w": 188,
+        "h": 155
+      }
     }
   ],
   "clips": [
@@ -1432,10 +1600,10 @@
       "name": "sweep",
       "loop": false,
       "frames": [
-        "sweep_0",
-        "sweep_1",
-        "sweep_2",
-        "sweep_3"
+        "sweep_mvp_00",
+        "sweep_mvp_01",
+        "sweep_mvp_02",
+        "sweep_mvp_03"
       ]
     },
     {
@@ -1518,6 +1686,26 @@
         "defeat_0",
         "defeat_1",
         "defeat_2"
+      ]
+    },
+    {
+      "name": "signature_special",
+      "loop": false,
+      "frames": [
+        "signature_special_mvp_00",
+        "signature_special_mvp_01",
+        "signature_special_mvp_02",
+        "signature_special_mvp_03"
+      ]
+    },
+    {
+      "name": "knockdown",
+      "loop": false,
+      "frames": [
+        "knockdown_mvp_00",
+        "knockdown_mvp_01",
+        "knockdown_mvp_02",
+        "knockdown_mvp_03"
       ]
     }
   ],

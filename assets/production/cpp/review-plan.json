@@ -60,8 +60,8 @@
     },
     "sweep": {
       "approved": true,
-      "scale_to_runtime": 0.3889695210449927,
-      "notes": "Selected v2 after lowering active boot from above head to upper-chest height in low supported pose. Sole near(1380,365), support(945,655), projects to(+169.2,-112.8)world inside existing Sweep box. Low kneeling support preserves hand and handbag. Standing-body active collision rule unchanged. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Approved only for candidate review export, not final art release."
+      "scale_to_runtime": 0.47686832740213525,
+      "notes": "New low sweep for corrected sustained crouching combat. V3 ankle-level boot was correct but torso too upright; v4 folds chest/head farther forward without shrinking anatomy. Uniform268/562 scale keeps the low silhouette116-118px against128px physical crouch. Active boot toe source(970,619), pivot(624,641) projects to(+165.0,-10.5), inside Vector Low x[+50.7,+205.3], y[-40,0]. Startup150ms, active150ms (ticks9..17), recovery217ms, total517ms~31ticks. Oldv2 source/action/prepared retained as before-mvp references. No combat metadata authored."
     },
     "overhead": {
       "approved": true,
@@ -107,6 +107,16 @@
       "approved": true,
       "scale_to_runtime": 0.3889695210449927,
       "notes": "Recoil then knees and supporting hand to ground, sustained defeat. One anatomy scale for all phases; no prone enlargement. Ground anchors explicitly follow contact level707/682/697. Approved only for candidate review export, not final art release."
+    },
+    "signature_special": {
+      "approved": true,
+      "scale_to_runtime": 0.4953789279112754,
+      "notes": "New grounded Template Arc. Generated v2 identity/poses retained in green-matte v3; local green key preserves white blouse and violet energy where checker flood left enclosed matte. Uniform268/541 scale, explicit support anchors. Active palm source(958,107) maps to(+75.8,-295.2) from body center/floor; palm/arc lie inside current special x[+50.7,+160], y[-341.3,-160]. Active150..266ms matches ticks9..15; total700ms/42ticks. Source/prompt/checker trial preserved, no combat metadata authored."
+    },
+    "knockdown": {
+      "approved": true,
+      "scale_to_runtime": 0.47686832740213525,
+      "notes": "New four-stage knockdown: falling backward, fully reclined on floor, kneeling rise, standing ready guard. Uniform268/562 anatomy scale derived from final upright pose. Pivots follow support ground, not bounding-box center. Full white blouse/trousers/boots/bag retained.100/250/150/100ms=600ms/36ticks matches real knockdown. No duplicated normal-hit or defeat frames; no combat metadata authored."
     }
   }
 }

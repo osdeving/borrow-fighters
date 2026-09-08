@@ -41,7 +41,9 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Reinício da partida.
 - HUD, ajuda de controles e debug visual configuráveis.
 - Testes de regras de combate sem abrir janela.
-- Move Showcase com um personagem sozinho ciclando todos os golpes.
+- Move Showcase com dois lutadores, situações específicas por golpe, resultado real de contato e quatro exemplos de defesa.
+- Um especial de assinatura por personagem da demo, com animação própria e recuperação punível.
+- Knockdown de 36 frames para rasteira, agarrão e slide da Python contra alvo no chão.
 - Combat Lab com reprodução de golpes e poses estáticas de inspeção.
 
 ## Como rodar
@@ -75,9 +77,32 @@ O GitHub também roda `Rust Check` no PR para validar formatação, testes e cli
 
 ## Move Showcase
 
-Abra pelo menu `Training > Move Showcase`. A cena usa o personagem escolhido como Player 1 em `Versus Setup`, deixa ele sozinho na arena atual e cicla automaticamente soco fraco, soco forte, chute, varredura, overhead, anti-air, ataques aéreos, agarrão e projectile.
+Abra pelo menu `Training > Move Showcase`. A cena usa o Player 1 escolhido em `Versus Setup`, a arena atual e um adversário do mesmo elenco. Também abre diretamente por CLI:
 
-Atalhos: `Tab` pula para o próximo golpe, `Shift+Tab` volta, `Enter` repete, `Espaço` pausa/continua e `Esc` volta ao menu.
+```bash
+cargo run -- --showcase --character rust --move anti_air --repeat
+cargo run -- --showcase --character duke --move throw --repeat
+cargo run -- --showcase --character c --move sweep --reverse
+cargo run -- --showcase --character python --move signature_special --repeat
+cargo run -- --showcase --character cpp --move signature_special --repeat --reverse
+```
+
+Cada personagem da demo tem 15 situações: 11 ataques, contando projétil e assinatura, e quatro demonstrações de defesa. A aproximação é real: o oponente anda em direção ao jab, salta em direção ao anti-air e ao Template Arc, protege o tronco contra a rasteira ou agacha contra o overhead. O agarrão pega um oponente próximo em guarda. Os ataques aéreos acontecem durante um salto real do atacante. As quatro defesas mostram guarda em pé contra jab, guarda em pé contra overhead, guarda baixa contra rasteira e bloqueio de projétil.
+
+Dano e resultado vêm das colisões do `World`, incluindo blockstun, hitstun e queda. Cada situação restaura vida e posição antes da próxima apresentação. `HIT`, `BLOCKED` e `WHIFF` descrevem o contato realmente observado; não há dano artificial para completar a demonstração.
+
+| Atalho | Ação |
+|---|---|
+| `Tab` / `Shift+Tab` | Próxima / anterior situação |
+| `Enter` / `Home` | Reiniciar a situação |
+| `Espaço` | Pausar / continuar |
+| `.` | Avançar um frame enquanto pausado |
+| `L` | Alternar autoplay de todas as situações / repetição da atual |
+| `X` | Espelhar os dois lutadores e reiniciar |
+| `PageUp` / `PageDown` | Trocar personagem entre os cinco da demo |
+| `Esc` | Voltar ao menu |
+
+`--repeat` inicia repetindo a situação escolhida e `--reverse` inicia com o personagem à direita. Trocar personagem preserva o golpe selecionado, a pausa, a repetição e o lado. Para acompanhar a revisão mecânica, consulte a [matriz de golpes](15-character-combat-matrix.md) e a [auditoria determinística](evidence/mvp-balance/README.md).
 
 ## Combat Lab
 
@@ -92,6 +117,7 @@ cargo run -- --lab combat --character go --move kick
 cargo run -- --lab combat --character c --move projectile
 cargo run -- --lab combat --character python --move heavy_punch
 cargo run -- --lab combat --character cpp --move overhead
+cargo run -- --lab combat --character python --move signature_special
 ```
 
 Para abrir uma pose estática:
@@ -156,7 +182,8 @@ Ao começar uma luta, os personagens entram em cena e depois aparece a contagem 
 | Overhead | Frente + `H` | Frente + `P`/`Right Shift` | Frente + `Y` |
 | Agarrão curto | `Q` + `F` | `U` + `O`/`Enter` | `LB`/`LT` + `X` |
 | Ataque aéreo | No ar: `F` ou `V` | No ar: `O`/`Enter` ou `;`/`/` | No ar: `X` ou `B` |
-| Fireball | `G` | `Right Ctrl` ou `KP0` | `RB` |
+| Fireball / projétil | `G` | `Right Ctrl` ou `KP0` | `RB` |
+| Especial de assinatura | `T` | `\` (Backslash) | `RT` |
 | Alternar P2 CPU/manual | `C` | `C` | `View` |
 | Reiniciar | `R` | `R` | `Menu` |
 
@@ -165,6 +192,23 @@ O primeiro gamepad conectado controla o Player 1 quando a IA do Player 1 está d
 Quando ambos os jogadores usam IA, Rust e Java usam perfis diferentes para evitar movimentos espelhados. Rust tende a preservar mais média distância e usar especial com mais frequência; Java tende a pressionar mais de perto. A IA decide em pequenos blocos de tempo e pode andar, afastar, pular, abaixar, bloquear, socar, chutar, tentar varredura, overhead, anti-air, agarrão curto, ataque aéreo e soltar especial.
 
 Com `Mostrar debug de combate` ligado, o topo da tela mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um controle Bluetooth estiver pareado mas aparecer `OFF`, confirme se o sistema que executa `cargo run` expõe joystick/gamepad para o Raylib. Em WSL ou ambiente remoto, pode ser necessário testar no host nativo ou encaminhar o dispositivo.
+
+## Defesa e recuperação
+
+Segure `Q` para Player 1 ou `U` para Player 2; no gamepad, `LB` ou `LT`. A guarda é uma ação explícita e não exige segurar a direção contrária.
+
+| Ataque recebido | Resposta |
+|---|---|
+| Socos/chutes médios e projétil | Guarda em pé ou abaixada |
+| Rasteira e Serpent Slide | Guarda abaixada ou salto com antecedência |
+| Overhead, GC Slam e ataques aéreos | Guarda em pé |
+| Agarrão | Saltar, sair de alcance ou interromper o startup |
+
+Durante blockstun, o lutador mantém a altura da guarda que bloqueou o golpe. Quando um overhead quebra guarda baixa, começa hitstun e termina o blockstun anterior. Chip deixa pelo menos 1 de vida, preservando a chance de responder.
+
+Rasteiras, agarrões e o slide da Python causam queda quando atingem um alvo no chão. A recuperação de 36 frames impede novos hits enquanto caído. Agarrões não pegam alvos no ar, em hitstun/blockstun nem nos seis primeiros frames após recuperar. Não há throw tech ou juggle de oponente caído neste corte.
+
+Especiais de assinatura são interrompíveis e ficam expostos após bloqueio ou erro. Teste um jab imediato após bloquear de perto. O projétil conserva seu botão; sua conjuração agora impede outro ataque, pulo ou guarda até terminar o tempo da pose. Um golpe sofrido interrompe essa pose.
 
 ## Como ler a tela
 
@@ -186,7 +230,7 @@ Com `Mostrar debug de combate` ligado, o topo da tela mostra `Pad P1` e `P2` com
 | Linha magenta | Colisão corpo-corpo bloqueando passagem, só com debug ligado |
 | Fundo Sirius/Fortaleza/Java Street/BioTIC/Porto Digital/Vale do Pinhao | Arena placeholder, não arte final |
 
-Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `Mostrar debug de combate` ligado. A ajuda de comandos no rodapé aparece somente com `Mostrar ajuda de controles` ligado.
+Hitboxes, hurtboxes, retângulos de reação/guarda, limites da arena, labels de golpe e linha de colisão aparecem somente com `Mostrar debug de combate` ligado. A ajuda de comandos no rodapé aparece somente com `Mostrar ajuda de controles` ligado.
 
 ## O que testar agora
 
@@ -195,9 +239,9 @@ Hitboxes, hurtboxes, labels de golpe e linha de colisão aparecem somente com `M
 3. Soco fraco deve ser mais curto e mais rápido.
 4. Soco forte deve alcançar mais longe e causar mais dano.
 5. Chute deve acertar em uma altura mais baixa.
-6. Varredura baixa deve exigir defesa abaixada.
+6. Varredura baixa deve manter postura abaixada, atingir canela/pé e exigir defesa abaixada; um salto antecipado deve escapar.
 7. Overhead deve exigir defesa em pé.
-8. Agarrão curto deve ignorar defesa, mas errar fora de alcance.
+8. Agarrão curto deve ignorar defesa e provocar queda, mas errar fora de alcance, contra oponente no ar ou ainda protegido pela recuperação.
 9. Anti-air deve cobrir região acima/frente do personagem.
 10. Ataques aéreos devem funcionar durante salto sem travar a queda.
 11. Defesa deve reduzir dano e mostrar feedback azul.
@@ -286,12 +330,12 @@ Controles do lab:
 - C, Python e C++ ainda usam ataques aéreos universais, mas já possuem kit terrestre, throw, projectile, vida e arquétipo próprios.
 - As arenas bitmap são placeholders gerados/derivados de referências e não devem ser tratadas como arte final.
 - O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.
-- Fireball no gamepad usa `RB` por enquanto; `RT` pode entrar depois quando tivermos leitura de gatilho com borda de pressionamento.
+- Fireball usa `RB`; especial de assinatura usa a borda do botão `RT` exposta pelo mapeamento Raylib.
 - Defesa é um experimento mínimo: já separa high/low/mid/throw/projectile, mas ainda não tem direção esquerda/direita nem defesa perfeita por timing.
 - A CPU é um sparring dummy determinístico: decide em pequenos blocos de tempo, usa perfis diferentes por slot, varia movimento/ataque/especial/defesa e reage a projéteis sem ser perfeita.
-- Não há combo, especial avançado, throw tech, knockdown ou IA adaptativa.
+- Não há combo tree, medidor de especial, throw tech, juggle no chão ou IA adaptativa.
 - Não há arte final, animação final, áudio final, pausa dedicada ou IA avançada.
-- O balanceamento ainda não importa.
+- O balanceamento de MVP é verificado por contrajogo e testes repetíveis; refinamento competitivo depende de playtest humano.
 - A colisão é propositalmente simples e axis-aligned.
 - O visual é debug/greybox, não direção de arte final.
 
@@ -309,7 +353,7 @@ Controles do lab:
 
 - Decidir se sweep, overhead, anti-air e throw serão universais ou parte da identidade de cada personagem.
 - Decidir se defesa por direção entra cedo ou fica para depois do feeling básico.
-- Definir o primeiro diferencial mecânico mínimo de Rust e Java.
+- Playtestar Borrow Break e GC Slam contra os outros três especiais, observando interrupção, alcance e recuperação.
 
 ### Próximo passo de arte
 

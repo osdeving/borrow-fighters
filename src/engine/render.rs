@@ -114,6 +114,9 @@ pub fn draw_fight(
     draw.clear_background(BACKGROUND);
     draw_arena(draw, arena, assets.arenas.get(arena), visual_time_seconds);
     let show_debug = flags.enabled(FeatureFlag::ShowCombatDebug);
+    if show_debug {
+        draw_arena_bounds(draw);
+    }
     let spawn_intro = world.spawn_intro_active();
     let player_one_visuals = character_visuals(world.player_one_character(), assets);
     let player_two_visuals = character_visuals(world.player_two_character(), assets);
@@ -2316,7 +2319,9 @@ fn draw_arena(
 
     draw_arena_background_animation(draw, arena, visual_time_seconds);
     draw_arena_screen_treatment(draw, visual_time_seconds);
+}
 
+fn draw_arena_bounds(draw: &mut impl DrawTarget) {
     draw.draw_line(
         ARENA_LEFT as i32,
         FLOOR_Y as i32,
@@ -2622,7 +2627,9 @@ fn draw_fighter(
         draw_body_parts(draw, fighter, body);
     }
 
-    if !outcome_pose {
+    // Rectangular body/guard feedback belongs to collision debug. Normal play
+    // already communicates contact through sprite tint, ground lights and sparks.
+    if options.show_debug && !outcome_pose {
         draw_fighter_state_flash(draw, fighter);
     }
 
@@ -2636,8 +2643,11 @@ fn draw_fighter(
 
     if options.show_debug {
         outline_rect(draw, fighter.body_rect(), BODY_OUTLINE);
-        if let Some(sprite_combat) = sprite_combat
+        if fighter.in_knockdown() {
+            // Floor recovery is protected, so there is no vulnerable shape.
+        } else if let Some(sprite_combat) = sprite_combat
             .as_ref()
+            .filter(|_| !fighter.uses_low_attack_hurtboxes())
             .filter(|combat| !combat.hurtboxes.is_empty())
         {
             for hurtbox in &sprite_combat.hurtboxes {
@@ -2653,6 +2663,7 @@ fn draw_fighter(
     if options.show_debug {
         let sprite_hitboxes = sprite_combat
             .as_ref()
+            .filter(|_| !fighter.uses_move_spec_hitbox())
             .map(|combat| combat.hitboxes.as_slice())
             .filter(|hitboxes| !hitboxes.is_empty());
         if let Some(hitboxes) = sprite_hitboxes {
@@ -2664,7 +2675,7 @@ fn draw_fighter(
         }
     }
 
-    if fighter.blocking && !outcome_pose {
+    if options.show_debug && fighter.blocking && !outcome_pose {
         let guard = fighter.guard_box();
         draw.draw_rectangle(
             guard.x.round() as i32,
@@ -2674,20 +2685,19 @@ fn draw_fighter(
             GUARD_FILL,
         );
         outline_rect(draw, guard, GUARD);
-        if options.show_debug {
-            draw.draw_text(
-                "BLOCK",
-                (guard.x - world_px(18.0)) as i32,
-                (guard.y - world_px(22.0)) as i32,
-                screen_px(16),
-                GUARD,
-            );
-        }
+        draw.draw_text(
+            "BLOCK",
+            (guard.x - world_px(18.0)) as i32,
+            (guard.y - world_px(22.0)) as i32,
+            screen_px(16),
+            GUARD,
+        );
     }
 
     let active_label_hitbox = if phase == AttackPhase::Active {
         sprite_combat
             .as_ref()
+            .filter(|_| !fighter.uses_move_spec_hitbox())
             .and_then(|combat| combat.hitboxes.first().copied())
             .or_else(|| fighter.active_hitbox())
     } else {
@@ -3058,7 +3068,7 @@ fn draw_help(draw: &mut impl DrawTarget) {
         UI_TEXT,
     );
     draw.draw_text(
-        "P1 attacks: F LP, H HP, V kick, G special or Pad X/Y/B/RB",
+        "P1: F LP/X, H HP/Y, V kick/B, G projectile/RB, T signature/RT",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(100),
         screen_px(15),
@@ -3079,7 +3089,7 @@ fn draw_help(draw: &mut impl DrawTarget) {
         UI_TEXT,
     );
     draw.draw_text(
-        "P2 manual: keyboard or second Pad same layout; Start/R restarts; F9/F10 records",
+        "P2: keyboard/Pad2; signature \\ or RT; Start/R restart; F9/F10 record",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(28),
         screen_px(15),

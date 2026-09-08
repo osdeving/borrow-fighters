@@ -402,3 +402,57 @@ fn lab_overlays_use_baseline_boxes_and_restore_fallback_after_metadata_is_cleare
         "test must sample authored baseline boxes"
     );
 }
+
+#[test]
+fn signature_lab_playback_uses_real_loadout_and_keeps_go_cycle_supported() {
+    use borrow_fighters::combat::fighter::AttackKind;
+    for character in [
+        CharacterId::Rust,
+        CharacterId::Duke,
+        CharacterId::C,
+        CharacterId::Python,
+        CharacterId::Cpp,
+    ] {
+        let mut lab = CombatLab::new(CombatLabOptions {
+            character,
+            selected_move: CombatLabMove::SignatureSpecial,
+            ..CombatLabOptions::default()
+        });
+        lab.update(CombatLabInput::default());
+        assert_eq!(
+            lab.fighter().attack_kind(),
+            Some(AttackKind::SignatureSpecial)
+        );
+        let analysis = lab.advantage().unwrap();
+        assert!(
+            analysis.block_advantage < 0,
+            "specials need a punish window"
+        );
+        assert_eq!(
+            analysis.contact_frame,
+            lab.fighter().attack_frame_data().unwrap().active_start
+        );
+    }
+    let mut go = CombatLab::new(CombatLabOptions {
+        character: CharacterId::Go,
+        ..CombatLabOptions::default()
+    });
+    go.update(CombatLabInput {
+        previous_move: true,
+        ..CombatLabInput::default()
+    });
+    assert_eq!(go.selected_move(), CombatLabMove::Projectile);
+    go.update(CombatLabInput {
+        next_move: true,
+        ..CombatLabInput::default()
+    });
+    assert_eq!(go.selected_move(), CombatLabMove::LightPunch);
+    assert_eq!(
+        CombatLabMove::from_cli("signature_special"),
+        Some(CombatLabMove::SignatureSpecial)
+    );
+    assert_eq!(
+        CombatLabMove::from_cli("special"),
+        Some(CombatLabMove::Projectile)
+    );
+}

@@ -2,7 +2,7 @@
   "schema": "borrow-fighters.sprite-provenance.v1",
   "character": "rust",
   "production": "../../production/rust/production.json",
-  "production_sha256": "4244981af4598da6c07258f55a57c8c69b0c57075eff42c4ae06eb18c35348d0",
+  "production_sha256": "943a4923a7232a4ee75f087714b1dbc2cdd0e3a1f8c10d89ba00d0e7ecf07df3",
   "production_snapshot": {
     "schema": "borrow-fighters.production.v1",
     "character": "rust",
@@ -676,61 +676,61 @@
         "loop": false,
         "frames": [
           {
-            "name": "sweep_0",
+            "name": "sweep_00",
             "source_rect": {
               "x": 0,
               "y": 0,
-              "w": 226,
-              "h": 361
+              "w": 278,
+              "h": 419
             },
             "pivot": {
-              "x": 118,
-              "y": 298
+              "x": 156,
+              "y": 359
             },
             "duration_ms": 166,
             "phase": "startup"
           },
           {
-            "name": "sweep_1",
+            "name": "sweep_01",
             "source_rect": {
-              "x": 296,
+              "x": 319,
               "y": 0,
-              "w": 296,
-              "h": 361
+              "w": 319,
+              "h": 419
             },
             "pivot": {
-              "x": 122,
-              "y": 298
+              "x": 131,
+              "y": 360
             },
             "duration_ms": 150,
             "phase": "active"
           },
           {
-            "name": "sweep_2",
+            "name": "sweep_02",
             "source_rect": {
-              "x": 592,
+              "x": 638,
               "y": 0,
-              "w": 216,
-              "h": 361
+              "w": 254,
+              "h": 419
             },
             "pivot": {
-              "x": 95,
-              "y": 298
+              "x": 126,
+              "y": 361
             },
             "duration_ms": 108,
             "phase": "recovery"
           },
           {
-            "name": "sweep_3",
+            "name": "sweep_03",
             "source_rect": {
-              "x": 888,
+              "x": 957,
               "y": 0,
-              "w": 225,
-              "h": 361
+              "w": 266,
+              "h": 419
             },
             "pivot": {
-              "x": 85,
-              "y": 298
+              "x": 123,
+              "y": 359
             },
             "duration_ms": 109,
             "phase": "recovery"
@@ -738,9 +738,9 @@
         ],
         "provenance": {
           "source_action": "sweep/action.json",
-          "source_sheet": "sweep/keyed-v6.png",
-          "scale_to_runtime": 0.47,
-          "review": "v6 lowers the active sole into the unchanged sweep box after rejecting v5 (sole too low). All four source rectangles, scale .47, ground pivots and combat timing preserved. Magenta extracted; pale pocket between arm and thigh removed by prepare-v6.py. Static contact/identity/alpha inspected; runtime recapture pending."
+          "source_sheet": "sweep/keyed-mvp-v1.png",
+          "scale_to_runtime": 0.546,
+          "review": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Low active foot now attacks ankle/shin band of the actual crouching MoveSpec. Previous action mapping preserved in action-pre-mvp.json. Timing unchanged."
         }
       },
       "overhead": {
@@ -1339,6 +1339,152 @@
           "scale_to_runtime": 0.415504,
           "review": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
         }
+      },
+      "knockdown": {
+        "sheet": "knockdown/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "knockdown_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 265,
+              "h": 384
+            },
+            "pivot": {
+              "x": 182,
+              "y": 325
+            },
+            "duration_ms": 100,
+            "phase": "fall"
+          },
+          {
+            "name": "knockdown_01",
+            "source_rect": {
+              "x": 280,
+              "y": 0,
+              "w": 280,
+              "h": 384
+            },
+            "pivot": {
+              "x": 145,
+              "y": 325
+            },
+            "duration_ms": 220,
+            "phase": "grounded"
+          },
+          {
+            "name": "knockdown_02",
+            "source_rect": {
+              "x": 560,
+              "y": 0,
+              "w": 235,
+              "h": 384
+            },
+            "pivot": {
+              "x": 130,
+              "y": 316
+            },
+            "duration_ms": 180,
+            "phase": "get_up"
+          },
+          {
+            "name": "knockdown_03",
+            "source_rect": {
+              "x": 840,
+              "y": 0,
+              "w": 244,
+              "h": 384
+            },
+            "pivot": {
+              "x": 130,
+              "y": 316
+            },
+            "duration_ms": 100,
+            "phase": "recover"
+          }
+        ],
+        "provenance": {
+          "source_action": "knockdown/action.json",
+          "source_sheet": "knockdown/keyed-v1.png",
+          "scale_to_runtime": 0.5,
+          "review": "Four newly generated fall/floor/get-up/guard poses; same attached hip accessories. Floor anchors are virtual during fall and actual support afterward. One uniform .5 action scale; final guard remains slightly bent at knees. Original source and prompt retained."
+        }
+      },
+      "signature_special": {
+        "sheet": "signature_special/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "signature_special_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 238,
+              "h": 365
+            },
+            "pivot": {
+              "x": 142,
+              "y": 309
+            },
+            "duration_ms": 200,
+            "phase": "startup"
+          },
+          {
+            "name": "signature_special_01",
+            "source_rect": {
+              "x": 290,
+              "y": 0,
+              "w": 290,
+              "h": 365
+            },
+            "pivot": {
+              "x": 133,
+              "y": 310
+            },
+            "duration_ms": 100,
+            "phase": "active"
+          },
+          {
+            "name": "signature_special_02",
+            "source_rect": {
+              "x": 580,
+              "y": 0,
+              "w": 214,
+              "h": 365
+            },
+            "pivot": {
+              "x": 104,
+              "y": 309
+            },
+            "duration_ms": 166,
+            "phase": "recovery"
+          },
+          {
+            "name": "signature_special_03",
+            "source_rect": {
+              "x": 870,
+              "y": 0,
+              "w": 232,
+              "h": 365
+            },
+            "pivot": {
+              "x": 128,
+              "y": 309
+            },
+            "duration_ms": 167,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "signature_special/action.json",
+          "source_sheet": "signature_special/keyed-v2.png",
+          "scale_to_runtime": 0.475,
+          "review": "New four-frame signature animation generated with imagegen. Explicit variable-width crops preserve whole extended limbs; constant anatomical scale, support pivots, startup/active/recovery keyed to MoveSpec. Original source and background-only revision preserved. Local matte removal authorized in production README. Source identity/alpha reviewed; runtime contacts verified in both facings."
+        }
       }
     }
   },
@@ -1385,7 +1531,7 @@
     },
     {
       "path": "../../production/rust/sweep/prepared.png",
-      "sha256": "abfb0fa051c8d5e92ac3b4eac59e3672b3f9eaa0cdfc1d3551f18afa1bbe7347"
+      "sha256": "bde964b538d9f05739a041f3eabe39ee42d6ae4a8c2bcd2a80969d112d874ac1"
     },
     {
       "path": "../../production/rust/overhead/prepared.png",
@@ -1422,6 +1568,14 @@
     {
       "path": "../../production/rust/defeat/prepared.png",
       "sha256": "b7b74b5d3655127d4b491f3f5eecfd94b3ee18f7f844d43eb894a551deb40e52"
+    },
+    {
+      "path": "../../production/rust/knockdown/prepared.png",
+      "sha256": "a9b3d2d064ef8ce350f2a53de2b4f6315a172929d6b9e75cd2a705afccbcb828"
+    },
+    {
+      "path": "../../production/rust/signature_special/prepared.png",
+      "sha256": "2f441398d3e3108b2194703da91d439fec811e1ce723958856572c6aaba2945d"
     }
   ],
   "frames": [
@@ -1881,55 +2035,55 @@
       "phase": "recovery"
     },
     {
-      "name": "sweep_0",
+      "name": "sweep_00",
       "action": "sweep",
       "sheet": "../../production/rust/sweep/prepared.png",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 226,
-        "h": 361
+        "w": 278,
+        "h": 419
       },
-      "exported_frame": "../../production/rust/sweep/frames/sweep_0.png",
+      "exported_frame": "../../production/rust/sweep/frames/sweep_00.png",
       "phase": "startup"
     },
     {
-      "name": "sweep_1",
+      "name": "sweep_01",
       "action": "sweep",
       "sheet": "../../production/rust/sweep/prepared.png",
       "source_rect": {
-        "x": 296,
+        "x": 319,
         "y": 0,
-        "w": 296,
-        "h": 361
+        "w": 319,
+        "h": 419
       },
-      "exported_frame": "../../production/rust/sweep/frames/sweep_1.png",
+      "exported_frame": "../../production/rust/sweep/frames/sweep_01.png",
       "phase": "active"
     },
     {
-      "name": "sweep_2",
+      "name": "sweep_02",
       "action": "sweep",
       "sheet": "../../production/rust/sweep/prepared.png",
       "source_rect": {
-        "x": 592,
+        "x": 638,
         "y": 0,
-        "w": 216,
-        "h": 361
+        "w": 254,
+        "h": 419
       },
-      "exported_frame": "../../production/rust/sweep/frames/sweep_2.png",
+      "exported_frame": "../../production/rust/sweep/frames/sweep_02.png",
       "phase": "recovery"
     },
     {
-      "name": "sweep_3",
+      "name": "sweep_03",
       "action": "sweep",
       "sheet": "../../production/rust/sweep/prepared.png",
       "source_rect": {
-        "x": 888,
+        "x": 957,
         "y": 0,
-        "w": 225,
-        "h": 361
+        "w": 266,
+        "h": 419
       },
-      "exported_frame": "../../production/rust/sweep/frames/sweep_3.png",
+      "exported_frame": "../../production/rust/sweep/frames/sweep_03.png",
       "phase": "recovery"
     },
     {
@@ -2347,8 +2501,112 @@
       },
       "exported_frame": "../../production/rust/defeat/frames/defeat_02.png",
       "phase": "supported_hold"
+    },
+    {
+      "name": "knockdown_00",
+      "action": "knockdown",
+      "sheet": "../../production/rust/knockdown/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 265,
+        "h": 384
+      },
+      "exported_frame": "../../production/rust/knockdown/frames/knockdown_00.png",
+      "phase": "fall"
+    },
+    {
+      "name": "knockdown_01",
+      "action": "knockdown",
+      "sheet": "../../production/rust/knockdown/prepared.png",
+      "source_rect": {
+        "x": 280,
+        "y": 0,
+        "w": 280,
+        "h": 384
+      },
+      "exported_frame": "../../production/rust/knockdown/frames/knockdown_01.png",
+      "phase": "grounded"
+    },
+    {
+      "name": "knockdown_02",
+      "action": "knockdown",
+      "sheet": "../../production/rust/knockdown/prepared.png",
+      "source_rect": {
+        "x": 560,
+        "y": 0,
+        "w": 235,
+        "h": 384
+      },
+      "exported_frame": "../../production/rust/knockdown/frames/knockdown_02.png",
+      "phase": "get_up"
+    },
+    {
+      "name": "knockdown_03",
+      "action": "knockdown",
+      "sheet": "../../production/rust/knockdown/prepared.png",
+      "source_rect": {
+        "x": 840,
+        "y": 0,
+        "w": 244,
+        "h": 384
+      },
+      "exported_frame": "../../production/rust/knockdown/frames/knockdown_03.png",
+      "phase": "recover"
+    },
+    {
+      "name": "signature_special_00",
+      "action": "signature_special",
+      "sheet": "../../production/rust/signature_special/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 238,
+        "h": 365
+      },
+      "exported_frame": "../../production/rust/signature_special/frames/signature_special_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_01",
+      "action": "signature_special",
+      "sheet": "../../production/rust/signature_special/prepared.png",
+      "source_rect": {
+        "x": 290,
+        "y": 0,
+        "w": 290,
+        "h": 365
+      },
+      "exported_frame": "../../production/rust/signature_special/frames/signature_special_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_02",
+      "action": "signature_special",
+      "sheet": "../../production/rust/signature_special/prepared.png",
+      "source_rect": {
+        "x": 580,
+        "y": 0,
+        "w": 214,
+        "h": 365
+      },
+      "exported_frame": "../../production/rust/signature_special/frames/signature_special_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "signature_special_03",
+      "action": "signature_special",
+      "sheet": "../../production/rust/signature_special/prepared.png",
+      "source_rect": {
+        "x": 870,
+        "y": 0,
+        "w": 232,
+        "h": 365
+      },
+      "exported_frame": "../../production/rust/signature_special/frames/signature_special_03.png",
+      "phase": "recovery"
     }
   ],
-  "atlas_sha256": "e969bf00c9df93c2980b45a24dacc066977ae2d9ebafcd0f982c010650d89f8d",
-  "manifest_sha256": "47bc02280fbb12a54a092bde8ae80204bd8ef648717b541cac778724d651e659"
+  "atlas_sha256": "e4aff47ef56082a1401728e5742f0a1f837c6df4c1d025d89567eb05f0eaa752",
+  "manifest_sha256": "8279d643aa5fab2d4167902788fc3450dde8700acf291599eb4666669c634be8"
 }

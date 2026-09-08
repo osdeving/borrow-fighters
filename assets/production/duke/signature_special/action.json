@@ -1,0 +1,67 @@
+{
+  "sheet": "signature_special/keyed-v2.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "signature_special_mvp_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 500,
+        "h": 768
+      },
+      "pivot": {
+        "x": 236,
+        "y": 625
+      },
+      "duration_ms": 366,
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_mvp_01",
+      "source_rect": {
+        "x": 520,
+        "y": 0,
+        "w": 510,
+        "h": 768
+      },
+      "pivot": {
+        "x": 210,
+        "y": 625
+      },
+      "duration_ms": 117,
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_mvp_02",
+      "source_rect": {
+        "x": 1070,
+        "y": 0,
+        "w": 450,
+        "h": 768
+      },
+      "pivot": {
+        "x": 200,
+        "y": 632
+      },
+      "duration_ms": 192,
+      "phase": "recovery"
+    },
+    {
+      "name": "signature_special_mvp_03",
+      "source_rect": {
+        "x": 1580,
+        "y": 0,
+        "w": 460,
+        "h": 768
+      },
+      "pivot": {
+        "x": 210,
+        "y": 625
+      },
+      "duration_ms": 192,
+      "phase": "recovery"
+    }
+  ]
+}

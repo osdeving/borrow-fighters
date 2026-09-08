@@ -1,6 +1,20 @@
 # 19 — Cobertura da produção de sprites
 
-## Escopo e estado
+## Rodada de MVP atual
+
+A rodada solicitada em 8 de setembro adiciona `signature_special` e `knockdown` para **Rust, Duke/Java, C, Python e C++**, com novas rasteiras baixas. São **130 clips / 420 quadros** no conjunto atual: 22 clips por personagem desta rodada, enquanto Go conserva seus 20 clips / 60 quadros. As 15 animações novas somam 60 desenhos, incluindo a substituição dos antigos quadros de rasteira. Fontes e ações anteriores ficam preservadas. Os [critérios e evidências do MVP](20-mvp-combat-showcase.md) acompanham a validação do conjunto integrado.
+
+| Personagem | Especial próprio | Queda/recuperação | Rasteira |
+|---|---|---|---|
+| Rust | Borrow Break — 4 quadros / 633 ms | 4 / 600 ms | 4 / 533 ms |
+| Duke/Java | GC Slam — 4 / 867 ms | 4 / 600 ms | 4 / 633 ms |
+| C | Pointer Lance — 4 / 767 ms | 4 / 600 ms | 4 / 600 ms |
+| Python | Serpent Slide — 4 / 650 ms | 4 / 600 ms | 4 / 483 ms |
+| C++ | Template Arc — 4 / 700 ms | 4 / 600 ms | 4 / 517 ms |
+
+`hit`, `block` e `crouch_block` permanecem dedicados a impactos normais e defesas. Quedas após rasteira, agarrão e slide usam a nova sequência de recuperação. O quadro ativo dos especiais e rasteiras precisa corresponder ao volume físico atual; essa rodada inclui alterações de combate autorizadas, descritas na [ADR 0013](adr/0013-contextual-showcase-and-mvp-combat.md).
+
+## Rodada anterior: escopo e estado
 
 **Rust, Duke/Java, Go, C, Python e C++ concluíram o refinamento e a verificação de arte final.** São **120 clips, 378 quadros selecionados e os dez golpes de cada personagem**. Os laudos atuais abaixo registram fontes novas, ações reaproveitadas, revisão visual, execução nativa e ressalvas concretas. O [plano de continuação](../assets/production/FINALIZATION-PLAN.md) conserva o andamento geral.
 
@@ -8,7 +22,7 @@ O **novo Go semirrealista está concluído e verificado** (20 clips / 60 quadros
 
 A matriz mantém o escopo alvo de **21 ações visuais por personagem, 126 linhas**, incluindo o projétil separado. As 126 linhas estão cobertas pelos seis conjuntos revisados. A defesa agachada representa uma combinação já implementada; vitória e derrota usam o resultado existente. A entrada de C++ preenche a apresentação existente. Nenhuma ação desta produção requer golpes novos.
 
-A arte revisada em `assets/candidates/` é carregada por padrão. `BORROW_FIGHTERS_SPRITE_CANDIDATES=0` permite comparar os originais preservados em `assets/placeholder/`; `1` continua selecionando os revisados explicitamente. Um conjunto ausente, inválido ou sem algum dos 20 clips mantém o fallback. O nome da pasta não substitui o estado artístico dos laudos. `combat_manifest` conserva caixas, origem de projétil e regras baseline.
+A arte revisada em `assets/candidates/` é carregada por padrão. `BORROW_FIGHTERS_SPRITE_CANDIDATES=0` permite comparar os originais preservados em `assets/placeholder/`; `1` continua selecionando os revisados explicitamente. Um conjunto ausente, inválido ou incompleto mantém o fallback; a rodada atual exige 22 clips dos cinco e preserva os 20 de Go. O nome da pasta não substitui o estado artístico dos laudos. `combat_manifest` conserva a metadata baseline; rasteiras e especiais novos usam o combate revisado conforme a ADR 0013.
 
 A coluna “uso inicial” registra a situação anterior; “produção / integração” registra o estado atual dos seis concluídos. O Go antigo está identificado apenas nos registros históricos. A solicitação de evoluir os seis personagens supera as antigas exclusões de arte final/roster dos documentos iniciais, mantendo o combate implementado como referência.
 

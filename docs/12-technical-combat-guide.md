@@ -28,7 +28,7 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Combat Lab state | Cena isolada para playback de golpes, pause, frame step e leitura de vantagem | [`src/scenes/combat_lab.rs`](../src/scenes/combat_lab.rs) | [`tests/combat_lab.rs`](../tests/combat_lab.rs) |
 | Combat Lab analysis | Cálculo de vantagem estimada, pushback e dummy de contato | [`src/scenes/combat_lab_analysis.rs`](../src/scenes/combat_lab_analysis.rs) | [`tests/combat_lab.rs`](../tests/combat_lab.rs) |
 | Combat Lab render | Orquestra Raylib da cena isolada, sprites, grid e projéteis | [`src/engine/render/combat_lab.rs`](../src/engine/render/combat_lab.rs) | Teste manual via Combat Lab |
-| Move Showcase | Autoplay limpo do Player 1 sozinho ciclando todos os golpes | [`src/scenes/move_showcase.rs`](../src/scenes/move_showcase.rs), [`src/engine/render/move_showcase.rs`](../src/engine/render/move_showcase.rs) | [`tests/move_showcase.rs`](../tests/move_showcase.rs), teste manual via `Training -> Move Showcase` |
+| Move Showcase | Demonstrações contextuais de todos os golpes e defesas contra um adversário no World real | [`src/scenes/move_showcase.rs`](../src/scenes/move_showcase.rs), [`src/engine/render/move_showcase.rs`](../src/engine/render/move_showcase.rs) | [`tests/move_showcase.rs`](../tests/move_showcase.rs), teste manual via `Training -> Move Showcase` |
 | Combat debug UI | Boxes, pivot, dummy, overlay e texto de timing do laboratório | [`src/ui/combat_debug.rs`](../src/ui/combat_debug.rs) | Teste manual via Combat Lab |
 | Sprite Combat Viewer | Ferramenta isolada para carregar atlas em runtime, ver grid, pivot, bounds e preparar boxes data-driven | [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), [`src/scenes/sprite_viewer/combat_edit.rs`](../src/scenes/sprite_viewer/combat_edit.rs), [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs) | [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs), teste manual via `--tool sprite-viewer` |
 | Sprite Studio | App externo Tauri 1.8 + React para editar manifestos sem depender de Raylib | [`tools/sprite-studio`](../tools/sprite-studio) | `pnpm build`; `pnpm tauri build --debug`; desktop requer pre-requisitos Tauri |
@@ -44,7 +44,7 @@ O loop principal em [`src/app.rs`](../src/app.rs) usa `AppScene` de [`src/scenes
 - `Preferences`: menu principal e submenus de versus, treino, lore/roster e opções;
 - `Fight`: luta normal com fixed timestep, IA, audio events e renderer de arena;
 - `CombatLab`: cena isolada para testar golpes e frame data;
-- `MoveShowcase`: cena limpa de treino que deixa um personagem sozinho ciclando todos os golpes;
+- `MoveShowcase`: cena de treino com dois atores, situações contextuais, golpes e defesas reais;
 - `SpriteViewer`: ferramenta de sprite em loop proprio, fora do fluxo normal de luta.
 
 Transicoes novas devem passar por esse enum em vez de espalhar flags soltas no loop. Se a nova tela for ferramenta temporaria, prefira loop isolado como o Sprite Viewer; se fizer parte do jogo, trate como cena normal. `Esc` tem comportamento de voltar dentro do jogo; o bootstrap em [`src/main.rs`](../src/main.rs) desativa a tecla padrão de fechamento do Raylib com `set_exit_key(None)`.
@@ -84,13 +84,13 @@ Hitboxes:
 - `Fighter::active_attack` só retorna hitbox ofensiva quando o frame atual está dentro da janela ativa.
 - `combat::collision::hitbox_hits_hurtbox` usa interseção AABB.
 
-Essa técnica foi escolhida porque é legível, testável sem Raylib e suficiente para o Prototype 0.1. Quando o frame do manifesto baseline declara `frames[].combat`, o runtime projeta esses dados para coordenadas de mundo em [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs). A resolução da luta usa `frames[].combat.hitboxes[]` e `frames[].combat.hurtboxes[]` quando essas listas existem; se estiverem ausentes ou vazias, volta para `MoveSpec.hitbox` e `Fighter::hurtboxes()`. A decisão inicial está em [`ADR 0007`](adr/0007-sprite-frame-combat-runtime.md); a separação entre arte candidata e metadata baseline está em [`ADR 0010`](adr/0010-reviewed-action-sprite-production.md).
+Essa técnica foi escolhida porque é legível, testável sem Raylib e suficiente para o Prototype 0.1. Quando o frame do manifesto baseline declara `frames[].combat`, o runtime projeta esses dados para coordenadas de mundo em [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs). A resolução da luta usa `frames[].combat.hitboxes[]` e `frames[].combat.hurtboxes[]` quando essas listas existem; rasteiras e especiais de assinatura usam sempre o `MoveSpec` revisado, e ações baixas usam as hurtboxes físicas para preservar sua postura (ver [ADR 0013](adr/0013-contextual-showcase-and-mvp-combat.md)); se estiverem ausentes ou vazias, volta para `MoveSpec.hitbox` e `Fighter::hurtboxes()`. A decisão inicial está em [`ADR 0007`](adr/0007-sprite-frame-combat-runtime.md); a separação entre arte candidata e metadata baseline está em [`ADR 0010`](adr/0010-reviewed-action-sprite-production.md).
 
-Rust, Duke, Go, C, Python e C++ ja possuem `combat.projectile_origin` no primeiro frame do clip `special`. Esse ponto e projetado por [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) e usado por [`src/game/world.rs`](../src/game/world.rs) ao criar o projectile, para evitar que o poder nasca desalinhado da mao. Os manifests de luta tambem declaram clips runtime para os nove golpes proximos (`punch_light`, `punch_heavy`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`) e para `hit` durante hitstun. Rust `Borrow Jab`, heavy punch e kick ja possuem hitboxes de frame; os valores ainda reproduzem o alcance do `MoveSpec` para migrar com baixo risco. Python e C++ raster high-res ainda usam fallback de `MoveSpec` para hitboxes dos golpes proximos ate uma calibracao propria no Sprite Studio. Hitboxes/hurtboxes restantes devem ser calibradas no Sprite Studio, com o Sprite Combat Viewer Raylib apenas como ferramenta temporaria ate a limpeza dedicada.
+Rust, Duke, Go, C, Python e C++ ja possuem `combat.projectile_origin` no primeiro frame do clip `special`. Esse ponto e projetado por [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) e usado por [`src/game/world.rs`](../src/game/world.rs) ao criar o projectile, para evitar que o poder nasca desalinhado da mao. Os manifests baseline de luta tambem declaram clips runtime para os nove golpes proximos (`punch_light`, `punch_heavy`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`) e para `hit` durante hitstun. Rust `Borrow Jab`, heavy punch e kick ja possuem hitboxes de frame; os valores ainda reproduzem o alcance do `MoveSpec` para migrar com baixo risco. Python e C++ raster high-res ainda usam fallback de `MoveSpec` para hitboxes dos golpes proximos ate uma calibracao propria no Sprite Studio. Hitboxes/hurtboxes restantes devem ser calibradas no Sprite Studio, com o Sprite Combat Viewer Raylib apenas como ferramenta temporaria ate a limpeza dedicada.
 
 ### Escala Visual e Pivot
 
-O opt-in de desenvolvimento `BORROW_FIGHTERS_SPRITE_CANDIDATES=1` procura `assets/candidates/<key>/<key>-fighter.sprite.json`, com `key` igual a `rust`, `duke`, `go`, `c`, `python` ou `cpp`. Apenas candidatos validos, com texturas carregaveis e os 20 clips do jogo atual, substituem o desenho em luta, Move Showcase e Combat Lab. Ausencia/falha/incompletude mantem o baseline do personagem; a lista de clips faltantes aparece no terminal. Conjuntos parciais sao revisados diretamente no Viewer/Studio. A lista e os comandos estao no [pipeline de sprites](11-sprite-pipeline.md#revisao-de-candidatos-no-runtime).
+A configuração padrão procura `assets/candidates/<key>/<key>-fighter.sprite.json`, com `key` igual a `rust`, `duke`, `go`, `c`, `python` ou `cpp`. Apenas conjuntos válidos e completos, com texturas carregáveis e 22 clips nos cinco personagens do MVP (20 em Go), substituem o desenho em luta, Move Showcase e Combat Lab. `BORROW_FIGHTERS_SPRITE_CANDIDATES=0` permite comparar o baseline preservado; `1` seleciona explicitamente a arte revisada. Ausencia/falha/incompletude mantem o baseline do personagem; a lista de clips faltantes aparece no terminal. Conjuntos parciais sao revisados diretamente no Viewer/Studio. A lista e os comandos estao no [pipeline de sprites](11-sprite-pipeline.md#revisao-de-candidatos-no-runtime).
 
 O loader mantem `SpriteAtlasAsset.manifest` para desenho e `combat_manifest` para as boxes e a origem de projectile existentes. `App::sync_world_sprite_combat` usa o segundo, assim como o overlay da luta. Nenhum campo experimental de combate no candidato e promovido por ligar a variavel de ambiente.
 
@@ -166,14 +166,16 @@ Golpes jogáveis atuais usam essas regras assim:
 
 `HitReaction` contém `hitstun`, `blockstun`, `hit_pushback` e `block_pushback`. Ao receber um hit, [`Fighter::take_hit`](../src/combat/fighter.rs) calcula se a defesa bloqueia aquele `GuardRule`, aplica dano reduzido quando bloqueado, liga o timer correspondente e retorna um `DamageResult` com dano, bloqueio e pushback:
 
-- `hitstun_timer`: interrompe ataque atual, troca clip para `hit` e impede iniciar ação.
+- `hitstun_timer`: interrompe ataque atual, seleciona `hit` ou `knockdown` conforme a reação e impede iniciar ação.
 - `blockstun_timer`: mantém o lutador em defesa e impede iniciar ação.
 - ambos são expostos para debug/testes por `hitstun_remaining_frames`, `blockstun_remaining_frames`, `in_hitstun` e `in_blockstun`.
 
-Limitacao preexistente: o update calcula `crouching` com `!action_locked`; durante blockstun ele pode limpar o agachamento no tick seguinte ao contato, mesmo com defesa baixa pressionada. A nova arte `crouch_block` acompanha os estados atuais e nao corrige essa regra. Preservar a postura fisica durante stun alteraria hurtbox e interacao com `GuardRule`, portanto exige uma mudanca de gameplay separada.
+A defesa baixa conserva a postura durante blockstun mesmo se o botão for solto. Chip é limitado para deixar pelo menos 1 HP. Acerto interrompe conjuração de projétil; a conjuração também trava novos ataques durante sua própria animação.
+
+Rasteiras, agarrões e Serpent Slide causam `HitReactionKind::Knockdown` quando acertam um alvo no chão: recuperação de 36 frames com clip `knockdown` e proteção contra novos hits. Agarrões falham contra saltos, stun e os seis primeiros frames depois de levantar. Os demais impactos usam `hit`.
 - `hit_pushback` e `block_pushback`: deslocamento horizontal em pixels aplicado ao defensor, com block pushback menor que hit pushback no tuning atual.
 
-O match runtime em [`src/game/world.rs`](../src/game/world.rs) passa `guard_rule` e `hit_reaction` de `ActiveAttack` ou `Projectile` para o defensor. O próprio `World` aplica o pushback, porque é ele quem sabe de qual lado está atacante, defensor e projétil. Depois do deslocamento, `Fighter::clamp_to_arena` mantém o defensor dentro da arena. Feature flags de dano ainda impedem dano, stun e pushback quando desativadas.
+O match runtime em [`src/game/world.rs`](../src/game/world.rs) passa `guard_rule` e `hit_reaction` de `ActiveAttack` ou `Projectile` para o defensor. O próprio `World` aplica o pushback, porque é ele quem sabe de qual lado está atacante, defensor e projétil. O spark e o número de dano usam o centro da interseção real entre a hitbox e a hurtbox atingidas, antes da reação e do pushback; uma rasteira mostra impacto nas pernas. Depois do deslocamento, `Fighter::clamp_to_arena` mantém o defensor dentro da arena. Feature flags de dano ainda impedem dano, stun e pushback quando desativadas.
 
 ### Dados de Golpes
 
@@ -313,9 +315,16 @@ A intenção de gameplay por golpe vive em [`docs/15-character-combat-matrix.md`
 
 ### Move Showcase
 
-O showcase abre pelo menu `Training -> Move Showcase`. Ele usa o personagem selecionado como Player 1 em `Versus Setup`, instancia um [`MoveShowcase`](../src/scenes/move_showcase.rs) e reaproveita `CombatLab` internamente para executar, em autoplay, `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw` e `projectile`.
+O showcase abre por `Training -> Move Showcase` ou diretamente:
 
-A renderização fica em [`src/engine/render/move_showcase.rs`](../src/engine/render/move_showcase.rs): ela usa a arena atual, desenha só o lutador e projéteis, e não mostra dummy, hitbox, hurtbox, pivot ou overlay técnico. `Tab` / `Shift+Tab` pulam golpes, `Enter` repete, `Espaço` pausa e `Esc` volta ao menu.
+```bash
+cargo run -- --showcase --character rust
+cargo run -- --showcase --character cpp --move signature_special --repeat --reverse
+```
+
+[`MoveShowcase`](../src/scenes/move_showcase.rs) executa dois lutadores em um `World` real. Cada personagem apresenta onze golpes (incluindo projétil e especial de assinatura) e quatro exemplos de defesa. Rasteira enfrenta guarda alta; overhead enfrenta guarda baixa; anti-air recebe um salto de aproximação; agarrão precisa alcançar um alvo em guarda no chão. Dano, bloqueio, projéteis, reações e áudio vêm da resolução normal do jogo. O painel descreve a situação e confirma o contato ocorrido.
+
+A [renderização](../src/engine/render/move_showcase.rs) mostra ambos os atores sem volumes de debug. `Tab` / `Shift+Tab` alternam demonstrações, `Enter` repete, `Espaço` pausa, `.` avança um frame, `Home` reinicia, `L` alterna repetição e `X` inverte os lados. `PageDown` / `PageUp` alternam os cinco personagens desta rodada; `Esc` volta ao menu. Os cenários e as opções são preservados ao trocar de personagem.
 
 ### Combat Lab
 
@@ -438,7 +447,7 @@ O viewer tambem entende metadata opcional `frames[].combat` no manifesto. Essa m
 }
 ```
 
-`frames[].combat` do manifesto baseline ja alimenta a luta real de forma incremental. Quando um frame possui `hitboxes`, elas substituem a hitbox ofensiva calculada por `MoveSpec` naquele frame. Quando um frame possui `hurtboxes`, elas substituem as hurtboxes compostas de `Fighter`. Quando o clip `special` possui `projectile_origin`, o projectile nasce desse ponto projetado para o mundo. Campos ausentes mantem fallback para `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, entao personagens sem metadata continuam jogaveis. Metadata editada em um arquivo candidato continua apenas nesse arquivo; ativar o desenho candidato nao substitui `combat_manifest`.
+`frames[].combat` do manifesto baseline ja alimenta a luta real de forma incremental. Quando um frame possui `hitboxes`, elas substituem a hitbox ofensiva de `MoveSpec`, exceto nas rasteiras e nos especiais de assinatura. Hurtboxes de metadata substituem as compostas de `Fighter`, exceto nas ações baixas revisadas. A geometria autoritativa dessas exceções é descrita na ADR 0013. Quando o clip `special` possui `projectile_origin`, o projectile nasce desse ponto projetado para o mundo. Campos ausentes mantem fallback para `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, entao personagens sem metadata continuam jogaveis. Metadata editada em um arquivo candidato continua apenas nesse arquivo; ativar o desenho candidato nao substitui `combat_manifest`.
 
 Teclas:
 
@@ -563,3 +572,5 @@ ruby -e 'require "yaml"; Dir[".github/**/*.yml", ".github/**/*.yaml", ".agents/*
 ```bash
 ruby -e 'bad = []; Dir["{README.md,CONTRIBUTING.md,CHANGELOG.md,AGENTS.md,CLAUDE.md,docs/**/*.md,.agents/**/*.md,.claude/**/*.md}"].each { |file| text = File.read(file); text.scan(/\[[^\]]+\]\(([^)#]+)(?:#[^)]+)?\)/).flatten.each { |link| next if link =~ %r{^[a-z]+://}; path = File.expand_path(link, File.dirname(file)); bad << "#{file}: #{link}" unless File.exist?(path) } }; if bad.empty? then puts "markdown links ok" else warn bad.join("\n"); exit 1 end'
 ```
+
+A vantagem mostrada pelo Combat Lab é estimada pelo `MoveSpec`; não inclui os 36 frames de knockdown. Para verificar queda, levantar e nova ação, use o showcase ou a luta real. O Lab rejeita `signature_special` para Go, que não possui essa ação.

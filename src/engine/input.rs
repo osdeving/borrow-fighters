@@ -132,6 +132,7 @@ fn keyboard_player_one(raylib: &RaylibHandle) -> FighterInput {
         heavy_punch: raylib.is_key_pressed(KeyboardKey::KEY_H),
         kick: raylib.is_key_pressed(KeyboardKey::KEY_V),
         projectile: raylib.is_key_pressed(KeyboardKey::KEY_G),
+        signature_special: raylib.is_key_pressed(KeyboardKey::KEY_T),
     }
 }
 
@@ -151,6 +152,7 @@ fn keyboard_player_two(raylib: &RaylibHandle) -> FighterInput {
             || raylib.is_key_pressed(KeyboardKey::KEY_SLASH),
         projectile: raylib.is_key_pressed(KeyboardKey::KEY_RIGHT_CONTROL)
             || raylib.is_key_pressed(KeyboardKey::KEY_KP_0),
+        signature_special: raylib.is_key_pressed(KeyboardKey::KEY_BACKSLASH),
     }
 }
 
@@ -208,6 +210,7 @@ fn merge_fighter_input(first: FighterInput, second: FighterInput) -> FighterInpu
         heavy_punch: first.heavy_punch || second.heavy_punch,
         kick: first.kick || second.kick,
         projectile: first.projectile || second.projectile,
+        signature_special: first.signature_special || second.signature_special,
     }
 }
 

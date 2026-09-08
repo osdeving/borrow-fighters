@@ -80,3 +80,9 @@ carregador exige os 20 nomes de clips implementados e mantém o placeholder se f
 
 A cobertura e as limitações verificadas ficam em
 [docs/19-sprite-production-coverage.md](../../docs/19-sprite-production-coverage.md).
+
+## Rodada de MVP de setembro de 2026
+
+Rust, Duke/Java, C, Python e C++ recebem duas ações novas (`signature_special` e `knockdown`) e rasteiras com contato baixo. A [ADR 0013](../../docs/adr/0013-contextual-showcase-and-mvp-combat.md) registra a mudança de postura, geometria e reação: a regra de preservar todo o baseline do ciclo anterior deixa de se aplicar a essas ações autorizadas. A escala continua uniforme por ação; geometria de combate não é inferida do PNG.
+
+Os novos prompts e fontes permanecem nos diretórios de ação, incluindo versões rejeitadas e correções de matte. A autorização de alpha local descrita acima continua sendo usada exclusivamente para preparação e recorte; todas as poses novas foram geradas pela ferramenta de imagens. A validação usa contatos reais, guardas e quedas no showcase, além das verificações de duração/fase do exportador.

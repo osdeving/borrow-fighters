@@ -31,7 +31,7 @@ const GO_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
 const C_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
 const PYTHON_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
 const CPP_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
-const RUST_MOVE_IDS: [MoveId; 9] = [
+const RUST_MOVE_IDS: [MoveId; 10] = [
     MoveId::RustBorrowJab,
     MoveId::HeavyPunch,
     MoveId::Kick,
@@ -41,8 +41,9 @@ const RUST_MOVE_IDS: [MoveId; 9] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::RustOwnershipThrow,
+    MoveId::RustBorrowBreak,
 ];
-const DUKE_MOVE_IDS: [MoveId; 9] = [
+const DUKE_MOVE_IDS: [MoveId; 10] = [
     MoveId::LightPunch,
     MoveId::DukeBoilerplatePoke,
     MoveId::Kick,
@@ -52,6 +53,7 @@ const DUKE_MOVE_IDS: [MoveId; 9] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::DukeEnterpriseThrow,
+    MoveId::DukeGcSlam,
 ];
 const GO_MOVE_IDS: [MoveId; 9] = [
     MoveId::GoGoroutineJab,
@@ -64,7 +66,7 @@ const GO_MOVE_IDS: [MoveId; 9] = [
     MoveId::GoHopkick,
     MoveId::CloseThrow,
 ];
-const C_MOVE_IDS: [MoveId; 9] = [
+const C_MOVE_IDS: [MoveId; 10] = [
     MoveId::CPointerJab,
     MoveId::CUnsafePoke,
     MoveId::CNullStepKick,
@@ -74,8 +76,9 @@ const C_MOVE_IDS: [MoveId; 9] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::CUndefinedThrow,
+    MoveId::CPointerLance,
 ];
-const PYTHON_MOVE_IDS: [MoveId; 9] = [
+const PYTHON_MOVE_IDS: [MoveId; 10] = [
     MoveId::PythonSnakeBite,
     MoveId::PythonDataStrike,
     MoveId::PythonHeelKick,
@@ -85,8 +88,9 @@ const PYTHON_MOVE_IDS: [MoveId; 9] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::PythonConstrictThrow,
+    MoveId::PythonSerpentSlide,
 ];
-const CPP_MOVE_IDS: [MoveId; 9] = [
+const CPP_MOVE_IDS: [MoveId; 10] = [
     MoveId::CppReferenceJab,
     MoveId::CppTemplateStrike,
     MoveId::CppOperatorKick,
@@ -96,6 +100,7 @@ const CPP_MOVE_IDS: [MoveId; 9] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::CppMoveThrow,
+    MoveId::CppTemplateArc,
 ];
 
 /// Stable identifier for playable or testable characters.

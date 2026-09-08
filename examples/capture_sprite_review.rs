@@ -253,6 +253,7 @@ fn move_clip(selected: CombatLabMove) -> FighterSpriteClip {
         CombatLabMove::AirKick => FighterSpriteClip::AirKick,
         CombatLabMove::Throw => FighterSpriteClip::Throw,
         CombatLabMove::Projectile => FighterSpriteClip::Special,
+        CombatLabMove::SignatureSpecial => FighterSpriteClip::SignatureSpecial,
     }
 }
 

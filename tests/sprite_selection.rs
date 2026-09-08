@@ -163,6 +163,69 @@ fn hitstun_uses_hit_clip_and_resets_clip_time() {
 }
 
 #[test]
+fn signature_attack_uses_its_own_clip_before_and_during_contact() {
+    let mut fighter = borrow_fighters::game::world::World::new_greybox().player_one;
+    fighter.update(
+        DT,
+        FighterInput {
+            signature_special: true,
+            ..FighterInput::default()
+        },
+    );
+    assert_eq!(
+        fighter_sprite_clip(&fighter),
+        FighterSpriteClip::SignatureSpecial
+    );
+    for _ in 0..12 {
+        fighter.update(DT, FighterInput::default());
+    }
+    assert!(fighter.active_attack().is_some());
+    assert_eq!(
+        fighter_sprite_clip(&fighter),
+        FighterSpriteClip::SignatureSpecial
+    );
+}
+
+#[test]
+fn floor_recovery_animates_from_impact_and_returns_to_idle() {
+    let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
+    fighter.take_hit(10, GuardRule::Low, LIGHT_ATTACK_REACTION);
+    fighter.start_knockdown();
+    assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Knockdown);
+    assert_eq!(fighter_clip_elapsed_seconds(&fighter, 900.0), 0.0);
+    for _ in 0..20 {
+        fighter.update(DT, FighterInput::default());
+    }
+    assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Knockdown);
+    assert!((fighter_clip_elapsed_seconds(&fighter, 900.0) - 20.0 * DT).abs() < 0.0001);
+    for _ in 0..20 {
+        fighter.update(DT, FighterInput::default());
+    }
+    assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Idle);
+}
+
+#[test]
+fn low_blockstun_preserves_crouching_guard_art_until_recovery() {
+    let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
+    fighter.update(
+        DT,
+        FighterInput {
+            block: true,
+            crouch: true,
+            ..FighterInput::default()
+        },
+    );
+    fighter.take_hit(10, GuardRule::Low, LIGHT_ATTACK_REACTION);
+    fighter.update(DT, FighterInput::default());
+    assert!(fighter.in_blockstun());
+    assert_eq!(
+        fighter_sprite_clip(&fighter),
+        FighterSpriteClip::CrouchBlock
+    );
+    assert!((fighter_clip_elapsed_seconds(&fighter, 900.0) - DT).abs() < 0.0001);
+}
+
+#[test]
 fn block_input_does_not_override_airborne_jump_clip() {
     let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
 

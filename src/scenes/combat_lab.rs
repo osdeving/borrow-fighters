@@ -42,11 +42,12 @@ pub enum CombatLabMove {
     AirKick,
     Throw,
     Projectile,
+    SignatureSpecial,
 }
 
 impl CombatLabMove {
     /// Ordered move list used by cycling controls.
-    pub const ALL: [Self; 10] = [
+    pub const ALL: [Self; 11] = [
         Self::LightPunch,
         Self::HeavyPunch,
         Self::Kick,
@@ -57,6 +58,7 @@ impl CombatLabMove {
         Self::AirKick,
         Self::Throw,
         Self::Projectile,
+        Self::SignatureSpecial,
     ];
 
     /// Parses a CLI move name.
@@ -72,6 +74,7 @@ impl CombatLabMove {
             "air_kick" | "air-kick" | "jump_kick" | "jump-kick" => Some(Self::AirKick),
             "throw" | "grab" | "close_throw" | "close-throw" => Some(Self::Throw),
             "projectile" | "special" | "fireball" => Some(Self::Projectile),
+            "signature_special" | "signature-special" | "signature" => Some(Self::SignatureSpecial),
             _ => None,
         }
     }
@@ -89,6 +92,7 @@ impl CombatLabMove {
             Self::AirKick => "Air Kick",
             Self::Throw => "Throw",
             Self::Projectile => "Projectile",
+            Self::SignatureSpecial => "Signature Special",
         }
     }
 
@@ -105,6 +109,7 @@ impl CombatLabMove {
             Self::AirKick => Some(AttackKind::AirKick),
             Self::Throw => Some(AttackKind::Throw),
             Self::Projectile => None,
+            Self::SignatureSpecial => Some(AttackKind::SignatureSpecial),
         }
     }
 
@@ -120,6 +125,7 @@ impl CombatLabMove {
             Self::AirKick => CombatLabAnalysisMove::Close(MoveInputKind::AirKick),
             Self::Throw => CombatLabAnalysisMove::Close(MoveInputKind::Throw),
             Self::Projectile => CombatLabAnalysisMove::Projectile,
+            Self::SignatureSpecial => CombatLabAnalysisMove::Close(MoveInputKind::SignatureSpecial),
         }
     }
 
@@ -166,6 +172,10 @@ impl CombatLabMove {
                 ..FighterInput::default()
             },
             Self::Projectile => FighterInput::default(),
+            Self::SignatureSpecial => FighterInput {
+                signature_special: true,
+                ..FighterInput::default()
+            },
         }
     }
 
@@ -530,6 +540,11 @@ impl CombatLab {
     fn select_next_move(&mut self) {
         let index = move_index(self.selected_move);
         self.selected_move = CombatLabMove::ALL[(index + 1) % CombatLabMove::ALL.len()];
+        if self.character == CharacterId::Go
+            && self.selected_move == CombatLabMove::SignatureSpecial
+        {
+            self.selected_move = CombatLabMove::ALL[0];
+        }
         self.reset_playback();
     }
 
@@ -541,6 +556,11 @@ impl CombatLab {
             index - 1
         };
         self.selected_move = CombatLabMove::ALL[next];
+        if self.character == CharacterId::Go
+            && self.selected_move == CombatLabMove::SignatureSpecial
+        {
+            self.selected_move = CombatLabMove::Projectile;
+        }
         self.reset_playback();
     }
 

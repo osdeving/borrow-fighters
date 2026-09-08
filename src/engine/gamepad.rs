@@ -44,8 +44,8 @@ pub fn read_fighter_input(raylib: &RaylibHandle, gamepad: i32) -> Option<Fighter
         light_punch: button_pressed(raylib, gamepad, face_left()),
         heavy_punch: button_pressed(raylib, gamepad, face_up()),
         kick: button_pressed(raylib, gamepad, face_right()),
-        projectile: button_pressed(raylib, gamepad, right_bumper())
-            || button_pressed(raylib, gamepad, right_trigger_button()),
+        projectile: button_pressed(raylib, gamepad, right_bumper()),
+        signature_special: button_pressed(raylib, gamepad, right_trigger_button()),
     })
 }
 

@@ -8,6 +8,12 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 
 ### Adicionado
 
+- Showcase contextual com dois lutadores no combate real, 11 ataques e quatro exemplos de defesa por personagem da demo, resultado de contato, áudio real, repetição, espelhamento, pausa e avanço de frame.
+- Entrada direta `--showcase --character ... --move ...`, com `--repeat` e `--reverse`; `L` repete, `X` espelha e `PageUp/PageDown` troca personagem.
+- Um especial de assinatura para Rust, Duke/Java, C, Python e C++: Borrow Break, GC Slam, Pointer Lance, Serpent Slide e Template Arc, com `T`/Backslash/`RT` e recuperação punível. O projétil mantém seus controles.
+- Reação `knockdown` e recuperação protegida de 36 frames para rasteiras, agarrões e slide contra alvos no chão; clips próprios de assinatura e queda exigidos nos cinco atlas revisados.
+- Auditoria determinística de 60 lutas espelhadas, evidência em CSV e testes de contrajogo, guarda, postura baixa e contatos reais do showcase.
+
 - Navegação dos menus com hover, clique esquerdo para ativar e clique direito para voltar valores ajustáveis.
 - Base inicial de documentação docs-first.
 - Governança proposta para PRs, branches, labels, squads e releases.
@@ -98,6 +104,14 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Clips CC0 adicionais e bindings específicos para deixar golpes de Rust e Duke/Java audíveis por move, sem depender só do fallback curto.
 
 ### Corrigido
+
+- Sparks e dano flutuante posicionados no contato real entre hitbox e hurtbox antes do pushback, incluindo rasteira, anti-air e projétil.
+
+- Retângulos de reação/guarda e limites da arena exibidos com debug desligado; a luta limpa mantém sprites, tintas, luzes e impactos sem essas caixas.
+- Rasteiras que voltavam à postura alta durante o ataque; hitboxes revisadas e hurtboxes baixas agora coincidem entre combate e debug.
+- Guarda abaixada perdida durante blockstun, blockstun residual após quebra por overhead, chip encerrando luta e agarrões atingindo saltos ou recuperação protegida.
+- Conjuração de projétil sobreposta a ataques, pulo ou guarda; um impacto também cancela sua pose.
+- Ataques acompanhando automaticamente o adversário que saltava por cima e comandos perdidos entre renderização e tick de combate; presses da luta são consumidos uma vez, mesmo quando um frame de renderização exige vários ticks.
 
 - Cursor reposicionado no centro a cada quadro, que deixava o `Linker` parado e impedia alcançar o botão de fechar da janela.
 - Overlay `Linker` residual ao tirar o foco ou mover o mouse para fora da janela.

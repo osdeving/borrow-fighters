@@ -62,6 +62,7 @@ fn attack_clip(kind: AttackKind) -> FighterSpriteClip {
         AttackKind::AirPunch => FighterSpriteClip::AirPunch,
         AttackKind::AirKick => FighterSpriteClip::AirKick,
         AttackKind::Throw => FighterSpriteClip::Throw,
+        AttackKind::SignatureSpecial => FighterSpriteClip::SignatureSpecial,
     }
 }
 
@@ -76,7 +77,7 @@ fn candidates_have_every_required_clip_and_preserve_visual_source_order() {
                 frame.name
             );
         }
-        for required in FighterSpriteClip::REQUIRED {
+        for required in FighterSpriteClip::required_for_character(candidate.character) {
             let clip_name = required.as_str();
             let clip = candidate
                 .manifest

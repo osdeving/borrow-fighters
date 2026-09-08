@@ -1,0 +1,83 @@
+{
+  "action": "sweep",
+  "source": "sweep/source-v6.png",
+  "sheet": "sweep/keyed-v6.png",
+  "reviewed": true,
+  "loop": false,
+  "status": "reviewed visual and functional pilot; see ../finalization-review.md for evidence and limits",
+  "source_body_height_reference_px": 554,
+  "normalization_note": "Approximate upright-body reference; do not scale each frame by its own alpha bounds. Air pivots are virtual standing-floor anchors beneath hips, not boot tips. Ground pivots are proposed and require foot-support review after normalization.",
+  "combat_timing": {
+    "move_id": "SweepKick",
+    "input": "Sweep",
+    "duration": 32,
+    "active_start": 10,
+    "active_end_inclusive": 18,
+    "whiff_recovery": 12,
+    "clip": "sweep"
+  },
+  "frames": [
+    {
+      "name": "sweep_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 480,
+        "h": 768
+      },
+      "pivot": {
+        "x": 250,
+        "y": 633
+      },
+      "duration_ms": 166,
+      "phase": "startup"
+    },
+    {
+      "name": "sweep_1",
+      "source_rect": {
+        "x": 480,
+        "y": 0,
+        "w": 630,
+        "h": 768
+      },
+      "pivot": {
+        "x": 260,
+        "y": 633
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "sweep_2",
+      "source_rect": {
+        "x": 1110,
+        "y": 0,
+        "w": 460,
+        "h": 768
+      },
+      "pivot": {
+        "x": 203,
+        "y": 634
+      },
+      "duration_ms": 108,
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_3",
+      "source_rect": {
+        "x": 1570,
+        "y": 0,
+        "w": 478,
+        "h": 768
+      },
+      "pivot": {
+        "x": 180,
+        "y": 633
+      },
+      "duration_ms": 109,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "v6 lowers the active sole into the unchanged sweep box after rejecting v5 (sole too low). All four source rectangles, scale .47, ground pivots and combat timing preserved. Magenta extracted; pale pocket between arm and thigh removed by prepare-v6.py. Static contact/identity/alpha inspected; Native verification complete; see ../finalization-review.md.",
+  "finalization_review": "../finalization-review.md"
+}

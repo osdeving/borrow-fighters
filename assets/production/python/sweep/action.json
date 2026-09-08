@@ -1,80 +1,77 @@
 {
-  "source": "sweep/source-v2.png",
-  "sheet": "sweep/keyed-v2.png",
+  "action": "sweep",
+  "source": "sweep/source-mvp-v1.png",
+  "sheet": "sweep/keyed-mvp-v1.png",
   "reviewed": true,
   "loop": false,
-  "status": "finalization refinement visually reviewed; complete native World/Lab and default application match recorded",
-  "source_body_height_reference_px": 620,
-  "review_notes": "v2 lowers extended sole toward original active band and adds retract/half-rise recovery, preserving150/133/200ms as150/133/100/100ms. Source identity, low support and snake continuity reviewed; contact center inside baseline box, toe near upper edge. Native Lab and complete World reviewed in both facings; no physical metadata changed.",
+  "status": "runtime_verified_mvp",
   "frames": [
     {
-      "name": "sweep_0",
+      "name": "sweep_00",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 627,
-        "h": 627
+        "w": 500,
+        "h": 768
       },
       "pivot": {
-        "x": 280,
-        "y": 536
+        "x": 270,
+        "y": 684
       },
       "duration_ms": 150,
       "phase": "startup"
     },
     {
-      "name": "sweep_1",
+      "name": "sweep_01",
       "source_rect": {
-        "x": 627,
+        "x": 500,
         "y": 0,
-        "w": 627,
-        "h": 627
+        "w": 680,
+        "h": 768
       },
       "pivot": {
-        "x": 170,
-        "y": 541
+        "x": 300,
+        "y": 681
       },
       "duration_ms": 133,
       "phase": "active"
     },
     {
-      "name": "sweep_2",
+      "name": "sweep_02",
       "source_rect": {
-        "x": 0,
-        "y": 627,
-        "w": 627,
-        "h": 627
+        "x": 1180,
+        "y": 0,
+        "w": 400,
+        "h": 768
       },
       "pivot": {
-        "x": 300,
-        "y": 508
+        "x": 170,
+        "y": 684
       },
       "duration_ms": 100,
       "phase": "recovery"
     },
     {
-      "name": "sweep_3",
+      "name": "sweep_03",
       "source_rect": {
-        "x": 627,
-        "y": 627,
-        "w": 627,
-        "h": 627
+        "x": 1580,
+        "y": 0,
+        "w": 468,
+        "h": 768
       },
       "pivot": {
-        "x": 292,
-        "y": 501
+        "x": 220,
+        "y": 690
       },
       "duration_ms": 100,
       "phase": "recovery"
     }
   ],
+  "review_notes": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Low active foot now attacks ankle/shin band of the actual crouching MoveSpec. Previous action mapping preserved in action-pre-mvp.json. Timing unchanged.",
   "runtime_review": {
-    "world_summary": "../../candidates/python/review/refinement-2026-09-07/world/capture-summary.json",
-    "lab_report": "../../candidates/python/review/refinement-2026-09-07/lab/capture-report.json",
-    "loaded_manifest_matches_candidate": true,
-    "combat_uses_baseline_manifest": true,
-    "clip_captured_in_filtered_lab": true,
-    "final_art_approved": true,
-    "approval_scope": "Production visual review of three refinements, complete World/Lab; primary agent reviewed walk/kick and default-app C versus Python match."
+    "scope": "MVP integration; actual World/Raylib showcase in both facings",
+    "report": "../../candidates/python/review/mvp/showcase-validation.json",
+    "actor_states": "attack, block, hit and knockdown selected by real combat state",
+    "reviewer": "Codex root; contact sheets and full-resolution samples inspected"
   }
 }

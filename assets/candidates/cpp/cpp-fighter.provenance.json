@@ -2,7 +2,7 @@
   "schema": "borrow-fighters.sprite-provenance.v1",
   "character": "cpp",
   "production": "../../production/cpp/production.json",
-  "production_sha256": "d81f55325c9a3e67808deced543f0edaed5ffd6eb7bd353570a5e9be25500c16",
+  "production_sha256": "11b69edc9706ba5c0806de3d2b4cd8205034689bf6183171ae86f3b7a4d4e286",
   "production_snapshot": {
     "schema": "borrow-fighters.production.v1",
     "character": "cpp",
@@ -616,56 +616,71 @@
         "loop": false,
         "frames": [
           {
-            "name": "sweep_00",
+            "name": "sweep_mvp_00",
             "source_rect": {
               "x": 0,
               "y": 0,
-              "w": 233,
-              "h": 286
+              "w": 219,
+              "h": 379
             },
             "pivot": {
-              "x": 128,
-              "y": 254
+              "x": 88,
+              "y": 304
             },
             "duration_ms": 150,
             "phase": "startup"
           },
           {
-            "name": "sweep_01",
+            "name": "sweep_mvp_01",
             "source_rect": {
-              "x": 327,
+              "x": 272,
               "y": 0,
-              "w": 327,
-              "h": 286
+              "w": 272,
+              "h": 379
             },
             "pivot": {
-              "x": 134,
-              "y": 255
+              "x": 78,
+              "y": 306
             },
             "duration_ms": 150,
             "phase": "active"
           },
           {
-            "name": "sweep_02",
+            "name": "sweep_mvp_02",
             "source_rect": {
-              "x": 654,
+              "x": 544,
               "y": 0,
-              "w": 236,
-              "h": 286
+              "w": 224,
+              "h": 379
             },
             "pivot": {
-              "x": 105,
-              "y": 259
+              "x": 83,
+              "y": 306
             },
-            "duration_ms": 216,
+            "duration_ms": 100,
+            "phase": "recovery"
+          },
+          {
+            "name": "sweep_mvp_03",
+            "source_rect": {
+              "x": 816,
+              "y": 0,
+              "w": 229,
+              "h": 379
+            },
+            "pivot": {
+              "x": 94,
+              "y": 307
+            },
+            "duration_ms": 117,
             "phase": "recovery"
           }
         ],
         "provenance": {
           "source_action": "sweep/action.json",
-          "source_sheet": "sweep/keyed-v2.png",
-          "scale_to_runtime": 0.3889695210449927,
-          "review": "Selected v2 after lowering active boot from above head to upper-chest height in low supported pose. Sole near(1380,365), support(945,655), projects to(+169.2,-112.8)world inside existing Sweep box. Low kneeling support preserves hand and handbag. Standing-body active collision rule unchanged. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Approved only for candidate review export, not final art release."
+          "source_sheet": "sweep/keyed-mvp-v4.png",
+          "scale_to_runtime": 0.47686832740213525,
+          "review": "New low sweep for corrected sustained crouching combat. V3 ankle-level boot was correct but torso too upright; v4 folds chest/head farther forward without shrinking anatomy. Uniform268/562 scale keeps the low silhouette116-118px against128px physical crouch. Active boot toe source(970,619), pivot(624,641) projects to(+165.0,-10.5), inside Vector Low x[+50.7,+205.3], y[-40,0]. Startup150ms, active150ms (ticks9..17), recovery217ms, total517ms~31ticks. Oldv2 source/action/prepared retained as before-mvp references. No combat metadata authored."
         }
       },
       "overhead": {
@@ -1189,6 +1204,152 @@
           "scale_to_runtime": 0.3889695210449927,
           "review": "Recoil then knees and supporting hand to ground, sustained defeat. One anatomy scale for all phases; no prone enlargement. Ground anchors explicitly follow contact level707/682/697. Approved only for candidate review export, not final art release."
         }
+      },
+      "signature_special": {
+        "sheet": "signature_special/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "signature_special_mvp_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 254,
+              "h": 380
+            },
+            "pivot": {
+              "x": 146,
+              "y": 349
+            },
+            "duration_ms": 150,
+            "phase": "startup"
+          },
+          {
+            "name": "signature_special_mvp_01",
+            "source_rect": {
+              "x": 254,
+              "y": 0,
+              "w": 254,
+              "h": 380
+            },
+            "pivot": {
+              "x": 145,
+              "y": 348
+            },
+            "duration_ms": 116,
+            "phase": "active"
+          },
+          {
+            "name": "signature_special_mvp_02",
+            "source_rect": {
+              "x": 508,
+              "y": 0,
+              "w": 254,
+              "h": 380
+            },
+            "pivot": {
+              "x": 142,
+              "y": 348
+            },
+            "duration_ms": 200,
+            "phase": "recovery"
+          },
+          {
+            "name": "signature_special_mvp_03",
+            "source_rect": {
+              "x": 762,
+              "y": 0,
+              "w": 254,
+              "h": 380
+            },
+            "pivot": {
+              "x": 158,
+              "y": 347
+            },
+            "duration_ms": 234,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "signature_special/action.json",
+          "source_sheet": "signature_special/keyed-green-v3.png",
+          "scale_to_runtime": 0.4953789279112754,
+          "review": "New grounded Template Arc. Generated v2 identity/poses retained in green-matte v3; local green key preserves white blouse and violet energy where checker flood left enclosed matte. Uniform268/541 scale, explicit support anchors. Active palm source(958,107) maps to(+75.8,-295.2) from body center/floor; palm/arc lie inside current special x[+50.7,+160], y[-341.3,-160]. Active150..266ms matches ticks9..15; total700ms/42ticks. Source/prompt/checker trial preserved, no combat metadata authored."
+        }
+      },
+      "knockdown": {
+        "sheet": "knockdown/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "knockdown_mvp_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 258,
+              "h": 378
+            },
+            "pivot": {
+              "x": 122,
+              "y": 325
+            },
+            "duration_ms": 100,
+            "phase": "fall"
+          },
+          {
+            "name": "knockdown_mvp_01",
+            "source_rect": {
+              "x": 300,
+              "y": 0,
+              "w": 300,
+              "h": 378
+            },
+            "pivot": {
+              "x": 143,
+              "y": 329
+            },
+            "duration_ms": 250,
+            "phase": "down"
+          },
+          {
+            "name": "knockdown_mvp_02",
+            "source_rect": {
+              "x": 600,
+              "y": 0,
+              "w": 210,
+              "h": 378
+            },
+            "pivot": {
+              "x": 93,
+              "y": 323
+            },
+            "duration_ms": 150,
+            "phase": "rise"
+          },
+          {
+            "name": "knockdown_mvp_03",
+            "source_rect": {
+              "x": 900,
+              "y": 0,
+              "w": 178,
+              "h": 378
+            },
+            "pivot": {
+              "x": 96,
+              "y": 327
+            },
+            "duration_ms": 100,
+            "phase": "ready"
+          }
+        ],
+        "provenance": {
+          "source_action": "knockdown/action.json",
+          "source_sheet": "knockdown/keyed-v1.png",
+          "scale_to_runtime": 0.47686832740213525,
+          "review": "New four-stage knockdown: falling backward, fully reclined on floor, kneeling rise, standing ready guard. Uniform268/562 anatomy scale derived from final upright pose. Pivots follow support ground, not bounding-box center. Full white blouse/trousers/boots/bag retained.100/250/150/100ms=600ms/36ticks matches real knockdown. No duplicated normal-hit or defeat frames; no combat metadata authored."
+        }
       }
     }
   },
@@ -1235,7 +1396,7 @@
     },
     {
       "path": "../../production/cpp/sweep/prepared.png",
-      "sha256": "8b6d581585947fb6c7b72484b34b5b1dee1db2d52fea57ed421951989fa9cdd1"
+      "sha256": "b0de3b4d6e6f320b56abc80e00b29194f73bcfcef49c7809cc2f2fe4f07b56dc"
     },
     {
       "path": "../../production/cpp/overhead/prepared.png",
@@ -1272,6 +1433,14 @@
     {
       "path": "../../production/cpp/defeat/prepared.png",
       "sha256": "e7aa88470f659094279156acc39a53d5ce8c3ca7f081ff10811d708f60488dfa"
+    },
+    {
+      "path": "../../production/cpp/signature_special/prepared.png",
+      "sha256": "37fa69c93d2adbb25cfd0eae5300df8c3808b2f40001e4913d9f6c1d558f4d38"
+    },
+    {
+      "path": "../../production/cpp/knockdown/prepared.png",
+      "sha256": "244da1bbe48828fc3b363ba5bc18f745887280baa6861bd019c60ff77a7552b1"
     }
   ],
   "frames": [
@@ -1679,42 +1848,55 @@
       "phase": "recovery"
     },
     {
-      "name": "sweep_00",
+      "name": "sweep_mvp_00",
       "action": "sweep",
       "sheet": "../../production/cpp/sweep/prepared.png",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 233,
-        "h": 286
+        "w": 219,
+        "h": 379
       },
-      "exported_frame": "../../production/cpp/sweep/frames/sweep_00.png",
+      "exported_frame": "../../production/cpp/sweep/frames/sweep_mvp_00.png",
       "phase": "startup"
     },
     {
-      "name": "sweep_01",
+      "name": "sweep_mvp_01",
       "action": "sweep",
       "sheet": "../../production/cpp/sweep/prepared.png",
       "source_rect": {
-        "x": 327,
+        "x": 272,
         "y": 0,
-        "w": 327,
-        "h": 286
+        "w": 272,
+        "h": 379
       },
-      "exported_frame": "../../production/cpp/sweep/frames/sweep_01.png",
+      "exported_frame": "../../production/cpp/sweep/frames/sweep_mvp_01.png",
       "phase": "active"
     },
     {
-      "name": "sweep_02",
+      "name": "sweep_mvp_02",
       "action": "sweep",
       "sheet": "../../production/cpp/sweep/prepared.png",
       "source_rect": {
-        "x": 654,
+        "x": 544,
         "y": 0,
-        "w": 236,
-        "h": 286
+        "w": 224,
+        "h": 379
       },
-      "exported_frame": "../../production/cpp/sweep/frames/sweep_02.png",
+      "exported_frame": "../../production/cpp/sweep/frames/sweep_mvp_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_mvp_03",
+      "action": "sweep",
+      "sheet": "../../production/cpp/sweep/prepared.png",
+      "source_rect": {
+        "x": 816,
+        "y": 0,
+        "w": 229,
+        "h": 379
+      },
+      "exported_frame": "../../production/cpp/sweep/frames/sweep_mvp_03.png",
       "phase": "recovery"
     },
     {
@@ -2067,8 +2249,112 @@
       },
       "exported_frame": "../../production/cpp/defeat/frames/defeat_2.png",
       "phase": "hold_defeat"
+    },
+    {
+      "name": "signature_special_mvp_00",
+      "action": "signature_special",
+      "sheet": "../../production/cpp/signature_special/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 254,
+        "h": 380
+      },
+      "exported_frame": "../../production/cpp/signature_special/frames/signature_special_mvp_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_mvp_01",
+      "action": "signature_special",
+      "sheet": "../../production/cpp/signature_special/prepared.png",
+      "source_rect": {
+        "x": 254,
+        "y": 0,
+        "w": 254,
+        "h": 380
+      },
+      "exported_frame": "../../production/cpp/signature_special/frames/signature_special_mvp_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_mvp_02",
+      "action": "signature_special",
+      "sheet": "../../production/cpp/signature_special/prepared.png",
+      "source_rect": {
+        "x": 508,
+        "y": 0,
+        "w": 254,
+        "h": 380
+      },
+      "exported_frame": "../../production/cpp/signature_special/frames/signature_special_mvp_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "signature_special_mvp_03",
+      "action": "signature_special",
+      "sheet": "../../production/cpp/signature_special/prepared.png",
+      "source_rect": {
+        "x": 762,
+        "y": 0,
+        "w": 254,
+        "h": 380
+      },
+      "exported_frame": "../../production/cpp/signature_special/frames/signature_special_mvp_03.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "knockdown_mvp_00",
+      "action": "knockdown",
+      "sheet": "../../production/cpp/knockdown/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 258,
+        "h": 378
+      },
+      "exported_frame": "../../production/cpp/knockdown/frames/knockdown_mvp_00.png",
+      "phase": "fall"
+    },
+    {
+      "name": "knockdown_mvp_01",
+      "action": "knockdown",
+      "sheet": "../../production/cpp/knockdown/prepared.png",
+      "source_rect": {
+        "x": 300,
+        "y": 0,
+        "w": 300,
+        "h": 378
+      },
+      "exported_frame": "../../production/cpp/knockdown/frames/knockdown_mvp_01.png",
+      "phase": "down"
+    },
+    {
+      "name": "knockdown_mvp_02",
+      "action": "knockdown",
+      "sheet": "../../production/cpp/knockdown/prepared.png",
+      "source_rect": {
+        "x": 600,
+        "y": 0,
+        "w": 210,
+        "h": 378
+      },
+      "exported_frame": "../../production/cpp/knockdown/frames/knockdown_mvp_02.png",
+      "phase": "rise"
+    },
+    {
+      "name": "knockdown_mvp_03",
+      "action": "knockdown",
+      "sheet": "../../production/cpp/knockdown/prepared.png",
+      "source_rect": {
+        "x": 900,
+        "y": 0,
+        "w": 178,
+        "h": 378
+      },
+      "exported_frame": "../../production/cpp/knockdown/frames/knockdown_mvp_03.png",
+      "phase": "ready"
     }
   ],
-  "atlas_sha256": "8e85e765b6257d590fe9de32aae8887b19e3964db647ca629de5a73811d34bb3",
-  "manifest_sha256": "129b5e9353ca441cbeff1fb996429f27d795402b7a3410fe66fec6254dd7e09b"
+  "atlas_sha256": "a23dd2c1cc45401ee61e93cc33b245ba60ee12d896a98c49ddeccb5ba062f197",
+  "manifest_sha256": "af19cf1b90f9f12c54881a937e4802b791a5e108975a76d20fb242313b9896f6"
 }

@@ -5,6 +5,7 @@
 //! without controlling both fighters.
 
 use crate::combat::fighter::{Fighter, FighterInput, PlayerSlot};
+use crate::combat::move_data::{GuardRule, MoveId, MoveInputKind, move_spec_for_input};
 use crate::config::world_px;
 use crate::game::world::World;
 use crate::math::rect::Rect;
@@ -22,6 +23,8 @@ pub struct BasicCpu {
     action_cooldown: f32,
     intent_timer: f32,
     guard_timer: f32,
+    guard_low: bool,
+    defense_cooldown: f32,
     pattern_index: usize,
     rng_state: u32,
     intent: CpuIntent,
@@ -64,6 +67,8 @@ impl BasicCpu {
             action_cooldown: profile.starting_action_cooldown,
             intent_timer: 0.0,
             guard_timer: 0.0,
+            guard_low: false,
+            defense_cooldown: 0.0,
             pattern_index: 0,
             rng_state: profile.seed,
             intent: CpuIntent::Hold,
@@ -76,6 +81,7 @@ impl BasicCpu {
         self.action_cooldown = (self.action_cooldown - dt).max(0.0);
         self.intent_timer = (self.intent_timer - dt).max(0.0);
         self.guard_timer = (self.guard_timer - dt).max(0.0);
+        self.defense_cooldown = (self.defense_cooldown - dt).max(0.0);
 
         let (cpu, target) = fighters_for_slot(world, slot);
         if world.outcome.is_some() || cpu.is_defeated() {
@@ -88,7 +94,33 @@ impl BasicCpu {
 
         if self.guard_timer > 0.0 {
             input.block = true;
+            input.crouch = self.guard_low;
             return input;
+        }
+
+        // Observe a telegraphed close attack once per reaction window. This is
+        // deliberately fallible; checking a random roll every frame makes the
+        // CPU effectively perfect against slower moves.
+        if cpu.grounded
+            && self.defense_cooldown <= 0.0
+            && let Some(attack) = target.attack_move_spec()
+            && gap <= attack.hitbox.width + world_px(16.0)
+            && target
+                .attack_elapsed_frames()
+                .is_some_and(|frame| frame.get() >= 4 && frame <= attack.frames.active_end)
+        {
+            self.defense_cooldown = 0.42;
+            if self.chance(self.profile.guard_reaction) {
+                if attack.guard_rule == GuardRule::Throw {
+                    input.jump = true;
+                } else {
+                    self.guard_timer = 0.30;
+                    self.guard_low = attack.guard_rule == GuardRule::Low;
+                    input.block = true;
+                    input.crouch = self.guard_low;
+                }
+                return input;
+            }
         }
 
         if incoming_projectile_threat(world, cpu) {
@@ -117,6 +149,7 @@ impl BasicCpu {
         let roll = self.next_roll(100);
         if roll < self.profile.guard_reaction {
             self.guard_timer = self.random_duration(0.18, 0.34);
+            self.guard_low = false;
             input.block = true;
         } else if roll < self.profile.guard_reaction + self.profile.jump_bias {
             input.jump = true;
@@ -197,6 +230,20 @@ impl BasicCpu {
                 let cooldown = self.random_duration(0.42, 0.72);
                 self.advance_pattern(cooldown);
             }
+            return;
+        }
+
+        if let Some(special) = move_spec_for_input(cpu.move_ids(), MoveInputKind::SignatureSpecial)
+            && gap <= special.hitbox.width - world_px(8.0)
+            && (special.id != MoveId::CppTemplateArc || !target.grounded)
+            && roll < 22
+        {
+            input.crouch = false;
+            input.left = false;
+            input.right = false;
+            input.signature_special = true;
+            let cooldown = self.random_duration(1.0, 1.4);
+            self.advance_pattern(cooldown);
             return;
         }
 

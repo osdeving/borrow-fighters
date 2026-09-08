@@ -2,7 +2,7 @@
   "schema": "borrow-fighters.sprite-provenance.v1",
   "character": "c",
   "production": "../../production/c/production.json",
-  "production_sha256": "7304c93ed42ae48a685332fbd520f269c8aaaa847cda2b6172579fd93021793e",
+  "production_sha256": "469a171c3793849327304c3751aae6b381de511b40c176006a99a811efcecb45",
   "production_snapshot": {
     "schema": "borrow-fighters.production.v1",
     "character": "c",
@@ -245,7 +245,7 @@
           "source_action": "crouch/action.json",
           "source_sheet": "crouch/keyed-v2.png",
           "scale_to_runtime": 0.4253968253968254,
-          "review": "v2 replaces upright squat with folded torso over tightly bent legs. Same source scale; hold height about140world px, close to128physical, rather than prior190–205. Entry is slightly higher for60ms. No physics changed."
+          "review": "v2 replaces upright squat with folded torso over tightly bent legs. Same source scale; hold height about140world px, close to128physical, rather than prior190\u2013205. Entry is slightly higher for60ms. No physics changed."
         }
       },
       "block": {
@@ -361,7 +361,7 @@
           "source_action": "crouch_block/action.json",
           "source_sheet": "crouch_block/keyed-v3.png",
           "scale_to_runtime": 0.4253968253968254,
-          "review": "v3 replaces tall low guard with a tightly folded torso/knees. Blue C book guards face immediately; brace and settle remain low. Same uniform source scale; about135–149world px versus former190–205, physical height128 unchanged. Three genuinely different source poses, same durations70/80/120ms."
+          "review": "v3 replaces tall low guard with a tightly folded torso/knees. Blue C book guards face immediately; brace and settle remain low. Same uniform source scale; about135\u2013149world px versus former190\u2013205, physical height128 unchanged. Three genuinely different source poses, same durations70/80/120ms."
         }
       },
       "hit": {
@@ -617,61 +617,61 @@
         "loop": false,
         "frames": [
           {
-            "name": "sweep_0",
+            "name": "sweep_mvp_00",
             "source_rect": {
               "x": 0,
               "y": 0,
-              "w": 267,
-              "h": 267
+              "w": 189,
+              "h": 225
             },
             "pivot": {
-              "x": 117,
-              "y": 230
+              "x": 92,
+              "y": 191
             },
             "duration_ms": 200,
             "phase": "startup"
           },
           {
-            "name": "sweep_1",
+            "name": "sweep_mvp_01",
             "source_rect": {
-              "x": 267,
+              "x": 292,
               "y": 0,
-              "w": 267,
-              "h": 267
+              "w": 292,
+              "h": 225
             },
             "pivot": {
-              "x": 76,
-              "y": 232
+              "x": 92,
+              "y": 195
             },
             "duration_ms": 150,
             "phase": "active"
           },
           {
-            "name": "sweep_2",
+            "name": "sweep_mvp_02",
             "source_rect": {
-              "x": 534,
+              "x": 584,
               "y": 0,
-              "w": 267,
-              "h": 267
+              "w": 176,
+              "h": 225
             },
             "pivot": {
-              "x": 128,
-              "y": 230
+              "x": 74,
+              "y": 191
             },
             "duration_ms": 125,
             "phase": "recovery"
           },
           {
-            "name": "sweep_3",
+            "name": "sweep_mvp_03",
             "source_rect": {
-              "x": 801,
+              "x": 876,
               "y": 0,
-              "w": 267,
-              "h": 267
+              "w": 176,
+              "h": 225
             },
             "pivot": {
-              "x": 111,
-              "y": 233
+              "x": 84,
+              "y": 191
             },
             "duration_ms": 125,
             "phase": "recovery"
@@ -679,9 +679,9 @@
         ],
         "provenance": {
           "source_action": "sweep/action.json",
-          "source_sheet": "sweep/keyed-v3.png",
-          "scale_to_runtime": 0.4253968253968254,
-          "review": "v3: low support, raised active sole, retract and half-rise, four real generated bodies. Baseline timing200/150/250ms conserved as200/150/125/125ms. Sole center crosses original active band; top of tilted toe approximately18px above it, no claim that full contour is inside. Native Lab and complete World reviewed, root accepted refinement."
+          "source_sheet": "sweep/keyed-mvp-v1.png",
+          "scale_to_runtime": 0.45,
+          "review": "New genuine ankle sweep replaces elevated kick: active sneaker source center(1080,582) projects to (+168.75,-14.4), within new floor-42.67..floor band. Book held under rear arm, free palm supports low body, four keys extend/retract/recover. Uniform0.45 keeps head/book scale near existing low poses. Prior action and prepared pixels preserved in before-mvp snapshot."
         }
       },
       "overhead": {
@@ -1220,6 +1220,152 @@
           "scale_to_runtime": 0.432258064516129,
           "review": "v3 selected recoil/kneel/sustained kneeling. v1 grew lying anatomy; v2 changed other poses. No per-frame scale workaround. Approved for candidate preview export, not final art release."
         }
+      },
+      "signature_special": {
+        "sheet": "signature_special/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "signature_special_mvp_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 245,
+              "h": 319
+            },
+            "pivot": {
+              "x": 123,
+              "y": 300
+            },
+            "duration_ms": 300,
+            "phase": "startup"
+          },
+          {
+            "name": "signature_special_mvp_01",
+            "source_rect": {
+              "x": 362,
+              "y": 0,
+              "w": 362,
+              "h": 319
+            },
+            "pivot": {
+              "x": 121,
+              "y": 300
+            },
+            "duration_ms": 100,
+            "phase": "active"
+          },
+          {
+            "name": "signature_special_mvp_02",
+            "source_rect": {
+              "x": 724,
+              "y": 0,
+              "w": 213,
+              "h": 319
+            },
+            "pivot": {
+              "x": 93,
+              "y": 300
+            },
+            "duration_ms": 183,
+            "phase": "recovery"
+          },
+          {
+            "name": "signature_special_mvp_03",
+            "source_rect": {
+              "x": 1086,
+              "y": 0,
+              "w": 245,
+              "h": 319
+            },
+            "pivot": {
+              "x": 132,
+              "y": 300
+            },
+            "duration_ms": 184,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "signature_special/action.json",
+          "source_sheet": "signature_special/keyed-v2.png",
+          "scale_to_runtime": 0.5317460317460317,
+          "review": "Four actual generated Pointer Lance poses, distinct from book projectile. Source v2 lowers pointing arm to lower chest/waist for real contact at height matching new MoveSpec and uses magenta matte. Pointer tip source(1140,393) projects near (+220,-133.5), within initial runtime box. Uniform268/504 matches idle standing height, feet anchored at644; head drops in active key as knee/torso lunge."
+        }
+      },
+      "knockdown": {
+        "sheet": "knockdown/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "knockdown_mvp_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 245,
+              "h": 330
+            },
+            "pivot": {
+              "x": 128,
+              "y": 294
+            },
+            "duration_ms": 100,
+            "phase": "fall"
+          },
+          {
+            "name": "knockdown_mvp_01",
+            "source_rect": {
+              "x": 277,
+              "y": 0,
+              "w": 271,
+              "h": 330
+            },
+            "pivot": {
+              "x": 106,
+              "y": 294
+            },
+            "duration_ms": 100,
+            "phase": "land"
+          },
+          {
+            "name": "knockdown_mvp_02",
+            "source_rect": {
+              "x": 554,
+              "y": 0,
+              "w": 277,
+              "h": 330
+            },
+            "pivot": {
+              "x": 133,
+              "y": 298
+            },
+            "duration_ms": 250,
+            "phase": "down"
+          },
+          {
+            "name": "knockdown_mvp_03",
+            "source_rect": {
+              "x": 831,
+              "y": 0,
+              "w": 239,
+              "h": 330
+            },
+            "pivot": {
+              "x": 104,
+              "y": 294
+            },
+            "duration_ms": 150,
+            "phase": "recover"
+          }
+        ],
+        "provenance": {
+          "source_action": "knockdown/action.json",
+          "source_sheet": "knockdown/keyed-v1.png",
+          "scale_to_runtime": 0.5317460317460317,
+          "review": "Four new backward knockdown keys, one secured blue C book throughout, hair/denim/face intact. Downed key lies on left hip/back instead of generic standing hit. Sole and bracing palm define floor. Uniform268/504 scale. Generic border-connected pale matte extraction preserves outlined white hair, shirt and soles; source RGB retained."
+        }
       }
     }
   },
@@ -1266,7 +1412,7 @@
     },
     {
       "path": "../../production/c/sweep/prepared.png",
-      "sha256": "421543b6b187761eb68beb97fb5ac6f1f755f04cddd414da60a3bb7df60b33ab"
+      "sha256": "d28a78e1b3d17dea1d5cb9d413abde2b9d1b8e00254f74541e836e7aff7f0bb4"
     },
     {
       "path": "../../production/c/overhead/prepared.png",
@@ -1303,6 +1449,14 @@
     {
       "path": "../../production/c/defeat/prepared.png",
       "sha256": "dda187b7f9c6bb0c6baa9a1d03b59a1493deb5bcfd07c38aacc97d621ab84f5e"
+    },
+    {
+      "path": "../../production/c/signature_special/prepared.png",
+      "sha256": "ca338873afe7bb2b7095e1d4f4f2b3c1811c5e50570c6385808566699dc800ac"
+    },
+    {
+      "path": "../../production/c/knockdown/prepared.png",
+      "sha256": "45dfa8b14784e72acbb659fa256c59adca48e8344ac781e75a9087af8e237ecc"
     }
   ],
   "frames": [
@@ -1710,55 +1864,55 @@
       "phase": "recovery"
     },
     {
-      "name": "sweep_0",
+      "name": "sweep_mvp_00",
       "action": "sweep",
       "sheet": "../../production/c/sweep/prepared.png",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 267,
-        "h": 267
+        "w": 189,
+        "h": 225
       },
-      "exported_frame": "../../production/c/sweep/frames/sweep_0.png",
+      "exported_frame": "../../production/c/sweep/frames/sweep_mvp_00.png",
       "phase": "startup"
     },
     {
-      "name": "sweep_1",
+      "name": "sweep_mvp_01",
       "action": "sweep",
       "sheet": "../../production/c/sweep/prepared.png",
       "source_rect": {
-        "x": 267,
+        "x": 292,
         "y": 0,
-        "w": 267,
-        "h": 267
+        "w": 292,
+        "h": 225
       },
-      "exported_frame": "../../production/c/sweep/frames/sweep_1.png",
+      "exported_frame": "../../production/c/sweep/frames/sweep_mvp_01.png",
       "phase": "active"
     },
     {
-      "name": "sweep_2",
+      "name": "sweep_mvp_02",
       "action": "sweep",
       "sheet": "../../production/c/sweep/prepared.png",
       "source_rect": {
-        "x": 534,
+        "x": 584,
         "y": 0,
-        "w": 267,
-        "h": 267
+        "w": 176,
+        "h": 225
       },
-      "exported_frame": "../../production/c/sweep/frames/sweep_2.png",
+      "exported_frame": "../../production/c/sweep/frames/sweep_mvp_02.png",
       "phase": "recovery"
     },
     {
-      "name": "sweep_3",
+      "name": "sweep_mvp_03",
       "action": "sweep",
       "sheet": "../../production/c/sweep/prepared.png",
       "source_rect": {
-        "x": 801,
+        "x": 876,
         "y": 0,
-        "w": 267,
-        "h": 267
+        "w": 176,
+        "h": 225
       },
-      "exported_frame": "../../production/c/sweep/frames/sweep_3.png",
+      "exported_frame": "../../production/c/sweep/frames/sweep_mvp_03.png",
       "phase": "recovery"
     },
     {
@@ -2124,8 +2278,119 @@
       },
       "exported_frame": "../../production/c/defeat/frames/defeat_2.png",
       "phase": "sustained_defeat"
+    },
+    {
+      "name": "signature_special_mvp_00",
+      "action": "signature_special",
+      "sheet": "../../production/c/signature_special/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 245,
+        "h": 319
+      },
+      "exported_frame": "../../production/c/signature_special/frames/signature_special_mvp_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_mvp_01",
+      "action": "signature_special",
+      "sheet": "../../production/c/signature_special/prepared.png",
+      "source_rect": {
+        "x": 362,
+        "y": 0,
+        "w": 362,
+        "h": 319
+      },
+      "exported_frame": "../../production/c/signature_special/frames/signature_special_mvp_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_mvp_02",
+      "action": "signature_special",
+      "sheet": "../../production/c/signature_special/prepared.png",
+      "source_rect": {
+        "x": 724,
+        "y": 0,
+        "w": 213,
+        "h": 319
+      },
+      "exported_frame": "../../production/c/signature_special/frames/signature_special_mvp_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "signature_special_mvp_03",
+      "action": "signature_special",
+      "sheet": "../../production/c/signature_special/prepared.png",
+      "source_rect": {
+        "x": 1086,
+        "y": 0,
+        "w": 245,
+        "h": 319
+      },
+      "exported_frame": "../../production/c/signature_special/frames/signature_special_mvp_03.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "knockdown_mvp_00",
+      "action": "knockdown",
+      "sheet": "../../production/c/knockdown/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 245,
+        "h": 330
+      },
+      "exported_frame": "../../production/c/knockdown/frames/knockdown_mvp_00.png",
+      "phase": "fall"
+    },
+    {
+      "name": "knockdown_mvp_01",
+      "action": "knockdown",
+      "sheet": "../../production/c/knockdown/prepared.png",
+      "source_rect": {
+        "x": 277,
+        "y": 0,
+        "w": 271,
+        "h": 330
+      },
+      "exported_frame": "../../production/c/knockdown/frames/knockdown_mvp_01.png",
+      "phase": "land"
+    },
+    {
+      "name": "knockdown_mvp_02",
+      "action": "knockdown",
+      "sheet": "../../production/c/knockdown/prepared.png",
+      "source_rect": {
+        "x": 554,
+        "y": 0,
+        "w": 277,
+        "h": 330
+      },
+      "exported_frame": "../../production/c/knockdown/frames/knockdown_mvp_02.png",
+      "phase": "down"
+    },
+    {
+      "name": "knockdown_mvp_03",
+      "action": "knockdown",
+      "sheet": "../../production/c/knockdown/prepared.png",
+      "source_rect": {
+        "x": 831,
+        "y": 0,
+        "w": 239,
+        "h": 330
+      },
+      "exported_frame": "../../production/c/knockdown/frames/knockdown_mvp_03.png",
+      "phase": "recover"
     }
   ],
-  "atlas_sha256": "4b71ac736d43149552ef76e7b255292249038f66862def48c61622c85ae8c86c",
-  "manifest_sha256": "0e191a41609fa2a1b9f507e47e9d3d7cfeb3b9681e75147426fd831078ed6b81"
+  "atlas_sha256": "bb35617eb3c50db58d706390ba3234b55ae1241fedf4475d5304565423f9fc4e",
+  "manifest_sha256": "7a1484f438efe701d53a6622800493e3159b21d2abaf8148ed9e633406359cc2",
+  "mvp_runtime_review": {
+    "report": "review/mvp/runtime-review.json",
+    "date": "2026-09-07",
+    "scenario_count": 30,
+    "both_sides": true,
+    "status": "reviewed-in-real-renderer"
+  }
 }

@@ -49,6 +49,7 @@ pub enum AttackKind {
     AirPunch,
     AirKick,
     Throw,
+    SignatureSpecial,
 }
 
 /// A currently active offensive shape.
@@ -106,6 +107,11 @@ impl AttackKind {
             | MoveId::CUndefinedThrow
             | MoveId::PythonConstrictThrow
             | MoveId::CppMoveThrow => Self::Throw,
+            MoveId::RustBorrowBreak
+            | MoveId::DukeGcSlam
+            | MoveId::CPointerLance
+            | MoveId::PythonSerpentSlide
+            | MoveId::CppTemplateArc => Self::SignatureSpecial,
         }
     }
 
@@ -121,6 +127,7 @@ impl AttackKind {
             MoveInputKind::AirPunch => Self::AirPunch,
             MoveInputKind::AirKick => Self::AirKick,
             MoveInputKind::Throw => Self::Throw,
+            MoveInputKind::SignatureSpecial => Self::SignatureSpecial,
         }
     }
 
@@ -136,6 +143,7 @@ impl AttackKind {
             Self::AirPunch => MoveId::AirPunch,
             Self::AirKick => MoveId::AirKick,
             Self::Throw => MoveId::CloseThrow,
+            Self::SignatureSpecial => MoveId::RustBorrowBreak,
         }
     }
 

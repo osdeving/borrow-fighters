@@ -1,83 +1,77 @@
 {
   "action": "sweep",
-  "source": "sweep/source-v6.png",
-  "sheet": "sweep/keyed-v6.png",
+  "source": "sweep/source-mvp-v1.png",
+  "sheet": "sweep/keyed-mvp-v1.png",
   "reviewed": true,
   "loop": false,
-  "status": "reviewed visual and functional pilot; see ../finalization-review.md for evidence and limits",
-  "source_body_height_reference_px": 554,
-  "normalization_note": "Approximate upright-body reference; do not scale each frame by its own alpha bounds. Air pivots are virtual standing-floor anchors beneath hips, not boot tips. Ground pivots are proposed and require foot-support review after normalization.",
-  "combat_timing": {
-    "move_id": "SweepKick",
-    "input": "Sweep",
-    "duration": 32,
-    "active_start": 10,
-    "active_end_inclusive": 18,
-    "whiff_recovery": 12,
-    "clip": "sweep"
-  },
+  "status": "runtime_verified_mvp",
   "frames": [
     {
-      "name": "sweep_0",
+      "name": "sweep_00",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 480,
+        "w": 510,
         "h": 768
       },
       "pivot": {
-        "x": 250,
-        "y": 633
+        "x": 285,
+        "y": 658
       },
       "duration_ms": 166,
       "phase": "startup"
     },
     {
-      "name": "sweep_1",
+      "name": "sweep_01",
       "source_rect": {
-        "x": 480,
+        "x": 510,
         "y": 0,
-        "w": 630,
+        "w": 585,
         "h": 768
       },
       "pivot": {
-        "x": 260,
-        "y": 633
+        "x": 240,
+        "y": 660
       },
       "duration_ms": 150,
       "phase": "active"
     },
     {
-      "name": "sweep_2",
+      "name": "sweep_02",
       "source_rect": {
-        "x": 1110,
+        "x": 1095,
         "y": 0,
-        "w": 460,
+        "w": 465,
         "h": 768
       },
       "pivot": {
-        "x": 203,
-        "y": 634
+        "x": 230,
+        "y": 662
       },
       "duration_ms": 108,
       "phase": "recovery"
     },
     {
-      "name": "sweep_3",
+      "name": "sweep_03",
       "source_rect": {
-        "x": 1570,
+        "x": 1560,
         "y": 0,
-        "w": 478,
+        "w": 488,
         "h": 768
       },
       "pivot": {
-        "x": 180,
-        "y": 633
+        "x": 225,
+        "y": 658
       },
       "duration_ms": 109,
       "phase": "recovery"
     }
   ],
-  "review_notes": "v6 lowers the active sole into the unchanged sweep box after rejecting v5 (sole too low). All four source rectangles, scale .47, ground pivots and combat timing preserved. Magenta extracted; pale pocket between arm and thigh removed by prepare-v6.py. Static contact/identity/alpha inspected; Native verification complete; see ../finalization-review.md.",
-  "finalization_review": "../finalization-review.md"
+  "review_notes": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Low active foot now attacks ankle/shin band of the actual crouching MoveSpec. Previous action mapping preserved in action-pre-mvp.json. Timing unchanged.",
+  "runtime_review": {
+    "scope": "MVP integration; actual World/Raylib showcase in both facings",
+    "report": "../../candidates/rust/review/mvp/showcase-validation.json",
+    "actor_states": "attack, block, hit and knockdown selected by real combat state",
+    "reviewer": "Codex root; contact sheets and full-resolution samples inspected"
+  }
 }

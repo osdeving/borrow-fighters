@@ -219,6 +219,10 @@ fn input_for_close_move(input: MoveInputKind) -> FighterInput {
             kick: true,
             ..FighterInput::default()
         },
+        MoveInputKind::SignatureSpecial => FighterInput {
+            signature_special: true,
+            ..FighterInput::default()
+        },
         MoveInputKind::Throw => FighterInput {
             block: true,
             light_punch: true,

@@ -102,6 +102,15 @@ pub struct FighterInput {
     pub heavy_punch: bool,
     pub kick: bool,
     pub projectile: bool,
+    pub signature_special: bool,
+}
+
+/// Visible impact posture; knockdowns include a protected floor recovery.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum HitReactionKind {
+    #[default]
+    Hit,
+    Knockdown,
 }
 
 /// Events produced while updating one fighter.
@@ -148,6 +157,8 @@ pub struct Fighter {
     hitstun_timer: f32,
     blockstun_timer: f32,
     reaction_visual_elapsed: f32,
+    hit_reaction_kind: HitReactionKind,
+    throw_protection_timer: f32,
     guard_visual_elapsed: f32,
     crouch_visual_elapsed: f32,
     jump_visual_elapsed: f32,
@@ -240,6 +251,8 @@ impl Fighter {
             hitstun_timer: 0.0,
             blockstun_timer: 0.0,
             reaction_visual_elapsed: 0.0,
+            hit_reaction_kind: HitReactionKind::Hit,
+            throw_protection_timer: 0.0,
             guard_visual_elapsed: 0.0,
             crouch_visual_elapsed: 0.0,
             jump_visual_elapsed: 0.0,
@@ -262,7 +275,8 @@ impl Fighter {
             return events;
         }
 
-        if self.is_reacting() {
+        let was_reacting = self.is_reacting();
+        if was_reacting {
             self.reaction_visual_elapsed += dt;
         }
         let was_blocking = self.blocking;
@@ -273,11 +287,29 @@ impl Fighter {
         self.hitstun_timer = tick_timer(self.hitstun_timer, dt);
         self.blockstun_timer = tick_timer(self.blockstun_timer, dt);
         self.whiff_recovery_timer = tick_timer(self.whiff_recovery_timer, dt);
+        self.throw_protection_timer = tick_timer(self.throw_protection_timer, dt);
+        if was_reacting && !self.is_reacting() {
+            // A defender must get a chance to jump after stun, including at the wall.
+            self.throw_protection_timer = FrameCount::new(6).as_seconds();
+        }
 
         let action_locked = self.is_action_locked();
         let requested_move = input.requested_move_spec(self.move_ids, self.facing, self.grounded);
         let wants_attack = requested_move.is_some();
-        self.crouching = !action_locked && input.crouch && self.grounded && self.attack.is_none();
+        let low_attack = self
+            .attack
+            .map(|attack| attack.spec)
+            .or(requested_move)
+            .is_some_and(|spec| {
+                spec.input == MoveInputKind::Sweep || spec.id == MoveId::PythonSerpentSlide
+            });
+        self.crouching = if self.in_blockstun() {
+            // Preserve guard height during blockstun; previously every blocked low
+            // forced the defender upright for the next incoming hit.
+            was_crouching
+        } else {
+            !action_locked && self.grounded && (low_attack || input.crouch && self.attack.is_none())
+        };
         self.crouch_visual_elapsed = if self.crouching && was_crouching {
             self.crouch_visual_elapsed + dt
         } else {
@@ -315,6 +347,16 @@ impl Fighter {
             });
         }
 
+        if let Some(attack) = self.attack
+            && attack.spec.id == MoveId::PythonSerpentSlide
+            && attack.is_active()
+        {
+            self.velocity.x = match self.facing {
+                Facing::Right => world_px(240.0),
+                Facing::Left => world_px(-240.0),
+            };
+        }
+
         self.velocity.y = (self.velocity.y + GRAVITY * dt).min(MAX_FALL_SPEED);
         self.position.x += self.velocity.x * dt;
         self.position.y += self.velocity.y * dt;
@@ -349,6 +391,11 @@ impl Fighter {
 
     /// Updates facing direction to look toward the opponent.
     pub fn face_toward(&mut self, opponent: &Self) {
+        // Attacks keep the direction of their startup so a jump-over can evade
+        // an attack instead of being tracked automatically through recovery.
+        if self.attack.is_some() || self.special_visual_timer > 0.0 {
+            return;
+        }
         self.facing = if self.body_rect().center_x() <= opponent.body_rect().center_x() {
             Facing::Right
         } else {
@@ -381,10 +428,15 @@ impl Fighter {
         guard_rule: GuardRule,
         hit_reaction: HitReaction,
     ) -> DamageResult {
-        let blocked =
-            !self.is_defeated() && guard_rule.is_blocked_by(self.blocking, self.crouching);
+        let blocked = !self.is_defeated()
+            && self.grounded
+            && !self.in_hitstun()
+            && guard_rule.is_blocked_by(self.blocking, self.crouching);
         let final_damage = if blocked {
-            (damage / BLOCK_DAMAGE_DIVISOR).max(1)
+            // Guard gives a low-health defender a chance to answer pressure.
+            (damage / BLOCK_DAMAGE_DIVISOR)
+                .max(1)
+                .min((self.health - 1).max(0))
         } else {
             damage
         };
@@ -513,6 +565,21 @@ impl Fighter {
         self.attack.map(|attack| attack.spec)
     }
 
+    /// Uses revised move geometry instead of hitboxes from legacy sprite frames.
+    pub fn uses_move_spec_hitbox(&self) -> bool {
+        matches!(
+            self.attack_kind(),
+            Some(AttackKind::Sweep | AttackKind::SignatureSpecial)
+        )
+    }
+
+    /// Uses the crouched physical hurtboxes for reviewed low attacks.
+    pub fn uses_low_attack_hurtboxes(&self) -> bool {
+        self.attack_move_spec().is_some_and(|spec| {
+            spec.input == MoveInputKind::Sweep || spec.id == MoveId::PythonSerpentSlide
+        })
+    }
+
     /// Returns close-range move ids available to this fighter.
     pub const fn move_ids(&self) -> &'static [MoveId] {
         self.move_ids
@@ -584,6 +651,31 @@ impl Fighter {
         self.reaction_visual_elapsed
     }
 
+    /// Returns the posture selected by the latest unblocked impact.
+    pub fn hit_reaction_kind(&self) -> HitReactionKind {
+        self.hit_reaction_kind
+    }
+
+    /// Returns whether floor recovery is still protecting this fighter.
+    pub fn in_knockdown(&self) -> bool {
+        self.in_hitstun() && self.hit_reaction_kind == HitReactionKind::Knockdown
+    }
+
+    /// Prevents grounded throws from catching jumps, stun, or the first recovery frames.
+    pub fn can_be_thrown(&self) -> bool {
+        self.grounded && !self.is_reacting() && self.throw_protection_timer <= 0.0
+    }
+
+    /// Applies the fall and get-up phase after a successful grounded sweep or throw.
+    pub fn start_knockdown(&mut self) {
+        self.hit_reaction_kind = HitReactionKind::Knockdown;
+        self.hitstun_timer = self.hitstun_timer.max(FrameCount::new(36).as_seconds());
+        self.position.y = FLOOR_Y - self.body_metrics.standing_height;
+        self.grounded = true;
+        self.crouching = false;
+        self.velocity = Vec2::ZERO;
+    }
+
     /// Returns presentation time since the current held guard began.
     pub fn guard_visual_elapsed_seconds(&self) -> f32 {
         self.guard_visual_elapsed
@@ -651,7 +743,11 @@ impl Fighter {
     }
 
     fn update_horizontal_velocity(&mut self, dt: f32, input: FighterInput) {
-        let axis = if self.crouching || self.blocking || self.is_action_locked() {
+        let axis = if self.crouching
+            || self.blocking
+            || self.is_action_locked()
+            || self.attack_kind() == Some(AttackKind::SignatureSpecial)
+        {
             0.0
         } else {
             input.horizontal_axis()
@@ -721,7 +817,10 @@ impl Fighter {
         }
 
         self.attack = None;
+        self.special_visual_timer = 0.0;
         self.blocking = false;
+        self.blockstun_timer = 0.0;
+        self.hit_reaction_kind = HitReactionKind::Hit;
         self.hitstun_timer = hit_reaction.hitstun.as_seconds();
         hit_reaction.hit_pushback
     }
@@ -731,7 +830,7 @@ impl Fighter {
     }
 
     fn is_action_locked(&self) -> bool {
-        self.is_reacting() || self.in_whiff_recovery()
+        self.is_reacting() || self.in_whiff_recovery() || self.special_visual_timer > 0.0
     }
 
     fn start_whiff_recovery(&mut self, spec: MoveSpec) {
@@ -776,6 +875,7 @@ impl FighterInput {
             heavy_punch: false,
             kick: false,
             projectile: false,
+            signature_special: false,
             ..self
         }
     }
@@ -801,7 +901,9 @@ impl FighterInput {
             };
         }
 
-        let input = if self.block && self.light_punch {
+        let input = if self.signature_special {
+            MoveInputKind::SignatureSpecial
+        } else if self.block && self.light_punch {
             MoveInputKind::Throw
         } else if self.crouch && self.kick {
             MoveInputKind::Sweep

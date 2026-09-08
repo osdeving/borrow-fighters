@@ -50,7 +50,7 @@ borrow-fighters/
 │   │   ├── video_capture.rs    # Captura local do framebuffer via ffmpeg
 │   │   ├── render/
 │   │   │   ├── combat_lab.rs   # Desenho da cena isolada de Combat Lab
-│   │   │   ├── move_showcase.rs # Desenho limpo do autoplay de golpes
+│   │   │   ├── move_showcase.rs # Desenho de combate contextual no showcase
 │   │   │   └── sprite_viewer.rs # Desenho da ferramenta isolada de sprites
 │   │   └── sprites/
 │   │       ├── animation.rs    # Seleção de frame por duração
@@ -73,7 +73,7 @@ borrow-fighters/
 │   ├── scenes/
 │   │   ├── mod.rs              # Estados de tela
 │   │   ├── combat_lab.rs       # Laboratório isolado para timing e boxes
-│   │   ├── move_showcase.rs    # Autoplay testável dos golpes de um personagem
+│   │   ├── move_showcase.rs    # Cenários testáveis com dois atores no World
 │   │   ├── preferences.rs      # Cursor e navegação do menu principal/submenus
 │   │   ├── sprite_viewer.rs    # Viewer testável de atlas, pivot e frame bounds
 │   │   └── sprite_viewer/
@@ -201,6 +201,8 @@ Responsabilidades:
 Usar cenas simples para separar fluxo de tela sem criar framework pesado.
 
 Ferramentas temporárias e plugáveis também podem entrar em `scenes/*` quando tiverem estado testável sem Raylib. O corte atual é `src/scenes/sprite_viewer.rs`, acionado por `--tool sprite-viewer`, enquanto o desenho fica em `src/engine/render/sprite_viewer.rs`. Esse modo não deve carregar `World`, áudio ou loop de luta normal.
+
+O `MoveShowcase` é uma cena de treino com dois atores no `World` real. Ele controla apenas preparação, entradas e repetição; as regras de combate e o log determinam o resultado. Especiais e queda usam os estados de combate existentes com novos dados/clips, conforme a [ADR 0013](adr/0013-contextual-showcase-and-mvp-combat.md).
 
 ### Feature flags runtime
 

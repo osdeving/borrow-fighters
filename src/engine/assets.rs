@@ -324,7 +324,7 @@ fn load_fighter_atlas_optional(
             && let Ok(combat_manifest) = SpriteManifest::load(baseline_path)
             && let Some(mut candidate) = load_sprite_atlas_optional(raylib, thread, &candidate_path)
         {
-            let missing = missing_candidate_clips(&candidate.manifest);
+            let missing = missing_candidate_clips(&candidate.manifest, character);
             if missing.is_empty() {
                 candidate.combat_manifest = combat_manifest;
                 return Some(candidate);
@@ -346,9 +346,8 @@ fn reviewed_sprite_art_enabled() -> bool {
     }
 }
 
-fn missing_candidate_clips(manifest: &SpriteManifest) -> Vec<&'static str> {
-    FighterSpriteClip::REQUIRED
-        .iter()
+fn missing_candidate_clips(manifest: &SpriteManifest, character: CharacterId) -> Vec<&'static str> {
+    FighterSpriteClip::required_for_character(character)
         .map(|clip| clip.as_str())
         .filter(|name| manifest.clip_named(name).is_none())
         .collect()
@@ -420,19 +419,54 @@ mod tests {
     fn partial_candidates_cannot_replace_a_complete_fighter_in_matches() {
         let mut manifest = SpriteManifest::load(RUST_FIGHTER_MANIFEST_PATH).unwrap();
         assert_eq!(
-            missing_candidate_clips(&manifest),
-            vec!["spawn", "crouch_block", "victory", "defeat"]
+            missing_candidate_clips(&manifest, CharacterId::Rust),
+            vec![
+                "spawn",
+                "crouch_block",
+                "victory",
+                "defeat",
+                "knockdown",
+                "signature_special"
+            ]
         );
-        for name in ["spawn", "crouch_block", "victory", "defeat"] {
+        for name in [
+            "spawn",
+            "crouch_block",
+            "victory",
+            "defeat",
+            "knockdown",
+            "signature_special",
+        ] {
             manifest.clips.push(SpriteClip {
                 name: name.to_string(),
                 r#loop: false,
                 frames: manifest.clip_named("idle").unwrap().frames.clone(),
             });
         }
-        assert!(missing_candidate_clips(&manifest).is_empty());
+        assert!(missing_candidate_clips(&manifest, CharacterId::Rust).is_empty());
         // Existing fallback artwork is not sufficient coverage for a candidate.
         manifest.clips.retain(|clip| clip.name != "throw");
-        assert_eq!(missing_candidate_clips(&manifest), vec!["throw"]);
+        assert_eq!(
+            missing_candidate_clips(&manifest, CharacterId::Rust),
+            vec!["throw"]
+        );
+    }
+
+    #[test]
+    fn go_keeps_its_previous_coverage_while_the_five_require_new_actions() {
+        let manifest = SpriteManifest::load("assets/candidates/go/go-fighter.sprite.json").unwrap();
+        assert!(missing_candidate_clips(&manifest, CharacterId::Go).is_empty());
+        for character in [
+            CharacterId::Rust,
+            CharacterId::Duke,
+            CharacterId::C,
+            CharacterId::Python,
+            CharacterId::Cpp,
+        ] {
+            assert_eq!(
+                missing_candidate_clips(&manifest, character),
+                vec!["knockdown", "signature_special"]
+            );
+        }
     }
 }

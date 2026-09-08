@@ -358,6 +358,11 @@ pub enum MoveId {
     CppVirtualOverhead,
     CppExceptionAntiAir,
     CppMoveThrow,
+    RustBorrowBreak,
+    DukeGcSlam,
+    CPointerLance,
+    PythonSerpentSlide,
+    CppTemplateArc,
 }
 
 impl MoveId {
@@ -404,6 +409,11 @@ impl MoveId {
             Self::CppVirtualOverhead => 38,
             Self::CppExceptionAntiAir => 39,
             Self::CppMoveThrow => 40,
+            Self::RustBorrowBreak => 41,
+            Self::DukeGcSlam => 42,
+            Self::CPointerLance => 43,
+            Self::PythonSerpentSlide => 44,
+            Self::CppTemplateArc => 45,
         }
     }
 
@@ -451,6 +461,11 @@ impl MoveId {
             Self::CppVirtualOverhead => "cpp_virtual_overhead",
             Self::CppExceptionAntiAir => "cpp_exception_anti_air",
             Self::CppMoveThrow => "cpp_move_throw",
+            Self::RustBorrowBreak => "rust_borrow_break",
+            Self::DukeGcSlam => "duke_gc_slam",
+            Self::CPointerLance => "c_pointer_lance",
+            Self::PythonSerpentSlide => "python_serpent_slide",
+            Self::CppTemplateArc => "cpp_template_arc",
         }
     }
 
@@ -498,6 +513,12 @@ impl MoveId {
             "cpp_virtual_overhead" => Some(Self::CppVirtualOverhead),
             "cpp_exception_anti_air" => Some(Self::CppExceptionAntiAir),
             "cpp_move_throw" => Some(Self::CppMoveThrow),
+            "rust_borrow_break" => Some(Self::RustBorrowBreak),
+            "duke_gc_slam" => Some(Self::DukeGcSlam),
+            "c_pointer_lance" => Some(Self::CPointerLance),
+            "python_serpent_slide" => Some(Self::PythonSerpentSlide),
+            "cpp_template_arc" => Some(Self::CppTemplateArc),
+
             _ => None,
         }
     }
@@ -528,6 +549,7 @@ pub enum MoveInputKind {
     AirPunch,
     AirKick,
     Throw,
+    SignatureSpecial,
 }
 
 /// How an incoming hit can be guarded.
@@ -596,7 +618,7 @@ pub struct MoveSpec {
 }
 
 /// Prototype 0.1 close-range move table.
-pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 41] = [
+pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 46] = [
     MoveSpec {
         id: MoveId::LightPunch,
         input: MoveInputKind::LightPunch,
@@ -1375,6 +1397,126 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 41] = [
         guard_rule: GuardRule::Throw,
         hit_reaction: CPP_THROW_REACTION,
         whiff_recovery: CPP_MOVE_THROW_WHIFF_RECOVERY,
+    },
+    MoveSpec {
+        id: MoveId::RustBorrowBreak,
+        input: MoveInputKind::SignatureSpecial,
+        label: "Borrow Break",
+        frames: AttackFrameData {
+            duration: FrameCount::new(38),
+            active_start: FrameCount::new(12),
+            active_end: FrameCount::new(17),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(90.0),
+            height: world_px(64.0),
+            y_offset: world_px(24.0),
+        },
+        damage: 16,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: HitReaction {
+            hitstun: FrameCount::new(18),
+            blockstun: FrameCount::new(10),
+            hit_pushback: world_px(36.0),
+            block_pushback: world_px(18.0),
+        },
+        whiff_recovery: FrameCount::new(14),
+    },
+    MoveSpec {
+        id: MoveId::DukeGcSlam,
+        input: MoveInputKind::SignatureSpecial,
+        label: "GC Slam",
+        frames: AttackFrameData {
+            duration: FrameCount::new(52),
+            active_start: FrameCount::new(22),
+            active_end: FrameCount::new(28),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(106.0),
+            height: world_px(114.0),
+            y_offset: world_px(36.0),
+        },
+        damage: 20,
+        guard_rule: GuardRule::High,
+        hit_reaction: HitReaction {
+            hitstun: FrameCount::new(24),
+            blockstun: FrameCount::new(12),
+            hit_pushback: world_px(50.0),
+            block_pushback: world_px(22.0),
+        },
+        whiff_recovery: FrameCount::new(18),
+    },
+    MoveSpec {
+        id: MoveId::CPointerLance,
+        input: MoveInputKind::SignatureSpecial,
+        label: "Pointer Lance",
+        frames: AttackFrameData {
+            duration: FrameCount::new(46),
+            active_start: FrameCount::new(18),
+            active_end: FrameCount::new(23),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(146.0),
+            height: world_px(36.0),
+            y_offset: world_px(62.0),
+        },
+        damage: 18,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: HitReaction {
+            hitstun: FrameCount::new(20),
+            blockstun: FrameCount::new(10),
+            hit_pushback: world_px(38.0),
+            block_pushback: world_px(18.0),
+        },
+        whiff_recovery: FrameCount::new(18),
+    },
+    MoveSpec {
+        id: MoveId::PythonSerpentSlide,
+        input: MoveInputKind::SignatureSpecial,
+        label: "Serpent Slide",
+        frames: AttackFrameData {
+            duration: FrameCount::new(39),
+            active_start: FrameCount::new(11),
+            active_end: FrameCount::new(16),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(98.0),
+            height: world_px(32.0),
+            y_offset: world_px(66.0),
+        },
+        damage: 13,
+        guard_rule: GuardRule::Low,
+        hit_reaction: HitReaction {
+            hitstun: FrameCount::new(20),
+            blockstun: FrameCount::new(10),
+            hit_pushback: world_px(42.0),
+            block_pushback: world_px(18.0),
+        },
+        whiff_recovery: FrameCount::new(16),
+    },
+    MoveSpec {
+        id: MoveId::CppTemplateArc,
+        input: MoveInputKind::SignatureSpecial,
+        label: "Template Arc",
+        frames: AttackFrameData {
+            duration: FrameCount::new(42),
+            active_start: FrameCount::new(9),
+            active_end: FrameCount::new(15),
+        },
+        hitbox: HitboxSpec {
+            width: world_px(82.0),
+            height: world_px(136.0),
+            y_offset: world_px(-88.0),
+        },
+        damage: 17,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: HitReaction {
+            hitstun: FrameCount::new(21),
+            blockstun: FrameCount::new(9),
+            hit_pushback: world_px(34.0),
+            block_pushback: world_px(16.0),
+        },
+        whiff_recovery: FrameCount::new(18),
     },
 ];
 

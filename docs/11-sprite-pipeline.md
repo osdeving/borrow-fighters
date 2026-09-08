@@ -52,7 +52,7 @@ Exemplo de metadata de combate dentro de um frame:
 }
 ```
 
-Esses valores sao medidos em pixels locais do frame do atlas, nao em coordenadas de mundo. A validacao rejeita retangulos vazios, retangulos fora do frame, labels vazias e origem de projectile fora do frame. O schema ainda e experimental, mas ja participa do runtime com fallback: hitboxes/hurtboxes presentes no frame substituem as caixas greybox daquele frame; campos ausentes mantem `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`.
+Esses valores sao medidos em pixels locais do frame do atlas, nao em coordenadas de mundo. A validacao rejeita retangulos vazios, retangulos fora do frame, labels vazias e origem de projectile fora do frame. O schema ainda e experimental, mas ja participa do runtime com fallback: hitboxes/hurtboxes presentes no frame substituem as caixas greybox daquele frame, exceto rasteiras/especiais de assinatura e hurtboxes de ações baixas, que usam geometria física revisada conforme a [ADR 0013](adr/0013-contextual-showcase-and-mvp-combat.md); campos ausentes mantem `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`.
 
 ## Convencoes
 
@@ -82,11 +82,13 @@ Esses valores sao medidos em pixels locais do frame do atlas, nao em coordenadas
 - `air_kick`
 - `throw`
 - `hit`
-- `special`
+- `knockdown` (cinco personagens do MVP)
+- `special` (conjuração de projétil)
+- `signature_special` (cinco personagens do MVP)
 - `victory`
 - `defeat`
 
-Estes 20 clips cobrem os estados e golpes implementados e sao exigidos para ativar um atlas candidato completo. `taunt` continua como compatibilidade para vitoria nos placeholders; `projectile` pode existir como material de efeito separado. A matriz de producao por personagem fica em [19 — Cobertura de producao](19-sprite-production-coverage.md).
+Os cinco personagens selecionáveis exigem 22 clips para ativar um atlas completo, incluindo o especial de assinatura e queda/recuperação. Go conserva os 20 clips anteriores nesta rodada. O loader e os testes compartilham `FighterSpriteClip::required_for_character`. `taunt` continua como compatibilidade para vitoria nos placeholders; `projectile` pode existir como material de efeito separado. A matriz de producao por personagem fica em [19 — Cobertura de producao](19-sprite-production-coverage.md).
 
 `spawn` e reservado para entrada cinematografica no inicio da luta. Ele deve ser nao-loopavel e nao deve carregar regra de combate; o jogo pausa os inputs durante a intro e depois durante a contagem `11`, `10`, `01`, `Fight!`.
 
@@ -299,3 +301,9 @@ O corte atual e viewer com ajuste controlado de escala, pivot, corpo fisico e me
 - Validar em playtest o padrao inicial de escala definido em [`docs/17-visual-scale-and-stage-metrics.md`](17-visual-scale-and-stage-metrics.md).
 - Criar criterio visual para aceitar atlas de personagem como "candidato" em vez de placeholder.
 - Definir criterio de review para `projectile_origin`, hitbox e hurtbox antes de aceitar metadata como balanceamento confiavel.
+
+## Produção de MVP: especial e queda
+
+`signature_special` precisa ter antecipação, contato e recuperação próprios para o especial do loadout. Os limites dos frames ativos devem coincidir com `MoveSpec` a 60 Hz; `tests/sprite_candidates.rs` verifica todos os ticks e a duração total. `knockdown` contém queda, permanência no chão, apoio para levantar e retorno à guarda em 600 ms. O relógio começa no impacto e termina junto da recuperação protegida.
+
+As rasteiras dos cinco foram geradas novamente para a nova postura baixa. O pé ativo deve atravessar a região dos tornozelos; não basta descer a caixa mantendo um chute alto. Fontes anteriores, prompts, versões, escala uniforme por ação, recortes e pivots permanecem em `assets/production/<personagem>/`. A validação de contato ocorre no showcase com oponente e nos dois lados; logs bem-sucedidos não substituem a inspeção da imagem. Ver [rodada de MVP](20-mvp-combat-showcase.md).

@@ -13,6 +13,7 @@ use crate::combat::fighter::{
     ActiveAttack, DamageResult, Facing, Fighter, FighterInput, FighterUpdateEvents, GuardRule,
     HitReaction, PlayerSlot,
 };
+use crate::combat::move_data::{MoveId, MoveInputKind, move_spec};
 use crate::combat::projectile::Projectile;
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, world_px};
 use crate::engine::sprites::{
@@ -373,7 +374,7 @@ impl World {
             p1_sprite_combat.as_ref(),
         );
 
-        if let Some(attack) = p1_attack {
+        if let Some((attack, contact)) = p1_attack {
             let pushback_direction = pushback_direction(&self.player_one, &self.player_two);
             let result = take_player_two_hit(
                 &mut self.player_two,
@@ -382,18 +383,19 @@ impl World {
                 attack.hit_reaction,
                 flags,
             );
+            apply_knockdown_for_move(&mut self.player_two, attack, result);
             apply_pushback(&mut self.player_two, pushback_direction, result.pushback);
             self.player_one.mark_attack_hit();
             self.queue_close_hit_audio(PlayerSlot::One, PlayerSlot::Two, attack, result);
             self.hit_effects.push(HitEffect::new(
-                self.player_two.hurtbox().center(),
+                contact,
                 result.damage,
                 result.blocked,
                 self.player_two.facing,
             ));
         }
 
-        if let Some(attack) = p2_attack {
+        if let Some((attack, contact)) = p2_attack {
             let pushback_direction = pushback_direction(&self.player_two, &self.player_one);
             let result = take_player_one_hit(
                 &mut self.player_one,
@@ -402,11 +404,12 @@ impl World {
                 attack.hit_reaction,
                 flags,
             );
+            apply_knockdown_for_move(&mut self.player_one, attack, result);
             apply_pushback(&mut self.player_one, pushback_direction, result.pushback);
             self.player_two.mark_attack_hit();
             self.queue_close_hit_audio(PlayerSlot::Two, PlayerSlot::One, attack, result);
             self.hit_effects.push(HitEffect::new(
-                self.player_one.hurtbox().center(),
+                contact,
                 result.damage,
                 result.blocked,
                 self.player_one.facing,
@@ -472,14 +475,16 @@ impl World {
             }
 
             let rect = projectile.rect();
+            let (defender, defender_combat) = match projectile.owner {
+                PlayerSlot::One => (&self.player_two, player_two_sprite_combat.as_ref()),
+                PlayerSlot::Two => (&self.player_one, player_one_sprite_combat.as_ref()),
+            };
+            let Some(contact) = hitbox_contact_with_defender(rect, defender, defender_combat)
+            else {
+                continue;
+            };
             match projectile.owner {
-                PlayerSlot::One
-                    if projectile_hits_fighter(
-                        rect,
-                        &self.player_two,
-                        player_two_sprite_combat.as_ref(),
-                    ) =>
-                {
+                PlayerSlot::One => {
                     let pushback_direction = projectile_pushback_direction(projectile);
                     let result = take_player_two_hit(
                         &mut self.player_two,
@@ -507,19 +512,13 @@ impl World {
                         blocked: result.blocked,
                     });
                     self.hit_effects.push(HitEffect::new(
-                        self.player_two.hurtbox().center(),
+                        contact,
                         result.damage,
                         result.blocked,
                         self.player_two.facing,
                     ));
                 }
-                PlayerSlot::Two
-                    if projectile_hits_fighter(
-                        rect,
-                        &self.player_one,
-                        player_one_sprite_combat.as_ref(),
-                    ) =>
-                {
+                PlayerSlot::Two => {
                     let pushback_direction = projectile_pushback_direction(projectile);
                     let result = take_player_one_hit(
                         &mut self.player_one,
@@ -547,13 +546,12 @@ impl World {
                         blocked: result.blocked,
                     });
                     self.hit_effects.push(HitEffect::new(
-                        self.player_one.hurtbox().center(),
+                        contact,
                         result.damage,
                         result.blocked,
                         self.player_one.facing,
                     ));
                 }
-                _ => {}
             }
         }
 
@@ -780,72 +778,75 @@ fn landed_attack(
     defender: &Fighter,
     attacker_sprite_combat: Option<&ProjectedSpriteCombat>,
     defender_sprite_combat: Option<&ProjectedSpriteCombat>,
-) -> Option<ActiveAttack> {
+) -> Option<(ActiveAttack, Vec2)> {
     let attack = attacker.active_attack()?;
-    if !attacker.can_register_hit() {
+    if !attacker.can_register_hit()
+        || defender.in_knockdown()
+        || (attack.guard_rule == GuardRule::Throw && !defender.can_be_thrown())
+    {
         return None;
     }
 
+    // These reviewed moves use ankle-level / signature geometry from MoveSpec;
+    // historical atlas metadata predates them and must not move the hit upward.
     let sprite_hitboxes = attacker_sprite_combat
+        .filter(|_| !attacker.uses_move_spec_hitbox())
         .map(|combat| combat.hitboxes.as_slice())
         .filter(|hitboxes| !hitboxes.is_empty());
 
     if let Some(hitboxes) = sprite_hitboxes {
-        hitboxes
-            .iter()
-            .copied()
-            .find(|hitbox| hitbox_hits_defender(*hitbox, defender, defender_sprite_combat))
-            .map(|hitbox| ActiveAttack { hitbox, ..attack })
-    } else if hitbox_hits_defender(attack.hitbox, defender, defender_sprite_combat) {
-        Some(attack)
+        hitboxes.iter().copied().find_map(|hitbox| {
+            hitbox_contact_with_defender(hitbox, defender, defender_sprite_combat)
+                .map(|point| (ActiveAttack { hitbox, ..attack }, point))
+        })
     } else {
-        None
+        hitbox_contact_with_defender(attack.hitbox, defender, defender_sprite_combat)
+            .map(|point| (attack, point))
     }
 }
 
-fn hitbox_hits_defender(
+/// Uses the same selected vulnerable shape for collision and impact feedback.
+/// The overlap center is captured before damage reactions or pushback move it.
+fn hitbox_contact_with_defender(
     hitbox: Rect,
     defender: &Fighter,
     defender_sprite_combat: Option<&ProjectedSpriteCombat>,
-) -> bool {
+) -> Option<Vec2> {
+    if defender.in_knockdown() {
+        return None;
+    }
     let sprite_hurtboxes = defender_sprite_combat
+        .filter(|_| !defender.uses_low_attack_hurtboxes())
         .map(|combat| combat.hurtboxes.as_slice())
         .filter(|hurtboxes| !hurtboxes.is_empty());
-
+    let intersection_center = |hurtbox: Rect| {
+        hitbox_hits_hurtbox(hitbox, hurtbox).then(|| {
+            Vec2::new(
+                (hitbox.x.max(hurtbox.x) + hitbox.right().min(hurtbox.right())) * 0.5,
+                (hitbox.y.max(hurtbox.y) + hitbox.bottom().min(hurtbox.bottom())) * 0.5,
+            )
+        })
+    };
     if let Some(hurtboxes) = sprite_hurtboxes {
-        hurtboxes
-            .iter()
-            .copied()
-            .any(|hurtbox| hitbox_hits_hurtbox(hitbox, hurtbox))
+        hurtboxes.iter().copied().find_map(intersection_center)
     } else {
         defender
             .hurtboxes()
             .rects()
             .into_iter()
-            .any(|hurtbox| hitbox_hits_hurtbox(hitbox, hurtbox))
+            .find_map(intersection_center)
     }
 }
 
-fn projectile_hits_fighter(
-    projectile: Rect,
-    fighter: &Fighter,
-    sprite_combat: Option<&ProjectedSpriteCombat>,
-) -> bool {
-    let sprite_hurtboxes = sprite_combat
-        .map(|combat| combat.hurtboxes.as_slice())
-        .filter(|hurtboxes| !hurtboxes.is_empty());
-
-    if let Some(hurtboxes) = sprite_hurtboxes {
-        hurtboxes
-            .iter()
-            .copied()
-            .any(|hurtbox| projectile.intersects(hurtbox))
-    } else {
-        fighter
-            .hurtboxes()
-            .rects()
-            .into_iter()
-            .any(|hurtbox| projectile.intersects(hurtbox))
+fn apply_knockdown_for_move(defender: &mut Fighter, attack: ActiveAttack, result: DamageResult) {
+    let input = move_spec(attack.move_id).input;
+    if result.damage > 0
+        && !result.blocked
+        && defender.grounded
+        && (matches!(input, MoveInputKind::Sweep | MoveInputKind::Throw)
+            || attack.move_id == MoveId::PythonSerpentSlide)
+    {
+        defender.start_knockdown();
     }
 }
 

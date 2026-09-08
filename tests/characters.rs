@@ -31,6 +31,7 @@ fn rust_spec_points_to_current_prototype_moves() {
             MoveId::AirPunch,
             MoveId::AirKick,
             MoveId::RustOwnershipThrow,
+            MoveId::RustBorrowBreak,
         ]
     );
 }
@@ -55,6 +56,7 @@ fn duke_spec_points_to_current_prototype_moves() {
             MoveId::AirPunch,
             MoveId::AirKick,
             MoveId::DukeEnterpriseThrow,
+            MoveId::DukeGcSlam,
         ]
     );
 }
@@ -103,6 +105,7 @@ fn c_spec_points_to_current_prototype_moves() {
             MoveId::AirPunch,
             MoveId::AirKick,
             MoveId::CUndefinedThrow,
+            MoveId::CPointerLance,
         ]
     );
 }
@@ -127,6 +130,7 @@ fn python_spec_points_to_current_prototype_moves() {
             MoveId::AirPunch,
             MoveId::AirKick,
             MoveId::PythonConstrictThrow,
+            MoveId::PythonSerpentSlide,
         ]
     );
 }
@@ -151,6 +155,7 @@ fn cpp_spec_points_to_current_prototype_moves() {
             MoveId::AirPunch,
             MoveId::AirKick,
             MoveId::CppMoveThrow,
+            MoveId::CppTemplateArc,
         ]
     );
 }

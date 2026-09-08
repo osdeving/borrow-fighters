@@ -598,61 +598,61 @@
       "loop": false,
       "frames": [
         {
-          "name": "sweep_0",
+          "name": "sweep_00",
           "source_rect": {
             "x": 0,
             "y": 0,
-            "w": 271,
-            "h": 271
+            "w": 224,
+            "h": 343
           },
           "pivot": {
             "x": 121,
-            "y": 232
+            "y": 306
           },
           "duration_ms": 150,
           "phase": "startup"
         },
         {
-          "name": "sweep_1",
+          "name": "sweep_01",
           "source_rect": {
-            "x": 271,
+            "x": 304,
             "y": 0,
-            "w": 271,
-            "h": 271
+            "w": 304,
+            "h": 343
           },
           "pivot": {
-            "x": 73,
-            "y": 234
+            "x": 134,
+            "y": 304
           },
           "duration_ms": 133,
           "phase": "active"
         },
         {
-          "name": "sweep_2",
+          "name": "sweep_02",
           "source_rect": {
-            "x": 542,
+            "x": 608,
             "y": 0,
-            "w": 271,
-            "h": 271
+            "w": 179,
+            "h": 343
           },
           "pivot": {
-            "x": 130,
-            "y": 220
+            "x": 76,
+            "y": 306
           },
           "duration_ms": 100,
           "phase": "recovery"
         },
         {
-          "name": "sweep_3",
+          "name": "sweep_03",
           "source_rect": {
-            "x": 813,
+            "x": 912,
             "y": 0,
-            "w": 271,
-            "h": 271
+            "w": 209,
+            "h": 343
           },
           "pivot": {
-            "x": 126,
-            "y": 217
+            "x": 98,
+            "y": 308
           },
           "duration_ms": 100,
           "phase": "recovery"
@@ -660,9 +660,9 @@
       ],
       "provenance": {
         "source_action": "sweep/action.json",
-        "source_sheet": "sweep/keyed-v2.png",
-        "scale_to_runtime": 0.432258,
-        "review": "v2 lowers extended sole toward original active band and adds retract/half-rise recovery, preserving150/133/200ms as150/133/100/100ms. Source identity, low support and snake continuity reviewed; contact center inside baseline box, toe near upper edge. Native Lab and complete World reviewed in both facings; no physical metadata changed."
+        "source_sheet": "sweep/keyed-mvp-v1.png",
+        "scale_to_runtime": 0.447,
+        "review": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Low active foot now attacks ankle/shin band of the actual crouching MoveSpec. Previous action mapping preserved in action-pre-mvp.json. Timing unchanged."
       }
     },
     "overhead": {
@@ -1210,6 +1210,152 @@
         "source_sheet": "defeat/keyed.png",
         "scale_to_runtime": 0.4,
         "review": "Standing loss, one-knee rest and sustained bowed one-knee hold. Same scale from standing pose; kneeling is naturally shorter. First generation produced no image due to output moderation; neutral sports-rest prompt v2 succeeded."
+      }
+    },
+    "signature_special": {
+      "sheet": "signature_special/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "signature_special_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 219,
+            "h": 336
+          },
+          "pivot": {
+            "x": 114,
+            "y": 301
+          },
+          "duration_ms": 183,
+          "phase": "startup"
+        },
+        {
+          "name": "signature_special_01",
+          "source_rect": {
+            "x": 267,
+            "y": 0,
+            "w": 267,
+            "h": 336
+          },
+          "pivot": {
+            "x": 78,
+            "y": 300
+          },
+          "duration_ms": 100,
+          "phase": "active"
+        },
+        {
+          "name": "signature_special_02",
+          "source_rect": {
+            "x": 534,
+            "y": 0,
+            "w": 197,
+            "h": 336
+          },
+          "pivot": {
+            "x": 105,
+            "y": 299
+          },
+          "duration_ms": 183,
+          "phase": "recovery"
+        },
+        {
+          "name": "signature_special_03",
+          "source_rect": {
+            "x": 801,
+            "y": 0,
+            "w": 214,
+            "h": 336
+          },
+          "pivot": {
+            "x": 110,
+            "y": 303
+          },
+          "duration_ms": 184,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "signature_special/action.json",
+        "source_sheet": "signature_special/keyed-v2.png",
+        "scale_to_runtime": 0.438,
+        "review": "New four-frame signature animation generated with imagegen. Explicit variable-width crops preserve whole extended limbs; constant anatomical scale, support pivots, startup/active/recovery keyed to MoveSpec. Original source and background-only revision preserved. Local matte removal authorized in production README. Source identity/alpha reviewed; runtime contacts verified in both facings."
+      }
+    },
+    "knockdown": {
+      "sheet": "knockdown/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "knockdown_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 240,
+            "h": 361
+          },
+          "pivot": {
+            "x": 155,
+            "y": 318
+          },
+          "duration_ms": 100,
+          "phase": "fall"
+        },
+        {
+          "name": "knockdown_01",
+          "source_rect": {
+            "x": 277,
+            "y": 0,
+            "w": 277,
+            "h": 361
+          },
+          "pivot": {
+            "x": 139,
+            "y": 317
+          },
+          "duration_ms": 220,
+          "phase": "grounded"
+        },
+        {
+          "name": "knockdown_02",
+          "source_rect": {
+            "x": 554,
+            "y": 0,
+            "w": 221,
+            "h": 361
+          },
+          "pivot": {
+            "x": 115,
+            "y": 321
+          },
+          "duration_ms": 180,
+          "phase": "get_up"
+        },
+        {
+          "name": "knockdown_03",
+          "source_rect": {
+            "x": 831,
+            "y": 0,
+            "w": 225,
+            "h": 361
+          },
+          "pivot": {
+            "x": 106,
+            "y": 322
+          },
+          "duration_ms": 100,
+          "phase": "recover"
+        }
+      ],
+      "provenance": {
+        "source_action": "knockdown/action.json",
+        "source_sheet": "knockdown/keyed-v1.png",
+        "scale_to_runtime": 0.47,
+        "review": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Distinct fall, grounded recovery, get-up and guard fit protected36frame recovery."
       }
     }
   }

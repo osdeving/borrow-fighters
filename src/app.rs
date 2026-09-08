@@ -38,6 +38,33 @@ const CAPTURE_SMOKE_SECONDS_ENV: &str = "BORROW_FIGHTERS_CAPTURE_SMOKE_SECONDS";
 const DEFAULT_MUSIC_VOLUME_PERCENT: u8 = 50;
 const MUSIC_VOLUME_STEP_PERCENT: u8 = 10;
 
+/// Retains button edges until the next fixed tick while refreshing held directions.
+#[derive(Clone, Copy, Debug, Default)]
+struct PendingFighterInput(FighterInput);
+
+impl PendingFighterInput {
+    fn push(&mut self, next: FighterInput) {
+        self.0 = FighterInput {
+            jump: self.0.jump || next.jump,
+            light_punch: self.0.light_punch || next.light_punch,
+            heavy_punch: self.0.heavy_punch || next.heavy_punch,
+            kick: self.0.kick || next.kick,
+            projectile: self.0.projectile || next.projectile,
+            signature_special: self.0.signature_special || next.signature_special,
+            ..next
+        };
+    }
+
+    fn take_tick(&mut self) -> FighterInput {
+        let input = self.0;
+        self.0 = FighterInput {
+            jump: false,
+            ..input.without_attacks()
+        };
+        input
+    }
+}
+
 /// Top-level application state outside the testable game world.
 pub struct App {
     world: World,
@@ -49,6 +76,8 @@ pub struct App {
     preferences_menu: PreferencesMenu,
     combat_lab: CombatLab,
     move_showcase: MoveShowcase,
+    pending_showcase_input: CombatLabInput,
+    pending_fight_input: [PendingFighterInput; 2],
     character_body_metrics: CharacterBodyMetricsCatalog,
     match_options: MatchOptions,
     match_options_dirty: bool,
@@ -71,6 +100,7 @@ impl App {
     /// Creates app state for the selected startup mode.
     pub fn new(options: LaunchOptions) -> Self {
         let match_options = options.match_options;
+        let mut move_showcase = MoveShowcase::default();
         let (scene, combat_lab, sprite_viewer_options) = match options.mode {
             LaunchMode::Game => (
                 if options.start_fight {
@@ -82,6 +112,19 @@ impl App {
                 None,
             ),
             LaunchMode::CombatLab(options) => (AppScene::CombatLab, CombatLab::new(options), None),
+            LaunchMode::MoveShowcase(options) => {
+                move_showcase = MoveShowcase::new(MoveShowcaseOptions {
+                    character: options.character,
+                });
+                move_showcase.select_move(options.selected_move);
+                if options.repeat_current {
+                    move_showcase.toggle_repeat();
+                }
+                if options.sides_reversed {
+                    move_showcase.switch_sides();
+                }
+                (AppScene::MoveShowcase, CombatLab::default(), None)
+            }
             LaunchMode::SpriteViewer(options) => {
                 (AppScene::SpriteViewer, CombatLab::default(), Some(options))
             }
@@ -91,6 +134,7 @@ impl App {
                 eprintln!("warning: using built-in character body metrics: {error}");
                 CharacterBodyMetricsCatalog::default()
             });
+        move_showcase.set_body_metrics(character_body_metrics.clone());
 
         Self {
             world: World::new_greybox_with_intro_for_characters_and_metrics(
@@ -105,7 +149,9 @@ impl App {
             sprite_viewer_options,
             preferences_menu: PreferencesMenu::default(),
             combat_lab,
-            move_showcase: MoveShowcase::default(),
+            move_showcase,
+            pending_showcase_input: CombatLabInput::default(),
+            pending_fight_input: [PendingFighterInput::default(); 2],
             character_body_metrics,
             match_options,
             match_options_dirty: false,
@@ -134,11 +180,7 @@ impl App {
                 self.combat_lab.character(),
                 &assets,
             ));
-        self.move_showcase
-            .set_combat_manifest(fighter_manifest_for_character(
-                self.move_showcase.character(),
-                &assets,
-            ));
+        self.sync_showcase_sprite_combat(&assets);
         let software_cursor_requested = software_cursor_enabled_for_env();
         let audio_device = RaylibAudio::init_audio_device();
         let mut audio_player = match &audio_device {
@@ -269,7 +311,21 @@ impl App {
                             );
                         }
                     } else {
-                        self.update_move_showcase(frame_time, input.combat_lab);
+                        if raylib.is_key_pressed(KeyboardKey::KEY_L) {
+                            self.move_showcase.toggle_repeat();
+                        }
+                        if raylib.is_key_pressed(KeyboardKey::KEY_X) {
+                            self.move_showcase.switch_sides();
+                            self.pending_showcase_input = CombatLabInput::default();
+                        }
+                        if input.combat_lab.next_pose {
+                            self.cycle_showcase_character(CycleDirection::Next);
+                            self.sync_showcase_sprite_combat(&assets);
+                        } else if input.combat_lab.previous_pose {
+                            self.cycle_showcase_character(CycleDirection::Previous);
+                            self.sync_showcase_sprite_combat(&assets);
+                        }
+                        self.update_move_showcase(frame_time, input.combat_lab, &mut audio_player);
 
                         {
                             let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
@@ -373,12 +429,8 @@ impl App {
                                 self.move_showcase = MoveShowcase::new(MoveShowcaseOptions {
                                     character: self.match_options.player_one,
                                 });
-                                self.move_showcase.set_combat_manifest(
-                                    fighter_manifest_for_character(
-                                        self.move_showcase.character(),
-                                        &assets,
-                                    ),
-                                );
+                                self.sync_showcase_sprite_combat(&assets);
+                                self.pending_showcase_input = CombatLabInput::default();
                                 self.scene = AppScene::MoveShowcase;
                                 self.accumulator = 0.0;
                                 audio_player.play_music(MusicTrack::CombatDeterminedPursuit);
@@ -443,6 +495,7 @@ impl App {
                 }
                 AppScene::Fight => {
                     if input.open_preferences {
+                        self.pending_fight_input = [PendingFighterInput::default(); 2];
                         self.scene = AppScene::Preferences;
                         self.preferences_menu.ignore_next_input();
                         audio_player.play(&AudioEvent::ui_back());
@@ -492,12 +545,16 @@ impl App {
                             self.feature_flags.toggle(FeatureFlag::PlayerTwoCpu);
                         }
 
+                        self.pending_fight_input[0].push(input.player_one);
+                        self.pending_fight_input[1].push(input.player_two);
                         self.accumulator += frame_time;
                         let mut fixed_steps = 0;
 
                         while self.accumulator >= FIXED_TIMESTEP
                             && fixed_steps < MAX_FIXED_STEPS_PER_FRAME
                         {
+                            let manual_one = self.pending_fight_input[0].take_tick();
+                            let manual_two = self.pending_fight_input[1].take_tick();
                             let mut player_one =
                                 if self.feature_flags.enabled(FeatureFlag::PlayerOneCpu) {
                                     self.player_one_cpu.next_input(
@@ -506,7 +563,7 @@ impl App {
                                         FIXED_TIMESTEP,
                                     )
                                 } else {
-                                    input.player_one
+                                    manual_one
                                 };
                             let mut player_two =
                                 if self.feature_flags.enabled(FeatureFlag::PlayerTwoCpu) {
@@ -516,7 +573,7 @@ impl App {
                                         FIXED_TIMESTEP,
                                     )
                                 } else {
-                                    input.player_two
+                                    manual_two
                                 };
 
                             player_one = cpu_attack_filtered_input(
@@ -601,6 +658,7 @@ impl App {
         self.arena_selection_dirty = false;
         self.advance_arena_on_next_match = false;
         self.accumulator = 0.0;
+        self.pending_fight_input = [PendingFighterInput::default(); 2];
         self.sync_world_sprite_combat(assets);
     }
 
@@ -624,6 +682,45 @@ impl App {
         }
     }
 
+    fn sync_showcase_sprite_combat(&mut self, assets: &GameAssets) {
+        self.move_showcase
+            .set_body_metrics(self.character_body_metrics.clone());
+        self.move_showcase
+            .set_sprite_combat_manifests(WorldSpriteCombatManifests {
+                player_one: fighter_manifest_for_character(self.move_showcase.character(), assets),
+                player_two: fighter_manifest_for_character(
+                    self.move_showcase.opponent_character(),
+                    assets,
+                ),
+            });
+    }
+
+    fn cycle_showcase_character(&mut self, direction: CycleDirection) {
+        let scenario = self.move_showcase.scenario();
+        let repeat = self.move_showcase.repeat_current();
+        let reversed = self.move_showcase.sides_reversed();
+        let paused = self.move_showcase.paused();
+        let character = cycle_character(self.move_showcase.character(), direction);
+        self.move_showcase = MoveShowcase::new(MoveShowcaseOptions { character });
+        self.move_showcase.select_scenario(scenario);
+        if repeat {
+            self.move_showcase.toggle_repeat();
+        }
+        if reversed {
+            self.move_showcase.switch_sides();
+        }
+        self.move_showcase
+            .set_body_metrics(self.character_body_metrics.clone());
+        if paused {
+            self.move_showcase.update(CombatLabInput {
+                pause_toggle: true,
+                ..CombatLabInput::default()
+            });
+        }
+        self.pending_showcase_input = CombatLabInput::default();
+        self.accumulator = 0.0;
+    }
+
     fn update_combat_lab(&mut self, frame_time: f32, input: CombatLabInput) {
         self.accumulator += frame_time;
         let mut fixed_steps = 0;
@@ -644,17 +741,20 @@ impl App {
         }
     }
 
-    fn update_move_showcase(&mut self, frame_time: f32, input: CombatLabInput) {
+    fn update_move_showcase(
+        &mut self,
+        frame_time: f32,
+        input: CombatLabInput,
+        audio: &mut AudioPlayer<'_>,
+    ) {
         self.accumulator += frame_time;
+        self.pending_showcase_input = merge_showcase_input(self.pending_showcase_input, input);
         let mut fixed_steps = 0;
 
         while self.accumulator >= FIXED_TIMESTEP && fixed_steps < MAX_FIXED_STEPS_PER_FRAME {
-            let showcase_input = if fixed_steps == 0 {
-                input
-            } else {
-                CombatLabInput::default()
-            };
+            let showcase_input = std::mem::take(&mut self.pending_showcase_input);
             self.move_showcase.update(showcase_input);
+            audio.play_events(self.move_showcase.take_audio_events());
             self.accumulator -= FIXED_TIMESTEP;
             fixed_steps += 1;
         }
@@ -689,6 +789,20 @@ fn cpu_attack_filtered_input(
         input.without_attacks()
     } else {
         input
+    }
+}
+
+fn merge_showcase_input(first: CombatLabInput, second: CombatLabInput) -> CombatLabInput {
+    // Key presses survive render frames with no simulation tick; subsequent
+    // catch-up ticks consume each navigation/pause/step command only once.
+    CombatLabInput {
+        next_move: first.next_move || second.next_move,
+        previous_move: first.previous_move || second.previous_move,
+        replay: first.replay || second.replay,
+        pause_toggle: first.pause_toggle || second.pause_toggle,
+        step_frame: first.step_frame || second.step_frame,
+        reset: first.reset || second.reset,
+        ..CombatLabInput::default()
     }
 }
 
@@ -1113,5 +1227,124 @@ mod tests {
 
         assert_eq!(app.music_volume_percent, 50);
         assert_eq!(app.music_volume_multiplier(), 0.5);
+    }
+
+    #[test]
+    fn app_applies_showcase_launch_move_repeat_and_facing() {
+        let options = LaunchOptions::parse(
+            [
+                "game",
+                "--showcase",
+                "--character",
+                "cpp",
+                "--move",
+                "signature_special",
+                "--repeat",
+                "--reverse",
+            ]
+            .map(String::from),
+        )
+        .unwrap();
+        let app = App::new(options);
+        assert_eq!(app.scene, AppScene::MoveShowcase);
+        assert_eq!(app.move_showcase.character(), CharacterId::Cpp);
+        assert_eq!(
+            app.move_showcase.selected_move(),
+            CombatLabMove::SignatureSpecial
+        );
+        assert!(app.move_showcase.repeat_current());
+        assert!(app.move_showcase.sides_reversed());
+        assert!(
+            app.move_showcase.world().player_one.position.x
+                > app.move_showcase.world().player_two.position.x
+        );
+    }
+
+    #[test]
+    fn showcase_preserves_pressed_keys_until_a_fixed_tick_and_steps_once_when_paused() {
+        let mut app = App::default();
+        let mut audio = AudioPlayer::disabled();
+        app.update_move_showcase(
+            FIXED_TIMESTEP * 0.25,
+            CombatLabInput {
+                pause_toggle: true,
+                ..CombatLabInput::default()
+            },
+            &mut audio,
+        );
+        assert!(!app.move_showcase.paused());
+        app.update_move_showcase(FIXED_TIMESTEP * 0.75, CombatLabInput::default(), &mut audio);
+        assert!(app.move_showcase.paused());
+        assert_eq!(app.move_showcase.current_frame(), 0);
+        app.update_move_showcase(
+            FIXED_TIMESTEP * 3.0,
+            CombatLabInput {
+                step_frame: true,
+                ..CombatLabInput::default()
+            },
+            &mut audio,
+        );
+        assert_eq!(app.move_showcase.current_frame(), 1);
+        assert!(app.move_showcase.take_audio_events().is_empty());
+    }
+
+    #[test]
+    fn fight_button_edges_survive_until_tick_without_repeating_during_catch_up() {
+        let mut pending = PendingFighterInput::default();
+        pending.push(FighterInput {
+            signature_special: true,
+            jump: true,
+            right: true,
+            ..FighterInput::default()
+        });
+        // A render-only frame can refresh held controls before the next fixed tick.
+        pending.push(FighterInput {
+            block: true,
+            left: true,
+            ..FighterInput::default()
+        });
+        let first = pending.take_tick();
+        assert!(first.signature_special && first.jump);
+        assert!(first.left && first.block);
+        assert!(!first.right);
+        let next = pending.take_tick();
+        assert!(!next.signature_special && !next.jump);
+        assert!(next.left && next.block);
+    }
+
+    #[test]
+    fn showcase_page_navigation_preserves_all_defense_scenarios_and_playback_options() {
+        use crate::scenes::move_showcase::ShowcaseScenario;
+
+        for scenario in [
+            ShowcaseScenario::StandingBlock,
+            ShowcaseScenario::OverheadBlock,
+            ShowcaseScenario::CrouchingBlock,
+            ShowcaseScenario::ProjectileBlock,
+        ] {
+            let mut app = App::default();
+            app.move_showcase.select_scenario(scenario);
+            app.move_showcase.toggle_repeat();
+            app.move_showcase.switch_sides();
+            app.move_showcase.update(CombatLabInput {
+                pause_toggle: true,
+                ..CombatLabInput::default()
+            });
+            // PageDown and PageUp use these same transitions, including wraparound.
+            for direction in [CycleDirection::Next, CycleDirection::Previous] {
+                for _ in 0..5 {
+                    let previous = app.move_showcase.character();
+                    app.cycle_showcase_character(direction);
+                    assert_ne!(app.move_showcase.character(), previous);
+                    assert_ne!(app.move_showcase.character(), CharacterId::Go);
+                    assert_eq!(app.move_showcase.scenario(), scenario);
+                    assert_eq!(app.move_showcase.current_frame(), 0);
+                    assert!(app.move_showcase.paused());
+                    assert!(app.move_showcase.repeat_current());
+                    assert!(app.move_showcase.sides_reversed());
+                }
+                assert_eq!(app.move_showcase.character(), CharacterId::Rust);
+            }
+        }
     }
 }
