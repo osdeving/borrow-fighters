@@ -423,15 +423,20 @@ fn signature_lab_playback_uses_real_loadout_and_keeps_go_cycle_supported() {
             lab.fighter().attack_kind(),
             Some(AttackKind::SignatureSpecial)
         );
-        let analysis = lab.advantage().unwrap();
+        lab.update(CombatLabInput {
+            toggle_dummy: true,
+            ..CombatLabInput::default()
+        });
+        assert!(lab.is_signature_actor_preview());
         assert!(
-            analysis.block_advantage < 0,
-            "specials need a punish window"
+            lab.advantage().is_none(),
+            "effect contacts need World simulation"
         );
-        assert_eq!(
-            analysis.contact_frame,
-            lab.fighter().attack_frame_data().unwrap().active_start
-        );
+        assert!(!lab.show_dummy());
+        for _ in 0..120 {
+            assert!(lab.attack_boxes().is_empty());
+            lab.update(CombatLabInput::default());
+        }
     }
     let mut go = CombatLab::new(CombatLabOptions {
         character: CharacterId::Go,
@@ -455,4 +460,45 @@ fn signature_lab_playback_uses_real_loadout_and_keeps_go_cycle_supported() {
         CombatLabMove::from_cli("special"),
         Some(CombatLabMove::Projectile)
     );
+}
+
+#[test]
+fn lab_sweeps_use_the_same_low_geometry_as_the_match_with_baseline_metadata() {
+    for character in [
+        CharacterId::Rust,
+        CharacterId::Duke,
+        CharacterId::C,
+        CharacterId::Python,
+        CharacterId::Cpp,
+    ] {
+        let baseline = SpriteManifest::load(format!(
+            "assets/placeholder/{}-fighter.sprite.json",
+            character.audio_key()
+        ))
+        .unwrap();
+        let mut lab = CombatLab::new(CombatLabOptions {
+            character,
+            selected_move: CombatLabMove::Sweep,
+            ..CombatLabOptions::default()
+        });
+        lab.set_combat_manifest(Some(baseline));
+        let mut active_frames = 0;
+        for _ in 0..70 {
+            lab.update(CombatLabInput::default());
+            if lab.fighter().active_hitbox().is_some() {
+                active_frames += 1;
+                assert_eq!(
+                    lab.attack_boxes(),
+                    lab.fighter().attack_box().into_iter().collect::<Vec<_>>()
+                );
+                assert_eq!(lab.hurtboxes(), lab.fighter().hurtboxes().rects());
+                assert!(
+                    lab.attack_boxes()
+                        .iter()
+                        .all(|area| area.y >= borrow_fighters::config::FLOOR_Y - world_px(43.0))
+                );
+            }
+        }
+        assert!(active_frames > 0, "{character:?}");
+    }
 }

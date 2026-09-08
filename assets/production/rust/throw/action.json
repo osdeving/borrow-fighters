@@ -1,83 +1,101 @@
 {
   "action": "throw",
-  "source": "throw/source-v2.png",
-  "sheet": "throw/cleaned-v2.png",
+  "source": "throw/source-spectacle-v3.png",
+  "sheet": "throw/mapped-spectacle-v3.png",
   "reviewed": true,
   "loop": false,
-  "status": "reviewed visual and functional pilot; see ../finalization-review.md for evidence and limits",
-  "source_body_height_reference_px": 498,
-  "normalization_note": "Approximate upright-body reference; do not scale each frame by its own alpha bounds. Air pivots are virtual standing-floor anchors beneath hips, not boot tips. Ground pivots are proposed and require foot-support review after normalization.",
-  "combat_timing": {
-    "move_id": "RustOwnershipThrow",
-    "input": "Throw",
-    "duration": 20,
-    "active_start": 5,
-    "active_end_inclusive": 7,
-    "whiff_recovery": 12,
-    "clip": "throw"
-  },
+  "status": "runtime_reviewed",
   "frames": [
     {
-      "name": "throw_0",
+      "name": "throw_00",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 540,
-        "h": 768
+        "w": 530,
+        "h": 543
       },
       "pivot": {
-        "x": 315,
-        "y": 660
+        "x": 277,
+        "y": 480
       },
-      "duration_ms": 83,
+      "duration_ms": 166,
       "phase": "startup"
     },
     {
-      "name": "throw_1",
+      "name": "throw_01",
       "source_rect": {
-        "x": 540,
+        "x": 530,
         "y": 0,
-        "w": 560,
-        "h": 768
+        "w": 435,
+        "h": 543
       },
       "pivot": {
-        "x": 242,
-        "y": 660
-      },
-      "duration_ms": 50,
-      "phase": "active"
-    },
-    {
-      "name": "throw_2",
-      "source_rect": {
-        "x": 1100,
-        "y": 0,
-        "w": 430,
-        "h": 768
-      },
-      "pivot": {
-        "x": 188,
-        "y": 661
+        "x": 155,
+        "y": 480
       },
       "duration_ms": 100,
-      "phase": "recovery"
+      "phase": "capture"
     },
     {
-      "name": "throw_3",
+      "name": "throw_02",
       "source_rect": {
-        "x": 1530,
+        "x": 965,
         "y": 0,
-        "w": 518,
-        "h": 768
+        "w": 483,
+        "h": 543
       },
       "pivot": {
         "x": 220,
-        "y": 661
+        "y": 480
       },
       "duration_ms": 100,
+      "phase": "capture"
+    },
+    {
+      "name": "throw_03",
+      "source_rect": {
+        "x": 0,
+        "y": 543,
+        "w": 480,
+        "h": 543
+      },
+      "pivot": {
+        "x": 276,
+        "y": 420
+      },
+      "duration_ms": 67,
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_04",
+      "source_rect": {
+        "x": 480,
+        "y": 543,
+        "w": 485,
+        "h": 543
+      },
+      "pivot": {
+        "x": 175,
+        "y": 420
+      },
+      "duration_ms": 133,
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_05",
+      "source_rect": {
+        "x": 965,
+        "y": 543,
+        "w": 483,
+        "h": 543
+      },
+      "pivot": {
+        "x": 204,
+        "y": 420
+      },
+      "duration_ms": 234,
       "phase": "recovery"
     }
   ],
-  "review_notes": "v2 shortens the active grasp by naturally bending both elbows. Forward hand is inside the original Ownership reach; other hand stays near the chest. Ground anchors, scale and all durations unchanged. Generated RGB checkerboard removed offline; source preserved. Static contact and silhouette reviewed; Native verification complete; see ../finalization-review.md.",
-  "finalization_review": "../finalization-review.md"
+  "review_notes": "Six newly drawn back-throw poses. v2 corrects release hands to throw behind LEFT; other poses preserve identity. Fixed10..12 contact,12fcapture, releasevisual22; originalmapping archived. Uniform scale0.7 and explicit foot pivots. v3 replaces only lift pose2: open supporting hands reach forward above forehead toward the captured body, instead of clasping behind the head. Other five source crops remain byte-identical to v2. See throw/mapping-spectacle-v3.json."
 }

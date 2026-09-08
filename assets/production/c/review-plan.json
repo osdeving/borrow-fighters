@@ -88,8 +88,9 @@
     },
     "throw": {
       "approved": true,
-      "scale_to_runtime": 0.4253968253968254,
-      "notes": "Generated source poses inspected; elderly identity, denim and continuous C book preserved. Approved for candidate preview export, not final art release."
+      "scale_to_runtime": 0.62,
+      "sheet": "throw/keyed-spectacle-v1.png",
+      "notes": "September spectacle: 6 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md."
     },
     "special": {
       "approved": true,
@@ -113,13 +114,32 @@
     },
     "signature_special": {
       "approved": true,
-      "scale_to_runtime": 0.5317460317460317,
-      "notes": "Four actual generated Pointer Lance poses, distinct from book projectile. Source v2 lowers pointing arm to lower chest/waist for real contact at height matching new MoveSpec and uses magenta matte. Pointer tip source(1140,393) projects near (+220,-133.5), within initial runtime box. Uniform268/504 matches idle standing height, feet anchored at644; head drops in active key as knee/torso lunge."
+      "scale_to_runtime": 0.72,
+      "sheet": "signature_special/keyed-spectacle-v1.png",
+      "notes": "September spectacle: 8 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md."
     },
     "knockdown": {
       "approved": true,
       "scale_to_runtime": 0.5317460317460317,
       "notes": "Four new backward knockdown keys, one secured blue C book throughout, hair/denim/face intact. Downed key lies on left hip/back instead of generic standing hit. Sole and bracing palm define floor. Uniform268/504 scale. Generic border-connected pale matte extraction preserves outlined white hair, shirt and soles; source RGB retained."
+    },
+    "thrown": {
+      "approved": true,
+      "scale_to_runtime": 0.5,
+      "sheet": "thrown/keyed-spectacle-v1.png",
+      "notes": "September spectacle: 4 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md."
+    },
+    "launched": {
+      "approved": true,
+      "scale_to_runtime": 0.45,
+      "sheet": "launched/keyed-spectacle-v1.png",
+      "notes": "September spectacle: 4 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md."
+    },
+    "heavy_hit": {
+      "approved": true,
+      "scale_to_runtime": 0.44,
+      "sheet": "heavy_hit/keyed-spectacle-v1.png",
+      "notes": "September spectacle: 3 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md."
     }
   }
 }

@@ -1,0 +1,1560 @@
+{
+  "render_size": [
+    1280,
+    720
+  ],
+  "reversed": true,
+  "scenarios": [
+    {
+      "captures": [
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_00",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                468.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f001.png",
+          "result": "Pending",
+          "tick": 1
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_1",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                709.1851196289062,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                468.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f031.png",
+          "result": "Pending",
+          "tick": 31
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_2",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                692.8887329101562,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                468.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f036.png",
+          "result": "Pending",
+          "tick": 36
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_3",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                656.0739135742188,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                468.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f042.png",
+          "result": "Pending",
+          "tick": 42
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_3",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                618.7405395507812,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                468.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f048.png",
+          "result": "Pending",
+          "tick": 48
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_0",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                612.518310546875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                468.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f049.png",
+          "result": "Pending",
+          "tick": 49
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "throw",
+              "crouching": false,
+              "frame": "throw_spectacle_00",
+              "frame_clip": "throw",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                588.5923461914062,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                468.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f053.png",
+          "result": "Pending",
+          "tick": 53
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "throw",
+              "crouching": false,
+              "frame": "throw_spectacle_01",
+              "frame_clip": "throw",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                579.6294555664062,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": true,
+              "character": "python",
+              "clip": "thrown",
+              "crouching": false,
+              "frame": "thrown_00",
+              "frame_clip": "thrown",
+              "grounded": true,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                467.62945556640625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f062.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 62
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "throw",
+              "crouching": false,
+              "frame": "throw_spectacle_02",
+              "frame_clip": "throw",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                579.6294555664062,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": true,
+              "character": "python",
+              "clip": "thrown",
+              "crouching": false,
+              "frame": "thrown_00",
+              "frame_clip": "thrown",
+              "grounded": true,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                502.2359313964844,
+                295.7037048339844
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f067.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 67
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "throw",
+              "crouching": false,
+              "frame": "throw_spectacle_02",
+              "frame_clip": "throw",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                579.6294555664062,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": true,
+              "character": "python",
+              "clip": "thrown",
+              "crouching": false,
+              "frame": "thrown_00",
+              "frame_clip": "thrown",
+              "grounded": true,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                513.6294555664062,
+                264.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f068.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 68
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "throw",
+              "crouching": false,
+              "frame": "throw_spectacle_03",
+              "frame_clip": "throw",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                579.6294555664062,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "thrown",
+              "crouching": false,
+              "frame": "thrown_01",
+              "frame_clip": "thrown",
+              "grounded": false,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                559.6294555664062,
+                136.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f074.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 74
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "throw",
+              "crouching": false,
+              "frame": "throw_spectacle_04",
+              "frame_clip": "throw",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                579.6294555664062,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "thrown",
+              "crouching": false,
+              "frame": "thrown_01",
+              "frame_clip": "thrown",
+              "grounded": false,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                613.2958374023438,
+                108.33332061767578
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f084.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 84
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "throw",
+              "crouching": false,
+              "frame": "throw_spectacle_04",
+              "frame_clip": "throw",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                579.6294555664062,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "thrown",
+              "crouching": false,
+              "frame": "thrown_02",
+              "frame_clip": "thrown",
+              "grounded": false,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                618.6624755859375,
+                108.92776489257812
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f085.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 85
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "throw",
+              "crouching": false,
+              "frame": "throw_spectacle_05",
+              "frame_clip": "throw",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                579.6294555664062,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "thrown",
+              "crouching": false,
+              "frame": "thrown_02",
+              "frame_clip": "thrown",
+              "grounded": false,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                656.2289428710938,
+                130.19998168945312
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f092.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 92
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "throw",
+              "crouching": false,
+              "frame": "throw_spectacle_05",
+              "frame_clip": "throw",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                579.6294555664062,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "thrown",
+              "crouching": false,
+              "frame": "thrown_03",
+              "frame_clip": "thrown",
+              "grounded": false,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                683.0621337890625,
+                163.72776794433594
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f097.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 97
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "throw",
+              "crouching": false,
+              "frame": "throw_spectacle_05",
+              "frame_clip": "throw",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "thrown",
+              "crouching": false,
+              "frame": "thrown_03",
+              "frame_clip": "thrown",
+              "grounded": false,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                690.0291137695312,
+                172.26666259765625
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f098.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 98
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "thrown",
+              "crouching": false,
+              "frame": "thrown_03",
+              "frame_clip": "thrown",
+              "grounded": false,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                706.1290283203125,
+                201.54998779296875
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f101.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 101
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "thrown",
+              "crouching": false,
+              "frame": "thrown_03",
+              "frame_clip": "thrown",
+              "grounded": false,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                754.4287719726562,
+                322.39996337890625
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f110.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 110
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_01",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f114.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 114
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_01",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f116.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 116
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_01",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f126.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 126
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_02",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f128.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 128
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_02",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f130.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 130
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_03",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f138.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 138
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_03",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 85,
+              "hitstun": true,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f145.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 145
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_00",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 85,
+              "hitstun": false,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f150.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 150
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 85,
+              "hitstun": false,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f156.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 156
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 85,
+              "hitstun": false,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f159.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 159
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 85,
+              "hitstun": false,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f173.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 173
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 85,
+              "hitstun": false,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f188.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 188
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 85,
+              "hitstun": false,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f202.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 202
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 85,
+              "hitstun": false,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f217.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 217
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 85,
+              "hitstun": false,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f231.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 231
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 85,
+              "hitstun": false,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f245.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 245
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                578.0291137695312,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 85,
+              "hitstun": false,
+              "position": [
+                775.8953247070312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "c-09-attackthrow-f259.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 259
+        }
+      ],
+      "character": "c",
+      "contact_frame": 62,
+      "result": "Hit { damage: 11 }",
+      "scenario": "Attack(Throw)",
+      "scenario_label": "Back throw / punish guard and switch sides"
+    }
+  ],
+  "raw_capture_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/c-throw-right",
+  "raw_images_are_external_to_this_report": true
+}

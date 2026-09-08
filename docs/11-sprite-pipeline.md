@@ -84,11 +84,11 @@ Esses valores sao medidos em pixels locais do frame do atlas, nao em coordenadas
 - `hit`
 - `knockdown` (cinco personagens do MVP)
 - `special` (conjuração de projétil)
-- `signature_special` (cinco personagens do MVP)
+- `signature_special`, `heavy_hit`, `launched` e `thrown` (cinco personagens do MVP)
 - `victory`
 - `defeat`
 
-Os cinco personagens selecionáveis exigem 22 clips para ativar um atlas completo, incluindo o especial de assinatura e queda/recuperação. Go conserva os 20 clips anteriores nesta rodada. O loader e os testes compartilham `FighterSpriteClip::required_for_character`. `taunt` continua como compatibilidade para vitoria nos placeholders; `projectile` pode existir como material de efeito separado. A matriz de producao por personagem fica em [19 — Cobertura de producao](19-sprite-production-coverage.md).
+Os cinco personagens selecionáveis exigem 25 clips para ativar um atlas completo, incluindo assinatura, queda/recuperação, impacto pesado, lançamento e vítima arremessada. Go conserva os 20 clips anteriores nesta rodada. O loader e os testes compartilham `FighterSpriteClip::required_for_character`. `taunt` continua como compatibilidade para vitoria nos placeholders; `projectile` pode existir como material de efeito separado. A matriz de producao por personagem fica em [19 — Cobertura de producao](19-sprite-production-coverage.md).
 
 `spawn` e reservado para entrada cinematografica no inicio da luta. Ele deve ser nao-loopavel e nao deve carregar regra de combate; o jogo pausa os inputs durante a intro e depois durante a contagem `11`, `10`, `01`, `Fight!`.
 
@@ -307,3 +307,11 @@ O corte atual e viewer com ajuste controlado de escala, pivot, corpo fisico e me
 `signature_special` precisa ter antecipação, contato e recuperação próprios para o especial do loadout. Os limites dos frames ativos devem coincidir com `MoveSpec` a 60 Hz; `tests/sprite_candidates.rs` verifica todos os ticks e a duração total. `knockdown` contém queda, permanência no chão, apoio para levantar e retorno à guarda em 600 ms. O relógio começa no impacto e termina junto da recuperação protegida.
 
 As rasteiras dos cinco foram geradas novamente para a nova postura baixa. O pé ativo deve atravessar a região dos tornozelos; não basta descer a caixa mantendo um chute alto. Fontes anteriores, prompts, versões, escala uniforme por ação, recortes e pivots permanecem em `assets/production/<personagem>/`. A validação de contato ocorre no showcase com oponente e nos dois lados; logs bem-sucedidos não substituem a inspeção da imagem. Ver [rodada de MVP](20-mvp-combat-showcase.md).
+
+## Assinaturas, arremessos e reações aéreas
+
+A [rodada de assinatura](21-signature-spectacle-and-throws.md) exige oito poses por `signature_special` e seis quadros em `<personagem>-signature-fx.sprite.json`. O atlas de efeitos usa o mesmo schema, com `projectile` em loop e `impact` de execução única. Pivôs representam o centro do papel/foguete ou o apoio no chão de barreira/erupção/vórtice/explosão. A escala é explícita; o renderer não redimensiona cada pose automaticamente. A posição e a geometria de dano vêm das entidades em `World`, sem metadados de ataque desenhados no atlas.
+
+`throw` tem seis poses e 800 ms nos cinco. O contato continua restrito aos ticks10..12; durante uma captura real o relógio ofensivo congela, enquanto as poses de segurar/levantar avançam até a soltura visual no tick22. Os testes permitem a fase artística `capture` sem estender a janela de colisão. `thrown` começa com uma pose de captura de200 ms, sustentada enquanto a vítima está presa; a soltura começa no segundo quadro invertido. `launched` tem impacto/ascensão/ápice/descida, seguido por `knockdown` ao tocar o chão. `heavy_hit` distingue golpes pesados dos leves.
+
+Durante a descida, o renderer usa `trimmed_bounds` para aproximar gradualmente a parte inferior visível da base física nos últimos100 pixels base antes do chão. Isso preserva o pivô corporal no voo alto e evita que uma pose horizontal flutue no impacto. Ao aterrissar de um lançamento, a reprodução de `knockdown` começa no quadro já caído (100 ms), conservando os36 frames de proteção.

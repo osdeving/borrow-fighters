@@ -917,56 +917,101 @@
       "loop": false,
       "frames": [
         {
-          "name": "throw_00",
+          "name": "throw_spectacle_00",
           "source_rect": {
             "x": 0,
             "y": 0,
-            "w": 270,
-            "h": 290
+            "w": 317,
+            "h": 310
           },
           "pivot": {
-            "x": 168,
+            "x": 174,
             "y": 267
           },
-          "duration_ms": 150,
+          "duration_ms": 166,
           "phase": "startup"
         },
         {
-          "name": "throw_01",
+          "name": "throw_spectacle_01",
           "source_rect": {
-            "x": 276,
+            "x": 317,
             "y": 0,
-            "w": 262,
-            "h": 290
+            "w": 317,
+            "h": 310
           },
           "pivot": {
-            "x": 105,
+            "x": 172,
             "y": 267
           },
-          "duration_ms": 50,
-          "phase": "active"
+          "duration_ms": 83,
+          "phase": "capture"
         },
         {
-          "name": "throw_02",
+          "name": "throw_spectacle_02",
           "source_rect": {
-            "x": 552,
+            "x": 634,
             "y": 0,
-            "w": 276,
-            "h": 290
+            "w": 317,
+            "h": 310
           },
           "pivot": {
-            "x": 80,
-            "y": 267
+            "x": 115,
+            "y": 268
           },
-          "duration_ms": 300,
+          "duration_ms": 117,
+          "phase": "capture"
+        },
+        {
+          "name": "throw_spectacle_03",
+          "source_rect": {
+            "x": 951,
+            "y": 0,
+            "w": 317,
+            "h": 325
+          },
+          "pivot": {
+            "x": 185,
+            "y": 272
+          },
+          "duration_ms": 167,
+          "phase": "recovery"
+        },
+        {
+          "name": "throw_spectacle_04",
+          "source_rect": {
+            "x": 1268,
+            "y": 0,
+            "w": 317,
+            "h": 325
+          },
+          "pivot": {
+            "x": 148,
+            "y": 273
+          },
+          "duration_ms": 133,
+          "phase": "recovery"
+        },
+        {
+          "name": "throw_spectacle_05",
+          "source_rect": {
+            "x": 1585,
+            "y": 0,
+            "w": 317,
+            "h": 325
+          },
+          "pivot": {
+            "x": 131,
+            "y": 272
+          },
+          "duration_ms": 134,
           "phase": "recovery"
         }
       ],
       "provenance": {
         "source_action": "throw/action.json",
-        "source_sheet": "throw/keyed.png",
-        "scale_to_runtime": 0.3946540880503145,
-        "review": "Own open/short-grab/pullback poses without fixed victim. Farthest active fingertips approximately+309source px ->+122world px, within the actual far edge+125.3world px. Open hands at torso height; scale normalizes source standing height636px. Timing150/50/300ms follows9–11/30f inclusive."
+        "source_sheet": "throw/mapped-spectacle-v3.png",
+        "scale_to_runtime": 0.62,
+        "review": "September spectacle: 6 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md. Actual gameplay capture showed missing hand contact during lift. Third pose regenerated with raised supporting arms; only that rectangle uses v3, other five remain original v2 crops."
       }
     },
     "special": {
@@ -1207,71 +1252,131 @@
       "loop": false,
       "frames": [
         {
-          "name": "signature_special_mvp_00",
+          "name": "signature_special_spectacle_00",
           "source_rect": {
             "x": 0,
             "y": 0,
-            "w": 250,
-            "h": 384
+            "w": 336,
+            "h": 308
           },
           "pivot": {
-            "x": 118,
-            "y": 312
+            "x": 196,
+            "y": 284
           },
-          "duration_ms": 366,
+          "duration_ms": 130,
           "phase": "startup"
         },
         {
-          "name": "signature_special_mvp_01",
+          "name": "signature_special_spectacle_01",
           "source_rect": {
-            "x": 255,
+            "x": 349,
             "y": 0,
-            "w": 255,
-            "h": 384
+            "w": 259,
+            "h": 308
           },
           "pivot": {
-            "x": 105,
-            "y": 312
+            "x": 115,
+            "y": 283
           },
-          "duration_ms": 117,
+          "duration_ms": 150,
+          "phase": "startup"
+        },
+        {
+          "name": "signature_special_spectacle_02",
+          "source_rect": {
+            "x": 698,
+            "y": 0,
+            "w": 315,
+            "h": 308
+          },
+          "pivot": {
+            "x": 119,
+            "y": 284
+          },
+          "duration_ms": 153,
+          "phase": "startup"
+        },
+        {
+          "name": "signature_special_spectacle_03",
+          "source_rect": {
+            "x": 1047,
+            "y": 0,
+            "w": 325,
+            "h": 308
+          },
+          "pivot": {
+            "x": 77,
+            "y": 283
+          },
+          "duration_ms": 167,
           "phase": "active"
         },
         {
-          "name": "signature_special_mvp_02",
+          "name": "signature_special_spectacle_04",
           "source_rect": {
-            "x": 510,
+            "x": 1396,
             "y": 0,
-            "w": 225,
-            "h": 384
+            "w": 340,
+            "h": 309
           },
           "pivot": {
-            "x": 100,
-            "y": 316
+            "x": 115,
+            "y": 260
           },
-          "duration_ms": 192,
+          "duration_ms": 183,
+          "phase": "active"
+        },
+        {
+          "name": "signature_special_spectacle_05",
+          "source_rect": {
+            "x": 1745,
+            "y": 0,
+            "w": 349,
+            "h": 309
+          },
+          "pivot": {
+            "x": 160,
+            "y": 262
+          },
+          "duration_ms": 250,
           "phase": "recovery"
         },
         {
-          "name": "signature_special_mvp_03",
+          "name": "signature_special_spectacle_06",
           "source_rect": {
-            "x": 765,
+            "x": 2094,
             "y": 0,
-            "w": 230,
-            "h": 384
+            "w": 245,
+            "h": 309
           },
           "pivot": {
             "x": 105,
-            "y": 312
+            "y": 267
           },
-          "duration_ms": 192,
+          "duration_ms": 267,
+          "phase": "recovery"
+        },
+        {
+          "name": "signature_special_spectacle_07",
+          "source_rect": {
+            "x": 2443,
+            "y": 0,
+            "w": 297,
+            "h": 309
+          },
+          "pivot": {
+            "x": 154,
+            "y": 267
+          },
+          "duration_ms": 367,
           "phase": "recovery"
         }
       ],
       "provenance": {
         "source_action": "signature_special/action.json",
-        "source_sheet": "signature_special/keyed-v2.png",
-        "scale_to_runtime": 0.5,
-        "review": "Four actual generated GC Slam poses: raised double fist, descending contact, low follow-through, guard. No projectile alias. Source v2 replaces painted checker matte through imagegen so steam survives generic magenta alpha extraction. Uniform 0.5 scale matches standing silhouette and nose. Active fist center source(880,525) projects to (+75,-50); cyan/gold downward trace extends above contact. All 20 original clips preserved except intentionally corrected sweep."
+        "source_sheet": "signature_special/keyed-spectacle-v1.png",
+        "scale_to_runtime": 0.7,
+        "review": "September spectacle: 8 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md."
       }
     },
     "knockdown": {
@@ -1345,6 +1450,210 @@
         "source_sheet": "knockdown/keyed-v2.png",
         "scale_to_runtime": 0.56,
         "review": "Four distinct physical reaction poses: backward loss of balance, landing, low seated recovery, pushing up. First key uses virtual floor below the airborne shoes. Uniform 0.56 scale keeps nose near idle size; mascot deforms on landing. All steam and white torso retained by imagegen magenta-matte revision; generic keyer never uses Rust-specific contour."
+      }
+    },
+    "thrown": {
+      "sheet": "thrown/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "thrown_spectacle_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 272,
+            "h": 362
+          },
+          "pivot": {
+            "x": 140,
+            "y": 290
+          },
+          "duration_ms": 200,
+          "phase": "capture"
+        },
+        {
+          "name": "thrown_spectacle_01",
+          "source_rect": {
+            "x": 298,
+            "y": 0,
+            "w": 244,
+            "h": 362
+          },
+          "pivot": {
+            "x": 124,
+            "y": 295
+          },
+          "duration_ms": 180,
+          "phase": "inverted"
+        },
+        {
+          "name": "thrown_spectacle_02",
+          "source_rect": {
+            "x": 596,
+            "y": 0,
+            "w": 272,
+            "h": 362
+          },
+          "pivot": {
+            "x": 135,
+            "y": 285
+          },
+          "duration_ms": 200,
+          "phase": "tumble"
+        },
+        {
+          "name": "thrown_spectacle_03",
+          "source_rect": {
+            "x": 894,
+            "y": 0,
+            "w": 298,
+            "h": 362
+          },
+          "pivot": {
+            "x": 152,
+            "y": 352
+          },
+          "duration_ms": 300,
+          "phase": "descent"
+        }
+      ],
+      "provenance": {
+        "source_action": "thrown/action.json",
+        "source_sheet": "thrown/keyed-spectacle-v2.png",
+        "scale_to_runtime": 0.5,
+        "review": "September spectacle: 4 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md."
+      }
+    },
+    "launched": {
+      "sheet": "launched/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "launched_spectacle_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 295,
+            "h": 362
+          },
+          "pivot": {
+            "x": 161,
+            "y": 281
+          },
+          "duration_ms": 120,
+          "phase": "impact"
+        },
+        {
+          "name": "launched_spectacle_01",
+          "source_rect": {
+            "x": 295,
+            "y": 0,
+            "w": 275,
+            "h": 362
+          },
+          "pivot": {
+            "x": 134,
+            "y": 294
+          },
+          "duration_ms": 180,
+          "phase": "rise"
+        },
+        {
+          "name": "launched_spectacle_02",
+          "source_rect": {
+            "x": 590,
+            "y": 0,
+            "w": 278,
+            "h": 362
+          },
+          "pivot": {
+            "x": 122,
+            "y": 284
+          },
+          "duration_ms": 180,
+          "phase": "apex"
+        },
+        {
+          "name": "launched_spectacle_03",
+          "source_rect": {
+            "x": 885,
+            "y": 0,
+            "w": 286,
+            "h": 434
+          },
+          "pivot": {
+            "x": 141,
+            "y": 414
+          },
+          "duration_ms": 300,
+          "phase": "descent"
+        }
+      ],
+      "provenance": {
+        "source_action": "launched/action.json",
+        "source_sheet": "launched/normalized-spectacle-v2.png",
+        "scale_to_runtime": 0.5,
+        "review": "September spectacle: 4 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md. Final descending source figure uniformly normalized1.2 to preserve red-nose/body size; no invented pose; see launched/normalization-spectacle.json."
+      }
+    },
+    "heavy_hit": {
+      "sheet": "heavy_hit/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "heavy_hit_spectacle_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 276,
+            "h": 334
+          },
+          "pivot": {
+            "x": 161,
+            "y": 289
+          },
+          "duration_ms": 90,
+          "phase": "impact"
+        },
+        {
+          "name": "heavy_hit_spectacle_01",
+          "source_rect": {
+            "x": 276,
+            "y": 0,
+            "w": 260,
+            "h": 334
+          },
+          "pivot": {
+            "x": 161,
+            "y": 289
+          },
+          "duration_ms": 140,
+          "phase": "stagger"
+        },
+        {
+          "name": "heavy_hit_spectacle_02",
+          "source_rect": {
+            "x": 552,
+            "y": 0,
+            "w": 216,
+            "h": 334
+          },
+          "pivot": {
+            "x": 84,
+            "y": 289
+          },
+          "duration_ms": 170,
+          "phase": "recover"
+        }
+      ],
+      "provenance": {
+        "source_action": "heavy_hit/action.json",
+        "source_sheet": "heavy_hit/keyed-spectacle-v2.png",
+        "scale_to_runtime": 0.4,
+        "review": "September spectacle: 3 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md."
       }
     }
   }

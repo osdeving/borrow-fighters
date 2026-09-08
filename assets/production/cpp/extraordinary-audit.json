@@ -1,0 +1,24 @@
+{
+  "character": "cpp",
+  "status": "runtime_verified_spectacle",
+  "actor_clips": 25,
+  "actor_frames": 88,
+  "signature_fx_frames": 6,
+  "verified_runtime_cases": 14,
+  "runtime_capture_count": 852,
+  "curated_png_count": 12,
+  "runtime_hashes": {
+    "assets/candidates/cpp/cpp-fighter-atlas.png": "95dde5b46cd1b51223bd60fbb3b64c9f7f30a798f06545e1c0aa843fbfd270dc",
+    "assets/candidates/cpp/cpp-fighter.sprite.json": "cc5ea5267320bdfa9ef0e78f71f7e86b5bb079910d5411b2954800c6dcc295d6",
+    "assets/candidates/cpp/cpp-signature-fx-atlas.png": "a2f838e8daa0fbf855a3bab66f9022603effd4c63d354224598d496ac8bb4ad6",
+    "assets/candidates/cpp/cpp-signature-fx.sprite.json": "20e00f5cbd797d63d50be6b99ed401f0e98510230c4d97219e115e8063254cd4"
+  },
+  "action_sha256": {
+    "signature_special": "d5892c2fb1100416694c5d34253a702677f8ed8d6c3403740e1906e365d181a6",
+    "throw": "e03acb3d90a33f6f1604c39dfac73aef9c42ccc1997732396a4fcbcacce51713",
+    "thrown": "84db26359154842360cb580560e8b8f0cbb086f05db3ff6c8d19aa58d7040133",
+    "launched": "822174bdf0969bb420b5b409ab2631ac7f7e7b643243ddea36ec0a42d23265de",
+    "heavy_hit": "2d0ef69347d5f014ac7876621f53b7adec953867f9498d675241f7e30fabfae0"
+  },
+  "report_sha256": "30845d74c1e628a17d1fc456b174ef7d77f47e68b8c84a633ab1bcd04e8a099f"
+}

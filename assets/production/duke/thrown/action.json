@@ -1,0 +1,67 @@
+{
+  "sheet": "thrown/keyed-spectacle-v2.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "thrown_spectacle_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 543,
+        "h": 724
+      },
+      "pivot": {
+        "x": 280,
+        "y": 580
+      },
+      "duration_ms": 200,
+      "phase": "capture"
+    },
+    {
+      "name": "thrown_spectacle_01",
+      "source_rect": {
+        "x": 543,
+        "y": 0,
+        "w": 487,
+        "h": 724
+      },
+      "pivot": {
+        "x": 247,
+        "y": 590
+      },
+      "duration_ms": 180,
+      "phase": "inverted"
+    },
+    {
+      "name": "thrown_spectacle_02",
+      "source_rect": {
+        "x": 1030,
+        "y": 0,
+        "w": 545,
+        "h": 724
+      },
+      "pivot": {
+        "x": 270,
+        "y": 570
+      },
+      "duration_ms": 200,
+      "phase": "tumble"
+    },
+    {
+      "name": "thrown_spectacle_03",
+      "source_rect": {
+        "x": 1575,
+        "y": 0,
+        "w": 597,
+        "h": 724
+      },
+      "pivot": {
+        "x": 305,
+        "y": 705
+      },
+      "duration_ms": 300,
+      "phase": "descent"
+    }
+  ]
+}

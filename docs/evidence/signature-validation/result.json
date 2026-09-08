@@ -1,0 +1,38 @@
+[
+  {
+    "check": "fmt",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0
+  },
+  {
+    "check": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0
+  },
+  {
+    "check": "test",
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "passed": 290,
+    "failed": 0,
+    "ignored": 0
+  }
+]

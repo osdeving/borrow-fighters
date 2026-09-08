@@ -1,0 +1,1351 @@
+{
+  "schema": "borrow-fighters.production.v1",
+  "character": "duke",
+  "scale": 1.0,
+  "provenance": {
+    "status": "candidate",
+    "generator": "built-in imagegen",
+    "identity_reference": "reference/master-existing.png",
+    "combat": "Visual-only candidate; runtime retains baseline combat_manifest.",
+    "scope": "Twenty existing actions; no new mechanics.",
+    "refinement": "Targeted real image_gen revisions; other satisfactory actions reused. Rejected source variants and old action/plan snapshots preserved."
+  },
+  "actions": {
+    "idle": {
+      "sheet": "idle/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 213,
+            "h": 320
+          },
+          "pivot": {
+            "x": 113,
+            "y": 276
+          },
+          "duration_ms": 175,
+          "phase": "breathing"
+        },
+        {
+          "name": "idle_01",
+          "source_rect": {
+            "x": 241,
+            "y": 0,
+            "w": 203,
+            "h": 320
+          },
+          "pivot": {
+            "x": 100,
+            "y": 278
+          },
+          "duration_ms": 175,
+          "phase": "breathing"
+        },
+        {
+          "name": "idle_02",
+          "source_rect": {
+            "x": 482,
+            "y": 0,
+            "w": 196,
+            "h": 320
+          },
+          "pivot": {
+            "x": 96,
+            "y": 278
+          },
+          "duration_ms": 175,
+          "phase": "breathing"
+        },
+        {
+          "name": "idle_03",
+          "source_rect": {
+            "x": 723,
+            "y": 0,
+            "w": 241,
+            "h": 320
+          },
+          "pivot": {
+            "x": 100,
+            "y": 278
+          },
+          "duration_ms": 175,
+          "phase": "breathing"
+        }
+      ],
+      "provenance": {
+        "source_action": "idle/action.json",
+        "source_sheet": "idle/keyed.png",
+        "scale_to_runtime": 0.4169435215946844,
+        "review": "Four actual breathing poses reviewed against original master; nose/emblem/steam and black limbs preserved. Crops explicitly avoid adjacent poses. Alpha keyed without Rust contour. Target first idle visible height251world px; feet anchored individually."
+      }
+    },
+    "walk": {
+      "sheet": "walk/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 334,
+            "h": 375
+          },
+          "pivot": {
+            "x": 146,
+            "y": 325
+          },
+          "duration_ms": 112,
+          "phase": "near_leg_contact"
+        },
+        {
+          "name": "walk_01",
+          "source_rect": {
+            "x": 334,
+            "y": 0,
+            "w": 334,
+            "h": 375
+          },
+          "pivot": {
+            "x": 146,
+            "y": 325
+          },
+          "duration_ms": 113,
+          "phase": "far_leg_passage"
+        },
+        {
+          "name": "walk_02",
+          "source_rect": {
+            "x": 668,
+            "y": 0,
+            "w": 334,
+            "h": 375
+          },
+          "pivot": {
+            "x": 146,
+            "y": 325
+          },
+          "duration_ms": 112,
+          "phase": "far_leg_contact"
+        },
+        {
+          "name": "walk_03",
+          "source_rect": {
+            "x": 1002,
+            "y": 0,
+            "w": 334,
+            "h": 375
+          },
+          "pivot": {
+            "x": 146,
+            "y": 325
+          },
+          "duration_ms": 113,
+          "phase": "near_leg_passage"
+        }
+      ],
+      "provenance": {
+        "source_action": "walk/action.json",
+        "source_sheet": "walk/selected-v1.png",
+        "scale_to_runtime": 0.4169435215946844,
+        "review": "Four genuinely different generated poses assembled from v5/v7/v6. v7 preserves opposite-contact v4 with safe magenta matte; checker extraction of v4 damaged white belly and was rejected. Alternating near/far contact and passage. Single-pose sources normalized uniformly0.49, then common runtime scale0.4169435. Original112/113/112/113ms total450ms."
+      }
+    },
+    "crouch": {
+      "sheet": "crouch/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "crouch_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 294,
+            "h": 320
+          },
+          "pivot": {
+            "x": 196,
+            "y": 285
+          },
+          "duration_ms": 80,
+          "phase": "lowering"
+        },
+        {
+          "name": "crouch_01",
+          "source_rect": {
+            "x": 294,
+            "y": 0,
+            "w": 277,
+            "h": 320
+          },
+          "pivot": {
+            "x": 152,
+            "y": 284
+          },
+          "duration_ms": 200,
+          "phase": "held_crouch"
+        }
+      ],
+      "provenance": {
+        "source_action": "crouch/action.json",
+        "source_sheet": "crouch/keyed.png",
+        "scale_to_runtime": 0.4169435215946844,
+        "review": "Selected two genuinely different poses: entering and low held squat. Third source pose near-duplicate deliberately omitted. Full squat solid body about315px ->131world px near existing128px body; steam remains above. Nose and outline preserved."
+      }
+    },
+    "jump": {
+      "sheet": "jump/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "jump_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 196,
+            "h": 307
+          },
+          "pivot": {
+            "x": 90,
+            "y": 292
+          },
+          "duration_ms": 60,
+          "phase": "takeoff"
+        },
+        {
+          "name": "jump_01",
+          "source_rect": {
+            "x": 312,
+            "y": 0,
+            "w": 248,
+            "h": 320
+          },
+          "pivot": {
+            "x": 136,
+            "y": 292
+          },
+          "duration_ms": 340,
+          "phase": "rise"
+        },
+        {
+          "name": "jump_02",
+          "source_rect": {
+            "x": 624,
+            "y": 0,
+            "w": 312,
+            "h": 320
+          },
+          "pivot": {
+            "x": 113,
+            "y": 292
+          },
+          "duration_ms": 400,
+          "phase": "fall"
+        }
+      ],
+      "provenance": {
+        "source_action": "jump/action.json",
+        "source_sheet": "jump/keyed.png",
+        "scale_to_runtime": 0.4169435215946844,
+        "review": "Three useful airborne poses takeoff/rise/fall; last legs extended in air, no landing squat. Timings60/340/400ms per current~0.8s flight. Virtual baseline y700 retains soles above support in all drawings, physics supplies displacement. Tiny drawn takeoff motion strokes retained from original generation."
+      }
+    },
+    "block": {
+      "sheet": "block/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "block_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 273,
+            "h": 307
+          },
+          "pivot": {
+            "x": 129,
+            "y": 269
+          },
+          "duration_ms": 80,
+          "phase": "guard"
+        },
+        {
+          "name": "block_01",
+          "source_rect": {
+            "x": 273,
+            "y": 0,
+            "w": 273,
+            "h": 307
+          },
+          "pivot": {
+            "x": 136,
+            "y": 270
+          },
+          "duration_ms": 100,
+          "phase": "absorb"
+        },
+        {
+          "name": "block_02",
+          "source_rect": {
+            "x": 546,
+            "y": 0,
+            "w": 273,
+            "h": 307
+          },
+          "pivot": {
+            "x": 89,
+            "y": 270
+          },
+          "duration_ms": 180,
+          "phase": "held_guard"
+        }
+      ],
+      "provenance": {
+        "source_action": "block/action.json",
+        "source_sheet": "block/keyed.png",
+        "scale_to_runtime": 0.4,
+        "review": "Immediate open-palm/front forearm guard, lean-back absorption, held guard. Gesture communicates defense without baked shield or spark. Uniform scale matches solid cone-to-shoe idle height; support pivots under feet."
+      }
+    },
+    "crouch_block": {
+      "sheet": "crouch_block/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "crouch_block_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 284,
+            "h": 320
+          },
+          "pivot": {
+            "x": 154,
+            "y": 284
+          },
+          "duration_ms": 80,
+          "phase": "low_guard"
+        },
+        {
+          "name": "crouch_block_01",
+          "source_rect": {
+            "x": 285,
+            "y": 0,
+            "w": 285,
+            "h": 320
+          },
+          "pivot": {
+            "x": 143,
+            "y": 284
+          },
+          "duration_ms": 100,
+          "phase": "low_absorb"
+        },
+        {
+          "name": "crouch_block_02",
+          "source_rect": {
+            "x": 570,
+            "y": 0,
+            "w": 285,
+            "h": 320
+          },
+          "pivot": {
+            "x": 115,
+            "y": 284
+          },
+          "duration_ms": 180,
+          "phase": "held_low_guard"
+        }
+      ],
+      "provenance": {
+        "source_action": "crouch_block/action.json",
+        "source_sheet": "crouch_block/keyed-v2.png",
+        "scale_to_runtime": 0.4169435215946844,
+        "review": "New v2 compressed low guard. Original nose/glove/feet scale retained; belly compressed and cone inclined. Original80/100/180ms total360ms."
+      }
+    },
+    "hit": {
+      "sheet": "hit/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hit_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 294,
+            "h": 320
+          },
+          "pivot": {
+            "x": 179,
+            "y": 281
+          },
+          "duration_ms": 65,
+          "phase": "impact"
+        },
+        {
+          "name": "hit_01",
+          "source_rect": {
+            "x": 294,
+            "y": 0,
+            "w": 271,
+            "h": 320
+          },
+          "pivot": {
+            "x": 161,
+            "y": 281
+          },
+          "duration_ms": 85,
+          "phase": "recoil"
+        },
+        {
+          "name": "hit_02",
+          "source_rect": {
+            "x": 588,
+            "y": 0,
+            "w": 289,
+            "h": 320
+          },
+          "pivot": {
+            "x": 109,
+            "y": 281
+          },
+          "duration_ms": 170,
+          "phase": "stagger"
+        }
+      ],
+      "provenance": {
+        "source_action": "hit/action.json",
+        "source_sheet": "hit/keyed.png",
+        "scale_to_runtime": 0.4169435215946844,
+        "review": "Immediate backward jolt, stronger recoil with one shoe raised, forward stagger recovery. Three distinct drawings, no eyes or added injury/effects. Support y673 and original feature scale preserved; hitstun duration remains gameplay data."
+      }
+    },
+    "punch_light": {
+      "sheet": "punch_light/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "punch_light_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 275,
+            "h": 308
+          },
+          "pivot": {
+            "x": 141,
+            "y": 269
+          },
+          "duration_ms": 83,
+          "phase": "startup"
+        },
+        {
+          "name": "punch_light_01",
+          "source_rect": {
+            "x": 281,
+            "y": 0,
+            "w": 267,
+            "h": 308
+          },
+          "pivot": {
+            "x": 110,
+            "y": 269
+          },
+          "duration_ms": 100,
+          "phase": "active"
+        },
+        {
+          "name": "punch_light_02",
+          "source_rect": {
+            "x": 562,
+            "y": 0,
+            "w": 281,
+            "h": 308
+          },
+          "pivot": {
+            "x": 109,
+            "y": 269
+          },
+          "duration_ms": 117,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "punch_light/action.json",
+        "source_sheet": "punch_light/keyed.png",
+        "scale_to_runtime": 0.4016,
+        "review": "Three own startup/contact/recovery drawings. Active glove centered approximately(+267,-295)source px from foot anchor; at0.4016 gives(+107,-118)world inside existingLP box(+50.7,-141.3,77.3,45.3). Final GPU check pending; no new combat metadata."
+      }
+    },
+    "punch_heavy": {
+      "sheet": "punch_heavy/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "punch_heavy_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 285,
+            "h": 320
+          },
+          "pivot": {
+            "x": 125,
+            "y": 277
+          },
+          "duration_ms": 216,
+          "phase": "startup"
+        },
+        {
+          "name": "punch_heavy_01",
+          "source_rect": {
+            "x": 285,
+            "y": 0,
+            "w": 285,
+            "h": 320
+          },
+          "pivot": {
+            "x": 90,
+            "y": 277
+          },
+          "duration_ms": 167,
+          "phase": "active"
+        },
+        {
+          "name": "punch_heavy_02",
+          "source_rect": {
+            "x": 570,
+            "y": 0,
+            "w": 284,
+            "h": 320
+          },
+          "pivot": {
+            "x": 115,
+            "y": 277
+          },
+          "duration_ms": 283,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "punch_heavy/action.json",
+        "source_sheet": "punch_heavy/keyed.png",
+        "scale_to_runtime": 0.4169435215946844,
+        "review": "Windup, longer straight poke, retracted arm. Active glove center roughly(+370,-282)source ->(+154,-118)world inside actual heavy box(+50.7,-144,149.3,58.7). Thin mascot arm intentionally extends farther than jab; no combat metadata added."
+      }
+    },
+    "kick": {
+      "sheet": "kick/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "kick_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 242,
+            "h": 288
+          },
+          "pivot": {
+            "x": 106,
+            "y": 269
+          },
+          "duration_ms": 150,
+          "phase": "startup"
+        },
+        {
+          "name": "kick_01",
+          "source_rect": {
+            "x": 301,
+            "y": 0,
+            "w": 301,
+            "h": 288
+          },
+          "pivot": {
+            "x": 94,
+            "y": 269
+          },
+          "duration_ms": 133,
+          "phase": "active"
+        },
+        {
+          "name": "kick_02",
+          "source_rect": {
+            "x": 602,
+            "y": 0,
+            "w": 257,
+            "h": 288
+          },
+          "pivot": {
+            "x": 124,
+            "y": 269
+          },
+          "duration_ms": 183,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "kick/action.json",
+        "source_sheet": "kick/keyed.png",
+        "scale_to_runtime": 0.3909657320872274,
+        "review": "Selected source-v2 after localized correction lowered the active shoe; original v1 retained as too high. Active shoe center about(+425,-159)source ->(+166,-62)world, inside existing kick box(+50.7,-80,133.3,48). Whole body/support preserved; inspect full GPU contact later."
+      }
+    },
+    "sweep": {
+      "sheet": "sweep/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sweep_mvp_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 220,
+            "h": 310
+          },
+          "pivot": {
+            "x": 102,
+            "y": 267
+          },
+          "duration_ms": 216,
+          "phase": "startup"
+        },
+        {
+          "name": "sweep_mvp_01",
+          "source_rect": {
+            "x": 300,
+            "y": 0,
+            "w": 300,
+            "h": 310
+          },
+          "pivot": {
+            "x": 102,
+            "y": 267
+          },
+          "duration_ms": 167,
+          "phase": "active"
+        },
+        {
+          "name": "sweep_mvp_02",
+          "source_rect": {
+            "x": 600,
+            "y": 0,
+            "w": 205,
+            "h": 310
+          },
+          "pivot": {
+            "x": 88,
+            "y": 267
+          },
+          "duration_ms": 125,
+          "phase": "recovery"
+        },
+        {
+          "name": "sweep_mvp_03",
+          "source_rect": {
+            "x": 900,
+            "y": 0,
+            "w": 220,
+            "h": 310
+          },
+          "pivot": {
+            "x": 106,
+            "y": 267
+          },
+          "duration_ms": 125,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "sweep/action.json",
+        "source_sheet": "sweep/keyed-mvp-v1.png",
+        "scale_to_runtime": 0.5,
+        "review": "MVP low sweep replaces elevated legacy leg. Active black shoe source center(1080,606) projects to (+173,-14), inside new shin/ankle range floor-42.67..floor. Rear glove/foot provide stable floor support. Four genuine articulated images, uniform 0.5 scale. Prior action.json and prepared sheet preserved under snapshots/2026-09-07-before-mvp. Pose still retains iconic cone and steam above compressed torso."
+      }
+    },
+    "overhead": {
+      "sheet": "overhead/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "overhead_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 334,
+            "h": 375
+          },
+          "pivot": {
+            "x": 146,
+            "y": 325
+          },
+          "duration_ms": 250,
+          "phase": "startup"
+        },
+        {
+          "name": "overhead_01",
+          "source_rect": {
+            "x": 334,
+            "y": 0,
+            "w": 334,
+            "h": 375
+          },
+          "pivot": {
+            "x": 146,
+            "y": 325
+          },
+          "duration_ms": 133,
+          "phase": "active"
+        },
+        {
+          "name": "overhead_02",
+          "source_rect": {
+            "x": 668,
+            "y": 0,
+            "w": 334,
+            "h": 375
+          },
+          "pivot": {
+            "x": 146,
+            "y": 325
+          },
+          "duration_ms": 283,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "overhead/action.json",
+        "source_sheet": "overhead/selected-v1.png",
+        "scale_to_runtime": 0.4169435215946844,
+        "review": "New isolated v8 contact has elbow above descending glove inside original box; v6 startup/recovery preserved. Uniform0.53 normalization of isolated contact, then common runtime0.4169435. Original250/133/283ms total666ms."
+      }
+    },
+    "anti_air": {
+      "sheet": "anti_air/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "anti_air_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 272,
+            "h": 391
+          },
+          "pivot": {
+            "x": 136,
+            "y": 357
+          },
+          "duration_ms": 116,
+          "phase": "startup"
+        },
+        {
+          "name": "anti_air_01",
+          "source_rect": {
+            "x": 274,
+            "y": 0,
+            "w": 274,
+            "h": 391
+          },
+          "pivot": {
+            "x": 131,
+            "y": 357
+          },
+          "duration_ms": 134,
+          "phase": "active"
+        },
+        {
+          "name": "anti_air_02",
+          "source_rect": {
+            "x": 548,
+            "y": 0,
+            "w": 272,
+            "h": 391
+          },
+          "pivot": {
+            "x": 119,
+            "y": 357
+          },
+          "duration_ms": 250,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "anti_air/action.json",
+        "source_sheet": "anti_air/keyed.png",
+        "scale_to_runtime": 0.46055045871559636,
+        "review": "Taller source canvas keeps raised fist fully contained. Active glove around(+150,-594)source ->(+69.5,-275)world lies in existing anti-air box(+50.7,-338.7,93.3,109.3). Feet remain planted; recovery distinct from high reach. Normalization from first standing visual height545px."
+      }
+    },
+    "air_punch": {
+      "sheet": "air_punch/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "air_punch_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 294,
+            "h": 307
+          },
+          "pivot": {
+            "x": 163,
+            "y": 276
+          },
+          "duration_ms": 83,
+          "phase": "startup"
+        },
+        {
+          "name": "air_punch_01",
+          "source_rect": {
+            "x": 294,
+            "y": 0,
+            "w": 284,
+            "h": 320
+          },
+          "pivot": {
+            "x": 130,
+            "y": 313
+          },
+          "duration_ms": 150,
+          "phase": "active"
+        },
+        {
+          "name": "air_punch_02",
+          "source_rect": {
+            "x": 588,
+            "y": 0,
+            "w": 277,
+            "h": 307
+          },
+          "pivot": {
+            "x": 111,
+            "y": 288
+          },
+          "duration_ms": 133,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "air_punch/action.json",
+        "source_sheet": "air_punch/keyed.png",
+        "scale_to_runtime": 0.4169435215946844,
+        "review": "Three airborne poses, low forward punch and retraction. Virtual pivots align nose/core across differently placed source drawings; feet remain above anchor. Active glove approximately(+260,-237)source ->(+108,-99)world inside air-punch box(+50.7,-130.7,96,56). GPU comparison pending; no collision changes."
+      }
+    },
+    "air_kick": {
+      "sheet": "air_kick/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "air_kick_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 324,
+            "h": 353
+          },
+          "pivot": {
+            "x": 170,
+            "y": 329
+          },
+          "duration_ms": 116,
+          "phase": "startup"
+        },
+        {
+          "name": "air_kick_01",
+          "source_rect": {
+            "x": 324,
+            "y": 0,
+            "w": 313,
+            "h": 353
+          },
+          "pivot": {
+            "x": 134,
+            "y": 349
+          },
+          "duration_ms": 167,
+          "phase": "active"
+        },
+        {
+          "name": "air_kick_02",
+          "source_rect": {
+            "x": 648,
+            "y": 0,
+            "w": 305,
+            "h": 353
+          },
+          "pivot": {
+            "x": 122,
+            "y": 329
+          },
+          "duration_ms": 150,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "air_kick/action.json",
+        "source_sheet": "air_kick/keyed.png",
+        "scale_to_runtime": 0.46,
+        "review": "Own downward airborne kick. Nose/body width normalized to idle; virtual pivots align nose/core across source poses while bent feet stay above anchor. Active boot center roughly(+190,-153)source ->(+87,-70)world inside actual air-kick box(+50.7,-106.7,117.3,61.3). Whole sole intersects range; validate airborne body placement in GPU capture."
+      }
+    },
+    "throw": {
+      "sheet": "throw/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "throw_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 270,
+            "h": 290
+          },
+          "pivot": {
+            "x": 168,
+            "y": 267
+          },
+          "duration_ms": 150,
+          "phase": "startup"
+        },
+        {
+          "name": "throw_01",
+          "source_rect": {
+            "x": 276,
+            "y": 0,
+            "w": 262,
+            "h": 290
+          },
+          "pivot": {
+            "x": 105,
+            "y": 267
+          },
+          "duration_ms": 50,
+          "phase": "active"
+        },
+        {
+          "name": "throw_02",
+          "source_rect": {
+            "x": 552,
+            "y": 0,
+            "w": 276,
+            "h": 290
+          },
+          "pivot": {
+            "x": 80,
+            "y": 267
+          },
+          "duration_ms": 300,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "throw/action.json",
+        "source_sheet": "throw/keyed.png",
+        "scale_to_runtime": 0.3946540880503145,
+        "review": "Own open/short-grab/pullback poses without fixed victim. Farthest active fingertips approximately+309source px ->+122world px, within the actual far edge+125.3world px. Open hands at torso height; scale normalizes source standing height636px. Timing150/50/300ms follows9–11/30f inclusive."
+      }
+    },
+    "special": {
+      "sheet": "special/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "special_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 309,
+            "h": 309
+          },
+          "pivot": {
+            "x": 120,
+            "y": 273
+          },
+          "duration_ms": 100,
+          "phase": "emission"
+        },
+        {
+          "name": "special_01",
+          "source_rect": {
+            "x": 309,
+            "y": 0,
+            "w": 264,
+            "h": 309
+          },
+          "pivot": {
+            "x": 92,
+            "y": 273
+          },
+          "duration_ms": 100,
+          "phase": "recoil"
+        },
+        {
+          "name": "special_02",
+          "source_rect": {
+            "x": 618,
+            "y": 0,
+            "w": 286,
+            "h": 309
+          },
+          "pivot": {
+            "x": 78,
+            "y": 273
+          },
+          "duration_ms": 217,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "special/action.json",
+        "source_sheet": "special/keyed.png",
+        "scale_to_runtime": 0.4197324414715719,
+        "review": "Selected source-v2 lifts/reaches gun and removes loose pale flecks. First pose already emits; legacy bean projectile remains separate. Expected baseline origin(+146.667,-117.333) maps near source(634,372), within the rotary muzzle face; exact GPU emission check pending. Pivot biased slightly rearward within stance; body size normalized to first standing silhouette.25f visual,72f cooldown unchanged."
+      }
+    },
+    "spawn": {
+      "sheet": "spawn/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "spawn_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 332,
+            "h": 405
+          },
+          "pivot": {
+            "x": 120,
+            "y": 334
+          },
+          "duration_ms": 600,
+          "phase": "coffee"
+        },
+        {
+          "name": "spawn_01",
+          "source_rect": {
+            "x": 332,
+            "y": 0,
+            "w": 302,
+            "h": 405
+          },
+          "pivot": {
+            "x": 88,
+            "y": 334
+          },
+          "duration_ms": 600,
+          "phase": "windup"
+        },
+        {
+          "name": "spawn_02",
+          "source_rect": {
+            "x": 664,
+            "y": 0,
+            "w": 302,
+            "h": 405
+          },
+          "pivot": {
+            "x": 133,
+            "y": 330
+          },
+          "duration_ms": 640,
+          "phase": "table_smash"
+        },
+        {
+          "name": "spawn_03",
+          "source_rect": {
+            "x": 996,
+            "y": 0,
+            "w": 280,
+            "h": 405
+          },
+          "pivot": {
+            "x": 111,
+            "y": 334
+          },
+          "duration_ms": 800,
+          "phase": "guard"
+        }
+      ],
+      "provenance": {
+        "source_action": "spawn/action.json",
+        "source_sheet": "spawn/keyed.png",
+        "scale_to_runtime": 0.56,
+        "review": "Preserves original coffee/mug/table-smash gag in four distinct keys. Cups/table/wood fully contained by explicit wider rectangles. Uniform factor matches final guard near250world px; drinking pose is taller (upright original intro proportions). Pivots follow actor soles, not foreground table/debris; props may extend a few pixels below actor support.2640ms retained."
+      }
+    },
+    "victory": {
+      "sheet": "victory/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "victory_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 254,
+            "h": 323
+          },
+          "pivot": {
+            "x": 114,
+            "y": 286
+          },
+          "duration_ms": 200,
+          "phase": "raise_mug"
+        },
+        {
+          "name": "victory_01",
+          "source_rect": {
+            "x": 254,
+            "y": 0,
+            "w": 254,
+            "h": 323
+          },
+          "pivot": {
+            "x": 89,
+            "y": 286
+          },
+          "duration_ms": 700,
+          "phase": "toast"
+        }
+      ],
+      "provenance": {
+        "source_action": "victory/action.json",
+        "source_sheet": "victory/keyed.png",
+        "scale_to_runtime": 0.33069828722002637,
+        "review": "Two distinct original-coffee celebration poses: lifts mug, then sustained higher toast. No eyes/mouth added; mug/steam complete. Uniform scale brings first visible height759px to251world px; feet pinned at measured support. Final hold is outcome presentation only."
+      }
+    },
+    "defeat": {
+      "sheet": "defeat/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "defeat_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 278,
+            "h": 299
+          },
+          "pivot": {
+            "x": 140,
+            "y": 279
+          },
+          "duration_ms": 180,
+          "phase": "weaken"
+        },
+        {
+          "name": "defeat_01",
+          "source_rect": {
+            "x": 278,
+            "y": 0,
+            "w": 276,
+            "h": 299
+          },
+          "pivot": {
+            "x": 122,
+            "y": 277
+          },
+          "duration_ms": 220,
+          "phase": "sink"
+        },
+        {
+          "name": "defeat_02",
+          "source_rect": {
+            "x": 556,
+            "y": 0,
+            "w": 278,
+            "h": 299
+          },
+          "pivot": {
+            "x": 100,
+            "y": 276
+          },
+          "duration_ms": 700,
+          "phase": "slump"
+        }
+      ],
+      "provenance": {
+        "source_action": "defeat/action.json",
+        "source_sheet": "defeat/keyed.png",
+        "scale_to_runtime": 0.40614886731391586,
+        "review": "Three clearly distinct exhausted-result poses: weakening, sinking, seated slump supported by gloves. No eyes, injuries, stars, added props or gameplay changes. Uniform scale from first visible height; later low silhouette is deliberate body compression. Ground support follows visible feet/hands."
+      }
+    },
+    "signature_special": {
+      "sheet": "signature_special/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "signature_special_mvp_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 250,
+            "h": 384
+          },
+          "pivot": {
+            "x": 118,
+            "y": 312
+          },
+          "duration_ms": 366,
+          "phase": "startup"
+        },
+        {
+          "name": "signature_special_mvp_01",
+          "source_rect": {
+            "x": 255,
+            "y": 0,
+            "w": 255,
+            "h": 384
+          },
+          "pivot": {
+            "x": 105,
+            "y": 312
+          },
+          "duration_ms": 117,
+          "phase": "active"
+        },
+        {
+          "name": "signature_special_mvp_02",
+          "source_rect": {
+            "x": 510,
+            "y": 0,
+            "w": 225,
+            "h": 384
+          },
+          "pivot": {
+            "x": 100,
+            "y": 316
+          },
+          "duration_ms": 192,
+          "phase": "recovery"
+        },
+        {
+          "name": "signature_special_mvp_03",
+          "source_rect": {
+            "x": 765,
+            "y": 0,
+            "w": 230,
+            "h": 384
+          },
+          "pivot": {
+            "x": 105,
+            "y": 312
+          },
+          "duration_ms": 192,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "signature_special/action.json",
+        "source_sheet": "signature_special/keyed-v2.png",
+        "scale_to_runtime": 0.5,
+        "review": "Four actual generated GC Slam poses: raised double fist, descending contact, low follow-through, guard. No projectile alias. Source v2 replaces painted checker matte through imagegen so steam survives generic magenta alpha extraction. Uniform 0.5 scale matches standing silhouette and nose. Active fist center source(880,525) projects to (+75,-50); cyan/gold downward trace extends above contact. All 20 original clips preserved except intentionally corrected sweep."
+      }
+    },
+    "knockdown": {
+      "sheet": "knockdown/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "knockdown_mvp_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 224,
+            "h": 308
+          },
+          "pivot": {
+            "x": 113,
+            "y": 272
+          },
+          "duration_ms": 100,
+          "phase": "fall"
+        },
+        {
+          "name": "knockdown_mvp_01",
+          "source_rect": {
+            "x": 241,
+            "y": 0,
+            "w": 241,
+            "h": 308
+          },
+          "pivot": {
+            "x": 129,
+            "y": 269
+          },
+          "duration_ms": 100,
+          "phase": "land"
+        },
+        {
+          "name": "knockdown_mvp_02",
+          "source_rect": {
+            "x": 482,
+            "y": 0,
+            "w": 230,
+            "h": 308
+          },
+          "pivot": {
+            "x": 95,
+            "y": 270
+          },
+          "duration_ms": 250,
+          "phase": "down"
+        },
+        {
+          "name": "knockdown_mvp_03",
+          "source_rect": {
+            "x": 723,
+            "y": 0,
+            "w": 213,
+            "h": 308
+          },
+          "pivot": {
+            "x": 112,
+            "y": 271
+          },
+          "duration_ms": 150,
+          "phase": "recover"
+        }
+      ],
+      "provenance": {
+        "source_action": "knockdown/action.json",
+        "source_sheet": "knockdown/keyed-v2.png",
+        "scale_to_runtime": 0.56,
+        "review": "Four distinct physical reaction poses: backward loss of balance, landing, low seated recovery, pushing up. First key uses virtual floor below the airborne shoes. Uniform 0.56 scale keeps nose near idle size; mascot deforms on landing. All steam and white torso retained by imagegen magenta-matte revision; generic keyer never uses Rust-specific contour."
+      }
+    }
+  }
+}

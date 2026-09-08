@@ -4,8 +4,8 @@
     "status": "candidate",
     "generator": "built-in imagegen",
     "identity_reference": "reference/master-existing.png",
-    "combat": "Visual-only candidate; runtime retains baseline combat_manifest.",
-    "review": "finalization-review.md"
+    "combat": "Baseline sprite combat metadata is retained. Throws, capture/launch trajectories and signature effects use explicit World/combat contracts documented by ADR0014; visual repacking does not retune baseline move boxes.",
+    "review": "spectacle-review.md"
   },
   "actions": {
     "idle": {
@@ -88,7 +88,7 @@
     "air_punch": {
       "approved": true,
       "scale_to_runtime": 0.497217,
-      "notes": "Existing source-v2 artwork recalibrated, not regenerated. Active pose hair and waist were44 source px lower than other poses; only air_punch_1 virtual pivot.y650→694 removes ~22px displacement. Hand remains within baseline box (world y approximately -125..-98 versus -130..-74). All other pivots, scale, timing and combat unchanged. See air_punch/pivot-calibration-2026-09-07.md; runtime recapture pending.",
+      "notes": "Existing source-v2 artwork recalibrated, not regenerated. Active pose hair and waist were44 source px lower than other poses; only air_punch_1 virtual pivot.y650\u2192694 removes ~22px displacement. Hand remains within baseline box (world y approximately -125..-98 versus -130..-74). All other pivots, scale, timing and combat unchanged. See air_punch/pivot-calibration-2026-09-07.md; runtime recapture pending.",
       "sheet": "air_punch/keyed.png"
     },
     "air_kick": {
@@ -99,9 +99,9 @@
     },
     "throw": {
       "approved": true,
-      "scale_to_runtime": 0.538153,
-      "notes": "v2 shortens the active grasp by naturally bending both elbows. Forward hand is inside the original Ownership reach; other hand stays near the chest. Ground anchors, scale and all durations unchanged. Generated RGB checkerboard removed offline; source preserved. Static contact and silhouette reviewed; runtime recapture pending.",
-      "sheet": "throw/cleaned-v2.png"
+      "scale_to_runtime": 0.7,
+      "sheet": "throw/mapped-spectacle-v3.png",
+      "notes": "Six newly drawn back-throw poses. v2 corrects release hands to throw behind LEFT; other poses preserve identity. Fixed10..12 contact,12fcapture, releasevisual22; originalmapping archived. Uniform scale0.7 and explicit foot pivots. v3 replaces only lift pose2: open supporting hands reach forward above forehead toward the captured body, instead of clasping behind the head. Other five source crops remain byte-identical to v2. See throw/mapping-spectacle-v3.json."
     },
     "special": {
       "approved": true,
@@ -135,9 +135,27 @@
     },
     "signature_special": {
       "approved": true,
-      "scale_to_runtime": 0.475,
-      "sheet": "signature_special/keyed-v2.png",
-      "notes": "New four-frame signature animation generated with imagegen. Explicit variable-width crops preserve whole extended limbs; constant anatomical scale, support pivots, startup/active/recovery keyed to MoveSpec. Original source and background-only revision preserved. Local matte removal authorized in production README. Source identity/alpha reviewed; runtime contacts verified in both facings."
+      "scale_to_runtime": 0.9,
+      "sheet": "signature_special/mapped-spectacle-v1.png",
+      "notes": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved."
+    },
+    "heavy_hit": {
+      "approved": true,
+      "scale_to_runtime": 0.86,
+      "sheet": "reactions/keyed-spectacle-v1.png",
+      "notes": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved."
+    },
+    "launched": {
+      "approved": true,
+      "scale_to_runtime": 0.86,
+      "sheet": "reactions/keyed-spectacle-v1.png",
+      "notes": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved."
+    },
+    "thrown": {
+      "approved": true,
+      "scale_to_runtime": 0.86,
+      "sheet": "reactions/keyed-spectacle-v1.png",
+      "notes": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved."
     }
   }
 }

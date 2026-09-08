@@ -1,0 +1,2086 @@
+{
+  "render_size": [
+    1280,
+    720
+  ],
+  "reversed": true,
+  "scenarios": [
+    {
+      "captures": [
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                468.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f001.png",
+          "result": "Pending",
+          "tick": 1
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_01",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                469.4814453125,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f031.png",
+          "result": "Pending",
+          "tick": 31
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_02",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                485.7777404785156,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f036.png",
+          "result": "Pending",
+          "tick": 36
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_03",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                522.5925903320312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f042.png",
+          "result": "Pending",
+          "tick": 42
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_03",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                535.0370483398438,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f044.png",
+          "result": "Pending",
+          "tick": 44
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_03",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                559.9259643554688,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f048.png",
+          "result": "Pending",
+          "tick": 48
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_00",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                566.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f049.png",
+          "result": "Pending",
+          "tick": 49
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_00",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_00",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                591.037109375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f053.png",
+          "result": "Pending",
+          "tick": 53
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_00",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                712.7407836914062,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                600.7407836914062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f055.png",
+          "result": "Pending",
+          "tick": 55
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_01",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 84,
+              "hitstun": true,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f062.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 62
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_01",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 84,
+              "hitstun": true,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f065.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 65
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_01",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 84,
+              "hitstun": true,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f068.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 68
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_01",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_02",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 84,
+              "hitstun": true,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f069.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 69
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_02",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_02",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 84,
+              "hitstun": true,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f071.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 71
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_02",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_03",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 84,
+              "hitstun": true,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f073.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 73
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_02",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_03",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 84,
+              "hitstun": true,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f074.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 74
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_02",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f079.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 79
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_02",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f084.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 84
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f086.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 86
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f087.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 87
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f092.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 92
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f098.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 98
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f101.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 101
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f109.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 109
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f110.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 110
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f116.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 116
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f119.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 119
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f126.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 126
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f130.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 130
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f141.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 141
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f145.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 145
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f152.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 152
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f159.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 159
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f163.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 163
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f173.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 173
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f184.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 184
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f188.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 188
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f195.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 195
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f202.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 202
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f206.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 206
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f217.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 217
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f227.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 227
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f231.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 231
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f238.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 238
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f245.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 245
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f249.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 249
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                715.5926513671875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 84,
+              "hitstun": false,
+              "position": [
+                558.2593383789062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-02-attackheavypunch-f259.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 259
+        }
+      ],
+      "character": "cpp",
+      "contact_frame": 62,
+      "result": "Hit { damage: 16 }",
+      "scenario": "Attack(HeavyPunch)",
+      "scenario_label": "Ground strike / stop an approaching opponent"
+    }
+  ]
+}

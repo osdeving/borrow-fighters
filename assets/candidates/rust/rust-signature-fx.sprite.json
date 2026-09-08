@@ -1,0 +1,131 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "rust-signature-fx.png",
+  "source": "../../production/rust/signature_fx/source-matte-v2.png",
+  "cell": {
+    "w": 586,
+    "h": 524
+  },
+  "default_pivot": {
+    "x": 262,
+    "y": 460
+  },
+  "scale": 0.55,
+  "frames": [
+    {
+      "name": "projectile_00",
+      "clip": "projectile",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 262,
+        "y": 460
+      },
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 480,
+        "h": 500
+      }
+    },
+    {
+      "name": "projectile_01",
+      "clip": "projectile",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 250,
+        "y": 465
+      },
+      "frame": {
+        "x": 480,
+        "y": 0,
+        "w": 470,
+        "h": 500
+      }
+    },
+    {
+      "name": "impact_02",
+      "clip": "impact",
+      "duration_ms": 65,
+      "pivot": {
+        "x": 170,
+        "y": 465
+      },
+      "frame": {
+        "x": 950,
+        "y": 0,
+        "w": 586,
+        "h": 500
+      }
+    },
+    {
+      "name": "impact_03",
+      "clip": "impact",
+      "duration_ms": 65,
+      "pivot": {
+        "x": 210,
+        "y": 430
+      },
+      "frame": {
+        "x": 0,
+        "y": 500,
+        "w": 580,
+        "h": 524
+      }
+    },
+    {
+      "name": "impact_04",
+      "clip": "impact",
+      "duration_ms": 65,
+      "pivot": {
+        "x": 120,
+        "y": 430
+      },
+      "frame": {
+        "x": 580,
+        "y": 500,
+        "w": 430,
+        "h": 524
+      }
+    },
+    {
+      "name": "impact_05",
+      "clip": "impact",
+      "duration_ms": 65,
+      "pivot": {
+        "x": 90,
+        "y": 430
+      },
+      "frame": {
+        "x": 1010,
+        "y": 500,
+        "w": 526,
+        "h": 524
+      }
+    }
+  ],
+  "clips": [
+    {
+      "name": "projectile",
+      "loop": true,
+      "frames": [
+        "projectile_00",
+        "projectile_01"
+      ]
+    },
+    {
+      "name": "impact",
+      "loop": false,
+      "frames": [
+        "impact_02",
+        "impact_03",
+        "impact_04",
+        "impact_05"
+      ]
+    }
+  ],
+  "notes": [
+    "Six original imagegen fortress/effect keys; full source preserved.",
+    "Ground pivots explicitly reviewed. Uniform scale0.55 targets~225px barrier height.",
+    "First two frames form barrier; final four form impact/shatter. Damage and geometry come exclusively from World entities."
+  ]
+}

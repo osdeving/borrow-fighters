@@ -100,6 +100,8 @@ pub struct GameAssets {
     pub python_fighter: Option<SpriteAtlasAsset>,
     pub python_start: Option<SpriteAtlasAsset>,
     pub cpp_fighter: Option<SpriteAtlasAsset>,
+    /// Separately authored signature VFX, keyed by the five playable fighters.
+    pub signature_effects: Vec<(CharacterId, SpriteAtlasAsset)>,
     pub rust_projectile: Option<Texture2D>,
     pub duke_projectile: Option<Texture2D>,
     pub go_projectile: Option<Texture2D>,
@@ -160,6 +162,14 @@ impl ArenaAssets {
 }
 
 impl GameAssets {
+    /// Finds the atlas used by a character's physical signature entities.
+    pub fn signature_atlas(&self, character: CharacterId) -> Option<&SpriteAtlasAsset> {
+        self.signature_effects
+            .iter()
+            .find(|(id, _)| *id == character)
+            .map(|(_, atlas)| atlas)
+    }
+
     /// Loads all optional prototype assets.
     pub fn load(raylib: &mut RaylibHandle, thread: &RaylibThread) -> Self {
         Self {
@@ -225,6 +235,20 @@ impl GameAssets {
                 CharacterId::Cpp,
                 CPP_FIGHTER_MANIFEST_PATH,
             ),
+            signature_effects: [
+                CharacterId::Rust,
+                CharacterId::Duke,
+                CharacterId::C,
+                CharacterId::Python,
+                CharacterId::Cpp,
+            ]
+            .into_iter()
+            .filter_map(|character| {
+                let key = character.audio_key();
+                let path = format!("assets/candidates/{key}/{key}-signature-fx.sprite.json");
+                load_sprite_atlas_optional(raylib, thread, &path).map(|atlas| (character, atlas))
+            })
+            .collect(),
             rust_projectile: load_projectile_texture_optional(
                 raylib,
                 thread,
@@ -426,7 +450,10 @@ mod tests {
                 "victory",
                 "defeat",
                 "knockdown",
-                "signature_special"
+                "signature_special",
+                "heavy_hit",
+                "launched",
+                "thrown"
             ]
         );
         for name in [
@@ -436,6 +463,9 @@ mod tests {
             "defeat",
             "knockdown",
             "signature_special",
+            "heavy_hit",
+            "launched",
+            "thrown",
         ] {
             manifest.clips.push(SpriteClip {
                 name: name.to_string(),
@@ -465,7 +495,13 @@ mod tests {
         ] {
             assert_eq!(
                 missing_candidate_clips(&manifest, character),
-                vec!["knockdown", "signature_special"]
+                vec![
+                    "knockdown",
+                    "signature_special",
+                    "heavy_hit",
+                    "launched",
+                    "thrown"
+                ]
             );
         }
     }

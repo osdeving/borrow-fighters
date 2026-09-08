@@ -1,0 +1,1923 @@
+{
+  "render_size": [
+    1280,
+    720
+  ],
+  "reversed": true,
+  "scenarios": [
+    {
+      "captures": [
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_00",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                478.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f001.png",
+          "result": "Pending",
+          "tick": 1
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_00",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                478.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f031.png",
+          "result": "Pending",
+          "tick": 31
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_01",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                478.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f039.png",
+          "result": "Pending",
+          "tick": 39
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_01",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                478.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f048.png",
+          "result": "Pending",
+          "tick": 48
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_02",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                478.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f050.png",
+          "result": "Pending",
+          "tick": 50
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_03",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                478.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.0,
+              "kind": "CppRocket",
+              "position": [
+                563.1666259765625,
+                590.2000122070312
+              ]
+            }
+          ],
+          "image": "cpp-11-attacksignaturespecial-f062.png",
+          "result": "Pending",
+          "tick": 62
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_03",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                478.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.06666667014360428,
+              "kind": "CppRocket",
+              "position": [
+                547.1666259765625,
+                598.8667602539062
+              ]
+            }
+          ],
+          "image": "cpp-11-attacksignaturespecial-f066.png",
+          "result": "Pending",
+          "tick": 66
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_03",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                478.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.13333334028720856,
+              "kind": "CppRocket",
+              "position": [
+                531.1666259765625,
+                607.5335083007812
+              ]
+            }
+          ],
+          "image": "cpp-11-attacksignaturespecial-f070.png",
+          "result": "Pending",
+          "tick": 70
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_04",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                478.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.15000000596046448,
+              "kind": "CppRocket",
+              "position": [
+                527.1666259765625,
+                609.7001953125
+              ]
+            }
+          ],
+          "image": "cpp-11-attacksignaturespecial-f071.png",
+          "result": "Pending",
+          "tick": 71
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_04",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_00",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                435.9999694824219,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.0,
+              "kind": "CppExplosion",
+              "position": [
+                515.1666259765625,
+                616.0
+              ]
+            }
+          ],
+          "image": "cpp-11-attacksignaturespecial-f074.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 74
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_04",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_00",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                427.1110534667969,
+                325.89739990234375
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.06666667014360428,
+              "kind": "CppExplosion",
+              "position": [
+                515.1666259765625,
+                616.0
+              ]
+            }
+          ],
+          "image": "cpp-11-attacksignaturespecial-f078.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 78
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_00",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                424.8888244628906,
+                310.8995361328125
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.0833333358168602,
+              "kind": "CppExplosion",
+              "position": [
+                515.1666259765625,
+                616.0
+              ]
+            }
+          ],
+          "image": "cpp-11-attacksignaturespecial-f079.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 79
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_00",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                422.6665954589844,
+                296.5127868652344
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.10000000149011612,
+              "kind": "CppExplosion",
+              "position": [
+                515.1666259765625,
+                616.0
+              ]
+            }
+          ],
+          "image": "cpp-11-attacksignaturespecial-f080.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 80
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_01",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                418.2221374511719,
+                269.5726318359375
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.13333334028720856,
+              "kind": "CppExplosion",
+              "position": [
+                515.1666259765625,
+                616.0
+              ]
+            }
+          ],
+          "image": "cpp-11-attacksignaturespecial-f082.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 82
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_01",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                411.5554504394531,
+                233.7457275390625
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.18333333730697632,
+              "kind": "CppExplosion",
+              "position": [
+                515.1666259765625,
+                616.0
+              ]
+            }
+          ],
+          "image": "cpp-11-attacksignaturespecial-f085.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 85
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_01",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                409.3332214355469,
+                223.02565002441406
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.20000000298023224,
+              "kind": "CppExplosion",
+              "position": [
+                515.1666259765625,
+                616.0
+              ]
+            }
+          ],
+          "image": "cpp-11-attacksignaturespecial-f086.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 86
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_01",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                402.6665344238281,
+                194.5320587158203
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f089.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 89
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_02",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                395.9998474121094,
+                171.53846740722656
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f092.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 92
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_02",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                387.1109313964844,
+                149.4359130859375
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f096.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 96
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                371.5553283691406,
+                134.2842254638672
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f103.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 103
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                369.3330993652344,
+                134.56414794921875
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f104.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 104
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                364.8886413574219,
+                136.95730590820312
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f106.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 106
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                355.9997253417969,
+                149.0769805908203
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f110.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 110
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                329.3329772949219,
+                244.1026611328125
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f122.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 122
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_01",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f133.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 133
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_01",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f138.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 138
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_01",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f139.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 139
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_01",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f145.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 145
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_02",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f147.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 147
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_03",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f157.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 157
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_03",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 76,
+              "hitstun": true,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f159.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 159
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_00",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 76,
+              "hitstun": false,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f169.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 169
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_00",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 76,
+              "hitstun": false,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f173.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 173
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_01",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 76,
+              "hitstun": false,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f174.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 174
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 76,
+              "hitstun": false,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f179.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 179
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 76,
+              "hitstun": false,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f188.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 188
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 76,
+              "hitstun": false,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f202.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 202
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 76,
+              "hitstun": false,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f217.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 217
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 76,
+              "hitstun": false,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f231.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 231
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 76,
+              "hitstun": false,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f245.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 245
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                699.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": true,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_02",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 76,
+              "hitstun": false,
+              "position": [
+                304.8884582519531,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "cpp-11-attacksignaturespecial-f259.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 259
+        }
+      ],
+      "character": "cpp",
+      "contact_frame": 74,
+      "result": "Hit { damage: 24 }",
+      "scenario": "Attack(SignatureSpecial)",
+      "scenario_label": "Undefined Bazooka / explosive foot punishment"
+    }
+  ],
+  "raw_capture_directory": "/tmp/borrow-fighters-extraordinary-final/cpp/left/signature_special",
+  "raw_images_are_external_to_this_report": true
+}

@@ -401,6 +401,7 @@ impl CombatLab {
     /// Returns inspected hurtboxes, falling back when baseline metadata is absent.
     pub fn hurtboxes(&self) -> Vec<Rect> {
         self.projected_combat()
+            .filter(|_| !self.fighter.uses_low_attack_hurtboxes())
             .map(|combat| combat.hurtboxes)
             .filter(|boxes| !boxes.is_empty())
             .unwrap_or_else(|| self.fighter.hurtboxes().rects().to_vec())
@@ -408,7 +409,11 @@ impl CombatLab {
 
     /// Returns inspected attack boxes; the fighter's attack phase still gates contact.
     pub fn attack_boxes(&self) -> Vec<Rect> {
+        if self.is_signature_actor_preview() {
+            return Vec::new();
+        }
         self.projected_combat()
+            .filter(|_| !self.fighter.uses_move_spec_hitbox())
             .map(|combat| combat.hitboxes)
             .filter(|boxes| !boxes.is_empty())
             .unwrap_or_else(|| self.fighter.attack_box().into_iter().collect())
@@ -451,7 +456,13 @@ impl CombatLab {
 
     /// Returns whether the optional contact dummy should be drawn.
     pub const fn show_dummy(&self) -> bool {
-        self.show_dummy
+        self.show_dummy && !self.is_signature_actor_preview()
+    }
+
+    /// Whether only the actor can be inspected, without World effect simulation.
+    pub const fn is_signature_actor_preview(&self) -> bool {
+        self.pose.is_move_playback()
+            && matches!(self.selected_move, CombatLabMove::SignatureSpecial)
     }
 
     /// Returns whether the arena background should be drawn behind the lab.
@@ -461,7 +472,7 @@ impl CombatLab {
 
     /// Returns estimated advantage and spacing for the selected move.
     pub fn advantage(&self) -> Option<CombatLabAdvantage> {
-        if !self.pose.is_move_playback() {
+        if !self.pose.is_move_playback() || self.is_signature_actor_preview() {
             return None;
         }
 
@@ -471,7 +482,7 @@ impl CombatLab {
 
     /// Returns the dummy body positioned at the selected move contact point.
     pub fn dummy_body_rect(&self) -> Rect {
-        if !self.pose.is_move_playback() {
+        if !self.pose.is_move_playback() || self.is_signature_actor_preview() {
             return default_dummy_body();
         }
 

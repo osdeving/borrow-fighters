@@ -21,6 +21,9 @@ pub fn frame_for_fighter_clip_at(
         FighterSpriteClip::Spawn => &["spawn", "idle"],
         FighterSpriteClip::CrouchBlock => &["crouch_block", "block", "idle"],
         FighterSpriteClip::Knockdown => &["knockdown", "hit", "idle"],
+        FighterSpriteClip::HeavyHit => &["heavy_hit", "hit", "idle"],
+        FighterSpriteClip::Launched => &["launched", "hit", "idle"],
+        FighterSpriteClip::Thrown => &["thrown", "launched", "hit", "idle"],
         FighterSpriteClip::SignatureSpecial => &["signature_special", "punch_heavy", "idle"],
         FighterSpriteClip::Sweep | FighterSpriteClip::AirKick => &[clip.as_str(), "kick", "idle"],
         FighterSpriteClip::Overhead | FighterSpriteClip::AntiAir => {

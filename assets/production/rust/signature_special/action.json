@@ -1,77 +1,179 @@
 {
   "action": "signature_special",
-  "source": "signature_special/source-v2.png",
-  "sheet": "signature_special/keyed-v2.png",
+  "source": "signature_special/source-spectacle-v1.png",
+  "sheet": "signature_special/mapped-spectacle-v1.png",
   "reviewed": true,
   "loop": false,
-  "status": "runtime_verified_mvp",
+  "status": "runtime_reviewed",
   "frames": [
     {
       "name": "signature_special_00",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 500,
-        "h": 768
+        "w": 380,
+        "h": 543
       },
       "pivot": {
-        "x": 298,
-        "y": 650
+        "x": 164,
+        "y": 484
       },
-      "duration_ms": 200,
-      "phase": "startup"
+      "duration_ms": 133,
+      "phase": "startup",
+      "original_source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 380,
+        "h": 543
+      }
     },
     {
       "name": "signature_special_01",
       "source_rect": {
-        "x": 500,
+        "x": 440,
         "y": 0,
-        "w": 610,
-        "h": 768
+        "w": 334,
+        "h": 543
       },
       "pivot": {
-        "x": 280,
-        "y": 652
+        "x": 125,
+        "y": 484
       },
-      "duration_ms": 100,
-      "phase": "active"
+      "duration_ms": 133,
+      "phase": "startup",
+      "original_source_rect": {
+        "x": 380,
+        "y": 0,
+        "w": 334,
+        "h": 543
+      }
     },
     {
       "name": "signature_special_02",
       "source_rect": {
-        "x": 1110,
+        "x": 880,
         "y": 0,
-        "w": 450,
-        "h": 768
+        "w": 340,
+        "h": 543
       },
       "pivot": {
-        "x": 220,
-        "y": 650
+        "x": 102,
+        "y": 484
       },
-      "duration_ms": 166,
-      "phase": "recovery"
+      "duration_ms": 134,
+      "phase": "startup",
+      "original_source_rect": {
+        "x": 714,
+        "y": 0,
+        "w": 340,
+        "h": 543
+      }
     },
     {
       "name": "signature_special_03",
       "source_rect": {
-        "x": 1560,
+        "x": 1320,
         "y": 0,
-        "w": 488,
-        "h": 768
+        "w": 394,
+        "h": 543
       },
       "pivot": {
-        "x": 270,
-        "y": 650
+        "x": 131,
+        "y": 484
       },
-      "duration_ms": 167,
-      "phase": "recovery"
+      "duration_ms": 100,
+      "phase": "active",
+      "original_source_rect": {
+        "x": 1054,
+        "y": 0,
+        "w": 394,
+        "h": 543
+      }
+    },
+    {
+      "name": "signature_special_04",
+      "source_rect": {
+        "x": 1760,
+        "y": 0,
+        "w": 369,
+        "h": 543
+      },
+      "pivot": {
+        "x": 142,
+        "y": 435
+      },
+      "duration_ms": 100,
+      "phase": "active",
+      "original_source_rect": {
+        "x": 0,
+        "y": 543,
+        "w": 369,
+        "h": 543
+      }
+    },
+    {
+      "name": "signature_special_05",
+      "source_rect": {
+        "x": 2200,
+        "y": 0,
+        "w": 440,
+        "h": 543
+      },
+      "pivot": {
+        "x": 169,
+        "y": 435
+      },
+      "duration_ms": 116,
+      "phase": "active",
+      "original_source_rect": {
+        "x": 330,
+        "y": 543,
+        "w": 440,
+        "h": 543
+      }
+    },
+    {
+      "name": "signature_special_06",
+      "source_rect": {
+        "x": 2640,
+        "y": 0,
+        "w": 375,
+        "h": 543
+      },
+      "pivot": {
+        "x": 155,
+        "y": 430
+      },
+      "duration_ms": 400,
+      "phase": "recovery",
+      "original_source_rect": {
+        "x": 770,
+        "y": 543,
+        "w": 375,
+        "h": 543
+      }
+    },
+    {
+      "name": "signature_special_07",
+      "source_rect": {
+        "x": 3080,
+        "y": 0,
+        "w": 303,
+        "h": 543
+      },
+      "pivot": {
+        "x": 130,
+        "y": 415
+      },
+      "duration_ms": 417,
+      "phase": "recovery",
+      "original_source_rect": {
+        "x": 1145,
+        "y": 543,
+        "w": 303,
+        "h": 543
+      }
     }
   ],
-  "review_notes": "New four-frame signature animation generated with imagegen. Explicit variable-width crops preserve whole extended limbs; constant anatomical scale, support pivots, startup/active/recovery keyed to MoveSpec. Original source and background-only revision preserved. Local matte removal authorized in production README. Source identity/alpha reviewed; runtime contacts verified in both facings.",
-  "runtime_review": {
-    "scope": "MVP integration; actual World/Raylib showcase in both facings",
-    "report": "../../candidates/rust/review/mvp/showcase-validation.json",
-    "actor_states": "attack, block, hit and knockdown selected by real combat state",
-    "reviewer": "Codex root; contact sheets and full-resolution samples inspected"
-  }
+  "review_notes": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved. Two adjacent bottom-row cells separated explicitly; boot and shield preserved without redraw. Enclosed pale checker voids at (250,285)/(1250,350) alpha-extracted. Final separation uses connected silhouette masks (original x0..355 and x336..769), retaining whole shield and whole boot; no hand-drawn pixels."
 }

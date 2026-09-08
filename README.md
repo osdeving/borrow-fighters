@@ -20,6 +20,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`docs/03-backlog.md`](docs/03-backlog.md): backlog inicial e t-shirt sizing.
 - [`docs/04-team-briefing.md`](docs/04-team-briefing.md): briefing para reunir colaboradores.
 - [`docs/10-greybox-playtest.md`](docs/10-greybox-playtest.md): como testar o primeiro protótipo greybox.
+- [`docs/21-signature-spectacle-and-throws.md`](docs/21-signature-spectacle-and-throws.md): arremessos, reações aéreas e os cinco especiais de assinatura.
 - [`docs/20-mvp-combat-showcase.md`](docs/20-mvp-combat-showcase.md): execução e critérios da rodada de MVP, showcase contextual e especiais.
 - [`docs/12-worldbuilding.md`](docs/12-worldbuilding.md): história, personagens e arenas brasileiras.
 
@@ -74,6 +75,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`docs/adr/0010-reviewed-action-sprite-production.md`](docs/adr/0010-reviewed-action-sprite-production.md): produção por ação, exportação explícita e revisão de candidatos sem alterar combate.
 - [`docs/adr/0011-reviewed-art-default.md`](docs/adr/0011-reviewed-art-default.md): seleção dos conjuntos revisados por padrão, mantendo comparação e fallback.
 - [`docs/adr/0012-shared-menu-pointer-layout.md`](docs/adr/0012-shared-menu-pointer-layout.md): geometria compartilhada entre desenho e navegação por mouse.
+- [`docs/adr/0014-throws-launches-and-signature-effects.md`](docs/adr/0014-throws-launches-and-signature-effects.md): captura, lançamento e efeitos físicos de assinatura.
 - [`docs/adr/0013-contextual-showcase-and-mvp-combat.md`](docs/adr/0013-contextual-showcase-and-mvp-combat.md): showcase com combate real, especiais e recuperação de queda.
 
 ### GitHub
@@ -92,9 +94,11 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ## Amostra atual
 
-[![Clique para abrir o clipe sem áudio do Prototype 0.1 greybox](assets/showcase/prototype-0.1-greybox-cover.jpg)](assets/showcase/prototype-0.1-greybox.mp4)
+[![Cinco especiais, arremesso e gancho no combate real](assets/showcase/signature-spectacle-cover.jpg)](assets/showcase/signature-spectacle-2026-09-08.mp4)
 
-_Clique na imagem para abrir o clipe sem áudio. Os sprites, VFX e cenário ainda são placeholders de protótipo: servem como mood, escala e teste de leitura visual, não como alvo final de polimento._
+_Clique para ver os cinco especiais, o arremesso com troca de lados e o gancho: 21 segundos, 1280×720 a 60 fps, captura sem áudio do showcase real. [Produção e verificação](docs/21-signature-spectacle-and-throws.md)._
+
+O [clipe original do greybox](assets/showcase/prototype-0.1-greybox.mp4) permanece como histórico.
 
 ## Como contribuir
 
@@ -129,7 +133,7 @@ As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
 
 ## Rodando o protótipo greybox
 
-O código jogável atual implementa um greybox local para validar o básico: menu principal com submenus de versus, treino, lore/roster e opções, arenas brasileiras em rotação começando pelo Sirius e trocando apenas no início da próxima luta, seleção manual de arena, livro de história carregado de JSON, intro cinematográfica com contagem `11` / `10` / `01` / `Fight!`, personagens com atlas de ações revisadas e placeholders preservados, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, varredura, overhead, anti-air, agarrão curto, ataques aéreos, fireball, cinco especiais de assinatura, queda com recuperação protegida, primeira identidade mecânica de Rust, Duke/Java, Go, C, Python e C++ por frame data, demo pública ciclando Rust, Duke/Java, C, Python e C++ sem Go no menu, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, stun, pushback, whiff recovery, hitspark, block pulse, trail de projétil, luz de chão em hitstun/blockstun, scanline/glow e animações leves de fundo por arena, vida, vitória e restart.
+O código jogável atual implementa um greybox local para validar o básico: menu principal com submenus de versus, treino, lore/roster e opções, arenas brasileiras em rotação começando pelo Sirius e trocando apenas no início da próxima luta, seleção manual de arena, livro de história carregado de JSON, intro cinematográfica com contagem `11` / `10` / `01` / `Fight!`, personagens com atlas de ações revisadas e placeholders preservados, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, varredura, overhead, anti-air com lançamento, arremesso com troca de lados, ataques aéreos, fireball, cinco especiais de assinatura, queda com recuperação protegida, primeira identidade mecânica de Rust, Duke/Java, Go, C, Python e C++ por frame data, demo pública ciclando Rust, Duke/Java, C, Python e C++ sem Go no menu, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, stun, pushback, whiff recovery, hitspark, block pulse, trail de projétil, luz de chão em hitstun/blockstun, scanline/glow e animações leves de fundo por arena, vida, vitória e restart.
 
 O runtime também já está preparado para áudio por eventos. O manifesto fica em [`assets/audio/audio_manifest.json`](assets/audio/audio_manifest.json), e o guia técnico fica em [`docs/14-audio-pipeline.md`](docs/14-audio-pipeline.md). O pacote inicial inclui SFX/UI/vozes de anúncio, contagem pré-luta, vozes de golpe por personagem com cobertura específica para Rust e Duke/Java, e músicas de menu, Combat Lab e arenas com fontes CC0 registradas em [`assets/audio/ATTRIBUTION.md`](assets/audio/ATTRIBUTION.md). O volume global da música pode ser ajustado em `Options`.
 
@@ -184,7 +188,7 @@ cargo run -- --lab combat --character rust --pose defeat
 
 No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp` para alternar pose, `Enter` para repetir, `Espaço` para pausar, `.` para avançar 1 frame quando pausado, `Home` para voltar ao frame 0, `H` para hurtbox, `B` para hitbox, `P` para pivot/eixos, `D` para dummy de contato, `A` para mostrar/esconder o fundo de arena e `Esc` para voltar ao menu quando aberto pelo submenu `Training`. O overlay mostra frame data, vantagem estimada, pushback, whiff recovery e distância após pushback. Valores aceitos em `--character`: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` ou `cpp.cpp`. Valores aceitos em `--move`: `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`, `projectile` e `signature_special`. Valores aceitos em `--pose`: `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory`, `spawn`, `defeat` e `crouch_block`. As poses mantêm o corpo parado para inspeção e reproduzem o clip com pause, avanço por frame e reinício.
 
-O `Move Showcase`, em `Training`, usa o personagem escolhido como Player 1 contra um adversário real. Cada um dos cinco personagens da demo tem 15 situações: os dez golpes anteriores, um especial de assinatura e quatro exemplos de defesa. O adversário se aproxima, salta para receber anti-air ou mantém a guarda apropriada para demonstrar rasteira, overhead e agarrão. O resultado mostra o dano ou bloqueio calculado pelo combate.
+O `Move Showcase`, em `Training`, usa o personagem escolhido como Player 1 contra um adversário real. Cada um dos cinco personagens da demo tem 15 situações: os dez golpes anteriores, um especial de assinatura e quatro exemplos de defesa. O adversário se aproxima, salta para receber anti-air ou mantém a guarda apropriada para demonstrar rasteira, overhead e agarrão. O resultado mostra o dano ou bloqueio calculado pelo combate. Cada cena dura 260 frames para incluir voo, queda e recuperação; o painel inferior deixa o espaço aéreo visível. Agarrões capturam e arremessam para o outro lado, e ganchos lançam a vítima. Os especiais são Borrow Fortress, System.out.println!, Segmentation Fault, import antigravity e Undefined Bazooka, sempre disponíveis com `T`/Backslash/`RT`, sem medidor.
 
 ```bash
 cargo run -- --showcase --character rust --move anti_air --repeat
@@ -202,7 +206,7 @@ cargo run -- --lab combat --character rust --pose victory
 BORROW_FIGHTERS_SPRITE_CANDIDATES=0 cargo run -- --fight --p1 rust --p2 duke
 ```
 
-O carregador procura `assets/candidates/<personagem>/<personagem>-fighter.sprite.json` e exige os 20 clips anteriores mais `signature_special` e `knockdown` para os cinco personagens da demo; Go conserva os 20 clips anteriores; arquivo inválido, incompleto ou ausente mantém o placeholder daquele personagem. Conjuntos parciais são inspecionados diretamente no Sprite Viewer/Studio. A variável com valor `1` continua escolhendo os novos atlas explicitamente; `0` ou um valor inválido seleciona os originais. A arte revisada controla a apresentação; `combat_manifest` preserva as boxes e origens baseline dos golpes anteriores. Rasteiras e novos especiais usam as boxes do `MoveSpec`, e ações baixas usam hurtboxes físicas agachadas, conforme a [ADR 0013](docs/adr/0013-contextual-showcase-and-mvp-combat.md). Reações, defesa, agachamento, salto e poses finais têm relógios visuais próprios. Veja [pipeline e comandos](docs/11-sprite-pipeline.md#revisao-de-candidatos-no-runtime) e [cobertura e pendências](docs/19-sprite-production-coverage.md).
+O carregador procura `assets/candidates/<personagem>/<personagem>-fighter.sprite.json` e exige os 20 clips anteriores mais `signature_special`, `knockdown`, `heavy_hit`, `launched` e `thrown` para os cinco personagens da demo; Go conserva os 20 clips anteriores; arquivo inválido, incompleto ou ausente mantém o placeholder daquele personagem. Conjuntos parciais são inspecionados diretamente no Sprite Viewer/Studio. A variável com valor `1` continua escolhendo os novos atlas explicitamente; `0` ou um valor inválido seleciona os originais. A arte revisada controla a apresentação; `combat_manifest` preserva as boxes e origens baseline dos golpes anteriores. Rasteiras usam as boxes do `MoveSpec`; especiais usam as entidades físicas de `World.signature_effects`, e ações baixas usam hurtboxes físicas agachadas, conforme a [ADR 0013](docs/adr/0013-contextual-showcase-and-mvp-combat.md). Reações, defesa, agachamento, salto e poses finais têm relógios visuais próprios. Veja [pipeline e comandos](docs/11-sprite-pipeline.md#revisao-de-candidatos-no-runtime) e [cobertura e pendências](docs/19-sprite-production-coverage.md).
 
 Para abrir o viewer de sprites direto em uma ferramenta isolada:
 
@@ -244,7 +248,7 @@ Configurações disponíveis em `Versus Setup` e `Options`:
 | Mostrar debug de combate | Desligado | Exibe hitboxes, hurtboxes, labels e colisão corpo-corpo. |
 | Entrada por gamepad | Ligado | Usa controles detectados pelo Raylib quando disponíveis. |
 
-Defesa: segure `Q`/`U` para bloquear médios, overheads e ataques aéreos em pé; acrescente baixo para bloquear rasteiras. Agarrões vencem guarda, mas erram contra saltos. Rasteiras, agarrões e o slide da Python derrubam alvos no chão; a recuperação protegida dura 36 frames e permite voltar a agir sem receber golpes enquanto caído. Chip reduz vida até o mínimo de 1.
+Defesa: segure `Q`/`U` para bloquear médios, overheads e ataques aéreos em pé; acrescente baixo para bloquear rasteiras. Agarrões vencem guarda, mas erram contra saltos. Rasteiras derrubam no lugar; agarrões arremessam, enquanto ganchos e os especiais de C, Python e C++ lançam a vítima; a recuperação protegida dura 36 frames e permite voltar a agir sem receber golpes enquanto caído. Chip reduz vida até o mínimo de 1.
 
 Controles:
 

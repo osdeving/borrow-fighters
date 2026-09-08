@@ -458,7 +458,7 @@
     {
       "cue": "fighter.attack.start",
       "character": "rust",
-      "move": "rust_borrow_break",
+      "move": "rust_borrow_fortress",
       "clips": ["voice.rust.attack.heavy.01"]
     },
     {
@@ -528,7 +528,7 @@
     {
       "cue": "fighter.attack.start",
       "character": "duke",
-      "move": "duke_gc_slam",
+      "move": "duke_println_barrage",
       "clips": ["voice.duke.attack.heavy.01"]
     },
     {

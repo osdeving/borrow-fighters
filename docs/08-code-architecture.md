@@ -39,7 +39,10 @@ borrow-fighters/
 │   │   ├── arena.rs            # Identidade e rotação das arenas do protótipo
 │   │   ├── ai.rs               # CPU simples para playtest
 │   │   ├── feature_flags.rs    # Flags runtime para experimentos e menu Options
-│   │   └── world.rs            # Estado jogável, intro/contagem e regras de partida
+│   │   ├── world.rs            # Estado jogável, intro/contagem e regras de partida
+│   │   └── world/
+│   │       ├── throws.rs       # Captura pareada e lançamento balístico
+│   │       └── signatures.rs   # Emissão e contato dos cinco especiais
 │   ├── engine/
 │   │   ├── mod.rs              # Adaptadores finos em volta de Raylib
 │   │   ├── audio.rs            # Boundary Raylib para carregar e tocar clips de áudio
@@ -51,6 +54,7 @@ borrow-fighters/
 │   │   ├── render/
 │   │   │   ├── combat_lab.rs   # Desenho da cena isolada de Combat Lab
 │   │   │   ├── move_showcase.rs # Desenho de combate contextual no showcase
+│   │   │   ├── signature_effects.rs # Atlas de efeitos nas posições físicas
 │   │   │   └── sprite_viewer.rs # Desenho da ferramenta isolada de sprites
 │   │   └── sprites/
 │   │       ├── animation.rs    # Seleção de frame por duração
@@ -62,6 +66,8 @@ borrow-fighters/
 │   ├── combat/
 │   │   ├── mod.rs              # Contratos do sistema de combate
 │   │   ├── fighter.rs          # Estado comum de lutador
+│   │   ├── fighter/reactions.rs # Captura, voo e aterrissagem
+│   │   ├── signature.rs        # Entidades e geometria dos especiais
 │   │   ├── frame.rs            # Timing de combate em frames inteiros
 │   │   ├── collision.rs        # Resolução hitbox x hurtbox
 │   │   ├── move_data.rs        # Tabela MoveSpec dos golpes atuais
@@ -202,7 +208,7 @@ Usar cenas simples para separar fluxo de tela sem criar framework pesado.
 
 Ferramentas temporárias e plugáveis também podem entrar em `scenes/*` quando tiverem estado testável sem Raylib. O corte atual é `src/scenes/sprite_viewer.rs`, acionado por `--tool sprite-viewer`, enquanto o desenho fica em `src/engine/render/sprite_viewer.rs`. Esse modo não deve carregar `World`, áudio ou loop de luta normal.
 
-O `MoveShowcase` é uma cena de treino com dois atores no `World` real. Ele controla apenas preparação, entradas e repetição; as regras de combate e o log determinam o resultado. Especiais e queda usam os estados de combate existentes com novos dados/clips, conforme a [ADR 0013](adr/0013-contextual-showcase-and-mvp-combat.md).
+O `MoveShowcase` é uma cena de treino com dois atores no `World` real. Ele controla apenas preparação, entradas e repetição; as regras de combate e o log determinam o resultado. A [ADR 0013](adr/0013-contextual-showcase-and-mvp-combat.md) registra a base do showcase. A evolução na [ADR 0014](adr/0014-throws-launches-and-signature-effects.md) adiciona captura pareada, reações aéreas e entidades físicas dos especiais. `World` mantém a autoridade sobre trajetória, contato e KO; o renderer apenas anima os atlas separados no mesmo ponto. O resultado do showcase soma todos os pulsos, incluindo as três folhas de Java.
 
 ### Feature flags runtime
 

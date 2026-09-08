@@ -1,0 +1,27 @@
+{
+  "output": "mapped-spectacle-v3.png",
+  "base": "keyed-spectacle-v2.png",
+  "replacement_source": "keyed-spectacle-v3.png",
+  "replacement_frame_index": 2,
+  "replacement_rect": {
+    "x": 965,
+    "y": 0,
+    "w": 483,
+    "h": 543
+  },
+  "operation": "Complete generated crop copied at its existing position. Other five v2 frame crops preserved. No procedural anatomy edits or independent limb transforms.",
+  "target_runtime_hands": "center+55px, floor-235px; open supporting palms in front of forehead",
+  "generator": "built-in imagegen",
+  "prompt": "prompt-spectacle-v3.txt",
+  "source": "source-spectacle-v3.png",
+  "matte_helper": "tools/art/remove_generated_magenta.py --rust-contour",
+  "source_sha256": "f01dd065c488d2956dd657f226bdd26705cf6e928785685d9e96072400c8957c",
+  "prompt_sha256": "d8e9c918290f881fdae21ec15311b8df065af2c7263dfd79e0093c58a4687712",
+  "mapped_rgba_sha256": "96c51c9afb1521a368aafba5214def45fe7a8f8ec707ac571366f88a46331b3b",
+  "review": "Actual isolated Raylib captures, both sides, inspected f068/070/072/073 and release/flight/landing; alpha inspected on light/dark. Supporting hands remain under/in contact with victim during the lift.",
+  "capture_directories": [
+    "/tmp/borrow-fighters-spectacle-qa/rust-throw-lift-v3-left",
+    "/tmp/borrow-fighters-spectacle-qa/rust-throw-lift-v3-right"
+  ],
+  "preservation_report": "preservation-spectacle-v3.json"
+}

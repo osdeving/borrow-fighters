@@ -41,7 +41,7 @@ const RUST_MOVE_IDS: [MoveId; 10] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::RustOwnershipThrow,
-    MoveId::RustBorrowBreak,
+    MoveId::RustBorrowFortress,
 ];
 const DUKE_MOVE_IDS: [MoveId; 10] = [
     MoveId::LightPunch,
@@ -53,7 +53,7 @@ const DUKE_MOVE_IDS: [MoveId; 10] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::DukeEnterpriseThrow,
-    MoveId::DukeGcSlam,
+    MoveId::DukePrintlnBarrage,
 ];
 const GO_MOVE_IDS: [MoveId; 9] = [
     MoveId::GoGoroutineJab,
@@ -76,7 +76,7 @@ const C_MOVE_IDS: [MoveId; 10] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::CUndefinedThrow,
-    MoveId::CPointerLance,
+    MoveId::CSegmentationFault,
 ];
 const PYTHON_MOVE_IDS: [MoveId; 10] = [
     MoveId::PythonSnakeBite,
@@ -88,7 +88,7 @@ const PYTHON_MOVE_IDS: [MoveId; 10] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::PythonConstrictThrow,
-    MoveId::PythonSerpentSlide,
+    MoveId::PythonImportAntigravity,
 ];
 const CPP_MOVE_IDS: [MoveId; 10] = [
     MoveId::CppReferenceJab,
@@ -100,7 +100,7 @@ const CPP_MOVE_IDS: [MoveId; 10] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::CppMoveThrow,
-    MoveId::CppTemplateArc,
+    MoveId::CppUndefinedBazooka,
 ];
 
 /// Stable identifier for playable or testable characters.

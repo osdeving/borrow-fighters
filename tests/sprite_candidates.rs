@@ -147,6 +147,20 @@ fn candidate_attack_poses_match_every_combat_tick_including_active_boundaries() 
                     .iter()
                     .find(|source| source["name"].as_str() == Some(frame.name.as_str()))
                     .unwrap_or_else(|| panic!("{key}/{clip_name}: {} has no source", frame.name));
+                // A landed throw freezes its contact clock while its authored
+                // capture keys continue through tick21. The same keys play on a
+                // whiff, but they create no extra active collision frames.
+                let capture_pose = requested_clip == FighterSpriteClip::Throw
+                    && candidate.character != CharacterId::Go
+                    && (10..22).contains(&tick);
+                if capture_pose {
+                    assert!(
+                        matches!(source["phase"].as_str(), Some("capture" | "active")),
+                        "{key}/{move_id:?}: capture tick {tick} samples {}",
+                        frame.name
+                    );
+                    continue;
+                }
                 let expected_phase = if tick < timing.active_start.get() {
                     "startup"
                 } else if tick <= timing.active_end.get() {

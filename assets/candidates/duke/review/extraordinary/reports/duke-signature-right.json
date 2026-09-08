@@ -1,0 +1,2907 @@
+{
+  "render_size": [
+    1280,
+    720
+  ],
+  "reversed": true,
+  "scenarios": [
+    {
+      "captures": [
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                391.99993896484375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f001.png",
+          "result": "Pending",
+          "tick": 1
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_00",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_1",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                392.81475830078125,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f031.png",
+          "result": "Pending",
+          "tick": 31
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_00",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_2",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                409.1110534667969,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f036.png",
+          "result": "Pending",
+          "tick": 36
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_01",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_2",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                421.0369873046875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f038.png",
+          "result": "Pending",
+          "tick": 38
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_01",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_3",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                445.9259033203125,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f042.png",
+          "result": "Pending",
+          "tick": 42
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_02",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_3",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                477.03704833984375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f047.png",
+          "result": "Pending",
+          "tick": 47
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_02",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_3",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                483.25927734375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f048.png",
+          "result": "Pending",
+          "tick": 48
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_02",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_0",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                489.48150634765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f049.png",
+          "result": "Pending",
+          "tick": 49
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_02",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_1",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                526.8148803710938,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f055.png",
+          "result": "Pending",
+          "tick": 55
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_03",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_1",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                533.037109375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.0,
+              "kind": "DukeCodeSheet",
+              "position": [
+                765.3333129882812,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f056.png",
+          "result": "Pending",
+          "tick": 56
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_03",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_1",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                557.926025390625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.06666667014360428,
+              "kind": "DukeCodeSheet",
+              "position": [
+                719.1111450195312,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f060.png",
+          "result": "Pending",
+          "tick": 60
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_03",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_2",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                564.1482543945312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.0833333358168602,
+              "kind": "DukeCodeSheet",
+              "position": [
+                707.5556030273438,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f061.png",
+          "result": "Pending",
+          "tick": 61
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_03",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 96,
+              "hitstun": true,
+              "position": [
+                551.7037963867188,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.0,
+              "kind": "DukeCodeSheet",
+              "position": [
+                696.0000610351562,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f062.png",
+          "result": "Hit { damage: 8 }",
+          "tick": 62
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_04",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 96,
+              "hitstun": true,
+              "position": [
+                551.7037963867188,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.06666667014360428,
+              "kind": "DukeCodeSheet",
+              "position": [
+                696.0000610351562,
+                505.3333435058594
+              ]
+            },
+            {
+              "elapsed": 0.0,
+              "kind": "DukeCodeSheet",
+              "position": [
+                765.3333129882812,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f066.png",
+          "result": "Hit { damage: 8 }",
+          "tick": 66
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_04",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 96,
+              "hitstun": true,
+              "position": [
+                551.7037963867188,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.10000000149011612,
+              "kind": "DukeCodeSheet",
+              "position": [
+                696.0000610351562,
+                505.3333435058594
+              ]
+            },
+            {
+              "elapsed": 0.03333333507180214,
+              "kind": "DukeCodeSheet",
+              "position": [
+                742.2222290039062,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f068.png",
+          "result": "Hit { damage: 8 }",
+          "tick": 68
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_04",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 96,
+              "hitstun": true,
+              "position": [
+                551.7037963867188,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.13333334028720856,
+              "kind": "DukeCodeSheet",
+              "position": [
+                696.0000610351562,
+                505.3333435058594
+              ]
+            },
+            {
+              "elapsed": 0.06666667014360428,
+              "kind": "DukeCodeSheet",
+              "position": [
+                719.1111450195312,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f070.png",
+          "result": "Hit { damage: 8 }",
+          "tick": 70
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_04",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 88,
+              "hitstun": true,
+              "position": [
+                533.037109375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.18333333730697632,
+              "kind": "DukeCodeSheet",
+              "position": [
+                696.0000610351562,
+                505.3333435058594
+              ]
+            },
+            {
+              "elapsed": 0.0,
+              "kind": "DukeCodeSheet",
+              "position": [
+                684.4445190429688,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f073.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 73
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_04",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 88,
+              "hitstun": true,
+              "position": [
+                533.037109375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.20000000298023224,
+              "kind": "DukeCodeSheet",
+              "position": [
+                696.0000610351562,
+                505.3333435058594
+              ]
+            },
+            {
+              "elapsed": 0.01666666753590107,
+              "kind": "DukeCodeSheet",
+              "position": [
+                684.4445190429688,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f074.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 74
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_04",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 88,
+              "hitstun": true,
+              "position": [
+                533.037109375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.23333333432674408,
+              "kind": "DukeCodeSheet",
+              "position": [
+                696.0000610351562,
+                505.3333435058594
+              ]
+            },
+            {
+              "elapsed": 0.05000000447034836,
+              "kind": "DukeCodeSheet",
+              "position": [
+                684.4445190429688,
+                505.3333435058594
+              ]
+            },
+            {
+              "elapsed": 0.0,
+              "kind": "DukeCodeSheet",
+              "position": [
+                765.3333129882812,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f076.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 76
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 88,
+              "hitstun": true,
+              "position": [
+                533.037109375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.06666667014360428,
+              "kind": "DukeCodeSheet",
+              "position": [
+                684.4445190429688,
+                505.3333435058594
+              ]
+            },
+            {
+              "elapsed": 0.01666666753590107,
+              "kind": "DukeCodeSheet",
+              "position": [
+                753.7777709960938,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f077.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 77
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 88,
+              "hitstun": true,
+              "position": [
+                533.037109375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.10000000149011612,
+              "kind": "DukeCodeSheet",
+              "position": [
+                684.4445190429688,
+                505.3333435058594
+              ]
+            },
+            {
+              "elapsed": 0.05000000447034836,
+              "kind": "DukeCodeSheet",
+              "position": [
+                730.6666870117188,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f079.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 79
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 88,
+              "hitstun": true,
+              "position": [
+                533.037109375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.11666666716337204,
+              "kind": "DukeCodeSheet",
+              "position": [
+                684.4445190429688,
+                505.3333435058594
+              ]
+            },
+            {
+              "elapsed": 0.06666667014360428,
+              "kind": "DukeCodeSheet",
+              "position": [
+                719.1111450195312,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f080.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 80
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 88,
+              "hitstun": true,
+              "position": [
+                533.037109375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.13333334028720856,
+              "kind": "DukeCodeSheet",
+              "position": [
+                684.4445190429688,
+                505.3333435058594
+              ]
+            },
+            {
+              "elapsed": 0.0833333358168602,
+              "kind": "DukeCodeSheet",
+              "position": [
+                707.5556030273438,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f081.png",
+          "result": "Hit { damage: 16 }",
+          "tick": 81
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 80,
+              "hitstun": true,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.18333333730697632,
+              "kind": "DukeCodeSheet",
+              "position": [
+                684.4445190429688,
+                505.3333435058594
+              ]
+            },
+            {
+              "elapsed": 0.0,
+              "kind": "DukeCodeSheet",
+              "position": [
+                672.8889770507812,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f084.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 84
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 80,
+              "hitstun": true,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.20000000298023224,
+              "kind": "DukeCodeSheet",
+              "position": [
+                684.4445190429688,
+                505.3333435058594
+              ]
+            },
+            {
+              "elapsed": 0.01666666753590107,
+              "kind": "DukeCodeSheet",
+              "position": [
+                672.8889770507812,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f085.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 85
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 80,
+              "hitstun": true,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.06666667014360428,
+              "kind": "DukeCodeSheet",
+              "position": [
+                672.8889770507812,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f088.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 88
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 80,
+              "hitstun": true,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.10000000149011612,
+              "kind": "DukeCodeSheet",
+              "position": [
+                672.8889770507812,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f090.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 90
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 80,
+              "hitstun": true,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.13333334028720856,
+              "kind": "DukeCodeSheet",
+              "position": [
+                672.8889770507812,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f092.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 92
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 80,
+              "hitstun": true,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.20000000298023224,
+              "kind": "DukeCodeSheet",
+              "position": [
+                672.8889770507812,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f096.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 96
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_02",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 80,
+              "hitstun": true,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.23333333432674408,
+              "kind": "DukeCodeSheet",
+              "position": [
+                672.8889770507812,
+                505.3333435058594
+              ]
+            }
+          ],
+          "image": "duke-11-attacksignaturespecial-f098.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 98
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_02",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 80,
+              "hitstun": true,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f099.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 99
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f104.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 104
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f109.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 109
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f110.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 110
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f116.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 116
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f126.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 126
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_spectacle_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f130.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 130
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f131.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 131
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f137.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 137
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f145.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 145
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f148.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 148
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f158.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 158
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f159.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 159
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f169.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 169
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f173.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 173
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f179.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 179
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f188.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 188
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f190.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 190
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f200.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 200
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f202.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 202
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f211.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 211
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f217.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 217
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f221.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 221
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f231.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 231
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f232.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 232
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f242.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 242
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f245.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 245
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f253.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 253
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                786.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 80,
+              "hitstun": false,
+              "position": [
+                514.3704223632812,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-11-attacksignaturespecial-f259.png",
+          "result": "Hit { damage: 24 }",
+          "tick": 259
+        }
+      ],
+      "character": "duke",
+      "contact_frame": 62,
+      "result": "Hit { damage: 24 }",
+      "scenario": "Attack(SignatureSpecial)",
+      "scenario_label": "System.out.println / three-wave paper barrage"
+    }
+  ]
+}

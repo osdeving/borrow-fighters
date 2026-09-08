@@ -1,51 +1,96 @@
 {
-  "sheet": "throw/keyed.png",
+  "sheet": "throw/mapped-spectacle-v3.png",
   "reviewed": true,
   "loop": false,
   "frames": [
     {
-      "name": "throw_00",
+      "name": "throw_spectacle_00",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 684,
-        "h": 736
+        "w": 512,
+        "h": 500
       },
       "pivot": {
-        "x": 425,
-        "y": 676
+        "x": 280,
+        "y": 430
       },
-      "duration_ms": 150,
+      "duration_ms": 166,
       "phase": "startup"
     },
     {
-      "name": "throw_01",
+      "name": "throw_spectacle_01",
       "source_rect": {
-        "x": 684,
+        "x": 512,
         "y": 0,
-        "w": 664,
-        "h": 736
+        "w": 512,
+        "h": 500
       },
       "pivot": {
-        "x": 266,
-        "y": 676
+        "x": 278,
+        "y": 431
       },
-      "duration_ms": 50,
-      "phase": "active"
+      "duration_ms": 83,
+      "phase": "capture"
     },
     {
-      "name": "throw_02",
+      "name": "throw_spectacle_02",
       "source_rect": {
-        "x": 1348,
+        "x": 1024,
         "y": 0,
-        "w": 700,
-        "h": 736
+        "w": 512,
+        "h": 500
       },
       "pivot": {
-        "x": 202,
-        "y": 676
+        "x": 186,
+        "y": 432
       },
-      "duration_ms": 300,
+      "duration_ms": 117,
+      "phase": "capture"
+    },
+    {
+      "name": "throw_spectacle_03",
+      "source_rect": {
+        "x": 0,
+        "y": 500,
+        "w": 512,
+        "h": 524
+      },
+      "pivot": {
+        "x": 298,
+        "y": 438
+      },
+      "duration_ms": 167,
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_spectacle_04",
+      "source_rect": {
+        "x": 512,
+        "y": 500,
+        "w": 512,
+        "h": 524
+      },
+      "pivot": {
+        "x": 239,
+        "y": 440
+      },
+      "duration_ms": 133,
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_spectacle_05",
+      "source_rect": {
+        "x": 1024,
+        "y": 500,
+        "w": 512,
+        "h": 524
+      },
+      "pivot": {
+        "x": 211,
+        "y": 438
+      },
+      "duration_ms": 134,
       "phase": "recovery"
     }
   ]

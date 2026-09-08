@@ -7,7 +7,9 @@ use borrow_fighters::{
     game::{combat_log::CombatLogKind, world::WorldSpriteCombatManifests},
     scenes::{
         combat_lab::{CombatLabInput, CombatLabMove},
-        move_showcase::{MoveShowcase, MoveShowcaseOptions, ShowcaseResult, ShowcaseScenario},
+        move_showcase::{
+            MoveShowcase, MoveShowcaseOptions, SCENARIO_FRAMES, ShowcaseResult, ShowcaseScenario,
+        },
     },
 };
 
@@ -62,7 +64,9 @@ fn every_public_move_hits_in_its_context_on_both_sides_with_match_metadata_and_f
                         {
                             airborne_contact = !scene.world().player_two.grounded;
                         }
-                        reaction_seen |= scene.world().player_two.in_hitstun();
+                        reaction_seen |= scene.world().player_two.in_hitstun()
+                            || scene.world().player_two.in_air_reaction()
+                            || scene.world().player_two.in_capture();
                         previous_result = scene.result();
                     }
                     if !matches!(scene.result(), ShowcaseResult::Hit { damage } if damage > 0) {
@@ -73,10 +77,7 @@ fn every_public_move_hits_in_its_context_on_both_sides_with_match_metadata_and_f
                         reaction_seen,
                         "{character:?}/{selected:?}: missing hit reaction"
                     );
-                    if selected == CombatLabMove::AntiAir
-                        || selected == CombatLabMove::SignatureSpecial
-                            && character == CharacterId::Cpp
-                    {
+                    if selected == CombatLabMove::AntiAir {
                         assert!(
                             airborne_contact,
                             "{character:?}/{selected:?}: anti-air must contact before landing"
@@ -110,7 +111,14 @@ fn every_public_move_hits_in_its_context_on_both_sides_with_match_metadata_and_f
                             )
                         })
                         .count();
-                    assert_eq!(contacts, 1, "one real strike per showcase scenario");
+                    let expected = if selected == CombatLabMove::SignatureSpecial
+                        && character == CharacterId::Duke
+                    {
+                        3
+                    } else {
+                        1
+                    };
+                    assert_eq!(contacts, expected, "each authored emission resolves once");
                 }
             }
         }
@@ -169,6 +177,58 @@ fn each_character_demonstrates_real_standing_low_overhead_and_projectile_defense
 }
 
 #[test]
+fn fortress_and_vortex_remain_visible_before_the_approaching_opponent_is_hit() {
+    let mut observations = Vec::new();
+    for character in [CharacterId::Rust, CharacterId::Python] {
+        for metadata in [false, true] {
+            for reversed in [false, true] {
+                let mut scene = showcase(character, metadata);
+                scene.select_move(CombatLabMove::SignatureSpecial);
+                if reversed {
+                    scene.switch_sides();
+                }
+                let mut visible_before_contact = 0;
+                for _ in 0..SCENARIO_FRAMES {
+                    scene.update(CombatLabInput::default());
+                    if scene
+                        .world()
+                        .signature_effects
+                        .iter()
+                        .any(|effect| !effect.has_connected())
+                    {
+                        assert_eq!(scene.result(), ShowcaseResult::Pending);
+                        visible_before_contact += 1;
+                    }
+                }
+                observations.push((character, metadata, reversed, visible_before_contact));
+                assert!(matches!(scene.result(), ShowcaseResult::Hit { damage } if damage > 0));
+                let contacts = scene
+                    .world()
+                    .combat_log()
+                    .iter()
+                    .filter(|event| {
+                        matches!(
+                            event.kind,
+                            CombatLogKind::CloseAttackResolved {
+                                attacker: PlayerSlot::One,
+                                ..
+                            }
+                        )
+                    })
+                    .count();
+                assert_eq!(contacts, 1);
+            }
+        }
+    }
+    assert!(
+        observations
+            .iter()
+            .all(|(_, _, _, ticks)| (7..=12).contains(ticks)),
+        "expected 7–12 visible ticks before contact: {observations:?}"
+    );
+}
+
+#[test]
 fn pause_frame_step_replay_and_side_switch_preserve_deterministic_results() {
     let mut scene = showcase(CharacterId::Python, true);
     scene.select_move(CombatLabMove::Sweep);
@@ -221,7 +281,7 @@ fn cycle_and_repeat_reset_time_result_and_health() {
     let mut scene = showcase(CharacterId::Rust, true);
     let first_count = scene.move_count();
     assert_eq!(first_count, CombatLabMove::ALL.len() + 4);
-    for _ in 0..200 {
+    for _ in 0..SCENARIO_FRAMES {
         scene.update(CombatLabInput::default());
     }
     assert!(matches!(scene.result(), ShowcaseResult::Hit { .. }));
@@ -235,7 +295,7 @@ fn cycle_and_repeat_reset_time_result_and_health() {
         scene.world().player_two.max_health
     );
     scene.toggle_repeat();
-    for _ in 0..201 {
+    for _ in 0..=SCENARIO_FRAMES {
         scene.update(CombatLabInput::default());
     }
     assert_eq!(scene.selected_move(), CombatLabMove::HeavyPunch);

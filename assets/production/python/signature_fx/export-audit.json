@@ -1,0 +1,30 @@
+{
+  "frames": 6,
+  "clips": [
+    {
+      "name": "projectile",
+      "loop": true,
+      "frames": [
+        "projectile_00",
+        "projectile_01"
+      ]
+    },
+    {
+      "name": "impact",
+      "loop": false,
+      "frames": [
+        "impact_02",
+        "impact_03",
+        "impact_04",
+        "impact_05"
+      ]
+    }
+  ],
+  "atlas_sha256": "2eef20e49ab191ba660e4e2f46327b72d33ec6834f717b2a517e433a550ead5f",
+  "manifest_sha256": "79449835473611a88cf316f87f1a602cf12e7bf5a89fd681ed6e89024caccfba",
+  "plan_sha256": "714ab634b1e87047dc434d1edad449cf087cb3774386408e8fd245429d7c1551",
+  "sources": {
+    "keyed-projectile-v2-edge-clean.png": "e7edb4ca18faf8f6201b7cce89302d241de22233e0414c64dd5639ee6842131d",
+    "keyed-extraordinary-v1-edge-clean.png": "6dc5b64dc34dd431db0d04dc8dc23e82095af537b828776853499916aad7b484"
+  }
+}

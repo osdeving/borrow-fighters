@@ -1,0 +1,83 @@
+{
+  "action": "throw",
+  "source": "throw/source-v2.png",
+  "sheet": "throw/cleaned-v2.png",
+  "reviewed": true,
+  "loop": false,
+  "status": "reviewed visual and functional pilot; see ../finalization-review.md for evidence and limits",
+  "source_body_height_reference_px": 498,
+  "normalization_note": "Approximate upright-body reference; do not scale each frame by its own alpha bounds. Air pivots are virtual standing-floor anchors beneath hips, not boot tips. Ground pivots are proposed and require foot-support review after normalization.",
+  "combat_timing": {
+    "move_id": "RustOwnershipThrow",
+    "input": "Throw",
+    "duration": 20,
+    "active_start": 5,
+    "active_end_inclusive": 7,
+    "whiff_recovery": 12,
+    "clip": "throw"
+  },
+  "frames": [
+    {
+      "name": "throw_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 540,
+        "h": 768
+      },
+      "pivot": {
+        "x": 315,
+        "y": 660
+      },
+      "duration_ms": 83,
+      "phase": "startup"
+    },
+    {
+      "name": "throw_1",
+      "source_rect": {
+        "x": 540,
+        "y": 0,
+        "w": 560,
+        "h": 768
+      },
+      "pivot": {
+        "x": 242,
+        "y": 660
+      },
+      "duration_ms": 50,
+      "phase": "active"
+    },
+    {
+      "name": "throw_2",
+      "source_rect": {
+        "x": 1100,
+        "y": 0,
+        "w": 430,
+        "h": 768
+      },
+      "pivot": {
+        "x": 188,
+        "y": 661
+      },
+      "duration_ms": 100,
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_3",
+      "source_rect": {
+        "x": 1530,
+        "y": 0,
+        "w": 518,
+        "h": 768
+      },
+      "pivot": {
+        "x": 220,
+        "y": 661
+      },
+      "duration_ms": 100,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "v2 shortens the active grasp by naturally bending both elbows. Forward hand is inside the original Ownership reach; other hand stays near the chest. Ground anchors, scale and all durations unchanged. Generated RGB checkerboard removed offline; source preserved. Static contact and silhouette reviewed; Native verification complete; see ../finalization-review.md.",
+  "finalization_review": "../finalization-review.md"
+}

@@ -23,6 +23,7 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Proxima acao |
 |---|---|---|---|---|
+| Concluído | Arremessos e especiais extraordinários | Cinco assinaturas, arremessos e reações integrados e verificados | [Goal local e critérios](21-signature-spectacle-and-throws.md), [ADR 0014](adr/0014-throws-launches-and-signature-effects.md) | 290 testes Rust; 40 cenas gráficas nos dois lados, 25 verificações de controles e 60 lutas de CPU. |
 | Concluído | MVP: showcase contextual, especiais e coerência de combate/arte | Cinco selecionáveis verificados; sem conteúdo novo para Go | [Plano e critérios](20-mvp-combat-showcase.md) | Corrigir debug, demonstrar contato real com oponente contextual, completar ações/reações e validar balanceamento/arte. |
 | Feito local | Cursor livre e menus por mouse | Corrigido e verificado | [Playtest](10-greybox-playtest.md), [guia técnico](12-technical-combat-guide.md#mouse-e-fechamento-da-janela), [ADR 0012](adr/0012-shared-menu-pointer-layout.md) | Cursor sem centralização por quadro; hover, cliques, saída pelo menu e fechamento nativo verificados em janela isolada. 242 testes Rust aprovados. |
 | Feito local | Runtime de `frames[].combat` | Feito | [`docs/11-sprite-pipeline.md`](11-sprite-pipeline.md), [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md), [`docs/adr/0007-sprite-frame-combat-runtime.md`](adr/0007-sprite-frame-combat-runtime.md) | Runtime consome hitboxes, hurtboxes e origem de projectile do manifesto com fallback para o greybox. |

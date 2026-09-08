@@ -1,0 +1,167 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "duke-signature-fx.png",
+  "source": "../../production/duke/signature_fx/production.json",
+  "cell": {
+    "w": 196,
+    "h": 179
+  },
+  "default_pivot": {
+    "x": 93,
+    "y": 98
+  },
+  "scale": 1.0,
+  "frames": [
+    {
+      "name": "duke_signature_projectile_00",
+      "clip": "projectile",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 93,
+        "y": 98
+      },
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 175,
+        "h": 179
+      },
+      "trimmed_bounds": {
+        "x": 34,
+        "y": 66,
+        "w": 112,
+        "h": 56
+      }
+    },
+    {
+      "name": "duke_signature_projectile_01",
+      "clip": "projectile",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 94,
+        "y": 96
+      },
+      "frame": {
+        "x": 196,
+        "y": 0,
+        "w": 161,
+        "h": 179
+      },
+      "trimmed_bounds": {
+        "x": 7,
+        "y": 57,
+        "w": 130,
+        "h": 73
+      }
+    },
+    {
+      "name": "duke_signature_impact_02",
+      "clip": "impact",
+      "duration_ms": 70,
+      "pivot": {
+        "x": 102,
+        "y": 97
+      },
+      "frame": {
+        "x": 392,
+        "y": 0,
+        "w": 196,
+        "h": 174
+      },
+      "trimmed_bounds": {
+        "x": 6,
+        "y": 21,
+        "w": 164,
+        "h": 136
+      }
+    },
+    {
+      "name": "duke_signature_impact_03",
+      "clip": "impact",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 88,
+        "y": 74
+      },
+      "frame": {
+        "x": 0,
+        "y": 179,
+        "w": 174,
+        "h": 174
+      },
+      "trimmed_bounds": {
+        "x": 0,
+        "y": 3,
+        "w": 160,
+        "h": 171
+      }
+    },
+    {
+      "name": "duke_signature_impact_04",
+      "clip": "impact",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 82,
+        "y": 76
+      },
+      "frame": {
+        "x": 196,
+        "y": 179,
+        "w": 174,
+        "h": 174
+      },
+      "trimmed_bounds": {
+        "x": 7,
+        "y": 5,
+        "w": 151,
+        "h": 135
+      }
+    },
+    {
+      "name": "duke_signature_impact_05",
+      "clip": "impact",
+      "duration_ms": 150,
+      "pivot": {
+        "x": 80,
+        "y": 78
+      },
+      "frame": {
+        "x": 392,
+        "y": 179,
+        "w": 174,
+        "h": 174
+      },
+      "trimmed_bounds": {
+        "x": 4,
+        "y": 15,
+        "w": 125,
+        "h": 112
+      }
+    }
+  ],
+  "clips": [
+    {
+      "name": "projectile",
+      "loop": true,
+      "frames": [
+        "duke_signature_projectile_00",
+        "duke_signature_projectile_01"
+      ]
+    },
+    {
+      "name": "impact",
+      "loop": false,
+      "frames": [
+        "duke_signature_impact_02",
+        "duke_signature_impact_03",
+        "duke_signature_impact_04",
+        "duke_signature_impact_05"
+      ]
+    }
+  ],
+  "notes": [
+    "Candidate assembled from explicitly reviewed action frames.",
+    "Combat metadata is included only when supplied explicitly in production.json.",
+    "Source rectangles and production provenance: duke-signature-fx.provenance.json"
+  ]
+}

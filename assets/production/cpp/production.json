@@ -920,52 +920,97 @@
           "source_rect": {
             "x": 0,
             "y": 0,
-            "w": 264,
-            "h": 286
+            "w": 312,
+            "h": 302
           },
           "pivot": {
-            "x": 150,
-            "y": 279
+            "x": 162,
+            "y": 290
           },
-          "duration_ms": 100,
+          "duration_ms": 166,
           "phase": "startup"
         },
         {
           "name": "throw_01",
           "source_rect": {
-            "x": 268,
+            "x": 312,
             "y": 0,
-            "w": 264,
-            "h": 286
+            "w": 248,
+            "h": 302
           },
           "pivot": {
-            "x": 111,
-            "y": 279
+            "x": 115,
+            "y": 290
           },
-          "duration_ms": 50,
-          "phase": "active"
+          "duration_ms": 100,
+          "phase": "capture"
         },
         {
           "name": "throw_02",
           "source_rect": {
-            "x": 536,
+            "x": 624,
             "y": 0,
-            "w": 268,
-            "h": 286
+            "w": 254,
+            "h": 302
           },
           "pivot": {
-            "x": 123,
-            "y": 279
+            "x": 115,
+            "y": 290
           },
-          "duration_ms": 233,
+          "duration_ms": 100,
+          "phase": "capture"
+        },
+        {
+          "name": "throw_03",
+          "source_rect": {
+            "x": 936,
+            "y": 0,
+            "w": 312,
+            "h": 316
+          },
+          "pivot": {
+            "x": 188,
+            "y": 290
+          },
+          "duration_ms": 67,
+          "phase": "recovery"
+        },
+        {
+          "name": "throw_04",
+          "source_rect": {
+            "x": 1248,
+            "y": 0,
+            "w": 260,
+            "h": 316
+          },
+          "pivot": {
+            "x": 125,
+            "y": 290
+          },
+          "duration_ms": 133,
+          "phase": "recovery"
+        },
+        {
+          "name": "throw_05",
+          "source_rect": {
+            "x": 1560,
+            "y": 0,
+            "w": 254,
+            "h": 316
+          },
+          "pivot": {
+            "x": 109,
+            "y": 289
+          },
+          "duration_ms": 234,
           "phase": "recovery"
         }
       ],
       "provenance": {
         "source_action": "throw/action.json",
-        "source_sheet": "throw/keyed-v1.png",
-        "scale_to_runtime": 0.3889695210449927,
-        "review": "Open preparation, short two-handed grab, pull toward waist. Farthest fingertip near(1255,325), support(965,716), projects to(+112.8,-152.1)world inside existing throw reach ending+117.3. Hands separate with bent elbows, bag remains attached; no victim or new combat metadata. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Approved only for candidate review export, not final art release."
+        "source_sheet": "throw/selected-lift-v2.png",
+        "scale_to_runtime": 0.6049661399548533,
+        "review": "Six shoulder-throw keys: reach, capture, lift/turn, release BEHIND, follow-through, ready.48ticks800ms; capture visual phase10..21, recovery starts22. No fake victim drawn into attacker sheet. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available. Lift v2 replaces only key2 with generated arms raised FORWARD; hands approximately(+55,-235)world support the victim during capture. Other five selected drawings retain identical pixel hashes. select_lift_v2.py reproduces the explicit whole-frame selection."
       }
     },
     "special": {
@@ -1206,71 +1251,131 @@
       "loop": false,
       "frames": [
         {
-          "name": "signature_special_mvp_00",
+          "name": "signature_special_00",
           "source_rect": {
             "x": 0,
             "y": 0,
-            "w": 254,
-            "h": 380
+            "w": 357,
+            "h": 357
           },
           "pivot": {
-            "x": 146,
-            "y": 349
+            "x": 177,
+            "y": 311
           },
           "duration_ms": 150,
           "phase": "startup"
         },
         {
-          "name": "signature_special_mvp_01",
+          "name": "signature_special_01",
           "source_rect": {
-            "x": 254,
+            "x": 357,
             "y": 0,
-            "w": 254,
-            "h": 380
+            "w": 357,
+            "h": 357
           },
           "pivot": {
-            "x": 145,
-            "y": 348
+            "x": 140,
+            "y": 296
           },
-          "duration_ms": 116,
+          "duration_ms": 183,
+          "phase": "startup"
+        },
+        {
+          "name": "signature_special_02",
+          "source_rect": {
+            "x": 714,
+            "y": 0,
+            "w": 357,
+            "h": 357
+          },
+          "pivot": {
+            "x": 127,
+            "y": 307
+          },
+          "duration_ms": 200,
+          "phase": "startup"
+        },
+        {
+          "name": "signature_special_03",
+          "source_rect": {
+            "x": 1071,
+            "y": 0,
+            "w": 357,
+            "h": 357
+          },
+          "pivot": {
+            "x": 109,
+            "y": 289
+          },
+          "duration_ms": 150,
           "phase": "active"
         },
         {
-          "name": "signature_special_mvp_02",
+          "name": "signature_special_04",
           "source_rect": {
-            "x": 508,
+            "x": 1428,
             "y": 0,
-            "w": 254,
-            "h": 380
+            "w": 357,
+            "h": 357
           },
           "pivot": {
-            "x": 142,
-            "y": 348
+            "x": 157,
+            "y": 287
           },
-          "duration_ms": 200,
+          "duration_ms": 133,
+          "phase": "active"
+        },
+        {
+          "name": "signature_special_05",
+          "source_rect": {
+            "x": 1785,
+            "y": 0,
+            "w": 357,
+            "h": 357
+          },
+          "pivot": {
+            "x": 213,
+            "y": 287
+          },
+          "duration_ms": 100,
+          "phase": "active"
+        },
+        {
+          "name": "signature_special_06",
+          "source_rect": {
+            "x": 2142,
+            "y": 0,
+            "w": 357,
+            "h": 357
+          },
+          "pivot": {
+            "x": 159,
+            "y": 287
+          },
+          "duration_ms": 350,
           "phase": "recovery"
         },
         {
-          "name": "signature_special_mvp_03",
+          "name": "signature_special_07",
           "source_rect": {
-            "x": 762,
+            "x": 2499,
             "y": 0,
-            "w": 254,
-            "h": 380
+            "w": 357,
+            "h": 357
           },
           "pivot": {
-            "x": 158,
-            "y": 347
+            "x": 142,
+            "y": 307
           },
-          "duration_ms": 234,
+          "duration_ms": 534,
           "phase": "recovery"
         }
       ],
       "provenance": {
         "source_action": "signature_special/action.json",
-        "source_sheet": "signature_special/keyed-green-v3.png",
-        "scale_to_runtime": 0.4953789279112754,
-        "review": "New grounded Template Arc. Generated v2 identity/poses retained in green-matte v3; local green key preserves white blouse and violet energy where checker flood left enclosed matte. Uniform268/541 scale, explicit support anchors. Active palm source(958,107) maps to(+75.8,-295.2) from body center/floor; palm/arc lie inside current special x[+50.7,+160], y[-341.3,-160]. Active150..266ms matches ticks9..15; total700ms/42ticks. Source/prompt/checker trial preserved, no combat metadata authored."
+        "source_sheet": "signature_special/keyed-extraordinary-v2-edge-clean.png",
+        "scale_to_runtime": 0.8048048048048048,
+        "review": "Undefined Bazooka: opens tiny bag, extracts absurdly huge weapon, shoulders it, aims down/fires, follows through, recoils in smoke, stows, returns ready. 108ticks1800ms: startup0..31, active32..54, recovery55..107. First active muzzle(1698,325) from pivot(1465,359) maps to(+187.5,-27.4)world. Dedicated projectile/impact atlas supplies the real moving rocket and ground explosion. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
       }
     },
     "knockdown": {
@@ -1344,6 +1449,210 @@
         "source_sheet": "knockdown/keyed-v1.png",
         "scale_to_runtime": 0.47686832740213525,
         "review": "New four-stage knockdown: falling backward, fully reclined on floor, kneeling rise, standing ready guard. Uniform268/562 anatomy scale derived from final upright pose. Pivots follow support ground, not bounding-box center. Full white blouse/trousers/boots/bag retained.100/250/150/100ms=600ms/36ticks matches real knockdown. No duplicated normal-hit or defeat frames; no combat metadata authored."
+      }
+    },
+    "thrown": {
+      "sheet": "thrown/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "thrown_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 214,
+            "h": 424
+          },
+          "pivot": {
+            "x": 78,
+            "y": 314
+          },
+          "duration_ms": 200,
+          "phase": "capture"
+        },
+        {
+          "name": "thrown_01",
+          "source_rect": {
+            "x": 223,
+            "y": 0,
+            "w": 156,
+            "h": 424
+          },
+          "pivot": {
+            "x": 53,
+            "y": 360
+          },
+          "duration_ms": 180,
+          "phase": "inverted"
+        },
+        {
+          "name": "thrown_02",
+          "source_rect": {
+            "x": 446,
+            "y": 0,
+            "w": 223,
+            "h": 424
+          },
+          "pivot": {
+            "x": 100,
+            "y": 357
+          },
+          "duration_ms": 200,
+          "phase": "tumble"
+        },
+        {
+          "name": "thrown_03",
+          "source_rect": {
+            "x": 669,
+            "y": 0,
+            "w": 220,
+            "h": 424
+          },
+          "pivot": {
+            "x": 85,
+            "y": 374
+          },
+          "duration_ms": 300,
+          "phase": "descent"
+        }
+      ],
+      "provenance": {
+        "source_action": "thrown/action.json",
+        "source_sheet": "thrown/keyed-extraordinary-v1-padded-edge-clean.png",
+        "scale_to_runtime": 0.44666666666666666,
+        "review": "Dedicated throw-victim captured/inverted/somersault/descent poses. First key200ms held by renderer during capture; ballistic flight starts clip clock at200ms. Waist registered near160world above virtual ground across rotations; transparent bottom padding accommodates virtual pivots without editing original drawings. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+      }
+    },
+    "launched": {
+      "sheet": "launched/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "launched_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 239,
+            "h": 389
+          },
+          "pivot": {
+            "x": 143,
+            "y": 311
+          },
+          "duration_ms": 120,
+          "phase": "impact"
+        },
+        {
+          "name": "launched_01",
+          "source_rect": {
+            "x": 239,
+            "y": 0,
+            "w": 198,
+            "h": 389
+          },
+          "pivot": {
+            "x": 99,
+            "y": 264
+          },
+          "duration_ms": 180,
+          "phase": "rise"
+        },
+        {
+          "name": "launched_02",
+          "source_rect": {
+            "x": 478,
+            "y": 0,
+            "w": 229,
+            "h": 389
+          },
+          "pivot": {
+            "x": 104,
+            "y": 238
+          },
+          "duration_ms": 180,
+          "phase": "apex"
+        },
+        {
+          "name": "launched_03",
+          "source_rect": {
+            "x": 717,
+            "y": 0,
+            "w": 211,
+            "h": 389
+          },
+          "pivot": {
+            "x": 95,
+            "y": 335
+          },
+          "duration_ms": 300,
+          "phase": "descent"
+        }
+      ],
+      "provenance": {
+        "source_action": "launched/action.json",
+        "source_sheet": "launched/keyed-extraordinary-v1-padded-edge-clean.png",
+        "scale_to_runtime": 0.432258064516129,
+        "review": "Dedicated uppercut reaction: chin snaps up, torso arches in rise, suspended apex, braced descent. No throw inversion or recycled ordinary hit. Virtual belt/ground pivots follow source pose placement while World supplies all flight. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+      }
+    },
+    "heavy_hit": {
+      "sheet": "heavy_hit/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "heavy_hit_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 265,
+            "h": 305
+          },
+          "pivot": {
+            "x": 151,
+            "y": 294
+          },
+          "duration_ms": 100,
+          "phase": "impact"
+        },
+        {
+          "name": "heavy_hit_01",
+          "source_rect": {
+            "x": 265,
+            "y": 0,
+            "w": 265,
+            "h": 305
+          },
+          "pivot": {
+            "x": 118,
+            "y": 294
+          },
+          "duration_ms": 120,
+          "phase": "recoil"
+        },
+        {
+          "name": "heavy_hit_02",
+          "source_rect": {
+            "x": 530,
+            "y": 0,
+            "w": 259,
+            "h": 305
+          },
+          "pivot": {
+            "x": 118,
+            "y": 294
+          },
+          "duration_ms": 150,
+          "phase": "recover"
+        }
+      ],
+      "provenance": {
+        "source_action": "heavy_hit/action.json",
+        "source_sheet": "heavy_hit/keyed-extraordinary-v1-edge-clean.png",
+        "scale_to_runtime": 0.4079147640791476,
+        "review": "Dedicated grounded heavy recoil, deep abdominal fold and stagger recovery. Feet support ground across keys, same anatomical scale from upright657px.370ms presentation; physical stun remains MoveSpec-driven. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
       }
     }
   }

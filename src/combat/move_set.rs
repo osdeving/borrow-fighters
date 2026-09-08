@@ -107,11 +107,11 @@ impl AttackKind {
             | MoveId::CUndefinedThrow
             | MoveId::PythonConstrictThrow
             | MoveId::CppMoveThrow => Self::Throw,
-            MoveId::RustBorrowBreak
-            | MoveId::DukeGcSlam
-            | MoveId::CPointerLance
-            | MoveId::PythonSerpentSlide
-            | MoveId::CppTemplateArc => Self::SignatureSpecial,
+            MoveId::RustBorrowFortress
+            | MoveId::DukePrintlnBarrage
+            | MoveId::CSegmentationFault
+            | MoveId::PythonImportAntigravity
+            | MoveId::CppUndefinedBazooka => Self::SignatureSpecial,
         }
     }
 
@@ -143,7 +143,7 @@ impl AttackKind {
             Self::AirPunch => MoveId::AirPunch,
             Self::AirKick => MoveId::AirKick,
             Self::Throw => MoveId::CloseThrow,
-            Self::SignatureSpecial => MoveId::RustBorrowBreak,
+            Self::SignatureSpecial => MoveId::RustBorrowFortress,
         }
     }
 

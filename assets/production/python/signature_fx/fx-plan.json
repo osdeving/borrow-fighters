@@ -1,0 +1,104 @@
+{
+  "schema": "borrow-fighters.signature-fx-production.v1",
+  "character": "python",
+  "generator": "builtin imagegen",
+  "notes": "Six explicitly selected generated frames. One uniform scale per clip; actor atlas is separate. Local magenta key authorized in production README. Additional transparent padding accommodates ground anchor; no runtime auto-fit. Cpp projectile is anchored at rocket body center. Python impact collapses around vortex midheight with a ground anchor. Original rejected variants remain available. Red-only boundary matte cleanup preserves blue/gold effects; original and first keyed PNGs remain available.",
+  "frames": [
+    {
+      "sheet": "keyed-projectile-v2-edge-clean.png",
+      "source_rect": {
+        "x": 230,
+        "y": 0,
+        "w": 550,
+        "h": 971
+      },
+      "pivot_source": {
+        "x": 496,
+        "y": 922
+      },
+      "duration_ms": 70,
+      "clip": "projectile",
+      "scale": 0.47444444444444445
+    },
+    {
+      "sheet": "keyed-projectile-v2-edge-clean.png",
+      "source_rect": {
+        "x": 870,
+        "y": 0,
+        "w": 570,
+        "h": 971
+      },
+      "pivot_source": {
+        "x": 1130,
+        "y": 922
+      },
+      "duration_ms": 70,
+      "clip": "projectile",
+      "scale": 0.47444444444444445
+    },
+    {
+      "sheet": "keyed-extraordinary-v1-edge-clean.png",
+      "source_rect": {
+        "x": 1080,
+        "y": 0,
+        "w": 539,
+        "h": 486
+      },
+      "pivot_source": {
+        "x": 1350,
+        "y": 619
+      },
+      "duration_ms": 55,
+      "clip": "impact",
+      "scale": 0.57
+    },
+    {
+      "sheet": "keyed-extraordinary-v1-edge-clean.png",
+      "source_rect": {
+        "x": 0,
+        "y": 486,
+        "w": 539,
+        "h": 485
+      },
+      "pivot_source": {
+        "x": 270,
+        "y": 1099
+      },
+      "duration_ms": 80,
+      "clip": "impact",
+      "scale": 0.57
+    },
+    {
+      "sheet": "keyed-extraordinary-v1-edge-clean.png",
+      "source_rect": {
+        "x": 539,
+        "y": 486,
+        "w": 540,
+        "h": 485
+      },
+      "pivot_source": {
+        "x": 810,
+        "y": 1099
+      },
+      "duration_ms": 100,
+      "clip": "impact",
+      "scale": 0.57
+    },
+    {
+      "sheet": "keyed-extraordinary-v1-edge-clean.png",
+      "source_rect": {
+        "x": 1079,
+        "y": 486,
+        "w": 540,
+        "h": 485
+      },
+      "pivot_source": {
+        "x": 1350,
+        "y": 1099
+      },
+      "duration_ms": 120,
+      "clip": "impact",
+      "scale": 0.57
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "sheet": "keyed-spectacle-v2.png",
+  "reviewed": true,
+  "loop": true,
+  "frames": [
+    {
+      "name": "duke_signature_projectile_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 500,
+        "h": 512
+      },
+      "pivot": {
+        "x": 265,
+        "y": 280
+      },
+      "duration_ms": 80,
+      "phase": "projectile"
+    },
+    {
+      "name": "duke_signature_projectile_01",
+      "source_rect": {
+        "x": 500,
+        "y": 0,
+        "w": 460,
+        "h": 512
+      },
+      "pivot": {
+        "x": 268,
+        "y": 275
+      },
+      "duration_ms": 80,
+      "phase": "projectile"
+    }
+  ]
+}

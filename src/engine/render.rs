@@ -9,6 +9,7 @@ use std::{f32::consts::TAU, ffi::CString};
 
 mod combat_lab;
 mod move_showcase;
+mod signature_effects;
 mod sprite_viewer;
 
 pub use combat_lab::draw_combat_lab;
@@ -120,6 +121,10 @@ pub fn draw_fight(
     let spawn_intro = world.spawn_intro_active();
     let player_one_visuals = character_visuals(world.player_one_character(), assets);
     let player_two_visuals = character_visuals(world.player_two_character(), assets);
+    let (player_one_clip, player_one_time) =
+        fighter_match_presentation(world, &world.player_one, spawn_intro);
+    let (player_two_clip, player_two_time) =
+        fighter_match_presentation(world, &world.player_two, spawn_intro);
 
     draw_fighter_ground_lights(draw, world);
     draw_projectiles(draw, world, show_debug, assets);
@@ -135,12 +140,8 @@ pub fn draw_fight(
                 player_one_visuals.fight_atlas,
             ),
             spritesheet: assets.fighter_spritesheet.as_ref(),
-            world_elapsed_seconds: fighter_visual_elapsed_seconds(world),
-            forced_clip: sprites::match_fighter_sprite_clip(
-                world.outcome,
-                PlayerSlot::One,
-                spawn_intro,
-            ),
+            world_elapsed_seconds: player_one_time,
+            forced_clip: player_one_clip,
         },
     );
     draw_fighter(
@@ -155,14 +156,11 @@ pub fn draw_fight(
                 player_two_visuals.fight_atlas,
             ),
             spritesheet: assets.fighter_spritesheet.as_ref(),
-            world_elapsed_seconds: fighter_visual_elapsed_seconds(world),
-            forced_clip: sprites::match_fighter_sprite_clip(
-                world.outcome,
-                PlayerSlot::Two,
-                spawn_intro,
-            ),
+            world_elapsed_seconds: player_two_time,
+            forced_clip: player_two_clip,
         },
     );
+    signature_effects::draw_signature_effects(draw, world, show_debug, assets);
     if show_debug {
         draw_body_collision(draw, world);
     }
@@ -980,6 +978,30 @@ fn arena_select_description(arena: ArenaId) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn lethal_landing_keeps_loser_on_floor_instead_of_restarting_standing_defeat() {
+        let mut world = World::new_greybox();
+        world.player_one.health = 0;
+        world.player_one.start_knockdown();
+        world.outcome = Some(MatchOutcome::Winner(PlayerSlot::Two));
+        let (clip, time) = fighter_match_presentation(&world, &world.player_one, false);
+        assert_eq!(clip, Some(sprites::FighterSpriteClip::Knockdown));
+        let manifest =
+            sprites::SpriteManifest::load("assets/candidates/rust/rust-fighter.sprite.json")
+                .unwrap();
+        let frame = sprites::frame_for_fighter_clip_at(&manifest, clip.unwrap(), time).unwrap();
+        assert_eq!(frame.name, "knockdown_01");
+        world.elapsed_seconds += 30.0;
+        assert_eq!(
+            fighter_match_presentation(&world, &world.player_one, false),
+            (clip, time)
+        );
+        assert_eq!(
+            fighter_match_presentation(&world, &world.player_two, false).0,
+            Some(sprites::FighterSpriteClip::Victory)
+        );
+    }
 
     #[test]
     fn character_select_labels_use_source_file_theme() {
@@ -2643,8 +2665,8 @@ fn draw_fighter(
 
     if options.show_debug {
         outline_rect(draw, fighter.body_rect(), BODY_OUTLINE);
-        if fighter.in_knockdown() {
-            // Floor recovery is protected, so there is no vulnerable shape.
+        if fighter.has_protected_reaction() {
+            // Capture, flight and floor recovery have no vulnerable shape.
         } else if let Some(sprite_combat) = sprite_combat
             .as_ref()
             .filter(|_| !fighter.uses_low_attack_hurtboxes())
@@ -2660,7 +2682,9 @@ fn draw_fighter(
         }
     }
 
-    if options.show_debug {
+    if options.show_debug
+        && fighter.attack_kind() != Some(crate::combat::fighter::AttackKind::SignatureSpecial)
+    {
         let sprite_hitboxes = sprite_combat
             .as_ref()
             .filter(|_| !fighter.uses_move_spec_hitbox())
@@ -3255,6 +3279,22 @@ fn fighter_atlas_for_intro<'a>(
     }
 }
 
+fn fighter_match_presentation(
+    world: &World,
+    fighter: &Fighter,
+    spawn_intro: bool,
+) -> (Option<sprites::FighterSpriteClip>, f32) {
+    if world.outcome.is_some() && fighter.health <= 0 && fighter.in_knockdown() {
+        // A lethal throw/launch ends on the floor. Never restart a standing
+        // defeat animation or play the recovery that would make the loser rise.
+        return (Some(sprites::FighterSpriteClip::Knockdown), 0.1);
+    }
+    (
+        sprites::match_fighter_sprite_clip(world.outcome, fighter.slot, spawn_intro),
+        fighter_visual_elapsed_seconds(world),
+    )
+}
+
 fn fighter_visual_elapsed_seconds(world: &World) -> f32 {
     if world.outcome.is_some() {
         world.outcome_elapsed_seconds()
@@ -3498,9 +3538,10 @@ fn fighter_body_color(fighter: &crate::combat::fighter::Fighter, phase_color: Co
 }
 
 fn fighter_sprite_tint(fighter: &crate::combat::fighter::Fighter, phase: AttackPhase) -> Color {
-    if fighter.in_hitstun() {
+    let impact_flash = fighter.reaction_visual_elapsed_seconds() < 4.0 / 60.0;
+    if fighter.in_hitstun() && impact_flash {
         HIT_FLASH
-    } else if fighter.in_blockstun() {
+    } else if fighter.in_blockstun() && impact_flash {
         BLOCK_FLASH
     } else if phase == AttackPhase::Active {
         ACTIVE_SPRITE_TINT

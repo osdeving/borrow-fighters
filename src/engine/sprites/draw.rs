@@ -7,7 +7,7 @@ use raylib::prelude::*;
 
 use crate::{
     combat::fighter::{Facing, Fighter},
-    config::{FLOOR_Y, RESOLUTION_SCALE, world_px},
+    config::{FLOOR_Y, RESOLUTION_SCALE, WINDOW_WIDTH, world_px},
     engine::sprites::{
         animation::frame_for_fighter_clip_at,
         manifest::{SpriteFrame, SpriteManifest},
@@ -119,11 +119,22 @@ fn manifest_frame_geometry(
     let body = fighter.body_rect();
     // KO freezes the physical body, including an airborne winner. Grounded
     // outcome artwork gets its own anchor while debug/combat retain that body.
-    let anchor_y = if matches!(clip, FighterSpriteClip::Victory | FighterSpriteClip::Defeat) {
+    let mut anchor_y = if matches!(clip, FighterSpriteClip::Victory | FighterSpriteClip::Defeat) {
         FLOOR_Y
     } else {
         body.bottom()
     };
+    if fighter.in_air_reaction()
+        && fighter.velocity.y > 0.0
+        && let Some(bounds) = frame.trimmed_bounds
+    {
+        // Air poses rotate around an authored body pivot. Near landing, settle
+        // their lowest visible pixel onto the physical floor contact, avoiding
+        // a horizontal victim hovering above the floor then snapping downward.
+        let approach = (1.0 - (FLOOR_Y - body.bottom()) / world_px(100.0)).clamp(0.0, 1.0);
+        let visible_gap = (frame.pivot.y - bounds.y - bounds.h).max(0) as f32 * runtime_scale;
+        anchor_y += visible_gap * approach;
+    }
     let source_width = frame.frame.w as f32;
     let source_height = frame.frame.h as f32;
     let dest_width = source_width * runtime_scale;
@@ -140,11 +151,28 @@ fn manifest_frame_geometry(
         fighter.facing == Facing::Left,
     );
 
-    let dest_x = if fighter.facing == Facing::Left {
+    let mut dest_x = if fighter.facing == Facing::Left {
         body.center_x() - (dest_width - pivot_x)
     } else {
         body.center_x() - pivot_x
     };
+    if matches!(
+        clip,
+        FighterSpriteClip::Thrown | FighterSpriteClip::Launched | FighterSpriteClip::Knockdown
+    ) && let Some(bounds) = frame.trimmed_bounds
+    {
+        let left = if fighter.facing == Facing::Left {
+            frame.frame.w - bounds.x - bounds.w
+        } else {
+            bounds.x
+        };
+        let visible_left = dest_x + left as f32 * runtime_scale;
+        let visible_right = visible_left + bounds.w as f32 * runtime_scale;
+        // Protected horizontal reactions can exceed the standing body's width.
+        // Keep the whole drawing visible without moving its physical trajectory.
+        dest_x +=
+            (8.0 - visible_left).max(0.0) - (visible_right - (WINDOW_WIDTH as f32 - 8.0)).max(0.0);
+    }
 
     let dest = Rectangle::new(dest_x, anchor_y - pivot_y, dest_width, dest_height);
     (source, dest)
@@ -157,6 +185,38 @@ mod tests {
         combat::fighter::{FighterInput, PlayerSlot},
         engine::sprites::{SpritePivot, SpriteRect},
     };
+
+    #[test]
+    fn descending_air_pose_settles_visible_bottom_at_floor_without_changing_physics() {
+        use crate::{combat::fighter::HitReactionKind, math::vec2::Vec2};
+        let mut manifest =
+            SpriteManifest::load("tests/fixtures/sprite-viewer-combat.sprite.json").unwrap();
+        manifest.scale = Some(1.25);
+        let mut frame = manifest.frames[0].clone();
+        frame.pivot = SpritePivot { x: 25, y: 115 };
+        frame.trimmed_bounds = Some(SpriteRect {
+            x: 0,
+            y: 20,
+            w: 96,
+            h: 50,
+        });
+        let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
+        fighter.begin_launch(Vec2::new(10.0, 300.0), HitReactionKind::Thrown);
+        fighter.position.y = FLOOR_Y - fighter.body_rect().height;
+        let body = fighter.body_rect();
+        for facing in [Facing::Left, Facing::Right] {
+            fighter.facing = facing;
+            let (_, dest) =
+                manifest_frame_geometry(&manifest, &frame, &fighter, FighterSpriteClip::Thrown);
+            assert!((dest.y + 70.0 * 1.25 - FLOOR_Y).abs() < 0.001);
+        }
+        assert_eq!(fighter.body_rect(), body);
+        assert_eq!(fighter.velocity, Vec2::new(10.0, 300.0));
+        fighter.position.y -= world_px(100.0);
+        let (_, high) =
+            manifest_frame_geometry(&manifest, &frame, &fighter, FighterSpriteClip::Thrown);
+        assert!((high.y + 115.0 * 1.25 - fighter.body_rect().bottom()).abs() < 0.001);
+    }
 
     #[test]
     fn mirroring_preserves_an_offset_atlas_crop_and_a_full_projectile_texture() {

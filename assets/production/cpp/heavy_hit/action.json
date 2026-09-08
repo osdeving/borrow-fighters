@@ -1,0 +1,70 @@
+{
+  "action": "heavy_hit",
+  "source": "heavy_hit/source-extraordinary-v1.png",
+  "sheet": "heavy_hit/keyed-extraordinary-v1-edge-clean.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "runtime_verified_spectacle",
+  "source_body_height_reference_px": 657,
+  "suggested_scale_to_runtime": 0.4079147640791476,
+  "frames": [
+    {
+      "name": "heavy_hit_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 650,
+        "h": 747
+      },
+      "pivot": {
+        "x": 369,
+        "y": 720
+      },
+      "duration_ms": 100,
+      "phase": "impact"
+    },
+    {
+      "name": "heavy_hit_01",
+      "source_rect": {
+        "x": 710,
+        "y": 0,
+        "w": 650,
+        "h": 747
+      },
+      "pivot": {
+        "x": 290,
+        "y": 720
+      },
+      "duration_ms": 120,
+      "phase": "recoil"
+    },
+    {
+      "name": "heavy_hit_02",
+      "source_rect": {
+        "x": 1470,
+        "y": 0,
+        "w": 636,
+        "h": 747
+      },
+      "pivot": {
+        "x": 290,
+        "y": 720
+      },
+      "duration_ms": 150,
+      "phase": "recover"
+    }
+  ],
+  "review_notes": "Dedicated grounded heavy recoil, deep abdominal fold and stagger recovery. Feet support ground across keys, same anatomical scale from upright657px.370ms presentation; physical stun remains MoveSpec-driven. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available.",
+  "runtime_review": {
+    "report": "../../candidates/cpp/review/extraordinary/runtime-review.json",
+    "actual_clip_present": true,
+    "both_facings_verified": true,
+    "all_selected_keys_observed": true,
+    "reviewed_frames": [
+      "heavy_hit_00",
+      "heavy_hit_01",
+      "heavy_hit_02"
+    ],
+    "review_scope": "Integrated art and real contact coherence for the extraordinary signatures / throws goal."
+  }
+}

@@ -10,8 +10,10 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 
 - Showcase contextual com dois lutadores no combate real, 11 ataques e quatro exemplos de defesa por personagem da demo, resultado de contato, áudio real, repetição, espelhamento, pausa e avanço de frame.
 - Entrada direta `--showcase --character ... --move ...`, com `--repeat` e `--reverse`; `L` repete, `X` espelha e `PageUp/PageDown` troca personagem.
-- Um especial de assinatura para Rust, Duke/Java, C, Python e C++: Borrow Break, GC Slam, Pointer Lance, Serpent Slide e Template Arc, com `T`/Backslash/`RT` e recuperação punível. O projétil mantém seus controles.
-- Reação `knockdown` e recuperação protegida de 36 frames para rasteiras, agarrões e slide contra alvos no chão; clips próprios de assinatura e queda exigidos nos cinco atlas revisados.
+- Cinco especiais de assinatura com oito poses e efeitos animados separados: Borrow Fortress, System.out.println!, Segmentation Fault, import antigravity e Undefined Bazooka. Sempre acessíveis com `T`/Backslash/`RT`, sem medidor; o projétil comum mantém seus controles.
+- Arremesso real que pune guarda, captura, levanta e lança por cima para trocar os lados; pouso seguro nos cantos e KO que aguarda aterrissagem. Novas poses de atacante e vítima nos cinco.
+- Reações específicas `heavy_hit`, `launched`, `thrown` e recuperação protegida `knockdown`; ganchos lançam de verdade e a vítima permanece sem controle até pousar.
+- Showcase de 260 frames por situação, soma dos três pulsos Java e painel inferior que deixa o espaço aéreo livre.
 - Auditoria determinística de 60 lutas espelhadas, evidência em CSV e testes de contrajogo, guarda, postura baixa e contatos reais do showcase.
 
 - Navegação dos menus com hover, clique esquerdo para ativar e clique direito para voltar valores ajustáveis.
@@ -104,6 +106,10 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Clips CC0 adicionais e bindings específicos para deixar golpes de Rust e Duke/Java audíveis por move, sem depender só do fallback curto.
 
 ### Corrigido
+
+- Prioridade indevida de Player 1 em especiais simultâneos e direção frontal da proteção de Rust em curta distância.
+- Vítima flutuando na aterrissagem, reset em pé no KO aéreo e cortes laterais das poses de reação.
+- Levantamento com mãos afastadas da vítima: poses de apoio regeneradas e conferidas nas duas direções.
 
 - Sparks e dano flutuante posicionados no contato real entre hitbox e hurtbox antes do pushback, incluindo rasteira, anti-air e projétil.
 

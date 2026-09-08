@@ -6,6 +6,7 @@
 
 use crate::combat::fighter::{Fighter, FighterInput, PlayerSlot};
 use crate::combat::move_data::{GuardRule, MoveId, MoveInputKind, move_spec_for_input};
+use crate::combat::signature::SignatureEffectKind;
 use crate::config::world_px;
 use crate::game::world::World;
 use crate::math::rect::Rect;
@@ -105,9 +106,14 @@ impl BasicCpu {
             && self.defense_cooldown <= 0.0
             && let Some(attack) = target.attack_move_spec()
             && gap <= attack.hitbox.width + world_px(16.0)
-            && target
-                .attack_elapsed_frames()
-                .is_some_and(|frame| frame.get() >= 4 && frame <= attack.frames.active_end)
+            && target.attack_elapsed_frames().is_some_and(|frame| {
+                let cue = if attack.input == MoveInputKind::SignatureSpecial {
+                    attack.frames.active_start.get().saturating_sub(12)
+                } else {
+                    4
+                };
+                frame.get() >= cue && frame <= attack.frames.active_end
+            })
         {
             self.defense_cooldown = 0.42;
             if self.chance(self.profile.guard_reaction) {
@@ -123,8 +129,15 @@ impl BasicCpu {
             }
         }
 
+        if self.defense_cooldown <= 0.0
+            && let Some(low) = incoming_signature_projectile(world, cpu)
+        {
+            self.defense_cooldown = 0.42;
+            self.react_to_projectile(&mut input, target_offset, low);
+            return input;
+        }
         if incoming_projectile_threat(world, cpu) {
-            self.react_to_projectile(&mut input, target_offset);
+            self.react_to_projectile(&mut input, target_offset, false);
             return input;
         }
 
@@ -145,12 +158,13 @@ impl BasicCpu {
         self.next_input(world, PlayerSlot::Two, dt)
     }
 
-    fn react_to_projectile(&mut self, input: &mut FighterInput, target_offset: f32) {
+    fn react_to_projectile(&mut self, input: &mut FighterInput, target_offset: f32, low: bool) {
         let roll = self.next_roll(100);
         if roll < self.profile.guard_reaction {
             self.guard_timer = self.random_duration(0.18, 0.34);
-            self.guard_low = false;
+            self.guard_low = low;
             input.block = true;
+            input.crouch = low;
         } else if roll < self.profile.guard_reaction + self.profile.jump_bias {
             input.jump = true;
             if self.chance(55) {
@@ -234,15 +248,20 @@ impl BasicCpu {
         }
 
         if let Some(special) = move_spec_for_input(cpu.move_ids(), MoveInputKind::SignatureSpecial)
-            && gap <= special.hitbox.width - world_px(8.0)
-            && (special.id != MoveId::CppTemplateArc || !target.grounded)
-            && roll < 22
+            && gap <= match special.id {
+                MoveId::PythonImportAntigravity => world_px(90.0),
+                MoveId::CppUndefinedBazooka => world_px(255.0),
+                _ => special.hitbox.width - world_px(8.0),
+            }
+            // Keep a separate choice interval so Java's long-range barrage
+            // does not consume every roll reserved for the regular projectile.
+            && (20..42).contains(&roll)
         {
             input.crouch = false;
             input.left = false;
             input.right = false;
             input.signature_special = true;
-            let cooldown = self.random_duration(1.0, 1.4);
+            let cooldown = special.frames.duration.as_seconds() + self.random_duration(0.10, 0.30);
             self.advance_pattern(cooldown);
             return;
         }
@@ -379,6 +398,23 @@ fn incoming_projectile_threat(world: &World, fighter: &Fighter) -> bool {
             && projectile_rect.bottom() > fighter_body.y + world_px(8.0);
 
         moving_toward_fighter && close_enough && vertical_threat
+    })
+}
+
+fn incoming_signature_projectile(world: &World, fighter: &Fighter) -> Option<bool> {
+    let center = fighter.body_rect().center_x();
+    world.signature_effects.iter().find_map(|effect| {
+        if effect.owner == fighter.slot
+            || !effect.alive
+            || effect.has_connected()
+            || !effect.is_projectile()
+        {
+            return None;
+        }
+        let toward = effect.velocity.x > 0.0 && effect.position.x < center
+            || effect.velocity.x < 0.0 && effect.position.x > center;
+        (toward && (center - effect.position.x).abs() <= PROJECTILE_GUARD_DISTANCE)
+            .then_some(effect.kind == SignatureEffectKind::CppRocket)
     })
 }
 

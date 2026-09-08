@@ -11,6 +11,7 @@ use crate::math::{rect::Rect, vec2::Vec2};
 
 use super::frame::FrameCount;
 use super::projectile::{PROJECTILE_SPEC, ProjectileFrameData, ProjectileSpec};
+mod reactions;
 pub use crate::combat::move_set::{
     AIR_KICK_DAMAGE, AIR_PUNCH_DAMAGE, ActiveAttack, AttackFrameData, AttackKind,
     CLOSE_THROW_DAMAGE, DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_BOILERPLATE_POKE_DAMAGE, GuardRule,
@@ -33,7 +34,7 @@ const GROUND_DECELERATION: f32 = world_px(2600.0);
 const AIR_DECELERATION: f32 = world_px(700.0);
 const DIAGONAL_JUMP_MIN_SPEED: f32 = world_px(180.0);
 const JUMP_SPEED: f32 = world_px(-680.0);
-const GRAVITY: f32 = world_px(1650.0);
+pub(crate) const GRAVITY: f32 = world_px(1650.0);
 const MAX_FALL_SPEED: f32 = world_px(920.0);
 const BLOCK_DAMAGE_DIVISOR: i32 = 4;
 const TIMER_EPSILON: f32 = 0.0001;
@@ -110,7 +111,16 @@ pub struct FighterInput {
 pub enum HitReactionKind {
     #[default]
     Hit,
+    HeavyHit,
+    Launched,
+    Thrown,
     Knockdown,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum CaptureRole {
+    Attacker,
+    Victim,
 }
 
 /// Events produced while updating one fighter.
@@ -159,6 +169,7 @@ pub struct Fighter {
     reaction_visual_elapsed: f32,
     hit_reaction_kind: HitReactionKind,
     throw_protection_timer: f32,
+    capture_role: Option<CaptureRole>,
     guard_visual_elapsed: f32,
     crouch_visual_elapsed: f32,
     jump_visual_elapsed: f32,
@@ -171,6 +182,7 @@ struct AttackState {
     spec: MoveSpec,
     elapsed: f32,
     has_hit: bool,
+    signature_emitted: u8,
 }
 
 impl Fighter {
@@ -253,6 +265,7 @@ impl Fighter {
             reaction_visual_elapsed: 0.0,
             hit_reaction_kind: HitReactionKind::Hit,
             throw_protection_timer: 0.0,
+            capture_role: None,
             guard_visual_elapsed: 0.0,
             crouch_visual_elapsed: 0.0,
             jump_visual_elapsed: 0.0,
@@ -264,6 +277,16 @@ impl Fighter {
     /// Advances movement, stance, defense, and attack timers.
     pub fn update(&mut self, dt: f32, input: FighterInput) -> FighterUpdateEvents {
         let mut events = FighterUpdateEvents::default();
+        // Scripted capture and ballistic reactions must finish even on a lethal
+        // hit; the World delays the round result until the victim reaches ground.
+        if self.capture_role.is_some() {
+            self.reaction_visual_elapsed += dt;
+            return events;
+        }
+        if self.in_air_reaction() {
+            self.advance_air_reaction(dt);
+            return events;
+        }
         if self.is_defeated() {
             self.velocity = Vec2::ZERO;
             self.crouching = false;
@@ -300,9 +323,7 @@ impl Fighter {
             .attack
             .map(|attack| attack.spec)
             .or(requested_move)
-            .is_some_and(|spec| {
-                spec.input == MoveInputKind::Sweep || spec.id == MoveId::PythonSerpentSlide
-            });
+            .is_some_and(|spec| spec.input == MoveInputKind::Sweep);
         self.crouching = if self.in_blockstun() {
             // Preserve guard height during blockstun; previously every blocked low
             // forced the defender upright for the next incoming hit.
@@ -344,20 +365,33 @@ impl Fighter {
                 spec,
                 elapsed: 0.0,
                 has_hit: false,
+                signature_emitted: 0,
             });
         }
 
         if let Some(attack) = self.attack
-            && attack.spec.id == MoveId::PythonSerpentSlide
+            && attack.spec.id == MoveId::RustBorrowFortress
             && attack.is_active()
         {
             self.velocity.x = match self.facing {
-                Facing::Right => world_px(240.0),
-                Facing::Left => world_px(-240.0),
+                Facing::Right => world_px(320.0),
+                Facing::Left => world_px(-320.0),
             };
         }
 
-        self.velocity.y = (self.velocity.y + GRAVITY * dt).min(MAX_FALL_SPEED);
+        let levitating = self.attack.is_some_and(|attack| {
+            attack.spec.id == MoveId::PythonImportAntigravity && attack.is_active()
+        });
+        if levitating {
+            self.grounded = false;
+            self.velocity.y = if self.attack_elapsed_frames().is_some_and(|f| f.get() < 40) {
+                world_px(-200.0)
+            } else {
+                0.0
+            };
+        } else {
+            self.velocity.y = (self.velocity.y + GRAVITY * dt).min(MAX_FALL_SPEED);
+        }
         self.position.x += self.velocity.x * dt;
         self.position.y += self.velocity.y * dt;
 
@@ -393,7 +427,11 @@ impl Fighter {
     pub fn face_toward(&mut self, opponent: &Self) {
         // Attacks keep the direction of their startup so a jump-over can evade
         // an attack instead of being tracked automatically through recovery.
-        if self.attack.is_some() || self.special_visual_timer > 0.0 {
+        if self.attack.is_some()
+            || self.special_visual_timer > 0.0
+            || self.capture_role.is_some()
+            || self.in_air_reaction()
+        {
             return;
         }
         self.facing = if self.body_rect().center_x() <= opponent.body_rect().center_x() {
@@ -575,8 +613,31 @@ impl Fighter {
 
     /// Uses the crouched physical hurtboxes for reviewed low attacks.
     pub fn uses_low_attack_hurtboxes(&self) -> bool {
-        self.attack_move_spec().is_some_and(|spec| {
-            spec.input == MoveInputKind::Sweep || spec.id == MoveId::PythonSerpentSlide
+        self.attack_move_spec()
+            .is_some_and(|spec| spec.input == MoveInputKind::Sweep)
+    }
+
+    /// Consumes due signature emissions exactly once, including catch-up ticks.
+    pub(crate) fn take_signature_emission(&mut self) -> Option<MoveId> {
+        let attack = self.attack.as_mut()?;
+        for (index, frame) in super::signature::signature_emission_frames(attack.spec.id)
+            .iter()
+            .enumerate()
+        {
+            let bit = 1 << index;
+            if attack.elapsed_frames().get() >= *frame && attack.signature_emitted & bit == 0 {
+                attack.signature_emitted |= bit;
+                return Some(attack.spec.id);
+            }
+        }
+        None
+    }
+
+    /// The fortress guards the front briefly, with exposed startup and recovery.
+    pub fn fortress_guard_active(&self) -> bool {
+        self.attack.is_some_and(|attack| {
+            attack.spec.id == MoveId::RustBorrowFortress
+                && (24..=36).contains(&attack.elapsed_frames().get())
         })
     }
 
@@ -663,7 +724,10 @@ impl Fighter {
 
     /// Prevents grounded throws from catching jumps, stun, or the first recovery frames.
     pub fn can_be_thrown(&self) -> bool {
-        self.grounded && !self.is_reacting() && self.throw_protection_timer <= 0.0
+        self.grounded
+            && !self.is_reacting()
+            && self.capture_role.is_none()
+            && self.throw_protection_timer <= 0.0
     }
 
     /// Applies the fall and get-up phase after a successful grounded sweep or throw.
@@ -674,6 +738,7 @@ impl Fighter {
         self.grounded = true;
         self.crouching = false;
         self.velocity = Vec2::ZERO;
+        self.reaction_visual_elapsed = 0.0;
     }
 
     /// Returns presentation time since the current held guard began.
@@ -698,7 +763,7 @@ impl Fighter {
 
     /// Returns whether the fighter is currently locked by hitstun.
     pub fn in_hitstun(&self) -> bool {
-        self.hitstun_timer > 0.0
+        self.hitstun_timer > 0.0 || self.in_capture() || self.in_air_reaction()
     }
 
     /// Returns whether the fighter is currently locked by blockstun.
@@ -746,8 +811,10 @@ impl Fighter {
         let axis = if self.crouching
             || self.blocking
             || self.is_action_locked()
-            || self.attack_kind() == Some(AttackKind::SignatureSpecial)
-        {
+            || matches!(
+                self.attack_kind(),
+                Some(AttackKind::SignatureSpecial | AttackKind::Throw)
+            ) {
             0.0
         } else {
             input.horizontal_axis()
@@ -830,7 +897,10 @@ impl Fighter {
     }
 
     fn is_action_locked(&self) -> bool {
-        self.is_reacting() || self.in_whiff_recovery() || self.special_visual_timer > 0.0
+        self.is_reacting()
+            || self.capture_role.is_some()
+            || self.in_whiff_recovery()
+            || self.special_visual_timer > 0.0
     }
 
     fn start_whiff_recovery(&mut self, spec: MoveSpec) {

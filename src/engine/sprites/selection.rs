@@ -20,6 +20,9 @@ pub enum FighterSpriteClip {
     Block,
     CrouchBlock,
     Hit,
+    HeavyHit,
+    Launched,
+    Thrown,
     Knockdown,
     PunchLight,
     PunchHeavy,
@@ -70,7 +73,13 @@ impl FighterSpriteClip {
     pub fn required_for_character(character: CharacterId) -> impl Iterator<Item = Self> {
         Self::REQUIRED.into_iter().chain(
             (character != CharacterId::Go)
-                .then_some([Self::Knockdown, Self::SignatureSpecial])
+                .then_some([
+                    Self::Knockdown,
+                    Self::SignatureSpecial,
+                    Self::HeavyHit,
+                    Self::Launched,
+                    Self::Thrown,
+                ])
                 .into_iter()
                 .flatten(),
         )
@@ -87,6 +96,9 @@ impl FighterSpriteClip {
             Self::Block => "block",
             Self::CrouchBlock => "crouch_block",
             Self::Hit => "hit",
+            Self::HeavyHit => "heavy_hit",
+            Self::Launched => "launched",
+            Self::Thrown => "thrown",
             Self::Knockdown => "knockdown",
             Self::PunchLight => "punch_light",
             Self::PunchHeavy => "punch_heavy",
@@ -153,9 +165,12 @@ impl FighterSpriteFrame {
 
 /// Returns the sprite clip matching the current fighter state.
 pub fn fighter_sprite_clip(fighter: &Fighter) -> FighterSpriteClip {
-    if fighter.in_hitstun() {
+    if fighter.in_hitstun() || fighter.in_air_reaction() || fighter.in_capture() {
         return match fighter.hit_reaction_kind() {
             HitReactionKind::Hit => FighterSpriteClip::Hit,
+            HitReactionKind::HeavyHit => FighterSpriteClip::HeavyHit,
+            HitReactionKind::Launched => FighterSpriteClip::Launched,
+            HitReactionKind::Thrown => FighterSpriteClip::Thrown,
             HitReactionKind::Knockdown => FighterSpriteClip::Knockdown,
         };
     }
@@ -200,6 +215,23 @@ pub fn fighter_sprite_clip(fighter: &Fighter) -> FighterSpriteClip {
 
 /// Returns elapsed clip time for the fighter's current visual state.
 pub fn fighter_clip_elapsed_seconds(fighter: &Fighter, world_elapsed_seconds: f32) -> f32 {
+    if fighter.is_throwing() {
+        return fighter.attack_elapsed_seconds().unwrap_or(0.0)
+            + fighter.reaction_visual_elapsed_seconds();
+    }
+    if fighter.in_capture() {
+        return 0.0;
+    }
+    if fighter.in_air_reaction() {
+        // Captured pose is the first thrown key. Flight starts on the inverted
+        // key and advances to descent using the same gravity-driven clock.
+        return fighter.reaction_visual_elapsed_seconds()
+            + if fighter.hit_reaction_kind() == HitReactionKind::Thrown {
+                0.2
+            } else {
+                0.0
+            };
+    }
     if fighter.in_hitstun() || fighter.in_blockstun() {
         return fighter.reaction_visual_elapsed_seconds();
     }
@@ -269,6 +301,8 @@ pub fn fighter_sprite_frame(fighter: &Fighter) -> FighterSpriteFrame {
         FighterSpriteClip::Block => FighterSpriteFrame::Block,
         FighterSpriteClip::CrouchBlock => FighterSpriteFrame::Block,
         FighterSpriteClip::Hit => FighterSpriteFrame::Idle,
+        FighterSpriteClip::HeavyHit => FighterSpriteFrame::Idle,
+        FighterSpriteClip::Launched | FighterSpriteClip::Thrown => FighterSpriteFrame::Jump,
         FighterSpriteClip::Knockdown => FighterSpriteFrame::Crouch,
         FighterSpriteClip::PunchLight => FighterSpriteFrame::LightPunch,
         FighterSpriteClip::PunchHeavy => FighterSpriteFrame::HeavyPunch,

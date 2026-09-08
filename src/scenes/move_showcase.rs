@@ -21,7 +21,8 @@ use crate::{
 use super::combat_lab::{CombatLabInput, CombatLabMove};
 
 const PREPARATION_FRAMES: u32 = 30;
-const SCENARIO_FRAMES: u32 = 200;
+/// Full playback includes long specials, airborne reactions and wake-up.
+pub const SCENARIO_FRAMES: u32 = 260;
 const DEFENSE_SCENARIOS: usize = 4;
 
 /// Startup options for the contextual move showcase.
@@ -314,17 +315,19 @@ impl MoveShowcase {
             ShowcaseScenario::Attack(selected) => match selected {
                 CombatLabMove::Sweep => "Sweep / punish standing guard",
                 CombatLabMove::Overhead => "Overhead / punish crouching guard",
-                CombatLabMove::Throw => "Throw / catch a close guarding opponent",
+                CombatLabMove::Throw => "Back throw / punish guard and switch sides",
                 CombatLabMove::AntiAir => "Anti-air / intercept a real jump-in",
                 CombatLabMove::AirPunch | CombatLabMove::AirKick => {
                     "Jump attack / strike a grounded opponent"
                 }
                 CombatLabMove::Projectile => "Projectile / control distance",
                 CombatLabMove::SignatureSpecial => match self.character {
-                    CharacterId::Duke => "Signature special / break crouching guard",
-                    CharacterId::Python => "Signature special / slide under standing guard",
-                    CharacterId::Cpp => "Signature special / intercept a jump-in",
-                    _ => "Signature special / punish an advancing opponent",
+                    CharacterId::Rust => "Borrow Fortress / armored shield rush",
+                    CharacterId::Duke => "System.out.println / three-wave paper barrage",
+                    CharacterId::C => "Segmentation Fault / rupture beneath high guard",
+                    CharacterId::Python => "import antigravity / serpent launch vortex",
+                    CharacterId::Cpp => "Undefined Bazooka / explosive foot punishment",
+                    CharacterId::Go => "Signature special",
                 },
                 _ => "Ground strike / stop an approaching opponent",
             },
@@ -341,7 +344,7 @@ impl MoveShowcase {
                 "Guard absorbs the projectile; reduced chip damage remains."
             }
             ShowcaseScenario::Attack(CombatLabMove::Throw) => {
-                "Walk into close range. Throws beat guard, but miss airborne opponents."
+                "Grab a guarding opponent, lift, throw behind you and switch sides. Jump to escape the grab."
             }
             ShowcaseScenario::Attack(CombatLabMove::Sweep) => {
                 "The opponent guards high. Attack the exposed legs."
@@ -350,7 +353,7 @@ impl MoveShowcase {
                 "The opponent guards low. Strike from above."
             }
             ShowcaseScenario::Attack(CombatLabMove::AntiAir) => {
-                "Wait for the opponent to jump forward, then intercept before landing."
+                "Intercept the jump-in with an uppercut: the hit launches the opponent into a helpless fall."
             }
             ShowcaseScenario::Attack(CombatLabMove::AirPunch | CombatLabMove::AirKick) => {
                 "Jump forward, then attack while descending into range."
@@ -358,9 +361,24 @@ impl MoveShowcase {
             ShowcaseScenario::Attack(CombatLabMove::Projectile) => {
                 "Launch from distance; the opponent walks into the projectile."
             }
-            ShowcaseScenario::Attack(CombatLabMove::SignatureSpecial) => {
-                "One signature move per fighter. Commit carefully: recovery can be punished."
-            }
+            ShowcaseScenario::Attack(CombatLabMove::SignatureSpecial) => match self.character {
+                CharacterId::Rust => {
+                    "Raise the safety shield and charge. Frontal protection has a short window; throws beat it."
+                }
+                CharacterId::Duke => {
+                    "Verbosity made physical: three paper waves. Guard, jump, or punish the printer jam."
+                }
+                CharacterId::C => {
+                    "Slam the book: corrupted memory erupts under the opponent. Guard low or jump away."
+                }
+                CharacterId::Python => {
+                    "Import antigravity, levitate, and launch the opponent with a giant serpent vortex."
+                }
+                CharacterId::Cpp => {
+                    "Bring an oversized bazooka to a foot fight. Guard low; punish the enormous recoil."
+                }
+                CharacterId::Go => "One signature per playable fighter; no meter required.",
+            },
             _ => "Let the opponent advance into reach, then strike once and watch the reaction.",
         }
     }
@@ -382,13 +400,21 @@ impl MoveShowcase {
             .set_sprite_combat_manifests(self.combat_manifests.clone());
         let gap = match self.selected_move() {
             CombatLabMove::Projectile => world_px(300.0),
-            CombatLabMove::SignatureSpecial if self.character == CharacterId::C => world_px(220.0),
+            CombatLabMove::SignatureSpecial if self.character == CharacterId::Duke => {
+                world_px(220.0)
+            }
+            CombatLabMove::SignatureSpecial if self.character == CharacterId::Rust => {
+                // Leave the fortress visible before the two advancing bodies
+                // meet; this spacing changes presentation, not combat reach.
+                world_px(300.0)
+            }
+            CombatLabMove::SignatureSpecial if self.character == CharacterId::Python => {
+                world_px(230.0)
+            }
             CombatLabMove::AntiAir | CombatLabMove::AirPunch | CombatLabMove::AirKick => {
                 world_px(150.0)
             }
-            CombatLabMove::SignatureSpecial if self.character == CharacterId::Cpp => {
-                world_px(150.0)
-            }
+            CombatLabMove::SignatureSpecial => world_px(90.0),
             _ => world_px(105.0),
         };
         let left = (WINDOW_WIDTH as f32
@@ -424,20 +450,16 @@ impl MoveShowcase {
         let low_guard = matches!(
             scenario,
             ShowcaseScenario::CrouchingBlock | ShowcaseScenario::Attack(CombatLabMove::Overhead)
-        ) || matches!(
-            scenario,
-            ShowcaseScenario::Attack(CombatLabMove::SignatureSpecial)
-        ) && self.character == CharacterId::Duke;
+        );
         let high_guard = scenario.is_defense()
             || matches!(selected, CombatLabMove::Sweep | CombatLabMove::Throw)
-            || selected == CombatLabMove::SignatureSpecial && self.character == CharacterId::Python;
+            || selected == CombatLabMove::SignatureSpecial
+                && matches!(self.character, CharacterId::C | CharacterId::Cpp);
         defend_input.block = high_guard || low_guard;
         defend_input.crouch = low_guard;
         if self.current_frame >= PREPARATION_FRAMES && self.result == ShowcaseResult::Pending {
             let gap = body_gap(attacker, defender);
-            let anti_air = selected == CombatLabMove::AntiAir
-                || selected == CombatLabMove::SignatureSpecial
-                    && self.character == CharacterId::Cpp;
+            let anti_air = selected == CombatLabMove::AntiAir;
             let air_attack = matches!(selected, CombatLabMove::AirPunch | CombatLabMove::AirKick);
             if anti_air {
                 defend_input = toward(defender);
@@ -467,6 +489,16 @@ impl MoveShowcase {
                     attack_input = attack_for(selected, attacker.facing);
                     self.attack_started = true;
                 }
+            } else if selected == CombatLabMove::SignatureSpecial {
+                // Stage each language's actual reach. Low blasts punish high
+                // guard; the other examples let the opponent advance into range.
+                if !self.attack_started {
+                    attack_input = attack_for(selected, attacker.facing);
+                    self.attack_started = true;
+                }
+                if !defend_input.block && gap > world_px(35.0) {
+                    defend_input = toward(defender);
+                }
             } else if selected == CombatLabMove::Projectile {
                 if !defend_input.block {
                     defend_input = toward(defender);
@@ -483,15 +515,7 @@ impl MoveShowcase {
                 } else {
                     defend_input = toward(defender);
                 }
-                // The long lance demonstrates interception at reach rather than
-                // waiting for jab range; its startup lets the opponent advance.
-                let trigger_gap = if selected == CombatLabMove::SignatureSpecial
-                    && self.character == CharacterId::C
-                {
-                    world_px(200.0)
-                } else {
-                    world_px(18.0)
-                };
+                let trigger_gap = world_px(18.0);
                 if !self.attack_started && gap <= trigger_gap {
                     attack_input = attack_for(selected, attacker.facing);
                     self.attack_started = true;
@@ -511,6 +535,9 @@ impl MoveShowcase {
         } else {
             PlayerSlot::One
         };
+        let mut total_damage = 0;
+        let mut contact_count = 0;
+        let mut all_blocked = true;
         for event in self.world.combat_log() {
             match event.kind {
                 CombatLogKind::CloseAttackResolved {
@@ -525,17 +552,24 @@ impl MoveShowcase {
                     blocked,
                     ..
                 } if attacker == expected_attacker => {
-                    self.result = if blocked {
-                        ShowcaseResult::Blocked { damage }
-                    } else {
-                        ShowcaseResult::Hit { damage }
-                    };
-                    return;
+                    total_damage += damage;
+                    contact_count += 1;
+                    all_blocked &= blocked;
                 }
                 _ => {}
             }
         }
-        if self.current_frame >= SCENARIO_FRAMES - 40 {
+        if contact_count > 0 {
+            self.result = if all_blocked {
+                ShowcaseResult::Blocked {
+                    damage: total_damage,
+                }
+            } else {
+                ShowcaseResult::Hit {
+                    damage: total_damage,
+                }
+            };
+        } else if self.current_frame >= SCENARIO_FRAMES - 40 {
             self.result = ShowcaseResult::Whiff;
         }
     }

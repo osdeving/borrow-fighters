@@ -85,8 +85,8 @@
     },
     "throw": {
       "approved": true,
-      "scale_to_runtime": 0.3889695210449927,
-      "notes": "Open preparation, short two-handed grab, pull toward waist. Farthest fingertip near(1255,325), support(965,716), projects to(+112.8,-152.1)world inside existing throw reach ending+117.3. Hands separate with bent elbows, bag remains attached; no victim or new combat metadata. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Approved only for candidate review export, not final art release."
+      "scale_to_runtime": 0.6049661399548533,
+      "notes": "Six shoulder-throw keys: reach, capture, lift/turn, release BEHIND, follow-through, ready.48ticks800ms; capture visual phase10..21, recovery starts22. No fake victim drawn into attacker sheet. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available. Lift v2 replaces only key2 with generated arms raised FORWARD; hands approximately(+55,-235)world support the victim during capture. Other five selected drawings retain identical pixel hashes. select_lift_v2.py reproduces the explicit whole-frame selection."
     },
     "special": {
       "approved": true,
@@ -110,13 +110,28 @@
     },
     "signature_special": {
       "approved": true,
-      "scale_to_runtime": 0.4953789279112754,
-      "notes": "New grounded Template Arc. Generated v2 identity/poses retained in green-matte v3; local green key preserves white blouse and violet energy where checker flood left enclosed matte. Uniform268/541 scale, explicit support anchors. Active palm source(958,107) maps to(+75.8,-295.2) from body center/floor; palm/arc lie inside current special x[+50.7,+160], y[-341.3,-160]. Active150..266ms matches ticks9..15; total700ms/42ticks. Source/prompt/checker trial preserved, no combat metadata authored."
+      "scale_to_runtime": 0.8048048048048048,
+      "notes": "Undefined Bazooka: opens tiny bag, extracts absurdly huge weapon, shoulders it, aims down/fires, follows through, recoils in smoke, stows, returns ready. 108ticks1800ms: startup0..31, active32..54, recovery55..107. First active muzzle(1698,325) from pivot(1465,359) maps to(+187.5,-27.4)world. Dedicated projectile/impact atlas supplies the real moving rocket and ground explosion. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
     },
     "knockdown": {
       "approved": true,
       "scale_to_runtime": 0.47686832740213525,
       "notes": "New four-stage knockdown: falling backward, fully reclined on floor, kneeling rise, standing ready guard. Uniform268/562 anatomy scale derived from final upright pose. Pivots follow support ground, not bounding-box center. Full white blouse/trousers/boots/bag retained.100/250/150/100ms=600ms/36ticks matches real knockdown. No duplicated normal-hit or defeat frames; no combat metadata authored."
+    },
+    "thrown": {
+      "approved": true,
+      "scale_to_runtime": 0.44666666666666666,
+      "notes": "Dedicated throw-victim captured/inverted/somersault/descent poses. First key200ms held by renderer during capture; ballistic flight starts clip clock at200ms. Waist registered near160world above virtual ground across rotations; transparent bottom padding accommodates virtual pivots without editing original drawings. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+    },
+    "launched": {
+      "approved": true,
+      "scale_to_runtime": 0.432258064516129,
+      "notes": "Dedicated uppercut reaction: chin snaps up, torso arches in rise, suspended apex, braced descent. No throw inversion or recycled ordinary hit. Virtual belt/ground pivots follow source pose placement while World supplies all flight. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+    },
+    "heavy_hit": {
+      "approved": true,
+      "scale_to_runtime": 0.4079147640791476,
+      "notes": "Dedicated grounded heavy recoil, deep abdominal fold and stagger recovery. Feet support ground across keys, same anatomical scale from upright657px.370ms presentation; physical stun remains MoveSpec-driven. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
     }
   }
 }

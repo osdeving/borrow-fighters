@@ -16,7 +16,7 @@ use borrow_fighters::{
     game::{arena::ArenaId, world::WorldSpriteCombatManifests},
     scenes::{
         combat_lab::{CombatLabInput, CombatLabMove},
-        move_showcase::{MoveShowcase, MoveShowcaseOptions, ShowcaseResult},
+        move_showcase::{MoveShowcase, MoveShowcaseOptions, SCENARIO_FRAMES, ShowcaseResult},
     },
 };
 use raylib::prelude::*;
@@ -27,12 +27,13 @@ type CaptureResult<T> = Result<T, Box<dyn Error>>;
 fn main() -> CaptureResult<()> {
     let raw_args: Vec<_> = std::env::args().skip(1).collect();
     let reversed = raw_args.iter().any(|arg| arg == "--reverse");
+    let every_frame = raw_args.iter().any(|arg| arg == "--every-frame");
     let args: Vec<_> = raw_args
         .into_iter()
-        .filter(|arg| arg != "--reverse")
+        .filter(|arg| arg != "--reverse" && arg != "--every-frame")
         .collect();
     if !(2..=3).contains(&args.len()) {
-        return Err("usage: cargo run --example capture_showcase_review -- <character|all> <output-directory> [move] [--reverse]".into());
+        return Err("usage: cargo run --example capture_showcase_review -- <character|all> <output-directory> [move] [--reverse] [--every-frame]".into());
     }
     let characters = if args[0] == "all" {
         vec![
@@ -65,6 +66,9 @@ fn main() -> CaptureResult<()> {
         raylib.load_render_texture(&thread, WINDOW_WIDTH as u32, WINDOW_HEIGHT as u32)?;
     let mut report = Vec::new();
     for character in characters {
+        if assets.signature_atlas(character).is_none() {
+            return Err(format!("{} signature effects did not load", character.audio_key()).into());
+        }
         let mut scene = MoveShowcase::new(MoveShowcaseOptions { character });
         if reversed {
             scene.switch_sides();
@@ -104,7 +108,9 @@ fn main() -> CaptureResult<()> {
                     .replace(['(', ')'], "")
                     .to_lowercase()
             );
-            while scene.current_frame() < 200 {
+            let mut last_actor_frames = [String::new(), String::new()];
+            let mut last_effect_frames = String::new();
+            while scene.current_frame() < SCENARIO_FRAMES {
                 if raylib.window_should_close() {
                     return Err("capture window closed before review completed".into());
                 }
@@ -118,8 +124,44 @@ fn main() -> CaptureResult<()> {
                 }
                 let tick = scene.current_frame();
                 let contact_offset = contact_frame.map(|frame| tick.saturating_sub(frame));
-                let scheduled = [1, 31, 48, 199].contains(&tick)
-                    || contact_offset.is_some_and(|offset| [0, 6, 12, 22, 36].contains(&offset));
+                let current_actor_frames = [&scene.world().player_one, &scene.world().player_two]
+                    .into_iter()
+                    .zip([character, scene.opponent_character()])
+                    .map(|(fighter, id)| {
+                        let clip = fighter_sprite_clip(fighter);
+                        let time =
+                            fighter_clip_elapsed_seconds(fighter, scene.world().elapsed_seconds);
+                        frame_for_fighter_clip_at(
+                            &atlas(&assets, id).expect("loaded actor atlas").manifest,
+                            clip,
+                            time,
+                        )
+                        .map(|frame| frame.name.clone())
+                        .unwrap_or_default()
+                    })
+                    .collect::<Vec<_>>();
+                let effect_frames = scene
+                    .world()
+                    .signature_effects
+                    .iter()
+                    .map(|effect| {
+                        format!(
+                            "{:?}:{}",
+                            effect.kind,
+                            (effect.elapsed_seconds * 15.0) as u32
+                        )
+                    })
+                    .collect::<Vec<_>>()
+                    .join(",");
+                let scheduled = every_frame
+                    || [1, 31, 48, SCENARIO_FRAMES - 1].contains(&tick)
+                    || contact_offset
+                        .is_some_and(|offset| [0, 6, 12, 22, 30, 36, 48, 64].contains(&offset))
+                    || (tick >= 31
+                        && (last_actor_frames.as_slice() != current_actor_frames
+                            || last_effect_frames != effect_frames));
+                last_actor_frames = current_actor_frames.try_into().expect("two actors");
+                last_effect_frames = effect_frames;
                 if scheduled {
                     {
                         let mut draw = raylib.begin_texture_mode(&thread, &mut target);
@@ -148,9 +190,10 @@ fn main() -> CaptureResult<()> {
                             return Err(format!("{} is missing the actual {} clip", id.audio_key(), clip.as_str()).into());
                         }
                         let frame = frame_for_fighter_clip_at(&loaded.manifest, clip, seconds).ok_or("missing rendered animation frame")?;
-                        Ok(json!({ "character": id.audio_key(), "clip": clip.as_str(), "frame": frame.name, "frame_clip": frame.clip, "health": fighter.health, "grounded": fighter.grounded, "crouching": fighter.crouching, "blocking": fighter.blocking, "hitstun": fighter.in_hitstun(), "blockstun": fighter.in_blockstun() }))
+                        Ok(json!({ "character": id.audio_key(), "clip": clip.as_str(), "frame": frame.name, "frame_clip": frame.clip, "health": fighter.health, "grounded": fighter.grounded, "crouching": fighter.crouching, "blocking": fighter.blocking, "hitstun": fighter.in_hitstun(), "blockstun": fighter.in_blockstun(), "captured": fighter.in_capture(), "air_reaction": fighter.in_air_reaction(), "position": [fighter.position.x, fighter.position.y] }))
                     }).collect::<CaptureResult<Vec<_>>>()?;
-                    captures.push(json!({ "image": filename, "tick": tick, "result": format!("{:?}", scene.result()), "actors": actors }));
+                    let effects = scene.world().signature_effects.iter().map(|effect| json!({ "kind": format!("{:?}", effect.kind), "position": [effect.position.x,effect.position.y], "elapsed":effect.elapsed_seconds })).collect::<Vec<_>>();
+                    captures.push(json!({ "image": filename, "tick": tick, "result": format!("{:?}", scene.result()), "actors": actors, "effects": effects }));
                 }
                 scene.update(CombatLabInput::default());
             }

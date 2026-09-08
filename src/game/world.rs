@@ -15,6 +15,7 @@ use crate::combat::fighter::{
 };
 use crate::combat::move_data::{MoveId, MoveInputKind, move_spec};
 use crate::combat::projectile::Projectile;
+use crate::combat::signature::SignatureEffect;
 use crate::config::{ARENA_LEFT, ARENA_RIGHT, world_px};
 use crate::engine::sprites::{
     FighterSpriteClip, ProjectedSpriteCombat, SpriteManifest, projected_fighter_combat,
@@ -24,6 +25,10 @@ use crate::game::combat_log::{CombatLog, CombatLogEvent, CombatLogKind};
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
 use crate::math::rect::Rect;
 use crate::math::vec2::Vec2;
+mod signatures;
+mod throws;
+use signatures::{fortress_block_result, fortress_faces, fortress_stops_projectile};
+pub use throws::{ThrowPhase, ThrowSequence};
 
 pub const HIT_EFFECT_LIFETIME: f32 = 0.35;
 const BODY_COLLISION_EFFECT_LIFETIME: f32 = 0.12;
@@ -68,6 +73,7 @@ pub struct World {
     pub outcome: Option<MatchOutcome>,
     pub hit_effects: Vec<HitEffect>,
     pub projectiles: Vec<Projectile>,
+    pub signature_effects: Vec<SignatureEffect>,
     pub body_collision_timer: f32,
     pub elapsed_seconds: f32,
     outcome_elapsed_seconds: f32,
@@ -77,6 +83,7 @@ pub struct World {
     countdown_timer: f32,
     countdown_audio_step: Option<usize>,
     sprite_combat_manifests: WorldSpriteCombatManifests,
+    throw_sequence: Option<ThrowSequence>,
 }
 
 impl World {
@@ -115,6 +122,7 @@ impl World {
             outcome: None,
             hit_effects: Vec::new(),
             projectiles: Vec::new(),
+            signature_effects: Vec::new(),
             body_collision_timer: 0.0,
             elapsed_seconds: 0.0,
             outcome_elapsed_seconds: 0.0,
@@ -124,6 +132,7 @@ impl World {
             countdown_timer: 0.0,
             countdown_audio_step: None,
             sprite_combat_manifests: WorldSpriteCombatManifests::default(),
+            throw_sequence: None,
         };
         world.record_combat(CombatLogKind::RoundStarted {
             player_one,
@@ -258,6 +267,13 @@ impl World {
 
         if self.outcome.is_some() {
             self.outcome_elapsed_seconds += dt;
+            // Finish visible effects without advancing attacks, projectiles or
+            // fighters after the round has ended.
+            for effect in &mut self.signature_effects {
+                effect.elapsed_seconds += dt;
+            }
+            self.signature_effects
+                .retain(|effect| effect.elapsed_seconds < effect.lifetime_seconds);
             return;
         }
 
@@ -272,16 +288,30 @@ impl World {
             return;
         }
 
+        let ending_in_flight = self.player_one.is_defeated() || self.player_two.is_defeated();
+        let player_one = if ending_in_flight {
+            FighterInput::default()
+        } else {
+            player_one
+        };
+        let player_two = if ending_in_flight {
+            FighterInput::default()
+        } else {
+            player_two
+        };
         let player_one_events = self.player_one.update(dt, player_one);
         self.queue_fighter_audio_events(PlayerSlot::One, player_one_events);
         let player_two_events = self.player_two.update(dt, player_two);
         self.queue_fighter_audio_events(PlayerSlot::Two, player_two_events);
+        self.update_throw_sequence(dt);
         self.spawn_projectiles(player_one, player_two);
+        self.spawn_signature_effects();
         self.update_projectiles(dt);
         self.resolve_body_collision();
         self.update_facing();
         self.resolve_hits(flags);
         self.resolve_projectile_hits(flags);
+        self.update_signature_effects(dt, flags);
         self.resolve_outcome();
     }
 
@@ -302,6 +332,9 @@ impl World {
     }
 
     fn resolve_body_collision(&mut self) {
+        if self.player_one.in_capture() || self.player_two.in_capture() {
+            return;
+        }
         let p1_body = self.player_one.body_rect();
         let p2_body = self.player_two.body_rect();
         let vertical_overlap = p1_body.bottom().min(p2_body.bottom()) - p1_body.y.max(p2_body.y);
@@ -361,31 +394,47 @@ impl World {
     fn resolve_hits(&mut self, flags: FeatureFlags) {
         let p1_sprite_combat = self.sprite_combat_for_slot(PlayerSlot::One);
         let p2_sprite_combat = self.sprite_combat_for_slot(PlayerSlot::Two);
-        let p1_attack = landed_attack(
+        let mut p1_attack = landed_attack(
             &self.player_one,
             &self.player_two,
             p1_sprite_combat.as_ref(),
             p2_sprite_combat.as_ref(),
         );
-        let p2_attack = landed_attack(
+        let mut p2_attack = landed_attack(
             &self.player_two,
             &self.player_one,
             p2_sprite_combat.as_ref(),
             p1_sprite_combat.as_ref(),
         );
 
+        if let (Some((one, _)), Some((two, _))) = (p1_attack, p2_attack) {
+            // Strikes interrupt a simultaneous grab; two grabs clash without
+            // arbitrarily giving Player 1 a captured opponent.
+            if one.guard_rule == GuardRule::Throw {
+                p1_attack = None;
+            }
+            if two.guard_rule == GuardRule::Throw {
+                p2_attack = None;
+            }
+        }
+
         if let Some((attack, contact)) = p1_attack {
             let pushback_direction = pushback_direction(&self.player_one, &self.player_two);
-            let result = take_player_two_hit(
-                &mut self.player_two,
-                attack.damage,
-                attack.guard_rule,
-                attack.hit_reaction,
-                flags,
-            );
-            apply_knockdown_for_move(&mut self.player_two, attack, result);
-            apply_pushback(&mut self.player_two, pushback_direction, result.pushback);
+            let result = if attack.guard_rule != GuardRule::Throw
+                && fortress_faces(&self.player_two, self.player_one.body_rect().center_x())
+            {
+                fortress_block_result()
+            } else {
+                take_player_two_hit(
+                    &mut self.player_two,
+                    attack.damage,
+                    attack.guard_rule,
+                    attack.hit_reaction,
+                    flags,
+                )
+            };
             self.player_one.mark_attack_hit();
+            self.apply_close_reaction(PlayerSlot::One, attack, result, pushback_direction);
             self.queue_close_hit_audio(PlayerSlot::One, PlayerSlot::Two, attack, result);
             self.hit_effects.push(HitEffect::new(
                 contact,
@@ -395,18 +444,25 @@ impl World {
             ));
         }
 
-        if let Some((attack, contact)) = p2_attack {
+        if let Some((attack, contact)) = p2_attack
+            && self.throw_sequence.is_none()
+        {
             let pushback_direction = pushback_direction(&self.player_two, &self.player_one);
-            let result = take_player_one_hit(
-                &mut self.player_one,
-                attack.damage,
-                attack.guard_rule,
-                attack.hit_reaction,
-                flags,
-            );
-            apply_knockdown_for_move(&mut self.player_one, attack, result);
-            apply_pushback(&mut self.player_one, pushback_direction, result.pushback);
+            let result = if attack.guard_rule != GuardRule::Throw
+                && fortress_faces(&self.player_one, self.player_two.body_rect().center_x())
+            {
+                fortress_block_result()
+            } else {
+                take_player_one_hit(
+                    &mut self.player_one,
+                    attack.damage,
+                    attack.guard_rule,
+                    attack.hit_reaction,
+                    flags,
+                )
+            };
             self.player_two.mark_attack_hit();
+            self.apply_close_reaction(PlayerSlot::Two, attack, result, pushback_direction);
             self.queue_close_hit_audio(PlayerSlot::Two, PlayerSlot::One, attack, result);
             self.hit_effects.push(HitEffect::new(
                 contact,
@@ -486,13 +542,18 @@ impl World {
             match projectile.owner {
                 PlayerSlot::One => {
                     let pushback_direction = projectile_pushback_direction(projectile);
-                    let result = take_player_two_hit(
-                        &mut self.player_two,
-                        projectile.damage,
-                        projectile.guard_rule,
-                        projectile.hit_reaction,
-                        flags,
-                    );
+                    let result =
+                        if fortress_stops_projectile(&self.player_two, projectile.velocity.x) {
+                            fortress_block_result()
+                        } else {
+                            take_player_two_hit(
+                                &mut self.player_two,
+                                projectile.damage,
+                                projectile.guard_rule,
+                                projectile.hit_reaction,
+                                flags,
+                            )
+                        };
                     apply_pushback(&mut self.player_two, pushback_direction, result.pushback);
                     projectile.alive = false;
                     queue_projectile_hit_audio(
@@ -520,13 +581,18 @@ impl World {
                 }
                 PlayerSlot::Two => {
                     let pushback_direction = projectile_pushback_direction(projectile);
-                    let result = take_player_one_hit(
-                        &mut self.player_one,
-                        projectile.damage,
-                        projectile.guard_rule,
-                        projectile.hit_reaction,
-                        flags,
-                    );
+                    let result =
+                        if fortress_stops_projectile(&self.player_one, projectile.velocity.x) {
+                            fortress_block_result()
+                        } else {
+                            take_player_one_hit(
+                                &mut self.player_one,
+                                projectile.damage,
+                                projectile.guard_rule,
+                                projectile.hit_reaction,
+                                flags,
+                            )
+                        };
                     apply_pushback(&mut self.player_one, pushback_direction, result.pushback);
                     projectile.alive = false;
                     queue_projectile_hit_audio(
@@ -563,6 +629,12 @@ impl World {
     }
 
     fn resolve_outcome(&mut self) {
+        if self.throw_sequence.is_some()
+            || self.player_one.in_air_reaction()
+            || self.player_two.in_air_reaction()
+        {
+            return;
+        }
         let previous = self.outcome;
         self.outcome = match (self.player_one.is_defeated(), self.player_two.is_defeated()) {
             (true, true) => Some(MatchOutcome::Draw),
@@ -780,8 +852,11 @@ fn landed_attack(
     defender_sprite_combat: Option<&ProjectedSpriteCombat>,
 ) -> Option<(ActiveAttack, Vec2)> {
     let attack = attacker.active_attack()?;
+    if attack.kind == crate::combat::fighter::AttackKind::SignatureSpecial {
+        return None;
+    }
     if !attacker.can_register_hit()
-        || defender.in_knockdown()
+        || defender.has_protected_reaction()
         || (attack.guard_rule == GuardRule::Throw && !defender.can_be_thrown())
     {
         return None;
@@ -812,7 +887,7 @@ fn hitbox_contact_with_defender(
     defender: &Fighter,
     defender_sprite_combat: Option<&ProjectedSpriteCombat>,
 ) -> Option<Vec2> {
-    if defender.in_knockdown() {
+    if defender.has_protected_reaction() {
         return None;
     }
     let sprite_hurtboxes = defender_sprite_combat
@@ -843,8 +918,7 @@ fn apply_knockdown_for_move(defender: &mut Fighter, attack: ActiveAttack, result
     if result.damage > 0
         && !result.blocked
         && defender.grounded
-        && (matches!(input, MoveInputKind::Sweep | MoveInputKind::Throw)
-            || attack.move_id == MoveId::PythonSerpentSlide)
+        && matches!(input, MoveInputKind::Sweep)
     {
         defender.start_knockdown();
     }

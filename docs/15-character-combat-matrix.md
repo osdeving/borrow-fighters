@@ -40,7 +40,7 @@ Rust deve parecer preciso e seguro. Ele não deve ter o maior dano nem o maior a
 | `S+H` | `RustLifetimeAntiAir` | anti-air rápido e menor | 12 | 6f | 62 | 10f | baitar e punir, atacar por baixo |
 | no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
 | no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
-| `Q+F` | `RustOwnershipThrow` | throw rápido, curto e pouco danoso | 9 | 5f | 42 | 12f | sair do alcance, pular |
+| `Q+F` | `RustOwnershipThrow` | arremesso curto e pouco danoso | 9 | 10f | 42 | 12f | sair do alcance, pular |
 
 ## Duke / Java
 
@@ -56,7 +56,7 @@ Duke deve parecer resistente e inconveniente em média distância. Ele pode ganh
 | `S+H` | `RisingAntiAir` | anti-air genérico, menos especializado que Rust | 13 | 7f | 70 | 14f | baitar e punir |
 | no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
 | no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
-| `U+O` / `U+Enter` | `DukeEnterpriseThrow` | throw mais longo e forte, bem punível | 12 | 9f | 56 | 20f | sair do alcance, pular, jab |
+| `U+O` / `U+Enter` | `DukeEnterpriseThrow` | throw mais longo e forte, bem punível | 12 | 10f | 56 | 20f | sair do alcance, pular, jab |
 
 ## Go
 
@@ -88,7 +88,7 @@ C deve parecer direto, perigoso e um pouco arriscado. Ele tem alcance e dano aci
 | `S+H` | `CInterruptVector` | anti-air honesto para cobrir salto previsível | 13 | 7f | 74 | 12f | baitar e punir |
 | no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
 | no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
-| `Q+F` | `CUndefinedThrow` | throw de pushback forte, mas mais arriscado no whiff | 11 | 7f | 50 | 18f | sair do alcance, pular, jab |
+| `Q+F` | `CUndefinedThrow` | arremesso forte, mais arriscado no whiff | 11 | 10f | 50 | 18f | sair do alcance, pular, jab |
 
 ## Python
 
@@ -104,7 +104,7 @@ Python deve parecer ágil, precisa e oportunista. Ela não vence por dano bruto:
 | `S+H` | `PythonVisionAntiAir` | anti-air rápido de leitura, alcance menor | 11 | 6f | 68 | 9f | baitar e punir, atacar por baixo |
 | no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
 | no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
-| `Q+F` | `PythonConstrictThrow` | throw moderado com recovery menor que o universal | 10 | 7f | 52 | 14f | sair do alcance, pular, jab |
+| `Q+F` | `PythonConstrictThrow` | arremesso com tema de constrição | 10 | 10f | 52 | 14f | sair do alcance, pular, jab |
 
 ## C++
 
@@ -120,42 +120,38 @@ C++ deve parecer filha de C: mais ornamentada, mais rápida em decisões pontuai
 | `S+H` | `CppExceptionAntiAir` | anti-air de exceção, rápido e menos largo que C | 13 | 6f | 72 | 10f | baitar e punir |
 | no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
 | no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
-| `Q+F` | `CppMoveThrow` | throw moderado com tema de move semantics | 10 | 6f | 50 | 14f | sair do alcance, pular, jab |
+| `Q+F` | `CppMoveThrow` | throw moderado com tema de move semantics | 10 | 10f | 50 | 14f | sair do alcance, pular, jab |
 
 ## Especiais de assinatura dos cinco personagens da demo
 
 Use `T` no Player 1, `\` (Backslash) no Player 2 ou `RT` no gamepad. Cada loadout oferece um `MoveInputKind::SignatureSpecial`. Go não recebe ação nem arte nova nesta rodada; os ajustes compartilhados de guarda, postura e recuperação também se aplicam a ele.
 
-Os números abaixo vêm de [MoveSpec](../src/combat/move_data.rs). `Início ativo` e `Fim ativo` são os índices inclusivos dos frames de contato; `Total` inclui startup, atividade e recuperação normal. `Whiff` soma recuperação somente se o golpe não tocar. As medidas espaciais são valores base, multiplicados por 4/3 no runtime.
+Os especiais são entidades físicas com animações próprias, sem barra por enquanto. Os índices são a 60 Hz e começam em 0. `Janela` indica emissão/atividade, enquanto folhas e foguete continuam pela trajetória real. Todas as assinaturas têm 16f extras quando erram. Medidas espaciais abaixo são valores base, multiplicados por 4/3; o ponto de emissão da bazuca foi calibrado em pixels do runtime para coincidir com a boca do canhão.
 
-| Personagem / MoveId | Guarda | Dano | Início ativo | Fim ativo | Total | Alcance | Whiff |
-|---|---|---:|---:|---:|---:|---:|---:|
-| Rust / `RustBorrowBreak` | Mid | 16 | 12f | 17f | 38f | 90 | 14f |
-| Duke / `DukeGcSlam` | High | 20 | 22f | 28f | 52f | 106 | 18f |
-| C / `CPointerLance` | Mid | 18 | 18f | 23f | 46f | 146 | 18f |
-| Python / `PythonSerpentSlide` | Low | 13 | 11f | 16f | 39f | 98 | 16f |
-| C++ / `CppTemplateArc` | Mid | 17 | 9f | 15f | 42f | 82 | 18f |
+| Personagem / MoveId | Guarda | Dano | Janela | Total | Manifestação física |
+|---|---|---:|---|---:|---|
+| Rust / `RustBorrowFortress` | Mid | 22 | 24..42 | 92f | Barreira 130×160 à frente, avanço e proteção frontal 24..36 |
+| Duke / `DukePrintlnBarrage` | Mid | 3×8 | Emite 26/36/46 | 100f | Três folhas 90×62, velocidade 520 e alcance 460 |
+| C / `CSegmentationFault` | Low | 22 | 34..53 | 102f | Ruptura 150×180 no chão, 70 à frente; lança a vítima |
+| Python / `PythonImportAntigravity` | Mid | 20 | 26..58 | 100f | Vórtice 150×320 à frente, levitação real e lançamento |
+| C++ / `CppUndefinedBazooka` | Low | 24 | Foguete 32, explosão 44..54 | 108f | Foguete diagonal pela boca da bazuca; explosão 260×95 no chão |
 
-| Ação | Melhor situação | Resposta e custo |
-|---|---|---|
-| Borrow Break | Duas palmas para interceptar aproximação em média distância | Bloquear em pé ou abaixado; interromper com jab próximo; punir recuperação. Hitbox começa na altura das palmas: offset vertical 24, altura 64. |
-| GC Slam | Duas mãos descendo contra guarda abaixada | Defender em pé ou interromper os 22 frames até contato; maior dano do grupo e startup mais anunciado. |
-| Pointer Lance | Palma estendida contra adversário avançando na borda do alcance | Bloquear ou sair da trajetória; alcance 146 cobra 46 frames totais e 18 extras ao errar. O livro permanece no braço de apoio. |
-| Serpent Slide | Chute baixo para abrir guarda alta, com avanço curto durante a fase ativa | Defender abaixado ou saltar cedo; permanece baixo, avança a 240 pixels base/s durante atividade e provoca queda no acerto terrestre. |
-| Template Arc | Palma em arco diagonal ascendente contra salto em aproximação | Evitar salto previsível, provocar erro e punir os 42 frames totais; não tem invulnerabilidade. |
+Rust ergue uma fortaleza hexagonal e pode absorver pressão frontal durante parte da investida; agarrão e ataques nas costas continuam funcionando. Java transforma verbosidade em três ondas de papel/código e termina com a impressora emperrada. C bate o livro e rompe a memória sob os pés do adversário. Python usa `import antigravity` e um tornado de serpente. C++ retira uma bazuca enorme da bolsa e atira nos pés, com recoil demorado. Cada golpe possui oito poses do ator e seis quadros de efeitos separados.
 
-Todos acertam uma vez por execução e podem ser interrompidos. Mesmo no último frame ativo, o atacante recupera pelo menos 11 frames depois do defensor que bloqueou. Essa vantagem temporal não garante punição a qualquer distância: alcance e pushback continuam relevantes. Os testes confirmam punição com jab após bloqueio próximo de Rust, Duke, C e Python; o caso principal do Template Arc é interceptação aérea.
+Guarda em pé ou baixa segura os especiais Mid. As explosões Low de C/C++ exigem guarda baixa; saltar/sair do volume, interromper a preparação e punir a recuperação são respostas contextuais. A barreira de Rust tem janela curta e não protege contra agarrão ou golpe vindo por trás. Efeitos que já foram emitidos podem persistir após o atacante ser interrompido, conforme seu tipo. Java aplica no máximo três contatos, os demais uma vez por execução. Lançamentos não aceitam novos hits no ar nesta rodada. Os testes de colisão e as capturas estão ligados no [registro da implementação](21-signature-spectacle-and-throws.md).
+
+Os cinco arremessos usam contato 10..12 e duração 48f. A arte avança enquanto a captura mantém o ataque no frame de contato; depois o movimento solta a vítima por cima do ombro e troca os lados no centro. No canto, lança para o espaço seguro em direção ao centro sem deslocar o atacante artificialmente.
 
 ## Defesa, rasteira e queda
 
 - Médios e projéteis aceitam guarda em pé ou baixa; overheads e ataques aéreos exigem guarda em pé; lows exigem guarda baixa. Defesa continua sendo botão explícito, sem direção obrigatória.
 - A altura da guarda é conservada durante blockstun. Um high que quebra guarda baixa inicia hitstun e elimina o blockstun antigo. Chip para em 1 de vida.
-- Rasteiras mantêm postura abaixada durante toda a ação e sua hitbox cobre canela/pé, aproximadamente os últimos 43 pixels antes do chão. Elas e o slide usam hurtboxes físicas agachadas. O debug mostra a mesma geometria usada pelo `World`.
-- Rasteiras, agarrões e Serpent Slide que atingem um alvo no chão geram knockdown de 36 frames. O período de queda/levantada é protegido contra novos golpes e projéteis.
+- Rasteiras mantêm postura abaixada durante toda a ação e sua hitbox cobre canela/pé, aproximadamente os últimos 43 pixels antes do chão. Elas usam hurtboxes físicas agachadas. O debug mostra a mesma geometria usada pelo `World`.
+- Rasteiras geram knockdown de 36 frames. Agarrões capturam por 12 frames, lançam por 40 frames e só então iniciam essa recuperação. Anti-air, ruptura, vórtice e explosão lançam com gravidade real. Captura, voo e queda/levantada são protegidos contra novos golpes e projéteis.
 - Agarrões exigem alvo no chão, fora de hitstun/blockstun e dos seis frames de proteção após recuperar. Pular, sair do alcance e interromper startup continuam sendo respostas; não há throw tech.
 - Spark e dano flutuante nascem no centro da interseção que confirmou o hit, antes do pushback; rasteira mostra contato na canela/pé e anti-air na região aérea realmente atingida.
 - Ataques mantêm a direção inicial, permitindo escapar com salto por cima. Conjurar projétil impede outro ataque, pulo ou defesa até encerrar a duração da pose; sofrer dano cancela essa pose.
-- As hitboxes de rasteira/assinatura vêm de `MoveSpec`; a metadata anterior continua usada pelos demais ataques. A exceção evita restaurar acidentalmente rasteiras altas a partir do atlas baseline, conforme a [ADR 0013](adr/0013-contextual-showcase-and-mvp-combat.md).
+- As hitboxes de rasteira vêm de `MoveSpec`; as de assinatura vêm das entidades `SignatureEffect`; a metadata anterior continua usada pelos demais ataques. A exceção evita restaurar acidentalmente rasteiras altas a partir do atlas baseline, conforme a [ADR 0013](adr/0013-contextual-showcase-and-mvp-combat.md).
 
 ## Especiais de Projectile
 

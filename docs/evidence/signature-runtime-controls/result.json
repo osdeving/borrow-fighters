@@ -1,0 +1,370 @@
+{
+  "isolated_display": ":93",
+  "host_parent_unmapped": true,
+  "art": "candidate atlases enabled",
+  "binary_sha256": "083e1b0cf4bfa2cc3c1abfd6510f1c1d35949c3cb33a7373b009b10a7236bdff",
+  "checks": [
+    {
+      "name": "CLI_showcase_and_pause_freezes_frame",
+      "passed": true
+    },
+    {
+      "name": "period_advances_visible_frame",
+      "passed": true
+    },
+    {
+      "name": "home_and_enter_reset_same_paused_frame",
+      "passed": true
+    },
+    {
+      "name": "tab_shift_tab_cycle_and_restore",
+      "passed": true
+    },
+    {
+      "name": "L_toggles_repeat",
+      "passed": true
+    },
+    {
+      "name": "X_mirrors_and_restores_Rust_actor",
+      "passed": true,
+      "orange_centers": [
+        716.2116244411326,
+        502.9937182171702,
+        716.1754700089525
+      ]
+    },
+    {
+      "name": "PageDown_PageUp_preserve_defense_scenario",
+      "passed": true
+    },
+    {
+      "name": "Escape_returns_menu",
+      "passed": true
+    },
+    {
+      "name": "debug_initially_off",
+      "passed": true
+    },
+    {
+      "name": "both_CPUs_disabled",
+      "passed": true
+    },
+    {
+      "name": "18-P1-throw-QF_deals_damage",
+      "passed": true,
+      "hp_fill_before": 398,
+      "hp_fill_after": 367
+    },
+    {
+      "name": "18-P1-throw-QF_debug_off",
+      "passed": true,
+      "samples": {
+        "capture": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        },
+        "flight": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        },
+        "fall": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        },
+        "land": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        }
+      }
+    },
+    {
+      "name": "19-P2-throw-UO_deals_damage",
+      "passed": true,
+      "hp_fill_before": 398,
+      "hp_fill_after": 351
+    },
+    {
+      "name": "19-P2-throw-UO_debug_off",
+      "passed": true,
+      "samples": {
+        "capture": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        },
+        "flight": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        },
+        "fall": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        },
+        "land": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        }
+      }
+    },
+    {
+      "name": "20-P1-signature-T_deals_damage",
+      "passed": true,
+      "hp_fill_before": 398,
+      "hp_fill_after": 320
+    },
+    {
+      "name": "20-P1-signature-T_debug_off",
+      "passed": true,
+      "samples": {
+        "fortress": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        },
+        "impact": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        }
+      }
+    },
+    {
+      "name": "21-P2-signature-backslash_deals_damage",
+      "passed": true,
+      "hp_fill_before": 398,
+      "hp_fill_after": 303
+    },
+    {
+      "name": "21-P2-signature-backslash_debug_off",
+      "passed": true,
+      "samples": {
+        "first-sheet": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        },
+        "barrage": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        }
+      }
+    },
+    {
+      "name": "debug_off_during_guard",
+      "passed": true,
+      "counts": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "23-P1-sweep_deals_damage",
+      "passed": true,
+      "hp_fill_before": 398,
+      "hp_fill_after": 360
+    },
+    {
+      "name": "23-P1-sweep_debug_off",
+      "passed": true,
+      "samples": {
+        "contact": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        },
+        "knockdown": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        }
+      }
+    },
+    {
+      "name": "Options_enables_debug",
+      "passed": true
+    },
+    {
+      "name": "debug_on_shows_hurtboxes_and_arena",
+      "passed": true,
+      "counts": {
+        "hurtbox_green": 1367,
+        "hitbox_red": 0,
+        "arena_left_gray": 395
+      }
+    },
+    {
+      "name": "Options_disables_debug_without_restart",
+      "passed": true,
+      "counts": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "native_window_close_exits_cleanly",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "name": "18-P1-throw-QF",
+      "phase": "capture",
+      "seconds_after_input": 0.477,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "18-P1-throw-QF",
+      "phase": "flight",
+      "seconds_after_input": 0.719,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "18-P1-throw-QF",
+      "phase": "fall",
+      "seconds_after_input": 1.1,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "18-P1-throw-QF",
+      "phase": "land",
+      "seconds_after_input": 1.346,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "19-P2-throw-UO",
+      "phase": "capture",
+      "seconds_after_input": 0.508,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "19-P2-throw-UO",
+      "phase": "flight",
+      "seconds_after_input": 0.781,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "19-P2-throw-UO",
+      "phase": "fall",
+      "seconds_after_input": 1.111,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "19-P2-throw-UO",
+      "phase": "land",
+      "seconds_after_input": 1.374,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "20-P1-signature-T",
+      "phase": "fortress",
+      "seconds_after_input": 0.684,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "20-P1-signature-T",
+      "phase": "impact",
+      "seconds_after_input": 0.948,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "21-P2-signature-backslash",
+      "phase": "first-sheet",
+      "seconds_after_input": 0.724,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "21-P2-signature-backslash",
+      "phase": "barrage",
+      "seconds_after_input": 1.013,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "23-P1-sweep",
+      "phase": "contact",
+      "seconds_after_input": 0.486,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "23-P1-sweep",
+      "phase": "knockdown",
+      "seconds_after_input": 0.746,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    }
+  ],
+  "passed": true,
+  "limitations": [
+    "No physical gamepad attached; RT covered by mapping unit tests.",
+    "Image timing is wall-clock observation, trajectory invariants are tested separately."
+  ],
+  "detector_revision": {
+    "initial_check_failure": "Arena outline detector sampled x=42, but the visible 1px outline rasterizes at x=41.",
+    "correction": "Reanalyzed the same captured PNGs across x=40..43; on=395 vertical gray pixels, off=0. No App code/input or screenshots changed.",
+    "raw_result": "initial-detector-result.json"
+  }
+}

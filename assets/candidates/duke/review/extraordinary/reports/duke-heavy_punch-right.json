@@ -1,0 +1,2086 @@
+{
+  "render_size": [
+    1280,
+    720
+  ],
+  "reversed": true,
+  "scenarios": [
+    {
+      "captures": [
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                468.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f001.png",
+          "result": "Pending",
+          "tick": 1
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_1",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                469.4814453125,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f031.png",
+          "result": "Pending",
+          "tick": 31
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_1",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                471.111083984375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f032.png",
+          "result": "Pending",
+          "tick": 32
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_2",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                485.7777404785156,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f036.png",
+          "result": "Pending",
+          "tick": 36
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_3",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                522.5925903320312,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f042.png",
+          "result": "Pending",
+          "tick": 42
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_3",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                559.9259643554688,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f048.png",
+          "result": "Pending",
+          "tick": 48
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_0",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                566.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f049.png",
+          "result": "Pending",
+          "tick": 49
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_00",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                709.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_0",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                591.037109375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f053.png",
+          "result": "Pending",
+          "tick": 53
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_00",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                712.7407836914062,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                600.7407836914062,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f055.png",
+          "result": "Pending",
+          "tick": 55
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_00",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                713.9630126953125,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                601.9630126953125,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f058.png",
+          "result": "Pending",
+          "tick": 58
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_01",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 86,
+              "hitstun": true,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f065.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 65
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_01",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 86,
+              "hitstun": true,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f071.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 71
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_02",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 86,
+              "hitstun": true,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f075.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 75
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_02",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 86,
+              "hitstun": true,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f077.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 77
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_02",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_02",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 86,
+              "hitstun": true,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f079.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 79
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_02",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f083.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 83
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "punch_heavy",
+              "crouching": false,
+              "frame": "punch_heavy_02",
+              "frame_clip": "punch_heavy",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f087.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 87
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f093.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 93
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f095.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 95
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f101.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 101
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f106.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 106
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f113.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 113
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f116.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 116
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f127.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 127
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f129.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 129
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f130.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 130
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f137.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 137
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f145.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 145
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f148.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 148
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f158.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 158
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f159.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 159
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f169.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 169
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f173.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 173
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f179.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 179
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f188.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 188
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f190.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 190
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f200.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 200
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f202.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 202
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f211.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 211
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f217.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 217
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f221.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 221
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f231.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 231
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f232.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 232
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f242.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 242
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f245.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 245
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f253.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 253
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                716.8148803710938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 86,
+              "hitstun": false,
+              "position": [
+                554.148193359375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-02-attackheavypunch-f259.png",
+          "result": "Hit { damage: 18 }",
+          "tick": 259
+        }
+      ],
+      "character": "duke",
+      "contact_frame": 65,
+      "result": "Hit { damage: 18 }",
+      "scenario": "Attack(HeavyPunch)",
+      "scenario_label": "Ground strike / stop an approaching opponent"
+    }
+  ]
+}

@@ -160,8 +160,10 @@ fn rust_defensive_tools_are_faster_but_smaller_than_generic_tools() {
     assert!(rust_anti_air.hitbox.width < generic_anti_air.hitbox.width);
     assert!(rust_anti_air.damage < generic_anti_air.damage);
 
-    assert!(rust_throw.frames.active_start < generic_throw.frames.active_start);
-    assert!(rust_throw.frames.duration < generic_throw.frames.duration);
+    // The five reviewed throws share capture/release timing; Rust retains
+    // identity through short reach, modest damage and lower whiff cost.
+    assert_eq!(rust_throw.frames.duration.get(), 48);
+    assert_eq!(rust_throw.frames.active_start.get(), 10);
     assert!(rust_throw.whiff_recovery < generic_throw.whiff_recovery);
     assert!(rust_throw.hitbox.width < generic_throw.hitbox.width);
     assert!(rust_throw.damage < generic_throw.damage);
@@ -329,6 +331,6 @@ fn cpp_tools_bridge_c_reach_with_python_tempo() {
     assert!(cpp_kick.damage > python_kick.damage);
     assert_eq!(cpp_kick.whiff_recovery, python_kick.whiff_recovery);
 
-    assert!(cpp_throw.frames.duration < c_throw.frames.duration);
+    assert_eq!(cpp_throw.frames.duration, c_throw.frames.duration);
     assert!(cpp_throw.whiff_recovery < c_throw.whiff_recovery);
 }

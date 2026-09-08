@@ -1,0 +1,42 @@
+{
+  "title": "Five signature specials, back throw and uppercut",
+  "date": "2026-09-08",
+  "method": "Actual isolated Raylib showcase at 60 simulation ticks/second. Each clip uses ticks31..210 inclusive (180frames). Concatenation only; no synthetic animation/interpolation; silent capture.",
+  "order": [
+    "rust",
+    "duke",
+    "c",
+    "python",
+    "cpp",
+    "throw",
+    "uppercut"
+  ],
+  "source_sequences": {
+    "duke": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-signature-left/duke-11-attacksignaturespecial-f%03d.png",
+    "c": "/tmp/borrow-fighters-duke-c-spectacle-final/c-signature-left/c-11-attacksignaturespecial-f%03d.png",
+    "cpp": "/tmp/borrow-fighters-extraordinary-final/cpp/right/signature_special/cpp-11-attacksignaturespecial-f%03d.png",
+    "uppercut": "/tmp/borrow-fighters-spectacle-qa/rust-forward/anti_air/rust-06-attackantiair-f%03d.png",
+    "rust": "/tmp/borrow-fighters-spectacle-qa/rust-signature-v2/right/rust-11-attacksignaturespecial-f%03d.png",
+    "python": "/tmp/borrow-fighters-extraordinary-final/python/right/signature_special/python-11-attacksignaturespecial-f%03d.png",
+    "throw": "/tmp/borrow-fighters-spectacle-qa/rust-throw-lift-v3-left/rust-09-attackthrow-f%03d.png"
+  },
+  "video": "signature-spectacle-2026-09-08.mp4",
+  "sha256": "33029babbb3fd8dd523156228482ab2803085f16c70a88f7b4d38c100b91838f",
+  "probe": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "60/1",
+        "nb_frames": "1260"
+      }
+    ],
+    "format": {
+      "duration": "21.000000",
+      "size": "3751536"
+    }
+  },
+  "cover_source": "/tmp/borrow-fighters-extraordinary-final/cpp/right/signature_special/cpp-11-attacksignaturespecial-f078.png"
+}

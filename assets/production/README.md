@@ -86,3 +86,7 @@ A cobertura e as limitações verificadas ficam em
 Rust, Duke/Java, C, Python e C++ recebem duas ações novas (`signature_special` e `knockdown`) e rasteiras com contato baixo. A [ADR 0013](../../docs/adr/0013-contextual-showcase-and-mvp-combat.md) registra a mudança de postura, geometria e reação: a regra de preservar todo o baseline do ciclo anterior deixa de se aplicar a essas ações autorizadas. A escala continua uniforme por ação; geometria de combate não é inferida do PNG.
 
 Os novos prompts e fontes permanecem nos diretórios de ação, incluindo versões rejeitadas e correções de matte. A autorização de alpha local descrita acima continua sendo usada exclusivamente para preparação e recorte; todas as poses novas foram geradas pela ferramenta de imagens. A validação usa contatos reais, guardas e quedas no showcase, além das verificações de duração/fase do exportador.
+
+## Rodada de arremessos e assinatura
+
+A evolução posterior ao commit88ffcaf está em [21 — Arremessos e assinatura](../../docs/21-signature-spectacle-and-throws.md). São oito poses de assinatura, seis de arremesso e três/quatro de impacto pesado, quatro de lançado e quatro de arremessado por selecionável, além de seis FX por linguagem. Go não recebeu nova produção. Prompts e fontes `spectacle`/`extraordinary` são a proveniência desta rodada; os snapshots preservam as ações substituídas. Preparação de alpha e separação explícita de células seguem a autorização já registrada, sem gerar anatomia por código.

@@ -1,6 +1,8 @@
 # Arte revisada — Borrow Fighters
 
-Os seis lutadores têm acabamento concluído e verificado: **120 animações, 378 quadros selecionados e os dez golpes de cada personagem**, com alpha real e metadados explícitos. Go recebeu uma nova identidade semirrealista conforme o pedido do usuário; a versão cartoon anterior foi arquivada.
+A rodada atual adiciona arremessos reais, reações aéreas e cinco especiais de assinatura: **25 clips por selecionável**, 510 quadros de ator no elenco incluindo Go, e 30 efeitos separados. Fontes e prompts foram produzidos com a ferramenta de imagens integrada. Ver [cobertura atual](../../docs/19-sprite-production-coverage.md) e [registro da assinatura](../../docs/21-signature-spectacle-and-throws.md). O [vídeo atual](../showcase/signature-spectacle-2026-09-08.mp4) reúne os cinco especiais, arremesso e gancho. Os panoramas/GIFs das pastas `review` acompanham os atlas atuais; os vídeos e laudos da tabela abaixo registram a finalização anterior.
+
+Na finalização anterior, os seis lutadores tiveram **120 animações, 378 quadros selecionados e os dez golpes de cada personagem**, com alpha real e metadados explícitos. Go recebeu uma nova identidade semirrealista conforme o pedido do usuário; a versão cartoon anterior foi arquivada.
 
 | Personagem | Clips / quadros | Panorama | World: movimento e dez golpes | Laudo atual |
 |---|---:|---|---|---|

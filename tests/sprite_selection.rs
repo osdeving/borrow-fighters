@@ -9,6 +9,72 @@ use borrow_fighters::engine::sprites::{
 const DT: f32 = 1.0 / 60.0;
 
 #[test]
+fn capture_clock_advances_the_thrower_but_keeps_victim_captured_until_release() {
+    use borrow_fighters::scenes::{
+        combat_lab::{CombatLabInput, CombatLabMove},
+        move_showcase::MoveShowcase,
+    };
+    let mut scene = MoveShowcase::default();
+    scene.select_move(CombatLabMove::Throw);
+    let mut previous_capture_time = None;
+    let mut capture_frames = 0;
+    let mut flight_seen = false;
+    for _ in 0..190 {
+        scene.update(CombatLabInput::default());
+        let world = scene.world();
+        if world.player_one.is_throwing() {
+            capture_frames += 1;
+            assert_eq!(
+                fighter_sprite_clip(&world.player_one),
+                FighterSpriteClip::Throw
+            );
+            assert_eq!(
+                fighter_sprite_clip(&world.player_two),
+                FighterSpriteClip::Thrown
+            );
+            let clock = fighter_clip_elapsed_seconds(&world.player_one, world.elapsed_seconds);
+            if let Some(previous) = previous_capture_time {
+                assert!(clock > previous);
+            }
+            previous_capture_time = Some(clock);
+            assert_eq!(
+                fighter_clip_elapsed_seconds(&world.player_two, world.elapsed_seconds),
+                0.0
+            );
+        } else if world.player_two.in_air_reaction() {
+            flight_seen = true;
+            assert_eq!(
+                fighter_sprite_clip(&world.player_two),
+                FighterSpriteClip::Thrown
+            );
+            assert!(fighter_clip_elapsed_seconds(&world.player_two, world.elapsed_seconds) >= 0.2);
+        }
+    }
+    assert!(capture_frames >= 11);
+    assert!(flight_seen);
+    assert!(!scene.world().player_two.in_hitstun());
+}
+
+#[test]
+fn launched_reaction_does_not_fall_back_to_jump_when_normal_hitstun_expires() {
+    use borrow_fighters::{combat::fighter::HitReactionKind, math::vec2::Vec2};
+    let mut fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
+    fighter.begin_launch(Vec2::new(50.0, -450.0), HitReactionKind::Launched);
+    for _ in 0..10 {
+        fighter.update(
+            DT,
+            FighterInput {
+                jump: true,
+                light_punch: true,
+                ..FighterInput::default()
+            },
+        );
+        assert_eq!(fighter_sprite_clip(&fighter), FighterSpriteClip::Launched);
+        assert!(fighter_clip_elapsed_seconds(&fighter, 99.0) < 1.0);
+    }
+}
+
+#[test]
 fn idle_fighter_uses_idle_clip() {
     let fighter = Fighter::new(PlayerSlot::One, "Rust", 320.0);
 
@@ -176,7 +242,13 @@ fn signature_attack_uses_its_own_clip_before_and_during_contact() {
         fighter_sprite_clip(&fighter),
         FighterSpriteClip::SignatureSpecial
     );
-    for _ in 0..12 {
+    let startup = fighter
+        .attack_move_spec()
+        .unwrap()
+        .frames
+        .active_start
+        .get();
+    for _ in 0..startup {
         fighter.update(DT, FighterInput::default());
     }
     assert!(fighter.active_attack().is_some());

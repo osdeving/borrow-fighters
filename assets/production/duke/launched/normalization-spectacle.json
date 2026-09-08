@@ -1,0 +1,67 @@
+{
+  "source": "keyed-spectacle-v2.png",
+  "output": "normalized-spectacle-v2.png",
+  "canvas": [
+    2360,
+    869
+  ],
+  "resampling": "Lanczos; uniform scaling only; explicit unequal-cell crops exclude adjacent art. No poses altered.",
+  "frames": [
+    {
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 590,
+        "h": 724
+      },
+      "uniform_factor": 1.0,
+      "packed_x": 0,
+      "pivot_before": {
+        "x": 322,
+        "y": 562
+      }
+    },
+    {
+      "source_rect": {
+        "x": 590,
+        "y": 0,
+        "w": 550,
+        "h": 724
+      },
+      "uniform_factor": 1.0,
+      "packed_x": 590,
+      "pivot_before": {
+        "x": 267,
+        "y": 589
+      }
+    },
+    {
+      "source_rect": {
+        "x": 1140,
+        "y": 0,
+        "w": 555,
+        "h": 724
+      },
+      "uniform_factor": 1.0,
+      "packed_x": 1180,
+      "pivot_before": {
+        "x": 245,
+        "y": 567
+      }
+    },
+    {
+      "source_rect": {
+        "x": 1695,
+        "y": 0,
+        "w": 477,
+        "h": 724
+      },
+      "uniform_factor": 1.2,
+      "packed_x": 1770,
+      "pivot_before": {
+        "x": 235,
+        "y": 691
+      }
+    }
+  ]
+}

@@ -7,7 +7,7 @@ use raylib::prelude::*;
 
 use crate::{
     characters::character_spec,
-    config::{WINDOW_HEIGHT, WINDOW_WIDTH, screen_px},
+    config::{WINDOW_HEIGHT, WINDOW_WIDTH},
     engine::assets::GameAssets,
     game::arena::ArenaId,
     scenes::move_showcase::{MoveShowcase, ShowcaseResult},
@@ -15,8 +15,7 @@ use crate::{
 
 use super::{
     BACKGROUND, FighterDrawOptions, UI_MUTED, UI_TEXT, draw_arena, draw_fighter,
-    draw_fighter_ground_lights, draw_health_bar, draw_hit_effects, draw_menu_text,
-    draw_projectiles,
+    draw_fighter_ground_lights, draw_hit_effects, draw_menu_text, draw_projectiles,
 };
 
 /// Draws two simulated fighters and the current move's practical situation.
@@ -50,6 +49,7 @@ pub fn draw_move_showcase(
             },
         );
     }
+    super::signature_effects::draw_signature_effects(draw, world, false, assets);
     draw_hit_effects(draw, world);
     draw_showcase_label(draw, showcase, assets);
 }
@@ -73,9 +73,12 @@ fn draw_showcase_label(
     } else {
         "ALL"
     };
-    draw.draw_rectangle(0, 0, WINDOW_WIDTH, screen_px(159), Color::new(0, 0, 0, 188));
+    // Keep the entire airspace visible: throws and uppercuts can reach above
+    // the old top HUD. The showcase controls now occupy only the floor margin.
+    let top = WINDOW_HEIGHT - 104;
+    draw.draw_rectangle(0, top, WINDOW_WIDTH, 104, Color::new(0, 0, 0, 220));
     let title = format!(
-        "MOVE SHOWCASE / {} / {:02}/{:02} / {}   {}  [{}]",
+        "MOVE SHOWCASE / {} / {:02}/{:02} / {}   {} [{}]",
         spec.display_name,
         showcase.move_number(),
         showcase.move_count(),
@@ -83,62 +86,14 @@ fn draw_showcase_label(
         state,
         cycle
     );
-    draw_menu_text(
-        draw,
-        font,
-        &title,
-        screen_px(24),
-        screen_px(13),
-        17.0,
-        UI_TEXT,
-    );
-    draw_menu_text(
-        draw,
-        font,
-        showcase.scenario_label(),
-        screen_px(24),
-        screen_px(41),
-        18.0,
-        Color::new(135, 255, 192, 255),
-    );
-    draw_menu_text(
-        draw,
-        font,
-        showcase.scenario_description(),
-        screen_px(24),
-        screen_px(68),
-        13.0,
-        UI_MUTED,
-    );
-    let world = showcase.world();
-    let (left, right) = if showcase.sides_reversed() {
-        (&world.player_two, &world.player_one)
-    } else {
-        (&world.player_one, &world.player_two)
-    };
-    draw_health_bar(
-        draw,
-        screen_px(24),
-        screen_px(120),
-        left.health,
-        left.max_health,
-        left.name,
-    );
-    draw_health_bar(
-        draw,
-        WINDOW_WIDTH - screen_px(324),
-        screen_px(120),
-        right.health,
-        right.max_health,
-        right.name,
-    );
+    draw_menu_text(draw, font, &title, 18, top + 5, 14.0, UI_TEXT);
     let (result, color) = match showcase.result() {
         ShowcaseResult::Pending => ("Waiting for contact".to_owned(), UI_MUTED),
         ShowcaseResult::Hit { damage } => {
-            (format!("HIT  -{damage} HP"), Color::new(255, 215, 132, 255))
+            (format!("HIT -{damage} HP"), Color::new(255, 215, 132, 255))
         }
         ShowcaseResult::Blocked { damage } => (
-            format!("BLOCK  -{damage} HP chip"),
+            format!("BLOCK -{damage} HP chip"),
             Color::new(139, 219, 255, 255),
         ),
         ShowcaseResult::Whiff => (
@@ -146,42 +101,27 @@ fn draw_showcase_label(
             Color::new(255, 140, 130, 255),
         ),
     };
+    let world = showcase.world();
+    let situation = format!(
+        "{}   |   {}   |   HP {} : {}",
+        showcase.scenario_label(),
+        result,
+        world.player_one.health,
+        world.player_two.health
+    );
+    draw_menu_text(draw, font, &situation, 18, top + 30, 12.0, color);
     draw_menu_text(
         draw,
         font,
-        &result,
-        screen_px(359),
-        screen_px(120),
-        14.0,
-        color,
-    );
-    draw.draw_rectangle(
-        0,
-        WINDOW_HEIGHT - screen_px(47),
-        WINDOW_WIDTH,
-        screen_px(47),
-        Color::new(0, 0, 0, 200),
-    );
-    draw_menu_text(
-        draw,
-        font,
-        "Tab / Shift+Tab: next / previous   Enter: replay   Space: pause   . : frame step   Home: reset",
-        screen_px(24),
-        WINDOW_HEIGHT - screen_px(37),
-        12.0,
-        UI_TEXT,
-    );
-    let footer = format!(
-        "L: repeat   X: switch sides   PgUp/PgDn: character   Esc: menu     Frame {:03}",
-        showcase.current_frame()
-    );
-    draw_menu_text(
-        draw,
-        font,
-        &footer,
-        screen_px(24),
-        WINDOW_HEIGHT - screen_px(19),
-        12.0,
+        showcase.scenario_description(),
+        18,
+        top + 53,
+        11.0,
         UI_MUTED,
     );
+    let footer = format!(
+        "Tab/Shift+Tab: move   Enter: replay   Space: pause   .: frame   L: repeat   X: sides   PgUp/PgDn: fighter   Home: reset   Esc: menu   [{:03}]",
+        showcase.current_frame()
+    );
+    draw_menu_text(draw, font, &footer, 18, top + 80, 10.0, UI_TEXT);
 }

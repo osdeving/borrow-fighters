@@ -1,8 +1,22 @@
 # 19 — Cobertura da produção de sprites
 
-## Rodada de MVP atual
+## Rodada atual: assinatura e arremessos
 
-A rodada solicitada em 8 de setembro adiciona `signature_special` e `knockdown` para **Rust, Duke/Java, C, Python e C++**, com novas rasteiras baixas. São **130 clips / 420 quadros** no conjunto atual: 22 clips por personagem desta rodada, enquanto Go conserva seus 20 clips / 60 quadros. As 15 animações novas somam 60 desenhos, incluindo a substituição dos antigos quadros de rasteira. Fontes e ações anteriores ficam preservadas. Os [critérios e evidências do MVP](20-mvp-combat-showcase.md) acompanham a validação do conjunto integrado.
+Os cinco selecionáveis têm **25 clips cada**, incluindo oito poses por especial, seis por arremesso e reações próprias `heavy_hit`, `launched` e `thrown`. Go conserva 20 clips / 60 quadros. São **145 clips / 510 quadros de ator**, mais **30 quadros de efeitos** em cinco atlas separados. A produção desta rodada contém **156 desenhos novos**: 126 poses e 30 efeitos, com fontes, revisões de matte, recortes e pivôs preservados. Ver [critérios e evidências da assinatura](21-signature-spectacle-and-throws.md).
+
+| Personagem | Ator: clips / quadros | Assinatura: poses / duração | FX | Reações novas |
+|---|---:|---|---:|---|
+| Rust | 25 / 97 | Borrow Fortress: 8 / 1533 ms | 6 | heavy_hit 4, launched 4, thrown 4 |
+| Duke/Java | 25 / 88 | System.out.println!: 8 / 1667 ms | 6 | heavy_hit 3, launched 4, thrown 4 |
+| C | 25 / 89 | Segmentation Fault: 8 / 1700 ms | 6 | heavy_hit 3, launched 4, thrown 4 |
+| Python | 25 / 88 | import antigravity: 8 / 1667 ms | 6 | heavy_hit 3, launched 4, thrown 4 |
+| C++ | 25 / 88 | Undefined Bazooka: 8 / 1800 ms | 6 | heavy_hit 3, launched 4, thrown 4 |
+
+O novo arremesso troca os lados e usa a vítima capturada/invertida/girando/descendo. Anti-air e três especiais lançam a vítima; a aterrissagem começa no quadro de chão e KO mantém o derrotado deitado. O flash de impacto dura apenas 4 frames para preservar a leitura dos desenhos. Efeitos têm geometria física própria, conforme a [ADR 0014](adr/0014-throws-launches-and-signature-effects.md).
+
+## Histórico: primeira rodada de MVP
+
+A rodada solicitada em 8 de setembro adiciona `signature_special` e `knockdown` para **Rust, Duke/Java, C, Python e C++**, com novas rasteiras baixas. O conjunto daquela etapa tinha **130 clips / 420 quadros**: 22 clips por personagem desta rodada, enquanto Go conserva seus 20 clips / 60 quadros. As 15 animações novas somam 60 desenhos, incluindo a substituição dos antigos quadros de rasteira. Fontes e ações anteriores ficam preservadas. Os [critérios e evidências do MVP](20-mvp-combat-showcase.md) acompanham a validação do conjunto integrado.
 
 | Personagem | Especial próprio | Queda/recuperação | Rasteira |
 |---|---|---|---|
@@ -22,7 +36,7 @@ O **novo Go semirrealista está concluído e verificado** (20 clips / 60 quadros
 
 A matriz mantém o escopo alvo de **21 ações visuais por personagem, 126 linhas**, incluindo o projétil separado. As 126 linhas estão cobertas pelos seis conjuntos revisados. A defesa agachada representa uma combinação já implementada; vitória e derrota usam o resultado existente. A entrada de C++ preenche a apresentação existente. Nenhuma ação desta produção requer golpes novos.
 
-A arte revisada em `assets/candidates/` é carregada por padrão. `BORROW_FIGHTERS_SPRITE_CANDIDATES=0` permite comparar os originais preservados em `assets/placeholder/`; `1` continua selecionando os revisados explicitamente. Um conjunto ausente, inválido ou incompleto mantém o fallback; a rodada atual exige 22 clips dos cinco e preserva os 20 de Go. O nome da pasta não substitui o estado artístico dos laudos. `combat_manifest` conserva a metadata baseline; rasteiras e especiais novos usam o combate revisado conforme a ADR 0013.
+A arte revisada em `assets/candidates/` é carregada por padrão. `BORROW_FIGHTERS_SPRITE_CANDIDATES=0` permite comparar os originais preservados em `assets/placeholder/`; `1` continua selecionando os revisados explicitamente. Um conjunto ausente, inválido ou incompleto mantém o fallback; a rodada atual exige 25 clips dos cinco e preserva os 20 de Go. O nome da pasta não substitui o estado artístico dos laudos. `combat_manifest` conserva a metadata baseline; rasteiras e especiais novos usam o combate revisado conforme a ADR 0013.
 
 A coluna “uso inicial” registra a situação anterior; “produção / integração” registra o estado atual dos seis concluídos. O Go antigo está identificado apenas nos registros históricos. A solicitação de evoluir os seis personagens supera as antigas exclusões de arte final/roster dos documentos iniciais, mantendo o combate implementado como referência.
 

@@ -1,0 +1,86 @@
+{
+  "action": "launched",
+  "source": "launched/source-extraordinary-v1.png",
+  "sheet": "launched/keyed-extraordinary-v1-padded-edge-clean.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "runtime_verified_spectacle",
+  "source_body_height_reference_px": 590,
+  "suggested_scale_to_runtime": 0.4542372881355932,
+  "frames": [
+    {
+      "name": "launched_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 530,
+        "h": 900
+      },
+      "pivot": {
+        "x": 300,
+        "y": 669
+      },
+      "duration_ms": 120,
+      "phase": "impact"
+    },
+    {
+      "name": "launched_01",
+      "source_rect": {
+        "x": 560,
+        "y": 0,
+        "w": 470,
+        "h": 900
+      },
+      "pivot": {
+        "x": 276,
+        "y": 640
+      },
+      "duration_ms": 180,
+      "phase": "rise"
+    },
+    {
+      "name": "launched_02",
+      "source_rect": {
+        "x": 1090,
+        "y": 0,
+        "w": 410,
+        "h": 900
+      },
+      "pivot": {
+        "x": 240,
+        "y": 547
+      },
+      "duration_ms": 180,
+      "phase": "apex"
+    },
+    {
+      "name": "launched_03",
+      "source_rect": {
+        "x": 1600,
+        "y": 0,
+        "w": 431,
+        "h": 900
+      },
+      "pivot": {
+        "x": 220,
+        "y": 761
+      },
+      "duration_ms": 300,
+      "phase": "descent"
+    }
+  ],
+  "review_notes": "Dedicated uppercut reaction: chin snaps up, torso arches in rise, suspended apex, braced descent. Four independent full-body drawings and virtual waist registration; World supplies all flight. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available. Python idle belt sits173world above ground; launched virtual pivots use that same reference (earlier160world registration put first extended heel below physical bottom). All four keys moved together by approximately13world, preserving source body motion and real trajectory.",
+  "runtime_review": {
+    "report": "../../candidates/python/review/extraordinary/runtime-review.json",
+    "actual_clip_present": true,
+    "both_facings_verified": true,
+    "all_selected_keys_observed": true,
+    "reviewed_frames": [
+      "launched_00",
+      "launched_01",
+      "launched_02",
+      "launched_03"
+    ],
+    "review_scope": "Integrated art and real contact coherence for the extraordinary signatures / throws goal."
+  }
+}

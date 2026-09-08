@@ -1,0 +1,67 @@
+{
+  "sheet": "launched/normalized-spectacle-v2.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "launched_spectacle_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 590,
+        "h": 724
+      },
+      "pivot": {
+        "x": 322,
+        "y": 562
+      },
+      "duration_ms": 120,
+      "phase": "impact"
+    },
+    {
+      "name": "launched_spectacle_01",
+      "source_rect": {
+        "x": 590,
+        "y": 0,
+        "w": 550,
+        "h": 724
+      },
+      "pivot": {
+        "x": 267,
+        "y": 589
+      },
+      "duration_ms": 180,
+      "phase": "rise"
+    },
+    {
+      "name": "launched_spectacle_02",
+      "source_rect": {
+        "x": 1180,
+        "y": 0,
+        "w": 555,
+        "h": 724
+      },
+      "pivot": {
+        "x": 245,
+        "y": 567
+      },
+      "duration_ms": 180,
+      "phase": "apex"
+    },
+    {
+      "name": "launched_spectacle_03",
+      "source_rect": {
+        "x": 1770,
+        "y": 0,
+        "w": 572,
+        "h": 869
+      },
+      "pivot": {
+        "x": 282,
+        "y": 829
+      },
+      "duration_ms": 300,
+      "phase": "descent"
+    }
+  ]
+}

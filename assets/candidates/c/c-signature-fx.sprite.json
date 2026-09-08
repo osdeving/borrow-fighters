@@ -1,0 +1,167 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "c-signature-fx.png",
+  "source": "../../production/c/signature_fx/production.json",
+  "cell": {
+    "w": 266,
+    "h": 317
+  },
+  "default_pivot": {
+    "x": 149,
+    "y": 199
+  },
+  "scale": 1.0,
+  "frames": [
+    {
+      "name": "c_signature_projectile_00",
+      "clip": "projectile",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 149,
+        "y": 199
+      },
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 266,
+        "h": 216
+      },
+      "trimmed_bounds": {
+        "x": 55,
+        "y": 155,
+        "w": 195,
+        "h": 45
+      }
+    },
+    {
+      "name": "c_signature_projectile_01",
+      "clip": "projectile",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 142,
+        "y": 201
+      },
+      "frame": {
+        "x": 266,
+        "y": 0,
+        "w": 266,
+        "h": 216
+      },
+      "trimmed_bounds": {
+        "x": 33,
+        "y": 148,
+        "w": 209,
+        "h": 54
+      }
+    },
+    {
+      "name": "c_signature_impact_02",
+      "clip": "impact",
+      "duration_ms": 70,
+      "pivot": {
+        "x": 118,
+        "y": 207
+      },
+      "frame": {
+        "x": 532,
+        "y": 0,
+        "w": 266,
+        "h": 216
+      },
+      "trimmed_bounds": {
+        "x": 29,
+        "y": 67,
+        "w": 177,
+        "h": 143
+      }
+    },
+    {
+      "name": "c_signature_impact_03",
+      "clip": "impact",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 146,
+        "y": 254
+      },
+      "frame": {
+        "x": 0,
+        "y": 317,
+        "w": 266,
+        "h": 317
+      },
+      "trimmed_bounds": {
+        "x": 51,
+        "y": 5,
+        "w": 205,
+        "h": 249
+      }
+    },
+    {
+      "name": "c_signature_impact_04",
+      "clip": "impact",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 142,
+        "y": 254
+      },
+      "frame": {
+        "x": 266,
+        "y": 317,
+        "w": 266,
+        "h": 317
+      },
+      "trimmed_bounds": {
+        "x": 45,
+        "y": 44,
+        "w": 190,
+        "h": 210
+      }
+    },
+    {
+      "name": "c_signature_impact_05",
+      "clip": "impact",
+      "duration_ms": 150,
+      "pivot": {
+        "x": 118,
+        "y": 254
+      },
+      "frame": {
+        "x": 532,
+        "y": 317,
+        "w": 266,
+        "h": 317
+      },
+      "trimmed_bounds": {
+        "x": 31,
+        "y": 120,
+        "w": 172,
+        "h": 133
+      }
+    }
+  ],
+  "clips": [
+    {
+      "name": "projectile",
+      "loop": true,
+      "frames": [
+        "c_signature_projectile_00",
+        "c_signature_projectile_01"
+      ]
+    },
+    {
+      "name": "impact",
+      "loop": false,
+      "frames": [
+        "c_signature_impact_02",
+        "c_signature_impact_03",
+        "c_signature_impact_04",
+        "c_signature_impact_05"
+      ]
+    }
+  ],
+  "notes": [
+    "Candidate assembled from explicitly reviewed action frames.",
+    "Combat metadata is included only when supplied explicitly in production.json.",
+    "Source rectangles and production provenance: c-signature-fx.provenance.json"
+  ]
+}

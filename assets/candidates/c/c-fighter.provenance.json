@@ -2,7 +2,7 @@
   "schema": "borrow-fighters.sprite-provenance.v1",
   "character": "c",
   "production": "../../production/c/production.json",
-  "production_sha256": "469a171c3793849327304c3751aae6b381de511b40c176006a99a811efcecb45",
+  "production_sha256": "c5b39003382bf4e6ca88bd8e516d4ae19b0ef5679f682ab351517def7594f86d",
   "production_snapshot": {
     "schema": "borrow-fighters.production.v1",
     "character": "c",
@@ -922,56 +922,101 @@
         "loop": false,
         "frames": [
           {
-            "name": "throw_0",
+            "name": "throw_spectacle_00",
             "source_rect": {
               "x": 0,
               "y": 0,
-              "w": 281,
-              "h": 327
+              "w": 350,
+              "h": 304
             },
             "pivot": {
-              "x": 151,
-              "y": 297
+              "x": 174,
+              "y": 288
             },
-            "duration_ms": 116,
+            "duration_ms": 166,
             "phase": "startup"
           },
           {
-            "name": "throw_1",
+            "name": "throw_spectacle_01",
             "source_rect": {
-              "x": 311,
+              "x": 350,
               "y": 0,
-              "w": 311,
-              "h": 327
+              "w": 267,
+              "h": 304
             },
             "pivot": {
-              "x": 145,
-              "y": 297
+              "x": 112,
+              "y": 289
             },
-            "duration_ms": 50,
-            "phase": "active"
+            "duration_ms": 83,
+            "phase": "capture"
           },
           {
-            "name": "throw_2",
+            "name": "throw_spectacle_02",
             "source_rect": {
-              "x": 622,
+              "x": 700,
               "y": 0,
-              "w": 280,
-              "h": 327
+              "w": 335,
+              "h": 304
             },
             "pivot": {
-              "x": 119,
-              "y": 297
+              "x": 117,
+              "y": 290
             },
-            "duration_ms": 267,
+            "duration_ms": 117,
+            "phase": "capture"
+          },
+          {
+            "name": "throw_spectacle_03",
+            "source_rect": {
+              "x": 1050,
+              "y": 0,
+              "w": 316,
+              "h": 331
+            },
+            "pivot": {
+              "x": 146,
+              "y": 288
+            },
+            "duration_ms": 167,
+            "phase": "recovery"
+          },
+          {
+            "name": "throw_spectacle_04",
+            "source_rect": {
+              "x": 1400,
+              "y": 0,
+              "w": 313,
+              "h": 331
+            },
+            "pivot": {
+              "x": 113,
+              "y": 288
+            },
+            "duration_ms": 133,
+            "phase": "recovery"
+          },
+          {
+            "name": "throw_spectacle_05",
+            "source_rect": {
+              "x": 1750,
+              "y": 0,
+              "w": 323,
+              "h": 331
+            },
+            "pivot": {
+              "x": 132,
+              "y": 288
+            },
+            "duration_ms": 134,
             "phase": "recovery"
           }
         ],
         "provenance": {
           "source_action": "throw/action.json",
-          "source_sheet": "throw/keyed-v1.png",
-          "scale_to_runtime": 0.4253968253968254,
-          "review": "Generated source poses inspected; elderly identity, denim and continuous C book preserved. Approved for candidate preview export, not final art release."
+          "source_sheet": "throw/keyed-spectacle-v1.png",
+          "scale_to_runtime": 0.62,
+          "review": "September spectacle: 6 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md."
         }
       },
       "special": {
@@ -1227,71 +1272,131 @@
         "loop": false,
         "frames": [
           {
-            "name": "signature_special_mvp_00",
+            "name": "signature_special_spectacle_00",
             "source_rect": {
               "x": 0,
               "y": 0,
-              "w": 245,
+              "w": 313,
               "h": 319
             },
             "pivot": {
-              "x": 123,
-              "y": 300
+              "x": 140,
+              "y": 296
             },
-            "duration_ms": 300,
+            "duration_ms": 180,
             "phase": "startup"
           },
           {
-            "name": "signature_special_mvp_01",
+            "name": "signature_special_spectacle_01",
             "source_rect": {
-              "x": 362,
+              "x": 341,
               "y": 0,
-              "w": 362,
+              "w": 318,
               "h": 319
             },
             "pivot": {
-              "x": 121,
-              "y": 300
+              "x": 125,
+              "y": 297
+            },
+            "duration_ms": 180,
+            "phase": "startup"
+          },
+          {
+            "name": "signature_special_spectacle_02",
+            "source_rect": {
+              "x": 682,
+              "y": 0,
+              "w": 298,
+              "h": 319
+            },
+            "pivot": {
+              "x": 124,
+              "y": 301
+            },
+            "duration_ms": 206,
+            "phase": "startup"
+          },
+          {
+            "name": "signature_special_spectacle_03",
+            "source_rect": {
+              "x": 1023,
+              "y": 0,
+              "w": 341,
+              "h": 319
+            },
+            "pivot": {
+              "x": 122,
+              "y": 304
             },
             "duration_ms": 100,
             "phase": "active"
           },
           {
-            "name": "signature_special_mvp_02",
+            "name": "signature_special_spectacle_04",
             "source_rect": {
-              "x": 724,
+              "x": 1364,
               "y": 0,
-              "w": 213,
-              "h": 319
+              "w": 319,
+              "h": 320
             },
             "pivot": {
-              "x": 93,
-              "y": 300
+              "x": 122,
+              "y": 258
             },
-            "duration_ms": 183,
+            "duration_ms": 134,
+            "phase": "active"
+          },
+          {
+            "name": "signature_special_spectacle_05",
+            "source_rect": {
+              "x": 1705,
+              "y": 0,
+              "w": 319,
+              "h": 320
+            },
+            "pivot": {
+              "x": 135,
+              "y": 257
+            },
+            "duration_ms": 100,
+            "phase": "active"
+          },
+          {
+            "name": "signature_special_spectacle_06",
+            "source_rect": {
+              "x": 2046,
+              "y": 0,
+              "w": 319,
+              "h": 320
+            },
+            "pivot": {
+              "x": 136,
+              "y": 263
+            },
+            "duration_ms": 400,
             "phase": "recovery"
           },
           {
-            "name": "signature_special_mvp_03",
+            "name": "signature_special_spectacle_07",
             "source_rect": {
-              "x": 1086,
+              "x": 2387,
               "y": 0,
-              "w": 245,
-              "h": 319
+              "w": 320,
+              "h": 320
             },
             "pivot": {
-              "x": 132,
-              "y": 300
+              "x": 148,
+              "y": 280
             },
-            "duration_ms": 184,
+            "duration_ms": 400,
             "phase": "recovery"
           }
         ],
         "provenance": {
           "source_action": "signature_special/action.json",
-          "source_sheet": "signature_special/keyed-v2.png",
-          "scale_to_runtime": 0.5317460317460317,
-          "review": "Four actual generated Pointer Lance poses, distinct from book projectile. Source v2 lowers pointing arm to lower chest/waist for real contact at height matching new MoveSpec and uses magenta matte. Pointer tip source(1140,393) projects near (+220,-133.5), within initial runtime box. Uniform268/504 matches idle standing height, feet anchored at644; head drops in active key as knee/torso lunge."
+          "source_sheet": "signature_special/keyed-spectacle-v1.png",
+          "scale_to_runtime": 0.72,
+          "review": "September spectacle: 8 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md."
         }
       },
       "knockdown": {
@@ -1366,6 +1471,210 @@
           "scale_to_runtime": 0.5317460317460317,
           "review": "Four new backward knockdown keys, one secured blue C book throughout, hair/denim/face intact. Downed key lies on left hip/back instead of generic standing hit. Sole and bracing palm define floor. Uniform268/504 scale. Generic border-connected pale matte extraction preserves outlined white hair, shirt and soles; source RGB retained."
         }
+      },
+      "thrown": {
+        "sheet": "thrown/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "thrown_spectacle_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 275,
+              "h": 362
+            },
+            "pivot": {
+              "x": 155,
+              "y": 325
+            },
+            "duration_ms": 200,
+            "phase": "capture"
+          },
+          {
+            "name": "thrown_spectacle_01",
+            "source_rect": {
+              "x": 311,
+              "y": 0,
+              "w": 265,
+              "h": 362
+            },
+            "pivot": {
+              "x": 120,
+              "y": 308
+            },
+            "duration_ms": 180,
+            "phase": "inverted"
+          },
+          {
+            "name": "thrown_spectacle_02",
+            "source_rect": {
+              "x": 622,
+              "y": 0,
+              "w": 235,
+              "h": 362
+            },
+            "pivot": {
+              "x": 115,
+              "y": 338
+            },
+            "duration_ms": 200,
+            "phase": "tumble"
+          },
+          {
+            "name": "thrown_spectacle_03",
+            "source_rect": {
+              "x": 933,
+              "y": 0,
+              "w": 311,
+              "h": 362
+            },
+            "pivot": {
+              "x": 160,
+              "y": 360
+            },
+            "duration_ms": 300,
+            "phase": "descent"
+          }
+        ],
+        "provenance": {
+          "source_action": "thrown/action.json",
+          "source_sheet": "thrown/keyed-spectacle-v1.png",
+          "scale_to_runtime": 0.5,
+          "review": "September spectacle: 4 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md."
+        }
+      },
+      "launched": {
+        "sheet": "launched/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "launched_spectacle_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 244,
+              "h": 326
+            },
+            "pivot": {
+              "x": 140,
+              "y": 306
+            },
+            "duration_ms": 120,
+            "phase": "impact"
+          },
+          {
+            "name": "launched_spectacle_01",
+            "source_rect": {
+              "x": 244,
+              "y": 0,
+              "w": 244,
+              "h": 326
+            },
+            "pivot": {
+              "x": 126,
+              "y": 291
+            },
+            "duration_ms": 180,
+            "phase": "rise"
+          },
+          {
+            "name": "launched_spectacle_02",
+            "source_rect": {
+              "x": 488,
+              "y": 0,
+              "w": 244,
+              "h": 326
+            },
+            "pivot": {
+              "x": 117,
+              "y": 279
+            },
+            "duration_ms": 180,
+            "phase": "apex"
+          },
+          {
+            "name": "launched_spectacle_03",
+            "source_rect": {
+              "x": 732,
+              "y": 0,
+              "w": 244,
+              "h": 326
+            },
+            "pivot": {
+              "x": 140,
+              "y": 324
+            },
+            "duration_ms": 300,
+            "phase": "descent"
+          }
+        ],
+        "provenance": {
+          "source_action": "launched/action.json",
+          "source_sheet": "launched/keyed-spectacle-v1.png",
+          "scale_to_runtime": 0.45,
+          "review": "September spectacle: 4 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md."
+        }
+      },
+      "heavy_hit": {
+        "sheet": "heavy_hit/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "heavy_hit_spectacle_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 290,
+              "h": 368
+            },
+            "pivot": {
+              "x": 180,
+              "y": 315
+            },
+            "duration_ms": 90,
+            "phase": "impact"
+          },
+          {
+            "name": "heavy_hit_spectacle_01",
+            "source_rect": {
+              "x": 290,
+              "y": 0,
+              "w": 290,
+              "h": 368
+            },
+            "pivot": {
+              "x": 187,
+              "y": 315
+            },
+            "duration_ms": 140,
+            "phase": "stagger"
+          },
+          {
+            "name": "heavy_hit_spectacle_02",
+            "source_rect": {
+              "x": 580,
+              "y": 0,
+              "w": 247,
+              "h": 368
+            },
+            "pivot": {
+              "x": 97,
+              "y": 315
+            },
+            "duration_ms": 170,
+            "phase": "recover"
+          }
+        ],
+        "provenance": {
+          "source_action": "heavy_hit/action.json",
+          "source_sheet": "heavy_hit/keyed-spectacle-v1.png",
+          "scale_to_runtime": 0.44,
+          "review": "September spectacle: 3 genuine imagegen drawings, reviewed source identity and alpha; explicit pivots preserve support/core through motion. Runtime capture pending. See spectacle-review.md."
+        }
       }
     }
   },
@@ -1432,7 +1741,7 @@
     },
     {
       "path": "../../production/c/throw/prepared.png",
-      "sha256": "bf9e08260fed0bcc62712632bf7b73230ed403e0a4d27e15e1caf676a978ceb3"
+      "sha256": "3cae855793fc7a6fbf7085d915600df63f52ae8e6e20199f2725e6150e0e110d"
     },
     {
       "path": "../../production/c/special/prepared.png",
@@ -1452,11 +1761,23 @@
     },
     {
       "path": "../../production/c/signature_special/prepared.png",
-      "sha256": "ca338873afe7bb2b7095e1d4f4f2b3c1811c5e50570c6385808566699dc800ac"
+      "sha256": "b0a336abec36eaaaf56a457692bdf165d14b48277a50806e0b4e31d309f5f253"
     },
     {
       "path": "../../production/c/knockdown/prepared.png",
       "sha256": "45dfa8b14784e72acbb659fa256c59adca48e8344ac781e75a9087af8e237ecc"
+    },
+    {
+      "path": "../../production/c/thrown/prepared.png",
+      "sha256": "ccae62a5aef937d5e451482dc2a11f123d096796e99d267d48a9b9ebd9079c4e"
+    },
+    {
+      "path": "../../production/c/launched/prepared.png",
+      "sha256": "0ef0b5eef8581c06b28905268bfb401adef33244155a106825a7062ef5f4f480"
+    },
+    {
+      "path": "../../production/c/heavy_hit/prepared.png",
+      "sha256": "c7832b107b28ae2115ad2f9364c65f09b9f266b78410cc6675563ffb67e0cba8"
     }
   ],
   "frames": [
@@ -2072,42 +2393,81 @@
       "phase": "recovery"
     },
     {
-      "name": "throw_0",
+      "name": "throw_spectacle_00",
       "action": "throw",
       "sheet": "../../production/c/throw/prepared.png",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 281,
-        "h": 327
+        "w": 350,
+        "h": 304
       },
-      "exported_frame": "../../production/c/throw/frames/throw_0.png",
+      "exported_frame": "../../production/c/throw/frames/throw_spectacle_00.png",
       "phase": "startup"
     },
     {
-      "name": "throw_1",
+      "name": "throw_spectacle_01",
       "action": "throw",
       "sheet": "../../production/c/throw/prepared.png",
       "source_rect": {
-        "x": 311,
+        "x": 350,
         "y": 0,
-        "w": 311,
-        "h": 327
+        "w": 267,
+        "h": 304
       },
-      "exported_frame": "../../production/c/throw/frames/throw_1.png",
-      "phase": "active"
+      "exported_frame": "../../production/c/throw/frames/throw_spectacle_01.png",
+      "phase": "capture"
     },
     {
-      "name": "throw_2",
+      "name": "throw_spectacle_02",
       "action": "throw",
       "sheet": "../../production/c/throw/prepared.png",
       "source_rect": {
-        "x": 622,
+        "x": 700,
         "y": 0,
-        "w": 280,
-        "h": 327
+        "w": 335,
+        "h": 304
       },
-      "exported_frame": "../../production/c/throw/frames/throw_2.png",
+      "exported_frame": "../../production/c/throw/frames/throw_spectacle_02.png",
+      "phase": "capture"
+    },
+    {
+      "name": "throw_spectacle_03",
+      "action": "throw",
+      "sheet": "../../production/c/throw/prepared.png",
+      "source_rect": {
+        "x": 1050,
+        "y": 0,
+        "w": 316,
+        "h": 331
+      },
+      "exported_frame": "../../production/c/throw/frames/throw_spectacle_03.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_spectacle_04",
+      "action": "throw",
+      "sheet": "../../production/c/throw/prepared.png",
+      "source_rect": {
+        "x": 1400,
+        "y": 0,
+        "w": 313,
+        "h": 331
+      },
+      "exported_frame": "../../production/c/throw/frames/throw_spectacle_04.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_spectacle_05",
+      "action": "throw",
+      "sheet": "../../production/c/throw/prepared.png",
+      "source_rect": {
+        "x": 1750,
+        "y": 0,
+        "w": 323,
+        "h": 331
+      },
+      "exported_frame": "../../production/c/throw/frames/throw_spectacle_05.png",
       "phase": "recovery"
     },
     {
@@ -2280,55 +2640,107 @@
       "phase": "sustained_defeat"
     },
     {
-      "name": "signature_special_mvp_00",
+      "name": "signature_special_spectacle_00",
       "action": "signature_special",
       "sheet": "../../production/c/signature_special/prepared.png",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 245,
+        "w": 313,
         "h": 319
       },
-      "exported_frame": "../../production/c/signature_special/frames/signature_special_mvp_00.png",
+      "exported_frame": "../../production/c/signature_special/frames/signature_special_spectacle_00.png",
       "phase": "startup"
     },
     {
-      "name": "signature_special_mvp_01",
+      "name": "signature_special_spectacle_01",
       "action": "signature_special",
       "sheet": "../../production/c/signature_special/prepared.png",
       "source_rect": {
-        "x": 362,
+        "x": 341,
         "y": 0,
-        "w": 362,
+        "w": 318,
         "h": 319
       },
-      "exported_frame": "../../production/c/signature_special/frames/signature_special_mvp_01.png",
+      "exported_frame": "../../production/c/signature_special/frames/signature_special_spectacle_01.png",
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_spectacle_02",
+      "action": "signature_special",
+      "sheet": "../../production/c/signature_special/prepared.png",
+      "source_rect": {
+        "x": 682,
+        "y": 0,
+        "w": 298,
+        "h": 319
+      },
+      "exported_frame": "../../production/c/signature_special/frames/signature_special_spectacle_02.png",
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_spectacle_03",
+      "action": "signature_special",
+      "sheet": "../../production/c/signature_special/prepared.png",
+      "source_rect": {
+        "x": 1023,
+        "y": 0,
+        "w": 341,
+        "h": 319
+      },
+      "exported_frame": "../../production/c/signature_special/frames/signature_special_spectacle_03.png",
       "phase": "active"
     },
     {
-      "name": "signature_special_mvp_02",
+      "name": "signature_special_spectacle_04",
       "action": "signature_special",
       "sheet": "../../production/c/signature_special/prepared.png",
       "source_rect": {
-        "x": 724,
+        "x": 1364,
         "y": 0,
-        "w": 213,
-        "h": 319
+        "w": 319,
+        "h": 320
       },
-      "exported_frame": "../../production/c/signature_special/frames/signature_special_mvp_02.png",
+      "exported_frame": "../../production/c/signature_special/frames/signature_special_spectacle_04.png",
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_spectacle_05",
+      "action": "signature_special",
+      "sheet": "../../production/c/signature_special/prepared.png",
+      "source_rect": {
+        "x": 1705,
+        "y": 0,
+        "w": 319,
+        "h": 320
+      },
+      "exported_frame": "../../production/c/signature_special/frames/signature_special_spectacle_05.png",
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_spectacle_06",
+      "action": "signature_special",
+      "sheet": "../../production/c/signature_special/prepared.png",
+      "source_rect": {
+        "x": 2046,
+        "y": 0,
+        "w": 319,
+        "h": 320
+      },
+      "exported_frame": "../../production/c/signature_special/frames/signature_special_spectacle_06.png",
       "phase": "recovery"
     },
     {
-      "name": "signature_special_mvp_03",
+      "name": "signature_special_spectacle_07",
       "action": "signature_special",
       "sheet": "../../production/c/signature_special/prepared.png",
       "source_rect": {
-        "x": 1086,
+        "x": 2387,
         "y": 0,
-        "w": 245,
-        "h": 319
+        "w": 320,
+        "h": 320
       },
-      "exported_frame": "../../production/c/signature_special/frames/signature_special_mvp_03.png",
+      "exported_frame": "../../production/c/signature_special/frames/signature_special_spectacle_07.png",
       "phase": "recovery"
     },
     {
@@ -2382,15 +2794,157 @@
       },
       "exported_frame": "../../production/c/knockdown/frames/knockdown_mvp_03.png",
       "phase": "recover"
+    },
+    {
+      "name": "thrown_spectacle_00",
+      "action": "thrown",
+      "sheet": "../../production/c/thrown/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 275,
+        "h": 362
+      },
+      "exported_frame": "../../production/c/thrown/frames/thrown_spectacle_00.png",
+      "phase": "capture"
+    },
+    {
+      "name": "thrown_spectacle_01",
+      "action": "thrown",
+      "sheet": "../../production/c/thrown/prepared.png",
+      "source_rect": {
+        "x": 311,
+        "y": 0,
+        "w": 265,
+        "h": 362
+      },
+      "exported_frame": "../../production/c/thrown/frames/thrown_spectacle_01.png",
+      "phase": "inverted"
+    },
+    {
+      "name": "thrown_spectacle_02",
+      "action": "thrown",
+      "sheet": "../../production/c/thrown/prepared.png",
+      "source_rect": {
+        "x": 622,
+        "y": 0,
+        "w": 235,
+        "h": 362
+      },
+      "exported_frame": "../../production/c/thrown/frames/thrown_spectacle_02.png",
+      "phase": "tumble"
+    },
+    {
+      "name": "thrown_spectacle_03",
+      "action": "thrown",
+      "sheet": "../../production/c/thrown/prepared.png",
+      "source_rect": {
+        "x": 933,
+        "y": 0,
+        "w": 311,
+        "h": 362
+      },
+      "exported_frame": "../../production/c/thrown/frames/thrown_spectacle_03.png",
+      "phase": "descent"
+    },
+    {
+      "name": "launched_spectacle_00",
+      "action": "launched",
+      "sheet": "../../production/c/launched/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 244,
+        "h": 326
+      },
+      "exported_frame": "../../production/c/launched/frames/launched_spectacle_00.png",
+      "phase": "impact"
+    },
+    {
+      "name": "launched_spectacle_01",
+      "action": "launched",
+      "sheet": "../../production/c/launched/prepared.png",
+      "source_rect": {
+        "x": 244,
+        "y": 0,
+        "w": 244,
+        "h": 326
+      },
+      "exported_frame": "../../production/c/launched/frames/launched_spectacle_01.png",
+      "phase": "rise"
+    },
+    {
+      "name": "launched_spectacle_02",
+      "action": "launched",
+      "sheet": "../../production/c/launched/prepared.png",
+      "source_rect": {
+        "x": 488,
+        "y": 0,
+        "w": 244,
+        "h": 326
+      },
+      "exported_frame": "../../production/c/launched/frames/launched_spectacle_02.png",
+      "phase": "apex"
+    },
+    {
+      "name": "launched_spectacle_03",
+      "action": "launched",
+      "sheet": "../../production/c/launched/prepared.png",
+      "source_rect": {
+        "x": 732,
+        "y": 0,
+        "w": 244,
+        "h": 326
+      },
+      "exported_frame": "../../production/c/launched/frames/launched_spectacle_03.png",
+      "phase": "descent"
+    },
+    {
+      "name": "heavy_hit_spectacle_00",
+      "action": "heavy_hit",
+      "sheet": "../../production/c/heavy_hit/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 290,
+        "h": 368
+      },
+      "exported_frame": "../../production/c/heavy_hit/frames/heavy_hit_spectacle_00.png",
+      "phase": "impact"
+    },
+    {
+      "name": "heavy_hit_spectacle_01",
+      "action": "heavy_hit",
+      "sheet": "../../production/c/heavy_hit/prepared.png",
+      "source_rect": {
+        "x": 290,
+        "y": 0,
+        "w": 290,
+        "h": 368
+      },
+      "exported_frame": "../../production/c/heavy_hit/frames/heavy_hit_spectacle_01.png",
+      "phase": "stagger"
+    },
+    {
+      "name": "heavy_hit_spectacle_02",
+      "action": "heavy_hit",
+      "sheet": "../../production/c/heavy_hit/prepared.png",
+      "source_rect": {
+        "x": 580,
+        "y": 0,
+        "w": 247,
+        "h": 368
+      },
+      "exported_frame": "../../production/c/heavy_hit/frames/heavy_hit_spectacle_02.png",
+      "phase": "recover"
     }
   ],
-  "atlas_sha256": "bb35617eb3c50db58d706390ba3234b55ae1241fedf4475d5304565423f9fc4e",
-  "manifest_sha256": "7a1484f438efe701d53a6622800493e3159b21d2abaf8148ed9e633406359cc2",
-  "mvp_runtime_review": {
-    "report": "review/mvp/runtime-review.json",
-    "date": "2026-09-07",
-    "scenario_count": 30,
-    "both_sides": true,
-    "status": "reviewed-in-real-renderer"
+  "atlas_sha256": "a1efa9e3170118676b97efef79defdd244dfc5d8e326c408d0d8a9449b453a3c",
+  "manifest_sha256": "a036a843746be9862e9b5169e4032c7d8d22090d917b3473316cc79f6f066964",
+  "spectacle_review": {
+    "report": "review/extraordinary/report.json",
+    "report_sha256": "e2ee2174b5aeeea195521d0987e43e0234d212f35a1a5073ef712420809efea7",
+    "source_generation": "../../production/c/spectacle-generation.json",
+    "preservation": "../../production/c/spectacle-preservation.json"
   }
 }

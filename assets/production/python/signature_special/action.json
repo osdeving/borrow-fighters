@@ -1,77 +1,150 @@
 {
   "action": "signature_special",
-  "source": "signature_special/source-v2.png",
-  "sheet": "signature_special/keyed-v2.png",
-  "reviewed": true,
+  "source": "signature_special/source-extraordinary-v2.png",
+  "sheet": "signature_special/keyed-extraordinary-v2-edge-clean.png",
   "loop": false,
-  "status": "runtime_verified_mvp",
+  "reviewed": true,
+  "status": "runtime_verified_spectacle",
+  "source_body_height_reference_px": 371,
+  "suggested_scale_to_runtime": 0.7223719676549866,
   "frames": [
     {
       "name": "signature_special_00",
       "source_rect": {
         "x": 0,
         "y": 0,
-        "w": 500,
-        "h": 768
+        "w": 443,
+        "h": 444
       },
       "pivot": {
-        "x": 260,
-        "y": 687
+        "x": 212,
+        "y": 439
       },
-      "duration_ms": 183,
+      "duration_ms": 133,
       "phase": "startup"
     },
     {
       "name": "signature_special_01",
       "source_rect": {
-        "x": 500,
+        "x": 443,
         "y": 0,
-        "w": 610,
-        "h": 768
+        "w": 444,
+        "h": 444
       },
       "pivot": {
-        "x": 177,
-        "y": 686
+        "x": 178,
+        "y": 439
       },
-      "duration_ms": 100,
-      "phase": "active"
+      "duration_ms": 150,
+      "phase": "startup"
     },
     {
       "name": "signature_special_02",
       "source_rect": {
-        "x": 1110,
+        "x": 887,
         "y": 0,
-        "w": 450,
-        "h": 768
+        "w": 443,
+        "h": 444
       },
       "pivot": {
-        "x": 240,
-        "y": 682
+        "x": 171,
+        "y": 432
       },
-      "duration_ms": 183,
-      "phase": "recovery"
+      "duration_ms": 150,
+      "phase": "startup"
     },
     {
       "name": "signature_special_03",
       "source_rect": {
-        "x": 1560,
+        "x": 1330,
         "y": 0,
-        "w": 488,
-        "h": 768
+        "w": 444,
+        "h": 444
       },
       "pivot": {
-        "x": 250,
-        "y": 691
+        "x": 158,
+        "y": 429
+      },
+      "duration_ms": 183,
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_04",
+      "source_rect": {
+        "x": 0,
+        "y": 444,
+        "w": 443,
+        "h": 443
+      },
+      "pivot": {
+        "x": 162,
+        "y": 405
+      },
+      "duration_ms": 183,
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_05",
+      "source_rect": {
+        "x": 443,
+        "y": 444,
+        "w": 444,
+        "h": 443
+      },
+      "pivot": {
+        "x": 275,
+        "y": 425
       },
       "duration_ms": 184,
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_06",
+      "source_rect": {
+        "x": 887,
+        "y": 444,
+        "w": 443,
+        "h": 443
+      },
+      "pivot": {
+        "x": 228,
+        "y": 407
+      },
+      "duration_ms": 300,
+      "phase": "recovery"
+    },
+    {
+      "name": "signature_special_07",
+      "source_rect": {
+        "x": 1330,
+        "y": 444,
+        "w": 444,
+        "h": 443
+      },
+      "pivot": {
+        "x": 207,
+        "y": 391
+      },
+      "duration_ms": 384,
       "phase": "recovery"
     }
   ],
-  "review_notes": "New four-frame signature animation generated with imagegen. Explicit variable-width crops preserve whole extended limbs; constant anatomical scale, support pivots, startup/active/recovery keyed to MoveSpec. Original source and background-only revision preserved. Local matte removal authorized in production README. Source identity/alpha reviewed; runtime contacts verified in both facings.",
+  "review_notes": "import antigravity: import gesture, snake expands, coils gather, full levitation, directs spiral, loose-leg hover recoil, landing crouch, guard. 100ticks1667ms: startup0..25, active26..58, recovery59..99. World owns vertical travel; body-attached coils remain in actor and detached vortex was removed in generated v2. Airborne keys4/5 use virtual ground anchors accounting for tucked legs; no second drawn flight path. Separate tall serpent vortex has its own exact ground anchor. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available.",
   "runtime_review": {
-    "scope": "MVP integration; actual World/Raylib showcase in both facings",
-    "report": "../../candidates/python/review/mvp/showcase-validation.json",
-    "actor_states": "attack, block, hit and knockdown selected by real combat state",
-    "reviewer": "Codex root; contact sheets and full-resolution samples inspected"
+    "report": "../../candidates/python/review/extraordinary/runtime-review.json",
+    "actual_clip_present": true,
+    "both_facings_verified": true,
+    "all_selected_keys_observed": true,
+    "reviewed_frames": [
+      "signature_special_00",
+      "signature_special_01",
+      "signature_special_02",
+      "signature_special_03",
+      "signature_special_04",
+      "signature_special_05",
+      "signature_special_06",
+      "signature_special_07"
+    ],
+    "review_scope": "Integrated art and real contact coherence for the extraordinary signatures / throws goal."
   }
 }

@@ -89,6 +89,15 @@ pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, asset
 
     draw_lab_projectiles(draw, lab.projectiles(), projectile_texture);
     combat_debug::draw_combat_lab_debug(draw, lab);
+    if lab.is_signature_actor_preview() {
+        draw.draw_text(
+            "Actor preview. Signature effects/contact: open Move Showcase",
+            screen_px(36),
+            screen_px(110),
+            screen_px(13),
+            UI_MUTED,
+        );
+    }
 }
 
 fn draw_lab_grid(draw: &mut impl super::DrawTarget, line_color: Color) {
