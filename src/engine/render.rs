@@ -272,6 +272,15 @@ pub fn draw_linker_chip_cursor(
         return;
     }
 
+    // Scale the complete pointer around its hotspot, including text and glow.
+    let mut cursor_draw = draw.begin_mode2D(Camera2D {
+        offset: mouse_position,
+        target: mouse_position,
+        rotation: 0.0,
+        zoom: 0.5,
+    });
+    let draw = &mut cursor_draw;
+
     let chip_size = screen_px(42);
     let pin_len = screen_px(7);
     let margin = pin_len + screen_px(4);
