@@ -679,6 +679,7 @@ fn opponent_for(character: CharacterId) -> CharacterId {
         CharacterId::Duke => CharacterId::C,
         CharacterId::C => CharacterId::Python,
         CharacterId::Python => CharacterId::Cpp,
-        CharacterId::Cpp | CharacterId::Go => CharacterId::Rust,
+        CharacterId::Cpp => CharacterId::Python,
+        CharacterId::Go => CharacterId::Rust,
     }
 }

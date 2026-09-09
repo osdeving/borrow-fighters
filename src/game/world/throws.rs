@@ -46,6 +46,10 @@ impl World {
         result: DamageResult,
         direction: f32,
     ) {
+        match attacker {
+            PlayerSlot::One => self.player_two.record_close_contact_profile(attack.kind),
+            PlayerSlot::Two => self.player_one.record_close_contact_profile(attack.kind),
+        }
         if result.damage > 0 && !result.blocked && attack.guard_rule == GuardRule::Throw {
             self.begin_throw(attacker);
             return;

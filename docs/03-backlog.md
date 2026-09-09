@@ -4,13 +4,19 @@
 
 Este documento e a fonte de verdade para **o que vem agora**.
 
-Rodada concluída: [reações e transformações](24-reactions-and-transformations.md).
-Animações de reação dos seis defensores, Python gigante, expansão de C++ e
-mutação persistente do cenário de Rust integradas e verificadas: 335 testes
-aprovados, teste de áudio ao vivo separado e revisão visual nas duas direções.
-[Evidências e reprodução](evidence/reactions-transformations/README.md).
-Próximo corte: playtest humano das animações e dos sons; depois avaliar custo,
-raridade e contra-jogo dos supers. Vantagens por arena continuam fora desta rodada.
+Rodada concluída: [reações próprias Python × C++](25-python-cpp-contact-reactions.md).
+64 desenhos novos e resposta sincronizada a cada contato, incluindo os oito da
+rajada. 346 testes, Fmt/Clippy e 64 cenários renderizados nos dois sentidos.
+[Vídeo e evidências](evidence/python-cpp-reactions/README.md).
+Próximo corte solicitado: aplicar o padrão de reações aos demais personagens
+em outra rodada, após revisar o piloto. Custo, raridade, contra-jogo e vantagens
+por arena permanecem fora desta entrega.
+
+Rodada anterior: [reações e transformações](24-reactions-and-transformations.md).
+Python gigante, expansão de C++ e mutação persistente de Rust continuam
+integradas. O playtest rejeitou a leitura das reações genéricas, e o piloto acima
+substitui essa apresentação para Python/C++. A validação anterior está preservada
+como [registro histórico](evidence/reactions-transformations/README.md).
 
 Rodada anterior concluída: [supers autorais e identidade sonora](23-authored-super-sequences.md).
 Garbage Collector, Ownership Eclipse, General Protection Fault e Footgun
@@ -45,6 +51,8 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Proxima acao |
 |---|---|---|---|---|
+| Concluído | Reações próprias Python × C++ | Implementado e verificado | [Entrega 25](25-python-cpp-contact-reactions.md), [evidências](evidence/python-cpp-reactions/README.md), [ADR 0018](adr/0018-contact-reaction-profiles.md) | 64 desenhos novos, reação individual à rajada, 64 cenários nos dois sentidos e vídeo do par. |
+| Próximo | Reações próprias dos demais personagens | Rodada posterior ao piloto | [Padrão 25](25-python-cpp-contact-reactions.md#aplicar-o-padrão-na-próxima-rodada) | Estender desenhos e validação por contato após o playtest de Python/C++. |
 | Concluído | Reações e transformações | Cinco supers autorais e reações dos seis defensores integrados e verificados | [Plano 24](24-reactions-and-transformations.md), [ADR 0017](adr/0017-reaction-clocks-and-arena-mutation.md), [evidências](evidence/reactions-transformations/README.md) | Playtest humano das animações e dos sons. 335 testes, Clippy estrito, formatação e teste separado de áudio ao vivo aprovados; custo, raridade e vantagens por arena ficam para outra rodada. |
 | Concluído | Supers autorais e vozes distintas | Quatro roteiros integrados, novos atlas e áudio por fase | [Plano23](23-authored-super-sequences.md), [ADR0016](adr/0016-authored-super-sequences.md) | Playtest humano das animações e timbres; depois calibrar captura, custo e raridade. 321 testes e 41 verificações de controles aprovados. |
 | Concluído | Tipografia, cenários vivos e segundo especial | Fontes incorporadas, memes animados e seis cinematográficas com contato local | [Plano e entrega](22-presentation-and-brazilian-stage-life.md), [ADR 0015](adr/0015-cinematic-presentation-and-stage-life.md) | Playtest humano do acabamento e do risco/recompensa dos novos golpes; 300 testes e revisão gráfica registrados. |

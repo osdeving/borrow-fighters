@@ -617,3 +617,29 @@ ruby -e 'bad = []; Dir["{README.md,CONTRIBUTING.md,CHANGELOG.md,AGENTS.md,CLAUDE
 A vantagem mostrada pelo Combat Lab é estimada pelo `MoveSpec`; não inclui os 36 frames de knockdown. Para verificar queda, levantar e nova ação, use o showcase ou a luta real. O Lab rejeita `signature_special` para Go, que não possui essa ação.
 
 Assinaturas no Combat Lab são prévias do ator: sem dummy de contato, hitbox de melee ou vantagem estimada. Para efeitos, trajeto e contato real, use Move Showcase. O Lab mantém a mesma geometria física baixa das rasteiras.
+
+## Reações por contato — piloto Python/C++
+
+A [rodada 25](25-python-cpp-contact-reactions.md) aplica desenhos próprios à dupla.
+Cada contato no World escolhe `ContactReactionProfile` e reinicia um relógio
+visual. O renderer distribui os quadros do clip `reaction_*` por essa janela,
+independentemente da duração física do stun. O primeiro quadro já é impacto.
+A rajada de C++ usa nove frames de resposta por pancada, com agenda compartilhada
+entre pose ofensiva e perfil do defensor. Queda, get-up, guarda e KO têm poses
+próprias; `combat_manifest`, dano e caixas não dependem desses novos desenhos.
+
+Para inspecionar as duas personagens juntas, tanto `--character cpp` quanto
+`--character python` no showcase usam a outra como adversária. `X` troca os lados.
+O exemplo `capture_pair_reactions` percorre os doze ataques e quatro situações
+de defesa de cada personagem; `--supers-only` limita a passagem aos dois supers
+e `--reverse` espelha o par. Seu JSON registra o perfil e o desenho a cada tick.
+
+```sh
+cargo run --example capture_pair_reactions -- --output /tmp/pair-reactions
+cargo run --example capture_pair_reactions -- --reverse --output /tmp/pair-reactions-left
+cargo run --example capture_pair_reactions -- --supers-only --no-snapshots --output /tmp/pair-supers --video /tmp/pair-supers.mp4
+```
+
+A matriz de testes por contato é complementada por revisão visual do par em
+movimento, incluindo o início e a recuperação entre pancadas consecutivas.
+A arte desse padrão para os demais personagens permanece fora desta rodada.

@@ -26,7 +26,8 @@ pub use manifest::{
 };
 pub use reaction::{
     FighterSpritePresentation, FighterVisualPlacement, FighterVisualTransform,
-    fighter_reaction_transform, frame_for_fighter_state,
+    contact_reaction_clip_name, contact_reaction_transform, fighter_reaction_transform,
+    frame_for_contact_reaction, frame_for_fighter_state,
 };
 pub use selection::{
     FighterSpriteClip, FighterSpriteFrame, fighter_clip_elapsed_seconds, fighter_sprite_clip,

@@ -14,6 +14,7 @@ use crate::{
         super_sequence::{
             CPP_BARRAGE_CADENCE, CPP_BARRAGE_START, CPP_FOOTSHOT_TICK, DUKE_CLONE_CADENCE,
             DUKE_CLONE_COUNT, DUKE_COLLECT_START, SuperPhase, SuperSequence,
+            cpp_barrage_pose_index,
         },
     },
     config::{FLOOR_Y, WINDOW_WIDTH},
@@ -404,7 +405,7 @@ fn draw_cpp_story(
         }
         SuperPhase::CppBarrage => {
             let local = sequence.tick - CPP_BARRAGE_START;
-            let key = [1, 3, 2, 4][(local / CPP_BARRAGE_CADENCE) as usize % 4];
+            let key = cpp_barrage_pose_index(sequence.tick);
             if local % CPP_BARRAGE_CADENCE < 7 {
                 (barrage, CPP_BARRAGE[key])
             } else {

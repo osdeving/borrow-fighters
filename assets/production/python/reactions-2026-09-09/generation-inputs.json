@@ -1,0 +1,63 @@
+{
+  "tool": "built-in imagegen",
+  "date": "2026-09-09",
+  "identity_reference": "assets/production/python/reference/master-existing.png",
+  "outputs": [
+    {
+      "name": "hits",
+      "source": "/home/willams/.codex/generated_images/01a085ab-2369-7fb1-8c35-7fbcf58cb5dd/exec-5f3e2e21-c521-444f-b913-cd68ea659c5e.png"
+    },
+    {
+      "name": "guards",
+      "source": "/home/willams/.codex/generated_images/01a085ab-2369-7fb1-8c35-7fbcf58cb5dd/exec-7c9cbd08-bfed-44dd-b7d0-3417304638e3.png"
+    },
+    {
+      "name": "hits-alpha",
+      "source": "/home/willams/.codex/generated_images/01a085ab-2369-7fb1-8c35-7fbcf58cb5dd/exec-9882b54e-821b-450c-89f8-0148b8c54b3c.png"
+    },
+    {
+      "name": "guards-alpha",
+      "source": "/home/willams/.codex/generated_images/01a085ab-2369-7fb1-8c35-7fbcf58cb5dd/exec-91c2de60-017e-4ff6-a6e5-3fbd7fdb3464.png"
+    },
+    {
+      "name": "launch",
+      "source": "/home/willams/.codex/generated_images/01a085ab-2369-7fb1-8c35-7fbcf58cb5dd/exec-117a6742-7970-4fe1-b8da-22f2d8eae00b.png"
+    },
+    {
+      "name": "ground-rise",
+      "source": "/home/willams/.codex/generated_images/01a085ab-2369-7fb1-8c35-7fbcf58cb5dd/exec-251a3427-e00e-49ce-85f7-35ae313a5994.png"
+    },
+    {
+      "name": "launch-alpha",
+      "source": "/home/willams/.codex/generated_images/01a085ab-2369-7fb1-8c35-7fbcf58cb5dd/exec-f97534e9-aae5-49c9-89b5-33eb111f6bb2.png"
+    },
+    {
+      "name": "ground-rise-alpha",
+      "source": "/home/willams/.codex/generated_images/01a085ab-2369-7fb1-8c35-7fbcf58cb5dd/exec-56259825-f2f7-4ed0-8190-6af14e257893.png"
+    },
+    {
+      "name": "ground-rise-alpha-final",
+      "source": "/home/willams/.codex/generated_images/01a085ab-2369-7fb1-8c35-7fbcf58cb5dd/exec-a83f87e0-7224-4e90-ad51-433ca6b5ebbe.png"
+    }
+  ],
+  "selected_alpha": [
+    "hits-alpha",
+    "guards-alpha",
+    "launch-alpha",
+    "ground-rise-alpha"
+  ],
+  "discarded_attempts": [
+    {
+      "prompt": "prompt-air-ground.txt",
+      "result": "Output moderation rejected; no usable image returned."
+    },
+    {
+      "prompt": "prompt-air-ground-v2.txt",
+      "result": "Output moderation rejected; no usable image returned."
+    },
+    {
+      "output": "ground-rise-alpha-final",
+      "result": "Unneeded retry; first extraction has verified alpha and preserves initial poses."
+    }
+  ]
+}

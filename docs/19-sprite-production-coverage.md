@@ -1,6 +1,25 @@
 # 19 — Cobertura da produção de sprites
 
-## Rodada atual: assinatura e arremessos
+## Rodada atual: reações próprias Python × C++
+
+O piloto acrescenta oito clips `reaction_*` com quatro desenhos por perfil em
+cada personagem. Python e C++ passam a **33 clips / 120 quadros cada**, preservando
+os 25 clips / 88 quadros anteriores. Os seis manifestos candidatos somam agora
+**161 clips / 574 quadros de ator**. Esse total não inclui os atlas de atores/efeitos
+cinematográficos separados.
+
+| Personagem | Clips novos | Desenhos novos | Produção | Validação |
+|---|---:|---:|---|---|
+| Python | 8 | 32 | [Fontes e prompts](../assets/production/python/reactions-2026-09-09/README.md) | [Par, duas direções e rajada](evidence/python-cpp-reactions/README.md) |
+| C++ | 8 | 32 | [Fontes e prompts](../assets/production/cpp/reactions-own-2026-09-09/README.md) | [Par, duas direções e recuperação](evidence/python-cpp-reactions/README.md) |
+
+Os novos clips são opcionais para o carregador; a seleção por contato habilita
+somente essas duas personagens. O [padrão da rodada 25](25-python-cpp-contact-reactions.md)
+substitui as reações genéricas rejeitadas no playtest e orienta a extensão futura
+ao resto do elenco. Os panoramas antigos continuam como histórico dos clips
+originais; a evidência atual é o vídeo e a revisão por contato do par.
+
+## Histórico: assinatura e arremessos
 
 Os cinco selecionáveis têm **25 clips cada**, incluindo oito poses por especial, seis por arremesso e reações próprias `heavy_hit`, `launched` e `thrown`. Go conserva 20 clips / 60 quadros. São **145 clips / 510 quadros de ator**, mais **30 quadros de efeitos** em cinco atlas separados. A produção desta rodada contém **156 desenhos novos**: 126 poses e 30 efeitos, com fontes, revisões de matte, recortes e pivôs preservados. Ver [critérios e evidências da assinatura](21-signature-spectacle-and-throws.md).
 

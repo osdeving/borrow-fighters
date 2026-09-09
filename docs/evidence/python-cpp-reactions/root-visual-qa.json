@@ -1,0 +1,231 @@
+{
+  "reviewer": "root",
+  "method": "Real rendered PNGs plus consecutive decoded video frames inspected through view_image. No live human playtest or continuous video playback is claimed.",
+  "direct_scenarios": 32,
+  "overview_samples": [
+    {
+      "character": "cpp",
+      "scenario": "Attack(LightPunch)",
+      "first": "cpp-Attack(LightPunch)-right-055-Body-0.png",
+      "last": "cpp-Attack(LightPunch)-right-066-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "Attack(HeavyPunch)",
+      "first": "cpp-Attack(HeavyPunch)-right-061-Body-0.png",
+      "last": "cpp-Attack(HeavyPunch)-right-078-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "Attack(Kick)",
+      "first": "cpp-Attack(Kick)-right-059-Body-0.png",
+      "last": "cpp-Attack(Kick)-right-074-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "Attack(Sweep)",
+      "first": "cpp-Attack(Sweep)-right-060-Low-0.png",
+      "last": "cpp-Attack(Sweep)-right-096-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "Attack(Overhead)",
+      "first": "cpp-Attack(Overhead)-right-062-Head-0.png",
+      "last": "cpp-Attack(Overhead)-right-079-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "Attack(AntiAir)",
+      "first": "cpp-Attack(AntiAir)-right-058-Launch-0.png",
+      "last": "cpp-Attack(AntiAir)-right-146-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "Attack(AirPunch)",
+      "first": "cpp-Attack(AirPunch)-right-069-Head-0.png",
+      "last": "cpp-Attack(AirPunch)-right-083-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "Attack(AirKick)",
+      "first": "cpp-Attack(AirKick)-right-071-Head-0.png",
+      "last": "cpp-Attack(AirKick)-right-085-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "Attack(Throw)",
+      "first": "cpp-Attack(Throw)-right-061-Launch-0.png",
+      "last": "cpp-Attack(Throw)-right-149-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "Attack(Projectile)",
+      "first": "cpp-Attack(Projectile)-right-043-Body-0.png",
+      "last": "cpp-Attack(Projectile)-right-058-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "Attack(SignatureSpecial)",
+      "first": "cpp-Attack(SignatureSpecial)-right-073-Launch-0.png",
+      "last": "cpp-Attack(SignatureSpecial)-right-168-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "Attack(CinematicSpecial)",
+      "first": "cpp-Attack(CinematicSpecial)-right-374-Head-0.png",
+      "last": "cpp-Attack(CinematicSpecial)-right-656-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "StandingBlock",
+      "first": "cpp-StandingBlock-right-055-GuardHigh-0.png",
+      "last": "cpp-StandingBlock-right-063-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "OverheadBlock",
+      "first": "cpp-OverheadBlock-right-062-GuardHigh-0.png",
+      "last": "cpp-OverheadBlock-right-073-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "CrouchingBlock",
+      "first": "cpp-CrouchingBlock-right-060-GuardLow-0.png",
+      "last": "cpp-CrouchingBlock-right-070-recovered.png"
+    },
+    {
+      "character": "cpp",
+      "scenario": "ProjectileBlock",
+      "first": "cpp-ProjectileBlock-right-050-GuardHigh-0.png",
+      "last": "cpp-ProjectileBlock-right-060-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "Attack(LightPunch)",
+      "first": "python-Attack(LightPunch)-right-055-Body-0.png",
+      "last": "python-Attack(LightPunch)-right-066-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "Attack(HeavyPunch)",
+      "first": "python-Attack(HeavyPunch)-right-061-Body-0.png",
+      "last": "python-Attack(HeavyPunch)-right-077-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "Attack(Kick)",
+      "first": "python-Attack(Kick)-right-059-Body-0.png",
+      "last": "python-Attack(Kick)-right-073-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "Attack(Sweep)",
+      "first": "python-Attack(Sweep)-right-060-Low-0.png",
+      "last": "python-Attack(Sweep)-right-096-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "Attack(Overhead)",
+      "first": "python-Attack(Overhead)-right-062-Head-0.png",
+      "last": "python-Attack(Overhead)-right-078-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "Attack(AntiAir)",
+      "first": "python-Attack(AntiAir)-right-058-Launch-0.png",
+      "last": "python-Attack(AntiAir)-right-146-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "Attack(AirPunch)",
+      "first": "python-Attack(AirPunch)-right-069-Head-0.png",
+      "last": "python-Attack(AirPunch)-right-083-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "Attack(AirKick)",
+      "first": "python-Attack(AirKick)-right-071-Head-0.png",
+      "last": "python-Attack(AirKick)-right-085-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "Attack(Throw)",
+      "first": "python-Attack(Throw)-right-061-Launch-0.png",
+      "last": "python-Attack(Throw)-right-149-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "Attack(Projectile)",
+      "first": "python-Attack(Projectile)-right-043-Body-0.png",
+      "last": "python-Attack(Projectile)-right-057-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "Attack(SignatureSpecial)",
+      "first": "python-Attack(SignatureSpecial)-right-063-Launch-0.png",
+      "last": "python-Attack(SignatureSpecial)-right-158-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "Attack(CinematicSpecial)",
+      "first": "python-Attack(CinematicSpecial)-right-334-Launch-0.png",
+      "last": "python-Attack(CinematicSpecial)-right-478-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "StandingBlock",
+      "first": "python-StandingBlock-right-055-GuardHigh-0.png",
+      "last": "python-StandingBlock-right-063-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "OverheadBlock",
+      "first": "python-OverheadBlock-right-062-GuardHigh-0.png",
+      "last": "python-OverheadBlock-right-074-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "CrouchingBlock",
+      "first": "python-CrouchingBlock-right-060-GuardLow-0.png",
+      "last": "python-CrouchingBlock-right-071-recovered.png"
+    },
+    {
+      "character": "python",
+      "scenario": "ProjectileBlock",
+      "first": "python-ProjectileBlock-right-050-GuardHigh-0.png",
+      "last": "python-ProjectileBlock-right-060-recovered.png"
+    }
+  ],
+  "consecutive_frames": {
+    "file": "cpp-barrage-80-frames.png",
+    "video_frames": [
+      1879,
+      1958
+    ],
+    "count": 80,
+    "covers": "All eight contacts, four articulated drawings per contact, attacker contact/recovery and immediate reaction restart."
+  },
+  "swallow_approach": {
+    "file": "python-swallow-approach.png",
+    "video_frames": [
+      4440,
+      4448,
+      4460,
+      4472
+    ],
+    "covers": "New C++ flight artwork during Python suction before damage/hidden state."
+  },
+  "findings": [
+    "Python and C++ articulate trunk/arms for ordinary body hits, head/shoulders for high hits, leg for sweep, and compress guards.",
+    "All eight barrage windows restart the impact pose, then recoil and recompose before the next contact.",
+    "Head response on the front kick removes the duck-under appearance found during the first pass. Spark follows the visible high contact.",
+    "Inspected launch/floor/rise/final-recovered samples keep scale and support consistent.",
+    "C++ visibly changes flight pose during suction and disappears as intended when swallowed."
+  ],
+  "status": "pass_for_reviewed_samples",
+  "limits": [
+    "Full video is supplied for user playtest; frame inspection alone does not establish subjective fluidity.",
+    "Overview crops supplement full frames; airborne body integrity was checked in the full frames and detailed flight samples.",
+    "Only Python/C++ art is accepted in this round; other characters retain their earlier presentation."
+  ]
+}

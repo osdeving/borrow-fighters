@@ -1,5 +1,17 @@
 # Changelog
 
+## Rodada 2026-09-09 — Reações próprias Python × C++
+
+- Reações articuladas de cabeça, tronco, perna, defesa alta/baixa, voo, queda e
+  recuperação com desenhos próprios para as duas personagens.
+- Cada pancada da rajada de C++ reinicia uma resposta de nove frames; ataque,
+  impacto e reação compartilham a mesma agenda, sem alterar dano ou stun físico.
+- Showcase de C++ agora usa Python como adversária, permitindo testar o par nos
+  dois sentidos. Capturas registram cada contato e sua progressão em movimento.
+- [Padrão e critérios](docs/25-python-cpp-contact-reactions.md) e
+  [decisão técnica](docs/adr/0018-contact-reaction-profiles.md). Os demais lutadores
+  aguardam a próxima rodada desse padrão visual.
+
 ## Rodada 2026-09-09 — Reações e transformações
 
 - Relógio próprio de reação para todos os seis defensores; acertos interrompem a pose anterior, com recoil, voo, impacto no chão e recuperação legíveis.

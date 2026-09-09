@@ -1,5 +1,10 @@
 # Reações e transformações — entrega de 9 de setembro de 2026
 
+Registro histórico de `caa3858`. O playtest seguinte rejeitou a leitura corporal
+das reações, principalmente na rajada de C++. A validação abaixo não demonstrava
+resposta convincente a cada pancada. O [piloto Python/C++ da rodada 25](../../25-python-cpp-contact-reactions.md)
+substitui essa parte da apresentação e mede cada contato separadamente.
+
 [![Python devora o adversário](python-devour.png)](../../../assets/showcase/reactions-transformations-2026-09-09.mp4)
 
 [Demonstração dos cinco supers com áudio](../../../assets/showcase/reactions-transformations-2026-09-09.mp4):

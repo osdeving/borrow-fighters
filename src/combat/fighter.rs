@@ -11,6 +11,7 @@ use crate::math::{rect::Rect, vec2::Vec2};
 
 use super::frame::FrameCount;
 use super::projectile::{PROJECTILE_SPEC, ProjectileFrameData, ProjectileSpec};
+mod contact_reactions;
 mod reactions;
 pub use crate::combat::move_set::{
     AIR_KICK_DAMAGE, AIR_PUNCH_DAMAGE, ActiveAttack, AttackFrameData, AttackKind,
@@ -19,6 +20,7 @@ pub use crate::combat::move_set::{
     MoveSpec, OVERHEAD_PUNCH_DAMAGE, RISING_ANTI_AIR_DAMAGE, RUST_BORROW_JAB_DAMAGE,
     SWEEP_KICK_DAMAGE, move_spec_for_input,
 };
+pub use contact_reactions::{ContactReactionProfile, ContactReactionState};
 pub use reactions::ReactionVisualState;
 
 const DEFAULT_WIDTH: f32 = world_px(76.0);
@@ -175,6 +177,8 @@ pub struct Fighter {
     reaction_was_crouching: bool,
     reaction_landed: bool,
     super_reaction: bool,
+    contact_reaction_profile: ContactReactionProfile,
+    contact_reaction_duration: f32,
     throw_protection_timer: f32,
     capture_role: Option<CaptureRole>,
     guard_visual_elapsed: f32,
@@ -276,6 +280,8 @@ impl Fighter {
             reaction_was_crouching: false,
             reaction_landed: false,
             super_reaction: false,
+            contact_reaction_profile: ContactReactionProfile::Body,
+            contact_reaction_duration: 0.0,
             throw_protection_timer: 0.0,
             capture_role: None,
             guard_visual_elapsed: 0.0,
@@ -492,6 +498,7 @@ impl Fighter {
         };
         self.take_damage(final_damage);
         let pushback = self.apply_hit_reaction(hit_reaction, blocked);
+        self.record_contact_reaction(guard_rule, blocked);
 
         DamageResult {
             damage: final_damage,

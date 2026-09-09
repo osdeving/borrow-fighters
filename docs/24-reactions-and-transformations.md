@@ -1,5 +1,10 @@
 # 24 — Reações de impacto e transformações
 
+> Histórico: no playtest posterior, o usuário considerou as reações da rajada
+> pouco expressivas, mesmo com a validação abaixo. A [rodada 25](25-python-cpp-contact-reactions.md)
+> substitui esse tratamento por desenhos próprios e verificação de cada contato
+> em Python/C++. A extensão visual aos demais personagens permanece pendente.
+
 ## Plano autorizado
 
 Rodada de 9 de setembro de 2026, posterior ao commit `94f0c7c`. O pedido amplia

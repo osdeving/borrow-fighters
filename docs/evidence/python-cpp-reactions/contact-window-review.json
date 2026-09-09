@@ -1,0 +1,346 @@
+{
+  "scenario_count": 64,
+  "directions": 2,
+  "barrage_windows": [
+    {
+      "side": "right",
+      "contact_tick": 344,
+      "video_frames": [
+        1879,
+        1888
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 93
+    },
+    {
+      "side": "right",
+      "contact_tick": 354,
+      "video_frames": [
+        1889,
+        1898
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 90
+    },
+    {
+      "side": "right",
+      "contact_tick": 364,
+      "video_frames": [
+        1899,
+        1908
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 87
+    },
+    {
+      "side": "right",
+      "contact_tick": 374,
+      "video_frames": [
+        1909,
+        1918
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 84
+    },
+    {
+      "side": "right",
+      "contact_tick": 384,
+      "video_frames": [
+        1919,
+        1928
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 81
+    },
+    {
+      "side": "right",
+      "contact_tick": 394,
+      "video_frames": [
+        1929,
+        1938
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 78
+    },
+    {
+      "side": "right",
+      "contact_tick": 404,
+      "video_frames": [
+        1939,
+        1948
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 75
+    },
+    {
+      "side": "right",
+      "contact_tick": 414,
+      "video_frames": [
+        1949,
+        1958
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 72
+    },
+    {
+      "side": "left",
+      "contact_tick": 344,
+      "video_frames": [
+        1879,
+        1888
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 93
+    },
+    {
+      "side": "left",
+      "contact_tick": 354,
+      "video_frames": [
+        1889,
+        1898
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 90
+    },
+    {
+      "side": "left",
+      "contact_tick": 364,
+      "video_frames": [
+        1899,
+        1908
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 87
+    },
+    {
+      "side": "left",
+      "contact_tick": 374,
+      "video_frames": [
+        1909,
+        1918
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 84
+    },
+    {
+      "side": "left",
+      "contact_tick": 384,
+      "video_frames": [
+        1919,
+        1928
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 81
+    },
+    {
+      "side": "left",
+      "contact_tick": 394,
+      "video_frames": [
+        1929,
+        1938
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 78
+    },
+    {
+      "side": "left",
+      "contact_tick": 404,
+      "video_frames": [
+        1939,
+        1948
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 75
+    },
+    {
+      "side": "left",
+      "contact_tick": 414,
+      "video_frames": [
+        1949,
+        1958
+      ],
+      "sampled_frames": [
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_02",
+        "reaction_head_03",
+        "reaction_head_03",
+        "reaction_head_03"
+      ],
+      "health": 72
+    }
+  ],
+  "per_contact_status": "passed",
+  "snapshots_generated": 548,
+  "snapshots_retained": 27,
+  "test_scope": "Deterministic World plus real sprite sampling; visual judgement documented separately."
+}

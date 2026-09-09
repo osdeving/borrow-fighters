@@ -9,11 +9,11 @@ use crate::{
     combat::fighter::{Facing, Fighter},
     config::{FLOOR_Y, RESOLUTION_SCALE, WINDOW_WIDTH, world_px},
     engine::sprites::{
-        animation::frame_for_fighter_clip_at,
+        animation::{frame_for_clip_at, frame_for_fighter_clip_at},
         manifest::{SpriteFrame, SpriteManifest},
         reaction::{
-            FighterSpritePresentation, FighterVisualTransform, fighter_reaction_transform,
-            frame_for_fighter_state,
+            FighterSpritePresentation, FighterVisualTransform, contact_reaction_transform,
+            fighter_reaction_transform, frame_for_fighter_state,
         },
         selection::{FighterSpriteClip, fighter_sprite_clip, fighter_sprite_frame},
     },
@@ -91,7 +91,19 @@ pub fn draw_manifest_fighter_sprite_placed<'a>(
     let clip = forced_clip.unwrap_or_else(|| fighter_sprite_clip(fighter));
     let defeated_floor =
         fighter.is_defeated() && fighter.in_knockdown() && clip == FighterSpriteClip::Knockdown;
-    let frame = if forced_clip.is_some() && !defeated_floor {
+    let captured_launch = forced_clip == Some(FighterSpriteClip::Launched)
+        && presentation.placement.is_some()
+        && fighter.uses_contact_reactions();
+    let authored_defeat = forced_clip == Some(FighterSpriteClip::Defeat)
+        && fighter.is_defeated()
+        && fighter.uses_contact_reactions();
+    let frame = if authored_defeat {
+        frame_for_clip_at(manifest, "reaction_fall", world_elapsed_seconds)
+            .or_else(|| frame_for_fighter_clip_at(manifest, clip, world_elapsed_seconds))
+    } else if captured_launch {
+        frame_for_clip_at(manifest, "reaction_launch", world_elapsed_seconds)
+            .or_else(|| frame_for_fighter_clip_at(manifest, clip, world_elapsed_seconds))
+    } else if forced_clip.is_some() && !defeated_floor {
         frame_for_fighter_clip_at(manifest, clip, world_elapsed_seconds)
     } else {
         frame_for_fighter_state(manifest, fighter, clip, world_elapsed_seconds)
@@ -106,7 +118,11 @@ pub fn draw_manifest_fighter_sprite_placed<'a>(
     let (source, dest) = manifest_frame_geometry(manifest, frame, fighter, clip);
     let authored_reaction = manifest.clip_named(clip.as_str()).is_some();
     let transform = if forced_clip.is_none() || defeated_floor {
-        fighter_reaction_transform(fighter, authored_reaction)
+        if frame.clip.starts_with("reaction_") {
+            contact_reaction_transform(fighter)
+        } else {
+            fighter_reaction_transform(fighter, authored_reaction)
+        }
     } else {
         FighterVisualTransform::default()
     };

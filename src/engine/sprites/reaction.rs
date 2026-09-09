@@ -6,14 +6,14 @@
 use std::f32::consts::PI;
 
 use crate::{
-    combat::fighter::{Facing, Fighter, HitReactionKind},
+    combat::fighter::{ContactReactionProfile, Facing, Fighter, HitReactionKind},
     config::world_px,
     math::vec2::Vec2,
 };
 
 use super::{
     FighterSpriteClip, SpriteFrame, SpriteManifest, fighter_clip_elapsed_seconds,
-    frame_for_fighter_clip_at,
+    frame_for_clip_at, frame_for_fighter_clip_at,
 };
 
 /// Visual-only displacement, squash/stretch and rotation, shared by all actors.
@@ -52,6 +52,43 @@ pub struct FighterSpritePresentation {
     pub placement: Option<FighterVisualPlacement>,
 }
 
+/// Optional authored response selected from the confirmed contact, not the attack clock.
+pub const fn contact_reaction_clip_name(profile: ContactReactionProfile) -> &'static str {
+    match profile {
+        ContactReactionProfile::Head => "reaction_head",
+        ContactReactionProfile::Body => "reaction_body",
+        ContactReactionProfile::Low => "reaction_low",
+        ContactReactionProfile::GuardHigh => "reaction_guard_high",
+        ContactReactionProfile::GuardLow => "reaction_guard_low",
+        ContactReactionProfile::Launch => "reaction_launch",
+        ContactReactionProfile::Fall => "reaction_fall",
+        ContactReactionProfile::Rise => "reaction_rise",
+    }
+}
+
+/// Fits the complete response to one contact window; a new contact starts on impact.
+pub fn frame_for_contact_reaction<'a>(
+    manifest: &'a SpriteManifest,
+    fighter: &Fighter,
+) -> Option<&'a SpriteFrame> {
+    let contact = fighter.contact_reaction_state()?;
+    let name = contact_reaction_clip_name(contact.profile);
+    let source = manifest.clip_named(name)?;
+    let duration = source
+        .frames
+        .iter()
+        .filter_map(|name| manifest.frame_named(name))
+        .map(|frame| frame.duration_ms as f32 / 1000.0)
+        .sum::<f32>();
+    // A throw holds the impact/lift key until World actually releases the target.
+    let progress = if fighter.in_capture() {
+        0.0
+    } else {
+        contact.progress()
+    };
+    frame_for_clip_at(manifest, name, progress.min(0.9999) * duration)
+}
+
 /// Samples the full reaction within actual stun, preserving authored pose durations.
 /// Air poses follow ascent/apex/descent; knockdowns expose the complete get-up.
 pub fn frame_for_fighter_state<'a>(
@@ -60,6 +97,9 @@ pub fn frame_for_fighter_state<'a>(
     clip: FighterSpriteClip,
     world_elapsed_seconds: f32,
 ) -> Option<&'a SpriteFrame> {
+    if let Some(frame) = frame_for_contact_reaction(manifest, fighter) {
+        return Some(frame);
+    }
     let elapsed = fighter_clip_elapsed_seconds(fighter, world_elapsed_seconds);
     let Some(reaction) = fighter.reaction_visual_state() else {
         return frame_for_fighter_clip_at(manifest, clip, elapsed);
@@ -105,6 +145,31 @@ pub fn frame_for_fighter_state<'a>(
         progress
     };
     frame_for_fighter_clip_at(manifest, clip, mapped.min(0.9999) * total_seconds)
+}
+
+/// Authored poses supply articulation; only a small contact-local translation is added.
+pub fn contact_reaction_transform(fighter: &Fighter) -> FighterVisualTransform {
+    let Some(contact) = fighter.contact_reaction_state() else {
+        return FighterVisualTransform::default();
+    };
+    if matches!(
+        contact.profile,
+        ContactReactionProfile::Launch
+            | ContactReactionProfile::Fall
+            | ContactReactionProfile::Rise
+    ) {
+        return FighterVisualTransform::default();
+    }
+    let away = if fighter.facing == Facing::Right {
+        -1.0
+    } else {
+        1.0
+    };
+    let recoil = (contact.progress() * PI).sin();
+    FighterVisualTransform {
+        offset: Vec2::new(away * 6.0 * contact.strength.min(1.6) * recoil, 0.0),
+        ..FighterVisualTransform::default()
+    }
 }
 
 /// Produces a recoil envelope that settles before control returns to the player.

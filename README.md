@@ -14,6 +14,8 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Visão e produto
 
+- [`docs/25-python-cpp-contact-reactions.md`](docs/25-python-cpp-contact-reactions.md): piloto de reações próprias e sincronizadas entre Python e C++.
+
 - [`docs/24-reactions-and-transformations.md`](docs/24-reactions-and-transformations.md): reações dos seis lutadores, Python gigante, notebook/BIOS de C++ e mutação persistente de arena.
 - [`docs/23-authored-super-sequences.md`](docs/23-authored-super-sequences.md): quatro supers com roteiro, clones, mutação de arena, BIOS, tiro no pé e vozes distintas.
 - [`docs/22-presentation-and-brazilian-stage-life.md`](docs/22-presentation-and-brazilian-stage-life.md): polimento de interface, cenários vivos e seis novos especiais cinematográficos.
@@ -66,6 +68,8 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Decisões registradas
 
+- [`docs/adr/0018-contact-reaction-profiles.md`](docs/adr/0018-contact-reaction-profiles.md): perfil e janela visual de cada contato, separados do stun físico.
+
 - [`docs/adr/0017-reaction-clocks-and-arena-mutation.md`](docs/adr/0017-reaction-clocks-and-arena-mutation.md): relógios de reação e arena efetiva no World.
 - [`docs/adr/0016-authored-super-sequences.md`](docs/adr/0016-authored-super-sequences.md): captura, fases e contatos autorais sob o relógio do combate.
 - [`docs/adr/0015-cinematic-presentation-and-stage-life.md`](docs/adr/0015-cinematic-presentation-and-stage-life.md): fontes consistentes, atores de cenário e efeitos cinematográficos com contato local.
@@ -100,11 +104,16 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ## Amostra atual
 
-[![Python gigante durante import devour](docs/evidence/reactions-transformations/python-devour.png)](assets/showcase/reactions-transformations-2026-09-09.mp4)
+[![Python reage ao chute da rajada de C++](docs/evidence/python-cpp-reactions/cpp-barrage-impact.png)](assets/showcase/python-cpp-reactions-2026-09-09.mp4)
 
-_Clique para ver as reações e os cinco supers autorais com áudio.
-[Roteiros](docs/24-reactions-and-transformations.md) e
-[evidências de verificação](docs/evidence/reactions-transformations/README.md)._
+_Clique para ver Python e C++ atacando e reagindo: 12 golpes e quatro situações
+de defesa para cada personagem, em 86,3 segundos com áudio.
+[Padrão de reações](docs/25-python-cpp-contact-reactions.md) e
+[evidências por contato](docs/evidence/python-cpp-reactions/README.md)._
+
+A [amostra anterior de reações e transformações](assets/showcase/reactions-transformations-2026-09-09.mp4)
+preserva os cinco supers, incluindo Rust/Sirius. O piloto atual substitui a
+apresentação de reações de Python/C++; os demais personagens ficam para outra rodada.
 
 A [amostra dos quatro supers da rodada anterior](assets/showcase/authored-supers-2026-09-09.mp4)
 preserva a primeira versão de Duke, Rust, Old C e C++, junto ao

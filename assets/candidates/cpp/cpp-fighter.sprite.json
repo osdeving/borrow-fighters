@@ -1859,6 +1859,710 @@
         "w": 167,
         "h": 268
       }
+    },
+    {
+      "name": "reaction_head_00",
+      "clip": "reaction_head",
+      "duration_ms": 70,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 163,
+        "y": 284
+      },
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 24,
+        "y": 12,
+        "w": 232,
+        "h": 272
+      }
+    },
+    {
+      "name": "reaction_head_01",
+      "clip": "reaction_head",
+      "duration_ms": 85,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 163,
+        "y": 292
+      },
+      "frame": {
+        "x": 384,
+        "y": 0,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 42,
+        "y": 17,
+        "w": 201,
+        "h": 275
+      }
+    },
+    {
+      "name": "reaction_head_02",
+      "clip": "reaction_head",
+      "duration_ms": 85,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 117,
+        "y": 272
+      },
+      "frame": {
+        "x": 768,
+        "y": 0,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 27,
+        "y": 12,
+        "w": 183,
+        "h": 260
+      }
+    },
+    {
+      "name": "reaction_head_03",
+      "clip": "reaction_head",
+      "duration_ms": 90,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 132,
+        "y": 270
+      },
+      "frame": {
+        "x": 1152,
+        "y": 0,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 38,
+        "y": 13,
+        "w": 159,
+        "h": 257
+      }
+    },
+    {
+      "name": "reaction_body_00",
+      "clip": "reaction_body",
+      "duration_ms": 70,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 132,
+        "y": 245
+      },
+      "frame": {
+        "x": 0,
+        "y": 384,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 35,
+        "y": 16,
+        "w": 168,
+        "h": 229
+      }
+    },
+    {
+      "name": "reaction_body_01",
+      "clip": "reaction_body",
+      "duration_ms": 85,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 158,
+        "y": 242
+      },
+      "frame": {
+        "x": 384,
+        "y": 384,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 64,
+        "y": 19,
+        "w": 184,
+        "h": 223
+      }
+    },
+    {
+      "name": "reaction_body_02",
+      "clip": "reaction_body",
+      "duration_ms": 85,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 126,
+        "y": 258
+      },
+      "frame": {
+        "x": 768,
+        "y": 384,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 30,
+        "y": 19,
+        "w": 200,
+        "h": 239
+      }
+    },
+    {
+      "name": "reaction_body_03",
+      "clip": "reaction_body",
+      "duration_ms": 90,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 126,
+        "y": 247
+      },
+      "frame": {
+        "x": 1152,
+        "y": 384,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 42,
+        "y": 14,
+        "w": 165,
+        "h": 233
+      }
+    },
+    {
+      "name": "reaction_low_00",
+      "clip": "reaction_low",
+      "duration_ms": 70,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 157,
+        "y": 262
+      },
+      "frame": {
+        "x": 0,
+        "y": 768,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 27,
+        "y": 15,
+        "w": 217,
+        "h": 247
+      }
+    },
+    {
+      "name": "reaction_low_01",
+      "clip": "reaction_low",
+      "duration_ms": 85,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 160,
+        "y": 257
+      },
+      "frame": {
+        "x": 384,
+        "y": 768,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 68,
+        "y": 16,
+        "w": 157,
+        "h": 241
+      }
+    },
+    {
+      "name": "reaction_low_02",
+      "clip": "reaction_low",
+      "duration_ms": 85,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 155,
+        "y": 246
+      },
+      "frame": {
+        "x": 768,
+        "y": 768,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 64,
+        "y": 17,
+        "w": 190,
+        "h": 229
+      }
+    },
+    {
+      "name": "reaction_low_03",
+      "clip": "reaction_low",
+      "duration_ms": 90,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 114,
+        "y": 237
+      },
+      "frame": {
+        "x": 1152,
+        "y": 768,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 25,
+        "y": 12,
+        "w": 164,
+        "h": 225
+      }
+    },
+    {
+      "name": "reaction_guard_high_00",
+      "clip": "reaction_guard_high",
+      "duration_ms": 60,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 100,
+        "y": 280
+      },
+      "frame": {
+        "x": 0,
+        "y": 1152,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 12,
+        "y": 11,
+        "w": 173,
+        "h": 269
+      }
+    },
+    {
+      "name": "reaction_guard_high_01",
+      "clip": "reaction_guard_high",
+      "duration_ms": 70,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 159,
+        "y": 273
+      },
+      "frame": {
+        "x": 384,
+        "y": 1152,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 65,
+        "y": 11,
+        "w": 194,
+        "h": 262
+      }
+    },
+    {
+      "name": "reaction_guard_high_02",
+      "clip": "reaction_guard_high",
+      "duration_ms": 70,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 139,
+        "y": 281
+      },
+      "frame": {
+        "x": 768,
+        "y": 1152,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 51,
+        "y": 11,
+        "w": 174,
+        "h": 270
+      }
+    },
+    {
+      "name": "reaction_guard_high_03",
+      "clip": "reaction_guard_high",
+      "duration_ms": 80,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 124,
+        "y": 282
+      },
+      "frame": {
+        "x": 1152,
+        "y": 1152,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 42,
+        "y": 11,
+        "w": 165,
+        "h": 271
+      }
+    },
+    {
+      "name": "reaction_guard_low_00",
+      "clip": "reaction_guard_low",
+      "duration_ms": 60,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 100,
+        "y": 191
+      },
+      "frame": {
+        "x": 0,
+        "y": 1536,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 11,
+        "y": 11,
+        "w": 167,
+        "h": 180
+      }
+    },
+    {
+      "name": "reaction_guard_low_01",
+      "clip": "reaction_guard_low",
+      "duration_ms": 70,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 125,
+        "y": 201
+      },
+      "frame": {
+        "x": 384,
+        "y": 1536,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 27,
+        "y": 39,
+        "w": 181,
+        "h": 162
+      }
+    },
+    {
+      "name": "reaction_guard_low_02",
+      "clip": "reaction_guard_low",
+      "duration_ms": 70,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 98,
+        "y": 190
+      },
+      "frame": {
+        "x": 768,
+        "y": 1536,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 14,
+        "y": 11,
+        "w": 165,
+        "h": 179
+      }
+    },
+    {
+      "name": "reaction_guard_low_03",
+      "clip": "reaction_guard_low",
+      "duration_ms": 80,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 109,
+        "y": 189
+      },
+      "frame": {
+        "x": 1152,
+        "y": 1536,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 34,
+        "y": 11,
+        "w": 158,
+        "h": 178
+      }
+    },
+    {
+      "name": "reaction_launch_00",
+      "clip": "reaction_launch",
+      "duration_ms": 70,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 172,
+        "y": 308
+      },
+      "frame": {
+        "x": 0,
+        "y": 1920,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 18,
+        "y": 16,
+        "w": 307,
+        "h": 293
+      }
+    },
+    {
+      "name": "reaction_launch_01",
+      "clip": "reaction_launch",
+      "duration_ms": 85,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 122,
+        "y": 288
+      },
+      "frame": {
+        "x": 384,
+        "y": 1920,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 12,
+        "y": 19,
+        "w": 222,
+        "h": 271
+      }
+    },
+    {
+      "name": "reaction_launch_02",
+      "clip": "reaction_launch",
+      "duration_ms": 85,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 180,
+        "y": 251
+      },
+      "frame": {
+        "x": 768,
+        "y": 1920,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 41,
+        "y": 51,
+        "w": 277,
+        "h": 201
+      }
+    },
+    {
+      "name": "reaction_launch_03",
+      "clip": "reaction_launch",
+      "duration_ms": 90,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 170,
+        "y": 268
+      },
+      "frame": {
+        "x": 1152,
+        "y": 1920,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 33,
+        "y": 72,
+        "w": 273,
+        "h": 198
+      }
+    },
+    {
+      "name": "reaction_fall_00",
+      "clip": "reaction_fall",
+      "duration_ms": 80,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 175,
+        "y": 218
+      },
+      "frame": {
+        "x": 0,
+        "y": 2304,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 18,
+        "y": 48,
+        "w": 317,
+        "h": 170
+      }
+    },
+    {
+      "name": "reaction_fall_01",
+      "clip": "reaction_fall",
+      "duration_ms": 100,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 146,
+        "y": 245
+      },
+      "frame": {
+        "x": 384,
+        "y": 2304,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 15,
+        "y": 66,
+        "w": 262,
+        "h": 179
+      }
+    },
+    {
+      "name": "reaction_fall_02",
+      "clip": "reaction_fall",
+      "duration_ms": 100,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 139,
+        "y": 221
+      },
+      "frame": {
+        "x": 768,
+        "y": 2304,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 16,
+        "y": 90,
+        "w": 245,
+        "h": 131
+      }
+    },
+    {
+      "name": "reaction_fall_03",
+      "clip": "reaction_fall",
+      "duration_ms": 160,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 166,
+        "y": 199
+      },
+      "frame": {
+        "x": 1152,
+        "y": 2304,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 16,
+        "y": 93,
+        "w": 296,
+        "h": 106
+      }
+    },
+    {
+      "name": "reaction_rise_00",
+      "clip": "reaction_rise",
+      "duration_ms": 90,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 167,
+        "y": 200
+      },
+      "frame": {
+        "x": 0,
+        "y": 2688,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 15,
+        "y": 87,
+        "w": 300,
+        "h": 113
+      }
+    },
+    {
+      "name": "reaction_rise_01",
+      "clip": "reaction_rise",
+      "duration_ms": 90,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 131,
+        "y": 208
+      },
+      "frame": {
+        "x": 384,
+        "y": 2688,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 14,
+        "y": 61,
+        "w": 233,
+        "h": 147
+      }
+    },
+    {
+      "name": "reaction_rise_02",
+      "clip": "reaction_rise",
+      "duration_ms": 110,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 146,
+        "y": 214
+      },
+      "frame": {
+        "x": 768,
+        "y": 2688,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 52,
+        "y": 12,
+        "w": 186,
+        "h": 202
+      }
+    },
+    {
+      "name": "reaction_rise_03",
+      "clip": "reaction_rise",
+      "duration_ms": 110,
+      "image": "cpp-reactions-own-2026-09-09.png",
+      "pivot": {
+        "x": 149,
+        "y": 277
+      },
+      "frame": {
+        "x": 1152,
+        "y": 2688,
+        "w": 384,
+        "h": 384
+      },
+      "trimmed_bounds": {
+        "x": 51,
+        "y": 15,
+        "w": 196,
+        "h": 262
+      }
     }
   ],
   "clips": [
@@ -2099,11 +2803,92 @@
         "heavy_hit_01",
         "heavy_hit_02"
       ]
+    },
+    {
+      "name": "reaction_head",
+      "loop": false,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ]
+    },
+    {
+      "name": "reaction_body",
+      "loop": false,
+      "frames": [
+        "reaction_body_00",
+        "reaction_body_01",
+        "reaction_body_02",
+        "reaction_body_03"
+      ]
+    },
+    {
+      "name": "reaction_low",
+      "loop": false,
+      "frames": [
+        "reaction_low_00",
+        "reaction_low_01",
+        "reaction_low_02",
+        "reaction_low_03"
+      ]
+    },
+    {
+      "name": "reaction_guard_high",
+      "loop": false,
+      "frames": [
+        "reaction_guard_high_00",
+        "reaction_guard_high_01",
+        "reaction_guard_high_02",
+        "reaction_guard_high_03"
+      ]
+    },
+    {
+      "name": "reaction_guard_low",
+      "loop": false,
+      "frames": [
+        "reaction_guard_low_00",
+        "reaction_guard_low_01",
+        "reaction_guard_low_02",
+        "reaction_guard_low_03"
+      ]
+    },
+    {
+      "name": "reaction_launch",
+      "loop": false,
+      "frames": [
+        "reaction_launch_00",
+        "reaction_launch_01",
+        "reaction_launch_02",
+        "reaction_launch_03"
+      ]
+    },
+    {
+      "name": "reaction_fall",
+      "loop": false,
+      "frames": [
+        "reaction_fall_00",
+        "reaction_fall_01",
+        "reaction_fall_02",
+        "reaction_fall_03"
+      ]
+    },
+    {
+      "name": "reaction_rise",
+      "loop": false,
+      "frames": [
+        "reaction_rise_00",
+        "reaction_rise_01",
+        "reaction_rise_02",
+        "reaction_rise_03"
+      ]
     }
   ],
   "notes": [
     "Candidate assembled from explicitly reviewed action frames.",
     "Combat metadata is included only when supplied explicitly in production.json.",
-    "Source rectangles and production provenance: cpp-fighter.provenance.json"
+    "Source rectangles and production provenance: cpp-fighter.provenance.json",
+    "The optional reaction_* clips use cpp-reactions-own-2026-09-09.png; prompts, original RGBA sheets, support bounds and production provenance: ../../production/cpp/reactions-own-2026-09-09/generation.json"
   ]
 }

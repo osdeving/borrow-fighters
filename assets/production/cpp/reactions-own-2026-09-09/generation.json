@@ -1,0 +1,988 @@
+{
+  "generator": "built-in imagegen",
+  "date": "2026-09-09",
+  "method": "Generated three original reaction sheets from C++ identity references. The generator initially returned RGB checkerboards; separate built-in imagegen background-extraction calls produced real RGBA sheets. The packer assigns original edge pixels to opaque sprite cores, retaining every nontransparent source RGBA pixel before uniform sheet scaling; no background removal, redraw or synthesized pose occurs in Python.",
+  "reference_images": [
+    "../reference/master-existing.png",
+    "../idle/source-v1.png"
+  ],
+  "sources": [
+    {
+      "source": "rgba-hits.png",
+      "sha256": "b363e6b37f023ac093e553f5a7728e9c7978ab9968731fae39af267400073608",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "native_alpha": true,
+      "source_nontransparent_pixels": 602424,
+      "all_original_nontransparent_pixels_preserved_before_scaling": true,
+      "edge_assignment_radius_pixels": 144
+    },
+    {
+      "source": "rgba-guards.png",
+      "sha256": "1a55870e1e48ec57bd9b174393707493a513f5e88e393f8ad0e8970d3dcd0975",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "native_alpha": true,
+      "source_nontransparent_pixels": 619585,
+      "all_original_nontransparent_pixels_preserved_before_scaling": true,
+      "edge_assignment_radius_pixels": 134
+    },
+    {
+      "source": "rgba-air.png",
+      "sha256": "91d1182d61ab50a6dbcd15771fb6c8e098ebe599c34e1ef4d2f4d3846bb48519",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "native_alpha": true,
+      "source_nontransparent_pixels": 570934,
+      "all_original_nontransparent_pixels_preserved_before_scaling": true,
+      "edge_assignment_radius_pixels": 187
+    }
+  ],
+  "frames": [
+    {
+      "name": "reaction_head_00",
+      "source": "rgba-hits.png",
+      "source_rect": [
+        31,
+        12,
+        372,
+        391
+      ],
+      "opaque_core_bounds": [
+        61,
+        17,
+        365,
+        385
+      ],
+      "uniform_scale": 0.73,
+      "pivot": {
+        "x": 163,
+        "y": 284
+      },
+      "crop_sha256": "dac5cab19de7ef62d1d33b9916262b051745090ebeb31d39ca264b20bfea6632",
+      "crop_rgba_sha256": "2adca350c43fdd1bb065a7632d93d2549dca4d7f95c5cff31ef54ea9c4104a41",
+      "scaled_size": [
+        249,
+        277
+      ]
+    },
+    {
+      "name": "reaction_head_01",
+      "source": "rgba-hits.png",
+      "source_rect": [
+        395,
+        0,
+        774,
+        397
+      ],
+      "opaque_core_bounds": [
+        440,
+        12,
+        708,
+        384
+      ],
+      "uniform_scale": 0.73,
+      "pivot": {
+        "x": 163,
+        "y": 292
+      },
+      "crop_sha256": "3446be9ec8510c1e35fade6a6dbc2f2bf771243ec0c7e3e157ab4334c3d1cda3",
+      "crop_rgba_sha256": "543cc8bd4fbdfafc15ead0f7683fe6cecb83911d89d27b2bab6b24c46ef2993e",
+      "scaled_size": [
+        277,
+        290
+      ]
+    },
+    {
+      "name": "reaction_head_02",
+      "source": "rgba-hits.png",
+      "source_rect": [
+        783,
+        31,
+        1104,
+        394
+      ],
+      "opaque_core_bounds": [
+        808,
+        35,
+        1056,
+        388
+      ],
+      "uniform_scale": 0.73,
+      "pivot": {
+        "x": 117,
+        "y": 272
+      },
+      "crop_sha256": "a23824dec42fbdbee7b26ea8f1151e6bc4e177fbf09b0760d013b933e9b43684",
+      "crop_rgba_sha256": "d85a56df35243a70ce835b30d590293670ab622e61f9244ef2d3eaf67937d6f7",
+      "scaled_size": [
+        234,
+        265
+      ]
+    },
+    {
+      "name": "reaction_head_03",
+      "source": "rgba-hits.png",
+      "source_rect": [
+        1143,
+        33,
+        1422,
+        430
+      ],
+      "opaque_core_bounds": [
+        1184,
+        40,
+        1397,
+        388
+      ],
+      "uniform_scale": 0.73,
+      "pivot": {
+        "x": 132,
+        "y": 270
+      },
+      "crop_sha256": "56e81de160d9332dea83d839b8b923f05b216097fcffcac923b1207e32d257bf",
+      "crop_rgba_sha256": "5a75e57ea035c071e37332af0f0bc62a532f450bc46b8c012cc9267af3ec48fc",
+      "scaled_size": [
+        204,
+        290
+      ]
+    },
+    {
+      "name": "reaction_body_00",
+      "source": "rgba-hits.png",
+      "source_rect": [
+        63,
+        404,
+        372,
+        737
+      ],
+      "opaque_core_bounds": [
+        99,
+        415,
+        322,
+        724
+      ],
+      "uniform_scale": 0.73,
+      "pivot": {
+        "x": 132,
+        "y": 245
+      },
+      "crop_sha256": "6a0db83b2180d94b192cf0933bc02ebee24e8af943d2f58f32745d4e38398115",
+      "crop_rgba_sha256": "109183320a6467b87322aa0e41afdafd7baf1e53ded3d603a3290ef5e8595bc3",
+      "scaled_size": [
+        226,
+        243
+      ]
+    },
+    {
+      "name": "reaction_body_01",
+      "source": "rgba-hits.png",
+      "source_rect": [
+        387,
+        410,
+        724,
+        733
+      ],
+      "opaque_core_bounds": [
+        462,
+        425,
+        711,
+        726
+      ],
+      "uniform_scale": 0.73,
+      "pivot": {
+        "x": 158,
+        "y": 242
+      },
+      "crop_sha256": "d3c0a97ec0963001d6ba9f7edc86f36e807d91bf645624b376eb8ff5110d28a2",
+      "crop_rgba_sha256": "1a689106071b47c9cb4a6fe51acd0b2fe7b1bd107709c222fbca9fb9925fa074",
+      "scaled_size": [
+        246,
+        236
+      ]
+    },
+    {
+      "name": "reaction_body_02",
+      "source": "rgba-hits.png",
+      "source_rect": [
+        787,
+        389,
+        1136,
+        758
+      ],
+      "opaque_core_bounds": [
+        816,
+        403,
+        1087,
+        728
+      ],
+      "uniform_scale": 0.73,
+      "pivot": {
+        "x": 126,
+        "y": 258
+      },
+      "crop_sha256": "2c1b2b7875d7a61656f9177b73327e8c93f538dbfa3a015e96cd8008d6aa0810",
+      "crop_rgba_sha256": "845e6d67c1581841304edd0e4beaad112b358740571d9a36637a0f8ae6324b7a",
+      "scaled_size": [
+        255,
+        269
+      ]
+    },
+    {
+      "name": "reaction_body_03",
+      "source": "rgba-hits.png",
+      "source_rect": [
+        1151,
+        406,
+        1426,
+        770
+      ],
+      "opaque_core_bounds": [
+        1197,
+        414,
+        1419,
+        729
+      ],
+      "uniform_scale": 0.73,
+      "pivot": {
+        "x": 126,
+        "y": 247
+      },
+      "crop_sha256": "2dddb0225c34ff1ee0ea845a311fa04213c0c727d86ca6bbd8002703681b6c10",
+      "crop_rgba_sha256": "2565fb33bd953ee6ef71bec053cb2b90cad0d8770a7cbace8116560580fbf87f",
+      "scaled_size": [
+        201,
+        266
+      ]
+    },
+    {
+      "name": "reaction_low_00",
+      "source": "rgba-hits.png",
+      "source_rect": [
+        33,
+        726,
+        398,
+        1072
+      ],
+      "opaque_core_bounds": [
+        66,
+        734,
+        350,
+        1069
+      ],
+      "uniform_scale": 0.73,
+      "pivot": {
+        "x": 157,
+        "y": 262
+      },
+      "crop_sha256": "123bce2ca7ed82b8698450b6d8f6af9e8ececc882ce2fe238bea3e6490beb5bf",
+      "crop_rgba_sha256": "616600abe58ae0195d8bb2d78602ae887d16811fc063b970a491f897a5e951fa",
+      "scaled_size": [
+        266,
+        253
+      ]
+    },
+    {
+      "name": "reaction_low_01",
+      "source": "rgba-hits.png",
+      "source_rect": [
+        397,
+        727,
+        756,
+        1070
+      ],
+      "opaque_core_bounds": [
+        478,
+        737,
+        690,
+        1064
+      ],
+      "uniform_scale": 0.73,
+      "pivot": {
+        "x": 160,
+        "y": 257
+      },
+      "crop_sha256": "0141541efb71c6281b22464989803c656ebaf9891b81077b15f490c7313a18c6",
+      "crop_rgba_sha256": "24c809e6ad15c0c6beb445c93d7fe6a6ed2644aee76d6c3eb295935bf9c0c38b",
+      "scaled_size": [
+        262,
+        250
+      ]
+    },
+    {
+      "name": "reaction_low_02",
+      "source": "rgba-hits.png",
+      "source_rect": [
+        749,
+        747,
+        1110,
+        1074
+      ],
+      "opaque_core_bounds": [
+        825,
+        759,
+        1077,
+        1069
+      ],
+      "uniform_scale": 0.73,
+      "pivot": {
+        "x": 155,
+        "y": 246
+      },
+      "crop_sha256": "d46d9e3a3ca88a4cfe8d95a3b65911497f43628cc60d91fdaeb61415a2ff7632",
+      "crop_rgba_sha256": "74caad3eebcf340e42919b80547f5cf838ae620188a720980021e0e48f493e4a",
+      "scaled_size": [
+        264,
+        239
+      ]
+    },
+    {
+      "name": "reaction_low_03",
+      "source": "rgba-hits.png",
+      "source_rect": [
+        1167,
+        759,
+        1415,
+        1072
+      ],
+      "opaque_core_bounds": [
+        1190,
+        763,
+        1407,
+        1068
+      ],
+      "uniform_scale": 0.73,
+      "pivot": {
+        "x": 114,
+        "y": 237
+      },
+      "crop_sha256": "c674a9cf2caad71d6eaf04d85061905feb8d43c11c3865e58e07acebb648880e",
+      "crop_rgba_sha256": "4c495c7b42fef4ac82de3c916b62cac76e4c8c038eef1acde715c94c540450dd",
+      "scaled_size": [
+        181,
+        228
+      ]
+    },
+    {
+      "name": "reaction_guard_high_00",
+      "source": "rgba-guards.png",
+      "source_rect": [
+        92,
+        18,
+        470,
+        534
+      ],
+      "opaque_core_bounds": [
+        98,
+        23,
+        421,
+        526
+      ],
+      "uniform_scale": 0.53,
+      "pivot": {
+        "x": 100,
+        "y": 280
+      },
+      "crop_sha256": "b5a3f15b01ea14e7d836fe5d9cfdc26172f9faf4d7133a5061c318049447a544",
+      "crop_rgba_sha256": "13a4737f1eddacf2f6828d9462858f50b3e0dc489474ebc83d48169e6cc1ee5d",
+      "scaled_size": [
+        200,
+        273
+      ]
+    },
+    {
+      "name": "reaction_guard_high_01",
+      "source": "rgba-guards.png",
+      "source_rect": [
+        428,
+        31,
+        903,
+        561
+      ],
+      "opaque_core_bounds": [
+        534,
+        35,
+        895,
+        525
+      ],
+      "uniform_scale": 0.53,
+      "pivot": {
+        "x": 159,
+        "y": 273
+      },
+      "crop_sha256": "da1c12cdd58a90e66473f57174cfdad4ad5ba94abe7103ea61c26f823070c725",
+      "crop_rgba_sha256": "3c0c0ba94f0153ecb4c2573d6f2466cb5ebbda15362d01a7811c59bc8cf62a2a",
+      "scaled_size": [
+        252,
+        281
+      ]
+    },
+    {
+      "name": "reaction_guard_high_02",
+      "source": "rgba-guards.png",
+      "source_rect": [
+        896,
+        16,
+        1331,
+        534
+      ],
+      "opaque_core_bounds": [
+        976,
+        20,
+        1299,
+        524
+      ],
+      "uniform_scale": 0.53,
+      "pivot": {
+        "x": 139,
+        "y": 281
+      },
+      "crop_sha256": "0be2dec28c21c511515da8ddd49e452d511fcb08a53192fc89edb08eae56ca32",
+      "crop_rgba_sha256": "5bb5a3f76197eb17f81abbcb80120d0d1e230d3bb59465cbbccf9cebb6db236a",
+      "scaled_size": [
+        231,
+        275
+      ]
+    },
+    {
+      "name": "reaction_guard_high_03",
+      "source": "rgba-guards.png",
+      "source_rect": [
+        1364,
+        14,
+        1740,
+        534
+      ],
+      "opaque_core_bounds": [
+        1426,
+        18,
+        1733,
+        525
+      ],
+      "uniform_scale": 0.53,
+      "pivot": {
+        "x": 124,
+        "y": 282
+      },
+      "crop_sha256": "818f1f136899370bd2ef8a21cc5b1cd20078ec1f3e2de50bb9dc3218d7972726",
+      "crop_rgba_sha256": "875067934e012c66cc0c1c969a8ee81ebfee9a52b9bdab1b61e412a340fc1d77",
+      "scaled_size": [
+        199,
+        276
+      ]
+    },
+    {
+      "name": "reaction_guard_low_00",
+      "source": "rgba-guards.png",
+      "source_rect": [
+        90,
+        528,
+        411,
+        872
+      ],
+      "opaque_core_bounds": [
+        94,
+        541,
+        406,
+        868
+      ],
+      "uniform_scale": 0.53,
+      "pivot": {
+        "x": 100,
+        "y": 191
+      },
+      "crop_sha256": "f368aa952c39ee823b28b006a33ad9e14b815bbd6fb18569a8b3a63d35050ae3",
+      "crop_rgba_sha256": "e6c1a5c9a361024e93fb86851460ed29e6fedd585a0db7389fc352f45119207a",
+      "scaled_size": [
+        170,
+        182
+      ]
+    },
+    {
+      "name": "reaction_guard_low_01",
+      "source": "rgba-guards.png",
+      "source_rect": [
+        493,
+        505,
+        937,
+        869
+      ],
+      "opaque_core_bounds": [
+        529,
+        563,
+        866,
+        863
+      ],
+      "uniform_scale": 0.53,
+      "pivot": {
+        "x": 125,
+        "y": 201
+      },
+      "crop_sha256": "2e98e9a43a7ccbb44d62b928eb372be43aceac44516692164a84c8b130e4ad55",
+      "crop_rgba_sha256": "f938d83dd0f08888ca3cb1a2ff9d3640fb29a9a66714cbb3e0658b936b145928",
+      "scaled_size": [
+        235,
+        193
+      ]
+    },
+    {
+      "name": "reaction_guard_low_02",
+      "source": "rgba-guards.png",
+      "source_rect": [
+        969,
+        529,
+        1290,
+        871
+      ],
+      "opaque_core_bounds": [
+        979,
+        538,
+        1286,
+        867
+      ],
+      "uniform_scale": 0.53,
+      "pivot": {
+        "x": 98,
+        "y": 190
+      },
+      "crop_sha256": "fb6c35c6443ea8e2607eeba5bd643293f9e1607e26603a12601b5a96bdbbaf0b",
+      "crop_rgba_sha256": "307677ffdd079ff5f35794b87f8e0c0d56e6449bc9345290e1dbcb7dd6c79848",
+      "scaled_size": [
+        170,
+        181
+      ]
+    },
+    {
+      "name": "reaction_guard_low_03",
+      "source": "rgba-guards.png",
+      "source_rect": [
+        1394,
+        531,
+        1740,
+        871
+      ],
+      "opaque_core_bounds": [
+        1441,
+        535,
+        1735,
+        868
+      ],
+      "uniform_scale": 0.53,
+      "pivot": {
+        "x": 109,
+        "y": 189
+      },
+      "crop_sha256": "43133031c9b5a5b765f8fb41b71ad0be6f40a77c0b7cbd1bc998ff7b6b2c7d41",
+      "crop_rgba_sha256": "f86c524898b9d8c6a6b0044852b8a287e6ff28cee3762d8268c50915e8cc3565",
+      "scaled_size": [
+        183,
+        180
+      ]
+    },
+    {
+      "name": "reaction_launch_00",
+      "source": "rgba-air.png",
+      "source_rect": [
+        0,
+        33,
+        450,
+        446
+      ],
+      "opaque_core_bounds": [
+        12,
+        42,
+        413,
+        425
+      ],
+      "uniform_scale": 0.76,
+      "pivot": {
+        "x": 172,
+        "y": 308
+      },
+      "crop_sha256": "0f35706e68b23061232f1eb68c88f1eb2da76afee7ea8a3e2e8e814037cfe3ea",
+      "crop_rgba_sha256": "5f6655676b4ceb7bb5e02c55a147e914ee333007c7179882d734867bfb2a42ba",
+      "scaled_size": [
+        342,
+        314
+      ]
+    },
+    {
+      "name": "reaction_launch_01",
+      "source": "rgba-air.png",
+      "source_rect": [
+        382,
+        21,
+        742,
+        464
+      ],
+      "opaque_core_bounds": [
+        386,
+        37,
+        674,
+        387
+      ],
+      "uniform_scale": 0.76,
+      "pivot": {
+        "x": 122,
+        "y": 288
+      },
+      "crop_sha256": "312d8f1b3e2f45d201ce3aefc7e13c5655f240091a20a52017721a566c18ba4f",
+      "crop_rgba_sha256": "06e95c654a807b4939adad691d4f3e8ab81cd561c51073a5ba5ab566e0d14d04",
+      "scaled_size": [
+        274,
+        337
+      ]
+    },
+    {
+      "name": "reaction_launch_02",
+      "source": "rgba-air.png",
+      "source_rect": [
+        679,
+        21,
+        1092,
+        419
+      ],
+      "opaque_core_bounds": [
+        722,
+        78,
+        1083,
+        338
+      ],
+      "uniform_scale": 0.76,
+      "pivot": {
+        "x": 180,
+        "y": 251
+      },
+      "crop_sha256": "83f6e782614338a73acf084562e48f0377e50472ad37f2dc1c7cefb4a0e950aa",
+      "crop_rgba_sha256": "059a8a72f1cf772b9691001075233ad4e233b22070659724afd38c2256a36bc4",
+      "scaled_size": [
+        314,
+        302
+      ]
+    },
+    {
+      "name": "reaction_launch_03",
+      "source": "rgba-air.png",
+      "source_rect": [
+        1051,
+        21,
+        1448,
+        446
+      ],
+      "opaque_core_bounds": [
+        1083,
+        111,
+        1439,
+        361
+      ],
+      "uniform_scale": 0.76,
+      "pivot": {
+        "x": 170,
+        "y": 268
+      },
+      "crop_sha256": "95a86077845a67d0824557f11c2fef71835d1bf7c6367bc5cd2d62c4737b77ba",
+      "crop_rgba_sha256": "68b9de63c9961d9f4ffd42d5f9b9dc4b1ef2977edaff1f8920605c7ad94822f9",
+      "scaled_size": [
+        302,
+        323
+      ]
+    },
+    {
+      "name": "reaction_fall_00",
+      "source": "rgba-air.png",
+      "source_rect": [
+        0,
+        421,
+        434,
+        786
+      ],
+      "opaque_core_bounds": [
+        12,
+        472,
+        422,
+        693
+      ],
+      "uniform_scale": 0.76,
+      "pivot": {
+        "x": 175,
+        "y": 218
+      },
+      "crop_sha256": "06e79d9884c2ff63d639f06d5a421a744963556aa2f484b7ee27601748ec63a6",
+      "crop_rgba_sha256": "2bac514c3b9bae798fea72e67444838fb2035f340aa534c39c5ea5deccea7769",
+      "scaled_size": [
+        330,
+        277
+      ]
+    },
+    {
+      "name": "reaction_fall_01",
+      "source": "rgba-air.png",
+      "source_rect": [
+        382,
+        378,
+        749,
+        772
+      ],
+      "opaque_core_bounds": [
+        391,
+        453,
+        732,
+        686
+      ],
+      "uniform_scale": 0.76,
+      "pivot": {
+        "x": 146,
+        "y": 245
+      },
+      "crop_sha256": "3c94056eb39a12b49669a2381f567d1052aef196a447adb81fdcc5661888505c",
+      "crop_rgba_sha256": "a8e4d0b0f5b8b46f2ad71bf21e7487b34954b3a094ced2da9d061e24b8511d89",
+      "scaled_size": [
+        279,
+        299
+      ]
+    },
+    {
+      "name": "reaction_fall_02",
+      "source": "rgba-air.png",
+      "source_rect": [
+        733,
+        412,
+        1070,
+        792
+      ],
+      "opaque_core_bounds": [
+        743,
+        519,
+        1062,
+        687
+      ],
+      "uniform_scale": 0.76,
+      "pivot": {
+        "x": 139,
+        "y": 221
+      },
+      "crop_sha256": "97d335e298458bcf63144c4c472ba02e025fc2f1272a95e6f14c53ac56320f9d",
+      "crop_rgba_sha256": "515c7ad1272ea037d525ba2b851eaf177afa5cb1735f3c7a83661e09bfb2551a",
+      "scaled_size": [
+        256,
+        289
+      ]
+    },
+    {
+      "name": "reaction_fall_03",
+      "source": "rgba-air.png",
+      "source_rect": [
+        1045,
+        442,
+        1447,
+        775
+      ],
+      "opaque_core_bounds": [
+        1061,
+        553,
+        1440,
+        688
+      ],
+      "uniform_scale": 0.76,
+      "pivot": {
+        "x": 166,
+        "y": 199
+      },
+      "crop_sha256": "268d15ad049a309c1a12bc6da67b00d18acbd45c49659764af36f9451fb77070",
+      "crop_rgba_sha256": "2fe5a4e4660cef92f7871a9ab6633207213868cf012b648d8636631557902082",
+      "scaled_size": [
+        306,
+        253
+      ]
+    },
+    {
+      "name": "reaction_rise_00",
+      "source": "rgba-air.png",
+      "source_rect": [
+        0,
+        774,
+        404,
+        1038
+      ],
+      "opaque_core_bounds": [
+        13,
+        876,
+        399,
+        1022
+      ],
+      "uniform_scale": 0.76,
+      "pivot": {
+        "x": 167,
+        "y": 200
+      },
+      "crop_sha256": "c353b1657eaa84ac83a1cabd19ced095f2152af69cca26a77dbe842a28fbe5ab",
+      "crop_rgba_sha256": "9bcdbc41cf3ed6b07180fa1fc6aa804746127988cf27faaafb31661bdc35c328",
+      "scaled_size": [
+        307,
+        201
+      ]
+    },
+    {
+      "name": "reaction_rise_01",
+      "source": "rgba-air.png",
+      "source_rect": [
+        418,
+        764,
+        732,
+        1035
+      ],
+      "opaque_core_bounds": [
+        427,
+        834,
+        727,
+        1023
+      ],
+      "uniform_scale": 0.76,
+      "pivot": {
+        "x": 131,
+        "y": 208
+      },
+      "crop_sha256": "d82fd9bedee036dfa419d690800d0f563f655b4e50192f3b8a4399e60119fe75",
+      "crop_rgba_sha256": "23cb31d00ee19cf8c23f28e939773d430353735d7b59941d7069773ca5e6a03a",
+      "scaled_size": [
+        239,
+        206
+      ]
+    },
+    {
+      "name": "reaction_rise_02",
+      "source": "rgba-air.png",
+      "source_rect": [
+        749,
+        762,
+        1106,
+        1076
+      ],
+      "opaque_core_bounds": [
+        807,
+        766,
+        1048,
+        1028
+      ],
+      "uniform_scale": 0.76,
+      "pivot": {
+        "x": 146,
+        "y": 214
+      },
+      "crop_sha256": "472cda70e146833a789fac373004f56edd5d3f8fc72919a50fd32044c2ce05a8",
+      "crop_rgba_sha256": "913e48313853b0d6668f0a77482be7c9c8d672b39232b40792aacb2d97c19ffa",
+      "scaled_size": [
+        271,
+        239
+      ]
+    },
+    {
+      "name": "reaction_rise_03",
+      "source": "rgba-air.png",
+      "source_rect": [
+        1094,
+        704,
+        1416,
+        1058
+      ],
+      "opaque_core_bounds": [
+        1150,
+        712,
+        1404,
+        1054
+      ],
+      "uniform_scale": 0.76,
+      "pivot": {
+        "x": 149,
+        "y": 277
+      },
+      "crop_sha256": "b49ef1955c38de37aedfc8380e580f4f8ed8e024853a140fe39abb151071efcd",
+      "crop_rgba_sha256": "fff3ed4b35090bc0b8f3cd617ef2028a2f1c44794c1882709526a9ac69d5d240",
+      "scaled_size": [
+        245,
+        269
+      ]
+    }
+  ],
+  "output": "assets/candidates/cpp/cpp-reactions-own-2026-09-09.png",
+  "output_sha256": "27acda5d25ffba0e208cc474dd6475624518edce0eab45165aa3f5a1b9e55c38",
+  "manifest": "assets/candidates/cpp/cpp-fighter.sprite.json",
+  "manifest_sha256": "c39a4159ce32416d36f6aed3f397d32c47ce47f101b0b9fdc3f958b5db87a3ca",
+  "prior_frames_preserved": 88,
+  "prior_clips_preserved": 25,
+  "added_clips": 8,
+  "added_drawings": 32,
+  "new_frames_have_combat_metadata": false,
+  "source_prompts": [
+    "prompt-hits.txt",
+    "prompt-guards.txt",
+    "prompt-air.txt"
+  ],
+  "background_extraction_prompts": [
+    "prompt-extract-hits.txt",
+    "prompt-extract-guards.txt",
+    "prompt-extract-air.txt"
+  ],
+  "visible_support_measurement": "trimmed_bounds and grounded pivots use the bounds of alpha > 16/255. This excludes nearly invisible remote residue from support measurements without changing any image alpha.",
+  "contour_review": "Thin red/gold fringe is present in the original generated RGBA edges. Additional built-in cleanup attempts either lost true alpha or restored the same fringe with identity/color drift. Original RGBA was retained; runtime arena inspection found the fringe discreet and the articulated reactions clear. No local alpha/color cleanup was applied.",
+  "rejected_cleanup_attempts": [
+    {
+      "file": "source-hits-clean-v2.png",
+      "sha256": "862402c6711c431b9396a3a99d2d82f46b0a09486363c994855888fad91c0a0c",
+      "reason": "RGB checkerboard; unusable transparency"
+    },
+    {
+      "file": "source-hits-clean-v3.png",
+      "sha256": "146a60c4d95701039516f976fd0a8b42b44951183052f29125d8626028945c6d",
+      "reason": "RGB checkerboard; unusable transparency"
+    },
+    {
+      "file": "rgba-hits-clean-v2-rejected.png",
+      "sha256": "304a01d8c47fcd42ad26fddda03318ad6e17af79033b28115ea8da52a30456a3",
+      "reason": "True RGBA but fringe persists and colors/pose details drift; original preferred"
+    }
+  ],
+  "original_generation_sources": [
+    {
+      "file": "source-hits.png",
+      "sha256": "dfdcc1fc160157fbd289af51a911c549e68d9416c8ab56992020504121cdd0c2",
+      "prompt": "prompt-hits.txt",
+      "selected_rgba": "rgba-hits.png"
+    },
+    {
+      "file": "source-guards.png",
+      "sha256": "22d5e36fff4ec3982be7c2b491a9b23f09f57284a00c9eacd779612df1aa057b",
+      "prompt": "prompt-guards.txt",
+      "selected_rgba": "rgba-guards.png"
+    },
+    {
+      "file": "source-air.png",
+      "sha256": "ceedd0cdbecf01d5db239bff7745990baf48bd7036c838a21b3442ae88a09be3",
+      "prompt": "prompt-air.txt",
+      "selected_rgba": "rgba-air.png"
+    }
+  ],
+  "cleanup_prompt_history": [
+    {
+      "prompt": "prompt-clean-hits.txt",
+      "input": "rgba-hits.png",
+      "output": "source-hits-clean-v2.png"
+    },
+    {
+      "prompt": "prompt-extract-clean-hits.txt",
+      "input": "source-hits-clean-v2.png",
+      "output": "source-hits-clean-v3.png"
+    },
+    {
+      "prompt": "prompt-extract-hits.txt",
+      "input": "source-hits-clean-v2.png",
+      "output": "rgba-hits-clean-v2-rejected.png"
+    }
+  ]
+}

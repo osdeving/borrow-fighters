@@ -210,13 +210,25 @@ fn every_move_reacts_with_every_defender_and_in_both_directions() {
 }
 
 #[test]
-fn contact_interrupts_attacks_and_projectiles_and_uses_all_three_hit_keys_before_release() {
+fn contact_interrupts_attacks_and_projectiles_and_uses_all_authored_hit_keys_before_release() {
     for character in ROSTER {
         let manifest = SpriteManifest::load(format!(
             "assets/candidates/{0}/{0}-fighter.sprite.json",
             character.audio_key()
         ))
         .unwrap();
+        let hit_clip = if matches!(character, CharacterId::Python | CharacterId::Cpp) {
+            "reaction_body"
+        } else {
+            "hit"
+        };
+        let expected_frames: BTreeSet<_> = manifest
+            .clip_named(hit_clip)
+            .unwrap()
+            .frames
+            .iter()
+            .cloned()
+            .collect();
         for projectile in [false, true] {
             let mut world = setup(character, character, CombatLabMove::HeavyPunch, false);
             let fighter = &mut world.player_two;
@@ -249,8 +261,7 @@ fn contact_interrupts_attacks_and_projectiles_and_uses_all_three_hit_keys_before
                 fighter.update(DT, FighterInput::default());
             }
             assert_eq!(
-                frames.len(),
-                3,
+                frames, expected_frames,
                 "all hit drawings must fit actual stun: {character:?}"
             );
             assert_eq!(fighter_sprite_clip(fighter).as_str(), "idle");

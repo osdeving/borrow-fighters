@@ -242,6 +242,14 @@ no domínio durante a ocultação; escala, rotação e alpha são apenas apresen
 
 ## Loop de jogo atual
 
+A [ADR 0018](adr/0018-contact-reaction-profiles.md) acrescenta o piloto de reações
+por contato em Python/C++. `combat/fighter/contact_reactions.rs` expõe perfil,
+idade e janela visual; `engine/sprites/reaction.rs` escolhe os clips opcionais
+`reaction_*`. A rajada compartilha sua agenda entre ataque e resposta, com
+recuperação visual de nove frames entre contatos a cada dez frames. O stun
+físico e as caixas permanecem separados. `examples/capture_pair_reactions.rs`
+registra o par inteiro e os frames de cada janela, não apenas poses isoladas.
+
 Fluxo conceitual:
 
 ```text

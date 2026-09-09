@@ -56,6 +56,8 @@ impl Fighter {
         let height = (FLOOR_Y - self.body_rect().bottom()).max(0.0);
         self.reaction_visual_duration =
             (-velocity.y + (velocity.y * velocity.y + 2.0 * GRAVITY * height).sqrt()) / GRAVITY;
+        self.contact_reaction_profile = super::ContactReactionProfile::Launch;
+        self.contact_reaction_duration = self.reaction_visual_duration;
         self.velocity = velocity;
     }
 
@@ -82,6 +84,8 @@ impl Fighter {
         self.special_visual_timer = 0.0;
         self.reaction_visual_elapsed = 0.0;
         self.reaction_visual_duration = FrameCount::new(12).as_seconds();
+        self.contact_reaction_profile = super::ContactReactionProfile::Launch;
+        self.contact_reaction_duration = self.reaction_visual_duration;
         self.reaction_landed = false;
         self.super_reaction = false;
         if !is_attacker {
@@ -183,6 +187,8 @@ impl Fighter {
         self.hit_reaction_kind = HitReactionKind::Hit;
         self.reaction_visual_elapsed = 0.0;
         self.reaction_visual_duration = 0.0;
+        self.contact_reaction_profile = super::ContactReactionProfile::Body;
+        self.contact_reaction_duration = 0.0;
         self.reaction_landed = false;
         self.super_reaction = false;
     }
@@ -226,6 +232,7 @@ impl Fighter {
             self.hitstun_timer = FrameCount::new(24).as_seconds();
             self.reaction_visual_duration = self.hitstun_timer;
         }
+        self.record_contact_reaction(super::GuardRule::Mid, guarded);
     }
 
     fn launch_super_target(&mut self) {
@@ -262,6 +269,7 @@ impl Fighter {
             self.reaction_visual_elapsed = 0.0;
             self.blockstun_timer = FrameCount::new(16).as_seconds();
             self.reaction_visual_duration = self.blockstun_timer;
+            self.contact_reaction_duration = self.reaction_visual_duration;
         } else {
             self.launch_super_target();
         }

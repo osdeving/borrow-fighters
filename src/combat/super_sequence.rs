@@ -29,6 +29,21 @@ pub const PYTHON_PEACE_START: u32 = 444;
 pub const CPP_BARRAGE_CADENCE: u32 = 10;
 pub const CPP_BARRAGE_HITS: u32 = 8;
 
+/// Atlas pose shared by the attacker drawing and its defender reaction mapping.
+pub fn cpp_barrage_pose_index(tick: u32) -> usize {
+    let beat = tick.saturating_sub(CPP_BARRAGE_START) / CPP_BARRAGE_CADENCE;
+    [1, 3, 2, 4][beat as usize % 4]
+}
+
+/// Reaction matched to the authored barrage: every fist and foot reaches the face/neck.
+/// The shared pose schedule synchronizes contact; it does not invent body hits for variety.
+pub fn cpp_barrage_reaction_profile(tick: u32) -> Option<super::fighter::ContactReactionProfile> {
+    if !(CPP_BARRAGE_START..CPP_FINISHER_TICK).contains(&tick) {
+        return None;
+    }
+    Some(super::fighter::ContactReactionProfile::Head)
+}
+
 /// Authored phases, shared by gameplay, artwork and audio.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum SuperPhase {

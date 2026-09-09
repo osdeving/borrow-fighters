@@ -195,10 +195,26 @@ impl World {
         };
         if takes_damage {
             target.receive_super_contact(damage, sequence.guarded, contact.knockdown);
+            if sequence.character == CharacterId::Cpp
+                && let Some(profile) =
+                    crate::combat::super_sequence::cpp_barrage_reaction_profile(contact.tick)
+            {
+                target.record_super_contact_profile(profile, CPP_BARRAGE_CADENCE - 1);
+            }
         }
+        let impact_height = target.contact_reaction_state().map_or(0.45, |reaction| {
+            use crate::combat::fighter::ContactReactionProfile;
+            match reaction.profile {
+                // Authored heads extend above the physical body; keep the spark
+                // at the visible fist/foot contact without moving collision boxes.
+                ContactReactionProfile::Head | ContactReactionProfile::GuardHigh => 0.06,
+                ContactReactionProfile::Low | ContactReactionProfile::GuardLow => 0.78,
+                _ => 0.45,
+            }
+        });
         let position = Vec2::new(
             target.body_rect().center_x(),
-            target.body_rect().y + target.body_rect().height * 0.45,
+            target.body_rect().y + target.body_rect().height * impact_height,
         );
         let facing = target.facing;
         self.hit_effects

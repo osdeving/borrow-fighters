@@ -1,0 +1,407 @@
+   Compiling borrow-fighters v0.1.0 (/home/willams/borrow-fighters)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.68s
+     Running unittests src/lib.rs (/tmp/borrow25-contact-check/debug/deps/borrow_fighters-b34b51ce0bf1136f)
+
+running 30 tests
+test app::tests::fight_button_edges_survive_until_tick_without_repeating_during_catch_up ... ok
+test engine::audio::live_review::live_music_pause_resume_and_cancel_preserve_stream_position ... ignored, requires an audio device; run manually with --ignored --nocapture
+test engine::audio::tests::music_output_volume_applies_ducking_and_user_volume ... ok
+test engine::render::authored_actors::tests::litter_settles_before_collectors_and_remains_until_the_pickup ... ok
+test engine::audio::tests::scene_track_refresh_never_restarts_paused_music ... ok
+test engine::render::authored_supers::tests::paused_super_scenery_ignores_the_app_wall_clock ... ok
+test engine::render::python_super::tests::swallow_visibility_and_return_follow_the_authoritative_clock ... ok
+test engine::render::stage_life::tests::dog_waits_between_complete_crossings_and_alternates_direction ... ok
+test engine::render::tests::character_select_labels_use_source_file_theme ... ok
+test engine::audio::tests::replay_after_the_first_mutation_restarts_phase_sounds_without_resetting_voices ... ok
+test engine::render::tests::outcome_render_time_does_not_skip_to_the_end_after_a_long_match ... ok
+test engine::sprites::draw::tests::mirroring_preserves_an_offset_atlas_crop_and_a_full_projectile_texture ... ok
+test engine::video_capture::tests::framebuffer_rows_flip_without_reversing_pixels_or_losing_alpha ... ok
+test engine::video_capture::tests::rejects_zero_sized_capture ... ok
+test engine::render::stage_life::tests::decorative_actors_stay_in_the_background_and_use_valid_atlas_cells ... ok
+test engine::render::tests::lethal_landing_keeps_loser_on_floor_instead_of_restarting_standing_defeat ... ok
+test app::tests::app_applies_showcase_launch_move_repeat_and_facing ... ok
+test app::tests::lab_retains_pause_and_step_edges_across_render_only_frames_without_catch_up_repeats ... ok
+test app::tests::showcase_preserves_pressed_keys_until_a_fixed_tick_and_steps_once_when_paused ... ok
+test app::tests::app_starts_with_music_volume_at_half ... ok
+test app::tests::showcase_page_navigation_preserves_all_defense_scenarios_and_playback_options ... ok
+test engine::sprites::draw::tests::descending_air_pose_settles_visible_bottom_at_floor_without_changing_physics ... ok
+test engine::sprites::draw::tests::outcome_art_uses_floor_anchor_and_keeps_airborne_combat_body_unchanged ... ok
+test app::tests::lab_reset_during_a_paused_super_clears_capture_then_single_step_restarts_at_zero ... ok
+test engine::assets::tests::partial_candidates_cannot_replace_a_complete_fighter_in_matches ... ok
+test engine::assets::tests::go_keeps_its_previous_coverage_while_the_five_require_new_actions ... ok
+test engine::render::tests::main_atlas_spawn_is_preferred_and_legacy_start_is_a_fallback ... ok
+test engine::render::stage_life::tests::authored_crops_fit_packaged_atlases_and_keep_their_shared_floor ... ok
+test engine::render::python_super::tests::every_authored_drawing_is_played_and_fits_its_rgba_sheet ... ok
+test engine::render::authored_actors::tests::authored_source_regions_fit_rgba_assets_without_repacking ... ok
+
+test result: ok. 29 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/main.rs (/tmp/borrow25-contact-check/debug/deps/borrow_fighters-de524f0afb9def78)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/arena_rotation.rs (/tmp/borrow25-contact-check/debug/deps/arena_rotation-06304d5057271aca)
+
+running 4 tests
+test arena_placeholder_assets_exist ... ok
+test arenas_have_context_names_and_locations ... ok
+test arena_rotation_starts_at_sirius_and_cycles ... ok
+test combat_lab_background_can_be_toggled ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/attack_frame_data.rs (/tmp/borrow25-contact-check/debug/deps/attack_frame_data-7caa3b76e1ac167b)
+
+running 7 tests
+test character_specific_moves_use_their_own_frame_data ... ok
+test close_attacks_expose_integer_frame_data ... ok
+test heavy_punch_and_kick_start_on_their_declared_active_frames ... ok
+test light_punch_phases_follow_frame_data ... ok
+test frame_count_converts_elapsed_seconds_to_current_combat_frame ... ok
+test projectile_special_exposes_integer_frame_data ... ok
+test projectile_special_uses_declared_frame_timers ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/audio_manifest.rs (/tmp/borrow25-contact-check/debug/deps/audio_manifest-3b1ce1ade3902c9e)
+
+running 10 tests
+test audio_clip_defaults_keep_placeholders_lightweight ... ok
+test audio_bank_exposes_binding_clip_ids_by_index ... ok
+test most_specific_audio_binding_wins ... ok
+test authored_super_phases_resolve_existing_sounds_for_their_character ... ok
+test ui_audio_cues_have_stable_manifest_keys ... ok
+test rust_and_duke_close_attacks_use_move_specific_voice_bindings ... ok
+test every_character_attack_can_resolve_voice_binding ... ok
+test repository_audio_manifest_uses_known_keys ... ok
+test recast_voices_use_different_source_recordings_even_after_processing ... ok
+test fighter_voices_never_fall_back_to_another_characters_recordings ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/authored_super_sequences.rs (/tmp/borrow25-contact-check/debug/deps/authored_super_sequences-379e79e797bbe3b2)
+
+running 15 tests
+test airborne_and_busy_attackers_cannot_start_a_super ... ok
+test launched_signature_effects_keep_their_positions_and_lifetime_during_capture ... ok
+test schedules_cover_every_tick_and_never_place_contact_outside_an_authored_phase ... ok
+test simultaneous_eligible_supers_clash_symmetrically_and_can_be_retried_next_tick ... ok
+test trash_collection_has_twelve_cadenced_clones_and_reset_discards_the_capture ... ok
+test existing_projectiles_freeze_and_commands_cannot_interrupt_or_add_contacts ... ok
+test transformation_and_notebook_audio_follow_authored_actions_once ... ok
+test cpp_runs_to_the_real_target_then_delivers_eight_hits_finisher_and_inherited_reboot ... ok
+test rust_commits_sirius_after_the_last_build_block_and_keeps_it_through_guard_ko_and_reset ... ok
+test python_swallow_hides_both_guard_and_hit_targets_until_return_without_an_extra_contact ... ok
+test frame_chunking_and_half_steps_emit_each_contact_and_phase_cue_once ... ok
+test airborne_targets_freeze_then_settle_without_teleport_and_stay_on_the_authored_floor ... ok
+test knockouts_wait_for_restoration_and_training_invincibility_applies_to_both_slots ... ok
+test every_authored_capture_reaches_both_corners_from_either_slot_and_only_scheduled_ticks_damage ... ok
+test guard_is_captured_at_entry_for_both_heights_and_never_chip_kills ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/binary_text.rs (/tmp/borrow25-contact-check/debug/deps/binary_text-6d9994eedd6fa44e)
+
+running 4 tests
+test binary_reveal_preserves_spacing_and_punctuation ... ok
+test binary_reveal_replaces_alphanumeric_text_at_full_pulse ... ok
+test seeded_binary_reveal_can_vary_repeated_labels ... ok
+test binary_reveal_returns_original_text_when_finished ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/character_identity_tuning.rs (/tmp/borrow25-contact-check/debug/deps/character_identity_tuning-fa54fe61535f5ef0)
+
+running 7 tests
+test c_fundamentals_tools_trade_speed_for_reach_and_stability ... ok
+test cpp_tools_bridge_c_reach_with_python_tempo ... ok
+test duke_pressure_tools_trade_speed_for_reach_and_damage ... ok
+test characters_resolve_identity_moves_from_shared_inputs ... ok
+test go_rushdown_tools_trade_durability_and_reach_for_speed ... ok
+test python_agile_tools_favor_fast_punishes_over_raw_damage ... ok
+test rust_defensive_tools_are_faster_but_smaller_than_generic_tools ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/characters.rs (/tmp/borrow25-contact-check/debug/deps/characters-0ed5397f8ac7766a)
+
+running 12 tests
+test c_spec_points_to_current_prototype_moves ... ok
+test character_cli_aliases_are_stable ... ok
+test character_projectiles_follow_archetype_intent ... ok
+test character_body_metrics_manifest_loads_go_as_leaner_mascot_body ... ok
+test character_roster_cycles_in_menu_order ... ok
+test cpp_spec_points_to_current_prototype_moves ... ok
+test demo_roster_cycles_without_go ... ok
+test duke_spec_points_to_current_prototype_moves ... ok
+test go_spec_points_to_current_prototype_moves ... ok
+test python_spec_points_to_current_prototype_moves ... ok
+test rust_spec_points_to_current_prototype_moves ... ok
+test world_uses_loaded_character_body_metrics ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cinematic_specials.rs (/tmp/borrow25-contact-check/debug/deps/cinematic_specials-acf04a36bf00a5b4)
+
+running 7 tests
+test commitment_blocks_movement_and_other_actions_and_reset_discards_the_clock ... ok
+test simultaneous_cinematics_trade_without_player_slot_priority ... ok
+test reused_actor_poses_are_available_and_retimed_at_the_new_contact_frame ... ok
+test startup_jab_interrupts_the_entire_cinematic_and_cannot_leave_delayed_damage ... ok
+test spectacle_cannot_damage_a_distant_opponent_or_spawn_a_travelling_hitbox ... ok
+test lab_and_showcase_expose_all_six_and_pause_keeps_the_same_clock ... ok
+test go_lands_once_locally_and_both_guard_heights_reduce_damage ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/cli.rs (/tmp/borrow25-contact-check/debug/deps/cli-bff788914ef27368)
+
+running 28 tests
+test combat_lab_args_accept_traditional_move_aliases ... ok
+test combat_lab_args_select_c_character ... ok
+test combat_lab_args_select_character_and_move ... ok
+test combat_lab_args_select_cpp_character ... ok
+test combat_lab_args_select_go_character ... ok
+test combat_lab_args_select_python_character ... ok
+test combat_lab_args_select_static_pose ... ok
+test combat_lab_rejects_go_signature_regardless_of_argument_order ... ok
+test game_args_accept_c_character_aliases ... ok
+test game_args_accept_cpp_character_aliases ... ok
+test game_args_accept_python_character_aliases ... ok
+test game_args_can_start_directly_in_fight ... ok
+test game_args_accept_long_character_flags ... ok
+test game_args_select_match_characters ... ok
+test no_args_start_regular_game ... ok
+test showcase_accepts_all_public_characters_and_signature_move ... ok
+test showcase_defaults_to_rust_jab_autoplay ... ok
+test showcase_options_are_independent_of_argument_order ... ok
+test showcase_rejects_conflicting_modes_and_unavailable_go_special ... ok
+test sprite_viewer_args_accept_character_and_move_for_combat_overlay ... ok
+test sprite_viewer_args_select_manifest_and_clip ... ok
+test sprite_viewer_infers_c_from_manifest_path ... ok
+test sprite_viewer_infers_cpp_from_manifest_path ... ok
+test sprite_viewer_infers_python_from_manifest_path ... ok
+test sprite_viewer_requires_manifest ... ok
+test unknown_match_character_is_rejected ... ok
+test unknown_pose_is_rejected ... ok
+test unknown_move_is_rejected ... ok
+
+test result: ok. 28 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/combat_lab.rs (/tmp/borrow25-contact-check/debug/deps/combat_lab-0fe635f3ee168a10)
+
+running 16 tests
+test entrance_defeat_and_crouched_guard_can_be_reviewed_and_restarted ... ok
+test lab_advances_selected_close_move_in_frames ... ok
+test lab_advantage_is_only_for_move_playback ... ok
+test lab_contact_dummy_tracks_selected_move_reach ... ok
+test lab_reports_character_specific_close_move_advantage ... ok
+test lab_reports_projectile_advantage_without_action_recovery ... ok
+test pause_and_step_advance_exactly_one_frame ... ok
+test pose_cli_aliases_are_stable ... ok
+test move_selection_restarts_playback ... ok
+test projectile_move_spawns_projectile_and_special_timing ... ok
+test pose_selection_restarts_playback ... ok
+test static_poses_keep_expected_fighter_state ... ok
+test lab_overlays_use_baseline_boxes_and_restore_fallback_after_metadata_is_cleared ... ok
+test signature_lab_playback_uses_real_loadout_and_keeps_go_cycle_supported ... ok
+test lab_sweeps_use_the_same_low_geometry_as_the_match_with_baseline_metadata ... ok
+test lab_projectile_emission_matches_world_with_baseline_metadata_and_fallback ... ok
+
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/combat_rules.rs (/tmp/borrow25-contact-check/debug/deps/combat_rules-3c82a37feb1f3a5b)
+
+running 42 tests
+test basic_cpu_attacks_when_close ... ok
+test basic_attack_deals_damage_once_per_swing ... ok
+test basic_cpu_blocks_incoming_projectile ... ok
+test basic_cpu_can_drive_player_one_toward_player_two ... ok
+test basic_cpu_moves_toward_player_when_far ... ok
+test blocked_close_attack_queues_guard_audio_events ... ok
+test basic_cpu_varies_movement_attacks_projectiles_and_defense ... ok
+test block_reduces_incoming_damage ... ok
+test close_attack_queues_audio_events_for_start_and_hit ... ok
+test close_attack_tuning_comes_from_character_loadout ... ok
+test combat_log_records_projectile_spawn_and_hit ... ok
+test combat_log_records_round_close_attack_hit_and_whiff ... ok
+test cpu_slots_use_different_opening_profiles ... ok
+test countdown_advances_labels_and_audio_events ... ok
+test crouch_reduces_the_vulnerable_body_height ... ok
+test diagonal_jump_keeps_horizontal_momentum ... ok
+test fighter_loadout_blocks_unlisted_close_moves ... ok
+test fighters_cannot_walk_through_each_other ... ok
+test greybox_intro_world_can_use_explicit_match_characters ... ok
+test fighters_keep_body_gap_when_pinned_to_arena_edge ... ok
+test greybox_world_uses_character_specs_for_match_setup ... ok
+test greybox_world_can_swap_character_specs_between_slots ... ok
+test guard_rule_controls_blockability_and_reaction ... ok
+test heavy_punch_reaches_farther_than_light_punch ... ok
+test hit_and_block_pushback_move_defender_away_from_attacker ... ok
+test hitstun_and_blockstun_lock_out_actions_temporarily ... ok
+test kick_has_its_own_damage ... ok
+test hit_feedback_expires_after_short_lifetime ... ok
+test player_one_cpu_blocks_incoming_projectile ... ok
+test projectile_cast_queues_audio_event ... ok
+test player_two_damage_flag_prevents_damage_from_attacks ... ok
+test player_one_damage_flag_prevents_damage_from_attacks ... ok
+test projectile_cooldown_prevents_immediate_spam ... ok
+test projectile_deals_damage_and_disappears ... ok
+test match_ends_when_health_reaches_zero ... ok
+test match_projectiles_use_character_specific_specs ... ok
+test projectile_guard_rule_blocks_like_a_projectile ... ok
+test sprite_frame_hitbox_metadata_can_drive_close_hit_resolution ... ok
+test spawn_intro_and_countdown_block_gameplay_until_finished ... ok
+test sprite_projectile_origin_metadata_overrides_default_spawn_position ... ok
+test no_damage_flag_suppresses_hurt_audio_event ... ok
+test whiff_recovery_locks_out_actions_after_missing ... ok
+
+test result: ok. 42 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/contact_reactions.rs (/tmp/borrow25-contact-check/debug/deps/contact_reactions-8cb5606a33396452)
+
+running 6 tests
+test lethal_pilot_supers_hold_the_final_fall_pose_and_reset_clears_contact_state ... ok
+test showcase_pause_step_and_replay_preserve_and_restart_the_contact_clock ... ok
+test pilot_contract_is_absent_for_other_fighters_and_outside_the_barrage ... ok
+test both_pilots_cover_every_move_with_immediate_profiles_and_complete_ground_recovery ... ok
+test each_barrage_contact_restarts_impact_and_finishes_visual_recovery_before_the_next_hit ... ok
+test all_moves_react_only_to_real_contacts_across_movement_attacks_crouch_air_and_guards ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.25s
+
+     Running tests/cpu_traditional_moves.rs (/tmp/borrow25-contact-check/debug/deps/cpu_traditional_moves-f307e94077e63194)
+
+running 3 tests
+test cpu_uses_air_attacks_while_airborne ... ok
+test cpu_mixes_throw_sweep_and_overhead_inputs_when_close ... ok
+test cpu_uses_anti_air_against_airborne_target ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/feature_flags.rs (/tmp/borrow25-contact-check/debug/deps/feature_flags-5fc5a85584c6d4b7)
+
+running 21 tests
+test feature_flags_start_with_playtest_friendly_defaults ... ok
+test feature_flags_toggle_through_central_api ... ok
+test left_click_toggles_options_while_right_click_leaves_toggles_and_actions_unchanged ... ok
+test menu_hit_testing_excludes_padding_gaps_and_edges_on_every_page ... ok
+test mouse_can_start_fights_and_open_each_training_tool ... ok
+test mouse_clicks_only_activate_visible_rows_including_exit ... ok
+test mouse_cycles_character_arena_lore_and_volume_in_both_directions ... ok
+test mouse_opens_every_submenu_and_its_back_row ... ok
+test pointer_click_is_suppressed_on_scene_entry_and_does_not_repeat_across_pages ... ok
+test preferences_menu_adjusts_music_volume_row ... ok
+test preferences_menu_cycles_arena_row ... ok
+test preferences_menu_cycles_character_rows ... ok
+test preferences_menu_ignores_first_frame_input ... ok
+test preferences_menu_opens_lore_and_cycles_book_entries ... ok
+test preferences_menu_opens_training_tools ... ok
+test preferences_menu_recording_row_requests_capture_toggle ... ok
+test preferences_menu_restarts_selection_pulse_when_cursor_moves ... ok
+test preferences_menu_scrolls_lore_text_areas ... ok
+test preferences_menu_start_row_enters_fight ... ok
+test preferences_menu_toggles_selected_feature_flag ... ok
+test stationary_pointer_preserves_keyboard_selection_until_it_moves_or_clicks ... ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/impact_positions.rs (/tmp/borrow25-contact-check/debug/deps/impact_positions-f124f7e0f0c3033d)
+
+running 1 test
+test sweep_anti_air_and_projectile_sparks_follow_actual_contact_on_both_sides ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+     Running tests/lore_book.rs (/tmp/borrow25-contact-check/debug/deps/lore_book-9f59bcc8bf53e7ca)
+
+running 3 tests
+test lore_book_wraps_selected_indices_for_menu ... ok
+test repository_lore_book_loads_story_and_roster ... ok
+test roster_portrait_assets_exist ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/move_data.rs (/tmp/borrow25-contact-check/debug/deps/move_data-a52058b6233af71b)
+
+running 7 tests
+test attack_kind_is_compatibility_layer_over_move_specs ... ok
+test character_specific_move_specs_have_distinct_tuning ... ok
+test guard_rules_describe_current_blocking_model ... ok
+test loadout_move_selection_prefers_character_specific_specs ... ok
+test close_range_moves_are_registered_in_table_order ... ok
+test move_specs_preserve_current_tuning_values ... ok
+test traditional_move_specs_define_guard_rules_and_reactions ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/move_showcase.rs (/tmp/borrow25-contact-check/debug/deps/move_showcase-48bebdfb50809bf7)
+
+running 5 tests
+test cycle_and_repeat_reset_time_result_and_health ... ok
+test pause_frame_step_replay_and_side_switch_preserve_deterministic_results ... ok
+test fortress_and_vortex_remain_visible_before_the_approaching_opponent_is_hit ... ok
+test each_character_demonstrates_real_standing_low_overhead_and_projectile_defense ... ok
+test every_public_move_hits_in_its_context_on_both_sides_with_match_metadata_and_fallback ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.54s
+
+     Running tests/mvp_combat.rs (/tmp/borrow25-contact-check/debug/deps/mvp_combat-4f110904bba4d90e)
+
+running 12 tests
+test all_five_have_one_unique_special_with_block_and_whiff_counterplay ... ok
+test chip_cannot_ko_a_defender ... ok
+test an_attack_commits_its_facing_and_cannot_track_a_jump_over ... ok
+test a_blocked_signature_allows_an_approach_and_jab_before_recovery_ends ... ok
+test ground_throw_misses_an_airborne_target_even_with_overlapping_body ... ok
+test guarded_low_keeps_crouch_height_through_blockstun_and_guard_break_clears_blockstun ... ok
+test projectile_cast_cannot_be_cancelled_into_attack_jump_or_guard ... ok
+test knockdown_plays_once_protects_the_floor_and_allows_wake_jump ... ok
+test every_signature_delivers_its_expected_hit_or_three_sheet_barrage ... ok
+test signature_startup_is_interruptible_by_a_close_jab ... ok
+test sweep_stays_low_and_cannot_hit_a_jumping_opponent ... ok
+test signature_effects_respect_mid_and_low_guard_rules ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/paired_reaction_sprites.rs (/tmp/borrow25-contact-check/debug/deps/paired_reaction_sprites-6f84ca1e789920d3)
+
+running 5 tests
+test authored_drawings_do_not_replace_independently_supplied_legacy_combat_metadata ... ok
+test both_pilots_have_four_distinct_drawings_per_profile_without_new_combat_boxes ... ok
+test every_cpp_barrage_hit_starts_the_correct_python_impact_and_plays_all_four_drawings ... ok
+test lethal_super_landing_holds_each_pilots_last_fall_drawing_without_recovery ... ok
+test all_attacks_and_guard_scenarios_use_new_reactions_for_both_characters_with_legacy_fallback ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.38s
+
+     Running tests/reaction_matrix.rs (/tmp/borrow25-contact-check/debug/deps/reaction_matrix-022af1779e0ba1e2)
+
+running 7 tests
+test airborne_damage_finishes_descent_and_floor_recovery_instead_of_returning_to_jump ... ok
+test heavy_close_hit_does_not_overwrite_an_airborne_victims_ballistic_reaction ... ok
+test mirrored_recoil_is_visual_only_and_guard_keeps_the_correct_height ... ok
+test super_horizontal_launch_preserves_an_inner_margin_and_never_teleports_at_contact ... ok
+test contact_interrupts_attacks_and_projectiles_and_uses_all_three_hit_keys_before_release ... FAILED
+test lethal_super_lands_and_holds_each_characters_prone_drawing_without_getting_up ... ok
+test every_move_reacts_with_every_defender_and_in_both_directions ... ok
+
+failures:
+
+---- contact_interrupts_attacks_and_projectiles_and_uses_all_three_hit_keys_before_release stdout ----
+
+thread 'contact_interrupts_attacks_and_projectiles_and_uses_all_three_hit_keys_before_release' (150904) panicked at tests/reaction_matrix.rs:251:13:
+assertion `left == right` failed: all hit drawings must fit actual stun: Python
+  left: 4
+ right: 3
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    contact_interrupts_attacks_and_projectiles_and_uses_all_three_hit_keys_before_release
+
+test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.75s
+
+error: test failed, to rerun pass `--test reaction_matrix`
