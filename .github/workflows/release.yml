@@ -86,6 +86,16 @@ jobs:
           cargo clippy --locked --all-targets --all-features -- -D warnings
       - name: Build optimized game
         run: cargo build --locked --release --bin borrow-fighters
+      - name: Capture roster and match flow for manual visual review
+        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch'
+        run: xvfb-run -a cargo run --locked --example capture_roster_flow_review -- dist/visual-review
+      - uses: actions/upload-artifact@v4
+        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch'
+        with:
+          name: visual-review-linux
+          path: dist/visual-review/*.png
+          if-no-files-found: error
+          retention-days: 14
       - name: Verify Windows imports do not require Visual C++ Redistributable
         if: runner.os == 'Windows'
         shell: pwsh

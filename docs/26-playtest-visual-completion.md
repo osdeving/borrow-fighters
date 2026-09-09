@@ -72,3 +72,10 @@ O [backlog](03-backlog.md) continua sendo a fonte de verdade da frente ativa.
 ## Estado da entrega
 
 Em execução. Evidências, resultados e limites serão registrados ao concluir.
+
+O workflow manual `Playtest Release` captura a seleção, random, confirmação,
+energia, pausa e resultado com Raylib/Xvfb no Linux. Os PNGs ficam no artefato
+`visual-review-linux` para revisão humana; não são publicados como pacotes do jogo.
+O exemplo `capture_roster_flow_review` também aceita `--frames` para inspecionar
+a transição e animação quadro a quadro. Captura de pixels não substitui testar
+a navegação e o áudio na janela real.
