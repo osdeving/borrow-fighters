@@ -81,3 +81,13 @@ a transição e animação quadro a quadro. Captura de pixels não substitui tes
 a navegação e o áudio na janela real.
 O artefato `native-review-tools-linux` contém os dois exemplos e os executáveis
 de testes para revisão local de GPU/áudio usando a mesma compilação do CI.
+
+Nas execuções manuais, `contact-reaction-review-linux` guarda o vídeo contínuo
+dos contatos no sentido principal, os relatórios das quatro condições (lado e
+dano), a auditoria completa e um PNG sem retoque por cenário/clip. Todos os PNGs
+da matriz são verificados no runner antes dessa seleção para download.
+`native-app-flow-linux` registra entradas de teclado enviadas à própria janela
+X11 do jogo, incluindo pausa, seleção e três partidas/revanches. As expectativas
+do script precisam ser confirmadas nas capturas; não equivalem a teste de
+gamepad físico nem a audição humana. O vídeo de seleção fica junto aos PNGs
+em `visual-review-linux`.

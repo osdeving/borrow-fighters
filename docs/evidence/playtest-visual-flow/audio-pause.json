@@ -1,0 +1,31 @@
+{
+  "commit": "4fbaf47ed88f1a631d05e5b27ccd42f0e4ceb1a3",
+  "ci_run": 34383732260,
+  "binary_sha256": "0e736e4637bd4217bdd368da2e0349643a8d6bc919944fbf619fa79a095b43b2",
+  "test": "engine::audio::live_review::live_match_pause_preserves_music_cursor_and_resumes_only_suspended_sounds",
+  "result": "passed",
+  "backend": "Raylib miniaudio / PulseAudio / WSLg RDPSink",
+  "loader": "isolated Ubuntu 22.04 glibc 2.35; system unchanged",
+  "records": [
+    {
+      "after_resume": 0.4810430705547333,
+      "cinematic": false,
+      "paused_at": 0.3311111032962799
+    },
+    {
+      "after_resume": 0.4810430705547333,
+      "cinematic": true,
+      "paused_at": 0.4810430705547333
+    }
+  ],
+  "scope": [
+    "match pause and resume",
+    "nested cinematic pause",
+    "UI cues during pause",
+    "cancellation discards suspended voices",
+    "stopped track remains stopped",
+    "track changes during pause"
+  ],
+  "output": "silent probes and zero music volume",
+  "subjective_listening": false
+}

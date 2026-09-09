@@ -1,0 +1,243 @@
+
+running 1 test
+test engine::audio::live_review::live_match_pause_preserves_music_cursor_and_resumes_only_suspended_sounds ... INFO: AUDIO: Device initialized successfully
+INFO:     > Backend:       miniaudio | PulseAudio
+INFO:     > Format:        32-bit IEEE Floating Point -> 16-bit Signed Integer
+INFO:     > Channels:      2 -> 2
+INFO:     > Sample rate:   44100 -> 44100
+INFO:     > Periods size:  3304
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/ui/navigate-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/ui/confirm-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/ui/back-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/match/start-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/match/countdown-11.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/match/countdown-10.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/match/countdown-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/match/countdown-fight.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/match/victory-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/combat/hit-light-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/combat/hit-light-02.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/combat/hit-heavy-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/combat/hit-heavy-02.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/combat/block-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/combat/block-02.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/combat/whiff-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/combat/whiff-02.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/combat/projectile-impact-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/combat/projectile-impact-02.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/rust/voice/attack-borrow-jab-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/rust/voice/attack-kick-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/rust/voice/attack-heavy-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/rust/voice/attack-lifetime-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/rust/voice/attack-ownership-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/rust/voice/hurt-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/rust/voice/block-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/rust/sfx/projectile-cast-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/duke/voice/attack-boilerplate-poke-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/duke/voice/attack-kick-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/duke/voice/attack-heavy-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/duke/voice/attack-sweep-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/duke/voice/attack-enterprise-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/duke/voice/hurt-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/duke/voice/block-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 2 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/duke/sfx/projectile-cast-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/go/voice/attack-goroutine-jab-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/go/voice/attack-defer-kick-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/go/voice/hurt-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/go/voice/block-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/c/voice/attack-pointer-jab-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/c/voice/attack-unsafe-poke-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/c/voice/hurt-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/c/voice/block-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/python/voice/attack-snake-bite-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/python/voice/attack-data-strike-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/python/voice/attack-heel-kick-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/python/voice/hurt-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/python/voice/block-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (44100 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/rust/voice/attack-quick-02.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/rust/voice/hurt-02.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/c/voice/attack-heavy-02.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/c/voice/attack-reboot-02.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/cpp/voice/attack-light-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/cpp/voice/attack-heavy-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/cpp/voice/attack-kick-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/cpp/voice/hurt-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/cpp/voice/hurt-02.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/characters/cpp/voice/block-01.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/start-rust.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/start-duke.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/start-c.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/start-cpp.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/trash-rain.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/collect-1.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/collect-2.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/collect-3.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/giant-drop.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/mutation-1.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/mutation-2.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/error-cascade.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/boot-post.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/footshot.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/barrage-1.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/barrage-2.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/barrage-3.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/end.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/start-python.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/python-morph.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/python-grow.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/python-lunge.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/python-swallow.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/python-revert.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/python-celebrate.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/python-peace.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/cpp-typing.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/sfx/super/cpp-enter.ogg] File loaded successfully
+INFO: WAVE: Data loaded successfully (48000 Hz, 16 bit, 1 channels)
+INFO: STREAM: Initialized successfully (44100 Hz, 16 bit, Stereo)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/music/menu-loop.ogg] Music file loaded successfully
+INFO:     > Sample rate:   44100 Hz
+INFO:     > Sample size:   16 bits
+INFO:     > Channels:      2 (Stereo)
+INFO:     > Total frames:  651265
+INFO: STREAM: Initialized successfully (44100 Hz, 16 bit, Mono)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/music/combat-loop.ogg] Music file loaded successfully
+INFO:     > Sample rate:   44100 Hz
+INFO:     > Sample size:   16 bits
+INFO:     > Channels:      1 (Mono)
+INFO:     > Total frames:  1092136
+INFO: STREAM: Initialized successfully (44100 Hz, 16 bit, Stereo)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/music/combat-chiptune-battle.ogg] Music file loaded successfully
+INFO:     > Sample rate:   44100 Hz
+INFO:     > Sample size:   16 bits
+INFO:     > Channels:      2 (Stereo)
+INFO:     > Total frames:  6703200
+INFO: STREAM: Initialized successfully (44100 Hz, 16 bit, Stereo)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/music/combat-rins-theme.ogg] Music file loaded successfully
+INFO:     > Sample rate:   44100 Hz
+INFO:     > Sample size:   16 bits
+INFO:     > Channels:      2 (Stereo)
+INFO:     > Total frames:  5715360
+INFO: STREAM: Initialized successfully (44100 Hz, 16 bit, Stereo)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/music/combat-8bit-battle.ogg] Music file loaded successfully
+INFO:     > Sample rate:   44100 Hz
+INFO:     > Sample size:   16 bits
+INFO:     > Channels:      2 (Stereo)
+INFO:     > Total frames:  1175265
+INFO: STREAM: Initialized successfully (44100 Hz, 16 bit, Stereo)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/music/combat-console-floor.ogg] Music file loaded successfully
+INFO:     > Sample rate:   44100 Hz
+INFO:     > Sample size:   16 bits
+INFO:     > Channels:      2 (Stereo)
+INFO:     > Total frames:  5648108
+INFO: STREAM: Initialized successfully (44100 Hz, 16 bit, Stereo)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/music/combat-random-encounter.ogg] Music file loaded successfully
+INFO:     > Sample rate:   44100 Hz
+INFO:     > Sample size:   16 bits
+INFO:     > Channels:      2 (Stereo)
+INFO:     > Total frames:  17265024
+INFO: STREAM: Initialized successfully (44100 Hz, 16 bit, Stereo)
+INFO: FILEIO: [/home/willams/borrow-fighters/assets/audio/music/combat-determined-pursuit.ogg] Music file loaded successfully
+INFO:     > Sample rate:   44100 Hz
+INFO:     > Sample size:   16 bits
+INFO:     > Channels:      2 (Stereo)
+INFO:     > Total frames:  4762800
+INFO: WAVE: Data loaded successfully (8000 Hz, 16 bit, 1 channels)
+match pause audio review: [{"after_resume":0.4810430705547333,"cinematic":false,"paused_at":0.3311111032962799},{"after_resume":0.4810430705547333,"cinematic":true,"paused_at":0.4810430705547333}]
+INFO: STREAM: Unloaded audio stream data from RAM
+INFO: STREAM: Unloaded audio stream data from RAM
+INFO: STREAM: Unloaded audio stream data from RAM
+INFO: STREAM: Unloaded audio stream data from RAM
+INFO: STREAM: Unloaded audio stream data from RAM
+INFO: STREAM: Unloaded audio stream data from RAM
+INFO: STREAM: Unloaded audio stream data from RAM
+INFO: STREAM: Unloaded audio stream data from RAM
+INFO: AUDIO: Device closed successfully
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 59 filtered out; finished in 11.51s
+

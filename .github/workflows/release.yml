@@ -64,7 +64,7 @@ jobs:
           sudo apt-get install -y clang cmake libclang-dev pkg-config \
             libasound2-dev libgl1-mesa-dev libudev-dev libx11-dev \
             libxcursor-dev libxi-dev libxinerama-dev libxrandr-dev \
-            rpm xvfb xauth libpulse0 libx11-xcb1 libxxf86vm1 libxrender1 libxext6 libasound2-data
+            rpm xvfb xauth ffmpeg libpulse0 libx11-xcb1 libxxf86vm1 libxrender1 libxext6 libasound2-data
       - name: Configure Windows static runtime
         if: runner.os == 'Windows'
         shell: pwsh
@@ -92,7 +92,9 @@ jobs:
         if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch'
         run: |
           cargo build --locked --example capture_roster_flow_review --example capture_roster_contacts
-          xvfb-run -a target/$CARGO_BUILD_TARGET/debug/examples/capture_roster_flow_review dist/visual-review
+          xvfb-run -a target/$CARGO_BUILD_TARGET/debug/examples/capture_roster_flow_review dist/visual-review --frames
+          ffmpeg -hide_banner -loglevel error -framerate 60 -i dist/visual-review/selection-%04d.png -an -c:v libx264 -preset fast -threads 1 -pix_fmt yuv420p -movflags +faststart dist/visual-review/roster-motion.mp4
+          rm dist/visual-review/selection-????.png
           mkdir -p dist/review-tools
           cp target/$CARGO_BUILD_TARGET/debug/examples/capture_roster_flow_review dist/review-tools/
           cp target/$CARGO_BUILD_TARGET/debug/examples/capture_roster_contacts dist/review-tools/
@@ -106,7 +108,46 @@ jobs:
         if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch'
         with:
           name: visual-review-linux
-          path: dist/visual-review/*.png
+          path: dist/visual-review/*
+          if-no-files-found: error
+          retention-days: 14
+      - name: Capture and verify the complete contact reaction matrix
+        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch'
+        run: |
+          capture=target/$CARGO_BUILD_TARGET/debug/examples/capture_roster_contacts
+          xvfb-run -a "$capture" --output dist/contact-review/right --video dist/contact-review/contacts-right.mp4
+          xvfb-run -a "$capture" --reverse --output dist/contact-review/left
+          xvfb-run -a "$capture" --no-damage --output dist/contact-review/protected-right
+          xvfb-run -a "$capture" --no-damage --reverse --output dist/contact-review/protected-left
+          python tools/art/audit_roster_contact_capture.py \
+            --input dist/contact-review/right --input dist/contact-review/left \
+            --input dist/contact-review/protected-right --input dist/contact-review/protected-left \
+            --report dist/contact-review/verification.json
+          python - <<'PY'
+          import json, pathlib, shutil
+          root = pathlib.Path('dist/contact-review')
+          # Keep one unchanged frame per scenario/clip; the video retains every tick.
+          # The full PNG set has already passed the audit above on this runner.
+          for report in root.glob('*/roster-contact-review.json'):
+              target = root / 'frames' / report.parent.name
+              target.mkdir(parents=True, exist_ok=True)
+              seen = set()
+              for scenario in json.loads(report.read_text())['scenarios']:
+                  for shot in scenario['screenshots']:
+                      key = (scenario['defender'], scenario['case'], shot['clip'])
+                      if key not in seen:
+                          shutil.copy2(report.parent / shot['image'], target / shot['image'])
+                          seen.add(key)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch' && !cancelled()
+        with:
+          name: contact-reaction-review-linux
+          path: |
+            dist/contact-review/*.mp4
+            dist/contact-review/verification.json
+            dist/contact-review/*/roster-contact-review.json
+            dist/contact-review/frames/**/*.png
           if-no-files-found: error
           retention-days: 14
       - uses: actions/upload-artifact@v4
@@ -114,6 +155,19 @@ jobs:
         with:
           name: native-review-tools-linux
           path: dist/review-tools/*
+          if-no-files-found: error
+          retention-days: 14
+      - name: Exercise three matches through the native X11 app
+        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch'
+        run: |
+          xvfb-run -a -s '-screen 0 1280x720x24' python tools/review/capture_match_flow_x11.py \
+            --executable "target/$CARGO_BUILD_TARGET/release/borrow-fighters" \
+            --output-directory dist/app-flow --matches 3 --match-seconds 75
+      - uses: actions/upload-artifact@v4
+        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch' && !cancelled()
+        with:
+          name: native-app-flow-linux
+          path: dist/app-flow/**
           if-no-files-found: error
           retention-days: 14
       - name: Verify Windows imports do not require Visual C++ Redistributable
