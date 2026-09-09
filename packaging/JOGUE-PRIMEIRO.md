@@ -22,9 +22,10 @@ o cliente também funciona com a compatibilidade PulseAudio do PipeWire. Drivers
 servidor de áudio e componentes do sistema continuam pertencendo ao sistema.
 Windows também precisa de driver com OpenGL 3.3.
 
-A versão `v0.1.0-prototype.2` corrige imagens e áudio ao instalar ou extrair
-o jogo em pastas com acentos. Se a primeira versão mostrou lutadores em blocos
-ou cenários sem imagens, baixe o pacote atualizado e extraia toda a pasta.
+A versão `v0.1.0-prototype.3` traz seleção Linker, reações mais completas,
+pausa/revanche e energia para os cinematográficos. A correção anterior de
+imagens e áudio em pastas com acentos continua incluída. Ao atualizar pelo ZIP,
+extraia toda a pasta do novo pacote.
 
 Os executáveis ainda não têm assinatura digital; o Windows pode mostrar um
 aviso de editor desconhecido. Baixe somente da página oficial de releases.

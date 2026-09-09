@@ -3,8 +3,9 @@
 ## Pedido e prioridade
 
 Rodada autorizada em 9 de setembro de 2026, a partir de `v0.1.0-prototype.2`.
-Entrega na branch `feature/playtest-visual-completion`,
-[PR #19](https://github.com/osdeving/borrow-fighters/pull/19).
+Entrega integrada à `main` pelo
+[PR #19](https://github.com/osdeving/borrow-fighters/pull/19), preparada para
+distribuição em [v0.1.0-prototype.3](releases/v0.1.0-prototype.3.md).
 A prioridade é emparelhar as reações do elenco com o piloto Python/C++.
 O pedido também inclui seleção visual de personagens, pausa/revanche, energia,
 transições e substituição da voz de Old C. Balanceamento fino fica para depois.
