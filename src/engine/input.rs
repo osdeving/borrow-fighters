@@ -179,7 +179,8 @@ pub fn read_character_select_input(
             result.launch |= layout::LAUNCH.contains(pos.x, pos.y);
             result.shared.back |= layout::BACK.contains(pos.x, pos.y);
             if layout::ARENA.contains(pos.x, pos.y) {
-                result.arena_direction = if pos.x < 480.0 { -1 } else { 1 };
+                let midpoint = (layout::ARENA.x + layout::ARENA.w / 2) as f32;
+                result.arena_direction = if pos.x < midpoint { -1 } else { 1 };
             }
         }
         result.shared.back |= raylib.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_RIGHT);
