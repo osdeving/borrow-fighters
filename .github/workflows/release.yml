@@ -68,6 +68,8 @@ jobs:
         shell: pwsh
         run: |
           'RUSTFLAGS=-C target-feature=+crt-static' >> $env:GITHUB_ENV
+          $toolchain = (Join-Path $env:GITHUB_WORKSPACE 'packaging/windows/static-runtime.cmake').Replace('\', '/')
+          "CMAKE_TOOLCHAIN_FILE=$toolchain" >> $env:GITHUB_ENV
           'LIBCLANG_PATH=C:\Program Files\LLVM\bin' >> $env:GITHUB_ENV
           'C:\Program Files (x86)\Inno Setup 6' >> $env:GITHUB_PATH
       - uses: dtolnay/rust-toolchain@stable
@@ -124,6 +126,13 @@ jobs:
         env:
           RELEASE_VERSION: ${{ steps.version.outputs.version }}
         run: python tools/release/package.py stage --target linux-x86_64 --version "$RELEASE_VERSION" --binary target/x86_64-unknown-linux-gnu/release/borrow-fighters --output dist/stage
+      - name: Synchronize bundled libraries with available source packages
+        if: runner.os == 'Linux'
+        run: |
+          python tools/release/package.py native-packages --stage dist/stage > "$RUNNER_TEMP/native-packages.txt"
+          mapfile -t runtime_packages < "$RUNNER_TEMP/native-packages.txt"
+          test "${#runtime_packages[@]}" -gt 0
+          sudo apt-get install -y "${runtime_packages[@]}"
       - name: Create Linux portable archive, DEB and RPM
         if: runner.os == 'Linux'
         env:

@@ -33,6 +33,7 @@ DLOPEN_LIBRARIES = (
 # The loader, glibc and graphics drivers must match the host. Never copy them.
 SYSTEM_LIBRARY = re.compile(
     r"^(?:linux-vdso|ld-linux|lib(?:c|m|pthread|dl|rt|resolv|util|anl)\.so"
+    r"|libnsl\.so\.1(?:$|\.)"
     r"|lib(?:GL|EGL|GLX|GLdispatch|OpenGL|GLES|vulkan|drm|gbm|nvidia))"
 )
 
@@ -231,13 +232,17 @@ def native_data_packages(paths):
     return packages
 
 
+def native_package_owners(libraries, data_files):
+    packages = {native_package(path) for path in libraries.values()}
+    packages.update(native_data_packages(data_files))
+    return sorted(packages)
+
+
 def native_notices(stage, libraries, data_files=()):
     """Carry licenses and exact sources for both native libraries and their data."""
     entries = []
     sources = set()
-    packages = {native_package(path) for path in libraries.values()}
-    packages.update(native_data_packages(data_files))
-    for package in sorted(packages):
+    for package in native_package_owners(libraries, data_files):
         fields = run("dpkg-query", "-W", "-f=${source:Package}\t${source:Version}\t${Version}", package)
         source, source_version, binary_version = fields.split("\t")
         copyright_path = Path("/usr/share/doc") / package.split(":")[0] / "copyright"
@@ -272,7 +277,8 @@ def native_notices(stage, libraries, data_files=()):
                    "Libraries are dynamically linked and may be replaced in lib/.\n")
 
 
-def bundle_linux(stage):
+def linux_runtime_files(stage):
+    """Resolve host runtime dependencies without copying or changing anything."""
     cache = run("ldconfig", "-p")
     libraries = ldd_libraries(stage / "bin/borrow-fighters")
     for soname in DLOPEN_LIBRARIES:
@@ -293,6 +299,25 @@ def bundle_linux(stage):
                 libraries[soname] = dependency
                 pending.append(dependency)
     libraries = {name: path for name, path in libraries.items() if not SYSTEM_LIBRARY.match(name)}
+    alsa_config = Path("/usr/share/alsa")
+    if not alsa_config.is_dir():
+        raise ValueError("Install libasound2-data for ALSA configuration")
+    alsa_files = sorted(path for path in alsa_config.rglob("*") if path.is_file())
+    return libraries, alsa_files
+
+
+def print_native_packages(args):
+    """Print only installed package names, suitable for a targeted apt upgrade."""
+    stage = args.stage.resolve()
+    build = json.loads((stage / "BUILD-INFO.json").read_text(encoding="utf-8"))
+    if build["target"] != "linux-x86_64":
+        raise ValueError("native-packages requires Linux staging")
+    libraries, data_files = linux_runtime_files(stage)
+    print("\n".join(native_package_owners(libraries, data_files)))
+
+
+def bundle_linux(stage):
+    libraries, alsa_files = linux_runtime_files(stage)
     for soname, source in libraries.items():
         copy(source, stage / "lib" / soname)
     # miniaudio tries the development name first. Keep that lookup in the bundle
@@ -302,11 +327,7 @@ def bundle_linux(stage):
     pulse_alias.unlink(missing_ok=True)
     pulse_alias.symlink_to("libpulse.so.0")
     # ALSA's data files are required for libasound configuration lookup.
-    alsa_config = Path("/usr/share/alsa")
-    if not alsa_config.is_dir():
-        raise ValueError("Install libasound2-data for ALSA configuration")
-    alsa_files = sorted(path for path in alsa_config.rglob("*") if path.is_file())
-    shutil.copytree(alsa_config, stage / "share/alsa", dirs_exist_ok=True)
+    shutil.copytree("/usr/share/alsa", stage / "share/alsa", dirs_exist_ok=True)
     native_notices(stage, libraries, alsa_files)
     validate_linux_libraries(stage)
 
@@ -425,6 +446,10 @@ def main():
     verify = commands.add_parser("verify", help="Verify staged assets, hashes and Linux dependencies")
     verify.add_argument("--stage", type=Path, required=True)
     verify.set_defaults(function=verify_package)
+    native_packages = commands.add_parser(
+        "native-packages", help="Print installed Linux packages whose files will be bundled")
+    native_packages.add_argument("--stage", type=Path, required=True)
+    native_packages.set_defaults(function=print_native_packages)
     args = parser.parse_args()
     if hasattr(args, "version") and not re.fullmatch(r"\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?", args.version):
         parser.error("--version must be a semantic version without a leading v")

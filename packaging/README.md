@@ -10,6 +10,8 @@ Na raiz do repositório, depois de `cargo build --locked --release`:
 python3 tools/release/package.py stage --target linux-x86_64 \
   --version 0.1.0-prototype.1 --binary target/release/borrow-fighters \
   --output dist/stage
+python3 tools/release/package.py native-packages --stage dist/stage > dist/native-packages.txt
+xargs -r sudo apt-get install --only-upgrade -y -- < dist/native-packages.txt
 python3 tools/release/package.py linux --stage dist/stage \
   --version 0.1.0-prototype.1 --output dist
 python3 tools/release/package.py verify --stage dist/stage
@@ -20,6 +22,10 @@ Com `CARGO_BUILD_TARGET`, o binário fica em `target/<target>/release/`.
 No Windows, use `--target windows-x86_64`, o arquivo `.exe` em `--binary` e o
 subcomando `windows`. Compile MSVC com `RUSTFLAGS=-C target-feature=+crt-static`;
 o workflow valida a instalação e a carga do executável sem redistribuível VC++.
+Aponte também `CMAKE_TOOLCHAIN_FILE` para o caminho absoluto de
+[static-runtime.cmake](windows/static-runtime.cmake), para que Raylib/GLFW usem
+o mesmo runtime estático `/MT` (a política CMP0091 do CMake separa essa escolha
+das flags do Rust). O workflow configura as duas opções.
 
 Artefatos gerados, usando `0.1.0-prototype.1` como exemplo:
 
@@ -50,8 +56,12 @@ empacotamento usa `rpm`, `dpkg-deb`, `readelf`, `ldd`, `ldconfig`, `apt-get`,
 Habilite entradas `deb-src` equivalentes aos repositórios binários e rode
 `apt-get update` antes de empacotar Linux. O script baixa **a versão exata** dos
 pacotes fonte das bibliotecas incorporadas, incluindo patches da distribuição.
-Se um mirror já tiver removido a versão instalada, atualize o runner ou use um
-snapshot consistente: a coleta falha em vez de distribuir fontes divergentes.
+`native-packages` usa a mesma resolução de dependências do empacotador e imprime
+somente os nomes dos pacotes binários instalados que fornecem bibliotecas e
+dados a incorporar. O CI atualiza essa lista limitada antes da cópia para que
+as versões instaladas correspondam às fontes ainda disponíveis nos mirrors.
+Não faz uma atualização geral do sistema. Se um mirror já tiver removido uma
+versão necessária, a coleta falha em vez de distribuir fontes divergentes.
 O passo `stage` funciona sem fontes APT, `rpm` ou ambiente gráfico.
 
 ## Conteúdo e verificação
