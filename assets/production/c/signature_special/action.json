@@ -1,0 +1,127 @@
+{
+  "sheet": "signature_special/keyed-spectacle-v1.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "signature_special_spectacle_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 435,
+        "h": 443
+      },
+      "pivot": {
+        "x": 195,
+        "y": 411
+      },
+      "duration_ms": 180,
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_spectacle_01",
+      "source_rect": {
+        "x": 443,
+        "y": 0,
+        "w": 442,
+        "h": 443
+      },
+      "pivot": {
+        "x": 174,
+        "y": 413
+      },
+      "duration_ms": 180,
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_spectacle_02",
+      "source_rect": {
+        "x": 886,
+        "y": 0,
+        "w": 414,
+        "h": 443
+      },
+      "pivot": {
+        "x": 172,
+        "y": 418
+      },
+      "duration_ms": 206,
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_spectacle_03",
+      "source_rect": {
+        "x": 1300,
+        "y": 0,
+        "w": 474,
+        "h": 443
+      },
+      "pivot": {
+        "x": 170,
+        "y": 422
+      },
+      "duration_ms": 100,
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_spectacle_04",
+      "source_rect": {
+        "x": 0,
+        "y": 443,
+        "w": 443,
+        "h": 444
+      },
+      "pivot": {
+        "x": 170,
+        "y": 359
+      },
+      "duration_ms": 134,
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_spectacle_05",
+      "source_rect": {
+        "x": 443,
+        "y": 443,
+        "w": 443,
+        "h": 444
+      },
+      "pivot": {
+        "x": 187,
+        "y": 357
+      },
+      "duration_ms": 100,
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_spectacle_06",
+      "source_rect": {
+        "x": 886,
+        "y": 443,
+        "w": 443,
+        "h": 444
+      },
+      "pivot": {
+        "x": 189,
+        "y": 365
+      },
+      "duration_ms": 400,
+      "phase": "recovery"
+    },
+    {
+      "name": "signature_special_spectacle_07",
+      "source_rect": {
+        "x": 1329,
+        "y": 443,
+        "w": 445,
+        "h": 444
+      },
+      "pivot": {
+        "x": 206,
+        "y": 389
+      },
+      "duration_ms": 400,
+      "phase": "recovery"
+    }
+  ]
+}

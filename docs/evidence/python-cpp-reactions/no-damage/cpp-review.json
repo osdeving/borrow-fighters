@@ -1,0 +1,4813 @@
+{
+  "audio": false,
+  "audio_delivery": "silent deterministic video; optional offline mix from the real World cues recorded below",
+  "barrage_log": true,
+  "feature_flags": {
+    "player_one_takes_damage": false,
+    "player_two_takes_damage": false
+  },
+  "fps": 60,
+  "live_audio_playback": false,
+  "max_frame_lateness_seconds": 0.0,
+  "no_damage": true,
+  "realtime": false,
+  "render_size": [
+    1280,
+    720
+  ],
+  "render_wall_time_seconds": 29.704962888,
+  "renderer": "draw_fight",
+  "scenarios": [
+    {
+      "arena": "BioTic",
+      "arena_transitions": [],
+      "audio_events": [
+        {
+          "character": "cpp",
+          "cue": "SuperStart",
+          "cue_key": "super.start",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 0,
+          "simulation_frame": 60,
+          "slot": "One",
+          "video_frame": 60,
+          "wall_time_seconds": 1.528004224
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperTyping",
+          "cue_key": "super.typing",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 25,
+          "simulation_frame": 85,
+          "slot": "One",
+          "video_frame": 85,
+          "wall_time_seconds": 2.310539553
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperEnter",
+          "cue_key": "super.enter",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 130,
+          "simulation_frame": 190,
+          "slot": "One",
+          "video_frame": 190,
+          "wall_time_seconds": 4.380218299
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperFootshot",
+          "cue_key": "super.footshot",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 184,
+          "simulation_frame": 244,
+          "slot": "One",
+          "video_frame": 244,
+          "wall_time_seconds": 5.639071654
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 344,
+          "simulation_frame": 404,
+          "slot": "One",
+          "video_frame": 404,
+          "wall_time_seconds": 10.411178957
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 344,
+          "simulation_frame": 404,
+          "slot": "One",
+          "video_frame": 404,
+          "wall_time_seconds": 10.411178957
+        },
+        {
+          "character": "python",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 344,
+          "simulation_frame": 404,
+          "slot": "Two",
+          "video_frame": 404,
+          "wall_time_seconds": 10.411178957
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 354,
+          "simulation_frame": 414,
+          "slot": "One",
+          "video_frame": 414,
+          "wall_time_seconds": 11.771069301
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 354,
+          "simulation_frame": 414,
+          "slot": "One",
+          "video_frame": 414,
+          "wall_time_seconds": 11.771069301
+        },
+        {
+          "character": "python",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 354,
+          "simulation_frame": 414,
+          "slot": "Two",
+          "video_frame": 414,
+          "wall_time_seconds": 11.771069301
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 364,
+          "simulation_frame": 424,
+          "slot": "One",
+          "video_frame": 424,
+          "wall_time_seconds": 13.123567419
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 364,
+          "simulation_frame": 424,
+          "slot": "One",
+          "video_frame": 424,
+          "wall_time_seconds": 13.123567419
+        },
+        {
+          "character": "python",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 364,
+          "simulation_frame": 424,
+          "slot": "Two",
+          "video_frame": 424,
+          "wall_time_seconds": 13.123567419
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 374,
+          "simulation_frame": 434,
+          "slot": "One",
+          "video_frame": 434,
+          "wall_time_seconds": 14.497413209
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 374,
+          "simulation_frame": 434,
+          "slot": "One",
+          "video_frame": 434,
+          "wall_time_seconds": 14.497413209
+        },
+        {
+          "character": "python",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 374,
+          "simulation_frame": 434,
+          "slot": "Two",
+          "video_frame": 434,
+          "wall_time_seconds": 14.497413209
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 384,
+          "simulation_frame": 444,
+          "slot": "One",
+          "video_frame": 444,
+          "wall_time_seconds": 15.914389047
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 384,
+          "simulation_frame": 444,
+          "slot": "One",
+          "video_frame": 444,
+          "wall_time_seconds": 15.914389047
+        },
+        {
+          "character": "python",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 384,
+          "simulation_frame": 444,
+          "slot": "Two",
+          "video_frame": 444,
+          "wall_time_seconds": 15.914389047
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 394,
+          "simulation_frame": 454,
+          "slot": "One",
+          "video_frame": 454,
+          "wall_time_seconds": 17.34112074
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 394,
+          "simulation_frame": 454,
+          "slot": "One",
+          "video_frame": 454,
+          "wall_time_seconds": 17.34112074
+        },
+        {
+          "character": "python",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 394,
+          "simulation_frame": 454,
+          "slot": "Two",
+          "video_frame": 454,
+          "wall_time_seconds": 17.34112074
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 404,
+          "simulation_frame": 464,
+          "slot": "One",
+          "video_frame": 464,
+          "wall_time_seconds": 18.698347776
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 404,
+          "simulation_frame": 464,
+          "slot": "One",
+          "video_frame": 464,
+          "wall_time_seconds": 18.698347776
+        },
+        {
+          "character": "python",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 404,
+          "simulation_frame": 464,
+          "slot": "Two",
+          "video_frame": 464,
+          "wall_time_seconds": 18.698347776
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 414,
+          "simulation_frame": 474,
+          "slot": "One",
+          "video_frame": 474,
+          "wall_time_seconds": 20.043990888
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 414,
+          "simulation_frame": 474,
+          "slot": "One",
+          "video_frame": 474,
+          "wall_time_seconds": 20.043990888
+        },
+        {
+          "character": "python",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 414,
+          "simulation_frame": 474,
+          "slot": "Two",
+          "video_frame": 474,
+          "wall_time_seconds": 20.043990888
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 424,
+          "simulation_frame": 484,
+          "slot": "One",
+          "video_frame": 484,
+          "wall_time_seconds": 21.385747635
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 424,
+          "simulation_frame": 484,
+          "slot": "One",
+          "video_frame": 484,
+          "wall_time_seconds": 21.385747635
+        },
+        {
+          "character": "python",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 424,
+          "simulation_frame": 484,
+          "slot": "Two",
+          "video_frame": 484,
+          "wall_time_seconds": 21.385747635
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperError",
+          "cue_key": "super.error",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 450,
+          "simulation_frame": 510,
+          "slot": "One",
+          "video_frame": 510,
+          "wall_time_seconds": 22.61133121
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperError",
+          "cue_key": "super.error",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 498,
+          "simulation_frame": 558,
+          "slot": "One",
+          "video_frame": 558,
+          "wall_time_seconds": 23.787226356
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBoot",
+          "cue_key": "super.boot",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 538,
+          "simulation_frame": 598,
+          "slot": "One",
+          "video_frame": 598,
+          "wall_time_seconds": 24.694062272
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 566,
+          "simulation_frame": 626,
+          "slot": "One",
+          "video_frame": 626,
+          "wall_time_seconds": 25.25987766
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 566,
+          "simulation_frame": 626,
+          "slot": "One",
+          "video_frame": 626,
+          "wall_time_seconds": 25.25987766
+        },
+        {
+          "character": "python",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 566,
+          "simulation_frame": 626,
+          "slot": "Two",
+          "video_frame": 626,
+          "wall_time_seconds": 25.25987766
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperEnd",
+          "cue_key": "super.end",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": null,
+          "simulation_frame": 692,
+          "slot": "One",
+          "video_frame": 692,
+          "wall_time_seconds": 27.823405244
+        }
+      ],
+      "barrage_frames": [
+        {
+          "age_since_contact_frames": 0,
+          "barrage_hit": 1,
+          "contact_tick": 344,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 344,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 404
+        },
+        {
+          "age_since_contact_frames": 1,
+          "barrage_hit": 1,
+          "contact_tick": 344,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 345,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 1,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.1111111119389534
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 405
+        },
+        {
+          "age_since_contact_frames": 2,
+          "barrage_hit": 1,
+          "contact_tick": 344,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 346,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 2,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.2222222238779068
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 406
+        },
+        {
+          "age_since_contact_frames": 3,
+          "barrage_hit": 1,
+          "contact_tick": 344,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 347,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 407
+        },
+        {
+          "age_since_contact_frames": 4,
+          "barrage_hit": 1,
+          "contact_tick": 344,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 348,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 4,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.4444444477558136
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 408
+        },
+        {
+          "age_since_contact_frames": 5,
+          "barrage_hit": 1,
+          "contact_tick": 344,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 349,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 5,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.555555522441864
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 409
+        },
+        {
+          "age_since_contact_frames": 6,
+          "barrage_hit": 1,
+          "contact_tick": 344,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 350,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 6,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.6666666269302368
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 410
+        },
+        {
+          "age_since_contact_frames": 7,
+          "barrage_hit": 1,
+          "contact_tick": 344,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 351,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 411
+        },
+        {
+          "age_since_contact_frames": 8,
+          "barrage_hit": 1,
+          "contact_tick": 344,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 352,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 8,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.8888888955116272
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 412
+        },
+        {
+          "age_since_contact_frames": 9,
+          "barrage_hit": 1,
+          "contact_tick": 344,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 353,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 9,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 1.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 413
+        },
+        {
+          "age_since_contact_frames": 0,
+          "barrage_hit": 2,
+          "contact_tick": 354,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 354,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 414
+        },
+        {
+          "age_since_contact_frames": 1,
+          "barrage_hit": 2,
+          "contact_tick": 354,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 355,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 1,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.1111111119389534
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 415
+        },
+        {
+          "age_since_contact_frames": 2,
+          "barrage_hit": 2,
+          "contact_tick": 354,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 356,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 2,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.2222222238779068
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 416
+        },
+        {
+          "age_since_contact_frames": 3,
+          "barrage_hit": 2,
+          "contact_tick": 354,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 357,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 417
+        },
+        {
+          "age_since_contact_frames": 4,
+          "barrage_hit": 2,
+          "contact_tick": 354,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 358,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 4,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.4444444477558136
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 418
+        },
+        {
+          "age_since_contact_frames": 5,
+          "barrage_hit": 2,
+          "contact_tick": 354,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 359,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 5,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.555555522441864
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 419
+        },
+        {
+          "age_since_contact_frames": 6,
+          "barrage_hit": 2,
+          "contact_tick": 354,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 360,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 6,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.6666666269302368
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 420
+        },
+        {
+          "age_since_contact_frames": 7,
+          "barrage_hit": 2,
+          "contact_tick": 354,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 361,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 421
+        },
+        {
+          "age_since_contact_frames": 8,
+          "barrage_hit": 2,
+          "contact_tick": 354,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 362,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 8,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.8888888955116272
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 422
+        },
+        {
+          "age_since_contact_frames": 9,
+          "barrage_hit": 2,
+          "contact_tick": 354,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 363,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 9,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 1.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 423
+        },
+        {
+          "age_since_contact_frames": 0,
+          "barrage_hit": 3,
+          "contact_tick": 364,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 364,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 424
+        },
+        {
+          "age_since_contact_frames": 1,
+          "barrage_hit": 3,
+          "contact_tick": 364,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 365,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 1,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.1111111119389534
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 425
+        },
+        {
+          "age_since_contact_frames": 2,
+          "barrage_hit": 3,
+          "contact_tick": 364,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 366,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 2,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.2222222238779068
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 426
+        },
+        {
+          "age_since_contact_frames": 3,
+          "barrage_hit": 3,
+          "contact_tick": 364,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 367,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 427
+        },
+        {
+          "age_since_contact_frames": 4,
+          "barrage_hit": 3,
+          "contact_tick": 364,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 368,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 4,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.4444444477558136
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 428
+        },
+        {
+          "age_since_contact_frames": 5,
+          "barrage_hit": 3,
+          "contact_tick": 364,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 369,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 5,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.555555522441864
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 429
+        },
+        {
+          "age_since_contact_frames": 6,
+          "barrage_hit": 3,
+          "contact_tick": 364,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 370,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 6,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.6666666269302368
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 430
+        },
+        {
+          "age_since_contact_frames": 7,
+          "barrage_hit": 3,
+          "contact_tick": 364,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 371,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 431
+        },
+        {
+          "age_since_contact_frames": 8,
+          "barrage_hit": 3,
+          "contact_tick": 364,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 372,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 8,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.8888888955116272
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 432
+        },
+        {
+          "age_since_contact_frames": 9,
+          "barrage_hit": 3,
+          "contact_tick": 364,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 373,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 9,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 1.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 433
+        },
+        {
+          "age_since_contact_frames": 0,
+          "barrage_hit": 4,
+          "contact_tick": 374,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 374,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 434
+        },
+        {
+          "age_since_contact_frames": 1,
+          "barrage_hit": 4,
+          "contact_tick": 374,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 375,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 1,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.1111111119389534
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 435
+        },
+        {
+          "age_since_contact_frames": 2,
+          "barrage_hit": 4,
+          "contact_tick": 374,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 376,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 2,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.2222222238779068
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 436
+        },
+        {
+          "age_since_contact_frames": 3,
+          "barrage_hit": 4,
+          "contact_tick": 374,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 377,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 437
+        },
+        {
+          "age_since_contact_frames": 4,
+          "barrage_hit": 4,
+          "contact_tick": 374,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 378,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 4,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.4444444477558136
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 438
+        },
+        {
+          "age_since_contact_frames": 5,
+          "barrage_hit": 4,
+          "contact_tick": 374,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 379,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 5,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.555555522441864
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 439
+        },
+        {
+          "age_since_contact_frames": 6,
+          "barrage_hit": 4,
+          "contact_tick": 374,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 380,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 6,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.6666666269302368
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 440
+        },
+        {
+          "age_since_contact_frames": 7,
+          "barrage_hit": 4,
+          "contact_tick": 374,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 381,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 441
+        },
+        {
+          "age_since_contact_frames": 8,
+          "barrage_hit": 4,
+          "contact_tick": 374,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 382,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 8,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.8888888955116272
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 442
+        },
+        {
+          "age_since_contact_frames": 9,
+          "barrage_hit": 4,
+          "contact_tick": 374,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 383,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 9,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 1.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 443
+        },
+        {
+          "age_since_contact_frames": 0,
+          "barrage_hit": 5,
+          "contact_tick": 384,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 384,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 444
+        },
+        {
+          "age_since_contact_frames": 1,
+          "barrage_hit": 5,
+          "contact_tick": 384,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 385,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 1,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.1111111119389534
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 445
+        },
+        {
+          "age_since_contact_frames": 2,
+          "barrage_hit": 5,
+          "contact_tick": 384,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 386,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 2,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.2222222238779068
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 446
+        },
+        {
+          "age_since_contact_frames": 3,
+          "barrage_hit": 5,
+          "contact_tick": 384,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 387,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 447
+        },
+        {
+          "age_since_contact_frames": 4,
+          "barrage_hit": 5,
+          "contact_tick": 384,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 388,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 4,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.4444444477558136
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 448
+        },
+        {
+          "age_since_contact_frames": 5,
+          "barrage_hit": 5,
+          "contact_tick": 384,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 389,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 5,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.555555522441864
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 449
+        },
+        {
+          "age_since_contact_frames": 6,
+          "barrage_hit": 5,
+          "contact_tick": 384,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 390,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 6,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.6666666269302368
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 450
+        },
+        {
+          "age_since_contact_frames": 7,
+          "barrage_hit": 5,
+          "contact_tick": 384,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 391,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 451
+        },
+        {
+          "age_since_contact_frames": 8,
+          "barrage_hit": 5,
+          "contact_tick": 384,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 392,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 8,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.8888888955116272
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 452
+        },
+        {
+          "age_since_contact_frames": 9,
+          "barrage_hit": 5,
+          "contact_tick": 384,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 393,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 9,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 1.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 453
+        },
+        {
+          "age_since_contact_frames": 0,
+          "barrage_hit": 6,
+          "contact_tick": 394,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 394,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 454
+        },
+        {
+          "age_since_contact_frames": 1,
+          "barrage_hit": 6,
+          "contact_tick": 394,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 395,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 1,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.1111111119389534
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 455
+        },
+        {
+          "age_since_contact_frames": 2,
+          "barrage_hit": 6,
+          "contact_tick": 394,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 396,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 2,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.2222222238779068
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 456
+        },
+        {
+          "age_since_contact_frames": 3,
+          "barrage_hit": 6,
+          "contact_tick": 394,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 397,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 457
+        },
+        {
+          "age_since_contact_frames": 4,
+          "barrage_hit": 6,
+          "contact_tick": 394,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 398,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 4,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.4444444477558136
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 458
+        },
+        {
+          "age_since_contact_frames": 5,
+          "barrage_hit": 6,
+          "contact_tick": 394,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 399,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 5,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.555555522441864
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 459
+        },
+        {
+          "age_since_contact_frames": 6,
+          "barrage_hit": 6,
+          "contact_tick": 394,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 400,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 6,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.6666666269302368
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 460
+        },
+        {
+          "age_since_contact_frames": 7,
+          "barrage_hit": 6,
+          "contact_tick": 394,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 401,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 461
+        },
+        {
+          "age_since_contact_frames": 8,
+          "barrage_hit": 6,
+          "contact_tick": 394,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 402,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 8,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.8888888955116272
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 462
+        },
+        {
+          "age_since_contact_frames": 9,
+          "barrage_hit": 6,
+          "contact_tick": 394,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 403,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 9,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 1.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 463
+        },
+        {
+          "age_since_contact_frames": 0,
+          "barrage_hit": 7,
+          "contact_tick": 404,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 404,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 464
+        },
+        {
+          "age_since_contact_frames": 1,
+          "barrage_hit": 7,
+          "contact_tick": 404,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 405,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 1,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.1111111119389534
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 465
+        },
+        {
+          "age_since_contact_frames": 2,
+          "barrage_hit": 7,
+          "contact_tick": 404,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 406,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 2,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.2222222238779068
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 466
+        },
+        {
+          "age_since_contact_frames": 3,
+          "barrage_hit": 7,
+          "contact_tick": 404,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 407,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 467
+        },
+        {
+          "age_since_contact_frames": 4,
+          "barrage_hit": 7,
+          "contact_tick": 404,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 408,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 4,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.4444444477558136
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 468
+        },
+        {
+          "age_since_contact_frames": 5,
+          "barrage_hit": 7,
+          "contact_tick": 404,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 409,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 5,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.555555522441864
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 469
+        },
+        {
+          "age_since_contact_frames": 6,
+          "barrage_hit": 7,
+          "contact_tick": 404,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 410,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 6,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.6666666269302368
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 470
+        },
+        {
+          "age_since_contact_frames": 7,
+          "barrage_hit": 7,
+          "contact_tick": 404,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 411,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 471
+        },
+        {
+          "age_since_contact_frames": 8,
+          "barrage_hit": 7,
+          "contact_tick": 404,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 412,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 8,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.8888888955116272
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 472
+        },
+        {
+          "age_since_contact_frames": 9,
+          "barrage_hit": 7,
+          "contact_tick": 404,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 413,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 9,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 1.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 473
+        },
+        {
+          "age_since_contact_frames": 0,
+          "barrage_hit": 8,
+          "contact_tick": 414,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 414,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 474
+        },
+        {
+          "age_since_contact_frames": 1,
+          "barrage_hit": 8,
+          "contact_tick": 414,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 415,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 1,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.1111111119389534
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 475
+        },
+        {
+          "age_since_contact_frames": 2,
+          "barrage_hit": 8,
+          "contact_tick": 414,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 416,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 2,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.2222222238779068
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 476
+        },
+        {
+          "age_since_contact_frames": 3,
+          "barrage_hit": 8,
+          "contact_tick": 414,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 417,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 477
+        },
+        {
+          "age_since_contact_frames": 4,
+          "barrage_hit": 8,
+          "contact_tick": 414,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 418,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 4,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.4444444477558136
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 478
+        },
+        {
+          "age_since_contact_frames": 5,
+          "barrage_hit": 8,
+          "contact_tick": 414,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 419,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 5,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.555555522441864
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 479
+        },
+        {
+          "age_since_contact_frames": 6,
+          "barrage_hit": 8,
+          "contact_tick": 414,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 420,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 6,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.6666666269302368
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_02",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 480
+        },
+        {
+          "age_since_contact_frames": 7,
+          "barrage_hit": 8,
+          "contact_tick": 414,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 421,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 481
+        },
+        {
+          "age_since_contact_frames": 8,
+          "barrage_hit": 8,
+          "contact_tick": 414,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 422,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 8,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.8888888955116272
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 482
+        },
+        {
+          "age_since_contact_frames": 9,
+          "barrage_hit": 8,
+          "contact_tick": 414,
+          "health": [
+            98,
+            96
+          ],
+          "sequence_tick": 423,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 9,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 1.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "video_frame": 483
+        }
+      ],
+      "character": "cpp",
+      "damage": 0,
+      "duration_frames": 632,
+      "final_effective_arena": "BioTic",
+      "final_health": [
+        98,
+        96
+      ],
+      "guarded": false,
+      "initial_health": [
+        98,
+        96
+      ],
+      "move": "Undefined Behavior: Footgun",
+      "music_track": "combat-rins-theme",
+      "no_damage": true,
+      "opponent": "python",
+      "reverse": false,
+      "screenshots": [
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-030-before.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 30,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_02",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 30
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-064-Freeze.png",
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "simulation_frame": 64,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_02",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 64
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-138-CppLaptop.png",
+          "phase": "CppLaptop",
+          "sequence_tick": 78,
+          "simulation_frame": 138,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_00",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 138
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-235-CppFootshot.png",
+          "phase": "CppFootshot",
+          "sequence_tick": 175,
+          "simulation_frame": 235,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_01",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 235
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-244-footshot.png",
+          "phase": "CppFootshot",
+          "sequence_tick": 184,
+          "simulation_frame": 244,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_02",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 244
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-286-CppHop.png",
+          "phase": "CppHop",
+          "sequence_tick": 226,
+          "simulation_frame": 286,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_02",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 286
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-325-CppRage.png",
+          "phase": "CppRage",
+          "sequence_tick": 265,
+          "simulation_frame": 325,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_02",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 325
+        },
+        {
+          "actor_x": 533.3333129882812,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-372-CppCharge.png",
+          "phase": "CppCharge",
+          "sequence_tick": 312,
+          "simulation_frame": 372,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_02",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 372
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-404-barrage-1-age-0.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 344,
+          "simulation_frame": 404,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 404
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-407-barrage-1-age-3.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 347,
+          "simulation_frame": 407,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 407
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-411-barrage-1-age-7.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 351,
+          "simulation_frame": 411,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 411
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-414-barrage-2-age-0.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 354,
+          "simulation_frame": 414,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 414
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-417-barrage-2-age-3.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 357,
+          "simulation_frame": 417,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 417
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-421-barrage-2-age-7.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 361,
+          "simulation_frame": 421,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 421
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-424-barrage-3-age-0.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 364,
+          "simulation_frame": 424,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 424
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-427-barrage-3-age-3.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 367,
+          "simulation_frame": 427,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 427
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-431-barrage-3-age-7.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 371,
+          "simulation_frame": 431,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 431
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-434-barrage-4-age-0.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 374,
+          "simulation_frame": 434,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 434
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-437-barrage-4-age-3.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 377,
+          "simulation_frame": 437,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 437
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-441-barrage-4-age-7.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 381,
+          "simulation_frame": 441,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 441
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-444-barrage-5-age-0.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 384,
+          "simulation_frame": 444,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 444
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-447-barrage-5-age-3.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 387,
+          "simulation_frame": 447,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 447
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-451-barrage-5-age-7.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 391,
+          "simulation_frame": 451,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 451
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-454-barrage-6-age-0.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 394,
+          "simulation_frame": 454,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 454
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-457-barrage-6-age-3.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 397,
+          "simulation_frame": 457,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 457
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-461-barrage-6-age-7.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 401,
+          "simulation_frame": 461,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 461
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-464-barrage-7-age-0.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 404,
+          "simulation_frame": 464,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 464
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-467-barrage-7-age-3.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 407,
+          "simulation_frame": 467,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 467
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-471-barrage-7-age-7.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 411,
+          "simulation_frame": 471,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 471
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-474-barrage-8-age-0.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 414,
+          "simulation_frame": 474,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_00",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 474
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-477-barrage-8-age-3.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 417,
+          "simulation_frame": 477,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.3333333432674408
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_01",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 477
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-481-barrage-8-age-7.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 421,
+          "simulation_frame": 481,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 7,
+              "cinematic": true,
+              "duration_frames": 9.0,
+              "profile": "Head",
+              "progress": 0.7777777314186096
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_head",
+            "sprite_frame": "reaction_head_03",
+            "state_clip": "heavy_hit"
+          },
+          "target_x": 1056.0,
+          "video_frame": 481
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-484-contact-424.png",
+          "phase": "CppFinisher",
+          "sequence_tick": 424,
+          "simulation_frame": 484,
+          "target": {
+            "air_reaction": true,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 24.727272033691406,
+              "profile": "Launch",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": false,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_launch",
+            "sprite_frame": "reaction_launch_00",
+            "state_clip": "launched"
+          },
+          "target_x": 1056.0,
+          "video_frame": 484
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-497-CppFinisher.png",
+          "phase": "CppFinisher",
+          "sequence_tick": 437,
+          "simulation_frame": 497,
+          "target": {
+            "air_reaction": true,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 13,
+              "cinematic": true,
+              "duration_frames": 24.727272033691406,
+              "profile": "Launch",
+              "progress": 0.5257353186607361
+            },
+            "forced_clip": null,
+            "grounded": false,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1081.235107421875,
+            "physical_y": 349.38885498046875,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_launch",
+            "sprite_frame": "reaction_launch_02",
+            "state_clip": "launched"
+          },
+          "target_x": 1081.235107421875,
+          "video_frame": 497
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-534-CTerminalStorm.png",
+          "phase": "CTerminalStorm",
+          "sequence_tick": 474,
+          "simulation_frame": 534,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 5,
+              "cinematic": true,
+              "duration_frames": 15.120001792907715,
+              "profile": "Rise",
+              "progress": 0.3386249542236328
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": true,
+            "physical_x": 1102.587890625,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_rise",
+            "sprite_frame": "reaction_rise_01",
+            "state_clip": "knockdown"
+          },
+          "target_x": 1102.587890625,
+          "video_frame": 534
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-578-CBlueScreen.png",
+          "phase": "CBlueScreen",
+          "sequence_tick": 518,
+          "simulation_frame": 578,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1102.587890625,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_01",
+            "state_clip": "idle"
+          },
+          "target_x": 1102.587890625,
+          "video_frame": 578
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-612-CBios.png",
+          "phase": "CBios",
+          "sequence_tick": 552,
+          "simulation_frame": 612,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1102.587890625,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_00",
+            "state_clip": "idle"
+          },
+          "target_x": 1102.587890625,
+          "video_frame": 612
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-626-contact-566.png",
+          "phase": "CReboot",
+          "sequence_tick": 566,
+          "simulation_frame": 626,
+          "target": {
+            "air_reaction": true,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 24.727272033691406,
+              "profile": "Launch",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": false,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1102.587890625,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_launch",
+            "sprite_frame": "reaction_launch_00",
+            "state_clip": "launched"
+          },
+          "target_x": 1102.587890625,
+          "video_frame": 626
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-641-CReboot.png",
+          "phase": "CReboot",
+          "sequence_tick": 581,
+          "simulation_frame": 641,
+          "target": {
+            "air_reaction": true,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 15,
+              "cinematic": true,
+              "duration_frames": 24.727272033691406,
+              "profile": "Launch",
+              "progress": 0.6066176295280457
+            },
+            "forced_clip": null,
+            "grounded": false,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1103.44482421875,
+            "physical_y": 351.9999694824219,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_launch",
+            "sprite_frame": "reaction_launch_02",
+            "state_clip": "launched"
+          },
+          "target_x": 1103.44482421875,
+          "video_frame": 641
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-674-Restore.png",
+          "phase": "Restore",
+          "sequence_tick": 614,
+          "simulation_frame": 674,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": {
+              "age_frames": 3,
+              "cinematic": true,
+              "duration_frames": 15.120001792907715,
+              "profile": "Rise",
+              "progress": 0.206349715590477
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": true,
+            "physical_x": 1103.958984375,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_rise",
+            "sprite_frame": "reaction_rise_00",
+            "state_clip": "knockdown"
+          },
+          "target_x": 1103.958984375,
+          "video_frame": 674
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "BioTic",
+          "health": [
+            98,
+            96
+          ],
+          "image": "cpp-right-hit-732-restored.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 732,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "python",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 96,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1103.958984375,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_03",
+            "state_clip": "idle"
+          },
+          "target_x": 1103.958984375,
+          "video_frame": 732
+        }
+      ],
+      "simulation_frames": [
+        0,
+        781
+      ],
+      "video_frames": [
+        0,
+        781
+      ],
+      "wall_time_seconds": 29.703111556
+    }
+  ],
+  "simulation": "World fixed-step with explicit feature flags; real contacts, physical C++ rush, snapshots at authored phase clocks",
+  "simulation_frame_count": 782,
+  "snapshots": true,
+  "video": "/tmp/borrow25-no-damage/cpp-silent.mp4",
+  "video_duration_seconds": 13.033333333333333,
+  "video_frame_count": 782
+}

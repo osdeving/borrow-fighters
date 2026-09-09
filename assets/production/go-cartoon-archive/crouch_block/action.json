@@ -1,0 +1,56 @@
+{
+  "action": "crouch_block",
+  "source": "crouch_block/source-v2.png",
+  "sheet": "crouch_block/keyed.png",
+  "loop": false,
+  "source_body_height_reference_px": 444,
+  "normalization_note": "Deep crouching guard v2 selected. Standing-height reference444 is inherited from the crouch sheet whose head size matches this sheet. v1 was a shallow squat and rejected.",
+  "frames": [
+    {
+      "name": "crouch_block_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 370,
+        "y": 761
+      },
+      "duration_ms": 70,
+      "phase": "crouch_block"
+    },
+    {
+      "name": "crouch_block_01",
+      "source_rect": {
+        "x": 591,
+        "y": 0,
+        "w": 592,
+        "h": 887
+      },
+      "pivot": {
+        "x": 298,
+        "y": 761
+      },
+      "duration_ms": 80,
+      "phase": "crouch_block"
+    },
+    {
+      "name": "crouch_block_02",
+      "source_rect": {
+        "x": 1183,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 223,
+        "y": 762
+      },
+      "duration_ms": 150,
+      "phase": "crouch_block"
+    }
+  ],
+  "review_notes": "Built-in image_gen, original narrow Go master and generated idle continuity. Flat magenta extracted without Rust contour mode; isolated matte corner pixels removed where present. Candidate visual only; baseline combat remains authoritative."
+}

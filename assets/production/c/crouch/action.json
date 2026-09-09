@@ -1,0 +1,49 @@
+{
+  "action": "crouch",
+  "source": "crouch/source-v2.png",
+  "sheet": "crouch/keyed-v2.png",
+  "loop": false,
+  "reviewed": false,
+  "status": "candidate: source and two-facing previews inspected; real Combat Lab captured; artistic limitations recorded in review.md",
+  "source_body_height_reference_px": 630,
+  "frames": [
+    {
+      "name": "crouch_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 768
+      },
+      "pivot": {
+        "x": 650,
+        "y": 716
+      },
+      "duration_ms": 60,
+      "phase": "deep_duck_entry"
+    },
+    {
+      "name": "crouch_1",
+      "source_rect": {
+        "x": 1024,
+        "y": 0,
+        "w": 1024,
+        "h": 768
+      },
+      "pivot": {
+        "x": 320,
+        "y": 716
+      },
+      "duration_ms": 200,
+      "phase": "deep_duck_hold"
+    }
+  ],
+  "review_notes": "v2 replaces upright squat with folded torso over tightly bent legs. Same source scale; hold height about140world px, close to128physical, rather than prior190\u2013205. Entry is slightly higher for60ms. No physics changed.",
+  "runtime_review": {
+    "report": "../../candidates/c/review/runtime-lab-final/capture-report.json",
+    "loaded_manifest_matches_candidate": true,
+    "clip_captured": true,
+    "final_art_approved": false,
+    "low_pose_update": "New compact source replaces prior source reviewed in full Lab; localized real Lab recapture follows."
+  }
+}

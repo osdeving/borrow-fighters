@@ -1,0 +1,101 @@
+{
+  "action": "throw",
+  "source": "throw/source-spectacle-v3.png",
+  "sheet": "throw/mapped-spectacle-v3.png",
+  "reviewed": true,
+  "loop": false,
+  "status": "runtime_reviewed",
+  "frames": [
+    {
+      "name": "throw_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 530,
+        "h": 543
+      },
+      "pivot": {
+        "x": 277,
+        "y": 480
+      },
+      "duration_ms": 166,
+      "phase": "startup"
+    },
+    {
+      "name": "throw_01",
+      "source_rect": {
+        "x": 530,
+        "y": 0,
+        "w": 435,
+        "h": 543
+      },
+      "pivot": {
+        "x": 155,
+        "y": 480
+      },
+      "duration_ms": 100,
+      "phase": "capture"
+    },
+    {
+      "name": "throw_02",
+      "source_rect": {
+        "x": 965,
+        "y": 0,
+        "w": 483,
+        "h": 543
+      },
+      "pivot": {
+        "x": 220,
+        "y": 480
+      },
+      "duration_ms": 100,
+      "phase": "capture"
+    },
+    {
+      "name": "throw_03",
+      "source_rect": {
+        "x": 0,
+        "y": 543,
+        "w": 480,
+        "h": 543
+      },
+      "pivot": {
+        "x": 276,
+        "y": 420
+      },
+      "duration_ms": 67,
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_04",
+      "source_rect": {
+        "x": 480,
+        "y": 543,
+        "w": 485,
+        "h": 543
+      },
+      "pivot": {
+        "x": 175,
+        "y": 420
+      },
+      "duration_ms": 133,
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_05",
+      "source_rect": {
+        "x": 965,
+        "y": 543,
+        "w": 483,
+        "h": 543
+      },
+      "pivot": {
+        "x": 204,
+        "y": 420
+      },
+      "duration_ms": 234,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Six newly drawn back-throw poses. v2 corrects release hands to throw behind LEFT; other poses preserve identity. Fixed10..12 contact,12fcapture, releasevisual22; originalmapping archived. Uniform scale0.7 and explicit foot pivots. v3 replaces only lift pose2: open supporting hands reach forward above forehead toward the captured body, instead of clasping behind the head. Other five source crops remain byte-identical to v2. See throw/mapping-spectacle-v3.json."
+}

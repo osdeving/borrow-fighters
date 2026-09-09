@@ -1,0 +1,2925 @@
+{
+  "schema": "borrow-fighters.sprite-provenance.v1",
+  "character": "python",
+  "production": "../../production/python/production.json",
+  "production_sha256": "1cb75118ac2d4e75e1890c6b60c3b1c8165ab12fd24be498904c375eb0378f4d",
+  "production_snapshot": {
+    "schema": "borrow-fighters.production.v1",
+    "character": "python",
+    "scale": 1.0,
+    "provenance": {
+      "status": "candidate",
+      "generator": "built-in imagegen",
+      "identity_reference": "reference/master-existing.png",
+      "combat": "Visual-only; baseline combat_manifest retained.",
+      "review": "finalization-review.md"
+    },
+    "actions": {
+      "idle": {
+        "sheet": "idle/prepared.png",
+        "reviewed": true,
+        "loop": true,
+        "frames": [
+          {
+            "name": "idle_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 221,
+              "h": 332
+            },
+            "pivot": {
+              "x": 120,
+              "y": 302
+            },
+            "duration_ms": 180,
+            "phase": "idle"
+          },
+          {
+            "name": "idle_01",
+            "source_rect": {
+              "x": 221,
+              "y": 0,
+              "w": 221,
+              "h": 332
+            },
+            "pivot": {
+              "x": 121,
+              "y": 302
+            },
+            "duration_ms": 180,
+            "phase": "idle"
+          },
+          {
+            "name": "idle_02",
+            "source_rect": {
+              "x": 442,
+              "y": 0,
+              "w": 221,
+              "h": 332
+            },
+            "pivot": {
+              "x": 121,
+              "y": 302
+            },
+            "duration_ms": 180,
+            "phase": "idle"
+          },
+          {
+            "name": "idle_03",
+            "source_rect": {
+              "x": 663,
+              "y": 0,
+              "w": 221,
+              "h": 332
+            },
+            "pivot": {
+              "x": 121,
+              "y": 302
+            },
+            "duration_ms": 180,
+            "phase": "idle"
+          }
+        ],
+        "provenance": {
+          "source_action": "idle/action.json",
+          "source_sheet": "idle/keyed.png",
+          "scale_to_runtime": 0.432258,
+          "review": "Four subtle breathing keys, stable feet and face; permanent original reference retained. Alpha inspected. Slender adult silhouette intentionally preserves original proportions; width below the generic humanoid idle guide is documented for review."
+        }
+      },
+      "walk": {
+        "sheet": "walk/prepared.png",
+        "reviewed": true,
+        "loop": true,
+        "frames": [
+          {
+            "name": "walk_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 229,
+              "h": 343
+            },
+            "pivot": {
+              "x": 127,
+              "y": 304
+            },
+            "duration_ms": 100,
+            "phase": "near_contact"
+          },
+          {
+            "name": "walk_01",
+            "source_rect": {
+              "x": 229,
+              "y": 0,
+              "w": 229,
+              "h": 343
+            },
+            "pivot": {
+              "x": 134,
+              "y": 308
+            },
+            "duration_ms": 100,
+            "phase": "far_toe_off"
+          },
+          {
+            "name": "walk_02",
+            "source_rect": {
+              "x": 458,
+              "y": 0,
+              "w": 229,
+              "h": 343
+            },
+            "pivot": {
+              "x": 120,
+              "y": 308
+            },
+            "duration_ms": 100,
+            "phase": "far_contact"
+          },
+          {
+            "name": "walk_03",
+            "source_rect": {
+              "x": 687,
+              "y": 0,
+              "w": 229,
+              "h": 343
+            },
+            "pivot": {
+              "x": 113,
+              "y": 308
+            },
+            "duration_ms": 100,
+            "phase": "near_toe_off"
+          }
+        ],
+        "provenance": {
+          "source_action": "walk/action.json",
+          "source_sheet": "walk/keyed-v8.png",
+          "scale_to_runtime": 0.44666666666666666,
+          "review": "v8 preserves fixed Python identity and uses C walk v3 only as leg pose reference. Opposite thigh overlap and arm swing; four whole bodies, near_contact/far_toe_off/far_contact/near_toe_off, 400ms unchanged. v4-v7 rejected for repeated or wrong crossing. Both toe-off keys named honestly. Native World both facings and default-app match reviewed; primary agent accepted walk."
+        }
+      },
+      "jump": {
+        "sheet": "jump/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "jump_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 236,
+              "h": 355
+            },
+            "pivot": {
+              "x": 132,
+              "y": 318
+            },
+            "duration_ms": 60,
+            "phase": "takeoff"
+          },
+          {
+            "name": "jump_01",
+            "source_rect": {
+              "x": 237,
+              "y": 0,
+              "w": 236,
+              "h": 355
+            },
+            "pivot": {
+              "x": 119,
+              "y": 302
+            },
+            "duration_ms": 340,
+            "phase": "rise"
+          },
+          {
+            "name": "jump_02",
+            "source_rect": {
+              "x": 474,
+              "y": 0,
+              "w": 237,
+              "h": 355
+            },
+            "pivot": {
+              "x": 113,
+              "y": 318
+            },
+            "duration_ms": 400,
+            "phase": "fall"
+          }
+        ],
+        "provenance": {
+          "source_action": "jump/action.json",
+          "source_sheet": "jump/keyed.png",
+          "scale_to_runtime": 0.4,
+          "review": "Three airborne keys. Pivots calibrated to keep head/waist of rising and falling poses aligned despite source drawing displacement; the World supplies the flight path. No grounded landing pose, whole accessories preserved."
+        }
+      },
+      "crouch": {
+        "sheet": "crouch/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "crouch_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 273,
+              "h": 273
+            },
+            "pivot": {
+              "x": 142,
+              "y": 227
+            },
+            "duration_ms": 100,
+            "phase": "entry"
+          },
+          {
+            "name": "crouch_01",
+            "source_rect": {
+              "x": 273,
+              "y": 0,
+              "w": 273,
+              "h": 273
+            },
+            "pivot": {
+              "x": 116,
+              "y": 234
+            },
+            "duration_ms": 220,
+            "phase": "hold"
+          }
+        ],
+        "provenance": {
+          "source_action": "crouch/action.json",
+          "source_sheet": "crouch/keyed.png",
+          "scale_to_runtime": 0.308046,
+          "review": "Two selected low-posture keys; normalization matches the generated head/hand size to idle instead of fitting each crouch to standing height. Shoe/knee/palm support explicitly reviewed. White blouse and hair retain clean contour."
+        }
+      },
+      "block": {
+        "sheet": "block/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "block_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 335,
+              "h": 335
+            },
+            "pivot": {
+              "x": 213,
+              "y": 298
+            },
+            "duration_ms": 100,
+            "phase": "guard"
+          },
+          {
+            "name": "block_01",
+            "source_rect": {
+              "x": 335,
+              "y": 0,
+              "w": 335,
+              "h": 335
+            },
+            "pivot": {
+              "x": 130,
+              "y": 300
+            },
+            "duration_ms": 220,
+            "phase": "brace"
+          }
+        ],
+        "provenance": {
+          "source_action": "block/action.json",
+          "source_sheet": "block/keyed.png",
+          "scale_to_runtime": 0.377465,
+          "review": "Immediate crossed-forearm guard and braced impact, followed by held guard. Two distinct body responses, stable support on both feet. Head and clothing sizes normalized uniformly from upright reference."
+        }
+      },
+      "crouch_block": {
+        "sheet": "crouch_block/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "crouch_block_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 352,
+              "h": 264
+            },
+            "pivot": {
+              "x": 210,
+              "y": 222
+            },
+            "duration_ms": 100,
+            "phase": "guard"
+          },
+          {
+            "name": "crouch_block_01",
+            "source_rect": {
+              "x": 352,
+              "y": 0,
+              "w": 352,
+              "h": 264
+            },
+            "pivot": {
+              "x": 115,
+              "y": 222
+            },
+            "duration_ms": 220,
+            "phase": "brace"
+          }
+        ],
+        "provenance": {
+          "source_action": "crouch_block/action.json",
+          "source_sheet": "crouch_block/keyed.png",
+          "scale_to_runtime": 0.34359,
+          "review": "Two tight low-guard keys, distinct from standing block. Knees and shoes support the same floor, cloth/snake continuous. Normalization based on head/hand size, not cropped posture height."
+        }
+      },
+      "hit": {
+        "sheet": "hit/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "hit_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 293,
+              "h": 330
+            },
+            "pivot": {
+              "x": 181,
+              "y": 300
+            },
+            "duration_ms": 90,
+            "phase": "impact"
+          },
+          {
+            "name": "hit_01",
+            "source_rect": {
+              "x": 295,
+              "y": 0,
+              "w": 295,
+              "h": 330
+            },
+            "pivot": {
+              "x": 142,
+              "y": 302
+            },
+            "duration_ms": 100,
+            "phase": "brace"
+          },
+          {
+            "name": "hit_02",
+            "source_rect": {
+              "x": 590,
+              "y": 0,
+              "w": 294,
+              "h": 330
+            },
+            "pivot": {
+              "x": 116,
+              "y": 302
+            },
+            "duration_ms": 130,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "hit/action.json",
+          "source_sheet": "hit/keyed.png",
+          "scale_to_runtime": 0.430177,
+          "review": "Immediate recoil, forward brace and recovery to ready stance. Supports and full accessories checked, no embedded victim or hit effect."
+        }
+      },
+      "punch_heavy": {
+        "sheet": "punch_heavy/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "punch_heavy_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 303,
+              "h": 341
+            },
+            "pivot": {
+              "x": 131,
+              "y": 310
+            },
+            "duration_ms": 166,
+            "phase": "startup"
+          },
+          {
+            "name": "punch_heavy_01",
+            "source_rect": {
+              "x": 304,
+              "y": 0,
+              "w": 304,
+              "h": 341
+            },
+            "pivot": {
+              "x": 117,
+              "y": 310
+            },
+            "duration_ms": 150,
+            "phase": "active"
+          },
+          {
+            "name": "punch_heavy_02",
+            "source_rect": {
+              "x": 608,
+              "y": 0,
+              "w": 304,
+              "h": 341
+            },
+            "pivot": {
+              "x": 131,
+              "y": 310
+            },
+            "duration_ms": 200,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "punch_heavy/action.json",
+          "source_sheet": "punch_heavy/keyed.png",
+          "scale_to_runtime": 0.444444,
+          "review": "Low cross with pronounced forward lean; active fist around1273,425 at feet-anchor946,698 projects to(+145,-121), inside baseline heavy box. Uniform scale from recovery upright body. Review in Lab pending."
+        }
+      },
+      "kick": {
+        "sheet": "kick/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "kick_0",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 392,
+              "h": 294
+            },
+            "pivot": {
+              "x": 176,
+              "y": 280
+            },
+            "duration_ms": 133,
+            "phase": "startup"
+          },
+          {
+            "name": "kick_1",
+            "source_rect": {
+              "x": 392,
+              "y": 0,
+              "w": 392,
+              "h": 294
+            },
+            "pivot": {
+              "x": 76,
+              "y": 280
+            },
+            "duration_ms": 117,
+            "phase": "active"
+          },
+          {
+            "name": "kick_2",
+            "source_rect": {
+              "x": 784,
+              "y": 0,
+              "w": 392,
+              "h": 294
+            },
+            "pivot": {
+              "x": 176,
+              "y": 272
+            },
+            "duration_ms": 83,
+            "phase": "recovery"
+          },
+          {
+            "name": "kick_3",
+            "source_rect": {
+              "x": 1176,
+              "y": 0,
+              "w": 392,
+              "h": 294
+            },
+            "pivot": {
+              "x": 119,
+              "y": 274
+            },
+            "duration_ms": 83,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "kick/action.json",
+          "source_sheet": "kick/keyed-v5.png",
+          "scale_to_runtime": 0.5414141414141415,
+          "review": "v5 raises black shoe into original active band. Four generated keys, baseline133/117/166ms kept as133/117/83/83ms. Whole shoe lies in vertical contact band; local uneven magenta removed from separate keyed sheet, source intact. Native Lab and full World reviewed; primary agent accepted contact and default-app match."
+        }
+      },
+      "punch_light": {
+        "sheet": "punch_light/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "punch_light_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 295,
+              "h": 332
+            },
+            "pivot": {
+              "x": 143,
+              "y": 302
+            },
+            "duration_ms": 66,
+            "phase": "startup"
+          },
+          {
+            "name": "punch_light_01",
+            "source_rect": {
+              "x": 316,
+              "y": 0,
+              "w": 316,
+              "h": 332
+            },
+            "pivot": {
+              "x": 150,
+              "y": 302
+            },
+            "duration_ms": 100,
+            "phase": "active"
+          },
+          {
+            "name": "punch_light_02",
+            "source_rect": {
+              "x": 632,
+              "y": 0,
+              "w": 275,
+              "h": 332
+            },
+            "pivot": {
+              "x": 109,
+              "y": 302
+            },
+            "duration_ms": 117,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "punch_light/action.json",
+          "source_sheet": "punch_light/keyed.png",
+          "scale_to_runtime": 0.432258,
+          "review": [
+            "Native Lab showed v4 fist mostly above the existing box. v5 lowers only active arm/hand into the box; source support feet preserved. Active knuckles now approximately(+134,-131) world, most of hand inside the far end of unchanged jab box. Front-support pivot accounts for lunge without increasing physical reach. Source body leans forward/down intentionally; startup/recovery unchanged."
+          ]
+        }
+      },
+      "sweep": {
+        "sheet": "sweep/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "sweep_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 224,
+              "h": 343
+            },
+            "pivot": {
+              "x": 121,
+              "y": 306
+            },
+            "duration_ms": 150,
+            "phase": "startup"
+          },
+          {
+            "name": "sweep_01",
+            "source_rect": {
+              "x": 304,
+              "y": 0,
+              "w": 304,
+              "h": 343
+            },
+            "pivot": {
+              "x": 134,
+              "y": 304
+            },
+            "duration_ms": 133,
+            "phase": "active"
+          },
+          {
+            "name": "sweep_02",
+            "source_rect": {
+              "x": 608,
+              "y": 0,
+              "w": 179,
+              "h": 343
+            },
+            "pivot": {
+              "x": 76,
+              "y": 306
+            },
+            "duration_ms": 100,
+            "phase": "recovery"
+          },
+          {
+            "name": "sweep_03",
+            "source_rect": {
+              "x": 912,
+              "y": 0,
+              "w": 209,
+              "h": 343
+            },
+            "pivot": {
+              "x": 98,
+              "y": 308
+            },
+            "duration_ms": 100,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "sweep/action.json",
+          "source_sheet": "sweep/keyed-mvp-v1.png",
+          "scale_to_runtime": 0.447,
+          "review": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Low active foot now attacks ankle/shin band of the actual crouching MoveSpec. Previous action mapping preserved in action-pre-mvp.json. Timing unchanged."
+        }
+      },
+      "overhead": {
+        "sheet": "overhead/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "overhead_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 298,
+              "h": 335
+            },
+            "pivot": {
+              "x": 133,
+              "y": 320
+            },
+            "duration_ms": 183,
+            "phase": "startup"
+          },
+          {
+            "name": "overhead_01",
+            "source_rect": {
+              "x": 298,
+              "y": 0,
+              "w": 298,
+              "h": 335
+            },
+            "pivot": {
+              "x": 124,
+              "y": 320
+            },
+            "duration_ms": 117,
+            "phase": "active"
+          },
+          {
+            "name": "overhead_02",
+            "source_rect": {
+              "x": 596,
+              "y": 0,
+              "w": 298,
+              "h": 335
+            },
+            "pivot": {
+              "x": 154,
+              "y": 321
+            },
+            "duration_ms": 216,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "overhead/action.json",
+          "source_sheet": "overhead/keyed.png",
+          "scale_to_runtime": 0.436482,
+          "review": [
+            "Active arm corrected from knee level to forward waist-height stopping point. Knuckles around (+127,-145) world relative to explicit support pivot, within unchanged overhead contact box. First overhead wind-up then low descending hammerfist and recovery. Body hinge deliberate; no collision or timing change."
+          ]
+        }
+      },
+      "air_punch": {
+        "sheet": "air_punch/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "air_punch_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 295,
+              "h": 346
+            },
+            "pivot": {
+              "x": 158,
+              "y": 303
+            },
+            "duration_ms": 83,
+            "phase": "startup"
+          },
+          {
+            "name": "air_punch_01",
+            "source_rect": {
+              "x": 295,
+              "y": 0,
+              "w": 295,
+              "h": 346
+            },
+            "pivot": {
+              "x": 129,
+              "y": 336
+            },
+            "duration_ms": 150,
+            "phase": "active"
+          },
+          {
+            "name": "air_punch_02",
+            "source_rect": {
+              "x": 590,
+              "y": 0,
+              "w": 295,
+              "h": 346
+            },
+            "pivot": {
+              "x": 82,
+              "y": 303
+            },
+            "duration_ms": 133,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "air_punch/action.json",
+          "source_sheet": "air_punch/keyed.png",
+          "scale_to_runtime": 0.432258,
+          "review": [
+            "Virtual pivots align waist near -172 world across the airborne phases; active source torso/waist was drawn 77 pixels lower, so it is corrected by metadata. Head lowers intentionally as torso hinges into dive punch. Active fist near (+97,-98) world, inside unchanged aerial punch box. No landing pose or baked jump trajectory."
+          ]
+        }
+      },
+      "air_kick": {
+        "sheet": "air_kick/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "air_kick_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 295,
+              "h": 332
+            },
+            "pivot": {
+              "x": 145,
+              "y": 303
+            },
+            "duration_ms": 116,
+            "phase": "startup"
+          },
+          {
+            "name": "air_kick_01",
+            "source_rect": {
+              "x": 295,
+              "y": 0,
+              "w": 295,
+              "h": 332
+            },
+            "pivot": {
+              "x": 116,
+              "y": 311
+            },
+            "duration_ms": 167,
+            "phase": "active"
+          },
+          {
+            "name": "air_kick_02",
+            "source_rect": {
+              "x": 590,
+              "y": 0,
+              "w": 295,
+              "h": 332
+            },
+            "pivot": {
+              "x": 138,
+              "y": 303
+            },
+            "duration_ms": 150,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "air_kick/action.json",
+          "source_sheet": "air_kick/keyed.png",
+          "scale_to_runtime": 0.432258,
+          "review": [
+            "Virtual waist aligned across phases; active source waist 20 pixels lower compensated by pivot. Extended heel around (+130,-69) world intersects unchanged aerial kick box. Recovery returns to knee chamber; startup/recovery silhouettes similar by design, distinct source drawings preserved. Entire shoe retained."
+          ]
+        }
+      },
+      "anti_air": {
+        "sheet": "anti_air/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "anti_air_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 251,
+              "h": 377
+            },
+            "pivot": {
+              "x": 128,
+              "y": 350
+            },
+            "duration_ms": 100,
+            "phase": "startup"
+          },
+          {
+            "name": "anti_air_01",
+            "source_rect": {
+              "x": 252,
+              "y": 0,
+              "w": 251,
+              "h": 377
+            },
+            "pivot": {
+              "x": 97,
+              "y": 349
+            },
+            "duration_ms": 116,
+            "phase": "active"
+          },
+          {
+            "name": "anti_air_02",
+            "source_rect": {
+              "x": 504,
+              "y": 0,
+              "w": 252,
+              "h": 377
+            },
+            "pivot": {
+              "x": 98,
+              "y": 352
+            },
+            "duration_ms": 200,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "anti_air/action.json",
+          "source_sheet": "anti_air/keyed.png",
+          "scale_to_runtime": 0.425397,
+          "review": [
+            "Raised uppercut hand kept inside source margins. Active knuckles around (+61,-315) world and forearm overlap unchanged anti-air box. Support pivot slightly behind pelvis for rising lean; entire heels remain on shared floor. Startup bends knees; recovery absorbs."
+          ]
+        }
+      },
+      "throw": {
+        "sheet": "throw/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "throw_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 334,
+              "h": 305
+            },
+            "pivot": {
+              "x": 182,
+              "y": 288
+            },
+            "duration_ms": 166,
+            "phase": "startup"
+          },
+          {
+            "name": "throw_01",
+            "source_rect": {
+              "x": 334,
+              "y": 0,
+              "w": 250,
+              "h": 305
+            },
+            "pivot": {
+              "x": 122,
+              "y": 288
+            },
+            "duration_ms": 100,
+            "phase": "capture"
+          },
+          {
+            "name": "throw_02",
+            "source_rect": {
+              "x": 668,
+              "y": 0,
+              "w": 256,
+              "h": 305
+            },
+            "pivot": {
+              "x": 110,
+              "y": 286
+            },
+            "duration_ms": 100,
+            "phase": "capture"
+          },
+          {
+            "name": "throw_03",
+            "source_rect": {
+              "x": 1002,
+              "y": 0,
+              "w": 314,
+              "h": 318
+            },
+            "pivot": {
+              "x": 192,
+              "y": 275
+            },
+            "duration_ms": 67,
+            "phase": "recovery"
+          },
+          {
+            "name": "throw_04",
+            "source_rect": {
+              "x": 1336,
+              "y": 0,
+              "w": 262,
+              "h": 318
+            },
+            "pivot": {
+              "x": 136,
+              "y": 278
+            },
+            "duration_ms": 133,
+            "phase": "recovery"
+          },
+          {
+            "name": "throw_05",
+            "source_rect": {
+              "x": 1670,
+              "y": 0,
+              "w": 256,
+              "h": 318
+            },
+            "pivot": {
+              "x": 116,
+              "y": 284
+            },
+            "duration_ms": 234,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "throw/action.json",
+          "source_sheet": "throw/selected-lift-v2.png",
+          "scale_to_runtime": 0.6090909090909091,
+          "review": "Six shoulder-throw keys: reach, capture, lift/turn, release BEHIND, follow-through, ready.48ticks800ms; capture visual phase10..21, recovery starts22. Skirt and serpent remain attached throughout; no fake victim drawn into attacker sheet. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available. Lift v2 replaces only key2 with generated arms raised FORWARD; hands approximately(+55,-235)world support the victim during capture. Other five selected drawings retain identical pixel hashes. select_lift_v2.py reproduces the explicit whole-frame selection."
+        }
+      },
+      "special": {
+        "sheet": "special/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "special_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 375,
+              "h": 329
+            },
+            "pivot": {
+              "x": 86,
+              "y": 298
+            },
+            "duration_ms": 100,
+            "phase": "emit"
+          },
+          {
+            "name": "special_01",
+            "source_rect": {
+              "x": 375,
+              "y": 0,
+              "w": 283,
+              "h": 329
+            },
+            "pivot": {
+              "x": 74,
+              "y": 299
+            },
+            "duration_ms": 100,
+            "phase": "recoil"
+          },
+          {
+            "name": "special_02",
+            "source_rect": {
+              "x": 750,
+              "y": 0,
+              "w": 219,
+              "h": 329
+            },
+            "pivot": {
+              "x": 104,
+              "y": 296
+            },
+            "duration_ms": 100,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "special/action.json",
+          "source_sheet": "special/keyed.png",
+          "scale_to_runtime": 0.42857142857142855,
+          "review": "v6 selected after reach/height revisions. Emission is already present at frame0; the single waist snake extends forward while the original separate projectile remains untouched. Uniform body scale264/616. Existing origin(+205.333,-157.333) maps to source point approximately(679.11,328.89) from pivot(200,696), in the first open mouth region. Earlier variants were too long/high or short; all retained. Second pose retracts, third recovers."
+        }
+      },
+      "spawn": {
+        "sheet": "spawn/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "spawn_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 241,
+              "h": 362
+            },
+            "pivot": {
+              "x": 104,
+              "y": 314
+            },
+            "duration_ms": 600,
+            "phase": "carry_easel"
+          },
+          {
+            "name": "spawn_01",
+            "source_rect": {
+              "x": 241,
+              "y": 0,
+              "w": 241,
+              "h": 362
+            },
+            "pivot": {
+              "x": 62,
+              "y": 311
+            },
+            "duration_ms": 650,
+            "phase": "set_easel"
+          },
+          {
+            "name": "spawn_02",
+            "source_rect": {
+              "x": 482,
+              "y": 0,
+              "w": 241,
+              "h": 362
+            },
+            "pivot": {
+              "x": 57,
+              "y": 311
+            },
+            "duration_ms": 750,
+            "phase": "present_chart"
+          },
+          {
+            "name": "spawn_03",
+            "source_rect": {
+              "x": 723,
+              "y": 0,
+              "w": 241,
+              "h": 362
+            },
+            "pivot": {
+              "x": 49,
+              "y": 310
+            },
+            "duration_ms": 650,
+            "phase": "hold"
+          }
+        ],
+        "provenance": {
+          "source_action": "spawn/action.json",
+          "source_sheet": "spawn/keyed.png",
+          "scale_to_runtime": 0.4714285714285714,
+          "review": "Preserves existing easel/chart entrance gag using old source only for props. Current outfit and adult identity remain from fixed master/new idle. One uniform scale from approximately560px standing reference; source first pose is about6percent taller than the other three, retained as candidate variation."
+        }
+      },
+      "victory": {
+        "sheet": "victory/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "victory_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 289,
+              "h": 325
+            },
+            "pivot": {
+              "x": 178,
+              "y": 294
+            },
+            "duration_ms": 140,
+            "phase": "relax"
+          },
+          {
+            "name": "victory_01",
+            "source_rect": {
+              "x": 289,
+              "y": 0,
+              "w": 289,
+              "h": 325
+            },
+            "pivot": {
+              "x": 138,
+              "y": 294
+            },
+            "duration_ms": 220,
+            "phase": "celebrate"
+          },
+          {
+            "name": "victory_02",
+            "source_rect": {
+              "x": 578,
+              "y": 0,
+              "w": 289,
+              "h": 325
+            },
+            "pivot": {
+              "x": 101,
+              "y": 294
+            },
+            "duration_ms": 600,
+            "phase": "hold"
+          }
+        ],
+        "provenance": {
+          "source_action": "victory/action.json",
+          "source_sheet": "victory/keyed.png",
+          "scale_to_runtime": 0.4230769230769231,
+          "review": "v2 removes the extra snake head at the hanging tail while preserving all three victory gestures. Uniform scale from upright body; current full white blouse, black skirt and heels retained."
+        }
+      },
+      "defeat": {
+        "sheet": "defeat/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "defeat_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 273,
+              "h": 307
+            },
+            "pivot": {
+              "x": 140,
+              "y": 282
+            },
+            "duration_ms": 140,
+            "phase": "recoil"
+          },
+          {
+            "name": "defeat_01",
+            "source_rect": {
+              "x": 273,
+              "y": 0,
+              "w": 273,
+              "h": 307
+            },
+            "pivot": {
+              "x": 109,
+              "y": 282
+            },
+            "duration_ms": 220,
+            "phase": "kneel"
+          },
+          {
+            "name": "defeat_02",
+            "source_rect": {
+              "x": 546,
+              "y": 0,
+              "w": 273,
+              "h": 307
+            },
+            "pivot": {
+              "x": 86,
+              "y": 282
+            },
+            "duration_ms": 600,
+            "phase": "hold"
+          }
+        ],
+        "provenance": {
+          "source_action": "defeat/action.json",
+          "source_sheet": "defeat/keyed.png",
+          "scale_to_runtime": 0.4,
+          "review": "Standing loss, one-knee rest and sustained bowed one-knee hold. Same scale from standing pose; kneeling is naturally shorter. First generation produced no image due to output moderation; neutral sports-rest prompt v2 succeeded."
+        }
+      },
+      "signature_special": {
+        "sheet": "signature_special/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "signature_special_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 320,
+              "h": 321
+            },
+            "pivot": {
+              "x": 153,
+              "y": 317
+            },
+            "duration_ms": 133,
+            "phase": "startup"
+          },
+          {
+            "name": "signature_special_01",
+            "source_rect": {
+              "x": 321,
+              "y": 0,
+              "w": 321,
+              "h": 321
+            },
+            "pivot": {
+              "x": 129,
+              "y": 317
+            },
+            "duration_ms": 150,
+            "phase": "startup"
+          },
+          {
+            "name": "signature_special_02",
+            "source_rect": {
+              "x": 642,
+              "y": 0,
+              "w": 320,
+              "h": 321
+            },
+            "pivot": {
+              "x": 124,
+              "y": 312
+            },
+            "duration_ms": 150,
+            "phase": "startup"
+          },
+          {
+            "name": "signature_special_03",
+            "source_rect": {
+              "x": 963,
+              "y": 0,
+              "w": 321,
+              "h": 321
+            },
+            "pivot": {
+              "x": 114,
+              "y": 310
+            },
+            "duration_ms": 183,
+            "phase": "active"
+          },
+          {
+            "name": "signature_special_04",
+            "source_rect": {
+              "x": 1284,
+              "y": 0,
+              "w": 320,
+              "h": 320
+            },
+            "pivot": {
+              "x": 117,
+              "y": 293
+            },
+            "duration_ms": 183,
+            "phase": "active"
+          },
+          {
+            "name": "signature_special_05",
+            "source_rect": {
+              "x": 1605,
+              "y": 0,
+              "w": 321,
+              "h": 320
+            },
+            "pivot": {
+              "x": 199,
+              "y": 307
+            },
+            "duration_ms": 184,
+            "phase": "active"
+          },
+          {
+            "name": "signature_special_06",
+            "source_rect": {
+              "x": 1926,
+              "y": 0,
+              "w": 320,
+              "h": 320
+            },
+            "pivot": {
+              "x": 165,
+              "y": 294
+            },
+            "duration_ms": 300,
+            "phase": "recovery"
+          },
+          {
+            "name": "signature_special_07",
+            "source_rect": {
+              "x": 2247,
+              "y": 0,
+              "w": 321,
+              "h": 320
+            },
+            "pivot": {
+              "x": 150,
+              "y": 282
+            },
+            "duration_ms": 384,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "signature_special/action.json",
+          "source_sheet": "signature_special/keyed-extraordinary-v2-edge-clean.png",
+          "scale_to_runtime": 0.7223719676549866,
+          "review": "import antigravity: import gesture, snake expands, coils gather, full levitation, directs spiral, loose-leg hover recoil, landing crouch, guard. 100ticks1667ms: startup0..25, active26..58, recovery59..99. World owns vertical travel; body-attached coils remain in actor and detached vortex was removed in generated v2. Airborne keys4/5 use virtual ground anchors accounting for tucked legs; no second drawn flight path. Separate tall serpent vortex has its own exact ground anchor. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+        }
+      },
+      "knockdown": {
+        "sheet": "knockdown/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "knockdown_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 240,
+              "h": 361
+            },
+            "pivot": {
+              "x": 155,
+              "y": 318
+            },
+            "duration_ms": 100,
+            "phase": "fall"
+          },
+          {
+            "name": "knockdown_01",
+            "source_rect": {
+              "x": 277,
+              "y": 0,
+              "w": 277,
+              "h": 361
+            },
+            "pivot": {
+              "x": 139,
+              "y": 317
+            },
+            "duration_ms": 220,
+            "phase": "grounded"
+          },
+          {
+            "name": "knockdown_02",
+            "source_rect": {
+              "x": 554,
+              "y": 0,
+              "w": 221,
+              "h": 361
+            },
+            "pivot": {
+              "x": 115,
+              "y": 321
+            },
+            "duration_ms": 180,
+            "phase": "get_up"
+          },
+          {
+            "name": "knockdown_03",
+            "source_rect": {
+              "x": 831,
+              "y": 0,
+              "w": 225,
+              "h": 361
+            },
+            "pivot": {
+              "x": 106,
+              "y": 322
+            },
+            "duration_ms": 100,
+            "phase": "recover"
+          }
+        ],
+        "provenance": {
+          "source_action": "knockdown/action.json",
+          "source_sheet": "knockdown/keyed-v1.png",
+          "scale_to_runtime": 0.47,
+          "review": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Distinct fall, grounded recovery, get-up and guard fit protected36frame recovery."
+        }
+      },
+      "thrown": {
+        "sheet": "thrown/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "thrown_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 212,
+              "h": 461
+            },
+            "pivot": {
+              "x": 64,
+              "y": 310
+            },
+            "duration_ms": 200,
+            "phase": "capture"
+          },
+          {
+            "name": "thrown_01",
+            "source_rect": {
+              "x": 222,
+              "y": 0,
+              "w": 160,
+              "h": 461
+            },
+            "pivot": {
+              "x": 73,
+              "y": 377
+            },
+            "duration_ms": 180,
+            "phase": "inverted"
+          },
+          {
+            "name": "thrown_02",
+            "source_rect": {
+              "x": 444,
+              "y": 0,
+              "w": 219,
+              "h": 461
+            },
+            "pivot": {
+              "x": 99,
+              "y": 378
+            },
+            "duration_ms": 200,
+            "phase": "tumble"
+          },
+          {
+            "name": "thrown_03",
+            "source_rect": {
+              "x": 666,
+              "y": 0,
+              "w": 222,
+              "h": 461
+            },
+            "pivot": {
+              "x": 89,
+              "y": 402
+            },
+            "duration_ms": 300,
+            "phase": "descent"
+          }
+        ],
+        "provenance": {
+          "source_action": "thrown/action.json",
+          "source_sheet": "thrown/keyed-extraordinary-v1-padded-edge-clean.png",
+          "scale_to_runtime": 0.47017543859649125,
+          "review": "Dedicated throw-victim captured/inverted/somersault/descent poses, with full skirt coverage and serpent accessory. First key200ms held in capture, then clip clock enters inverted key at200ms. Virtual waist anchors exclude source sheet placement from the real ballistic motion; bottom padding only adds transparency. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+        }
+      },
+      "launched": {
+        "sheet": "launched/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "launched_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 241,
+              "h": 409
+            },
+            "pivot": {
+              "x": 136,
+              "y": 304
+            },
+            "duration_ms": 120,
+            "phase": "impact"
+          },
+          {
+            "name": "launched_01",
+            "source_rect": {
+              "x": 241,
+              "y": 0,
+              "w": 213,
+              "h": 409
+            },
+            "pivot": {
+              "x": 125,
+              "y": 291
+            },
+            "duration_ms": 180,
+            "phase": "rise"
+          },
+          {
+            "name": "launched_02",
+            "source_rect": {
+              "x": 482,
+              "y": 0,
+              "w": 186,
+              "h": 409
+            },
+            "pivot": {
+              "x": 109,
+              "y": 248
+            },
+            "duration_ms": 180,
+            "phase": "apex"
+          },
+          {
+            "name": "launched_03",
+            "source_rect": {
+              "x": 723,
+              "y": 0,
+              "w": 196,
+              "h": 409
+            },
+            "pivot": {
+              "x": 100,
+              "y": 346
+            },
+            "duration_ms": 300,
+            "phase": "descent"
+          }
+        ],
+        "provenance": {
+          "source_action": "launched/action.json",
+          "source_sheet": "launched/keyed-extraordinary-v1-padded-edge-clean.png",
+          "scale_to_runtime": 0.4542372881355932,
+          "review": "Dedicated uppercut reaction: chin snaps up, torso arches in rise, suspended apex, braced descent. Four independent full-body drawings and virtual waist registration; World supplies all flight. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available. Python idle belt sits173world above ground; launched virtual pivots use that same reference (earlier160world registration put first extended heel below physical bottom). All four keys moved together by approximately13world, preserving source body motion and real trajectory."
+        }
+      },
+      "heavy_hit": {
+        "sheet": "heavy_hit/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "heavy_hit_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 308,
+              "h": 335
+            },
+            "pivot": {
+              "x": 188,
+              "y": 309
+            },
+            "duration_ms": 100,
+            "phase": "impact"
+          },
+          {
+            "name": "heavy_hit_01",
+            "source_rect": {
+              "x": 308,
+              "y": 0,
+              "w": 264,
+              "h": 335
+            },
+            "pivot": {
+              "x": 116,
+              "y": 314
+            },
+            "duration_ms": 120,
+            "phase": "recoil"
+          },
+          {
+            "name": "heavy_hit_02",
+            "source_rect": {
+              "x": 616,
+              "y": 0,
+              "w": 288,
+              "h": 335
+            },
+            "pivot": {
+              "x": 125,
+              "y": 314
+            },
+            "duration_ms": 150,
+            "phase": "recover"
+          }
+        ],
+        "provenance": {
+          "source_action": "heavy_hit/action.json",
+          "source_sheet": "heavy_hit/keyed-extraordinary-v1-edge-clean.png",
+          "scale_to_runtime": 0.44666666666666666,
+          "review": "Dedicated grounded heavy recoil, deep abdominal fold and stagger recovery. Feet support ground across keys; stable adult anatomy and skirt coverage.370ms presentation; physical stun remains MoveSpec-driven. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+        }
+      }
+    }
+  },
+  "sources": [
+    {
+      "path": "../../production/python/idle/prepared.png",
+      "sha256": "b9ea64ee6bc762346f994189148c1236520cec3bd2124bcf165ce46b68a48ed5"
+    },
+    {
+      "path": "../../production/python/walk/prepared.png",
+      "sha256": "910eafd206aa923737ff3485e8a80a11208791282e7a4095dfdda2aac32bb94a"
+    },
+    {
+      "path": "../../production/python/jump/prepared.png",
+      "sha256": "3ef0c43ee6c78a28ac3c7458663d89780cc326975748c24233fc7e117a8abd84"
+    },
+    {
+      "path": "../../production/python/crouch/prepared.png",
+      "sha256": "55247a06ebd1d7deeb0e5c66cf5cf55e1b8be1ede22ff37ec26d65158cfce666"
+    },
+    {
+      "path": "../../production/python/block/prepared.png",
+      "sha256": "4c486de29bce64e9198c12e886469b0caba4e7b119d804ff737177ff1b4ff9cf"
+    },
+    {
+      "path": "../../production/python/crouch_block/prepared.png",
+      "sha256": "b45be1ace59440060c35d0f70ba66a8e0d343bf6767c55949515a4ff57320f1e"
+    },
+    {
+      "path": "../../production/python/hit/prepared.png",
+      "sha256": "cbbecfe9aeb86937c0f6084888a7912e860ea8ecbf8a09f4a75a9346c426901d"
+    },
+    {
+      "path": "../../production/python/punch_heavy/prepared.png",
+      "sha256": "2e3ac70d2b5a9ce88828f4a1b5b0c35a2ca0103e4ff76cb68f1c09375bc844bc"
+    },
+    {
+      "path": "../../production/python/kick/prepared.png",
+      "sha256": "5e0e92849409e5400b1178b567db720dbae64d35f7956f1c3c899effa9cc1fc6"
+    },
+    {
+      "path": "../../production/python/punch_light/prepared.png",
+      "sha256": "a77b64dd0b4b675a294d32d7a2af5f90d8dde3b52f08c5aa8696f1d357bea963"
+    },
+    {
+      "path": "../../production/python/sweep/prepared.png",
+      "sha256": "9a9b07fd5bdb12451920159b422da5c81a4f60e741f2042d7c7a02ba44ae8854"
+    },
+    {
+      "path": "../../production/python/overhead/prepared.png",
+      "sha256": "134b35efd625e648d0e0513f963349f0e4f566db684aebecde420aecaa7024d9"
+    },
+    {
+      "path": "../../production/python/air_punch/prepared.png",
+      "sha256": "e1778667bac0f02db4f4eb884a1152b0d556b3558c4d3b0ccbd57823d17db5cd"
+    },
+    {
+      "path": "../../production/python/air_kick/prepared.png",
+      "sha256": "c70590a9e26e4a4a63c1dfb1d49e9c7835d48f13f93de595f92c112a88f5f75c"
+    },
+    {
+      "path": "../../production/python/anti_air/prepared.png",
+      "sha256": "c58e80b73ed09291d237910f41e28bcc0d9aee3689598153fec536e805889cfc"
+    },
+    {
+      "path": "../../production/python/throw/prepared.png",
+      "sha256": "a041b9a2c22d161221522e5e0a01a537aa1402f3b03bce60729fd0fb6dd00765"
+    },
+    {
+      "path": "../../production/python/special/prepared.png",
+      "sha256": "64e83bae1bd6a7447b87a22b5c7c41e8628dba7e84549a7c46bce054da336db1"
+    },
+    {
+      "path": "../../production/python/spawn/prepared.png",
+      "sha256": "c7df1986848ae9efc87ca1330c3dff4a9d4dae8644255eb0d5633b3ed02a1f4e"
+    },
+    {
+      "path": "../../production/python/victory/prepared.png",
+      "sha256": "cedfda65122cf1829d690afa8f61a7deccfcbd073ae1cb8cb991dfe902af2911"
+    },
+    {
+      "path": "../../production/python/defeat/prepared.png",
+      "sha256": "28788067a2b8168a6c24fea4042d00dccb2cbe3d1086f2b387943fde3c39440f"
+    },
+    {
+      "path": "../../production/python/signature_special/prepared.png",
+      "sha256": "9c6b65d83ad82c64e97708ce3f128cfc17a283d115302559fdebc675ac80d975"
+    },
+    {
+      "path": "../../production/python/knockdown/prepared.png",
+      "sha256": "1c25202b7261d5a842bd8afba5e86d3e74b4cb0618bdf6196f6f2331dacc840d"
+    },
+    {
+      "path": "../../production/python/thrown/prepared.png",
+      "sha256": "38b33dcad106d4982aa043e562c5326a48753153c4144b4402f942a3b53b3483"
+    },
+    {
+      "path": "../../production/python/launched/prepared.png",
+      "sha256": "90682811c17d36b7c0e429c98ddf4eeec37e37ef6170ed36da83032a590f1e18"
+    },
+    {
+      "path": "../../production/python/heavy_hit/prepared.png",
+      "sha256": "2e12d1ff711920efeb09ce588e189878abd4bfc5a73478fbc1de149d9975d5de"
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_00",
+      "action": "idle",
+      "sheet": "../../production/python/idle/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 221,
+        "h": 332
+      },
+      "exported_frame": "../../production/python/idle/frames/idle_00.png",
+      "phase": "idle"
+    },
+    {
+      "name": "idle_01",
+      "action": "idle",
+      "sheet": "../../production/python/idle/prepared.png",
+      "source_rect": {
+        "x": 221,
+        "y": 0,
+        "w": 221,
+        "h": 332
+      },
+      "exported_frame": "../../production/python/idle/frames/idle_01.png",
+      "phase": "idle"
+    },
+    {
+      "name": "idle_02",
+      "action": "idle",
+      "sheet": "../../production/python/idle/prepared.png",
+      "source_rect": {
+        "x": 442,
+        "y": 0,
+        "w": 221,
+        "h": 332
+      },
+      "exported_frame": "../../production/python/idle/frames/idle_02.png",
+      "phase": "idle"
+    },
+    {
+      "name": "idle_03",
+      "action": "idle",
+      "sheet": "../../production/python/idle/prepared.png",
+      "source_rect": {
+        "x": 663,
+        "y": 0,
+        "w": 221,
+        "h": 332
+      },
+      "exported_frame": "../../production/python/idle/frames/idle_03.png",
+      "phase": "idle"
+    },
+    {
+      "name": "walk_00",
+      "action": "walk",
+      "sheet": "../../production/python/walk/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 229,
+        "h": 343
+      },
+      "exported_frame": "../../production/python/walk/frames/walk_00.png",
+      "phase": "near_contact"
+    },
+    {
+      "name": "walk_01",
+      "action": "walk",
+      "sheet": "../../production/python/walk/prepared.png",
+      "source_rect": {
+        "x": 229,
+        "y": 0,
+        "w": 229,
+        "h": 343
+      },
+      "exported_frame": "../../production/python/walk/frames/walk_01.png",
+      "phase": "far_toe_off"
+    },
+    {
+      "name": "walk_02",
+      "action": "walk",
+      "sheet": "../../production/python/walk/prepared.png",
+      "source_rect": {
+        "x": 458,
+        "y": 0,
+        "w": 229,
+        "h": 343
+      },
+      "exported_frame": "../../production/python/walk/frames/walk_02.png",
+      "phase": "far_contact"
+    },
+    {
+      "name": "walk_03",
+      "action": "walk",
+      "sheet": "../../production/python/walk/prepared.png",
+      "source_rect": {
+        "x": 687,
+        "y": 0,
+        "w": 229,
+        "h": 343
+      },
+      "exported_frame": "../../production/python/walk/frames/walk_03.png",
+      "phase": "near_toe_off"
+    },
+    {
+      "name": "jump_00",
+      "action": "jump",
+      "sheet": "../../production/python/jump/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 236,
+        "h": 355
+      },
+      "exported_frame": "../../production/python/jump/frames/jump_00.png",
+      "phase": "takeoff"
+    },
+    {
+      "name": "jump_01",
+      "action": "jump",
+      "sheet": "../../production/python/jump/prepared.png",
+      "source_rect": {
+        "x": 237,
+        "y": 0,
+        "w": 236,
+        "h": 355
+      },
+      "exported_frame": "../../production/python/jump/frames/jump_01.png",
+      "phase": "rise"
+    },
+    {
+      "name": "jump_02",
+      "action": "jump",
+      "sheet": "../../production/python/jump/prepared.png",
+      "source_rect": {
+        "x": 474,
+        "y": 0,
+        "w": 237,
+        "h": 355
+      },
+      "exported_frame": "../../production/python/jump/frames/jump_02.png",
+      "phase": "fall"
+    },
+    {
+      "name": "crouch_00",
+      "action": "crouch",
+      "sheet": "../../production/python/crouch/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 273,
+        "h": 273
+      },
+      "exported_frame": "../../production/python/crouch/frames/crouch_00.png",
+      "phase": "entry"
+    },
+    {
+      "name": "crouch_01",
+      "action": "crouch",
+      "sheet": "../../production/python/crouch/prepared.png",
+      "source_rect": {
+        "x": 273,
+        "y": 0,
+        "w": 273,
+        "h": 273
+      },
+      "exported_frame": "../../production/python/crouch/frames/crouch_01.png",
+      "phase": "hold"
+    },
+    {
+      "name": "block_00",
+      "action": "block",
+      "sheet": "../../production/python/block/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 335,
+        "h": 335
+      },
+      "exported_frame": "../../production/python/block/frames/block_00.png",
+      "phase": "guard"
+    },
+    {
+      "name": "block_01",
+      "action": "block",
+      "sheet": "../../production/python/block/prepared.png",
+      "source_rect": {
+        "x": 335,
+        "y": 0,
+        "w": 335,
+        "h": 335
+      },
+      "exported_frame": "../../production/python/block/frames/block_01.png",
+      "phase": "brace"
+    },
+    {
+      "name": "crouch_block_00",
+      "action": "crouch_block",
+      "sheet": "../../production/python/crouch_block/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 352,
+        "h": 264
+      },
+      "exported_frame": "../../production/python/crouch_block/frames/crouch_block_00.png",
+      "phase": "guard"
+    },
+    {
+      "name": "crouch_block_01",
+      "action": "crouch_block",
+      "sheet": "../../production/python/crouch_block/prepared.png",
+      "source_rect": {
+        "x": 352,
+        "y": 0,
+        "w": 352,
+        "h": 264
+      },
+      "exported_frame": "../../production/python/crouch_block/frames/crouch_block_01.png",
+      "phase": "brace"
+    },
+    {
+      "name": "hit_00",
+      "action": "hit",
+      "sheet": "../../production/python/hit/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 293,
+        "h": 330
+      },
+      "exported_frame": "../../production/python/hit/frames/hit_00.png",
+      "phase": "impact"
+    },
+    {
+      "name": "hit_01",
+      "action": "hit",
+      "sheet": "../../production/python/hit/prepared.png",
+      "source_rect": {
+        "x": 295,
+        "y": 0,
+        "w": 295,
+        "h": 330
+      },
+      "exported_frame": "../../production/python/hit/frames/hit_01.png",
+      "phase": "brace"
+    },
+    {
+      "name": "hit_02",
+      "action": "hit",
+      "sheet": "../../production/python/hit/prepared.png",
+      "source_rect": {
+        "x": 590,
+        "y": 0,
+        "w": 294,
+        "h": 330
+      },
+      "exported_frame": "../../production/python/hit/frames/hit_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "punch_heavy_00",
+      "action": "punch_heavy",
+      "sheet": "../../production/python/punch_heavy/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 303,
+        "h": 341
+      },
+      "exported_frame": "../../production/python/punch_heavy/frames/punch_heavy_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "punch_heavy_01",
+      "action": "punch_heavy",
+      "sheet": "../../production/python/punch_heavy/prepared.png",
+      "source_rect": {
+        "x": 304,
+        "y": 0,
+        "w": 304,
+        "h": 341
+      },
+      "exported_frame": "../../production/python/punch_heavy/frames/punch_heavy_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "punch_heavy_02",
+      "action": "punch_heavy",
+      "sheet": "../../production/python/punch_heavy/prepared.png",
+      "source_rect": {
+        "x": 608,
+        "y": 0,
+        "w": 304,
+        "h": 341
+      },
+      "exported_frame": "../../production/python/punch_heavy/frames/punch_heavy_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "kick_0",
+      "action": "kick",
+      "sheet": "../../production/python/kick/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 392,
+        "h": 294
+      },
+      "exported_frame": "../../production/python/kick/frames/kick_0.png",
+      "phase": "startup"
+    },
+    {
+      "name": "kick_1",
+      "action": "kick",
+      "sheet": "../../production/python/kick/prepared.png",
+      "source_rect": {
+        "x": 392,
+        "y": 0,
+        "w": 392,
+        "h": 294
+      },
+      "exported_frame": "../../production/python/kick/frames/kick_1.png",
+      "phase": "active"
+    },
+    {
+      "name": "kick_2",
+      "action": "kick",
+      "sheet": "../../production/python/kick/prepared.png",
+      "source_rect": {
+        "x": 784,
+        "y": 0,
+        "w": 392,
+        "h": 294
+      },
+      "exported_frame": "../../production/python/kick/frames/kick_2.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "kick_3",
+      "action": "kick",
+      "sheet": "../../production/python/kick/prepared.png",
+      "source_rect": {
+        "x": 1176,
+        "y": 0,
+        "w": 392,
+        "h": 294
+      },
+      "exported_frame": "../../production/python/kick/frames/kick_3.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "punch_light_00",
+      "action": "punch_light",
+      "sheet": "../../production/python/punch_light/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 295,
+        "h": 332
+      },
+      "exported_frame": "../../production/python/punch_light/frames/punch_light_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "punch_light_01",
+      "action": "punch_light",
+      "sheet": "../../production/python/punch_light/prepared.png",
+      "source_rect": {
+        "x": 316,
+        "y": 0,
+        "w": 316,
+        "h": 332
+      },
+      "exported_frame": "../../production/python/punch_light/frames/punch_light_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "punch_light_02",
+      "action": "punch_light",
+      "sheet": "../../production/python/punch_light/prepared.png",
+      "source_rect": {
+        "x": 632,
+        "y": 0,
+        "w": 275,
+        "h": 332
+      },
+      "exported_frame": "../../production/python/punch_light/frames/punch_light_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_00",
+      "action": "sweep",
+      "sheet": "../../production/python/sweep/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 224,
+        "h": 343
+      },
+      "exported_frame": "../../production/python/sweep/frames/sweep_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "sweep_01",
+      "action": "sweep",
+      "sheet": "../../production/python/sweep/prepared.png",
+      "source_rect": {
+        "x": 304,
+        "y": 0,
+        "w": 304,
+        "h": 343
+      },
+      "exported_frame": "../../production/python/sweep/frames/sweep_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "sweep_02",
+      "action": "sweep",
+      "sheet": "../../production/python/sweep/prepared.png",
+      "source_rect": {
+        "x": 608,
+        "y": 0,
+        "w": 179,
+        "h": 343
+      },
+      "exported_frame": "../../production/python/sweep/frames/sweep_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_03",
+      "action": "sweep",
+      "sheet": "../../production/python/sweep/prepared.png",
+      "source_rect": {
+        "x": 912,
+        "y": 0,
+        "w": 209,
+        "h": 343
+      },
+      "exported_frame": "../../production/python/sweep/frames/sweep_03.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "overhead_00",
+      "action": "overhead",
+      "sheet": "../../production/python/overhead/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 298,
+        "h": 335
+      },
+      "exported_frame": "../../production/python/overhead/frames/overhead_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "overhead_01",
+      "action": "overhead",
+      "sheet": "../../production/python/overhead/prepared.png",
+      "source_rect": {
+        "x": 298,
+        "y": 0,
+        "w": 298,
+        "h": 335
+      },
+      "exported_frame": "../../production/python/overhead/frames/overhead_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "overhead_02",
+      "action": "overhead",
+      "sheet": "../../production/python/overhead/prepared.png",
+      "source_rect": {
+        "x": 596,
+        "y": 0,
+        "w": 298,
+        "h": 335
+      },
+      "exported_frame": "../../production/python/overhead/frames/overhead_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "air_punch_00",
+      "action": "air_punch",
+      "sheet": "../../production/python/air_punch/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 295,
+        "h": 346
+      },
+      "exported_frame": "../../production/python/air_punch/frames/air_punch_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "air_punch_01",
+      "action": "air_punch",
+      "sheet": "../../production/python/air_punch/prepared.png",
+      "source_rect": {
+        "x": 295,
+        "y": 0,
+        "w": 295,
+        "h": 346
+      },
+      "exported_frame": "../../production/python/air_punch/frames/air_punch_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "air_punch_02",
+      "action": "air_punch",
+      "sheet": "../../production/python/air_punch/prepared.png",
+      "source_rect": {
+        "x": 590,
+        "y": 0,
+        "w": 295,
+        "h": 346
+      },
+      "exported_frame": "../../production/python/air_punch/frames/air_punch_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "air_kick_00",
+      "action": "air_kick",
+      "sheet": "../../production/python/air_kick/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 295,
+        "h": 332
+      },
+      "exported_frame": "../../production/python/air_kick/frames/air_kick_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "air_kick_01",
+      "action": "air_kick",
+      "sheet": "../../production/python/air_kick/prepared.png",
+      "source_rect": {
+        "x": 295,
+        "y": 0,
+        "w": 295,
+        "h": 332
+      },
+      "exported_frame": "../../production/python/air_kick/frames/air_kick_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "air_kick_02",
+      "action": "air_kick",
+      "sheet": "../../production/python/air_kick/prepared.png",
+      "source_rect": {
+        "x": 590,
+        "y": 0,
+        "w": 295,
+        "h": 332
+      },
+      "exported_frame": "../../production/python/air_kick/frames/air_kick_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "anti_air_00",
+      "action": "anti_air",
+      "sheet": "../../production/python/anti_air/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 251,
+        "h": 377
+      },
+      "exported_frame": "../../production/python/anti_air/frames/anti_air_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "anti_air_01",
+      "action": "anti_air",
+      "sheet": "../../production/python/anti_air/prepared.png",
+      "source_rect": {
+        "x": 252,
+        "y": 0,
+        "w": 251,
+        "h": 377
+      },
+      "exported_frame": "../../production/python/anti_air/frames/anti_air_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "anti_air_02",
+      "action": "anti_air",
+      "sheet": "../../production/python/anti_air/prepared.png",
+      "source_rect": {
+        "x": 504,
+        "y": 0,
+        "w": 252,
+        "h": 377
+      },
+      "exported_frame": "../../production/python/anti_air/frames/anti_air_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_00",
+      "action": "throw",
+      "sheet": "../../production/python/throw/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 334,
+        "h": 305
+      },
+      "exported_frame": "../../production/python/throw/frames/throw_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "throw_01",
+      "action": "throw",
+      "sheet": "../../production/python/throw/prepared.png",
+      "source_rect": {
+        "x": 334,
+        "y": 0,
+        "w": 250,
+        "h": 305
+      },
+      "exported_frame": "../../production/python/throw/frames/throw_01.png",
+      "phase": "capture"
+    },
+    {
+      "name": "throw_02",
+      "action": "throw",
+      "sheet": "../../production/python/throw/prepared.png",
+      "source_rect": {
+        "x": 668,
+        "y": 0,
+        "w": 256,
+        "h": 305
+      },
+      "exported_frame": "../../production/python/throw/frames/throw_02.png",
+      "phase": "capture"
+    },
+    {
+      "name": "throw_03",
+      "action": "throw",
+      "sheet": "../../production/python/throw/prepared.png",
+      "source_rect": {
+        "x": 1002,
+        "y": 0,
+        "w": 314,
+        "h": 318
+      },
+      "exported_frame": "../../production/python/throw/frames/throw_03.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_04",
+      "action": "throw",
+      "sheet": "../../production/python/throw/prepared.png",
+      "source_rect": {
+        "x": 1336,
+        "y": 0,
+        "w": 262,
+        "h": 318
+      },
+      "exported_frame": "../../production/python/throw/frames/throw_04.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_05",
+      "action": "throw",
+      "sheet": "../../production/python/throw/prepared.png",
+      "source_rect": {
+        "x": 1670,
+        "y": 0,
+        "w": 256,
+        "h": 318
+      },
+      "exported_frame": "../../production/python/throw/frames/throw_05.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "special_00",
+      "action": "special",
+      "sheet": "../../production/python/special/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 375,
+        "h": 329
+      },
+      "exported_frame": "../../production/python/special/frames/special_00.png",
+      "phase": "emit"
+    },
+    {
+      "name": "special_01",
+      "action": "special",
+      "sheet": "../../production/python/special/prepared.png",
+      "source_rect": {
+        "x": 375,
+        "y": 0,
+        "w": 283,
+        "h": 329
+      },
+      "exported_frame": "../../production/python/special/frames/special_01.png",
+      "phase": "recoil"
+    },
+    {
+      "name": "special_02",
+      "action": "special",
+      "sheet": "../../production/python/special/prepared.png",
+      "source_rect": {
+        "x": 750,
+        "y": 0,
+        "w": 219,
+        "h": 329
+      },
+      "exported_frame": "../../production/python/special/frames/special_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "spawn_00",
+      "action": "spawn",
+      "sheet": "../../production/python/spawn/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 241,
+        "h": 362
+      },
+      "exported_frame": "../../production/python/spawn/frames/spawn_00.png",
+      "phase": "carry_easel"
+    },
+    {
+      "name": "spawn_01",
+      "action": "spawn",
+      "sheet": "../../production/python/spawn/prepared.png",
+      "source_rect": {
+        "x": 241,
+        "y": 0,
+        "w": 241,
+        "h": 362
+      },
+      "exported_frame": "../../production/python/spawn/frames/spawn_01.png",
+      "phase": "set_easel"
+    },
+    {
+      "name": "spawn_02",
+      "action": "spawn",
+      "sheet": "../../production/python/spawn/prepared.png",
+      "source_rect": {
+        "x": 482,
+        "y": 0,
+        "w": 241,
+        "h": 362
+      },
+      "exported_frame": "../../production/python/spawn/frames/spawn_02.png",
+      "phase": "present_chart"
+    },
+    {
+      "name": "spawn_03",
+      "action": "spawn",
+      "sheet": "../../production/python/spawn/prepared.png",
+      "source_rect": {
+        "x": 723,
+        "y": 0,
+        "w": 241,
+        "h": 362
+      },
+      "exported_frame": "../../production/python/spawn/frames/spawn_03.png",
+      "phase": "hold"
+    },
+    {
+      "name": "victory_00",
+      "action": "victory",
+      "sheet": "../../production/python/victory/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 289,
+        "h": 325
+      },
+      "exported_frame": "../../production/python/victory/frames/victory_00.png",
+      "phase": "relax"
+    },
+    {
+      "name": "victory_01",
+      "action": "victory",
+      "sheet": "../../production/python/victory/prepared.png",
+      "source_rect": {
+        "x": 289,
+        "y": 0,
+        "w": 289,
+        "h": 325
+      },
+      "exported_frame": "../../production/python/victory/frames/victory_01.png",
+      "phase": "celebrate"
+    },
+    {
+      "name": "victory_02",
+      "action": "victory",
+      "sheet": "../../production/python/victory/prepared.png",
+      "source_rect": {
+        "x": 578,
+        "y": 0,
+        "w": 289,
+        "h": 325
+      },
+      "exported_frame": "../../production/python/victory/frames/victory_02.png",
+      "phase": "hold"
+    },
+    {
+      "name": "defeat_00",
+      "action": "defeat",
+      "sheet": "../../production/python/defeat/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 273,
+        "h": 307
+      },
+      "exported_frame": "../../production/python/defeat/frames/defeat_00.png",
+      "phase": "recoil"
+    },
+    {
+      "name": "defeat_01",
+      "action": "defeat",
+      "sheet": "../../production/python/defeat/prepared.png",
+      "source_rect": {
+        "x": 273,
+        "y": 0,
+        "w": 273,
+        "h": 307
+      },
+      "exported_frame": "../../production/python/defeat/frames/defeat_01.png",
+      "phase": "kneel"
+    },
+    {
+      "name": "defeat_02",
+      "action": "defeat",
+      "sheet": "../../production/python/defeat/prepared.png",
+      "source_rect": {
+        "x": 546,
+        "y": 0,
+        "w": 273,
+        "h": 307
+      },
+      "exported_frame": "../../production/python/defeat/frames/defeat_02.png",
+      "phase": "hold"
+    },
+    {
+      "name": "signature_special_00",
+      "action": "signature_special",
+      "sheet": "../../production/python/signature_special/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 321
+      },
+      "exported_frame": "../../production/python/signature_special/frames/signature_special_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_01",
+      "action": "signature_special",
+      "sheet": "../../production/python/signature_special/prepared.png",
+      "source_rect": {
+        "x": 321,
+        "y": 0,
+        "w": 321,
+        "h": 321
+      },
+      "exported_frame": "../../production/python/signature_special/frames/signature_special_01.png",
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_02",
+      "action": "signature_special",
+      "sheet": "../../production/python/signature_special/prepared.png",
+      "source_rect": {
+        "x": 642,
+        "y": 0,
+        "w": 320,
+        "h": 321
+      },
+      "exported_frame": "../../production/python/signature_special/frames/signature_special_02.png",
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_03",
+      "action": "signature_special",
+      "sheet": "../../production/python/signature_special/prepared.png",
+      "source_rect": {
+        "x": 963,
+        "y": 0,
+        "w": 321,
+        "h": 321
+      },
+      "exported_frame": "../../production/python/signature_special/frames/signature_special_03.png",
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_04",
+      "action": "signature_special",
+      "sheet": "../../production/python/signature_special/prepared.png",
+      "source_rect": {
+        "x": 1284,
+        "y": 0,
+        "w": 320,
+        "h": 320
+      },
+      "exported_frame": "../../production/python/signature_special/frames/signature_special_04.png",
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_05",
+      "action": "signature_special",
+      "sheet": "../../production/python/signature_special/prepared.png",
+      "source_rect": {
+        "x": 1605,
+        "y": 0,
+        "w": 321,
+        "h": 320
+      },
+      "exported_frame": "../../production/python/signature_special/frames/signature_special_05.png",
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_06",
+      "action": "signature_special",
+      "sheet": "../../production/python/signature_special/prepared.png",
+      "source_rect": {
+        "x": 1926,
+        "y": 0,
+        "w": 320,
+        "h": 320
+      },
+      "exported_frame": "../../production/python/signature_special/frames/signature_special_06.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "signature_special_07",
+      "action": "signature_special",
+      "sheet": "../../production/python/signature_special/prepared.png",
+      "source_rect": {
+        "x": 2247,
+        "y": 0,
+        "w": 321,
+        "h": 320
+      },
+      "exported_frame": "../../production/python/signature_special/frames/signature_special_07.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "knockdown_00",
+      "action": "knockdown",
+      "sheet": "../../production/python/knockdown/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 240,
+        "h": 361
+      },
+      "exported_frame": "../../production/python/knockdown/frames/knockdown_00.png",
+      "phase": "fall"
+    },
+    {
+      "name": "knockdown_01",
+      "action": "knockdown",
+      "sheet": "../../production/python/knockdown/prepared.png",
+      "source_rect": {
+        "x": 277,
+        "y": 0,
+        "w": 277,
+        "h": 361
+      },
+      "exported_frame": "../../production/python/knockdown/frames/knockdown_01.png",
+      "phase": "grounded"
+    },
+    {
+      "name": "knockdown_02",
+      "action": "knockdown",
+      "sheet": "../../production/python/knockdown/prepared.png",
+      "source_rect": {
+        "x": 554,
+        "y": 0,
+        "w": 221,
+        "h": 361
+      },
+      "exported_frame": "../../production/python/knockdown/frames/knockdown_02.png",
+      "phase": "get_up"
+    },
+    {
+      "name": "knockdown_03",
+      "action": "knockdown",
+      "sheet": "../../production/python/knockdown/prepared.png",
+      "source_rect": {
+        "x": 831,
+        "y": 0,
+        "w": 225,
+        "h": 361
+      },
+      "exported_frame": "../../production/python/knockdown/frames/knockdown_03.png",
+      "phase": "recover"
+    },
+    {
+      "name": "thrown_00",
+      "action": "thrown",
+      "sheet": "../../production/python/thrown/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 212,
+        "h": 461
+      },
+      "exported_frame": "../../production/python/thrown/frames/thrown_00.png",
+      "phase": "capture"
+    },
+    {
+      "name": "thrown_01",
+      "action": "thrown",
+      "sheet": "../../production/python/thrown/prepared.png",
+      "source_rect": {
+        "x": 222,
+        "y": 0,
+        "w": 160,
+        "h": 461
+      },
+      "exported_frame": "../../production/python/thrown/frames/thrown_01.png",
+      "phase": "inverted"
+    },
+    {
+      "name": "thrown_02",
+      "action": "thrown",
+      "sheet": "../../production/python/thrown/prepared.png",
+      "source_rect": {
+        "x": 444,
+        "y": 0,
+        "w": 219,
+        "h": 461
+      },
+      "exported_frame": "../../production/python/thrown/frames/thrown_02.png",
+      "phase": "tumble"
+    },
+    {
+      "name": "thrown_03",
+      "action": "thrown",
+      "sheet": "../../production/python/thrown/prepared.png",
+      "source_rect": {
+        "x": 666,
+        "y": 0,
+        "w": 222,
+        "h": 461
+      },
+      "exported_frame": "../../production/python/thrown/frames/thrown_03.png",
+      "phase": "descent"
+    },
+    {
+      "name": "launched_00",
+      "action": "launched",
+      "sheet": "../../production/python/launched/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 241,
+        "h": 409
+      },
+      "exported_frame": "../../production/python/launched/frames/launched_00.png",
+      "phase": "impact"
+    },
+    {
+      "name": "launched_01",
+      "action": "launched",
+      "sheet": "../../production/python/launched/prepared.png",
+      "source_rect": {
+        "x": 241,
+        "y": 0,
+        "w": 213,
+        "h": 409
+      },
+      "exported_frame": "../../production/python/launched/frames/launched_01.png",
+      "phase": "rise"
+    },
+    {
+      "name": "launched_02",
+      "action": "launched",
+      "sheet": "../../production/python/launched/prepared.png",
+      "source_rect": {
+        "x": 482,
+        "y": 0,
+        "w": 186,
+        "h": 409
+      },
+      "exported_frame": "../../production/python/launched/frames/launched_02.png",
+      "phase": "apex"
+    },
+    {
+      "name": "launched_03",
+      "action": "launched",
+      "sheet": "../../production/python/launched/prepared.png",
+      "source_rect": {
+        "x": 723,
+        "y": 0,
+        "w": 196,
+        "h": 409
+      },
+      "exported_frame": "../../production/python/launched/frames/launched_03.png",
+      "phase": "descent"
+    },
+    {
+      "name": "heavy_hit_00",
+      "action": "heavy_hit",
+      "sheet": "../../production/python/heavy_hit/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 308,
+        "h": 335
+      },
+      "exported_frame": "../../production/python/heavy_hit/frames/heavy_hit_00.png",
+      "phase": "impact"
+    },
+    {
+      "name": "heavy_hit_01",
+      "action": "heavy_hit",
+      "sheet": "../../production/python/heavy_hit/prepared.png",
+      "source_rect": {
+        "x": 308,
+        "y": 0,
+        "w": 264,
+        "h": 335
+      },
+      "exported_frame": "../../production/python/heavy_hit/frames/heavy_hit_01.png",
+      "phase": "recoil"
+    },
+    {
+      "name": "heavy_hit_02",
+      "action": "heavy_hit",
+      "sheet": "../../production/python/heavy_hit/prepared.png",
+      "source_rect": {
+        "x": 616,
+        "y": 0,
+        "w": 288,
+        "h": 335
+      },
+      "exported_frame": "../../production/python/heavy_hit/frames/heavy_hit_02.png",
+      "phase": "recover"
+    }
+  ],
+  "atlas_sha256": "1f795ae31b4b5e5cd5e7c1104375ee1f9abb8d822e2e9c6a7ea8ad5d937465b2",
+  "manifest_sha256": "8f5345046ad544c8cf1bac2b803a3e1ebf6701c3b1d3d0963b409887a09ec5b2"
+}

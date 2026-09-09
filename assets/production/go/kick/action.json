@@ -1,0 +1,110 @@
+{
+  "action": "kick",
+  "source": "kick/source-v1.png",
+  "sheet": "kick/sheet-v1.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "Final generated art reviewed: complete World in both facings, native Lab, Sprite Studio and normal match; evidence in finalization-review.md.",
+  "source_body_height_reference_px": 742,
+  "suggested_scale_to_runtime": 0.3557951482479784,
+  "replacement_contract": "../action-contracts.json#/actions/kick",
+  "references": {
+    "new_master": "reference/master.png",
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
+  "frames": [
+    {
+      "name": "kick_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 800,
+        "h": 920
+      },
+      "pivot": {
+        "x": 367,
+        "y": 819
+      },
+      "duration_ms": 116,
+      "phase": "startup"
+    },
+    {
+      "name": "kick_01",
+      "source_rect": {
+        "x": 800,
+        "y": 0,
+        "w": 800,
+        "h": 920
+      },
+      "pivot": {
+        "x": 350,
+        "y": 819
+      },
+      "duration_ms": 117,
+      "phase": "active"
+    },
+    {
+      "name": "kick_02",
+      "source_rect": {
+        "x": 1600,
+        "y": 0,
+        "w": 800,
+        "h": 920
+      },
+      "pivot": {
+        "x": 324,
+        "y": 819
+      },
+      "duration_ms": 150,
+      "phase": "recovery"
+    }
+  ],
+  "generation_brief": "Chamber, anatomically readable low kick and recovery; contact near the low baseline box with the other foot planted.",
+  "review_notes": "Low front kick with readable heel/sole pads, chamber and recoil. Supporting paw stays at the ground anchor. Explicit crops/pivots are recorded in preparation.json; no timing or combat changes.",
+  "timing_reference": {
+    "move_id": "GoDeferKick",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 23,
+      "active_start": 7,
+      "active_end": 13
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 116,
+      "recovery_starts": 233,
+      "clip_ends": 383
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -82.66666666666669,
+      "w": 114.66666666666666,
+      "h": 45.33333333333333
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -165.33333333333331,
+      "y": -82.66666666666669,
+      "w": 114.66666666666666,
+      "h": 45.33333333333333
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 108.0,
+      "y": -60.00000000000002
+    }
+  },
+  "scale_to_runtime": 0.3557951482479784,
+  "runtime_review": {
+    "approved": true,
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "report": "../finalization-review.md",
+    "world_facings_seen": [
+      "Left",
+      "Right"
+    ],
+    "lab_capture": "full set before jump, art unchanged by frame checksum",
+    "normal_match_result_evidence": false
+  }
+}

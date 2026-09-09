@@ -1,0 +1,52 @@
+{
+  "sheet": "crouch_block/keyed-v2.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "crouch_block_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 682,
+        "h": 768
+      },
+      "pivot": {
+        "x": 370,
+        "y": 681
+      },
+      "duration_ms": 80,
+      "phase": "low_guard"
+    },
+    {
+      "name": "crouch_block_01",
+      "source_rect": {
+        "x": 682,
+        "y": 0,
+        "w": 683,
+        "h": 768
+      },
+      "pivot": {
+        "x": 342,
+        "y": 681
+      },
+      "duration_ms": 100,
+      "phase": "low_absorb"
+    },
+    {
+      "name": "crouch_block_02",
+      "source_rect": {
+        "x": 1365,
+        "y": 0,
+        "w": 683,
+        "h": 768
+      },
+      "pivot": {
+        "x": 277,
+        "y": 681
+      },
+      "duration_ms": 180,
+      "phase": "held_low_guard"
+    }
+  ]
+}

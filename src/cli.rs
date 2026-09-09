@@ -23,7 +23,17 @@ pub enum LaunchMode {
     #[default]
     Game,
     CombatLab(CombatLabOptions),
+    MoveShowcase(ShowcaseLaunchOptions),
     SpriteViewer(SpriteViewerOptions),
+}
+
+/// Selects a contextual demonstration and optional fixed replay at startup.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct ShowcaseLaunchOptions {
+    pub character: CharacterId,
+    pub selected_move: CombatLabMove,
+    pub repeat_current: bool,
+    pub sides_reversed: bool,
 }
 
 /// Parsed startup options.
@@ -69,9 +79,15 @@ impl LaunchOptions {
         let mut sprite_viewer_manifest = None;
         let mut sprite_viewer_clip = None;
         let mut sprite_viewer_character_requested = false;
+        let mut showcase_requested = false;
+        let mut repeat_current = false;
+        let mut sides_reversed = false;
 
         while let Some(arg) = args.next() {
             match arg.as_str() {
+                "--showcase" => showcase_requested = true,
+                "--repeat" => repeat_current = true,
+                "--reverse" => sides_reversed = true,
                 "--fight" | "--skip-menu" => {
                     start_fight = true;
                 }
@@ -175,6 +191,36 @@ impl LaunchOptions {
             }
         }
 
+        if showcase_requested {
+            if sprite_viewer_requested || matches!(mode, LaunchMode::CombatLab(_)) || start_fight {
+                return Err(CliError::new(
+                    "cannot combine --showcase with --fight, --lab or sprite viewer",
+                ));
+            }
+            if lab.pose != CombatLabPose::Move {
+                return Err(CliError::new(
+                    "--pose belongs to Combat Lab; showcase demonstrates attacks and defense automatically",
+                ));
+            }
+            mode = LaunchMode::MoveShowcase(ShowcaseLaunchOptions {
+                character: lab.character,
+                selected_move: lab.selected_move,
+                repeat_current,
+                sides_reversed,
+            });
+        } else if repeat_current || sides_reversed {
+            return Err(CliError::new("--repeat and --reverse require --showcase"));
+        }
+
+        if matches!(mode, LaunchMode::CombatLab(_) | LaunchMode::MoveShowcase(_))
+            && lab.character == CharacterId::Go
+            && lab.selected_move == CombatLabMove::SignatureSpecial
+        {
+            return Err(CliError::new(
+                "Go has no signature special in this roster update",
+            ));
+        }
+
         if sprite_viewer_requested {
             let Some(manifest_path) = sprite_viewer_manifest else {
                 return Err(CliError::new(
@@ -223,7 +269,7 @@ impl Display for CliError {
 impl std::error::Error for CliError {}
 
 fn usage() -> &'static str {
-    "Usage:\n  cargo run\n  cargo run -- --fight --p1 python --p2 duke\n  cargo run -- --lab combat --character rust --move light_punch\n  cargo run -- --lab combat --character duke --pose block\n  cargo run -- --lab combat --character python --move kick\n  cargo run -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip idle --character python --move projectile"
+    "Usage:\n  cargo run\n  cargo run -- --showcase --character rust --move cinematic_special --repeat --reverse\n  cargo run -- --fight --p1 cpp --p2 python\n  cargo run -- --lab combat --character rust --move light_punch\n  cargo run -- --lab combat --character duke --pose block\n  cargo run -- --lab combat --character cpp --move kick\n  cargo run -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip idle --character python --move projectile"
 }
 
 fn infer_sprite_viewer_character(path: &std::path::Path) -> Option<CharacterId> {
@@ -238,6 +284,8 @@ fn infer_sprite_viewer_character(path: &std::path::Path) -> Option<CharacterId> 
         Some(CharacterId::C)
     } else if raw.contains("python") || raw.contains("/py-") {
         Some(CharacterId::Python)
+    } else if raw.contains("cpp") || raw.contains("c++") || raw.contains("cplusplus") {
+        Some(CharacterId::Cpp)
     } else {
         None
     }

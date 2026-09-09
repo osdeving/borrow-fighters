@@ -1,0 +1,88 @@
+{
+  "action": "punch_light",
+  "source": "punch_light/source-v4.png",
+  "sheet": "punch_light/keyed.png",
+  "loop": false,
+  "source_body_height_reference_px": 534,
+  "normalization_note": "v4 compact jab selected. v1 reached too far, v2 lost the punch, v3 remained too long. Knuckles approach the far edge of the existing short hitbox; no hitbox changed.",
+  "frames": [
+    {
+      "name": "punch_light_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 315,
+        "y": 721
+      },
+      "duration_ms": 50,
+      "phase": "startup"
+    },
+    {
+      "name": "punch_light_01",
+      "source_rect": {
+        "x": 591,
+        "y": 0,
+        "w": 592,
+        "h": 887
+      },
+      "pivot": {
+        "x": 239,
+        "y": 721
+      },
+      "duration_ms": 83,
+      "phase": "active"
+    },
+    {
+      "name": "punch_light_02",
+      "source_rect": {
+        "x": 1183,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 250,
+        "y": 721
+      },
+      "duration_ms": 100,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Built-in image_gen, original narrow Go master and generated idle continuity. Flat magenta extracted without Rust contour mode; isolated matte corner pixels removed where present. Candidate visual only; baseline combat remains authoritative.",
+  "timing_reference": {
+    "move_id": "GoGoroutineJab",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 14,
+      "active_start": 3,
+      "active_end": 7
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 50,
+      "recovery_starts": 133,
+      "clip_ends": 233
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -141.33333333333334,
+      "w": 56.0,
+      "h": 40.0
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -106.66666666666666,
+      "y": -141.33333333333334,
+      "w": 56.0,
+      "h": 40.0
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 78.66666666666666,
+      "y": -121.33333333333334
+    }
+  }
+}

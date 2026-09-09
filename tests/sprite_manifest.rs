@@ -8,13 +8,14 @@ use borrow_fighters::{
         move_data::{MoveId, move_spec},
     },
     config::RESOLUTION_SCALE,
+    engine::sprites::FighterSpriteClip::{self, *},
     engine::sprites::{
         C_BITSTREAM_PROJECTILE_PATH, C_FIGHTER_MANIFEST_PATH, C_START_MANIFEST_PATH,
-        DUKE_FIGHTER_MANIFEST_PATH, DUKE_START_MANIFEST_PATH, GO_CHANNEL_PROJECTILE_PATH,
-        GO_FIGHTER_MANIFEST_PATH, GO_START_MANIFEST_PATH, PYTHON_DATA_PROJECTILE_PATH,
-        PYTHON_FIGHTER_MANIFEST_PATH, PYTHON_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH,
-        RUST_START_MANIFEST_PATH, SPRITE_SCHEMA, SpriteManifest, frame_for_clip_at,
-        project_frame_combat,
+        CPP_FIGHTER_MANIFEST_PATH, CPP_PLUSPLUS_PROJECTILE_PATH, DUKE_FIGHTER_MANIFEST_PATH,
+        DUKE_START_MANIFEST_PATH, GO_CHANNEL_PROJECTILE_PATH, GO_FIGHTER_MANIFEST_PATH,
+        GO_START_MANIFEST_PATH, PYTHON_DATA_PROJECTILE_PATH, PYTHON_FIGHTER_MANIFEST_PATH,
+        PYTHON_START_MANIFEST_PATH, RUST_FIGHTER_MANIFEST_PATH, RUST_START_MANIFEST_PATH,
+        SPRITE_SCHEMA, SpriteManifest, frame_for_clip_at, project_frame_combat,
     },
 };
 
@@ -25,16 +26,37 @@ fn assert_f32_close(actual: f32, expected: f32, context: &str) {
     );
 }
 
+fn runtime_fighter_clips() -> [FighterSpriteClip; 17] {
+    [
+        Idle, Walk, Crouch, Jump, Block, Hit, PunchLight, PunchHeavy, Kick, Sweep, Overhead,
+        AntiAir, AirPunch, AirKick, Throw, Special, Taunt,
+    ]
+}
+
+fn assert_runtime_fighter_clips(manifest: &SpriteManifest, path: &str) {
+    for clip in runtime_fighter_clips() {
+        let name = clip.as_str();
+        let clip = manifest
+            .clip_named(name)
+            .unwrap_or_else(|| panic!("{path} should contain runtime clip '{name}'"));
+        assert!(
+            !clip.frames.is_empty(),
+            "{path} runtime clip '{name}' should contain frames"
+        );
+    }
+}
+
 #[test]
 fn rust_fighter_manifest_loads() {
     let manifest = SpriteManifest::load(RUST_FIGHTER_MANIFEST_PATH).expect("manifest should load");
 
     assert_eq!(manifest.schema, SPRITE_SCHEMA);
     assert_eq!(manifest.image, "rust-fighter-atlas.png");
-    assert_eq!(manifest.frames.len(), 33);
+    assert_eq!(manifest.frames.len(), 51);
     assert!(manifest.clip_named("idle").is_some());
     assert!(manifest.clip_named("kick").is_some());
     assert!(manifest.clip_named("projectile").is_some());
+    assert_runtime_fighter_clips(&manifest, RUST_FIGHTER_MANIFEST_PATH);
 }
 
 #[test]
@@ -43,10 +65,11 @@ fn duke_fighter_manifest_loads() {
 
     assert_eq!(manifest.schema, SPRITE_SCHEMA);
     assert_eq!(manifest.image, "duke-fighter-atlas.png");
-    assert_eq!(manifest.frames.len(), 33);
+    assert_eq!(manifest.frames.len(), 51);
     assert_eq!(manifest.cell.w, 384);
     assert!(manifest.clip_named("special").is_some());
     assert!(manifest.clip_named("taunt").is_some());
+    assert_runtime_fighter_clips(&manifest, DUKE_FIGHTER_MANIFEST_PATH);
 }
 
 #[test]
@@ -60,11 +83,12 @@ fn go_fighter_manifest_loads() {
         1.08 * RESOLUTION_SCALE,
         "Go manifest scale",
     );
-    assert_eq!(manifest.frames.len(), 36);
+    assert_eq!(manifest.frames.len(), 54);
     assert_eq!(manifest.cell.w, 384);
     assert!(manifest.clip_named("idle").is_some());
     assert!(manifest.clip_named("kick").is_some());
     assert!(manifest.clip_named("special").is_some());
+    assert_runtime_fighter_clips(&manifest, GO_FIGHTER_MANIFEST_PATH);
 }
 
 #[test]
@@ -73,12 +97,13 @@ fn c_fighter_manifest_loads() {
 
     assert_eq!(manifest.schema, SPRITE_SCHEMA);
     assert_eq!(manifest.image, "c-fighter-atlas.png");
-    assert_eq!(manifest.frames.len(), 94);
+    assert_eq!(manifest.frames.len(), 112);
     assert_eq!(manifest.cell.w, 384);
     assert!(manifest.clip_named("idle").is_some());
     assert!(manifest.clip_named("punch_light").is_some());
     assert!(manifest.clip_named("kick").is_some());
     assert!(manifest.clip_named("special").is_some());
+    assert_runtime_fighter_clips(&manifest, C_FIGHTER_MANIFEST_PATH);
 }
 
 #[test]
@@ -88,13 +113,69 @@ fn python_fighter_manifest_candidate_loads() {
 
     assert_eq!(manifest.schema, SPRITE_SCHEMA);
     assert_eq!(manifest.image, "python-fighter-atlas.png");
-    assert_eq!(manifest.frames.len(), 94);
-    assert_eq!(manifest.cell.w, 384);
+    assert_eq!(manifest.frames.len(), 112);
+    assert_eq!(manifest.cell.w, 768);
+    assert_eq!(manifest.cell.h, 512);
+    assert_f32_close(
+        manifest
+            .scale
+            .expect("Python manifest should declare scale"),
+        2.0 / 3.0,
+        "Python manifest scale",
+    );
     assert!(manifest.clip_named("idle").is_some());
     assert!(manifest.clip_named("punch_light").is_some());
     assert!(manifest.clip_named("punch_heavy").is_some());
     assert!(manifest.clip_named("taunt").is_some());
     assert!(manifest.clip_named("special").is_some());
+    assert_runtime_fighter_clips(&manifest, PYTHON_FIGHTER_MANIFEST_PATH);
+}
+
+#[test]
+fn cpp_fighter_manifest_loads_from_two_atlases() {
+    let manifest = SpriteManifest::load(CPP_FIGHTER_MANIFEST_PATH).expect("manifest should load");
+
+    assert_eq!(manifest.schema, SPRITE_SCHEMA);
+    assert_eq!(manifest.image, "cpp-fighter-atlas-a.png");
+    assert_eq!(manifest.frames.len(), 112);
+    assert_eq!(manifest.cell.w, 768);
+    assert_eq!(manifest.cell.h, 512);
+    assert_f32_close(
+        manifest.scale.expect("C++ manifest should declare scale"),
+        2.0 / 3.0,
+        "C++ manifest scale",
+    );
+    assert!(manifest.clip_named("idle").is_some());
+    assert!(manifest.clip_named("punch_light").is_some());
+    assert!(manifest.clip_named("punch_heavy").is_some());
+    assert!(manifest.clip_named("hit").is_some());
+    assert!(manifest.clip_named("special").is_some());
+    assert_runtime_fighter_clips(&manifest, CPP_FIGHTER_MANIFEST_PATH);
+}
+
+#[test]
+fn cpp_manifest_resolves_frame_image_overrides() {
+    let manifest = SpriteManifest::load(CPP_FIGHTER_MANIFEST_PATH).expect("manifest should load");
+    let first_atlas_frame = manifest
+        .frame_named("punch_heavy_6")
+        .expect("first atlas frame should exist");
+    let second_atlas_frame = manifest
+        .frame_named("kick_light_0")
+        .expect("second atlas frame should exist");
+    let paths = manifest.image_paths(CPP_FIGHTER_MANIFEST_PATH);
+
+    assert_eq!(paths.len(), 2);
+    assert!(paths.iter().all(|(_, path)| path.exists()));
+    assert!(
+        manifest
+            .image_path_for_frame(CPP_FIGHTER_MANIFEST_PATH, first_atlas_frame)
+            .ends_with("assets/placeholder/cpp-fighter-atlas-a.png")
+    );
+    assert!(
+        manifest
+            .image_path_for_frame(CPP_FIGHTER_MANIFEST_PATH, second_atlas_frame)
+            .ends_with("assets/placeholder/cpp-fighter-atlas-b.png")
+    );
 }
 
 #[test]
@@ -108,12 +189,26 @@ fn python_runtime_sprite_assets_exist() {
 }
 
 #[test]
+fn cpp_runtime_sprite_assets_exist() {
+    let fighter = SpriteManifest::load(CPP_FIGHTER_MANIFEST_PATH).expect("manifest should load");
+
+    assert!(
+        fighter
+            .image_paths(CPP_FIGHTER_MANIFEST_PATH)
+            .iter()
+            .all(|(_, path)| path.exists())
+    );
+    assert!(Path::new(CPP_PLUSPLUS_PROJECTILE_PATH).exists());
+}
+
+#[test]
 fn fighter_special_first_frames_declare_projectile_origins() {
     let cases = [
         (RUST_FIGHTER_MANIFEST_PATH, "special_0", 216, 148),
         (DUKE_FIGHTER_MANIFEST_PATH, "special_0", 222, 148),
         (GO_FIGHTER_MANIFEST_PATH, "special_0", 180, 150),
         (C_FIGHTER_MANIFEST_PATH, "special_0", 208, 145),
+        (CPP_FIGHTER_MANIFEST_PATH, "special_0", 532, 236),
     ];
 
     for (path, frame_name, expected_x, expected_y) in cases {

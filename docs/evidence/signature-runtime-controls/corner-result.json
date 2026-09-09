@@ -1,0 +1,71 @@
+{
+  "checks": [
+    {
+      "name": "corner-P2-throw_deals_damage",
+      "passed": true,
+      "hp_fill_before": 398,
+      "hp_fill_after": 351
+    },
+    {
+      "name": "corner-P2-throw_debug_off",
+      "passed": true,
+      "samples": {
+        "flight": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        },
+        "fall": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        },
+        "land": {
+          "hurtbox_green": 0,
+          "hitbox_red": 0,
+          "arena_left_gray": 0
+        }
+      }
+    },
+    {
+      "name": "native_window_close",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "name": "corner-P2-throw",
+      "phase": "flight",
+      "seconds_after_input": 0.739,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "corner-P2-throw",
+      "phase": "fall",
+      "seconds_after_input": 1.129,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    },
+    {
+      "name": "corner-P2-throw",
+      "phase": "land",
+      "seconds_after_input": 1.406,
+      "debug": {
+        "hurtbox_green": 0,
+        "hitbox_red": 0,
+        "arena_left_gray": 0
+      }
+    }
+  ],
+  "isolated_display": ":93",
+  "host_parent_unmapped": true,
+  "candidate_art": true,
+  "passed": true
+}

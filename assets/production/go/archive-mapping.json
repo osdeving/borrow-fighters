@@ -1,0 +1,10 @@
+{
+  "status": "old Go preserved byte-for-byte before canonical replacement",
+  "mappings": {
+    "assets/production/go": "assets/production/go-cartoon-archive",
+    "assets/candidates/go": "assets/candidates/go-cartoon-archive"
+  },
+  "historical_files_verified": 269,
+  "snapshot": "historical-preservation.json",
+  "note": "Snapshot names describe pre-move locations; apply mappings to find old character files. Baseline combat and placeholder paths did not move."
+}

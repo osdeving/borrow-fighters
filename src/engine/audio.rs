@@ -3,11 +3,17 @@
 //! System: Raylib audio boundary. This module owns loaded `Sound` and `Music`
 //! resources and maps pure gameplay audio events to raylib playback calls.
 
-use std::{collections::HashMap, path::Path};
+use std::collections::HashMap;
 
 use raylib::prelude::*;
 
-use crate::audio::{AudioBank, AudioClipDefinition, AudioEvent, AudioMusicDefinition, MusicTrack};
+use crate::audio::{
+    AudioBank, AudioClipDefinition, AudioCue, AudioEvent, AudioMusicDefinition, MusicTrack,
+};
+use crate::runtime_paths::asset_path;
+
+#[cfg(test)]
+mod live_review;
 
 pub const AUDIO_MANIFEST_PATH: &str = "assets/audio/audio_manifest.json";
 
@@ -19,6 +25,7 @@ pub struct AudioPlayer<'aud> {
     binding_cursors: Vec<usize>,
     current_music: Option<String>,
     music_ducked: bool,
+    cinematic_paused: bool,
     music_volume: f32,
     enabled: bool,
 }
@@ -46,6 +53,7 @@ impl<'aud> AudioPlayer<'aud> {
             binding_cursors: Vec::new(),
             current_music: None,
             music_ducked: false,
+            cinematic_paused: false,
             music_volume: 1.0,
             enabled: false,
         }
@@ -53,7 +61,7 @@ impl<'aud> AudioPlayer<'aud> {
 
     /// Loads audio manifest and optional sound files.
     pub fn load(audio: &'aud RaylibAudio, manifest_path: &str) -> Self {
-        let bank = match AudioBank::load(manifest_path) {
+        let bank = match AudioBank::load(asset_path(manifest_path)) {
             Ok(bank) => bank,
             Err(error) => {
                 eprintln!("warning: audio disabled: {error}");
@@ -63,7 +71,8 @@ impl<'aud> AudioPlayer<'aud> {
 
         let mut sounds = HashMap::new();
         for clip in bank.clips() {
-            if !Path::new(&clip.file).exists() {
+            let clip_path = asset_path(&clip.file);
+            if !clip_path.exists() {
                 if clip.required {
                     eprintln!(
                         "warning: required audio clip {} is missing at {}",
@@ -73,7 +82,7 @@ impl<'aud> AudioPlayer<'aud> {
                 continue;
             }
 
-            match audio.new_sound(&clip.file) {
+            match audio.new_sound(&clip_path.to_string_lossy()) {
                 Ok(sound) => {
                     sounds.insert(clip.id.clone(), LoadedSound::new(sound, clip));
                 }
@@ -88,7 +97,8 @@ impl<'aud> AudioPlayer<'aud> {
 
         let mut music = HashMap::new();
         for track in bank.music_tracks() {
-            if !Path::new(&track.file).exists() {
+            let track_path = asset_path(&track.file);
+            if !track_path.exists() {
                 if track.required {
                     eprintln!(
                         "warning: required music track {} is missing at {}",
@@ -98,7 +108,7 @@ impl<'aud> AudioPlayer<'aud> {
                 continue;
             }
 
-            match audio.new_music(&track.file) {
+            match audio.new_music(&track_path.to_string_lossy()) {
                 Ok(mut loaded) => {
                     loaded.set_looping(track.looping);
                     music.insert(track.id.clone(), LoadedMusic::new(loaded, track));
@@ -120,6 +130,7 @@ impl<'aud> AudioPlayer<'aud> {
             binding_cursors: vec![0; binding_count],
             current_music: None,
             music_ducked: false,
+            cinematic_paused: false,
             music_volume: 1.0,
             enabled: true,
         }
@@ -127,7 +138,7 @@ impl<'aud> AudioPlayer<'aud> {
 
     /// Updates the active music stream.
     pub fn update_streams(&self) {
-        if !self.enabled {
+        if !self.enabled || self.cinematic_paused {
             return;
         }
 
@@ -147,12 +158,14 @@ impl<'aud> AudioPlayer<'aud> {
         }
 
         let next_id = track.key();
-        if self.current_music.as_deref() == Some(next_id)
-            && self
-                .music
+        if keeps_current_music(
+            self.current_music.as_deref(),
+            next_id,
+            self.cinematic_paused,
+            self.music
                 .get(next_id)
-                .is_some_and(|loaded| loaded.music.is_stream_playing())
-        {
+                .is_some_and(|loaded| loaded.music.is_stream_playing()),
+        ) {
             return;
         }
 
@@ -165,14 +178,62 @@ impl<'aud> AudioPlayer<'aud> {
         let Some(next) = self.music.get(next_id) else {
             return;
         };
-        next.music.set_volume(music_output_volume(
-            next.volume,
-            self.music_ducked,
-            self.music_volume,
-        ));
+        let volume = music_output_volume(next.volume, self.music_ducked, self.music_volume);
+        // A scene can select a different track while paused. Prime it silently,
+        // then leave it paused until the sequence or menu transition releases it.
+        next.music
+            .set_volume(if self.cinematic_paused { 0.0 } else { volume });
         next.music.set_pitch(next.pitch);
         next.music.play_stream();
+        if self.cinematic_paused {
+            next.music.pause_stream();
+            next.music.set_volume(volume);
+        }
         self.current_music = Some(next_id.to_owned());
+    }
+
+    /// Pauses music at its current position while authored sequence cues continue.
+    ///
+    /// Entering the sequence cuts older voices/SFX once. Further phase cues are
+    /// allowed to play normally; leaving resumes rather than restarts the track.
+    pub fn set_cinematic_paused(&mut self, paused: bool) {
+        if self.cinematic_paused == paused {
+            return;
+        }
+        self.cinematic_paused = paused;
+        if !self.enabled {
+            return;
+        }
+        if paused {
+            for loaded in self.sounds.values() {
+                loaded.sound.stop();
+            }
+        }
+        if let Some(current) = self
+            .current_music
+            .as_ref()
+            .and_then(|id| self.music.get(id))
+        {
+            if paused {
+                current.music.pause_stream();
+            } else {
+                current.music.resume_stream();
+            }
+        }
+    }
+
+    /// Cuts the unfinished sequence's sounds and restores music after an abort.
+    ///
+    /// Reset and scene changes use this instead of the normal completion path,
+    /// which lets the final impact or end cue finish playing.
+    pub fn cancel_cinematic(&mut self) {
+        if !self.cinematic_paused {
+            return;
+        }
+        for loaded in self.sounds.values() {
+            loaded.sound.stop();
+        }
+        self.set_cinematic_paused(false);
     }
 
     /// Lowers the active music while a foreground cue needs priority.
@@ -237,6 +298,17 @@ impl<'aud> AudioPlayer<'aud> {
             return;
         }
 
+        if event.cue == AudioCue::SuperStart {
+            // Super variants follow authored phases (for example morph, then
+            // grow). A replay after an abort must restart that order while
+            // ordinary fighter voices keep their independent variation.
+            for (binding, cursor) in self.bank.bindings().iter().zip(&mut self.binding_cursors) {
+                if binding.cue.starts_with("super.") {
+                    *cursor = 0;
+                }
+            }
+        }
+
         let Some(binding_index) = self.bank.binding_index_for_event(event) else {
             return;
         };
@@ -246,7 +318,9 @@ impl<'aud> AudioPlayer<'aud> {
         let Some(cursor) = self.binding_cursors.get_mut(binding_index) else {
             return;
         };
-        let Some(clip_id) = next_loaded_clip_id(clip_ids, &self.sounds, cursor) else {
+        let Some(clip_id) =
+            next_loaded_clip_id(clip_ids, |id| self.sounds.contains_key(id), cursor)
+        else {
             return;
         };
         let Some(loaded) = self.sounds.get(clip_id) else {
@@ -281,9 +355,9 @@ impl<'aud> LoadedMusic<'aud> {
     }
 }
 
-fn next_loaded_clip_id<'clips, 'aud>(
+fn next_loaded_clip_id<'clips>(
     clip_ids: &'clips [String],
-    sounds: &HashMap<String, LoadedSound<'aud>>,
+    is_loaded: impl Fn(&str) -> bool,
     cursor: &mut usize,
 ) -> Option<&'clips str> {
     if clip_ids.is_empty() {
@@ -294,13 +368,17 @@ fn next_loaded_clip_id<'clips, 'aud>(
     for offset in 0..clip_ids.len() {
         let index = (start + offset) % clip_ids.len();
         let clip_id = clip_ids[index].as_str();
-        if sounds.contains_key(clip_id) {
+        if is_loaded(clip_id) {
             *cursor = (index + 1) % clip_ids.len();
             return Some(clip_id);
         }
     }
 
     None
+}
+
+fn keeps_current_music(current: Option<&str>, next: &str, paused: bool, playing: bool) -> bool {
+    current == Some(next) && (paused || playing)
 }
 
 fn music_output_volume(volume: f32, ducked: bool, music_volume: f32) -> f32 {
@@ -318,6 +396,59 @@ mod tests {
         assert_near(music_output_volume(0.5, false, 0.4), 0.2);
         assert_near(music_output_volume(0.5, true, 1.0), 0.175);
         assert_near(music_output_volume(2.0, false, 1.0), 1.0);
+    }
+
+    #[test]
+    fn scene_track_refresh_never_restarts_paused_music() {
+        assert!(keeps_current_music(Some("combat"), "combat", true, false));
+        assert!(keeps_current_music(Some("combat"), "combat", false, true));
+        assert!(!keeps_current_music(Some("combat"), "menu", true, false));
+        assert!(!keeps_current_music(Some("combat"), "combat", false, false));
+        assert!(!keeps_current_music(None, "combat", true, false));
+    }
+
+    #[test]
+    fn replay_after_the_first_mutation_restarts_phase_sounds_without_resetting_voices() {
+        use crate::{characters::CharacterId, combat::fighter::PlayerSlot};
+        let mut player = AudioPlayer::disabled();
+        player.bank = AudioBank::load(AUDIO_MANIFEST_PATH).unwrap();
+        player.binding_cursors = vec![0; player.bank.bindings().len()];
+        player.enabled = true;
+        let voice = AudioEvent::fighter_hurt(PlayerSlot::Two, CharacterId::Rust);
+        sample_variation(&mut player, &voice);
+        let voice_binding = player.bank.binding_index_for_event(&voice).unwrap();
+        let voice_cursor = player.binding_cursors[voice_binding];
+        assert_ne!(
+            voice_cursor, 0,
+            "the hurt voice must have multiple variants"
+        );
+
+        for character in [CharacterId::Python, CharacterId::Rust] {
+            let start =
+                AudioEvent::new(AudioCue::SuperStart).with_fighter(PlayerSlot::One, character);
+            let mutation =
+                AudioEvent::new(AudioCue::SuperMutation).with_fighter(PlayerSlot::One, character);
+            player.play(&start);
+            let first = sample_variation(&mut player, &mutation);
+            // Reset/replay occurs before the second phase. The next SuperStart
+            // must restore the first phase even when the starting sound is absent.
+            player.cancel_cinematic();
+            player.play(&start);
+            assert_eq!(sample_variation(&mut player, &mutation), first);
+            assert_ne!(sample_variation(&mut player, &mutation), first);
+            assert_eq!(player.binding_cursors[voice_binding], voice_cursor);
+        }
+    }
+
+    fn sample_variation(player: &mut AudioPlayer<'_>, event: &AudioEvent) -> String {
+        let binding = player.bank.binding_index_for_event(event).unwrap();
+        next_loaded_clip_id(
+            player.bank.binding_clip_ids(binding).unwrap(),
+            |_| true,
+            &mut player.binding_cursors[binding],
+        )
+        .unwrap()
+        .to_owned()
     }
 
     fn assert_near(actual: f32, expected: f32) {

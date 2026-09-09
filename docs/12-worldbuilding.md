@@ -20,6 +20,16 @@ As arenas devem acontecer em locais brasileiros de ciência, tecnologia, arquite
 
 ## Tom
 
+Na rodada de [supers autorais](23-authored-super-sequences.md), cada lutador ganhou
+uma arena de origem visual: Rust/Sirius (Campinas), Duke/Java Street (São Paulo),
+Old C/Porto Digital (Recife), C++/Vale do Pinhão (Curitiba), Python/BioTIC (Brasília)
+e Go/Tech Coast (Fortaleza). A associação aparece na entrada dos supers; não
+restringe matchups. Na [rodada 24](24-reactions-and-transformations.md), o Ownership
+Eclipse passou a substituir literalmente a arena atual por Sirius em blocos.
+Música e ambientação acompanham a troca persistente naquela partida; não há
+bônus de combate. Python revela sua forma gigante e C++ herda o crash de Old C.
+
+
 - Cartunesco, legível e com humor técnico.
 - Intrigante, com camadas de mistério por trás das piadas.
 - Brasileiro sem virar cartão-postal óbvio.

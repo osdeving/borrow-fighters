@@ -13,5 +13,6 @@ pub mod engine;
 pub mod game;
 pub mod lore;
 pub mod math;
+pub mod runtime_paths;
 pub mod scenes;
 pub mod ui;

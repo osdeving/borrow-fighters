@@ -1,0 +1,24 @@
+{
+  "character": "python",
+  "status": "runtime_verified_spectacle",
+  "actor_clips": 25,
+  "actor_frames": 88,
+  "signature_fx_frames": 6,
+  "verified_runtime_cases": 14,
+  "runtime_capture_count": 857,
+  "curated_png_count": 12,
+  "runtime_hashes": {
+    "assets/candidates/python/python-fighter-atlas.png": "1f795ae31b4b5e5cd5e7c1104375ee1f9abb8d822e2e9c6a7ea8ad5d937465b2",
+    "assets/candidates/python/python-fighter.sprite.json": "8f5345046ad544c8cf1bac2b803a3e1ebf6701c3b1d3d0963b409887a09ec5b2",
+    "assets/candidates/python/python-signature-fx-atlas.png": "2eef20e49ab191ba660e4e2f46327b72d33ec6834f717b2a517e433a550ead5f",
+    "assets/candidates/python/python-signature-fx.sprite.json": "79449835473611a88cf316f87f1a602cf12e7bf5a89fd681ed6e89024caccfba"
+  },
+  "action_sha256": {
+    "signature_special": "e366b089d80c658b051621b6ffecbadb50ed6ac878fc46acee194e53a527d3a6",
+    "throw": "f61296718a8d4ad36e8878aba4b904f07b5cae83f668cbd60230fe9284a1c7bd",
+    "thrown": "ca212b829477a95dbdf025d1ef2db08aaa42dd0b5af9dedc318c6d9c554caf62",
+    "launched": "122cd30541558269404a25c53b53dfbda91f57ff027a6aec95e7da704b40f2ab",
+    "heavy_hit": "5b8694dc59501af00d3c32db6cc91cbcc2061f86c0c05e137ccb52f9914663ea"
+  },
+  "report_sha256": "fd71b1b2157806dafdd0bb512a4e274e8af5020828931ac1d7dff66ac7e41176"
+}

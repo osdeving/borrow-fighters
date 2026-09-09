@@ -1,0 +1,752 @@
+{
+  "character": "cpp",
+  "status": "candidate GPU evidence; not final artistic approval",
+  "full_capture_png_directory": "target/art/cpp-combat-lab-final",
+  "full_capture_count": 253,
+  "selected_images": [
+    "punch_light-f006-active.png",
+    "punch_heavy-f012-active.png",
+    "kick-f012-active.png",
+    "sweep-f012-active.png",
+    "overhead-f012-active.png",
+    "anti_air-f012-active.png",
+    "air_punch-f006-active.png",
+    "air_kick-f012-active.png",
+    "throw-f006-active.png",
+    "special-f001-idle.png",
+    "idle-f000-idle.png",
+    "crouch-f000-idle.png",
+    "crouch_block-f000-idle.png",
+    "jump-f024-idle.png",
+    "defeat-f066-idle.png"
+  ],
+  "captures": [
+    {
+      "action": "punch_light",
+      "attack_boxes": [
+        [
+          531.3333129882812,
+          472.0,
+          77.33333587646484,
+          40.0
+        ]
+      ],
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "punch_light",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          405.4186706542969,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          466.5706481933594,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          565.3546752929688,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "punch_light-f006-active.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.10000000149011612,
+      "sprite_frame": "punch_light_01"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_boxes": [
+        [
+          531.3333129882812,
+          466.66668701171875,
+          138.6666717529297,
+          53.333335876464844
+        ]
+      ],
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "punch_heavy",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          405.4186706542969,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          466.5706481933594,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          565.3546752929688,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "punch_heavy-f012-active.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "punch_heavy_01"
+    },
+    {
+      "action": "kick",
+      "attack_boxes": [
+        [
+          531.3333129882812,
+          536.0,
+          136.0,
+          45.333335876464844
+        ]
+      ],
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          405.4186706542969,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          466.5706481933594,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          565.3546752929688,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "kick-f012-active.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "kick_01"
+    },
+    {
+      "action": "sweep",
+      "attack_boxes": [
+        [
+          531.3333129882812,
+          480.0,
+          154.6666717529297,
+          40.0
+        ]
+      ],
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "sweep",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          405.4186706542969,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          466.5706481933594,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          565.3546752929688,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "sweep-f012-active.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "sweep_01"
+    },
+    {
+      "action": "overhead",
+      "attack_boxes": [
+        [
+          532.1481323242188,
+          448.0,
+          112.0,
+          69.33333587646484
+        ]
+      ],
+      "attack_phase": "active",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "overhead",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "hurtboxes": [
+        [
+          462.7668151855469,
+          405.4186706542969,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          449.4921569824219,
+          466.5706481933594,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          445.4388122558594,
+          565.3546752929688,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "overhead-f012-active.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "overhead_01"
+    },
+    {
+      "action": "anti_air",
+      "attack_boxes": [
+        [
+          531.3333129882812,
+          274.6666564941406,
+          96.0,
+          117.33333587646484
+        ]
+      ],
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "anti_air",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          405.4186706542969,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          466.5706481933594,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          565.3546752929688,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "anti_air-f012-active.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "anti_air_01"
+    },
+    {
+      "action": "air_punch",
+      "attack_boxes": [
+        [
+          531.3333129882812,
+          375.5,
+          96.0,
+          56.0
+        ]
+      ],
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        282.1666564941406,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "air_punch",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          295.5853271484375,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          356.7373046875,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          455.5213317871094,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "air_punch-f006-active.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.10000000149011612,
+      "sprite_frame": "air_punch_01"
+    },
+    {
+      "action": "air_kick",
+      "attack_boxes": [
+        [
+          531.3333129882812,
+          434.3333435058594,
+          117.33333587646484,
+          61.333335876464844
+        ]
+      ],
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        317.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "air_kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          330.4186706542969,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          391.5706481933594,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          490.3546447753906,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "air_kick-f012-active.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "air_kick_01"
+    },
+    {
+      "action": "throw",
+      "attack_boxes": [
+        [
+          531.3333129882812,
+          432.0,
+          66.66667175292969,
+          157.33334350585938
+        ]
+      ],
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "throw",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          405.4186706542969,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          466.5706481933594,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          565.3546752929688,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "throw-f006-active.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.10000000149011612,
+      "sprite_frame": "throw_01"
+    },
+    {
+      "action": "special",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "special",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          405.4186706542969,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          466.5706481933594,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          565.3546752929688,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "special-f001-idle.png",
+      "lab_tick": 1,
+      "pose": "move",
+      "projectile_count": 1,
+      "projectile_rects": [
+        [
+          695.0,
+          437.33331298828125,
+          80.0,
+          42.66666793823242
+        ]
+      ],
+      "sprite_clip_seconds": 0.016666680574417114,
+      "sprite_frame": "special_0"
+    },
+    {
+      "action": "idle",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          405.4186706542969,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          466.5706481933594,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          565.3546752929688,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "idle-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "idle",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "crouch",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "cpp",
+      "clip": "crouch",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          460.6346435546875,
+          498.73065185546875,
+          39.962669372558594,
+          29.354665756225586
+        ],
+        [
+          448.6773376464844,
+          535.9786987304688,
+          63.97867202758789,
+          42.66666793823242
+        ],
+        [
+          443.3066711425781,
+          586.6666870117188,
+          74.61865997314453,
+          21.290666580200195
+        ]
+      ],
+      "image": "crouch-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "crouch",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "crouch_0"
+    },
+    {
+      "action": "jump",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          282.7519836425781,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          343.9039611816406,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          442.6879577636719,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "jump-f024-idle.png",
+      "lab_tick": 24,
+      "pose": "jump",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.40000003576278687,
+      "sprite_frame": "jump_2"
+    },
+    {
+      "action": "defeat",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "cpp",
+      "clip": "defeat",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          461.9519958496094,
+          405.4186706542969,
+          37.3280029296875,
+          50.66666793823242
+        ],
+        [
+          448.6773376464844,
+          466.5706481933594,
+          63.97867202758789,
+          85.38666534423828
+        ],
+        [
+          444.6239929199219,
+          565.3546752929688,
+          71.98400115966797,
+          39.914669036865234
+        ]
+      ],
+      "image": "defeat-f066-idle.png",
+      "lab_tick": 66,
+      "pose": "defeat",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 1.100000023841858,
+      "sprite_frame": "defeat_2"
+    },
+    {
+      "action": "crouch_block",
+      "attack_boxes": [],
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "cpp",
+      "clip": "crouch_block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "hurtboxes": [
+        [
+          460.6346435546875,
+          498.73065185546875,
+          39.962669372558594,
+          29.354665756225586
+        ],
+        [
+          448.6773376464844,
+          535.9786987304688,
+          63.97867202758789,
+          42.66666793823242
+        ],
+        [
+          443.3066711425781,
+          586.6666870117188,
+          74.61865997314453,
+          21.290666580200195
+        ]
+      ],
+      "image": "crouch_block-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "crouch_block",
+      "projectile_count": 0,
+      "projectile_rects": [],
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "crouch_block_0"
+    }
+  ],
+  "visual_review": {
+    "contact": "All9 selected close-attack poses visibly intersect current active box; air-kick outer heel/sole extends below/front beyond box. Special first emitted projectile aligns with forward bag edge.",
+    "ground": "Crouch/crouch_block fit crouch height, defeat supports touch ground, jump uses virtual anchor above world ground.",
+    "facings": "Lab native right facing only; both facings inspected in exported previews. World captured separately by root.",
+    "limitations": [
+      "Images are review artifacts, not assertions of visual correctness.",
+      "Static lab poses advance art time only; they do not simulate match damage, outcome transitions, or a full jump trajectory.",
+      "Combat Lab has no walk pose; walking and match transitions require a separate playtest.",
+      "The lab uses its native facing for this character; no fighter state is modified to mirror it.",
+      "Advantage estimates and automatic dummy placement use MoveSpec; drawn boxes and projectile emission use baseline sprite metadata with match-equivalent fallback."
+    ]
+  }
+}

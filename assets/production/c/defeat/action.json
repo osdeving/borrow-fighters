@@ -1,0 +1,63 @@
+{
+  "action": "defeat",
+  "source": "defeat/source-v3.png",
+  "sheet": "defeat/keyed-v3.png",
+  "loop": false,
+  "reviewed": false,
+  "status": "candidate: source and two-facing previews inspected; real Combat Lab captured; artistic limitations recorded in review.md",
+  "source_body_height_reference_px": 620,
+  "frames": [
+    {
+      "name": "defeat_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 680,
+        "h": 768
+      },
+      "pivot": {
+        "x": 370,
+        "y": 676
+      },
+      "duration_ms": 160,
+      "phase": "recoil"
+    },
+    {
+      "name": "defeat_1",
+      "source_rect": {
+        "x": 680,
+        "y": 0,
+        "w": 710,
+        "h": 768
+      },
+      "pivot": {
+        "x": 340,
+        "y": 673
+      },
+      "duration_ms": 180,
+      "phase": "kneel"
+    },
+    {
+      "name": "defeat_2",
+      "source_rect": {
+        "x": 1390,
+        "y": 0,
+        "w": 658,
+        "h": 768
+      },
+      "pivot": {
+        "x": 275,
+        "y": 678
+      },
+      "duration_ms": 660,
+      "phase": "sustained_defeat"
+    }
+  ],
+  "review_notes": "v3 selected recoil/kneel/sustained kneeling. v1 grew lying anatomy; v2 changed other poses. No per-frame scale workaround.",
+  "runtime_review": {
+    "report": "../../candidates/c/review/runtime-lab-final/capture-report.json",
+    "loaded_manifest_matches_candidate": true,
+    "clip_captured": true,
+    "final_art_approved": false
+  }
+}

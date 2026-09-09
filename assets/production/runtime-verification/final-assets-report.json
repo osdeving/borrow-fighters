@@ -1,0 +1,88 @@
+{
+  "scope": "Current six canonical reviewed sets; archive directories excluded",
+  "counts": {
+    "characters": 6,
+    "clips": 120,
+    "frames": 378,
+    "offensive_actions_per_character": 10
+  },
+  "characters": {
+    "rust": {
+      "clips": 20,
+      "frames": 71,
+      "ten_moves_present": true,
+      "all_frames_visible_with_real_alpha_and_valid_bounds": true,
+      "no_action_aliases": true,
+      "manifest_sha256": "47bc02280fbb12a54a092bde8ae80204bd8ef648717b541cac778724d651e659",
+      "atlas_sha256": "e969bf00c9df93c2980b45a24dacc066977ae2d9ebafcd0f982c010650d89f8d",
+      "final_visual_review": "../rust/finalization-review.md"
+    },
+    "duke": {
+      "clips": 20,
+      "frames": 61,
+      "ten_moves_present": true,
+      "all_frames_visible_with_real_alpha_and_valid_bounds": true,
+      "no_action_aliases": true,
+      "manifest_sha256": "e60b6e8fa43cbcaef77aa4b3aa42e6a793a923bb1f3c3237366194a5b2a88441",
+      "atlas_sha256": "0488acccdb9537f993b53c27ce2a28a2f01e031235f6743aaf010904c37c5634",
+      "final_visual_review": "../duke/finalization-review.md"
+    },
+    "go": {
+      "clips": 20,
+      "frames": 60,
+      "ten_moves_present": true,
+      "all_frames_visible_with_real_alpha_and_valid_bounds": true,
+      "no_action_aliases": true,
+      "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+      "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+      "final_visual_review": "../go/finalization-review.md"
+    },
+    "c": {
+      "clips": 20,
+      "frames": 63,
+      "ten_moves_present": true,
+      "all_frames_visible_with_real_alpha_and_valid_bounds": true,
+      "no_action_aliases": true,
+      "manifest_sha256": "0e191a41609fa2a1b9f507e47e9d3d7cfeb3b9681e75147426fd831078ed6b81",
+      "atlas_sha256": "4b71ac736d43149552ef76e7b255292249038f66862def48c61622c85ae8c86c",
+      "final_visual_review": "../c/finalization-review.md"
+    },
+    "python": {
+      "clips": 20,
+      "frames": 62,
+      "ten_moves_present": true,
+      "all_frames_visible_with_real_alpha_and_valid_bounds": true,
+      "no_action_aliases": true,
+      "manifest_sha256": "2015f1052c380dabedfc91a5516adab188b2c331cff4ed7311640af15097edeb",
+      "atlas_sha256": "5544735a6758f52974c2ce35da0204406f2cfcc925b00536993ca0c5e791fa9d",
+      "final_visual_review": "../python/finalization-review.md"
+    },
+    "cpp": {
+      "clips": 20,
+      "frames": 61,
+      "ten_moves_present": true,
+      "all_frames_visible_with_real_alpha_and_valid_bounds": true,
+      "no_action_aliases": true,
+      "manifest_sha256": "129b5e9353ca441cbeff1fb996429f27d795402b7a3410fe66fec6254dd7e09b",
+      "atlas_sha256": "8e85e765b6257d590fe9de32aae8887b19e3964db647ca629de5a73811d34bb3",
+      "final_visual_review": "../cpp/finalization-review.md"
+    }
+  },
+  "checks": {
+    "rust_suite_passed": 234,
+    "rust_command": "cargo test --all-targets --all-features",
+    "rust_suite_note": "Entire suite repeated successfully after final Go jump v2 promotion.",
+    "python_tool_tests_passed": 7,
+    "cargo_fmt_check": "passed",
+    "cargo_clippy_all_targets_all_features_deny_warnings": "passed",
+    "baseline_directories_unchanged": [
+      "src/combat",
+      "src/characters",
+      "src/game",
+      "assets/placeholder",
+      "assets/tuning"
+    ]
+  },
+  "native_visual_reports": "Six finalization-review.md reports complete. New Go World repeated after jumpv2:638PNGs/1845states, all10moves per facing, all10returns to groundedidle, video1845frames/60fps/30.75s. Final Labjump10PNGs; prior269Lab images preserved for unchanged clips. Studio60unique frames with3jump frames recaptured; final normal Go\u00d7Go match53\u00d70.",
+  "status": "complete; final canonical assets structurally and visually verified"
+}

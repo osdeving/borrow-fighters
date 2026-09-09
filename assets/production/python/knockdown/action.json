@@ -1,0 +1,77 @@
+{
+  "action": "knockdown",
+  "source": "knockdown/source-v1.png",
+  "sheet": "knockdown/keyed-v1.png",
+  "reviewed": true,
+  "loop": false,
+  "status": "runtime_verified_mvp",
+  "frames": [
+    {
+      "name": "knockdown_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 510,
+        "h": 768
+      },
+      "pivot": {
+        "x": 330,
+        "y": 677
+      },
+      "duration_ms": 100,
+      "phase": "fall"
+    },
+    {
+      "name": "knockdown_01",
+      "source_rect": {
+        "x": 510,
+        "y": 0,
+        "w": 590,
+        "h": 768
+      },
+      "pivot": {
+        "x": 295,
+        "y": 675
+      },
+      "duration_ms": 220,
+      "phase": "grounded"
+    },
+    {
+      "name": "knockdown_02",
+      "source_rect": {
+        "x": 1100,
+        "y": 0,
+        "w": 470,
+        "h": 768
+      },
+      "pivot": {
+        "x": 245,
+        "y": 682
+      },
+      "duration_ms": 180,
+      "phase": "get_up"
+    },
+    {
+      "name": "knockdown_03",
+      "source_rect": {
+        "x": 1570,
+        "y": 0,
+        "w": 478,
+        "h": 768
+      },
+      "pivot": {
+        "x": 225,
+        "y": 686
+      },
+      "duration_ms": 100,
+      "phase": "recover"
+    }
+  ],
+  "review_notes": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Distinct fall, grounded recovery, get-up and guard fit protected36frame recovery.",
+  "runtime_review": {
+    "scope": "MVP integration; actual World/Raylib showcase in both facings",
+    "report": "../../candidates/python/review/mvp/showcase-validation.json",
+    "actor_states": "attack, block, hit and knockdown selected by real combat state",
+    "reviewer": "Codex root; contact sheets and full-resolution samples inspected"
+  }
+}

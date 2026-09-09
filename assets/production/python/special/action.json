@@ -1,0 +1,75 @@
+{
+  "action": "special",
+  "source": "special/source-v6.png",
+  "sheet": "special/keyed.png",
+  "loop": false,
+  "source_body_height_reference_px": 616,
+  "suggested_scale_to_runtime": 0.42857142857142855,
+  "normalization_note": "v6 selected after reach/height revisions. Emission is already present at frame0; the single waist snake extends forward while the original separate projectile remains untouched. Uniform body scale264/616. Existing origin(+205.333,-157.333) maps to source point approximately(679.11,328.89) from pivot(200,696), in the first open mouth region. Earlier variants were too long/high or short; all retained. Second pose retracts, third recovers.",
+  "frames": [
+    {
+      "name": "special_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 875,
+        "h": 768
+      },
+      "pivot": {
+        "x": 200,
+        "y": 696
+      },
+      "duration_ms": 100,
+      "phase": "emit"
+    },
+    {
+      "name": "special_01",
+      "source_rect": {
+        "x": 875,
+        "y": 0,
+        "w": 661,
+        "h": 768
+      },
+      "pivot": {
+        "x": 172,
+        "y": 698
+      },
+      "duration_ms": 100,
+      "phase": "recoil"
+    },
+    {
+      "name": "special_02",
+      "source_rect": {
+        "x": 1536,
+        "y": 0,
+        "w": 512,
+        "h": 768
+      },
+      "pivot": {
+        "x": 242,
+        "y": 690
+      },
+      "duration_ms": 100,
+      "phase": "recovery"
+    }
+  ],
+  "emission_review": {
+    "baseline_contract": "../contact-contract.json",
+    "baseline_origin_world": {
+      "x": 205.33333333333331,
+      "y": -157.33333333333331
+    },
+    "mapped_source_point": {
+      "x": 679.1111111111111,
+      "y": 328.8888888888889
+    },
+    "review": "The origin lies at the rear of the open-mouth cavity; snout extends slightly farther right. Verify the unchanged projectile in native Lab after consolidated export."
+  },
+  "timing_reference": {
+    "startup": 0,
+    "spawn_frame": 0,
+    "visual_duration": 18,
+    "cooldown": 50
+  },
+  "review_notes": "Built-in image_gen from fixed original master and new idle. No candidate combat metadata. Magenta extraction without Rust contour mode; isolated matte corner pixels cleared. Adult woman/current full outfit preserved; final native review awaits consolidation."
+}

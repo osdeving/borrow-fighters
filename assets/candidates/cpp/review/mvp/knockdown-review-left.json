@@ -1,0 +1,83 @@
+{
+  "render_size": [
+    1280,
+    720
+  ],
+  "reversed": false,
+  "scenarios": [
+    {
+      "captures": [
+        {
+          "actors": [
+            {
+              "blocking": false,
+              "blockstun": false,
+              "character": "python",
+              "clip": "sweep",
+              "crouching": true,
+              "frame": "sweep_02",
+              "frame_clip": "sweep",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false
+            },
+            {
+              "blocking": false,
+              "blockstun": false,
+              "character": "cpp",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_01",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 88,
+              "hitstun": true
+            }
+          ],
+          "image": "left-received-python-04-attacksweep-f073.png",
+          "result": "Hit { damage: 10 }",
+          "tick": 73
+        },
+        {
+          "actors": [
+            {
+              "blocking": false,
+              "blockstun": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false
+            },
+            {
+              "blocking": false,
+              "blockstun": false,
+              "character": "cpp",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_02",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 88,
+              "hitstun": true
+            }
+          ],
+          "image": "left-received-python-04-attacksweep-f083.png",
+          "result": "Hit { damage: 10 }",
+          "tick": 83
+        }
+      ],
+      "character": "python",
+      "contact_frame": 61,
+      "result": "Hit { damage: 10 }",
+      "scenario": "Attack(Sweep)",
+      "scenario_label": "Sweep / punish standing guard",
+      "raw_capture_count": 9
+    }
+  ],
+  "review_target": "cpp knockdown received from Python sweep",
+  "raw_capture_directory": "/tmp/borrow-fighters-cpp-knockdown-final-left"
+}

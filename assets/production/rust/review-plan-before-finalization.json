@@ -1,0 +1,129 @@
+{
+  "character": "rust",
+  "provenance": {
+    "status": "candidate",
+    "generator": "built-in imagegen",
+    "identity_reference": "reference/master-existing.png",
+    "combat": "Visual-only candidate; runtime retains baseline combat_manifest."
+  },
+  "actions": {
+    "idle": {
+      "approved": true,
+      "scale_to_runtime": 0.47,
+      "notes": "Identity and alpha edges reviewed; Raylib Viewer at runtime size feet y616, body~269px. Source snapshots preserved."
+    },
+    "walk": {
+      "approved": true,
+      "scale_to_runtime": 0.63,
+      "notes": "Four selected keys contact/pass each foot; original v3 cells 0,1,3,5. Need movement check after export."
+    },
+    "crouch": {
+      "approved": true,
+      "scale_to_runtime": 0.47,
+      "sheet": "crouch/keyed.png",
+      "notes": "Source inspected by production agent; root alpha review and common-scale preview. Functional review pending."
+    },
+    "jump": {
+      "approved": true,
+      "scale_to_runtime": 0.47,
+      "sheet": "jump/keyed.png",
+      "notes": "Three selected keys: takeoff, rise and fall. The source includes a fourth landing crouch, omitted because the engine selects idle once grounded. Virtual airborne pivots are calibrated explicitly to align the rise/fall pelvis and head, removing vertical travel already present in the source sheet; only World supplies the jump arc. Total800ms follows existing physics. Source frame3 remains preserved, not exported."
+    },
+    "block": {
+      "approved": true,
+      "scale_to_runtime": 0.46,
+      "sheet": "block/keyed.png",
+      "notes": "Source inspected by production agent; root alpha review and common-scale preview. Functional review pending."
+    },
+    "crouch_block": {
+      "approved": true,
+      "scale_to_runtime": 0.43,
+      "sheet": "crouch_block/keyed.png",
+      "notes": "Source inspected by production agent; root alpha review and common-scale preview. Functional review pending."
+    },
+    "hit": {
+      "approved": true,
+      "scale_to_runtime": 0.47,
+      "sheet": "hit/keyed.png",
+      "notes": "Source inspected by production agent; root alpha review and common-scale preview. Functional review pending."
+    },
+    "punch_light": {
+      "approved": true,
+      "scale_to_runtime": 0.491743,
+      "notes": "Revised low contact pose against unchanged baseline collision geometry. Source and explicit pivots reviewed; final Combat Lab capture pending.",
+      "sheet": "punch_light/keyed.png"
+    },
+    "punch_heavy": {
+      "approved": true,
+      "scale_to_runtime": 0.52549,
+      "notes": "Revised low contact pose against unchanged baseline collision geometry. Source and explicit pivots reviewed; final Combat Lab capture pending.",
+      "sheet": "punch_heavy/keyed.png"
+    },
+    "kick": {
+      "approved": true,
+      "scale_to_runtime": 0.556017,
+      "notes": "Revised low contact pose against unchanged baseline collision geometry. Source and explicit pivots reviewed; final Combat Lab capture pending.",
+      "sheet": "kick/keyed.png"
+    },
+    "sweep": {
+      "approved": true,
+      "scale_to_runtime": 0.47,
+      "notes": "Selected v2 rising sweep: the original crouched floor sweep missed the baseline hitbox at y480\u2013520. Its raised ankle/shin intersects that existing box. The game clears crouching during all attacks; physical posture and collision remain unchanged. v3 dropped the foot below contact; v4 raised it further, both rejected. Ground support fixed; hand contact and upright recovery are explicit.",
+      "sheet": "sweep/keyed.png"
+    },
+    "overhead": {
+      "approved": true,
+      "scale_to_runtime": 0.537074,
+      "notes": "v3 runtime fist above active box. v4 lowered too far near lower edge. v5 selected: active glove around source x899..960,y404..457, mapping with unchanged global pivot783,663 and scale268/499 into world x62..95,y-139..-111; target box world x50.67..160,y-166.67..-101.33. Head/body/feet preserve prior ground placement. Source reviewed; runtime recapture pending.",
+      "sheet": "overhead/keyed.png"
+    },
+    "anti_air": {
+      "approved": true,
+      "scale_to_runtime": 0.509506,
+      "notes": "Four explicit source poses reviewed by producing agent. Runtime body normalized using source_body_height_reference_px; no per-frame automatic fitting.",
+      "sheet": "anti_air/keyed.png"
+    },
+    "air_punch": {
+      "approved": true,
+      "scale_to_runtime": 0.497217,
+      "notes": "v1 runtime fist was much too high. v2 selected downward air punch: active glove approximately source x885..953,y443..497 maps through unchanged global pivot743,650 and scale268/539 to world x71..104,y-103..-76; captured active box x50.67..145,y-130..-74. Source body also pitches down: active hair top155 versus startup110, rear boot bottom602 versus575. This visible 13..22px shift is NOT concealed by moving pivot. v3 and v4 attempts to restore body height were rejected because generator lowered it further. Runtime review should judge the brief downward body pitch; contact geometry fits without combat changes.",
+      "sheet": "air_punch/keyed.png"
+    },
+    "air_kick": {
+      "approved": true,
+      "scale_to_runtime": 0.497217,
+      "notes": "Uniform visual calibration of the airborne reference for all four poses: virtual Y650\u2192630 (~10px downward in world), preserving scale and inter-pose offsets. The initial sole missed the unchanged active box by4px. This keeps feet above the physical anchor and brings the active sole into contact; no body, hitbox, trajectory or timing modification.",
+      "sheet": "air_kick/keyed.png"
+    },
+    "throw": {
+      "approved": true,
+      "scale_to_runtime": 0.538153,
+      "notes": "Four explicit source poses reviewed by producing agent. Runtime body normalized using source_body_height_reference_px; no per-frame automatic fitting.",
+      "sheet": "throw/keyed.png"
+    },
+    "special": {
+      "approved": true,
+      "scale_to_runtime": 0.47,
+      "sheet": "special/keyed.png",
+      "notes": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+    },
+    "spawn": {
+      "approved": true,
+      "scale_to_runtime": 0.516378,
+      "sheet": "spawn/keyed.png",
+      "notes": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+    },
+    "victory": {
+      "approved": true,
+      "scale_to_runtime": 0.353096,
+      "sheet": "victory/keyed.png",
+      "notes": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+    },
+    "defeat": {
+      "approved": true,
+      "scale_to_runtime": 0.415504,
+      "sheet": "defeat/keyed.png",
+      "notes": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+    }
+  }
+}

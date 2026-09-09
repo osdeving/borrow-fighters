@@ -1,0 +1,90 @@
+{
+  "action": "sweep",
+  "source": "sweep/source-v3.png",
+  "sheet": "sweep/keyed-v3.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "finalization refinement visually accepted by primary agent; native World/Lab and default application match complete",
+  "source_body_height_reference_px": 630,
+  "frames": [
+    {
+      "name": "sweep_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 627,
+        "h": 627
+      },
+      "pivot": {
+        "x": 275,
+        "y": 540
+      },
+      "duration_ms": 200,
+      "phase": "startup"
+    },
+    {
+      "name": "sweep_1",
+      "source_rect": {
+        "x": 627,
+        "y": 0,
+        "w": 627,
+        "h": 627
+      },
+      "pivot": {
+        "x": 178,
+        "y": 545
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "sweep_2",
+      "source_rect": {
+        "x": 0,
+        "y": 627,
+        "w": 627,
+        "h": 627
+      },
+      "pivot": {
+        "x": 300,
+        "y": 541
+      },
+      "duration_ms": 125,
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_3",
+      "source_rect": {
+        "x": 627,
+        "y": 627,
+        "w": 627,
+        "h": 627
+      },
+      "pivot": {
+        "x": 260,
+        "y": 548
+      },
+      "duration_ms": 125,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "v3: low support, raised active sole, retract and half-rise, four real generated bodies. Baseline timing200/150/250ms conserved as200/150/125/125ms. Sole center crosses original active band; top of tilted toe approximately18px above it, no claim that full contour is inside. Native Lab and complete World reviewed, root accepted refinement.",
+  "combat_timing": {
+    "move_id": "CSegfaultSweep",
+    "input": "Sweep",
+    "duration": 36,
+    "active_start": 12,
+    "active_end_inclusive": 20,
+    "whiff_recovery": 15,
+    "clip": "sweep"
+  },
+  "runtime_review": {
+    "world_summary": "../../candidates/c/review/refinement-2026-09-07/world/capture-summary.json",
+    "lab_report": "../../candidates/c/review/refinement-2026-09-07/lab/capture-report.json",
+    "loaded_manifest_matches_candidate": true,
+    "combat_uses_baseline_manifest": true,
+    "clip_captured_in_filtered_lab": true,
+    "final_art_approved": true,
+    "approval_scope": "Three refinements accepted by primary agent after contact review and default-app C versus Python match; full World review completed."
+  }
+}

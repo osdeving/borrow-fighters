@@ -1,0 +1,246 @@
+{
+  "status": "refinement approved by primary visual review; World, Lab and native default-app evidence complete",
+  "manifest_sha256": "129b5e9353ca441cbeff1fb996429f27d795402b7a3410fe66fec6254dd7e09b",
+  "atlas_sha256": "8e85e765b6257d590fe9de32aae8887b19e3964db647ca629de5a73811d34bb3",
+  "clips": 20,
+  "frames": 61,
+  "atlas_dimensions": [
+    3160,
+    3064
+  ],
+  "durations_preserved": {
+    "walk": [
+      100,
+      100,
+      100,
+      100
+    ],
+    "air_kick": [
+      116,
+      167,
+      150
+    ],
+    "crouch_block": [
+      110,
+      90,
+      140
+    ]
+  },
+  "new_combat_fields": 0,
+  "selected_alpha_bounds": {
+    "idle_0": {
+      "solid_bounds": [
+        75,
+        14,
+        209,
+        281
+      ],
+      "solid_top_from_pivot": -267,
+      "solid_bottom_from_pivot": 0
+    },
+    "idle_1": {
+      "solid_bounds": [
+        74,
+        13,
+        208,
+        281
+      ],
+      "solid_top_from_pivot": -268,
+      "solid_bottom_from_pivot": 0
+    },
+    "idle_2": {
+      "solid_bounds": [
+        75,
+        13,
+        209,
+        281
+      ],
+      "solid_top_from_pivot": -268,
+      "solid_bottom_from_pivot": 0
+    },
+    "walk_0": {
+      "solid_bounds": [
+        29,
+        29,
+        189,
+        297
+      ],
+      "solid_top_from_pivot": -268,
+      "solid_bottom_from_pivot": 0
+    },
+    "walk_1": {
+      "solid_bounds": [
+        25,
+        30,
+        153,
+        298
+      ],
+      "solid_top_from_pivot": -268,
+      "solid_bottom_from_pivot": 0
+    },
+    "walk_2": {
+      "solid_bounds": [
+        8,
+        30,
+        181,
+        297
+      ],
+      "solid_top_from_pivot": -267,
+      "solid_bottom_from_pivot": 0
+    },
+    "walk_3": {
+      "solid_bounds": [
+        47,
+        30,
+        141,
+        299
+      ],
+      "solid_top_from_pivot": -269,
+      "solid_bottom_from_pivot": 0
+    },
+    "crouch_0": {
+      "solid_bounds": [
+        77,
+        168,
+        205,
+        287
+      ],
+      "solid_top_from_pivot": -118,
+      "solid_bottom_from_pivot": 1
+    },
+    "crouch_1": {
+      "solid_bounds": [
+        63,
+        172,
+        190,
+        287
+      ],
+      "solid_top_from_pivot": -115,
+      "solid_bottom_from_pivot": 0
+    },
+    "crouch_2": {
+      "solid_bounds": [
+        57,
+        174,
+        183,
+        287
+      ],
+      "solid_top_from_pivot": -113,
+      "solid_bottom_from_pivot": 0
+    },
+    "crouch_block_0": {
+      "solid_bounds": [
+        68,
+        168,
+        193,
+        286
+      ],
+      "solid_top_from_pivot": -118,
+      "solid_bottom_from_pivot": 0
+    },
+    "crouch_block_1": {
+      "solid_bounds": [
+        61,
+        172,
+        182,
+        286
+      ],
+      "solid_top_from_pivot": -114,
+      "solid_bottom_from_pivot": 0
+    },
+    "crouch_block_2": {
+      "solid_bounds": [
+        56,
+        172,
+        177,
+        286
+      ],
+      "solid_top_from_pivot": -114,
+      "solid_bottom_from_pivot": 0
+    },
+    "air_kick_00": {
+      "solid_bounds": [
+        41,
+        28,
+        189,
+        254
+      ],
+      "solid_top_from_pivot": -266,
+      "solid_bottom_from_pivot": -40
+    },
+    "air_kick_01": {
+      "solid_bounds": [
+        19,
+        45,
+        270,
+        268
+      ],
+      "solid_top_from_pivot": -266,
+      "solid_bottom_from_pivot": -43
+    },
+    "air_kick_02": {
+      "solid_bounds": [
+        10,
+        45,
+        157,
+        250
+      ],
+      "solid_top_from_pivot": -264,
+      "solid_bottom_from_pivot": -59
+    }
+  },
+  "tests": [
+    "cargo test --test sprite_candidates: 2 passed"
+  ],
+  "source_snapshot": "snapshots/2026-09-07-before-finalization",
+  "lab": {
+    "captured_images": 36,
+    "loaded_manifest_matches_candidate": true,
+    "loaded_combat_baseline_image": "cpp-fighter-atlas-a.png"
+  },
+  "world": {
+    "captured_images": 624,
+    "simulation_states": 1845,
+    "candidate_loaded_matches_disk": true,
+    "candidate_image_sha256": "8e85e765b6257d590fe9de32aae8887b19e3964db647ca629de5a73811d34bb3  assets/candidates/cpp/cpp-fighter-atlas.png\n",
+    "moves_seen_per_player": [
+      [
+        "air_kick",
+        "air_punch",
+        "anti_air",
+        "kick",
+        "overhead",
+        "punch_heavy",
+        "punch_light",
+        "special",
+        "sweep",
+        "throw"
+      ],
+      [
+        "air_kick",
+        "air_punch",
+        "anti_air",
+        "kick",
+        "overhead",
+        "punch_heavy",
+        "punch_light",
+        "special",
+        "sweep",
+        "throw"
+      ]
+    ],
+    "returned_to_idle_after_moves": 10,
+    "final_health": [
+      91,
+      91
+    ],
+    "encoded_video": {
+      "r_frame_rate": "60/1",
+      "duration": "30.750000",
+      "nb_frames": "1845"
+    },
+    "summary": "../../candidates/cpp/review/refinement-2026-09-07/world/capture-summary.json",
+    "visual_review": "Both facings reviewed for walk keys, walk-to-idle, both aerial transitions, and active/emission poses of all10moves. Sparse capture, not every simulation PNG."
+  },
+  "native_default_app": "../../candidates/cpp/review/refinement-2026-09-07/native-match-assets.json"
+}

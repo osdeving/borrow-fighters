@@ -44,7 +44,7 @@ use borrow_fighters::config::world_px;
 
 #[test]
 fn close_range_moves_are_registered_in_table_order() {
-    assert_eq!(CLOSE_RANGE_MOVE_SPECS.len(), 34);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS.len(), 52);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[0].id, MoveId::LightPunch);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[1].id, MoveId::HeavyPunch);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[2].id, MoveId::Kick);
@@ -88,6 +88,21 @@ fn close_range_moves_are_registered_in_table_order() {
     );
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[32].id, MoveId::PythonVisionAntiAir);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[33].id, MoveId::PythonConstrictThrow);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[34].id, MoveId::CppReferenceJab);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[35].id, MoveId::CppTemplateStrike);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[36].id, MoveId::CppOperatorKick);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[37].id, MoveId::CppVectorSweep);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[38].id, MoveId::CppVirtualOverhead);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[39].id, MoveId::CppExceptionAntiAir);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[40].id, MoveId::CppMoveThrow);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[41].id, MoveId::RustBorrowFortress);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[42].id, MoveId::DukePrintlnBarrage);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[43].id, MoveId::CSegmentationFault);
+    assert_eq!(
+        CLOSE_RANGE_MOVE_SPECS[44].id,
+        MoveId::PythonImportAntigravity
+    );
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS[45].id, MoveId::CppUndefinedBazooka);
 }
 
 #[test]
@@ -227,9 +242,9 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(rust_throw.input, MoveInputKind::Throw);
     assert_eq!(rust_throw.label, "Ownership");
     assert_eq!(rust_throw.damage, RUST_OWNERSHIP_THROW_DAMAGE);
-    assert_eq!(rust_throw.frames.duration, FrameCount::new(20));
-    assert_eq!(rust_throw.frames.active_start, FrameCount::new(5));
-    assert_eq!(rust_throw.frames.active_end, FrameCount::new(7));
+    assert_eq!(rust_throw.frames.duration, FrameCount::new(48));
+    assert_eq!(rust_throw.frames.active_start, FrameCount::new(10));
+    assert_eq!(rust_throw.frames.active_end, FrameCount::new(12));
     assert_eq!(rust_throw.hitbox.width, world_px(42.0));
     assert_eq!(rust_throw.hitbox.height, world_px(118.0));
     assert_eq!(rust_throw.hitbox.y_offset, world_px(30.0));
@@ -297,9 +312,9 @@ fn character_specific_move_specs_have_distinct_tuning() {
     assert_eq!(duke_throw.input, MoveInputKind::Throw);
     assert_eq!(duke_throw.label, "Enterprise Grab");
     assert_eq!(duke_throw.damage, DUKE_ENTERPRISE_THROW_DAMAGE);
-    assert_eq!(duke_throw.frames.duration, FrameCount::new(30));
-    assert_eq!(duke_throw.frames.active_start, FrameCount::new(9));
-    assert_eq!(duke_throw.frames.active_end, FrameCount::new(11));
+    assert_eq!(duke_throw.frames.duration, FrameCount::new(48));
+    assert_eq!(duke_throw.frames.active_start, FrameCount::new(10));
+    assert_eq!(duke_throw.frames.active_end, FrameCount::new(12));
     assert_eq!(duke_throw.hitbox.width, world_px(56.0));
     assert_eq!(duke_throw.guard_rule, GuardRule::Throw);
     assert_eq!(duke_throw.hit_reaction, DUKE_ENTERPRISE_THROW_REACTION);

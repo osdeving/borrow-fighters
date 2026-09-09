@@ -1,0 +1,78 @@
+{
+  "action": "spawn",
+  "source": "spawn/source-v1.png",
+  "sheet": "spawn/keyed-v1.png",
+  "loop": false,
+  "reviewed": false,
+  "status": "candidate: source and two-facing previews inspected; real Combat Lab captured; artistic limitations recorded in review.md",
+  "source_body_height_reference_px": 625,
+  "frames": [
+    {
+      "name": "spawn_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 512,
+        "h": 768
+      },
+      "pivot": {
+        "x": 270,
+        "y": 696
+      },
+      "duration_ms": 650,
+      "phase": "arrive"
+    },
+    {
+      "name": "spawn_1",
+      "source_rect": {
+        "x": 512,
+        "y": 0,
+        "w": 512,
+        "h": 768
+      },
+      "pivot": {
+        "x": 258,
+        "y": 697
+      },
+      "duration_ms": 850,
+      "phase": "show_book"
+    },
+    {
+      "name": "spawn_2",
+      "source_rect": {
+        "x": 1024,
+        "y": 0,
+        "w": 512,
+        "h": 768
+      },
+      "pivot": {
+        "x": 246,
+        "y": 697
+      },
+      "duration_ms": 245,
+      "phase": "point"
+    },
+    {
+      "name": "spawn_3",
+      "source_rect": {
+        "x": 1536,
+        "y": 0,
+        "w": 512,
+        "h": 768
+      },
+      "pivot": {
+        "x": 264,
+        "y": 697
+      },
+      "duration_ms": 800,
+      "phase": "guard"
+    }
+  ],
+  "review_notes": "Generated source poses inspected; elderly identity, denim and continuous C book preserved.",
+  "runtime_review": {
+    "report": "../../candidates/c/review/runtime-lab-final/capture-report.json",
+    "loaded_manifest_matches_candidate": true,
+    "clip_captured": true,
+    "final_art_approved": false
+  }
+}

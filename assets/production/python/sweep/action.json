@@ -1,0 +1,77 @@
+{
+  "action": "sweep",
+  "source": "sweep/source-mvp-v1.png",
+  "sheet": "sweep/keyed-mvp-v1.png",
+  "reviewed": true,
+  "loop": false,
+  "status": "runtime_verified_mvp",
+  "frames": [
+    {
+      "name": "sweep_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 500,
+        "h": 768
+      },
+      "pivot": {
+        "x": 270,
+        "y": 684
+      },
+      "duration_ms": 150,
+      "phase": "startup"
+    },
+    {
+      "name": "sweep_01",
+      "source_rect": {
+        "x": 500,
+        "y": 0,
+        "w": 680,
+        "h": 768
+      },
+      "pivot": {
+        "x": 300,
+        "y": 681
+      },
+      "duration_ms": 133,
+      "phase": "active"
+    },
+    {
+      "name": "sweep_02",
+      "source_rect": {
+        "x": 1180,
+        "y": 0,
+        "w": 400,
+        "h": 768
+      },
+      "pivot": {
+        "x": 170,
+        "y": 684
+      },
+      "duration_ms": 100,
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_03",
+      "source_rect": {
+        "x": 1580,
+        "y": 0,
+        "w": 468,
+        "h": 768
+      },
+      "pivot": {
+        "x": 220,
+        "y": 690
+      },
+      "duration_ms": 100,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Low active foot now attacks ankle/shin band of the actual crouching MoveSpec. Previous action mapping preserved in action-pre-mvp.json. Timing unchanged.",
+  "runtime_review": {
+    "scope": "MVP integration; actual World/Raylib showcase in both facings",
+    "report": "../../candidates/python/review/mvp/showcase-validation.json",
+    "actor_states": "attack, block, hit and knockdown selected by real combat state",
+    "reviewer": "Codex root; contact sheets and full-resolution samples inspected"
+  }
+}

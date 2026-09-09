@@ -17,12 +17,31 @@ use crate::scenes::combat_lab::{CombatLab, CombatLabPose};
 use crate::ui::combat_debug;
 
 use super::{
-    BACKGROUND, FighterDrawOptions, PLAYER_C, PLAYER_GO, PLAYER_ONE, PLAYER_PYTHON, PLAYER_TWO,
-    PROJECTILE, PROJECTILE_FILL, UI_MUTED, draw_arena, draw_fighter, outline_rect,
+    BACKGROUND, FighterDrawOptions, PLAYER_C, PLAYER_CPP, PLAYER_GO, PLAYER_ONE, PLAYER_PYTHON,
+    PLAYER_TWO, PROJECTILE, PROJECTILE_FILL, UI_MUTED, draw_arena, draw_fighter, outline_rect,
 };
 
 /// Draws the isolated Combat Lab scene.
 pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, assets: &GameAssets) {
+    if let Some(world) = lab.super_preview_world() {
+        use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
+        let mut flags = FeatureFlags::default();
+        flags.set(FeatureFlag::ShowHud, false);
+        flags.set(FeatureFlag::ShowStageLife, false);
+        super::draw_fight(
+            draw,
+            world,
+            ArenaId::home_for_character(lab.character()),
+            world.elapsed_seconds,
+            flags,
+            super::GamepadStatus::default(),
+            assets,
+        );
+        if !super::authored_supers::replaces_frame(world) {
+            combat_debug::draw_combat_lab_debug(draw, lab, assets.menu_font.as_ref());
+        }
+        return;
+    }
     draw.clear_background(BACKGROUND);
     if lab.show_background() {
         draw_arena(
@@ -34,6 +53,10 @@ pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, asset
         draw_lab_grid(draw, Color::new(44, 49, 60, 118));
     } else {
         draw_lab_grid(draw, Color::new(44, 49, 60, 255));
+    }
+
+    if let Some(state) = lab.fighter().cinematic_special() {
+        super::cinematic_effects::draw_background(draw, lab.fighter(), state, assets);
     }
 
     let (body_color, sprite_atlas, projectile_texture) = match lab.character() {
@@ -62,7 +85,17 @@ pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, asset
             assets.python_fighter.as_ref(),
             assets.python_projectile.as_ref(),
         ),
+        CharacterId::Cpp => (
+            PLAYER_CPP,
+            assets.cpp_fighter.as_ref(),
+            assets.cpp_projectile.as_ref(),
+        ),
     };
+    let sprite_atlas = super::fighter_atlas_for_intro(
+        lab.pose() == CombatLabPose::Spawn,
+        super::character_visuals(lab.character(), assets).start_atlas,
+        sprite_atlas,
+    );
 
     draw_fighter(
         draw,
@@ -74,11 +107,24 @@ pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, asset
             spritesheet: assets.fighter_spritesheet.as_ref(),
             world_elapsed_seconds: lab.elapsed_seconds(),
             forced_clip: forced_clip_for_pose(lab.pose()),
+            placement: None,
         },
     );
 
     draw_lab_projectiles(draw, lab.projectiles(), projectile_texture);
-    combat_debug::draw_combat_lab_debug(draw, lab);
+    if let Some(state) = lab.fighter().cinematic_special() {
+        super::cinematic_effects::draw_foreground(draw, lab.fighter(), state, assets);
+    }
+    combat_debug::draw_combat_lab_debug(draw, lab, assets.menu_font.as_ref());
+    if lab.is_signature_actor_preview() {
+        draw.draw_text(
+            "Actor preview. Signature effects/contact: open Move Showcase",
+            screen_px(36),
+            screen_px(110),
+            screen_px(13),
+            UI_MUTED,
+        );
+    }
 }
 
 fn draw_lab_grid(draw: &mut impl super::DrawTarget, line_color: Color) {
@@ -133,6 +179,9 @@ fn forced_clip_for_pose(pose: CombatLabPose) -> Option<sprites::FighterSpriteCli
         CombatLabPose::Jump => Some(sprites::FighterSpriteClip::Jump),
         CombatLabPose::Block => Some(sprites::FighterSpriteClip::Block),
         CombatLabPose::Hit => Some(sprites::FighterSpriteClip::Hit),
-        CombatLabPose::Victory => Some(sprites::FighterSpriteClip::Taunt),
+        CombatLabPose::Victory => Some(sprites::FighterSpriteClip::Victory),
+        CombatLabPose::Spawn => Some(sprites::FighterSpriteClip::Spawn),
+        CombatLabPose::Defeat => Some(sprites::FighterSpriteClip::Defeat),
+        CombatLabPose::CrouchBlock => Some(sprites::FighterSpriteClip::CrouchBlock),
     }
 }

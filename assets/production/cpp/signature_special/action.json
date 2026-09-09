@@ -1,0 +1,150 @@
+{
+  "action": "signature_special",
+  "source": "signature_special/source-extraordinary-v2.png",
+  "sheet": "signature_special/keyed-extraordinary-v2-edge-clean.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "runtime_verified_spectacle",
+  "source_body_height_reference_px": 333,
+  "suggested_scale_to_runtime": 0.8048048048048048,
+  "frames": [
+    {
+      "name": "signature_special_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 443,
+        "h": 444
+      },
+      "pivot": {
+        "x": 220,
+        "y": 386
+      },
+      "duration_ms": 150,
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_01",
+      "source_rect": {
+        "x": 443,
+        "y": 0,
+        "w": 444,
+        "h": 444
+      },
+      "pivot": {
+        "x": 174,
+        "y": 368
+      },
+      "duration_ms": 183,
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_02",
+      "source_rect": {
+        "x": 887,
+        "y": 0,
+        "w": 443,
+        "h": 444
+      },
+      "pivot": {
+        "x": 158,
+        "y": 382
+      },
+      "duration_ms": 200,
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_03",
+      "source_rect": {
+        "x": 1330,
+        "y": 0,
+        "w": 444,
+        "h": 444
+      },
+      "pivot": {
+        "x": 135,
+        "y": 359
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_04",
+      "source_rect": {
+        "x": 0,
+        "y": 444,
+        "w": 443,
+        "h": 443
+      },
+      "pivot": {
+        "x": 195,
+        "y": 356
+      },
+      "duration_ms": 133,
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_05",
+      "source_rect": {
+        "x": 443,
+        "y": 444,
+        "w": 444,
+        "h": 443
+      },
+      "pivot": {
+        "x": 265,
+        "y": 356
+      },
+      "duration_ms": 100,
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_06",
+      "source_rect": {
+        "x": 887,
+        "y": 444,
+        "w": 443,
+        "h": 443
+      },
+      "pivot": {
+        "x": 198,
+        "y": 356
+      },
+      "duration_ms": 350,
+      "phase": "recovery"
+    },
+    {
+      "name": "signature_special_07",
+      "source_rect": {
+        "x": 1330,
+        "y": 444,
+        "w": 444,
+        "h": 443
+      },
+      "pivot": {
+        "x": 176,
+        "y": 381
+      },
+      "duration_ms": 534,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Undefined Bazooka: opens tiny bag, extracts absurdly huge weapon, shoulders it, aims down/fires, follows through, recoils in smoke, stows, returns ready. 108ticks1800ms: startup0..31, active32..54, recovery55..107. First active muzzle(1698,325) from pivot(1465,359) maps to(+187.5,-27.4)world. Dedicated projectile/impact atlas supplies the real moving rocket and ground explosion. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available.",
+  "runtime_review": {
+    "report": "../../candidates/cpp/review/extraordinary/runtime-review.json",
+    "actual_clip_present": true,
+    "both_facings_verified": true,
+    "all_selected_keys_observed": true,
+    "reviewed_frames": [
+      "signature_special_00",
+      "signature_special_01",
+      "signature_special_02",
+      "signature_special_03",
+      "signature_special_04",
+      "signature_special_05",
+      "signature_special_06",
+      "signature_special_07"
+    ],
+    "review_scope": "Integrated art and real contact coherence for the extraordinary signatures / throws goal."
+  }
+}

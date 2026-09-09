@@ -1,0 +1,447 @@
+{
+  "passed": true,
+  "check_count": 41,
+  "input_backend": "Real XTest key/button events in unmapped-parent Xephyr. No host focus or pointer manipulation.",
+  "runs": {
+    "showcase_and_lab": {
+      "isolated_display": ":93",
+      "host_parent_unmapped": true,
+      "input_backend": "XTest real key/button events",
+      "binary_sha256": "630f18430536a51951842de45b472cc95fde3441eb1e97e44b8d81409c1512bf",
+      "checks": [
+        {
+          "name": "showcase-c_pause_freezes_frame_counter",
+          "passed": true
+        },
+        {
+          "name": "showcase-c_period_advances_frame",
+          "passed": true
+        },
+        {
+          "name": "showcase-c_home_and_replay_reset_same_frame",
+          "passed": true
+        },
+        {
+          "name": "showcase-c_X_switches_and_restores_target_side",
+          "passed": true,
+          "blue_C_costume_centers": [
+            402.11,
+            894.68,
+            402.45
+          ],
+          "measurement_note": "Tracked Old C blue costume; this matchup has Python as target, so initial Rust-orange assumption was inapplicable."
+        },
+        {
+          "name": "showcase-c_L_toggles_repeat",
+          "passed": true
+        },
+        {
+          "name": "showcase-c_BIOS_covers_showcase_overlay",
+          "passed": true
+        },
+        {
+          "name": "showcase-c_full_sequence_restores_showcase_UI",
+          "passed": true
+        },
+        {
+          "name": "showcase-c_long_repeat_progresses_after_restoration",
+          "passed": true
+        },
+        {
+          "name": "showcase-c_Escape_returns_menu",
+          "passed": true
+        },
+        {
+          "name": "showcase-c_window_close",
+          "passed": true
+        },
+        {
+          "name": "showcase-duke_pause_freezes_frame_counter",
+          "passed": true
+        },
+        {
+          "name": "showcase-duke_period_advances_frame",
+          "passed": true,
+          "changed_text_pixels": 43,
+          "evidence": [
+            "showcase-duke-01-paused.png",
+            "showcase-duke-03-step.png"
+          ],
+          "measurement_note": "Threshold adjusted from >165 to >90: muted lab text is RGB165,172,185 and small antialiased digits have lower coverage. Source captures unchanged."
+        },
+        {
+          "name": "showcase-duke_home_and_replay_reset_same_frame",
+          "passed": true
+        },
+        {
+          "name": "showcase-duke_X_switches_and_restores_target_side",
+          "passed": true,
+          "orange_centers": [
+            863.31,
+            439.17,
+            863.31
+          ]
+        },
+        {
+          "name": "showcase-duke_L_toggles_repeat",
+          "passed": true
+        },
+        {
+          "name": "showcase-duke_full_sequence_restores_showcase_UI",
+          "passed": true
+        },
+        {
+          "name": "showcase-duke_long_repeat_progresses_after_restoration",
+          "passed": true
+        },
+        {
+          "name": "showcase-duke_Escape_returns_menu",
+          "passed": true
+        },
+        {
+          "name": "showcase-duke_window_close",
+          "passed": true
+        },
+        {
+          "name": "lab-c_pause_freezes_timing",
+          "passed": true
+        },
+        {
+          "name": "lab-c_period_advances_single_frame",
+          "passed": true,
+          "changed_text_pixels": 86,
+          "evidence": [
+            "lab-c-01-paused.png",
+            "lab-c-03-step.png"
+          ],
+          "measurement_note": "Threshold adjusted from >165 to >90: muted lab text is RGB165,172,185 and small antialiased digits have lower coverage. Source captures unchanged."
+        },
+        {
+          "name": "lab-c_Home_Enter_reset_paused_world",
+          "passed": true
+        },
+        {
+          "name": "lab-c_step_after_reset_starts_new_capture",
+          "passed": true,
+          "changed_text_pixels": 2213,
+          "evidence": [
+            "lab-c-04-reset.png",
+            "lab-c-06-step-start.png"
+          ],
+          "measurement_note": "Threshold adjusted from >165 to >90: muted lab text is RGB165,172,185 and small antialiased digits have lower coverage. Source captures unchanged."
+        },
+        {
+          "name": "lab-c_BIOS_covers_lab_overlay",
+          "passed": true
+        },
+        {
+          "name": "lab-c_full_super_returns_lab_timing",
+          "passed": true
+        },
+        {
+          "name": "lab-c_reset_while_running_restarts_sequence",
+          "passed": true,
+          "changed_text_pixels": 2428,
+          "evidence": [
+            "lab-c-07-restored.png",
+            "lab-c-08-running-reset.png"
+          ],
+          "measurement_note": "Threshold adjusted from >165 to >90: muted lab text is RGB165,172,185 and small antialiased digits have lower coverage. Source captures unchanged."
+        },
+        {
+          "name": "lab-c_Escape_returns_menu",
+          "passed": true
+        },
+        {
+          "name": "lab-c_window_close",
+          "passed": true
+        }
+      ],
+      "observations": [
+        {
+          "scenario": "showcase-c",
+          "args": [
+            "--showcase",
+            "--character",
+            "c",
+            "--move",
+            "cinematic_special",
+            "--repeat"
+          ],
+          "startup_seconds_upper_bound": 2.8
+        },
+        {
+          "scenario": "showcase-c",
+          "phase": "early",
+          "seconds_after_resume": 1.754,
+          "footer_bright_pixels": 120,
+          "file": "showcase-c-10-early.png"
+        },
+        {
+          "scenario": "showcase-c",
+          "phase": "late-phase",
+          "seconds_after_resume": 3.824,
+          "footer_bright_pixels": 0,
+          "file": "showcase-c-10-late-phase.png"
+        },
+        {
+          "scenario": "showcase-c",
+          "phase": "restored",
+          "seconds_after_resume": 6.899,
+          "footer_bright_pixels": 130,
+          "file": "showcase-c-10-restored.png"
+        },
+        {
+          "scenario": "showcase-c",
+          "phase": "repeat",
+          "seconds_after_resume": 8.346,
+          "footer_bright_pixels": 121,
+          "file": "showcase-c-10-repeat.png"
+        },
+        {
+          "scenario": "showcase-duke",
+          "args": [
+            "--showcase",
+            "--character",
+            "duke",
+            "--move",
+            "cinematic_special",
+            "--repeat"
+          ],
+          "startup_seconds_upper_bound": 3.0
+        },
+        {
+          "scenario": "showcase-duke",
+          "phase": "early",
+          "seconds_after_resume": 1.825,
+          "footer_bright_pixels": 120,
+          "file": "showcase-duke-10-early.png"
+        },
+        {
+          "scenario": "showcase-duke",
+          "phase": "late-phase",
+          "seconds_after_resume": 4.073,
+          "footer_bright_pixels": 121,
+          "file": "showcase-duke-10-late-phase.png"
+        },
+        {
+          "scenario": "showcase-duke",
+          "phase": "restored",
+          "seconds_after_resume": 6.799,
+          "footer_bright_pixels": 130,
+          "file": "showcase-duke-10-restored.png"
+        },
+        {
+          "scenario": "showcase-duke",
+          "phase": "repeat",
+          "seconds_after_resume": 8.384,
+          "footer_bright_pixels": 121,
+          "file": "showcase-duke-10-repeat.png"
+        },
+        {
+          "scenario": "lab-c",
+          "args": [
+            "--lab",
+            "combat",
+            "--character",
+            "c",
+            "--move",
+            "cinematic_special"
+          ],
+          "startup_seconds_upper_bound": 2.6
+        },
+        {
+          "scenario": "lab-c",
+          "phase": "BIOS",
+          "seconds_after_resume": 3.271,
+          "file": "lab-c-07-BIOS.png"
+        },
+        {
+          "scenario": "lab-c",
+          "phase": "restored",
+          "seconds_after_resume": 6.115,
+          "file": "lab-c-07-restored.png"
+        }
+      ],
+      "passed": true,
+      "error": null,
+      "limitations": [
+        "Audio disabled to keep this parallel run out of the audiovisual review capture; stream pause was verified separately with a live audio device.",
+        "No physical gamepad; keyboard controls exercised.",
+        "Wall-clock phase captures supplement deterministic gameplay tests."
+      ],
+      "harness_corrections": [
+        "showcase-duke_period_advances_frame",
+        "lab-c_period_advances_single_frame",
+        "lab-c_step_after_reset_starts_new_capture",
+        "lab-c_reset_while_running_restarts_sequence",
+        "showcase-c_X_switches_and_restores_target_side"
+      ],
+      "rerun_note": "Fight run completed separately after this run was stopped during its reset observation; successful showcase/lab observations retained and pixel measurement corrected against existing captures."
+    },
+    "fight": {
+      "isolated_display": ":94",
+      "host_parent_unmapped": true,
+      "input_backend": "XTest real key/button events",
+      "checks": [
+        {
+          "name": "fight-c-rust_both_CPUs_disabled_in_Options",
+          "passed": true
+        },
+        {
+          "name": "fight-c-rust_Y_starts_super_and_deals_damage_at_distance",
+          "passed": true,
+          "hp_fill_before": 509,
+          "hp_fill_after": 346
+        },
+        {
+          "name": "fight-c-rust_held_U_guard_reduces_super_damage_to_chip",
+          "passed": true,
+          "hp_fill_before": 509,
+          "hp_fill_after": 468,
+          "unguarded_loss": 163,
+          "guarded_loss": 41
+        },
+        {
+          "name": "fight-c-rust_R_cancels_capture_and_resets_health",
+          "passed": true
+        },
+        {
+          "name": "fight-c-rust_Escape_returns_menu",
+          "passed": true,
+          "menu_title_pixels": 913,
+          "measurement_note": "Compared the fixed ENTRE NA LUTA title with the already verified menu reference. A health-bar saturation test is inapplicable to the colorful menu background."
+        },
+        {
+          "name": "fight-c-rust_window_close",
+          "passed": true
+        }
+      ],
+      "observations": [
+        {
+          "scenario": "fight-c-rust",
+          "args": [
+            "--fight",
+            "--p1",
+            "c",
+            "--p2",
+            "rust"
+          ],
+          "startup_seconds_upper_bound": 2.4
+        }
+      ],
+      "passed": true,
+      "error": null,
+      "limitations": [
+        "Audio disabled to keep this parallel run out of the audiovisual review capture; stream pause was verified separately with a live audio device.",
+        "No physical gamepad; keyboard controls exercised.",
+        "Wall-clock phase captures supplement deterministic gameplay tests."
+      ],
+      "binary_sha256_after_capture": "3db6026e7c899708c8b9a58f6ec0564bbbc46badf42209a22bd44026abbccf4f",
+      "binary_sha256": null,
+      "binary_note": "The game process started before a concurrent rebuild replaced target/debug/borrow-fighters. Its exact launch hash was not sampled; the old process remained running. The after-capture hash identifies the newer executable, not these functional screenshots."
+    },
+    "final_font_and_recording": {
+      "isolated_display": ":93",
+      "host_parent_unmapped": true,
+      "binary_sha256": "3db6026e7c899708c8b9a58f6ec0564bbbc46badf42209a22bd44026abbccf4f",
+      "binary_snapshot": "Immutable copy in /tmp captured before launching either scene.",
+      "checks": [
+        {
+          "name": "final_F9_starts_recording",
+          "passed": true,
+          "red_pixels": 705
+        },
+        {
+          "name": "final_BIOS_hides_REC_and_showcase_overlay",
+          "passed": true,
+          "red_pixels": 0,
+          "footer_bright_pixels": 0
+        },
+        {
+          "name": "final_F10_stop_message_also_hidden_during_BIOS",
+          "passed": true,
+          "whole_frame_difference": 0.0
+        },
+        {
+          "name": "final_F10_finalizes_recording",
+          "passed": true,
+          "video_bytes": 496728
+        },
+        {
+          "name": "final-showcase-c_window_close",
+          "passed": true
+        },
+        {
+          "name": "final_Lab_overlay_rendered_with_font",
+          "passed": true
+        },
+        {
+          "name": "final-lab-c_window_close",
+          "passed": true
+        }
+      ],
+      "observations": [
+        {
+          "scenario": "final-showcase-c",
+          "args": [
+            "--showcase",
+            "--character",
+            "c",
+            "--move",
+            "cinematic_special",
+            "--repeat"
+          ],
+          "startup_seconds_upper_bound": 2.5
+        },
+        {
+          "scenario": "final-lab-c",
+          "args": [
+            "--lab",
+            "combat",
+            "--character",
+            "c",
+            "--move",
+            "cinematic_special"
+          ],
+          "startup_seconds_upper_bound": 2.6
+        }
+      ],
+      "error": null,
+      "passed": true,
+      "capture_adapter": "F9/F10 used real FFmpeg process and pipe. Test wrapper substituted a silent lavfi audio source for Pulse and sent only this QA recording to /tmp; no production code changed and concurrent audio review was untouched."
+    }
+  },
+  "recording_probe": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ],
+    "format": {
+      "duration": "2.048000"
+    }
+  },
+  "full_capture_archive": "/tmp/borrow-authored-controls/archive",
+  "retained_images": {
+    "fight-c-rust-07-guard-restored.png": "dd288f1453fb73606c74ac94576f859fd32c6424588499cd6e05e12a5bd1aa25",
+    "final-01-recording-ready.png": "f6672ca7813c94523a4f40b1a9bcdde2ca95245cc0dc35809766e815782bcd79",
+    "final-02-BIOS-recording-hidden.png": "bcd6f16c70d7d45470f28615032389c24158048572568af911744a01571b6320",
+    "final-03-lab-Barlow-font.png": "0179b17e0d5940ab126a2bac6a013230ae61d7ea287562cc5ad52b125f38bca3"
+  },
+  "harness_archive": "/tmp/borrow-authored-controls/qa_controls.py; qa_final.py; validate_captures.py",
+  "review_notes": [
+    "The first 28 checks used build 630f1843 before final font/recording-overlay polish. Fight control checks ran across an unrelated target/debug rebuild; precise launch hash was not sampled.",
+    "The seven final checks used immutable build 3db6026e copied before launch and include the Barlow overlay plus F9/F10 BIOS behavior.",
+    "Image-analysis false negatives were corrected against unchanged screenshots: a threshold excluding RGB165 muted text/small antialiased digits, an orange-Rust assumption in a C-vs-Python showcase, and a health-gauge detector incorrectly applied to the colorful menu. Each correction is documented with measurements.",
+    "Old C full hit removed32 HP from Rust; standing guard removed8 HP. Reset restored100 HP and canceled the capture."
+  ]
+}

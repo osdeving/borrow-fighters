@@ -1,0 +1,885 @@
+{
+  "audio": false,
+  "fps": 60,
+  "realtime": false,
+  "render_size": [
+    1280,
+    720
+  ],
+  "render_wall_time_seconds": 0.00476028,
+  "scenarios": [
+    {
+      "arena": "Sirius",
+      "audio_events": [
+        {
+          "character": "rust",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 60
+        },
+        {
+          "character": "rust",
+          "cue": "SuperMutation",
+          "sequence_tick": 11,
+          "video_frame": 71
+        },
+        {
+          "character": "rust",
+          "cue": "SuperMutation",
+          "sequence_tick": 125,
+          "video_frame": 185
+        },
+        {
+          "character": "rust",
+          "cue": "CombatBlock",
+          "sequence_tick": 212,
+          "video_frame": 272
+        },
+        {
+          "character": "duke",
+          "cue": "FighterBlock",
+          "sequence_tick": 212,
+          "video_frame": 272
+        },
+        {
+          "character": "rust",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 360
+        }
+      ],
+      "character": "rust",
+      "damage": 7,
+      "duration_frames": 300,
+      "guarded": true,
+      "move": "Ownership Eclipse",
+      "reverse": false,
+      "screenshots": [],
+      "video_frames": [
+        0,
+        449
+      ],
+      "wall_time_seconds": 0.000430626
+    },
+    {
+      "arena": "Sirius",
+      "audio_events": [
+        {
+          "character": "rust",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 510
+        },
+        {
+          "character": "rust",
+          "cue": "SuperMutation",
+          "sequence_tick": 11,
+          "video_frame": 521
+        },
+        {
+          "character": "rust",
+          "cue": "SuperMutation",
+          "sequence_tick": 125,
+          "video_frame": 635
+        },
+        {
+          "character": "rust",
+          "cue": "CombatBlock",
+          "sequence_tick": 212,
+          "video_frame": 722
+        },
+        {
+          "character": "duke",
+          "cue": "FighterBlock",
+          "sequence_tick": 212,
+          "video_frame": 722
+        },
+        {
+          "character": "rust",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 810
+        }
+      ],
+      "character": "rust",
+      "damage": 7,
+      "duration_frames": 300,
+      "guarded": true,
+      "move": "Ownership Eclipse",
+      "reverse": true,
+      "screenshots": [],
+      "video_frames": [
+        450,
+        899
+      ],
+      "wall_time_seconds": 0.00040011
+    },
+    {
+      "arena": "JavaStreet",
+      "audio_events": [
+        {
+          "character": "duke",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 960
+        },
+        {
+          "character": "duke",
+          "cue": "SuperTrashRain",
+          "sequence_tick": 8,
+          "video_frame": 968
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 84,
+          "video_frame": 1044
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 96,
+          "video_frame": 1056
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 108,
+          "video_frame": 1068
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 120,
+          "video_frame": 1080
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 132,
+          "video_frame": 1092
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 144,
+          "video_frame": 1104
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 156,
+          "video_frame": 1116
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 168,
+          "video_frame": 1128
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 180,
+          "video_frame": 1140
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 192,
+          "video_frame": 1152
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 204,
+          "video_frame": 1164
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 216,
+          "video_frame": 1176
+        },
+        {
+          "character": "duke",
+          "cue": "SuperGiantDrop",
+          "sequence_tick": 264,
+          "video_frame": 1224
+        },
+        {
+          "character": "duke",
+          "cue": "CombatBlock",
+          "sequence_tick": 264,
+          "video_frame": 1224
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 264,
+          "video_frame": 1224
+        },
+        {
+          "character": "duke",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 1310
+        }
+      ],
+      "character": "duke",
+      "damage": 8,
+      "duration_frames": 350,
+      "guarded": true,
+      "move": "Garbage Collector",
+      "reverse": false,
+      "screenshots": [],
+      "video_frames": [
+        900,
+        1399
+      ],
+      "wall_time_seconds": 0.000439567
+    },
+    {
+      "arena": "JavaStreet",
+      "audio_events": [
+        {
+          "character": "duke",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 1460
+        },
+        {
+          "character": "duke",
+          "cue": "SuperTrashRain",
+          "sequence_tick": 8,
+          "video_frame": 1468
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 84,
+          "video_frame": 1544
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 96,
+          "video_frame": 1556
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 108,
+          "video_frame": 1568
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 120,
+          "video_frame": 1580
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 132,
+          "video_frame": 1592
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 144,
+          "video_frame": 1604
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 156,
+          "video_frame": 1616
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 168,
+          "video_frame": 1628
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 180,
+          "video_frame": 1640
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 192,
+          "video_frame": 1652
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 204,
+          "video_frame": 1664
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 216,
+          "video_frame": 1676
+        },
+        {
+          "character": "duke",
+          "cue": "SuperGiantDrop",
+          "sequence_tick": 264,
+          "video_frame": 1724
+        },
+        {
+          "character": "duke",
+          "cue": "CombatBlock",
+          "sequence_tick": 264,
+          "video_frame": 1724
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 264,
+          "video_frame": 1724
+        },
+        {
+          "character": "duke",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 1810
+        }
+      ],
+      "character": "duke",
+      "damage": 8,
+      "duration_frames": 350,
+      "guarded": true,
+      "move": "Garbage Collector",
+      "reverse": true,
+      "screenshots": [],
+      "video_frames": [
+        1400,
+        1899
+      ],
+      "wall_time_seconds": 0.000754603
+    },
+    {
+      "arena": "PortoDigital",
+      "audio_events": [
+        {
+          "character": "c",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 1960
+        },
+        {
+          "character": "c",
+          "cue": "SuperError",
+          "sequence_tick": 8,
+          "video_frame": 1968
+        },
+        {
+          "character": "c",
+          "cue": "SuperError",
+          "sequence_tick": 105,
+          "video_frame": 2065
+        },
+        {
+          "character": "c",
+          "cue": "SuperBoot",
+          "sequence_tick": 180,
+          "video_frame": 2140
+        },
+        {
+          "character": "c",
+          "cue": "CombatBlock",
+          "sequence_tick": 222,
+          "video_frame": 2182
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 222,
+          "video_frame": 2182
+        },
+        {
+          "character": "c",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 2280
+        }
+      ],
+      "character": "c",
+      "damage": 8,
+      "duration_frames": 320,
+      "guarded": true,
+      "move": "General Protection Fault / #GP",
+      "reverse": false,
+      "screenshots": [],
+      "video_frames": [
+        1900,
+        2369
+      ],
+      "wall_time_seconds": 0.000613382
+    },
+    {
+      "arena": "PortoDigital",
+      "audio_events": [
+        {
+          "character": "c",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 2430
+        },
+        {
+          "character": "c",
+          "cue": "SuperError",
+          "sequence_tick": 8,
+          "video_frame": 2438
+        },
+        {
+          "character": "c",
+          "cue": "SuperError",
+          "sequence_tick": 105,
+          "video_frame": 2535
+        },
+        {
+          "character": "c",
+          "cue": "SuperBoot",
+          "sequence_tick": 180,
+          "video_frame": 2610
+        },
+        {
+          "character": "c",
+          "cue": "CombatBlock",
+          "sequence_tick": 222,
+          "video_frame": 2652
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 222,
+          "video_frame": 2652
+        },
+        {
+          "character": "c",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 2750
+        }
+      ],
+      "character": "c",
+      "damage": 8,
+      "duration_frames": 320,
+      "guarded": true,
+      "move": "General Protection Fault / #GP",
+      "reverse": true,
+      "screenshots": [],
+      "video_frames": [
+        2370,
+        2839
+      ],
+      "wall_time_seconds": 0.000438405
+    },
+    {
+      "arena": "ValeDoPinhao",
+      "audio_events": [
+        {
+          "character": "cpp",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 2900
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperFootshot",
+          "sequence_tick": 44,
+          "video_frame": 2944
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 204,
+          "video_frame": 3104
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 204,
+          "video_frame": 3104
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 204,
+          "video_frame": 3104
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 214,
+          "video_frame": 3114
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 214,
+          "video_frame": 3114
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 214,
+          "video_frame": 3114
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 224,
+          "video_frame": 3124
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 224,
+          "video_frame": 3124
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 224,
+          "video_frame": 3124
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 234,
+          "video_frame": 3134
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 234,
+          "video_frame": 3134
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 234,
+          "video_frame": 3134
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 244,
+          "video_frame": 3144
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 244,
+          "video_frame": 3144
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 244,
+          "video_frame": 3144
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 254,
+          "video_frame": 3154
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 254,
+          "video_frame": 3154
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 254,
+          "video_frame": 3154
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 264,
+          "video_frame": 3164
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 264,
+          "video_frame": 3164
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 264,
+          "video_frame": 3164
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 274,
+          "video_frame": 3174
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 274,
+          "video_frame": 3174
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 274,
+          "video_frame": 3174
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 284,
+          "video_frame": 3184
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 284,
+          "video_frame": 3184
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 284,
+          "video_frame": 3184
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 3256
+        }
+      ],
+      "character": "cpp",
+      "damage": 9,
+      "duration_frames": 356,
+      "guarded": true,
+      "move": "Undefined Behavior: Footgun",
+      "reverse": false,
+      "screenshots": [],
+      "video_frames": [
+        2840,
+        3345
+      ],
+      "wall_time_seconds": 0.000502239
+    },
+    {
+      "arena": "ValeDoPinhao",
+      "audio_events": [
+        {
+          "character": "cpp",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 3406
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperFootshot",
+          "sequence_tick": 44,
+          "video_frame": 3450
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 204,
+          "video_frame": 3610
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 204,
+          "video_frame": 3610
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 204,
+          "video_frame": 3610
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 214,
+          "video_frame": 3620
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 214,
+          "video_frame": 3620
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 214,
+          "video_frame": 3620
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 224,
+          "video_frame": 3630
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 224,
+          "video_frame": 3630
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 224,
+          "video_frame": 3630
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 234,
+          "video_frame": 3640
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 234,
+          "video_frame": 3640
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 234,
+          "video_frame": 3640
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 244,
+          "video_frame": 3650
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 244,
+          "video_frame": 3650
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 244,
+          "video_frame": 3650
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 254,
+          "video_frame": 3660
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 254,
+          "video_frame": 3660
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 254,
+          "video_frame": 3660
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 264,
+          "video_frame": 3670
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 264,
+          "video_frame": 3670
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 264,
+          "video_frame": 3670
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 274,
+          "video_frame": 3680
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 274,
+          "video_frame": 3680
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 274,
+          "video_frame": 3680
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 284,
+          "video_frame": 3690
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatBlock",
+          "sequence_tick": 284,
+          "video_frame": 3690
+        },
+        {
+          "character": "rust",
+          "cue": "FighterBlock",
+          "sequence_tick": 284,
+          "video_frame": 3690
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 3762
+        }
+      ],
+      "character": "cpp",
+      "damage": 9,
+      "duration_frames": 356,
+      "guarded": true,
+      "move": "Undefined Behavior: Footgun",
+      "reverse": true,
+      "screenshots": [],
+      "video_frames": [
+        3346,
+        3851
+      ],
+      "wall_time_seconds": 0.000566629
+    }
+  ],
+  "simulation": "World fixed-step; real contacts, physical C++ rush, snapshots at authored phase clocks",
+  "snapshots": false,
+  "video": null,
+  "video_duration_seconds": 64.2,
+  "video_frame_count": 3852
+}

@@ -1,0 +1,80 @@
+{
+  "source": "sweep/source-v2.png",
+  "sheet": "sweep/keyed-v2.png",
+  "reviewed": true,
+  "loop": false,
+  "status": "finalization refinement visually reviewed; complete native World/Lab and default application match recorded",
+  "source_body_height_reference_px": 620,
+  "review_notes": "v2 lowers extended sole toward original active band and adds retract/half-rise recovery, preserving150/133/200ms as150/133/100/100ms. Source identity, low support and snake continuity reviewed; contact center inside baseline box, toe near upper edge. Native Lab and complete World reviewed in both facings; no physical metadata changed.",
+  "frames": [
+    {
+      "name": "sweep_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 627,
+        "h": 627
+      },
+      "pivot": {
+        "x": 280,
+        "y": 536
+      },
+      "duration_ms": 150,
+      "phase": "startup"
+    },
+    {
+      "name": "sweep_1",
+      "source_rect": {
+        "x": 627,
+        "y": 0,
+        "w": 627,
+        "h": 627
+      },
+      "pivot": {
+        "x": 170,
+        "y": 541
+      },
+      "duration_ms": 133,
+      "phase": "active"
+    },
+    {
+      "name": "sweep_2",
+      "source_rect": {
+        "x": 0,
+        "y": 627,
+        "w": 627,
+        "h": 627
+      },
+      "pivot": {
+        "x": 300,
+        "y": 508
+      },
+      "duration_ms": 100,
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_3",
+      "source_rect": {
+        "x": 627,
+        "y": 627,
+        "w": 627,
+        "h": 627
+      },
+      "pivot": {
+        "x": 292,
+        "y": 501
+      },
+      "duration_ms": 100,
+      "phase": "recovery"
+    }
+  ],
+  "runtime_review": {
+    "world_summary": "../../candidates/python/review/refinement-2026-09-07/world/capture-summary.json",
+    "lab_report": "../../candidates/python/review/refinement-2026-09-07/lab/capture-report.json",
+    "loaded_manifest_matches_candidate": true,
+    "combat_uses_baseline_manifest": true,
+    "clip_captured_in_filtered_lab": true,
+    "final_art_approved": true,
+    "approval_scope": "Production visual review of three refinements, complete World/Lab; primary agent reviewed walk/kick and default-app C versus Python match."
+  }
+}

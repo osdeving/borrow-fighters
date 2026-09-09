@@ -14,8 +14,8 @@ use crate::combat::{
     fighter::FighterBodyMetrics,
     move_data::MoveId,
     projectile::{
-        C_PROJECTILE_SPEC, DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC, PYTHON_PROJECTILE_SPEC,
-        ProjectileSpec, RUST_PROJECTILE_SPEC,
+        C_PROJECTILE_SPEC, CPP_PROJECTILE_SPEC, DUKE_PROJECTILE_SPEC, GO_PROJECTILE_SPEC,
+        PYTHON_PROJECTILE_SPEC, ProjectileSpec, RUST_PROJECTILE_SPEC,
     },
 };
 
@@ -24,12 +24,14 @@ const DUKE_STATS: CharacterStats = CharacterStats { max_health: 112 };
 const GO_STATS: CharacterStats = CharacterStats { max_health: 92 };
 const C_STATS: CharacterStats = CharacterStats { max_health: 104 };
 const PYTHON_STATS: CharacterStats = CharacterStats { max_health: 96 };
+const CPP_STATS: CharacterStats = CharacterStats { max_health: 98 };
 const RUST_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
 const DUKE_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
 const GO_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
 const C_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
 const PYTHON_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
-const RUST_MOVE_IDS: [MoveId; 9] = [
+const CPP_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
+const RUST_MOVE_IDS: [MoveId; 11] = [
     MoveId::RustBorrowJab,
     MoveId::HeavyPunch,
     MoveId::Kick,
@@ -39,8 +41,10 @@ const RUST_MOVE_IDS: [MoveId; 9] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::RustOwnershipThrow,
+    MoveId::RustBorrowFortress,
+    MoveId::RustOwnershipEclipse,
 ];
-const DUKE_MOVE_IDS: [MoveId; 9] = [
+const DUKE_MOVE_IDS: [MoveId; 11] = [
     MoveId::LightPunch,
     MoveId::DukeBoilerplatePoke,
     MoveId::Kick,
@@ -50,8 +54,10 @@ const DUKE_MOVE_IDS: [MoveId; 9] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::DukeEnterpriseThrow,
+    MoveId::DukePrintlnBarrage,
+    MoveId::DukeJvmOverdrive,
 ];
-const GO_MOVE_IDS: [MoveId; 9] = [
+const GO_MOVE_IDS: [MoveId; 10] = [
     MoveId::GoGoroutineJab,
     MoveId::HeavyPunch,
     MoveId::GoDeferKick,
@@ -61,8 +67,9 @@ const GO_MOVE_IDS: [MoveId; 9] = [
     MoveId::AirPunch,
     MoveId::GoHopkick,
     MoveId::CloseThrow,
+    MoveId::GoMillionGoroutines,
 ];
-const C_MOVE_IDS: [MoveId; 9] = [
+const C_MOVE_IDS: [MoveId; 11] = [
     MoveId::CPointerJab,
     MoveId::CUnsafePoke,
     MoveId::CNullStepKick,
@@ -72,8 +79,10 @@ const C_MOVE_IDS: [MoveId; 9] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::CUndefinedThrow,
+    MoveId::CSegmentationFault,
+    MoveId::CKernelPanic,
 ];
-const PYTHON_MOVE_IDS: [MoveId; 9] = [
+const PYTHON_MOVE_IDS: [MoveId; 11] = [
     MoveId::PythonSnakeBite,
     MoveId::PythonDataStrike,
     MoveId::PythonHeelKick,
@@ -83,6 +92,21 @@ const PYTHON_MOVE_IDS: [MoveId; 9] = [
     MoveId::AirPunch,
     MoveId::AirKick,
     MoveId::PythonConstrictThrow,
+    MoveId::PythonImportAntigravity,
+    MoveId::PythonEventHorizon,
+];
+const CPP_MOVE_IDS: [MoveId; 11] = [
+    MoveId::CppReferenceJab,
+    MoveId::CppTemplateStrike,
+    MoveId::CppOperatorKick,
+    MoveId::CppVectorSweep,
+    MoveId::CppVirtualOverhead,
+    MoveId::CppExceptionAntiAir,
+    MoveId::AirPunch,
+    MoveId::AirKick,
+    MoveId::CppMoveThrow,
+    MoveId::CppUndefinedBazooka,
+    MoveId::CppTemplateSingularity,
 ];
 
 /// Stable identifier for playable or testable characters.
@@ -94,6 +118,7 @@ pub enum CharacterId {
     Go,
     C,
     Python,
+    Cpp,
 }
 
 impl CharacterId {
@@ -104,18 +129,20 @@ impl CharacterId {
             Self::Duke => Self::Go,
             Self::Go => Self::C,
             Self::C => Self::Python,
-            Self::Python => Self::Rust,
+            Self::Python => Self::Cpp,
+            Self::Cpp => Self::Rust,
         }
     }
 
     /// Returns the previous prototype roster character.
     pub const fn previous(self) -> Self {
         match self {
-            Self::Rust => Self::Python,
+            Self::Rust => Self::Cpp,
             Self::Duke => Self::Rust,
             Self::Go => Self::Duke,
             Self::C => Self::Go,
             Self::Python => Self::C,
+            Self::Cpp => Self::Python,
         }
     }
 
@@ -125,17 +152,19 @@ impl CharacterId {
             Self::Rust => Self::Duke,
             Self::Duke | Self::Go => Self::C,
             Self::C => Self::Python,
-            Self::Python => Self::Rust,
+            Self::Python => Self::Cpp,
+            Self::Cpp => Self::Rust,
         }
     }
 
     /// Returns the previous character exposed in the current public demo menu.
     pub const fn demo_previous(self) -> Self {
         match self {
-            Self::Rust => Self::Python,
+            Self::Rust => Self::Cpp,
             Self::Duke => Self::Rust,
             Self::Go | Self::C => Self::Duke,
             Self::Python => Self::C,
+            Self::Cpp => Self::Python,
         }
     }
 
@@ -147,6 +176,7 @@ impl CharacterId {
             "go" | "golang" | "gopher" => Some(Self::Go),
             "c" | "langc" | "c-lang" | "clang" => Some(Self::C),
             "python" | "py" | "python.py" | "fei-fei" | "feifei" => Some(Self::Python),
+            "cpp" | "c++" | "cplusplus" | "c-plus-plus" | "cxx" | "cpp.cpp" => Some(Self::Cpp),
             _ => None,
         }
     }
@@ -159,6 +189,7 @@ impl CharacterId {
             Self::Go => "go",
             Self::C => "c",
             Self::Python => "python",
+            Self::Cpp => "cpp",
         }
     }
 
@@ -170,6 +201,7 @@ impl CharacterId {
             "go" | "golang" | "gopher" => Some(Self::Go),
             "c" | "langc" | "c-lang" | "clang" => Some(Self::C),
             "python" | "py" | "python.py" => Some(Self::Python),
+            "cpp" | "c++" | "cplusplus" | "c-plus-plus" | "cxx" | "cpp.cpp" => Some(Self::Cpp),
             _ => None,
         }
     }
@@ -256,6 +288,16 @@ pub const fn character_spec(id: CharacterId) -> CharacterSpec {
             body_metrics: PYTHON_BODY_METRICS,
             move_ids: &PYTHON_MOVE_IDS,
             projectile: PYTHON_PROJECTILE_SPEC,
+        },
+        CharacterId::Cpp => CharacterSpec {
+            id,
+            display_name: "C++",
+            fighter_name: "C++",
+            archetype: CharacterArchetype::AgilePunisher,
+            stats: CPP_STATS,
+            body_metrics: CPP_BODY_METRICS,
+            move_ids: &CPP_MOVE_IDS,
+            projectile: CPP_PROJECTILE_SPEC,
         },
     }
 }

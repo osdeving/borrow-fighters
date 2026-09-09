@@ -1,0 +1,110 @@
+{
+  "action": "punch_light",
+  "source": "punch_light/source-v4.png",
+  "sheet": "punch_light/sheet-v1.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "Final generated art reviewed: complete World in both facings, native Lab, Sprite Studio and normal match; evidence in finalization-review.md.",
+  "source_body_height_reference_px": 754,
+  "suggested_scale_to_runtime": 0.35013262599469497,
+  "replacement_contract": "../action-contracts.json#/actions/punch_light",
+  "references": {
+    "new_master": "reference/master.png",
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
+  "frames": [
+    {
+      "name": "punch_light_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 800,
+        "h": 920
+      },
+      "pivot": {
+        "x": 389,
+        "y": 828
+      },
+      "duration_ms": 50,
+      "phase": "startup"
+    },
+    {
+      "name": "punch_light_01",
+      "source_rect": {
+        "x": 800,
+        "y": 0,
+        "w": 800,
+        "h": 920
+      },
+      "pivot": {
+        "x": 384,
+        "y": 828
+      },
+      "duration_ms": 83,
+      "phase": "active"
+    },
+    {
+      "name": "punch_light_02",
+      "source_rect": {
+        "x": 1600,
+        "y": 0,
+        "w": 800,
+        "h": 920
+      },
+      "pivot": {
+        "x": 332,
+        "y": 828
+      },
+      "duration_ms": 100,
+      "phase": "recovery"
+    }
+  ],
+  "generation_brief": "Compact elbow extension: active knuckles must fit the short baseline box, without moving the whole body to fake reach.",
+  "review_notes": "Short bent-elbow body jab. v1 was too high/long; v2 had no reach; v3 was still high. v4 selects the final compact contact. Explicit crops/pivots are recorded in preparation.json; no timing or combat changes.",
+  "timing_reference": {
+    "move_id": "GoGoroutineJab",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 14,
+      "active_start": 3,
+      "active_end": 7
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 50,
+      "recovery_starts": 133,
+      "clip_ends": 233
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -141.33333333333334,
+      "w": 56.0,
+      "h": 40.0
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -106.66666666666666,
+      "y": -141.33333333333334,
+      "w": 56.0,
+      "h": 40.0
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 78.66666666666666,
+      "y": -121.33333333333334
+    }
+  },
+  "scale_to_runtime": 0.35013262599469497,
+  "runtime_review": {
+    "approved": true,
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "report": "../finalization-review.md",
+    "world_facings_seen": [
+      "Left",
+      "Right"
+    ],
+    "lab_capture": "full set before jump, art unchanged by frame checksum",
+    "normal_match_result_evidence": false
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "keyed-v2.png",
+  "scale": 0.37,
+  "cell": {
+    "w": 627,
+    "h": 836
+  },
+  "default_pivot": {
+    "x": 336,
+    "y": 745
+  },
+  "frames": [
+    {
+      "name": "jump_00",
+      "clip": "jump",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 336,
+        "y": 745
+      },
+      "duration_ms": 60
+    },
+    {
+      "name": "jump_01",
+      "clip": "jump",
+      "frame": {
+        "x": 627,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 294,
+        "y": 723
+      },
+      "duration_ms": 340
+    },
+    {
+      "name": "jump_02",
+      "clip": "jump",
+      "frame": {
+        "x": 1254,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 236,
+        "y": 784
+      },
+      "duration_ms": 400
+    }
+  ],
+  "clips": [
+    {
+      "name": "jump",
+      "loop": false,
+      "frames": [
+        "jump_00",
+        "jump_01",
+        "jump_02"
+      ]
+    }
+  ]
+}

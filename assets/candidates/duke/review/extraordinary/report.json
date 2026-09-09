@@ -1,0 +1,226 @@
+{
+  "character": "duke",
+  "review_date": "2026-09-08",
+  "method": "Actual 1280x720 Raylib showcase in unmapped isolated Xephyr. Frame-change captures plus full 60-Hz left signature; successful real contact required, exact actor clips required, no fallback permitted. Sources/crops/alpha also visually inspected.",
+  "verdict": "accepted after source-crop corrections and regenerated supporting lift pose",
+  "visual_findings": [
+    "Right/left scenarios inspected for signature effect origin, silhouette, support, scale, alpha, throw trajectory, inversion, descent and ground recovery.",
+    "Signature actor draws all eight poses; throw draws all six; actual victim playback covers four thrown, four launched and three heavy-hit drawings.",
+    "Raised hands physically support Duke throw victim after pose2 revision.",
+    "Dark/light alpha panels exclude checkerboard/magenta and adjacent-frame fragments."
+  ],
+  "actor_manifest_sha256": "b4d5f9fd3a71a38df30f47702e59cbe9be147a9dd44fb0c08f48b2ffc3b56c3a",
+  "actor_atlas_sha256": "d013474eea2f82fae04da2456622bb4379e086569facceef97f88d26703c3ca8",
+  "fx_manifest_sha256": "919fd1242647d5c93d11d67795bd8ff1b3ff51b4d542c7fc946a41bd39b3ea2f",
+  "fx_atlas_sha256": "a20b25ec7cd849bd9a1df999f2dd4ef60a5880e0309b1ca180a57570dc2b3dcd",
+  "asset_capture_note": "Duke and Rust throw pose2 were revised after the initial special/reaction captures; all other rendered frames retained identical pixels and pivots. Final throw reports now use the accepted lift-v3 captures for both attackers.",
+  "coverage": {
+    "signature_special": [
+      "signature_special_spectacle_00",
+      "signature_special_spectacle_01",
+      "signature_special_spectacle_02",
+      "signature_special_spectacle_03",
+      "signature_special_spectacle_04",
+      "signature_special_spectacle_05",
+      "signature_special_spectacle_06",
+      "signature_special_spectacle_07"
+    ],
+    "throw": [
+      "throw_spectacle_00",
+      "throw_spectacle_01",
+      "throw_spectacle_02",
+      "throw_spectacle_03",
+      "throw_spectacle_04",
+      "throw_spectacle_05"
+    ],
+    "thrown": [
+      "thrown_spectacle_00",
+      "thrown_spectacle_01",
+      "thrown_spectacle_02",
+      "thrown_spectacle_03"
+    ],
+    "launched": [
+      "launched_spectacle_00",
+      "launched_spectacle_01",
+      "launched_spectacle_02",
+      "launched_spectacle_03"
+    ],
+    "heavy_hit": [
+      "heavy_hit_spectacle_00",
+      "heavy_hit_spectacle_01",
+      "heavy_hit_spectacle_02"
+    ]
+  },
+  "reports": [
+    {
+      "report": "reports/duke-signature-left.json",
+      "sha256": "52db3cbded713c86164422be008e3b61945067b0870f690ef64131f4279f9dc2",
+      "raw_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-signature-left",
+      "capture_count": 259,
+      "reversed": false
+    },
+    {
+      "report": "reports/duke-signature-right.json",
+      "sha256": "5067ad6304f02a771ef7b8b1668c3225a3114420502aa9b5fe35fb3c609eb19f",
+      "raw_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-signature-right",
+      "capture_count": 59,
+      "reversed": true
+    },
+    {
+      "report": "reports/duke-throw-lift-v3-left.json",
+      "sha256": "b6c3e8b8129c2af886ba8bfcf207c44cc68d321a311f3c1753f00bd236322fd7",
+      "raw_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-throw-lift-v3-left",
+      "capture_count": 40,
+      "reversed": false
+    },
+    {
+      "report": "reports/duke-throw-lift-v3-right.json",
+      "sha256": "0f2f6eb022080dbecdd8c92de619ededc5fe994f67e38f6e8e32de1e9d67aa53",
+      "raw_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-throw-lift-v3-right",
+      "capture_count": 40,
+      "reversed": true
+    },
+    {
+      "report": "reports/duke-anti_air-left.json",
+      "sha256": "ef28121b6093a7c9f733f3bb2fc948afde8691bc1f61644541307efb212b5395",
+      "raw_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-anti_air-left",
+      "capture_count": 49,
+      "reversed": false
+    },
+    {
+      "report": "reports/duke-anti_air-right.json",
+      "sha256": "3e169fbc65cf6fb925961f4c6a0f286e4a3a57cec31113fb02185bca9126b2b7",
+      "raw_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-anti_air-right",
+      "capture_count": 49,
+      "reversed": true
+    },
+    {
+      "report": "reports/duke-heavy_punch-left.json",
+      "sha256": "edca16ee5d21b27919c63b626c09377fd4392516ca97c7fc2f6e16b53489fd63",
+      "raw_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-heavy_punch-left",
+      "capture_count": 47,
+      "reversed": false
+    },
+    {
+      "report": "reports/duke-heavy_punch-right.json",
+      "sha256": "5ff978d583d92a77ee4b3b2de0b3c9c86ae96c860984b84a06fc9af624fc5c46",
+      "raw_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-heavy_punch-right",
+      "capture_count": 47,
+      "reversed": true
+    },
+    {
+      "report": "reports/rust-forward-throw.json",
+      "sha256": "994d5d5eb08aeaa29367352777dd0eefcd11957cecaea02b312e9dde953d87dd",
+      "raw_directory": "/tmp/borrow-fighters-spectacle-qa/rust-throw-lift-v3-left",
+      "capture_count": 259,
+      "reversed": false
+    },
+    {
+      "report": "reports/rust-forward-anti_air.json",
+      "sha256": "a58b2484a7eaaf86e746349e858f4ccd519b77fe8aa748f2991b563a4f44bafb",
+      "raw_directory": "/tmp/borrow-fighters-spectacle-qa/rust-forward/anti_air",
+      "capture_count": 259,
+      "reversed": false
+    },
+    {
+      "report": "reports/rust-forward-heavy_punch.json",
+      "sha256": "d056c77a90a2ac3aee065dc05886411dcfe3e89fa9a086731dc23ee341510f82",
+      "raw_directory": "/tmp/borrow-fighters-spectacle-qa/rust-forward/heavy_punch",
+      "capture_count": 53,
+      "reversed": false
+    },
+    {
+      "report": "reports/duke-victim-throw-right.json",
+      "sha256": "6f8b57d93aefe4dc9d8ea3d771adf49629d1fde6df23853db71261a019212d5a",
+      "raw_directory": "/tmp/borrow-fighters-spectacle-qa/rust-throw-lift-v3-right",
+      "capture_count": 41,
+      "reversed": true
+    }
+  ],
+  "retained_images": [
+    {
+      "image": "signature-paper-reveal.png",
+      "sha256": "535961075fca200491813a9af69920625141423317899a83ccb654d3517e9fc9",
+      "source_capture": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-signature-left/duke-11-attacksignaturespecial-f038.png",
+      "tick": 38,
+      "reviewed": true
+    },
+    {
+      "image": "signature-printer.png",
+      "sha256": "dc600e887c932ec2d36f36f824f7fb7da4a3183518949e1ce74ab6acb571f111",
+      "source_capture": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-signature-left/duke-11-attacksignaturespecial-f047.png",
+      "tick": 47,
+      "reviewed": true
+    },
+    {
+      "image": "signature-barrage-left.png",
+      "sha256": "898e033b7163226f8f84a7859cf474f002988c12edf93e300665800e12a4de01",
+      "source_capture": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-signature-left/duke-11-attacksignaturespecial-f066.png",
+      "tick": 66,
+      "reviewed": true
+    },
+    {
+      "image": "signature-jam.png",
+      "sha256": "2c197abd0886d2a45db390d467629eb83b5dec0b1ff2b164b903edde61e88e43",
+      "source_capture": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-signature-left/duke-11-attacksignaturespecial-f088.png",
+      "tick": 88,
+      "reviewed": true
+    },
+    {
+      "image": "signature-barrage-right.png",
+      "sha256": "37aec34fb5a4af05d1172a5fcfdad9359a762f94335d90a167819f97eff3c1a0",
+      "source_capture": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-signature-right/duke-11-attacksignaturespecial-f066.png",
+      "tick": 66,
+      "reviewed": true
+    },
+    {
+      "image": "throw-supported-lift-left.png",
+      "sha256": "3061f673201a344217e8a6936af5dc36f7a417069720b657c6725e4a5316cfb2",
+      "source_capture": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-throw-lift-v3-left/duke-09-attackthrow-f067.png",
+      "tick": 67,
+      "reviewed": true
+    },
+    {
+      "image": "throw-supported-lift-right.png",
+      "sha256": "3de68ce2117b7f95eb44afe5fddc2903e339bae70ff32683a815fa6ba5a0a1a4",
+      "source_capture": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-throw-lift-v3-right/duke-09-attackthrow-f067.png",
+      "tick": 67,
+      "reviewed": true
+    },
+    {
+      "image": "throw-release.png",
+      "sha256": "14785e8444a38cd3ac9d515156a4dd6e53fb98c85afa37ab0688625f2c2855cc",
+      "source_capture": "/tmp/borrow-fighters-duke-c-spectacle-final/duke-throw-lift-v3-left/duke-09-attackthrow-f074.png",
+      "tick": 74,
+      "reviewed": true
+    },
+    {
+      "image": "received-throw-roll.png",
+      "sha256": "c3dd0fc4797085345e48b57b53f12939d1d346841ef71ab339803c2066711e05",
+      "source_capture": "/tmp/borrow-fighters-spectacle-qa/rust-throw-lift-v3-right/rust-09-attackthrow-f085.png",
+      "tick": 85,
+      "reviewed": true
+    },
+    {
+      "image": "received-launch-rise.png",
+      "sha256": "86a1cbec9b9eff69fdba2f61bb4a0ddcc76b0eef15b416e60bf04d5484692a52",
+      "source_capture": "/tmp/borrow-fighters-spectacle-qa/rust-forward/anti_air/rust-06-attackantiair-f067.png",
+      "tick": 67,
+      "reviewed": true
+    },
+    {
+      "image": "received-launch-descent-mirrored.png",
+      "sha256": "7ccfbbe286a0e0397780167e2f1d2da5b71132ed1a66034beb6ef87d9bdc114e",
+      "source_capture": "/tmp/borrow-fighters-spectacle-qa/rust-all-reverse/rust-06-attackantiair-f088.png",
+      "tick": 88,
+      "reviewed": true
+    },
+    {
+      "image": "received-heavy-recoil.png",
+      "sha256": "a77b574e580ee896450cd6ec16cfb45957928cf6efd38268ca1217587b5fa240",
+      "source_capture": "/tmp/borrow-fighters-spectacle-qa/rust-forward/heavy_punch/rust-02-attackheavypunch-f069.png",
+      "tick": 69,
+      "reviewed": true
+    }
+  ]
+}

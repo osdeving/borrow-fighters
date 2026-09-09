@@ -1,0 +1,738 @@
+{
+  "audio": false,
+  "audio_delivery": "silent deterministic video; optional offline mix from the real World cues recorded below",
+  "barrage_log": false,
+  "feature_flags": {
+    "player_one_takes_damage": false,
+    "player_two_takes_damage": false
+  },
+  "fps": 60,
+  "live_audio_playback": false,
+  "max_frame_lateness_seconds": 0.0,
+  "no_damage": true,
+  "realtime": false,
+  "render_size": [
+    1280,
+    720
+  ],
+  "render_wall_time_seconds": 7.633693693,
+  "renderer": "draw_fight",
+  "scenarios": [
+    {
+      "arena": "BioTic",
+      "arena_transitions": [],
+      "audio_events": [
+        {
+          "character": "python",
+          "cue": "SuperStart",
+          "cue_key": "super.start",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 0,
+          "simulation_frame": 60,
+          "slot": "One",
+          "video_frame": 60,
+          "wall_time_seconds": 0.527120739
+        },
+        {
+          "character": "python",
+          "cue": "SuperMutation",
+          "cue_key": "super.mutation",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 62,
+          "simulation_frame": 122,
+          "slot": "One",
+          "video_frame": 122,
+          "wall_time_seconds": 1.364795138
+        },
+        {
+          "character": "python",
+          "cue": "SuperMutation",
+          "cue_key": "super.mutation",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 158,
+          "simulation_frame": 218,
+          "slot": "One",
+          "video_frame": 218,
+          "wall_time_seconds": 1.956507401
+        },
+        {
+          "character": "python",
+          "cue": "SuperLunge",
+          "cue_key": "super.lunge",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 270,
+          "simulation_frame": 330,
+          "slot": "One",
+          "video_frame": 330,
+          "wall_time_seconds": 3.296015052
+        },
+        {
+          "character": "python",
+          "cue": "SuperSwallow",
+          "cue_key": "super.swallow",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 304,
+          "simulation_frame": 364,
+          "slot": "One",
+          "video_frame": 364,
+          "wall_time_seconds": 3.8397186530000003
+        },
+        {
+          "character": "python",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 304,
+          "simulation_frame": 364,
+          "slot": "One",
+          "video_frame": 364,
+          "wall_time_seconds": 3.8397186530000003
+        },
+        {
+          "character": "cpp",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 304,
+          "simulation_frame": 364,
+          "slot": "Two",
+          "video_frame": 364,
+          "wall_time_seconds": 3.8397186530000003
+        },
+        {
+          "character": "python",
+          "cue": "SuperRevert",
+          "cue_key": "super.revert",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 344,
+          "simulation_frame": 404,
+          "slot": "One",
+          "video_frame": 404,
+          "wall_time_seconds": 4.696863839
+        },
+        {
+          "character": "python",
+          "cue": "SuperCelebrate",
+          "cue_key": "super.celebrate",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 400,
+          "simulation_frame": 460,
+          "slot": "One",
+          "video_frame": 460,
+          "wall_time_seconds": 5.523214419
+        },
+        {
+          "character": "python",
+          "cue": "SuperPeace",
+          "cue_key": "super.peace",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 444,
+          "simulation_frame": 504,
+          "slot": "One",
+          "video_frame": 504,
+          "wall_time_seconds": 5.939854003
+        },
+        {
+          "character": "python",
+          "cue": "SuperEnd",
+          "cue_key": "super.end",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": null,
+          "simulation_frame": 588,
+          "slot": "One",
+          "video_frame": 588,
+          "wall_time_seconds": 7.169618676
+        }
+      ],
+      "barrage_frames": [],
+      "character": "python",
+      "damage": 0,
+      "duration_frames": 528,
+      "final_effective_arena": "BioTic",
+      "final_health": [
+        96,
+        98
+      ],
+      "guarded": false,
+      "initial_health": [
+        96,
+        98
+      ],
+      "move": "import devour",
+      "music_track": "combat-rins-theme",
+      "no_damage": true,
+      "opponent": "cpp",
+      "reverse": false,
+      "screenshots": [
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-030-before.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 30,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 98,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_2",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 30
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-064-Freeze.png",
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "simulation_frame": 64,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 98,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_1",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 64
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-095-PythonPrepare.png",
+          "phase": "PythonPrepare",
+          "sequence_tick": 35,
+          "simulation_frame": 95,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 98,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_0",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 95
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-170-PythonMorph.png",
+          "phase": "PythonMorph",
+          "sequence_tick": 110,
+          "simulation_frame": 170,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 98,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_2",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 170
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-254-PythonGrow.png",
+          "phase": "PythonGrow",
+          "sequence_tick": 194,
+          "simulation_frame": 254,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 98,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_2",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 254
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-310-PythonMouth.png",
+          "phase": "PythonMouth",
+          "sequence_tick": 250,
+          "simulation_frame": 310,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 98,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_0",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 310
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-347-PythonLunge.png",
+          "phase": "PythonLunge",
+          "sequence_tick": 287,
+          "simulation_frame": 347,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": null,
+            "forced_clip": "reaction_launch",
+            "grounded": true,
+            "health": 98,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "reaction_launch",
+            "sprite_frame": "reaction_launch_03",
+            "state_clip": "idle"
+          },
+          "target_x": 1056.0,
+          "video_frame": 347
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-364-contact-304.png",
+          "phase": "PythonSwallow",
+          "sequence_tick": 304,
+          "simulation_frame": 364,
+          "target": {
+            "air_reaction": true,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 24.727272033691406,
+              "profile": "Launch",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": false,
+            "health": 98,
+            "hidden": true,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1056.0,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_launch",
+            "sprite_frame": "reaction_launch_00",
+            "state_clip": "launched"
+          },
+          "target_x": 1056.0,
+          "video_frame": 364
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-384-PythonSwallow.png",
+          "phase": "PythonSwallow",
+          "sequence_tick": 324,
+          "simulation_frame": 384,
+          "target": {
+            "air_reaction": true,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": {
+              "age_frames": 20,
+              "cinematic": true,
+              "duration_frames": 24.727272033691406,
+              "profile": "Launch",
+              "progress": 0.8088237047195435
+            },
+            "forced_clip": null,
+            "grounded": false,
+            "health": 98,
+            "hidden": true,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1094.8232421875,
+            "physical_y": 369.2221984863281,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_launch",
+            "sprite_frame": "reaction_launch_03",
+            "state_clip": "launched"
+          },
+          "target_x": 1094.8232421875,
+          "video_frame": 384
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-432-PythonRevert.png",
+          "phase": "PythonRevert",
+          "sequence_tick": 372,
+          "simulation_frame": 432,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 98,
+            "hidden": true,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1102.587890625,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_0",
+            "state_clip": "idle"
+          },
+          "target_x": 1102.587890625,
+          "video_frame": 432
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-448-target-return.png",
+          "phase": "PythonRevert",
+          "sequence_tick": 388,
+          "simulation_frame": 448,
+          "target": {
+            "air_reaction": true,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": {
+              "age_frames": 0,
+              "cinematic": true,
+              "duration_frames": 24.727272033691406,
+              "profile": "Launch",
+              "progress": 0.0
+            },
+            "forced_clip": null,
+            "grounded": false,
+            "health": 98,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": false,
+            "physical_x": 1102.587890625,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_launch",
+            "sprite_frame": "reaction_launch_00",
+            "state_clip": "launched"
+          },
+          "target_x": 1102.587890625,
+          "video_frame": 448
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-480-celebration-hop.png",
+          "phase": "PythonCelebrate",
+          "sequence_tick": 420,
+          "simulation_frame": 480,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": {
+              "age_frames": 8,
+              "cinematic": true,
+              "duration_frames": 20.8799991607666,
+              "profile": "Fall",
+              "progress": 0.38314178586006165
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 98,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": true,
+            "physical_x": 1103.958984375,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_fall",
+            "sprite_frame": "reaction_fall_01",
+            "state_clip": "knockdown"
+          },
+          "target_x": 1103.958984375,
+          "video_frame": 480
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-504-PythonCelebrate.png",
+          "phase": "PythonCelebrate",
+          "sequence_tick": 444,
+          "simulation_frame": 504,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": {
+              "age_frames": 11,
+              "cinematic": true,
+              "duration_frames": 15.120001792907715,
+              "profile": "Rise",
+              "progress": 0.735450267791748
+            },
+            "forced_clip": null,
+            "grounded": true,
+            "health": 98,
+            "hidden": false,
+            "hitstun": true,
+            "knockdown": true,
+            "physical_x": 1103.958984375,
+            "physical_y": 392.0,
+            "reaction_visual_active": true,
+            "sprite_clip": "reaction_rise",
+            "sprite_frame": "reaction_rise_03",
+            "state_clip": "knockdown"
+          },
+          "target_x": 1103.958984375,
+          "video_frame": 504
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-520-peace.png",
+          "phase": "PythonCelebrate",
+          "sequence_tick": 460,
+          "simulation_frame": 520,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 98,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1103.958984375,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_0",
+            "state_clip": "idle"
+          },
+          "target_x": 1103.958984375,
+          "video_frame": 520
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-568-Restore.png",
+          "phase": "Restore",
+          "sequence_tick": 508,
+          "simulation_frame": 568,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 98,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1103.958984375,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_0",
+            "state_clip": "idle"
+          },
+          "target_x": 1103.958984375,
+          "video_frame": 568
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "BioTic",
+          "health": [
+            96,
+            98
+          ],
+          "image": "python-right-hit-628-restored.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 628,
+          "target": {
+            "air_reaction": false,
+            "blockstun": false,
+            "character": "cpp",
+            "contact": null,
+            "forced_clip": null,
+            "grounded": true,
+            "health": 98,
+            "hidden": false,
+            "hitstun": false,
+            "knockdown": false,
+            "physical_x": 1103.958984375,
+            "physical_y": 392.0,
+            "reaction_visual_active": false,
+            "sprite_clip": "idle",
+            "sprite_frame": "idle_1",
+            "state_clip": "idle"
+          },
+          "target_x": 1103.958984375,
+          "video_frame": 628
+        }
+      ],
+      "simulation_frames": [
+        0,
+        677
+      ],
+      "video_frames": [
+        0,
+        677
+      ],
+      "wall_time_seconds": 7.633283883
+    }
+  ],
+  "simulation": "World fixed-step with explicit feature flags; real contacts, physical C++ rush, snapshots at authored phase clocks",
+  "simulation_frame_count": 678,
+  "snapshots": true,
+  "video": null,
+  "video_duration_seconds": 11.3,
+  "video_frame_count": 678
+}

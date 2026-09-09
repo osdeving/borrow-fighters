@@ -1,0 +1,1390 @@
+{
+  "source": "capture-report.json",
+  "method": "Original GPU PNG pixels cropped without resizing or retouching. Each player crop follows the physical body anchor; use original PNG/video to assess world translation.",
+  "panels": {
+    "walk_in": {
+      "image": "evidence-panels/walk_in.png",
+      "captures": [
+        {
+          "image": "f0375-walk_in.png",
+          "tick": 375,
+          "players": {
+            "p1": {
+              "frame": "walk_2",
+              "facing": "Right",
+              "crop_rect": [
+                211,
+                236,
+                511,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -271.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "walk_2",
+              "facing": "Left",
+              "crop_rect": [
+                801,
+                236,
+                1101,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -271.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f0378-walk_in.png",
+          "tick": 378,
+          "players": {
+            "p1": {
+              "frame": "walk_3",
+              "facing": "Right",
+              "crop_rect": [
+                218,
+                236,
+                518,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -271.0,
+              "alpha_bottom_offset_from_body_bottom": 2.0
+            },
+            "p2": {
+              "frame": "walk_3",
+              "facing": "Left",
+              "crop_rect": [
+                794,
+                236,
+                1094,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -271.0,
+              "alpha_bottom_offset_from_body_bottom": 2.0
+            }
+          }
+        },
+        {
+          "image": "f0384-walk_in.png",
+          "tick": 384,
+          "players": {
+            "p1": {
+              "frame": "walk_0",
+              "facing": "Right",
+              "crop_rect": [
+                251,
+                236,
+                551,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -273.0,
+              "alpha_bottom_offset_from_body_bottom": 29.0
+            },
+            "p2": {
+              "frame": "walk_0",
+              "facing": "Left",
+              "crop_rect": [
+                761,
+                236,
+                1061,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -273.0,
+              "alpha_bottom_offset_from_body_bottom": 29.0
+            }
+          }
+        },
+        {
+          "image": "f0390-walk_in.png",
+          "tick": 390,
+          "players": {
+            "p1": {
+              "frame": "walk_1",
+              "facing": "Right",
+              "crop_rect": [
+                289,
+                236,
+                589,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -270.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "walk_1",
+              "facing": "Left",
+              "crop_rect": [
+                723,
+                236,
+                1023,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -270.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        }
+      ]
+    },
+    "walk_out": {
+      "image": "evidence-panels/walk_out.png",
+      "captures": [
+        {
+          "image": "f0404-walk_out.png",
+          "tick": 404,
+          "players": {
+            "p1": {
+              "frame": "walk_3",
+              "facing": "Right",
+              "crop_rect": [
+                376,
+                236,
+                676,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -271.0,
+              "alpha_bottom_offset_from_body_bottom": 2.0
+            },
+            "p2": {
+              "frame": "walk_3",
+              "facing": "Left",
+              "crop_rect": [
+                636,
+                236,
+                936,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -271.0,
+              "alpha_bottom_offset_from_body_bottom": 2.0
+            }
+          }
+        },
+        {
+          "image": "f0408-walk_out.png",
+          "tick": 408,
+          "players": {
+            "p1": {
+              "frame": "walk_0",
+              "facing": "Right",
+              "crop_rect": [
+                393,
+                236,
+                693,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -273.0,
+              "alpha_bottom_offset_from_body_bottom": 29.0
+            },
+            "p2": {
+              "frame": "walk_0",
+              "facing": "Left",
+              "crop_rect": [
+                619,
+                236,
+                919,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -273.0,
+              "alpha_bottom_offset_from_body_bottom": 29.0
+            }
+          }
+        },
+        {
+          "image": "f0414-walk_out.png",
+          "tick": 414,
+          "players": {
+            "p1": {
+              "frame": "walk_1",
+              "facing": "Right",
+              "crop_rect": [
+                393,
+                236,
+                693,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -270.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "walk_1",
+              "facing": "Left",
+              "crop_rect": [
+                619,
+                236,
+                919,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -270.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f0420-walk_out.png",
+          "tick": 420,
+          "players": {
+            "p1": {
+              "frame": "walk_2",
+              "facing": "Right",
+              "crop_rect": [
+                365,
+                236,
+                665,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -271.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "walk_2",
+              "facing": "Left",
+              "crop_rect": [
+                647,
+                236,
+                947,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -271.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        }
+      ]
+    },
+    "walk-return-idle": {
+      "image": "evidence-panels/walk-return-idle.png",
+      "captures": [
+        {
+          "image": "f0440-return_idle.png",
+          "tick": 440,
+          "players": {
+            "p1": {
+              "frame": "walk_1",
+              "facing": "Right",
+              "crop_rect": [
+                261,
+                236,
+                561,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -270.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "walk_1",
+              "facing": "Left",
+              "crop_rect": [
+                751,
+                236,
+                1051,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -270.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f0441-return_idle.png",
+          "tick": 441,
+          "players": {
+            "p1": {
+              "frame": "idle_0",
+              "facing": "Right",
+              "crop_rect": [
+                261,
+                236,
+                561,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -272.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "idle_0",
+              "facing": "Left",
+              "crop_rect": [
+                751,
+                236,
+                1051,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -272.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        }
+      ]
+    },
+    "punch_heavy-transition": {
+      "image": "evidence-panels/punch_heavy-transition.png",
+      "captures": [
+        {
+          "image": "f0704-punch_heavy.png",
+          "tick": 704,
+          "players": {
+            "p1": {
+              "frame": "idle_0",
+              "facing": "Right",
+              "crop_rect": [
+                221,
+                236,
+                601,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -272.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "idle_0",
+              "facing": "Left",
+              "crop_rect": [
+                711,
+                236,
+                1091,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -272.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f0705-punch_heavy.png",
+          "tick": 705,
+          "players": {
+            "p1": {
+              "frame": "punch_heavy_0",
+              "facing": "Right",
+              "crop_rect": [
+                221,
+                236,
+                601,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -271.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "punch_heavy_0",
+              "facing": "Left",
+              "crop_rect": [
+                711,
+                236,
+                1091,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -271.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f0716-punch_heavy.png",
+          "tick": 716,
+          "players": {
+            "p1": {
+              "frame": "punch_heavy_1",
+              "facing": "Right",
+              "crop_rect": [
+                221,
+                236,
+                601,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -238.0,
+              "alpha_bottom_offset_from_body_bottom": 2.0
+            },
+            "p2": {
+              "frame": "punch_heavy_1",
+              "facing": "Left",
+              "crop_rect": [
+                711,
+                236,
+                1091,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -238.0,
+              "alpha_bottom_offset_from_body_bottom": 2.0
+            }
+          }
+        },
+        {
+          "image": "f0725-punch_heavy.png",
+          "tick": 725,
+          "players": {
+            "p1": {
+              "frame": "punch_heavy_2",
+              "facing": "Right",
+              "crop_rect": [
+                221,
+                236,
+                601,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -257.0,
+              "alpha_bottom_offset_from_body_bottom": 2.0
+            },
+            "p2": {
+              "frame": "punch_heavy_2",
+              "facing": "Left",
+              "crop_rect": [
+                711,
+                236,
+                1091,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -257.0,
+              "alpha_bottom_offset_from_body_bottom": 2.0
+            }
+          }
+        },
+        {
+          "image": "f0734-punch_heavy.png",
+          "tick": 734,
+          "players": {
+            "p1": {
+              "frame": "punch_heavy_3",
+              "facing": "Right",
+              "crop_rect": [
+                221,
+                236,
+                601,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -266.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "punch_heavy_3",
+              "facing": "Left",
+              "crop_rect": [
+                711,
+                236,
+                1091,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -266.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f0743-punch_heavy.png",
+          "tick": 743,
+          "players": {
+            "p1": {
+              "frame": "idle_0",
+              "facing": "Right",
+              "crop_rect": [
+                221,
+                236,
+                601,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -272.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "idle_0",
+              "facing": "Left",
+              "crop_rect": [
+                711,
+                236,
+                1091,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -272.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        }
+      ]
+    },
+    "sweep-transition": {
+      "image": "evidence-panels/sweep-transition.png",
+      "captures": [
+        {
+          "image": "f0944-sweep.png",
+          "tick": 944,
+          "players": {
+            "p1": {
+              "frame": "idle_2",
+              "facing": "Right",
+              "crop_rect": [
+                221,
+                236,
+                601,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -266.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "idle_2",
+              "facing": "Left",
+              "crop_rect": [
+                711,
+                236,
+                1091,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -266.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f0945-sweep.png",
+          "tick": 945,
+          "players": {
+            "p1": {
+              "frame": "sweep_0",
+              "facing": "Right",
+              "crop_rect": [
+                221,
+                236,
+                601,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -166.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "sweep_0",
+              "facing": "Left",
+              "crop_rect": [
+                711,
+                236,
+                1091,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -166.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f0956-sweep.png",
+          "tick": 956,
+          "players": {
+            "p1": {
+              "frame": "sweep_1",
+              "facing": "Right",
+              "crop_rect": [
+                221,
+                236,
+                601,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -160.0,
+              "alpha_bottom_offset_from_body_bottom": 4.0
+            },
+            "p2": {
+              "frame": "sweep_1",
+              "facing": "Left",
+              "crop_rect": [
+                711,
+                236,
+                1091,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -160.0,
+              "alpha_bottom_offset_from_body_bottom": 4.0
+            }
+          }
+        },
+        {
+          "image": "f0965-sweep.png",
+          "tick": 965,
+          "players": {
+            "p1": {
+              "frame": "sweep_2",
+              "facing": "Right",
+              "crop_rect": [
+                221,
+                236,
+                601,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -164.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "sweep_2",
+              "facing": "Left",
+              "crop_rect": [
+                711,
+                236,
+                1091,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -164.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f0973-sweep.png",
+          "tick": 973,
+          "players": {
+            "p1": {
+              "frame": "sweep_3",
+              "facing": "Right",
+              "crop_rect": [
+                221,
+                236,
+                601,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -219.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "sweep_3",
+              "facing": "Left",
+              "crop_rect": [
+                711,
+                236,
+                1091,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -219.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f0981-sweep.png",
+          "tick": 981,
+          "players": {
+            "p1": {
+              "frame": "idle_2",
+              "facing": "Right",
+              "crop_rect": [
+                221,
+                236,
+                601,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -266.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "idle_2",
+              "facing": "Left",
+              "crop_rect": [
+                711,
+                236,
+                1091,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -266.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        }
+      ]
+    },
+    "air_punch-transition": {
+      "image": "evidence-panels/air_punch-transition.png",
+      "captures": [
+        {
+          "image": "f1310-air_punch.png",
+          "tick": 1310,
+          "players": {
+            "p1": {
+              "frame": "jump_1",
+              "facing": "Right",
+              "crop_rect": [
+                222,
+                158,
+                602,
+                568
+              ],
+              "body_bottom_y": 538.1666870117188,
+              "alpha_top_offset_from_body_bottom": -235.0,
+              "alpha_bottom_offset_from_body_bottom": -58.0
+            },
+            "p2": {
+              "frame": "jump_1",
+              "facing": "Left",
+              "crop_rect": [
+                710,
+                158,
+                1090,
+                568
+              ],
+              "body_bottom_y": 538.1666870117188,
+              "alpha_top_offset_from_body_bottom": -235.0,
+              "alpha_bottom_offset_from_body_bottom": -58.0
+            }
+          }
+        },
+        {
+          "image": "f1313-air_punch.png",
+          "tick": 1313,
+          "players": {
+            "p1": {
+              "frame": "air_punch_0",
+              "facing": "Right",
+              "crop_rect": [
+                222,
+                128,
+                602,
+                538
+              ],
+              "body_bottom_y": 507.5,
+              "alpha_top_offset_from_body_bottom": -282.0,
+              "alpha_bottom_offset_from_body_bottom": -29.0
+            },
+            "p2": {
+              "frame": "air_punch_0",
+              "facing": "Left",
+              "crop_rect": [
+                710,
+                128,
+                1090,
+                538
+              ],
+              "body_bottom_y": 507.5,
+              "alpha_top_offset_from_body_bottom": -282.0,
+              "alpha_bottom_offset_from_body_bottom": -29.0
+            }
+          }
+        },
+        {
+          "image": "f1317-air_punch.png",
+          "tick": 1317,
+          "players": {
+            "p1": {
+              "frame": "air_punch_1",
+              "facing": "Right",
+              "crop_rect": [
+                222,
+                95,
+                602,
+                505
+              ],
+              "body_bottom_y": 475.1666717529297,
+              "alpha_top_offset_from_body_bottom": -275.0,
+              "alpha_bottom_offset_from_body_bottom": -14.0
+            },
+            "p2": {
+              "frame": "air_punch_1",
+              "facing": "Left",
+              "crop_rect": [
+                710,
+                95,
+                1090,
+                505
+              ],
+              "body_bottom_y": 475.1666717529297,
+              "alpha_top_offset_from_body_bottom": -275.0,
+              "alpha_bottom_offset_from_body_bottom": -14.0
+            }
+          }
+        },
+        {
+          "image": "f1326-air_punch.png",
+          "tick": 1326,
+          "players": {
+            "p1": {
+              "frame": "air_punch_2",
+              "facing": "Right",
+              "crop_rect": [
+                222,
+                58,
+                602,
+                468
+              ],
+              "body_bottom_y": 438.16668701171875,
+              "alpha_top_offset_from_body_bottom": -279.0,
+              "alpha_bottom_offset_from_body_bottom": -29.0
+            },
+            "p2": {
+              "frame": "air_punch_2",
+              "facing": "Left",
+              "crop_rect": [
+                710,
+                58,
+                1090,
+                468
+              ],
+              "body_bottom_y": 438.16668701171875,
+              "alpha_top_offset_from_body_bottom": -279.0,
+              "alpha_bottom_offset_from_body_bottom": -29.0
+            }
+          }
+        },
+        {
+          "image": "f1335-air_punch.png",
+          "tick": 1335,
+          "players": {
+            "p1": {
+              "frame": "jump_2",
+              "facing": "Right",
+              "crop_rect": [
+                222,
+                71,
+                602,
+                481
+              ],
+              "body_bottom_y": 450.6667175292969,
+              "alpha_top_offset_from_body_bottom": -238.0,
+              "alpha_bottom_offset_from_body_bottom": -16.0
+            },
+            "p2": {
+              "frame": "jump_2",
+              "facing": "Left",
+              "crop_rect": [
+                710,
+                71,
+                1090,
+                481
+              ],
+              "body_bottom_y": 450.6667175292969,
+              "alpha_top_offset_from_body_bottom": -238.0,
+              "alpha_bottom_offset_from_body_bottom": -16.0
+            }
+          }
+        }
+      ]
+    },
+    "air_kick-transition": {
+      "image": "evidence-panels/air_kick-transition.png",
+      "captures": [
+        {
+          "image": "f1430-air_kick.png",
+          "tick": 1430,
+          "players": {
+            "p1": {
+              "frame": "jump_1",
+              "facing": "Right",
+              "crop_rect": [
+                222,
+                158,
+                602,
+                568
+              ],
+              "body_bottom_y": 538.1666870117188,
+              "alpha_top_offset_from_body_bottom": -235.0,
+              "alpha_bottom_offset_from_body_bottom": -58.0
+            },
+            "p2": {
+              "frame": "jump_1",
+              "facing": "Left",
+              "crop_rect": [
+                710,
+                158,
+                1090,
+                568
+              ],
+              "body_bottom_y": 538.1666870117188,
+              "alpha_top_offset_from_body_bottom": -235.0,
+              "alpha_bottom_offset_from_body_bottom": -58.0
+            }
+          }
+        },
+        {
+          "image": "f1433-air_kick.png",
+          "tick": 1433,
+          "players": {
+            "p1": {
+              "frame": "air_kick_0",
+              "facing": "Right",
+              "crop_rect": [
+                222,
+                128,
+                602,
+                538
+              ],
+              "body_bottom_y": 507.5,
+              "alpha_top_offset_from_body_bottom": -285.0,
+              "alpha_bottom_offset_from_body_bottom": -70.0
+            },
+            "p2": {
+              "frame": "air_kick_0",
+              "facing": "Left",
+              "crop_rect": [
+                710,
+                128,
+                1090,
+                538
+              ],
+              "body_bottom_y": 507.5,
+              "alpha_top_offset_from_body_bottom": -285.0,
+              "alpha_bottom_offset_from_body_bottom": -70.0
+            }
+          }
+        },
+        {
+          "image": "f1439-air_kick.png",
+          "tick": 1439,
+          "players": {
+            "p1": {
+              "frame": "air_kick_1",
+              "facing": "Right",
+              "crop_rect": [
+                222,
+                83,
+                602,
+                493
+              ],
+              "body_bottom_y": 462.6666717529297,
+              "alpha_top_offset_from_body_bottom": -269.0,
+              "alpha_bottom_offset_from_body_bottom": -25.0
+            },
+            "p2": {
+              "frame": "air_kick_1",
+              "facing": "Left",
+              "crop_rect": [
+                710,
+                83,
+                1090,
+                493
+              ],
+              "body_bottom_y": 462.6666717529297,
+              "alpha_top_offset_from_body_bottom": -269.0,
+              "alpha_bottom_offset_from_body_bottom": -25.0
+            }
+          }
+        },
+        {
+          "image": "f1449-air_kick.png",
+          "tick": 1449,
+          "players": {
+            "p1": {
+              "frame": "air_kick_2",
+              "facing": "Right",
+              "crop_rect": [
+                222,
+                57,
+                602,
+                467
+              ],
+              "body_bottom_y": 436.83335876464844,
+              "alpha_top_offset_from_body_bottom": -265.0,
+              "alpha_bottom_offset_from_body_bottom": -58.0
+            },
+            "p2": {
+              "frame": "air_kick_2",
+              "facing": "Left",
+              "crop_rect": [
+                710,
+                57,
+                1090,
+                467
+              ],
+              "body_bottom_y": 436.83335876464844,
+              "alpha_top_offset_from_body_bottom": -265.0,
+              "alpha_bottom_offset_from_body_bottom": -58.0
+            }
+          }
+        },
+        {
+          "image": "f1459-air_kick.png",
+          "tick": 1459,
+          "players": {
+            "p1": {
+              "frame": "jump_2",
+              "facing": "Right",
+              "crop_rect": [
+                222,
+                92,
+                602,
+                502
+              ],
+              "body_bottom_y": 472.1111755371094,
+              "alpha_top_offset_from_body_bottom": -238.0,
+              "alpha_bottom_offset_from_body_bottom": -16.0
+            },
+            "p2": {
+              "frame": "jump_2",
+              "facing": "Left",
+              "crop_rect": [
+                710,
+                92,
+                1090,
+                502
+              ],
+              "body_bottom_y": 472.1111755371094,
+              "alpha_top_offset_from_body_bottom": -238.0,
+              "alpha_bottom_offset_from_body_bottom": -16.0
+            }
+          }
+        }
+      ]
+    },
+    "all-ten-moves-both-facings": {
+      "image": "evidence-panels/all-ten-moves-both-facings.png",
+      "captures": [
+        {
+          "image": "f0589-punch_light.png",
+          "tick": 589,
+          "players": {
+            "p1": {
+              "frame": "punch_light_1",
+              "facing": "Right",
+              "crop_rect": [
+                161,
+                236,
+                661,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -260.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "punch_light_1",
+              "facing": "Left",
+              "crop_rect": [
+                651,
+                236,
+                1151,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -260.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f0716-punch_heavy.png",
+          "tick": 716,
+          "players": {
+            "p1": {
+              "frame": "punch_heavy_1",
+              "facing": "Right",
+              "crop_rect": [
+                161,
+                236,
+                661,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -238.0,
+              "alpha_bottom_offset_from_body_bottom": 2.0
+            },
+            "p2": {
+              "frame": "punch_heavy_1",
+              "facing": "Left",
+              "crop_rect": [
+                651,
+                236,
+                1151,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -238.0,
+              "alpha_bottom_offset_from_body_bottom": 2.0
+            }
+          }
+        },
+        {
+          "image": "f0833-kick.png",
+          "tick": 833,
+          "players": {
+            "p1": {
+              "frame": "kick_1",
+              "facing": "Right",
+              "crop_rect": [
+                161,
+                236,
+                661,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -268.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "kick_1",
+              "facing": "Left",
+              "crop_rect": [
+                651,
+                236,
+                1151,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -268.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f0956-sweep.png",
+          "tick": 956,
+          "players": {
+            "p1": {
+              "frame": "sweep_1",
+              "facing": "Right",
+              "crop_rect": [
+                161,
+                236,
+                661,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -160.0,
+              "alpha_bottom_offset_from_body_bottom": 4.0
+            },
+            "p2": {
+              "frame": "sweep_1",
+              "facing": "Left",
+              "crop_rect": [
+                651,
+                236,
+                1151,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -160.0,
+              "alpha_bottom_offset_from_body_bottom": 4.0
+            }
+          }
+        },
+        {
+          "image": "f1077-overhead.png",
+          "tick": 1077,
+          "players": {
+            "p1": {
+              "frame": "overhead_1",
+              "facing": "Right",
+              "crop_rect": [
+                162,
+                236,
+                662,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -255.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "overhead_1",
+              "facing": "Left",
+              "crop_rect": [
+                650,
+                236,
+                1150,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -255.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f1191-anti_air.png",
+          "tick": 1191,
+          "players": {
+            "p1": {
+              "frame": "anti_air_1",
+              "facing": "Right",
+              "crop_rect": [
+                162,
+                236,
+                662,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -315.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "anti_air_1",
+              "facing": "Left",
+              "crop_rect": [
+                650,
+                236,
+                1150,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -315.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f1317-air_punch.png",
+          "tick": 1317,
+          "players": {
+            "p1": {
+              "frame": "air_punch_1",
+              "facing": "Right",
+              "crop_rect": [
+                162,
+                95,
+                662,
+                505
+              ],
+              "body_bottom_y": 475.1666717529297,
+              "alpha_top_offset_from_body_bottom": -275.0,
+              "alpha_bottom_offset_from_body_bottom": -14.0
+            },
+            "p2": {
+              "frame": "air_punch_1",
+              "facing": "Left",
+              "crop_rect": [
+                650,
+                95,
+                1150,
+                505
+              ],
+              "body_bottom_y": 475.1666717529297,
+              "alpha_top_offset_from_body_bottom": -275.0,
+              "alpha_bottom_offset_from_body_bottom": -14.0
+            }
+          }
+        },
+        {
+          "image": "f1439-air_kick.png",
+          "tick": 1439,
+          "players": {
+            "p1": {
+              "frame": "air_kick_1",
+              "facing": "Right",
+              "crop_rect": [
+                162,
+                83,
+                662,
+                493
+              ],
+              "body_bottom_y": 462.6666717529297,
+              "alpha_top_offset_from_body_bottom": -269.0,
+              "alpha_bottom_offset_from_body_bottom": -25.0
+            },
+            "p2": {
+              "frame": "air_kick_1",
+              "facing": "Left",
+              "crop_rect": [
+                650,
+                83,
+                1150,
+                493
+              ],
+              "body_bottom_y": 462.6666717529297,
+              "alpha_top_offset_from_body_bottom": -269.0,
+              "alpha_bottom_offset_from_body_bottom": -25.0
+            }
+          }
+        },
+        {
+          "image": "f1551-throw.png",
+          "tick": 1551,
+          "players": {
+            "p1": {
+              "frame": "throw_1",
+              "facing": "Right",
+              "crop_rect": [
+                162,
+                236,
+                662,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -269.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "throw_1",
+              "facing": "Left",
+              "crop_rect": [
+                650,
+                236,
+                1150,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -269.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        },
+        {
+          "image": "f1665-special.png",
+          "tick": 1665,
+          "players": {
+            "p1": {
+              "frame": "special_0",
+              "facing": "Right",
+              "crop_rect": [
+                162,
+                236,
+                662,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -220.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            },
+            "p2": {
+              "frame": "special_0",
+              "facing": "Left",
+              "crop_rect": [
+                650,
+                236,
+                1150,
+                646
+              ],
+              "body_bottom_y": 616.0,
+              "alpha_top_offset_from_body_bottom": -220.0,
+              "alpha_bottom_offset_from_body_bottom": 3.0
+            }
+          }
+        }
+      ]
+    }
+  }
+}

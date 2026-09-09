@@ -13,10 +13,8 @@ use std::{
     time::{Duration, SystemTime, UNIX_EPOCH},
 };
 
+use crate::runtime_paths::capture_dir;
 use raylib::prelude::*;
-
-/// Directory where local gameplay captures are written.
-pub const CAPTURE_DIR: &str = "captures";
 
 const AUDIO_SOURCE_ENV: &str = "BORROW_FIGHTERS_CAPTURE_AUDIO_SOURCE";
 const FFMPEG_PATH_ENV: &str = "BORROW_FIGHTERS_FFMPEG";
@@ -45,11 +43,12 @@ impl VideoCapture {
             return Err(VideoCaptureError::InvalidFrameSize { width, height });
         }
 
-        fs::create_dir_all(CAPTURE_DIR).map_err(VideoCaptureError::CreateDirectory)?;
+        fs::create_dir_all(capture_dir()).map_err(VideoCaptureError::CreateDirectory)?;
         let output_path = next_capture_path();
         let audio_source =
             std::env::var(AUDIO_SOURCE_ENV).unwrap_or_else(|_| DEFAULT_PULSE_MONITOR.to_owned());
-        let mut child = ffmpeg_command(width, height, &audio_source, &output_path)
+        let pulse_source = cfg!(target_os = "linux").then_some(audio_source.as_str());
+        let mut child = ffmpeg_command(width, height, pulse_source, &output_path)
             .spawn()
             .map_err(VideoCaptureError::SpawnFfmpeg)?;
         let stdin = child.stdin.take().ok_or(VideoCaptureError::FfmpegStdin)?;
@@ -73,11 +72,7 @@ impl VideoCapture {
             return Ok(());
         };
 
-        let image = target
-            .texture()
-            .load_image()
-            .map_err(|error| VideoCaptureError::ReadFrame(error.to_string()))?;
-        let pixels = image.get_image_data_u8(true);
+        let pixels = read_render_texture_rgba(target)?;
         let Some(stdin) = active.stdin.as_mut() else {
             return Err(VideoCaptureError::FfmpegStdin);
         };
@@ -153,6 +148,53 @@ impl VideoCapture {
     }
 }
 
+/// Reads a framebuffer as contiguous top-down RGBA bytes for a video encoder.
+///
+/// Raylib 6's `get_image_data_u8` calls `GetImageColor` for every pixel. A single
+/// `LoadImageColors` allocation plus row copies avoids that FFI cost per frame.
+pub fn read_render_texture_rgba(target: &RenderTexture2D) -> Result<Vec<u8>, VideoCaptureError> {
+    let image = target
+        .texture()
+        .load_image()
+        .map_err(|error| VideoCaptureError::ReadFrame(error.to_string()))?;
+    let width = usize::try_from(image.width())
+        .map_err(|_| VideoCaptureError::ReadFrame("invalid image width".into()))?;
+    let colors = image.get_image_data();
+    Ok(top_down_rgba(&colors, width))
+}
+
+fn top_down_rgba(colors: &[raylib::ffi::Color], width: usize) -> Vec<u8> {
+    if colors.is_empty() {
+        return Vec::new();
+    }
+    assert!(width > 0 && colors.len().is_multiple_of(width));
+    // raylib-sys binds C's Color as #[repr(C)] { r: u8, g: u8, b: u8, a: u8 }.
+    // These assertions also prevent accidentally treating a future padded or
+    // differently aligned representation as a tightly packed RGBA byte stream.
+    const {
+        assert!(std::mem::size_of::<raylib::ffi::Color>() == 4);
+    }
+    const {
+        assert!(std::mem::align_of::<raylib::ffi::Color>() == 1);
+    }
+    // SAFETY: Color contains exactly four initialized u8 channels in C field
+    // order, with no padding. The byte view borrows only the live slice's full
+    // allocation, remains read-only, and is copied before ImageColors drops.
+    let bytes = unsafe {
+        std::slice::from_raw_parts(colors.as_ptr().cast::<u8>(), std::mem::size_of_val(colors))
+    };
+    let row_bytes = width * 4;
+    let mut pixels = vec![0; bytes.len()];
+    for (source, destination) in bytes
+        .chunks_exact(row_bytes)
+        .rev()
+        .zip(pixels.chunks_exact_mut(row_bytes))
+    {
+        destination.copy_from_slice(source);
+    }
+    pixels
+}
+
 impl Drop for VideoCapture {
     fn drop(&mut self) {
         let _ = self.stop();
@@ -188,7 +230,11 @@ impl fmt::Display for VideoCaptureError {
                 write!(formatter, "tamanho de frame invalido: {width}x{height}")
             }
             Self::CreateDirectory(error) => {
-                write!(formatter, "nao foi possivel criar {CAPTURE_DIR}: {error}")
+                write!(
+                    formatter,
+                    "nao foi possivel criar {}: {error}",
+                    capture_dir().display()
+                )
             }
             Self::SpawnFfmpeg(error) => write!(formatter, "ffmpeg nao iniciou: {error}"),
             Self::FfmpegStdin => write!(formatter, "ffmpeg nao abriu stdin para video bruto"),
@@ -204,7 +250,12 @@ impl fmt::Display for VideoCaptureError {
 
 impl std::error::Error for VideoCaptureError {}
 
-fn ffmpeg_command(width: u32, height: u32, audio_source: &str, output_path: &Path) -> Command {
+fn ffmpeg_command(
+    width: u32,
+    height: u32,
+    pulse_source: Option<&str>,
+    output_path: &Path,
+) -> Command {
     let ffmpeg_path = std::env::var(FFMPEG_PATH_ENV).unwrap_or_else(|_| "ffmpeg".to_owned());
     let mut command = Command::new(ffmpeg_path);
     command
@@ -216,17 +267,25 @@ fn ffmpeg_command(width: u32, height: u32, audio_source: &str, output_path: &Pat
         .args(["-pixel_format", "rgba"])
         .args(["-video_size", &format!("{width}x{height}")])
         .args(["-framerate", &DEFAULT_FRAMERATE.to_string()])
-        .args(["-i", "pipe:0"])
-        .args(["-thread_queue_size", "512"])
-        .args(["-f", "pulse"])
-        .args(["-i", audio_source])
+        .args(["-i", "pipe:0"]);
+    if let Some(source) = pulse_source {
+        command
+            .args(["-thread_queue_size", "512"])
+            .args(["-f", "pulse"])
+            .args(["-i", source])
+            .args(["-c:a", "aac"])
+            .args(["-b:a", "160k"])
+            .arg("-shortest");
+    } else {
+        // Desktop recording is optional. Windows has no PulseAudio source;
+        // keep framebuffer recording useful with a separately installed FFmpeg.
+        command.arg("-an");
+    }
+    command
         .args(["-c:v", "libx264"])
         .args(["-preset", "veryfast"])
         .args(["-crf", "20"])
-        .args(["-c:a", "aac"])
-        .args(["-b:a", "160k"])
         .args(["-pix_fmt", "yuv420p"])
-        .arg("-shortest")
         .args(["-movflags", "+faststart"])
         .arg(output_path)
         .stdin(Stdio::piped())
@@ -261,7 +320,7 @@ fn next_capture_path() -> PathBuf {
         .duration_since(UNIX_EPOCH)
         .unwrap_or_default()
         .as_secs();
-    Path::new(CAPTURE_DIR).join(format!("borrow-fighters-{timestamp}.mp4"))
+    capture_dir().join(format!("borrow-fighters-{timestamp}.mp4"))
 }
 
 #[cfg(test)]
@@ -269,9 +328,39 @@ mod tests {
     use super::*;
 
     #[test]
+    fn framebuffer_rows_flip_without_reversing_pixels_or_losing_alpha() {
+        let colors = [
+            Color::new(1, 2, 3, 4),
+            Color::new(5, 6, 7, 8),
+            Color::new(9, 10, 11, 12),
+            Color::new(13, 14, 15, 16),
+            Color::new(17, 18, 19, 20),
+            Color::new(21, 22, 23, 24),
+        ];
+        assert_eq!(
+            top_down_rgba(&colors, 2),
+            vec![
+                17, 18, 19, 20, 21, 22, 23, 24, 9, 10, 11, 12, 13, 14, 15, 16, 1, 2, 3, 4, 5, 6, 7,
+                8
+            ]
+        );
+        assert_eq!(top_down_rgba(&colors[..2], 2), vec![1, 2, 3, 4, 5, 6, 7, 8]);
+        assert!(top_down_rgba(&[], 0).is_empty());
+    }
+
+    #[test]
     fn rejects_zero_sized_capture() {
         let mut capture = VideoCapture::default();
         let error = capture.start(0, 540).unwrap_err();
         assert!(matches!(error, VideoCaptureError::InvalidFrameSize { .. }));
+    }
+
+    #[test]
+    fn silent_recording_does_not_require_a_linux_audio_device() {
+        let command = ffmpeg_command(960, 540, None, Path::new("capture.mp4"));
+        let args: Vec<_> = command.get_args().collect();
+        assert!(args.contains(&std::ffi::OsStr::new("-an")));
+        assert!(!args.contains(&std::ffi::OsStr::new("pulse")));
+        assert!(!args.contains(&std::ffi::OsStr::new("-shortest")));
     }
 }

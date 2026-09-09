@@ -1,0 +1,67 @@
+{
+  "sheet": "knockdown/keyed-v2.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "knockdown_mvp_00",
+      "source_rect": {
+        "x": 100,
+        "y": 100,
+        "w": 400,
+        "h": 550
+      },
+      "pivot": {
+        "x": 202,
+        "y": 485
+      },
+      "duration_ms": 100,
+      "phase": "fall"
+    },
+    {
+      "name": "knockdown_mvp_01",
+      "source_rect": {
+        "x": 550,
+        "y": 100,
+        "w": 430,
+        "h": 550
+      },
+      "pivot": {
+        "x": 230,
+        "y": 481
+      },
+      "duration_ms": 100,
+      "phase": "land"
+    },
+    {
+      "name": "knockdown_mvp_02",
+      "source_rect": {
+        "x": 1070,
+        "y": 100,
+        "w": 410,
+        "h": 550
+      },
+      "pivot": {
+        "x": 170,
+        "y": 482
+      },
+      "duration_ms": 250,
+      "phase": "down"
+    },
+    {
+      "name": "knockdown_mvp_03",
+      "source_rect": {
+        "x": 1600,
+        "y": 100,
+        "w": 380,
+        "h": 550
+      },
+      "pivot": {
+        "x": 200,
+        "y": 484
+      },
+      "duration_ms": 150,
+      "phase": "recover"
+    }
+  ]
+}

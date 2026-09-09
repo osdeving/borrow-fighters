@@ -1,0 +1,53 @@
+{
+  "kind": "live Raylib stream observation; same player calls used by three scenes",
+  "scenes": [
+    {
+      "after_cancel": 0.912108838558197,
+      "after_resume": 0.6622222065925598,
+      "before_pause": 0.3623582720756531,
+      "cancel_paused_at": 0.6622222065925598,
+      "cancel_resumed_at": 0.6622222065925598,
+      "cancel_stops_phase_cue": true,
+      "during_pause": 0.3623582720756531,
+      "music": "combat",
+      "paused_at": 0.3623582720756531,
+      "phase_cue_while_paused": true,
+      "resumed_at": 0.3623582720756531,
+      "scene": "fight"
+    },
+    {
+      "after_cancel": 0.912108838558197,
+      "after_resume": 0.6622222065925598,
+      "before_pause": 0.3623582720756531,
+      "cancel_paused_at": 0.6622222065925598,
+      "cancel_resumed_at": 0.6622222065925598,
+      "cancel_stops_phase_cue": true,
+      "during_pause": 0.3623582720756531,
+      "music": "combat-determined-pursuit",
+      "paused_at": 0.3623582720756531,
+      "phase_cue_while_paused": true,
+      "resumed_at": 0.3623582720756531,
+      "scene": "combat_lab"
+    },
+    {
+      "after_cancel": 1.811700701713562,
+      "after_resume": 1.5618140697479248,
+      "before_pause": 1.261950135231018,
+      "cancel_paused_at": 1.5618140697479248,
+      "cancel_resumed_at": 1.5618140697479248,
+      "cancel_stops_phase_cue": true,
+      "during_pause": 1.261950135231018,
+      "music": "combat-determined-pursuit",
+      "paused_at": 1.261950135231018,
+      "phase_cue_while_paused": true,
+      "resumed_at": 1.261950135231018,
+      "scene": "move_showcase"
+    }
+  ],
+  "track_change_while_paused": {
+    "after_cancel": 0.249886617064476,
+    "music": "menu",
+    "paused_at": 0.0,
+    "remained_paused_until_cancel": true
+  }
+}

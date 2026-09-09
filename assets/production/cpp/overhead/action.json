@@ -1,0 +1,65 @@
+{
+  "action": "overhead",
+  "source": "overhead/source-v1.png",
+  "sheet": "overhead/keyed-v1.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "candidate: source, alpha and two-facing previews inspected; corrected Combat Lab captured, artistic limitations recorded in review.md",
+  "source_body_height_reference_px": 689,
+  "suggested_scale_to_runtime": 0.3889695210449927,
+  "frames": [
+    {
+      "name": "overhead_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 680,
+        "h": 736
+      },
+      "pivot": {
+        "x": 375,
+        "y": 718
+      },
+      "duration_ms": 183,
+      "phase": "startup"
+    },
+    {
+      "name": "overhead_01",
+      "source_rect": {
+        "x": 680,
+        "y": 0,
+        "w": 680,
+        "h": 736
+      },
+      "pivot": {
+        "x": 275,
+        "y": 718
+      },
+      "duration_ms": 133,
+      "phase": "active"
+    },
+    {
+      "name": "overhead_02",
+      "source_rect": {
+        "x": 1360,
+        "y": 0,
+        "w": 688,
+        "h": 736
+      },
+      "pivot": {
+        "x": 300,
+        "y": 718
+      },
+      "duration_ms": 217,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Complete raised fist preparation, forward descending hammerfist contact, low follow-through. Glove near(1200,375), support(955,718), projects to(+95.3,-133.4)world inside overhead box. Full raised hand, adult anatomy and bag preserved. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged.",
+  "runtime_review": {
+    "report": "../../candidates/cpp/review/runtime-lab/capture-report.json",
+    "loaded_manifest_matches_candidate": true,
+    "clip_captured": true,
+    "combat_uses_baseline_manifest": true,
+    "final_art_approved": false
+  }
+}

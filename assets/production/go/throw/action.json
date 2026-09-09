@@ -1,0 +1,110 @@
+{
+  "action": "throw",
+  "source": "throw/source-v2.png",
+  "sheet": "throw/sheet-v1.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "Final generated art reviewed: complete World in both facings, native Lab, Sprite Studio and normal match; evidence in finalization-review.md.",
+  "source_body_height_reference_px": 780,
+  "suggested_scale_to_runtime": 0.3384615384615385,
+  "replacement_contract": "../action-contracts.json#/actions/throw",
+  "references": {
+    "new_master": "reference/master.png",
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
+  "frames": [
+    {
+      "name": "throw_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 800,
+        "h": 920
+      },
+      "pivot": {
+        "x": 395,
+        "y": 853
+      },
+      "duration_ms": 100,
+      "phase": "startup"
+    },
+    {
+      "name": "throw_01",
+      "source_rect": {
+        "x": 800,
+        "y": 0,
+        "w": 800,
+        "h": 920
+      },
+      "pivot": {
+        "x": 370,
+        "y": 853
+      },
+      "duration_ms": 50,
+      "phase": "active"
+    },
+    {
+      "name": "throw_02",
+      "source_rect": {
+        "x": 1600,
+        "y": 0,
+        "w": 800,
+        "h": 920
+      },
+      "pivot": {
+        "x": 355,
+        "y": 853
+      },
+      "duration_ms": 216,
+      "phase": "recovery"
+    }
+  ],
+  "generation_brief": "Open hand preparation, compact grasp inside short throw reach and pull/recovery; no opponent baked into the sheet.",
+  "review_notes": "Two separated bent-arm grips. v2 lowered and extended the leading grasp into the short throw range; rear support hand naturally sits behind the contact hand. Explicit crops/pivots are recorded in preparation.json; no timing or combat changes.",
+  "timing_reference": {
+    "move_id": "CloseThrow",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 22,
+      "active_start": 6,
+      "active_end": 8
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 100,
+      "recovery_starts": 150,
+      "clip_ends": 366
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -184.0,
+      "w": 61.33333333333333,
+      "h": 160.0
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -112.0,
+      "y": -184.0,
+      "w": 61.33333333333333,
+      "h": 160.0
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 81.33333333333333,
+      "y": -104.0
+    }
+  },
+  "scale_to_runtime": 0.3384615384615385,
+  "runtime_review": {
+    "approved": true,
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "report": "../finalization-review.md",
+    "world_facings_seen": [
+      "Left",
+      "Right"
+    ],
+    "lab_capture": "full set before jump, art unchanged by frame checksum",
+    "normal_match_result_evidence": false
+  }
+}

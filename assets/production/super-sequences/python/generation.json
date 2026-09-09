@@ -1,0 +1,362 @@
+{
+  "transform.png": {
+    "source": "/home/willams/.codex/generated_images/01a0833a-394f-76f3-84df-c4bf7f00f23b/exec-48c2752b-c9f1-4215-890e-27dacd63f1ea.png",
+    "size": [
+      1448,
+      1086
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_fraction": 0.5802777438621125,
+    "sha256": "4ab04276bf2dfc02368b8aede1432484bd7154b872f5e7985421407ff29924cb",
+    "analysis_threshold": 32,
+    "components": [
+      {
+        "area": 56406,
+        "box": [
+          47,
+          19,
+          302,
+          521
+        ]
+      },
+      {
+        "area": 58463,
+        "box": [
+          382,
+          49,
+          696,
+          517
+        ]
+      },
+      {
+        "area": 68295,
+        "box": [
+          747,
+          51,
+          1051,
+          504
+        ]
+      },
+      {
+        "area": 84044,
+        "box": [
+          1119,
+          78,
+          1420,
+          510
+        ]
+      },
+      {
+        "area": 88870,
+        "box": [
+          29,
+          590,
+          341,
+          1065
+        ]
+      },
+      {
+        "area": 79158,
+        "box": [
+          387,
+          611,
+          710,
+          1055
+        ]
+      },
+      {
+        "area": 78240,
+        "box": [
+          737,
+          637,
+          1069,
+          1055
+        ]
+      },
+      {
+        "area": 96820,
+        "box": [
+          1103,
+          544,
+          1431,
+          1065
+        ]
+      }
+    ],
+    "method": "built-in imagegen; PNG copied byte-for-byte; alpha analysis read-only"
+  },
+  "serpent.png": {
+    "source": "/home/willams/.codex/generated_images/01a0833a-394f-76f3-84df-c4bf7f00f23b/exec-627e708c-4d38-464e-85fa-2ddf3c349565.png",
+    "size": [
+      1448,
+      1086
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_fraction": 0.6083332061495884,
+    "sha256": "05ae956f629ae0de9f74c34f6ecf9cc2e58f8d6ca93b3d7e4f89eb1ea4e75b13",
+    "analysis_threshold": 32,
+    "components": [
+      {
+        "area": 62861,
+        "box": [
+          9,
+          187,
+          360,
+          510
+        ]
+      },
+      {
+        "area": 73967,
+        "box": [
+          379,
+          51,
+          710,
+          518
+        ]
+      },
+      {
+        "area": 77771,
+        "box": [
+          744,
+          138,
+          1086,
+          519
+        ]
+      },
+      {
+        "area": 76280,
+        "box": [
+          1112,
+          79,
+          1439,
+          523
+        ]
+      },
+      {
+        "area": 77033,
+        "box": [
+          7,
+          670,
+          545,
+          1000
+        ]
+      },
+      {
+        "area": 71225,
+        "box": [
+          422,
+          738,
+          856,
+          1014
+        ]
+      },
+      {
+        "area": 69872,
+        "box": [
+          823,
+          602,
+          1118,
+          1032
+        ]
+      },
+      {
+        "area": 67563,
+        "box": [
+          1130,
+          637,
+          1444,
+          1032
+        ]
+      }
+    ],
+    "method": "built-in imagegen; PNG copied byte-for-byte; alpha analysis read-only"
+  },
+  "revert.png": {
+    "source": "/home/willams/.codex/generated_images/01a0833a-394f-76f3-84df-c4bf7f00f23b/exec-5212aca9-cea7-415a-8d3d-0ad6412b5684.png",
+    "size": [
+      1448,
+      1086
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_fraction": 0.573781198172624,
+    "sha256": "081eaa92ff9f1ca134abf43616649f9bb49810cece9fa4122fb6ab98f23840bc",
+    "analysis_threshold": 32,
+    "components": [
+      {
+        "area": 98181,
+        "box": [
+          22,
+          65,
+          391,
+          529
+        ]
+      },
+      {
+        "area": 77424,
+        "box": [
+          414,
+          141,
+          743,
+          527
+        ]
+      },
+      {
+        "area": 75789,
+        "box": [
+          760,
+          127,
+          1040,
+          523
+        ]
+      },
+      {
+        "area": 85974,
+        "box": [
+          1086,
+          100,
+          1426,
+          528
+        ]
+      },
+      {
+        "area": 62650,
+        "box": [
+          1150,
+          539,
+          1430,
+          1053
+        ]
+      },
+      {
+        "area": 95863,
+        "box": [
+          48,
+          590,
+          385,
+          1057
+        ]
+      },
+      {
+        "area": 62627,
+        "box": [
+          441,
+          655,
+          744,
+          1052
+        ]
+      },
+      {
+        "area": 56840,
+        "box": [
+          780,
+          717,
+          1109,
+          1048
+        ]
+      }
+    ],
+    "method": "built-in imagegen; PNG copied byte-for-byte; alpha analysis read-only"
+  },
+  "celebrate.png": {
+    "source": "/home/willams/.codex/generated_images/01a08339-7fe6-7293-8023-8cb6ff3a3f76/exec-57fd641d-d67d-46db-9a8a-e9f9b3997919.png",
+    "size": [
+      1448,
+      1086
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_fraction": 0.6589154533337404,
+    "sha256": "8ce26d81d004370edb0a780959083f0b4f5b70932edcca2b5c32f6a325ab3562",
+    "analysis_threshold": 32,
+    "components": [
+      {
+        "area": 57223,
+        "box": [
+          63,
+          134,
+          319,
+          529
+        ]
+      },
+      {
+        "area": 54443,
+        "box": [
+          433,
+          36,
+          669,
+          412
+        ]
+      },
+      {
+        "area": 62645,
+        "box": [
+          778,
+          9,
+          1061,
+          396
+        ]
+      },
+      {
+        "area": 58531,
+        "box": [
+          1075,
+          40,
+          1439,
+          521
+        ]
+      },
+      {
+        "area": 59981,
+        "box": [
+          54,
+          624,
+          372,
+          1052
+        ]
+      },
+      {
+        "area": 57300,
+        "box": [
+          447,
+          546,
+          706,
+          1063
+        ]
+      },
+      {
+        "area": 57569,
+        "box": [
+          802,
+          550,
+          1031,
+          1062
+        ]
+      },
+      {
+        "area": 58968,
+        "box": [
+          1160,
+          546,
+          1408,
+          1063
+        ]
+      }
+    ],
+    "method": "built-in imagegen; PNG copied byte-for-byte; alpha analysis read-only"
+  }
+}

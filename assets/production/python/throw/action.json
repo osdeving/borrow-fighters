@@ -1,0 +1,126 @@
+{
+  "action": "throw",
+  "source": "throw/source-extraordinary-v1.png",
+  "sheet": "throw/selected-lift-v2.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "runtime_verified_spectacle",
+  "source_body_height_reference_px": 440,
+  "suggested_scale_to_runtime": 0.6090909090909091,
+  "frames": [
+    {
+      "name": "throw_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 548,
+        "h": 500
+      },
+      "pivot": {
+        "x": 298,
+        "y": 473
+      },
+      "duration_ms": 166,
+      "phase": "startup"
+    },
+    {
+      "name": "throw_01",
+      "source_rect": {
+        "x": 580,
+        "y": 0,
+        "w": 410,
+        "h": 500
+      },
+      "pivot": {
+        "x": 201,
+        "y": 473
+      },
+      "duration_ms": 100,
+      "phase": "capture"
+    },
+    {
+      "name": "throw_02",
+      "source_rect": {
+        "x": 1050,
+        "y": 0,
+        "w": 420,
+        "h": 500
+      },
+      "pivot": {
+        "x": 180,
+        "y": 469
+      },
+      "duration_ms": 100,
+      "phase": "capture"
+    },
+    {
+      "name": "throw_03",
+      "source_rect": {
+        "x": 0,
+        "y": 502,
+        "w": 515,
+        "h": 522
+      },
+      "pivot": {
+        "x": 315,
+        "y": 451
+      },
+      "duration_ms": 67,
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_04",
+      "source_rect": {
+        "x": 550,
+        "y": 502,
+        "w": 430,
+        "h": 522
+      },
+      "pivot": {
+        "x": 223,
+        "y": 457
+      },
+      "duration_ms": 133,
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_05",
+      "source_rect": {
+        "x": 1050,
+        "y": 502,
+        "w": 420,
+        "h": 522
+      },
+      "pivot": {
+        "x": 190,
+        "y": 467
+      },
+      "duration_ms": 234,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Six shoulder-throw keys: reach, capture, lift/turn, release BEHIND, follow-through, ready.48ticks800ms; capture visual phase10..21, recovery starts22. Skirt and serpent remain attached throughout; no fake victim drawn into attacker sheet. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available. Lift v2 replaces only key2 with generated arms raised FORWARD; hands approximately(+55,-235)world support the victim during capture. Other five selected drawings retain identical pixel hashes. select_lift_v2.py reproduces the explicit whole-frame selection.",
+  "frame_sources": [
+    "throw/source-extraordinary-v1.png",
+    "throw/source-extraordinary-v1.png",
+    "throw/source-lift-v2.png",
+    "throw/source-extraordinary-v1.png",
+    "throw/source-extraordinary-v1.png",
+    "throw/source-extraordinary-v1.png"
+  ],
+  "runtime_review": {
+    "report": "../../candidates/python/review/extraordinary/runtime-review.json",
+    "actual_clip_present": true,
+    "both_facings_verified": true,
+    "all_selected_keys_observed": true,
+    "reviewed_frames": [
+      "throw_00",
+      "throw_01",
+      "throw_02",
+      "throw_03",
+      "throw_04",
+      "throw_05"
+    ],
+    "review_scope": "Integrated art and real contact coherence for the extraordinary signatures / throws goal."
+  }
+}

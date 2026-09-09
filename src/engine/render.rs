@@ -1,16 +1,25 @@
-//! Draws the greybox prototype.
+//! Draws arenas, fighters, menus and match presentation.
 //!
-//! Rendering intentionally uses primitive shapes and debug overlays so gameplay
-//! problems are visible before art production starts.
+//! System: Raylib presentation. Artwork and smooth embedded typography share
+//! screen geometry with pointer input; debug overlays remain optional.
 
 use raylib::core::text::RaylibFont;
 use raylib::prelude::*;
 use std::{f32::consts::TAU, ffi::CString};
 
+mod authored_actors;
+mod authored_supers;
+mod cinematic_effects;
 mod combat_lab;
+mod move_showcase;
+mod onboarding;
+mod python_super;
+mod signature_effects;
 mod sprite_viewer;
+mod stage_life;
 
 pub use combat_lab::draw_combat_lab;
+pub use move_showcase::draw_move_showcase;
 pub use sprite_viewer::{draw_sprite_viewer, draw_sprite_viewer_error};
 
 use crate::characters::CharacterId;
@@ -28,6 +37,7 @@ use crate::lore::{LoreBook, LoreChapter, LoreCharacter};
 use crate::math::rect::Rect;
 use crate::scenes::preferences::{MenuPage, PreferencesMenu};
 use crate::ui::binary_text::{DEFAULT_BINARY_REVEAL_FRAMES, binary_reveal_text_with_seed};
+use crate::ui::menu_layout::{MenuBounds as MenuPanel, MenuLayout};
 
 const BACKGROUND: Color = Color::new(18, 20, 26, 255);
 const FLOOR: Color = Color::new(72, 76, 88, 255);
@@ -36,6 +46,7 @@ const PLAYER_TWO: Color = Color::new(255, 178, 104, 255);
 const PLAYER_GO: Color = Color::new(96, 220, 190, 255);
 pub(super) const PLAYER_C: Color = Color::new(126, 194, 255, 255);
 pub(super) const PLAYER_PYTHON: Color = Color::new(255, 210, 92, 255);
+pub(super) const PLAYER_CPP: Color = Color::new(118, 214, 255, 255);
 const BODY_OUTLINE: Color = Color::new(238, 241, 247, 255);
 const HURTBOX: Color = Color::new(105, 240, 174, 255);
 const HITBOX: Color = Color::new(255, 82, 82, 255);
@@ -107,72 +118,85 @@ pub fn draw_fight(
     gamepad_status: GamepadStatus,
     assets: &GameAssets,
 ) {
+    if authored_supers::draw_override(draw, world) {
+        return;
+    }
     draw.clear_background(BACKGROUND);
+    let arena = world.effective_arena(arena);
+    let visual_time_seconds = authored_supers::arena_time(world, visual_time_seconds);
     draw_arena(draw, arena, assets.arenas.get(arena), visual_time_seconds);
+    draw_stage_life_layer(draw, arena, visual_time_seconds, flags, Some(world), assets);
+    draw_world_cinematic_background(draw, world, assets);
     let show_debug = flags.enabled(FeatureFlag::ShowCombatDebug);
+    if show_debug {
+        draw_arena_bounds(draw);
+    }
     let spawn_intro = world.spawn_intro_active();
     let player_one_visuals = character_visuals(world.player_one_character(), assets);
     let player_two_visuals = character_visuals(world.player_two_character(), assets);
+    let (player_one_clip, player_one_time) =
+        fighter_match_presentation(world, &world.player_one, spawn_intro);
+    let (player_two_clip, player_two_time) =
+        fighter_match_presentation(world, &world.player_two, spawn_intro);
 
     draw_fighter_ground_lights(draw, world);
     draw_projectiles(draw, world, show_debug, assets);
-    draw_fighter(
-        draw,
-        &world.player_one,
-        FighterDrawOptions {
-            body_color: player_one_visuals.body_color,
-            show_debug,
-            sprite_atlas: fighter_atlas_for_intro(
-                spawn_intro,
-                player_one_visuals.start_atlas,
-                player_one_visuals.fight_atlas,
-            ),
-            spritesheet: assets.fighter_spritesheet.as_ref(),
-            world_elapsed_seconds: fighter_visual_elapsed_seconds(
-                world,
-                spawn_intro,
-                player_one_visuals.start_atlas.is_some(),
-            ),
-            forced_clip: forced_fighter_clip(
-                world,
-                PlayerSlot::One,
-                spawn_intro,
-                player_one_visuals.start_atlas.is_some(),
-            ),
-        },
-    );
-    draw_fighter(
-        draw,
-        &world.player_two,
-        FighterDrawOptions {
-            body_color: player_two_visuals.body_color,
-            show_debug,
-            sprite_atlas: fighter_atlas_for_intro(
-                spawn_intro,
-                player_two_visuals.start_atlas,
-                player_two_visuals.fight_atlas,
-            ),
-            spritesheet: assets.fighter_spritesheet.as_ref(),
-            world_elapsed_seconds: fighter_visual_elapsed_seconds(
-                world,
-                spawn_intro,
-                player_two_visuals.start_atlas.is_some(),
-            ),
-            forced_clip: forced_fighter_clip(
-                world,
-                PlayerSlot::Two,
-                spawn_intro,
-                player_two_visuals.start_atlas.is_some(),
-            ),
-        },
-    );
+    if !hides_authored_actor(world, world.player_one.slot, assets) {
+        draw_fighter(
+            draw,
+            &world.player_one,
+            FighterDrawOptions {
+                body_color: player_one_visuals.body_color,
+                show_debug,
+                sprite_atlas: fighter_atlas_for_intro(
+                    spawn_intro,
+                    player_one_visuals.start_atlas,
+                    player_one_visuals.fight_atlas,
+                ),
+                spritesheet: assets.fighter_spritesheet.as_ref(),
+                world_elapsed_seconds: player_one_time,
+                forced_clip: player_one_clip,
+                placement: authored_target_placement(world, world.player_one.slot, assets),
+            },
+        );
+    }
+    if !hides_authored_actor(world, world.player_two.slot, assets) {
+        draw_fighter(
+            draw,
+            &world.player_two,
+            FighterDrawOptions {
+                body_color: player_two_visuals.body_color,
+                show_debug,
+                sprite_atlas: fighter_atlas_for_intro(
+                    spawn_intro,
+                    player_two_visuals.start_atlas,
+                    player_two_visuals.fight_atlas,
+                ),
+                spritesheet: assets.fighter_spritesheet.as_ref(),
+                world_elapsed_seconds: player_two_time,
+                forced_clip: player_two_clip,
+                placement: authored_target_placement(world, world.player_two.slot, assets),
+            },
+        );
+    }
+    draw_authored_actors(draw, world, assets);
+    signature_effects::draw_signature_effects(draw, world, show_debug, assets);
     if show_debug {
         draw_body_collision(draw, world);
     }
-    draw_hit_effects(draw, world);
+    draw_hit_effects(draw, world, assets.menu_font.as_ref());
+    draw_world_cinematic_foreground(draw, world, assets);
 
     if flags.enabled(FeatureFlag::ShowHud) {
-        draw_hud(draw, world, flags, gamepad_status);
+        draw_hud(
+            draw,
+            world,
+            arena,
+            flags,
+            gamepad_status,
+            show_debug,
+            assets,
+        );
     }
 
     if let Some(label) = world.countdown_label() {
@@ -180,7 +204,7 @@ pub fn draw_fight(
     }
 
     if flags.enabled(FeatureFlag::ShowControlsHelp) {
-        draw_help(draw);
+        draw_help(draw, assets.menu_font.as_ref());
     }
 }
 
@@ -192,6 +216,14 @@ pub fn draw_preferences(draw: &mut impl DrawTarget, options: PreferencesDrawOpti
         options.arena,
         options.assets.arenas.get(options.arena),
         options.visual_time_seconds,
+    );
+    draw_stage_life_layer(
+        draw,
+        options.arena,
+        options.visual_time_seconds,
+        options.flags,
+        None,
+        options.assets,
     );
     draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(0, 0, 0, 164));
     draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(4, 9, 22, 68));
@@ -206,6 +238,7 @@ pub fn draw_preferences(draw: &mut impl DrawTarget, options: PreferencesDrawOpti
         MenuPage::Training => draw_training_menu(draw, font, &options),
         MenuPage::Lore => draw_lore_menu(draw, font, &options),
         MenuPage::Options => draw_options_menu(draw, font, &options),
+        MenuPage::HowToPlay => onboarding::draw_guide(draw, font, &options),
     }
 }
 
@@ -263,7 +296,7 @@ pub fn draw_video_capture_overlay(
     draw.draw_text(&text, x, y, font_size, UI_MUTED);
 }
 
-/// Draws the software menu cursor used when the OS cursor is hidden.
+/// Draws the WSL fallback pointer while the native cursor remains enabled.
 pub fn draw_linker_chip_cursor(
     draw: &mut impl DrawTarget,
     mouse_position: Vector2,
@@ -272,11 +305,20 @@ pub fn draw_linker_chip_cursor(
 ) {
     if mouse_position.x < 0.0
         || mouse_position.y < 0.0
-        || mouse_position.x > WINDOW_WIDTH as f32
-        || mouse_position.y > WINDOW_HEIGHT as f32
+        || mouse_position.x >= WINDOW_WIDTH as f32
+        || mouse_position.y >= WINDOW_HEIGHT as f32
     {
         return;
     }
+
+    // Scale the complete pointer around its hotspot, including text and glow.
+    let mut cursor_draw = draw.begin_mode2D(Camera2D {
+        offset: mouse_position,
+        target: mouse_position,
+        rotation: 0.0,
+        zoom: 0.5,
+    });
+    let draw = &mut cursor_draw;
 
     let chip_size = screen_px(42);
     let pin_len = screen_px(7);
@@ -457,14 +499,6 @@ pub struct PreferencesDrawOptions<'a> {
     pub gamepad_status: GamepadStatus,
     pub recording: bool,
     pub assets: &'a GameAssets,
-}
-
-#[derive(Clone, Copy)]
-struct MenuPanel {
-    x: i32,
-    y: i32,
-    width: i32,
-    height: i32,
 }
 
 struct MenuLine<'a> {
@@ -733,30 +767,55 @@ fn draw_menu_chrome(
     font: Option<&Font>,
     options: &PreferencesDrawOptions<'_>,
 ) {
-    draw_menu_title_sprite(draw, font, options.assets.menu_title.as_ref());
-    draw_centered_menu_text(
-        draw,
-        font,
-        "commit your combo  //  borrow checker online",
-        WINDOW_WIDTH / 2,
-        screen_px(128),
-        14.0,
-        MENU_HACK_GREEN,
-    );
+    if options.menu.page() == MenuPage::Main {
+        draw_menu_title_sprite(draw, font, options.assets.menu_title.as_ref());
+        draw_centered_menu_text(
+            draw,
+            font,
+            "CÓDIGO NO PUNHO. BRASIL NO CENÁRIO.",
+            WINDOW_WIDTH / 2,
+            screen_px(128),
+            12.0,
+            MENU_HACK_GREEN,
+        );
+        // Slow traveling lights sit outside the interactive rows.
+        let travel = (options.visual_time_seconds * 0.18).fract();
+        let light_y = screen_px(176) + (travel * world_px(304.0)) as i32;
+        for x in [screen_px(284), screen_px(674)] {
+            draw.draw_rectangle_gradient_v(
+                x,
+                light_y,
+                screen_px(2),
+                screen_px(38),
+                Color::new(0, 202, 255, 0),
+                Color::new(0, 202, 255, 145),
+            );
+        }
+    } else {
+        draw_menu_text(
+            draw,
+            font,
+            "BORROW FIGHTERS",
+            screen_px(28),
+            screen_px(12),
+            16.0,
+            UI_TEXT,
+        );
+    }
 
     let status = format!(
-        "PADS  P1 {}  P2 {}",
+        "GAMEPADS   P1 {}   /   P2 {}",
         connected_label(options.gamepad_status.player_one),
         connected_label(options.gamepad_status.player_two)
     );
-    let width = menu_text_width(font, &status, 14.0, 1.0);
+    let width = menu_text_width(font, &status, 11.0, 1.0);
     draw_menu_text(
         draw,
         font,
         &status,
         WINDOW_WIDTH - width - screen_px(28),
-        screen_px(24),
-        14.0,
+        screen_px(14),
+        11.0,
         UI_MUTED,
     );
 }
@@ -829,49 +888,51 @@ fn draw_main_menu(
     font: Option<&Font>,
     options: &PreferencesDrawOptions<'_>,
 ) {
-    let panel = MenuPanel {
-        x: screen_px(302),
-        y: screen_px(154),
-        width: screen_px(356),
-        height: screen_px(370),
-    };
+    let geometry = MenuLayout::for_page(MenuPage::Main);
+    let panel = geometry.panel;
     draw_menu_panel(draw, panel);
-    draw_menu_page_title(draw, font, panel, "BOOT SELECT");
+    draw_menu_page_title(draw, font, panel, "ENTRE NA LUTA");
 
     let rows = [
         MenuLine {
             label: "QUICK FIGHT",
-            description: "boot fight loop",
+            description: "Seu próximo round começa aqui",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "VERSUS SETUP",
-            description: "configure players",
+            description: "Escolha lutadores e cenário",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "TRAINING",
-            description: "inspect hit logic",
+            description: "Domine golpes e especiais",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "LORE / ROSTER",
-            description: "read the linker book",
+            description: "Conheça quem está no ringue",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "OPTIONS",
-            description: "toggle prototype flags",
+            description: "Áudio, controles e preferências",
+            value: None,
+            checked: None,
+        },
+        MenuLine {
+            label: "COMO JOGAR",
+            description: "Controles, duelo local e modo solo",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "EXIT",
-            description: "shutdown",
+            description: "Até o próximo round",
             value: None,
             checked: None,
         },
@@ -883,15 +944,18 @@ fn draw_main_menu(
         &rows,
         options.menu.selected(),
         MenuRowsLayout {
-            panel,
-            row_height: screen_px(44),
-            start_offset_y: screen_px(58),
+            geometry,
             large_labels: true,
             show_descriptions: true,
             selection_pulse_frames: options.menu.selection_pulse_frames(),
         },
     );
-    draw_menu_footer(draw, font, panel, "Setas/W/S navegam  |  Enter confirma");
+    draw_menu_footer(
+        draw,
+        font,
+        panel,
+        "Mouse/Setas navegam  |  Clique/Enter confirma",
+    );
 }
 
 fn draw_versus_menu(
@@ -899,12 +963,8 @@ fn draw_versus_menu(
     font: Option<&Font>,
     options: &PreferencesDrawOptions<'_>,
 ) {
-    let panel = MenuPanel {
-        x: screen_px(270),
-        y: screen_px(112),
-        width: screen_px(484),
-        height: screen_px(432),
-    };
+    let geometry = MenuLayout::for_page(MenuPage::Versus);
+    let panel = geometry.panel;
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "VERSUS SETUP");
 
@@ -951,9 +1011,7 @@ fn draw_versus_menu(
         &rows,
         options.menu.selected(),
         MenuRowsLayout {
-            panel,
-            row_height: screen_px(56),
-            start_offset_y: screen_px(96),
+            geometry,
             large_labels: false,
             show_descriptions: true,
             selection_pulse_frames: options.menu.selection_pulse_frames(),
@@ -963,7 +1021,7 @@ fn draw_versus_menu(
         draw,
         font,
         panel,
-        "A/D ou setas ajustam personagem/arena  |  Esc volta",
+        "Clique/A/D ajusta  |  Botao direito: anterior  |  Esc volta",
     );
 }
 
@@ -974,6 +1032,7 @@ fn character_select_label(character: CharacterId) -> &'static str {
         CharacterId::Go => "gopher.go",
         CharacterId::C => "old.c",
         CharacterId::Python => "python.py",
+        CharacterId::Cpp => "cpp.cpp",
     }
 }
 
@@ -990,12 +1049,89 @@ mod tests {
     use super::*;
 
     #[test]
+    fn lethal_landing_keeps_loser_on_floor_instead_of_restarting_standing_defeat() {
+        let mut world = World::new_greybox();
+        world.player_one.health = 0;
+        world.player_one.start_knockdown();
+        world.outcome = Some(MatchOutcome::Winner(PlayerSlot::Two));
+        let (clip, time) = fighter_match_presentation(&world, &world.player_one, false);
+        assert_eq!(clip, Some(sprites::FighterSpriteClip::Knockdown));
+        let manifest =
+            sprites::SpriteManifest::load("assets/candidates/rust/rust-fighter.sprite.json")
+                .unwrap();
+        let frame = sprites::frame_for_fighter_clip_at(&manifest, clip.unwrap(), time).unwrap();
+        assert_eq!(frame.name, "knockdown_01");
+        world.elapsed_seconds += 30.0;
+        assert_eq!(
+            fighter_match_presentation(&world, &world.player_one, false),
+            (clip, time)
+        );
+        assert_eq!(
+            fighter_match_presentation(&world, &world.player_two, false).0,
+            Some(sprites::FighterSpriteClip::Victory)
+        );
+    }
+
+    #[test]
     fn character_select_labels_use_source_file_theme() {
         assert_eq!(character_select_label(CharacterId::C), "old.c");
         assert_eq!(character_select_label(CharacterId::Rust), "rust.rs");
         assert_eq!(character_select_label(CharacterId::Duke), "duke.java");
         assert_eq!(character_select_label(CharacterId::Go), "gopher.go");
         assert_eq!(character_select_label(CharacterId::Python), "python.py");
+        assert_eq!(character_select_label(CharacterId::Cpp), "cpp.cpp");
+    }
+
+    #[test]
+    fn main_atlas_spawn_is_preferred_and_legacy_start_is_a_fallback() {
+        let manifest = sprites::SpriteManifest::load(sprites::RUST_FIGHTER_MANIFEST_PATH).unwrap();
+        let mut fight = SpriteAtlasAsset {
+            combat_manifest: manifest.clone(),
+            manifest,
+            textures: Vec::new(),
+        };
+        let start_manifest =
+            sprites::SpriteManifest::load(sprites::RUST_START_MANIFEST_PATH).unwrap();
+        let start = SpriteAtlasAsset {
+            combat_manifest: start_manifest.clone(),
+            manifest: start_manifest,
+            textures: Vec::new(),
+        };
+        assert!(std::ptr::eq(
+            fighter_atlas_for_intro(true, Some(&start), Some(&fight)).unwrap(),
+            &start
+        ));
+        let mut spawn = fight.manifest.clip_named("idle").unwrap().clone();
+        spawn.name = "spawn".to_string();
+        fight.manifest.clips.push(spawn);
+        assert!(std::ptr::eq(
+            fighter_atlas_for_intro(true, Some(&start), Some(&fight)).unwrap(),
+            &fight
+        ));
+        assert!(std::ptr::eq(
+            fighter_atlas_for_intro(true, None, Some(&fight)).unwrap(),
+            &fight
+        ));
+        assert_eq!(
+            sprites::match_fighter_sprite_clip(None, PlayerSlot::One, true),
+            Some(sprites::FighterSpriteClip::Spawn)
+        );
+        assert!(std::ptr::eq(
+            fighter_atlas_for_intro(false, Some(&start), Some(&fight)).unwrap(),
+            &fight
+        ));
+    }
+
+    #[test]
+    fn outcome_render_time_does_not_skip_to_the_end_after_a_long_match() {
+        let mut world = World::new_greybox();
+        world.elapsed_seconds = 60.0;
+        world.player_two.health = 0;
+        let input = crate::combat::fighter::FighterInput::default();
+        world.update(1.0 / 60.0, input, input);
+        assert_eq!(fighter_visual_elapsed_seconds(&world), 0.0);
+        world.update(1.0 / 60.0, input, input);
+        assert_eq!(fighter_visual_elapsed_seconds(&world), 1.0 / 60.0);
     }
 }
 
@@ -1004,12 +1140,8 @@ fn draw_training_menu(
     font: Option<&Font>,
     options: &PreferencesDrawOptions<'_>,
 ) {
-    let panel = MenuPanel {
-        x: screen_px(286),
-        y: screen_px(150),
-        width: screen_px(452),
-        height: screen_px(330),
-    };
+    let geometry = MenuLayout::for_page(MenuPage::Training);
+    let panel = geometry.panel;
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "TRAINING");
 
@@ -1017,6 +1149,12 @@ fn draw_training_menu(
         MenuLine {
             label: "COMBAT LAB",
             description: "Teste golpes, frames, hitboxes e hurtboxes.",
+            value: None,
+            checked: None,
+        },
+        MenuLine {
+            label: "MOVE SHOWCASE",
+            description: "Veja golpes e defesa em combate real.",
             value: None,
             checked: None,
         },
@@ -1040,9 +1178,7 @@ fn draw_training_menu(
         &rows,
         options.menu.selected(),
         MenuRowsLayout {
-            panel,
-            row_height: screen_px(62),
-            start_offset_y: screen_px(120),
+            geometry,
             large_labels: false,
             show_descriptions: true,
             selection_pulse_frames: options.menu.selection_pulse_frames(),
@@ -1056,12 +1192,8 @@ fn draw_lore_menu(
     font: Option<&Font>,
     options: &PreferencesDrawOptions<'_>,
 ) {
-    let panel = MenuPanel {
-        x: screen_px(54),
-        y: screen_px(78),
-        width: screen_px(852),
-        height: screen_px(428),
-    };
+    let geometry = MenuLayout::for_page(MenuPage::Lore);
+    let panel = geometry.panel;
     let book = &options.assets.lore_book;
     let lore_font = options.assets.lore_font.as_ref().or(font);
     let lore_body_font = options
@@ -1147,21 +1279,13 @@ fn draw_lore_menu(
             checked: None,
         },
     ];
-    let selector_panel = MenuPanel {
-        x: panel.x + screen_px(28),
-        y: panel.y + screen_px(82),
-        width: screen_px(330),
-        height: screen_px(134),
-    };
     draw_menu_rows(
         draw,
         font,
         &controls,
         options.menu.selected(),
         MenuRowsLayout {
-            panel: selector_panel,
-            row_height: screen_px(40),
-            start_offset_y: 0,
+            geometry,
             large_labels: false,
             show_descriptions: true,
             selection_pulse_frames: options.menu.selection_pulse_frames(),
@@ -1306,19 +1430,16 @@ fn draw_options_menu(
     font: Option<&Font>,
     options: &PreferencesDrawOptions<'_>,
 ) {
-    let panel = MenuPanel {
-        x: screen_px(176),
-        y: screen_px(56),
-        width: screen_px(672),
-        height: screen_px(526),
-    };
+    let geometry = MenuLayout::for_page(MenuPage::Options);
+    let panel = geometry.panel;
     draw_menu_panel(draw, panel);
     draw_menu_page_title(draw, font, panel, "OPTIONS");
 
-    let row_x = panel.x + screen_px(48);
-    let row_width = panel.width - screen_px(96);
-    let row_height = screen_px(28);
-    let row_y = panel.y + screen_px(86);
+    let first_row = geometry.row_bounds(0);
+    let row_x = first_row.x;
+    let row_width = first_row.width;
+    let row_height = first_row.height;
+    let row_y = first_row.y;
 
     draw_option_row(
         draw,
@@ -1341,7 +1462,9 @@ fn draw_options_menu(
         font,
         OptionRow {
             x: row_x,
-            y: row_y + PreferencesMenu::OPTIONS_MUSIC_VOLUME_ROW as i32 * row_height,
+            y: geometry
+                .row_bounds(PreferencesMenu::OPTIONS_MUSIC_VOLUME_ROW)
+                .y,
             width: row_width,
             height: row_height,
             selected: options.menu.selected() == PreferencesMenu::OPTIONS_MUSIC_VOLUME_ROW,
@@ -1358,7 +1481,7 @@ fn draw_options_menu(
             font,
             OptionRow {
                 x: row_x,
-                y: row_y + row as i32 * row_height,
+                y: geometry.row_bounds(row).y,
                 width: row_width,
                 height: row_height,
                 selected: options.menu.selected() == row,
@@ -1379,7 +1502,7 @@ fn draw_options_menu(
         font,
         OptionRow {
             x: row_x,
-            y: row_y + back_row as i32 * row_height,
+            y: geometry.row_bounds(back_row).y,
             width: row_width,
             height: row_height,
             selected: options.menu.selected() == back_row,
@@ -1395,7 +1518,7 @@ fn draw_options_menu(
         font,
         hint,
         panel.x + screen_px(48),
-        panel.y + panel.height - screen_px(52),
+        panel.y + panel.height - screen_px(64),
         13.0,
         UI_MUTED,
     );
@@ -1403,7 +1526,7 @@ fn draw_options_menu(
         draw,
         font,
         panel,
-        "Enter/Espaco alterna  |  F9/F10 gravacao  |  Esc volta",
+        "Clique/Enter alterna  |  Botao direito: anterior  |  Esc volta",
     );
 }
 
@@ -1430,7 +1553,7 @@ fn draw_menu_panel(draw: &mut impl DrawTarget, panel: MenuPanel) {
             y,
             panel.x + panel.width - screen_px(10),
             y,
-            Color::new(78, 130, 164, 18),
+            Color::new(78, 130, 164, 6),
         );
     }
     draw.draw_rectangle_lines(
@@ -1543,23 +1666,17 @@ fn draw_menu_rows(
     selected: usize,
     layout: MenuRowsLayout,
 ) {
-    let compact_rows = layout.row_height <= screen_px(42);
-    let horizontal_padding = if compact_rows {
-        screen_px(18)
-    } else {
-        screen_px(42)
-    };
-    let row_x = layout.panel.x + horizontal_padding;
-    let row_width = layout.panel.width - horizontal_padding * 2;
+    let compact_rows = layout.geometry.row_step <= screen_px(42);
     for (index, row) in rows.iter().enumerate() {
+        let bounds = layout.geometry.row_bounds(index);
         draw_large_menu_row(
             draw,
             font,
             LargeMenuRow {
-                x: row_x,
-                y: layout.panel.y + layout.start_offset_y + index as i32 * layout.row_height,
-                width: row_width,
-                height: layout.row_height - screen_px(8),
+                x: bounds.x,
+                y: bounds.y,
+                width: bounds.width,
+                height: bounds.height,
                 selected: selected == index,
                 label: row.label,
                 description: row.description,
@@ -1580,9 +1697,7 @@ fn draw_menu_rows(
 
 #[derive(Clone, Copy)]
 struct MenuRowsLayout {
-    panel: MenuPanel,
-    row_height: i32,
-    start_offset_y: i32,
+    geometry: MenuLayout,
     large_labels: bool,
     show_descriptions: bool,
     selection_pulse_frames: u16,
@@ -1650,17 +1765,17 @@ fn draw_large_menu_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: Lar
         row.x + screen_px(50)
     };
 
-    let label_size = if row.large_label {
-        22.0
-    } else if compact_row {
+    let label_size = if compact_row {
         16.0
+    } else if row.large_label {
+        22.0
     } else {
         20.0
     };
     let label_y = if row.show_description {
         row.y + screen_px(if compact_row { 5 } else { 3 })
     } else {
-        row.y + row.height / 2 - screen_px(15)
+        row.y + (row.height - screen_px(label_size as i32)) / 2
     };
     let animated_label;
     let label = if row.animation_frames > 0 {
@@ -1688,7 +1803,7 @@ fn draw_large_menu_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: Lar
             row.description,
             label_x,
             row.y + row.height - screen_px(if compact_row { 13 } else { 17 }),
-            if compact_row { 8.5 } else { 11.0 },
+            if compact_row { 10.0 } else { 11.0 },
             UI_MUTED,
         );
     }
@@ -1785,7 +1900,7 @@ fn draw_selected_row_xray(draw: &mut impl DrawTarget, font: Option<&Font>, row: 
             row.y + screen_px(6),
             row.x + offset + screen_px(16),
             row.y + row.height - screen_px(8),
-            Color::new(95, 255, 174, 38),
+            Color::new(95, 255, 174, 12),
         );
     }
 
@@ -1849,15 +1964,9 @@ fn draw_option_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: OptionR
     } else {
         Color::new(9, 15, 28, 190)
     };
-    draw.draw_rectangle(row.x, row.y, row.width, row.height - screen_px(2), fill);
+    draw.draw_rectangle(row.x, row.y, row.width, row.height, fill);
     if row.selected {
-        draw.draw_rectangle_lines(
-            row.x,
-            row.y,
-            row.width,
-            row.height - screen_px(2),
-            MENU_ACCENT,
-        );
+        draw.draw_rectangle_lines(row.x, row.y, row.width, row.height, MENU_ACCENT);
     }
 
     let label_x = if let Some(checked) = row.checked {
@@ -1924,10 +2033,10 @@ fn draw_menu_footer(draw: &mut impl DrawTarget, font: Option<&Font>, panel: Menu
 
 fn selected_options_hint(options: &PreferencesDrawOptions<'_>) -> &'static str {
     if options.menu.selected() == PreferencesMenu::OPTIONS_RECORDING_ROW {
-        return "Gravacao local salva videos em captures/; F9 inicia e F10 para.";
+        return "Grave seus melhores rounds. F9 inicia; F10 encerra e salva.";
     }
     if options.menu.selected() == PreferencesMenu::OPTIONS_MUSIC_VOLUME_ROW {
-        return "A/D ou setas esquerda/direita ajustam apenas a musica.";
+        return "A/D ou setas esquerda/direita ajustam o volume da música.";
     }
     if options.menu.selected() == options.menu.row_count() - 1 {
         return "Volta para o menu principal.";
@@ -2281,6 +2390,117 @@ fn menu_text_width(font: Option<&Font>, text: &str, font_size: f32, spacing: f32
     }
 }
 
+fn world_cinematic(
+    world: &World,
+) -> Option<(&Fighter, crate::combat::cinematic::CinematicSpecialState)> {
+    if world.outcome.is_some() {
+        return None;
+    }
+    // One composition at a time on simultaneous starts. Combat still resolves
+    // both moves independently; selecting the newest presentation never hits.
+    [&world.player_one, &world.player_two]
+        .into_iter()
+        .filter_map(|fighter| fighter.cinematic_special().map(|state| (fighter, state)))
+        .min_by_key(|(_, state)| state.elapsed_frames)
+}
+
+fn draw_world_cinematic_background(draw: &mut impl DrawTarget, world: &World, assets: &GameAssets) {
+    authored_supers::draw_background(draw, world, assets);
+    if let Some((fighter, state)) = world_cinematic(world) {
+        cinematic_effects::draw_background(draw, fighter, state, assets);
+    }
+}
+
+fn authored_actor_textures(assets: &GameAssets) -> authored_actors::AuthoredActorTextures<'_> {
+    authored_actors::AuthoredActorTextures {
+        duke: assets.duke_collector_poses.as_ref(),
+        cpp_laptop: assets.cpp_laptop.as_ref(),
+        cpp_comedy: assets.cpp_footgun_comedy.as_ref(),
+        cpp_barrage: assets.cpp_footgun_barrage.as_ref(),
+        trash: assets.garbage_items.as_ref(),
+        font: assets.menu_font.as_ref(),
+    }
+}
+
+fn python_textures(assets: &GameAssets) -> python_super::PythonSuperTextures<'_> {
+    python_super::PythonSuperTextures {
+        transform: assets.python_transform.as_ref(),
+        serpent: assets.python_serpent.as_ref(),
+        revert: assets.python_revert.as_ref(),
+        celebrate: assets.python_celebrate.as_ref(),
+    }
+}
+
+fn authored_target_placement(
+    world: &World,
+    slot: PlayerSlot,
+    assets: &GameAssets,
+) -> Option<sprites::FighterVisualPlacement> {
+    use crate::combat::super_sequence::{PYTHON_TARGET_RETURN_TICK, SuperPhase};
+    let sequence = world.super_sequence()?;
+    if slot != sequence.target || !python_textures(assets).ready() {
+        return None;
+    }
+    if sequence.phase() != SuperPhase::PythonLunge
+        && !(PYTHON_TARGET_RETURN_TICK..PYTHON_TARGET_RETURN_TICK + 6).contains(&sequence.tick)
+    {
+        return None;
+    }
+    python_super::target_visual(sequence).map(|visual| sprites::FighterVisualPlacement {
+        anchor: visual.anchor,
+        scale: visual.scale,
+        rotation_degrees: visual.rotation_degrees,
+        opacity: visual.opacity,
+    })
+}
+
+fn hides_authored_actor(world: &World, slot: PlayerSlot, assets: &GameAssets) -> bool {
+    let textures = python_textures(assets);
+    authored_actors::hides_actor(world, slot, authored_actor_textures(assets))
+        || python_super::hides_actor(world, slot, textures)
+        || (textures.ready()
+            && world
+                .super_sequence()
+                .is_some_and(|sequence| sequence.target == slot && sequence.target_hidden()))
+}
+
+fn draw_authored_actors(draw: &mut impl DrawTarget, world: &World, assets: &GameAssets) {
+    authored_actors::draw_authored_actors(draw, world, authored_actor_textures(assets));
+    python_super::draw_python_super(draw, world, python_textures(assets));
+}
+
+fn draw_world_cinematic_foreground(draw: &mut impl DrawTarget, world: &World, assets: &GameAssets) {
+    authored_supers::draw_foreground(draw, world, assets);
+    if let Some((fighter, state)) = world_cinematic(world) {
+        cinematic_effects::draw_foreground(draw, fighter, state, assets);
+    }
+}
+
+fn draw_stage_life_layer(
+    draw: &mut impl DrawTarget,
+    arena: ArenaId,
+    time: f32,
+    flags: FeatureFlags,
+    world: Option<&World>,
+    assets: &GameAssets,
+) {
+    if flags.enabled(FeatureFlag::ShowStageLife) {
+        stage_life::draw_stage_life(
+            draw,
+            stage_life::StageLifeDrawOptions {
+                arena,
+                time,
+                dog_atlas: assets.caramelo_run.as_ref(),
+                jessica_atlas: assets.jessica_gesture.as_ref(),
+                font: assets.menu_font.as_ref(),
+                cinematic_active: world.is_some_and(|world| {
+                    world_cinematic(world).is_some() || world.super_sequence_active()
+                }),
+            },
+        );
+    }
+}
+
 fn draw_arena(
     draw: &mut impl DrawTarget,
     arena: ArenaId,
@@ -2301,7 +2521,9 @@ fn draw_arena(
 
     draw_arena_background_animation(draw, arena, visual_time_seconds);
     draw_arena_screen_treatment(draw, visual_time_seconds);
+}
 
+fn draw_arena_bounds(draw: &mut impl DrawTarget) {
     draw.draw_line(
         ARENA_LEFT as i32,
         FLOOR_Y as i32,
@@ -2487,7 +2709,7 @@ fn draw_biotic_motion(draw: &mut impl DrawTarget, time: f32) {
         let x = screen_px(228 + index * 154);
         let y = screen_px(182 + (index % 2) * 34);
         let radius = world_px(12.0 + pulse01(time, 0.7, index as f32 * 0.3) * 12.0);
-        draw.draw_circle_lines(x, y, radius, Color::new(95, 255, 174, 38));
+        draw.draw_circle_lines(x, y, radius, Color::new(95, 255, 174, 12));
     }
 }
 
@@ -2566,6 +2788,10 @@ fn draw_fighter(
     options: FighterDrawOptions<'_>,
 ) {
     let phase = fighter.attack_phase();
+    let outcome_pose = matches!(
+        options.forced_clip,
+        Some(sprites::FighterSpriteClip::Victory | sprites::FighterSpriteClip::Defeat)
+    );
     let phase_body = match phase {
         AttackPhase::Idle => options.body_color,
         AttackPhase::Startup => lighten(options.body_color, 30),
@@ -2573,18 +2799,31 @@ fn draw_fighter(
         AttackPhase::Recovery => dim(options.body_color, 25),
         AttackPhase::WhiffRecovery => dim(options.body_color, 45),
     };
-    let body = fighter_body_color(fighter, phase_body);
-    let sprite_tint = fighter_sprite_tint(fighter, phase);
+    let body = if outcome_pose {
+        options.body_color
+    } else {
+        fighter_body_color(fighter, phase_body)
+    };
+    // Combat freezes at KO; its final attack/reaction must not tint the entire
+    // outcome animation. Only presentation changes here, never the fighter.
+    let sprite_tint = if outcome_pose {
+        Color::WHITE
+    } else {
+        fighter_sprite_tint(fighter, phase)
+    };
 
     if let Some(sprite_atlas) = options.sprite_atlas
-        && sprites::draw_manifest_fighter_sprite(
+        && sprites::draw_manifest_fighter_sprite_placed(
             draw,
-            &sprite_atlas.texture,
             &sprite_atlas.manifest,
             fighter,
-            options.world_elapsed_seconds,
-            options.forced_clip,
+            sprites::FighterSpritePresentation {
+                elapsed_seconds: options.world_elapsed_seconds,
+                forced_clip: options.forced_clip,
+                placement: options.placement,
+            },
             sprite_tint,
+            |frame| sprite_atlas.texture_for_frame(frame),
         )
     {
     } else if let Some(texture) = options.spritesheet {
@@ -2593,11 +2832,15 @@ fn draw_fighter(
         draw_body_parts(draw, fighter, body);
     }
 
-    draw_fighter_state_flash(draw, fighter);
+    // Rectangular body/guard feedback belongs to collision debug. Normal play
+    // already communicates contact through sprite tint, ground lights and sparks.
+    if options.show_debug && !outcome_pose {
+        draw_fighter_state_flash(draw, fighter);
+    }
 
     let sprite_combat = options.sprite_atlas.and_then(|sprite_atlas| {
         sprites::projected_fighter_combat(
-            &sprite_atlas.manifest,
+            &sprite_atlas.combat_manifest,
             fighter,
             options.world_elapsed_seconds,
         )
@@ -2605,8 +2848,11 @@ fn draw_fighter(
 
     if options.show_debug {
         outline_rect(draw, fighter.body_rect(), BODY_OUTLINE);
-        if let Some(sprite_combat) = sprite_combat
+        if fighter.has_protected_reaction() {
+            // Capture, flight and floor recovery have no vulnerable shape.
+        } else if let Some(sprite_combat) = sprite_combat
             .as_ref()
+            .filter(|_| !fighter.uses_low_attack_hurtboxes())
             .filter(|combat| !combat.hurtboxes.is_empty())
         {
             for hurtbox in &sprite_combat.hurtboxes {
@@ -2619,9 +2865,12 @@ fn draw_fighter(
         }
     }
 
-    if options.show_debug {
+    if options.show_debug
+        && fighter.attack_kind() != Some(crate::combat::fighter::AttackKind::SignatureSpecial)
+    {
         let sprite_hitboxes = sprite_combat
             .as_ref()
+            .filter(|_| !fighter.uses_move_spec_hitbox())
             .map(|combat| combat.hitboxes.as_slice())
             .filter(|hitboxes| !hitboxes.is_empty());
         if let Some(hitboxes) = sprite_hitboxes {
@@ -2633,7 +2882,7 @@ fn draw_fighter(
         }
     }
 
-    if fighter.blocking {
+    if options.show_debug && fighter.blocking && !outcome_pose {
         let guard = fighter.guard_box();
         draw.draw_rectangle(
             guard.x.round() as i32,
@@ -2643,20 +2892,19 @@ fn draw_fighter(
             GUARD_FILL,
         );
         outline_rect(draw, guard, GUARD);
-        if options.show_debug {
-            draw.draw_text(
-                "BLOCK",
-                (guard.x - world_px(18.0)) as i32,
-                (guard.y - world_px(22.0)) as i32,
-                screen_px(16),
-                GUARD,
-            );
-        }
+        draw.draw_text(
+            "BLOCK",
+            (guard.x - world_px(18.0)) as i32,
+            (guard.y - world_px(22.0)) as i32,
+            screen_px(16),
+            GUARD,
+        );
     }
 
     let active_label_hitbox = if phase == AttackPhase::Active {
         sprite_combat
             .as_ref()
+            .filter(|_| !fighter.uses_move_spec_hitbox())
             .and_then(|combat| combat.hitboxes.first().copied())
             .or_else(|| fighter.active_hitbox())
     } else {
@@ -2676,7 +2924,9 @@ fn draw_fighter(
 
     let label_x = fighter.position.x as i32;
     let label_y = (fighter.position.y - world_px(22.0)) as i32;
-    draw.draw_text(fighter.name, label_x, label_y, screen_px(16), UI_TEXT);
+    if options.show_debug {
+        draw.draw_text(fighter.name, label_x, label_y, screen_px(16), UI_TEXT);
+    }
 
     if options.show_debug && fighter.in_hitstun() {
         let stun_text = format!("HITSTUN {:02}", fighter.hitstun_remaining_frames().get());
@@ -2807,6 +3057,7 @@ struct FighterDrawOptions<'a> {
     spritesheet: Option<&'a Texture2D>,
     world_elapsed_seconds: f32,
     forced_clip: Option<sprites::FighterSpriteClip>,
+    placement: Option<sprites::FighterVisualPlacement>,
 }
 
 struct CharacterVisuals<'a> {
@@ -2848,23 +3099,118 @@ fn character_visuals<'a>(character: CharacterId, assets: &'a GameAssets) -> Char
             start_atlas: assets.python_start.as_ref(),
             projectile_texture: assets.python_projectile.as_ref(),
         },
+        CharacterId::Cpp => CharacterVisuals {
+            body_color: PLAYER_CPP,
+            fight_atlas: assets.cpp_fighter.as_ref(),
+            start_atlas: None,
+            projectile_texture: assets.cpp_projectile.as_ref(),
+        },
     }
 }
 
 fn draw_hud(
     draw: &mut impl DrawTarget,
     world: &World,
+    arena: ArenaId,
+    flags: FeatureFlags,
+    gamepad_status: GamepadStatus,
+    show_debug: bool,
+    assets: &GameAssets,
+) {
+    let font = assets.menu_font.as_ref();
+    draw.draw_rectangle_gradient_v(
+        0,
+        0,
+        WINDOW_WIDTH,
+        screen_px(108),
+        Color::new(3, 9, 20, 236),
+        Color::new(3, 9, 20, 0),
+    );
+    draw_menu_text(
+        draw,
+        font,
+        "BORROW FIGHTERS",
+        screen_px(24),
+        screen_px(10),
+        11.0,
+        UI_MUTED,
+    );
+    draw_centered_menu_text(
+        draw,
+        font,
+        &format!("{} / {}", arena.label(), arena.location()),
+        WINDOW_WIDTH / 2,
+        screen_px(13),
+        10.0,
+        UI_MUTED,
+    );
+
+    draw_health_bar(draw, font, &world.player_one, false);
+    draw_health_bar(draw, font, &world.player_two, true);
+    let center_x = WINDOW_WIDTH / 2;
+    draw.draw_rectangle(
+        center_x - screen_px(29),
+        screen_px(37),
+        screen_px(58),
+        screen_px(45),
+        Color::new(8, 20, 34, 232),
+    );
+    draw.draw_rectangle_lines(
+        center_x - screen_px(29),
+        screen_px(37),
+        screen_px(58),
+        screen_px(45),
+        Color::new(112, 161, 185, 140),
+    );
+    draw_centered_menu_text(draw, font, "VS", center_x, screen_px(43), 28.0, UI_TEXT);
+
+    if show_debug {
+        draw_hud_debug_status(draw, flags, gamepad_status);
+    }
+
+    if let Some(outcome) = world.outcome {
+        let (title, message, accent) = match outcome {
+            MatchOutcome::Winner(PlayerSlot::One) => {
+                ("VITÓRIA", world.player_one.name, MENU_ACCENT)
+            }
+            MatchOutcome::Winner(PlayerSlot::Two) => {
+                ("VITÓRIA", world.player_two.name, MENU_ACCENT_ALT)
+            }
+            MatchOutcome::Draw => ("EMPATE", "Um round à altura dos dois.", UI_TEXT),
+        };
+        let banner = Rectangle::new(
+            world_px(245.0),
+            world_px(114.0),
+            world_px(470.0),
+            world_px(112.0),
+        );
+        draw.draw_rectangle_rec(banner, Color::new(4, 11, 22, 234));
+        draw.draw_rectangle(
+            banner.x as i32,
+            banner.y as i32,
+            banner.width as i32,
+            screen_px(3),
+            accent,
+        );
+        draw_centered_menu_text(draw, font, title, center_x, screen_px(121), 37.0, accent);
+        draw_centered_menu_text(draw, font, message, center_x, screen_px(162), 21.0, UI_TEXT);
+        draw_centered_menu_text(
+            draw,
+            font,
+            "R / START  revanche     •     ESC  menu",
+            center_x,
+            screen_px(198),
+            12.0,
+            UI_MUTED,
+        );
+    }
+}
+
+fn draw_hud_debug_status(
+    draw: &mut impl DrawTarget,
     flags: FeatureFlags,
     gamepad_status: GamepadStatus,
 ) {
-    draw.draw_text(
-        "Borrow Fighters / Prototype 0.1 Greybox",
-        screen_px(24),
-        screen_px(12),
-        screen_px(20),
-        UI_TEXT,
-    );
-
     let status = format!(
         "P1 CPU {} | P2 CPU {} | Pad P1 {} | P2 {}",
         connected_label(flags.enabled(FeatureFlag::PlayerOneCpu)),
@@ -2881,44 +3227,6 @@ fn draw_hud(
         status_font_size,
         UI_MUTED,
     );
-
-    draw_health_bar(
-        draw,
-        screen_px(24),
-        screen_px(72),
-        world.player_one.health,
-        world.player_one.max_health,
-        world.player_one.name,
-    );
-    draw_health_bar(
-        draw,
-        WINDOW_WIDTH - screen_px(324),
-        screen_px(72),
-        world.player_two.health,
-        world.player_two.max_health,
-        world.player_two.name,
-    );
-
-    if let Some(outcome) = world.outcome {
-        let message = match outcome {
-            MatchOutcome::Winner(PlayerSlot::One) => {
-                format!("{} wins - press R/Menu", world.player_one.name)
-            }
-            MatchOutcome::Winner(PlayerSlot::Two) => {
-                format!("{} wins - press R/Menu", world.player_two.name)
-            }
-            MatchOutcome::Draw => "Draw - press R/Menu".to_owned(),
-        };
-        let font_size = screen_px(32);
-        let width = measure_text_width(&message, font_size);
-        draw.draw_text(
-            &message,
-            (WINDOW_WIDTH - width) / 2,
-            screen_px(124),
-            font_size,
-            UI_TEXT,
-        );
-    }
 }
 
 fn draw_countdown_sprite(draw: &mut impl DrawTarget, texture: &Texture2D) {
@@ -2999,40 +3307,58 @@ fn draw_countdown(draw: &mut impl DrawTarget, label: &str, assets: &GameAssets) 
     }
 }
 
-fn draw_help(draw: &mut impl DrawTarget) {
-    draw.draw_text(
-        "P1: A/D/W/S/Q or Pad LS/DPad, A jump, LB/LT block",
+fn draw_help(draw: &mut impl DrawTarget, font: Option<&Font>) {
+    draw.draw_rectangle_gradient_v(
+        0,
+        WINDOW_HEIGHT - screen_px(142),
+        WINDOW_WIDTH,
+        screen_px(142),
+        Color::new(3, 9, 20, 0),
+        Color::new(3, 9, 20, 225),
+    );
+    draw_menu_text(
+        draw,
+        font,
+        "P1: A/D/W/S movimento, Q defesa  |  Controle: LS/DPad, A pula, LB/LT defende",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(124),
-        screen_px(15),
+        15.0,
         UI_TEXT,
     );
-    draw.draw_text(
-        "P1 attacks: F LP, H HP, V kick, G special or Pad X/Y/B/RB",
+    draw_menu_text(
+        draw,
+        font,
+        "P1: F soco/X, H forte/Y, V chute/B, G projétil/RB, T assinatura/RT",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(100),
-        screen_px(15),
+        15.0,
         UI_TEXT,
     );
-    draw.draw_text(
-        "P1 mods: S+V sweep, S+H anti-air, forward+H overhead, Q+F throw, air F/V",
+    draw_menu_text(
+        draw,
+        font,
+        "P1: S+V rasteira, S+H gancho, frente+H overhead, Q+F agarrão, F/V no ar",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(76),
-        screen_px(15),
+        15.0,
         UI_TEXT,
     );
-    draw.draw_text(
-        "P2: CPU default; C or View toggles P2 manual",
+    draw_menu_text(
+        draw,
+        font,
+        "CINEMÁTICO: P1 Y, P2 ] ou LB+RT  |  CPU: Options muda P1; C/View muda P2",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(52),
-        screen_px(15),
+        15.0,
         UI_TEXT,
     );
-    draw.draw_text(
-        "P2 manual: keyboard or second Pad same layout; Start/R restarts; F9/F10 records",
+    draw_menu_text(
+        draw,
+        font,
+        "P2: teclado/controle 2; assinatura \\ ou RT  |  R/Start revanche; F9/F10 grava; Esc menu",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(28),
-        screen_px(15),
+        15.0,
         UI_MUTED,
     );
 }
@@ -3065,29 +3391,115 @@ fn truncate_middle(text: &str, max_chars: usize) -> String {
 
 fn draw_health_bar(
     draw: &mut impl DrawTarget,
-    x: i32,
-    y: i32,
-    health: i32,
-    max_health: i32,
-    label: &str,
+    font: Option<&Font>,
+    fighter: &Fighter,
+    mirrored: bool,
 ) {
-    let width = screen_px(300);
-    let height = screen_px(18);
-    let max_health = max_health.max(1);
-    let ratio = health.max(0) as f32 / max_health as f32;
-    let fill_width = (width as f32 * ratio.clamp(0.0, 1.0)).round() as i32;
+    let width = screen_px(382);
+    let x = if mirrored {
+        WINDOW_WIDTH - screen_px(24) - width
+    } else {
+        screen_px(24)
+    };
+    let y = screen_px(66);
+    let height = screen_px(15);
+    let max_health = fighter.max_health.max(1);
+    let health = fighter.health.clamp(0, max_health);
+    let ratio = health as f32 / max_health as f32;
+    let fill_width = (width as f32 * ratio).round() as i32;
+    let accent = if mirrored {
+        MENU_ACCENT_ALT
+    } else {
+        MENU_ACCENT
+    };
     let fill = if health * 4 <= max_health {
         HEALTH_DANGER
     } else {
-        HEALTH_FILL
+        accent
     };
+    let fill_x = if mirrored { x + width - fill_width } else { x };
 
+    draw.draw_rectangle(
+        x - screen_px(3),
+        y - screen_px(3),
+        width + screen_px(6),
+        height + screen_px(6),
+        Color::new(3, 8, 15, 230),
+    );
     draw.draw_rectangle(x, y, width, height, HEALTH_BACK);
-    draw.draw_rectangle(x, y, fill_width, height, fill);
-    draw.draw_rectangle_lines(x, y, width, height, UI_TEXT);
+    if fill_width > 0 {
+        draw.draw_rectangle_gradient_v(
+            fill_x,
+            y,
+            fill_width,
+            height,
+            fill,
+            Color::new(fill.r / 2, fill.g / 2, fill.b / 2, 255),
+        );
+        draw.draw_rectangle(
+            fill_x,
+            y,
+            fill_width,
+            screen_px(2),
+            Color::new(255, 255, 255, 164),
+        );
+    }
+    draw.draw_rectangle_lines(
+        x - screen_px(3),
+        y - screen_px(3),
+        width + screen_px(6),
+        height + screen_px(6),
+        Color::new(176, 194, 209, 144),
+    );
+    for index in 1..4 {
+        let tick_x = x + width * index / 4;
+        draw.draw_line(
+            tick_x,
+            y + screen_px(10),
+            tick_x,
+            y + height,
+            Color::new(3, 8, 15, 150),
+        );
+    }
 
-    let text = format!("{label} HP {health:03}");
-    draw.draw_text(&text, x, y - screen_px(24), screen_px(20), UI_TEXT);
+    let name_width = menu_text_width(font, fighter.name, 23.0, 1.0);
+    let name_x = if mirrored { x + width - name_width } else { x };
+    draw_menu_text(
+        draw,
+        font,
+        fighter.name,
+        name_x,
+        screen_px(34),
+        23.0,
+        UI_TEXT,
+    );
+    let life = format!("{health} / {max_health}");
+    let life_width = menu_text_width(font, &life, 11.0, 1.0);
+    let life_x = if mirrored { x } else { x + width - life_width };
+    draw_menu_text(draw, font, &life, life_x, screen_px(45), 11.0, UI_MUTED);
+    let slot = if mirrored { "PLAYER 02" } else { "PLAYER 01" };
+    let slot_width = menu_text_width(font, slot, 9.0, 1.0);
+    let slot_x = if mirrored { x + width - slot_width } else { x };
+    draw_menu_text(draw, font, slot, slot_x, screen_px(87), 9.0, accent);
+    let special = if mirrored {
+        "] / LB+RT   CINEMÁTICO"
+    } else {
+        "Y / LB+RT   CINEMÁTICO"
+    };
+    let special_width = menu_text_width(font, special, 10.0, 1.0);
+    let special_x = if mirrored {
+        x
+    } else {
+        x + width - special_width
+    };
+    draw.draw_rectangle(
+        special_x - screen_px(4),
+        screen_px(85),
+        special_width + screen_px(8),
+        screen_px(16),
+        Color::new(3, 9, 20, 176),
+    );
+    draw_menu_text(draw, font, special, special_x, screen_px(87), 10.0, UI_TEXT);
 }
 
 fn draw_projectiles(
@@ -3186,32 +3598,66 @@ fn fighter_atlas_for_intro<'a>(
     fight_atlas: Option<&'a SpriteAtlasAsset>,
 ) -> Option<&'a SpriteAtlasAsset> {
     if spawn_intro {
-        start_atlas.or(fight_atlas)
+        fight_atlas
+            .filter(|atlas| atlas.manifest.clip_named("spawn").is_some())
+            .or_else(|| start_atlas.filter(|atlas| atlas.manifest.clip_named("spawn").is_some()))
+            .or(fight_atlas)
     } else {
         fight_atlas
     }
 }
 
-fn fighter_visual_elapsed_seconds(world: &World, spawn_intro: bool, has_start_atlas: bool) -> f32 {
-    if spawn_intro && has_start_atlas {
+fn fighter_match_presentation(
+    world: &World,
+    fighter: &Fighter,
+    spawn_intro: bool,
+) -> (Option<sprites::FighterSpriteClip>, f32) {
+    if let Some(sequence) = world.super_sequence() {
+        use crate::combat::super_sequence::SuperPhase;
+        if fighter.slot == sequence.target && sequence.phase() == SuperPhase::PythonLunge {
+            return (
+                Some(sprites::FighterSpriteClip::Launched),
+                (sequence.tick - sequence.phase_span().start) as f32 / 60.0,
+            );
+        }
+        if fighter.slot == sequence.attacker && sequence.phase() != SuperPhase::Freeze {
+            let time = match sequence.character {
+                CharacterId::Rust => match sequence.phase() {
+                    SuperPhase::RustBuild => 0.08 + sequence.phase_progress() * 0.22,
+                    SuperPhase::RustCharge => 0.3 + sequence.phase_progress() * 0.22,
+                    SuperPhase::RustPulse => 0.52 + sequence.phase_progress() * 0.2,
+                    SuperPhase::Restore => 0.72 + sequence.phase_progress() * 0.4,
+                    _ => 0.0,
+                },
+                CharacterId::C => (sequence.tick as f32 / sequence.duration_frames as f32) * 1.1,
+                _ => 0.0,
+            };
+            return (Some(sprites::FighterSpriteClip::SignatureSpecial), time);
+        }
+        return (
+            None,
+            authored_supers::arena_time(world, world.elapsed_seconds),
+        );
+    }
+    if world.outcome.is_some() && fighter.health <= 0 && fighter.in_knockdown() {
+        // A lethal throw/launch ends on the floor. Never restart a standing
+        // defeat animation or play the recovery that would make the loser rise.
+        return (Some(sprites::FighterSpriteClip::Knockdown), 0.1);
+    }
+    (
+        sprites::match_fighter_sprite_clip(world.outcome, fighter.slot, spawn_intro),
+        fighter_visual_elapsed_seconds(world),
+    )
+}
+
+fn fighter_visual_elapsed_seconds(world: &World) -> f32 {
+    if world.outcome.is_some() {
+        world.outcome_elapsed_seconds()
+    } else if world.spawn_intro_active() {
         world.spawn_intro_elapsed_seconds()
     } else {
         world.elapsed_seconds
     }
-}
-
-fn forced_fighter_clip(
-    world: &World,
-    slot: PlayerSlot,
-    spawn_intro: bool,
-    has_start_atlas: bool,
-) -> Option<sprites::FighterSpriteClip> {
-    if spawn_intro && has_start_atlas {
-        return Some(sprites::FighterSpriteClip::Spawn);
-    }
-
-    matches!(world.outcome, Some(MatchOutcome::Winner(winner)) if winner == slot)
-        .then_some(sprites::FighterSpriteClip::Taunt)
 }
 
 fn draw_body_collision(draw: &mut impl DrawTarget, world: &World) {
@@ -3245,8 +3691,17 @@ fn draw_body_collision(draw: &mut impl DrawTarget, world: &World) {
 }
 
 fn draw_fighter_ground_lights(draw: &mut impl DrawTarget, world: &World) {
-    draw_fighter_ground_light(draw, &world.player_one);
-    draw_fighter_ground_light(draw, &world.player_two);
+    if world.outcome.is_some() {
+        return;
+    }
+    for fighter in [&world.player_one, &world.player_two] {
+        if !world
+            .super_sequence()
+            .is_some_and(|sequence| sequence.target == fighter.slot && sequence.target_hidden())
+        {
+            draw_fighter_ground_light(draw, fighter);
+        }
+    }
 }
 
 fn draw_fighter_ground_light(draw: &mut impl DrawTarget, fighter: &Fighter) {
@@ -3284,7 +3739,15 @@ fn draw_fighter_ground_light(draw: &mut impl DrawTarget, fighter: &Fighter) {
     );
 }
 
-fn draw_hit_effects(draw: &mut impl DrawTarget, world: &World) {
+fn draw_hit_effects(draw: &mut impl DrawTarget, world: &World, font: Option<&Font>) {
+    // The swallowed fighter is visually inside Python; its old floor position
+    // must not retain a floating body impact while the gulp animation plays.
+    if world
+        .super_sequence()
+        .is_some_and(|sequence| sequence.target_hidden())
+    {
+        return;
+    }
     for effect in &world.hit_effects {
         let progress = hit_effect_progress(effect.timer);
         let fade_alpha = ((1.0 - progress) * 255.0).clamp(0.0, 255.0).round() as u8;
@@ -3308,19 +3771,23 @@ fn draw_hit_effects(draw: &mut impl DrawTarget, world: &World) {
         }
 
         let damage = format!("-{}", effect.damage);
-        draw.draw_text(
+        draw_menu_text(
+            draw,
+            font,
             &damage,
             x + screen_px(14),
             y - screen_px(18),
-            screen_px(24),
+            24.0,
             color,
         );
         let label = if effect.blocked { "BLOCK" } else { "HIT" };
-        draw.draw_text(
+        draw_menu_text(
+            draw,
+            font,
             label,
             x - screen_px(18),
             y - screen_px(42),
-            screen_px(20),
+            20.0,
             color,
         );
     }
@@ -3444,9 +3911,10 @@ fn fighter_body_color(fighter: &crate::combat::fighter::Fighter, phase_color: Co
 }
 
 fn fighter_sprite_tint(fighter: &crate::combat::fighter::Fighter, phase: AttackPhase) -> Color {
-    if fighter.in_hitstun() {
+    let impact_flash = fighter.reaction_visual_elapsed_seconds() < 4.0 / 60.0;
+    if fighter.in_hitstun() && impact_flash {
         HIT_FLASH
-    } else if fighter.in_blockstun() {
+    } else if fighter.in_blockstun() && impact_flash {
         BLOCK_FLASH
     } else if phase == AttackPhase::Active {
         ACTIVE_SPRITE_TINT

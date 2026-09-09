@@ -1,0 +1,37 @@
+{
+  "sheet": "victory/keyed.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "victory_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 768,
+        "h": 976
+      },
+      "pivot": {
+        "x": 346,
+        "y": 865
+      },
+      "duration_ms": 200,
+      "phase": "raise_mug"
+    },
+    {
+      "name": "victory_01",
+      "source_rect": {
+        "x": 768,
+        "y": 0,
+        "w": 768,
+        "h": 976
+      },
+      "pivot": {
+        "x": 269,
+        "y": 865
+      },
+      "duration_ms": 700,
+      "phase": "toast"
+    }
+  ]
+}

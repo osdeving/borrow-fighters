@@ -147,7 +147,13 @@ fn close_throw_ignores_block() {
     );
     advance(
         &mut world,
-        8,
+        usize::from(
+            move_spec(MoveId::RustOwnershipThrow)
+                .frames
+                .active_start
+                .get()
+                - 1,
+        ),
         FighterInput::default(),
         FighterInput {
             block: true,
@@ -161,6 +167,7 @@ fn close_throw_ignores_block() {
     );
     assert!(!world.player_two.in_blockstun());
     assert!(world.player_two.in_hitstun());
+    assert!(world.player_two.in_capture());
 }
 
 #[test]

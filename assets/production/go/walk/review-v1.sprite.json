@@ -1,0 +1,83 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "keyed-v1.png",
+  "scale": 0.4258064516129032,
+  "frames": [
+    {
+      "name": "walk_00",
+      "clip": "walk",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 543,
+        "h": 724
+      },
+      "pivot": {
+        "x": 270,
+        "y": 672
+      },
+      "duration_ms": 60
+    },
+    {
+      "name": "walk_01",
+      "clip": "walk",
+      "frame": {
+        "x": 543,
+        "y": 0,
+        "w": 543,
+        "h": 724
+      },
+      "pivot": {
+        "x": 282,
+        "y": 672
+      },
+      "duration_ms": 60
+    },
+    {
+      "name": "walk_02",
+      "clip": "walk",
+      "frame": {
+        "x": 1086,
+        "y": 0,
+        "w": 543,
+        "h": 724
+      },
+      "pivot": {
+        "x": 261,
+        "y": 669
+      },
+      "duration_ms": 60
+    },
+    {
+      "name": "walk_03",
+      "clip": "walk",
+      "frame": {
+        "x": 1629,
+        "y": 0,
+        "w": 543,
+        "h": 724
+      },
+      "pivot": {
+        "x": 241,
+        "y": 671
+      },
+      "duration_ms": 60
+    }
+  ],
+  "clips": [
+    {
+      "name": "walk",
+      "loop": true,
+      "frames": [
+        "walk_00",
+        "walk_01",
+        "walk_02",
+        "walk_03"
+      ]
+    }
+  ],
+  "cell": {
+    "w": 543,
+    "h": 724
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "action": "sweep",
+  "source": "sweep/source-mvp-v4.png",
+  "sheet": "sweep/keyed-mvp-v4.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "runtime_verified_mvp",
+  "source_body_height_reference_px": 562.0,
+  "suggested_scale_to_runtime": 0.47686832740213525,
+  "frames": [
+    {
+      "name": "sweep_mvp_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 460,
+        "h": 794
+      },
+      "pivot": {
+        "x": 185,
+        "y": 638
+      },
+      "duration_ms": 150,
+      "phase": "startup"
+    },
+    {
+      "name": "sweep_mvp_01",
+      "source_rect": {
+        "x": 460,
+        "y": 0,
+        "w": 570,
+        "h": 794
+      },
+      "pivot": {
+        "x": 164,
+        "y": 641
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "sweep_mvp_02",
+      "source_rect": {
+        "x": 1030,
+        "y": 0,
+        "w": 470,
+        "h": 794
+      },
+      "pivot": {
+        "x": 175,
+        "y": 642
+      },
+      "duration_ms": 100,
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_mvp_03",
+      "source_rect": {
+        "x": 1500,
+        "y": 0,
+        "w": 481,
+        "h": 794
+      },
+      "pivot": {
+        "x": 197,
+        "y": 644
+      },
+      "duration_ms": 117,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "New low sweep for corrected sustained crouching combat. V3 ankle-level boot was correct but torso too upright; v4 folds chest/head farther forward without shrinking anatomy. Uniform268/562 scale keeps the low silhouette116-118px against128px physical crouch. Active boot toe source(970,619), pivot(624,641) projects to(+165.0,-10.5), inside Vector Low x[+50.7,+205.3], y[-40,0]. Startup150ms, active150ms (ticks9..17), recovery217ms, total517ms~31ticks. Oldv2 source/action/prepared retained as before-mvp references. No combat metadata authored.",
+  "runtime_review": {
+    "report": "../../../candidates/cpp/review/mvp/showcase-review-left.json",
+    "both_facings_reviewed": true,
+    "combat_uses_baseline_manifest": true,
+    "review_status": "integrated_and_reviewed_for_mvp",
+    "root_review": {
+      "reviewer": "root agent",
+      "decision": "MVP visual integration accepted",
+      "evidence": "Runtime Template Arc and knockdown captures inspected; contextual and phase/alpha checks passed."
+    }
+  }
+}

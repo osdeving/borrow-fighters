@@ -1,0 +1,2174 @@
+{
+  "render_size": [
+    1280,
+    720
+  ],
+  "reversed": true,
+  "scenarios": [
+    {
+      "captures": [
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f001.png",
+          "result": "Pending",
+          "tick": 1
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_0",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                442.6666259765625,
+                377.5
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f031.png",
+          "result": "Pending",
+          "tick": 31
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_0",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                447.1666259765625,
+                363.6111145019531
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f032.png",
+          "result": "Pending",
+          "tick": 32
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_1",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                463.6666259765625,
+                325.61114501953125
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f035.png",
+          "result": "Pending",
+          "tick": 35
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_1",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                507.22222900390625,
+                258.3333435058594
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f042.png",
+          "result": "Pending",
+          "tick": 42
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_1",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                544.5556030273438,
+                224.50001525878906
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f048.png",
+          "result": "Pending",
+          "tick": 48
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_1",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                575.666748046875,
+                213.1111297607422
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f053.png",
+          "result": "Pending",
+          "tick": 53
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "anti_air",
+              "crouching": true,
+              "frame": "anti_air_00",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_1",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                581.8889770507812,
+                212.66668701171875
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f054.png",
+          "result": "Pending",
+          "tick": 54
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_00",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_2",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 104,
+              "hitstun": false,
+              "position": [
+                588.1112060546875,
+                212.83335876464844
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f055.png",
+          "result": "Pending",
+          "tick": 55
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_01",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_00",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                581.8890380859375,
+                222.8333740234375
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f060.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 60
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_01",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_00",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                564.5555419921875,
+                158.64288330078125
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f066.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 66
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_02",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_01",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                558.7777099609375,
+                142.13494873046875
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f068.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 68
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_02",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_01",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                547.2220458984375,
+                116.45240783691406
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f072.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 72
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_02",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_02",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                529.8885498046875,
+                96.26192474365234
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f078.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 78
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_02",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_02",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                518.3328857421875,
+                95.0238265991211
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f082.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 82
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_02",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                512.5550537109375,
+                98.07144927978516
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f084.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 84
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_02",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                509.6661682128906,
+                100.51192474365234
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f085.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 85
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                498.1106262207031,
+                116.38494110107422
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f089.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 89
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                495.22174072265625,
+                121.88097381591797
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f090.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 90
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                480.7773132324219,
+                158.5277862548828
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f095.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 95
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                477.888427734375,
+                167.69049072265625
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f096.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 96
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                448.99957275390625,
+                292.9285583496094
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f106.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 106
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_spectacle_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                443.2218017578125,
+                325.30950927734375
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f108.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 108
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_01",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f112.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 112
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_01",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f116.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 116
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_02",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f118.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 118
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_02",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f124.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 124
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_02",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f127.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 127
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_03",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f133.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 133
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_03",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 91,
+              "hitstun": true,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f137.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 137
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f148.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 148
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f158.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 158
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f159.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 159
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f169.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 169
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f173.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 173
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f179.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 179
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f188.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 188
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f190.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 190
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f200.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 200
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f202.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 202
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f211.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 211
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f217.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 217
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f221.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 221
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f231.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 231
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f232.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 232
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f242.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 242
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f245.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 245
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f253.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 253
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "c",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 91,
+              "hitstun": false,
+              "position": [
+                431.666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "duke-06-attackantiair-f259.png",
+          "result": "Hit { damage: 13 }",
+          "tick": 259
+        }
+      ],
+      "character": "duke",
+      "contact_frame": 60,
+      "result": "Hit { damage: 13 }",
+      "scenario": "Attack(AntiAir)",
+      "scenario_label": "Anti-air / intercept a real jump-in"
+    }
+  ]
+}

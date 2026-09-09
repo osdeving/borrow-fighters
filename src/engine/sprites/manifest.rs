@@ -90,6 +90,8 @@ pub struct SpriteCombatPoint {
 pub struct SpriteFrame {
     pub name: String,
     pub clip: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub image: Option<String>,
     pub duration_ms: u32,
     pub pivot: SpritePivot,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -236,16 +238,48 @@ impl SpriteManifest {
 
     /// Returns the atlas image path resolved next to the manifest file.
     pub fn image_path(&self, manifest_path: impl AsRef<Path>) -> PathBuf {
-        let image = Path::new(&self.image);
-        if image.is_absolute() {
-            return image.to_path_buf();
+        resolve_manifest_image_path(manifest_path, &self.image)
+    }
+
+    /// Returns the atlas image path used by a specific frame.
+    pub fn image_path_for_frame(
+        &self,
+        manifest_path: impl AsRef<Path>,
+        frame: &SpriteFrame,
+    ) -> PathBuf {
+        resolve_manifest_image_path(manifest_path, self.frame_image(frame))
+    }
+
+    /// Returns all atlas image paths referenced by this manifest.
+    pub fn image_paths(&self, manifest_path: impl AsRef<Path>) -> Vec<(String, PathBuf)> {
+        let manifest_path = manifest_path.as_ref();
+        let mut images = Vec::new();
+        let mut seen = HashSet::new();
+
+        for image in std::iter::once(self.image.as_str()).chain(
+            self.frames
+                .iter()
+                .filter_map(|frame| frame.image.as_deref()),
+        ) {
+            if seen.insert(image) {
+                images.push((
+                    image.to_string(),
+                    resolve_manifest_image_path(manifest_path, image),
+                ));
+            }
         }
 
-        manifest_path
-            .as_ref()
-            .parent()
-            .unwrap_or_else(|| Path::new(""))
-            .join(image)
+        images
+    }
+
+    /// Returns the image key to use for a frame, falling back to the manifest image.
+    pub fn frame_image<'a>(&'a self, frame: &'a SpriteFrame) -> &'a str {
+        frame.image.as_deref().unwrap_or(&self.image)
+    }
+
+    /// Returns whether a frame uses an override image instead of the manifest default.
+    pub fn frame_uses_image(&self, frame: &SpriteFrame, image: &str) -> bool {
+        self.frame_image(frame) == image
     }
 
     /// Returns a frame by name.
@@ -262,6 +296,19 @@ impl SpriteManifest {
     pub fn clip_named(&self, name: &str) -> Option<&SpriteClip> {
         self.clips.iter().find(|clip| clip.name == name)
     }
+}
+
+fn resolve_manifest_image_path(manifest_path: impl AsRef<Path>, image_name: &str) -> PathBuf {
+    let image = Path::new(image_name);
+    if image.is_absolute() {
+        return image.to_path_buf();
+    }
+
+    manifest_path
+        .as_ref()
+        .parent()
+        .unwrap_or_else(|| Path::new(""))
+        .join(image)
 }
 
 impl Display for SpriteManifestError {
@@ -306,6 +353,17 @@ fn validate_frame(frame: &SpriteFrame) -> Result<(), SpriteManifestError> {
     if frame.clip.trim().is_empty() {
         return Err(SpriteManifestError::Invalid(format!(
             "sprite frame '{}' must declare a source clip",
+            frame.name
+        )));
+    }
+
+    if frame
+        .image
+        .as_deref()
+        .is_some_and(|image| image.trim().is_empty())
+    {
+        return Err(SpriteManifestError::Invalid(format!(
+            "sprite frame '{}' image cannot be empty",
             frame.name
         )));
     }

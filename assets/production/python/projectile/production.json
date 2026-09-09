@@ -1,0 +1,34 @@
+{
+  "action": "projectile",
+  "source": "source-v1.png",
+  "source_format": "RGBA generated; no magenta in returned image",
+  "reviewed_crop_xyxy": [
+    84,
+    157,
+    1759,
+    657
+  ],
+  "removed_nearly_transparent_noise_alpha_at_most": 8,
+  "removed_pixel_count": 11260,
+  "resampled_size": [
+    136,
+    41
+  ],
+  "output_canvas": [
+    144,
+    68
+  ],
+  "offset": [
+    4,
+    13
+  ],
+  "runtime_canvas_size": [
+    86.4,
+    40.8
+  ],
+  "collision_size_unchanged": [
+    85.3333333333,
+    40.0
+  ],
+  "notes": "Single generated data-stream texture; no character body. Uniform scaling within transparent canvas. Existing center, projectile speed, damage, origin, timing and draw scale0.6 preserved. Visual envelope intentionally reduced from inappropriate old fallen-character cutout."
+}

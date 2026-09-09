@@ -1,0 +1,13 @@
+{
+  "output": "mapped-spectacle-v3.png",
+  "base": "keyed-spectacle-v2.png",
+  "replacement_source": "keyed-spectacle-v3.png",
+  "replacement_frame_index": 2,
+  "replacement_rect": {
+    "x": 1024,
+    "y": 0,
+    "w": 512,
+    "h": 500
+  },
+  "operation": "Copy complete generated rectangle without transformations; preserve other five original pose crops byte for byte. No anatomy redrawn programmatically."
+}

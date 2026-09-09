@@ -1,0 +1,80 @@
+{
+  "method": "Native AT-SPI action of real clip buttons and Next frame; native X11 window PNG via ImageMagick import. Resize 1px requests repaint in WSL Weston. No manifest or metrics writes. No continuous playback claimed.",
+  "window_id": "0xa00003",
+  "loaded_manifest_matches_candidate": true,
+  "captures": [
+    {
+      "clip": "jump",
+      "frame": "jump_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 124",
+        "Pivot Y 276",
+        "Duration ms 60"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "jump-00.png"
+    },
+    {
+      "clip": "jump",
+      "frame": "jump_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 109",
+        "Pivot Y 268",
+        "Duration ms 340"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "jump-01.png"
+    },
+    {
+      "clip": "jump",
+      "frame": "jump_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 87",
+        "Pivot Y 290",
+        "Duration ms 400"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "jump-02.png"
+    }
+  ],
+  "candidate_path": "assets/candidates/go/go-fighter.sprite.json",
+  "selected_source": "assets/production/go/jump/source-v2.png",
+  "selected_source_sha256": "aa1007876d838e6913145fb4c9a2f78791149e14c1e14c4dd50ad86bed4abe83",
+  "source_to_runtime_scale": 0.37,
+  "clip_count": 1,
+  "png_count": 3,
+  "ui_data_matches_all_three_frames": true,
+  "hashes_before": {
+    "assets/candidates/go/go-fighter.sprite.json": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "assets/candidates/go/go-fighter-atlas.png": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "assets/tuning/character-body-metrics.json": "7f77453d98681adf5b6b0d8020ca8167dcbb8245ea97363425c5fc9cf309c962"
+  },
+  "hashes_after": {
+    "assets/candidates/go/go-fighter.sprite.json": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "assets/candidates/go/go-fighter-atlas.png": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "assets/tuning/character-body-metrics.json": "7f77453d98681adf5b6b0d8020ca8167dcbb8245ea97363425c5fc9cf309c962"
+  },
+  "supersedes_only": [
+    "../jump-00.png",
+    "../jump-01.png",
+    "../jump-02.png"
+  ],
+  "previous_other_19_clips": "../review-captures.json",
+  "review_scope": {
+    "native_file_chooser_reload": true,
+    "native_clip_and_next_frame_buttons": true,
+    "all_three_jump_frames_inspected": true,
+    "zoom": 1.0,
+    "orientation": "Right",
+    "continuous_playback": false,
+    "world_trajectory_verified_here": false,
+    "saved_tuning": false
+  },
+  "files_unchanged": true
+}

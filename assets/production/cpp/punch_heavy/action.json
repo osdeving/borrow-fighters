@@ -1,0 +1,65 @@
+{
+  "action": "punch_heavy",
+  "source": "punch_heavy/source-v1.png",
+  "sheet": "punch_heavy/keyed-v1.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "candidate: source, alpha and two-facing previews inspected; corrected Combat Lab captured, artistic limitations recorded in review.md",
+  "source_body_height_reference_px": 689,
+  "suggested_scale_to_runtime": 0.3889695210449927,
+  "frames": [
+    {
+      "name": "punch_heavy_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 676,
+        "h": 736
+      },
+      "pivot": {
+        "x": 385,
+        "y": 708
+      },
+      "duration_ms": 166,
+      "phase": "startup"
+    },
+    {
+      "name": "punch_heavy_01",
+      "source_rect": {
+        "x": 676,
+        "y": 0,
+        "w": 708,
+        "h": 736
+      },
+      "pivot": {
+        "x": 279,
+        "y": 708
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "punch_heavy_02",
+      "source_rect": {
+        "x": 1384,
+        "y": 0,
+        "w": 664,
+        "h": 736
+      },
+      "pivot": {
+        "x": 260,
+        "y": 708
+      },
+      "duration_ms": 234,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Three forceful windup/contact/recovery poses with rotated adult torso and attached handbag. Contact glove source about(1340,350), support pivot(955,708), projects to(+149.8,-139.2)world within heavy box. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged.",
+  "runtime_review": {
+    "report": "../../candidates/cpp/review/runtime-lab/capture-report.json",
+    "loaded_manifest_matches_candidate": true,
+    "clip_captured": true,
+    "combat_uses_baseline_manifest": true,
+    "final_art_approved": false
+  }
+}

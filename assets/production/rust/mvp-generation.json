@@ -1,0 +1,43 @@
+{
+  "scope": "five-character MVP, no Go art",
+  "sources": [
+    {
+      "action": "signature_special",
+      "source": "signature_special/source-v1.png",
+      "prompt": "signature_special/prompt-v1.txt",
+      "reference": "signature_special/../idle/prepared.png",
+      "tool": "built-in imagegen",
+      "sha256": "ae2fd0beaff0ca5976614e65612808b312b012e2eb09721343ecdf9b1ead2766"
+    },
+    {
+      "action": "signature_special",
+      "source": "signature_special/source-v2.png",
+      "prompt": "signature_special/prompt-v2.txt",
+      "reference": "signature_special/source-v1.png",
+      "tool": "built-in imagegen",
+      "sha256": "edaeb20d69ef31e5177eb8353c6209132e6003bc79b1ca2444ea3e7424ac5f1e"
+    },
+    {
+      "action": "knockdown",
+      "source": "knockdown/source-v1.png",
+      "prompt": "knockdown/prompt-v1.txt",
+      "reference": "knockdown/../idle/prepared.png",
+      "tool": "built-in imagegen",
+      "sha256": "f2b6ad02be765a3d971e70b2a7193d40208882e3ddfaba621e8df846d7c61ad1"
+    },
+    {
+      "action": "sweep",
+      "source": "sweep/source-mvp-v1.png",
+      "prompt": "sweep/prompt-mvp-v1.txt",
+      "reference": "sweep/../idle/prepared.png",
+      "tool": "built-in imagegen",
+      "sha256": "7533d1acb84890990303c8169d18f7f3f45a1003a7af4c70f86e740af01adca9"
+    }
+  ],
+  "preparation": "Existing authorized local matte extraction; explicit uniform scale, rectangle and pivot per reviewed action",
+  "selected_actions": [
+    "signature_special",
+    "knockdown",
+    "sweep"
+  ]
+}

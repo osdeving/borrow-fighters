@@ -1,0 +1,74 @@
+{
+  "actor_frames": 510,
+  "effect_frames": 30,
+  "errors": [],
+  "manifests": [
+    {
+      "path": "assets/candidates/c/c-fighter.sprite.json",
+      "clips": 25,
+      "frames": 89,
+      "rgba": "RGBA"
+    },
+    {
+      "path": "assets/candidates/cpp/cpp-fighter.sprite.json",
+      "clips": 25,
+      "frames": 88,
+      "rgba": "RGBA"
+    },
+    {
+      "path": "assets/candidates/duke/duke-fighter.sprite.json",
+      "clips": 25,
+      "frames": 88,
+      "rgba": "RGBA"
+    },
+    {
+      "path": "assets/candidates/go/go-fighter.sprite.json",
+      "clips": 20,
+      "frames": 60,
+      "rgba": "RGBA"
+    },
+    {
+      "path": "assets/candidates/python/python-fighter.sprite.json",
+      "clips": 25,
+      "frames": 88,
+      "rgba": "RGBA"
+    },
+    {
+      "path": "assets/candidates/rust/rust-fighter.sprite.json",
+      "clips": 25,
+      "frames": 97,
+      "rgba": "RGBA"
+    },
+    {
+      "path": "assets/candidates/c/c-signature-fx.sprite.json",
+      "clips": 2,
+      "frames": 6,
+      "rgba": "RGBA"
+    },
+    {
+      "path": "assets/candidates/cpp/cpp-signature-fx.sprite.json",
+      "clips": 2,
+      "frames": 6,
+      "rgba": "RGBA"
+    },
+    {
+      "path": "assets/candidates/duke/duke-signature-fx.sprite.json",
+      "clips": 2,
+      "frames": 6,
+      "rgba": "RGBA"
+    },
+    {
+      "path": "assets/candidates/python/python-signature-fx.sprite.json",
+      "clips": 2,
+      "frames": 6,
+      "rgba": "RGBA"
+    },
+    {
+      "path": "assets/candidates/rust/rust-signature-fx.sprite.json",
+      "clips": 2,
+      "frames": 6,
+      "rgba": "RGBA"
+    }
+  ],
+  "scope": "Six current actor atlases and five current signature FX atlases; preserved Go cartoon archive excluded."
+}

@@ -437,7 +437,7 @@ Status: **concluída em corte mínimo, com primeiro tuning específico por perso
 Entregáveis:
 
 - [x] mover dados hard-coded de `AttackKind::spec` para `MoveSpec`;
-- [x] criar `CharacterSpec` para Rust, Duke, Go, C e Python;
+- [x] criar `CharacterSpec` para Rust, Duke, Go, C, Python e C++;
 - [x] fazer `World`, `Combat Lab` e `Fighter` consumirem nome, vida máxima e loadout vindos de `CharacterSpec`;
 - [x] manter comportamento atual com dados novos;
 - [x] testes garantindo que dados antigos continuam equivalentes.
@@ -447,7 +447,7 @@ Critério de aceite:
 
 - adicionar um golpe novo não exige alterar `Fighter` profundamente.
 - `AttackKind` permanece como camada de compatibilidade runtime para sprites, debug e seleção de ataque.
-- Rust possui `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` como ferramentas rápidas/curtas; Duke possui `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` como ferramentas longas/pesadas e mais puníveis; C possui kit terrestre próprio de fundamentos; Python possui kit terrestre próprio de punição ágil.
+- Rust possui `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` como ferramentas rápidas/curtas; Duke possui `DukeBoilerplatePoke`, `DukeGarbageCollectorSweep`, `DukeAbstractFactoryOverhead` e `DukeEnterpriseThrow` como ferramentas longas/pesadas e mais puníveis; C possui kit terrestre próprio de fundamentos; Python possui kit terrestre próprio de punição ágil; C++ possui kit terrestre próprio entre herança de C e ritmo de Python.
 - A parte mínima está aceita; a próxima evolução é refinar defesa, hitstun/blockstun e contra-jogo.
 
 ### Fase 4 — Defesa e contra-jogo
@@ -467,7 +467,7 @@ Critério de aceite:
 
 - cada golpe forte tem pelo menos uma resposta documentada.
 - o corte atual impede ação durante hitstun/blockstun, aplica pushback, mostra vantagem estimada no Combat Lab e aplica whiff recovery quando golpe próximo erra.
-- `Low`, `High`/overhead, `Throw`, anti-air e ataques aéreos já têm primeiro corte jogável. Rust, Duke/Java, Go, C e Python possuem identidade própria nos golpes terrestres principais; ataques aéreos universais continuam aceitos no Prototype 0.1.
+- `Low`, `High`/overhead, `Throw`, anti-air e ataques aéreos já têm primeiro corte jogável. Rust, Duke/Java, Go, C, Python e C++ possuem identidade própria nos golpes terrestres principais; ataques aéreos universais continuam aceitos no Prototype 0.1.
 
 Respostas mínimas documentadas:
 
@@ -494,8 +494,9 @@ Entregáveis:
 - [x] Go rushdown em dados: `GoGoroutineJab`, `GoDeferKick`, `GoChannelOverhead`, `GoHopkick`;
 - [x] C fundamentals em dados: `CPointerJab`, `CUnsafePoke`, `CNullStepKick`, `CSegfaultSweep`, `CStackOverflow`, `CInterruptVector`, `CUndefinedThrow`;
 - [x] Python agile punisher em dados: `PythonSnakeBite`, `PythonDataStrike`, `PythonHeelKick`, `PythonIndentSweep`, `PythonTracebackOverhead`, `PythonVisionAntiAir`, `PythonConstrictThrow`;
-- [x] especiais de projectile por personagem via `ProjectileSpec`, com Rust balanceado, Duke mais pesado/lento, Go em burst curto, C em bitstream medio/rapido e Python em fluxo rapido/medio;
-- [x] demo publica ciclando Rust, Duke/Java, C e Python, mantendo Go disponivel por CLI/ferramentas;
+- [x] C++ agile systems punisher em dados: `CppReferenceJab`, `CppTemplateStrike`, `CppOperatorKick`, `CppVectorSweep`, `CppVirtualOverhead`, `CppExceptionAntiAir`, `CppMoveThrow`;
+- [x] especiais de projectile por personagem via `ProjectileSpec`, com Rust balanceado, Duke mais pesado/lento, Go em burst curto, C em bitstream medio/rapido, Python em fluxo rapido/medio e C++ em operadores rapido/medio;
+- [x] demo publica ciclando Rust, Duke/Java, C, Python e C++, mantendo Go disponivel por CLI/ferramentas;
 - [x] matriz de intenção mecânica em [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md);
 - [x] matriz de matchups de intenção, sem buscar balanceamento final.
 
@@ -507,6 +508,7 @@ Critério de aceite:
 - Go deve pressionar com velocidade, mas sofrer por alcance e vida menores.
 - C deve ganhar por alcance e dano sólido sem ficar seguro no erro.
 - Python deve ganhar por punir whiff e agir cedo, não por troca bruta de dano.
+- C++ deve ganhar por alcance técnico e timing, sem virar C mais segura ou Python mais forte.
 
 ### Fase 6 — Proteções contra degeneração
 

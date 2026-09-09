@@ -1,0 +1,167 @@
+{
+  "character": "python",
+  "provenance": {
+    "status": "candidate",
+    "generator": "built-in imagegen",
+    "identity_reference": "reference/master-existing.png",
+    "combat": "Visual-only; baseline combat_manifest retained.",
+    "review": "finalization-review.md"
+  },
+  "actions": {
+    "idle": {
+      "approved": true,
+      "scale_to_runtime": 0.432258,
+      "sheet": "idle/keyed.png",
+      "notes": "Four subtle breathing keys, stable feet and face; permanent original reference retained. Alpha inspected. Slender adult silhouette intentionally preserves original proportions; width below the generic humanoid idle guide is documented for review."
+    },
+    "walk": {
+      "approved": true,
+      "scale_to_runtime": 0.44666666666666666,
+      "sheet": "walk/keyed-v8.png",
+      "notes": "v8 preserves fixed Python identity and uses C walk v3 only as leg pose reference. Opposite thigh overlap and arm swing; four whole bodies, near_contact/far_toe_off/far_contact/near_toe_off, 400ms unchanged. v4-v7 rejected for repeated or wrong crossing. Both toe-off keys named honestly. Native World both facings and default-app match reviewed; primary agent accepted walk."
+    },
+    "jump": {
+      "approved": true,
+      "scale_to_runtime": 0.4,
+      "sheet": "jump/keyed.png",
+      "notes": "Three airborne keys. Pivots calibrated to keep head/waist of rising and falling poses aligned despite source drawing displacement; the World supplies the flight path. No grounded landing pose, whole accessories preserved."
+    },
+    "crouch": {
+      "approved": true,
+      "scale_to_runtime": 0.308046,
+      "sheet": "crouch/keyed.png",
+      "notes": "Two selected low-posture keys; normalization matches the generated head/hand size to idle instead of fitting each crouch to standing height. Shoe/knee/palm support explicitly reviewed. White blouse and hair retain clean contour."
+    },
+    "block": {
+      "approved": true,
+      "scale_to_runtime": 0.377465,
+      "sheet": "block/keyed.png",
+      "notes": "Immediate crossed-forearm guard and braced impact, followed by held guard. Two distinct body responses, stable support on both feet. Head and clothing sizes normalized uniformly from upright reference."
+    },
+    "crouch_block": {
+      "approved": true,
+      "scale_to_runtime": 0.34359,
+      "sheet": "crouch_block/keyed.png",
+      "notes": "Two tight low-guard keys, distinct from standing block. Knees and shoes support the same floor, cloth/snake continuous. Normalization based on head/hand size, not cropped posture height."
+    },
+    "hit": {
+      "approved": true,
+      "scale_to_runtime": 0.430177,
+      "sheet": "hit/keyed.png",
+      "notes": "Immediate recoil, forward brace and recovery to ready stance. Supports and full accessories checked, no embedded victim or hit effect."
+    },
+    "punch_heavy": {
+      "approved": true,
+      "scale_to_runtime": 0.444444,
+      "sheet": "punch_heavy/keyed.png",
+      "notes": "Low cross with pronounced forward lean; active fist around1273,425 at feet-anchor946,698 projects to(+145,-121), inside baseline heavy box. Uniform scale from recovery upright body. Review in Lab pending."
+    },
+    "kick": {
+      "approved": true,
+      "scale_to_runtime": 0.5414141414141415,
+      "sheet": "kick/keyed-v5.png",
+      "notes": "v5 raises black shoe into original active band. Four generated keys, baseline133/117/166ms kept as133/117/83/83ms. Whole shoe lies in vertical contact band; local uneven magenta removed from separate keyed sheet, source intact. Native Lab and full World reviewed; primary agent accepted contact and default-app match."
+    },
+    "punch_light": {
+      "approved": true,
+      "scale_to_runtime": 0.432258,
+      "sheet": "punch_light/keyed.png",
+      "notes": [
+        "Native Lab showed v4 fist mostly above the existing box. v5 lowers only active arm/hand into the box; source support feet preserved. Active knuckles now approximately(+134,-131) world, most of hand inside the far end of unchanged jab box. Front-support pivot accounts for lunge without increasing physical reach. Source body leans forward/down intentionally; startup/recovery unchanged."
+      ]
+    },
+    "sweep": {
+      "approved": true,
+      "scale_to_runtime": 0.447,
+      "sheet": "sweep/keyed-mvp-v1.png",
+      "notes": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Low active foot now attacks ankle/shin band of the actual crouching MoveSpec. Previous action mapping preserved in action-pre-mvp.json. Timing unchanged."
+    },
+    "overhead": {
+      "approved": true,
+      "scale_to_runtime": 0.436482,
+      "sheet": "overhead/keyed.png",
+      "notes": [
+        "Active arm corrected from knee level to forward waist-height stopping point. Knuckles around (+127,-145) world relative to explicit support pivot, within unchanged overhead contact box. First overhead wind-up then low descending hammerfist and recovery. Body hinge deliberate; no collision or timing change."
+      ]
+    },
+    "air_punch": {
+      "approved": true,
+      "scale_to_runtime": 0.432258,
+      "sheet": "air_punch/keyed.png",
+      "notes": [
+        "Virtual pivots align waist near -172 world across the airborne phases; active source torso/waist was drawn 77 pixels lower, so it is corrected by metadata. Head lowers intentionally as torso hinges into dive punch. Active fist near (+97,-98) world, inside unchanged aerial punch box. No landing pose or baked jump trajectory."
+      ]
+    },
+    "air_kick": {
+      "approved": true,
+      "scale_to_runtime": 0.432258,
+      "sheet": "air_kick/keyed.png",
+      "notes": [
+        "Virtual waist aligned across phases; active source waist 20 pixels lower compensated by pivot. Extended heel around (+130,-69) world intersects unchanged aerial kick box. Recovery returns to knee chamber; startup/recovery silhouettes similar by design, distinct source drawings preserved. Entire shoe retained."
+      ]
+    },
+    "anti_air": {
+      "approved": true,
+      "scale_to_runtime": 0.425397,
+      "sheet": "anti_air/keyed.png",
+      "notes": [
+        "Raised uppercut hand kept inside source margins. Active knuckles around (+61,-315) world and forearm overlap unchanged anti-air box. Support pivot slightly behind pelvis for rising lean; entire heels remain on shared floor. Startup bends knees; recovery absorbs."
+      ]
+    },
+    "throw": {
+      "approved": true,
+      "scale_to_runtime": 0.6090909090909091,
+      "notes": "Six shoulder-throw keys: reach, capture, lift/turn, release BEHIND, follow-through, ready.48ticks800ms; capture visual phase10..21, recovery starts22. Skirt and serpent remain attached throughout; no fake victim drawn into attacker sheet. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available. Lift v2 replaces only key2 with generated arms raised FORWARD; hands approximately(+55,-235)world support the victim during capture. Other five selected drawings retain identical pixel hashes. select_lift_v2.py reproduces the explicit whole-frame selection."
+    },
+    "special": {
+      "approved": true,
+      "scale_to_runtime": 0.42857142857142855,
+      "sheet": "special/keyed.png",
+      "notes": "v6 selected after reach/height revisions. Emission is already present at frame0; the single waist snake extends forward while the original separate projectile remains untouched. Uniform body scale264/616. Existing origin(+205.333,-157.333) maps to source point approximately(679.11,328.89) from pivot(200,696), in the first open mouth region. Earlier variants were too long/high or short; all retained. Second pose retracts, third recovers."
+    },
+    "spawn": {
+      "approved": true,
+      "scale_to_runtime": 0.4714285714285714,
+      "sheet": "spawn/keyed.png",
+      "notes": "Preserves existing easel/chart entrance gag using old source only for props. Current outfit and adult identity remain from fixed master/new idle. One uniform scale from approximately560px standing reference; source first pose is about6percent taller than the other three, retained as candidate variation."
+    },
+    "victory": {
+      "approved": true,
+      "scale_to_runtime": 0.4230769230769231,
+      "sheet": "victory/keyed.png",
+      "notes": "v2 removes the extra snake head at the hanging tail while preserving all three victory gestures. Uniform scale from upright body; current full white blouse, black skirt and heels retained."
+    },
+    "defeat": {
+      "approved": true,
+      "scale_to_runtime": 0.4,
+      "sheet": "defeat/keyed.png",
+      "notes": "Standing loss, one-knee rest and sustained bowed one-knee hold. Same scale from standing pose; kneeling is naturally shorter. First generation produced no image due to output moderation; neutral sports-rest prompt v2 succeeded."
+    },
+    "signature_special": {
+      "approved": true,
+      "scale_to_runtime": 0.7223719676549866,
+      "notes": "import antigravity: import gesture, snake expands, coils gather, full levitation, directs spiral, loose-leg hover recoil, landing crouch, guard. 100ticks1667ms: startup0..25, active26..58, recovery59..99. World owns vertical travel; body-attached coils remain in actor and detached vortex was removed in generated v2. Airborne keys4/5 use virtual ground anchors accounting for tucked legs; no second drawn flight path. Separate tall serpent vortex has its own exact ground anchor. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+    },
+    "knockdown": {
+      "approved": true,
+      "scale_to_runtime": 0.47,
+      "sheet": "knockdown/keyed-v1.png",
+      "notes": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Distinct fall, grounded recovery, get-up and guard fit protected36frame recovery."
+    },
+    "thrown": {
+      "approved": true,
+      "scale_to_runtime": 0.47017543859649125,
+      "notes": "Dedicated throw-victim captured/inverted/somersault/descent poses, with full skirt coverage and serpent accessory. First key200ms held in capture, then clip clock enters inverted key at200ms. Virtual waist anchors exclude source sheet placement from the real ballistic motion; bottom padding only adds transparency. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+    },
+    "launched": {
+      "approved": true,
+      "scale_to_runtime": 0.4542372881355932,
+      "notes": "Dedicated uppercut reaction: chin snaps up, torso arches in rise, suspended apex, braced descent. Four independent full-body drawings and virtual waist registration; World supplies all flight. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available. Python idle belt sits173world above ground; launched virtual pivots use that same reference (earlier160world registration put first extended heel below physical bottom). All four keys moved together by approximately13world, preserving source body motion and real trajectory."
+    },
+    "heavy_hit": {
+      "approved": true,
+      "scale_to_runtime": 0.44666666666666666,
+      "notes": "Dedicated grounded heavy recoil, deep abdominal fold and stagger recovery. Feet support ground across keys; stable adult anatomy and skirt coverage.370ms presentation; physical stun remains MoveSpec-driven. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+    }
+  }
+}

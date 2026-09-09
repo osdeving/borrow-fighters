@@ -1,0 +1,2192 @@
+{
+  "audio": false,
+  "audio_delivery": "Silent framebuffer capture with separate offline event mix; see offline-audio-mix.json and audio-stream-review.json for delivery and live-player verification.",
+  "fps": 60,
+  "live_audio_playback": false,
+  "max_frame_lateness_seconds": 0.0,
+  "realtime": false,
+  "render_size": [
+    1280,
+    720
+  ],
+  "render_wall_time_seconds": 82.631689287,
+  "scenarios": [
+    {
+      "arena": "JavaStreet",
+      "arena_transitions": [
+        {
+          "arena": "Sirius",
+          "music_track": "combat",
+          "video_frame": 185
+        }
+      ],
+      "audio_events": [
+        {
+          "character": "rust",
+          "cue": "SuperStart",
+          "cue_key": "super.start",
+          "environment": null,
+          "move_id": "rust_ownership_eclipse",
+          "sequence_tick": 0,
+          "simulation_frame": 60,
+          "slot": "One",
+          "video_frame": 60,
+          "wall_time_seconds": 1.588269059
+        },
+        {
+          "character": "rust",
+          "cue": "SuperMutation",
+          "cue_key": "super.mutation",
+          "environment": null,
+          "move_id": "rust_ownership_eclipse",
+          "sequence_tick": 11,
+          "simulation_frame": 71,
+          "slot": "One",
+          "video_frame": 71,
+          "wall_time_seconds": 2.364123316
+        },
+        {
+          "character": "rust",
+          "cue": "SuperMutation",
+          "cue_key": "super.mutation",
+          "environment": null,
+          "move_id": "rust_ownership_eclipse",
+          "sequence_tick": 125,
+          "simulation_frame": 185,
+          "slot": "One",
+          "video_frame": 185,
+          "wall_time_seconds": 6.065724374
+        },
+        {
+          "character": "rust",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "rust_ownership_eclipse",
+          "sequence_tick": 212,
+          "simulation_frame": 272,
+          "slot": "One",
+          "video_frame": 272,
+          "wall_time_seconds": 8.56647472
+        },
+        {
+          "character": "duke",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 212,
+          "simulation_frame": 272,
+          "slot": "Two",
+          "video_frame": 272,
+          "wall_time_seconds": 8.56647472
+        },
+        {
+          "character": "rust",
+          "cue": "SuperEnd",
+          "cue_key": "super.end",
+          "environment": null,
+          "move_id": "rust_ownership_eclipse",
+          "sequence_tick": null,
+          "simulation_frame": 360,
+          "slot": "One",
+          "video_frame": 360,
+          "wall_time_seconds": 11.428476271
+        }
+      ],
+      "character": "rust",
+      "damage": 28,
+      "duration_frames": 300,
+      "final_effective_arena": "Sirius",
+      "guarded": false,
+      "move": "Ownership Eclipse",
+      "music_track": "combat-console-floor",
+      "reverse": false,
+      "screenshots": [
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            100,
+            112
+          ],
+          "image": "rust-right-hit-030-before.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 30,
+          "target_x": 1056.0,
+          "video_frame": 30,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            100,
+            112
+          ],
+          "image": "rust-right-hit-064-Freeze.png",
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "simulation_frame": 64,
+          "target_x": 1056.0,
+          "video_frame": 64,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            100,
+            112
+          ],
+          "image": "rust-right-hit-069-RustBlackout.png",
+          "phase": "RustBlackout",
+          "sequence_tick": 9,
+          "simulation_frame": 69,
+          "target_x": 1056.0,
+          "video_frame": 69,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            100,
+            112
+          ],
+          "image": "rust-right-hit-095-build-early.png",
+          "phase": "RustBuild",
+          "sequence_tick": 35,
+          "simulation_frame": 95,
+          "target_x": 1056.0,
+          "video_frame": 95,
+          "retained_image": "rust-build.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            100,
+            112
+          ],
+          "image": "rust-right-hit-128-RustBuild.png",
+          "phase": "RustBuild",
+          "sequence_tick": 68,
+          "simulation_frame": 128,
+          "target_x": 1056.0,
+          "video_frame": 128,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            100,
+            112
+          ],
+          "image": "rust-right-hit-184-build-last-block.png",
+          "phase": "RustBuild",
+          "sequence_tick": 124,
+          "simulation_frame": 184,
+          "target_x": 1056.0,
+          "video_frame": 184,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "Sirius",
+          "health": [
+            100,
+            112
+          ],
+          "image": "rust-right-hit-185-arena-commit.png",
+          "phase": "RustCharge",
+          "sequence_tick": 125,
+          "simulation_frame": 185,
+          "target_x": 1056.0,
+          "video_frame": 185,
+          "retained_image": "rust-sirius.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "Sirius",
+          "health": [
+            100,
+            112
+          ],
+          "image": "rust-right-hit-225-RustCharge.png",
+          "phase": "RustCharge",
+          "sequence_tick": 165,
+          "simulation_frame": 225,
+          "target_x": 1056.0,
+          "video_frame": 225,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "Sirius",
+          "health": [
+            100,
+            84
+          ],
+          "image": "rust-right-hit-272-contact-212.png",
+          "phase": "RustPulse",
+          "sequence_tick": 212,
+          "simulation_frame": 272,
+          "target_x": 1056.0,
+          "video_frame": 272,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "Sirius",
+          "health": [
+            100,
+            84
+          ],
+          "image": "rust-right-hit-280-RustPulse.png",
+          "phase": "RustPulse",
+          "sequence_tick": 220,
+          "simulation_frame": 280,
+          "target_x": 1071.529296875,
+          "video_frame": 280,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "Sirius",
+          "health": [
+            100,
+            84
+          ],
+          "image": "rust-right-hit-327-Restore.png",
+          "phase": "Restore",
+          "sequence_tick": 267,
+          "simulation_frame": 327,
+          "target_x": 1102.587890625,
+          "video_frame": 327,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "Sirius",
+          "health": [
+            100,
+            84
+          ],
+          "image": "rust-right-hit-400-restored.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 400,
+          "target_x": 1102.587890625,
+          "video_frame": 400,
+          "retained_image": "rust-restored.png"
+        }
+      ],
+      "simulation_frames": [
+        0,
+        449
+      ],
+      "video_frames": [
+        0,
+        449
+      ],
+      "wall_time_seconds": 13.334728004
+    },
+    {
+      "arena": "JavaStreet",
+      "arena_transitions": [],
+      "audio_events": [
+        {
+          "character": "duke",
+          "cue": "SuperStart",
+          "cue_key": "super.start",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 0,
+          "simulation_frame": 510,
+          "slot": "One",
+          "video_frame": 510,
+          "wall_time_seconds": 14.707715305
+        },
+        {
+          "character": "duke",
+          "cue": "SuperTrashRain",
+          "cue_key": "super.trash_rain",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 8,
+          "simulation_frame": 518,
+          "slot": "One",
+          "video_frame": 518,
+          "wall_time_seconds": 15.228176905
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "cue_key": "super.collect",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 84,
+          "simulation_frame": 594,
+          "slot": "One",
+          "video_frame": 594,
+          "wall_time_seconds": 17.282150557
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "cue_key": "super.collect",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 96,
+          "simulation_frame": 606,
+          "slot": "One",
+          "video_frame": 606,
+          "wall_time_seconds": 17.480356508
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "cue_key": "super.collect",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 108,
+          "simulation_frame": 618,
+          "slot": "One",
+          "video_frame": 618,
+          "wall_time_seconds": 17.670051366
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "cue_key": "super.collect",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 120,
+          "simulation_frame": 630,
+          "slot": "One",
+          "video_frame": 630,
+          "wall_time_seconds": 17.856491485
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "cue_key": "super.collect",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 132,
+          "simulation_frame": 642,
+          "slot": "One",
+          "video_frame": 642,
+          "wall_time_seconds": 18.049869093
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "cue_key": "super.collect",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 144,
+          "simulation_frame": 654,
+          "slot": "One",
+          "video_frame": 654,
+          "wall_time_seconds": 18.237737344
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "cue_key": "super.collect",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 156,
+          "simulation_frame": 666,
+          "slot": "One",
+          "video_frame": 666,
+          "wall_time_seconds": 18.434527722
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "cue_key": "super.collect",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 168,
+          "simulation_frame": 678,
+          "slot": "One",
+          "video_frame": 678,
+          "wall_time_seconds": 19.037752403
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "cue_key": "super.collect",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 180,
+          "simulation_frame": 690,
+          "slot": "One",
+          "video_frame": 690,
+          "wall_time_seconds": 19.23205503
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "cue_key": "super.collect",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 192,
+          "simulation_frame": 702,
+          "slot": "One",
+          "video_frame": 702,
+          "wall_time_seconds": 19.431773888
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "cue_key": "super.collect",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 204,
+          "simulation_frame": 714,
+          "slot": "One",
+          "video_frame": 714,
+          "wall_time_seconds": 19.62819577
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "cue_key": "super.collect",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 216,
+          "simulation_frame": 726,
+          "slot": "One",
+          "video_frame": 726,
+          "wall_time_seconds": 19.829153509
+        },
+        {
+          "character": "duke",
+          "cue": "SuperGiantDrop",
+          "cue_key": "super.giant_drop",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 264,
+          "simulation_frame": 774,
+          "slot": "One",
+          "video_frame": 774,
+          "wall_time_seconds": 21.121696441
+        },
+        {
+          "character": "duke",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": 264,
+          "simulation_frame": 774,
+          "slot": "One",
+          "video_frame": 774,
+          "wall_time_seconds": 21.121696441
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 264,
+          "simulation_frame": 774,
+          "slot": "Two",
+          "video_frame": 774,
+          "wall_time_seconds": 21.121696441
+        },
+        {
+          "character": "duke",
+          "cue": "SuperEnd",
+          "cue_key": "super.end",
+          "environment": null,
+          "move_id": "duke_jvm_overdrive",
+          "sequence_tick": null,
+          "simulation_frame": 860,
+          "slot": "One",
+          "video_frame": 860,
+          "wall_time_seconds": 23.934378401
+        }
+      ],
+      "character": "duke",
+      "damage": 32,
+      "duration_frames": 350,
+      "final_effective_arena": "JavaStreet",
+      "guarded": false,
+      "move": "Garbage Collector",
+      "music_track": "combat-console-floor",
+      "reverse": false,
+      "screenshots": [
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            112,
+            100
+          ],
+          "image": "duke-right-hit-030-before.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 480,
+          "target_x": 1056.0,
+          "video_frame": 480,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            112,
+            100
+          ],
+          "image": "duke-right-hit-064-Freeze.png",
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "simulation_frame": 514,
+          "target_x": 1056.0,
+          "video_frame": 514,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            112,
+            100
+          ],
+          "image": "duke-right-hit-094-DukeTrashFall.png",
+          "phase": "DukeTrashFall",
+          "sequence_tick": 34,
+          "simulation_frame": 544,
+          "target_x": 1056.0,
+          "video_frame": 544,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            112,
+            100
+          ],
+          "image": "duke-right-hit-132-DukeTrashSettle.png",
+          "phase": "DukeTrashSettle",
+          "sequence_tick": 72,
+          "simulation_frame": 582,
+          "target_x": 1056.0,
+          "video_frame": 582,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            112,
+            100
+          ],
+          "image": "duke-right-hit-216-DukeCollect.png",
+          "phase": "DukeCollect",
+          "sequence_tick": 156,
+          "simulation_frame": 666,
+          "target_x": 1056.0,
+          "video_frame": 666,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            112,
+            100
+          ],
+          "image": "duke-right-hit-306-DukeGiantDrop.png",
+          "phase": "DukeGiantDrop",
+          "sequence_tick": 246,
+          "simulation_frame": 756,
+          "target_x": 1056.0,
+          "video_frame": 756,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            112,
+            68
+          ],
+          "image": "duke-right-hit-324-contact-264.png",
+          "phase": "DukeImpact",
+          "sequence_tick": 264,
+          "simulation_frame": 774,
+          "target_x": 1056.0,
+          "video_frame": 774,
+          "retained_image": "duke-impact.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            112,
+            68
+          ],
+          "image": "duke-right-hit-343-DukeImpact.png",
+          "phase": "DukeImpact",
+          "sequence_tick": 283,
+          "simulation_frame": 793,
+          "target_x": 1092.882080078125,
+          "video_frame": 793,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            112,
+            68
+          ],
+          "image": "duke-right-hit-386-Restore.png",
+          "phase": "Restore",
+          "sequence_tick": 326,
+          "simulation_frame": 836,
+          "target_x": 1102.587890625,
+          "video_frame": 836,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            112,
+            68
+          ],
+          "image": "duke-right-hit-450-restored.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 900,
+          "target_x": 1102.587890625,
+          "video_frame": 900,
+          "retained_image": null
+        }
+      ],
+      "simulation_frames": [
+        450,
+        949
+      ],
+      "video_frames": [
+        450,
+        949
+      ],
+      "wall_time_seconds": 12.669745973
+    },
+    {
+      "arena": "JavaStreet",
+      "arena_transitions": [],
+      "audio_events": [
+        {
+          "character": "c",
+          "cue": "SuperStart",
+          "cue_key": "super.start",
+          "environment": null,
+          "move_id": "c_kernel_panic",
+          "sequence_tick": 0,
+          "simulation_frame": 1010,
+          "slot": "One",
+          "video_frame": 1010,
+          "wall_time_seconds": 27.461434604
+        },
+        {
+          "character": "c",
+          "cue": "SuperError",
+          "cue_key": "super.error",
+          "environment": null,
+          "move_id": "c_kernel_panic",
+          "sequence_tick": 8,
+          "simulation_frame": 1018,
+          "slot": "One",
+          "video_frame": 1018,
+          "wall_time_seconds": 28.032199622
+        },
+        {
+          "character": "c",
+          "cue": "SuperError",
+          "cue_key": "super.error",
+          "environment": null,
+          "move_id": "c_kernel_panic",
+          "sequence_tick": 105,
+          "simulation_frame": 1115,
+          "slot": "One",
+          "video_frame": 1115,
+          "wall_time_seconds": 30.226639018
+        },
+        {
+          "character": "c",
+          "cue": "SuperBoot",
+          "cue_key": "super.boot",
+          "environment": null,
+          "move_id": "c_kernel_panic",
+          "sequence_tick": 180,
+          "simulation_frame": 1190,
+          "slot": "One",
+          "video_frame": 1190,
+          "wall_time_seconds": 31.725397243
+        },
+        {
+          "character": "c",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "c_kernel_panic",
+          "sequence_tick": 222,
+          "simulation_frame": 1232,
+          "slot": "One",
+          "video_frame": 1232,
+          "wall_time_seconds": 32.426357446
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 222,
+          "simulation_frame": 1232,
+          "slot": "Two",
+          "video_frame": 1232,
+          "wall_time_seconds": 32.426357446
+        },
+        {
+          "character": "c",
+          "cue": "SuperEnd",
+          "cue_key": "super.end",
+          "environment": null,
+          "move_id": "c_kernel_panic",
+          "sequence_tick": null,
+          "simulation_frame": 1330,
+          "slot": "One",
+          "video_frame": 1330,
+          "wall_time_seconds": 35.330524946
+        }
+      ],
+      "character": "c",
+      "damage": 32,
+      "duration_frames": 320,
+      "final_effective_arena": "JavaStreet",
+      "guarded": false,
+      "move": "General Protection Fault / #GP",
+      "music_track": "combat-console-floor",
+      "reverse": false,
+      "screenshots": [
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            104,
+            100
+          ],
+          "image": "c-right-hit-030-before.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 980,
+          "target_x": 1056.0,
+          "video_frame": 980,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            104,
+            100
+          ],
+          "image": "c-right-hit-064-Freeze.png",
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "simulation_frame": 1014,
+          "target_x": 1056.0,
+          "video_frame": 1014,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            104,
+            100
+          ],
+          "image": "c-right-hit-116-CTerminalStorm.png",
+          "phase": "CTerminalStorm",
+          "sequence_tick": 56,
+          "simulation_frame": 1066,
+          "target_x": 1056.0,
+          "video_frame": 1066,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            104,
+            100
+          ],
+          "image": "c-right-hit-202-CBlueScreen.png",
+          "phase": "CBlueScreen",
+          "sequence_tick": 142,
+          "simulation_frame": 1152,
+          "target_x": 1056.0,
+          "video_frame": 1152,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            104,
+            100
+          ],
+          "image": "c-right-hit-261-CBios.png",
+          "phase": "CBios",
+          "sequence_tick": 201,
+          "simulation_frame": 1211,
+          "target_x": 1056.0,
+          "video_frame": 1211,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            104,
+            68
+          ],
+          "image": "c-right-hit-282-contact-222.png",
+          "phase": "CReboot",
+          "sequence_tick": 222,
+          "simulation_frame": 1232,
+          "target_x": 1056.0,
+          "video_frame": 1232,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            104,
+            68
+          ],
+          "image": "c-right-hit-301-CReboot.png",
+          "phase": "CReboot",
+          "sequence_tick": 241,
+          "simulation_frame": 1251,
+          "target_x": 1092.882080078125,
+          "video_frame": 1251,
+          "retained_image": "c-reboot.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            104,
+            68
+          ],
+          "image": "c-right-hit-350-Restore.png",
+          "phase": "Restore",
+          "sequence_tick": 290,
+          "simulation_frame": 1300,
+          "target_x": 1102.587890625,
+          "video_frame": 1300,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            104,
+            68
+          ],
+          "image": "c-right-hit-420-restored.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 1370,
+          "target_x": 1102.587890625,
+          "video_frame": 1370,
+          "retained_image": null
+        }
+      ],
+      "simulation_frames": [
+        950,
+        1419
+      ],
+      "video_frames": [
+        950,
+        1419
+      ],
+      "wall_time_seconds": 11.205203548
+    },
+    {
+      "arena": "JavaStreet",
+      "arena_transitions": [],
+      "audio_events": [
+        {
+          "character": "cpp",
+          "cue": "SuperStart",
+          "cue_key": "super.start",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 0,
+          "simulation_frame": 1480,
+          "slot": "One",
+          "video_frame": 1480,
+          "wall_time_seconds": 38.644964499
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperTyping",
+          "cue_key": "super.typing",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 25,
+          "simulation_frame": 1505,
+          "slot": "One",
+          "video_frame": 1505,
+          "wall_time_seconds": 39.487027137
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperEnter",
+          "cue_key": "super.enter",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 130,
+          "simulation_frame": 1610,
+          "slot": "One",
+          "video_frame": 1610,
+          "wall_time_seconds": 41.679608738
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperFootshot",
+          "cue_key": "super.footshot",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 184,
+          "simulation_frame": 1664,
+          "slot": "One",
+          "video_frame": 1664,
+          "wall_time_seconds": 43.207441485
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 344,
+          "simulation_frame": 1824,
+          "slot": "One",
+          "video_frame": 1824,
+          "wall_time_seconds": 50.004578705
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 344,
+          "simulation_frame": 1824,
+          "slot": "One",
+          "video_frame": 1824,
+          "wall_time_seconds": 50.004578705
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 344,
+          "simulation_frame": 1824,
+          "slot": "Two",
+          "video_frame": 1824,
+          "wall_time_seconds": 50.004578705
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 354,
+          "simulation_frame": 1834,
+          "slot": "One",
+          "video_frame": 1834,
+          "wall_time_seconds": 50.689413858
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 354,
+          "simulation_frame": 1834,
+          "slot": "One",
+          "video_frame": 1834,
+          "wall_time_seconds": 50.689413858
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 354,
+          "simulation_frame": 1834,
+          "slot": "Two",
+          "video_frame": 1834,
+          "wall_time_seconds": 50.689413858
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 364,
+          "simulation_frame": 1844,
+          "slot": "One",
+          "video_frame": 1844,
+          "wall_time_seconds": 51.360693377
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 364,
+          "simulation_frame": 1844,
+          "slot": "One",
+          "video_frame": 1844,
+          "wall_time_seconds": 51.360693377
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 364,
+          "simulation_frame": 1844,
+          "slot": "Two",
+          "video_frame": 1844,
+          "wall_time_seconds": 51.360693377
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 374,
+          "simulation_frame": 1854,
+          "slot": "One",
+          "video_frame": 1854,
+          "wall_time_seconds": 52.004788354
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 374,
+          "simulation_frame": 1854,
+          "slot": "One",
+          "video_frame": 1854,
+          "wall_time_seconds": 52.004788354
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 374,
+          "simulation_frame": 1854,
+          "slot": "Two",
+          "video_frame": 1854,
+          "wall_time_seconds": 52.004788354
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 384,
+          "simulation_frame": 1864,
+          "slot": "One",
+          "video_frame": 1864,
+          "wall_time_seconds": 52.652163232
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 384,
+          "simulation_frame": 1864,
+          "slot": "One",
+          "video_frame": 1864,
+          "wall_time_seconds": 52.652163232
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 384,
+          "simulation_frame": 1864,
+          "slot": "Two",
+          "video_frame": 1864,
+          "wall_time_seconds": 52.652163232
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 394,
+          "simulation_frame": 1874,
+          "slot": "One",
+          "video_frame": 1874,
+          "wall_time_seconds": 53.324235423
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 394,
+          "simulation_frame": 1874,
+          "slot": "One",
+          "video_frame": 1874,
+          "wall_time_seconds": 53.324235423
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 394,
+          "simulation_frame": 1874,
+          "slot": "Two",
+          "video_frame": 1874,
+          "wall_time_seconds": 53.324235423
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 404,
+          "simulation_frame": 1884,
+          "slot": "One",
+          "video_frame": 1884,
+          "wall_time_seconds": 54.112370592
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 404,
+          "simulation_frame": 1884,
+          "slot": "One",
+          "video_frame": 1884,
+          "wall_time_seconds": 54.112370592
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 404,
+          "simulation_frame": 1884,
+          "slot": "Two",
+          "video_frame": 1884,
+          "wall_time_seconds": 54.112370592
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 414,
+          "simulation_frame": 1894,
+          "slot": "One",
+          "video_frame": 1894,
+          "wall_time_seconds": 55.044923381
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 414,
+          "simulation_frame": 1894,
+          "slot": "One",
+          "video_frame": 1894,
+          "wall_time_seconds": 55.044923381
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 414,
+          "simulation_frame": 1894,
+          "slot": "Two",
+          "video_frame": 1894,
+          "wall_time_seconds": 55.044923381
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 424,
+          "simulation_frame": 1904,
+          "slot": "One",
+          "video_frame": 1904,
+          "wall_time_seconds": 55.835020598
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 424,
+          "simulation_frame": 1904,
+          "slot": "One",
+          "video_frame": 1904,
+          "wall_time_seconds": 55.835020598
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 424,
+          "simulation_frame": 1904,
+          "slot": "Two",
+          "video_frame": 1904,
+          "wall_time_seconds": 55.835020598
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperError",
+          "cue_key": "super.error",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 450,
+          "simulation_frame": 1930,
+          "slot": "One",
+          "video_frame": 1930,
+          "wall_time_seconds": 57.39299422
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperError",
+          "cue_key": "super.error",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 498,
+          "simulation_frame": 1978,
+          "slot": "One",
+          "video_frame": 1978,
+          "wall_time_seconds": 58.658704922
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBoot",
+          "cue_key": "super.boot",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 538,
+          "simulation_frame": 2018,
+          "slot": "One",
+          "video_frame": 2018,
+          "wall_time_seconds": 59.597029295
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "cue_key": "super.barrage_hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 566,
+          "simulation_frame": 2046,
+          "slot": "One",
+          "video_frame": 2046,
+          "wall_time_seconds": 60.146172348
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": 566,
+          "simulation_frame": 2046,
+          "slot": "One",
+          "video_frame": 2046,
+          "wall_time_seconds": 60.146172348
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 566,
+          "simulation_frame": 2046,
+          "slot": "Two",
+          "video_frame": 2046,
+          "wall_time_seconds": 60.146172348
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperEnd",
+          "cue_key": "super.end",
+          "environment": null,
+          "move_id": "cpp_template_singularity",
+          "sequence_tick": null,
+          "simulation_frame": 2112,
+          "slot": "One",
+          "video_frame": 2112,
+          "wall_time_seconds": 62.607270225
+        }
+      ],
+      "character": "cpp",
+      "damage": 36,
+      "duration_frames": 632,
+      "final_effective_arena": "JavaStreet",
+      "guarded": false,
+      "move": "Undefined Behavior: Footgun",
+      "music_track": "combat-console-floor",
+      "reverse": false,
+      "screenshots": [
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            100
+          ],
+          "image": "cpp-right-hit-030-before.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 1450,
+          "target_x": 1056.0,
+          "video_frame": 1450,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            100
+          ],
+          "image": "cpp-right-hit-064-Freeze.png",
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "simulation_frame": 1484,
+          "target_x": 1056.0,
+          "video_frame": 1484,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            100
+          ],
+          "image": "cpp-right-hit-138-CppLaptop.png",
+          "phase": "CppLaptop",
+          "sequence_tick": 78,
+          "simulation_frame": 1558,
+          "target_x": 1056.0,
+          "video_frame": 1558,
+          "retained_image": "cpp-laptop.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            100
+          ],
+          "image": "cpp-right-hit-235-CppFootshot.png",
+          "phase": "CppFootshot",
+          "sequence_tick": 175,
+          "simulation_frame": 1655,
+          "target_x": 1056.0,
+          "video_frame": 1655,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            100
+          ],
+          "image": "cpp-right-hit-244-footshot.png",
+          "phase": "CppFootshot",
+          "sequence_tick": 184,
+          "simulation_frame": 1664,
+          "target_x": 1056.0,
+          "video_frame": 1664,
+          "retained_image": "cpp-footshot.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            100
+          ],
+          "image": "cpp-right-hit-286-CppHop.png",
+          "phase": "CppHop",
+          "sequence_tick": 226,
+          "simulation_frame": 1706,
+          "target_x": 1056.0,
+          "video_frame": 1706,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            100
+          ],
+          "image": "cpp-right-hit-325-CppRage.png",
+          "phase": "CppRage",
+          "sequence_tick": 265,
+          "simulation_frame": 1745,
+          "target_x": 1056.0,
+          "video_frame": 1745,
+          "retained_image": null
+        },
+        {
+          "actor_x": 533.3333129882812,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            100
+          ],
+          "image": "cpp-right-hit-372-CppCharge.png",
+          "phase": "CppCharge",
+          "sequence_tick": 312,
+          "simulation_frame": 1792,
+          "target_x": 1056.0,
+          "video_frame": 1792,
+          "retained_image": null
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            97
+          ],
+          "image": "cpp-right-hit-404-contact-344.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 344,
+          "simulation_frame": 1824,
+          "target_x": 1056.0,
+          "video_frame": 1824,
+          "retained_image": null
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            94
+          ],
+          "image": "cpp-right-hit-414-contact-354.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 354,
+          "simulation_frame": 1834,
+          "target_x": 1056.0,
+          "video_frame": 1834,
+          "retained_image": null
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            91
+          ],
+          "image": "cpp-right-hit-424-contact-364.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 364,
+          "simulation_frame": 1844,
+          "target_x": 1056.0,
+          "video_frame": 1844,
+          "retained_image": null
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            88
+          ],
+          "image": "cpp-right-hit-434-contact-374.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 374,
+          "simulation_frame": 1854,
+          "target_x": 1056.0,
+          "video_frame": 1854,
+          "retained_image": null
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            85
+          ],
+          "image": "cpp-right-hit-444-contact-384.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 384,
+          "simulation_frame": 1864,
+          "target_x": 1056.0,
+          "video_frame": 1864,
+          "retained_image": "cpp-barrage.png"
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            82
+          ],
+          "image": "cpp-right-hit-454-contact-394.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 394,
+          "simulation_frame": 1874,
+          "target_x": 1056.0,
+          "video_frame": 1874,
+          "retained_image": null
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            79
+          ],
+          "image": "cpp-right-hit-464-contact-404.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 404,
+          "simulation_frame": 1884,
+          "target_x": 1056.0,
+          "video_frame": 1884,
+          "retained_image": null
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            76
+          ],
+          "image": "cpp-right-hit-474-contact-414.png",
+          "phase": "CppBarrage",
+          "sequence_tick": 414,
+          "simulation_frame": 1894,
+          "target_x": 1056.0,
+          "video_frame": 1894,
+          "retained_image": null
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            70
+          ],
+          "image": "cpp-right-hit-484-contact-424.png",
+          "phase": "CppFinisher",
+          "sequence_tick": 424,
+          "simulation_frame": 1904,
+          "target_x": 1056.0,
+          "video_frame": 1904,
+          "retained_image": null
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            70
+          ],
+          "image": "cpp-right-hit-497-CppFinisher.png",
+          "phase": "CppFinisher",
+          "sequence_tick": 437,
+          "simulation_frame": 1917,
+          "target_x": 1081.235107421875,
+          "video_frame": 1917,
+          "retained_image": null
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            70
+          ],
+          "image": "cpp-right-hit-534-CTerminalStorm.png",
+          "phase": "CTerminalStorm",
+          "sequence_tick": 474,
+          "simulation_frame": 1954,
+          "target_x": 1102.587890625,
+          "video_frame": 1954,
+          "retained_image": "cpp-terminals.png"
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            70
+          ],
+          "image": "cpp-right-hit-578-CBlueScreen.png",
+          "phase": "CBlueScreen",
+          "sequence_tick": 518,
+          "simulation_frame": 1998,
+          "target_x": 1102.587890625,
+          "video_frame": 1998,
+          "retained_image": null
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            70
+          ],
+          "image": "cpp-right-hit-612-CBios.png",
+          "phase": "CBios",
+          "sequence_tick": 552,
+          "simulation_frame": 2032,
+          "target_x": 1102.587890625,
+          "video_frame": 2032,
+          "retained_image": "cpp-bios.png"
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            64
+          ],
+          "image": "cpp-right-hit-626-contact-566.png",
+          "phase": "CReboot",
+          "sequence_tick": 566,
+          "simulation_frame": 2046,
+          "target_x": 1102.587890625,
+          "video_frame": 2046,
+          "retained_image": null
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            64
+          ],
+          "image": "cpp-right-hit-641-CReboot.png",
+          "phase": "CReboot",
+          "sequence_tick": 581,
+          "simulation_frame": 2061,
+          "target_x": 1103.44482421875,
+          "video_frame": 2061,
+          "retained_image": "cpp-reboot.png"
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            64
+          ],
+          "image": "cpp-right-hit-674-Restore.png",
+          "phase": "Restore",
+          "sequence_tick": 614,
+          "simulation_frame": 2094,
+          "target_x": 1103.958984375,
+          "video_frame": 2094,
+          "retained_image": null
+        },
+        {
+          "actor_x": 944.0,
+          "effective_arena": "JavaStreet",
+          "health": [
+            98,
+            64
+          ],
+          "image": "cpp-right-hit-732-restored.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 2152,
+          "target_x": 1103.958984375,
+          "video_frame": 2152,
+          "retained_image": null
+        }
+      ],
+      "simulation_frames": [
+        1420,
+        2201
+      ],
+      "video_frames": [
+        1420,
+        2201
+      ],
+      "wall_time_seconds": 27.274420883
+    },
+    {
+      "arena": "JavaStreet",
+      "arena_transitions": [],
+      "audio_events": [
+        {
+          "character": "python",
+          "cue": "SuperStart",
+          "cue_key": "super.start",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 0,
+          "simulation_frame": 2262,
+          "slot": "One",
+          "video_frame": 2262,
+          "wall_time_seconds": 65.900194463
+        },
+        {
+          "character": "python",
+          "cue": "SuperMutation",
+          "cue_key": "super.mutation",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 62,
+          "simulation_frame": 2324,
+          "slot": "One",
+          "video_frame": 2324,
+          "wall_time_seconds": 67.743224979
+        },
+        {
+          "character": "python",
+          "cue": "SuperMutation",
+          "cue_key": "super.mutation",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 158,
+          "simulation_frame": 2420,
+          "slot": "One",
+          "video_frame": 2420,
+          "wall_time_seconds": 69.796975443
+        },
+        {
+          "character": "python",
+          "cue": "SuperLunge",
+          "cue_key": "super.lunge",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 270,
+          "simulation_frame": 2532,
+          "slot": "One",
+          "video_frame": 2532,
+          "wall_time_seconds": 72.599322034
+        },
+        {
+          "character": "python",
+          "cue": "SuperSwallow",
+          "cue_key": "super.swallow",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 304,
+          "simulation_frame": 2566,
+          "slot": "One",
+          "video_frame": 2566,
+          "wall_time_seconds": 73.56079317
+        },
+        {
+          "character": "python",
+          "cue": "CombatHit",
+          "cue_key": "combat.hit",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 304,
+          "simulation_frame": 2566,
+          "slot": "One",
+          "video_frame": 2566,
+          "wall_time_seconds": 73.56079317
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "cue_key": "fighter.hurt",
+          "environment": null,
+          "move_id": null,
+          "sequence_tick": 304,
+          "simulation_frame": 2566,
+          "slot": "Two",
+          "video_frame": 2566,
+          "wall_time_seconds": 73.56079317
+        },
+        {
+          "character": "python",
+          "cue": "SuperRevert",
+          "cue_key": "super.revert",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 344,
+          "simulation_frame": 2606,
+          "slot": "One",
+          "video_frame": 2606,
+          "wall_time_seconds": 75.011958491
+        },
+        {
+          "character": "python",
+          "cue": "SuperCelebrate",
+          "cue_key": "super.celebrate",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 400,
+          "simulation_frame": 2662,
+          "slot": "One",
+          "video_frame": 2662,
+          "wall_time_seconds": 76.778993633
+        },
+        {
+          "character": "python",
+          "cue": "SuperPeace",
+          "cue_key": "super.peace",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": 444,
+          "simulation_frame": 2706,
+          "slot": "One",
+          "video_frame": 2706,
+          "wall_time_seconds": 77.885292008
+        },
+        {
+          "character": "python",
+          "cue": "SuperEnd",
+          "cue_key": "super.end",
+          "environment": null,
+          "move_id": "python_event_horizon",
+          "sequence_tick": null,
+          "simulation_frame": 2790,
+          "slot": "One",
+          "video_frame": 2790,
+          "wall_time_seconds": 80.582637748
+        }
+      ],
+      "character": "python",
+      "damage": 32,
+      "duration_frames": 528,
+      "final_effective_arena": "JavaStreet",
+      "guarded": false,
+      "move": "import devour",
+      "music_track": "combat-console-floor",
+      "reverse": false,
+      "screenshots": [
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            100
+          ],
+          "image": "python-right-hit-030-before.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 2232,
+          "target_x": 1056.0,
+          "video_frame": 2232,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            100
+          ],
+          "image": "python-right-hit-064-Freeze.png",
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "simulation_frame": 2266,
+          "target_x": 1056.0,
+          "video_frame": 2266,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            100
+          ],
+          "image": "python-right-hit-095-PythonPrepare.png",
+          "phase": "PythonPrepare",
+          "sequence_tick": 35,
+          "simulation_frame": 2297,
+          "target_x": 1056.0,
+          "video_frame": 2297,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            100
+          ],
+          "image": "python-right-hit-170-PythonMorph.png",
+          "phase": "PythonMorph",
+          "sequence_tick": 110,
+          "simulation_frame": 2372,
+          "target_x": 1056.0,
+          "video_frame": 2372,
+          "retained_image": "python-morph.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            100
+          ],
+          "image": "python-right-hit-254-PythonGrow.png",
+          "phase": "PythonGrow",
+          "sequence_tick": 194,
+          "simulation_frame": 2456,
+          "target_x": 1056.0,
+          "video_frame": 2456,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            100
+          ],
+          "image": "python-right-hit-310-PythonMouth.png",
+          "phase": "PythonMouth",
+          "sequence_tick": 250,
+          "simulation_frame": 2512,
+          "target_x": 1056.0,
+          "video_frame": 2512,
+          "retained_image": "python-mouth.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            100
+          ],
+          "image": "python-right-hit-347-PythonLunge.png",
+          "phase": "PythonLunge",
+          "sequence_tick": 287,
+          "simulation_frame": 2549,
+          "target_x": 1056.0,
+          "video_frame": 2549,
+          "retained_image": "python-devour.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            68
+          ],
+          "image": "python-right-hit-364-contact-304.png",
+          "phase": "PythonSwallow",
+          "sequence_tick": 304,
+          "simulation_frame": 2566,
+          "target_x": 1056.0,
+          "video_frame": 2566,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            68
+          ],
+          "image": "python-right-hit-384-PythonSwallow.png",
+          "phase": "PythonSwallow",
+          "sequence_tick": 324,
+          "simulation_frame": 2586,
+          "target_x": 1094.8232421875,
+          "video_frame": 2586,
+          "retained_image": "python-swallowed.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            68
+          ],
+          "image": "python-right-hit-432-PythonRevert.png",
+          "phase": "PythonRevert",
+          "sequence_tick": 372,
+          "simulation_frame": 2634,
+          "target_x": 1102.587890625,
+          "video_frame": 2634,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            68
+          ],
+          "image": "python-right-hit-448-target-return.png",
+          "phase": "PythonRevert",
+          "sequence_tick": 388,
+          "simulation_frame": 2650,
+          "target_x": 1102.587890625,
+          "video_frame": 2650,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            68
+          ],
+          "image": "python-right-hit-480-celebration-hop.png",
+          "phase": "PythonCelebrate",
+          "sequence_tick": 420,
+          "simulation_frame": 2682,
+          "target_x": 1103.958984375,
+          "video_frame": 2682,
+          "retained_image": "python-hop.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            68
+          ],
+          "image": "python-right-hit-504-PythonCelebrate.png",
+          "phase": "PythonCelebrate",
+          "sequence_tick": 444,
+          "simulation_frame": 2706,
+          "target_x": 1103.958984375,
+          "video_frame": 2706,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            68
+          ],
+          "image": "python-right-hit-520-peace.png",
+          "phase": "PythonCelebrate",
+          "sequence_tick": 460,
+          "simulation_frame": 2722,
+          "target_x": 1103.958984375,
+          "video_frame": 2722,
+          "retained_image": "python-peace.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            68
+          ],
+          "image": "python-right-hit-568-Restore.png",
+          "phase": "Restore",
+          "sequence_tick": 508,
+          "simulation_frame": 2770,
+          "target_x": 1103.958984375,
+          "video_frame": 2770,
+          "retained_image": null
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "effective_arena": "JavaStreet",
+          "health": [
+            96,
+            68
+          ],
+          "image": "python-right-hit-628-restored.png",
+          "phase": null,
+          "sequence_tick": null,
+          "simulation_frame": 2830,
+          "target_x": 1103.958984375,
+          "video_frame": 2830,
+          "retained_image": null
+        }
+      ],
+      "simulation_frames": [
+        2202,
+        2879
+      ],
+      "video_frames": [
+        2202,
+        2879
+      ],
+      "wall_time_seconds": 18.145524453
+    }
+  ],
+  "simulation": "World fixed-step; real contacts, physical C++ rush, snapshots at authored phase clocks",
+  "simulation_frame_count": 2880,
+  "snapshots": true,
+  "video": "assets/showcase/reactions-transformations-2026-09-09.mp4",
+  "video_duration_seconds": 48.0,
+  "video_frame_count": 2880
+}

@@ -1,0 +1,11 @@
+{
+  "review-plan.json": "2f597b513786977a412e7b2a40b8705e7b574328e5d3356f2f5235d377b06572",
+  "production.json": "f0784b6db6ad1bdc34adaa3a52bc74280922f3a0cea0d1bf1003016a3d838909",
+  "review.md": "09103f7a9c3aa35999d410147f7bb464f5b65d4f104dc27df574711118389201",
+  "walk/action.json": "d3d15f089f9f6ee8907c9298fdf83ce3bb4a14b4fcfec1eae8f6df3fd21c7820",
+  "air_kick/action.json": "421485ccae84298a6b4234e2d488285bb0d41820efa4301d3e7fa7e168798eb2",
+  "crouch_block/action.json": "3b43945c2526b211f92519ebe8219662cbc9effce5fbb72e3065426a0b143c6e",
+  "crouch/action.json": "ed059b90f938e296a1c4a98972e5574b0270b5ca2c4a363ea8ea5536651899a9",
+  "cpp-fighter.sprite.json": "d7e731fa6307607760d7b9a455d2c451e2089b5b524004bcbe42617ea0be0255",
+  "cpp-fighter.provenance.json": "b40fd88c47669649cbe35dbe5eeed0b0cb908fba9ab2995c1c41d9498793cdad"
+}

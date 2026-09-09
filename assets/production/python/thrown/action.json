@@ -1,0 +1,86 @@
+{
+  "action": "thrown",
+  "source": "thrown/source-extraordinary-v1.png",
+  "sheet": "thrown/keyed-extraordinary-v1-padded-edge-clean.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "runtime_verified_spectacle",
+  "source_body_height_reference_px": 570,
+  "suggested_scale_to_runtime": 0.47017543859649125,
+  "frames": [
+    {
+      "name": "thrown_00",
+      "source_rect": {
+        "x": 30,
+        "y": 0,
+        "w": 450,
+        "h": 980
+      },
+      "pivot": {
+        "x": 137,
+        "y": 660
+      },
+      "duration_ms": 200,
+      "phase": "capture"
+    },
+    {
+      "name": "thrown_01",
+      "source_rect": {
+        "x": 565,
+        "y": 0,
+        "w": 340,
+        "h": 980
+      },
+      "pivot": {
+        "x": 155,
+        "y": 801
+      },
+      "duration_ms": 180,
+      "phase": "inverted"
+    },
+    {
+      "name": "thrown_02",
+      "source_rect": {
+        "x": 985,
+        "y": 0,
+        "w": 465,
+        "h": 980
+      },
+      "pivot": {
+        "x": 210,
+        "y": 805
+      },
+      "duration_ms": 200,
+      "phase": "tumble"
+    },
+    {
+      "name": "thrown_03",
+      "source_rect": {
+        "x": 1510,
+        "y": 0,
+        "w": 473,
+        "h": 980
+      },
+      "pivot": {
+        "x": 190,
+        "y": 854
+      },
+      "duration_ms": 300,
+      "phase": "descent"
+    }
+  ],
+  "review_notes": "Dedicated throw-victim captured/inverted/somersault/descent poses, with full skirt coverage and serpent accessory. First key200ms held in capture, then clip clock enters inverted key at200ms. Virtual waist anchors exclude source sheet placement from the real ballistic motion; bottom padding only adds transparency. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available.",
+  "runtime_review": {
+    "report": "../../candidates/python/review/extraordinary/runtime-review.json",
+    "actual_clip_present": true,
+    "both_facings_verified": true,
+    "all_selected_keys_observed": true,
+    "reviewed_frames": [
+      "thrown_00",
+      "thrown_01",
+      "thrown_02",
+      "thrown_03"
+    ],
+    "review_scope": "Integrated art and real contact coherence for the extraordinary signatures / throws goal."
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "sheet": "air_kick/keyed.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "air_kick_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 704,
+        "h": 768
+      },
+      "pivot": {
+        "x": 370,
+        "y": 715
+      },
+      "duration_ms": 116,
+      "phase": "startup"
+    },
+    {
+      "name": "air_kick_01",
+      "source_rect": {
+        "x": 704,
+        "y": 0,
+        "w": 680,
+        "h": 768
+      },
+      "pivot": {
+        "x": 291,
+        "y": 758
+      },
+      "duration_ms": 167,
+      "phase": "active"
+    },
+    {
+      "name": "air_kick_02",
+      "source_rect": {
+        "x": 1384,
+        "y": 0,
+        "w": 664,
+        "h": 768
+      },
+      "pivot": {
+        "x": 266,
+        "y": 715
+      },
+      "duration_ms": 150,
+      "phase": "recovery"
+    }
+  ]
+}

@@ -5,6 +5,7 @@
 
 pub mod combat_lab;
 pub mod combat_lab_analysis;
+pub mod move_showcase;
 pub mod preferences;
 pub mod sprite_viewer;
 
@@ -14,5 +15,6 @@ pub enum AppScene {
     Preferences,
     Fight,
     CombatLab,
+    MoveShowcase,
     SpriteViewer,
 }

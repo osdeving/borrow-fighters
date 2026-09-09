@@ -1,0 +1,119 @@
+{
+  "generator": "built-in imagegen",
+  "date": "2026-09-08",
+  "source_files": [
+    {
+      "path": "signature_special/action.json",
+      "sha256": "0883eed17df66eaa1883e2b5533a529e7e0f2e27bb8341d2327f882ee2235932"
+    },
+    {
+      "path": "signature_special/prompt-spectacle-v1.txt",
+      "sha256": "35b6d610c08ae8ec85daa073235c3dd851184caa655a8130ec4ce0495645105b"
+    },
+    {
+      "path": "signature_special/prompt-v1.txt",
+      "sha256": "4a8f6703acf7f20c8a40e2c6baff33dd52a8b642307e475fec916cd6acc71fcf"
+    },
+    {
+      "path": "signature_special/prompt-v2.txt",
+      "sha256": "b84f9d4fdf62d67263c201726d4288792e62130b4cb211ac4b545f1184ce9d9d"
+    },
+    {
+      "path": "signature_special/source-spectacle-v1.png",
+      "sha256": "6529683d2e7b68aa1c4b3d9468acf606811b0166a2babceb744415c8020cee27"
+    },
+    {
+      "path": "signature_special/source-v1.png",
+      "sha256": "ae2fd0beaff0ca5976614e65612808b312b012e2eb09721343ecdf9b1ead2766"
+    },
+    {
+      "path": "signature_special/source-v2.png",
+      "sha256": "edaeb20d69ef31e5177eb8353c6209132e6003bc79b1ca2444ea3e7424ac5f1e"
+    },
+    {
+      "path": "throw/action-before-finalization.json",
+      "sha256": "25f9c7ee9d136be643976fc1db3c50f95f5630537078e658d266b3d53863a476"
+    },
+    {
+      "path": "throw/action.json",
+      "sha256": "d6be2ea8116a1c55480bc4e4b17d058c3ab134ac629ce20976076a82acc8e32f"
+    },
+    {
+      "path": "throw/mapping-spectacle-v3.json",
+      "sha256": "18c10f00f2ff0de79e4c973b13cf23e42cf25705c9f087c6da500ece42cda11b"
+    },
+    {
+      "path": "throw/preservation-spectacle-v3.json",
+      "sha256": "3f00c5c68503fb8e6bb07b00bf997daa9a3e9e16c68643dd6ff0ff4ab9bbbfd6"
+    },
+    {
+      "path": "throw/prompt-spectacle-v1.txt",
+      "sha256": "944b3aae4647bd1cee958680126596809ab7d152acf0c593eda616c93f6543e9"
+    },
+    {
+      "path": "throw/prompt-spectacle-v2.txt",
+      "sha256": "34fe09d88d6b3c1347aeee1a4c3d3ad78c81705d1c401d9fe5c1613d7a2ae1be"
+    },
+    {
+      "path": "throw/prompt-spectacle-v3.txt",
+      "sha256": "d8e9c918290f881fdae21ec15311b8df065af2c7263dfd79e0093c58a4687712"
+    },
+    {
+      "path": "throw/prompt-v1.txt",
+      "sha256": "9e0f12d68d5b1a6fe908426d2dfcd5931f29c27a37cbe96aecce98819280475e"
+    },
+    {
+      "path": "throw/prompt-v2.txt",
+      "sha256": "582e1d3771c2daa9de7dc2f44f2b172d27fc69a0d1e0fdc07fa2dfc3dc6dbd3e"
+    },
+    {
+      "path": "throw/source-spectacle-v1.png",
+      "sha256": "4e2a7299c10658071935f85941388b4d6cfec4edfe5f2b4f2df77ee611722b20"
+    },
+    {
+      "path": "throw/source-spectacle-v2.png",
+      "sha256": "8e2daa45de85bce7630f434e5dc2a043d39a0755938e7c0f5583237fc35dac4b"
+    },
+    {
+      "path": "throw/source-spectacle-v3.png",
+      "sha256": "f01dd065c488d2956dd657f226bdd26705cf6e928785685d9e96072400c8957c"
+    },
+    {
+      "path": "throw/source-v1.png",
+      "sha256": "ca2abeaf03286d1a15eb3807c4e69d150bd9b055d0db9a0977571a36488a18de"
+    },
+    {
+      "path": "throw/source-v2.png",
+      "sha256": "6fe3186952d01037e88edb129a0e2ef6330b03b9ed517fdde4fa942d7b73ce47"
+    },
+    {
+      "path": "reactions/prompt-spectacle-v1.txt",
+      "sha256": "60fe55c73ae5a80f2163d5d6726e0de016b043b7c7ed3e4d1842026f78b10e27"
+    },
+    {
+      "path": "reactions/source-spectacle-v1.png",
+      "sha256": "ac7fe77695a518d59683a5357be4f187ae71358b10d6f4664a60966b060b604b"
+    },
+    {
+      "path": "signature_fx/action.json",
+      "sha256": "713a80f9efd0cd14a7a1022c0a2dafdc0a4c556bd197ee33cc5e380f852c63a9"
+    },
+    {
+      "path": "signature_fx/prompt-matte-v2.txt",
+      "sha256": "6906a472ba38785e8eec4f44264fec18172421f0110a7316d33e65065d14ef1d"
+    },
+    {
+      "path": "signature_fx/prompt-spectacle-v1.txt",
+      "sha256": "3e207ec028f0035a078ae211a999931bb15caa4e99634258c6467ce072fd4fc7"
+    },
+    {
+      "path": "signature_fx/source-matte-v2.png",
+      "sha256": "8172a7649909dc1c6e0dfd8538a2823b80cafc80344b509034f9f1ae19dfb194"
+    },
+    {
+      "path": "signature_fx/source-spectacle-v1.png",
+      "sha256": "083273113a2f77640fb422566577d68d7dfeae30543c61cd1e2d534f535311e7"
+    }
+  ],
+  "note": "Original outputs and revision prompts preserved. Matte extraction and explicit source crops follow user authorization in production README. See action metadata and lift-v3 mapping for selected sources."
+}

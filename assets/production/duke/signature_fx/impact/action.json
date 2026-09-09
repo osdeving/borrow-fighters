@@ -1,0 +1,67 @@
+{
+  "sheet": "keyed-spectacle-v2.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "duke_signature_impact_02",
+      "source_rect": {
+        "x": 960,
+        "y": 0,
+        "w": 576,
+        "h": 512
+      },
+      "pivot": {
+        "x": 300,
+        "y": 286
+      },
+      "duration_ms": 70,
+      "phase": "impact"
+    },
+    {
+      "name": "duke_signature_impact_03",
+      "source_rect": {
+        "x": 0,
+        "y": 512,
+        "w": 512,
+        "h": 512
+      },
+      "pivot": {
+        "x": 259,
+        "y": 218
+      },
+      "duration_ms": 100,
+      "phase": "impact"
+    },
+    {
+      "name": "duke_signature_impact_04",
+      "source_rect": {
+        "x": 512,
+        "y": 512,
+        "w": 512,
+        "h": 512
+      },
+      "pivot": {
+        "x": 240,
+        "y": 224
+      },
+      "duration_ms": 120,
+      "phase": "impact"
+    },
+    {
+      "name": "duke_signature_impact_05",
+      "source_rect": {
+        "x": 1024,
+        "y": 512,
+        "w": 512,
+        "h": 512
+      },
+      "pivot": {
+        "x": 236,
+        "y": 228
+      },
+      "duration_ms": 150,
+      "phase": "impact"
+    }
+  ]
+}

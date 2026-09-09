@@ -1,0 +1,1366 @@
+{
+  "schema": "borrow-fighters.production.v1",
+  "character": "c",
+  "scale": 1.0,
+  "provenance": {
+    "status": "candidate",
+    "generator": "built-in imagegen",
+    "identity_reference": "reference/master-existing.png",
+    "polished_reference": "idle/source-v1.png",
+    "combat": "Visual-only; baseline combat_manifest unchanged.",
+    "review": "finalization-review.md"
+  },
+  "actions": {
+    "idle": {
+      "sheet": "idle/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 217,
+            "h": 326
+          },
+          "pivot": {
+            "x": 112,
+            "y": 296
+          },
+          "duration_ms": 240,
+          "phase": "guard"
+        },
+        {
+          "name": "idle_1",
+          "source_rect": {
+            "x": 217,
+            "y": 0,
+            "w": 217,
+            "h": 326
+          },
+          "pivot": {
+            "x": 114,
+            "y": 296
+          },
+          "duration_ms": 240,
+          "phase": "inhale"
+        },
+        {
+          "name": "idle_2",
+          "source_rect": {
+            "x": 434,
+            "y": 0,
+            "w": 217,
+            "h": 326
+          },
+          "pivot": {
+            "x": 116,
+            "y": 296
+          },
+          "duration_ms": 240,
+          "phase": "exhale"
+        }
+      ],
+      "provenance": {
+        "source_action": "idle/action.json",
+        "source_sheet": "idle/keyed-v2.png",
+        "scale_to_runtime": 0.4240506329113924,
+        "review": "v2 selected cells0,1,3: neutral, hand-to-chin guard adjustment, settle. Excluded source cell2 because its deep knee bob exaggerated idle. Same identity and scale as fixed source-v1 used by other generations. Approved for candidate review export only."
+      }
+    },
+    "walk": {
+      "sheet": "walk/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 218,
+            "h": 327
+          },
+          "pivot": {
+            "x": 124,
+            "y": 298
+          },
+          "duration_ms": 100,
+          "phase": "near_contact"
+        },
+        {
+          "name": "walk_1",
+          "source_rect": {
+            "x": 218,
+            "y": 0,
+            "w": 218,
+            "h": 327
+          },
+          "pivot": {
+            "x": 117,
+            "y": 296
+          },
+          "duration_ms": 100,
+          "phase": "far_toe_off"
+        },
+        {
+          "name": "walk_2",
+          "source_rect": {
+            "x": 436,
+            "y": 0,
+            "w": 218,
+            "h": 327
+          },
+          "pivot": {
+            "x": 108,
+            "y": 296
+          },
+          "duration_ms": 100,
+          "phase": "far_contact"
+        },
+        {
+          "name": "walk_3",
+          "source_rect": {
+            "x": 654,
+            "y": 0,
+            "w": 218,
+            "h": 327
+          },
+          "pivot": {
+            "x": 85,
+            "y": 297
+          },
+          "duration_ms": 100,
+          "phase": "near_passing"
+        }
+      ],
+      "provenance": {
+        "source_action": "walk/action.json",
+        "source_sheet": "walk/keyed-v3.png",
+        "scale_to_runtime": 0.4253968253968254,
+        "review": "v3: near contact, far toe-off, opposite contact and near passing, 400ms unchanged. Complete World reviewed both facings and idle return; root accepted refinement. See walk/review-v3.md and finalization-review.md."
+      }
+    },
+    "jump": {
+      "sheet": "jump/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "jump_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 285,
+            "h": 327
+          },
+          "pivot": {
+            "x": 155,
+            "y": 296
+          },
+          "duration_ms": 60,
+          "phase": "takeoff"
+        },
+        {
+          "name": "jump_1",
+          "source_rect": {
+            "x": 311,
+            "y": 0,
+            "w": 311,
+            "h": 327
+          },
+          "pivot": {
+            "x": 149,
+            "y": 256
+          },
+          "duration_ms": 340,
+          "phase": "rise_apex"
+        },
+        {
+          "name": "jump_2",
+          "source_rect": {
+            "x": 622,
+            "y": 0,
+            "w": 276,
+            "h": 327
+          },
+          "pivot": {
+            "x": 115,
+            "y": 269
+          },
+          "duration_ms": 400,
+          "phase": "fall"
+        }
+      ],
+      "provenance": {
+        "source_action": "jump/action.json",
+        "source_sheet": "jump/keyed-v1.png",
+        "scale_to_runtime": 0.4253968253968254,
+        "review": "World review found source waist translated y370/277/308. Virtual pivots695/602/633 align pelvis/head across poses, removing a second embedded jump arc. Same three poses, scale and60/340/400ms; only World provides physical trajectory. Fall retains slightly bent knees before grounded idle."
+      }
+    },
+    "crouch": {
+      "sheet": "crouch/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "crouch_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 436,
+            "h": 327
+          },
+          "pivot": {
+            "x": 277,
+            "y": 305
+          },
+          "duration_ms": 60,
+          "phase": "deep_duck_entry"
+        },
+        {
+          "name": "crouch_1",
+          "source_rect": {
+            "x": 436,
+            "y": 0,
+            "w": 436,
+            "h": 327
+          },
+          "pivot": {
+            "x": 136,
+            "y": 305
+          },
+          "duration_ms": 200,
+          "phase": "deep_duck_hold"
+        }
+      ],
+      "provenance": {
+        "source_action": "crouch/action.json",
+        "source_sheet": "crouch/keyed-v2.png",
+        "scale_to_runtime": 0.4253968253968254,
+        "review": "v2 replaces upright squat with folded torso over tightly bent legs. Same source scale; hold height about140world px, close to128physical, rather than prior190–205. Entry is slightly higher for60ms. No physics changed."
+      }
+    },
+    "block": {
+      "sheet": "block/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "block_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 294,
+            "h": 332
+          },
+          "pivot": {
+            "x": 153,
+            "y": 301
+          },
+          "duration_ms": 80,
+          "phase": "guard_immediate"
+        },
+        {
+          "name": "block_1",
+          "source_rect": {
+            "x": 307,
+            "y": 0,
+            "w": 307,
+            "h": 332
+          },
+          "pivot": {
+            "x": 147,
+            "y": 301
+          },
+          "duration_ms": 80,
+          "phase": "compress"
+        },
+        {
+          "name": "block_2",
+          "source_rect": {
+            "x": 614,
+            "y": 0,
+            "w": 284,
+            "h": 332
+          },
+          "pivot": {
+            "x": 125,
+            "y": 301
+          },
+          "duration_ms": 120,
+          "phase": "hold"
+        }
+      ],
+      "provenance": {
+        "source_action": "block/action.json",
+        "source_sheet": "block/keyed-v1.png",
+        "scale_to_runtime": 0.432258064516129,
+        "review": "Generated source poses inspected; elderly identity, denim and continuous C book preserved. Approved for candidate preview export, not final art release."
+      }
+    },
+    "crouch_block": {
+      "sheet": "crouch_block/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "crouch_block_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 290,
+            "h": 327
+          },
+          "pivot": {
+            "x": 140,
+            "y": 259
+          },
+          "duration_ms": 70,
+          "phase": "low_guard_immediate"
+        },
+        {
+          "name": "crouch_block_1",
+          "source_rect": {
+            "x": 291,
+            "y": 0,
+            "w": 291,
+            "h": 327
+          },
+          "pivot": {
+            "x": 120,
+            "y": 259
+          },
+          "duration_ms": 80,
+          "phase": "compress"
+        },
+        {
+          "name": "crouch_block_2",
+          "source_rect": {
+            "x": 582,
+            "y": 0,
+            "w": 291,
+            "h": 327
+          },
+          "pivot": {
+            "x": 103,
+            "y": 259
+          },
+          "duration_ms": 120,
+          "phase": "hold"
+        }
+      ],
+      "provenance": {
+        "source_action": "crouch_block/action.json",
+        "source_sheet": "crouch_block/keyed-v3.png",
+        "scale_to_runtime": 0.4253968253968254,
+        "review": "v3 replaces tall low guard with a tightly folded torso/knees. Blue C book guards face immediately; brace and settle remain low. Same uniform source scale; about135–149world px versus former190–205, physical height128 unchanged. Three genuinely different source poses, same durations70/80/120ms."
+      }
+    },
+    "hit": {
+      "sheet": "hit/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hit_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 280,
+            "h": 317
+          },
+          "pivot": {
+            "x": 146,
+            "y": 293
+          },
+          "duration_ms": 80,
+          "phase": "impact_immediate"
+        },
+        {
+          "name": "hit_1",
+          "source_rect": {
+            "x": 293,
+            "y": 0,
+            "w": 293,
+            "h": 317
+          },
+          "pivot": {
+            "x": 132,
+            "y": 293
+          },
+          "duration_ms": 100,
+          "phase": "recoil"
+        },
+        {
+          "name": "hit_2",
+          "source_rect": {
+            "x": 586,
+            "y": 0,
+            "w": 271,
+            "h": 317
+          },
+          "pivot": {
+            "x": 132,
+            "y": 293
+          },
+          "duration_ms": 120,
+          "phase": "settle"
+        }
+      ],
+      "provenance": {
+        "source_action": "hit/action.json",
+        "source_sheet": "hit/keyed-v1.png",
+        "scale_to_runtime": 0.4123076923076923,
+        "review": "Generated source poses inspected; elderly identity, denim and continuous C book preserved. Approved for candidate preview export, not final art release."
+      }
+    },
+    "punch_light": {
+      "sheet": "punch_light/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "punch_light_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 290,
+            "h": 332
+          },
+          "pivot": {
+            "x": 160,
+            "y": 301
+          },
+          "duration_ms": 83,
+          "phase": "startup"
+        },
+        {
+          "name": "punch_light_1",
+          "source_rect": {
+            "x": 316,
+            "y": 0,
+            "w": 316,
+            "h": 332
+          },
+          "pivot": {
+            "x": 138,
+            "y": 301
+          },
+          "duration_ms": 100,
+          "phase": "active"
+        },
+        {
+          "name": "punch_light_2",
+          "source_rect": {
+            "x": 632,
+            "y": 0,
+            "w": 280,
+            "h": 332
+          },
+          "pivot": {
+            "x": 121,
+            "y": 301
+          },
+          "duration_ms": 117,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "punch_light/action.json",
+        "source_sheet": "punch_light/keyed-v1.png",
+        "scale_to_runtime": 0.432258064516129,
+        "review": "Generated source poses inspected; elderly identity, denim and continuous C book preserved. Approved for candidate preview export, not final art release."
+      }
+    },
+    "punch_heavy": {
+      "sheet": "punch_heavy/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "punch_heavy_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 283,
+            "h": 323
+          },
+          "pivot": {
+            "x": 161,
+            "y": 299
+          },
+          "duration_ms": 200,
+          "phase": "startup"
+        },
+        {
+          "name": "punch_heavy_1",
+          "source_rect": {
+            "x": 363,
+            "y": 0,
+            "w": 363,
+            "h": 323
+          },
+          "pivot": {
+            "x": 183,
+            "y": 298
+          },
+          "duration_ms": 150,
+          "phase": "active"
+        },
+        {
+          "name": "punch_heavy_2",
+          "source_rect": {
+            "x": 726,
+            "y": 0,
+            "w": 323,
+            "h": 323
+          },
+          "pivot": {
+            "x": 179,
+            "y": 281
+          },
+          "duration_ms": 140,
+          "phase": "recovery"
+        },
+        {
+          "name": "punch_heavy_3",
+          "source_rect": {
+            "x": 1089,
+            "y": 0,
+            "w": 323,
+            "h": 323
+          },
+          "pivot": {
+            "x": 167,
+            "y": 283
+          },
+          "duration_ms": 143,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "punch_heavy/action.json",
+        "source_sheet": "punch_heavy/keyed-v3.png",
+        "scale_to_runtime": 0.5153846153846153,
+        "review": "v3: longer two-hand book strike, retract and settle; timing200/150/283ms retained as200/150/140/143ms. Page contact center inside baseline active band; upper edge around11px above it. v4/v5 too low and v6 too high rejected. Native Lab and complete World reviewed, root accepted refinement."
+      }
+    },
+    "kick": {
+      "sheet": "kick/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "kick_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 277,
+            "h": 327
+          },
+          "pivot": {
+            "x": 128,
+            "y": 297
+          },
+          "duration_ms": 150,
+          "phase": "startup"
+        },
+        {
+          "name": "kick_1",
+          "source_rect": {
+            "x": 319,
+            "y": 0,
+            "w": 319,
+            "h": 327
+          },
+          "pivot": {
+            "x": 119,
+            "y": 297
+          },
+          "duration_ms": 133,
+          "phase": "active"
+        },
+        {
+          "name": "kick_2",
+          "source_rect": {
+            "x": 638,
+            "y": 0,
+            "w": 276,
+            "h": 327
+          },
+          "pivot": {
+            "x": 136,
+            "y": 297
+          },
+          "duration_ms": 217,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "kick/action.json",
+        "source_sheet": "kick/keyed-v1.png",
+        "scale_to_runtime": 0.4253968253968254,
+        "review": "Generated source poses inspected; elderly identity, denim and continuous C book preserved. Approved for candidate preview export, not final art release."
+      }
+    },
+    "sweep": {
+      "sheet": "sweep/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sweep_mvp_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 189,
+            "h": 225
+          },
+          "pivot": {
+            "x": 92,
+            "y": 191
+          },
+          "duration_ms": 200,
+          "phase": "startup"
+        },
+        {
+          "name": "sweep_mvp_01",
+          "source_rect": {
+            "x": 292,
+            "y": 0,
+            "w": 292,
+            "h": 225
+          },
+          "pivot": {
+            "x": 92,
+            "y": 195
+          },
+          "duration_ms": 150,
+          "phase": "active"
+        },
+        {
+          "name": "sweep_mvp_02",
+          "source_rect": {
+            "x": 584,
+            "y": 0,
+            "w": 176,
+            "h": 225
+          },
+          "pivot": {
+            "x": 74,
+            "y": 191
+          },
+          "duration_ms": 125,
+          "phase": "recovery"
+        },
+        {
+          "name": "sweep_mvp_03",
+          "source_rect": {
+            "x": 876,
+            "y": 0,
+            "w": 176,
+            "h": 225
+          },
+          "pivot": {
+            "x": 84,
+            "y": 191
+          },
+          "duration_ms": 125,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "sweep/action.json",
+        "source_sheet": "sweep/keyed-mvp-v1.png",
+        "scale_to_runtime": 0.45,
+        "review": "New genuine ankle sweep replaces elevated kick: active sneaker source center(1080,582) projects to (+168.75,-14.4), within new floor-42.67..floor band. Book held under rear arm, free palm supports low body, four keys extend/retract/recover. Uniform0.45 keeps head/book scale near existing low poses. Prior action and prepared pixels preserved in before-mvp snapshot."
+      }
+    },
+    "overhead": {
+      "sheet": "overhead/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "overhead_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 302,
+            "h": 346
+          },
+          "pivot": {
+            "x": 178,
+            "y": 319
+          },
+          "duration_ms": 216,
+          "phase": "startup"
+        },
+        {
+          "name": "overhead_1",
+          "source_rect": {
+            "x": 329,
+            "y": 0,
+            "w": 329,
+            "h": 346
+          },
+          "pivot": {
+            "x": 142,
+            "y": 319
+          },
+          "duration_ms": 134,
+          "phase": "active"
+        },
+        {
+          "name": "overhead_2",
+          "source_rect": {
+            "x": 658,
+            "y": 0,
+            "w": 292,
+            "h": 346
+          },
+          "pivot": {
+            "x": 101,
+            "y": 319
+          },
+          "duration_ms": 250,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "overhead/action.json",
+        "source_sheet": "overhead/keyed-v1.png",
+        "scale_to_runtime": 0.4504201680672269,
+        "review": "Generated source poses inspected; elderly identity, denim and continuous C book preserved. Approved for candidate preview export, not final art release."
+      }
+    },
+    "anti_air": {
+      "sheet": "anti_air/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "anti_air_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 235,
+            "h": 366
+          },
+          "pivot": {
+            "x": 118,
+            "y": 327
+          },
+          "duration_ms": 116,
+          "phase": "startup"
+        },
+        {
+          "name": "anti_air_1",
+          "source_rect": {
+            "x": 268,
+            "y": 0,
+            "w": 268,
+            "h": 366
+          },
+          "pivot": {
+            "x": 122,
+            "y": 327
+          },
+          "duration_ms": 134,
+          "phase": "active"
+        },
+        {
+          "name": "anti_air_2",
+          "source_rect": {
+            "x": 536,
+            "y": 0,
+            "w": 228,
+            "h": 366
+          },
+          "pivot": {
+            "x": 111,
+            "y": 327
+          },
+          "duration_ms": 250,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "anti_air/action.json",
+        "source_sheet": "anti_air/keyed-v1.png",
+        "scale_to_runtime": 0.4123076923076923,
+        "review": "Generated source poses inspected; elderly identity, denim and continuous C book preserved. Approved for candidate preview export, not final art release."
+      }
+    },
+    "air_punch": {
+      "sheet": "air_punch/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "air_punch_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 289,
+            "h": 327
+          },
+          "pivot": {
+            "x": 155,
+            "y": 296
+          },
+          "duration_ms": 83,
+          "phase": "startup"
+        },
+        {
+          "name": "air_punch_1",
+          "source_rect": {
+            "x": 311,
+            "y": 0,
+            "w": 311,
+            "h": 327
+          },
+          "pivot": {
+            "x": 136,
+            "y": 296
+          },
+          "duration_ms": 150,
+          "phase": "active"
+        },
+        {
+          "name": "air_punch_2",
+          "source_rect": {
+            "x": 622,
+            "y": 0,
+            "w": 271,
+            "h": 327
+          },
+          "pivot": {
+            "x": 111,
+            "y": 296
+          },
+          "duration_ms": 133,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "air_punch/action.json",
+        "source_sheet": "air_punch/keyed-v1.png",
+        "scale_to_runtime": 0.4253968253968254,
+        "review": "Generated source poses inspected; elderly identity, denim and continuous C book preserved. Approved for candidate preview export, not final art release."
+      }
+    },
+    "air_kick": {
+      "sheet": "air_kick/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "air_kick_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 289,
+            "h": 327
+          },
+          "pivot": {
+            "x": 155,
+            "y": 296
+          },
+          "duration_ms": 116,
+          "phase": "startup"
+        },
+        {
+          "name": "air_kick_1",
+          "source_rect": {
+            "x": 311,
+            "y": 0,
+            "w": 311,
+            "h": 327
+          },
+          "pivot": {
+            "x": 123,
+            "y": 296
+          },
+          "duration_ms": 167,
+          "phase": "active"
+        },
+        {
+          "name": "air_kick_2",
+          "source_rect": {
+            "x": 622,
+            "y": 0,
+            "w": 271,
+            "h": 327
+          },
+          "pivot": {
+            "x": 111,
+            "y": 296
+          },
+          "duration_ms": 150,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "air_kick/action.json",
+        "source_sheet": "air_kick/keyed-v1.png",
+        "scale_to_runtime": 0.4253968253968254,
+        "review": "Generated source poses inspected; elderly identity, denim and continuous C book preserved. Approved for candidate preview export, not final art release."
+      }
+    },
+    "throw": {
+      "sheet": "throw/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "throw_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 281,
+            "h": 327
+          },
+          "pivot": {
+            "x": 151,
+            "y": 297
+          },
+          "duration_ms": 116,
+          "phase": "startup"
+        },
+        {
+          "name": "throw_1",
+          "source_rect": {
+            "x": 311,
+            "y": 0,
+            "w": 311,
+            "h": 327
+          },
+          "pivot": {
+            "x": 145,
+            "y": 297
+          },
+          "duration_ms": 50,
+          "phase": "active"
+        },
+        {
+          "name": "throw_2",
+          "source_rect": {
+            "x": 622,
+            "y": 0,
+            "w": 280,
+            "h": 327
+          },
+          "pivot": {
+            "x": 119,
+            "y": 297
+          },
+          "duration_ms": 267,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "throw/action.json",
+        "source_sheet": "throw/keyed-v1.png",
+        "scale_to_runtime": 0.4253968253968254,
+        "review": "Generated source poses inspected; elderly identity, denim and continuous C book preserved. Approved for candidate preview export, not final art release."
+      }
+    },
+    "special": {
+      "sheet": "special/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "special_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 379,
+            "h": 329
+          },
+          "pivot": {
+            "x": 189,
+            "y": 299
+          },
+          "duration_ms": 100,
+          "phase": "emission_immediate"
+        },
+        {
+          "name": "special_1",
+          "source_rect": {
+            "x": 379,
+            "y": 0,
+            "w": 212,
+            "h": 329
+          },
+          "pivot": {
+            "x": 71,
+            "y": 299
+          },
+          "duration_ms": 100,
+          "phase": "followthrough"
+        },
+        {
+          "name": "special_2",
+          "source_rect": {
+            "x": 758,
+            "y": 0,
+            "w": 286,
+            "h": 329
+          },
+          "pivot": {
+            "x": 129,
+            "y": 299
+          },
+          "duration_ms": 133,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "special/action.json",
+        "source_sheet": "special/keyed-v4.png",
+        "scale_to_runtime": 0.4288,
+        "review": "v4 selected after v1 high contact and v2/v3 short reach. Page source790,369 maps by pivot440,697 and268/625 to world150.08,-140.65; baseline148.48,-140.7467. Projectile stays separate. Approved for candidate preview export, not final art release."
+      }
+    },
+    "spawn": {
+      "sheet": "spawn/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "spawn_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 220,
+            "h": 329
+          },
+          "pivot": {
+            "x": 116,
+            "y": 298
+          },
+          "duration_ms": 650,
+          "phase": "arrive"
+        },
+        {
+          "name": "spawn_1",
+          "source_rect": {
+            "x": 220,
+            "y": 0,
+            "w": 220,
+            "h": 329
+          },
+          "pivot": {
+            "x": 111,
+            "y": 299
+          },
+          "duration_ms": 850,
+          "phase": "show_book"
+        },
+        {
+          "name": "spawn_2",
+          "source_rect": {
+            "x": 440,
+            "y": 0,
+            "w": 220,
+            "h": 329
+          },
+          "pivot": {
+            "x": 105,
+            "y": 299
+          },
+          "duration_ms": 245,
+          "phase": "point"
+        },
+        {
+          "name": "spawn_3",
+          "source_rect": {
+            "x": 660,
+            "y": 0,
+            "w": 220,
+            "h": 329
+          },
+          "pivot": {
+            "x": 113,
+            "y": 299
+          },
+          "duration_ms": 800,
+          "phase": "guard"
+        }
+      ],
+      "provenance": {
+        "source_action": "spawn/action.json",
+        "source_sheet": "spawn/keyed-v1.png",
+        "scale_to_runtime": 0.4288,
+        "review": "Generated source poses inspected; elderly identity, denim and continuous C book preserved. Approved for candidate preview export, not final art release."
+      }
+    },
+    "victory": {
+      "sheet": "victory/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "victory_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 252,
+            "h": 366
+          },
+          "pivot": {
+            "x": 166,
+            "y": 323
+          },
+          "duration_ms": 160,
+          "phase": "raise_book"
+        },
+        {
+          "name": "victory_1",
+          "source_rect": {
+            "x": 252,
+            "y": 0,
+            "w": 239,
+            "h": 366
+          },
+          "pivot": {
+            "x": 132,
+            "y": 323
+          },
+          "duration_ms": 250,
+          "phase": "point"
+        },
+        {
+          "name": "victory_2",
+          "source_rect": {
+            "x": 504,
+            "y": 0,
+            "w": 241,
+            "h": 366
+          },
+          "pivot": {
+            "x": 118,
+            "y": 323
+          },
+          "duration_ms": 500,
+          "phase": "hold"
+        }
+      ],
+      "provenance": {
+        "source_action": "victory/action.json",
+        "source_sheet": "victory/keyed-v1.png",
+        "scale_to_runtime": 0.4123076923076923,
+        "review": "Generated source poses inspected; elderly identity, denim and continuous C book preserved. Approved for candidate preview export, not final art release."
+      }
+    },
+    "defeat": {
+      "sheet": "defeat/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "defeat_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 294,
+            "h": 332
+          },
+          "pivot": {
+            "x": 160,
+            "y": 292
+          },
+          "duration_ms": 160,
+          "phase": "recoil"
+        },
+        {
+          "name": "defeat_1",
+          "source_rect": {
+            "x": 307,
+            "y": 0,
+            "w": 307,
+            "h": 332
+          },
+          "pivot": {
+            "x": 147,
+            "y": 291
+          },
+          "duration_ms": 180,
+          "phase": "kneel"
+        },
+        {
+          "name": "defeat_2",
+          "source_rect": {
+            "x": 614,
+            "y": 0,
+            "w": 284,
+            "h": 332
+          },
+          "pivot": {
+            "x": 119,
+            "y": 293
+          },
+          "duration_ms": 660,
+          "phase": "sustained_defeat"
+        }
+      ],
+      "provenance": {
+        "source_action": "defeat/action.json",
+        "source_sheet": "defeat/keyed-v3.png",
+        "scale_to_runtime": 0.432258064516129,
+        "review": "v3 selected recoil/kneel/sustained kneeling. v1 grew lying anatomy; v2 changed other poses. No per-frame scale workaround. Approved for candidate preview export, not final art release."
+      }
+    },
+    "signature_special": {
+      "sheet": "signature_special/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "signature_special_mvp_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 245,
+            "h": 319
+          },
+          "pivot": {
+            "x": 123,
+            "y": 300
+          },
+          "duration_ms": 300,
+          "phase": "startup"
+        },
+        {
+          "name": "signature_special_mvp_01",
+          "source_rect": {
+            "x": 362,
+            "y": 0,
+            "w": 362,
+            "h": 319
+          },
+          "pivot": {
+            "x": 121,
+            "y": 300
+          },
+          "duration_ms": 100,
+          "phase": "active"
+        },
+        {
+          "name": "signature_special_mvp_02",
+          "source_rect": {
+            "x": 724,
+            "y": 0,
+            "w": 213,
+            "h": 319
+          },
+          "pivot": {
+            "x": 93,
+            "y": 300
+          },
+          "duration_ms": 183,
+          "phase": "recovery"
+        },
+        {
+          "name": "signature_special_mvp_03",
+          "source_rect": {
+            "x": 1086,
+            "y": 0,
+            "w": 245,
+            "h": 319
+          },
+          "pivot": {
+            "x": 132,
+            "y": 300
+          },
+          "duration_ms": 184,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "signature_special/action.json",
+        "source_sheet": "signature_special/keyed-v2.png",
+        "scale_to_runtime": 0.5317460317460317,
+        "review": "Four actual generated Pointer Lance poses, distinct from book projectile. Source v2 lowers pointing arm to lower chest/waist for real contact at height matching new MoveSpec and uses magenta matte. Pointer tip source(1140,393) projects near (+220,-133.5), within initial runtime box. Uniform268/504 matches idle standing height, feet anchored at644; head drops in active key as knee/torso lunge."
+      }
+    },
+    "knockdown": {
+      "sheet": "knockdown/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "knockdown_mvp_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 245,
+            "h": 330
+          },
+          "pivot": {
+            "x": 128,
+            "y": 294
+          },
+          "duration_ms": 100,
+          "phase": "fall"
+        },
+        {
+          "name": "knockdown_mvp_01",
+          "source_rect": {
+            "x": 277,
+            "y": 0,
+            "w": 271,
+            "h": 330
+          },
+          "pivot": {
+            "x": 106,
+            "y": 294
+          },
+          "duration_ms": 100,
+          "phase": "land"
+        },
+        {
+          "name": "knockdown_mvp_02",
+          "source_rect": {
+            "x": 554,
+            "y": 0,
+            "w": 277,
+            "h": 330
+          },
+          "pivot": {
+            "x": 133,
+            "y": 298
+          },
+          "duration_ms": 250,
+          "phase": "down"
+        },
+        {
+          "name": "knockdown_mvp_03",
+          "source_rect": {
+            "x": 831,
+            "y": 0,
+            "w": 239,
+            "h": 330
+          },
+          "pivot": {
+            "x": 104,
+            "y": 294
+          },
+          "duration_ms": 150,
+          "phase": "recover"
+        }
+      ],
+      "provenance": {
+        "source_action": "knockdown/action.json",
+        "source_sheet": "knockdown/keyed-v1.png",
+        "scale_to_runtime": 0.5317460317460317,
+        "review": "Four new backward knockdown keys, one secured blue C book throughout, hair/denim/face intact. Downed key lies on left hip/back instead of generic standing hit. Sole and bracing palm define floor. Uniform268/504 scale. Generic border-connected pale matte extraction preserves outlined white hair, shirt and soles; source RGB retained."
+      }
+    }
+  }
+}

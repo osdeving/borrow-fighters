@@ -14,11 +14,12 @@ pub enum FeatureFlag {
     ShowHud,
     ShowControlsHelp,
     ShowCombatDebug,
+    ShowStageLife,
     GamepadInput,
 }
 
 /// Every feature flag exposed in the preferences screen.
-pub const PREFERENCE_FLAGS: [FeatureFlag; 9] = [
+pub const PREFERENCE_FLAGS: [FeatureFlag; 10] = [
     FeatureFlag::PlayerOneCpu,
     FeatureFlag::PlayerTwoCpu,
     FeatureFlag::CpuCanAttack,
@@ -27,6 +28,7 @@ pub const PREFERENCE_FLAGS: [FeatureFlag; 9] = [
     FeatureFlag::ShowHud,
     FeatureFlag::ShowControlsHelp,
     FeatureFlag::ShowCombatDebug,
+    FeatureFlag::ShowStageLife,
     FeatureFlag::GamepadInput,
 ];
 
@@ -41,13 +43,14 @@ pub struct FeatureFlags {
     show_hud: bool,
     show_controls_help: bool,
     show_combat_debug: bool,
+    show_stage_life: bool,
     gamepad_input: bool,
 }
 
 impl Default for FeatureFlags {
     fn default() -> Self {
         Self {
-            player_one_cpu: false,
+            player_one_cpu: true,
             player_two_cpu: true,
             cpu_can_attack: true,
             player_one_takes_damage: true,
@@ -55,6 +58,7 @@ impl Default for FeatureFlags {
             show_hud: true,
             show_controls_help: false,
             show_combat_debug: false,
+            show_stage_life: true,
             gamepad_input: true,
         }
     }
@@ -72,6 +76,7 @@ impl FeatureFlags {
             FeatureFlag::ShowHud => self.show_hud,
             FeatureFlag::ShowControlsHelp => self.show_controls_help,
             FeatureFlag::ShowCombatDebug => self.show_combat_debug,
+            FeatureFlag::ShowStageLife => self.show_stage_life,
             FeatureFlag::GamepadInput => self.gamepad_input,
         }
     }
@@ -87,6 +92,7 @@ impl FeatureFlags {
             FeatureFlag::ShowHud => self.show_hud = enabled,
             FeatureFlag::ShowControlsHelp => self.show_controls_help = enabled,
             FeatureFlag::ShowCombatDebug => self.show_combat_debug = enabled,
+            FeatureFlag::ShowStageLife => self.show_stage_life = enabled,
             FeatureFlag::GamepadInput => self.gamepad_input = enabled,
         }
     }
@@ -109,6 +115,7 @@ impl FeatureFlag {
             FeatureFlag::ShowHud => "Mostrar HUD",
             FeatureFlag::ShowControlsHelp => "Mostrar ajuda de controles",
             FeatureFlag::ShowCombatDebug => "Mostrar debug de combate",
+            FeatureFlag::ShowStageLife => "Vida nos cenarios",
             FeatureFlag::GamepadInput => "Entrada por gamepad",
         }
     }
@@ -119,15 +126,15 @@ impl FeatureFlag {
             FeatureFlag::PlayerOneCpu => "Quando ligado, o Player 1 tambem vira CPU.",
             FeatureFlag::PlayerTwoCpu => "Liga o sparring dummy do Player 2.",
             FeatureFlag::CpuCanAttack => "Quando desligado, a IA se move e defende, mas nao ataca.",
-            FeatureFlag::PlayerOneTakesDamage => {
-                "Quando desligado, o Player 1 fica invencivel para playtest."
-            }
-            FeatureFlag::PlayerTwoTakesDamage => {
-                "Quando desligado, o Player 2 fica invencivel para playtest."
+            FeatureFlag::PlayerOneTakesDamage | FeatureFlag::PlayerTwoTakesDamage => {
+                "Quando desligado, preserva a vida; reacoes e defesa continuam."
             }
             FeatureFlag::ShowHud => "Barras de vida, titulo e status no topo.",
             FeatureFlag::ShowControlsHelp => "Texto de comandos no rodape durante a luta.",
             FeatureFlag::ShowCombatDebug => "Hitboxes, hurtboxes, labels e colisao corpo-corpo.",
+            FeatureFlag::ShowStageLife => {
+                "Caramelo, figurantes animados e memes discretos ao fundo."
+            }
             FeatureFlag::GamepadInput => "Usa controles detectados pelo Raylib quando disponiveis.",
         }
     }

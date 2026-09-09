@@ -39,7 +39,11 @@ borrow-fighters/
 │   │   ├── arena.rs            # Identidade e rotação das arenas do protótipo
 │   │   ├── ai.rs               # CPU simples para playtest
 │   │   ├── feature_flags.rs    # Flags runtime para experimentos e menu Options
-│   │   └── world.rs            # Estado jogável, intro/contagem e regras de partida
+│   │   ├── world.rs            # Estado jogável, intro/contagem e regras de partida
+│   │   └── world/
+│   │       ├── throws.rs       # Captura pareada e lançamento balístico
+│   │       ├── supers.rs       # Captura autoral, fases, áudio e contatos de supers
+│   │       └── signatures.rs   # Emissão e contato dos cinco especiais
 │   ├── engine/
 │   │   ├── mod.rs              # Adaptadores finos em volta de Raylib
 │   │   ├── audio.rs            # Boundary Raylib para carregar e tocar clips de áudio
@@ -50,6 +54,11 @@ borrow-fighters/
 │   │   ├── video_capture.rs    # Captura local do framebuffer via ffmpeg
 │   │   ├── render/
 │   │   │   ├── combat_lab.rs   # Desenho da cena isolada de Combat Lab
+│   │   │   ├── move_showcase.rs # Desenho de combate contextual no showcase
+│   │   │   ├── signature_effects.rs # Atlas de efeitos nas posições físicas
+│   │   │   ├── authored_supers.rs # Eclipse, mutação, terminais, tela azul e BIOS
+│   │   │   ├── authored_actors.rs # Clones, lixo, notebook e Footgun
+│   │   │   ├── python_super.rs  # Transformação/deglutição e poses de celebração
 │   │   │   └── sprite_viewer.rs # Desenho da ferramenta isolada de sprites
 │   │   └── sprites/
 │   │       ├── animation.rs    # Seleção de frame por duração
@@ -61,6 +70,9 @@ borrow-fighters/
 │   ├── combat/
 │   │   ├── mod.rs              # Contratos do sistema de combate
 │   │   ├── fighter.rs          # Estado comum de lutador
+│   │   ├── fighter/reactions.rs # Captura, voo e aterrissagem
+│   │   ├── signature.rs        # Entidades e geometria dos especiais
+│   │   ├── super_sequence.rs   # Dados puros dos cinco roteiros autorais
 │   │   ├── frame.rs            # Timing de combate em frames inteiros
 │   │   ├── collision.rs        # Resolução hitbox x hurtbox
 │   │   ├── move_data.rs        # Tabela MoveSpec dos golpes atuais
@@ -72,12 +84,14 @@ borrow-fighters/
 │   ├── scenes/
 │   │   ├── mod.rs              # Estados de tela
 │   │   ├── combat_lab.rs       # Laboratório isolado para timing e boxes
+│   │   ├── move_showcase.rs    # Cenários testáveis com dois atores no World
 │   │   ├── preferences.rs      # Cursor e navegação do menu principal/submenus
 │   │   ├── sprite_viewer.rs    # Viewer testável de atlas, pivot e frame bounds
 │   │   └── sprite_viewer/
 │   │       └── combat_edit.rs  # Helpers puros para editar boxes do viewer
 │   ├── ui/
 │   │   ├── mod.rs              # API dos overlays de UI/debug
+│   │   ├── menu_layout.rs      # Retângulos compartilhados pelo desenho e cliques dos menus
 │   │   └── combat_debug.rs     # Overlay de boxes, pivot e timing do Combat Lab
 │   └── math/
 │       ├── mod.rs              # Tipos geométricos pequenos do jogo
@@ -87,6 +101,7 @@ borrow-fighters/
 │   ├── cli.rs                  # Contrato de argumentos de inicialização
 │   ├── characters.rs           # Contrato do registro de personagens
 │   ├── combat_lab.rs           # Estado testável do Combat Lab
+│   ├── move_showcase.rs        # Contrato do autoplay de golpes do Training
 │   ├── attack_frame_data.rs    # Timing de golpes em frames
 │   ├── move_data.rs            # Contrato da tabela MoveSpec
 │   ├── character_identity_tuning.rs # Intenção mecânica de Rust/Duke/Go/C por dados
@@ -106,6 +121,12 @@ borrow-fighters/
 O diretório `scenes/` ainda deve permanecer simples, sem framework de telas. `ui/` já abriga o overlay de debug do Combat Lab, mas ainda não deve virar um sistema genérico antes de haver HUD e menus suficientes para justificar isso. `characters/` já possui o registro mínimo de personagens, mas ainda deve permanecer simples e orientado a dados. Novos módulos só devem entrar quando reduzirem responsabilidade real dos arquivos atuais.
 
 ## Regras de fronteira
+
+A [ADR 0015](adr/0015-cinematic-presentation-and-stage-life.md) acrescenta dois
+limites de apresentação: `combat/cinematic.rs` expõe um snapshot do ataque vivo,
+consumido por `engine/render/cinematic_effects.rs`; `engine/render/stage_life.rs`
+anima atores decorativos sem estado de combate. Fontes incorporadas e filtragem
+continuam em `engine/assets.rs`. Nenhum desses desenhos amplia a hitbox física.
 
 ### `main.rs`
 
@@ -198,6 +219,8 @@ Usar cenas simples para separar fluxo de tela sem criar framework pesado.
 
 Ferramentas temporárias e plugáveis também podem entrar em `scenes/*` quando tiverem estado testável sem Raylib. O corte atual é `src/scenes/sprite_viewer.rs`, acionado por `--tool sprite-viewer`, enquanto o desenho fica em `src/engine/render/sprite_viewer.rs`. Esse modo não deve carregar `World`, áudio ou loop de luta normal.
 
+O `MoveShowcase` é uma cena de treino com dois atores no `World` real. Ele controla apenas preparação, entradas e repetição; as regras de combate e o log determinam o resultado. A [ADR 0013](adr/0013-contextual-showcase-and-mvp-combat.md) registra a base do showcase. A evolução na [ADR 0014](adr/0014-throws-launches-and-signature-effects.md) adiciona captura pareada, reações aéreas e entidades físicas dos especiais. `World` mantém a autoridade sobre trajetória, contato e KO; o renderer apenas anima os atlas separados no mesmo ponto. O resultado do showcase soma todos os pulsos, incluindo as três folhas de Java.
+
 ### Feature flags runtime
 
 Opções experimentais de gameplay, UI e input devem entrar por `src/game/feature_flags.rs`.
@@ -210,7 +233,22 @@ Regras:
 - evitar booleans soltos em `App`, `World`, render ou IA;
 - registrar ADR quando a flag virar decisão estrutural.
 
+A [ADR0017](adr/0017-reaction-clocks-and-arena-mutation.md) separa o relógio de
+reação do relógio global/ataque e acrescenta `World::effective_arena(base)`.
+O override de arena pertence ao World e se perde ao reconstruí-lo; seleção de
+menu e rotação do próximo round continuam independentes. Renderer e áudio
+consultam o mesmo estado, inclusive em Lab e showcase. Python conserva o alvo
+no domínio durante a ocultação; escala, rotação e alpha são apenas apresentação.
+
 ## Loop de jogo atual
+
+A [ADR 0018](adr/0018-contact-reaction-profiles.md) acrescenta o piloto de reações
+por contato em Python/C++. `combat/fighter/contact_reactions.rs` expõe perfil,
+idade e janela visual; `engine/sprites/reaction.rs` escolhe os clips opcionais
+`reaction_*`. A rajada compartilha sua agenda entre ataque e resposta, com
+recuperação visual de nove frames entre contatos a cada dez frames. O stun
+físico e as caixas permanecem separados. `examples/capture_pair_reactions.rs`
+registra o par inteiro e os frames de cada janela, não apenas poses isoladas.
 
 Fluxo conceitual:
 
@@ -268,3 +306,13 @@ Revisar se:
 - personagens passarem a precisar de dados externos;
 - testes de combate ficarem difíceis de escrever;
 - Raylib começar a vazar para todo o domínio de gameplay.
+
+## Distribuição e primeira abertura
+
+A [ADR 0019](adr/0019-playtest-distribution.md) define os pacotes de playtest.
+`runtime_paths` localiza assets na instalação e mantém capturas/marcador do guia
+nos dados do usuário, sem trocar o diretório de trabalho nem alterar caminhos
+explicitamente passados ao CLI. `App` organiza a primeira abertura; o submenu
+`Como jogar` reutiliza a navegação de `PreferencesMenu` e a geometria compartilhada.
+O desenho do guia fica em `engine/render/onboarding.rs`. Os modos só configuram
+as flags de CPU, sem introduzir novas regras no domínio de combate.

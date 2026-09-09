@@ -1,0 +1,121 @@
+{
+  "action": "air_kick",
+  "source": "air_kick/source-v3.png",
+  "sheet": "air_kick/keyed-v3.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "finalization refinement visually approved by primary agent; runtime evidence complete",
+  "source_body_height_reference_px": 650,
+  "suggested_scale_to_runtime": 0.4123076923076923,
+  "frames": [
+    {
+      "name": "air_kick_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 565,
+        "h": 850
+      },
+      "pivot": {
+        "x": 280,
+        "y": 712
+      },
+      "duration_ms": 116,
+      "phase": "startup"
+    },
+    {
+      "name": "air_kick_01",
+      "source_rect": {
+        "x": 565,
+        "y": 0,
+        "w": 695,
+        "h": 887
+      },
+      "pivot": {
+        "x": 250,
+        "y": 754
+      },
+      "duration_ms": 167,
+      "phase": "active"
+    },
+    {
+      "name": "air_kick_02",
+      "source_rect": {
+        "x": 1260,
+        "y": 0,
+        "w": 514,
+        "h": 887
+      },
+      "pivot": {
+        "x": 203,
+        "y": 750
+      },
+      "duration_ms": 150,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Selected v3 redraws the active ankle/boot in dorsiflexion while preserving the downward leg, trunk, startup and recovery. Original uniform268/650 scale, belt-registered virtual pivots and116/167/150ms timing retained. Active sole center around(1205,579) maps to(+160.8,-72.2), within the existing box; lowest heel at648 maps about-43.7, within2px of its lower edge-45.3, reducing the former~15px extension. v2 rejected for raising the entire leg too high. No combat or whole-body translation change. First crop excludes isolated matte pixel below the artwork.",
+  "timing_reference": {
+    "move_id": "AirKick",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 26,
+      "active_start": 7,
+      "active_end": 16
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 116,
+      "recovery_starts": 283,
+      "clip_ends": 433
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -106.66666666666667,
+      "w": 117.33333333333333,
+      "h": 61.33333333333333
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -168.0,
+      "y": -106.66666666666667,
+      "w": 117.33333333333333,
+      "h": 61.33333333333333
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 109.33333333333333,
+      "y": -76.0
+    }
+  },
+  "provenance": {
+    "tool": "built-in image_gen",
+    "identity_reference": "reference/master-existing.png",
+    "continuity_reference": "idle/source-v1.png",
+    "prompt": "air_kick/prompt-v3.txt",
+    "extraction": "remove_generated_magenta.py without --rust-contour",
+    "edit_reference": "air_kick/source-v1.png"
+  },
+  "active_contact_review": {
+    "source_point": [
+      1205,
+      579
+    ],
+    "world_relative_to_anchor": [
+      160.8,
+      -72.15384615384616
+    ],
+    "inside_baseline_box": true,
+    "lowest_heel_y_source_px": 648,
+    "lowest_heel_world_y": -43.70461538461539,
+    "baseline_lower_y": -45.33333333333333,
+    "lower_edge_tolerance_world_px": 2
+  },
+  "runtime_review": {
+    "world_summary": "../../candidates/cpp/review/refinement-2026-09-07/world/capture-summary.json",
+    "lab_summary": "../../candidates/cpp/review/refinement-2026-09-07/lab/capture-summary.json",
+    "loaded_manifest_matches_candidate": true,
+    "combat_uses_baseline_manifest": true,
+    "final_art_approved": true,
+    "approval_scope": "Primary agent approved these three refinements after native comparison and default-app match; World/Lab capture evidence completed."
+  }
+}

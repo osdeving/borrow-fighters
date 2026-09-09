@@ -1,0 +1,6883 @@
+{
+  "candidate_manifest": "assets/candidates/c/c-fighter.sprite.json",
+  "captured_clips": [
+    "air_kick",
+    "air_punch",
+    "anti_air",
+    "block",
+    "crouch",
+    "crouch_block",
+    "defeat",
+    "hit",
+    "idle",
+    "jump",
+    "kick",
+    "overhead",
+    "punch_heavy",
+    "punch_light",
+    "spawn",
+    "special",
+    "sweep",
+    "throw",
+    "victory"
+  ],
+  "captures": [
+    {
+      "action": "punch_light",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "punch_light",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f001-startup.png",
+      "lab_tick": 1,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "punch_light_0"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "punch_light",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "punch_light-f005-active.png",
+      "lab_tick": 5,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0833333358168602,
+      "sprite_frame": "punch_light_1"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "punch_light",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "punch_light-f006-active.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000149011612,
+      "sprite_frame": "punch_light_1"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "punch_light",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f011-recovery.png",
+      "lab_tick": 11,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.18333333730697632,
+      "sprite_frame": "punch_light_2"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "punch_light",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f012-recovery.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "punch_light_2"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "punch_light",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f018-recovery.png",
+      "lab_tick": 18,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000004172325134,
+      "sprite_frame": "punch_light_2"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f019-whiffrecovery.png",
+      "lab_tick": 19,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.31666669249534607,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f024-idle.png",
+      "lab_tick": 24,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.40000003576278687,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f029-idle.png",
+      "lab_tick": 29,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.4833333492279053,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f030-idle.png",
+      "lab_tick": 30,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f044-idle.png",
+      "lab_tick": 44,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7333333492279053,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f045-idle.png",
+      "lab_tick": 45,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f058-idle.png",
+      "lab_tick": 58,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.9666666984558105,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f060-idle.png",
+      "lab_tick": 60,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.0,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f072-idle.png",
+      "lab_tick": 72,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.2000000476837158,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f087-idle.png",
+      "lab_tick": 87,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.4500000476837158,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "punch_light",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_light-f090-idle.png",
+      "lab_tick": 90,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.5000001192092896,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "punch_heavy",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f001-startup.png",
+      "lab_tick": 1,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "punch_heavy_0"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "punch_heavy",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f006-startup.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000149011612,
+      "sprite_frame": "punch_heavy_0"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "punch_heavy",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "punch_heavy-f012-active.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "punch_heavy_1"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "punch_heavy",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "punch_heavy-f018-active.png",
+      "lab_tick": 18,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000004172325134,
+      "sprite_frame": "punch_heavy_1"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "punch_heavy",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f021-recovery.png",
+      "lab_tick": 21,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.3500000834465027,
+      "sprite_frame": "punch_heavy_2"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "punch_heavy",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f030-recovery.png",
+      "lab_tick": 30,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5000001788139343,
+      "sprite_frame": "punch_heavy_2"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f039-whiffrecovery.png",
+      "lab_tick": 39,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.6500000357627869,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f044-whiffrecovery.png",
+      "lab_tick": 44,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7333333492279053,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f045-whiffrecovery.png",
+      "lab_tick": 45,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f052-idle.png",
+      "lab_tick": 52,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.8666667342185974,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f058-idle.png",
+      "lab_tick": 58,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.9666666984558105,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f060-idle.png",
+      "lab_tick": 60,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.0,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f072-idle.png",
+      "lab_tick": 72,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.2000000476837158,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f087-idle.png",
+      "lab_tick": 87,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.4500000476837158,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "punch_heavy",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "punch_heavy-f090-idle.png",
+      "lab_tick": 90,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.5000001192092896,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f001-startup.png",
+      "lab_tick": 1,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "kick_0"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f006-startup.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000149011612,
+      "sprite_frame": "kick_0"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "kick-f009-active.png",
+      "lab_tick": 9,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.15000000596046448,
+      "sprite_frame": "kick_1"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "kick-f012-active.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "kick_1"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f017-recovery.png",
+      "lab_tick": 17,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.28333336114883423,
+      "sprite_frame": "kick_2"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f018-recovery.png",
+      "lab_tick": 18,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000004172325134,
+      "sprite_frame": "kick_2"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f030-recovery.png",
+      "lab_tick": 30,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5000001788139343,
+      "sprite_frame": "kick_2"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f031-whiffrecovery.png",
+      "lab_tick": 31,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5166667103767395,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f040-idle.png",
+      "lab_tick": 40,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.6666666865348816,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f044-idle.png",
+      "lab_tick": 44,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7333333492279053,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f045-idle.png",
+      "lab_tick": 45,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f058-idle.png",
+      "lab_tick": 58,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.9666666984558105,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f060-idle.png",
+      "lab_tick": 60,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.0,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f072-idle.png",
+      "lab_tick": 72,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.2000000476837158,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f087-idle.png",
+      "lab_tick": 87,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.4500000476837158,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "kick-f090-idle.png",
+      "lab_tick": 90,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.5000001192092896,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "sweep",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f001-startup.png",
+      "lab_tick": 1,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "sweep_0"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "sweep",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f006-startup.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000149011612,
+      "sprite_frame": "sweep_0"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "sweep",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "sweep-f012-active.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "sweep_1"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "sweep",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "sweep-f018-active.png",
+      "lab_tick": 18,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000004172325134,
+      "sprite_frame": "sweep_1"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "sweep",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f021-recovery.png",
+      "lab_tick": 21,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.3500000834465027,
+      "sprite_frame": "sweep_2"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "sweep",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f030-recovery.png",
+      "lab_tick": 30,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5000001788139343,
+      "sprite_frame": "sweep_2"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f037-whiffrecovery.png",
+      "lab_tick": 37,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.6166666746139526,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f044-whiffrecovery.png",
+      "lab_tick": 44,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7333333492279053,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f045-whiffrecovery.png",
+      "lab_tick": 45,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f052-idle.png",
+      "lab_tick": 52,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.8666667342185974,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f058-idle.png",
+      "lab_tick": 58,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.9666666984558105,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f060-idle.png",
+      "lab_tick": 60,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.0,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f072-idle.png",
+      "lab_tick": 72,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.2000000476837158,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f087-idle.png",
+      "lab_tick": 87,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.4500000476837158,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "sweep",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "sweep-f090-idle.png",
+      "lab_tick": 90,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.5000001192092896,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "overhead",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f001-startup.png",
+      "lab_tick": 1,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "overhead_0"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "overhead",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f006-startup.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000149011612,
+      "sprite_frame": "overhead_0"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "overhead",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f012-startup.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "overhead_0"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "active",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "overhead",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "overhead-f013-active.png",
+      "lab_tick": 13,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.21666666865348816,
+      "sprite_frame": "overhead_1"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "active",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "overhead",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "overhead-f018-active.png",
+      "lab_tick": 18,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000004172325134,
+      "sprite_frame": "overhead_1"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "overhead",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f021-recovery.png",
+      "lab_tick": 21,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.3500000834465027,
+      "sprite_frame": "overhead_2"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "overhead",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f030-recovery.png",
+      "lab_tick": 30,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5000001788139343,
+      "sprite_frame": "overhead_2"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f037-whiffrecovery.png",
+      "lab_tick": 37,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.6166666746139526,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f044-whiffrecovery.png",
+      "lab_tick": 44,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7333333492279053,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f045-whiffrecovery.png",
+      "lab_tick": 45,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f051-idle.png",
+      "lab_tick": 51,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.8500000238418579,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f058-idle.png",
+      "lab_tick": 58,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.9666666984558105,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f060-idle.png",
+      "lab_tick": 60,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.0,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f072-idle.png",
+      "lab_tick": 72,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.2000000476837158,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f087-idle.png",
+      "lab_tick": 87,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.4500000476837158,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "overhead",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.8148193359375,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "overhead-f090-idle.png",
+      "lab_tick": 90,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.5000001192092896,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "anti_air",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f001-startup.png",
+      "lab_tick": 1,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "anti_air_0"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "anti_air",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f006-startup.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000149011612,
+      "sprite_frame": "anti_air_0"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "anti_air",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "anti_air-f007-active.png",
+      "lab_tick": 7,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.11666666716337204,
+      "sprite_frame": "anti_air_1"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "anti_air",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "anti_air-f012-active.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "anti_air_1"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "anti_air",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f015-recovery.png",
+      "lab_tick": 15,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.25,
+      "sprite_frame": "anti_air_2"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "anti_air",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f018-recovery.png",
+      "lab_tick": 18,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000004172325134,
+      "sprite_frame": "anti_air_2"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "anti_air",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f030-recovery.png",
+      "lab_tick": 30,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5000001788139343,
+      "sprite_frame": "anti_air_2"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f031-whiffrecovery.png",
+      "lab_tick": 31,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5166667103767395,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f043-idle.png",
+      "lab_tick": 43,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7166666984558105,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f044-idle.png",
+      "lab_tick": 44,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7333333492279053,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f045-idle.png",
+      "lab_tick": 45,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f058-idle.png",
+      "lab_tick": 58,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.9666666984558105,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f060-idle.png",
+      "lab_tick": 60,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.0,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f072-idle.png",
+      "lab_tick": 72,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.2000000476837158,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f087-idle.png",
+      "lab_tick": 87,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.4500000476837158,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "anti_air",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "anti_air-f090-idle.png",
+      "lab_tick": 90,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.5000001192092896,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "jump_0"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        269.9444274902344,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "air_punch",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f001-startup.png",
+      "lab_tick": 1,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "air_punch_0"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        278.5,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "air_punch",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "air_punch-f005-active.png",
+      "lab_tick": 5,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0833333358168602,
+      "sprite_frame": "air_punch_1"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        282.1666564941406,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "air_punch",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "air_punch-f006-active.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000149011612,
+      "sprite_frame": "air_punch_1"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        317.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "air_punch",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "air_punch-f012-active.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "air_punch_1"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        333.5,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "air_punch",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f014-recovery.png",
+      "lab_tick": 14,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.23333333432674408,
+      "sprite_frame": "air_punch_2"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        373.83331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "air_punch",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f018-recovery.png",
+      "lab_tick": 18,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000004172325134,
+      "sprite_frame": "air_punch_2"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f023-whiffrecovery.png",
+      "lab_tick": 23,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.38333335518836975,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f029-idle.png",
+      "lab_tick": 29,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.4833333492279053,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f030-idle.png",
+      "lab_tick": 30,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f044-idle.png",
+      "lab_tick": 44,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7333333492279053,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f045-idle.png",
+      "lab_tick": 45,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f058-idle.png",
+      "lab_tick": 58,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.9666666984558105,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f060-idle.png",
+      "lab_tick": 60,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.0,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f072-idle.png",
+      "lab_tick": 72,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.2000000476837158,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f087-idle.png",
+      "lab_tick": 87,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.4500000476837158,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "air_punch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_punch-f090-idle.png",
+      "lab_tick": 90,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.5000001192092896,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "jump_0"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        269.9444274902344,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "air_kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f001-startup.png",
+      "lab_tick": 1,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "air_kick_0"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        282.1666564941406,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "air_kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f006-startup.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000149011612,
+      "sprite_frame": "air_kick_0"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        286.4444274902344,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "air_kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "air_kick-f007-active.png",
+      "lab_tick": 7,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.11666666716337204,
+      "sprite_frame": "air_kick_1"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        317.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "air_kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "air_kick-f012-active.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "air_kick_1"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        362.83331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "air_kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f017-recovery.png",
+      "lab_tick": 17,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.28333336114883423,
+      "sprite_frame": "air_kick_2"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        373.83331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "air_kick",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f018-recovery.png",
+      "lab_tick": 18,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000004172325134,
+      "sprite_frame": "air_kick_2"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f027-whiffrecovery.png",
+      "lab_tick": 27,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.45000001788139343,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f029-whiffrecovery.png",
+      "lab_tick": 29,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.4833333492279053,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f030-whiffrecovery.png",
+      "lab_tick": 30,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f033-idle.png",
+      "lab_tick": 33,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.550000011920929,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f044-idle.png",
+      "lab_tick": 44,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7333333492279053,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f045-idle.png",
+      "lab_tick": 45,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f058-idle.png",
+      "lab_tick": 58,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.9666666984558105,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f060-idle.png",
+      "lab_tick": 60,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.0,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f072-idle.png",
+      "lab_tick": 72,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.2000000476837158,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f087-idle.png",
+      "lab_tick": 87,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.4500000476837158,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "air_kick",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "air_kick-f090-idle.png",
+      "lab_tick": 90,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.5000001192092896,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "throw",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f001-startup.png",
+      "lab_tick": 1,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "throw_0"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "startup",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "throw",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f006-startup.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000149011612,
+      "sprite_frame": "throw_0"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "active",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "throw",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": true,
+      "image": "throw-f007-active.png",
+      "lab_tick": 7,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.11666666716337204,
+      "sprite_frame": "throw_1"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "throw",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f010-recovery.png",
+      "lab_tick": 10,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.1666666716337204,
+      "sprite_frame": "throw_2"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "throw",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f012-recovery.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000000298023224,
+      "sprite_frame": "throw_2"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "recovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "throw",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f018-recovery.png",
+      "lab_tick": 18,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000004172325134,
+      "sprite_frame": "throw_2"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f027-whiffrecovery.png",
+      "lab_tick": 27,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.45000001788139343,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f029-whiffrecovery.png",
+      "lab_tick": 29,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.4833333492279053,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f030-whiffrecovery.png",
+      "lab_tick": 30,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "whiffrecovery",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f044-whiffrecovery.png",
+      "lab_tick": 44,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7333333492279053,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f045-idle.png",
+      "lab_tick": 45,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f058-idle.png",
+      "lab_tick": 58,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.9666666984558105,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f060-idle.png",
+      "lab_tick": 60,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.0,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f072-idle.png",
+      "lab_tick": 72,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.2000000476837158,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f087-idle.png",
+      "lab_tick": 87,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.4500000476837158,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "throw",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "throw-f090-idle.png",
+      "lab_tick": 90,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.5000001192092896,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "special",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f001-idle.png",
+      "lab_tick": 1,
+      "pose": "move",
+      "projectile_count": 1,
+      "sprite_clip_seconds": 0.016666680574417114,
+      "sprite_frame": "special_0"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "special",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f006-idle.png",
+      "lab_tick": 6,
+      "pose": "move",
+      "projectile_count": 1,
+      "sprite_clip_seconds": 0.1000000536441803,
+      "sprite_frame": "special_1"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "special",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f012-idle.png",
+      "lab_tick": 12,
+      "pose": "move",
+      "projectile_count": 1,
+      "sprite_clip_seconds": 0.20000004768371582,
+      "sprite_frame": "special_2"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "special",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f018-idle.png",
+      "lab_tick": 18,
+      "pose": "move",
+      "projectile_count": 1,
+      "sprite_clip_seconds": 0.30000004172325134,
+      "sprite_frame": "special_2"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f020-idle.png",
+      "lab_tick": 20,
+      "pose": "move",
+      "projectile_count": 1,
+      "sprite_clip_seconds": 0.3333333432674408,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f029-idle.png",
+      "lab_tick": 29,
+      "pose": "move",
+      "projectile_count": 1,
+      "sprite_clip_seconds": 0.4833333492279053,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f030-idle.png",
+      "lab_tick": 30,
+      "pose": "move",
+      "projectile_count": 1,
+      "sprite_clip_seconds": 0.5,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f044-idle.png",
+      "lab_tick": 44,
+      "pose": "move",
+      "projectile_count": 1,
+      "sprite_clip_seconds": 0.7333333492279053,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f045-idle.png",
+      "lab_tick": 45,
+      "pose": "move",
+      "projectile_count": 1,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f058-idle.png",
+      "lab_tick": 58,
+      "pose": "move",
+      "projectile_count": 1,
+      "sprite_clip_seconds": 0.9666666984558105,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f060-idle.png",
+      "lab_tick": 60,
+      "pose": "move",
+      "projectile_count": 1,
+      "sprite_clip_seconds": 1.0,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f072-idle.png",
+      "lab_tick": 72,
+      "pose": "move",
+      "projectile_count": 1,
+      "sprite_clip_seconds": 1.2000000476837158,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f087-idle.png",
+      "lab_tick": 87,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.4500000476837158,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "special",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": false,
+      "has_active_hitbox": false,
+      "image": "special-f090-idle.png",
+      "lab_tick": 90,
+      "pose": "move",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.5000001192092896,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "idle",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "idle-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "idle",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "idle",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "idle-f001-idle.png",
+      "lab_tick": 1,
+      "pose": "idle",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "idle",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "idle-f006-idle.png",
+      "lab_tick": 6,
+      "pose": "idle",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000894069672,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "idle",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "idle-f012-idle.png",
+      "lab_tick": 12,
+      "pose": "idle",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000001788139343,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "idle",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "idle-f015-idle.png",
+      "lab_tick": 15,
+      "pose": "idle",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.25,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "idle",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "idle-f018-idle.png",
+      "lab_tick": 18,
+      "pose": "idle",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000001192092896,
+      "sprite_frame": "idle_1"
+    },
+    {
+      "action": "idle",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "idle-f029-idle.png",
+      "lab_tick": 29,
+      "pose": "idle",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.4833333492279053,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "idle",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "idle-f030-idle.png",
+      "lab_tick": 30,
+      "pose": "idle",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5,
+      "sprite_frame": "idle_2"
+    },
+    {
+      "action": "idle",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "idle-f044-idle.png",
+      "lab_tick": 44,
+      "pose": "idle",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7333333492279053,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "idle",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "idle-f045-idle.png",
+      "lab_tick": 45,
+      "pose": "idle",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "idle",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "idle",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "idle-f050-idle.png",
+      "lab_tick": 50,
+      "pose": "idle",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.8333333730697632,
+      "sprite_frame": "idle_0"
+    },
+    {
+      "action": "crouch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "crouch",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "crouch_0"
+    },
+    {
+      "action": "crouch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch-f001-idle.png",
+      "lab_tick": 1,
+      "pose": "crouch",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "crouch_0"
+    },
+    {
+      "action": "crouch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch-f004-idle.png",
+      "lab_tick": 4,
+      "pose": "crouch",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.06666667014360428,
+      "sprite_frame": "crouch_1"
+    },
+    {
+      "action": "crouch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch-f006-idle.png",
+      "lab_tick": 6,
+      "pose": "crouch",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000894069672,
+      "sprite_frame": "crouch_1"
+    },
+    {
+      "action": "crouch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch-f012-idle.png",
+      "lab_tick": 12,
+      "pose": "crouch",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000001788139343,
+      "sprite_frame": "crouch_1"
+    },
+    {
+      "action": "crouch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch-f018-idle.png",
+      "lab_tick": 18,
+      "pose": "crouch",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000001192092896,
+      "sprite_frame": "crouch_1"
+    },
+    {
+      "action": "crouch",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch-f022-idle.png",
+      "lab_tick": 22,
+      "pose": "crouch",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.36666667461395264,
+      "sprite_frame": "crouch_1"
+    },
+    {
+      "action": "jump",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "jump-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "jump",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "jump_0"
+    },
+    {
+      "action": "jump",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "jump-f001-idle.png",
+      "lab_tick": 1,
+      "pose": "jump",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "jump_0"
+    },
+    {
+      "action": "jump",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "jump-f004-idle.png",
+      "lab_tick": 4,
+      "pose": "jump",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.06666667014360428,
+      "sprite_frame": "jump_1"
+    },
+    {
+      "action": "jump",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "jump-f006-idle.png",
+      "lab_tick": 6,
+      "pose": "jump",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000894069672,
+      "sprite_frame": "jump_1"
+    },
+    {
+      "action": "jump",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "jump-f012-idle.png",
+      "lab_tick": 12,
+      "pose": "jump",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000001788139343,
+      "sprite_frame": "jump_1"
+    },
+    {
+      "action": "jump",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "jump-f018-idle.png",
+      "lab_tick": 18,
+      "pose": "jump",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000001192092896,
+      "sprite_frame": "jump_1"
+    },
+    {
+      "action": "jump",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "jump-f024-idle.png",
+      "lab_tick": 24,
+      "pose": "jump",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.40000003576278687,
+      "sprite_frame": "jump_2"
+    },
+    {
+      "action": "jump",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "jump-f030-idle.png",
+      "lab_tick": 30,
+      "pose": "jump",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5,
+      "sprite_frame": "jump_2"
+    },
+    {
+      "action": "jump",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "jump-f045-idle.png",
+      "lab_tick": 45,
+      "pose": "jump",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "jump_2"
+    },
+    {
+      "action": "jump",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        269.33331298828125,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "jump",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "jump-f054-idle.png",
+      "lab_tick": 54,
+      "pose": "jump",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.9000000357627869,
+      "sprite_frame": "jump_2"
+    },
+    {
+      "action": "block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "block-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "block_0"
+    },
+    {
+      "action": "block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "block-f001-idle.png",
+      "lab_tick": 1,
+      "pose": "block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "block_0"
+    },
+    {
+      "action": "block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "block-f005-idle.png",
+      "lab_tick": 5,
+      "pose": "block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0833333358168602,
+      "sprite_frame": "block_1"
+    },
+    {
+      "action": "block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "block-f006-idle.png",
+      "lab_tick": 6,
+      "pose": "block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000894069672,
+      "sprite_frame": "block_1"
+    },
+    {
+      "action": "block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "block-f010-idle.png",
+      "lab_tick": 10,
+      "pose": "block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.1666666716337204,
+      "sprite_frame": "block_2"
+    },
+    {
+      "action": "block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "block-f012-idle.png",
+      "lab_tick": 12,
+      "pose": "block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000001788139343,
+      "sprite_frame": "block_2"
+    },
+    {
+      "action": "block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "block-f018-idle.png",
+      "lab_tick": 18,
+      "pose": "block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000001192092896,
+      "sprite_frame": "block_2"
+    },
+    {
+      "action": "block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "block-f023-idle.png",
+      "lab_tick": 23,
+      "pose": "block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.38333335518836975,
+      "sprite_frame": "block_2"
+    },
+    {
+      "action": "hit",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "hit",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "hit-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "hit",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "hit_0"
+    },
+    {
+      "action": "hit",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "hit",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "hit-f001-idle.png",
+      "lab_tick": 1,
+      "pose": "hit",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "hit_0"
+    },
+    {
+      "action": "hit",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "hit",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "hit-f005-idle.png",
+      "lab_tick": 5,
+      "pose": "hit",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0833333358168602,
+      "sprite_frame": "hit_1"
+    },
+    {
+      "action": "hit",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "hit",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "hit-f006-idle.png",
+      "lab_tick": 6,
+      "pose": "hit",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000894069672,
+      "sprite_frame": "hit_1"
+    },
+    {
+      "action": "hit",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "hit",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "hit-f011-idle.png",
+      "lab_tick": 11,
+      "pose": "hit",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.18333333730697632,
+      "sprite_frame": "hit_2"
+    },
+    {
+      "action": "hit",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "hit",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "hit-f012-idle.png",
+      "lab_tick": 12,
+      "pose": "hit",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000001788139343,
+      "sprite_frame": "hit_2"
+    },
+    {
+      "action": "hit",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "hit",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "hit-f018-idle.png",
+      "lab_tick": 18,
+      "pose": "hit",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000001192092896,
+      "sprite_frame": "hit_2"
+    },
+    {
+      "action": "hit",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "hit",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "hit-f024-idle.png",
+      "lab_tick": 24,
+      "pose": "hit",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.40000003576278687,
+      "sprite_frame": "hit_2"
+    },
+    {
+      "action": "victory",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "victory",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "victory-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "victory",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "victory_0"
+    },
+    {
+      "action": "victory",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "victory",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "victory-f001-idle.png",
+      "lab_tick": 1,
+      "pose": "victory",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "victory_0"
+    },
+    {
+      "action": "victory",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "victory",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "victory-f006-idle.png",
+      "lab_tick": 6,
+      "pose": "victory",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000894069672,
+      "sprite_frame": "victory_0"
+    },
+    {
+      "action": "victory",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "victory",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "victory-f010-idle.png",
+      "lab_tick": 10,
+      "pose": "victory",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.1666666716337204,
+      "sprite_frame": "victory_1"
+    },
+    {
+      "action": "victory",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "victory",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "victory-f012-idle.png",
+      "lab_tick": 12,
+      "pose": "victory",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000001788139343,
+      "sprite_frame": "victory_1"
+    },
+    {
+      "action": "victory",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "victory",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "victory-f018-idle.png",
+      "lab_tick": 18,
+      "pose": "victory",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000001192092896,
+      "sprite_frame": "victory_1"
+    },
+    {
+      "action": "victory",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "victory",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "victory-f025-idle.png",
+      "lab_tick": 25,
+      "pose": "victory",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.4166666865348816,
+      "sprite_frame": "victory_2"
+    },
+    {
+      "action": "victory",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "victory",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "victory-f030-idle.png",
+      "lab_tick": 30,
+      "pose": "victory",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5,
+      "sprite_frame": "victory_2"
+    },
+    {
+      "action": "victory",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "victory",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "victory-f045-idle.png",
+      "lab_tick": 45,
+      "pose": "victory",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "victory_2"
+    },
+    {
+      "action": "victory",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "victory",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "victory-f060-idle.png",
+      "lab_tick": 60,
+      "pose": "victory",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.0,
+      "sprite_frame": "victory_2"
+    },
+    {
+      "action": "victory",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "victory",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "victory-f061-idle.png",
+      "lab_tick": 61,
+      "pose": "victory",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.0166667699813843,
+      "sprite_frame": "victory_2"
+    },
+    {
+      "action": "spawn",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "spawn",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "spawn-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "spawn",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "spawn_0"
+    },
+    {
+      "action": "spawn",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "spawn",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "spawn-f001-idle.png",
+      "lab_tick": 1,
+      "pose": "spawn",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "spawn_0"
+    },
+    {
+      "action": "spawn",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "spawn",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "spawn-f006-idle.png",
+      "lab_tick": 6,
+      "pose": "spawn",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000894069672,
+      "sprite_frame": "spawn_0"
+    },
+    {
+      "action": "spawn",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "spawn",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "spawn-f012-idle.png",
+      "lab_tick": 12,
+      "pose": "spawn",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000001788139343,
+      "sprite_frame": "spawn_0"
+    },
+    {
+      "action": "spawn",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "spawn",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "spawn-f018-idle.png",
+      "lab_tick": 18,
+      "pose": "spawn",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000001192092896,
+      "sprite_frame": "spawn_0"
+    },
+    {
+      "action": "spawn",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "spawn",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "spawn-f030-idle.png",
+      "lab_tick": 30,
+      "pose": "spawn",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5,
+      "sprite_frame": "spawn_0"
+    },
+    {
+      "action": "spawn",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "spawn",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "spawn-f039-idle.png",
+      "lab_tick": 39,
+      "pose": "spawn",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.6500000357627869,
+      "sprite_frame": "spawn_1"
+    },
+    {
+      "action": "spawn",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "spawn",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "spawn-f045-idle.png",
+      "lab_tick": 45,
+      "pose": "spawn",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "spawn_1"
+    },
+    {
+      "action": "spawn",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "spawn",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "spawn-f060-idle.png",
+      "lab_tick": 60,
+      "pose": "spawn",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.0,
+      "sprite_frame": "spawn_1"
+    },
+    {
+      "action": "spawn",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "spawn",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "spawn-f090-idle.png",
+      "lab_tick": 90,
+      "pose": "spawn",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.5000001192092896,
+      "sprite_frame": "spawn_2"
+    },
+    {
+      "action": "spawn",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "spawn",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "spawn-f105-idle.png",
+      "lab_tick": 105,
+      "pose": "spawn",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.7500001192092896,
+      "sprite_frame": "spawn_3"
+    },
+    {
+      "action": "spawn",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "spawn",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "spawn-f159-idle.png",
+      "lab_tick": 159,
+      "pose": "spawn",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 2.6500000953674316,
+      "sprite_frame": "spawn_3"
+    },
+    {
+      "action": "defeat",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "defeat",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "defeat-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "defeat",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "defeat_0"
+    },
+    {
+      "action": "defeat",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "defeat",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "defeat-f001-idle.png",
+      "lab_tick": 1,
+      "pose": "defeat",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "defeat_0"
+    },
+    {
+      "action": "defeat",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "defeat",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "defeat-f006-idle.png",
+      "lab_tick": 6,
+      "pose": "defeat",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000894069672,
+      "sprite_frame": "defeat_0"
+    },
+    {
+      "action": "defeat",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "defeat",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "defeat-f010-idle.png",
+      "lab_tick": 10,
+      "pose": "defeat",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.1666666716337204,
+      "sprite_frame": "defeat_1"
+    },
+    {
+      "action": "defeat",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "defeat",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "defeat-f012-idle.png",
+      "lab_tick": 12,
+      "pose": "defeat",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000001788139343,
+      "sprite_frame": "defeat_1"
+    },
+    {
+      "action": "defeat",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "defeat",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "defeat-f018-idle.png",
+      "lab_tick": 18,
+      "pose": "defeat",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000001192092896,
+      "sprite_frame": "defeat_1"
+    },
+    {
+      "action": "defeat",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "defeat",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "defeat-f021-idle.png",
+      "lab_tick": 21,
+      "pose": "defeat",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.3500000238418579,
+      "sprite_frame": "defeat_2"
+    },
+    {
+      "action": "defeat",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "defeat",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "defeat-f030-idle.png",
+      "lab_tick": 30,
+      "pose": "defeat",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.5,
+      "sprite_frame": "defeat_2"
+    },
+    {
+      "action": "defeat",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "defeat",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "defeat-f045-idle.png",
+      "lab_tick": 45,
+      "pose": "defeat",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.7500000596046448,
+      "sprite_frame": "defeat_2"
+    },
+    {
+      "action": "defeat",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "defeat",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "defeat-f060-idle.png",
+      "lab_tick": 60,
+      "pose": "defeat",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.0,
+      "sprite_frame": "defeat_2"
+    },
+    {
+      "action": "defeat",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "character": "c",
+      "clip": "defeat",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "defeat-f066-idle.png",
+      "lab_tick": 66,
+      "pose": "defeat",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 1.100000023841858,
+      "sprite_frame": "defeat_2"
+    },
+    {
+      "action": "crouch_block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch_block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch_block-f000-idle.png",
+      "lab_tick": 0,
+      "pose": "crouch_block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0,
+      "sprite_frame": "crouch_block_0"
+    },
+    {
+      "action": "crouch_block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch_block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch_block-f001-idle.png",
+      "lab_tick": 1,
+      "pose": "crouch_block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.01666666753590107,
+      "sprite_frame": "crouch_block_0"
+    },
+    {
+      "action": "crouch_block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch_block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch_block-f005-idle.png",
+      "lab_tick": 5,
+      "pose": "crouch_block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.0833333358168602,
+      "sprite_frame": "crouch_block_1"
+    },
+    {
+      "action": "crouch_block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch_block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch_block-f006-idle.png",
+      "lab_tick": 6,
+      "pose": "crouch_block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.10000000894069672,
+      "sprite_frame": "crouch_block_1"
+    },
+    {
+      "action": "crouch_block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch_block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch_block-f009-idle.png",
+      "lab_tick": 9,
+      "pose": "crouch_block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.15000000596046448,
+      "sprite_frame": "crouch_block_2"
+    },
+    {
+      "action": "crouch_block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch_block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch_block-f012-idle.png",
+      "lab_tick": 12,
+      "pose": "crouch_block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.20000001788139343,
+      "sprite_frame": "crouch_block_2"
+    },
+    {
+      "action": "crouch_block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch_block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch_block-f018-idle.png",
+      "lab_tick": 18,
+      "pose": "crouch_block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.30000001192092896,
+      "sprite_frame": "crouch_block_2"
+    },
+    {
+      "action": "crouch_block",
+      "attack_phase": "idle",
+      "body_rect": [
+        430.0,
+        488.0,
+        101.33333587646484,
+        128.0
+      ],
+      "character": "c",
+      "clip": "crouch_block",
+      "facing": "Right",
+      "forced_pose": true,
+      "has_active_hitbox": false,
+      "image": "crouch_block-f023-idle.png",
+      "lab_tick": 23,
+      "pose": "crouch_block",
+      "projectile_count": 0,
+      "sprite_clip_seconds": 0.38333335518836975,
+      "sprite_frame": "crouch_block_2"
+    }
+  ],
+  "character": "c",
+  "fixed_timestep_seconds": 0.01666666753590107,
+  "limitations": [
+    "Images are review artifacts, not assertions of visual correctness.",
+    "Static lab poses advance art time only; they do not simulate match damage, outcome transitions, or a full jump trajectory.",
+    "Combat Lab has no walk pose; walking and match transitions require a separate playtest.",
+    "The lab uses its native facing for this character; no fighter state is modified to mirror it."
+  ],
+  "loaded_manifest": {
+    "cell": {
+      "h": 366,
+      "w": 436
+    },
+    "clips": [
+      {
+        "frames": [
+          "idle_0",
+          "idle_1",
+          "idle_2"
+        ],
+        "loop": true,
+        "name": "idle"
+      },
+      {
+        "frames": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3"
+        ],
+        "loop": true,
+        "name": "walk"
+      },
+      {
+        "frames": [
+          "jump_0",
+          "jump_1",
+          "jump_2"
+        ],
+        "loop": false,
+        "name": "jump"
+      },
+      {
+        "frames": [
+          "crouch_0",
+          "crouch_1"
+        ],
+        "loop": false,
+        "name": "crouch"
+      },
+      {
+        "frames": [
+          "block_0",
+          "block_1",
+          "block_2"
+        ],
+        "loop": false,
+        "name": "block"
+      },
+      {
+        "frames": [
+          "crouch_block_0",
+          "crouch_block_1",
+          "crouch_block_2"
+        ],
+        "loop": false,
+        "name": "crouch_block"
+      },
+      {
+        "frames": [
+          "hit_0",
+          "hit_1",
+          "hit_2"
+        ],
+        "loop": false,
+        "name": "hit"
+      },
+      {
+        "frames": [
+          "punch_light_0",
+          "punch_light_1",
+          "punch_light_2"
+        ],
+        "loop": false,
+        "name": "punch_light"
+      },
+      {
+        "frames": [
+          "punch_heavy_0",
+          "punch_heavy_1",
+          "punch_heavy_2"
+        ],
+        "loop": false,
+        "name": "punch_heavy"
+      },
+      {
+        "frames": [
+          "kick_0",
+          "kick_1",
+          "kick_2"
+        ],
+        "loop": false,
+        "name": "kick"
+      },
+      {
+        "frames": [
+          "sweep_0",
+          "sweep_1",
+          "sweep_2"
+        ],
+        "loop": false,
+        "name": "sweep"
+      },
+      {
+        "frames": [
+          "overhead_0",
+          "overhead_1",
+          "overhead_2"
+        ],
+        "loop": false,
+        "name": "overhead"
+      },
+      {
+        "frames": [
+          "anti_air_0",
+          "anti_air_1",
+          "anti_air_2"
+        ],
+        "loop": false,
+        "name": "anti_air"
+      },
+      {
+        "frames": [
+          "air_punch_0",
+          "air_punch_1",
+          "air_punch_2"
+        ],
+        "loop": false,
+        "name": "air_punch"
+      },
+      {
+        "frames": [
+          "air_kick_0",
+          "air_kick_1",
+          "air_kick_2"
+        ],
+        "loop": false,
+        "name": "air_kick"
+      },
+      {
+        "frames": [
+          "throw_0",
+          "throw_1",
+          "throw_2"
+        ],
+        "loop": false,
+        "name": "throw"
+      },
+      {
+        "frames": [
+          "special_0",
+          "special_1",
+          "special_2"
+        ],
+        "loop": false,
+        "name": "special"
+      },
+      {
+        "frames": [
+          "spawn_0",
+          "spawn_1",
+          "spawn_2",
+          "spawn_3"
+        ],
+        "loop": false,
+        "name": "spawn"
+      },
+      {
+        "frames": [
+          "victory_0",
+          "victory_1",
+          "victory_2"
+        ],
+        "loop": false,
+        "name": "victory"
+      },
+      {
+        "frames": [
+          "defeat_0",
+          "defeat_1",
+          "defeat_2"
+        ],
+        "loop": false,
+        "name": "defeat"
+      }
+    ],
+    "default_pivot": {
+      "x": 112,
+      "y": 296
+    },
+    "frames": [
+      {
+        "clip": "idle",
+        "duration_ms": 240,
+        "frame": {
+          "h": 326,
+          "w": 217,
+          "x": 0,
+          "y": 0
+        },
+        "name": "idle_0",
+        "pivot": {
+          "x": 112,
+          "y": 296
+        },
+        "trimmed_bounds": {
+          "h": 275,
+          "w": 150,
+          "x": 33,
+          "y": 24
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 240,
+        "frame": {
+          "h": 326,
+          "w": 217,
+          "x": 436,
+          "y": 0
+        },
+        "name": "idle_1",
+        "pivot": {
+          "x": 114,
+          "y": 296
+        },
+        "trimmed_bounds": {
+          "h": 268,
+          "w": 157,
+          "x": 35,
+          "y": 31
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 240,
+        "frame": {
+          "h": 326,
+          "w": 217,
+          "x": 872,
+          "y": 0
+        },
+        "name": "idle_2",
+        "pivot": {
+          "x": 116,
+          "y": 296
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 153,
+          "x": 31,
+          "y": 30
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 100,
+        "frame": {
+          "h": 327,
+          "w": 217,
+          "x": 1308,
+          "y": 0
+        },
+        "name": "walk_0",
+        "pivot": {
+          "x": 119,
+          "y": 299
+        },
+        "trimmed_bounds": {
+          "h": 278,
+          "w": 168,
+          "x": 37,
+          "y": 24
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 100,
+        "frame": {
+          "h": 327,
+          "w": 219,
+          "x": 1744,
+          "y": 0
+        },
+        "name": "walk_1",
+        "pivot": {
+          "x": 108,
+          "y": 297
+        },
+        "trimmed_bounds": {
+          "h": 277,
+          "w": 165,
+          "x": 36,
+          "y": 24
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 100,
+        "frame": {
+          "h": 327,
+          "w": 217,
+          "x": 2180,
+          "y": 0
+        },
+        "name": "walk_2",
+        "pivot": {
+          "x": 115,
+          "y": 299
+        },
+        "trimmed_bounds": {
+          "h": 278,
+          "w": 164,
+          "x": 31,
+          "y": 24
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 100,
+        "frame": {
+          "h": 327,
+          "w": 218,
+          "x": 2616,
+          "y": 0
+        },
+        "name": "walk_3",
+        "pivot": {
+          "x": 113,
+          "y": 297
+        },
+        "trimmed_bounds": {
+          "h": 277,
+          "w": 133,
+          "x": 33,
+          "y": 24
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 60,
+        "frame": {
+          "h": 327,
+          "w": 285,
+          "x": 3052,
+          "y": 0
+        },
+        "name": "jump_0",
+        "pivot": {
+          "x": 155,
+          "y": 296
+        },
+        "trimmed_bounds": {
+          "h": 241,
+          "w": 175,
+          "x": 65,
+          "y": 53
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 340,
+        "frame": {
+          "h": 327,
+          "w": 311,
+          "x": 0,
+          "y": 366
+        },
+        "name": "jump_1",
+        "pivot": {
+          "x": 149,
+          "y": 256
+        },
+        "trimmed_bounds": {
+          "h": 177,
+          "w": 162,
+          "x": 66,
+          "y": 21
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 400,
+        "frame": {
+          "h": 327,
+          "w": 276,
+          "x": 436,
+          "y": 366
+        },
+        "name": "jump_2",
+        "pivot": {
+          "x": 115,
+          "y": 269
+        },
+        "trimmed_bounds": {
+          "h": 222,
+          "w": 177,
+          "x": 27,
+          "y": 31
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 60,
+        "frame": {
+          "h": 327,
+          "w": 436,
+          "x": 872,
+          "y": 366
+        },
+        "name": "crouch_0",
+        "pivot": {
+          "x": 277,
+          "y": 305
+        },
+        "trimmed_bounds": {
+          "h": 191,
+          "w": 390,
+          "x": 0,
+          "y": 136
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 200,
+        "frame": {
+          "h": 327,
+          "w": 436,
+          "x": 1308,
+          "y": 366
+        },
+        "name": "crouch_1",
+        "pivot": {
+          "x": 136,
+          "y": 305
+        },
+        "trimmed_bounds": {
+          "h": 146,
+          "w": 191,
+          "x": 66,
+          "y": 161
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 80,
+        "frame": {
+          "h": 332,
+          "w": 294,
+          "x": 1744,
+          "y": 366
+        },
+        "name": "block_0",
+        "pivot": {
+          "x": 153,
+          "y": 301
+        },
+        "trimmed_bounds": {
+          "h": 275,
+          "w": 147,
+          "x": 78,
+          "y": 29
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 80,
+        "frame": {
+          "h": 332,
+          "w": 307,
+          "x": 2180,
+          "y": 366
+        },
+        "name": "block_1",
+        "pivot": {
+          "x": 147,
+          "y": 301
+        },
+        "trimmed_bounds": {
+          "h": 263,
+          "w": 154,
+          "x": 69,
+          "y": 41
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 120,
+        "frame": {
+          "h": 332,
+          "w": 284,
+          "x": 2616,
+          "y": 366
+        },
+        "name": "block_2",
+        "pivot": {
+          "x": 125,
+          "y": 301
+        },
+        "trimmed_bounds": {
+          "h": 275,
+          "w": 150,
+          "x": 50,
+          "y": 29
+        }
+      },
+      {
+        "clip": "crouch_block",
+        "duration_ms": 70,
+        "frame": {
+          "h": 327,
+          "w": 290,
+          "x": 3052,
+          "y": 366
+        },
+        "name": "crouch_block_0",
+        "pivot": {
+          "x": 140,
+          "y": 259
+        },
+        "trimmed_bounds": {
+          "h": 219,
+          "w": 247,
+          "x": 0,
+          "y": 108
+        }
+      },
+      {
+        "clip": "crouch_block",
+        "duration_ms": 80,
+        "frame": {
+          "h": 327,
+          "w": 291,
+          "x": 0,
+          "y": 732
+        },
+        "name": "crouch_block_1",
+        "pivot": {
+          "x": 120,
+          "y": 259
+        },
+        "trimmed_bounds": {
+          "h": 143,
+          "w": 177,
+          "x": 48,
+          "y": 119
+        }
+      },
+      {
+        "clip": "crouch_block",
+        "duration_ms": 120,
+        "frame": {
+          "h": 327,
+          "w": 291,
+          "x": 436,
+          "y": 732
+        },
+        "name": "crouch_block_2",
+        "pivot": {
+          "x": 103,
+          "y": 259
+        },
+        "trimmed_bounds": {
+          "h": 150,
+          "w": 171,
+          "x": 30,
+          "y": 112
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 80,
+        "frame": {
+          "h": 317,
+          "w": 280,
+          "x": 872,
+          "y": 732
+        },
+        "name": "hit_0",
+        "pivot": {
+          "x": 146,
+          "y": 293
+        },
+        "trimmed_bounds": {
+          "h": 275,
+          "w": 195,
+          "x": 41,
+          "y": 21
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 100,
+        "frame": {
+          "h": 317,
+          "w": 293,
+          "x": 1308,
+          "y": 732
+        },
+        "name": "hit_1",
+        "pivot": {
+          "x": 132,
+          "y": 293
+        },
+        "trimmed_bounds": {
+          "h": 273,
+          "w": 219,
+          "x": 14,
+          "y": 22
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 120,
+        "frame": {
+          "h": 317,
+          "w": 271,
+          "x": 1744,
+          "y": 732
+        },
+        "name": "hit_2",
+        "pivot": {
+          "x": 132,
+          "y": 293
+        },
+        "trimmed_bounds": {
+          "h": 265,
+          "w": 174,
+          "x": 49,
+          "y": 31
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 83,
+        "frame": {
+          "h": 332,
+          "w": 290,
+          "x": 2180,
+          "y": 732
+        },
+        "name": "punch_light_0",
+        "pivot": {
+          "x": 160,
+          "y": 301
+        },
+        "trimmed_bounds": {
+          "h": 277,
+          "w": 159,
+          "x": 79,
+          "y": 27
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 100,
+        "frame": {
+          "h": 332,
+          "w": 316,
+          "x": 2616,
+          "y": 732
+        },
+        "name": "punch_light_1",
+        "pivot": {
+          "x": 138,
+          "y": 301
+        },
+        "trimmed_bounds": {
+          "h": 263,
+          "w": 233,
+          "x": 42,
+          "y": 41
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 117,
+        "frame": {
+          "h": 332,
+          "w": 280,
+          "x": 3052,
+          "y": 732
+        },
+        "name": "punch_light_2",
+        "pivot": {
+          "x": 121,
+          "y": 301
+        },
+        "trimmed_bounds": {
+          "h": 276,
+          "w": 158,
+          "x": 47,
+          "y": 28
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 200,
+        "frame": {
+          "h": 332,
+          "w": 281,
+          "x": 0,
+          "y": 1098
+        },
+        "name": "punch_heavy_0",
+        "pivot": {
+          "x": 143,
+          "y": 301
+        },
+        "trimmed_bounds": {
+          "h": 271,
+          "w": 149,
+          "x": 64,
+          "y": 33
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 150,
+        "frame": {
+          "h": 332,
+          "w": 324,
+          "x": 436,
+          "y": 1098
+        },
+        "name": "punch_heavy_1",
+        "pivot": {
+          "x": 149,
+          "y": 301
+        },
+        "trimmed_bounds": {
+          "h": 257,
+          "w": 252,
+          "x": 26,
+          "y": 48
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 283,
+        "frame": {
+          "h": 332,
+          "w": 280,
+          "x": 872,
+          "y": 1098
+        },
+        "name": "punch_heavy_2",
+        "pivot": {
+          "x": 134,
+          "y": 301
+        },
+        "trimmed_bounds": {
+          "h": 273,
+          "w": 157,
+          "x": 57,
+          "y": 29
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 150,
+        "frame": {
+          "h": 327,
+          "w": 277,
+          "x": 1308,
+          "y": 1098
+        },
+        "name": "kick_0",
+        "pivot": {
+          "x": 128,
+          "y": 297
+        },
+        "trimmed_bounds": {
+          "h": 276,
+          "w": 150,
+          "x": 49,
+          "y": 24
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 133,
+        "frame": {
+          "h": 327,
+          "w": 319,
+          "x": 1744,
+          "y": 1098
+        },
+        "name": "kick_1",
+        "pivot": {
+          "x": 119,
+          "y": 297
+        },
+        "trimmed_bounds": {
+          "h": 271,
+          "w": 247,
+          "x": 45,
+          "y": 29
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 217,
+        "frame": {
+          "h": 327,
+          "w": 276,
+          "x": 2180,
+          "y": 1098
+        },
+        "name": "kick_2",
+        "pivot": {
+          "x": 136,
+          "y": 297
+        },
+        "trimmed_bounds": {
+          "h": 276,
+          "w": 161,
+          "x": 54,
+          "y": 24
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 200,
+        "frame": {
+          "h": 327,
+          "w": 277,
+          "x": 2616,
+          "y": 1098
+        },
+        "name": "sweep_0",
+        "pivot": {
+          "x": 134,
+          "y": 301
+        },
+        "trimmed_bounds": {
+          "h": 207,
+          "w": 225,
+          "x": 26,
+          "y": 97
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 150,
+        "frame": {
+          "h": 327,
+          "w": 340,
+          "x": 3052,
+          "y": 1098
+        },
+        "name": "sweep_1",
+        "pivot": {
+          "x": 153,
+          "y": 297
+        },
+        "trimmed_bounds": {
+          "h": 217,
+          "w": 282,
+          "x": 44,
+          "y": 83
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 250,
+        "frame": {
+          "h": 327,
+          "w": 254,
+          "x": 0,
+          "y": 1464
+        },
+        "name": "sweep_2",
+        "pivot": {
+          "x": 111,
+          "y": 302
+        },
+        "trimmed_bounds": {
+          "h": 242,
+          "w": 159,
+          "x": 32,
+          "y": 63
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 216,
+        "frame": {
+          "h": 346,
+          "w": 302,
+          "x": 436,
+          "y": 1464
+        },
+        "name": "overhead_0",
+        "pivot": {
+          "x": 178,
+          "y": 319
+        },
+        "trimmed_bounds": {
+          "h": 314,
+          "w": 143,
+          "x": 106,
+          "y": 8
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 134,
+        "frame": {
+          "h": 346,
+          "w": 329,
+          "x": 872,
+          "y": 1464
+        },
+        "name": "overhead_1",
+        "pivot": {
+          "x": 142,
+          "y": 319
+        },
+        "trimmed_bounds": {
+          "h": 258,
+          "w": 199,
+          "x": 58,
+          "y": 64
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 250,
+        "frame": {
+          "h": 346,
+          "w": 292,
+          "x": 1308,
+          "y": 1464
+        },
+        "name": "overhead_2",
+        "pivot": {
+          "x": 101,
+          "y": 319
+        },
+        "trimmed_bounds": {
+          "h": 246,
+          "w": 153,
+          "x": 19,
+          "y": 76
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 116,
+        "frame": {
+          "h": 366,
+          "w": 235,
+          "x": 1744,
+          "y": 1464
+        },
+        "name": "anti_air_0",
+        "pivot": {
+          "x": 118,
+          "y": 327
+        },
+        "trimmed_bounds": {
+          "h": 236,
+          "w": 165,
+          "x": 33,
+          "y": 94
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 134,
+        "frame": {
+          "h": 366,
+          "w": 268,
+          "x": 2180,
+          "y": 1464
+        },
+        "name": "anti_air_1",
+        "pivot": {
+          "x": 122,
+          "y": 327
+        },
+        "trimmed_bounds": {
+          "h": 318,
+          "w": 211,
+          "x": 34,
+          "y": 12
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 250,
+        "frame": {
+          "h": 366,
+          "w": 228,
+          "x": 2616,
+          "y": 1464
+        },
+        "name": "anti_air_2",
+        "pivot": {
+          "x": 111,
+          "y": 327
+        },
+        "trimmed_bounds": {
+          "h": 274,
+          "w": 147,
+          "x": 33,
+          "y": 56
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 83,
+        "frame": {
+          "h": 327,
+          "w": 289,
+          "x": 3052,
+          "y": 1464
+        },
+        "name": "air_punch_0",
+        "pivot": {
+          "x": 155,
+          "y": 296
+        },
+        "trimmed_bounds": {
+          "h": 253,
+          "w": 142,
+          "x": 86,
+          "y": 14
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 150,
+        "frame": {
+          "h": 327,
+          "w": 311,
+          "x": 0,
+          "y": 1830
+        },
+        "name": "air_punch_1",
+        "pivot": {
+          "x": 136,
+          "y": 296
+        },
+        "trimmed_bounds": {
+          "h": 261,
+          "w": 200,
+          "x": 60,
+          "y": 21
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 133,
+        "frame": {
+          "h": 327,
+          "w": 271,
+          "x": 436,
+          "y": 1830
+        },
+        "name": "air_punch_2",
+        "pivot": {
+          "x": 111,
+          "y": 296
+        },
+        "trimmed_bounds": {
+          "h": 250,
+          "w": 135,
+          "x": 35,
+          "y": 17
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 116,
+        "frame": {
+          "h": 327,
+          "w": 289,
+          "x": 872,
+          "y": 1830
+        },
+        "name": "air_kick_0",
+        "pivot": {
+          "x": 155,
+          "y": 296
+        },
+        "trimmed_bounds": {
+          "h": 215,
+          "w": 166,
+          "x": 68,
+          "y": 11
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 167,
+        "frame": {
+          "h": 327,
+          "w": 311,
+          "x": 1308,
+          "y": 1830
+        },
+        "name": "air_kick_1",
+        "pivot": {
+          "x": 123,
+          "y": 296
+        },
+        "trimmed_bounds": {
+          "h": 244,
+          "w": 231,
+          "x": 40,
+          "y": 27
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 150,
+        "frame": {
+          "h": 327,
+          "w": 271,
+          "x": 1744,
+          "y": 1830
+        },
+        "name": "air_kick_2",
+        "pivot": {
+          "x": 111,
+          "y": 296
+        },
+        "trimmed_bounds": {
+          "h": 207,
+          "w": 151,
+          "x": 33,
+          "y": 31
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 116,
+        "frame": {
+          "h": 327,
+          "w": 281,
+          "x": 2180,
+          "y": 1830
+        },
+        "name": "throw_0",
+        "pivot": {
+          "x": 151,
+          "y": 297
+        },
+        "trimmed_bounds": {
+          "h": 276,
+          "w": 185,
+          "x": 70,
+          "y": 24
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 50,
+        "frame": {
+          "h": 327,
+          "w": 311,
+          "x": 2616,
+          "y": 1830
+        },
+        "name": "throw_1",
+        "pivot": {
+          "x": 145,
+          "y": 297
+        },
+        "trimmed_bounds": {
+          "h": 272,
+          "w": 217,
+          "x": 50,
+          "y": 28
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 267,
+        "frame": {
+          "h": 327,
+          "w": 280,
+          "x": 3052,
+          "y": 1830
+        },
+        "name": "throw_2",
+        "pivot": {
+          "x": 119,
+          "y": 297
+        },
+        "trimmed_bounds": {
+          "h": 274,
+          "w": 161,
+          "x": 27,
+          "y": 26
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 100,
+        "frame": {
+          "h": 329,
+          "w": 379,
+          "x": 0,
+          "y": 2196
+        },
+        "name": "special_0",
+        "pivot": {
+          "x": 189,
+          "y": 299
+        },
+        "trimmed_bounds": {
+          "h": 223,
+          "w": 341,
+          "x": 29,
+          "y": 79
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 100,
+        "frame": {
+          "h": 329,
+          "w": 212,
+          "x": 436,
+          "y": 2196
+        },
+        "name": "special_1",
+        "pivot": {
+          "x": 71,
+          "y": 299
+        },
+        "trimmed_bounds": {
+          "h": 277,
+          "w": 155,
+          "x": 5,
+          "y": 25
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 133,
+        "frame": {
+          "h": 329,
+          "w": 286,
+          "x": 872,
+          "y": 2196
+        },
+        "name": "special_2",
+        "pivot": {
+          "x": 129,
+          "y": 299
+        },
+        "trimmed_bounds": {
+          "h": 276,
+          "w": 152,
+          "x": 54,
+          "y": 25
+        }
+      },
+      {
+        "clip": "spawn",
+        "duration_ms": 650,
+        "frame": {
+          "h": 329,
+          "w": 220,
+          "x": 1308,
+          "y": 2196
+        },
+        "name": "spawn_0",
+        "pivot": {
+          "x": 116,
+          "y": 298
+        },
+        "trimmed_bounds": {
+          "h": 270,
+          "w": 144,
+          "x": 37,
+          "y": 31
+        }
+      },
+      {
+        "clip": "spawn",
+        "duration_ms": 850,
+        "frame": {
+          "h": 329,
+          "w": 220,
+          "x": 1744,
+          "y": 2196
+        },
+        "name": "spawn_1",
+        "pivot": {
+          "x": 111,
+          "y": 299
+        },
+        "trimmed_bounds": {
+          "h": 275,
+          "w": 155,
+          "x": 36,
+          "y": 26
+        }
+      },
+      {
+        "clip": "spawn",
+        "duration_ms": 245,
+        "frame": {
+          "h": 329,
+          "w": 220,
+          "x": 2180,
+          "y": 2196
+        },
+        "name": "spawn_2",
+        "pivot": {
+          "x": 105,
+          "y": 299
+        },
+        "trimmed_bounds": {
+          "h": 275,
+          "w": 143,
+          "x": 26,
+          "y": 26
+        }
+      },
+      {
+        "clip": "spawn",
+        "duration_ms": 800,
+        "frame": {
+          "h": 329,
+          "w": 220,
+          "x": 2616,
+          "y": 2196
+        },
+        "name": "spawn_3",
+        "pivot": {
+          "x": 113,
+          "y": 299
+        },
+        "trimmed_bounds": {
+          "h": 271,
+          "w": 151,
+          "x": 29,
+          "y": 30
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 160,
+        "frame": {
+          "h": 366,
+          "w": 252,
+          "x": 3052,
+          "y": 2196
+        },
+        "name": "victory_0",
+        "pivot": {
+          "x": 166,
+          "y": 323
+        },
+        "trimmed_bounds": {
+          "h": 298,
+          "w": 162,
+          "x": 76,
+          "y": 28
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 250,
+        "frame": {
+          "h": 366,
+          "w": 239,
+          "x": 0,
+          "y": 2562
+        },
+        "name": "victory_1",
+        "pivot": {
+          "x": 132,
+          "y": 323
+        },
+        "trimmed_bounds": {
+          "h": 317,
+          "w": 167,
+          "x": 40,
+          "y": 9
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 500,
+        "frame": {
+          "h": 366,
+          "w": 241,
+          "x": 436,
+          "y": 2562
+        },
+        "name": "victory_2",
+        "pivot": {
+          "x": 118,
+          "y": 323
+        },
+        "trimmed_bounds": {
+          "h": 316,
+          "w": 156,
+          "x": 27,
+          "y": 10
+        }
+      },
+      {
+        "clip": "defeat",
+        "duration_ms": 160,
+        "frame": {
+          "h": 332,
+          "w": 294,
+          "x": 872,
+          "y": 2562
+        },
+        "name": "defeat_0",
+        "pivot": {
+          "x": 160,
+          "y": 292
+        },
+        "trimmed_bounds": {
+          "h": 253,
+          "w": 164,
+          "x": 69,
+          "y": 42
+        }
+      },
+      {
+        "clip": "defeat",
+        "duration_ms": 180,
+        "frame": {
+          "h": 332,
+          "w": 307,
+          "x": 1308,
+          "y": 2562
+        },
+        "name": "defeat_1",
+        "pivot": {
+          "x": 147,
+          "y": 291
+        },
+        "trimmed_bounds": {
+          "h": 214,
+          "w": 185,
+          "x": 54,
+          "y": 79
+        }
+      },
+      {
+        "clip": "defeat",
+        "duration_ms": 660,
+        "frame": {
+          "h": 332,
+          "w": 284,
+          "x": 1744,
+          "y": 2562
+        },
+        "name": "defeat_2",
+        "pivot": {
+          "x": 119,
+          "y": 293
+        },
+        "trimmed_bounds": {
+          "h": 208,
+          "w": 157,
+          "x": 40,
+          "y": 90
+        }
+      }
+    ],
+    "image": "c-fighter-atlas.png",
+    "notes": [
+      "Candidate assembled from explicitly reviewed action frames.",
+      "Combat metadata is included only when supplied explicitly in production.json.",
+      "Source rectangles and production provenance: c-fighter.provenance.json"
+    ],
+    "scale": 1.0,
+    "schema": "borrow-fighters.sprite.v1",
+    "source": "../../production/c/production.json"
+  },
+  "loaded_manifest_matches_candidate": true,
+  "render_size": [
+    1280,
+    720
+  ],
+  "required_clips_checked": [
+    "spawn",
+    "idle",
+    "walk",
+    "crouch",
+    "jump",
+    "block",
+    "crouch_block",
+    "hit",
+    "punch_light",
+    "punch_heavy",
+    "kick",
+    "sweep",
+    "overhead",
+    "anti_air",
+    "air_punch",
+    "air_kick",
+    "throw",
+    "special",
+    "victory",
+    "defeat"
+  ],
+  "uncaptured_clips": [
+    "walk"
+  ]
+}

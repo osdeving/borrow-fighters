@@ -1,0 +1,1485 @@
+{
+  "schema": "borrow-fighters.production.v1",
+  "character": "rust",
+  "scale": 1.0,
+  "provenance": {
+    "status": "candidate",
+    "generator": "built-in imagegen",
+    "identity_reference": "reference/master-existing.png",
+    "combat": "Visual-only candidate; runtime retains baseline combat_manifest.",
+    "review": "finalization-review.md"
+  },
+  "actions": {
+    "idle": {
+      "sheet": "idle/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 241,
+            "h": 361
+          },
+          "pivot": {
+            "x": 152,
+            "y": 310
+          },
+          "duration_ms": 180,
+          "phase": "breathing"
+        },
+        {
+          "name": "idle_01",
+          "source_rect": {
+            "x": 241,
+            "y": 0,
+            "w": 241,
+            "h": 361
+          },
+          "pivot": {
+            "x": 142,
+            "y": 310
+          },
+          "duration_ms": 180,
+          "phase": "breathing"
+        },
+        {
+          "name": "idle_02",
+          "source_rect": {
+            "x": 482,
+            "y": 0,
+            "w": 241,
+            "h": 361
+          },
+          "pivot": {
+            "x": 126,
+            "y": 311
+          },
+          "duration_ms": 180,
+          "phase": "breathing"
+        },
+        {
+          "name": "idle_03",
+          "source_rect": {
+            "x": 723,
+            "y": 0,
+            "w": 241,
+            "h": 361
+          },
+          "pivot": {
+            "x": 118,
+            "y": 311
+          },
+          "duration_ms": 180,
+          "phase": "breathing"
+        }
+      ],
+      "provenance": {
+        "source_action": "idle/action.json",
+        "source_sheet": "idle/reviewed.png",
+        "scale_to_runtime": 0.47,
+        "review": "Identity and alpha edges reviewed; Raylib Viewer at runtime size feet y616, body~269px. Source snapshots preserved."
+      }
+    },
+    "walk": {
+      "sheet": "walk/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 244,
+            "h": 335
+          },
+          "pivot": {
+            "x": 143,
+            "y": 308
+          },
+          "duration_ms": 100,
+          "phase": "contact-near"
+        },
+        {
+          "name": "walk_01",
+          "source_rect": {
+            "x": 244,
+            "y": 0,
+            "w": 203,
+            "h": 335
+          },
+          "pivot": {
+            "x": 117,
+            "y": 308
+          },
+          "duration_ms": 100,
+          "phase": "passing-far"
+        },
+        {
+          "name": "walk_02",
+          "source_rect": {
+            "x": 488,
+            "y": 0,
+            "w": 244,
+            "h": 335
+          },
+          "pivot": {
+            "x": 131,
+            "y": 312
+          },
+          "duration_ms": 100,
+          "phase": "contact-far"
+        },
+        {
+          "name": "walk_03",
+          "source_rect": {
+            "x": 732,
+            "y": 0,
+            "w": 203,
+            "h": 335
+          },
+          "pivot": {
+            "x": 83,
+            "y": 309
+          },
+          "duration_ms": 100,
+          "phase": "passing-near"
+        }
+      ],
+      "provenance": {
+        "source_action": "walk/action.json",
+        "source_sheet": "walk/cleaned-v8.png",
+        "scale_to_runtime": 0.4364820846905538,
+        "review": "v8 four distinct walk keys explicitly alternate near cargo-pocket leg and far plain leg; v4/v5 rejected for repeated contact. Master identity and idle retained as references. Ground pivots and one uniform scale selected from 614px body reference; clip stays400ms. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+      }
+    },
+    "crouch": {
+      "sheet": "crouch/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "crouch_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 311,
+            "h": 373
+          },
+          "pivot": {
+            "x": 164,
+            "y": 311
+          },
+          "duration_ms": 60,
+          "phase": "lower"
+        },
+        {
+          "name": "crouch_01",
+          "source_rect": {
+            "x": 311,
+            "y": 0,
+            "w": 311,
+            "h": 373
+          },
+          "pivot": {
+            "x": 144,
+            "y": 311
+          },
+          "duration_ms": 80,
+          "phase": "crouch"
+        },
+        {
+          "name": "crouch_02",
+          "source_rect": {
+            "x": 622,
+            "y": 0,
+            "w": 311,
+            "h": 373
+          },
+          "pivot": {
+            "x": 118,
+            "y": 311
+          },
+          "duration_ms": 120,
+          "phase": "settle"
+        }
+      ],
+      "provenance": {
+        "source_action": "crouch/action.json",
+        "source_sheet": "crouch/keyed.png",
+        "scale_to_runtime": 0.47,
+        "review": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+      }
+    },
+    "jump": {
+      "sheet": "jump/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "jump_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 241,
+            "h": 361
+          },
+          "pivot": {
+            "x": 129,
+            "y": 317
+          },
+          "duration_ms": 60,
+          "phase": "takeoff"
+        },
+        {
+          "name": "jump_01",
+          "source_rect": {
+            "x": 241,
+            "y": 0,
+            "w": 241,
+            "h": 361
+          },
+          "pivot": {
+            "x": 125,
+            "y": 260
+          },
+          "duration_ms": 340,
+          "phase": "rise"
+        },
+        {
+          "name": "jump_02",
+          "source_rect": {
+            "x": 482,
+            "y": 0,
+            "w": 241,
+            "h": 361
+          },
+          "pivot": {
+            "x": 126,
+            "y": 296
+          },
+          "duration_ms": 400,
+          "phase": "fall"
+        }
+      ],
+      "provenance": {
+        "source_action": "jump/action.json",
+        "source_sheet": "jump/keyed.png",
+        "scale_to_runtime": 0.47,
+        "review": "Three selected keys: takeoff, rise and fall. The source includes a fourth landing crouch, omitted because the engine selects idle once grounded. Virtual airborne pivots are calibrated explicitly to align the rise/fall pelvis and head, removing vertical travel already present in the source sheet; only World supplies the jump arc. Total800ms follows existing physics. Source frame3 remains preserved, not exported."
+      }
+    },
+    "block": {
+      "sheet": "block/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "block_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 304,
+            "h": 365
+          },
+          "pivot": {
+            "x": 172,
+            "y": 313
+          },
+          "duration_ms": 80,
+          "phase": "guard"
+        },
+        {
+          "name": "block_01",
+          "source_rect": {
+            "x": 304,
+            "y": 0,
+            "w": 304,
+            "h": 365
+          },
+          "pivot": {
+            "x": 152,
+            "y": 313
+          },
+          "duration_ms": 80,
+          "phase": "brace"
+        },
+        {
+          "name": "block_02",
+          "source_rect": {
+            "x": 608,
+            "y": 0,
+            "w": 304,
+            "h": 365
+          },
+          "pivot": {
+            "x": 129,
+            "y": 313
+          },
+          "duration_ms": 120,
+          "phase": "settle"
+        }
+      ],
+      "provenance": {
+        "source_action": "block/action.json",
+        "source_sheet": "block/keyed.png",
+        "scale_to_runtime": 0.46,
+        "review": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+      }
+    },
+    "crouch_block": {
+      "sheet": "crouch_block/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "crouch_block_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 284,
+            "h": 341
+          },
+          "pivot": {
+            "x": 156,
+            "y": 297
+          },
+          "duration_ms": 70,
+          "phase": "low_guard"
+        },
+        {
+          "name": "crouch_block_01",
+          "source_rect": {
+            "x": 284,
+            "y": 0,
+            "w": 284,
+            "h": 341
+          },
+          "pivot": {
+            "x": 146,
+            "y": 297
+          },
+          "duration_ms": 80,
+          "phase": "brace"
+        },
+        {
+          "name": "crouch_block_02",
+          "source_rect": {
+            "x": 568,
+            "y": 0,
+            "w": 284,
+            "h": 341
+          },
+          "pivot": {
+            "x": 141,
+            "y": 297
+          },
+          "duration_ms": 120,
+          "phase": "settle"
+        }
+      ],
+      "provenance": {
+        "source_action": "crouch_block/action.json",
+        "source_sheet": "crouch_block/keyed.png",
+        "scale_to_runtime": 0.43,
+        "review": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+      }
+    },
+    "hit": {
+      "sheet": "hit/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hit_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 311,
+            "h": 373
+          },
+          "pivot": {
+            "x": 210,
+            "y": 315
+          },
+          "duration_ms": 80,
+          "phase": "recoil"
+        },
+        {
+          "name": "hit_01",
+          "source_rect": {
+            "x": 311,
+            "y": 0,
+            "w": 311,
+            "h": 373
+          },
+          "pivot": {
+            "x": 159,
+            "y": 315
+          },
+          "duration_ms": 100,
+          "phase": "hurt"
+        },
+        {
+          "name": "hit_02",
+          "source_rect": {
+            "x": 622,
+            "y": 0,
+            "w": 311,
+            "h": 373
+          },
+          "pivot": {
+            "x": 144,
+            "y": 315
+          },
+          "duration_ms": 120,
+          "phase": "recover"
+        }
+      ],
+      "provenance": {
+        "source_action": "hit/action.json",
+        "source_sheet": "hit/keyed.png",
+        "scale_to_runtime": 0.47,
+        "review": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+      }
+    },
+    "punch_light": {
+      "sheet": "punch_light/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "punch_light_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 256,
+            "h": 378
+          },
+          "pivot": {
+            "x": 140,
+            "y": 325
+          },
+          "duration_ms": 66,
+          "phase": "startup"
+        },
+        {
+          "name": "punch_light_1",
+          "source_rect": {
+            "x": 258,
+            "y": 0,
+            "w": 258,
+            "h": 378
+          },
+          "pivot": {
+            "x": 126,
+            "y": 325
+          },
+          "duration_ms": 84,
+          "phase": "active"
+        },
+        {
+          "name": "punch_light_2",
+          "source_rect": {
+            "x": 516,
+            "y": 0,
+            "w": 243,
+            "h": 378
+          },
+          "pivot": {
+            "x": 125,
+            "y": 325
+          },
+          "duration_ms": 58,
+          "phase": "recovery"
+        },
+        {
+          "name": "punch_light_3",
+          "source_rect": {
+            "x": 774,
+            "y": 0,
+            "w": 250,
+            "h": 378
+          },
+          "pivot": {
+            "x": 121,
+            "y": 325
+          },
+          "duration_ms": 58,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "punch_light/action.json",
+        "source_sheet": "punch_light/keyed.png",
+        "scale_to_runtime": 0.491743,
+        "review": "Revised low contact pose against unchanged baseline collision geometry. Source and explicit pivots reviewed; final Combat Lab capture pending."
+      }
+    },
+    "punch_heavy": {
+      "sheet": "punch_heavy/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "punch_heavy_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 265,
+            "h": 404
+          },
+          "pivot": {
+            "x": 145,
+            "y": 348
+          },
+          "duration_ms": 183,
+          "phase": "startup"
+        },
+        {
+          "name": "punch_heavy_1",
+          "source_rect": {
+            "x": 305,
+            "y": 0,
+            "w": 305,
+            "h": 404
+          },
+          "pivot": {
+            "x": 121,
+            "y": 348
+          },
+          "duration_ms": 167,
+          "phase": "active"
+        },
+        {
+          "name": "punch_heavy_2",
+          "source_rect": {
+            "x": 610,
+            "y": 0,
+            "w": 250,
+            "h": 404
+          },
+          "pivot": {
+            "x": 97,
+            "y": 348
+          },
+          "duration_ms": 116,
+          "phase": "recovery"
+        },
+        {
+          "name": "punch_heavy_3",
+          "source_rect": {
+            "x": 915,
+            "y": 0,
+            "w": 256,
+            "h": 404
+          },
+          "pivot": {
+            "x": 116,
+            "y": 348
+          },
+          "duration_ms": 117,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "punch_heavy/action.json",
+        "source_sheet": "punch_heavy/keyed.png",
+        "scale_to_runtime": 0.52549,
+        "review": "Revised low contact pose against unchanged baseline collision geometry. Source and explicit pivots reviewed; final Combat Lab capture pending."
+      }
+    },
+    "kick": {
+      "sheet": "kick/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "kick_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 272,
+            "h": 427
+          },
+          "pivot": {
+            "x": 150,
+            "y": 350
+          },
+          "duration_ms": 150,
+          "phase": "startup"
+        },
+        {
+          "name": "kick_1",
+          "source_rect": {
+            "x": 317,
+            "y": 0,
+            "w": 317,
+            "h": 427
+          },
+          "pivot": {
+            "x": 125,
+            "y": 350
+          },
+          "duration_ms": 133,
+          "phase": "active"
+        },
+        {
+          "name": "kick_2",
+          "source_rect": {
+            "x": 634,
+            "y": 0,
+            "w": 261,
+            "h": 427
+          },
+          "pivot": {
+            "x": 128,
+            "y": 350
+          },
+          "duration_ms": 91,
+          "phase": "recovery"
+        },
+        {
+          "name": "kick_3",
+          "source_rect": {
+            "x": 951,
+            "y": 0,
+            "w": 288,
+            "h": 427
+          },
+          "pivot": {
+            "x": 133,
+            "y": 350
+          },
+          "duration_ms": 92,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "kick/action.json",
+        "source_sheet": "kick/keyed.png",
+        "scale_to_runtime": 0.556017,
+        "review": "Revised low contact pose against unchanged baseline collision geometry. Source and explicit pivots reviewed; final Combat Lab capture pending."
+      }
+    },
+    "sweep": {
+      "sheet": "sweep/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sweep_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 278,
+            "h": 419
+          },
+          "pivot": {
+            "x": 156,
+            "y": 359
+          },
+          "duration_ms": 166,
+          "phase": "startup"
+        },
+        {
+          "name": "sweep_01",
+          "source_rect": {
+            "x": 319,
+            "y": 0,
+            "w": 319,
+            "h": 419
+          },
+          "pivot": {
+            "x": 131,
+            "y": 360
+          },
+          "duration_ms": 150,
+          "phase": "active"
+        },
+        {
+          "name": "sweep_02",
+          "source_rect": {
+            "x": 638,
+            "y": 0,
+            "w": 254,
+            "h": 419
+          },
+          "pivot": {
+            "x": 126,
+            "y": 361
+          },
+          "duration_ms": 108,
+          "phase": "recovery"
+        },
+        {
+          "name": "sweep_03",
+          "source_rect": {
+            "x": 957,
+            "y": 0,
+            "w": 266,
+            "h": 419
+          },
+          "pivot": {
+            "x": 123,
+            "y": 359
+          },
+          "duration_ms": 109,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "sweep/action.json",
+        "source_sheet": "sweep/keyed-mvp-v1.png",
+        "scale_to_runtime": 0.546,
+        "review": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Low active foot now attacks ankle/shin band of the actual crouching MoveSpec. Previous action mapping preserved in action-pre-mvp.json. Timing unchanged."
+      }
+    },
+    "overhead": {
+      "sheet": "overhead/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "overhead_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 282,
+            "h": 412
+          },
+          "pivot": {
+            "x": 166,
+            "y": 356
+          },
+          "duration_ms": 200,
+          "phase": "startup"
+        },
+        {
+          "name": "overhead_1",
+          "source_rect": {
+            "x": 295,
+            "y": 0,
+            "w": 295,
+            "h": 412
+          },
+          "pivot": {
+            "x": 139,
+            "y": 356
+          },
+          "duration_ms": 116,
+          "phase": "active"
+        },
+        {
+          "name": "overhead_2",
+          "source_rect": {
+            "x": 590,
+            "y": 0,
+            "w": 247,
+            "h": 412
+          },
+          "pivot": {
+            "x": 110,
+            "y": 356
+          },
+          "duration_ms": 125,
+          "phase": "recovery"
+        },
+        {
+          "name": "overhead_3",
+          "source_rect": {
+            "x": 885,
+            "y": 0,
+            "w": 276,
+            "h": 412
+          },
+          "pivot": {
+            "x": 121,
+            "y": 356
+          },
+          "duration_ms": 125,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "overhead/action.json",
+        "source_sheet": "overhead/keyed.png",
+        "scale_to_runtime": 0.537074,
+        "review": "v3 runtime fist above active box. v4 lowered too far near lower edge. v5 selected: active glove around source x899..960,y404..457, mapping with unchanged global pivot783,663 and scale268/499 into world x62..95,y-139..-111; target box world x50.67..160,y-166.67..-101.33. Head/body/feet preserve prior ground placement. Source reviewed; runtime recapture pending."
+      }
+    },
+    "anti_air": {
+      "sheet": "anti_air/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "anti_air_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 273,
+            "h": 391
+          },
+          "pivot": {
+            "x": 160,
+            "y": 351
+          },
+          "duration_ms": 100,
+          "phase": "startup"
+        },
+        {
+          "name": "anti_air_1",
+          "source_rect": {
+            "x": 275,
+            "y": 0,
+            "w": 275,
+            "h": 391
+          },
+          "pivot": {
+            "x": 127,
+            "y": 351
+          },
+          "duration_ms": 116,
+          "phase": "active"
+        },
+        {
+          "name": "anti_air_2",
+          "source_rect": {
+            "x": 550,
+            "y": 0,
+            "w": 242,
+            "h": 391
+          },
+          "pivot": {
+            "x": 125,
+            "y": 351
+          },
+          "duration_ms": 108,
+          "phase": "recovery"
+        },
+        {
+          "name": "anti_air_3",
+          "source_rect": {
+            "x": 825,
+            "y": 0,
+            "w": 254,
+            "h": 391
+          },
+          "pivot": {
+            "x": 125,
+            "y": 351
+          },
+          "duration_ms": 109,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "anti_air/action.json",
+        "source_sheet": "anti_air/keyed.png",
+        "scale_to_runtime": 0.509506,
+        "review": "Four explicit source poses reviewed by producing agent. Runtime body normalized using source_body_height_reference_px; no per-frame automatic fitting."
+      }
+    },
+    "air_punch": {
+      "sheet": "air_punch/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "air_punch_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 244,
+            "h": 382
+          },
+          "pivot": {
+            "x": 142,
+            "y": 323
+          },
+          "duration_ms": 83,
+          "phase": "startup"
+        },
+        {
+          "name": "air_punch_1",
+          "source_rect": {
+            "x": 286,
+            "y": 0,
+            "w": 286,
+            "h": 382
+          },
+          "pivot": {
+            "x": 126,
+            "y": 345
+          },
+          "duration_ms": 150,
+          "phase": "active"
+        },
+        {
+          "name": "air_punch_2",
+          "source_rect": {
+            "x": 572,
+            "y": 0,
+            "w": 236,
+            "h": 382
+          },
+          "pivot": {
+            "x": 122,
+            "y": 323
+          },
+          "duration_ms": 66,
+          "phase": "recovery"
+        },
+        {
+          "name": "air_punch_3",
+          "source_rect": {
+            "x": 858,
+            "y": 0,
+            "w": 253,
+            "h": 382
+          },
+          "pivot": {
+            "x": 114,
+            "y": 323
+          },
+          "duration_ms": 67,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "air_punch/action.json",
+        "source_sheet": "air_punch/keyed.png",
+        "scale_to_runtime": 0.497217,
+        "review": "Existing source-v2 artwork recalibrated, not regenerated. Active pose hair and waist were44 source px lower than other poses; only air_punch_1 virtual pivot.y650→694 removes ~22px displacement. Hand remains within baseline box (world y approximately -125..-98 versus -130..-74). All other pivots, scale, timing and combat unchanged. See air_punch/pivot-calibration-2026-09-07.md; runtime recapture pending."
+      }
+    },
+    "air_kick": {
+      "sheet": "air_kick/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "air_kick_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 254,
+            "h": 382
+          },
+          "pivot": {
+            "x": 139,
+            "y": 323
+          },
+          "duration_ms": 116,
+          "phase": "startup"
+        },
+        {
+          "name": "air_kick_1",
+          "source_rect": {
+            "x": 301,
+            "y": 0,
+            "w": 301,
+            "h": 382
+          },
+          "pivot": {
+            "x": 112,
+            "y": 323
+          },
+          "duration_ms": 167,
+          "phase": "active"
+        },
+        {
+          "name": "air_kick_2",
+          "source_rect": {
+            "x": 602,
+            "y": 0,
+            "w": 219,
+            "h": 382
+          },
+          "pivot": {
+            "x": 94,
+            "y": 323
+          },
+          "duration_ms": 75,
+          "phase": "recovery"
+        },
+        {
+          "name": "air_kick_3",
+          "source_rect": {
+            "x": 903,
+            "y": 0,
+            "w": 245,
+            "h": 382
+          },
+          "pivot": {
+            "x": 114,
+            "y": 323
+          },
+          "duration_ms": 75,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "air_kick/action.json",
+        "source_sheet": "air_kick/cleaned-v2.png",
+        "scale_to_runtime": 0.497217,
+        "review": "v2 redraws only the active extended leg and sneaker downward so the sole reaches the original airborne hitbox. All four virtual Y anchors restored from temporary630 to original650: the previous whole-clip downward offset is no longer needed. Scale .497217, X anchors, timing, physics and baseline collision unchanged. Static pose/contact/alpha reviewed; World transition recapture pending."
+      }
+    },
+    "throw": {
+      "sheet": "throw/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "throw_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 291,
+            "h": 413
+          },
+          "pivot": {
+            "x": 170,
+            "y": 355
+          },
+          "duration_ms": 83,
+          "phase": "startup"
+        },
+        {
+          "name": "throw_1",
+          "source_rect": {
+            "x": 301,
+            "y": 0,
+            "w": 301,
+            "h": 413
+          },
+          "pivot": {
+            "x": 130,
+            "y": 355
+          },
+          "duration_ms": 50,
+          "phase": "active"
+        },
+        {
+          "name": "throw_2",
+          "source_rect": {
+            "x": 602,
+            "y": 0,
+            "w": 231,
+            "h": 413
+          },
+          "pivot": {
+            "x": 101,
+            "y": 356
+          },
+          "duration_ms": 100,
+          "phase": "recovery"
+        },
+        {
+          "name": "throw_3",
+          "source_rect": {
+            "x": 903,
+            "y": 0,
+            "w": 279,
+            "h": 413
+          },
+          "pivot": {
+            "x": 118,
+            "y": 356
+          },
+          "duration_ms": 100,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "throw/action.json",
+        "source_sheet": "throw/cleaned-v2.png",
+        "scale_to_runtime": 0.538153,
+        "review": "v2 shortens the active grasp by naturally bending both elbows. Forward hand is inside the original Ownership reach; other hand stays near the chest. Ground anchors, scale and all durations unchanged. Generated RGB checkerboard removed offline; source preserved. Static contact and silhouette reviewed; runtime recapture pending."
+      }
+    },
+    "special": {
+      "sheet": "special/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "special_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 350,
+            "h": 373
+          },
+          "pivot": {
+            "x": 170,
+            "y": 312
+          },
+          "duration_ms": 100,
+          "phase": "emission"
+        },
+        {
+          "name": "special_01",
+          "source_rect": {
+            "x": 350,
+            "y": 0,
+            "w": 285,
+            "h": 373
+          },
+          "pivot": {
+            "x": 122,
+            "y": 310
+          },
+          "duration_ms": 100,
+          "phase": "recovery"
+        },
+        {
+          "name": "special_02",
+          "source_rect": {
+            "x": 700,
+            "y": 0,
+            "w": 298,
+            "h": 373
+          },
+          "pivot": {
+            "x": 123,
+            "y": 310
+          },
+          "duration_ms": 150,
+          "phase": "return"
+        }
+      ],
+      "provenance": {
+        "source_action": "special/action.json",
+        "source_sheet": "special/keyed.png",
+        "scale_to_runtime": 0.47,
+        "review": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+      }
+    },
+    "spawn": {
+      "sheet": "spawn/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "spawn_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 289,
+            "h": 374
+          },
+          "pivot": {
+            "x": 151,
+            "y": 314
+          },
+          "duration_ms": 650,
+          "phase": "open_notebook"
+        },
+        {
+          "name": "spawn_01",
+          "source_rect": {
+            "x": 346,
+            "y": 0,
+            "w": 253,
+            "h": 374
+          },
+          "pivot": {
+            "x": 133,
+            "y": 314
+          },
+          "duration_ms": 850,
+          "phase": "type"
+        },
+        {
+          "name": "spawn_02",
+          "source_rect": {
+            "x": 692,
+            "y": 0,
+            "w": 346,
+            "h": 374
+          },
+          "pivot": {
+            "x": 115,
+            "y": 315
+          },
+          "duration_ms": 245,
+          "phase": "toss_notebook"
+        },
+        {
+          "name": "spawn_03",
+          "source_rect": {
+            "x": 1038,
+            "y": 0,
+            "w": 233,
+            "h": 374
+          },
+          "pivot": {
+            "x": 90,
+            "y": 314
+          },
+          "duration_ms": 800,
+          "phase": "ready"
+        }
+      ],
+      "provenance": {
+        "source_action": "spawn/action.json",
+        "source_sheet": "spawn/keyed.png",
+        "scale_to_runtime": 0.516378,
+        "review": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+      }
+    },
+    "victory": {
+      "sheet": "victory/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "victory_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 286,
+            "h": 343
+          },
+          "pivot": {
+            "x": 171,
+            "y": 298
+          },
+          "duration_ms": 160,
+          "phase": "raise_thumb"
+        },
+        {
+          "name": "victory_01",
+          "source_rect": {
+            "x": 286,
+            "y": 0,
+            "w": 286,
+            "h": 343
+          },
+          "pivot": {
+            "x": 123,
+            "y": 298
+          },
+          "duration_ms": 500,
+          "phase": "thumbs_up"
+        }
+      ],
+      "provenance": {
+        "source_action": "victory/action.json",
+        "source_sheet": "victory/keyed.png",
+        "scale_to_runtime": 0.353096,
+        "review": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+      }
+    },
+    "defeat": {
+      "sheet": "defeat/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "defeat_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 275,
+            "h": 329
+          },
+          "pivot": {
+            "x": 151,
+            "y": 292
+          },
+          "duration_ms": 160,
+          "phase": "buckle"
+        },
+        {
+          "name": "defeat_01",
+          "source_rect": {
+            "x": 275,
+            "y": 0,
+            "w": 275,
+            "h": 329
+          },
+          "pivot": {
+            "x": 135,
+            "y": 293
+          },
+          "duration_ms": 180,
+          "phase": "kneel"
+        },
+        {
+          "name": "defeat_02",
+          "source_rect": {
+            "x": 550,
+            "y": 0,
+            "w": 275,
+            "h": 329
+          },
+          "pivot": {
+            "x": 112,
+            "y": 296
+          },
+          "duration_ms": 660,
+          "phase": "supported_hold"
+        }
+      ],
+      "provenance": {
+        "source_action": "defeat/action.json",
+        "source_sheet": "defeat/keyed.png",
+        "scale_to_runtime": 0.415504,
+        "review": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+      }
+    },
+    "knockdown": {
+      "sheet": "knockdown/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "knockdown_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 265,
+            "h": 384
+          },
+          "pivot": {
+            "x": 182,
+            "y": 325
+          },
+          "duration_ms": 100,
+          "phase": "fall"
+        },
+        {
+          "name": "knockdown_01",
+          "source_rect": {
+            "x": 280,
+            "y": 0,
+            "w": 280,
+            "h": 384
+          },
+          "pivot": {
+            "x": 145,
+            "y": 325
+          },
+          "duration_ms": 220,
+          "phase": "grounded"
+        },
+        {
+          "name": "knockdown_02",
+          "source_rect": {
+            "x": 560,
+            "y": 0,
+            "w": 235,
+            "h": 384
+          },
+          "pivot": {
+            "x": 130,
+            "y": 316
+          },
+          "duration_ms": 180,
+          "phase": "get_up"
+        },
+        {
+          "name": "knockdown_03",
+          "source_rect": {
+            "x": 840,
+            "y": 0,
+            "w": 244,
+            "h": 384
+          },
+          "pivot": {
+            "x": 130,
+            "y": 316
+          },
+          "duration_ms": 100,
+          "phase": "recover"
+        }
+      ],
+      "provenance": {
+        "source_action": "knockdown/action.json",
+        "source_sheet": "knockdown/keyed-v1.png",
+        "scale_to_runtime": 0.5,
+        "review": "Four newly generated fall/floor/get-up/guard poses; same attached hip accessories. Floor anchors are virtual during fall and actual support afterward. One uniform .5 action scale; final guard remains slightly bent at knees. Original source and prompt retained."
+      }
+    },
+    "signature_special": {
+      "sheet": "signature_special/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "signature_special_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 238,
+            "h": 365
+          },
+          "pivot": {
+            "x": 142,
+            "y": 309
+          },
+          "duration_ms": 200,
+          "phase": "startup"
+        },
+        {
+          "name": "signature_special_01",
+          "source_rect": {
+            "x": 290,
+            "y": 0,
+            "w": 290,
+            "h": 365
+          },
+          "pivot": {
+            "x": 133,
+            "y": 310
+          },
+          "duration_ms": 100,
+          "phase": "active"
+        },
+        {
+          "name": "signature_special_02",
+          "source_rect": {
+            "x": 580,
+            "y": 0,
+            "w": 214,
+            "h": 365
+          },
+          "pivot": {
+            "x": 104,
+            "y": 309
+          },
+          "duration_ms": 166,
+          "phase": "recovery"
+        },
+        {
+          "name": "signature_special_03",
+          "source_rect": {
+            "x": 870,
+            "y": 0,
+            "w": 232,
+            "h": 365
+          },
+          "pivot": {
+            "x": 128,
+            "y": 309
+          },
+          "duration_ms": 167,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "signature_special/action.json",
+        "source_sheet": "signature_special/keyed-v2.png",
+        "scale_to_runtime": 0.475,
+        "review": "New four-frame signature animation generated with imagegen. Explicit variable-width crops preserve whole extended limbs; constant anatomical scale, support pivots, startup/active/recovery keyed to MoveSpec. Original source and background-only revision preserved. Local matte removal authorized in production README. Source identity/alpha reviewed; runtime contacts verified in both facings."
+      }
+    }
+  }
+}

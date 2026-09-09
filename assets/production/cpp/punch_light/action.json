@@ -1,0 +1,65 @@
+{
+  "action": "punch_light",
+  "source": "punch_light/source-v3.png",
+  "sheet": "punch_light/keyed-v3.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "candidate: source, alpha and two-facing previews inspected; corrected Combat Lab captured, artistic limitations recorded in review.md",
+  "source_body_height_reference_px": 689,
+  "suggested_scale_to_runtime": 0.3889695210449927,
+  "frames": [
+    {
+      "name": "punch_light_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 684,
+        "h": 736
+      },
+      "pivot": {
+        "x": 391,
+        "y": 715
+      },
+      "duration_ms": 66,
+      "phase": "startup"
+    },
+    {
+      "name": "punch_light_01",
+      "source_rect": {
+        "x": 684,
+        "y": 0,
+        "w": 684,
+        "h": 736
+      },
+      "pivot": {
+        "x": 303,
+        "y": 715
+      },
+      "duration_ms": 84,
+      "phase": "active"
+    },
+    {
+      "name": "punch_light_02",
+      "source_rect": {
+        "x": 1368,
+        "y": 0,
+        "w": 680,
+        "h": 736
+      },
+      "pivot": {
+        "x": 300,
+        "y": 715
+      },
+      "duration_ms": 116,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Selected v3 after lowering contact from chest to waistband. Three own stages, adult proportions and continuous bag preserved. Glove center around source(1230,390), pivot(987,715), gives world offset(+94.5,-126.4), inside existing LP box. Original drafts retained. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged.",
+  "runtime_review": {
+    "report": "../../candidates/cpp/review/runtime-lab/capture-report.json",
+    "loaded_manifest_matches_candidate": true,
+    "clip_captured": true,
+    "combat_uses_baseline_manifest": true,
+    "final_art_approved": false
+  }
+}

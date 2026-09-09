@@ -1,0 +1,75 @@
+{
+  "character": "cpp",
+  "clips": 22,
+  "frames": 70,
+  "new_or_replaced_actions": [
+    {
+      "action": "signature_special",
+      "source": "signature_special/source-green-v3.png",
+      "source_sha256": "ddf6e76b0d62aa9fae483bac2bb06dabba5b84c230ac3c9ad0fb0fcd3aaa0bb3",
+      "frames": 4,
+      "duration_ms": 700,
+      "scale_to_runtime": 0.4953789279112754,
+      "phases": [
+        "startup",
+        "active",
+        "recovery",
+        "recovery"
+      ]
+    },
+    {
+      "action": "sweep",
+      "source": "sweep/source-mvp-v4.png",
+      "source_sha256": "fdc8a2d2b0f7fedf0cb7c133f6f8d5208257b9d6010eee898378a1de74d16f0c",
+      "frames": 4,
+      "duration_ms": 517,
+      "scale_to_runtime": 0.47686832740213525,
+      "phases": [
+        "startup",
+        "active",
+        "recovery",
+        "recovery"
+      ]
+    },
+    {
+      "action": "knockdown",
+      "source": "knockdown/source-v1.png",
+      "source_sha256": "cd04ea34d4d357253027a9ab01a766ae33b3c4b071b2e0fbf35871753548a572",
+      "frames": 4,
+      "duration_ms": 600,
+      "scale_to_runtime": 0.47686832740213525,
+      "phases": [
+        "fall",
+        "down",
+        "rise",
+        "ready"
+      ]
+    }
+  ],
+  "contextual_review": {
+    "left": {
+      "scenarios": 15,
+      "raw_snapshots": 135
+    },
+    "right": {
+      "scenarios": 15,
+      "raw_snapshots": 135
+    }
+  },
+  "retained_runtime_pngs": 11,
+  "alpha_review": "dark and light backgrounds, both facings; source checker pockets corrected through imagegen green background followed by explicit local alpha preparation",
+  "tests": [
+    "cargo test --test sprite_candidates: passed coverage/source order and every actual attack tick"
+  ],
+  "combat_metadata_added": false,
+  "original_sources_retained": true,
+  "root_review": {
+    "reviewer": "root agent",
+    "status": "integrated_and_reviewed_for_mvp",
+    "reviewed_runtime_actions": [
+      "signature_special",
+      "knockdown"
+    ],
+    "scope": "MVP visual integration accepted; original candidate history retained."
+  }
+}

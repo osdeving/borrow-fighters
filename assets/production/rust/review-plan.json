@@ -1,0 +1,161 @@
+{
+  "character": "rust",
+  "provenance": {
+    "status": "candidate",
+    "generator": "built-in imagegen",
+    "identity_reference": "reference/master-existing.png",
+    "combat": "Baseline sprite combat metadata is retained. Throws, capture/launch trajectories and signature effects use explicit World/combat contracts documented by ADR0014; visual repacking does not retune baseline move boxes.",
+    "review": "spectacle-review.md"
+  },
+  "actions": {
+    "idle": {
+      "approved": true,
+      "scale_to_runtime": 0.47,
+      "notes": "Identity and alpha edges reviewed; Raylib Viewer at runtime size feet y616, body~269px. Source snapshots preserved."
+    },
+    "walk": {
+      "approved": true,
+      "scale_to_runtime": 0.4364820846905538,
+      "notes": "v8 four distinct walk keys explicitly alternate near cargo-pocket leg and far plain leg; v4/v5 rejected for repeated contact. Master identity and idle retained as references. Ground pivots and one uniform scale selected from 614px body reference; clip stays400ms. Pilot visual and functional review completed; see finalization-review.md for scope and evidence.",
+      "sheet": "walk/cleaned-v8.png"
+    },
+    "crouch": {
+      "approved": true,
+      "scale_to_runtime": 0.47,
+      "sheet": "crouch/keyed.png",
+      "notes": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+    },
+    "jump": {
+      "approved": true,
+      "scale_to_runtime": 0.47,
+      "sheet": "jump/keyed.png",
+      "notes": "Three selected keys: takeoff, rise and fall. The source includes a fourth landing crouch, omitted because the engine selects idle once grounded. Virtual airborne pivots are calibrated explicitly to align the rise/fall pelvis and head, removing vertical travel already present in the source sheet; only World supplies the jump arc. Total800ms follows existing physics. Source frame3 remains preserved, not exported."
+    },
+    "block": {
+      "approved": true,
+      "scale_to_runtime": 0.46,
+      "sheet": "block/keyed.png",
+      "notes": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+    },
+    "crouch_block": {
+      "approved": true,
+      "scale_to_runtime": 0.43,
+      "sheet": "crouch_block/keyed.png",
+      "notes": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+    },
+    "hit": {
+      "approved": true,
+      "scale_to_runtime": 0.47,
+      "sheet": "hit/keyed.png",
+      "notes": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+    },
+    "punch_light": {
+      "approved": true,
+      "scale_to_runtime": 0.491743,
+      "notes": "Revised low contact pose against unchanged baseline collision geometry. Source and explicit pivots reviewed; final Combat Lab capture pending.",
+      "sheet": "punch_light/keyed.png"
+    },
+    "punch_heavy": {
+      "approved": true,
+      "scale_to_runtime": 0.52549,
+      "notes": "Revised low contact pose against unchanged baseline collision geometry. Source and explicit pivots reviewed; final Combat Lab capture pending.",
+      "sheet": "punch_heavy/keyed.png"
+    },
+    "kick": {
+      "approved": true,
+      "scale_to_runtime": 0.556017,
+      "notes": "Revised low contact pose against unchanged baseline collision geometry. Source and explicit pivots reviewed; final Combat Lab capture pending.",
+      "sheet": "kick/keyed.png"
+    },
+    "sweep": {
+      "approved": true,
+      "scale_to_runtime": 0.546,
+      "sheet": "sweep/keyed-mvp-v1.png",
+      "notes": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Low active foot now attacks ankle/shin band of the actual crouching MoveSpec. Previous action mapping preserved in action-pre-mvp.json. Timing unchanged."
+    },
+    "overhead": {
+      "approved": true,
+      "scale_to_runtime": 0.537074,
+      "notes": "v3 runtime fist above active box. v4 lowered too far near lower edge. v5 selected: active glove around source x899..960,y404..457, mapping with unchanged global pivot783,663 and scale268/499 into world x62..95,y-139..-111; target box world x50.67..160,y-166.67..-101.33. Head/body/feet preserve prior ground placement. Source reviewed; runtime recapture pending.",
+      "sheet": "overhead/keyed.png"
+    },
+    "anti_air": {
+      "approved": true,
+      "scale_to_runtime": 0.509506,
+      "notes": "Four explicit source poses reviewed by producing agent. Runtime body normalized using source_body_height_reference_px; no per-frame automatic fitting.",
+      "sheet": "anti_air/keyed.png"
+    },
+    "air_punch": {
+      "approved": true,
+      "scale_to_runtime": 0.497217,
+      "notes": "Existing source-v2 artwork recalibrated, not regenerated. Active pose hair and waist were44 source px lower than other poses; only air_punch_1 virtual pivot.y650\u2192694 removes ~22px displacement. Hand remains within baseline box (world y approximately -125..-98 versus -130..-74). All other pivots, scale, timing and combat unchanged. See air_punch/pivot-calibration-2026-09-07.md; runtime recapture pending.",
+      "sheet": "air_punch/keyed.png"
+    },
+    "air_kick": {
+      "approved": true,
+      "scale_to_runtime": 0.497217,
+      "notes": "v2 redraws only the active extended leg and sneaker downward so the sole reaches the original airborne hitbox. All four virtual Y anchors restored from temporary630 to original650: the previous whole-clip downward offset is no longer needed. Scale .497217, X anchors, timing, physics and baseline collision unchanged. Static pose/contact/alpha reviewed; World transition recapture pending.",
+      "sheet": "air_kick/cleaned-v2.png"
+    },
+    "throw": {
+      "approved": true,
+      "scale_to_runtime": 0.7,
+      "sheet": "throw/mapped-spectacle-v3.png",
+      "notes": "Six newly drawn back-throw poses. v2 corrects release hands to throw behind LEFT; other poses preserve identity. Fixed10..12 contact,12fcapture, releasevisual22; originalmapping archived. Uniform scale0.7 and explicit foot pivots. v3 replaces only lift pose2: open supporting hands reach forward above forehead toward the captured body, instead of clasping behind the head. Other five source crops remain byte-identical to v2. See throw/mapping-spectacle-v3.json."
+    },
+    "special": {
+      "approved": true,
+      "scale_to_runtime": 0.47,
+      "sheet": "special/keyed.png",
+      "notes": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+    },
+    "spawn": {
+      "approved": true,
+      "scale_to_runtime": 0.516378,
+      "sheet": "spawn/keyed.png",
+      "notes": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+    },
+    "victory": {
+      "approved": true,
+      "scale_to_runtime": 0.353096,
+      "sheet": "victory/keyed.png",
+      "notes": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+    },
+    "defeat": {
+      "approved": true,
+      "scale_to_runtime": 0.415504,
+      "sheet": "defeat/keyed.png",
+      "notes": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+    },
+    "knockdown": {
+      "approved": true,
+      "scale_to_runtime": 0.5,
+      "sheet": "knockdown/keyed-v1.png",
+      "notes": "Four newly generated fall/floor/get-up/guard poses; same attached hip accessories. Floor anchors are virtual during fall and actual support afterward. One uniform .5 action scale; final guard remains slightly bent at knees. Original source and prompt retained."
+    },
+    "signature_special": {
+      "approved": true,
+      "scale_to_runtime": 0.9,
+      "sheet": "signature_special/mapped-spectacle-v1.png",
+      "notes": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved."
+    },
+    "heavy_hit": {
+      "approved": true,
+      "scale_to_runtime": 0.86,
+      "sheet": "reactions/keyed-spectacle-v1.png",
+      "notes": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved."
+    },
+    "launched": {
+      "approved": true,
+      "scale_to_runtime": 0.86,
+      "sheet": "reactions/keyed-spectacle-v1.png",
+      "notes": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved."
+    },
+    "thrown": {
+      "approved": true,
+      "scale_to_runtime": 0.86,
+      "sheet": "reactions/keyed-spectacle-v1.png",
+      "notes": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved."
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "sheet": "heavy_hit/keyed-spectacle-v2.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "heavy_hit_spectacle_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 690,
+        "h": 836
+      },
+      "pivot": {
+        "x": 403,
+        "y": 722
+      },
+      "duration_ms": 90,
+      "phase": "impact"
+    },
+    {
+      "name": "heavy_hit_spectacle_01",
+      "source_rect": {
+        "x": 690,
+        "y": 0,
+        "w": 650,
+        "h": 836
+      },
+      "pivot": {
+        "x": 402,
+        "y": 722
+      },
+      "duration_ms": 140,
+      "phase": "stagger"
+    },
+    {
+      "name": "heavy_hit_spectacle_02",
+      "source_rect": {
+        "x": 1340,
+        "y": 0,
+        "w": 541,
+        "h": 836
+      },
+      "pivot": {
+        "x": 210,
+        "y": 722
+      },
+      "duration_ms": 170,
+      "phase": "recover"
+    }
+  ]
+}

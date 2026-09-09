@@ -1,0 +1,94 @@
+{
+  "tool": "built-in imagegen",
+  "source_output_mapping": "generation-inputs.json",
+  "files": {
+    "ground-rise-source.png": {
+      "sha256": "74df7b5884fa438b88258b3d9b04455e100011688bfc9ec788ffe0488ecb387b",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB"
+    },
+    "guards-source.png": {
+      "sha256": "f6a1b9613b1c19e90d9f3a044d6b552630e171539d77d1abac3220e566988e5e",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB"
+    },
+    "hits-source.png": {
+      "sha256": "116d7f64293b31b98ddb758701322a628e4891390da71c98a6d77d825b5bce09",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGB"
+    },
+    "launch-source.png": {
+      "sha256": "d57bcdf6bd0aef81d0f963021ce42b8dd0eba20593aa91ba85757202b2a0df8e",
+      "size": [
+        2172,
+        724
+      ],
+      "mode": "RGB"
+    },
+    "ground-rise-alpha.png": {
+      "sha256": "aa4a0a5f6a02da87eeb8e9c6b682012f8a4518a0de6495c9144b4611228bc99b",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_fraction": 0.7272497812906901,
+      "visible_fraction_above_32": 0.24464289347330728
+    },
+    "guards-alpha.png": {
+      "sha256": "e702462b497ed7c25c5aea9b89142c3ec9ee4ca11334ee1ae5519f14795cf868",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_fraction": 0.6428303606268168,
+      "visible_fraction_above_32": 0.3155811934633927
+    },
+    "hits-alpha.png": {
+      "sha256": "303be937305bd86a0117e0fb607c01358cc70059635648da21cbc39dede8ee0a",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_fraction": 0.6300326607856903,
+      "visible_fraction_above_32": 0.31741692357783136
+    },
+    "launch-alpha.png": {
+      "sha256": "31ac970b39e88fb38aef4d0b12956cecf6b2a3831dbce0a1fa584397551a7c32",
+      "size": [
+        2172,
+        724
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_fraction": 0.7150270138274167,
+      "visible_fraction_above_32": 0.2615336579062503
+    }
+  }
+}

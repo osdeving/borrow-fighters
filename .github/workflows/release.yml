@@ -1,0 +1,266 @@
+name: Playtest Release
+
+on:
+  push:
+    branches: ["release/**"]
+    tags: ["v[0-9]*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: playtest-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  package:
+    name: Package ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux-x86_64
+            os: ubuntu-22.04
+            target: x86_64-unknown-linux-gnu
+          - platform: windows-x86_64
+            os: windows-2022
+            target: x86_64-pc-windows-msvc
+    runs-on: ${{ matrix.os }}
+    env:
+      CARGO_BUILD_TARGET: ${{ matrix.target }}
+      CARGO_TERM_COLOR: always
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Read and validate release version
+        id: version
+        shell: bash
+        env:
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          python - <<'PY'
+          import os, pathlib, re, tomllib
+          version = tomllib.loads(pathlib.Path('Cargo.toml').read_text())['package']['version']
+          if not re.fullmatch(r'\d+\.\d+\.\d+(?:-[a-z]+\.\d+)?', version):
+              raise SystemExit(f'Unsupported package version: {version}')
+          if os.environ['REF_TYPE'] == 'tag' and os.environ['REF_NAME'] != 'v' + version:
+              raise SystemExit('Tag must match Cargo.toml version')
+          if not pathlib.Path(f'docs/releases/v{version}.md').is_file():
+              raise SystemExit('Missing player release notes')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write(f'version={version}\n')
+          PY
+      - name: Install Linux build and packaging dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sed -n 's/^deb /deb-src /p' /etc/apt/sources.list | sudo tee /etc/apt/sources.list.d/borrow-fighters-source.list >/dev/null
+          sudo apt-get update
+          sudo apt-get install -y clang cmake libclang-dev pkg-config \
+            libasound2-dev libgl1-mesa-dev libudev-dev libx11-dev \
+            libxcursor-dev libxi-dev libxinerama-dev libxrandr-dev \
+            rpm xvfb xauth libpulse0 libx11-xcb1 libxxf86vm1 libxrender1 libxext6 libasound2-data
+      - name: Configure Windows static runtime
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          'RUSTFLAGS=-C target-feature=+crt-static' >> $env:GITHUB_ENV
+          $toolchain = (Join-Path $env:GITHUB_WORKSPACE 'packaging/windows/static-runtime.cmake').Replace('\', '/')
+          "CMAKE_TOOLCHAIN_FILE=$toolchain" >> $env:GITHUB_ENV
+          'LIBCLANG_PATH=C:\Program Files\LLVM\bin' >> $env:GITHUB_ENV
+          'C:\Program Files (x86)\Inno Setup 6' >> $env:GITHUB_PATH
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: release-${{ matrix.platform }}
+      - name: Rust checks
+        run: |
+          cargo fmt --check
+          cargo test --locked --all-targets
+          cargo clippy --locked --all-targets --all-features -- -D warnings
+      - name: Build optimized game
+        run: cargo build --locked --release --bin borrow-fighters
+      - name: Verify Windows imports do not require Visual C++ Redistributable
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $imports = & 'C:\Program Files\LLVM\bin\llvm-readobj.exe' --coff-imports target/x86_64-pc-windows-msvc/release/borrow-fighters.exe
+          if ($LASTEXITCODE -ne 0) { throw 'Could not inspect executable imports' }
+          $imports | Select-String 'Name:'
+          if ($imports -match '(?i)Name:.*(vcruntime|msvcp|ucrtbase|api-ms-win-crt)') {
+            throw 'A dynamic Microsoft C/C++ runtime was linked; check crt-static configuration'
+          }
+      - name: Stage Windows files
+        if: runner.os == 'Windows'
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
+        run: python tools/release/package.py stage --target windows-x86_64 --version $env:RELEASE_VERSION --binary target/x86_64-pc-windows-msvc/release/borrow-fighters.exe --output dist/stage
+      - name: Create Windows installer and portable ZIP
+        if: runner.os == 'Windows'
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
+        run: python tools/release/package.py windows --stage dist/stage --version $env:RELEASE_VERSION --output dist
+      - name: Verify Windows installer and ZIP in accented paths
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $mt = Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin\*\x64\mt.exe" | Sort-Object FullName -Descending | Select-Object -First 1
+          if (!$mt) { throw 'Windows SDK mt.exe is required to inspect the embedded application manifest' }
+          $expectedHash = (Get-FileHash 'dist/stage/borrow-fighters.exe' -Algorithm SHA256).Hash
+          function Assert-PackagedExecutable([string] $executable, [string] $label) {
+            if ((Get-FileHash -LiteralPath $executable -Algorithm SHA256).Hash -ne $expectedHash) {
+              throw "$label executable differs from the staged build"
+            }
+            $manifestPath = Join-Path $env:RUNNER_TEMP "$label-app.manifest"
+            & $mt.FullName '-nologo' "-inputresource:$executable;#1" "-out:$manifestPath"
+            if ($LASTEXITCODE -ne 0) { throw "Could not extract $label application manifest" }
+            [xml] $manifest = Get-Content -LiteralPath $manifestPath -Raw
+            $codePage = $manifest.SelectSingleNode("//*[local-name()='activeCodePage' and namespace-uri()='http://schemas.microsoft.com/SMI/2019/WindowsSettings']")
+            if (!$codePage -or $codePage.InnerText.Trim() -ne 'UTF-8') {
+              throw "$label executable must embed activeCodePage=UTF-8 for accented asset paths"
+            }
+            python tools/release/package.py verify --stage (Split-Path -Parent $executable)
+            if ($LASTEXITCODE -ne 0) { throw "$label packaged asset verification failed" }
+            # --help checks process loading without requiring a graphics context.
+            $game = Start-Process $executable -ArgumentList '--help' -WorkingDirectory $env:RUNNER_TEMP -Wait -PassThru
+            if ($game.ExitCode -ne 2) { throw "$label executable failed to load: $($game.ExitCode)" }
+          }
+          $installer = (Get-ChildItem dist/*-setup.exe).FullName
+          $installDir = Join-Path $env:RUNNER_TEMP 'Jogo ação instalado'
+          $install = Start-Process $installer -ArgumentList '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', "/DIR=`"$installDir`"" -Wait -PassThru
+          if ($install.ExitCode -ne 0) { throw "Installer failed: $($install.ExitCode)" }
+          Assert-PackagedExecutable "$installDir/borrow-fighters.exe" 'installed'
+          $uninstall = Start-Process "$installDir/unins000.exe" -ArgumentList '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART' -Wait -PassThru
+          if ($uninstall.ExitCode -ne 0) { throw "Uninstaller failed: $($uninstall.ExitCode)" }
+          $portableDir = Join-Path $env:RUNNER_TEMP 'Jogo ação portátil'
+          $portableZip = @(Get-ChildItem dist/*windows-x86_64.zip)
+          if ($portableZip.Count -ne 1) { throw 'Expected exactly one portable Windows ZIP' }
+          Expand-Archive -LiteralPath $portableZip[0].FullName -DestinationPath $portableDir
+          $portableExe = @(Get-ChildItem -LiteralPath $portableDir -Filter 'borrow-fighters.exe' -Recurse)
+          if ($portableExe.Count -ne 1) { throw 'Expected exactly one extracted game executable' }
+          Assert-PackagedExecutable $portableExe[0].FullName 'portable'
+      - name: Stage Linux files
+        if: runner.os == 'Linux'
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
+        run: python tools/release/package.py stage --target linux-x86_64 --version "$RELEASE_VERSION" --binary target/x86_64-unknown-linux-gnu/release/borrow-fighters --output dist/stage
+      - name: Synchronize bundled libraries with available source packages
+        if: runner.os == 'Linux'
+        run: |
+          python tools/release/package.py native-packages --stage dist/stage > "$RUNNER_TEMP/native-packages.txt"
+          mapfile -t runtime_packages < "$RUNNER_TEMP/native-packages.txt"
+          test "${#runtime_packages[@]}" -gt 0
+          sudo apt-get install -y "${runtime_packages[@]}"
+      - name: Create Linux portable archive, DEB and RPM
+        if: runner.os == 'Linux'
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
+        run: python tools/release/package.py linux --stage dist/stage --version "$RELEASE_VERSION" --output dist
+      - name: Smoke test packaged Linux game
+        if: runner.os == 'Linux'
+        run: |
+          sudo dpkg -i dist/*.deb
+          game=/usr/bin/borrow-fighters
+          cd /tmp
+          export BORROW_FIGHTERS_DATA_DIR="$RUNNER_TEMP/playtest-user"
+          set +e
+          timeout 12s xvfb-run -a "$game" > "$RUNNER_TEMP/game-smoke.log" 2>&1
+          status=$?
+          set -e
+          cat "$RUNNER_TEMP/game-smoke.log"
+          test "$status" -eq 124
+          ! grep -Ei 'failed to (load|open)|could not (load|open)|panicked at|error while loading shared libraries' "$RUNNER_TEMP/game-smoke.log"
+          sudo dpkg -r borrow-fighters
+      - name: Verify RPM installation on Fedora 44
+        if: runner.os == 'Linux'
+        run: |
+          docker run --rm -v "$PWD/dist:/packages:ro" fedora:44 bash -c '
+            set -eu
+            dnf install -y /packages/*.rpm xorg-x11-server-Xvfb xauth mesa-dri-drivers
+            cd /tmp
+            set +e
+            /usr/bin/borrow-fighters --help
+            status=$?
+            set -e
+            test "$status" -eq 2
+            test -f /usr/share/applications/borrow-fighters.desktop
+            Xvfb :99 -screen 0 1280x720x24 >/tmp/xvfb.log 2>&1 &
+            export DISPLAY=:99 LIBGL_ALWAYS_SOFTWARE=1
+            sleep 2
+            set +e
+            timeout 12s /usr/bin/borrow-fighters >/tmp/game.log 2>&1
+            status=$?
+            set -e
+            cat /tmp/game.log
+            test "$status" -eq 124
+            ! grep -Ei "failed to (load|open)|could not (load|open)|panicked at|error while loading shared libraries" /tmp/game.log
+            dnf remove -y borrow-fighters
+          '
+      - name: Verify packaged assets and checksums
+        run: python tools/release/package.py verify --stage dist/stage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: packages-${{ matrix.platform }}
+          path: |
+            dist/*.zip
+            dist/*-setup.exe
+            dist/*.tar.gz
+            dist/*.deb
+            dist/*.rpm
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+
+  publish:
+    name: Publish GitHub prerelease
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: package
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: packages-*
+          merge-multiple: true
+          path: dist
+      - name: Validate downloads and calculate checksums
+        run: |
+          python3 - <<'PY'
+          import hashlib, pathlib
+          root = pathlib.Path('dist')
+          # Keep prerelease ordering inside DEB/RPM metadata, while using simple
+          # download names that GitHub will preserve verbatim for the checksums.
+          for path in root.iterdir():
+              if '~' in path.name:
+                  path.rename(path.with_name(path.name.replace('~', '-')))
+          for suffix in ('.zip', '-setup.exe', '.tar.gz', '.deb', '.rpm'):
+              matches = list(root.glob('*' + suffix))
+              if len(matches) != 1:
+                  raise SystemExit(f'Expected one {suffix} package, found {len(matches)}')
+          files = sorted(p for p in root.iterdir() if p.is_file())
+          with (root / 'SHA256SUMS.txt').open('w') as output:
+              for path in files:
+                  output.write(hashlib.sha256(path.read_bytes()).hexdigest() + '  ' + path.name + '\n')
+          PY
+      - name: Upload all assets before making release visible
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          if gh release view "$RELEASE_TAG" --json isDraft --jq '.isDraft' > /tmp/is-draft; then
+            test "$(cat /tmp/is-draft)" = true || { echo 'Published releases are immutable in this workflow; use a new tag.'; exit 1; }
+          else
+            gh release create "$RELEASE_TAG" --verify-tag --draft --prerelease \
+              --title "Borrow Fighters $RELEASE_TAG — baixe e jogue" \
+              --notes-file "docs/releases/$RELEASE_TAG.md"
+          fi
+          gh release upload "$RELEASE_TAG" dist/* --clobber
+          gh release edit "$RELEASE_TAG" --draft=false --prerelease --latest=false

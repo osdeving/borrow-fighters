@@ -1,0 +1,368 @@
+{
+  "description": "Comparison of isolated voices and all authored-super effects, with exact runtime manifest volume and pitch. Silence separates entries; no added speech or music.",
+  "file": "assets/audio/review/voice-and-super-reel.ogg",
+  "duration_seconds": 40.7413,
+  "sha256": "b0381422b31bba0f14a3855fe3e7a5a018e381934bbfae446661e9c4eec8d5d6",
+  "segments": [
+    {
+      "label": "Rust · Ataque",
+      "clip_id": "voice.rust.attack.heavy.01",
+      "file": "assets/audio/characters/rust/voice/attack-heavy-01.ogg",
+      "sha256": "2904b0d2cf923ca11b56433961b81f1c29a0ad00d9ac8a6094ed4fc95e137555",
+      "start_seconds": 0.4,
+      "end_seconds": 1.1587,
+      "volume": 0.64,
+      "pitch": 1.0
+    },
+    {
+      "label": "Rust · Dano",
+      "clip_id": "voice.rust.hurt.01",
+      "file": "assets/audio/characters/rust/voice/hurt-01.ogg",
+      "sha256": "a7d14e052a979d1a4a479f43a7e3028bad4384815943809a02a779ced23f114f",
+      "start_seconds": 1.6587,
+      "end_seconds": 2.1747,
+      "volume": 0.53,
+      "pitch": 1.0
+    },
+    {
+      "label": "Rust · Defesa",
+      "clip_id": "voice.rust.block.01",
+      "file": "assets/audio/characters/rust/voice/block-01.ogg",
+      "sha256": "d4afee90b4deb99cbed543fd2b29c88ed857b2cf715e685debe0c1d13d11c761",
+      "start_seconds": 2.6747,
+      "end_seconds": 2.9533,
+      "volume": 0.53,
+      "pitch": 1.0
+    },
+    {
+      "label": "Duke / Java — preservado · Ataque",
+      "clip_id": "voice.duke.attack.enterprise.01",
+      "file": "assets/audio/characters/duke/voice/attack-enterprise-01.ogg",
+      "sha256": "191448507e0241586b88445b06826ca72b846dcaa0d621913348b17d3f4e94a8",
+      "start_seconds": 3.4533,
+      "end_seconds": 4.1483,
+      "volume": 0.72,
+      "pitch": 0.9
+    },
+    {
+      "label": "Duke / Java — preservado · Dano",
+      "clip_id": "voice.duke.hurt.01",
+      "file": "assets/audio/characters/duke/voice/hurt-01.ogg",
+      "sha256": "49e7ca88743fca974bb8676ea138b751cfd8f9033b5e7af8736c2a215d6edbc1",
+      "start_seconds": 4.6483,
+      "end_seconds": 5.1751,
+      "volume": 0.52,
+      "pitch": 1.0
+    },
+    {
+      "label": "Duke / Java — preservado · Defesa",
+      "clip_id": "voice.duke.block.01",
+      "file": "assets/audio/characters/duke/voice/block-01.ogg",
+      "sha256": "92d5db6bfc672d9dc1b4f390b2900504f013187fa36335472554fafefa9050b1",
+      "start_seconds": 5.6751,
+      "end_seconds": 6.17,
+      "volume": 0.52,
+      "pitch": 1.0
+    },
+    {
+      "label": "Old C · Ataque",
+      "clip_id": "voice.c.attack.unsafe_poke.01",
+      "file": "assets/audio/characters/c/voice/attack-unsafe-poke-01.ogg",
+      "sha256": "10ff0edb1c7956abfb4d13ea2a9cd867cd706aacc9c2540980d5ff2f308712fd",
+      "start_seconds": 6.67,
+      "end_seconds": 7.8287,
+      "volume": 0.64,
+      "pitch": 1.0
+    },
+    {
+      "label": "Old C · Dano",
+      "clip_id": "voice.c.hurt.01",
+      "file": "assets/audio/characters/c/voice/hurt-01.ogg",
+      "sha256": "3e7139badb5b8c3b3c354ed39bb39e4265bacde4c1cf189f82c7ebb1b10edce1",
+      "start_seconds": 8.3287,
+      "end_seconds": 9.69,
+      "volume": 0.53,
+      "pitch": 1.0
+    },
+    {
+      "label": "Old C · Defesa",
+      "clip_id": "voice.c.block.01",
+      "file": "assets/audio/characters/c/voice/block-01.ogg",
+      "sha256": "d3f89c58d407467776325c84904c5bfde89a6e5fd5e86790a46a44e11e5b3255",
+      "start_seconds": 10.19,
+      "end_seconds": 10.9274,
+      "volume": 0.53,
+      "pitch": 1.0
+    },
+    {
+      "label": "Go · Ataque",
+      "clip_id": "voice.go.attack.goroutine_jab.01",
+      "file": "assets/audio/characters/go/voice/attack-goroutine-jab-01.ogg",
+      "sha256": "391d8ed7712c0ba238ef971056beea0257af09aedb532796fbb3e756191a847c",
+      "start_seconds": 11.4274,
+      "end_seconds": 11.794,
+      "volume": 0.64,
+      "pitch": 1.0
+    },
+    {
+      "label": "Go · Dano",
+      "clip_id": "voice.go.hurt.01",
+      "file": "assets/audio/characters/go/voice/hurt-01.ogg",
+      "sha256": "781914ed3ea3947085e257a22c00a9f5566ee495f51e4ed664472da25eb6796f",
+      "start_seconds": 12.294,
+      "end_seconds": 12.5994,
+      "volume": 0.53,
+      "pitch": 1.0
+    },
+    {
+      "label": "Go · Defesa",
+      "clip_id": "voice.go.block.01",
+      "file": "assets/audio/characters/go/voice/block-01.ogg",
+      "sha256": "a9f674488792c4d1e3befeaad2c90dd8c122b7d2b0bd75a76ba1ebe4ca4313a3",
+      "start_seconds": 13.0994,
+      "end_seconds": 13.3727,
+      "volume": 0.53,
+      "pitch": 1.0
+    },
+    {
+      "label": "Python — preservada · Ataque",
+      "clip_id": "voice.python.attack.data_strike.01",
+      "file": "assets/audio/characters/python/voice/attack-data-strike-01.ogg",
+      "sha256": "c3dafb9bac0153d9231f224e3753e60c78f67fb762161fb82f9dc7ddd602781d",
+      "start_seconds": 13.8727,
+      "end_seconds": 14.2185,
+      "volume": 0.58,
+      "pitch": 1.02
+    },
+    {
+      "label": "Python — preservada · Dano",
+      "clip_id": "voice.python.hurt.01",
+      "file": "assets/audio/characters/python/voice/hurt-01.ogg",
+      "sha256": "0caaaf3f50db44285673db29bd221c6f45c082af22121d0f37afa0f254c53a4b",
+      "start_seconds": 14.7185,
+      "end_seconds": 15.2047,
+      "volume": 0.5,
+      "pitch": 1.0
+    },
+    {
+      "label": "Python — preservada · Defesa",
+      "clip_id": "voice.python.block.01",
+      "file": "assets/audio/characters/python/voice/block-01.ogg",
+      "sha256": "92120f056f648c0b327aa4c9794a78acdb0762d6a78b0ee0ce76b8562cc9677f",
+      "start_seconds": 15.7047,
+      "end_seconds": 16.0892,
+      "volume": 0.48,
+      "pitch": 1.0
+    },
+    {
+      "label": "C++ · Ataque",
+      "clip_id": "voice.cpp.attack.heavy.01",
+      "file": "assets/audio/characters/cpp/voice/attack-heavy-01.ogg",
+      "sha256": "17594daa2681bb8fbda870fac86ad8d6e232331c79ce566ed4875d3882b568c3",
+      "start_seconds": 16.5892,
+      "end_seconds": 17.6973,
+      "volume": 0.58,
+      "pitch": 1.0
+    },
+    {
+      "label": "C++ · Dano",
+      "clip_id": "voice.cpp.hurt.01",
+      "file": "assets/audio/characters/cpp/voice/hurt-01.ogg",
+      "sha256": "b11426a6a07e8a3afc76c2eb5fad1022e70846b20359d083cd9121429d3d816b",
+      "start_seconds": 18.1973,
+      "end_seconds": 18.9239,
+      "volume": 0.58,
+      "pitch": 1.0
+    },
+    {
+      "label": "C++ · Defesa",
+      "clip_id": "voice.cpp.block.01",
+      "file": "assets/audio/characters/cpp/voice/block-01.ogg",
+      "sha256": "20a0d7ac899984291fe46717a316cb8308cb9ada7124a574f8d2645596ac05ef",
+      "start_seconds": 19.4239,
+      "end_seconds": 19.8493,
+      "volume": 0.58,
+      "pitch": 1.0
+    },
+    {
+      "label": "Rust · entrada",
+      "clip_id": "sfx.super.start.rust",
+      "file": "assets/audio/sfx/super/start-rust.ogg",
+      "sha256": "047723de8c0dc44278c458dab2290fa7dd49b0e6feaf69ff3faa7b0718e05d4a",
+      "start_seconds": 20.3493,
+      "end_seconds": 21.1053,
+      "volume": 0.56,
+      "pitch": 1.0
+    },
+    {
+      "label": "Duke · entrada",
+      "clip_id": "sfx.super.start.duke",
+      "file": "assets/audio/sfx/super/start-duke.ogg",
+      "sha256": "e541c38a0057d035f6531794460230c3b36e8137b8c28ef763b131a3f227a056",
+      "start_seconds": 21.6053,
+      "end_seconds": 22.3026,
+      "volume": 0.52,
+      "pitch": 1.0
+    },
+    {
+      "label": "Old C · entrada",
+      "clip_id": "sfx.super.start.c",
+      "file": "assets/audio/sfx/super/start-c.ogg",
+      "sha256": "18f37295be9691dc909dc8bc7e4a549a53abb54d8ef772d39c08f29249086709",
+      "start_seconds": 22.8026,
+      "end_seconds": 23.8813,
+      "volume": 0.56,
+      "pitch": 1.0
+    },
+    {
+      "label": "C++ · entrada",
+      "clip_id": "sfx.super.start.cpp",
+      "file": "assets/audio/sfx/super/start-cpp.ogg",
+      "sha256": "3158d9916e655cd7d54de23c6436ed9114c100c822c60dd0394f3e967f6ad73f",
+      "start_seconds": 24.3813,
+      "end_seconds": 25.2279,
+      "volume": 0.55,
+      "pitch": 1.0
+    },
+    {
+      "label": "Duke · lixo caindo",
+      "clip_id": "sfx.super.trash.rain",
+      "file": "assets/audio/sfx/super/trash-rain.ogg",
+      "sha256": "4ca80450e79697e7a2183e3e7bb13610d3716e2936dca775a86d10a5dcb7e861",
+      "start_seconds": 25.7279,
+      "end_seconds": 26.9879,
+      "volume": 0.55,
+      "pitch": 1.0
+    },
+    {
+      "label": "Duke · coleta A",
+      "clip_id": "sfx.super.collect.1",
+      "file": "assets/audio/sfx/super/collect-1.ogg",
+      "sha256": "c90f4ba737c15f7f4c01d4fa7f9d0f228e722181cb71618ed1b392a83e0e6e7d",
+      "start_seconds": 27.4879,
+      "end_seconds": 27.6253,
+      "volume": 0.57,
+      "pitch": 1.0
+    },
+    {
+      "label": "Duke · coleta B",
+      "clip_id": "sfx.super.collect.2",
+      "file": "assets/audio/sfx/super/collect-2.ogg",
+      "sha256": "8c3299ae2e5e313fd36b5dbb65126c32dd1b8f91144737b7ac514cad013d48f7",
+      "start_seconds": 28.1253,
+      "end_seconds": 28.2546,
+      "volume": 0.57,
+      "pitch": 1.0
+    },
+    {
+      "label": "Duke · coleta C",
+      "clip_id": "sfx.super.collect.3",
+      "file": "assets/audio/sfx/super/collect-3.ogg",
+      "sha256": "d4cf45a57e979767fd0d3772e9842b6a1dc32d3d53468d8566e17e050d07a2f8",
+      "start_seconds": 28.7546,
+      "end_seconds": 28.9359,
+      "volume": 0.57,
+      "pitch": 1.0
+    },
+    {
+      "label": "Duke · queda gigante",
+      "clip_id": "sfx.super.giant.drop",
+      "file": "assets/audio/sfx/super/giant-drop.ogg",
+      "sha256": "d4efe0afa04d675518120ff0bf77c9ee37508c0a39ab838f5add88ea8d0a08ff",
+      "start_seconds": 29.4359,
+      "end_seconds": 30.4079,
+      "volume": 0.8,
+      "pitch": 1.0
+    },
+    {
+      "label": "Rust · transformação A",
+      "clip_id": "sfx.super.mutation.1",
+      "file": "assets/audio/sfx/super/mutation-1.ogg",
+      "sha256": "3d058ca371de2ca1c6c06a8069cb0e74853614077ba63c2abda06a4dd187a3c4",
+      "start_seconds": 30.9079,
+      "end_seconds": 32.6346,
+      "volume": 0.56,
+      "pitch": 1.0
+    },
+    {
+      "label": "Rust · transformação B",
+      "clip_id": "sfx.super.mutation.2",
+      "file": "assets/audio/sfx/super/mutation-2.ogg",
+      "sha256": "bfbbb57a40a99c748e2fc187e450dc90dadffe7c43d71c716338681bcfe41966",
+      "start_seconds": 33.1346,
+      "end_seconds": 33.9012,
+      "volume": 0.58,
+      "pitch": 1.0
+    },
+    {
+      "label": "Old C · cascata de erros",
+      "clip_id": "sfx.super.error.cascade",
+      "file": "assets/audio/sfx/super/error-cascade.ogg",
+      "sha256": "da7790f0969dbb52301eb7c53e5d645b7dc0b4aec0a266070d0b5f5346db41e6",
+      "start_seconds": 34.4012,
+      "end_seconds": 34.8826,
+      "volume": 0.62,
+      "pitch": 1.0
+    },
+    {
+      "label": "Old C · BIOS / POST",
+      "clip_id": "sfx.super.boot.post",
+      "file": "assets/audio/sfx/super/boot-post.ogg",
+      "sha256": "600e2e17808e36e053ba95cd9f43ca0a98f2862540d4a5d44c69243512f6d891",
+      "start_seconds": 35.3826,
+      "end_seconds": 36.1946,
+      "volume": 0.55,
+      "pitch": 1.0
+    },
+    {
+      "label": "C++ · tiro no pé",
+      "clip_id": "sfx.super.footshot",
+      "file": "assets/audio/sfx/super/footshot.ogg",
+      "sha256": "fc8eb62029a58f31944b004fad067167eaa8f2ed7713b81fa80fee7bb75dca28",
+      "start_seconds": 36.6946,
+      "end_seconds": 37.3332,
+      "volume": 0.78,
+      "pitch": 1.0
+    },
+    {
+      "label": "C++ · rajada A",
+      "clip_id": "sfx.super.barrage.1",
+      "file": "assets/audio/sfx/super/barrage-1.ogg",
+      "sha256": "d2ee19526ae0dc284b2ffc963d458fb6a89cea2c1d692e6ba22adb58cfcb8530",
+      "start_seconds": 37.8332,
+      "end_seconds": 38.0119,
+      "volume": 0.4,
+      "pitch": 1.0
+    },
+    {
+      "label": "C++ · rajada B",
+      "clip_id": "sfx.super.barrage.2",
+      "file": "assets/audio/sfx/super/barrage-2.ogg",
+      "sha256": "0b8c2e7b68015458a77f4c2633b7e488f7140a8a007bbcadad8c5cd3cb6a3a5a",
+      "start_seconds": 38.5119,
+      "end_seconds": 38.7132,
+      "volume": 0.4,
+      "pitch": 1.0
+    },
+    {
+      "label": "C++ · rajada C",
+      "clip_id": "sfx.super.barrage.3",
+      "file": "assets/audio/sfx/super/barrage-3.ogg",
+      "sha256": "e285a69b48c6effaba6f2e3a9ac6cb577f9519e15b0a9e27d565a6d724a519c6",
+      "start_seconds": 39.2133,
+      "end_seconds": 39.4013,
+      "volume": 0.4,
+      "pitch": 1.0
+    },
+    {
+      "label": "Fim da sequência",
+      "clip_id": "sfx.super.end",
+      "file": "assets/audio/sfx/super/end.ogg",
+      "sha256": "bcea2d97e45fc3107aeb2df451e4555b755de3d557dc93492004bce1e7db3e30",
+      "start_seconds": 39.9012,
+      "end_seconds": 40.2413,
+      "volume": 0.3,
+      "pitch": 1.0
+    }
+  ]
+}

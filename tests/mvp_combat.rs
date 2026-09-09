@@ -1,0 +1,448 @@
+//! Guards against combat exploits and verifies the five signature moves in a real World.
+//!
+//! System: Combat regression tests. These scenarios exercise action locks,
+//! counterplay and recovery rather than relying on generated sprite metadata.
+
+use borrow_fighters::characters::{CharacterId, character_spec};
+use borrow_fighters::combat::fighter::{
+    AttackKind, Facing, Fighter, FighterInput, HitReactionKind, PlayerSlot,
+};
+use borrow_fighters::combat::move_data::{
+    GuardRule, MoveId, MoveInputKind, move_spec, move_spec_for_input,
+};
+use borrow_fighters::config::{FIXED_TIMESTEP as DT, FLOOR_Y, world_px};
+use borrow_fighters::game::world::World;
+
+const ROSTER: [CharacterId; 5] = [
+    CharacterId::Rust,
+    CharacterId::Duke,
+    CharacterId::C,
+    CharacterId::Python,
+    CharacterId::Cpp,
+];
+const NONE: FighterInput = FighterInput {
+    left: false,
+    right: false,
+    jump: false,
+    crouch: false,
+    block: false,
+    light_punch: false,
+    heavy_punch: false,
+    kick: false,
+    projectile: false,
+    signature_special: false,
+    cinematic_special: false,
+};
+
+fn close_world(character: CharacterId) -> World {
+    let mut world = World::new_with_characters(character, CharacterId::Rust);
+    world.player_one.position.x = world_px(240.0);
+    world.player_two.position.x = world.player_one.body_rect().right() + world_px(10.0);
+    world
+}
+
+#[test]
+fn all_five_have_one_unique_special_with_block_and_whiff_counterplay() {
+    let mut ids = Vec::new();
+    for character in ROSTER {
+        let moves = character_spec(character).move_ids;
+        let special = move_spec_for_input(moves, MoveInputKind::SignatureSpecial).unwrap();
+        assert!(!ids.contains(&special.id));
+        ids.push(special.id);
+        assert!(special.damage <= 24);
+        assert!(special.frames.active_start.get() >= 24);
+        assert!(
+            special.frames.duration.get() - special.frames.active_end.get()
+                > special.hit_reaction.blockstun.get() + 6,
+            "{character:?} must be punishable even on late block"
+        );
+        assert!(special.whiff_recovery.get() >= 12);
+        assert_ne!(special.guard_rule, GuardRule::Throw);
+    }
+    assert!(
+        move_spec_for_input(
+            character_spec(CharacterId::Go).move_ids,
+            MoveInputKind::SignatureSpecial
+        )
+        .is_none()
+    );
+}
+
+#[test]
+fn every_signature_delivers_its_expected_hit_or_three_sheet_barrage() {
+    for character in ROSTER {
+        let mut world = close_world(character);
+        let special = move_spec_for_input(
+            character_spec(character).move_ids,
+            MoveInputKind::SignatureSpecial,
+        )
+        .unwrap();
+        world.update(
+            DT,
+            FighterInput {
+                signature_special: true,
+                ..NONE
+            },
+            NONE,
+        );
+        for _ in 0..special.frames.duration.get() {
+            world.update(DT, NONE, NONE);
+        }
+        assert_eq!(
+            world.player_two.health,
+            world.player_two.max_health
+                - special.damage * if character == CharacterId::Duke { 3 } else { 1 },
+            "{character:?} special should deal exactly one hit"
+        );
+    }
+}
+
+#[test]
+fn signature_effects_respect_mid_and_low_guard_rules() {
+    for (character, crouching, should_block) in [
+        (CharacterId::Duke, false, true),
+        (CharacterId::Duke, true, true),
+        (CharacterId::Python, true, true),
+        (CharacterId::Python, false, true),
+        (CharacterId::Rust, true, true),
+        (CharacterId::C, false, false),
+        (CharacterId::C, true, true),
+        (CharacterId::Cpp, false, false),
+        (CharacterId::Cpp, true, true),
+    ] {
+        let mut world = close_world(character);
+        let special = move_spec_for_input(
+            character_spec(character).move_ids,
+            MoveInputKind::SignatureSpecial,
+        )
+        .unwrap();
+        let guard = FighterInput {
+            block: true,
+            crouch: crouching,
+            ..NONE
+        };
+        world.update(
+            DT,
+            FighterInput {
+                signature_special: true,
+                ..NONE
+            },
+            guard,
+        );
+        for _ in 0..special.frames.duration.get() {
+            world.update(DT, NONE, guard);
+        }
+        let hits = if character == CharacterId::Duke { 3 } else { 1 };
+        let expected = hits
+            * if should_block {
+                special.damage / 4
+            } else {
+                special.damage
+            };
+        assert_eq!(
+            world.player_two.max_health - world.player_two.health,
+            expected,
+            "{character:?} crouch={crouching}"
+        );
+    }
+}
+
+#[test]
+fn guarded_low_keeps_crouch_height_through_blockstun_and_guard_break_clears_blockstun() {
+    let mut fighter = Fighter::new(PlayerSlot::One, "defender", 300.0);
+    let low = move_spec(MoveId::SweepKick);
+    fighter.update(
+        DT,
+        FighterInput {
+            crouch: true,
+            block: true,
+            ..NONE
+        },
+    );
+    assert!(
+        fighter
+            .take_hit(low.damage, low.guard_rule, low.hit_reaction)
+            .blocked
+    );
+    fighter.update(
+        DT,
+        FighterInput {
+            crouch: true,
+            block: true,
+            ..NONE
+        },
+    );
+    assert!(fighter.crouching);
+    assert!(
+        fighter
+            .take_hit(low.damage, low.guard_rule, low.hit_reaction)
+            .blocked
+    );
+    let high = move_spec(MoveId::OverheadPunch);
+    assert!(
+        !fighter
+            .take_hit(high.damage, high.guard_rule, high.hit_reaction)
+            .blocked
+    );
+    assert!(!fighter.in_blockstun());
+    fighter.update(
+        DT,
+        FighterInput {
+            block: true,
+            ..NONE
+        },
+    );
+    assert!(!fighter.blocking);
+}
+
+#[test]
+fn sweep_stays_low_and_cannot_hit_a_jumping_opponent() {
+    let mut world = close_world(CharacterId::Rust);
+    world.update(
+        DT,
+        FighterInput {
+            crouch: true,
+            kick: true,
+            ..NONE
+        },
+        FighterInput { jump: true, ..NONE },
+    );
+    for _ in 0..28 {
+        world.update(DT, NONE, NONE);
+        if let Some(hitbox) = world.player_one.active_hitbox() {
+            assert!(world.player_one.crouching);
+            assert!(hitbox.y >= FLOOR_Y - world_px(34.0));
+        }
+    }
+    assert_eq!(world.player_two.health, world.player_two.max_health);
+}
+
+#[test]
+fn ground_throw_misses_an_airborne_target_even_with_overlapping_body() {
+    let mut world = close_world(CharacterId::Rust);
+    world.update(
+        DT,
+        FighterInput {
+            block: true,
+            light_punch: true,
+            ..NONE
+        },
+        FighterInput { jump: true, ..NONE },
+    );
+    for _ in 0..12 {
+        world.update(DT, NONE, NONE);
+    }
+    assert_eq!(world.player_two.health, world.player_two.max_health);
+}
+
+#[test]
+fn knockdown_plays_once_protects_the_floor_and_allows_wake_jump() {
+    let mut world = close_world(CharacterId::Rust);
+    world.update(
+        DT,
+        FighterInput {
+            block: true,
+            light_punch: true,
+            ..NONE
+        },
+        FighterInput {
+            block: true,
+            ..NONE
+        },
+    );
+    for _ in 0..90 {
+        world.update(DT, NONE, NONE);
+        if world.player_two.in_knockdown() {
+            break;
+        }
+    }
+    assert!(world.player_two.in_knockdown());
+    assert_eq!(
+        world.player_two.hit_reaction_kind(),
+        HitReactionKind::Knockdown
+    );
+    let health = world.player_two.health;
+    // A fresh attacker and projectile overlap the downed fighter deliberately.
+    world.player_one = close_world(CharacterId::Rust).player_one;
+    world.player_one.position.x =
+        world.player_two.position.x - world.player_one.body_rect().width - world_px(10.0);
+    for _ in 0..16 {
+        world.update(
+            DT,
+            FighterInput {
+                light_punch: true,
+                projectile: true,
+                ..NONE
+            },
+            NONE,
+        );
+    }
+    assert_eq!(world.player_two.health, health);
+    while world.player_two.in_knockdown() {
+        world.update(DT, NONE, NONE);
+    }
+    assert!(!world.player_two.can_be_thrown());
+    world.update(DT, NONE, FighterInput { jump: true, ..NONE });
+    assert!(!world.player_two.grounded);
+}
+
+#[test]
+fn projectile_cast_cannot_be_cancelled_into_attack_jump_or_guard() {
+    let mut world = World::new_greybox();
+    world.update(
+        DT,
+        FighterInput {
+            projectile: true,
+            ..NONE
+        },
+        NONE,
+    );
+    for _ in 0..10 {
+        world.update(
+            DT,
+            FighterInput {
+                signature_special: true,
+                light_punch: true,
+                jump: true,
+                block: true,
+                ..NONE
+            },
+            NONE,
+        );
+        assert!(world.player_one.attack_kind().is_none());
+        assert!(world.player_one.grounded);
+        assert!(!world.player_one.blocking);
+    }
+}
+
+#[test]
+fn chip_cannot_ko_a_defender() {
+    let mut fighter = Fighter::new(PlayerSlot::One, "defender", 300.0);
+    fighter.health = 1;
+    fighter.update(
+        DT,
+        FighterInput {
+            block: true,
+            ..NONE
+        },
+    );
+    let hit = move_spec(MoveId::HeavyPunch);
+    let result = fighter.take_hit(hit.damage, hit.guard_rule, hit.hit_reaction);
+    assert!(result.blocked);
+    assert_eq!(result.damage, 0);
+    assert_eq!(fighter.health, 1);
+}
+
+#[test]
+fn an_attack_commits_its_facing_and_cannot_track_a_jump_over() {
+    let mut world = close_world(CharacterId::Rust);
+    world.update(
+        DT,
+        FighterInput {
+            signature_special: true,
+            ..NONE
+        },
+        NONE,
+    );
+    assert_eq!(
+        world.player_one.attack_kind(),
+        Some(AttackKind::SignatureSpecial)
+    );
+    world.player_two.position.x = world.player_one.position.x - world_px(170.0);
+    world.player_two.position.y -= world_px(200.0);
+    world.player_two.grounded = false;
+    world.update(DT, NONE, NONE);
+    assert_eq!(world.player_one.facing, Facing::Right);
+}
+
+#[test]
+fn signature_startup_is_interruptible_by_a_close_jab() {
+    for character in ROSTER {
+        let mut world = close_world(character);
+        world.update(
+            DT,
+            FighterInput {
+                signature_special: true,
+                ..NONE
+            },
+            FighterInput {
+                light_punch: true,
+                ..NONE
+            },
+        );
+        for _ in 0..7 {
+            world.update(DT, NONE, NONE);
+        }
+        assert!(
+            world.player_one.health < world.player_one.max_health,
+            "{character:?} must be interruptible"
+        );
+        assert!(world.player_one.attack_kind().is_none());
+        assert_eq!(world.player_two.health, world.player_two.max_health);
+    }
+}
+
+#[test]
+fn a_blocked_signature_allows_an_approach_and_jab_before_recovery_ends() {
+    for character in [
+        CharacterId::Rust,
+        CharacterId::Duke,
+        CharacterId::C,
+        CharacterId::Python,
+    ] {
+        let mut world = close_world(character);
+        let guard = FighterInput {
+            block: true,
+            crouch: character == CharacterId::C,
+            ..NONE
+        };
+        world.update(
+            DT,
+            FighterInput {
+                signature_special: true,
+                ..NONE
+            },
+            guard,
+        );
+        for _ in 0..60 {
+            if world.player_two.in_blockstun() {
+                break;
+            }
+            world.update(DT, NONE, guard);
+        }
+        assert!(world.player_two.in_blockstun());
+        for _ in 0..60 {
+            if !world.player_two.in_blockstun()
+                && world
+                    .player_one
+                    .attack_elapsed_frames()
+                    .is_some_and(|f| f.get() > 58)
+            {
+                break;
+            }
+            world.update(DT, NONE, guard);
+        }
+        assert!(!world.player_two.in_blockstun());
+        // Barrage pushes three times; close the resulting small gap while its
+        // caster is still committed to the long recovery animation.
+        for _ in 0..8 {
+            world.update(DT, NONE, FighterInput { left: true, ..NONE });
+        }
+        assert!(world.player_one.attack_kind().is_some());
+        world.update(
+            DT,
+            NONE,
+            FighterInput {
+                light_punch: true,
+                ..NONE
+            },
+        );
+        for _ in 0..5 {
+            world.update(DT, NONE, NONE);
+        }
+        assert!(
+            world.player_one.health < world.player_one.max_health,
+            "{character:?} recovery should lose to immediate close jab"
+        );
+    }
+}

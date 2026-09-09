@@ -1,0 +1,65 @@
+{
+  "isolated_display": ":94",
+  "binary_sha256": "ec3da5cc03d320889aff3fdeee25627481dd75181a552d4846ec03746c640e1b",
+  "checks": [
+    {
+      "name": "showcase_space_freezes_frame_counter",
+      "passed": true
+    },
+    {
+      "name": "showcase_period_advances_frame_counter",
+      "passed": true
+    },
+    {
+      "name": "showcase_home_enter_reset_same_paused_counter",
+      "passed": true
+    },
+    {
+      "name": "options_manual_controls_changed_both_rows",
+      "passed": true
+    },
+    {
+      "name": "stage_life_toggle_changes_and_restores_row",
+      "passed": true
+    },
+    {
+      "name": "11-P1-Y_starts_cinematic_banner",
+      "passed": true,
+      "white_title_pixels": 2446
+    },
+    {
+      "name": "11-P1-Y_deals_local_damage",
+      "passed": true,
+      "filled_pixels_before": 509,
+      "filled_pixels_after": 382
+    },
+    {
+      "name": "11-P1-Y_cleans_up_banner",
+      "passed": true
+    },
+    {
+      "name": "12-P2-right-bracket_starts_cinematic_banner",
+      "passed": true,
+      "white_title_pixels": 1905
+    },
+    {
+      "name": "12-P2-right-bracket_deals_local_damage",
+      "passed": true,
+      "filled_pixels_before": 509,
+      "filled_pixels_after": 346
+    },
+    {
+      "name": "12-P2-right-bracket_cleans_up_banner",
+      "passed": true
+    },
+    {
+      "name": "native_close_exits",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "limitations": [
+    "No physical gamepad connected; LB+RT was not hardware-tested.",
+    "Input timing is wall-clock observed; exact timing and geometry are covered by deterministic Rust tests."
+  ]
+}

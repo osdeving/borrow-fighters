@@ -920,6 +920,276 @@
         "w": 384,
         "h": 256
       }
+    },
+    {
+      "name": "sweep_0",
+      "clip": "sweep",
+      "duration_ms": 82,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 1152,
+        "y": 1280,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "sweep_1",
+      "clip": "sweep",
+      "duration_ms": 82,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 1536,
+        "y": 1280,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "sweep_2",
+      "clip": "sweep",
+      "duration_ms": 82,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 1920,
+        "y": 1280,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "overhead_0",
+      "clip": "overhead",
+      "duration_ms": 92,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 0,
+        "y": 1536,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "overhead_1",
+      "clip": "overhead",
+      "duration_ms": 92,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 384,
+        "y": 1536,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "overhead_2",
+      "clip": "overhead",
+      "duration_ms": 92,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 768,
+        "y": 1536,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "anti_air_0",
+      "clip": "anti_air",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 1152,
+        "y": 1536,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "anti_air_1",
+      "clip": "anti_air",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 1536,
+        "y": 1536,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "anti_air_2",
+      "clip": "anti_air",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 1920,
+        "y": 1536,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "air_punch_0",
+      "clip": "air_punch",
+      "duration_ms": 76,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 0,
+        "y": 1792,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "air_punch_1",
+      "clip": "air_punch",
+      "duration_ms": 76,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 384,
+        "y": 1792,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "air_punch_2",
+      "clip": "air_punch",
+      "duration_ms": 76,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 768,
+        "y": 1792,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "air_kick_0",
+      "clip": "air_kick",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 1152,
+        "y": 1792,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "air_kick_1",
+      "clip": "air_kick",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 1536,
+        "y": 1792,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "air_kick_2",
+      "clip": "air_kick",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 1920,
+        "y": 1792,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "throw_0",
+      "clip": "throw",
+      "duration_ms": 92,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 0,
+        "y": 2048,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "throw_1",
+      "clip": "throw",
+      "duration_ms": 92,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 384,
+        "y": 2048,
+        "w": 384,
+        "h": 256
+      }
+    },
+    {
+      "name": "throw_2",
+      "clip": "throw",
+      "duration_ms": 92,
+      "pivot": {
+        "x": 112,
+        "y": 236
+      },
+      "frame": {
+        "x": 768,
+        "y": 2048,
+        "w": 384,
+        "h": 256
+      }
     }
   ],
   "clips": [
@@ -1027,11 +1297,66 @@
         "projectile_1",
         "projectile_2"
       ]
+    },
+    {
+      "name": "sweep",
+      "loop": false,
+      "frames": [
+        "sweep_0",
+        "sweep_1",
+        "sweep_2"
+      ]
+    },
+    {
+      "name": "overhead",
+      "loop": false,
+      "frames": [
+        "overhead_0",
+        "overhead_1",
+        "overhead_2"
+      ]
+    },
+    {
+      "name": "anti_air",
+      "loop": false,
+      "frames": [
+        "anti_air_0",
+        "anti_air_1",
+        "anti_air_2"
+      ]
+    },
+    {
+      "name": "air_punch",
+      "loop": false,
+      "frames": [
+        "air_punch_0",
+        "air_punch_1",
+        "air_punch_2"
+      ]
+    },
+    {
+      "name": "air_kick",
+      "loop": false,
+      "frames": [
+        "air_kick_0",
+        "air_kick_1",
+        "air_kick_2"
+      ]
+    },
+    {
+      "name": "throw",
+      "loop": false,
+      "frames": [
+        "throw_0",
+        "throw_1",
+        "throw_2"
+      ]
     }
   ],
   "notes": [
     "Extracted from an RGB concept/reference sheet; not a final authored sprite export.",
     "Labels and checkerboard background are intentionally excluded from runtime assets.",
-    "Future artist-authored files should prefer native alpha and Aseprite or TexturePacker metadata."
+    "Future artist-authored files should prefer native alpha and Aseprite or TexturePacker metadata.",
+    "Generated placeholder clips for sweep, overhead, anti_air, air_punch, air_kick, and throw so every close-range attack has an atlas-backed animation."
   ]
 }

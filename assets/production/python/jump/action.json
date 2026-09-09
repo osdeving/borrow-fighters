@@ -1,0 +1,56 @@
+{
+  "source": "jump/source-v1.png",
+  "sheet": "jump/keyed.png",
+  "reviewed": false,
+  "loop": false,
+  "status": "generated candidate; source inspected, full runtime review pending",
+  "source_body_height_reference_px": 670,
+  "review_notes": "Three airborne keys. Pivots calibrated to keep head/waist of rising and falling poses aligned despite source drawing displacement; the World supplies the flight path. No grounded landing pose, whole accessories preserved.",
+  "frames": [
+    {
+      "name": "jump_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 330,
+        "y": 795
+      },
+      "duration_ms": 60,
+      "phase": "takeoff"
+    },
+    {
+      "name": "jump_01",
+      "source_rect": {
+        "x": 591,
+        "y": 0,
+        "w": 591,
+        "h": 887
+      },
+      "pivot": {
+        "x": 298,
+        "y": 754
+      },
+      "duration_ms": 340,
+      "phase": "rise"
+    },
+    {
+      "name": "jump_02",
+      "source_rect": {
+        "x": 1182,
+        "y": 0,
+        "w": 592,
+        "h": 887
+      },
+      "pivot": {
+        "x": 283,
+        "y": 795
+      },
+      "duration_ms": 400,
+      "phase": "fall"
+    }
+  ]
+}

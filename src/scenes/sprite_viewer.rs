@@ -25,6 +25,7 @@ use crate::{
         SpriteManifestError,
     },
     math::rect::Rect,
+    runtime_paths::asset_path,
     scenes::combat_lab::CombatLabMove,
 };
 
@@ -283,7 +284,8 @@ impl SpriteViewer {
         })?;
         let image_path = manifest.image_path(&options.manifest_path);
         let body_metrics =
-            CharacterBodyMetricsCatalog::load(CHARACTER_BODY_METRICS_PATH).unwrap_or_default();
+            CharacterBodyMetricsCatalog::load(asset_path(CHARACTER_BODY_METRICS_PATH))
+                .unwrap_or_default();
         let clip_index = match options.initial_clip.as_deref() {
             Some(clip_name) => manifest
                 .clips
@@ -1358,12 +1360,10 @@ impl SpriteViewer {
                 })?;
         }
         if self.body_metrics_dirty {
+            let path = asset_path(CHARACTER_BODY_METRICS_PATH);
             self.body_metrics
-                .save(CHARACTER_BODY_METRICS_PATH)
-                .map_err(|source| SpriteViewerError::BodyMetricsSave {
-                    path: PathBuf::from(CHARACTER_BODY_METRICS_PATH),
-                    source,
-                })?;
+                .save(&path)
+                .map_err(|source| SpriteViewerError::BodyMetricsSave { path, source })?;
         }
         self.manifest_dirty = false;
         self.body_metrics_dirty = false;
@@ -1606,6 +1606,8 @@ fn input_kind_for_move(selected_move: CombatLabMove) -> Option<MoveInputKind> {
         CombatLabMove::AirPunch => Some(MoveInputKind::AirPunch),
         CombatLabMove::AirKick => Some(MoveInputKind::AirKick),
         CombatLabMove::Throw => Some(MoveInputKind::Throw),
+        CombatLabMove::SignatureSpecial => Some(MoveInputKind::SignatureSpecial),
+        CombatLabMove::CinematicSpecial => Some(MoveInputKind::CinematicSpecial),
         CombatLabMove::Projectile => None,
     }
 }
@@ -1678,5 +1680,9 @@ fn preferred_clips_for_move(selected_move: CombatLabMove) -> &'static [&'static 
         CombatLabMove::AirKick => &["air_kick", "jump_kick", "jump", "kick"],
         CombatLabMove::Throw => &["throw", "grab", "punch_light"],
         CombatLabMove::Projectile => &["special", "projectile"],
+        CombatLabMove::SignatureSpecial => &["signature_special"],
+        CombatLabMove::CinematicSpecial => {
+            &["cinematic_special", "signature_special", "punch_heavy"]
+        }
     }
 }

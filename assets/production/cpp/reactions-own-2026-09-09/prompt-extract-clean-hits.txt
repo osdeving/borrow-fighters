@@ -1,0 +1,1 @@
+Remove the gray checkerboard background from this sprite sheet and export transparent PNG cutouts. Preserve every character pixel, all twelve poses and the original image dimensions. Natural clean dark outlines, with no colored fringes or glow. Transparent background.

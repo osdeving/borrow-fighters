@@ -1,0 +1,73 @@
+{
+  "action": "punch_heavy",
+  "source": null,
+  "sheet": null,
+  "loop": false,
+  "reviewed": false,
+  "status": "planning placeholder; no new image generated, no source geometry approved",
+  "source_body_height_reference_px": null,
+  "suggested_scale_to_runtime": null,
+  "replacement_contract": "../action-contracts.json#/actions/punch_heavy",
+  "references": {
+    "new_master": null,
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
+  "frames": [
+    {
+      "name": "punch_heavy_00",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 183,
+      "phase": "startup"
+    },
+    {
+      "name": "punch_heavy_01",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 167,
+      "phase": "active"
+    },
+    {
+      "name": "punch_heavy_02",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 233,
+      "phase": "recovery"
+    }
+  ],
+  "generation_brief": "Weight transfer, clear extended fist contact and controlled recovery, preserving ground support.",
+  "review_notes": "Fill source rectangles, source pivots and one measured action scale only after viewing real generated pixels. This skeleton is not exportable art.",
+  "timing_reference": {
+    "move_id": "HeavyPunch",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 35,
+      "active_start": 11,
+      "active_end": 20
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 183,
+      "recovery_starts": 350,
+      "clip_ends": 583
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -146.66666666666669,
+      "w": 128.0,
+      "h": 56.0
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -178.66666666666666,
+      "y": -146.66666666666669,
+      "w": 128.0,
+      "h": 56.0
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 114.66666666666666,
+      "y": -118.66666666666669
+    }
+  }
+}

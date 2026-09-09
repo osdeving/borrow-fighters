@@ -1,0 +1,120 @@
+{
+  "scope": "Recalibration of an existing generated raster; no new artwork or combat change.",
+  "scale_to_runtime": 0.497217,
+  "source_landmarks": [
+    {
+      "frame": "air_punch_0",
+      "hair_top_alpha128_y": 109,
+      "hair_roi": [
+        200,
+        70,
+        385,
+        230
+      ],
+      "belt_center_approx": [
+        279,
+        363
+      ]
+    },
+    {
+      "frame": "air_punch_1",
+      "hair_top_alpha128_y": 153,
+      "hair_roi": [
+        680,
+        100,
+        870,
+        280
+      ],
+      "belt_center_approx": [
+        738,
+        407
+      ]
+    },
+    {
+      "frame": "air_punch_2",
+      "hair_top_alpha128_y": 109,
+      "hair_roi": [
+        1210,
+        70,
+        1385,
+        230
+      ],
+      "belt_center_approx": [
+        1289,
+        365
+      ]
+    },
+    {
+      "frame": "air_punch_3",
+      "hair_top_alpha128_y": 109,
+      "hair_roi": [
+        1680,
+        70,
+        1870,
+        230
+      ],
+      "belt_center_approx": [
+        1776,
+        370
+      ]
+    }
+  ],
+  "landmark_method": "Hair alpha minima measured in explicit ROIs on keyed.png with alpha >=128. Belt centers manually identified from source-v2.png/keyed.png; approximate, not automatic pose recognition.",
+  "active_pivot_before": {
+    "x": 253,
+    "y": 650
+  },
+  "active_pivot_after": {
+    "x": 253,
+    "y": 694
+  },
+  "visual_world_shift": {
+    "x": 0,
+    "y": -21.877548
+  },
+  "exported_active_pivot_before": {
+    "x": 126,
+    "y": 323
+  },
+  "exported_active_pivot_after": {
+    "x": 126,
+    "y": 345
+  },
+  "active_glove_approx_source_global_bbox": [
+    885,
+    443,
+    953,
+    497
+  ],
+  "active_glove_approx_world_before": [
+    70.604814,
+    -102.923919,
+    104.41557,
+    -76.074201
+  ],
+  "active_glove_approx_world_after": [
+    70.604814,
+    -124.801467,
+    104.41557,
+    -97.951749
+  ],
+  "baseline_contact_box_world": [
+    50.666666666666664,
+    -130.66666666666669,
+    146.66666666666666,
+    -74.66666666666669
+  ],
+  "timing_ms_unchanged": [
+    83,
+    150,
+    66,
+    67
+  ],
+  "source_hashes_unchanged": {
+    "assets/production/rust/air_punch/source-v2.png": "344539fb2e9ba62258bdc8072b0787ab2a14ee29773cb2027909608001a350f5",
+    "assets/production/rust/air_punch/sheet-v2.png": "83167b39c26f83677ee2c138f1213d8f2f392c42e363d304535b628c41b036fa",
+    "assets/production/rust/air_punch/keyed.png": "63fc8da3b4a6ad8b82e74647a4748bb269b35b37f76147a03bbd1c8a3d7f1762",
+    "assets/production/rust/air_punch/prepared.png": "9404edcc94239956d7e646572915e5218d86582897eaa200a7b8543c6160e832"
+  },
+  "verification": "Before/after static full-sequence previews and active contact overlay inspected at runtime scale in both facings. Root must re-export candidate and perform native runtime capture."
+}

@@ -1,0 +1,67 @@
+{
+  "sheet": "walk/selected-v1.png",
+  "reviewed": true,
+  "loop": true,
+  "frames": [
+    {
+      "name": "walk_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 800,
+        "h": 900
+      },
+      "pivot": {
+        "x": 350,
+        "y": 780
+      },
+      "duration_ms": 112,
+      "phase": "near_leg_contact"
+    },
+    {
+      "name": "walk_01",
+      "source_rect": {
+        "x": 800,
+        "y": 0,
+        "w": 800,
+        "h": 900
+      },
+      "pivot": {
+        "x": 350,
+        "y": 780
+      },
+      "duration_ms": 113,
+      "phase": "far_leg_passage"
+    },
+    {
+      "name": "walk_02",
+      "source_rect": {
+        "x": 1600,
+        "y": 0,
+        "w": 800,
+        "h": 900
+      },
+      "pivot": {
+        "x": 350,
+        "y": 780
+      },
+      "duration_ms": 112,
+      "phase": "far_leg_contact"
+    },
+    {
+      "name": "walk_03",
+      "source_rect": {
+        "x": 2400,
+        "y": 0,
+        "w": 800,
+        "h": 900
+      },
+      "pivot": {
+        "x": 350,
+        "y": 780
+      },
+      "duration_ms": 113,
+      "phase": "near_leg_passage"
+    }
+  ]
+}

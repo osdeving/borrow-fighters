@@ -7,21 +7,31 @@ pub mod animation;
 pub mod combat;
 mod draw;
 pub mod manifest;
+mod reaction;
 mod selection;
 
-pub use animation::frame_for_clip_at;
+pub use animation::{frame_for_clip_at, frame_for_fighter_clip_at};
 pub use combat::{
     ProjectedSpriteCombat, project_frame_combat, projected_fighter_combat,
     projected_projectile_origin_for_clip,
 };
-pub use draw::{draw_fighter_sprite, draw_manifest_fighter_sprite, draw_projectile_texture};
+pub(crate) use draw::mirrored_source_rect;
+pub use draw::{
+    draw_fighter_sprite, draw_manifest_fighter_sprite, draw_manifest_fighter_sprite_placed,
+    draw_projectile_texture,
+};
 pub use manifest::{
     SPRITE_SCHEMA, SpriteClip, SpriteCombatBox, SpriteCombatPoint, SpriteFrame, SpriteFrameCombat,
     SpriteManifest, SpriteManifestError, SpritePivot, SpriteRect, SpriteSize,
 };
+pub use reaction::{
+    FighterSpritePresentation, FighterVisualPlacement, FighterVisualTransform,
+    contact_reaction_clip_name, contact_reaction_transform, fighter_reaction_transform,
+    frame_for_contact_reaction, frame_for_fighter_state,
+};
 pub use selection::{
     FighterSpriteClip, FighterSpriteFrame, fighter_clip_elapsed_seconds, fighter_sprite_clip,
-    fighter_sprite_frame,
+    fighter_sprite_frame, match_fighter_sprite_clip,
 };
 
 pub const FIGHTER_SPRITESHEET_PATH: &str = "assets/placeholder/fighter-greybox-spritesheet.png";
@@ -40,3 +50,5 @@ pub const C_BITSTREAM_PROJECTILE_PATH: &str = "assets/placeholder/c-bitstream-pr
 pub const PYTHON_FIGHTER_MANIFEST_PATH: &str = "assets/placeholder/python-fighter.sprite.json";
 pub const PYTHON_START_MANIFEST_PATH: &str = "assets/placeholder/python-start.sprite.json";
 pub const PYTHON_DATA_PROJECTILE_PATH: &str = "assets/placeholder/python-data-projectile.png";
+pub const CPP_FIGHTER_MANIFEST_PATH: &str = "assets/placeholder/cpp-fighter.sprite.json";
+pub const CPP_PLUSPLUS_PROJECTILE_PATH: &str = "assets/placeholder/cpp-plusplus-projectile.png";

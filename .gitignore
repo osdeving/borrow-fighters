@@ -165,6 +165,8 @@ build/
 dist/
 debug/
 release/
+!tools/release/
+!tools/release/**
 cmake-build-*/
 CMakeFiles/
 CMakeCache.txt
@@ -183,6 +185,8 @@ exports/
 builds/
 packages/
 releases/
+!docs/releases/
+!docs/releases/**
 
 # Raw local captures can be large. Curated public clips should live in
 # assets/showcase/ and be added explicitly.
@@ -223,6 +227,8 @@ temp/
 cache/
 .cache/
 .sass-cache/
+__pycache__/
+*.py[cod]
 
 *.tmp
 *.temp

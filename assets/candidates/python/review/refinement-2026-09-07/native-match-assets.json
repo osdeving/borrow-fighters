@@ -1,0 +1,14 @@
+{
+  "command": "cargo run -- --fight --p1 c --p2 python",
+  "sprite_candidates_env": null,
+  "result": {
+    "c": 2,
+    "python": 0
+  },
+  "assets_at_review": {
+    "assets/candidates/c/c-fighter.sprite.json": "0e191a41609fa2a1b9f507e47e9d3d7cfeb3b9681e75147426fd831078ed6b81",
+    "assets/candidates/c/c-fighter-atlas.png": "4b71ac736d43149552ef76e7b255292249038f66862def48c61622c85ae8c86c",
+    "assets/candidates/python/python-fighter.sprite.json": "2015f1052c380dabedfc91a5516adab188b2c331cff4ed7311640af15097edeb",
+    "assets/candidates/python/python-fighter-atlas.png": "5544735a6758f52974c2ce35da0204406f2cfcc925b00536993ca0c5e791fa9d"
+  }
+}

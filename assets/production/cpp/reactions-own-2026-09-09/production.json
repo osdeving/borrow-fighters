@@ -1,0 +1,516 @@
+{
+  "schema": "borrow-fighters.production.v1",
+  "character": "cpp",
+  "scale": 1.0,
+  "provenance": {
+    "generator": "built-in imagegen",
+    "status": "candidate; distinct articulated reactions reviewed in source sheets; runtime review follows separately",
+    "combat": "No combat metadata. All prior candidate frames/clips and main fields retained."
+  },
+  "actions": {
+    "reaction_head": {
+      "sheet": "reaction_head-prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "reaction_head_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 163,
+            "y": 284
+          },
+          "duration_ms": 70
+        },
+        {
+          "name": "reaction_head_01",
+          "source_rect": {
+            "x": 384,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 163,
+            "y": 292
+          },
+          "duration_ms": 85
+        },
+        {
+          "name": "reaction_head_02",
+          "source_rect": {
+            "x": 768,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 117,
+            "y": 272
+          },
+          "duration_ms": 85
+        },
+        {
+          "name": "reaction_head_03",
+          "source_rect": {
+            "x": 1152,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 132,
+            "y": 270
+          },
+          "duration_ms": 90
+        }
+      ]
+    },
+    "reaction_body": {
+      "sheet": "reaction_body-prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "reaction_body_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 132,
+            "y": 245
+          },
+          "duration_ms": 70
+        },
+        {
+          "name": "reaction_body_01",
+          "source_rect": {
+            "x": 384,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 158,
+            "y": 242
+          },
+          "duration_ms": 85
+        },
+        {
+          "name": "reaction_body_02",
+          "source_rect": {
+            "x": 768,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 126,
+            "y": 258
+          },
+          "duration_ms": 85
+        },
+        {
+          "name": "reaction_body_03",
+          "source_rect": {
+            "x": 1152,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 126,
+            "y": 247
+          },
+          "duration_ms": 90
+        }
+      ]
+    },
+    "reaction_low": {
+      "sheet": "reaction_low-prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "reaction_low_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 157,
+            "y": 262
+          },
+          "duration_ms": 70
+        },
+        {
+          "name": "reaction_low_01",
+          "source_rect": {
+            "x": 384,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 160,
+            "y": 257
+          },
+          "duration_ms": 85
+        },
+        {
+          "name": "reaction_low_02",
+          "source_rect": {
+            "x": 768,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 155,
+            "y": 246
+          },
+          "duration_ms": 85
+        },
+        {
+          "name": "reaction_low_03",
+          "source_rect": {
+            "x": 1152,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 114,
+            "y": 237
+          },
+          "duration_ms": 90
+        }
+      ]
+    },
+    "reaction_guard_high": {
+      "sheet": "reaction_guard_high-prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "reaction_guard_high_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 100,
+            "y": 280
+          },
+          "duration_ms": 60
+        },
+        {
+          "name": "reaction_guard_high_01",
+          "source_rect": {
+            "x": 384,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 159,
+            "y": 273
+          },
+          "duration_ms": 70
+        },
+        {
+          "name": "reaction_guard_high_02",
+          "source_rect": {
+            "x": 768,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 139,
+            "y": 281
+          },
+          "duration_ms": 70
+        },
+        {
+          "name": "reaction_guard_high_03",
+          "source_rect": {
+            "x": 1152,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 124,
+            "y": 282
+          },
+          "duration_ms": 80
+        }
+      ]
+    },
+    "reaction_guard_low": {
+      "sheet": "reaction_guard_low-prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "reaction_guard_low_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 100,
+            "y": 191
+          },
+          "duration_ms": 60
+        },
+        {
+          "name": "reaction_guard_low_01",
+          "source_rect": {
+            "x": 384,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 125,
+            "y": 201
+          },
+          "duration_ms": 70
+        },
+        {
+          "name": "reaction_guard_low_02",
+          "source_rect": {
+            "x": 768,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 98,
+            "y": 190
+          },
+          "duration_ms": 70
+        },
+        {
+          "name": "reaction_guard_low_03",
+          "source_rect": {
+            "x": 1152,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 109,
+            "y": 189
+          },
+          "duration_ms": 80
+        }
+      ]
+    },
+    "reaction_launch": {
+      "sheet": "reaction_launch-prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "reaction_launch_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 172,
+            "y": 308
+          },
+          "duration_ms": 70
+        },
+        {
+          "name": "reaction_launch_01",
+          "source_rect": {
+            "x": 384,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 122,
+            "y": 288
+          },
+          "duration_ms": 85
+        },
+        {
+          "name": "reaction_launch_02",
+          "source_rect": {
+            "x": 768,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 180,
+            "y": 251
+          },
+          "duration_ms": 85
+        },
+        {
+          "name": "reaction_launch_03",
+          "source_rect": {
+            "x": 1152,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 170,
+            "y": 268
+          },
+          "duration_ms": 90
+        }
+      ]
+    },
+    "reaction_fall": {
+      "sheet": "reaction_fall-prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "reaction_fall_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 175,
+            "y": 218
+          },
+          "duration_ms": 80
+        },
+        {
+          "name": "reaction_fall_01",
+          "source_rect": {
+            "x": 384,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 146,
+            "y": 245
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "reaction_fall_02",
+          "source_rect": {
+            "x": 768,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 139,
+            "y": 221
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "reaction_fall_03",
+          "source_rect": {
+            "x": 1152,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 166,
+            "y": 199
+          },
+          "duration_ms": 160
+        }
+      ]
+    },
+    "reaction_rise": {
+      "sheet": "reaction_rise-prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "reaction_rise_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 167,
+            "y": 200
+          },
+          "duration_ms": 90
+        },
+        {
+          "name": "reaction_rise_01",
+          "source_rect": {
+            "x": 384,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 131,
+            "y": 208
+          },
+          "duration_ms": 90
+        },
+        {
+          "name": "reaction_rise_02",
+          "source_rect": {
+            "x": 768,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 146,
+            "y": 214
+          },
+          "duration_ms": 110
+        },
+        {
+          "name": "reaction_rise_03",
+          "source_rect": {
+            "x": 1152,
+            "y": 0,
+            "w": 384,
+            "h": 384
+          },
+          "pivot": {
+            "x": 149,
+            "y": 277
+          },
+          "duration_ms": 110
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "character": "rust",
+  "review_date": "2026-09-08",
+  "method": "Actual Raylib showcase, 1280x720, isolated unmapped Xephyr; exact clips required, contact validated by World. Selected sources and runtime captures visually inspected.",
+  "reports": [
+    {
+      "report": "reports/signature-right.json",
+      "sha256": "61cdda00d277c62d954e4edc0a02a0418804d2ce356ced5f690636ebe18c1698",
+      "raw_directory": "/tmp/borrow-fighters-spectacle-qa/rust-signature-v2/right",
+      "reversed": false,
+      "scenarios": 1,
+      "capture_count": 259
+    },
+    {
+      "report": "reports/signature-left.json",
+      "sha256": "b98bcd8a31b0374b6a57e37c8b607f3185526f38b271da9665b0c8dbd33016bd",
+      "raw_directory": "/tmp/borrow-fighters-spectacle-qa/rust-signature-v2/left",
+      "reversed": true,
+      "scenarios": 1,
+      "capture_count": 58
+    },
+    {
+      "report": "reports/uppercut-right.json",
+      "sha256": "a58b2484a7eaaf86e746349e858f4ccd519b77fe8aa748f2991b563a4f44bafb",
+      "raw_directory": "/tmp/borrow-fighters-spectacle-qa/rust-forward/anti_air",
+      "reversed": false,
+      "scenarios": 1,
+      "capture_count": 259
+    },
+    {
+      "report": "reports/heavy-right.json",
+      "sha256": "d056c77a90a2ac3aee065dc05886411dcfe3e89fa9a086731dc23ee341510f82",
+      "raw_directory": "/tmp/borrow-fighters-spectacle-qa/rust-forward/heavy_punch",
+      "reversed": false,
+      "scenarios": 1,
+      "capture_count": 53
+    },
+    {
+      "report": "reports/rust-cycle-left.json",
+      "sha256": "7934392216783dbea9f128f996eaf103746a753dcd8e2737853381e1895c4987",
+      "raw_directory": "/tmp/borrow-fighters-spectacle-qa/rust-all-reverse-software",
+      "reversed": true,
+      "scenarios": 13,
+      "capture_count": 602
+    },
+    {
+      "report": "reports/cpp-victim-throw-right.json",
+      "sha256": "4665955aab89445546d6138beb2c98f76119bc435b76c74963c51ec26903e2e4",
+      "raw_directory": "/tmp/borrow-fighters-extraordinary-final/cpp/right/throw",
+      "reversed": false,
+      "scenarios": 1,
+      "capture_count": 37
+    },
+    {
+      "report": "reports/cpp-victim-anti_air-right.json",
+      "sha256": "3f7b40f65a0212c42a25cca339424f3c14efcb541467c917b4c0091d2c5b0acf",
+      "raw_directory": "/tmp/borrow-fighters-extraordinary-final/cpp/right/anti_air",
+      "reversed": false,
+      "scenarios": 1,
+      "capture_count": 43
+    },
+    {
+      "report": "reports/cpp-victim-heavy_punch-right.json",
+      "sha256": "f1d8984ac0d0b85de20bf775b70075c1aeca1cd7dd9091dfb6feaadebbba1320",
+      "raw_directory": "/tmp/borrow-fighters-extraordinary-final/cpp/right/heavy_punch",
+      "reversed": false,
+      "scenarios": 1,
+      "capture_count": 47
+    },
+    {
+      "report": "reports/cpp-victim-throw-left.json",
+      "sha256": "e027683984c2654c7b7b8e51d8207a018cf9404e80f83bf248c78c5aeb1f96ca",
+      "raw_directory": "/tmp/borrow-fighters-extraordinary-final/cpp/left/throw",
+      "reversed": true,
+      "scenarios": 1,
+      "capture_count": 37
+    },
+    {
+      "report": "reports/cpp-victim-anti_air-left.json",
+      "sha256": "35fd81b92e6372335d91818f217c841f3f185acc9fc95fc8f9d8c828fc376e0f",
+      "raw_directory": "/tmp/borrow-fighters-extraordinary-final/cpp/left/anti_air",
+      "reversed": true,
+      "scenarios": 1,
+      "capture_count": 43
+    },
+    {
+      "report": "reports/cpp-victim-heavy_punch-left.json",
+      "sha256": "92c901621fd428eff0304e6ea6a4aed441bca71e4f8c113851b7157999dd05b1",
+      "raw_directory": "/tmp/borrow-fighters-extraordinary-final/cpp/left/heavy_punch",
+      "reversed": true,
+      "scenarios": 1,
+      "capture_count": 47
+    },
+    {
+      "report": "reports/throw-lift-v3-left.json",
+      "sha256": "994d5d5eb08aeaa29367352777dd0eefcd11957cecaea02b312e9dde953d87dd",
+      "raw_directory": "/tmp/borrow-fighters-spectacle-qa/rust-throw-lift-v3-left",
+      "reversed": false,
+      "scenarios": 1,
+      "capture_count": 259
+    },
+    {
+      "report": "reports/throw-lift-v3-right.json",
+      "sha256": "6f8b57d93aefe4dc9d8ea3d771adf49629d1fde6df23853db71261a019212d5a",
+      "raw_directory": "/tmp/borrow-fighters-spectacle-qa/rust-throw-lift-v3-right",
+      "reversed": true,
+      "scenarios": 1,
+      "capture_count": 41
+    }
+  ],
+  "coverage": {
+    "signature_special": [
+      "signature_special_00",
+      "signature_special_01",
+      "signature_special_02",
+      "signature_special_03",
+      "signature_special_04",
+      "signature_special_05",
+      "signature_special_06",
+      "signature_special_07"
+    ],
+    "thrown": [
+      "thrown_00",
+      "thrown_01",
+      "thrown_02",
+      "thrown_03"
+    ],
+    "launched": [
+      "launched_00",
+      "launched_01",
+      "launched_02",
+      "launched_03"
+    ],
+    "heavy_hit": [
+      "heavy_hit_00",
+      "heavy_hit_01",
+      "heavy_hit_02",
+      "heavy_hit_03"
+    ],
+    "throw": [
+      "throw_00",
+      "throw_01",
+      "throw_02",
+      "throw_03",
+      "throw_04",
+      "throw_05"
+    ]
+  },
+  "retained_images": [
+    {
+      "image": "signature-formation-right.png",
+      "source_capture": "/tmp/borrow-fighters-spectacle-qa/rust-signature-v2/right/rust-11-attacksignaturespecial-f060.png",
+      "sha256": "95d616daa4c39ef21bde70b70453634e1235a8bc668eb4828b75c674515c1920",
+      "reviewed": true
+    },
+    {
+      "image": "signature-formation-left.png",
+      "source_capture": "/tmp/borrow-fighters-spectacle-qa/rust-signature-v2/left/rust-11-attacksignaturespecial-f060.png",
+      "sha256": "cf52313012f61696d2c974cedd76d8f5b8766dcfa2ce4d2545b646883c034a8d",
+      "reviewed": true
+    },
+    {
+      "image": "signature-shatter.png",
+      "source_capture": "/tmp/borrow-fighters-spectacle-qa/rust-signature-v2/right/rust-11-attacksignaturespecial-f068.png",
+      "sha256": "7d8de035bd460410a20051d016630d732d98ccc59fbf90aad3d50f5ed96dcc84",
+      "reviewed": true
+    },
+    {
+      "image": "signature-recovery.png",
+      "source_capture": "/tmp/borrow-fighters-spectacle-qa/rust-signature-v2/right/rust-11-attacksignaturespecial-f086.png",
+      "sha256": "8913b208abab60b3cb0e9fee249e1202eb4252afc45d0524e03350c7b1eb9ea3",
+      "reviewed": true
+    },
+    {
+      "image": "received-throw-lift.png",
+      "source_capture": "/tmp/borrow-fighters-extraordinary-final/cpp/right/throw/cpp-09-attackthrow-f068.png",
+      "sha256": "569ba679764a5e3e47fede9eb66894f105ec5b33fea5003e76cb32f9a1001095",
+      "reviewed": true
+    },
+    {
+      "image": "received-throw-roll.png",
+      "source_capture": "/tmp/borrow-fighters-extraordinary-final/cpp/right/throw/cpp-09-attackthrow-f085.png",
+      "sha256": "3863bb6526bdbe7c1a7863542844cbae03a45459b4b67cdc77d4a1dc1ebc55b0",
+      "reviewed": true
+    },
+    {
+      "image": "received-launch-rise.png",
+      "source_capture": "/tmp/borrow-fighters-extraordinary-final/cpp/right/anti_air/cpp-06-attackantiair-f067.png",
+      "sha256": "211eefb1b743d7e01a409335eb6699e9195123d775871df7ac703fce5bd10f56",
+      "reviewed": true
+    },
+    {
+      "image": "received-launch-left.png",
+      "source_capture": "/tmp/borrow-fighters-extraordinary-final/cpp/left/anti_air/cpp-06-attackantiair-f088.png",
+      "sha256": "f4a9ef6dd84c33eb3514b32889f191da02f7200bb4c5d6e2d83e0a7698d35c51",
+      "reviewed": true
+    },
+    {
+      "image": "received-launch-ground.png",
+      "source_capture": "/tmp/borrow-fighters-extraordinary-final/cpp/right/anti_air/cpp-06-attackantiair-f111.png",
+      "sha256": "c499f04e73c1f925b9a9361010579358e5455e2a86c632a57246dda17ada0b05",
+      "reviewed": true
+    },
+    {
+      "image": "received-heavy.png",
+      "source_capture": "/tmp/borrow-fighters-extraordinary-final/cpp/right/heavy_punch/cpp-02-attackheavypunch-f073.png",
+      "sha256": "81fa4be5bb2bdeb221720dfdabbdb4d1c6fd34f97a455da26b1fbf788f7f6229",
+      "reviewed": true
+    },
+    {
+      "image": "throw-supported-left.png",
+      "source_capture": "/tmp/borrow-fighters-spectacle-qa/rust-throw-lift-v3-left/rust-09-attackthrow-f068.png",
+      "sha256": "979e1357f7905e6611e38386a95e7c0c50966d667a2164e6d76a4b561eb49853",
+      "reviewed": true
+    },
+    {
+      "image": "throw-supported-right.png",
+      "source_capture": "/tmp/borrow-fighters-spectacle-qa/rust-throw-lift-v3-right/rust-09-attackthrow-f068.png",
+      "sha256": "525ed98e0449e1858f09386d7e4ea1c7749d2e0daa7b6f06e06e5769920f0723",
+      "reviewed": true
+    }
+  ],
+  "verdict": "accepted after explicit source-cell separation, backward release and supporting lift revisions",
+  "visual_findings": [
+    "All eight signature poses, six throw poses and twelve victim-reaction drawings were exercised in actual World playback.",
+    "Both formation keys are visible before actual signature contact; ground anchors and shatter inspected in both directions.",
+    "Lift-v3 hands reach victim; release travels behind attacker, helpless poses settle into floor recovery.",
+    "Aerial poses remain legible after the four-frame flash; standing KO reset and landing hover corrected in shared renderer.",
+    "Isolated review of all15 Rust scenarios in reversed orientation passed; superseded special/throw records excluded here and replaced with final captures."
+  ],
+  "actor_manifest_sha256": "4010c64d512c5eeca6a1142f5caecc09e3af85d5c183eac7b3af142162dc89f8",
+  "actor_atlas_sha256": "eed867ea07c3743e76d87c73dfdf50e8baceada31c4ff305e9a14e99dcd29e26",
+  "fx_manifest_sha256": "61d9ad3c071d11dc6831e0aa879a5856b6a832e94fb7a624675aec568c1c4b70",
+  "fx_atlas_sha256": "b1ba6e55d5b3e737eaf9fe75b0a10b187192b234e7eb4231d12ee8cbe3457ff8",
+  "preservation": "../../../../production/rust/throw/preservation-spectacle-v3.json"
+}

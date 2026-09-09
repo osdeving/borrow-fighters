@@ -1,0 +1,2696 @@
+{
+  "render_size": [
+    1280,
+    720
+  ],
+  "reversed": true,
+  "scenarios": [
+    {
+      "captures": [
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                840.0,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                338.6666259765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f001.png",
+          "result": "Pending",
+          "tick": 1
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_00",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                840.0,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_00",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                339.4814453125,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f031.png",
+          "result": "Pending",
+          "tick": 31
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_00",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                840.0,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_01",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                346.8147888183594,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f034.png",
+          "result": "Pending",
+          "tick": 34
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_01",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                840.0,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_01",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                367.70367431640625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f038.png",
+          "result": "Pending",
+          "tick": 38
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_01",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                840.0,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_02",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                386.370361328125,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f041.png",
+          "result": "Pending",
+          "tick": 41
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_02",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                840.0,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_02",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                417.48150634765625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f046.png",
+          "result": "Pending",
+          "tick": 46
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_02",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                840.0,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_03",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                429.92596435546875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f048.png",
+          "result": "Pending",
+          "tick": 48
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_03",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                840.0,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_03",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                467.25933837890625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.0,
+              "kind": "RustFortress",
+              "position": [
+                753.3333129882812,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f054.png",
+          "result": "Pending",
+          "tick": 54
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_03",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                832.888916015625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_00",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                473.4815673828125,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.01666666753590107,
+              "kind": "RustFortress",
+              "position": [
+                746.2222290039062,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f055.png",
+          "result": "Pending",
+          "tick": 55
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_03",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                811.5556640625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_00",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                492.14825439453125,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.06666667014360428,
+              "kind": "RustFortress",
+              "position": [
+                724.8889770507812,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f058.png",
+          "result": "Pending",
+          "tick": 58
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_04",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                797.33349609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_00",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                504.59271240234375,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.10000000149011612,
+              "kind": "RustFortress",
+              "position": [
+                710.6668090820312,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f060.png",
+          "result": "Pending",
+          "tick": 60
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_04",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                790.222412109375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_01",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                510.81494140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.11666666716337204,
+              "kind": "RustFortress",
+              "position": [
+                703.5557250976562,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f061.png",
+          "result": "Pending",
+          "tick": 61
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_04",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                783.111328125,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "walk",
+              "crouching": false,
+              "frame": "walk_01",
+              "frame_clip": "walk",
+              "grounded": true,
+              "health": 112,
+              "hitstun": false,
+              "position": [
+                517.0371704101562,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.13333334028720856,
+              "kind": "RustFortress",
+              "position": [
+                696.4446411132812,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f062.png",
+          "result": "Pending",
+          "tick": 62
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_04",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                776.000244140625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 90,
+              "hitstun": true,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.0,
+              "kind": "RustFortress",
+              "position": [
+                689.3335571289062,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f063.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 63
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                754.6669921875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 90,
+              "hitstun": true,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.05000000447034836,
+              "kind": "RustFortress",
+              "position": [
+                668.0003051757812,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f066.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 66
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                747.555908203125,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_00",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 90,
+              "hitstun": true,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.06666667014360428,
+              "kind": "RustFortress",
+              "position": [
+                660.8892211914062,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f067.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 67
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                733.333740234375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 90,
+              "hitstun": true,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.10000000149011612,
+              "kind": "RustFortress",
+              "position": [
+                646.6670532226562,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f069.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 69
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_05",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                719.111572265625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 90,
+              "hitstun": true,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.13333334028720856,
+              "kind": "RustFortress",
+              "position": [
+                632.4448852539062,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f071.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 71
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                704.889404296875,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 90,
+              "hitstun": true,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.1666666716337204,
+              "kind": "RustFortress",
+              "position": [
+                618.2227172851562,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f073.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 73
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                693.5560913085938,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_01",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 90,
+              "hitstun": true,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.20000000298023224,
+              "kind": "RustFortress",
+              "position": [
+                606.889404296875,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f075.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 75
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                686.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_02",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 90,
+              "hitstun": true,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "elapsed": 0.23333333432674408,
+              "kind": "RustFortress",
+              "position": [
+                599.4078979492188,
+                616.0
+              ]
+            }
+          ],
+          "image": "rust-11-attacksignaturespecial-f077.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 77
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                683.7782592773438,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "heavy_hit",
+              "crouching": false,
+              "frame": "heavy_hit_spectacle_02",
+              "frame_clip": "heavy_hit",
+              "grounded": true,
+              "health": 90,
+              "hitstun": true,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f078.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 78
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f083.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 83
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f085.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 85
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f093.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 93
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_06",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f095.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 95
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f097.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 97
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f099.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 99
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f106.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 106
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f111.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 111
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_07",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f116.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 116
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f123.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 123
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f127.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 127
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f130.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 130
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f137.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 137
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f141.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 141
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f148.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 148
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f152.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 152
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f158.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 158
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f163.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 163
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f169.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 169
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f173.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 173
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f179.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 179
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f184.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 184
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f190.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 190
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f195.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 195
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f200.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 200
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f206.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 206
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f211.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 211
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f217.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 217
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f221.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 221
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f227.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 227
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f232.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 232
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f238.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 238
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f242.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 242
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f249.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 249
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f253.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 253
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "rust",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false,
+              "position": [
+                682.0745849609375,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "duke",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 90,
+              "hitstun": false,
+              "position": [
+                443.2593994140625,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "rust-11-attacksignaturespecial-f259.png",
+          "result": "Hit { damage: 22 }",
+          "tick": 259
+        }
+      ],
+      "character": "rust",
+      "contact_frame": 63,
+      "result": "Hit { damage: 22 }",
+      "scenario": "Attack(SignatureSpecial)",
+      "scenario_label": "Borrow Fortress / armored shield rush"
+    }
+  ]
+}

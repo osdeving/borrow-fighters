@@ -1,0 +1,15 @@
+{
+  "command": "cargo run -- --fight --p1 go --p2 go",
+  "sprite_candidates_env": null,
+  "result": {
+    "go_p1": 53,
+    "go_p2": 0
+  },
+  "assets_at_review": {
+    "assets/candidates/go/go-fighter.sprite.json": "b865f26b9cd586c27f5ddecfdae47979ca14b55717c50494753432095409550f",
+    "assets/candidates/go/go-fighter-atlas.png": "535bda2c604dfaec68fcbf157451c7a55dfc5a69e6adbdf61ffcadfc14972060",
+    "assets/placeholder/go-channel-projectile.png": "4257c24a9994216a5d3e032884391c1ebd02270ddaee3f44639774043252c8e5",
+    "assets/tuning/character-body-metrics.json": "7f77453d98681adf5b6b0d8020ca8167dcbb8245ea97363425c5fc9cf309c962"
+  },
+  "review": "Actual normal application, CPU versus CPU through result; victory/defeat supported at floor, new semi-realistic art visible in both facings."
+}

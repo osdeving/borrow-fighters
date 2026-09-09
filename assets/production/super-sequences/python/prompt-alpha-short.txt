@@ -1,0 +1,1 @@
+Make the background fully transparent. Keep the eight cutout sprites unchanged. Export as PNG with transparent background.

@@ -1,0 +1,271 @@
+{
+  "idle": {
+    "source_version": 1,
+    "source_body_height_reference_px": 689,
+    "spans": [
+      0,
+      683,
+      1365,
+      2048
+    ],
+    "global_pivots": [
+      [
+        390,
+        722
+      ],
+      [
+        1072,
+        722
+      ],
+      [
+        1755,
+        722
+      ]
+    ]
+  },
+  "walk": {
+    "source_version": 2,
+    "source_body_height_reference_px": 650,
+    "spans": [
+      0,
+      580,
+      1024,
+      1536,
+      2048
+    ],
+    "global_pivots": [
+      [
+        320,
+        700
+      ],
+      [
+        800,
+        700
+      ],
+      [
+        1270,
+        700
+      ],
+      [
+        1740,
+        700
+      ]
+    ]
+  },
+  "jump": {
+    "source_version": 1,
+    "source_body_height_reference_px": 650,
+    "spans": [
+      0,
+      683,
+      1365,
+      2048
+    ],
+    "global_pivots": [
+      [
+        397,
+        712
+      ],
+      [
+        1025,
+        695
+      ],
+      [
+        1650,
+        711
+      ]
+    ]
+  },
+  "crouch": {
+    "source_version": 2,
+    "source_body_height_reference_px": 689,
+    "spans": [
+      0,
+      683,
+      1365,
+      2048
+    ],
+    "global_pivots": [
+      [
+        350,
+        736
+      ],
+      [
+        1000,
+        737
+      ],
+      [
+        1670,
+        737
+      ]
+    ]
+  },
+  "block": {
+    "source_version": 1,
+    "source_body_height_reference_px": 689,
+    "spans": [
+      0,
+      683,
+      1365,
+      2048
+    ],
+    "global_pivots": [
+      [
+        350,
+        722
+      ],
+      [
+        1025,
+        722
+      ],
+      [
+        1685,
+        722
+      ]
+    ]
+  },
+  "crouch_block": {
+    "source_version": 4,
+    "source_body_height_reference_px": 689,
+    "spans": [
+      0,
+      683,
+      1365,
+      2048
+    ],
+    "global_pivots": [
+      [
+        345,
+        710
+      ],
+      [
+        1004,
+        710
+      ],
+      [
+        1670,
+        710
+      ]
+    ]
+  },
+  "hit": {
+    "source_version": 1,
+    "source_body_height_reference_px": 660,
+    "spans": [
+      0,
+      683,
+      1365,
+      2048
+    ],
+    "global_pivots": [
+      [
+        420,
+        720
+      ],
+      [
+        1065,
+        720
+      ],
+      [
+        1750,
+        720
+      ]
+    ]
+  },
+  "special": {
+    "source_version": 2,
+    "source_body_height_reference_px": 559,
+    "spans": [
+      0,
+      824,
+      1560,
+      2172
+    ],
+    "global_pivots": [
+      [
+        386,
+        657
+      ],
+      [
+        1100,
+        657
+      ],
+      [
+        1830,
+        671
+      ]
+    ]
+  },
+  "spawn": {
+    "source_version": 1,
+    "source_body_height_reference_px": 679,
+    "spans": [
+      0,
+      683,
+      1365,
+      2048
+    ],
+    "global_pivots": [
+      [
+        380,
+        722
+      ],
+      [
+        1060,
+        722
+      ],
+      [
+        1710,
+        722
+      ]
+    ]
+  },
+  "victory": {
+    "source_version": 1,
+    "source_body_height_reference_px": 689,
+    "spans": [
+      0,
+      683,
+      1365,
+      2048
+    ],
+    "global_pivots": [
+      [
+        380,
+        724
+      ],
+      [
+        1060,
+        723
+      ],
+      [
+        1750,
+        723
+      ]
+    ]
+  },
+  "defeat": {
+    "source_version": 1,
+    "source_body_height_reference_px": 689,
+    "spans": [
+      0,
+      683,
+      1365,
+      2048
+    ],
+    "global_pivots": [
+      [
+        380,
+        707
+      ],
+      [
+        1030,
+        682
+      ],
+      [
+        1660,
+        697
+      ]
+    ]
+  }
+}

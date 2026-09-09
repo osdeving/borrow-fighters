@@ -24,6 +24,7 @@ O foco atual é **Prototype 0.1**. Não estamos criando combo tree, meter, throw
 | Go | rushdown de concorrência | ações rápidas, pressão curta, ritmo alto | vida menor, alcance menor, sofre contra anti-air e espaço bem controlado |
 | C | low-level fundamentals | alcance honesto, dano sólido, pressão simples e punível | startup/whiff maiores; precisa confirmar espaço antes de bater |
 | Python | agile punisher | startup leve, recovery curto, leitura de whiff e ritmo rápido | vida/dano menores; não deve ganhar troca bruta |
+| C++ | agile systems punisher | herda alcance de C com ritmo mais moderno, golpes técnicos e projectile de operadores | vida moderada; precisa escolher espaço, não pode virar C mais segura |
 
 ## Rust
 
@@ -32,14 +33,14 @@ Rust deve parecer preciso e seguro. Ele não deve ter o maior dano nem o maior a
 | Input | MoveId | Intenção | Dano | Startup | Alcance | Whiff | Contra-jogo |
 |---|---|---|---:|---:|---:|---:|---|
 | `F` | `RustBorrowJab` | checar avanço e interromper golpe lento | 7 | 4f | 48 | 4f | ficar fora do alcance, whiff punish |
-| `H` | `HeavyPunch` | ferramenta média genérica, ainda sem assinatura | 16 | 11f | 96 | 10f | bloquear, pular, punir whiff |
+| `H` | `HeavyPunch` | soco médio genérico, complementar à assinatura | 16 | 11f | 96 | 10f | bloquear, pular, punir whiff |
 | `V` | `Kick` | golpe baixo/médio de controle | 12 | 9f | 100 | 8f | bloquear, recuar, punir whiff |
 | `S+V` | `SweepKick` | low universal de teste | 11 | 10f | 112 | 12f | defender abaixado, pular |
 | frente + `H` | `OverheadPunch` | overhead universal de teste | 14 | 12f | 82 | 12f | defender em pé, interromper startup |
 | `S+H` | `RustLifetimeAntiAir` | anti-air rápido e menor | 12 | 6f | 62 | 10f | baitar e punir, atacar por baixo |
 | no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
 | no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
-| `Q+F` | `RustOwnershipThrow` | throw rápido, curto e pouco danoso | 9 | 5f | 42 | 12f | sair do alcance, pular |
+| `Q+F` | `RustOwnershipThrow` | arremesso curto e pouco danoso | 9 | 10f | 42 | 12f | sair do alcance, pular |
 
 ## Duke / Java
 
@@ -55,11 +56,11 @@ Duke deve parecer resistente e inconveniente em média distância. Ele pode ganh
 | `S+H` | `RisingAntiAir` | anti-air genérico, menos especializado que Rust | 13 | 7f | 70 | 14f | baitar e punir |
 | no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
 | no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
-| `U+O` / `U+Enter` | `DukeEnterpriseThrow` | throw mais longo e forte, bem punível | 12 | 9f | 56 | 20f | sair do alcance, pular, jab |
+| `U+O` / `U+Enter` | `DukeEnterpriseThrow` | throw mais longo e forte, bem punível | 12 | 10f | 56 | 20f | sair do alcance, pular, jab |
 
 ## Go
 
-Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jogo suporta um personagem que vence por aproximação e sequência curta, sem depender de alcance grande. No momento, Go usa atlas placeholder próprio de luta, entrada e projectile no Combat Lab e em match real iniciado por CLI; ele fica fora do ciclo público do menu da demo enquanto a arte do Gopher é reavaliada.
+Go deve parecer rápido e impaciente. Ele existe neste corte para testar se o jogo suporta um personagem que vence por aproximação e sequência curta, sem depender de alcance grande. Go usa o novo atlas semirrealista de 20 ações no Combat Lab e em partidas iniciadas por CLI, com projétil separado. O baseline placeholder continua responsável pelo contrato de combate e disponível para comparação. Sua presença no ciclo público do menu da demo permanece como antes desta revisão visual.
 
 | Input | MoveId | Intenção | Dano | Startup | Alcance | Whiff | Contra-jogo |
 |---|---|---|---:|---:|---:|---:|---|
@@ -87,7 +88,7 @@ C deve parecer direto, perigoso e um pouco arriscado. Ele tem alcance e dano aci
 | `S+H` | `CInterruptVector` | anti-air honesto para cobrir salto previsível | 13 | 7f | 74 | 12f | baitar e punir |
 | no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
 | no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
-| `Q+F` | `CUndefinedThrow` | throw de pushback forte, mas mais arriscado no whiff | 11 | 7f | 50 | 18f | sair do alcance, pular, jab |
+| `Q+F` | `CUndefinedThrow` | arremesso forte, mais arriscado no whiff | 11 | 10f | 50 | 18f | sair do alcance, pular, jab |
 
 ## Python
 
@@ -103,11 +104,92 @@ Python deve parecer ágil, precisa e oportunista. Ela não vence por dano bruto:
 | `S+H` | `PythonVisionAntiAir` | anti-air rápido de leitura, alcance menor | 11 | 6f | 68 | 9f | baitar e punir, atacar por baixo |
 | no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
 | no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
-| `Q+F` | `PythonConstrictThrow` | throw moderado com recovery menor que o universal | 10 | 7f | 52 | 14f | sair do alcance, pular, jab |
+| `Q+F` | `PythonConstrictThrow` | arremesso com tema de constrição | 10 | 10f | 52 | 14f | sair do alcance, pular, jab |
+
+## C++
+
+C++ deve parecer filha de C: mais ornamentada, mais rápida em decisões pontuais e ainda presa ao risco de escolher espaço errado. Ela não deve substituir C como fundamentos brutos nem Python como punisher leve; o papel dela é ficar entre os dois, com alcance técnico e recuperação moderada.
+
+| Input | MoveId | Intenção | Dano | Startup | Alcance | Whiff | Contra-jogo |
+|---|---|---|---:|---:|---:|---:|---|
+| `F` | `CppReferenceJab` | jab de referência, rápido e menor que o ponteiro de C | 7 | 4f | 58 | 4f | ficar fora do alcance, whiff punish |
+| `H` | `CppTemplateStrike` | soco forte técnico, mais alcance/dano que Python e menos bruto que C | 16 | 10f | 104 | 10f | bloquear, desafiar antes do ativo, punir whiff |
+| `V` | `CppOperatorKick` | chute de operador para controle médio e whiff punish | 12 | 8f | 102 | 7f | bloquear, recuar, punir se espaçado |
+| `S+V` | `CppVectorSweep` | low de vetor, alcance bom sem dano de C | 11 | 9f | 116 | 11f | defender abaixado, pular |
+| frente + `H` | `CppVirtualOverhead` | overhead técnico e moderado | 14 | 11f | 84 | 11f | defender em pé, jab no startup |
+| `S+H` | `CppExceptionAntiAir` | anti-air de exceção, rápido e menos largo que C | 13 | 6f | 72 | 10f | baitar e punir |
+| no ar + `F/H` | `AirPunch` | ataque aéreo leve universal | 9 | 5f | 72 | 6f | anti-air, andar fora |
+| no ar + `V` | `AirKick` | ataque aéreo de alcance médio | 12 | 7f | 88 | 6f | anti-air, defender em pé |
+| `Q+F` | `CppMoveThrow` | throw moderado com tema de move semantics | 10 | 10f | 50 | 14f | sair do alcance, pular, jab |
+
+## Especiais de assinatura dos cinco personagens da demo
+
+Use `T` no Player 1, `\` (Backslash) no Player 2 ou `RT` no gamepad. Cada loadout oferece um `MoveInputKind::SignatureSpecial`. Go não recebe ação nem arte nova nesta rodada; os ajustes compartilhados de guarda, postura e recuperação também se aplicam a ele.
+
+Os especiais são entidades físicas com animações próprias, sem barra por enquanto. Os índices são a 60 Hz e começam em 0. `Janela` indica emissão/atividade, enquanto folhas e foguete continuam pela trajetória real. Todas as assinaturas têm 16f extras quando erram. Medidas espaciais abaixo são valores base, multiplicados por 4/3; o ponto de emissão da bazuca foi calibrado em pixels do runtime para coincidir com a boca do canhão.
+
+| Personagem / MoveId | Guarda | Dano | Janela | Total | Manifestação física |
+|---|---|---:|---|---:|---|
+| Rust / `RustBorrowFortress` | Mid | 22 | 24..42 | 92f | Barreira 130×160 à frente, avanço e proteção frontal 24..36 |
+| Duke / `DukePrintlnBarrage` | Mid | 3×8 | Emite 26/36/46 | 100f | Três folhas 90×62, velocidade 520 e alcance 460 |
+| C / `CSegmentationFault` | Low | 22 | 34..53 | 102f | Ruptura 150×180 no chão, 70 à frente; lança a vítima |
+| Python / `PythonImportAntigravity` | Mid | 20 | 26..58 | 100f | Vórtice 150×320 à frente, levitação real e lançamento |
+| C++ / `CppUndefinedBazooka` | Low | 24 | Foguete 32, explosão 44..54 | 108f | Foguete diagonal pela boca da bazuca; explosão 260×95 no chão |
+
+Rust ergue uma fortaleza hexagonal e pode absorver pressão frontal durante parte da investida; agarrão e ataques nas costas continuam funcionando. Java transforma verbosidade em três ondas de papel/código e termina com a impressora emperrada. C bate o livro e rompe a memória sob os pés do adversário. Python usa `import antigravity` e um tornado de serpente. C++ retira uma bazuca enorme da bolsa e atira nos pés, com recoil demorado. Cada golpe possui oito poses do ator e seis quadros de efeitos separados.
+
+Guarda em pé ou baixa segura os especiais Mid. As explosões Low de C/C++ exigem guarda baixa; saltar/sair do volume, interromper a preparação e punir a recuperação são respostas contextuais. A barreira de Rust tem janela curta e não protege contra agarrão ou golpe vindo por trás. Efeitos que já foram emitidos podem persistir após o atacante ser interrompido, conforme seu tipo. Java aplica no máximo três contatos, os demais uma vez por execução. Lançamentos não aceitam novos hits no ar nesta rodada. Os testes de colisão e as capturas estão ligados no [registro da implementação](21-signature-spectacle-and-throws.md).
+
+Os cinco arremessos usam contato 10..12 e duração 48f. A arte avança enquanto a captura mantém o ataque no frame de contato; depois o movimento solta a vítima por cima do ombro e troca os lados no centro. No canto, lança para o espaço seguro em direção ao centro sem deslocar o atacante artificialmente.
+
+## Supers cinematográficos e captura autoral
+
+Input: `Y` / `]` / `LB+RT`. Assinaturas (`T` / `\\` / `RT`) continuam separadas.
+Na rodada de setembro de 2026, estes cinco movimentos passaram de uma hitbox próxima
+para sequências que capturam o alvo em qualquer distância quando aceitas. O
+atacante precisa estar no chão e livre de outra ação/stun. São oito frames de
+superfreeze, música pausada e roteiro sem controles até a restauração. A defesa
+na entrada, em pé ou baixa, é conservada. O chip não pode reduzir a vida abaixo de 1.
+
+| Personagem / nome exibido | Duração a 60 Hz | Dano / chip máximo | Contatos e apresentação |
+|---|---:|---:|---|
+| Rust / Ownership Eclipse | 300f / 5s | 28 / 7 | Apagão 8..10; blocos substituem a arena atual por Sirius; troca real no frame 125, pulso no 212. Sirius permanece após o golpe. |
+| Duke / Garbage Collector | 350f / 5,83s | 32 / 8 | Lixo 8..59, chão 60..83; 12 coletas a cada 12 frames; queda gigante 228..263 e contato 264. |
+| Old C / General Protection Fault / #GP | 320f / 5,33s | 32 / 8 | Terminais 8..104, tela azul 105..179, BIOS 180..221; reboot e contato 222, alvo caído. |
+| C++ / Undefined Behavior: Footgun | 632f / 10,53s | 36 / 10 | Notebook 8..147; disparo 184, pulinhos e raiva; corrida 280..343; 8 contatos de 3 HP em 344..414, final 424 de 6 HP; terminais/BSOD/BIOS; reboot 566 de 6 HP. |
+| Python / import devour | 528f / 8,8s | 32 / 8 | Preparação, transformação 62..157, crescimento 158..229, boca/bote; engole e acerta 304, alvo retorna 388; salto 400..443, paz 444..487 e restauração. |
+
+O tiro no pé é visual, sem perda de HP própria. C++ percorre o espaço até o alvo;
+Java faz a queda final na posição capturada. Lixo, clones, blocos e janelas são
+decoração; apenas os contatos listados alteram vida. Um KO é anunciado depois
+do roteiro terminar. Pedidos simultâneos elegíveis se anulam sem priorizar P1.
+
+Os `MoveId` históricos `DukeJvmOverdrive`, `CKernelPanic` e
+`CppTemplateSingularity` e `PythonEventHorizon` permanecem identificadores internos compatíveis, mas os
+nomes exibidos acima descrevem o golpe atual. O tuning autoral está em
+[`super_sequence.rs`](../src/combat/super_sequence.rs), não nos tempos melee antigos.
+Go (`Million Goroutines`) mantém apresentação ampla e contato próximo. Python
+passou a ter captura autoral na [rodada 24](24-reactions-and-transformations.md).
+
+Custo, raridade e esquivas/interruptibilidade dos cinco supers ficam para o
+balanceamento seguinte. A captura garantida atual é ferramenta de teste,
+conforme os [planos23](23-authored-super-sequences.md) e [24](24-reactions-and-transformations.md). O [showcase](10-greybox-playtest.md#move-showcase)
+usa duração completa, resultado real, pausa, repetição e troca de lado.
+
+## Defesa, rasteira e queda
+
+- Médios e projéteis aceitam guarda em pé ou baixa; overheads e ataques aéreos exigem guarda em pé; lows exigem guarda baixa. Defesa continua sendo botão explícito, sem direção obrigatória.
+- A altura da guarda é conservada durante blockstun. Um high que quebra guarda baixa inicia hitstun e elimina o blockstun antigo. Chip para em 1 de vida.
+- Rasteiras mantêm postura abaixada durante toda a ação e sua hitbox cobre canela/pé, aproximadamente os últimos 43 pixels antes do chão. Elas usam hurtboxes físicas agachadas. O debug mostra a mesma geometria usada pelo `World`.
+- Rasteiras geram knockdown de 36 frames. Agarrões capturam por 12 frames, lançam por 40 frames e só então iniciam essa recuperação. Anti-air, ruptura, vórtice e explosão lançam com gravidade real. Captura, voo e queda/levantada são protegidos contra novos golpes e projéteis.
+- Agarrões exigem alvo no chão, fora de hitstun/blockstun e dos seis frames de proteção após recuperar. Pular, sair do alcance e interromper startup continuam sendo respostas; não há throw tech.
+- Spark e dano flutuante nascem no centro da interseção que confirmou o hit, antes do pushback; rasteira mostra contato na canela/pé e anti-air na região aérea realmente atingida.
+- Ataques mantêm a direção inicial, permitindo escapar com salto por cima. Conjurar projétil impede outro ataque, pulo ou defesa até encerrar a duração da pose; sofrer dano cancela essa pose.
+- As hitboxes de rasteira vêm de `MoveSpec`; as de assinatura vêm das entidades `SignatureEffect`; a metadata anterior continua usada pelos demais ataques. A exceção evita restaurar acidentalmente rasteiras altas a partir do atlas baseline, conforme a [ADR 0013](adr/0013-contextual-showcase-and-mvp-combat.md).
 
 ## Especiais de Projectile
 
-Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ainda é o mesmo botão de especial do protótipo, mas dano, tamanho, velocidade, cooldown, reação e limite de alcance já vêm do `CharacterSpec`. Velocidade e alcance abaixo seguem os valores base de tuning; no runtime `1280x720`, medidas espaciais usam `RESOLUTION_SCALE = 4 / 3`.
+Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input permanece `G`/Right Ctrl/`RB`, separado do botão de assinatura; dano, tamanho, velocidade, cooldown, reação e limite de alcance já vêm do `CharacterSpec`. Velocidade e alcance abaixo seguem os valores base de tuning; no runtime `1280x720`, medidas espaciais usam `RESOLUTION_SCALE = 4 / 3`.
 
 | Personagem | Spec | Intenção | Dano | Velocidade | Cooldown | Alcance | Contra-jogo |
 |---|---|---|---:|---:|---:|---|---|
@@ -116,6 +198,7 @@ Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ai
 | Go | `GO_PROJECTILE_SPEC` | burst rápido para cobrir entrada sem virar zoner | 6 | 430 px/s | 44f | 320 px | ficar fora do curto alcance, bloquear pouco dano, desafiar depois do burst |
 | C | `C_PROJECTILE_SPEC` | bitstream médio/rápido para validar asset separado e origem do especial | 8 | 360 px/s | 56f | tela inteira | bloquear chip, pular, aproximar no cooldown |
 | Python | `PYTHON_PROJECTILE_SPEC` | fluxo de dados rápido/médio para validar atlas novo sem virar zoner completo | 7 | 390 px/s | 50f | tela inteira | bloquear pouco dano, pular, desafiar antes do próximo fluxo |
+| C++ | `CPP_PROJECTILE_SPEC` | burst de operadores `++` rápido/médio, herdando leitura de C sem dano bruto | 7 | 405 px/s | 52f | tela inteira | bloquear pouco dano, pular, aproximar no cooldown |
 
 ## Matchups de Intenção
 
@@ -127,8 +210,10 @@ Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ai
 | C x Rust | C tenta ganhar alcance e dano sólido; Rust tenta whiff punish e anti-air mais limpo. | C não pode ficar seguro demais no poke; Rust não pode anular todo alcance com jab/throw. |
 | C x Duke | C joga fundamentos contra presença pesada; Duke tem golpes maiores, mas C deve punir melhor whiffs longos. | Se Duke sempre ganha alcance e dano, C vira redundante; se C é mais rápido e mais forte, Duke perde função. |
 | C x Python | C ganha trocas e espaço; Python tenta entrar e sair antes do whiff punish. | Python não pode vencer troca bruta; C não pode prender Python sem risco. |
+| C x C++ | C tenta impor risco e alcance bruto; C++ tenta ganhar por tempo, whiff punish e escolhas mais rápidas. | C++ não pode ser C com menos recovery; C não pode perder todo fundamento para a filha. |
 | Python x Rust | Python tenta acelerar o ritmo e punir decisão errada; Rust tenta estabilizar com respostas honestas. | Python não pode virar Rust melhor e mais rápido; Rust não pode impedir todo whiff punish. |
 | Python x Duke | Python tenta passar por startup longo; Duke tenta manter presença com dano e pushback. | Se Python entra sem risco, Duke perde arquétipo; se Duke controla tudo, Python não joga. |
+| Python x C++ | Python tenta ganhar por leveza; C++ tenta controlar espaço com golpes um pouco maiores. | Se C++ acompanha toda a velocidade de Python, Python perde identidade; se Python pune tudo sem risco, C++ vira redundante. |
 
 ## Critérios de Playtest
 
@@ -136,15 +221,22 @@ Os projectiles são `ProjectileSpec` por personagem, não `MoveSpec`. O input ai
 2. Duke deve controlar mais espaço com sweep/overhead/poke, mas deve sofrer quando erra.
 3. Go deve ser percebido como mais rápido, mas não como mais seguro.
 4. C deve parecer mais sólido e comprido, mas punível quando erra.
-5. O jogador deve conseguir explicar por que tomou dano: low, overhead, throw, anti-air ou projectile.
-6. CPU x CPU deve mostrar diferença de ritmo, sem parecer dois personagens espelhados.
-7. Nenhum golpe deve resolver neutral, defesa e pressão ao mesmo tempo.
-8. Python deve parecer ágil e clara no feedback de hit, sem ganhar por dano bruto.
+5. Python deve parecer ágil e clara no feedback de hit, sem ganhar por dano bruto.
+6. C++ deve parecer herdeira de C com timing mais moderno, sem ganhar por ser mais segura que C e mais forte que Python ao mesmo tempo.
+7. O jogador deve conseguir explicar por que tomou dano: low, overhead, throw, anti-air ou projectile.
+8. CPU x CPU deve mostrar diferença de ritmo, sem parecer dois personagens espelhados.
+9. Nenhum golpe deve resolver neutral, defesa e pressão ao mesmo tempo.
+
+## Evidência de balanceamento de MVP
+
+A [auditoria preservada em CSV](evidence/mvp-balance/README.md) compara 60 lutas determinísticas antes/depois, com ambos os lados e três distâncias iniciais. O [programa reproduzível](../examples/balance_audit.rs) não carrega atlas e não estima win rate competitivo. A CPU usa os especiais conforme alcance e situação, tenta guarda compatível com high/low e reage de forma falível a agarrões; observa ataques em startup/atividade, sem bloquear automaticamente toda recuperação.
+
+O critério desta rodada é garantir contato válido, defesa possível, recuperação punível, reações legíveis e conclusão de lutas. Vida e dano dos golpes anteriores foram mantidos; não houve ajuste para forçar igualdade de vitórias entre políticas de CPU. O [showcase](10-greybox-playtest.md#move-showcase) complementa a auditoria com contato real, metadata baseline e revisão visual dos dois lados.
 
 ## Próximos Cortes
 
 - Decidir se Rust precisa de uma ferramenta defensiva futura como `ownership_counter`.
 - Playtestar se o `DUKE_PROJECTILE_SPEC` pesado abre espaço sem virar spam lento sem resposta.
 - Playtestar se o `GO_PROJECTILE_SPEC` curto ajuda aproximação sem transformar Go em zoner.
-- Playtestar C e Python contra Rust/Duke antes de mexer em vida ou dano.
+- Playtestar C, Python e C++ contra Rust/Duke antes de mexer em vida ou dano.
 - Avaliar hitbox/hurtbox por frame quando os sprites finais começarem a limitar o tuning.

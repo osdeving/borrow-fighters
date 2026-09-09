@@ -1,0 +1,67 @@
+{
+  "sheet": "sweep/keyed-mvp-v1.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "sweep_mvp_00",
+      "source_rect": {
+        "x": 50,
+        "y": 100,
+        "w": 440,
+        "h": 620
+      },
+      "pivot": {
+        "x": 205,
+        "y": 534
+      },
+      "duration_ms": 216,
+      "phase": "startup"
+    },
+    {
+      "name": "sweep_mvp_01",
+      "source_rect": {
+        "x": 530,
+        "y": 100,
+        "w": 600,
+        "h": 620
+      },
+      "pivot": {
+        "x": 204,
+        "y": 534
+      },
+      "duration_ms": 167,
+      "phase": "active"
+    },
+    {
+      "name": "sweep_mvp_02",
+      "source_rect": {
+        "x": 1130,
+        "y": 100,
+        "w": 410,
+        "h": 620
+      },
+      "pivot": {
+        "x": 176,
+        "y": 534
+      },
+      "duration_ms": 125,
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_mvp_03",
+      "source_rect": {
+        "x": 1570,
+        "y": 100,
+        "w": 440,
+        "h": 620
+      },
+      "pivot": {
+        "x": 211,
+        "y": 534
+      },
+      "duration_ms": 125,
+      "phase": "recovery"
+    }
+  ]
+}

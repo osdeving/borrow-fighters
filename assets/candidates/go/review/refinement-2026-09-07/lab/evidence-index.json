@@ -1,0 +1,35 @@
+{
+  "method": "Original native GPU PNG pixels cropped without resizing or retouching. Lab forces the airborne pose and its HUD overlaps the head; use World for the full unobscured arc.",
+  "selected": [
+    {
+      "image": "jump-f000-idle.png",
+      "sprite_frame": "jump_00",
+      "crop_rect": [
+        291,
+        123,
+        671,
+        533
+      ]
+    },
+    {
+      "image": "jump-f004-idle.png",
+      "sprite_frame": "jump_01",
+      "crop_rect": [
+        291,
+        123,
+        671,
+        533
+      ]
+    },
+    {
+      "image": "jump-f024-idle.png",
+      "sprite_frame": "jump_02",
+      "crop_rect": [
+        291,
+        123,
+        671,
+        533
+      ]
+    }
+  ]
+}

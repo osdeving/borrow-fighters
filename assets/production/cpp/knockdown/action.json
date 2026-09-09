@@ -1,0 +1,84 @@
+{
+  "action": "knockdown",
+  "source": "knockdown/source-v1.png",
+  "sheet": "knockdown/keyed-v1.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "runtime_verified_mvp",
+  "source_body_height_reference_px": 562.0,
+  "suggested_scale_to_runtime": 0.47686832740213525,
+  "frames": [
+    {
+      "name": "knockdown_mvp_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 540,
+        "h": 793
+      },
+      "pivot": {
+        "x": 256,
+        "y": 681
+      },
+      "duration_ms": 100,
+      "phase": "fall"
+    },
+    {
+      "name": "knockdown_mvp_01",
+      "source_rect": {
+        "x": 540,
+        "y": 0,
+        "w": 630,
+        "h": 793
+      },
+      "pivot": {
+        "x": 300,
+        "y": 690
+      },
+      "duration_ms": 250,
+      "phase": "down"
+    },
+    {
+      "name": "knockdown_mvp_02",
+      "source_rect": {
+        "x": 1170,
+        "y": 0,
+        "w": 440,
+        "h": 793
+      },
+      "pivot": {
+        "x": 195,
+        "y": 678
+      },
+      "duration_ms": 150,
+      "phase": "rise"
+    },
+    {
+      "name": "knockdown_mvp_03",
+      "source_rect": {
+        "x": 1610,
+        "y": 0,
+        "w": 373,
+        "h": 793
+      },
+      "pivot": {
+        "x": 202,
+        "y": 685
+      },
+      "duration_ms": 100,
+      "phase": "ready"
+    }
+  ],
+  "review_notes": "New four-stage knockdown: falling backward, fully reclined on floor, kneeling rise, standing ready guard. Uniform268/562 anatomy scale derived from final upright pose. Pivots follow support ground, not bounding-box center. Full white blouse/trousers/boots/bag retained.100/250/150/100ms=600ms/36ticks matches real knockdown. No duplicated normal-hit or defeat frames; no combat metadata authored.",
+  "runtime_review": {
+    "report": "../../../candidates/cpp/review/mvp/knockdown-review-left.json",
+    "both_facings_reviewed": true,
+    "combat_uses_baseline_manifest": true,
+    "review_status": "integrated_and_reviewed_for_mvp",
+    "root_review": {
+      "reviewer": "root agent",
+      "decision": "MVP visual integration accepted",
+      "evidence": "Runtime Template Arc and knockdown captures inspected; contextual and phase/alpha checks passed."
+    }
+  }
+}

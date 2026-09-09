@@ -219,6 +219,14 @@ fn input_for_close_move(input: MoveInputKind) -> FighterInput {
             kick: true,
             ..FighterInput::default()
         },
+        MoveInputKind::CinematicSpecial => FighterInput {
+            cinematic_special: true,
+            ..FighterInput::default()
+        },
+        MoveInputKind::SignatureSpecial => FighterInput {
+            signature_special: true,
+            ..FighterInput::default()
+        },
         MoveInputKind::Throw => FighterInput {
             block: true,
             light_punch: true,
@@ -234,6 +242,7 @@ fn dummy_fighter_for(attacker_character: CharacterId) -> Fighter {
         CharacterId::Go => CharacterId::Duke,
         CharacterId::C => CharacterId::Rust,
         CharacterId::Python => CharacterId::Duke,
+        CharacterId::Cpp => CharacterId::C,
     };
     let spec = character_spec(character);
     Fighter::new_with_projectile_loadout_and_body_metrics(

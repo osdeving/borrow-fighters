@@ -1,0 +1,97 @@
+{
+  "sheet": "throw/keyed-spectacle-v1.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "throw_spectacle_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 565,
+        "h": 490
+      },
+      "pivot": {
+        "x": 280,
+        "y": 465
+      },
+      "duration_ms": 166,
+      "phase": "startup"
+    },
+    {
+      "name": "throw_spectacle_01",
+      "source_rect": {
+        "x": 565,
+        "y": 0,
+        "w": 430,
+        "h": 490
+      },
+      "pivot": {
+        "x": 181,
+        "y": 466
+      },
+      "duration_ms": 83,
+      "phase": "capture"
+    },
+    {
+      "name": "throw_spectacle_02",
+      "source_rect": {
+        "x": 995,
+        "y": 0,
+        "w": 541,
+        "h": 490
+      },
+      "pivot": {
+        "x": 188,
+        "y": 468
+      },
+      "duration_ms": 117,
+      "phase": "capture"
+    },
+    {
+      "name": "throw_spectacle_03",
+      "source_rect": {
+        "x": 0,
+        "y": 490,
+        "w": 510,
+        "h": 534
+      },
+      "pivot": {
+        "x": 235,
+        "y": 465
+      },
+      "duration_ms": 167,
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_spectacle_04",
+      "source_rect": {
+        "x": 510,
+        "y": 490,
+        "w": 505,
+        "h": 534
+      },
+      "pivot": {
+        "x": 183,
+        "y": 465
+      },
+      "duration_ms": 133,
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_spectacle_05",
+      "source_rect": {
+        "x": 1015,
+        "y": 490,
+        "w": 521,
+        "h": 534
+      },
+      "pivot": {
+        "x": 213,
+        "y": 465
+      },
+      "duration_ms": 134,
+      "phase": "recovery"
+    }
+  ]
+}

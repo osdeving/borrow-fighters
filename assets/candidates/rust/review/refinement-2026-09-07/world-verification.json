@@ -1,0 +1,564 @@
+{
+  "character": "rust",
+  "candidate_loaded_matches_disk": true,
+  "candidate_image_sha256": "e969bf00c9df93c2980b45a24dacc066977ae2d9ebafcd0f982c010650d89f8d  assets/candidates/rust/rust-fighter-atlas.png\n",
+  "capture_sampling": "each pose/frame/phase/countdown change, plus every 3 live simulation ticks",
+  "every_tick": false,
+  "debug_boxes": true,
+  "attacks": true,
+  "moves_seen_per_player": [
+    [
+      "air_kick",
+      "air_punch",
+      "anti_air",
+      "kick",
+      "overhead",
+      "punch_heavy",
+      "punch_light",
+      "special",
+      "sweep",
+      "throw"
+    ],
+    [
+      "air_kick",
+      "air_punch",
+      "anti_air",
+      "kick",
+      "overhead",
+      "punch_heavy",
+      "punch_light",
+      "special",
+      "sweep",
+      "throw"
+    ]
+  ],
+  "returned_to_idle_after_moves": [
+    {
+      "move": "punch_light",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 11.716659545898438,
+        "facing": "Right",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 11.716659545898438,
+        "facing": "Left",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 703
+    },
+    {
+      "move": "punch_heavy",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 13.716629028320312,
+        "facing": "Right",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 13.716629028320312,
+        "facing": "Left",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 823
+    },
+    {
+      "move": "kick",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 15.716598510742188,
+        "facing": "Right",
+        "frame": "idle_03",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 15.716598510742188,
+        "facing": "Left",
+        "frame": "idle_03",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 943
+    },
+    {
+      "move": "sweep",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 17.716567993164062,
+        "facing": "Right",
+        "frame": "idle_02",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 17.716567993164062,
+        "facing": "Left",
+        "frame": "idle_02",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1063
+    },
+    {
+      "move": "overhead",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 19.716537475585938,
+        "facing": "Right",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 19.716537475585938,
+        "facing": "Left",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1183
+    },
+    {
+      "move": "anti_air",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 21.716506958007812,
+        "facing": "Right",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 21.716506958007812,
+        "facing": "Left",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1303
+    },
+    {
+      "move": "air_punch",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 23.716476440429688,
+        "facing": "Right",
+        "frame": "idle_03",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 23.716476440429688,
+        "facing": "Left",
+        "frame": "idle_03",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1423
+    },
+    {
+      "move": "air_kick",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 25.716445922851562,
+        "facing": "Right",
+        "frame": "idle_02",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 25.716445922851562,
+        "facing": "Left",
+        "frame": "idle_02",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1543
+    },
+    {
+      "move": "throw",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 27.716415405273438,
+        "facing": "Right",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 27.716415405273438,
+        "facing": "Left",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 100,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1663
+    },
+    {
+      "move": "special",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          321.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 29.716384887695312,
+        "facing": "Right",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          321.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          889.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 29.716384887695312,
+        "facing": "Left",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          889.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1783
+    }
+  ],
+  "last_tick": 1844,
+  "limitations": [
+    "Controlled World inputs; not an interactive keyboard playtest.",
+    "Close attacks are whiffs at the scenario spacing; use Combat Lab for contact alignment.",
+    "With --attacks, the final projectiles may hit normally; health is recorded and never reset.",
+    "This recording does not evaluate combat balance, audio or input devices."
+  ]
+}

@@ -49,7 +49,7 @@ export function HelpCenter({ open, onClose }: HelpCenterProps) {
               <WorkflowCard
                 title="Carregar algo pronto"
                 steps={[
-                  "Use os presets Rust, Duke, Go ou C.",
+                  "Use os presets Rust, Duke, Go, C ou Python.",
                   "Escolha um clip na lateral ou um frame na timeline.",
                   "Confira pivot, escala e marcadores de combat metadata.",
                 ]}
@@ -182,7 +182,7 @@ export function HelpCenter({ open, onClose }: HelpCenterProps) {
               </li>
               <li>
                 Nos placeholders atuais, Rust já tem algumas hitboxes de
-                soco/chute no manifesto; Duke, Go e C ainda dependem mais de
+                soco/chute no manifesto; Duke, Go, C e Python ainda dependem mais de
                 fallback runtime.
               </li>
             </ul>

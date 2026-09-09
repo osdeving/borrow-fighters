@@ -1,0 +1,16 @@
+{
+  "command": "cargo run -- --fight --p1 duke --p2 rust",
+  "sprite_candidates_env": null,
+  "result": {
+    "duke": 14,
+    "rust": 0
+  },
+  "assets_at_review": {
+    "assets/candidates/duke/duke-fighter.sprite.json": "e60b6e8fa43cbcaef77aa4b3aa42e6a793a923bb1f3c3237366194a5b2a88441",
+    "assets/candidates/duke/duke-fighter-atlas.png": "0488acccdb9537f993b53c27ce2a28a2f01e031235f6743aaf010904c37c5634",
+    "assets/candidates/duke/duke-projectile.png": "8cfaa86bd3c56c8bbfc6cce8d03769a62e06a3a58766b9492edd68f4c4ee199c",
+    "assets/candidates/rust/rust-fighter.sprite.json": "47bc02280fbb12a54a092bde8ae80204bd8ef648717b541cac778724d651e659",
+    "assets/candidates/rust/rust-fighter-atlas.png": "e969bf00c9df93c2980b45a24dacc066977ae2d9ebafcd0f982c010650d89f8d",
+    "assets/candidates/rust/rust-projectile.png": "287c7d34f1f76bb5a228592a0a2b95001f88eae7a858988109f0a947c108d836"
+  }
+}

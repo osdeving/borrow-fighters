@@ -11,7 +11,7 @@
     {
       "id": "combat",
       "file": "assets/audio/music/combat-loop.ogg",
-      "volume": 0.10,
+      "volume": 0.1,
       "looping": true,
       "required": true
     },
@@ -177,43 +177,50 @@
       "id": "voice.rust.attack.borrow_jab.01",
       "file": "assets/audio/characters/rust/voice/attack-borrow-jab-01.ogg",
       "bus": "voice",
-      "volume": 0.58
+      "volume": 0.64,
+      "required": true
     },
     {
       "id": "voice.rust.attack.kick.01",
       "file": "assets/audio/characters/rust/voice/attack-kick-01.ogg",
       "bus": "voice",
-      "volume": 0.58
+      "volume": 0.64,
+      "required": true
     },
     {
       "id": "voice.rust.attack.heavy.01",
       "file": "assets/audio/characters/rust/voice/attack-heavy-01.ogg",
       "bus": "voice",
-      "volume": 0.72
+      "volume": 0.64,
+      "required": true
     },
     {
       "id": "voice.rust.attack.lifetime.01",
       "file": "assets/audio/characters/rust/voice/attack-lifetime-01.ogg",
       "bus": "voice",
-      "volume": 0.7
+      "volume": 0.64,
+      "required": true
     },
     {
       "id": "voice.rust.attack.ownership.01",
       "file": "assets/audio/characters/rust/voice/attack-ownership-01.ogg",
       "bus": "voice",
-      "volume": 0.7
+      "volume": 0.64,
+      "required": true
     },
     {
       "id": "voice.rust.hurt.01",
       "file": "assets/audio/characters/rust/voice/hurt-01.ogg",
       "bus": "voice",
-      "volume": 0.5
+      "volume": 0.53,
+      "required": true
     },
     {
       "id": "voice.rust.block.01",
       "file": "assets/audio/characters/rust/voice/block-01.ogg",
       "bus": "voice",
-      "volume": 0.5
+      "volume": 0.53,
+      "required": true
     },
     {
       "id": "sfx.rust.projectile.cast.01",
@@ -276,57 +283,57 @@
       "id": "voice.go.attack.goroutine_jab.01",
       "file": "assets/audio/characters/go/voice/attack-goroutine-jab-01.ogg",
       "bus": "voice",
-      "volume": 0.82,
-      "pitch": 1.08
+      "volume": 0.64,
+      "required": true
     },
     {
       "id": "voice.go.attack.defer_kick.01",
       "file": "assets/audio/characters/go/voice/attack-defer-kick-01.ogg",
       "bus": "voice",
-      "volume": 0.76,
-      "pitch": 1.08
+      "volume": 0.64,
+      "required": true
     },
     {
       "id": "voice.go.hurt.01",
       "file": "assets/audio/characters/go/voice/hurt-01.ogg",
       "bus": "voice",
-      "volume": 0.44,
-      "pitch": 1.05
+      "volume": 0.53,
+      "required": true
     },
     {
       "id": "voice.go.block.01",
       "file": "assets/audio/characters/go/voice/block-01.ogg",
       "bus": "voice",
-      "volume": 0.42,
-      "pitch": 1.05
+      "volume": 0.53,
+      "required": true
     },
     {
       "id": "voice.c.attack.pointer_jab.01",
       "file": "assets/audio/characters/c/voice/attack-pointer-jab-01.ogg",
       "bus": "voice",
-      "volume": 0.62,
-      "pitch": 0.92
+      "volume": 0.64,
+      "required": true
     },
     {
       "id": "voice.c.attack.unsafe_poke.01",
       "file": "assets/audio/characters/c/voice/attack-unsafe-poke-01.ogg",
       "bus": "voice",
-      "volume": 0.62,
-      "pitch": 0.9
+      "volume": 0.64,
+      "required": true
     },
     {
       "id": "voice.c.hurt.01",
       "file": "assets/audio/characters/c/voice/hurt-01.ogg",
       "bus": "voice",
-      "volume": 0.52,
-      "pitch": 0.9
+      "volume": 0.53,
+      "required": true
     },
     {
       "id": "voice.c.block.01",
       "file": "assets/audio/characters/c/voice/block-01.ogg",
       "bus": "voice",
-      "volume": 0.48,
-      "pitch": 0.92
+      "volume": 0.53,
+      "required": true
     },
     {
       "id": "voice.python.attack.snake_bite.01",
@@ -362,162 +369,500 @@
       "bus": "voice",
       "volume": 0.48,
       "pitch": 1.0
+    },
+    {
+      "id": "voice.rust.attack.quick.02",
+      "file": "assets/audio/characters/rust/voice/attack-quick-02.ogg",
+      "bus": "voice",
+      "volume": 0.59,
+      "required": true
+    },
+    {
+      "id": "voice.rust.hurt.02",
+      "file": "assets/audio/characters/rust/voice/hurt-02.ogg",
+      "bus": "voice",
+      "volume": 0.59,
+      "required": true
+    },
+    {
+      "id": "voice.c.attack.heavy.02",
+      "file": "assets/audio/characters/c/voice/attack-heavy-02.ogg",
+      "bus": "voice",
+      "volume": 0.63,
+      "required": true
+    },
+    {
+      "id": "voice.c.attack.reboot.02",
+      "file": "assets/audio/characters/c/voice/attack-reboot-02.ogg",
+      "bus": "voice",
+      "volume": 0.63,
+      "required": true
+    },
+    {
+      "id": "voice.cpp.attack.light.01",
+      "file": "assets/audio/characters/cpp/voice/attack-light-01.ogg",
+      "bus": "voice",
+      "volume": 0.58,
+      "required": true
+    },
+    {
+      "id": "voice.cpp.attack.heavy.01",
+      "file": "assets/audio/characters/cpp/voice/attack-heavy-01.ogg",
+      "bus": "voice",
+      "volume": 0.58,
+      "required": true
+    },
+    {
+      "id": "voice.cpp.attack.kick.01",
+      "file": "assets/audio/characters/cpp/voice/attack-kick-01.ogg",
+      "bus": "voice",
+      "volume": 0.58,
+      "required": true
+    },
+    {
+      "id": "voice.cpp.hurt.01",
+      "file": "assets/audio/characters/cpp/voice/hurt-01.ogg",
+      "bus": "voice",
+      "volume": 0.58,
+      "required": true
+    },
+    {
+      "id": "voice.cpp.hurt.02",
+      "file": "assets/audio/characters/cpp/voice/hurt-02.ogg",
+      "bus": "voice",
+      "volume": 0.58,
+      "required": true
+    },
+    {
+      "id": "voice.cpp.block.01",
+      "file": "assets/audio/characters/cpp/voice/block-01.ogg",
+      "bus": "voice",
+      "volume": 0.58,
+      "required": true
+    },
+    {
+      "id": "sfx.super.start.rust",
+      "file": "assets/audio/sfx/super/start-rust.ogg",
+      "bus": "sfx",
+      "volume": 0.56,
+      "required": true
+    },
+    {
+      "id": "sfx.super.start.duke",
+      "file": "assets/audio/sfx/super/start-duke.ogg",
+      "bus": "sfx",
+      "volume": 0.52,
+      "required": true
+    },
+    {
+      "id": "sfx.super.start.c",
+      "file": "assets/audio/sfx/super/start-c.ogg",
+      "bus": "sfx",
+      "volume": 0.56,
+      "required": true
+    },
+    {
+      "id": "sfx.super.start.cpp",
+      "file": "assets/audio/sfx/super/start-cpp.ogg",
+      "bus": "sfx",
+      "volume": 0.55,
+      "required": true
+    },
+    {
+      "id": "sfx.super.trash.rain",
+      "file": "assets/audio/sfx/super/trash-rain.ogg",
+      "bus": "sfx",
+      "volume": 0.55,
+      "required": true
+    },
+    {
+      "id": "sfx.super.collect.1",
+      "file": "assets/audio/sfx/super/collect-1.ogg",
+      "bus": "sfx",
+      "volume": 0.57,
+      "required": true
+    },
+    {
+      "id": "sfx.super.collect.2",
+      "file": "assets/audio/sfx/super/collect-2.ogg",
+      "bus": "sfx",
+      "volume": 0.57,
+      "required": true
+    },
+    {
+      "id": "sfx.super.collect.3",
+      "file": "assets/audio/sfx/super/collect-3.ogg",
+      "bus": "sfx",
+      "volume": 0.57,
+      "required": true
+    },
+    {
+      "id": "sfx.super.giant.drop",
+      "file": "assets/audio/sfx/super/giant-drop.ogg",
+      "bus": "sfx",
+      "volume": 0.8,
+      "required": true
+    },
+    {
+      "id": "sfx.super.mutation.1",
+      "file": "assets/audio/sfx/super/mutation-1.ogg",
+      "bus": "sfx",
+      "volume": 0.56,
+      "required": true
+    },
+    {
+      "id": "sfx.super.mutation.2",
+      "file": "assets/audio/sfx/super/mutation-2.ogg",
+      "bus": "sfx",
+      "volume": 0.58,
+      "required": true
+    },
+    {
+      "id": "sfx.super.error.cascade",
+      "file": "assets/audio/sfx/super/error-cascade.ogg",
+      "bus": "sfx",
+      "volume": 0.62,
+      "required": true
+    },
+    {
+      "id": "sfx.super.boot.post",
+      "file": "assets/audio/sfx/super/boot-post.ogg",
+      "bus": "sfx",
+      "volume": 0.55,
+      "required": true
+    },
+    {
+      "id": "sfx.super.footshot",
+      "file": "assets/audio/sfx/super/footshot.ogg",
+      "bus": "sfx",
+      "volume": 0.78,
+      "required": true
+    },
+    {
+      "id": "sfx.super.barrage.1",
+      "file": "assets/audio/sfx/super/barrage-1.ogg",
+      "bus": "sfx",
+      "volume": 0.4,
+      "required": true
+    },
+    {
+      "id": "sfx.super.barrage.2",
+      "file": "assets/audio/sfx/super/barrage-2.ogg",
+      "bus": "sfx",
+      "volume": 0.4,
+      "required": true
+    },
+    {
+      "id": "sfx.super.barrage.3",
+      "file": "assets/audio/sfx/super/barrage-3.ogg",
+      "bus": "sfx",
+      "volume": 0.4,
+      "required": true
+    },
+    {
+      "id": "sfx.super.end",
+      "file": "assets/audio/sfx/super/end.ogg",
+      "bus": "sfx",
+      "volume": 0.3,
+      "required": true
+    },
+    {
+      "id": "sfx.super.start.python",
+      "file": "assets/audio/sfx/super/start-python.ogg",
+      "bus": "sfx",
+      "volume": 0.55,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.morph",
+      "file": "assets/audio/sfx/super/python-morph.ogg",
+      "bus": "sfx",
+      "volume": 0.48,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.grow",
+      "file": "assets/audio/sfx/super/python-grow.ogg",
+      "bus": "sfx",
+      "volume": 0.5,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.lunge",
+      "file": "assets/audio/sfx/super/python-lunge.ogg",
+      "bus": "sfx",
+      "volume": 0.57,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.swallow",
+      "file": "assets/audio/sfx/super/python-swallow.ogg",
+      "bus": "sfx",
+      "volume": 0.62,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.revert",
+      "file": "assets/audio/sfx/super/python-revert.ogg",
+      "bus": "sfx",
+      "volume": 0.48,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.celebrate",
+      "file": "assets/audio/sfx/super/python-celebrate.ogg",
+      "bus": "sfx",
+      "volume": 0.43,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.peace",
+      "file": "assets/audio/sfx/super/python-peace.ogg",
+      "bus": "sfx",
+      "volume": 0.42,
+      "required": true
+    },
+    {
+      "id": "sfx.super.cpp.typing",
+      "file": "assets/audio/sfx/super/cpp-typing.ogg",
+      "bus": "sfx",
+      "volume": 0.48,
+      "required": true
+    },
+    {
+      "id": "sfx.super.cpp.enter",
+      "file": "assets/audio/sfx/super/cpp-enter.ogg",
+      "bus": "sfx",
+      "volume": 0.47,
+      "required": true
     }
   ],
   "bindings": [
     {
       "cue": "ui.navigate",
-      "clips": ["ui.navigate.01"]
+      "clips": [
+        "ui.navigate.01"
+      ]
     },
     {
       "cue": "ui.confirm",
-      "clips": ["ui.confirm.01"]
+      "clips": [
+        "ui.confirm.01"
+      ]
     },
     {
       "cue": "ui.back",
-      "clips": ["ui.back.01"]
+      "clips": [
+        "ui.back.01"
+      ]
     },
     {
       "cue": "match.start",
-      "clips": ["sfx.match.start.01"]
+      "clips": [
+        "sfx.match.start.01"
+      ]
     },
     {
       "cue": "match.countdown.11",
-      "clips": ["sfx.match.countdown.11"]
+      "clips": [
+        "sfx.match.countdown.11"
+      ]
     },
     {
       "cue": "match.countdown.10",
-      "clips": ["sfx.match.countdown.10"]
+      "clips": [
+        "sfx.match.countdown.10"
+      ]
     },
     {
       "cue": "match.countdown.01",
-      "clips": ["sfx.match.countdown.01"]
+      "clips": [
+        "sfx.match.countdown.01"
+      ]
     },
     {
       "cue": "match.countdown.fight",
-      "clips": ["sfx.match.countdown.fight"]
+      "clips": [
+        "sfx.match.countdown.fight"
+      ]
     },
     {
       "cue": "match.victory",
-      "clips": ["sfx.match.victory.01"]
+      "clips": [
+        "sfx.match.victory.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "rust",
       "move": "rust_borrow_jab",
-      "clips": ["voice.rust.attack.borrow_jab.01"]
+      "clips": [
+        "voice.rust.attack.borrow_jab.01",
+        "voice.rust.attack.quick.02",
+        "voice.rust.attack.kick.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "rust",
       "move": "heavy_punch",
-      "clips": ["voice.rust.attack.heavy.01"]
+      "clips": [
+        "voice.rust.attack.heavy.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "rust",
       "move": "kick",
-      "clips": ["voice.rust.attack.ownership.01"]
+      "clips": [
+        "voice.rust.attack.ownership.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "rust",
       "move": "sweep_kick",
-      "clips": ["voice.rust.attack.kick.01", "voice.rust.attack.ownership.01"]
+      "clips": [
+        "voice.rust.attack.kick.01",
+        "voice.rust.attack.ownership.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "rust",
       "move": "overhead_punch",
-      "clips": ["voice.rust.attack.heavy.01"]
+      "clips": [
+        "voice.rust.attack.heavy.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "rust",
       "move": "rust_lifetime_anti_air",
-      "clips": ["voice.rust.attack.lifetime.01"]
+      "clips": [
+        "voice.rust.attack.lifetime.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "rust",
       "move": "air_punch",
-      "clips": ["voice.rust.attack.heavy.01"]
+      "clips": [
+        "voice.rust.attack.heavy.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "rust",
       "move": "air_kick",
-      "clips": ["voice.rust.attack.ownership.01"]
+      "clips": [
+        "voice.rust.attack.ownership.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "rust",
       "move": "rust_ownership_throw",
-      "clips": ["voice.rust.attack.ownership.01"]
+      "clips": [
+        "voice.rust.attack.ownership.01"
+      ]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
+      "move": "rust_borrow_fortress",
+      "clips": [
+        "voice.rust.attack.heavy.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "rust",
       "clips": [
         "voice.rust.attack.borrow_jab.01",
-        "voice.rust.attack.heavy.01",
-        "voice.rust.attack.lifetime.01",
-        "voice.rust.attack.ownership.01"
+        "voice.rust.attack.quick.02",
+        "voice.rust.attack.kick.01"
       ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "duke",
       "move": "duke_boilerplate_poke",
-      "clips": ["voice.duke.attack.boilerplate_poke.01"]
+      "clips": [
+        "voice.duke.attack.boilerplate_poke.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "duke",
       "move": "light_punch",
-      "clips": ["voice.duke.attack.heavy.01"]
+      "clips": [
+        "voice.duke.attack.heavy.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "duke",
       "move": "kick",
-      "clips": ["voice.duke.attack.sweep.01"]
+      "clips": [
+        "voice.duke.attack.sweep.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "duke",
       "move": "duke_garbage_collector_sweep",
-      "clips": ["voice.duke.attack.sweep.01"]
+      "clips": [
+        "voice.duke.attack.sweep.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "duke",
       "move": "duke_abstract_factory_overhead",
-      "clips": ["voice.duke.attack.heavy.01"]
+      "clips": [
+        "voice.duke.attack.heavy.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "duke",
       "move": "rising_anti_air",
-      "clips": ["voice.duke.attack.heavy.01"]
+      "clips": [
+        "voice.duke.attack.heavy.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "duke",
       "move": "air_punch",
-      "clips": ["voice.duke.attack.heavy.01"]
+      "clips": [
+        "voice.duke.attack.heavy.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "duke",
       "move": "air_kick",
-      "clips": ["voice.duke.attack.sweep.01"]
+      "clips": [
+        "voice.duke.attack.sweep.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "duke",
       "move": "duke_enterprise_throw",
-      "clips": ["voice.duke.attack.enterprise.01"]
+      "clips": [
+        "voice.duke.attack.enterprise.01"
+      ]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
+      "move": "duke_println_barrage",
+      "clips": [
+        "voice.duke.attack.heavy.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
@@ -533,13 +878,17 @@
       "cue": "fighter.attack.start",
       "character": "go",
       "move": "go_goroutine_jab",
-      "clips": ["voice.go.attack.goroutine_jab.01"]
+      "clips": [
+        "voice.go.attack.goroutine_jab.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "go",
       "move": "go_defer_kick",
-      "clips": ["voice.go.attack.defer_kick.01"]
+      "clips": [
+        "voice.go.attack.defer_kick.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
@@ -553,36 +902,51 @@
       "cue": "fighter.attack.start",
       "character": "c",
       "move": "c_pointer_jab",
-      "clips": ["voice.c.attack.pointer_jab.01"]
+      "clips": [
+        "voice.c.attack.pointer_jab.01",
+        "voice.c.attack.heavy.02"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "c",
       "move": "c_unsafe_poke",
-      "clips": ["voice.c.attack.unsafe_poke.01"]
+      "clips": [
+        "voice.c.attack.unsafe_poke.01",
+        "voice.c.attack.reboot.02"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "c",
-      "clips": ["voice.c.attack.pointer_jab.01", "voice.c.attack.unsafe_poke.01"]
+      "clips": [
+        "voice.c.attack.unsafe_poke.01",
+        "voice.c.attack.reboot.02"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "python",
       "move": "python_snake_bite",
-      "clips": ["voice.python.attack.snake_bite.01"]
+      "clips": [
+        "voice.python.attack.snake_bite.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "python",
       "move": "python_data_strike",
-      "clips": ["voice.python.attack.data_strike.01"]
+      "clips": [
+        "voice.python.attack.data_strike.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
       "character": "python",
       "move": "python_heel_kick",
-      "clips": ["voice.python.attack.heel_kick.01"]
+      "clips": [
+        "voice.python.attack.heel_kick.01"
+      ]
     },
     {
       "cue": "fighter.attack.start",
@@ -594,105 +958,457 @@
       ]
     },
     {
+      "cue": "fighter.attack.start",
+      "character": "cpp",
+      "clips": [
+        "voice.cpp.attack.light.01",
+        "voice.cpp.attack.heavy.01",
+        "voice.cpp.attack.kick.01"
+      ]
+    },
+    {
       "cue": "fighter.attack.whiff",
-      "clips": ["sfx.combat.whiff.01", "sfx.combat.whiff.02"]
+      "clips": [
+        "sfx.combat.whiff.01",
+        "sfx.combat.whiff.02"
+      ]
     },
     {
       "cue": "fighter.projectile.cast",
       "character": "rust",
-      "clips": ["sfx.rust.projectile.cast.01"]
+      "clips": [
+        "sfx.rust.projectile.cast.01"
+      ]
     },
     {
       "cue": "fighter.projectile.cast",
       "character": "duke",
-      "clips": ["sfx.duke.projectile.cast.01"]
+      "clips": [
+        "sfx.duke.projectile.cast.01"
+      ]
     },
     {
       "cue": "fighter.projectile.cast",
       "character": "go",
-      "clips": ["voice.go.attack.goroutine_jab.01"]
+      "clips": [
+        "voice.go.attack.goroutine_jab.01"
+      ]
     },
     {
       "cue": "fighter.projectile.cast",
       "character": "c",
-      "clips": ["voice.c.attack.unsafe_poke.01"]
+      "clips": [
+        "voice.c.attack.unsafe_poke.01"
+      ]
     },
     {
       "cue": "fighter.projectile.cast",
       "character": "python",
-      "clips": ["voice.python.attack.data_strike.01"]
+      "clips": [
+        "voice.python.attack.data_strike.01"
+      ]
+    },
+    {
+      "cue": "fighter.projectile.cast",
+      "character": "cpp",
+      "clips": [
+        "voice.cpp.attack.heavy.01"
+      ]
     },
     {
       "cue": "fighter.hurt",
       "character": "rust",
-      "clips": ["voice.rust.hurt.01"]
+      "clips": [
+        "voice.rust.hurt.01",
+        "voice.rust.hurt.02"
+      ]
     },
     {
       "cue": "fighter.hurt",
       "character": "duke",
-      "clips": ["voice.duke.hurt.01"]
+      "clips": [
+        "voice.duke.hurt.01"
+      ]
     },
     {
       "cue": "fighter.hurt",
       "character": "go",
-      "clips": ["voice.go.hurt.01"]
+      "clips": [
+        "voice.go.hurt.01"
+      ]
     },
     {
       "cue": "fighter.hurt",
       "character": "c",
-      "clips": ["voice.c.hurt.01"]
+      "clips": [
+        "voice.c.hurt.01"
+      ]
     },
     {
       "cue": "fighter.hurt",
       "character": "python",
-      "clips": ["voice.python.hurt.01"]
+      "clips": [
+        "voice.python.hurt.01"
+      ]
+    },
+    {
+      "cue": "fighter.hurt",
+      "character": "cpp",
+      "clips": [
+        "voice.cpp.hurt.01",
+        "voice.cpp.hurt.02"
+      ]
     },
     {
       "cue": "fighter.block",
       "character": "rust",
-      "clips": ["voice.rust.block.01"]
+      "clips": [
+        "voice.rust.block.01"
+      ]
     },
     {
       "cue": "fighter.block",
       "character": "duke",
-      "clips": ["voice.duke.block.01"]
+      "clips": [
+        "voice.duke.block.01"
+      ]
     },
     {
       "cue": "fighter.block",
       "character": "go",
-      "clips": ["voice.go.block.01"]
+      "clips": [
+        "voice.go.block.01"
+      ]
     },
     {
       "cue": "fighter.block",
       "character": "c",
-      "clips": ["voice.c.block.01"]
+      "clips": [
+        "voice.c.block.01"
+      ]
     },
     {
       "cue": "fighter.block",
       "character": "python",
-      "clips": ["voice.python.block.01"]
+      "clips": [
+        "voice.python.block.01"
+      ]
+    },
+    {
+      "cue": "fighter.block",
+      "character": "cpp",
+      "clips": [
+        "voice.cpp.block.01"
+      ]
     },
     {
       "cue": "combat.hit",
       "move": "heavy_punch",
-      "clips": ["sfx.combat.hit.heavy.01", "sfx.combat.hit.heavy.02"]
+      "clips": [
+        "sfx.combat.hit.heavy.01",
+        "sfx.combat.hit.heavy.02"
+      ]
     },
     {
       "cue": "combat.hit",
       "move": "duke_boilerplate_poke",
-      "clips": ["sfx.combat.hit.heavy.01", "sfx.combat.hit.heavy.02"]
+      "clips": [
+        "sfx.combat.hit.heavy.01",
+        "sfx.combat.hit.heavy.02"
+      ]
     },
     {
       "cue": "combat.hit",
-      "clips": ["sfx.combat.hit.light.01", "sfx.combat.hit.light.02"]
+      "clips": [
+        "sfx.combat.hit.light.01",
+        "sfx.combat.hit.light.02"
+      ]
     },
     {
       "cue": "combat.block",
-      "clips": ["sfx.combat.block.01", "sfx.combat.block.02"]
+      "clips": [
+        "sfx.combat.block.01",
+        "sfx.combat.block.02"
+      ]
     },
     {
       "cue": "projectile.impact",
-      "clips": ["sfx.projectile.impact.01", "sfx.projectile.impact.02"]
+      "clips": [
+        "sfx.projectile.impact.01",
+        "sfx.projectile.impact.02"
+      ]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
+      "move": "rust_ownership_eclipse",
+      "clips": [
+        "voice.rust.attack.heavy.01"
+      ]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "rust_ownership_eclipse",
+      "clips": [
+        "sfx.combat.hit.heavy.01",
+        "sfx.combat.hit.heavy.02"
+      ]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
+      "move": "duke_jvm_overdrive",
+      "clips": [
+        "voice.duke.attack.heavy.01"
+      ]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "duke_jvm_overdrive",
+      "clips": [
+        "sfx.combat.hit.heavy.01",
+        "sfx.combat.hit.heavy.02"
+      ]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "go",
+      "move": "go_million_goroutines",
+      "clips": [
+        "voice.go.attack.goroutine_jab.01"
+      ]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "go_million_goroutines",
+      "clips": [
+        "sfx.combat.hit.heavy.01",
+        "sfx.combat.hit.heavy.02"
+      ]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "c",
+      "move": "c_kernel_panic",
+      "clips": [
+        "voice.c.attack.unsafe_poke.01",
+        "voice.c.attack.reboot.02"
+      ]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "c_kernel_panic",
+      "clips": [
+        "sfx.combat.hit.heavy.01",
+        "sfx.combat.hit.heavy.02"
+      ]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "python",
+      "move": "python_event_horizon",
+      "clips": [
+        "voice.python.attack.snake_bite.01"
+      ]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "python_event_horizon",
+      "clips": [
+        "sfx.combat.hit.heavy.01",
+        "sfx.combat.hit.heavy.02"
+      ]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "cpp",
+      "move": "cpp_template_singularity",
+      "clips": [
+        "voice.cpp.attack.light.01",
+        "voice.cpp.attack.heavy.01",
+        "voice.cpp.attack.kick.01"
+      ]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "cpp_template_singularity",
+      "clips": [
+        "sfx.combat.hit.heavy.01",
+        "sfx.combat.hit.heavy.02"
+      ]
+    },
+    {
+      "cue": "super.start",
+      "character": "rust",
+      "clips": [
+        "sfx.super.start.rust"
+      ]
+    },
+    {
+      "cue": "super.start",
+      "character": "duke",
+      "clips": [
+        "sfx.super.start.duke"
+      ]
+    },
+    {
+      "cue": "super.start",
+      "character": "c",
+      "clips": [
+        "sfx.super.start.c"
+      ]
+    },
+    {
+      "cue": "super.start",
+      "character": "cpp",
+      "clips": [
+        "sfx.super.start.cpp"
+      ]
+    },
+    {
+      "cue": "super.trash_rain",
+      "character": "duke",
+      "clips": [
+        "sfx.super.trash.rain"
+      ]
+    },
+    {
+      "cue": "super.collect",
+      "character": "duke",
+      "clips": [
+        "sfx.super.collect.1",
+        "sfx.super.collect.2",
+        "sfx.super.collect.3"
+      ]
+    },
+    {
+      "cue": "super.giant_drop",
+      "character": "duke",
+      "clips": [
+        "sfx.super.giant.drop"
+      ]
+    },
+    {
+      "cue": "super.mutation",
+      "character": "rust",
+      "clips": [
+        "sfx.super.mutation.1",
+        "sfx.super.mutation.2"
+      ]
+    },
+    {
+      "cue": "super.error",
+      "character": "c",
+      "clips": [
+        "sfx.super.error.cascade"
+      ]
+    },
+    {
+      "cue": "super.boot",
+      "character": "c",
+      "clips": [
+        "sfx.super.boot.post"
+      ]
+    },
+    {
+      "cue": "super.footshot",
+      "character": "cpp",
+      "clips": [
+        "sfx.super.footshot"
+      ]
+    },
+    {
+      "cue": "super.barrage_hit",
+      "character": "cpp",
+      "clips": [
+        "sfx.super.barrage.1",
+        "sfx.super.barrage.2",
+        "sfx.super.barrage.3"
+      ]
+    },
+    {
+      "cue": "super.end",
+      "clips": [
+        "sfx.super.end"
+      ]
+    },
+    {
+      "cue": "super.start",
+      "character": "python",
+      "clips": [
+        "sfx.super.start.python"
+      ]
+    },
+    {
+      "cue": "super.mutation",
+      "character": "python",
+      "clips": [
+        "sfx.super.python.morph",
+        "sfx.super.python.grow"
+      ]
+    },
+    {
+      "cue": "super.lunge",
+      "character": "python",
+      "clips": [
+        "sfx.super.python.lunge"
+      ]
+    },
+    {
+      "cue": "super.swallow",
+      "character": "python",
+      "clips": [
+        "sfx.super.python.swallow"
+      ]
+    },
+    {
+      "cue": "super.revert",
+      "character": "python",
+      "clips": [
+        "sfx.super.python.revert"
+      ]
+    },
+    {
+      "cue": "super.celebrate",
+      "character": "python",
+      "clips": [
+        "sfx.super.python.celebrate"
+      ]
+    },
+    {
+      "cue": "super.peace",
+      "character": "python",
+      "clips": [
+        "sfx.super.python.peace"
+      ]
+    },
+    {
+      "cue": "super.typing",
+      "character": "cpp",
+      "clips": [
+        "sfx.super.cpp.typing"
+      ]
+    },
+    {
+      "cue": "super.enter",
+      "character": "cpp",
+      "clips": [
+        "sfx.super.cpp.enter"
+      ]
+    },
+    {
+      "cue": "super.error",
+      "character": "cpp",
+      "clips": [
+        "sfx.super.error.cascade"
+      ]
+    },
+    {
+      "cue": "super.boot",
+      "character": "cpp",
+      "clips": [
+        "sfx.super.boot.post"
+      ]
     }
   ]
 }

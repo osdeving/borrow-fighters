@@ -1,0 +1,52 @@
+{
+  "sheet": "block/keyed.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "block_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 682,
+        "h": 768
+      },
+      "pivot": {
+        "x": 322,
+        "y": 672
+      },
+      "duration_ms": 80,
+      "phase": "guard"
+    },
+    {
+      "name": "block_01",
+      "source_rect": {
+        "x": 682,
+        "y": 0,
+        "w": 683,
+        "h": 768
+      },
+      "pivot": {
+        "x": 340,
+        "y": 674
+      },
+      "duration_ms": 100,
+      "phase": "absorb"
+    },
+    {
+      "name": "block_02",
+      "source_rect": {
+        "x": 1365,
+        "y": 0,
+        "w": 683,
+        "h": 768
+      },
+      "pivot": {
+        "x": 223,
+        "y": 675
+      },
+      "duration_ms": 180,
+      "phase": "held_guard"
+    }
+  ]
+}

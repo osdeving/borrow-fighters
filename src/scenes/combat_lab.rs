@@ -3,8 +3,9 @@
 //! System: Combat Lab scene. This file owns isolated move playback state and
 //! intentionally keeps Raylib drawing outside the testable lab model.
 //!
-//! The lab reuses combat primitives without match flow so move timing, pivots,
-//! hitboxes, hurtboxes, and projectile spawn can be inspected directly.
+//! Ordinary moves and poses use isolated combat primitives for box inspection.
+//! Authored supers retain a full World so both actors, phase contacts and audio
+//! use the same sequence contract as a match.
 
 use crate::characters::{CharacterId, character_spec};
 use crate::combat::{
@@ -14,6 +15,10 @@ use crate::combat::{
     projectile::Projectile,
 };
 use crate::config::{FIXED_TIMESTEP, WINDOW_WIDTH, world_px};
+use crate::engine::sprites::{
+    FighterSpriteClip, ProjectedSpriteCombat, SpriteManifest, projected_fighter_combat,
+    projected_projectile_origin_for_clip,
+};
 use crate::math::rect::Rect;
 
 use super::combat_lab_analysis::{
@@ -38,11 +43,13 @@ pub enum CombatLabMove {
     AirKick,
     Throw,
     Projectile,
+    SignatureSpecial,
+    CinematicSpecial,
 }
 
 impl CombatLabMove {
     /// Ordered move list used by cycling controls.
-    pub const ALL: [Self; 10] = [
+    pub const ALL: [Self; 12] = [
         Self::LightPunch,
         Self::HeavyPunch,
         Self::Kick,
@@ -53,6 +60,8 @@ impl CombatLabMove {
         Self::AirKick,
         Self::Throw,
         Self::Projectile,
+        Self::SignatureSpecial,
+        Self::CinematicSpecial,
     ];
 
     /// Parses a CLI move name.
@@ -68,6 +77,10 @@ impl CombatLabMove {
             "air_kick" | "air-kick" | "jump_kick" | "jump-kick" => Some(Self::AirKick),
             "throw" | "grab" | "close_throw" | "close-throw" => Some(Self::Throw),
             "projectile" | "special" | "fireball" => Some(Self::Projectile),
+            "signature_special" | "signature-special" | "signature" => Some(Self::SignatureSpecial),
+            "cinematic_special" | "cinematic-special" | "cinematic" | "ultimate" => {
+                Some(Self::CinematicSpecial)
+            }
             _ => None,
         }
     }
@@ -85,6 +98,8 @@ impl CombatLabMove {
             Self::AirKick => "Air Kick",
             Self::Throw => "Throw",
             Self::Projectile => "Projectile",
+            Self::SignatureSpecial => "Signature Special",
+            Self::CinematicSpecial => "Cinematic Special",
         }
     }
 
@@ -101,6 +116,8 @@ impl CombatLabMove {
             Self::AirKick => Some(AttackKind::AirKick),
             Self::Throw => Some(AttackKind::Throw),
             Self::Projectile => None,
+            Self::SignatureSpecial => Some(AttackKind::SignatureSpecial),
+            Self::CinematicSpecial => Some(AttackKind::CinematicSpecial),
         }
     }
 
@@ -116,6 +133,8 @@ impl CombatLabMove {
             Self::AirKick => CombatLabAnalysisMove::Close(MoveInputKind::AirKick),
             Self::Throw => CombatLabAnalysisMove::Close(MoveInputKind::Throw),
             Self::Projectile => CombatLabAnalysisMove::Projectile,
+            Self::SignatureSpecial => CombatLabAnalysisMove::Close(MoveInputKind::SignatureSpecial),
+            Self::CinematicSpecial => CombatLabAnalysisMove::Close(MoveInputKind::CinematicSpecial),
         }
     }
 
@@ -162,6 +181,14 @@ impl CombatLabMove {
                 ..FighterInput::default()
             },
             Self::Projectile => FighterInput::default(),
+            Self::CinematicSpecial => FighterInput {
+                cinematic_special: true,
+                ..FighterInput::default()
+            },
+            Self::SignatureSpecial => FighterInput {
+                signature_special: true,
+                ..FighterInput::default()
+            },
         }
     }
 
@@ -181,11 +208,14 @@ pub enum CombatLabPose {
     Block,
     Hit,
     Victory,
+    Spawn,
+    Defeat,
+    CrouchBlock,
 }
 
 impl CombatLabPose {
     /// Ordered pose list used by cycling controls.
-    pub const ALL: [Self; 7] = [
+    pub const ALL: [Self; 10] = [
         Self::Move,
         Self::Idle,
         Self::Crouch,
@@ -193,6 +223,9 @@ impl CombatLabPose {
         Self::Block,
         Self::Hit,
         Self::Victory,
+        Self::Spawn,
+        Self::Defeat,
+        Self::CrouchBlock,
     ];
 
     /// Parses a CLI pose name.
@@ -205,6 +238,9 @@ impl CombatLabPose {
             "block" | "guard" => Some(Self::Block),
             "hit" | "hurt" => Some(Self::Hit),
             "victory" | "taunt" | "win" => Some(Self::Victory),
+            "spawn" | "entrance" => Some(Self::Spawn),
+            "defeat" | "ko" => Some(Self::Defeat),
+            "crouch_block" | "low_guard" => Some(Self::CrouchBlock),
             _ => None,
         }
     }
@@ -219,6 +255,9 @@ impl CombatLabPose {
             Self::Block => "block",
             Self::Hit => "hit",
             Self::Victory => "victory",
+            Self::Spawn => "spawn",
+            Self::Defeat => "defeat",
+            Self::CrouchBlock => "crouch_block",
         }
     }
 
@@ -260,6 +299,7 @@ pub struct CombatLab {
     selected_move: CombatLabMove,
     pose: CombatLabPose,
     fighter: Fighter,
+    combat_manifest: Option<SpriteManifest>,
     projectiles: Vec<Projectile>,
     current_frame: FrameCount,
     paused: bool,
@@ -268,6 +308,7 @@ pub struct CombatLab {
     show_pivot: bool,
     show_dummy: bool,
     show_background: bool,
+    super_preview: Option<crate::game::world::World>,
 }
 
 impl Default for CombatLab {
@@ -284,6 +325,7 @@ impl CombatLab {
             selected_move: options.selected_move,
             pose: options.pose,
             fighter: fighter_for(options.character),
+            combat_manifest: None,
             projectiles: Vec::new(),
             current_frame: FrameCount::ZERO,
             paused: false,
@@ -292,6 +334,7 @@ impl CombatLab {
             show_pivot: true,
             show_dummy: false,
             show_background: true,
+            super_preview: None,
         };
         lab.reset_playback();
         lab
@@ -358,6 +401,51 @@ impl CombatLab {
         &self.fighter
     }
 
+    /// Full two-actor preview for supers, shared with the normal match rules.
+    pub fn super_preview_world(&self) -> Option<&crate::game::world::World> {
+        self.super_preview.as_ref()
+    }
+
+    /// Drains authored phase cues for the App audio boundary.
+    pub fn take_super_audio_events(&mut self) -> Vec<crate::audio::AudioEvent> {
+        self.super_preview
+            .as_mut()
+            .map_or_else(Vec::new, |world| world.take_audio_events())
+    }
+
+    /// Supplies baseline metadata for match-equivalent boxes and future projectile spawns.
+    pub fn set_combat_manifest(&mut self, manifest: Option<SpriteManifest>) {
+        self.combat_manifest = manifest;
+    }
+
+    /// Returns baseline metadata with the same sampling clock used by the match.
+    pub fn projected_combat(&self) -> Option<ProjectedSpriteCombat> {
+        self.combat_manifest.as_ref().and_then(|manifest| {
+            projected_fighter_combat(manifest, &self.fighter, self.elapsed_seconds())
+        })
+    }
+
+    /// Returns inspected hurtboxes, falling back when baseline metadata is absent.
+    pub fn hurtboxes(&self) -> Vec<Rect> {
+        self.projected_combat()
+            .filter(|_| !self.fighter.uses_low_attack_hurtboxes())
+            .map(|combat| combat.hurtboxes)
+            .filter(|boxes| !boxes.is_empty())
+            .unwrap_or_else(|| self.fighter.hurtboxes().rects().to_vec())
+    }
+
+    /// Returns inspected attack boxes; the fighter's attack phase still gates contact.
+    pub fn attack_boxes(&self) -> Vec<Rect> {
+        if self.is_signature_actor_preview() || self.super_preview.is_some() {
+            return Vec::new();
+        }
+        self.projected_combat()
+            .filter(|_| !self.fighter.uses_move_spec_hitbox())
+            .map(|combat| combat.hitboxes)
+            .filter(|boxes| !boxes.is_empty())
+            .unwrap_or_else(|| self.fighter.attack_box().into_iter().collect())
+    }
+
     /// Returns active lab projectiles.
     pub fn projectiles(&self) -> &[Projectile] {
         &self.projectiles
@@ -395,7 +483,13 @@ impl CombatLab {
 
     /// Returns whether the optional contact dummy should be drawn.
     pub const fn show_dummy(&self) -> bool {
-        self.show_dummy
+        self.show_dummy && !self.is_signature_actor_preview() && self.super_preview.is_none()
+    }
+
+    /// Whether only the actor can be inspected, without World effect simulation.
+    pub const fn is_signature_actor_preview(&self) -> bool {
+        self.pose.is_move_playback()
+            && matches!(self.selected_move, CombatLabMove::SignatureSpecial)
     }
 
     /// Returns whether the arena background should be drawn behind the lab.
@@ -405,7 +499,10 @@ impl CombatLab {
 
     /// Returns estimated advantage and spacing for the selected move.
     pub fn advantage(&self) -> Option<CombatLabAdvantage> {
-        if !self.pose.is_move_playback() {
+        if !self.pose.is_move_playback()
+            || self.is_signature_actor_preview()
+            || self.super_preview.is_some()
+        {
             return None;
         }
 
@@ -415,7 +512,10 @@ impl CombatLab {
 
     /// Returns the dummy body positioned at the selected move contact point.
     pub fn dummy_body_rect(&self) -> Rect {
-        if !self.pose.is_move_playback() {
+        if !self.pose.is_move_playback()
+            || self.is_signature_actor_preview()
+            || self.super_preview.is_some()
+        {
             return default_dummy_body();
         }
 
@@ -425,6 +525,19 @@ impl CombatLab {
     }
 
     fn advance_frame(&mut self) {
+        if let Some(world) = &mut self.super_preview {
+            world.update(
+                FIXED_TIMESTEP,
+                FighterInput {
+                    cinematic_special: self.current_frame == FrameCount::ZERO,
+                    ..FighterInput::default()
+                },
+                FighterInput::default(),
+            );
+            self.fighter = world.player_one.clone();
+            self.current_frame = FrameCount::new(self.current_frame.get().saturating_add(1));
+            return;
+        }
         if !self.pose.is_move_playback() {
             self.current_frame = FrameCount::new(self.current_frame.get().saturating_add(1));
             return;
@@ -456,12 +569,26 @@ impl CombatLab {
             return;
         }
 
-        self.projectiles
-            .push(Projectile::from_fighter(&self.fighter));
+        let origin = self.combat_manifest.as_ref().and_then(|manifest| {
+            projected_projectile_origin_for_clip(
+                manifest,
+                &self.fighter,
+                FighterSpriteClip::Special,
+                0.0,
+            )
+        });
+        self.projectiles.push(match origin {
+            Some(origin) => Projectile::from_fighter_with_origin(&self.fighter, origin),
+            None => Projectile::from_fighter(&self.fighter),
+        });
         self.fighter.mark_projectile_fired();
     }
 
     fn reset_playback(&mut self) {
+        self.super_preview = (self.pose.is_move_playback()
+            && self.selected_move == CombatLabMove::CinematicSpecial
+            && crate::combat::super_sequence::super_spec(self.character).is_some())
+        .then(|| crate::game::world::World::new_with_characters(self.character, CharacterId::Rust));
         self.fighter = fighter_for(self.character);
         self.projectiles.clear();
         self.current_frame = FrameCount::ZERO;
@@ -474,6 +601,11 @@ impl CombatLab {
     fn select_next_move(&mut self) {
         let index = move_index(self.selected_move);
         self.selected_move = CombatLabMove::ALL[(index + 1) % CombatLabMove::ALL.len()];
+        if self.character == CharacterId::Go
+            && self.selected_move == CombatLabMove::SignatureSpecial
+        {
+            self.selected_move = CombatLabMove::CinematicSpecial;
+        }
         self.reset_playback();
     }
 
@@ -485,6 +617,11 @@ impl CombatLab {
             index - 1
         };
         self.selected_move = CombatLabMove::ALL[next];
+        if self.character == CharacterId::Go
+            && self.selected_move == CombatLabMove::SignatureSpecial
+        {
+            self.selected_move = CombatLabMove::Projectile;
+        }
         self.reset_playback();
     }
 
@@ -524,6 +661,10 @@ fn apply_pose_to_fighter(fighter: &mut Fighter, pose: CombatLabPose) {
         CombatLabPose::Block => {
             fighter.blocking = true;
         }
+        CombatLabPose::CrouchBlock => {
+            fighter.crouching = true;
+            fighter.blocking = true;
+        }
         _ => {}
     }
 }
@@ -553,6 +694,7 @@ fn slot_for(character: CharacterId) -> PlayerSlot {
         CharacterId::Go => PlayerSlot::One,
         CharacterId::C => PlayerSlot::Two,
         CharacterId::Python => PlayerSlot::One,
+        CharacterId::Cpp => PlayerSlot::Two,
     }
 }
 

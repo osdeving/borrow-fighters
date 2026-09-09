@@ -1,0 +1,14 @@
+{
+  "source": "source-v2.png",
+  "rgba": "master.png",
+  "opaque_bounds": [
+    158,
+    108,
+    851,
+    1439
+  ],
+  "body_height_reference_px": 1331,
+  "reference_scale": 0.19834710743801653,
+  "target_idle_height": 264,
+  "note": "Master is a design reference; action geometry and sole alignment must be measured in each generated action, without copying these source pivots."
+}

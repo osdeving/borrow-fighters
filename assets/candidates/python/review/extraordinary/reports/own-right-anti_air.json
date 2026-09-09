@@ -1,0 +1,2088 @@
+{
+  "render_size": [
+    1280,
+    720
+  ],
+  "reversed": false,
+  "scenarios": [
+    {
+      "captures": [
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                739.9999389648438,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f001.png",
+          "result": "Pending",
+          "tick": 1
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_0",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                735.9999389648438,
+                377.5
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f031.png",
+          "result": "Pending",
+          "tick": 31
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_0",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                726.4999389648438,
+                350.3333435058594
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f033.png",
+          "result": "Pending",
+          "tick": 33
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_1",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                714.9999389648438,
+                325.61114501953125
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f035.png",
+          "result": "Pending",
+          "tick": 35
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_1",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                658.9998779296875,
+                244.61111450195312
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f044.png",
+          "result": "Pending",
+          "tick": 44
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_1",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                634.1109619140625,
+                224.50001525878906
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f048.png",
+          "result": "Pending",
+          "tick": 48
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "anti_air",
+              "crouching": true,
+              "frame": "anti_air_00",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_1",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                596.777587890625,
+                212.66668701171875
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f054.png",
+          "result": "Pending",
+          "tick": 54
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_00",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "jump",
+              "crouching": false,
+              "frame": "jump_2",
+              "frame_clip": "jump",
+              "grounded": false,
+              "health": 98,
+              "hitstun": false,
+              "position": [
+                590.5553588867188,
+                212.83335876464844
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f055.png",
+          "result": "Pending",
+          "tick": 55
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_01",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_00",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                602.999755859375,
+                219.61114501953125
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f059.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 59
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_01",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_00",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                620.333251953125,
+                156.34658813476562
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f065.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 65
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_02",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_00",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                623.22216796875,
+                147.94139099121094
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f066.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 66
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_02",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_01",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                626.111083984375,
+                140.1472930908203
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f067.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 67
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_02",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_01",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                637.666748046875,
+                115.08203125
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f071.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 71
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "anti_air",
+              "crouching": false,
+              "frame": "anti_air_02",
+              "frame_clip": "anti_air",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_02",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                655.000244140625,
+                95.81746673583984
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f077.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 77
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_02",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                660.778076171875,
+                94.28483581542969
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f079.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 79
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_02",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                666.555908203125,
+                95.19664764404297
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f081.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 81
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_02",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                683.889404296875,
+                112.59876251220703
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f087.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 87
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                686.7783203125,
+                117.63800048828125
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f088.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 88
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                689.667236328125,
+                123.2883529663086
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f089.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 89
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                707.000732421875,
+                170.0238037109375
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f095.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 95
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                715.66748046875,
+                201.64154052734375
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f098.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 98
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                741.667724609375,
+                329.4947204589844
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f107.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 107
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": true,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "launched",
+              "crouching": false,
+              "frame": "launched_03",
+              "frame_clip": "launched",
+              "grounded": false,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                747.445556640625,
+                364.6287841796875
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f109.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 109
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_01",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f111.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 111
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_01",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f119.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 119
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_01",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f123.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 123
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_02",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f126.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 126
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_02",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f130.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 130
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_03",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f135.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 135
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_mvp_03",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 87,
+              "hitstun": true,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f141.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 141
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f147.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 147
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f152.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 152
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f159.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 159
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f163.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 163
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f173.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 173
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f184.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 184
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f188.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 188
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f195.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 195
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f202.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 202
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f206.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 206
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_00",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f217.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 217
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_0",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f227.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 227
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_01",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f231.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 231
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_1",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f238.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 238
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_02",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f245.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 245
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f249.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 249
+        },
+        {
+          "actors": [
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "python",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_03",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false,
+              "position": [
+                438.6666259765625,
+                392.0
+              ]
+            },
+            {
+              "air_reaction": false,
+              "blocking": false,
+              "blockstun": false,
+              "captured": false,
+              "character": "cpp",
+              "clip": "idle",
+              "crouching": false,
+              "frame": "idle_2",
+              "frame_clip": "idle",
+              "grounded": true,
+              "health": 87,
+              "hitstun": false,
+              "position": [
+                753.223388671875,
+                392.0
+              ]
+            }
+          ],
+          "effects": [],
+          "image": "python-06-attackantiair-f259.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 259
+        }
+      ],
+      "character": "python",
+      "contact_frame": 59,
+      "result": "Hit { damage: 11 }",
+      "scenario": "Attack(AntiAir)",
+      "scenario_label": "Anti-air / intercept a real jump-in"
+    }
+  ],
+  "raw_capture_directory": "/tmp/borrow-fighters-extraordinary-final/python/right/anti_air",
+  "raw_images_are_external_to_this_report": true
+}

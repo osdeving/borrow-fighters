@@ -1,0 +1,195 @@
+{
+  "action": "special",
+  "source": "special/source-v2.png",
+  "sheet": "special/keyed-v2.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "Final generated art reviewed: complete World in both facings, native Lab, Sprite Studio and normal match; evidence in finalization-review.md.",
+  "source_body_height_reference_px": 700,
+  "suggested_scale_to_runtime": 0.37714285714285717,
+  "replacement_contract": "../action-contracts.json#/actions/special",
+  "references": {
+    "new_master": "reference/master.png",
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
+  "frames": [
+    {
+      "name": "special_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 627,
+        "h": 820
+      },
+      "pivot": {
+        "x": 243,
+        "y": 801
+      },
+      "duration_ms": 80,
+      "phase": "emit"
+    },
+    {
+      "name": "special_01",
+      "source_rect": {
+        "x": 627,
+        "y": 0,
+        "w": 627,
+        "h": 820
+      },
+      "pivot": {
+        "x": 321,
+        "y": 801
+      },
+      "duration_ms": 80,
+      "phase": "recoil"
+    },
+    {
+      "name": "special_02",
+      "source_rect": {
+        "x": 1254,
+        "y": 0,
+        "w": 628,
+        "h": 820
+      },
+      "pivot": {
+        "x": 250,
+        "y": 803
+      },
+      "duration_ms": 107,
+      "phase": "recovery"
+    }
+  ],
+  "generation_brief": "Emission is visible in the FIRST key at baseline origin. Emitting hand aligns with(+97.92,-123.84); projectile stays a separate asset, no glow rectangle baked onto the fighter.",
+  "review_notes": "Selected v2 after v1 emitted from an incorrect high palm. The first key already extends a low open palm; subsequent keys recoil and return to guard. Uniform264/700 from normal standing anatomy. Projected original origin lies on the lower outward palm near source(502.64,472.64), with the projectile kept separate. Ground pivots801/801/803 preserve support. First emitting torso settles about12worldpixels below full guard as a drawn commitment pose; no whole-body translation added. Crop excludes a lone matte pixel at lower-left below all art.",
+  "emission_reference": {
+    "spec": "GO_PROJECTILE_SPEC",
+    "timing_ticks": {
+      "startup": 0,
+      "spawn_frame": 0,
+      "visual_duration": 16,
+      "cooldown": 44
+    },
+    "projectile_dimensions_world": {
+      "w": 48.0,
+      "h": 32.0
+    },
+    "projectile_speed_world_per_second": 573.3333333333333,
+    "emission_origin_source": "World::projectile_for_fighter -> projected_projectile_origin_for_clip(Special,0.0)",
+    "first_emission_origin_right_relative_to_anchor": {
+      "x": 97.92,
+      "y": -123.83999999999999
+    },
+    "all_baseline_origins": [
+      {
+        "frame": "special_0",
+        "baseline_local_origin": {
+          "x": 180,
+          "y": 150
+        },
+        "baseline_pivot": {
+          "x": 112,
+          "y": 236
+        },
+        "baseline_scale": 1.44,
+        "right_relative_to_anchor": {
+          "x": 97.92,
+          "y": -123.83999999999999
+        },
+        "left_relative_to_anchor": {
+          "x": -97.92,
+          "y": -123.83999999999999
+        },
+        "used_for_initial_emission_at_elapsed_zero": true
+      },
+      {
+        "frame": "special_1",
+        "baseline_local_origin": {
+          "x": 192,
+          "y": 151
+        },
+        "baseline_pivot": {
+          "x": 112,
+          "y": 236
+        },
+        "baseline_scale": 1.44,
+        "right_relative_to_anchor": {
+          "x": 115.19999999999999,
+          "y": -122.39999999999999
+        },
+        "left_relative_to_anchor": {
+          "x": -115.19999999999999,
+          "y": -122.39999999999999
+        },
+        "used_for_initial_emission_at_elapsed_zero": false
+      },
+      {
+        "frame": "special_2",
+        "baseline_local_origin": {
+          "x": 201,
+          "y": 150
+        },
+        "baseline_pivot": {
+          "x": 112,
+          "y": 236
+        },
+        "baseline_scale": 1.44,
+        "right_relative_to_anchor": {
+          "x": 128.16,
+          "y": -123.83999999999999
+        },
+        "left_relative_to_anchor": {
+          "x": -128.16,
+          "y": -123.83999999999999
+        },
+        "used_for_initial_emission_at_elapsed_zero": false
+      }
+    ],
+    "fallback_used_only_without_manifest_origin": {
+      "right_relative_to_anchor": {
+        "x": 128.0,
+        "y": -112.0
+      }
+    },
+    "drawing_instruction": "Aim the muzzle/emitting hand at first_emission_origin from the first pose; preserve separate existing projectile."
+  },
+  "provenance": {
+    "tool": "built-in image_gen",
+    "master": "reference/master.png",
+    "prompt": "special/prompt-v2.txt",
+    "original_sources_preserved": true,
+    "extraction": "tools/art/remove_generated_magenta.py without --rust-contour"
+  },
+  "emission_art_review": {
+    "first_source_point": [
+      502.6363636363636,
+      472.6363636363637
+    ],
+    "world_relative_to_anchor": {
+      "x": 97.92,
+      "y": -123.83999999999999
+    },
+    "point_is_on_opaque_emitting_palm": true,
+    "new_combat_metadata_authored": false
+  },
+  "static_review": {
+    "approved": true,
+    "new_master_used_every_generation": true,
+    "dark_and_light_backgrounds": true,
+    "both_facings": true,
+    "source_and_action_scale_reviewed": true,
+    "runtime_final_approved": true
+  },
+  "runtime_review": {
+    "approved": true,
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "report": "../finalization-review.md",
+    "world_facings_seen": [
+      "Left",
+      "Right"
+    ],
+    "lab_capture": "full set before jump, art unchanged by frame checksum",
+    "normal_match_result_evidence": false
+  }
+}

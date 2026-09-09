@@ -1,0 +1,164 @@
+{
+  "python-body.png": {
+    "source": "/tmp/borrow25-final/cpp-Attack(LightPunch)-right-055-Body-0.png",
+    "video_frame": 55,
+    "side": "right",
+    "sha256": "d7a9af3fea8cc0e58ae4b8d6aca07d438fb7485d7329ccf06f4470a3075a3225"
+  },
+  "python-head.png": {
+    "source": "/tmp/borrow25-final/cpp-Attack(Overhead)-right-065-Head-3.png",
+    "video_frame": 533,
+    "side": "right",
+    "sha256": "de20b394af867126245122396ed14110ffb2fa2cd3da5c5f2fc4e1352af0bfe9"
+  },
+  "python-low.png": {
+    "source": "/tmp/borrow25-final/cpp-Attack(Sweep)-right-060-Low-0.png",
+    "video_frame": 396,
+    "side": "right",
+    "sha256": "1c68c153211239538992b4d28bd906c8d1962b2acf4bfb14a7a8eaa4a8d20aa4"
+  },
+  "python-launch.png": {
+    "source": "/tmp/borrow25-final/cpp-Attack(AntiAir)-right-072-Launch-14.png",
+    "video_frame": 655,
+    "side": "right",
+    "sha256": "c6a02bd299c1215a10f3c5db8c5aae52ce5dc972bb5492b26bba3ff12fe52a41"
+  },
+  "python-fall.png": {
+    "source": "/tmp/borrow25-final/cpp-Attack(AntiAir)-right-124-Fall-14.png",
+    "video_frame": 707,
+    "side": "right",
+    "sha256": "247b6de6ad84a137bb3d570685fe7985da8a979ea0db82a44c42d900b4ff2cea"
+  },
+  "python-rise.png": {
+    "source": "/tmp/borrow25-final/cpp-Attack(AntiAir)-right-145-Rise-14.png",
+    "video_frame": 728,
+    "side": "right",
+    "sha256": "f7e2ad574902395dcb6397edd13e68f6c80a016dbfdfebba18b73a493f1515c8"
+  },
+  "python-recovered.png": {
+    "source": "/tmp/borrow25-final/cpp-Attack(AntiAir)-right-146-recovered.png",
+    "video_frame": 729,
+    "side": "right",
+    "sha256": "e068554d93ffda86ea7cb8e0e56c63a697044d9f555139c9c37ec80876f2c4f5"
+  },
+  "python-guard-high.png": {
+    "source": "/tmp/borrow25-final/python-StandingBlock-right-058-GuardHigh-3.png",
+    "video_frame": 4792,
+    "side": "right",
+    "sha256": "6fa0545ddef2e2586d9a2db709089b0ee71e1b87f653396de731174fdb310e59"
+  },
+  "python-guard-low.png": {
+    "source": "/tmp/borrow25-final/python-CrouchingBlock-right-063-GuardLow-3.png",
+    "video_frame": 5019,
+    "side": "right",
+    "sha256": "a650433b10170b47e337f08463cbbae322d43bcbda9cce9930dd4c1050f9ec27"
+  },
+  "python-body-left.png": {
+    "source": "/tmp/borrow25-final-reverse/cpp-Attack(LightPunch)-left-058-Body-3.png",
+    "video_frame": 58,
+    "side": "left",
+    "sha256": "3cc422663baaf76b99c7ffdac9094d5b2d174f67c8cf162ff2cceb8e5d67095b"
+  },
+  "python-rise-left.png": {
+    "source": "/tmp/borrow25-final-reverse/cpp-Attack(AntiAir)-left-145-Rise-14.png",
+    "video_frame": 728,
+    "side": "left",
+    "sha256": "8d98ad61a66a4bb0229ae070946e4a01e94309336f5eda82de77bd6b544a07a5"
+  },
+  "cpp-body.png": {
+    "source": "/tmp/borrow25-final/python-Attack(LightPunch)-right-055-Body-0.png",
+    "video_frame": 2702,
+    "side": "right",
+    "sha256": "2959b54732b6c2301b5ce454667ea929abacda4d6d9a6028c9697725990eddc7"
+  },
+  "cpp-head.png": {
+    "source": "/tmp/borrow25-final/python-Attack(Overhead)-right-065-Head-3.png",
+    "video_frame": 3179,
+    "side": "right",
+    "sha256": "a0d3ac5f3d84cbaaea0661c4b02d4604b9a0fc48999529b563def99233e18db9"
+  },
+  "cpp-low.png": {
+    "source": "/tmp/borrow25-final/python-Attack(Sweep)-right-060-Low-0.png",
+    "video_frame": 3042,
+    "side": "right",
+    "sha256": "13ff185c45bc27242de1b82f3c68c9a8644fd49877c3e210bebe9922ffe17396"
+  },
+  "cpp-launch.png": {
+    "source": "/tmp/borrow25-final/python-Attack(AntiAir)-right-072-Launch-14.png",
+    "video_frame": 3300,
+    "side": "right",
+    "sha256": "3f971f24323bb5f0c9d8545fb13b1970d4089504a7afdd0e0c30214e58eb41b5"
+  },
+  "cpp-fall.png": {
+    "source": "/tmp/borrow25-final/python-Attack(AntiAir)-right-124-Fall-14.png",
+    "video_frame": 3352,
+    "side": "right",
+    "sha256": "d8bcd44ab4fb84648fb04f4702d81daef65ea9fbf061f622d31a4f7ad0f0b382"
+  },
+  "cpp-rise.png": {
+    "source": "/tmp/borrow25-final/python-Attack(AntiAir)-right-145-Rise-14.png",
+    "video_frame": 3373,
+    "side": "right",
+    "sha256": "3d4309765bfbaf9ecb08be12ba94a24e8f63c745e9c2fa36feadc760f139a884"
+  },
+  "cpp-recovered.png": {
+    "source": "/tmp/borrow25-final/python-Attack(AntiAir)-right-146-recovered.png",
+    "video_frame": 3374,
+    "side": "right",
+    "sha256": "58f642eb17cbdf1dbd2901e4668d5d2ad0baccacdff314fc50fd3230f89ac33e"
+  },
+  "cpp-guard-high.png": {
+    "source": "/tmp/borrow25-final/cpp-StandingBlock-right-058-GuardHigh-3.png",
+    "video_frame": 2261,
+    "side": "right",
+    "sha256": "295b71a903d7fd5a16678a60e160464c526bcda101db77b1de9da0f7b037eb1d"
+  },
+  "cpp-guard-low.png": {
+    "source": "/tmp/borrow25-final/cpp-CrouchingBlock-right-063-GuardLow-3.png",
+    "video_frame": 2488,
+    "side": "right",
+    "sha256": "43f3acf7a9e17dbd2d7db24241f28cfdac6c3dbc4455390c9c27d8850cfd2d2f"
+  },
+  "cpp-body-left.png": {
+    "source": "/tmp/borrow25-final-reverse/python-Attack(LightPunch)-left-058-Body-3.png",
+    "video_frame": 2705,
+    "side": "left",
+    "sha256": "794c31a459e81013dca3e35891ad8897af69692c285241e6f29449778b6f13d0"
+  },
+  "cpp-rise-left.png": {
+    "source": "/tmp/borrow25-final-reverse/python-Attack(AntiAir)-left-145-Rise-14.png",
+    "video_frame": 3373,
+    "side": "left",
+    "sha256": "b559bef771bd146cc3344f121ff13ff39050b5d05984818b663f315744f22f7b"
+  },
+  "cpp-barrage-impact.png": {
+    "source": "/tmp/borrow25-final/cpp-Attack(CinematicSpecial)-right-384-Head-0.png",
+    "video_frame": 1889,
+    "side": "right",
+    "sha256": "5bb3fefc76b59d298b50b60025bd5e27e5986d4316c651a0d23b54bc77087a95"
+  },
+  "cpp-barrage-recoil.png": {
+    "source": "/tmp/borrow25-final/cpp-Attack(CinematicSpecial)-right-387-Head-3.png",
+    "video_frame": 1892,
+    "side": "right",
+    "sha256": "e621503bf945a93a57e8cf0a03ddd8b897eb398e6db83c18ee6b0188b26768ac"
+  },
+  "cpp-barrage-settle.png": {
+    "source": "/tmp/borrow25-final/cpp-Attack(CinematicSpecial)-right-391-Head-7.png",
+    "video_frame": 1896,
+    "side": "right",
+    "sha256": "5ace316cf2f737a095805658a6e30ea44d74b74d40905ecb51d76e55070e638d"
+  },
+  "cpp-barrage-impact-left.png": {
+    "source": "/tmp/borrow25-final-reverse/cpp-Attack(CinematicSpecial)-left-384-Head-0.png",
+    "video_frame": 1889,
+    "side": "left",
+    "sha256": "c0368f95e493d27f3288fd3aa7fdd88c7e5bdf8a33c232e7e4dbd2d6027988f2"
+  },
+  "python-super-return.png": {
+    "source": "/tmp/borrow25-final/python-Attack(CinematicSpecial)-right-372-Fall-14.png",
+    "video_frame": 4512,
+    "side": "right",
+    "sha256": "62f2c882d10005f5bb30c950e900795d139b08123c593f18d79ffa66b042e73c"
+  }
+}

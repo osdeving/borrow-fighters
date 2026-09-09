@@ -58,6 +58,7 @@ O primeiro corte ja permite:
 
 - abrir manifestos por caminho relativo ao repo ou file picker nativo;
 - usar presets de Rust, Duke, Go, C e Python;
+- inferir `cpp` para body metrics quando um manifest da C++ for aberto manualmente; paridade visual completa com `frames[].image` ainda fica como pendencia de multi-atlas;
 - carregar o atlas PNG referenciado pelo manifesto;
 - navegar por clips e frames com lista lateral e timeline horizontal;
 - usar barra de menu desktop (`File`, `Edit`, `View`, `Help`) e toolbar de acoes frequentes;

@@ -1,0 +1,65 @@
+{
+  "action": "jump",
+  "source": "jump/source-v1.png",
+  "sheet": "jump/keyed-v1.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "new Go real generated action, source and alpha reviewed; pending native complete-set validation",
+  "source_body_height_reference_px": 783.0,
+  "suggested_scale_to_runtime": 0.3371647509578544,
+  "replacement_contract": "../action-contracts.json#/actions/jump",
+  "references": {
+    "new_master": "reference/master.png",
+    "new_idle": "idle/source-v1.png",
+    "old_pose_art_allowed": false
+  },
+  "frames": [
+    {
+      "name": "jump_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 372,
+        "y": 797
+      },
+      "duration_ms": 60,
+      "phase": "takeoff"
+    },
+    {
+      "name": "jump_01",
+      "source_rect": {
+        "x": 627,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 295,
+        "y": 777
+      },
+      "duration_ms": 340,
+      "phase": "rise"
+    },
+    {
+      "name": "jump_02",
+      "source_rect": {
+        "x": 1254,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 216,
+        "y": 822
+      },
+      "duration_ms": 400,
+      "phase": "fall"
+    }
+  ],
+  "generation_brief": "Takeoff/rise/fall. Register head/torso/waist against one virtual standing anchor; let real World physics provide the arc. Grounded idle must resume at landing.",
+  "review_notes": "Three new airborne keys. Virtual Y pivots calibrated from the waist to idle (447 source pixels above support), allowing actual leg tucking without cancelling the World jump arc."
+}

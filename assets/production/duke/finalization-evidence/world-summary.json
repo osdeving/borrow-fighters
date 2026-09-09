@@ -1,0 +1,57 @@
+{
+  "character": "duke",
+  "scenario": "World same-character mirror: real intro/countdown, idle, 30 ticks forward, 30 ticks backward, 60 ticks settling/idle, one jump input followed through the complete arc and return to idle; optional ten attacks use normal inputs with recovery between moves",
+  "renderer": "draw_fight -> RenderTexture -> GPU readback",
+  "candidate_image_sha256": "0488acccdb9537f993b53c27ce2a28a2f01e031235f6743aaf010904c37c5634  assets/candidates/duke/duke-fighter-atlas.png\n",
+  "candidate_loaded_matches_disk": true,
+  "combat_metadata": "baseline combat_manifest, same wiring as App",
+  "physical_metrics": "assets/tuning/character-body-metrics.json",
+  "capture_sampling": "each pose/frame/phase/countdown change, plus every 3 live simulation ticks",
+  "fixed_timestep": 0.01666666753590107,
+  "moves_seen_per_player": [
+    [
+      "air_kick",
+      "air_punch",
+      "anti_air",
+      "kick",
+      "overhead",
+      "punch_heavy",
+      "punch_light",
+      "special",
+      "sweep",
+      "throw"
+    ],
+    [
+      "air_kick",
+      "air_punch",
+      "anti_air",
+      "kick",
+      "overhead",
+      "punch_heavy",
+      "punch_light",
+      "special",
+      "sweep",
+      "throw"
+    ]
+  ],
+  "limitations": [
+    "Controlled World inputs; not an interactive keyboard playtest.",
+    "Close attacks are whiffs at the scenario spacing; use Combat Lab for contact alignment.",
+    "With --attacks, the final projectiles may hit normally; health is recorded and never reset.",
+    "This recording does not evaluate combat balance, audio or input devices."
+  ],
+  "captured_images": 636,
+  "simulation_states": 1845,
+  "returned_to_idle_after_each_move": true,
+  "walk_frames": [
+    "walk_00",
+    "walk_01",
+    "walk_02",
+    "walk_03"
+  ],
+  "final_health": [
+    102,
+    102
+  ],
+  "source_report": "target/art/duke-finalization-world/capture-report.json"
+}

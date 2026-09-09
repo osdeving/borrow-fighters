@@ -1,0 +1,38 @@
+[
+  {
+    "path": "assets/production/duke/reference/spawn-first-existing.png",
+    "source": "assets/references/duke-start-anim.png",
+    "source_rect": {
+      "x": 55,
+      "y": 46,
+      "w": 215,
+      "h": 268
+    },
+    "source_sha256": "e35959c2633d1af455d1af73f508088c8fce1be8467d295def28687f9da447bc",
+    "sha256": "96199d7bcd0889af06a0b6e2da87fb83a75d7aef88c579e61bb399b993820b35",
+    "purpose": "Apoio de identidade do início; o gag completo está na folha original de 18 poses.",
+    "status": "reused_existing_reference_only",
+    "pixel_operations": [
+      "crop_only"
+    ],
+    "background": "RGB checkerboard inherited from source; not production alpha"
+  },
+  {
+    "path": "assets/production/duke/reference/special-existing.png",
+    "source": "assets/references/duke-sprite.png",
+    "source_rect": {
+      "x": 0,
+      "y": 882,
+      "w": 970,
+      "h": 196
+    },
+    "source_sha256": "e22926ad8fa1da3e4bbf17d5fd45960d02636ee32fb883279f735d7b661240c4",
+    "sha256": "740ca341a957653c6d3bc46df3e382123a0d5afa0993fe6bc1f3d243bb2dfc0a",
+    "purpose": "Arma de grãos, mãos, correia e orientação do cano; poses antigas e VFX são referência, não temporização nova.",
+    "status": "reused_existing_reference_only",
+    "pixel_operations": [
+      "crop_only"
+    ],
+    "background": "RGB checkerboard inherited from source; not production alpha"
+  }
+]

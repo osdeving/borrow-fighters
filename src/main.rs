@@ -3,6 +3,8 @@
 //! This binary stays thin: it creates the Raylib window and hands control to
 //! the application loop.
 
+#![cfg_attr(all(windows, not(debug_assertions)), windows_subsystem = "windows")]
+
 use borrow_fighters::app::App;
 use borrow_fighters::cli::LaunchOptions;
 use borrow_fighters::config::{WINDOW_HEIGHT, WINDOW_TITLE, WINDOW_WIDTH};
@@ -19,9 +21,9 @@ fn main() {
     let (mut raylib, thread) = raylib::init()
         .size(WINDOW_WIDTH, WINDOW_HEIGHT)
         .title(WINDOW_TITLE)
+        .msaa_4x()
         .build();
     raylib.set_exit_key(None);
-    raylib.enable_cursor();
     raylib.show_cursor();
 
     App::new(options).run(&mut raylib, &thread);

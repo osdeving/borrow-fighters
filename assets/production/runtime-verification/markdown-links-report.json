@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "files": 44,
+  "local_paths_checked": 657,
+  "broken": [],
+  "scope": "Changed/new current Markdown plus archive index documents. Frozen historical copies in archive/snapshots keep their original path base and are excluded."
+}

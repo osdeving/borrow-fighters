@@ -11,19 +11,24 @@ use crate::math::rect::Rect;
 pub use super::move_data::{
     AIR_ATTACK_REACTION, AIR_ATTACK_WHIFF_RECOVERY, AIR_KICK_DAMAGE, AIR_PUNCH_DAMAGE,
     AttackFrameData, CLOSE_THROW_DAMAGE, CLOSE_THROW_REACTION, CLOSE_THROW_WHIFF_RECOVERY,
-    DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_ABSTRACT_FACTORY_OVERHEAD_DAMAGE,
-    DUKE_ABSTRACT_FACTORY_OVERHEAD_REACTION, DUKE_ABSTRACT_FACTORY_OVERHEAD_WHIFF_RECOVERY,
-    DUKE_BOILERPLATE_POKE_DAMAGE, DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY,
-    DUKE_ENTERPRISE_THROW_DAMAGE, DUKE_ENTERPRISE_THROW_REACTION,
-    DUKE_ENTERPRISE_THROW_WHIFF_RECOVERY, DUKE_GARBAGE_COLLECTOR_SWEEP_DAMAGE,
-    DUKE_GARBAGE_COLLECTOR_SWEEP_REACTION, DUKE_GARBAGE_COLLECTOR_SWEEP_WHIFF_RECOVERY,
-    GO_CHANNEL_OVERHEAD_DAMAGE, GO_CHANNEL_OVERHEAD_WHIFF_RECOVERY, GO_DEFER_KICK_DAMAGE,
-    GO_DEFER_KICK_WHIFF_RECOVERY, GO_GOROUTINE_JAB_DAMAGE, GO_GOROUTINE_JAB_WHIFF_RECOVERY,
-    GO_HOPKICK_DAMAGE, GO_HOPKICK_WHIFF_RECOVERY, GO_KICK_REACTION, GO_LIGHT_REACTION,
-    GO_OVERHEAD_REACTION, GuardRule, HEAVY_ATTACK_REACTION, HEAVY_ATTACK_WHIFF_RECOVERY,
-    HEAVY_PUNCH_DAMAGE, HitReaction, KICK_DAMAGE, KICK_REACTION, KICK_WHIFF_RECOVERY,
-    LIGHT_ATTACK_REACTION, LIGHT_ATTACK_WHIFF_RECOVERY, LIGHT_PUNCH_DAMAGE, MoveId, MoveInputKind,
-    MoveSpec, OVERHEAD_PUNCH_DAMAGE, OVERHEAD_PUNCH_WHIFF_RECOVERY, OVERHEAD_REACTION,
+    CPP_EXCEPTION_ANTI_AIR_DAMAGE, CPP_EXCEPTION_ANTI_AIR_WHIFF_RECOVERY, CPP_MOVE_THROW_DAMAGE,
+    CPP_MOVE_THROW_WHIFF_RECOVERY, CPP_OPERATOR_KICK_DAMAGE, CPP_OPERATOR_KICK_WHIFF_RECOVERY,
+    CPP_REFERENCE_JAB_DAMAGE, CPP_REFERENCE_JAB_WHIFF_RECOVERY, CPP_TEMPLATE_STRIKE_DAMAGE,
+    CPP_TEMPLATE_STRIKE_WHIFF_RECOVERY, CPP_VECTOR_SWEEP_DAMAGE, CPP_VECTOR_SWEEP_WHIFF_RECOVERY,
+    CPP_VIRTUAL_OVERHEAD_DAMAGE, CPP_VIRTUAL_OVERHEAD_WHIFF_RECOVERY, DEFAULT_CLOSE_RANGE_MOVE_IDS,
+    DUKE_ABSTRACT_FACTORY_OVERHEAD_DAMAGE, DUKE_ABSTRACT_FACTORY_OVERHEAD_REACTION,
+    DUKE_ABSTRACT_FACTORY_OVERHEAD_WHIFF_RECOVERY, DUKE_BOILERPLATE_POKE_DAMAGE,
+    DUKE_BOILERPLATE_POKE_WHIFF_RECOVERY, DUKE_ENTERPRISE_THROW_DAMAGE,
+    DUKE_ENTERPRISE_THROW_REACTION, DUKE_ENTERPRISE_THROW_WHIFF_RECOVERY,
+    DUKE_GARBAGE_COLLECTOR_SWEEP_DAMAGE, DUKE_GARBAGE_COLLECTOR_SWEEP_REACTION,
+    DUKE_GARBAGE_COLLECTOR_SWEEP_WHIFF_RECOVERY, GO_CHANNEL_OVERHEAD_DAMAGE,
+    GO_CHANNEL_OVERHEAD_WHIFF_RECOVERY, GO_DEFER_KICK_DAMAGE, GO_DEFER_KICK_WHIFF_RECOVERY,
+    GO_GOROUTINE_JAB_DAMAGE, GO_GOROUTINE_JAB_WHIFF_RECOVERY, GO_HOPKICK_DAMAGE,
+    GO_HOPKICK_WHIFF_RECOVERY, GO_KICK_REACTION, GO_LIGHT_REACTION, GO_OVERHEAD_REACTION,
+    GuardRule, HEAVY_ATTACK_REACTION, HEAVY_ATTACK_WHIFF_RECOVERY, HEAVY_PUNCH_DAMAGE, HitReaction,
+    KICK_DAMAGE, KICK_REACTION, KICK_WHIFF_RECOVERY, LIGHT_ATTACK_REACTION,
+    LIGHT_ATTACK_WHIFF_RECOVERY, LIGHT_PUNCH_DAMAGE, MoveId, MoveInputKind, MoveSpec,
+    OVERHEAD_PUNCH_DAMAGE, OVERHEAD_PUNCH_WHIFF_RECOVERY, OVERHEAD_REACTION,
     RISING_ANTI_AIR_DAMAGE, RISING_ANTI_AIR_REACTION, RISING_ANTI_AIR_WHIFF_RECOVERY,
     RUST_BORROW_JAB_DAMAGE, RUST_BORROW_JAB_WHIFF_RECOVERY, RUST_LIFETIME_ANTI_AIR_DAMAGE,
     RUST_LIFETIME_ANTI_AIR_REACTION, RUST_LIFETIME_ANTI_AIR_WHIFF_RECOVERY,
@@ -44,6 +49,8 @@ pub enum AttackKind {
     AirPunch,
     AirKick,
     Throw,
+    SignatureSpecial,
+    CinematicSpecial,
 }
 
 /// A currently active offensive shape.
@@ -65,34 +72,53 @@ impl AttackKind {
             | MoveId::RustBorrowJab
             | MoveId::GoGoroutineJab
             | MoveId::CPointerJab
-            | MoveId::PythonSnakeBite => Self::LightPunch,
+            | MoveId::PythonSnakeBite
+            | MoveId::CppReferenceJab => Self::LightPunch,
             MoveId::HeavyPunch
             | MoveId::DukeBoilerplatePoke
             | MoveId::CUnsafePoke
-            | MoveId::PythonDataStrike => Self::HeavyPunch,
-            MoveId::Kick | MoveId::GoDeferKick | MoveId::CNullStepKick | MoveId::PythonHeelKick => {
-                Self::Kick
-            }
+            | MoveId::PythonDataStrike
+            | MoveId::CppTemplateStrike => Self::HeavyPunch,
+            MoveId::Kick
+            | MoveId::GoDeferKick
+            | MoveId::CNullStepKick
+            | MoveId::PythonHeelKick
+            | MoveId::CppOperatorKick => Self::Kick,
             MoveId::SweepKick
             | MoveId::DukeGarbageCollectorSweep
             | MoveId::CSegfaultSweep
-            | MoveId::PythonIndentSweep => Self::Sweep,
+            | MoveId::PythonIndentSweep
+            | MoveId::CppVectorSweep => Self::Sweep,
             MoveId::OverheadPunch
             | MoveId::DukeAbstractFactoryOverhead
             | MoveId::GoChannelOverhead
             | MoveId::CStackOverflow
-            | MoveId::PythonTracebackOverhead => Self::Overhead,
+            | MoveId::PythonTracebackOverhead
+            | MoveId::CppVirtualOverhead => Self::Overhead,
             MoveId::RisingAntiAir
             | MoveId::RustLifetimeAntiAir
             | MoveId::CInterruptVector
-            | MoveId::PythonVisionAntiAir => Self::AntiAir,
+            | MoveId::PythonVisionAntiAir
+            | MoveId::CppExceptionAntiAir => Self::AntiAir,
             MoveId::AirPunch => Self::AirPunch,
             MoveId::AirKick | MoveId::GoHopkick => Self::AirKick,
             MoveId::CloseThrow
             | MoveId::RustOwnershipThrow
             | MoveId::DukeEnterpriseThrow
             | MoveId::CUndefinedThrow
-            | MoveId::PythonConstrictThrow => Self::Throw,
+            | MoveId::PythonConstrictThrow
+            | MoveId::CppMoveThrow => Self::Throw,
+            MoveId::RustBorrowFortress
+            | MoveId::DukePrintlnBarrage
+            | MoveId::CSegmentationFault
+            | MoveId::PythonImportAntigravity
+            | MoveId::CppUndefinedBazooka => Self::SignatureSpecial,
+            MoveId::RustOwnershipEclipse
+            | MoveId::DukeJvmOverdrive
+            | MoveId::GoMillionGoroutines
+            | MoveId::CKernelPanic
+            | MoveId::PythonEventHorizon
+            | MoveId::CppTemplateSingularity => Self::CinematicSpecial,
         }
     }
 
@@ -108,6 +134,8 @@ impl AttackKind {
             MoveInputKind::AirPunch => Self::AirPunch,
             MoveInputKind::AirKick => Self::AirKick,
             MoveInputKind::Throw => Self::Throw,
+            MoveInputKind::SignatureSpecial => Self::SignatureSpecial,
+            MoveInputKind::CinematicSpecial => Self::CinematicSpecial,
         }
     }
 
@@ -123,6 +151,8 @@ impl AttackKind {
             Self::AirPunch => MoveId::AirPunch,
             Self::AirKick => MoveId::AirKick,
             Self::Throw => MoveId::CloseThrow,
+            Self::SignatureSpecial => MoveId::RustBorrowFortress,
+            Self::CinematicSpecial => MoveId::RustOwnershipEclipse,
         }
     }
 

@@ -1,0 +1,19 @@
+{
+  "video": "assets/showcase/python-cpp-reactions-2026-09-09.mp4",
+  "sha256": "c66d8fe44b7c194063c5797a53bb3f37b459953c9e30f9eea7f726b7727c4661",
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "size": [
+    1280,
+    720
+  ],
+  "fps": 60,
+  "decoded_video_frames": 5178,
+  "duration_seconds": 86.322,
+  "audio_sample_rate": 48000,
+  "audio_channels": 2,
+  "decoded_audio_peak_dbfs": -2.158422884572998,
+  "clipped_samples": 0,
+  "decode_status": "passed",
+  "audio_method": "offline mix from real World cues; no audio code changed in this round"
+}

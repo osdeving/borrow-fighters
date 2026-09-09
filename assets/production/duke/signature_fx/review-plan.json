@@ -1,0 +1,19 @@
+{
+  "character": "duke",
+  "provenance": {
+    "generator": "built-in imagegen",
+    "intent": "Separate signature projectile and impact VFX; six genuine drawings, no procedural pose or effect synthesis."
+  },
+  "actions": {
+    "projectile": {
+      "approved": true,
+      "scale_to_runtime": 0.35,
+      "notes": "Reviewed separated sprite drawings and alpha. Duke center anchor; C floor anchor. Uniform per-clip scale; no frame fitting."
+    },
+    "impact": {
+      "approved": true,
+      "scale_to_runtime": 0.34,
+      "notes": "Reviewed separated sprite drawings and alpha. Duke center anchor; C floor anchor. Uniform per-clip scale; no frame fitting."
+    }
+  }
+}

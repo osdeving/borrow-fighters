@@ -1,0 +1,5268 @@
+{
+  "ai_or_keyboard": false,
+  "attacks": true,
+  "candidate_image_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028  assets/candidates/go/go-fighter-atlas.png\n",
+  "candidate_loaded_matches_disk": true,
+  "capture_sampling": "each pose/frame/phase/countdown change, plus every 3 live simulation ticks",
+  "character": "go",
+  "combat_metadata": "baseline combat_manifest, same wiring as App",
+  "debug_boxes": true,
+  "every_tick": false,
+  "fixed_timestep": 0.01666666753590107,
+  "last_tick": 1844,
+  "limitations": [
+    "Controlled World inputs; not an interactive keyboard playtest.",
+    "Close attacks are whiffs at the scenario spacing; use Combat Lab for contact alignment.",
+    "With --attacks, the final projectiles may hit normally; health is recorded and never reset.",
+    "This recording does not evaluate combat balance, audio or input devices."
+  ],
+  "loaded_combat_manifest": {
+    "cell": {
+      "h": 256,
+      "w": 384
+    },
+    "clips": [
+      {
+        "frames": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4"
+        ],
+        "loop": true,
+        "name": "idle"
+      },
+      {
+        "frames": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "loop": true,
+        "name": "walk"
+      },
+      {
+        "frames": [
+          "crouch_0",
+          "crouch_1",
+          "crouch_2"
+        ],
+        "loop": false,
+        "name": "crouch"
+      },
+      {
+        "frames": [
+          "jump_0",
+          "jump_1",
+          "jump_2"
+        ],
+        "loop": false,
+        "name": "jump"
+      },
+      {
+        "frames": [
+          "punch_light_0",
+          "punch_light_1",
+          "punch_light_2"
+        ],
+        "loop": false,
+        "name": "punch_light"
+      },
+      {
+        "frames": [
+          "punch_heavy_0",
+          "punch_heavy_1",
+          "punch_heavy_2"
+        ],
+        "loop": false,
+        "name": "punch_heavy"
+      },
+      {
+        "frames": [
+          "kick_0",
+          "kick_1",
+          "kick_2"
+        ],
+        "loop": false,
+        "name": "kick"
+      },
+      {
+        "frames": [
+          "block_0",
+          "block_1"
+        ],
+        "loop": true,
+        "name": "block"
+      },
+      {
+        "frames": [
+          "hit_0",
+          "hit_1"
+        ],
+        "loop": false,
+        "name": "hit"
+      },
+      {
+        "frames": [
+          "taunt_0",
+          "taunt_1"
+        ],
+        "loop": false,
+        "name": "taunt"
+      },
+      {
+        "frames": [
+          "special_0",
+          "special_1",
+          "special_2"
+        ],
+        "loop": false,
+        "name": "special"
+      },
+      {
+        "frames": [
+          "idle_reference"
+        ],
+        "loop": true,
+        "name": "idle_reference"
+      },
+      {
+        "frames": [
+          "sweep_0",
+          "sweep_1",
+          "sweep_2"
+        ],
+        "loop": false,
+        "name": "sweep"
+      },
+      {
+        "frames": [
+          "overhead_0",
+          "overhead_1",
+          "overhead_2"
+        ],
+        "loop": false,
+        "name": "overhead"
+      },
+      {
+        "frames": [
+          "anti_air_0",
+          "anti_air_1",
+          "anti_air_2"
+        ],
+        "loop": false,
+        "name": "anti_air"
+      },
+      {
+        "frames": [
+          "air_punch_0",
+          "air_punch_1",
+          "air_punch_2"
+        ],
+        "loop": false,
+        "name": "air_punch"
+      },
+      {
+        "frames": [
+          "air_kick_0",
+          "air_kick_1",
+          "air_kick_2"
+        ],
+        "loop": false,
+        "name": "air_kick"
+      },
+      {
+        "frames": [
+          "throw_0",
+          "throw_1",
+          "throw_2"
+        ],
+        "loop": false,
+        "name": "throw"
+      }
+    ],
+    "default_pivot": {
+      "x": 112,
+      "y": 236
+    },
+    "frames": [
+      {
+        "clip": "idle",
+        "duration_ms": 140,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 0,
+          "y": 0
+        },
+        "name": "idle_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 140,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 384,
+          "y": 0
+        },
+        "name": "idle_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 140,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 768,
+          "y": 0
+        },
+        "name": "idle_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 140,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1152,
+          "y": 0
+        },
+        "name": "idle_3",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 140,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1536,
+          "y": 0
+        },
+        "name": "idle_4",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 90,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1920,
+          "y": 0
+        },
+        "name": "walk_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 90,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 0,
+          "y": 256
+        },
+        "name": "walk_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 90,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 384,
+          "y": 256
+        },
+        "name": "walk_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 90,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 768,
+          "y": 256
+        },
+        "name": "walk_3",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 90,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1152,
+          "y": 256
+        },
+        "name": "walk_4",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 90,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1536,
+          "y": 256
+        },
+        "name": "walk_5",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 120,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1920,
+          "y": 256
+        },
+        "name": "crouch_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 120,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 0,
+          "y": 512
+        },
+        "name": "crouch_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 120,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 384,
+          "y": 512
+        },
+        "name": "crouch_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 120,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 768,
+          "y": 512
+        },
+        "name": "jump_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 120,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1152,
+          "y": 512
+        },
+        "name": "jump_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 120,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1536,
+          "y": 512
+        },
+        "name": "jump_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 80,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1920,
+          "y": 512
+        },
+        "name": "punch_light_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 80,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 0,
+          "y": 768
+        },
+        "name": "punch_light_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 80,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 384,
+          "y": 768
+        },
+        "name": "punch_light_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 110,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 768,
+          "y": 768
+        },
+        "name": "punch_heavy_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 110,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1152,
+          "y": 768
+        },
+        "name": "punch_heavy_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 110,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1536,
+          "y": 768
+        },
+        "name": "punch_heavy_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 95,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1920,
+          "y": 768
+        },
+        "name": "kick_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 95,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 0,
+          "y": 1024
+        },
+        "name": "kick_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 95,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 384,
+          "y": 1024
+        },
+        "name": "kick_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 120,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 768,
+          "y": 1024
+        },
+        "name": "block_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 120,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1152,
+          "y": 1024
+        },
+        "name": "block_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 120,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1536,
+          "y": 1024
+        },
+        "name": "hit_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 120,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1920,
+          "y": 1024
+        },
+        "name": "hit_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "taunt",
+        "duration_ms": 180,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 0,
+          "y": 1280
+        },
+        "name": "taunt_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "taunt",
+        "duration_ms": 180,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 384,
+          "y": 1280
+        },
+        "name": "taunt_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "special",
+        "combat": {
+          "projectile_origin": {
+            "x": 180,
+            "y": 150
+          }
+        },
+        "duration_ms": 100,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 768,
+          "y": 1280
+        },
+        "name": "special_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "special",
+        "combat": {
+          "projectile_origin": {
+            "x": 192,
+            "y": 151
+          }
+        },
+        "duration_ms": 100,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1152,
+          "y": 1280
+        },
+        "name": "special_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "special",
+        "combat": {
+          "projectile_origin": {
+            "x": 201,
+            "y": 150
+          }
+        },
+        "duration_ms": 100,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1536,
+          "y": 1280
+        },
+        "name": "special_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "idle_reference",
+        "duration_ms": 140,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1920,
+          "y": 1280
+        },
+        "name": "idle_reference",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 82,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 0,
+          "y": 1536
+        },
+        "name": "sweep_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 82,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 384,
+          "y": 1536
+        },
+        "name": "sweep_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 82,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 768,
+          "y": 1536
+        },
+        "name": "sweep_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 92,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1152,
+          "y": 1536
+        },
+        "name": "overhead_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 92,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1536,
+          "y": 1536
+        },
+        "name": "overhead_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 92,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1920,
+          "y": 1536
+        },
+        "name": "overhead_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 80,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 0,
+          "y": 1792
+        },
+        "name": "anti_air_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 80,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 384,
+          "y": 1792
+        },
+        "name": "anti_air_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 80,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 768,
+          "y": 1792
+        },
+        "name": "anti_air_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 76,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1152,
+          "y": 1792
+        },
+        "name": "air_punch_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 76,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1536,
+          "y": 1792
+        },
+        "name": "air_punch_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 76,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1920,
+          "y": 1792
+        },
+        "name": "air_punch_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 80,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 0,
+          "y": 2048
+        },
+        "name": "air_kick_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 80,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 384,
+          "y": 2048
+        },
+        "name": "air_kick_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 80,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 768,
+          "y": 2048
+        },
+        "name": "air_kick_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 92,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1152,
+          "y": 2048
+        },
+        "name": "throw_0",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 92,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1536,
+          "y": 2048
+        },
+        "name": "throw_1",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 92,
+        "frame": {
+          "h": 256,
+          "w": 384,
+          "x": 1920,
+          "y": 2048
+        },
+        "name": "throw_2",
+        "pivot": {
+          "x": 112,
+          "y": 236
+        }
+      }
+    ],
+    "image": "go-fighter-atlas.png",
+    "notes": [
+      "AI-generated Go/Gopher atlas candidate for runtime sprite validation.",
+      "Frames use a 6x6 grid with 384x256 cells and consistent grounded pivot.",
+      "The atlas was compressed horizontally around the pivot, cleaned of stray frame islands, and uses scale 1.44 for the 1280x720 runtime while preserving the earlier 1.08 relative tuning.",
+      "Go Gopher is originally by Renee French; this is a project-local derivative candidate, not final art.",
+      "Generated placeholder clips for sweep, overhead, anti_air, air_punch, air_kick, and throw so every close-range attack has an atlas-backed animation."
+    ],
+    "scale": 1.440000057220459,
+    "schema": "borrow-fighters.sprite.v1",
+    "source": "../references/go-sprite-altas.png"
+  },
+  "loaded_manifest": {
+    "cell": {
+      "h": 382,
+      "w": 301
+    },
+    "clips": [
+      {
+        "frames": [
+          "idle_00",
+          "idle_01",
+          "idle_02"
+        ],
+        "loop": true,
+        "name": "idle"
+      },
+      {
+        "frames": [
+          "walk_00",
+          "walk_01",
+          "walk_02",
+          "walk_03"
+        ],
+        "loop": true,
+        "name": "walk"
+      },
+      {
+        "frames": [
+          "jump_00",
+          "jump_01",
+          "jump_02"
+        ],
+        "loop": false,
+        "name": "jump"
+      },
+      {
+        "frames": [
+          "crouch_00",
+          "crouch_02"
+        ],
+        "loop": false,
+        "name": "crouch"
+      },
+      {
+        "frames": [
+          "block_00",
+          "block_01",
+          "block_02"
+        ],
+        "loop": false,
+        "name": "block"
+      },
+      {
+        "frames": [
+          "crouch_block_00",
+          "crouch_block_01",
+          "crouch_block_02"
+        ],
+        "loop": false,
+        "name": "crouch_block"
+      },
+      {
+        "frames": [
+          "hit_00",
+          "hit_01",
+          "hit_02"
+        ],
+        "loop": false,
+        "name": "hit"
+      },
+      {
+        "frames": [
+          "punch_light_00",
+          "punch_light_01",
+          "punch_light_02"
+        ],
+        "loop": false,
+        "name": "punch_light"
+      },
+      {
+        "frames": [
+          "punch_heavy_00",
+          "punch_heavy_01",
+          "punch_heavy_02"
+        ],
+        "loop": false,
+        "name": "punch_heavy"
+      },
+      {
+        "frames": [
+          "kick_00",
+          "kick_01",
+          "kick_02"
+        ],
+        "loop": false,
+        "name": "kick"
+      },
+      {
+        "frames": [
+          "sweep_00",
+          "sweep_01",
+          "sweep_02"
+        ],
+        "loop": false,
+        "name": "sweep"
+      },
+      {
+        "frames": [
+          "overhead_00",
+          "overhead_01",
+          "overhead_02"
+        ],
+        "loop": false,
+        "name": "overhead"
+      },
+      {
+        "frames": [
+          "throw_00",
+          "throw_01",
+          "throw_02"
+        ],
+        "loop": false,
+        "name": "throw"
+      },
+      {
+        "frames": [
+          "anti_air_00",
+          "anti_air_01",
+          "anti_air_02"
+        ],
+        "loop": false,
+        "name": "anti_air"
+      },
+      {
+        "frames": [
+          "air_punch_00",
+          "air_punch_01",
+          "air_punch_02"
+        ],
+        "loop": false,
+        "name": "air_punch"
+      },
+      {
+        "frames": [
+          "air_kick_00",
+          "air_kick_01",
+          "air_kick_02"
+        ],
+        "loop": false,
+        "name": "air_kick"
+      },
+      {
+        "frames": [
+          "special_00",
+          "special_01",
+          "special_02"
+        ],
+        "loop": false,
+        "name": "special"
+      },
+      {
+        "frames": [
+          "spawn_00",
+          "spawn_01",
+          "spawn_02"
+        ],
+        "loop": false,
+        "name": "spawn"
+      },
+      {
+        "frames": [
+          "victory_00",
+          "victory_01",
+          "victory_02"
+        ],
+        "loop": false,
+        "name": "victory"
+      },
+      {
+        "frames": [
+          "defeat_00",
+          "defeat_01",
+          "defeat_02"
+        ],
+        "loop": false,
+        "name": "defeat"
+      }
+    ],
+    "default_pivot": {
+      "x": 103,
+      "y": 279
+    },
+    "frames": [
+      {
+        "clip": "idle",
+        "duration_ms": 180,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 0,
+          "y": 0
+        },
+        "name": "idle_00",
+        "pivot": {
+          "x": 103,
+          "y": 279
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 145,
+          "x": 33,
+          "y": 12
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 180,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 301,
+          "y": 0
+        },
+        "name": "idle_01",
+        "pivot": {
+          "x": 96,
+          "y": 279
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 146,
+          "x": 25,
+          "y": 12
+        }
+      },
+      {
+        "clip": "idle",
+        "duration_ms": 180,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 602,
+          "y": 0
+        },
+        "name": "idle_02",
+        "pivot": {
+          "x": 88,
+          "y": 279
+        },
+        "trimmed_bounds": {
+          "h": 268,
+          "w": 145,
+          "x": 18,
+          "y": 13
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 60,
+        "frame": {
+          "h": 308,
+          "w": 231,
+          "x": 903,
+          "y": 0
+        },
+        "name": "walk_00",
+        "pivot": {
+          "x": 115,
+          "y": 286
+        },
+        "trimmed_bounds": {
+          "h": 268,
+          "w": 174,
+          "x": 38,
+          "y": 20
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 60,
+        "frame": {
+          "h": 308,
+          "w": 231,
+          "x": 1204,
+          "y": 0
+        },
+        "name": "walk_01",
+        "pivot": {
+          "x": 120,
+          "y": 286
+        },
+        "trimmed_bounds": {
+          "h": 265,
+          "w": 173,
+          "x": 38,
+          "y": 23
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 60,
+        "frame": {
+          "h": 308,
+          "w": 231,
+          "x": 1505,
+          "y": 0
+        },
+        "name": "walk_02",
+        "pivot": {
+          "x": 111,
+          "y": 285
+        },
+        "trimmed_bounds": {
+          "h": 261,
+          "w": 106,
+          "x": 62,
+          "y": 26
+        }
+      },
+      {
+        "clip": "walk",
+        "duration_ms": 60,
+        "frame": {
+          "h": 308,
+          "w": 231,
+          "x": 1806,
+          "y": 0
+        },
+        "name": "walk_03",
+        "pivot": {
+          "x": 103,
+          "y": 286
+        },
+        "trimmed_bounds": {
+          "h": 260,
+          "w": 197,
+          "x": 23,
+          "y": 28
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 60,
+        "frame": {
+          "h": 309,
+          "w": 232,
+          "x": 2107,
+          "y": 0
+        },
+        "name": "jump_00",
+        "pivot": {
+          "x": 124,
+          "y": 276
+        },
+        "trimmed_bounds": {
+          "h": 227,
+          "w": 130,
+          "x": 59,
+          "y": 16
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 340,
+        "frame": {
+          "h": 309,
+          "w": 232,
+          "x": 2408,
+          "y": 0
+        },
+        "name": "jump_01",
+        "pivot": {
+          "x": 109,
+          "y": 268
+        },
+        "trimmed_bounds": {
+          "h": 213,
+          "w": 137,
+          "x": 37,
+          "y": 13
+        }
+      },
+      {
+        "clip": "jump",
+        "duration_ms": 400,
+        "frame": {
+          "h": 309,
+          "w": 232,
+          "x": 0,
+          "y": 382
+        },
+        "name": "jump_02",
+        "pivot": {
+          "x": 87,
+          "y": 290
+        },
+        "trimmed_bounds": {
+          "h": 270,
+          "w": 133,
+          "x": 16,
+          "y": 23
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 80,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 301,
+          "y": 382
+        },
+        "name": "crouch_00",
+        "pivot": {
+          "x": 103,
+          "y": 274
+        },
+        "trimmed_bounds": {
+          "h": 168,
+          "w": 136,
+          "x": 45,
+          "y": 108
+        }
+      },
+      {
+        "clip": "crouch",
+        "duration_ms": 280,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 602,
+          "y": 382
+        },
+        "name": "crouch_02",
+        "pivot": {
+          "x": 51,
+          "y": 275
+        },
+        "trimmed_bounds": {
+          "h": 127,
+          "w": 124,
+          "x": 4,
+          "y": 150
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 70,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 903,
+          "y": 382
+        },
+        "name": "block_00",
+        "pivot": {
+          "x": 98,
+          "y": 273
+        },
+        "trimmed_bounds": {
+          "h": 257,
+          "w": 156,
+          "x": 27,
+          "y": 19
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 80,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 1204,
+          "y": 382
+        },
+        "name": "block_01",
+        "pivot": {
+          "x": 91,
+          "y": 274
+        },
+        "trimmed_bounds": {
+          "h": 250,
+          "w": 164,
+          "x": 14,
+          "y": 27
+        }
+      },
+      {
+        "clip": "block",
+        "duration_ms": 150,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 1505,
+          "y": 382
+        },
+        "name": "block_02",
+        "pivot": {
+          "x": 84,
+          "y": 273
+        },
+        "trimmed_bounds": {
+          "h": 261,
+          "w": 145,
+          "x": 16,
+          "y": 15
+        }
+      },
+      {
+        "clip": "crouch_block",
+        "duration_ms": 70,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 1806,
+          "y": 382
+        },
+        "name": "crouch_block_00",
+        "pivot": {
+          "x": 98,
+          "y": 257
+        },
+        "trimmed_bounds": {
+          "h": 129,
+          "w": 136,
+          "x": 48,
+          "y": 131
+        }
+      },
+      {
+        "clip": "crouch_block",
+        "duration_ms": 80,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 2107,
+          "y": 382
+        },
+        "name": "crouch_block_01",
+        "pivot": {
+          "x": 79,
+          "y": 257
+        },
+        "trimmed_bounds": {
+          "h": 138,
+          "w": 120,
+          "x": 29,
+          "y": 122
+        }
+      },
+      {
+        "clip": "crouch_block",
+        "duration_ms": 150,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 2408,
+          "y": 382
+        },
+        "name": "crouch_block_02",
+        "pivot": {
+          "x": 53,
+          "y": 257
+        },
+        "trimmed_bounds": {
+          "h": 129,
+          "w": 127,
+          "x": 4,
+          "y": 131
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 60,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 0,
+          "y": 764
+        },
+        "name": "hit_00",
+        "pivot": {
+          "x": 111,
+          "y": 277
+        },
+        "trimmed_bounds": {
+          "h": 266,
+          "w": 161,
+          "x": 42,
+          "y": 14
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 80,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 301,
+          "y": 764
+        },
+        "name": "hit_01",
+        "pivot": {
+          "x": 94,
+          "y": 277
+        },
+        "trimmed_bounds": {
+          "h": 243,
+          "w": 142,
+          "x": 31,
+          "y": 36
+        }
+      },
+      {
+        "clip": "hit",
+        "duration_ms": 120,
+        "frame": {
+          "h": 282,
+          "w": 211,
+          "x": 602,
+          "y": 764
+        },
+        "name": "hit_02",
+        "pivot": {
+          "x": 74,
+          "y": 278
+        },
+        "trimmed_bounds": {
+          "h": 266,
+          "w": 144,
+          "x": 9,
+          "y": 14
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 50,
+        "frame": {
+          "h": 322,
+          "w": 280,
+          "x": 903,
+          "y": 764
+        },
+        "name": "punch_light_00",
+        "pivot": {
+          "x": 136,
+          "y": 290
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 161,
+          "x": 62,
+          "y": 23
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 83,
+        "frame": {
+          "h": 322,
+          "w": 280,
+          "x": 1204,
+          "y": 764
+        },
+        "name": "punch_light_01",
+        "pivot": {
+          "x": 134,
+          "y": 290
+        },
+        "trimmed_bounds": {
+          "h": 240,
+          "w": 201,
+          "x": 27,
+          "y": 52
+        }
+      },
+      {
+        "clip": "punch_light",
+        "duration_ms": 100,
+        "frame": {
+          "h": 322,
+          "w": 280,
+          "x": 1505,
+          "y": 764
+        },
+        "name": "punch_light_02",
+        "pivot": {
+          "x": 116,
+          "y": 290
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 161,
+          "x": 41,
+          "y": 23
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 183,
+        "frame": {
+          "h": 335,
+          "w": 291,
+          "x": 1806,
+          "y": 764
+        },
+        "name": "punch_heavy_00",
+        "pivot": {
+          "x": 151,
+          "y": 301
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 163,
+          "x": 72,
+          "y": 35
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 167,
+        "frame": {
+          "h": 335,
+          "w": 291,
+          "x": 2107,
+          "y": 764
+        },
+        "name": "punch_heavy_01",
+        "pivot": {
+          "x": 128,
+          "y": 297
+        },
+        "trimmed_bounds": {
+          "h": 224,
+          "w": 257,
+          "x": 20,
+          "y": 76
+        }
+      },
+      {
+        "clip": "punch_heavy",
+        "duration_ms": 233,
+        "frame": {
+          "h": 335,
+          "w": 291,
+          "x": 2408,
+          "y": 764
+        },
+        "name": "punch_heavy_02",
+        "pivot": {
+          "x": 134,
+          "y": 301
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 161,
+          "x": 54,
+          "y": 35
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 116,
+        "frame": {
+          "h": 327,
+          "w": 285,
+          "x": 0,
+          "y": 1146
+        },
+        "name": "kick_00",
+        "pivot": {
+          "x": 131,
+          "y": 291
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 140,
+          "x": 70,
+          "y": 25
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 117,
+        "frame": {
+          "h": 327,
+          "w": 285,
+          "x": 301,
+          "y": 1146
+        },
+        "name": "kick_01",
+        "pivot": {
+          "x": 125,
+          "y": 291
+        },
+        "trimmed_bounds": {
+          "h": 251,
+          "w": 192,
+          "x": 54,
+          "y": 43
+        }
+      },
+      {
+        "clip": "kick",
+        "duration_ms": 150,
+        "frame": {
+          "h": 327,
+          "w": 285,
+          "x": 602,
+          "y": 1146
+        },
+        "name": "kick_02",
+        "pivot": {
+          "x": 115,
+          "y": 291
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 133,
+          "x": 52,
+          "y": 25
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 166,
+        "frame": {
+          "h": 341,
+          "w": 297,
+          "x": 903,
+          "y": 1146
+        },
+        "name": "sweep_00",
+        "pivot": {
+          "x": 143,
+          "y": 292
+        },
+        "trimmed_bounds": {
+          "h": 207,
+          "w": 219,
+          "x": 48,
+          "y": 88
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 150,
+        "frame": {
+          "h": 341,
+          "w": 297,
+          "x": 1204,
+          "y": 1146
+        },
+        "name": "sweep_01",
+        "pivot": {
+          "x": 109,
+          "y": 286
+        },
+        "trimmed_bounds": {
+          "h": 190,
+          "w": 261,
+          "x": 18,
+          "y": 101
+        }
+      },
+      {
+        "clip": "sweep",
+        "duration_ms": 217,
+        "frame": {
+          "h": 341,
+          "w": 297,
+          "x": 1505,
+          "y": 1146
+        },
+        "name": "sweep_02",
+        "pivot": {
+          "x": 133,
+          "y": 301
+        },
+        "trimmed_bounds": {
+          "h": 270,
+          "w": 176,
+          "x": 43,
+          "y": 34
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 166,
+        "frame": {
+          "h": 346,
+          "w": 301,
+          "x": 1806,
+          "y": 1146
+        },
+        "name": "overhead_00",
+        "pivot": {
+          "x": 164,
+          "y": 316
+        },
+        "trimmed_bounds": {
+          "h": 298,
+          "w": 158,
+          "x": 84,
+          "y": 20
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 100,
+        "frame": {
+          "h": 346,
+          "w": 301,
+          "x": 2107,
+          "y": 1146
+        },
+        "name": "overhead_01",
+        "pivot": {
+          "x": 157,
+          "y": 315
+        },
+        "trimmed_bounds": {
+          "h": 259,
+          "w": 203,
+          "x": 42,
+          "y": 58
+        }
+      },
+      {
+        "clip": "overhead",
+        "duration_ms": 200,
+        "frame": {
+          "h": 346,
+          "w": 301,
+          "x": 2408,
+          "y": 1146
+        },
+        "name": "overhead_02",
+        "pivot": {
+          "x": 131,
+          "y": 315
+        },
+        "trimmed_bounds": {
+          "h": 268,
+          "w": 148,
+          "x": 59,
+          "y": 49
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 100,
+        "frame": {
+          "h": 311,
+          "w": 271,
+          "x": 0,
+          "y": 1528
+        },
+        "name": "throw_00",
+        "pivot": {
+          "x": 134,
+          "y": 289
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 164,
+          "x": 63,
+          "y": 22
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 50,
+        "frame": {
+          "h": 311,
+          "w": 271,
+          "x": 301,
+          "y": 1528
+        },
+        "name": "throw_01",
+        "pivot": {
+          "x": 125,
+          "y": 289
+        },
+        "trimmed_bounds": {
+          "h": 264,
+          "w": 153,
+          "x": 56,
+          "y": 27
+        }
+      },
+      {
+        "clip": "throw",
+        "duration_ms": 216,
+        "frame": {
+          "h": 311,
+          "w": 271,
+          "x": 602,
+          "y": 1528
+        },
+        "name": "throw_02",
+        "pivot": {
+          "x": 120,
+          "y": 289
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 148,
+          "x": 44,
+          "y": 22
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 116,
+        "frame": {
+          "h": 382,
+          "w": 286,
+          "x": 903,
+          "y": 1528
+        },
+        "name": "anti_air_00",
+        "pivot": {
+          "x": 137,
+          "y": 358
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 189,
+          "x": 42,
+          "y": 92
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 134,
+        "frame": {
+          "h": 382,
+          "w": 286,
+          "x": 1204,
+          "y": 1528
+        },
+        "name": "anti_air_01",
+        "pivot": {
+          "x": 129,
+          "y": 360
+        },
+        "trimmed_bounds": {
+          "h": 335,
+          "w": 197,
+          "x": 44,
+          "y": 28
+        }
+      },
+      {
+        "clip": "anti_air",
+        "duration_ms": 250,
+        "frame": {
+          "h": 382,
+          "w": 286,
+          "x": 1505,
+          "y": 1528
+        },
+        "name": "anti_air_02",
+        "pivot": {
+          "x": 131,
+          "y": 359
+        },
+        "trimmed_bounds": {
+          "h": 272,
+          "w": 185,
+          "x": 33,
+          "y": 90
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 83,
+        "frame": {
+          "h": 325,
+          "w": 210,
+          "x": 1806,
+          "y": 1528
+        },
+        "name": "air_punch_00",
+        "pivot": {
+          "x": 101,
+          "y": 300
+        },
+        "trimmed_bounds": {
+          "h": 256,
+          "w": 170,
+          "x": 21,
+          "y": 34
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 150,
+        "frame": {
+          "h": 325,
+          "w": 280,
+          "x": 2107,
+          "y": 1528
+        },
+        "name": "air_punch_01",
+        "pivot": {
+          "x": 120,
+          "y": 306
+        },
+        "trimmed_bounds": {
+          "h": 226,
+          "w": 239,
+          "x": 20,
+          "y": 60
+        }
+      },
+      {
+        "clip": "air_punch",
+        "duration_ms": 133,
+        "frame": {
+          "h": 325,
+          "w": 241,
+          "x": 2408,
+          "y": 1528
+        },
+        "name": "air_punch_02",
+        "pivot": {
+          "x": 98,
+          "y": 305
+        },
+        "trimmed_bounds": {
+          "h": 242,
+          "w": 145,
+          "x": 36,
+          "y": 40
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 83,
+        "frame": {
+          "h": 334,
+          "w": 240,
+          "x": 0,
+          "y": 1910
+        },
+        "name": "air_kick_00",
+        "pivot": {
+          "x": 111,
+          "y": 294
+        },
+        "trimmed_bounds": {
+          "h": 237,
+          "w": 130,
+          "x": 54,
+          "y": 26
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 133,
+        "frame": {
+          "h": 334,
+          "w": 280,
+          "x": 301,
+          "y": 1910
+        },
+        "name": "air_kick_01",
+        "pivot": {
+          "x": 90,
+          "y": 306
+        },
+        "trimmed_bounds": {
+          "h": 234,
+          "w": 230,
+          "x": 18,
+          "y": 37
+        }
+      },
+      {
+        "clip": "air_kick",
+        "duration_ms": 117,
+        "frame": {
+          "h": 334,
+          "w": 232,
+          "x": 602,
+          "y": 1910
+        },
+        "name": "air_kick_02",
+        "pivot": {
+          "x": 87,
+          "y": 302
+        },
+        "trimmed_bounds": {
+          "h": 242,
+          "w": 131,
+          "x": 39,
+          "y": 29
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 80,
+        "frame": {
+          "h": 309,
+          "w": 236,
+          "x": 903,
+          "y": 1910
+        },
+        "name": "special_00",
+        "pivot": {
+          "x": 92,
+          "y": 302
+        },
+        "trimmed_bounds": {
+          "h": 257,
+          "w": 188,
+          "x": 16,
+          "y": 48
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 80,
+        "frame": {
+          "h": 309,
+          "w": 236,
+          "x": 1204,
+          "y": 1910
+        },
+        "name": "special_01",
+        "pivot": {
+          "x": 121,
+          "y": 302
+        },
+        "trimmed_bounds": {
+          "h": 266,
+          "w": 205,
+          "x": 11,
+          "y": 39
+        }
+      },
+      {
+        "clip": "special",
+        "duration_ms": 107,
+        "frame": {
+          "h": 309,
+          "w": 237,
+          "x": 1505,
+          "y": 1910
+        },
+        "name": "special_02",
+        "pivot": {
+          "x": 94,
+          "y": 303
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 189,
+          "x": 14,
+          "y": 36
+        }
+      },
+      {
+        "clip": "spawn",
+        "duration_ms": 500,
+        "frame": {
+          "h": 311,
+          "w": 233,
+          "x": 1806,
+          "y": 1910
+        },
+        "name": "spawn_00",
+        "pivot": {
+          "x": 117,
+          "y": 290
+        },
+        "trimmed_bounds": {
+          "h": 285,
+          "w": 127,
+          "x": 55,
+          "y": 8
+        }
+      },
+      {
+        "clip": "spawn",
+        "duration_ms": 700,
+        "frame": {
+          "h": 311,
+          "w": 233,
+          "x": 2107,
+          "y": 1910
+        },
+        "name": "spawn_01",
+        "pivot": {
+          "x": 102,
+          "y": 290
+        },
+        "trimmed_bounds": {
+          "h": 243,
+          "w": 125,
+          "x": 53,
+          "y": 49
+        }
+      },
+      {
+        "clip": "spawn",
+        "duration_ms": 1500,
+        "frame": {
+          "h": 311,
+          "w": 233,
+          "x": 2408,
+          "y": 1910
+        },
+        "name": "spawn_02",
+        "pivot": {
+          "x": 95,
+          "y": 282
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 142,
+          "x": 21,
+          "y": 15
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 160,
+        "frame": {
+          "h": 307,
+          "w": 230,
+          "x": 0,
+          "y": 2292
+        },
+        "name": "victory_00",
+        "pivot": {
+          "x": 123,
+          "y": 289
+        },
+        "trimmed_bounds": {
+          "h": 274,
+          "w": 130,
+          "x": 61,
+          "y": 18
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 200,
+        "frame": {
+          "h": 307,
+          "w": 230,
+          "x": 301,
+          "y": 2292
+        },
+        "name": "victory_01",
+        "pivot": {
+          "x": 117,
+          "y": 291
+        },
+        "trimmed_bounds": {
+          "h": 270,
+          "w": 150,
+          "x": 45,
+          "y": 24
+        }
+      },
+      {
+        "clip": "victory",
+        "duration_ms": 500,
+        "frame": {
+          "h": 307,
+          "w": 230,
+          "x": 602,
+          "y": 2292
+        },
+        "name": "victory_02",
+        "pivot": {
+          "x": 95,
+          "y": 290
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 132,
+          "x": 29,
+          "y": 24
+        }
+      },
+      {
+        "clip": "defeat",
+        "duration_ms": 160,
+        "frame": {
+          "h": 297,
+          "w": 223,
+          "x": 903,
+          "y": 2292
+        },
+        "name": "defeat_00",
+        "pivot": {
+          "x": 95,
+          "y": 286
+        },
+        "trimmed_bounds": {
+          "h": 269,
+          "w": 105,
+          "x": 44,
+          "y": 19
+        }
+      },
+      {
+        "clip": "defeat",
+        "duration_ms": 220,
+        "frame": {
+          "h": 297,
+          "w": 223,
+          "x": 1204,
+          "y": 2292
+        },
+        "name": "defeat_01",
+        "pivot": {
+          "x": 97,
+          "y": 272
+        },
+        "trimmed_bounds": {
+          "h": 180,
+          "w": 162,
+          "x": 14,
+          "y": 95
+        }
+      },
+      {
+        "clip": "defeat",
+        "duration_ms": 660,
+        "frame": {
+          "h": 297,
+          "w": 223,
+          "x": 1505,
+          "y": 2292
+        },
+        "name": "defeat_02",
+        "pivot": {
+          "x": 83,
+          "y": 284
+        },
+        "trimmed_bounds": {
+          "h": 141,
+          "w": 154,
+          "x": 8,
+          "y": 145
+        }
+      }
+    ],
+    "image": "go-fighter-atlas.png",
+    "notes": [
+      "Candidate assembled from explicitly reviewed action frames.",
+      "Combat metadata is included only when supplied explicitly in production.json.",
+      "Source rectangles and production provenance: go-fighter.provenance.json"
+    ],
+    "scale": 1.0,
+    "schema": "borrow-fighters.sprite.v1",
+    "source": "../../production/go/production.json"
+  },
+  "moves_seen_per_player": [
+    [
+      "air_kick",
+      "air_punch",
+      "anti_air",
+      "kick",
+      "overhead",
+      "punch_heavy",
+      "punch_light",
+      "special",
+      "sweep",
+      "throw"
+    ],
+    [
+      "air_kick",
+      "air_punch",
+      "anti_air",
+      "kick",
+      "overhead",
+      "punch_heavy",
+      "punch_light",
+      "special",
+      "sweep",
+      "throw"
+    ]
+  ],
+  "physical_metrics": "assets/tuning/character-body-metrics.json",
+  "renderer": "draw_fight -> RenderTexture -> GPU readback",
+  "returned_to_idle_after_moves": [
+    {
+      "move": "punch_light",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 11.716659545898438,
+        "facing": "Right",
+        "frame": "idle_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 11.716659545898438,
+        "facing": "Left",
+        "frame": "idle_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 703
+    },
+    {
+      "move": "punch_heavy",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 13.716629028320312,
+        "facing": "Right",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 13.716629028320312,
+        "facing": "Left",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 823
+    },
+    {
+      "move": "kick",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 15.716598510742188,
+        "facing": "Right",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 15.716598510742188,
+        "facing": "Left",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 943
+    },
+    {
+      "move": "sweep",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 17.716567993164062,
+        "facing": "Right",
+        "frame": "idle_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 17.716567993164062,
+        "facing": "Left",
+        "frame": "idle_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1063
+    },
+    {
+      "move": "overhead",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 19.716537475585938,
+        "facing": "Right",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 19.716537475585938,
+        "facing": "Left",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1183
+    },
+    {
+      "move": "anti_air",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 21.716506958007812,
+        "facing": "Right",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 21.716506958007812,
+        "facing": "Left",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1303
+    },
+    {
+      "move": "air_punch",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 23.716476440429688,
+        "facing": "Right",
+        "frame": "idle_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 23.716476440429688,
+        "facing": "Left",
+        "frame": "idle_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1423
+    },
+    {
+      "move": "air_kick",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 25.716445922851562,
+        "facing": "Right",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 25.716445922851562,
+        "facing": "Left",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1543
+    },
+    {
+      "move": "throw",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 27.716415405273438,
+        "facing": "Right",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 27.716415405273438,
+        "facing": "Left",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1663
+    },
+    {
+      "move": "special",
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          337.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 29.716384887695312,
+        "facing": "Right",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 86,
+        "in_whiff_recovery": false,
+        "position": [
+          337.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          873.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 29.716384887695312,
+        "facing": "Left",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 86,
+        "in_whiff_recovery": false,
+        "position": [
+          873.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "tick": 1783
+    }
+  ],
+  "scenario": "World same-character mirror: real intro/countdown, idle, 30 ticks forward, 30 ticks backward, 60 ticks settling/idle, one jump input followed through the complete arc and return to idle; optional ten attacks use normal inputs with recovery between moves",
+  "status": "Final complete World capture of jump v2 canonical candidate, all ten moves in both facings and grounded return to idle after each.",
+  "captured_images": 638,
+  "simulation_states": 1845,
+  "last_state": {
+    "countdown_label": null,
+    "live_tick": 1500,
+    "next_input": {
+      "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+      "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+    },
+    "p1": {
+      "attack_phase": "Idle",
+      "body": [
+        337.1852722167969,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "clip": "idle",
+      "clip_seconds": 30.733036041259766,
+      "facing": "Right",
+      "frame": "idle_02",
+      "grounded": true,
+      "health": 86,
+      "in_whiff_recovery": false,
+      "position": [
+        337.1852722167969,
+        392.0
+      ],
+      "velocity": [
+        0.0,
+        0.0
+      ]
+    },
+    "p2": {
+      "attack_phase": "Idle",
+      "body": [
+        873.4814453125,
+        392.0,
+        101.33333587646484,
+        224.0
+      ],
+      "clip": "idle",
+      "clip_seconds": 30.733036041259766,
+      "facing": "Left",
+      "frame": "idle_02",
+      "grounded": true,
+      "health": 86,
+      "in_whiff_recovery": false,
+      "position": [
+        873.4814453125,
+        392.0
+      ],
+      "velocity": [
+        0.0,
+        0.0
+      ]
+    },
+    "phase": "idle_after_jump",
+    "projectiles": [],
+    "seconds": 30.733036041259766,
+    "tick": 1844
+  },
+  "full_capture_report": "target/art/go-realistic-approved-world/capture-report.json",
+  "selected_captures": [
+    {
+      "countdown_label": null,
+      "image": "f0000-spawn.png",
+      "live_tick": null,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          309.3333435058594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "spawn",
+        "clip_seconds": 0.0,
+        "facing": "Right",
+        "frame": "spawn_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          309.3333435058594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          901.3333740234375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "spawn",
+        "clip_seconds": 0.0,
+        "facing": "Left",
+        "frame": "spawn_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          901.3333740234375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "phase": "spawn",
+      "projectiles": [],
+      "seconds": 0.0,
+      "tick": 0
+    },
+    {
+      "countdown_label": null,
+      "image": "f0375-walk_in.png",
+      "live_tick": 31,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: true, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: true, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          310.1481628417969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.250026702880859,
+        "facing": "Right",
+        "frame": "walk_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          310.1481628417969,
+          392.0
+        ],
+        "velocity": [
+          48.888893127441406,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          900.5185546875,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.250026702880859,
+        "facing": "Left",
+        "frame": "walk_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          900.5185546875,
+          392.0
+        ],
+        "velocity": [
+          -48.888893127441406,
+          0.0
+        ]
+      },
+      "phase": "walk_in",
+      "projectiles": [],
+      "seconds": 6.250026702880859,
+      "tick": 375
+    },
+    {
+      "countdown_label": null,
+      "image": "f0378-walk_in.png",
+      "live_tick": 34,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: true, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: true, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          317.48150634765625,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.300027370452881,
+        "facing": "Right",
+        "frame": "walk_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          317.48150634765625,
+          392.0
+        ],
+        "velocity": [
+          195.55557250976562,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          893.1851806640625,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.300027370452881,
+        "facing": "Left",
+        "frame": "walk_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          893.1851806640625,
+          392.0
+        ],
+        "velocity": [
+          -195.55557250976562,
+          0.0
+        ]
+      },
+      "phase": "walk_in",
+      "projectiles": [],
+      "seconds": 6.300027370452881,
+      "tick": 378
+    },
+    {
+      "countdown_label": null,
+      "image": "f0382-walk_in.png",
+      "live_tick": 38,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: true, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: true, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          338.3703918457031,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.366694927215576,
+        "facing": "Right",
+        "frame": "walk_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          338.3703918457031,
+          392.0
+        ],
+        "velocity": [
+          373.3333435058594,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          872.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.366694927215576,
+        "facing": "Left",
+        "frame": "walk_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          872.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          -373.3333435058594,
+          0.0
+        ]
+      },
+      "phase": "walk_in",
+      "projectiles": [],
+      "seconds": 6.366694927215576,
+      "tick": 382
+    },
+    {
+      "countdown_label": null,
+      "image": "f0386-walk_in.png",
+      "live_tick": 42,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: true, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: true, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          363.2593078613281,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.4333624839782715,
+        "facing": "Right",
+        "frame": "walk_03",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          363.2593078613281,
+          392.0
+        ],
+        "velocity": [
+          373.3333435058594,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          847.4073486328125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.4333624839782715,
+        "facing": "Left",
+        "frame": "walk_03",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          847.4073486328125,
+          392.0
+        ],
+        "velocity": [
+          -373.3333435058594,
+          0.0
+        ]
+      },
+      "phase": "walk_in",
+      "projectiles": [],
+      "seconds": 6.4333624839782715,
+      "tick": 386
+    },
+    {
+      "countdown_label": null,
+      "image": "f0404-walk_out.png",
+      "live_tick": 60,
+      "next_input": {
+        "p1": "FighterInput { left: true, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: true, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          475.2594299316406,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.7333664894104,
+        "facing": "Right",
+        "frame": "walk_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          475.2594299316406,
+          392.0
+        ],
+        "velocity": [
+          373.3333435058594,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          735.4072265625,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.7333664894104,
+        "facing": "Left",
+        "frame": "walk_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          735.4072265625,
+          392.0
+        ],
+        "velocity": [
+          -373.3333435058594,
+          0.0
+        ]
+      },
+      "phase": "walk_out",
+      "projectiles": [],
+      "seconds": 6.7333664894104,
+      "tick": 404
+    },
+    {
+      "countdown_label": null,
+      "image": "f0407-walk_out.png",
+      "live_tick": 63,
+      "next_input": {
+        "p1": "FighterInput { left: true, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: true, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          489.0372009277344,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.783367156982422,
+        "facing": "Right",
+        "frame": "walk_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          489.0372009277344,
+          392.0
+        ],
+        "velocity": [
+          226.66668701171875,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          721.6294555664062,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.783367156982422,
+        "facing": "Left",
+        "frame": "walk_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          721.6294555664062,
+          392.0
+        ],
+        "velocity": [
+          -226.66668701171875,
+          0.0
+        ]
+      },
+      "phase": "walk_out",
+      "projectiles": [],
+      "seconds": 6.783367156982422,
+      "tick": 407
+    },
+    {
+      "countdown_label": null,
+      "image": "f0411-walk_out.png",
+      "live_tick": 67,
+      "next_input": {
+        "p1": "FighterInput { left: true, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: true, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          496.00018310546875,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.850034713745117,
+        "facing": "Right",
+        "frame": "walk_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          496.00018310546875,
+          392.0
+        ],
+        "velocity": [
+          31.111129760742188,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          714.6665649414062,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.850034713745117,
+        "facing": "Left",
+        "frame": "walk_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          714.6665649414062,
+          392.0
+        ],
+        "velocity": [
+          -31.111129760742188,
+          0.0
+        ]
+      },
+      "phase": "walk_out",
+      "projectiles": [],
+      "seconds": 6.850034713745117,
+      "tick": 411
+    },
+    {
+      "countdown_label": null,
+      "image": "f0414-walk_out.png",
+      "live_tick": 70,
+      "next_input": {
+        "p1": "FighterInput { left: true, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: true, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          492.6668395996094,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.900035381317139,
+        "facing": "Right",
+        "frame": "walk_03",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          492.6668395996094,
+          392.0
+        ],
+        "velocity": [
+          -115.55554962158203,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          717.9998779296875,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 6.900035381317139,
+        "facing": "Left",
+        "frame": "walk_03",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          717.9998779296875,
+          392.0
+        ],
+        "velocity": [
+          115.55554962158203,
+          0.0
+        ]
+      },
+      "phase": "walk_out",
+      "projectiles": [],
+      "seconds": 6.900035381317139,
+      "tick": 414
+    },
+    {
+      "countdown_label": null,
+      "image": "f0440-return_idle.png",
+      "live_tick": 96,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 7.333374500274658,
+        "facing": "Right",
+        "frame": "walk_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          -26.66666030883789,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "walk",
+        "clip_seconds": 7.333374500274658,
+        "facing": "Left",
+        "frame": "walk_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          26.66666030883789,
+          0.0
+        ]
+      },
+      "phase": "return_idle",
+      "projectiles": [],
+      "seconds": 7.333374500274658,
+      "tick": 440
+    },
+    {
+      "countdown_label": null,
+      "image": "f0441-return_idle.png",
+      "live_tick": 97,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 7.350041389465332,
+        "facing": "Right",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 7.350041389465332,
+        "facing": "Left",
+        "frame": "idle_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "phase": "return_idle",
+      "projectiles": [],
+      "seconds": 7.350041389465332,
+      "tick": 441
+    },
+    {
+      "countdown_label": null,
+      "image": "f0494-jump_arc.png",
+      "live_tick": 150,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: true, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: true, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 8.233379364013672,
+        "facing": "Right",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 8.233379364013672,
+        "facing": "Left",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "phase": "jump_arc",
+      "projectiles": [],
+      "seconds": 8.233379364013672,
+      "tick": 494
+    },
+    {
+      "countdown_label": null,
+      "image": "f0495-jump_arc.png",
+      "live_tick": 151,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          377.5,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.0,
+        "facing": "Right",
+        "frame": "jump_00",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          377.5
+        ],
+        "velocity": [
+          0.0,
+          -870.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          377.5,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.0,
+        "facing": "Left",
+        "frame": "jump_00",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          377.5
+        ],
+        "velocity": [
+          0.0,
+          -870.0
+        ]
+      },
+      "phase": "jump_arc",
+      "projectiles": [],
+      "seconds": 8.250045776367188,
+      "tick": 495
+    },
+    {
+      "countdown_label": null,
+      "image": "f0518-jump_arc.png",
+      "live_tick": 174,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          212.66668701171875,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.3833334445953369,
+        "facing": "Right",
+        "frame": "jump_01",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          212.66668701171875
+        ],
+        "velocity": [
+          0.0,
+          -26.666526794433594
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          212.66668701171875,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.3833334445953369,
+        "facing": "Left",
+        "frame": "jump_01",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          212.66668701171875
+        ],
+        "velocity": [
+          0.0,
+          -26.666526794433594
+        ]
+      },
+      "phase": "jump_arc",
+      "projectiles": [],
+      "seconds": 8.633373260498047,
+      "tick": 518
+    },
+    {
+      "countdown_label": null,
+      "image": "f0542-jump_arc.png",
+      "live_tick": 198,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          385.33343505859375,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.7833332419395447,
+        "facing": "Right",
+        "frame": "jump_02",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          385.33343505859375
+        ],
+        "velocity": [
+          0.0,
+          853.3336181640625
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          385.33343505859375,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.7833332419395447,
+        "facing": "Left",
+        "frame": "jump_02",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          385.33343505859375
+        ],
+        "velocity": [
+          0.0,
+          853.3336181640625
+        ]
+      },
+      "phase": "jump_arc",
+      "projectiles": [],
+      "seconds": 9.033367156982422,
+      "tick": 542
+    },
+    {
+      "countdown_label": null,
+      "image": "f0543-jump_arc.png",
+      "live_tick": 199,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 9.050033569335938,
+        "facing": "Right",
+        "frame": "idle_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 9.050033569335938,
+        "facing": "Left",
+        "frame": "idle_02",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "phase": "jump_arc",
+      "projectiles": [],
+      "seconds": 9.050033569335938,
+      "tick": 543
+    },
+    {
+      "countdown_label": null,
+      "image": "f0554-idle_after_jump.png",
+      "live_tick": 210,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 9.23336410522461,
+        "facing": "Right",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "idle",
+        "clip_seconds": 9.23336410522461,
+        "facing": "Left",
+        "frame": "idle_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "phase": "idle_after_jump",
+      "projectiles": [],
+      "seconds": 9.23336410522461,
+      "tick": 554
+    },
+    {
+      "countdown_label": null,
+      "image": "f0587-punch_light.png",
+      "live_tick": 243,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Active",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "punch_light",
+        "clip_seconds": 0.05000000447034836,
+        "facing": "Right",
+        "frame": "punch_light_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Active",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "punch_light",
+        "clip_seconds": 0.05000000447034836,
+        "facing": "Left",
+        "frame": "punch_light_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "phase": "punch_light",
+      "projectiles": [],
+      "seconds": 9.783355712890625,
+      "tick": 587
+    },
+    {
+      "countdown_label": null,
+      "image": "f0715-punch_heavy.png",
+      "live_tick": 371,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Active",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "punch_heavy",
+        "clip_seconds": 0.18333333730697632,
+        "facing": "Right",
+        "frame": "punch_heavy_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Active",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "punch_heavy",
+        "clip_seconds": 0.18333333730697632,
+        "facing": "Left",
+        "frame": "punch_heavy_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "phase": "punch_heavy",
+      "projectiles": [],
+      "seconds": 11.916656494140625,
+      "tick": 715
+    },
+    {
+      "countdown_label": null,
+      "image": "f0831-kick.png",
+      "live_tick": 487,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Active",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "kick",
+        "clip_seconds": 0.11666666716337204,
+        "facing": "Right",
+        "frame": "kick_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Active",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "kick",
+        "clip_seconds": 0.11666666716337204,
+        "facing": "Left",
+        "frame": "kick_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "phase": "kick",
+      "projectiles": [],
+      "seconds": 13.849960327148438,
+      "tick": 831
+    },
+    {
+      "countdown_label": null,
+      "image": "f0954-sweep.png",
+      "live_tick": 610,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Active",
+        "body": [
+          360.3704528808594,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "sweep",
+        "clip_seconds": 0.1666666716337204,
+        "facing": "Right",
+        "frame": "sweep_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          360.3704528808594,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Active",
+        "body": [
+          850.2962646484375,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "sweep",
+        "clip_seconds": 0.1666666716337204,
+        "facing": "Left",
+        "frame": "sweep_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          850.2962646484375,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "phase": "sweep",
+      "projectiles": [],
+      "seconds": 15.89992904663086,
+      "tick": 954
+    },
+    {
+      "countdown_label": null,
+      "image": "f1074-overhead.png",
+      "live_tick": 730,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Active",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "overhead",
+        "clip_seconds": 0.1666666716337204,
+        "facing": "Right",
+        "frame": "overhead_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Active",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "overhead",
+        "clip_seconds": 0.1666666716337204,
+        "facing": "Left",
+        "frame": "overhead_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "phase": "overhead",
+      "projectiles": [],
+      "seconds": 17.899898529052734,
+      "tick": 1074
+    },
+    {
+      "countdown_label": null,
+      "image": "f1191-anti_air.png",
+      "live_tick": 847,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Active",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "anti_air",
+        "clip_seconds": 0.11666666716337204,
+        "facing": "Right",
+        "frame": "anti_air_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Active",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "anti_air",
+        "clip_seconds": 0.11666666716337204,
+        "facing": "Left",
+        "frame": "anti_air_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "phase": "anti_air",
+      "projectiles": [],
+      "seconds": 19.849868774414062,
+      "tick": 1191
+    },
+    {
+      "countdown_label": null,
+      "image": "f1310-air_punch.png",
+      "live_tick": 966,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          361.1852722167969,
+          314.16668701171875,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.0833333358168602,
+        "facing": "Right",
+        "frame": "jump_01",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          314.16668701171875
+        ],
+        "velocity": [
+          0.0,
+          -686.6665649414062
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          849.4814453125,
+          314.16668701171875,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.0833333358168602,
+        "facing": "Left",
+        "frame": "jump_01",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          314.16668701171875
+        ],
+        "velocity": [
+          0.0,
+          -686.6665649414062
+        ]
+      },
+      "phase": "air_punch",
+      "projectiles": [],
+      "seconds": 21.833171844482422,
+      "tick": 1310
+    },
+    {
+      "countdown_label": null,
+      "image": "f1313-air_punch.png",
+      "live_tick": 969,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Startup",
+        "body": [
+          361.1852722167969,
+          283.5,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "air_punch",
+        "clip_seconds": 0.01666666753590107,
+        "facing": "Right",
+        "frame": "air_punch_00",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          283.5
+        ],
+        "velocity": [
+          0.0,
+          -576.66650390625
+        ]
+      },
+      "p2": {
+        "attack_phase": "Startup",
+        "body": [
+          849.4814453125,
+          283.5,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "air_punch",
+        "clip_seconds": 0.01666666753590107,
+        "facing": "Left",
+        "frame": "air_punch_00",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          283.5
+        ],
+        "velocity": [
+          0.0,
+          -576.66650390625
+        ]
+      },
+      "phase": "air_punch",
+      "projectiles": [],
+      "seconds": 21.88317108154297,
+      "tick": 1313
+    },
+    {
+      "countdown_label": null,
+      "image": "f1317-air_punch.png",
+      "live_tick": 973,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Active",
+        "body": [
+          361.1852722167969,
+          251.1666717529297,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "air_punch",
+        "clip_seconds": 0.0833333358168602,
+        "facing": "Right",
+        "frame": "air_punch_01",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          251.1666717529297
+        ],
+        "velocity": [
+          0.0,
+          -429.9998474121094
+        ]
+      },
+      "p2": {
+        "attack_phase": "Active",
+        "body": [
+          849.4814453125,
+          251.1666717529297,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "air_punch",
+        "clip_seconds": 0.0833333358168602,
+        "facing": "Left",
+        "frame": "air_punch_01",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          251.1666717529297
+        ],
+        "velocity": [
+          0.0,
+          -429.9998474121094
+        ]
+      },
+      "phase": "air_punch",
+      "projectiles": [],
+      "seconds": 21.94983673095703,
+      "tick": 1317
+    },
+    {
+      "countdown_label": null,
+      "image": "f1326-air_punch.png",
+      "live_tick": 982,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Recovery",
+        "body": [
+          361.1852722167969,
+          214.16668701171875,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "air_punch",
+        "clip_seconds": 0.23333333432674408,
+        "facing": "Right",
+        "frame": "air_punch_02",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          214.16668701171875
+        ],
+        "velocity": [
+          0.0,
+          -99.99986267089844
+        ]
+      },
+      "p2": {
+        "attack_phase": "Recovery",
+        "body": [
+          849.4814453125,
+          214.16668701171875,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "air_punch",
+        "clip_seconds": 0.23333333432674408,
+        "facing": "Left",
+        "frame": "air_punch_02",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          214.16668701171875
+        ],
+        "velocity": [
+          0.0,
+          -99.99986267089844
+        ]
+      },
+      "phase": "air_punch",
+      "projectiles": [],
+      "seconds": 22.099834442138672,
+      "tick": 1326
+    },
+    {
+      "countdown_label": null,
+      "image": "f1335-air_punch.png",
+      "live_tick": 991,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "WhiffRecovery",
+        "body": [
+          361.1852722167969,
+          226.66671752929688,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.5000001788139343,
+        "facing": "Right",
+        "frame": "jump_02",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": true,
+        "position": [
+          361.1852722167969,
+          226.66671752929688
+        ],
+        "velocity": [
+          0.0,
+          230.0001678466797
+        ]
+      },
+      "p2": {
+        "attack_phase": "WhiffRecovery",
+        "body": [
+          849.4814453125,
+          226.66671752929688,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.5000001788139343,
+        "facing": "Left",
+        "frame": "jump_02",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": true,
+        "position": [
+          849.4814453125,
+          226.66671752929688
+        ],
+        "velocity": [
+          0.0,
+          230.0001678466797
+        ]
+      },
+      "phase": "air_punch",
+      "projectiles": [],
+      "seconds": 22.249832153320312,
+      "tick": 1335
+    },
+    {
+      "countdown_label": null,
+      "image": "f1430-air_kick.png",
+      "live_tick": 1086,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          361.1852722167969,
+          314.16668701171875,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.0833333358168602,
+        "facing": "Right",
+        "frame": "jump_01",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          314.16668701171875
+        ],
+        "velocity": [
+          0.0,
+          -686.6665649414062
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          849.4814453125,
+          314.16668701171875,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.0833333358168602,
+        "facing": "Left",
+        "frame": "jump_01",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          314.16668701171875
+        ],
+        "velocity": [
+          0.0,
+          -686.6665649414062
+        ]
+      },
+      "phase": "air_kick",
+      "projectiles": [],
+      "seconds": 23.833141326904297,
+      "tick": 1430
+    },
+    {
+      "countdown_label": null,
+      "image": "f1433-air_kick.png",
+      "live_tick": 1089,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Startup",
+        "body": [
+          361.1852722167969,
+          283.5,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "air_kick",
+        "clip_seconds": 0.01666666753590107,
+        "facing": "Right",
+        "frame": "air_kick_00",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          283.5
+        ],
+        "velocity": [
+          0.0,
+          -576.66650390625
+        ]
+      },
+      "p2": {
+        "attack_phase": "Startup",
+        "body": [
+          849.4814453125,
+          283.5,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "air_kick",
+        "clip_seconds": 0.01666666753590107,
+        "facing": "Left",
+        "frame": "air_kick_00",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          283.5
+        ],
+        "velocity": [
+          0.0,
+          -576.66650390625
+        ]
+      },
+      "phase": "air_kick",
+      "projectiles": [],
+      "seconds": 23.883140563964844,
+      "tick": 1433
+    },
+    {
+      "countdown_label": null,
+      "image": "f1437-air_kick.png",
+      "live_tick": 1093,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Active",
+        "body": [
+          361.1852722167969,
+          251.1666717529297,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "air_kick",
+        "clip_seconds": 0.0833333358168602,
+        "facing": "Right",
+        "frame": "air_kick_01",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          251.1666717529297
+        ],
+        "velocity": [
+          0.0,
+          -429.9998474121094
+        ]
+      },
+      "p2": {
+        "attack_phase": "Active",
+        "body": [
+          849.4814453125,
+          251.1666717529297,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "air_kick",
+        "clip_seconds": 0.0833333358168602,
+        "facing": "Left",
+        "frame": "air_kick_01",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          251.1666717529297
+        ],
+        "velocity": [
+          0.0,
+          -429.9998474121094
+        ]
+      },
+      "phase": "air_kick",
+      "projectiles": [],
+      "seconds": 23.949806213378906,
+      "tick": 1437
+    },
+    {
+      "countdown_label": null,
+      "image": "f1445-air_kick.png",
+      "live_tick": 1101,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Recovery",
+        "body": [
+          361.1852722167969,
+          215.83335876464844,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "air_kick",
+        "clip_seconds": 0.21666666865348816,
+        "facing": "Right",
+        "frame": "air_kick_02",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          215.83335876464844
+        ],
+        "velocity": [
+          0.0,
+          -136.66653442382812
+        ]
+      },
+      "p2": {
+        "attack_phase": "Recovery",
+        "body": [
+          849.4814453125,
+          215.83335876464844,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "air_kick",
+        "clip_seconds": 0.21666666865348816,
+        "facing": "Left",
+        "frame": "air_kick_02",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          215.83335876464844
+        ],
+        "velocity": [
+          0.0,
+          -136.66653442382812
+        ]
+      },
+      "phase": "air_kick",
+      "projectiles": [],
+      "seconds": 24.08313751220703,
+      "tick": 1445
+    },
+    {
+      "countdown_label": null,
+      "image": "f1453-air_kick.png",
+      "live_tick": 1109,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "WhiffRecovery",
+        "body": [
+          361.1852722167969,
+          219.61114501953125,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.4666668474674225,
+        "facing": "Right",
+        "frame": "jump_02",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": true,
+        "position": [
+          361.1852722167969,
+          219.61114501953125
+        ],
+        "velocity": [
+          0.0,
+          156.6668243408203
+        ]
+      },
+      "p2": {
+        "attack_phase": "WhiffRecovery",
+        "body": [
+          849.4814453125,
+          219.61114501953125,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "jump",
+        "clip_seconds": 0.4666668474674225,
+        "facing": "Left",
+        "frame": "jump_02",
+        "grounded": false,
+        "health": 92,
+        "in_whiff_recovery": true,
+        "position": [
+          849.4814453125,
+          219.61114501953125
+        ],
+        "velocity": [
+          0.0,
+          156.6668243408203
+        ]
+      },
+      "phase": "air_kick",
+      "projectiles": [],
+      "seconds": 24.216468811035156,
+      "tick": 1453
+    },
+    {
+      "countdown_label": null,
+      "image": "f1550-throw.png",
+      "live_tick": 1206,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Active",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "throw",
+        "clip_seconds": 0.10000000149011612,
+        "facing": "Right",
+        "frame": "throw_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Active",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "throw",
+        "clip_seconds": 0.10000000149011612,
+        "facing": "Left",
+        "frame": "throw_01",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "phase": "throw",
+      "projectiles": [],
+      "seconds": 25.833110809326172,
+      "tick": 1550
+    },
+    {
+      "countdown_label": null,
+      "image": "f1665-special.png",
+      "live_tick": 1321,
+      "next_input": {
+        "p1": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }",
+        "p2": "FighterInput { left: false, right: false, jump: false, crouch: false, block: false, light_punch: false, heavy_punch: false, kick: false, projectile: false }"
+      },
+      "p1": {
+        "attack_phase": "Idle",
+        "body": [
+          361.1852722167969,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "special",
+        "clip_seconds": 0.0,
+        "facing": "Right",
+        "frame": "special_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          361.1852722167969,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "p2": {
+        "attack_phase": "Idle",
+        "body": [
+          849.4814453125,
+          392.0,
+          101.33333587646484,
+          224.0
+        ],
+        "clip": "special",
+        "clip_seconds": 0.0,
+        "facing": "Left",
+        "frame": "special_00",
+        "grounded": true,
+        "health": 92,
+        "in_whiff_recovery": false,
+        "position": [
+          849.4814453125,
+          392.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "phase": "special",
+      "projectiles": [
+        {
+          "owner": "One",
+          "rect": [
+            519.3275146484375,
+            476.15997314453125,
+            48.0,
+            32.0
+          ]
+        },
+        {
+          "owner": "Two",
+          "rect": [
+            744.672607421875,
+            476.15997314453125,
+            48.0,
+            32.0
+          ]
+        }
+      ],
+      "seconds": 27.74974822998047,
+      "tick": 1665
+    }
+  ]
+}

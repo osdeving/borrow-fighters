@@ -1,0 +1,57 @@
+{
+  "idle": {
+    "version": 1,
+    "removed_disconnected_alpha_pixels": 0,
+    "method": "Generic magenta key and decontamination, then remove disconnected alpha components smaller than32pixels; main contours preserved."
+  },
+  "walk": {
+    "version": 2,
+    "removed_disconnected_alpha_pixels": 2,
+    "method": "Generic magenta key and decontamination, then remove disconnected alpha components smaller than32pixels; main contours preserved."
+  },
+  "jump": {
+    "version": 1,
+    "removed_disconnected_alpha_pixels": 4,
+    "method": "Generic magenta key and decontamination, then remove disconnected alpha components smaller than32pixels; main contours preserved."
+  },
+  "crouch": {
+    "version": 2,
+    "removed_disconnected_alpha_pixels": 12,
+    "method": "Generic magenta key and decontamination, then remove disconnected alpha components smaller than32pixels; main contours preserved."
+  },
+  "block": {
+    "version": 1,
+    "removed_disconnected_alpha_pixels": 1,
+    "method": "Generic magenta key and decontamination, then remove disconnected alpha components smaller than32pixels; main contours preserved."
+  },
+  "crouch_block": {
+    "version": 4,
+    "removed_disconnected_alpha_pixels": 1,
+    "method": "Generic magenta key and decontamination plus connected alpha components smaller than32pixels."
+  },
+  "hit": {
+    "version": 1,
+    "removed_disconnected_alpha_pixels": 4,
+    "method": "Generic magenta key and decontamination, then remove disconnected alpha components smaller than32pixels; main contours preserved."
+  },
+  "special": {
+    "version": 2,
+    "removed_disconnected_alpha_pixels": 11,
+    "method": "Generic magenta key and decontamination plus connected alpha components smaller than32pixels."
+  },
+  "spawn": {
+    "version": 1,
+    "removed_disconnected_alpha_pixels": 1,
+    "method": "Generic magenta key and decontamination, then remove disconnected alpha components smaller than32pixels; main contours preserved."
+  },
+  "victory": {
+    "version": 1,
+    "removed_disconnected_alpha_pixels": 1,
+    "method": "Generic magenta key and decontamination, then remove disconnected alpha components smaller than32pixels; main contours preserved."
+  },
+  "defeat": {
+    "version": 1,
+    "removed_disconnected_alpha_pixels": 1,
+    "method": "Generic magenta key and decontamination, then remove disconnected alpha components smaller than32pixels; main contours preserved."
+  }
+}

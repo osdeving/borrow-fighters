@@ -1,0 +1,83 @@
+{
+  "action": "air_kick",
+  "source": "air_kick/source-v2.png",
+  "sheet": "air_kick/cleaned-v2.png",
+  "reviewed": true,
+  "loop": false,
+  "status": "reviewed visual and functional pilot; see ../finalization-review.md for evidence and limits",
+  "source_body_height_reference_px": 539,
+  "normalization_note": "Approximate upright-body reference; do not scale each frame by its own alpha bounds. Air pivots are virtual standing-floor anchors beneath hips, not boot tips. Ground pivots are proposed and require foot-support review after normalization.",
+  "combat_timing": {
+    "move_id": "AirKick",
+    "input": "AirKick",
+    "duration": 26,
+    "active_start": 7,
+    "active_end_inclusive": 16,
+    "whiff_recovery": 6,
+    "clip": "air_kick"
+  },
+  "frames": [
+    {
+      "name": "air_kick_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 510,
+        "h": 768
+      },
+      "pivot": {
+        "x": 280,
+        "y": 650
+      },
+      "duration_ms": 116,
+      "phase": "startup"
+    },
+    {
+      "name": "air_kick_1",
+      "source_rect": {
+        "x": 510,
+        "y": 0,
+        "w": 605,
+        "h": 768
+      },
+      "pivot": {
+        "x": 225,
+        "y": 650
+      },
+      "duration_ms": 167,
+      "phase": "active"
+    },
+    {
+      "name": "air_kick_2",
+      "source_rect": {
+        "x": 1115,
+        "y": 0,
+        "w": 440,
+        "h": 768
+      },
+      "pivot": {
+        "x": 190,
+        "y": 650
+      },
+      "duration_ms": 75,
+      "phase": "recovery"
+    },
+    {
+      "name": "air_kick_3",
+      "source_rect": {
+        "x": 1555,
+        "y": 0,
+        "w": 493,
+        "h": 768
+      },
+      "pivot": {
+        "x": 230,
+        "y": 650
+      },
+      "duration_ms": 75,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "v2 redraws only the active extended leg and sneaker downward so the sole reaches the original airborne hitbox. All four virtual Y anchors restored from temporary630 to original650: the previous whole-clip downward offset is no longer needed. Scale .497217, X anchors, timing, physics and baseline collision unchanged. Static pose/contact/alpha reviewed; Native verification complete; see ../finalization-review.md.",
+  "finalization_review": "../finalization-review.md"
+}

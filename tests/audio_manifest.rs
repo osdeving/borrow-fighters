@@ -216,6 +216,7 @@ fn every_character_attack_can_resolve_voice_binding() {
         CharacterId::Go,
         CharacterId::C,
         CharacterId::Python,
+        CharacterId::Cpp,
     ] {
         let spec = character_spec(character);
         for move_id in spec.move_ids {
@@ -279,4 +280,161 @@ fn audio_clip_defaults_keep_placeholders_lightweight() {
     assert_eq!(music.pitch, 1.0);
     assert!(music.looping);
     assert!(!music.required);
+}
+
+#[test]
+fn fighter_voices_never_fall_back_to_another_characters_recordings() {
+    let manifest = AudioManifest::load("assets/audio/audio_manifest.json").unwrap();
+    let bank = AudioBank::new(manifest.clone());
+    let mut voice_files = Vec::new();
+    for character in [
+        CharacterId::Rust,
+        CharacterId::Duke,
+        CharacterId::Go,
+        CharacterId::C,
+        CharacterId::Python,
+        CharacterId::Cpp,
+    ] {
+        let expected_directory =
+            format!("assets/audio/characters/{}/voice/", character.audio_key());
+        let mut ids = HashSet::new();
+        for cue in [
+            AudioCue::FighterAttackStart,
+            AudioCue::FighterHurt,
+            AudioCue::FighterBlock,
+        ] {
+            let event = AudioEvent::new(cue).with_fighter(PlayerSlot::One, character);
+            let (_, binding) = bank.binding_for_event(&event).unwrap();
+            ids.extend(binding.clips.iter().cloned());
+        }
+        for &move_id in character_spec(character).move_ids {
+            let event = AudioEvent::fighter_attack_start(PlayerSlot::One, character, move_id);
+            let (_, binding) = bank.binding_for_event(&event).unwrap();
+            ids.extend(binding.clips.iter().cloned());
+        }
+        let projectile = AudioEvent::fighter_projectile_cast(PlayerSlot::One, character);
+        let (_, binding) = bank.binding_for_event(&projectile).unwrap();
+        ids.extend(binding.clips.iter().cloned());
+        for id in ids {
+            let clip = manifest.clips.iter().find(|clip| clip.id == id).unwrap();
+            if clip.bus != "voice" {
+                continue;
+            }
+            assert!(
+                clip.file.starts_with(&expected_directory),
+                "{character:?} uses {}",
+                clip.file
+            );
+            let bytes = std::fs::read(&clip.file).unwrap();
+            for (other, other_file, other_bytes) in &voice_files {
+                if *other != character {
+                    assert_ne!(
+                        &bytes, other_bytes,
+                        "{character:?} and {other:?} share the same recording: {} / {other_file}",
+                        clip.file
+                    );
+                }
+            }
+            voice_files.push((character, clip.file.clone(), bytes));
+        }
+    }
+}
+
+#[test]
+fn authored_super_phases_resolve_existing_sounds_for_their_character() {
+    let bank = AudioBank::new(AudioManifest::load("assets/audio/audio_manifest.json").unwrap());
+    let phases = [
+        (
+            CharacterId::Rust,
+            &[
+                AudioCue::SuperStart,
+                AudioCue::SuperMutation,
+                AudioCue::SuperEnd,
+            ][..],
+        ),
+        (
+            CharacterId::Duke,
+            &[
+                AudioCue::SuperStart,
+                AudioCue::SuperTrashRain,
+                AudioCue::SuperCollect,
+                AudioCue::SuperGiantDrop,
+                AudioCue::SuperEnd,
+            ][..],
+        ),
+        (
+            CharacterId::C,
+            &[
+                AudioCue::SuperStart,
+                AudioCue::SuperError,
+                AudioCue::SuperBoot,
+                AudioCue::SuperEnd,
+            ][..],
+        ),
+        (
+            CharacterId::Cpp,
+            &[
+                AudioCue::SuperStart,
+                AudioCue::SuperTyping,
+                AudioCue::SuperEnter,
+                AudioCue::SuperFootshot,
+                AudioCue::SuperBarrageHit,
+                AudioCue::SuperError,
+                AudioCue::SuperBoot,
+                AudioCue::SuperEnd,
+            ][..],
+        ),
+        (
+            CharacterId::Python,
+            &[
+                AudioCue::SuperStart,
+                AudioCue::SuperMutation,
+                AudioCue::SuperLunge,
+                AudioCue::SuperSwallow,
+                AudioCue::SuperRevert,
+                AudioCue::SuperCelebrate,
+                AudioCue::SuperPeace,
+                AudioCue::SuperEnd,
+            ][..],
+        ),
+    ];
+    for (character, cues) in phases {
+        for &cue in cues {
+            assert_eq!(AudioCue::from_key(cue.key()), Some(cue));
+            let event = AudioEvent::new(cue).with_fighter(PlayerSlot::One, character);
+            assert!(
+                bank.binding_for_event(&event).is_some(),
+                "{character:?} {cue:?} needs phase audio"
+            );
+        }
+    }
+}
+
+#[test]
+fn recast_voices_use_different_source_recordings_even_after_processing() {
+    let production: serde_json::Value = serde_json::from_str(
+        &std::fs::read_to_string("assets/audio/production-2026-09-09.json").unwrap(),
+    )
+    .unwrap();
+    let mut source_owners = std::collections::HashMap::new();
+    let mut characters = HashSet::new();
+    for output in production["outputs"].as_array().unwrap() {
+        let file = output["file"].as_str().unwrap();
+        let Some(voice_path) = file.strip_prefix("assets/audio/characters/") else {
+            continue;
+        };
+        let character = voice_path.split('/').next().unwrap();
+        characters.insert(character);
+        for source in output["sources"].as_array().unwrap() {
+            let hash = source["source_sha256"].as_str().unwrap();
+            assert_eq!(hash.len(), 64, "source hash missing for {file}");
+            if let Some(other) = source_owners.insert(hash, character) {
+                assert_eq!(
+                    other, character,
+                    "{character} and {other} reuse a source despite different output processing"
+                );
+            }
+        }
+    }
+    assert_eq!(characters, HashSet::from(["rust", "c", "go", "cpp"]));
 }

@@ -1,0 +1,71 @@
+{
+  "action": "heavy_hit",
+  "source": "reactions/source-spectacle-v1.png",
+  "sheet": "reactions/keyed-spectacle-v1.png",
+  "reviewed": true,
+  "loop": false,
+  "status": "runtime_reviewed",
+  "frames": [
+    {
+      "name": "heavy_hit_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 330,
+        "h": 440
+      },
+      "pivot": {
+        "x": 176,
+        "y": 383
+      },
+      "duration_ms": 50,
+      "phase": "heavy_hit"
+    },
+    {
+      "name": "heavy_hit_01",
+      "source_rect": {
+        "x": 330,
+        "y": 0,
+        "w": 288,
+        "h": 440
+      },
+      "pivot": {
+        "x": 145,
+        "y": 383
+      },
+      "duration_ms": 60,
+      "phase": "heavy_hit"
+    },
+    {
+      "name": "heavy_hit_02",
+      "source_rect": {
+        "x": 618,
+        "y": 0,
+        "w": 341,
+        "h": 440
+      },
+      "pivot": {
+        "x": 180,
+        "y": 387
+      },
+      "duration_ms": 70,
+      "phase": "heavy_hit"
+    },
+    {
+      "name": "heavy_hit_03",
+      "source_rect": {
+        "x": 959,
+        "y": 0,
+        "w": 295,
+        "h": 440
+      },
+      "pivot": {
+        "x": 145,
+        "y": 391
+      },
+      "duration_ms": 87,
+      "phase": "heavy_hit"
+    }
+  ],
+  "review_notes": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved."
+}

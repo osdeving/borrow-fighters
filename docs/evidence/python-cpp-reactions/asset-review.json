@@ -1,0 +1,27 @@
+{
+  "baseline_commit": "caa385834baa93ff7e2ab6d9f612b63e2b267f78",
+  "pilots": [
+    {
+      "character": "python",
+      "manifest": "assets/candidates/python/python-fighter.sprite.json",
+      "manifest_sha256": "d0bcdbd5b33ade9d4e780e72b0b153d7dad09b263f487b6fbbd6a569f3aa9ed4",
+      "old_frames_preserved": 88,
+      "old_clips_preserved": 25,
+      "new_frames": 32,
+      "distinct_rgba_crops": 32,
+      "new_combat_metadata": false,
+      "old_top_fields_preserved_except_appended_notes": true
+    },
+    {
+      "character": "cpp",
+      "manifest": "assets/candidates/cpp/cpp-fighter.sprite.json",
+      "manifest_sha256": "c39a4159ce32416d36f6aed3f397d32c47ce47f101b0b9fdc3f958b5db87a3ca",
+      "old_frames_preserved": 88,
+      "old_clips_preserved": 25,
+      "new_frames": 32,
+      "distinct_rgba_crops": 32,
+      "new_combat_metadata": false,
+      "old_top_fields_preserved_except_appended_notes": true
+    }
+  ]
+}

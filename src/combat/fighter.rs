@@ -11,6 +11,8 @@ use crate::math::{rect::Rect, vec2::Vec2};
 
 use super::frame::FrameCount;
 use super::projectile::{PROJECTILE_SPEC, ProjectileFrameData, ProjectileSpec};
+mod contact_reactions;
+mod reactions;
 pub use crate::combat::move_set::{
     AIR_KICK_DAMAGE, AIR_PUNCH_DAMAGE, ActiveAttack, AttackFrameData, AttackKind,
     CLOSE_THROW_DAMAGE, DEFAULT_CLOSE_RANGE_MOVE_IDS, DUKE_BOILERPLATE_POKE_DAMAGE, GuardRule,
@@ -18,6 +20,8 @@ pub use crate::combat::move_set::{
     MoveSpec, OVERHEAD_PUNCH_DAMAGE, RISING_ANTI_AIR_DAMAGE, RUST_BORROW_JAB_DAMAGE,
     SWEEP_KICK_DAMAGE, move_spec_for_input,
 };
+pub use contact_reactions::{ContactReactionProfile, ContactReactionState};
+pub use reactions::ReactionVisualState;
 
 const DEFAULT_WIDTH: f32 = world_px(76.0);
 const DEFAULT_STANDING_HEIGHT: f32 = world_px(168.0);
@@ -33,7 +37,7 @@ const GROUND_DECELERATION: f32 = world_px(2600.0);
 const AIR_DECELERATION: f32 = world_px(700.0);
 const DIAGONAL_JUMP_MIN_SPEED: f32 = world_px(180.0);
 const JUMP_SPEED: f32 = world_px(-680.0);
-const GRAVITY: f32 = world_px(1650.0);
+pub(crate) const GRAVITY: f32 = world_px(1650.0);
 const MAX_FALL_SPEED: f32 = world_px(920.0);
 const BLOCK_DAMAGE_DIVISOR: i32 = 4;
 const TIMER_EPSILON: f32 = 0.0001;
@@ -102,6 +106,25 @@ pub struct FighterInput {
     pub heavy_punch: bool,
     pub kick: bool,
     pub projectile: bool,
+    pub signature_special: bool,
+    pub cinematic_special: bool,
+}
+
+/// Visible impact posture; knockdowns include a protected floor recovery.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum HitReactionKind {
+    #[default]
+    Hit,
+    HeavyHit,
+    Launched,
+    Thrown,
+    Knockdown,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum CaptureRole {
+    Attacker,
+    Victim,
 }
 
 /// Events produced while updating one fighter.
@@ -147,6 +170,20 @@ pub struct Fighter {
     special_visual_timer: f32,
     hitstun_timer: f32,
     blockstun_timer: f32,
+    reaction_visual_elapsed: f32,
+    hit_reaction_kind: HitReactionKind,
+    reaction_visual_duration: f32,
+    reaction_strength: f32,
+    reaction_was_crouching: bool,
+    reaction_landed: bool,
+    super_reaction: bool,
+    contact_reaction_profile: ContactReactionProfile,
+    contact_reaction_duration: f32,
+    throw_protection_timer: f32,
+    capture_role: Option<CaptureRole>,
+    guard_visual_elapsed: f32,
+    crouch_visual_elapsed: f32,
+    jump_visual_elapsed: f32,
     whiff_recovery_timer: f32,
     attack: Option<AttackState>,
 }
@@ -156,6 +193,7 @@ struct AttackState {
     spec: MoveSpec,
     elapsed: f32,
     has_hit: bool,
+    signature_emitted: u8,
 }
 
 impl Fighter {
@@ -235,6 +273,20 @@ impl Fighter {
             special_visual_timer: 0.0,
             hitstun_timer: 0.0,
             blockstun_timer: 0.0,
+            reaction_visual_elapsed: 0.0,
+            hit_reaction_kind: HitReactionKind::Hit,
+            reaction_visual_duration: 0.0,
+            reaction_strength: 1.0,
+            reaction_was_crouching: false,
+            reaction_landed: false,
+            super_reaction: false,
+            contact_reaction_profile: ContactReactionProfile::Body,
+            contact_reaction_duration: 0.0,
+            throw_protection_timer: 0.0,
+            capture_role: None,
+            guard_visual_elapsed: 0.0,
+            crouch_visual_elapsed: 0.0,
+            jump_visual_elapsed: 0.0,
             whiff_recovery_timer: 0.0,
             attack: None,
         }
@@ -243,6 +295,16 @@ impl Fighter {
     /// Advances movement, stance, defense, and attack timers.
     pub fn update(&mut self, dt: f32, input: FighterInput) -> FighterUpdateEvents {
         let mut events = FighterUpdateEvents::default();
+        // Scripted capture and ballistic reactions must finish even on a lethal
+        // hit; the World delays the round result until the victim reaches ground.
+        if self.capture_role.is_some() {
+            self.reaction_visual_elapsed += dt;
+            return events;
+        }
+        if self.in_air_reaction() {
+            self.advance_air_reaction(dt);
+            return events;
+        }
         if self.is_defeated() {
             self.velocity = Vec2::ZERO;
             self.crouching = false;
@@ -254,22 +316,56 @@ impl Fighter {
             return events;
         }
 
+        let was_reacting = self.is_reacting();
+        if was_reacting {
+            self.reaction_visual_elapsed += dt;
+        }
+        let was_blocking = self.blocking;
+        let was_crouching = self.crouching;
+        let was_grounded = self.grounded;
         self.projectile_cooldown = tick_timer(self.projectile_cooldown, dt);
         self.special_visual_timer = tick_timer(self.special_visual_timer, dt);
         self.hitstun_timer = tick_timer(self.hitstun_timer, dt);
         self.blockstun_timer = tick_timer(self.blockstun_timer, dt);
         self.whiff_recovery_timer = tick_timer(self.whiff_recovery_timer, dt);
+        self.throw_protection_timer = tick_timer(self.throw_protection_timer, dt);
+        if was_reacting && !self.is_reacting() {
+            // A defender must get a chance to jump after stun, including at the wall.
+            self.throw_protection_timer = FrameCount::new(6).as_seconds();
+        }
 
         let action_locked = self.is_action_locked();
         let requested_move = input.requested_move_spec(self.move_ids, self.facing, self.grounded);
         let wants_attack = requested_move.is_some();
-        self.crouching = !action_locked && input.crouch && self.grounded && self.attack.is_none();
+        let low_attack = self
+            .attack
+            .map(|attack| attack.spec)
+            .or(requested_move)
+            .is_some_and(|spec| spec.input == MoveInputKind::Sweep);
+        self.crouching = if self.in_blockstun() {
+            // Preserve guard height during blockstun; previously every blocked low
+            // forced the defender upright for the next incoming hit.
+            was_crouching
+        } else {
+            !action_locked && self.grounded && (low_attack || input.crouch && self.attack.is_none())
+        };
+        self.crouch_visual_elapsed = if self.crouching && was_crouching {
+            self.crouch_visual_elapsed + dt
+        } else {
+            0.0
+        };
         self.blocking = self.in_blockstun()
             || (!action_locked
                 && input.block
                 && self.grounded
                 && self.attack.is_none()
                 && !wants_attack);
+        self.guard_visual_elapsed =
+            if self.blocking && was_blocking && self.crouching == was_crouching {
+                self.guard_visual_elapsed + dt
+            } else {
+                0.0
+            };
         self.update_horizontal_velocity(dt, input);
 
         let can_start_action = !action_locked && !self.blocking && self.attack.is_none();
@@ -287,10 +383,33 @@ impl Fighter {
                 spec,
                 elapsed: 0.0,
                 has_hit: false,
+                signature_emitted: 0,
             });
         }
 
-        self.velocity.y = (self.velocity.y + GRAVITY * dt).min(MAX_FALL_SPEED);
+        if let Some(attack) = self.attack
+            && attack.spec.id == MoveId::RustBorrowFortress
+            && attack.is_active()
+        {
+            self.velocity.x = match self.facing {
+                Facing::Right => world_px(320.0),
+                Facing::Left => world_px(-320.0),
+            };
+        }
+
+        let levitating = self.attack.is_some_and(|attack| {
+            attack.spec.id == MoveId::PythonImportAntigravity && attack.is_active()
+        });
+        if levitating {
+            self.grounded = false;
+            self.velocity.y = if self.attack_elapsed_frames().is_some_and(|f| f.get() < 40) {
+                world_px(-200.0)
+            } else {
+                0.0
+            };
+        } else {
+            self.velocity.y = (self.velocity.y + GRAVITY * dt).min(MAX_FALL_SPEED);
+        }
         self.position.x += self.velocity.x * dt;
         self.position.y += self.velocity.y * dt;
 
@@ -300,6 +419,11 @@ impl Fighter {
             self.velocity.y = 0.0;
             self.grounded = true;
         }
+        self.jump_visual_elapsed = if !self.grounded && !was_grounded {
+            self.jump_visual_elapsed + dt
+        } else {
+            0.0
+        };
 
         if let Some(mut attack) = self.attack {
             attack.elapsed += dt;
@@ -319,6 +443,15 @@ impl Fighter {
 
     /// Updates facing direction to look toward the opponent.
     pub fn face_toward(&mut self, opponent: &Self) {
+        // Attacks keep the direction of their startup so a jump-over can evade
+        // an attack instead of being tracked automatically through recovery.
+        if self.attack.is_some()
+            || self.special_visual_timer > 0.0
+            || self.capture_role.is_some()
+            || self.is_reacting()
+        {
+            return;
+        }
         self.facing = if self.body_rect().center_x() <= opponent.body_rect().center_x() {
             Facing::Right
         } else {
@@ -351,15 +484,34 @@ impl Fighter {
         guard_rule: GuardRule,
         hit_reaction: HitReaction,
     ) -> DamageResult {
-        let blocked =
-            !self.is_defeated() && guard_rule.is_blocked_by(self.blocking, self.crouching);
-        let final_damage = if blocked {
-            (damage / BLOCK_DAMAGE_DIVISOR).max(1)
+        self.take_hit_with_damage_enabled(damage, guard_rule, hit_reaction, true)
+    }
+
+    /// Resolves a confirmed contact normally while optionally preserving health for playtest.
+    pub(crate) fn take_hit_with_damage_enabled(
+        &mut self,
+        damage: i32,
+        guard_rule: GuardRule,
+        hit_reaction: HitReaction,
+        damage_enabled: bool,
+    ) -> DamageResult {
+        let blocked = !self.is_defeated()
+            && self.grounded
+            && !self.in_hitstun()
+            && guard_rule.is_blocked_by(self.blocking, self.crouching);
+        let final_damage = if !damage_enabled {
+            0
+        } else if blocked {
+            // Guard gives a low-health defender a chance to answer pressure.
+            (damage / BLOCK_DAMAGE_DIVISOR)
+                .max(1)
+                .min((self.health - 1).max(0))
         } else {
             damage
         };
         self.take_damage(final_damage);
         let pushback = self.apply_hit_reaction(hit_reaction, blocked);
+        self.record_contact_reaction(guard_rule, blocked);
 
         DamageResult {
             damage: final_damage,
@@ -478,9 +630,59 @@ impl Fighter {
         self.attack.map(AttackState::kind)
     }
 
+    /// Authored supers can start from grounded neutral or held guard, never stun/recovery.
+    pub(crate) fn can_start_super(&self) -> bool {
+        self.grounded && !self.is_defeated() && self.attack.is_none() && !self.is_action_locked()
+    }
+
+    /// Exposes the local cinematic attack clock used by Go in World.
+    /// Authored five-character sessions use World::super_sequence instead.
+    pub fn cinematic_special(&self) -> Option<super::cinematic::CinematicSpecialState> {
+        let attack = self.attack?;
+        super::cinematic::CinematicSpecialState::from_move(attack.spec, attack.elapsed_frames())
+    }
+
     /// Returns the concrete close-range move spec currently being played.
     pub fn attack_move_spec(&self) -> Option<MoveSpec> {
         self.attack.map(|attack| attack.spec)
+    }
+
+    /// Uses revised move geometry instead of hitboxes from legacy sprite frames.
+    pub fn uses_move_spec_hitbox(&self) -> bool {
+        matches!(
+            self.attack_kind(),
+            Some(AttackKind::Sweep | AttackKind::SignatureSpecial | AttackKind::CinematicSpecial)
+        )
+    }
+
+    /// Uses the crouched physical hurtboxes for reviewed low attacks.
+    pub fn uses_low_attack_hurtboxes(&self) -> bool {
+        self.attack_move_spec()
+            .is_some_and(|spec| spec.input == MoveInputKind::Sweep)
+    }
+
+    /// Consumes due signature emissions exactly once, including catch-up ticks.
+    pub(crate) fn take_signature_emission(&mut self) -> Option<MoveId> {
+        let attack = self.attack.as_mut()?;
+        for (index, frame) in super::signature::signature_emission_frames(attack.spec.id)
+            .iter()
+            .enumerate()
+        {
+            let bit = 1 << index;
+            if attack.elapsed_frames().get() >= *frame && attack.signature_emitted & bit == 0 {
+                attack.signature_emitted |= bit;
+                return Some(attack.spec.id);
+            }
+        }
+        None
+    }
+
+    /// The fortress guards the front briefly, with exposed startup and recovery.
+    pub fn fortress_guard_active(&self) -> bool {
+        self.attack.is_some_and(|attack| {
+            attack.spec.id == MoveId::RustBorrowFortress
+                && (24..=36).contains(&attack.elapsed_frames().get())
+        })
     }
 
     /// Returns close-range move ids available to this fighter.
@@ -547,6 +749,46 @@ impl Fighter {
         FrameCount::from_elapsed_seconds(self.blockstun_timer)
     }
 
+    /// Returns presentation time since the latest hit or blocked impact.
+    ///
+    /// This clock never controls stun duration, collisions, or action availability.
+    pub fn reaction_visual_elapsed_seconds(&self) -> f32 {
+        self.reaction_visual_elapsed
+    }
+
+    /// Returns the posture selected by the latest unblocked impact.
+    pub fn hit_reaction_kind(&self) -> HitReactionKind {
+        self.hit_reaction_kind
+    }
+
+    /// Returns whether floor recovery is still protecting this fighter.
+    pub fn in_knockdown(&self) -> bool {
+        self.in_hitstun() && self.hit_reaction_kind == HitReactionKind::Knockdown
+    }
+
+    /// Prevents grounded throws from catching jumps, stun, or the first recovery frames.
+    pub fn can_be_thrown(&self) -> bool {
+        self.grounded
+            && !self.is_reacting()
+            && self.capture_role.is_none()
+            && self.throw_protection_timer <= 0.0
+    }
+
+    /// Returns presentation time since the current held guard began.
+    pub fn guard_visual_elapsed_seconds(&self) -> f32 {
+        self.guard_visual_elapsed
+    }
+
+    /// Returns presentation time since entering the current crouch.
+    pub fn crouch_visual_elapsed_seconds(&self) -> f32 {
+        self.crouch_visual_elapsed
+    }
+
+    /// Returns presentation time since leaving the floor; physics stays authoritative.
+    pub fn jump_visual_elapsed_seconds(&self) -> f32 {
+        self.jump_visual_elapsed
+    }
+
     /// Returns remaining whiff recovery in whole frames.
     pub fn whiff_recovery_remaining_frames(&self) -> FrameCount {
         FrameCount::from_elapsed_seconds(self.whiff_recovery_timer)
@@ -554,7 +796,7 @@ impl Fighter {
 
     /// Returns whether the fighter is currently locked by hitstun.
     pub fn in_hitstun(&self) -> bool {
-        self.hitstun_timer > 0.0
+        self.hitstun_timer > 0.0 || self.in_capture() || self.in_air_reaction()
     }
 
     /// Returns whether the fighter is currently locked by blockstun.
@@ -599,7 +841,15 @@ impl Fighter {
     }
 
     fn update_horizontal_velocity(&mut self, dt: f32, input: FighterInput) {
-        let axis = if self.crouching || self.blocking || self.is_action_locked() {
+        let axis = if self.crouching
+            || self.blocking
+            || self.is_action_locked()
+            || matches!(
+                self.attack_kind(),
+                Some(
+                    AttackKind::SignatureSpecial | AttackKind::CinematicSpecial | AttackKind::Throw
+                )
+            ) {
             0.0
         } else {
             input.horizontal_axis()
@@ -659,6 +909,16 @@ impl Fighter {
     }
 
     fn apply_hit_reaction(&mut self, hit_reaction: HitReaction, blocked: bool) -> f32 {
+        self.reaction_visual_elapsed = 0.0;
+        self.reaction_visual_duration = if blocked {
+            hit_reaction.blockstun.as_seconds()
+        } else {
+            hit_reaction.hitstun.as_seconds()
+        };
+        self.reaction_strength = (hit_reaction.hit_pushback / world_px(30.0)).clamp(0.7, 1.6);
+        self.reaction_was_crouching = self.crouching;
+        self.reaction_landed = false;
+        self.super_reaction = false;
         self.velocity.x = 0.0;
         self.whiff_recovery_timer = 0.0;
         if blocked {
@@ -668,8 +928,25 @@ impl Fighter {
         }
 
         self.attack = None;
+        self.special_visual_timer = 0.0;
         self.blocking = false;
+        self.blockstun_timer = 0.0;
+        self.hit_reaction_kind = HitReactionKind::Hit;
         self.hitstun_timer = hit_reaction.hitstun.as_seconds();
+        if !self.grounded {
+            let direction = if self.facing == Facing::Right {
+                -1.0
+            } else {
+                1.0
+            };
+            self.begin_launch(
+                Vec2::new(
+                    direction * world_px(105.0),
+                    self.velocity.y.min(world_px(-180.0)),
+                ),
+                HitReactionKind::Launched,
+            );
+        }
         hit_reaction.hit_pushback
     }
 
@@ -678,7 +955,10 @@ impl Fighter {
     }
 
     fn is_action_locked(&self) -> bool {
-        self.is_reacting() || self.in_whiff_recovery()
+        self.is_reacting()
+            || self.capture_role.is_some()
+            || self.in_whiff_recovery()
+            || self.special_visual_timer > 0.0
     }
 
     fn start_whiff_recovery(&mut self, spec: MoveSpec) {
@@ -723,6 +1003,8 @@ impl FighterInput {
             heavy_punch: false,
             kick: false,
             projectile: false,
+            signature_special: false,
+            cinematic_special: false,
             ..self
         }
     }
@@ -748,7 +1030,11 @@ impl FighterInput {
             };
         }
 
-        let input = if self.block && self.light_punch {
+        let input = if self.cinematic_special {
+            MoveInputKind::CinematicSpecial
+        } else if self.signature_special {
+            MoveInputKind::SignatureSpecial
+        } else if self.block && self.light_punch {
             MoveInputKind::Throw
         } else if self.crouch && self.kick {
             MoveInputKind::Sweep

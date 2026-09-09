@@ -1,0 +1,127 @@
+{
+  "schema": "borrow-fighters.production.v1",
+  "character": "duke",
+  "scale": 1.0,
+  "provenance": {
+    "generator": "built-in imagegen",
+    "intent": "Separate signature projectile and impact VFX; six genuine drawings, no procedural pose or effect synthesis."
+  },
+  "actions": {
+    "projectile": {
+      "sheet": "projectile/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "duke_signature_projectile_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 175,
+            "h": 179
+          },
+          "pivot": {
+            "x": 93,
+            "y": 98
+          },
+          "duration_ms": 80,
+          "phase": "projectile"
+        },
+        {
+          "name": "duke_signature_projectile_01",
+          "source_rect": {
+            "x": 175,
+            "y": 0,
+            "w": 161,
+            "h": 179
+          },
+          "pivot": {
+            "x": 94,
+            "y": 96
+          },
+          "duration_ms": 80,
+          "phase": "projectile"
+        }
+      ],
+      "provenance": {
+        "source_action": "projectile/action.json",
+        "source_sheet": "keyed-spectacle-v2.png",
+        "scale_to_runtime": 0.35,
+        "review": "Reviewed separated sprite drawings and alpha. Duke center anchor; C floor anchor. Uniform per-clip scale; no frame fitting."
+      }
+    },
+    "impact": {
+      "sheet": "impact/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "duke_signature_impact_02",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 196,
+            "h": 174
+          },
+          "pivot": {
+            "x": 102,
+            "y": 97
+          },
+          "duration_ms": 70,
+          "phase": "impact"
+        },
+        {
+          "name": "duke_signature_impact_03",
+          "source_rect": {
+            "x": 196,
+            "y": 0,
+            "w": 174,
+            "h": 174
+          },
+          "pivot": {
+            "x": 88,
+            "y": 74
+          },
+          "duration_ms": 100,
+          "phase": "impact"
+        },
+        {
+          "name": "duke_signature_impact_04",
+          "source_rect": {
+            "x": 392,
+            "y": 0,
+            "w": 174,
+            "h": 174
+          },
+          "pivot": {
+            "x": 82,
+            "y": 76
+          },
+          "duration_ms": 120,
+          "phase": "impact"
+        },
+        {
+          "name": "duke_signature_impact_05",
+          "source_rect": {
+            "x": 588,
+            "y": 0,
+            "w": 174,
+            "h": 174
+          },
+          "pivot": {
+            "x": 80,
+            "y": 78
+          },
+          "duration_ms": 150,
+          "phase": "impact"
+        }
+      ],
+      "provenance": {
+        "source_action": "impact/action.json",
+        "source_sheet": "keyed-spectacle-v2.png",
+        "scale_to_runtime": 0.34,
+        "review": "Reviewed separated sprite drawings and alpha. Duke center anchor; C floor anchor. Uniform per-clip scale; no frame fitting."
+      }
+    }
+  }
+}

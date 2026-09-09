@@ -1,0 +1,742 @@
+{
+  "character": "python",
+  "status": "runtime_verified_spectacle",
+  "review_date": "2026-09-08",
+  "render_size": [
+    1280,
+    720
+  ],
+  "notes": "Authored sprites inspected in real contextual World contacts, both facings, without debug geometry. Corrected lift arms meet victim at capture. Physics supplies levitation, launch, side switch and landing. Full raw screenshots stay in /tmp; only curated originals and all JSON reports are committed.",
+  "cases": [
+    {
+      "case": "own-right-signature_special",
+      "result": "Hit { damage: 20 }",
+      "contact_tick": 64,
+      "capture_count": 259,
+      "report": "reports/own-right-signature_special.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-extraordinary-final/python/right/signature_special"
+    },
+    {
+      "case": "own-right-throw",
+      "result": "Hit { damage: 10 }",
+      "contact_tick": 62,
+      "capture_count": 56,
+      "report": "reports/own-right-throw.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-extraordinary-final/python/right/throw"
+    },
+    {
+      "case": "own-right-anti_air",
+      "result": "Hit { damage: 11 }",
+      "contact_tick": 59,
+      "capture_count": 47,
+      "report": "reports/own-right-anti_air.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-extraordinary-final/python/right/anti_air"
+    },
+    {
+      "case": "own-right-heavy_punch",
+      "result": "Hit { damage: 15 }",
+      "contact_tick": 62,
+      "capture_count": 46,
+      "report": "reports/own-right-heavy_punch.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-extraordinary-final/python/right/heavy_punch"
+    },
+    {
+      "case": "received-right-throw",
+      "result": "Hit { damage: 11 }",
+      "contact_tick": 62,
+      "capture_count": 35,
+      "report": "reports/received-right-throw.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/c-throw-right"
+    },
+    {
+      "case": "received-right-anti_air",
+      "result": "Hit { damage: 13 }",
+      "contact_tick": 60,
+      "capture_count": 44,
+      "report": "reports/received-right-anti_air.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/c-anti_air-right"
+    },
+    {
+      "case": "received-right-heavy_punch",
+      "result": "Hit { damage: 17 }",
+      "contact_tick": 64,
+      "capture_count": 46,
+      "report": "reports/received-right-heavy_punch.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/c-heavy_punch-right"
+    },
+    {
+      "case": "own-left-signature_special",
+      "result": "Hit { damage: 20 }",
+      "contact_tick": 64,
+      "capture_count": 50,
+      "report": "reports/own-left-signature_special.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-extraordinary-final/python/left/signature_special"
+    },
+    {
+      "case": "own-left-throw",
+      "result": "Hit { damage: 10 }",
+      "contact_tick": 62,
+      "capture_count": 56,
+      "report": "reports/own-left-throw.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-extraordinary-final/python/left/throw"
+    },
+    {
+      "case": "own-left-anti_air",
+      "result": "Hit { damage: 11 }",
+      "contact_tick": 59,
+      "capture_count": 47,
+      "report": "reports/own-left-anti_air.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-extraordinary-final/python/left/anti_air"
+    },
+    {
+      "case": "own-left-heavy_punch",
+      "result": "Hit { damage: 15 }",
+      "contact_tick": 62,
+      "capture_count": 46,
+      "report": "reports/own-left-heavy_punch.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-extraordinary-final/python/left/heavy_punch"
+    },
+    {
+      "case": "received-left-throw",
+      "result": "Hit { damage: 11 }",
+      "contact_tick": 62,
+      "capture_count": 35,
+      "report": "reports/received-left-throw.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/c-throw-left"
+    },
+    {
+      "case": "received-left-anti_air",
+      "result": "Hit { damage: 13 }",
+      "contact_tick": 60,
+      "capture_count": 44,
+      "report": "reports/received-left-anti_air.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/c-anti_air-left"
+    },
+    {
+      "case": "received-left-heavy_punch",
+      "result": "Hit { damage: 17 }",
+      "contact_tick": 64,
+      "capture_count": 46,
+      "report": "reports/received-left-heavy_punch.json",
+      "raw_capture_directory": "/tmp/borrow-fighters-duke-c-spectacle-final/c-heavy_punch-left"
+    }
+  ],
+  "coverage": {
+    "signature_special": [
+      "signature_special_00",
+      "signature_special_01",
+      "signature_special_02",
+      "signature_special_03",
+      "signature_special_04",
+      "signature_special_05",
+      "signature_special_06",
+      "signature_special_07"
+    ],
+    "throw": [
+      "throw_00",
+      "throw_01",
+      "throw_02",
+      "throw_03",
+      "throw_04",
+      "throw_05"
+    ],
+    "thrown": [
+      "thrown_00",
+      "thrown_01",
+      "thrown_02",
+      "thrown_03"
+    ],
+    "launched": [
+      "launched_00",
+      "launched_01",
+      "launched_02",
+      "launched_03"
+    ],
+    "heavy_hit": [
+      "heavy_hit_00",
+      "heavy_hit_01",
+      "heavy_hit_02"
+    ]
+  },
+  "curated": [
+    {
+      "case": "own-right-signature_special",
+      "image": "own-right-signature_special-python-11-attacksignaturespecial-f063.png",
+      "tick": 63,
+      "actors": [
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "python",
+          "clip": "signature_special",
+          "crouching": false,
+          "frame": "signature_special_03",
+          "frame_clip": "signature_special",
+          "grounded": false,
+          "health": 96,
+          "hitstun": false,
+          "position": [
+            385.3332824707031,
+            360.8887939453125
+          ]
+        },
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "cpp",
+          "clip": "walk",
+          "crouching": false,
+          "frame": "walk_2",
+          "frame_clip": "walk",
+          "grounded": true,
+          "health": 98,
+          "hitstun": false,
+          "position": [
+            608.740478515625,
+            392.0
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "elapsed": 0.11666666716337204,
+          "kind": "PythonVortex",
+          "position": [
+            522.6666259765625,
+            616.0
+          ]
+        }
+      ],
+      "result": "Pending",
+      "source_png_sha256": "06fafd5fe1425a48842c8dbded6569ddb5abe701b802262830da9ec0614f878e"
+    },
+    {
+      "case": "own-right-throw",
+      "image": "own-right-throw-python-09-attackthrow-f068.png",
+      "tick": 68,
+      "actors": [
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "python",
+          "clip": "throw",
+          "crouching": false,
+          "frame": "throw_02",
+          "frame_clip": "throw",
+          "grounded": true,
+          "health": 96,
+          "hitstun": false,
+          "position": [
+            599.0370483398438,
+            392.0
+          ]
+        },
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": true,
+          "character": "cpp",
+          "clip": "thrown",
+          "crouching": false,
+          "frame": "thrown_00",
+          "frame_clip": "thrown",
+          "grounded": true,
+          "health": 88,
+          "hitstun": true,
+          "position": [
+            665.0370483398438,
+            264.0
+          ]
+        }
+      ],
+      "effects": [],
+      "result": "Hit { damage: 10 }",
+      "source_png_sha256": "280f8bf044c5d08c3e42465444f3c2f8f32366a339267c8f05e24d98859c17cf"
+    },
+    {
+      "case": "own-left-signature_special",
+      "image": "own-left-signature_special-python-11-attacksignaturespecial-f061.png",
+      "tick": 61,
+      "actors": [
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "python",
+          "clip": "signature_special",
+          "crouching": false,
+          "frame": "signature_special_03",
+          "frame_clip": "signature_special",
+          "grounded": false,
+          "health": 96,
+          "hitstun": false,
+          "position": [
+            793.3333129882812,
+            369.7777099609375
+          ]
+        },
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "cpp",
+          "clip": "walk",
+          "crouching": false,
+          "frame": "walk_2",
+          "frame_clip": "walk",
+          "grounded": true,
+          "health": 98,
+          "hitstun": false,
+          "position": [
+            557.4815673828125,
+            392.0
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "elapsed": 0.0833333358168602,
+          "kind": "PythonVortex",
+          "position": [
+            757.3333129882812,
+            616.0
+          ]
+        }
+      ],
+      "result": "Pending",
+      "source_png_sha256": "855290e355362ffba367977b14db33892bf6187a6e61035ce086488c04672455"
+    },
+    {
+      "case": "own-left-throw",
+      "image": "own-left-throw-python-09-attackthrow-f068.png",
+      "tick": 68,
+      "actors": [
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "python",
+          "clip": "throw",
+          "crouching": false,
+          "frame": "throw_02",
+          "frame_clip": "throw",
+          "grounded": true,
+          "health": 96,
+          "hitstun": false,
+          "position": [
+            579.6294555664062,
+            392.0
+          ]
+        },
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": true,
+          "character": "cpp",
+          "clip": "thrown",
+          "crouching": false,
+          "frame": "thrown_00",
+          "frame_clip": "thrown",
+          "grounded": true,
+          "health": 88,
+          "hitstun": true,
+          "position": [
+            513.6294555664062,
+            264.0
+          ]
+        }
+      ],
+      "effects": [],
+      "result": "Hit { damage: 10 }",
+      "source_png_sha256": "612e201464238e6541abf985fdc87c0f4414530ecbc821766078ed188bc3eeca"
+    },
+    {
+      "case": "own-right-signature_special",
+      "image": "own-right-signature_special-python-11-attacksignaturespecial-f068.png",
+      "tick": 68,
+      "actors": [
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "python",
+          "clip": "signature_special",
+          "crouching": false,
+          "frame": "signature_special_04",
+          "frame_clip": "signature_special",
+          "grounded": false,
+          "health": 96,
+          "hitstun": false,
+          "position": [
+            385.3332824707031,
+            338.66650390625
+          ]
+        },
+        {
+          "air_reaction": true,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "cpp",
+          "clip": "launched",
+          "crouching": false,
+          "frame": "launched_00",
+          "frame_clip": "launched",
+          "grounded": false,
+          "health": 78,
+          "hitstun": true,
+          "position": [
+            638.0738525390625,
+            325.89739990234375
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "elapsed": 0.06666667014360428,
+          "kind": "PythonVortex",
+          "position": [
+            522.6666259765625,
+            616.0
+          ]
+        }
+      ],
+      "result": "Hit { damage: 20 }",
+      "source_png_sha256": "2c52c7cd29260f1e5ee37f4a0f460d87590ac539e767599230e8d82ef36fa914"
+    },
+    {
+      "case": "received-right-throw",
+      "image": "received-right-throw-c-09-attackthrow-f074.png",
+      "tick": 74,
+      "actors": [
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "c",
+          "clip": "throw",
+          "crouching": false,
+          "frame": "throw_spectacle_03",
+          "frame_clip": "throw",
+          "grounded": true,
+          "health": 104,
+          "hitstun": false,
+          "position": [
+            579.6294555664062,
+            392.0
+          ]
+        },
+        {
+          "air_reaction": true,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "python",
+          "clip": "thrown",
+          "crouching": false,
+          "frame": "thrown_01",
+          "frame_clip": "thrown",
+          "grounded": false,
+          "health": 85,
+          "hitstun": true,
+          "position": [
+            559.6294555664062,
+            136.0
+          ]
+        }
+      ],
+      "effects": [],
+      "result": "Hit { damage: 11 }",
+      "source_png_sha256": "ce0c27d958457b0bd721bb1089dadae450746c2476a23161a88e7479d9a888c2"
+    },
+    {
+      "case": "received-right-anti_air",
+      "image": "received-right-anti_air-c-06-attackantiair-f068.png",
+      "tick": 68,
+      "actors": [
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "c",
+          "clip": "anti_air",
+          "crouching": false,
+          "frame": "anti_air_2",
+          "frame_clip": "anti_air",
+          "grounded": true,
+          "health": 104,
+          "hitstun": false,
+          "position": [
+            739.9999389648438,
+            392.0
+          ]
+        },
+        {
+          "air_reaction": true,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "python",
+          "clip": "launched",
+          "crouching": false,
+          "frame": "launched_01",
+          "frame_clip": "launched",
+          "grounded": false,
+          "health": 83,
+          "hitstun": true,
+          "position": [
+            556.1110229492188,
+            142.13494873046875
+          ]
+        }
+      ],
+      "effects": [],
+      "result": "Hit { damage: 13 }",
+      "source_png_sha256": "c32a3aeb1faf18c79161b0866c8c96f9bee644cb8c9ca928066f0d67faa9bc54"
+    },
+    {
+      "case": "received-right-heavy_punch",
+      "image": "received-right-heavy_punch-c-02-attackheavypunch-f070.png",
+      "tick": 70,
+      "actors": [
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "c",
+          "clip": "punch_heavy",
+          "crouching": false,
+          "frame": "punch_heavy_1",
+          "frame_clip": "punch_heavy",
+          "grounded": true,
+          "health": 104,
+          "hitstun": false,
+          "position": [
+            716.407470703125,
+            392.0
+          ]
+        },
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "python",
+          "clip": "heavy_hit",
+          "crouching": false,
+          "frame": "heavy_hit_01",
+          "frame_clip": "heavy_hit",
+          "grounded": true,
+          "health": 79,
+          "hitstun": true,
+          "position": [
+            548.407470703125,
+            392.0
+          ]
+        }
+      ],
+      "effects": [],
+      "result": "Hit { damage: 17 }",
+      "source_png_sha256": "742f020da9eddb9f55e648e6df2f6af4728e5066ac9c1bf3e0480fb6e41225f6"
+    },
+    {
+      "case": "received-right-throw",
+      "image": "received-right-throw-c-09-attackthrow-f085.png",
+      "tick": 85,
+      "actors": [
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "c",
+          "clip": "throw",
+          "crouching": false,
+          "frame": "throw_spectacle_04",
+          "frame_clip": "throw",
+          "grounded": true,
+          "health": 104,
+          "hitstun": false,
+          "position": [
+            579.6294555664062,
+            392.0
+          ]
+        },
+        {
+          "air_reaction": true,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "python",
+          "clip": "thrown",
+          "crouching": false,
+          "frame": "thrown_02",
+          "frame_clip": "thrown",
+          "grounded": false,
+          "health": 85,
+          "hitstun": true,
+          "position": [
+            618.6624755859375,
+            108.92776489257812
+          ]
+        }
+      ],
+      "effects": [],
+      "result": "Hit { damage: 11 }",
+      "source_png_sha256": "6fbbcae10e2cebefa575b005cf7554409f06d304e32f9a7e44e36794871f8c6a"
+    },
+    {
+      "case": "received-right-throw",
+      "image": "received-right-throw-c-09-attackthrow-f110.png",
+      "tick": 110,
+      "actors": [
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "c",
+          "clip": "idle",
+          "crouching": false,
+          "frame": "idle_1",
+          "frame_clip": "idle",
+          "grounded": true,
+          "health": 104,
+          "hitstun": false,
+          "position": [
+            578.0291137695312,
+            392.0
+          ]
+        },
+        {
+          "air_reaction": true,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "python",
+          "clip": "thrown",
+          "crouching": false,
+          "frame": "thrown_03",
+          "frame_clip": "thrown",
+          "grounded": false,
+          "health": 85,
+          "hitstun": true,
+          "position": [
+            754.4287719726562,
+            322.39996337890625
+          ]
+        }
+      ],
+      "effects": [],
+      "result": "Hit { damage: 11 }",
+      "source_png_sha256": "2b1ca2999d731a8806881af235d91839f68e1ff1098ae23701946287f9f3ac47"
+    },
+    {
+      "case": "received-right-throw",
+      "image": "received-right-throw-c-09-attackthrow-f114.png",
+      "tick": 114,
+      "actors": [
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "c",
+          "clip": "idle",
+          "crouching": false,
+          "frame": "idle_1",
+          "frame_clip": "idle",
+          "grounded": true,
+          "health": 104,
+          "hitstun": false,
+          "position": [
+            578.0291137695312,
+            392.0
+          ]
+        },
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "python",
+          "clip": "knockdown",
+          "crouching": false,
+          "frame": "knockdown_01",
+          "frame_clip": "knockdown",
+          "grounded": true,
+          "health": 85,
+          "hitstun": true,
+          "position": [
+            775.8953247070312,
+            392.0
+          ]
+        }
+      ],
+      "effects": [],
+      "result": "Hit { damage: 11 }",
+      "source_png_sha256": "415c36069122b0fd3d2c55be4abca9823bc054aa0b00bcd77b46c0fbc992cdd8"
+    },
+    {
+      "case": "received-left-heavy_punch",
+      "image": "received-left-heavy_punch-c-02-attackheavypunch-f070.png",
+      "tick": 70,
+      "actors": [
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "c",
+          "clip": "punch_heavy",
+          "crouching": false,
+          "frame": "punch_heavy_1",
+          "frame_clip": "punch_heavy",
+          "grounded": true,
+          "health": 104,
+          "hitstun": false,
+          "position": [
+            462.25909423828125,
+            392.0
+          ]
+        },
+        {
+          "air_reaction": false,
+          "blocking": false,
+          "blockstun": false,
+          "captured": false,
+          "character": "python",
+          "clip": "heavy_hit",
+          "crouching": false,
+          "frame": "heavy_hit_01",
+          "frame_clip": "heavy_hit",
+          "grounded": true,
+          "health": 79,
+          "hitstun": true,
+          "position": [
+            630.2590942382812,
+            392.0
+          ]
+        }
+      ],
+      "effects": [],
+      "result": "Hit { damage: 17 }",
+      "source_png_sha256": "531a31b785dae106ecb197f0e787a89e8de81e73f692efbbb29418ffa1643e35"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "tool": "built-in imagegen",
+  "source": "/home/willams/.codex/generated_images/01a08339-7fe6-7293-8023-8cb6ff3a3f76/exec-f42fa8e5-79bd-4b26-a496-96338ad35e8f.png",
+  "output": "assets/production/super-sequences/cpp/laptop.png",
+  "sha256": "3cd0324209c4461c3d3625bb464dc5f8df18d16d61edab1de4ff64fcb920a9de",
+  "mode": "RGBA",
+  "size": [
+    1536,
+    1024
+  ],
+  "alpha_range": [
+    0,
+    254
+  ],
+  "cell_alpha_bounds": [
+    [
+      41,
+      0,
+      471,
+      512
+    ],
+    [
+      517,
+      0,
+      507,
+      512
+    ],
+    [
+      1025,
+      0,
+      491,
+      512
+    ],
+    [
+      0,
+      512,
+      512,
+      512
+    ],
+    [
+      519,
+      512,
+      499,
+      497
+    ],
+    [
+      1053,
+      512,
+      469,
+      496
+    ]
+  ]
+}

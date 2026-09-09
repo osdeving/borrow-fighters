@@ -1,0 +1,73 @@
+{
+  "action": "punch_light",
+  "source": null,
+  "sheet": null,
+  "loop": false,
+  "reviewed": false,
+  "status": "planning placeholder; no new image generated, no source geometry approved",
+  "source_body_height_reference_px": null,
+  "suggested_scale_to_runtime": null,
+  "replacement_contract": "../action-contracts.json#/actions/punch_light",
+  "references": {
+    "new_master": null,
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
+  "frames": [
+    {
+      "name": "punch_light_00",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 50,
+      "phase": "startup"
+    },
+    {
+      "name": "punch_light_01",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 83,
+      "phase": "active"
+    },
+    {
+      "name": "punch_light_02",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 100,
+      "phase": "recovery"
+    }
+  ],
+  "generation_brief": "Compact elbow extension: active knuckles must fit the short baseline box, without moving the whole body to fake reach.",
+  "review_notes": "Fill source rectangles, source pivots and one measured action scale only after viewing real generated pixels. This skeleton is not exportable art.",
+  "timing_reference": {
+    "move_id": "GoGoroutineJab",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 14,
+      "active_start": 3,
+      "active_end": 7
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 50,
+      "recovery_starts": 133,
+      "clip_ends": 233
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -141.33333333333334,
+      "w": 56.0,
+      "h": 40.0
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -106.66666666666666,
+      "y": -141.33333333333334,
+      "w": 56.0,
+      "h": 40.0
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 78.66666666666666,
+      "y": -121.33333333333334
+    }
+  }
+}

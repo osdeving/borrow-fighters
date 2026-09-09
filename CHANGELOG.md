@@ -1,5 +1,75 @@
 # Changelog
 
+## v0.1.0-prototype.2 — Assets em pastas com acentos no Windows
+
+- Corrige imagens e áudio ausentes quando a pasta de instalação ou de usuário
+  contém acentos. Antes, a luta podia mostrar lutadores em blocos e apenas
+  linhas do cenário, embora os arquivos estivessem no pacote.
+- Incorpora `activeCodePage=UTF-8` ao executável Windows e adiciona regressão
+  do carregamento nativo de imagem em caminhos Unicode. Requer Windows 10
+  1903+ ou Windows 11.
+- Mantém o conteúdo do playtest; [instruções e downloads da correção](docs/releases/v0.1.0-prototype.2.md).
+
+## v0.1.0-prototype.1 — Distribuição para playtest
+
+- Instalador por usuário e ZIP para Windows x86_64; DEB, RPM e tar.gz para Linux.
+- Assets de runtime selecionados, bibliotecas redistribuíveis, créditos, licenças
+  e fontes correspondentes acompanham os pacotes. Não é preciso compilar para jogar.
+- Guia de primeira abertura e menu Como jogar com modos contra CPU, duelo local
+  e demo; entrada normal com P1 manual.
+- Assets localizados pela instalação; capturas e marcador de boas-vindas no
+  diretório de dados do usuário.
+- Workflow de build/checks por plataforma, instaladores verificados e publicação
+  por tag com SHA256 e [notas para jogadores](docs/releases/v0.1.0-prototype.1.md).
+
+
+## Correção 2026-09-09 — Reações com dano desligado
+
+- Desligar `Player recebe dano` preserva HP e mantém reações, guarda, empurrão,
+  arremesso, lançamento e feedback de contato. Antes a opção também impedia
+  ativar a animação, deixando o defensor em idle durante os golpes.
+
+## Rodada 2026-09-09 — Reações próprias Python × C++
+
+- Reações articuladas de cabeça, tronco, perna, defesa alta/baixa, voo, queda e
+  recuperação com desenhos próprios para as duas personagens.
+- Cada pancada da rajada de C++ reinicia uma resposta de nove frames; ataque,
+  impacto e reação compartilham a mesma agenda, sem alterar dano ou stun físico.
+- Showcase de C++ agora usa Python como adversária, permitindo testar o par nos
+  dois sentidos. Capturas registram cada contato e sua progressão em movimento.
+- [Padrão e critérios](docs/25-python-cpp-contact-reactions.md) e
+  [decisão técnica](docs/adr/0018-contact-reaction-profiles.md). Os demais lutadores
+  aguardam a próxima rodada desse padrão visual.
+
+## Rodada 2026-09-09 — Reações e transformações
+
+- Relógio próprio de reação para todos os seis defensores; acertos interrompem a pose anterior, com recoil, voo, impacto no chão e recuperação legíveis.
+- Python ganha `import devour`: transformação em cobra gigante azul/amarela, bote, deglutição, retorno e salto/sinal de paz, com 32 desenhos específicos.
+- C++ abre notebook, digita um pequeno programa com ponteiro nulo e expande a Footgun com terminais, BSOD e BIOS herdados de C.
+- Rust substitui a arena em blocos por Sirius de forma persistente na partida; música, identificação e ambientação acompanham a troca, sem bônus de combate.
+- Sons por fase, defesa/KO/reset e previews preservados; vozes aprovadas de Duke/Python intactas.
+- Replay de especial interrompido reinicia a ordem dos efeitos de fase, evitando
+  trocar transformação e crescimento de Python; a variação das vozes comuns é preservada.
+- Banner do super descreve seu roteiro, sem confundir a arena natal do personagem
+  com o cenário atual da luta.
+- [Roteiros e comportamento](docs/24-reactions-and-transformations.md),
+  [evidências de verificação](docs/evidence/reactions-transformations/README.md)
+  e [demonstração com áudio](assets/showcase/reactions-transformations-2026-09-09.mp4).
+
+## Rodada 2026-09-09 — Supers autorais
+
+- Quatro roteiros com captura, entrada congelada, pausa/retomada da música,
+  guarda preservada e dano reduzido por bloqueio; sem KO por chip.
+- Garbage Collector de Duke: lixo caindo, clones coletando/comendo e queda gigante.
+- Ownership Eclipse: apagão breve e estruturas do Sirius transformando o cenário.
+- General Protection Fault de Old C: terminais, tela azul e BIOS de reboot.
+- Footgun de C++: bazuca no próprio pé, pulinhos, raiva, corrida e rajada de golpes.
+- Atlas exclusivos de Duke/C++, lixo e estruturas de Rust, com prompts e procedência.
+- Vozes distintas pesquisadas para Rust, Old C, Go e C++; Duke/Python preservados.
+- Sons por fase e preview integral no Combat Lab e Move Showcase.
+- Leitura de frames em blocos para reduzir o custo da gravação F9.
+- [Plano, catálogo e validação](docs/23-authored-super-sequences.md).
+
 Todas as mudanças relevantes do projeto devem ser registradas aqui.
 
 O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré-produção.
@@ -8,6 +78,28 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 
 ### Adicionado
 
+- Seis especiais cinematográficos adicionais: Ownership Eclipse, JVM Overdrive,
+  Million Goroutines, Kernel Panic, Event Horizon e Template Singularity, com
+  efeitos de tela inteira e um único contato local bloqueável. Entrada `Y` / `]`
+  / `LB+RT`, CLI `--move cinematic_special`, Combat Lab e showcase.
+- Caramelo brasileiro de pelo curto em corrida animada, cameo gestual de “Já
+  acabou, Jéssica?” em São Paulo e detalhes de memes discretos nas seis arenas;
+  opção `Vida nos cenarios` e Sirius revisado sem o cachorro estático anterior.
+- Fontes Barlow/Lora incorporadas com licença OFL, glifos portugueses, atlas de
+  alta resolução e filtragem por mipmaps; logo, retratos, contagem e fundos
+  pintados das arenas suavizados na escala de apresentação.
+- HUD renovado com barras espelhadas, banner de vitória, dicas de controles e
+  menus com descrições e geometria ajustada para navegação por teclado e mouse.
+
+- Showcase contextual com dois lutadores no combate real, 11 ataques e quatro exemplos de defesa por personagem da demo, resultado de contato, áudio real, repetição, espelhamento, pausa e avanço de frame.
+- Entrada direta `--showcase --character ... --move ...`, com `--repeat` e `--reverse`; `L` repete, `X` espelha e `PageUp/PageDown` troca personagem.
+- Cinco especiais de assinatura com oito poses e efeitos animados separados: Borrow Fortress, System.out.println!, Segmentation Fault, import antigravity e Undefined Bazooka. Sempre acessíveis com `T`/Backslash/`RT`, sem medidor; o projétil comum mantém seus controles.
+- Arremesso real que pune guarda, captura, levanta e lança por cima para trocar os lados; pouso seguro nos cantos e KO que aguarda aterrissagem. Novas poses de atacante e vítima nos cinco.
+- Reações específicas `heavy_hit`, `launched`, `thrown` e recuperação protegida `knockdown`; ganchos lançam de verdade e a vítima permanece sem controle até pousar.
+- Showcase de 260 frames por situação, soma dos três pulsos Java e painel inferior que deixa o espaço aéreo livre.
+- Auditoria determinística de 60 lutas espelhadas, evidência em CSV e testes de contrajogo, guarda, postura baixa e contatos reais do showcase.
+
+- Navegação dos menus com hover, clique esquerdo para ativar e clique direito para voltar valores ajustáveis.
 - Base inicial de documentação docs-first.
 - Governança proposta para PRs, branches, labels, squads e releases.
 - Templates de contribuição para GitHub, arte, personagens, ADR e release.
@@ -95,6 +187,23 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 - Submenu `Lore / Roster`, com livro do Linker, capítulos, fichas de personagem e retratos placeholder de Rust, Duke/Java, C e Python.
 - JSON runtime `assets/lore/story.json` para editar história e roster sem recompilar o jogo.
 - Clips CC0 adicionais e bindings específicos para deixar golpes de Rust e Duke/Java audíveis por move, sem depender só do fallback curto.
+
+### Corrigido
+
+- Prioridade indevida de Player 1 em especiais simultâneos e direção frontal da proteção de Rust em curta distância.
+- Vítima flutuando na aterrissagem, reset em pé no KO aéreo e cortes laterais das poses de reação.
+- Levantamento com mãos afastadas da vítima: poses de apoio regeneradas e conferidas nas duas direções.
+
+- Sparks e dano flutuante posicionados no contato real entre hitbox e hurtbox antes do pushback, incluindo rasteira, anti-air e projétil.
+
+- Retângulos de reação/guarda e limites da arena exibidos com debug desligado; a luta limpa mantém sprites, tintas, luzes e impactos sem essas caixas.
+- Rasteiras que voltavam à postura alta durante o ataque; hitboxes revisadas e hurtboxes baixas agora coincidem entre combate e debug.
+- Guarda abaixada perdida durante blockstun, blockstun residual após quebra por overhead, chip encerrando luta e agarrões atingindo saltos ou recuperação protegida.
+- Conjuração de projétil sobreposta a ataques, pulo ou guarda; um impacto também cancela sua pose.
+- Ataques acompanhando automaticamente o adversário que saltava por cima e comandos perdidos entre renderização e tick de combate; presses da luta são consumidos uma vez, mesmo quando um frame de renderização exige vários ticks.
+
+- Cursor reposicionado no centro a cada quadro, que deixava o `Linker` parado e impedia alcançar o botão de fechar da janela.
+- Overlay `Linker` residual ao tirar o foco ou mover o mouse para fora da janela.
 
 ### Em aberto
 

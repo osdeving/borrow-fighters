@@ -1,134 +1,122 @@
 # 06 — Processo de Release
 
-## Status
+## Estado atual
 
-Proposto para o dia 0.
+O corte atual é `v0.1.0-prototype.2`: corrige imagens e áudio ausentes ao abrir
+o jogo em pastas com acentos no Windows. A estabilização continua na branch
+`release/v0.1.0-prototype.1`, pelo PR #18. A [ADR 0019](adr/0019-playtest-distribution.md)
+registra as decisões de plataforma, bibliotecas, assets e primeira abertura.
+As [notas da versão](releases/v0.1.0-prototype.2.md) explicam a entrega ao jogador;
+as [notas do primeiro pacote](releases/v0.1.0-prototype.1.md) ficam como histórico.
 
-O objetivo é criar um processo simples o bastante para não travar o protótipo, mas forte o bastante para manter histórico, versão e escopo sob controle.
+## Downloads
 
-## Tipos de release
-
-| Tipo | Exemplo | Objetivo |
+| Plataforma | Pacotes | Base de compatibilidade |
 |---|---|---|
-| Docs foundation | `v0.0.1-docs` | Marcar base de documentação e governança |
-| Prototype | `v0.1.0-prototype.1` | Validar mecânica central jogável |
-| Vertical slice | `v0.2.0-slice.1` | Demonstrar identidade mínima de gameplay e arte |
-| Demo | `v0.3.0-demo.1` | Empacotar experiência compartilhável |
+| Windows x86_64 | Instalador Inno Setup e ZIP portátil | Windows 10 1903+ ou Windows 11, driver OpenGL 3.3 |
+| Debian/Ubuntu x86_64 | DEB | Debian 12+, Ubuntu 22.04+ e derivados |
+| Fedora x86_64 | RPM | Fedora 44 como ambiente de verificação |
+| Linux x86_64 | tar.gz portátil | glibc 2.35+, X11/XWayland e driver OpenGL 3.3 |
 
-Enquanto o jogo estiver em pré-produção, versões podem quebrar formato, escopo e estrutura. O compromisso é registrar a mudança.
+Windows usa Raylib e CRT estáticos, com instalação por usuário e desinstalador.
+O executável incorpora um manifesto com `activeCodePage=UTF-8`, para as APIs
+nativas abrirem imagens e áudio em caminhos como `Jogos/ação çãõ`.
+Linux inclui bibliotecas redistribuíveis de X11/áudio; libc e drivers gráficos
+permanecem no sistema. Os pacotes incluem os assets usados pelo runtime e suas
+referências transitivas, sem vídeos de revisão e materiais de produção.
+FFmpeg é opcional e não acompanha a release. Sprite Studio é ferramenta separada.
 
-## Fonte de verdade
+Créditos, textos de licença e fontes correspondentes acompanham os pacotes.
+Os textos `LICENSE-MIT`/`LICENSE-APACHE` formalizam a escolha já declarada no
+`Cargo.toml`; assets e bibliotecas mantêm seus próprios créditos e termos.
 
-- **Milestones do GitHub** agrupam escopo.
-- **Issues** descrevem trabalho e discussão.
-- **PRs** carregam revisão e histórico.
-- **Conventional Commits** tornam o histórico legível e ajudam a gerar notas de release.
-- **Tags** marcam versões.
-- **GitHub Releases** comunicam o que mudou.
-- **CHANGELOG.md** resume marcos importantes.
+## Versão e branch
 
-## Convenção de versão
-
-Usar tags no formato:
-
-```text
-vMAJOR.MINOR.PATCH-sufixo.N
-```
-
-Exemplos:
-
-- `v0.0.1-docs`
-- `v0.1.0-prototype.1`
-- `v0.1.0-prototype.2`
-- `v0.2.0-slice.1`
-
-## Fluxo de release
-
-1. Criar ou revisar milestone no GitHub.
-2. Definir objetivo da versão em uma frase.
-3. Cortar escopo explicitamente.
-4. Fechar ou mover issues que não entram.
-5. Criar branch `release/vX.Y.Z` apenas quando houver estabilização real.
-6. Abrir PR de release para atualizar docs, checklist e changelog.
-7. Revisar com Core Steward e Production / Release.
-8. Criar tag.
-9. Publicar GitHub Release usando as notas geradas.
-10. Registrar aprendizados e próximos riscos.
-
-## Commits e changelog
-
-O projeto usa Conventional Commits para facilitar leitura de histórico, squash merge e release notes.
-
-Mapeamento inicial:
-
-| Commit | Release notes |
-|---|---|
-| `feat` | Novidades |
-| `fix` | Correções |
-| `docs` | Documentação |
-| `art` | Arte e direção visual |
-| `ci` | Automação |
-| `build` | Build e empacotamento |
-| `release` | Preparação de versão |
-| `BREAKING CHANGE` ou `!` | Mudanças quebráveis |
-
-No dia 0, a validação é manual durante revisão de PR. Automação pode entrar quando houver CI.
-
-Automação inicial:
-
-- `Validate docs and GitHub YAML`: valida YAML em `.github/` e links Markdown locais.
-- `Conventional Commit title`: valida título de PR antes do merge.
-
-## Critério de pronto para release
-
-Para qualquer release:
-
-- objetivo da versão descrito;
-- milestone revisada;
-- changelog atualizado;
-- issues fora de escopo movidas;
-- riscos conhecidos documentados;
-- PR de release aprovado.
-
-Para release jogável:
-
-- build reproduzível no ambiente principal;
-- instruções de execução atualizadas;
-- teste manual mínimo registrado;
-- assets licenciados ou marcados como placeholder;
-- bugs bloqueantes triados.
-
-## Release branches
-
-Como seguimos Trunk-Based Development adaptado, criar `release/*` somente quando o projeto precisar estabilizar algo antes de publicar. No dia 0, provavelmente tags em `main` bastam.
-
-Regras:
-
-- não adicionar feature nova em `release/*`;
-- aceitar apenas docs de release, correções e cortes de escopo;
-- merge de volta para `main` via PR;
-- deletar branch depois da release, se não houver manutenção ativa.
-
-## GitHub Releases
-
-O arquivo `.github/release.yml` organiza categorias de changelog geradas pelo GitHub.
-
-Labels importantes para release notes:
-
-- `area: gameplay`
-- `area: art`
-- `area: docs`
-- `area: process`
-- `type: bug`
-- `type: release`
-- `breaking`
-
-## Primeira release sugerida
-
-Primeiro marco recomendado:
+Manter a versão idêntica em `Cargo.toml`, `Cargo.lock` e tag, por exemplo:
 
 ```text
-v0.0.1-docs
+0.1.0-prototype.2
+v0.1.0-prototype.2
+release/v0.1.0-prototype.1
 ```
 
-Objetivo: congelar uma base inicial de visão, governança, contribuição, templates e processo de release antes de iniciar código de produção.
+A tag e o pacote avançam para cada correção publicada; a branch de estabilização
+pode continuar com o nome do corte inicial até o merge do PR.
+
+Conventional Commits continuam sendo usados. A branch de release recebe apenas
+empacotamento, instruções, correções e estabilização do corte jogável. O retorno
+para `main` é feito por PR; não manter uma `develop` ou um fork do jogo.
+
+## Fluxo automatizado
+
+O workflow [Playtest Release](../.github/workflows/release.yml) faz:
+
+1. Validar versão e presença de notas em `docs/releases/vVERSAO.md`.
+2. Compilar/testar em Ubuntu 22.04 e Windows 2022 com `Cargo.lock`.
+3. Executar fmt, testes e Clippy em ambas as plataformas.
+4. Selecionar assets, empacotar dependências e preparar os cinco downloads.
+5. Verificar instalação/desinstalação no Windows e carregamento do executável;
+   verificar DEB com inicialização gráfica por Xvfb e instalação RPM no Fedora.
+6. Em push de `release/*`, disponibilizar os pacotes como artefatos do Actions.
+7. Em push de tag, criar release inicialmente em rascunho, anexar todos os
+   downloads e `SHA256SUMS.txt`, e então publicar como pré-release.
+
+O job de publicação recebe `contents: write`; builds usam apenas leitura.
+Uma release já publicada não é sobrescrita pelo workflow. Correções posteriores
+recebem nova versão/tag; um rascunho de tentativa interrompida pode ser retomado.
+Os smoke tests automatizados não substituem playtest humano com GPU e gamepads.
+No Windows, validar também o carregamento nativo de PNG em caminhos com espaços
+e acentos: conferir apenas `std::fs`, JSON ou existência de arquivos não detecta
+a diferença de codificação nas chamadas C usadas pelo Raylib.
+
+## Preparar e publicar
+
+1. Criar `release/vVERSAO` a partir do estado jogável revisado.
+2. Atualizar versões, changelog, backlog e notas para jogadores.
+3. Executar `cargo fmt`, `cargo test --locked --all-targets` e
+   `cargo clippy --locked --all-targets --all-features -- -D warnings`.
+4. Validar links Markdown, YAML e scripts de empacotamento.
+5. Commitar, enviar a branch e abrir PR de retorno para `main`.
+6. Acompanhar o workflow e corrigir falhas antes de criar a tag.
+7. Criar e enviar a tag anotada; conferir a release e os cinco downloads.
+8. Registrar o resultado e recolher feedback dos jogadores.
+
+Exemplo de publicação após os checks:
+
+```sh
+git tag -a v0.1.0-prototype.2 -m 'release: fix Windows Unicode asset paths'
+git push origin v0.1.0-prototype.2
+```
+
+A solicitação explícita do responsável por publicar a release autoriza esse
+fluxo. A revisão do PR preserva a integração posterior em `main`.
+
+## Gerar pacotes localmente
+
+As instruções dos scripts estão em [packaging/README.md](../packaging/README.md).
+É preciso ambiente de build e ferramentas de empacotamento apenas para quem
+produz os pacotes. O jogador instala/extrai o download pronto.
+
+Para verificar integridade depois do download no Linux:
+
+```sh
+sha256sum --check SHA256SUMS.txt --ignore-missing
+```
+
+No PowerShell, use `Get-FileHash CAMINHO -Algorithm SHA256` e compare com a linha
+correspondente em `SHA256SUMS.txt`.
+
+## Critérios de pronto
+
+- Versão e escopo registrados; changelog e notas coerentes com o código.
+- Builds, testes e empacotamento aprovados em ambas as plataformas.
+- Executável abre fora do checkout, com assets completos e dados graváveis.
+- No Windows, PNG e áudio carregam em uma pasta com espaços e acentos.
+- Guia inicial explica como assumir um jogador, reiniciar e sair.
+- Créditos e limitações conhecidos acompanham o download.
+- Cinco pacotes e checksums disponíveis na mesma GitHub pré-release.
+- PR de retorno para `main` aberto, com evidência do que foi verificado.
+
+A configuração [release.yml](../.github/release.yml) preserva categorias para
+notas técnicas geradas pelo GitHub. As notas públicas deste playtest são
+curadas: primeiro download e controles, depois novidades e limitações.

@@ -1,0 +1,73 @@
+{
+  "action": "sweep",
+  "source": null,
+  "sheet": null,
+  "loop": false,
+  "reviewed": false,
+  "status": "planning placeholder; no new image generated, no source geometry approved",
+  "source_body_height_reference_px": null,
+  "suggested_scale_to_runtime": null,
+  "replacement_contract": "../action-contracts.json#/actions/sweep",
+  "references": {
+    "new_master": null,
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
+  "frames": [
+    {
+      "name": "sweep_00",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 166,
+      "phase": "startup"
+    },
+    {
+      "name": "sweep_01",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "sweep_02",
+      "source_rect": null,
+      "pivot": null,
+      "duration_ms": 217,
+      "phase": "recovery"
+    }
+  ],
+  "generation_brief": "Low supported torso and extended sweeping foot meeting the existing elevated active box. The engine uses standing attack body height; do not move the box to the ground.",
+  "review_notes": "Fill source rectangles, source pivots and one measured action scale only after viewing real generated pixels. This skeleton is not exportable art.",
+  "timing_reference": {
+    "move_id": "SweepKick",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 32,
+      "active_start": 10,
+      "active_end": 18
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 166,
+      "recovery_starts": 316,
+      "clip_ends": 533
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -136.0,
+      "w": 149.33333333333331,
+      "h": 40.0
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -199.99999999999997,
+      "y": -136.0,
+      "w": 149.33333333333331,
+      "h": 40.0
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 125.33333333333331,
+      "y": -116.0
+    }
+  }
+}

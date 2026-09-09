@@ -1,0 +1,37 @@
+{
+  "idle": {
+    "approved": true,
+    "scale_to_runtime": 0.3371647509578544,
+    "notes": "Three restrained breathing/guard keys; fixed sole and waist registration at 264 px."
+  },
+  "walk": {
+    "approved": true,
+    "scale_to_runtime": 0.4258064516129032,
+    "notes": "Four real low martial shuffle poses; 240 ms preserved. Separate contact, weight transfer, closing step and advancing lead paw. Uniform anatomical scale; grounded support per pose. Native transition review pending."
+  },
+  "jump": {
+    "approved": true,
+    "scale_to_runtime": 0.3371647509578544,
+    "notes": "Three new airborne keys. Virtual Y pivots calibrated from the waist to idle (447 source pixels above support), allowing actual leg tucking without cancelling the World jump arc."
+  },
+  "crouch": {
+    "approved": true,
+    "scale_to_runtime": 0.3371647509578544,
+    "notes": "Selected entry cell 0 and held cell 2. Cell 1 rejected for an invented dark chin detail. Entry 80 ms plus hold 280 ms preserve 360 ms total; hold approximately 123 px tall."
+  },
+  "block": {
+    "approved": true,
+    "scale_to_runtime": 0.3371647509578544,
+    "notes": "Three standing guard/brace/settle keys. Uniform idle anatomical scale preserves bent-knee compression."
+  },
+  "crouch_block": {
+    "approved": true,
+    "scale_to_runtime": 0.3371647509578544,
+    "notes": "Three low guard/absorb/settle keys generated from the selected crouch hold. Heights approximately 124/133/123 px; 300 ms preserved."
+  },
+  "hit": {
+    "approved": true,
+    "scale_to_runtime": 0.3371647509578544,
+    "notes": "Three struck/recoil/guard-recovery keys; grounded sole registration and uniform idle anatomical scale, 260 ms preserved."
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "cwd": "/home/willams/borrow-fighters",
+  "target_dir": "/tmp/borrow25-contact-check",
+  "started_utc": "2026-09-09T11:04:09Z",
+  "status": "passed",
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.34,
+      "log": "verification-output/fmt-final.txt"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.21,
+      "log": "verification-output/clippy-final.txt"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.44,
+      "log": "verification-output/test-final.txt",
+      "totals": {
+        "passed": 346,
+        "failed": 0,
+        "ignored": 1,
+        "measured": 0,
+        "filtered_out": 0
+      },
+      "test_binaries": 42
+    }
+  ],
+  "previous_attempts": [
+    {
+      "cwd": "/home/willams/borrow-fighters",
+      "target_dir": "/tmp/borrow25-contact-check",
+      "started_utc": "2026-09-09T11:03:21Z",
+      "status": "failed",
+      "commands": [
+        {
+          "command": [
+            "cargo",
+            "fmt",
+            "--all",
+            "--check"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 0.45,
+          "log": "verification-output/fmt.txt"
+        },
+        {
+          "command": [
+            "cargo",
+            "clippy",
+            "--all-targets",
+            "--all-features",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 3.36,
+          "log": "verification-output/clippy.txt"
+        },
+        {
+          "command": [
+            "cargo",
+            "test",
+            "--all-targets"
+          ],
+          "exit_code": 101,
+          "elapsed_seconds": 9.89,
+          "log": "verification-output/test.txt",
+          "totals": {
+            "passed": 250,
+            "failed": 1,
+            "ignored": 1,
+            "measured": 0,
+            "filtered_out": 0
+          },
+          "test_binaries": 23
+        }
+      ],
+      "finished_utc": "2026-09-09T11:03:35Z"
+    }
+  ],
+  "corrections": [
+    {
+      "file": "tests/reaction_matrix.rs",
+      "reason": "The previous universal three-frame expectation predates the Python/C++ optional four-frame reactions. The test now requires every frame of reaction_body for the pilots and hit for the other four fighters; interruption and release checks are preserved."
+    }
+  ],
+  "finished_utc": "2026-09-09T11:04:14Z",
+  "totals": {
+    "passed": 346,
+    "failed": 0,
+    "ignored": 1,
+    "measured": 0,
+    "filtered_out": 0
+  },
+  "test_binaries": 42,
+  "ignored_tests": [
+    "test engine::audio::live_review::live_music_pause_resume_and_cancel_preserve_stream_position ... ignored, requires an audio device; run manually with --ignored --nocapture"
+  ]
+}

@@ -5,3 +5,4 @@
 
 pub mod binary_text;
 pub mod combat_debug;
+pub mod menu_layout;

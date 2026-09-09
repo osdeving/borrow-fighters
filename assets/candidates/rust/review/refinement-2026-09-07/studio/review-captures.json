@@ -1,0 +1,319 @@
+{
+  "method": "Native AT-SPI action of real clip buttons and Next frame; native X11 window PNG via ImageMagick import. Resize 1px requests repaint in WSL Weston. No manifest or metrics writes. No continuous playback claimed.",
+  "window_id": "0x600003",
+  "loaded_manifest_matches_candidate": true,
+  "captures": [
+    {
+      "clip": "idle",
+      "frame": "idle_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 152",
+        "Pivot Y 310",
+        "Duration ms 180"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "idle-00.png"
+    },
+    {
+      "clip": "idle",
+      "frame": "idle_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 142",
+        "Pivot Y 310",
+        "Duration ms 180"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "idle-01.png"
+    },
+    {
+      "clip": "idle",
+      "frame": "idle_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 126",
+        "Pivot Y 311",
+        "Duration ms 180"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "idle-02.png"
+    },
+    {
+      "clip": "idle",
+      "frame": "idle_03",
+      "ui_frame_index": 4,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 118",
+        "Pivot Y 311",
+        "Duration ms 180"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "idle-03.png"
+    },
+    {
+      "clip": "walk",
+      "frame": "walk_00",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 143",
+        "Pivot Y 308",
+        "Duration ms 100"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "walk-00.png"
+    },
+    {
+      "clip": "walk",
+      "frame": "walk_01",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 117",
+        "Pivot Y 308",
+        "Duration ms 100"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "walk-01.png"
+    },
+    {
+      "clip": "walk",
+      "frame": "walk_02",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 131",
+        "Pivot Y 312",
+        "Duration ms 100"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "walk-02.png"
+    },
+    {
+      "clip": "walk",
+      "frame": "walk_03",
+      "ui_frame_index": 4,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 83",
+        "Pivot Y 309",
+        "Duration ms 100"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "walk-03.png"
+    },
+    {
+      "clip": "air_punch",
+      "frame": "air_punch_0",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 142",
+        "Pivot Y 323",
+        "Duration ms 83"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_punch-00.png"
+    },
+    {
+      "clip": "air_punch",
+      "frame": "air_punch_1",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 126",
+        "Pivot Y 345",
+        "Duration ms 150"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_punch-01.png"
+    },
+    {
+      "clip": "air_punch",
+      "frame": "air_punch_2",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 122",
+        "Pivot Y 323",
+        "Duration ms 66"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_punch-02.png"
+    },
+    {
+      "clip": "air_punch",
+      "frame": "air_punch_3",
+      "ui_frame_index": 4,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 114",
+        "Pivot Y 323",
+        "Duration ms 67"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_punch-03.png"
+    },
+    {
+      "clip": "sweep",
+      "frame": "sweep_0",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 118",
+        "Pivot Y 298",
+        "Duration ms 166"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "sweep-00.png"
+    },
+    {
+      "clip": "sweep",
+      "frame": "sweep_1",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 122",
+        "Pivot Y 298",
+        "Duration ms 150"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "sweep-01.png"
+    },
+    {
+      "clip": "sweep",
+      "frame": "sweep_2",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 95",
+        "Pivot Y 298",
+        "Duration ms 108"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "sweep-02.png"
+    },
+    {
+      "clip": "sweep",
+      "frame": "sweep_3",
+      "ui_frame_index": 4,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 85",
+        "Pivot Y 298",
+        "Duration ms 109"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "sweep-03.png"
+    },
+    {
+      "clip": "throw",
+      "frame": "throw_0",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 170",
+        "Pivot Y 355",
+        "Duration ms 83"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "throw-00.png"
+    },
+    {
+      "clip": "throw",
+      "frame": "throw_1",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 130",
+        "Pivot Y 355",
+        "Duration ms 50"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "throw-01.png"
+    },
+    {
+      "clip": "throw",
+      "frame": "throw_2",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 101",
+        "Pivot Y 356",
+        "Duration ms 100"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "throw-02.png"
+    },
+    {
+      "clip": "throw",
+      "frame": "throw_3",
+      "ui_frame_index": 4,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 118",
+        "Pivot Y 356",
+        "Duration ms 100"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "throw-03.png"
+    },
+    {
+      "clip": "air_kick",
+      "frame": "air_kick_0",
+      "ui_frame_index": 1,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 139",
+        "Pivot Y 323",
+        "Duration ms 116"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_kick-00.png"
+    },
+    {
+      "clip": "air_kick",
+      "frame": "air_kick_1",
+      "ui_frame_index": 2,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 112",
+        "Pivot Y 323",
+        "Duration ms 167"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_kick-01.png"
+    },
+    {
+      "clip": "air_kick",
+      "frame": "air_kick_2",
+      "ui_frame_index": 3,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 94",
+        "Pivot Y 323",
+        "Duration ms 75"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_kick-02.png"
+    },
+    {
+      "clip": "air_kick",
+      "frame": "air_kick_3",
+      "ui_frame_index": 4,
+      "ui_values": [
+        "Manifest scale 1",
+        "Pivot X 114",
+        "Pivot Y 323",
+        "Duration ms 75"
+      ],
+      "zoom": "Zoom 1 1.00 x",
+      "capture": "air_kick-03.png"
+    }
+  ]
+}

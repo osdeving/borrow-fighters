@@ -1,0 +1,1350 @@
+{
+  "schema": "borrow-fighters.production.v1",
+  "character": "cpp",
+  "scale": 1.0,
+  "provenance": {
+    "status": "candidate",
+    "generator": "built-in imagegen",
+    "identity_reference": "reference/master-existing.png",
+    "polished_reference": "idle/source-v1.png",
+    "combat": "Visual only; original combat_manifest retained without any box or move change."
+  },
+  "actions": {
+    "idle": {
+      "sheet": "idle/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 266,
+            "h": 299
+          },
+          "pivot": {
+            "x": 152,
+            "y": 281
+          },
+          "duration_ms": 240,
+          "phase": "guard"
+        },
+        {
+          "name": "idle_1",
+          "source_rect": {
+            "x": 266,
+            "y": 0,
+            "w": 265,
+            "h": 299
+          },
+          "pivot": {
+            "x": 151,
+            "y": 281
+          },
+          "duration_ms": 240,
+          "phase": "inhale"
+        },
+        {
+          "name": "idle_2",
+          "source_rect": {
+            "x": 532,
+            "y": 0,
+            "w": 266,
+            "h": 299
+          },
+          "pivot": {
+            "x": 152,
+            "y": 281
+          },
+          "duration_ms": 240,
+          "phase": "settle"
+        }
+      ],
+      "provenance": {
+        "source_action": "idle/action.json",
+        "source_sheet": "idle/keyed-v1.png",
+        "scale_to_runtime": 0.3889695210449927,
+        "review": "Three separately generated subtle idle keys; breathing amplitude is very small. Original adult identity retained, continuous round black/gold bag. Approved only for candidate review export, not final art release."
+      }
+    },
+    "walk": {
+      "sheet": "walk/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 202,
+            "h": 319
+          },
+          "pivot": {
+            "x": 104,
+            "y": 297
+          },
+          "duration_ms": 100,
+          "phase": "contact_left"
+        },
+        {
+          "name": "walk_1",
+          "source_rect": {
+            "x": 202,
+            "y": 0,
+            "w": 202,
+            "h": 319
+          },
+          "pivot": {
+            "x": 100,
+            "y": 298
+          },
+          "duration_ms": 100,
+          "phase": "passing_right"
+        },
+        {
+          "name": "walk_2",
+          "source_rect": {
+            "x": 404,
+            "y": 0,
+            "w": 202,
+            "h": 319
+          },
+          "pivot": {
+            "x": 102,
+            "y": 297
+          },
+          "duration_ms": 100,
+          "phase": "contact_right"
+        },
+        {
+          "name": "walk_3",
+          "source_rect": {
+            "x": 606,
+            "y": 0,
+            "w": 202,
+            "h": 319
+          },
+          "pivot": {
+            "x": 105,
+            "y": 299
+          },
+          "duration_ms": 100,
+          "phase": "passing_left"
+        }
+      ],
+      "provenance": {
+        "source_action": "walk/action.json",
+        "source_sheet": "walk/assembled-selected-v8.png",
+        "scale_to_runtime": 0.4200626959247649,
+        "review": "Selected v8 packs whole generated v6 keys0/1/2 and v7 key3. The near gold-striped leg leads at contact0; the far plain leg leads at contact2. Passing1 plants the far leg, passing3 plants the near leg with the far boot lifted. Near-arm placement follows the opposite contacts. V5/v6 fourth poses and the regressed v7 contact2 were rejected. Uniform268/638 anatomical scale and source ground pivots708/710/707/712 compensate source placement only. Original100ms per key,400ms loop preserved. Crops exclude the isolated lower-left matte pixel without retouching artwork. Candidate export; finalization evidence is recorded separately."
+      }
+    },
+    "jump": {
+      "sheet": "jump/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "jump_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 282,
+            "h": 317
+          },
+          "pivot": {
+            "x": 164,
+            "y": 294
+          },
+          "duration_ms": 60,
+          "phase": "takeoff"
+        },
+        {
+          "name": "jump_1",
+          "source_rect": {
+            "x": 282,
+            "y": 0,
+            "w": 281,
+            "h": 317
+          },
+          "pivot": {
+            "x": 141,
+            "y": 287
+          },
+          "duration_ms": 340,
+          "phase": "rise"
+        },
+        {
+          "name": "jump_2",
+          "source_rect": {
+            "x": 564,
+            "y": 0,
+            "w": 282,
+            "h": 317
+          },
+          "pivot": {
+            "x": 118,
+            "y": 293
+          },
+          "duration_ms": 400,
+          "phase": "fall"
+        }
+      ],
+      "provenance": {
+        "source_action": "jump/action.json",
+        "source_sheet": "jump/keyed-v1.png",
+        "scale_to_runtime": 0.4123076923076923,
+        "review": "Three poses takeoff/rise/fall, 60/340/400ms. Virtual anchors712/695/711 subtract source waist translation: waist317/300/316 yields invariant -395px from anchor. Feet allowed to tuck; world physics supplies travel, no drawn landing crouch. Approved only for candidate review export, not final art release."
+      }
+    },
+    "crouch": {
+      "sheet": "crouch/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "crouch_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 266,
+            "h": 299
+          },
+          "pivot": {
+            "x": 136,
+            "y": 286
+          },
+          "duration_ms": 180,
+          "phase": "low_guard"
+        },
+        {
+          "name": "crouch_1",
+          "source_rect": {
+            "x": 266,
+            "y": 0,
+            "w": 265,
+            "h": 299
+          },
+          "pivot": {
+            "x": 123,
+            "y": 287
+          },
+          "duration_ms": 180,
+          "phase": "breathe"
+        },
+        {
+          "name": "crouch_2",
+          "source_rect": {
+            "x": 532,
+            "y": 0,
+            "w": 266,
+            "h": 299
+          },
+          "pivot": {
+            "x": 119,
+            "y": 287
+          },
+          "duration_ms": 180,
+          "phase": "settle"
+        }
+      ],
+      "provenance": {
+        "source_action": "crouch/action.json",
+        "source_sheet": "crouch/keyed-v2.png",
+        "scale_to_runtime": 0.3889695210449927,
+        "review": "Selected v2 folds chest and hips instead of shrinking figure. Runtime silhouette about113-119px at original anatomical scale, within128px physical crouch height. v1 rejected for taller pose. Approved only for candidate review export, not final art release."
+      }
+    },
+    "block": {
+      "sheet": "block/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "block_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 266,
+            "h": 299
+          },
+          "pivot": {
+            "x": 136,
+            "y": 281
+          },
+          "duration_ms": 110,
+          "phase": "guard"
+        },
+        {
+          "name": "block_1",
+          "source_rect": {
+            "x": 266,
+            "y": 0,
+            "w": 265,
+            "h": 299
+          },
+          "pivot": {
+            "x": 133,
+            "y": 281
+          },
+          "duration_ms": 90,
+          "phase": "absorb"
+        },
+        {
+          "name": "block_2",
+          "source_rect": {
+            "x": 532,
+            "y": 0,
+            "w": 266,
+            "h": 299
+          },
+          "pivot": {
+            "x": 124,
+            "y": 281
+          },
+          "duration_ms": 140,
+          "phase": "recover_guard"
+        }
+      ],
+      "provenance": {
+        "source_action": "block/action.json",
+        "source_sheet": "block/keyed-v1.png",
+        "scale_to_runtime": 0.3889695210449927,
+        "review": "Distinct crossed-forearm guard, impact absorption, recovery. Same anatomical scale as idle. Approved only for candidate review export, not final art release."
+      }
+    },
+    "crouch_block": {
+      "sheet": "crouch_block/prepared.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "crouch_block_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 266,
+            "h": 292
+          },
+          "pivot": {
+            "x": 128,
+            "y": 286
+          },
+          "duration_ms": 110,
+          "phase": "low_guard"
+        },
+        {
+          "name": "crouch_block_1",
+          "source_rect": {
+            "x": 266,
+            "y": 0,
+            "w": 265,
+            "h": 292
+          },
+          "pivot": {
+            "x": 120,
+            "y": 286
+          },
+          "duration_ms": 90,
+          "phase": "absorb"
+        },
+        {
+          "name": "crouch_block_2",
+          "source_rect": {
+            "x": 532,
+            "y": 0,
+            "w": 266,
+            "h": 292
+          },
+          "pivot": {
+            "x": 117,
+            "y": 286
+          },
+          "duration_ms": 140,
+          "phase": "recover_low_guard"
+        }
+      ],
+      "provenance": {
+        "source_action": "crouch_block/action.json",
+        "source_sheet": "crouch_block/keyed-v6.png",
+        "scale_to_runtime": 0.3889695210449927,
+        "review": "Selected generated v6 changes the rear arm of crouch/source-v2 into a face/chest guard while retaining the crouch body depth. Runtime silhouette about114-118px now matches ordinary crouch113-119px instead of former92-95px guard. Uniform268/689 scale and110/90/140ms timing preserved. Pivots330,735 /309,736 /300,736 register generated support positions; no body rescaling, gameplay change or procedural posture construction. v5 rejected because it raised the torso too far. Crop excludes an isolated matte pixel below all body contours. Candidate export; finalization evidence is recorded separately."
+      }
+    },
+    "hit": {
+      "sheet": "hit/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "hit_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 277,
+            "h": 312
+          },
+          "pivot": {
+            "x": 171,
+            "y": 292
+          },
+          "duration_ms": 75,
+          "phase": "recoil"
+        },
+        {
+          "name": "hit_1",
+          "source_rect": {
+            "x": 277,
+            "y": 0,
+            "w": 277,
+            "h": 312
+          },
+          "pivot": {
+            "x": 155,
+            "y": 292
+          },
+          "duration_ms": 105,
+          "phase": "fold"
+        },
+        {
+          "name": "hit_2",
+          "source_rect": {
+            "x": 554,
+            "y": 0,
+            "w": 277,
+            "h": 312
+          },
+          "pivot": {
+            "x": 156,
+            "y": 292
+          },
+          "duration_ms": 140,
+          "phase": "recover"
+        }
+      ],
+      "provenance": {
+        "source_action": "hit/action.json",
+        "source_sheet": "hit/keyed-v1.png",
+        "scale_to_runtime": 0.40606060606060607,
+        "review": "Distinct recoil, abdominal fold, recovery; bag and hair follow body. One uniform action scale. Approved only for candidate review export, not final art release."
+      }
+    },
+    "punch_light": {
+      "sheet": "punch_light/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "punch_light_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 266,
+            "h": 286
+          },
+          "pivot": {
+            "x": 152,
+            "y": 278
+          },
+          "duration_ms": 66,
+          "phase": "startup"
+        },
+        {
+          "name": "punch_light_01",
+          "source_rect": {
+            "x": 266,
+            "y": 0,
+            "w": 266,
+            "h": 286
+          },
+          "pivot": {
+            "x": 118,
+            "y": 278
+          },
+          "duration_ms": 84,
+          "phase": "active"
+        },
+        {
+          "name": "punch_light_02",
+          "source_rect": {
+            "x": 532,
+            "y": 0,
+            "w": 264,
+            "h": 286
+          },
+          "pivot": {
+            "x": 117,
+            "y": 278
+          },
+          "duration_ms": 116,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "punch_light/action.json",
+        "source_sheet": "punch_light/keyed-v3.png",
+        "scale_to_runtime": 0.3889695210449927,
+        "review": "Selected v3 after lowering contact from chest to waistband. Three own stages, adult proportions and continuous bag preserved. Glove center around source(1230,390), pivot(987,715), gives world offset(+94.5,-126.4), inside existing LP box. Original drafts retained. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Approved only for candidate review export, not final art release."
+      }
+    },
+    "punch_heavy": {
+      "sheet": "punch_heavy/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "punch_heavy_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 263,
+            "h": 286
+          },
+          "pivot": {
+            "x": 150,
+            "y": 275
+          },
+          "duration_ms": 166,
+          "phase": "startup"
+        },
+        {
+          "name": "punch_heavy_01",
+          "source_rect": {
+            "x": 275,
+            "y": 0,
+            "w": 275,
+            "h": 286
+          },
+          "pivot": {
+            "x": 109,
+            "y": 275
+          },
+          "duration_ms": 150,
+          "phase": "active"
+        },
+        {
+          "name": "punch_heavy_02",
+          "source_rect": {
+            "x": 550,
+            "y": 0,
+            "w": 258,
+            "h": 286
+          },
+          "pivot": {
+            "x": 101,
+            "y": 275
+          },
+          "duration_ms": 234,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "punch_heavy/action.json",
+        "source_sheet": "punch_heavy/keyed-v1.png",
+        "scale_to_runtime": 0.3889695210449927,
+        "review": "Three forceful windup/contact/recovery poses with rotated adult torso and attached handbag. Contact glove source about(1340,350), support pivot(955,708), projects to(+149.8,-139.2)world within heavy box. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Approved only for candidate review export, not final art release."
+      }
+    },
+    "kick": {
+      "sheet": "kick/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "kick_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 264,
+            "h": 286
+          },
+          "pivot": {
+            "x": 122,
+            "y": 280
+          },
+          "duration_ms": 133,
+          "phase": "startup"
+        },
+        {
+          "name": "kick_01",
+          "source_rect": {
+            "x": 268,
+            "y": 0,
+            "w": 264,
+            "h": 286
+          },
+          "pivot": {
+            "x": 92,
+            "y": 280
+          },
+          "duration_ms": 133,
+          "phase": "active"
+        },
+        {
+          "name": "kick_02",
+          "source_rect": {
+            "x": 536,
+            "y": 0,
+            "w": 268,
+            "h": 286
+          },
+          "pivot": {
+            "x": 119,
+            "y": 280
+          },
+          "duration_ms": 167,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "kick/action.json",
+        "source_sheet": "kick/keyed-v2.png",
+        "scale_to_runtime": 0.3889695210449927,
+        "review": "Selected v2 after rotating kicking leg downward to current low collision height. Toe/sole near(1275,548), support(916,721), projects to(+139.6,-67.3)world inside kick box. Full heeled boot and handbag retained. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Approved only for candidate review export, not final art release."
+      }
+    },
+    "sweep": {
+      "sheet": "sweep/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "sweep_mvp_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 219,
+            "h": 379
+          },
+          "pivot": {
+            "x": 88,
+            "y": 304
+          },
+          "duration_ms": 150,
+          "phase": "startup"
+        },
+        {
+          "name": "sweep_mvp_01",
+          "source_rect": {
+            "x": 272,
+            "y": 0,
+            "w": 272,
+            "h": 379
+          },
+          "pivot": {
+            "x": 78,
+            "y": 306
+          },
+          "duration_ms": 150,
+          "phase": "active"
+        },
+        {
+          "name": "sweep_mvp_02",
+          "source_rect": {
+            "x": 544,
+            "y": 0,
+            "w": 224,
+            "h": 379
+          },
+          "pivot": {
+            "x": 83,
+            "y": 306
+          },
+          "duration_ms": 100,
+          "phase": "recovery"
+        },
+        {
+          "name": "sweep_mvp_03",
+          "source_rect": {
+            "x": 816,
+            "y": 0,
+            "w": 229,
+            "h": 379
+          },
+          "pivot": {
+            "x": 94,
+            "y": 307
+          },
+          "duration_ms": 117,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "sweep/action.json",
+        "source_sheet": "sweep/keyed-mvp-v4.png",
+        "scale_to_runtime": 0.47686832740213525,
+        "review": "New low sweep for corrected sustained crouching combat. V3 ankle-level boot was correct but torso too upright; v4 folds chest/head farther forward without shrinking anatomy. Uniform268/562 scale keeps the low silhouette116-118px against128px physical crouch. Active boot toe source(970,619), pivot(624,641) projects to(+165.0,-10.5), inside Vector Low x[+50.7,+205.3], y[-40,0]. Startup150ms, active150ms (ticks9..17), recovery217ms, total517ms~31ticks. Oldv2 source/action/prepared retained as before-mvp references. No combat metadata authored."
+      }
+    },
+    "overhead": {
+      "sheet": "overhead/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "overhead_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 264,
+            "h": 286
+          },
+          "pivot": {
+            "x": 146,
+            "y": 279
+          },
+          "duration_ms": 183,
+          "phase": "startup"
+        },
+        {
+          "name": "overhead_01",
+          "source_rect": {
+            "x": 268,
+            "y": 0,
+            "w": 264,
+            "h": 286
+          },
+          "pivot": {
+            "x": 107,
+            "y": 279
+          },
+          "duration_ms": 133,
+          "phase": "active"
+        },
+        {
+          "name": "overhead_02",
+          "source_rect": {
+            "x": 536,
+            "y": 0,
+            "w": 268,
+            "h": 286
+          },
+          "pivot": {
+            "x": 117,
+            "y": 279
+          },
+          "duration_ms": 217,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "overhead/action.json",
+        "source_sheet": "overhead/keyed-v1.png",
+        "scale_to_runtime": 0.3889695210449927,
+        "review": "Complete raised fist preparation, forward descending hammerfist contact, low follow-through. Glove near(1200,375), support(955,718), projects to(+95.3,-133.4)world inside overhead box. Full raised hand, adult anatomy and bag preserved. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Approved only for candidate review export, not final art release."
+      }
+    },
+    "anti_air": {
+      "sheet": "anti_air/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "anti_air_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 255,
+            "h": 383
+          },
+          "pivot": {
+            "x": 134,
+            "y": 343
+          },
+          "duration_ms": 100,
+          "phase": "startup"
+        },
+        {
+          "name": "anti_air_01",
+          "source_rect": {
+            "x": 256,
+            "y": 0,
+            "w": 256,
+            "h": 383
+          },
+          "pivot": {
+            "x": 129,
+            "y": 343
+          },
+          "duration_ms": 133,
+          "phase": "active"
+        },
+        {
+          "name": "anti_air_02",
+          "source_rect": {
+            "x": 512,
+            "y": 0,
+            "w": 255,
+            "h": 383
+          },
+          "pivot": {
+            "x": 118,
+            "y": 343
+          },
+          "duration_ms": 217,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "anti_air/action.json",
+        "source_sheet": "anti_air/keyed-v1.png",
+        "scale_to_runtime": 0.432258064516129,
+        "review": "Upright active body measures about620px from hair top to soles; use one uniform268/620 scale for all3 drawings. Grounded support remains y793. Glove projects near(+67.9,-287.0), inside the baseline anti-air box; shoulder bag and raised hand retained. Approved only for candidate review export, not final art release."
+      }
+    },
+    "air_punch": {
+      "sheet": "air_punch/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "air_punch_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 230,
+            "h": 345
+          },
+          "pivot": {
+            "x": 130,
+            "y": 297
+          },
+          "duration_ms": 83,
+          "phase": "startup"
+        },
+        {
+          "name": "air_punch_01",
+          "source_rect": {
+            "x": 230,
+            "y": 0,
+            "w": 230,
+            "h": 345
+          },
+          "pivot": {
+            "x": 100,
+            "y": 324
+          },
+          "duration_ms": 150,
+          "phase": "active"
+        },
+        {
+          "name": "air_punch_02",
+          "source_rect": {
+            "x": 460,
+            "y": 0,
+            "w": 230,
+            "h": 345
+          },
+          "pivot": {
+            "x": 109,
+            "y": 306
+          },
+          "duration_ms": 133,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "air_punch/action.json",
+        "source_sheet": "air_punch/keyed-v1.png",
+        "scale_to_runtime": 0.3889695210449927,
+        "review": "Virtual pivots register gold belt at about-160world in all3 poses, rather than registering airborne boots. Body equivalent689px matches the idle. Source active glove projects near(+73.5,-122.5), inside the upper/back portion of the baseline air-punch box. Physics supplies air displacement; no second trajectory. Torso inclines into the punch. Approved only for candidate review export, not final art release."
+      }
+    },
+    "air_kick": {
+      "sheet": "air_kick/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "air_kick_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 233,
+            "h": 350
+          },
+          "pivot": {
+            "x": 115,
+            "y": 294
+          },
+          "duration_ms": 116,
+          "phase": "startup"
+        },
+        {
+          "name": "air_kick_01",
+          "source_rect": {
+            "x": 287,
+            "y": 0,
+            "w": 287,
+            "h": 366
+          },
+          "pivot": {
+            "x": 103,
+            "y": 311
+          },
+          "duration_ms": 167,
+          "phase": "active"
+        },
+        {
+          "name": "air_kick_02",
+          "source_rect": {
+            "x": 574,
+            "y": 0,
+            "w": 212,
+            "h": 366
+          },
+          "pivot": {
+            "x": 84,
+            "y": 309
+          },
+          "duration_ms": 150,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "air_kick/action.json",
+        "source_sheet": "air_kick/keyed-v3.png",
+        "scale_to_runtime": 0.4123076923076923,
+        "review": "Selected v3 redraws the active ankle/boot in dorsiflexion while preserving the downward leg, trunk, startup and recovery. Original uniform268/650 scale, belt-registered virtual pivots and116/167/150ms timing retained. Active sole center around(1205,579) maps to(+160.8,-72.2), within the existing box; lowest heel at648 maps about-43.7, within2px of its lower edge-45.3, reducing the former~15px extension. v2 rejected for raising the entire leg too high. No combat or whole-body translation change. First crop excludes isolated matte pixel below the artwork. Candidate export; finalization evidence is recorded separately."
+      }
+    },
+    "throw": {
+      "sheet": "throw/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "throw_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 264,
+            "h": 286
+          },
+          "pivot": {
+            "x": 150,
+            "y": 279
+          },
+          "duration_ms": 100,
+          "phase": "startup"
+        },
+        {
+          "name": "throw_01",
+          "source_rect": {
+            "x": 268,
+            "y": 0,
+            "w": 264,
+            "h": 286
+          },
+          "pivot": {
+            "x": 111,
+            "y": 279
+          },
+          "duration_ms": 50,
+          "phase": "active"
+        },
+        {
+          "name": "throw_02",
+          "source_rect": {
+            "x": 536,
+            "y": 0,
+            "w": 268,
+            "h": 286
+          },
+          "pivot": {
+            "x": 123,
+            "y": 279
+          },
+          "duration_ms": 233,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "throw/action.json",
+        "source_sheet": "throw/keyed-v1.png",
+        "scale_to_runtime": 0.3889695210449927,
+        "review": "Open preparation, short two-handed grab, pull toward waist. Farthest fingertip near(1255,325), support(965,716), projects to(+112.8,-152.1)world inside existing throw reach ending+117.3. Hands separate with bent elbows, bag remains attached; no victim or new combat metadata. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Approved only for candidate review export, not final art release."
+      }
+    },
+    "special": {
+      "sheet": "special/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "special_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 395,
+            "h": 347
+          },
+          "pivot": {
+            "x": 185,
+            "y": 315
+          },
+          "duration_ms": 100,
+          "phase": "emit"
+        },
+        {
+          "name": "special_1",
+          "source_rect": {
+            "x": 395,
+            "y": 0,
+            "w": 353,
+            "h": 347
+          },
+          "pivot": {
+            "x": 132,
+            "y": 315
+          },
+          "duration_ms": 100,
+          "phase": "recoil"
+        },
+        {
+          "name": "special_2",
+          "source_rect": {
+            "x": 790,
+            "y": 0,
+            "w": 293,
+            "h": 347
+          },
+          "pivot": {
+            "x": 129,
+            "y": 322
+          },
+          "duration_ms": 100,
+          "phase": "recover"
+        }
+      ],
+      "provenance": {
+        "source_action": "special/action.json",
+        "source_sheet": "special/keyed-v2.png",
+        "scale_to_runtime": 0.47942754919499103,
+        "review": "Selected v2: bag swung on continuous taut shoulder strap, hand guides strap; first pose already emits. Gold bag edge source(814,329), grounded anchor(386,657), scale268/559 maps(+205.1968,-157.2522), baseline(+205.3333,-157.3333). No new projectile or combat metadata; original v1 short/high reach retained. Approved only for candidate review export, not final art release."
+      }
+    },
+    "spawn": {
+      "sheet": "spawn/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "spawn_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 270,
+            "h": 303
+          },
+          "pivot": {
+            "x": 150,
+            "y": 285
+          },
+          "duration_ms": 180,
+          "phase": "adjust_glove"
+        },
+        {
+          "name": "spawn_1",
+          "source_rect": {
+            "x": 270,
+            "y": 0,
+            "w": 269,
+            "h": 303
+          },
+          "pivot": {
+            "x": 149,
+            "y": 285
+          },
+          "duration_ms": 180,
+          "phase": "hair_flick"
+        },
+        {
+          "name": "spawn_2",
+          "source_rect": {
+            "x": 540,
+            "y": 0,
+            "w": 270,
+            "h": 303
+          },
+          "pivot": {
+            "x": 136,
+            "y": 285
+          },
+          "duration_ms": 180,
+          "phase": "ready"
+        }
+      ],
+      "provenance": {
+        "source_action": "spawn/action.json",
+        "source_sheet": "spawn/keyed-v1.png",
+        "scale_to_runtime": 0.3946980854197349,
+        "review": "Glove adjustment, hair flick, ready guard; full identity and bag continuity. Approved only for candidate review export, not final art release."
+      }
+    },
+    "victory": {
+      "sheet": "victory/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "victory_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 266,
+            "h": 299
+          },
+          "pivot": {
+            "x": 148,
+            "y": 282
+          },
+          "duration_ms": 180,
+          "phase": "relax"
+        },
+        {
+          "name": "victory_1",
+          "source_rect": {
+            "x": 266,
+            "y": 0,
+            "w": 265,
+            "h": 299
+          },
+          "pivot": {
+            "x": 147,
+            "y": 281
+          },
+          "duration_ms": 220,
+          "phase": "celebrate"
+        },
+        {
+          "name": "victory_2",
+          "source_rect": {
+            "x": 532,
+            "y": 0,
+            "w": 266,
+            "h": 299
+          },
+          "pivot": {
+            "x": 150,
+            "y": 281
+          },
+          "duration_ms": 800,
+          "phase": "hold"
+        }
+      ],
+      "provenance": {
+        "source_action": "victory/action.json",
+        "source_sheet": "victory/keyed-v1.png",
+        "scale_to_runtime": 0.3889695210449927,
+        "review": "Relax, restrained raised-fist celebration, confident sustained pose. Three distinct generated keys. Approved only for candidate review export, not final art release."
+      }
+    },
+    "defeat": {
+      "sheet": "defeat/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "defeat_0",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 266,
+            "h": 299
+          },
+          "pivot": {
+            "x": 148,
+            "y": 275
+          },
+          "duration_ms": 150,
+          "phase": "recoil"
+        },
+        {
+          "name": "defeat_1",
+          "source_rect": {
+            "x": 266,
+            "y": 0,
+            "w": 265,
+            "h": 299
+          },
+          "pivot": {
+            "x": 135,
+            "y": 265
+          },
+          "duration_ms": 220,
+          "phase": "kneel"
+        },
+        {
+          "name": "defeat_2",
+          "source_rect": {
+            "x": 532,
+            "y": 0,
+            "w": 266,
+            "h": 299
+          },
+          "pivot": {
+            "x": 115,
+            "y": 271
+          },
+          "duration_ms": 630,
+          "phase": "hold_defeat"
+        }
+      ],
+      "provenance": {
+        "source_action": "defeat/action.json",
+        "source_sheet": "defeat/keyed-v1.png",
+        "scale_to_runtime": 0.3889695210449927,
+        "review": "Recoil then knees and supporting hand to ground, sustained defeat. One anatomy scale for all phases; no prone enlargement. Ground anchors explicitly follow contact level707/682/697. Approved only for candidate review export, not final art release."
+      }
+    },
+    "signature_special": {
+      "sheet": "signature_special/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "signature_special_mvp_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 254,
+            "h": 380
+          },
+          "pivot": {
+            "x": 146,
+            "y": 349
+          },
+          "duration_ms": 150,
+          "phase": "startup"
+        },
+        {
+          "name": "signature_special_mvp_01",
+          "source_rect": {
+            "x": 254,
+            "y": 0,
+            "w": 254,
+            "h": 380
+          },
+          "pivot": {
+            "x": 145,
+            "y": 348
+          },
+          "duration_ms": 116,
+          "phase": "active"
+        },
+        {
+          "name": "signature_special_mvp_02",
+          "source_rect": {
+            "x": 508,
+            "y": 0,
+            "w": 254,
+            "h": 380
+          },
+          "pivot": {
+            "x": 142,
+            "y": 348
+          },
+          "duration_ms": 200,
+          "phase": "recovery"
+        },
+        {
+          "name": "signature_special_mvp_03",
+          "source_rect": {
+            "x": 762,
+            "y": 0,
+            "w": 254,
+            "h": 380
+          },
+          "pivot": {
+            "x": 158,
+            "y": 347
+          },
+          "duration_ms": 234,
+          "phase": "recovery"
+        }
+      ],
+      "provenance": {
+        "source_action": "signature_special/action.json",
+        "source_sheet": "signature_special/keyed-green-v3.png",
+        "scale_to_runtime": 0.4953789279112754,
+        "review": "New grounded Template Arc. Generated v2 identity/poses retained in green-matte v3; local green key preserves white blouse and violet energy where checker flood left enclosed matte. Uniform268/541 scale, explicit support anchors. Active palm source(958,107) maps to(+75.8,-295.2) from body center/floor; palm/arc lie inside current special x[+50.7,+160], y[-341.3,-160]. Active150..266ms matches ticks9..15; total700ms/42ticks. Source/prompt/checker trial preserved, no combat metadata authored."
+      }
+    },
+    "knockdown": {
+      "sheet": "knockdown/prepared.png",
+      "reviewed": true,
+      "loop": false,
+      "frames": [
+        {
+          "name": "knockdown_mvp_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 258,
+            "h": 378
+          },
+          "pivot": {
+            "x": 122,
+            "y": 325
+          },
+          "duration_ms": 100,
+          "phase": "fall"
+        },
+        {
+          "name": "knockdown_mvp_01",
+          "source_rect": {
+            "x": 300,
+            "y": 0,
+            "w": 300,
+            "h": 378
+          },
+          "pivot": {
+            "x": 143,
+            "y": 329
+          },
+          "duration_ms": 250,
+          "phase": "down"
+        },
+        {
+          "name": "knockdown_mvp_02",
+          "source_rect": {
+            "x": 600,
+            "y": 0,
+            "w": 210,
+            "h": 378
+          },
+          "pivot": {
+            "x": 93,
+            "y": 323
+          },
+          "duration_ms": 150,
+          "phase": "rise"
+        },
+        {
+          "name": "knockdown_mvp_03",
+          "source_rect": {
+            "x": 900,
+            "y": 0,
+            "w": 178,
+            "h": 378
+          },
+          "pivot": {
+            "x": 96,
+            "y": 327
+          },
+          "duration_ms": 100,
+          "phase": "ready"
+        }
+      ],
+      "provenance": {
+        "source_action": "knockdown/action.json",
+        "source_sheet": "knockdown/keyed-v1.png",
+        "scale_to_runtime": 0.47686832740213525,
+        "review": "New four-stage knockdown: falling backward, fully reclined on floor, kneeling rise, standing ready guard. Uniform268/562 anatomy scale derived from final upright pose. Pivots follow support ground, not bounding-box center. Full white blouse/trousers/boots/bag retained.100/250/150/100ms=600ms/36ticks matches real knockdown. No duplicated normal-hit or defeat frames; no combat metadata authored."
+      }
+    }
+  }
+}

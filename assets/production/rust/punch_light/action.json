@@ -1,0 +1,83 @@
+{
+  "action": "punch_light",
+  "source": "punch_light/source-v4.png",
+  "sheet": "punch_light/sheet-v4.png",
+  "reviewed": true,
+  "loop": false,
+  "status": "reviewed visual and functional pilot; see ../finalization-review.md for evidence and limits",
+  "source_body_height_reference_px": 545,
+  "normalization_note": "Approximate upright-body reference; do not scale each frame by its own alpha bounds. Air pivots are virtual standing-floor anchors beneath hips, not boot tips. Ground pivots are proposed and require foot-support review after normalization.",
+  "combat_timing": {
+    "move_id": "RustBorrowJab",
+    "input": "LightPunch",
+    "duration": 16,
+    "active_start": 4,
+    "active_end_inclusive": 8,
+    "whiff_recovery": 4,
+    "clip": "punch_light"
+  },
+  "frames": [
+    {
+      "name": "punch_light_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 520,
+        "h": 768
+      },
+      "pivot": {
+        "x": 285,
+        "y": 661
+      },
+      "duration_ms": 66,
+      "phase": "startup"
+    },
+    {
+      "name": "punch_light_1",
+      "source_rect": {
+        "x": 520,
+        "y": 0,
+        "w": 525,
+        "h": 768
+      },
+      "pivot": {
+        "x": 257,
+        "y": 661
+      },
+      "duration_ms": 84,
+      "phase": "active"
+    },
+    {
+      "name": "punch_light_2",
+      "source_rect": {
+        "x": 1045,
+        "y": 0,
+        "w": 495,
+        "h": 768
+      },
+      "pivot": {
+        "x": 255,
+        "y": 661
+      },
+      "duration_ms": 58,
+      "phase": "recovery"
+    },
+    {
+      "name": "punch_light_3",
+      "source_rect": {
+        "x": 1540,
+        "y": 0,
+        "w": 508,
+        "h": 768
+      },
+      "pivot": {
+        "x": 247,
+        "y": 661
+      },
+      "duration_ms": 58,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "Regenerated low contact to preserve baseline world-space combat metadata. Earlier generations remain as rejected alignment candidates. Source static review completed; normalized movement/functional review remains pending. v2 was low but too foreshortened; v3 raised the fist again; v4 selected for low forward fist with other hand guarding.",
+  "finalization_review": "../finalization-review.md"
+}

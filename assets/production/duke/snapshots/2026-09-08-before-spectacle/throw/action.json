@@ -1,0 +1,52 @@
+{
+  "sheet": "throw/keyed.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "throw_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 684,
+        "h": 736
+      },
+      "pivot": {
+        "x": 425,
+        "y": 676
+      },
+      "duration_ms": 150,
+      "phase": "startup"
+    },
+    {
+      "name": "throw_01",
+      "source_rect": {
+        "x": 684,
+        "y": 0,
+        "w": 664,
+        "h": 736
+      },
+      "pivot": {
+        "x": 266,
+        "y": 676
+      },
+      "duration_ms": 50,
+      "phase": "active"
+    },
+    {
+      "name": "throw_02",
+      "source_rect": {
+        "x": 1348,
+        "y": 0,
+        "w": 700,
+        "h": 736
+      },
+      "pivot": {
+        "x": 202,
+        "y": 676
+      },
+      "duration_ms": 300,
+      "phase": "recovery"
+    }
+  ]
+}

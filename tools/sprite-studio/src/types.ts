@@ -20,6 +20,7 @@ export type FrameCombat = {
 export type SpriteFrame = {
   name: string;
   clip: string;
+  image?: string;
   duration_ms: number;
   pivot: SpritePoint;
   frame: SpriteRect;

@@ -1,0 +1,3167 @@
+{
+  "schema": "borrow-fighters.sprite-provenance.v1",
+  "character": "rust",
+  "production": "../../production/rust/production.json",
+  "production_sha256": "ffb7e31bc31cc0063fb64c3e8c88f2ce4d366a359a3f88e73d4eedac7f5b97ee",
+  "production_snapshot": {
+    "schema": "borrow-fighters.production.v1",
+    "character": "rust",
+    "scale": 1.0,
+    "provenance": {
+      "status": "candidate",
+      "generator": "built-in imagegen",
+      "identity_reference": "reference/master-existing.png",
+      "combat": "Baseline sprite combat metadata is retained. Throws, capture/launch trajectories and signature effects use explicit World/combat contracts documented by ADR0014; visual repacking does not retune baseline move boxes.",
+      "review": "spectacle-review.md"
+    },
+    "actions": {
+      "idle": {
+        "sheet": "idle/prepared.png",
+        "reviewed": true,
+        "loop": true,
+        "frames": [
+          {
+            "name": "idle_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 241,
+              "h": 361
+            },
+            "pivot": {
+              "x": 152,
+              "y": 310
+            },
+            "duration_ms": 180,
+            "phase": "breathing"
+          },
+          {
+            "name": "idle_01",
+            "source_rect": {
+              "x": 241,
+              "y": 0,
+              "w": 241,
+              "h": 361
+            },
+            "pivot": {
+              "x": 142,
+              "y": 310
+            },
+            "duration_ms": 180,
+            "phase": "breathing"
+          },
+          {
+            "name": "idle_02",
+            "source_rect": {
+              "x": 482,
+              "y": 0,
+              "w": 241,
+              "h": 361
+            },
+            "pivot": {
+              "x": 126,
+              "y": 311
+            },
+            "duration_ms": 180,
+            "phase": "breathing"
+          },
+          {
+            "name": "idle_03",
+            "source_rect": {
+              "x": 723,
+              "y": 0,
+              "w": 241,
+              "h": 361
+            },
+            "pivot": {
+              "x": 118,
+              "y": 311
+            },
+            "duration_ms": 180,
+            "phase": "breathing"
+          }
+        ],
+        "provenance": {
+          "source_action": "idle/action.json",
+          "source_sheet": "idle/reviewed.png",
+          "scale_to_runtime": 0.47,
+          "review": "Identity and alpha edges reviewed; Raylib Viewer at runtime size feet y616, body~269px. Source snapshots preserved."
+        }
+      },
+      "walk": {
+        "sheet": "walk/prepared.png",
+        "reviewed": true,
+        "loop": true,
+        "frames": [
+          {
+            "name": "walk_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 244,
+              "h": 335
+            },
+            "pivot": {
+              "x": 143,
+              "y": 308
+            },
+            "duration_ms": 100,
+            "phase": "contact-near"
+          },
+          {
+            "name": "walk_01",
+            "source_rect": {
+              "x": 244,
+              "y": 0,
+              "w": 203,
+              "h": 335
+            },
+            "pivot": {
+              "x": 117,
+              "y": 308
+            },
+            "duration_ms": 100,
+            "phase": "passing-far"
+          },
+          {
+            "name": "walk_02",
+            "source_rect": {
+              "x": 488,
+              "y": 0,
+              "w": 244,
+              "h": 335
+            },
+            "pivot": {
+              "x": 131,
+              "y": 312
+            },
+            "duration_ms": 100,
+            "phase": "contact-far"
+          },
+          {
+            "name": "walk_03",
+            "source_rect": {
+              "x": 732,
+              "y": 0,
+              "w": 203,
+              "h": 335
+            },
+            "pivot": {
+              "x": 83,
+              "y": 309
+            },
+            "duration_ms": 100,
+            "phase": "passing-near"
+          }
+        ],
+        "provenance": {
+          "source_action": "walk/action.json",
+          "source_sheet": "walk/cleaned-v8.png",
+          "scale_to_runtime": 0.4364820846905538,
+          "review": "v8 four distinct walk keys explicitly alternate near cargo-pocket leg and far plain leg; v4/v5 rejected for repeated contact. Master identity and idle retained as references. Ground pivots and one uniform scale selected from 614px body reference; clip stays400ms. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+        }
+      },
+      "crouch": {
+        "sheet": "crouch/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "crouch_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 311,
+              "h": 373
+            },
+            "pivot": {
+              "x": 164,
+              "y": 311
+            },
+            "duration_ms": 60,
+            "phase": "lower"
+          },
+          {
+            "name": "crouch_01",
+            "source_rect": {
+              "x": 311,
+              "y": 0,
+              "w": 311,
+              "h": 373
+            },
+            "pivot": {
+              "x": 144,
+              "y": 311
+            },
+            "duration_ms": 80,
+            "phase": "crouch"
+          },
+          {
+            "name": "crouch_02",
+            "source_rect": {
+              "x": 622,
+              "y": 0,
+              "w": 311,
+              "h": 373
+            },
+            "pivot": {
+              "x": 118,
+              "y": 311
+            },
+            "duration_ms": 120,
+            "phase": "settle"
+          }
+        ],
+        "provenance": {
+          "source_action": "crouch/action.json",
+          "source_sheet": "crouch/keyed.png",
+          "scale_to_runtime": 0.47,
+          "review": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+        }
+      },
+      "jump": {
+        "sheet": "jump/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "jump_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 241,
+              "h": 361
+            },
+            "pivot": {
+              "x": 129,
+              "y": 317
+            },
+            "duration_ms": 60,
+            "phase": "takeoff"
+          },
+          {
+            "name": "jump_01",
+            "source_rect": {
+              "x": 241,
+              "y": 0,
+              "w": 241,
+              "h": 361
+            },
+            "pivot": {
+              "x": 125,
+              "y": 260
+            },
+            "duration_ms": 340,
+            "phase": "rise"
+          },
+          {
+            "name": "jump_02",
+            "source_rect": {
+              "x": 482,
+              "y": 0,
+              "w": 241,
+              "h": 361
+            },
+            "pivot": {
+              "x": 126,
+              "y": 296
+            },
+            "duration_ms": 400,
+            "phase": "fall"
+          }
+        ],
+        "provenance": {
+          "source_action": "jump/action.json",
+          "source_sheet": "jump/keyed.png",
+          "scale_to_runtime": 0.47,
+          "review": "Three selected keys: takeoff, rise and fall. The source includes a fourth landing crouch, omitted because the engine selects idle once grounded. Virtual airborne pivots are calibrated explicitly to align the rise/fall pelvis and head, removing vertical travel already present in the source sheet; only World supplies the jump arc. Total800ms follows existing physics. Source frame3 remains preserved, not exported."
+        }
+      },
+      "block": {
+        "sheet": "block/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "block_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 304,
+              "h": 365
+            },
+            "pivot": {
+              "x": 172,
+              "y": 313
+            },
+            "duration_ms": 80,
+            "phase": "guard"
+          },
+          {
+            "name": "block_01",
+            "source_rect": {
+              "x": 304,
+              "y": 0,
+              "w": 304,
+              "h": 365
+            },
+            "pivot": {
+              "x": 152,
+              "y": 313
+            },
+            "duration_ms": 80,
+            "phase": "brace"
+          },
+          {
+            "name": "block_02",
+            "source_rect": {
+              "x": 608,
+              "y": 0,
+              "w": 304,
+              "h": 365
+            },
+            "pivot": {
+              "x": 129,
+              "y": 313
+            },
+            "duration_ms": 120,
+            "phase": "settle"
+          }
+        ],
+        "provenance": {
+          "source_action": "block/action.json",
+          "source_sheet": "block/keyed.png",
+          "scale_to_runtime": 0.46,
+          "review": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+        }
+      },
+      "crouch_block": {
+        "sheet": "crouch_block/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "crouch_block_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 284,
+              "h": 341
+            },
+            "pivot": {
+              "x": 156,
+              "y": 297
+            },
+            "duration_ms": 70,
+            "phase": "low_guard"
+          },
+          {
+            "name": "crouch_block_01",
+            "source_rect": {
+              "x": 284,
+              "y": 0,
+              "w": 284,
+              "h": 341
+            },
+            "pivot": {
+              "x": 146,
+              "y": 297
+            },
+            "duration_ms": 80,
+            "phase": "brace"
+          },
+          {
+            "name": "crouch_block_02",
+            "source_rect": {
+              "x": 568,
+              "y": 0,
+              "w": 284,
+              "h": 341
+            },
+            "pivot": {
+              "x": 141,
+              "y": 297
+            },
+            "duration_ms": 120,
+            "phase": "settle"
+          }
+        ],
+        "provenance": {
+          "source_action": "crouch_block/action.json",
+          "source_sheet": "crouch_block/keyed.png",
+          "scale_to_runtime": 0.43,
+          "review": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+        }
+      },
+      "hit": {
+        "sheet": "hit/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "hit_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 311,
+              "h": 373
+            },
+            "pivot": {
+              "x": 210,
+              "y": 315
+            },
+            "duration_ms": 80,
+            "phase": "recoil"
+          },
+          {
+            "name": "hit_01",
+            "source_rect": {
+              "x": 311,
+              "y": 0,
+              "w": 311,
+              "h": 373
+            },
+            "pivot": {
+              "x": 159,
+              "y": 315
+            },
+            "duration_ms": 100,
+            "phase": "hurt"
+          },
+          {
+            "name": "hit_02",
+            "source_rect": {
+              "x": 622,
+              "y": 0,
+              "w": 311,
+              "h": 373
+            },
+            "pivot": {
+              "x": 144,
+              "y": 315
+            },
+            "duration_ms": 120,
+            "phase": "recover"
+          }
+        ],
+        "provenance": {
+          "source_action": "hit/action.json",
+          "source_sheet": "hit/keyed.png",
+          "scale_to_runtime": 0.47,
+          "review": "Source inspected by production agent; root alpha review and common-scale preview. Pilot visual and functional review completed; see finalization-review.md for scope and evidence."
+        }
+      },
+      "punch_light": {
+        "sheet": "punch_light/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "punch_light_0",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 256,
+              "h": 378
+            },
+            "pivot": {
+              "x": 140,
+              "y": 325
+            },
+            "duration_ms": 66,
+            "phase": "startup"
+          },
+          {
+            "name": "punch_light_1",
+            "source_rect": {
+              "x": 258,
+              "y": 0,
+              "w": 258,
+              "h": 378
+            },
+            "pivot": {
+              "x": 126,
+              "y": 325
+            },
+            "duration_ms": 84,
+            "phase": "active"
+          },
+          {
+            "name": "punch_light_2",
+            "source_rect": {
+              "x": 516,
+              "y": 0,
+              "w": 243,
+              "h": 378
+            },
+            "pivot": {
+              "x": 125,
+              "y": 325
+            },
+            "duration_ms": 58,
+            "phase": "recovery"
+          },
+          {
+            "name": "punch_light_3",
+            "source_rect": {
+              "x": 774,
+              "y": 0,
+              "w": 250,
+              "h": 378
+            },
+            "pivot": {
+              "x": 121,
+              "y": 325
+            },
+            "duration_ms": 58,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "punch_light/action.json",
+          "source_sheet": "punch_light/keyed.png",
+          "scale_to_runtime": 0.491743,
+          "review": "Revised low contact pose against unchanged baseline collision geometry. Source and explicit pivots reviewed; final Combat Lab capture pending."
+        }
+      },
+      "punch_heavy": {
+        "sheet": "punch_heavy/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "punch_heavy_0",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 265,
+              "h": 404
+            },
+            "pivot": {
+              "x": 145,
+              "y": 348
+            },
+            "duration_ms": 183,
+            "phase": "startup"
+          },
+          {
+            "name": "punch_heavy_1",
+            "source_rect": {
+              "x": 305,
+              "y": 0,
+              "w": 305,
+              "h": 404
+            },
+            "pivot": {
+              "x": 121,
+              "y": 348
+            },
+            "duration_ms": 167,
+            "phase": "active"
+          },
+          {
+            "name": "punch_heavy_2",
+            "source_rect": {
+              "x": 610,
+              "y": 0,
+              "w": 250,
+              "h": 404
+            },
+            "pivot": {
+              "x": 97,
+              "y": 348
+            },
+            "duration_ms": 116,
+            "phase": "recovery"
+          },
+          {
+            "name": "punch_heavy_3",
+            "source_rect": {
+              "x": 915,
+              "y": 0,
+              "w": 256,
+              "h": 404
+            },
+            "pivot": {
+              "x": 116,
+              "y": 348
+            },
+            "duration_ms": 117,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "punch_heavy/action.json",
+          "source_sheet": "punch_heavy/keyed.png",
+          "scale_to_runtime": 0.52549,
+          "review": "Revised low contact pose against unchanged baseline collision geometry. Source and explicit pivots reviewed; final Combat Lab capture pending."
+        }
+      },
+      "kick": {
+        "sheet": "kick/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "kick_0",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 272,
+              "h": 427
+            },
+            "pivot": {
+              "x": 150,
+              "y": 350
+            },
+            "duration_ms": 150,
+            "phase": "startup"
+          },
+          {
+            "name": "kick_1",
+            "source_rect": {
+              "x": 317,
+              "y": 0,
+              "w": 317,
+              "h": 427
+            },
+            "pivot": {
+              "x": 125,
+              "y": 350
+            },
+            "duration_ms": 133,
+            "phase": "active"
+          },
+          {
+            "name": "kick_2",
+            "source_rect": {
+              "x": 634,
+              "y": 0,
+              "w": 261,
+              "h": 427
+            },
+            "pivot": {
+              "x": 128,
+              "y": 350
+            },
+            "duration_ms": 91,
+            "phase": "recovery"
+          },
+          {
+            "name": "kick_3",
+            "source_rect": {
+              "x": 951,
+              "y": 0,
+              "w": 288,
+              "h": 427
+            },
+            "pivot": {
+              "x": 133,
+              "y": 350
+            },
+            "duration_ms": 92,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "kick/action.json",
+          "source_sheet": "kick/keyed.png",
+          "scale_to_runtime": 0.556017,
+          "review": "Revised low contact pose against unchanged baseline collision geometry. Source and explicit pivots reviewed; final Combat Lab capture pending."
+        }
+      },
+      "sweep": {
+        "sheet": "sweep/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "sweep_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 278,
+              "h": 419
+            },
+            "pivot": {
+              "x": 156,
+              "y": 359
+            },
+            "duration_ms": 166,
+            "phase": "startup"
+          },
+          {
+            "name": "sweep_01",
+            "source_rect": {
+              "x": 319,
+              "y": 0,
+              "w": 319,
+              "h": 419
+            },
+            "pivot": {
+              "x": 131,
+              "y": 360
+            },
+            "duration_ms": 150,
+            "phase": "active"
+          },
+          {
+            "name": "sweep_02",
+            "source_rect": {
+              "x": 638,
+              "y": 0,
+              "w": 254,
+              "h": 419
+            },
+            "pivot": {
+              "x": 126,
+              "y": 361
+            },
+            "duration_ms": 108,
+            "phase": "recovery"
+          },
+          {
+            "name": "sweep_03",
+            "source_rect": {
+              "x": 957,
+              "y": 0,
+              "w": 266,
+              "h": 419
+            },
+            "pivot": {
+              "x": 123,
+              "y": 359
+            },
+            "duration_ms": 109,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "sweep/action.json",
+          "source_sheet": "sweep/keyed-mvp-v1.png",
+          "scale_to_runtime": 0.546,
+          "review": "New imagegen animation for MVP. Whole source preserved; explicit crop boundaries separate poses without clipping extended limbs. Uniform action scale preserves anatomy; pivots follow grounded support (virtual floor during fall). Matte alpha extracted under prior authorization; inspected dark/light. Low active foot now attacks ankle/shin band of the actual crouching MoveSpec. Previous action mapping preserved in action-pre-mvp.json. Timing unchanged."
+        }
+      },
+      "overhead": {
+        "sheet": "overhead/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "overhead_0",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 282,
+              "h": 412
+            },
+            "pivot": {
+              "x": 166,
+              "y": 356
+            },
+            "duration_ms": 200,
+            "phase": "startup"
+          },
+          {
+            "name": "overhead_1",
+            "source_rect": {
+              "x": 295,
+              "y": 0,
+              "w": 295,
+              "h": 412
+            },
+            "pivot": {
+              "x": 139,
+              "y": 356
+            },
+            "duration_ms": 116,
+            "phase": "active"
+          },
+          {
+            "name": "overhead_2",
+            "source_rect": {
+              "x": 590,
+              "y": 0,
+              "w": 247,
+              "h": 412
+            },
+            "pivot": {
+              "x": 110,
+              "y": 356
+            },
+            "duration_ms": 125,
+            "phase": "recovery"
+          },
+          {
+            "name": "overhead_3",
+            "source_rect": {
+              "x": 885,
+              "y": 0,
+              "w": 276,
+              "h": 412
+            },
+            "pivot": {
+              "x": 121,
+              "y": 356
+            },
+            "duration_ms": 125,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "overhead/action.json",
+          "source_sheet": "overhead/keyed.png",
+          "scale_to_runtime": 0.537074,
+          "review": "v3 runtime fist above active box. v4 lowered too far near lower edge. v5 selected: active glove around source x899..960,y404..457, mapping with unchanged global pivot783,663 and scale268/499 into world x62..95,y-139..-111; target box world x50.67..160,y-166.67..-101.33. Head/body/feet preserve prior ground placement. Source reviewed; runtime recapture pending."
+        }
+      },
+      "anti_air": {
+        "sheet": "anti_air/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "anti_air_0",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 273,
+              "h": 391
+            },
+            "pivot": {
+              "x": 160,
+              "y": 351
+            },
+            "duration_ms": 100,
+            "phase": "startup"
+          },
+          {
+            "name": "anti_air_1",
+            "source_rect": {
+              "x": 275,
+              "y": 0,
+              "w": 275,
+              "h": 391
+            },
+            "pivot": {
+              "x": 127,
+              "y": 351
+            },
+            "duration_ms": 116,
+            "phase": "active"
+          },
+          {
+            "name": "anti_air_2",
+            "source_rect": {
+              "x": 550,
+              "y": 0,
+              "w": 242,
+              "h": 391
+            },
+            "pivot": {
+              "x": 125,
+              "y": 351
+            },
+            "duration_ms": 108,
+            "phase": "recovery"
+          },
+          {
+            "name": "anti_air_3",
+            "source_rect": {
+              "x": 825,
+              "y": 0,
+              "w": 254,
+              "h": 391
+            },
+            "pivot": {
+              "x": 125,
+              "y": 351
+            },
+            "duration_ms": 109,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "anti_air/action.json",
+          "source_sheet": "anti_air/keyed.png",
+          "scale_to_runtime": 0.509506,
+          "review": "Four explicit source poses reviewed by producing agent. Runtime body normalized using source_body_height_reference_px; no per-frame automatic fitting."
+        }
+      },
+      "air_punch": {
+        "sheet": "air_punch/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "air_punch_0",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 244,
+              "h": 382
+            },
+            "pivot": {
+              "x": 142,
+              "y": 323
+            },
+            "duration_ms": 83,
+            "phase": "startup"
+          },
+          {
+            "name": "air_punch_1",
+            "source_rect": {
+              "x": 286,
+              "y": 0,
+              "w": 286,
+              "h": 382
+            },
+            "pivot": {
+              "x": 126,
+              "y": 345
+            },
+            "duration_ms": 150,
+            "phase": "active"
+          },
+          {
+            "name": "air_punch_2",
+            "source_rect": {
+              "x": 572,
+              "y": 0,
+              "w": 236,
+              "h": 382
+            },
+            "pivot": {
+              "x": 122,
+              "y": 323
+            },
+            "duration_ms": 66,
+            "phase": "recovery"
+          },
+          {
+            "name": "air_punch_3",
+            "source_rect": {
+              "x": 858,
+              "y": 0,
+              "w": 253,
+              "h": 382
+            },
+            "pivot": {
+              "x": 114,
+              "y": 323
+            },
+            "duration_ms": 67,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "air_punch/action.json",
+          "source_sheet": "air_punch/keyed.png",
+          "scale_to_runtime": 0.497217,
+          "review": "Existing source-v2 artwork recalibrated, not regenerated. Active pose hair and waist were44 source px lower than other poses; only air_punch_1 virtual pivot.y650→694 removes ~22px displacement. Hand remains within baseline box (world y approximately -125..-98 versus -130..-74). All other pivots, scale, timing and combat unchanged. See air_punch/pivot-calibration-2026-09-07.md; runtime recapture pending."
+        }
+      },
+      "air_kick": {
+        "sheet": "air_kick/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "air_kick_0",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 254,
+              "h": 382
+            },
+            "pivot": {
+              "x": 139,
+              "y": 323
+            },
+            "duration_ms": 116,
+            "phase": "startup"
+          },
+          {
+            "name": "air_kick_1",
+            "source_rect": {
+              "x": 301,
+              "y": 0,
+              "w": 301,
+              "h": 382
+            },
+            "pivot": {
+              "x": 112,
+              "y": 323
+            },
+            "duration_ms": 167,
+            "phase": "active"
+          },
+          {
+            "name": "air_kick_2",
+            "source_rect": {
+              "x": 602,
+              "y": 0,
+              "w": 219,
+              "h": 382
+            },
+            "pivot": {
+              "x": 94,
+              "y": 323
+            },
+            "duration_ms": 75,
+            "phase": "recovery"
+          },
+          {
+            "name": "air_kick_3",
+            "source_rect": {
+              "x": 903,
+              "y": 0,
+              "w": 245,
+              "h": 382
+            },
+            "pivot": {
+              "x": 114,
+              "y": 323
+            },
+            "duration_ms": 75,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "air_kick/action.json",
+          "source_sheet": "air_kick/cleaned-v2.png",
+          "scale_to_runtime": 0.497217,
+          "review": "v2 redraws only the active extended leg and sneaker downward so the sole reaches the original airborne hitbox. All four virtual Y anchors restored from temporary630 to original650: the previous whole-clip downward offset is no longer needed. Scale .497217, X anchors, timing, physics and baseline collision unchanged. Static pose/contact/alpha reviewed; World transition recapture pending."
+        }
+      },
+      "throw": {
+        "sheet": "throw/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "throw_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 371,
+              "h": 380
+            },
+            "pivot": {
+              "x": 194,
+              "y": 336
+            },
+            "duration_ms": 166,
+            "phase": "startup"
+          },
+          {
+            "name": "throw_01",
+            "source_rect": {
+              "x": 371,
+              "y": 0,
+              "w": 304,
+              "h": 380
+            },
+            "pivot": {
+              "x": 108,
+              "y": 336
+            },
+            "duration_ms": 100,
+            "phase": "capture"
+          },
+          {
+            "name": "throw_02",
+            "source_rect": {
+              "x": 742,
+              "y": 0,
+              "w": 338,
+              "h": 380
+            },
+            "pivot": {
+              "x": 154,
+              "y": 336
+            },
+            "duration_ms": 100,
+            "phase": "capture"
+          },
+          {
+            "name": "throw_03",
+            "source_rect": {
+              "x": 1113,
+              "y": 0,
+              "w": 336,
+              "h": 380
+            },
+            "pivot": {
+              "x": 193,
+              "y": 294
+            },
+            "duration_ms": 67,
+            "phase": "recovery"
+          },
+          {
+            "name": "throw_04",
+            "source_rect": {
+              "x": 1484,
+              "y": 0,
+              "w": 340,
+              "h": 380
+            },
+            "pivot": {
+              "x": 122,
+              "y": 294
+            },
+            "duration_ms": 133,
+            "phase": "recovery"
+          },
+          {
+            "name": "throw_05",
+            "source_rect": {
+              "x": 1855,
+              "y": 0,
+              "w": 338,
+              "h": 380
+            },
+            "pivot": {
+              "x": 143,
+              "y": 294
+            },
+            "duration_ms": 234,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "throw/action.json",
+          "source_sheet": "throw/mapped-spectacle-v3.png",
+          "scale_to_runtime": 0.7,
+          "review": "Six newly drawn back-throw poses. v2 corrects release hands to throw behind LEFT; other poses preserve identity. Fixed10..12 contact,12fcapture, releasevisual22; originalmapping archived. Uniform scale0.7 and explicit foot pivots. v3 replaces only lift pose2: open supporting hands reach forward above forehead toward the captured body, instead of clasping behind the head. Other five source crops remain byte-identical to v2. See throw/mapping-spectacle-v3.json."
+        }
+      },
+      "special": {
+        "sheet": "special/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "special_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 350,
+              "h": 373
+            },
+            "pivot": {
+              "x": 170,
+              "y": 312
+            },
+            "duration_ms": 100,
+            "phase": "emission"
+          },
+          {
+            "name": "special_01",
+            "source_rect": {
+              "x": 350,
+              "y": 0,
+              "w": 285,
+              "h": 373
+            },
+            "pivot": {
+              "x": 122,
+              "y": 310
+            },
+            "duration_ms": 100,
+            "phase": "recovery"
+          },
+          {
+            "name": "special_02",
+            "source_rect": {
+              "x": 700,
+              "y": 0,
+              "w": 298,
+              "h": 373
+            },
+            "pivot": {
+              "x": 123,
+              "y": 310
+            },
+            "duration_ms": 150,
+            "phase": "return"
+          }
+        ],
+        "provenance": {
+          "source_action": "special/action.json",
+          "source_sheet": "special/keyed.png",
+          "scale_to_runtime": 0.47,
+          "review": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+        }
+      },
+      "spawn": {
+        "sheet": "spawn/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "spawn_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 289,
+              "h": 374
+            },
+            "pivot": {
+              "x": 151,
+              "y": 314
+            },
+            "duration_ms": 650,
+            "phase": "open_notebook"
+          },
+          {
+            "name": "spawn_01",
+            "source_rect": {
+              "x": 346,
+              "y": 0,
+              "w": 253,
+              "h": 374
+            },
+            "pivot": {
+              "x": 133,
+              "y": 314
+            },
+            "duration_ms": 850,
+            "phase": "type"
+          },
+          {
+            "name": "spawn_02",
+            "source_rect": {
+              "x": 692,
+              "y": 0,
+              "w": 346,
+              "h": 374
+            },
+            "pivot": {
+              "x": 115,
+              "y": 315
+            },
+            "duration_ms": 245,
+            "phase": "toss_notebook"
+          },
+          {
+            "name": "spawn_03",
+            "source_rect": {
+              "x": 1038,
+              "y": 0,
+              "w": 233,
+              "h": 374
+            },
+            "pivot": {
+              "x": 90,
+              "y": 314
+            },
+            "duration_ms": 800,
+            "phase": "ready"
+          }
+        ],
+        "provenance": {
+          "source_action": "spawn/action.json",
+          "source_sheet": "spawn/keyed.png",
+          "scale_to_runtime": 0.516378,
+          "review": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+        }
+      },
+      "victory": {
+        "sheet": "victory/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "victory_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 286,
+              "h": 343
+            },
+            "pivot": {
+              "x": 171,
+              "y": 298
+            },
+            "duration_ms": 160,
+            "phase": "raise_thumb"
+          },
+          {
+            "name": "victory_01",
+            "source_rect": {
+              "x": 286,
+              "y": 0,
+              "w": 286,
+              "h": 343
+            },
+            "pivot": {
+              "x": 123,
+              "y": 298
+            },
+            "duration_ms": 500,
+            "phase": "thumbs_up"
+          }
+        ],
+        "provenance": {
+          "source_action": "victory/action.json",
+          "source_sheet": "victory/keyed.png",
+          "scale_to_runtime": 0.353096,
+          "review": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+        }
+      },
+      "defeat": {
+        "sheet": "defeat/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "defeat_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 275,
+              "h": 329
+            },
+            "pivot": {
+              "x": 151,
+              "y": 292
+            },
+            "duration_ms": 160,
+            "phase": "buckle"
+          },
+          {
+            "name": "defeat_01",
+            "source_rect": {
+              "x": 275,
+              "y": 0,
+              "w": 275,
+              "h": 329
+            },
+            "pivot": {
+              "x": 135,
+              "y": 293
+            },
+            "duration_ms": 180,
+            "phase": "kneel"
+          },
+          {
+            "name": "defeat_02",
+            "source_rect": {
+              "x": 550,
+              "y": 0,
+              "w": 275,
+              "h": 329
+            },
+            "pivot": {
+              "x": 112,
+              "y": 296
+            },
+            "duration_ms": 660,
+            "phase": "supported_hold"
+          }
+        ],
+        "provenance": {
+          "source_action": "defeat/action.json",
+          "source_sheet": "defeat/keyed.png",
+          "scale_to_runtime": 0.415504,
+          "review": "Explicit source rectangles reviewed incl extended fingers/notebook; homogeneous source scale to runtime, no combat changes."
+        }
+      },
+      "knockdown": {
+        "sheet": "knockdown/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "knockdown_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 265,
+              "h": 384
+            },
+            "pivot": {
+              "x": 182,
+              "y": 325
+            },
+            "duration_ms": 100,
+            "phase": "fall"
+          },
+          {
+            "name": "knockdown_01",
+            "source_rect": {
+              "x": 280,
+              "y": 0,
+              "w": 280,
+              "h": 384
+            },
+            "pivot": {
+              "x": 145,
+              "y": 325
+            },
+            "duration_ms": 220,
+            "phase": "grounded"
+          },
+          {
+            "name": "knockdown_02",
+            "source_rect": {
+              "x": 560,
+              "y": 0,
+              "w": 235,
+              "h": 384
+            },
+            "pivot": {
+              "x": 130,
+              "y": 316
+            },
+            "duration_ms": 180,
+            "phase": "get_up"
+          },
+          {
+            "name": "knockdown_03",
+            "source_rect": {
+              "x": 840,
+              "y": 0,
+              "w": 244,
+              "h": 384
+            },
+            "pivot": {
+              "x": 130,
+              "y": 316
+            },
+            "duration_ms": 100,
+            "phase": "recover"
+          }
+        ],
+        "provenance": {
+          "source_action": "knockdown/action.json",
+          "source_sheet": "knockdown/keyed-v1.png",
+          "scale_to_runtime": 0.5,
+          "review": "Four newly generated fall/floor/get-up/guard poses; same attached hip accessories. Floor anchors are virtual during fall and actual support afterward. One uniform .5 action scale; final guard remains slightly bent at knees. Original source and prompt retained."
+        }
+      },
+      "signature_special": {
+        "sheet": "signature_special/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "signature_special_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 342,
+              "h": 489
+            },
+            "pivot": {
+              "x": 148,
+              "y": 436
+            },
+            "duration_ms": 133,
+            "phase": "startup"
+          },
+          {
+            "name": "signature_special_01",
+            "source_rect": {
+              "x": 396,
+              "y": 0,
+              "w": 301,
+              "h": 489
+            },
+            "pivot": {
+              "x": 112,
+              "y": 436
+            },
+            "duration_ms": 133,
+            "phase": "startup"
+          },
+          {
+            "name": "signature_special_02",
+            "source_rect": {
+              "x": 792,
+              "y": 0,
+              "w": 306,
+              "h": 489
+            },
+            "pivot": {
+              "x": 92,
+              "y": 436
+            },
+            "duration_ms": 134,
+            "phase": "startup"
+          },
+          {
+            "name": "signature_special_03",
+            "source_rect": {
+              "x": 1188,
+              "y": 0,
+              "w": 355,
+              "h": 489
+            },
+            "pivot": {
+              "x": 118,
+              "y": 436
+            },
+            "duration_ms": 100,
+            "phase": "active"
+          },
+          {
+            "name": "signature_special_04",
+            "source_rect": {
+              "x": 1584,
+              "y": 0,
+              "w": 332,
+              "h": 489
+            },
+            "pivot": {
+              "x": 128,
+              "y": 392
+            },
+            "duration_ms": 100,
+            "phase": "active"
+          },
+          {
+            "name": "signature_special_05",
+            "source_rect": {
+              "x": 1980,
+              "y": 0,
+              "w": 396,
+              "h": 489
+            },
+            "pivot": {
+              "x": 152,
+              "y": 392
+            },
+            "duration_ms": 116,
+            "phase": "active"
+          },
+          {
+            "name": "signature_special_06",
+            "source_rect": {
+              "x": 2376,
+              "y": 0,
+              "w": 338,
+              "h": 489
+            },
+            "pivot": {
+              "x": 140,
+              "y": 387
+            },
+            "duration_ms": 400,
+            "phase": "recovery"
+          },
+          {
+            "name": "signature_special_07",
+            "source_rect": {
+              "x": 2772,
+              "y": 0,
+              "w": 273,
+              "h": 489
+            },
+            "pivot": {
+              "x": 117,
+              "y": 374
+            },
+            "duration_ms": 417,
+            "phase": "recovery"
+          }
+        ],
+        "provenance": {
+          "source_action": "signature_special/action.json",
+          "source_sheet": "signature_special/mapped-spectacle-v1.png",
+          "scale_to_runtime": 0.9,
+          "review": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved."
+        }
+      },
+      "heavy_hit": {
+        "sheet": "heavy_hit/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "heavy_hit_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 284,
+              "h": 378
+            },
+            "pivot": {
+              "x": 151,
+              "y": 329
+            },
+            "duration_ms": 50,
+            "phase": "heavy_hit"
+          },
+          {
+            "name": "heavy_hit_01",
+            "source_rect": {
+              "x": 293,
+              "y": 0,
+              "w": 248,
+              "h": 378
+            },
+            "pivot": {
+              "x": 125,
+              "y": 329
+            },
+            "duration_ms": 60,
+            "phase": "heavy_hit"
+          },
+          {
+            "name": "heavy_hit_02",
+            "source_rect": {
+              "x": 586,
+              "y": 0,
+              "w": 293,
+              "h": 378
+            },
+            "pivot": {
+              "x": 155,
+              "y": 333
+            },
+            "duration_ms": 70,
+            "phase": "heavy_hit"
+          },
+          {
+            "name": "heavy_hit_03",
+            "source_rect": {
+              "x": 879,
+              "y": 0,
+              "w": 254,
+              "h": 378
+            },
+            "pivot": {
+              "x": 125,
+              "y": 336
+            },
+            "duration_ms": 87,
+            "phase": "heavy_hit"
+          }
+        ],
+        "provenance": {
+          "source_action": "heavy_hit/action.json",
+          "source_sheet": "reactions/keyed-spectacle-v1.png",
+          "scale_to_runtime": 0.86,
+          "review": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved."
+        }
+      },
+      "launched": {
+        "sheet": "launched/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "launched_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 297,
+              "h": 305
+            },
+            "pivot": {
+              "x": 148,
+              "y": 236
+            },
+            "duration_ms": 120,
+            "phase": "launched"
+          },
+          {
+            "name": "launched_01",
+            "source_rect": {
+              "x": 297,
+              "y": 0,
+              "w": 224,
+              "h": 305
+            },
+            "pivot": {
+              "x": 110,
+              "y": 254
+            },
+            "duration_ms": 180,
+            "phase": "launched"
+          },
+          {
+            "name": "launched_02",
+            "source_rect": {
+              "x": 594,
+              "y": 0,
+              "w": 286,
+              "h": 305
+            },
+            "pivot": {
+              "x": 142,
+              "y": 300
+            },
+            "duration_ms": 180,
+            "phase": "launched"
+          },
+          {
+            "name": "launched_03",
+            "source_rect": {
+              "x": 891,
+              "y": 0,
+              "w": 272,
+              "h": 305
+            },
+            "pivot": {
+              "x": 135,
+              "y": 300
+            },
+            "duration_ms": 300,
+            "phase": "launched"
+          }
+        ],
+        "provenance": {
+          "source_action": "launched/action.json",
+          "source_sheet": "reactions/keyed-spectacle-v1.png",
+          "scale_to_runtime": 0.86,
+          "review": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved."
+        }
+      },
+      "thrown": {
+        "sheet": "thrown/prepared.png",
+        "reviewed": true,
+        "loop": false,
+        "frames": [
+          {
+            "name": "thrown_00",
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 262,
+              "h": 395
+            },
+            "pivot": {
+              "x": 143,
+              "y": 267
+            },
+            "duration_ms": 200,
+            "phase": "thrown"
+          },
+          {
+            "name": "thrown_01",
+            "source_rect": {
+              "x": 304,
+              "y": 0,
+              "w": 219,
+              "h": 395
+            },
+            "pivot": {
+              "x": 103,
+              "y": 279
+            },
+            "duration_ms": 180,
+            "phase": "thrown"
+          },
+          {
+            "name": "thrown_02",
+            "source_rect": {
+              "x": 608,
+              "y": 0,
+              "w": 292,
+              "h": 395
+            },
+            "pivot": {
+              "x": 159,
+              "y": 314
+            },
+            "duration_ms": 200,
+            "phase": "thrown"
+          },
+          {
+            "name": "thrown_03",
+            "source_rect": {
+              "x": 912,
+              "y": 0,
+              "w": 304,
+              "h": 395
+            },
+            "pivot": {
+              "x": 146,
+              "y": 348
+            },
+            "duration_ms": 300,
+            "phase": "thrown"
+          }
+        ],
+        "provenance": {
+          "source_action": "thrown/action.json",
+          "source_sheet": "reactions/keyed-spectacle-v1.png",
+          "scale_to_runtime": 0.86,
+          "review": "Imagegen authored poses; explicit visual crops, one uniform anatomical scale, ground anchors for standing and pelvis-relative virtual pivots for flight. See spectacle-review.md. Sources and prompts preserved."
+        }
+      }
+    }
+  },
+  "sources": [
+    {
+      "path": "../../production/rust/idle/prepared.png",
+      "sha256": "a2425f3e89d1d9a41a21b380eaeb5faa9c59286c4541739d7a81b39ad8224fa5"
+    },
+    {
+      "path": "../../production/rust/walk/prepared.png",
+      "sha256": "cff9402a4922b89460e8606a117ef64f15bdfb4bec260fd7c322eef12aad63f7"
+    },
+    {
+      "path": "../../production/rust/crouch/prepared.png",
+      "sha256": "d2dde051f9205660ef0ae8e157ff380edf4e1f1db7bcb5eb9dfbb809d97f976e"
+    },
+    {
+      "path": "../../production/rust/jump/prepared.png",
+      "sha256": "4dbe473cb4484ddc7ada7dd6e25cfdd4e6ed67e52455cfc275698baefe2cb8bb"
+    },
+    {
+      "path": "../../production/rust/block/prepared.png",
+      "sha256": "e23d020769ef33798f36b1426be89f4a9ebdc5bab1027598e6ea7e90c86f7b10"
+    },
+    {
+      "path": "../../production/rust/crouch_block/prepared.png",
+      "sha256": "ec9d655aeef3db58703e9065162dc9f9499d684b9972ebc183817f372522571f"
+    },
+    {
+      "path": "../../production/rust/hit/prepared.png",
+      "sha256": "bbdec61520a6fe48f5d4d3338459a4acb17d70d1fee6e0c8e39583fea8a5e320"
+    },
+    {
+      "path": "../../production/rust/punch_light/prepared.png",
+      "sha256": "63213345be23dc2aaf856d1abb26e7b4ca06775fa10bd30befc573ac171a7e9f"
+    },
+    {
+      "path": "../../production/rust/punch_heavy/prepared.png",
+      "sha256": "db67d0ab6a61d5ac2948c225ed487e2f2ef9786a79f831fcdf9c1d55cb1197e0"
+    },
+    {
+      "path": "../../production/rust/kick/prepared.png",
+      "sha256": "9891bfa99969a4b626357eeeff5f7c9cdaa28b666ad5403cc270d4d82866e170"
+    },
+    {
+      "path": "../../production/rust/sweep/prepared.png",
+      "sha256": "bde964b538d9f05739a041f3eabe39ee42d6ae4a8c2bcd2a80969d112d874ac1"
+    },
+    {
+      "path": "../../production/rust/overhead/prepared.png",
+      "sha256": "4cc0a537f66775b69a6698cd5bf8b4a46d9171f482171e068873f75f3814e645"
+    },
+    {
+      "path": "../../production/rust/anti_air/prepared.png",
+      "sha256": "16d38f80234eab58f5acec7cf61252e5d18b670b27f06bdb7a06b55cf4af9941"
+    },
+    {
+      "path": "../../production/rust/air_punch/prepared.png",
+      "sha256": "9404edcc94239956d7e646572915e5218d86582897eaa200a7b8543c6160e832"
+    },
+    {
+      "path": "../../production/rust/air_kick/prepared.png",
+      "sha256": "3f10eb4c1942acde21e08ba68079ac5d168400fd25950fba46d951ee23c0cc6d"
+    },
+    {
+      "path": "../../production/rust/throw/prepared.png",
+      "sha256": "0d98a6e1cf15a223a25f690696ac39e38e644619393d88ef20a64f944aaa981b"
+    },
+    {
+      "path": "../../production/rust/special/prepared.png",
+      "sha256": "dc8d2bd11bd13d4f3e825d05ca5272c5f7bc5a51be66e8a1cafe693bb8ebeccb"
+    },
+    {
+      "path": "../../production/rust/spawn/prepared.png",
+      "sha256": "a8858e87c1a9adfe7d97c832b08aba225427c5eaa6c12413ff385e548d0349a7"
+    },
+    {
+      "path": "../../production/rust/victory/prepared.png",
+      "sha256": "918d48351150e225626805425af1eac58a3a4fd242bf23a368c70bfbb0c62403"
+    },
+    {
+      "path": "../../production/rust/defeat/prepared.png",
+      "sha256": "b7b74b5d3655127d4b491f3f5eecfd94b3ee18f7f844d43eb894a551deb40e52"
+    },
+    {
+      "path": "../../production/rust/knockdown/prepared.png",
+      "sha256": "a9b3d2d064ef8ce350f2a53de2b4f6315a172929d6b9e75cd2a705afccbcb828"
+    },
+    {
+      "path": "../../production/rust/signature_special/prepared.png",
+      "sha256": "6076dc45177b7bec5aff1cd93f4cb7a131794a45446d09e0679fde94e4e15b1f"
+    },
+    {
+      "path": "../../production/rust/heavy_hit/prepared.png",
+      "sha256": "fd56b5507a4139b6836feec7e9426f5c709592a1d9fc4e8908a33e1e142462ef"
+    },
+    {
+      "path": "../../production/rust/launched/prepared.png",
+      "sha256": "c52f51fe6a8da4130b3e542b662f8c5d735fd44015fb7bd08fa92762067a3ac9"
+    },
+    {
+      "path": "../../production/rust/thrown/prepared.png",
+      "sha256": "f91d80faabb30d092cd3ed4e6d8c033ba2840c995c671a061748e84c883761e5"
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_00",
+      "action": "idle",
+      "sheet": "../../production/rust/idle/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 241,
+        "h": 361
+      },
+      "exported_frame": "../../production/rust/idle/frames/idle_00.png",
+      "phase": "breathing"
+    },
+    {
+      "name": "idle_01",
+      "action": "idle",
+      "sheet": "../../production/rust/idle/prepared.png",
+      "source_rect": {
+        "x": 241,
+        "y": 0,
+        "w": 241,
+        "h": 361
+      },
+      "exported_frame": "../../production/rust/idle/frames/idle_01.png",
+      "phase": "breathing"
+    },
+    {
+      "name": "idle_02",
+      "action": "idle",
+      "sheet": "../../production/rust/idle/prepared.png",
+      "source_rect": {
+        "x": 482,
+        "y": 0,
+        "w": 241,
+        "h": 361
+      },
+      "exported_frame": "../../production/rust/idle/frames/idle_02.png",
+      "phase": "breathing"
+    },
+    {
+      "name": "idle_03",
+      "action": "idle",
+      "sheet": "../../production/rust/idle/prepared.png",
+      "source_rect": {
+        "x": 723,
+        "y": 0,
+        "w": 241,
+        "h": 361
+      },
+      "exported_frame": "../../production/rust/idle/frames/idle_03.png",
+      "phase": "breathing"
+    },
+    {
+      "name": "walk_00",
+      "action": "walk",
+      "sheet": "../../production/rust/walk/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 244,
+        "h": 335
+      },
+      "exported_frame": "../../production/rust/walk/frames/walk_00.png",
+      "phase": "contact-near"
+    },
+    {
+      "name": "walk_01",
+      "action": "walk",
+      "sheet": "../../production/rust/walk/prepared.png",
+      "source_rect": {
+        "x": 244,
+        "y": 0,
+        "w": 203,
+        "h": 335
+      },
+      "exported_frame": "../../production/rust/walk/frames/walk_01.png",
+      "phase": "passing-far"
+    },
+    {
+      "name": "walk_02",
+      "action": "walk",
+      "sheet": "../../production/rust/walk/prepared.png",
+      "source_rect": {
+        "x": 488,
+        "y": 0,
+        "w": 244,
+        "h": 335
+      },
+      "exported_frame": "../../production/rust/walk/frames/walk_02.png",
+      "phase": "contact-far"
+    },
+    {
+      "name": "walk_03",
+      "action": "walk",
+      "sheet": "../../production/rust/walk/prepared.png",
+      "source_rect": {
+        "x": 732,
+        "y": 0,
+        "w": 203,
+        "h": 335
+      },
+      "exported_frame": "../../production/rust/walk/frames/walk_03.png",
+      "phase": "passing-near"
+    },
+    {
+      "name": "crouch_00",
+      "action": "crouch",
+      "sheet": "../../production/rust/crouch/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 311,
+        "h": 373
+      },
+      "exported_frame": "../../production/rust/crouch/frames/crouch_00.png",
+      "phase": "lower"
+    },
+    {
+      "name": "crouch_01",
+      "action": "crouch",
+      "sheet": "../../production/rust/crouch/prepared.png",
+      "source_rect": {
+        "x": 311,
+        "y": 0,
+        "w": 311,
+        "h": 373
+      },
+      "exported_frame": "../../production/rust/crouch/frames/crouch_01.png",
+      "phase": "crouch"
+    },
+    {
+      "name": "crouch_02",
+      "action": "crouch",
+      "sheet": "../../production/rust/crouch/prepared.png",
+      "source_rect": {
+        "x": 622,
+        "y": 0,
+        "w": 311,
+        "h": 373
+      },
+      "exported_frame": "../../production/rust/crouch/frames/crouch_02.png",
+      "phase": "settle"
+    },
+    {
+      "name": "jump_00",
+      "action": "jump",
+      "sheet": "../../production/rust/jump/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 241,
+        "h": 361
+      },
+      "exported_frame": "../../production/rust/jump/frames/jump_00.png",
+      "phase": "takeoff"
+    },
+    {
+      "name": "jump_01",
+      "action": "jump",
+      "sheet": "../../production/rust/jump/prepared.png",
+      "source_rect": {
+        "x": 241,
+        "y": 0,
+        "w": 241,
+        "h": 361
+      },
+      "exported_frame": "../../production/rust/jump/frames/jump_01.png",
+      "phase": "rise"
+    },
+    {
+      "name": "jump_02",
+      "action": "jump",
+      "sheet": "../../production/rust/jump/prepared.png",
+      "source_rect": {
+        "x": 482,
+        "y": 0,
+        "w": 241,
+        "h": 361
+      },
+      "exported_frame": "../../production/rust/jump/frames/jump_02.png",
+      "phase": "fall"
+    },
+    {
+      "name": "block_00",
+      "action": "block",
+      "sheet": "../../production/rust/block/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 304,
+        "h": 365
+      },
+      "exported_frame": "../../production/rust/block/frames/block_00.png",
+      "phase": "guard"
+    },
+    {
+      "name": "block_01",
+      "action": "block",
+      "sheet": "../../production/rust/block/prepared.png",
+      "source_rect": {
+        "x": 304,
+        "y": 0,
+        "w": 304,
+        "h": 365
+      },
+      "exported_frame": "../../production/rust/block/frames/block_01.png",
+      "phase": "brace"
+    },
+    {
+      "name": "block_02",
+      "action": "block",
+      "sheet": "../../production/rust/block/prepared.png",
+      "source_rect": {
+        "x": 608,
+        "y": 0,
+        "w": 304,
+        "h": 365
+      },
+      "exported_frame": "../../production/rust/block/frames/block_02.png",
+      "phase": "settle"
+    },
+    {
+      "name": "crouch_block_00",
+      "action": "crouch_block",
+      "sheet": "../../production/rust/crouch_block/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 284,
+        "h": 341
+      },
+      "exported_frame": "../../production/rust/crouch_block/frames/crouch_block_00.png",
+      "phase": "low_guard"
+    },
+    {
+      "name": "crouch_block_01",
+      "action": "crouch_block",
+      "sheet": "../../production/rust/crouch_block/prepared.png",
+      "source_rect": {
+        "x": 284,
+        "y": 0,
+        "w": 284,
+        "h": 341
+      },
+      "exported_frame": "../../production/rust/crouch_block/frames/crouch_block_01.png",
+      "phase": "brace"
+    },
+    {
+      "name": "crouch_block_02",
+      "action": "crouch_block",
+      "sheet": "../../production/rust/crouch_block/prepared.png",
+      "source_rect": {
+        "x": 568,
+        "y": 0,
+        "w": 284,
+        "h": 341
+      },
+      "exported_frame": "../../production/rust/crouch_block/frames/crouch_block_02.png",
+      "phase": "settle"
+    },
+    {
+      "name": "hit_00",
+      "action": "hit",
+      "sheet": "../../production/rust/hit/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 311,
+        "h": 373
+      },
+      "exported_frame": "../../production/rust/hit/frames/hit_00.png",
+      "phase": "recoil"
+    },
+    {
+      "name": "hit_01",
+      "action": "hit",
+      "sheet": "../../production/rust/hit/prepared.png",
+      "source_rect": {
+        "x": 311,
+        "y": 0,
+        "w": 311,
+        "h": 373
+      },
+      "exported_frame": "../../production/rust/hit/frames/hit_01.png",
+      "phase": "hurt"
+    },
+    {
+      "name": "hit_02",
+      "action": "hit",
+      "sheet": "../../production/rust/hit/prepared.png",
+      "source_rect": {
+        "x": 622,
+        "y": 0,
+        "w": 311,
+        "h": 373
+      },
+      "exported_frame": "../../production/rust/hit/frames/hit_02.png",
+      "phase": "recover"
+    },
+    {
+      "name": "punch_light_0",
+      "action": "punch_light",
+      "sheet": "../../production/rust/punch_light/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 378
+      },
+      "exported_frame": "../../production/rust/punch_light/frames/punch_light_0.png",
+      "phase": "startup"
+    },
+    {
+      "name": "punch_light_1",
+      "action": "punch_light",
+      "sheet": "../../production/rust/punch_light/prepared.png",
+      "source_rect": {
+        "x": 258,
+        "y": 0,
+        "w": 258,
+        "h": 378
+      },
+      "exported_frame": "../../production/rust/punch_light/frames/punch_light_1.png",
+      "phase": "active"
+    },
+    {
+      "name": "punch_light_2",
+      "action": "punch_light",
+      "sheet": "../../production/rust/punch_light/prepared.png",
+      "source_rect": {
+        "x": 516,
+        "y": 0,
+        "w": 243,
+        "h": 378
+      },
+      "exported_frame": "../../production/rust/punch_light/frames/punch_light_2.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "punch_light_3",
+      "action": "punch_light",
+      "sheet": "../../production/rust/punch_light/prepared.png",
+      "source_rect": {
+        "x": 774,
+        "y": 0,
+        "w": 250,
+        "h": 378
+      },
+      "exported_frame": "../../production/rust/punch_light/frames/punch_light_3.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "punch_heavy_0",
+      "action": "punch_heavy",
+      "sheet": "../../production/rust/punch_heavy/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 265,
+        "h": 404
+      },
+      "exported_frame": "../../production/rust/punch_heavy/frames/punch_heavy_0.png",
+      "phase": "startup"
+    },
+    {
+      "name": "punch_heavy_1",
+      "action": "punch_heavy",
+      "sheet": "../../production/rust/punch_heavy/prepared.png",
+      "source_rect": {
+        "x": 305,
+        "y": 0,
+        "w": 305,
+        "h": 404
+      },
+      "exported_frame": "../../production/rust/punch_heavy/frames/punch_heavy_1.png",
+      "phase": "active"
+    },
+    {
+      "name": "punch_heavy_2",
+      "action": "punch_heavy",
+      "sheet": "../../production/rust/punch_heavy/prepared.png",
+      "source_rect": {
+        "x": 610,
+        "y": 0,
+        "w": 250,
+        "h": 404
+      },
+      "exported_frame": "../../production/rust/punch_heavy/frames/punch_heavy_2.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "punch_heavy_3",
+      "action": "punch_heavy",
+      "sheet": "../../production/rust/punch_heavy/prepared.png",
+      "source_rect": {
+        "x": 915,
+        "y": 0,
+        "w": 256,
+        "h": 404
+      },
+      "exported_frame": "../../production/rust/punch_heavy/frames/punch_heavy_3.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "kick_0",
+      "action": "kick",
+      "sheet": "../../production/rust/kick/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 272,
+        "h": 427
+      },
+      "exported_frame": "../../production/rust/kick/frames/kick_0.png",
+      "phase": "startup"
+    },
+    {
+      "name": "kick_1",
+      "action": "kick",
+      "sheet": "../../production/rust/kick/prepared.png",
+      "source_rect": {
+        "x": 317,
+        "y": 0,
+        "w": 317,
+        "h": 427
+      },
+      "exported_frame": "../../production/rust/kick/frames/kick_1.png",
+      "phase": "active"
+    },
+    {
+      "name": "kick_2",
+      "action": "kick",
+      "sheet": "../../production/rust/kick/prepared.png",
+      "source_rect": {
+        "x": 634,
+        "y": 0,
+        "w": 261,
+        "h": 427
+      },
+      "exported_frame": "../../production/rust/kick/frames/kick_2.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "kick_3",
+      "action": "kick",
+      "sheet": "../../production/rust/kick/prepared.png",
+      "source_rect": {
+        "x": 951,
+        "y": 0,
+        "w": 288,
+        "h": 427
+      },
+      "exported_frame": "../../production/rust/kick/frames/kick_3.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_00",
+      "action": "sweep",
+      "sheet": "../../production/rust/sweep/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 278,
+        "h": 419
+      },
+      "exported_frame": "../../production/rust/sweep/frames/sweep_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "sweep_01",
+      "action": "sweep",
+      "sheet": "../../production/rust/sweep/prepared.png",
+      "source_rect": {
+        "x": 319,
+        "y": 0,
+        "w": 319,
+        "h": 419
+      },
+      "exported_frame": "../../production/rust/sweep/frames/sweep_01.png",
+      "phase": "active"
+    },
+    {
+      "name": "sweep_02",
+      "action": "sweep",
+      "sheet": "../../production/rust/sweep/prepared.png",
+      "source_rect": {
+        "x": 638,
+        "y": 0,
+        "w": 254,
+        "h": 419
+      },
+      "exported_frame": "../../production/rust/sweep/frames/sweep_02.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "sweep_03",
+      "action": "sweep",
+      "sheet": "../../production/rust/sweep/prepared.png",
+      "source_rect": {
+        "x": 957,
+        "y": 0,
+        "w": 266,
+        "h": 419
+      },
+      "exported_frame": "../../production/rust/sweep/frames/sweep_03.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "overhead_0",
+      "action": "overhead",
+      "sheet": "../../production/rust/overhead/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 282,
+        "h": 412
+      },
+      "exported_frame": "../../production/rust/overhead/frames/overhead_0.png",
+      "phase": "startup"
+    },
+    {
+      "name": "overhead_1",
+      "action": "overhead",
+      "sheet": "../../production/rust/overhead/prepared.png",
+      "source_rect": {
+        "x": 295,
+        "y": 0,
+        "w": 295,
+        "h": 412
+      },
+      "exported_frame": "../../production/rust/overhead/frames/overhead_1.png",
+      "phase": "active"
+    },
+    {
+      "name": "overhead_2",
+      "action": "overhead",
+      "sheet": "../../production/rust/overhead/prepared.png",
+      "source_rect": {
+        "x": 590,
+        "y": 0,
+        "w": 247,
+        "h": 412
+      },
+      "exported_frame": "../../production/rust/overhead/frames/overhead_2.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "overhead_3",
+      "action": "overhead",
+      "sheet": "../../production/rust/overhead/prepared.png",
+      "source_rect": {
+        "x": 885,
+        "y": 0,
+        "w": 276,
+        "h": 412
+      },
+      "exported_frame": "../../production/rust/overhead/frames/overhead_3.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "anti_air_0",
+      "action": "anti_air",
+      "sheet": "../../production/rust/anti_air/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 273,
+        "h": 391
+      },
+      "exported_frame": "../../production/rust/anti_air/frames/anti_air_0.png",
+      "phase": "startup"
+    },
+    {
+      "name": "anti_air_1",
+      "action": "anti_air",
+      "sheet": "../../production/rust/anti_air/prepared.png",
+      "source_rect": {
+        "x": 275,
+        "y": 0,
+        "w": 275,
+        "h": 391
+      },
+      "exported_frame": "../../production/rust/anti_air/frames/anti_air_1.png",
+      "phase": "active"
+    },
+    {
+      "name": "anti_air_2",
+      "action": "anti_air",
+      "sheet": "../../production/rust/anti_air/prepared.png",
+      "source_rect": {
+        "x": 550,
+        "y": 0,
+        "w": 242,
+        "h": 391
+      },
+      "exported_frame": "../../production/rust/anti_air/frames/anti_air_2.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "anti_air_3",
+      "action": "anti_air",
+      "sheet": "../../production/rust/anti_air/prepared.png",
+      "source_rect": {
+        "x": 825,
+        "y": 0,
+        "w": 254,
+        "h": 391
+      },
+      "exported_frame": "../../production/rust/anti_air/frames/anti_air_3.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "air_punch_0",
+      "action": "air_punch",
+      "sheet": "../../production/rust/air_punch/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 244,
+        "h": 382
+      },
+      "exported_frame": "../../production/rust/air_punch/frames/air_punch_0.png",
+      "phase": "startup"
+    },
+    {
+      "name": "air_punch_1",
+      "action": "air_punch",
+      "sheet": "../../production/rust/air_punch/prepared.png",
+      "source_rect": {
+        "x": 286,
+        "y": 0,
+        "w": 286,
+        "h": 382
+      },
+      "exported_frame": "../../production/rust/air_punch/frames/air_punch_1.png",
+      "phase": "active"
+    },
+    {
+      "name": "air_punch_2",
+      "action": "air_punch",
+      "sheet": "../../production/rust/air_punch/prepared.png",
+      "source_rect": {
+        "x": 572,
+        "y": 0,
+        "w": 236,
+        "h": 382
+      },
+      "exported_frame": "../../production/rust/air_punch/frames/air_punch_2.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "air_punch_3",
+      "action": "air_punch",
+      "sheet": "../../production/rust/air_punch/prepared.png",
+      "source_rect": {
+        "x": 858,
+        "y": 0,
+        "w": 253,
+        "h": 382
+      },
+      "exported_frame": "../../production/rust/air_punch/frames/air_punch_3.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "air_kick_0",
+      "action": "air_kick",
+      "sheet": "../../production/rust/air_kick/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 254,
+        "h": 382
+      },
+      "exported_frame": "../../production/rust/air_kick/frames/air_kick_0.png",
+      "phase": "startup"
+    },
+    {
+      "name": "air_kick_1",
+      "action": "air_kick",
+      "sheet": "../../production/rust/air_kick/prepared.png",
+      "source_rect": {
+        "x": 301,
+        "y": 0,
+        "w": 301,
+        "h": 382
+      },
+      "exported_frame": "../../production/rust/air_kick/frames/air_kick_1.png",
+      "phase": "active"
+    },
+    {
+      "name": "air_kick_2",
+      "action": "air_kick",
+      "sheet": "../../production/rust/air_kick/prepared.png",
+      "source_rect": {
+        "x": 602,
+        "y": 0,
+        "w": 219,
+        "h": 382
+      },
+      "exported_frame": "../../production/rust/air_kick/frames/air_kick_2.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "air_kick_3",
+      "action": "air_kick",
+      "sheet": "../../production/rust/air_kick/prepared.png",
+      "source_rect": {
+        "x": 903,
+        "y": 0,
+        "w": 245,
+        "h": 382
+      },
+      "exported_frame": "../../production/rust/air_kick/frames/air_kick_3.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_00",
+      "action": "throw",
+      "sheet": "../../production/rust/throw/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 371,
+        "h": 380
+      },
+      "exported_frame": "../../production/rust/throw/frames/throw_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "throw_01",
+      "action": "throw",
+      "sheet": "../../production/rust/throw/prepared.png",
+      "source_rect": {
+        "x": 371,
+        "y": 0,
+        "w": 304,
+        "h": 380
+      },
+      "exported_frame": "../../production/rust/throw/frames/throw_01.png",
+      "phase": "capture"
+    },
+    {
+      "name": "throw_02",
+      "action": "throw",
+      "sheet": "../../production/rust/throw/prepared.png",
+      "source_rect": {
+        "x": 742,
+        "y": 0,
+        "w": 338,
+        "h": 380
+      },
+      "exported_frame": "../../production/rust/throw/frames/throw_02.png",
+      "phase": "capture"
+    },
+    {
+      "name": "throw_03",
+      "action": "throw",
+      "sheet": "../../production/rust/throw/prepared.png",
+      "source_rect": {
+        "x": 1113,
+        "y": 0,
+        "w": 336,
+        "h": 380
+      },
+      "exported_frame": "../../production/rust/throw/frames/throw_03.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_04",
+      "action": "throw",
+      "sheet": "../../production/rust/throw/prepared.png",
+      "source_rect": {
+        "x": 1484,
+        "y": 0,
+        "w": 340,
+        "h": 380
+      },
+      "exported_frame": "../../production/rust/throw/frames/throw_04.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "throw_05",
+      "action": "throw",
+      "sheet": "../../production/rust/throw/prepared.png",
+      "source_rect": {
+        "x": 1855,
+        "y": 0,
+        "w": 338,
+        "h": 380
+      },
+      "exported_frame": "../../production/rust/throw/frames/throw_05.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "special_00",
+      "action": "special",
+      "sheet": "../../production/rust/special/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 350,
+        "h": 373
+      },
+      "exported_frame": "../../production/rust/special/frames/special_00.png",
+      "phase": "emission"
+    },
+    {
+      "name": "special_01",
+      "action": "special",
+      "sheet": "../../production/rust/special/prepared.png",
+      "source_rect": {
+        "x": 350,
+        "y": 0,
+        "w": 285,
+        "h": 373
+      },
+      "exported_frame": "../../production/rust/special/frames/special_01.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "special_02",
+      "action": "special",
+      "sheet": "../../production/rust/special/prepared.png",
+      "source_rect": {
+        "x": 700,
+        "y": 0,
+        "w": 298,
+        "h": 373
+      },
+      "exported_frame": "../../production/rust/special/frames/special_02.png",
+      "phase": "return"
+    },
+    {
+      "name": "spawn_00",
+      "action": "spawn",
+      "sheet": "../../production/rust/spawn/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 289,
+        "h": 374
+      },
+      "exported_frame": "../../production/rust/spawn/frames/spawn_00.png",
+      "phase": "open_notebook"
+    },
+    {
+      "name": "spawn_01",
+      "action": "spawn",
+      "sheet": "../../production/rust/spawn/prepared.png",
+      "source_rect": {
+        "x": 346,
+        "y": 0,
+        "w": 253,
+        "h": 374
+      },
+      "exported_frame": "../../production/rust/spawn/frames/spawn_01.png",
+      "phase": "type"
+    },
+    {
+      "name": "spawn_02",
+      "action": "spawn",
+      "sheet": "../../production/rust/spawn/prepared.png",
+      "source_rect": {
+        "x": 692,
+        "y": 0,
+        "w": 346,
+        "h": 374
+      },
+      "exported_frame": "../../production/rust/spawn/frames/spawn_02.png",
+      "phase": "toss_notebook"
+    },
+    {
+      "name": "spawn_03",
+      "action": "spawn",
+      "sheet": "../../production/rust/spawn/prepared.png",
+      "source_rect": {
+        "x": 1038,
+        "y": 0,
+        "w": 233,
+        "h": 374
+      },
+      "exported_frame": "../../production/rust/spawn/frames/spawn_03.png",
+      "phase": "ready"
+    },
+    {
+      "name": "victory_00",
+      "action": "victory",
+      "sheet": "../../production/rust/victory/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 286,
+        "h": 343
+      },
+      "exported_frame": "../../production/rust/victory/frames/victory_00.png",
+      "phase": "raise_thumb"
+    },
+    {
+      "name": "victory_01",
+      "action": "victory",
+      "sheet": "../../production/rust/victory/prepared.png",
+      "source_rect": {
+        "x": 286,
+        "y": 0,
+        "w": 286,
+        "h": 343
+      },
+      "exported_frame": "../../production/rust/victory/frames/victory_01.png",
+      "phase": "thumbs_up"
+    },
+    {
+      "name": "defeat_00",
+      "action": "defeat",
+      "sheet": "../../production/rust/defeat/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 275,
+        "h": 329
+      },
+      "exported_frame": "../../production/rust/defeat/frames/defeat_00.png",
+      "phase": "buckle"
+    },
+    {
+      "name": "defeat_01",
+      "action": "defeat",
+      "sheet": "../../production/rust/defeat/prepared.png",
+      "source_rect": {
+        "x": 275,
+        "y": 0,
+        "w": 275,
+        "h": 329
+      },
+      "exported_frame": "../../production/rust/defeat/frames/defeat_01.png",
+      "phase": "kneel"
+    },
+    {
+      "name": "defeat_02",
+      "action": "defeat",
+      "sheet": "../../production/rust/defeat/prepared.png",
+      "source_rect": {
+        "x": 550,
+        "y": 0,
+        "w": 275,
+        "h": 329
+      },
+      "exported_frame": "../../production/rust/defeat/frames/defeat_02.png",
+      "phase": "supported_hold"
+    },
+    {
+      "name": "knockdown_00",
+      "action": "knockdown",
+      "sheet": "../../production/rust/knockdown/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 265,
+        "h": 384
+      },
+      "exported_frame": "../../production/rust/knockdown/frames/knockdown_00.png",
+      "phase": "fall"
+    },
+    {
+      "name": "knockdown_01",
+      "action": "knockdown",
+      "sheet": "../../production/rust/knockdown/prepared.png",
+      "source_rect": {
+        "x": 280,
+        "y": 0,
+        "w": 280,
+        "h": 384
+      },
+      "exported_frame": "../../production/rust/knockdown/frames/knockdown_01.png",
+      "phase": "grounded"
+    },
+    {
+      "name": "knockdown_02",
+      "action": "knockdown",
+      "sheet": "../../production/rust/knockdown/prepared.png",
+      "source_rect": {
+        "x": 560,
+        "y": 0,
+        "w": 235,
+        "h": 384
+      },
+      "exported_frame": "../../production/rust/knockdown/frames/knockdown_02.png",
+      "phase": "get_up"
+    },
+    {
+      "name": "knockdown_03",
+      "action": "knockdown",
+      "sheet": "../../production/rust/knockdown/prepared.png",
+      "source_rect": {
+        "x": 840,
+        "y": 0,
+        "w": 244,
+        "h": 384
+      },
+      "exported_frame": "../../production/rust/knockdown/frames/knockdown_03.png",
+      "phase": "recover"
+    },
+    {
+      "name": "signature_special_00",
+      "action": "signature_special",
+      "sheet": "../../production/rust/signature_special/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 342,
+        "h": 489
+      },
+      "exported_frame": "../../production/rust/signature_special/frames/signature_special_00.png",
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_01",
+      "action": "signature_special",
+      "sheet": "../../production/rust/signature_special/prepared.png",
+      "source_rect": {
+        "x": 396,
+        "y": 0,
+        "w": 301,
+        "h": 489
+      },
+      "exported_frame": "../../production/rust/signature_special/frames/signature_special_01.png",
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_02",
+      "action": "signature_special",
+      "sheet": "../../production/rust/signature_special/prepared.png",
+      "source_rect": {
+        "x": 792,
+        "y": 0,
+        "w": 306,
+        "h": 489
+      },
+      "exported_frame": "../../production/rust/signature_special/frames/signature_special_02.png",
+      "phase": "startup"
+    },
+    {
+      "name": "signature_special_03",
+      "action": "signature_special",
+      "sheet": "../../production/rust/signature_special/prepared.png",
+      "source_rect": {
+        "x": 1188,
+        "y": 0,
+        "w": 355,
+        "h": 489
+      },
+      "exported_frame": "../../production/rust/signature_special/frames/signature_special_03.png",
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_04",
+      "action": "signature_special",
+      "sheet": "../../production/rust/signature_special/prepared.png",
+      "source_rect": {
+        "x": 1584,
+        "y": 0,
+        "w": 332,
+        "h": 489
+      },
+      "exported_frame": "../../production/rust/signature_special/frames/signature_special_04.png",
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_05",
+      "action": "signature_special",
+      "sheet": "../../production/rust/signature_special/prepared.png",
+      "source_rect": {
+        "x": 1980,
+        "y": 0,
+        "w": 396,
+        "h": 489
+      },
+      "exported_frame": "../../production/rust/signature_special/frames/signature_special_05.png",
+      "phase": "active"
+    },
+    {
+      "name": "signature_special_06",
+      "action": "signature_special",
+      "sheet": "../../production/rust/signature_special/prepared.png",
+      "source_rect": {
+        "x": 2376,
+        "y": 0,
+        "w": 338,
+        "h": 489
+      },
+      "exported_frame": "../../production/rust/signature_special/frames/signature_special_06.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "signature_special_07",
+      "action": "signature_special",
+      "sheet": "../../production/rust/signature_special/prepared.png",
+      "source_rect": {
+        "x": 2772,
+        "y": 0,
+        "w": 273,
+        "h": 489
+      },
+      "exported_frame": "../../production/rust/signature_special/frames/signature_special_07.png",
+      "phase": "recovery"
+    },
+    {
+      "name": "heavy_hit_00",
+      "action": "heavy_hit",
+      "sheet": "../../production/rust/heavy_hit/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 284,
+        "h": 378
+      },
+      "exported_frame": "../../production/rust/heavy_hit/frames/heavy_hit_00.png",
+      "phase": "heavy_hit"
+    },
+    {
+      "name": "heavy_hit_01",
+      "action": "heavy_hit",
+      "sheet": "../../production/rust/heavy_hit/prepared.png",
+      "source_rect": {
+        "x": 293,
+        "y": 0,
+        "w": 248,
+        "h": 378
+      },
+      "exported_frame": "../../production/rust/heavy_hit/frames/heavy_hit_01.png",
+      "phase": "heavy_hit"
+    },
+    {
+      "name": "heavy_hit_02",
+      "action": "heavy_hit",
+      "sheet": "../../production/rust/heavy_hit/prepared.png",
+      "source_rect": {
+        "x": 586,
+        "y": 0,
+        "w": 293,
+        "h": 378
+      },
+      "exported_frame": "../../production/rust/heavy_hit/frames/heavy_hit_02.png",
+      "phase": "heavy_hit"
+    },
+    {
+      "name": "heavy_hit_03",
+      "action": "heavy_hit",
+      "sheet": "../../production/rust/heavy_hit/prepared.png",
+      "source_rect": {
+        "x": 879,
+        "y": 0,
+        "w": 254,
+        "h": 378
+      },
+      "exported_frame": "../../production/rust/heavy_hit/frames/heavy_hit_03.png",
+      "phase": "heavy_hit"
+    },
+    {
+      "name": "launched_00",
+      "action": "launched",
+      "sheet": "../../production/rust/launched/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 297,
+        "h": 305
+      },
+      "exported_frame": "../../production/rust/launched/frames/launched_00.png",
+      "phase": "launched"
+    },
+    {
+      "name": "launched_01",
+      "action": "launched",
+      "sheet": "../../production/rust/launched/prepared.png",
+      "source_rect": {
+        "x": 297,
+        "y": 0,
+        "w": 224,
+        "h": 305
+      },
+      "exported_frame": "../../production/rust/launched/frames/launched_01.png",
+      "phase": "launched"
+    },
+    {
+      "name": "launched_02",
+      "action": "launched",
+      "sheet": "../../production/rust/launched/prepared.png",
+      "source_rect": {
+        "x": 594,
+        "y": 0,
+        "w": 286,
+        "h": 305
+      },
+      "exported_frame": "../../production/rust/launched/frames/launched_02.png",
+      "phase": "launched"
+    },
+    {
+      "name": "launched_03",
+      "action": "launched",
+      "sheet": "../../production/rust/launched/prepared.png",
+      "source_rect": {
+        "x": 891,
+        "y": 0,
+        "w": 272,
+        "h": 305
+      },
+      "exported_frame": "../../production/rust/launched/frames/launched_03.png",
+      "phase": "launched"
+    },
+    {
+      "name": "thrown_00",
+      "action": "thrown",
+      "sheet": "../../production/rust/thrown/prepared.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 262,
+        "h": 395
+      },
+      "exported_frame": "../../production/rust/thrown/frames/thrown_00.png",
+      "phase": "thrown"
+    },
+    {
+      "name": "thrown_01",
+      "action": "thrown",
+      "sheet": "../../production/rust/thrown/prepared.png",
+      "source_rect": {
+        "x": 304,
+        "y": 0,
+        "w": 219,
+        "h": 395
+      },
+      "exported_frame": "../../production/rust/thrown/frames/thrown_01.png",
+      "phase": "thrown"
+    },
+    {
+      "name": "thrown_02",
+      "action": "thrown",
+      "sheet": "../../production/rust/thrown/prepared.png",
+      "source_rect": {
+        "x": 608,
+        "y": 0,
+        "w": 292,
+        "h": 395
+      },
+      "exported_frame": "../../production/rust/thrown/frames/thrown_02.png",
+      "phase": "thrown"
+    },
+    {
+      "name": "thrown_03",
+      "action": "thrown",
+      "sheet": "../../production/rust/thrown/prepared.png",
+      "source_rect": {
+        "x": 912,
+        "y": 0,
+        "w": 304,
+        "h": 395
+      },
+      "exported_frame": "../../production/rust/thrown/frames/thrown_03.png",
+      "phase": "thrown"
+    }
+  ],
+  "atlas_sha256": "eed867ea07c3743e76d87c73dfdf50e8baceada31c4ff305e9a14e99dcd29e26",
+  "manifest_sha256": "4010c64d512c5eeca6a1142f5caecc09e3af85d5c183eac7b3af142162dc89f8"
+}

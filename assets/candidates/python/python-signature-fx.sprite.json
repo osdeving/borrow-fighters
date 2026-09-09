@@ -1,0 +1,165 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "python-signature-fx-atlas.png",
+  "source": "../../production/python/signature_fx/fx-plan.json",
+  "cell": {
+    "w": 308,
+    "h": 461
+  },
+  "default_pivot": {
+    "x": 126,
+    "y": 437
+  },
+  "scale": 1.0,
+  "frames": [
+    {
+      "name": "projectile_00",
+      "clip": "projectile",
+      "duration_ms": 70,
+      "pivot": {
+        "x": 126,
+        "y": 437
+      },
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 261,
+        "h": 461
+      },
+      "trimmed_bounds": {
+        "x": 28,
+        "y": 9,
+        "w": 195,
+        "h": 435
+      }
+    },
+    {
+      "name": "projectile_01",
+      "clip": "projectile",
+      "duration_ms": 70,
+      "pivot": {
+        "x": 123,
+        "y": 437
+      },
+      "frame": {
+        "x": 308,
+        "y": 0,
+        "w": 270,
+        "h": 461
+      },
+      "trimmed_bounds": {
+        "x": 26,
+        "y": 9,
+        "w": 192,
+        "h": 435
+      }
+    },
+    {
+      "name": "impact_02",
+      "clip": "impact",
+      "duration_ms": 55,
+      "pivot": {
+        "x": 154,
+        "y": 353
+      },
+      "frame": {
+        "x": 616,
+        "y": 0,
+        "w": 307,
+        "h": 353
+      },
+      "trimmed_bounds": {
+        "x": 32,
+        "y": 28,
+        "w": 243,
+        "h": 222
+      }
+    },
+    {
+      "name": "impact_03",
+      "clip": "impact",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 154,
+        "y": 349
+      },
+      "frame": {
+        "x": 0,
+        "y": 461,
+        "w": 307,
+        "h": 350
+      },
+      "trimmed_bounds": {
+        "x": 19,
+        "y": 10,
+        "w": 288,
+        "h": 251
+      }
+    },
+    {
+      "name": "impact_04",
+      "clip": "impact",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 154,
+        "y": 349
+      },
+      "frame": {
+        "x": 308,
+        "y": 461,
+        "w": 308,
+        "h": 350
+      },
+      "trimmed_bounds": {
+        "x": 51,
+        "y": 10,
+        "w": 235,
+        "h": 252
+      }
+    },
+    {
+      "name": "impact_05",
+      "clip": "impact",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 154,
+        "y": 349
+      },
+      "frame": {
+        "x": 616,
+        "y": 461,
+        "w": 308,
+        "h": 350
+      },
+      "trimmed_bounds": {
+        "x": 64,
+        "y": 15,
+        "w": 180,
+        "h": 242
+      }
+    }
+  ],
+  "clips": [
+    {
+      "name": "projectile",
+      "loop": true,
+      "frames": [
+        "projectile_00",
+        "projectile_01"
+      ]
+    },
+    {
+      "name": "impact",
+      "loop": false,
+      "frames": [
+        "impact_02",
+        "impact_03",
+        "impact_04",
+        "impact_05"
+      ]
+    }
+  ],
+  "notes": [
+    "Six explicitly selected generated frames. One uniform scale per clip; actor atlas is separate. Local magenta key authorized in production README. Additional transparent padding accommodates ground anchor; no runtime auto-fit. Cpp projectile is anchored at rocket body center. Python impact collapses around vortex midheight with a ground anchor. Original rejected variants remain available. Red-only boundary matte cleanup preserves blue/gold effects; original and first keyed PNGs remain available."
+  ]
+}

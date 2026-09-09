@@ -1,0 +1,89 @@
+{
+  "date": "2026-09-07",
+  "character": "duke",
+  "intent": "New unique special and knockdown plus actual ankle-height sweep per MVP request",
+  "assets": [
+    {
+      "action": "signature_special",
+      "version": "v1",
+      "tool": "built-in image_gen.imagegen",
+      "source": "signature_special/source-v1.png",
+      "prompt": "signature_special/prompt-v1.txt",
+      "source_sha256": "97daa8fbe93ddf00abc64e0361977aa9dee145bac965bd0d8668dcd8773a432b",
+      "dimensions": [
+        2048,
+        768
+      ],
+      "mode": "RGB",
+      "reference_role": "Exact existing polished character identity; sweep also uses previous sweep as rejected-height motion reference",
+      "initial_reference": "idle/prepared.png",
+      "selected": false
+    },
+    {
+      "action": "signature_special",
+      "version": "v2",
+      "tool": "built-in image_gen.imagegen",
+      "source": "signature_special/source-v2.png",
+      "prompt": "signature_special/prompt-v2.txt",
+      "source_sha256": "79119824f3cc848f7f0671321a3ca4a37100ae7c66ce6f8ba0ee66ec75a5c89a",
+      "dimensions": [
+        2048,
+        768
+      ],
+      "mode": "RGB",
+      "reference_role": "Exact existing polished character identity; sweep also uses previous sweep as rejected-height motion reference",
+      "initial_reference": "idle/prepared.png",
+      "selected": true
+    },
+    {
+      "action": "knockdown",
+      "version": "v1",
+      "tool": "built-in image_gen.imagegen",
+      "source": "knockdown/source-v1.png",
+      "prompt": "knockdown/prompt-v1.txt",
+      "source_sha256": "0912a09a284698feaa54a1396d232396a37dfe5bd576515f522200c43dc71e8e",
+      "dimensions": [
+        2048,
+        768
+      ],
+      "mode": "RGB",
+      "reference_role": "Exact existing polished character identity; sweep also uses previous sweep as rejected-height motion reference",
+      "initial_reference": "idle/prepared.png",
+      "selected": false
+    },
+    {
+      "action": "knockdown",
+      "version": "v2",
+      "tool": "built-in image_gen.imagegen",
+      "source": "knockdown/source-v2.png",
+      "prompt": "knockdown/prompt-v2.txt",
+      "source_sha256": "7ccb28e370989d06d2c0db4be8f69d98a17736120aada3fee745efff8638e855",
+      "dimensions": [
+        2048,
+        768
+      ],
+      "mode": "RGB",
+      "reference_role": "Exact existing polished character identity; sweep also uses previous sweep as rejected-height motion reference",
+      "initial_reference": "idle/prepared.png",
+      "selected": true
+    },
+    {
+      "action": "sweep",
+      "version": "mvp-v1",
+      "tool": "built-in image_gen.imagegen",
+      "source": "sweep/source-mvp-v1.png",
+      "prompt": "sweep/prompt-mvp-v1.txt",
+      "source_sha256": "28c4ccc7cc8b3c391d75b002e5e4cb57e529eeab0a81b26de9b3d81c723feff9",
+      "dimensions": [
+        2048,
+        768
+      ],
+      "mode": "RGB",
+      "reference_role": "Exact existing polished character identity; sweep also uses previous sweep as rejected-height motion reference",
+      "initial_reference": "idle/prepared.png",
+      "selected": true
+    }
+  ],
+  "alpha": "Built-in requested actual alpha but returned RGB. Prior user-authorized extraction uses existing helpers, preserves original RGB. Duke v1 neutral matte rejected because it removed white steam; v2 is imagegen background-only matte correction. C special v2 also lowers actual pointing arm for contact.",
+  "runtime_review": "../../candidates/duke/review/mvp/runtime-review.json"
+}

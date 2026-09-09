@@ -1,0 +1,55 @@
+{
+  "character": "cpp",
+  "scope": "Six grounded close attacks only; do not replace shared review-plan wholesale",
+  "generator": "built-in imagegen",
+  "actions": {
+    "punch_light": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "source_body_height_reference_px": 689,
+      "source": "punch_light/source-v3.png",
+      "sheet": "punch_light/keyed-v3.png",
+      "notes": "Selected v3 after lowering contact from chest to waistband. Three own stages, adult proportions and continuous bag preserved. Glove center around source(1230,390), pivot(987,715), gives world offset(+94.5,-126.4), inside existing LP box. Original drafts retained. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Source/alpha/crops reviewed; final artistic approval and GPU contact review pending."
+    },
+    "punch_heavy": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "source_body_height_reference_px": 689,
+      "source": "punch_heavy/source-v1.png",
+      "sheet": "punch_heavy/keyed-v1.png",
+      "notes": "Three forceful windup/contact/recovery poses with rotated adult torso and attached handbag. Contact glove source about(1340,350), support pivot(955,708), projects to(+149.8,-139.2)world within heavy box. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Source/alpha/crops reviewed; final artistic approval and GPU contact review pending."
+    },
+    "kick": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "source_body_height_reference_px": 689,
+      "source": "kick/source-v2.png",
+      "sheet": "kick/keyed-v2.png",
+      "notes": "Selected v2 after rotating kicking leg downward to current low collision height. Toe/sole near(1275,548), support(916,721), projects to(+139.6,-67.3)world inside kick box. Full heeled boot and handbag retained. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Source/alpha/crops reviewed; final artistic approval and GPU contact review pending."
+    },
+    "sweep": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "source_body_height_reference_px": 689,
+      "source": "sweep/source-v2.png",
+      "sheet": "sweep/keyed-v2.png",
+      "notes": "Selected v2 after lowering active boot from above head to upper-chest height in low supported pose. Sole near(1380,365), support(945,655), projects to(+169.2,-112.8)world inside existing Sweep box. Low kneeling support preserves hand and handbag. Standing-body active collision rule unchanged. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Source/alpha/crops reviewed; final artistic approval and GPU contact review pending."
+    },
+    "overhead": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "source_body_height_reference_px": 689,
+      "source": "overhead/source-v1.png",
+      "sheet": "overhead/keyed-v1.png",
+      "notes": "Complete raised fist preparation, forward descending hammerfist contact, low follow-through. Glove near(1200,375), support(955,718), projects to(+95.3,-133.4)world inside overhead box. Full raised hand, adult anatomy and bag preserved. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Source/alpha/crops reviewed; final artistic approval and GPU contact review pending."
+    },
+    "throw": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "source_body_height_reference_px": 689,
+      "source": "throw/source-v1.png",
+      "sheet": "throw/keyed-v1.png",
+      "notes": "Open preparation, short two-handed grab, pull toward waist. Farthest fingertip near(1255,325), support(965,716), projects to(+112.8,-152.1)world inside existing throw reach ending+117.3. Hands separate with bent elbows, bag remains attached; no victim or new combat metadata. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Source/alpha/crops reviewed; final artistic approval and GPU contact review pending."
+    }
+  }
+}

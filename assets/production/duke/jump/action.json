@@ -1,0 +1,52 @@
+{
+  "sheet": "jump/keyed.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "jump_00",
+      "source_rect": {
+        "x": 235,
+        "y": 0,
+        "w": 469,
+        "h": 736
+      },
+      "pivot": {
+        "x": 215,
+        "y": 700
+      },
+      "duration_ms": 60,
+      "phase": "takeoff"
+    },
+    {
+      "name": "jump_01",
+      "source_rect": {
+        "x": 704,
+        "y": 0,
+        "w": 596,
+        "h": 768
+      },
+      "pivot": {
+        "x": 326,
+        "y": 700
+      },
+      "duration_ms": 340,
+      "phase": "rise"
+    },
+    {
+      "name": "jump_02",
+      "source_rect": {
+        "x": 1300,
+        "y": 0,
+        "w": 748,
+        "h": 768
+      },
+      "pivot": {
+        "x": 270,
+        "y": 700
+      },
+      "duration_ms": 400,
+      "phase": "fall"
+    }
+  ]
+}

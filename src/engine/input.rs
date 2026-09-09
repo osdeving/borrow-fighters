@@ -1,4 +1,4 @@
-//! Maps local keyboard and gamepad state into game commands.
+//! Maps local keyboard, mouse and gamepad state into game commands.
 //!
 //! System: Raylib input boundary. This module translates device state into
 //! scene and combat input structs without owning gameplay decisions.
@@ -11,7 +11,8 @@ use raylib::prelude::*;
 use crate::combat::fighter::FighterInput;
 use crate::engine::gamepad;
 use crate::scenes::combat_lab::CombatLabInput;
-use crate::scenes::preferences::PreferencesInput;
+use crate::scenes::preferences::{PreferencesInput, PreferencesMenu, PreferencesPointerInput};
+use crate::ui::menu_layout::MenuLayout;
 
 /// Local two-player input for one simulation step.
 #[derive(Clone, Copy, Debug, Default)]
@@ -76,6 +77,28 @@ impl LocalInput {
     }
 }
 
+/// Reads mouse navigation only while the pointer belongs to the focused window.
+pub fn read_preferences_pointer(
+    raylib: &RaylibHandle,
+    menu: &PreferencesMenu,
+) -> PreferencesPointerInput {
+    if !raylib.is_window_focused() || !raylib.is_cursor_on_screen() {
+        return PreferencesPointerInput::default();
+    }
+    let position = raylib.get_mouse_position();
+    let delta = raylib.get_mouse_delta();
+    PreferencesPointerInput {
+        hovered_row: MenuLayout::for_page(menu.page()).hovered_row(
+            position.x,
+            position.y,
+            menu.row_count(),
+        ),
+        moved: delta.x != 0.0 || delta.y != 0.0,
+        activate: raylib.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_LEFT),
+        previous: raylib.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_RIGHT),
+    }
+}
+
 fn keyboard_combat_lab(raylib: &RaylibHandle) -> CombatLabInput {
     let shift_down = raylib.is_key_down(KeyboardKey::KEY_LEFT_SHIFT)
         || raylib.is_key_down(KeyboardKey::KEY_RIGHT_SHIFT);
@@ -109,6 +132,8 @@ fn keyboard_player_one(raylib: &RaylibHandle) -> FighterInput {
         heavy_punch: raylib.is_key_pressed(KeyboardKey::KEY_H),
         kick: raylib.is_key_pressed(KeyboardKey::KEY_V),
         projectile: raylib.is_key_pressed(KeyboardKey::KEY_G),
+        signature_special: raylib.is_key_pressed(KeyboardKey::KEY_T),
+        cinematic_special: raylib.is_key_pressed(KeyboardKey::KEY_Y),
     }
 }
 
@@ -128,11 +153,17 @@ fn keyboard_player_two(raylib: &RaylibHandle) -> FighterInput {
             || raylib.is_key_pressed(KeyboardKey::KEY_SLASH),
         projectile: raylib.is_key_pressed(KeyboardKey::KEY_RIGHT_CONTROL)
             || raylib.is_key_pressed(KeyboardKey::KEY_KP_0),
+        signature_special: raylib.is_key_pressed(KeyboardKey::KEY_BACKSLASH),
+        cinematic_special: raylib.is_key_pressed(KeyboardKey::KEY_RIGHT_BRACKET),
     }
 }
 
 fn keyboard_preferences(raylib: &RaylibHandle) -> PreferencesInput {
-    let mouse_wheel = raylib.get_mouse_wheel_move();
+    let mouse_wheel = if raylib.is_window_focused() && raylib.is_cursor_on_screen() {
+        raylib.get_mouse_wheel_move()
+    } else {
+        0.0
+    };
     PreferencesInput {
         up: raylib.is_key_pressed(KeyboardKey::KEY_UP) || raylib.is_key_pressed(KeyboardKey::KEY_W),
         down: raylib.is_key_pressed(KeyboardKey::KEY_DOWN)
@@ -146,6 +177,7 @@ fn keyboard_preferences(raylib: &RaylibHandle) -> PreferencesInput {
         activate: raylib.is_key_pressed(KeyboardKey::KEY_SPACE)
             || raylib.is_key_pressed(KeyboardKey::KEY_ENTER),
         start: false,
+        pointer: PreferencesPointerInput::default(),
     }
 }
 
@@ -165,6 +197,7 @@ fn gamepad_preferences(raylib: &RaylibHandle) -> PreferencesInput {
             || gamepad::menu_activate_pressed(raylib, gamepad::PLAYER_TWO_GAMEPAD),
         start: gamepad::menu_start_pressed(raylib, gamepad::PLAYER_ONE_GAMEPAD)
             || gamepad::menu_start_pressed(raylib, gamepad::PLAYER_TWO_GAMEPAD),
+        pointer: PreferencesPointerInput::default(),
     }
 }
 
@@ -179,6 +212,8 @@ fn merge_fighter_input(first: FighterInput, second: FighterInput) -> FighterInpu
         heavy_punch: first.heavy_punch || second.heavy_punch,
         kick: first.kick || second.kick,
         projectile: first.projectile || second.projectile,
+        signature_special: first.signature_special || second.signature_special,
+        cinematic_special: first.cinematic_special || second.cinematic_special,
     }
 }
 
@@ -192,5 +227,6 @@ fn merge_preferences_input(first: PreferencesInput, second: PreferencesInput) ->
         scroll_down: first.scroll_down || second.scroll_down,
         activate: first.activate || second.activate,
         start: first.start || second.start,
+        pointer: PreferencesPointerInput::default(),
     }
 }

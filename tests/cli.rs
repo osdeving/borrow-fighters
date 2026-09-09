@@ -79,6 +79,24 @@ fn game_args_accept_python_character_aliases() {
 }
 
 #[test]
+fn game_args_accept_cpp_character_aliases() {
+    let options = LaunchOptions::parse(
+        [
+            "borrow-fighters",
+            "--player-one",
+            "cpp",
+            "--player-two",
+            "c++",
+        ]
+        .map(String::from),
+    )
+    .unwrap();
+
+    assert_eq!(options.match_options.player_one, CharacterId::Cpp);
+    assert_eq!(options.match_options.player_two, CharacterId::Cpp);
+}
+
+#[test]
 fn game_args_can_start_directly_in_fight() {
     let options = LaunchOptions::parse(
         ["borrow-fighters", "--fight", "--p1", "go", "--p2", "duke"].map(String::from),
@@ -199,6 +217,26 @@ fn combat_lab_args_select_python_character() {
 }
 
 #[test]
+fn combat_lab_args_select_cpp_character() {
+    let options = LaunchOptions::parse(
+        [
+            "borrow-fighters",
+            "--lab",
+            "combat",
+            "--character",
+            "cpp.cpp",
+        ]
+        .map(String::from),
+    )
+    .unwrap();
+
+    let LaunchMode::CombatLab(lab) = options.mode else {
+        panic!("expected combat lab mode");
+    };
+    assert_eq!(lab.character, CharacterId::Cpp);
+}
+
+#[test]
 fn sprite_viewer_args_select_manifest_and_clip() {
     let options = LaunchOptions::parse(
         [
@@ -267,6 +305,26 @@ fn sprite_viewer_infers_python_from_manifest_path() {
 }
 
 #[test]
+fn sprite_viewer_infers_cpp_from_manifest_path() {
+    let options = LaunchOptions::parse(
+        [
+            "borrow-fighters",
+            "--tool",
+            "sprite-viewer",
+            "--manifest",
+            "assets/placeholder/cpp-fighter.sprite.json",
+        ]
+        .map(String::from),
+    )
+    .unwrap();
+
+    let LaunchMode::SpriteViewer(viewer) = options.mode else {
+        panic!("expected sprite viewer mode");
+    };
+    assert_eq!(viewer.character, Some(CharacterId::Cpp));
+}
+
+#[test]
 fn sprite_viewer_args_accept_character_and_move_for_combat_overlay() {
     let options = LaunchOptions::parse(
         [
@@ -298,6 +356,33 @@ fn sprite_viewer_requires_manifest() {
             .unwrap_err();
 
     assert!(error.to_string().contains("requires --manifest"));
+}
+
+#[test]
+fn combat_lab_rejects_go_signature_regardless_of_argument_order() {
+    for args in [
+        [
+            "game",
+            "--lab",
+            "combat",
+            "--character",
+            "go",
+            "--move",
+            "signature_special",
+        ],
+        [
+            "game",
+            "--move",
+            "signature",
+            "--character",
+            "go",
+            "--lab",
+            "combat",
+        ],
+    ] {
+        let error = LaunchOptions::parse(args.map(String::from)).unwrap_err();
+        assert!(error.to_string().contains("Go has no signature special"));
+    }
 }
 
 #[test]
@@ -333,4 +418,114 @@ fn unknown_pose_is_rejected() {
     .unwrap_err();
 
     assert!(error.to_string().contains("unknown pose"));
+}
+
+#[test]
+fn showcase_accepts_all_public_characters_and_signature_move() {
+    for character in ["rust", "duke", "c", "python", "cpp"] {
+        let options = LaunchOptions::parse(
+            [
+                "borrow-fighters",
+                "--showcase",
+                "--character",
+                character,
+                "--move",
+                "signature_special",
+                "--repeat",
+                "--reverse",
+            ]
+            .map(String::from),
+        )
+        .unwrap();
+        let LaunchMode::MoveShowcase(showcase) = options.mode else {
+            panic!("expected showcase");
+        };
+        assert_eq!(
+            showcase.character,
+            CharacterId::from_cli(character).unwrap()
+        );
+        assert_eq!(showcase.selected_move, CombatLabMove::SignatureSpecial);
+        assert!(showcase.repeat_current);
+        assert!(showcase.sides_reversed);
+        assert!(!options.start_fight);
+    }
+}
+
+#[test]
+fn showcase_options_are_independent_of_argument_order() {
+    let first = LaunchOptions::parse(
+        [
+            "borrow-fighters",
+            "--showcase",
+            "--character",
+            "rust",
+            "--move",
+            "anti_air",
+            "--repeat",
+            "--reverse",
+        ]
+        .map(String::from),
+    )
+    .unwrap();
+    let last = LaunchOptions::parse(
+        [
+            "borrow-fighters",
+            "--character",
+            "rust",
+            "--move",
+            "anti_air",
+            "--reverse",
+            "--repeat",
+            "--showcase",
+        ]
+        .map(String::from),
+    )
+    .unwrap();
+    assert_eq!(first, last);
+    let LaunchMode::MoveShowcase(options) = first.mode else {
+        panic!("expected showcase");
+    };
+    assert_eq!(options.selected_move, CombatLabMove::AntiAir);
+}
+
+#[test]
+fn showcase_defaults_to_rust_jab_autoplay() {
+    let options =
+        LaunchOptions::parse(["borrow-fighters", "--showcase"].map(String::from)).unwrap();
+    let LaunchMode::MoveShowcase(options) = options.mode else {
+        panic!("expected showcase");
+    };
+    assert_eq!(options.character, CharacterId::Rust);
+    assert_eq!(options.selected_move, CombatLabMove::LightPunch);
+    assert!(!options.repeat_current);
+    assert!(!options.sides_reversed);
+}
+
+#[test]
+fn showcase_rejects_conflicting_modes_and_unavailable_go_special() {
+    for args in [
+        vec!["--showcase", "--fight"],
+        vec!["--fight", "--showcase"],
+        vec!["--showcase", "--lab", "combat"],
+        vec!["--lab", "combat", "--showcase"],
+        vec!["--showcase", "--manifest", "fighter.sprite.json"],
+        vec!["--manifest", "fighter.sprite.json", "--showcase"],
+        vec!["--showcase", "--pose", "block"],
+        vec!["--repeat"],
+        vec!["--reverse"],
+        vec![
+            "--showcase",
+            "--character",
+            "go",
+            "--move",
+            "signature_special",
+        ],
+    ] {
+        let parsed = LaunchOptions::parse(
+            std::iter::once("borrow-fighters")
+                .chain(args.iter().copied())
+                .map(String::from),
+        );
+        assert!(parsed.is_err(), "must reject {args:?}");
+    }
 }

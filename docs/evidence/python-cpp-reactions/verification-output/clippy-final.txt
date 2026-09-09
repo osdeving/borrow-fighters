@@ -1,0 +1,2 @@
+    Checking borrow-fighters v0.1.0 (/home/willams/borrow-fighters)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s

@@ -1,0 +1,99 @@
+{
+  "date": "2026-09-09",
+  "video": "assets/showcase/reactions-transformations-2026-09-09.mp4",
+  "video_sha256": "0ebaaaf34a7fc83a0cd977a07b2a5b135c55ddfbf3560a5c82437748d574c5bd",
+  "method": "FFprobe counted actual H.264 frames and inspected AAC stream timing; decoded the completed MP4 audio to float PCM. Compared the offline trace to all exported World audio events and verified music intervals against each super start/end and the Rust arena transition. Synchronization is structural at the exported frame clock; this is not a live host-audio capture or a subjective listening review.",
+  "video_stream": {
+    "codec": "h264",
+    "width": 1280,
+    "height": 720,
+    "fps": 60,
+    "frames": 2880,
+    "duration_seconds": 48.0,
+    "start_seconds": 0.0
+  },
+  "audio_stream": {
+    "codec": "aac",
+    "channels": 2,
+    "sample_rate": 48000,
+    "duration_seconds": 48.0,
+    "start_seconds": 0.0,
+    "decoded_samples_per_channel": 2304000,
+    "decoded_peak_dbfs": -2.0062836208762644,
+    "rms_dbfs_by_channel": [
+      -35.03195259516993,
+      -27.188644092665847
+    ],
+    "clipped_samples": 0,
+    "nonfinite_samples": 0
+  },
+  "mux_duration_difference_seconds": 0.0,
+  "audio_events_matched_exactly": 80,
+  "music_pauses": [
+    {
+      "character": "rust",
+      "start_frame": 60,
+      "end_frame": 360,
+      "start_seconds": 1.0,
+      "end_seconds": 6.0,
+      "no_music_interval_inside_sequence": true,
+      "resumed_track": "combat",
+      "source_cursor_on_resume_seconds": 0.0
+    },
+    {
+      "character": "duke",
+      "start_frame": 510,
+      "end_frame": 860,
+      "start_seconds": 8.5,
+      "end_seconds": 14.333333333333334,
+      "no_music_interval_inside_sequence": true,
+      "resumed_track": "combat-console-floor",
+      "source_cursor_on_resume_seconds": 1.0
+    },
+    {
+      "character": "c",
+      "start_frame": 1010,
+      "end_frame": 1330,
+      "start_seconds": 16.833333333333332,
+      "end_seconds": 22.166666666666668,
+      "no_music_interval_inside_sequence": true,
+      "resumed_track": "combat-console-floor",
+      "source_cursor_on_resume_seconds": 3.5
+    },
+    {
+      "character": "cpp",
+      "start_frame": 1480,
+      "end_frame": 2112,
+      "start_seconds": 24.666666666666668,
+      "end_seconds": 35.2,
+      "no_music_interval_inside_sequence": true,
+      "resumed_track": "combat-console-floor",
+      "source_cursor_on_resume_seconds": 6.0
+    },
+    {
+      "character": "python",
+      "start_frame": 2262,
+      "end_frame": 2790,
+      "start_seconds": 37.7,
+      "end_seconds": 46.5,
+      "no_music_interval_inside_sequence": true,
+      "resumed_track": "combat-console-floor",
+      "source_cursor_on_resume_seconds": 8.5
+    }
+  ],
+  "arena_music_transition": {
+    "video_frame": 185,
+    "previous_track": "combat-console-floor",
+    "track": "combat",
+    "paused": true,
+    "previous_source_cursor_seconds": 1.0,
+    "source_cursor_seconds": 0.0,
+    "reason": "arena_transition"
+  },
+  "python_mutation_order": [
+    "assets/audio/sfx/super/python-morph.ogg",
+    "assets/audio/sfx/super/python-grow.ogg"
+  ],
+  "all_referenced_clip_hashes_verified": true,
+  "result": "passed"
+}

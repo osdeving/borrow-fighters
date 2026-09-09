@@ -1,0 +1,73 @@
+{
+  "reason": "Isolated nonzero matte pixels at blank generated sheet corners, outside every full-body silhouette; no character edge changed.",
+  "changes": [
+    {
+      "action": "throw",
+      "cleared_corner_pixels_yx": [
+        [
+          767,
+          0
+        ]
+      ],
+      "count": 1
+    },
+    {
+      "action": "overhead",
+      "cleared_corner_pixels_yx": [
+        [
+          767,
+          0
+        ]
+      ],
+      "count": 1
+    },
+    {
+      "action": "crouch",
+      "cleared_corner_pixels_yx": [
+        [
+          886,
+          0
+        ]
+      ],
+      "count": 1
+    },
+    {
+      "action": "hit",
+      "cleared_corner_pixels_yx": [
+        [
+          767,
+          0
+        ]
+      ],
+      "count": 1
+    },
+    {
+      "action": "punch_light",
+      "cleared_corner_pixels_yx": [
+        [
+          0,
+          0
+        ],
+        [
+          767,
+          0
+        ],
+        [
+          767,
+          2047
+        ]
+      ],
+      "count": 3
+    },
+    {
+      "action": "jump",
+      "cleared_corner_pixels_yx": [
+        [
+          886,
+          0
+        ]
+      ],
+      "count": 1
+    }
+  ]
+}

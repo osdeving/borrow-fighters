@@ -1,0 +1,137 @@
+{
+  "character": "cpp",
+  "provenance": {
+    "status": "candidate",
+    "generator": "built-in imagegen",
+    "identity_reference": "reference/master-existing.png",
+    "polished_reference": "idle/source-v1.png",
+    "combat": "Visual only; original combat_manifest retained without any box or move change."
+  },
+  "actions": {
+    "idle": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "notes": "Three separately generated subtle idle keys; breathing amplitude is very small. Original adult identity retained, continuous round black/gold bag. Approved only for candidate review export, not final art release."
+    },
+    "walk": {
+      "approved": true,
+      "scale_to_runtime": 0.4200626959247649,
+      "notes": "Selected v8 packs whole generated v6 keys0/1/2 and v7 key3. The near gold-striped leg leads at contact0; the far plain leg leads at contact2. Passing1 plants the far leg, passing3 plants the near leg with the far boot lifted. Near-arm placement follows the opposite contacts. V5/v6 fourth poses and the regressed v7 contact2 were rejected. Uniform268/638 anatomical scale and source ground pivots708/710/707/712 compensate source placement only. Original100ms per key,400ms loop preserved. Crops exclude the isolated lower-left matte pixel without retouching artwork. Candidate export; finalization evidence is recorded separately."
+    },
+    "jump": {
+      "approved": true,
+      "scale_to_runtime": 0.4123076923076923,
+      "notes": "Three poses takeoff/rise/fall, 60/340/400ms. Virtual anchors712/695/711 subtract source waist translation: waist317/300/316 yields invariant -395px from anchor. Feet allowed to tuck; world physics supplies travel, no drawn landing crouch. Approved only for candidate review export, not final art release."
+    },
+    "crouch": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "notes": "Selected v2 folds chest and hips instead of shrinking figure. Runtime silhouette about113-119px at original anatomical scale, within128px physical crouch height. v1 rejected for taller pose. Approved only for candidate review export, not final art release."
+    },
+    "block": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "notes": "Distinct crossed-forearm guard, impact absorption, recovery. Same anatomical scale as idle. Approved only for candidate review export, not final art release."
+    },
+    "crouch_block": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "notes": "Selected generated v6 changes the rear arm of crouch/source-v2 into a face/chest guard while retaining the crouch body depth. Runtime silhouette about114-118px now matches ordinary crouch113-119px instead of former92-95px guard. Uniform268/689 scale and110/90/140ms timing preserved. Pivots330,735 /309,736 /300,736 register generated support positions; no body rescaling, gameplay change or procedural posture construction. v5 rejected because it raised the torso too far. Crop excludes an isolated matte pixel below all body contours. Candidate export; finalization evidence is recorded separately."
+    },
+    "hit": {
+      "approved": true,
+      "scale_to_runtime": 0.40606060606060607,
+      "notes": "Distinct recoil, abdominal fold, recovery; bag and hair follow body. One uniform action scale. Approved only for candidate review export, not final art release."
+    },
+    "punch_light": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "notes": "Selected v3 after lowering contact from chest to waistband. Three own stages, adult proportions and continuous bag preserved. Glove center around source(1230,390), pivot(987,715), gives world offset(+94.5,-126.4), inside existing LP box. Original drafts retained. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Approved only for candidate review export, not final art release."
+    },
+    "punch_heavy": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "notes": "Three forceful windup/contact/recovery poses with rotated adult torso and attached handbag. Contact glove source about(1340,350), support pivot(955,708), projects to(+149.8,-139.2)world within heavy box. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Approved only for candidate review export, not final art release."
+    },
+    "kick": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "notes": "Selected v2 after rotating kicking leg downward to current low collision height. Toe/sole near(1275,548), support(916,721), projects to(+139.6,-67.3)world inside kick box. Full heeled boot and handbag retained. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Approved only for candidate review export, not final art release."
+    },
+    "sweep": {
+      "approved": true,
+      "scale_to_runtime": 0.47686832740213525,
+      "notes": "New low sweep for corrected sustained crouching combat. V3 ankle-level boot was correct but torso too upright; v4 folds chest/head farther forward without shrinking anatomy. Uniform268/562 scale keeps the low silhouette116-118px against128px physical crouch. Active boot toe source(970,619), pivot(624,641) projects to(+165.0,-10.5), inside Vector Low x[+50.7,+205.3], y[-40,0]. Startup150ms, active150ms (ticks9..17), recovery217ms, total517ms~31ticks. Oldv2 source/action/prepared retained as before-mvp references. No combat metadata authored."
+    },
+    "overhead": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "notes": "Complete raised fist preparation, forward descending hammerfist contact, low follow-through. Glove near(1200,375), support(955,718), projects to(+95.3,-133.4)world inside overhead box. Full raised hand, adult anatomy and bag preserved. No combat metadata authored. Source crop excludes a lone matte pixel at original(0,767); source and keyed pixels are unchanged. Approved only for candidate review export, not final art release."
+    },
+    "anti_air": {
+      "approved": true,
+      "scale_to_runtime": 0.432258064516129,
+      "notes": "Upright active body measures about620px from hair top to soles; use one uniform268/620 scale for all3 drawings. Grounded support remains y793. Glove projects near(+67.9,-287.0), inside the baseline anti-air box; shoulder bag and raised hand retained. Approved only for candidate review export, not final art release."
+    },
+    "air_punch": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "notes": "Virtual pivots register gold belt at about-160world in all3 poses, rather than registering airborne boots. Body equivalent689px matches the idle. Source active glove projects near(+73.5,-122.5), inside the upper/back portion of the baseline air-punch box. Physics supplies air displacement; no second trajectory. Torso inclines into the punch. Approved only for candidate review export, not final art release."
+    },
+    "air_kick": {
+      "approved": true,
+      "scale_to_runtime": 0.4123076923076923,
+      "notes": "Selected v3 redraws the active ankle/boot in dorsiflexion while preserving the downward leg, trunk, startup and recovery. Original uniform268/650 scale, belt-registered virtual pivots and116/167/150ms timing retained. Active sole center around(1205,579) maps to(+160.8,-72.2), within the existing box; lowest heel at648 maps about-43.7, within2px of its lower edge-45.3, reducing the former~15px extension. v2 rejected for raising the entire leg too high. No combat or whole-body translation change. First crop excludes isolated matte pixel below the artwork. Candidate export; finalization evidence is recorded separately."
+    },
+    "throw": {
+      "approved": true,
+      "scale_to_runtime": 0.6049661399548533,
+      "notes": "Six shoulder-throw keys: reach, capture, lift/turn, release BEHIND, follow-through, ready.48ticks800ms; capture visual phase10..21, recovery starts22. No fake victim drawn into attacker sheet. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available. Lift v2 replaces only key2 with generated arms raised FORWARD; hands approximately(+55,-235)world support the victim during capture. Other five selected drawings retain identical pixel hashes. select_lift_v2.py reproduces the explicit whole-frame selection."
+    },
+    "special": {
+      "approved": true,
+      "scale_to_runtime": 0.47942754919499103,
+      "notes": "Selected v2: bag swung on continuous taut shoulder strap, hand guides strap; first pose already emits. Gold bag edge source(814,329), grounded anchor(386,657), scale268/559 maps(+205.1968,-157.2522), baseline(+205.3333,-157.3333). No new projectile or combat metadata; original v1 short/high reach retained. Approved only for candidate review export, not final art release."
+    },
+    "spawn": {
+      "approved": true,
+      "scale_to_runtime": 0.3946980854197349,
+      "notes": "Glove adjustment, hair flick, ready guard; full identity and bag continuity. Approved only for candidate review export, not final art release."
+    },
+    "victory": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "notes": "Relax, restrained raised-fist celebration, confident sustained pose. Three distinct generated keys. Approved only for candidate review export, not final art release."
+    },
+    "defeat": {
+      "approved": true,
+      "scale_to_runtime": 0.3889695210449927,
+      "notes": "Recoil then knees and supporting hand to ground, sustained defeat. One anatomy scale for all phases; no prone enlargement. Ground anchors explicitly follow contact level707/682/697. Approved only for candidate review export, not final art release."
+    },
+    "signature_special": {
+      "approved": true,
+      "scale_to_runtime": 0.8048048048048048,
+      "notes": "Undefined Bazooka: opens tiny bag, extracts absurdly huge weapon, shoulders it, aims down/fires, follows through, recoils in smoke, stows, returns ready. 108ticks1800ms: startup0..31, active32..54, recovery55..107. First active muzzle(1698,325) from pivot(1465,359) maps to(+187.5,-27.4)world. Dedicated projectile/impact atlas supplies the real moving rocket and ground explosion. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+    },
+    "knockdown": {
+      "approved": true,
+      "scale_to_runtime": 0.47686832740213525,
+      "notes": "New four-stage knockdown: falling backward, fully reclined on floor, kneeling rise, standing ready guard. Uniform268/562 anatomy scale derived from final upright pose. Pivots follow support ground, not bounding-box center. Full white blouse/trousers/boots/bag retained.100/250/150/100ms=600ms/36ticks matches real knockdown. No duplicated normal-hit or defeat frames; no combat metadata authored."
+    },
+    "thrown": {
+      "approved": true,
+      "scale_to_runtime": 0.44666666666666666,
+      "notes": "Dedicated throw-victim captured/inverted/somersault/descent poses. First key200ms held by renderer during capture; ballistic flight starts clip clock at200ms. Waist registered near160world above virtual ground across rotations; transparent bottom padding accommodates virtual pivots without editing original drawings. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+    },
+    "launched": {
+      "approved": true,
+      "scale_to_runtime": 0.432258064516129,
+      "notes": "Dedicated uppercut reaction: chin snaps up, torso arches in rise, suspended apex, braced descent. No throw inversion or recycled ordinary hit. Virtual belt/ground pivots follow source pose placement while World supplies all flight. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+    },
+    "heavy_hit": {
+      "approved": true,
+      "scale_to_runtime": 0.4079147640791476,
+      "notes": "Dedicated grounded heavy recoil, deep abdominal fold and stagger recovery. Feet support ground across keys, same anatomical scale from upright657px.370ms presentation; physical stun remains MoveSpec-driven. Original sources remain intact. Matte removal locally authorized; all drawings generated with builtin imagegen. Explicit crop/pivot and one uniform anatomical scale per action. Residual red matte at transparent contours removed with the asset-local red-only cleanup; blue serpent and gold/skin interior colors are preserved. Earlier keyed result remains available."
+    }
+  }
+}

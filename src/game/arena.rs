@@ -15,6 +15,18 @@ pub enum ArenaId {
 }
 
 impl ArenaId {
+    /// Narrative home used by super motifs, without restricting match selection.
+    pub const fn home_for_character(character: crate::characters::CharacterId) -> Self {
+        match character {
+            crate::characters::CharacterId::Rust => Self::Sirius,
+            crate::characters::CharacterId::Duke => Self::JavaStreet,
+            crate::characters::CharacterId::C => Self::PortoDigital,
+            crate::characters::CharacterId::Cpp => Self::ValeDoPinhao,
+            crate::characters::CharacterId::Python => Self::BioTic,
+            crate::characters::CharacterId::Go => Self::Fortaleza,
+        }
+    }
+
     /// First arena used when the application starts.
     pub const STARTING_ARENA: Self = Self::Sirius;
 

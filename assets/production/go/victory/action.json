@@ -1,0 +1,89 @@
+{
+  "action": "victory",
+  "source": "victory/source-v1.png",
+  "sheet": "victory/keyed-v1.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "Final generated art reviewed: complete World in both facings, native Lab, Sprite Studio and normal match; evidence in finalization-review.md.",
+  "source_body_height_reference_px": 720,
+  "suggested_scale_to_runtime": 0.36666666666666664,
+  "replacement_contract": "../action-contracts.json#/actions/victory",
+  "references": {
+    "new_master": "reference/master.png",
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
+  "frames": [
+    {
+      "name": "victory_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 336,
+        "y": 789
+      },
+      "duration_ms": 160,
+      "phase": "relax"
+    },
+    {
+      "name": "victory_01",
+      "source_rect": {
+        "x": 627,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 320,
+        "y": 793
+      },
+      "duration_ms": 200,
+      "phase": "celebrate"
+    },
+    {
+      "name": "victory_02",
+      "source_rect": {
+        "x": 1254,
+        "y": 0,
+        "w": 627,
+        "h": 836
+      },
+      "pivot": {
+        "x": 258,
+        "y": 791
+      },
+      "duration_ms": 500,
+      "phase": "hold"
+    }
+  ],
+  "generation_brief": "New identity-appropriate release, celebration and held result, maintaining full limbs/accessories.",
+  "review_notes": "Three real drawings: lower guard/exhale, restrained raised fist, held thumbs-up. Uniform264/720 from the final upright body. Feet grounded with anchors789/793/791. Adult small eyes and modeled muzzle preserved; no childish facial redesign.",
+  "provenance": {
+    "tool": "built-in image_gen",
+    "master": "reference/master.png",
+    "prompt": "victory/prompt-v1.txt",
+    "original_sources_preserved": true,
+    "extraction": "tools/art/remove_generated_magenta.py without --rust-contour"
+  },
+  "static_review": {
+    "approved": true,
+    "new_master_used_every_generation": true,
+    "dark_and_light_backgrounds": true,
+    "both_facings": true,
+    "source_and_action_scale_reviewed": true,
+    "runtime_final_approved": true
+  },
+  "runtime_review": {
+    "approved": true,
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "report": "../finalization-review.md",
+    "world_facings_seen": [],
+    "lab_capture": "full set before jump, art unchanged by frame checksum",
+    "normal_match_result_evidence": true
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "sheet": "crouch_block/source.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "crouch_block_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 661,
+        "h": 793
+      },
+      "pivot": {
+        "x": 363,
+        "y": 690
+      },
+      "duration_ms": 70,
+      "phase": "low_guard"
+    },
+    {
+      "name": "crouch_block_01",
+      "source_rect": {
+        "x": 661,
+        "y": 0,
+        "w": 661,
+        "h": 793
+      },
+      "pivot": {
+        "x": 340,
+        "y": 690
+      },
+      "duration_ms": 80,
+      "phase": "brace"
+    },
+    {
+      "name": "crouch_block_02",
+      "source_rect": {
+        "x": 1322,
+        "y": 0,
+        "w": 661,
+        "h": 793
+      },
+      "pivot": {
+        "x": 328,
+        "y": 690
+      },
+      "duration_ms": 120,
+      "phase": "settle"
+    }
+  ],
+  "review": {
+    "identity": "Three crouched guard phases; face protected by actual forearms, unlike crouch art. Costume recognizable and complete.",
+    "remaining": "World movement/attacks in both facings, Combat Lab, native match and sequential Sprite Studio inspection completed. See ../finalization-review.md for exact scope, sampling and retained mirroring convention.",
+    "generation": "built-in image_gen; original source-v1.png; prompt.txt",
+    "suggested_scale": 0.47,
+    "alpha": "Prepared using remove_generated_magenta.py; inspected on black backdrop, no white speckles or visible magenta matte.",
+    "status": "Source frames reviewed as candidates; runtime continuity/scale/function still pending."
+  },
+  "status": "reviewed visual and functional pilot; see ../finalization-review.md for evidence and limits",
+  "finalization_review": "../finalization-review.md"
+}

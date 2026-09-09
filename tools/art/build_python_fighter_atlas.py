@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -32,9 +33,14 @@ def main() -> None:
     source = Image.open(SOURCE_PATH).convert("RGBA")
     source_sprites = extract_source_sprites(source)
     reference = json.loads(REFERENCE_MANIFEST_PATH.read_text())
-    reference_frames = reference["frames"][:94]
+    reference_frames = reference["frames"]
 
-    atlas = Image.new("RGBA", (TARGET_COLUMNS * CELL_WIDTH, 16 * CELL_HEIGHT), (0, 0, 0, 0))
+    target_rows = math.ceil(len(reference_frames) / TARGET_COLUMNS)
+    atlas = Image.new(
+        "RGBA",
+        (TARGET_COLUMNS * CELL_WIDTH, target_rows * CELL_HEIGHT),
+        (0, 0, 0, 0),
+    )
     frames: list[dict[str, Any]] = []
 
     for index, reference_frame in enumerate(reference_frames):
@@ -74,7 +80,7 @@ def main() -> None:
             "AI-generated Python fighter atlas candidate for sprite validation.",
             "Original adult character inspired by Python and data science; not a portrait or exact likeness of any real person.",
             "Source sheet was generated as a chroma-key atlas, cleaned to alpha, segmented into major pose components, then repacked to the C atlas 6x16 runtime layout.",
-            "The source provided 77 major poses, so some neighboring runtime frames intentionally reuse a pose until hand animation is produced.",
+            f"The source provided {len(source_sprites)} major poses for {len(frames)} runtime frames, so some neighboring frames intentionally reuse a pose until hand animation is produced.",
             "Light punch frames are intended to read as the snake bite; heavy punch frames are the fighter's own punch.",
             "Taunt frames use data-science visual effects such as points, charts, and matrix-like energy without readable text.",
             "This asset is not integrated into the playable roster yet and still needs review in Sprite Studio.",

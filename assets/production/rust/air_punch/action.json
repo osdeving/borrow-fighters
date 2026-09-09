@@ -1,0 +1,92 @@
+{
+  "action": "air_punch",
+  "source": "air_punch/source-v2.png",
+  "sheet": "air_punch/sheet-v2.png",
+  "reviewed": true,
+  "loop": false,
+  "status": "reviewed visual and functional pilot; see ../finalization-review.md for evidence and limits",
+  "source_body_height_reference_px": 539,
+  "normalization_note": "Approximate upright-body reference; do not scale each frame by its own alpha bounds. Air pivots are virtual standing-floor anchors beneath hips, not boot tips. Ground pivots are proposed and require foot-support review after normalization.",
+  "combat_timing": {
+    "move_id": "AirPunch",
+    "input": "AirPunch",
+    "duration": 22,
+    "active_start": 5,
+    "active_end_inclusive": 13,
+    "whiff_recovery": 6,
+    "clip": "air_punch"
+  },
+  "frames": [
+    {
+      "name": "air_punch_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 490,
+        "h": 768
+      },
+      "pivot": {
+        "x": 285,
+        "y": 650
+      },
+      "duration_ms": 83,
+      "phase": "startup"
+    },
+    {
+      "name": "air_punch_1",
+      "source_rect": {
+        "x": 490,
+        "y": 0,
+        "w": 575,
+        "h": 768
+      },
+      "pivot": {
+        "x": 253,
+        "y": 694
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "air_punch_2",
+      "source_rect": {
+        "x": 1065,
+        "y": 0,
+        "w": 475,
+        "h": 768
+      },
+      "pivot": {
+        "x": 245,
+        "y": 650
+      },
+      "duration_ms": 66,
+      "phase": "recovery"
+    },
+    {
+      "name": "air_punch_3",
+      "source_rect": {
+        "x": 1540,
+        "y": 0,
+        "w": 508,
+        "h": 768
+      },
+      "pivot": {
+        "x": 230,
+        "y": 650
+      },
+      "duration_ms": 67,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "2026-09-07: existing v2 active pose has hair and belt both 44 source pixels below startup. Active-only virtual pivot y650->694 removes that embedded translation, yielding a 21.877548 world-pixel upward visual correction (22 px after prepared-pivot rounding). Hair top aligns across all four poses; belt is level with startup. The approximate active glove remains inside the unchanged AirPunch box at world x70.60..104.42, y-124.80..-97.95. Source pixels, scale, source rectangles, x pivots, durations, physics and combat are unchanged. Full source landmarks, before/after overlays and prior notes are preserved in the local pivot-calibration files. Native verification complete; see ../finalization-review.md.",
+  "pivot_calibration": {
+    "review": "pivot-calibration-2026-09-07.md",
+    "measurements": "pivot-calibration-2026-09-07.json",
+    "previous_action": "action-before-pivot-calibration-2026-09-07.json",
+    "changed_frame": "air_punch_1",
+    "previous_y": 650,
+    "new_y": 694,
+    "source_pixels_changed": false
+  },
+  "finalization_review": "../finalization-review.md"
+}

@@ -1,0 +1,825 @@
+{
+  "date": "2026-09-09",
+  "reviewer": "audio_delivery subagent; C++ asset author, so this is an author QA pass rather than an independent art approval",
+  "method": "Read-only visual inspection using view_image of 47 actual 1280x720 game frames from the completed reverse-direction capture. Exported World/renderer reaction metadata was used to identify the victim and phase. No video watching, live input or subjective timing/fluidity review is claimed.",
+  "capture_directory": "/tmp/borrow25-final-reverse",
+  "capture_report_sha256": "5be1494ad19aec30d79b96386ebd0125ce18f9c05404865c5d4ec9833a6e2b76",
+  "character_reviewed": "cpp",
+  "opponent": "python",
+  "reverse": true,
+  "scenario_coverage": {
+    "scenarios_with_cpp_as_victim": 16,
+    "attack_scenarios": 12,
+    "guard_scenarios": 4,
+    "selected_frames_reviewed": 47,
+    "intentional_hidden_target_frames": 1,
+    "visible_cpp_frames": 46
+  },
+  "findings": [
+    {
+      "area": "Contact articulation",
+      "result": "pass",
+      "detail": "Body strikes fold the waist and gather arms at the abdomen; overhead and aerial hits snap the head/upper torso backward; sweep buckles the leg with arms thrown outward. These differ visibly from prior idle/guard poses at the first contact sample."
+    },
+    {
+      "area": "Progression",
+      "result": "pass in sampled frames",
+      "detail": "Heavy body and overhead samples at ages0/7/14 show separate articulated drawings and partial recovery. Launch, Fall and Rise samples demonstrate knees/arms/torso changing configuration, with horizontal prone and kneeling recovery poses."
+    },
+    {
+      "area": "Ground support",
+      "result": "pass",
+      "detail": "Standing and crouching guard, body/head/low hit, prone Fall14, Rise0/7/14 and recovered samples align their visible support with the same floor line. No66px sink suggested by faint-alpha metadata was present."
+    },
+    {
+      "area": "Integrity and mirroring",
+      "result": "pass",
+      "detail": "Visible sampled bodies retain head, two arms/hands, two legs/boots, flower and purse; no unintended atlas-neighbor fragments or border cropping observed. Guard scenarios mirror C++ toward the left; attack scenarios initially face right. Back throw crosses sides and the recovered guard turns toward Python."
+    },
+    {
+      "area": "Python authored super",
+      "result": "pass for sampled visibility phases",
+      "detail": "C++ is intentionally hidden after swallowing; returns visibly airborne, then lies on the floor and progresses through Rise before her normal stance resumes. These observations include a darkened cinematic background."
+    },
+    {
+      "area": "Contours",
+      "result": "minor known cosmetic limitation",
+      "detail": "Thin red/gold fringe in source RGBA is discreet against the arena at native display size and did not impair silhouette reading in inspected frames. Bright red contact tint is intentional runtime feedback and is separate from that source fringe."
+    }
+  ],
+  "blocking_findings": [],
+  "limits": [
+    "Static frames sampled from one arena and reverse direction; these do not establish subjective fluidity between samples.",
+    "No audio or video playback reviewed in this pass.",
+    "Some hit flashes and effects overlap the torso/hands; other later samples and source sheets support body-integrity inspection.",
+    "Hidden-target contact is expected from the Python super and does not provide a visible reaction sample.",
+    "No claim that every frame of every gameplay combination was visually inspected."
+  ],
+  "images_reviewed": [
+    {
+      "image": "cpp-StandingBlock-left-055-GuardHigh-0.png",
+      "scenario": "StandingBlock",
+      "character": "cpp",
+      "video_frame": 2258,
+      "sha256": "c385d7fc92dad1acffdc6b095e8e7c371fb22f71be0ccd714b5ef14dff2d4f88",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "GuardHigh",
+        "sprite_frame": "reaction_guard_high_00",
+        "sprite_clip": "reaction_guard_high",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "cpp-OverheadBlock-left-062-GuardHigh-0.png",
+      "scenario": "OverheadBlock",
+      "character": "cpp",
+      "video_frame": 2376,
+      "sha256": "1d1bbfc96e0b3d420b438154a850d210b9fa7702a511da564f1e89e28195a414",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "GuardHigh",
+        "sprite_frame": "reaction_guard_high_00",
+        "sprite_clip": "reaction_guard_high",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "cpp-CrouchingBlock-left-060-GuardLow-0.png",
+      "scenario": "CrouchingBlock",
+      "character": "cpp",
+      "video_frame": 2485,
+      "sha256": "754bec93241ea7088ab95ed897db3a964b7907783fa253fc37b7052010a09217",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "GuardLow",
+        "sprite_frame": "reaction_guard_low_00",
+        "sprite_clip": "reaction_guard_low",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "cpp-ProjectileBlock-left-050-GuardHigh-0.png",
+      "scenario": "ProjectileBlock",
+      "character": "cpp",
+      "video_frame": 2586,
+      "sha256": "2fc5da042fcf4c967a9c0cceadec306babd74b45bfe97e88a310e8360b8f8917",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "GuardHigh",
+        "sprite_frame": "reaction_guard_high_00",
+        "sprite_clip": "reaction_guard_high",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(LightPunch)-left-055-Body-0.png",
+      "scenario": "Attack(LightPunch)",
+      "character": "python",
+      "video_frame": 2702,
+      "sha256": "1bf35f9e8102c28765a6e072e480c2bf769cd3e9a618b7a0b8ea8e78d76d4ce3",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Body",
+        "sprite_frame": "reaction_body_00",
+        "sprite_clip": "reaction_body",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(HeavyPunch)-left-061-Body-0.png",
+      "scenario": "Attack(HeavyPunch)",
+      "character": "python",
+      "video_frame": 2819,
+      "sha256": "3c9734aaa0176a43fdb74c9e7d678b9b80df670964a5db7f0e5228b767cadfdb",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Body",
+        "sprite_frame": "reaction_body_00",
+        "sprite_clip": "reaction_body",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(HeavyPunch)-left-068-Body-7.png",
+      "scenario": "Attack(HeavyPunch)",
+      "character": "python",
+      "video_frame": 2826,
+      "sha256": "ce5d3e089fd8131279b2a2ecb17c7e3bd004e8c5da9b63762a157284dbad5525",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Body",
+        "sprite_frame": "reaction_body_01",
+        "sprite_clip": "reaction_body",
+        "age_frames": 7,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(HeavyPunch)-left-075-Body-14.png",
+      "scenario": "Attack(HeavyPunch)",
+      "character": "python",
+      "video_frame": 2833,
+      "sha256": "2f70b074e1ea1b2c242e9402bc8ceac14a7d69c4ec9b67624c0f26773a97eef0",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Body",
+        "sprite_frame": "reaction_body_03",
+        "sprite_clip": "reaction_body",
+        "age_frames": 14,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Kick)-left-059-Body-0.png",
+      "scenario": "Attack(Kick)",
+      "character": "python",
+      "video_frame": 2930,
+      "sha256": "0d699a8419c325806dcbe7253530a7b83f95a8713883e87ec86de63fbca7f61c",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Body",
+        "sprite_frame": "reaction_body_00",
+        "sprite_clip": "reaction_body",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Sweep)-left-060-Low-0.png",
+      "scenario": "Attack(Sweep)",
+      "character": "python",
+      "video_frame": 3042,
+      "sha256": "ffc32384742fdb040aa3038f56c61ded743b6fc9e9803f9705014655e857505f",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Low",
+        "sprite_frame": "reaction_low_00",
+        "sprite_clip": "reaction_low",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Sweep)-left-073-Fall-7.png",
+      "scenario": "Attack(Sweep)",
+      "character": "python",
+      "video_frame": 3055,
+      "sha256": "5f02a50d4541e607dca0028a87a177960e7c7c0092c9bc7a090e97e03958763e",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Fall",
+        "sprite_frame": "reaction_fall_02",
+        "sprite_clip": "reaction_fall",
+        "age_frames": 7,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Sweep)-left-095-Rise-14.png",
+      "scenario": "Attack(Sweep)",
+      "character": "python",
+      "video_frame": 3077,
+      "sha256": "68e57467e37dc5e4d7240297b274353f4f18c6ebff144490d7f218f54b5ae2a2",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Rise",
+        "sprite_frame": "reaction_rise_03",
+        "sprite_clip": "reaction_rise",
+        "age_frames": 14,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Sweep)-left-096-recovered.png",
+      "scenario": "Attack(Sweep)",
+      "character": "python",
+      "video_frame": 3078,
+      "sha256": "80de2f62c5769508f6dc875641e9ee87972c598018eb52698e7111c842bd79cb",
+      "reviewed_visually": true,
+      "reaction": null,
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Overhead)-left-062-Head-0.png",
+      "scenario": "Attack(Overhead)",
+      "character": "python",
+      "video_frame": 3176,
+      "sha256": "b73fdc8488700c4739fea947776980e319c9a98d9f6454cc62d339afb5af5ec1",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Head",
+        "sprite_frame": "reaction_head_00",
+        "sprite_clip": "reaction_head",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Overhead)-left-069-Head-7.png",
+      "scenario": "Attack(Overhead)",
+      "character": "python",
+      "video_frame": 3183,
+      "sha256": "7569757343e2a3a13b4deb67b1243525416387d88e5dd23c44c554720cbdb21e",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Head",
+        "sprite_frame": "reaction_head_01",
+        "sprite_clip": "reaction_head",
+        "age_frames": 7,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Overhead)-left-076-Head-14.png",
+      "scenario": "Attack(Overhead)",
+      "character": "python",
+      "video_frame": 3190,
+      "sha256": "0454d13f6bd04dcc98a03d6774620d65c8d60f4fa6f9dbcddf8cf6e9a2f47682",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Head",
+        "sprite_frame": "reaction_head_03",
+        "sprite_clip": "reaction_head",
+        "age_frames": 14,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(AntiAir)-left-058-Launch-0.png",
+      "scenario": "Attack(AntiAir)",
+      "character": "python",
+      "video_frame": 3286,
+      "sha256": "7be7fc596d77f5d7759274eeebb84c258a42d8ab9fe02be4ba8cd3e6d582083b",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Launch",
+        "sprite_frame": "reaction_launch_00",
+        "sprite_clip": "reaction_launch",
+        "age_frames": 0,
+        "grounded": false,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(AntiAir)-left-065-Launch-7.png",
+      "scenario": "Attack(AntiAir)",
+      "character": "python",
+      "video_frame": 3293,
+      "sha256": "45ada508d923eaa94d8e072a615c52037c5d19a4c4febcd3f3915df7d59b2e45",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Launch",
+        "sprite_frame": "reaction_launch_00",
+        "sprite_clip": "reaction_launch",
+        "age_frames": 7,
+        "grounded": false,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(AntiAir)-left-117-Fall-7.png",
+      "scenario": "Attack(AntiAir)",
+      "character": "python",
+      "video_frame": 3345,
+      "sha256": "5fe3be520d02efd0b57bc3ecb004cd62b52a18d37024f66133e027f6109a43c5",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Fall",
+        "sprite_frame": "reaction_fall_01",
+        "sprite_clip": "reaction_fall",
+        "age_frames": 7,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(AntiAir)-left-145-Rise-14.png",
+      "scenario": "Attack(AntiAir)",
+      "character": "python",
+      "video_frame": 3373,
+      "sha256": "b559bef771bd146cc3344f121ff13ff39050b5d05984818b663f315744f22f7b",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Rise",
+        "sprite_frame": "reaction_rise_03",
+        "sprite_clip": "reaction_rise",
+        "age_frames": 14,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(AntiAir)-left-146-recovered.png",
+      "scenario": "Attack(AntiAir)",
+      "character": "python",
+      "video_frame": 3374,
+      "sha256": "24983c25049a12b986253e5f03c8d9a366a9cb489c2ad2468fa4d7e717d6e823",
+      "reviewed_visually": true,
+      "reaction": null,
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(AirPunch)-left-069-Head-0.png",
+      "scenario": "Attack(AirPunch)",
+      "character": "python",
+      "video_frame": 3479,
+      "sha256": "787fdbdc88f13b2b0c5c92f065a722326ac1f3ded4c1ea0dffa28efc3742097c",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Head",
+        "sprite_frame": "reaction_head_00",
+        "sprite_clip": "reaction_head",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(AirKick)-left-071-Head-0.png",
+      "scenario": "Attack(AirKick)",
+      "character": "python",
+      "video_frame": 3600,
+      "sha256": "e60c61bfb7e3298ba3fb20e28f9a8f98e5fc42556330f448d635cdc39795a200",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Head",
+        "sprite_frame": "reaction_head_00",
+        "sprite_clip": "reaction_head",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Throw)-left-061-Launch-0.png",
+      "scenario": "Attack(Throw)",
+      "character": "python",
+      "video_frame": 3711,
+      "sha256": "3c06d5177b8db3ae47c951248fb33d58c53149b72f06efafdedfa1f91d890218",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Launch",
+        "sprite_frame": "reaction_launch_00",
+        "sprite_clip": "reaction_launch",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Throw)-left-080-Launch-7.png",
+      "scenario": "Attack(Throw)",
+      "character": "python",
+      "video_frame": 3730,
+      "sha256": "f9add3a1d45dcd976d29a65ad9c242f857600a73eb149562ee40a15a09186f08",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Launch",
+        "sprite_frame": "reaction_launch_00",
+        "sprite_clip": "reaction_launch",
+        "age_frames": 7,
+        "grounded": false,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Throw)-left-120-Fall-7.png",
+      "scenario": "Attack(Throw)",
+      "character": "python",
+      "video_frame": 3770,
+      "sha256": "4c427e450c3dd27075c5ba5ed9b97777a4f4e1c5897e8e12eca01f339bf2e13a",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Fall",
+        "sprite_frame": "reaction_fall_01",
+        "sprite_clip": "reaction_fall",
+        "age_frames": 7,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Throw)-left-148-Rise-14.png",
+      "scenario": "Attack(Throw)",
+      "character": "python",
+      "video_frame": 3798,
+      "sha256": "dadc6fa5a6f86cec69f02b11c8346afce037d26cb3a234e8e7024b878826c86e",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Rise",
+        "sprite_frame": "reaction_rise_03",
+        "sprite_clip": "reaction_rise",
+        "age_frames": 14,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Throw)-left-149-recovered.png",
+      "scenario": "Attack(Throw)",
+      "character": "python",
+      "video_frame": 3799,
+      "sha256": "4f49a15dc772489d519ae6caeeb0f9115fb08108202c8a1e488386880fb409fc",
+      "reviewed_visually": true,
+      "reaction": null,
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(Projectile)-left-043-Body-0.png",
+      "scenario": "Attack(Projectile)",
+      "character": "python",
+      "video_frame": 3878,
+      "sha256": "38f697e75db066dce81c5d683824476c5cbae628cc311648015ea2cd6dfd5b38",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Body",
+        "sprite_frame": "reaction_body_00",
+        "sprite_clip": "reaction_body",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(SignatureSpecial)-left-063-Launch-0.png",
+      "scenario": "Attack(SignatureSpecial)",
+      "character": "python",
+      "video_frame": 4009,
+      "sha256": "333b373b239aa64be95c5ad215002b13bd59591568dbe6c1eb4ab31405dd5dde",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Launch",
+        "sprite_frame": "reaction_launch_00",
+        "sprite_clip": "reaction_launch",
+        "age_frames": 0,
+        "grounded": false,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(SignatureSpecial)-left-070-Launch-7.png",
+      "scenario": "Attack(SignatureSpecial)",
+      "character": "python",
+      "video_frame": 4016,
+      "sha256": "6b935d4647b2da1cad999073eb3819a96ae04937101858064a46413d6e05b1cc",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Launch",
+        "sprite_frame": "reaction_launch_00",
+        "sprite_clip": "reaction_launch",
+        "age_frames": 7,
+        "grounded": false,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(SignatureSpecial)-left-129-Fall-7.png",
+      "scenario": "Attack(SignatureSpecial)",
+      "character": "python",
+      "video_frame": 4075,
+      "sha256": "4578dd2c61d58b9670c42f254634d7687bd4b251d81edab69740a552f772f762",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Fall",
+        "sprite_frame": "reaction_fall_01",
+        "sprite_clip": "reaction_fall",
+        "age_frames": 7,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(SignatureSpecial)-left-157-Rise-14.png",
+      "scenario": "Attack(SignatureSpecial)",
+      "character": "python",
+      "video_frame": 4103,
+      "sha256": "a1297b8413a648ad260aef1f484c34c281957e7f894b6bd2b5a4a0045ce44f36",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Rise",
+        "sprite_frame": "reaction_rise_03",
+        "sprite_clip": "reaction_rise",
+        "age_frames": 14,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(SignatureSpecial)-left-158-recovered.png",
+      "scenario": "Attack(SignatureSpecial)",
+      "character": "python",
+      "video_frame": 4104,
+      "sha256": "6b9f6a0a25a5c6a1d9fd116703dd675a456aa03dec690b43878244763b7f1646",
+      "reviewed_visually": true,
+      "reaction": null,
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(CinematicSpecial)-left-334-Launch-0.png",
+      "scenario": "Attack(CinematicSpecial)",
+      "character": "python",
+      "video_frame": 4474,
+      "sha256": "733afa54d4d38aa89c1c86ba70c459a12cbcca8ef2f17a10bbf04e930bbaf278",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Launch",
+        "sprite_frame": "reaction_launch_00",
+        "sprite_clip": "reaction_launch",
+        "age_frames": 0,
+        "grounded": false,
+        "hidden": true
+      },
+      "observation": "Intentional swallowed-target interval; C++ is hidden by the super script, so body integrity cannot be assessed from this frame."
+    },
+    {
+      "image": "python-Attack(CinematicSpecial)-left-425-Launch-7.png",
+      "scenario": "Attack(CinematicSpecial)",
+      "character": "python",
+      "video_frame": 4565,
+      "sha256": "618eb6626d6cd6cb780e7470a33bd79517e9f1c0dabbd68c83337bd927cedfdb",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Launch",
+        "sprite_frame": "reaction_launch_01",
+        "sprite_clip": "reaction_launch",
+        "age_frames": 7,
+        "grounded": false,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(CinematicSpecial)-left-449-Fall-7.png",
+      "scenario": "Attack(CinematicSpecial)",
+      "character": "python",
+      "video_frame": 4589,
+      "sha256": "9b42c893c7a067d63b9633b2b2c26abb76740d2a7e7ac3e0ffcdb5b2d4c285f8",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Fall",
+        "sprite_frame": "reaction_fall_01",
+        "sprite_clip": "reaction_fall",
+        "age_frames": 7,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(CinematicSpecial)-left-477-Rise-14.png",
+      "scenario": "Attack(CinematicSpecial)",
+      "character": "python",
+      "video_frame": 4617,
+      "sha256": "104eedfd03a5b18363e260c6f708272647dbf065c522710c78b5ab8d1ace584f",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Rise",
+        "sprite_frame": "reaction_rise_03",
+        "sprite_clip": "reaction_rise",
+        "age_frames": 14,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(CinematicSpecial)-left-478-recovered.png",
+      "scenario": "Attack(CinematicSpecial)",
+      "character": "python",
+      "video_frame": 4618,
+      "sha256": "81ba74eb7f1a90c2e50398d05e37c50d23d3eba4e5b5cb339dfb5f42decf3496",
+      "reviewed_visually": true,
+      "reaction": null,
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(AntiAir)-left-072-Launch-14.png",
+      "scenario": "Attack(AntiAir)",
+      "character": "python",
+      "video_frame": 3300,
+      "sha256": "2e2331f6d21c444f834f93e659488602fcb5939016ede0312e075d91d0d8937a",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Launch",
+        "sprite_frame": "reaction_launch_01",
+        "sprite_clip": "reaction_launch",
+        "age_frames": 14,
+        "grounded": false,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(AntiAir)-left-124-Fall-14.png",
+      "scenario": "Attack(AntiAir)",
+      "character": "python",
+      "video_frame": 3352,
+      "sha256": "6d741c25a87c1cbe1ffe49cb48ca356fc58a825db23c756425ca8d9fdad3d1a1",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Fall",
+        "sprite_frame": "reaction_fall_03",
+        "sprite_clip": "reaction_fall",
+        "age_frames": 14,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(AntiAir)-left-131-Rise-0.png",
+      "scenario": "Attack(AntiAir)",
+      "character": "python",
+      "video_frame": 3359,
+      "sha256": "c5a6d1a5237c9f14ff199f5e70f0fdd1ce903262eb2efbab5ea608844f4650c4",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Rise",
+        "sprite_frame": "reaction_rise_00",
+        "sprite_clip": "reaction_rise",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(AntiAir)-left-138-Rise-7.png",
+      "scenario": "Attack(AntiAir)",
+      "character": "python",
+      "video_frame": 3366,
+      "sha256": "29e0eaf682df281077aac59352ae6b4aefbad21df168309d95d7a5d87cf37f58",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Rise",
+        "sprite_frame": "reaction_rise_02",
+        "sprite_clip": "reaction_rise",
+        "age_frames": 7,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(CinematicSpecial)-left-432-Launch-14.png",
+      "scenario": "Attack(CinematicSpecial)",
+      "character": "python",
+      "video_frame": 4572,
+      "sha256": "de508c8d34cb1dd7b49bb41f5bb9194f2b31dced9019e691db38b4d89c3590bc",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Launch",
+        "sprite_frame": "reaction_launch_02",
+        "sprite_clip": "reaction_launch",
+        "age_frames": 14,
+        "grounded": false,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(CinematicSpecial)-left-456-Fall-14.png",
+      "scenario": "Attack(CinematicSpecial)",
+      "character": "python",
+      "video_frame": 4596,
+      "sha256": "223e6849440e7fecf1bd5ca11c5976e312721b767391d9c2c2a4a15b296e8f1f",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Fall",
+        "sprite_frame": "reaction_fall_03",
+        "sprite_clip": "reaction_fall",
+        "age_frames": 14,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(CinematicSpecial)-left-463-Rise-0.png",
+      "scenario": "Attack(CinematicSpecial)",
+      "character": "python",
+      "video_frame": 4603,
+      "sha256": "a8185c5a29d4b5ce2a57b6f8e2fdbbea6725538a7a35d5218fb7721139dff49d",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Rise",
+        "sprite_frame": "reaction_rise_00",
+        "sprite_clip": "reaction_rise",
+        "age_frames": 0,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    },
+    {
+      "image": "python-Attack(CinematicSpecial)-left-470-Rise-7.png",
+      "scenario": "Attack(CinematicSpecial)",
+      "character": "python",
+      "video_frame": 4610,
+      "sha256": "cc6c9d3e59b9579a19c6e970c586057015587a0db750dfa0137ba91f8c846ca8",
+      "reviewed_visually": true,
+      "reaction": {
+        "profile": "Rise",
+        "sprite_frame": "reaction_rise_02",
+        "sprite_clip": "reaction_rise",
+        "age_frames": 7,
+        "grounded": true,
+        "hidden": false
+      },
+      "observation": "Whole C++ body readable; no unintended crop/missing limb or floor penetration observed. Grounded support/airborne separation appropriate to the recorded state."
+    }
+  ],
+  "result": "pass with documented minor contour limitation"
+}

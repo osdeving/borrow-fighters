@@ -1,0 +1,49 @@
+{
+  "first_airborne": {
+    "tick": 495,
+    "live_tick": 151,
+    "frame": "jump_00",
+    "velocity_y": -870.0,
+    "grounded": false,
+    "body_bottom_y": 601.5,
+    "alpha_bottom_y": 604.5,
+    "alpha_bottom_offset_from_pivot": 3.0
+  },
+  "apex": {
+    "tick": 518,
+    "live_tick": 174,
+    "frame": "jump_01",
+    "velocity_y": -26.666526794433594,
+    "grounded": false,
+    "body_bottom_y": 436.66668701171875,
+    "alpha_bottom_y": 405.66668701171875,
+    "alpha_bottom_offset_from_pivot": -31.0
+  },
+  "last_airborne": {
+    "tick": 542,
+    "live_tick": 198,
+    "frame": "jump_02",
+    "velocity_y": 853.3336181640625,
+    "grounded": false,
+    "body_bottom_y": 609.3334350585938,
+    "alpha_bottom_y": 612.3334350585938,
+    "alpha_bottom_offset_from_pivot": 3.0
+  },
+  "landing": {
+    "tick": 543,
+    "live_tick": 199,
+    "frame": "idle_02",
+    "velocity_y": 0.0,
+    "grounded": true,
+    "body_bottom_y": 616.0,
+    "alpha_bottom_y": 620.0,
+    "alpha_bottom_offset_from_pivot": 4.0
+  },
+  "captured_images": 122,
+  "video": "runtime-motion.mp4",
+  "video_fps": 20,
+  "notes": [
+    "The video preserves elapsed simulation time between captured GPU frames.",
+    "Alpha bounds include every opaque detail and do not prove which pixel is the foot."
+  ]
+}

@@ -4,6 +4,40 @@
 //! tested without opening a window.
 
 use crate::engine::sprites::manifest::{SpriteFrame, SpriteManifest};
+use crate::engine::sprites::selection::FighterSpriteClip;
+
+/// Resolves presentation clips with explicit compatibility fallbacks.
+///
+/// Fallback poses are visual only: combat metadata must use the requested clip
+/// directly so an older atlas cannot change attack reach through an alias.
+pub fn frame_for_fighter_clip_at(
+    manifest: &SpriteManifest,
+    clip: FighterSpriteClip,
+    elapsed_seconds: f32,
+) -> Option<&SpriteFrame> {
+    let fallback = match clip {
+        FighterSpriteClip::Victory => &["victory", "taunt", "idle"][..],
+        FighterSpriteClip::Defeat => &["defeat", "hit", "idle"],
+        FighterSpriteClip::Spawn => &["spawn", "idle"],
+        FighterSpriteClip::CrouchBlock => &["crouch_block", "block", "idle"],
+        FighterSpriteClip::Knockdown => &["knockdown", "hit", "idle"],
+        FighterSpriteClip::HeavyHit => &["heavy_hit", "hit", "idle"],
+        FighterSpriteClip::Launched => &["launched", "hit", "idle"],
+        FighterSpriteClip::Thrown => &["thrown", "launched", "hit", "idle"],
+        FighterSpriteClip::SignatureSpecial => &["signature_special", "punch_heavy", "idle"],
+        FighterSpriteClip::Sweep | FighterSpriteClip::AirKick => &[clip.as_str(), "kick", "idle"],
+        FighterSpriteClip::Overhead | FighterSpriteClip::AntiAir => {
+            &[clip.as_str(), "punch_heavy", "idle"]
+        }
+        FighterSpriteClip::AirPunch | FighterSpriteClip::Throw => {
+            &[clip.as_str(), "punch_light", "idle"]
+        }
+        _ => &[clip.as_str(), "idle"],
+    };
+    fallback
+        .iter()
+        .find_map(|name| frame_for_clip_at(manifest, name, elapsed_seconds))
+}
 
 /// Returns the frame for a clip at the given elapsed time.
 pub fn frame_for_clip_at<'a>(

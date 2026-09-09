@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-09",
+  "cargo_test_all_targets": {
+    "passed": 321,
+    "failed": 0,
+    "ignored": 1,
+    "ignored_reason": "Real audio device test runs separately; see audio-stream-review.json."
+  },
+  "cargo_fmt_all": "passed",
+  "cargo_clippy_all_targets_deny_warnings": "passed",
+  "runtime_controls": "41 passed; controls/result.json",
+  "phase_scenarios": 8,
+  "guard_scenarios": 8,
+  "retained_phase_pngs": 15,
+  "protected_voice_files": 12,
+  "markdown_files_checked": 81,
+  "yaml_files_checked": 18,
+  "audiovisual_review": "Passed; offline mix of 61 real World events, 32.1 s, source identity and onset correlation verified separately from runtime audio.",
+  "final_video": "assets/showcase/authored-supers-2026-09-09.mp4"
+}

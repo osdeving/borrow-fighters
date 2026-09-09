@@ -1,0 +1,59 @@
+{
+  "captured_images": 624,
+  "simulation_states": 1845,
+  "video": "runtime-motion.mp4",
+  "video_fps": 60,
+  "simulation_fps": 60,
+  "simulation_duration_seconds": 30.75,
+  "encoded_video": {
+    "r_frame_rate": "60/1",
+    "duration": "30.750000",
+    "nb_frames": "1845"
+  },
+  "every_tick_captured": false,
+  "notes": [
+    "Video timing follows recorded simulation ticks, with no extra final pause.",
+    "Sparse captures hold the previous GPU image until the next sampled tick; use --every-tick when capturing to inspect every simulation frame.",
+    "Alpha bounds include every opaque detail and do not identify which pixel is the foot."
+  ],
+  "first_airborne": {
+    "tick": 495,
+    "live_tick": 151,
+    "frame": "jump_0",
+    "velocity_y": -870.0,
+    "grounded": false,
+    "body_bottom_y": 601.5,
+    "alpha_bottom_y": 603.5,
+    "alpha_bottom_offset_from_pivot": 2.0
+  },
+  "apex": {
+    "tick": 518,
+    "live_tick": 174,
+    "frame": "jump_1",
+    "velocity_y": -26.666526794433594,
+    "grounded": false,
+    "body_bottom_y": 436.66668701171875,
+    "alpha_bottom_y": 364.66668701171875,
+    "alpha_bottom_offset_from_pivot": -72.0
+  },
+  "last_airborne": {
+    "tick": 542,
+    "live_tick": 198,
+    "frame": "jump_2",
+    "velocity_y": 853.3336181640625,
+    "grounded": false,
+    "body_bottom_y": 609.3334350585938,
+    "alpha_bottom_y": 598.3334350585938,
+    "alpha_bottom_offset_from_pivot": -11.0
+  },
+  "landing": {
+    "tick": 543,
+    "live_tick": 199,
+    "frame": "idle_1",
+    "velocity_y": 0.0,
+    "grounded": true,
+    "body_bottom_y": 616.0,
+    "alpha_bottom_y": 619.0,
+    "alpha_bottom_offset_from_pivot": 3.0
+  }
+}

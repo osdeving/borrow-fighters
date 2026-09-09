@@ -2,7 +2,7 @@
 
 ## Status
 
-Padrao de prototipo. Deve ser revisado quando tivermos arte final, camera com zoom ou corpos fisicos por personagem.
+Padrao de prototipo. Deve ser revisado conforme os candidatos de arte passarem por verificacao visual e funcional, ou quando camera/metricas de gameplay mudarem.
 
 ## Objetivo
 
@@ -32,9 +32,9 @@ Isso da uma arena com cerca de `11,8` larguras de corpo (`1194,7 / 101,3`). Para
 
 ## Tamanho Visual Alvo
 
-O corpo fisico ainda e um retangulo comum para todos os personagens. O sprite pode ultrapassar esse corpo para cabelo, orelha, roupa, efeito e leitura visual, mas a area vulneravel principal deve continuar coerente com a hurtbox.
+As metricas fisicas sao carregadas por personagem, mas o roster atual usa o mesmo corpo padrao. O sprite pode ultrapassar esse corpo para cabelo, orelha, roupa, efeito e leitura visual, mas a area vulneravel principal deve continuar coerente com a hurtbox.
 
-Para personagens humanoides, como Rust, Duke/Java, C e Python:
+Para personagens humanoides, como Rust, Duke/Java, C, Python e C++:
 
 - altura visivel em idle: `247` a `280 px`;
 - largura visivel em idle: `147` a `200 px`;
@@ -42,6 +42,7 @@ Para personagens humanoides, como Rust, Duke/Java, C e Python:
 - Java/Duke atual aparece com cerca de `161 x 251 px` em idle.
 - C atual deve ficar nessa mesma faixa humanoide; a versao inicial usa `scale = 1.5467` no manifesto para compensar o recorte dos atlas de referencia.
 - Python atual usa corpo fisico humanoide padrao e deve ser validada pela mesma faixa antes de qualquer ajuste de hitbox.
+- C++ atual usa corpo fisico humanoide padrao, manifesto multi-atlas e deve ser validada pela mesma faixa antes de qualquer ajuste de hitbox.
 
 Para personagens nao-humanos, como Go/Gopher:
 
@@ -69,11 +70,17 @@ O schema `borrow-fighters.sprite.v1` usa:
 
 - `scale`: escala visual runtime do atlas;
 - `frames[].pivot`: ponto local de apoio por frame;
-- `frames[].combat.hurtboxes[]`: metadata visual opcional para hurtbox por frame;
-- `frames[].combat.hitboxes[]`: metadata visual opcional para hitbox por frame;
+- `frames[].combat.hurtboxes[]`: metadata de combate opcional para hurtbox por frame;
+- `frames[].combat.hitboxes[]`: metadata de combate opcional para hitbox por frame;
 - `frames[].combat.projectile_origin`: ponto local opcional de origem de projectile.
 
-O renderer de luta e o Sprite Combat Viewer consomem o mesmo `scale` e o mesmo `pivot`. Portanto, ajuste salvo no viewer aparece no jogo sem recompilar.
+O renderer e o Sprite Combat Viewer consomem `scale` e `pivot` do manifesto aberto. Para aparecer na luta, esse manifesto precisa ser o selecionado pelo loader e o processo precisa recarregar os assets; salvar no viewer nao troca um jogo ja aberto automaticamente.
+
+Durante a revisao, `BORROW_FIGHTERS_SPRITE_CANDIDATES=1` seleciona `assets/candidates/<personagem>/<personagem>-fighter.sprite.json` somente quando o conjunto tem os 20 clips exigidos e as texturas carregam. Candidatos parciais ficam no Viewer/Studio; luta e Combat Lab preservam o placeholder do personagem. O [pipeline de sprites](11-sprite-pipeline.md#revisao-de-candidatos-no-runtime) descreve os fallbacks e comandos.
+
+O candidato controla apenas o desenho: `SpriteAtlasAsset.combat_manifest` mantem escala, pivôs, boxes e origem do projectile do manifesto baseline para a resolucao de combate e o overlay da luta. Alterar `scale`/`pivot` no candidato pode corrigir alinhamento visual, mas nao desloca a colisao. Use as boxes baseline como referencia para avaliar o novo desenho, registre desalinhamentos e trate qualquer mudanca de combate em uma revisao propria. `frames[].combat` nos placeholders ativos continua sendo dado de gameplay; nao o ajuste como se fosse apenas anotacao.
+
+Confira apoio dos pes nas duas orientacoes, em tamanho real, durante agachamento, salto, reacoes, entrada e fim de luta. Esses clips agora avancam desde o inicio do estado; salto deve acompanhar a trajetoria real, e poses finais usam tempo desde o resultado. Os novos relogios visuais nao alteram corpo fisico, gravidade, velocidade, alcance ou frame data. A separacao e a producao por acao estao registradas no [ADR 0010](adr/0010-reviewed-action-sprite-production.md).
 
 O corpo fisico de personagem usa outro manifesto:
 
@@ -91,6 +98,8 @@ cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip idle --character python --move light_punch
 ```
 
+Para C++, confira frames dos dois atlas e valide escala e combate no jogo, Move Showcase ou Combat Lab; examinar apenas uma pagina nao cobre o personagem completo.
+
 No viewer:
 
 - `=` aumenta `scale` do manifesto;
@@ -107,7 +116,9 @@ No viewer:
 
 O Go ficou baixo e largo demais em comparacao com Rust e C. A primeira correcao, com `scale = 0.88` e corpo fisico `92 x 156 / crouch 88`, deixou o personagem legivel, mas ainda reforcava a leitura de mascote pequeno/gordinho.
 
-A correcao atual comprime `assets/placeholder/go-fighter-atlas.png` e `assets/placeholder/go-start-atlas.png` horizontalmente em torno do pivot, remove ilhas soltas de frames no atlas de luta, define `scale = 1.44` nos manifestos do Go e usa corpo fisico padrao `101,3 x 224 / crouch 128` em `assets/tuning/character-body-metrics.json`. A intencao e preservar a identidade de Gopher sem fazer o personagem parecer baixo/largo ou em outra escala de jogo. Esse `1.44` e o antigo `1.08` migrado pela escala `4/3`.
+O novo Go semirrealista usa atlas preparado em escala runtime, com referência visual de 264 px em idle e corpo físico preservado. Ver [master e medidas](../assets/production/go/reference/README.md) e [contratos por ação](../assets/production/go/action-contracts.json). As escalas abaixo descrevem os placeholders preservados e seu contrato de combate.
+
+A correcao histórica comprime `assets/placeholder/go-fighter-atlas.png` e `assets/placeholder/go-start-atlas.png` horizontalmente em torno do pivot, remove ilhas soltas de frames no atlas de luta, define `scale = 1.44` nos manifestos do Go e usa corpo fisico padrao `101,3 x 224 / crouch 128` em `assets/tuning/character-body-metrics.json`. A intencao e preservar a identidade de Gopher sem fazer o personagem parecer baixo/largo ou em outra escala de jogo. Esse `1.44` e o antigo `1.08` migrado pela escala `4/3`.
 
 Rust e Duke/Java usam `scale = 1.3333` nos manifestos de luta porque esse e o antigo tamanho efetivo `1.0` migrado pela escala `4/3`. As intros de spawn de Rust/Duke usam `scale = 1.2267`, preservando o ajuste relativo anterior de `0.92`.
 
@@ -117,6 +128,6 @@ Python entrou com corpo fisico humanoide padrao (`101,3 x 224 / crouch 128`) em 
 
 ## Ainda Em Aberto
 
-- Criar alcas visuais de hitbox/hurtbox no Sprite Combat Viewer, alem do ajuste atual de `scale` e `pivot`.
+- Calibrar e revisar boxes por acao nas ferramentas existentes antes de promover metadata nova ao combate.
 - Definir se metricas de arena entram em um manifesto proprio ou continuam em `src/config.rs` ate a camera evoluir.
 - Validar a faixa de altura/largura em playtest, nao apenas por comparacao visual.

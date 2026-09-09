@@ -1,0 +1,5 @@
+{
+  "scale_to_runtime": 0.42857142857142855,
+  "reviewed_for_packing": true,
+  "notes": "v6 selected after reach/height revisions. Emission is already present at frame0; the single waist snake extends forward while the original separate projectile remains untouched. Uniform body scale264/616. Existing origin(+205.333,-157.333) maps to source point approximately(679.11,328.89) from pivot(200,696), in the first open mouth region. Earlier variants were too long/high or short; all retained. Second pose retracts, third recovers."
+}

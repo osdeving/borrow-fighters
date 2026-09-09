@@ -1,0 +1,82 @@
+{
+  "sheet": "walk/cleaned-v8.png",
+  "reviewed": true,
+  "loop": true,
+  "frames": [
+    {
+      "name": "walk_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 560,
+        "h": 768
+      },
+      "pivot": {
+        "x": 327,
+        "y": 706
+      },
+      "duration_ms": 100,
+      "phase": "contact-near"
+    },
+    {
+      "name": "walk_01",
+      "source_rect": {
+        "x": 560,
+        "y": 0,
+        "w": 464,
+        "h": 768
+      },
+      "pivot": {
+        "x": 267,
+        "y": 706
+      },
+      "duration_ms": 100,
+      "phase": "passing-far"
+    },
+    {
+      "name": "walk_02",
+      "source_rect": {
+        "x": 1024,
+        "y": 0,
+        "w": 560,
+        "h": 768
+      },
+      "pivot": {
+        "x": 301,
+        "y": 714
+      },
+      "duration_ms": 100,
+      "phase": "contact-far"
+    },
+    {
+      "name": "walk_03",
+      "source_rect": {
+        "x": 1584,
+        "y": 0,
+        "w": 464,
+        "h": 768
+      },
+      "pivot": {
+        "x": 191,
+        "y": 708
+      },
+      "duration_ms": 100,
+      "phase": "passing-near"
+    }
+  ],
+  "review": {
+    "source": "source-v8.png",
+    "identity_references": [
+      "../reference/master-existing.png",
+      "../idle/reviewed.png"
+    ],
+    "discarded": "v4/v5 repeated contact-near in frame3. v6 established the opposite stride. v7 retained a rear heel curl in frame2; v8 changed only that passing leg. Sources and prompts preserved.",
+    "source_body_height_reference_px": 614,
+    "scale_to_runtime_recommendation": 0.4364820846905538,
+    "alpha": "RGB checkerboard returned despite explicit alpha request. Local removal authorized in previous user session; remove_generated_checkerboard.py used. Dark/light full-size and runtime previews reviewed.",
+    "visual": "Four distinct keys alternate near cargo-pocket and far plain legs; relaxed guard, face, clothing and head scale consistent. Pivots use pelvis axis and lowest supporting sole; all source rectangles retain full silhouette.",
+    "remaining": "World movement/attacks in both facings, Combat Lab, native match and sequential Sprite Studio inspection completed. See ../finalization-review.md for exact scope, sampling and retained mirroring convention."
+  },
+  "status": "reviewed visual and functional pilot; see ../finalization-review.md for evidence and limits",
+  "finalization_review": "../finalization-review.md"
+}

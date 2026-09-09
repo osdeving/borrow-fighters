@@ -1,0 +1,3359 @@
+{
+  "schema": "borrow-fighters.sprite.v1",
+  "image": "cpp-fighter-atlas-a.png",
+  "source": "assets/references/cpp-fighter-raster-source.png",
+  "cell": {
+    "w": 768,
+    "h": 512
+  },
+  "default_pivot": {
+    "x": 224,
+    "y": 472
+  },
+  "scale": 0.6666666666666666,
+  "notes": [
+    "High-resolution raster C++ fighter atlas generated from assets/references/cpp-fighter-raster-source.png. Frames are split across cpp-fighter-atlas-a.png and cpp-fighter-atlas-b.png using per-frame image overrides.",
+    "Close-range attack hitboxes intentionally fall back to MoveSpec until the raster frames are calibrated in Sprite Studio.",
+    "The source pose sheet depicts C++ as a daughter of C through operator/projectile motifs and a compact high-level stance."
+  ],
+  "frames": [
+    {
+      "name": "idle_0",
+      "clip": "idle",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "idle_1",
+      "clip": "idle",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 0,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "idle_2",
+      "clip": "idle",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 0,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "idle_3",
+      "clip": "idle",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 0,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "idle_4",
+      "clip": "idle",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 0,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "idle_5",
+      "clip": "idle",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 0,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "idle_6",
+      "clip": "idle",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 512,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "walk_0",
+      "clip": "walk",
+      "duration_ms": 85,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 512,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 105,
+        "y": 61,
+        "w": 274,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 105,
+        "y": 61,
+        "w": 274,
+        "h": 402
+      }
+    },
+    {
+      "name": "walk_1",
+      "clip": "walk",
+      "duration_ms": 85,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 512,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "walk_2",
+      "clip": "walk",
+      "duration_ms": 85,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 512,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 105,
+        "y": 61,
+        "w": 274,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 105,
+        "y": 61,
+        "w": 274,
+        "h": 402
+      }
+    },
+    {
+      "name": "walk_3",
+      "clip": "walk",
+      "duration_ms": 85,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 512,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "walk_4",
+      "clip": "walk",
+      "duration_ms": 85,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 512,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 105,
+        "y": 61,
+        "w": 274,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 105,
+        "y": 61,
+        "w": 274,
+        "h": 402
+      }
+    },
+    {
+      "name": "walk_5",
+      "clip": "walk",
+      "duration_ms": 85,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 1024,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "walk_6",
+      "clip": "walk",
+      "duration_ms": 85,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 1024,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 105,
+        "y": 61,
+        "w": 274,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 105,
+        "y": 61,
+        "w": 274,
+        "h": 402
+      }
+    },
+    {
+      "name": "crouch_0",
+      "clip": "crouch",
+      "duration_ms": 110,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 1024,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "crouch_1",
+      "clip": "crouch",
+      "duration_ms": 110,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 1024,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      },
+      "trimmed_bounds": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      }
+    },
+    {
+      "name": "crouch_2",
+      "clip": "crouch",
+      "duration_ms": 110,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 1024,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      },
+      "trimmed_bounds": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      }
+    },
+    {
+      "name": "crouch_3",
+      "clip": "crouch",
+      "duration_ms": 140,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 1024,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      },
+      "trimmed_bounds": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      }
+    },
+    {
+      "name": "jump_0",
+      "clip": "jump",
+      "duration_ms": 105,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 1536,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "jump_1",
+      "clip": "jump",
+      "duration_ms": 105,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 1536,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 81,
+        "y": 9,
+        "w": 319,
+        "h": 392
+      },
+      "trimmed_bounds": {
+        "x": 81,
+        "y": 9,
+        "w": 319,
+        "h": 392
+      }
+    },
+    {
+      "name": "jump_2",
+      "clip": "jump",
+      "duration_ms": 105,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 1536,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 81,
+        "y": 9,
+        "w": 319,
+        "h": 392
+      },
+      "trimmed_bounds": {
+        "x": 81,
+        "y": 9,
+        "w": 319,
+        "h": 392
+      }
+    },
+    {
+      "name": "jump_3",
+      "clip": "jump",
+      "duration_ms": 105,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 1536,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 81,
+        "y": 9,
+        "w": 319,
+        "h": 392
+      },
+      "trimmed_bounds": {
+        "x": 81,
+        "y": 9,
+        "w": 319,
+        "h": 392
+      }
+    },
+    {
+      "name": "jump_4",
+      "clip": "jump",
+      "duration_ms": 105,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 1536,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 81,
+        "y": 9,
+        "w": 319,
+        "h": 392
+      },
+      "trimmed_bounds": {
+        "x": 81,
+        "y": 9,
+        "w": 319,
+        "h": 392
+      }
+    },
+    {
+      "name": "jump_5",
+      "clip": "jump",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 1536,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "block_0",
+      "clip": "block",
+      "duration_ms": 105,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 2048,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "block_1",
+      "clip": "block",
+      "duration_ms": 105,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 2048,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 93,
+        "y": 61,
+        "w": 294,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 93,
+        "y": 61,
+        "w": 294,
+        "h": 402
+      }
+    },
+    {
+      "name": "block_2",
+      "clip": "block",
+      "duration_ms": 105,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 2048,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 93,
+        "y": 61,
+        "w": 294,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 93,
+        "y": 61,
+        "w": 294,
+        "h": 402
+      }
+    },
+    {
+      "name": "block_3",
+      "clip": "block",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 2048,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 93,
+        "y": 61,
+        "w": 294,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 93,
+        "y": 61,
+        "w": 294,
+        "h": 402
+      }
+    },
+    {
+      "name": "hit_0",
+      "clip": "hit",
+      "duration_ms": 110,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 2048,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "hit_1",
+      "clip": "hit",
+      "duration_ms": 110,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 2048,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 76,
+        "y": 62,
+        "w": 332,
+        "h": 400
+      },
+      "trimmed_bounds": {
+        "x": 76,
+        "y": 62,
+        "w": 332,
+        "h": 400
+      }
+    },
+    {
+      "name": "hit_2",
+      "clip": "hit",
+      "duration_ms": 110,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 2560,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 76,
+        "y": 62,
+        "w": 332,
+        "h": 400
+      },
+      "trimmed_bounds": {
+        "x": 76,
+        "y": 62,
+        "w": 332,
+        "h": 400
+      }
+    },
+    {
+      "name": "hit_3",
+      "clip": "hit",
+      "duration_ms": 130,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 2560,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "taunt_0",
+      "clip": "taunt",
+      "duration_ms": 150,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 2560,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 121,
+        "y": 56,
+        "w": 231,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 121,
+        "y": 56,
+        "w": 231,
+        "h": 407
+      }
+    },
+    {
+      "name": "taunt_1",
+      "clip": "taunt",
+      "duration_ms": 150,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 2560,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 82,
+        "y": 56,
+        "w": 318,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 82,
+        "y": 56,
+        "w": 318,
+        "h": 407
+      }
+    },
+    {
+      "name": "taunt_2",
+      "clip": "taunt",
+      "duration_ms": 150,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 2560,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 121,
+        "y": 56,
+        "w": 231,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 121,
+        "y": 56,
+        "w": 231,
+        "h": 407
+      }
+    },
+    {
+      "name": "taunt_3",
+      "clip": "taunt",
+      "duration_ms": 150,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 2560,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 144,
+        "y": 56,
+        "w": 179,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 144,
+        "y": 56,
+        "w": 179,
+        "h": 407
+      }
+    },
+    {
+      "name": "taunt_4",
+      "clip": "taunt",
+      "duration_ms": 150,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 3072,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 121,
+        "y": 56,
+        "w": 231,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 121,
+        "y": 56,
+        "w": 231,
+        "h": 407
+      }
+    },
+    {
+      "name": "taunt_5",
+      "clip": "taunt",
+      "duration_ms": 180,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 3072,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 82,
+        "y": 56,
+        "w": 318,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 82,
+        "y": 56,
+        "w": 318,
+        "h": 407
+      }
+    },
+    {
+      "name": "punch_light_0",
+      "clip": "punch_light",
+      "duration_ms": 75,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 3072,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_light_1",
+      "clip": "punch_light",
+      "duration_ms": 75,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 3072,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_light_2",
+      "clip": "punch_light",
+      "duration_ms": 75,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 3072,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_light_3",
+      "clip": "punch_light",
+      "duration_ms": 75,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 3072,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_light_4",
+      "clip": "punch_light",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 3584,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_medium_0",
+      "clip": "punch_medium",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 3584,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_medium_1",
+      "clip": "punch_medium",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 3584,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_medium_2",
+      "clip": "punch_medium",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 3584,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 90,
+        "y": 61,
+        "w": 402,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 90,
+        "y": 61,
+        "w": 402,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_medium_3",
+      "clip": "punch_medium",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 3584,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 90,
+        "y": 61,
+        "w": 402,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 90,
+        "y": 61,
+        "w": 402,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_medium_4",
+      "clip": "punch_medium",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 3584,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_medium_5",
+      "clip": "punch_medium",
+      "duration_ms": 100,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 4096,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_heavy_0",
+      "clip": "punch_heavy",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 4096,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_heavy_1",
+      "clip": "punch_heavy",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 4096,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_heavy_2",
+      "clip": "punch_heavy",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 4096,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 90,
+        "y": 61,
+        "w": 402,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 90,
+        "y": 61,
+        "w": 402,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_heavy_3",
+      "clip": "punch_heavy",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 4096,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 90,
+        "y": 61,
+        "w": 402,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 90,
+        "y": 61,
+        "w": 402,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_heavy_4",
+      "clip": "punch_heavy",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 4096,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 90,
+        "y": 61,
+        "w": 402,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 90,
+        "y": 61,
+        "w": 402,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_heavy_5",
+      "clip": "punch_heavy",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 4608,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 111,
+        "y": 61,
+        "w": 341,
+        "h": 402
+      }
+    },
+    {
+      "name": "punch_heavy_6",
+      "clip": "punch_heavy",
+      "duration_ms": 110,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 4608,
+        "w": 768,
+        "h": 512
+      },
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "kick_light_0",
+      "clip": "kick_light",
+      "duration_ms": 85,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "kick_light_1",
+      "clip": "kick_light",
+      "duration_ms": 85,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 0,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      },
+      "trimmed_bounds": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      }
+    },
+    {
+      "name": "kick_light_2",
+      "clip": "kick_light",
+      "duration_ms": 85,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 0,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      },
+      "trimmed_bounds": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      }
+    },
+    {
+      "name": "kick_light_3",
+      "clip": "kick_light",
+      "duration_ms": 85,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 0,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "kick_light_4",
+      "clip": "kick_light",
+      "duration_ms": 105,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 0,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "kick_0",
+      "clip": "kick",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 0,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "kick_1",
+      "clip": "kick",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 512,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      },
+      "trimmed_bounds": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      }
+    },
+    {
+      "name": "kick_2",
+      "clip": "kick",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 512,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      },
+      "trimmed_bounds": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      }
+    },
+    {
+      "name": "kick_3",
+      "clip": "kick",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 512,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      },
+      "trimmed_bounds": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      }
+    },
+    {
+      "name": "kick_4",
+      "clip": "kick",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 512,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "kick_5",
+      "clip": "kick",
+      "duration_ms": 110,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 512,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "kick_heavy_0",
+      "clip": "kick_heavy",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 512,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "kick_heavy_1",
+      "clip": "kick_heavy",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 1024,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      },
+      "trimmed_bounds": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      }
+    },
+    {
+      "name": "kick_heavy_2",
+      "clip": "kick_heavy",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 1024,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      },
+      "trimmed_bounds": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      }
+    },
+    {
+      "name": "kick_heavy_3",
+      "clip": "kick_heavy",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 1024,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      },
+      "trimmed_bounds": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      }
+    },
+    {
+      "name": "kick_heavy_4",
+      "clip": "kick_heavy",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 1024,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 66,
+        "y": 6,
+        "w": 498,
+        "h": 392
+      },
+      "trimmed_bounds": {
+        "x": 66,
+        "y": 6,
+        "w": 498,
+        "h": 392
+      }
+    },
+    {
+      "name": "kick_heavy_5",
+      "clip": "kick_heavy",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 1024,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      },
+      "trimmed_bounds": {
+        "x": 109,
+        "y": 60,
+        "w": 358,
+        "h": 403
+      }
+    },
+    {
+      "name": "kick_heavy_6",
+      "clip": "kick_heavy",
+      "duration_ms": 115,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 1024,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "special_0",
+      "clip": "special",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 1536,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "combat": {
+        "projectile_origin": {
+          "x": 532,
+          "y": 236
+        }
+      }
+    },
+    {
+      "name": "special_1",
+      "clip": "special",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 1536,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 82,
+        "y": 56,
+        "w": 318,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 82,
+        "y": 56,
+        "w": 318,
+        "h": 407
+      }
+    },
+    {
+      "name": "special_2",
+      "clip": "special",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 1536,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 119,
+        "y": 66,
+        "w": 339,
+        "h": 397
+      },
+      "trimmed_bounds": {
+        "x": 119,
+        "y": 66,
+        "w": 339,
+        "h": 397
+      }
+    },
+    {
+      "name": "special_3",
+      "clip": "special",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 1536,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 119,
+        "y": 66,
+        "w": 339,
+        "h": 397
+      },
+      "trimmed_bounds": {
+        "x": 119,
+        "y": 66,
+        "w": 339,
+        "h": 397
+      }
+    },
+    {
+      "name": "special_4",
+      "clip": "special",
+      "duration_ms": 95,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 1536,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 82,
+        "y": 56,
+        "w": 318,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 82,
+        "y": 56,
+        "w": 318,
+        "h": 407
+      }
+    },
+    {
+      "name": "special_5",
+      "clip": "special",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 1536,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "projectile_0",
+      "clip": "projectile",
+      "duration_ms": 75,
+      "pivot": {
+        "x": 408,
+        "y": 264
+      },
+      "frame": {
+        "x": 0,
+        "y": 2048,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 119,
+        "y": 66,
+        "w": 339,
+        "h": 397
+      },
+      "trimmed_bounds": {
+        "x": 119,
+        "y": 66,
+        "w": 339,
+        "h": 397
+      }
+    },
+    {
+      "name": "knockdown_0",
+      "clip": "knockdown",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 2048,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 76,
+        "y": 62,
+        "w": 332,
+        "h": 400
+      },
+      "trimmed_bounds": {
+        "x": 76,
+        "y": 62,
+        "w": 332,
+        "h": 400
+      }
+    },
+    {
+      "name": "knockdown_1",
+      "clip": "knockdown",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 2048,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 76,
+        "y": 62,
+        "w": 332,
+        "h": 400
+      },
+      "trimmed_bounds": {
+        "x": 76,
+        "y": 62,
+        "w": 332,
+        "h": 400
+      }
+    },
+    {
+      "name": "knockdown_2",
+      "clip": "knockdown",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 2048,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      },
+      "trimmed_bounds": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      }
+    },
+    {
+      "name": "knockdown_3",
+      "clip": "knockdown",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 2048,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      },
+      "trimmed_bounds": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      }
+    },
+    {
+      "name": "knockdown_4",
+      "clip": "knockdown",
+      "duration_ms": 90,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 2048,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 76,
+        "y": 62,
+        "w": 332,
+        "h": 400
+      },
+      "trimmed_bounds": {
+        "x": 76,
+        "y": 62,
+        "w": 332,
+        "h": 400
+      }
+    },
+    {
+      "name": "knockdown_5",
+      "clip": "knockdown",
+      "duration_ms": 120,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 2560,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "victory_0",
+      "clip": "victory",
+      "duration_ms": 140,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 2560,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "victory_1",
+      "clip": "victory",
+      "duration_ms": 140,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 2560,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 143,
+        "y": 56,
+        "w": 183,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 143,
+        "y": 56,
+        "w": 183,
+        "h": 407
+      }
+    },
+    {
+      "name": "victory_2",
+      "clip": "victory",
+      "duration_ms": 140,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 2560,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 143,
+        "y": 56,
+        "w": 183,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 143,
+        "y": 56,
+        "w": 183,
+        "h": 407
+      }
+    },
+    {
+      "name": "victory_3",
+      "clip": "victory",
+      "duration_ms": 140,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 2560,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 82,
+        "y": 56,
+        "w": 318,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 82,
+        "y": 56,
+        "w": 318,
+        "h": 407
+      }
+    },
+    {
+      "name": "victory_4",
+      "clip": "victory",
+      "duration_ms": 140,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 2560,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 143,
+        "y": 56,
+        "w": 183,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 143,
+        "y": 56,
+        "w": 183,
+        "h": 407
+      }
+    },
+    {
+      "name": "victory_5",
+      "clip": "victory",
+      "duration_ms": 140,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 3072,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 121,
+        "y": 56,
+        "w": 231,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 121,
+        "y": 56,
+        "w": 231,
+        "h": 407
+      }
+    },
+    {
+      "name": "victory_6",
+      "clip": "victory",
+      "duration_ms": 170,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 3072,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 143,
+        "y": 56,
+        "w": 183,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 143,
+        "y": 56,
+        "w": 183,
+        "h": 407
+      }
+    },
+    {
+      "name": "sweep_0",
+      "clip": "sweep",
+      "duration_ms": 82,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 3072,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      },
+      "trimmed_bounds": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      }
+    },
+    {
+      "name": "sweep_1",
+      "clip": "sweep",
+      "duration_ms": 82,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 3072,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 77,
+        "y": 173,
+        "w": 459,
+        "h": 288
+      },
+      "trimmed_bounds": {
+        "x": 77,
+        "y": 173,
+        "w": 459,
+        "h": 288
+      }
+    },
+    {
+      "name": "sweep_2",
+      "clip": "sweep",
+      "duration_ms": 82,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 3072,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 77,
+        "y": 173,
+        "w": 459,
+        "h": 288
+      },
+      "trimmed_bounds": {
+        "x": 77,
+        "y": 173,
+        "w": 459,
+        "h": 288
+      }
+    },
+    {
+      "name": "overhead_0",
+      "clip": "overhead",
+      "duration_ms": 92,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 3072,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "overhead_1",
+      "clip": "overhead",
+      "duration_ms": 92,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 3584,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 69,
+        "y": 61,
+        "w": 347,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 69,
+        "y": 61,
+        "w": 347,
+        "h": 402
+      }
+    },
+    {
+      "name": "overhead_2",
+      "clip": "overhead",
+      "duration_ms": 92,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 3584,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 69,
+        "y": 61,
+        "w": 347,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 69,
+        "y": 61,
+        "w": 347,
+        "h": 402
+      }
+    },
+    {
+      "name": "anti_air_0",
+      "clip": "anti_air",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 3584,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      },
+      "trimmed_bounds": {
+        "x": 118,
+        "y": 171,
+        "w": 238,
+        "h": 292
+      }
+    },
+    {
+      "name": "anti_air_1",
+      "clip": "anti_air",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 3584,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 117,
+        "y": 32,
+        "w": 239,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 117,
+        "y": 32,
+        "w": 239,
+        "h": 407
+      }
+    },
+    {
+      "name": "anti_air_2",
+      "clip": "anti_air",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 3584,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 117,
+        "y": 8,
+        "w": 239,
+        "h": 407
+      },
+      "trimmed_bounds": {
+        "x": 117,
+        "y": 8,
+        "w": 239,
+        "h": 407
+      }
+    },
+    {
+      "name": "air_punch_0",
+      "clip": "air_punch",
+      "duration_ms": 76,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 3584,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 81,
+        "y": 9,
+        "w": 319,
+        "h": 392
+      },
+      "trimmed_bounds": {
+        "x": 81,
+        "y": 9,
+        "w": 319,
+        "h": 392
+      }
+    },
+    {
+      "name": "air_punch_1",
+      "clip": "air_punch",
+      "duration_ms": 76,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 4096,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 112,
+        "y": 4,
+        "w": 337,
+        "h": 397
+      },
+      "trimmed_bounds": {
+        "x": 112,
+        "y": 4,
+        "w": 337,
+        "h": 397
+      }
+    },
+    {
+      "name": "air_punch_2",
+      "clip": "air_punch",
+      "duration_ms": 76,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 4096,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 112,
+        "y": 4,
+        "w": 337,
+        "h": 397
+      },
+      "trimmed_bounds": {
+        "x": 112,
+        "y": 4,
+        "w": 337,
+        "h": 397
+      }
+    },
+    {
+      "name": "air_kick_0",
+      "clip": "air_kick",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 1536,
+        "y": 4096,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 81,
+        "y": 9,
+        "w": 319,
+        "h": 392
+      },
+      "trimmed_bounds": {
+        "x": 81,
+        "y": 9,
+        "w": 319,
+        "h": 392
+      }
+    },
+    {
+      "name": "air_kick_1",
+      "clip": "air_kick",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 2304,
+        "y": 4096,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 66,
+        "y": 6,
+        "w": 498,
+        "h": 392
+      },
+      "trimmed_bounds": {
+        "x": 66,
+        "y": 6,
+        "w": 498,
+        "h": 392
+      }
+    },
+    {
+      "name": "air_kick_2",
+      "clip": "air_kick",
+      "duration_ms": 80,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3072,
+        "y": 4096,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 66,
+        "y": 6,
+        "w": 498,
+        "h": 392
+      },
+      "trimmed_bounds": {
+        "x": 66,
+        "y": 6,
+        "w": 498,
+        "h": 392
+      }
+    },
+    {
+      "name": "throw_0",
+      "clip": "throw",
+      "duration_ms": 92,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 3840,
+        "y": 4096,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 61,
+        "w": 204,
+        "h": 402
+      }
+    },
+    {
+      "name": "throw_1",
+      "clip": "throw",
+      "duration_ms": 92,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 0,
+        "y": 4608,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 85,
+        "y": 63,
+        "w": 408,
+        "h": 398
+      },
+      "trimmed_bounds": {
+        "x": 85,
+        "y": 63,
+        "w": 408,
+        "h": 398
+      }
+    },
+    {
+      "name": "throw_2",
+      "clip": "throw",
+      "duration_ms": 92,
+      "pivot": {
+        "x": 224,
+        "y": 472
+      },
+      "frame": {
+        "x": 768,
+        "y": 4608,
+        "w": 768,
+        "h": 512
+      },
+      "image": "cpp-fighter-atlas-b.png",
+      "source_crop": {
+        "x": 85,
+        "y": 63,
+        "w": 408,
+        "h": 398
+      },
+      "trimmed_bounds": {
+        "x": 85,
+        "y": 63,
+        "w": 408,
+        "h": 398
+      }
+    }
+  ],
+  "clips": [
+    {
+      "name": "idle",
+      "loop": true,
+      "frames": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3",
+        "idle_4",
+        "idle_5",
+        "idle_6"
+      ]
+    },
+    {
+      "name": "walk",
+      "loop": true,
+      "frames": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "walk_4",
+        "walk_5",
+        "walk_6"
+      ]
+    },
+    {
+      "name": "crouch",
+      "loop": false,
+      "frames": [
+        "crouch_0",
+        "crouch_1",
+        "crouch_2",
+        "crouch_3"
+      ]
+    },
+    {
+      "name": "jump",
+      "loop": false,
+      "frames": [
+        "jump_0",
+        "jump_1",
+        "jump_2",
+        "jump_3",
+        "jump_4",
+        "jump_5"
+      ]
+    },
+    {
+      "name": "punch_light",
+      "loop": false,
+      "frames": [
+        "punch_light_0",
+        "punch_light_1",
+        "punch_light_2",
+        "punch_light_3",
+        "punch_light_4"
+      ]
+    },
+    {
+      "name": "punch_medium",
+      "loop": false,
+      "frames": [
+        "punch_medium_0",
+        "punch_medium_1",
+        "punch_medium_2",
+        "punch_medium_3",
+        "punch_medium_4",
+        "punch_medium_5"
+      ]
+    },
+    {
+      "name": "punch_heavy",
+      "loop": false,
+      "frames": [
+        "punch_heavy_0",
+        "punch_heavy_1",
+        "punch_heavy_2",
+        "punch_heavy_3",
+        "punch_heavy_4",
+        "punch_heavy_5",
+        "punch_heavy_6"
+      ]
+    },
+    {
+      "name": "kick_light",
+      "loop": false,
+      "frames": [
+        "kick_light_0",
+        "kick_light_1",
+        "kick_light_2",
+        "kick_light_3",
+        "kick_light_4"
+      ]
+    },
+    {
+      "name": "kick",
+      "loop": false,
+      "frames": [
+        "kick_0",
+        "kick_1",
+        "kick_2",
+        "kick_3",
+        "kick_4",
+        "kick_5"
+      ]
+    },
+    {
+      "name": "kick_heavy",
+      "loop": false,
+      "frames": [
+        "kick_heavy_0",
+        "kick_heavy_1",
+        "kick_heavy_2",
+        "kick_heavy_3",
+        "kick_heavy_4",
+        "kick_heavy_5",
+        "kick_heavy_6"
+      ]
+    },
+    {
+      "name": "block",
+      "loop": true,
+      "frames": [
+        "block_0",
+        "block_1",
+        "block_2",
+        "block_3"
+      ]
+    },
+    {
+      "name": "hit",
+      "loop": false,
+      "frames": [
+        "hit_0",
+        "hit_1",
+        "hit_2",
+        "hit_3"
+      ]
+    },
+    {
+      "name": "knockdown",
+      "loop": false,
+      "frames": [
+        "knockdown_0",
+        "knockdown_1",
+        "knockdown_2",
+        "knockdown_3",
+        "knockdown_4",
+        "knockdown_5"
+      ]
+    },
+    {
+      "name": "taunt",
+      "loop": false,
+      "frames": [
+        "taunt_0",
+        "taunt_1",
+        "taunt_2",
+        "taunt_3",
+        "taunt_4",
+        "taunt_5"
+      ]
+    },
+    {
+      "name": "victory",
+      "loop": false,
+      "frames": [
+        "victory_0",
+        "victory_1",
+        "victory_2",
+        "victory_3",
+        "victory_4",
+        "victory_5",
+        "victory_6"
+      ]
+    },
+    {
+      "name": "special",
+      "loop": false,
+      "frames": [
+        "special_0",
+        "special_1",
+        "special_2",
+        "special_3",
+        "special_4",
+        "special_5"
+      ]
+    },
+    {
+      "name": "projectile",
+      "loop": true,
+      "frames": [
+        "projectile_0"
+      ]
+    },
+    {
+      "name": "sweep",
+      "loop": false,
+      "frames": [
+        "sweep_0",
+        "sweep_1",
+        "sweep_2"
+      ]
+    },
+    {
+      "name": "overhead",
+      "loop": false,
+      "frames": [
+        "overhead_0",
+        "overhead_1",
+        "overhead_2"
+      ]
+    },
+    {
+      "name": "anti_air",
+      "loop": false,
+      "frames": [
+        "anti_air_0",
+        "anti_air_1",
+        "anti_air_2"
+      ]
+    },
+    {
+      "name": "air_punch",
+      "loop": false,
+      "frames": [
+        "air_punch_0",
+        "air_punch_1",
+        "air_punch_2"
+      ]
+    },
+    {
+      "name": "air_kick",
+      "loop": false,
+      "frames": [
+        "air_kick_0",
+        "air_kick_1",
+        "air_kick_2"
+      ]
+    },
+    {
+      "name": "throw",
+      "loop": false,
+      "frames": [
+        "throw_0",
+        "throw_1",
+        "throw_2"
+      ]
+    }
+  ]
+}

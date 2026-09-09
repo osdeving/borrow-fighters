@@ -1,0 +1,110 @@
+{
+  "action": "punch_heavy",
+  "source": "punch_heavy/source-v2.png",
+  "sheet": "punch_heavy/sheet-v1.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "Final generated art reviewed: complete World in both facings, native Lab, Sprite Studio and normal match; evidence in finalization-review.md.",
+  "source_body_height_reference_px": 725,
+  "suggested_scale_to_runtime": 0.3641379310344828,
+  "replacement_contract": "../action-contracts.json#/actions/punch_heavy",
+  "references": {
+    "new_master": "reference/master.png",
+    "new_idle": null,
+    "old_pose_art_allowed": false
+  },
+  "frames": [
+    {
+      "name": "punch_heavy_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 800,
+        "h": 920
+      },
+      "pivot": {
+        "x": 416,
+        "y": 827
+      },
+      "duration_ms": 183,
+      "phase": "startup"
+    },
+    {
+      "name": "punch_heavy_01",
+      "source_rect": {
+        "x": 800,
+        "y": 0,
+        "w": 800,
+        "h": 920
+      },
+      "pivot": {
+        "x": 351,
+        "y": 816
+      },
+      "duration_ms": 167,
+      "phase": "active"
+    },
+    {
+      "name": "punch_heavy_02",
+      "source_rect": {
+        "x": 1600,
+        "y": 0,
+        "w": 800,
+        "h": 920
+      },
+      "pivot": {
+        "x": 367,
+        "y": 827
+      },
+      "duration_ms": 233,
+      "phase": "recovery"
+    }
+  ],
+  "generation_brief": "Weight transfer, clear extended fist contact and controlled recovery, preserving ground support.",
+  "review_notes": "Low body cross with visible weight transfer. v2 lowered the fist; normal anatomy scale is shared across all three poses. Explicit crops/pivots are recorded in preparation.json; no timing or combat changes.",
+  "timing_reference": {
+    "move_id": "HeavyPunch",
+    "source": "src/combat/move_data.rs",
+    "collision_source": "MoveSpec fallback; no baseline frame hitboxes for this character",
+    "timing_ticks": {
+      "duration": 35,
+      "active_start": 11,
+      "active_end": 20
+    },
+    "active_end_inclusive": true,
+    "suggested_phase_boundary_ms": {
+      "active_starts": 183,
+      "recovery_starts": 350,
+      "clip_ends": 583
+    },
+    "active_box_right_relative_to_anchor": {
+      "x": 50.666666666666664,
+      "y": -146.66666666666669,
+      "w": 128.0,
+      "h": 56.0
+    },
+    "active_box_left_relative_to_anchor": {
+      "x": -178.66666666666666,
+      "y": -146.66666666666669,
+      "w": 128.0,
+      "h": 56.0
+    },
+    "suggested_contact_center_right_relative_to_anchor": {
+      "x": 114.66666666666666,
+      "y": -118.66666666666669
+    }
+  },
+  "scale_to_runtime": 0.3641379310344828,
+  "runtime_review": {
+    "approved": true,
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "report": "../finalization-review.md",
+    "world_facings_seen": [
+      "Left",
+      "Right"
+    ],
+    "lab_capture": "full set before jump, art unchanged by frame checksum",
+    "normal_match_result_evidence": false
+  }
+}

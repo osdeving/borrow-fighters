@@ -26,16 +26,46 @@ use crate::game::ai::BasicCpu;
 use crate::game::arena::ArenaId;
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
 use crate::game::world::{World, WorldSpriteCombatManifests};
+use crate::runtime_paths::{asset_path, data_dir};
 use crate::scenes::{
     AppScene,
     combat_lab::{CombatLab, CombatLabInput, CombatLabMove, CombatLabOptions},
-    preferences::{CycleDirection, PreferencesAction, PreferencesMenu},
+    move_showcase::{MoveShowcase, MoveShowcaseOptions},
+    preferences::{CycleDirection, MenuPage, PlayMode, PreferencesAction, PreferencesMenu},
     sprite_viewer::{SpriteViewer, SpriteViewerInput, SpriteViewerOptions, ViewerPoint},
 };
 
 const CAPTURE_SMOKE_SECONDS_ENV: &str = "BORROW_FIGHTERS_CAPTURE_SMOKE_SECONDS";
-const DEFAULT_MUSIC_VOLUME_PERCENT: u8 = 100;
+const DEFAULT_MUSIC_VOLUME_PERCENT: u8 = 50;
 const MUSIC_VOLUME_STEP_PERCENT: u8 = 10;
+
+/// Retains button edges until the next fixed tick while refreshing held directions.
+#[derive(Clone, Copy, Debug, Default)]
+struct PendingFighterInput(FighterInput);
+
+impl PendingFighterInput {
+    fn push(&mut self, next: FighterInput) {
+        self.0 = FighterInput {
+            jump: self.0.jump || next.jump,
+            light_punch: self.0.light_punch || next.light_punch,
+            heavy_punch: self.0.heavy_punch || next.heavy_punch,
+            kick: self.0.kick || next.kick,
+            projectile: self.0.projectile || next.projectile,
+            signature_special: self.0.signature_special || next.signature_special,
+            cinematic_special: self.0.cinematic_special || next.cinematic_special,
+            ..next
+        };
+    }
+
+    fn take_tick(&mut self) -> FighterInput {
+        let input = self.0;
+        self.0 = FighterInput {
+            jump: false,
+            ..input.without_attacks()
+        };
+        input
+    }
+}
 
 /// Top-level application state outside the testable game world.
 pub struct App {
@@ -46,7 +76,12 @@ pub struct App {
     scene: AppScene,
     sprite_viewer_options: Option<SpriteViewerOptions>,
     preferences_menu: PreferencesMenu,
+    onboarding_marker: Option<PathBuf>,
     combat_lab: CombatLab,
+    move_showcase: MoveShowcase,
+    pending_showcase_input: CombatLabInput,
+    pending_lab_input: CombatLabInput,
+    pending_fight_input: [PendingFighterInput; 2],
     character_body_metrics: CharacterBodyMetricsCatalog,
     match_options: MatchOptions,
     match_options_dirty: bool,
@@ -68,7 +103,22 @@ impl Default for App {
 impl App {
     /// Creates app state for the selected startup mode.
     pub fn new(options: LaunchOptions) -> Self {
+        Self::with_onboarding_marker(options, data_dir().join("onboarding-v1.seen"))
+    }
+
+    fn with_onboarding_marker(options: LaunchOptions, marker: PathBuf) -> Self {
+        let onboarding_marker = (!marker.is_file()).then_some(marker);
+        let mut preferences_menu = PreferencesMenu::default();
+        if matches!(options.mode, LaunchMode::Game)
+            && !options.start_fight
+            && onboarding_marker.is_some()
+        {
+            preferences_menu.open_guide();
+        }
+        let mut feature_flags = FeatureFlags::default();
+        PlayMode::AgainstCpu.apply(&mut feature_flags);
         let match_options = options.match_options;
+        let mut move_showcase = MoveShowcase::default();
         let (scene, combat_lab, sprite_viewer_options) = match options.mode {
             LaunchMode::Game => (
                 if options.start_fight {
@@ -80,15 +130,30 @@ impl App {
                 None,
             ),
             LaunchMode::CombatLab(options) => (AppScene::CombatLab, CombatLab::new(options), None),
+            LaunchMode::MoveShowcase(options) => {
+                move_showcase = MoveShowcase::new(MoveShowcaseOptions {
+                    character: options.character,
+                });
+                move_showcase.select_move(options.selected_move);
+                if options.repeat_current {
+                    move_showcase.toggle_repeat();
+                }
+                if options.sides_reversed {
+                    move_showcase.switch_sides();
+                }
+                (AppScene::MoveShowcase, CombatLab::default(), None)
+            }
             LaunchMode::SpriteViewer(options) => {
                 (AppScene::SpriteViewer, CombatLab::default(), Some(options))
             }
         };
-        let character_body_metrics = CharacterBodyMetricsCatalog::load(CHARACTER_BODY_METRICS_PATH)
-            .unwrap_or_else(|error| {
-                eprintln!("warning: using built-in character body metrics: {error}");
-                CharacterBodyMetricsCatalog::default()
-            });
+        let character_body_metrics =
+            CharacterBodyMetricsCatalog::load(asset_path(CHARACTER_BODY_METRICS_PATH))
+                .unwrap_or_else(|error| {
+                    eprintln!("warning: using built-in character body metrics: {error}");
+                    CharacterBodyMetricsCatalog::default()
+                });
+        move_showcase.set_body_metrics(character_body_metrics.clone());
 
         Self {
             world: World::new_greybox_with_intro_for_characters_and_metrics(
@@ -98,11 +163,16 @@ impl App {
             ),
             player_one_cpu: BasicCpu::for_slot(PlayerSlot::One),
             player_two_cpu: BasicCpu::for_slot(PlayerSlot::Two),
-            feature_flags: FeatureFlags::default(),
+            feature_flags,
             scene,
             sprite_viewer_options,
-            preferences_menu: PreferencesMenu::default(),
+            preferences_menu,
+            onboarding_marker,
             combat_lab,
+            move_showcase,
+            pending_showcase_input: CombatLabInput::default(),
+            pending_lab_input: CombatLabInput::default(),
+            pending_fight_input: [PendingFighterInput::default(); 2],
             character_body_metrics,
             match_options,
             match_options_dirty: false,
@@ -126,6 +196,13 @@ impl App {
 
         let assets = GameAssets::load(raylib, thread);
         self.sync_world_sprite_combat(&assets);
+        self.combat_lab
+            .set_combat_manifest(fighter_manifest_for_character(
+                self.combat_lab.character(),
+                &assets,
+            ));
+        self.sync_showcase_sprite_combat(&assets);
+        let software_cursor_requested = software_cursor_enabled_for_env();
         let audio_device = RaylibAudio::init_audio_device();
         let mut audio_player = match &audio_device {
             Ok(audio_device) => AudioPlayer::load(audio_device, AUDIO_MANIFEST_PATH),
@@ -142,8 +219,11 @@ impl App {
         while !raylib.window_should_close() {
             let frame_time = raylib.get_frame_time().min(MAX_FRAME_TIME);
             self.visual_time_seconds += frame_time;
-            sync_scene_cursor(raylib, cursor_mode_for_scene(self.scene));
+            sync_system_cursor(raylib);
             let mouse_position = raylib.get_mouse_position();
+            let software_cursor_enabled = software_cursor_requested
+                && raylib.is_window_focused()
+                && raylib.is_cursor_on_screen();
             audio_player.update_streams();
             update_video_capture_status(&mut self.video_capture);
 
@@ -165,12 +245,14 @@ impl App {
             match self.scene {
                 AppScene::CombatLab => {
                     if input.open_preferences {
+                        self.pending_lab_input = CombatLabInput::default();
                         self.scene = AppScene::Preferences;
                         self.preferences_menu.ignore_next_input();
                         self.accumulator = 0.0;
+                        audio_player.cancel_cinematic();
                         audio_player.play(&AudioEvent::ui_back());
                         audio_player.play_music(MusicTrack::Menu);
-                        sync_scene_cursor(raylib, SceneCursorMode::CustomCi);
+                        sync_system_cursor(raylib);
                         {
                             let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
                             render::draw_preferences(
@@ -195,16 +277,22 @@ impl App {
                             );
                         }
                     } else {
-                        self.update_combat_lab(frame_time, input.combat_lab);
+                        self.update_combat_lab(frame_time, input.combat_lab, &mut audio_player);
 
                         {
                             let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
                             render::draw_combat_lab(&mut draw, &self.combat_lab, &assets);
-                            render::draw_video_capture_overlay(
-                                &mut draw,
-                                self.video_capture.is_recording(),
-                                self.video_capture.last_message(),
-                            );
+                            if !self
+                                .combat_lab
+                                .super_preview_world()
+                                .is_some_and(authored_frame_replaced)
+                            {
+                                render::draw_video_capture_overlay(
+                                    &mut draw,
+                                    self.video_capture.is_recording(),
+                                    self.video_capture.last_message(),
+                                );
+                            }
                         }
                     }
                     finish_frame(
@@ -212,8 +300,104 @@ impl App {
                         thread,
                         &frame_target,
                         &mut self.video_capture,
-                        software_cursor_for_scene(
-                            self.scene,
+                        software_cursor_for_position(
+                            software_cursor_enabled
+                                && !scene_replaces_frame(
+                                    self.scene,
+                                    &self.world,
+                                    &self.combat_lab,
+                                    &self.move_showcase,
+                                ),
+                            mouse_position,
+                            self.visual_time_seconds,
+                            &assets,
+                        ),
+                    );
+                }
+                AppScene::MoveShowcase => {
+                    if input.open_preferences {
+                        self.scene = AppScene::Preferences;
+                        self.preferences_menu.ignore_next_input();
+                        self.accumulator = 0.0;
+                        audio_player.cancel_cinematic();
+                        audio_player.play(&AudioEvent::ui_back());
+                        audio_player.play_music(MusicTrack::Menu);
+                        sync_system_cursor(raylib);
+                        {
+                            let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
+                            render::draw_preferences(
+                                &mut draw,
+                                render::PreferencesDrawOptions {
+                                    menu: &self.preferences_menu,
+                                    player_one_character: self.match_options.player_one,
+                                    player_two_character: self.match_options.player_two,
+                                    arena: self.current_arena,
+                                    music_volume_percent: self.music_volume_percent,
+                                    visual_time_seconds: self.visual_time_seconds,
+                                    flags: self.feature_flags,
+                                    gamepad_status,
+                                    recording: self.video_capture.is_recording(),
+                                    assets: &assets,
+                                },
+                            );
+                            render::draw_video_capture_overlay(
+                                &mut draw,
+                                self.video_capture.is_recording(),
+                                self.video_capture.last_message(),
+                            );
+                        }
+                    } else {
+                        if raylib.is_key_pressed(KeyboardKey::KEY_L) {
+                            self.move_showcase.toggle_repeat();
+                        }
+                        if raylib.is_key_pressed(KeyboardKey::KEY_X) {
+                            audio_player.cancel_cinematic();
+                            self.move_showcase.switch_sides();
+                            self.pending_showcase_input = CombatLabInput::default();
+                        }
+                        if input.combat_lab.next_pose {
+                            audio_player.cancel_cinematic();
+                            self.cycle_showcase_character(CycleDirection::Next);
+                            self.sync_showcase_sprite_combat(&assets);
+                        } else if input.combat_lab.previous_pose {
+                            audio_player.cancel_cinematic();
+                            self.cycle_showcase_character(CycleDirection::Previous);
+                            self.sync_showcase_sprite_combat(&assets);
+                        }
+                        self.update_move_showcase(frame_time, input.combat_lab, &mut audio_player);
+
+                        {
+                            let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
+                            render::draw_move_showcase(
+                                &mut draw,
+                                &self.move_showcase,
+                                self.current_arena,
+                                self.visual_time_seconds,
+                                self.feature_flags,
+                                &assets,
+                            );
+                            if !authored_frame_replaced(self.move_showcase.world()) {
+                                render::draw_video_capture_overlay(
+                                    &mut draw,
+                                    self.video_capture.is_recording(),
+                                    self.video_capture.last_message(),
+                                );
+                            }
+                        }
+                    }
+                    finish_frame(
+                        raylib,
+                        thread,
+                        &frame_target,
+                        &mut self.video_capture,
+                        software_cursor_for_position(
+                            software_cursor_enabled
+                                && !scene_replaces_frame(
+                                    self.scene,
+                                    &self.world,
+                                    &self.combat_lab,
+                                    &self.move_showcase,
+                                ),
                             mouse_position,
                             self.visual_time_seconds,
                             &assets,
@@ -221,15 +405,31 @@ impl App {
                     );
                 }
                 AppScene::Preferences => {
+                    let leaving_guide = input.open_preferences
+                        && self.preferences_menu.page() == MenuPage::HowToPlay;
                     if input.open_preferences && self.preferences_menu.back() {
+                        if leaving_guide {
+                            self.finish_onboarding();
+                        }
+                        audio_player.cancel_cinematic();
                         audio_player.play(&AudioEvent::ui_back());
                     } else {
-                        play_preferences_audio_feedback(&mut audio_player, input.preferences);
+                        let mut preferences_input = input.preferences;
+                        preferences_input.pointer = crate::engine::input::read_preferences_pointer(
+                            raylib,
+                            &self.preferences_menu,
+                        );
+                        play_preferences_audio_feedback(
+                            &mut audio_player,
+                            preferences_input,
+                            self.preferences_menu.selected(),
+                        );
                         let preferences_action = self
                             .preferences_menu
-                            .update(input.preferences, &mut self.feature_flags);
+                            .update(preferences_input, &mut self.feature_flags);
                         match preferences_action {
                             PreferencesAction::Stay => {}
+                            PreferencesAction::CloseGuide => self.finish_onboarding(),
                             PreferencesAction::CyclePlayerOne(direction) => {
                                 self.match_options.player_one =
                                     cycle_character(self.match_options.player_one, direction);
@@ -270,7 +470,24 @@ impl App {
                                     selected_move: CombatLabMove::Projectile,
                                     ..CombatLabOptions::default()
                                 });
+                                self.combat_lab.set_combat_manifest(
+                                    fighter_manifest_for_character(
+                                        self.combat_lab.character(),
+                                        &assets,
+                                    ),
+                                );
                                 self.scene = AppScene::CombatLab;
+                                self.pending_lab_input = CombatLabInput::default();
+                                self.accumulator = 0.0;
+                                audio_player.play_music(MusicTrack::CombatDeterminedPursuit);
+                            }
+                            PreferencesAction::OpenMoveShowcase => {
+                                self.move_showcase = MoveShowcase::new(MoveShowcaseOptions {
+                                    character: self.match_options.player_one,
+                                });
+                                self.sync_showcase_sprite_combat(&assets);
+                                self.pending_showcase_input = CombatLabInput::default();
+                                self.scene = AppScene::MoveShowcase;
                                 self.accumulator = 0.0;
                                 audio_player.play_music(MusicTrack::CombatDeterminedPursuit);
                             }
@@ -282,15 +499,25 @@ impl App {
                                 self.preferences_menu.ignore_next_input();
                                 audio_player.play_music(MusicTrack::Menu);
                             }
-                            PreferencesAction::StartFight => {
-                                if self.world.outcome.is_some()
+                            PreferencesAction::StartFight | PreferencesAction::StartWithMode(_) => {
+                                let chosen_mode = matches!(
+                                    preferences_action,
+                                    PreferencesAction::StartWithMode(_)
+                                );
+                                if chosen_mode {
+                                    self.finish_onboarding();
+                                }
+                                if chosen_mode
+                                    || self.world.outcome.is_some()
                                     || self.match_options_dirty
                                     || self.arena_selection_dirty
                                 {
                                     self.restart_match(&assets);
                                 }
                                 self.scene = AppScene::Fight;
-                                audio_player.play_music(music_track_for_arena(self.current_arena));
+                                audio_player.play_music(music_track_for_arena(
+                                    self.world.effective_arena(self.current_arena),
+                                ));
                             }
                             PreferencesAction::Exit => return,
                         }
@@ -324,8 +551,14 @@ impl App {
                         thread,
                         &frame_target,
                         &mut self.video_capture,
-                        software_cursor_for_scene(
-                            self.scene,
+                        software_cursor_for_position(
+                            software_cursor_enabled
+                                && !scene_replaces_frame(
+                                    self.scene,
+                                    &self.world,
+                                    &self.combat_lab,
+                                    &self.move_showcase,
+                                ),
                             mouse_position,
                             self.visual_time_seconds,
                             &assets,
@@ -334,8 +567,10 @@ impl App {
                 }
                 AppScene::Fight => {
                     if input.open_preferences {
+                        self.pending_fight_input = [PendingFighterInput::default(); 2];
                         self.scene = AppScene::Preferences;
                         self.preferences_menu.ignore_next_input();
+                        audio_player.cancel_cinematic();
                         audio_player.play(&AudioEvent::ui_back());
                         audio_player.play_music(MusicTrack::Menu);
                         {
@@ -366,8 +601,14 @@ impl App {
                             thread,
                             &frame_target,
                             &mut self.video_capture,
-                            software_cursor_for_scene(
-                                self.scene,
+                            software_cursor_for_position(
+                                software_cursor_enabled
+                                    && !scene_replaces_frame(
+                                        self.scene,
+                                        &self.world,
+                                        &self.combat_lab,
+                                        &self.move_showcase,
+                                    ),
                                 mouse_position,
                                 self.visual_time_seconds,
                                 &assets,
@@ -376,19 +617,26 @@ impl App {
                     } else {
                         if input.restart {
                             self.restart_match(&assets);
-                            audio_player.play_music(music_track_for_arena(self.current_arena));
+                            audio_player.cancel_cinematic();
+                            audio_player.play_music(music_track_for_arena(
+                                self.world.effective_arena(self.current_arena),
+                            ));
                         }
 
                         if input.toggle_cpu {
                             self.feature_flags.toggle(FeatureFlag::PlayerTwoCpu);
                         }
 
+                        self.pending_fight_input[0].push(input.player_one);
+                        self.pending_fight_input[1].push(input.player_two);
                         self.accumulator += frame_time;
                         let mut fixed_steps = 0;
 
                         while self.accumulator >= FIXED_TIMESTEP
                             && fixed_steps < MAX_FIXED_STEPS_PER_FRAME
                         {
+                            let manual_one = self.pending_fight_input[0].take_tick();
+                            let manual_two = self.pending_fight_input[1].take_tick();
                             let mut player_one =
                                 if self.feature_flags.enabled(FeatureFlag::PlayerOneCpu) {
                                     self.player_one_cpu.next_input(
@@ -397,7 +645,7 @@ impl App {
                                         FIXED_TIMESTEP,
                                     )
                                 } else {
-                                    input.player_one
+                                    manual_one
                                 };
                             let mut player_two =
                                 if self.feature_flags.enabled(FeatureFlag::PlayerTwoCpu) {
@@ -407,7 +655,7 @@ impl App {
                                         FIXED_TIMESTEP,
                                     )
                                 } else {
-                                    input.player_two
+                                    manual_two
                                 };
 
                             player_one = cpu_attack_filtered_input(
@@ -428,6 +676,10 @@ impl App {
                                 self.feature_flags,
                             );
                             self.remember_finished_match();
+                            audio_player.set_cinematic_paused(self.world.super_sequence_active());
+                            audio_player.play_music(music_track_for_arena(
+                                self.world.effective_arena(self.current_arena),
+                            ));
                             audio_player.play_events(self.world.drain_audio_events());
                             self.accumulator -= FIXED_TIMESTEP;
                             fixed_steps += 1;
@@ -450,17 +702,49 @@ impl App {
                                 gamepad_status,
                                 &assets,
                             );
-                            render::draw_video_capture_overlay(
-                                &mut draw,
-                                self.video_capture.is_recording(),
-                                self.video_capture.last_message(),
-                            );
+                            if !authored_frame_replaced(&self.world) {
+                                render::draw_video_capture_overlay(
+                                    &mut draw,
+                                    self.video_capture.is_recording(),
+                                    self.video_capture.last_message(),
+                                );
+                            }
                         }
-                        finish_frame(raylib, thread, &frame_target, &mut self.video_capture, None);
+                        finish_frame(
+                            raylib,
+                            thread,
+                            &frame_target,
+                            &mut self.video_capture,
+                            software_cursor_for_position(
+                                software_cursor_enabled
+                                    && !scene_replaces_frame(
+                                        self.scene,
+                                        &self.world,
+                                        &self.combat_lab,
+                                        &self.move_showcase,
+                                    ),
+                                mouse_position,
+                                self.visual_time_seconds,
+                                &assets,
+                            ),
+                        );
                     }
                 }
                 AppScene::SpriteViewer => unreachable!("sprite viewer has a separate app loop"),
             }
+        }
+    }
+
+    fn finish_onboarding(&mut self) {
+        let Some(marker) = self.onboarding_marker.take() else {
+            return;
+        };
+        let saved = marker
+            .parent()
+            .map_or(Ok(()), std::fs::create_dir_all)
+            .and_then(|()| std::fs::write(&marker, b"Borrow Fighters welcome guide v1\n"));
+        if let Err(error) = saved {
+            eprintln!("warning: could not remember welcome guide completion: {error}");
         }
     }
 
@@ -481,6 +765,7 @@ impl App {
         self.arena_selection_dirty = false;
         self.advance_arena_on_next_match = false;
         self.accumulator = 0.0;
+        self.pending_fight_input = [PendingFighterInput::default(); 2];
         self.sync_world_sprite_combat(assets);
     }
 
@@ -504,17 +789,116 @@ impl App {
         }
     }
 
-    fn update_combat_lab(&mut self, frame_time: f32, input: CombatLabInput) {
+    fn sync_showcase_sprite_combat(&mut self, assets: &GameAssets) {
+        self.move_showcase
+            .set_body_metrics(self.character_body_metrics.clone());
+        self.move_showcase
+            .set_sprite_combat_manifests(WorldSpriteCombatManifests {
+                player_one: fighter_manifest_for_character(self.move_showcase.character(), assets),
+                player_two: fighter_manifest_for_character(
+                    self.move_showcase.opponent_character(),
+                    assets,
+                ),
+            });
+    }
+
+    fn cycle_showcase_character(&mut self, direction: CycleDirection) {
+        let scenario = self.move_showcase.scenario();
+        let repeat = self.move_showcase.repeat_current();
+        let reversed = self.move_showcase.sides_reversed();
+        let paused = self.move_showcase.paused();
+        let character = cycle_character(self.move_showcase.character(), direction);
+        self.move_showcase = MoveShowcase::new(MoveShowcaseOptions { character });
+        self.move_showcase.select_scenario(scenario);
+        if repeat {
+            self.move_showcase.toggle_repeat();
+        }
+        if reversed {
+            self.move_showcase.switch_sides();
+        }
+        self.move_showcase
+            .set_body_metrics(self.character_body_metrics.clone());
+        if paused {
+            self.move_showcase.update(CombatLabInput {
+                pause_toggle: true,
+                ..CombatLabInput::default()
+            });
+        }
+        self.pending_showcase_input = CombatLabInput::default();
+        self.accumulator = 0.0;
+    }
+
+    fn update_combat_lab(
+        &mut self,
+        frame_time: f32,
+        input: CombatLabInput,
+        audio: &mut AudioPlayer<'_>,
+    ) {
         self.accumulator += frame_time;
+        self.pending_lab_input = merge_showcase_input(self.pending_lab_input, input);
         let mut fixed_steps = 0;
 
         while self.accumulator >= FIXED_TIMESTEP && fixed_steps < MAX_FIXED_STEPS_PER_FRAME {
-            let lab_input = if fixed_steps == 0 {
-                input
-            } else {
-                CombatLabInput::default()
-            };
+            let lab_input = std::mem::take(&mut self.pending_lab_input);
+            if lab_input.reset
+                || lab_input.next_move
+                || lab_input.previous_move
+                || lab_input.replay
+                || lab_input.next_pose
+                || lab_input.previous_pose
+            {
+                audio.cancel_cinematic();
+            }
             self.combat_lab.update(lab_input);
+            audio.set_cinematic_paused(
+                self.combat_lab
+                    .super_preview_world()
+                    .is_some_and(World::super_sequence_active),
+            );
+            let track = self
+                .combat_lab
+                .super_preview_world()
+                .and_then(World::arena_override)
+                .map_or(MusicTrack::CombatDeterminedPursuit, music_track_for_arena);
+            audio.play_music(track);
+            audio.play_events(self.combat_lab.take_super_audio_events());
+            self.accumulator -= FIXED_TIMESTEP;
+            fixed_steps += 1;
+        }
+
+        if fixed_steps == MAX_FIXED_STEPS_PER_FRAME {
+            self.accumulator = 0.0;
+        }
+    }
+
+    fn update_move_showcase(
+        &mut self,
+        frame_time: f32,
+        input: CombatLabInput,
+        audio: &mut AudioPlayer<'_>,
+    ) {
+        self.accumulator += frame_time;
+        self.pending_showcase_input = merge_showcase_input(self.pending_showcase_input, input);
+        let mut fixed_steps = 0;
+
+        while self.accumulator >= FIXED_TIMESTEP && fixed_steps < MAX_FIXED_STEPS_PER_FRAME {
+            let showcase_input = std::mem::take(&mut self.pending_showcase_input);
+            if showcase_input.reset
+                || showcase_input.next_move
+                || showcase_input.previous_move
+                || showcase_input.replay
+            {
+                audio.cancel_cinematic();
+            }
+            self.move_showcase.update(showcase_input);
+            audio.set_cinematic_paused(self.move_showcase.world().super_sequence_active());
+            let track = self
+                .move_showcase
+                .world()
+                .arena_override()
+                .map_or(MusicTrack::CombatDeterminedPursuit, music_track_for_arena);
+            audio.play_music(track);
+            audio.play_events(self.move_showcase.take_audio_events());
             self.accumulator -= FIXED_TIMESTEP;
             fixed_steps += 1;
         }
@@ -552,6 +936,26 @@ fn cpu_attack_filtered_input(
     }
 }
 
+fn merge_showcase_input(first: CombatLabInput, second: CombatLabInput) -> CombatLabInput {
+    // Key presses survive render frames with no simulation tick; subsequent
+    // catch-up ticks consume each navigation/pause/step command only once.
+    CombatLabInput {
+        next_move: first.next_move || second.next_move,
+        previous_move: first.previous_move || second.previous_move,
+        replay: first.replay || second.replay,
+        pause_toggle: first.pause_toggle || second.pause_toggle,
+        step_frame: first.step_frame || second.step_frame,
+        reset: first.reset || second.reset,
+        next_pose: first.next_pose || second.next_pose,
+        previous_pose: first.previous_pose || second.previous_pose,
+        toggle_hurtboxes: first.toggle_hurtboxes || second.toggle_hurtboxes,
+        toggle_hitboxes: first.toggle_hitboxes || second.toggle_hitboxes,
+        toggle_pivot: first.toggle_pivot || second.toggle_pivot,
+        toggle_dummy: first.toggle_dummy || second.toggle_dummy,
+        toggle_background: first.toggle_background || second.toggle_background,
+    }
+}
+
 fn cycle_character(
     character: crate::characters::CharacterId,
     direction: CycleDirection,
@@ -579,28 +983,45 @@ fn fighter_manifest_for_character(
         CharacterId::Go => assets.go_fighter.as_ref(),
         CharacterId::C => assets.c_fighter.as_ref(),
         CharacterId::Python => assets.python_fighter.as_ref(),
+        CharacterId::Cpp => assets.cpp_fighter.as_ref(),
     }
-    .map(|atlas| atlas.manifest.clone())
+    .map(|atlas| atlas.combat_manifest.clone())
 }
 
 fn play_preferences_audio_feedback<'aud>(
     audio_player: &mut AudioPlayer<'aud>,
     input: crate::scenes::preferences::PreferencesInput,
+    selected_row: usize,
 ) {
-    if input.up || input.down || input.left || input.right || input.scroll_up || input.scroll_down {
+    let pointer_selection_changed = input.pointer.moved
+        && input
+            .pointer
+            .hovered_row
+            .is_some_and(|row| row != selected_row);
+    if input.up
+        || input.down
+        || input.left
+        || input.right
+        || input.scroll_up
+        || input.scroll_down
+        || pointer_selection_changed
+        || (input.pointer.previous && input.pointer.hovered_row.is_some())
+    {
         audio_player.play(&AudioEvent::ui_navigate());
     }
 
-    if input.activate || input.start {
+    if input.activate
+        || input.start
+        || (input.pointer.activate && input.pointer.hovered_row.is_some())
+    {
         audio_player.play(&AudioEvent::ui_confirm());
     }
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-enum SceneCursorMode {
-    CustomCi,
-    Hidden,
-    SystemVisible,
+fn sync_system_cursor(raylib: &mut RaylibHandle) {
+    // EnableCursor also warps the pointer to the window center in Raylib.
+    // ShowCursor restores the normal cursor without changing its position.
+    raylib.show_cursor();
 }
 
 #[derive(Clone, Copy)]
@@ -610,32 +1031,52 @@ struct SoftwareCursorFrame<'a> {
     assets: &'a GameAssets,
 }
 
-const fn cursor_mode_for_scene(scene: AppScene) -> SceneCursorMode {
-    match scene {
-        AppScene::Preferences => SceneCursorMode::CustomCi,
-        AppScene::Fight => SceneCursorMode::Hidden,
-        AppScene::CombatLab | AppScene::SpriteViewer => SceneCursorMode::SystemVisible,
+fn software_cursor_enabled_for_env() -> bool {
+    match std::env::var("BORROW_FIGHTERS_SOFTWARE_CURSOR") {
+        Ok(value) => !matches!(
+            value.trim().to_ascii_lowercase().as_str(),
+            "0" | "false" | "off" | "no"
+        ),
+        Err(_) => std::env::var_os("WSL_DISTRO_NAME").is_some(),
     }
 }
 
-fn software_cursor_for_scene<'a>(
-    scene: AppScene,
+fn software_cursor_for_position<'a>(
+    enabled: bool,
     position: Vector2,
     visual_time_seconds: f32,
     assets: &'a GameAssets,
 ) -> Option<SoftwareCursorFrame<'a>> {
-    (cursor_mode_for_scene(scene) == SceneCursorMode::CustomCi).then_some(SoftwareCursorFrame {
+    enabled.then_some(SoftwareCursorFrame {
         position,
         visual_time_seconds,
         assets,
     })
 }
 
-fn sync_scene_cursor(raylib: &mut RaylibHandle, mode: SceneCursorMode) {
-    raylib.enable_cursor();
-    match mode {
-        SceneCursorMode::CustomCi | SceneCursorMode::Hidden => raylib.hide_cursor(),
-        SceneCursorMode::SystemVisible => raylib.show_cursor(),
+fn authored_frame_replaced(world: &World) -> bool {
+    use crate::combat::super_sequence::SuperPhase;
+    world.super_sequence().is_some_and(|sequence| {
+        matches!(
+            sequence.phase(),
+            SuperPhase::RustBlackout | SuperPhase::CBios
+        )
+    })
+}
+
+fn scene_replaces_frame(
+    scene: AppScene,
+    world: &World,
+    lab: &CombatLab,
+    showcase: &MoveShowcase,
+) -> bool {
+    match scene {
+        AppScene::Fight => authored_frame_replaced(world),
+        AppScene::CombatLab => lab
+            .super_preview_world()
+            .is_some_and(authored_frame_replaced),
+        AppScene::MoveShowcase => authored_frame_replaced(showcase.world()),
+        _ => false,
     }
 }
 
@@ -644,6 +1085,7 @@ const fn music_track_for_scene(scene: AppScene, arena: ArenaId) -> MusicTrack {
         AppScene::Preferences => MusicTrack::Menu,
         AppScene::Fight => music_track_for_arena(arena),
         AppScene::CombatLab => MusicTrack::CombatDeterminedPursuit,
+        AppScene::MoveShowcase => MusicTrack::CombatDeterminedPursuit,
         AppScene::SpriteViewer => MusicTrack::Menu,
     }
 }
@@ -664,7 +1106,7 @@ fn run_sprite_viewer(
     thread: &RaylibThread,
     options: SpriteViewerOptions,
 ) {
-    sync_scene_cursor(raylib, SceneCursorMode::SystemVisible);
+    sync_system_cursor(raylib);
     let mut viewer = match SpriteViewer::load(options) {
         Ok(viewer) => viewer,
         Err(error) => {
@@ -718,12 +1160,13 @@ fn run_sprite_viewer(
         finish_frame(raylib, thread, &frame_target, &mut video_capture, None);
 
         if screenshot_requested {
-            let path = "target/sprite-viewer-capture.png";
-            if let Err(error) = std::fs::create_dir_all("target") {
-                viewer.set_texture_error(format!("could not create target directory: {error}"));
+            let directory = data_dir().join("captures");
+            let path = directory.join("sprite-viewer-capture.png");
+            if let Err(error) = std::fs::create_dir_all(directory) {
+                viewer.set_texture_error(format!("could not create capture directory: {error}"));
             } else {
-                raylib.take_screenshot(thread, path);
-                viewer.set_status_message(format!("Screenshot salvo em {path}."));
+                raylib.take_screenshot(thread, &path.to_string_lossy());
+                viewer.set_status_message(format!("Screenshot salvo em {}.", path.display()));
             }
         }
     }
@@ -731,7 +1174,7 @@ fn run_sprite_viewer(
 
 fn default_sprite_viewer_options() -> SpriteViewerOptions {
     SpriteViewerOptions {
-        manifest_path: PathBuf::from(C_FIGHTER_MANIFEST_PATH),
+        manifest_path: asset_path(C_FIGHTER_MANIFEST_PATH),
         initial_clip: Some("special".to_owned()),
         character: Some(CharacterId::C),
         selected_move: CombatLabMove::Projectile,
@@ -948,5 +1391,324 @@ fn read_sprite_viewer_input(raylib: &RaylibHandle) -> SpriteViewerInput {
         mouse_pressed: raylib.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_LEFT),
         mouse_down: raylib.is_mouse_button_down(MouseButton::MOUSE_BUTTON_LEFT),
         mouse_released: raylib.is_mouse_button_released(MouseButton::MOUSE_BUTTON_LEFT),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn isolated_onboarding_path() -> PathBuf {
+        static NEXT: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+        std::env::temp_dir()
+            .join(format!(
+                "borrow-fighters-onboarding-{}-{}-{}",
+                std::process::id(),
+                std::time::SystemTime::now()
+                    .duration_since(std::time::UNIX_EPOCH)
+                    .unwrap()
+                    .as_nanos(),
+                NEXT.fetch_add(1, std::sync::atomic::Ordering::Relaxed),
+            ))
+            .join("onboarding-v1.seen")
+    }
+
+    #[test]
+    fn onboarding_is_shown_once_and_app_starts_with_a_human_player() {
+        let marker = isolated_onboarding_path();
+        let mut app = App::with_onboarding_marker(LaunchOptions::default(), marker.clone());
+        assert_eq!(app.preferences_menu.page(), MenuPage::HowToPlay);
+        assert!(!app.feature_flags.enabled(FeatureFlag::PlayerOneCpu));
+        assert!(app.feature_flags.enabled(FeatureFlag::PlayerTwoCpu));
+        assert!(!marker.exists());
+        app.finish_onboarding();
+        assert!(marker.is_file());
+        let returning = App::with_onboarding_marker(LaunchOptions::default(), marker.clone());
+        assert_eq!(returning.preferences_menu.page(), MenuPage::Main);
+        std::fs::remove_dir_all(marker.parent().unwrap()).unwrap();
+    }
+
+    #[test]
+    fn direct_fight_and_tools_bypass_guide_without_marking_it_seen() {
+        let marker = isolated_onboarding_path();
+        for arguments in [vec!["game", "--fight"], vec!["game", "--showcase"]] {
+            let options = LaunchOptions::parse(arguments.into_iter().map(String::from)).unwrap();
+            let app = App::with_onboarding_marker(options, marker.clone());
+            assert_ne!(app.scene, AppScene::Preferences);
+            assert_eq!(app.preferences_menu.page(), MenuPage::Main);
+            assert!(!marker.exists());
+        }
+    }
+
+    #[test]
+    fn unavailable_onboarding_storage_does_not_prevent_playing() {
+        let marker = isolated_onboarding_path();
+        std::fs::create_dir_all(marker.parent().unwrap()).unwrap();
+        std::fs::write(&marker, b"blocked parent").unwrap();
+        let mut app = App::with_onboarding_marker(LaunchOptions::default(), marker.join("seen"));
+        app.finish_onboarding();
+        assert!(app.onboarding_marker.is_none());
+        std::fs::remove_dir_all(marker.parent().unwrap()).unwrap();
+    }
+
+    #[test]
+    fn app_starts_with_music_volume_at_half() {
+        let app = App::default();
+
+        assert_eq!(app.music_volume_percent, 50);
+        assert_eq!(app.music_volume_multiplier(), 0.5);
+    }
+
+    #[test]
+    fn app_applies_showcase_launch_move_repeat_and_facing() {
+        let options = LaunchOptions::parse(
+            [
+                "game",
+                "--showcase",
+                "--character",
+                "cpp",
+                "--move",
+                "signature_special",
+                "--repeat",
+                "--reverse",
+            ]
+            .map(String::from),
+        )
+        .unwrap();
+        let app = App::new(options);
+        assert_eq!(app.scene, AppScene::MoveShowcase);
+        assert_eq!(app.move_showcase.character(), CharacterId::Cpp);
+        assert_eq!(
+            app.move_showcase.selected_move(),
+            CombatLabMove::SignatureSpecial
+        );
+        assert!(app.move_showcase.repeat_current());
+        assert!(app.move_showcase.sides_reversed());
+        assert!(
+            app.move_showcase.world().player_one.position.x
+                > app.move_showcase.world().player_two.position.x
+        );
+    }
+
+    #[test]
+    fn showcase_preserves_pressed_keys_until_a_fixed_tick_and_steps_once_when_paused() {
+        let mut app = App::default();
+        let mut audio = AudioPlayer::disabled();
+        app.update_move_showcase(
+            FIXED_TIMESTEP * 0.25,
+            CombatLabInput {
+                pause_toggle: true,
+                ..CombatLabInput::default()
+            },
+            &mut audio,
+        );
+        assert!(!app.move_showcase.paused());
+        app.update_move_showcase(FIXED_TIMESTEP * 0.75, CombatLabInput::default(), &mut audio);
+        assert!(app.move_showcase.paused());
+        assert_eq!(app.move_showcase.current_frame(), 0);
+        app.update_move_showcase(
+            FIXED_TIMESTEP * 3.0,
+            CombatLabInput {
+                step_frame: true,
+                ..CombatLabInput::default()
+            },
+            &mut audio,
+        );
+        assert_eq!(app.move_showcase.current_frame(), 1);
+        assert!(app.move_showcase.take_audio_events().is_empty());
+    }
+
+    #[test]
+    fn lab_retains_pause_and_step_edges_across_render_only_frames_without_catch_up_repeats() {
+        let options = LaunchOptions::parse(
+            [
+                "game",
+                "--lab",
+                "combat",
+                "--character",
+                "c",
+                "--move",
+                "cinematic_special",
+            ]
+            .map(String::from),
+        )
+        .unwrap();
+        let mut app = App::new(options);
+        let mut audio = AudioPlayer::disabled();
+        app.update_combat_lab(FIXED_TIMESTEP, CombatLabInput::default(), &mut audio);
+        app.update_combat_lab(
+            FIXED_TIMESTEP * 0.25,
+            CombatLabInput {
+                pause_toggle: true,
+                ..CombatLabInput::default()
+            },
+            &mut audio,
+        );
+        assert!(!app.combat_lab.paused());
+        app.update_combat_lab(FIXED_TIMESTEP * 0.75, CombatLabInput::default(), &mut audio);
+        assert!(app.combat_lab.paused());
+        assert_eq!(
+            app.combat_lab
+                .super_preview_world()
+                .unwrap()
+                .super_sequence()
+                .unwrap()
+                .tick,
+            0
+        );
+        app.update_combat_lab(
+            FIXED_TIMESTEP * 0.25,
+            CombatLabInput {
+                step_frame: true,
+                toggle_background: true,
+                ..CombatLabInput::default()
+            },
+            &mut audio,
+        );
+        assert_eq!(app.combat_lab.current_frame().get(), 1);
+        app.update_combat_lab(FIXED_TIMESTEP * 3.75, CombatLabInput::default(), &mut audio);
+        assert_eq!(app.combat_lab.current_frame().get(), 2);
+        assert_eq!(
+            app.combat_lab
+                .super_preview_world()
+                .unwrap()
+                .super_sequence()
+                .unwrap()
+                .tick,
+            1
+        );
+        assert!(!app.combat_lab.show_background());
+        assert_eq!(app.pending_lab_input, CombatLabInput::default());
+    }
+
+    #[test]
+    fn lab_reset_during_a_paused_super_clears_capture_then_single_step_restarts_at_zero() {
+        for character in ["rust", "duke", "c", "cpp"] {
+            let options = LaunchOptions::parse(
+                [
+                    "game",
+                    "--lab",
+                    "combat",
+                    "--character",
+                    character,
+                    "--move",
+                    "cinematic_special",
+                ]
+                .map(String::from),
+            )
+            .unwrap();
+            let mut app = App::new(options);
+            let mut audio = AudioPlayer::disabled();
+            for _ in 0..230 {
+                app.update_combat_lab(FIXED_TIMESTEP, CombatLabInput::default(), &mut audio);
+            }
+            app.update_combat_lab(
+                FIXED_TIMESTEP,
+                CombatLabInput {
+                    pause_toggle: true,
+                    ..CombatLabInput::default()
+                },
+                &mut audio,
+            );
+            assert!(
+                app.combat_lab
+                    .super_preview_world()
+                    .unwrap()
+                    .super_sequence_active()
+            );
+            app.update_combat_lab(
+                FIXED_TIMESTEP * 0.25,
+                CombatLabInput {
+                    reset: true,
+                    ..CombatLabInput::default()
+                },
+                &mut audio,
+            );
+            app.update_combat_lab(FIXED_TIMESTEP * 0.75, CombatLabInput::default(), &mut audio);
+            let preview = app.combat_lab.super_preview_world().unwrap();
+            assert!(!preview.super_sequence_active());
+            assert_eq!(preview.player_two.health, preview.player_two.max_health);
+            assert!(app.combat_lab.paused());
+            assert_eq!(app.combat_lab.current_frame().get(), 0);
+            app.update_combat_lab(
+                FIXED_TIMESTEP * 2.0,
+                CombatLabInput {
+                    step_frame: true,
+                    ..CombatLabInput::default()
+                },
+                &mut audio,
+            );
+            assert_eq!(
+                app.combat_lab
+                    .super_preview_world()
+                    .unwrap()
+                    .super_sequence()
+                    .unwrap()
+                    .tick,
+                0
+            );
+            assert_eq!(app.combat_lab.current_frame().get(), 1);
+        }
+    }
+
+    #[test]
+    fn fight_button_edges_survive_until_tick_without_repeating_during_catch_up() {
+        let mut pending = PendingFighterInput::default();
+        pending.push(FighterInput {
+            signature_special: true,
+            cinematic_special: true,
+            jump: true,
+            right: true,
+            ..FighterInput::default()
+        });
+        // A render-only frame can refresh held controls before the next fixed tick.
+        pending.push(FighterInput {
+            block: true,
+            left: true,
+            ..FighterInput::default()
+        });
+        let first = pending.take_tick();
+        assert!(first.signature_special && first.cinematic_special && first.jump);
+        assert!(first.left && first.block);
+        assert!(!first.right);
+        let next = pending.take_tick();
+        assert!(!next.signature_special && !next.cinematic_special && !next.jump);
+        assert!(next.left && next.block);
+    }
+
+    #[test]
+    fn showcase_page_navigation_preserves_all_defense_scenarios_and_playback_options() {
+        use crate::scenes::move_showcase::ShowcaseScenario;
+
+        for scenario in [
+            ShowcaseScenario::StandingBlock,
+            ShowcaseScenario::OverheadBlock,
+            ShowcaseScenario::CrouchingBlock,
+            ShowcaseScenario::ProjectileBlock,
+        ] {
+            let mut app = App::default();
+            app.move_showcase.select_scenario(scenario);
+            app.move_showcase.toggle_repeat();
+            app.move_showcase.switch_sides();
+            app.move_showcase.update(CombatLabInput {
+                pause_toggle: true,
+                ..CombatLabInput::default()
+            });
+            // PageDown and PageUp use these same transitions, including wraparound.
+            for direction in [CycleDirection::Next, CycleDirection::Previous] {
+                for _ in 0..5 {
+                    let previous = app.move_showcase.character();
+                    app.cycle_showcase_character(direction);
+                    assert_ne!(app.move_showcase.character(), previous);
+                    assert_ne!(app.move_showcase.character(), CharacterId::Go);
+                    assert_eq!(app.move_showcase.scenario(), scenario);
+                    assert_eq!(app.move_showcase.current_frame(), 0);
+                    assert!(app.move_showcase.paused());
+                    assert!(app.move_showcase.repeat_current());
+                    assert!(app.move_showcase.sides_reversed());
+                }
+                assert_eq!(app.move_showcase.character(), CharacterId::Rust);
+            }
+        }
     }
 }

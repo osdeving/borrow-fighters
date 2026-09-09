@@ -1,0 +1,41 @@
+{
+  "action": "walk",
+  "source": "walk/source-v2.png",
+  "sheet": "walk/keyed.png",
+  "loop": true,
+  "source_body_height_reference_px": 480,
+  "normalization_note": "Two distinct martial advancing poses selected from v2. Repeated cells2/3 omitted; v1 repeated the same pair, v3 exaggerated body bob. Short two-phase shuffle; fluidity remains a candidate limitation.",
+  "frames": [
+    {
+      "name": "walk_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 444,
+        "h": 887
+      },
+      "pivot": {
+        "x": 249,
+        "y": 683
+      },
+      "duration_ms": 120,
+      "phase": "stride"
+    },
+    {
+      "name": "walk_01",
+      "source_rect": {
+        "x": 444,
+        "y": 0,
+        "w": 443,
+        "h": 887
+      },
+      "pivot": {
+        "x": 256,
+        "y": 684
+      },
+      "duration_ms": 120,
+      "phase": "passing"
+    }
+  ],
+  "review_notes": "Built-in image_gen, original narrow Go master and generated idle continuity. Flat magenta extracted without Rust contour mode; isolated matte corner pixels removed where present. Candidate visual only; baseline combat remains authoritative."
+}

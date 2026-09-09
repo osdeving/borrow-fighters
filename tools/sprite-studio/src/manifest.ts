@@ -14,6 +14,8 @@ export const PRESET_MANIFESTS = [
   ["Go intro", "assets/placeholder/go-start.sprite.json"],
   ["C fighter", "assets/placeholder/c-fighter.sprite.json"],
   ["C intro", "assets/placeholder/c-start.sprite.json"],
+  ["Python fighter", "assets/placeholder/python-fighter.sprite.json"],
+  ["Python intro", "assets/placeholder/python-start.sprite.json"],
 ] as const;
 
 export const EDIT_MODES: Array<{ id: EditMode; label: string }> = [
@@ -86,6 +88,12 @@ export function inferCharacterId(path: string): string {
   }
   if (normalized.includes("/c-") || normalized.includes("c-fighter")) {
     return "c";
+  }
+  if (normalized.includes("python") || normalized.includes("/py-")) {
+    return "python";
+  }
+  if (normalized.includes("cpp") || normalized.includes("c++")) {
+    return "cpp";
   }
   return "rust";
 }

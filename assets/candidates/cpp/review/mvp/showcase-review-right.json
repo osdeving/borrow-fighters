@@ -1,0 +1,274 @@
+{
+  "render_size": [
+    1280,
+    720
+  ],
+  "reversed": true,
+  "scenarios": [
+    {
+      "captures": [],
+      "character": "cpp",
+      "contact_frame": 56,
+      "result": "Hit { damage: 7 }",
+      "scenario": "Attack(LightPunch)",
+      "scenario_label": "Ground strike / stop an approaching opponent",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [],
+      "character": "cpp",
+      "contact_frame": 62,
+      "result": "Hit { damage: 16 }",
+      "scenario": "Attack(HeavyPunch)",
+      "scenario_label": "Ground strike / stop an approaching opponent",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [],
+      "character": "cpp",
+      "contact_frame": 60,
+      "result": "Hit { damage: 12 }",
+      "scenario": "Attack(Kick)",
+      "scenario_label": "Ground strike / stop an approaching opponent",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [
+        {
+          "actors": [
+            {
+              "blocking": false,
+              "blockstun": false,
+              "character": "cpp",
+              "clip": "sweep",
+              "crouching": true,
+              "frame": "sweep_mvp_01",
+              "frame_clip": "sweep",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false
+            },
+            {
+              "blocking": false,
+              "blockstun": false,
+              "character": "rust",
+              "clip": "knockdown",
+              "crouching": false,
+              "frame": "knockdown_00",
+              "frame_clip": "knockdown",
+              "grounded": true,
+              "health": 89,
+              "hitstun": true
+            }
+          ],
+          "image": "right-cpp-04-attacksweep-f061.png",
+          "result": "Hit { damage: 11 }",
+          "tick": 61
+        }
+      ],
+      "character": "cpp",
+      "contact_frame": 61,
+      "result": "Hit { damage: 11 }",
+      "scenario": "Attack(Sweep)",
+      "scenario_label": "Sweep / punish standing guard",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [],
+      "character": "cpp",
+      "contact_frame": 63,
+      "result": "Hit { damage: 14 }",
+      "scenario": "Attack(Overhead)",
+      "scenario_label": "Overhead / punish crouching guard",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [],
+      "character": "cpp",
+      "contact_frame": 59,
+      "result": "Hit { damage: 13 }",
+      "scenario": "Attack(AntiAir)",
+      "scenario_label": "Anti-air / intercept a real jump-in",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [],
+      "character": "cpp",
+      "contact_frame": 70,
+      "result": "Hit { damage: 9 }",
+      "scenario": "Attack(AirPunch)",
+      "scenario_label": "Jump attack / strike a grounded opponent",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [],
+      "character": "cpp",
+      "contact_frame": 72,
+      "result": "Hit { damage: 12 }",
+      "scenario": "Attack(AirKick)",
+      "scenario_label": "Jump attack / strike a grounded opponent",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [],
+      "character": "cpp",
+      "contact_frame": 58,
+      "result": "Hit { damage: 10 }",
+      "scenario": "Attack(Throw)",
+      "scenario_label": "Throw / catch a close guarding opponent",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [],
+      "character": "cpp",
+      "contact_frame": 44,
+      "result": "Hit { damage: 7 }",
+      "scenario": "Attack(Projectile)",
+      "scenario_label": "Projectile / control distance",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [
+        {
+          "actors": [
+            {
+              "blocking": false,
+              "blockstun": false,
+              "character": "cpp",
+              "clip": "signature_special",
+              "crouching": false,
+              "frame": "signature_special_mvp_01",
+              "frame_clip": "signature_special",
+              "grounded": true,
+              "health": 98,
+              "hitstun": false
+            },
+            {
+              "blocking": false,
+              "blockstun": false,
+              "character": "rust",
+              "clip": "hit",
+              "crouching": false,
+              "frame": "hit_00",
+              "frame_clip": "hit",
+              "grounded": false,
+              "health": 83,
+              "hitstun": true
+            }
+          ],
+          "image": "right-cpp-11-attacksignaturespecial-f062.png",
+          "result": "Hit { damage: 17 }",
+          "tick": 62
+        }
+      ],
+      "character": "cpp",
+      "contact_frame": 62,
+      "result": "Hit { damage: 17 }",
+      "scenario": "Attack(SignatureSpecial)",
+      "scenario_label": "Signature special / intercept a jump-in",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [],
+      "character": "cpp",
+      "contact_frame": 56,
+      "result": "Blocked { damage: 1 }",
+      "scenario": "StandingBlock",
+      "scenario_label": "Standing defense / mid strike",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [
+        {
+          "actors": [
+            {
+              "blocking": true,
+              "blockstun": true,
+              "character": "cpp",
+              "clip": "block",
+              "crouching": false,
+              "frame": "block_0",
+              "frame_clip": "block",
+              "grounded": true,
+              "health": 95,
+              "hitstun": false
+            },
+            {
+              "blocking": false,
+              "blockstun": false,
+              "character": "rust",
+              "clip": "overhead",
+              "crouching": false,
+              "frame": "overhead_1",
+              "frame_clip": "overhead",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false
+            }
+          ],
+          "image": "right-cpp-13-overheadblock-f064.png",
+          "result": "Blocked { damage: 3 }",
+          "tick": 64
+        }
+      ],
+      "character": "cpp",
+      "contact_frame": 64,
+      "result": "Blocked { damage: 3 }",
+      "scenario": "OverheadBlock",
+      "scenario_label": "Standing defense / overhead",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [
+        {
+          "actors": [
+            {
+              "blocking": true,
+              "blockstun": true,
+              "character": "cpp",
+              "clip": "crouch_block",
+              "crouching": true,
+              "frame": "crouch_block_0",
+              "frame_clip": "crouch_block",
+              "grounded": true,
+              "health": 96,
+              "hitstun": false
+            },
+            {
+              "blocking": false,
+              "blockstun": false,
+              "character": "rust",
+              "clip": "sweep",
+              "crouching": true,
+              "frame": "sweep_01",
+              "frame_clip": "sweep",
+              "grounded": true,
+              "health": 100,
+              "hitstun": false
+            }
+          ],
+          "image": "right-cpp-14-crouchingblock-f062.png",
+          "result": "Blocked { damage: 2 }",
+          "tick": 62
+        }
+      ],
+      "character": "cpp",
+      "contact_frame": 62,
+      "result": "Blocked { damage: 2 }",
+      "scenario": "CrouchingBlock",
+      "scenario_label": "Crouching defense / low sweep",
+      "raw_capture_count": 9
+    },
+    {
+      "captures": [],
+      "character": "cpp",
+      "contact_frame": 67,
+      "result": "Blocked { damage: 2 }",
+      "scenario": "ProjectileBlock",
+      "scenario_label": "Standing defense / projectile",
+      "raw_capture_count": 9
+    }
+  ],
+  "capture_scope": "All 15 scenarios rendered; only key contact screenshots retained in repository. Full captures remain in the local /tmp directory.",
+  "raw_capture_directory": "/tmp/borrow-fighters-cpp-final-right"
+}

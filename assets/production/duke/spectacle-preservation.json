@@ -1,0 +1,458 @@
+{
+  "baseline": "snapshots/2026-09-08-before-spectacle",
+  "baseline_manifest_sha256": "f20323e990f944d4e3103dd8bac5bb1c5fe0e6907161de006690b27f4bd208ec",
+  "current_manifest_sha256": "b4d5f9fd3a71a38df30f47702e59cbe9be147a9dd44fb0c08f48b2ffc3b56c3a",
+  "replaced_clips": [
+    "signature_special",
+    "throw"
+  ],
+  "added_clips": [
+    "thrown",
+    "launched",
+    "heavy_hit"
+  ],
+  "preserved_frames": 63,
+  "records": [
+    {
+      "frame": "idle_00",
+      "clip": "idle",
+      "rgba_sha256": "64605a65b0a8073ea3b0be32ef3aed7a16c354a075e3976ddc4a39877bc56a13",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "idle_01",
+      "clip": "idle",
+      "rgba_sha256": "c427757693c331246bd4710028a80f5deba7088bc48dc256ad488f18a66eed5d",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "idle_02",
+      "clip": "idle",
+      "rgba_sha256": "a4c59c774f190c92a12f822607f2d05cc6a1832147699f27237b4a47ee1cb7bf",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "idle_03",
+      "clip": "idle",
+      "rgba_sha256": "8f3f35792aab08222a413fb0765756feaf8945a3e10a95cbe5a3a0e50571447e",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "walk_00",
+      "clip": "walk",
+      "rgba_sha256": "1234f5f9ee30bf3437dee49e73a9b963409c9b8f4627aee96fb0fac4aa800801",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "walk_01",
+      "clip": "walk",
+      "rgba_sha256": "036bdf8defc0dcdb7e87605b79e2d00c2090c4d02bfa3990663f2dedb6d185a5",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "walk_02",
+      "clip": "walk",
+      "rgba_sha256": "317b45590ee445237b6d0ac17dd32b1c0b33f3a7c9a87a89e4714bb7a04bd057",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "walk_03",
+      "clip": "walk",
+      "rgba_sha256": "bcbd04af0862875a20318c07f77ae11f435bd367a5bf749d988e923367d87889",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "crouch_00",
+      "clip": "crouch",
+      "rgba_sha256": "c15cf44dbacc788619b194ff5f9eae0c0d4d8340c2a12822673037f0f57825d5",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "crouch_01",
+      "clip": "crouch",
+      "rgba_sha256": "76f2347b4bd60a80c30cdf1b25b15064b2c9599a86faa6ca1bcaa7449c454268",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "jump_00",
+      "clip": "jump",
+      "rgba_sha256": "147b1432c4cef2202f26cc614970b4e6485702beb81b3f975f6d97668bb94e22",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "jump_01",
+      "clip": "jump",
+      "rgba_sha256": "e92e15c3b4324f96a5137fb95a8a009c10e5f93ccac110a96400fe2fb8c17cc0",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "jump_02",
+      "clip": "jump",
+      "rgba_sha256": "1f14e305fe1994839ac8aa1e0dc432d09e35ed00513d9e3ce2c35a2930729bb8",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "block_00",
+      "clip": "block",
+      "rgba_sha256": "4566353e49eecb9409e5bb8f1d623070a21edb2dcf2080e6d57f44e3747f037c",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "block_01",
+      "clip": "block",
+      "rgba_sha256": "cb9e3513cffbb9858014209c260a79440ae9502c7b451a9847e3c901d31f7b1b",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "block_02",
+      "clip": "block",
+      "rgba_sha256": "20d1a6bc98d68ee662771f9ccd1f5c052a5e94863542723c117dc471cb14a950",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "crouch_block_00",
+      "clip": "crouch_block",
+      "rgba_sha256": "95dfae384604aaba909603ddeb8826477fc434dc086e7dc4d3ffe28c6f1d0e36",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "crouch_block_01",
+      "clip": "crouch_block",
+      "rgba_sha256": "96dd19df81cbc45b48adaf06c0fa4c364f6f33b7af6068ffbb8663487dca4100",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "crouch_block_02",
+      "clip": "crouch_block",
+      "rgba_sha256": "6809b4a0487e86b2112e5206fd6fed596427ad1650ec1680627f8bcce5eb9df2",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "hit_00",
+      "clip": "hit",
+      "rgba_sha256": "be84f4c82051deb8842684947c07e58bccc00416bdaf5cbb69902a6b8258ebe7",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "hit_01",
+      "clip": "hit",
+      "rgba_sha256": "fd73ad75f3fe30d151dd4d6a144ce7ed33b48954465495bd556e8d95af9242ad",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "hit_02",
+      "clip": "hit",
+      "rgba_sha256": "7b7d7193e6a7ce67a3e0ede2257d455a9b76c1b351b5e483e6995b742b195389",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "punch_light_00",
+      "clip": "punch_light",
+      "rgba_sha256": "606ab9644e973787861c125f0feb44d08da9457231e9e356a2eaa47a43dd680c",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "punch_light_01",
+      "clip": "punch_light",
+      "rgba_sha256": "f192e766c2ea71d84508c4637b62117518823269d2d6617c46edfaebc9641f99",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "punch_light_02",
+      "clip": "punch_light",
+      "rgba_sha256": "4be006a864d32d801060c0150f9904312696d28cab3bb2277226e3e6cb90747d",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "punch_heavy_00",
+      "clip": "punch_heavy",
+      "rgba_sha256": "b5a7a63857aaeb82cc8e5fe77d9b54c0c54bdba35a8551883398531bcd242ef8",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "punch_heavy_01",
+      "clip": "punch_heavy",
+      "rgba_sha256": "edde84e04dc6d04ad51f8c2a925e0909a81393697e985e0464669be22667c085",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "punch_heavy_02",
+      "clip": "punch_heavy",
+      "rgba_sha256": "018da92a2cf1d01a66424f57ccc70e84f91577b2295dfe9e627905a5c0b00a5a",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "kick_00",
+      "clip": "kick",
+      "rgba_sha256": "ee92a00c04d4027f443a8662e6e885f880d1ae3abbfecc689dc114b612282b2f",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "kick_01",
+      "clip": "kick",
+      "rgba_sha256": "2757fc029f925f894a869af16169862d4d662926f0652cf10d0dcdc8fffa4128",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "kick_02",
+      "clip": "kick",
+      "rgba_sha256": "e9c45126192b3e41e880cef13ce85707d93954f37e94034e00cbdaaa984d9cf7",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "sweep_mvp_00",
+      "clip": "sweep",
+      "rgba_sha256": "25b86007666397d06b3c1198d0f9aa9ea365d1df7c59641b259eba2c5685fb3f",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "sweep_mvp_01",
+      "clip": "sweep",
+      "rgba_sha256": "e1004f74e5bc2ec41070df8bcb14b8523e45c94d63ca82ebf612d3da4a1b709f",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "sweep_mvp_02",
+      "clip": "sweep",
+      "rgba_sha256": "4892ee58d37af81dfe1463c73f62afe4232027d5c03c8144b0b7964a9e05578a",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "sweep_mvp_03",
+      "clip": "sweep",
+      "rgba_sha256": "d761125df2e747badc60f50703e3c27e9c9f8d7a5e23d51c64bc69859d734f2d",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "overhead_00",
+      "clip": "overhead",
+      "rgba_sha256": "f1a40cd34d9db7eb12385ba3c885be565925b366e2fa0e1f5eeb5a128bde2e58",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "overhead_01",
+      "clip": "overhead",
+      "rgba_sha256": "2d0587153b2bd816194aaad886ab5d67585ce32da19440b2c675a09e757f2bd1",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "overhead_02",
+      "clip": "overhead",
+      "rgba_sha256": "d8f546dabd37dd5d245b8f5bc710bf9ec314b9308c549bd2708a7136d3145bba",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "anti_air_00",
+      "clip": "anti_air",
+      "rgba_sha256": "093071212a2525d107abc82dfb4a4b5f5ad89f5f822840de063b13127dd62fc4",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "anti_air_01",
+      "clip": "anti_air",
+      "rgba_sha256": "4bcb1416b1e87577594a48c2102fd0b0c02e2cbd8a3b9837ddc8bf9260efabbc",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "anti_air_02",
+      "clip": "anti_air",
+      "rgba_sha256": "f3f8f821b67981d6492f6a6309ede2caf5998f7361f2f1f0520f0ce6043fad14",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "air_punch_00",
+      "clip": "air_punch",
+      "rgba_sha256": "9321fc7c5c9ebb922574db89fc9dc3a530e57202c5cb932eeacc5586ba02d197",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "air_punch_01",
+      "clip": "air_punch",
+      "rgba_sha256": "10416aa76feeed01fbd26e07e72018b0a5ee0b8a799723ea897fe226928d43fa",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "air_punch_02",
+      "clip": "air_punch",
+      "rgba_sha256": "2ee17f12543474446bd115dd7b36381cbf8ec0dc2888a222ffbad58ccc86a1ee",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "air_kick_00",
+      "clip": "air_kick",
+      "rgba_sha256": "95d2ca7eabc19d01e295e5f2fb6c281e65bbd2f7127c83e7101160a1c8597b4f",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "air_kick_01",
+      "clip": "air_kick",
+      "rgba_sha256": "701d193d090f6ef77bde7999ffb70ab519df1219c511fed8daa42b96022bc6c2",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "air_kick_02",
+      "clip": "air_kick",
+      "rgba_sha256": "bb9f2192dd43b2757f2df6b999043732b147b49138983823577addf2a0a51a94",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "special_00",
+      "clip": "special",
+      "rgba_sha256": "70d08377b2ac508a3fa8ebad7e504a428e201df74142b8eefce062e956942922",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "special_01",
+      "clip": "special",
+      "rgba_sha256": "adba3173406fe0cdc617ee3b438daa35a8858f336f2d4bc93a3ea7aa1b7c76dd",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "special_02",
+      "clip": "special",
+      "rgba_sha256": "2069789d16dedd267c2e0e865436a2613df9b93983157cb0b7f8b852465e3297",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "spawn_00",
+      "clip": "spawn",
+      "rgba_sha256": "1fb751409d4ce9f2deb9b294657cd9e1b50e5199a82f3517518af1a0b2c05bc2",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "spawn_01",
+      "clip": "spawn",
+      "rgba_sha256": "87d2107a84359eebc3d02f28c8e6c45c0496e6d09a07330d3841ffcff9daeeff",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "spawn_02",
+      "clip": "spawn",
+      "rgba_sha256": "73ec8b0eca3b5eb672e4e9f4242e11285e832d93e496e7770e40b1283012350c",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "spawn_03",
+      "clip": "spawn",
+      "rgba_sha256": "a2db67734c917ff711cf77fcb803f347c29bdfa143fcd918e2a68b003bf3b4b1",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "victory_00",
+      "clip": "victory",
+      "rgba_sha256": "84f2b1b1065a76e04e1ca5d596b4c9a422e134e8bca3c33b654b8bc26e405b45",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "victory_01",
+      "clip": "victory",
+      "rgba_sha256": "ecac4e5f1d464ae2157a6d4fccb3f7f26ac78cab69c6c02d303863b205806127",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "defeat_00",
+      "clip": "defeat",
+      "rgba_sha256": "f9c51af092ac82d09f90018338103af4be5632ae41bf381aeb28d1959be5d721",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "defeat_01",
+      "clip": "defeat",
+      "rgba_sha256": "6d98ffad4130e26bf945c6fb235f604ea65ab8c068b8e31b979fe67b3b053c42",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "defeat_02",
+      "clip": "defeat",
+      "rgba_sha256": "bfaedeb4f4a7816491a85b346d80a48edae0a29d2790c285e57e412949f67b16",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "knockdown_mvp_00",
+      "clip": "knockdown",
+      "rgba_sha256": "566259127c6fc8774b9d3190948e2deef7e2e3b9e67104248a12da72b71a6482",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "knockdown_mvp_01",
+      "clip": "knockdown",
+      "rgba_sha256": "c73decd779360e759c58b3e4842114790538175ff59cfe5c4411a88b4b36e8ed",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "knockdown_mvp_02",
+      "clip": "knockdown",
+      "rgba_sha256": "b7df8fd11c90c2f2474430f5ee1e956884cb17b775adbf7ae5a7323af7e94d94",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    },
+    {
+      "frame": "knockdown_mvp_03",
+      "clip": "knockdown",
+      "rgba_sha256": "67190bca1fe08cf96a1623c4f5f8f49ef5d629b35bc8bd7233045444bb658aab",
+      "pixels_preserved": true,
+      "metadata_preserved": true
+    }
+  ]
+}

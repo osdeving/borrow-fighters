@@ -2,7 +2,7 @@
 //!
 //! The menu changes feature flags only through the central feature flag API.
 
-use crate::game::feature_flags::{FeatureFlags, PREFERENCE_FLAGS};
+use crate::game::feature_flags::{FeatureFlag, FeatureFlags, PREFERENCE_FLAGS};
 use crate::ui::binary_text::DEFAULT_BINARY_REVEAL_FRAMES;
 
 /// Top-level prototype menu pages.
@@ -14,6 +14,24 @@ pub enum MenuPage {
     Training,
     Lore,
     Options,
+    HowToPlay,
+}
+
+/// Ready-to-play control assignments offered by the welcome guide.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum PlayMode {
+    #[default]
+    AgainstCpu,
+    LocalDuel,
+    WatchDemo,
+}
+
+impl PlayMode {
+    /// Applies control assignments without changing combat or debugging options.
+    pub fn apply(self, flags: &mut FeatureFlags) {
+        flags.set(FeatureFlag::PlayerOneCpu, self == Self::WatchDemo);
+        flags.set(FeatureFlag::PlayerTwoCpu, self != Self::LocalDuel);
+    }
 }
 
 /// Menu input commands for one frame.
@@ -27,6 +45,16 @@ pub struct PreferencesInput {
     pub scroll_down: bool,
     pub activate: bool,
     pub start: bool,
+    pub pointer: PreferencesPointerInput,
+}
+
+/// Pointer commands already hit-tested against the current menu page.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct PreferencesPointerInput {
+    pub hovered_row: Option<usize>,
+    pub moved: bool,
+    pub activate: bool,
+    pub previous: bool,
 }
 
 /// Direction used by menu rows that cycle through discrete options.
@@ -41,7 +69,10 @@ pub enum CycleDirection {
 pub enum PreferencesAction {
     Stay,
     StartFight,
+    StartWithMode(PlayMode),
+    CloseGuide,
     OpenCombatLab,
+    OpenMoveShowcase,
     OpenSpriteViewer,
     CycleLoreChapter(CycleDirection),
     CycleLoreCharacter(CycleDirection),
@@ -74,15 +105,21 @@ impl PreferencesMenu {
     pub const MAIN_TRAINING_ROW: usize = 2;
     pub const MAIN_LORE_ROW: usize = 3;
     pub const MAIN_OPTIONS_ROW: usize = 4;
-    pub const MAIN_EXIT_ROW: usize = 5;
+    pub const MAIN_HOW_TO_PLAY_ROW: usize = 5;
+    pub const MAIN_EXIT_ROW: usize = 6;
+    pub const GUIDE_CPU_ROW: usize = 0;
+    pub const GUIDE_LOCAL_ROW: usize = 1;
+    pub const GUIDE_DEMO_ROW: usize = 2;
+    pub const GUIDE_BACK_ROW: usize = 3;
     pub const VERSUS_START_ROW: usize = 0;
     pub const VERSUS_PLAYER_ONE_CHARACTER_ROW: usize = 1;
     pub const VERSUS_PLAYER_TWO_CHARACTER_ROW: usize = 2;
     pub const VERSUS_ARENA_ROW: usize = 3;
     pub const VERSUS_BACK_ROW: usize = 4;
     pub const TRAINING_COMBAT_LAB_ROW: usize = 0;
-    pub const TRAINING_SPRITE_VIEWER_ROW: usize = 1;
-    pub const TRAINING_BACK_ROW: usize = 2;
+    pub const TRAINING_MOVE_SHOWCASE_ROW: usize = 1;
+    pub const TRAINING_SPRITE_VIEWER_ROW: usize = 2;
+    pub const TRAINING_BACK_ROW: usize = 3;
     pub const LORE_CHAPTER_ROW: usize = 0;
     pub const LORE_CHARACTER_ROW: usize = 1;
     pub const LORE_BACK_ROW: usize = 2;
@@ -140,11 +177,20 @@ impl PreferencesMenu {
         self.accepting_input = false;
     }
 
+    /// Opens the same guide used on first launch and from the main menu.
+    pub fn open_guide(&mut self) {
+        self.enter_page(MenuPage::HowToPlay);
+    }
+
     /// Moves back one page when possible.
     pub fn back(&mut self) -> bool {
         match self.page {
             MenuPage::Main => false,
-            MenuPage::Versus | MenuPage::Training | MenuPage::Lore | MenuPage::Options => {
+            MenuPage::Versus
+            | MenuPage::Training
+            | MenuPage::Lore
+            | MenuPage::Options
+            | MenuPage::HowToPlay => {
                 self.enter_page(MenuPage::Main);
                 true
             }
@@ -175,6 +221,19 @@ impl PreferencesMenu {
         }
 
         let previous_selected = self.selected;
+        let keyboard_command =
+            input.up || input.down || input.left || input.right || input.activate || input.start;
+        // Only movement or a fresh click gives the mouse selection control.
+        // A resting pointer must not undo keyboard/gamepad navigation.
+        let pointer_row = input
+            .pointer
+            .hovered_row
+            .filter(|&row| row < self.page_row_count());
+        let pointer_used = !keyboard_command
+            && (input.pointer.moved || input.pointer.activate || input.pointer.previous);
+        if pointer_used && let Some(row) = pointer_row {
+            self.selected = row;
+        }
 
         if input.up {
             self.selected = self.selected.saturating_sub(1);
@@ -197,7 +256,11 @@ impl PreferencesMenu {
         }
 
         if input.start {
-            return PreferencesAction::StartFight;
+            return if self.page == MenuPage::HowToPlay {
+                self.activate_selected(flags)
+            } else {
+                PreferencesAction::StartFight
+            };
         }
 
         if input.left {
@@ -210,6 +273,15 @@ impl PreferencesMenu {
 
         if input.activate {
             return self.activate_selected(flags);
+        }
+
+        if pointer_used && pointer_row.is_some() {
+            if input.pointer.activate {
+                return self.activate_selected(flags);
+            }
+            if input.pointer.previous {
+                return self.cycle_action(CycleDirection::Previous);
+            }
         }
 
         PreferencesAction::Stay
@@ -244,7 +316,7 @@ impl PreferencesMenu {
                     None
                 }
             }
-            MenuPage::Main | MenuPage::Training => None,
+            MenuPage::Main | MenuPage::Training | MenuPage::HowToPlay => None,
         }
     }
 
@@ -268,6 +340,10 @@ impl PreferencesMenu {
                     self.enter_page(MenuPage::Options);
                     PreferencesAction::Stay
                 }
+                Self::MAIN_HOW_TO_PLAY_ROW => {
+                    self.open_guide();
+                    PreferencesAction::Stay
+                }
                 Self::MAIN_EXIT_ROW => PreferencesAction::Exit,
                 _ => PreferencesAction::Stay,
             },
@@ -288,6 +364,7 @@ impl PreferencesMenu {
             },
             MenuPage::Training => match self.selected {
                 Self::TRAINING_COMBAT_LAB_ROW => PreferencesAction::OpenCombatLab,
+                Self::TRAINING_MOVE_SHOWCASE_ROW => PreferencesAction::OpenMoveShowcase,
                 Self::TRAINING_SPRITE_VIEWER_ROW => PreferencesAction::OpenSpriteViewer,
                 Self::TRAINING_BACK_ROW => {
                     self.enter_page(MenuPage::Main);
@@ -321,6 +398,20 @@ impl PreferencesMenu {
                 let flag = PREFERENCE_FLAGS[self.selected - Self::OPTIONS_FIRST_FLAG_ROW];
                 flags.toggle(flag);
                 PreferencesAction::Stay
+            }
+            MenuPage::HowToPlay => {
+                let mode = match self.selected {
+                    Self::GUIDE_CPU_ROW => PlayMode::AgainstCpu,
+                    Self::GUIDE_LOCAL_ROW => PlayMode::LocalDuel,
+                    Self::GUIDE_DEMO_ROW => PlayMode::WatchDemo,
+                    _ => {
+                        self.enter_page(MenuPage::Main);
+                        return PreferencesAction::CloseGuide;
+                    }
+                };
+                mode.apply(flags);
+                self.enter_page(MenuPage::Main);
+                PreferencesAction::StartWithMode(mode)
             }
         }
     }
@@ -356,11 +447,12 @@ impl PreferencesMenu {
 
     fn page_row_count(&self) -> usize {
         match self.page {
-            MenuPage::Main => 6,
+            MenuPage::Main => 7,
             MenuPage::Versus => 5,
-            MenuPage::Training => 3,
+            MenuPage::Training => 4,
             MenuPage::Lore => 3,
             MenuPage::Options => PREFERENCE_FLAGS.len() + Self::OPTIONS_FIRST_FLAG_ROW + 1,
+            MenuPage::HowToPlay => 4,
         }
     }
 }

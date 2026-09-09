@@ -1,0 +1,2275 @@
+{
+  "schema": "borrow-fighters.sprite-integration-review.v1",
+  "character": "go",
+  "review_date": "2026-09-07",
+  "reviewer": "audit_moves",
+  "status": "statically_approved_with_nonblocking_caveats; native_recapture_in_progress_by_other_agent",
+  "scope": "Independent static/sequential review of canonical new Go:20 clips,60 frames in both facings; nine attack boxes and special emission origin. After real jump-v2 correction, all57 other frames were checked byte-for-byte against the preserved export snapshot; all3 promoted jump frames were inspected again. This report does not claim native recapture execution.",
+  "art_mutated": false,
+  "reviewed_assets": {
+    "manifest": "assets/candidates/go/go-fighter.sprite.json",
+    "manifest_sha256": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+    "atlas": "assets/candidates/go/go-fighter-atlas.png",
+    "atlas_sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028",
+    "master_sha256": "8fa19c0e7a4183a9e9354351c810abc5610551fd8eb5e9a24c745b17262cf0aa"
+  },
+  "counts": {
+    "clips": 20,
+    "frames": 60,
+    "attack_clips_including_special": 10,
+    "gif_frames_examined": 60,
+    "directions": 2
+  },
+  "verification": {
+    "all_clip_totals_match_contract": true,
+    "export_durations_match_selected_action_json": true,
+    "nine_active_phase_boundaries_match_contract": true,
+    "all60_frames_nonempty_with_transparent_margins": true,
+    "cuts_or_background_halos_observed": false,
+    "runtime_timing_caveat": "Review helper adds400ms to final nonloop GIF frame and GIF quantizes10ms. Exact runtime timings above come from manifest, not GIF.",
+    "all57_nonjump_pixels_and_frame_metadata_identical_to_preserved_export": true,
+    "only_three_jump_frame_pixels_changed": true,
+    "promoted_jump_metrics_match_selected_v2_preview": true,
+    "anatomical_continuity_finding_resolved_by_joint_visual_review": true
+  },
+  "findings": [
+    {
+      "id": "GO-INTEGRATION-01",
+      "severity": "medium",
+      "status": "resolved_by_real_source_v2_and_joint_visual_review",
+      "action": "jump",
+      "frames": [
+        "jump_00",
+        "jump_01",
+        "jump_02"
+      ],
+      "finding": "A cabeça/tronco pequenos do jump v1 foram corrigidos por nova fonte real v2, escala uniforme 0.37, selecionada após comparação visual conjunta com idle/aéreos. O ajuste virtual da descida deixa a sola sólida em Y−1 no atlas promovido.",
+      "recommended_action": "No further static anatomy refinement requested; coordinator/verification_pipeline complete native recapture of promoted version.",
+      "historical_finding": "Cabeça/tronco visualmente menores que idle e golpes aéreos, causando crescimento aparente ao iniciar um aéreo. Identidade permanece a mesma; o problema é continuidade de proporção/registro.",
+      "before_measurement": {
+        "method": "Exported atlas, alpha>=128, upper-body height from solid top to virtual waist Y=-150. This is a silhouette comparison, not a precise anatomical scale estimate.",
+        "top_to_virtual_waist_px": {
+          "idle_00": 114,
+          "jump_00": 94,
+          "jump_01": 92,
+          "jump_02": 96,
+          "air_punch_02": 113,
+          "air_kick_00": 115
+        },
+        "upper_30px_silhouette_width_px": {
+          "idle_00": 55,
+          "jump_00": 48,
+          "jump_01": 48,
+          "jump_02": 47
+        }
+      },
+      "resolution": {
+        "selected_source": "assets/production/go/jump/source-v2.png",
+        "selected_sheet": "assets/production/go/jump/keyed-v2.png",
+        "scale_to_runtime": 0.37,
+        "selected_by": "root after reviewing comparison-v2 and comparison-v3 with audit_moves",
+        "rejected_alternative": "source-v3.png lengthened the abdomen too much; retained as history.",
+        "frames": [
+          {
+            "name": "jump_00",
+            "duration_ms": 60,
+            "source_rect": {
+              "x": 0,
+              "y": 0,
+              "w": 627,
+              "h": 836
+            },
+            "source_pivot": {
+              "x": 336,
+              "y": 745
+            },
+            "runtime_pivot": {
+              "x": 124,
+              "y": 276
+            },
+            "runtime_size": [
+              232,
+              309
+            ],
+            "solid_top_from_anchor": -258,
+            "solid_bottom_from_anchor": -37,
+            "upper_30px_silhouette_width": 55,
+            "alpha_bbox": [
+              59,
+              16,
+              189,
+              243
+            ]
+          },
+          {
+            "name": "jump_01",
+            "duration_ms": 340,
+            "source_rect": {
+              "x": 627,
+              "y": 0,
+              "w": 627,
+              "h": 836
+            },
+            "source_pivot": {
+              "x": 294,
+              "y": 723
+            },
+            "runtime_pivot": {
+              "x": 109,
+              "y": 268
+            },
+            "runtime_size": [
+              232,
+              309
+            ],
+            "solid_top_from_anchor": -252,
+            "solid_bottom_from_anchor": -46,
+            "upper_30px_silhouette_width": 54,
+            "alpha_bbox": [
+              37,
+              13,
+              174,
+              226
+            ]
+          },
+          {
+            "name": "jump_02",
+            "duration_ms": 400,
+            "source_rect": {
+              "x": 1254,
+              "y": 0,
+              "w": 627,
+              "h": 836
+            },
+            "source_pivot": {
+              "x": 236,
+              "y": 784
+            },
+            "runtime_pivot": {
+              "x": 87,
+              "y": 290
+            },
+            "runtime_size": [
+              232,
+              309
+            ],
+            "solid_top_from_anchor": -264,
+            "solid_bottom_from_anchor": -1,
+            "upper_30px_silhouette_width": 53,
+            "alpha_bbox": [
+              16,
+              23,
+              149,
+              293
+            ]
+          }
+        ],
+        "native_validation": "New canonical version promoted; World/Lab recapture in progress with verification_pipeline."
+      },
+      "evidence_before": [
+        "target/art/go-integration-review/jump-transitions.png",
+        "target/art/go-integration-review/upper-body-comparison-2x.png"
+      ],
+      "evidence": [
+        "assets/production/go/jump/review/transition-v2.png",
+        "assets/production/go/jump/review/both-facings-v2.png",
+        "assets/candidates/go/review/jump-frames.png"
+      ]
+    },
+    {
+      "id": "GO-INTEGRATION-02",
+      "severity": "low",
+      "status": "known_nonblocking_support_caveat",
+      "action": "sweep",
+      "frames": [
+        "sweep_01"
+      ],
+      "finding": "Palma de apoio não compartilha exatamente a linha da pata traseira. No atlas final alpha>=128, palma termina em Y=-6 e pata em Y=+1, diferença de 7 px. É visível sobre linha horizontal; pode representar profundidade, mas não é apoio perfeitamente coplanar.",
+      "evidence": [
+        "target/art/go-integration-review/contacts-2.png"
+      ],
+      "contact_affected": false
+    },
+    {
+      "id": "GO-INTEGRATION-03",
+      "severity": "low",
+      "status": "known_nonblocking_contact_edge",
+      "action": "air_kick",
+      "frames": [
+        "air_kick_01"
+      ],
+      "finding": "Sola e volume útil da pata entram na caixa; ponta fina da garra fica junto à borda frontal, aproximadamente 1 px além segundo lote C. Espelhamento mantém o mesmo resultado.",
+      "evidence": [
+        "target/art/go-integration-review/contacts-5.png"
+      ],
+      "contact_affected": false
+    },
+    {
+      "id": "GO-INTEGRATION-04",
+      "severity": "low",
+      "status": "nonblocking_color_variation",
+      "action": "spawn",
+      "frames": [
+        "spawn_02",
+        "idle_00"
+      ],
+      "finding": "Azul da pose final do spawn um pouco mais saturado que idle, perceptível na comparação lado a lado; pelagem, roupa e identidade permanecem coerentes.",
+      "evidence": [
+        "target/art/go-integration-review/returns.png"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "action": "idle",
+      "frames": 3,
+      "durations_ms": [
+        180,
+        180,
+        180
+      ],
+      "total_ms": 540,
+      "loop": true,
+      "status": "pass",
+      "notes": "Respiração discreta, cabeça/faixa/apoios estáveis.",
+      "gif_durations_ms": [
+        180,
+        180,
+        180
+      ],
+      "frame_metrics": [
+        {
+          "name": "idle_00",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            33,
+            12,
+            178,
+            281
+          ],
+          "minimum_alpha_margin_px": 1
+        },
+        {
+          "name": "idle_01",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            25,
+            12,
+            171,
+            281
+          ],
+          "minimum_alpha_margin_px": 1
+        },
+        {
+          "name": "idle_02",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            18,
+            13,
+            163,
+            281
+          ],
+          "minimum_alpha_margin_px": 1
+        }
+      ]
+    },
+    {
+      "action": "walk",
+      "frames": 4,
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60
+      ],
+      "total_ms": 240,
+      "loop": true,
+      "status": "pass",
+      "notes": "Quatro apoios distintos em avanço de guarda; 240 ms deixam o ciclo rápido. Mantém a ordem das pernas e fecha a base antes de avançar a pata frontal.",
+      "gif_durations_ms": [
+        60,
+        60,
+        60,
+        60
+      ],
+      "frame_metrics": [
+        {
+          "name": "walk_00",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            38,
+            20,
+            212,
+            288
+          ],
+          "minimum_alpha_margin_px": 19
+        },
+        {
+          "name": "walk_01",
+          "solid_top_from_anchor": -260,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            38,
+            23,
+            211,
+            288
+          ],
+          "minimum_alpha_margin_px": 20
+        },
+        {
+          "name": "walk_02",
+          "solid_top_from_anchor": -256,
+          "solid_bottom_from_anchor": -2,
+          "alpha_bbox": [
+            62,
+            26,
+            168,
+            287
+          ],
+          "minimum_alpha_margin_px": 21
+        },
+        {
+          "name": "walk_03",
+          "solid_top_from_anchor": -255,
+          "solid_bottom_from_anchor": -2,
+          "alpha_bbox": [
+            23,
+            28,
+            220,
+            288
+          ],
+          "minimum_alpha_margin_px": 11
+        }
+      ]
+    },
+    {
+      "action": "jump",
+      "frames": 3,
+      "durations_ms": [
+        60,
+        340,
+        400
+      ],
+      "total_ms": 800,
+      "loop": false,
+      "status": "pass_after_real_source_v2_correction",
+      "notes": "V2 selecionada restaura volume de cabeça/tronco coerente com idle/aéreos; pernas recolhem e a sola da descida fica 1 px acima da âncora. Tempos 60/340/400 ms preservados.",
+      "gif_durations_ms": [
+        60,
+        340,
+        800
+      ],
+      "frame_metrics": [
+        {
+          "name": "jump_00",
+          "solid_top_from_anchor": -258,
+          "solid_bottom_from_anchor": -37,
+          "alpha_bbox": [
+            59,
+            16,
+            189,
+            243
+          ],
+          "minimum_alpha_margin_px": 16
+        },
+        {
+          "name": "jump_01",
+          "solid_top_from_anchor": -252,
+          "solid_bottom_from_anchor": -46,
+          "alpha_bbox": [
+            37,
+            13,
+            174,
+            226
+          ],
+          "minimum_alpha_margin_px": 13
+        },
+        {
+          "name": "jump_02",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            16,
+            23,
+            149,
+            293
+          ],
+          "minimum_alpha_margin_px": 16
+        }
+      ]
+    },
+    {
+      "action": "crouch",
+      "frames": 2,
+      "durations_ms": [
+        80,
+        280
+      ],
+      "total_ms": 360,
+      "loop": false,
+      "status": "pass",
+      "notes": "Entrada de 80 ms e hold de 280 ms compactos; a pose descartada não foi exportada.",
+      "gif_durations_ms": [
+        80,
+        680
+      ],
+      "frame_metrics": [
+        {
+          "name": "crouch_00",
+          "solid_top_from_anchor": -163,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            45,
+            108,
+            181,
+            276
+          ],
+          "minimum_alpha_margin_px": 6
+        },
+        {
+          "name": "crouch_02",
+          "solid_top_from_anchor": -123,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            4,
+            150,
+            128,
+            277
+          ],
+          "minimum_alpha_margin_px": 4
+        }
+      ]
+    },
+    {
+      "action": "block",
+      "frames": 3,
+      "durations_ms": [
+        70,
+        80,
+        150
+      ],
+      "total_ms": 300,
+      "loop": false,
+      "status": "pass",
+      "notes": "Guarda alta, absorção e retorno legíveis; sem deslocamento anormal dos apoios.",
+      "gif_durations_ms": [
+        70,
+        80,
+        550
+      ],
+      "frame_metrics": [
+        {
+          "name": "block_00",
+          "solid_top_from_anchor": -251,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            27,
+            19,
+            183,
+            276
+          ],
+          "minimum_alpha_margin_px": 6
+        },
+        {
+          "name": "block_01",
+          "solid_top_from_anchor": -245,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            14,
+            27,
+            178,
+            277
+          ],
+          "minimum_alpha_margin_px": 5
+        },
+        {
+          "name": "block_02",
+          "solid_top_from_anchor": -255,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            16,
+            15,
+            161,
+            276
+          ],
+          "minimum_alpha_margin_px": 6
+        }
+      ]
+    },
+    {
+      "action": "crouch_block",
+      "frames": 3,
+      "durations_ms": [
+        70,
+        80,
+        150
+      ],
+      "total_ms": 300,
+      "loop": false,
+      "status": "pass",
+      "notes": "Proteção compacta compatível com crouch hold, sem mudança evidente de escala da cabeça.",
+      "gif_durations_ms": [
+        70,
+        80,
+        550
+      ],
+      "frame_metrics": [
+        {
+          "name": "crouch_block_00",
+          "solid_top_from_anchor": -124,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            48,
+            131,
+            184,
+            260
+          ],
+          "minimum_alpha_margin_px": 22
+        },
+        {
+          "name": "crouch_block_01",
+          "solid_top_from_anchor": -133,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            29,
+            122,
+            149,
+            260
+          ],
+          "minimum_alpha_margin_px": 22
+        },
+        {
+          "name": "crouch_block_02",
+          "solid_top_from_anchor": -123,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            4,
+            131,
+            131,
+            260
+          ],
+          "minimum_alpha_margin_px": 4
+        }
+      ]
+    },
+    {
+      "action": "hit",
+      "frames": 3,
+      "durations_ms": [
+        60,
+        80,
+        120
+      ],
+      "total_ms": 260,
+      "loop": false,
+      "status": "pass",
+      "notes": "Impacto, dobra do tronco e recuperação identificáveis; expressão adulta.",
+      "gif_durations_ms": [
+        60,
+        80,
+        520
+      ],
+      "frame_metrics": [
+        {
+          "name": "hit_00",
+          "solid_top_from_anchor": -260,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            42,
+            14,
+            203,
+            280
+          ],
+          "minimum_alpha_margin_px": 2
+        },
+        {
+          "name": "hit_01",
+          "solid_top_from_anchor": -238,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            31,
+            36,
+            173,
+            279
+          ],
+          "minimum_alpha_margin_px": 3
+        },
+        {
+          "name": "hit_02",
+          "solid_top_from_anchor": -261,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            9,
+            14,
+            153,
+            280
+          ],
+          "minimum_alpha_margin_px": 2
+        }
+      ]
+    },
+    {
+      "action": "punch_light",
+      "frames": 3,
+      "durations_ms": [
+        50,
+        83,
+        100
+      ],
+      "total_ms": 233,
+      "loop": false,
+      "status": "pass",
+      "notes": "Punho curto dentro da caixa; inclinação para golpe no corpo e retorno à guarda.",
+      "gif_durations_ms": [
+        50,
+        80,
+        500
+      ],
+      "frame_metrics": [
+        {
+          "name": "punch_light_00",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -2,
+          "alpha_bbox": [
+            62,
+            23,
+            223,
+            292
+          ],
+          "minimum_alpha_margin_px": 23
+        },
+        {
+          "name": "punch_light_01",
+          "solid_top_from_anchor": -235,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            27,
+            52,
+            228,
+            292
+          ],
+          "minimum_alpha_margin_px": 27
+        },
+        {
+          "name": "punch_light_02",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -2,
+          "alpha_bbox": [
+            41,
+            23,
+            202,
+            292
+          ],
+          "minimum_alpha_margin_px": 23
+        }
+      ]
+    },
+    {
+      "action": "punch_heavy",
+      "frames": 3,
+      "durations_ms": [
+        183,
+        167,
+        233
+      ],
+      "total_ms": 583,
+      "loop": false,
+      "status": "pass",
+      "notes": "Punho e alcance longo dentro da caixa; inclinação maior que no jab sem reescala entre chaves.",
+      "gif_durations_ms": [
+        180,
+        160,
+        630
+      ],
+      "frame_metrics": [
+        {
+          "name": "punch_heavy_00",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            72,
+            35,
+            235,
+            304
+          ],
+          "minimum_alpha_margin_px": 31
+        },
+        {
+          "name": "punch_heavy_01",
+          "solid_top_from_anchor": -218,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            20,
+            76,
+            277,
+            300
+          ],
+          "minimum_alpha_margin_px": 14
+        },
+        {
+          "name": "punch_heavy_02",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            54,
+            35,
+            215,
+            304
+          ],
+          "minimum_alpha_margin_px": 31
+        }
+      ]
+    },
+    {
+      "action": "kick",
+      "frames": 3,
+      "durations_ms": [
+        116,
+        117,
+        150
+      ],
+      "total_ms": 383,
+      "loop": false,
+      "status": "pass",
+      "notes": "Joelho arma, sola baixa entra na caixa e perna recolhe; pata de apoio permanece legível.",
+      "gif_durations_ms": [
+        110,
+        110,
+        550
+      ],
+      "frame_metrics": [
+        {
+          "name": "kick_00",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            70,
+            25,
+            210,
+            294
+          ],
+          "minimum_alpha_margin_px": 25
+        },
+        {
+          "name": "kick_01",
+          "solid_top_from_anchor": -245,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            54,
+            43,
+            246,
+            294
+          ],
+          "minimum_alpha_margin_px": 33
+        },
+        {
+          "name": "kick_02",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            52,
+            25,
+            185,
+            294
+          ],
+          "minimum_alpha_margin_px": 25
+        }
+      ]
+    },
+    {
+      "action": "sweep",
+      "frames": 3,
+      "durations_ms": [
+        166,
+        150,
+        217
+      ],
+      "total_ms": 533,
+      "loop": false,
+      "status": "pass_with_note",
+      "notes": "Sola dentro da caixa em altura; mão de apoio sólida fica 6 px acima da âncora e pata 1 px abaixo (ressalva de profundidade).",
+      "gif_durations_ms": [
+        160,
+        150,
+        610
+      ],
+      "frame_metrics": [
+        {
+          "name": "sweep_00",
+          "solid_top_from_anchor": -201,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            48,
+            88,
+            267,
+            295
+          ],
+          "minimum_alpha_margin_px": 30
+        },
+        {
+          "name": "sweep_01",
+          "solid_top_from_anchor": -182,
+          "solid_bottom_from_anchor": 1,
+          "alpha_bbox": [
+            18,
+            101,
+            279,
+            291
+          ],
+          "minimum_alpha_margin_px": 18
+        },
+        {
+          "name": "sweep_02",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            43,
+            34,
+            219,
+            304
+          ],
+          "minimum_alpha_margin_px": 34
+        }
+      ]
+    },
+    {
+      "action": "overhead",
+      "frames": 3,
+      "durations_ms": [
+        166,
+        100,
+        200
+      ],
+      "total_ms": 466,
+      "loop": false,
+      "status": "pass",
+      "notes": "Braço arma alto e punho desce até a caixa; recuperação retorna à guarda.",
+      "gif_durations_ms": [
+        160,
+        100,
+        600
+      ],
+      "frame_metrics": [
+        {
+          "name": "overhead_00",
+          "solid_top_from_anchor": -293,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            84,
+            20,
+            242,
+            318
+          ],
+          "minimum_alpha_margin_px": 20
+        },
+        {
+          "name": "overhead_01",
+          "solid_top_from_anchor": -254,
+          "solid_bottom_from_anchor": -2,
+          "alpha_bbox": [
+            42,
+            58,
+            245,
+            317
+          ],
+          "minimum_alpha_margin_px": 29
+        },
+        {
+          "name": "overhead_02",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            59,
+            49,
+            207,
+            317
+          ],
+          "minimum_alpha_margin_px": 29
+        }
+      ]
+    },
+    {
+      "action": "throw",
+      "frames": 3,
+      "durations_ms": [
+        100,
+        50,
+        216
+      ],
+      "total_ms": 366,
+      "loop": false,
+      "status": "pass",
+      "notes": "Duas mãos distintas com cotovelos dobrados; a mão frontal entra na caixa curta.",
+      "gif_durations_ms": [
+        100,
+        50,
+        610
+      ],
+      "frame_metrics": [
+        {
+          "name": "throw_00",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -2,
+          "alpha_bbox": [
+            63,
+            22,
+            227,
+            291
+          ],
+          "minimum_alpha_margin_px": 20
+        },
+        {
+          "name": "throw_01",
+          "solid_top_from_anchor": -259,
+          "solid_bottom_from_anchor": -2,
+          "alpha_bbox": [
+            56,
+            27,
+            209,
+            291
+          ],
+          "minimum_alpha_margin_px": 20
+        },
+        {
+          "name": "throw_02",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -2,
+          "alpha_bbox": [
+            44,
+            22,
+            192,
+            291
+          ],
+          "minimum_alpha_margin_px": 20
+        }
+      ]
+    },
+    {
+      "action": "anti_air",
+      "frames": 3,
+      "durations_ms": [
+        116,
+        134,
+        250
+      ],
+      "total_ms": 500,
+      "loop": false,
+      "status": "pass",
+      "notes": "Punho alto integralmente na caixa; extensão de pernas/tronco explica postura mais alta.",
+      "gif_durations_ms": [
+        110,
+        130,
+        650
+      ],
+      "frame_metrics": [
+        {
+          "name": "anti_air_00",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            42,
+            92,
+            231,
+            361
+          ],
+          "minimum_alpha_margin_px": 21
+        },
+        {
+          "name": "anti_air_01",
+          "solid_top_from_anchor": -329,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            44,
+            28,
+            241,
+            363
+          ],
+          "minimum_alpha_margin_px": 19
+        },
+        {
+          "name": "anti_air_02",
+          "solid_top_from_anchor": -266,
+          "solid_bottom_from_anchor": 0,
+          "alpha_bbox": [
+            33,
+            90,
+            218,
+            362
+          ],
+          "minimum_alpha_margin_px": 20
+        }
+      ]
+    },
+    {
+      "action": "air_punch",
+      "frames": 3,
+      "durations_ms": [
+        83,
+        150,
+        133
+      ],
+      "total_ms": 366,
+      "loop": false,
+      "status": "pass",
+      "notes": "Punho diagonal para baixo na caixa; perna traseira e mãos completas. Continuidade com jump v2 selecionada após comparação visual.",
+      "gif_durations_ms": [
+        80,
+        150,
+        530
+      ],
+      "frame_metrics": [
+        {
+          "name": "air_punch_00",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -13,
+          "alpha_bbox": [
+            21,
+            34,
+            191,
+            290
+          ],
+          "minimum_alpha_margin_px": 19
+        },
+        {
+          "name": "air_punch_01",
+          "solid_top_from_anchor": -243,
+          "solid_bottom_from_anchor": -23,
+          "alpha_bbox": [
+            20,
+            60,
+            259,
+            286
+          ],
+          "minimum_alpha_margin_px": 20
+        },
+        {
+          "name": "air_punch_02",
+          "solid_top_from_anchor": -263,
+          "solid_bottom_from_anchor": -27,
+          "alpha_bbox": [
+            36,
+            40,
+            181,
+            282
+          ],
+          "minimum_alpha_margin_px": 36
+        }
+      ]
+    },
+    {
+      "action": "air_kick",
+      "frames": 3,
+      "durations_ms": [
+        83,
+        133,
+        117
+      ],
+      "total_ms": 333,
+      "loop": false,
+      "status": "pass_with_note",
+      "notes": "Sola/pata na caixa; ponta da garra junto à borda frontal (~1 px). Continuidade com jump v2 selecionada após comparação visual.",
+      "gif_durations_ms": [
+        80,
+        130,
+        510
+      ],
+      "frame_metrics": [
+        {
+          "name": "air_kick_00",
+          "solid_top_from_anchor": -265,
+          "solid_bottom_from_anchor": -35,
+          "alpha_bbox": [
+            54,
+            26,
+            184,
+            263
+          ],
+          "minimum_alpha_margin_px": 26
+        },
+        {
+          "name": "air_kick_01",
+          "solid_top_from_anchor": -266,
+          "solid_bottom_from_anchor": -39,
+          "alpha_bbox": [
+            18,
+            37,
+            248,
+            271
+          ],
+          "minimum_alpha_margin_px": 18
+        },
+        {
+          "name": "air_kick_02",
+          "solid_top_from_anchor": -270,
+          "solid_bottom_from_anchor": -35,
+          "alpha_bbox": [
+            39,
+            29,
+            170,
+            271
+          ],
+          "minimum_alpha_margin_px": 29
+        }
+      ]
+    },
+    {
+      "action": "special",
+      "frames": 3,
+      "durations_ms": [
+        80,
+        80,
+        107
+      ],
+      "total_ms": 267,
+      "loop": false,
+      "status": "pass",
+      "notes": "Origem baseline de emissão toca a base externa da palma no primeiro quadro; projétil segue separado.",
+      "gif_durations_ms": [
+        80,
+        80,
+        500
+      ],
+      "frame_metrics": [
+        {
+          "name": "special_00",
+          "solid_top_from_anchor": -252,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            16,
+            48,
+            204,
+            305
+          ],
+          "minimum_alpha_margin_px": 4
+        },
+        {
+          "name": "special_01",
+          "solid_top_from_anchor": -260,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            11,
+            39,
+            216,
+            305
+          ],
+          "minimum_alpha_margin_px": 4
+        },
+        {
+          "name": "special_02",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -2,
+          "alpha_bbox": [
+            14,
+            36,
+            203,
+            305
+          ],
+          "minimum_alpha_margin_px": 4
+        }
+      ]
+    },
+    {
+      "action": "spawn",
+      "frames": 3,
+      "durations_ms": [
+        500,
+        700,
+        1500
+      ],
+      "total_ms": 2700,
+      "loop": false,
+      "status": "pass_with_note",
+      "notes": "Ajuste de faixa, reverência e guarda; pernas estendidas explicam altura inicial. O azul do último quadro é um pouco mais saturado que idle.",
+      "gif_durations_ms": [
+        500,
+        700,
+        1900
+      ],
+      "frame_metrics": [
+        {
+          "name": "spawn_00",
+          "solid_top_from_anchor": -279,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            55,
+            8,
+            182,
+            293
+          ],
+          "minimum_alpha_margin_px": 8
+        },
+        {
+          "name": "spawn_01",
+          "solid_top_from_anchor": -238,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            53,
+            49,
+            178,
+            292
+          ],
+          "minimum_alpha_margin_px": 19
+        },
+        {
+          "name": "spawn_02",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -2,
+          "alpha_bbox": [
+            21,
+            15,
+            163,
+            284
+          ],
+          "minimum_alpha_margin_px": 15
+        }
+      ]
+    },
+    {
+      "action": "victory",
+      "frames": 3,
+      "durations_ms": [
+        160,
+        200,
+        500
+      ],
+      "total_ms": 860,
+      "loop": false,
+      "status": "pass",
+      "notes": "Relaxamento, celebração e final contido; mãos/faces e apoio legíveis.",
+      "gif_durations_ms": [
+        160,
+        200,
+        900
+      ],
+      "frame_metrics": [
+        {
+          "name": "victory_00",
+          "solid_top_from_anchor": -268,
+          "solid_bottom_from_anchor": 0,
+          "alpha_bbox": [
+            61,
+            18,
+            191,
+            292
+          ],
+          "minimum_alpha_margin_px": 15
+        },
+        {
+          "name": "victory_01",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            45,
+            24,
+            195,
+            294
+          ],
+          "minimum_alpha_margin_px": 13
+        },
+        {
+          "name": "victory_02",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            29,
+            24,
+            161,
+            293
+          ],
+          "minimum_alpha_margin_px": 14
+        }
+      ]
+    },
+    {
+      "action": "defeat",
+      "frames": 3,
+      "durations_ms": [
+        160,
+        220,
+        660
+      ],
+      "total_ms": 1040,
+      "loop": false,
+      "status": "pass",
+      "notes": "Descida em duas etapas para apoio no chão, sem ampliar a pose final.",
+      "gif_durations_ms": [
+        160,
+        220,
+        1060
+      ],
+      "frame_metrics": [
+        {
+          "name": "defeat_00",
+          "solid_top_from_anchor": -264,
+          "solid_bottom_from_anchor": -2,
+          "alpha_bbox": [
+            44,
+            19,
+            149,
+            288
+          ],
+          "minimum_alpha_margin_px": 9
+        },
+        {
+          "name": "defeat_01",
+          "solid_top_from_anchor": -174,
+          "solid_bottom_from_anchor": -1,
+          "alpha_bbox": [
+            14,
+            95,
+            176,
+            275
+          ],
+          "minimum_alpha_margin_px": 14
+        },
+        {
+          "name": "defeat_02",
+          "solid_top_from_anchor": -136,
+          "solid_bottom_from_anchor": -2,
+          "alpha_bbox": [
+            8,
+            145,
+            162,
+            286
+          ],
+          "minimum_alpha_margin_px": 8
+        }
+      ]
+    }
+  ],
+  "native_validation": {
+    "status": "recapture_in_progress_by_other_agent",
+    "owner": "verification_pipeline and root",
+    "scope": "Promoted canonical jump-v2 export; previous World snapshot preserved for comparison. This independent review does not claim execution or completion of the new native run."
+  },
+  "previous_reviewed_assets": {
+    "manifest": "assets/candidates/go/go-fighter.sprite.json",
+    "manifest_sha256": "b865f26b9cd586c27f5ddecfdae47979ca14b55717c50494753432095409550f",
+    "atlas": "assets/candidates/go/go-fighter-atlas.png",
+    "atlas_sha256": "535bda2c604dfaec68fcbf157451c7a55dfc5a69e6adbdf61ffcadfc14972060",
+    "master_sha256": "8fa19c0e7a4183a9e9354351c810abc5610551fd8eb5e9a24c745b17262cf0aa"
+  },
+  "post_jump_promotion_comparison": {
+    "before_snapshot_directory": "assets/candidates/go/review/refinement-2026-09-07/world-before-jump-refinement/runtime-assets",
+    "after_directory": "assets/candidates/go",
+    "comparison_method": "Crop each named frame using its own manifest rect; compare dimensions and SHA256 of every decoded RGBA byte including transparent pixels. Compare complete frame metadata for all non-jump frames.",
+    "unchanged_nonjump_count": 57,
+    "changed_jump_count": 3,
+    "all_57_nonjump_pixels_identical": true,
+    "all_57_nonjump_frame_metadata_identical": true,
+    "clip_order_names_and_loop_settings_identical": true,
+    "manifest_scale_unchanged": true,
+    "before_manifest_sha256": "b865f26b9cd586c27f5ddecfdae47979ca14b55717c50494753432095409550f",
+    "before_atlas_sha256": "535bda2c604dfaec68fcbf157451c7a55dfc5a69e6adbdf61ffcadfc14972060",
+    "after_hashes": {
+      "assets/candidates/go/go-fighter.sprite.json": "fc5560a0478019b1a45ef13cde21c34c177d12ff345ad373993913c5eab2e4da",
+      "assets/candidates/go/go-fighter-atlas.png": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028"
+    },
+    "frames": [
+      {
+        "frame": "idle_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "cc853e6258513acc46b88c35a1c3dd28bb9dbe65150da29a6f7da7b773fee70f",
+        "after_rgba_sha256": "cc853e6258513acc46b88c35a1c3dd28bb9dbe65150da29a6f7da7b773fee70f",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "idle_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "f7a5ea956fb79c31d91eac713604189664f90e9caf5f9b29d82a5461596ad4ab",
+        "after_rgba_sha256": "f7a5ea956fb79c31d91eac713604189664f90e9caf5f9b29d82a5461596ad4ab",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "idle_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "55e713ae288bba3cffb6bbdf3576337dba0c8a687708232feb39501ebd27ec15",
+        "after_rgba_sha256": "55e713ae288bba3cffb6bbdf3576337dba0c8a687708232feb39501ebd27ec15",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "walk_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "147509c2319f3002675061a92f36247d8fdbaf97b5eb190cb7698a3433da792d",
+        "after_rgba_sha256": "147509c2319f3002675061a92f36247d8fdbaf97b5eb190cb7698a3433da792d",
+        "before_dimensions": [
+          231,
+          308
+        ],
+        "after_dimensions": [
+          231,
+          308
+        ]
+      },
+      {
+        "frame": "walk_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "79fd28c848a0d62b0c28a9e1faba1ced55b28d77a0c9b8680fb8697e892560af",
+        "after_rgba_sha256": "79fd28c848a0d62b0c28a9e1faba1ced55b28d77a0c9b8680fb8697e892560af",
+        "before_dimensions": [
+          231,
+          308
+        ],
+        "after_dimensions": [
+          231,
+          308
+        ]
+      },
+      {
+        "frame": "walk_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "a97620cf4f068f33838a1cc218e191f2aa37a8f463d6f99995ada290b768fd15",
+        "after_rgba_sha256": "a97620cf4f068f33838a1cc218e191f2aa37a8f463d6f99995ada290b768fd15",
+        "before_dimensions": [
+          231,
+          308
+        ],
+        "after_dimensions": [
+          231,
+          308
+        ]
+      },
+      {
+        "frame": "walk_03",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "29120cf0e79957b55749ace986d5b42df903005b6becdec26b29426e6b4bd388",
+        "after_rgba_sha256": "29120cf0e79957b55749ace986d5b42df903005b6becdec26b29426e6b4bd388",
+        "before_dimensions": [
+          231,
+          308
+        ],
+        "after_dimensions": [
+          231,
+          308
+        ]
+      },
+      {
+        "frame": "jump_00",
+        "pixels_equal": false,
+        "metadata_equal": false,
+        "before_rgba_sha256": "9ee9129439783bde489e962e28c7035fd1a1b3643d52a0bf6f127a457aebe65a",
+        "after_rgba_sha256": "58ba445e836310f2640f00d1b7a1a5be30c002dfb66170c8f56638379d95f1ff",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          232,
+          309
+        ]
+      },
+      {
+        "frame": "jump_01",
+        "pixels_equal": false,
+        "metadata_equal": false,
+        "before_rgba_sha256": "04ca09aecb485ef4e97f9a300d9da982164e9fc8c282f74292e3c07a77dd8f29",
+        "after_rgba_sha256": "bff74ddc90820e62a0ed811003e82089f1702b496c56ae4884d63ac430e874cc",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          232,
+          309
+        ]
+      },
+      {
+        "frame": "jump_02",
+        "pixels_equal": false,
+        "metadata_equal": false,
+        "before_rgba_sha256": "2afd2624861b952c83be7ed7920c5441907154b4aacc334a36347b5ec31e803d",
+        "after_rgba_sha256": "37c08a0b06e8ecb589ca29a45ac1ad3a556fed17acc82b51c4339537978f7b6d",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          232,
+          309
+        ]
+      },
+      {
+        "frame": "crouch_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "821ec6bdbf81d547ea06d35e1f320c7019a4b8d719941883f358ad507ddbd77c",
+        "after_rgba_sha256": "821ec6bdbf81d547ea06d35e1f320c7019a4b8d719941883f358ad507ddbd77c",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "crouch_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "d0408a4a979a8ec351fd31bc06afaa54589a1ab132bdb48a50067637decd89f8",
+        "after_rgba_sha256": "d0408a4a979a8ec351fd31bc06afaa54589a1ab132bdb48a50067637decd89f8",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "block_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "35140566af1239f726e9fc68582a74a50aa576a77a75bc3116892c90ce4ac8bc",
+        "after_rgba_sha256": "35140566af1239f726e9fc68582a74a50aa576a77a75bc3116892c90ce4ac8bc",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "block_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "b6308a3ed4acd1913bc9ea453ee4050eb4df2f0f6f7e6dfbdc54020307bf73d9",
+        "after_rgba_sha256": "b6308a3ed4acd1913bc9ea453ee4050eb4df2f0f6f7e6dfbdc54020307bf73d9",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "block_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "6d07e9790a29842d3ccb6b3dc37ebb5e2b01d171b7421096d576972cd3a88c9e",
+        "after_rgba_sha256": "6d07e9790a29842d3ccb6b3dc37ebb5e2b01d171b7421096d576972cd3a88c9e",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "crouch_block_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "0d51b840e9dc6888973186084254209aa59e2812638b9785691c51117a26282c",
+        "after_rgba_sha256": "0d51b840e9dc6888973186084254209aa59e2812638b9785691c51117a26282c",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "crouch_block_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "178eed2a86b07a28cab32bf18a0da9f0b51a5b6f389ea89a83a354feb046a850",
+        "after_rgba_sha256": "178eed2a86b07a28cab32bf18a0da9f0b51a5b6f389ea89a83a354feb046a850",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "crouch_block_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "cffc423113e00612f972aee3781dffddc13619b2c7ebc8ee89671659ad593423",
+        "after_rgba_sha256": "cffc423113e00612f972aee3781dffddc13619b2c7ebc8ee89671659ad593423",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "hit_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "2d21de078472642772ae0486cbd418e9468368c61c8ca96a96f52b32bcc2ff8d",
+        "after_rgba_sha256": "2d21de078472642772ae0486cbd418e9468368c61c8ca96a96f52b32bcc2ff8d",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "hit_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "98be5bc9e53d1d3d55972006a3486f99a7078ae3f8fc24c78a21f92dbd732b7e",
+        "after_rgba_sha256": "98be5bc9e53d1d3d55972006a3486f99a7078ae3f8fc24c78a21f92dbd732b7e",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "hit_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "d4f99d78cc80cfc9d5850858fe7a06ba4390df479815cb3c8fc13dd5251d8e01",
+        "after_rgba_sha256": "d4f99d78cc80cfc9d5850858fe7a06ba4390df479815cb3c8fc13dd5251d8e01",
+        "before_dimensions": [
+          211,
+          282
+        ],
+        "after_dimensions": [
+          211,
+          282
+        ]
+      },
+      {
+        "frame": "punch_light_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "e27988f87ddb6f44176a4180a838cb371ab3ead7f77392f9f9e1e84d24b8d21d",
+        "after_rgba_sha256": "e27988f87ddb6f44176a4180a838cb371ab3ead7f77392f9f9e1e84d24b8d21d",
+        "before_dimensions": [
+          280,
+          322
+        ],
+        "after_dimensions": [
+          280,
+          322
+        ]
+      },
+      {
+        "frame": "punch_light_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "4ce21a07f0fcc29622b18ad78b415a745a8d9fb20dc2e84088e272a84d0cff0d",
+        "after_rgba_sha256": "4ce21a07f0fcc29622b18ad78b415a745a8d9fb20dc2e84088e272a84d0cff0d",
+        "before_dimensions": [
+          280,
+          322
+        ],
+        "after_dimensions": [
+          280,
+          322
+        ]
+      },
+      {
+        "frame": "punch_light_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "67bbb41abea78224930c3fba434a275d9ff1aa3d060559c30cedc6fce56290d9",
+        "after_rgba_sha256": "67bbb41abea78224930c3fba434a275d9ff1aa3d060559c30cedc6fce56290d9",
+        "before_dimensions": [
+          280,
+          322
+        ],
+        "after_dimensions": [
+          280,
+          322
+        ]
+      },
+      {
+        "frame": "punch_heavy_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "3a9af7cf0d0ee38cc5178dabc16e7b6badde02b6cd3c20050a32b4725f57afaa",
+        "after_rgba_sha256": "3a9af7cf0d0ee38cc5178dabc16e7b6badde02b6cd3c20050a32b4725f57afaa",
+        "before_dimensions": [
+          291,
+          335
+        ],
+        "after_dimensions": [
+          291,
+          335
+        ]
+      },
+      {
+        "frame": "punch_heavy_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "006cb1f6d05bd675744feefb0ebfe7eb2ce578bef6214e6f23ea1b0d84cbdbba",
+        "after_rgba_sha256": "006cb1f6d05bd675744feefb0ebfe7eb2ce578bef6214e6f23ea1b0d84cbdbba",
+        "before_dimensions": [
+          291,
+          335
+        ],
+        "after_dimensions": [
+          291,
+          335
+        ]
+      },
+      {
+        "frame": "punch_heavy_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "7cf6e3e053f5f1e85181875445178fe6d1629a179d4ee8792feba7518cae1e0d",
+        "after_rgba_sha256": "7cf6e3e053f5f1e85181875445178fe6d1629a179d4ee8792feba7518cae1e0d",
+        "before_dimensions": [
+          291,
+          335
+        ],
+        "after_dimensions": [
+          291,
+          335
+        ]
+      },
+      {
+        "frame": "kick_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "47c00ea607e495f37d1fccfa46640fe5378cd8c7bba8a5d8900f306d15f10713",
+        "after_rgba_sha256": "47c00ea607e495f37d1fccfa46640fe5378cd8c7bba8a5d8900f306d15f10713",
+        "before_dimensions": [
+          285,
+          327
+        ],
+        "after_dimensions": [
+          285,
+          327
+        ]
+      },
+      {
+        "frame": "kick_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "6e82ceffae65c7da5d06176f81acea47162216af828f83330e7276b8270bdae0",
+        "after_rgba_sha256": "6e82ceffae65c7da5d06176f81acea47162216af828f83330e7276b8270bdae0",
+        "before_dimensions": [
+          285,
+          327
+        ],
+        "after_dimensions": [
+          285,
+          327
+        ]
+      },
+      {
+        "frame": "kick_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "af585e52febbb92cd60ef4fbbea1cd97de470e5caa9e9a7f81409eb007546492",
+        "after_rgba_sha256": "af585e52febbb92cd60ef4fbbea1cd97de470e5caa9e9a7f81409eb007546492",
+        "before_dimensions": [
+          285,
+          327
+        ],
+        "after_dimensions": [
+          285,
+          327
+        ]
+      },
+      {
+        "frame": "sweep_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "240f5740818831e99407b448ccc647cd0c9bfd2192146f0dd9505c4de4f82de8",
+        "after_rgba_sha256": "240f5740818831e99407b448ccc647cd0c9bfd2192146f0dd9505c4de4f82de8",
+        "before_dimensions": [
+          297,
+          341
+        ],
+        "after_dimensions": [
+          297,
+          341
+        ]
+      },
+      {
+        "frame": "sweep_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "0094f17b1d6ff4e5381cadfc1ca5ca002bfd1feeeb7ea9bd368f3356530dccca",
+        "after_rgba_sha256": "0094f17b1d6ff4e5381cadfc1ca5ca002bfd1feeeb7ea9bd368f3356530dccca",
+        "before_dimensions": [
+          297,
+          341
+        ],
+        "after_dimensions": [
+          297,
+          341
+        ]
+      },
+      {
+        "frame": "sweep_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "50801b4ae36f1d135ffb54203c779c2d674dc45f18d2371c299363bb5223aedd",
+        "after_rgba_sha256": "50801b4ae36f1d135ffb54203c779c2d674dc45f18d2371c299363bb5223aedd",
+        "before_dimensions": [
+          297,
+          341
+        ],
+        "after_dimensions": [
+          297,
+          341
+        ]
+      },
+      {
+        "frame": "overhead_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "0f2ccd7c8d75012c91dae456bfb8a711b27ad1e5267e8e8149c5cbd27cee35dc",
+        "after_rgba_sha256": "0f2ccd7c8d75012c91dae456bfb8a711b27ad1e5267e8e8149c5cbd27cee35dc",
+        "before_dimensions": [
+          301,
+          346
+        ],
+        "after_dimensions": [
+          301,
+          346
+        ]
+      },
+      {
+        "frame": "overhead_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "2bb60bddd45ff97e448beae675842191dbf28a3b700a46c0cf54bc7158a7efca",
+        "after_rgba_sha256": "2bb60bddd45ff97e448beae675842191dbf28a3b700a46c0cf54bc7158a7efca",
+        "before_dimensions": [
+          301,
+          346
+        ],
+        "after_dimensions": [
+          301,
+          346
+        ]
+      },
+      {
+        "frame": "overhead_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "4c57ec58357c3e5c78c46f273158bad58322c542c7432461c9f645e4bb295381",
+        "after_rgba_sha256": "4c57ec58357c3e5c78c46f273158bad58322c542c7432461c9f645e4bb295381",
+        "before_dimensions": [
+          301,
+          346
+        ],
+        "after_dimensions": [
+          301,
+          346
+        ]
+      },
+      {
+        "frame": "throw_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "4db6b2eaacc5498d3b09d84b517889315bed056c8d3aded0ae0e18a903ffcf2d",
+        "after_rgba_sha256": "4db6b2eaacc5498d3b09d84b517889315bed056c8d3aded0ae0e18a903ffcf2d",
+        "before_dimensions": [
+          271,
+          311
+        ],
+        "after_dimensions": [
+          271,
+          311
+        ]
+      },
+      {
+        "frame": "throw_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "4799ed14496100c6eeb523e384326175653fad14574863027d4dfbe9ba530555",
+        "after_rgba_sha256": "4799ed14496100c6eeb523e384326175653fad14574863027d4dfbe9ba530555",
+        "before_dimensions": [
+          271,
+          311
+        ],
+        "after_dimensions": [
+          271,
+          311
+        ]
+      },
+      {
+        "frame": "throw_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "1f6b4ffd26327785792d95969e9e7fd0be54b8a02bf62b3c554f159985e29a5d",
+        "after_rgba_sha256": "1f6b4ffd26327785792d95969e9e7fd0be54b8a02bf62b3c554f159985e29a5d",
+        "before_dimensions": [
+          271,
+          311
+        ],
+        "after_dimensions": [
+          271,
+          311
+        ]
+      },
+      {
+        "frame": "anti_air_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "e8d7c60f993ccc1fbeea06825f7fc60315331341b726840a4d82c92b87c457d0",
+        "after_rgba_sha256": "e8d7c60f993ccc1fbeea06825f7fc60315331341b726840a4d82c92b87c457d0",
+        "before_dimensions": [
+          286,
+          382
+        ],
+        "after_dimensions": [
+          286,
+          382
+        ]
+      },
+      {
+        "frame": "anti_air_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "b32668e4a80915ad3f1cebdfabf515406a5da30af39663ea3e71f5123a1ebcbb",
+        "after_rgba_sha256": "b32668e4a80915ad3f1cebdfabf515406a5da30af39663ea3e71f5123a1ebcbb",
+        "before_dimensions": [
+          286,
+          382
+        ],
+        "after_dimensions": [
+          286,
+          382
+        ]
+      },
+      {
+        "frame": "anti_air_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "038fb1e3af0d131e4a6eb1e0956e2cb6102277d5ff4b6bb45a605cc031bf9505",
+        "after_rgba_sha256": "038fb1e3af0d131e4a6eb1e0956e2cb6102277d5ff4b6bb45a605cc031bf9505",
+        "before_dimensions": [
+          286,
+          382
+        ],
+        "after_dimensions": [
+          286,
+          382
+        ]
+      },
+      {
+        "frame": "air_punch_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "81f68e3893bd791827f2cfbbbe4164fbeb6fc379c765c80771a40b553cb0d796",
+        "after_rgba_sha256": "81f68e3893bd791827f2cfbbbe4164fbeb6fc379c765c80771a40b553cb0d796",
+        "before_dimensions": [
+          210,
+          325
+        ],
+        "after_dimensions": [
+          210,
+          325
+        ]
+      },
+      {
+        "frame": "air_punch_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "7a11278ab10967b2c1679d9440c705e7429f1b814dbecfc350c4cdb5ba9bfb77",
+        "after_rgba_sha256": "7a11278ab10967b2c1679d9440c705e7429f1b814dbecfc350c4cdb5ba9bfb77",
+        "before_dimensions": [
+          280,
+          325
+        ],
+        "after_dimensions": [
+          280,
+          325
+        ]
+      },
+      {
+        "frame": "air_punch_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "797ef2ea61df7c492bbe8f83bf36799859ea1fd751dceefe46b9a1669554045a",
+        "after_rgba_sha256": "797ef2ea61df7c492bbe8f83bf36799859ea1fd751dceefe46b9a1669554045a",
+        "before_dimensions": [
+          241,
+          325
+        ],
+        "after_dimensions": [
+          241,
+          325
+        ]
+      },
+      {
+        "frame": "air_kick_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "70973c8bbb0df8975c7ad46dc6257384e8cb2689b3eecf07bac937c719fbde57",
+        "after_rgba_sha256": "70973c8bbb0df8975c7ad46dc6257384e8cb2689b3eecf07bac937c719fbde57",
+        "before_dimensions": [
+          240,
+          334
+        ],
+        "after_dimensions": [
+          240,
+          334
+        ]
+      },
+      {
+        "frame": "air_kick_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "7e1e2592a7be88d81882049aac1883343219b658e1ecdb19a44fe6c88b390164",
+        "after_rgba_sha256": "7e1e2592a7be88d81882049aac1883343219b658e1ecdb19a44fe6c88b390164",
+        "before_dimensions": [
+          280,
+          334
+        ],
+        "after_dimensions": [
+          280,
+          334
+        ]
+      },
+      {
+        "frame": "air_kick_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "f7c622b18220b967c4548489ed97cfa7a170305e2b8f70b2aa095da6f17dd03a",
+        "after_rgba_sha256": "f7c622b18220b967c4548489ed97cfa7a170305e2b8f70b2aa095da6f17dd03a",
+        "before_dimensions": [
+          232,
+          334
+        ],
+        "after_dimensions": [
+          232,
+          334
+        ]
+      },
+      {
+        "frame": "special_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "fc4cc0b6e63ee58a89638dc8931ba91b33c28325698d361dbc06a5df190ebecc",
+        "after_rgba_sha256": "fc4cc0b6e63ee58a89638dc8931ba91b33c28325698d361dbc06a5df190ebecc",
+        "before_dimensions": [
+          236,
+          309
+        ],
+        "after_dimensions": [
+          236,
+          309
+        ]
+      },
+      {
+        "frame": "special_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "61dbc43b3cfa2433d6fc7e1ed0e8453558ac324ee3931865ec22eb6b636fa75a",
+        "after_rgba_sha256": "61dbc43b3cfa2433d6fc7e1ed0e8453558ac324ee3931865ec22eb6b636fa75a",
+        "before_dimensions": [
+          236,
+          309
+        ],
+        "after_dimensions": [
+          236,
+          309
+        ]
+      },
+      {
+        "frame": "special_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "ea5ad8c07004b91544027a2d002879f0e9a7e1c48d67c960cebfae0f84273b5e",
+        "after_rgba_sha256": "ea5ad8c07004b91544027a2d002879f0e9a7e1c48d67c960cebfae0f84273b5e",
+        "before_dimensions": [
+          237,
+          309
+        ],
+        "after_dimensions": [
+          237,
+          309
+        ]
+      },
+      {
+        "frame": "spawn_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "88b0fd8b1ec8cd779b6db27ca8d5cb8ccb6c10b08587b2d615e920cef4fc3018",
+        "after_rgba_sha256": "88b0fd8b1ec8cd779b6db27ca8d5cb8ccb6c10b08587b2d615e920cef4fc3018",
+        "before_dimensions": [
+          233,
+          311
+        ],
+        "after_dimensions": [
+          233,
+          311
+        ]
+      },
+      {
+        "frame": "spawn_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "890e4fdd50f7db1cb4156bbdf4897a5cafe35b8a2d557411f195d909081f5226",
+        "after_rgba_sha256": "890e4fdd50f7db1cb4156bbdf4897a5cafe35b8a2d557411f195d909081f5226",
+        "before_dimensions": [
+          233,
+          311
+        ],
+        "after_dimensions": [
+          233,
+          311
+        ]
+      },
+      {
+        "frame": "spawn_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "a6bd760314167b51fb6be86a96f11e1da893410100bceac3320b939b5eb3b251",
+        "after_rgba_sha256": "a6bd760314167b51fb6be86a96f11e1da893410100bceac3320b939b5eb3b251",
+        "before_dimensions": [
+          233,
+          311
+        ],
+        "after_dimensions": [
+          233,
+          311
+        ]
+      },
+      {
+        "frame": "victory_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "8279463d2d81b7d8407f37728dc269cfd5559cbdb71646104af55275677569d7",
+        "after_rgba_sha256": "8279463d2d81b7d8407f37728dc269cfd5559cbdb71646104af55275677569d7",
+        "before_dimensions": [
+          230,
+          307
+        ],
+        "after_dimensions": [
+          230,
+          307
+        ]
+      },
+      {
+        "frame": "victory_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "b5b4c5c1785c19d2fda97e839e0d7ac1f14245bfe62302ad18694a8e4518411d",
+        "after_rgba_sha256": "b5b4c5c1785c19d2fda97e839e0d7ac1f14245bfe62302ad18694a8e4518411d",
+        "before_dimensions": [
+          230,
+          307
+        ],
+        "after_dimensions": [
+          230,
+          307
+        ]
+      },
+      {
+        "frame": "victory_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "f7bbfeaa76d17514410e683039b3a30e79e8481ea4134ba61f543d374115c52c",
+        "after_rgba_sha256": "f7bbfeaa76d17514410e683039b3a30e79e8481ea4134ba61f543d374115c52c",
+        "before_dimensions": [
+          230,
+          307
+        ],
+        "after_dimensions": [
+          230,
+          307
+        ]
+      },
+      {
+        "frame": "defeat_00",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "60770dbeacbc9b1e0dcd51807156d30f5c3d83aa60506514686124e560d1c882",
+        "after_rgba_sha256": "60770dbeacbc9b1e0dcd51807156d30f5c3d83aa60506514686124e560d1c882",
+        "before_dimensions": [
+          223,
+          297
+        ],
+        "after_dimensions": [
+          223,
+          297
+        ]
+      },
+      {
+        "frame": "defeat_01",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "182e5e7eca060b32f4566b349a3297f2bff1b73bedcae9c472f4437bac5d22e9",
+        "after_rgba_sha256": "182e5e7eca060b32f4566b349a3297f2bff1b73bedcae9c472f4437bac5d22e9",
+        "before_dimensions": [
+          223,
+          297
+        ],
+        "after_dimensions": [
+          223,
+          297
+        ]
+      },
+      {
+        "frame": "defeat_02",
+        "pixels_equal": true,
+        "metadata_equal": true,
+        "before_rgba_sha256": "08c516deea62b43961367ff17261b780d75a18bdc95a4d493ab8103116c3a196",
+        "after_rgba_sha256": "08c516deea62b43961367ff17261b780d75a18bdc95a4d493ab8103116c3a196",
+        "before_dimensions": [
+          223,
+          297
+        ],
+        "after_dimensions": [
+          223,
+          297
+        ]
+      }
+    ]
+  }
+}

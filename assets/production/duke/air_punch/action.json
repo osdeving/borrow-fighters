@@ -1,0 +1,52 @@
+{
+  "sheet": "air_punch/keyed.png",
+  "reviewed": true,
+  "loop": false,
+  "frames": [
+    {
+      "name": "air_punch_00",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 704,
+        "h": 736
+      },
+      "pivot": {
+        "x": 390,
+        "y": 663
+      },
+      "duration_ms": 83,
+      "phase": "startup"
+    },
+    {
+      "name": "air_punch_01",
+      "source_rect": {
+        "x": 704,
+        "y": 0,
+        "w": 680,
+        "h": 768
+      },
+      "pivot": {
+        "x": 311,
+        "y": 750
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "air_punch_02",
+      "source_rect": {
+        "x": 1384,
+        "y": 0,
+        "w": 664,
+        "h": 736
+      },
+      "pivot": {
+        "x": 266,
+        "y": 690
+      },
+      "duration_ms": 133,
+      "phase": "recovery"
+    }
+  ]
+}

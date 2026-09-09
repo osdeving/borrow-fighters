@@ -1,0 +1,104 @@
+{
+  "schema": "borrow-fighters.signature-fx-production.v1",
+  "character": "cpp",
+  "generator": "builtin imagegen",
+  "notes": "Six explicitly selected generated frames. One uniform scale per clip; actor atlas is separate. Local magenta key authorized in production README. Additional transparent padding accommodates ground anchor; no runtime auto-fit. Cpp projectile is anchored at rocket body center. Python impact collapses around vortex midheight with a ground anchor. Original rejected variants remain available. Both rocket frames have a painted downward angle of24degrees (measured rear axis~316,256 to nose490,331); renderer subtracts24degrees before rotation to physical velocity. Rocket pivot is the body center, flame trail extends behind it. Red-only boundary matte cleanup preserves blue/gold effects; original and first keyed PNGs remain available.",
+  "frames": [
+    {
+      "sheet": "keyed-extraordinary-v1-edge-clean.png",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 539,
+        "h": 486
+      },
+      "pivot_source": {
+        "x": 369,
+        "y": 275
+      },
+      "duration_ms": 70,
+      "clip": "projectile",
+      "scale": 0.2857142857142857
+    },
+    {
+      "sheet": "keyed-extraordinary-v1-edge-clean.png",
+      "source_rect": {
+        "x": 539,
+        "y": 0,
+        "w": 540,
+        "h": 486
+      },
+      "pivot_source": {
+        "x": 915,
+        "y": 281
+      },
+      "duration_ms": 70,
+      "clip": "projectile",
+      "scale": 0.2857142857142857
+    },
+    {
+      "sheet": "keyed-extraordinary-v2-edge-clean.png",
+      "source_rect": {
+        "x": 0,
+        "y": 640,
+        "w": 400,
+        "h": 331
+      },
+      "pivot_source": {
+        "x": 200,
+        "y": 895
+      },
+      "duration_ms": 35,
+      "clip": "impact",
+      "scale": 0.8525798525798526
+    },
+    {
+      "sheet": "keyed-extraordinary-v2-edge-clean.png",
+      "source_rect": {
+        "x": 400,
+        "y": 640,
+        "w": 412,
+        "h": 331
+      },
+      "pivot_source": {
+        "x": 608,
+        "y": 895
+      },
+      "duration_ms": 55,
+      "clip": "impact",
+      "scale": 0.8525798525798526
+    },
+    {
+      "sheet": "keyed-extraordinary-v2-edge-clean.png",
+      "source_rect": {
+        "x": 812,
+        "y": 640,
+        "w": 418,
+        "h": 331
+      },
+      "pivot_source": {
+        "x": 1021,
+        "y": 895
+      },
+      "duration_ms": 50,
+      "clip": "impact",
+      "scale": 0.8525798525798526
+    },
+    {
+      "sheet": "keyed-extraordinary-v2-edge-clean.png",
+      "source_rect": {
+        "x": 1230,
+        "y": 640,
+        "w": 389,
+        "h": 331
+      },
+      "pivot_source": {
+        "x": 1425,
+        "y": 895
+      },
+      "duration_ms": 43,
+      "clip": "impact",
+      "scale": 0.8525798525798526
+    }
+  ]
+}

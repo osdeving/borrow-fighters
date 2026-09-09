@@ -6,6 +6,14 @@ import type {
   ValidationIssue,
 } from "./types";
 
+// Runtime pixels at 1280×720; keep aligned with docs/17 visual idle metrics.
+export const VISUAL_SCALE_TARGET = {
+  minWidth: 147,
+  maxWidth: 200,
+  minHeight: 247,
+  maxHeight: 280,
+} as const;
+
 export function validateManifest(manifest: SpriteManifest | null): ValidationIssue[] {
   if (!manifest) {
     return [{ severity: "error", message: "No manifest loaded." }];
@@ -72,8 +80,8 @@ export function visualScaleSummary(frame: SpriteFrame | null, scale: number) {
   }
   const width = bounds.w * scale;
   const height = bounds.h * scale;
-  const heightOk = height >= 185 && height <= 210;
-  const widthOk = width >= 110 && width <= 150;
+  const heightOk = height >= VISUAL_SCALE_TARGET.minHeight && height <= VISUAL_SCALE_TARGET.maxHeight;
+  const widthOk = width >= VISUAL_SCALE_TARGET.minWidth && width <= VISUAL_SCALE_TARGET.maxWidth;
   return {
     width,
     height,
@@ -81,8 +89,8 @@ export function visualScaleSummary(frame: SpriteFrame | null, scale: number) {
     widthOk,
     message:
       heightOk && widthOk
-        ? "Inside current Rust/C visual target."
-        : "Outside current target; adjust atlas art, pivot or manifest scale before gameplay boxes.",
+        ? "Inside current idle visual target."
+        : "Outside idle target; compare the standing silhouette before adjusting art or scale. Combat boxes are separate.",
   };
 }
 

@@ -1,0 +1,90 @@
+{
+  "action": "punch_heavy",
+  "source": "punch_heavy/source-v3.png",
+  "sheet": "punch_heavy/keyed-v3.png",
+  "loop": false,
+  "reviewed": true,
+  "status": "finalization refinement visually accepted by primary agent; native World/Lab and default application match complete",
+  "source_body_height_reference_px": 520,
+  "frames": [
+    {
+      "name": "punch_heavy_0",
+      "source_rect": {
+        "x": 0,
+        "y": 0,
+        "w": 550,
+        "h": 627
+      },
+      "pivot": {
+        "x": 312,
+        "y": 580
+      },
+      "duration_ms": 200,
+      "phase": "startup"
+    },
+    {
+      "name": "punch_heavy_1",
+      "source_rect": {
+        "x": 550,
+        "y": 0,
+        "w": 704,
+        "h": 627
+      },
+      "pivot": {
+        "x": 355,
+        "y": 578
+      },
+      "duration_ms": 150,
+      "phase": "active"
+    },
+    {
+      "name": "punch_heavy_2",
+      "source_rect": {
+        "x": 0,
+        "y": 627,
+        "w": 627,
+        "h": 627
+      },
+      "pivot": {
+        "x": 347,
+        "y": 545
+      },
+      "duration_ms": 140,
+      "phase": "recovery"
+    },
+    {
+      "name": "punch_heavy_3",
+      "source_rect": {
+        "x": 627,
+        "y": 627,
+        "w": 627,
+        "h": 627
+      },
+      "pivot": {
+        "x": 325,
+        "y": 550
+      },
+      "duration_ms": 143,
+      "phase": "recovery"
+    }
+  ],
+  "review_notes": "v3: longer two-hand book strike, retract and settle; timing200/150/283ms retained as200/150/140/143ms. Page contact center inside baseline active band; upper edge around11px above it. v4/v5 too low and v6 too high rejected. Native Lab and complete World reviewed, root accepted refinement.",
+  "combat_timing": {
+    "move_id": "CUnsafePoke",
+    "input": "HeavyPunch",
+    "duration": 38,
+    "active_start": 12,
+    "active_end_inclusive": 20,
+    "whiff_recovery": 13,
+    "clip": "punch_heavy"
+  },
+  "runtime_review": {
+    "world_summary": "../../candidates/c/review/refinement-2026-09-07/world/capture-summary.json",
+    "lab_report": "../../candidates/c/review/refinement-2026-09-07/lab/capture-report.json",
+    "loaded_manifest_matches_candidate": true,
+    "combat_uses_baseline_manifest": true,
+    "clip_captured_in_filtered_lab": true,
+    "final_art_approved": true,
+    "approval_scope": "Three refinements accepted by primary agent after contact review and default-app C versus Python match; full World review completed."
+  }
+}

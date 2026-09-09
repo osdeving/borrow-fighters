@@ -1,0 +1,358 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-09-09",
+  "reviewer": "/root/recover_scope",
+  "reviewer_role": "Python reaction asset author performing final integration visual QA",
+  "result": "pass_for_reviewed_samples",
+  "method": "Read-only visual inspection with view_image of actual 1280x720 game framebuffer screenshots from the completed reverse capture. No continuous video was watched in this review.",
+  "capture_directory": "/tmp/borrow25-final-reverse",
+  "capture_report": {
+    "path": "/tmp/borrow25-final-reverse/pair-reaction-review.json",
+    "sha256": "5be1494ad19aec30d79b96386ebd0125ce18f9c05404865c5d4ec9833a6e2b76"
+  },
+  "assets": [
+    {
+      "path": "assets/candidates/python/python-fighter.sprite.json",
+      "sha256": "d0bcdbd5b33ade9d4e780e72b0b153d7dad09b263f487b6fbbd6a569f3aa9ed4"
+    },
+    {
+      "path": "assets/candidates/python/python-reactions-atlas.png",
+      "sha256": "368c6fba0c6d352b73e7b759f0f949d9baab9b87dc666c688f192da1a5080fc2"
+    }
+  ],
+  "scope": {
+    "defender": "python",
+    "attacker": "cpp",
+    "capture_variant": "reverse / left",
+    "filename_interpretation": "cpp-Attack(...) files show C++ attacking Python; python-*Block files show Python defending against C++. The role-specific filenames, not only the prefix, define the defender.",
+    "attack_scenarios": [
+      "LightPunch",
+      "HeavyPunch",
+      "Kick",
+      "Overhead",
+      "Sweep",
+      "Projectile",
+      "AirPunch",
+      "AirKick",
+      "AntiAir",
+      "Throw",
+      "SignatureSpecial",
+      "CinematicSpecial"
+    ],
+    "guard_scenarios": [
+      "StandingBlock",
+      "OverheadBlock",
+      "CrouchingBlock",
+      "ProjectileBlock"
+    ],
+    "reviewed_screenshot_count": 62,
+    "rise_age14_and_recovered_pairs": [
+      "Sweep 095/096",
+      "AntiAir 145/146",
+      "Throw 148/149",
+      "SignatureSpecial 167/168",
+      "CinematicSpecial 513/514",
+      "CinematicSpecial 655/656"
+    ]
+  },
+  "findings": [
+    {
+      "area": "impact articulation",
+      "result": "pass",
+      "observation": "Body impacts fold the torso and bend knees with arms toward the abdomen. Head impacts snap the head and shoulders backward, then move a hand toward the face. Sweep visibly buckles the leg. The first impact samples already show the appropriate reaction drawing."
+    },
+    {
+      "area": "guard articulation",
+      "result": "pass",
+      "observation": "Standing, overhead and projectile guard samples use crossed raised arms followed by a different guarded stance. Low guard lowers the body and braces the arms over a bent knee. Ground contact stays readable in both the immediate absorption and later samples."
+    },
+    {
+      "area": "airborne reactions",
+      "result": "pass",
+      "observation": "AntiAir, Throw, SignatureSpecial and both cinematic launch windows show a complete airborne silhouette with changing torso and leg articulation. No body clipping at the sprite cell boundary was visible in inspected frames."
+    },
+    {
+      "area": "ground impact and rise",
+      "result": "pass",
+      "observation": "Fall samples visibly place the body on its side at floor level. Rise samples progress through forearm/hand and knee support, then the age14 sample is standing with bent knees. Recovered samples restore the prior idle or guard at the same floor level."
+    },
+    {
+      "area": "scale and pivots",
+      "result": "pass",
+      "observation": "Extended anatomy remains credible beside C++ and beside Python's restored base pose. Crouched, curled and kneeling drawings are shorter because of articulation. Feet, hands, knees and side-contact points stay aligned with the ground in inspected grounded states; no conspicuous floor float or sinking was seen."
+    },
+    {
+      "area": "cinematic barrage",
+      "result": "pass_for_sampled_contacts",
+      "observation": "Sampled Head reactions at ticks 374, 384, 424 and 444, plus age7 after tick384, keep the head and upper torso readable as receiving the barrage. The earlier belly-fold silhouette that read as ducking under the high kick is absent from these samples."
+    },
+    {
+      "area": "identity and compositing",
+      "result": "pass",
+      "observation": "Dark hair, white blouse, black skirt/skort, black shoes and blue/yellow belt accents remain recognizable. Actual game compositing shows clean silhouettes without a visible rectangular background or alpha halo in reviewed screenshots."
+    },
+    {
+      "area": "throw facing",
+      "result": "observed",
+      "observation": "After the throw switches sides, reaction/rise maintains its earlier orientation; the recovered guard turns to face C++. This is an observed engine transition, not a Python alpha or pivot defect."
+    }
+  ],
+  "required_asset_changes": [],
+  "limits": [
+    "Only the listed screenshots were visually inspected; this report does not claim a continuous video review or interactive manual play.",
+    "Coverage is one captured matchup and arena with the reverse showcase orientation; guard demos and throw side-switch provide some mirrored-facing samples, but this is not certification of every arena, fighter pairing or screen edge.",
+    "Every one of the 12 attack scenarios and 4 guard scenarios has a reviewed impact/absorption sample, but not every tick or every barrage contact was inspected here.",
+    "This review checks visible reaction articulation, compositing, scale and ground support. It does not establish pixel-perfect attacker contact alignment, combat hitbox correctness, audio synchronization or animation timing at playback speed.",
+    "Fall and Rise drawings are shared across the inspected knockdown contexts, with engine-controlled timing. The short transitions between selected frames were not evaluated as continuous motion in this report."
+  ],
+  "reviewed_screenshots": [
+    {
+      "path": "cpp-Attack(LightPunch)-left-055-Body-0.png",
+      "sha256": "85392521bff89c23ab926523a49649f761bee34dcfc2620f639d46c5b4b444b8"
+    },
+    {
+      "path": "cpp-Attack(HeavyPunch)-left-061-Body-0.png",
+      "sha256": "ec75da41f450ceac339578c08e3315af904902e301d3f654755cc97d5d503ef9"
+    },
+    {
+      "path": "cpp-Attack(Kick)-left-059-Body-0.png",
+      "sha256": "f43ac785e726434c14179e5b06de9e377f95d1288f725f5757dde47695db7b0a"
+    },
+    {
+      "path": "cpp-Attack(Overhead)-left-062-Head-0.png",
+      "sha256": "dab0a8b3440ef83dda20b85d9634364653cd70b8f0f5fbbb05a0bedac510db81"
+    },
+    {
+      "path": "cpp-Attack(Sweep)-left-060-Low-0.png",
+      "sha256": "cd50bf59e66990b086a86a0123f3d3165abb46248b2542848c835bf3dae822da"
+    },
+    {
+      "path": "cpp-Attack(Projectile)-left-043-Body-0.png",
+      "sha256": "290fc3711c7aa6f0544ac66b921d14629a33b60f24422e7f3b1685d5f0dceaac"
+    },
+    {
+      "path": "cpp-Attack(LightPunch)-left-062-Body-7.png",
+      "sha256": "0a18d2fd912cb4af706232dba67e66a176f89bfaf2e848399ec8a61adb54b812"
+    },
+    {
+      "path": "cpp-Attack(HeavyPunch)-left-075-Body-14.png",
+      "sha256": "116997e97c5b04cd0c8f14be89fef2be52d27883371088fa32c63503614cfe65"
+    },
+    {
+      "path": "cpp-Attack(Kick)-left-073-Body-14.png",
+      "sha256": "cdaddeb10e864337d91f106d056fb502d0c75152d322244c35d02a3dba43839f"
+    },
+    {
+      "path": "cpp-Attack(Overhead)-left-076-Head-14.png",
+      "sha256": "62af3359f7d1bd4a546bea7763334ac39dc22f188768697bc0b32ba0bfdc3f51"
+    },
+    {
+      "path": "cpp-Attack(Projectile)-left-057-Body-14.png",
+      "sha256": "e151c63d971dccb59ace900c177fed9dee5e677e053fd1b8f2c8e761d0714755"
+    },
+    {
+      "path": "cpp-Attack(LightPunch)-left-066-recovered.png",
+      "sha256": "215c0712c3b8a11e9b74cc7335a79929bf9156638e9ae6bc93edd486f3354a9f"
+    },
+    {
+      "path": "cpp-Attack(AirPunch)-left-069-Head-0.png",
+      "sha256": "aed15176883e340a63749e7ee83327f799b473693854eb2e91337da25fe3bdd7"
+    },
+    {
+      "path": "cpp-Attack(AirKick)-left-071-Head-0.png",
+      "sha256": "9b1afa6a2df10ea3f9b456d36cfdce02d2dbd8bedb203c82358ffc21640e2a77"
+    },
+    {
+      "path": "cpp-Attack(AntiAir)-left-058-Launch-0.png",
+      "sha256": "bf70daa0a8b2e3ba6882781a27e161d82a1b7e244e491357f4aa54037e264a95"
+    },
+    {
+      "path": "cpp-Attack(Throw)-left-061-Launch-0.png",
+      "sha256": "9981ef2c799aeffe2ad99b0a28a5da7feb5f252547ec6b78520da19ee1f1053a"
+    },
+    {
+      "path": "cpp-Attack(SignatureSpecial)-left-073-Launch-0.png",
+      "sha256": "940a67965c07bb571f414fa76fe1fc311de325918655de7c778219f224c9d983"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-374-Head-0.png",
+      "sha256": "fc4bf24dd539effffef2f0b003bf314ae009a136f488559f63dc14aaf7ade03a"
+    },
+    {
+      "path": "python-StandingBlock-left-055-GuardHigh-0.png",
+      "sha256": "34c79df8ead02d43e4c78d1e6d580ccffbaf34cb91396e8fb2d91ff2c77d18d5"
+    },
+    {
+      "path": "python-StandingBlock-left-062-GuardHigh-7.png",
+      "sha256": "405325a8c65dd81033676fb8385cae21e840cdc347b40b0c316f14215ce90e71"
+    },
+    {
+      "path": "python-OverheadBlock-left-062-GuardHigh-0.png",
+      "sha256": "9b0a49ccf31a1a8db4aa5ddd41dd908b196985e43a955482265e8c799f5aabcb"
+    },
+    {
+      "path": "python-ProjectileBlock-left-050-GuardHigh-0.png",
+      "sha256": "3e68f68229ad14360dd55866eef9e9906a6b4d596f19104f3d6168684da8f242"
+    },
+    {
+      "path": "python-CrouchingBlock-left-060-GuardLow-0.png",
+      "sha256": "cfd27e592e3e8bf5beece2db123032779e90cfdabd4b7e0a53e9af334cc9f71a"
+    },
+    {
+      "path": "python-CrouchingBlock-left-067-GuardLow-7.png",
+      "sha256": "6c54897f04b473216257a74007f5a5df2589821ac6533e0b5831446aee25969b"
+    },
+    {
+      "path": "python-CrouchingBlock-left-071-recovered.png",
+      "sha256": "1a15e7049978dfac824d2729bfb943aae1b920478684a165fea2534c38ed16d6"
+    },
+    {
+      "path": "python-StandingBlock-left-063-recovered.png",
+      "sha256": "2a63f84002214285047dd1eeadd1ffd37019feaea808dbcd904fb0dce4d8034a"
+    },
+    {
+      "path": "cpp-Attack(AntiAir)-left-072-Launch-14.png",
+      "sha256": "774f8c5e58d9f122c6020269fdaf526dbac7dbbad3305ffa790bcd68f43ae463"
+    },
+    {
+      "path": "cpp-Attack(AntiAir)-left-110-Fall-0.png",
+      "sha256": "d5ba51729df3ea840204ad74a3249edbfac4823dd3b933d908d4155b540a99c6"
+    },
+    {
+      "path": "cpp-Attack(AntiAir)-left-145-Rise-14.png",
+      "sha256": "8d98ad61a66a4bb0229ae070946e4a01e94309336f5eda82de77bd6b544a07a5"
+    },
+    {
+      "path": "cpp-Attack(AntiAir)-left-124-Fall-14.png",
+      "sha256": "1b04c0f15706bc9e68945aa6693270a7de30ca0e63b25723761569bedbb49e54"
+    },
+    {
+      "path": "cpp-Attack(AntiAir)-left-131-Rise-0.png",
+      "sha256": "333f0e49d7d45ef089a332f7262b2a37db53d1d9a559162047f9b15d3c4bd095"
+    },
+    {
+      "path": "cpp-Attack(AntiAir)-left-138-Rise-7.png",
+      "sha256": "23bcba1bb057eab794585ad61fb04cb5631421cd29dd909fd1453f3e029ec2ed"
+    },
+    {
+      "path": "cpp-Attack(AntiAir)-left-146-recovered.png",
+      "sha256": "cecc850de568bb66b203bf000e8a48161a2be90b853d4788673f2ce613be379d"
+    },
+    {
+      "path": "cpp-Attack(Sweep)-left-063-Low-3.png",
+      "sha256": "6f567ac399e21bd812d655ce542b6516ee1b3b487f7f4cc39d6a31066402766b"
+    },
+    {
+      "path": "cpp-Attack(Sweep)-left-080-Fall-14.png",
+      "sha256": "a11de18b51f8c2e1b2ef5dd9c9b92995d4417fd346a809cc83a54cdb1e40ec4f"
+    },
+    {
+      "path": "cpp-Attack(Sweep)-left-095-Rise-14.png",
+      "sha256": "5df820f4863abbd89024c1124e0aaa177d31acbc21778ffbee59ced207b3aac8"
+    },
+    {
+      "path": "cpp-Attack(Sweep)-left-096-recovered.png",
+      "sha256": "6c46b181ab48eef1b01e641b0225518177157b6a71cf31ef47919a439efe222d"
+    },
+    {
+      "path": "cpp-Attack(Throw)-left-087-Launch-14.png",
+      "sha256": "ff5e2b71b9a4574c996f5f965f73997340cc66ea11ac5f3460e3ea3102e56fdd"
+    },
+    {
+      "path": "cpp-Attack(Throw)-left-113-Fall-0.png",
+      "sha256": "7a6c05067b6f98d552512894cab9c4c3ac39dedc2602d1666671b7d91023448d"
+    },
+    {
+      "path": "cpp-Attack(Throw)-left-148-Rise-14.png",
+      "sha256": "cb9f2f512f845b05afc6da7fbc3dbb64abfce4ac1cdc1631e0aba8cf29a772c7"
+    },
+    {
+      "path": "cpp-Attack(Throw)-left-149-recovered.png",
+      "sha256": "f10a9b81acaf15f67547eb5a99af19401b76bf8a5ef132ddf978c32cf96c7a50"
+    },
+    {
+      "path": "cpp-Attack(SignatureSpecial)-left-087-Launch-14.png",
+      "sha256": "c9944a3706ef29881edea6c73622430f4f9fb3a11586429bafa23eac828f2bb9"
+    },
+    {
+      "path": "cpp-Attack(SignatureSpecial)-left-132-Fall-0.png",
+      "sha256": "907f431ed65a0b587b17cf17091ede5ed0766ac735adc14665808904a6691ceb"
+    },
+    {
+      "path": "cpp-Attack(SignatureSpecial)-left-167-Rise-14.png",
+      "sha256": "a000e9dcdffd93cc6659a3fcabadce89649a98a9b53d5c66f97415d98ef98513"
+    },
+    {
+      "path": "cpp-Attack(SignatureSpecial)-left-168-recovered.png",
+      "sha256": "ea07d2d6a736fb3d1803fe3b749e7c1abe38f37fba0ead863596122d294ae6db"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-384-Head-0.png",
+      "sha256": "c0368f95e493d27f3288fd3aa7fdd88c7e5bdf8a33c232e7e4dbd2d6027988f2"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-391-Head-7.png",
+      "sha256": "d73a2f7984643aa83c55d055747c1de729df5398220daf19cb7facb75bb30c3e"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-424-Head-0.png",
+      "sha256": "0a6c88d7ff9fe38cdb506c9490f5f9290d0a9b974359ada4bc9d1629bca03d93"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-444-Head-0.png",
+      "sha256": "d2ce29763b5bddd9fda1d20fcbea387550d569900cceee80218ffff66f55cd1e"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-454-Launch-0.png",
+      "sha256": "9194b93b289f91b6ccd5e3779f53ad6182f549050d2223241c1ed99a3b7c1023"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-468-Launch-14.png",
+      "sha256": "999d615ff94f225573b2a59c79bb26974db7863bd00a90d83a7fc237aa2f9abf"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-478-Fall-0.png",
+      "sha256": "3ebaefd72aa58d0ec842584778da911ba5ea3ef11012db78aea44f5ddb49a381"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-492-Fall-14.png",
+      "sha256": "4b695a8656c4b354374f2129b1ebb7085a98e5764655964b0ec45bf0c90ae365"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-499-Rise-0.png",
+      "sha256": "a3400d0ca528275ce872f9c9c46082bb8f3f7eb02c6b3ab5fc2f2cd7b91c957b"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-506-Rise-7.png",
+      "sha256": "f23b383078cda335318a64f5ef6f07b52763b7b0ea2c18fc0fc51878975b25ca"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-513-Rise-14.png",
+      "sha256": "2fc32dde607cc80290b8a86f21dc2c65100a03ed196a74a78706d2a5f086c862"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-514-recovered.png",
+      "sha256": "f9abfb7fbd220b94fb385c5bd18cd9d3c401dd833b833137132f152b4f8cdfd6"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-596-Launch-0.png",
+      "sha256": "c5689a51f778e974682837e2cd9ba1e26e6a8bf20edad8bd1f282f3d64bff8a0"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-610-Launch-14.png",
+      "sha256": "ef8208ee3820d7f91ae21b9bf667104a1403ec5ec842717691204199ae6da7f1"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-620-Fall-0.png",
+      "sha256": "9a175bcd2a2aeace56362baa29e50252cafe5a7de151215df7366efbc8c5ab71"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-655-Rise-14.png",
+      "sha256": "128044c136f20b1e0f9d77951ab166e452fff42483c1fe69dbd2197a17953e97"
+    },
+    {
+      "path": "cpp-Attack(CinematicSpecial)-left-656-recovered.png",
+      "sha256": "224f804a1b9428ef8dee26a3921f639875e921a16e0ec0165db9fed0d63ada88"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "directory": "target/art/python-finalization-world",
+  "status": "incomplete",
+  "process_exit_code": 143,
+  "signal": "SIGTERM",
+  "origin": "unknown; no signal sent by this production agent",
+  "captured_images": 434,
+  "last_image": "f1325-air_punch.png",
+  "report_written": false,
+  "used_as_complete_evidence": false,
+  "replacement": "target/art/python-finalization-world-v2",
+  "replacement_completed": true
+}
