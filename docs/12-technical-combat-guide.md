@@ -11,6 +11,7 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Sistema | Responsabilidade | Código principal | Testes |
 |---|---|---|---|
 | Combat runtime | Estado de lutador, movimento, defesa, ataque ativo, stun, dano e hurtbox | [`src/combat/fighter.rs`](../src/combat/fighter.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs), [`tests/traditional_moves.rs`](../tests/traditional_moves.rs) |
+| Cinematic presentation data | Identidade e relógio derivados do ataque local vivo, sem hitbox de tela | [`src/combat/cinematic.rs`](../src/combat/cinematic.rs) | [`tests/cinematic_specials.rs`](../tests/cinematic_specials.rs) |
 | Combat data | Frame data, dano, guard rule, hit reaction e hitbox dos golpes próximos | [`src/combat/move_data.rs`](../src/combat/move_data.rs) | [`tests/move_data.rs`](../tests/move_data.rs), [`tests/traditional_moves.rs`](../tests/traditional_moves.rs) |
 | Move runtime | Enum runtime `AttackKind` e compatibilidade com `MoveSpec` | [`src/combat/move_set.rs`](../src/combat/move_set.rs) | [`tests/move_data.rs`](../tests/move_data.rs) |
 | Projectile | Projétil horizontal, dano, guard rule, hit reaction, velocidade, spawn e timing do especial | [`src/combat/projectile.rs`](../src/combat/projectile.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs) |
@@ -227,6 +228,35 @@ Os golpes próximos atuais estão em [`src/combat/move_data.rs`](../src/combat/m
 
 `Fighter` carrega `move_ids` próprios. Quando um botão de golpe é pressionado, `FighterInput::requested_move_spec` escolhe o `MoveInputKind` a partir de botão, direção, abaixar, defesa e estado aéreo. Depois `move_spec_for_input` procura no loadout o primeiro `MoveSpec` com aquele input. Se não houver `MoveId` compatível, o input daquele golpe não inicia ataque. Isso permite que o mesmo botão resolva para golpes diferentes por personagem sem alterar profundamente `Fighter`.
 
+### Especiais cinematográficos adicionais
+
+`AttackKind::CinematicSpecial` / `MoveInputKind::CinematicSpecial` identifica uma segunda ação temática, independente de `SignatureSpecial` e do projétil. Os seis personagens possuem um `MoveId` próprio. `FighterInput.cinematic_special` inicia apenas no chão e tem prioridade sobre a assinatura, a guarda e o agarrão no mesmo comando.
+
+| Personagem / golpe | MoveId | Dano | Ativos (inclusivos) | Duração | Alcance (`world_px`) |
+|---|---|---|---|---|---|
+| Rust / Ownership Eclipse | `RustOwnershipEclipse` | 28 | 36–43 | 102f | 120 |
+| Java / JVM Overdrive | `DukeJvmOverdrive` | 32 | 42–49 | 110f | 135 |
+| Go / Million Goroutines | `GoMillionGoroutines` | 25 | 32–39 | 94f | 100 |
+| C / Kernel Panic | `CKernelPanic` | 32 | 44–51 | 110f | 145 |
+| Python / Event Horizon | `PythonEventHorizon` | 27 | 34–41 | 98f | 115 |
+| C++ / Template Singularity | `CppTemplateSingularity` | 30 | 40–47 | 106f | 130 |
+
+Todos têm guarda `Mid`, hitstun de 28f, blockstun de 16f, pushback H/B de `world_px(72/28)` e 18f extras de whiff. O golpe usa uma única hitbox local diante do corpo, altura `world_px(142)` e offset Y `world_px(10)`. Ela segue exclusivamente `MoveSpec`: metadata de sprite não pode ampliar o ataque e nenhum projétil/`SignatureEffect` é criado. Movimento, pulo e outros ataques ficam bloqueados até terminar ou sofrer interrupção. Não há armadura, invulnerabilidade, cancelamento, dano adicional de cenário ou custo de medidor.
+
+`Fighter::cinematic_special()` retorna `CinematicSpecialState`: personagem, `move_id`, label, elapsed/duration/active_start/active_end em frames e `progress()`. A renderização pode transformar toda a tela a partir desse relógio sem participar das colisões. O estado desaparece junto com o ataque ao sofrer golpe ou reset; o renderer também deve ocultá-lo após `World.outcome`. Pausa preserva o relógio e avanço de frame move exatamente um tick. As poses de assinatura existentes (soco forte para Go) são reaproveitadas com remapeamento visual de startup/active/recovery para as fases novas; as boxes físicas não usam esse remapeamento.
+
+Teclado: `Y` P1 e `]` P2. `Right Shift` conserva o soco forte P2. Gamepad: segurar `LB` e pressionar `RT`; `RT` sem `LB` continua assinatura. `PendingFighterInput` preserva a borda até o próximo tick e a consome uma única vez em catch-up. A CPU usa o ataque ocasionalmente em alcance local e reage à antecipação sem defesa perfeita.
+
+```bash
+cargo run -- --showcase --character rust --move cinematic_special --repeat
+cargo run -- --showcase --character go --move cinematic_special --repeat --reverse
+cargo run -- --lab combat --character python --move cinematic_special
+```
+
+CLI também aceita `cinematic`, `cinematic-special` e `ultimate`. O Lab permite dummy/alcance/estimativa de vantagem porque este golpe usa melee local; a assinatura anterior continua sendo apenas prévia do ator no Lab. O showcase público passa a 16 situações por personagem; Go tem 15, pois não possui a assinatura anterior, mas tem o cinematográfico.
+
+A matriz em [`tests/cinematic_specials.rs`](../tests/cinematic_specials.rs) verifica os seis personagens nas duas orientações, com e sem metadata, ambas as guardas, único contato, ausência de dano à distância, interrupção no startup, compromisso de movimento/ações, reset, CLI, replay e alinhamento da pose ativa reutilizada.
+
 ### Combat Log
 
 O log de combate fica em [`src/game/combat_log.rs`](../src/game/combat_log.rs) e é preenchido por [`World`](../src/game/world.rs). Ele registra eventos compactos como início de round, countdown, ataque iniciado, whiff, hit/block resolvido, projectile disparado, projectile resolvido e fim de luta.
@@ -244,6 +274,7 @@ Mapeamento atual de input:
 | Abaixar + soco forte | `AntiAir` |
 | Frente + soco forte | `Overhead` |
 | Defender + soco fraco | `Throw` |
+| `Y` P1 / `]` P2 / `LB+RT` | `CinematicSpecial` |
 | No ar + soco fraco/forte | `AirPunch` |
 | No ar + chute | `AirKick` |
 

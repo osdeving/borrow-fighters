@@ -44,7 +44,7 @@ use borrow_fighters::config::world_px;
 
 #[test]
 fn close_range_moves_are_registered_in_table_order() {
-    assert_eq!(CLOSE_RANGE_MOVE_SPECS.len(), 46);
+    assert_eq!(CLOSE_RANGE_MOVE_SPECS.len(), 52);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[0].id, MoveId::LightPunch);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[1].id, MoveId::HeavyPunch);
     assert_eq!(CLOSE_RANGE_MOVE_SPECS[2].id, MoveId::Kick);

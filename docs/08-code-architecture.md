@@ -117,6 +117,12 @@ O diretório `scenes/` ainda deve permanecer simples, sem framework de telas. `u
 
 ## Regras de fronteira
 
+A [ADR 0015](adr/0015-cinematic-presentation-and-stage-life.md) acrescenta dois
+limites de apresentação: `combat/cinematic.rs` expõe um snapshot do ataque vivo,
+consumido por `engine/render/cinematic_effects.rs`; `engine/render/stage_life.rs`
+anima atores decorativos sem estado de combate. Fontes incorporadas e filtragem
+continuam em `engine/assets.rs`. Nenhum desses desenhos amplia a hitbox física.
+
 ### `main.rs`
 
 Deve ser fino. Responsabilidades:

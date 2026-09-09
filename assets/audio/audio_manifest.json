@@ -729,6 +729,72 @@
     {
       "cue": "projectile.impact",
       "clips": ["sfx.projectile.impact.01", "sfx.projectile.impact.02"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "rust",
+      "move": "rust_ownership_eclipse",
+      "clips": ["voice.rust.attack.heavy.01"]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "rust_ownership_eclipse",
+      "clips": ["sfx.combat.hit.heavy.01", "sfx.combat.hit.heavy.02"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "duke",
+      "move": "duke_jvm_overdrive",
+      "clips": ["voice.duke.attack.heavy.01"]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "duke_jvm_overdrive",
+      "clips": ["sfx.combat.hit.heavy.01", "sfx.combat.hit.heavy.02"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "go",
+      "move": "go_million_goroutines",
+      "clips": ["voice.go.attack.goroutine_jab.01"]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "go_million_goroutines",
+      "clips": ["sfx.combat.hit.heavy.01", "sfx.combat.hit.heavy.02"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "c",
+      "move": "c_kernel_panic",
+      "clips": ["voice.c.attack.pointer_jab.01"]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "c_kernel_panic",
+      "clips": ["sfx.combat.hit.heavy.01", "sfx.combat.hit.heavy.02"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "python",
+      "move": "python_event_horizon",
+      "clips": ["voice.python.attack.snake_bite.01"]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "python_event_horizon",
+      "clips": ["sfx.combat.hit.heavy.01", "sfx.combat.hit.heavy.02"]
+    },
+    {
+      "cue": "fighter.attack.start",
+      "character": "cpp",
+      "move": "cpp_template_singularity",
+      "clips": ["voice.c.attack.pointer_jab.01", "voice.c.attack.unsafe_poke.01", "voice.python.attack.heel_kick.01"]
+    },
+    {
+      "cue": "combat.hit",
+      "move": "cpp_template_singularity",
+      "clips": ["sfx.combat.hit.heavy.01", "sfx.combat.hit.heavy.02"]
     }
   ]
 }

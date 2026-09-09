@@ -3,6 +3,7 @@
 //! This module owns fighter state, hitbox/hurtbox timing, and damage rules for
 //! the greybox prototype.
 
+pub mod cinematic;
 pub mod collision;
 pub mod fighter;
 pub mod frame;

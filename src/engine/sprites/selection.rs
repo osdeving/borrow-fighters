@@ -198,7 +198,9 @@ pub fn fighter_sprite_clip(fighter: &Fighter) -> FighterSpriteClip {
             AttackKind::AirPunch => FighterSpriteClip::AirPunch,
             AttackKind::AirKick => FighterSpriteClip::AirKick,
             AttackKind::Throw => FighterSpriteClip::Throw,
-            AttackKind::SignatureSpecial => FighterSpriteClip::SignatureSpecial,
+            AttackKind::SignatureSpecial | AttackKind::CinematicSpecial => {
+                FighterSpriteClip::SignatureSpecial
+            }
         };
     }
 
@@ -240,6 +242,29 @@ pub fn fighter_clip_elapsed_seconds(fighter: &Fighter, world_elapsed_seconds: f3
     }
     if let Some(elapsed) = fighter.special_elapsed_seconds() {
         return elapsed;
+    }
+    if let Some(cinematic) = fighter.cinematic_special() {
+        use crate::combat::move_data::{MoveInputKind, move_spec_for_input};
+        let source = move_spec_for_input(fighter.move_ids(), MoveInputKind::SignatureSpecial)
+            .or_else(|| move_spec_for_input(fighter.move_ids(), MoveInputKind::HeavyPunch))
+            .expect("every cinematic actor has a source pose")
+            .frames;
+        let tick = cinematic.elapsed_frames as f32;
+        let start = cinematic.active_start as f32;
+        let recovery_start = (cinematic.active_end + 1) as f32;
+        let source_start = source.active_start.get() as f32;
+        let source_recovery = (source.active_end.get() + 1) as f32;
+        let mapped = if tick < start {
+            tick / start * source_start
+        } else if tick < recovery_start {
+            source_start
+                + (tick - start) / (recovery_start - start) * (source_recovery - source_start)
+        } else {
+            source_recovery
+                + (tick - recovery_start) / (cinematic.duration_frames as f32 - recovery_start)
+                    * (source.duration.get() as f32 - source_recovery)
+        };
+        return mapped * crate::config::FIXED_TIMESTEP;
     }
     if let Some(elapsed) = fighter.attack_elapsed_seconds() {
         return elapsed;

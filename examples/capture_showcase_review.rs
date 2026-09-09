@@ -170,6 +170,7 @@ fn main() -> CaptureResult<()> {
                             &scene,
                             ArenaId::Sirius,
                             scene.world().elapsed_seconds,
+                            Default::default(),
                             &assets,
                         );
                     }

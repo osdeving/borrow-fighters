@@ -32,6 +32,7 @@ fn rust_spec_points_to_current_prototype_moves() {
             MoveId::AirKick,
             MoveId::RustOwnershipThrow,
             MoveId::RustBorrowFortress,
+            MoveId::RustOwnershipEclipse,
         ]
     );
 }
@@ -57,6 +58,7 @@ fn duke_spec_points_to_current_prototype_moves() {
             MoveId::AirKick,
             MoveId::DukeEnterpriseThrow,
             MoveId::DukePrintlnBarrage,
+            MoveId::DukeJvmOverdrive,
         ]
     );
 }
@@ -81,6 +83,7 @@ fn go_spec_points_to_current_prototype_moves() {
             MoveId::AirPunch,
             MoveId::GoHopkick,
             MoveId::CloseThrow,
+            MoveId::GoMillionGoroutines,
         ]
     );
 }
@@ -106,6 +109,7 @@ fn c_spec_points_to_current_prototype_moves() {
             MoveId::AirKick,
             MoveId::CUndefinedThrow,
             MoveId::CSegmentationFault,
+            MoveId::CKernelPanic,
         ]
     );
 }
@@ -131,6 +135,7 @@ fn python_spec_points_to_current_prototype_moves() {
             MoveId::AirKick,
             MoveId::PythonConstrictThrow,
             MoveId::PythonImportAntigravity,
+            MoveId::PythonEventHorizon,
         ]
     );
 }
@@ -156,6 +161,7 @@ fn cpp_spec_points_to_current_prototype_moves() {
             MoveId::AirKick,
             MoveId::CppMoveThrow,
             MoveId::CppUndefinedBazooka,
+            MoveId::CppTemplateSingularity,
         ]
     );
 }

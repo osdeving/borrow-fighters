@@ -9,7 +9,7 @@ use crate::{
     characters::character_spec,
     config::{WINDOW_HEIGHT, WINDOW_WIDTH},
     engine::assets::GameAssets,
-    game::arena::ArenaId,
+    game::{arena::ArenaId, feature_flags::FeatureFlags},
     scenes::move_showcase::{MoveShowcase, ShowcaseResult},
 };
 
@@ -24,11 +24,14 @@ pub fn draw_move_showcase(
     showcase: &MoveShowcase,
     arena: ArenaId,
     visual_time_seconds: f32,
+    flags: FeatureFlags,
     assets: &GameAssets,
 ) {
     draw.clear_background(BACKGROUND);
     draw_arena(draw, arena, assets.arenas.get(arena), visual_time_seconds);
     let world = showcase.world();
+    super::draw_stage_life_layer(draw, arena, visual_time_seconds, flags, Some(world), assets);
+    super::draw_world_cinematic_background(draw, world, assets);
     draw_fighter_ground_lights(draw, world);
     draw_projectiles(draw, world, false, assets);
     for (fighter, character) in [
@@ -50,7 +53,8 @@ pub fn draw_move_showcase(
         );
     }
     super::signature_effects::draw_signature_effects(draw, world, false, assets);
-    draw_hit_effects(draw, world);
+    draw_hit_effects(draw, world, assets.menu_font.as_ref());
+    super::draw_world_cinematic_foreground(draw, world, assets);
     draw_showcase_label(draw, showcase, assets);
 }
 

@@ -309,6 +309,7 @@ fn feature_flags_start_with_playtest_friendly_defaults() {
     assert!(flags.enabled(FeatureFlag::ShowHud));
     assert!(!flags.enabled(FeatureFlag::ShowControlsHelp));
     assert!(!flags.enabled(FeatureFlag::ShowCombatDebug));
+    assert!(flags.enabled(FeatureFlag::ShowStageLife));
     assert!(flags.enabled(FeatureFlag::GamepadInput));
 }
 

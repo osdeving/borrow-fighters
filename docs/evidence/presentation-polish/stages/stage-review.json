@@ -1,0 +1,38 @@
+{
+  "captures": [
+    {
+      "arena": "Sirius Light Ring",
+      "image": "sirius.png",
+      "stage_life": true,
+      "visual_time_seconds": 8.5
+    },
+    {
+      "arena": "Tech Coast Beacon",
+      "image": "fortaleza.png",
+      "stage_life": true,
+      "visual_time_seconds": 11.5
+    },
+    {
+      "arena": "BioTIC Garden",
+      "image": "biotic.png",
+      "stage_life": true,
+      "visual_time_seconds": 13.5
+    },
+    {
+      "arena": "Porto Digital Cache",
+      "image": "porto-digital.png",
+      "stage_life": true,
+      "visual_time_seconds": 10.5
+    },
+    {
+      "arena": "Pinhao Smart Grid",
+      "image": "vale-pinhao.png",
+      "stage_life": true,
+      "visual_time_seconds": 12.5
+    }
+  ],
+  "render_size": [
+    1280,
+    720
+  ]
+}

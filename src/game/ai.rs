@@ -107,7 +107,10 @@ impl BasicCpu {
             && let Some(attack) = target.attack_move_spec()
             && gap <= attack.hitbox.width + world_px(16.0)
             && target.attack_elapsed_frames().is_some_and(|frame| {
-                let cue = if attack.input == MoveInputKind::SignatureSpecial {
+                let cue = if matches!(
+                    attack.input,
+                    MoveInputKind::SignatureSpecial | MoveInputKind::CinematicSpecial
+                ) {
                     attack.frames.active_start.get().saturating_sub(12)
                 } else {
                     4
@@ -244,6 +247,19 @@ impl BasicCpu {
                 let cooldown = self.random_duration(0.42, 0.72);
                 self.advance_pattern(cooldown);
             }
+            return;
+        }
+
+        if let Some(special) = move_spec_for_input(cpu.move_ids(), MoveInputKind::CinematicSpecial)
+            && gap <= special.hitbox.width - world_px(14.0)
+            && (12..20).contains(&roll)
+        {
+            input.crouch = false;
+            input.left = false;
+            input.right = false;
+            input.cinematic_special = true;
+            let cooldown = special.frames.duration.as_seconds() + self.random_duration(0.3, 0.6);
+            self.advance_pattern(cooldown);
             return;
         }
 

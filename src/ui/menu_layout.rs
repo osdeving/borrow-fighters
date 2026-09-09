@@ -37,10 +37,10 @@ impl MenuLayout {
     pub fn for_page(page: MenuPage) -> Self {
         let (x, y, width, height, row_offset_x, row_offset_y, row_width, step, gap) = match page {
             MenuPage::Main => (302, 154, 356, 370, 42, 58, 272, 44, 8),
-            MenuPage::Versus => (270, 112, 484, 432, 42, 96, 400, 56, 8),
-            MenuPage::Training => (286, 126, 452, 390, 42, 106, 368, 56, 8),
+            MenuPage::Versus => (238, 96, 484, 432, 42, 96, 400, 56, 8),
+            MenuPage::Training => (254, 126, 452, 390, 42, 106, 368, 56, 8),
             MenuPage::Lore => (54, 78, 852, 428, 46, 82, 294, 40, 8),
-            MenuPage::Options => (176, 56, 672, 526, 48, 86, 576, 28, 2),
+            MenuPage::Options => (144, 40, 672, 490, 48, 66, 576, 28, 2),
         };
         let panel = MenuBounds {
             x: screen_px(x),

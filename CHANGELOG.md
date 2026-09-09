@@ -8,6 +8,19 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 
 ### Adicionado
 
+- Seis especiais cinematográficos adicionais: Ownership Eclipse, JVM Overdrive,
+  Million Goroutines, Kernel Panic, Event Horizon e Template Singularity, com
+  efeitos de tela inteira e um único contato local bloqueável. Entrada `Y` / `]`
+  / `LB+RT`, CLI `--move cinematic_special`, Combat Lab e showcase.
+- Caramelo brasileiro de pelo curto em corrida animada, cameo gestual de “Já
+  acabou, Jéssica?” em São Paulo e detalhes de memes discretos nas seis arenas;
+  opção `Vida nos cenarios` e Sirius revisado sem o cachorro estático anterior.
+- Fontes Barlow/Lora incorporadas com licença OFL, glifos portugueses, atlas de
+  alta resolução e filtragem por mipmaps; logo, retratos, contagem e fundos
+  pintados das arenas suavizados na escala de apresentação.
+- HUD renovado com barras espelhadas, banner de vitória, dicas de controles e
+  menus com descrições e geometria ajustada para navegação por teclado e mouse.
+
 - Showcase contextual com dois lutadores no combate real, 11 ataques e quatro exemplos de defesa por personagem da demo, resultado de contato, áudio real, repetição, espelhamento, pausa e avanço de frame.
 - Entrada direta `--showcase --character ... --move ...`, com `--repeat` e `--reverse`; `L` repete, `X` espelha e `PageUp/PageDown` troca personagem.
 - Cinco especiais de assinatura com oito poses e efeitos animados separados: Borrow Fortress, System.out.println!, Segmentation Fault, import antigravity e Undefined Bazooka. Sempre acessíveis com `T`/Backslash/`RT`, sem medidor; o projétil comum mantém seus controles.

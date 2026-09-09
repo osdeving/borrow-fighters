@@ -1,0 +1,837 @@
+{
+  "audio": false,
+  "fps": 60,
+  "render_size": [
+    1280,
+    720
+  ],
+  "scenarios": [
+    {
+      "captures": [
+        {
+          "active_frames": [
+            36,
+            43
+          ],
+          "attack_tick": 26,
+          "image": "rust-right-startup.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            160.0,
+            189.33334350585938
+          ],
+          "opponent_health": 112,
+          "phase": "startup",
+          "result": "Pending",
+          "showcase_tick": 56
+        },
+        {
+          "active_frames": [
+            36,
+            43
+          ],
+          "attack_tick": 38,
+          "image": "rust-right-active.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            160.0,
+            189.33334350585938
+          ],
+          "opponent_health": 84,
+          "phase": "active",
+          "result": "Hit { damage: 28 }",
+          "showcase_tick": 68
+        },
+        {
+          "active_frames": [
+            36,
+            43
+          ],
+          "attack_tick": 65,
+          "image": "rust-right-recovery.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            160.0,
+            189.33334350585938
+          ],
+          "opponent_health": 84,
+          "phase": "recovery",
+          "result": "Hit { damage: 28 }",
+          "showcase_tick": 95
+        }
+      ],
+      "character": "rust",
+      "contact_tick": 66,
+      "result": "Hit { damage: 28 }",
+      "reverse": false,
+      "video_frames": [
+        0,
+        179
+      ]
+    },
+    {
+      "captures": [
+        {
+          "active_frames": [
+            36,
+            43
+          ],
+          "attack_tick": 26,
+          "image": "rust-left-startup.png",
+          "local_hitbox": [
+            519.9999389648438,
+            405.3333435058594,
+            160.0,
+            189.33334350585938
+          ],
+          "opponent_health": 112,
+          "phase": "startup",
+          "result": "Pending",
+          "showcase_tick": 56
+        },
+        {
+          "active_frames": [
+            36,
+            43
+          ],
+          "attack_tick": 38,
+          "image": "rust-left-active.png",
+          "local_hitbox": [
+            519.9999389648438,
+            405.3333435058594,
+            160.0,
+            189.33334350585938
+          ],
+          "opponent_health": 84,
+          "phase": "active",
+          "result": "Hit { damage: 28 }",
+          "showcase_tick": 68
+        },
+        {
+          "active_frames": [
+            36,
+            43
+          ],
+          "attack_tick": 65,
+          "image": "rust-left-recovery.png",
+          "local_hitbox": [
+            519.9999389648438,
+            405.3333435058594,
+            160.0,
+            189.33334350585938
+          ],
+          "opponent_health": 84,
+          "phase": "recovery",
+          "result": "Hit { damage: 28 }",
+          "showcase_tick": 95
+        }
+      ],
+      "character": "rust",
+      "contact_tick": 66,
+      "result": "Hit { damage: 28 }",
+      "reverse": true,
+      "video_frames": null
+    },
+    {
+      "captures": [
+        {
+          "active_frames": [
+            42,
+            49
+          ],
+          "attack_tick": 32,
+          "image": "duke-right-startup.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            180.0,
+            189.33334350585938
+          ],
+          "opponent_health": 104,
+          "phase": "startup",
+          "result": "Pending",
+          "showcase_tick": 62
+        },
+        {
+          "active_frames": [
+            42,
+            49
+          ],
+          "attack_tick": 44,
+          "image": "duke-right-active.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            180.0,
+            189.33334350585938
+          ],
+          "opponent_health": 72,
+          "phase": "active",
+          "result": "Hit { damage: 32 }",
+          "showcase_tick": 74
+        },
+        {
+          "active_frames": [
+            42,
+            49
+          ],
+          "attack_tick": 71,
+          "image": "duke-right-recovery.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            180.0,
+            189.33334350585938
+          ],
+          "opponent_health": 72,
+          "phase": "recovery",
+          "result": "Hit { damage: 32 }",
+          "showcase_tick": 101
+        }
+      ],
+      "character": "duke",
+      "contact_tick": 72,
+      "result": "Hit { damage: 32 }",
+      "reverse": false,
+      "video_frames": [
+        180,
+        359
+      ]
+    },
+    {
+      "captures": [
+        {
+          "active_frames": [
+            42,
+            49
+          ],
+          "attack_tick": 32,
+          "image": "duke-left-startup.png",
+          "local_hitbox": [
+            499.99993896484375,
+            405.3333435058594,
+            180.0,
+            189.33334350585938
+          ],
+          "opponent_health": 104,
+          "phase": "startup",
+          "result": "Pending",
+          "showcase_tick": 62
+        },
+        {
+          "active_frames": [
+            42,
+            49
+          ],
+          "attack_tick": 44,
+          "image": "duke-left-active.png",
+          "local_hitbox": [
+            499.99993896484375,
+            405.3333435058594,
+            180.0,
+            189.33334350585938
+          ],
+          "opponent_health": 72,
+          "phase": "active",
+          "result": "Hit { damage: 32 }",
+          "showcase_tick": 74
+        },
+        {
+          "active_frames": [
+            42,
+            49
+          ],
+          "attack_tick": 71,
+          "image": "duke-left-recovery.png",
+          "local_hitbox": [
+            499.99993896484375,
+            405.3333435058594,
+            180.0,
+            189.33334350585938
+          ],
+          "opponent_health": 72,
+          "phase": "recovery",
+          "result": "Hit { damage: 32 }",
+          "showcase_tick": 101
+        }
+      ],
+      "character": "duke",
+      "contact_tick": 72,
+      "result": "Hit { damage: 32 }",
+      "reverse": true,
+      "video_frames": null
+    },
+    {
+      "captures": [
+        {
+          "active_frames": [
+            32,
+            39
+          ],
+          "attack_tick": 22,
+          "image": "go-right-startup.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            133.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 100,
+          "phase": "startup",
+          "result": "Pending",
+          "showcase_tick": 52
+        },
+        {
+          "active_frames": [
+            32,
+            39
+          ],
+          "attack_tick": 34,
+          "image": "go-right-active.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            133.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 75,
+          "phase": "active",
+          "result": "Hit { damage: 25 }",
+          "showcase_tick": 64
+        },
+        {
+          "active_frames": [
+            32,
+            39
+          ],
+          "attack_tick": 61,
+          "image": "go-right-recovery.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            133.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 75,
+          "phase": "recovery",
+          "result": "Hit { damage: 25 }",
+          "showcase_tick": 91
+        }
+      ],
+      "character": "go",
+      "contact_tick": 62,
+      "result": "Hit { damage: 25 }",
+      "reverse": false,
+      "video_frames": [
+        360,
+        539
+      ]
+    },
+    {
+      "captures": [
+        {
+          "active_frames": [
+            32,
+            39
+          ],
+          "attack_tick": 22,
+          "image": "go-left-startup.png",
+          "local_hitbox": [
+            546.6666259765625,
+            405.3333435058594,
+            133.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 100,
+          "phase": "startup",
+          "result": "Pending",
+          "showcase_tick": 52
+        },
+        {
+          "active_frames": [
+            32,
+            39
+          ],
+          "attack_tick": 34,
+          "image": "go-left-active.png",
+          "local_hitbox": [
+            546.6666259765625,
+            405.3333435058594,
+            133.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 75,
+          "phase": "active",
+          "result": "Hit { damage: 25 }",
+          "showcase_tick": 64
+        },
+        {
+          "active_frames": [
+            32,
+            39
+          ],
+          "attack_tick": 61,
+          "image": "go-left-recovery.png",
+          "local_hitbox": [
+            546.6666259765625,
+            405.3333435058594,
+            133.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 75,
+          "phase": "recovery",
+          "result": "Hit { damage: 25 }",
+          "showcase_tick": 91
+        }
+      ],
+      "character": "go",
+      "contact_tick": 62,
+      "result": "Hit { damage: 25 }",
+      "reverse": true,
+      "video_frames": null
+    },
+    {
+      "captures": [
+        {
+          "active_frames": [
+            44,
+            51
+          ],
+          "attack_tick": 34,
+          "image": "c-right-startup.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            193.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 96,
+          "phase": "startup",
+          "result": "Pending",
+          "showcase_tick": 64
+        },
+        {
+          "active_frames": [
+            44,
+            51
+          ],
+          "attack_tick": 46,
+          "image": "c-right-active.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            193.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 64,
+          "phase": "active",
+          "result": "Hit { damage: 32 }",
+          "showcase_tick": 76
+        },
+        {
+          "active_frames": [
+            44,
+            51
+          ],
+          "attack_tick": 73,
+          "image": "c-right-recovery.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            193.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 64,
+          "phase": "recovery",
+          "result": "Hit { damage: 32 }",
+          "showcase_tick": 103
+        }
+      ],
+      "character": "c",
+      "contact_tick": 74,
+      "result": "Hit { damage: 32 }",
+      "reverse": false,
+      "video_frames": [
+        540,
+        719
+      ]
+    },
+    {
+      "captures": [
+        {
+          "active_frames": [
+            44,
+            51
+          ],
+          "attack_tick": 34,
+          "image": "c-left-startup.png",
+          "local_hitbox": [
+            486.6665954589844,
+            405.3333435058594,
+            193.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 96,
+          "phase": "startup",
+          "result": "Pending",
+          "showcase_tick": 64
+        },
+        {
+          "active_frames": [
+            44,
+            51
+          ],
+          "attack_tick": 46,
+          "image": "c-left-active.png",
+          "local_hitbox": [
+            486.6665954589844,
+            405.3333435058594,
+            193.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 64,
+          "phase": "active",
+          "result": "Hit { damage: 32 }",
+          "showcase_tick": 76
+        },
+        {
+          "active_frames": [
+            44,
+            51
+          ],
+          "attack_tick": 73,
+          "image": "c-left-recovery.png",
+          "local_hitbox": [
+            486.6665954589844,
+            405.3333435058594,
+            193.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 64,
+          "phase": "recovery",
+          "result": "Hit { damage: 32 }",
+          "showcase_tick": 103
+        }
+      ],
+      "character": "c",
+      "contact_tick": 74,
+      "result": "Hit { damage: 32 }",
+      "reverse": true,
+      "video_frames": null
+    },
+    {
+      "captures": [
+        {
+          "active_frames": [
+            34,
+            41
+          ],
+          "attack_tick": 24,
+          "image": "python-right-startup.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            153.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 98,
+          "phase": "startup",
+          "result": "Pending",
+          "showcase_tick": 54
+        },
+        {
+          "active_frames": [
+            34,
+            41
+          ],
+          "attack_tick": 36,
+          "image": "python-right-active.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            153.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 71,
+          "phase": "active",
+          "result": "Hit { damage: 27 }",
+          "showcase_tick": 66
+        },
+        {
+          "active_frames": [
+            34,
+            41
+          ],
+          "attack_tick": 63,
+          "image": "python-right-recovery.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            153.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 71,
+          "phase": "recovery",
+          "result": "Hit { damage: 27 }",
+          "showcase_tick": 93
+        }
+      ],
+      "character": "python",
+      "contact_tick": 64,
+      "result": "Hit { damage: 27 }",
+      "reverse": false,
+      "video_frames": [
+        720,
+        899
+      ]
+    },
+    {
+      "captures": [
+        {
+          "active_frames": [
+            34,
+            41
+          ],
+          "attack_tick": 24,
+          "image": "python-left-startup.png",
+          "local_hitbox": [
+            526.6666259765625,
+            405.3333435058594,
+            153.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 98,
+          "phase": "startup",
+          "result": "Pending",
+          "showcase_tick": 54
+        },
+        {
+          "active_frames": [
+            34,
+            41
+          ],
+          "attack_tick": 36,
+          "image": "python-left-active.png",
+          "local_hitbox": [
+            526.6666259765625,
+            405.3333435058594,
+            153.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 71,
+          "phase": "active",
+          "result": "Hit { damage: 27 }",
+          "showcase_tick": 66
+        },
+        {
+          "active_frames": [
+            34,
+            41
+          ],
+          "attack_tick": 63,
+          "image": "python-left-recovery.png",
+          "local_hitbox": [
+            526.6666259765625,
+            405.3333435058594,
+            153.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 71,
+          "phase": "recovery",
+          "result": "Hit { damage: 27 }",
+          "showcase_tick": 93
+        }
+      ],
+      "character": "python",
+      "contact_tick": 64,
+      "result": "Hit { damage: 27 }",
+      "reverse": true,
+      "video_frames": null
+    },
+    {
+      "captures": [
+        {
+          "active_frames": [
+            40,
+            47
+          ],
+          "attack_tick": 30,
+          "image": "cpp-right-startup.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            173.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 100,
+          "phase": "startup",
+          "result": "Pending",
+          "showcase_tick": 60
+        },
+        {
+          "active_frames": [
+            40,
+            47
+          ],
+          "attack_tick": 42,
+          "image": "cpp-right-active.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            173.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 70,
+          "phase": "active",
+          "result": "Hit { damage: 30 }",
+          "showcase_tick": 72
+        },
+        {
+          "active_frames": [
+            40,
+            47
+          ],
+          "attack_tick": 69,
+          "image": "cpp-right-recovery.png",
+          "local_hitbox": [
+            599.9999389648438,
+            405.3333435058594,
+            173.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 70,
+          "phase": "recovery",
+          "result": "Hit { damage: 30 }",
+          "showcase_tick": 99
+        }
+      ],
+      "character": "cpp",
+      "contact_tick": 70,
+      "result": "Hit { damage: 30 }",
+      "reverse": false,
+      "video_frames": [
+        900,
+        1079
+      ]
+    },
+    {
+      "captures": [
+        {
+          "active_frames": [
+            40,
+            47
+          ],
+          "attack_tick": 30,
+          "image": "cpp-left-startup.png",
+          "local_hitbox": [
+            506.6665954589844,
+            405.3333435058594,
+            173.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 100,
+          "phase": "startup",
+          "result": "Pending",
+          "showcase_tick": 60
+        },
+        {
+          "active_frames": [
+            40,
+            47
+          ],
+          "attack_tick": 42,
+          "image": "cpp-left-active.png",
+          "local_hitbox": [
+            506.6665954589844,
+            405.3333435058594,
+            173.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 70,
+          "phase": "active",
+          "result": "Hit { damage: 30 }",
+          "showcase_tick": 72
+        },
+        {
+          "active_frames": [
+            40,
+            47
+          ],
+          "attack_tick": 69,
+          "image": "cpp-left-recovery.png",
+          "local_hitbox": [
+            506.6665954589844,
+            405.3333435058594,
+            173.33334350585938,
+            189.33334350585938
+          ],
+          "opponent_health": 70,
+          "phase": "recovery",
+          "result": "Hit { damage: 30 }",
+          "showcase_tick": 99
+        }
+      ],
+      "character": "cpp",
+      "contact_tick": 70,
+      "result": "Hit { damage: 30 }",
+      "reverse": true,
+      "video_frames": null
+    }
+  ],
+  "simulation": "actual MoveShowcase fixed updates; no synthetic contacts or interpolation",
+  "stage_life": [
+    {
+      "arena": "JavaStreet",
+      "image": "java-street-095-on.png",
+      "stage_life": true,
+      "visual_time_seconds": 9.5
+    },
+    {
+      "arena": "JavaStreet",
+      "image": "java-street-095-off.png",
+      "stage_life": false,
+      "visual_time_seconds": 9.5
+    },
+    {
+      "arena": "JavaStreet",
+      "image": "java-street-350-on.png",
+      "stage_life": true,
+      "visual_time_seconds": 35.0
+    },
+    {
+      "arena": "JavaStreet",
+      "image": "java-street-350-off.png",
+      "stage_life": false,
+      "visual_time_seconds": 35.0
+    },
+    {
+      "arena": "Sirius",
+      "image": "sirius-084-on.png",
+      "stage_life": true,
+      "visual_time_seconds": 8.399999618530273
+    },
+    {
+      "arena": "Sirius",
+      "image": "sirius-084-off.png",
+      "stage_life": false,
+      "visual_time_seconds": 8.399999618530273
+    }
+  ],
+  "stage_video": {
+    "arena": "JavaStreet",
+    "combat": "static idle world",
+    "video_frames": [
+      1080,
+      1559
+    ],
+    "visual_time_seconds": [
+      6.0,
+      14.0
+    ]
+  },
+  "video": "assets/showcase/presentation-polish-2026-09-08.mp4",
+  "video_frame_count": 1560
+}

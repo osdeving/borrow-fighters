@@ -43,11 +43,12 @@ pub enum CombatLabMove {
     Throw,
     Projectile,
     SignatureSpecial,
+    CinematicSpecial,
 }
 
 impl CombatLabMove {
     /// Ordered move list used by cycling controls.
-    pub const ALL: [Self; 11] = [
+    pub const ALL: [Self; 12] = [
         Self::LightPunch,
         Self::HeavyPunch,
         Self::Kick,
@@ -59,6 +60,7 @@ impl CombatLabMove {
         Self::Throw,
         Self::Projectile,
         Self::SignatureSpecial,
+        Self::CinematicSpecial,
     ];
 
     /// Parses a CLI move name.
@@ -75,6 +77,9 @@ impl CombatLabMove {
             "throw" | "grab" | "close_throw" | "close-throw" => Some(Self::Throw),
             "projectile" | "special" | "fireball" => Some(Self::Projectile),
             "signature_special" | "signature-special" | "signature" => Some(Self::SignatureSpecial),
+            "cinematic_special" | "cinematic-special" | "cinematic" | "ultimate" => {
+                Some(Self::CinematicSpecial)
+            }
             _ => None,
         }
     }
@@ -93,6 +98,7 @@ impl CombatLabMove {
             Self::Throw => "Throw",
             Self::Projectile => "Projectile",
             Self::SignatureSpecial => "Signature Special",
+            Self::CinematicSpecial => "Cinematic Special",
         }
     }
 
@@ -110,6 +116,7 @@ impl CombatLabMove {
             Self::Throw => Some(AttackKind::Throw),
             Self::Projectile => None,
             Self::SignatureSpecial => Some(AttackKind::SignatureSpecial),
+            Self::CinematicSpecial => Some(AttackKind::CinematicSpecial),
         }
     }
 
@@ -126,6 +133,7 @@ impl CombatLabMove {
             Self::Throw => CombatLabAnalysisMove::Close(MoveInputKind::Throw),
             Self::Projectile => CombatLabAnalysisMove::Projectile,
             Self::SignatureSpecial => CombatLabAnalysisMove::Close(MoveInputKind::SignatureSpecial),
+            Self::CinematicSpecial => CombatLabAnalysisMove::Close(MoveInputKind::CinematicSpecial),
         }
     }
 
@@ -172,6 +180,10 @@ impl CombatLabMove {
                 ..FighterInput::default()
             },
             Self::Projectile => FighterInput::default(),
+            Self::CinematicSpecial => FighterInput {
+                cinematic_special: true,
+                ..FighterInput::default()
+            },
             Self::SignatureSpecial => FighterInput {
                 signature_special: true,
                 ..FighterInput::default()
@@ -554,7 +566,7 @@ impl CombatLab {
         if self.character == CharacterId::Go
             && self.selected_move == CombatLabMove::SignatureSpecial
         {
-            self.selected_move = CombatLabMove::ALL[0];
+            self.selected_move = CombatLabMove::CinematicSpecial;
         }
         self.reset_playback();
     }

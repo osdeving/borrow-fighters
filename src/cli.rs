@@ -269,7 +269,7 @@ impl Display for CliError {
 impl std::error::Error for CliError {}
 
 fn usage() -> &'static str {
-    "Usage:\n  cargo run\n  cargo run -- --showcase --character rust --move anti_air --repeat --reverse\n  cargo run -- --fight --p1 cpp --p2 python\n  cargo run -- --lab combat --character rust --move light_punch\n  cargo run -- --lab combat --character duke --pose block\n  cargo run -- --lab combat --character cpp --move kick\n  cargo run -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip idle --character python --move projectile"
+    "Usage:\n  cargo run\n  cargo run -- --showcase --character rust --move cinematic_special --repeat --reverse\n  cargo run -- --fight --p1 cpp --p2 python\n  cargo run -- --lab combat --character rust --move light_punch\n  cargo run -- --lab combat --character duke --pose block\n  cargo run -- --lab combat --character cpp --move kick\n  cargo run -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip idle --character python --move projectile"
 }
 
 fn infer_sprite_viewer_character(path: &std::path::Path) -> Option<CharacterId> {

@@ -31,7 +31,7 @@ const GO_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
 const C_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
 const PYTHON_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
 const CPP_BODY_METRICS: FighterBodyMetrics = FighterBodyMetrics::DEFAULT;
-const RUST_MOVE_IDS: [MoveId; 10] = [
+const RUST_MOVE_IDS: [MoveId; 11] = [
     MoveId::RustBorrowJab,
     MoveId::HeavyPunch,
     MoveId::Kick,
@@ -42,8 +42,9 @@ const RUST_MOVE_IDS: [MoveId; 10] = [
     MoveId::AirKick,
     MoveId::RustOwnershipThrow,
     MoveId::RustBorrowFortress,
+    MoveId::RustOwnershipEclipse,
 ];
-const DUKE_MOVE_IDS: [MoveId; 10] = [
+const DUKE_MOVE_IDS: [MoveId; 11] = [
     MoveId::LightPunch,
     MoveId::DukeBoilerplatePoke,
     MoveId::Kick,
@@ -54,8 +55,9 @@ const DUKE_MOVE_IDS: [MoveId; 10] = [
     MoveId::AirKick,
     MoveId::DukeEnterpriseThrow,
     MoveId::DukePrintlnBarrage,
+    MoveId::DukeJvmOverdrive,
 ];
-const GO_MOVE_IDS: [MoveId; 9] = [
+const GO_MOVE_IDS: [MoveId; 10] = [
     MoveId::GoGoroutineJab,
     MoveId::HeavyPunch,
     MoveId::GoDeferKick,
@@ -65,8 +67,9 @@ const GO_MOVE_IDS: [MoveId; 9] = [
     MoveId::AirPunch,
     MoveId::GoHopkick,
     MoveId::CloseThrow,
+    MoveId::GoMillionGoroutines,
 ];
-const C_MOVE_IDS: [MoveId; 10] = [
+const C_MOVE_IDS: [MoveId; 11] = [
     MoveId::CPointerJab,
     MoveId::CUnsafePoke,
     MoveId::CNullStepKick,
@@ -77,8 +80,9 @@ const C_MOVE_IDS: [MoveId; 10] = [
     MoveId::AirKick,
     MoveId::CUndefinedThrow,
     MoveId::CSegmentationFault,
+    MoveId::CKernelPanic,
 ];
-const PYTHON_MOVE_IDS: [MoveId; 10] = [
+const PYTHON_MOVE_IDS: [MoveId; 11] = [
     MoveId::PythonSnakeBite,
     MoveId::PythonDataStrike,
     MoveId::PythonHeelKick,
@@ -89,8 +93,9 @@ const PYTHON_MOVE_IDS: [MoveId; 10] = [
     MoveId::AirKick,
     MoveId::PythonConstrictThrow,
     MoveId::PythonImportAntigravity,
+    MoveId::PythonEventHorizon,
 ];
-const CPP_MOVE_IDS: [MoveId; 10] = [
+const CPP_MOVE_IDS: [MoveId; 11] = [
     MoveId::CppReferenceJab,
     MoveId::CppTemplateStrike,
     MoveId::CppOperatorKick,
@@ -101,6 +106,7 @@ const CPP_MOVE_IDS: [MoveId; 10] = [
     MoveId::AirKick,
     MoveId::CppMoveThrow,
     MoveId::CppUndefinedBazooka,
+    MoveId::CppTemplateSingularity,
 ];
 
 /// Stable identifier for playable or testable characters.

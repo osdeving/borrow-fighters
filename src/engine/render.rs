@@ -1,16 +1,18 @@
-//! Draws the greybox prototype.
+//! Draws arenas, fighters, menus and match presentation.
 //!
-//! Rendering intentionally uses primitive shapes and debug overlays so gameplay
-//! problems are visible before art production starts.
+//! System: Raylib presentation. Artwork and smooth embedded typography share
+//! screen geometry with pointer input; debug overlays remain optional.
 
 use raylib::core::text::RaylibFont;
 use raylib::prelude::*;
 use std::{f32::consts::TAU, ffi::CString};
 
+mod cinematic_effects;
 mod combat_lab;
 mod move_showcase;
 mod signature_effects;
 mod sprite_viewer;
+mod stage_life;
 
 pub use combat_lab::draw_combat_lab;
 pub use move_showcase::draw_move_showcase;
@@ -114,6 +116,8 @@ pub fn draw_fight(
 ) {
     draw.clear_background(BACKGROUND);
     draw_arena(draw, arena, assets.arenas.get(arena), visual_time_seconds);
+    draw_stage_life_layer(draw, arena, visual_time_seconds, flags, Some(world), assets);
+    draw_world_cinematic_background(draw, world, assets);
     let show_debug = flags.enabled(FeatureFlag::ShowCombatDebug);
     if show_debug {
         draw_arena_bounds(draw);
@@ -164,10 +168,11 @@ pub fn draw_fight(
     if show_debug {
         draw_body_collision(draw, world);
     }
-    draw_hit_effects(draw, world);
+    draw_hit_effects(draw, world, assets.menu_font.as_ref());
+    draw_world_cinematic_foreground(draw, world, assets);
 
     if flags.enabled(FeatureFlag::ShowHud) {
-        draw_hud(draw, world, flags, gamepad_status, show_debug);
+        draw_hud(draw, world, flags, gamepad_status, show_debug, assets);
     }
 
     if let Some(label) = world.countdown_label() {
@@ -175,7 +180,7 @@ pub fn draw_fight(
     }
 
     if flags.enabled(FeatureFlag::ShowControlsHelp) {
-        draw_help(draw);
+        draw_help(draw, assets.menu_font.as_ref());
     }
 }
 
@@ -187,6 +192,14 @@ pub fn draw_preferences(draw: &mut impl DrawTarget, options: PreferencesDrawOpti
         options.arena,
         options.assets.arenas.get(options.arena),
         options.visual_time_seconds,
+    );
+    draw_stage_life_layer(
+        draw,
+        options.arena,
+        options.visual_time_seconds,
+        options.flags,
+        None,
+        options.assets,
     );
     draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(0, 0, 0, 164));
     draw.draw_rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Color::new(4, 9, 22, 68));
@@ -729,30 +742,55 @@ fn draw_menu_chrome(
     font: Option<&Font>,
     options: &PreferencesDrawOptions<'_>,
 ) {
-    draw_menu_title_sprite(draw, font, options.assets.menu_title.as_ref());
-    draw_centered_menu_text(
-        draw,
-        font,
-        "commit your combo  //  borrow checker online",
-        WINDOW_WIDTH / 2,
-        screen_px(128),
-        14.0,
-        MENU_HACK_GREEN,
-    );
+    if options.menu.page() == MenuPage::Main {
+        draw_menu_title_sprite(draw, font, options.assets.menu_title.as_ref());
+        draw_centered_menu_text(
+            draw,
+            font,
+            "CÓDIGO NO PUNHO. BRASIL NO CENÁRIO.",
+            WINDOW_WIDTH / 2,
+            screen_px(128),
+            12.0,
+            MENU_HACK_GREEN,
+        );
+        // Slow traveling lights sit outside the interactive rows.
+        let travel = (options.visual_time_seconds * 0.18).fract();
+        let light_y = screen_px(176) + (travel * world_px(304.0)) as i32;
+        for x in [screen_px(284), screen_px(674)] {
+            draw.draw_rectangle_gradient_v(
+                x,
+                light_y,
+                screen_px(2),
+                screen_px(38),
+                Color::new(0, 202, 255, 0),
+                Color::new(0, 202, 255, 145),
+            );
+        }
+    } else {
+        draw_menu_text(
+            draw,
+            font,
+            "BORROW FIGHTERS",
+            screen_px(28),
+            screen_px(12),
+            16.0,
+            UI_TEXT,
+        );
+    }
 
     let status = format!(
-        "PADS  P1 {}  P2 {}",
+        "GAMEPADS   P1 {}   /   P2 {}",
         connected_label(options.gamepad_status.player_one),
         connected_label(options.gamepad_status.player_two)
     );
-    let width = menu_text_width(font, &status, 14.0, 1.0);
+    let width = menu_text_width(font, &status, 11.0, 1.0);
     draw_menu_text(
         draw,
         font,
         &status,
         WINDOW_WIDTH - width - screen_px(28),
-        screen_px(24),
-        14.0,
+        screen_px(14),
+        11.0,
         UI_MUTED,
     );
 }
@@ -828,42 +866,42 @@ fn draw_main_menu(
     let geometry = MenuLayout::for_page(MenuPage::Main);
     let panel = geometry.panel;
     draw_menu_panel(draw, panel);
-    draw_menu_page_title(draw, font, panel, "BOOT SELECT");
+    draw_menu_page_title(draw, font, panel, "ENTRE NA LUTA");
 
     let rows = [
         MenuLine {
             label: "QUICK FIGHT",
-            description: "boot fight loop",
+            description: "Seu próximo round começa aqui",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "VERSUS SETUP",
-            description: "configure players",
+            description: "Escolha lutadores e cenário",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "TRAINING",
-            description: "inspect hit logic",
+            description: "Domine golpes e especiais",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "LORE / ROSTER",
-            description: "read the linker book",
+            description: "Conheça quem está no ringue",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "OPTIONS",
-            description: "toggle prototype flags",
+            description: "Áudio, controles e preferências",
             value: None,
             checked: None,
         },
         MenuLine {
             label: "EXIT",
-            description: "shutdown",
+            description: "Até o próximo round",
             value: None,
             checked: None,
         },
@@ -1085,7 +1123,7 @@ fn draw_training_menu(
         },
         MenuLine {
             label: "MOVE SHOWCASE",
-            description: "Player 1 sozinho cicla todos os golpes.",
+            description: "Veja golpes e defesa em combate real.",
             value: None,
             checked: None,
         },
@@ -1449,7 +1487,7 @@ fn draw_options_menu(
         font,
         hint,
         panel.x + screen_px(48),
-        panel.y + panel.height - screen_px(52),
+        panel.y + panel.height - screen_px(64),
         13.0,
         UI_MUTED,
     );
@@ -1484,7 +1522,7 @@ fn draw_menu_panel(draw: &mut impl DrawTarget, panel: MenuPanel) {
             y,
             panel.x + panel.width - screen_px(10),
             y,
-            Color::new(78, 130, 164, 18),
+            Color::new(78, 130, 164, 6),
         );
     }
     draw.draw_rectangle_lines(
@@ -1734,7 +1772,7 @@ fn draw_large_menu_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: Lar
             row.description,
             label_x,
             row.y + row.height - screen_px(if compact_row { 13 } else { 17 }),
-            if compact_row { 8.5 } else { 11.0 },
+            if compact_row { 10.0 } else { 11.0 },
             UI_MUTED,
         );
     }
@@ -1831,7 +1869,7 @@ fn draw_selected_row_xray(draw: &mut impl DrawTarget, font: Option<&Font>, row: 
             row.y + screen_px(6),
             row.x + offset + screen_px(16),
             row.y + row.height - screen_px(8),
-            Color::new(95, 255, 174, 38),
+            Color::new(95, 255, 174, 12),
         );
     }
 
@@ -1964,10 +2002,10 @@ fn draw_menu_footer(draw: &mut impl DrawTarget, font: Option<&Font>, panel: Menu
 
 fn selected_options_hint(options: &PreferencesDrawOptions<'_>) -> &'static str {
     if options.menu.selected() == PreferencesMenu::OPTIONS_RECORDING_ROW {
-        return "Gravacao local salva videos em captures/; F9 inicia e F10 para.";
+        return "Grave seus melhores rounds. F9 inicia; F10 encerra e salva.";
     }
     if options.menu.selected() == PreferencesMenu::OPTIONS_MUSIC_VOLUME_ROW {
-        return "A/D ou setas esquerda/direita ajustam apenas a musica.";
+        return "A/D ou setas esquerda/direita ajustam o volume da música.";
     }
     if options.menu.selected() == options.menu.row_count() - 1 {
         return "Volta para o menu principal.";
@@ -2321,6 +2359,55 @@ fn menu_text_width(font: Option<&Font>, text: &str, font_size: f32, spacing: f32
     }
 }
 
+fn world_cinematic(
+    world: &World,
+) -> Option<(&Fighter, crate::combat::cinematic::CinematicSpecialState)> {
+    if world.outcome.is_some() {
+        return None;
+    }
+    // One composition at a time on simultaneous starts. Combat still resolves
+    // both moves independently; selecting the newest presentation never hits.
+    [&world.player_one, &world.player_two]
+        .into_iter()
+        .filter_map(|fighter| fighter.cinematic_special().map(|state| (fighter, state)))
+        .min_by_key(|(_, state)| state.elapsed_frames)
+}
+
+fn draw_world_cinematic_background(draw: &mut impl DrawTarget, world: &World, assets: &GameAssets) {
+    if let Some((fighter, state)) = world_cinematic(world) {
+        cinematic_effects::draw_background(draw, fighter, state, assets);
+    }
+}
+
+fn draw_world_cinematic_foreground(draw: &mut impl DrawTarget, world: &World, assets: &GameAssets) {
+    if let Some((fighter, state)) = world_cinematic(world) {
+        cinematic_effects::draw_foreground(draw, fighter, state, assets);
+    }
+}
+
+fn draw_stage_life_layer(
+    draw: &mut impl DrawTarget,
+    arena: ArenaId,
+    time: f32,
+    flags: FeatureFlags,
+    world: Option<&World>,
+    assets: &GameAssets,
+) {
+    if flags.enabled(FeatureFlag::ShowStageLife) {
+        stage_life::draw_stage_life(
+            draw,
+            stage_life::StageLifeDrawOptions {
+                arena,
+                time,
+                dog_atlas: assets.caramelo_run.as_ref(),
+                jessica_atlas: assets.jessica_gesture.as_ref(),
+                font: assets.menu_font.as_ref(),
+                cinematic_active: world.is_some_and(|world| world_cinematic(world).is_some()),
+            },
+        );
+    }
+}
+
 fn draw_arena(
     draw: &mut impl DrawTarget,
     arena: ArenaId,
@@ -2529,7 +2616,7 @@ fn draw_biotic_motion(draw: &mut impl DrawTarget, time: f32) {
         let x = screen_px(228 + index * 154);
         let y = screen_px(182 + (index % 2) * 34);
         let radius = world_px(12.0 + pulse01(time, 0.7, index as f32 * 0.3) * 12.0);
-        draw.draw_circle_lines(x, y, radius, Color::new(95, 255, 174, 38));
+        draw.draw_circle_lines(x, y, radius, Color::new(95, 255, 174, 12));
     }
 }
 
@@ -2930,54 +3017,93 @@ fn draw_hud(
     flags: FeatureFlags,
     gamepad_status: GamepadStatus,
     show_debug: bool,
+    assets: &GameAssets,
 ) {
-    draw.draw_text(
-        "Borrow Fighters / Prototype 0.1 Greybox",
-        screen_px(24),
-        screen_px(12),
-        screen_px(20),
-        UI_TEXT,
+    let font = assets.menu_font.as_ref();
+    draw.draw_rectangle_gradient_v(
+        0,
+        0,
+        WINDOW_WIDTH,
+        screen_px(108),
+        Color::new(3, 9, 20, 236),
+        Color::new(3, 9, 20, 0),
     );
+    draw_menu_text(
+        draw,
+        font,
+        "BORROW FIGHTERS",
+        screen_px(24),
+        screen_px(10),
+        11.0,
+        UI_MUTED,
+    );
+    draw_centered_menu_text(
+        draw,
+        font,
+        "LOCAL VERSUS",
+        WINDOW_WIDTH / 2,
+        screen_px(13),
+        10.0,
+        UI_MUTED,
+    );
+
+    draw_health_bar(draw, font, &world.player_one, false);
+    draw_health_bar(draw, font, &world.player_two, true);
+    let center_x = WINDOW_WIDTH / 2;
+    draw.draw_rectangle(
+        center_x - screen_px(29),
+        screen_px(37),
+        screen_px(58),
+        screen_px(45),
+        Color::new(8, 20, 34, 232),
+    );
+    draw.draw_rectangle_lines(
+        center_x - screen_px(29),
+        screen_px(37),
+        screen_px(58),
+        screen_px(45),
+        Color::new(112, 161, 185, 140),
+    );
+    draw_centered_menu_text(draw, font, "VS", center_x, screen_px(43), 28.0, UI_TEXT);
 
     if show_debug {
         draw_hud_debug_status(draw, flags, gamepad_status);
     }
 
-    draw_health_bar(
-        draw,
-        screen_px(24),
-        screen_px(72),
-        world.player_one.health,
-        world.player_one.max_health,
-        world.player_one.name,
-    );
-    draw_health_bar(
-        draw,
-        WINDOW_WIDTH - screen_px(324),
-        screen_px(72),
-        world.player_two.health,
-        world.player_two.max_health,
-        world.player_two.name,
-    );
-
     if let Some(outcome) = world.outcome {
-        let message = match outcome {
+        let (title, message, accent) = match outcome {
             MatchOutcome::Winner(PlayerSlot::One) => {
-                format!("{} wins - press R/Menu", world.player_one.name)
+                ("VITÓRIA", world.player_one.name, MENU_ACCENT)
             }
             MatchOutcome::Winner(PlayerSlot::Two) => {
-                format!("{} wins - press R/Menu", world.player_two.name)
+                ("VITÓRIA", world.player_two.name, MENU_ACCENT_ALT)
             }
-            MatchOutcome::Draw => "Draw - press R/Menu".to_owned(),
+            MatchOutcome::Draw => ("EMPATE", "Um round à altura dos dois.", UI_TEXT),
         };
-        let font_size = screen_px(32);
-        let width = measure_text_width(&message, font_size);
-        draw.draw_text(
-            &message,
-            (WINDOW_WIDTH - width) / 2,
-            screen_px(124),
-            font_size,
-            UI_TEXT,
+        let banner = Rectangle::new(
+            world_px(245.0),
+            world_px(114.0),
+            world_px(470.0),
+            world_px(112.0),
+        );
+        draw.draw_rectangle_rec(banner, Color::new(4, 11, 22, 234));
+        draw.draw_rectangle(
+            banner.x as i32,
+            banner.y as i32,
+            banner.width as i32,
+            screen_px(3),
+            accent,
+        );
+        draw_centered_menu_text(draw, font, title, center_x, screen_px(121), 37.0, accent);
+        draw_centered_menu_text(draw, font, message, center_x, screen_px(162), 21.0, UI_TEXT);
+        draw_centered_menu_text(
+            draw,
+            font,
+            "R / START  revanche     •     ESC  menu",
+            center_x,
+            screen_px(198),
+            12.0,
+            UI_MUTED,
         );
     }
 }
@@ -3083,40 +3209,58 @@ fn draw_countdown(draw: &mut impl DrawTarget, label: &str, assets: &GameAssets) 
     }
 }
 
-fn draw_help(draw: &mut impl DrawTarget) {
-    draw.draw_text(
-        "P1: A/D/W/S/Q or Pad LS/DPad, A jump, LB/LT block",
+fn draw_help(draw: &mut impl DrawTarget, font: Option<&Font>) {
+    draw.draw_rectangle_gradient_v(
+        0,
+        WINDOW_HEIGHT - screen_px(142),
+        WINDOW_WIDTH,
+        screen_px(142),
+        Color::new(3, 9, 20, 0),
+        Color::new(3, 9, 20, 225),
+    );
+    draw_menu_text(
+        draw,
+        font,
+        "P1: A/D/W/S movimento, Q defesa  |  Controle: LS/DPad, A pula, LB/LT defende",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(124),
-        screen_px(15),
+        15.0,
         UI_TEXT,
     );
-    draw.draw_text(
-        "P1: F LP/X, H HP/Y, V kick/B, G projectile/RB, T signature/RT",
+    draw_menu_text(
+        draw,
+        font,
+        "P1: F soco/X, H forte/Y, V chute/B, G projétil/RB, T assinatura/RT",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(100),
-        screen_px(15),
+        15.0,
         UI_TEXT,
     );
-    draw.draw_text(
-        "P1 mods: S+V sweep, S+H anti-air, forward+H overhead, Q+F throw, air F/V",
+    draw_menu_text(
+        draw,
+        font,
+        "P1: S+V rasteira, S+H gancho, frente+H overhead, Q+F agarrão, F/V no ar",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(76),
-        screen_px(15),
+        15.0,
         UI_TEXT,
     );
-    draw.draw_text(
-        "P1/P2: CPU default; Options toggles P1, C or View toggles P2",
+    draw_menu_text(
+        draw,
+        font,
+        "CINEMÁTICO: P1 Y, P2 ] ou LB+RT  |  CPU: Options muda P1; C/View muda P2",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(52),
-        screen_px(15),
+        15.0,
         UI_TEXT,
     );
-    draw.draw_text(
-        "P2: keyboard/Pad2; signature \\ or RT; Start/R restart; F9/F10 record",
+    draw_menu_text(
+        draw,
+        font,
+        "P2: teclado/controle 2; assinatura \\ ou RT  |  R/Start revanche; F9/F10 grava; Esc menu",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(28),
-        screen_px(15),
+        15.0,
         UI_MUTED,
     );
 }
@@ -3149,29 +3293,115 @@ fn truncate_middle(text: &str, max_chars: usize) -> String {
 
 fn draw_health_bar(
     draw: &mut impl DrawTarget,
-    x: i32,
-    y: i32,
-    health: i32,
-    max_health: i32,
-    label: &str,
+    font: Option<&Font>,
+    fighter: &Fighter,
+    mirrored: bool,
 ) {
-    let width = screen_px(300);
-    let height = screen_px(18);
-    let max_health = max_health.max(1);
-    let ratio = health.max(0) as f32 / max_health as f32;
-    let fill_width = (width as f32 * ratio.clamp(0.0, 1.0)).round() as i32;
+    let width = screen_px(382);
+    let x = if mirrored {
+        WINDOW_WIDTH - screen_px(24) - width
+    } else {
+        screen_px(24)
+    };
+    let y = screen_px(66);
+    let height = screen_px(15);
+    let max_health = fighter.max_health.max(1);
+    let health = fighter.health.clamp(0, max_health);
+    let ratio = health as f32 / max_health as f32;
+    let fill_width = (width as f32 * ratio).round() as i32;
+    let accent = if mirrored {
+        MENU_ACCENT_ALT
+    } else {
+        MENU_ACCENT
+    };
     let fill = if health * 4 <= max_health {
         HEALTH_DANGER
     } else {
-        HEALTH_FILL
+        accent
     };
+    let fill_x = if mirrored { x + width - fill_width } else { x };
 
+    draw.draw_rectangle(
+        x - screen_px(3),
+        y - screen_px(3),
+        width + screen_px(6),
+        height + screen_px(6),
+        Color::new(3, 8, 15, 230),
+    );
     draw.draw_rectangle(x, y, width, height, HEALTH_BACK);
-    draw.draw_rectangle(x, y, fill_width, height, fill);
-    draw.draw_rectangle_lines(x, y, width, height, UI_TEXT);
+    if fill_width > 0 {
+        draw.draw_rectangle_gradient_v(
+            fill_x,
+            y,
+            fill_width,
+            height,
+            fill,
+            Color::new(fill.r / 2, fill.g / 2, fill.b / 2, 255),
+        );
+        draw.draw_rectangle(
+            fill_x,
+            y,
+            fill_width,
+            screen_px(2),
+            Color::new(255, 255, 255, 164),
+        );
+    }
+    draw.draw_rectangle_lines(
+        x - screen_px(3),
+        y - screen_px(3),
+        width + screen_px(6),
+        height + screen_px(6),
+        Color::new(176, 194, 209, 144),
+    );
+    for index in 1..4 {
+        let tick_x = x + width * index / 4;
+        draw.draw_line(
+            tick_x,
+            y + screen_px(10),
+            tick_x,
+            y + height,
+            Color::new(3, 8, 15, 150),
+        );
+    }
 
-    let text = format!("{label} HP {health:03}");
-    draw.draw_text(&text, x, y - screen_px(24), screen_px(20), UI_TEXT);
+    let name_width = menu_text_width(font, fighter.name, 23.0, 1.0);
+    let name_x = if mirrored { x + width - name_width } else { x };
+    draw_menu_text(
+        draw,
+        font,
+        fighter.name,
+        name_x,
+        screen_px(34),
+        23.0,
+        UI_TEXT,
+    );
+    let life = format!("{health} / {max_health}");
+    let life_width = menu_text_width(font, &life, 11.0, 1.0);
+    let life_x = if mirrored { x } else { x + width - life_width };
+    draw_menu_text(draw, font, &life, life_x, screen_px(45), 11.0, UI_MUTED);
+    let slot = if mirrored { "PLAYER 02" } else { "PLAYER 01" };
+    let slot_width = menu_text_width(font, slot, 9.0, 1.0);
+    let slot_x = if mirrored { x + width - slot_width } else { x };
+    draw_menu_text(draw, font, slot, slot_x, screen_px(87), 9.0, accent);
+    let special = if mirrored {
+        "] / LB+RT   CINEMÁTICO"
+    } else {
+        "Y / LB+RT   CINEMÁTICO"
+    };
+    let special_width = menu_text_width(font, special, 10.0, 1.0);
+    let special_x = if mirrored {
+        x
+    } else {
+        x + width - special_width
+    };
+    draw.draw_rectangle(
+        special_x - screen_px(4),
+        screen_px(85),
+        special_width + screen_px(8),
+        screen_px(16),
+        Color::new(3, 9, 20, 176),
+    );
+    draw_menu_text(draw, font, special, special_x, screen_px(87), 10.0, UI_TEXT);
 }
 
 fn draw_projectiles(
@@ -3378,7 +3608,7 @@ fn draw_fighter_ground_light(draw: &mut impl DrawTarget, fighter: &Fighter) {
     );
 }
 
-fn draw_hit_effects(draw: &mut impl DrawTarget, world: &World) {
+fn draw_hit_effects(draw: &mut impl DrawTarget, world: &World, font: Option<&Font>) {
     for effect in &world.hit_effects {
         let progress = hit_effect_progress(effect.timer);
         let fade_alpha = ((1.0 - progress) * 255.0).clamp(0.0, 255.0).round() as u8;
@@ -3402,19 +3632,23 @@ fn draw_hit_effects(draw: &mut impl DrawTarget, world: &World) {
         }
 
         let damage = format!("-{}", effect.damage);
-        draw.draw_text(
+        draw_menu_text(
+            draw,
+            font,
             &damage,
             x + screen_px(14),
             y - screen_px(18),
-            screen_px(24),
+            24.0,
             color,
         );
         let label = if effect.blocked { "BLOCK" } else { "HIT" };
-        draw.draw_text(
+        draw_menu_text(
+            draw,
+            font,
             label,
             x - screen_px(18),
             y - screen_px(42),
-            screen_px(20),
+            20.0,
             color,
         );
     }

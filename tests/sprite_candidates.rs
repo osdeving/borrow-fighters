@@ -62,7 +62,9 @@ fn attack_clip(kind: AttackKind) -> FighterSpriteClip {
         AttackKind::AirPunch => FighterSpriteClip::AirPunch,
         AttackKind::AirKick => FighterSpriteClip::AirKick,
         AttackKind::Throw => FighterSpriteClip::Throw,
-        AttackKind::SignatureSpecial => FighterSpriteClip::SignatureSpecial,
+        AttackKind::SignatureSpecial | AttackKind::CinematicSpecial => {
+            FighterSpriteClip::SignatureSpecial
+        }
     }
 }
 
@@ -115,6 +117,11 @@ fn candidate_attack_poses_match_every_combat_tick_including_active_boundaries() 
     for candidate in available_candidates() {
         let key = candidate.character.audio_key();
         for &move_id in character_spec(candidate.character).move_ids {
+            // Cinematic moves reuse phase-retimed actor clips; their presentation
+            // contract is covered separately in cinematic_specials.rs.
+            if AttackKind::from_move_id(move_id) == AttackKind::CinematicSpecial {
+                continue;
+            }
             let timing = move_spec(move_id).frames;
             let requested_clip = attack_clip(AttackKind::from_move_id(move_id));
             let clip_name = requested_clip.as_str();

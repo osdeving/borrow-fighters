@@ -50,6 +50,7 @@ pub enum AttackKind {
     AirKick,
     Throw,
     SignatureSpecial,
+    CinematicSpecial,
 }
 
 /// A currently active offensive shape.
@@ -112,6 +113,12 @@ impl AttackKind {
             | MoveId::CSegmentationFault
             | MoveId::PythonImportAntigravity
             | MoveId::CppUndefinedBazooka => Self::SignatureSpecial,
+            MoveId::RustOwnershipEclipse
+            | MoveId::DukeJvmOverdrive
+            | MoveId::GoMillionGoroutines
+            | MoveId::CKernelPanic
+            | MoveId::PythonEventHorizon
+            | MoveId::CppTemplateSingularity => Self::CinematicSpecial,
         }
     }
 
@@ -128,6 +135,7 @@ impl AttackKind {
             MoveInputKind::AirKick => Self::AirKick,
             MoveInputKind::Throw => Self::Throw,
             MoveInputKind::SignatureSpecial => Self::SignatureSpecial,
+            MoveInputKind::CinematicSpecial => Self::CinematicSpecial,
         }
     }
 
@@ -144,6 +152,7 @@ impl AttackKind {
             Self::AirKick => MoveId::AirKick,
             Self::Throw => MoveId::CloseThrow,
             Self::SignatureSpecial => MoveId::RustBorrowFortress,
+            Self::CinematicSpecial => MoveId::RustOwnershipEclipse,
         }
     }
 

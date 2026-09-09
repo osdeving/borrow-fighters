@@ -31,6 +31,7 @@ const NONE: FighterInput = FighterInput {
     kick: false,
     projectile: false,
     signature_special: false,
+    cinematic_special: false,
 };
 
 fn close_world(character: CharacterId) -> World {

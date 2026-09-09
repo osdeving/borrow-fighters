@@ -36,6 +36,10 @@ pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, asset
         draw_lab_grid(draw, Color::new(44, 49, 60, 255));
     }
 
+    if let Some(state) = lab.fighter().cinematic_special() {
+        super::cinematic_effects::draw_background(draw, lab.fighter(), state, assets);
+    }
+
     let (body_color, sprite_atlas, projectile_texture) = match lab.character() {
         CharacterId::Rust => (
             PLAYER_ONE,
@@ -88,6 +92,9 @@ pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, asset
     );
 
     draw_lab_projectiles(draw, lab.projectiles(), projectile_texture);
+    if let Some(state) = lab.fighter().cinematic_special() {
+        super::cinematic_effects::draw_foreground(draw, lab.fighter(), state, assets);
+    }
     combat_debug::draw_combat_lab_debug(draw, lab);
     if lab.is_signature_actor_preview() {
         draw.draw_text(

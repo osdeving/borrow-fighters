@@ -206,3 +206,7 @@ Clips opcionais não quebram o jogo se o arquivo não existir. Os assets atuais 
 - Criar teste de lint para garantir que todo binding referencia clip existente no manifesto.
 - Trocar placeholders CC0 por direção sonora própria quando houver áudio original.
 - Avaliar middleware dedicado somente quando Raylib deixar de cobrir mistura, estados, bancos ou authoring.
+
+## Cinematográficos adicionais
+
+Os seis `MoveId` cinematográficos têm bindings explícitos de `fighter.attack.start` e `combat.hit` no [manifesto](../assets/audio/audio_manifest.json). As vozes reaproveitam os clips fortes já disponíveis do personagem; os impactos usam `sfx.combat.hit.heavy.01/02`. Não foram gravadas falas novas nem adicionados cues. O dano e o áudio de impacto continuam vindo do contato local em `World`, nunca do efeito de tela. Os nomes estáveis dos golpes e comandos estão no [guia técnico de combate](12-technical-combat-guide.md#especiais-cinematográficos-adicionais).

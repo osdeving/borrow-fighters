@@ -446,7 +446,7 @@ fn signature_lab_playback_uses_real_loadout_and_keeps_go_cycle_supported() {
         previous_move: true,
         ..CombatLabInput::default()
     });
-    assert_eq!(go.selected_move(), CombatLabMove::Projectile);
+    assert_eq!(go.selected_move(), CombatLabMove::CinematicSpecial);
     go.update(CombatLabInput {
         next_move: true,
         ..CombatLabInput::default()

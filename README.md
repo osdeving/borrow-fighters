@@ -14,6 +14,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Visão e produto
 
+- [`docs/22-presentation-and-brazilian-stage-life.md`](docs/22-presentation-and-brazilian-stage-life.md): polimento de interface, cenários vivos e seis novos especiais cinematográficos.
 - [`docs/00-vision.md`](docs/00-vision.md): visão do jogo.
 - [`docs/01-mini-gdd.md`](docs/01-mini-gdd.md): Mini-GDD inicial.
 - [`docs/02-prototype-scope.md`](docs/02-prototype-scope.md): escopo do primeiro protótipo.
@@ -63,6 +64,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Decisões registradas
 
+- [`docs/adr/0015-cinematic-presentation-and-stage-life.md`](docs/adr/0015-cinematic-presentation-and-stage-life.md): fontes consistentes, atores de cenário e efeitos cinematográficos com contato local.
 - [`docs/adr/0001-stack-rust-raylib.md`](docs/adr/0001-stack-rust-raylib.md): decisão inicial de stack.
 - [`docs/adr/0002-version-control-workflow.md`](docs/adr/0002-version-control-workflow.md): fluxo de branches, PRs e commits.
 - [`docs/adr/0003-code-architecture-rust-raylib.md`](docs/adr/0003-code-architecture-rust-raylib.md): arquitetura inicial de código Rust + Raylib.
@@ -100,6 +102,27 @@ _Clique para ver os cinco especiais, o arremesso com troca de lados e o gancho: 
 
 O [clipe original do greybox](assets/showcase/prototype-0.1-greybox.mp4) permanece como histórico.
 
+O acabamento atual inclui fontes Barlow/Lora incorporadas com acentos e filtragem
+suave, HUD renovado, menus com descrições, caramelo de pelo curto correndo entre
+intervalos e uma participação de “Já acabou, Jéssica?” ao fundo de São Paulo.
+`Options > Vida nos cenarios` alterna os detalhes brasileiros dos cenários.
+As fontes e a arte têm procedência em [assets/fonts](assets/fonts/README.md) e
+[assets/production/stage-life](assets/production/stage-life/README.md).
+
+Cada um dos seis personagens também ganha um especial cinematográfico adicional:
+`Y` para P1, `]` para P2, ou `LB` segurado + `RT` no controle. A apresentação ocupa
+a tela; o dano continua na hitbox local e pode ser bloqueado. Para inspecionar:
+
+```sh
+cargo run -- --showcase --character rust --move cinematic_special --repeat
+```
+
+Troque `rust` por `duke`, `go`, `c`, `python` ou `cpp`. Os especiais anteriores
+continuam em `T` / `\\` / `RT`. [Plano e critérios](docs/22-presentation-and-brazilian-stage-life.md).
+
+[Vídeo do novo acabamento e dos especiais](assets/showcase/presentation-polish-2026-09-08.mp4)
+e [capturas/verificação](docs/evidence/presentation-polish/README.md).
+
 ## Como contribuir
 
 Leia primeiro:
@@ -133,7 +156,7 @@ As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
 
 ## Rodando o protótipo greybox
 
-O código jogável atual implementa um greybox local para validar o básico: menu principal com submenus de versus, treino, lore/roster e opções, arenas brasileiras em rotação começando pelo Sirius e trocando apenas no início da próxima luta, seleção manual de arena, livro de história carregado de JSON, intro cinematográfica com contagem `11` / `10` / `01` / `Fight!`, personagens com atlas de ações revisadas e placeholders preservados, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, varredura, overhead, anti-air com lançamento, arremesso com troca de lados, ataques aéreos, fireball, cinco especiais de assinatura, queda com recuperação protegida, primeira identidade mecânica de Rust, Duke/Java, Go, C, Python e C++ por frame data, demo pública ciclando Rust, Duke/Java, C, Python e C++ sem Go no menu, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, stun, pushback, whiff recovery, hitspark, block pulse, trail de projétil, luz de chão em hitstun/blockstun, scanline/glow e animações leves de fundo por arena, vida, vitória e restart.
+O código jogável atual implementa um greybox local para validar o básico: menu principal com submenus de versus, treino, lore/roster e opções, arenas brasileiras em rotação começando pelo Sirius e trocando apenas no início da próxima luta, seleção manual de arena, livro de história carregado de JSON, intro cinematográfica com contagem `11` / `10` / `01` / `Fight!`, personagens com atlas de ações revisadas e placeholders preservados, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, varredura, overhead, anti-air com lançamento, arremesso com troca de lados, ataques aéreos, fireball, cinco especiais de assinatura, seis especiais cinematográficos adicionais, queda com recuperação protegida, primeira identidade mecânica de Rust, Duke/Java, Go, C, Python e C++ por frame data, demo pública ciclando Rust, Duke/Java, C, Python e C++ sem Go no menu, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, stun, pushback, whiff recovery, hitspark, block pulse, trail de projétil, luz de chão em hitstun/blockstun, scanline/glow e animações leves de fundo por arena, vida, vitória e restart.
 
 O runtime também já está preparado para áudio por eventos. O manifesto fica em [`assets/audio/audio_manifest.json`](assets/audio/audio_manifest.json), e o guia técnico fica em [`docs/14-audio-pipeline.md`](docs/14-audio-pipeline.md). O pacote inicial inclui SFX/UI/vozes de anúncio, contagem pré-luta, vozes de golpe por personagem com cobertura específica para Rust e Duke/Java, e músicas de menu, Combat Lab e arenas com fontes CC0 registradas em [`assets/audio/ATTRIBUTION.md`](assets/audio/ATTRIBUTION.md). O volume global da música pode ser ajustado em `Options`.
 
@@ -186,9 +209,9 @@ cargo run -- --lab combat --character rust --pose spawn
 cargo run -- --lab combat --character rust --pose defeat
 ```
 
-No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp` para alternar pose, `Enter` para repetir, `Espaço` para pausar, `.` para avançar 1 frame quando pausado, `Home` para voltar ao frame 0, `H` para hurtbox, `B` para hitbox, `P` para pivot/eixos, `D` para dummy de contato, `A` para mostrar/esconder o fundo de arena e `Esc` para voltar ao menu quando aberto pelo submenu `Training`. O overlay mostra frame data, vantagem estimada, pushback, whiff recovery e distância após pushback. Valores aceitos em `--character`: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` ou `cpp.cpp`. Valores aceitos em `--move`: `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`, `projectile` e `signature_special`. Valores aceitos em `--pose`: `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory`, `spawn`, `defeat` e `crouch_block`. As poses mantêm o corpo parado para inspeção e reproduzem o clip com pause, avanço por frame e reinício.
+No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp` para alternar pose, `Enter` para repetir, `Espaço` para pausar, `.` para avançar 1 frame quando pausado, `Home` para voltar ao frame 0, `H` para hurtbox, `B` para hitbox, `P` para pivot/eixos, `D` para dummy de contato, `A` para mostrar/esconder o fundo de arena e `Esc` para voltar ao menu quando aberto pelo submenu `Training`. O overlay mostra frame data, vantagem estimada, pushback, whiff recovery e distância após pushback. Valores aceitos em `--character`: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` ou `cpp.cpp`. Valores aceitos em `--move`: `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`, `projectile`, `signature_special` e `cinematic_special`. Valores aceitos em `--pose`: `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory`, `spawn`, `defeat` e `crouch_block`. As poses mantêm o corpo parado para inspeção e reproduzem o clip com pause, avanço por frame e reinício.
 
-O `Move Showcase`, em `Training`, usa o personagem escolhido como Player 1 contra um adversário real. Cada um dos cinco personagens da demo tem 15 situações: os dez golpes anteriores, um especial de assinatura e quatro exemplos de defesa. O adversário se aproxima, salta para receber anti-air ou mantém a guarda apropriada para demonstrar rasteira, overhead e agarrão. O resultado mostra o dano ou bloqueio calculado pelo combate. Cada cena dura 260 frames para incluir voo, queda e recuperação; o painel inferior deixa o espaço aéreo visível. Agarrões capturam e arremessam para o outro lado, e ganchos lançam a vítima. Os especiais são Borrow Fortress, System.out.println!, Segmentation Fault, import antigravity e Undefined Bazooka, sempre disponíveis com `T`/Backslash/`RT`, sem medidor.
+O `Move Showcase`, em `Training`, usa o personagem escolhido como Player 1 contra um adversário real. Cada um dos cinco personagens da demo tem 16 situações: os dez golpes anteriores, um especial de assinatura, um cinematográfico e quatro exemplos de defesa. O adversário se aproxima, salta para receber anti-air ou mantém a guarda apropriada para demonstrar rasteira, overhead e agarrão. O resultado mostra o dano ou bloqueio calculado pelo combate. Cada cena dura 260 frames para incluir voo, queda e recuperação; o painel inferior deixa o espaço aéreo visível. Agarrões capturam e arremessam para o outro lado, e ganchos lançam a vítima. Os especiais são Borrow Fortress, System.out.println!, Segmentation Fault, import antigravity e Undefined Bazooka, sempre disponíveis com `T`/Backslash/`RT`, sem medidor.
 
 ```bash
 cargo run -- --showcase --character rust --move anti_air --repeat

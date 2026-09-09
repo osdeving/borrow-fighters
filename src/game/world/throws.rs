@@ -68,7 +68,10 @@ impl World {
                 );
             }
             crate::combat::fighter::AttackKind::HeavyPunch
-            | crate::combat::fighter::AttackKind::Overhead => defender.mark_heavy_reaction(),
+            | crate::combat::fighter::AttackKind::Overhead
+            | crate::combat::fighter::AttackKind::CinematicSpecial => {
+                defender.mark_heavy_reaction()
+            }
             _ => apply_knockdown_for_move(defender, attack, result),
         }
     }

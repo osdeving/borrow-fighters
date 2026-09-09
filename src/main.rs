@@ -19,6 +19,7 @@ fn main() {
     let (mut raylib, thread) = raylib::init()
         .size(WINDOW_WIDTH, WINDOW_HEIGHT)
         .title(WINDOW_TITLE)
+        .msaa_4x()
         .build();
     raylib.set_exit_key(None);
     raylib.show_cursor();

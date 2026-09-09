@@ -4,6 +4,13 @@
 
 Este documento e a fonte de verdade para **o que vem agora**.
 
+Rodada concluída: [polimento da apresentação, Brasil cotidiano e seis
+especiais cinematográficos](22-presentation-and-brazilian-stage-life.md), solicitado
+em 8 de setembro de 2026. Implementação integrada; 300 testes Rust, formatação,
+Clippy estrito e links/YAML aprovados. [Evidência gráfica e controles](evidence/presentation-polish/README.md).
+Próximo corte após entrega: playtest humano e fechamento
+do checklist de release, incluindo pausa, resolução e remapeamento de controles.
+
 Roadmaps especializados continuam existindo, mas devem apontar para este backlog quando uma frente virar trabalho ativo:
 
 - combate e balanceamento: [`docs/13-combat-design-roadmap.md`](13-combat-design-roadmap.md);
@@ -23,6 +30,7 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Proxima acao |
 |---|---|---|---|---|
+| Concluído | Tipografia, cenários vivos e segundo especial | Fontes incorporadas, memes animados e seis cinematográficas com contato local | [Plano e entrega](22-presentation-and-brazilian-stage-life.md), [ADR 0015](adr/0015-cinematic-presentation-and-stage-life.md) | Playtest humano do acabamento e do risco/recompensa dos novos golpes; 300 testes e revisão gráfica registrados. |
 | Concluído | Arremessos e especiais extraordinários | Cinco assinaturas, arremessos e reações integrados e verificados | [Goal local e critérios](21-signature-spectacle-and-throws.md), [ADR 0014](adr/0014-throws-launches-and-signature-effects.md) | 290 testes Rust; 40 cenas gráficas nos dois lados, 25 verificações de controles e 60 lutas de CPU. |
 | Concluído | MVP: showcase contextual, especiais e coerência de combate/arte | Cinco selecionáveis verificados; sem conteúdo novo para Go | [Plano e critérios](20-mvp-combat-showcase.md) | Corrigir debug, demonstrar contato real com oponente contextual, completar ações/reações e validar balanceamento/arte. |
 | Feito local | Cursor livre e menus por mouse | Corrigido e verificado | [Playtest](10-greybox-playtest.md), [guia técnico](12-technical-combat-guide.md#mouse-e-fechamento-da-janela), [ADR 0012](adr/0012-shared-menu-pointer-layout.md) | Cursor sem centralização por quadro; hover, cliques, saída pelo menu e fechamento nativo verificados em janela isolada. 242 testes Rust aprovados. |

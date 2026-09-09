@@ -363,6 +363,12 @@ pub enum MoveId {
     CSegmentationFault,
     PythonImportAntigravity,
     CppUndefinedBazooka,
+    RustOwnershipEclipse,
+    DukeJvmOverdrive,
+    GoMillionGoroutines,
+    CKernelPanic,
+    PythonEventHorizon,
+    CppTemplateSingularity,
 }
 
 impl MoveId {
@@ -414,6 +420,12 @@ impl MoveId {
             Self::CSegmentationFault => 43,
             Self::PythonImportAntigravity => 44,
             Self::CppUndefinedBazooka => 45,
+            Self::RustOwnershipEclipse => 46,
+            Self::DukeJvmOverdrive => 47,
+            Self::GoMillionGoroutines => 48,
+            Self::CKernelPanic => 49,
+            Self::PythonEventHorizon => 50,
+            Self::CppTemplateSingularity => 51,
         }
     }
 
@@ -466,6 +478,12 @@ impl MoveId {
             Self::CSegmentationFault => "c_segmentation_fault",
             Self::PythonImportAntigravity => "python_import_antigravity",
             Self::CppUndefinedBazooka => "cpp_undefined_bazooka",
+            Self::RustOwnershipEclipse => "rust_ownership_eclipse",
+            Self::DukeJvmOverdrive => "duke_jvm_overdrive",
+            Self::GoMillionGoroutines => "go_million_goroutines",
+            Self::CKernelPanic => "c_kernel_panic",
+            Self::PythonEventHorizon => "python_event_horizon",
+            Self::CppTemplateSingularity => "cpp_template_singularity",
         }
     }
 
@@ -521,6 +539,12 @@ impl MoveId {
             }
             "cpp_undefined_bazooka" | "cpp_template_arc" => Some(Self::CppUndefinedBazooka),
 
+            "rust_ownership_eclipse" => Some(Self::RustOwnershipEclipse),
+            "duke_jvm_overdrive" => Some(Self::DukeJvmOverdrive),
+            "go_million_goroutines" => Some(Self::GoMillionGoroutines),
+            "c_kernel_panic" => Some(Self::CKernelPanic),
+            "python_event_horizon" => Some(Self::PythonEventHorizon),
+            "cpp_template_singularity" => Some(Self::CppTemplateSingularity),
             _ => None,
         }
     }
@@ -552,6 +576,7 @@ pub enum MoveInputKind {
     AirKick,
     Throw,
     SignatureSpecial,
+    CinematicSpecial,
 }
 
 /// How an incoming hit can be guarded.
@@ -620,7 +645,7 @@ pub struct MoveSpec {
 }
 
 /// Prototype 0.1 close-range move table.
-pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 46] = [
+pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 52] = [
     MoveSpec {
         id: MoveId::LightPunch,
         input: MoveInputKind::LightPunch,
@@ -1519,6 +1544,156 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 46] = [
             block_pushback: world_px(20.0),
         },
         whiff_recovery: FrameCount::new(16),
+    },
+    MoveSpec {
+        id: MoveId::RustOwnershipEclipse,
+        input: MoveInputKind::CinematicSpecial,
+        label: "Ownership Eclipse",
+        frames: AttackFrameData {
+            duration: FrameCount::new(102),
+            active_start: FrameCount::new(36),
+            active_end: FrameCount::new(43),
+        },
+        // Full-screen spectacle never extends this local, forward-facing strike.
+        hitbox: HitboxSpec {
+            width: world_px(120.0),
+            height: world_px(142.0),
+            y_offset: world_px(10.0),
+        },
+        damage: 28,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: HitReaction {
+            hitstun: FrameCount::new(28),
+            blockstun: FrameCount::new(16),
+            hit_pushback: world_px(72.0),
+            block_pushback: world_px(28.0),
+        },
+        whiff_recovery: FrameCount::new(18),
+    },
+    MoveSpec {
+        id: MoveId::DukeJvmOverdrive,
+        input: MoveInputKind::CinematicSpecial,
+        label: "JVM Overdrive",
+        frames: AttackFrameData {
+            duration: FrameCount::new(110),
+            active_start: FrameCount::new(42),
+            active_end: FrameCount::new(49),
+        },
+        // Full-screen spectacle never extends this local, forward-facing strike.
+        hitbox: HitboxSpec {
+            width: world_px(135.0),
+            height: world_px(142.0),
+            y_offset: world_px(10.0),
+        },
+        damage: 32,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: HitReaction {
+            hitstun: FrameCount::new(28),
+            blockstun: FrameCount::new(16),
+            hit_pushback: world_px(72.0),
+            block_pushback: world_px(28.0),
+        },
+        whiff_recovery: FrameCount::new(18),
+    },
+    MoveSpec {
+        id: MoveId::GoMillionGoroutines,
+        input: MoveInputKind::CinematicSpecial,
+        label: "Million Goroutines",
+        frames: AttackFrameData {
+            duration: FrameCount::new(94),
+            active_start: FrameCount::new(32),
+            active_end: FrameCount::new(39),
+        },
+        // Full-screen spectacle never extends this local, forward-facing strike.
+        hitbox: HitboxSpec {
+            width: world_px(100.0),
+            height: world_px(142.0),
+            y_offset: world_px(10.0),
+        },
+        damage: 25,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: HitReaction {
+            hitstun: FrameCount::new(28),
+            blockstun: FrameCount::new(16),
+            hit_pushback: world_px(72.0),
+            block_pushback: world_px(28.0),
+        },
+        whiff_recovery: FrameCount::new(18),
+    },
+    MoveSpec {
+        id: MoveId::CKernelPanic,
+        input: MoveInputKind::CinematicSpecial,
+        label: "Kernel Panic",
+        frames: AttackFrameData {
+            duration: FrameCount::new(110),
+            active_start: FrameCount::new(44),
+            active_end: FrameCount::new(51),
+        },
+        // Full-screen spectacle never extends this local, forward-facing strike.
+        hitbox: HitboxSpec {
+            width: world_px(145.0),
+            height: world_px(142.0),
+            y_offset: world_px(10.0),
+        },
+        damage: 32,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: HitReaction {
+            hitstun: FrameCount::new(28),
+            blockstun: FrameCount::new(16),
+            hit_pushback: world_px(72.0),
+            block_pushback: world_px(28.0),
+        },
+        whiff_recovery: FrameCount::new(18),
+    },
+    MoveSpec {
+        id: MoveId::PythonEventHorizon,
+        input: MoveInputKind::CinematicSpecial,
+        label: "Event Horizon",
+        frames: AttackFrameData {
+            duration: FrameCount::new(98),
+            active_start: FrameCount::new(34),
+            active_end: FrameCount::new(41),
+        },
+        // Full-screen spectacle never extends this local, forward-facing strike.
+        hitbox: HitboxSpec {
+            width: world_px(115.0),
+            height: world_px(142.0),
+            y_offset: world_px(10.0),
+        },
+        damage: 27,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: HitReaction {
+            hitstun: FrameCount::new(28),
+            blockstun: FrameCount::new(16),
+            hit_pushback: world_px(72.0),
+            block_pushback: world_px(28.0),
+        },
+        whiff_recovery: FrameCount::new(18),
+    },
+    MoveSpec {
+        id: MoveId::CppTemplateSingularity,
+        input: MoveInputKind::CinematicSpecial,
+        label: "Template Singularity",
+        frames: AttackFrameData {
+            duration: FrameCount::new(106),
+            active_start: FrameCount::new(40),
+            active_end: FrameCount::new(47),
+        },
+        // Full-screen spectacle never extends this local, forward-facing strike.
+        hitbox: HitboxSpec {
+            width: world_px(130.0),
+            height: world_px(142.0),
+            y_offset: world_px(10.0),
+        },
+        damage: 30,
+        guard_rule: GuardRule::Mid,
+        hit_reaction: HitReaction {
+            hitstun: FrameCount::new(28),
+            blockstun: FrameCount::new(16),
+            hit_pushback: world_px(72.0),
+            block_pushback: world_px(28.0),
+        },
+        whiff_recovery: FrameCount::new(18),
     },
 ];
 

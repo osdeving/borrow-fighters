@@ -321,6 +321,7 @@ impl MoveShowcase {
                     "Jump attack / strike a grounded opponent"
                 }
                 CombatLabMove::Projectile => "Projectile / control distance",
+                CombatLabMove::CinematicSpecial => "Cinematic special / commit at close range",
                 CombatLabMove::SignatureSpecial => match self.character {
                     CharacterId::Rust => "Borrow Fortress / armored shield rush",
                     CharacterId::Duke => "System.out.println / three-wave paper barrage",
@@ -361,6 +362,9 @@ impl MoveShowcase {
             ShowcaseScenario::Attack(CombatLabMove::Projectile) => {
                 "Launch from distance; the opponent walks into the projectile."
             }
+            ShowcaseScenario::Attack(CombatLabMove::CinematicSpecial) => {
+                "The whole arena transforms. Get close to land the strike; guard or interrupt the wind-up."
+            }
             ShowcaseScenario::Attack(CombatLabMove::SignatureSpecial) => match self.character {
                 CharacterId::Rust => {
                     "Raise the safety shield and charge. Frontal protection has a short window; throws beat it."
@@ -384,10 +388,24 @@ impl MoveShowcase {
     }
 
     fn offensive_moves(&self) -> &'static [CombatLabMove] {
-        // Signature is appended to the existing move cycle; Go keeps its ten
-        // established actions without allocating a new list every playback tick.
-        let count = CombatLabMove::ALL.len() - usize::from(self.character == CharacterId::Go);
-        &CombatLabMove::ALL[..count]
+        const GO_MOVES: [CombatLabMove; 11] = [
+            CombatLabMove::LightPunch,
+            CombatLabMove::HeavyPunch,
+            CombatLabMove::Kick,
+            CombatLabMove::Sweep,
+            CombatLabMove::Overhead,
+            CombatLabMove::AntiAir,
+            CombatLabMove::AirPunch,
+            CombatLabMove::AirKick,
+            CombatLabMove::Throw,
+            CombatLabMove::Projectile,
+            CombatLabMove::CinematicSpecial,
+        ];
+        if self.character == CharacterId::Go {
+            &GO_MOVES
+        } else {
+            &CombatLabMove::ALL
+        }
     }
 
     fn reset_current_move(&mut self) {
@@ -400,6 +418,7 @@ impl MoveShowcase {
             .set_sprite_combat_manifests(self.combat_manifests.clone());
         let gap = match self.selected_move() {
             CombatLabMove::Projectile => world_px(300.0),
+            CombatLabMove::CinematicSpecial => world_px(60.0),
             CombatLabMove::SignatureSpecial if self.character == CharacterId::Duke => {
                 world_px(220.0)
             }
@@ -489,7 +508,10 @@ impl MoveShowcase {
                     attack_input = attack_for(selected, attacker.facing);
                     self.attack_started = true;
                 }
-            } else if selected == CombatLabMove::SignatureSpecial {
+            } else if matches!(
+                selected,
+                CombatLabMove::SignatureSpecial | CombatLabMove::CinematicSpecial
+            ) {
                 // Stage each language's actual reach. Low blasts punish high
                 // guard; the other examples let the opponent advance into range.
                 if !self.attack_started {
@@ -616,6 +638,7 @@ fn attack_for(selected: CombatLabMove, facing: Facing) -> FighterInput {
         }
         CombatLabMove::Projectile => input.projectile = true,
         CombatLabMove::SignatureSpecial => input.signature_special = true,
+        CombatLabMove::CinematicSpecial => input.cinematic_special = true,
     }
     input
 }

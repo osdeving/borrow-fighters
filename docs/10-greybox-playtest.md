@@ -43,6 +43,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Testes de regras de combate sem abrir janela.
 - Move Showcase com dois lutadores, situações específicas por golpe, resultado real de contato e quatro exemplos de defesa.
 - Um especial de assinatura por personagem da demo, com animação própria e recuperação punível.
+- Um especial cinematográfico adicional para Rust, Duke/Java, Go, C, Python e C++; a apresentação ocupa a tela, mas o golpe só acerta perto do personagem.
 - Knockdown de 36 frames para rasteira, agarrão e slide da Python contra alvo no chão.
 - Combat Lab com reprodução de golpes e poses estáticas de inspeção.
 
@@ -85,9 +86,11 @@ cargo run -- --showcase --character duke --move throw --repeat
 cargo run -- --showcase --character c --move sweep --reverse
 cargo run -- --showcase --character python --move signature_special --repeat
 cargo run -- --showcase --character cpp --move signature_special --repeat --reverse
+cargo run -- --showcase --character rust --move cinematic_special --repeat
+cargo run -- --showcase --character go --move cinematic_special --repeat
 ```
 
-Cada personagem da demo tem 15 situações: 11 ataques, contando projétil e assinatura, e quatro demonstrações de defesa. A aproximação é real: o oponente anda em direção ao jab, salta em direção ao anti-air e ao Template Arc, protege o tronco contra a rasteira ou agacha contra o overhead. O agarrão pega um oponente próximo em guarda. Os ataques aéreos acontecem durante um salto real do atacante. As quatro defesas mostram guarda em pé contra jab, guarda em pé contra overhead, guarda baixa contra rasteira e bloqueio de projétil.
+Cada personagem da demo tem 16 situações: 12 ataques, contando projétil, assinatura e cinematográfico, e quatro demonstrações de defesa. A aproximação é real: o oponente anda em direção ao jab, salta em direção ao anti-air e ao Template Arc, protege o tronco contra a rasteira ou agacha contra o overhead. O agarrão pega um oponente próximo em guarda. Os ataques aéreos acontecem durante um salto real do atacante. As quatro defesas mostram guarda em pé contra jab, guarda em pé contra overhead, guarda baixa contra rasteira e bloqueio de projétil.
 
 Dano e resultado vêm das colisões do `World`, incluindo blockstun, hitstun e queda. Cada situação restaura vida e posição antes da próxima apresentação. `HIT`, `BLOCKED` e `WHIFF` descrevem o contato realmente observado; não há dano artificial para completar a demonstração.
 
@@ -184,6 +187,7 @@ Ao começar uma luta, os personagens entram em cena e depois aparece a contagem 
 | Ataque aéreo | No ar: `F` ou `V` | No ar: `O`/`Enter` ou `;`/`/` | No ar: `X` ou `B` |
 | Fireball / projétil | `G` | `Right Ctrl` ou `KP0` | `RB` |
 | Especial de assinatura | `T` | `\` (Backslash) | `RT` |
+| Especial cinematográfico | `Y` | `]` (Right bracket) | Segurar `LB` + pressionar `RT` |
 | Alternar P2 CPU/manual | `C` | `C` | `View` |
 | Reiniciar | `R` | `R` | `Menu` |
 
@@ -209,6 +213,8 @@ Durante blockstun, o lutador mantém a altura da guarda que bloqueou o golpe. Qu
 Rasteiras, agarrões e o slide da Python causam queda quando atingem um alvo no chão. A recuperação de 36 frames impede novos hits enquanto caído. Agarrões não pegam alvos no ar, em hitstun/blockstun nem nos seis primeiros frames após recuperar. Não há throw tech ou juggle de oponente caído neste corte.
 
 Especiais de assinatura são interrompíveis e ficam expostos após bloqueio ou erro. Teste um jab imediato após bloquear de perto. O projétil conserva seu botão; sua conjuração agora impede outro ataque, pulo ou guarda até terminar o tempo da pose. Um golpe sofrido interrompe essa pose.
+
+Os cinematográficos são Ownership Eclipse (Rust), JVM Overdrive (Java), Million Goroutines (Go), Kernel Panic (C), Event Horizon (Python) e Template Singularity (C++). Não exigem medidor: a antecipação de 32–44 frames permite interromper com um golpe rápido; guarda alta ou baixa reduz o dano; afastar-se evita o contato. Só há um acerto local por ativação e a recuperação longa permite punir erro ou bloqueio. A apresentação acompanha pausa e avanço por frame no treino. `Right Shift` continua sendo soco forte de P2.
 
 ## Como ler a tela
 
@@ -330,7 +336,7 @@ Controles do lab:
 - C, Python e C++ ainda usam ataques aéreos universais, mas já possuem kit terrestre, throw, projectile, vida e arquétipo próprios.
 - As arenas bitmap são placeholders gerados/derivados de referências e não devem ser tratadas como arte final.
 - O spritesheet de lutador é placeholder gerado localmente com formas simples e não deve ser tratado como arte final.
-- Fireball usa `RB`; especial de assinatura usa a borda do botão `RT` exposta pelo mapeamento Raylib.
+- Fireball usa `RB`; especial de assinatura usa a borda do botão `RT` exposta pelo mapeamento Raylib. `LB` segurado + borda de `RT` seleciona exclusivamente o cinematográfico; a guarda não impede seu início.
 - Defesa é um experimento mínimo: já separa high/low/mid/throw/projectile, mas ainda não tem direção esquerda/direita nem defesa perfeita por timing.
 - A CPU é um sparring dummy determinístico: decide em pequenos blocos de tempo, usa perfis diferentes por slot, varia movimento/ataque/especial/defesa e reage a projéteis sem ser perfeita.
 - Não há combo tree, medidor de especial, throw tech, juggle no chão ou IA adaptativa.

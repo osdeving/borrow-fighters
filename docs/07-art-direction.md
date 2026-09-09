@@ -114,6 +114,14 @@ Direções iniciais de arena vivem em [`docs/12-worldbuilding.md`](12-worldbuild
 
 ## Easter eggs
 
+A rodada [Apresentação e Brasil cotidiano](22-presentation-and-brazilian-stage-life.md)
+implementa caramelo de pelo curto com corrida em quatro poses e cameo gestual de
+“Já acabou, Jéssica?” com figurino da referência em São Paulo. Os atlas, cortes e
+origem estão em [stage-life](../assets/production/stage-life/README.md). Detalhes
+ficam atrás dos lutadores e são controlados por `ShowStageLife`. O Sirius revisado
+retira o animal estático do fundo anterior. Os seis novos especiais compõem
+geometrias técnicas de tela inteira mantendo os corpos visíveis e a colisão local.
+
 Easter eggs são parte da identidade visual do jogo. Eles devem aparecer como detalhes de cenário, cartazes, props, telas, nomes de lojas, logs, pichações fictícias ou animações distantes.
 
 Exemplos possíveis:

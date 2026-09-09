@@ -3,6 +3,7 @@
 //! Assets stay optional in the greybox phase so the game can still run with
 //! procedural debug drawing if a local file is missing.
 
+use raylib::core::{AsRawMut, text::RaylibFont};
 use raylib::prelude::*;
 use std::path::Path;
 
@@ -19,12 +20,14 @@ use crate::engine::sprites::{
 use crate::game::arena::ArenaId;
 use crate::lore::{LORE_BOOK_PATH, LoreBook};
 
-pub const ARENA_SIRIUS_PATH: &str = "assets/placeholder/arena-sirius.png";
+pub const ARENA_SIRIUS_PATH: &str = "assets/production/stage-life/arena-sirius-clean.png";
 pub const ARENA_FORTALEZA_PATH: &str = "assets/placeholder/arena-fortaleza.png";
 pub const ARENA_JAVA_STREET_PATH: &str = "assets/placeholder/arena-java-street.png";
 pub const ARENA_BIOTIC_PATH: &str = "assets/placeholder/arena-biotic.png";
 pub const ARENA_PORTO_DIGITAL_PATH: &str = "assets/placeholder/arena-porto-digital.png";
 pub const ARENA_VALE_PINHAO_PATH: &str = "assets/placeholder/arena-vale-pinhao.png";
+pub const CARAMELO_RUN_PATH: &str = "assets/production/stage-life/caramelo-run.png";
+pub const JESSICA_GESTURE_PATH: &str = "assets/production/stage-life/jessica-gesture.png";
 
 pub const COUNTDOWN_11_PATH: &str = "assets/placeholder/countdown-11.png";
 pub const COUNTDOWN_10_PATH: &str = "assets/placeholder/countdown-10.png";
@@ -36,23 +39,9 @@ pub const ROSTER_DUKE_PATH: &str = "assets/placeholder/roster-duke.png";
 pub const ROSTER_C_PATH: &str = "assets/placeholder/roster-c.png";
 pub const ROSTER_PYTHON_PATH: &str = "assets/placeholder/roster-python.png";
 pub const ROSTER_CPP_PATH: &str = "assets/placeholder/roster-cpp.png";
-const MENU_FONT_CANDIDATES: [&str; 3] = [
-    "assets/fonts/menu.ttf",
-    "/usr/share/fonts/truetype/roboto/unhinted/RobotoCondensed-Bold.ttf",
-    "/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed-Bold.ttf",
-];
-const LORE_FONT_CANDIDATES: [&str; 4] = [
-    "assets/fonts/lore.ttf",
-    "/usr/share/fonts/truetype/noto/NotoSerif-Regular.ttf",
-    "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
-    "/usr/share/fonts/truetype/freefont/FreeSerif.ttf",
-];
-const LORE_BODY_FONT_CANDIDATES: [&str; 4] = [
-    "assets/fonts/lore-body.ttf",
-    "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf",
-    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-    "/usr/share/fonts/truetype/freefont/FreeSans.ttf",
-];
+const MENU_FONT: &[u8] = include_bytes!("../../assets/fonts/BarlowCondensed-SemiBold.ttf");
+const LORE_FONT: &[u8] = include_bytes!("../../assets/fonts/Lora-Variable.ttf");
+const LORE_BODY_FONT: &[u8] = include_bytes!("../../assets/fonts/Barlow-Regular.ttf");
 
 /// Texture and metadata for one atlas-driven sprite set.
 pub struct SpriteAtlasAsset {
@@ -82,6 +71,9 @@ impl SpriteAtlasAsset {
 /// Runtime textures used by the prototype renderer.
 pub struct GameAssets {
     pub arenas: ArenaAssets,
+    /// Optional decorative actors, independent from fighter and collision data.
+    pub caramelo_run: Option<Texture2D>,
+    pub jessica_gesture: Option<Texture2D>,
     pub lore_book: LoreBook,
     pub menu_font: Option<Font>,
     pub lore_font: Option<Font>,
@@ -174,24 +166,30 @@ impl GameAssets {
     pub fn load(raylib: &mut RaylibHandle, thread: &RaylibThread) -> Self {
         Self {
             arenas: ArenaAssets {
-                sirius: load_texture_optional(raylib, thread, ARENA_SIRIUS_PATH),
-                fortaleza: load_texture_optional(raylib, thread, ARENA_FORTALEZA_PATH),
-                java_street: load_texture_optional(raylib, thread, ARENA_JAVA_STREET_PATH),
-                biotic: load_texture_optional(raylib, thread, ARENA_BIOTIC_PATH),
-                porto_digital: load_texture_optional(raylib, thread, ARENA_PORTO_DIGITAL_PATH),
-                vale_pinhao: load_texture_optional(raylib, thread, ARENA_VALE_PINHAO_PATH),
+                sirius: load_smooth_texture_optional(raylib, thread, ARENA_SIRIUS_PATH),
+                fortaleza: load_smooth_texture_optional(raylib, thread, ARENA_FORTALEZA_PATH),
+                java_street: load_smooth_texture_optional(raylib, thread, ARENA_JAVA_STREET_PATH),
+                biotic: load_smooth_texture_optional(raylib, thread, ARENA_BIOTIC_PATH),
+                porto_digital: load_smooth_texture_optional(
+                    raylib,
+                    thread,
+                    ARENA_PORTO_DIGITAL_PATH,
+                ),
+                vale_pinhao: load_smooth_texture_optional(raylib, thread, ARENA_VALE_PINHAO_PATH),
             },
+            caramelo_run: load_smooth_texture_optional(raylib, thread, CARAMELO_RUN_PATH),
+            jessica_gesture: load_smooth_texture_optional(raylib, thread, JESSICA_GESTURE_PATH),
             lore_book: LoreBook::load_or_default(LORE_BOOK_PATH),
-            menu_font: load_font_optional(raylib, thread),
-            lore_font: load_lore_font_optional(raylib, thread),
-            lore_body_font: load_lore_body_font_optional(raylib, thread),
-            menu_title: load_texture_optional(raylib, thread, MENU_TITLE_PATH),
+            menu_font: load_ui_font(raylib, thread, MENU_FONT, "menu"),
+            lore_font: load_ui_font(raylib, thread, LORE_FONT, "lore"),
+            lore_body_font: load_ui_font(raylib, thread, LORE_BODY_FONT, "lore body"),
+            menu_title: load_smooth_texture_optional(raylib, thread, MENU_TITLE_PATH),
             roster_portraits: RosterPortraitAssets {
-                rust: load_texture_optional(raylib, thread, ROSTER_RUST_PATH),
-                duke: load_texture_optional(raylib, thread, ROSTER_DUKE_PATH),
-                c: load_texture_optional(raylib, thread, ROSTER_C_PATH),
-                python: load_texture_optional(raylib, thread, ROSTER_PYTHON_PATH),
-                cpp: load_texture_optional(raylib, thread, ROSTER_CPP_PATH),
+                rust: load_smooth_texture_optional(raylib, thread, ROSTER_RUST_PATH),
+                duke: load_smooth_texture_optional(raylib, thread, ROSTER_DUKE_PATH),
+                c: load_smooth_texture_optional(raylib, thread, ROSTER_C_PATH),
+                python: load_smooth_texture_optional(raylib, thread, ROSTER_PYTHON_PATH),
+                cpp: load_smooth_texture_optional(raylib, thread, ROSTER_CPP_PATH),
             },
             fighter_spritesheet: load_texture_optional(raylib, thread, FIGHTER_SPRITESHEET_PATH),
             rust_fighter: load_fighter_atlas_optional(
@@ -285,54 +283,45 @@ impl GameAssets {
                 CharacterId::Cpp,
                 CPP_PLUSPLUS_PROJECTILE_PATH,
             ),
-            countdown_11: load_texture_optional(raylib, thread, COUNTDOWN_11_PATH),
-            countdown_10: load_texture_optional(raylib, thread, COUNTDOWN_10_PATH),
-            countdown_01: load_texture_optional(raylib, thread, COUNTDOWN_01_PATH),
-            countdown_fight: load_texture_optional(raylib, thread, COUNTDOWN_FIGHT_PATH),
+            countdown_11: load_smooth_texture_optional(raylib, thread, COUNTDOWN_11_PATH),
+            countdown_10: load_smooth_texture_optional(raylib, thread, COUNTDOWN_10_PATH),
+            countdown_01: load_smooth_texture_optional(raylib, thread, COUNTDOWN_01_PATH),
+            countdown_fight: load_smooth_texture_optional(raylib, thread, COUNTDOWN_FIGHT_PATH),
         }
     }
 }
 
-fn load_font_optional(raylib: &mut RaylibHandle, thread: &RaylibThread) -> Option<Font> {
-    for path in MENU_FONT_CANDIDATES {
-        if !Path::new(path).exists() {
-            continue;
+fn load_ui_font(
+    raylib: &mut RaylibHandle,
+    thread: &RaylibThread,
+    data: &[u8],
+    label: &str,
+) -> Option<Font> {
+    // Raylib's default glyph subset excludes accented letters. Mipmaps average
+    // the oversampled strokes before minification; bilinear alone still aliases
+    // a 96 px atlas when a footer is displayed at 14 px.
+    let glyphs: String = (32..=126)
+        .chain(160..=255)
+        .chain([
+            0x2013, 0x2014, 0x2018, 0x2019, 0x201c, 0x201d, 0x2022, 0x2026,
+        ])
+        .filter(|&codepoint| codepoint != 0x00ad)
+        .filter_map(char::from_u32)
+        .collect();
+    match raylib.load_font_from_memory(thread, ".ttf", data, 96, Some(&glyphs)) {
+        Ok(mut font) => {
+            // SAFETY: the live font owns this GPU texture. Raylib only updates
+            // its mipmap count; no glyph pointers or ownership change.
+            unsafe { raylib::ffi::GenTextureMipmaps(&mut font.as_raw_mut().texture) };
+            font.texture()
+                .set_texture_filter(thread, TextureFilter::TEXTURE_FILTER_TRILINEAR);
+            Some(font)
         }
-        match raylib.load_font_ex(thread, path, 72, None) {
-            Ok(font) => return Some(font),
-            Err(error) => eprintln!("warning: could not load menu font {path}: {error:?}"),
-        }
-    }
-
-    None
-}
-
-fn load_lore_font_optional(raylib: &mut RaylibHandle, thread: &RaylibThread) -> Option<Font> {
-    for path in LORE_FONT_CANDIDATES {
-        if !Path::new(path).exists() {
-            continue;
-        }
-        match raylib.load_font_ex(thread, path, 64, None) {
-            Ok(font) => return Some(font),
-            Err(error) => eprintln!("warning: could not load lore font {path}: {error:?}"),
-        }
-    }
-
-    None
-}
-
-fn load_lore_body_font_optional(raylib: &mut RaylibHandle, thread: &RaylibThread) -> Option<Font> {
-    for path in LORE_BODY_FONT_CANDIDATES {
-        if !Path::new(path).exists() {
-            continue;
-        }
-        match raylib.load_font_ex(thread, path, 48, None) {
-            Ok(font) => return Some(font),
-            Err(error) => eprintln!("warning: could not load lore body font {path}: {error:?}"),
+        Err(error) => {
+            eprintln!("warning: could not load embedded {label} font: {error:?}");
+            None
         }
     }
-
-    None
 }
 
 fn load_fighter_atlas_optional(
@@ -418,6 +407,17 @@ fn load_projectile_texture_optional(
         }
     }
     load_texture_optional(raylib, thread, baseline_path)
+}
+
+fn load_smooth_texture_optional(
+    raylib: &mut RaylibHandle,
+    thread: &RaylibThread,
+    path: &str,
+) -> Option<Texture2D> {
+    let mut texture = load_texture_optional(raylib, thread, path)?;
+    texture.gen_texture_mipmaps();
+    texture.set_texture_filter(thread, TextureFilter::TEXTURE_FILTER_TRILINEAR);
+    Some(texture)
 }
 
 fn load_texture_optional(

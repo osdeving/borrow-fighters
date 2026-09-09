@@ -104,6 +104,7 @@ pub struct FighterInput {
     pub kick: bool,
     pub projectile: bool,
     pub signature_special: bool,
+    pub cinematic_special: bool,
 }
 
 /// Visible impact posture; knockdowns include a protected floor recovery.
@@ -598,6 +599,13 @@ impl Fighter {
         self.attack.map(AttackState::kind)
     }
 
+    /// Exposes a presentation clock only while the cinematic attack is alive.
+    /// Hits, throws and round resets remove the attack and its spectacle together.
+    pub fn cinematic_special(&self) -> Option<super::cinematic::CinematicSpecialState> {
+        let attack = self.attack?;
+        super::cinematic::CinematicSpecialState::from_move(attack.spec, attack.elapsed_frames())
+    }
+
     /// Returns the concrete close-range move spec currently being played.
     pub fn attack_move_spec(&self) -> Option<MoveSpec> {
         self.attack.map(|attack| attack.spec)
@@ -607,7 +615,7 @@ impl Fighter {
     pub fn uses_move_spec_hitbox(&self) -> bool {
         matches!(
             self.attack_kind(),
-            Some(AttackKind::Sweep | AttackKind::SignatureSpecial)
+            Some(AttackKind::Sweep | AttackKind::SignatureSpecial | AttackKind::CinematicSpecial)
         )
     }
 
@@ -813,7 +821,9 @@ impl Fighter {
             || self.is_action_locked()
             || matches!(
                 self.attack_kind(),
-                Some(AttackKind::SignatureSpecial | AttackKind::Throw)
+                Some(
+                    AttackKind::SignatureSpecial | AttackKind::CinematicSpecial | AttackKind::Throw
+                )
             ) {
             0.0
         } else {
@@ -946,6 +956,7 @@ impl FighterInput {
             kick: false,
             projectile: false,
             signature_special: false,
+            cinematic_special: false,
             ..self
         }
     }
@@ -971,7 +982,9 @@ impl FighterInput {
             };
         }
 
-        let input = if self.signature_special {
+        let input = if self.cinematic_special {
+            MoveInputKind::CinematicSpecial
+        } else if self.signature_special {
             MoveInputKind::SignatureSpecial
         } else if self.block && self.light_punch {
             MoveInputKind::Throw

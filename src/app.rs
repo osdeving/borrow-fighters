@@ -51,6 +51,7 @@ impl PendingFighterInput {
             kick: self.0.kick || next.kick,
             projectile: self.0.projectile || next.projectile,
             signature_special: self.0.signature_special || next.signature_special,
+            cinematic_special: self.0.cinematic_special || next.cinematic_special,
             ..next
         };
     }
@@ -334,6 +335,7 @@ impl App {
                                 &self.move_showcase,
                                 self.current_arena,
                                 self.visual_time_seconds,
+                                self.feature_flags,
                                 &assets,
                             );
                             render::draw_video_capture_overlay(
@@ -1293,6 +1295,7 @@ mod tests {
         let mut pending = PendingFighterInput::default();
         pending.push(FighterInput {
             signature_special: true,
+            cinematic_special: true,
             jump: true,
             right: true,
             ..FighterInput::default()
@@ -1304,11 +1307,11 @@ mod tests {
             ..FighterInput::default()
         });
         let first = pending.take_tick();
-        assert!(first.signature_special && first.jump);
+        assert!(first.signature_special && first.cinematic_special && first.jump);
         assert!(first.left && first.block);
         assert!(!first.right);
         let next = pending.take_tick();
-        assert!(!next.signature_special && !next.jump);
+        assert!(!next.signature_special && !next.cinematic_special && !next.jump);
         assert!(next.left && next.block);
     }
 
