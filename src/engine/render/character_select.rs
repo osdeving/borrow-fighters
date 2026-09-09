@@ -493,6 +493,10 @@ fn draw_character_art(
     );
     let mut target = dest;
     if portrait {
+        // Duke's face sits below his steam plume; frame the nose, not the plume.
+        if id == CharacterId::Duke {
+            source.y += source.height * 0.22;
+        }
         source.height *= 0.47;
         let aspect = dest.width / dest.height;
         let width = source.height * aspect;

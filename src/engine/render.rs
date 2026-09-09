@@ -3510,13 +3510,14 @@ fn draw_energy_bar(
             meter.amount()
         )
     };
+    draw.draw_rectangle(x - 2, y + 13, width + 4, 22, Color::new(5, 13, 23, 225));
     presentation::label(
         draw,
         assets,
         &text,
         x,
         y + 16,
-        11.0,
+        13.0,
         if ready { accent } else { presentation::MUTED },
     );
 }
