@@ -26,11 +26,12 @@ use crate::game::ai::BasicCpu;
 use crate::game::arena::ArenaId;
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
 use crate::game::world::{World, WorldSpriteCombatManifests};
+use crate::runtime_paths::{asset_path, data_dir};
 use crate::scenes::{
     AppScene,
     combat_lab::{CombatLab, CombatLabInput, CombatLabMove, CombatLabOptions},
     move_showcase::{MoveShowcase, MoveShowcaseOptions},
-    preferences::{CycleDirection, PreferencesAction, PreferencesMenu},
+    preferences::{CycleDirection, MenuPage, PlayMode, PreferencesAction, PreferencesMenu},
     sprite_viewer::{SpriteViewer, SpriteViewerInput, SpriteViewerOptions, ViewerPoint},
 };
 
@@ -75,6 +76,7 @@ pub struct App {
     scene: AppScene,
     sprite_viewer_options: Option<SpriteViewerOptions>,
     preferences_menu: PreferencesMenu,
+    onboarding_marker: Option<PathBuf>,
     combat_lab: CombatLab,
     move_showcase: MoveShowcase,
     pending_showcase_input: CombatLabInput,
@@ -101,6 +103,20 @@ impl Default for App {
 impl App {
     /// Creates app state for the selected startup mode.
     pub fn new(options: LaunchOptions) -> Self {
+        Self::with_onboarding_marker(options, data_dir().join("onboarding-v1.seen"))
+    }
+
+    fn with_onboarding_marker(options: LaunchOptions, marker: PathBuf) -> Self {
+        let onboarding_marker = (!marker.is_file()).then_some(marker);
+        let mut preferences_menu = PreferencesMenu::default();
+        if matches!(options.mode, LaunchMode::Game)
+            && !options.start_fight
+            && onboarding_marker.is_some()
+        {
+            preferences_menu.open_guide();
+        }
+        let mut feature_flags = FeatureFlags::default();
+        PlayMode::AgainstCpu.apply(&mut feature_flags);
         let match_options = options.match_options;
         let mut move_showcase = MoveShowcase::default();
         let (scene, combat_lab, sprite_viewer_options) = match options.mode {
@@ -131,11 +147,12 @@ impl App {
                 (AppScene::SpriteViewer, CombatLab::default(), Some(options))
             }
         };
-        let character_body_metrics = CharacterBodyMetricsCatalog::load(CHARACTER_BODY_METRICS_PATH)
-            .unwrap_or_else(|error| {
-                eprintln!("warning: using built-in character body metrics: {error}");
-                CharacterBodyMetricsCatalog::default()
-            });
+        let character_body_metrics =
+            CharacterBodyMetricsCatalog::load(asset_path(CHARACTER_BODY_METRICS_PATH))
+                .unwrap_or_else(|error| {
+                    eprintln!("warning: using built-in character body metrics: {error}");
+                    CharacterBodyMetricsCatalog::default()
+                });
         move_showcase.set_body_metrics(character_body_metrics.clone());
 
         Self {
@@ -146,10 +163,11 @@ impl App {
             ),
             player_one_cpu: BasicCpu::for_slot(PlayerSlot::One),
             player_two_cpu: BasicCpu::for_slot(PlayerSlot::Two),
-            feature_flags: FeatureFlags::default(),
+            feature_flags,
             scene,
             sprite_viewer_options,
-            preferences_menu: PreferencesMenu::default(),
+            preferences_menu,
+            onboarding_marker,
             combat_lab,
             move_showcase,
             pending_showcase_input: CombatLabInput::default(),
@@ -387,7 +405,12 @@ impl App {
                     );
                 }
                 AppScene::Preferences => {
+                    let leaving_guide = input.open_preferences
+                        && self.preferences_menu.page() == MenuPage::HowToPlay;
                     if input.open_preferences && self.preferences_menu.back() {
+                        if leaving_guide {
+                            self.finish_onboarding();
+                        }
                         audio_player.cancel_cinematic();
                         audio_player.play(&AudioEvent::ui_back());
                     } else {
@@ -406,6 +429,7 @@ impl App {
                             .update(preferences_input, &mut self.feature_flags);
                         match preferences_action {
                             PreferencesAction::Stay => {}
+                            PreferencesAction::CloseGuide => self.finish_onboarding(),
                             PreferencesAction::CyclePlayerOne(direction) => {
                                 self.match_options.player_one =
                                     cycle_character(self.match_options.player_one, direction);
@@ -475,8 +499,16 @@ impl App {
                                 self.preferences_menu.ignore_next_input();
                                 audio_player.play_music(MusicTrack::Menu);
                             }
-                            PreferencesAction::StartFight => {
-                                if self.world.outcome.is_some()
+                            PreferencesAction::StartFight | PreferencesAction::StartWithMode(_) => {
+                                let chosen_mode = matches!(
+                                    preferences_action,
+                                    PreferencesAction::StartWithMode(_)
+                                );
+                                if chosen_mode {
+                                    self.finish_onboarding();
+                                }
+                                if chosen_mode
+                                    || self.world.outcome.is_some()
                                     || self.match_options_dirty
                                     || self.arena_selection_dirty
                                 {
@@ -700,6 +732,19 @@ impl App {
                 }
                 AppScene::SpriteViewer => unreachable!("sprite viewer has a separate app loop"),
             }
+        }
+    }
+
+    fn finish_onboarding(&mut self) {
+        let Some(marker) = self.onboarding_marker.take() else {
+            return;
+        };
+        let saved = marker
+            .parent()
+            .map_or(Ok(()), std::fs::create_dir_all)
+            .and_then(|()| std::fs::write(&marker, b"Borrow Fighters welcome guide v1\n"));
+        if let Err(error) = saved {
+            eprintln!("warning: could not remember welcome guide completion: {error}");
         }
     }
 
@@ -1115,12 +1160,13 @@ fn run_sprite_viewer(
         finish_frame(raylib, thread, &frame_target, &mut video_capture, None);
 
         if screenshot_requested {
-            let path = "target/sprite-viewer-capture.png";
-            if let Err(error) = std::fs::create_dir_all("target") {
-                viewer.set_texture_error(format!("could not create target directory: {error}"));
+            let directory = data_dir().join("captures");
+            let path = directory.join("sprite-viewer-capture.png");
+            if let Err(error) = std::fs::create_dir_all(directory) {
+                viewer.set_texture_error(format!("could not create capture directory: {error}"));
             } else {
-                raylib.take_screenshot(thread, path);
-                viewer.set_status_message(format!("Screenshot salvo em {path}."));
+                raylib.take_screenshot(thread, &path.to_string_lossy());
+                viewer.set_status_message(format!("Screenshot salvo em {}.", path.display()));
             }
         }
     }
@@ -1128,7 +1174,7 @@ fn run_sprite_viewer(
 
 fn default_sprite_viewer_options() -> SpriteViewerOptions {
     SpriteViewerOptions {
-        manifest_path: PathBuf::from(C_FIGHTER_MANIFEST_PATH),
+        manifest_path: asset_path(C_FIGHTER_MANIFEST_PATH),
         initial_clip: Some("special".to_owned()),
         character: Some(CharacterId::C),
         selected_move: CombatLabMove::Projectile,
@@ -1351,6 +1397,59 @@ fn read_sprite_viewer_input(raylib: &RaylibHandle) -> SpriteViewerInput {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn isolated_onboarding_path() -> PathBuf {
+        static NEXT: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+        std::env::temp_dir()
+            .join(format!(
+                "borrow-fighters-onboarding-{}-{}-{}",
+                std::process::id(),
+                std::time::SystemTime::now()
+                    .duration_since(std::time::UNIX_EPOCH)
+                    .unwrap()
+                    .as_nanos(),
+                NEXT.fetch_add(1, std::sync::atomic::Ordering::Relaxed),
+            ))
+            .join("onboarding-v1.seen")
+    }
+
+    #[test]
+    fn onboarding_is_shown_once_and_app_starts_with_a_human_player() {
+        let marker = isolated_onboarding_path();
+        let mut app = App::with_onboarding_marker(LaunchOptions::default(), marker.clone());
+        assert_eq!(app.preferences_menu.page(), MenuPage::HowToPlay);
+        assert!(!app.feature_flags.enabled(FeatureFlag::PlayerOneCpu));
+        assert!(app.feature_flags.enabled(FeatureFlag::PlayerTwoCpu));
+        assert!(!marker.exists());
+        app.finish_onboarding();
+        assert!(marker.is_file());
+        let returning = App::with_onboarding_marker(LaunchOptions::default(), marker.clone());
+        assert_eq!(returning.preferences_menu.page(), MenuPage::Main);
+        std::fs::remove_dir_all(marker.parent().unwrap()).unwrap();
+    }
+
+    #[test]
+    fn direct_fight_and_tools_bypass_guide_without_marking_it_seen() {
+        let marker = isolated_onboarding_path();
+        for arguments in [vec!["game", "--fight"], vec!["game", "--showcase"]] {
+            let options = LaunchOptions::parse(arguments.into_iter().map(String::from)).unwrap();
+            let app = App::with_onboarding_marker(options, marker.clone());
+            assert_ne!(app.scene, AppScene::Preferences);
+            assert_eq!(app.preferences_menu.page(), MenuPage::Main);
+            assert!(!marker.exists());
+        }
+    }
+
+    #[test]
+    fn unavailable_onboarding_storage_does_not_prevent_playing() {
+        let marker = isolated_onboarding_path();
+        std::fs::create_dir_all(marker.parent().unwrap()).unwrap();
+        std::fs::write(&marker, b"blocked parent").unwrap();
+        let mut app = App::with_onboarding_marker(LaunchOptions::default(), marker.join("seen"));
+        app.finish_onboarding();
+        assert!(app.onboarding_marker.is_none());
+        std::fs::remove_dir_all(marker.parent().unwrap()).unwrap();
+    }
 
     #[test]
     fn app_starts_with_music_volume_at_half() {

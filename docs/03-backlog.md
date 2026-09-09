@@ -4,6 +4,11 @@
 
 Este documento e a fonte de verdade para **o que vem agora**.
 
+Frente atual: distribuir o estado jogável em `release/v0.1.0-prototype.1`,
+com instalador Windows, pacotes Linux e guia de primeira abertura.
+[Processo](06-release-process.md), [notas](releases/v0.1.0-prototype.1.md) e
+[ADR 0019](adr/0019-playtest-distribution.md).
+
 Rodada concluída: [reações próprias Python × C++](25-python-cpp-contact-reactions.md).
 64 desenhos novos e resposta sincronizada a cada contato, incluindo os oito da
 rajada. 346 testes, Fmt/Clippy e 64 cenários renderizados nos dois sentidos.
@@ -64,7 +69,7 @@ Regra operacional:
 | Proximo | Feeling e balanceamento | Planejado | [`docs/13-combat-design-roadmap.md`](13-combat-design-roadmap.md), [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md) | Playtestar a demo Rust x Duke x C x Python x C++ com Combat Lab, mantendo Go fora do menu publico e ajustando frame data por dados, nao por achismo. |
 | Feito local | Arte final dos seis lutadores | Acabamento e verificação concluídos | [Laudos e vídeos atuais](../assets/candidates/README.md), [cobertura](19-sprite-production-coverage.md) | 120 clips e 378 quadros, dez golpes por personagem. Go recebeu outra identidade semirrealista. Arte padrão, comparação com env=0, fontes e combate preservados. |
 | Depois | Ferramenta visual clicavel | Aberto | [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) | Avaliar `raygui` somente se atalhos e texto ficarem insuficientes. |
-| Depois | Release Prototype 0.1 | Aberto | [`docs/06-release-process.md`](06-release-process.md) | Criar milestone/release checklist quando o slice tiver playtest minimo e assets candidatos. |
+| Agora | Release Prototype 0.1 | Empacotamento e playtest público | [Processo](06-release-process.md), [notas da versão](releases/v0.1.0-prototype.1.md), [ADR 0019](adr/0019-playtest-distribution.md) | Publicar os pacotes verificados e recolher feedback de instalação, controles e combate. |
 
 ## Ritual de manutencao
 

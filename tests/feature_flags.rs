@@ -2,7 +2,7 @@
 
 use borrow_fighters::game::feature_flags::{FeatureFlag, FeatureFlags, PREFERENCE_FLAGS};
 use borrow_fighters::scenes::preferences::{
-    CycleDirection, MenuPage, PreferencesAction, PreferencesInput, PreferencesMenu,
+    CycleDirection, MenuPage, PlayMode, PreferencesAction, PreferencesInput, PreferencesMenu,
     PreferencesPointerInput,
 };
 use borrow_fighters::ui::menu_layout::MenuLayout;
@@ -269,11 +269,12 @@ fn left_click_toggles_options_while_right_click_leaves_toggles_and_actions_uncha
 #[test]
 fn menu_hit_testing_excludes_padding_gaps_and_edges_on_every_page() {
     for (page, rows) in [
-        (MenuPage::Main, 6),
+        (MenuPage::Main, 7),
         (MenuPage::Versus, 5),
         (MenuPage::Training, 4),
         (MenuPage::Lore, 3),
         (MenuPage::Options, PREFERENCE_FLAGS.len() + 3),
+        (MenuPage::HowToPlay, 4),
     ] {
         let layout = MenuLayout::for_page(page);
         for row in 0..rows {
@@ -311,6 +312,95 @@ fn feature_flags_start_with_playtest_friendly_defaults() {
     assert!(!flags.enabled(FeatureFlag::ShowCombatDebug));
     assert!(flags.enabled(FeatureFlag::ShowStageLife));
     assert!(flags.enabled(FeatureFlag::GamepadInput));
+}
+
+#[test]
+fn guide_modes_assign_controls_from_mouse_keyboard_and_gamepad() {
+    for (row, mode, p1_cpu, p2_cpu) in [
+        (
+            PreferencesMenu::GUIDE_CPU_ROW,
+            PlayMode::AgainstCpu,
+            false,
+            true,
+        ),
+        (
+            PreferencesMenu::GUIDE_LOCAL_ROW,
+            PlayMode::LocalDuel,
+            false,
+            false,
+        ),
+        (
+            PreferencesMenu::GUIDE_DEMO_ROW,
+            PlayMode::WatchDemo,
+            true,
+            true,
+        ),
+    ] {
+        for input_kind in 0..3 {
+            let mut flags = FeatureFlags::default();
+            flags.set(FeatureFlag::ShowCombatDebug, true);
+            let mut menu = PreferencesMenu::default();
+            menu.open_guide();
+            menu.update(PreferencesInput::default(), &mut flags);
+            for _ in 0..row {
+                menu.update(
+                    PreferencesInput {
+                        down: true,
+                        ..PreferencesInput::default()
+                    },
+                    &mut flags,
+                );
+            }
+            let input = match input_kind {
+                0 => pointer_on_row(&menu, row, true),
+                1 => PreferencesInput {
+                    activate: true,
+                    ..PreferencesInput::default()
+                },
+                _ => PreferencesInput {
+                    start: true,
+                    ..PreferencesInput::default()
+                },
+            };
+            assert_eq!(
+                menu.update(input, &mut flags),
+                PreferencesAction::StartWithMode(mode)
+            );
+            assert_eq!(menu.page(), MenuPage::Main);
+            assert_eq!(flags.enabled(FeatureFlag::PlayerOneCpu), p1_cpu);
+            assert_eq!(flags.enabled(FeatureFlag::PlayerTwoCpu), p2_cpu);
+            assert!(flags.enabled(FeatureFlag::ShowCombatDebug));
+        }
+    }
+}
+
+#[test]
+fn guide_can_be_reopened_and_closed_without_changing_control_assignments() {
+    let mut flags = FeatureFlags::default();
+    PlayMode::LocalDuel.apply(&mut flags);
+    let previous = flags;
+    let mut menu = PreferencesMenu::default();
+    menu.update(PreferencesInput::default(), &mut flags);
+    assert_eq!(
+        menu.update(
+            pointer_on_row(&menu, PreferencesMenu::MAIN_HOW_TO_PLAY_ROW, true),
+            &mut flags
+        ),
+        PreferencesAction::Stay
+    );
+    assert_eq!(menu.page(), MenuPage::HowToPlay);
+    assert_eq!(
+        menu.update(
+            pointer_on_row(&menu, PreferencesMenu::GUIDE_BACK_ROW, true),
+            &mut flags
+        ),
+        PreferencesAction::CloseGuide
+    );
+    assert_eq!(menu.page(), MenuPage::Main);
+    assert_eq!(flags, previous);
+    menu.open_guide();
+    assert!(menu.back());
+    assert_eq!(menu.page(), MenuPage::Main);
 }
 
 #[test]

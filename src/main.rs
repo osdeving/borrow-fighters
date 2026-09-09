@@ -3,6 +3,8 @@
 //! This binary stays thin: it creates the Raylib window and hands control to
 //! the application loop.
 
+#![cfg_attr(all(windows, not(debug_assertions)), windows_subsystem = "windows")]
+
 use borrow_fighters::app::App;
 use borrow_fighters::cli::LaunchOptions;
 use borrow_fighters::config::{WINDOW_HEIGHT, WINDOW_TITLE, WINDOW_WIDTH};

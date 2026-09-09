@@ -306,3 +306,13 @@ Revisar se:
 - personagens passarem a precisar de dados externos;
 - testes de combate ficarem difíceis de escrever;
 - Raylib começar a vazar para todo o domínio de gameplay.
+
+## Distribuição e primeira abertura
+
+A [ADR 0019](adr/0019-playtest-distribution.md) define os pacotes de playtest.
+`runtime_paths` localiza assets na instalação e mantém capturas/marcador do guia
+nos dados do usuário, sem trocar o diretório de trabalho nem alterar caminhos
+explicitamente passados ao CLI. `App` organiza a primeira abertura; o submenu
+`Como jogar` reutiliza a navegação de `PreferencesMenu` e a geometria compartilhada.
+O desenho do guia fica em `engine/render/onboarding.rs`. Os modos só configuram
+as flags de CPU, sem introduzir novas regras no domínio de combate.

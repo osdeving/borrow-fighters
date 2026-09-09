@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Borrow Fighters
+Comment=Uma demo de luta com humor de programação
+Exec=/usr/bin/borrow-fighters
+Icon=borrow-fighters
+Terminal=false
+Categories=Game;ActionGame;
+StartupNotify=false

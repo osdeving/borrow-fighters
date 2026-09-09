@@ -5,7 +5,6 @@
 
 use raylib::core::{AsRawMut, text::RaylibFont};
 use raylib::prelude::*;
-use std::path::Path;
 
 use crate::characters::CharacterId;
 use crate::engine::sprites::{
@@ -19,6 +18,7 @@ use crate::engine::sprites::{
 };
 use crate::game::arena::ArenaId;
 use crate::lore::{LORE_BOOK_PATH, LoreBook};
+use crate::runtime_paths::asset_path;
 
 pub const ARENA_SIRIUS_PATH: &str = "assets/production/stage-life/arena-sirius-clean.png";
 pub const ARENA_FORTALEZA_PATH: &str = "assets/placeholder/arena-fortaleza.png";
@@ -234,7 +234,7 @@ impl GameAssets {
             },
             caramelo_run: load_smooth_texture_optional(raylib, thread, CARAMELO_RUN_PATH),
             jessica_gesture: load_smooth_texture_optional(raylib, thread, JESSICA_GESTURE_PATH),
-            lore_book: LoreBook::load_or_default(LORE_BOOK_PATH),
+            lore_book: LoreBook::load_or_default(asset_path(LORE_BOOK_PATH)),
             menu_font: load_ui_font(raylib, thread, MENU_FONT, "menu"),
             lore_font: load_ui_font(raylib, thread, LORE_FONT, "lore"),
             lore_body_font: load_ui_font(raylib, thread, LORE_BODY_FONT, "lore body"),
@@ -388,8 +388,8 @@ fn load_fighter_atlas_optional(
     if reviewed_sprite_art_enabled() {
         let key = character.audio_key();
         let candidate_path = format!("assets/candidates/{key}/{key}-fighter.sprite.json");
-        if Path::new(&candidate_path).is_file()
-            && let Ok(combat_manifest) = SpriteManifest::load(baseline_path)
+        if asset_path(&candidate_path).is_file()
+            && let Ok(combat_manifest) = SpriteManifest::load(asset_path(baseline_path))
             && let Some(mut candidate) = load_sprite_atlas_optional(raylib, thread, &candidate_path)
         {
             let missing = missing_candidate_clips(&candidate.manifest, character);
@@ -426,7 +426,8 @@ fn load_sprite_atlas_optional(
     thread: &RaylibThread,
     manifest_path: &str,
 ) -> Option<SpriteAtlasAsset> {
-    let manifest = match SpriteManifest::load(manifest_path) {
+    let resolved_path = asset_path(manifest_path);
+    let manifest = match SpriteManifest::load(&resolved_path) {
         Ok(manifest) => manifest,
         Err(error) => {
             eprintln!("warning: could not load sprite manifest {manifest_path}: {error}");
@@ -434,7 +435,7 @@ fn load_sprite_atlas_optional(
         }
     };
     let mut textures = Vec::new();
-    for (image, path) in manifest.image_paths(manifest_path) {
+    for (image, path) in manifest.image_paths(&resolved_path) {
         let texture = load_texture_optional(raylib, thread, &path.to_string_lossy())?;
         textures.push(SpriteAtlasTexture { image, texture });
     }
@@ -455,7 +456,7 @@ fn load_projectile_texture_optional(
     if reviewed_sprite_art_enabled() {
         let key = character.audio_key();
         let candidate_path = format!("assets/candidates/{key}/{key}-projectile.png");
-        if Path::new(&candidate_path).is_file()
+        if asset_path(&candidate_path).is_file()
             && let Some(texture) = load_texture_optional(raylib, thread, &candidate_path)
         {
             return Some(texture);
@@ -480,7 +481,7 @@ fn load_texture_optional(
     thread: &RaylibThread,
     path: &str,
 ) -> Option<Texture2D> {
-    match raylib.load_texture(thread, path) {
+    match raylib.load_texture(thread, &asset_path(path).to_string_lossy()) {
         Ok(texture) => Some(texture),
         Err(error) => {
             eprintln!("warning: could not load texture {path}: {error:?}");

@@ -13,10 +13,8 @@ use std::{
     time::{Duration, SystemTime, UNIX_EPOCH},
 };
 
+use crate::runtime_paths::capture_dir;
 use raylib::prelude::*;
-
-/// Directory where local gameplay captures are written.
-pub const CAPTURE_DIR: &str = "captures";
 
 const AUDIO_SOURCE_ENV: &str = "BORROW_FIGHTERS_CAPTURE_AUDIO_SOURCE";
 const FFMPEG_PATH_ENV: &str = "BORROW_FIGHTERS_FFMPEG";
@@ -45,11 +43,12 @@ impl VideoCapture {
             return Err(VideoCaptureError::InvalidFrameSize { width, height });
         }
 
-        fs::create_dir_all(CAPTURE_DIR).map_err(VideoCaptureError::CreateDirectory)?;
+        fs::create_dir_all(capture_dir()).map_err(VideoCaptureError::CreateDirectory)?;
         let output_path = next_capture_path();
         let audio_source =
             std::env::var(AUDIO_SOURCE_ENV).unwrap_or_else(|_| DEFAULT_PULSE_MONITOR.to_owned());
-        let mut child = ffmpeg_command(width, height, &audio_source, &output_path)
+        let pulse_source = cfg!(target_os = "linux").then_some(audio_source.as_str());
+        let mut child = ffmpeg_command(width, height, pulse_source, &output_path)
             .spawn()
             .map_err(VideoCaptureError::SpawnFfmpeg)?;
         let stdin = child.stdin.take().ok_or(VideoCaptureError::FfmpegStdin)?;
@@ -231,7 +230,11 @@ impl fmt::Display for VideoCaptureError {
                 write!(formatter, "tamanho de frame invalido: {width}x{height}")
             }
             Self::CreateDirectory(error) => {
-                write!(formatter, "nao foi possivel criar {CAPTURE_DIR}: {error}")
+                write!(
+                    formatter,
+                    "nao foi possivel criar {}: {error}",
+                    capture_dir().display()
+                )
             }
             Self::SpawnFfmpeg(error) => write!(formatter, "ffmpeg nao iniciou: {error}"),
             Self::FfmpegStdin => write!(formatter, "ffmpeg nao abriu stdin para video bruto"),
@@ -247,7 +250,12 @@ impl fmt::Display for VideoCaptureError {
 
 impl std::error::Error for VideoCaptureError {}
 
-fn ffmpeg_command(width: u32, height: u32, audio_source: &str, output_path: &Path) -> Command {
+fn ffmpeg_command(
+    width: u32,
+    height: u32,
+    pulse_source: Option<&str>,
+    output_path: &Path,
+) -> Command {
     let ffmpeg_path = std::env::var(FFMPEG_PATH_ENV).unwrap_or_else(|_| "ffmpeg".to_owned());
     let mut command = Command::new(ffmpeg_path);
     command
@@ -259,17 +267,25 @@ fn ffmpeg_command(width: u32, height: u32, audio_source: &str, output_path: &Pat
         .args(["-pixel_format", "rgba"])
         .args(["-video_size", &format!("{width}x{height}")])
         .args(["-framerate", &DEFAULT_FRAMERATE.to_string()])
-        .args(["-i", "pipe:0"])
-        .args(["-thread_queue_size", "512"])
-        .args(["-f", "pulse"])
-        .args(["-i", audio_source])
+        .args(["-i", "pipe:0"]);
+    if let Some(source) = pulse_source {
+        command
+            .args(["-thread_queue_size", "512"])
+            .args(["-f", "pulse"])
+            .args(["-i", source])
+            .args(["-c:a", "aac"])
+            .args(["-b:a", "160k"])
+            .arg("-shortest");
+    } else {
+        // Desktop recording is optional. Windows has no PulseAudio source;
+        // keep framebuffer recording useful with a separately installed FFmpeg.
+        command.arg("-an");
+    }
+    command
         .args(["-c:v", "libx264"])
         .args(["-preset", "veryfast"])
         .args(["-crf", "20"])
-        .args(["-c:a", "aac"])
-        .args(["-b:a", "160k"])
         .args(["-pix_fmt", "yuv420p"])
-        .arg("-shortest")
         .args(["-movflags", "+faststart"])
         .arg(output_path)
         .stdin(Stdio::piped())
@@ -304,7 +320,7 @@ fn next_capture_path() -> PathBuf {
         .duration_since(UNIX_EPOCH)
         .unwrap_or_default()
         .as_secs();
-    Path::new(CAPTURE_DIR).join(format!("borrow-fighters-{timestamp}.mp4"))
+    capture_dir().join(format!("borrow-fighters-{timestamp}.mp4"))
 }
 
 #[cfg(test)]
@@ -337,5 +353,14 @@ mod tests {
         let mut capture = VideoCapture::default();
         let error = capture.start(0, 540).unwrap_err();
         assert!(matches!(error, VideoCaptureError::InvalidFrameSize { .. }));
+    }
+
+    #[test]
+    fn silent_recording_does_not_require_a_linux_audio_device() {
+        let command = ffmpeg_command(960, 540, None, Path::new("capture.mp4"));
+        let args: Vec<_> = command.get_args().collect();
+        assert!(args.contains(&std::ffi::OsStr::new("-an")));
+        assert!(!args.contains(&std::ffi::OsStr::new("pulse")));
+        assert!(!args.contains(&std::ffi::OsStr::new("-shortest")));
     }
 }

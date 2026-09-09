@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.1.0-prototype.1 — Distribuição para playtest
+
+- Instalador por usuário e ZIP para Windows x86_64; DEB, RPM e tar.gz para Linux.
+- Assets de runtime selecionados, bibliotecas redistribuíveis, créditos, licenças
+  e fontes correspondentes acompanham os pacotes. Não é preciso compilar para jogar.
+- Guia de primeira abertura e menu Como jogar com modos contra CPU, duelo local
+  e demo; entrada normal com P1 manual.
+- Assets localizados pela instalação; capturas e marcador de boas-vindas no
+  diretório de dados do usuário.
+- Workflow de build/checks por plataforma, instaladores verificados e publicação
+  por tag com SHA256 e [notas para jogadores](docs/releases/v0.1.0-prototype.1.md).
+
+
 ## Correção 2026-09-09 — Reações com dano desligado
 
 - Desligar `Player recebe dano` preserva HP e mantém reações, guarda, empurrão,

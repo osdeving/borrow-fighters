@@ -4,6 +4,24 @@ Jogo 2D de luta com humor de programação, iniciado como um projeto **docs-firs
 
 Status: **Prototype 0.1 / Greybox jogável / Vertical slice em evolução**
 
+## Baixar e jogar (sem instalar Rust)
+
+A primeira versão distribuível é **v0.1.0-prototype.1**, uma pré-release para
+playtest. [Abra os downloads e as instruções da release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.1):
+instalador/ZIP para Windows 10/11, DEB para Debian/Ubuntu, RPM para Fedora e
+arquivo portátil para Linux, todos em x86_64. Extraia a pasta inteira se escolher
+a versão portátil. Os arquivos necessários do jogo acompanham os pacotes.
+
+Na primeira abertura, **Como jogar** apresenta os controles e permite escolher
+CPU, duelo local ou assistir à demo. O guia pode ser reaberto pelo menu.
+A entrada normal deixa P1 manual contra CPU; `Quick Fight` usa a configuração
+atual. O código e as ferramentas de desenvolvimento continuam descritos abaixo.
+
+Jogue por dez minutos e [conte o que funcionou e o que ficou confuso](https://github.com/osdeving/borrow-fighters/issues/new/choose).
+[Notas do playtest](docs/releases/v0.1.0-prototype.1.md) ·
+[Como gerar os pacotes](docs/06-release-process.md) ·
+[Decisão de distribuição](docs/adr/0019-playtest-distribution.md).
+
 ## Objetivo
 
 Este repositório centraliza documentação, governança, assets placeholder e código do primeiro protótipo jogável.
@@ -213,11 +231,12 @@ cargo run -- --fight --p1 python --p2 duke
 cargo run -- --fight --p1 cpp --p2 c
 ```
 
-O jogo abre primeiro no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem, arena, capítulo, ficha de roster e volume em linhas ajustáveis, e `Esc` para voltar de submenus, luta, Move Showcase, Combat Lab ou Sprite Viewer. O mouse também navega pelos menus: passe sobre uma linha para selecioná-la, clique com o botão esquerdo para confirmar, alternar uma opção ou avançar um valor, e use o botão direito para voltar valores de personagem, arena, capítulo e volume. O cursor nativo permanece visível e livre para sair da janela; em WSL, o cursor `Linker` acompanha o mouse apenas enquanto a janela está em foco e o ponteiro está dentro dela. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar da janela.
+Na primeira abertura, o jogo mostra `Como jogar`; depois abre no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem, arena, capítulo, ficha de roster e volume em linhas ajustáveis, e `Esc` para voltar de submenus, luta, Move Showcase, Combat Lab ou Sprite Viewer. O mouse também navega pelos menus: passe sobre uma linha para selecioná-la, clique com o botão esquerdo para confirmar, alternar uma opção ou avançar um valor, e use o botão direito para voltar valores de personagem, arena, capítulo e volume. O cursor nativo permanece visível e livre para sair da janela; em WSL, o cursor `Linker` acompanha o mouse apenas enquanto a janela está em foco e o ponteiro está dentro dela. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar da janela.
 
 O menu principal mantém a primeira tela simples:
 
 - `Quick Fight`: inicia a luta com a configuração atual.
+- `Como jogar`: reabre controles e escolha de modo.
 - `Versus Setup`: escolhe Player 1, Player 2 e arena.
 - `Training`: abre `Move Showcase`, `Combat Lab` ou `Sprite Viewer`.
 - `Lore / Roster`: abre um livro de programação com capítulos da história e fichas dos personagens.
@@ -277,7 +296,7 @@ cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite
 cargo run -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip punch_light --character python --move light_punch
 ```
 
-No Sprite Combat Viewer, use o mouse para inspecionar coordenadas locais do frame, arrastar personagem/dummy e ajustar alças de `frames[].combat`. `N` gera um rascunho de metadata a partir do overlay runtime do golpe selecionado, `Tab` / `Shift+Tab` alterna clip, `Enter` sincroniza clip com golpe, `C` / `Shift+C` alterna personagem de combate, `[` / `]` alterna golpe, `.` / `,` avança ou volta frame, `Espaço` pausa, mouse wheel controla zoom, `0` reseta zoom, `=` / `-` ajusta `scale`, `Setas` ou `Shift+Setas` move o `pivot`, `Ctrl+Setas` ajusta largura/altura do corpo físico, `Ctrl+Shift+Setas` ajusta altura abaixada, `Ctrl+S` salva manifestos de tuning, `O` mostra/esconde dummy, `M` mostra/esconde boxes de combate, `T` mostra/esconde trajetória prevista do projectile, `F5` recarrega manifesto/atlas, `F12` salva screenshot em `target/sprite-viewer-capture.png`, `F9`/`F10` gravam um MP4 local, `G` alterna grade, `P` alterna pivot, `B` alterna bounds, `R` reseta posição e `Esc` volta ao menu quando aberto por `Training`. O padrão de escala fica em [`docs/17-visual-scale-and-stage-metrics.md`](docs/17-visual-scale-and-stage-metrics.md), e o roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md).
+No Sprite Combat Viewer, use o mouse para inspecionar coordenadas locais do frame, arrastar personagem/dummy e ajustar alças de `frames[].combat`. `N` gera um rascunho de metadata a partir do overlay runtime do golpe selecionado, `Tab` / `Shift+Tab` alterna clip, `Enter` sincroniza clip com golpe, `C` / `Shift+C` alterna personagem de combate, `[` / `]` alterna golpe, `.` / `,` avança ou volta frame, `Espaço` pausa, mouse wheel controla zoom, `0` reseta zoom, `=` / `-` ajusta `scale`, `Setas` ou `Shift+Setas` move o `pivot`, `Ctrl+Setas` ajusta largura/altura do corpo físico, `Ctrl+Shift+Setas` ajusta altura abaixada, `Ctrl+S` salva manifestos de tuning, `O` mostra/esconde dummy, `M` mostra/esconde boxes de combate, `T` mostra/esconde trajetória prevista do projectile, `F5` recarrega manifesto/atlas, `F12` salva screenshot em `captures/sprite-viewer-capture.png` dentro dos dados do usuário, `F9`/`F10` gravam um MP4 local, `G` alterna grade, `P` alterna pivot, `B` alterna bounds, `R` reseta posição e `Esc` volta ao menu quando aberto por `Training`. O padrão de escala fica em [`docs/17-visual-scale-and-stage-metrics.md`](docs/17-visual-scale-and-stage-metrics.md), e o roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md).
 
 O novo Sprite Studio externo vive em `tools/sprite-studio` e deve substituir o viewer Raylib em uma limpeza propria:
 
@@ -298,7 +317,7 @@ Configurações disponíveis em `Versus Setup` e `Options`:
 | Personagem Player 2 | duke.java | Define o personagem do Player 2 na próxima luta. |
 | Arena | Sirius Light Ring / Campinas, SP | Define o cenário da próxima luta sem esperar a rotação automática. |
 | Volume da música | 50% | Ajusta apenas a música de fundo em passos de 10%. |
-| Player 1 usa IA | Ligado | Controla o Player 1 automaticamente. |
+| Player 1 usa IA | Desligado | P1 começa manual; ligue para assistir à CPU. |
 | Player 2 usa IA | Ligado | Controla o Player 2 automaticamente. |
 | IA pode dar golpes | Ligado | Quando desligado, a IA ainda anda, pula, afasta, aproxima e defende, mas não ataca. |
 | Player 1 recebe dano | Ligado | Quando desligado, o Player 1 fica invencível para playtest. |
@@ -332,11 +351,11 @@ Controles:
 | Reiniciar | `R` | `R` | `Menu` |
 | Gravar captura local | `F9` inicia / `F10` para | `F9` / `F10` | - |
 
-O primeiro gamepad conectado controla o Player 1 quando a IA do Player 1 estiver desligada. O segundo gamepad controla o Player 2 quando a IA do Player 2 estiver desligada. Player 1 e Player 2 começam em modo CPU; use `Options` para alternar a IA do Player 1 e `C` ou `View` para alternar CPU/manual do Player 2 durante a luta.
+O primeiro gamepad conectado controla o Player 1 quando a IA do Player 1 estiver desligada. O segundo gamepad controla o Player 2 quando a IA do Player 2 estiver desligada. P1 começa manual contra P2 CPU. `Como jogar` oferece duelo local e demo; use `Options` para alternar a IA do Player 1 e `C` ou `View` para alternar CPU/manual do Player 2 durante a luta.
 
 Quando ambos os jogadores usam IA, Rust e Java usam perfis diferentes para evitar movimentos espelhados: um tende a jogar mais em média distância e o outro pressiona mais de perto. A IA anda, pula, bloqueia, soca, chuta e tenta o kit completo, incluindo o especial de assinatura. Reage de forma falível à altura do golpe e tenta saltar contra agarrões; permanece determinística e serve para playtest.
 
-Captura local: `F9` inicia uma gravação MP4 do framebuffer do jogo com áudio e `F10` para/salva em `captures/`. O submenu `Options` também tem a linha `Local Recording`, útil quando o ambiente captura mal teclas de função. O corte atual envia frames brutos do Raylib para `ffmpeg` e usa PulseAudio para áudio; no WSLg o áudio padrão é `RDPSink.monitor`. Se a fonte de áudio local tiver outro nome, rode com `BORROW_FIGHTERS_CAPTURE_AUDIO_SOURCE=<fonte> cargo run`.
+Captura local: `F9` inicia uma gravação MP4 do framebuffer do jogo com áudio e `F10` para/salva em `captures/` dentro dos dados do usuário. O submenu `Options` também tem a linha `Local Recording`, útil quando o ambiente captura mal teclas de função. O corte atual envia frames brutos do Raylib para `ffmpeg` e usa PulseAudio para áudio; no WSLg o áudio padrão é `RDPSink.monitor`. Se a fonte de áudio local tiver outro nome, rode com `BORROW_FIGHTERS_CAPTURE_AUDIO_SOURCE=<fonte> cargo run`.
 
 Com `Mostrar debug de combate` ligado, o topo da tela mostra `Pad P1` e `P2` como `ON` quando Raylib detecta o controle. Se um controle Bluetooth estiver pareado mas aparecer `OFF`, confirme se o sistema que executa `cargo run` expõe joystick/gamepad para o Raylib. Em WSL ou ambiente remoto, pode ser necessário testar no host nativo ou encaminhar o dispositivo.
 

@@ -49,7 +49,11 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 
 ## Como rodar
 
-Requisitos:
+Para jogar a distribuição publicada, siga as instruções de download e instalação na
+[página de releases](https://github.com/osdeving/borrow-fighters/releases). O pacote
+inclui o jogo e os assets; quem joga não precisa instalar Rust ou compilar.
+
+Para executar a partir do código-fonte, os requisitos são:
 
 - Rust estável.
 - Dependências nativas exigidas por Raylib/raylib-rs no seu sistema operacional.
@@ -139,7 +143,20 @@ O Combat Lab abre com o fundo `Sirius` ligado para validar contraste de golpe/sp
 
 ## Menu Principal
 
-O jogo abre primeiro no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem, arena, capítulo, ficha de roster e volume em linhas ajustáveis, e `Esc` para voltar de submenus, luta, Move Showcase, Combat Lab ou Sprite Viewer. O mouse também navega pelos menus: passe sobre uma linha para selecioná-la, clique com o botão esquerdo para confirmar, alternar uma opção ou avançar um valor, e use o botão direito para voltar valores de personagem, arena, capítulo e volume. O cursor nativo permanece visível e livre para sair da janela; em WSL, o cursor `Linker` acompanha o mouse apenas enquanto a janela está em foco e o ponteiro está dentro dela. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar.
+Na primeira abertura, o guia **Como jogar** mostra controles de teclado e gamepad,
+defesa, condição de vitória e três modos: **Jogar contra CPU** (você é P1),
+**Duelo local** (P1 e P2 manuais) e **Assistir demo** (CPU contra CPU). Escolher um
+modo inicia uma nova luta. **Ir ao menu** permite escolher personagens e cenário
+antes de jogar. O jogo volta ao menu principal nas próximas aberturas, sempre
+começando com P1 manual contra P2 CPU. A escolha do modo vale para a sessão.
+
+O guia pode ser reaberto em **Como jogar** no menu. Sair dele por uma opção ou
+`Esc` grava `onboarding-v1.seen` no diretório de dados do usuário: `%LOCALAPPDATA%/BorrowFighters`
+no Windows e `$XDG_DATA_HOME/borrow-fighters` (ou `~/.local/share/borrow-fighters`)
+no Linux. Se a gravação falhar, o jogo continua e o guia reaparece na próxima
+abertura. `--fight`, `--showcase`, `--lab` e `--tool` preservam a entrada direta.
+
+Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem, arena, capítulo, ficha de roster e volume em linhas ajustáveis, e `Esc` para voltar de submenus, luta, Move Showcase, Combat Lab ou Sprite Viewer. No controle, `D-pad` navega e `A` confirma. O mouse também navega pelos menus: passe sobre uma linha para selecioná-la, clique com o botão esquerdo para confirmar, alternar uma opção ou avançar um valor, e use o botão direito para voltar valores de personagem, arena, capítulo e volume. O cursor nativo permanece visível e livre para sair da janela; em WSL, o cursor `Linker` acompanha o mouse apenas enquanto a janela está em foco e o ponteiro está dentro dela. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar.
 
 Fluxo atual:
 
@@ -148,6 +165,7 @@ Fluxo atual:
 - `Training`: abre `Move Showcase`, `Combat Lab` ou `Sprite Viewer`.
 - `Lore / Roster`: abre o livro do Linker e fichas de Rust, Duke/Java, C, Python e C++.
 - `Options`: ajusta volume da música e liga/desliga gravação local, CPU, dano, HUD, ajuda, debug e gamepad.
+- `Como jogar`: reabre controles e permite iniciar uma luta contra CPU, local ou de demonstração.
 
 Ao começar uma luta, os personagens entram em cena e depois aparece a contagem central `11`, `10`, `01`, `Fight!`. Enquanto a intro ou a contagem estiver ativa, ataques, movimento e projéteis ficam bloqueados. Depois que alguém vence, o cenário permanece o mesmo durante a pose final; a próxima arena só entra quando a luta seguinte começa com `R`/`Start` ou ao voltar pelo menu.
 
@@ -158,7 +176,7 @@ Ao começar uma luta, os personagens entram em cena e depois aparece a contagem 
 | Arena | Sirius Light Ring / Campinas, SP | A próxima luta deve iniciar no cenário escolhido. |
 | Lore / Roster | Manual do Linker | Capítulos e fichas devem carregar de `assets/lore/story.json` sem recompilar. |
 | Volume da música | 50% | A música deve baixar/subir em passos de 10% sem afetar SFX e vozes. |
-| Player 1 usa IA | Ligado | O Player 1 deve ser controlado automaticamente quando ligado. |
+| Player 1 usa IA | Desligado | O Player 1 responde ao teclado/gamepad; `Assistir demo` liga a IA. |
 | Player 2 usa IA | Ligado | O Player 2 deve ser controlado automaticamente. |
 | IA pode dar golpes | Ligado | Quando desligado, lutadores controlados por IA devem andar, pular, afastar, aproximar e defender, mas não atacar. |
 | Player 1 recebe dano | Ligado | Quando desligado, Player 1 mantém HP, mas reage aos golpes, defende e pode ser arremessado. |
@@ -191,7 +209,7 @@ Ao começar uma luta, os personagens entram em cena e depois aparece a contagem 
 | Alternar P2 CPU/manual | `C` | `C` | `View` |
 | Reiniciar | `R` | `R` | `Menu` |
 
-O primeiro gamepad conectado controla o Player 1 quando a IA do Player 1 está desligada. O segundo gamepad controla o Player 2 quando a IA do Player 2 está desligada. Player 1 e Player 2 começam em modo CPU; quando a CPU de um jogador está ligada, os comandos manuais daquele jogador são ignorados.
+O primeiro gamepad conectado controla o Player 1 quando a IA do Player 1 está desligada. O segundo gamepad controla o Player 2 quando a IA do Player 2 está desligada. O aplicativo começa com P1 manual e P2 CPU. **Como jogar > Duelo local** desliga as duas IAs; **Assistir demo** liga ambas. Quando a CPU de um jogador está ligada, os comandos manuais daquele jogador são ignorados.
 
 Quando ambos os jogadores usam IA, Rust e Java usam perfis diferentes para evitar movimentos espelhados. Rust tende a preservar mais média distância e usar especial com mais frequência; Java tende a pressionar mais de perto. A IA decide em pequenos blocos de tempo e pode andar, afastar, pular, abaixar, bloquear, socar, chutar, tentar varredura, overhead, anti-air, agarrão curto, ataque aéreo e soltar especial.
 

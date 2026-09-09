@@ -43,7 +43,7 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 
 O loop principal em [`src/app.rs`](../src/app.rs) usa `AppScene` de [`src/scenes/mod.rs`](../src/scenes/mod.rs) como maquina de estados simples:
 
-- `Preferences`: menu principal e submenus de versus, treino, lore/roster e opções;
+- `Preferences`: menu principal e submenus de versus, treino, lore/roster, opções e Como jogar;
 - `Fight`: luta normal com fixed timestep, IA, audio events e renderer de arena;
 - `CombatLab`: cena isolada para testar golpes e frame data;
 - `MoveShowcase`: cena de treino com dois atores, situações contextuais, golpes e defesas reais;
@@ -60,6 +60,21 @@ O menu recebe hover, clique esquerdo e clique direito por [`src/engine/input.rs`
 O cursor nativo usa `show_cursor()`, que preserva sua posição. Não chamar `enable_cursor()` a cada quadro: no Raylib 6 essa função também centraliza o ponteiro, impedindo o movimento e o acesso ao botão de fechar. O overlay `Linker` em WSL acompanha a posição real e só aparece com a janela em foco e o mouse na área cliente. `Esc` mantém a função de voltar; o botão nativo de fechar e `Exit` encerram o jogo. A navegação por mouse é coberta em [`tests/feature_flags.rs`](../tests/feature_flags.rs); cursor e fechamento exigem também verificação com janela real.
 
 ### Fluxo de Início de Luta
+
+O guia de primeira abertura reutiliza `MenuPage::HowToPlay` em
+[`src/scenes/preferences.rs`](../src/scenes/preferences.rs) e a geometria compartilhada
+de menus. O desenho fica em [`src/engine/render/onboarding.rs`](../src/engine/render/onboarding.rs).
+`PlayMode` configura somente as duas flags CPU: contra CPU (manual/CPU), duelo local
+(manual/manual) e demonstração (CPU/CPU). `App` começa em manual/CPU; o default
+de `FeatureFlags` usado pelos testes de combate continua CPU/CPU. Escolher um modo
+reinicia o mundo; fechar o guia só retorna ao menu, sem alterar o modo em andamento.
+
+`App` grava o marcador `onboarding-v1.seen` em `runtime_paths::data_dir()` ao sair
+do guia. O marcador evita repetir a apresentação; preferências e modo não são
+persistidos. Falha de escrita não interrompe o jogo. CLI direto para luta ou
+ferramentas ignora o guia e não grava o marcador. A cobertura de navegação está em
+[`tests/feature_flags.rs`](../tests/feature_flags.rs); primeira abertura, repetição,
+bypass e falha de armazenamento têm testes unitários em `app.rs`.
 
 O início de luta fica em [`src/game/world.rs`](../src/game/world.rs), não no renderer. `World::new_greybox_with_intro` liga primeiro `spawn_intro_timer` para a entrada cinematográfica e também prepara `countdown_timer`.
 
@@ -541,14 +556,20 @@ O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância ent
 
 O viewer já possui edição visual para essa metadata: `N` substitui a metadata do frame atual por um rascunho vindo do overlay runtime, o mouse move boxes/origem, cantos das boxes redimensionam hurtboxes/hitboxes, e `Ctrl+S` persiste o manifesto. Essa edição fica em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs) e é coberta por [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs). A projeção runtime fica em [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs), a resolução de hits fica em [`src/game/world.rs`](../src/game/world.rs), e a renderização das alças fica em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs).
 
-O personagem e o golpe podem ser trocados em runtime com `C`/`Shift+C` e `[`/`]`, sem reabrir o comando. `Enter` tenta selecionar o clip mais provável para o golpe atual. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `target/sprite-viewer-capture.png` para anexar em PR/issue. A evolução restante está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
+O personagem e o golpe podem ser trocados em runtime com `C`/`Shift+C` e `[`/`]`, sem reabrir o comando. `Enter` tenta selecionar o clip mais provável para o golpe atual. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `captures/sprite-viewer-capture.png` dentro dos dados do usuário para anexar em PR/issue. A evolução restante está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
 
 ## Captura de Gameplay
+
+A pasta de dados é `%LOCALAPPDATA%\BorrowFighters` no Windows ou
+`$XDG_DATA_HOME/borrow-fighters` no Linux (fallback
+`~/.local/share/borrow-fighters`). `BORROW_FIGHTERS_DATA_DIR` aceita um caminho
+absoluto alternativo. FFmpeg é opcional; no Windows a gravação atual captura
+somente vídeo. Linux usa PulseAudio para o áudio conforme a configuração abaixo.
 
 Atalhos globais:
 
 - `F9`: inicia gravação local da janela atual;
-- `F10`: para a gravação e salva o MP4 em `captures/`.
+- `F10`: para a gravação e salva o MP4 em `captures/` dentro dos dados do usuário.
 - Menu `Options` -> `Local Recording`: inicia/para pelo menu quando teclas de função não chegam ao jogo.
 
 O código fica em [`src/engine/video_capture.rs`](../src/engine/video_capture.rs). A técnica usada é manter a captura fora do gameplay: `App` só detecta os atalhos, desenha a cena normalmente e, quando há gravação ativa, envia o framebuffer renderizado pelo Raylib para `ffmpeg` como `rawvideo`. O áudio vem do PulseAudio e o MP4 é finalizado ao fechar o pipe de vídeo.
@@ -569,7 +590,7 @@ Para validar o motor de captura sem depender de automação de teclado, rode:
 BORROW_FIGHTERS_CAPTURE_SMOKE_SECONDS=8 cargo run -- --fight
 ```
 
-Esse hook inicia a gravação automaticamente, para depois do número de segundos informado e usa o mesmo pipeline de `F9`/`F10`: render texture do Raylib, áudio PulseAudio e saída em `captures/`.
+Esse hook inicia a gravação automaticamente, para depois do número de segundos informado e usa o mesmo pipeline de `F9`/`F10`: render texture do Raylib, áudio PulseAudio e saída em `captures/` dentro dos dados do usuário.
 
 ## Cabeçalho de Arquivos
 

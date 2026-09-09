@@ -3,13 +3,14 @@
 //! System: Raylib audio boundary. This module owns loaded `Sound` and `Music`
 //! resources and maps pure gameplay audio events to raylib playback calls.
 
-use std::{collections::HashMap, path::Path};
+use std::collections::HashMap;
 
 use raylib::prelude::*;
 
 use crate::audio::{
     AudioBank, AudioClipDefinition, AudioCue, AudioEvent, AudioMusicDefinition, MusicTrack,
 };
+use crate::runtime_paths::asset_path;
 
 #[cfg(test)]
 mod live_review;
@@ -60,7 +61,7 @@ impl<'aud> AudioPlayer<'aud> {
 
     /// Loads audio manifest and optional sound files.
     pub fn load(audio: &'aud RaylibAudio, manifest_path: &str) -> Self {
-        let bank = match AudioBank::load(manifest_path) {
+        let bank = match AudioBank::load(asset_path(manifest_path)) {
             Ok(bank) => bank,
             Err(error) => {
                 eprintln!("warning: audio disabled: {error}");
@@ -70,7 +71,8 @@ impl<'aud> AudioPlayer<'aud> {
 
         let mut sounds = HashMap::new();
         for clip in bank.clips() {
-            if !Path::new(&clip.file).exists() {
+            let clip_path = asset_path(&clip.file);
+            if !clip_path.exists() {
                 if clip.required {
                     eprintln!(
                         "warning: required audio clip {} is missing at {}",
@@ -80,7 +82,7 @@ impl<'aud> AudioPlayer<'aud> {
                 continue;
             }
 
-            match audio.new_sound(&clip.file) {
+            match audio.new_sound(&clip_path.to_string_lossy()) {
                 Ok(sound) => {
                     sounds.insert(clip.id.clone(), LoadedSound::new(sound, clip));
                 }
@@ -95,7 +97,8 @@ impl<'aud> AudioPlayer<'aud> {
 
         let mut music = HashMap::new();
         for track in bank.music_tracks() {
-            if !Path::new(&track.file).exists() {
+            let track_path = asset_path(&track.file);
+            if !track_path.exists() {
                 if track.required {
                     eprintln!(
                         "warning: required music track {} is missing at {}",
@@ -105,7 +108,7 @@ impl<'aud> AudioPlayer<'aud> {
                 continue;
             }
 
-            match audio.new_music(&track.file) {
+            match audio.new_music(&track_path.to_string_lossy()) {
                 Ok(mut loaded) => {
                     loaded.set_looping(track.looping);
                     music.insert(track.id.clone(), LoadedMusic::new(loaded, track));

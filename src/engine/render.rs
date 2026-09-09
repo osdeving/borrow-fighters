@@ -12,6 +12,7 @@ mod authored_supers;
 mod cinematic_effects;
 mod combat_lab;
 mod move_showcase;
+mod onboarding;
 mod python_super;
 mod signature_effects;
 mod sprite_viewer;
@@ -237,6 +238,7 @@ pub fn draw_preferences(draw: &mut impl DrawTarget, options: PreferencesDrawOpti
         MenuPage::Training => draw_training_menu(draw, font, &options),
         MenuPage::Lore => draw_lore_menu(draw, font, &options),
         MenuPage::Options => draw_options_menu(draw, font, &options),
+        MenuPage::HowToPlay => onboarding::draw_guide(draw, font, &options),
     }
 }
 
@@ -919,6 +921,12 @@ fn draw_main_menu(
         MenuLine {
             label: "OPTIONS",
             description: "Áudio, controles e preferências",
+            value: None,
+            checked: None,
+        },
+        MenuLine {
+            label: "COMO JOGAR",
+            description: "Controles, duelo local e modo solo",
             value: None,
             checked: None,
         },
@@ -1757,17 +1765,17 @@ fn draw_large_menu_row(draw: &mut impl DrawTarget, font: Option<&Font>, row: Lar
         row.x + screen_px(50)
     };
 
-    let label_size = if row.large_label {
-        22.0
-    } else if compact_row {
+    let label_size = if compact_row {
         16.0
+    } else if row.large_label {
+        22.0
     } else {
         20.0
     };
     let label_y = if row.show_description {
         row.y + screen_px(if compact_row { 5 } else { 3 })
     } else {
-        row.y + row.height / 2 - screen_px(15)
+        row.y + (row.height - screen_px(label_size as i32)) / 2
     };
     let animated_label;
     let label = if row.animation_frames > 0 {

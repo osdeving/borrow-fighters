@@ -7,6 +7,7 @@ use std::time::{Duration, Instant};
 
 use super::*;
 use crate::{audio::AudioCue, characters::CharacterId, combat::fighter::PlayerSlot};
+use std::path::Path;
 
 #[test]
 #[ignore = "requires an audio device; run manually with --ignored --nocapture"]
