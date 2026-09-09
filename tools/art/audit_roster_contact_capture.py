@@ -64,7 +64,9 @@ def main():
                 assert row["frame"] in manifests[defender]["clips"][row["clip"]], row
                 assert row["duration_frames"] > 0
                 drawing_coverage.setdefault((*key, row["profile"]), set()).add(row["frame"])
-                if row["grounded"]:
+                # Throw capture lifts the body before begin_launch changes the
+                # grounded flag. Floor support applies once that capture ends.
+                if row["grounded"] and not row["captured"]:
                     assert abs(row["feet_y"] - report["floor_y"]) < 0.01, row
             for item in scenario["screenshots"]:
                 image = path.parent / item["image"]
