@@ -161,8 +161,8 @@ Ao começar uma luta, os personagens entram em cena e depois aparece a contagem 
 | Player 1 usa IA | Ligado | O Player 1 deve ser controlado automaticamente quando ligado. |
 | Player 2 usa IA | Ligado | O Player 2 deve ser controlado automaticamente. |
 | IA pode dar golpes | Ligado | Quando desligado, lutadores controlados por IA devem andar, pular, afastar, aproximar e defender, mas não atacar. |
-| Player 1 recebe dano | Ligado | Quando desligado, Rust não deve perder vida ao ser acertado. |
-| Player 2 recebe dano | Ligado | Quando desligado, Java não deve perder vida ao ser acertado. |
+| Player 1 recebe dano | Ligado | Quando desligado, Player 1 mantém HP, mas reage aos golpes, defende e pode ser arremessado. |
+| Player 2 recebe dano | Ligado | Quando desligado, Player 2 mantém HP, mas reage aos golpes, defende e pode ser arremessado. |
 | Mostrar HUD | Ligado | Barras de vida e título no topo aparecem/desaparecem. |
 | Mostrar ajuda de controles | Desligado | Texto de controles no rodapé aparece/desaparece. |
 | Mostrar debug de combate | Desligado | Hitboxes, hurtboxes, labels e colisão corpo-corpo aparecem/desaparecem. |
@@ -274,8 +274,8 @@ Hitboxes, hurtboxes, retângulos de reação/guarda, limites da arena, labels de
 28. O submenu `Options` deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
 29. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
 30. A opção `IA pode dar golpes` desligada deve impedir soco, chute e fireball da CPU, mantendo movimento/defesa.
-31. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Player 1.
-32. A opção `Player 2 recebe dano` desligada deve impedir perda de vida do Player 2.
+31. A opção `Player 1 recebe dano` desligada deve impedir perda de vida do Player 1, mantendo animação de impacto/guarda, empurrão, queda e recuperação.
+32. A opção `Player 2 recebe dano` desligada deve fazer o mesmo para Player 2. Conferir soco, chute, projétil, arremesso, assinatura e cada pancada da rajada de C++; `HIT -0` não deve deixar o alvo em idle.
 33. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
 34. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
 35. `R` ou `Menu` deve reiniciar a partida.

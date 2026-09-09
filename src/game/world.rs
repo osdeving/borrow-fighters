@@ -758,10 +758,8 @@ impl World {
                 attacker_character,
                 attack.move_id,
             ));
-            if result.damage > 0 {
-                self.audio_events
-                    .push(AudioEvent::fighter_hurt(defender, defender_character));
-            }
+            self.audio_events
+                .push(AudioEvent::fighter_hurt(defender, defender_character));
         }
         self.record_combat(CombatLogKind::CloseAttackResolved {
             attacker,
@@ -832,9 +830,7 @@ fn queue_projectile_hit_audio(
     if result.blocked {
         events.push(AudioEvent::fighter_block(defender, defender_character));
     } else {
-        if result.damage > 0 {
-            events.push(AudioEvent::fighter_hurt(defender, defender_character));
-        }
+        events.push(AudioEvent::fighter_hurt(defender, defender_character));
     }
 }
 
@@ -945,11 +941,7 @@ fn hitbox_contact_with_defender(
 
 fn apply_knockdown_for_move(defender: &mut Fighter, attack: ActiveAttack, result: DamageResult) {
     let input = move_spec(attack.move_id).input;
-    if result.damage > 0
-        && !result.blocked
-        && defender.grounded
-        && matches!(input, MoveInputKind::Sweep)
-    {
+    if !result.blocked && defender.grounded && matches!(input, MoveInputKind::Sweep) {
         defender.start_knockdown();
     }
 }
@@ -986,15 +978,12 @@ fn take_player_one_hit(
     hit_reaction: HitReaction,
     flags: FeatureFlags,
 ) -> DamageResult {
-    if flags.enabled(FeatureFlag::PlayerOneTakesDamage) {
-        player_one.take_hit(damage, guard_rule, hit_reaction)
-    } else {
-        DamageResult {
-            damage: 0,
-            blocked: false,
-            pushback: 0.0,
-        }
-    }
+    player_one.take_hit_with_damage_enabled(
+        damage,
+        guard_rule,
+        hit_reaction,
+        flags.enabled(FeatureFlag::PlayerOneTakesDamage),
+    )
 }
 
 fn take_player_two_hit(
@@ -1004,13 +993,10 @@ fn take_player_two_hit(
     hit_reaction: HitReaction,
     flags: FeatureFlags,
 ) -> DamageResult {
-    if flags.enabled(FeatureFlag::PlayerTwoTakesDamage) {
-        player_two.take_hit(damage, guard_rule, hit_reaction)
-    } else {
-        DamageResult {
-            damage: 0,
-            blocked: false,
-            pushback: 0.0,
-        }
-    }
+    player_two.take_hit_with_damage_enabled(
+        damage,
+        guard_rule,
+        hit_reaction,
+        flags.enabled(FeatureFlag::PlayerTwoTakesDamage),
+    )
 }

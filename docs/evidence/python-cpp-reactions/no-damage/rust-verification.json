@@ -1,0 +1,62 @@
+{
+  "cwd": "/home/willams/borrow-fighters",
+  "target_dir": "/tmp/borrow25-contact-check",
+  "status": "passed",
+  "started_utc": "2026-09-09T11:37:09Z",
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.32,
+      "log": "/tmp/borrow25-no-damage-rust-verification/fmt.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.52,
+      "log": "/tmp/borrow25-no-damage-rust-verification/clippy.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 6.56,
+      "log": "/tmp/borrow25-no-damage-rust-verification/test.log",
+      "totals": {
+        "passed": 349,
+        "failed": 0,
+        "ignored": 1,
+        "measured": 0,
+        "filtered_out": 0
+      }
+    }
+  ],
+  "totals": {
+    "passed": 349,
+    "failed": 0,
+    "ignored": 1,
+    "measured": 0,
+    "filtered_out": 0
+  },
+  "test_binaries": 43,
+  "ignored_tests": [
+    "test engine::audio::live_review::live_music_pause_resume_and_cancel_preserve_stream_position ... ignored, requires an audio device; run manually with --ignored --nocapture"
+  ],
+  "finished_utc": "2026-09-09T11:37:18Z"
+}

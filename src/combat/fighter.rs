@@ -484,11 +484,24 @@ impl Fighter {
         guard_rule: GuardRule,
         hit_reaction: HitReaction,
     ) -> DamageResult {
+        self.take_hit_with_damage_enabled(damage, guard_rule, hit_reaction, true)
+    }
+
+    /// Resolves a confirmed contact normally while optionally preserving health for playtest.
+    pub(crate) fn take_hit_with_damage_enabled(
+        &mut self,
+        damage: i32,
+        guard_rule: GuardRule,
+        hit_reaction: HitReaction,
+        damage_enabled: bool,
+    ) -> DamageResult {
         let blocked = !self.is_defeated()
             && self.grounded
             && !self.in_hitstun()
             && guard_rule.is_blocked_by(self.blocking, self.crouching);
-        let final_damage = if blocked {
+        let final_damage = if !damage_enabled {
+            0
+        } else if blocked {
             // Guard gives a low-health defender a chance to answer pressure.
             (damage / BLOCK_DAMAGE_DIVISOR)
                 .max(1)

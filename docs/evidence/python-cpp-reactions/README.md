@@ -7,6 +7,9 @@
 real mostra ambas as personagens em cada situação; o World controla contatos,
 reações, deslocamento e recuperação. Captura automática em display Xvfb isolado.
 
+Esta captura original usa dano habilitado. O bug das opções de dano desligadas
+foi corrigido depois, com [validação específica e vídeo de 13 s](no-damage/README.md).
+
 | Trecho | Situações |
 |---|---|
 | 0–25,08 s | C++ ataca Python: socos, chute, rasteira, overhead, anti-air, golpes aéreos, arremesso, projétil e assinatura. |

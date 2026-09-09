@@ -1,5 +1,11 @@
 # Changelog
 
+## Correção 2026-09-09 — Reações com dano desligado
+
+- Desligar `Player recebe dano` preserva HP e mantém reações, guarda, empurrão,
+  arremesso, lançamento e feedback de contato. Antes a opção também impedia
+  ativar a animação, deixando o defensor em idle durante os golpes.
+
 ## Rodada 2026-09-09 — Reações próprias Python × C++
 
 - Reações articuladas de cabeça, tronco, perna, defesa alta/baixa, voo, queda e

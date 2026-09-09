@@ -50,7 +50,7 @@ impl World {
             PlayerSlot::One => self.player_two.record_close_contact_profile(attack.kind),
             PlayerSlot::Two => self.player_one.record_close_contact_profile(attack.kind),
         }
-        if result.damage > 0 && !result.blocked && attack.guard_rule == GuardRule::Throw {
+        if !result.blocked && attack.guard_rule == GuardRule::Throw {
             self.begin_throw(attacker);
             return;
         }
@@ -59,7 +59,7 @@ impl World {
             PlayerSlot::Two => &mut self.player_one,
         };
         apply_pushback(defender, direction, result.pushback);
-        if result.damage <= 0 || result.blocked {
+        if result.blocked {
             return;
         }
         match attack.kind {

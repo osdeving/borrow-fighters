@@ -193,14 +193,12 @@ impl World {
         } else {
             contact.damage.min(before.max(0))
         };
-        if takes_damage {
-            target.receive_super_contact(damage, sequence.guarded, contact.knockdown);
-            if sequence.character == CharacterId::Cpp
-                && let Some(profile) =
-                    crate::combat::super_sequence::cpp_barrage_reaction_profile(contact.tick)
-            {
-                target.record_super_contact_profile(profile, CPP_BARRAGE_CADENCE - 1);
-            }
+        target.receive_super_contact(damage, sequence.guarded, contact.knockdown);
+        if sequence.character == CharacterId::Cpp
+            && let Some(profile) =
+                crate::combat::super_sequence::cpp_barrage_reaction_profile(contact.tick)
+        {
+            target.record_super_contact_profile(profile, CPP_BARRAGE_CADENCE - 1);
         }
         let impact_height = target.contact_reaction_state().map_or(0.45, |reaction| {
             use crate::combat::fighter::ContactReactionProfile;
@@ -228,18 +226,16 @@ impl World {
             damage,
             blocked: sequence.guarded,
         });
-        if damage > 0 {
-            self.audio_events.push(if sequence.guarded {
-                AudioEvent::combat_block(sequence.attacker, sequence.character, sequence.move_id)
-            } else {
-                AudioEvent::combat_hit(sequence.attacker, sequence.character, sequence.move_id)
-            });
-            self.audio_events.push(if sequence.guarded {
-                AudioEvent::fighter_block(sequence.target, target_character)
-            } else {
-                AudioEvent::fighter_hurt(sequence.target, target_character)
-            });
-        }
+        self.audio_events.push(if sequence.guarded {
+            AudioEvent::combat_block(sequence.attacker, sequence.character, sequence.move_id)
+        } else {
+            AudioEvent::combat_hit(sequence.attacker, sequence.character, sequence.move_id)
+        });
+        self.audio_events.push(if sequence.guarded {
+            AudioEvent::fighter_block(sequence.target, target_character)
+        } else {
+            AudioEvent::fighter_hurt(sequence.target, target_character)
+        });
     }
 
     fn super_fighter(&self, slot: PlayerSlot) -> &Fighter {

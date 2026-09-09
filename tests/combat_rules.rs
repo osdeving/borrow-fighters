@@ -345,7 +345,7 @@ fn blocked_close_attack_queues_guard_audio_events() {
 }
 
 #[test]
-fn no_damage_flag_suppresses_hurt_audio_event() {
+fn no_damage_flag_preserves_hurt_audio_event_and_health() {
     let mut world = World::new_greybox();
     world.player_one.position.x = 420.0;
     world.player_two.position.x = 470.0;
@@ -371,8 +371,9 @@ fn no_damage_flag_suppresses_hurt_audio_event() {
     assert!(
         events
             .iter()
-            .all(|event| event.cue != AudioCue::FighterHurt)
+            .any(|event| event.cue == AudioCue::FighterHurt)
     );
+    assert_eq!(world.player_two.health, world.player_two.max_health);
 }
 
 #[test]

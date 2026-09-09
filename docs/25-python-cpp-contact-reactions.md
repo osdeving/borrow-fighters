@@ -96,6 +96,27 @@ offline dos eventos do World, sem alteração do player nesta rodada. O padrão
 fica pronto para extensão; nenhuma nova aprovação visual é atribuída ao resto
 do elenco.
 
+## Correção do treino sem dano
+
+O playtest seguinte revelou uma lacuna na validação: com `Player 1 recebe dano`
+ou `Player 2 recebe dano` desligado, o World pulava a rotina inteira de contato,
+incluindo a ativação das reações. A rajada exibia `HIT -0`, mas o defensor ficava
+em idle. Os sprites estavam presentes; o bloqueio era no código. As capturas
+anteriores desta rodada usaram dano habilitado.
+
+A opção deve impedir apenas a redução de HP. Contato confirmado continua
+interrompendo a ação, ativando a reação/guarda, empurrando, arremessando ou
+lançando e produzindo feedback sonoro conforme o golpe. Guarda não pode cobrar
+chip quando o dano está desligado. Golpes que erram continuam sem reação.
+Essa regra vale independentemente do personagem ou slot; a arte nova permanece
+limitada ao piloto Python/C++.
+
+Correção implementada: **349 testes passaram**, zero falhas, um teste de áudio
+com dispositivo ignorado; Fmt e Clippy aprovados. A [nova captura com dano
+desligado](evidence/python-cpp-reactions/no-damage/README.md) confirma HP cheio,
+os quatro desenhos por pancada nos 80 ticks da rajada e queda/recuperação de
+C++ ao receber o especial de Python.
+
 ## Aplicar o padrão na próxima rodada
 
 1. Revisar a identidade e as poses do personagem contra a arte já integrada.
@@ -107,7 +128,8 @@ do elenco.
    reutilizam o perfil existente; novos contatos cinematográficos precisam de uma
    agenda compartilhada entre pose ofensiva, efeito e reação do defensor.
 4. Validar contato a contato no World, incluindo guarda, erro, ar, queda, KO,
-   pausa e replay. Comparar a metadata física antes/depois da troca de desenho.
+   pausa, replay e flags de dano desligadas em cada slot. Comparar a metadata
+   física antes/depois da troca de desenho.
 5. Conferir o par em movimento e nos dois sentidos: impacto, pico, recuperação,
    articulação, escala, pés no chão e encaixe visual do golpe. Um teste de seleção
    de frames sozinho não aprova a qualidade da animação.

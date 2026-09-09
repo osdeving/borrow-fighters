@@ -568,7 +568,7 @@ fn airborne_targets_freeze_then_settle_without_teleport_and_stay_on_the_authored
                         flags,
                     );
                     let target = fighter(&world, opposite(slot));
-                    if frame < super_spec(character).unwrap().contacts[0].tick || invincible {
+                    if frame < super_spec(character).unwrap().contacts[0].tick {
                         assert_eq!(target.position.x, original.x);
                     }
                     if frame <= 8 {
@@ -578,12 +578,14 @@ fn airborne_targets_freeze_then_settle_without_teleport_and_stay_on_the_authored
                         assert!(target.position.y > previous_y);
                         assert!(target.body_rect().bottom() < FLOOR_Y);
                         assert!(!target.grounded);
-                    } else if frame < super_spec(character).unwrap().contacts[0].tick || invincible
-                    {
+                    } else if frame < super_spec(character).unwrap().contacts[0].tick {
                         assert!(target.grounded);
                         assert!((target.body_rect().bottom() - FLOOR_Y).abs() < 0.01);
                     }
                     previous_y = target.position.y;
+                    if invincible {
+                        assert_eq!(target.health, target.max_health);
+                    }
                 }
             }
         }

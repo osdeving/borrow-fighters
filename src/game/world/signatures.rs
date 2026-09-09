@@ -180,7 +180,7 @@ impl World {
                 }
             };
             apply_pushback(defender, effect.direction, result.pushback);
-            if result.damage > 0 && !result.blocked {
+            if !result.blocked {
                 if matches!(
                     effect.kind,
                     SignatureEffectKind::CMemoryRupture

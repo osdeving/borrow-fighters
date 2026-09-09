@@ -265,7 +265,13 @@ cargo run -- --lab combat --character c --move cinematic_special
 
 CLI também aceita `cinematic`, `cinematic-special` e `ultimate`. O Combat Lab mantém um `World` completo para os cinco supers, acessível por `super_preview_world()`, reproduz ambos os atores e disponibiliza os cues reais por `take_super_audio_events()`. Não apresenta dummy, alcance melee nem vantagem fictícia para capturas. Go mantém o dummy local. Showcase prepara o alvo à distância nos cinco supers e calcula `scenario_frames()` como 30f de preparação + duração da sessão + 90f de observação; os outros exemplos conservam 260f. Pausa e avanço por frame preservam o relógio de cada modo. Há 16 situações por personagem da demo e 15 para Go, que não possui a assinatura anterior.
 
-[`tests/authored_super_sequences.rs`](../tests/authored_super_sequences.rs) verifica ambas as orientações e slots, distância/cantos, fases e contatos, corrida física, guarda capturada/chip, invencibilidade, KO adiado, comandos simultâneos, alvo aéreo, emissão única de áudio e reset, mutação persistente para Sirius e retorno de Python sem dano adicional. [`tests/cinematic_specials.rs`](../tests/cinematic_specials.rs) preserva a matriz local de Go e verifica CLI, pause/frame-step e replay dos seis personagens. [`tests/move_showcase.rs`](../tests/move_showcase.rs) valida contatos reais de todos os golpes com e sem metadata.
+[`tests/authored_super_sequences.rs`](../tests/authored_super_sequences.rs) verifica ambas as orientações e slots, distância/cantos, fases e contatos, corrida física, guarda capturada/chip, preservação de HP no treino, KO adiado, comandos simultâneos, alvo aéreo, emissão única de áudio e reset, mutação persistente para Sirius e retorno de Python sem dano adicional. [`tests/cinematic_specials.rs`](../tests/cinematic_specials.rs) preserva a matriz local de Go e verifica CLI, pause/frame-step e replay dos seis personagens. [`tests/move_showcase.rs`](../tests/move_showcase.rs) valida contatos reais de todos os golpes com e sem metadata.
+
+As flags `PlayerOneTakesDamage` e `PlayerTwoTakesDamage` controlam somente a
+redução de vida. O contato continua aplicando reação, interrupção, defesa,
+empurrão, captura/lançamento e feedback sonoro. Chip também fica em zero com a
+flag desligada. Não usar `damage > 0` como condição para ativar resposta a um
+contato confirmado; isso deixava os personagens em idle no treino sem dano.
 
 ### Combat Log
 

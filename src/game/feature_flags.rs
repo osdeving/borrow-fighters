@@ -126,11 +126,8 @@ impl FeatureFlag {
             FeatureFlag::PlayerOneCpu => "Quando ligado, o Player 1 tambem vira CPU.",
             FeatureFlag::PlayerTwoCpu => "Liga o sparring dummy do Player 2.",
             FeatureFlag::CpuCanAttack => "Quando desligado, a IA se move e defende, mas nao ataca.",
-            FeatureFlag::PlayerOneTakesDamage => {
-                "Quando desligado, o Player 1 fica invencivel para playtest."
-            }
-            FeatureFlag::PlayerTwoTakesDamage => {
-                "Quando desligado, o Player 2 fica invencivel para playtest."
+            FeatureFlag::PlayerOneTakesDamage | FeatureFlag::PlayerTwoTakesDamage => {
+                "Quando desligado, preserva a vida; reacoes e defesa continuam."
             }
             FeatureFlag::ShowHud => "Barras de vida, titulo e status no topo.",
             FeatureFlag::ShowControlsHelp => "Texto de comandos no rodape durante a luta.",
