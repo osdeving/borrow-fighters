@@ -1,0 +1,3616 @@
+{
+  "method": "Real World contact exports and unmodified PNG headers; visual articulation is reviewed separately",
+  "inputs": [
+    "dist/contact-review/right",
+    "dist/contact-review/left",
+    "dist/contact-review/protected-right",
+    "dist/contact-review/protected-left"
+  ],
+  "scenarios": [
+    {
+      "defender": "rust",
+      "case": "body",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 100,
+      "final_health": 93,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "head",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 100,
+      "final_health": 86,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "low",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 100,
+      "final_health": 89,
+      "screenshots": 13
+    },
+    {
+      "defender": "rust",
+      "case": "guard-high",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 100,
+      "final_health": 99,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "guard-low",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 100,
+      "final_health": 98,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "throw",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 100,
+      "final_health": 90,
+      "screenshots": 13
+    },
+    {
+      "defender": "rust",
+      "case": "cinematic",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 100,
+      "final_health": 64,
+      "screenshots": 94
+    },
+    {
+      "defender": "rust",
+      "case": "knockout",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 0,
+      "screenshots": 85
+    },
+    {
+      "defender": "duke",
+      "case": "body",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 112,
+      "final_health": 105,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "head",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 112,
+      "final_health": 98,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "low",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 112,
+      "final_health": 101,
+      "screenshots": 13
+    },
+    {
+      "defender": "duke",
+      "case": "guard-high",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 112,
+      "final_health": 111,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "guard-low",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 112,
+      "final_health": 110,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "throw",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 112,
+      "final_health": 102,
+      "screenshots": 13
+    },
+    {
+      "defender": "duke",
+      "case": "cinematic",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 112,
+      "final_health": 76,
+      "screenshots": 94
+    },
+    {
+      "defender": "duke",
+      "case": "knockout",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 0,
+      "screenshots": 85
+    },
+    {
+      "defender": "c",
+      "case": "body",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 104,
+      "final_health": 97,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "head",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 104,
+      "final_health": 90,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "low",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 104,
+      "final_health": 93,
+      "screenshots": 13
+    },
+    {
+      "defender": "c",
+      "case": "guard-high",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 104,
+      "final_health": 103,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "guard-low",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 104,
+      "final_health": 102,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "throw",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 104,
+      "final_health": 94,
+      "screenshots": 13
+    },
+    {
+      "defender": "c",
+      "case": "cinematic",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 104,
+      "final_health": 68,
+      "screenshots": 94
+    },
+    {
+      "defender": "c",
+      "case": "knockout",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 0,
+      "screenshots": 85
+    },
+    {
+      "defender": "go",
+      "case": "body",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 92,
+      "final_health": 85,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "head",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 92,
+      "final_health": 78,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "low",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 92,
+      "final_health": 81,
+      "screenshots": 13
+    },
+    {
+      "defender": "go",
+      "case": "guard-high",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 92,
+      "final_health": 91,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "guard-low",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 92,
+      "final_health": 90,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "throw",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 92,
+      "final_health": 82,
+      "screenshots": 13
+    },
+    {
+      "defender": "go",
+      "case": "cinematic",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 92,
+      "final_health": 56,
+      "screenshots": 94
+    },
+    {
+      "defender": "go",
+      "case": "knockout",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 0,
+      "screenshots": 85
+    },
+    {
+      "defender": "rust",
+      "case": "body",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 100,
+      "final_health": 93,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "head",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 100,
+      "final_health": 86,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "low",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 100,
+      "final_health": 89,
+      "screenshots": 13
+    },
+    {
+      "defender": "rust",
+      "case": "guard-high",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 100,
+      "final_health": 99,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "guard-low",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 100,
+      "final_health": 98,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "throw",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 100,
+      "final_health": 90,
+      "screenshots": 13
+    },
+    {
+      "defender": "rust",
+      "case": "cinematic",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 100,
+      "final_health": 64,
+      "screenshots": 94
+    },
+    {
+      "defender": "rust",
+      "case": "knockout",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 0,
+      "screenshots": 85
+    },
+    {
+      "defender": "duke",
+      "case": "body",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 112,
+      "final_health": 105,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "head",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 112,
+      "final_health": 98,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "low",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 112,
+      "final_health": 101,
+      "screenshots": 13
+    },
+    {
+      "defender": "duke",
+      "case": "guard-high",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 112,
+      "final_health": 111,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "guard-low",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 112,
+      "final_health": 110,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "throw",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 112,
+      "final_health": 102,
+      "screenshots": 13
+    },
+    {
+      "defender": "duke",
+      "case": "cinematic",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 112,
+      "final_health": 76,
+      "screenshots": 94
+    },
+    {
+      "defender": "duke",
+      "case": "knockout",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 0,
+      "screenshots": 85
+    },
+    {
+      "defender": "c",
+      "case": "body",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 104,
+      "final_health": 97,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "head",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 104,
+      "final_health": 90,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "low",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 104,
+      "final_health": 93,
+      "screenshots": 13
+    },
+    {
+      "defender": "c",
+      "case": "guard-high",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 104,
+      "final_health": 103,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "guard-low",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 104,
+      "final_health": 102,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "throw",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 104,
+      "final_health": 94,
+      "screenshots": 13
+    },
+    {
+      "defender": "c",
+      "case": "cinematic",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 104,
+      "final_health": 68,
+      "screenshots": 94
+    },
+    {
+      "defender": "c",
+      "case": "knockout",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 0,
+      "screenshots": 85
+    },
+    {
+      "defender": "go",
+      "case": "body",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 92,
+      "final_health": 85,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "head",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 92,
+      "final_health": 78,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "low",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 92,
+      "final_health": 81,
+      "screenshots": 13
+    },
+    {
+      "defender": "go",
+      "case": "guard-high",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 92,
+      "final_health": 91,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "guard-low",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 92,
+      "final_health": 90,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "throw",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 92,
+      "final_health": 82,
+      "screenshots": 13
+    },
+    {
+      "defender": "go",
+      "case": "cinematic",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 92,
+      "final_health": 56,
+      "screenshots": 94
+    },
+    {
+      "defender": "go",
+      "case": "knockout",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 0,
+      "screenshots": 85
+    },
+    {
+      "defender": "rust",
+      "case": "body",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "head",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "low",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "rust",
+      "case": "guard-high",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "guard-low",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "throw",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "rust",
+      "case": "cinematic",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 94
+    },
+    {
+      "defender": "duke",
+      "case": "body",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "head",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "low",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "duke",
+      "case": "guard-high",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "guard-low",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "throw",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "duke",
+      "case": "cinematic",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 94
+    },
+    {
+      "defender": "c",
+      "case": "body",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "head",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "low",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "c",
+      "case": "guard-high",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "guard-low",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "throw",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "c",
+      "case": "cinematic",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 94
+    },
+    {
+      "defender": "go",
+      "case": "body",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "head",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "low",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "go",
+      "case": "guard-high",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "guard-low",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "throw",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "go",
+      "case": "cinematic",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 94
+    },
+    {
+      "defender": "rust",
+      "case": "body",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "head",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "low",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "rust",
+      "case": "guard-high",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "guard-low",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "rust",
+      "case": "throw",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "rust",
+      "case": "cinematic",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 94
+    },
+    {
+      "defender": "duke",
+      "case": "body",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "head",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "low",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "duke",
+      "case": "guard-high",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "guard-low",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "duke",
+      "case": "throw",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "duke",
+      "case": "cinematic",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 94
+    },
+    {
+      "defender": "c",
+      "case": "body",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "head",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "low",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "c",
+      "case": "guard-high",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "guard-low",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "c",
+      "case": "throw",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "c",
+      "case": "cinematic",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 94
+    },
+    {
+      "defender": "go",
+      "case": "body",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Body"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "head",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Head"
+      ],
+      "first_contact_tick": 10,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "low",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Low",
+        "Rise"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "go",
+      "case": "guard-high",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "GuardHigh"
+      ],
+      "first_contact_tick": 3,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "guard-low",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "GuardLow"
+      ],
+      "first_contact_tick": 8,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 5
+    },
+    {
+      "defender": "go",
+      "case": "throw",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 9,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 13
+    },
+    {
+      "defender": "go",
+      "case": "cinematic",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Fall",
+        "Head",
+        "Launch",
+        "Rise"
+      ],
+      "first_contact_tick": 344,
+      "initial_health": 1,
+      "final_health": 1,
+      "screenshots": 94
+    }
+  ],
+  "scenarios_checked": 120,
+  "screenshots_checked": 2920,
+  "barrage_windows_checked": 128,
+  "barrage_windows": [
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": false,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": false,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": true,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 344,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 354,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 364,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 374,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 384,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 394,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 404,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": true,
+      "impact_tick": 414,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ],
+      "duration_frames": 9
+    }
+  ],
+  "manifest_sha256": {
+    "c": "f75875aed172aa3cf14dac9037d812b59cb720839b0a8a0be1ae50f7446e27eb",
+    "duke": "8ce1126f685e6ea8677b566569f391db234066e78c24c640def3b0fe7e002697",
+    "go": "cd170b2dfc2fb9eddfeff33d2f075ce661f0ae2d082239b13826190070d057ec",
+    "rust": "77ff9e48de1c3c1799be963a2fd981cd667e93dc3c059cdd01d16959085dd7e5"
+  },
+  "profile_coverage": [
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "c",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "c",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "duke",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "duke",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "go",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "go",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": false,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "rust",
+      "reverse": false,
+      "protected_health": true,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": false,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    },
+    {
+      "defender": "rust",
+      "reverse": true,
+      "protected_health": true,
+      "profiles": [
+        "Body",
+        "Fall",
+        "GuardHigh",
+        "GuardLow",
+        "Head",
+        "Launch",
+        "Low",
+        "Rise"
+      ]
+    }
+  ]
+}

@@ -4,13 +4,16 @@
 
 Este documento e a fonte de verdade para **o que vem agora**.
 
-Frente atual: [concluir a apresentação do playtest](26-playtest-visual-completion.md),
-com prioridade para reações de todo o elenco, seleção visual, pausa/revanche,
-barra de energia, transições e revisão da voz Old C. Goal autorizado em
-9 de setembro de 2026, branch `feature/playtest-visual-completion`.
+Rodada entregue: [apresentação e fluxo do playtest](26-playtest-visual-completion.md),
+com reações de todo o elenco, seleção Linker, pausa/revanche, energia,
+transições e voz provisória de Old C. Implementação e revisão funcional em
+9 de setembro de 2026, branch `feature/playtest-visual-completion`,
+[PR #19](https://github.com/osdeving/borrow-fighters/pull/19).
+Próxima frente: playtest humano e balanceamento, conforme solicitado, incluindo
+valores de energia, risco/recompensa e feedback pontual de animação.
 
 A correção do carregamento em caminhos Windows com acentos já foi publicada
-na versão `v0.1.0-prototype.2`; a integração à main segue pelo PR #18.
+na versão `v0.1.0-prototype.2` e integrada à main pelo PR #18.
 [Processo](06-release-process.md), [notas](releases/v0.1.0-prototype.2.md) e
 [ADR 0019](adr/0019-playtest-distribution.md).
 
@@ -18,9 +21,9 @@ Rodada concluída: [reações próprias Python × C++](25-python-cpp-contact-rea
 64 desenhos novos e resposta sincronizada a cada contato, incluindo os oito da
 rajada. 346 testes, Fmt/Clippy e 64 cenários renderizados nos dois sentidos.
 [Vídeo e evidências](evidence/python-cpp-reactions/README.md).
-Próximo corte solicitado: aplicar o padrão de reações aos demais personagens
-em outra rodada, após revisar o piloto. Custo, raridade, contra-jogo e vantagens
-por arena permanecem fora desta entrega.
+O padrão de reações dos demais personagens integra a rodada 26 atual. Custo de
+energia recebeu seu primeiro corte funcional nessa rodada; balanceamento fino,
+contra-jogo e vantagens por arena permanecem para depois.
 
 Rodada anterior: [reações e transformações](24-reactions-and-transformations.md).
 Python gigante, expansão de C++ e mutação persistente de Rust continuam
@@ -61,9 +64,8 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Proxima acao |
 |---|---|---|---|---|
-| Agora | Conclusão visual e fluxo do playtest | Goal em execução | [Plano 26](26-playtest-visual-completion.md), [ADR 0020](adr/0020-match-flow-selection-and-energy.md) | Reações completas, seleção Linker, pausa/revanche, energia, transições e voz Old C; balanceamento fino depois. |
+| Concluído | Apresentação e fluxo do playtest | Implementado e verificado; PR #19 | [Entrega 26](26-playtest-visual-completion.md), [ADR 0020](adr/0020-match-flow-selection-and-energy.md), [UI e fluxo](evidence/playtest-visual-flow/README.md), [reações](evidence/roster-contact-reactions/README.md) | 128 desenhos, 120 cenários renderizados, três partidas e duas revanches, 393 testes, Windows/Linux verificados. Próximo: playtest humano e balanceamento fino. |
 | Concluído | Reações próprias Python × C++ | Implementado e verificado | [Entrega 25](25-python-cpp-contact-reactions.md), [evidências](evidence/python-cpp-reactions/README.md), [ADR 0018](adr/0018-contact-reaction-profiles.md) | 64 desenhos novos, reação individual à rajada, 64 cenários nos dois sentidos e vídeo do par. |
-| Próximo | Reações próprias dos demais personagens | Rodada posterior ao piloto | [Padrão 25](25-python-cpp-contact-reactions.md#aplicar-o-padrão-na-próxima-rodada) | Estender desenhos e validação por contato após o playtest de Python/C++. |
 | Concluído | Reações e transformações | Cinco supers autorais e reações dos seis defensores integrados e verificados | [Plano 24](24-reactions-and-transformations.md), [ADR 0017](adr/0017-reaction-clocks-and-arena-mutation.md), [evidências](evidence/reactions-transformations/README.md) | Playtest humano das animações e dos sons. 335 testes, Clippy estrito, formatação e teste separado de áudio ao vivo aprovados; custo, raridade e vantagens por arena ficam para outra rodada. |
 | Concluído | Supers autorais e vozes distintas | Quatro roteiros integrados, novos atlas e áudio por fase | [Plano23](23-authored-super-sequences.md), [ADR0016](adr/0016-authored-super-sequences.md) | Playtest humano das animações e timbres; depois calibrar captura, custo e raridade. 321 testes e 41 verificações de controles aprovados. |
 | Concluído | Tipografia, cenários vivos e segundo especial | Fontes incorporadas, memes animados e seis cinematográficas com contato local | [Plano e entrega](22-presentation-and-brazilian-stage-life.md), [ADR 0015](adr/0015-cinematic-presentation-and-stage-life.md) | Playtest humano do acabamento e do risco/recompensa dos novos golpes; 300 testes e revisão gráfica registrados. |
@@ -75,7 +77,7 @@ Regra operacional:
 | Proximo | Feeling e balanceamento | Planejado | [`docs/13-combat-design-roadmap.md`](13-combat-design-roadmap.md), [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md) | Playtestar a demo Rust x Duke x C x Python x C++ com Combat Lab, mantendo Go fora do menu publico e ajustando frame data por dados, nao por achismo. |
 | Feito local | Arte final dos seis lutadores | Acabamento e verificação concluídos | [Laudos e vídeos atuais](../assets/candidates/README.md), [cobertura](19-sprite-production-coverage.md) | 120 clips e 378 quadros, dez golpes por personagem. Go recebeu outra identidade semirrealista. Arte padrão, comparação com env=0, fontes e combate preservados. |
 | Depois | Ferramenta visual clicavel | Aberto | [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) | Avaliar `raygui` somente se atalhos e texto ficarem insuficientes. |
-| Concluído | Release Prototype 0.1 | Correção v0.1.0-prototype.2 publicada; integração pelo PR #18 | [Processo](06-release-process.md), [notas da versão](releases/v0.1.0-prototype.2.md), [ADR 0019](adr/0019-playtest-distribution.md) | Cinco pacotes publicados; ZIP público conferido no Windows em pasta com acentos, com arte/áudio e combate completos. |
+| Concluído | Release Prototype 0.1 | Correção v0.1.0-prototype.2 publicada e integrada à main pelo PR #18 | [Processo](06-release-process.md), [notas da versão](releases/v0.1.0-prototype.2.md), [ADR 0019](adr/0019-playtest-distribution.md) | Cinco pacotes publicados; ZIP público conferido no Windows em pasta com acentos, com arte/áudio e combate completos. |
 
 ## Ritual de manutencao
 

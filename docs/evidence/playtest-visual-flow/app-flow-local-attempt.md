@@ -43,6 +43,12 @@ terminou com 130 por interrupção; ambos os PIDs deixaram de existir.
 - Os três PNGs acima foram copiados sem modificação. Os demais PNGs desta
   tentativa não integram evidência de aceite.
 
-A sequência completa deve ser revisada novamente no artefato
-`native-app-flow-linux` do CI, que usa Xvfb isolado. Esta tentativa não comprova
-três partidas, teste físico de controles nem qualidade sonora.
+A sequência completa foi posteriormente verificada no
+[artefato `native-app-flow-linux` do CI](app-flow-ci/README.md), com Xvfb
+isolado. Esta tentativa local continua inconclusiva e não comprova três
+partidas, teste físico de controles nem qualidade sonora.
+
+Uma tentativa posterior com Xvfb portátil falhou ao criar seu próprio listener
+X11, antes de iniciar o harness ou o jogo. O servidor foi encerrado pelo cleanup;
+nenhuma permissão, socket, montagem ou foco do desktop foi alterado. Essa
+tentativa não produziu captura nem resultado de teste do jogo.

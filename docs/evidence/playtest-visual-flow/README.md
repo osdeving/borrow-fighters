@@ -39,8 +39,11 @@ as mesmas cenas também são capturadas pelo CI em `visual-review-linux`.
 Os testes de estado cobrem entrada neutra entre telas, confirmação dos dois
 jogadores, random estável, vagas futuras, conservação de arena/confronto e
 energia limitada ou livre nas ferramentas. A navegação na janela é registrada
-separadamente: a [tentativa no desktop compartilhado](app-flow-local-attempt.md)
-ficou inconclusiva e não conta como três partidas aprovadas.
+separadamente: a [revisão nativa isolada](app-flow-ci/README.md) confirmou três
+partidas, duas revanches, pausa/retomada, reinício, random, vagas futuras e
+controle dos dois lados. Preserva as 31 capturas originais, entradas e hashes.
+A [tentativa no desktop compartilhado](app-flow-local-attempt.md) ficou
+inconclusiva e não conta como aceite; o teste isolado posterior passou.
 
 ## Áudio e limites
 
@@ -57,3 +60,10 @@ registra as fontes CC0 e a preservação dos outros personagens.
 Teclado sintético, estado e geometria compartilhada não substituem um controle
 físico. Não houve teste de gamepad físico nem aprovação humana de timbre nesta
 execução. Balanceamento fino continua fora desta rodada.
+
+## Verificações de código
+
+O [registro dos checks](checks.json) resume fmt, Clippy estrito e 393 testes
+aprovados, com a [saída dos testes](tests-output.txt.gz) preservada e seu hash.
+Os dois testes de áudio que exigem dispositivo ficam fora da execução padrão;
+a verificação nativa de pausa está registrada acima.

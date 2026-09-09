@@ -120,7 +120,7 @@ As vozes de ataque possuem bindings específicos para golpes de identidade e fal
 |---|---|
 | Rust | Esforço jovem de aventureiro, por Brandon Song / wolfwoot; voz no pitch original. |
 | Duke / Java | Pacote anterior preservado, incluindo arquivos e parâmetros do manifesto. |
-| Old C | Fallback temporário autorizado para seis clips de Rust/Brandon Song, copiados sem alteração; esforços de 0,26–0,74 s. A atuação anterior de Volvion saiu do runtime. |
+| Old C | Fallback temporário autorizado para seis clips de Rust/Brandon Song, copiados sem alteração; esforços de 0,28–0,76 s. A atuação anterior de Volvion saiu do runtime. |
 | Go | Vocalizações de criatura de Ogrebane, com articulação encurtada; fonte diferente de todas as vozes humanas. |
 | Python | Pacote anterior de cicifyre preservado, incluindo arquivos e parâmetros. |
 | C++ | Esforços de SkyRae e reações de AuraVoice; ambos diferentes da intérprete de Python. |

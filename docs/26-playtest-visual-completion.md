@@ -3,7 +3,8 @@
 ## Pedido e prioridade
 
 Rodada autorizada em 9 de setembro de 2026, a partir de `v0.1.0-prototype.2`.
-Goal em execução na branch `feature/playtest-visual-completion`.
+Entrega na branch `feature/playtest-visual-completion`,
+[PR #19](https://github.com/osdeving/borrow-fighters/pull/19).
 A prioridade é emparelhar as reações do elenco com o piloto Python/C++.
 O pedido também inclui seleção visual de personagens, pausa/revanche, energia,
 transições e substituição da voz de Old C. Balanceamento fino fica para depois.
@@ -72,7 +73,36 @@ O [backlog](03-backlog.md) continua sendo a fonte de verdade da frente ativa.
 
 ## Estado da entrega
 
-Em execução. Evidências, resultados e limites serão registrados ao concluir.
+Implementação e revisão funcional concluídas em 9 de setembro de 2026.
+
+| Entrega | Verificação |
+|---|---|
+| Reações do elenco | 128 desenhos novos, 120 cenários renderizados, 2.920 PNGs auditados, 128 janelas de rajada e oito KOs; [vídeo, amostras e relatórios](evidence/roster-contact-reactions/README.md). Python/C++ permanecem cobertos pelo piloto e pela matriz geral. |
+| Seleção Linker | Retratos e previews dos cinco selecionáveis, escala/pivô estáveis, random, vagas futuras e confirmação dos dois lados; [capturas e vídeo](evidence/playtest-visual-flow/README.md). Go conserva suporte interno e as novas reações. |
+| Pausa e revanche | Aplicação nativa sob Xvfb: 31 capturas revisadas, três partidas encerradas, duas revanches preservando confronto/arena, pausa/retomada e reinício com vida/energia restauradas; [revisão do fluxo](evidence/playtest-visual-flow/app-flow-ci/README.md). |
+| Energia | Testes de custo, teto/piso, ganho por contato, cancelamento simultâneo, reinício e ferramentas livres; renderer mostra 100 após contatos e zero após cinematográfico aceito. |
+| Movimento e efeitos | Abertura progressiva, foco, confirmação, previews animados, início/resultado e componentes de apresentação compartilhados; capturas e vídeo vêm do renderer real. |
+| Voz Old C | Fallback de Rust autorizado, seis cópias exatas e nova camada vocal na entrada do super; [comparação, licença e preservação dos demais arquivos](../assets/audio/review/old-c-fallback-2026-09-09/README.md). |
+| Código e distribuição | 393 testes, fmt e Clippy estrito aprovados. O [CI completo](https://github.com/osdeving/borrow-fighters/actions/runs/34394289582) passou no Windows e Linux, incluindo ZIP/instalador em caminhos com acentos, DEB/tar e instalação RPM em Fedora 44. |
+
+O código da revisão completa é `4f1631f`. O ajuste posterior `591b694` apenas
+alinha as duas metades clicáveis da arena ao painel compartilhado; testes,
+Clippy e fmt passaram novamente. Os
+[pacotes da revisão atualizada](https://github.com/osdeving/borrow-fighters/actions/runs/34395185385)
+e o PR identificam o commit de origem de cada build. A publicação de versão
+segue o [processo de release](06-release-process.md).
+
+A navegação foi testada com teclado sintético enviado à própria janela. Não
+houve gamepad/mouse físicos nem aprovação humana de timbre. O teste separado
+com PulseAudio verificou pausa/retomada reais usando sondas silenciosas; o CI
+de navegação estava sem dispositivo de áudio. A tentativa no desktop WSLg
+compartilhado ficou inconclusiva e foi substituída pelo teste isolado aprovado.
+
+A revisão dos contatos registra limites pontuais de acabamento: sobreposição do
+HUD no ápice de arremessos, mãos altas de Go em guarda em pé, primeiro recuo de
+Duke afastado da faísca e variação facial de Go. Os relógios, a articulação e a
+matriz passaram; a comparação de frames não equivale à aprovação humana de
+fluidez. Balanceamento fino e esse feedback de playtest formam a próxima rodada.
 
 O workflow manual `Playtest Release` captura a seleção, random, confirmação,
 energia, pausa e resultado com Raylib/Xvfb no Linux. Os PNGs ficam no artefato

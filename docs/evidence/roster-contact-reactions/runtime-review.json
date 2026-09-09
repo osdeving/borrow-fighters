@@ -1,0 +1,2428 @@
+{
+  "date": "2026-09-09",
+  "commit": "4f1631fad02fdf24184e8117c0a05332da843690",
+  "workflow_run": 34394289582,
+  "job": 102610028332,
+  "artifact_id": 10121477023,
+  "artifact_url": "https://github.com/osdeving/borrow-fighters/actions/runs/34394289582/artifacts/10121477023",
+  "capture_source": "World::update_with_flags + render::draw_fight, Raylib/Xvfb Linux",
+  "runner_verification": {
+    "path": "capture-verification.json",
+    "sha256": "fc2428d1378a8d1374367ba24bfb75dcbc38b566121691195bd05e666a5c616e",
+    "scenarios": 120,
+    "png_headers_checked_before_selection": 2920,
+    "barrage_windows": 128,
+    "consecutive_barrage_pngs": 1280,
+    "profiles_per_defender_condition": 8,
+    "drawings_per_defender_condition": 32,
+    "conditions": [
+      "right",
+      "left",
+      "protected-right",
+      "protected-left"
+    ],
+    "defenders": [
+      "rust",
+      "duke",
+      "c",
+      "go"
+    ]
+  },
+  "source_reports": [
+    {
+      "condition": "right",
+      "path": "source-reports/right.json.gz",
+      "uncompressed_sha256": "76579515d776723dd8047543f219ffa7827f0f5ae3b6e17448f2f4393188c0e6",
+      "compressed_sha256": "f34d068b745ccf3c8b3aa84aa1694918277cbcd2079b49a54db82cd71516553e",
+      "scenarios": 32,
+      "observations": 2876
+    },
+    {
+      "condition": "left",
+      "path": "source-reports/left.json.gz",
+      "uncompressed_sha256": "a27115442b4bef5117b1c84136935232d6fde0697a01b60db9864092a29192b8",
+      "compressed_sha256": "a5fc2c5b8bf53bdb66151febbd8b2d90bfa3279fdd0707df6d5ee1792ea95007",
+      "scenarios": 32,
+      "observations": 2876
+    },
+    {
+      "condition": "protected-right",
+      "path": "source-reports/protected-right.json.gz",
+      "uncompressed_sha256": "23a518293c6e75dff73c3e37910a1fe31f9865389a542069efd39f3be55cc43c",
+      "compressed_sha256": "e34412239ba64b421ed88995026be4c14bf080598dceaf0e6d53a7ab4007ea1e",
+      "scenarios": 28,
+      "observations": 1484
+    },
+    {
+      "condition": "protected-left",
+      "path": "source-reports/protected-left.json.gz",
+      "uncompressed_sha256": "c0e1bc0b1f77b16036dc52db3f30be3912dd5fd673dd4ac66de9128714f899cb",
+      "compressed_sha256": "df5bfae1b9b3f6c162295cc7f2bfaef611d7980d721ba71e55a0f2d7dd52a513",
+      "scenarios": 28,
+      "observations": 1484
+    }
+  ],
+  "artifact_png_review": {
+    "method": "Decoded every retained PNG at 1280x720 with Pillow and hashed its unchanged bytes; the full 2920-frame PNG set was checked on the runner and is not included in the selected artifact",
+    "decoded_pngs": 360,
+    "files": [
+      {
+        "path": "frames/left/c-body-left-0003-reaction_body_00.png",
+        "sha256": "0c837e4460f9ec6fcfa22248f07ae771c2f4797334cee95edd542f2d9f0fe60b",
+        "bytes": 2036705
+      },
+      {
+        "path": "frames/left/c-body-left-0014-idle_1.png",
+        "sha256": "4a9aaeb8cb08de86844b31b1c17558fbcacabaee2aa9b325eb1094a687e3a6db",
+        "bytes": 2047002
+      },
+      {
+        "path": "frames/left/c-cinematic-left-0344-reaction_head_00.png",
+        "sha256": "ad9f59923cb88c9cdde4598bc982be3bbe833df0bdbc8791a3b43cb9af5b6253",
+        "bytes": 1438307
+      },
+      {
+        "path": "frames/left/c-cinematic-left-0424-reaction_launch_00.png",
+        "sha256": "f14334e99997d8e7c84ceca6f5d22298f9f769f2945c860c0c2ec1dbd6410b5e",
+        "bytes": 1442661
+      },
+      {
+        "path": "frames/left/c-cinematic-left-0448-reaction_fall_00.png",
+        "sha256": "5a9f88428346efd0ab9b2b60a5c8dd75f548628201965966e3db329b88755aa1",
+        "bytes": 1434489
+      },
+      {
+        "path": "frames/left/c-cinematic-left-0469-reaction_rise_00.png",
+        "sha256": "c40a6652d108bad844f17a40ddff4feccbaa8c0f9294606d3b73ac86bdf20879",
+        "bytes": 1121073
+      },
+      {
+        "path": "frames/left/c-cinematic-left-0484-idle_0.png",
+        "sha256": "f12c5e5126d5d883a6f8eee2b3b96485f68811a6b812793917318d5547802491",
+        "bytes": 1040178
+      },
+      {
+        "path": "frames/left/c-guard-high-left-0003-reaction_guard_high_00.png",
+        "sha256": "98c153ebab79e27370118716ab674cea62c39699a8b4588322154c7ea1b0e11c",
+        "bytes": 2043557
+      },
+      {
+        "path": "frames/left/c-guard-high-left-0011-block_2.png",
+        "sha256": "179a83fc892e84d75153e521f439cb74d2b8b586f4c324d3ce155be4e9aebe15",
+        "bytes": 2046140
+      },
+      {
+        "path": "frames/left/c-guard-low-left-0008-reaction_guard_low_00.png",
+        "sha256": "15133e447fb80b67d15defe91f4a2cccbbd778b0e683125f0d616a89ccd5f8e3",
+        "bytes": 2039770
+      },
+      {
+        "path": "frames/left/c-guard-low-left-0019-crouch_block_2.png",
+        "sha256": "0b2115530b56dc6a3348f8f2a3f6b4232b72537fa41bd52670ed0229284161cc",
+        "bytes": 2029300
+      },
+      {
+        "path": "frames/left/c-head-left-0010-reaction_head_00.png",
+        "sha256": "8b74655f297bfa797bc143208e6ceda6339caf920e9ff30f72b9fd26e1fe5b1e",
+        "bytes": 2038421
+      },
+      {
+        "path": "frames/left/c-head-left-0027-idle_1.png",
+        "sha256": "27aa24574edf1c74399bba1a4fa6ede5c9af8bed6ba9c5764b2c248bf9a977a6",
+        "bytes": 2042839
+      },
+      {
+        "path": "frames/left/c-knockout-left-0344-reaction_head_00.png",
+        "sha256": "923ea771f1d4f8bfb8fc60b21137c9a659f0d1f7aa32197f586b1ef7e3460627",
+        "bytes": 1437216
+      },
+      {
+        "path": "frames/left/c-knockout-left-0424-reaction_launch_00.png",
+        "sha256": "9eae2918a77fb5cd130091f160664540484118bdb414ed5b2923e476f9a5e54a",
+        "bytes": 1442087
+      },
+      {
+        "path": "frames/left/c-knockout-left-0448-reaction_fall_03.png",
+        "sha256": "18d554f3c7401835d933f1c5e35dd85326398d48553ba79e00a2b89cf49e38f4",
+        "bytes": 1424166
+      },
+      {
+        "path": "frames/left/c-low-left-0008-reaction_low_00.png",
+        "sha256": "079debe85ae0d66554411b21ba900911a4c9fdcdf9c17510494e0cad1f78fb7a",
+        "bytes": 2039121
+      },
+      {
+        "path": "frames/left/c-low-left-0015-reaction_fall_00.png",
+        "sha256": "5b6de6fa7c5042f18cdece736b231f03fbb6e072eaa029c4cac99f12b086e0a0",
+        "bytes": 2040350
+      },
+      {
+        "path": "frames/left/c-low-left-0029-reaction_rise_00.png",
+        "sha256": "9c7cdb33a14f7cdb90513f3d18f7144b0393c624ee4b1194fb90e1971cd48d69",
+        "bytes": 2039212
+      },
+      {
+        "path": "frames/left/c-low-left-0044-idle_0.png",
+        "sha256": "e7f95e8a20a3a50f02516ed194031be7e27f4d94517e1d7e365bcce72b42c7ec",
+        "bytes": 2045552
+      },
+      {
+        "path": "frames/left/c-throw-left-0009-reaction_launch_00.png",
+        "sha256": "b5802376fb4477cab8af22d5fb0286147c2824c1031081109de09ccb9d1db9a8",
+        "bytes": 2043319
+      },
+      {
+        "path": "frames/left/c-throw-left-0061-reaction_fall_00.png",
+        "sha256": "9b317dbfe474d575570cda86963af4b3c0b365ef69fecc5baad90c258fdc5564",
+        "bytes": 2035412
+      },
+      {
+        "path": "frames/left/c-throw-left-0082-reaction_rise_00.png",
+        "sha256": "ffe5860c617742b000d1892adda83e8cdc6b8a839238cdd33ecfa4ff9bf18ae8",
+        "bytes": 2043151
+      },
+      {
+        "path": "frames/left/c-throw-left-0097-idle_0.png",
+        "sha256": "ea21e163b2ff43a76f45f9806c1fe5b1786d7f0de2a10b7cbe9aca10557df6d2",
+        "bytes": 2038826
+      },
+      {
+        "path": "frames/left/duke-body-left-0003-reaction_body_00.png",
+        "sha256": "0b23174f6958df580642a1a4ef86870e2e35664ccdc20bf09577fc26bd87b9fa",
+        "bytes": 2020003
+      },
+      {
+        "path": "frames/left/duke-body-left-0014-idle_01.png",
+        "sha256": "48fef512c5ee874be9765aa8e5b5e4723ee418a02408ea8790e8820cee34dabd",
+        "bytes": 2027819
+      },
+      {
+        "path": "frames/left/duke-cinematic-left-0344-reaction_head_00.png",
+        "sha256": "9800ba4acde137bd5daeb9508c4a3d43beb536da03bc44640862399e79d0cccb",
+        "bytes": 1419564
+      },
+      {
+        "path": "frames/left/duke-cinematic-left-0424-reaction_launch_00.png",
+        "sha256": "0b464942c5e01e8803a93ff2a2473cc4f0bae63d6158dd6e9291d03c05c6c699",
+        "bytes": 1415970
+      },
+      {
+        "path": "frames/left/duke-cinematic-left-0448-reaction_fall_00.png",
+        "sha256": "05814bc4afc1423d77d5081e00531f96944468eb1f3d708b745fba8cfe2f34cc",
+        "bytes": 1415613
+      },
+      {
+        "path": "frames/left/duke-cinematic-left-0469-reaction_rise_00.png",
+        "sha256": "1642268f227b7f49777f096ab989abdaad3ef90227f2528c0ecca20a97b82226",
+        "bytes": 1096784
+      },
+      {
+        "path": "frames/left/duke-cinematic-left-0484-idle_02.png",
+        "sha256": "f24d1972ce7e8ee671079eb42612acc7a09a60fe9df1409d40ddfd68e9e521ec",
+        "bytes": 1022406
+      },
+      {
+        "path": "frames/left/duke-guard-high-left-0003-reaction_guard_high_00.png",
+        "sha256": "13c9da2a00cd61f4be3c6f942d5415f8dee068f0da0057dde4ab11cf38c8be91",
+        "bytes": 2022622
+      },
+      {
+        "path": "frames/left/duke-guard-high-left-0011-block_02.png",
+        "sha256": "f64b10845369c99306f2ef72d14a3febd77bbe84ec5dc66335ccc593a554dd2e",
+        "bytes": 2028276
+      },
+      {
+        "path": "frames/left/duke-guard-low-left-0008-reaction_guard_low_00.png",
+        "sha256": "cd30dffeb182b0e527bae408b59ab25d12ff779d55d9f662da6cf49822ff0411",
+        "bytes": 2022016
+      },
+      {
+        "path": "frames/left/duke-guard-low-left-0019-crouch_block_02.png",
+        "sha256": "3d170af18f73e68bf211891e01d3a756fc2eb0d94ea93e4c4a24909b5cf4df95",
+        "bytes": 2021540
+      },
+      {
+        "path": "frames/left/duke-head-left-0010-reaction_head_00.png",
+        "sha256": "cdd24832731697c2cb98a4683cc3a3d029eb94a68bc134de7217dd224700943b",
+        "bytes": 2016220
+      },
+      {
+        "path": "frames/left/duke-head-left-0027-idle_02.png",
+        "sha256": "5f1e7e79f680358ca9160a2e4123ccb63da885bda4820f3132c61b519e5b64cc",
+        "bytes": 2024732
+      },
+      {
+        "path": "frames/left/duke-knockout-left-0344-reaction_head_00.png",
+        "sha256": "a0dbe29cb791f8312ddca394515e3b24b42b53203781fd37c83b253f90faf0d9",
+        "bytes": 1419259
+      },
+      {
+        "path": "frames/left/duke-knockout-left-0424-reaction_launch_00.png",
+        "sha256": "fba615a7a28c51db2613077ed6888202d74f23e0d43b7ae6d619d7b3876e9a20",
+        "bytes": 1416194
+      },
+      {
+        "path": "frames/left/duke-knockout-left-0448-reaction_fall_03.png",
+        "sha256": "7c7a18d184ae8debc4b411b2582f58571f223d84998c0b9be7e054d54157bc9a",
+        "bytes": 1410998
+      },
+      {
+        "path": "frames/left/duke-low-left-0008-reaction_low_00.png",
+        "sha256": "40c597e7574330a61d32e998f43600369044c75963e3c2ae824de05feb149b54",
+        "bytes": 2018639
+      },
+      {
+        "path": "frames/left/duke-low-left-0015-reaction_fall_00.png",
+        "sha256": "73f78fd482896dbcd029524f734f1f0ec1da782cf1caa6c4e77414cf1fc9f598",
+        "bytes": 2022811
+      },
+      {
+        "path": "frames/left/duke-low-left-0029-reaction_rise_00.png",
+        "sha256": "0f4e893193d44fa2cd269dc4e01699e997dcfeec882efa2eca3f626a55e7f6d6",
+        "bytes": 2021945
+      },
+      {
+        "path": "frames/left/duke-low-left-0044-idle_00.png",
+        "sha256": "057d5048c70ae4fdb060737bfadb5d13acc98e6ea6b537fc046e0b0ecc3d287a",
+        "bytes": 2027605
+      },
+      {
+        "path": "frames/left/duke-throw-left-0009-reaction_launch_00.png",
+        "sha256": "29ea93a8d3897c572c70a53c8bef1a36b7db49df57ea14da34a21f1f58b697ee",
+        "bytes": 2024750
+      },
+      {
+        "path": "frames/left/duke-throw-left-0061-reaction_fall_00.png",
+        "sha256": "715417a1761f819eb534d3f51049a2a476e2594eaeae5ba37d9a6fdb69b8f4ef",
+        "bytes": 2024126
+      },
+      {
+        "path": "frames/left/duke-throw-left-0082-reaction_rise_00.png",
+        "sha256": "818f2d00add79386889054a06f87f8ab62249f209bbd463921cb5aff07942d08",
+        "bytes": 2026768
+      },
+      {
+        "path": "frames/left/duke-throw-left-0097-idle_01.png",
+        "sha256": "5a387a1676cf9a854b878391d8d06b6409c05a8bb5486b28fcf453f0bd78b5e6",
+        "bytes": 2019912
+      },
+      {
+        "path": "frames/left/go-body-left-0003-reaction_body_00.png",
+        "sha256": "539359c2b888f0617eb0d5c77d0ede6bff1380ea03fa8f3fc6750aec0721eb20",
+        "bytes": 2036673
+      },
+      {
+        "path": "frames/left/go-body-left-0014-idle_01.png",
+        "sha256": "a333395d81cf19413880ba49df59a884aa6ffa840238a1e693f21876c706033f",
+        "bytes": 2040969
+      },
+      {
+        "path": "frames/left/go-cinematic-left-0344-reaction_head_00.png",
+        "sha256": "24a49641f6910ca2834d0f1f8a0b0c596fa64a8995c5b8857f69c68dad0fcd99",
+        "bytes": 1439705
+      },
+      {
+        "path": "frames/left/go-cinematic-left-0424-reaction_launch_00.png",
+        "sha256": "1d6d4edcd386007c47a97244c002b63459ddd9eb66c5e9acadb0b424babaa4d7",
+        "bytes": 1427499
+      },
+      {
+        "path": "frames/left/go-cinematic-left-0448-reaction_fall_00.png",
+        "sha256": "c73800954468e36a88312050aa0e0ee6a11ba1715e96f74e0f0640ddfeef5e35",
+        "bytes": 1430115
+      },
+      {
+        "path": "frames/left/go-cinematic-left-0469-reaction_rise_00.png",
+        "sha256": "a948b7ee8d0d0f8cda72882cf41876dade4caa0ee7a59c703685997a735238c8",
+        "bytes": 1119222
+      },
+      {
+        "path": "frames/left/go-cinematic-left-0484-idle_02.png",
+        "sha256": "2bae64d4541dca17ea57ccc26f5015bb3855305171412043e8494111dae3ffcf",
+        "bytes": 1033671
+      },
+      {
+        "path": "frames/left/go-guard-high-left-0003-reaction_guard_high_00.png",
+        "sha256": "39a740f5a6997e7619476866f5aa09a95aa685836104083a0dc823b755d0adfe",
+        "bytes": 2041193
+      },
+      {
+        "path": "frames/left/go-guard-high-left-0011-block_02.png",
+        "sha256": "64e78ab4bcdb3562f87e1a056e702fd40819484a2e1ffc8ad4d7687c3514032f",
+        "bytes": 2041505
+      },
+      {
+        "path": "frames/left/go-guard-low-left-0008-reaction_guard_low_00.png",
+        "sha256": "adbfe4e5ff8e892212d1f00875e86924fe4f9eb0cda399e0b8b7d17034057537",
+        "bytes": 2024904
+      },
+      {
+        "path": "frames/left/go-guard-low-left-0019-crouch_block_02.png",
+        "sha256": "5d4fd28bc9aec3d3edc5a9dcb36d55ed4d69b01e76aa24970c4e0edbff09e75b",
+        "bytes": 2026385
+      },
+      {
+        "path": "frames/left/go-head-left-0010-reaction_head_00.png",
+        "sha256": "b500ed24169c3d2bc2d81b226b1f4941f4e382acd0347ea7a217f02c1af971ae",
+        "bytes": 2037535
+      },
+      {
+        "path": "frames/left/go-head-left-0027-idle_02.png",
+        "sha256": "431bc3627e041223a12b3aa1c4f0f584cfffd07f8f88b3f1ba950627b477a776",
+        "bytes": 2036580
+      },
+      {
+        "path": "frames/left/go-knockout-left-0344-reaction_head_00.png",
+        "sha256": "d35ab01e9973daaf971608791752ee594e579390af3276b1a2215e85228fe3c6",
+        "bytes": 1439022
+      },
+      {
+        "path": "frames/left/go-knockout-left-0424-reaction_launch_00.png",
+        "sha256": "3a85fa25ed9bb6574a1ee0b673e8284f80fc9f5a9a1069090b408386584cdc85",
+        "bytes": 1426981
+      },
+      {
+        "path": "frames/left/go-knockout-left-0448-reaction_fall_03.png",
+        "sha256": "5e7ea2a11aede8366dbaa3d07b13bd39a8af2e791a561d10f97fcac0a9ce5f2f",
+        "bytes": 1423967
+      },
+      {
+        "path": "frames/left/go-low-left-0008-reaction_low_00.png",
+        "sha256": "2afd5052dd6621128b5dbca297407a072ed2a5715fc2f49c9a3c64304d39aee0",
+        "bytes": 2036557
+      },
+      {
+        "path": "frames/left/go-low-left-0015-reaction_fall_00.png",
+        "sha256": "ca39face7a132f781c78c761e72b64b203001e1305e1b9e8fe842f34596150d3",
+        "bytes": 2036050
+      },
+      {
+        "path": "frames/left/go-low-left-0029-reaction_rise_00.png",
+        "sha256": "a66f2fd6a1930b52dee7f8ff085c5c4586cbc8f0ba2963291c269877d641d6da",
+        "bytes": 2035694
+      },
+      {
+        "path": "frames/left/go-low-left-0044-idle_01.png",
+        "sha256": "7ad39c959b273f9aba01b436176c22c9ff0ae24c2238056d493d695fdb6845c8",
+        "bytes": 2041056
+      },
+      {
+        "path": "frames/left/go-throw-left-0009-reaction_launch_00.png",
+        "sha256": "12528ae8a5ea789bdee9850637bef9fb44cf69c0e3c1778af15305b2ee37311a",
+        "bytes": 2044192
+      },
+      {
+        "path": "frames/left/go-throw-left-0061-reaction_fall_00.png",
+        "sha256": "0e1483f0b29df5b21ba7f95dfbb420054a42b504d856d91d533b654ef4de2518",
+        "bytes": 2033265
+      },
+      {
+        "path": "frames/left/go-throw-left-0082-reaction_rise_00.png",
+        "sha256": "67debc4bf521d25c81c0c676bb018c75c1ba6bbf4c343347412150796d98aea7",
+        "bytes": 2041207
+      },
+      {
+        "path": "frames/left/go-throw-left-0097-idle_00.png",
+        "sha256": "63a06376d42e5c32e171bfb39067e17f44f10cc1f173dc334c01f9e296d3ed70",
+        "bytes": 2033554
+      },
+      {
+        "path": "frames/left/rust-body-left-0003-reaction_body_00.png",
+        "sha256": "edef36c88f78e1cb0fbb2937d28eee53259f08a068ec5ab88f0e9dc883fb7fd4",
+        "bytes": 2037433
+      },
+      {
+        "path": "frames/left/rust-body-left-0014-idle_01.png",
+        "sha256": "6764b97a80917c62c99be90cff524b09478b66eae0700fa58b8b42e2f4c7e207",
+        "bytes": 2042039
+      },
+      {
+        "path": "frames/left/rust-cinematic-left-0344-reaction_head_00.png",
+        "sha256": "33c861a534454b900a099410dc392827717797e21734ea41b6a8015fe9d60002",
+        "bytes": 1442647
+      },
+      {
+        "path": "frames/left/rust-cinematic-left-0424-reaction_launch_00.png",
+        "sha256": "64a17b2225880b896419ac44eacb83904349cf74e6674cd06d1fa29fbc6a6fac",
+        "bytes": 1442442
+      },
+      {
+        "path": "frames/left/rust-cinematic-left-0448-reaction_fall_00.png",
+        "sha256": "0da22cc26bdb676fa093af19c119f887a8fdfcc0d55562dcd81c2e5bbf303c99",
+        "bytes": 1425499
+      },
+      {
+        "path": "frames/left/rust-cinematic-left-0469-reaction_rise_00.png",
+        "sha256": "9663a923e178497e83b4a0c5474da99d083467b97fff1c4d8ac695050152eac0",
+        "bytes": 1112054
+      },
+      {
+        "path": "frames/left/rust-cinematic-left-0484-idle_00.png",
+        "sha256": "ea3ecdecc1235123e6f9e2c6bec86ff3b40c831aefa1596ac3ec79dec85faae6",
+        "bytes": 1048704
+      },
+      {
+        "path": "frames/left/rust-guard-high-left-0003-reaction_guard_high_00.png",
+        "sha256": "ad53e09282e5a68a8daf3a3f1cbf7c4cbcb5e77fa0b949ead09686132dff4135",
+        "bytes": 2038253
+      },
+      {
+        "path": "frames/left/rust-guard-high-left-0011-block_02.png",
+        "sha256": "cd4aa8301a638b5439eea47631cac91f3aa58285b6e3ffe6575a099a8f0c8d17",
+        "bytes": 2047911
+      },
+      {
+        "path": "frames/left/rust-guard-low-left-0008-reaction_guard_low_00.png",
+        "sha256": "e4baa902b2ff468a757e06662617e0f201fe98fb32390e810c9c922c90628bea",
+        "bytes": 2030628
+      },
+      {
+        "path": "frames/left/rust-guard-low-left-0019-crouch_block_02.png",
+        "sha256": "a62fd062e59be11d10254c23ece97c306ffa444bdeb35ea68c2ece782566d8cd",
+        "bytes": 2032324
+      },
+      {
+        "path": "frames/left/rust-head-left-0010-reaction_head_00.png",
+        "sha256": "a9a7832b884142ade02c056b0451dfa701809d9549d34d0904eac3d6c34f9578",
+        "bytes": 2040168
+      },
+      {
+        "path": "frames/left/rust-head-left-0027-idle_02.png",
+        "sha256": "f6bcc846e6e96f09017870a4a56d7670f2cf7ca3e5c17b474c74b80af94ef41b",
+        "bytes": 2039209
+      },
+      {
+        "path": "frames/left/rust-knockout-left-0344-reaction_head_00.png",
+        "sha256": "3aa557978394149809b5c6f2c12e4bdde35cac99a72ba159ffe656d9c73beedd",
+        "bytes": 1441622
+      },
+      {
+        "path": "frames/left/rust-knockout-left-0424-reaction_launch_00.png",
+        "sha256": "98d0c996aab55836b2496d72ad18c11ad09d5fb87dec9b01d7833e708bc38667",
+        "bytes": 1442659
+      },
+      {
+        "path": "frames/left/rust-knockout-left-0448-reaction_fall_03.png",
+        "sha256": "a3136990e47986688fc832d4c11db0216ee17311dad90be0cdc6cbff26283a0e",
+        "bytes": 1422605
+      },
+      {
+        "path": "frames/left/rust-low-left-0008-reaction_low_00.png",
+        "sha256": "e4b4ce6cd45eacc7d0e0bdc75eb7b89a8bcd705247cf4a7d06aef4f5928d58ef",
+        "bytes": 2037377
+      },
+      {
+        "path": "frames/left/rust-low-left-0015-reaction_fall_00.png",
+        "sha256": "13b6ebc7f75618bb8b254f0d5b4b84f317e3b863cb4a412542fc1d9c8f30c882",
+        "bytes": 2031595
+      },
+      {
+        "path": "frames/left/rust-low-left-0029-reaction_rise_00.png",
+        "sha256": "9f312296268b3ab3abc3a80277389ab02075eb9addd1c2e25fa2c12575b68820",
+        "bytes": 2032053
+      },
+      {
+        "path": "frames/left/rust-low-left-0044-idle_00.png",
+        "sha256": "29d91ee930a289b06d0f43e022e87229a6681c9acf5f3ce0008f4dad5601d20f",
+        "bytes": 2041440
+      },
+      {
+        "path": "frames/left/rust-throw-left-0009-reaction_launch_00.png",
+        "sha256": "57a8b9c482f01a91665138bbd0cd1989ed052969af0d22d4652a6b9a9dc5c2a6",
+        "bytes": 2043941
+      },
+      {
+        "path": "frames/left/rust-throw-left-0061-reaction_fall_00.png",
+        "sha256": "0a589d5549bf951837e71b1626481d6648daa7fa6e2227880a3d7fed76cda483",
+        "bytes": 2029679
+      },
+      {
+        "path": "frames/left/rust-throw-left-0082-reaction_rise_00.png",
+        "sha256": "21d2602b3bf985e368f8bc89232040fd601a8bb89a4b1fe9d5ebb01ef688a5ee",
+        "bytes": 2035436
+      },
+      {
+        "path": "frames/left/rust-throw-left-0097-idle_01.png",
+        "sha256": "8fc0306f12f44d966de8285002131c5a8058eef67dd61e75cd19cc0e026aebb9",
+        "bytes": 2035028
+      },
+      {
+        "path": "frames/protected-left/c-body-left-0003-reaction_body_00.png",
+        "sha256": "126f22214f8375ec1af7fdcc4ec0c109fb982cf6f5e083a013a0863863aaff71",
+        "bytes": 2036862
+      },
+      {
+        "path": "frames/protected-left/c-body-left-0014-idle_1.png",
+        "sha256": "9333991953688b21f97795bbd6d4e34967353adab6f6ae09b444e612bf3b8f38",
+        "bytes": 2046567
+      },
+      {
+        "path": "frames/protected-left/c-cinematic-left-0344-reaction_head_00.png",
+        "sha256": "40adb4a682b2c3863418d81356bc9f4c79a565f8d4434031b25e912ccd1d45e4",
+        "bytes": 1437563
+      },
+      {
+        "path": "frames/protected-left/c-cinematic-left-0424-reaction_launch_00.png",
+        "sha256": "c51679b70e31068459b946b07e7c92e4c2485c2b3da3b3320de701336ff2da4b",
+        "bytes": 1442410
+      },
+      {
+        "path": "frames/protected-left/c-cinematic-left-0448-reaction_fall_00.png",
+        "sha256": "e743a624635c560741a3d8747b525c75796d8547ce14100805bb7aca054d72f4",
+        "bytes": 1433917
+      },
+      {
+        "path": "frames/protected-left/c-cinematic-left-0469-reaction_rise_00.png",
+        "sha256": "b0d8a0887dc1352276ab90901697159bf9d9d8c768f08133d756fb4b3779b1f8",
+        "bytes": 1120343
+      },
+      {
+        "path": "frames/protected-left/c-cinematic-left-0484-idle_0.png",
+        "sha256": "82f34670266c677782b24a900465d394b1d634d2f569f800996f304c6c239d61",
+        "bytes": 1039629
+      },
+      {
+        "path": "frames/protected-left/c-guard-high-left-0003-reaction_guard_high_00.png",
+        "sha256": "9794610af21b301ff10e9cf0df6e0c0a366191280da958c5a6e316cecb2765b0",
+        "bytes": 2043253
+      },
+      {
+        "path": "frames/protected-left/c-guard-high-left-0011-block_2.png",
+        "sha256": "354ef6d020d400f377e827338ea2312d881f4d648e9bf9a726d17554456ed9a4",
+        "bytes": 2046052
+      },
+      {
+        "path": "frames/protected-left/c-guard-low-left-0008-reaction_guard_low_00.png",
+        "sha256": "54692500f746ad02100509d957a8a76411ed839e84c26449fa0aa89edeee0556",
+        "bytes": 2039583
+      },
+      {
+        "path": "frames/protected-left/c-guard-low-left-0019-crouch_block_2.png",
+        "sha256": "4f8c69ed6ff69aa5d7ba7206dbb6705f0fb6867cb3dc4344ff3487fb0b63fc38",
+        "bytes": 2029108
+      },
+      {
+        "path": "frames/protected-left/c-head-left-0010-reaction_head_00.png",
+        "sha256": "d6bc835ce9c561f7e7bc13633a646964c3b25cff30464591f098be764e20c527",
+        "bytes": 2038111
+      },
+      {
+        "path": "frames/protected-left/c-head-left-0027-idle_1.png",
+        "sha256": "45cc1cc2468338b999942b03e5400159d2624657a04be8c1b932347e9930c616",
+        "bytes": 2042723
+      },
+      {
+        "path": "frames/protected-left/c-low-left-0008-reaction_low_00.png",
+        "sha256": "be7ea48e27eb33ccf43926a5ab5503e816bbd7266809a7ca2da646f32d5d05c2",
+        "bytes": 2038555
+      },
+      {
+        "path": "frames/protected-left/c-low-left-0015-reaction_fall_00.png",
+        "sha256": "3d00cd4b61c3932d10de13014d231b70b7a98abb600e91deb89f8e3317733bd0",
+        "bytes": 2040330
+      },
+      {
+        "path": "frames/protected-left/c-low-left-0029-reaction_rise_00.png",
+        "sha256": "71d4254388fbb7b45e8ced44626dbd2ee67a896897a4a9aa70d55046240af47b",
+        "bytes": 2039079
+      },
+      {
+        "path": "frames/protected-left/c-low-left-0044-idle_0.png",
+        "sha256": "1bcc5392313729cd354b8ab7244aff8705dd62ffd548d1e857e589a4f2b8d9bc",
+        "bytes": 2045687
+      },
+      {
+        "path": "frames/protected-left/c-throw-left-0009-reaction_launch_00.png",
+        "sha256": "9aa2eb0b4e748af20972fe1c3fc81d4fc0c46f946fc35eb26a494ccf0ce997c5",
+        "bytes": 2043310
+      },
+      {
+        "path": "frames/protected-left/c-throw-left-0061-reaction_fall_00.png",
+        "sha256": "b771164224a8a449b8cd635779f6535c745df2c05add539237161c483694a140",
+        "bytes": 2035079
+      },
+      {
+        "path": "frames/protected-left/c-throw-left-0082-reaction_rise_00.png",
+        "sha256": "ee286b26c2e34a61105ee020e818909552bd427efc2e9ae151451e3b0cfd317f",
+        "bytes": 2043213
+      },
+      {
+        "path": "frames/protected-left/c-throw-left-0097-idle_0.png",
+        "sha256": "c46d5ede7edfef3ada458d16021f72b6d2632b233f0e00ccfff305ece7fd34f5",
+        "bytes": 2039162
+      },
+      {
+        "path": "frames/protected-left/duke-body-left-0003-reaction_body_00.png",
+        "sha256": "843dacbe5d18bcbf840d807efcec2c3871fc70b1cdb2a6af87c1c51d2c944a8e",
+        "bytes": 2019786
+      },
+      {
+        "path": "frames/protected-left/duke-body-left-0014-idle_01.png",
+        "sha256": "f7328aa3c880c2413ef3deb35c107f830310f0e79236e644253bb9aadd1e5a3a",
+        "bytes": 2026994
+      },
+      {
+        "path": "frames/protected-left/duke-cinematic-left-0344-reaction_head_00.png",
+        "sha256": "2f40ff6720a4df9a421582390270d424615a7d1ae015d525f6bc06d7051de7fd",
+        "bytes": 1419079
+      },
+      {
+        "path": "frames/protected-left/duke-cinematic-left-0424-reaction_launch_00.png",
+        "sha256": "3110931999d12d4ce4c3e394c4602f89e5455c5d19a5d0538d2a19a71b4e9ed5",
+        "bytes": 1416056
+      },
+      {
+        "path": "frames/protected-left/duke-cinematic-left-0448-reaction_fall_00.png",
+        "sha256": "af64c844e08d16367564745cadef679113c145e7c57a920407b5960a61db53c7",
+        "bytes": 1414938
+      },
+      {
+        "path": "frames/protected-left/duke-cinematic-left-0469-reaction_rise_00.png",
+        "sha256": "808607934a091ba2923809f7a3bab5c07f8f603a11b6b15cce8df6f9dc08d1fc",
+        "bytes": 1096624
+      },
+      {
+        "path": "frames/protected-left/duke-cinematic-left-0484-idle_02.png",
+        "sha256": "fa07b1ae651655a4d8e4ceb3b39bc842fc561a5357bee4920915e6bce24c3833",
+        "bytes": 1022200
+      },
+      {
+        "path": "frames/protected-left/duke-guard-high-left-0003-reaction_guard_high_00.png",
+        "sha256": "8b9fe7ef374a705645facb67b21146865bb314f7090f32c8a1879d8b4abe5afa",
+        "bytes": 2023098
+      },
+      {
+        "path": "frames/protected-left/duke-guard-high-left-0011-block_02.png",
+        "sha256": "18f7b53e0bea633f6416129ce8ab225dc51e90c29a8f0ac72d5469075ed93f5a",
+        "bytes": 2028864
+      },
+      {
+        "path": "frames/protected-left/duke-guard-low-left-0008-reaction_guard_low_00.png",
+        "sha256": "59d27fe089cf830d67f9b5b3ac9698d2844fe044baa7ccf4daf16f78c48726ae",
+        "bytes": 2021123
+      },
+      {
+        "path": "frames/protected-left/duke-guard-low-left-0019-crouch_block_02.png",
+        "sha256": "19328a3b38f376b4a9f1c0598b5aca0df5d9b511213f5ab39ae269151d48a500",
+        "bytes": 2021559
+      },
+      {
+        "path": "frames/protected-left/duke-head-left-0010-reaction_head_00.png",
+        "sha256": "4165a220e10a7c6932e12b4b04afd42cbf29269f3b96e575d43323d31d63490a",
+        "bytes": 2015616
+      },
+      {
+        "path": "frames/protected-left/duke-head-left-0027-idle_02.png",
+        "sha256": "77faaba2470a8a2a95b0ffcbf3b77b7c9030962351c99db32283ae46a3dfae98",
+        "bytes": 2023504
+      },
+      {
+        "path": "frames/protected-left/duke-low-left-0008-reaction_low_00.png",
+        "sha256": "8ad4e889ec381a98c5d32faf25d37d9d8f531594c564203424b0a3c4d299385f",
+        "bytes": 2018407
+      },
+      {
+        "path": "frames/protected-left/duke-low-left-0015-reaction_fall_00.png",
+        "sha256": "09d16d2eeb7503f1fd9df0fcdd25921395975aa4f8c5284cefbffd34de647ec0",
+        "bytes": 2022469
+      },
+      {
+        "path": "frames/protected-left/duke-low-left-0029-reaction_rise_00.png",
+        "sha256": "897d916812c6e64f392fe3fe5d9287a379e3305f9e40976ea2d2827068419873",
+        "bytes": 2021511
+      },
+      {
+        "path": "frames/protected-left/duke-low-left-0044-idle_00.png",
+        "sha256": "add8512e48a45f8600ad2ec093a86ca0dfcb5ac75eaa905571ac59d0edaaddfe",
+        "bytes": 2027295
+      },
+      {
+        "path": "frames/protected-left/duke-throw-left-0009-reaction_launch_00.png",
+        "sha256": "0d25336232db4cc1bf5c6b4bbbb33ee04d3fd69a48677548c394acd40edf8b23",
+        "bytes": 2024508
+      },
+      {
+        "path": "frames/protected-left/duke-throw-left-0061-reaction_fall_00.png",
+        "sha256": "0ce56bf247b1a98cec1b9a896f3d4cb79f7ea4702c6f8e349ec95be5e5fb4a0f",
+        "bytes": 2023658
+      },
+      {
+        "path": "frames/protected-left/duke-throw-left-0082-reaction_rise_00.png",
+        "sha256": "5a63b8106c88e7177ee97f596db6d81fac054771acef2384fdaba8c062572cd4",
+        "bytes": 2026327
+      },
+      {
+        "path": "frames/protected-left/duke-throw-left-0097-idle_01.png",
+        "sha256": "c6c678bfc76d7961c26ce592397628be1a5604f9f51325fb1811d2194b37024c",
+        "bytes": 2019112
+      },
+      {
+        "path": "frames/protected-left/go-body-left-0003-reaction_body_00.png",
+        "sha256": "6e9067fe5ccd9d76df6c9141325b4e467208f056b565ee62f35f7964221005d3",
+        "bytes": 2036440
+      },
+      {
+        "path": "frames/protected-left/go-body-left-0014-idle_01.png",
+        "sha256": "149e4391005658c9937debc5ce642ca210a8f33718ad21b15195452bd88c72ab",
+        "bytes": 2041001
+      },
+      {
+        "path": "frames/protected-left/go-cinematic-left-0344-reaction_head_00.png",
+        "sha256": "8f42da5fcaed80efd6c9eccd749d0e087768a60439d0b5b9dc4e4b967e17b55c",
+        "bytes": 1439015
+      },
+      {
+        "path": "frames/protected-left/go-cinematic-left-0424-reaction_launch_00.png",
+        "sha256": "372073e0ed7f2cfbd455a98648f318f33a8dbc1e2515a640e80f9253aa226c35",
+        "bytes": 1426662
+      },
+      {
+        "path": "frames/protected-left/go-cinematic-left-0448-reaction_fall_00.png",
+        "sha256": "05dfd48c68b78604cac2381feae844bc55385349b03667fc2a6f0bdcc32723ee",
+        "bytes": 1429511
+      },
+      {
+        "path": "frames/protected-left/go-cinematic-left-0469-reaction_rise_00.png",
+        "sha256": "1ef8e52560f303433522f0f7eaa5c7f2b1da66483df800de7400d4c36ffcacb5",
+        "bytes": 1118470
+      },
+      {
+        "path": "frames/protected-left/go-cinematic-left-0484-idle_02.png",
+        "sha256": "38792d8fbe8a25068be6322a6782fd45d358574eb61805c5a1c2bdac29653970",
+        "bytes": 1033096
+      },
+      {
+        "path": "frames/protected-left/go-guard-high-left-0003-reaction_guard_high_00.png",
+        "sha256": "29cdd547facae3ee8c38d86d21d9e9c42acf507d05486f84718ae9ef0242d0dc",
+        "bytes": 2040482
+      },
+      {
+        "path": "frames/protected-left/go-guard-high-left-0011-block_02.png",
+        "sha256": "d7b13b7aa20deba2c02d8e5de9d6b24c28e918720cc79a9e5bec5ad8c43d5b5e",
+        "bytes": 2041554
+      },
+      {
+        "path": "frames/protected-left/go-guard-low-left-0008-reaction_guard_low_00.png",
+        "sha256": "fd8dde934ec98bea77d8ee86d888627c336007aa104166d62d2c4c997332c11b",
+        "bytes": 2025289
+      },
+      {
+        "path": "frames/protected-left/go-guard-low-left-0019-crouch_block_02.png",
+        "sha256": "df1f699cbfb1fc5d66ae3a5be1342f20757cd8736d96a3b718d70915d180e6df",
+        "bytes": 2025414
+      },
+      {
+        "path": "frames/protected-left/go-head-left-0010-reaction_head_00.png",
+        "sha256": "a2405e0f22aa14d6a4ed1e0ce866d156dc1da340af87656f61451a06d1b3bfb5",
+        "bytes": 2037786
+      },
+      {
+        "path": "frames/protected-left/go-head-left-0027-idle_02.png",
+        "sha256": "f1fc5555e632a0803426ce7f883517649954304d7bf3b2f768ce548da0084c2e",
+        "bytes": 2036553
+      },
+      {
+        "path": "frames/protected-left/go-low-left-0008-reaction_low_00.png",
+        "sha256": "7ef71a7c2515603f19b875cafaff75b394ef6d84b8d506739d9485eb9d85aeed",
+        "bytes": 2036310
+      },
+      {
+        "path": "frames/protected-left/go-low-left-0015-reaction_fall_00.png",
+        "sha256": "685b11f8c308a99c26e91ad47afbcfe517513c7201a5e7caad42d7a5691937d0",
+        "bytes": 2036204
+      },
+      {
+        "path": "frames/protected-left/go-low-left-0029-reaction_rise_00.png",
+        "sha256": "3b4b6f6000f152a1b1fcf9f18eac4eaea330b2602f4311813687abe81c03559f",
+        "bytes": 2035947
+      },
+      {
+        "path": "frames/protected-left/go-low-left-0044-idle_01.png",
+        "sha256": "4ebd269cd8abdc072855859f996faa139a3a835ee6bca2cd6ed9b65719b8acb7",
+        "bytes": 2040969
+      },
+      {
+        "path": "frames/protected-left/go-throw-left-0009-reaction_launch_00.png",
+        "sha256": "d54f2b1dc31f941927d9acce1ed7a77a460f540ab32d3f962f849ec73d8174ce",
+        "bytes": 2043248
+      },
+      {
+        "path": "frames/protected-left/go-throw-left-0061-reaction_fall_00.png",
+        "sha256": "1fc520bc3121225b0bcf74fd13ee2aca648b1b992684108c8f758642519e17c4",
+        "bytes": 2033088
+      },
+      {
+        "path": "frames/protected-left/go-throw-left-0082-reaction_rise_00.png",
+        "sha256": "2c98436d955866430e0b714512697983d44df15d63bf4badb657bf3d3c9264b7",
+        "bytes": 2040694
+      },
+      {
+        "path": "frames/protected-left/go-throw-left-0097-idle_00.png",
+        "sha256": "909c87bdd42d86fd18414b192c4e310b460d7b2de55e5eefcbc321494930a32f",
+        "bytes": 2033340
+      },
+      {
+        "path": "frames/protected-left/rust-body-left-0003-reaction_body_00.png",
+        "sha256": "926c99e8d818f7bedd049a14cf70170615b460d45dbd37d856dff7b32b9fe409",
+        "bytes": 2037214
+      },
+      {
+        "path": "frames/protected-left/rust-body-left-0014-idle_01.png",
+        "sha256": "4d7ac721d0c89e2dba3262f136d7381d1cf9bb7f2d4d98d8c312fe44b694e60d",
+        "bytes": 2041326
+      },
+      {
+        "path": "frames/protected-left/rust-cinematic-left-0344-reaction_head_00.png",
+        "sha256": "8dfe997ca02af6c19f5dc6a1ec8343b23a0a1eb6871243d2431c520a4f04632d",
+        "bytes": 1442162
+      },
+      {
+        "path": "frames/protected-left/rust-cinematic-left-0424-reaction_launch_00.png",
+        "sha256": "f9e74b155f5eff0053df1a802ce6a2d6f6fd424f122e1cbb4ecb4709ea2d408d",
+        "bytes": 1442653
+      },
+      {
+        "path": "frames/protected-left/rust-cinematic-left-0448-reaction_fall_00.png",
+        "sha256": "c71e616cd4cb4bc0efff1ceaf4c93e7490ad6d223e620e43dc45aefb5a50dbda",
+        "bytes": 1425091
+      },
+      {
+        "path": "frames/protected-left/rust-cinematic-left-0469-reaction_rise_00.png",
+        "sha256": "1c2c210e6e549133a8f02866f0ff511c8633522286a1a4425d2dbf0a92fa439c",
+        "bytes": 1112185
+      },
+      {
+        "path": "frames/protected-left/rust-cinematic-left-0484-idle_00.png",
+        "sha256": "e1426fd077a30a23206da60dafa6fbb35d4ec8a26565bc3bfc12cedd5cfd1910",
+        "bytes": 1048434
+      },
+      {
+        "path": "frames/protected-left/rust-guard-high-left-0003-reaction_guard_high_00.png",
+        "sha256": "cb59805ffb993a9d010352620366965ee20b1bc63ffee43f8eeb7f65c003d723",
+        "bytes": 2038561
+      },
+      {
+        "path": "frames/protected-left/rust-guard-high-left-0011-block_02.png",
+        "sha256": "cd41d872cf62cb8ff5fe8ad186f5bc60a7886aa52cf6121b2223a9f0870ba91e",
+        "bytes": 2048155
+      },
+      {
+        "path": "frames/protected-left/rust-guard-low-left-0008-reaction_guard_low_00.png",
+        "sha256": "0a5ee89c9f77409da8cf54955a5a11c2d5e9bc14d4e8c77920f8825efa710308",
+        "bytes": 2029950
+      },
+      {
+        "path": "frames/protected-left/rust-guard-low-left-0019-crouch_block_02.png",
+        "sha256": "b6cc17dbe32a5686ff376c59e3746f113c49e7133a3407610e6250f30aa2c39d",
+        "bytes": 2032645
+      },
+      {
+        "path": "frames/protected-left/rust-head-left-0010-reaction_head_00.png",
+        "sha256": "7f2ef559c0e9bd5ac5e4a925d3c08996ade22e0ce2a00078fd7ab6c73f5afe6a",
+        "bytes": 2039668
+      },
+      {
+        "path": "frames/protected-left/rust-head-left-0027-idle_02.png",
+        "sha256": "629396665499c0b538ec9815ad8d74742c98eafd1fd4dcb0ccc23057055905e9",
+        "bytes": 2038731
+      },
+      {
+        "path": "frames/protected-left/rust-low-left-0008-reaction_low_00.png",
+        "sha256": "9a555551ad1fca418afda53e927f42fa02f243ec7a330433003dc90ef0eef092",
+        "bytes": 2036777
+      },
+      {
+        "path": "frames/protected-left/rust-low-left-0015-reaction_fall_00.png",
+        "sha256": "d786f40479943f421e656b28ed73af68bfe22e26933868e33e12dea505ac555e",
+        "bytes": 2030584
+      },
+      {
+        "path": "frames/protected-left/rust-low-left-0029-reaction_rise_00.png",
+        "sha256": "9eff3dd9159f73f86f5a81a9c0f435aab9059b1c6249f7c845e913307fc9670f",
+        "bytes": 2031244
+      },
+      {
+        "path": "frames/protected-left/rust-low-left-0044-idle_00.png",
+        "sha256": "ba6f20cc9574d47ff3c0f94f58dda7ba14402bea56036b147d9a44bd140f13a8",
+        "bytes": 2041772
+      },
+      {
+        "path": "frames/protected-left/rust-throw-left-0009-reaction_launch_00.png",
+        "sha256": "06e9d5a8a100a48bd5bc8dc7dbd4597d19415e17b0c6f93cb6a82d386713d166",
+        "bytes": 2044355
+      },
+      {
+        "path": "frames/protected-left/rust-throw-left-0061-reaction_fall_00.png",
+        "sha256": "336cbdb5ca27611ba4f19b19c100760e475af8923904c5391ad96938aa4971a5",
+        "bytes": 2029394
+      },
+      {
+        "path": "frames/protected-left/rust-throw-left-0082-reaction_rise_00.png",
+        "sha256": "424d4504da386a3d5698166d9954117a6862c69a8344ecf1d920e234f3d6a652",
+        "bytes": 2035776
+      },
+      {
+        "path": "frames/protected-left/rust-throw-left-0097-idle_01.png",
+        "sha256": "23c65d9a1fbb4619a499c8eabdb7d9dd40753d9cf8cbd8b028d48e6d5faf2877",
+        "bytes": 2034258
+      },
+      {
+        "path": "frames/protected-right/c-body-right-0003-reaction_body_00.png",
+        "sha256": "98bdde405915377d51fd95b139d5a9cc3616a3d49485a49828e10efee6c48bcb",
+        "bytes": 2033808
+      },
+      {
+        "path": "frames/protected-right/c-body-right-0014-idle_1.png",
+        "sha256": "c06c0e8a121722f8fc47493c3468926544e59b80b0b13719999003a6514487de",
+        "bytes": 2040603
+      },
+      {
+        "path": "frames/protected-right/c-cinematic-right-0344-reaction_head_00.png",
+        "sha256": "20a867700dd61dd951be92cc296ad438833d2b69ea455b275c8c30b167e62172",
+        "bytes": 1430191
+      },
+      {
+        "path": "frames/protected-right/c-cinematic-right-0424-reaction_launch_00.png",
+        "sha256": "71dfc1e4eb804ac513fca2245775339f026862add1f3d0197d20a0c1c83291ca",
+        "bytes": 1434453
+      },
+      {
+        "path": "frames/protected-right/c-cinematic-right-0448-reaction_fall_00.png",
+        "sha256": "70245c1e0b2926d04f881593d4f3005fc9706982618365290fde354e9c2e3666",
+        "bytes": 1429434
+      },
+      {
+        "path": "frames/protected-right/c-cinematic-right-0469-reaction_rise_00.png",
+        "sha256": "baaf4884886f4cd7eb062b086d4100c8848761b40796bedb7ca88deedf76d387",
+        "bytes": 1126854
+      },
+      {
+        "path": "frames/protected-right/c-cinematic-right-0484-idle_0.png",
+        "sha256": "fe7cc4034ed35870d9ae0664c46143e8c394ab21019248da906608759229077a",
+        "bytes": 1039630
+      },
+      {
+        "path": "frames/protected-right/c-guard-high-right-0003-reaction_guard_high_00.png",
+        "sha256": "99da27ad56ecf080ea075c6381f098d5c3e52bb1f50cceae8e2f172917e8df92",
+        "bytes": 2040873
+      },
+      {
+        "path": "frames/protected-right/c-guard-high-right-0011-block_2.png",
+        "sha256": "cbfd5e84215db49708b3e22919a18116610823ca57043bfa74db018db9652837",
+        "bytes": 2039461
+      },
+      {
+        "path": "frames/protected-right/c-guard-low-right-0008-reaction_guard_low_00.png",
+        "sha256": "531ea1360079e6a4932a051aec66b6f37d39083988ca95f85c719fed36b181b2",
+        "bytes": 2042951
+      },
+      {
+        "path": "frames/protected-right/c-guard-low-right-0019-crouch_block_2.png",
+        "sha256": "1c0ea5518bae747716c3d827843c5964140c33cb79f84ccfa144abc40c328c91",
+        "bytes": 2031543
+      },
+      {
+        "path": "frames/protected-right/c-head-right-0010-reaction_head_00.png",
+        "sha256": "5b116bafdaf5708e7ee1bc11d26b941c5f797532efe5b89b11c3de89d890b57b",
+        "bytes": 2037525
+      },
+      {
+        "path": "frames/protected-right/c-head-right-0027-idle_1.png",
+        "sha256": "852e26c23aa22067a6a8da8b4060e35ce186619eba8c1e2e3eae6c8cb3895876",
+        "bytes": 2040361
+      },
+      {
+        "path": "frames/protected-right/c-low-right-0008-reaction_low_00.png",
+        "sha256": "813c984cb0e48f73e9968680030358daefa036058ee14a1a8e0eccf934f94858",
+        "bytes": 2040755
+      },
+      {
+        "path": "frames/protected-right/c-low-right-0015-reaction_fall_00.png",
+        "sha256": "3df61a0b1e3cf70677ddc8ea69b545553a192cd4353d901c7a280c87a0330855",
+        "bytes": 2042846
+      },
+      {
+        "path": "frames/protected-right/c-low-right-0029-reaction_rise_00.png",
+        "sha256": "a7ab5eacb5f329d0014daf675509f9d66b4f89e4f2f55bcba573b28317b17cf3",
+        "bytes": 2040465
+      },
+      {
+        "path": "frames/protected-right/c-low-right-0044-idle_0.png",
+        "sha256": "3a763de8126652c0f1abcdd4f1b6dded9c05730bbd6e326e60986bad07af060c",
+        "bytes": 2039516
+      },
+      {
+        "path": "frames/protected-right/c-throw-right-0009-reaction_launch_00.png",
+        "sha256": "354fe1c19abb71db9ee33fc1cf6c9be3bf731f8ba34b9cf282b24a1623a50cac",
+        "bytes": 2035046
+      },
+      {
+        "path": "frames/protected-right/c-throw-right-0061-reaction_fall_00.png",
+        "sha256": "01c818cf101d06c4673d999363c7f797f1fdb27932cf04d40c4cfb49714020e4",
+        "bytes": 2040352
+      },
+      {
+        "path": "frames/protected-right/c-throw-right-0082-reaction_rise_00.png",
+        "sha256": "a163e0d24fd8123d6be46d5cd9af247c439c0a0aa857bbab62937d61f46740a7",
+        "bytes": 2049681
+      },
+      {
+        "path": "frames/protected-right/c-throw-right-0097-idle_0.png",
+        "sha256": "30ef03755b918445eaeb5aa36a132a0c4832ce2be4cdcd6244441f3e322ff445",
+        "bytes": 2035895
+      },
+      {
+        "path": "frames/protected-right/duke-body-right-0003-reaction_body_00.png",
+        "sha256": "92289011ea20b5028fda61540ac8cacc7b3ba31282ea348389ba758e0407bd7c",
+        "bytes": 2020134
+      },
+      {
+        "path": "frames/protected-right/duke-body-right-0014-idle_01.png",
+        "sha256": "9f333e8cd3effac295214cbde6036156bd056c3cb7abf696ef077da77561d92b",
+        "bytes": 2022573
+      },
+      {
+        "path": "frames/protected-right/duke-cinematic-right-0344-reaction_head_00.png",
+        "sha256": "79727879415aa633025ac3b0b22826e776f460021b813df705617005d52664e5",
+        "bytes": 1410440
+      },
+      {
+        "path": "frames/protected-right/duke-cinematic-right-0424-reaction_launch_00.png",
+        "sha256": "4200a8b955ec1c42503a70c061c5a1a2851197b9e17a87a70138b10823132559",
+        "bytes": 1409172
+      },
+      {
+        "path": "frames/protected-right/duke-cinematic-right-0448-reaction_fall_00.png",
+        "sha256": "e541fdbd431e19ae59286fabe6338c0d9c5bdc394f6d8ce8caf6878e636052e9",
+        "bytes": 1410381
+      },
+      {
+        "path": "frames/protected-right/duke-cinematic-right-0469-reaction_rise_00.png",
+        "sha256": "9c3743e28b2f3bc3a5e132d10de7f115d824fe3d852b39b1b2e987615c1e472c",
+        "bytes": 1099651
+      },
+      {
+        "path": "frames/protected-right/duke-cinematic-right-0484-idle_02.png",
+        "sha256": "552e5f6a043f137839c6e9669fc3491dc74eca0b734fda091139ba59ac2bdc55",
+        "bytes": 1022394
+      },
+      {
+        "path": "frames/protected-right/duke-guard-high-right-0003-reaction_guard_high_00.png",
+        "sha256": "e95f67a8b44bb7484702a6720ba4a3e0bbfefafe35b140bccbd7c97b6b9de2af",
+        "bytes": 2023355
+      },
+      {
+        "path": "frames/protected-right/duke-guard-high-right-0011-block_02.png",
+        "sha256": "a0f904ffdbd9797566f2cfec2173e6976b2094cb5e2786c1db08f00bb715c766",
+        "bytes": 2024460
+      },
+      {
+        "path": "frames/protected-right/duke-guard-low-right-0008-reaction_guard_low_00.png",
+        "sha256": "d7748e835159bea3ef53a6961feae1090faccc6dcd1f03924bd8300db12c9ec1",
+        "bytes": 2022838
+      },
+      {
+        "path": "frames/protected-right/duke-guard-low-right-0019-crouch_block_02.png",
+        "sha256": "fa2a76925f96f6735612e38859ce1efebcc112b177bfe9cd72a1c544b4758211",
+        "bytes": 2023522
+      },
+      {
+        "path": "frames/protected-right/duke-head-right-0010-reaction_head_00.png",
+        "sha256": "d06ccbf396d4b74f592af2572d1e9fe431504bf4bf5660a2b42f863abb76557f",
+        "bytes": 2017125
+      },
+      {
+        "path": "frames/protected-right/duke-head-right-0027-idle_02.png",
+        "sha256": "9b97b207ae7e00fb223d681dcf451fffbe7bd3dceaa4bc227a2753c85795b0ef",
+        "bytes": 2021428
+      },
+      {
+        "path": "frames/protected-right/duke-low-right-0008-reaction_low_00.png",
+        "sha256": "8f8d21e631252dfe199e397888ab4df0a666653a0e217d9f0b7d135bdc44cbf1",
+        "bytes": 2018868
+      },
+      {
+        "path": "frames/protected-right/duke-low-right-0015-reaction_fall_00.png",
+        "sha256": "24530c8ba3e7dfdfdb54654b9492f3ba0c939ee57b107d482a863e002300c826",
+        "bytes": 2024854
+      },
+      {
+        "path": "frames/protected-right/duke-low-right-0029-reaction_rise_00.png",
+        "sha256": "457bdc263ffe2767a492312f221fb3d8bd5bf7b9b1e86f9860b8672de120f12d",
+        "bytes": 2023221
+      },
+      {
+        "path": "frames/protected-right/duke-low-right-0044-idle_00.png",
+        "sha256": "33295af295663ba74fad9d181d1bede7bbc08ac3f2237422f732dd77caa1b3e6",
+        "bytes": 2021312
+      },
+      {
+        "path": "frames/protected-right/duke-throw-right-0009-reaction_launch_00.png",
+        "sha256": "edc1fc38890eb5aaf84e3f1ec7a02f489955af994dc4c7f0b6c83291faa3b37d",
+        "bytes": 2016798
+      },
+      {
+        "path": "frames/protected-right/duke-throw-right-0061-reaction_fall_00.png",
+        "sha256": "318e4cf88014266848816d16e4c30a1b943af72f08fca6b49155e2d08e019e64",
+        "bytes": 2027688
+      },
+      {
+        "path": "frames/protected-right/duke-throw-right-0082-reaction_rise_00.png",
+        "sha256": "360903f737e0a606bdfcb5d264f96a89f52518fd1a7f0d90e9d3922265107662",
+        "bytes": 2028618
+      },
+      {
+        "path": "frames/protected-right/duke-throw-right-0097-idle_01.png",
+        "sha256": "531f9eeae5af31bc52417f23853c1700641a8acebb28ffa49dd74f38fcdd3b70",
+        "bytes": 2021984
+      },
+      {
+        "path": "frames/protected-right/go-body-right-0003-reaction_body_00.png",
+        "sha256": "f0e625691899a550fa3e5e240428a928e4ec6cf195874c425879a74b1d2807f4",
+        "bytes": 2034229
+      },
+      {
+        "path": "frames/protected-right/go-body-right-0014-idle_01.png",
+        "sha256": "d6df2ffb825dff479177130998f75a2380ff03893e7da215871e2cfb6fc61a35",
+        "bytes": 2035096
+      },
+      {
+        "path": "frames/protected-right/go-cinematic-right-0344-reaction_head_00.png",
+        "sha256": "24b6fa31d4c0d4e1b2725b724d8dfe48a4907af29cc75452d99fcd83321a63a2",
+        "bytes": 1431171
+      },
+      {
+        "path": "frames/protected-right/go-cinematic-right-0424-reaction_launch_00.png",
+        "sha256": "3e7ad18bb1429dd36d5973ee6c34e22cd66575eb18ade16dd03b601b18e96ee4",
+        "bytes": 1419956
+      },
+      {
+        "path": "frames/protected-right/go-cinematic-right-0448-reaction_fall_00.png",
+        "sha256": "6b41c91413faa122af4ccec09ebc5efc28a4cfef58d3bb135cf6fcf272a56947",
+        "bytes": 1425213
+      },
+      {
+        "path": "frames/protected-right/go-cinematic-right-0469-reaction_rise_00.png",
+        "sha256": "5057733ea96d6f3af4ccbf03c322b9fb3c502eb2163d5bc7452637bc2151dc79",
+        "bytes": 1125387
+      },
+      {
+        "path": "frames/protected-right/go-cinematic-right-0484-idle_02.png",
+        "sha256": "ad373b51979fe977df0fda8690b03f8ff096bed53093cc3fc2855d67eea67a45",
+        "bytes": 1035230
+      },
+      {
+        "path": "frames/protected-right/go-guard-high-right-0003-reaction_guard_high_00.png",
+        "sha256": "14ef1c8e1eea05cdbb98f7eff21f476996235b39b2583bb886fb7c48857e43c0",
+        "bytes": 2038996
+      },
+      {
+        "path": "frames/protected-right/go-guard-high-right-0011-block_02.png",
+        "sha256": "3291d4b03522294defacc5b10bfb6d7ef74f778bd2989e3a7bf8b12bb6b02e81",
+        "bytes": 2035466
+      },
+      {
+        "path": "frames/protected-right/go-guard-low-right-0008-reaction_guard_low_00.png",
+        "sha256": "d51fb9a758ca7986da66ce79a4b5f629c2ab865d3df571321ad940efdaec486e",
+        "bytes": 2026184
+      },
+      {
+        "path": "frames/protected-right/go-guard-low-right-0019-crouch_block_02.png",
+        "sha256": "5da6a5028afe24c335814376135358bc861aac88ec8b7fb33d105432d08fb486",
+        "bytes": 2027395
+      },
+      {
+        "path": "frames/protected-right/go-head-right-0010-reaction_head_00.png",
+        "sha256": "ee4de5689a03cabc0ceda1871c741890122c178b0228f905dd1549edfa411ccc",
+        "bytes": 2036150
+      },
+      {
+        "path": "frames/protected-right/go-head-right-0027-idle_02.png",
+        "sha256": "4b49a5562ae7d48311f7cc185e76e9193cc1a8ca7e8879517e425f674430af92",
+        "bytes": 2033831
+      },
+      {
+        "path": "frames/protected-right/go-low-right-0008-reaction_low_00.png",
+        "sha256": "24f013e6e8e5cd3365ef6dc628c5dc63cd9ab04d5360348967297d21d5fe858a",
+        "bytes": 2037668
+      },
+      {
+        "path": "frames/protected-right/go-low-right-0015-reaction_fall_00.png",
+        "sha256": "a98fe4cf3948b40976fe1b1f79195e7c719ec05b56e1617da93a3a25afa32da5",
+        "bytes": 2038209
+      },
+      {
+        "path": "frames/protected-right/go-low-right-0029-reaction_rise_00.png",
+        "sha256": "29f9c4b2f2ac138bf04c7de23ecc6d1697c4ab75fe9042bf819b7aa794d61d18",
+        "bytes": 2038161
+      },
+      {
+        "path": "frames/protected-right/go-low-right-0044-idle_01.png",
+        "sha256": "fee0aea339f7cac0b2b7b2610465634b8a2260819135ecc23aafda13066f6d66",
+        "bytes": 2034851
+      },
+      {
+        "path": "frames/protected-right/go-throw-right-0009-reaction_launch_00.png",
+        "sha256": "dec5bb505541bc5ff7012ba605baec0d72c9171a73ca33cf1f3568c0f97b443f",
+        "bytes": 2034044
+      },
+      {
+        "path": "frames/protected-right/go-throw-right-0061-reaction_fall_00.png",
+        "sha256": "25bec1fc5b579245b3e8fc212c84a1f578bb421d1a0ba0ae7d257bfb6fd70a20",
+        "bytes": 2038130
+      },
+      {
+        "path": "frames/protected-right/go-throw-right-0082-reaction_rise_00.png",
+        "sha256": "0e431f2f510c8da67ab6f5703551fa71f68eb319fe401ef352eec7dcfe50a527",
+        "bytes": 2047231
+      },
+      {
+        "path": "frames/protected-right/go-throw-right-0097-idle_00.png",
+        "sha256": "ab2fee0a4f5df011f478a3b0ea171db6f51fcc5968e4bbe9b11041fd3e2763b8",
+        "bytes": 2031867
+      },
+      {
+        "path": "frames/protected-right/rust-body-right-0003-reaction_body_00.png",
+        "sha256": "b28b8b6a228a70dbff7067611932e8d512b0f062da1db56a5f91ed7865f9ba07",
+        "bytes": 2033880
+      },
+      {
+        "path": "frames/protected-right/rust-body-right-0014-idle_01.png",
+        "sha256": "a533587408d046a3e9afabcb50fcdddbbef2475e2381a8527cfd62babb28d121",
+        "bytes": 2037100
+      },
+      {
+        "path": "frames/protected-right/rust-cinematic-right-0344-reaction_head_00.png",
+        "sha256": "8bc24e9bf29bae20e05fc0fb0bf0305e87bb1da83909d5e029507a5dbd79f6db",
+        "bytes": 1434275
+      },
+      {
+        "path": "frames/protected-right/rust-cinematic-right-0424-reaction_launch_00.png",
+        "sha256": "80946b41ccd793dfdc76bde93b5413f32bf6915f80aa7ee4d5f9f12d9e40c84a",
+        "bytes": 1436278
+      },
+      {
+        "path": "frames/protected-right/rust-cinematic-right-0448-reaction_fall_00.png",
+        "sha256": "1981f72af6231b5446ee38568502685c1db0f98d379e5f7d2eb50056ea4b15a2",
+        "bytes": 1421749
+      },
+      {
+        "path": "frames/protected-right/rust-cinematic-right-0469-reaction_rise_00.png",
+        "sha256": "29b5a604706b0214416ce5200eff208cb6d91cf64cc6b28e6bf6987ca79894bf",
+        "bytes": 1118398
+      },
+      {
+        "path": "frames/protected-right/rust-cinematic-right-0484-idle_00.png",
+        "sha256": "159f30973e3ca792ad8bd45666341b1a8c036803540a49648cfa878629787ee9",
+        "bytes": 1048017
+      },
+      {
+        "path": "frames/protected-right/rust-guard-high-right-0003-reaction_guard_high_00.png",
+        "sha256": "82882c2467827b64df8129c27d7742ae759f8e5fc87a540555431da42d76f709",
+        "bytes": 2037557
+      },
+      {
+        "path": "frames/protected-right/rust-guard-high-right-0011-block_02.png",
+        "sha256": "f6828ea735ae8e9ff737a79f29bab4eecfde9f9af38efd636644462984d4aa22",
+        "bytes": 2041670
+      },
+      {
+        "path": "frames/protected-right/rust-guard-low-right-0008-reaction_guard_low_00.png",
+        "sha256": "d48a87fe91ac55abbb90b7edbb7626e1c8346aec39d19ea00b62155d8768ec0f",
+        "bytes": 2033483
+      },
+      {
+        "path": "frames/protected-right/rust-guard-low-right-0019-crouch_block_02.png",
+        "sha256": "f3bcafe6575bd3990f1afc6479e0d9a788d7badca0510b1c87c37c82b1d3a0b1",
+        "bytes": 2036514
+      },
+      {
+        "path": "frames/protected-right/rust-head-right-0010-reaction_head_00.png",
+        "sha256": "f646d0498943617626820ff653d7c1bbca7c6d35f90154dfdbd4a31f510ed5bc",
+        "bytes": 2039490
+      },
+      {
+        "path": "frames/protected-right/rust-head-right-0027-idle_02.png",
+        "sha256": "bb69a8f766c196802288d9cc29c0df4fa6b21b4ab84f960ae59894604c74a556",
+        "bytes": 2035610
+      },
+      {
+        "path": "frames/protected-right/rust-low-right-0008-reaction_low_00.png",
+        "sha256": "90629212bfc1c95f2197110b2e1d0c09bb03f0124931b1527992142fba601a39",
+        "bytes": 2037914
+      },
+      {
+        "path": "frames/protected-right/rust-low-right-0015-reaction_fall_00.png",
+        "sha256": "7aa1b103897567bbec6a197017945d8d10b9d3ef2af85e9deb581846c984fdb0",
+        "bytes": 2032436
+      },
+      {
+        "path": "frames/protected-right/rust-low-right-0029-reaction_rise_00.png",
+        "sha256": "793dcf41bf90e5ce5143c3ad19042c593222121d55e8c1819ea51c3847b08151",
+        "bytes": 2033205
+      },
+      {
+        "path": "frames/protected-right/rust-low-right-0044-idle_00.png",
+        "sha256": "bdaab7dfd0614d7b1a25662931fe6df4cb655d41b71e6d6e9d917ef0c07b076d",
+        "bytes": 2036091
+      },
+      {
+        "path": "frames/protected-right/rust-throw-right-0009-reaction_launch_00.png",
+        "sha256": "8f506789f2a8131d612f01048d1dce138a404e0b73c434263b7df1a9bf5b0d90",
+        "bytes": 2035779
+      },
+      {
+        "path": "frames/protected-right/rust-throw-right-0061-reaction_fall_00.png",
+        "sha256": "8bbced7acbddd4326b85b5440e555e73d1f1cd13ce68c13ffc7ba7727f26de71",
+        "bytes": 2034534
+      },
+      {
+        "path": "frames/protected-right/rust-throw-right-0082-reaction_rise_00.png",
+        "sha256": "7553da4ae2aa9f15609d84efc405784fbac67b8a97ab8ea4ac25ca05b56d522c",
+        "bytes": 2041269
+      },
+      {
+        "path": "frames/protected-right/rust-throw-right-0097-idle_01.png",
+        "sha256": "aae3567f2c7f336d074527e56555d767befdb2ad8cfbd57f7d75d384a26b8d0c",
+        "bytes": 2033202
+      },
+      {
+        "path": "frames/right/c-body-right-0003-reaction_body_00.png",
+        "sha256": "fff79abc38b4eea5e53ad32e7a518a047722859455c6eb043aaff834f9aefa6d",
+        "bytes": 2034266
+      },
+      {
+        "path": "frames/right/c-body-right-0014-idle_1.png",
+        "sha256": "6db483e32b1594e5537bc7d27353a3730ac52e67fe29ba42c0cc685297065b53",
+        "bytes": 2040849
+      },
+      {
+        "path": "frames/right/c-cinematic-right-0344-reaction_head_00.png",
+        "sha256": "21fdafc48db3dd7b224902f0b7cc38ab5c0b1cc1f86c8e24e6e2dbaa965c30fb",
+        "bytes": 1431180
+      },
+      {
+        "path": "frames/right/c-cinematic-right-0424-reaction_launch_00.png",
+        "sha256": "09fba1b3eed3f68c998a084ac0690b6bfded5eb1564e8f86bec0071c8e41f2c3",
+        "bytes": 1434833
+      },
+      {
+        "path": "frames/right/c-cinematic-right-0448-reaction_fall_00.png",
+        "sha256": "942064c71c87102cae332fd515c08492139c93344da413bea9f12decdbd70c02",
+        "bytes": 1430048
+      },
+      {
+        "path": "frames/right/c-cinematic-right-0469-reaction_rise_00.png",
+        "sha256": "404f04cf8772344ff29524b533c2f1750c5f8588a5423d8541fe3df069b0bfd3",
+        "bytes": 1127158
+      },
+      {
+        "path": "frames/right/c-cinematic-right-0484-idle_0.png",
+        "sha256": "5d7cdb2c63fd7a21e5a941fd4775bea26fc717eb52def46027183f43d9a67b66",
+        "bytes": 1040362
+      },
+      {
+        "path": "frames/right/c-guard-high-right-0003-reaction_guard_high_00.png",
+        "sha256": "08ed55111383d03cc9a02a6046ccfd31cf1a1784cd19ba49571270cd596888a1",
+        "bytes": 2041002
+      },
+      {
+        "path": "frames/right/c-guard-high-right-0011-block_2.png",
+        "sha256": "7725862c59dfd75ed0430d981e55729a5eb80151c027d87dd6fdcb221a0b4cca",
+        "bytes": 2039279
+      },
+      {
+        "path": "frames/right/c-guard-low-right-0008-reaction_guard_low_00.png",
+        "sha256": "b058beadd8a762632aeb36d2b84d499834117a82b2bca629e7171bcb7206e6a8",
+        "bytes": 2043840
+      },
+      {
+        "path": "frames/right/c-guard-low-right-0019-crouch_block_2.png",
+        "sha256": "ea42f3a9ab861391a8c95b72a675b4ba4b7a9da996669ccdc9679282c86580af",
+        "bytes": 2031460
+      },
+      {
+        "path": "frames/right/c-head-right-0010-reaction_head_00.png",
+        "sha256": "661a6fee4024c7ce0928a88ee45b1dfb795b7c238de2d4715096c7316054dbb1",
+        "bytes": 2037464
+      },
+      {
+        "path": "frames/right/c-head-right-0027-idle_1.png",
+        "sha256": "1323ac15d0fe35e3de38f26cc61798da67549f8146da88f696d7c467afafde3c",
+        "bytes": 2039869
+      },
+      {
+        "path": "frames/right/c-knockout-right-0344-reaction_head_00.png",
+        "sha256": "205c028e17842cae20c9ca423c6f511f88d7465a76fccee958e572ab424a60b1",
+        "bytes": 1430337
+      },
+      {
+        "path": "frames/right/c-knockout-right-0424-reaction_launch_00.png",
+        "sha256": "9c9e7d886ac7449866b425f4b086684918976a6366303cc04fc7e8c98333331a",
+        "bytes": 1434936
+      },
+      {
+        "path": "frames/right/c-knockout-right-0448-reaction_fall_03.png",
+        "sha256": "3199f3e4ed79d44e6101b6ff58b96853bf3cb57898672c1034173f5cc1435136",
+        "bytes": 1419804
+      },
+      {
+        "path": "frames/right/c-low-right-0008-reaction_low_00.png",
+        "sha256": "d2280f24e7ce677782ca7c46790f62ddfd0def1b640dbcbd8e1936a472f709f5",
+        "bytes": 2041867
+      },
+      {
+        "path": "frames/right/c-low-right-0015-reaction_fall_00.png",
+        "sha256": "5de5e5fc51f5dc54b8853c4c77a89d081a1bf85c8446ca1bac2a0a110b0dd5e9",
+        "bytes": 2042426
+      },
+      {
+        "path": "frames/right/c-low-right-0029-reaction_rise_00.png",
+        "sha256": "2d6239c2351e09c7bac66c0bf00250217e5d51e8349d04fc5500e7c478468c68",
+        "bytes": 2040686
+      },
+      {
+        "path": "frames/right/c-low-right-0044-idle_0.png",
+        "sha256": "a2dbc0ffeea3e7837acf4604b5c18b2abe669a21a84d4fcfd1d95e6583b49b4b",
+        "bytes": 2040608
+      },
+      {
+        "path": "frames/right/c-throw-right-0009-reaction_launch_00.png",
+        "sha256": "ae2b2fa7c88a25ad14e77b6622683bf51eb11a7f27566209a00770b8e84db841",
+        "bytes": 2034708
+      },
+      {
+        "path": "frames/right/c-throw-right-0061-reaction_fall_00.png",
+        "sha256": "1fb6ea52dda9fd9dd500e1b5265c11a962bc0a2263e02089dcd4f5fb65f95bbd",
+        "bytes": 2040704
+      },
+      {
+        "path": "frames/right/c-throw-right-0082-reaction_rise_00.png",
+        "sha256": "758386b6df79b554e89185c075a4567b6168f5691d59a64d4b1728f1b33cb533",
+        "bytes": 2049431
+      },
+      {
+        "path": "frames/right/c-throw-right-0097-idle_0.png",
+        "sha256": "40e32c29b5640d8bb4ac23b24fcde9b201247b6a9f7baa9b1f1d2e3ef4be7074",
+        "bytes": 2036191
+      },
+      {
+        "path": "frames/right/duke-body-right-0003-reaction_body_00.png",
+        "sha256": "a84d6872b8799399badec80f564305eb6cb4ef409f6493aff5dbc14e335f50e2",
+        "bytes": 2020705
+      },
+      {
+        "path": "frames/right/duke-body-right-0014-idle_01.png",
+        "sha256": "2bce04806dc1c4ce2cb5b20d583380e278614cdd6a275a936047f6db788752f8",
+        "bytes": 2022315
+      },
+      {
+        "path": "frames/right/duke-cinematic-right-0344-reaction_head_00.png",
+        "sha256": "951d81d1bcbaab205a297e458c82d2f99f20a79cb6d6d31ea5ff0fa40d601e35",
+        "bytes": 1411160
+      },
+      {
+        "path": "frames/right/duke-cinematic-right-0424-reaction_launch_00.png",
+        "sha256": "e2868e6d7a6984ee2a78e67ca8953ff3fceabe9e08f24ea71cc66620367a2067",
+        "bytes": 1409820
+      },
+      {
+        "path": "frames/right/duke-cinematic-right-0448-reaction_fall_00.png",
+        "sha256": "e758e3d551cd9c8090468afdd1bece912d9ad5597610618e3611fcc9300aafa8",
+        "bytes": 1410948
+      },
+      {
+        "path": "frames/right/duke-cinematic-right-0469-reaction_rise_00.png",
+        "sha256": "df7b1286220fded51aa26ecebf61212b841c2c3084c5f6561fdee33479f53998",
+        "bytes": 1100100
+      },
+      {
+        "path": "frames/right/duke-cinematic-right-0484-idle_02.png",
+        "sha256": "e362b5e01143f5635784786a5a94159b3e719e0e2e091620717a1d2ad2cec4f5",
+        "bytes": 1022979
+      },
+      {
+        "path": "frames/right/duke-guard-high-right-0003-reaction_guard_high_00.png",
+        "sha256": "94c1b9d3509a2eb53c12a2dc6758c97bba630b4a8ae7f15d5e0ca0f7c6e80cf2",
+        "bytes": 2022439
+      },
+      {
+        "path": "frames/right/duke-guard-high-right-0011-block_02.png",
+        "sha256": "2d9d747290e8d9a2d6e773dfc11702d4ab3d2a0527341b8829ec6d13e47748a9",
+        "bytes": 2024066
+      },
+      {
+        "path": "frames/right/duke-guard-low-right-0008-reaction_guard_low_00.png",
+        "sha256": "d90e22b413c684e31bd18a2060902f063d817bc62eace66f30b05efaf5a3a4ad",
+        "bytes": 2023507
+      },
+      {
+        "path": "frames/right/duke-guard-low-right-0019-crouch_block_02.png",
+        "sha256": "c01aad76229202893368ffbbb388525d24a420e0fcd6edfffd6e029cf126d3b8",
+        "bytes": 2024021
+      },
+      {
+        "path": "frames/right/duke-head-right-0010-reaction_head_00.png",
+        "sha256": "992565bc4ee3bab8702d6bea77543e7a7638a002de3c049cb8615f485d2a57ea",
+        "bytes": 2017719
+      },
+      {
+        "path": "frames/right/duke-head-right-0027-idle_02.png",
+        "sha256": "9f93c3d7a546a1e3eb726e77c697ace42ebc52036d80ddc583e70e74c1844b54",
+        "bytes": 2022350
+      },
+      {
+        "path": "frames/right/duke-knockout-right-0344-reaction_head_00.png",
+        "sha256": "3d05953e2e6ce00ad3a73ade15040474e2f5be9054e55a0798bacc69cc9ac906",
+        "bytes": 1410501
+      },
+      {
+        "path": "frames/right/duke-knockout-right-0424-reaction_launch_00.png",
+        "sha256": "4e3869fdf1d223edeb0e88e56bec8efa9cdb95a04f2496b5c3f21243986360af",
+        "bytes": 1409063
+      },
+      {
+        "path": "frames/right/duke-knockout-right-0448-reaction_fall_03.png",
+        "sha256": "4f0aa9d72dc58651c9c8feb9222e3fdb758ac288288d4b2fa7959b92be7d5275",
+        "bytes": 1406309
+      },
+      {
+        "path": "frames/right/duke-low-right-0008-reaction_low_00.png",
+        "sha256": "19a5f2d654721ef92c92ec11b2dd377f669b7199d594939a1eafd01c8e2b3480",
+        "bytes": 2018799
+      },
+      {
+        "path": "frames/right/duke-low-right-0015-reaction_fall_00.png",
+        "sha256": "0d3faf3e37f393812994ecd31a5a1accdd215fb5adfc3593553ba438de5d406c",
+        "bytes": 2024587
+      },
+      {
+        "path": "frames/right/duke-low-right-0029-reaction_rise_00.png",
+        "sha256": "98dea378eae517aaab5e0fdf15c3c98c45bea680281a156f55db4766736f5024",
+        "bytes": 2023864
+      },
+      {
+        "path": "frames/right/duke-low-right-0044-idle_00.png",
+        "sha256": "5781878bc48596e2aa20758f5803cf058731ae907ab4e7a6d7567e2c6195d5fd",
+        "bytes": 2021969
+      },
+      {
+        "path": "frames/right/duke-throw-right-0009-reaction_launch_00.png",
+        "sha256": "60d5fff43444e543909b7f5a21565ab85b5fe04d0ad2ac87470eb4265f87c7f0",
+        "bytes": 2017428
+      },
+      {
+        "path": "frames/right/duke-throw-right-0061-reaction_fall_00.png",
+        "sha256": "60be2c3bddb5a0e85d7d387decc050359c1d56efbd6c69198978a85e0f20ae9b",
+        "bytes": 2028108
+      },
+      {
+        "path": "frames/right/duke-throw-right-0082-reaction_rise_00.png",
+        "sha256": "f34e1c876722503877b7bfcc7c85836bff541e1127a3c20f46dd4dc1cf1e33f5",
+        "bytes": 2029050
+      },
+      {
+        "path": "frames/right/duke-throw-right-0097-idle_01.png",
+        "sha256": "a47169811de71c5ee29f2140cb4733152c34b9fbd286268e4e063ee132a059a8",
+        "bytes": 2022533
+      },
+      {
+        "path": "frames/right/go-body-right-0003-reaction_body_00.png",
+        "sha256": "7cc8f5cda485b9d8929534027fc3352872a6efacc69502170df68f32c62d8993",
+        "bytes": 2035046
+      },
+      {
+        "path": "frames/right/go-body-right-0014-idle_01.png",
+        "sha256": "4753bbd4b7aae3c3e28b3876e651c21b7834035ca3028ca5e0b673623b6f6ca2",
+        "bytes": 2034660
+      },
+      {
+        "path": "frames/right/go-cinematic-right-0344-reaction_head_00.png",
+        "sha256": "b17106cf06cb8be433747d1c61db2f5eea4f923da21cf661bd52137f6140004b",
+        "bytes": 1431590
+      },
+      {
+        "path": "frames/right/go-cinematic-right-0424-reaction_launch_00.png",
+        "sha256": "50b8a731b80c8490a08806c04d60cf59d4392e5aa4be82c85a5c8abd6fcb982b",
+        "bytes": 1420795
+      },
+      {
+        "path": "frames/right/go-cinematic-right-0448-reaction_fall_00.png",
+        "sha256": "9c4ca9556eb5f725321abeea52c199af15998e1dc2f96f9655c6e297b53800c8",
+        "bytes": 1426448
+      },
+      {
+        "path": "frames/right/go-cinematic-right-0469-reaction_rise_00.png",
+        "sha256": "0589c74acb84b4589e06754333da46668dcf8e80f8243aa925eccf884211ebf8",
+        "bytes": 1126346
+      },
+      {
+        "path": "frames/right/go-cinematic-right-0484-idle_02.png",
+        "sha256": "599ec375a7b098025d62f56a00989f3c45ab72cb8bce7964a3b071b8c8da320b",
+        "bytes": 1035742
+      },
+      {
+        "path": "frames/right/go-guard-high-right-0003-reaction_guard_high_00.png",
+        "sha256": "bc71615182e79ad51286b0c9ecaedcade18721557c3532240168f1fbbf23af93",
+        "bytes": 2038736
+      },
+      {
+        "path": "frames/right/go-guard-high-right-0011-block_02.png",
+        "sha256": "301cce5320b655add83c629b2ecba7c4738394ff96745a592d478f92ed9bee89",
+        "bytes": 2035510
+      },
+      {
+        "path": "frames/right/go-guard-low-right-0008-reaction_guard_low_00.png",
+        "sha256": "9b11da3073575d2f0b30ab0132c5e5ebcaabb69f4c9a01a55e03ccb789903798",
+        "bytes": 2025709
+      },
+      {
+        "path": "frames/right/go-guard-low-right-0019-crouch_block_02.png",
+        "sha256": "f859f843db98ca3c5ff788b806f2c49e18abbb7d159384d4c29afe02468def90",
+        "bytes": 2028382
+      },
+      {
+        "path": "frames/right/go-head-right-0010-reaction_head_00.png",
+        "sha256": "4b82239f2ffe3f76c082a4d46ac6a6ca61b22567f0233a922db340bbb5cd4fdb",
+        "bytes": 2035992
+      },
+      {
+        "path": "frames/right/go-head-right-0027-idle_02.png",
+        "sha256": "7f73a2841c0884ffa1cb13c6d07ddd76efabc19a7e2aa00221174750e08e627c",
+        "bytes": 2033505
+      },
+      {
+        "path": "frames/right/go-knockout-right-0344-reaction_head_00.png",
+        "sha256": "9874b08e3c184800f30e552700bae545ec1218946ff8249116f745820f9cfaae",
+        "bytes": 1431039
+      },
+      {
+        "path": "frames/right/go-knockout-right-0424-reaction_launch_00.png",
+        "sha256": "ba03db2c627a9ab8cca3e8848c1551e6e3898c9e758802d98177d9cde671b955",
+        "bytes": 1419887
+      },
+      {
+        "path": "frames/right/go-knockout-right-0448-reaction_fall_03.png",
+        "sha256": "18e82eb05cb3b1a392c914ded4979ad50e263ae4a93bbb7d3eef703d15840a0d",
+        "bytes": 1420053
+      },
+      {
+        "path": "frames/right/go-low-right-0008-reaction_low_00.png",
+        "sha256": "08ae06da4ef3cd4bd13b06a503245f9b1c1cfa3d052bbbe3f2f4f98643ae2a41",
+        "bytes": 2037582
+      },
+      {
+        "path": "frames/right/go-low-right-0015-reaction_fall_00.png",
+        "sha256": "5082fbeeb6889f4222fa6cb9b2413740a98167e12eae96861af915ab0f7332de",
+        "bytes": 2038394
+      },
+      {
+        "path": "frames/right/go-low-right-0029-reaction_rise_00.png",
+        "sha256": "b279ec8f79a9c2c83f30fb5075361fd1ee5795f6025bf074f8730534a1e747bc",
+        "bytes": 2038134
+      },
+      {
+        "path": "frames/right/go-low-right-0044-idle_01.png",
+        "sha256": "7c962cad97504d137b599011a7fe17a6bd1b8523823819ed808d8171a39fc7ef",
+        "bytes": 2035110
+      },
+      {
+        "path": "frames/right/go-throw-right-0009-reaction_launch_00.png",
+        "sha256": "34576177e49de03b4b0e7db5c2fd82811395c1495c97ff1d268c4b017376a372",
+        "bytes": 2035098
+      },
+      {
+        "path": "frames/right/go-throw-right-0061-reaction_fall_00.png",
+        "sha256": "ef91d311cbda9897847c789a54de17589afb35dc50e491f354af0c71daadf08d",
+        "bytes": 2038388
+      },
+      {
+        "path": "frames/right/go-throw-right-0082-reaction_rise_00.png",
+        "sha256": "444ccd22f70ce1d2a38c5d2c8ebba637ebe4d2a1fe3123de5573749252ff168b",
+        "bytes": 2047605
+      },
+      {
+        "path": "frames/right/go-throw-right-0097-idle_00.png",
+        "sha256": "11a294fd88d3601d59f99ce207808a3706a1a9918294d0fc6c95509327559bb5",
+        "bytes": 2032384
+      },
+      {
+        "path": "frames/right/rust-body-right-0003-reaction_body_00.png",
+        "sha256": "5b7eaa1757f85f1d1040d4acba59c4c6d7062d24c08db7b501546377930eb244",
+        "bytes": 2034697
+      },
+      {
+        "path": "frames/right/rust-body-right-0014-idle_01.png",
+        "sha256": "42af1cf25b3bb0683126c5c8a5bbc3650aafa53ca35919d63f7937fedbf20f07",
+        "bytes": 2037154
+      },
+      {
+        "path": "frames/right/rust-cinematic-right-0344-reaction_head_00.png",
+        "sha256": "383acca7e34dafa73e3ef024690b45c0ec75f2cfe99cc9f4d8e806e7ff4dc2f2",
+        "bytes": 1435235
+      },
+      {
+        "path": "frames/right/rust-cinematic-right-0424-reaction_launch_00.png",
+        "sha256": "8ffcf5b1d7d92d0178f78918e95a479c0ce756227178e24e8e3ced062f2cb4ff",
+        "bytes": 1436477
+      },
+      {
+        "path": "frames/right/rust-cinematic-right-0448-reaction_fall_00.png",
+        "sha256": "253de144bb847c552433a033dac4315d0640272505765b00010f855d7ad685e9",
+        "bytes": 1421187
+      },
+      {
+        "path": "frames/right/rust-cinematic-right-0469-reaction_rise_00.png",
+        "sha256": "6c96405071313ccaf5a7a91b760a4abf9e828397cdda6f586de70ea907972806",
+        "bytes": 1118563
+      },
+      {
+        "path": "frames/right/rust-cinematic-right-0484-idle_00.png",
+        "sha256": "aa2a82d6da2215c74271686104c009ead6cff1b4f48ba3fdeb66765dcd72935a",
+        "bytes": 1048418
+      },
+      {
+        "path": "frames/right/rust-guard-high-right-0003-reaction_guard_high_00.png",
+        "sha256": "31bff86a28f835e9512f46ec79f2e6d8286d5dc3bb6143c234aab55bd96a73cc",
+        "bytes": 2037500
+      },
+      {
+        "path": "frames/right/rust-guard-high-right-0011-block_02.png",
+        "sha256": "5e47eea7bcfacd5af93c9c1b1b7f0c88b81de63769fe44ce1fa6b98695285e37",
+        "bytes": 2042171
+      },
+      {
+        "path": "frames/right/rust-guard-low-right-0008-reaction_guard_low_00.png",
+        "sha256": "9b45fed957e1641de3ab2df3a23e1e366cae5ddb8d058f1b431981ec17c44391",
+        "bytes": 2034170
+      },
+      {
+        "path": "frames/right/rust-guard-low-right-0019-crouch_block_02.png",
+        "sha256": "e3ac9b2542132d2ccf08946d0387d55f9e5d0c572612088a69ea34be00f59549",
+        "bytes": 2036513
+      },
+      {
+        "path": "frames/right/rust-head-right-0010-reaction_head_00.png",
+        "sha256": "008407fdb4e468d16b6599d22947eed5ce3747a71b3fe7357306521c78bb098c",
+        "bytes": 2039764
+      },
+      {
+        "path": "frames/right/rust-head-right-0027-idle_02.png",
+        "sha256": "7a5648d62e6d722c9d49019844d4c4f0f9ea2f41173c665afba35c10133b702c",
+        "bytes": 2036377
+      },
+      {
+        "path": "frames/right/rust-knockout-right-0344-reaction_head_00.png",
+        "sha256": "ee2fbd70078adf6e645ff3bd6a6f282592a2ffb1f21d2a26f5a34d5826499955",
+        "bytes": 1434348
+      },
+      {
+        "path": "frames/right/rust-knockout-right-0424-reaction_launch_00.png",
+        "sha256": "cd4f3ddae5320d629b115c43d46c492b9ef064dbb1aaa0b2f021f278929ffcb2",
+        "bytes": 1436771
+      },
+      {
+        "path": "frames/right/rust-knockout-right-0448-reaction_fall_03.png",
+        "sha256": "495a9c32331a45c146b061f9f093f24ed147dc6bf8d6addfc77e7bd8d9186e86",
+        "bytes": 1417929
+      },
+      {
+        "path": "frames/right/rust-low-right-0008-reaction_low_00.png",
+        "sha256": "c60402c7aaac41646f8bc9e9cf78813f6154f66ed0699ce7bccfa6eebe211d34",
+        "bytes": 2038520
+      },
+      {
+        "path": "frames/right/rust-low-right-0015-reaction_fall_00.png",
+        "sha256": "d1f53d1ac1d3341f57b8b9e9817621070aaef0c41f62797e5aed58f3e4147b2c",
+        "bytes": 2033204
+      },
+      {
+        "path": "frames/right/rust-low-right-0029-reaction_rise_00.png",
+        "sha256": "8f3a74e4a90256c0376bdac2bd342f14cf0ec423f25f67f075f0286a15ae036e",
+        "bytes": 2033573
+      },
+      {
+        "path": "frames/right/rust-low-right-0044-idle_00.png",
+        "sha256": "e705970c2eaf2b9bb706a99782e8fb864f67a8eec091d24ecb20533039b93609",
+        "bytes": 2036366
+      },
+      {
+        "path": "frames/right/rust-throw-right-0009-reaction_launch_00.png",
+        "sha256": "7a1c669e8d6045c46fe295cf4f8e7cb81e0d5af0aa9b7fd2b45923330fadfde9",
+        "bytes": 2035751
+      },
+      {
+        "path": "frames/right/rust-throw-right-0061-reaction_fall_00.png",
+        "sha256": "5714371e1577f1b6ba25476aa1be0f444f4ad897a3c332e4b4cc2da455e603b8",
+        "bytes": 2034876
+      },
+      {
+        "path": "frames/right/rust-throw-right-0082-reaction_rise_00.png",
+        "sha256": "562f3b4e2777e5b78b457269262355dc63708dc6b1ae45a005f3facede6107ef",
+        "bytes": 2041657
+      },
+      {
+        "path": "frames/right/rust-throw-right-0097-idle_01.png",
+        "sha256": "8d56ff3129394238f1ff053b3ca9807e01e035e5ea1f3def34a40470f1b08159",
+        "bytes": 2033898
+      }
+    ]
+  },
+  "preserved_pngs": [
+    {
+      "defender": "rust",
+      "condition": "right",
+      "case": "body",
+      "profile": "Body",
+      "path": "frames/rust-right-body.png",
+      "source": "frames/right/rust-body-right-0003-reaction_body_00.png",
+      "sha256": "5b7eaa1757f85f1d1040d4acba59c4c6d7062d24c08db7b501546377930eb244",
+      "tick": 3,
+      "sequence_tick": null,
+      "drawing": "reaction_body_00",
+      "health": 93,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "rust",
+      "condition": "protected-right",
+      "case": "cinematic",
+      "profile": "Head",
+      "path": "frames/rust-protected-right-head.png",
+      "source": "frames/protected-right/rust-cinematic-right-0344-reaction_head_00.png",
+      "sha256": "8bc24e9bf29bae20e05fc0fb0bf0305e87bb1da83909d5e029507a5dbd79f6db",
+      "tick": 344,
+      "sequence_tick": 344,
+      "drawing": "reaction_head_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "rust",
+      "condition": "left",
+      "case": "low",
+      "profile": "Low",
+      "path": "frames/rust-left-low.png",
+      "source": "frames/left/rust-low-left-0008-reaction_low_00.png",
+      "sha256": "e4b4ce6cd45eacc7d0e0bdc75eb7b89a8bcd705247cf4a7d06aef4f5928d58ef",
+      "tick": 8,
+      "sequence_tick": null,
+      "drawing": "reaction_low_00",
+      "health": 89,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "rust",
+      "condition": "protected-left",
+      "case": "guard-high",
+      "profile": "GuardHigh",
+      "path": "frames/rust-protected-left-guardhigh.png",
+      "source": "frames/protected-left/rust-guard-high-left-0003-reaction_guard_high_00.png",
+      "sha256": "cb59805ffb993a9d010352620366965ee20b1bc63ffee43f8eeb7f65c003d723",
+      "tick": 3,
+      "sequence_tick": null,
+      "drawing": "reaction_guard_high_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "rust",
+      "condition": "protected-right",
+      "case": "guard-low",
+      "profile": "GuardLow",
+      "path": "frames/rust-protected-right-guardlow.png",
+      "source": "frames/protected-right/rust-guard-low-right-0008-reaction_guard_low_00.png",
+      "sha256": "d48a87fe91ac55abbb90b7edbb7626e1c8346aec39d19ea00b62155d8768ec0f",
+      "tick": 8,
+      "sequence_tick": null,
+      "drawing": "reaction_guard_low_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "rust",
+      "condition": "left",
+      "case": "throw",
+      "profile": "Launch",
+      "path": "frames/rust-left-launch.png",
+      "source": "frames/left/rust-throw-left-0009-reaction_launch_00.png",
+      "sha256": "57a8b9c482f01a91665138bbd0cd1989ed052969af0d22d4652a6b9a9dc5c2a6",
+      "tick": 9,
+      "sequence_tick": null,
+      "drawing": "reaction_launch_00",
+      "health": 90,
+      "grounded": true,
+      "captured": true
+    },
+    {
+      "defender": "rust",
+      "condition": "right",
+      "case": "throw",
+      "profile": "Fall",
+      "path": "frames/rust-right-fall.png",
+      "source": "frames/right/rust-throw-right-0061-reaction_fall_00.png",
+      "sha256": "5714371e1577f1b6ba25476aa1be0f444f4ad897a3c332e4b4cc2da455e603b8",
+      "tick": 61,
+      "sequence_tick": null,
+      "drawing": "reaction_fall_00",
+      "health": 90,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "rust",
+      "condition": "protected-left",
+      "case": "throw",
+      "profile": "Rise",
+      "path": "frames/rust-protected-left-rise.png",
+      "source": "frames/protected-left/rust-throw-left-0082-reaction_rise_00.png",
+      "sha256": "424d4504da386a3d5698166d9954117a6862c69a8344ecf1d920e234f3d6a652",
+      "tick": 82,
+      "sequence_tick": null,
+      "drawing": "reaction_rise_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "duke",
+      "condition": "right",
+      "case": "body",
+      "profile": "Body",
+      "path": "frames/duke-right-body.png",
+      "source": "frames/right/duke-body-right-0003-reaction_body_00.png",
+      "sha256": "a84d6872b8799399badec80f564305eb6cb4ef409f6493aff5dbc14e335f50e2",
+      "tick": 3,
+      "sequence_tick": null,
+      "drawing": "reaction_body_00",
+      "health": 105,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "duke",
+      "condition": "protected-right",
+      "case": "cinematic",
+      "profile": "Head",
+      "path": "frames/duke-protected-right-head.png",
+      "source": "frames/protected-right/duke-cinematic-right-0344-reaction_head_00.png",
+      "sha256": "79727879415aa633025ac3b0b22826e776f460021b813df705617005d52664e5",
+      "tick": 344,
+      "sequence_tick": 344,
+      "drawing": "reaction_head_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "duke",
+      "condition": "left",
+      "case": "low",
+      "profile": "Low",
+      "path": "frames/duke-left-low.png",
+      "source": "frames/left/duke-low-left-0008-reaction_low_00.png",
+      "sha256": "40c597e7574330a61d32e998f43600369044c75963e3c2ae824de05feb149b54",
+      "tick": 8,
+      "sequence_tick": null,
+      "drawing": "reaction_low_00",
+      "health": 101,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "duke",
+      "condition": "protected-left",
+      "case": "guard-high",
+      "profile": "GuardHigh",
+      "path": "frames/duke-protected-left-guardhigh.png",
+      "source": "frames/protected-left/duke-guard-high-left-0003-reaction_guard_high_00.png",
+      "sha256": "8b9fe7ef374a705645facb67b21146865bb314f7090f32c8a1879d8b4abe5afa",
+      "tick": 3,
+      "sequence_tick": null,
+      "drawing": "reaction_guard_high_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "duke",
+      "condition": "protected-right",
+      "case": "guard-low",
+      "profile": "GuardLow",
+      "path": "frames/duke-protected-right-guardlow.png",
+      "source": "frames/protected-right/duke-guard-low-right-0008-reaction_guard_low_00.png",
+      "sha256": "d7748e835159bea3ef53a6961feae1090faccc6dcd1f03924bd8300db12c9ec1",
+      "tick": 8,
+      "sequence_tick": null,
+      "drawing": "reaction_guard_low_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "duke",
+      "condition": "left",
+      "case": "throw",
+      "profile": "Launch",
+      "path": "frames/duke-left-launch.png",
+      "source": "frames/left/duke-throw-left-0009-reaction_launch_00.png",
+      "sha256": "29ea93a8d3897c572c70a53c8bef1a36b7db49df57ea14da34a21f1f58b697ee",
+      "tick": 9,
+      "sequence_tick": null,
+      "drawing": "reaction_launch_00",
+      "health": 102,
+      "grounded": true,
+      "captured": true
+    },
+    {
+      "defender": "duke",
+      "condition": "right",
+      "case": "throw",
+      "profile": "Fall",
+      "path": "frames/duke-right-fall.png",
+      "source": "frames/right/duke-throw-right-0061-reaction_fall_00.png",
+      "sha256": "60be2c3bddb5a0e85d7d387decc050359c1d56efbd6c69198978a85e0f20ae9b",
+      "tick": 61,
+      "sequence_tick": null,
+      "drawing": "reaction_fall_00",
+      "health": 102,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "duke",
+      "condition": "protected-left",
+      "case": "throw",
+      "profile": "Rise",
+      "path": "frames/duke-protected-left-rise.png",
+      "source": "frames/protected-left/duke-throw-left-0082-reaction_rise_00.png",
+      "sha256": "5a63b8106c88e7177ee97f596db6d81fac054771acef2384fdaba8c062572cd4",
+      "tick": 82,
+      "sequence_tick": null,
+      "drawing": "reaction_rise_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "c",
+      "condition": "right",
+      "case": "body",
+      "profile": "Body",
+      "path": "frames/c-right-body.png",
+      "source": "frames/right/c-body-right-0003-reaction_body_00.png",
+      "sha256": "fff79abc38b4eea5e53ad32e7a518a047722859455c6eb043aaff834f9aefa6d",
+      "tick": 3,
+      "sequence_tick": null,
+      "drawing": "reaction_body_00",
+      "health": 97,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "c",
+      "condition": "protected-right",
+      "case": "cinematic",
+      "profile": "Head",
+      "path": "frames/c-protected-right-head.png",
+      "source": "frames/protected-right/c-cinematic-right-0344-reaction_head_00.png",
+      "sha256": "20a867700dd61dd951be92cc296ad438833d2b69ea455b275c8c30b167e62172",
+      "tick": 344,
+      "sequence_tick": 344,
+      "drawing": "reaction_head_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "c",
+      "condition": "left",
+      "case": "low",
+      "profile": "Low",
+      "path": "frames/c-left-low.png",
+      "source": "frames/left/c-low-left-0008-reaction_low_00.png",
+      "sha256": "079debe85ae0d66554411b21ba900911a4c9fdcdf9c17510494e0cad1f78fb7a",
+      "tick": 8,
+      "sequence_tick": null,
+      "drawing": "reaction_low_00",
+      "health": 93,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "c",
+      "condition": "protected-left",
+      "case": "guard-high",
+      "profile": "GuardHigh",
+      "path": "frames/c-protected-left-guardhigh.png",
+      "source": "frames/protected-left/c-guard-high-left-0003-reaction_guard_high_00.png",
+      "sha256": "9794610af21b301ff10e9cf0df6e0c0a366191280da958c5a6e316cecb2765b0",
+      "tick": 3,
+      "sequence_tick": null,
+      "drawing": "reaction_guard_high_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "c",
+      "condition": "protected-right",
+      "case": "guard-low",
+      "profile": "GuardLow",
+      "path": "frames/c-protected-right-guardlow.png",
+      "source": "frames/protected-right/c-guard-low-right-0008-reaction_guard_low_00.png",
+      "sha256": "531ea1360079e6a4932a051aec66b6f37d39083988ca95f85c719fed36b181b2",
+      "tick": 8,
+      "sequence_tick": null,
+      "drawing": "reaction_guard_low_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "c",
+      "condition": "left",
+      "case": "throw",
+      "profile": "Launch",
+      "path": "frames/c-left-launch.png",
+      "source": "frames/left/c-throw-left-0009-reaction_launch_00.png",
+      "sha256": "b5802376fb4477cab8af22d5fb0286147c2824c1031081109de09ccb9d1db9a8",
+      "tick": 9,
+      "sequence_tick": null,
+      "drawing": "reaction_launch_00",
+      "health": 94,
+      "grounded": true,
+      "captured": true
+    },
+    {
+      "defender": "c",
+      "condition": "right",
+      "case": "throw",
+      "profile": "Fall",
+      "path": "frames/c-right-fall.png",
+      "source": "frames/right/c-throw-right-0061-reaction_fall_00.png",
+      "sha256": "1fb6ea52dda9fd9dd500e1b5265c11a962bc0a2263e02089dcd4f5fb65f95bbd",
+      "tick": 61,
+      "sequence_tick": null,
+      "drawing": "reaction_fall_00",
+      "health": 94,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "c",
+      "condition": "protected-left",
+      "case": "throw",
+      "profile": "Rise",
+      "path": "frames/c-protected-left-rise.png",
+      "source": "frames/protected-left/c-throw-left-0082-reaction_rise_00.png",
+      "sha256": "ee286b26c2e34a61105ee020e818909552bd427efc2e9ae151451e3b0cfd317f",
+      "tick": 82,
+      "sequence_tick": null,
+      "drawing": "reaction_rise_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "go",
+      "condition": "right",
+      "case": "body",
+      "profile": "Body",
+      "path": "frames/go-right-body.png",
+      "source": "frames/right/go-body-right-0003-reaction_body_00.png",
+      "sha256": "7cc8f5cda485b9d8929534027fc3352872a6efacc69502170df68f32c62d8993",
+      "tick": 3,
+      "sequence_tick": null,
+      "drawing": "reaction_body_00",
+      "health": 85,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "go",
+      "condition": "protected-right",
+      "case": "cinematic",
+      "profile": "Head",
+      "path": "frames/go-protected-right-head.png",
+      "source": "frames/protected-right/go-cinematic-right-0344-reaction_head_00.png",
+      "sha256": "24b6fa31d4c0d4e1b2725b724d8dfe48a4907af29cc75452d99fcd83321a63a2",
+      "tick": 344,
+      "sequence_tick": 344,
+      "drawing": "reaction_head_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "go",
+      "condition": "left",
+      "case": "low",
+      "profile": "Low",
+      "path": "frames/go-left-low.png",
+      "source": "frames/left/go-low-left-0008-reaction_low_00.png",
+      "sha256": "2afd5052dd6621128b5dbca297407a072ed2a5715fc2f49c9a3c64304d39aee0",
+      "tick": 8,
+      "sequence_tick": null,
+      "drawing": "reaction_low_00",
+      "health": 81,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "go",
+      "condition": "protected-left",
+      "case": "guard-high",
+      "profile": "GuardHigh",
+      "path": "frames/go-protected-left-guardhigh.png",
+      "source": "frames/protected-left/go-guard-high-left-0003-reaction_guard_high_00.png",
+      "sha256": "29cdd547facae3ee8c38d86d21d9e9c42acf507d05486f84718ae9ef0242d0dc",
+      "tick": 3,
+      "sequence_tick": null,
+      "drawing": "reaction_guard_high_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "go",
+      "condition": "protected-right",
+      "case": "guard-low",
+      "profile": "GuardLow",
+      "path": "frames/go-protected-right-guardlow.png",
+      "source": "frames/protected-right/go-guard-low-right-0008-reaction_guard_low_00.png",
+      "sha256": "d51fb9a758ca7986da66ce79a4b5f629c2ab865d3df571321ad940efdaec486e",
+      "tick": 8,
+      "sequence_tick": null,
+      "drawing": "reaction_guard_low_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "go",
+      "condition": "left",
+      "case": "throw",
+      "profile": "Launch",
+      "path": "frames/go-left-launch.png",
+      "source": "frames/left/go-throw-left-0009-reaction_launch_00.png",
+      "sha256": "12528ae8a5ea789bdee9850637bef9fb44cf69c0e3c1778af15305b2ee37311a",
+      "tick": 9,
+      "sequence_tick": null,
+      "drawing": "reaction_launch_00",
+      "health": 82,
+      "grounded": true,
+      "captured": true
+    },
+    {
+      "defender": "go",
+      "condition": "right",
+      "case": "throw",
+      "profile": "Fall",
+      "path": "frames/go-right-fall.png",
+      "source": "frames/right/go-throw-right-0061-reaction_fall_00.png",
+      "sha256": "ef91d311cbda9897847c789a54de17589afb35dc50e491f354af0c71daadf08d",
+      "tick": 61,
+      "sequence_tick": null,
+      "drawing": "reaction_fall_00",
+      "health": 82,
+      "grounded": true,
+      "captured": false
+    },
+    {
+      "defender": "go",
+      "condition": "protected-left",
+      "case": "throw",
+      "profile": "Rise",
+      "path": "frames/go-protected-left-rise.png",
+      "source": "frames/protected-left/go-throw-left-0082-reaction_rise_00.png",
+      "sha256": "2c98436d955866430e0b714512697983d44df15d63bf4badb657bf3d3c9264b7",
+      "tick": 82,
+      "sequence_tick": null,
+      "drawing": "reaction_rise_00",
+      "health": 1,
+      "grounded": true,
+      "captured": false
+    }
+  ],
+  "video_source": {
+    "artifact_relative_path": "contacts-right.mp4",
+    "original_sha256": "25d4409020eb595c317ba8bc70604ee8b7e423b10eea1e962f29a58b64d57ce0",
+    "original_bytes": 98181611,
+    "fps": 60,
+    "frames": 6708,
+    "duration_seconds": 111.8,
+    "audio": "not captured"
+  },
+  "review_scope": "Static comparison of extracted video frames and original selected PNGs, paired with exported World contact clocks. Does not claim human playback review, audio review or physical-device playtest.",
+  "visual_findings": {
+    "accepted": [
+      "All four defenders show articulated body compression and recovery across their eight profiles; the animation is not limited to a tint or rigid transform.",
+      "Standing/crouching guards, airborne reaction, grounded fall and rise have distinct body poses. Grounded uncaptured observations retain physical floor support.",
+      "The barrage restarts Head at each of its eight contacts and samples all four drawings during each nine-frame response in every captured direction/damage condition."
+    ],
+    "limits": [
+      "At the apex of throws, the HUD overlaps parts of the defender; the body stays within the captured frame but is not fully unobstructed.",
+      "The shared standing-guard pose of Go raises its arms above the head while this captured body punch contacts the lower abdomen, leaving visible separation from the BLOCK effect.",
+      "In the first recoil drawing of Duke during the C++ barrage, the spark is visibly offset from the head; the fingertips approach the top of the nose.",
+      "Go shows some muzzle/face-volume variation between the first two recovery drawings.",
+      "Video is continuous only for the primary direction with damage enabled. Other direction/damage conditions have original PNG samples and full state reports; these do not establish human-perceived fluency."
+    ],
+    "example_video_frames": {
+      "throw_hud_overlap": [
+        252,
+        3606,
+        1929,
+        5283
+      ],
+      "go_standing_guard_body_contact": [
+        5182
+      ],
+      "duke_first_barrage_recoil": [
+        2359,
+        2362
+      ],
+      "go_recovery_face_variation": [
+        5333,
+        5337
+      ]
+    }
+  },
+  "artifact_zip_sha256": "998047f8177656b0f8238693c2f11af9ac37788fe8143b24ce02fa06f01d68f3",
+  "artifact_zip_bytes": 738737689,
+  "video_frame_selection": "video-frame-selection.json",
+  "visual_review": {
+    "method": "Agent image-tool inspection of side-by-side extracted video drawings and original PNG selections; the contact sheets used only scaling/labels for comparison",
+    "video_drawings_compared": 128,
+    "original_pngs_compared": 32,
+    "video_capture": "current workflow run 34394289582",
+    "human_playback_review": false
+  },
+  "preserved_video": {
+    "path": "contacts-right.mp4",
+    "sha256": "bbd94ec218f2958ad8a4ef10a5d97cc5d36a585f0e6ad9a2b6855243831a90b4",
+    "bytes": 18410011,
+    "width": 1280,
+    "height": 720,
+    "fps": 60,
+    "frames": 6708,
+    "duration_seconds": 111.8,
+    "audio": "none",
+    "transcode": {
+      "input": "video_source.original_sha256",
+      "encoder": "libx264",
+      "preset": "fast",
+      "crf": 25,
+      "threads": 1,
+      "movflags": "+faststart",
+      "interpolation": false,
+      "retiming": false
+    },
+    "ffprobe_verified": true
+  }
+}

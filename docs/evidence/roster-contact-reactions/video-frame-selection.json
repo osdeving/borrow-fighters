@@ -1,0 +1,1026 @@
+[
+  {
+    "defender": "rust",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_00",
+    "tick": 3,
+    "video_frame": 3
+  },
+  {
+    "defender": "rust",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_01",
+    "tick": 6,
+    "video_frame": 6
+  },
+  {
+    "defender": "rust",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_02",
+    "tick": 9,
+    "video_frame": 9
+  },
+  {
+    "defender": "rust",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_03",
+    "tick": 12,
+    "video_frame": 12
+  },
+  {
+    "defender": "rust",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_00",
+    "tick": 344,
+    "video_frame": 682
+  },
+  {
+    "defender": "rust",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_01",
+    "tick": 347,
+    "video_frame": 685
+  },
+  {
+    "defender": "rust",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_02",
+    "tick": 349,
+    "video_frame": 687
+  },
+  {
+    "defender": "rust",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_03",
+    "tick": 351,
+    "video_frame": 689
+  },
+  {
+    "defender": "rust",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_00",
+    "tick": 8,
+    "video_frame": 91
+  },
+  {
+    "defender": "rust",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_01",
+    "tick": 10,
+    "video_frame": 93
+  },
+  {
+    "defender": "rust",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_02",
+    "tick": 11,
+    "video_frame": 94
+  },
+  {
+    "defender": "rust",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_03",
+    "tick": 13,
+    "video_frame": 96
+  },
+  {
+    "defender": "rust",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_00",
+    "tick": 3,
+    "video_frame": 151
+  },
+  {
+    "defender": "rust",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_01",
+    "tick": 5,
+    "video_frame": 153
+  },
+  {
+    "defender": "rust",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_02",
+    "tick": 7,
+    "video_frame": 155
+  },
+  {
+    "defender": "rust",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_03",
+    "tick": 9,
+    "video_frame": 157
+  },
+  {
+    "defender": "rust",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_00",
+    "tick": 8,
+    "video_frame": 188
+  },
+  {
+    "defender": "rust",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_01",
+    "tick": 11,
+    "video_frame": 191
+  },
+  {
+    "defender": "rust",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_02",
+    "tick": 14,
+    "video_frame": 194
+  },
+  {
+    "defender": "rust",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_03",
+    "tick": 17,
+    "video_frame": 197
+  },
+  {
+    "defender": "rust",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_00",
+    "tick": 21,
+    "video_frame": 241
+  },
+  {
+    "defender": "rust",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_01",
+    "tick": 32,
+    "video_frame": 252
+  },
+  {
+    "defender": "rust",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_02",
+    "tick": 42,
+    "video_frame": 262
+  },
+  {
+    "defender": "rust",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_03",
+    "tick": 52,
+    "video_frame": 272
+  },
+  {
+    "defender": "rust",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_00",
+    "tick": 61,
+    "video_frame": 281
+  },
+  {
+    "defender": "rust",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_01",
+    "tick": 67,
+    "video_frame": 287
+  },
+  {
+    "defender": "rust",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_02",
+    "tick": 72,
+    "video_frame": 292
+  },
+  {
+    "defender": "rust",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_03",
+    "tick": 77,
+    "video_frame": 297
+  },
+  {
+    "defender": "rust",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_00",
+    "tick": 82,
+    "video_frame": 302
+  },
+  {
+    "defender": "rust",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_01",
+    "tick": 86,
+    "video_frame": 306
+  },
+  {
+    "defender": "rust",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_02",
+    "tick": 90,
+    "video_frame": 310
+  },
+  {
+    "defender": "rust",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_03",
+    "tick": 94,
+    "video_frame": 314
+  },
+  {
+    "defender": "duke",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_00",
+    "tick": 3,
+    "video_frame": 1680
+  },
+  {
+    "defender": "duke",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_01",
+    "tick": 6,
+    "video_frame": 1683
+  },
+  {
+    "defender": "duke",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_02",
+    "tick": 9,
+    "video_frame": 1686
+  },
+  {
+    "defender": "duke",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_03",
+    "tick": 12,
+    "video_frame": 1689
+  },
+  {
+    "defender": "duke",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_00",
+    "tick": 344,
+    "video_frame": 2359
+  },
+  {
+    "defender": "duke",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_01",
+    "tick": 347,
+    "video_frame": 2362
+  },
+  {
+    "defender": "duke",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_02",
+    "tick": 349,
+    "video_frame": 2364
+  },
+  {
+    "defender": "duke",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_03",
+    "tick": 351,
+    "video_frame": 2366
+  },
+  {
+    "defender": "duke",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_00",
+    "tick": 8,
+    "video_frame": 1768
+  },
+  {
+    "defender": "duke",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_01",
+    "tick": 10,
+    "video_frame": 1770
+  },
+  {
+    "defender": "duke",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_02",
+    "tick": 11,
+    "video_frame": 1771
+  },
+  {
+    "defender": "duke",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_03",
+    "tick": 13,
+    "video_frame": 1773
+  },
+  {
+    "defender": "duke",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_00",
+    "tick": 3,
+    "video_frame": 1828
+  },
+  {
+    "defender": "duke",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_01",
+    "tick": 5,
+    "video_frame": 1830
+  },
+  {
+    "defender": "duke",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_02",
+    "tick": 7,
+    "video_frame": 1832
+  },
+  {
+    "defender": "duke",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_03",
+    "tick": 9,
+    "video_frame": 1834
+  },
+  {
+    "defender": "duke",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_00",
+    "tick": 8,
+    "video_frame": 1865
+  },
+  {
+    "defender": "duke",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_01",
+    "tick": 11,
+    "video_frame": 1868
+  },
+  {
+    "defender": "duke",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_02",
+    "tick": 14,
+    "video_frame": 1871
+  },
+  {
+    "defender": "duke",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_03",
+    "tick": 17,
+    "video_frame": 1874
+  },
+  {
+    "defender": "duke",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_00",
+    "tick": 21,
+    "video_frame": 1918
+  },
+  {
+    "defender": "duke",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_01",
+    "tick": 32,
+    "video_frame": 1929
+  },
+  {
+    "defender": "duke",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_02",
+    "tick": 42,
+    "video_frame": 1939
+  },
+  {
+    "defender": "duke",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_03",
+    "tick": 52,
+    "video_frame": 1949
+  },
+  {
+    "defender": "duke",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_00",
+    "tick": 61,
+    "video_frame": 1958
+  },
+  {
+    "defender": "duke",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_01",
+    "tick": 67,
+    "video_frame": 1964
+  },
+  {
+    "defender": "duke",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_02",
+    "tick": 72,
+    "video_frame": 1969
+  },
+  {
+    "defender": "duke",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_03",
+    "tick": 77,
+    "video_frame": 1974
+  },
+  {
+    "defender": "duke",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_00",
+    "tick": 82,
+    "video_frame": 1979
+  },
+  {
+    "defender": "duke",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_01",
+    "tick": 86,
+    "video_frame": 1983
+  },
+  {
+    "defender": "duke",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_02",
+    "tick": 90,
+    "video_frame": 1987
+  },
+  {
+    "defender": "duke",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_03",
+    "tick": 94,
+    "video_frame": 1991
+  },
+  {
+    "defender": "c",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_00",
+    "tick": 3,
+    "video_frame": 3357
+  },
+  {
+    "defender": "c",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_01",
+    "tick": 6,
+    "video_frame": 3360
+  },
+  {
+    "defender": "c",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_02",
+    "tick": 9,
+    "video_frame": 3363
+  },
+  {
+    "defender": "c",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_03",
+    "tick": 12,
+    "video_frame": 3366
+  },
+  {
+    "defender": "c",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_00",
+    "tick": 344,
+    "video_frame": 4036
+  },
+  {
+    "defender": "c",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_01",
+    "tick": 347,
+    "video_frame": 4039
+  },
+  {
+    "defender": "c",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_02",
+    "tick": 349,
+    "video_frame": 4041
+  },
+  {
+    "defender": "c",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_03",
+    "tick": 351,
+    "video_frame": 4043
+  },
+  {
+    "defender": "c",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_00",
+    "tick": 8,
+    "video_frame": 3445
+  },
+  {
+    "defender": "c",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_01",
+    "tick": 10,
+    "video_frame": 3447
+  },
+  {
+    "defender": "c",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_02",
+    "tick": 11,
+    "video_frame": 3448
+  },
+  {
+    "defender": "c",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_03",
+    "tick": 13,
+    "video_frame": 3450
+  },
+  {
+    "defender": "c",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_00",
+    "tick": 3,
+    "video_frame": 3505
+  },
+  {
+    "defender": "c",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_01",
+    "tick": 5,
+    "video_frame": 3507
+  },
+  {
+    "defender": "c",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_02",
+    "tick": 7,
+    "video_frame": 3509
+  },
+  {
+    "defender": "c",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_03",
+    "tick": 9,
+    "video_frame": 3511
+  },
+  {
+    "defender": "c",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_00",
+    "tick": 8,
+    "video_frame": 3542
+  },
+  {
+    "defender": "c",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_01",
+    "tick": 11,
+    "video_frame": 3545
+  },
+  {
+    "defender": "c",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_02",
+    "tick": 14,
+    "video_frame": 3548
+  },
+  {
+    "defender": "c",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_03",
+    "tick": 17,
+    "video_frame": 3551
+  },
+  {
+    "defender": "c",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_00",
+    "tick": 21,
+    "video_frame": 3595
+  },
+  {
+    "defender": "c",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_01",
+    "tick": 32,
+    "video_frame": 3606
+  },
+  {
+    "defender": "c",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_02",
+    "tick": 42,
+    "video_frame": 3616
+  },
+  {
+    "defender": "c",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_03",
+    "tick": 52,
+    "video_frame": 3626
+  },
+  {
+    "defender": "c",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_00",
+    "tick": 61,
+    "video_frame": 3635
+  },
+  {
+    "defender": "c",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_01",
+    "tick": 67,
+    "video_frame": 3641
+  },
+  {
+    "defender": "c",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_02",
+    "tick": 72,
+    "video_frame": 3646
+  },
+  {
+    "defender": "c",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_03",
+    "tick": 77,
+    "video_frame": 3651
+  },
+  {
+    "defender": "c",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_00",
+    "tick": 82,
+    "video_frame": 3656
+  },
+  {
+    "defender": "c",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_01",
+    "tick": 86,
+    "video_frame": 3660
+  },
+  {
+    "defender": "c",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_02",
+    "tick": 90,
+    "video_frame": 3664
+  },
+  {
+    "defender": "c",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_03",
+    "tick": 94,
+    "video_frame": 3668
+  },
+  {
+    "defender": "go",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_00",
+    "tick": 3,
+    "video_frame": 5034
+  },
+  {
+    "defender": "go",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_01",
+    "tick": 6,
+    "video_frame": 5037
+  },
+  {
+    "defender": "go",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_02",
+    "tick": 9,
+    "video_frame": 5040
+  },
+  {
+    "defender": "go",
+    "case": "body",
+    "profile": "Body",
+    "drawing": "reaction_body_03",
+    "tick": 12,
+    "video_frame": 5043
+  },
+  {
+    "defender": "go",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_00",
+    "tick": 344,
+    "video_frame": 5713
+  },
+  {
+    "defender": "go",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_01",
+    "tick": 347,
+    "video_frame": 5716
+  },
+  {
+    "defender": "go",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_02",
+    "tick": 349,
+    "video_frame": 5718
+  },
+  {
+    "defender": "go",
+    "case": "cinematic",
+    "profile": "Head",
+    "drawing": "reaction_head_03",
+    "tick": 351,
+    "video_frame": 5720
+  },
+  {
+    "defender": "go",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_00",
+    "tick": 8,
+    "video_frame": 5122
+  },
+  {
+    "defender": "go",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_01",
+    "tick": 10,
+    "video_frame": 5124
+  },
+  {
+    "defender": "go",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_02",
+    "tick": 11,
+    "video_frame": 5125
+  },
+  {
+    "defender": "go",
+    "case": "low",
+    "profile": "Low",
+    "drawing": "reaction_low_03",
+    "tick": 13,
+    "video_frame": 5127
+  },
+  {
+    "defender": "go",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_00",
+    "tick": 3,
+    "video_frame": 5182
+  },
+  {
+    "defender": "go",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_01",
+    "tick": 5,
+    "video_frame": 5184
+  },
+  {
+    "defender": "go",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_02",
+    "tick": 7,
+    "video_frame": 5186
+  },
+  {
+    "defender": "go",
+    "case": "guard-high",
+    "profile": "GuardHigh",
+    "drawing": "reaction_guard_high_03",
+    "tick": 9,
+    "video_frame": 5188
+  },
+  {
+    "defender": "go",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_00",
+    "tick": 8,
+    "video_frame": 5219
+  },
+  {
+    "defender": "go",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_01",
+    "tick": 11,
+    "video_frame": 5222
+  },
+  {
+    "defender": "go",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_02",
+    "tick": 14,
+    "video_frame": 5225
+  },
+  {
+    "defender": "go",
+    "case": "guard-low",
+    "profile": "GuardLow",
+    "drawing": "reaction_guard_low_03",
+    "tick": 17,
+    "video_frame": 5228
+  },
+  {
+    "defender": "go",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_00",
+    "tick": 21,
+    "video_frame": 5272
+  },
+  {
+    "defender": "go",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_01",
+    "tick": 32,
+    "video_frame": 5283
+  },
+  {
+    "defender": "go",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_02",
+    "tick": 42,
+    "video_frame": 5293
+  },
+  {
+    "defender": "go",
+    "case": "throw",
+    "profile": "Launch",
+    "drawing": "reaction_launch_03",
+    "tick": 52,
+    "video_frame": 5303
+  },
+  {
+    "defender": "go",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_00",
+    "tick": 61,
+    "video_frame": 5312
+  },
+  {
+    "defender": "go",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_01",
+    "tick": 67,
+    "video_frame": 5318
+  },
+  {
+    "defender": "go",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_02",
+    "tick": 72,
+    "video_frame": 5323
+  },
+  {
+    "defender": "go",
+    "case": "throw",
+    "profile": "Fall",
+    "drawing": "reaction_fall_03",
+    "tick": 77,
+    "video_frame": 5328
+  },
+  {
+    "defender": "go",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_00",
+    "tick": 82,
+    "video_frame": 5333
+  },
+  {
+    "defender": "go",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_01",
+    "tick": 86,
+    "video_frame": 5337
+  },
+  {
+    "defender": "go",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_02",
+    "tick": 90,
+    "video_frame": 5341
+  },
+  {
+    "defender": "go",
+    "case": "throw",
+    "profile": "Rise",
+    "drawing": "reaction_rise_03",
+    "tick": 94,
+    "video_frame": 5345
+  }
+]

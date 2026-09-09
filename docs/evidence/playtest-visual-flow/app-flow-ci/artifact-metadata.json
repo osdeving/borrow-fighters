@@ -1,0 +1,20 @@
+{
+  "id": 10121652772,
+  "node_id": "MDg6QXJ0aWZhY3QxMDEyMTY1Mjc3Mg==",
+  "name": "native-app-flow-linux",
+  "size_in_bytes": 35713581,
+  "url": "https://api.github.com/repos/osdeving/borrow-fighters/actions/artifacts/10121652772",
+  "archive_download_url": "https://api.github.com/repos/osdeving/borrow-fighters/actions/artifacts/10121652772/zip",
+  "expired": false,
+  "digest": "sha256:11fb7486883b38a05506a83a3f95646601676b013ef463e228ed085074e8138a",
+  "created_at": "2026-09-09T19:39:38Z",
+  "updated_at": "2026-09-09T19:39:38Z",
+  "expires_at": "2026-09-23T19:39:36Z",
+  "workflow_run": {
+    "id": 34394289582,
+    "repository_id": 1275440853,
+    "head_repository_id": 1275440853,
+    "head_branch": "feature/playtest-visual-completion",
+    "head_sha": "4f1631fad02fdf24184e8117c0a05332da843690"
+  }
+}
