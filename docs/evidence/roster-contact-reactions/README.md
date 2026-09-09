@@ -28,6 +28,11 @@ e desenha os dois atores com `draw_fight`. Ele exporta PNGs sem retoque e um JSO
 com contatos, HP, perfil, idade da reação, desenho, pivô e posição física. Nenhum
 perfil é forçado para produzir a evidência. O exemplo não captura áudio.
 
+`--video PATH.mp4` também grava todos os ticks diretamente do framebuffer a
+60 fps, sem interpolação. Requer o `ffmpeg` já usado pelas outras ferramentas
+de captura, limitado a uma thread. O JSON identifica o intervalo exato de
+frames de cada cenário. Sem essa opção, apenas os PNGs selecionados são lidos.
+
 As execuções completas gravam os 80 frames consecutivos das oito pancadas de
 C++ por defensor; `--barrage-only` permite repetir somente essa sequência.
 `--no-damage` mantém o alvo em 1 HP com dano desligado; `--reverse`
@@ -38,7 +43,7 @@ Com Rust, dependências Raylib e um display disponível (Xvfb também funciona):
 
 ```sh
 CARGO_BUILD_JOBS=1 cargo test --test roster_contact_reactions --test reaction_matrix --test contact_reactions --test paired_reaction_sprites --test no_damage_reactions
-cargo run --example capture_roster_contacts -- --output /tmp/roster-contact-right
+cargo run --example capture_roster_contacts -- --output /tmp/roster-contact-right --video /tmp/roster-contact-right.mp4
 cargo run --example capture_roster_contacts -- --reverse --output /tmp/roster-contact-left
 cargo run --example capture_roster_contacts -- --no-damage --output /tmp/roster-contact-protected-right
 cargo run --example capture_roster_contacts -- --no-damage --reverse --output /tmp/roster-contact-protected-left

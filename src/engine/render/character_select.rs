@@ -103,7 +103,7 @@ pub fn draw_character_select(
     };
     label(draw, assets, "MODO", 366, 545, 12.0, MUTED);
     centered(draw, assets, mode, 650, 541, 21.0, Color::WHITE);
-    label(draw, assets, "TAB  >", 859, 545, 12.0, CYAN);
+    label(draw, assets, "TAB / SELECT  >", 807, 545, 12.0, CYAN);
     panel(draw, rect(layout::ARENA), GOLD);
     if let Some(texture) = assets.arenas.get(selection.arena) {
         draw.draw_texture_pro(
@@ -135,8 +135,24 @@ pub fn draw_character_select(
         MUTED,
     );
     label(draw, assets, ">", 904, 592, 22.0, GOLD);
-    label(draw, assets, "Q / E  arena", 1070, 657, 12.0, MUTED);
-    label(draw, assets, "TAB  modo de jogo", 1035, 677, 12.0, MUTED);
+    label(
+        draw,
+        assets,
+        "Q/E · LB/RB (P1)  arena",
+        968,
+        657,
+        12.0,
+        MUTED,
+    );
+    label(
+        draw,
+        assets,
+        "TAB · SELECT/BACK (P1)  modo",
+        968,
+        677,
+        12.0,
+        MUTED,
+    );
     panel(
         draw,
         rect(layout::LAUNCH),

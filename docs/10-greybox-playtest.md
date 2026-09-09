@@ -167,7 +167,7 @@ Fluxo atual:
 - `Options` ajusta volume da música, gravação local, CPU, dano, HUD, ajuda, debug e gamepad.
 - `Como jogar` reabre este guia e permite escolher o modo antes da seleção.
 
-Na seleção contra CPU ou na demo, use `WASD`, setas ou `D-pad` para mover o cursor; `Enter`/`F`/`Espaço`, o botão `A` ou clique confirma o personagem do lado ativo. No duelo local pelo teclado, P1 usa `WASD` e confirma com `F`; P2 usa setas e confirma com `Enter`. `Espaço` continua confirmando o lado ativo. Confirme **P1**, depois **P2** e, com os dois prontos, confirme **Lutar** (`Enter`/`Start` ou clique). Dois controles podem confirmar seus lados separadamente. Clique na prévia de P1/P2 para escolher o lado ativo. `Tab` ou clique em **Modo** alterna **Você × CPU**, **Duelo local** e **CPU × CPU**; mudar modo limpa as confirmações. `Q/E` ou as setas da arena mudam o cenário. `Esc`/`B` desfaz uma confirmação antes de voltar ao menu. A opção aleatória escolhe apenas lutadores disponíveis; espaços futuros ficam bloqueados.
+Na seleção contra CPU ou na demo, use `WASD`, setas ou `D-pad` para mover o cursor; `Enter`/`F`/`Espaço`, o botão `A` ou clique confirma o personagem do lado ativo. No duelo local pelo teclado, P1 usa `WASD` e confirma com `F`; P2 usa setas e confirma com `Enter`. `Espaço` continua confirmando o lado ativo. Confirme **P1**, depois **P2** e, com os dois prontos, confirme **Lutar** (`Enter`/`Start` ou clique). Dois controles podem confirmar seus lados separadamente. Clique na prévia de P1/P2 para escolher o lado ativo. `Tab` ou clique em **Modo** alterna **Você × CPU**, **Duelo local** e **CPU × CPU**; mudar modo limpa as confirmações. `Q/E` ou as setas da arena mudam o cenário. No controle de P1, `Select`/`Back` alterna modo e `LB/RB` alterna arena; P2 mantém seu cursor independente. `Esc`/`B` desfaz uma confirmação antes de voltar ao menu. A opção aleatória escolhe apenas lutadores disponíveis; espaços futuros ficam bloqueados.
 
 Ao começar uma luta, os personagens entram em cena e aparece a contagem `11`, `10`, `01`, `Fight!`. Intro e contagem bloqueiam movimento e ataques. Zerar a vida rival decide o resultado depois de terminar qualquer sequência cinematográfica ativa.
 
@@ -295,7 +295,7 @@ Hitboxes, hurtboxes, retângulos de reação/guarda, limites da arena, labels de
 23. Rust e Duke/Java devem ter esforço audível em cada golpe próximo do loadout, sem depender só de fallback curto.
 24. `Lore / Roster` deve mostrar o livro do Linker, trocar capítulo/personagem com A/D e exibir retrato/ficha de Rust, Duke/Java, C, Python e C++.
 25. Editar `assets/lore/story.json` e reiniciar o jogo deve alterar o texto do livro sem recompilar.
-26. Na seleção visual, `Q/E` ou as setas clicáveis da arena devem atualizar a prévia; a luta confirmada deve começar na arena escolhida.
+26. Na seleção visual, `Q/E`, `LB/RB` no controle de P1 ou as setas clicáveis da arena devem atualizar a prévia; a luta confirmada deve começar na arena escolhida. Com dois controles, `Select`/`Back` de P1 deve permitir preparar Duelo Local sem teclado; `B` continua cancelando e `Start` inicia apenas com os dois personagens confirmados.
 27. `Options > Music Volume` deve baixar/subir a música em passos de 10%, sem afetar vozes e impactos.
 28. O submenu `Options` deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
 29. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.

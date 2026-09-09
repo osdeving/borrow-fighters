@@ -7,7 +7,9 @@ use std::{
     collections::BTreeSet,
     error::Error,
     fs,
+    io::Write,
     path::{Path, PathBuf},
+    process::{Child, ChildStdin, Command, Stdio},
 };
 
 use borrow_fighters::{
@@ -113,6 +115,7 @@ fn atlas(assets: &GameAssets, character: CharacterId) -> ReviewResult<&SpriteAtl
 
 fn main() -> ReviewResult<()> {
     let mut output = None;
+    let mut video = None;
     let mut reverse = false;
     let mut protected = false;
     let mut barrage_only = false;
@@ -126,6 +129,7 @@ fn main() -> ReviewResult<()> {
                 ))
             }
             "--reverse" => reverse = true,
+            "--video" => video = Some(PathBuf::from(args.next().ok_or("--video requires a path")?)),
             "--no-damage" => protected = true,
             "--barrage-only" => barrage_only = true,
             "--defender" => {
@@ -141,7 +145,7 @@ fn main() -> ReviewResult<()> {
             _ => return Err(format!("unknown argument: {arg}").into()),
         }
     }
-    let output = output.ok_or("usage: capture_roster_contacts --output PATH [--reverse] [--no-damage] [--barrage-only] [--defender ID]")?;
+    let output = output.ok_or("usage: capture_roster_contacts --output PATH [--video PATH] [--reverse] [--no-damage] [--barrage-only] [--defender ID]")?;
     if output.exists() && fs::read_dir(&output)?.next().is_some() {
         return Err("output directory is not empty; use a new evidence directory".into());
     }
@@ -156,6 +160,8 @@ fn main() -> ReviewResult<()> {
     let metrics = CharacterBodyMetricsCatalog::load(CHARACTER_BODY_METRICS_PATH)?;
     let mut target =
         raylib.load_render_texture(&thread, WINDOW_WIDTH as u32, WINDOW_HEIGHT as u32)?;
+    let mut movie = video.as_deref().map(Movie::new).transpose()?;
+    let mut video_frame_count = 0u32;
     let mut cases = vec![
         ContactCase::Body,
         ContactCase::Head,
@@ -178,6 +184,7 @@ fn main() -> ReviewResult<()> {
         }
         let sheet = atlas(&assets, defender)?;
         for case in &cases {
+            let video_first_frame = video_frame_count;
             let mut world =
                 World::new_with_character_body_metrics(CharacterId::Cpp, defender, &metrics);
             world.set_sprite_combat_manifests(WorldSpriteCombatManifests {
@@ -262,14 +269,7 @@ fn main() -> ReviewResult<()> {
                 if barrage_only {
                     capture = barrage_frame;
                 }
-                if capture {
-                    let name = format!(
-                        "{}-{}-{}-{tick:04}-{}.png",
-                        defender.audio_key(),
-                        case.name(),
-                        if reverse { "left" } else { "right" },
-                        frame.name
-                    );
+                if capture || movie.is_some() {
                     {
                         let mut draw = raylib.begin_texture_mode(&thread, &mut target);
                         draw_fight(
@@ -282,6 +282,19 @@ fn main() -> ReviewResult<()> {
                             &assets,
                         );
                     }
+                    if let Some(movie) = &mut movie {
+                        movie.frame(&target)?;
+                        video_frame_count += 1;
+                    }
+                }
+                if capture {
+                    let name = format!(
+                        "{}-{}-{}-{tick:04}-{}.png",
+                        defender.audio_key(),
+                        case.name(),
+                        if reverse { "left" } else { "right" },
+                        frame.name
+                    );
                     export(&target, &output.join(&name))?;
                     screenshots.push(json!({"image":name,"tick":tick,"sequence_tick":sequence_tick,"frame":frame.name,"clip":frame.clip}));
                 }
@@ -317,14 +330,19 @@ fn main() -> ReviewResult<()> {
             );
             report.push(json!({"defender":defender.audio_key(),"attacker":"cpp","case":case.name(),"reverse":reverse,"protected_health":protected,
                 "initial_health":initial_health,"final_health":world.player_two.health,"first_contact_tick":first_contact,"recovered_at":recovered_at,
-                "frames_run":frames_run,"observations":observations,"screenshots":screenshots}));
+                "frames_run":frames_run,"video_frames":video.as_ref().map(|_| [video_first_frame,video_frame_count-1]),
+                "observations":observations,"screenshots":screenshots}));
         }
+    }
+    if let Some(movie) = movie {
+        movie.finish()?;
     }
     fs::write(
         output.join("roster-contact-review.json"),
         serde_json::to_string_pretty(&json!({
             "fps":60,"render_size":[WINDOW_WIDTH,WINDOW_HEIGHT],"source":"World::update_with_flags + render::draw_fight",
-            "audio":"not captured","floor_y":FLOOR_Y,"barrage_only":barrage_only,"scenarios":report
+            "audio":"not captured","floor_y":FLOOR_Y,"barrage_only":barrage_only,
+            "video":video,"video_frame_count":video_frame_count,"scenarios":report
         }))? + "\n",
     )?;
     Ok(())
@@ -335,4 +353,72 @@ fn export(target: &RenderTexture2D, path: &Path) -> ReviewResult<()> {
     pixels.flip_vertical();
     fs::write(path, pixels.export_image_to_memory(".png")?.as_ref())?;
     Ok(())
+}
+
+/// Streams each unchanged framebuffer at its simulation tick, without interpolation.
+struct Movie {
+    child: Child,
+    stdin: ChildStdin,
+}
+
+impl Movie {
+    fn new(path: &Path) -> ReviewResult<Self> {
+        if let Some(parent) = path.parent() {
+            fs::create_dir_all(parent)?;
+        }
+        let mut child = Command::new("ffmpeg")
+            .args([
+                "-hide_banner",
+                "-loglevel",
+                "error",
+                "-n",
+                "-thread_queue_size",
+                "8",
+                "-f",
+                "rawvideo",
+                "-pixel_format",
+                "rgba",
+                "-video_size",
+            ])
+            .arg(format!("{WINDOW_WIDTH}x{WINDOW_HEIGHT}"))
+            .args([
+                "-framerate",
+                "60",
+                "-i",
+                "pipe:0",
+                "-an",
+                "-c:v",
+                "libx264",
+                "-preset",
+                "ultrafast",
+                "-threads",
+                "1",
+                "-crf",
+                "20",
+                "-pix_fmt",
+                "yuv420p",
+                "-movflags",
+                "+faststart",
+            ])
+            .arg(path)
+            .stdin(Stdio::piped())
+            .spawn()?;
+        let stdin = child.stdin.take().ok_or("ffmpeg stdin unavailable")?;
+        Ok(Self { child, stdin })
+    }
+
+    fn frame(&mut self, target: &RenderTexture2D) -> ReviewResult<()> {
+        let pixels = borrow_fighters::engine::video_capture::read_render_texture_rgba(target)?;
+        self.stdin.write_all(&pixels)?;
+        Ok(())
+    }
+
+    fn finish(self) -> ReviewResult<()> {
+        let Self { mut child, stdin } = self;
+        drop(stdin);
+        if !child.wait()?.success() {
+            return Err("ffmpeg failed".into());
+        }
+        Ok(())
+    }
 }

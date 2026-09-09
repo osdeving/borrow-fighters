@@ -38,7 +38,8 @@ aviso de editor desconhecido. Baixe somente da página oficial de releases.
    confirme **Lutar**. Pelo menu principal, `Quick Fight` e `Versus Setup`
    também abrem a seleção.
 3. Na seleção, use `WASD`/setas, controle ou mouse. `Tab` muda o modo e
-   `Q/E` muda a arena; você também pode clicar nessas opções. Contra CPU ou
+   `Q/E` muda a arena; você também pode clicar nessas opções. No controle de P1,
+   `Select`/`Back` muda o modo e `LB/RB` muda a arena. Contra CPU ou
    na demo, `Enter` confirma o lado ativo. No duelo local, P1 usa `WASD` + `F`
    e P2 usa setas + `Enter`; com mouse, clique nas prévias P1/P2 para trocar
    o lado ativo. `Esc`/`B` desfaz uma confirmação antes de voltar ao menu.

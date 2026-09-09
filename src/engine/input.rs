@@ -130,6 +130,15 @@ pub fn read_character_select_input(
         ];
     }
     if gamepad_enabled {
+        // Match setup belongs to P1; P2 keeps independent fighter navigation.
+        let primary = gamepad::PLAYER_ONE_GAMEPAD;
+        if gamepad::is_connected(raylib, primary) {
+            let pressed = |button| raylib.is_gamepad_button_pressed(primary, button);
+            result.cycle_mode |= pressed(GamepadButton::GAMEPAD_BUTTON_MIDDLE_LEFT);
+            let arena_direction = i8::from(pressed(GamepadButton::GAMEPAD_BUTTON_RIGHT_TRIGGER_1))
+                - i8::from(pressed(GamepadButton::GAMEPAD_BUTTON_LEFT_TRIGGER_1));
+            result.arena_direction = (result.arena_direction + arena_direction).clamp(-1, 1);
+        }
         for owner in 0..2 {
             let pad = owner as i32;
             let command = SelectCommand {
