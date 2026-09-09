@@ -44,7 +44,8 @@ no diretório pessoal controlado pelo runtime.
 O Windows precisa de Rust MSVC, Visual Studio Build Tools, CMake, LLVM/libclang
 e Inno Setup 6. No Ubuntu 22.04, além das dependências Rust/Raylib do CI, o
 empacotamento usa `rpm`, `dpkg-deb`, `readelf`, `ldd`, `ldconfig`, `apt-get`,
-`libx11-xcb1`, `libxxf86vm1`, `libxrender1`, `libxext6` e `libasound2-data`.
+`libx11-xcb1`, `libxxf86vm1`, `libxrender1`, `libxext6`, `libasound2-data` e
+`libpulse0`.
 
 Habilite entradas `deb-src` equivalentes aos repositórios binários e rode
 `apt-get update` antes de empacotar Linux. O script baixa **a versão exata** dos
@@ -68,8 +69,8 @@ pelo Cargo. O arquivo de fontes dos crates preserva também os notices de
 bibliotecas C embutidos nos headers do Raylib. `BUILD-INFO.json` identifica a
 revisão e `PACKAGE-SHA256SUMS.txt` verifica o conteúdo extraído.
 
-Linux coleta dependências transitivas por `ldd` e também bibliotecas X11/ALSA
-carregadas por `dlopen`, que não aparecem no `ldd` do jogo. Copia a configuração
+Linux coleta dependências transitivas por `ldd` e também bibliotecas X11, ALSA
+e PulseAudio carregadas por `dlopen`, que não aparecem no `ldd` do jogo. Copia a configuração
 ALSA e registra versões, licenças e fontes em `NATIVE-LIBRARIES.json`, `licenses/`
 e `THIRD_PARTY_SOURCES/`. O runtime GCC conserva a licença e sua exceção de
 linkagem; não é necessário carregar o fonte do compilador dentro do jogo.
@@ -78,8 +79,14 @@ As bibliotecas permanecem dinâmicas e substituíveis em `lib/`.
 glibc, loader, OpenGL e drivers permanecem no sistema. O launcher usa
 `LD_LIBRARY_PATH` apenas no processo do jogo. A validação recusa dependências
 não incorporadas, exceto as do sistema, e símbolos de glibc posteriores a 2.35.
-Desktop X11 ou XWayland e OpenGL 3.3 continuam necessários; áudio usa o servidor
-ou dispositivo do host. A gravação opcional requer `ffmpeg` separado.
+Desktop X11 ou XWayland e OpenGL 3.3 continuam necessários. O cliente PulseAudio
+incorporado atende também ao servidor de compatibilidade
+[pipewire-pulse](https://docs.pipewire.org/page_module_protocol_pulse.html) do
+host; ALSA permanece como alternativa. O pacote inclui `libpulsecommon` e as
+demais dependências do cliente, além de um alias `libpulse.so` que mantém a
+primeira tentativa de carregamento do miniaudio dentro do bundle. O servidor
+de áudio ou dispositivo continua no host. A gravação opcional requer `ffmpeg`
+separado.
 
 `verify` confere assets e hashes e, após empacotar Linux, a resolução de todas
 as bibliotecas incorporadas. O workflow também testa instalação/desinstalação,

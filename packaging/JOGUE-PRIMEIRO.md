@@ -17,7 +17,8 @@ Você não precisa instalar Rust, Cargo ou ferramentas de desenvolvimento.
   `./borrow-fighters`. Mantenha `bin/`, `lib/` e `assets/` juntos.
 
 Linux precisa de desktop com X11 ou XWayland, glibc 2.35+ e driver com OpenGL
-3.3. Bibliotecas de janela e ALSA acompanham o pacote; drivers gráficos,
+3.3. Bibliotecas de janela, ALSA e cliente PulseAudio acompanham o pacote;
+o cliente também funciona com a compatibilidade PulseAudio do PipeWire. Drivers gráficos,
 servidor de áudio e componentes do sistema continuam pertencendo ao sistema.
 Windows também precisa de driver com OpenGL 3.3.
 

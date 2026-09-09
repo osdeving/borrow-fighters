@@ -28,7 +28,7 @@ TARGETS = {
 DLOPEN_LIBRARIES = (
     "libX11.so.6", "libX11-xcb.so.1", "libXcursor.so.1", "libXi.so.6",
     "libXinerama.so.1", "libXrandr.so.2", "libXrender.so.1", "libXext.so.6",
-    "libXxf86vm.so.1", "libasound.so.2",
+    "libXxf86vm.so.1", "libasound.so.2", "libpulse.so.0",
 )
 # The loader, glibc and graphics drivers must match the host. Never copy them.
 SYSTEM_LIBRARY = re.compile(
@@ -295,6 +295,12 @@ def bundle_linux(stage):
     libraries = {name: path for name, path in libraries.items() if not SYSTEM_LIBRARY.match(name)}
     for soname, source in libraries.items():
         copy(source, stage / "lib" / soname)
+    # miniaudio tries the development name first. Keep that lookup in the bundle
+    # even on a host with libpulse-dev installed; its private libpulsecommon is
+    # already included by the transitive dependency collection above.
+    pulse_alias = stage / "lib/libpulse.so"
+    pulse_alias.unlink(missing_ok=True)
+    pulse_alias.symlink_to("libpulse.so.0")
     # ALSA's data files are required for libasound configuration lookup.
     alsa_config = Path("/usr/share/alsa")
     if not alsa_config.is_dir():

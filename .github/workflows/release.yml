@@ -62,7 +62,7 @@ jobs:
           sudo apt-get install -y clang cmake libclang-dev pkg-config \
             libasound2-dev libgl1-mesa-dev libudev-dev libx11-dev \
             libxcursor-dev libxi-dev libxinerama-dev libxrandr-dev \
-            rpm xvfb xauth libx11-xcb1 libxxf86vm1 libxrender1 libxext6 libasound2-data
+            rpm xvfb xauth libpulse0 libx11-xcb1 libxxf86vm1 libxrender1 libxext6 libasound2-data
       - name: Configure Windows static runtime
         if: runner.os == 'Windows'
         shell: pwsh
