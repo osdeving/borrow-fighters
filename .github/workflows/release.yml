@@ -57,6 +57,8 @@ jobs:
       - name: Install Linux build and packaging dependencies
         if: runner.os == 'Linux'
         run: |
+          # All build packages come from Ubuntu; Chrome is not used by this job.
+          sudo rm -f /etc/apt/sources.list.d/google-chrome.list /etc/apt/sources.list.d/google-chrome.sources
           sed -n 's/^deb /deb-src /p' /etc/apt/sources.list | sudo tee /etc/apt/sources.list.d/borrow-fighters-source.list >/dev/null
           sudo apt-get update
           sudo apt-get install -y clang cmake libclang-dev pkg-config \
