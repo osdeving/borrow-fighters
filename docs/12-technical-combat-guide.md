@@ -22,7 +22,7 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Match runtime | Instancia lutadores a partir de personagens, bloqueia intro/contagem, resolve hits, projéteis e vitória | [`src/game/world.rs`](../src/game/world.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
 | Combat log | Eventos compactos de diagnóstico para reproduzir bugs de luta | [`src/game/combat_log.rs`](../src/game/combat_log.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs) |
 | CPU playtest | Heurística determinística para mover, defender e exercitar golpes básicos/tradicionais | [`src/game/ai.rs`](../src/game/ai.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/cpu_traditional_moves.rs`](../tests/cpu_traditional_moves.rs) |
-| Arena runtime | Identidade, contexto, rotação e seleção manual de arenas do protótipo | [`src/game/arena.rs`](../src/game/arena.rs) | [`tests/arena_rotation.rs`](../tests/arena_rotation.rs) |
+| Arena runtime | Identidade, contexto e navegação cíclica na seleção manual de arenas | [`src/game/arena.rs`](../src/game/arena.rs) | [`tests/arena_rotation.rs`](../tests/arena_rotation.rs) |
 | Audio domain | Cues, eventos de gameplay, manifesto JSON e matching de bindings | [`src/audio/mod.rs`](../src/audio/mod.rs) | [`tests/audio_manifest.rs`](../tests/audio_manifest.rs) |
 | Audio Raylib boundary | Carrega clips existentes e toca eventos resolvidos por manifesto | [`src/engine/audio.rs`](../src/engine/audio.rs) | Teste manual via jogo |
 | Lore data | Livro de história e fichas de roster carregados de JSON | [`src/lore/mod.rs`](../src/lore/mod.rs), [`assets/lore/story.json`](../assets/lore/story.json) | [`tests/lore_book.rs`](../tests/lore_book.rs) |
@@ -84,7 +84,7 @@ O matchup inicial vem de [`LaunchOptions.match_options`](../src/cli.rs), que ace
 
 Enquanto `spawn_intro_active` ou `countdown_active` estiverem ativos, `World::update_with_flags` atualiza apenas timers e feedback transitório; movimento, ataques, projéteis e IA não avançam gameplay. A contagem visual usa os labels `11`, `10`, `01` e `Fight!`, expostos por `World::countdown_label`. Os eventos de áudio correspondentes são `match.countdown.11`, `match.countdown.10`, `match.countdown.01` e `match.countdown.fight`.
 
-O desenho da contagem fica em [`src/engine/render.rs`](../src/engine/render.rs), que só consulta `World::countdown_label`. A troca de arena é decisão de [`src/app.rs`](../src/app.rs): depois que `World::outcome` aparece, a arena atual permanece na pose de vitória e só avança quando uma nova luta é iniciada por restart ou pelo menu. Uma arena confirmada na seleção vale para a próxima luta e desliga o avanço automático naquele restart.
+O desenho da contagem fica em [`src/engine/render.rs`](../src/engine/render.rs), que só consulta `World::countdown_label`. [`App`](../src/app.rs) mantém a arena base escolhida na seleção ao reiniciar ou pedir revanche; não há avanço automático após a vitória. A mutação criada pelo super de Rust pertence ao `World` e continua visível até a luta ser recriada, quando a arena base é restaurada. Uma nova escolha de cenário na seleção vale para o próximo confronto.
 
 ### Pausa e Resultado
 

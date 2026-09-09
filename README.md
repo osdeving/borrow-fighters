@@ -129,6 +129,12 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ## Amostra atual
 
+[![Seleção Linker com Rust e Java](docs/evidence/playtest-visual-flow/roster-rust-java.png)](docs/evidence/playtest-visual-flow/roster-motion.mp4)
+
+_Seleção com retratos, personagens animados, random e vagas futuras.
+[Vídeo e revisão da interface, energia e pausa](docs/evidence/playtest-visual-flow/README.md).
+[Reações de Rust, Java, Old C e Go](docs/evidence/roster-contact-reactions/README.md)._
+
 [![Python reage ao chute da rajada de C++](docs/evidence/python-cpp-reactions/cpp-barrage-impact.png)](assets/showcase/python-cpp-reactions-2026-09-09.mp4)
 
 _Clique para ver Python e C++ atacando e reagindo: 12 golpes e quatro situações
@@ -258,7 +264,7 @@ Ao iniciar uma luta, o jogo roda a entrada dos personagens e depois bloqueia inp
 
 Cada jogador começa com 50 de energia, até o máximo de 100. Acertar ou defender carrega a barra; o cinematográfico consome 100 ao iniciar. Ataques no vazio e o próprio cinematográfico não carregam energia. A assinatura continua independente dessa barra. Combat Lab e Move Showcase mantêm energia livre para revisão; os valores da luta são provisórios, com balanceamento fino em uma rodada posterior.
 
-Por padrão, a luta normal inicia `rust.rs` contra `duke.java` no `Sirius Light Ring` em Campinas, SP. A seleção Linker reúne rust.rs, duke.java, old.c, python.py e cpp.cpp, com retratos derivados da arte atual e escolha de arena pelo nome/local. Go/Gopher continua no repositório, no CLI, no Combat Lab e no Sprite Viewer, mas saiu da seleção pública da demo por enquanto. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` ou `cpp.cpp`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pelo menu. Rust, Duke/Java, Go, C, Python e C++ já possuem vida, loadout, frame data, voz de ataque e projectile próprios; C joga como fundamentos de alcance/risco, Python como punisher ágil de dano moderado e C++ como herdeira técnica entre alcance de C e ritmo de Python.
+Por padrão, a luta normal inicia `rust.rs` contra `duke.java` no `Sirius Light Ring` em Campinas, SP. A seleção Linker reúne rust.rs, duke.java, old.c, python.py e cpp.cpp, com retratos derivados da arte atual e escolha de arena pelo nome/local. Go/Gopher continua no repositório, no CLI, no Combat Lab e no Sprite Viewer, mas saiu da seleção pública da demo por enquanto. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` ou `cpp.cpp`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pelo menu. Rust, Duke/Java, Go, C, Python e C++ já possuem vida, loadout, frame data e projectile próprios; Old C compartilha temporariamente a voz de Rust. C joga como fundamentos de alcance/risco, Python como punisher ágil de dano moderado e C++ como herdeira técnica entre alcance de C e ritmo de Python.
 
 O submenu `Lore / Roster` lê [`assets/lore/story.json`](assets/lore/story.json) em runtime. Edite esse arquivo para alterar capítulos, perfis, objetivos ou notas de personagem sem recompilar o jogo; reinicie o processo para recarregar o JSON. Com `CHAPTER` ou `CHARACTER` selecionado, use a roda do mouse ou `PageUp` / `PageDown` para rolar textos longos no capítulo ou na ficha. Os retratos atuais do roster são cards placeholder derivados dos sprites jogáveis.
 

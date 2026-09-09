@@ -19,7 +19,7 @@ Esta versão jogável permite testar partidas locais, seleção de personagens, 
 - Pulo simples e pulo diagonal com momentum.
 - Abaixar com hurtbox menor.
 - Defesa com redução de dano.
-- Arena com chão, limites e rotação de cenário ao iniciar a próxima luta após uma vitória.
+- Arena com chão e limites; reinício e revanche preservam o cenário selecionado.
 - Entrada cinematográfica seguida de contagem pré-luta `11`, `10`, `01`, `Fight!`.
 - Colisão física corpo-corpo com gap mínimo.
 - Soco fraco/curto.
@@ -311,7 +311,7 @@ Hitboxes, hurtboxes, retângulos de reação/guarda, limites da arena, labels de
 39. `Training > Sprite Viewer` deve abrir o viewer e `Esc` deve voltar ao menu.
 40. Pulo com direção pressionada deve sair em diagonal.
 41. A vida deve chegar a zero e encerrar a luta.
-42. A tela de resultado deve manter as poses visíveis e oferecer `Revanche`, `Trocar personagens` e `Menu`. Revanche reinicia o confronto; a rotação automática de arena, quando ativa, avança somente no começo da próxima luta, enquanto uma arena escolhida na seleção deve ser respeitada.
+42. A tela de resultado deve manter as poses visíveis e oferecer `Revanche`, `Trocar personagens` e `Menu`. Revanche preserva personagens, modo e arena selecionada, restaurando vida e energia iniciais. Reiniciar também preserva a arena base; a mutação de cenário criada por Rust é removida ao recriar a luta.
 43. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil por hitspark, block pulse, trail e luz de chão em stun.
 44. O mouse deve alcançar qualquer ponto da janela e sair dela sem retornar ao centro, tanto no menu quanto na luta. Em WSL, `Linker` acompanha o movimento e desaparece fora da janela ou ao perder foco.
 45. Hover e clique devem navegar por todos os menus, incluindo `Back` e `Exit`; cliques fora das linhas não devem ativar a seleção anterior. O mouse parado não deve impedir navegação por teclado/gamepad.
