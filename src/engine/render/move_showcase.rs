@@ -28,6 +28,7 @@ pub fn draw_move_showcase(
     assets: &GameAssets,
 ) {
     let world = showcase.world();
+    let arena = world.effective_arena(arena);
     if super::authored_supers::draw_override(draw, world) {
         return;
     }
@@ -57,6 +58,7 @@ pub fn draw_move_showcase(
                 spritesheet: assets.fighter_spritesheet.as_ref(),
                 world_elapsed_seconds: time,
                 forced_clip,
+                placement: super::authored_target_placement(world, fighter.slot, assets),
             },
         );
     }
@@ -64,6 +66,15 @@ pub fn draw_move_showcase(
     super::signature_effects::draw_signature_effects(draw, world, false, assets);
     draw_hit_effects(draw, world, assets.menu_font.as_ref());
     super::draw_world_cinematic_foreground(draw, world, assets);
+    super::draw_centered_menu_text(
+        draw,
+        assets.menu_font.as_ref(),
+        &format!("{} / {}", arena.label(), arena.location()),
+        WINDOW_WIDTH / 2,
+        19,
+        14.0,
+        UI_MUTED,
+    );
     draw_showcase_label(draw, showcase, assets);
 }
 

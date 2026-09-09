@@ -1648,7 +1648,7 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 52] = [
     MoveSpec {
         id: MoveId::PythonEventHorizon,
         input: MoveInputKind::CinematicSpecial,
-        label: "Event Horizon",
+        label: "import devour",
         frames: AttackFrameData {
             duration: FrameCount::new(98),
             active_start: FrameCount::new(34),

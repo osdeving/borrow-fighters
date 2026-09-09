@@ -14,6 +14,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Visão e produto
 
+- [`docs/24-reactions-and-transformations.md`](docs/24-reactions-and-transformations.md): reações dos seis lutadores, Python gigante, notebook/BIOS de C++ e mutação persistente de arena.
 - [`docs/23-authored-super-sequences.md`](docs/23-authored-super-sequences.md): quatro supers com roteiro, clones, mutação de arena, BIOS, tiro no pé e vozes distintas.
 - [`docs/22-presentation-and-brazilian-stage-life.md`](docs/22-presentation-and-brazilian-stage-life.md): polimento de interface, cenários vivos e seis novos especiais cinematográficos.
 - [`docs/00-vision.md`](docs/00-vision.md): visão do jogo.
@@ -65,6 +66,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Decisões registradas
 
+- [`docs/adr/0017-reaction-clocks-and-arena-mutation.md`](docs/adr/0017-reaction-clocks-and-arena-mutation.md): relógios de reação e arena efetiva no World.
 - [`docs/adr/0016-authored-super-sequences.md`](docs/adr/0016-authored-super-sequences.md): captura, fases e contatos autorais sob o relógio do combate.
 - [`docs/adr/0015-cinematic-presentation-and-stage-life.md`](docs/adr/0015-cinematic-presentation-and-stage-life.md): fontes consistentes, atores de cenário e efeitos cinematográficos com contato local.
 - [`docs/adr/0001-stack-rust-raylib.md`](docs/adr/0001-stack-rust-raylib.md): decisão inicial de stack.
@@ -98,10 +100,15 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ## Amostra atual
 
-[![Garbage Collector com Duke e clones](docs/evidence/authored-supers/duke-right-hit-216-DukeCollect.png)](assets/showcase/authored-supers-2026-09-09.mp4)
+[![Python gigante durante import devour](docs/evidence/reactions-transformations/python-devour.png)](assets/showcase/reactions-transformations-2026-09-09.mp4)
 
-_Clique para ver os quatro supers autorais com áudio, 1280×720 a 60 fps.
-[Roteiros e verificação](docs/23-authored-super-sequences.md)._
+_Clique para ver as reações e os cinco supers autorais com áudio.
+[Roteiros](docs/24-reactions-and-transformations.md) e
+[evidências de verificação](docs/evidence/reactions-transformations/README.md)._
+
+A [amostra dos quatro supers da rodada anterior](assets/showcase/authored-supers-2026-09-09.mp4)
+preserva a primeira versão de Duke, Rust, Old C e C++, junto ao
+[registro daquela entrega](docs/23-authored-super-sequences.md).
 
 A [amostra das assinaturas e arremessos](assets/showcase/signature-spectacle-2026-09-08.mp4)
 permanece como registro da rodada anterior, junto à sua
@@ -117,11 +124,11 @@ As fontes e a arte têm procedência em [assets/fonts](assets/fonts/README.md) e
 [assets/production/stage-life](assets/production/stage-life/README.md).
 
 Cada um dos seis personagens também tem um especial cinematográfico adicional:
-`Y` para P1, `]` para P2, ou `LB` segurado + `RT` no controle. Rust, Duke, Old C e C++
-agora executam sequências de 5–6 segundos: a música pausa, os atores são capturados
+`Y` para P1, `]` para P2, ou `LB` segurado + `RT` no controle. Rust, Duke, Old C, Python e C++
+agora executam sequências de 5–10,5 segundos: a música pausa, os atores são capturados
 e o roteiro assume a luta até a conclusão. Por enquanto são fáceis de acionar,
 inclusive à distância, para testar animação. Segurar defesa na entrada reduz o
-dano para chip e não deixa morrer por chip. Go/Python mantêm contato local.
+dano para chip e não deixa morrer por chip. Go mantém contato local.
 Para inspecionar:
 
 ```sh
@@ -129,16 +136,20 @@ cargo run -- --showcase --character rust --move cinematic_special --repeat
 ```
 
 Troque `rust` por `duke`, `go`, `c`, `python` ou `cpp`. Os especiais anteriores
-continuam em `T` / `\\` / `RT`. [Roteiros, duração, dano e entrega](docs/23-authored-super-sequences.md).
+continuam em `T` / `\\` / `RT`. [Roteiros, duração, dano e entrega](docs/24-reactions-and-transformations.md).
 
 Java faz chover lixo, multiplica Duke para coletar/comer e termina com uma queda
-gigante. Rust traz estruturas do Sirius durante um eclipse; Old C provoca #GP,
-tela azul e reboot pela BIOS; C++ acerta o próprio pé com uma bazuca e parte para
-uma rajada de socos/chutes. Rust, Old C, Go e C++ receberam vozes de fontes
+gigante. Rust troca a arena por Sirius em quadrados, incluindo a música; Old C
+provoca #GP, tela azul e BIOS. C++ digita código com ponteiro nulo no notebook,
+atira no pé, aplica a rajada e termina herdando o crash de C. Python se transforma
+em cobra gigante, devora o adversário, volta à forma humana, pula e faz sinal de paz.
+Todos os defensores têm reações animadas com relógio próprio, incluindo queda e
+recuperação ampliadas nos supers. Rust, Old C, Go e C++ receberam vozes de fontes
 diferentes; Duke/Python foram preservados. [Créditos de áudio](assets/audio/ATTRIBUTION.md).
 
-[Vídeo do novo acabamento e dos especiais](assets/showcase/presentation-polish-2026-09-08.mp4)
-e [capturas/verificação](docs/evidence/presentation-polish/README.md).
+O [vídeo do acabamento de 8 de setembro](assets/showcase/presentation-polish-2026-09-08.mp4)
+e suas [capturas/verificação](docs/evidence/presentation-polish/README.md)
+registram a etapa anterior de tipografia, interface e cenários vivos.
 
 ## Como contribuir
 
@@ -228,7 +239,7 @@ cargo run -- --lab combat --character rust --pose defeat
 
 No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp` para alternar pose, `Enter` para repetir, `Espaço` para pausar, `.` para avançar 1 frame quando pausado, `Home` para voltar ao frame 0, `H` para hurtbox, `B` para hitbox, `P` para pivot/eixos, `D` para dummy de contato, `A` para mostrar/esconder o fundo de arena e `Esc` para voltar ao menu quando aberto pelo submenu `Training`. O overlay mostra frame data, vantagem estimada, pushback, whiff recovery e distância após pushback. Valores aceitos em `--character`: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` ou `cpp.cpp`. Valores aceitos em `--move`: `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`, `projectile`, `signature_special` e `cinematic_special`. Valores aceitos em `--pose`: `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory`, `spawn`, `defeat` e `crouch_block`. As poses mantêm o corpo parado para inspeção e reproduzem o clip com pause, avanço por frame e reinício.
 
-O `Move Showcase`, em `Training`, usa o personagem escolhido como Player 1 contra um adversário real. Cada um dos cinco personagens da demo tem 16 situações: os dez golpes anteriores, um especial de assinatura, um cinematográfico e quatro exemplos de defesa. O adversário se aproxima, salta para receber anti-air ou mantém a guarda apropriada para demonstrar rasteira, overhead e agarrão. O resultado mostra o dano ou bloqueio calculado pelo combate. Cada cena dura 260 frames para incluir voo, queda e recuperação; o painel inferior deixa o espaço aéreo visível. Agarrões capturam e arremessam para o outro lado, e ganchos lançam a vítima. Os especiais são Borrow Fortress, System.out.println!, Segmentation Fault, import antigravity e Undefined Bazooka, sempre disponíveis com `T`/Backslash/`RT`, sem medidor.
+O `Move Showcase`, em `Training`, usa o personagem escolhido como Player 1 contra um adversário real. Cada um dos cinco personagens da demo tem 16 situações: os dez golpes anteriores, um especial de assinatura, um cinematográfico e quatro exemplos de defesa. O adversário se aproxima, salta para receber anti-air ou mantém a guarda apropriada para demonstrar rasteira, overhead e agarrão. O resultado mostra o dano ou bloqueio calculado pelo combate. As cenas incluem voo, queda e recuperação, respeitando a duração própria dos supers; o painel inferior deixa o espaço aéreo visível. Agarrões capturam e arremessam para o outro lado, e ganchos lançam a vítima. Os especiais de assinatura são Borrow Fortress, System.out.println!, Segmentation Fault, import antigravity e Undefined Bazooka, sempre disponíveis com `T`/Backslash/`RT`, sem medidor.
 
 ```bash
 cargo run -- --showcase --character rust --move anti_air --repeat

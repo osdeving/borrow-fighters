@@ -1,0 +1,140 @@
+{
+  "method": "Real XTest input into isolated Xephyr App; CPU disabled manually in Options for guard test",
+  "binary_sha256": "fe2d51b81bef504e1f1d54ec3fe2306d15fe3a51ff8b1d67d13f25739c514a49",
+  "display": ":93",
+  "checks": [
+    {
+      "name": "Python_showcase_pause_freezes_frame",
+      "passed": true
+    },
+    {
+      "name": "Python_showcase_period_advances_one_frame",
+      "passed": true
+    },
+    {
+      "name": "Python_showcase_replay_restores_frame_zero",
+      "passed": true
+    },
+    {
+      "name": "Python_showcase_reset_after_full_cycle_restores_frame_zero",
+      "passed": true
+    },
+    {
+      "name": "Python_showcase_Escape_returns_menu",
+      "passed": true
+    },
+    {
+      "name": "python-showcase_window_close",
+      "passed": true
+    },
+    {
+      "name": "Python_super_respects_real_P2_U_guard_and_returns_control",
+      "passed": true,
+      "hp_bar_pixels_before": 509,
+      "hp_bar_pixels_after": 467,
+      "expected_chip": 8,
+      "defender_max_hp": 98
+    },
+    {
+      "name": "Python_target_accepts_movement_after_return",
+      "passed": true
+    },
+    {
+      "name": "Python_fight_R_resets_health_and_capture",
+      "passed": true
+    },
+    {
+      "name": "python-fight_window_close",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "observations": [
+    {
+      "scenario": "python-showcase",
+      "args": [
+        "--showcase",
+        "--character",
+        "python",
+        "--move",
+        "cinematic_special",
+        "--repeat"
+      ],
+      "startup_seconds_upper_bound": 2.6
+    },
+    {
+      "phase": "growing",
+      "seconds_after_resume": 3.589,
+      "filename": "05-showcase-growing.png"
+    },
+    {
+      "phase": "mouth",
+      "seconds_after_resume": 5.261,
+      "filename": "05-showcase-mouth.png"
+    },
+    {
+      "phase": "swallowed",
+      "seconds_after_resume": 6.194,
+      "filename": "05-showcase-swallowed.png"
+    },
+    {
+      "phase": "returned",
+      "seconds_after_resume": 7.709,
+      "filename": "05-showcase-returned.png"
+    },
+    {
+      "phase": "restored",
+      "seconds_after_resume": 9.955,
+      "filename": "05-showcase-restored.png"
+    },
+    {
+      "scenario": "python-fight",
+      "args": [
+        "--fight",
+        "--p1",
+        "python",
+        "--p2",
+        "cpp"
+      ],
+      "startup_seconds_upper_bound": 2.4
+    },
+    {
+      "phase": "guard-swallowed",
+      "seconds_after_Y": 5.726,
+      "filename": "09-fight-guard-swallowed.png"
+    },
+    {
+      "phase": "guard-returned",
+      "seconds_after_Y": 7.117,
+      "filename": "09-fight-guard-returned.png"
+    },
+    {
+      "phase": "guard-restored",
+      "seconds_after_Y": 9.449,
+      "filename": "09-fight-guard-restored.png"
+    }
+  ],
+  "note": "Phase images require visual confirmation; their timestamps are host observations, exact phase/tick invariants are covered by World tests.",
+  "visual_review": [
+    {
+      "passed": true,
+      "observation": "During swallow the actual C++ target is absent; showcase HUD records exactly 32 damage (98 \u2192 66 HP).",
+      "source_capture": "05-showcase-swallowed.png"
+    },
+    {
+      "passed": true,
+      "observation": "After return the actual C++ fighter is prone while Python jumps with knees bent; both fighters become standing after restoration.",
+      "source_capture": "05-showcase-returned.png"
+    },
+    {
+      "passed": true,
+      "observation": "With real P2 U held at entry, HUD reads GUARD / CHIP and 90/98 HP; target reappears in guard, then accepts movement after the sequence.",
+      "source_capture": "09-fight-guard-returned.png"
+    }
+  ],
+  "saved_captures": {
+    "05-showcase-swallowed.png": "python-swallowed.png",
+    "05-showcase-returned.png": "python-returned-prone.png",
+    "09-fight-guard-returned.png": "python-guard-returned.png"
+  }
+}

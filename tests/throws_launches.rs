@@ -103,7 +103,7 @@ fn throws_capture_lift_cross_above_the_attacker_and_land_safely_for_all_five() {
                     assert!(closest_capture_gap < initial_center_gap * 0.5);
                     assert!(world.player_two.health < initial_health);
                     assert_eq!(world.player_two.body_rect().bottom(), FLOOR_Y);
-                    assert_eq!(world.player_two.reaction_visual_elapsed_seconds(), 0.1);
+                    assert_eq!(world.player_two.reaction_visual_elapsed_seconds(), 0.0);
                     assert!(world.player_two.position.x >= ARENA_LEFT);
                     assert!(world.player_two.body_rect().right() <= ARENA_RIGHT + 0.01);
                     assert!(world.throw_sequence().is_none());
@@ -192,7 +192,7 @@ fn every_anti_air_launches_under_gravity_then_allows_recovery_and_jump() {
             }
         }
         assert!(landed, "{character:?} must land after launch");
-        assert_eq!(world.player_two.reaction_visual_elapsed_seconds(), 0.1);
+        assert_eq!(world.player_two.reaction_visual_elapsed_seconds(), 0.0);
         assert!(min_y < contact_y.unwrap() - world_px(40.0));
         for _ in 0..40 {
             world.update(DT, FighterInput::default(), FighterInput::default());

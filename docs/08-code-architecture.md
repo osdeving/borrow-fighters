@@ -57,7 +57,8 @@ borrow-fighters/
 │   │   │   ├── move_showcase.rs # Desenho de combate contextual no showcase
 │   │   │   ├── signature_effects.rs # Atlas de efeitos nas posições físicas
 │   │   │   ├── authored_supers.rs # Eclipse, mutação, terminais, tela azul e BIOS
-│   │   │   ├── authored_actors.rs # Clones, lixo e animação exclusiva de Footgun
+│   │   │   ├── authored_actors.rs # Clones, lixo, notebook e Footgun
+│   │   │   ├── python_super.rs  # Transformação/deglutição e poses de celebração
 │   │   │   └── sprite_viewer.rs # Desenho da ferramenta isolada de sprites
 │   │   └── sprites/
 │   │       ├── animation.rs    # Seleção de frame por duração
@@ -71,7 +72,7 @@ borrow-fighters/
 │   │   ├── fighter.rs          # Estado comum de lutador
 │   │   ├── fighter/reactions.rs # Captura, voo e aterrissagem
 │   │   ├── signature.rs        # Entidades e geometria dos especiais
-│   │   ├── super_sequence.rs   # Dados puros dos quatro roteiros autorais
+│   │   ├── super_sequence.rs   # Dados puros dos cinco roteiros autorais
 │   │   ├── frame.rs            # Timing de combate em frames inteiros
 │   │   ├── collision.rs        # Resolução hitbox x hurtbox
 │   │   ├── move_data.rs        # Tabela MoveSpec dos golpes atuais
@@ -231,6 +232,13 @@ Regras:
 - consumir com `FeatureFlags::enabled`, `set` ou `toggle`;
 - evitar booleans soltos em `App`, `World`, render ou IA;
 - registrar ADR quando a flag virar decisão estrutural.
+
+A [ADR0017](adr/0017-reaction-clocks-and-arena-mutation.md) separa o relógio de
+reação do relógio global/ataque e acrescenta `World::effective_arena(base)`.
+O override de arena pertence ao World e se perde ao reconstruí-lo; seleção de
+menu e rotação do próximo round continuam independentes. Renderer e áudio
+consultam o mesmo estado, inclusive em Lab e showcase. Python conserva o alvo
+no domínio durante a ocultação; escala, rotação e alpha são apenas apresentação.
 
 ## Loop de jogo atual
 

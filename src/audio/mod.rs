@@ -41,6 +41,13 @@ pub enum AudioCue {
     SuperBoot,
     SuperFootshot,
     SuperBarrageHit,
+    SuperTyping,
+    SuperEnter,
+    SuperLunge,
+    SuperSwallow,
+    SuperRevert,
+    SuperCelebrate,
+    SuperPeace,
     SuperEnd,
 }
 
@@ -74,6 +81,13 @@ impl AudioCue {
             Self::SuperBoot => "super.boot",
             Self::SuperFootshot => "super.footshot",
             Self::SuperBarrageHit => "super.barrage_hit",
+            Self::SuperTyping => "super.typing",
+            Self::SuperEnter => "super.enter",
+            Self::SuperLunge => "super.lunge",
+            Self::SuperSwallow => "super.swallow",
+            Self::SuperRevert => "super.revert",
+            Self::SuperCelebrate => "super.celebrate",
+            Self::SuperPeace => "super.peace",
             Self::SuperEnd => "super.end",
         }
     }
@@ -107,6 +121,13 @@ impl AudioCue {
             "super.boot" => Some(Self::SuperBoot),
             "super.footshot" => Some(Self::SuperFootshot),
             "super.barrage_hit" => Some(Self::SuperBarrageHit),
+            "super.typing" => Some(Self::SuperTyping),
+            "super.enter" => Some(Self::SuperEnter),
+            "super.lunge" => Some(Self::SuperLunge),
+            "super.swallow" => Some(Self::SuperSwallow),
+            "super.revert" => Some(Self::SuperRevert),
+            "super.celebrate" => Some(Self::SuperCelebrate),
+            "super.peace" => Some(Self::SuperPeace),
             "super.end" => Some(Self::SuperEnd),
             _ => None,
         }

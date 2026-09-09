@@ -29,6 +29,7 @@ const CPP_SCALE: f32 = 0.54;
 #[derive(Clone, Copy, Default)]
 pub(super) struct AuthoredActorTextures<'a> {
     pub duke: Option<&'a Texture2D>,
+    pub cpp_laptop: Option<&'a Texture2D>,
     pub cpp_comedy: Option<&'a Texture2D>,
     pub cpp_barrage: Option<&'a Texture2D>,
     pub trash: Option<&'a Texture2D>,
@@ -61,6 +62,15 @@ const DUKE: [Frame; 8] = [
     frame([421., 520., 319., 389.], [162., 471.]),
     frame([806., 532., 344., 441.], [175., 446.]),
     frame([1171., 621., 348., 356.], [177., 359.]),
+];
+
+const CPP_LAPTOP: [Frame; 6] = [
+    frame([0., 0., 512., 512.], [336., 511.]),
+    frame([512., 0., 512., 512.], [271., 511.]),
+    frame([1024., 0., 512., 512.], [241., 511.]),
+    frame([0., 512., 512., 512.], [326., 491.]),
+    frame([512., 512., 512., 512.], [288., 494.]),
+    frame([1024., 512., 512., 512.], [253., 491.]),
 ];
 
 const CPP_COMEDY: [Frame; 6] = [
@@ -137,7 +147,14 @@ pub(super) fn draw_authored_actors(
         }
         CharacterId::Cpp => {
             if let (Some(comedy), Some(barrage)) = (textures.cpp_comedy, textures.cpp_barrage) {
-                draw_cpp_story(draw, sequence, comedy, barrage, textures.font);
+                draw_cpp_story(
+                    draw,
+                    sequence,
+                    comedy,
+                    barrage,
+                    textures.cpp_laptop,
+                    textures.font,
+                );
             }
         }
         _ => {}
@@ -310,6 +327,7 @@ fn draw_cpp_story(
     sequence: &SuperSequence,
     comedy: &Texture2D,
     barrage: &Texture2D,
+    laptop: Option<&Texture2D>,
     font: Option<&Font>,
 ) {
     let mut anchor = Vector2::new(sequence.attacker_anchor.x, sequence.attacker_anchor.y);
@@ -317,6 +335,28 @@ fn draw_cpp_story(
     let sign = if right { 1. } else { -1. };
     let (texture, frame) = match sequence.phase() {
         SuperPhase::Freeze => return,
+        SuperPhase::CppLaptop => {
+            let local = sequence.tick - sequence.phase_span().start;
+            let key = match local {
+                0..=17 => 0,
+                18..=31 => 1,
+                32..=45 => 2,
+                46..=111 => {
+                    if (local / 7).is_multiple_of(2) {
+                        3
+                    } else {
+                        4
+                    }
+                }
+                _ => 5,
+            };
+            anchor.y -= (local as f32 * 0.14).sin().abs() * 1.5;
+            if let Some(laptop) = laptop {
+                (laptop, CPP_LAPTOP[key])
+            } else {
+                (comedy, CPP_COMEDY[4])
+            }
+        }
         SuperPhase::CppFootshot => {
             if sequence.tick >= CPP_FOOTSHOT_TICK {
                 let local = (sequence.tick - CPP_FOOTSHOT_TICK) as f32;
@@ -372,7 +412,10 @@ fn draw_cpp_story(
             }
         }
         SuperPhase::CppFinisher => (barrage, CPP_BARRAGE[5]),
-        SuperPhase::Restore => (comedy, CPP_COMEDY[4]),
+        SuperPhase::CTerminalStorm
+        | SuperPhase::CBlueScreen
+        | SuperPhase::CReboot
+        | SuperPhase::Restore => (comedy, CPP_COMEDY[4]),
         _ => return,
     };
     shadow(draw, Vector2::new(anchor.x, FLOOR_Y), 46., 0.35);
@@ -479,6 +522,7 @@ mod tests {
         for (path, frames) in [
             ("duke/collector-poses.png", DUKE.as_slice()),
             ("cpp/footgun-comedy.png", CPP_COMEDY.as_slice()),
+            ("cpp/laptop.png", CPP_LAPTOP.as_slice()),
             ("cpp/footgun-barrage.png", CPP_BARRAGE.as_slice()),
             ("trash/garbage-items.png", TRASH.as_slice()),
         ] {

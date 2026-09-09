@@ -75,6 +75,7 @@ def main() -> None:
     active: dict[str, tuple[int, int]] = {}  # clip -> sample offset, trace entry
     trace: list[dict] = []
     music_trace: list[dict] = []
+    music_changes: list[dict] = []
     track_cache: dict[str, np.ndarray] = {}
     current_track: str | None = None
     music_cursor = 0
@@ -82,7 +83,8 @@ def main() -> None:
     position = 0
     timeline = []
     for scenario in schedule["scenarios"]:
-        timeline.append((scenario["video_frames"][0], {"music_track": scenario["music_track"]}))
+        timeline.append((scenario["video_frames"][0], {"music_track": scenario["music_track"], "scenario_start": True}))
+        timeline.extend((event["video_frame"], event) for event in scenario.get("arena_transitions", []))
         timeline.extend((event["video_frame"], event) for event in scenario["audio_events"])
     timeline.sort(key=lambda item: item[0])  # Stable: preserve same-frame event order.
 
@@ -128,9 +130,18 @@ def main() -> None:
         advance(round(frame * RATE / fps))
         if "music_track" in event:
             track_id = event["music_track"]
-            paused = False
+            if event.get("scenario_start", False):
+                paused = False
+            previous_track, previous_cursor = current_track, music_cursor
             if track_id != current_track:
                 current_track, music_cursor = track_id, 0
+            music_changes.append({
+                "video_frame": frame, "previous_track": previous_track,
+                "track": track_id, "paused": paused,
+                "previous_source_cursor_seconds": previous_cursor / RATE,
+                "source_cursor_seconds": music_cursor / RATE,
+                "reason": "scenario_start" if event.get("scenario_start") else "arena_transition",
+            })
             if track_id not in track_cache:
                 track = tracks[track_id]
                 pitch = max(0.01, track.get("pitch", 1.0))
@@ -142,6 +153,11 @@ def main() -> None:
             for _, entry in active.values():
                 trace[entry].update(actual_end_frame=frame, interrupted_by="super.start")
             active.clear()
+            # AudioPlayer restarts authored phase rotations for every sequence,
+            # including replays after cancellation partway through a binding.
+            for index, binding in enumerate(manifest["bindings"]):
+                if binding["cue"].startswith("super."):
+                    cursors[index] = 0
             paused = True
         elif cue == "super.end":
             paused = False
@@ -206,6 +222,7 @@ def main() -> None:
         "master_gain_db": float(20 * np.log10(master_gain)),
         "master_normalization_or_limiter": "Constant attenuation only when needed for -2dBFS peak headroom; no compressor or limiter, preserve relative manifest dynamics",
         "sound_events": trace, "music_playback_intervals": music_trace,
+        "music_track_changes": music_changes,
         "music_sources": {key: {"file": tracks[key]["file"], "sha256": sha256(ROOT / tracks[key]["file"])} for key in track_cache},
     }
     args.report.parent.mkdir(parents=True, exist_ok=True)

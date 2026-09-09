@@ -1,0 +1,1110 @@
+{
+  "method": "Actual World snapshots, shared fighter renderer, 0.48 visual scale for comparison",
+  "samples": [
+    {
+      "character": "rust",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_00",
+      "health": 92,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.0, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "rust",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_00",
+      "health": 92,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.033333335, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 2
+    },
+    {
+      "character": "rust",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_01",
+      "health": 92,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.06666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 4
+    },
+    {
+      "character": "rust",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_01",
+      "health": 92,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.11666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 7
+    },
+    {
+      "character": "rust",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_02",
+      "health": 92,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.16666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 10
+    },
+    {
+      "character": "rust",
+      "clip": "idle",
+      "feet_y": 616.0,
+      "frame": "idle_00",
+      "health": 92,
+      "kind": "hit",
+      "reaction": "None",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "duke",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_00",
+      "health": 104,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.0, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "duke",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_00",
+      "health": 104,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.033333335, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 2
+    },
+    {
+      "character": "duke",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_01",
+      "health": 104,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.06666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 4
+    },
+    {
+      "character": "duke",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_02",
+      "health": 104,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.11666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 7
+    },
+    {
+      "character": "duke",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_02",
+      "health": 104,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.16666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 10
+    },
+    {
+      "character": "duke",
+      "clip": "idle",
+      "feet_y": 616.0,
+      "frame": "idle_00",
+      "health": 104,
+      "kind": "hit",
+      "reaction": "None",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "go",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_00",
+      "health": 84,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.0, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "go",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_00",
+      "health": 84,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.033333335, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 2
+    },
+    {
+      "character": "go",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_01",
+      "health": 84,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.06666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 4
+    },
+    {
+      "character": "go",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_02",
+      "health": 84,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.11666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 7
+    },
+    {
+      "character": "go",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_02",
+      "health": 84,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.16666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 10
+    },
+    {
+      "character": "go",
+      "clip": "idle",
+      "feet_y": 616.0,
+      "frame": "idle_00",
+      "health": 84,
+      "kind": "hit",
+      "reaction": "None",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "c",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_0",
+      "health": 96,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.0, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "c",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_0",
+      "health": 96,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.033333335, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 2
+    },
+    {
+      "character": "c",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_1",
+      "health": 96,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.06666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 4
+    },
+    {
+      "character": "c",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_1",
+      "health": 96,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.11666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 7
+    },
+    {
+      "character": "c",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_2",
+      "health": 96,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.16666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 10
+    },
+    {
+      "character": "c",
+      "clip": "idle",
+      "feet_y": 616.0,
+      "frame": "idle_0",
+      "health": 96,
+      "kind": "hit",
+      "reaction": "None",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "python",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_00",
+      "health": 88,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.0, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "python",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_00",
+      "health": 88,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.033333335, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 2
+    },
+    {
+      "character": "python",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_01",
+      "health": 88,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.06666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 4
+    },
+    {
+      "character": "python",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_01",
+      "health": 88,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.11666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 7
+    },
+    {
+      "character": "python",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_02",
+      "health": 88,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.16666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 10
+    },
+    {
+      "character": "python",
+      "clip": "idle",
+      "feet_y": 616.0,
+      "frame": "idle_00",
+      "health": 88,
+      "kind": "hit",
+      "reaction": "None",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "cpp",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_0",
+      "health": 90,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.0, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "cpp",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_0",
+      "health": 90,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.033333335, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 2
+    },
+    {
+      "character": "cpp",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_1",
+      "health": 90,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.06666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 4
+    },
+    {
+      "character": "cpp",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_2",
+      "health": 90,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.11666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 7
+    },
+    {
+      "character": "cpp",
+      "clip": "hit",
+      "feet_y": 616.0,
+      "frame": "hit_2",
+      "health": 90,
+      "kind": "hit",
+      "reaction": "Some(ReactionVisualState { kind: Hit, elapsed_seconds: 0.16666667, duration_seconds: 0.20000002, strength: 0.73333335, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 10
+    },
+    {
+      "character": "cpp",
+      "clip": "idle",
+      "feet_y": 616.0,
+      "frame": "idle_0",
+      "health": 90,
+      "kind": "hit",
+      "reaction": "None",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "rust",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_00",
+      "health": 82,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.0, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "rust",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_00",
+      "health": 82,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.033333335, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 2
+    },
+    {
+      "character": "rust",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_01",
+      "health": 82,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.06666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 4
+    },
+    {
+      "character": "rust",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_01",
+      "health": 82,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.11666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 7
+    },
+    {
+      "character": "rust",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_02",
+      "health": 82,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.16666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 10
+    },
+    {
+      "character": "rust",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_03",
+      "health": 82,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.23333333, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "duke",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_spectacle_00",
+      "health": 94,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.0, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "duke",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_spectacle_00",
+      "health": 94,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.033333335, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 2
+    },
+    {
+      "character": "duke",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_spectacle_00",
+      "health": 94,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.06666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 4
+    },
+    {
+      "character": "duke",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_spectacle_01",
+      "health": 94,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.11666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 7
+    },
+    {
+      "character": "duke",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_spectacle_01",
+      "health": 94,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.16666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 10
+    },
+    {
+      "character": "duke",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_spectacle_02",
+      "health": 94,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.23333333, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "go",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "hit_00",
+      "health": 74,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.0, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "go",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "hit_00",
+      "health": 74,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.033333335, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 2
+    },
+    {
+      "character": "go",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "hit_00",
+      "health": 74,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.06666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 4
+    },
+    {
+      "character": "go",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "hit_01",
+      "health": 74,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.11666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 7
+    },
+    {
+      "character": "go",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "hit_02",
+      "health": 74,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.16666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 10
+    },
+    {
+      "character": "go",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "hit_02",
+      "health": 74,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.23333333, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "c",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_spectacle_00",
+      "health": 86,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.0, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "c",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_spectacle_00",
+      "health": 86,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.033333335, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 2
+    },
+    {
+      "character": "c",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_spectacle_00",
+      "health": 86,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.06666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 4
+    },
+    {
+      "character": "c",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_spectacle_01",
+      "health": 86,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.11666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 7
+    },
+    {
+      "character": "c",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_spectacle_01",
+      "health": 86,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.16666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 10
+    },
+    {
+      "character": "c",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_spectacle_02",
+      "health": 86,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.23333333, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "python",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_00",
+      "health": 78,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.0, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "python",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_00",
+      "health": 78,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.033333335, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 2
+    },
+    {
+      "character": "python",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_00",
+      "health": 78,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.06666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 4
+    },
+    {
+      "character": "python",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_01",
+      "health": 78,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.11666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 7
+    },
+    {
+      "character": "python",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_01",
+      "health": 78,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.16666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 10
+    },
+    {
+      "character": "python",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_02",
+      "health": 78,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.23333333, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "cpp",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_00",
+      "health": 80,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.0, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "cpp",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_00",
+      "health": 80,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.033333335, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 2
+    },
+    {
+      "character": "cpp",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_00",
+      "health": 80,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.06666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 4
+    },
+    {
+      "character": "cpp",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_01",
+      "health": 80,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.11666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 7
+    },
+    {
+      "character": "cpp",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_01",
+      "health": 80,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.16666667, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 10
+    },
+    {
+      "character": "cpp",
+      "clip": "heavy_hit",
+      "feet_y": 616.0,
+      "frame": "heavy_hit_02",
+      "health": 80,
+      "kind": "heavy",
+      "reaction": "Some(ReactionVisualState { kind: HeavyHit, elapsed_seconds: 0.23333333, duration_seconds: 0.3, strength: 1.35, guarded: false, crouched: false, landed: false, cinematic: false })",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "rust",
+      "clip": "launched",
+      "feet_y": 616.0,
+      "frame": "launched_00",
+      "health": 68,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.0, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "rust",
+      "clip": "launched",
+      "feet_y": 583.5,
+      "frame": "launched_01",
+      "health": 68,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.1, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 6
+    },
+    {
+      "character": "rust",
+      "clip": "launched",
+      "feet_y": 574.3888549804688,
+      "frame": "launched_02",
+      "health": 68,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.23333333, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "rust",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_01",
+      "health": 68,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.033333335, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 26
+    },
+    {
+      "character": "rust",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_02",
+      "health": 68,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.31666672, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 43
+    },
+    {
+      "character": "rust",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_03",
+      "health": 68,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.58333343, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 59
+    },
+    {
+      "character": "duke",
+      "clip": "launched",
+      "feet_y": 616.0,
+      "frame": "launched_spectacle_00",
+      "health": 80,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.0, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "duke",
+      "clip": "launched",
+      "feet_y": 583.5,
+      "frame": "launched_spectacle_01",
+      "health": 80,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.1, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 6
+    },
+    {
+      "character": "duke",
+      "clip": "launched",
+      "feet_y": 574.3888549804688,
+      "frame": "launched_spectacle_02",
+      "health": 80,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.23333333, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "duke",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_mvp_01",
+      "health": 80,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.033333335, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 26
+    },
+    {
+      "character": "duke",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_mvp_02",
+      "health": 80,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.31666672, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 43
+    },
+    {
+      "character": "duke",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_mvp_03",
+      "health": 80,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.58333343, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 59
+    },
+    {
+      "character": "go",
+      "clip": "launched",
+      "feet_y": 616.0,
+      "frame": "hit_00",
+      "health": 60,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.0, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "go",
+      "clip": "launched",
+      "feet_y": 583.5,
+      "frame": "hit_01",
+      "health": 60,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.1, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 6
+    },
+    {
+      "character": "go",
+      "clip": "launched",
+      "feet_y": 574.3888549804688,
+      "frame": "hit_02",
+      "health": 60,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.23333333, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "go",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "hit_00",
+      "health": 60,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.033333335, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 26
+    },
+    {
+      "character": "go",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "hit_02",
+      "health": 60,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.31666672, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 43
+    },
+    {
+      "character": "go",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "hit_02",
+      "health": 60,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.58333343, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 59
+    },
+    {
+      "character": "c",
+      "clip": "launched",
+      "feet_y": 616.0,
+      "frame": "launched_spectacle_00",
+      "health": 72,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.0, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "c",
+      "clip": "launched",
+      "feet_y": 583.5,
+      "frame": "launched_spectacle_01",
+      "health": 72,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.1, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 6
+    },
+    {
+      "character": "c",
+      "clip": "launched",
+      "feet_y": 574.3888549804688,
+      "frame": "launched_spectacle_02",
+      "health": 72,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.23333333, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "c",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_mvp_01",
+      "health": 72,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.033333335, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 26
+    },
+    {
+      "character": "c",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_mvp_02",
+      "health": 72,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.31666672, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 43
+    },
+    {
+      "character": "c",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_mvp_03",
+      "health": 72,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.58333343, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 59
+    },
+    {
+      "character": "python",
+      "clip": "launched",
+      "feet_y": 616.0,
+      "frame": "launched_00",
+      "health": 64,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.0, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "python",
+      "clip": "launched",
+      "feet_y": 583.5,
+      "frame": "launched_01",
+      "health": 64,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.1, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 6
+    },
+    {
+      "character": "python",
+      "clip": "launched",
+      "feet_y": 574.3888549804688,
+      "frame": "launched_02",
+      "health": 64,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.23333333, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "python",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_01",
+      "health": 64,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.033333335, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 26
+    },
+    {
+      "character": "python",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_02",
+      "health": 64,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.31666672, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 43
+    },
+    {
+      "character": "python",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_03",
+      "health": 64,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.58333343, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 59
+    },
+    {
+      "character": "cpp",
+      "clip": "launched",
+      "feet_y": 616.0,
+      "frame": "launched_00",
+      "health": 66,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.0, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 0
+    },
+    {
+      "character": "cpp",
+      "clip": "launched",
+      "feet_y": 583.5,
+      "frame": "launched_01",
+      "health": 66,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.1, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 6
+    },
+    {
+      "character": "cpp",
+      "clip": "launched",
+      "feet_y": 574.3888549804688,
+      "frame": "launched_02",
+      "health": 66,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Launched, elapsed_seconds: 0.23333333, duration_seconds: 0.4121212, strength: 2.0, guarded: false, crouched: false, landed: false, cinematic: true })",
+      "tick_since_contact": 14
+    },
+    {
+      "character": "cpp",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_mvp_01",
+      "health": 66,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.033333335, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 26
+    },
+    {
+      "character": "cpp",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_mvp_02",
+      "health": 66,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.31666672, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 43
+    },
+    {
+      "character": "cpp",
+      "clip": "knockdown",
+      "feet_y": 616.0,
+      "frame": "knockdown_mvp_03",
+      "health": 66,
+      "kind": "super",
+      "reaction": "Some(ReactionVisualState { kind: Knockdown, elapsed_seconds: 0.58333343, duration_seconds: 0.6, strength: 2.0, guarded: false, crouched: false, landed: true, cinematic: true })",
+      "tick_since_contact": 59
+    }
+  ],
+  "verification": {
+    "matrix_cases": 1704,
+    "matrix_dimensions": "71 supported character/move pairs \u00d7 6 defenders \u00d7 2 directions \u00d7 2 collision metadata modes",
+    "reaction_tests_passed": 7,
+    "legacy_suites_passed": [
+      "sprite_playback",
+      "sprite_selection",
+      "throws_launches",
+      "authored_super_sequences"
+    ],
+    "visual_review": "Inspected all three sheets; reactions visibly progress through atlas drawings; Go retains existing hit art with continuous flight/floor rotation.",
+    "super_velocity": "vy=world_px(-340), vx<=world_px(90), reduced near corners to preserve world_px(24) inner body margin",
+    "verified_source_files_sha256": {
+      "src/combat/fighter.rs": "04fab728c5dcef8cf0b3629b19a2550d8273a450dd0c69019f3d1916bd22c5e8",
+      "src/combat/fighter/reactions.rs": "84d7d37b4fee97eba99762baee9468e7d697572d23357183000e15971742b973",
+      "src/engine/sprites/reaction.rs": "ed63112ffa2707778edd0ac234d2d2fe63afb12f84c21ea1e0cbb23cdbb06728",
+      "src/engine/sprites/draw.rs": "9e8e02415b8d55677d32dd83e00f978f7ec07b123924dfeb6ed03934f4a7e215",
+      "examples/capture_reaction_review.rs": "b63012f342c59ad546a434bd31001fe3863e45e47612e857caf05732efca2536"
+    },
+    "full_test_run": {
+      "passed": 332,
+      "ignored": 1,
+      "scope": "cargo test --all-targets; after this run the existing reaction KO test was extended for grounded Go, targeted matrix and strict Clippy rerun passed"
+    }
+  }
+}

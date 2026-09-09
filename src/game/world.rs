@@ -86,6 +86,7 @@ pub struct World {
     sprite_combat_manifests: WorldSpriteCombatManifests,
     throw_sequence: Option<ThrowSequence>,
     super_sequence: Option<crate::combat::super_sequence::SuperSequence>,
+    arena_override: Option<crate::game::arena::ArenaId>,
 }
 
 impl World {
@@ -136,6 +137,7 @@ impl World {
             sprite_combat_manifests: WorldSpriteCombatManifests::default(),
             throw_sequence: None,
             super_sequence: None,
+            arena_override: None,
         };
         world.record_combat(CombatLogKind::RoundStarted {
             player_one,
@@ -207,6 +209,19 @@ impl World {
     /// Returns elapsed time inside the pre-fight countdown.
     pub fn countdown_elapsed_seconds(&self) -> f32 {
         (ROUND_COUNTDOWN_TOTAL_SECONDS - self.countdown_timer).max(0.0)
+    }
+
+    /// Returns the arena mutation owned by this match, independent of preferences.
+    pub const fn arena_override(&self) -> Option<crate::game::arena::ArenaId> {
+        self.arena_override
+    }
+
+    /// Resolves the live match arena without changing the caller's selected base.
+    pub fn effective_arena(
+        &self,
+        base: crate::game::arena::ArenaId,
+    ) -> crate::game::arena::ArenaId {
+        self.arena_override.unwrap_or(base)
     }
 
     /// Returns the character id used by Player 1.

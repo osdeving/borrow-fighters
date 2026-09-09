@@ -72,8 +72,12 @@ impl SpriteAtlasAsset {
 pub struct GameAssets {
     pub arenas: ArenaAssets,
     /// Separate authorial super props; they never supply combat geometry.
-    pub rust_mutation_props: Option<Texture2D>,
     pub duke_collector_poses: Option<Texture2D>,
+    pub cpp_laptop: Option<Texture2D>,
+    pub python_transform: Option<Texture2D>,
+    pub python_serpent: Option<Texture2D>,
+    pub python_revert: Option<Texture2D>,
+    pub python_celebrate: Option<Texture2D>,
     pub cpp_footgun_comedy: Option<Texture2D>,
     pub cpp_footgun_barrage: Option<Texture2D>,
     pub garbage_items: Option<Texture2D>,
@@ -171,10 +175,30 @@ impl GameAssets {
     /// Loads all optional prototype assets.
     pub fn load(raylib: &mut RaylibHandle, thread: &RaylibThread) -> Self {
         Self {
-            rust_mutation_props: load_smooth_texture_optional(
+            cpp_laptop: load_smooth_texture_optional(
                 raylib,
                 thread,
-                "assets/production/super-sequences/rust/mutation-props.png",
+                "assets/production/super-sequences/cpp/laptop.png",
+            ),
+            python_transform: load_smooth_texture_optional(
+                raylib,
+                thread,
+                "assets/production/super-sequences/python/transform.png",
+            ),
+            python_serpent: load_smooth_texture_optional(
+                raylib,
+                thread,
+                "assets/production/super-sequences/python/serpent.png",
+            ),
+            python_revert: load_smooth_texture_optional(
+                raylib,
+                thread,
+                "assets/production/super-sequences/python/revert.png",
+            ),
+            python_celebrate: load_smooth_texture_optional(
+                raylib,
+                thread,
+                "assets/production/super-sequences/python/celebrate.png",
             ),
             duke_collector_poses: load_smooth_texture_optional(
                 raylib,

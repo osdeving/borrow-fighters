@@ -7,7 +7,9 @@ use std::{collections::HashMap, path::Path};
 
 use raylib::prelude::*;
 
-use crate::audio::{AudioBank, AudioClipDefinition, AudioEvent, AudioMusicDefinition, MusicTrack};
+use crate::audio::{
+    AudioBank, AudioClipDefinition, AudioCue, AudioEvent, AudioMusicDefinition, MusicTrack,
+};
 
 #[cfg(test)]
 mod live_review;
@@ -293,6 +295,17 @@ impl<'aud> AudioPlayer<'aud> {
             return;
         }
 
+        if event.cue == AudioCue::SuperStart {
+            // Super variants follow authored phases (for example morph, then
+            // grow). A replay after an abort must restart that order while
+            // ordinary fighter voices keep their independent variation.
+            for (binding, cursor) in self.bank.bindings().iter().zip(&mut self.binding_cursors) {
+                if binding.cue.starts_with("super.") {
+                    *cursor = 0;
+                }
+            }
+        }
+
         let Some(binding_index) = self.bank.binding_index_for_event(event) else {
             return;
         };
@@ -302,7 +315,9 @@ impl<'aud> AudioPlayer<'aud> {
         let Some(cursor) = self.binding_cursors.get_mut(binding_index) else {
             return;
         };
-        let Some(clip_id) = next_loaded_clip_id(clip_ids, &self.sounds, cursor) else {
+        let Some(clip_id) =
+            next_loaded_clip_id(clip_ids, |id| self.sounds.contains_key(id), cursor)
+        else {
             return;
         };
         let Some(loaded) = self.sounds.get(clip_id) else {
@@ -337,9 +352,9 @@ impl<'aud> LoadedMusic<'aud> {
     }
 }
 
-fn next_loaded_clip_id<'clips, 'aud>(
+fn next_loaded_clip_id<'clips>(
     clip_ids: &'clips [String],
-    sounds: &HashMap<String, LoadedSound<'aud>>,
+    is_loaded: impl Fn(&str) -> bool,
     cursor: &mut usize,
 ) -> Option<&'clips str> {
     if clip_ids.is_empty() {
@@ -350,7 +365,7 @@ fn next_loaded_clip_id<'clips, 'aud>(
     for offset in 0..clip_ids.len() {
         let index = (start + offset) % clip_ids.len();
         let clip_id = clip_ids[index].as_str();
-        if sounds.contains_key(clip_id) {
+        if is_loaded(clip_id) {
             *cursor = (index + 1) % clip_ids.len();
             return Some(clip_id);
         }
@@ -387,6 +402,50 @@ mod tests {
         assert!(!keeps_current_music(Some("combat"), "menu", true, false));
         assert!(!keeps_current_music(Some("combat"), "combat", false, false));
         assert!(!keeps_current_music(None, "combat", true, false));
+    }
+
+    #[test]
+    fn replay_after_the_first_mutation_restarts_phase_sounds_without_resetting_voices() {
+        use crate::{characters::CharacterId, combat::fighter::PlayerSlot};
+        let mut player = AudioPlayer::disabled();
+        player.bank = AudioBank::load(AUDIO_MANIFEST_PATH).unwrap();
+        player.binding_cursors = vec![0; player.bank.bindings().len()];
+        player.enabled = true;
+        let voice = AudioEvent::fighter_hurt(PlayerSlot::Two, CharacterId::Rust);
+        sample_variation(&mut player, &voice);
+        let voice_binding = player.bank.binding_index_for_event(&voice).unwrap();
+        let voice_cursor = player.binding_cursors[voice_binding];
+        assert_ne!(
+            voice_cursor, 0,
+            "the hurt voice must have multiple variants"
+        );
+
+        for character in [CharacterId::Python, CharacterId::Rust] {
+            let start =
+                AudioEvent::new(AudioCue::SuperStart).with_fighter(PlayerSlot::One, character);
+            let mutation =
+                AudioEvent::new(AudioCue::SuperMutation).with_fighter(PlayerSlot::One, character);
+            player.play(&start);
+            let first = sample_variation(&mut player, &mutation);
+            // Reset/replay occurs before the second phase. The next SuperStart
+            // must restore the first phase even when the starting sound is absent.
+            player.cancel_cinematic();
+            player.play(&start);
+            assert_eq!(sample_variation(&mut player, &mutation), first);
+            assert_ne!(sample_variation(&mut player, &mutation), first);
+            assert_eq!(player.binding_cursors[voice_binding], voice_cursor);
+        }
+    }
+
+    fn sample_variation(player: &mut AudioPlayer<'_>, event: &AudioEvent) -> String {
+        let binding = player.bank.binding_index_for_event(event).unwrap();
+        next_loaded_clip_id(
+            player.bank.binding_clip_ids(binding).unwrap(),
+            |_| true,
+            &mut player.binding_cursors[binding],
+        )
+        .unwrap()
+        .to_owned()
     }
 
     fn assert_near(actual: f32, expected: f32) {

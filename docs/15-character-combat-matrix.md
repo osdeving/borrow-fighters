@@ -145,7 +145,7 @@ Os cinco arremessos usam contato 10..12 e duração 48f. A arte avança enquanto
 ## Supers cinematográficos e captura autoral
 
 Input: `Y` / `]` / `LB+RT`. Assinaturas (`T` / `\\` / `RT`) continuam separadas.
-Na rodada de setembro de 2026, estes quatro movimentos passaram de uma hitbox próxima
+Na rodada de setembro de 2026, estes cinco movimentos passaram de uma hitbox próxima
 para sequências que capturam o alvo em qualquer distância quando aceitas. O
 atacante precisa estar no chão e livre de outra ação/stun. São oito frames de
 superfreeze, música pausada e roteiro sem controles até a restauração. A defesa
@@ -153,26 +153,27 @@ na entrada, em pé ou baixa, é conservada. O chip não pode reduzir a vida abai
 
 | Personagem / nome exibido | Duração a 60 Hz | Dano / chip máximo | Contatos e apresentação |
 |---|---:|---:|---|
-| Rust / Ownership Eclipse | 300f / 5s | 28 / 7 | Apagão 8..10; Sirius se materializa, cabos e placas alteram o cenário; pulso no frame 212, queda e dissolução. |
+| Rust / Ownership Eclipse | 300f / 5s | 28 / 7 | Apagão 8..10; blocos substituem a arena atual por Sirius; troca real no frame 125, pulso no 212. Sirius permanece após o golpe. |
 | Duke / Garbage Collector | 350f / 5,83s | 32 / 8 | Lixo 8..59, chão 60..83; 12 coletas a cada 12 frames; queda gigante 228..263 e contato 264. |
 | Old C / General Protection Fault / #GP | 320f / 5,33s | 32 / 8 | Terminais 8..104, tela azul 105..179, BIOS 180..221; reboot e contato 222, alvo caído. |
-| C++ / Undefined Behavior: Footgun | 356f / 5,93s | 30 / 9 | Disparo 44, pulinhos 62..109, raiva 110..139, corrida 140..203; 8 contatos de 3 HP nos frames 204..274 e final de 6 HP no frame 284. |
+| C++ / Undefined Behavior: Footgun | 632f / 10,53s | 36 / 10 | Notebook 8..147; disparo 184, pulinhos e raiva; corrida 280..343; 8 contatos de 3 HP em 344..414, final 424 de 6 HP; terminais/BSOD/BIOS; reboot 566 de 6 HP. |
+| Python / import devour | 528f / 8,8s | 32 / 8 | Preparação, transformação 62..157, crescimento 158..229, boca/bote; engole e acerta 304, alvo retorna 388; salto 400..443, paz 444..487 e restauração. |
 
 O tiro no pé é visual, sem perda de HP própria. C++ percorre o espaço até o alvo;
-Java faz a queda final na posição capturada. Lixo, clones, placas e janelas são
+Java faz a queda final na posição capturada. Lixo, clones, blocos e janelas são
 decoração; apenas os contatos listados alteram vida. Um KO é anunciado depois
 do roteiro terminar. Pedidos simultâneos elegíveis se anulam sem priorizar P1.
 
 Os `MoveId` históricos `DukeJvmOverdrive`, `CKernelPanic` e
-`CppTemplateSingularity` permanecem identificadores internos compatíveis, mas os
+`CppTemplateSingularity` e `PythonEventHorizon` permanecem identificadores internos compatíveis, mas os
 nomes exibidos acima descrevem o golpe atual. O tuning autoral está em
 [`super_sequence.rs`](../src/combat/super_sequence.rs), não nos tempos melee antigos.
-Go (`Goroutine Storm`) e Python (`Import Universe`) mantêm apresentação ampla e
-contato próximo; não receberam este roteiro de captura.
+Go (`Million Goroutines`) mantém apresentação ampla e contato próximo. Python
+passou a ter captura autoral na [rodada 24](24-reactions-and-transformations.md).
 
-Custo, raridade e esquivas/interruptibilidade dos quatro supers ficam para o
+Custo, raridade e esquivas/interruptibilidade dos cinco supers ficam para o
 balanceamento seguinte. A captura garantida atual é ferramenta de teste,
-conforme o [plano 23](23-authored-super-sequences.md). O [showcase](10-greybox-playtest.md#move-showcase)
+conforme os [planos23](23-authored-super-sequences.md) e [24](24-reactions-and-transformations.md). O [showcase](10-greybox-playtest.md#move-showcase)
 usa duração completa, resultado real, pausa, repetição e troca de lado.
 
 ## Defesa, rasteira e queda

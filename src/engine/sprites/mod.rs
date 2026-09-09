@@ -7,6 +7,7 @@ pub mod animation;
 pub mod combat;
 mod draw;
 pub mod manifest;
+mod reaction;
 mod selection;
 
 pub use animation::{frame_for_clip_at, frame_for_fighter_clip_at};
@@ -15,10 +16,17 @@ pub use combat::{
     projected_projectile_origin_for_clip,
 };
 pub(crate) use draw::mirrored_source_rect;
-pub use draw::{draw_fighter_sprite, draw_manifest_fighter_sprite, draw_projectile_texture};
+pub use draw::{
+    draw_fighter_sprite, draw_manifest_fighter_sprite, draw_manifest_fighter_sprite_placed,
+    draw_projectile_texture,
+};
 pub use manifest::{
     SPRITE_SCHEMA, SpriteClip, SpriteCombatBox, SpriteCombatPoint, SpriteFrame, SpriteFrameCombat,
     SpriteManifest, SpriteManifestError, SpritePivot, SpriteRect, SpriteSize,
+};
+pub use reaction::{
+    FighterSpritePresentation, FighterVisualPlacement, FighterVisualTransform,
+    fighter_reaction_transform, frame_for_fighter_state,
 };
 pub use selection::{
     FighterSpriteClip, FighterSpriteFrame, fighter_clip_elapsed_seconds, fighter_sprite_clip,

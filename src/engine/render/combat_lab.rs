@@ -107,6 +107,7 @@ pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, asset
             spritesheet: assets.fighter_spritesheet.as_ref(),
             world_elapsed_seconds: lab.elapsed_seconds(),
             forced_clip: forced_clip_for_pose(lab.pose()),
+            placement: None,
         },
     );
 

@@ -90,12 +90,50 @@ fn live_music_pause_resume_and_cancel_preserve_stream_position() {
     pump(&player, 250);
     let menu_after_cancel = position(&player);
     assert!(menu_after_cancel > menu_paused_at + 0.1);
+
+    // Rust replaces Java Street's music during the super, then starts Sirius
+    // from zero only when the sequence releases its music pause.
+    player.play_music(MusicTrack::CombatConsoleFloor);
+    pump(&player, 300);
+    let arena_before_pause = position(&player);
+    assert!(arena_before_pause > 0.15);
+    player.set_cinematic_paused(true);
+    player.play_music(MusicTrack::Combat);
+    let sirius_paused_at = position(&player);
+    assert!(sirius_paused_at < 0.04);
+    assert!(!playing(&player));
+    pump(&player, 250);
+    player.play_music(MusicTrack::Combat);
+    let sirius_during_pause = position(&player);
+    assert!(!playing(&player));
+    assert!((sirius_during_pause - sirius_paused_at).abs() < 0.02);
+    player.set_cinematic_paused(false);
+    let sirius_resumed_at = position(&player);
+    assert!((sirius_resumed_at - sirius_paused_at).abs() < 0.04);
+    pump(&player, 300);
+    let sirius_after_resume = position(&player);
+    assert!(sirius_after_resume > sirius_resumed_at + 0.15);
+    player.play_music(MusicTrack::CombatConsoleFloor);
+    let reset_at = position(&player);
+    assert!(reset_at < 0.04);
+    pump(&player, 250);
+    let reset_after_resume = position(&player);
+    assert!(reset_after_resume > reset_at + 0.1);
     let report = serde_json::json!({
         "kind": "live Raylib stream observation; same player calls used by three scenes",
         "scenes": records,
         "track_change_while_paused": {
             "music": "menu", "paused_at": menu_paused_at,
             "after_cancel": menu_after_cancel, "remained_paused_until_cancel": true
+        },
+        "arena_music_change_while_paused": {
+            "previous_music": "combat-console-floor", "music": "combat",
+            "previous_position": arena_before_pause,
+            "paused_at": sirius_paused_at, "during_pause": sirius_during_pause,
+            "resumed_at": sirius_resumed_at, "after_resume": sirius_after_resume,
+            "started_from_zero_after_sequence": true,
+            "reset_music": "combat-console-floor", "reset_at": reset_at,
+            "reset_after_resume": reset_after_resume
         }
     });
     let text = serde_json::to_string_pretty(&report).unwrap();

@@ -168,6 +168,8 @@ Crédito não é obrigatório, mas apreciado pela autora.
 
 ## Mixagens de sequência e rastreio
 
-Os 18 arquivos em `assets/audio/sfx/super/` combinam as gravações acima com os pacotes Kenney Interface Sounds, Impact Sounds e RPG Audio. Papel, pequenos objetos, metal pesado, impactos, sinais de erro e POST são gravações/efeitos desses pacotes CC0; não houve geração de fala. `start-duke.ogg` utiliza o recorte de HaelDB já aprovado para Duke. Os arquivos originais de voz de Duke e Python permanecem inalterados.
+Os 18 arquivos iniciais em `assets/audio/sfx/super/` combinam as gravações acima com os pacotes Kenney Interface Sounds, Impact Sounds e RPG Audio. Papel, pequenos objetos, metal pesado, impactos, sinais de erro e POST são gravações/efeitos desses pacotes CC0; não houve geração de fala. `start-duke.ogg` utiliza o recorte de HaelDB já aprovado para Duke. Os arquivos originais de voz de Duke e Python permanecem inalterados.
 
 O [registro de produção de 9 de setembro de 2026](production-2026-09-09.json) contém, para cada saída, URL de origem e download, licença, hash da gravação, intervalo recortado, filtros FFmpeg, ganhos e atrasos de cada camada, formato e hash final. A [página de audição](audition.html) inclui comparações individuais e reel com os parâmetros do manifesto.
+
+A ampliação com dez efeitos de Python e notebook da C++ está registrada em [produção das transformações](production-transformations-2026-09-09.json). Digitação/ENTER usam Kenney Interface Sounds; crescimento, bote e reversão combinam tecido Kenney RPG Audio com os slurps CC0 de Independent.nu/qubodup; o gesto final combina confirmação e sino Kenney. `start-python.ogg` reutiliza a voz `attack-snake-bite-01.ogg` de cicifyre no pitch de reprodução já aprovado (1.02), com efeitos discretos. Nenhuma voz original foi substituída ou regravada; os doze hashes protegidos permanecem iguais.

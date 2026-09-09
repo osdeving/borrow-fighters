@@ -1,0 +1,114 @@
+{
+  "recorded_at": "2026-09-09T10:27:31.314172+00:00",
+  "base_commit": "94f0c7c1e3a11294e28be0872a91d3adfd4b6f4b",
+  "checks": [
+    {
+      "check": "fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.368
+    },
+    {
+      "check": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 4.252
+    },
+    {
+      "check": "test",
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets"
+      ],
+      "exit_code": 0,
+      "seconds": 9.65,
+      "passed": 335,
+      "failed": 0,
+      "ignored": 1,
+      "targets": 39
+    }
+  ],
+  "source_sha256": {
+    "examples/capture_authored_super_review.rs": "7942b99c832922639c7b720559652598d698bcb877ed6c6042a13d68a33c4b03",
+    "examples/capture_reaction_review.rs": "b63012f342c59ad546a434bd31001fe3863e45e47612e857caf05732efca2536",
+    "src/app.rs": "a01354831eb8c8645eb313c46353481127056f14cd6f9c47275c7523eceba5a3",
+    "src/audio/mod.rs": "10b68c58cd36fb876c5e8d159fc947312d02d10d364935be4daeae5de05e4b27",
+    "src/combat/fighter.rs": "37daebd3747aef3a38d6a3c35807009ccf630ab9373d33e44d9eb815406d5e9d",
+    "src/combat/fighter/reactions.rs": "84d7d37b4fee97eba99762baee9468e7d697572d23357183000e15971742b973",
+    "src/combat/move_data.rs": "d2c2ca26c44d870b79b960f5d2ce930568dcd45ee4426c9eb5221b04467b8286",
+    "src/combat/super_sequence.rs": "93a08e6339dc2dcf581692bb64c46810235ab65dac7c8470bab612b74b34908c",
+    "src/engine/assets.rs": "38246b38cdcb8f8fa9932a800129d4cb5a1dd81b56310cae361e4735cc0b97f2",
+    "src/engine/audio.rs": "cce9222f88f5dd3afe6044f8f8fc7fb05b7cdd1439766b02f6f71669c87ffc3d",
+    "src/engine/audio/live_review.rs": "cfe7eb4fa7110838b93ca6b1605f5e467a7f55d6fe8c3de67113587b8191c01d",
+    "src/engine/render.rs": "123bbff86f52ae2113a8f690d7826d84f59bcc1d1dd9dd10b89750f93d73a1a2",
+    "src/engine/render/authored_actors.rs": "25100d804bb41df74fd94a72694b7dc32a0cf2274d616aa5d7608ac0fb229a41",
+    "src/engine/render/authored_supers.rs": "6b89a3f3e8479da4f1d10a93be62d637fb6ceb02a31a9bb970712cc36dcba254",
+    "src/engine/render/combat_lab.rs": "1d5d1d1d7e45b8236ba5cb1dbc75befbf69ff327cbe946aef75cf26a0c081778",
+    "src/engine/render/move_showcase.rs": "3287233031b0f33828513187f6558a7ac9fafcd6acb5d7dd16d99c968300964f",
+    "src/engine/render/python_super.rs": "1748a28897f03f1dcbe6a03693c7d135f05089e57cf836901d712bb9695a8655",
+    "src/engine/sprites/draw.rs": "9e8e02415b8d55677d32dd83e00f978f7ec07b123924dfeb6ed03934f4a7e215",
+    "src/engine/sprites/mod.rs": "53a5da9c995b48328c25bac738089353d5adc8795831e7f06a202a721f536854",
+    "src/engine/sprites/reaction.rs": "ed63112ffa2707778edd0ac234d2d2fe63afb12f84c21ea1e0cbb23cdbb06728",
+    "src/game/world.rs": "9b4bf6904f9b8af04ed782ca97096678502c0c7de4f416fe2b68f99313f746a8",
+    "src/game/world/supers.rs": "fbc014f50f0d77b3ea4cd964a88f1edf7d50f80c13b03e5684f5f25744003243",
+    "tests/audio_manifest.rs": "ecfbe19193ee46270fb8b60d997d63a7171720c80b2a8066f060a47fd4c5d118",
+    "tests/authored_super_sequences.rs": "1af2f9a7c1d16818bcf89e46c97ec57cd6d04d06286616f65e759d4f85982925",
+    "tests/cinematic_specials.rs": "79928937a097d3822f3bb5fa92658d8f3bcd0a3c6fdda94f6f998d7621d6acf9",
+    "tests/move_showcase.rs": "4d698acc1463e8e4b43e14075995f64b4e0b1734671f26c4a6d082651545e9fd",
+    "tests/reaction_matrix.rs": "8e68b97424e28929e9c2cab2cd8e40c599f112fe72385353f4f51979a33631da",
+    "tests/throws_launches.rs": "15434abf24e8c6d0ec087ac4d13914888f1aff75beddaf261280872d3a867c84",
+    "tools/audio/mix_authored_super_review.py": "e021c92fb79d5a3801f1c11ab9311a7789641aa35eb8839047d1b078e77f1e3e"
+  },
+  "example_binary_sha256": "1689ce57741857c29d3f5997fde25731e934d07ab0b27476da970fb489951635",
+  "render_environment": "Xvfb :88 (isolated), LIBGL_ALWAYS_SOFTWARE=1; no host input",
+  "capture_review": {
+    "right_scenarios": 5,
+    "reverse_scenarios": 5,
+    "phase_snapshots": 144,
+    "retained_final_pngs": 22,
+    "guard_scenarios": 10,
+    "damage_order": "Rust/Duke/C/C++/Python",
+    "hit_damage": [
+      28,
+      32,
+      32,
+      36,
+      32
+    ],
+    "guard_damage": [
+      7,
+      8,
+      8,
+      10,
+      8
+    ]
+  },
+  "visual_review": {
+    "result": "accepted for prototype slice",
+    "inspected": "Python morph/mouth/lunge/swallow/hop/peace in both directions; C++ laptop code/footshot/barrage/terminals/BIOS/reboot; Rust block replacement and persisted Sirius HUD; six-defender reaction sheet",
+    "motion_sampling": "Final MP4 lunge/swallow at42.2s and barrage at30.35s sampled at10fps for1.2s; real framebuffer frames, diagnostic sheets not published",
+    "limits": "Visual review is phase and sampled-motion inspection, not competitive balancing or exhaustive per-frame art approval."
+  },
+  "live_audio": "audio-stream-review.json (ignored standard-suite device test passed separately)",
+  "media": "media-review.json",
+  "documentation_checks": {
+    "github_and_skill_yaml": "passed using repository CI Ruby parser",
+    "local_markdown_links": "passed using repository CI link check",
+    "git_diff_check": "passed"
+  },
+  "video_sha256": "0ebaaaf34a7fc83a0cd977a07b2a5b135c55ddfbf3560a5c82437748d574c5bd"
+}

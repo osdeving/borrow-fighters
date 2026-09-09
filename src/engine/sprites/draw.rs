@@ -11,10 +11,11 @@ use crate::{
     engine::sprites::{
         animation::frame_for_fighter_clip_at,
         manifest::{SpriteFrame, SpriteManifest},
-        selection::{
-            FighterSpriteClip, fighter_clip_elapsed_seconds, fighter_sprite_clip,
-            fighter_sprite_frame,
+        reaction::{
+            FighterSpritePresentation, FighterVisualTransform, fighter_reaction_transform,
+            frame_for_fighter_state,
         },
+        selection::{FighterSpriteClip, fighter_sprite_clip, fighter_sprite_frame},
     },
 };
 
@@ -62,13 +63,40 @@ pub fn draw_manifest_fighter_sprite<'a>(
     tint: Color,
     texture_for_frame: impl Fn(&SpriteFrame) -> Option<&'a Texture2D>,
 ) -> bool {
+    draw_manifest_fighter_sprite_placed(
+        draw,
+        manifest,
+        fighter,
+        FighterSpritePresentation {
+            elapsed_seconds: world_elapsed_seconds,
+            forced_clip,
+            placement: None,
+        },
+        tint,
+        texture_for_frame,
+    )
+}
+
+/// Draws the actual fighter with an optional scene placement, preserving its reaction.
+pub fn draw_manifest_fighter_sprite_placed<'a>(
+    draw: &mut impl RaylibDraw,
+    manifest: &SpriteManifest,
+    fighter: &Fighter,
+    presentation: FighterSpritePresentation,
+    mut tint: Color,
+    texture_for_frame: impl Fn(&SpriteFrame) -> Option<&'a Texture2D>,
+) -> bool {
+    let world_elapsed_seconds = presentation.elapsed_seconds;
+    let forced_clip = presentation.forced_clip;
     let clip = forced_clip.unwrap_or_else(|| fighter_sprite_clip(fighter));
-    let clip_time = if forced_clip.is_some() {
-        world_elapsed_seconds
+    let defeated_floor =
+        fighter.is_defeated() && fighter.in_knockdown() && clip == FighterSpriteClip::Knockdown;
+    let frame = if forced_clip.is_some() && !defeated_floor {
+        frame_for_fighter_clip_at(manifest, clip, world_elapsed_seconds)
     } else {
-        fighter_clip_elapsed_seconds(fighter, world_elapsed_seconds)
+        frame_for_fighter_state(manifest, fighter, clip, world_elapsed_seconds)
     };
-    let Some(frame) = frame_for_fighter_clip_at(manifest, clip, clip_time) else {
+    let Some(frame) = frame else {
         return false;
     };
     let Some(texture) = texture_for_frame(frame) else {
@@ -76,8 +104,82 @@ pub fn draw_manifest_fighter_sprite<'a>(
     };
 
     let (source, dest) = manifest_frame_geometry(manifest, frame, fighter, clip);
-    draw.draw_texture_pro(texture, source, dest, Vector2::new(0.0, 0.0), 0.0, tint);
+    let authored_reaction = manifest.clip_named(clip.as_str()).is_some();
+    let transform = if forced_clip.is_none() || defeated_floor {
+        fighter_reaction_transform(fighter, authored_reaction)
+    } else {
+        FighterVisualTransform::default()
+    };
+    let (mut dest, mut origin) =
+        reaction_geometry(dest, frame, fighter, transform, authored_reaction);
+    let mut rotation = transform.rotation_degrees;
+    if let Some(placement) = presentation.placement {
+        let body = fighter.body_rect();
+        let relative_x = body.center_x() - dest.x;
+        let relative_y = body.bottom() - dest.y;
+        let (sine, cosine) = rotation.to_radians().sin_cos();
+        // Convert the center-pivot recoil to a foot pivot before applying the
+        // authored placement. Contact deformation survives shrink/rotation.
+        origin.x += relative_x * cosine + relative_y * sine;
+        origin.y += -relative_x * sine + relative_y * cosine;
+        let scale = placement.scale.max(0.001);
+        origin.x *= scale;
+        origin.y *= scale;
+        dest.width *= scale;
+        dest.height *= scale;
+        dest.x = placement.anchor.x;
+        dest.y = placement.anchor.y;
+        rotation += placement.rotation_degrees;
+        tint.a = (tint.a as f32 * placement.opacity.clamp(0.0, 1.0)) as u8;
+    }
+    draw.draw_texture_pro(texture, source, dest, origin, rotation, tint);
     true
+}
+
+/// Applies visual motion around the body center and keeps legacy floor poses grounded.
+fn reaction_geometry(
+    dest: Rectangle,
+    frame: &SpriteFrame,
+    fighter: &Fighter,
+    transform: FighterVisualTransform,
+    has_authored_clip: bool,
+) -> (Rectangle, Vector2) {
+    let body = fighter.body_rect();
+    let anchor = Vector2::new(body.center_x(), body.y + body.height * 0.5);
+    let origin = Vector2::new(
+        (anchor.x - dest.x) * transform.scale.x,
+        (anchor.y - dest.y) * transform.scale.y,
+    );
+    let mut dest = Rectangle::new(
+        anchor.x + transform.offset.x,
+        anchor.y + transform.offset.y,
+        dest.width * transform.scale.x,
+        dest.height * transform.scale.y,
+    );
+    if !has_authored_clip
+        && fighter.in_knockdown()
+        && let Some(bounds) = frame.trimmed_bounds
+    {
+        let scale_x = dest.width / frame.frame.w as f32;
+        let scale_y = dest.height / frame.frame.h as f32;
+        let left = if fighter.facing == Facing::Left {
+            frame.frame.w - bounds.x - bounds.w
+        } else {
+            bounds.x
+        };
+        let (sine, cosine) = transform.rotation_degrees.to_radians().sin_cos();
+        let bottom = [left, left + bounds.w]
+            .into_iter()
+            .flat_map(|x| {
+                [bounds.y, bounds.y + bounds.h].into_iter().map(move |y| {
+                    (x as f32 * scale_x - origin.x) * sine
+                        + (y as f32 * scale_y - origin.y) * cosine
+                })
+            })
+            .fold(f32::NEG_INFINITY, f32::max);
+        dest.y = FLOOR_Y - bottom;
+    }
+    (dest, origin)
 }
 
 /// Draws the current projectile texture centered on a projectile rectangle.

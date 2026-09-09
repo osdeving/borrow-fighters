@@ -565,6 +565,76 @@
       "bus": "sfx",
       "volume": 0.3,
       "required": true
+    },
+    {
+      "id": "sfx.super.start.python",
+      "file": "assets/audio/sfx/super/start-python.ogg",
+      "bus": "sfx",
+      "volume": 0.55,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.morph",
+      "file": "assets/audio/sfx/super/python-morph.ogg",
+      "bus": "sfx",
+      "volume": 0.48,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.grow",
+      "file": "assets/audio/sfx/super/python-grow.ogg",
+      "bus": "sfx",
+      "volume": 0.5,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.lunge",
+      "file": "assets/audio/sfx/super/python-lunge.ogg",
+      "bus": "sfx",
+      "volume": 0.57,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.swallow",
+      "file": "assets/audio/sfx/super/python-swallow.ogg",
+      "bus": "sfx",
+      "volume": 0.62,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.revert",
+      "file": "assets/audio/sfx/super/python-revert.ogg",
+      "bus": "sfx",
+      "volume": 0.48,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.celebrate",
+      "file": "assets/audio/sfx/super/python-celebrate.ogg",
+      "bus": "sfx",
+      "volume": 0.43,
+      "required": true
+    },
+    {
+      "id": "sfx.super.python.peace",
+      "file": "assets/audio/sfx/super/python-peace.ogg",
+      "bus": "sfx",
+      "volume": 0.42,
+      "required": true
+    },
+    {
+      "id": "sfx.super.cpp.typing",
+      "file": "assets/audio/sfx/super/cpp-typing.ogg",
+      "bus": "sfx",
+      "volume": 0.48,
+      "required": true
+    },
+    {
+      "id": "sfx.super.cpp.enter",
+      "file": "assets/audio/sfx/super/cpp-enter.ogg",
+      "bus": "sfx",
+      "volume": 0.47,
+      "required": true
     }
   ],
   "bindings": [
@@ -1260,6 +1330,84 @@
       "cue": "super.end",
       "clips": [
         "sfx.super.end"
+      ]
+    },
+    {
+      "cue": "super.start",
+      "character": "python",
+      "clips": [
+        "sfx.super.start.python"
+      ]
+    },
+    {
+      "cue": "super.mutation",
+      "character": "python",
+      "clips": [
+        "sfx.super.python.morph",
+        "sfx.super.python.grow"
+      ]
+    },
+    {
+      "cue": "super.lunge",
+      "character": "python",
+      "clips": [
+        "sfx.super.python.lunge"
+      ]
+    },
+    {
+      "cue": "super.swallow",
+      "character": "python",
+      "clips": [
+        "sfx.super.python.swallow"
+      ]
+    },
+    {
+      "cue": "super.revert",
+      "character": "python",
+      "clips": [
+        "sfx.super.python.revert"
+      ]
+    },
+    {
+      "cue": "super.celebrate",
+      "character": "python",
+      "clips": [
+        "sfx.super.python.celebrate"
+      ]
+    },
+    {
+      "cue": "super.peace",
+      "character": "python",
+      "clips": [
+        "sfx.super.python.peace"
+      ]
+    },
+    {
+      "cue": "super.typing",
+      "character": "cpp",
+      "clips": [
+        "sfx.super.cpp.typing"
+      ]
+    },
+    {
+      "cue": "super.enter",
+      "character": "cpp",
+      "clips": [
+        "sfx.super.cpp.enter"
+      ]
+    },
+    {
+      "cue": "super.error",
+      "character": "cpp",
+      "clips": [
+        "sfx.super.error.cascade"
+      ]
+    },
+    {
+      "cue": "super.boot",
+      "character": "cpp",
+      "clips": [
+        "sfx.super.boot.post"
       ]
     }
   ]

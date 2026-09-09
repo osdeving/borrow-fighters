@@ -4,7 +4,7 @@
 
 Implementado em corte inicial.
 
-O projeto já possui um motor leve de áudio por eventos, manifesto JSON, música via stream, controle de volume de música no menu e integração com Raylib. Os arquivos sonoros são assets CC0 para UI, impactos, música, contagem e vozes próprias de Rust, Duke/Java, Go, C, Python e C++. As quatro sequências autorais também possuem entradas sonoras e efeitos sincronizados por fase, com pausa real da música.
+O projeto já possui um motor leve de áudio por eventos, manifesto JSON, música via stream, controle de volume de música no menu e integração com Raylib. Os arquivos sonoros são assets CC0 para UI, impactos, música, contagem e vozes próprias de Rust, Duke/Java, Go, C, Python e C++. As cinco sequências autorais também possuem entradas sonoras e efeitos sincronizados por fase, com pausa real da música.
 
 ## Objetivo
 
@@ -73,15 +73,19 @@ Decisão para o Prototype 0.1:
 | `combat.hit` | impacto físico de golpe próximo |
 | `combat.block` | impacto físico em defesa |
 | `projectile.impact` | impacto de projétil |
-| `super.start` | entrada com voz do atacante e efeito específico; substitui `fighter.attack.start` nos quatro supers autorais |
+| `super.start` | entrada com voz do atacante e efeito específico; substitui `fighter.attack.start` nos cinco supers autorais |
 | `super.trash_rain` | papel, copos e resíduos caem na sequência de Duke |
 | `super.collect` | coleta curta pelos clones de Duke; três variações |
 | `super.giant_drop` | queda do Duke gigante |
-| `super.mutation` | materialização e reorganização do mundo de Rust; duas variações |
-| `super.error` | cascata de erros de Old C |
+| `super.mutation` | materialização de Rust ou transformação/crescimento da Python; duas variações próprias de cada personagem |
+| `super.error` | cascata de erros de Old C e trecho herdado pela C++ |
 | `super.boot` | sinais de POST/BIOS antes de restaurar a arena |
 | `super.footshot` | disparo cômico da C++ |
 | `super.barrage_hit` | camada rápida de deslocamento/impacto da rajada de C++; três variações |
+| `super.typing` / `super.enter` | digitação curta no notebook da C++ (frame 25) e confirmação (130) |
+| `super.lunge` / `super.swallow` | bote (270) e deglutição (304) da Python |
+| `super.revert` | retorno da serpente para Python (344) |
+| `super.celebrate` / `super.peace` | salto feliz (400) e gesto de paz (444) da Python |
 | `super.end` | encerramento discreto da sequência autoral |
 
 ## Música Atual
@@ -99,7 +103,7 @@ Decisão para o Prototype 0.1:
 
 Música usa `Music` streaming do Raylib, não `Sound`. Por isso [`App`](../src/app.rs) chama `AudioPlayer::update_streams` a cada frame. O app troca a faixa em transições de tela e quando uma nova luta muda de arena, e `Options > Music Volume` aplica um multiplicador global apenas sobre música.
 
-Na entrada de uma sequência autoral, o app chama `AudioPlayer::set_cinematic_paused(true)` antes de tocar `super.start`. O player interrompe uma única vez os sons anteriores e chama `pause_stream` na música. Os próximos cues continuam tocando; `update_streams` e chamadas repetidas de `play_music` não avançam nem reiniciam a faixa pausada. Ao terminar normalmente, `set_cinematic_paused(false)` chama `resume_stream`, preservando a posição da faixa e permitindo terminar o último efeito. Reinício, Escape e mudanças de cena/personagem usam `cancel_cinematic()`, que também interrompe os efeitos da sequência abortada antes de retomar a música. Essa pausa é independente do ducking usado em outros contextos.
+Na entrada de uma sequência autoral, o app chama `AudioPlayer::set_cinematic_paused(true)` antes de tocar `super.start`. O player interrompe uma única vez os sons anteriores e chama `pause_stream` na música. Os próximos cues continuam tocando; `update_streams` e chamadas repetidas de `play_music` não avançam nem reiniciam a faixa pausada. Ao terminar normalmente, `set_cinematic_paused(false)` chama `resume_stream`, preservando a posição da faixa e permitindo terminar o último efeito. Reinício, Escape e mudanças de cena/personagem usam `cancel_cinematic()`, que também interrompe os efeitos da sequência abortada antes de retomar a música. Essa pausa é independente do ducking usado em outros contextos. A mutação de Rust troca a faixa para Sirius no frame 125 mantendo a pausa; a nova faixa começa no cursor zero apenas ao terminar a sequência. Reiniciar a luta restaura a música da arena selecionada. O mixer de evidência [`mix_authored_super_review.py`](../tools/audio/mix_authored_super_review.py) aplica os mesmos eventos `arena_transitions` exportados no JSON.
 
 Cada evento pode carregar:
 
@@ -245,8 +249,31 @@ Este teste manual consulta `get_time_played`, verifica cues durante a pausa, can
 
 ## Cinematográficos adicionais
 
-Os cinematográficos de Go e Python mantêm os bindings anteriores de ataque e impacto. Rust, Duke, Old C e C++ usam os cues `super.*` acima, emitidos pelo relógio puro em [`src/game/world/supers.rs`](../src/game/world/supers.rs). A entrada já mistura a voz com o efeito do personagem, evitando duas vozes sobrepostas. `combat.hit`, `fighter.hurt` e os equivalentes de defesa acompanham cada contato de dano real, incluindo o chip; os efeitos decorativos não aplicam dano.
+O cinematográfico local de Go mantém os bindings anteriores de ataque e impacto.
+Rust, Duke, Old C, C++ e Python usam os cues `super.*` acima, emitidos pelo relógio
+puro em [`src/game/world/supers.rs`](../src/game/world/supers.rs). A entrada já
+mistura a voz com o efeito do personagem, evitando duas vozes sobrepostas.
+`combat.hit`, `fighter.hurt` e os equivalentes de defesa acompanham cada contato
+de dano real, incluindo o chip; os efeitos decorativos não aplicam dano.
 
-Os sons de lixo combinam papel, pequenos metais e impactos úmidos; a coleta alterna três recortes curtos. A queda gigante usa impacto grave; Rust usa metal e lâminas reverberantes; Old C usa erros digitais e POST; C++ usa disparo seco e camadas curtas de rajada. São recortes e mixagens de gravações CC0, sem fala gerada. Foram produzidos 25 arquivos de voz novos/substituídos e 18 efeitos de sequência, Ogg Vorbis mono 48 kHz, normalizados antes da codificação a −3,48 dBFS e com fades curtos. A validação das saídas decodificadas verificou ausência de clipping, amostras inválidas e arquivos vazios. A seleção subjetiva permanece disponível para audição humana no reel.
+Ao receber `SuperStart`, o player reinicia os cursores dos bindings `super.*`.
+Assim, repetir um super interrompido mantém a ordem de sons definida pelo roteiro,
+incluindo transformação antes de crescimento de Python. Os cursores das vozes
+comuns permanecem independentes. O teste de regressão em
+[`src/engine/audio.rs`](../src/engine/audio.rs) cobre interrupção e replay;
+o [teste com stream real](evidence/reactions-transformations/audio-stream-review.json)
+verifica também a troca pausada de Java Street para Sirius e a restauração por reset.
 
-Os roteiros e tempos estão no [plano das sequências autorais](23-authored-super-sequences.md); os nomes e comandos, no [guia técnico de combate](12-technical-combat-guide.md#especiais-cinematográficos-adicionais).
+Os sons de lixo combinam papel, pequenos metais e impactos úmidos; a coleta alterna três recortes curtos. A queda gigante usa impacto grave; Rust usa metal e lâminas reverberantes; Old C usa erros digitais e POST; C++ usa disparo seco e camadas curtas de rajada. São recortes e mixagens de gravações CC0, sem fala gerada. Na rodada 23 foram produzidos 25 arquivos de voz novos/substituídos e 18 efeitos de sequência, Ogg Vorbis mono 48 kHz, normalizados antes da codificação a −3,48 dBFS e com fades curtos. A validação das saídas decodificadas verificou ausência de clipping, amostras inválidas e arquivos vazios. A seleção subjetiva permanece disponível para audição humana no reel.
+
+A rodada 24 acrescenta dez efeitos: digitação e confirmação do notebook de C++,
+entrada de Python e fases de transformação, crescimento, bote, deglutição,
+reversão, salto e paz. Os arquivos e bindings das vozes aprovadas de Duke/Python
+permanecem preservados; a entrada de Python reutiliza sua voz existente na nova
+mixagem. A [procedência adicional](../assets/audio/production-transformations-2026-09-09.json)
+identifica os recortes e arquivos produzidos.
+
+Os roteiros e tempos atuais estão em [Reações e transformações](24-reactions-and-transformations.md);
+a [rodada anterior](23-authored-super-sequences.md) preserva o histórico dos quatro
+primeiros roteiros. Os nomes e comandos ficam no
+[guia técnico de combate](12-technical-combat-guide.md#especiais-cinematográficos-adicionais).

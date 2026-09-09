@@ -24,8 +24,10 @@ Na rodada de [supers autorais](23-authored-super-sequences.md), cada lutador gan
 uma arena de origem visual: Rust/Sirius (Campinas), Duke/Java Street (São Paulo),
 Old C/Porto Digital (Recife), C++/Vale do Pinhão (Curitiba), Python/BioTIC (Brasília)
 e Go/Tech Coast (Fortaleza). A associação aparece na entrada dos supers; não
-restringe matchups. O Ownership Eclipse leva anel, torres, cabos e placas do
-Sirius para qualquer cenário, dando forma visível à ideia de tomar `&mut world`.
+restringe matchups. Na [rodada 24](24-reactions-and-transformations.md), o Ownership
+Eclipse passou a substituir literalmente a arena atual por Sirius em blocos.
+Música e ambientação acompanham a troca persistente naquela partida; não há
+bônus de combate. Python revela sua forma gigante e C++ herda o crash de Old C.
 
 
 - Cartunesco, legível e com humor técnico.

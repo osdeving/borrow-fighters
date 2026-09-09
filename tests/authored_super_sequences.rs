@@ -9,21 +9,27 @@ use borrow_fighters::{
     combat::{
         fighter::{Facing, Fighter, FighterInput, PlayerSlot},
         projectile::Projectile,
-        super_sequence::{SuperPhase, super_spec},
+        super_sequence::{
+            CPP_BARRAGE_START, CPP_CHARGE_START, CPP_FINISHER_TICK, CPP_REBOOT_TICK,
+            PYTHON_SWALLOW_TICK, PYTHON_TARGET_RETURN_TICK, RUST_ARENA_COMMIT_TICK, SuperPhase,
+            super_spec,
+        },
     },
     config::{ARENA_LEFT, ARENA_RIGHT, FIXED_TIMESTEP as DT, FLOOR_Y, world_px},
     game::{
+        arena::ArenaId,
         combat_log::CombatLogKind,
         feature_flags::{FeatureFlag, FeatureFlags},
         world::{MIN_BODY_GAP, MatchOutcome, World},
     },
 };
 
-const AUTHORED: [CharacterId; 4] = [
+const AUTHORED: [CharacterId; 5] = [
     CharacterId::Rust,
     CharacterId::Duke,
     CharacterId::C,
     CharacterId::Cpp,
+    CharacterId::Python,
 ];
 
 fn request() -> FighterInput {
@@ -92,6 +98,7 @@ fn every_authored_capture_reaches_both_corners_from_either_slot_and_only_schedul
                 assert_eq!(sequence.tick, 0);
                 assert_eq!(sequence.phase(), SuperPhase::Freeze);
                 let mut expected_damage = 0;
+                let mut reaction_seen = false;
                 for frame in 1..spec.duration_frames {
                     tick(&mut world);
                     expected_damage += spec
@@ -116,13 +123,17 @@ fn every_authored_capture_reaches_both_corners_from_either_slot_and_only_schedul
                     );
                     assert!(world.projectiles.is_empty() && world.signature_effects.is_empty());
                     assert!(world.outcome.is_none());
+                    reaction_seen |= fighter(&world, opposite(slot)).in_air_reaction()
+                        || fighter(&world, opposite(slot)).in_knockdown();
                 }
-                assert!(fighter(&world, opposite(slot)).in_knockdown());
+                assert!(
+                    reaction_seen,
+                    "every confirmed super must show a real damage reaction"
+                );
                 assert_eq!(contacts(&world), spec.contacts.len());
                 tick(&mut world);
                 assert!(!world.super_sequence_active());
-                assert!(fighter(&world, opposite(slot)).in_knockdown());
-                for _ in 0..40 {
+                for _ in 0..70 {
                     tick(&mut world);
                 }
                 assert!(!fighter(&world, opposite(slot)).in_knockdown());
@@ -262,18 +273,18 @@ fn knockouts_wait_for_restoration_and_training_invincibility_applies_to_both_slo
 }
 
 #[test]
-fn cpp_runs_continuously_to_the_real_target_then_delivers_eight_hits_and_a_finisher() {
+fn cpp_runs_to_the_real_target_then_delivers_eight_hits_finisher_and_inherited_reboot() {
     for slot in [PlayerSlot::One, PlayerSlot::Two] {
         for reverse in [false, true] {
             let mut world = arrangement(CharacterId::Cpp, slot, reverse);
             input(&mut world, slot, request(), FighterInput::default());
             let start = fighter(&world, slot).position.x;
             let mut previous = start;
-            for frame in 1..=204 {
+            for frame in 1..=CPP_BARRAGE_START {
                 tick(&mut world);
                 let sequence = world.super_sequence().unwrap();
                 let x = fighter(&world, slot).position.x;
-                if frame <= 140 {
+                if frame <= CPP_CHARGE_START {
                     assert_eq!(x, start);
                 } else {
                     assert_ne!(x, previous, "the rush must move each tick");
@@ -298,11 +309,16 @@ fn cpp_runs_continuously_to_the_real_target_then_delivers_eight_hits_and_a_finis
             };
             assert!((gap - MIN_BODY_GAP).abs() < 0.01);
             assert_eq!(contacts(&world), 1);
-            for _ in 205..=284 {
+            for _ in CPP_BARRAGE_START + 1..=CPP_FINISHER_TICK {
                 tick(&mut world);
             }
             assert_eq!(contacts(&world), 9);
-            assert!(fighter(&world, opposite(slot)).in_knockdown());
+            assert!(fighter(&world, opposite(slot)).in_air_reaction());
+            for _ in CPP_FINISHER_TICK + 1..=CPP_REBOOT_TICK {
+                tick(&mut world);
+            }
+            assert_eq!(contacts(&world), 10);
+            assert!(fighter(&world, opposite(slot)).in_air_reaction());
         }
     }
 }
@@ -330,7 +346,7 @@ fn existing_projectiles_freeze_and_commands_cannot_interrupt_or_add_contacts() {
             !world.player_one.blocking,
             "LB super chord clears owner guard"
         );
-        for _ in 0..super_spec(character).unwrap().duration_frames {
+        for frame in 1..=super_spec(character).unwrap().duration_frames {
             let noisy = FighterInput {
                 left: true,
                 jump: true,
@@ -342,7 +358,9 @@ fn existing_projectiles_freeze_and_commands_cannot_interrupt_or_add_contacts() {
             };
             world.update(DT, noisy, noisy);
             assert_eq!(world.projectiles, before);
-            assert_eq!(world.player_two.position, target_position);
+            if frame < super_spec(character).unwrap().contacts[0].tick {
+                assert_eq!(world.player_two.position, target_position);
+            }
             assert!(world.player_one.attack_kind().is_none());
             assert!(world.player_two.attack_kind().is_none());
         }
@@ -550,7 +568,9 @@ fn airborne_targets_freeze_then_settle_without_teleport_and_stay_on_the_authored
                         flags,
                     );
                     let target = fighter(&world, opposite(slot));
-                    assert_eq!(target.position.x, original.x);
+                    if frame < super_spec(character).unwrap().contacts[0].tick || invincible {
+                        assert_eq!(target.position.x, original.x);
+                    }
                     if frame <= 8 {
                         assert_eq!(target.position.y, original.y);
                         assert!(!target.grounded);
@@ -558,7 +578,8 @@ fn airborne_targets_freeze_then_settle_without_teleport_and_stay_on_the_authored
                         assert!(target.position.y > previous_y);
                         assert!(target.body_rect().bottom() < FLOOR_Y);
                         assert!(!target.grounded);
-                    } else {
+                    } else if frame < super_spec(character).unwrap().contacts[0].tick || invincible
+                    {
                         assert!(target.grounded);
                         assert!((target.body_rect().bottom() - FLOOR_Y).abs() < 0.01);
                     }
@@ -566,5 +587,183 @@ fn airborne_targets_freeze_then_settle_without_teleport_and_stay_on_the_authored
                 }
             }
         }
+    }
+}
+
+#[test]
+fn rust_commits_sirius_after_the_last_build_block_and_keeps_it_through_guard_ko_and_reset() {
+    for base in ArenaId::ROTATION {
+        for guarded in [false, true] {
+            let mut world = arrangement(CharacterId::Rust, PlayerSlot::One, false);
+            world.player_two.health = 1;
+            world.update(
+                DT,
+                request(),
+                FighterInput {
+                    block: guarded,
+                    ..FighterInput::default()
+                },
+            );
+            for frame in 1..RUST_ARENA_COMMIT_TICK {
+                assert_eq!(
+                    world.effective_arena(base),
+                    base,
+                    "mutation must not commit early at tick {frame}"
+                );
+                assert_eq!(world.arena_override(), None);
+                tick(&mut world);
+            }
+            assert_eq!(
+                world.super_sequence().unwrap().tick,
+                RUST_ARENA_COMMIT_TICK - 1
+            );
+            tick(&mut world);
+            assert_eq!(world.arena_override(), Some(ArenaId::Sirius));
+            assert_eq!(world.effective_arena(base), ArenaId::Sirius);
+            for _ in RUST_ARENA_COMMIT_TICK..super_spec(CharacterId::Rust).unwrap().duration_frames
+            {
+                tick(&mut world);
+            }
+            assert!(!world.super_sequence_active());
+            assert_eq!(world.effective_arena(base), ArenaId::Sirius);
+            assert_eq!(world.outcome.is_some(), !guarded);
+            tick(&mut world);
+            assert_eq!(world.effective_arena(base), ArenaId::Sirius);
+            world = arrangement(CharacterId::Rust, PlayerSlot::One, false);
+            assert_eq!(world.effective_arena(base), base);
+            assert_eq!(world.arena_override(), None);
+        }
+    }
+}
+
+#[test]
+fn python_swallow_hides_both_guard_and_hit_targets_until_return_without_an_extra_contact() {
+    for slot in [PlayerSlot::One, PlayerSlot::Two] {
+        for reverse in [false, true] {
+            for guarded in [false, true] {
+                let mut world = arrangement(CharacterId::Python, slot, reverse);
+                input(
+                    &mut world,
+                    slot,
+                    request(),
+                    FighterInput {
+                        block: guarded,
+                        ..FighterInput::default()
+                    },
+                );
+                let mut return_health = None;
+                for frame in 1..super_spec(CharacterId::Python).unwrap().duration_frames {
+                    tick(&mut world);
+                    let sequence = world.super_sequence().unwrap();
+                    assert_eq!(
+                        sequence.target_hidden(),
+                        (PYTHON_SWALLOW_TICK..PYTHON_TARGET_RETURN_TICK).contains(&frame)
+                    );
+                    let target = fighter(&world, opposite(slot));
+                    if frame < PYTHON_SWALLOW_TICK {
+                        assert_eq!(target.health, target.max_health);
+                    }
+                    if frame == PYTHON_TARGET_RETURN_TICK - 1 {
+                        return_health = Some(target.health);
+                    }
+                    if frame == PYTHON_TARGET_RETURN_TICK {
+                        assert_eq!(Some(target.health), return_health);
+                        assert_eq!(contacts(&world), 1);
+                        assert!(
+                            target.in_air_reaction() || target.in_blockstun(),
+                            "return must restart a visible reaction"
+                        );
+                    }
+                }
+                tick(&mut world);
+                assert_eq!(contacts(&world), 1);
+                assert!(fighter(&world, opposite(slot)).grounded);
+                assert!(!world.super_sequence_active());
+            }
+        }
+    }
+}
+
+#[test]
+fn schedules_cover_every_tick_and_never_place_contact_outside_an_authored_phase() {
+    for character in AUTHORED {
+        let spec = super_spec(character).unwrap();
+        assert_eq!(spec.phases[0].phase, SuperPhase::Freeze);
+        assert_eq!(spec.phases[0].start, 0);
+        assert_eq!(spec.phases.last().unwrap().end, spec.duration_frames);
+        for neighbors in spec.phases.windows(2) {
+            assert_eq!(
+                neighbors[0].end, neighbors[1].start,
+                "no skipped or competing phases for {character:?}"
+            );
+        }
+        for contact in spec.contacts {
+            assert!(contact.tick < spec.duration_frames);
+            assert!(spec.phases.iter().any(|phase| phase.start <= contact.tick
+                && contact.tick < phase.end
+                && phase.phase != SuperPhase::Freeze));
+        }
+    }
+}
+
+#[test]
+fn transformation_and_notebook_audio_follow_authored_actions_once() {
+    for (character, mut expected) in [
+        (
+            CharacterId::Python,
+            vec![
+                (0, AudioCue::SuperStart),
+                (62, AudioCue::SuperMutation),
+                (158, AudioCue::SuperMutation),
+                (270, AudioCue::SuperLunge),
+                (304, AudioCue::SuperSwallow),
+                (344, AudioCue::SuperRevert),
+                (400, AudioCue::SuperCelebrate),
+                (444, AudioCue::SuperPeace),
+                (528, AudioCue::SuperEnd),
+            ],
+        ),
+        (
+            CharacterId::Cpp,
+            vec![
+                (0, AudioCue::SuperStart),
+                (25, AudioCue::SuperTyping),
+                (130, AudioCue::SuperEnter),
+                (184, AudioCue::SuperFootshot),
+                (424, AudioCue::SuperBarrageHit),
+                (450, AudioCue::SuperError),
+                (498, AudioCue::SuperError),
+                (538, AudioCue::SuperBoot),
+                (566, AudioCue::SuperBarrageHit),
+                (632, AudioCue::SuperEnd),
+            ],
+        ),
+    ] {
+        if character == CharacterId::Cpp {
+            expected.extend((0..8).map(|index| (344 + index * 10, AudioCue::SuperBarrageHit)));
+            expected.sort_by_key(|(frame, _)| *frame);
+        }
+        let mut world = arrangement(character, PlayerSlot::Two, true);
+        input(
+            &mut world,
+            PlayerSlot::Two,
+            request(),
+            FighterInput::default(),
+        );
+        let mut actual = Vec::new();
+        for frame in 0..=super_spec(character).unwrap().duration_frames {
+            if frame > 0 {
+                tick(&mut world);
+            }
+            for event in world.take_audio_events() {
+                if event.cue.key().starts_with("super.") {
+                    assert_eq!(event.character, Some(character));
+                    assert_eq!(event.slot, Some(PlayerSlot::Two));
+                    assert_eq!(event.move_id, Some(super_spec(character).unwrap().move_id));
+                    actual.push((frame, event.cue));
+                }
+            }
+        }
+        assert_eq!(actual, expected, "{character:?} phase foley drifted");
     }
 }

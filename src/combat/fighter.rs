@@ -19,6 +19,7 @@ pub use crate::combat::move_set::{
     MoveSpec, OVERHEAD_PUNCH_DAMAGE, RISING_ANTI_AIR_DAMAGE, RUST_BORROW_JAB_DAMAGE,
     SWEEP_KICK_DAMAGE, move_spec_for_input,
 };
+pub use reactions::ReactionVisualState;
 
 const DEFAULT_WIDTH: f32 = world_px(76.0);
 const DEFAULT_STANDING_HEIGHT: f32 = world_px(168.0);
@@ -169,6 +170,11 @@ pub struct Fighter {
     blockstun_timer: f32,
     reaction_visual_elapsed: f32,
     hit_reaction_kind: HitReactionKind,
+    reaction_visual_duration: f32,
+    reaction_strength: f32,
+    reaction_was_crouching: bool,
+    reaction_landed: bool,
+    super_reaction: bool,
     throw_protection_timer: f32,
     capture_role: Option<CaptureRole>,
     guard_visual_elapsed: f32,
@@ -265,6 +271,11 @@ impl Fighter {
             blockstun_timer: 0.0,
             reaction_visual_elapsed: 0.0,
             hit_reaction_kind: HitReactionKind::Hit,
+            reaction_visual_duration: 0.0,
+            reaction_strength: 1.0,
+            reaction_was_crouching: false,
+            reaction_landed: false,
+            super_reaction: false,
             throw_protection_timer: 0.0,
             capture_role: None,
             guard_visual_elapsed: 0.0,
@@ -431,7 +442,7 @@ impl Fighter {
         if self.attack.is_some()
             || self.special_visual_timer > 0.0
             || self.capture_role.is_some()
-            || self.in_air_reaction()
+            || self.is_reacting()
         {
             return;
         }
@@ -604,58 +615,8 @@ impl Fighter {
         self.grounded && !self.is_defeated() && self.attack.is_none() && !self.is_action_locked()
     }
 
-    pub(crate) fn begin_super_capture(&mut self, guarded: bool, crouching: bool) {
-        self.attack = None;
-        self.capture_role = None;
-        self.special_visual_timer = 0.0;
-        self.hitstun_timer = 0.0;
-        self.blockstun_timer = 0.0;
-        self.whiff_recovery_timer = 0.0;
-        self.velocity = Vec2::ZERO;
-        self.blocking = guarded;
-        self.crouching = guarded && crouching;
-        self.hit_reaction_kind = HitReactionKind::Hit;
-        self.reaction_visual_elapsed = 0.0;
-    }
-
-    pub(crate) fn advance_super_visuals(&mut self, dt: f32) {
-        if self.in_knockdown() {
-            // The captured victim stays prone until the authored restoration ends.
-            self.reaction_visual_elapsed = 0.1;
-        } else if self.is_reacting() {
-            self.reaction_visual_elapsed += dt;
-        }
-    }
-
-    pub(crate) fn receive_super_contact(&mut self, damage: i32, guarded: bool, knockdown: bool) {
-        self.take_damage(damage);
-        self.reaction_visual_elapsed = 0.0;
-        if guarded {
-            self.blocking = true;
-            self.blockstun_timer = FrameCount::new(16).as_seconds();
-        } else if knockdown {
-            self.blocking = false;
-            self.start_knockdown();
-            self.reaction_visual_elapsed = 0.1;
-        } else {
-            self.blocking = false;
-            self.hit_reaction_kind = HitReactionKind::HeavyHit;
-            self.hitstun_timer = FrameCount::new(24).as_seconds();
-        }
-    }
-
-    pub(crate) fn finish_super_capture(&mut self) {
-        self.velocity = Vec2::ZERO;
-        self.blocking = false;
-        self.blockstun_timer = 0.0;
-        if !self.in_knockdown() {
-            self.hitstun_timer = 0.0;
-        }
-        self.throw_protection_timer = FrameCount::new(6).as_seconds();
-    }
-
-    /// Exposes the local cinematic attack clock used by Go and Python in World.
-    /// Authored four-character sessions use World::super_sequence instead.
+    /// Exposes the local cinematic attack clock used by Go in World.
+    /// Authored five-character sessions use World::super_sequence instead.
     pub fn cinematic_special(&self) -> Option<super::cinematic::CinematicSpecialState> {
         let attack = self.attack?;
         super::cinematic::CinematicSpecialState::from_move(attack.spec, attack.elapsed_frames())
@@ -791,17 +752,6 @@ impl Fighter {
             && !self.is_reacting()
             && self.capture_role.is_none()
             && self.throw_protection_timer <= 0.0
-    }
-
-    /// Applies the fall and get-up phase after a successful grounded sweep or throw.
-    pub fn start_knockdown(&mut self) {
-        self.hit_reaction_kind = HitReactionKind::Knockdown;
-        self.hitstun_timer = self.hitstun_timer.max(FrameCount::new(36).as_seconds());
-        self.position.y = FLOOR_Y - self.body_metrics.standing_height;
-        self.grounded = true;
-        self.crouching = false;
-        self.velocity = Vec2::ZERO;
-        self.reaction_visual_elapsed = 0.0;
     }
 
     /// Returns presentation time since the current held guard began.
@@ -940,6 +890,15 @@ impl Fighter {
 
     fn apply_hit_reaction(&mut self, hit_reaction: HitReaction, blocked: bool) -> f32 {
         self.reaction_visual_elapsed = 0.0;
+        self.reaction_visual_duration = if blocked {
+            hit_reaction.blockstun.as_seconds()
+        } else {
+            hit_reaction.hitstun.as_seconds()
+        };
+        self.reaction_strength = (hit_reaction.hit_pushback / world_px(30.0)).clamp(0.7, 1.6);
+        self.reaction_was_crouching = self.crouching;
+        self.reaction_landed = false;
+        self.super_reaction = false;
         self.velocity.x = 0.0;
         self.whiff_recovery_timer = 0.0;
         if blocked {
@@ -954,6 +913,20 @@ impl Fighter {
         self.blockstun_timer = 0.0;
         self.hit_reaction_kind = HitReactionKind::Hit;
         self.hitstun_timer = hit_reaction.hitstun.as_seconds();
+        if !self.grounded {
+            let direction = if self.facing == Facing::Right {
+                -1.0
+            } else {
+                1.0
+            };
+            self.begin_launch(
+                Vec2::new(
+                    direction * world_px(105.0),
+                    self.velocity.y.min(world_px(-180.0)),
+                ),
+                HitReactionKind::Launched,
+            );
+        }
         hit_reaction.hit_pushback
     }
 

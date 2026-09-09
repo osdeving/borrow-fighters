@@ -12,6 +12,7 @@ mod authored_supers;
 mod cinematic_effects;
 mod combat_lab;
 mod move_showcase;
+mod python_super;
 mod signature_effects;
 mod sprite_viewer;
 mod stage_life;
@@ -120,6 +121,7 @@ pub fn draw_fight(
         return;
     }
     draw.clear_background(BACKGROUND);
+    let arena = world.effective_arena(arena);
     let visual_time_seconds = authored_supers::arena_time(world, visual_time_seconds);
     draw_arena(draw, arena, assets.arenas.get(arena), visual_time_seconds);
     draw_stage_life_layer(draw, arena, visual_time_seconds, flags, Some(world), assets);
@@ -153,6 +155,7 @@ pub fn draw_fight(
                 spritesheet: assets.fighter_spritesheet.as_ref(),
                 world_elapsed_seconds: player_one_time,
                 forced_clip: player_one_clip,
+                placement: authored_target_placement(world, world.player_one.slot, assets),
             },
         );
     }
@@ -171,6 +174,7 @@ pub fn draw_fight(
                 spritesheet: assets.fighter_spritesheet.as_ref(),
                 world_elapsed_seconds: player_two_time,
                 forced_clip: player_two_clip,
+                placement: authored_target_placement(world, world.player_two.slot, assets),
             },
         );
     }
@@ -183,7 +187,15 @@ pub fn draw_fight(
     draw_world_cinematic_foreground(draw, world, assets);
 
     if flags.enabled(FeatureFlag::ShowHud) {
-        draw_hud(draw, world, flags, gamepad_status, show_debug, assets);
+        draw_hud(
+            draw,
+            world,
+            arena,
+            flags,
+            gamepad_status,
+            show_debug,
+            assets,
+        );
     }
 
     if let Some(label) = world.countdown_label() {
@@ -2394,6 +2406,7 @@ fn draw_world_cinematic_background(draw: &mut impl DrawTarget, world: &World, as
 fn authored_actor_textures(assets: &GameAssets) -> authored_actors::AuthoredActorTextures<'_> {
     authored_actors::AuthoredActorTextures {
         duke: assets.duke_collector_poses.as_ref(),
+        cpp_laptop: assets.cpp_laptop.as_ref(),
         cpp_comedy: assets.cpp_footgun_comedy.as_ref(),
         cpp_barrage: assets.cpp_footgun_barrage.as_ref(),
         trash: assets.garbage_items.as_ref(),
@@ -2401,12 +2414,51 @@ fn authored_actor_textures(assets: &GameAssets) -> authored_actors::AuthoredActo
     }
 }
 
+fn python_textures(assets: &GameAssets) -> python_super::PythonSuperTextures<'_> {
+    python_super::PythonSuperTextures {
+        transform: assets.python_transform.as_ref(),
+        serpent: assets.python_serpent.as_ref(),
+        revert: assets.python_revert.as_ref(),
+        celebrate: assets.python_celebrate.as_ref(),
+    }
+}
+
+fn authored_target_placement(
+    world: &World,
+    slot: PlayerSlot,
+    assets: &GameAssets,
+) -> Option<sprites::FighterVisualPlacement> {
+    use crate::combat::super_sequence::{PYTHON_TARGET_RETURN_TICK, SuperPhase};
+    let sequence = world.super_sequence()?;
+    if slot != sequence.target || !python_textures(assets).ready() {
+        return None;
+    }
+    if sequence.phase() != SuperPhase::PythonLunge
+        && !(PYTHON_TARGET_RETURN_TICK..PYTHON_TARGET_RETURN_TICK + 6).contains(&sequence.tick)
+    {
+        return None;
+    }
+    python_super::target_visual(sequence).map(|visual| sprites::FighterVisualPlacement {
+        anchor: visual.anchor,
+        scale: visual.scale,
+        rotation_degrees: visual.rotation_degrees,
+        opacity: visual.opacity,
+    })
+}
+
 fn hides_authored_actor(world: &World, slot: PlayerSlot, assets: &GameAssets) -> bool {
+    let textures = python_textures(assets);
     authored_actors::hides_actor(world, slot, authored_actor_textures(assets))
+        || python_super::hides_actor(world, slot, textures)
+        || (textures.ready()
+            && world
+                .super_sequence()
+                .is_some_and(|sequence| sequence.target == slot && sequence.target_hidden()))
 }
 
 fn draw_authored_actors(draw: &mut impl DrawTarget, world: &World, assets: &GameAssets) {
     authored_actors::draw_authored_actors(draw, world, authored_actor_textures(assets));
+    python_super::draw_python_super(draw, world, python_textures(assets));
 }
 
 fn draw_world_cinematic_foreground(draw: &mut impl DrawTarget, world: &World, assets: &GameAssets) {
@@ -2753,12 +2805,15 @@ fn draw_fighter(
     };
 
     if let Some(sprite_atlas) = options.sprite_atlas
-        && sprites::draw_manifest_fighter_sprite(
+        && sprites::draw_manifest_fighter_sprite_placed(
             draw,
             &sprite_atlas.manifest,
             fighter,
-            options.world_elapsed_seconds,
-            options.forced_clip,
+            sprites::FighterSpritePresentation {
+                elapsed_seconds: options.world_elapsed_seconds,
+                forced_clip: options.forced_clip,
+                placement: options.placement,
+            },
             sprite_tint,
             |frame| sprite_atlas.texture_for_frame(frame),
         )
@@ -2994,6 +3049,7 @@ struct FighterDrawOptions<'a> {
     spritesheet: Option<&'a Texture2D>,
     world_elapsed_seconds: f32,
     forced_clip: Option<sprites::FighterSpriteClip>,
+    placement: Option<sprites::FighterVisualPlacement>,
 }
 
 struct CharacterVisuals<'a> {
@@ -3047,6 +3103,7 @@ fn character_visuals<'a>(character: CharacterId, assets: &'a GameAssets) -> Char
 fn draw_hud(
     draw: &mut impl DrawTarget,
     world: &World,
+    arena: ArenaId,
     flags: FeatureFlags,
     gamepad_status: GamepadStatus,
     show_debug: bool,
@@ -3073,7 +3130,7 @@ fn draw_hud(
     draw_centered_menu_text(
         draw,
         font,
-        "LOCAL VERSUS",
+        &format!("{} / {}", arena.label(), arena.location()),
         WINDOW_WIDTH / 2,
         screen_px(13),
         10.0,
@@ -3549,8 +3606,11 @@ fn fighter_match_presentation(
 ) -> (Option<sprites::FighterSpriteClip>, f32) {
     if let Some(sequence) = world.super_sequence() {
         use crate::combat::super_sequence::SuperPhase;
-        if fighter.in_knockdown() {
-            return (Some(sprites::FighterSpriteClip::Knockdown), 0.1);
+        if fighter.slot == sequence.target && sequence.phase() == SuperPhase::PythonLunge {
+            return (
+                Some(sprites::FighterSpriteClip::Launched),
+                (sequence.tick - sequence.phase_span().start) as f32 / 60.0,
+            );
         }
         if fighter.slot == sequence.attacker && sequence.phase() != SuperPhase::Freeze {
             let time = match sequence.character {
@@ -3626,8 +3686,14 @@ fn draw_fighter_ground_lights(draw: &mut impl DrawTarget, world: &World) {
     if world.outcome.is_some() {
         return;
     }
-    draw_fighter_ground_light(draw, &world.player_one);
-    draw_fighter_ground_light(draw, &world.player_two);
+    for fighter in [&world.player_one, &world.player_two] {
+        if !world
+            .super_sequence()
+            .is_some_and(|sequence| sequence.target == fighter.slot && sequence.target_hidden())
+        {
+            draw_fighter_ground_light(draw, fighter);
+        }
+    }
 }
 
 fn draw_fighter_ground_light(draw: &mut impl DrawTarget, fighter: &Fighter) {
@@ -3666,6 +3732,14 @@ fn draw_fighter_ground_light(draw: &mut impl DrawTarget, fighter: &Fighter) {
 }
 
 fn draw_hit_effects(draw: &mut impl DrawTarget, world: &World, font: Option<&Font>) {
+    // The swallowed fighter is visually inside Python; its old floor position
+    // must not retain a floating body impact while the gulp animation plays.
+    if world
+        .super_sequence()
+        .is_some_and(|sequence| sequence.target_hidden())
+    {
+        return;
+    }
     for effect in &world.hit_effects {
         let progress = hit_effect_progress(effect.timer);
         let fade_alpha = ((1.0 - progress) * 255.0).clamp(0.0, 255.0).round() as u8;

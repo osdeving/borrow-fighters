@@ -1,5 +1,8 @@
 # 23 — Sequências autorais de especiais e identidade sonora
 
+Esta página registra a rodada23. As reações, Python, C++ e a troca persistente
+de arena evoluíram na [rodada24](24-reactions-and-transformations.md).
+
 ## Pedido e plano de execução
 
 Rodada de 9 de setembro de 2026. O usuário autorizou animações específicas,

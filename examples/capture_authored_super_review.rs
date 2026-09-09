@@ -19,7 +19,10 @@ use borrow_fighters::{
     characters::{CHARACTER_BODY_METRICS_PATH, CharacterBodyMetricsCatalog, CharacterId},
     combat::{
         fighter::FighterInput,
-        super_sequence::{CPP_FOOTSHOT_TICK, super_spec},
+        super_sequence::{
+            CPP_FOOTSHOT_TICK, PYTHON_PEACE_START, PYTHON_TARGET_RETURN_TICK,
+            RUST_ARENA_COMMIT_TICK, super_spec,
+        },
     },
     config::{ARENA_LEFT, ARENA_RIGHT, FIXED_TIMESTEP, WINDOW_HEIGHT, WINDOW_WIDTH, world_px},
     engine::{
@@ -39,16 +42,18 @@ use serde_json::{Value, json};
 type ReviewResult<T> = Result<T, Box<dyn Error>>;
 const PREPARATION: u32 = 60;
 const RESTORED_OBSERVATION: u32 = 90;
-const ROSTER: [CharacterId; 4] = [
+const ROSTER: [CharacterId; 5] = [
     CharacterId::Rust,
     CharacterId::Duke,
     CharacterId::C,
     CharacterId::Cpp,
+    CharacterId::Python,
 ];
 
 struct Options {
     output: PathBuf,
     character: Option<CharacterId>,
+    arena: Option<ArenaId>,
     guard: bool,
     reverse: bool,
     both_sides: bool,
@@ -63,6 +68,7 @@ impl Options {
         let mut result = Self {
             output: PathBuf::from("docs/evidence/authored-supers"),
             character: None,
+            arena: None,
             guard: false,
             reverse: false,
             both_sides: false,
@@ -76,9 +82,16 @@ impl Options {
             match arg.as_str() {
                 "--output" => result.output = args.next().ok_or("--output needs a directory")?.into(),
                 "--video" => result.video = Some(args.next().ok_or("--video needs an MP4 path")?.into()),
-                "--character" => result.character = Some(match args.next().ok_or("--character needs rust/duke/c/cpp")?.as_str() {
-                    "rust" => CharacterId::Rust, "duke" | "java" => CharacterId::Duke, "c" => CharacterId::C, "cpp" | "c++" => CharacterId::Cpp,
-                    _ => return Err("only rust/duke/c/cpp have authored supers".into()),
+                "--character" => result.character = Some(match args.next().ok_or("--character needs rust/duke/c/cpp/python")?.as_str() {
+                    "rust" => CharacterId::Rust, "duke" | "java" => CharacterId::Duke, "c" => CharacterId::C, "cpp" | "c++" => CharacterId::Cpp, "python" | "py" => CharacterId::Python,
+                    _ => return Err("only rust/duke/c/cpp/python have authored supers".into()),
+                }),
+                "--arena" => result.arena = Some(match args.next().ok_or("--arena needs an arena key")?.as_str() {
+                    "sirius" => ArenaId::Sirius, "fortaleza" => ArenaId::Fortaleza,
+                    "java-street" | "java" => ArenaId::JavaStreet, "biotic" => ArenaId::BioTic,
+                    "porto-digital" | "recife" => ArenaId::PortoDigital,
+                    "vale-do-pinhao" | "curitiba" => ArenaId::ValeDoPinhao,
+                    _ => return Err("unknown arena; use sirius/fortaleza/java-street/biotic/porto-digital/vale-do-pinhao".into()),
                 }),
                 "--guard" => result.guard = true,
                 "--reverse" => result.reverse = true,
@@ -86,7 +99,7 @@ impl Options {
                 "--audio" => { result.audio = true; result.realtime = true; },
                 "--realtime" => result.realtime = true,
                 "--no-snapshots" => result.snapshots = false,
-                _ => return Err(format!("unknown argument {arg}; use --output DIR [--character rust|duke|c|cpp] [--guard] [--reverse|--both-sides] [--video PATH] [--audio] [--realtime] [--no-snapshots]").into()),
+                _ => return Err(format!("unknown argument {arg}; use --output DIR [--character rust|duke|c|cpp|python] [--arena ARENA] [--guard] [--reverse|--both-sides] [--video PATH] [--audio] [--realtime] [--no-snapshots]").into()),
             }
         }
         if result.audio && result.video.is_some() {
@@ -164,7 +177,11 @@ fn main() -> ReviewResult<()> {
                 player_one: Some(atlas(&assets, character)?.combat_manifest.clone()),
                 player_two: Some(atlas(&assets, opponent)?.combat_manifest.clone()),
             });
-            let arena = ArenaId::home_for_character(character);
+            let arena = options
+                .arena
+                .unwrap_or_else(|| ArenaId::home_for_character(character));
+            let mut effective_arena = world.effective_arena(arena);
+            let mut arena_transitions = Vec::new();
             let mut schedule = BTreeMap::new();
             for phase in spec.phases {
                 schedule.insert(
@@ -177,6 +194,16 @@ fn main() -> ReviewResult<()> {
             }
             if character == CharacterId::Cpp {
                 schedule.insert(CPP_FOOTSHOT_TICK, "footshot".into());
+            }
+            if character == CharacterId::Python {
+                schedule.insert(PYTHON_TARGET_RETURN_TICK, "target-return".into());
+                schedule.insert(420, "celebration-hop".into());
+                schedule.insert(PYTHON_PEACE_START + 16, "peace".into());
+            }
+            if character == CharacterId::Rust {
+                schedule.insert(35, "build-early".into());
+                schedule.insert(RUST_ARENA_COMMIT_TICK - 1, "build-last-block".into());
+                schedule.insert(RUST_ARENA_COMMIT_TICK, "arena-commit".into());
             }
             let mut screenshots = Vec::new();
             let mut cues = Vec::new();
@@ -211,7 +238,12 @@ fn main() -> ReviewResult<()> {
                         ..FighterInput::default()
                     },
                 );
+                if world.effective_arena(arena) != effective_arena {
+                    effective_arena = world.effective_arena(arena);
+                    arena_transitions.push(json!({"video_frame":global_frame,"arena":format!("{effective_arena:?}"),"music_track":music_for_arena(effective_arena).key()}));
+                }
                 audio.set_cinematic_paused(world.super_sequence_active());
+                audio.play_music(music_for_arena(effective_arena));
                 let frame_wall_seconds = render_started.elapsed().as_secs_f64();
                 let output_frame = global_frame;
                 let events = world.take_audio_events();
@@ -241,7 +273,7 @@ fn main() -> ReviewResult<()> {
                         draw_fight(
                             &mut draw,
                             &world,
-                            arena,
+                            effective_arena,
                             world.elapsed_seconds,
                             FeatureFlags::default(),
                             GamepadStatus::default(),
@@ -256,7 +288,7 @@ fn main() -> ReviewResult<()> {
                             if options.guard { "guard" } else { "hit" }
                         );
                         export(&target, &options.output.join(&name))?;
-                        screenshots.push(json!({"image":name,"video_frame":output_frame,"simulation_frame":global_frame,"phase":snapshot.map(|sequence|format!("{:?}",sequence.phase())),"sequence_tick":snapshot.map(|sequence|sequence.tick),"health":[world.player_one.health,world.player_two.health],"actor_x":world.player_one.position.x,"target_x":world.player_two.position.x}));
+                        screenshots.push(json!({"image":name,"effective_arena":format!("{effective_arena:?}"),"video_frame":output_frame,"simulation_frame":global_frame,"phase":snapshot.map(|sequence|format!("{:?}",sequence.phase())),"sequence_tick":snapshot.map(|sequence|sequence.tick),"health":[world.player_one.health,world.player_two.health],"actor_x":world.player_one.position.x,"target_x":world.player_two.position.x}));
                     }
                     if let Some(movie) = &mut movie {
                         movie.frame(&target)?;
@@ -291,7 +323,7 @@ fn main() -> ReviewResult<()> {
             {
                 return Err(format!("incorrect final result for {character:?}/{reverse}").into());
             }
-            scenarios.push(json!({"character":character.audio_key(),"move":spec.label,"arena":format!("{arena:?}"),"music_track":music_for_arena(arena).key(),"reverse":reverse,"guarded":options.guard,"duration_frames":spec.duration_frames,"simulation_frames":[initial_frame,global_frame-1],"video_frames":[initial_frame,global_frame-1],"wall_time_seconds":scenario_started.elapsed().as_secs_f64(),"damage":expected,"screenshots":screenshots,"audio_events":cues}));
+            scenarios.push(json!({"character":character.audio_key(),"move":spec.label,"arena":format!("{arena:?}"),"final_effective_arena":format!("{effective_arena:?}"),"arena_transitions":arena_transitions,"music_track":music_for_arena(arena).key(),"reverse":reverse,"guarded":options.guard,"duration_frames":spec.duration_frames,"simulation_frames":[initial_frame,global_frame-1],"video_frames":[initial_frame,global_frame-1],"wall_time_seconds":scenario_started.elapsed().as_secs_f64(),"damage":expected,"screenshots":screenshots,"audio_events":cues}));
             println!(
                 "REVIEW_END {} damage={expected} frame={global_frame}",
                 character.audio_key()

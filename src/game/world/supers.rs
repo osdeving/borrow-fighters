@@ -1,4 +1,4 @@
-//! Coordinates confirmed captures and frame-authored contacts for four supers.
+//! Coordinates confirmed captures and frame-authored contacts for five supers.
 //!
 //! System: Match runtime. Ordinary updates yield to one sequence; renderer and
 //! audio consume its clock while only this module changes captured health.
@@ -7,9 +7,11 @@ use super::*;
 use crate::{
     audio::AudioCue,
     combat::super_sequence::{
-        CPP_BARRAGE_CADENCE, CPP_BARRAGE_HITS, CPP_BARRAGE_START, CPP_FOOTSHOT_TICK,
-        DUKE_CLONE_CADENCE, DUKE_CLONE_COUNT, DUKE_COLLECT_START, SUPER_FREEZE_FRAMES,
-        SUPER_TARGET_LAND_END, SuperContact, SuperPhase, SuperSequence, super_spec,
+        CPP_BARRAGE_CADENCE, CPP_BARRAGE_HITS, CPP_BARRAGE_START, CPP_CHARGE_START, CPP_ENTER_TICK,
+        CPP_FINISHER_TICK, CPP_FOOTSHOT_TICK, CPP_REBOOT_TICK, CPP_TYPING_TICK, DUKE_CLONE_CADENCE,
+        DUKE_CLONE_COUNT, DUKE_COLLECT_START, PYTHON_PEACE_START, PYTHON_TARGET_RETURN_TICK,
+        RUST_ARENA_COMMIT_TICK, SUPER_FREEZE_FRAMES, SUPER_TARGET_LAND_END, SuperContact,
+        SuperPhase, SuperSequence, super_spec,
     },
     config::{FIXED_TIMESTEP, FLOOR_Y},
 };
@@ -136,12 +138,23 @@ impl World {
             }
             self.player_one.advance_super_visuals(FIXED_TIMESTEP);
             self.player_two.advance_super_visuals(FIXED_TIMESTEP);
-            if sequence.character == CharacterId::Cpp && sequence.tick >= 140 {
-                let progress = ((sequence.tick.saturating_sub(140)) as f32 / 64.0).clamp(0.0, 1.0);
+            if sequence.character == CharacterId::Cpp && sequence.tick >= CPP_CHARGE_START {
+                let progress = (sequence.tick.saturating_sub(CPP_CHARGE_START) as f32
+                    / (CPP_BARRAGE_START - CPP_CHARGE_START) as f32)
+                    .clamp(0.0, 1.0);
                 let actor = self.super_fighter_mut(sequence.attacker);
                 let from = sequence.attacker_origin.x - actor.body_rect().width * 0.5;
                 actor.position.x = from + (sequence.charge_destination_x - from) * progress;
                 actor.clamp_to_arena();
+            }
+            if sequence.character == CharacterId::Rust && sequence.tick == RUST_ARENA_COMMIT_TICK {
+                self.arena_override = Some(crate::game::arena::ArenaId::Sirius);
+            }
+            if sequence.character == CharacterId::Python
+                && sequence.tick == PYTHON_TARGET_RETURN_TICK
+            {
+                self.super_fighter_mut(sequence.target)
+                    .resume_super_target_reaction();
             }
             if let Some(cue) = phase_cue(&sequence) {
                 self.audio_events.push(super_event(&sequence, cue));
@@ -243,7 +256,7 @@ fn phase_cue(sequence: &SuperSequence) -> Option<AudioCue> {
     use AudioCue::*;
     let tick = sequence.tick;
     match sequence.character {
-        CharacterId::Rust if matches!(tick, 11 | 125) => Some(SuperMutation),
+        CharacterId::Rust if tick == 11 || tick == RUST_ARENA_COMMIT_TICK => Some(SuperMutation),
         CharacterId::Duke if tick == 8 => Some(SuperTrashRain),
         CharacterId::Duke
             if (DUKE_COLLECT_START..DUKE_COLLECT_START + DUKE_CLONE_COUNT * DUKE_CLONE_CADENCE)
@@ -260,13 +273,45 @@ fn phase_cue(sequence: &SuperSequence) -> Option<AudioCue> {
         }
         CharacterId::C if matches!(tick, 8 | 105) => Some(SuperError),
         CharacterId::C if tick == 180 => Some(SuperBoot),
+        CharacterId::Cpp if tick == CPP_TYPING_TICK => Some(SuperTyping),
+        CharacterId::Cpp if tick == CPP_ENTER_TICK => Some(SuperEnter),
         CharacterId::Cpp if tick == CPP_FOOTSHOT_TICK => Some(SuperFootshot),
+        CharacterId::Cpp
+            if matches!(
+                sequence.phase(),
+                SuperPhase::CTerminalStorm | SuperPhase::CBlueScreen
+            ) && tick == sequence.phase_span().start =>
+        {
+            Some(SuperError)
+        }
+        CharacterId::Cpp
+            if sequence.phase() == SuperPhase::CBios && tick == sequence.phase_span().start =>
+        {
+            Some(SuperBoot)
+        }
+        CharacterId::Cpp if tick == CPP_REBOOT_TICK => Some(SuperBarrageHit),
+        CharacterId::Python
+            if matches!(
+                sequence.phase(),
+                SuperPhase::PythonMorph | SuperPhase::PythonGrow
+            ) && tick == sequence.phase_span().start =>
+        {
+            Some(SuperMutation)
+        }
+        CharacterId::Python if tick == PYTHON_PEACE_START => Some(SuperPeace),
+        CharacterId::Python if tick == sequence.phase_span().start => match sequence.phase() {
+            SuperPhase::PythonLunge => Some(SuperLunge),
+            SuperPhase::PythonSwallow => Some(SuperSwallow),
+            SuperPhase::PythonRevert => Some(SuperRevert),
+            SuperPhase::PythonCelebrate => Some(SuperCelebrate),
+            _ => None,
+        },
         CharacterId::Cpp
             if ((CPP_BARRAGE_START
                 ..CPP_BARRAGE_START + CPP_BARRAGE_HITS * CPP_BARRAGE_CADENCE)
                 .contains(&tick)
                 && (tick - CPP_BARRAGE_START).is_multiple_of(CPP_BARRAGE_CADENCE))
-                || tick == 284 =>
+                || tick == CPP_FINISHER_TICK =>
         {
             Some(SuperBarrageHit)
         }

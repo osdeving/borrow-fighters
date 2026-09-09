@@ -483,7 +483,9 @@ impl App {
                                     self.restart_match(&assets);
                                 }
                                 self.scene = AppScene::Fight;
-                                audio_player.play_music(music_track_for_arena(self.current_arena));
+                                audio_player.play_music(music_track_for_arena(
+                                    self.world.effective_arena(self.current_arena),
+                                ));
                             }
                             PreferencesAction::Exit => return,
                         }
@@ -584,7 +586,9 @@ impl App {
                         if input.restart {
                             self.restart_match(&assets);
                             audio_player.cancel_cinematic();
-                            audio_player.play_music(music_track_for_arena(self.current_arena));
+                            audio_player.play_music(music_track_for_arena(
+                                self.world.effective_arena(self.current_arena),
+                            ));
                         }
 
                         if input.toggle_cpu {
@@ -641,6 +645,9 @@ impl App {
                             );
                             self.remember_finished_match();
                             audio_player.set_cinematic_paused(self.world.super_sequence_active());
+                            audio_player.play_music(music_track_for_arena(
+                                self.world.effective_arena(self.current_arena),
+                            ));
                             audio_player.play_events(self.world.drain_audio_events());
                             self.accumulator -= FIXED_TIMESTEP;
                             fixed_steps += 1;
@@ -803,6 +810,12 @@ impl App {
                     .super_preview_world()
                     .is_some_and(World::super_sequence_active),
             );
+            let track = self
+                .combat_lab
+                .super_preview_world()
+                .and_then(World::arena_override)
+                .map_or(MusicTrack::CombatDeterminedPursuit, music_track_for_arena);
+            audio.play_music(track);
             audio.play_events(self.combat_lab.take_super_audio_events());
             self.accumulator -= FIXED_TIMESTEP;
             fixed_steps += 1;
@@ -834,6 +847,12 @@ impl App {
             }
             self.move_showcase.update(showcase_input);
             audio.set_cinematic_paused(self.move_showcase.world().super_sequence_active());
+            let track = self
+                .move_showcase
+                .world()
+                .arena_override()
+                .map_or(MusicTrack::CombatDeterminedPursuit, music_track_for_arena);
+            audio.play_music(track);
             audio.play_events(self.move_showcase.take_audio_events());
             self.accumulator -= FIXED_TIMESTEP;
             fixed_steps += 1;

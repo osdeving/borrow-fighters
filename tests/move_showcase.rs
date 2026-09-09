@@ -111,14 +111,13 @@ fn every_public_move_hits_in_its_context_on_both_sides_with_match_metadata_and_f
                             )
                         })
                         .count();
-                    let expected = if selected == CombatLabMove::SignatureSpecial
+                    let expected = if selected == CombatLabMove::CinematicSpecial {
+                        borrow_fighters::combat::super_sequence::super_spec(character)
+                            .map_or(1, |spec| spec.contacts.len())
+                    } else if selected == CombatLabMove::SignatureSpecial
                         && character == CharacterId::Duke
                     {
                         3
-                    } else if selected == CombatLabMove::CinematicSpecial
-                        && character == CharacterId::Cpp
-                    {
-                        9
                     } else {
                         1
                     };

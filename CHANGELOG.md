@@ -1,5 +1,20 @@
 # Changelog
 
+## Rodada 2026-09-09 — Reações e transformações
+
+- Relógio próprio de reação para todos os seis defensores; acertos interrompem a pose anterior, com recoil, voo, impacto no chão e recuperação legíveis.
+- Python ganha `import devour`: transformação em cobra gigante azul/amarela, bote, deglutição, retorno e salto/sinal de paz, com 32 desenhos específicos.
+- C++ abre notebook, digita um pequeno programa com ponteiro nulo e expande a Footgun com terminais, BSOD e BIOS herdados de C.
+- Rust substitui a arena em blocos por Sirius de forma persistente na partida; música, identificação e ambientação acompanham a troca, sem bônus de combate.
+- Sons por fase, defesa/KO/reset e previews preservados; vozes aprovadas de Duke/Python intactas.
+- Replay de especial interrompido reinicia a ordem dos efeitos de fase, evitando
+  trocar transformação e crescimento de Python; a variação das vozes comuns é preservada.
+- Banner do super descreve seu roteiro, sem confundir a arena natal do personagem
+  com o cenário atual da luta.
+- [Roteiros e comportamento](docs/24-reactions-and-transformations.md),
+  [evidências de verificação](docs/evidence/reactions-transformations/README.md)
+  e [demonstração com áudio](assets/showcase/reactions-transformations-2026-09-09.mp4).
+
 ## Rodada 2026-09-09 — Supers autorais
 
 - Quatro roteiros com captura, entrada congelada, pausa/retomada da música,

@@ -1,0 +1,57 @@
+{
+  "method": "Real XTest key/mouse input to App in independent Xephyr; parent window on host stays unmapped",
+  "binary_sha256": "4af62ae50fb2254dac93bd6299b72b4fe8850bdce8540571c3482fe6480ad1ca",
+  "display": ":93",
+  "checks": [
+    {
+      "name": "both_CPUs_disabled",
+      "passed": true
+    },
+    {
+      "name": "Y_changes_the_effective_arena_and_HUD_title",
+      "passed": true,
+      "stage_mean_difference": 43.45232755143203,
+      "title_pixels_before": 227,
+      "title_pixels_after": 145,
+      "title_text_visually_read_before": "Java Street Terminal / Sao Paulo, SP",
+      "title_text_visually_read_after": "Sirius Light Ring / Campinas, SP"
+    },
+    {
+      "name": "Sirius_persists_after_sequence",
+      "passed": true,
+      "stage_mean_difference": 1.3256528169961006
+    },
+    {
+      "name": "R_starts_fresh_round_on_selected_base_arena",
+      "passed": true,
+      "stage_mean_difference": 0.7797472098964636
+    },
+    {
+      "name": "super_does_not_overwrite_menu_arena_preference",
+      "passed": true,
+      "green_title_mask_iou": 0.9118012422360249,
+      "visible_value": "Java Street Terminal",
+      "note": "Different selected row changes antialias edge brightness; compare mask overlap rather than exact RGB."
+    },
+    {
+      "name": "rust_window_close",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "observations": [
+    {
+      "scenario": "rust",
+      "args": [
+        "--fight",
+        "--p1",
+        "rust",
+        "--p2",
+        "duke"
+      ],
+      "startup_seconds_upper_bound": 2.3
+    }
+  ],
+  "note": "No audio output in this input QA; pause/resume is validated by separate live AudioPlayer tests.",
+  "measurement_correction": "Initial exact-RGB title matcher found zero pixels in 10 px antialiased Barlow text. Reanalysis uses a nonempty luminance mask and preserves source PNGs; no game change was needed."
+}

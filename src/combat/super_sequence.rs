@@ -1,4 +1,4 @@
-//! Defines the four authored super schedules and their presentation snapshots.
+//! Defines the five authored super schedules and their presentation snapshots.
 //!
 //! System: Combat data. A World-owned sequence confirms capture, advances these
 //! fixed phases and applies only listed contacts; decorations never deal damage.
@@ -14,8 +14,18 @@ pub const SUPER_TARGET_LAND_END: u32 = 20;
 pub const DUKE_CLONE_COUNT: u32 = 12;
 pub const DUKE_COLLECT_START: u32 = 84;
 pub const DUKE_CLONE_CADENCE: u32 = 12;
-pub const CPP_FOOTSHOT_TICK: u32 = 44;
-pub const CPP_BARRAGE_START: u32 = 204;
+pub const RUST_ARENA_COMMIT_TICK: u32 = 125;
+pub const CPP_TYPING_TICK: u32 = 25;
+pub const CPP_ENTER_TICK: u32 = 130;
+pub const CPP_LAPTOP_END: u32 = 148;
+pub const CPP_FOOTSHOT_TICK: u32 = 184;
+pub const CPP_CHARGE_START: u32 = 280;
+pub const CPP_BARRAGE_START: u32 = 344;
+pub const CPP_FINISHER_TICK: u32 = 424;
+pub const CPP_REBOOT_TICK: u32 = 566;
+pub const PYTHON_SWALLOW_TICK: u32 = 304;
+pub const PYTHON_TARGET_RETURN_TICK: u32 = 388;
+pub const PYTHON_PEACE_START: u32 = 444;
 pub const CPP_BARRAGE_CADENCE: u32 = 10;
 pub const CPP_BARRAGE_HITS: u32 = 8;
 
@@ -36,12 +46,21 @@ pub enum SuperPhase {
     CBlueScreen,
     CBios,
     CReboot,
+    CppLaptop,
     CppFootshot,
     CppHop,
     CppRage,
     CppCharge,
     CppBarrage,
     CppFinisher,
+    PythonPrepare,
+    PythonMorph,
+    PythonGrow,
+    PythonMouth,
+    PythonLunge,
+    PythonSwallow,
+    PythonRevert,
+    PythonCelebrate,
     Restore,
 }
 
@@ -81,8 +100,8 @@ use SuperPhase::*;
 const RUST_PHASES: &[SuperPhaseSpan] = &[
     phase(Freeze, 0, 8),
     phase(RustBlackout, 8, 11),
-    phase(RustBuild, 11, 125),
-    phase(RustCharge, 125, 205),
+    phase(RustBuild, 11, RUST_ARENA_COMMIT_TICK),
+    phase(RustCharge, RUST_ARENA_COMMIT_TICK, 205),
     phase(RustPulse, 205, 235),
     phase(Restore, 235, 300),
 ];
@@ -108,16 +127,34 @@ const C_PHASES: &[SuperPhaseSpan] = &[
 
 const CPP_PHASES: &[SuperPhaseSpan] = &[
     phase(Freeze, 0, 8),
-    phase(CppFootshot, 8, 62),
-    phase(CppHop, 62, 110),
-    phase(CppRage, 110, 140),
-    phase(CppCharge, 140, 204),
-    phase(CppBarrage, 204, 284),
-    phase(CppFinisher, 284, 312),
-    phase(Restore, 312, 356),
+    phase(CppLaptop, 8, CPP_LAPTOP_END),
+    phase(CppFootshot, CPP_LAPTOP_END, 202),
+    phase(CppHop, 202, 250),
+    phase(CppRage, 250, CPP_CHARGE_START),
+    phase(CppCharge, CPP_CHARGE_START, CPP_BARRAGE_START),
+    phase(CppBarrage, CPP_BARRAGE_START, CPP_FINISHER_TICK),
+    phase(CppFinisher, CPP_FINISHER_TICK, 450),
+    phase(CTerminalStorm, 450, 498),
+    phase(CBlueScreen, 498, 538),
+    phase(CBios, 538, CPP_REBOOT_TICK),
+    phase(CReboot, CPP_REBOOT_TICK, 596),
+    phase(Restore, 596, 632),
 ];
 
-/// Returns authored data, or None for the unchanged Go/Python local cinematographics.
+const PYTHON_PHASES: &[SuperPhaseSpan] = &[
+    phase(Freeze, 0, 8),
+    phase(PythonPrepare, 8, 62),
+    phase(PythonMorph, 62, 158),
+    phase(PythonGrow, 158, 230),
+    phase(PythonMouth, 230, 270),
+    phase(PythonLunge, 270, PYTHON_SWALLOW_TICK),
+    phase(PythonSwallow, PYTHON_SWALLOW_TICK, 344),
+    phase(PythonRevert, 344, 400),
+    phase(PythonCelebrate, 400, 488),
+    phase(Restore, 488, 528),
+];
+
+/// Returns authored data, or None for the unchanged Go local cinematic.
 pub const fn super_spec(character: CharacterId) -> Option<SuperSpec> {
     Some(match character {
         CharacterId::Rust => SuperSpec {
@@ -160,57 +197,74 @@ pub const fn super_spec(character: CharacterId) -> Option<SuperSpec> {
             character,
             move_id: MoveId::CppTemplateSingularity,
             label: "Undefined Behavior: Footgun",
-            duration_frames: 356,
+            duration_frames: 632,
             phases: CPP_PHASES,
             contacts: &[
                 SuperContact {
-                    tick: 204,
+                    tick: CPP_BARRAGE_START,
                     damage: 3,
                     knockdown: false,
                 },
                 SuperContact {
-                    tick: 214,
+                    tick: CPP_BARRAGE_START + CPP_BARRAGE_CADENCE,
                     damage: 3,
                     knockdown: false,
                 },
                 SuperContact {
-                    tick: 224,
+                    tick: CPP_BARRAGE_START + 2 * CPP_BARRAGE_CADENCE,
                     damage: 3,
                     knockdown: false,
                 },
                 SuperContact {
-                    tick: 234,
+                    tick: CPP_BARRAGE_START + 3 * CPP_BARRAGE_CADENCE,
                     damage: 3,
                     knockdown: false,
                 },
                 SuperContact {
-                    tick: 244,
+                    tick: CPP_BARRAGE_START + 4 * CPP_BARRAGE_CADENCE,
                     damage: 3,
                     knockdown: false,
                 },
                 SuperContact {
-                    tick: 254,
+                    tick: CPP_BARRAGE_START + 5 * CPP_BARRAGE_CADENCE,
                     damage: 3,
                     knockdown: false,
                 },
                 SuperContact {
-                    tick: 264,
+                    tick: CPP_BARRAGE_START + 6 * CPP_BARRAGE_CADENCE,
                     damage: 3,
                     knockdown: false,
                 },
                 SuperContact {
-                    tick: 274,
+                    tick: CPP_BARRAGE_START + 7 * CPP_BARRAGE_CADENCE,
                     damage: 3,
                     knockdown: false,
                 },
                 SuperContact {
-                    tick: 284,
+                    tick: CPP_FINISHER_TICK,
+                    damage: 6,
+                    knockdown: true,
+                },
+                SuperContact {
+                    tick: CPP_REBOOT_TICK,
                     damage: 6,
                     knockdown: true,
                 },
             ],
         },
-        CharacterId::Go | CharacterId::Python => return None,
+        CharacterId::Python => SuperSpec {
+            character,
+            move_id: MoveId::PythonEventHorizon,
+            label: "import devour",
+            duration_frames: 528,
+            phases: PYTHON_PHASES,
+            contacts: &[SuperContact {
+                tick: PYTHON_SWALLOW_TICK,
+                damage: 32,
+                knockdown: true,
+            }],
+        },
+        CharacterId::Go => return None,
     })
 }
 
@@ -236,6 +290,12 @@ pub struct SuperSequence {
 }
 
 impl SuperSequence {
+    /// Python hides the captured target during swallowing, including held guard.
+    pub fn target_hidden(&self) -> bool {
+        self.character == CharacterId::Python
+            && (PYTHON_SWALLOW_TICK..PYTHON_TARGET_RETURN_TICK).contains(&self.tick)
+    }
+
     /// The single active phase, including restoration on the last tick.
     pub fn phase(&self) -> SuperPhase {
         self.phase_span().phase

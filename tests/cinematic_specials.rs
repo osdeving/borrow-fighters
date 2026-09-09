@@ -1,4 +1,4 @@
-//! Verifies Go/Python local cinematics and shared six-character preview controls.
+//! Verifies Go local cinematics and shared six-character preview controls.
 //!
 //! System: Combat integration. Full-screen presentation must not grant reach,
 //! invulnerability, extra contacts, or stale state after interruption and reset.
@@ -34,7 +34,7 @@ const ROSTER: [CharacterId; 6] = [
     CharacterId::Cpp,
 ];
 
-const LOCAL_CINEMATICS: [CharacterId; 2] = [CharacterId::Go, CharacterId::Python];
+const LOCAL_CINEMATICS: [CharacterId; 1] = [CharacterId::Go];
 
 fn baseline(character: CharacterId) -> SpriteManifest {
     SpriteManifest::load(format!(
@@ -67,7 +67,7 @@ fn special() -> FighterInput {
 }
 
 #[test]
-fn go_and_python_land_once_locally_and_both_guard_heights_reduce_damage() {
+fn go_lands_once_locally_and_both_guard_heights_reduce_damage() {
     for character in LOCAL_CINEMATICS {
         for reverse in [false, true] {
             for metadata in [false, true] {
