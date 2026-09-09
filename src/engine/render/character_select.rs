@@ -6,7 +6,7 @@
 use super::presentation::{self, CYAN, GOLD, MUTED, centered, label, panel};
 use super::{DrawTarget, GameAssets, character_visuals};
 use crate::characters::CharacterId;
-use crate::engine::sprites::frame_for_clip_at;
+use crate::engine::sprites::{SpriteFrame, SpriteManifest, SpriteRect, frame_for_clip_at};
 use crate::scenes::{
     character_select::{CharacterSelect, PUBLIC_ROSTER, RANDOM_SLOT},
     preferences::PlayMode,
@@ -477,14 +477,7 @@ fn draw_character_art(
     let Some(texture) = atlas.texture_for_frame(frame) else {
         return;
     };
-    let bounds = frame
-        .trimmed_bounds
-        .unwrap_or(crate::engine::sprites::SpriteRect {
-            x: 0,
-            y: 0,
-            w: frame.frame.w,
-            h: frame.frame.h,
-        });
+    let bounds = frame_bounds(frame);
     let mut source = Rectangle::new(
         (frame.frame.x + bounds.x) as f32,
         (frame.frame.y + bounds.y) as f32,
@@ -503,11 +496,11 @@ fn draw_character_art(
         source.x += (source.width - width) * 0.5;
         source.width = width;
     } else {
-        let scale = (dest.width / source.width).min(dest.height / source.height);
-        target.width = source.width * scale;
-        target.height = source.height * scale;
-        target.x += (dest.width - target.width) * 0.5;
-        target.y += dest.height - target.height;
+        let Some(placement) = standing_preview_target(&atlas.manifest, frame, dest, mirrored)
+        else {
+            return;
+        };
+        target = placement;
         let slide = (1.0 - (focus_time / 0.22).clamp(0.0, 1.0)).powi(3) * 25.0;
         target.x += if mirrored { slide } else { -slide };
     }
@@ -515,6 +508,66 @@ fn draw_character_art(
         source.width = -source.width;
     }
     draw.draw_texture_pro(texture, source, target, Vector2::zero(), 0.0, Color::WHITE);
+}
+
+fn frame_bounds(frame: &SpriteFrame) -> SpriteRect {
+    frame.trimmed_bounds.unwrap_or(SpriteRect {
+        x: 0,
+        y: 0,
+        w: frame.frame.w,
+        h: frame.frame.h,
+    })
+}
+
+fn bounds_from_pivot(frame: &SpriteFrame) -> Rectangle {
+    let bounds = frame_bounds(frame);
+    Rectangle::new(
+        (bounds.x - frame.pivot.x) as f32,
+        (bounds.y - frame.pivot.y) as f32,
+        bounds.w as f32,
+        bounds.h as f32,
+    )
+}
+
+// Fit a fixed envelope of the idle clip in pivot space. Poses may breathe or
+// lean without adding a per-frame zoom or moving their authored support point.
+fn standing_preview_target(
+    manifest: &SpriteManifest,
+    frame: &SpriteFrame,
+    dest: Rectangle,
+    mirrored: bool,
+) -> Option<Rectangle> {
+    let mut poses = manifest
+        .clip_named("idle")?
+        .frames
+        .iter()
+        .filter_map(|name| manifest.frame_named(name))
+        .map(bounds_from_pivot);
+    let first = poses.next()?;
+    let (mut left, mut top) = (first.x, first.y);
+    let (mut right, mut bottom) = (left + first.width, top + first.height);
+    for pose in poses {
+        left = left.min(pose.x);
+        top = top.min(pose.y);
+        right = right.max(pose.x + pose.width);
+        bottom = bottom.max(pose.y + pose.height);
+    }
+    let scale = (dest.width / (right - left)).min(dest.height / (bottom - top));
+    let center = (left + right) * 0.5;
+    let anchor_x = dest.x + dest.width * 0.5 + if mirrored { center } else { -center } * scale;
+    let anchor_y = dest.y + dest.height - bottom * scale;
+    let pose = bounds_from_pivot(frame);
+    let offset_x = if mirrored {
+        -pose.x - pose.width
+    } else {
+        pose.x
+    };
+    Some(Rectangle::new(
+        anchor_x + offset_x * scale,
+        anchor_y + pose.y * scale,
+        pose.width * scale,
+        pose.height * scale,
+    ))
 }
 
 fn identity(id: CharacterId) -> (&'static str, &'static str, &'static str) {
@@ -529,5 +582,57 @@ fn identity(id: CharacterId) -> (&'static str, &'static str, &'static str) {
         CharacterId::Python => ("Python.py", "DADOS / AGILIDADE", "IMPORT VICTORY"),
         CharacterId::Cpp => ("C++.cpp", "TEMPLATES / PUNIÇÃO", "UNDEFINED BEHAVIOR"),
         CharacterId::Go => ("Go.go", "GOROUTINES / VELOCIDADE", "GO FIGHT()"),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn public_idle_previews_keep_scale_and_pivot_and_fit_in_both_orientations() {
+        let manifests = [
+            include_str!("../../../assets/candidates/rust/rust-fighter.sprite.json"),
+            include_str!("../../../assets/candidates/duke/duke-fighter.sprite.json"),
+            include_str!("../../../assets/candidates/c/c-fighter.sprite.json"),
+            include_str!("../../../assets/candidates/python/python-fighter.sprite.json"),
+            include_str!("../../../assets/candidates/cpp/cpp-fighter.sprite.json"),
+        ];
+        let dest = Rectangle::new(56.0, 247.0, 246.0, 272.0);
+        for json in manifests {
+            let manifest: SpriteManifest = serde_json::from_str(json).unwrap();
+            for mirrored in [false, true] {
+                let mut reference = None;
+                for name in &manifest.clip_named("idle").unwrap().frames {
+                    let frame = manifest.frame_named(name).unwrap();
+                    let target = standing_preview_target(&manifest, frame, dest, mirrored).unwrap();
+                    let bounds = frame_bounds(frame);
+                    let scale = target.width / bounds.w as f32;
+                    let pivot_x = if mirrored {
+                        bounds.x + bounds.w - frame.pivot.x
+                    } else {
+                        frame.pivot.x - bounds.x
+                    } as f32;
+                    let pivot = (
+                        target.x + pivot_x * scale,
+                        target.y + (frame.pivot.y - bounds.y) as f32 * scale,
+                    );
+                    let (expected_scale, expected_pivot) = *reference.get_or_insert((scale, pivot));
+                    assert!((scale - expected_scale).abs() < 0.0001);
+                    assert!((pivot.0 - expected_pivot.0).abs() < 0.001);
+                    assert!((pivot.1 - expected_pivot.1).abs() < 0.001);
+                    assert!(target.x >= dest.x - 0.001 && target.y >= dest.y - 0.001);
+                    assert!(target.x + target.width <= dest.x + dest.width + 0.001);
+                    assert!(target.y + target.height <= dest.y + dest.height + 0.001);
+                    let opposite =
+                        standing_preview_target(&manifest, frame, dest, !mirrored).unwrap();
+                    assert!(
+                        (target.x + target.width + opposite.x - 2.0 * dest.x - dest.width).abs()
+                            < 0.001
+                    );
+                    assert!((target.y - opposite.y).abs() < 0.001);
+                }
+            }
+        }
     }
 }

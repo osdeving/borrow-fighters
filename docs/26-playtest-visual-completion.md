@@ -30,7 +30,8 @@ transições e substituição da voz de Old C. Balanceamento fino fica para depo
    ataques no vazio ou pelo próprio cinematográfico. Pedido recusado ou
    simultâneos cancelados não gastam energia. HUD explica carga/disponibilidade.
    Estes valores são um primeiro corte funcional, não balanceamento aprovado.
-   Laboratório e demonstrações continuam com uso livre para revisão.
+   Combat Lab e Move Showcase continuam com uso livre para revisão;
+   Assistir demo (CPU × CPU) usa a mesma energia das lutas normais.
 5. **Apresentação em movimento:** entrada das telas, movimento de foco,
    confirmação, revelação do confronto, início e resultado de luta. Uma pequena
    linguagem compartilhada de painéis, pulsos e conexões anima a UI sem framework
@@ -91,3 +92,9 @@ X11 do jogo, incluindo pausa, seleção e três partidas/revanches. As expectati
 do script precisam ser confirmadas nas capturas; não equivalem a teste de
 gamepad físico nem a audição humana. O vídeo de seleção fica junto aos PNGs
 em `visual-review-linux`.
+
+O parâmetro manual `deep_review` fica ligado por padrão. Pode ser desligado em
+ajustes apenas da interface depois que contatos e navegação já tiverem evidência
+válida: fmt, testes, Clippy, pacotes e capturas/vídeo da seleção continuam sendo
+executados. Os exemplos são compilados com otimização para gravar o renderer
+sem o custo da instrumentação de desenvolvimento.

@@ -137,8 +137,9 @@ de defesa para cada personagem, em 86,3 segundos com áudio.
 [evidências por contato](docs/evidence/python-cpp-reactions/README.md)._
 
 A [amostra anterior de reações e transformações](assets/showcase/reactions-transformations-2026-09-09.mp4)
-preserva os cinco supers, incluindo Rust/Sirius. O piloto atual substitui a
-apresentação de reações de Python/C++; os demais personagens ficam para outra rodada.
+preserva os cinco supers, incluindo Rust/Sirius. O piloto de Python/C++ agora
+se estende a Rust, Java, Old C e Go, com 128 poses novas nos oito perfis de contato.
+[Escopo e verificação desta rodada](docs/26-playtest-visual-completion.md).
 
 A [amostra dos quatro supers da rodada anterior](assets/showcase/authored-supers-2026-09-09.mp4)
 preserva a primeira versão de Duke, Rust, Old C e C++, junto ao
@@ -160,8 +161,9 @@ As fontes e a arte têm procedência em [assets/fonts](assets/fonts/README.md) e
 Cada um dos seis personagens também tem um especial cinematográfico adicional:
 `Y` para P1, `]` para P2, ou `LB` segurado + `RT` no controle. Rust, Duke, Old C, Python e C++
 agora executam sequências de 5–10,5 segundos: a música pausa, os atores são capturados
-e o roteiro assume a luta até a conclusão. Por enquanto são fáceis de acionar,
-inclusive à distância, para testar animação. Segurar defesa na entrada reduz o
+e o roteiro assume a luta até a conclusão. Na luta, exigem 100 de energia;
+Combat Lab e Move Showcase mantêm o uso livre. A captura funciona inclusive à
+distância. Segurar defesa na entrada reduz o
 dano para chip e não deixa morrer por chip. Go mantém contato local.
 Para inspecionar:
 
@@ -178,8 +180,9 @@ provoca #GP, tela azul e BIOS. C++ digita código com ponteiro nulo no notebook,
 atira no pé, aplica a rajada e termina herdando o crash de C. Python se transforma
 em cobra gigante, devora o adversário, volta à forma humana, pula e faz sinal de paz.
 Todos os defensores têm reações animadas com relógio próprio, incluindo queda e
-recuperação ampliadas nos supers. Rust, Old C, Go e C++ receberam vozes de fontes
-diferentes; Duke/Python foram preservados. [Créditos de áudio](assets/audio/ATTRIBUTION.md).
+recuperação ampliadas nos supers. Old C compartilha temporariamente a voz de Rust,
+como autorizado para o playtest; as vozes dos demais personagens foram preservadas.
+[Créditos de áudio](assets/audio/ATTRIBUTION.md).
 
 O [vídeo do acabamento de 8 de setembro](assets/showcase/presentation-polish-2026-09-08.mp4)
 e suas [capturas/verificação](docs/evidence/presentation-polish/README.md)

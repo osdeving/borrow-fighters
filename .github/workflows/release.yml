@@ -5,6 +5,11 @@ on:
     branches: ["release/**"]
     tags: ["v[0-9]*"]
   workflow_dispatch:
+    inputs:
+      deep_review:
+        description: Capture all contacts and exercise three matches (disable for UI-only follow-ups)
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -91,13 +96,13 @@ jobs:
       - name: Capture roster and match flow for manual visual review
         if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch'
         run: |
-          cargo build --locked --example capture_roster_flow_review --example capture_roster_contacts
-          xvfb-run -a target/$CARGO_BUILD_TARGET/debug/examples/capture_roster_flow_review dist/visual-review --frames
+          cargo build --locked --release --example capture_roster_flow_review --example capture_roster_contacts
+          xvfb-run -a target/$CARGO_BUILD_TARGET/release/examples/capture_roster_flow_review dist/visual-review --frames
           ffmpeg -hide_banner -loglevel error -framerate 60 -i dist/visual-review/selection-%04d.png -an -c:v libx264 -preset fast -threads 1 -pix_fmt yuv420p -movflags +faststart dist/visual-review/roster-motion.mp4
           rm dist/visual-review/selection-????.png
           mkdir -p dist/review-tools
-          cp target/$CARGO_BUILD_TARGET/debug/examples/capture_roster_flow_review dist/review-tools/
-          cp target/$CARGO_BUILD_TARGET/debug/examples/capture_roster_contacts dist/review-tools/
+          cp target/$CARGO_BUILD_TARGET/release/examples/capture_roster_flow_review dist/review-tools/
+          cp target/$CARGO_BUILD_TARGET/release/examples/capture_roster_contacts dist/review-tools/
           for binary in target/$CARGO_BUILD_TARGET/debug/deps/borrow_fighters-*; do
             if [ -f "$binary" ] && [ -x "$binary" ]; then
               cp "$binary" dist/review-tools/
@@ -112,9 +117,9 @@ jobs:
           if-no-files-found: error
           retention-days: 14
       - name: Capture and verify the complete contact reaction matrix
-        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch'
+        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch' && inputs.deep_review
         run: |
-          capture=target/$CARGO_BUILD_TARGET/debug/examples/capture_roster_contacts
+          capture=target/$CARGO_BUILD_TARGET/release/examples/capture_roster_contacts
           xvfb-run -a "$capture" --output dist/contact-review/right --video dist/contact-review/contacts-right.mp4
           xvfb-run -a "$capture" --reverse --output dist/contact-review/left
           xvfb-run -a "$capture" --no-damage --output dist/contact-review/protected-right
@@ -140,7 +145,7 @@ jobs:
                           seen.add(key)
           PY
       - uses: actions/upload-artifact@v4
-        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch' && !cancelled()
+        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch' && inputs.deep_review && !cancelled()
         with:
           name: contact-reaction-review-linux
           path: |
@@ -158,13 +163,13 @@ jobs:
           if-no-files-found: error
           retention-days: 14
       - name: Exercise three matches through the native X11 app
-        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch'
+        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch' && inputs.deep_review
         run: |
           xvfb-run -a -s '-screen 0 1280x720x24' python tools/review/capture_match_flow_x11.py \
             --executable "target/$CARGO_BUILD_TARGET/release/borrow-fighters" \
             --output-directory dist/app-flow --matches 3 --match-seconds 75
       - uses: actions/upload-artifact@v4
-        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch' && !cancelled()
+        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch' && inputs.deep_review && !cancelled()
         with:
           name: native-app-flow-linux
           path: dist/app-flow/**
