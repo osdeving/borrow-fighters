@@ -551,7 +551,8 @@ pub(super) fn draw_foreground(draw: &mut impl DrawTarget, world: &World, assets:
     let banner_y = if s.character == CharacterId::Python {
         WINDOW_HEIGHT - 82
     } else {
-        116
+        // Leave room for health, energy and their command labels above the scene.
+        180
     };
     draw.draw_rectangle(
         0,
