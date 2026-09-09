@@ -2,12 +2,14 @@
 
 ## Estado atual
 
-O corte atual é `v0.1.0-prototype.2`: corrige imagens e áudio ausentes ao abrir
-o jogo em pastas com acentos no Windows. A estabilização continua na branch
-`release/v0.1.0-prototype.1`, pelo PR #18. A [ADR 0019](adr/0019-playtest-distribution.md)
-registra as decisões de plataforma, bibliotecas, assets e primeira abertura.
-As [notas da versão](releases/v0.1.0-prototype.2.md) explicam a entrega ao jogador;
-as [notas do primeiro pacote](releases/v0.1.0-prototype.1.md) ficam como histórico.
+O corte atual é `v0.1.0-prototype.3`: seleção Linker, reações do elenco,
+pausa/revanche, energia e transições. A implementação foi integrada à `main`
+pelo [PR #19](https://github.com/osdeving/borrow-fighters/pull/19); a preparação
+dos pacotes usa `release/v0.1.0-prototype.3`, com retorno por PR à `main`.
+A [ADR 0019](adr/0019-playtest-distribution.md) registra as decisões de plataforma,
+bibliotecas, assets e primeira abertura. As [notas da versão](releases/v0.1.0-prototype.3.md)
+explicam a entrega ao jogador. A [correção anterior](releases/v0.1.0-prototype.2.md)
+de imagens e áudio em caminhos Windows com acentos continua incluída.
 
 ## Downloads
 
@@ -35,9 +37,9 @@ Os textos `LICENSE-MIT`/`LICENSE-APACHE` formalizam a escolha já declarada no
 Manter a versão idêntica em `Cargo.toml`, `Cargo.lock` e tag, por exemplo:
 
 ```text
-0.1.0-prototype.2
-v0.1.0-prototype.2
-release/v0.1.0-prototype.1
+0.1.0-prototype.3
+v0.1.0-prototype.3
+release/v0.1.0-prototype.3
 ```
 
 A tag e o pacote avançam para cada correção publicada; a branch de estabilização
@@ -84,8 +86,8 @@ a diferença de codificação nas chamadas C usadas pelo Raylib.
 Exemplo de publicação após os checks:
 
 ```sh
-git tag -a v0.1.0-prototype.2 -m 'release: fix Windows Unicode asset paths'
-git push origin v0.1.0-prototype.2
+git tag -a v0.1.0-prototype.3 -m 'release: publish roster, reactions and match flow'
+git push origin v0.1.0-prototype.3
 ```
 
 A solicitação explícita do responsável por publicar a release autoriza esse

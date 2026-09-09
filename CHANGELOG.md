@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.1.0-prototype.3 — Seleção, reações e fluxo de partida
+
+- Seleção visual Linker com retratos, personagens animados, confirmação P1/P2,
+  escolha aleatória, arena e modo de controle; cinco personagens selecionáveis.
+- 128 desenhos de reação para Rust, Java, Old C e Go completam o padrão de
+  Python/C++; Go permanece fora da seleção pública.
+- Pausa por `Esc`/`Start`, retomada sem perder o ponto do áudio e revanche
+  preservando personagens e arena, com novas transições de interface.
+- Energia de 0–100, carga inicial 50 e custo 100 para o cinematográfico;
+  contatos carregam a barra, enquanto Combat Lab e Move Showcase mantêm uso livre.
+- Old C compartilha temporariamente a voz de Rust; as demais vozes são preservadas.
+- Mantém a correção de caminhos com acentos no Windows e os cinco pacotes para
+  Windows/Linux. [Novidades, controles e downloads](docs/releases/v0.1.0-prototype.3.md).
+
 ## v0.1.0-prototype.2 — Assets em pastas com acentos no Windows
 
 - Corrige imagens e áudio ausentes quando a pasta de instalação ou de usuário
