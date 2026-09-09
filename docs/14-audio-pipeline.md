@@ -4,7 +4,7 @@
 
 Implementado em corte inicial.
 
-O projeto já possui um motor leve de áudio por eventos, manifesto JSON, música via stream, controle de volume de música no menu e integração com Raylib. Os arquivos sonoros atuais são assets CC0 de protótipo para UI, impactos, música, contagem e vozes/fallbacks de Rust, Duke/Java, Go, C, Python e C++, ainda sem direção final de mixagem.
+O projeto já possui um motor leve de áudio por eventos, manifesto JSON, música via stream, controle de volume de música no menu e integração com Raylib. Os arquivos sonoros são assets CC0 para UI, impactos, música, contagem e vozes próprias de Rust, Duke/Java, Go, C, Python e C++. As quatro sequências autorais também possuem entradas sonoras e efeitos sincronizados por fase, com pausa real da música.
 
 ## Objetivo
 
@@ -73,6 +73,16 @@ Decisão para o Prototype 0.1:
 | `combat.hit` | impacto físico de golpe próximo |
 | `combat.block` | impacto físico em defesa |
 | `projectile.impact` | impacto de projétil |
+| `super.start` | entrada com voz do atacante e efeito específico; substitui `fighter.attack.start` nos quatro supers autorais |
+| `super.trash_rain` | papel, copos e resíduos caem na sequência de Duke |
+| `super.collect` | coleta curta pelos clones de Duke; três variações |
+| `super.giant_drop` | queda do Duke gigante |
+| `super.mutation` | materialização e reorganização do mundo de Rust; duas variações |
+| `super.error` | cascata de erros de Old C |
+| `super.boot` | sinais de POST/BIOS antes de restaurar a arena |
+| `super.footshot` | disparo cômico da C++ |
+| `super.barrage_hit` | camada rápida de deslocamento/impacto da rajada de C++; três variações |
+| `super.end` | encerramento discreto da sequência autoral |
 
 ## Música Atual
 
@@ -89,6 +99,8 @@ Decisão para o Prototype 0.1:
 
 Música usa `Music` streaming do Raylib, não `Sound`. Por isso [`App`](../src/app.rs) chama `AudioPlayer::update_streams` a cada frame. O app troca a faixa em transições de tela e quando uma nova luta muda de arena, e `Options > Music Volume` aplica um multiplicador global apenas sobre música.
 
+Na entrada de uma sequência autoral, o app chama `AudioPlayer::set_cinematic_paused(true)` antes de tocar `super.start`. O player interrompe uma única vez os sons anteriores e chama `pause_stream` na música. Os próximos cues continuam tocando; `update_streams` e chamadas repetidas de `play_music` não avançam nem reiniciam a faixa pausada. Ao terminar normalmente, `set_cinematic_paused(false)` chama `resume_stream`, preservando a posição da faixa e permitindo terminar o último efeito. Reinício, Escape e mudanças de cena/personagem usam `cancel_cinematic()`, que também interrompe os efeitos da sequência abortada antes de retomar a música. Essa pausa é independente do ducking usado em outros contextos.
+
 Cada evento pode carregar:
 
 - `slot`: Player 1 ou Player 2;
@@ -98,7 +110,20 @@ Cada evento pode carregar:
 
 A contagem pré-luta é emitida pelo `World`, não pelo menu. A tela mostra `11`, `10`, `01`, `Fight!`, enquanto os clips atuais usam voz CC0 de "three", "two", "one" e "fight" para manter leitura auditiva imediata.
 
-As vozes de ataque possuem bindings específicos para golpes de identidade e fallback por personagem para os demais golpes próximos da demo. Rust e Duke/Java também possuem bindings específicos para cada golpe próximo do loadout, usando clips CC0 mais longos para não sumirem atrás da música. C++ usa fallback temporário de clips existentes até ganhar pacote de voz próprio. [`tests/audio_manifest.rs`](../tests/audio_manifest.rs) garante que Rust, Duke/Java, Go, C, Python e C++ conseguem resolver voz de início de golpe e cast de projectile para seus loadouts atuais, que todo binding referencia clip existente e que Rust/Duke não dependem só do fallback genérico.
+As vozes de ataque possuem bindings específicos para golpes de identidade e fallback do próprio personagem para os demais golpes próximos. Bindings com várias opções alternam gravações para reduzir repetição. C++ agora tem arquivos próprios e não usa vozes de C ou Python.
+
+| Lutador | Direção e gravação |
+|---|---|
+| Rust | Esforço jovem de aventureiro, por Brandon Song / wolfwoot; voz no pitch original. |
+| Duke / Java | Pacote anterior preservado, incluindo arquivos e parâmetros do manifesto. |
+| Old C | Atuação de velho sábio de Volvion, com esforço rouco; pitch original. |
+| Go | Vocalizações de criatura de Ogrebane, com articulação encurtada; fonte diferente de todas as vozes humanas. |
+| Python | Pacote anterior de cicifyre preservado, incluindo arquivos e parâmetros. |
+| C++ | Esforços de SkyRae e reações de AuraVoice; ambos diferentes da intérprete de Python. |
+
+As páginas originais, licenças e créditos estão em [ATTRIBUTION](../assets/audio/ATTRIBUTION.md). O [registro de produção](../assets/audio/production-2026-09-09.json) documenta hashes SHA256 das gravações, recortes, filtros, mixagens, saídas e preservação de Duke/Python. A identidade nova não depende de transpor o mesmo grunhido para vários personagens.
+
+[`tests/audio_manifest.rs`](../tests/audio_manifest.rs) garante que os loadouts resolvem voz, que os bindings apontam para arquivos existentes e do próprio personagem, que personagens distintos não compartilham o mesmo arquivo ou gravação-fonte de voz e que todos os cues das sequências têm bindings. A [página de audição](../assets/audio/audition.html) permite comparar vozes e efeitos isolados; o reel aplica volume e pitch do manifesto.
 
 ## Manifesto
 
@@ -144,6 +169,8 @@ Campos de `clips`:
 - `pan`: 0.5 é centro;
 - `required`: quando `true`, clip ausente gera warning explícito.
 
+Nota de calibração: o manifesto e o wrapper Rust documentam `pan=0.5` como centro, mas o `raudio.c` empacotado em raylib 6 usa −1..1, com centro em 0. O player atual repassa o valor do manifesto diretamente. Esta rodada preserva o runtime e os parâmetros aprovados; a mixagem da evidência reproduz essa chamada e a lei de pan nativa. Uma calibração futura deve alinhar essas convenções antes de alterar a imagem estéreo.
+
 Campos de `music`:
 
 - `id`: chave estável conhecida por `MusicTrack`;
@@ -186,6 +213,16 @@ cargo run
 
 Clips opcionais não quebram o jogo se o arquivo não existir. Os assets atuais já existem no repositório e são validados por teste.
 
+Para verificar pausa e retomada contra um dispositivo real, sem API de depuração no player de produção:
+
+```bash
+BORROW_AUDIO_REVIEW_OUTPUT=docs/evidence/authored-supers/audio-stream-review.json \
+  cargo test --lib live_music_pause_resume_and_cancel -- --ignored --nocapture
+```
+
+Este teste manual consulta `get_time_played`, verifica cues durante a pausa, cancela a sequência e mede a retomada das faixas usadas por luta, Combat Lab e Move Showcase. Também troca a faixa para Menu enquanto pausado. O [registro da execução](evidence/authored-supers/audio-stream-review.json) confirmou cursor estável durante a pausa e avanço após retomada/cancelamento. Trata-se do player real e das chamadas usadas nas cenas; a navegação do app e a sequência visual são verificadas separadamente pelo [harness de captura](../examples/capture_authored_super_review.rs).
+
+
 ## Regras Para Código Novo
 
 - Gameplay deve emitir `AudioEvent`, não chamar Raylib.
@@ -203,10 +240,13 @@ Clips opcionais não quebram o jogo se o arquivo não existir. Os assets atuais 
 - Adicionar controle separado por bus de SFX/voice na tela de preferências.
 - Adicionar `environment` real quando houver seleção de arena.
 - Adicionar cooldown de voz se clips repetirem demais em multi-hit.
-- Criar teste de lint para garantir que todo binding referencia clip existente no manifesto.
 - Trocar placeholders CC0 por direção sonora própria quando houver áudio original.
 - Avaliar middleware dedicado somente quando Raylib deixar de cobrir mistura, estados, bancos ou authoring.
 
 ## Cinematográficos adicionais
 
-Os seis `MoveId` cinematográficos têm bindings explícitos de `fighter.attack.start` e `combat.hit` no [manifesto](../assets/audio/audio_manifest.json). As vozes reaproveitam os clips fortes já disponíveis do personagem; os impactos usam `sfx.combat.hit.heavy.01/02`. Não foram gravadas falas novas nem adicionados cues. O dano e o áudio de impacto continuam vindo do contato local em `World`, nunca do efeito de tela. Os nomes estáveis dos golpes e comandos estão no [guia técnico de combate](12-technical-combat-guide.md#especiais-cinematográficos-adicionais).
+Os cinematográficos de Go e Python mantêm os bindings anteriores de ataque e impacto. Rust, Duke, Old C e C++ usam os cues `super.*` acima, emitidos pelo relógio puro em [`src/game/world/supers.rs`](../src/game/world/supers.rs). A entrada já mistura a voz com o efeito do personagem, evitando duas vozes sobrepostas. `combat.hit`, `fighter.hurt` e os equivalentes de defesa acompanham cada contato de dano real, incluindo o chip; os efeitos decorativos não aplicam dano.
+
+Os sons de lixo combinam papel, pequenos metais e impactos úmidos; a coleta alterna três recortes curtos. A queda gigante usa impacto grave; Rust usa metal e lâminas reverberantes; Old C usa erros digitais e POST; C++ usa disparo seco e camadas curtas de rajada. São recortes e mixagens de gravações CC0, sem fala gerada. Foram produzidos 25 arquivos de voz novos/substituídos e 18 efeitos de sequência, Ogg Vorbis mono 48 kHz, normalizados antes da codificação a −3,48 dBFS e com fades curtos. A validação das saídas decodificadas verificou ausência de clipping, amostras inválidas e arquivos vazios. A seleção subjetiva permanece disponível para audição humana no reel.
+
+Os roteiros e tempos estão no [plano das sequências autorais](23-authored-super-sequences.md); os nomes e comandos, no [guia técnico de combate](12-technical-combat-guide.md#especiais-cinematográficos-adicionais).

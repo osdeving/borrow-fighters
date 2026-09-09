@@ -42,6 +42,7 @@ borrow-fighters/
 │   │   ├── world.rs            # Estado jogável, intro/contagem e regras de partida
 │   │   └── world/
 │   │       ├── throws.rs       # Captura pareada e lançamento balístico
+│   │       ├── supers.rs       # Captura autoral, fases, áudio e contatos de supers
 │   │       └── signatures.rs   # Emissão e contato dos cinco especiais
 │   ├── engine/
 │   │   ├── mod.rs              # Adaptadores finos em volta de Raylib
@@ -55,6 +56,8 @@ borrow-fighters/
 │   │   │   ├── combat_lab.rs   # Desenho da cena isolada de Combat Lab
 │   │   │   ├── move_showcase.rs # Desenho de combate contextual no showcase
 │   │   │   ├── signature_effects.rs # Atlas de efeitos nas posições físicas
+│   │   │   ├── authored_supers.rs # Eclipse, mutação, terminais, tela azul e BIOS
+│   │   │   ├── authored_actors.rs # Clones, lixo e animação exclusiva de Footgun
 │   │   │   └── sprite_viewer.rs # Desenho da ferramenta isolada de sprites
 │   │   └── sprites/
 │   │       ├── animation.rs    # Seleção de frame por duração
@@ -68,6 +71,7 @@ borrow-fighters/
 │   │   ├── fighter.rs          # Estado comum de lutador
 │   │   ├── fighter/reactions.rs # Captura, voo e aterrissagem
 │   │   ├── signature.rs        # Entidades e geometria dos especiais
+│   │   ├── super_sequence.rs   # Dados puros dos quatro roteiros autorais
 │   │   ├── frame.rs            # Timing de combate em frames inteiros
 │   │   ├── collision.rs        # Resolução hitbox x hurtbox
 │   │   ├── move_data.rs        # Tabela MoveSpec dos golpes atuais

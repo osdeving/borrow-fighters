@@ -1,0 +1,306 @@
+{
+  "video": "assets/showcase/authored-supers-2026-09-09.mp4",
+  "video_sha256": "e08c8cc0bc9da700370be1f3f7263caf55a2a128dd2502877b6295c73b1586de",
+  "manifest_sha256": "b70503ab02ac5dccafb486af83bee5d70e000db67b66b0f2a801a7bc643b78ea",
+  "decoder_documentation": "https://ffmpeg.org/ffmpeg-resampler.html",
+  "schedule": "docs/evidence/authored-supers/video-review.json",
+  "method": "FFprobe/FFmpeg levels and zero-mean normalized FFT cross-correlation of actual OGG stingers against decoded mono16kHz mix. Secondary RMS-envelope matches are diagnostic only; waveform matches determine onset acceptance. Timestamp gaps are respected with aresample async=1:first_pts=0. No subjective listening was claimed.",
+  "probe": {
+    "programs": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "avg_frame_rate": "60/1",
+        "start_time": "0.000000",
+        "duration": "32.100000",
+        "nb_frames": "1926"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "avg_frame_rate": "0/0",
+        "start_time": "0.000000",
+        "duration": "32.100000",
+        "nb_frames": "1506"
+      }
+    ],
+    "format": {
+      "duration": "32.122000",
+      "size": "8840995"
+    }
+  },
+  "levels": {
+    "mean_volume": -28.8,
+    "max_volume": -2.0,
+    "float_decoded_peak_dbfs": -1.973,
+    "float_decoded_rms_dbfs": -28.815,
+    "samples_at_or_above_full_scale": 0,
+    "finite_samples": true
+  },
+  "super_start_matches": [
+    {
+      "character": "rust",
+      "cue": "SuperStart",
+      "video_frame": 60,
+      "expected_video_seconds": 1.0,
+      "reference_file": "assets/audio/sfx/super/start-rust.ogg",
+      "reference_sha256": "047723de8c0dc44278c458dab2290fa7dd49b0e6feaf69ff3faa7b0718e05d4a",
+      "reference_seconds": 0.758687,
+      "waveform_match": {
+        "start_seconds": 0.997313,
+        "normalized_correlation": 0.705322,
+        "next_distinct_correlation": 0.080469,
+        "search_seconds": [
+          0.0,
+          2.5
+        ],
+        "offset_from_video_seconds": -0.002687
+      },
+      "rms_envelope_match_5ms": {
+        "start_seconds": 1.0,
+        "normalized_correlation": 0.723434,
+        "next_distinct_correlation": 0.278851,
+        "search_seconds": [
+          0.0,
+          2.5
+        ],
+        "offset_from_video_seconds": 0.0
+      }
+    },
+    {
+      "character": "duke",
+      "cue": "SuperStart",
+      "video_frame": 510,
+      "expected_video_seconds": 8.5,
+      "reference_file": "assets/audio/sfx/super/start-duke.ogg",
+      "reference_sha256": "e541c38a0057d035f6531794460230c3b36e8137b8c28ef763b131a3f227a056",
+      "reference_seconds": 0.7,
+      "waveform_match": {
+        "start_seconds": 8.497312,
+        "normalized_correlation": 0.93902,
+        "next_distinct_correlation": 0.097382,
+        "search_seconds": [
+          7.0,
+          10.0
+        ],
+        "offset_from_video_seconds": -0.002688
+      },
+      "rms_envelope_match_5ms": {
+        "start_seconds": 8.5,
+        "normalized_correlation": 0.921227,
+        "next_distinct_correlation": 0.475753,
+        "search_seconds": [
+          7.0,
+          10.0
+        ],
+        "offset_from_video_seconds": 0.0
+      }
+    },
+    {
+      "character": "c",
+      "cue": "SuperStart",
+      "video_frame": 1010,
+      "expected_video_seconds": 16.833333,
+      "reference_file": "assets/audio/sfx/super/start-c.ogg",
+      "reference_sha256": "18f37295be9691dc909dc8bc7e4a549a53abb54d8ef772d39c08f29249086709",
+      "reference_seconds": 1.078688,
+      "waveform_match": {
+        "start_seconds": 16.833313,
+        "normalized_correlation": 0.643035,
+        "next_distinct_correlation": 0.083016,
+        "search_seconds": [
+          15.3333,
+          18.3333
+        ],
+        "offset_from_video_seconds": -2e-05
+      },
+      "rms_envelope_match_5ms": {
+        "start_seconds": 16.835,
+        "normalized_correlation": 0.741381,
+        "next_distinct_correlation": 0.60782,
+        "search_seconds": [
+          15.33,
+          18.33
+        ],
+        "offset_from_video_seconds": 0.001667
+      }
+    },
+    {
+      "character": "cpp",
+      "cue": "SuperStart",
+      "video_frame": 1480,
+      "expected_video_seconds": 24.666667,
+      "reference_file": "assets/audio/sfx/super/start-cpp.ogg",
+      "reference_sha256": "3158d9916e655cd7d54de23c6436ed9114c100c822c60dd0394f3e967f6ad73f",
+      "reference_seconds": 0.849313,
+      "waveform_match": {
+        "start_seconds": 24.664,
+        "normalized_correlation": 0.781178,
+        "next_distinct_correlation": 0.083468,
+        "search_seconds": [
+          23.1666,
+          26.1666
+        ],
+        "offset_from_video_seconds": -0.002667
+      },
+      "rms_envelope_match_5ms": {
+        "start_seconds": 25.19,
+        "normalized_correlation": 0.782488,
+        "next_distinct_correlation": 0.640527,
+        "search_seconds": [
+          23.165,
+          26.165
+        ],
+        "offset_from_video_seconds": 0.523333
+      },
+      "envelope_note": "Amplitude-envelope timing is ambiguous around overlapping effects and is not used for onset acceptance; the waveform match remains distinct and aligned."
+    }
+  ],
+  "scheduled_music_pause_windows": [
+    {
+      "character": "rust",
+      "preceding_cue": "SuperMutation",
+      "following_cue": "CombatHit",
+      "preceding_clip": "assets/audio/sfx/super/mutation-2.ogg",
+      "preceding_clip_seconds": 0.769312,
+      "before_super": {
+        "seconds": [
+          0.397313,
+          0.847313
+        ],
+        "rms_dbfs": -37.824
+      },
+      "interior_without_cues": {
+        "seconds": [
+          3.949959,
+          4.430646
+        ],
+        "rms_dbfs": -240.0
+      },
+      "after_super": {
+        "seconds": [
+          6.347313,
+          6.847313
+        ],
+        "rms_dbfs": -38.577
+      }
+    },
+    {
+      "character": "duke",
+      "preceding_cue": "SuperGiantDrop",
+      "following_cue": "SuperEnd",
+      "preceding_clip": "assets/audio/sfx/super/giant-drop.ogg",
+      "preceding_clip_seconds": 0.974688,
+      "before_super": {
+        "seconds": [
+          7.897312,
+          8.347312
+        ],
+        "rms_dbfs": -47.432
+      },
+      "interior_without_cues": {
+        "seconds": [
+          13.972,
+          14.230645
+        ],
+        "rms_dbfs": -240.0
+      },
+      "after_super": {
+        "seconds": [
+          14.680645,
+          15.180645
+        ],
+        "rms_dbfs": -44.611
+      }
+    },
+    {
+      "character": "c",
+      "preceding_cue": "SuperError",
+      "following_cue": "SuperBoot",
+      "preceding_clip": "assets/audio/sfx/super/error-cascade.ogg",
+      "preceding_clip_seconds": 0.484,
+      "before_super": {
+        "seconds": [
+          16.233313,
+          16.683313
+        ],
+        "rms_dbfs": -51.134
+      },
+      "interior_without_cues": {
+        "seconds": [
+          19.200313,
+          19.700313
+        ],
+        "rms_dbfs": -240.0
+      },
+      "after_super": {
+        "seconds": [
+          22.516647,
+          23.016647
+        ],
+        "rms_dbfs": -50.922
+      }
+    },
+    {
+      "character": "cpp",
+      "preceding_cue": "SuperFootshot",
+      "following_cue": "SuperBarrageHit",
+      "preceding_clip": "assets/audio/sfx/super/footshot.ogg",
+      "preceding_clip_seconds": 0.641312,
+      "before_super": {
+        "seconds": [
+          24.064,
+          24.514
+        ],
+        "rms_dbfs": -51.309
+      },
+      "interior_without_cues": {
+        "seconds": [
+          26.801323,
+          27.301323
+        ],
+        "rms_dbfs": -240.0
+      },
+      "after_super": {
+        "seconds": [
+          30.947333,
+          31.447333
+        ],
+        "rms_dbfs": -52.245
+      }
+    }
+  ],
+  "offset_spread_seconds": 0.002668,
+  "checks": {
+    "audio_stream_present": true,
+    "video_stream_present": true,
+    "scheduled_super_starts_present": true,
+    "finite_audio": true,
+    "not_silent": true,
+    "no_samples_reach_full_scale": true,
+    "all_waveform_matches_above_0_35": true,
+    "all_start_offsets_within_150ms": true,
+    "start_offset_spread_within_100ms": true,
+    "scheduled_quiet_interiors_below_minus65dB": true,
+    "music_audible_before_and_after_each_super": true
+  },
+  "passed": true,
+  "capture_timing": {
+    "fps": 60,
+    "video_frame_count": 1926,
+    "video_duration_seconds": 32.1,
+    "render_wall_time_seconds": 32.338942726,
+    "max_frame_lateness_seconds": 0.0,
+    "initial_video_hold_seconds": null
+  },
+  "audio_origin": "Offline mix from the real exported gameplay events and repository recordings; not live device capture.",
+  "runtime_validation": "audio-stream-review.json",
+  "mix_report": "offline-audio-mix.json"
+}

@@ -3,8 +3,9 @@
 //! System: Combat Lab scene. This file owns isolated move playback state and
 //! intentionally keeps Raylib drawing outside the testable lab model.
 //!
-//! The lab reuses combat primitives without match flow so move timing, pivots,
-//! hitboxes, hurtboxes, and projectile spawn can be inspected directly.
+//! Ordinary moves and poses use isolated combat primitives for box inspection.
+//! Authored supers retain a full World so both actors, phase contacts and audio
+//! use the same sequence contract as a match.
 
 use crate::characters::{CharacterId, character_spec};
 use crate::combat::{
@@ -307,6 +308,7 @@ pub struct CombatLab {
     show_pivot: bool,
     show_dummy: bool,
     show_background: bool,
+    super_preview: Option<crate::game::world::World>,
 }
 
 impl Default for CombatLab {
@@ -332,6 +334,7 @@ impl CombatLab {
             show_pivot: true,
             show_dummy: false,
             show_background: true,
+            super_preview: None,
         };
         lab.reset_playback();
         lab
@@ -398,6 +401,18 @@ impl CombatLab {
         &self.fighter
     }
 
+    /// Full two-actor preview for supers, shared with the normal match rules.
+    pub fn super_preview_world(&self) -> Option<&crate::game::world::World> {
+        self.super_preview.as_ref()
+    }
+
+    /// Drains authored phase cues for the App audio boundary.
+    pub fn take_super_audio_events(&mut self) -> Vec<crate::audio::AudioEvent> {
+        self.super_preview
+            .as_mut()
+            .map_or_else(Vec::new, |world| world.take_audio_events())
+    }
+
     /// Supplies baseline metadata for match-equivalent boxes and future projectile spawns.
     pub fn set_combat_manifest(&mut self, manifest: Option<SpriteManifest>) {
         self.combat_manifest = manifest;
@@ -421,7 +436,7 @@ impl CombatLab {
 
     /// Returns inspected attack boxes; the fighter's attack phase still gates contact.
     pub fn attack_boxes(&self) -> Vec<Rect> {
-        if self.is_signature_actor_preview() {
+        if self.is_signature_actor_preview() || self.super_preview.is_some() {
             return Vec::new();
         }
         self.projected_combat()
@@ -468,7 +483,7 @@ impl CombatLab {
 
     /// Returns whether the optional contact dummy should be drawn.
     pub const fn show_dummy(&self) -> bool {
-        self.show_dummy && !self.is_signature_actor_preview()
+        self.show_dummy && !self.is_signature_actor_preview() && self.super_preview.is_none()
     }
 
     /// Whether only the actor can be inspected, without World effect simulation.
@@ -484,7 +499,10 @@ impl CombatLab {
 
     /// Returns estimated advantage and spacing for the selected move.
     pub fn advantage(&self) -> Option<CombatLabAdvantage> {
-        if !self.pose.is_move_playback() || self.is_signature_actor_preview() {
+        if !self.pose.is_move_playback()
+            || self.is_signature_actor_preview()
+            || self.super_preview.is_some()
+        {
             return None;
         }
 
@@ -494,7 +512,10 @@ impl CombatLab {
 
     /// Returns the dummy body positioned at the selected move contact point.
     pub fn dummy_body_rect(&self) -> Rect {
-        if !self.pose.is_move_playback() || self.is_signature_actor_preview() {
+        if !self.pose.is_move_playback()
+            || self.is_signature_actor_preview()
+            || self.super_preview.is_some()
+        {
             return default_dummy_body();
         }
 
@@ -504,6 +525,19 @@ impl CombatLab {
     }
 
     fn advance_frame(&mut self) {
+        if let Some(world) = &mut self.super_preview {
+            world.update(
+                FIXED_TIMESTEP,
+                FighterInput {
+                    cinematic_special: self.current_frame == FrameCount::ZERO,
+                    ..FighterInput::default()
+                },
+                FighterInput::default(),
+            );
+            self.fighter = world.player_one.clone();
+            self.current_frame = FrameCount::new(self.current_frame.get().saturating_add(1));
+            return;
+        }
         if !self.pose.is_move_playback() {
             self.current_frame = FrameCount::new(self.current_frame.get().saturating_add(1));
             return;
@@ -551,6 +585,10 @@ impl CombatLab {
     }
 
     fn reset_playback(&mut self) {
+        self.super_preview = (self.pose.is_move_playback()
+            && self.selected_move == CombatLabMove::CinematicSpecial
+            && crate::combat::super_sequence::super_spec(self.character).is_some())
+        .then(|| crate::game::world::World::new_with_characters(self.character, CharacterId::Rust));
         self.fighter = fighter_for(self.character);
         self.projectiles.clear();
         self.current_frame = FrameCount::ZERO;

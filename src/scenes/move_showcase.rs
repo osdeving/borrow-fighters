@@ -136,7 +136,7 @@ impl MoveShowcase {
         if self.paused && !input.step_frame {
             return;
         }
-        if self.current_frame >= SCENARIO_FRAMES {
+        if self.current_frame >= self.scenario_frames() {
             if !self.repeat_current {
                 self.scenario_index = (self.scenario_index + 1) % self.move_count();
             }
@@ -147,6 +147,17 @@ impl MoveShowcase {
         self.world.update(FIXED_TIMESTEP, player_one, player_two);
         self.current_frame += 1;
         self.update_result();
+    }
+
+    /// Playback budget includes full authored super restoration and wake-up.
+    pub fn scenario_frames(&self) -> u32 {
+        if self.selected_move() == CombatLabMove::CinematicSpecial
+            && let Some(spec) = crate::combat::super_sequence::super_spec(self.character)
+        {
+            PREPARATION_FRAMES + spec.duration_frames + 90
+        } else {
+            SCENARIO_FRAMES
+        }
     }
 
     /// Returns the selected playable character.
@@ -321,6 +332,11 @@ impl MoveShowcase {
                     "Jump attack / strike a grounded opponent"
                 }
                 CombatLabMove::Projectile => "Projectile / control distance",
+                CombatLabMove::CinematicSpecial
+                    if crate::combat::super_sequence::super_spec(self.character).is_some() =>
+                {
+                    "Authored super / confirmed capture"
+                }
                 CombatLabMove::CinematicSpecial => "Cinematic special / commit at close range",
                 CombatLabMove::SignatureSpecial => match self.character {
                     CharacterId::Rust => "Borrow Fortress / armored shield rush",
@@ -361,6 +377,11 @@ impl MoveShowcase {
             }
             ShowcaseScenario::Attack(CombatLabMove::Projectile) => {
                 "Launch from distance; the opponent walks into the projectile."
+            }
+            ShowcaseScenario::Attack(CombatLabMove::CinematicSpecial)
+                if crate::combat::super_sequence::super_spec(self.character).is_some() =>
+            {
+                "The target is caught at any distance. Hold guard before activation to reduce the damage."
             }
             ShowcaseScenario::Attack(CombatLabMove::CinematicSpecial) => {
                 "The whole arena transforms. Get close to land the strike; guard or interrupt the wind-up."
@@ -418,6 +439,11 @@ impl MoveShowcase {
             .set_sprite_combat_manifests(self.combat_manifests.clone());
         let gap = match self.selected_move() {
             CombatLabMove::Projectile => world_px(300.0),
+            CombatLabMove::CinematicSpecial
+                if crate::combat::super_sequence::super_spec(self.character).is_some() =>
+            {
+                world_px(360.0)
+            }
             CombatLabMove::CinematicSpecial => world_px(60.0),
             CombatLabMove::SignatureSpecial if self.character == CharacterId::Duke => {
                 world_px(220.0)
@@ -518,7 +544,11 @@ impl MoveShowcase {
                     attack_input = attack_for(selected, attacker.facing);
                     self.attack_started = true;
                 }
-                if !defend_input.block && gap > world_px(35.0) {
+                if !defend_input.block
+                    && gap > world_px(35.0)
+                    && !(selected == CombatLabMove::CinematicSpecial
+                        && crate::combat::super_sequence::super_spec(self.character).is_some())
+                {
                     defend_input = toward(defender);
                 }
             } else if selected == CombatLabMove::Projectile {
@@ -591,7 +621,7 @@ impl MoveShowcase {
                     damage: total_damage,
                 }
             };
-        } else if self.current_frame >= SCENARIO_FRAMES - 40 {
+        } else if self.current_frame >= self.scenario_frames() - 40 {
             self.result = ShowcaseResult::Whiff;
         }
     }

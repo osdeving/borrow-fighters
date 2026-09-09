@@ -7,6 +7,8 @@ use raylib::core::text::RaylibFont;
 use raylib::prelude::*;
 use std::{f32::consts::TAU, ffi::CString};
 
+mod authored_actors;
+mod authored_supers;
 mod cinematic_effects;
 mod combat_lab;
 mod move_showcase;
@@ -114,7 +116,11 @@ pub fn draw_fight(
     gamepad_status: GamepadStatus,
     assets: &GameAssets,
 ) {
+    if authored_supers::draw_override(draw, world) {
+        return;
+    }
     draw.clear_background(BACKGROUND);
+    let visual_time_seconds = authored_supers::arena_time(world, visual_time_seconds);
     draw_arena(draw, arena, assets.arenas.get(arena), visual_time_seconds);
     draw_stage_life_layer(draw, arena, visual_time_seconds, flags, Some(world), assets);
     draw_world_cinematic_background(draw, world, assets);
@@ -132,38 +138,43 @@ pub fn draw_fight(
 
     draw_fighter_ground_lights(draw, world);
     draw_projectiles(draw, world, show_debug, assets);
-    draw_fighter(
-        draw,
-        &world.player_one,
-        FighterDrawOptions {
-            body_color: player_one_visuals.body_color,
-            show_debug,
-            sprite_atlas: fighter_atlas_for_intro(
-                spawn_intro,
-                player_one_visuals.start_atlas,
-                player_one_visuals.fight_atlas,
-            ),
-            spritesheet: assets.fighter_spritesheet.as_ref(),
-            world_elapsed_seconds: player_one_time,
-            forced_clip: player_one_clip,
-        },
-    );
-    draw_fighter(
-        draw,
-        &world.player_two,
-        FighterDrawOptions {
-            body_color: player_two_visuals.body_color,
-            show_debug,
-            sprite_atlas: fighter_atlas_for_intro(
-                spawn_intro,
-                player_two_visuals.start_atlas,
-                player_two_visuals.fight_atlas,
-            ),
-            spritesheet: assets.fighter_spritesheet.as_ref(),
-            world_elapsed_seconds: player_two_time,
-            forced_clip: player_two_clip,
-        },
-    );
+    if !hides_authored_actor(world, world.player_one.slot, assets) {
+        draw_fighter(
+            draw,
+            &world.player_one,
+            FighterDrawOptions {
+                body_color: player_one_visuals.body_color,
+                show_debug,
+                sprite_atlas: fighter_atlas_for_intro(
+                    spawn_intro,
+                    player_one_visuals.start_atlas,
+                    player_one_visuals.fight_atlas,
+                ),
+                spritesheet: assets.fighter_spritesheet.as_ref(),
+                world_elapsed_seconds: player_one_time,
+                forced_clip: player_one_clip,
+            },
+        );
+    }
+    if !hides_authored_actor(world, world.player_two.slot, assets) {
+        draw_fighter(
+            draw,
+            &world.player_two,
+            FighterDrawOptions {
+                body_color: player_two_visuals.body_color,
+                show_debug,
+                sprite_atlas: fighter_atlas_for_intro(
+                    spawn_intro,
+                    player_two_visuals.start_atlas,
+                    player_two_visuals.fight_atlas,
+                ),
+                spritesheet: assets.fighter_spritesheet.as_ref(),
+                world_elapsed_seconds: player_two_time,
+                forced_clip: player_two_clip,
+            },
+        );
+    }
+    draw_authored_actors(draw, world, assets);
     signature_effects::draw_signature_effects(draw, world, show_debug, assets);
     if show_debug {
         draw_body_collision(draw, world);
@@ -2374,12 +2385,32 @@ fn world_cinematic(
 }
 
 fn draw_world_cinematic_background(draw: &mut impl DrawTarget, world: &World, assets: &GameAssets) {
+    authored_supers::draw_background(draw, world, assets);
     if let Some((fighter, state)) = world_cinematic(world) {
         cinematic_effects::draw_background(draw, fighter, state, assets);
     }
 }
 
+fn authored_actor_textures(assets: &GameAssets) -> authored_actors::AuthoredActorTextures<'_> {
+    authored_actors::AuthoredActorTextures {
+        duke: assets.duke_collector_poses.as_ref(),
+        cpp_comedy: assets.cpp_footgun_comedy.as_ref(),
+        cpp_barrage: assets.cpp_footgun_barrage.as_ref(),
+        trash: assets.garbage_items.as_ref(),
+        font: assets.menu_font.as_ref(),
+    }
+}
+
+fn hides_authored_actor(world: &World, slot: PlayerSlot, assets: &GameAssets) -> bool {
+    authored_actors::hides_actor(world, slot, authored_actor_textures(assets))
+}
+
+fn draw_authored_actors(draw: &mut impl DrawTarget, world: &World, assets: &GameAssets) {
+    authored_actors::draw_authored_actors(draw, world, authored_actor_textures(assets));
+}
+
 fn draw_world_cinematic_foreground(draw: &mut impl DrawTarget, world: &World, assets: &GameAssets) {
+    authored_supers::draw_foreground(draw, world, assets);
     if let Some((fighter, state)) = world_cinematic(world) {
         cinematic_effects::draw_foreground(draw, fighter, state, assets);
     }
@@ -2402,7 +2433,9 @@ fn draw_stage_life_layer(
                 dog_atlas: assets.caramelo_run.as_ref(),
                 jessica_atlas: assets.jessica_gesture.as_ref(),
                 font: assets.menu_font.as_ref(),
-                cinematic_active: world.is_some_and(|world| world_cinematic(world).is_some()),
+                cinematic_active: world.is_some_and(|world| {
+                    world_cinematic(world).is_some() || world.super_sequence_active()
+                }),
             },
         );
     }
@@ -3514,6 +3547,30 @@ fn fighter_match_presentation(
     fighter: &Fighter,
     spawn_intro: bool,
 ) -> (Option<sprites::FighterSpriteClip>, f32) {
+    if let Some(sequence) = world.super_sequence() {
+        use crate::combat::super_sequence::SuperPhase;
+        if fighter.in_knockdown() {
+            return (Some(sprites::FighterSpriteClip::Knockdown), 0.1);
+        }
+        if fighter.slot == sequence.attacker && sequence.phase() != SuperPhase::Freeze {
+            let time = match sequence.character {
+                CharacterId::Rust => match sequence.phase() {
+                    SuperPhase::RustBuild => 0.08 + sequence.phase_progress() * 0.22,
+                    SuperPhase::RustCharge => 0.3 + sequence.phase_progress() * 0.22,
+                    SuperPhase::RustPulse => 0.52 + sequence.phase_progress() * 0.2,
+                    SuperPhase::Restore => 0.72 + sequence.phase_progress() * 0.4,
+                    _ => 0.0,
+                },
+                CharacterId::C => (sequence.tick as f32 / sequence.duration_frames as f32) * 1.1,
+                _ => 0.0,
+            };
+            return (Some(sprites::FighterSpriteClip::SignatureSpecial), time);
+        }
+        return (
+            None,
+            authored_supers::arena_time(world, world.elapsed_seconds),
+        );
+    }
     if world.outcome.is_some() && fighter.health <= 0 && fighter.in_knockdown() {
         // A lethal throw/launch ends on the floor. Never restart a standing
         // defeat animation or play the recovery that would make the loser rise.

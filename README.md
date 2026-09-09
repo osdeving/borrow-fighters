@@ -14,6 +14,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Visão e produto
 
+- [`docs/23-authored-super-sequences.md`](docs/23-authored-super-sequences.md): quatro supers com roteiro, clones, mutação de arena, BIOS, tiro no pé e vozes distintas.
 - [`docs/22-presentation-and-brazilian-stage-life.md`](docs/22-presentation-and-brazilian-stage-life.md): polimento de interface, cenários vivos e seis novos especiais cinematográficos.
 - [`docs/00-vision.md`](docs/00-vision.md): visão do jogo.
 - [`docs/01-mini-gdd.md`](docs/01-mini-gdd.md): Mini-GDD inicial.
@@ -64,6 +65,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Decisões registradas
 
+- [`docs/adr/0016-authored-super-sequences.md`](docs/adr/0016-authored-super-sequences.md): captura, fases e contatos autorais sob o relógio do combate.
 - [`docs/adr/0015-cinematic-presentation-and-stage-life.md`](docs/adr/0015-cinematic-presentation-and-stage-life.md): fontes consistentes, atores de cenário e efeitos cinematográficos com contato local.
 - [`docs/adr/0001-stack-rust-raylib.md`](docs/adr/0001-stack-rust-raylib.md): decisão inicial de stack.
 - [`docs/adr/0002-version-control-workflow.md`](docs/adr/0002-version-control-workflow.md): fluxo de branches, PRs e commits.
@@ -96,9 +98,14 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ## Amostra atual
 
-[![Cinco especiais, arremesso e gancho no combate real](assets/showcase/signature-spectacle-cover.jpg)](assets/showcase/signature-spectacle-2026-09-08.mp4)
+[![Garbage Collector com Duke e clones](docs/evidence/authored-supers/duke-right-hit-216-DukeCollect.png)](assets/showcase/authored-supers-2026-09-09.mp4)
 
-_Clique para ver os cinco especiais, o arremesso com troca de lados e o gancho: 21 segundos, 1280×720 a 60 fps, captura sem áudio do showcase real. [Produção e verificação](docs/21-signature-spectacle-and-throws.md)._
+_Clique para ver os quatro supers autorais com áudio, 1280×720 a 60 fps.
+[Roteiros e verificação](docs/23-authored-super-sequences.md)._
+
+A [amostra das assinaturas e arremessos](assets/showcase/signature-spectacle-2026-09-08.mp4)
+permanece como registro da rodada anterior, junto à sua
+[produção e verificação](docs/21-signature-spectacle-and-throws.md).
 
 O [clipe original do greybox](assets/showcase/prototype-0.1-greybox.mp4) permanece como histórico.
 
@@ -109,16 +116,26 @@ intervalos e uma participação de “Já acabou, Jéssica?” ao fundo de São 
 As fontes e a arte têm procedência em [assets/fonts](assets/fonts/README.md) e
 [assets/production/stage-life](assets/production/stage-life/README.md).
 
-Cada um dos seis personagens também ganha um especial cinematográfico adicional:
-`Y` para P1, `]` para P2, ou `LB` segurado + `RT` no controle. A apresentação ocupa
-a tela; o dano continua na hitbox local e pode ser bloqueado. Para inspecionar:
+Cada um dos seis personagens também tem um especial cinematográfico adicional:
+`Y` para P1, `]` para P2, ou `LB` segurado + `RT` no controle. Rust, Duke, Old C e C++
+agora executam sequências de 5–6 segundos: a música pausa, os atores são capturados
+e o roteiro assume a luta até a conclusão. Por enquanto são fáceis de acionar,
+inclusive à distância, para testar animação. Segurar defesa na entrada reduz o
+dano para chip e não deixa morrer por chip. Go/Python mantêm contato local.
+Para inspecionar:
 
 ```sh
 cargo run -- --showcase --character rust --move cinematic_special --repeat
 ```
 
 Troque `rust` por `duke`, `go`, `c`, `python` ou `cpp`. Os especiais anteriores
-continuam em `T` / `\\` / `RT`. [Plano e critérios](docs/22-presentation-and-brazilian-stage-life.md).
+continuam em `T` / `\\` / `RT`. [Roteiros, duração, dano e entrega](docs/23-authored-super-sequences.md).
+
+Java faz chover lixo, multiplica Duke para coletar/comer e termina com uma queda
+gigante. Rust traz estruturas do Sirius durante um eclipse; Old C provoca #GP,
+tela azul e reboot pela BIOS; C++ acerta o próprio pé com uma bazuca e parte para
+uma rajada de socos/chutes. Rust, Old C, Go e C++ receberam vozes de fontes
+diferentes; Duke/Python foram preservados. [Créditos de áudio](assets/audio/ATTRIBUTION.md).
 
 [Vídeo do novo acabamento e dos especiais](assets/showcase/presentation-polish-2026-09-08.mp4)
 e [capturas/verificação](docs/evidence/presentation-polish/README.md).

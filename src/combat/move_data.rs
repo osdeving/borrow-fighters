@@ -1573,7 +1573,7 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 52] = [
     MoveSpec {
         id: MoveId::DukeJvmOverdrive,
         input: MoveInputKind::CinematicSpecial,
-        label: "JVM Overdrive",
+        label: "Garbage Collector",
         frames: AttackFrameData {
             duration: FrameCount::new(110),
             active_start: FrameCount::new(42),
@@ -1623,7 +1623,7 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 52] = [
     MoveSpec {
         id: MoveId::CKernelPanic,
         input: MoveInputKind::CinematicSpecial,
-        label: "Kernel Panic",
+        label: "General Protection Fault / #GP",
         frames: AttackFrameData {
             duration: FrameCount::new(110),
             active_start: FrameCount::new(44),
@@ -1673,7 +1673,7 @@ pub const CLOSE_RANGE_MOVE_SPECS: [MoveSpec; 52] = [
     MoveSpec {
         id: MoveId::CppTemplateSingularity,
         input: MoveInputKind::CinematicSpecial,
-        label: "Template Singularity",
+        label: "Undefined Behavior: Footgun",
         frames: AttackFrameData {
             duration: FrameCount::new(106),
             active_start: FrameCount::new(40),

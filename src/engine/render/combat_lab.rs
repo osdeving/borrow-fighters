@@ -23,6 +23,25 @@ use super::{
 
 /// Draws the isolated Combat Lab scene.
 pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, assets: &GameAssets) {
+    if let Some(world) = lab.super_preview_world() {
+        use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
+        let mut flags = FeatureFlags::default();
+        flags.set(FeatureFlag::ShowHud, false);
+        flags.set(FeatureFlag::ShowStageLife, false);
+        super::draw_fight(
+            draw,
+            world,
+            ArenaId::home_for_character(lab.character()),
+            world.elapsed_seconds,
+            flags,
+            super::GamepadStatus::default(),
+            assets,
+        );
+        if !super::authored_supers::replaces_frame(world) {
+            combat_debug::draw_combat_lab_debug(draw, lab, assets.menu_font.as_ref());
+        }
+        return;
+    }
     draw.clear_background(BACKGROUND);
     if lab.show_background() {
         draw_arena(
@@ -95,7 +114,7 @@ pub fn draw_combat_lab(draw: &mut impl super::DrawTarget, lab: &CombatLab, asset
     if let Some(state) = lab.fighter().cinematic_special() {
         super::cinematic_effects::draw_foreground(draw, lab.fighter(), state, assets);
     }
-    combat_debug::draw_combat_lab_debug(draw, lab);
+    combat_debug::draw_combat_lab_debug(draw, lab, assets.menu_font.as_ref());
     if lab.is_signature_actor_preview() {
         draw.draw_text(
             "Actor preview. Signature effects/contact: open Move Showcase",

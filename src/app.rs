@@ -78,6 +78,7 @@ pub struct App {
     combat_lab: CombatLab,
     move_showcase: MoveShowcase,
     pending_showcase_input: CombatLabInput,
+    pending_lab_input: CombatLabInput,
     pending_fight_input: [PendingFighterInput; 2],
     character_body_metrics: CharacterBodyMetricsCatalog,
     match_options: MatchOptions,
@@ -152,6 +153,7 @@ impl App {
             combat_lab,
             move_showcase,
             pending_showcase_input: CombatLabInput::default(),
+            pending_lab_input: CombatLabInput::default(),
             pending_fight_input: [PendingFighterInput::default(); 2],
             character_body_metrics,
             match_options,
@@ -225,9 +227,11 @@ impl App {
             match self.scene {
                 AppScene::CombatLab => {
                     if input.open_preferences {
+                        self.pending_lab_input = CombatLabInput::default();
                         self.scene = AppScene::Preferences;
                         self.preferences_menu.ignore_next_input();
                         self.accumulator = 0.0;
+                        audio_player.cancel_cinematic();
                         audio_player.play(&AudioEvent::ui_back());
                         audio_player.play_music(MusicTrack::Menu);
                         sync_system_cursor(raylib);
@@ -255,16 +259,22 @@ impl App {
                             );
                         }
                     } else {
-                        self.update_combat_lab(frame_time, input.combat_lab);
+                        self.update_combat_lab(frame_time, input.combat_lab, &mut audio_player);
 
                         {
                             let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
                             render::draw_combat_lab(&mut draw, &self.combat_lab, &assets);
-                            render::draw_video_capture_overlay(
-                                &mut draw,
-                                self.video_capture.is_recording(),
-                                self.video_capture.last_message(),
-                            );
+                            if !self
+                                .combat_lab
+                                .super_preview_world()
+                                .is_some_and(authored_frame_replaced)
+                            {
+                                render::draw_video_capture_overlay(
+                                    &mut draw,
+                                    self.video_capture.is_recording(),
+                                    self.video_capture.last_message(),
+                                );
+                            }
                         }
                     }
                     finish_frame(
@@ -273,7 +283,13 @@ impl App {
                         &frame_target,
                         &mut self.video_capture,
                         software_cursor_for_position(
-                            software_cursor_enabled,
+                            software_cursor_enabled
+                                && !scene_replaces_frame(
+                                    self.scene,
+                                    &self.world,
+                                    &self.combat_lab,
+                                    &self.move_showcase,
+                                ),
                             mouse_position,
                             self.visual_time_seconds,
                             &assets,
@@ -285,6 +301,7 @@ impl App {
                         self.scene = AppScene::Preferences;
                         self.preferences_menu.ignore_next_input();
                         self.accumulator = 0.0;
+                        audio_player.cancel_cinematic();
                         audio_player.play(&AudioEvent::ui_back());
                         audio_player.play_music(MusicTrack::Menu);
                         sync_system_cursor(raylib);
@@ -316,13 +333,16 @@ impl App {
                             self.move_showcase.toggle_repeat();
                         }
                         if raylib.is_key_pressed(KeyboardKey::KEY_X) {
+                            audio_player.cancel_cinematic();
                             self.move_showcase.switch_sides();
                             self.pending_showcase_input = CombatLabInput::default();
                         }
                         if input.combat_lab.next_pose {
+                            audio_player.cancel_cinematic();
                             self.cycle_showcase_character(CycleDirection::Next);
                             self.sync_showcase_sprite_combat(&assets);
                         } else if input.combat_lab.previous_pose {
+                            audio_player.cancel_cinematic();
                             self.cycle_showcase_character(CycleDirection::Previous);
                             self.sync_showcase_sprite_combat(&assets);
                         }
@@ -338,11 +358,13 @@ impl App {
                                 self.feature_flags,
                                 &assets,
                             );
-                            render::draw_video_capture_overlay(
-                                &mut draw,
-                                self.video_capture.is_recording(),
-                                self.video_capture.last_message(),
-                            );
+                            if !authored_frame_replaced(self.move_showcase.world()) {
+                                render::draw_video_capture_overlay(
+                                    &mut draw,
+                                    self.video_capture.is_recording(),
+                                    self.video_capture.last_message(),
+                                );
+                            }
                         }
                     }
                     finish_frame(
@@ -351,7 +373,13 @@ impl App {
                         &frame_target,
                         &mut self.video_capture,
                         software_cursor_for_position(
-                            software_cursor_enabled,
+                            software_cursor_enabled
+                                && !scene_replaces_frame(
+                                    self.scene,
+                                    &self.world,
+                                    &self.combat_lab,
+                                    &self.move_showcase,
+                                ),
                             mouse_position,
                             self.visual_time_seconds,
                             &assets,
@@ -360,6 +388,7 @@ impl App {
                 }
                 AppScene::Preferences => {
                     if input.open_preferences && self.preferences_menu.back() {
+                        audio_player.cancel_cinematic();
                         audio_player.play(&AudioEvent::ui_back());
                     } else {
                         let mut preferences_input = input.preferences;
@@ -424,6 +453,7 @@ impl App {
                                     ),
                                 );
                                 self.scene = AppScene::CombatLab;
+                                self.pending_lab_input = CombatLabInput::default();
                                 self.accumulator = 0.0;
                                 audio_player.play_music(MusicTrack::CombatDeterminedPursuit);
                             }
@@ -488,7 +518,13 @@ impl App {
                         &frame_target,
                         &mut self.video_capture,
                         software_cursor_for_position(
-                            software_cursor_enabled,
+                            software_cursor_enabled
+                                && !scene_replaces_frame(
+                                    self.scene,
+                                    &self.world,
+                                    &self.combat_lab,
+                                    &self.move_showcase,
+                                ),
                             mouse_position,
                             self.visual_time_seconds,
                             &assets,
@@ -500,6 +536,7 @@ impl App {
                         self.pending_fight_input = [PendingFighterInput::default(); 2];
                         self.scene = AppScene::Preferences;
                         self.preferences_menu.ignore_next_input();
+                        audio_player.cancel_cinematic();
                         audio_player.play(&AudioEvent::ui_back());
                         audio_player.play_music(MusicTrack::Menu);
                         {
@@ -531,7 +568,13 @@ impl App {
                             &frame_target,
                             &mut self.video_capture,
                             software_cursor_for_position(
-                                software_cursor_enabled,
+                                software_cursor_enabled
+                                    && !scene_replaces_frame(
+                                        self.scene,
+                                        &self.world,
+                                        &self.combat_lab,
+                                        &self.move_showcase,
+                                    ),
                                 mouse_position,
                                 self.visual_time_seconds,
                                 &assets,
@@ -540,6 +583,7 @@ impl App {
                     } else {
                         if input.restart {
                             self.restart_match(&assets);
+                            audio_player.cancel_cinematic();
                             audio_player.play_music(music_track_for_arena(self.current_arena));
                         }
 
@@ -596,6 +640,7 @@ impl App {
                                 self.feature_flags,
                             );
                             self.remember_finished_match();
+                            audio_player.set_cinematic_paused(self.world.super_sequence_active());
                             audio_player.play_events(self.world.drain_audio_events());
                             self.accumulator -= FIXED_TIMESTEP;
                             fixed_steps += 1;
@@ -618,11 +663,13 @@ impl App {
                                 gamepad_status,
                                 &assets,
                             );
-                            render::draw_video_capture_overlay(
-                                &mut draw,
-                                self.video_capture.is_recording(),
-                                self.video_capture.last_message(),
-                            );
+                            if !authored_frame_replaced(&self.world) {
+                                render::draw_video_capture_overlay(
+                                    &mut draw,
+                                    self.video_capture.is_recording(),
+                                    self.video_capture.last_message(),
+                                );
+                            }
                         }
                         finish_frame(
                             raylib,
@@ -630,7 +677,13 @@ impl App {
                             &frame_target,
                             &mut self.video_capture,
                             software_cursor_for_position(
-                                software_cursor_enabled,
+                                software_cursor_enabled
+                                    && !scene_replaces_frame(
+                                        self.scene,
+                                        &self.world,
+                                        &self.combat_lab,
+                                        &self.move_showcase,
+                                    ),
                                 mouse_position,
                                 self.visual_time_seconds,
                                 &assets,
@@ -723,17 +776,34 @@ impl App {
         self.accumulator = 0.0;
     }
 
-    fn update_combat_lab(&mut self, frame_time: f32, input: CombatLabInput) {
+    fn update_combat_lab(
+        &mut self,
+        frame_time: f32,
+        input: CombatLabInput,
+        audio: &mut AudioPlayer<'_>,
+    ) {
         self.accumulator += frame_time;
+        self.pending_lab_input = merge_showcase_input(self.pending_lab_input, input);
         let mut fixed_steps = 0;
 
         while self.accumulator >= FIXED_TIMESTEP && fixed_steps < MAX_FIXED_STEPS_PER_FRAME {
-            let lab_input = if fixed_steps == 0 {
-                input
-            } else {
-                CombatLabInput::default()
-            };
+            let lab_input = std::mem::take(&mut self.pending_lab_input);
+            if lab_input.reset
+                || lab_input.next_move
+                || lab_input.previous_move
+                || lab_input.replay
+                || lab_input.next_pose
+                || lab_input.previous_pose
+            {
+                audio.cancel_cinematic();
+            }
             self.combat_lab.update(lab_input);
+            audio.set_cinematic_paused(
+                self.combat_lab
+                    .super_preview_world()
+                    .is_some_and(World::super_sequence_active),
+            );
+            audio.play_events(self.combat_lab.take_super_audio_events());
             self.accumulator -= FIXED_TIMESTEP;
             fixed_steps += 1;
         }
@@ -755,7 +825,15 @@ impl App {
 
         while self.accumulator >= FIXED_TIMESTEP && fixed_steps < MAX_FIXED_STEPS_PER_FRAME {
             let showcase_input = std::mem::take(&mut self.pending_showcase_input);
+            if showcase_input.reset
+                || showcase_input.next_move
+                || showcase_input.previous_move
+                || showcase_input.replay
+            {
+                audio.cancel_cinematic();
+            }
             self.move_showcase.update(showcase_input);
+            audio.set_cinematic_paused(self.move_showcase.world().super_sequence_active());
             audio.play_events(self.move_showcase.take_audio_events());
             self.accumulator -= FIXED_TIMESTEP;
             fixed_steps += 1;
@@ -804,7 +882,13 @@ fn merge_showcase_input(first: CombatLabInput, second: CombatLabInput) -> Combat
         pause_toggle: first.pause_toggle || second.pause_toggle,
         step_frame: first.step_frame || second.step_frame,
         reset: first.reset || second.reset,
-        ..CombatLabInput::default()
+        next_pose: first.next_pose || second.next_pose,
+        previous_pose: first.previous_pose || second.previous_pose,
+        toggle_hurtboxes: first.toggle_hurtboxes || second.toggle_hurtboxes,
+        toggle_hitboxes: first.toggle_hitboxes || second.toggle_hitboxes,
+        toggle_pivot: first.toggle_pivot || second.toggle_pivot,
+        toggle_dummy: first.toggle_dummy || second.toggle_dummy,
+        toggle_background: first.toggle_background || second.toggle_background,
     }
 }
 
@@ -904,6 +988,32 @@ fn software_cursor_for_position<'a>(
         visual_time_seconds,
         assets,
     })
+}
+
+fn authored_frame_replaced(world: &World) -> bool {
+    use crate::combat::super_sequence::SuperPhase;
+    world.super_sequence().is_some_and(|sequence| {
+        matches!(
+            sequence.phase(),
+            SuperPhase::RustBlackout | SuperPhase::CBios
+        )
+    })
+}
+
+fn scene_replaces_frame(
+    scene: AppScene,
+    world: &World,
+    lab: &CombatLab,
+    showcase: &MoveShowcase,
+) -> bool {
+    match scene {
+        AppScene::Fight => authored_frame_replaced(world),
+        AppScene::CombatLab => lab
+            .super_preview_world()
+            .is_some_and(authored_frame_replaced),
+        AppScene::MoveShowcase => authored_frame_replaced(showcase.world()),
+        _ => false,
+    }
 }
 
 const fn music_track_for_scene(scene: AppScene, arena: ArenaId) -> MusicTrack {
@@ -1288,6 +1398,139 @@ mod tests {
         );
         assert_eq!(app.move_showcase.current_frame(), 1);
         assert!(app.move_showcase.take_audio_events().is_empty());
+    }
+
+    #[test]
+    fn lab_retains_pause_and_step_edges_across_render_only_frames_without_catch_up_repeats() {
+        let options = LaunchOptions::parse(
+            [
+                "game",
+                "--lab",
+                "combat",
+                "--character",
+                "c",
+                "--move",
+                "cinematic_special",
+            ]
+            .map(String::from),
+        )
+        .unwrap();
+        let mut app = App::new(options);
+        let mut audio = AudioPlayer::disabled();
+        app.update_combat_lab(FIXED_TIMESTEP, CombatLabInput::default(), &mut audio);
+        app.update_combat_lab(
+            FIXED_TIMESTEP * 0.25,
+            CombatLabInput {
+                pause_toggle: true,
+                ..CombatLabInput::default()
+            },
+            &mut audio,
+        );
+        assert!(!app.combat_lab.paused());
+        app.update_combat_lab(FIXED_TIMESTEP * 0.75, CombatLabInput::default(), &mut audio);
+        assert!(app.combat_lab.paused());
+        assert_eq!(
+            app.combat_lab
+                .super_preview_world()
+                .unwrap()
+                .super_sequence()
+                .unwrap()
+                .tick,
+            0
+        );
+        app.update_combat_lab(
+            FIXED_TIMESTEP * 0.25,
+            CombatLabInput {
+                step_frame: true,
+                toggle_background: true,
+                ..CombatLabInput::default()
+            },
+            &mut audio,
+        );
+        assert_eq!(app.combat_lab.current_frame().get(), 1);
+        app.update_combat_lab(FIXED_TIMESTEP * 3.75, CombatLabInput::default(), &mut audio);
+        assert_eq!(app.combat_lab.current_frame().get(), 2);
+        assert_eq!(
+            app.combat_lab
+                .super_preview_world()
+                .unwrap()
+                .super_sequence()
+                .unwrap()
+                .tick,
+            1
+        );
+        assert!(!app.combat_lab.show_background());
+        assert_eq!(app.pending_lab_input, CombatLabInput::default());
+    }
+
+    #[test]
+    fn lab_reset_during_a_paused_super_clears_capture_then_single_step_restarts_at_zero() {
+        for character in ["rust", "duke", "c", "cpp"] {
+            let options = LaunchOptions::parse(
+                [
+                    "game",
+                    "--lab",
+                    "combat",
+                    "--character",
+                    character,
+                    "--move",
+                    "cinematic_special",
+                ]
+                .map(String::from),
+            )
+            .unwrap();
+            let mut app = App::new(options);
+            let mut audio = AudioPlayer::disabled();
+            for _ in 0..230 {
+                app.update_combat_lab(FIXED_TIMESTEP, CombatLabInput::default(), &mut audio);
+            }
+            app.update_combat_lab(
+                FIXED_TIMESTEP,
+                CombatLabInput {
+                    pause_toggle: true,
+                    ..CombatLabInput::default()
+                },
+                &mut audio,
+            );
+            assert!(
+                app.combat_lab
+                    .super_preview_world()
+                    .unwrap()
+                    .super_sequence_active()
+            );
+            app.update_combat_lab(
+                FIXED_TIMESTEP * 0.25,
+                CombatLabInput {
+                    reset: true,
+                    ..CombatLabInput::default()
+                },
+                &mut audio,
+            );
+            app.update_combat_lab(FIXED_TIMESTEP * 0.75, CombatLabInput::default(), &mut audio);
+            let preview = app.combat_lab.super_preview_world().unwrap();
+            assert!(!preview.super_sequence_active());
+            assert_eq!(preview.player_two.health, preview.player_two.max_health);
+            assert!(app.combat_lab.paused());
+            assert_eq!(app.combat_lab.current_frame().get(), 0);
+            app.update_combat_lab(
+                FIXED_TIMESTEP * 2.0,
+                CombatLabInput {
+                    step_frame: true,
+                    ..CombatLabInput::default()
+                },
+                &mut audio,
+            );
+            assert_eq!(
+                app.combat_lab
+                    .super_preview_world()
+                    .unwrap()
+                    .super_sequence()
+                    .unwrap()
+                    .tick,
+                0
+            );
+            assert_eq!(app.combat_lab.current_frame().get(), 1);
+        }
     }
 
     #[test]

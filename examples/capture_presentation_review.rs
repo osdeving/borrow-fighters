@@ -292,8 +292,8 @@ impl Movie {
         Ok(Self { child, stdin })
     }
     fn frame(&mut self, target: &RenderTexture2D) -> ReviewResult<()> {
-        let image = target.texture().load_image()?;
-        self.stdin.write_all(&image.get_image_data_u8(true))?;
+        let pixels = borrow_fighters::engine::video_capture::read_render_texture_rgba(target)?;
+        self.stdin.write_all(&pixels)?;
         Ok(())
     }
     fn finish(self) -> ReviewResult<()> {

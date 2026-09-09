@@ -23,7 +23,11 @@ const UI_MUTED: Color = Color::new(165, 172, 185, 255);
 const UI_TEXT: Color = Color::new(238, 241, 247, 255);
 
 /// Draws every Combat Lab debug overlay controlled by lab toggles.
-pub fn draw_combat_lab_debug(draw: &mut impl RaylibDraw, lab: &CombatLab) {
+pub fn draw_combat_lab_debug(draw: &mut impl RaylibDraw, lab: &CombatLab, font: Option<&Font>) {
+    if lab.super_preview_world().is_some() {
+        draw_super_lab_overlay(draw, lab, font);
+        return;
+    }
     draw_lab_boxes(draw, lab);
     if lab.show_dummy() {
         draw_lab_dummy(draw, lab);
@@ -32,6 +36,30 @@ pub fn draw_combat_lab_debug(draw: &mut impl RaylibDraw, lab: &CombatLab) {
         draw_lab_pivot(draw, lab.fighter());
     }
     draw_lab_overlay(draw, lab);
+}
+
+fn draw_super_lab_overlay(draw: &mut impl RaylibDraw, lab: &CombatLab, font: Option<&Font>) {
+    let spec = crate::combat::super_sequence::super_spec(lab.character())
+        .expect("super lab has authored spec");
+    let top = WINDOW_HEIGHT - 104;
+    draw.draw_rectangle(0, top, WINDOW_WIDTH, 104, PANEL);
+    let title = format!(
+        "SUPER LAB / {} / {} / {}",
+        character_spec(lab.character()).display_name,
+        spec.label,
+        if lab.paused() { "PAUSED" } else { "PLAYING" }
+    );
+    for (text, y, size, color) in [
+        (title, top + 7, 24.0, UI_TEXT),
+        (lab_timing_text(lab), top + 39, 20.0, UI_MUTED),
+        ("Space: pause   .: frame   Enter: replay   Tab/Shift+Tab: move   Home: reset   Esc: menu".into(), top + 73, 18.0, UI_MUTED),
+    ] {
+        if let Some(font) = font {
+            draw.draw_text_ex(font, &text, Vector2::new(18.0, y as f32), size, 1.0, color);
+        } else {
+            draw.draw_text(&text, 18, y, size as i32, color);
+        }
+    }
 }
 
 fn draw_lab_boxes(draw: &mut impl RaylibDraw, lab: &CombatLab) {
@@ -191,6 +219,46 @@ fn draw_lab_overlay(draw: &mut impl RaylibDraw, lab: &CombatLab) {
 }
 
 fn lab_timing_text(lab: &CombatLab) -> String {
+    if let Some(world) = lab.super_preview_world() {
+        let spec = crate::combat::super_sequence::super_spec(lab.character())
+            .expect("super lab has authored spec");
+        let timing = world.super_sequence().map_or_else(
+            || {
+                if lab.current_frame().get() == 0 {
+                    "ready".to_owned()
+                } else {
+                    "restored".to_owned()
+                }
+            },
+            |sequence| {
+                format!(
+                    "{:?} {:03}/{:03}",
+                    sequence.phase(),
+                    sequence.tick,
+                    sequence.duration_frames
+                )
+            },
+        );
+        let contacts = world
+            .combat_log()
+            .iter()
+            .filter(|event| {
+                matches!(
+                    event.kind,
+                    crate::game::combat_log::CombatLogKind::CloseAttackResolved { .. }
+                )
+            })
+            .count();
+        return format!(
+            "{} | contacts {}/{} | target HP {}/{} | frame {:03}",
+            timing,
+            contacts,
+            spec.contacts.len(),
+            world.player_two.health,
+            world.player_two.max_health,
+            lab.current_frame().get()
+        );
+    }
     if !matches!(lab.pose(), CombatLabPose::Move) {
         return format!("pose {} | inspect boxes/pivot", lab.pose().label());
     }

@@ -27,9 +27,13 @@ pub fn draw_move_showcase(
     flags: FeatureFlags,
     assets: &GameAssets,
 ) {
-    draw.clear_background(BACKGROUND);
-    draw_arena(draw, arena, assets.arenas.get(arena), visual_time_seconds);
     let world = showcase.world();
+    if super::authored_supers::draw_override(draw, world) {
+        return;
+    }
+    draw.clear_background(BACKGROUND);
+    let visual_time_seconds = super::authored_supers::arena_time(world, visual_time_seconds);
+    draw_arena(draw, arena, assets.arenas.get(arena), visual_time_seconds);
     super::draw_stage_life_layer(draw, arena, visual_time_seconds, flags, Some(world), assets);
     super::draw_world_cinematic_background(draw, world, assets);
     draw_fighter_ground_lights(draw, world);
@@ -38,7 +42,11 @@ pub fn draw_move_showcase(
         (&world.player_one, world.player_one_character()),
         (&world.player_two, world.player_two_character()),
     ] {
+        if super::hides_authored_actor(world, fighter.slot, assets) {
+            continue;
+        }
         let visuals = super::character_visuals(character, assets);
+        let (forced_clip, time) = super::fighter_match_presentation(world, fighter, false);
         draw_fighter(
             draw,
             fighter,
@@ -47,11 +55,12 @@ pub fn draw_move_showcase(
                 show_debug: false,
                 sprite_atlas: visuals.fight_atlas,
                 spritesheet: assets.fighter_spritesheet.as_ref(),
-                world_elapsed_seconds: world.elapsed_seconds,
-                forced_clip: None,
+                world_elapsed_seconds: time,
+                forced_clip,
             },
         );
     }
+    super::draw_authored_actors(draw, world, assets);
     super::signature_effects::draw_signature_effects(draw, world, false, assets);
     draw_hit_effects(draw, world, assets.menu_font.as_ref());
     super::draw_world_cinematic_foreground(draw, world, assets);

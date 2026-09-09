@@ -11,3 +11,5 @@ pub mod move_data;
 pub mod move_set;
 pub mod projectile;
 pub mod signature;
+
+pub mod super_sequence;

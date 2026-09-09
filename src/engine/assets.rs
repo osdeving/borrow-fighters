@@ -71,6 +71,12 @@ impl SpriteAtlasAsset {
 /// Runtime textures used by the prototype renderer.
 pub struct GameAssets {
     pub arenas: ArenaAssets,
+    /// Separate authorial super props; they never supply combat geometry.
+    pub rust_mutation_props: Option<Texture2D>,
+    pub duke_collector_poses: Option<Texture2D>,
+    pub cpp_footgun_comedy: Option<Texture2D>,
+    pub cpp_footgun_barrage: Option<Texture2D>,
+    pub garbage_items: Option<Texture2D>,
     /// Optional decorative actors, independent from fighter and collision data.
     pub caramelo_run: Option<Texture2D>,
     pub jessica_gesture: Option<Texture2D>,
@@ -165,6 +171,31 @@ impl GameAssets {
     /// Loads all optional prototype assets.
     pub fn load(raylib: &mut RaylibHandle, thread: &RaylibThread) -> Self {
         Self {
+            rust_mutation_props: load_smooth_texture_optional(
+                raylib,
+                thread,
+                "assets/production/super-sequences/rust/mutation-props.png",
+            ),
+            duke_collector_poses: load_smooth_texture_optional(
+                raylib,
+                thread,
+                "assets/production/super-sequences/duke/collector-poses.png",
+            ),
+            cpp_footgun_comedy: load_smooth_texture_optional(
+                raylib,
+                thread,
+                "assets/production/super-sequences/cpp/footgun-comedy.png",
+            ),
+            cpp_footgun_barrage: load_smooth_texture_optional(
+                raylib,
+                thread,
+                "assets/production/super-sequences/cpp/footgun-barrage.png",
+            ),
+            garbage_items: load_smooth_texture_optional(
+                raylib,
+                thread,
+                "assets/production/super-sequences/trash/garbage-items.png",
+            ),
             arenas: ArenaAssets {
                 sirius: load_smooth_texture_optional(raylib, thread, ARENA_SIRIUS_PATH),
                 fortaleza: load_smooth_texture_optional(raylib, thread, ARENA_FORTALEZA_PATH),

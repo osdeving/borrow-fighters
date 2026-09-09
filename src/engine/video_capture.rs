@@ -73,11 +73,7 @@ impl VideoCapture {
             return Ok(());
         };
 
-        let image = target
-            .texture()
-            .load_image()
-            .map_err(|error| VideoCaptureError::ReadFrame(error.to_string()))?;
-        let pixels = image.get_image_data_u8(true);
+        let pixels = read_render_texture_rgba(target)?;
         let Some(stdin) = active.stdin.as_mut() else {
             return Err(VideoCaptureError::FfmpegStdin);
         };
@@ -151,6 +147,53 @@ impl VideoCapture {
     pub fn set_error_message(&mut self, error: &VideoCaptureError) {
         self.last_message = Some(format!("Falha na gravacao: {error}"));
     }
+}
+
+/// Reads a framebuffer as contiguous top-down RGBA bytes for a video encoder.
+///
+/// Raylib 6's `get_image_data_u8` calls `GetImageColor` for every pixel. A single
+/// `LoadImageColors` allocation plus row copies avoids that FFI cost per frame.
+pub fn read_render_texture_rgba(target: &RenderTexture2D) -> Result<Vec<u8>, VideoCaptureError> {
+    let image = target
+        .texture()
+        .load_image()
+        .map_err(|error| VideoCaptureError::ReadFrame(error.to_string()))?;
+    let width = usize::try_from(image.width())
+        .map_err(|_| VideoCaptureError::ReadFrame("invalid image width".into()))?;
+    let colors = image.get_image_data();
+    Ok(top_down_rgba(&colors, width))
+}
+
+fn top_down_rgba(colors: &[raylib::ffi::Color], width: usize) -> Vec<u8> {
+    if colors.is_empty() {
+        return Vec::new();
+    }
+    assert!(width > 0 && colors.len().is_multiple_of(width));
+    // raylib-sys binds C's Color as #[repr(C)] { r: u8, g: u8, b: u8, a: u8 }.
+    // These assertions also prevent accidentally treating a future padded or
+    // differently aligned representation as a tightly packed RGBA byte stream.
+    const {
+        assert!(std::mem::size_of::<raylib::ffi::Color>() == 4);
+    }
+    const {
+        assert!(std::mem::align_of::<raylib::ffi::Color>() == 1);
+    }
+    // SAFETY: Color contains exactly four initialized u8 channels in C field
+    // order, with no padding. The byte view borrows only the live slice's full
+    // allocation, remains read-only, and is copied before ImageColors drops.
+    let bytes = unsafe {
+        std::slice::from_raw_parts(colors.as_ptr().cast::<u8>(), std::mem::size_of_val(colors))
+    };
+    let row_bytes = width * 4;
+    let mut pixels = vec![0; bytes.len()];
+    for (source, destination) in bytes
+        .chunks_exact(row_bytes)
+        .rev()
+        .zip(pixels.chunks_exact_mut(row_bytes))
+    {
+        destination.copy_from_slice(source);
+    }
+    pixels
 }
 
 impl Drop for VideoCapture {
@@ -267,6 +310,27 @@ fn next_capture_path() -> PathBuf {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn framebuffer_rows_flip_without_reversing_pixels_or_losing_alpha() {
+        let colors = [
+            Color::new(1, 2, 3, 4),
+            Color::new(5, 6, 7, 8),
+            Color::new(9, 10, 11, 12),
+            Color::new(13, 14, 15, 16),
+            Color::new(17, 18, 19, 20),
+            Color::new(21, 22, 23, 24),
+        ];
+        assert_eq!(
+            top_down_rgba(&colors, 2),
+            vec![
+                17, 18, 19, 20, 21, 22, 23, 24, 9, 10, 11, 12, 13, 14, 15, 16, 1, 2, 3, 4, 5, 6, 7,
+                8
+            ]
+        );
+        assert_eq!(top_down_rgba(&colors[..2], 2), vec![1, 2, 3, 4, 5, 6, 7, 8]);
+        assert!(top_down_rgba(&[], 0).is_empty());
+    }
 
     #[test]
     fn rejects_zero_sized_capture() {

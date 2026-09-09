@@ -1,5 +1,19 @@
 # Changelog
 
+## Rodada 2026-09-09 — Supers autorais
+
+- Quatro roteiros com captura, entrada congelada, pausa/retomada da música,
+  guarda preservada e dano reduzido por bloqueio; sem KO por chip.
+- Garbage Collector de Duke: lixo caindo, clones coletando/comendo e queda gigante.
+- Ownership Eclipse: apagão breve e estruturas do Sirius transformando o cenário.
+- General Protection Fault de Old C: terminais, tela azul e BIOS de reboot.
+- Footgun de C++: bazuca no próprio pé, pulinhos, raiva, corrida e rajada de golpes.
+- Atlas exclusivos de Duke/C++, lixo e estruturas de Rust, com prompts e procedência.
+- Vozes distintas pesquisadas para Rust, Old C, Go e C++; Duke/Python preservados.
+- Sons por fase e preview integral no Combat Lab e Move Showcase.
+- Leitura de frames em blocos para reduzir o custo da gravação F9.
+- [Plano, catálogo e validação](docs/23-authored-super-sequences.md).
+
 Todas as mudanças relevantes do projeto devem ser registradas aqui.
 
 O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré-produção.

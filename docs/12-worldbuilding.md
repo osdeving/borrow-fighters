@@ -20,6 +20,14 @@ As arenas devem acontecer em locais brasileiros de ciência, tecnologia, arquite
 
 ## Tom
 
+Na rodada de [supers autorais](23-authored-super-sequences.md), cada lutador ganhou
+uma arena de origem visual: Rust/Sirius (Campinas), Duke/Java Street (São Paulo),
+Old C/Porto Digital (Recife), C++/Vale do Pinhão (Curitiba), Python/BioTIC (Brasília)
+e Go/Tech Coast (Fortaleza). A associação aparece na entrada dos supers; não
+restringe matchups. O Ownership Eclipse leva anel, torres, cabos e placas do
+Sirius para qualquer cenário, dando forma visível à ideia de tomar `&mut world`.
+
+
 - Cartunesco, legível e com humor técnico.
 - Intrigante, com camadas de mistério por trás das piadas.
 - Brasileiro sem virar cartão-postal óbvio.

@@ -32,6 +32,16 @@ pub enum AudioCue {
     CombatHit,
     CombatBlock,
     ProjectileImpact,
+    SuperStart,
+    SuperTrashRain,
+    SuperCollect,
+    SuperGiantDrop,
+    SuperMutation,
+    SuperError,
+    SuperBoot,
+    SuperFootshot,
+    SuperBarrageHit,
+    SuperEnd,
 }
 
 impl AudioCue {
@@ -55,6 +65,16 @@ impl AudioCue {
             Self::CombatHit => "combat.hit",
             Self::CombatBlock => "combat.block",
             Self::ProjectileImpact => "projectile.impact",
+            Self::SuperStart => "super.start",
+            Self::SuperTrashRain => "super.trash_rain",
+            Self::SuperCollect => "super.collect",
+            Self::SuperGiantDrop => "super.giant_drop",
+            Self::SuperMutation => "super.mutation",
+            Self::SuperError => "super.error",
+            Self::SuperBoot => "super.boot",
+            Self::SuperFootshot => "super.footshot",
+            Self::SuperBarrageHit => "super.barrage_hit",
+            Self::SuperEnd => "super.end",
         }
     }
 
@@ -78,6 +98,16 @@ impl AudioCue {
             "combat.hit" => Some(Self::CombatHit),
             "combat.block" => Some(Self::CombatBlock),
             "projectile.impact" => Some(Self::ProjectileImpact),
+            "super.start" => Some(Self::SuperStart),
+            "super.trash_rain" => Some(Self::SuperTrashRain),
+            "super.collect" => Some(Self::SuperCollect),
+            "super.giant_drop" => Some(Self::SuperGiantDrop),
+            "super.mutation" => Some(Self::SuperMutation),
+            "super.error" => Some(Self::SuperError),
+            "super.boot" => Some(Self::SuperBoot),
+            "super.footshot" => Some(Self::SuperFootshot),
+            "super.barrage_hit" => Some(Self::SuperBarrageHit),
+            "super.end" => Some(Self::SuperEnd),
             _ => None,
         }
     }

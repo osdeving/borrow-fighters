@@ -11,7 +11,8 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 | Sistema | Responsabilidade | Código principal | Testes |
 |---|---|---|---|
 | Combat runtime | Estado de lutador, movimento, defesa, ataque ativo, stun, dano e hurtbox | [`src/combat/fighter.rs`](../src/combat/fighter.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs), [`tests/traditional_moves.rs`](../tests/traditional_moves.rs) |
-| Cinematic presentation data | Identidade e relógio derivados do ataque local vivo, sem hitbox de tela | [`src/combat/cinematic.rs`](../src/combat/cinematic.rs) | [`tests/cinematic_specials.rs`](../tests/cinematic_specials.rs) |
+| Cinematic presentation data | Go/Python: identidade e relógio do ataque local vivo | [`src/combat/cinematic.rs`](../src/combat/cinematic.rs) | [`tests/cinematic_specials.rs`](../tests/cinematic_specials.rs) |
+| Authored super sequence | Rust/Duke/C/C++: captura, fases, contatos e restauração | [`src/combat/super_sequence.rs`](../src/combat/super_sequence.rs), [`src/game/world/supers.rs`](../src/game/world/supers.rs) | [`tests/authored_super_sequences.rs`](../tests/authored_super_sequences.rs) |
 | Combat data | Frame data, dano, guard rule, hit reaction e hitbox dos golpes próximos | [`src/combat/move_data.rs`](../src/combat/move_data.rs) | [`tests/move_data.rs`](../tests/move_data.rs), [`tests/traditional_moves.rs`](../tests/traditional_moves.rs) |
 | Move runtime | Enum runtime `AttackKind` e compatibilidade com `MoveSpec` | [`src/combat/move_set.rs`](../src/combat/move_set.rs) | [`tests/move_data.rs`](../tests/move_data.rs) |
 | Projectile | Projétil horizontal, dano, guard rule, hit reaction, velocidade, spawn e timing do especial | [`src/combat/projectile.rs`](../src/combat/projectile.rs) | [`tests/combat_rules.rs`](../tests/combat_rules.rs), [`tests/attack_frame_data.rs`](../tests/attack_frame_data.rs) |
@@ -230,32 +231,36 @@ Os golpes próximos atuais estão em [`src/combat/move_data.rs`](../src/combat/m
 
 ### Especiais cinematográficos adicionais
 
-`AttackKind::CinematicSpecial` / `MoveInputKind::CinematicSpecial` identifica uma segunda ação temática, independente de `SignatureSpecial` e do projétil. Os seis personagens possuem um `MoveId` próprio. `FighterInput.cinematic_special` inicia apenas no chão e tem prioridade sobre a assinatura, a guarda e o agarrão no mesmo comando.
+`MoveInputKind::CinematicSpecial` identifica uma segunda ação temática, independente de `SignatureSpecial` e do projétil. Os seis personagens conservam seus `MoveId` estáveis para inputs, catálogo e bindings de áudio. A [ADR0016](adr/0016-authored-super-sequences.md) substitui o modelo melee local por captura autoral para Rust, Duke, C e C++.
 
-| Personagem / golpe | MoveId | Dano | Ativos (inclusivos) | Duração | Alcance (`world_px`) |
-|---|---|---|---|---|---|
-| Rust / Ownership Eclipse | `RustOwnershipEclipse` | 28 | 36–43 | 102f | 120 |
-| Java / JVM Overdrive | `DukeJvmOverdrive` | 32 | 42–49 | 110f | 135 |
-| Go / Million Goroutines | `GoMillionGoroutines` | 25 | 32–39 | 94f | 100 |
-| C / Kernel Panic | `CKernelPanic` | 32 | 44–51 | 110f | 145 |
-| Python / Event Horizon | `PythonEventHorizon` | 27 | 34–41 | 98f | 115 |
-| C++ / Template Singularity | `CppTemplateSingularity` | 30 | 40–47 | 106f | 130 |
+`World::try_start_super` aceita o comando apenas com o atacante vivo, livre e no chão, fora de intro/countdown/agarrão. Guarda mantida não impede `LB+RT`. A aceitação limpa as ações dos atores, registra posições e defesa do alvo, emite `SuperStart` e começa no tick zero. Duas solicitações elegíveis no mesmo tick anulam ambas, sem vencedor arbitrário por slot; a próxima solicitação pode iniciar normalmente. A captura é garantida a qualquer distância, e inputs posteriores não alteram a defesa capturada nem aceleram fases. Um alvo no ar permanece parado no freeze inicial e desce continuamente até a âncora de chão nos ticks 8–20, conservando X; as fases e contatos seguintes encontram ambos os atores no piso, inclusive na corrida de C++.
 
-Todos têm guarda `Mid`, hitstun de 28f, blockstun de 16f, pushback H/B de `world_px(72/28)` e 18f extras de whiff. O golpe usa uma única hitbox local diante do corpo, altura `world_px(142)` e offset Y `world_px(10)`. Ela segue exclusivamente `MoveSpec`: metadata de sprite não pode ampliar o ataque e nenhum projétil/`SignatureEffect` é criado. Movimento, pulo e outros ataques ficam bloqueados até terminar ou sofrer interrupção. Não há armadura, invulnerabilidade, cancelamento, dano adicional de cenário ou custo de medidor.
+| Personagem / golpe | MoveId estável | Dano / chip | Contatos (ticks) | Duração a 60 Hz |
+|---|---|---|---|---|
+| Rust / Ownership Eclipse | `RustOwnershipEclipse` | 28 / 7 | 212 | 300f / 5s |
+| Java / Garbage Collector | `DukeJvmOverdrive` | 32 / 8 | 264 | 350f / 5,83s |
+| C / General Protection Fault / #GP | `CKernelPanic` | 32 / 8 | 222 | 320f / 5,33s |
+| C++ / Undefined Behavior: Footgun | `CppTemplateSingularity` | 30 / 9 | 204–274, a cada 10f: 8 × 3; 284: 6 | 356f / 5,93s |
 
-`Fighter::cinematic_special()` retorna `CinematicSpecialState`: personagem, `move_id`, label, elapsed/duration/active_start/active_end em frames e `progress()`. A renderização pode transformar toda a tela a partir desse relógio sem participar das colisões. O estado desaparece junto com o ataque ao sofrer golpe ou reset; o renderer também deve ocultá-lo após `World.outcome`. Pausa preserva o relógio e avanço de frame move exatamente um tick. As poses de assinatura existentes (soco forte para Go) são reaproveitadas com remapeamento visual de startup/active/recovery para as fases novas; as boxes físicas não usam esse remapeamento.
+Os intervalos de fase são semiabertos `[início, fim)`, declarados em `super_spec(character)`. Todos começam em `Freeze` 0–8. Rust: apagão 8–11, construção 11–125, carga 125–205, pulso 205–235, restauração 235–300. Duke: lixo caindo 8–60, assentado 60–84, 12 coletas 84–228 (cadência 12f), queda gigante 228–264, impacto 264–302 e restauração 302–350. C: terminais 8–105, tela azul 105–180, BIOS 180–222, reboot 222–260 e restauração 260–320. C++: tiro no pé 8–62 (disparo 44), saltos 62–110, raiva 110–140, corrida 140–204, rajada 204–284, final 284–312 e restauração 312–356.
 
-Teclado: `Y` P1 e `]` P2. `Right Shift` conserva o soco forte P2. Gamepad: segurar `LB` e pressionar `RT`; `RT` sem `LB` continua assinatura. `PendingFighterInput` preserva a borda até o próximo tick e a consome uma única vez em catch-up. A CPU usa o ataque ocasionalmente em alcance local e reage à antecipação sem defesa perfeita.
+`World::super_sequence()` expõe `SuperSequence` com personagem, MoveId, label, slots atacante/alvo, `guarded`, `target_crouching`, tick/duração, posição original e atual dos pés de cada ator e facing. `phase()`, `phase_span()`, `phase_progress()` e `progress()` orientam renderer e áudio. `World.elapsed_seconds` continua avançando para apresentação; o gameplay comum não avança enquanto há sessão. Não existem hitboxes ofensivas de tela nem projéteis decorativos com dano. C++ desloca sua posição física continuamente de 140 a 204 até o gap corporal mínimo diante do alvo, inclusive nos cantos e na orientação inversa.
+
+Somente os `SuperContact` aplicam dano. Guarda em qualquer altura causa `max(dano / 4, 1)` por contato, limitado a manter pelo menos 1 HP. Flags de invencibilidade continuam respeitadas. O tiro no próprio pé não retira HP. O último contato sem bloqueio põe o alvo em knockdown, mantido até terminar a restauração e seguido da recuperação protegida de 36f. A vida pode chegar a zero durante a sessão, mas `resolve_outcome` só anuncia KO depois de `SuperEnd`. Recriar `World` remove sessão, contatos pendentes e relógio. A fronteira do app pausa/retoma música pelo estado da sessão e limpa a pausa ao sair da cena.
+
+Go / Million Goroutines (`GoMillionGoroutines`) e Python / Event Horizon (`PythonEventHorizon`) preservam `AttackKind::CinematicSpecial` local. Go tem 25 de dano, ativos inclusivos 32–39, duração 94f e alcance `world_px(100)`; Python tem 27 de dano, ativos 34–41, duração 98f e alcance `world_px(115)`. São mid, hitstun 28f, blockstun 16f, pushback H/B `world_px(72/28)`, 18f extras de whiff e uma hitbox local de altura `world_px(142)`. Podem errar à distância e sofrer interrupção; metadata não amplia o alcance. `Fighter::cinematic_special()` expõe exclusivamente o relógio desse ataque vivo para sua apresentação. Os antigos timings `MoveSpec` dos quatro supers autorais são dados legados de pose/compatibilidade; o runtime usa `super_spec` como autoridade de fases e dano.
+
+Teclado: `Y` P1 e `]` P2. `Right Shift` conserva o soco forte P2. Gamepad: segurar `LB` e pressionar `RT`; `RT` sem `LB` continua assinatura. `PendingFighterInput` preserva a borda até o próximo tick e a consome uma única vez em catch-up. A CPU continua selecionando cinematográficos ocasionalmente pela heurística de alcance local; a aceitação dos quatro supers não depende dessa distância.
 
 ```bash
 cargo run -- --showcase --character rust --move cinematic_special --repeat
-cargo run -- --showcase --character go --move cinematic_special --repeat --reverse
-cargo run -- --lab combat --character python --move cinematic_special
+cargo run -- --showcase --character cpp --move cinematic_special --repeat --reverse
+cargo run -- --lab combat --character c --move cinematic_special
 ```
 
-CLI também aceita `cinematic`, `cinematic-special` e `ultimate`. O Lab permite dummy/alcance/estimativa de vantagem porque este golpe usa melee local; a assinatura anterior continua sendo apenas prévia do ator no Lab. O showcase público passa a 16 situações por personagem; Go tem 15, pois não possui a assinatura anterior, mas tem o cinematográfico.
+CLI também aceita `cinematic`, `cinematic-special` e `ultimate`. O Combat Lab mantém um `World` completo para os quatro supers, acessível por `super_preview_world()`, reproduz ambos os atores e disponibiliza os cues reais por `take_super_audio_events()`. Não apresenta dummy, alcance melee nem vantagem fictícia para capturas. Go/Python mantêm o dummy local. Showcase prepara o alvo à distância nos quatro supers e calcula `scenario_frames()` como 30f de preparação + duração da sessão + 90f de observação; os outros exemplos conservam 260f. Pausa e avanço por frame preservam o relógio de cada modo. Há 16 situações por personagem da demo e 15 para Go, que não possui a assinatura anterior.
 
-A matriz em [`tests/cinematic_specials.rs`](../tests/cinematic_specials.rs) verifica os seis personagens nas duas orientações, com e sem metadata, ambas as guardas, único contato, ausência de dano à distância, interrupção no startup, compromisso de movimento/ações, reset, CLI, replay e alinhamento da pose ativa reutilizada.
+[`tests/authored_super_sequences.rs`](../tests/authored_super_sequences.rs) verifica ambas as orientações e slots, distância/cantos, fases e contatos, corrida física, guarda capturada/chip, invencibilidade, KO adiado, comandos simultâneos, alvo aéreo, emissão única de áudio e reset. [`tests/cinematic_specials.rs`](../tests/cinematic_specials.rs) preserva a matriz local de Go/Python e verifica CLI, pause/frame-step e replay dos seis personagens. [`tests/move_showcase.rs`](../tests/move_showcase.rs) valida contatos reais de todos os golpes com e sem metadata.
 
 ### Combat Log
 

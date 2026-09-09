@@ -599,8 +599,63 @@ impl Fighter {
         self.attack.map(AttackState::kind)
     }
 
-    /// Exposes a presentation clock only while the cinematic attack is alive.
-    /// Hits, throws and round resets remove the attack and its spectacle together.
+    /// Authored supers can start from grounded neutral or held guard, never stun/recovery.
+    pub(crate) fn can_start_super(&self) -> bool {
+        self.grounded && !self.is_defeated() && self.attack.is_none() && !self.is_action_locked()
+    }
+
+    pub(crate) fn begin_super_capture(&mut self, guarded: bool, crouching: bool) {
+        self.attack = None;
+        self.capture_role = None;
+        self.special_visual_timer = 0.0;
+        self.hitstun_timer = 0.0;
+        self.blockstun_timer = 0.0;
+        self.whiff_recovery_timer = 0.0;
+        self.velocity = Vec2::ZERO;
+        self.blocking = guarded;
+        self.crouching = guarded && crouching;
+        self.hit_reaction_kind = HitReactionKind::Hit;
+        self.reaction_visual_elapsed = 0.0;
+    }
+
+    pub(crate) fn advance_super_visuals(&mut self, dt: f32) {
+        if self.in_knockdown() {
+            // The captured victim stays prone until the authored restoration ends.
+            self.reaction_visual_elapsed = 0.1;
+        } else if self.is_reacting() {
+            self.reaction_visual_elapsed += dt;
+        }
+    }
+
+    pub(crate) fn receive_super_contact(&mut self, damage: i32, guarded: bool, knockdown: bool) {
+        self.take_damage(damage);
+        self.reaction_visual_elapsed = 0.0;
+        if guarded {
+            self.blocking = true;
+            self.blockstun_timer = FrameCount::new(16).as_seconds();
+        } else if knockdown {
+            self.blocking = false;
+            self.start_knockdown();
+            self.reaction_visual_elapsed = 0.1;
+        } else {
+            self.blocking = false;
+            self.hit_reaction_kind = HitReactionKind::HeavyHit;
+            self.hitstun_timer = FrameCount::new(24).as_seconds();
+        }
+    }
+
+    pub(crate) fn finish_super_capture(&mut self) {
+        self.velocity = Vec2::ZERO;
+        self.blocking = false;
+        self.blockstun_timer = 0.0;
+        if !self.in_knockdown() {
+            self.hitstun_timer = 0.0;
+        }
+        self.throw_protection_timer = FrameCount::new(6).as_seconds();
+    }
+
+    /// Exposes the local cinematic attack clock used by Go and Python in World.
+    /// Authored four-character sessions use World::super_sequence instead.
     pub fn cinematic_special(&self) -> Option<super::cinematic::CinematicSpecialState> {
         let attack = self.attack?;
         super::cinematic::CinematicSpecialState::from_move(attack.spec, attack.elapsed_frames())

@@ -1,0 +1,136 @@
+{
+  "footgun-comedy.png": {
+    "source": "/home/willams/.codex/generated_images/01a0833a-394f-76f3-84df-c4bf7f00f23b/exec-91820eff-7cb7-4edb-bf30-517909f81f3a.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGBA",
+    "transparent_fraction": 0.6905587514241537,
+    "components": [
+      {
+        "area": 80996,
+        "box": [
+          616,
+          2,
+          971,
+          517
+        ]
+      },
+      {
+        "area": 80694,
+        "box": [
+          156,
+          12,
+          482,
+          519
+        ]
+      },
+      {
+        "area": 77961,
+        "box": [
+          1042,
+          550,
+          1478,
+          1005
+        ]
+      },
+      {
+        "area": 67161,
+        "box": [
+          644,
+          514,
+          948,
+          1015
+        ]
+      },
+      {
+        "area": 61553,
+        "box": [
+          1152,
+          7,
+          1399,
+          517
+        ]
+      },
+      {
+        "area": 61353,
+        "box": [
+          119,
+          523,
+          407,
+          1010
+        ]
+      }
+    ],
+    "sha256": "5e94447e62c211a2d88267f483ae65f95c512dafa0dc94a30931c0d51990b08d",
+    "method": "built-in imagegen; selected PNG copied intact; no raster processing after generation"
+  },
+  "footgun-barrage.png": {
+    "source": "/home/willams/.codex/generated_images/01a0833a-394f-76f3-84df-c4bf7f00f23b/exec-da97d6e6-ec33-4479-950a-c57593b2a39f.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGBA",
+    "transparent_fraction": 0.6621685028076172,
+    "components": [
+      {
+        "area": 83396,
+        "box": [
+          15,
+          37,
+          462,
+          489
+        ]
+      },
+      {
+        "area": 79391,
+        "box": [
+          1103,
+          19,
+          1504,
+          508
+        ]
+      },
+      {
+        "area": 78397,
+        "box": [
+          534,
+          22,
+          1045,
+          504
+        ]
+      },
+      {
+        "area": 76030,
+        "box": [
+          1064,
+          513,
+          1505,
+          1006
+        ]
+      },
+      {
+        "area": 72881,
+        "box": [
+          516,
+          504,
+          1058,
+          1006
+        ]
+      },
+      {
+        "area": 69854,
+        "box": [
+          19,
+          495,
+          494,
+          1004
+        ]
+      }
+    ],
+    "sha256": "6069d2f909a32d194bcfde50bfde95137b0a06d235a4bfdc347d67e165efd52b",
+    "method": "built-in imagegen; selected PNG copied intact; no raster processing after generation"
+  }
+}

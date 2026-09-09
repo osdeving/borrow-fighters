@@ -9,6 +9,9 @@ use raylib::prelude::*;
 
 use crate::audio::{AudioBank, AudioClipDefinition, AudioEvent, AudioMusicDefinition, MusicTrack};
 
+#[cfg(test)]
+mod live_review;
+
 pub const AUDIO_MANIFEST_PATH: &str = "assets/audio/audio_manifest.json";
 
 /// Raylib-backed audio event player.
@@ -19,6 +22,7 @@ pub struct AudioPlayer<'aud> {
     binding_cursors: Vec<usize>,
     current_music: Option<String>,
     music_ducked: bool,
+    cinematic_paused: bool,
     music_volume: f32,
     enabled: bool,
 }
@@ -46,6 +50,7 @@ impl<'aud> AudioPlayer<'aud> {
             binding_cursors: Vec::new(),
             current_music: None,
             music_ducked: false,
+            cinematic_paused: false,
             music_volume: 1.0,
             enabled: false,
         }
@@ -120,6 +125,7 @@ impl<'aud> AudioPlayer<'aud> {
             binding_cursors: vec![0; binding_count],
             current_music: None,
             music_ducked: false,
+            cinematic_paused: false,
             music_volume: 1.0,
             enabled: true,
         }
@@ -127,7 +133,7 @@ impl<'aud> AudioPlayer<'aud> {
 
     /// Updates the active music stream.
     pub fn update_streams(&self) {
-        if !self.enabled {
+        if !self.enabled || self.cinematic_paused {
             return;
         }
 
@@ -147,12 +153,14 @@ impl<'aud> AudioPlayer<'aud> {
         }
 
         let next_id = track.key();
-        if self.current_music.as_deref() == Some(next_id)
-            && self
-                .music
+        if keeps_current_music(
+            self.current_music.as_deref(),
+            next_id,
+            self.cinematic_paused,
+            self.music
                 .get(next_id)
-                .is_some_and(|loaded| loaded.music.is_stream_playing())
-        {
+                .is_some_and(|loaded| loaded.music.is_stream_playing()),
+        ) {
             return;
         }
 
@@ -165,14 +173,62 @@ impl<'aud> AudioPlayer<'aud> {
         let Some(next) = self.music.get(next_id) else {
             return;
         };
-        next.music.set_volume(music_output_volume(
-            next.volume,
-            self.music_ducked,
-            self.music_volume,
-        ));
+        let volume = music_output_volume(next.volume, self.music_ducked, self.music_volume);
+        // A scene can select a different track while paused. Prime it silently,
+        // then leave it paused until the sequence or menu transition releases it.
+        next.music
+            .set_volume(if self.cinematic_paused { 0.0 } else { volume });
         next.music.set_pitch(next.pitch);
         next.music.play_stream();
+        if self.cinematic_paused {
+            next.music.pause_stream();
+            next.music.set_volume(volume);
+        }
         self.current_music = Some(next_id.to_owned());
+    }
+
+    /// Pauses music at its current position while authored sequence cues continue.
+    ///
+    /// Entering the sequence cuts older voices/SFX once. Further phase cues are
+    /// allowed to play normally; leaving resumes rather than restarts the track.
+    pub fn set_cinematic_paused(&mut self, paused: bool) {
+        if self.cinematic_paused == paused {
+            return;
+        }
+        self.cinematic_paused = paused;
+        if !self.enabled {
+            return;
+        }
+        if paused {
+            for loaded in self.sounds.values() {
+                loaded.sound.stop();
+            }
+        }
+        if let Some(current) = self
+            .current_music
+            .as_ref()
+            .and_then(|id| self.music.get(id))
+        {
+            if paused {
+                current.music.pause_stream();
+            } else {
+                current.music.resume_stream();
+            }
+        }
+    }
+
+    /// Cuts the unfinished sequence's sounds and restores music after an abort.
+    ///
+    /// Reset and scene changes use this instead of the normal completion path,
+    /// which lets the final impact or end cue finish playing.
+    pub fn cancel_cinematic(&mut self) {
+        if !self.cinematic_paused {
+            return;
+        }
+        for loaded in self.sounds.values() {
+            loaded.sound.stop();
+        }
+        self.set_cinematic_paused(false);
     }
 
     /// Lowers the active music while a foreground cue needs priority.
@@ -303,6 +359,10 @@ fn next_loaded_clip_id<'clips, 'aud>(
     None
 }
 
+fn keeps_current_music(current: Option<&str>, next: &str, paused: bool, playing: bool) -> bool {
+    current == Some(next) && (paused || playing)
+}
+
 fn music_output_volume(volume: f32, ducked: bool, music_volume: f32) -> f32 {
     let multiplier = if ducked { 0.35 } else { 1.0 };
     (volume * multiplier * music_volume).clamp(0.0, 1.0)
@@ -318,6 +378,15 @@ mod tests {
         assert_near(music_output_volume(0.5, false, 0.4), 0.2);
         assert_near(music_output_volume(0.5, true, 1.0), 0.175);
         assert_near(music_output_volume(2.0, false, 1.0), 1.0);
+    }
+
+    #[test]
+    fn scene_track_refresh_never_restarts_paused_music() {
+        assert!(keeps_current_music(Some("combat"), "combat", true, false));
+        assert!(keeps_current_music(Some("combat"), "combat", false, true));
+        assert!(!keeps_current_music(Some("combat"), "menu", true, false));
+        assert!(!keeps_current_music(Some("combat"), "combat", false, false));
+        assert!(!keeps_current_music(None, "combat", true, false));
     }
 
     fn assert_near(actual: f32, expected: f32) {

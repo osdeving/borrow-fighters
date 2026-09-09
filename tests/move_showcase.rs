@@ -57,7 +57,7 @@ fn every_public_move_hits_in_its_context_on_both_sides_with_match_metadata_and_f
                     let mut airborne_contact = false;
                     let mut reaction_seen = false;
                     let mut previous_result = ShowcaseResult::Pending;
-                    for _ in 0..190 {
+                    for _ in 0..scene.scenario_frames() - 1 {
                         scene.update(CombatLabInput::default());
                         if previous_result == ShowcaseResult::Pending
                             && matches!(scene.result(), ShowcaseResult::Hit { .. })
@@ -115,6 +115,10 @@ fn every_public_move_hits_in_its_context_on_both_sides_with_match_metadata_and_f
                         && character == CharacterId::Duke
                     {
                         3
+                    } else if selected == CombatLabMove::CinematicSpecial
+                        && character == CharacterId::Cpp
+                    {
+                        9
                     } else {
                         1
                     };

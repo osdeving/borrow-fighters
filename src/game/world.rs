@@ -26,6 +26,7 @@ use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
 use crate::math::rect::Rect;
 use crate::math::vec2::Vec2;
 mod signatures;
+mod supers;
 mod throws;
 use signatures::{fortress_block_result, fortress_faces, fortress_stops_projectile};
 pub use throws::{ThrowPhase, ThrowSequence};
@@ -84,6 +85,7 @@ pub struct World {
     countdown_audio_step: Option<usize>,
     sprite_combat_manifests: WorldSpriteCombatManifests,
     throw_sequence: Option<ThrowSequence>,
+    super_sequence: Option<crate::combat::super_sequence::SuperSequence>,
 }
 
 impl World {
@@ -133,6 +135,7 @@ impl World {
             countdown_audio_step: None,
             sprite_combat_manifests: WorldSpriteCombatManifests::default(),
             throw_sequence: None,
+            super_sequence: None,
         };
         world.record_combat(CombatLogKind::RoundStarted {
             player_one,
@@ -285,6 +288,17 @@ impl World {
         if self.countdown_active() {
             self.queue_countdown_audio_event();
             self.countdown_timer = (self.countdown_timer - dt).max(0.0);
+            return;
+        }
+
+        if self.super_sequence.is_some() {
+            self.update_super_sequence(dt, flags);
+            return;
+        }
+        let (mut player_one, mut player_two) = (player_one, player_two);
+        self.try_start_super(&mut player_one, &mut player_two);
+        if self.super_sequence.is_some() {
+            // The entry snapshot is tick zero; subsequent fixed ticks advance it.
             return;
         }
 
@@ -629,7 +643,8 @@ impl World {
     }
 
     fn resolve_outcome(&mut self) {
-        if self.throw_sequence.is_some()
+        if self.super_sequence.is_some()
+            || self.throw_sequence.is_some()
             || self.player_one.in_air_reaction()
             || self.player_two.in_air_reaction()
         {

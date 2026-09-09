@@ -4,7 +4,14 @@
 
 Este documento e a fonte de verdade para **o que vem agora**.
 
-Rodada concluída: [polimento da apresentação, Brasil cotidiano e seis
+Rodada concluída: [supers autorais e identidade sonora](23-authored-super-sequences.md).
+Garbage Collector, Ownership Eclipse, General Protection Fault e Footgun
+integrados, com 321 testes Rust e 41 verificações de controles aprovados.
+[Evidência visual e sonora](evidence/authored-supers/README.md).
+Próximo corte: balancear custo/raridade,
+janela de captura e contra-jogo após o playtest destas animações.
+
+Rodada anterior concluída: [polimento da apresentação, Brasil cotidiano e seis
 especiais cinematográficos](22-presentation-and-brazilian-stage-life.md), solicitado
 em 8 de setembro de 2026. Implementação integrada; 300 testes Rust, formatação,
 Clippy estrito e links/YAML aprovados. [Evidência gráfica e controles](evidence/presentation-polish/README.md).
@@ -30,6 +37,7 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Proxima acao |
 |---|---|---|---|---|
+| Concluído | Supers autorais e vozes distintas | Quatro roteiros integrados, novos atlas e áudio por fase | [Plano23](23-authored-super-sequences.md), [ADR0016](adr/0016-authored-super-sequences.md) | Playtest humano das animações e timbres; depois calibrar captura, custo e raridade. 321 testes e 41 verificações de controles aprovados. |
 | Concluído | Tipografia, cenários vivos e segundo especial | Fontes incorporadas, memes animados e seis cinematográficas com contato local | [Plano e entrega](22-presentation-and-brazilian-stage-life.md), [ADR 0015](adr/0015-cinematic-presentation-and-stage-life.md) | Playtest humano do acabamento e do risco/recompensa dos novos golpes; 300 testes e revisão gráfica registrados. |
 | Concluído | Arremessos e especiais extraordinários | Cinco assinaturas, arremessos e reações integrados e verificados | [Goal local e critérios](21-signature-spectacle-and-throws.md), [ADR 0014](adr/0014-throws-launches-and-signature-effects.md) | 290 testes Rust; 40 cenas gráficas nos dois lados, 25 verificações de controles e 60 lutas de CPU. |
 | Concluído | MVP: showcase contextual, especiais e coerência de combate/arte | Cinco selecionáveis verificados; sem conteúdo novo para Go | [Plano e critérios](20-mvp-combat-showcase.md) | Corrigir debug, demonstrar contato real com oponente contextual, completar ações/reações e validar balanceamento/arte. |

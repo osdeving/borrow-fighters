@@ -1,0 +1,2037 @@
+{
+  "audio": false,
+  "fps": 60,
+  "realtime": false,
+  "render_size": [
+    1280,
+    720
+  ],
+  "render_wall_time_seconds": 43.050383071,
+  "scenarios": [
+    {
+      "arena": "Sirius",
+      "audio_events": [
+        {
+          "character": "rust",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 60
+        },
+        {
+          "character": "rust",
+          "cue": "SuperMutation",
+          "sequence_tick": 11,
+          "video_frame": 71
+        },
+        {
+          "character": "rust",
+          "cue": "SuperMutation",
+          "sequence_tick": 125,
+          "video_frame": 185
+        },
+        {
+          "character": "rust",
+          "cue": "CombatHit",
+          "sequence_tick": 212,
+          "video_frame": 272
+        },
+        {
+          "character": "duke",
+          "cue": "FighterHurt",
+          "sequence_tick": 212,
+          "video_frame": 272
+        },
+        {
+          "character": "rust",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 360
+        }
+      ],
+      "character": "rust",
+      "damage": 28,
+      "duration_frames": 300,
+      "guarded": false,
+      "move": "Ownership Eclipse",
+      "reverse": false,
+      "screenshots": [
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            100,
+            112
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 1056.0,
+          "video_frame": 30,
+          "captured_name": "rust-right-hit-030-before.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            100,
+            112
+          ],
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "target_x": 1056.0,
+          "video_frame": 64,
+          "captured_name": "rust-right-hit-064-Freeze.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            100,
+            112
+          ],
+          "phase": "RustBlackout",
+          "sequence_tick": 9,
+          "target_x": 1056.0,
+          "video_frame": 69,
+          "captured_name": "rust-right-hit-069-RustBlackout.png",
+          "retained_image": "rust-right-hit-069-RustBlackout.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            100,
+            112
+          ],
+          "phase": "RustBuild",
+          "sequence_tick": 68,
+          "target_x": 1056.0,
+          "video_frame": 128,
+          "captured_name": "rust-right-hit-128-RustBuild.png",
+          "retained_image": "rust-right-hit-128-RustBuild.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            100,
+            112
+          ],
+          "phase": "RustCharge",
+          "sequence_tick": 165,
+          "target_x": 1056.0,
+          "video_frame": 225,
+          "captured_name": "rust-right-hit-225-RustCharge.png",
+          "retained_image": "rust-right-hit-225-RustCharge.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            100,
+            84
+          ],
+          "phase": "RustPulse",
+          "sequence_tick": 212,
+          "target_x": 1056.0,
+          "video_frame": 272,
+          "captured_name": "rust-right-hit-272-contact-212.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            100,
+            84
+          ],
+          "phase": "RustPulse",
+          "sequence_tick": 220,
+          "target_x": 1056.0,
+          "video_frame": 280,
+          "captured_name": "rust-right-hit-280-RustPulse.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            100,
+            84
+          ],
+          "phase": "Restore",
+          "sequence_tick": 267,
+          "target_x": 1056.0,
+          "video_frame": 327,
+          "captured_name": "rust-right-hit-327-Restore.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            100,
+            84
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 1056.0,
+          "video_frame": 400,
+          "captured_name": "rust-right-hit-400-restored.png"
+        }
+      ],
+      "video_frames": [
+        0,
+        449
+      ],
+      "wall_time_seconds": 4.22536166
+    },
+    {
+      "arena": "Sirius",
+      "audio_events": [
+        {
+          "character": "rust",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 510
+        },
+        {
+          "character": "rust",
+          "cue": "SuperMutation",
+          "sequence_tick": 11,
+          "video_frame": 521
+        },
+        {
+          "character": "rust",
+          "cue": "SuperMutation",
+          "sequence_tick": 125,
+          "video_frame": 635
+        },
+        {
+          "character": "rust",
+          "cue": "CombatHit",
+          "sequence_tick": 212,
+          "video_frame": 722
+        },
+        {
+          "character": "duke",
+          "cue": "FighterHurt",
+          "sequence_tick": 212,
+          "video_frame": 722
+        },
+        {
+          "character": "rust",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 810
+        }
+      ],
+      "character": "rust",
+      "damage": 28,
+      "duration_frames": 300,
+      "guarded": false,
+      "move": "Ownership Eclipse",
+      "reverse": true,
+      "screenshots": [
+        {
+          "actor_x": 1056.0,
+          "health": [
+            100,
+            112
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 122.66667175292969,
+          "video_frame": 480,
+          "captured_name": "rust-left-hit-030-before.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            100,
+            112
+          ],
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "target_x": 122.66667175292969,
+          "video_frame": 514,
+          "captured_name": "rust-left-hit-064-Freeze.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            100,
+            112
+          ],
+          "phase": "RustBlackout",
+          "sequence_tick": 9,
+          "target_x": 122.66667175292969,
+          "video_frame": 519,
+          "captured_name": "rust-left-hit-069-RustBlackout.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            100,
+            112
+          ],
+          "phase": "RustBuild",
+          "sequence_tick": 68,
+          "target_x": 122.66667175292969,
+          "video_frame": 578,
+          "captured_name": "rust-left-hit-128-RustBuild.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            100,
+            112
+          ],
+          "phase": "RustCharge",
+          "sequence_tick": 165,
+          "target_x": 122.66667175292969,
+          "video_frame": 675,
+          "captured_name": "rust-left-hit-225-RustCharge.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            100,
+            84
+          ],
+          "phase": "RustPulse",
+          "sequence_tick": 212,
+          "target_x": 122.66667175292969,
+          "video_frame": 722,
+          "captured_name": "rust-left-hit-272-contact-212.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            100,
+            84
+          ],
+          "phase": "RustPulse",
+          "sequence_tick": 220,
+          "target_x": 122.66667175292969,
+          "video_frame": 730,
+          "captured_name": "rust-left-hit-280-RustPulse.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            100,
+            84
+          ],
+          "phase": "Restore",
+          "sequence_tick": 267,
+          "target_x": 122.66667175292969,
+          "video_frame": 777,
+          "captured_name": "rust-left-hit-327-Restore.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            100,
+            84
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 122.66667175292969,
+          "video_frame": 850,
+          "captured_name": "rust-left-hit-400-restored.png"
+        }
+      ],
+      "video_frames": [
+        450,
+        899
+      ],
+      "wall_time_seconds": 4.185752336
+    },
+    {
+      "arena": "JavaStreet",
+      "audio_events": [
+        {
+          "character": "duke",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 960
+        },
+        {
+          "character": "duke",
+          "cue": "SuperTrashRain",
+          "sequence_tick": 8,
+          "video_frame": 968
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 84,
+          "video_frame": 1044
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 96,
+          "video_frame": 1056
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 108,
+          "video_frame": 1068
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 120,
+          "video_frame": 1080
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 132,
+          "video_frame": 1092
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 144,
+          "video_frame": 1104
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 156,
+          "video_frame": 1116
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 168,
+          "video_frame": 1128
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 180,
+          "video_frame": 1140
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 192,
+          "video_frame": 1152
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 204,
+          "video_frame": 1164
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 216,
+          "video_frame": 1176
+        },
+        {
+          "character": "duke",
+          "cue": "SuperGiantDrop",
+          "sequence_tick": 264,
+          "video_frame": 1224
+        },
+        {
+          "character": "duke",
+          "cue": "CombatHit",
+          "sequence_tick": 264,
+          "video_frame": 1224
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 264,
+          "video_frame": 1224
+        },
+        {
+          "character": "duke",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 1310
+        }
+      ],
+      "character": "duke",
+      "damage": 32,
+      "duration_frames": 350,
+      "guarded": false,
+      "move": "Garbage Collector",
+      "reverse": false,
+      "screenshots": [
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            112,
+            100
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 1056.0,
+          "video_frame": 930,
+          "captured_name": "duke-right-hit-030-before.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            112,
+            100
+          ],
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "target_x": 1056.0,
+          "video_frame": 964,
+          "captured_name": "duke-right-hit-064-Freeze.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            112,
+            100
+          ],
+          "phase": "DukeTrashFall",
+          "sequence_tick": 34,
+          "target_x": 1056.0,
+          "video_frame": 994,
+          "captured_name": "duke-right-hit-094-DukeTrashFall.png",
+          "retained_image": "duke-right-hit-094-DukeTrashFall.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            112,
+            100
+          ],
+          "phase": "DukeTrashSettle",
+          "sequence_tick": 72,
+          "target_x": 1056.0,
+          "video_frame": 1032,
+          "captured_name": "duke-right-hit-132-DukeTrashSettle.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            112,
+            100
+          ],
+          "phase": "DukeCollect",
+          "sequence_tick": 156,
+          "target_x": 1056.0,
+          "video_frame": 1116,
+          "captured_name": "duke-right-hit-216-DukeCollect.png",
+          "retained_image": "duke-right-hit-216-DukeCollect.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            112,
+            100
+          ],
+          "phase": "DukeGiantDrop",
+          "sequence_tick": 246,
+          "target_x": 1056.0,
+          "video_frame": 1206,
+          "captured_name": "duke-right-hit-306-DukeGiantDrop.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            112,
+            68
+          ],
+          "phase": "DukeImpact",
+          "sequence_tick": 264,
+          "target_x": 1056.0,
+          "video_frame": 1224,
+          "captured_name": "duke-right-hit-324-contact-264.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            112,
+            68
+          ],
+          "phase": "DukeImpact",
+          "sequence_tick": 283,
+          "target_x": 1056.0,
+          "video_frame": 1243,
+          "captured_name": "duke-right-hit-343-DukeImpact.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            112,
+            68
+          ],
+          "phase": "Restore",
+          "sequence_tick": 326,
+          "target_x": 1056.0,
+          "video_frame": 1286,
+          "captured_name": "duke-right-hit-386-Restore.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            112,
+            68
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 1056.0,
+          "video_frame": 1350,
+          "captured_name": "duke-right-hit-450-restored.png"
+        }
+      ],
+      "video_frames": [
+        900,
+        1399
+      ],
+      "wall_time_seconds": 5.304737437
+    },
+    {
+      "arena": "JavaStreet",
+      "audio_events": [
+        {
+          "character": "duke",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 1460
+        },
+        {
+          "character": "duke",
+          "cue": "SuperTrashRain",
+          "sequence_tick": 8,
+          "video_frame": 1468
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 84,
+          "video_frame": 1544
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 96,
+          "video_frame": 1556
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 108,
+          "video_frame": 1568
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 120,
+          "video_frame": 1580
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 132,
+          "video_frame": 1592
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 144,
+          "video_frame": 1604
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 156,
+          "video_frame": 1616
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 168,
+          "video_frame": 1628
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 180,
+          "video_frame": 1640
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 192,
+          "video_frame": 1652
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 204,
+          "video_frame": 1664
+        },
+        {
+          "character": "duke",
+          "cue": "SuperCollect",
+          "sequence_tick": 216,
+          "video_frame": 1676
+        },
+        {
+          "character": "duke",
+          "cue": "SuperGiantDrop",
+          "sequence_tick": 264,
+          "video_frame": 1724
+        },
+        {
+          "character": "duke",
+          "cue": "CombatHit",
+          "sequence_tick": 264,
+          "video_frame": 1724
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 264,
+          "video_frame": 1724
+        },
+        {
+          "character": "duke",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 1810
+        }
+      ],
+      "character": "duke",
+      "damage": 32,
+      "duration_frames": 350,
+      "guarded": false,
+      "move": "Garbage Collector",
+      "reverse": true,
+      "screenshots": [
+        {
+          "actor_x": 1056.0,
+          "health": [
+            112,
+            100
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 122.66667175292969,
+          "video_frame": 1430,
+          "captured_name": "duke-left-hit-030-before.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            112,
+            100
+          ],
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "target_x": 122.66667175292969,
+          "video_frame": 1464,
+          "captured_name": "duke-left-hit-064-Freeze.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            112,
+            100
+          ],
+          "phase": "DukeTrashFall",
+          "sequence_tick": 34,
+          "target_x": 122.66667175292969,
+          "video_frame": 1494,
+          "captured_name": "duke-left-hit-094-DukeTrashFall.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            112,
+            100
+          ],
+          "phase": "DukeTrashSettle",
+          "sequence_tick": 72,
+          "target_x": 122.66667175292969,
+          "video_frame": 1532,
+          "captured_name": "duke-left-hit-132-DukeTrashSettle.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            112,
+            100
+          ],
+          "phase": "DukeCollect",
+          "sequence_tick": 156,
+          "target_x": 122.66667175292969,
+          "video_frame": 1616,
+          "captured_name": "duke-left-hit-216-DukeCollect.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            112,
+            100
+          ],
+          "phase": "DukeGiantDrop",
+          "sequence_tick": 246,
+          "target_x": 122.66667175292969,
+          "video_frame": 1706,
+          "captured_name": "duke-left-hit-306-DukeGiantDrop.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            112,
+            68
+          ],
+          "phase": "DukeImpact",
+          "sequence_tick": 264,
+          "target_x": 122.66667175292969,
+          "video_frame": 1724,
+          "captured_name": "duke-left-hit-324-contact-264.png",
+          "retained_image": "duke-left-hit-324-contact-264.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            112,
+            68
+          ],
+          "phase": "DukeImpact",
+          "sequence_tick": 283,
+          "target_x": 122.66667175292969,
+          "video_frame": 1743,
+          "captured_name": "duke-left-hit-343-DukeImpact.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            112,
+            68
+          ],
+          "phase": "Restore",
+          "sequence_tick": 326,
+          "target_x": 122.66667175292969,
+          "video_frame": 1786,
+          "captured_name": "duke-left-hit-386-Restore.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            112,
+            68
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 122.66667175292969,
+          "video_frame": 1850,
+          "captured_name": "duke-left-hit-450-restored.png"
+        }
+      ],
+      "video_frames": [
+        1400,
+        1899
+      ],
+      "wall_time_seconds": 4.94562227
+    },
+    {
+      "arena": "PortoDigital",
+      "audio_events": [
+        {
+          "character": "c",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 1960
+        },
+        {
+          "character": "c",
+          "cue": "SuperError",
+          "sequence_tick": 8,
+          "video_frame": 1968
+        },
+        {
+          "character": "c",
+          "cue": "SuperError",
+          "sequence_tick": 105,
+          "video_frame": 2065
+        },
+        {
+          "character": "c",
+          "cue": "SuperBoot",
+          "sequence_tick": 180,
+          "video_frame": 2140
+        },
+        {
+          "character": "c",
+          "cue": "CombatHit",
+          "sequence_tick": 222,
+          "video_frame": 2182
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 222,
+          "video_frame": 2182
+        },
+        {
+          "character": "c",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 2280
+        }
+      ],
+      "character": "c",
+      "damage": 32,
+      "duration_frames": 320,
+      "guarded": false,
+      "move": "General Protection Fault / #GP",
+      "reverse": false,
+      "screenshots": [
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            104,
+            100
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 1056.0,
+          "video_frame": 1930,
+          "captured_name": "c-right-hit-030-before.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            104,
+            100
+          ],
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "target_x": 1056.0,
+          "video_frame": 1964,
+          "captured_name": "c-right-hit-064-Freeze.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            104,
+            100
+          ],
+          "phase": "CTerminalStorm",
+          "sequence_tick": 56,
+          "target_x": 1056.0,
+          "video_frame": 2016,
+          "captured_name": "c-right-hit-116-CTerminalStorm.png",
+          "retained_image": "c-right-hit-116-CTerminalStorm.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            104,
+            100
+          ],
+          "phase": "CBlueScreen",
+          "sequence_tick": 142,
+          "target_x": 1056.0,
+          "video_frame": 2102,
+          "captured_name": "c-right-hit-202-CBlueScreen.png",
+          "retained_image": "c-right-hit-202-CBlueScreen.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            104,
+            100
+          ],
+          "phase": "CBios",
+          "sequence_tick": 201,
+          "target_x": 1056.0,
+          "video_frame": 2161,
+          "captured_name": "c-right-hit-261-CBios.png",
+          "retained_image": "c-right-hit-261-CBios.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            104,
+            68
+          ],
+          "phase": "CReboot",
+          "sequence_tick": 222,
+          "target_x": 1056.0,
+          "video_frame": 2182,
+          "captured_name": "c-right-hit-282-contact-222.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            104,
+            68
+          ],
+          "phase": "CReboot",
+          "sequence_tick": 241,
+          "target_x": 1056.0,
+          "video_frame": 2201,
+          "captured_name": "c-right-hit-301-CReboot.png",
+          "retained_image": "c-right-hit-301-CReboot.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            104,
+            68
+          ],
+          "phase": "Restore",
+          "sequence_tick": 290,
+          "target_x": 1056.0,
+          "video_frame": 2250,
+          "captured_name": "c-right-hit-350-Restore.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            104,
+            68
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 1056.0,
+          "video_frame": 2320,
+          "captured_name": "c-right-hit-420-restored.png"
+        }
+      ],
+      "video_frames": [
+        1900,
+        2369
+      ],
+      "wall_time_seconds": 3.731138773
+    },
+    {
+      "arena": "PortoDigital",
+      "audio_events": [
+        {
+          "character": "c",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 2430
+        },
+        {
+          "character": "c",
+          "cue": "SuperError",
+          "sequence_tick": 8,
+          "video_frame": 2438
+        },
+        {
+          "character": "c",
+          "cue": "SuperError",
+          "sequence_tick": 105,
+          "video_frame": 2535
+        },
+        {
+          "character": "c",
+          "cue": "SuperBoot",
+          "sequence_tick": 180,
+          "video_frame": 2610
+        },
+        {
+          "character": "c",
+          "cue": "CombatHit",
+          "sequence_tick": 222,
+          "video_frame": 2652
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 222,
+          "video_frame": 2652
+        },
+        {
+          "character": "c",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 2750
+        }
+      ],
+      "character": "c",
+      "damage": 32,
+      "duration_frames": 320,
+      "guarded": false,
+      "move": "General Protection Fault / #GP",
+      "reverse": true,
+      "screenshots": [
+        {
+          "actor_x": 1056.0,
+          "health": [
+            104,
+            100
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 122.66667175292969,
+          "video_frame": 2400,
+          "captured_name": "c-left-hit-030-before.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            104,
+            100
+          ],
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "target_x": 122.66667175292969,
+          "video_frame": 2434,
+          "captured_name": "c-left-hit-064-Freeze.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            104,
+            100
+          ],
+          "phase": "CTerminalStorm",
+          "sequence_tick": 56,
+          "target_x": 122.66667175292969,
+          "video_frame": 2486,
+          "captured_name": "c-left-hit-116-CTerminalStorm.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            104,
+            100
+          ],
+          "phase": "CBlueScreen",
+          "sequence_tick": 142,
+          "target_x": 122.66667175292969,
+          "video_frame": 2572,
+          "captured_name": "c-left-hit-202-CBlueScreen.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            104,
+            100
+          ],
+          "phase": "CBios",
+          "sequence_tick": 201,
+          "target_x": 122.66667175292969,
+          "video_frame": 2631,
+          "captured_name": "c-left-hit-261-CBios.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            104,
+            68
+          ],
+          "phase": "CReboot",
+          "sequence_tick": 222,
+          "target_x": 122.66667175292969,
+          "video_frame": 2652,
+          "captured_name": "c-left-hit-282-contact-222.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            104,
+            68
+          ],
+          "phase": "CReboot",
+          "sequence_tick": 241,
+          "target_x": 122.66667175292969,
+          "video_frame": 2671,
+          "captured_name": "c-left-hit-301-CReboot.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            104,
+            68
+          ],
+          "phase": "Restore",
+          "sequence_tick": 290,
+          "target_x": 122.66667175292969,
+          "video_frame": 2720,
+          "captured_name": "c-left-hit-350-Restore.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            104,
+            68
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 122.66667175292969,
+          "video_frame": 2790,
+          "captured_name": "c-left-hit-420-restored.png"
+        }
+      ],
+      "video_frames": [
+        2370,
+        2839
+      ],
+      "wall_time_seconds": 3.565042723
+    },
+    {
+      "arena": "ValeDoPinhao",
+      "audio_events": [
+        {
+          "character": "cpp",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 2900
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperFootshot",
+          "sequence_tick": 44,
+          "video_frame": 2944
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 204,
+          "video_frame": 3104
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 204,
+          "video_frame": 3104
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 204,
+          "video_frame": 3104
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 214,
+          "video_frame": 3114
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 214,
+          "video_frame": 3114
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 214,
+          "video_frame": 3114
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 224,
+          "video_frame": 3124
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 224,
+          "video_frame": 3124
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 224,
+          "video_frame": 3124
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 234,
+          "video_frame": 3134
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 234,
+          "video_frame": 3134
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 234,
+          "video_frame": 3134
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 244,
+          "video_frame": 3144
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 244,
+          "video_frame": 3144
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 244,
+          "video_frame": 3144
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 254,
+          "video_frame": 3154
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 254,
+          "video_frame": 3154
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 254,
+          "video_frame": 3154
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 264,
+          "video_frame": 3164
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 264,
+          "video_frame": 3164
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 264,
+          "video_frame": 3164
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 274,
+          "video_frame": 3174
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 274,
+          "video_frame": 3174
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 274,
+          "video_frame": 3174
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 284,
+          "video_frame": 3184
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 284,
+          "video_frame": 3184
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 284,
+          "video_frame": 3184
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 3256
+        }
+      ],
+      "character": "cpp",
+      "damage": 30,
+      "duration_frames": 356,
+      "guarded": false,
+      "move": "Undefined Behavior: Footgun",
+      "reverse": false,
+      "screenshots": [
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            98,
+            100
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 1056.0,
+          "video_frame": 2870,
+          "captured_name": "cpp-right-hit-030-before.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            98,
+            100
+          ],
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "target_x": 1056.0,
+          "video_frame": 2904,
+          "captured_name": "cpp-right-hit-064-Freeze.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            98,
+            100
+          ],
+          "phase": "CppFootshot",
+          "sequence_tick": 35,
+          "target_x": 1056.0,
+          "video_frame": 2935,
+          "captured_name": "cpp-right-hit-095-CppFootshot.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            98,
+            100
+          ],
+          "phase": "CppFootshot",
+          "sequence_tick": 44,
+          "target_x": 1056.0,
+          "video_frame": 2944,
+          "captured_name": "cpp-right-hit-104-footshot.png",
+          "retained_image": "cpp-right-hit-104-footshot.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            98,
+            100
+          ],
+          "phase": "CppHop",
+          "sequence_tick": 86,
+          "target_x": 1056.0,
+          "video_frame": 2986,
+          "captured_name": "cpp-right-hit-146-CppHop.png"
+        },
+        {
+          "actor_x": 122.66667175292969,
+          "health": [
+            98,
+            100
+          ],
+          "phase": "CppRage",
+          "sequence_tick": 125,
+          "target_x": 1056.0,
+          "video_frame": 3025,
+          "captured_name": "cpp-right-hit-185-CppRage.png"
+        },
+        {
+          "actor_x": 533.3333129882812,
+          "health": [
+            98,
+            100
+          ],
+          "phase": "CppCharge",
+          "sequence_tick": 172,
+          "target_x": 1056.0,
+          "video_frame": 3072,
+          "captured_name": "cpp-right-hit-232-CppCharge.png",
+          "retained_image": "cpp-right-hit-232-CppCharge.png"
+        },
+        {
+          "actor_x": 944.0,
+          "health": [
+            98,
+            97
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 204,
+          "target_x": 1056.0,
+          "video_frame": 3104,
+          "captured_name": "cpp-right-hit-264-contact-204.png"
+        },
+        {
+          "actor_x": 944.0,
+          "health": [
+            98,
+            94
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 214,
+          "target_x": 1056.0,
+          "video_frame": 3114,
+          "captured_name": "cpp-right-hit-274-contact-214.png",
+          "retained_image": "cpp-right-hit-274-contact-214.png"
+        },
+        {
+          "actor_x": 944.0,
+          "health": [
+            98,
+            91
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 224,
+          "target_x": 1056.0,
+          "video_frame": 3124,
+          "captured_name": "cpp-right-hit-284-contact-224.png"
+        },
+        {
+          "actor_x": 944.0,
+          "health": [
+            98,
+            88
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 234,
+          "target_x": 1056.0,
+          "video_frame": 3134,
+          "captured_name": "cpp-right-hit-294-contact-234.png"
+        },
+        {
+          "actor_x": 944.0,
+          "health": [
+            98,
+            85
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 244,
+          "target_x": 1056.0,
+          "video_frame": 3144,
+          "captured_name": "cpp-right-hit-304-contact-244.png"
+        },
+        {
+          "actor_x": 944.0,
+          "health": [
+            98,
+            82
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 254,
+          "target_x": 1056.0,
+          "video_frame": 3154,
+          "captured_name": "cpp-right-hit-314-contact-254.png"
+        },
+        {
+          "actor_x": 944.0,
+          "health": [
+            98,
+            79
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 264,
+          "target_x": 1056.0,
+          "video_frame": 3164,
+          "captured_name": "cpp-right-hit-324-contact-264.png"
+        },
+        {
+          "actor_x": 944.0,
+          "health": [
+            98,
+            76
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 274,
+          "target_x": 1056.0,
+          "video_frame": 3174,
+          "captured_name": "cpp-right-hit-334-contact-274.png"
+        },
+        {
+          "actor_x": 944.0,
+          "health": [
+            98,
+            70
+          ],
+          "phase": "CppFinisher",
+          "sequence_tick": 284,
+          "target_x": 1056.0,
+          "video_frame": 3184,
+          "captured_name": "cpp-right-hit-344-contact-284.png"
+        },
+        {
+          "actor_x": 944.0,
+          "health": [
+            98,
+            70
+          ],
+          "phase": "CppFinisher",
+          "sequence_tick": 298,
+          "target_x": 1056.0,
+          "video_frame": 3198,
+          "captured_name": "cpp-right-hit-358-CppFinisher.png",
+          "retained_image": "cpp-right-hit-358-CppFinisher.png"
+        },
+        {
+          "actor_x": 944.0,
+          "health": [
+            98,
+            70
+          ],
+          "phase": "Restore",
+          "sequence_tick": 334,
+          "target_x": 1056.0,
+          "video_frame": 3234,
+          "captured_name": "cpp-right-hit-394-Restore.png"
+        },
+        {
+          "actor_x": 943.9998168945312,
+          "health": [
+            98,
+            70
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 1055.999755859375,
+          "video_frame": 3296,
+          "captured_name": "cpp-right-hit-456-restored.png"
+        }
+      ],
+      "video_frames": [
+        2840,
+        3345
+      ],
+      "wall_time_seconds": 8.589285047
+    },
+    {
+      "arena": "ValeDoPinhao",
+      "audio_events": [
+        {
+          "character": "cpp",
+          "cue": "SuperStart",
+          "sequence_tick": 0,
+          "video_frame": 3406
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperFootshot",
+          "sequence_tick": 44,
+          "video_frame": 3450
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 204,
+          "video_frame": 3610
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 204,
+          "video_frame": 3610
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 204,
+          "video_frame": 3610
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 214,
+          "video_frame": 3620
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 214,
+          "video_frame": 3620
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 214,
+          "video_frame": 3620
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 224,
+          "video_frame": 3630
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 224,
+          "video_frame": 3630
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 224,
+          "video_frame": 3630
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 234,
+          "video_frame": 3640
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 234,
+          "video_frame": 3640
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 234,
+          "video_frame": 3640
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 244,
+          "video_frame": 3650
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 244,
+          "video_frame": 3650
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 244,
+          "video_frame": 3650
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 254,
+          "video_frame": 3660
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 254,
+          "video_frame": 3660
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 254,
+          "video_frame": 3660
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 264,
+          "video_frame": 3670
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 264,
+          "video_frame": 3670
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 264,
+          "video_frame": 3670
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 274,
+          "video_frame": 3680
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 274,
+          "video_frame": 3680
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 274,
+          "video_frame": 3680
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperBarrageHit",
+          "sequence_tick": 284,
+          "video_frame": 3690
+        },
+        {
+          "character": "cpp",
+          "cue": "CombatHit",
+          "sequence_tick": 284,
+          "video_frame": 3690
+        },
+        {
+          "character": "rust",
+          "cue": "FighterHurt",
+          "sequence_tick": 284,
+          "video_frame": 3690
+        },
+        {
+          "character": "cpp",
+          "cue": "SuperEnd",
+          "sequence_tick": null,
+          "video_frame": 3762
+        }
+      ],
+      "character": "cpp",
+      "damage": 30,
+      "duration_frames": 356,
+      "guarded": false,
+      "move": "Undefined Behavior: Footgun",
+      "reverse": true,
+      "screenshots": [
+        {
+          "actor_x": 1056.0,
+          "health": [
+            98,
+            100
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 122.66667175292969,
+          "video_frame": 3376,
+          "captured_name": "cpp-left-hit-030-before.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            98,
+            100
+          ],
+          "phase": "Freeze",
+          "sequence_tick": 4,
+          "target_x": 122.66667175292969,
+          "video_frame": 3410,
+          "captured_name": "cpp-left-hit-064-Freeze.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            98,
+            100
+          ],
+          "phase": "CppFootshot",
+          "sequence_tick": 35,
+          "target_x": 122.66667175292969,
+          "video_frame": 3441,
+          "captured_name": "cpp-left-hit-095-CppFootshot.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            98,
+            100
+          ],
+          "phase": "CppFootshot",
+          "sequence_tick": 44,
+          "target_x": 122.66667175292969,
+          "video_frame": 3450,
+          "captured_name": "cpp-left-hit-104-footshot.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            98,
+            100
+          ],
+          "phase": "CppHop",
+          "sequence_tick": 86,
+          "target_x": 122.66667175292969,
+          "video_frame": 3492,
+          "captured_name": "cpp-left-hit-146-CppHop.png",
+          "retained_image": "cpp-left-hit-146-CppHop.png"
+        },
+        {
+          "actor_x": 1056.0,
+          "health": [
+            98,
+            100
+          ],
+          "phase": "CppRage",
+          "sequence_tick": 125,
+          "target_x": 122.66667175292969,
+          "video_frame": 3531,
+          "captured_name": "cpp-left-hit-185-CppRage.png"
+        },
+        {
+          "actor_x": 645.3333740234375,
+          "health": [
+            98,
+            100
+          ],
+          "phase": "CppCharge",
+          "sequence_tick": 172,
+          "target_x": 122.66667175292969,
+          "video_frame": 3578,
+          "captured_name": "cpp-left-hit-232-CppCharge.png"
+        },
+        {
+          "actor_x": 234.66668701171875,
+          "health": [
+            98,
+            97
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 204,
+          "target_x": 122.66667175292969,
+          "video_frame": 3610,
+          "captured_name": "cpp-left-hit-264-contact-204.png"
+        },
+        {
+          "actor_x": 234.66668701171875,
+          "health": [
+            98,
+            94
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 214,
+          "target_x": 122.66667175292969,
+          "video_frame": 3620,
+          "captured_name": "cpp-left-hit-274-contact-214.png"
+        },
+        {
+          "actor_x": 234.66668701171875,
+          "health": [
+            98,
+            91
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 224,
+          "target_x": 122.66667175292969,
+          "video_frame": 3630,
+          "captured_name": "cpp-left-hit-284-contact-224.png"
+        },
+        {
+          "actor_x": 234.66668701171875,
+          "health": [
+            98,
+            88
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 234,
+          "target_x": 122.66667175292969,
+          "video_frame": 3640,
+          "captured_name": "cpp-left-hit-294-contact-234.png"
+        },
+        {
+          "actor_x": 234.66668701171875,
+          "health": [
+            98,
+            85
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 244,
+          "target_x": 122.66667175292969,
+          "video_frame": 3650,
+          "captured_name": "cpp-left-hit-304-contact-244.png"
+        },
+        {
+          "actor_x": 234.66668701171875,
+          "health": [
+            98,
+            82
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 254,
+          "target_x": 122.66667175292969,
+          "video_frame": 3660,
+          "captured_name": "cpp-left-hit-314-contact-254.png"
+        },
+        {
+          "actor_x": 234.66668701171875,
+          "health": [
+            98,
+            79
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 264,
+          "target_x": 122.66667175292969,
+          "video_frame": 3670,
+          "captured_name": "cpp-left-hit-324-contact-264.png"
+        },
+        {
+          "actor_x": 234.66668701171875,
+          "health": [
+            98,
+            76
+          ],
+          "phase": "CppBarrage",
+          "sequence_tick": 274,
+          "target_x": 122.66667175292969,
+          "video_frame": 3680,
+          "captured_name": "cpp-left-hit-334-contact-274.png"
+        },
+        {
+          "actor_x": 234.66668701171875,
+          "health": [
+            98,
+            70
+          ],
+          "phase": "CppFinisher",
+          "sequence_tick": 284,
+          "target_x": 122.66667175292969,
+          "video_frame": 3690,
+          "captured_name": "cpp-left-hit-344-contact-284.png"
+        },
+        {
+          "actor_x": 234.66668701171875,
+          "health": [
+            98,
+            70
+          ],
+          "phase": "CppFinisher",
+          "sequence_tick": 298,
+          "target_x": 122.66667175292969,
+          "video_frame": 3704,
+          "captured_name": "cpp-left-hit-358-CppFinisher.png"
+        },
+        {
+          "actor_x": 234.66668701171875,
+          "health": [
+            98,
+            70
+          ],
+          "phase": "Restore",
+          "sequence_tick": 334,
+          "target_x": 122.66667175292969,
+          "video_frame": 3740,
+          "captured_name": "cpp-left-hit-394-Restore.png"
+        },
+        {
+          "actor_x": 234.66668701171875,
+          "health": [
+            98,
+            70
+          ],
+          "phase": null,
+          "sequence_tick": null,
+          "target_x": 122.66667175292969,
+          "video_frame": 3802,
+          "captured_name": "cpp-left-hit-456-restored.png"
+        }
+      ],
+      "video_frames": [
+        3346,
+        3851
+      ],
+      "wall_time_seconds": 8.10625726
+    }
+  ],
+  "simulation": "World fixed-step; real contacts, physical C++ rush, snapshots at authored phase clocks",
+  "snapshots": true,
+  "video": null,
+  "video_duration_seconds": 64.2,
+  "video_frame_count": 3852,
+  "evidence_note": "94 frames captured across four supers and both directions; this repository keeps 15 representative PNGs. Other captures can be reproduced with the example."
+}

@@ -1,0 +1,42 @@
+{
+  "garbage-items.png": {
+    "source": "/home/willams/.codex/generated_images/01a0833a-394f-76f3-84df-c4bf7f00f23b/exec-f2120369-fdee-40c0-8e0e-ed2d32834508.png",
+    "size": [
+      2172,
+      724
+    ],
+    "mode": "RGBA",
+    "transparent_fraction": 0.6906840450535698,
+    "components": [
+      {
+        "area": 200189,
+        "box": [
+          902,
+          139,
+          1518,
+          584
+        ]
+      },
+      {
+        "area": 136656,
+        "box": [
+          89,
+          105,
+          835,
+          635
+        ]
+      },
+      {
+        "area": 135596,
+        "box": [
+          1641,
+          185,
+          2096,
+          611
+        ]
+      }
+    ],
+    "sha256": "2d73cc14b28c90194d9d9f37d9ebcf495ba17d343f08fe342feb63ed83d4083c",
+    "method": "built-in imagegen; selected PNG copied intact; no raster processing after generation"
+  }
+}
