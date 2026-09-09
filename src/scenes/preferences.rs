@@ -70,6 +70,7 @@ pub enum PreferencesAction {
     Stay,
     StartFight,
     StartWithMode(PlayMode),
+    OpenCharacterSelect,
     CloseGuide,
     OpenCombatLab,
     OpenMoveShowcase,
@@ -324,10 +325,7 @@ impl PreferencesMenu {
         match self.page {
             MenuPage::Main => match self.selected {
                 Self::MAIN_START_ROW => PreferencesAction::StartFight,
-                Self::MAIN_VERSUS_ROW => {
-                    self.enter_page(MenuPage::Versus);
-                    PreferencesAction::Stay
-                }
+                Self::MAIN_VERSUS_ROW => PreferencesAction::OpenCharacterSelect,
                 Self::MAIN_TRAINING_ROW => {
                     self.enter_page(MenuPage::Training);
                     PreferencesAction::Stay

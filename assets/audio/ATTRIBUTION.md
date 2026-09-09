@@ -116,12 +116,13 @@ Crédito não é obrigatório, mas apreciado pela autora.
 
 ### Voice Clip Pack — Male Adventurer RPG
 
-- Arquivos no repo: `assets/audio/characters/rust/voice/*.ogg`, camada vocal de `assets/audio/sfx/super/start-rust.ogg`.
+- Arquivos no repo: `assets/audio/characters/rust/voice/*.ogg`, cópias temporárias em `assets/audio/characters/c/voice/*.ogg` e camadas vocais de `assets/audio/sfx/super/start-rust.ogg` e `start-c.ogg`.
 - Fonte: <https://opengameart.org/content/voice-clip-pack-male-adventurer-rpg>
 - Autor: Brandon Song; submitter: wolfwoot.
 - Licença usada: Creative Commons Zero, CC0 1.0.
 - Recortes de esforços de ataque, salto e dor, com filtro passa-altas, fades e normalização; voz no pitch original.
 - Crédito opcional solicitado pelo autor: `Voice clips by Brandon Song`.
+- Old C reutiliza seis clips já aprovados de Rust, sem transposição ou reprocessamento, por autorização do usuário nesta rodada de playtest. Rust permanece inalterado. A entrada do super de C preserva os efeitos Kenney de erro e glitch, substituindo a gravação vocal de Volvion. [Decisão, comparação e fontes pesquisadas](review/old-c-fallback-2026-09-09/README.md).
 
 ### Monster Sound Effects 2
 
@@ -159,17 +160,25 @@ Crédito não é obrigatório, mas apreciado pela autora.
 
 ### Old Man Noises.mp3
 
-- Arquivos no repo: `assets/audio/characters/c/voice/*.ogg`, camada vocal de `assets/audio/sfx/super/start-c.ogg`.
+- Arquivos históricos no repo: `assets/audio/review/old-c-fallback-2026-09-09/before/*.ogg`. A gravação foi retirada dos clips de execução de Old C nesta rodada; os recortes anteriores ficam somente para comparação.
 - Fonte: <https://freesound.org/people/Volvion/sounds/609788/>
 - Autor: Volvion.
 - Licença usada: Creative Commons Zero, CC0 1.0.
 - Origem baixada: [preview HQ público](https://cdn.freesound.org/previews/609/609788_4085012-hq.mp3) completo da atuação de velho sábio, disponível sem autenticação.
 - Seis recortes de esforço e reação, filtros passa-altas/baixas, fades e normalização; pitch original. Não é apenas a gravação de Duke transposta.
 
+## Candidatos não adotados para Old C
+
+- [Steampunk Fantasy Voices](https://opengameart.org/content/steampunk-fantasy-voices), por xathien, CC0 1.0: `Guard_Attack_001_0.wav` e `Knight_Attack_001_0.wav` em `review/old-c-fallback-2026-09-09/` são arquivos originais para audição humana posterior. Não entram no manifesto nem nos pacotes de execução.
+- [Voiceover Pack (Fighter)](https://kenney.nl/assets/voiceover-pack-fighter), Kenney, CC0 1.0: `review/old-c-fallback-2026-09-09/kenney-prepare-yourself.ogg` é a locução original `Audio/prepare_yourself.ogg`, incluída somente como evidência da busca. O inventário contém locuções de anúncio, sem conjunto correspondente de esforço/dor/defesa.
+- Não houve avaliação subjetiva de audição pelo agente: a ferramenta informou que não aceita entrada de áudio. Por isso, a alternativa adotada foi o compartilhamento temporário já autorizado de Rust, sem afirmar que um candidato novo soa melhor.
+
 ## Mixagens de sequência e rastreio
 
 Os 18 arquivos iniciais em `assets/audio/sfx/super/` combinam as gravações acima com os pacotes Kenney Interface Sounds, Impact Sounds e RPG Audio. Papel, pequenos objetos, metal pesado, impactos, sinais de erro e POST são gravações/efeitos desses pacotes CC0; não houve geração de fala. `start-duke.ogg` utiliza o recorte de HaelDB já aprovado para Duke. Os arquivos originais de voz de Duke e Python permanecem inalterados.
 
 O [registro de produção de 9 de setembro de 2026](production-2026-09-09.json) contém, para cada saída, URL de origem e download, licença, hash da gravação, intervalo recortado, filtros FFmpeg, ganhos e atrasos de cada camada, formato e hash final. A [página de audição](audition.html) inclui comparações individuais e reel com os parâmetros do manifesto.
+
+Para Old C, o registro atual é [produção do fallback autorizado](production-old-c-fallback-2026-09-09.json): seis cópias exatas, remix da entrada do super, hashes anteriores/atuais e comprovação de que os demais 87 arquivos de áudio e o manifesto ficaram intactos. O registro anterior continua preservado como histórico.
 
 A ampliação com dez efeitos de Python e notebook da C++ está registrada em [produção das transformações](production-transformations-2026-09-09.json). Digitação/ENTER usam Kenney Interface Sounds; crescimento, bote e reversão combinam tecido Kenney RPG Audio com os slurps CC0 de Independent.nu/qubodup; o gesto final combina confirmação e sino Kenney. `start-python.ogg` reutiliza a voz `attack-snake-bite-01.ogg` de cicifyre no pitch de reprodução já aprovado (1.02), com efeitos discretos. Nenhuma voz original foi substituída ou regravada; os doze hashes protegidos permanecem iguais.

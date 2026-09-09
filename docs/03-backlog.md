@@ -4,9 +4,13 @@
 
 Este documento e a fonte de verdade para **o que vem agora**.
 
-Frente atual: corrigir o carregamento de imagens e áudio em caminhos Windows
-com acentos na versão `v0.1.0-prototype.2`. A estabilização continua em
-`release/v0.1.0-prototype.1`, pelo PR #18, com os mesmos instaladores e guia.
+Frente atual: [concluir a apresentação do playtest](26-playtest-visual-completion.md),
+com prioridade para reações de todo o elenco, seleção visual, pausa/revanche,
+barra de energia, transições e revisão da voz Old C. Goal autorizado em
+9 de setembro de 2026, branch `feature/playtest-visual-completion`.
+
+A correção do carregamento em caminhos Windows com acentos já foi publicada
+na versão `v0.1.0-prototype.2`; a integração à main segue pelo PR #18.
 [Processo](06-release-process.md), [notas](releases/v0.1.0-prototype.2.md) e
 [ADR 0019](adr/0019-playtest-distribution.md).
 
@@ -57,6 +61,7 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Proxima acao |
 |---|---|---|---|---|
+| Agora | Conclusão visual e fluxo do playtest | Goal em execução | [Plano 26](26-playtest-visual-completion.md), [ADR 0020](adr/0020-match-flow-selection-and-energy.md) | Reações completas, seleção Linker, pausa/revanche, energia, transições e voz Old C; balanceamento fino depois. |
 | Concluído | Reações próprias Python × C++ | Implementado e verificado | [Entrega 25](25-python-cpp-contact-reactions.md), [evidências](evidence/python-cpp-reactions/README.md), [ADR 0018](adr/0018-contact-reaction-profiles.md) | 64 desenhos novos, reação individual à rajada, 64 cenários nos dois sentidos e vídeo do par. |
 | Próximo | Reações próprias dos demais personagens | Rodada posterior ao piloto | [Padrão 25](25-python-cpp-contact-reactions.md#aplicar-o-padrão-na-próxima-rodada) | Estender desenhos e validação por contato após o playtest de Python/C++. |
 | Concluído | Reações e transformações | Cinco supers autorais e reações dos seis defensores integrados e verificados | [Plano 24](24-reactions-and-transformations.md), [ADR 0017](adr/0017-reaction-clocks-and-arena-mutation.md), [evidências](evidence/reactions-transformations/README.md) | Playtest humano das animações e dos sons. 335 testes, Clippy estrito, formatação e teste separado de áudio ao vivo aprovados; custo, raridade e vantagens por arena ficam para outra rodada. |
@@ -70,7 +75,7 @@ Regra operacional:
 | Proximo | Feeling e balanceamento | Planejado | [`docs/13-combat-design-roadmap.md`](13-combat-design-roadmap.md), [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md) | Playtestar a demo Rust x Duke x C x Python x C++ com Combat Lab, mantendo Go fora do menu publico e ajustando frame data por dados, nao por achismo. |
 | Feito local | Arte final dos seis lutadores | Acabamento e verificação concluídos | [Laudos e vídeos atuais](../assets/candidates/README.md), [cobertura](19-sprite-production-coverage.md) | 120 clips e 378 quadros, dez golpes por personagem. Go recebeu outra identidade semirrealista. Arte padrão, comparação com env=0, fontes e combate preservados. |
 | Depois | Ferramenta visual clicavel | Aberto | [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) | Avaliar `raygui` somente se atalhos e texto ficarem insuficientes. |
-| Agora | Release Prototype 0.1 | Correção v0.1.0-prototype.2 em estabilização no PR #18 | [Processo](06-release-process.md), [notas da versão](releases/v0.1.0-prototype.2.md), [ADR 0019](adr/0019-playtest-distribution.md) | Verificar PNG e áudio em caminhos Windows com espaços e acentos, publicar a correção e recolher feedback do playtest. |
+| Concluído | Release Prototype 0.1 | Correção v0.1.0-prototype.2 publicada; integração pelo PR #18 | [Processo](06-release-process.md), [notas da versão](releases/v0.1.0-prototype.2.md), [ADR 0019](adr/0019-playtest-distribution.md) | Cinco pacotes publicados; ZIP público conferido no Windows em pasta com acentos, com arte/áudio e combate completos. |
 
 ## Ritual de manutencao
 

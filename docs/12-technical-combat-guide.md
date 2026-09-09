@@ -43,13 +43,14 @@ Sempre que um código novo alterar combate, personagens, input de combate, Comba
 
 O loop principal em [`src/app.rs`](../src/app.rs) usa `AppScene` de [`src/scenes/mod.rs`](../src/scenes/mod.rs) como maquina de estados simples:
 
-- `Preferences`: menu principal e submenus de versus, treino, lore/roster, opções e Como jogar;
+- `Preferences`: menu principal e submenus de treino, lore/roster, opções e Como jogar;
+- `CharacterSelect`: roster visual com cursores P1/P2, confirmações, modo e arena;
 - `Fight`: luta normal com fixed timestep, IA, audio events e renderer de arena;
 - `CombatLab`: cena isolada para testar golpes e frame data;
 - `MoveShowcase`: cena de treino com dois atores, situações contextuais, golpes e defesas reais;
 - `SpriteViewer`: ferramenta de sprite em loop proprio, fora do fluxo normal de luta.
 
-Transicoes novas devem passar por esse enum em vez de espalhar flags soltas no loop. Se a nova tela for ferramenta temporaria, prefira loop isolado como o Sprite Viewer; se fizer parte do jogo, trate como cena normal. `Esc` tem comportamento de voltar dentro do jogo; o bootstrap em [`src/main.rs`](../src/main.rs) desativa a tecla padrão de fechamento do Raylib com `set_exit_key(None)`.
+Transicoes novas devem passar por esse enum em vez de espalhar flags soltas no loop. Se a nova tela for ferramenta temporaria, prefira loop isolado como o Sprite Viewer; se fizer parte do jogo, trate como cena normal. `Esc` volta em menus e ferramentas e abre pausa durante a luta; o bootstrap em [`src/main.rs`](../src/main.rs) desativa a tecla padrão de fechamento do Raylib com `set_exit_key(None)`.
 
 ### Mouse e Fechamento da Janela
 
@@ -57,7 +58,7 @@ O compartilhamento da geometria de menus entre desenho e input está registrado 
 
 O menu recebe hover, clique esquerdo e clique direito por [`src/engine/input.rs`](../src/engine/input.rs). Desenho e detecção de linhas compartilham a geometria de [`src/ui/menu_layout.rs`](../src/ui/menu_layout.rs). [`PreferencesMenu`](../src/scenes/preferences.rs) usa movimento real do mouse para mudar a seleção; um ponteiro parado não disputa a seleção com teclado/gamepad. Clique esquerdo ativa a linha sob o ponteiro, inclusive `Exit` e `Back`, alterna flags ou avança valores. Clique direito volta valores ajustáveis. Cliques fora das linhas são ignorados, e a proteção de entrada nas transições também cobre o mouse.
 
-O cursor nativo usa `show_cursor()`, que preserva sua posição. Não chamar `enable_cursor()` a cada quadro: no Raylib 6 essa função também centraliza o ponteiro, impedindo o movimento e o acesso ao botão de fechar. O overlay `Linker` em WSL acompanha a posição real e só aparece com a janela em foco e o mouse na área cliente. `Esc` mantém a função de voltar; o botão nativo de fechar e `Exit` encerram o jogo. A navegação por mouse é coberta em [`tests/feature_flags.rs`](../tests/feature_flags.rs); cursor e fechamento exigem também verificação com janela real.
+O cursor nativo usa `show_cursor()`, que preserva sua posição. Não chamar `enable_cursor()` a cada quadro: no Raylib 6 essa função também centraliza o ponteiro, impedindo o movimento e o acesso ao botão de fechar. O overlay `Linker` em WSL acompanha a posição real e só aparece com a janela em foco e o mouse na área cliente. `Esc` volta em menus/ferramentas e abre `MatchFlow::pause()` na luta; o botão nativo de fechar e `Exit` encerram o jogo. A navegação por mouse é coberta em [`tests/feature_flags.rs`](../tests/feature_flags.rs); cursor e fechamento exigem também verificação com janela real.
 
 ### Fluxo de Início de Luta
 
@@ -67,7 +68,8 @@ de menus. O desenho fica em [`src/engine/render/onboarding.rs`](../src/engine/re
 `PlayMode` configura somente as duas flags CPU: contra CPU (manual/CPU), duelo local
 (manual/manual) e demonstração (CPU/CPU). `App` começa em manual/CPU; o default
 de `FeatureFlags` usado pelos testes de combate continua CPU/CPU. Escolher um modo
-reinicia o mundo; fechar o guia só retorna ao menu, sem alterar o modo em andamento.
+abre `CharacterSelect` com essas flags. Somente confirmar os dois personagens e
+iniciar a luta recria o mundo; fechar o guia retorna ao menu sem alterar o modo.
 
 `App` grava o marcador `onboarding-v1.seen` em `runtime_paths::data_dir()` ao sair
 do guia. O marcador evita repetir a apresentação; preferências e modo não são
@@ -78,11 +80,17 @@ bypass e falha de armazenamento têm testes unitários em `app.rs`.
 
 O início de luta fica em [`src/game/world.rs`](../src/game/world.rs), não no renderer. `World::new_greybox_with_intro` liga primeiro `spawn_intro_timer` para a entrada cinematográfica e também prepara `countdown_timer`.
 
-O matchup inicial vem de [`LaunchOptions.match_options`](../src/cli.rs), que aceita `--p1`/`--player-one` e `--p2`/`--player-two` para a luta normal. O submenu `Versus Setup` da demo cicla Player 1 e Player 2 entre Rust, Duke/Java, C, Python e C++; Go/Gopher continua no enum e nas ferramentas, mas não entra no ciclo público por enquanto. O mesmo submenu também permite escolher a arena da próxima luta usando os nomes e locais expostos por [`ArenaId`](../src/game/arena.rs). [`App`](../src/app.rs) marca matchup ou arena como pendente e recria o mundo ao começar a próxima luta. `LaunchOptions.start_fight` vem de `--fight`/`--skip-menu` e permite iniciar direto em `AppScene::Fight`. [`App`](../src/app.rs) preserva essa escolha no primeiro mundo e em `restart_match`, chamando `World::new_greybox_with_intro_for_characters`.
+O matchup inicial vem de [`LaunchOptions.match_options`](../src/cli.rs), que aceita `--p1`/`--player-one` e `--p2`/`--player-two` para a luta normal. `Quick Fight`, `Versus Setup` e os modos do tutorial abrem [`CharacterSelect`](../src/scenes/character_select.rs), com Rust, Duke/Java, C, Python e C++. A opção aleatória resolve apenas esses cinco; slots futuros recusam confirmação. Go/Gopher continua no enum e nas ferramentas. Dois cursores confirmam P1/P2 antes de um novo comando iniciar a luta. `Tab` alterna modo, `Q/E` alterna arena e o mouse usa [`roster_layout`](../src/ui/roster_layout.rs). A seleção usa nomes e locais de [`ArenaId`](../src/game/arena.rs); [`App`](../src/app.rs) aplica personagens, modo e arena ao lançar o confronto. `LaunchOptions.start_fight` vem de `--fight`/`--skip-menu` e permite iniciar direto em `AppScene::Fight`. [`App`](../src/app.rs) preserva essa escolha no primeiro mundo e em `restart_match`, chamando `World::new_greybox_with_intro_for_characters`.
 
 Enquanto `spawn_intro_active` ou `countdown_active` estiverem ativos, `World::update_with_flags` atualiza apenas timers e feedback transitório; movimento, ataques, projéteis e IA não avançam gameplay. A contagem visual usa os labels `11`, `10`, `01` e `Fight!`, expostos por `World::countdown_label`. Os eventos de áudio correspondentes são `match.countdown.11`, `match.countdown.10`, `match.countdown.01` e `match.countdown.fight`.
 
-O desenho da contagem fica em [`src/engine/render.rs`](../src/engine/render.rs), que só consulta `World::countdown_label`. A troca de arena é decisão de [`src/app.rs`](../src/app.rs): depois que `World::outcome` aparece, a arena atual permanece na pose de vitória e só avança quando uma nova luta é iniciada por restart ou pelo menu. Se o jogador escolher uma arena manualmente em `Versus Setup`, essa escolha vale para a próxima luta e desliga o avanço automático naquele restart.
+O desenho da contagem fica em [`src/engine/render.rs`](../src/engine/render.rs), que só consulta `World::countdown_label`. A troca de arena é decisão de [`src/app.rs`](../src/app.rs): depois que `World::outcome` aparece, a arena atual permanece na pose de vitória e só avança quando uma nova luta é iniciada por restart ou pelo menu. Uma arena confirmada na seleção vale para a próxima luta e desliga o avanço automático naquele restart.
+
+### Pausa e Resultado
+
+[`MatchFlow`](../src/scenes/match_flow.rs) concentra seleção, ações e regiões de clique dos overlays. Na luta, `Esc`/`Start` abre pausa; **Continuar** retoma, **Reiniciar** recria o confronto e **Trocar personagens**/**Menu** muda de cena. A primeira borda é descartada até um frame neutro. `R` permanece como reinício rápido fora dos overlays.
+
+A pausa impede ticks do `World` e preserva intro, contagem, projéteis, energia, reações e sequência autoral. O relógio visual da interface continua independente. `AudioPlayer::set_match_paused` preserva os cursores de áudio; trocar de cena ou reiniciar cancela a sequência antes de liberar essa pausa. O resultado aparece depois da pose inicial de vitória, oferecendo **Revanche**, **Trocar personagens** e **Menu**. O [renderer](../src/engine/render/match_flow.rs) usa as mesmas regiões de clique e coloca os controles abaixo dos atores. A [ADR 0020](adr/0020-match-flow-selection-and-energy.md) registra seleção, pausa e energia.
 
 ### Hitbox e Hurtbox
 
@@ -248,7 +256,9 @@ Os golpes próximos atuais estão em [`src/combat/move_data.rs`](../src/combat/m
 
 `MoveInputKind::CinematicSpecial` identifica uma segunda ação temática, independente de `SignatureSpecial` e do projétil. Os seis personagens conservam seus `MoveId` estáveis para inputs, catálogo e bindings de áudio. A [ADR0016](adr/0016-authored-super-sequences.md) introduziu a captura autoral para Rust, Duke, C e C++; a [ADR0017](adr/0017-reaction-clocks-and-arena-mutation.md) amplia o roteiro de C++, adiciona Python e torna persistente a mutação de arena de Rust.
 
-`World::try_start_super` aceita o comando apenas com o atacante vivo, livre e no chão, fora de intro/countdown/agarrão. Guarda mantida não impede `LB+RT`. A aceitação limpa as ações dos atores, registra posições e defesa do alvo, emite `SuperStart` e começa no tick zero. Duas solicitações elegíveis no mesmo tick anulam ambas, sem vencedor arbitrário por slot; a próxima solicitação pode iniciar normalmente. A captura é garantida a qualquer distância, e inputs posteriores não alteram a defesa capturada nem aceleram fases. Um alvo no ar permanece parado no freeze inicial e desce continuamente até a âncora de chão nos ticks 8–20, conservando X; as fases e contatos seguintes encontram ambos os atores no piso, inclusive na corrida de C++.
+`World::try_start_super` aceita o comando apenas com o atacante vivo, livre e no chão, fora de intro/countdown/agarrão e com energia suficiente sob `EnergyPolicy::Metered`. Guarda mantida não impede `LB+RT`. A aceitação limpa as ações dos atores, registra posições e defesa do alvo, emite `SuperStart` e começa no tick zero. Duas solicitações elegíveis no mesmo tick anulam ambas, sem gastar energia e sem vencedor arbitrário por slot; a próxima solicitação pode iniciar normalmente. A captura é garantida a qualquer distância, e inputs posteriores não alteram a defesa capturada nem aceleram fases. Um alvo no ar permanece parado no freeze inicial e desce continuamente até a âncora de chão nos ticks 8–20, conservando X; as fases e contatos seguintes encontram ambos os atores no piso, inclusive na corrida de C++.
+
+[`game::energy`](../src/game/energy.rs) mantém reservas de 0–100, iniciadas em 50. `App` aplica `EnergyPolicy::Metered` na luta, inclusive entrada CLI e reinício; o default de `World` permanece `Unlimited` para ferramentas e simulações isoladas. Um contato normal sem bloqueio rende 12 ao atacante e 8 ao alvo; bloqueado rende 4 e 6. Melee, projéteis e agarrões só creditam contato confirmado. Espera, whiff e contatos cinematográficos não recarregam. Um cinematográfico aceito consome 100 uma única vez; rejeição por estado, energia insuficiente ou solicitações simultâneas elegíveis não consome a reserva. Reiniciar restaura 50/100. O HUD consulta a energia por jogador; vida, dano, frame data e cooldowns permanecem independentes desse recurso.
 
 | Personagem / golpe | MoveId estável | Dano / chip | Contatos (ticks) | Duração a 60 Hz |
 |---|---|---|---|---|
@@ -268,7 +278,7 @@ A construção de Rust revela Sirius sobre a arena atual em blocos. No tick `RUS
 
 Somente os `SuperContact` aplicam dano. Guarda em qualquer altura causa `max(dano / 4, 1)` por contato, limitado a manter pelo menos 1 HP. Flags de invencibilidade continuam respeitadas. O tiro no próprio pé não retira HP. Contatos fortes sem bloqueio lançam o alvo, que progride por voo, queda e recuperação protegida de 36f. O relógio da reação continua avançando durante a sequência: vítimas vivas conseguem completar a recuperação antes da restauração, e novos contatos reiniciam o recoil. Vítimas derrotadas permanecem caídas após aterrissar. A vida pode chegar a zero durante a sessão, mas `resolve_outcome` só anuncia KO depois de `SuperEnd`. Recriar `World` remove sessão, contatos pendentes e relógio. A fronteira do app pausa/retoma música pelo estado da sessão e limpa a pausa ao sair da cena.
 
-Go / Million Goroutines (`GoMillionGoroutines`) preserva `AttackKind::CinematicSpecial` local: 25 de dano, ativos inclusivos 32–39, duração 94f e alcance `world_px(100)`. É mid, hitstun 28f, blockstun 16f, pushback H/B `world_px(72/28)`, 18f extras de whiff e hitbox local de altura `world_px(142)`. Pode errar à distância e sofrer interrupção; metadata não amplia o alcance. `Fighter::cinematic_special()` expõe esse relógio para sua apresentação. Os antigos timings `MoveSpec` dos cinco supers autorais são dados legados de pose/compatibilidade; o runtime usa `super_spec` como autoridade de fases e dano.
+Go / Million Goroutines (`GoMillionGoroutines`) também paga 100 de energia nas lutas e preserva `AttackKind::CinematicSpecial` local: 25 de dano, ativos inclusivos 32–39, duração 94f e alcance `world_px(100)`. É mid, hitstun 28f, blockstun 16f, pushback H/B `world_px(72/28)`, 18f extras de whiff e hitbox local de altura `world_px(142)`. Pode errar à distância e sofrer interrupção; metadata não amplia o alcance. `Fighter::cinematic_special()` expõe esse relógio para sua apresentação. Os antigos timings `MoveSpec` dos cinco supers autorais são dados legados de pose/compatibilidade; o runtime usa `super_spec` como autoridade de fases e dano.
 
 Teclado: `Y` P1 e `]` P2. `Right Shift` conserva o soco forte P2. Gamepad: segurar `LB` e pressionar `RT`; `RT` sem `LB` continua assinatura. `PendingFighterInput` preserva a borda até o próximo tick e a consome uma única vez em catch-up. A CPU continua selecionando cinematográficos ocasionalmente pela heurística de alcance local; a aceitação dos cinco supers não depende dessa distância.
 
@@ -278,7 +288,7 @@ cargo run -- --showcase --character cpp --move cinematic_special --repeat --reve
 cargo run -- --lab combat --character c --move cinematic_special
 ```
 
-CLI também aceita `cinematic`, `cinematic-special` e `ultimate`. O Combat Lab mantém um `World` completo para os cinco supers, acessível por `super_preview_world()`, reproduz ambos os atores e disponibiliza os cues reais por `take_super_audio_events()`. Não apresenta dummy, alcance melee nem vantagem fictícia para capturas. Go mantém o dummy local. Showcase prepara o alvo à distância nos cinco supers e calcula `scenario_frames()` como 30f de preparação + duração da sessão + 90f de observação; os outros exemplos conservam 260f. Pausa e avanço por frame preservam o relógio de cada modo. Há 16 situações por personagem da demo e 15 para Go, que não possui a assinatura anterior.
+CLI também aceita `cinematic`, `cinematic-special` e `ultimate`. Combat Lab e Move Showcase usam `EnergyPolicy::Unlimited`, mantendo repetição livre sem acumular ou gastar energia. O Combat Lab mantém um `World` completo para os cinco supers, acessível por `super_preview_world()`, reproduz ambos os atores e disponibiliza os cues reais por `take_super_audio_events()`. Não apresenta dummy, alcance melee nem vantagem fictícia para capturas. Go mantém o dummy local. Showcase prepara o alvo à distância nos cinco supers e calcula `scenario_frames()` como 30f de preparação + duração da sessão + 90f de observação; os outros exemplos conservam 260f. Pausa e avanço por frame preservam o relógio de cada modo. Há 16 situações por personagem da demo e 15 para Go, que não possui a assinatura anterior.
 
 [`tests/authored_super_sequences.rs`](../tests/authored_super_sequences.rs) verifica ambas as orientações e slots, distância/cantos, fases e contatos, corrida física, guarda capturada/chip, preservação de HP no treino, KO adiado, comandos simultâneos, alvo aéreo, emissão única de áudio e reset, mutação persistente para Sirius e retorno de Python sem dano adicional. [`tests/cinematic_specials.rs`](../tests/cinematic_specials.rs) preserva a matriz local de Go e verifica CLI, pause/frame-step e replay dos seis personagens. [`tests/move_showcase.rs`](../tests/move_showcase.rs) valida contatos reais de todos os golpes com e sem metadata.
 
@@ -371,7 +381,7 @@ Hoje `Rust` usa `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` pa
 
 Os especiais de projectile ficam em [`src/combat/projectile.rs`](../src/combat/projectile.rs) como `RUST_PROJECTILE_SPEC`, `DUKE_PROJECTILE_SPEC`, `GO_PROJECTILE_SPEC`, `C_PROJECTILE_SPEC` e `PYTHON_PROJECTILE_SPEC`. `Fighter::projectile_spec` alimenta `Projectile::from_fighter`, o Combat Lab e o overlay técnico, então alterar um spec muda luta real e lab no mesmo caminho.
 
-`World::new_with_characters` e `World::new_greybox_with_intro_for_characters` aceitam qualquer `CharacterId`; a luta padrão ainda instancia Rust x Duke. O submenu `Versus Setup` da demo cicla Rust, Duke/Java, C, Python e C++ para personagens e percorre as arenas com nomes contextualizados. Go/Gopher continua testável por `--p1`/`--p2`, Combat Lab e Sprite Viewer, mas fica fora do menu público por enquanto.
+`World::new_with_characters` e `World::new_greybox_with_intro_for_characters` aceitam qualquer `CharacterId`; a luta padrão ainda instancia Rust x Duke. A cena de seleção pública oferece Rust, Duke/Java, C, Python e C++, confirma P1/P2 separadamente e permite escolher modo e arena. Go/Gopher continua testável por `--p1`/`--p2`, Combat Lab e Sprite Viewer, mas fica fora do menu público por enquanto.
 
 A intenção de gameplay por golpe vive em [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md). Atualize essa matriz quando alterar frame data, alcance, dano, guard rule, projectile ou loadout de personagem.
 

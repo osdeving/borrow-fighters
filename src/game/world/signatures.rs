@@ -83,7 +83,12 @@ impl World {
         }
     }
 
-    pub(super) fn update_signature_effects(&mut self, dt: f32, flags: FeatureFlags) {
+    pub(super) fn update_signature_effects(
+        &mut self,
+        dt: f32,
+        flags: FeatureFlags,
+        gain_energy: bool,
+    ) {
         // Strikes resolved earlier in World can interrupt a channel. Effects
         // contacting on this same tick must instead trade symmetrically: the
         // first contact cannot erase the second owner's already-active cast.
@@ -140,6 +145,10 @@ impl World {
                 && (effect.position.x - defender.body_rect().center_x()).abs() < world_px(105.0)
                 && effect.position.y >= defender.body_rect().y
             {
+                if gain_energy {
+                    self.energy
+                        .record_contact(effect.owner, defender_slot, true);
+                }
                 effect.alive = false;
                 continue;
             }
@@ -221,7 +230,7 @@ impl World {
                 guard_rule: spec.guard_rule,
                 hit_reaction: spec.hit_reaction,
             };
-            self.queue_close_hit_audio(effect.owner, defender_slot, attack, result);
+            self.record_close_contact(effect.owner, defender_slot, attack, result, gain_energy);
             self.hit_effects.push(HitEffect::new(
                 contact,
                 result.damage,

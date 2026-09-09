@@ -6,3 +6,4 @@
 pub mod binary_text;
 pub mod combat_debug;
 pub mod menu_layout;
+pub mod roster_layout;

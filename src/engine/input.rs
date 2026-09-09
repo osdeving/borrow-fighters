@@ -22,6 +22,7 @@ pub struct LocalInput {
     pub preferences: PreferencesInput,
     pub combat_lab: CombatLabInput,
     pub restart: bool,
+    pub pause: bool,
     pub toggle_cpu: bool,
     pub open_preferences: bool,
     pub start_recording: bool,
@@ -60,7 +61,8 @@ impl LocalInput {
             player_two: merge_fighter_input(keyboard_player_two, gamepad_player_two),
             preferences: merge_preferences_input(keyboard_preferences, gamepad_preferences),
             combat_lab,
-            restart: raylib.is_key_pressed(KeyboardKey::KEY_R)
+            restart: raylib.is_key_pressed(KeyboardKey::KEY_R),
+            pause: raylib.is_key_pressed(KeyboardKey::KEY_ESCAPE)
                 || (gamepad_input_enabled
                     && (gamepad::restart_pressed(raylib, gamepad::PLAYER_ONE_GAMEPAD)
                         || gamepad::restart_pressed(raylib, gamepad::PLAYER_TWO_GAMEPAD))),
@@ -75,6 +77,105 @@ impl LocalInput {
             player_two_gamepad_connected,
         }
     }
+}
+
+/// Reads roster navigation without merging the ownership of local controllers.
+pub fn read_character_select_input(
+    raylib: &RaylibHandle,
+    selection: &crate::scenes::character_select::CharacterSelect,
+    gamepad_enabled: bool,
+) -> crate::scenes::character_select::SelectInput {
+    use crate::scenes::character_select::{SelectCommand, SelectInput};
+    use crate::scenes::preferences::PlayMode;
+    use crate::ui::roster_layout as layout;
+    let key = |key| raylib.is_key_pressed(key);
+    let local = selection.mode == PlayMode::LocalDuel;
+    let mut result = SelectInput {
+        shared: SelectCommand {
+            horizontal: if local {
+                0
+            } else {
+                i8::from(key(KeyboardKey::KEY_RIGHT) || key(KeyboardKey::KEY_D))
+                    - i8::from(key(KeyboardKey::KEY_LEFT) || key(KeyboardKey::KEY_A))
+            },
+            vertical: if local {
+                0
+            } else {
+                i8::from(key(KeyboardKey::KEY_DOWN) || key(KeyboardKey::KEY_S))
+                    - i8::from(key(KeyboardKey::KEY_UP) || key(KeyboardKey::KEY_W))
+            },
+            confirm: key(KeyboardKey::KEY_SPACE)
+                || (!local && (key(KeyboardKey::KEY_ENTER) || key(KeyboardKey::KEY_F))),
+            back: key(KeyboardKey::KEY_ESCAPE),
+        },
+        cycle_mode: key(KeyboardKey::KEY_TAB),
+        arena_direction: i8::from(key(KeyboardKey::KEY_E)) - i8::from(key(KeyboardKey::KEY_Q)),
+        ..SelectInput::default()
+    };
+    if local {
+        result.players = [
+            SelectCommand {
+                horizontal: i8::from(key(KeyboardKey::KEY_D)) - i8::from(key(KeyboardKey::KEY_A)),
+                vertical: i8::from(key(KeyboardKey::KEY_S)) - i8::from(key(KeyboardKey::KEY_W)),
+                confirm: key(KeyboardKey::KEY_F),
+                back: false,
+            },
+            SelectCommand {
+                horizontal: i8::from(key(KeyboardKey::KEY_RIGHT))
+                    - i8::from(key(KeyboardKey::KEY_LEFT)),
+                vertical: i8::from(key(KeyboardKey::KEY_DOWN)) - i8::from(key(KeyboardKey::KEY_UP)),
+                confirm: key(KeyboardKey::KEY_ENTER),
+                back: false,
+            },
+        ];
+    }
+    if gamepad_enabled {
+        for owner in 0..2 {
+            let pad = owner as i32;
+            let command = SelectCommand {
+                horizontal: i8::from(gamepad::menu_right_pressed(raylib, pad))
+                    - i8::from(gamepad::menu_left_pressed(raylib, pad)),
+                vertical: i8::from(gamepad::menu_down_pressed(raylib, pad))
+                    - i8::from(gamepad::menu_up_pressed(raylib, pad)),
+                confirm: gamepad::menu_activate_pressed(raylib, pad),
+                back: gamepad::is_connected(raylib, pad)
+                    && raylib.is_gamepad_button_pressed(
+                        pad,
+                        GamepadButton::GAMEPAD_BUTTON_RIGHT_FACE_RIGHT,
+                    ),
+            };
+            let target = if !local && owner == 0 {
+                &mut result.shared
+            } else {
+                &mut result.players[owner]
+            };
+            target.horizontal = (target.horizontal + command.horizontal).clamp(-1, 1);
+            target.vertical = (target.vertical + command.vertical).clamp(-1, 1);
+            target.confirm |= command.confirm;
+            target.back |= command.back;
+            result.launch |= gamepad::menu_start_pressed(raylib, pad);
+        }
+    }
+    if raylib.is_window_focused() && raylib.is_cursor_on_screen() {
+        let pos = raylib.get_mouse_position();
+        let delta = raylib.get_mouse_delta();
+        let clicked = raylib.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_LEFT);
+        if clicked || delta.x != 0.0 || delta.y != 0.0 {
+            result.hover = layout::hovered_cell(pos.x, pos.y);
+        }
+        if clicked {
+            result.click = result.hover.is_some();
+            result.owner = (0..2).find(|&owner| layout::preview(owner).contains(pos.x, pos.y));
+            result.cycle_mode |= layout::MODE.contains(pos.x, pos.y);
+            result.launch |= layout::LAUNCH.contains(pos.x, pos.y);
+            result.shared.back |= layout::BACK.contains(pos.x, pos.y);
+            if layout::ARENA.contains(pos.x, pos.y) {
+                result.arena_direction = if pos.x < 480.0 { -1 } else { 1 };
+            }
+        }
+        result.shared.back |= raylib.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_RIGHT);
+    }
+    result
 }
 
 /// Reads mouse navigation only while the pointer belongs to the focused window.

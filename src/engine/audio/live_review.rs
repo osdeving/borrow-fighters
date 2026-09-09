@@ -11,6 +11,130 @@ use std::path::Path;
 
 #[test]
 #[ignore = "requires an audio device; run manually with --ignored --nocapture"]
+fn live_match_pause_preserves_music_cursor_and_resumes_only_suspended_sounds() {
+    let device = RaylibAudio::init_audio_device().expect("audio device must initialize");
+    let mut player = AudioPlayer::load(&device, AUDIO_MANIFEST_PATH);
+    assert!(player.enabled);
+    player.set_music_volume(0.0);
+    let wave = device
+        .new_wave_from_memory(".wav", &silent_probe_wav())
+        .unwrap();
+    let sound = device.new_sound_from_wave(&wave).unwrap();
+    sound.set_volume(0.0);
+    player.sounds.insert(
+        "pause-probe".to_owned(),
+        LoadedSound {
+            sound,
+            volume: 0.0,
+            pitch: 1.0,
+            pan: 0.0,
+        },
+    );
+    player.play_music(MusicTrack::Combat);
+    pump(&player, 250);
+    assert!(position(&player) > 0.05);
+    let mut records = Vec::new();
+    for cinematic in [false, true] {
+        player.set_cinematic_paused(cinematic);
+        player.sounds["pause-probe"].sound.play();
+        pump(&player, 60);
+        assert!(player.sounds["pause-probe"].sound.is_playing());
+        player.set_match_paused(true);
+        let paused_at = position(&player);
+        assert!(!playing(&player));
+        assert!(!player.sounds["pause-probe"].sound.is_playing());
+        player.set_match_paused(true);
+        player.play_music(MusicTrack::Combat);
+        for cue in [AudioCue::UiNavigate, AudioCue::UiConfirm, AudioCue::UiBack] {
+            let event = AudioEvent::new(cue);
+            let index = player.bank.binding_index_for_event(&event).unwrap();
+            let ids = player.bank.binding_clip_ids(index).unwrap().to_vec();
+            for id in &ids {
+                if let Some(loaded) = player.sounds.get_mut(id) {
+                    loaded.volume = 0.0;
+                }
+            }
+            player.play(&event);
+            assert!(ids.iter().any(|id| {
+                player
+                    .sounds
+                    .get(id)
+                    .is_some_and(|loaded| loaded.sound.is_playing())
+            }));
+            assert!(!playing(&player));
+            assert!(!player.sounds["pause-probe"].sound.is_playing());
+            for id in &ids {
+                if let Some(loaded) = player.sounds.get(id) {
+                    loaded.sound.stop();
+                }
+            }
+        }
+        pump(&player, 200);
+        assert!((position(&player) - paused_at).abs() < 0.02);
+        player.set_match_paused(false);
+        assert!(player.sounds["pause-probe"].sound.is_playing());
+        assert_eq!(playing(&player), !cinematic);
+        assert!((position(&player) - paused_at).abs() < 0.05);
+        pump(&player, 150);
+        let after_resume = position(&player);
+        if cinematic {
+            assert!((after_resume - paused_at).abs() < 0.02);
+        } else {
+            assert!(after_resume > paused_at + 0.05);
+        }
+        player.set_match_paused(true);
+        player.cancel_cinematic();
+        assert!(
+            !playing(&player),
+            "cancel must respect the remaining match pause"
+        );
+        player.set_match_paused(false);
+        assert!(playing(&player));
+        assert!(!player.sounds["pause-probe"].sound.is_playing());
+        records.push(serde_json::json!({"cinematic":cinematic, "paused_at":paused_at, "after_resume":after_resume}));
+    }
+    // A stopped track must stay stopped; pausing is not a new play request.
+    player.music[player.current_music.as_ref().unwrap()]
+        .music
+        .stop_stream();
+    player.set_match_paused(true);
+    player.set_match_paused(false);
+    assert!(!playing(&player));
+    player.play_music(MusicTrack::Combat);
+    player.set_match_paused(true);
+    player.play_music(MusicTrack::Menu);
+    let next_start = position(&player);
+    pump(&player, 150);
+    assert!(!playing(&player));
+    assert!((position(&player) - next_start).abs() < 0.02);
+    player.set_match_paused(false);
+    pump(&player, 180);
+    assert!(position(&player) > next_start + 0.05);
+    eprintln!("match pause audio review: {}", serde_json::json!(records));
+}
+
+fn silent_probe_wav() -> Vec<u8> {
+    let sample_rate = 8_000_u32;
+    let data_size = sample_rate * 2 * 2; // Two seconds of mono PCM16 silence.
+    let mut wav = Vec::new();
+    wav.extend_from_slice(b"RIFF");
+    wav.extend_from_slice(&(36 + data_size).to_le_bytes());
+    wav.extend_from_slice(b"WAVEfmt ");
+    wav.extend_from_slice(&16_u32.to_le_bytes());
+    wav.extend_from_slice(&1_u16.to_le_bytes());
+    wav.extend_from_slice(&1_u16.to_le_bytes());
+    wav.extend_from_slice(&sample_rate.to_le_bytes());
+    wav.extend_from_slice(&(sample_rate * 2).to_le_bytes());
+    wav.extend_from_slice(&2_u16.to_le_bytes());
+    wav.extend_from_slice(&16_u16.to_le_bytes());
+    wav.extend_from_slice(b"data");
+    wav.extend_from_slice(&data_size.to_le_bytes());
+    wav.resize(44 + data_size as usize, 0);
+    wav
+}
+
+#[test]
+#[ignore = "requires an audio device; run manually with --ignored --nocapture"]
 fn live_music_pause_resume_and_cancel_preserve_stream_position() {
     let device = RaylibAudio::init_audio_device().expect("audio device must initialize");
     let mut player = AudioPlayer::load(&device, AUDIO_MANIFEST_PATH);

@@ -28,19 +28,25 @@ impl World {
     }
 
     pub(super) fn try_start_super(&mut self, one: &mut FighterInput, two: &mut FighterInput) {
+        let metered = self.energy_policy() == EnergyPolicy::Metered;
+        let authored_one = super_spec(self.player_one_character).is_some();
+        let authored_two = super_spec(self.player_two_character).is_some();
         let candidates = [
             one.cinematic_special
-                && super_spec(self.player_one_character).is_some()
-                && self.player_one.can_start_super(),
+                && (metered || authored_one)
+                && self.player_one.can_start_super()
+                && self.cinematic_ready(PlayerSlot::One),
             two.cinematic_special
-                && super_spec(self.player_two_character).is_some()
-                && self.player_two.can_start_super(),
+                && (metered || authored_two)
+                && self.player_two.can_start_super()
+                && self.cinematic_ready(PlayerSlot::Two),
         ];
-        // Authored requests never fall through to the old melee cinematic.
-        if super_spec(self.player_one_character).is_some() {
+        // Metered matches arbitrate all six characters. Unrestricted tools keep
+        // their existing Go-vs-Go local trade, useful for contact inspection.
+        if metered || authored_one {
             one.cinematic_special = false;
         }
-        if super_spec(self.player_two_character).is_some() {
+        if metered || authored_two {
             two.cinematic_special = false;
         }
         if self.player_one.is_defeated()
@@ -56,7 +62,17 @@ impl World {
             _ => return,
         };
         let character = self.character_for_slot(attacker);
-        let spec = super_spec(character).expect("candidate has authored spec");
+        let Some(spec) = super_spec(character) else {
+            // Fighter reports whether Go actually starts; only that event pays.
+            match attacker {
+                PlayerSlot::One => one.cinematic_special = true,
+                PlayerSlot::Two => two.cinematic_special = true,
+            }
+            return;
+        };
+        if !self.energy.spend_cinematic(attacker) {
+            return;
+        }
         let (actor, target, target_input) = match attacker {
             PlayerSlot::One => (&mut self.player_one, &mut self.player_two, *two),
             PlayerSlot::Two => (&mut self.player_two, &mut self.player_one, *one),

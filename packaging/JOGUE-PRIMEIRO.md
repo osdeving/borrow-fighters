@@ -31,33 +31,53 @@ aviso de editor desconhecido. Baixe somente da página oficial de releases.
 
 ## Sua primeira luta
 
-1. Leia a ajuda de boas-vindas ao abrir. Você pode revisitá-la no menu.
-2. Para jogar contra a CPU, desligue **Player 1 usa IA** em `Options` e
-   deixe **Player 2 usa IA** ligado. Se ambos estiverem ligados, assista à demo.
-3. Escolha `Quick Fight`. Em `Versus Setup`, troque lutadores e arena.
-4. Use `A/D` para andar, `W` para pular e `S` para abaixar. `F` dá soco,
-   `H` dá soco forte, `V` dá chute e `Q` defende.
-5. Experimente `G` (projétil), `T` (especial) e `Y` (cinematográfico).
-   `R` reinicia a luta; `Esc` volta ao menu.
+1. No guia de boas-vindas, escolha **Jogar contra CPU** (você é P1),
+   **Duelo local** (duas pessoas) ou **Assistir demo** (CPU contra CPU).
+   Você pode reabrir o guia em **Como jogar**.
+2. Confirme o personagem de **P1**, depois o de **P2**. Com os dois prontos,
+   confirme **Lutar**. Pelo menu principal, `Quick Fight` e `Versus Setup`
+   também abrem a seleção.
+3. Na seleção, use `WASD`/setas, controle ou mouse. `Tab` muda o modo e
+   `Q/E` muda a arena; você também pode clicar nessas opções. Contra CPU ou
+   na demo, `Enter` confirma o lado ativo. No duelo local, P1 usa `WASD` + `F`
+   e P2 usa setas + `Enter`; com mouse, clique nas prévias P1/P2 para trocar
+   o lado ativo. `Esc`/`B` desfaz uma confirmação antes de voltar ao menu.
+4. Espere o **Fight!**. Use `A/D` para andar, `W` para pular e `S` para abaixar.
+   `F` dá soco, `H` dá soco forte, `V` dá chute e `Q` defende.
+   Segure `S + Q` contra rasteiras; defenda em pé contra golpes por cima.
+5. Experimente `G` (projétil) e `T` (especial). A barra de energia começa em
+   **50/100** e enche ao acertar, receber golpes ou defender. Com **100**,
+   `Y` ativa o cinematográfico e gasta a barra. Errar golpes ou esperar
+   não gera energia.
+6. `Esc` ou `Menu`/`Start` do controle abre **Pausa**: **Continuar**,
+   **Reiniciar**, **Trocar personagens** ou **Menu**. `R` reinicia rapidamente
+   fora desses menus. Ao terminar a luta, escolha **Revanche**,
+   **Trocar personagens** ou **Menu** abaixo dos lutadores.
 
 No controle Xbox: direcional/analógico move, `A` pula, `X/Y/B` atacam,
 `LB/LT` defende, `RB` lança projétil, `RT` faz especial e `LB + RT` faz o
-cinematográfico. A IA do jogador precisa estar desligada para assumir o controle.
+cinematográfico com energia cheia. Na seleção, `A` confirma; dois controles
+podem escolher seus lados. Com ambos prontos, `Start` inicia a luta.
 
-Para duas pessoas no teclado, desligue também a IA do Player 2 (`C` alterna
-durante a luta). P2 usa setas, `O` (soco), `P` (soco forte), `;` (chute),
-`U` (defesa), `Ctrl direito` (projétil), `\` (especial) e `]` (cinematográfico).
-Alguns teclados limitam teclas simultâneas; dois controles ajudam nesse caso.
+No duelo local, P2 luta com setas, `O` (soco), `P` (soco forte), `;` ou `/`
+(chute), `U` (defesa), `Ctrl direito` (projétil), `\` (especial) e `]`
+(cinematográfico). Alguns teclados limitam teclas simultâneas; dois controles
+ajudam nesse caso. A IA precisa estar desligada para controlar o respectivo
+jogador; **Duelo local** faz isso para os dois. `C`/`View` alterna a CPU de P2
+fora da pausa.
 
 `Training > Move Showcase` demonstra golpes e defesas. Use `Tab` para trocar
-a situação, `Enter` para repetir e `Esc` para voltar. Em `Options`, você pode
-ligar a ajuda de controles durante a luta.
+a situação, `Enter` para repetir e `Esc` para voltar. Os cinematográficos são
+livres de custo no **Move Showcase** e no **Combat Lab**. Em `Options`, você
+pode ligar a ajuda de controles durante a luta.
 
 ## O que testar e contar para a gente
 
 Jogue algumas lutas com Rust, Duke/Java, C, Python e C++. Experimente os
 especiais e nos conte: os comandos foram claros? Algum golpe pareceu injusto?
-Você entendeu quando acertou ou bloqueou? Teve travamento, silêncio ou tela preta?
+Você entendeu quando acertou ou bloqueou e quando a energia ficou pronta?
+Selecionar personagens, pausar e pedir revanche foi claro? Teve travamento,
+silêncio ou tela preta?
 
 Abra uma issue no repositório indicado na página da release. Inclua a versão
 (também em `BUILD-INFO.json`), sistema operacional, placa de vídeo, personagens
