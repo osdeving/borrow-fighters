@@ -4,7 +4,7 @@
 
 Implementado em corte inicial.
 
-O projeto já possui um motor leve de áudio por eventos, manifesto JSON, música via stream, controle de volume de música no menu e integração com Raylib. Os arquivos sonoros são assets CC0 para UI, impactos, música, contagem e vozes próprias de Rust, Duke/Java, Go, C, Python e C++. As cinco sequências autorais também possuem entradas sonoras e efeitos sincronizados por fase, com pausa real da música.
+O projeto já possui um motor leve de áudio por eventos, manifesto JSON, música via stream, controle de volume de música no menu e integração com Raylib. Os arquivos sonoros são assets CC0 para UI, impactos, música, contagem e vozes dos lutadores. Old C reutiliza temporariamente a voz de Rust por autorização do usuário; Duke/Java, Go, Python e C++ conservam suas gravações. As cinco sequências autorais também possuem entradas sonoras e efeitos sincronizados por fase, com pausa real da música.
 
 ## Objetivo
 
@@ -103,7 +103,7 @@ Decisão para o Prototype 0.1:
 
 Música usa `Music` streaming do Raylib, não `Sound`. Por isso [`App`](../src/app.rs) chama `AudioPlayer::update_streams` a cada frame. O app troca a faixa em transições de tela e quando uma nova luta muda de arena, e `Options > Music Volume` aplica um multiplicador global apenas sobre música.
 
-Na entrada de uma sequência autoral, o app chama `AudioPlayer::set_cinematic_paused(true)` antes de tocar `super.start`. O player interrompe uma única vez os sons anteriores e chama `pause_stream` na música. Os próximos cues continuam tocando; `update_streams` e chamadas repetidas de `play_music` não avançam nem reiniciam a faixa pausada. Ao terminar normalmente, `set_cinematic_paused(false)` chama `resume_stream`, preservando a posição da faixa e permitindo terminar o último efeito. Reinício, Escape e mudanças de cena/personagem usam `cancel_cinematic()`, que também interrompe os efeitos da sequência abortada antes de retomar a música. Essa pausa é independente do ducking usado em outros contextos. A mutação de Rust troca a faixa para Sirius no frame 125 mantendo a pausa; a nova faixa começa no cursor zero apenas ao terminar a sequência. Reiniciar a luta restaura a música da arena selecionada. O mixer de evidência [`mix_authored_super_review.py`](../tools/audio/mix_authored_super_review.py) aplica os mesmos eventos `arena_transitions` exportados no JSON.
+Na entrada de uma sequência autoral, o app chama `AudioPlayer::set_cinematic_paused(true)` antes de tocar `super.start`. O player interrompe uma única vez os sons anteriores e chama `pause_stream` na música. Os próximos cues continuam tocando; `update_streams` e chamadas repetidas de `play_music` não avançam nem reiniciam a faixa pausada. Ao terminar normalmente, `set_cinematic_paused(false)` chama `resume_stream`, preservando a posição da faixa e permitindo terminar o último efeito. Reinício e mudanças de cena/personagem usam `cancel_cinematic()`, que também interrompe os efeitos da sequência abortada antes de retomar a música. `Esc`/`Start` abre a pausa da luta: `set_match_paused(true)` preserva os cursores dos sons e da música; continuar usa `set_match_paused(false)` e mantém a pausa musical do cinematográfico, se ele ainda estiver ativo. Reiniciar, trocar personagens ou ir ao menu cancela a sequência antiga antes de liberar a pausa da luta. Essa pausa é independente do ducking usado em outros contextos. A mutação de Rust troca a faixa para Sirius no frame 125 mantendo a pausa; a nova faixa começa no cursor zero apenas ao terminar a sequência. Reiniciar a luta restaura a música da arena selecionada. O mixer de evidência [`mix_authored_super_review.py`](../tools/audio/mix_authored_super_review.py) aplica os mesmos eventos `arena_transitions` exportados no JSON.
 
 Cada evento pode carregar:
 
@@ -120,14 +120,16 @@ As vozes de ataque possuem bindings específicos para golpes de identidade e fal
 |---|---|
 | Rust | Esforço jovem de aventureiro, por Brandon Song / wolfwoot; voz no pitch original. |
 | Duke / Java | Pacote anterior preservado, incluindo arquivos e parâmetros do manifesto. |
-| Old C | Atuação de velho sábio de Volvion, com esforço rouco; pitch original. |
+| Old C | Fallback temporário autorizado para seis clips de Rust/Brandon Song, copiados sem alteração; esforços de 0,28–0,76 s. A atuação anterior de Volvion saiu do runtime. |
 | Go | Vocalizações de criatura de Ogrebane, com articulação encurtada; fonte diferente de todas as vozes humanas. |
 | Python | Pacote anterior de cicifyre preservado, incluindo arquivos e parâmetros. |
 | C++ | Esforços de SkyRae e reações de AuraVoice; ambos diferentes da intérprete de Python. |
 
-As páginas originais, licenças e créditos estão em [ATTRIBUTION](../assets/audio/ATTRIBUTION.md). O [registro de produção](../assets/audio/production-2026-09-09.json) documenta hashes SHA256 das gravações, recortes, filtros, mixagens, saídas e preservação de Duke/Python. A identidade nova não depende de transpor o mesmo grunhido para vários personagens.
+As páginas originais, licenças e créditos estão em [ATTRIBUTION](../assets/audio/ATTRIBUTION.md). O [registro de produção original](../assets/audio/production-2026-09-09.json) documenta hashes SHA256 das gravações, recortes, filtros, mixagens, saídas e preservação de Duke/Python. O [registro atual de Old C](../assets/audio/production-old-c-fallback-2026-09-09.json) substitui somente as seis vozes de C e a camada vocal da entrada do seu super; mantém o manifesto, 87 outros arquivos de áudio e os efeitos Kenney de erro/glitch. O compartilhamento C/Rust é uma exceção explícita de playtest, com a procedência compartilhada registrada.
 
-[`tests/audio_manifest.rs`](../tests/audio_manifest.rs) garante que os loadouts resolvem voz, que os bindings apontam para arquivos existentes e do próprio personagem, que personagens distintos não compartilham o mesmo arquivo ou gravação-fonte de voz e que todos os cues das sequências têm bindings. A [página de audição](../assets/audio/audition.html) permite comparar vozes e efeitos isolados; o reel aplica volume e pitch do manifesto.
+[`tests/audio_manifest.rs`](../tests/audio_manifest.rs) garante que os loadouts resolvem voz, que os bindings apontam para arquivos existentes no diretório do personagem e que somente C/Rust compartilham gravações. Também confere as seis cópias exatas e todos os cues de sequência. A [comparação de Old C](../assets/audio/review/old-c-fallback-2026-09-09/README.md) oferece um reel antes/depois de 18,25 s e candidatos CC0 não adotados. A busca identificou locuções Kenney e caricaturas de xathien; não houve audição subjetiva pelo agente porque a ferramenta rejeitou entrada de áudio. O fallback usa a alternativa de Rust já autorizada, enquanto uma voz exclusiva melhor depende de revisão humana.
+
+A [página geral de audição](../assets/audio/audition.html) permite comparar os arquivos atuais isolados. Seu reel original permanece identificado como histórico anterior ao fallback de C.
 
 ## Manifesto
 

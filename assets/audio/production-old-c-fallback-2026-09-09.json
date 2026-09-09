@@ -1,0 +1,409 @@
+{
+  "date": "2026-09-09",
+  "decision": "Temporary user-authorized Old C -> Rust recording reuse. No other character or unrelated cue changed.",
+  "listening_review": "Not claimed: tool explicitly reported audio input unsupported. New packs were screened by primary-source license, descriptions and archive inventory; the existing user-approved Rust fallback was selected instead of an unverified new performance.",
+  "previous_production": "assets/audio/production-2026-09-09.json",
+  "manifest_sha256_before_and_after": "657d078579433ee050f9c7bdb34b23adb6cab0b9ec05c273e8bc004b63a55fa6",
+  "protected_audio_files": 87,
+  "protected_audio_sha256": {
+    "assets/audio/sfx/combat/block-02.ogg": "fba69c467ddd85da7b1d82e259f936b876d9ba6a3d6f1b24bdd10468e46bfe08",
+    "assets/audio/sfx/combat/hit-light-02.ogg": "e71d23abcc3f10d9d6bc9615b2a431fff70b12333a5fcdd9964457564ace4349",
+    "assets/audio/sfx/combat/projectile-impact-01.ogg": "a96f879fec0864a8938e0c745b6996a6c5679c16a234ce31a01cc995e8401003",
+    "assets/audio/sfx/combat/whiff-01.ogg": "5c294d2e1a6b6d07ee2d75b17105a55ad3527e5482dd60652dc49c2ea4c70096",
+    "assets/audio/sfx/combat/hit-heavy-01.ogg": "b33a8f14068aec24ec69ba85e5e87fdc41228975f6a1a3e44a6e7d6fc3d9f8d8",
+    "assets/audio/sfx/combat/hit-light-01.ogg": "486988aa2d6440ffc4c62a0e8ccf3c23673ba84424bd4723378d451b7255eb5c",
+    "assets/audio/sfx/combat/projectile-impact-02.ogg": "e8a9eaba7c4d27422e4eeb3e6c7100d5d7dc0f83e005efc98c960adcc5265337",
+    "assets/audio/sfx/combat/whiff-02.ogg": "2b07edafc1f3f49c4813f2b0ae9481c566c1f9962a22d5f5b79da7111e058e56",
+    "assets/audio/sfx/combat/hit-heavy-02.ogg": "f92f5cb6ba4ff2766497292ffd90865654317eeca976f5652e0708dbdcdc0dd9",
+    "assets/audio/sfx/combat/block-01.ogg": "33b5e6e37c6e9d54e07bf5a89b12c76e879f40c1ea83cdd82714df1d6f9fec6d",
+    "assets/audio/sfx/ui/navigate-01.ogg": "aec0c31ea934a35936ae0d2ab8fac8123c93aa5647f935853a58dbaf90278b7a",
+    "assets/audio/sfx/ui/confirm-01.ogg": "063564703b6094d70718a3e787a55cc9141611e4ecd6b6637f8828f79b4a8c3a",
+    "assets/audio/sfx/ui/back-01.ogg": "07db973f79f6ae0f2edc34561e7592e24d0577455919fb602cb8ecc0da991dcf",
+    "assets/audio/sfx/match/countdown-11.ogg": "44ea4ef78e6cc9c871f9eb7c13398142109dcc657d33216f57b8883b767044a1",
+    "assets/audio/sfx/match/countdown-01.ogg": "232c59c88113298e4d7de15a0ad4e00efb4d040d3efec683dd5f9b1394ce0eac",
+    "assets/audio/sfx/match/start-01.ogg": "fc16c61cd474da6c80fffe34fb3bfcee79b754fcc345bd916b0e66a826695e89",
+    "assets/audio/sfx/match/countdown-10.ogg": "95155ea07826b3c4f5fb034441f460e02e1d9e8646ee82260959f98045c86990",
+    "assets/audio/sfx/match/victory-01.ogg": "109cf00bedc2dc6579dac8096c9026c66f5946074bf3d1586bc09366b6581357",
+    "assets/audio/sfx/match/countdown-fight.ogg": "fc16c61cd474da6c80fffe34fb3bfcee79b754fcc345bd916b0e66a826695e89",
+    "assets/audio/sfx/super/mutation-2.ogg": "bfbbb57a40a99c748e2fc187e450dc90dadffe7c43d71c716338681bcfe41966",
+    "assets/audio/sfx/super/cpp-enter.ogg": "2156f6ae2a2c694272898d3a482a3f7a1abc6e2212791e3321dc545f5a208757",
+    "assets/audio/sfx/super/mutation-1.ogg": "3d058ca371de2ca1c6c06a8069cb0e74853614077ba63c2abda06a4dd187a3c4",
+    "assets/audio/sfx/super/barrage-3.ogg": "e285a69b48c6effaba6f2e3a9ac6cb577f9519e15b0a9e27d565a6d724a519c6",
+    "assets/audio/sfx/super/start-cpp.ogg": "3158d9916e655cd7d54de23c6436ed9114c100c822c60dd0394f3e967f6ad73f",
+    "assets/audio/sfx/super/python-grow.ogg": "ba725e75d4cce89be1e17147322e60d9cdcb6ab4d8fc1f7b7989aa4ad546a462",
+    "assets/audio/sfx/super/collect-2.ogg": "8c3299ae2e5e313fd36b5dbb65126c32dd1b8f91144737b7ac514cad013d48f7",
+    "assets/audio/sfx/super/python-peace.ogg": "7f34a011967f407e9835c972be84fdecf916c2e3d35ae46a4e2ce06eab5ce0b7",
+    "assets/audio/sfx/super/collect-1.ogg": "c90f4ba737c15f7f4c01d4fa7f9d0f228e722181cb71618ed1b392a83e0e6e7d",
+    "assets/audio/sfx/super/python-lunge.ogg": "b985331c9ab0cfbd2f5bc4dc529440f876d2d071b8222ca67b6ee1c5892444c1",
+    "assets/audio/sfx/super/trash-rain.ogg": "4ca80450e79697e7a2183e3e7bb13610d3716e2936dca775a86d10a5dcb7e861",
+    "assets/audio/sfx/super/python-celebrate.ogg": "c8c2cc7e6a579b3764325bf645c193bad5631d9e282d1dbeee984edbc8349589",
+    "assets/audio/sfx/super/giant-drop.ogg": "d4efe0afa04d675518120ff0bf77c9ee37508c0a39ab838f5add88ea8d0a08ff",
+    "assets/audio/sfx/super/cpp-typing.ogg": "041a9538c9cc9217e0441fb4625f61d3c957dd0b68740ddde21f41e12f0b2d3e",
+    "assets/audio/sfx/super/start-python.ogg": "f06c8d95047490f948276919191495986b61bd88ef902982b48a86a7f56737f9",
+    "assets/audio/sfx/super/footshot.ogg": "fc8eb62029a58f31944b004fad067167eaa8f2ed7713b81fa80fee7bb75dca28",
+    "assets/audio/sfx/super/python-swallow.ogg": "ae5a3056d69ba32716aff2ba3b2bfa7f727136c16d9dc31aff2b28c755d64186",
+    "assets/audio/sfx/super/collect-3.ogg": "d4cf45a57e979767fd0d3772e9842b6a1dc32d3d53468d8566e17e050d07a2f8",
+    "assets/audio/sfx/super/error-cascade.ogg": "da7790f0969dbb52301eb7c53e5d645b7dc0b4aec0a266070d0b5f5346db41e6",
+    "assets/audio/sfx/super/start-rust.ogg": "047723de8c0dc44278c458dab2290fa7dd49b0e6feaf69ff3faa7b0718e05d4a",
+    "assets/audio/sfx/super/start-duke.ogg": "e541c38a0057d035f6531794460230c3b36e8137b8c28ef763b131a3f227a056",
+    "assets/audio/sfx/super/barrage-1.ogg": "d2ee19526ae0dc284b2ffc963d458fb6a89cea2c1d692e6ba22adb58cfcb8530",
+    "assets/audio/sfx/super/python-morph.ogg": "91abbd70934cc93b48c93f2b29ea4ec4a49d6a3ae8f30b642388a08bbcef802e",
+    "assets/audio/sfx/super/end.ogg": "bcea2d97e45fc3107aeb2df451e4555b755de3d557dc93492004bce1e7db3e30",
+    "assets/audio/sfx/super/boot-post.ogg": "600e2e17808e36e053ba95cd9f43ca0a98f2862540d4a5d44c69243512f6d891",
+    "assets/audio/sfx/super/barrage-2.ogg": "0b8c2e7b68015458a77f4c2633b7e488f7140a8a007bbcadad8c5cd3cb6a3a5a",
+    "assets/audio/sfx/super/python-revert.ogg": "9310cec71033ff94259c6292ca143669446c5829a9a3088b5665c6e9ab6625b2",
+    "assets/audio/music/combat-8bit-battle.ogg": "3ffedb0875b311605321ce00def96d8416c4668e9331ea4ee4abb6430d74ab8b",
+    "assets/audio/music/combat-determined-pursuit.ogg": "d3a1251427314f8d0b0902860e7b8fa85a8ad8bfdf4c5671dcbca0c4bb3dea04",
+    "assets/audio/music/combat-console-floor.ogg": "eb120dd4a7704415bbfe6f604350b3d371a62664368017619f26787c6a0c0d39",
+    "assets/audio/music/combat-loop.ogg": "21f9052750000f52c17738b50f3a1a414ddf8e2cd0a28ff0b405ba2872c577d7",
+    "assets/audio/music/combat-chiptune-battle.ogg": "fef13a566090b3f9e8492dcee58e724373a90a0ca7e53171d1d0a03190623b30",
+    "assets/audio/music/combat-random-encounter.ogg": "ec5531d21fad943d32463c3cb9fd53e868028f99676cad545fe9323f2eed14d0",
+    "assets/audio/music/menu-loop.ogg": "027c219d10b47a6c69b1bfa472987a0fcfb04c4e7e93902731daf0dfb9975171",
+    "assets/audio/music/combat-rins-theme.ogg": "7614cdb914d1bc896769bca02374b1892c94d821f0f729a0d39f870e206717b9",
+    "assets/audio/characters/python/voice/attack-data-strike-01.ogg": "c3dafb9bac0153d9231f224e3753e60c78f67fb762161fb82f9dc7ddd602781d",
+    "assets/audio/characters/python/voice/attack-heel-kick-01.ogg": "f922daa6f8253d4a2bb1ee71beb9bc1b541a3f63e9d10312ffc909dc74582b63",
+    "assets/audio/characters/python/voice/attack-snake-bite-01.ogg": "9add5bd4e34d30b55854ae31dce9747f471b8d9d5fdf5773807b92fe0a150ee6",
+    "assets/audio/characters/python/voice/hurt-01.ogg": "0caaaf3f50db44285673db29bd221c6f45c082af22121d0f37afa0f254c53a4b",
+    "assets/audio/characters/python/voice/block-01.ogg": "92120f056f648c0b327aa4c9794a78acdb0762d6a78b0ee0ce76b8562cc9677f",
+    "assets/audio/characters/go/voice/attack-defer-kick-01.ogg": "073f262a1cce1ee46d9489de513f2f2dfa2762a9547778dad63d73e77cc0ce81",
+    "assets/audio/characters/go/voice/attack-goroutine-jab-01.ogg": "391d8ed7712c0ba238ef971056beea0257af09aedb532796fbb3e756191a847c",
+    "assets/audio/characters/go/voice/hurt-01.ogg": "781914ed3ea3947085e257a22c00a9f5566ee495f51e4ed664472da25eb6796f",
+    "assets/audio/characters/go/voice/block-01.ogg": "a9f674488792c4d1e3befeaad2c90dd8c122b7d2b0bd75a76ba1ebe4ca4313a3",
+    "assets/audio/characters/cpp/voice/hurt-02.ogg": "f984407b39f3cac72fa228312108b275cf64d6d8acd94a0b1e1ff458a6e0b2e0",
+    "assets/audio/characters/cpp/voice/attack-kick-01.ogg": "bd003a67377fc3ef617507ba895930fbbfc0ed67aec8f8c702b35d72627193e3",
+    "assets/audio/characters/cpp/voice/attack-heavy-01.ogg": "17594daa2681bb8fbda870fac86ad8d6e232331c79ce566ed4875d3882b568c3",
+    "assets/audio/characters/cpp/voice/attack-light-01.ogg": "73d78289b692c1d681c1b23d139d1b957ff7ad0e6f7868a1df0854895edec492",
+    "assets/audio/characters/cpp/voice/hurt-01.ogg": "b11426a6a07e8a3afc76c2eb5fad1022e70846b20359d083cd9121429d3d816b",
+    "assets/audio/characters/cpp/voice/block-01.ogg": "20a0d7ac899984291fe46717a316cb8308cb9ada7124a574f8d2645596ac05ef",
+    "assets/audio/characters/rust/sfx/projectile-cast-01.ogg": "da78c642bbd95da2c364ed0e991ebbfc5a4c0d281165d932b5819e0dd31a39d2",
+    "assets/audio/characters/rust/voice/hurt-02.ogg": "ddf36308b4c680b85b176e8c0de86ae0dbbb176f0d9c913fd485fa433337a97f",
+    "assets/audio/characters/rust/voice/attack-kick-01.ogg": "9f67d4ba4a311b0e215becd8611836c60481a5da411ce6e729d5203e93be8fcc",
+    "assets/audio/characters/rust/voice/attack-heavy-01.ogg": "2904b0d2cf923ca11b56433961b81f1c29a0ad00d9ac8a6094ed4fc95e137555",
+    "assets/audio/characters/rust/voice/attack-borrow-jab-01.ogg": "adb6eaec5b0655a84f62472a89073579388eece3bc3a66ca6f401cb97faebf24",
+    "assets/audio/characters/rust/voice/attack-ownership-01.ogg": "1593be64b197e9ccb6f7c7ab1006d9dbde4c64e5654b4fc8c80d813f3fc34c67",
+    "assets/audio/characters/rust/voice/attack-lifetime-01.ogg": "1cdea07947c5fee20bbd351edd1c828b5a38bd085626956d37f5919b3abac846",
+    "assets/audio/characters/rust/voice/attack-quick-02.ogg": "01ae442a8f095a3bb3f78413775e4ece6b8f4e6c83ac2804cde53c5044bdd3af",
+    "assets/audio/characters/rust/voice/hurt-01.ogg": "a7d14e052a979d1a4a479f43a7e3028bad4384815943809a02a779ced23f114f",
+    "assets/audio/characters/rust/voice/block-01.ogg": "d4afee90b4deb99cbed543fd2b29c88ed857b2cf715e685debe0c1d13d11c761",
+    "assets/audio/characters/duke/sfx/projectile-cast-01.ogg": "a27c6bb0df7da1e6af5dd5937593c98bc58b6e513f42fe6a3254cd6a6949c648",
+    "assets/audio/characters/duke/voice/attack-boilerplate-poke-01.ogg": "d21d0f0b782445db579d11e2506b24cd1ac9d664ee33aeaf807761aa7b6fd710",
+    "assets/audio/characters/duke/voice/attack-kick-01.ogg": "692ee3a6f1821402ca649ff735bee9591dc4846c8098fc7d6a90fd15fa57c1af",
+    "assets/audio/characters/duke/voice/attack-enterprise-01.ogg": "191448507e0241586b88445b06826ca72b846dcaa0d621913348b17d3f4e94a8",
+    "assets/audio/characters/duke/voice/attack-heavy-01.ogg": "e775a9f6e849a988db6cbd895709584c5d3a1efbc9b7a7edf678a680c3ba167e",
+    "assets/audio/characters/duke/voice/attack-sweep-01.ogg": "ba78ff6c43aea635d18dc4802758c2d83b69fd7cb8680d075cce140b5a67de9b",
+    "assets/audio/characters/duke/voice/hurt-01.ogg": "49e7ca88743fca974bb8676ea138b751cfd8f9033b5e7af8736c2a215d6edbc1",
+    "assets/audio/characters/duke/voice/block-01.ogg": "92d5db6bfc672d9dc1b4f390b2900504f013187fa36335472554fafefa9050b1"
+  },
+  "outputs": [
+    {
+      "file": "assets/audio/characters/c/voice/attack-pointer-jab-01.ogg",
+      "method": "Byte-for-byte copy of the already-approved Rust clip; no repitching, reencoding or gain change.",
+      "copied_from": "assets/audio/characters/rust/voice/attack-borrow-jab-01.ogg",
+      "before_file": "assets/audio/review/old-c-fallback-2026-09-09/before/attack-pointer-jab-01.ogg",
+      "before": {
+        "duration_seconds": 0.828,
+        "decoded_peak_dbfs": -3.577,
+        "clipped_samples": 0,
+        "sha256": "cd4946e22a3a4faa0d562c9d9cecd7dbfd466d90af21cd68700e6a12c0bf9567"
+      },
+      "after": {
+        "duration_seconds": 0.396,
+        "decoded_peak_dbfs": -3.3904,
+        "clipped_samples": 0,
+        "sha256": "adb6eaec5b0655a84f62472a89073579388eece3bc3a66ca6f401cb97faebf24"
+      },
+      "sources": [
+        {
+          "source": "rust-adventurer",
+          "recording": "rust-adventurer/RPG Male Adventurer/attack0.wav",
+          "source_sha256": "01f4adfff1d7a5f7be27b6d63041708d8fd01d43d6847f8527b991828bf6382b",
+          "trim_seconds": null,
+          "processing": "highpass=f=100",
+          "delay_seconds": 0,
+          "mix_gain": 1,
+          "page": "https://opengameart.org/content/voice-clip-pack-male-adventurer-rpg",
+          "download_urls": [
+            "https://opengameart.org/sites/default/files/RPG%20Male%20Adventurer.zip"
+          ],
+          "license": "CC0-1.0"
+        }
+      ]
+    },
+    {
+      "file": "assets/audio/characters/c/voice/attack-unsafe-poke-01.ogg",
+      "method": "Byte-for-byte copy of the already-approved Rust clip; no repitching, reencoding or gain change.",
+      "copied_from": "assets/audio/characters/rust/voice/attack-lifetime-01.ogg",
+      "before_file": "assets/audio/review/old-c-fallback-2026-09-09/before/attack-unsafe-poke-01.ogg",
+      "before": {
+        "duration_seconds": 1.158667,
+        "decoded_peak_dbfs": -3.0335,
+        "clipped_samples": 0,
+        "sha256": "10ff0edb1c7956abfb4d13ea2a9cd867cd706aacc9c2540980d5ff2f308712fd"
+      },
+      "after": {
+        "duration_seconds": 0.534667,
+        "decoded_peak_dbfs": -3.2339,
+        "clipped_samples": 0,
+        "sha256": "1cdea07947c5fee20bbd351edd1c828b5a38bd085626956d37f5919b3abac846"
+      },
+      "sources": [
+        {
+          "source": "rust-adventurer",
+          "recording": "rust-adventurer/RPG Male Adventurer/attackbig3.wav",
+          "source_sha256": "026d596cbafdd730e33422243010d63cc73088746e817bd89660201ca4a2506f",
+          "trim_seconds": null,
+          "processing": "highpass=f=100",
+          "delay_seconds": 0,
+          "mix_gain": 1,
+          "page": "https://opengameart.org/content/voice-clip-pack-male-adventurer-rpg",
+          "download_urls": [
+            "https://opengameart.org/sites/default/files/RPG%20Male%20Adventurer.zip"
+          ],
+          "license": "CC0-1.0"
+        }
+      ]
+    },
+    {
+      "file": "assets/audio/characters/c/voice/attack-heavy-02.ogg",
+      "method": "Byte-for-byte copy of the already-approved Rust clip; no repitching, reencoding or gain change.",
+      "copied_from": "assets/audio/characters/rust/voice/attack-heavy-01.ogg",
+      "before_file": "assets/audio/review/old-c-fallback-2026-09-09/before/attack-heavy-02.ogg",
+      "before": {
+        "duration_seconds": 0.78,
+        "decoded_peak_dbfs": -3.6595,
+        "clipped_samples": 0,
+        "sha256": "8e6ec35d1b668071b473e4766f2f52c23c4191398492fe91a5dd539aaa411890"
+      },
+      "after": {
+        "duration_seconds": 0.758667,
+        "decoded_peak_dbfs": -2.8757,
+        "clipped_samples": 0,
+        "sha256": "2904b0d2cf923ca11b56433961b81f1c29a0ad00d9ac8a6094ed4fc95e137555"
+      },
+      "sources": [
+        {
+          "source": "rust-adventurer",
+          "recording": "rust-adventurer/RPG Male Adventurer/attackbig2.wav",
+          "source_sha256": "7fb7582565945efd5c8722bc6a7ed858086850c0fb93c58e9ca2836a08b52930",
+          "trim_seconds": null,
+          "processing": "highpass=f=100",
+          "delay_seconds": 0,
+          "mix_gain": 1,
+          "page": "https://opengameart.org/content/voice-clip-pack-male-adventurer-rpg",
+          "download_urls": [
+            "https://opengameart.org/sites/default/files/RPG%20Male%20Adventurer.zip"
+          ],
+          "license": "CC0-1.0"
+        }
+      ]
+    },
+    {
+      "file": "assets/audio/characters/c/voice/attack-reboot-02.ogg",
+      "method": "Byte-for-byte copy of the already-approved Rust clip; no repitching, reencoding or gain change.",
+      "copied_from": "assets/audio/characters/rust/voice/attack-kick-01.ogg",
+      "before_file": "assets/audio/review/old-c-fallback-2026-09-09/before/attack-reboot-02.ogg",
+      "before": {
+        "duration_seconds": 1.078667,
+        "decoded_peak_dbfs": -3.7065,
+        "clipped_samples": 0,
+        "sha256": "29c4b3d755f307d0221d7f2632138c25312dba6d56548c4d41d0d83a2f16647d"
+      },
+      "after": {
+        "duration_seconds": 0.66,
+        "decoded_peak_dbfs": -3.08,
+        "clipped_samples": 0,
+        "sha256": "9f67d4ba4a311b0e215becd8611836c60481a5da411ce6e729d5203e93be8fcc"
+      },
+      "sources": [
+        {
+          "source": "rust-adventurer",
+          "recording": "rust-adventurer/RPG Male Adventurer/attack1.wav",
+          "source_sha256": "18604485719a00414f368a3eedf074666ea7d0751bd4ee6f28f5510fcc3099a4",
+          "trim_seconds": null,
+          "processing": "highpass=f=100",
+          "delay_seconds": 0,
+          "mix_gain": 1,
+          "page": "https://opengameart.org/content/voice-clip-pack-male-adventurer-rpg",
+          "download_urls": [
+            "https://opengameart.org/sites/default/files/RPG%20Male%20Adventurer.zip"
+          ],
+          "license": "CC0-1.0"
+        }
+      ]
+    },
+    {
+      "file": "assets/audio/characters/c/voice/hurt-01.ogg",
+      "method": "Byte-for-byte copy of the already-approved Rust clip; no repitching, reencoding or gain change.",
+      "copied_from": "assets/audio/characters/rust/voice/hurt-01.ogg",
+      "before_file": "assets/audio/review/old-c-fallback-2026-09-09/before/hurt-01.ogg",
+      "before": {
+        "duration_seconds": 1.361333,
+        "decoded_peak_dbfs": -3.679,
+        "clipped_samples": 0,
+        "sha256": "3e7139badb5b8c3b3c354ed39bb39e4265bacde4c1cf189f82c7ebb1b10edce1"
+      },
+      "after": {
+        "duration_seconds": 0.516,
+        "decoded_peak_dbfs": -3.3649,
+        "clipped_samples": 0,
+        "sha256": "a7d14e052a979d1a4a479f43a7e3028bad4384815943809a02a779ced23f114f"
+      },
+      "sources": [
+        {
+          "source": "rust-adventurer",
+          "recording": "rust-adventurer/RPG Male Adventurer/hurt4.wav",
+          "source_sha256": "e7c94af220ea927b6da2e9dc024c530b16314252fa8f4361e70a36ae516db30b",
+          "trim_seconds": null,
+          "processing": "highpass=f=100",
+          "delay_seconds": 0,
+          "mix_gain": 1,
+          "page": "https://opengameart.org/content/voice-clip-pack-male-adventurer-rpg",
+          "download_urls": [
+            "https://opengameart.org/sites/default/files/RPG%20Male%20Adventurer.zip"
+          ],
+          "license": "CC0-1.0"
+        }
+      ]
+    },
+    {
+      "file": "assets/audio/characters/c/voice/block-01.ogg",
+      "method": "Byte-for-byte copy of the already-approved Rust clip; no repitching, reencoding or gain change.",
+      "copied_from": "assets/audio/characters/rust/voice/block-01.ogg",
+      "before_file": "assets/audio/review/old-c-fallback-2026-09-09/before/block-01.ogg",
+      "before": {
+        "duration_seconds": 0.737333,
+        "decoded_peak_dbfs": -3.5853,
+        "clipped_samples": 0,
+        "sha256": "d3f89c58d407467776325c84904c5bfde89a6e5fd5e86790a46a44e11e5b3255"
+      },
+      "after": {
+        "duration_seconds": 0.278667,
+        "decoded_peak_dbfs": -3.5413,
+        "clipped_samples": 0,
+        "sha256": "d4afee90b4deb99cbed543fd2b29c88ed857b2cf715e685debe0c1d13d11c761"
+      },
+      "sources": [
+        {
+          "source": "rust-adventurer",
+          "recording": "rust-adventurer/RPG Male Adventurer/jump1.wav",
+          "source_sha256": "60be516f61c39dbe577d78352da3a0b8a221ba911b69856c13379d1a58cc960f",
+          "trim_seconds": null,
+          "processing": "highpass=f=100",
+          "delay_seconds": 0,
+          "mix_gain": 1,
+          "page": "https://opengameart.org/content/voice-clip-pack-male-adventurer-rpg",
+          "download_urls": [
+            "https://opengameart.org/sites/default/files/RPG%20Male%20Adventurer.zip"
+          ],
+          "license": "CC0-1.0"
+        }
+      ]
+    },
+    {
+      "file": "assets/audio/sfx/super/start-c.ogg",
+      "method": "Replace only vocal recording; preserve the same Kenney glitch/error recordings, gains, delay, 1.06s duration and 5ms/25ms output fades. Normalize new summed mix to -3.48 dBFS before Vorbis quality5 encoding.",
+      "before_file": "assets/audio/review/old-c-fallback-2026-09-09/before/start-c.ogg",
+      "before": {
+        "duration_seconds": 1.078667,
+        "decoded_peak_dbfs": -4.1759,
+        "clipped_samples": 0,
+        "sha256": "18f37295be9691dc909dc8bc7e4a549a53abb54d8ef772d39c08f29249086709"
+      },
+      "after": {
+        "duration_seconds": 1.068,
+        "decoded_peak_dbfs": -4.1817,
+        "clipped_samples": 0,
+        "sha256": "e379092d6ad9c751e60ecfcbe33c2ef1f519b32d6e11b0185f49616f3b317212"
+      },
+      "sources": [
+        {
+          "source": "rust-adventurer",
+          "recording": "rust-adventurer/RPG Male Adventurer/attackbig2.wav",
+          "source_sha256": "7fb7582565945efd5c8722bc6a7ed858086850c0fb93c58e9ca2836a08b52930",
+          "trim_seconds": null,
+          "processing": "highpass=f=100",
+          "delay_seconds": 0,
+          "mix_gain": 0.95,
+          "page": "https://opengameart.org/content/voice-clip-pack-male-adventurer-rpg",
+          "download_urls": [
+            "https://opengameart.org/sites/default/files/RPG%20Male%20Adventurer.zip"
+          ],
+          "license": "CC0-1.0",
+          "processed_input": "assets/audio/characters/rust/voice/attack-heavy-01.ogg",
+          "processed_input_sha256": "2904b0d2cf923ca11b56433961b81f1c29a0ad00d9ac8a6094ed4fc95e137555"
+        },
+        {
+          "source": "interface",
+          "recording": "interface/Audio/glitch_001.ogg",
+          "source_sha256": "da78c642bbd95da2c364ed0e991ebbfc5a4c0d281165d932b5819e0dd31a39d2",
+          "trim_seconds": null,
+          "processing": "none",
+          "delay_seconds": 0,
+          "mix_gain": 0.45,
+          "page": "https://kenney.nl/assets/interface-sounds",
+          "download_urls": [
+            "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip"
+          ],
+          "license": "CC0-1.0"
+        },
+        {
+          "source": "interface",
+          "recording": "interface/Audio/error_002.ogg",
+          "source_sha256": "76810ec365f41078fd0507101da5bb7b8730fe011dde43908329fdabd8575e79",
+          "trim_seconds": null,
+          "processing": "none",
+          "delay_seconds": 0.07,
+          "mix_gain": 0.6,
+          "page": "https://kenney.nl/assets/interface-sounds",
+          "download_urls": [
+            "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip"
+          ],
+          "license": "CC0-1.0"
+        }
+      ],
+      "mix_normalization_gain": 0.746275872971472,
+      "sample_rate": 48000,
+      "channels": 1
+    }
+  ],
+  "unadopted_candidates": [
+    {
+      "file": "assets/audio/review/old-c-fallback-2026-09-09/Guard_Attack_001_0.wav",
+      "original_sha256": "3db8016b20029bdede11a1a69652bdbe278f3ce9cbaef6e7b8096ae79753eeec",
+      "page": "https://opengameart.org/content/steampunk-fantasy-voices",
+      "download_url": "https://opengameart.org/sites/default/files/Guard_Attack_001_0.wav",
+      "author": "xathien",
+      "license": "CC0-1.0",
+      "adopted": false,
+      "reason": "Requires human listening review; author describes caricature voices. No model listening capability was available."
+    },
+    {
+      "file": "assets/audio/review/old-c-fallback-2026-09-09/Knight_Attack_001_0.wav",
+      "original_sha256": "847fd5eaa9905bf53038542f1bcd264bd39eea3ecc4bb7fee26bf8323a70f2b7",
+      "page": "https://opengameart.org/content/steampunk-fantasy-voices",
+      "download_url": "https://opengameart.org/sites/default/files/Knight_Attack_001_0.wav",
+      "author": "xathien",
+      "license": "CC0-1.0",
+      "adopted": false,
+      "reason": "Requires human listening review; author describes caricature voices. No model listening capability was available."
+    },
+    {
+      "file": "assets/audio/review/old-c-fallback-2026-09-09/kenney-prepare-yourself.ogg",
+      "original_sha256": "220a1dc842b4ff3ed42d449d1b2ef059c928f55ec0cd56c162bda470ea96938f",
+      "page": "https://kenney.nl/assets/voiceover-pack-fighter",
+      "download_url": "https://kenney.nl/media/pages/assets/voiceover-pack-fighter/6ceb77c6f1-1677589837/kenney_voiceover-pack-fighter.zip",
+      "author": "Kenney",
+      "license": "CC0-1.0",
+      "adopted": false,
+      "reason": "Archive inventory contains spoken match/menu announcements rather than a matched attack/hurt/block effort set."
+    }
+  ],
+  "comparison_reel": "assets/audio/review/old-c-fallback-2026-09-09/before-after.ogg",
+  "comparison_reel_metrics": {
+    "duration_seconds": 18.246667,
+    "decoded_peak_dbfs": -6.7911,
+    "clipped_samples": 0,
+    "sha256": "fe4433cf0feea63a89fbbc60851d8c956c98e2c1509c5ef7437f4a4a8f2e12aa"
+  },
+  "timeline": "assets/audio/review/old-c-fallback-2026-09-09/timeline.json"
+}

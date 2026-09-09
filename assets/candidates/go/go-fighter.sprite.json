@@ -1271,6 +1271,710 @@
         "w": 154,
         "h": 141
       }
+    },
+    {
+      "name": "reaction_head_00",
+      "clip": "reaction_head",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 111,
+        "y": 28,
+        "w": 227,
+        "h": 283
+      }
+    },
+    {
+      "name": "reaction_head_01",
+      "clip": "reaction_head",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 448,
+        "y": 0,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 110,
+        "y": 24,
+        "w": 224,
+        "h": 287
+      }
+    },
+    {
+      "name": "reaction_head_02",
+      "clip": "reaction_head",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 896,
+        "y": 0,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 111,
+        "y": 53,
+        "w": 225,
+        "h": 259
+      }
+    },
+    {
+      "name": "reaction_head_03",
+      "clip": "reaction_head",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 1344,
+        "y": 0,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 110,
+        "y": 42,
+        "w": 229,
+        "h": 268
+      }
+    },
+    {
+      "name": "reaction_body_00",
+      "clip": "reaction_body",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 0,
+        "y": 352,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 114,
+        "y": 68,
+        "w": 216,
+        "h": 243
+      }
+    },
+    {
+      "name": "reaction_body_01",
+      "clip": "reaction_body",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 448,
+        "y": 352,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 144,
+        "y": 95,
+        "w": 190,
+        "h": 215
+      }
+    },
+    {
+      "name": "reaction_body_02",
+      "clip": "reaction_body",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 896,
+        "y": 352,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 114,
+        "y": 47,
+        "w": 220,
+        "h": 265
+      }
+    },
+    {
+      "name": "reaction_body_03",
+      "clip": "reaction_body",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 1344,
+        "y": 352,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 109,
+        "y": 36,
+        "w": 231,
+        "h": 274
+      }
+    },
+    {
+      "name": "reaction_low_00",
+      "clip": "reaction_low",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 0,
+        "y": 704,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 87,
+        "y": 70,
+        "w": 250,
+        "h": 241
+      }
+    },
+    {
+      "name": "reaction_low_01",
+      "clip": "reaction_low",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 448,
+        "y": 704,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 162,
+        "y": 70,
+        "w": 128,
+        "h": 242
+      }
+    },
+    {
+      "name": "reaction_low_02",
+      "clip": "reaction_low",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 896,
+        "y": 704,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 109,
+        "y": 88,
+        "w": 230,
+        "h": 223
+      }
+    },
+    {
+      "name": "reaction_low_03",
+      "clip": "reaction_low",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 1344,
+        "y": 704,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 103,
+        "y": 84,
+        "w": 243,
+        "h": 228
+      }
+    },
+    {
+      "name": "reaction_guard_high_00",
+      "clip": "reaction_guard_high",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 0,
+        "y": 1056,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 123,
+        "y": 33,
+        "w": 200,
+        "h": 279
+      }
+    },
+    {
+      "name": "reaction_guard_high_01",
+      "clip": "reaction_guard_high",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 448,
+        "y": 1056,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 204,
+        "y": 62,
+        "w": 176,
+        "h": 250
+      }
+    },
+    {
+      "name": "reaction_guard_high_02",
+      "clip": "reaction_guard_high",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 896,
+        "y": 1056,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 112,
+        "y": 52,
+        "w": 225,
+        "h": 258
+      }
+    },
+    {
+      "name": "reaction_guard_high_03",
+      "clip": "reaction_guard_high",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 1344,
+        "y": 1056,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 120,
+        "y": 43,
+        "w": 209,
+        "h": 269
+      }
+    },
+    {
+      "name": "reaction_guard_low_00",
+      "clip": "reaction_guard_low",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 0,
+        "y": 1408,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 181,
+        "y": 156,
+        "w": 170,
+        "h": 155
+      }
+    },
+    {
+      "name": "reaction_guard_low_01",
+      "clip": "reaction_guard_low",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 448,
+        "y": 1408,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 209,
+        "y": 163,
+        "w": 206,
+        "h": 148
+      }
+    },
+    {
+      "name": "reaction_guard_low_02",
+      "clip": "reaction_guard_low",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 896,
+        "y": 1408,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 133,
+        "y": 144,
+        "w": 177,
+        "h": 167
+      }
+    },
+    {
+      "name": "reaction_guard_low_03",
+      "clip": "reaction_guard_low",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 1344,
+        "y": 1408,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 142,
+        "y": 137,
+        "w": 163,
+        "h": 174
+      }
+    },
+    {
+      "name": "reaction_launch_00",
+      "clip": "reaction_launch",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 0,
+        "y": 1760,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 116,
+        "y": 27,
+        "w": 216,
+        "h": 268
+      }
+    },
+    {
+      "name": "reaction_launch_01",
+      "clip": "reaction_launch",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 448,
+        "y": 1760,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 84,
+        "y": 34,
+        "w": 280,
+        "h": 267
+      }
+    },
+    {
+      "name": "reaction_launch_02",
+      "clip": "reaction_launch",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 896,
+        "y": 1760,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 150,
+        "y": 58,
+        "w": 150,
+        "h": 218
+      }
+    },
+    {
+      "name": "reaction_launch_03",
+      "clip": "reaction_launch",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 1344,
+        "y": 1760,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 92,
+        "y": 79,
+        "w": 262,
+        "h": 209
+      }
+    },
+    {
+      "name": "reaction_fall_00",
+      "clip": "reaction_fall",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 0,
+        "y": 2112,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 88,
+        "y": 164,
+        "w": 272,
+        "h": 147
+      }
+    },
+    {
+      "name": "reaction_fall_01",
+      "clip": "reaction_fall",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 448,
+        "y": 2112,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 107,
+        "y": 178,
+        "w": 235,
+        "h": 134
+      }
+    },
+    {
+      "name": "reaction_fall_02",
+      "clip": "reaction_fall",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 896,
+        "y": 2112,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 98,
+        "y": 186,
+        "w": 251,
+        "h": 125
+      }
+    },
+    {
+      "name": "reaction_fall_03",
+      "clip": "reaction_fall",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 1344,
+        "y": 2112,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 90,
+        "y": 219,
+        "w": 269,
+        "h": 92
+      }
+    },
+    {
+      "name": "reaction_rise_00",
+      "clip": "reaction_rise",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 0,
+        "y": 2464,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 88,
+        "y": 157,
+        "w": 272,
+        "h": 154
+      }
+    },
+    {
+      "name": "reaction_rise_01",
+      "clip": "reaction_rise",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 448,
+        "y": 2464,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 100,
+        "y": 128,
+        "w": 248,
+        "h": 183
+      }
+    },
+    {
+      "name": "reaction_rise_02",
+      "clip": "reaction_rise",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 896,
+        "y": 2464,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 81,
+        "y": 105,
+        "w": 214,
+        "h": 205
+      }
+    },
+    {
+      "name": "reaction_rise_03",
+      "clip": "reaction_rise",
+      "duration_ms": 70,
+      "image": "go-contact-reactions-atlas.png",
+      "pivot": {
+        "x": 224,
+        "y": 310
+      },
+      "frame": {
+        "x": 1344,
+        "y": 2464,
+        "w": 448,
+        "h": 352
+      },
+      "trimmed_bounds": {
+        "x": 204,
+        "y": 40,
+        "w": 232,
+        "h": 271
+      }
     }
   ],
   "clips": [
@@ -1453,11 +2157,92 @@
         "defeat_01",
         "defeat_02"
       ]
+    },
+    {
+      "name": "reaction_head",
+      "loop": false,
+      "frames": [
+        "reaction_head_00",
+        "reaction_head_01",
+        "reaction_head_02",
+        "reaction_head_03"
+      ]
+    },
+    {
+      "name": "reaction_body",
+      "loop": false,
+      "frames": [
+        "reaction_body_00",
+        "reaction_body_01",
+        "reaction_body_02",
+        "reaction_body_03"
+      ]
+    },
+    {
+      "name": "reaction_low",
+      "loop": false,
+      "frames": [
+        "reaction_low_00",
+        "reaction_low_01",
+        "reaction_low_02",
+        "reaction_low_03"
+      ]
+    },
+    {
+      "name": "reaction_guard_high",
+      "loop": false,
+      "frames": [
+        "reaction_guard_high_00",
+        "reaction_guard_high_01",
+        "reaction_guard_high_02",
+        "reaction_guard_high_03"
+      ]
+    },
+    {
+      "name": "reaction_guard_low",
+      "loop": false,
+      "frames": [
+        "reaction_guard_low_00",
+        "reaction_guard_low_01",
+        "reaction_guard_low_02",
+        "reaction_guard_low_03"
+      ]
+    },
+    {
+      "name": "reaction_launch",
+      "loop": false,
+      "frames": [
+        "reaction_launch_00",
+        "reaction_launch_01",
+        "reaction_launch_02",
+        "reaction_launch_03"
+      ]
+    },
+    {
+      "name": "reaction_fall",
+      "loop": false,
+      "frames": [
+        "reaction_fall_00",
+        "reaction_fall_01",
+        "reaction_fall_02",
+        "reaction_fall_03"
+      ]
+    },
+    {
+      "name": "reaction_rise",
+      "loop": false,
+      "frames": [
+        "reaction_rise_00",
+        "reaction_rise_01",
+        "reaction_rise_02",
+        "reaction_rise_03"
+      ]
     }
   ],
   "notes": [
     "Candidate assembled from explicitly reviewed action frames.",
     "Combat metadata is included only when supplied explicitly in production.json.",
-    "Source rectangles and production provenance: go-fighter.provenance.json"
+    "Source rectangles and production provenance: go-fighter.provenance.json",
+    "Authored contact reactions: ../../production/go/reactions-own-2026-09-09/README.md"
   ]
 }

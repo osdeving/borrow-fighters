@@ -6,5 +6,6 @@
 pub mod ai;
 pub mod arena;
 pub mod combat_log;
+pub mod energy;
 pub mod feature_flags;
 pub mod world;

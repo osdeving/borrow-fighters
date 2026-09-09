@@ -12,6 +12,10 @@ Criar o menor protótipo jogável possível para provar a mecânica central de l
 
 O protótipo 0.1 já possui uma versão jogável em Rust + Raylib na `main`.
 
+O corte inicial abaixo foi ampliado por rodadas autorizadas. A
+[rodada de conclusão visual](26-playtest-visual-completion.md) acrescenta seleção
+visual, pausa/revanche e energia na branch `feature/playtest-visual-completion`.
+
 O slice atual inclui:
 
 - janela, loop principal e carregamento de assets;
@@ -25,7 +29,7 @@ O slice atual inclui:
 - hitbox/hurtbox configuráveis no código;
 - dano, vida, vitória e reinício;
 - flags runtime para HUD, debug, ajuda, gamepad, dano do Player 1 e dano do Player 2;
-- seis arenas bitmap com nome/contexto, seleção manual no menu e rotação no início da próxima luta após uma vitória;
+- seis arenas bitmap com nome/contexto e seleção manual; reinício e revanche preservam a arena base escolhida;
 - entrada cinematográfica com contagem pré-luta `11` / `10` / `01` / `Fight!`;
 - runtime inicial de sprites por atlas + manifesto JSON;
 - animações placeholder de luta, entrada cinematográfica e vitória.
@@ -60,7 +64,7 @@ Ainda não é uma release fechada. O objetivo agora é melhorar leitura visual, 
 - [x] Debug draw de hitbox/hurtbox.
 - [x] Menu principal mínimo.
 - [x] IA simples de playtest.
-- [ ] Pausa dedicada.
+- [x] Pausa dedicada com continuar, reiniciar, trocar personagens e menu.
 
 ### Fora do protótipo 0.1
 
@@ -69,7 +73,7 @@ Ainda não é uma release fechada. O objetivo agora é melhorar leitura visual, 
 - Sprites finais.
 - Áudio final.
 - Roster grande ou final de personagens.
-- Menus completos de produto final, como story mode, perfil, loja ou seleção visual completa.
+- Menus completos de produto final, como story mode, perfil ou loja. A seleção visual de lutadores foi autorizada na [rodada 26](26-playtest-visual-completion.md).
 - Sistema de combo.
 - Story mode.
 - ECS sofisticado.

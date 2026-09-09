@@ -496,7 +496,7 @@ Entregáveis:
 - [x] Python agile punisher em dados: `PythonSnakeBite`, `PythonDataStrike`, `PythonHeelKick`, `PythonIndentSweep`, `PythonTracebackOverhead`, `PythonVisionAntiAir`, `PythonConstrictThrow`;
 - [x] C++ agile systems punisher em dados: `CppReferenceJab`, `CppTemplateStrike`, `CppOperatorKick`, `CppVectorSweep`, `CppVirtualOverhead`, `CppExceptionAntiAir`, `CppMoveThrow`;
 - [x] especiais de projectile por personagem via `ProjectileSpec`, com Rust balanceado, Duke mais pesado/lento, Go em burst curto, C em bitstream medio/rapido, Python em fluxo rapido/medio e C++ em operadores rapido/medio;
-- [x] demo publica ciclando Rust, Duke/Java, C, Python e C++, mantendo Go disponivel por CLI/ferramentas;
+- [x] seleção visual pública de Rust, Duke/Java, C, Python e C++, com confirmações P1/P2, escolha aleatória e Go disponível por CLI/ferramentas;
 - [x] matriz de intenção mecânica em [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md);
 - [x] matriz de matchups de intenção, sem buscar balanceamento final.
 
@@ -519,7 +519,8 @@ Entregáveis:
 - testes para impedir loop infinito simples;
 - limite de hitstun/cancel se necessário;
 - cooldown e recovery para projectiles;
-- [x] log de eventos de combate para reproduzir bugs.
+- [x] log de eventos de combate para reproduzir bugs;
+- [x] energia de 0–100 nas lutas: início em 50, custo 100 por cinematográfico aceito e ganho somente em contatos normais; Combat Lab e Showcase mantêm acesso livre. Ver [fluxo de playtest e energia](26-playtest-visual-completion.md).
 
 O primeiro corte adicionou [`src/game/combat_log.rs`](../src/game/combat_log.rs), exposto por `World::combat_log`, registrando round, countdown, ataques, whiffs, hits/blocks, projectiles e fim de luta.
 
@@ -531,7 +532,7 @@ Critério de aceite:
 
 1. Usar a leitura de vantagem do Combat Lab para ajustar golpes seguros, puníveis e spacing.
 2. Playtestar a matriz da demo Rust x Duke x C x Python e manter Go em validação separada por CLI/ferramentas.
-3. Playtestar se a seleção mínima no menu basta ou se precisa de tela dedicada de personagem.
+3. Playtestar a seleção visual, confirmações independentes de P1/P2, pausa e revanche com teclado, mouse e controles.
 4. Adicionar leitura de hitbox/hurtbox por pose ou frame quando os sprites exigirem mais precisão.
 5. Só depois ampliar para novos golpes especiais.
 
@@ -540,6 +541,6 @@ Critério de aceite:
 - Sweep, overhead, anti-air, ataques aéreos e throw continuam universais ou serão diferenciados por personagem?
 - Throws terão throw tech, prioridade própria ou outra resposta defensiva?
 - Projectile deve colidir com projectile?
-- Haverá recurso/meter ou cooldown continua sendo o único custo?
+- Ajustar por playtest os ganhos de energia e o custo dos cinematográficos; a primeira regra já é 50/100 ao iniciar e 100 por uso aceito.
 - Combat Lab entra por CLI flag, tela de preferência ou ambos?
 - Os manifests de sprite devem carregar hitbox/hurtbox por frame no futuro?

@@ -1,0 +1,53 @@
+{
+  "source_commit": "8b8ecfd38476d5c92a9273f473e61a50785fa97b",
+  "platform": "Ubuntu 20.04 / WSL2",
+  "fmt": {
+    "command": "cargo fmt --check",
+    "result": "passed"
+  },
+  "clippy": {
+    "command": "cargo clippy --locked --all-targets --all-features -- -D warnings",
+    "result": "passed"
+  },
+  "tests": {
+    "command": "cargo test --locked --all-targets",
+    "result": "passed",
+    "suites": 48,
+    "passed": 393,
+    "failed": 0,
+    "ignored": 2,
+    "ignored_reason": "two audio tests require a real device; match-pause backend verification is recorded separately in audio-pause.json",
+    "log_sha256": "8a35631ca8fbc77d9a214eb6489fb4eead9e571dfc7a429ecf03ddcd2f0735f9",
+    "log": "tests-output.txt.gz"
+  },
+  "local_markdown_links": {
+    "checked": 990,
+    "broken": 0
+  },
+  "independent_review": {
+    "arena_mouse_midpoint": "fixed in 591b694; derived from shared ARENA bounds",
+    "match_flow_energy_roster": "no additional implementation blockers identified",
+    "native_evidence": "separate reports required"
+  },
+  "ci": {
+    "complete_review": {
+      "run": 34394289582,
+      "source_commit": "4f1631fad02fdf24184e8117c0a05332da843690",
+      "windows": "passed",
+      "linux": "passed",
+      "native_matches_reviewed": 3,
+      "rematches_reviewed": 2,
+      "contact_scenarios": 120,
+      "png_headers_checked": 2920
+    },
+    "updated_packages": {
+      "run": 34395185385,
+      "source_commit": "8b8ecfd38476d5c92a9273f473e61a50785fa97b",
+      "scope": "shared arena mouse midpoint correction; all other runtime and assets unchanged"
+    }
+  },
+  "github_yaml": {
+    "result": "passed",
+    "method": "Ruby YAML.load_file over GitHub and agent YAML"
+  }
+}

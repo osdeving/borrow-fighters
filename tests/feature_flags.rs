@@ -28,7 +28,6 @@ fn pointer_on_row(menu: &PreferencesMenu, row: usize, activate: bool) -> Prefere
 #[test]
 fn mouse_opens_every_submenu_and_its_back_row() {
     for (row, page) in [
-        (PreferencesMenu::MAIN_VERSUS_ROW, MenuPage::Versus),
         (PreferencesMenu::MAIN_TRAINING_ROW, MenuPage::Training),
         (PreferencesMenu::MAIN_LORE_ROW, MenuPage::Lore),
         (PreferencesMenu::MAIN_OPTIONS_ROW, MenuPage::Options),
@@ -129,73 +128,44 @@ fn pointer_click_is_suppressed_on_scene_entry_and_does_not_repeat_across_pages()
 
 #[test]
 fn mouse_can_start_fights_and_open_each_training_tool() {
-    for (main_row, actions) in [
+    let mut flags = FeatureFlags::default();
+    let mut menu = PreferencesMenu::default();
+    menu.update(PreferencesInput::default(), &mut flags);
+    assert_eq!(
+        menu.update(
+            pointer_on_row(&menu, PreferencesMenu::MAIN_START_ROW, true),
+            &mut flags
+        ),
+        PreferencesAction::StartFight
+    );
+    menu.update(
+        pointer_on_row(&menu, PreferencesMenu::MAIN_TRAINING_ROW, true),
+        &mut flags,
+    );
+    for (row, action) in [
         (
-            PreferencesMenu::MAIN_VERSUS_ROW,
-            vec![(
-                PreferencesMenu::VERSUS_START_ROW,
-                PreferencesAction::StartFight,
-            )],
+            PreferencesMenu::TRAINING_COMBAT_LAB_ROW,
+            PreferencesAction::OpenCombatLab,
         ),
         (
-            PreferencesMenu::MAIN_TRAINING_ROW,
-            vec![
-                (
-                    PreferencesMenu::TRAINING_COMBAT_LAB_ROW,
-                    PreferencesAction::OpenCombatLab,
-                ),
-                (
-                    PreferencesMenu::TRAINING_MOVE_SHOWCASE_ROW,
-                    PreferencesAction::OpenMoveShowcase,
-                ),
-                (
-                    PreferencesMenu::TRAINING_SPRITE_VIEWER_ROW,
-                    PreferencesAction::OpenSpriteViewer,
-                ),
-            ],
+            PreferencesMenu::TRAINING_MOVE_SHOWCASE_ROW,
+            PreferencesAction::OpenMoveShowcase,
+        ),
+        (
+            PreferencesMenu::TRAINING_SPRITE_VIEWER_ROW,
+            PreferencesAction::OpenSpriteViewer,
         ),
     ] {
-        let mut flags = FeatureFlags::default();
-        let mut menu = PreferencesMenu::default();
-        menu.update(PreferencesInput::default(), &mut flags);
         assert_eq!(
-            menu.update(
-                pointer_on_row(&menu, PreferencesMenu::MAIN_START_ROW, true),
-                &mut flags
-            ),
-            PreferencesAction::StartFight
+            menu.update(pointer_on_row(&menu, row, true), &mut flags),
+            action
         );
-        menu.update(pointer_on_row(&menu, main_row, true), &mut flags);
-        for (row, action) in actions {
-            assert_eq!(
-                menu.update(pointer_on_row(&menu, row, true), &mut flags),
-                action
-            );
-        }
     }
 }
 
 #[test]
-fn mouse_cycles_character_arena_lore_and_volume_in_both_directions() {
+fn mouse_cycles_lore_and_volume_in_both_directions() {
     for (main_row, row, next, previous) in [
-        (
-            PreferencesMenu::MAIN_VERSUS_ROW,
-            PreferencesMenu::VERSUS_PLAYER_ONE_CHARACTER_ROW,
-            PreferencesAction::CyclePlayerOne(CycleDirection::Next),
-            PreferencesAction::CyclePlayerOne(CycleDirection::Previous),
-        ),
-        (
-            PreferencesMenu::MAIN_VERSUS_ROW,
-            PreferencesMenu::VERSUS_PLAYER_TWO_CHARACTER_ROW,
-            PreferencesAction::CyclePlayerTwo(CycleDirection::Next),
-            PreferencesAction::CyclePlayerTwo(CycleDirection::Previous),
-        ),
-        (
-            PreferencesMenu::MAIN_VERSUS_ROW,
-            PreferencesMenu::VERSUS_ARENA_ROW,
-            PreferencesAction::CycleArena(CycleDirection::Next),
-            PreferencesAction::CycleArena(CycleDirection::Previous),
-        ),
         (
             PreferencesMenu::MAIN_LORE_ROW,
             PreferencesMenu::LORE_CHAPTER_ROW,
@@ -458,55 +428,39 @@ fn preferences_menu_toggles_selected_feature_flag() {
 }
 
 #[test]
-fn preferences_menu_cycles_arena_row() {
-    let mut flags = FeatureFlags::default();
-    let mut menu = PreferencesMenu::default();
-
-    menu.update(PreferencesInput::default(), &mut flags);
-    menu.update(
-        PreferencesInput {
-            down: true,
-            ..PreferencesInput::default()
-        },
-        &mut flags,
-    );
-    menu.update(
-        PreferencesInput {
-            activate: true,
-            ..PreferencesInput::default()
-        },
-        &mut flags,
-    );
-    for _ in 0..PreferencesMenu::VERSUS_ARENA_ROW {
-        menu.update(
-            PreferencesInput {
-                down: true,
-                ..PreferencesInput::default()
-            },
-            &mut flags,
-        );
-    }
-
-    assert_eq!(
-        menu.update(
-            PreferencesInput {
-                right: true,
-                ..PreferencesInput::default()
-            },
-            &mut flags,
-        ),
-        PreferencesAction::CycleArena(CycleDirection::Next)
-    );
-    assert_eq!(
-        menu.update(
+fn versus_opens_character_select_from_mouse_and_confirm() {
+    for input_kind in 0..2 {
+        let mut flags = FeatureFlags::default();
+        PlayMode::LocalDuel.apply(&mut flags);
+        flags.set(FeatureFlag::ShowCombatDebug, true);
+        let original_flags = flags;
+        let mut menu = PreferencesMenu::default();
+        menu.update(PreferencesInput::default(), &mut flags);
+        for _ in 0..PreferencesMenu::MAIN_VERSUS_ROW {
+            menu.update(
+                PreferencesInput {
+                    down: true,
+                    ..PreferencesInput::default()
+                },
+                &mut flags,
+            );
+        }
+        let input = if input_kind == 0 {
+            pointer_on_row(&menu, PreferencesMenu::MAIN_VERSUS_ROW, true)
+        } else {
+            // Enter and the controller confirm button share this command.
             PreferencesInput {
                 activate: true,
                 ..PreferencesInput::default()
-            },
-            &mut flags,
-        ),
-        PreferencesAction::CycleArena(CycleDirection::Next)
-    );
+            }
+        };
+        assert_eq!(
+            menu.update(input, &mut flags),
+            PreferencesAction::OpenCharacterSelect
+        );
+        assert_eq!(menu.page(), MenuPage::Main);
+        assert_eq!(flags, original_flags);
+    }
 }
 
 #[test]
@@ -558,74 +512,6 @@ fn preferences_menu_adjusts_music_volume_row() {
             &mut flags,
         ),
         PreferencesAction::AdjustMusicVolume(CycleDirection::Next)
-    );
-}
-
-#[test]
-fn preferences_menu_cycles_character_rows() {
-    let mut flags = FeatureFlags::default();
-    let mut menu = PreferencesMenu::default();
-
-    menu.update(PreferencesInput::default(), &mut flags);
-    menu.update(
-        PreferencesInput {
-            down: true,
-            ..PreferencesInput::default()
-        },
-        &mut flags,
-    );
-    menu.update(
-        PreferencesInput {
-            activate: true,
-            ..PreferencesInput::default()
-        },
-        &mut flags,
-    );
-    menu.update(
-        PreferencesInput {
-            down: true,
-            ..PreferencesInput::default()
-        },
-        &mut flags,
-    );
-
-    assert_eq!(
-        menu.update(
-            PreferencesInput {
-                right: true,
-                ..PreferencesInput::default()
-            },
-            &mut flags,
-        ),
-        PreferencesAction::CyclePlayerOne(CycleDirection::Next)
-    );
-    assert_eq!(
-        menu.update(
-            PreferencesInput {
-                left: true,
-                ..PreferencesInput::default()
-            },
-            &mut flags,
-        ),
-        PreferencesAction::CyclePlayerOne(CycleDirection::Previous)
-    );
-
-    menu.update(
-        PreferencesInput {
-            down: true,
-            ..PreferencesInput::default()
-        },
-        &mut flags,
-    );
-    assert_eq!(
-        menu.update(
-            PreferencesInput {
-                activate: true,
-                ..PreferencesInput::default()
-            },
-            &mut flags,
-        ),
-        PreferencesAction::CyclePlayerTwo(CycleDirection::Next)
     );
 }
 

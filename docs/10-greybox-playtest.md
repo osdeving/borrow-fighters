@@ -2,16 +2,16 @@
 
 ## Status
 
-Este é o primeiro código jogável do projeto. O objetivo não é parecer bonito; é provar que o loop básico de luta existe e pode ser discutido por gameplay, arte, produção e engenharia.
+Esta versão jogável permite testar partidas locais, seleção de personagens, pausa e revanche. O playtest verifica clareza dos comandos, leitura de combate e continuidade entre as lutas. O corte atual está descrito em [conclusão visual do playtest](26-playtest-visual-completion.md).
 
 ## O que já existe
 
 - Janela Raylib.
 - Loop de jogo com fixed timestep.
 - Arenas bitmap placeholder `Sirius`, `Fortaleza Tech Coast`, `Java Street`, `BioTIC`, `Porto Digital` e `Vale do Pinhao`.
-- Menu principal com submenus de versus, treino e opções runtime.
+- Menu principal com seleção visual de personagens, treino e opções runtime.
 - Livro `Lore / Roster` carregado de JSON runtime, com capítulos de história e fichas dos personagens da demo.
-- Seleção manual de arena e volume de música no menu.
+- Seleção de P1/P2, modo e arena antes da luta; volume de música em `Options`.
 - Dois lutadores greybox na luta padrão: Rust e Java.
 - Corpo composto por cabeça, tronco e pernas placeholder.
 - Spritesheet placeholder com poses de idle, andar, abaixar, pular, defender, socos e chute.
@@ -19,7 +19,7 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Pulo simples e pulo diagonal com momentum.
 - Abaixar com hurtbox menor.
 - Defesa com redução de dano.
-- Arena com chão, limites e rotação de cenário ao iniciar a próxima luta após uma vitória.
+- Arena com chão e limites; reinício e revanche preservam o cenário selecionado.
 - Entrada cinematográfica seguida de contagem pré-luta `11`, `10`, `01`, `Fight!`.
 - Colisão física corpo-corpo com gap mínimo.
 - Soco fraco/curto.
@@ -38,12 +38,12 @@ Este é o primeiro código jogável do projeto. O objetivo não é parecer bonit
 - Barra de vida com número.
 - Hit spark, block spark, dano flutuante, trail de projectile, luz de chão em stun e animações leves de fundo por arena.
 - Condição de vitória.
-- Reinício da partida.
+- Pausa com Continuar, Reiniciar, Trocar personagens e Menu; resultado com Revanche, Trocar personagens e Menu.
 - HUD, ajuda de controles e debug visual configuráveis.
 - Testes de regras de combate sem abrir janela.
 - Move Showcase com dois lutadores, situações específicas por golpe, resultado real de contato e quatro exemplos de defesa.
 - Um especial de assinatura por personagem da demo, com animação própria e recuperação punível.
-- Um especial cinematográfico adicional para os seis personagens: Rust, Duke/Java, C, C++ e Python usam sequências autorais de captura; Go preserva contato local.
+- Um especial cinematográfico adicional para os seis personagens: Rust, Duke/Java, C, C++ e Python usam sequências autorais de captura; Go preserva contato local. Nas lutas, cada jogador começa com 50/100 de energia e precisa de 100 para ativá-lo; Combat Lab e Move Showcase mantêm acesso livre.
 - Knockdown de 36 frames para rasteira, agarrão e slide da Python contra alvo no chão.
 - Combat Lab com reprodução de golpes e poses estáticas de inspeção.
 
@@ -68,7 +68,7 @@ cargo run -- --fight --p1 python --p2 duke
 cargo run -- --fight --p1 cpp --p2 c
 ```
 
-Use `--p1`/`--player-one` e `--p2`/`--player-two` para iniciar matchups específicos sem tela de seleção. Valores aceitos: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` e `cpp.cpp`. Use `--fight` ou `--skip-menu` para abrir diretamente na luta. O menu da demo cicla apenas Rust, Duke/Java, C, Python e C++; Go/Gopher fica disponível por CLI e ferramentas enquanto a arte dele fica fora da demo.
+Use `--p1`/`--player-one` e `--p2`/`--player-two` para iniciar matchups específicos sem tela de seleção. Valores aceitos: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` e `cpp.cpp`. Use `--fight` ou `--skip-menu` para abrir diretamente na luta. A seleção visual oferece Rust, Duke/Java, C, Python e C++, além de uma opção aleatória entre esses cinco; os espaços futuros não podem ser confirmados. Go/Gopher fica disponível por CLI e ferramentas enquanto permanece fora da seleção pública.
 
 Checks úteis:
 
@@ -82,7 +82,7 @@ O GitHub também roda `Rust Check` no PR para validar formatação, testes e cli
 
 ## Move Showcase
 
-Abra pelo menu `Training > Move Showcase`. A cena usa o Player 1 escolhido em `Versus Setup`, a arena atual e um adversário do mesmo elenco. Também abre diretamente por CLI:
+Abra pelo menu `Training > Move Showcase`. A cena usa o Player 1 da configuração de luta confirmada, a arena atual e um adversário do mesmo elenco. Também abre diretamente por CLI:
 
 ```bash
 cargo run -- --showcase --character rust --move anti_air --repeat
@@ -96,7 +96,7 @@ cargo run -- --showcase --character go --move cinematic_special --repeat
 
 Cada personagem da demo tem 16 situações: 12 ataques, contando projétil, assinatura e cinematográfico, e quatro demonstrações de defesa. A aproximação é real: o oponente anda em direção ao jab, salta em direção ao anti-air e ao Template Arc, protege o tronco contra a rasteira ou agacha contra o overhead. O agarrão pega um oponente próximo em guarda. Os ataques aéreos acontecem durante um salto real do atacante. As quatro defesas mostram guarda em pé contra jab, guarda em pé contra overhead, guarda baixa contra rasteira e bloqueio de projétil.
 
-Dano e resultado vêm das colisões do `World`, incluindo blockstun, hitstun e queda. Cada situação restaura vida e posição antes da próxima apresentação. `HIT`, `BLOCKED` e `WHIFF` descrevem o contato realmente observado; não há dano artificial para completar a demonstração.
+Dano e resultado vêm das colisões do `World`, incluindo blockstun, hitstun e queda. Cada situação restaura vida e posição antes da próxima apresentação. Os cinematográficos ficam livres de custo de energia para permitir repetição e inspeção. `HIT`, `BLOCKED` e `WHIFF` descrevem o contato realmente observado; não há dano artificial para completar a demonstração.
 
 | Atalho | Ação |
 |---|---|
@@ -139,15 +139,16 @@ cargo run -- --lab combat --character python --pose hit
 
 No Combat Lab, `Tab` / `Shift+Tab` alterna golpes, `PageDown` / `PageUp` alterna poses, `Enter` reinicia, `Espaço` pausa, `.` avança um frame quando pausado, `Home` volta ao frame 0, `H` alterna hurtbox, `B` alterna hitbox, `P` alterna pivot/eixos, `D` alterna dummy, `A` alterna o fundo de arena e `Esc` volta ao menu quando o lab foi aberto por `Training`.
 
-O Combat Lab abre com o fundo `Sirius` ligado para validar contraste de golpe/sprite contra cenário. Use `A` para remover o fundo e voltar ao grid limpo.
+O Combat Lab abre com o fundo `Sirius` ligado para validar contraste de golpe/sprite contra cenário. Use `A` para remover o fundo e voltar ao grid limpo. O laboratório permite ativar os cinematográficos sem acumular energia.
 
 ## Menu Principal
 
 Na primeira abertura, o guia **Como jogar** mostra controles de teclado e gamepad,
 defesa, condição de vitória e três modos: **Jogar contra CPU** (você é P1),
 **Duelo local** (P1 e P2 manuais) e **Assistir demo** (CPU contra CPU). Escolher um
-modo inicia uma nova luta. **Ir ao menu** permite escolher personagens e cenário
-antes de jogar. O jogo volta ao menu principal nas próximas aberturas, sempre
+modo abre a seleção de personagens com essa configuração. Confirme P1, confirme
+P2 e então escolha **Lutar** para começar. **Ir ao menu principal** abre as outras
+opções antes de jogar. O jogo volta ao menu principal nas próximas aberturas, sempre
 começando com P1 manual contra P2 CPU. A escolha do modo vale para a sessão.
 
 O guia pode ser reaberto em **Como jogar** no menu. Sair dele por uma opção ou
@@ -156,18 +157,21 @@ no Windows e `$XDG_DATA_HOME/borrow-fighters` (ou `~/.local/share/borrow-fighter
 no Linux. Se a gravação falhar, o jogo continua e o guia reaparece na próxima
 abertura. `--fight`, `--showcase`, `--lab` e `--tool` preservam a entrada direta.
 
-Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem, arena, capítulo, ficha de roster e volume em linhas ajustáveis, e `Esc` para voltar de submenus, luta, Move Showcase, Combat Lab ou Sprite Viewer. No controle, `D-pad` navega e `A` confirma. O mouse também navega pelos menus: passe sobre uma linha para selecioná-la, clique com o botão esquerdo para confirmar, alternar uma opção ou avançar um valor, e use o botão direito para voltar valores de personagem, arena, capítulo e volume. O cursor nativo permanece visível e livre para sair da janela; em WSL, o cursor `Linker` acompanha o mouse apenas enquanto a janela está em foco e o ponteiro está dentro dela. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar.
+Nos menus, use `Setas` ou `W/S` para navegar e `Enter`, `Espaço` ou o botão `A` do controle para confirmar. O mouse seleciona ao passar sobre uma linha e confirma com clique esquerdo. Em Lore/Options, `A/D`, `←/→` e clique esquerdo/direito ajustam capítulo, ficha e volume. `Esc` volta de submenus e ferramentas; durante a luta, abre **Pausa**. O cursor permanece livre para sair da janela; em WSL, o cursor `Linker` acompanha o ponteiro apenas com a janela em foco. Para sair do jogo, use a opção de sair no menu ou o botão nativo de fechar.
 
 Fluxo atual:
 
-- `Quick Fight`: inicia a luta com a configuração atual.
-- `Versus Setup`: troca Player 1, Player 2 e arena.
-- `Training`: abre `Move Showcase`, `Combat Lab` ou `Sprite Viewer`.
-- `Lore / Roster`: abre o livro do Linker e fichas de Rust, Duke/Java, C, Python e C++.
-- `Options`: ajusta volume da música e liga/desliga gravação local, CPU, dano, HUD, ajuda, debug e gamepad.
-- `Como jogar`: reabre controles e permite iniciar uma luta contra CPU, local ou de demonstração.
+- `Quick Fight` e `Versus Setup` abrem a **seleção de personagens**.
+- `Training` abre `Move Showcase`, `Combat Lab` ou `Sprite Viewer`.
+- `Lore / Roster` abre o livro do Linker e fichas de Rust, Duke/Java, C, Python e C++.
+- `Options` ajusta volume da música, gravação local, CPU, dano, HUD, ajuda, debug e gamepad.
+- `Como jogar` reabre este guia e permite escolher o modo antes da seleção.
 
-Ao começar uma luta, os personagens entram em cena e depois aparece a contagem central `11`, `10`, `01`, `Fight!`. Enquanto a intro ou a contagem estiver ativa, ataques, movimento e projéteis ficam bloqueados. Depois que alguém vence, o cenário permanece o mesmo durante a pose final; a próxima arena só entra quando a luta seguinte começa com `R`/`Start` ou ao voltar pelo menu.
+Na seleção contra CPU ou na demo, use `WASD`, setas ou `D-pad` para mover o cursor; `Enter`/`F`/`Espaço`, o botão `A` ou clique confirma o personagem do lado ativo. No duelo local pelo teclado, P1 usa `WASD` e confirma com `F`; P2 usa setas e confirma com `Enter`. `Espaço` continua confirmando o lado ativo. Confirme **P1**, depois **P2** e, com os dois prontos, confirme **Lutar** (`Enter`/`Start` ou clique). Dois controles podem confirmar seus lados separadamente. Clique na prévia de P1/P2 para escolher o lado ativo. `Tab` ou clique em **Modo** alterna **Você × CPU**, **Duelo local** e **CPU × CPU**; mudar modo limpa as confirmações. `Q/E` ou as setas da arena mudam o cenário. No controle de P1, `Select`/`Back` alterna modo e `LB/RB` alterna arena; P2 mantém seu cursor independente. `Esc`/`B` desfaz uma confirmação antes de voltar ao menu. A opção aleatória escolhe apenas lutadores disponíveis; espaços futuros ficam bloqueados.
+
+Ao começar uma luta, os personagens entram em cena e aparece a contagem `11`, `10`, `01`, `Fight!`. Intro e contagem bloqueiam movimento e ataques. Zerar a vida rival decide o resultado depois de terminar qualquer sequência cinematográfica ativa.
+
+Durante a luta, `Esc` ou `Menu`/`Start` abre **Pausa**, com **Continuar**, **Reiniciar**, **Trocar personagens** e **Menu**. A simulação e o áudio da luta param; continuar retoma do mesmo ponto. `R` é o reinício rápido fora dos overlays. Depois da pose final, **Revanche**, **Trocar personagens** e **Menu** aparecem abaixo dos lutadores. Use setas/direcional ou mouse para escolher e `Enter`/`A` para confirmar. No resultado, `Start` também confirma; na pausa, `Esc`/`Start`/`B` continua. O cenário permanece visível até iniciar a próxima luta.
 
 | Preferência | Padrão | O que testar |
 |---|---|---|
@@ -207,7 +211,8 @@ Ao começar uma luta, os personagens entram em cena e depois aparece a contagem 
 | Especial de assinatura | `T` | `\` (Backslash) | `RT` |
 | Especial cinematográfico | `Y` | `]` (Right bracket) | Segurar `LB` + pressionar `RT` |
 | Alternar P2 CPU/manual | `C` | `C` | `View` |
-| Reiniciar | `R` | `R` | `Menu` |
+| Pausar / continuar | `Esc` | `Esc` | `Menu` / `Start` |
+| Reiniciar rapidamente, fora dos overlays | `R` | `R` | Pausa > Reiniciar |
 
 O primeiro gamepad conectado controla o Player 1 quando a IA do Player 1 está desligada. O segundo gamepad controla o Player 2 quando a IA do Player 2 está desligada. O aplicativo começa com P1 manual e P2 CPU. **Como jogar > Duelo local** desliga as duas IAs; **Assistir demo** liga ambas. Quando a CPU de um jogador está ligada, os comandos manuais daquele jogador são ignorados.
 
@@ -234,7 +239,9 @@ Especiais de assinatura são interrompíveis e ficam expostos após bloqueio ou 
 
 Os cinematográficos são Ownership Eclipse (Rust), Garbage Collector (Java), Million Goroutines (Go), General Protection Fault / #GP (C), import devour (Python) e Undefined Behavior: Footgun (C++). `Right Shift` continua sendo soco forte de P2.
 
-Rust, Java, C, C++ e Python iniciam uma sequência de 5–10,53 segundos quando o atacante está livre no chão. A captura alcança qualquer distância; bloquear em pé ou abaixado **no instante da ativação** reduz o dano e impede KO por chip. Afastar-se depois da captura não cancela o golpe. Há uma pausa inicial de oito ticks, seguida das fases próprias de cada personagem: troca persistente para Sirius em blocos, chuva de lixo/coleta/queda gigante, terminais/tela azul/BIOS/reboot, notebook/tiro no pé/corrida/rajada/reboot de C++ e transformação de Python em cobra gigante, deglutição, reversão e celebração. C++ sofre apenas a reação cômica, sem perder a própria vida, e corre fisicamente até o alvo antes de acertar. Comandos simultâneos elegíveis dos dois jogadores anulam as duas solicitações, permitindo tentar novamente; nenhum lado tem prioridade fixa. Não há medidor nesta rodada de protótipo.
+Rust, Java, C, C++ e Python iniciam uma sequência de 5–10,53 segundos quando o atacante está livre no chão e tem 100 de energia na luta. A captura alcança qualquer distância; bloquear em pé ou abaixado **no instante da ativação** reduz o dano e impede KO por chip. Afastar-se depois da captura não cancela o golpe. Há uma pausa inicial de oito ticks, seguida das fases próprias de cada personagem: troca persistente para Sirius em blocos, chuva de lixo/coleta/queda gigante, terminais/tela azul/BIOS/reboot, notebook/tiro no pé/corrida/rajada/reboot de C++ e transformação de Python em cobra gigante, deglutição, reversão e celebração. C++ sofre apenas a reação cômica, sem perder a própria vida, e corre fisicamente até o alvo antes de acertar. Comandos simultâneos elegíveis dos dois jogadores anulam as duas solicitações, permitindo tentar novamente; nenhum lado tem prioridade fixa.
+
+Cada luta começa com 50/100 de energia por jogador; a ativação aceita consome 100. Golpes comuns que acertam rendem +12 para quem atacou e +8 para quem recebeu; no bloqueio, +4 para quem atacou e +6 para quem defendeu. Errar ou aguardar não enche a barra, e os contatos do próprio cinematográfico não recuperam energia. Com energia insuficiente ou comando recusado, não há cobrança. A energia volta a 50 ao reiniciar. Combat Lab e Move Showcase mantêm o acesso livre.
 
 Movimentos e projéteis comuns aguardam a sequência terminar; somente os contatos programados causam dano. Mesmo ao zerar a vida, o resultado do round espera a restauração visual. Go conserva o golpe local interrompível: alcance e antecipação continuam relevantes. O Combat Lab reproduz os cinco supers com um `World` completo, e o Showcase oferece pausa, avanço por frame, repetição e troca de lado, respeitando a duração própria. O alvo engolido por Python volta durante a reversão; há somente um contato de dano. A arena criada por Rust continua em Sirius depois do golpe, e reiniciar/reproduzir a luta restaura a arena base. Ver [roteiros e contrato](24-reactions-and-transformations.md) e [timings técnicos](12-technical-combat-guide.md#especiais-cinematográficos-adicionais).
 
@@ -242,6 +249,7 @@ Movimentos e projéteis comuns aguardam a sequência terminar; somente os contat
 
 | Elemento | Significado |
 |---|---|
+| Barra de energia 0–100 | Começa em 50; cheia libera um cinematográfico de custo 100 |
 | Partes azuis | Rust / Player 1 |
 | Partes laranja | Java / Player 2 |
 | Braços e pernas do sprite | Pose/ação atual sem depender do debug |
@@ -278,7 +286,7 @@ Hitboxes, hurtboxes, retângulos de reação/guarda, limites da arena, labels de
 14. A CPU do Player 2 deve variar aproximação, afastamento, pulo, socos, chutes, varredura, overhead, anti-air, agarrão curto, ataque aéreo, defesa e fireballs.
 15. Rust deve parecer mais responsivo em anti-air e throw.
 16. Duke deve controlar mais espaço com sweep, overhead e poke, mas ficar mais exposto quando erra.
-17. Go no Combat Lab ou na luta iniciada por `--p1 go`/`--p2 go` deve parecer mais rápido e curto que os golpes genéricos equivalentes, pagando com menos vida; ele não deve aparecer no ciclo do menu da demo.
+17. Go no Combat Lab ou na luta iniciada por `--p1 go`/`--p2 go` deve parecer mais rápido e curto que os golpes genéricos equivalentes, pagando com menos vida; ele não deve aparecer na seleção pública nem na escolha aleatória.
 18. C no Combat Lab, no menu ou na luta iniciada por `--p1 c`/`--p2 c` deve aparecer na escala correta, com entrada, atlas de luta e projectile carregados, e jogar como fundamentos de alcance maior com whiff mais punível.
 19. O projectile do C deve ler claramente como stream de bits, com `0` e `1` visiveis durante a luta.
 20. Python no Combat Lab, no menu ou na luta iniciada por `--p1 python`/`--p2 python` deve aparecer com atlas de luta, entrada cinematografica e projectile carregados; o soco fraco deve ler como bote da cobra, o soco forte como ataque da própria personagem e a personagem deve compensar dano menor com startup/recovery mais leves.
@@ -287,7 +295,7 @@ Hitboxes, hurtboxes, retângulos de reação/guarda, limites da arena, labels de
 23. Rust e Duke/Java devem ter esforço audível em cada golpe próximo do loadout, sem depender só de fallback curto.
 24. `Lore / Roster` deve mostrar o livro do Linker, trocar capítulo/personagem com A/D e exibir retrato/ficha de Rust, Duke/Java, C, Python e C++.
 25. Editar `assets/lore/story.json` e reiniciar o jogo deve alterar o texto do livro sem recompilar.
-26. `Versus Setup > Arena` deve trocar imediatamente o fundo de menu e iniciar a próxima luta na arena escolhida.
+26. Na seleção visual, `Q/E`, `LB/RB` no controle de P1 ou as setas clicáveis da arena devem atualizar a prévia; a luta confirmada deve começar na arena escolhida. Com dois controles, `Select`/`Back` de P1 deve permitir preparar Duelo Local sem teclado; `B` continua cancelando e `Start` inicia apenas com os dois personagens confirmados.
 27. `Options > Music Volume` deve baixar/subir a música em passos de 10%, sem afetar vozes e impactos.
 28. O submenu `Options` deve ligar/desligar HUD, ajuda e debug sem reiniciar o jogo.
 29. A opção `Player 1 usa IA` ligada deve permitir CPU x CPU quando `Player 2 usa IA` tambem estiver ligada.
@@ -296,19 +304,24 @@ Hitboxes, hurtboxes, retângulos de reação/guarda, limites da arena, labels de
 32. A opção `Player 2 recebe dano` desligada deve fazer o mesmo para Player 2. Conferir soco, chute, projétil, arremesso, assinatura e cada pancada da rajada de C++; `HIT -0` não deve deixar o alvo em idle.
 33. Gamepad Xbox deve controlar o Player 1 com left stick/D-pad, `A`, `X`, `Y`, `B`, `LB/LT` e `RB` quando o ambiente expõe controle ao Raylib.
 34. `C` ou `View` deve alternar entre CPU e controle manual do Player 2.
-35. `R` ou `Menu` deve reiniciar a partida.
-36. `Esc` durante a luta deve voltar para o menu, sem fechar a janela.
+35. `R` deve reiniciar rapidamente fora de pausa/resultado; no controle, `Menu`/`Start` abre a pausa e `Reiniciar` refaz a luta com vida e energia iniciais.
+36. `Esc` ou `Menu`/`Start` durante a luta deve abrir a pausa, congelando movimento, projéteis, intro, contagem e cinematográficos. Continuar deve retomar do mesmo ponto; o botão de abertura não pode confirmar uma ação no mesmo instante.
 37. `Training > Combat Lab` deve abrir o laboratório e `Esc` deve voltar ao menu.
-38. `Training > Move Showcase` deve mostrar o Player 1 sozinho ciclando todos os golpes e `Esc` deve voltar ao menu.
+38. `Training > Move Showcase` deve mostrar os dois atores nas situações de golpe/defesa; `Esc` deve voltar ao menu e repetir um cinematográfico não deve exigir energia.
 39. `Training > Sprite Viewer` deve abrir o viewer e `Esc` deve voltar ao menu.
 40. Pulo com direção pressionada deve sair em diagonal.
 41. A vida deve chegar a zero e encerrar a luta.
-42. Ao iniciar a próxima luta depois de uma vitória, o cenário deve avançar uma vez no ciclo `Sirius Light Ring -> Tech Coast Beacon -> Java Street Terminal -> BioTIC Garden -> Porto Digital Cache -> Pinhao Smart Grid -> Sirius Light Ring`.
+42. A tela de resultado deve manter as poses visíveis e oferecer `Revanche`, `Trocar personagens` e `Menu`. Revanche preserva personagens, modo e arena selecionada, restaurando vida e energia iniciais. Reiniciar também preserva a arena base; a mutação de cenário criada por Rust é removida ao recriar a luta.
 43. O feedback visual deve deixar claro quando houve contato físico, golpe, bloqueio e projétil por hitspark, block pulse, trail e luz de chão em stun.
 44. O mouse deve alcançar qualquer ponto da janela e sair dela sem retornar ao centro, tanto no menu quanto na luta. Em WSL, `Linker` acompanha o movimento e desaparece fora da janela ou ao perder foco.
 45. Hover e clique devem navegar por todos os menus, incluindo `Back` e `Exit`; cliques fora das linhas não devem ativar a seleção anterior. O mouse parado não deve impedir navegação por teclado/gamepad.
-46. Clique esquerdo deve avançar personagem, arena, capítulo e volume; clique direito deve voltar esses valores. Flags em `Options` devem alternar com clique esquerdo.
-47. O botão nativo de fechar deve encerrar a janela durante a luta e nas ferramentas. `Esc` seguido de clique em `Exit` deve encerrar pelo menu.
+46. No roster, clique deve escolher e confirmar o personagem do lado ativo; clicar na prévia P1/P2 deve selecionar o lado. Arena e modo têm áreas próprias. Nos menus de Lore/Options, clique esquerdo/direito continua avançando/voltando capítulo e volume; flags alternam com clique esquerdo.
+47. O botão nativo de fechar deve encerrar a janela durante a luta e nas ferramentas. Durante a luta, `Esc > Menu` e depois a opção de sair deve encerrar pelo menu.
+48. O tutorial, a opção de jogar e `Versus` devem abrir a seleção. Confirmar P1 não pode confirmar P2 nem iniciar a luta no mesmo evento; depois das duas confirmações, um novo comando em `Lutar` inicia o confronto.
+49. `Tab` na seleção deve alternar CPU, duelo local e demonstração, limpando confirmações antigas. O aleatório deve escolher apenas um dos cinco lutadores públicos; slots futuros não iniciam luta.
+50. Energia deve começar em 50, subir somente em contatos normais e parar em 100. Cinematográfico recusado por falta de energia não dispara áudio/animação nem gasta energia; com 100, um uso aceito consome a barra uma única vez.
+51. Pausar e continuar no meio de um cinematográfico deve preservar sua fase e o áudio. Reiniciar, trocar personagens ou ir ao menu deve encerrar a sequência antiga.
+52. Combat Lab e Showcase devem reproduzir cinematográficos livremente com pausa, avanço de frame e repetição.
 
 ## Combat Lab
 
@@ -361,8 +374,8 @@ Controles do lab:
 - Fireball usa `RB`; especial de assinatura usa a borda do botão `RT` exposta pelo mapeamento Raylib. `LB` segurado + borda de `RT` seleciona exclusivamente o cinematográfico; a guarda não impede seu início.
 - Defesa é um experimento mínimo: já separa high/low/mid/throw/projectile, mas ainda não tem direção esquerda/direita nem defesa perfeita por timing.
 - A CPU é um sparring dummy determinístico: decide em pequenos blocos de tempo, usa perfis diferentes por slot, varia movimento/ataque/especial/defesa e reage a projéteis sem ser perfeita.
-- Não há combo tree, medidor de especial, throw tech, juggle no chão ou IA adaptativa.
-- Não há arte final, animação final, áudio final, pausa dedicada ou IA avançada.
+- Não há combo tree, throw tech, juggle no chão ou IA adaptativa. A energia limita apenas cinematográficos; projéteis e especiais de assinatura preservam seus tempos e não gastam essa barra.
+- Arte, animação e áudio continuam sujeitos a revisão de playtest; a pausa está implementada, mas não há IA avançada.
 - O balanceamento de MVP é verificado por contrajogo e testes repetíveis; refinamento competitivo depende de playtest humano.
 - A colisão é propositalmente simples e axis-aligned.
 - O visual é debug/greybox, não direção de arte final.

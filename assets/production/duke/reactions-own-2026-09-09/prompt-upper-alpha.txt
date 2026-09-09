@@ -1,0 +1,1 @@
+Extract all sixteen Duke mascot sprites onto a transparent PNG background. Preserve their layout, original colors, white belly and steam curls. No other changes.

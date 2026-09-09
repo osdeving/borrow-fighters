@@ -22,6 +22,7 @@ use crate::engine::sprites::{
     projected_projectile_origin_for_clip,
 };
 use crate::game::combat_log::{CombatLog, CombatLogEvent, CombatLogKind};
+use crate::game::energy::{EnergyMeter, EnergyPolicy, MatchEnergy};
 use crate::game::feature_flags::{FeatureFlag, FeatureFlags};
 use crate::math::rect::Rect;
 use crate::math::vec2::Vec2;
@@ -87,6 +88,7 @@ pub struct World {
     throw_sequence: Option<ThrowSequence>,
     super_sequence: Option<crate::combat::super_sequence::SuperSequence>,
     arena_override: Option<crate::game::arena::ArenaId>,
+    energy: MatchEnergy,
 }
 
 impl World {
@@ -138,6 +140,7 @@ impl World {
             throw_sequence: None,
             super_sequence: None,
             arena_override: None,
+            energy: MatchEnergy::default(),
         };
         world.record_combat(CombatLogKind::RoundStarted {
             player_one,
@@ -267,6 +270,31 @@ impl World {
         self.combat_log.clear();
     }
 
+    /// Selects match costs or unrestricted tool access without refilling meters.
+    pub fn set_energy_policy(&mut self, policy: EnergyPolicy) {
+        self.energy.policy = policy;
+    }
+
+    /// Returns the energy policy; low-level Worlds default to unrestricted tools.
+    pub fn energy_policy(&self) -> EnergyPolicy {
+        self.energy.policy
+    }
+
+    /// Returns the fighter's meter snapshot for HUDs and deterministic inspection.
+    pub fn energy(&self, slot: PlayerSlot) -> EnergyMeter {
+        self.energy.meter(slot)
+    }
+
+    /// Returns whether energy allows a cinematic; action-state rules still apply.
+    pub fn cinematic_ready(&self, slot: PlayerSlot) -> bool {
+        self.energy.ready(slot)
+    }
+
+    /// Resets both reserves to their initial charge while preserving the policy.
+    pub fn reset_energy(&mut self) {
+        self.energy.reset();
+    }
+
     /// Advances one fixed gameplay step.
     pub fn update(&mut self, dt: f32, player_one: FighterInput, player_two: FighterInput) {
         self.update_with_flags(dt, player_one, player_two, FeatureFlags::default());
@@ -311,6 +339,7 @@ impl World {
             return;
         }
         let (mut player_one, mut player_two) = (player_one, player_two);
+        let cinematic_was_active = self.local_cinematic_active();
         self.try_start_super(&mut player_one, &mut player_two);
         if self.super_sequence.is_some() {
             // The entry snapshot is tick zero; subsequent fixed ticks advance it.
@@ -329,18 +358,28 @@ impl World {
             player_two
         };
         let player_one_events = self.player_one.update(dt, player_one);
-        self.queue_fighter_audio_events(PlayerSlot::One, player_one_events);
+        let cinematic_started = player_one_events
+            .close_attack_started
+            .is_some_and(|move_id| move_spec(move_id).input == MoveInputKind::CinematicSpecial);
+        self.record_fighter_update_events(PlayerSlot::One, player_one_events);
         let player_two_events = self.player_two.update(dt, player_two);
-        self.queue_fighter_audio_events(PlayerSlot::Two, player_two_events);
+        let cinematic_started = cinematic_started
+            || player_two_events
+                .close_attack_started
+                .is_some_and(|move_id| move_spec(move_id).input == MoveInputKind::CinematicSpecial);
+        self.record_fighter_update_events(PlayerSlot::Two, player_two_events);
+        // Include the entry and interruption/ending tick of Go's local cinematic.
+        let gain_energy =
+            !cinematic_was_active && !cinematic_started && !self.local_cinematic_active();
         self.update_throw_sequence(dt);
         self.spawn_projectiles(player_one, player_two);
         self.spawn_signature_effects();
         self.update_projectiles(dt);
         self.resolve_body_collision();
         self.update_facing();
-        self.resolve_hits(flags);
-        self.resolve_projectile_hits(flags);
-        self.update_signature_effects(dt, flags);
+        self.resolve_hits(flags, gain_energy);
+        self.resolve_projectile_hits(flags, gain_energy);
+        self.update_signature_effects(dt, flags, gain_energy);
         self.resolve_outcome();
     }
 
@@ -420,7 +459,7 @@ impl World {
         }
     }
 
-    fn resolve_hits(&mut self, flags: FeatureFlags) {
+    fn resolve_hits(&mut self, flags: FeatureFlags, gain_energy: bool) {
         let p1_sprite_combat = self.sprite_combat_for_slot(PlayerSlot::One);
         let p2_sprite_combat = self.sprite_combat_for_slot(PlayerSlot::Two);
         let mut p1_attack = landed_attack(
@@ -464,7 +503,13 @@ impl World {
             };
             self.player_one.mark_attack_hit();
             self.apply_close_reaction(PlayerSlot::One, attack, result, pushback_direction);
-            self.queue_close_hit_audio(PlayerSlot::One, PlayerSlot::Two, attack, result);
+            self.record_close_contact(
+                PlayerSlot::One,
+                PlayerSlot::Two,
+                attack,
+                result,
+                gain_energy,
+            );
             self.hit_effects.push(HitEffect::new(
                 contact,
                 result.damage,
@@ -492,7 +537,13 @@ impl World {
             };
             self.player_two.mark_attack_hit();
             self.apply_close_reaction(PlayerSlot::Two, attack, result, pushback_direction);
-            self.queue_close_hit_audio(PlayerSlot::Two, PlayerSlot::One, attack, result);
+            self.record_close_contact(
+                PlayerSlot::Two,
+                PlayerSlot::One,
+                attack,
+                result,
+                gain_energy,
+            );
             self.hit_effects.push(HitEffect::new(
                 contact,
                 result.damage,
@@ -546,7 +597,7 @@ impl World {
         self.projectiles.retain(|projectile| projectile.alive);
     }
 
-    fn resolve_projectile_hits(&mut self, flags: FeatureFlags) {
+    fn resolve_projectile_hits(&mut self, flags: FeatureFlags, gain_energy: bool) {
         let player_one_character = self.player_one_character;
         let player_two_character = self.player_two_character;
         let player_one_sprite_combat = self.sprite_combat_for_slot(PlayerSlot::One);
@@ -585,6 +636,13 @@ impl World {
                         };
                     apply_pushback(&mut self.player_two, pushback_direction, result.pushback);
                     projectile.alive = false;
+                    if gain_energy {
+                        self.energy.record_contact(
+                            PlayerSlot::One,
+                            PlayerSlot::Two,
+                            result.blocked,
+                        );
+                    }
                     queue_projectile_hit_audio(
                         &mut audio_events,
                         PlayerSlot::One,
@@ -624,6 +682,13 @@ impl World {
                         };
                     apply_pushback(&mut self.player_one, pushback_direction, result.pushback);
                     projectile.alive = false;
+                    if gain_energy {
+                        self.energy.record_contact(
+                            PlayerSlot::Two,
+                            PlayerSlot::One,
+                            result.blocked,
+                        );
+                    }
                     queue_projectile_hit_audio(
                         &mut audio_events,
                         PlayerSlot::Two,
@@ -695,9 +760,15 @@ impl World {
         }
     }
 
-    fn queue_fighter_audio_events(&mut self, slot: PlayerSlot, events: FighterUpdateEvents) {
+    fn record_fighter_update_events(&mut self, slot: PlayerSlot, events: FighterUpdateEvents) {
         let character = self.character_for_slot(slot);
         if let Some(move_id) = events.close_attack_started {
+            // Only Go reaches the ordinary Fighter path; authored supers pay in
+            // try_start_super when capture is committed.
+            if move_spec(move_id).input == MoveInputKind::CinematicSpecial {
+                let paid = self.energy.spend_cinematic(slot);
+                debug_assert!(paid, "local cinematic passed the energy gate");
+            }
             self.audio_events
                 .push(AudioEvent::fighter_attack_start(slot, character, move_id));
             self.record_combat(CombatLogKind::CloseAttackStarted {
@@ -735,13 +806,18 @@ impl World {
         });
     }
 
-    fn queue_close_hit_audio(
+    fn record_close_contact(
         &mut self,
         attacker: PlayerSlot,
         defender: PlayerSlot,
         attack: ActiveAttack,
         result: DamageResult,
+        gain_energy: bool,
     ) {
+        if gain_energy && move_spec(attack.move_id).input != MoveInputKind::CinematicSpecial {
+            self.energy
+                .record_contact(attacker, defender, result.blocked);
+        }
         let attacker_character = self.character_for_slot(attacker);
         let defender_character = self.character_for_slot(defender);
         if result.blocked {
@@ -781,6 +857,11 @@ impl World {
 
     fn record_combat(&mut self, kind: CombatLogKind) {
         self.combat_log.record(self.elapsed_seconds, kind);
+    }
+
+    fn local_cinematic_active(&self) -> bool {
+        self.player_one.cinematic_special().is_some()
+            || self.player_two.cinematic_special().is_some()
     }
 
     fn sprite_combat_for_slot(&self, slot: PlayerSlot) -> Option<ProjectedSpriteCombat> {

@@ -3,8 +3,10 @@
 //! Scenes keep application flow explicit without introducing a full screen
 //! framework during the prototype.
 
+pub mod character_select;
 pub mod combat_lab;
 pub mod combat_lab_analysis;
+pub mod match_flow;
 pub mod move_showcase;
 pub mod preferences;
 pub mod sprite_viewer;
@@ -13,6 +15,7 @@ pub mod sprite_viewer;
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum AppScene {
     Preferences,
+    CharacterSelect,
     Fight,
     CombatLab,
     MoveShowcase,

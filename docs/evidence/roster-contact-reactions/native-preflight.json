@@ -1,0 +1,102 @@
+{
+  "scope": "Native preflight only; no contact frame was rendered in these attempts. Contact review proceeds using CI/Xvfb exports.",
+  "ci_binary": {
+    "run_id": 34383732260,
+    "revision": "4fbaf47",
+    "sha256": "3ee8fa4d74dc580ffdce655c5358893d3d07726bfd9cddf1c2230b888631c9c2"
+  },
+  "loader": {
+    "purpose": "Isolated loader for Ubuntu22 CI review binaries on Ubuntu20 WSL; no system installation",
+    "source_index": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+    "index_sha256": "fc3ca7fd8c51bfcaef4c60146d82f07771d5c81843def876d3b4296acffad473",
+    "index_verified_against_signed_inrelease": true,
+    "packages": [
+      {
+        "package": "libc6",
+        "version": "2.35-0ubuntu3.15",
+        "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb",
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d",
+        "bytes": 3234380
+      },
+      {
+        "package": "libgcc-s1",
+        "version": "12.3.0-1ubuntu1~22.04.3",
+        "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/gcc-12/libgcc-s1_12.3.0-1ubuntu1~22.04.3_amd64.deb",
+        "sha256": "d383e642d83263147f7b4b69fb92cf1036e5246c6be3accf10b77f986684589a",
+        "bytes": 53896
+      },
+      {
+        "package": "libstdc++6",
+        "version": "12.3.0-1ubuntu1~22.04.3",
+        "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/gcc-12/libstdc++6_12.3.0-1ubuntu1~22.04.3_amd64.deb",
+        "sha256": "29ef3d289b272704b75141906c8f683db0f2bdb0942061366691333bfb289bdc",
+        "bytes": 698608
+      }
+    ],
+    "wrapper": "/tmp/borrow-fighters-jammy-runtime/run",
+    "wrapper_contents": "#!/bin/sh\nset -eu\nreview_runtime=\"$(CDPATH= cd -- \"$(dirname -- \"$0\")\" && pwd)\"\nexec \"$review_runtime/root/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2\" --library-path \"$review_runtime/root/lib/x86_64-linux-gnu:$review_runtime/root/usr/lib/x86_64-linux-gnu\" \"$@\"\n",
+    "smoke": {
+      "command": [
+        "/tmp/borrow-fighters-jammy-runtime/run",
+        "/usr/bin/true"
+      ],
+      "exit_code": 0,
+      "loader_version": "ld.so (Ubuntu GLIBC 2.35-0ubuntu3.15) stable release version 2.35."
+    },
+    "glx_smoke": {
+      "command": [
+        "/tmp/borrow-fighters-jammy-runtime/run",
+        "/usr/bin/glxinfo",
+        "-B"
+      ],
+      "display": ":0",
+      "exit_code": 0,
+      "direct_rendering": true,
+      "vendor": "Microsoft Corporation",
+      "renderer": "D3D12 (NVIDIA GeForce RTX 4070 Laptop GPU)",
+      "accelerated": true,
+      "opengl_core": "3.3 (Core Profile) Mesa 21.2.6",
+      "shader_language": "3.30",
+      "limitation": "Initialization took several minutes under host resource pressure; capture performance still needs measurement."
+    }
+  },
+  "capture_attempt": {
+    "command": [
+      "/usr/bin/time",
+      "-p",
+      "-o",
+      "/tmp/borrow-roster-contact-native-4fbaf47/rust-right-time.txt",
+      "env",
+      "LP_NUM_THREADS=1",
+      "/tmp/borrow-fighters-jammy-runtime/run",
+      "/tmp/borrow-fighters-native-review-tools/capture_roster_contacts",
+      "--defender",
+      "rust",
+      "--output",
+      "/tmp/borrow-roster-contact-native-4fbaf47/rust-right"
+    ],
+    "exit_code": 143,
+    "last_log_line": "INFO: DISPLAY: Trying to enable MSAA x4",
+    "png_count": 0,
+    "signal_cause": "Unknown; harness, wrapper and command contain no timeout; no termination was requested by the reviewing agent."
+  },
+  "xvfb_attempt": {
+    "command": [
+      "/tmp/borrow24-xvfb/root/usr/bin/Xvfb",
+      "-displayfd",
+      "1",
+      "-screen",
+      "0",
+      "1280x720x24",
+      "-nolisten",
+      "tcp",
+      "-ac",
+      "+extension",
+      "GLX",
+      "+render",
+      "-noreset"
+    ],
+    "result": "Repeated failure to bind UNIX listener in /tmp/.X11-unix; no display created",
+    "cleanup": "Reviewing agent stopped only its own PID802902 after confirmed bind failures. System directory permissions and mounts were unchanged."
+  }
+}

@@ -26,6 +26,9 @@ pub struct AudioPlayer<'aud> {
     current_music: Option<String>,
     music_ducked: bool,
     cinematic_paused: bool,
+    match_paused: bool,
+    paused_sounds: Vec<String>,
+    resume_music_after_pause: bool,
     music_volume: f32,
     enabled: bool,
 }
@@ -54,6 +57,9 @@ impl<'aud> AudioPlayer<'aud> {
             current_music: None,
             music_ducked: false,
             cinematic_paused: false,
+            match_paused: false,
+            paused_sounds: Vec::new(),
+            resume_music_after_pause: false,
             music_volume: 1.0,
             enabled: false,
         }
@@ -131,6 +137,9 @@ impl<'aud> AudioPlayer<'aud> {
             current_music: None,
             music_ducked: false,
             cinematic_paused: false,
+            match_paused: false,
+            paused_sounds: Vec::new(),
+            resume_music_after_pause: false,
             music_volume: 1.0,
             enabled: true,
         }
@@ -138,7 +147,7 @@ impl<'aud> AudioPlayer<'aud> {
 
     /// Updates the active music stream.
     pub fn update_streams(&self) {
-        if !self.enabled || self.cinematic_paused {
+        if !self.enabled || self.music_paused() {
             return;
         }
 
@@ -161,7 +170,7 @@ impl<'aud> AudioPlayer<'aud> {
         if keeps_current_music(
             self.current_music.as_deref(),
             next_id,
-            self.cinematic_paused,
+            self.music_paused(),
             self.music
                 .get(next_id)
                 .is_some_and(|loaded| loaded.music.is_stream_playing()),
@@ -174,6 +183,7 @@ impl<'aud> AudioPlayer<'aud> {
         {
             current.music.stop_stream();
         }
+        self.resume_music_after_pause = false;
 
         let Some(next) = self.music.get(next_id) else {
             return;
@@ -182,12 +192,13 @@ impl<'aud> AudioPlayer<'aud> {
         // A scene can select a different track while paused. Prime it silently,
         // then leave it paused until the sequence or menu transition releases it.
         next.music
-            .set_volume(if self.cinematic_paused { 0.0 } else { volume });
+            .set_volume(if self.music_paused() { 0.0 } else { volume });
         next.music.set_pitch(next.pitch);
         next.music.play_stream();
-        if self.cinematic_paused {
+        if self.music_paused() {
             next.music.pause_stream();
             next.music.set_volume(volume);
+            self.resume_music_after_pause = true;
         }
         self.current_music = Some(next_id.to_owned());
     }
@@ -200,6 +211,7 @@ impl<'aud> AudioPlayer<'aud> {
         if self.cinematic_paused == paused {
             return;
         }
+        let music_was_paused = self.music_paused();
         self.cinematic_paused = paused;
         if !self.enabled {
             return;
@@ -208,6 +220,48 @@ impl<'aud> AudioPlayer<'aud> {
             for loaded in self.sounds.values() {
                 loaded.sound.stop();
             }
+            self.paused_sounds.clear();
+        }
+        self.sync_music_pause(music_was_paused);
+    }
+
+    /// Freezes current music and playing sounds while the match overlay is open.
+    ///
+    /// Resume continues only sounds that this pause suspended. A cinematic's
+    /// music pause remains independent. New combat events are ignored without
+    /// advancing variation cursors; new UI feedback remains available.
+    pub fn set_match_paused(&mut self, paused: bool) {
+        if self.match_paused == paused {
+            return;
+        }
+        let music_was_paused = self.music_paused();
+        self.match_paused = paused;
+        if paused {
+            self.paused_sounds.clear();
+            for (id, loaded) in &self.sounds {
+                if loaded.sound.is_playing() {
+                    loaded.sound.pause();
+                    self.paused_sounds.push(id.clone());
+                }
+            }
+        } else {
+            for id in self.paused_sounds.drain(..) {
+                if let Some(loaded) = self.sounds.get(&id) {
+                    loaded.sound.resume();
+                }
+            }
+        }
+        self.sync_music_pause(music_was_paused);
+    }
+
+    fn music_paused(&self) -> bool {
+        self.cinematic_paused || self.match_paused
+    }
+
+    fn sync_music_pause(&mut self, was_paused: bool) {
+        let paused = self.music_paused();
+        if !self.enabled || paused == was_paused {
+            return;
         }
         if let Some(current) = self
             .current_music
@@ -215,8 +269,11 @@ impl<'aud> AudioPlayer<'aud> {
             .and_then(|id| self.music.get(id))
         {
             if paused {
-                current.music.pause_stream();
-            } else {
+                self.resume_music_after_pause = current.music.is_stream_playing();
+                if self.resume_music_after_pause {
+                    current.music.pause_stream();
+                }
+            } else if std::mem::take(&mut self.resume_music_after_pause) {
                 current.music.resume_stream();
             }
         }
@@ -225,14 +282,14 @@ impl<'aud> AudioPlayer<'aud> {
     /// Cuts the unfinished sequence's sounds and restores music after an abort.
     ///
     /// Reset and scene changes use this instead of the normal completion path,
-    /// which lets the final impact or end cue finish playing.
+    /// which lets the final impact or end cue finish playing. It also discards
+    /// paused sounds so a scene change cannot resume voices from the old fight.
+    /// Call `set_match_paused(false)` when leaving the pause overlay itself.
     pub fn cancel_cinematic(&mut self) {
-        if !self.cinematic_paused {
-            return;
-        }
         for loaded in self.sounds.values() {
             loaded.sound.stop();
         }
+        self.paused_sounds.clear();
         self.set_cinematic_paused(false);
     }
 
@@ -294,7 +351,7 @@ impl<'aud> AudioPlayer<'aud> {
 
     /// Resolves and plays one event if a loaded clip is available.
     pub fn play(&mut self, event: &AudioEvent) {
-        if !self.enabled {
+        if !self.enabled || (self.match_paused && !pause_overlay_feedback(event.cue)) {
             return;
         }
 
@@ -327,11 +384,24 @@ impl<'aud> AudioPlayer<'aud> {
             return;
         };
 
+        if self.match_paused {
+            // A fresh UI cue replaces any earlier instance of the same sound;
+            // it must not be resumed again when the fight overlay closes.
+            self.paused_sounds.retain(|id| id != clip_id);
+        }
+
         loaded.sound.set_volume(loaded.volume);
         loaded.sound.set_pitch(loaded.pitch);
         loaded.sound.set_pan(loaded.pan);
         loaded.sound.play();
     }
+}
+
+fn pause_overlay_feedback(cue: AudioCue) -> bool {
+    matches!(
+        cue,
+        AudioCue::UiNavigate | AudioCue::UiConfirm | AudioCue::UiBack
+    )
 }
 
 impl<'aud> LoadedSound<'aud> {
@@ -389,6 +459,89 @@ fn music_output_volume(volume: f32, ducked: bool, music_volume: f32) -> f32 {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn match_and_cinematic_pause_can_be_released_in_either_order() {
+        for release_match_first in [false, true] {
+            let mut player = AudioPlayer::disabled();
+            player.set_cinematic_paused(true);
+            player.set_match_paused(true);
+            assert!(player.music_paused());
+            if release_match_first {
+                player.set_match_paused(false);
+                assert!(player.cinematic_paused && player.music_paused());
+                player.set_cinematic_paused(false);
+            } else {
+                player.set_cinematic_paused(false);
+                assert!(player.match_paused && player.music_paused());
+                player.set_match_paused(false);
+            }
+            assert!(!player.music_paused());
+        }
+    }
+
+    #[test]
+    fn cancelling_a_paused_scene_discards_its_pending_voices() {
+        let mut player = AudioPlayer::disabled();
+        player.set_cinematic_paused(true);
+        player.set_match_paused(true);
+        // This records only the pending-resume state, not a fake audio device.
+        player.paused_sounds.push("unfinished-phase".to_owned());
+        player.cancel_cinematic();
+        assert!(player.paused_sounds.is_empty());
+        assert!(!player.cinematic_paused);
+        assert!(player.match_paused, "scene owns when its overlay closes");
+        player.set_match_paused(false);
+        assert!(!player.music_paused());
+        player.set_match_paused(true);
+        player.paused_sounds.push("unfinished-punch".to_owned());
+        player.cancel_cinematic();
+        player.set_match_paused(false);
+        assert!(player.paused_sounds.is_empty());
+        assert!(!player.music_paused());
+    }
+
+    #[test]
+    fn events_during_match_pause_do_not_consume_variations_or_restart_phase_order() {
+        let mut player = AudioPlayer::disabled();
+        player.bank = AudioBank::load(AUDIO_MANIFEST_PATH).unwrap();
+        player.binding_cursors = vec![7; player.bank.bindings().len()];
+        player.enabled = true;
+        player.set_match_paused(true);
+        let before = player.binding_cursors.clone();
+        let event = AudioEvent::new(AudioCue::SuperStart);
+        player.play(&event);
+        assert_eq!(player.binding_cursors, before);
+        player.set_match_paused(false);
+        player.play(&event);
+        assert_ne!(
+            player.binding_cursors, before,
+            "normal SuperStart resets authored phase order"
+        );
+    }
+
+    #[test]
+    fn paused_event_filter_allows_only_ui_feedback_from_the_audio_manifest() {
+        let bank = AudioBank::load(AUDIO_MANIFEST_PATH).unwrap();
+        let mut ui_cues = std::collections::HashSet::new();
+        for binding in bank.bindings() {
+            let cue = AudioCue::from_key(&binding.cue).expect("known manifest cue");
+            assert_eq!(
+                pause_overlay_feedback(cue),
+                binding.cue.starts_with("ui."),
+                "paused routing for {}",
+                binding.cue,
+            );
+            if pause_overlay_feedback(cue) {
+                ui_cues.insert(binding.cue.as_str());
+            }
+        }
+        assert_eq!(
+            ui_cues.len(),
+            3,
+            "navigate, confirm and back remain audible"
+        );
+    }
 
     #[test]
     fn music_output_volume_applies_ducking_and_user_volume() {

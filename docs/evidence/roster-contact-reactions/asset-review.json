@@ -1,0 +1,3920 @@
+{
+  "baseline_revision": "38d81ae1dabd3f48f9cd844661a9ec5fc80e39e2",
+  "method": "Unchanged legacy manifest entries; original RGBA crops, pivots, alpha bounds and distinct pixel hashes",
+  "limitation": "Distinct pixels and bounding boxes do not establish articulated motion; inspect real contact captures separately.",
+  "new_drawings": 128,
+  "characters": [
+    {
+      "character": "rust",
+      "manifest": "assets/candidates/rust/rust-fighter.sprite.json",
+      "manifest_sha256": "77ff9e48de1c3c1799be963a2fd981cd667e93dc3c059cdd01d16959085dd7e5",
+      "legacy_frames_preserved": 97,
+      "legacy_clips_preserved": 25,
+      "legacy_image_blobs_preserved": {
+        "assets/candidates/rust/rust-fighter-atlas.png": "bf13e582a7222a7c8223d1a7bbe4aaa6475bc057"
+      },
+      "scale_before_and_after": 1.0,
+      "idle_trimmed_height": 272,
+      "distinct_reaction_drawings": 32,
+      "frames": [
+        {
+          "name": "reaction_head_00",
+          "profile": "head",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            97,
+            14,
+            345,
+            315
+          ],
+          "opaque_bounds": [
+            100,
+            16,
+            341,
+            312
+          ],
+          "visible_height_relative_to_idle": 1.0882,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "5ef52fbc83e113d3b2970eb7c8aac000f8c9b0cdd6df9245255e0173e34cc806"
+        },
+        {
+          "name": "reaction_head_01",
+          "profile": "head",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            89,
+            35,
+            345,
+            314
+          ],
+          "opaque_bounds": [
+            92,
+            39,
+            343,
+            312
+          ],
+          "visible_height_relative_to_idle": 1.0037,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "4aba39172e7f6b385294f6b0af3086984d8b48c3ae14b01d7b380a3da7266b7f"
+        },
+        {
+          "name": "reaction_head_02",
+          "profile": "head",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            116,
+            40,
+            325,
+            313
+          ],
+          "opaque_bounds": [
+            120,
+            43,
+            322,
+            310
+          ],
+          "visible_height_relative_to_idle": 0.9816,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "0964ca9cf29e5357716a1e1f4db3be03220b3fa431e8ab15d892620204402de2"
+        },
+        {
+          "name": "reaction_head_03",
+          "profile": "head",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            107,
+            38,
+            326,
+            313
+          ],
+          "opaque_bounds": [
+            110,
+            40,
+            323,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.9963,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "e6488b617bf0060d1c1512f87fbb98dac9fc52707e52abd299704963b7c2e07b"
+        },
+        {
+          "name": "reaction_body_00",
+          "profile": "body",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            109,
+            39,
+            320,
+            314
+          ],
+          "opaque_bounds": [
+            113,
+            43,
+            317,
+            310
+          ],
+          "visible_height_relative_to_idle": 0.9816,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "446881e1160f9431ba64bb6dd33051f37d887247841b8842056b57e5eb116a97"
+        },
+        {
+          "name": "reaction_body_01",
+          "profile": "body",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            93,
+            80,
+            313,
+            316
+          ],
+          "opaque_bounds": [
+            96,
+            83,
+            311,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.8419,
+          "lowest_pixel_relative_to_pivot": 6,
+          "rgba_sha256": "8f6cbff076c1bd5cc89a17f2e6e8f5babd4c7129882fe9f3acc2f2db9db2e907"
+        },
+        {
+          "name": "reaction_body_02",
+          "profile": "body",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            112,
+            52,
+            379,
+            315
+          ],
+          "opaque_bounds": [
+            114,
+            56,
+            375,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.9375,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "afe86ebf1422d22ddcb1cad22a72ab38e8107fcb20706d700afa7ba7f04128d6"
+        },
+        {
+          "name": "reaction_body_03",
+          "profile": "body",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            112,
+            38,
+            335,
+            314
+          ],
+          "opaque_bounds": [
+            115,
+            42,
+            332,
+            310
+          ],
+          "visible_height_relative_to_idle": 0.9853,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "99e9a7cd787f7351de50dc8fd68a9f5fd312059f342bf3a1d3ad73f36656db48"
+        },
+        {
+          "name": "reaction_low_00",
+          "profile": "low",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            99,
+            13,
+            352,
+            315
+          ],
+          "opaque_bounds": [
+            103,
+            16,
+            348,
+            311
+          ],
+          "visible_height_relative_to_idle": 1.0846,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "26c88d1c208f350ca37eb717e166fdf6d17ebb569c2e060b1a93c13e722d1ed0"
+        },
+        {
+          "name": "reaction_low_01",
+          "profile": "low",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            90,
+            22,
+            268,
+            316
+          ],
+          "opaque_bounds": [
+            93,
+            26,
+            264,
+            312
+          ],
+          "visible_height_relative_to_idle": 1.0515,
+          "lowest_pixel_relative_to_pivot": 6,
+          "rgba_sha256": "9cc845ef6afae298c2eb5f3c46c349fa9691d0f79262e0e135535be2c0bae40a"
+        },
+        {
+          "name": "reaction_low_02",
+          "profile": "low",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            112,
+            59,
+            361,
+            315
+          ],
+          "opaque_bounds": [
+            116,
+            63,
+            357,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.9118,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "fba7634535bea40d9c5157919945e32dd25e14659a094e93711e2fbd4da0981b"
+        },
+        {
+          "name": "reaction_low_03",
+          "profile": "low",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            109,
+            63,
+            316,
+            315
+          ],
+          "opaque_bounds": [
+            112,
+            66,
+            314,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.9007,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "876a13684c74b08a876ba17d3fe99047394beb088ec849fb2451136b72ff75dd"
+        },
+        {
+          "name": "reaction_guard_high_00",
+          "profile": "guard_high",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            107,
+            33,
+            329,
+            315
+          ],
+          "opaque_bounds": [
+            111,
+            37,
+            325,
+            311
+          ],
+          "visible_height_relative_to_idle": 1.0074,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "005d6931fadc3e49fcf1134de393e30d16e04f8e33fd70c6b4d46faf64f56315"
+        },
+        {
+          "name": "reaction_guard_high_01",
+          "profile": "guard_high",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            74,
+            47,
+            340,
+            315
+          ],
+          "opaque_bounds": [
+            78,
+            50,
+            337,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.9596,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "7f53cfa0b4264b2a7f258f75b9f882d7bf321a600bcf41fdf7360c9b5ba1a5c0"
+        },
+        {
+          "name": "reaction_guard_high_02",
+          "profile": "guard_high",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            117,
+            29,
+            324,
+            315
+          ],
+          "opaque_bounds": [
+            121,
+            32,
+            320,
+            311
+          ],
+          "visible_height_relative_to_idle": 1.0257,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "8ad1b0b29c4c4ccfb1a896b8d5f1f518f4fbb805297f1a769307b74712ab142e"
+        },
+        {
+          "name": "reaction_guard_high_03",
+          "profile": "guard_high",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            111,
+            30,
+            327,
+            315
+          ],
+          "opaque_bounds": [
+            115,
+            33,
+            324,
+            311
+          ],
+          "visible_height_relative_to_idle": 1.0221,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "c758ba3efd3929b5a9e0aec951c9696296fdbdfaf67fab1d6bd6e26e8b943189"
+        },
+        {
+          "name": "reaction_guard_low_00",
+          "profile": "guard_low",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            107,
+            82,
+            318,
+            313
+          ],
+          "opaque_bounds": [
+            110,
+            85,
+            316,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.8309,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "4ca161d74aff563cb2faf46dbf1972984f86cbd144c216e62f343f241d17152b"
+        },
+        {
+          "name": "reaction_guard_low_01",
+          "profile": "guard_low",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            121,
+            115,
+            314,
+            313
+          ],
+          "opaque_bounds": [
+            125,
+            118,
+            311,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.7096,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "f926f0ee3e269d0e342446adeb8707c7e345d95da636bf6b7d1d15532737a8b6"
+        },
+        {
+          "name": "reaction_guard_low_02",
+          "profile": "guard_low",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            109,
+            74,
+            321,
+            313
+          ],
+          "opaque_bounds": [
+            112,
+            77,
+            318,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.8603,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "18515f2e26ef51d02cfdf694e183a3aa98b3d4372d47053cab3d9a0477432cf9"
+        },
+        {
+          "name": "reaction_guard_low_03",
+          "profile": "guard_low",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            105,
+            80,
+            314,
+            314
+          ],
+          "opaque_bounds": [
+            108,
+            83,
+            312,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.8382,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "ad05a42c8f9907f503b00f57e98ad02a4c98d6aa02b6b7c6d3103face99b5376"
+        },
+        {
+          "name": "reaction_launch_00",
+          "profile": "launch",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            87,
+            5,
+            361,
+            313
+          ],
+          "opaque_bounds": [
+            90,
+            7,
+            358,
+            310
+          ],
+          "visible_height_relative_to_idle": 1.114,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "0c1aaae1619b93ed3a7412f346587f3cec2f05b9eed77909fbf5fb72af56f600"
+        },
+        {
+          "name": "reaction_launch_01",
+          "profile": "launch",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            89,
+            20,
+            358,
+            289
+          ],
+          "opaque_bounds": [
+            93,
+            22,
+            356,
+            285
+          ],
+          "visible_height_relative_to_idle": 0.9669,
+          "lowest_pixel_relative_to_pivot": -21,
+          "rgba_sha256": "751d36957ca8d2868266a17c4806634bc17a3a0b9152fa04154bbb628ae44cea"
+        },
+        {
+          "name": "reaction_launch_02",
+          "profile": "launch",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            116,
+            19,
+            333,
+            275
+          ],
+          "opaque_bounds": [
+            119,
+            21,
+            330,
+            271
+          ],
+          "visible_height_relative_to_idle": 0.9191,
+          "lowest_pixel_relative_to_pivot": -35,
+          "rgba_sha256": "94e283813213969208b4017bf3402a348773449c308a672059214e2d1ac1f43d"
+        },
+        {
+          "name": "reaction_launch_03",
+          "profile": "launch",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            84,
+            38,
+            363,
+            321
+          ],
+          "opaque_bounds": [
+            88,
+            42,
+            360,
+            317
+          ],
+          "visible_height_relative_to_idle": 1.011,
+          "lowest_pixel_relative_to_pivot": 11,
+          "rgba_sha256": "cb46c4bc2cab5b8f47f09cda3136957b8bd4bafb97fa3380bbe369ab7c9c0027"
+        },
+        {
+          "name": "reaction_fall_00",
+          "profile": "fall",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            79,
+            196,
+            370,
+            311
+          ],
+          "opaque_bounds": [
+            82,
+            198,
+            368,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.4154,
+          "lowest_pixel_relative_to_pivot": 1,
+          "rgba_sha256": "4945e72a23fa9c9193debdf749aaebd8e7b7dcb74448258e13f40649fd719ae4"
+        },
+        {
+          "name": "reaction_fall_01",
+          "profile": "fall",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            94,
+            144,
+            354,
+            315
+          ],
+          "opaque_bounds": [
+            97,
+            146,
+            353,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.6066,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "18b68994217bf8e78e5cc9d240256819cb9bebd75eb34fb7d1913856a8614313"
+        },
+        {
+          "name": "reaction_fall_02",
+          "profile": "fall",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            86,
+            205,
+            362,
+            315
+          ],
+          "opaque_bounds": [
+            87,
+            208,
+            358,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.3824,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "290d8dd14afd29611463c95a03ab11dd8675f541bd199030010361779ea8734d"
+        },
+        {
+          "name": "reaction_fall_03",
+          "profile": "fall",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            77,
+            211,
+            371,
+            311
+          ],
+          "opaque_bounds": [
+            79,
+            215,
+            367,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.3529,
+          "lowest_pixel_relative_to_pivot": 1,
+          "rgba_sha256": "288ea40a0751f9c860c0f34bd327cf57249180f7828a0d694fc49e9cf456d65a"
+        },
+        {
+          "name": "reaction_rise_00",
+          "profile": "rise",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            87,
+            152,
+            361,
+            314
+          ],
+          "opaque_bounds": [
+            91,
+            155,
+            358,
+            310
+          ],
+          "visible_height_relative_to_idle": 0.5699,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "614eb9c479806fcbb128819d102b766c044bab79b10cd688cc3bbe867b057b96"
+        },
+        {
+          "name": "reaction_rise_01",
+          "profile": "rise",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            99,
+            130,
+            348,
+            315
+          ],
+          "opaque_bounds": [
+            102,
+            133,
+            345,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.6544,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "604a1452b2fcfcbd76fe7b5d502cc8e5cfe3a6ddc5ac9d27e086202c90001db8"
+        },
+        {
+          "name": "reaction_rise_02",
+          "profile": "rise",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            102,
+            90,
+            324,
+            315
+          ],
+          "opaque_bounds": [
+            105,
+            94,
+            320,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.7978,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "75fc2d1f31c3fe5752bda36ce15f7eb7268fff4bf7e54cdcc1fa1501bc14b26d"
+        },
+        {
+          "name": "reaction_rise_03",
+          "profile": "rise",
+          "source": "assets/candidates/rust/rust-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            117,
+            33,
+            317,
+            314
+          ],
+          "opaque_bounds": [
+            120,
+            34,
+            314,
+            311
+          ],
+          "visible_height_relative_to_idle": 1.0184,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "1d1731e16fe337e7c632afdaee2949e857d413187467cf59a5e87ffd18fd3b99"
+        }
+      ],
+      "atlas_sha256": {
+        "assets/candidates/rust/rust-contact-reactions-atlas.png": "80134486ff22122a7c873332b92ecf1d7e8570d553c4c14c43672cd022898a33"
+      }
+    },
+    {
+      "character": "duke",
+      "manifest": "assets/candidates/duke/duke-fighter.sprite.json",
+      "manifest_sha256": "8ce1126f685e6ea8677b566569f391db234066e78c24c640def3b0fe7e002697",
+      "legacy_frames_preserved": 88,
+      "legacy_clips_preserved": 25,
+      "legacy_image_blobs_preserved": {
+        "assets/candidates/duke/duke-fighter-atlas.png": "15d7c4e77b414fb1873a93dcc5b20eded4c6780d"
+      },
+      "scale_before_and_after": 1.0,
+      "idle_trimmed_height": 256,
+      "distinct_reaction_drawings": 32,
+      "frames": [
+        {
+          "name": "reaction_head_00",
+          "profile": "head",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            70,
+            39,
+            328,
+            313
+          ],
+          "opaque_bounds": [
+            74,
+            42,
+            326,
+            310
+          ],
+          "visible_height_relative_to_idle": 1.0469,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "dfa610df4936e4f58ec689f118c2ed0309c0f82b48802419cf9f0562f1d35d4d"
+        },
+        {
+          "name": "reaction_head_01",
+          "profile": "head",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            123,
+            56,
+            383,
+            315
+          ],
+          "opaque_bounds": [
+            127,
+            58,
+            381,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.9883,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "f5fd27abaf38dab4e064a6494f5bf6674b10bae9cad332dff0e295db093c3ba0"
+        },
+        {
+          "name": "reaction_head_02",
+          "profile": "head",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            115,
+            52,
+            332,
+            315
+          ],
+          "opaque_bounds": [
+            119,
+            55,
+            328,
+            311
+          ],
+          "visible_height_relative_to_idle": 1.0,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "15481a81339c6ad2a2a0f010dee7f102dc6b9006c5f69c8030ec51acf0940222"
+        },
+        {
+          "name": "reaction_head_03",
+          "profile": "head",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            127,
+            52,
+            321,
+            314
+          ],
+          "opaque_bounds": [
+            131,
+            55,
+            317,
+            312
+          ],
+          "visible_height_relative_to_idle": 1.0039,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "5674bb8ec413e2fb2e291d1f17eaff6475e3c55860df65bff260cafff6d0bbc1"
+        },
+        {
+          "name": "reaction_body_00",
+          "profile": "body",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            141,
+            51,
+            308,
+            315
+          ],
+          "opaque_bounds": [
+            144,
+            54,
+            305,
+            312
+          ],
+          "visible_height_relative_to_idle": 1.0078,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "aa447a9bc111a6b6fa2829354c8344d77fceb68b83813eef26e31f4efd1d537a"
+        },
+        {
+          "name": "reaction_body_01",
+          "profile": "body",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            143,
+            77,
+            305,
+            314
+          ],
+          "opaque_bounds": [
+            147,
+            80,
+            301,
+            310
+          ],
+          "visible_height_relative_to_idle": 0.8984,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "44b788e414ca72ad4c919bc740173e649cc7242c561811b1e060ebd1e8adda32"
+        },
+        {
+          "name": "reaction_body_02",
+          "profile": "body",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            122,
+            40,
+            400,
+            315
+          ],
+          "opaque_bounds": [
+            126,
+            44,
+            397,
+            311
+          ],
+          "visible_height_relative_to_idle": 1.043,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "02b143ad1564b0bb2d939a7d3e95cfab28ad1fe161c473a24c9807580b8b723f"
+        },
+        {
+          "name": "reaction_body_03",
+          "profile": "body",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            127,
+            35,
+            323,
+            314
+          ],
+          "opaque_bounds": [
+            130,
+            39,
+            321,
+            310
+          ],
+          "visible_height_relative_to_idle": 1.0586,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "726fdc7af96becfa0bc734f8b93bcdc53c02f1be75be4aba54fc1b46f5f8f852"
+        },
+        {
+          "name": "reaction_low_00",
+          "profile": "low",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            98,
+            45,
+            368,
+            315
+          ],
+          "opaque_bounds": [
+            102,
+            49,
+            366,
+            311
+          ],
+          "visible_height_relative_to_idle": 1.0234,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "e152d5a3a49c48abfc509ec70acb66cce9f9513abcf057598d064b783661d7c6"
+        },
+        {
+          "name": "reaction_low_01",
+          "profile": "low",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            189,
+            38,
+            353,
+            314
+          ],
+          "opaque_bounds": [
+            193,
+            42,
+            351,
+            310
+          ],
+          "visible_height_relative_to_idle": 1.0469,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "18d1356514e680f9440470a92c12e5f49ae41936fef950990c38ed452ede2a2f"
+        },
+        {
+          "name": "reaction_low_02",
+          "profile": "low",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            104,
+            51,
+            358,
+            315
+          ],
+          "opaque_bounds": [
+            108,
+            53,
+            354,
+            311
+          ],
+          "visible_height_relative_to_idle": 1.0078,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "9616380cbe10226e9de67fa848b2f2e1059fe09cd5a2b88855e2bc94fe77168b"
+        },
+        {
+          "name": "reaction_low_03",
+          "profile": "low",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            126,
+            37,
+            329,
+            314
+          ],
+          "opaque_bounds": [
+            130,
+            40,
+            325,
+            310
+          ],
+          "visible_height_relative_to_idle": 1.0547,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "d1b668a38969de480ca57fc2b4b7b1bffd7ff4ec38979f105565dd9060505243"
+        },
+        {
+          "name": "reaction_guard_high_00",
+          "profile": "guard_high",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            125,
+            49,
+            324,
+            315
+          ],
+          "opaque_bounds": [
+            127,
+            52,
+            322,
+            312
+          ],
+          "visible_height_relative_to_idle": 1.0156,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "5c480dd6b500fb62db0d0d05adf976b450482701b5bbfd0608562b6ded7fe0bf"
+        },
+        {
+          "name": "reaction_guard_high_01",
+          "profile": "guard_high",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            129,
+            73,
+            320,
+            315
+          ],
+          "opaque_bounds": [
+            131,
+            77,
+            317,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.9141,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "e399a03853d96673af5bc886c4c59dc148313bd8e12564f6dc28e8f06bd1e605"
+        },
+        {
+          "name": "reaction_guard_high_02",
+          "profile": "guard_high",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            120,
+            41,
+            329,
+            316
+          ],
+          "opaque_bounds": [
+            124,
+            44,
+            325,
+            312
+          ],
+          "visible_height_relative_to_idle": 1.0469,
+          "lowest_pixel_relative_to_pivot": 6,
+          "rgba_sha256": "bf128b7a390c04cdaecaffa16dac0a01e2e7936ecc377c6a4663789afa2d8940"
+        },
+        {
+          "name": "reaction_guard_high_03",
+          "profile": "guard_high",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            125,
+            44,
+            321,
+            315
+          ],
+          "opaque_bounds": [
+            128,
+            48,
+            319,
+            312
+          ],
+          "visible_height_relative_to_idle": 1.0312,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "c9c192fead93c710b1659a9b662d5479fdf33952fcca62a0b93e11bf2aee0f59"
+        },
+        {
+          "name": "reaction_guard_low_00",
+          "profile": "guard_low",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            119,
+            94,
+            330,
+            315
+          ],
+          "opaque_bounds": [
+            122,
+            97,
+            327,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.8359,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "d1f0abf650a54bdb5421ecf6412dd59b18052934a3ab89097d5c8258298be4b7"
+        },
+        {
+          "name": "reaction_guard_low_01",
+          "profile": "guard_low",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            90,
+            94,
+            303,
+            315
+          ],
+          "opaque_bounds": [
+            94,
+            97,
+            300,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.8398,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "4f74140a01da4224dce39fc7da67248f5c45df841389ce751cd83c6718b161b4"
+        },
+        {
+          "name": "reaction_guard_low_02",
+          "profile": "guard_low",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            128,
+            93,
+            319,
+            315
+          ],
+          "opaque_bounds": [
+            130,
+            96,
+            316,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.8398,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "012f7e3a506925fb14937b654e9e189ce0543828903f72119cbc63e2625f4a39"
+        },
+        {
+          "name": "reaction_guard_low_03",
+          "profile": "guard_low",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            123,
+            92,
+            322,
+            314
+          ],
+          "opaque_bounds": [
+            127,
+            95,
+            320,
+            310
+          ],
+          "visible_height_relative_to_idle": 0.8398,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "ddaa264eda6e8d8d3fceb8648dd0ed4c9cddf6ff984ced81719b73354d715b22"
+        },
+        {
+          "name": "reaction_launch_00",
+          "profile": "launch",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            102,
+            17,
+            345,
+            266
+          ],
+          "opaque_bounds": [
+            105,
+            20,
+            342,
+            263
+          ],
+          "visible_height_relative_to_idle": 0.9492,
+          "lowest_pixel_relative_to_pivot": -44,
+          "rgba_sha256": "94456c5b7aea010272c47a57dc3b5596fea5adceb839527d01bcbcbaa2959291"
+        },
+        {
+          "name": "reaction_launch_01",
+          "profile": "launch",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            102,
+            15,
+            344,
+            230
+          ],
+          "opaque_bounds": [
+            106,
+            17,
+            341,
+            226
+          ],
+          "visible_height_relative_to_idle": 0.8164,
+          "lowest_pixel_relative_to_pivot": -80,
+          "rgba_sha256": "7cc777f3c525dfda58f9e108e93aa97df12afe844ab52c72e740d6d2a239c845"
+        },
+        {
+          "name": "reaction_launch_02",
+          "profile": "launch",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            138,
+            39,
+            308,
+            259
+          ],
+          "opaque_bounds": [
+            142,
+            41,
+            305,
+            256
+          ],
+          "visible_height_relative_to_idle": 0.8398,
+          "lowest_pixel_relative_to_pivot": -51,
+          "rgba_sha256": "23bcb4f7404f8c76d841eea87ba3b48568e31239478c47ed2f7a13f7620a42b1"
+        },
+        {
+          "name": "reaction_launch_03",
+          "profile": "launch",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            112,
+            34,
+            337,
+            285
+          ],
+          "opaque_bounds": [
+            115,
+            36,
+            334,
+            282
+          ],
+          "visible_height_relative_to_idle": 0.9609,
+          "lowest_pixel_relative_to_pivot": -25,
+          "rgba_sha256": "f1f4c1ca0d0d2c26b4bbbcf3b089dbae8cd9057f6f74158cc2af5ab1811f52d7"
+        },
+        {
+          "name": "reaction_fall_00",
+          "profile": "fall",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            93,
+            160,
+            354,
+            314
+          ],
+          "opaque_bounds": [
+            97,
+            163,
+            351,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.5781,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "b9bf08abd92298e09cdaadfe94df443ff51dfe4ff9e64714d4f1a505507934f5"
+        },
+        {
+          "name": "reaction_fall_01",
+          "profile": "fall",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            104,
+            159,
+            343,
+            314
+          ],
+          "opaque_bounds": [
+            108,
+            163,
+            341,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.5781,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "442c837a3bfd3196702837fb3eac6d160aa201b8ee7486ba132a66763b3b7bfb"
+        },
+        {
+          "name": "reaction_fall_02",
+          "profile": "fall",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            102,
+            171,
+            348,
+            315
+          ],
+          "opaque_bounds": [
+            105,
+            174,
+            344,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.5352,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "b75b90b8f101c6a5685cff8ca2cdeb41c7edc731983656519592daa41da97a58"
+        },
+        {
+          "name": "reaction_fall_03",
+          "profile": "fall",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            90,
+            201,
+            358,
+            314
+          ],
+          "opaque_bounds": [
+            94,
+            205,
+            356,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.4141,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "07627cbc595fd529e59dc2be71f0b9d817485056a5d5029cfa8e7375e8f1f4f2"
+        },
+        {
+          "name": "reaction_rise_00",
+          "profile": "rise",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            101,
+            152,
+            348,
+            315
+          ],
+          "opaque_bounds": [
+            104,
+            154,
+            345,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.6133,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "5293bb7bb2cb8e2964cff91cfdd54c3a19a355d5c71cbeefd60ef3a3843c2b8b"
+        },
+        {
+          "name": "reaction_rise_01",
+          "profile": "rise",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            107,
+            119,
+            340,
+            314
+          ],
+          "opaque_bounds": [
+            111,
+            121,
+            336,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.7422,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "629c10e9e901c697236b824c76b8db79c3f3f2ad2cbffaf07294eb0ce3230dba"
+        },
+        {
+          "name": "reaction_rise_02",
+          "profile": "rise",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            133,
+            66,
+            316,
+            315
+          ],
+          "opaque_bounds": [
+            135,
+            70,
+            313,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.9414,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "8c97b6dcea73ca0f51208c17cecfc6f2907d432fee9660af6c857071a0bf8146"
+        },
+        {
+          "name": "reaction_rise_03",
+          "profile": "rise",
+          "source": "assets/candidates/duke/duke-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            126,
+            51,
+            322,
+            314
+          ],
+          "opaque_bounds": [
+            128,
+            54,
+            319,
+            310
+          ],
+          "visible_height_relative_to_idle": 1.0,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "7203b296a882768dbcfcdd205a7938e7adca96b726c60595dde0caa030151f38"
+        }
+      ],
+      "atlas_sha256": {
+        "assets/candidates/duke/duke-contact-reactions-atlas.png": "3f8357163dfa9d55b299028c506e76a15abd9db800c82040b39e38e5c16c52e0"
+      }
+    },
+    {
+      "character": "c",
+      "manifest": "assets/candidates/c/c-fighter.sprite.json",
+      "manifest_sha256": "f75875aed172aa3cf14dac9037d812b59cb720839b0a8a0be1ae50f7446e27eb",
+      "legacy_frames_preserved": 89,
+      "legacy_clips_preserved": 25,
+      "legacy_image_blobs_preserved": {
+        "assets/candidates/c/c-fighter-atlas.png": "7fb6e6cc7b2b99d603ef44ed5cabb0754d6763c5"
+      },
+      "scale_before_and_after": 1.0,
+      "idle_trimmed_height": 275,
+      "distinct_reaction_drawings": 32,
+      "frames": [
+        {
+          "name": "reaction_head_00",
+          "profile": "head",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            122,
+            17,
+            355,
+            315
+          ],
+          "opaque_bounds": [
+            125,
+            21,
+            353,
+            311
+          ],
+          "visible_height_relative_to_idle": 1.0545,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "8b13c2c15fda951f088a62c4b0971ce9a7b1363eb51f06aa9eedaae5aabc65cc"
+        },
+        {
+          "name": "reaction_head_01",
+          "profile": "head",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            78,
+            33,
+            318,
+            315
+          ],
+          "opaque_bounds": [
+            82,
+            37,
+            314,
+            312
+          ],
+          "visible_height_relative_to_idle": 1.0,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "e0498d2f899c87a8d9667e6df60dcaf67a18e84e7cb9e74de8a71a5790742b8c"
+        },
+        {
+          "name": "reaction_head_02",
+          "profile": "head",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            120,
+            34,
+            326,
+            314
+          ],
+          "opaque_bounds": [
+            123,
+            38,
+            323,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.9927,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "09ebfa5cffb6bcbb2eb996b80bf2ff8a7ad712ded6b6a0f67cfc521cfd85eb68"
+        },
+        {
+          "name": "reaction_head_03",
+          "profile": "head",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            132,
+            33,
+            316,
+            316
+          ],
+          "opaque_bounds": [
+            134,
+            36,
+            313,
+            312
+          ],
+          "visible_height_relative_to_idle": 1.0036,
+          "lowest_pixel_relative_to_pivot": 6,
+          "rgba_sha256": "4568c4ecd3561ae8dca27c918f7c0a4f0be707bcefb29712ca45625984bfa1ec"
+        },
+        {
+          "name": "reaction_body_00",
+          "profile": "body",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            122,
+            54,
+            325,
+            311
+          ],
+          "opaque_bounds": [
+            125,
+            57,
+            322,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.9236,
+          "lowest_pixel_relative_to_pivot": 1,
+          "rgba_sha256": "4d000351951a283153fa82a326de2f1051f231360a252c76d4b59388596ed0cb"
+        },
+        {
+          "name": "reaction_body_01",
+          "profile": "body",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            145,
+            86,
+            327,
+            311
+          ],
+          "opaque_bounds": [
+            148,
+            89,
+            324,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.8073,
+          "lowest_pixel_relative_to_pivot": 1,
+          "rgba_sha256": "a84b23fb8e2a6e2b40264f5196256c2864e61a1deddf099fd2092bcfbcff653e"
+        },
+        {
+          "name": "reaction_body_02",
+          "profile": "body",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            133,
+            57,
+            316,
+            312
+          ],
+          "opaque_bounds": [
+            136,
+            60,
+            313,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.9127,
+          "lowest_pixel_relative_to_pivot": 2,
+          "rgba_sha256": "e9052e116fa049a0fe503bb088d0f9663d385782cadfa6d22dd6a213c8dd28ff"
+        },
+        {
+          "name": "reaction_body_03",
+          "profile": "body",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            130,
+            63,
+            318,
+            312
+          ],
+          "opaque_bounds": [
+            133,
+            66,
+            315,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.8909,
+          "lowest_pixel_relative_to_pivot": 2,
+          "rgba_sha256": "c96ffef6edd738dee2079ebdf7751aaf63487ba783329b862cf0afa5179875b1"
+        },
+        {
+          "name": "reaction_low_00",
+          "profile": "low",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            75,
+            71,
+            338,
+            315
+          ],
+          "opaque_bounds": [
+            79,
+            73,
+            335,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.8691,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "9cd0c79345ca68943b73be25b12ace92fa8b8d5adffffb3465b0fb88759543e3"
+        },
+        {
+          "name": "reaction_low_01",
+          "profile": "low",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            142,
+            70,
+            306,
+            314
+          ],
+          "opaque_bounds": [
+            144,
+            70,
+            303,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.88,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "5f8ac4561da16c7bfa97384483ea4e0a7882abbb9a3ae746df7d8a3e1ffad882"
+        },
+        {
+          "name": "reaction_low_02",
+          "profile": "low",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            131,
+            82,
+            312,
+            313
+          ],
+          "opaque_bounds": [
+            135,
+            85,
+            308,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.8218,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "91104373ea4163ffbc58f3454aa70643babd6116a82eb73c114fe32163d29a99"
+        },
+        {
+          "name": "reaction_low_03",
+          "profile": "low",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            131,
+            84,
+            317,
+            312
+          ],
+          "opaque_bounds": [
+            135,
+            88,
+            315,
+            310
+          ],
+          "visible_height_relative_to_idle": 0.8073,
+          "lowest_pixel_relative_to_pivot": 2,
+          "rgba_sha256": "517d98ffdead657dec4915fa09feaffee67687e1fe0a687ab52404172d93e85d"
+        },
+        {
+          "name": "reaction_guard_high_00",
+          "profile": "guard_high",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            122,
+            66,
+            325,
+            313
+          ],
+          "opaque_bounds": [
+            126,
+            70,
+            323,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.8764,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "d699303de86f8198a7ca4bb1c6ffb2fdde3cfa9d5d708badec632cdf7c0354ce"
+        },
+        {
+          "name": "reaction_guard_high_01",
+          "profile": "guard_high",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            155,
+            81,
+            321,
+            313
+          ],
+          "opaque_bounds": [
+            158,
+            84,
+            318,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.8255,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "595c818c1cf257bfa4266abeac6bd388e8ce62a2342d7dee1f0cae151840bd53"
+        },
+        {
+          "name": "reaction_guard_high_02",
+          "profile": "guard_high",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            131,
+            66,
+            319,
+            314
+          ],
+          "opaque_bounds": [
+            134,
+            67,
+            316,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.8909,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "5b5443004a7d62373f2fcfbf2ef0e93e696ee9f2f82894bd435f2ea29e17302b"
+        },
+        {
+          "name": "reaction_guard_high_03",
+          "profile": "guard_high",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            129,
+            66,
+            318,
+            314
+          ],
+          "opaque_bounds": [
+            133,
+            67,
+            315,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.8909,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "03d161dc1bf4f30d22470d8e3bd62ecee91a5c39f52e7161d933e5de3ee37cc8"
+        },
+        {
+          "name": "reaction_guard_low_00",
+          "profile": "guard_low",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            116,
+            93,
+            335,
+            314
+          ],
+          "opaque_bounds": [
+            119,
+            96,
+            331,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.7855,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "31ec43f97beee84969ed67d547adc535804eb469e8efc00d91cd33d199b952c3"
+        },
+        {
+          "name": "reaction_guard_low_01",
+          "profile": "guard_low",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            131,
+            109,
+            339,
+            314
+          ],
+          "opaque_bounds": [
+            134,
+            113,
+            337,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.7236,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "f8cca2ad49d2bb241bccdbf0d58fb362e52bb198ad985b2857d9d057f5aca8cf"
+        },
+        {
+          "name": "reaction_guard_low_02",
+          "profile": "guard_low",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            138,
+            86,
+            330,
+            313
+          ],
+          "opaque_bounds": [
+            141,
+            89,
+            327,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.8073,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "ab494b1b687044c92aa2c575171cef359fb1bf85ed156537de7a1756ef0ea5d2"
+        },
+        {
+          "name": "reaction_guard_low_03",
+          "profile": "guard_low",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            138,
+            90,
+            341,
+            314
+          ],
+          "opaque_bounds": [
+            141,
+            93,
+            338,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.7964,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "1809b7f5328015afffb5d535d3c5275101ce1311035d7d9cb2722d184a0332f3"
+        },
+        {
+          "name": "reaction_launch_00",
+          "profile": "launch",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            69,
+            39,
+            378,
+            310
+          ],
+          "opaque_bounds": [
+            72,
+            42,
+            375,
+            306
+          ],
+          "visible_height_relative_to_idle": 0.96,
+          "lowest_pixel_relative_to_pivot": 0,
+          "rgba_sha256": "0c0df17430f5652b4605860c30468d14fb8fe27b378b0ab2787df7d3e7fec53c"
+        },
+        {
+          "name": "reaction_launch_01",
+          "profile": "launch",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            87,
+            36,
+            362,
+            286
+          ],
+          "opaque_bounds": [
+            90,
+            40,
+            359,
+            282
+          ],
+          "visible_height_relative_to_idle": 0.88,
+          "lowest_pixel_relative_to_pivot": -24,
+          "rgba_sha256": "eb1e06875a19905faa7a7dd61c641d4b5a1965b512c6ef6e7084e4fc57d7445a"
+        },
+        {
+          "name": "reaction_launch_02",
+          "profile": "launch",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            141,
+            32,
+            306,
+            285
+          ],
+          "opaque_bounds": [
+            144,
+            36,
+            303,
+            282
+          ],
+          "visible_height_relative_to_idle": 0.8945,
+          "lowest_pixel_relative_to_pivot": -25,
+          "rgba_sha256": "cecad69af48ca5e1d1baa038aa310bd2fbf5a7a8097cc36761b6f09437b3eafc"
+        },
+        {
+          "name": "reaction_launch_03",
+          "profile": "launch",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            80,
+            55,
+            368,
+            299
+          ],
+          "opaque_bounds": [
+            83,
+            59,
+            365,
+            296
+          ],
+          "visible_height_relative_to_idle": 0.8618,
+          "lowest_pixel_relative_to_pivot": -11,
+          "rgba_sha256": "abd0f1dabada006bf27d2ab8400c5d14f390b87d43f81279ee366ee7dd5633e1"
+        },
+        {
+          "name": "reaction_fall_00",
+          "profile": "fall",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            74,
+            152,
+            373,
+            314
+          ],
+          "opaque_bounds": [
+            77,
+            156,
+            371,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.5673,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "a80d71693f7f91dcadbe270bb3defa165ad496c241cf8faf64b414ca1d100d8c"
+        },
+        {
+          "name": "reaction_fall_01",
+          "profile": "fall",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            99,
+            182,
+            347,
+            314
+          ],
+          "opaque_bounds": [
+            100,
+            186,
+            345,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.4545,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "cfba550c7e14f65047c965bc6ecd1fdad5a0e213e5984cd3f18198fb478700cb"
+        },
+        {
+          "name": "reaction_fall_02",
+          "profile": "fall",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            88,
+            200,
+            360,
+            312
+          ],
+          "opaque_bounds": [
+            92,
+            204,
+            357,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.3891,
+          "lowest_pixel_relative_to_pivot": 2,
+          "rgba_sha256": "2cd773f0b5680f7a529ba459d627106891d49d198bbfd4964cc9f0e16b583afc"
+        },
+        {
+          "name": "reaction_fall_03",
+          "profile": "fall",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            84,
+            213,
+            364,
+            311
+          ],
+          "opaque_bounds": [
+            86,
+            216,
+            360,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.3455,
+          "lowest_pixel_relative_to_pivot": 1,
+          "rgba_sha256": "0d775a3c02fd3da3e7f1d633d63c750939774b81cf7129085d9e64d573ff9881"
+        },
+        {
+          "name": "reaction_rise_00",
+          "profile": "rise",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            81,
+            145,
+            367,
+            314
+          ],
+          "opaque_bounds": [
+            85,
+            149,
+            364,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.5891,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "d8195abe7f79cb2846f226e6e762e94fc3a5ef04d83981fe137be2e7c47e2b39"
+        },
+        {
+          "name": "reaction_rise_01",
+          "profile": "rise",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            114,
+            86,
+            332,
+            314
+          ],
+          "opaque_bounds": [
+            118,
+            89,
+            329,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.8073,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "87e85d709ba4a814bf411cd4fe2ae85e72a82f0849433c7eea5f7638355edec0"
+        },
+        {
+          "name": "reaction_rise_02",
+          "profile": "rise",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            121,
+            40,
+            332,
+            315
+          ],
+          "opaque_bounds": [
+            124,
+            41,
+            328,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.9818,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "fe0055bf795ae412908b1a9de148a062fb8d7f8c435607c255e6a07d9b06339e"
+        },
+        {
+          "name": "reaction_rise_03",
+          "profile": "rise",
+          "source": "assets/candidates/c/c-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            120,
+            29,
+            329,
+            315
+          ],
+          "opaque_bounds": [
+            124,
+            29,
+            326,
+            312
+          ],
+          "visible_height_relative_to_idle": 1.0291,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "35d18115ad4f3bfa59fc34ee15a7eb22c3e45ed4acb03f5fd29e8d1f0210ce14"
+        }
+      ],
+      "atlas_sha256": {
+        "assets/candidates/c/c-contact-reactions-atlas.png": "49aa1d2d8bd2a0c397dc583c3bd59b236b49f2f66bb375d409b5c3489a8c3886"
+      }
+    },
+    {
+      "character": "go",
+      "manifest": "assets/candidates/go/go-fighter.sprite.json",
+      "manifest_sha256": "cd170b2dfc2fb9eddfeff33d2f075ce661f0ae2d082239b13826190070d057ec",
+      "legacy_frames_preserved": 60,
+      "legacy_clips_preserved": 20,
+      "legacy_image_blobs_preserved": {
+        "assets/candidates/go/go-fighter-atlas.png": "24871acb4d74dc788efb1a38b300b86ff174a1ef"
+      },
+      "scale_before_and_after": 1.0,
+      "idle_trimmed_height": 269,
+      "distinct_reaction_drawings": 32,
+      "frames": [
+        {
+          "name": "reaction_head_00",
+          "profile": "head",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            108,
+            25,
+            341,
+            315
+          ],
+          "opaque_bounds": [
+            111,
+            28,
+            338,
+            311
+          ],
+          "visible_height_relative_to_idle": 1.052,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "68651759503580710e698dbde5a8f9c1b40296088161f0857b9f4c8fc56427eb"
+        },
+        {
+          "name": "reaction_head_01",
+          "profile": "head",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            107,
+            21,
+            337,
+            314
+          ],
+          "opaque_bounds": [
+            110,
+            24,
+            334,
+            311
+          ],
+          "visible_height_relative_to_idle": 1.0669,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "28cde92fdd51ac3695e0b1834d90770eb6ab033e1d30535041a5639aebc5557c"
+        },
+        {
+          "name": "reaction_head_02",
+          "profile": "head",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            108,
+            49,
+            339,
+            312
+          ],
+          "opaque_bounds": [
+            111,
+            53,
+            336,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.9628,
+          "lowest_pixel_relative_to_pivot": 2,
+          "rgba_sha256": "76b8d371731c0dcb107b678c4dddfff7d3c2ebd1afca8ca465815c43964607e0"
+        },
+        {
+          "name": "reaction_head_03",
+          "profile": "head",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 0,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            106,
+            38,
+            342,
+            313
+          ],
+          "opaque_bounds": [
+            110,
+            42,
+            339,
+            310
+          ],
+          "visible_height_relative_to_idle": 0.9963,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "582908b0bdd85f31659b44e2849e12b12ea6f73b4d272f2872d8010b0b23784a"
+        },
+        {
+          "name": "reaction_body_00",
+          "profile": "body",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            110,
+            65,
+            333,
+            312
+          ],
+          "opaque_bounds": [
+            114,
+            68,
+            330,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.9033,
+          "lowest_pixel_relative_to_pivot": 2,
+          "rgba_sha256": "0b258361de57567ef93fbcd26b00a83fc71bcee25f91b7327e254ea28ecde69d"
+        },
+        {
+          "name": "reaction_body_01",
+          "profile": "body",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            140,
+            91,
+            337,
+            312
+          ],
+          "opaque_bounds": [
+            144,
+            95,
+            334,
+            310
+          ],
+          "visible_height_relative_to_idle": 0.7993,
+          "lowest_pixel_relative_to_pivot": 2,
+          "rgba_sha256": "12b7d700eef7aa7fadd2d472ca3f39755b6b8349935e535ee83a418f1a66c3dd"
+        },
+        {
+          "name": "reaction_body_02",
+          "profile": "body",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            110,
+            43,
+            338,
+            313
+          ],
+          "opaque_bounds": [
+            114,
+            47,
+            334,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.9851,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "ddcf6fa2fa17f61db1c319c55fdfb6ec2686d67ed27c473381071f37b350847d"
+        },
+        {
+          "name": "reaction_body_03",
+          "profile": "body",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 352,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            106,
+            36,
+            343,
+            312
+          ],
+          "opaque_bounds": [
+            109,
+            36,
+            340,
+            310
+          ],
+          "visible_height_relative_to_idle": 1.0186,
+          "lowest_pixel_relative_to_pivot": 2,
+          "rgba_sha256": "652b6ae82b44a7191f853ea19d829041e71f37cca4e7649f25c416763ac3e8ee"
+        },
+        {
+          "name": "reaction_low_00",
+          "profile": "low",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            84,
+            69,
+            341,
+            314
+          ],
+          "opaque_bounds": [
+            87,
+            70,
+            337,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.8959,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "1f1a68f418982a0f9a1858cacf9400ab30df8373000b435785a6a16b5ea26b45"
+        },
+        {
+          "name": "reaction_low_01",
+          "profile": "low",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            159,
+            69,
+            294,
+            314
+          ],
+          "opaque_bounds": [
+            162,
+            70,
+            290,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.8996,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "f4a236d1d960f188129077d548138360bf43a376c0a66a47050e30ecabcc8839"
+        },
+        {
+          "name": "reaction_low_02",
+          "profile": "low",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            105,
+            84,
+            342,
+            314
+          ],
+          "opaque_bounds": [
+            109,
+            88,
+            339,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.829,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "0b095ae210b3cee18d5df6732dab6b21e0928996144536b4a34a08208cb82f1a"
+        },
+        {
+          "name": "reaction_low_03",
+          "profile": "low",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 704,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            99,
+            81,
+            349,
+            313
+          ],
+          "opaque_bounds": [
+            103,
+            84,
+            346,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.8476,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "284204ed8d97c1e53b29d2962103dd34928b79fd116d092a42e94c33c7141a4a"
+        },
+        {
+          "name": "reaction_guard_high_00",
+          "profile": "guard_high",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            120,
+            33,
+            327,
+            315
+          ],
+          "opaque_bounds": [
+            123,
+            33,
+            323,
+            312
+          ],
+          "visible_height_relative_to_idle": 1.0372,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "1fdddf46ea3ceced6f0a2a93bd23ff83bc94f3a3209a309b0815d3847e658689"
+        },
+        {
+          "name": "reaction_guard_high_01",
+          "profile": "guard_high",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            200,
+            59,
+            383,
+            315
+          ],
+          "opaque_bounds": [
+            204,
+            62,
+            380,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.9294,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "57846d0edd593a665918e7935b2fd3651f138ec48f9c51bfc688a71b03ccd14b"
+        },
+        {
+          "name": "reaction_guard_high_02",
+          "profile": "guard_high",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            109,
+            49,
+            340,
+            314
+          ],
+          "opaque_bounds": [
+            112,
+            52,
+            337,
+            310
+          ],
+          "visible_height_relative_to_idle": 0.9591,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "4d0919b60a884a6012b3878c79660a68ace65e1bd6ab7dfcc3f3b9aa6dacacd2"
+        },
+        {
+          "name": "reaction_guard_high_03",
+          "profile": "guard_high",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 1056,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            117,
+            40,
+            332,
+            315
+          ],
+          "opaque_bounds": [
+            120,
+            43,
+            329,
+            312
+          ],
+          "visible_height_relative_to_idle": 1.0,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "120e6a6a0cca525bfa076bb03d1750911acf06f7641614f6bbf53fa0a4c1d824"
+        },
+        {
+          "name": "reaction_guard_low_00",
+          "profile": "guard_low",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            179,
+            154,
+            354,
+            314
+          ],
+          "opaque_bounds": [
+            181,
+            156,
+            351,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.5762,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "0dba55a6e5e0ca4abb30c4cb424937baa5e8d58548f61647a8adcf2ae02c0559"
+        },
+        {
+          "name": "reaction_guard_low_01",
+          "profile": "guard_low",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            206,
+            161,
+            418,
+            314
+          ],
+          "opaque_bounds": [
+            209,
+            163,
+            415,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.5502,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "678f2e8a6d91f69b9827e5addcacfd53d9a8e7ca41951da21ed3255b6c4c5a76"
+        },
+        {
+          "name": "reaction_guard_low_02",
+          "profile": "guard_low",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            130,
+            141,
+            313,
+            314
+          ],
+          "opaque_bounds": [
+            133,
+            144,
+            310,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.6208,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "989948df4b5af2e3922eeab515411a0079282805f40b2bfbabc88aca6d987987"
+        },
+        {
+          "name": "reaction_guard_low_03",
+          "profile": "guard_low",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 1408,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            140,
+            134,
+            308,
+            314
+          ],
+          "opaque_bounds": [
+            142,
+            137,
+            305,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.6468,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "2402030307d839e6f6918919268d96093a8c81dc9886c2905d40cbaf6bc50e1b"
+        },
+        {
+          "name": "reaction_launch_00",
+          "profile": "launch",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            113,
+            24,
+            335,
+            297
+          ],
+          "opaque_bounds": [
+            116,
+            27,
+            332,
+            295
+          ],
+          "visible_height_relative_to_idle": 0.9963,
+          "lowest_pixel_relative_to_pivot": -13,
+          "rgba_sha256": "574cbf4d4b29b14b6558214b7f7232ea3038c5f280a218c61bd94390b8083b47"
+        },
+        {
+          "name": "reaction_launch_01",
+          "profile": "launch",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            80,
+            31,
+            367,
+            304
+          ],
+          "opaque_bounds": [
+            84,
+            34,
+            364,
+            301
+          ],
+          "visible_height_relative_to_idle": 0.9926,
+          "lowest_pixel_relative_to_pivot": -6,
+          "rgba_sha256": "69b8a4aee082c8ee5911d906fa9148729dbc923a652bc5cf2a6ab08504db99d3"
+        },
+        {
+          "name": "reaction_launch_02",
+          "profile": "launch",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            146,
+            55,
+            303,
+            279
+          ],
+          "opaque_bounds": [
+            150,
+            58,
+            300,
+            276
+          ],
+          "visible_height_relative_to_idle": 0.8104,
+          "lowest_pixel_relative_to_pivot": -31,
+          "rgba_sha256": "fda1214690e850bcdf03f76e166edd3c3fee9e97eab8c725eaaf4fdc0da5edc9"
+        },
+        {
+          "name": "reaction_launch_03",
+          "profile": "launch",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 1760,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            90,
+            76,
+            356,
+            292
+          ],
+          "opaque_bounds": [
+            92,
+            79,
+            354,
+            288
+          ],
+          "visible_height_relative_to_idle": 0.777,
+          "lowest_pixel_relative_to_pivot": -18,
+          "rgba_sha256": "207d6a08732286b578c6174c28fb4a2e7c055276ef537a3728a9371612c27297"
+        },
+        {
+          "name": "reaction_fall_00",
+          "profile": "fall",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            84,
+            160,
+            363,
+            314
+          ],
+          "opaque_bounds": [
+            88,
+            164,
+            360,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.5465,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "f20a28897b16f0f11ee78bf235edcea160d680b60a1161554066aeab1bdf6d61"
+        },
+        {
+          "name": "reaction_fall_01",
+          "profile": "fall",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            103,
+            174,
+            344,
+            314
+          ],
+          "opaque_bounds": [
+            107,
+            178,
+            342,
+            312
+          ],
+          "visible_height_relative_to_idle": 0.4981,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "5942e7302dfabdfe4e80c17e13f4f898cf480430f737aac99417fb418b366f41"
+        },
+        {
+          "name": "reaction_fall_02",
+          "profile": "fall",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            96,
+            183,
+            352,
+            315
+          ],
+          "opaque_bounds": [
+            98,
+            186,
+            349,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.4647,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "fd4563f8a36c4677461e2baafa3dc88260c984187b86b044e7104a1d08b84d50"
+        },
+        {
+          "name": "reaction_fall_03",
+          "profile": "fall",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 2112,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            87,
+            216,
+            362,
+            313
+          ],
+          "opaque_bounds": [
+            90,
+            219,
+            359,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.342,
+          "lowest_pixel_relative_to_pivot": 3,
+          "rgba_sha256": "cfde1d5a3d9a57e165a69a68f1f0f388d6e7f0b02e5e051b54d881b00481412f"
+        },
+        {
+          "name": "reaction_rise_00",
+          "profile": "rise",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 0,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            84,
+            154,
+            363,
+            314
+          ],
+          "opaque_bounds": [
+            88,
+            157,
+            360,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.5725,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "06e062e0e8839f86a8f01610d4f175f06ba8d4cb4d5cfae1dc0f89562dc2bba0"
+        },
+        {
+          "name": "reaction_rise_01",
+          "profile": "rise",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 448,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            97,
+            125,
+            351,
+            315
+          ],
+          "opaque_bounds": [
+            100,
+            128,
+            348,
+            311
+          ],
+          "visible_height_relative_to_idle": 0.6803,
+          "lowest_pixel_relative_to_pivot": 5,
+          "rgba_sha256": "b4de85ec071c77fe5ecafcd6566ea18f1b79637bd00c8c19adc888cda4baadc4"
+        },
+        {
+          "name": "reaction_rise_02",
+          "profile": "rise",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 896,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            77,
+            102,
+            298,
+            314
+          ],
+          "opaque_bounds": [
+            81,
+            105,
+            295,
+            310
+          ],
+          "visible_height_relative_to_idle": 0.7621,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "dcef8f80676f6d0633ba2daa1a538538efdd589a691e2d2fe5a605e95ccd3cbb"
+        },
+        {
+          "name": "reaction_rise_03",
+          "profile": "rise",
+          "source": "assets/candidates/go/go-contact-reactions-atlas.png",
+          "frame": {
+            "x": 1344,
+            "y": 2464,
+            "w": 448,
+            "h": 352
+          },
+          "pivot": {
+            "x": 224,
+            "y": 310
+          },
+          "alpha_bounds": [
+            200,
+            37,
+            439,
+            314
+          ],
+          "opaque_bounds": [
+            204,
+            40,
+            436,
+            311
+          ],
+          "visible_height_relative_to_idle": 1.0074,
+          "lowest_pixel_relative_to_pivot": 4,
+          "rgba_sha256": "8ccb6a7045c4435609c29327a356fdfe7b50cc18a732566ee45471a2c85288de"
+        }
+      ],
+      "atlas_sha256": {
+        "assets/candidates/go/go-contact-reactions-atlas.png": "f2d0cec56ec28425fde85dee0cbaa2f8989c333f946e3b1f17dadc1d89fdb8bc"
+      }
+    }
+  ]
+}

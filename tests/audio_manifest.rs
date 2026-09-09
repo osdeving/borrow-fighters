@@ -283,7 +283,7 @@ fn audio_clip_defaults_keep_placeholders_lightweight() {
 }
 
 #[test]
-fn fighter_voices_never_fall_back_to_another_characters_recordings() {
+fn fighter_voices_only_share_recordings_for_the_authorized_old_c_rust_pair() {
     let manifest = AudioManifest::load("assets/audio/audio_manifest.json").unwrap();
     let bank = AudioBank::new(manifest.clone());
     let mut voice_files = Vec::new();
@@ -327,7 +327,11 @@ fn fighter_voices_never_fall_back_to_another_characters_recordings() {
             );
             let bytes = std::fs::read(&clip.file).unwrap();
             for (other, other_file, other_bytes) in &voice_files {
-                if *other != character {
+                let authorized_shared_voice = matches!(
+                    (character, *other),
+                    (CharacterId::C, CharacterId::Rust) | (CharacterId::Rust, CharacterId::C)
+                );
+                if *other != character && !authorized_shared_voice {
                     assert_ne!(
                         &bytes, other_bytes,
                         "{character:?} and {other:?} share the same recording: {} / {other_file}",
@@ -337,6 +341,25 @@ fn fighter_voices_never_fall_back_to_another_characters_recordings() {
             }
             voice_files.push((character, clip.file.clone(), bytes));
         }
+    }
+}
+
+#[test]
+fn old_c_temporarily_reuses_the_selected_rust_clips_without_reprocessing() {
+    let mappings = [
+        ("attack-pointer-jab-01.ogg", "attack-borrow-jab-01.ogg"),
+        ("attack-unsafe-poke-01.ogg", "attack-lifetime-01.ogg"),
+        ("attack-heavy-02.ogg", "attack-heavy-01.ogg"),
+        ("attack-reboot-02.ogg", "attack-kick-01.ogg"),
+        ("hurt-01.ogg", "hurt-01.ogg"),
+        ("block-01.ogg", "block-01.ogg"),
+    ];
+    for (old_c, rust) in mappings {
+        assert_eq!(
+            std::fs::read(format!("assets/audio/characters/c/voice/{old_c}")).unwrap(),
+            std::fs::read(format!("assets/audio/characters/rust/voice/{rust}")).unwrap(),
+            "Old C fallback {old_c} must preserve the selected Rust recording"
+        );
     }
 }
 
@@ -411,14 +434,21 @@ fn authored_super_phases_resolve_existing_sounds_for_their_character() {
 }
 
 #[test]
-fn recast_voices_use_different_source_recordings_even_after_processing() {
-    let production: serde_json::Value = serde_json::from_str(
-        &std::fs::read_to_string("assets/audio/production-2026-09-09.json").unwrap(),
-    )
-    .unwrap();
+fn current_voice_sources_only_share_the_authorized_old_c_rust_recordings() {
+    let mut current_outputs = std::collections::BTreeMap::new();
+    for path in [
+        "assets/audio/production-2026-09-09.json",
+        "assets/audio/production-old-c-fallback-2026-09-09.json",
+    ] {
+        let production: serde_json::Value =
+            serde_json::from_str(&std::fs::read_to_string(path).unwrap()).unwrap();
+        for output in production["outputs"].as_array().unwrap() {
+            current_outputs.insert(output["file"].as_str().unwrap().to_owned(), output.clone());
+        }
+    }
     let mut source_owners = std::collections::HashMap::new();
     let mut characters = HashSet::new();
-    for output in production["outputs"].as_array().unwrap() {
+    for output in current_outputs.values() {
         let file = output["file"].as_str().unwrap();
         let Some(voice_path) = file.strip_prefix("assets/audio/characters/") else {
             continue;
@@ -429,9 +459,10 @@ fn recast_voices_use_different_source_recordings_even_after_processing() {
             let hash = source["source_sha256"].as_str().unwrap();
             assert_eq!(hash.len(), 64, "source hash missing for {file}");
             if let Some(other) = source_owners.insert(hash, character) {
-                assert_eq!(
-                    other, character,
-                    "{character} and {other} reuse a source despite different output processing"
+                assert!(
+                    other == character
+                        || matches!((character, other), ("c", "rust") | ("rust", "c")),
+                    "{character} and {other} reuse a source outside the authorized Old C/Rust pair"
                 );
             }
         }

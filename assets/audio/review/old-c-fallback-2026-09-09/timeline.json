@@ -1,0 +1,100 @@
+[
+  {
+    "start_seconds": 0.0,
+    "phase": "before",
+    "role": "attack-pointer-jab-01.ogg",
+    "file": "assets/audio/review/old-c-fallback-2026-09-09/before/attack-pointer-jab-01.ogg",
+    "manifest_volume": 0.64
+  },
+  {
+    "start_seconds": 1.328,
+    "phase": "after",
+    "role": "attack-pointer-jab-01.ogg",
+    "file": "assets/audio/characters/c/voice/attack-pointer-jab-01.ogg",
+    "manifest_volume": 0.64
+  },
+  {
+    "start_seconds": 2.224,
+    "phase": "before",
+    "role": "attack-unsafe-poke-01.ogg",
+    "file": "assets/audio/review/old-c-fallback-2026-09-09/before/attack-unsafe-poke-01.ogg",
+    "manifest_volume": 0.64
+  },
+  {
+    "start_seconds": 3.8827,
+    "phase": "after",
+    "role": "attack-unsafe-poke-01.ogg",
+    "file": "assets/audio/characters/c/voice/attack-unsafe-poke-01.ogg",
+    "manifest_volume": 0.64
+  },
+  {
+    "start_seconds": 4.9173,
+    "phase": "before",
+    "role": "attack-heavy-02.ogg",
+    "file": "assets/audio/review/old-c-fallback-2026-09-09/before/attack-heavy-02.ogg",
+    "manifest_volume": 0.63
+  },
+  {
+    "start_seconds": 6.1973,
+    "phase": "after",
+    "role": "attack-heavy-02.ogg",
+    "file": "assets/audio/characters/c/voice/attack-heavy-02.ogg",
+    "manifest_volume": 0.63
+  },
+  {
+    "start_seconds": 7.456,
+    "phase": "before",
+    "role": "attack-reboot-02.ogg",
+    "file": "assets/audio/review/old-c-fallback-2026-09-09/before/attack-reboot-02.ogg",
+    "manifest_volume": 0.63
+  },
+  {
+    "start_seconds": 9.0347,
+    "phase": "after",
+    "role": "attack-reboot-02.ogg",
+    "file": "assets/audio/characters/c/voice/attack-reboot-02.ogg",
+    "manifest_volume": 0.63
+  },
+  {
+    "start_seconds": 10.1947,
+    "phase": "before",
+    "role": "hurt-01.ogg",
+    "file": "assets/audio/review/old-c-fallback-2026-09-09/before/hurt-01.ogg",
+    "manifest_volume": 0.53
+  },
+  {
+    "start_seconds": 12.056,
+    "phase": "after",
+    "role": "hurt-01.ogg",
+    "file": "assets/audio/characters/c/voice/hurt-01.ogg",
+    "manifest_volume": 0.53
+  },
+  {
+    "start_seconds": 13.072,
+    "phase": "before",
+    "role": "block-01.ogg",
+    "file": "assets/audio/review/old-c-fallback-2026-09-09/before/block-01.ogg",
+    "manifest_volume": 0.53
+  },
+  {
+    "start_seconds": 14.3093,
+    "phase": "after",
+    "role": "block-01.ogg",
+    "file": "assets/audio/characters/c/voice/block-01.ogg",
+    "manifest_volume": 0.53
+  },
+  {
+    "start_seconds": 15.088,
+    "phase": "before",
+    "role": "start-c.ogg",
+    "file": "assets/audio/review/old-c-fallback-2026-09-09/before/start-c.ogg",
+    "manifest_volume": 0.56
+  },
+  {
+    "start_seconds": 16.6667,
+    "phase": "after",
+    "role": "start-c.ogg",
+    "file": "assets/audio/sfx/super/start-c.ogg",
+    "manifest_volume": 0.56
+  }
+]

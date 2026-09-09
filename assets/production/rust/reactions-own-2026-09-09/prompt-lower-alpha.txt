@@ -1,0 +1,1 @@
+Remove the gray checkerboard background from this sprite sheet. Return the same sixteen Rust character drawings, same positions and same dimensions, on a genuinely transparent RGBA background. Preserve every character pixel, clothing detail, emblem and limb. Transparent means alpha=0 outside the sprites, not a checkerboard painting. No redesign, no extra shadows.

@@ -17,7 +17,7 @@ pub(super) fn draw_guide(
     draw_centered_menu_text(
         draw,
         font,
-        "Escolha um modo abaixo. Espere o Fight! e zere a vida do adversário para vencer.",
+        "Escolha o modo, confirme P1 e P2 e selecione LUTAR. Espere o Fight! e zere a vida rival.",
         WINDOW_WIDTH / 2,
         screen_px(91),
         13.0,
@@ -34,7 +34,7 @@ pub(super) fn draw_guide(
                 "F  soco fraco   ·   H  soco forte",
                 "V  chute   ·   G  projétil",
                 "T  especial de assinatura",
-                "Y  especial cinematográfico",
+                "Y  cinematográfico (100 de energia)",
                 "S + V  rasteira   ·   S + H  anti-air",
                 "Frente + H  overhead   ·   Q + F  agarrão",
                 "No ar: F / V para atacar",
@@ -49,7 +49,7 @@ pub(super) fn draw_guide(
                 "O  soco fraco   ·   P  soco forte",
                 "; ou /  chute   ·   Ctrl direito  projétil",
                 "\\  especial de assinatura",
-                "]  especial cinematográfico",
+                "]  cinematográfico (100 de energia)",
                 "Baixo + chute  rasteira",
                 "Frente + P  overhead   ·   U + O  agarrão",
                 "Baixo + P  anti-air   ·   No ar: O / chute",
@@ -67,7 +67,7 @@ pub(super) fn draw_guide(
                 "Baixo + B  rasteira   ·   Baixo + Y  anti-air",
                 "Frente + Y  overhead   ·   LB + X  agarrão",
                 "1º controle: P1   ·   2º controle: P2",
-                "Menu  reinicia   ·   View  alterna CPU P2",
+                "Menu / Start  pausa   ·   View  CPU P2",
             ],
         ),
     ];
@@ -104,12 +104,20 @@ pub(super) fn draw_guide(
     }
     for (text, y) in [
         (
-            "Defenda em pé contra overheads; baixo + defesa contra rasteiras. Pule para escapar de agarrões.",
+            "Seleção: P1 WASD / F · P2 setas / Enter · mouse / controle · Tab muda modo · Q / E muda arena.",
             309,
         ),
         (
-            "R reinicia · Esc volta ao menu · Training > Move Showcase ensina golpes · Como jogar reabre este guia.",
-            329,
+            "Energia começa em 50/100. Acerte, receba golpes ou defenda para encher; cinematográfico custa 100.",
+            323,
+        ),
+        (
+            "Defenda em pé contra overheads; baixo + defesa contra rasteiras. Em Training, os especiais são livres.",
+            337,
+        ),
+        (
+            "Esc / Start pausa · R reinicia · fim da luta: Revanche, Trocar personagens ou Menu.",
+            351,
         ),
     ] {
         draw_centered_menu_text(
@@ -118,7 +126,7 @@ pub(super) fn draw_guide(
             text,
             WINDOW_WIDTH / 2,
             screen_px(y),
-            11.5,
+            10.5,
             UI_TEXT,
         );
     }
@@ -143,7 +151,7 @@ pub(super) fn draw_guide(
             checked: None,
         },
         MenuLine {
-            label: "IR AO MENU · ESCOLHER PERSONAGENS",
+            label: "IR AO MENU PRINCIPAL",
             description: "",
             value: None,
             checked: None,

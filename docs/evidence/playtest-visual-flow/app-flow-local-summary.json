@@ -1,0 +1,238 @@
+{
+  "success": false,
+  "evidence": "/tmp/borrow-fighters-native-app-flow",
+  "executable": "/home/willams/borrow-fighters/target/release/borrow-fighters",
+  "executable_sha256": "cfde9dbdc0fb3b40c56742dc83cb81e3460b48df181eabbbddc34f8438172b7c",
+  "pid": 49267,
+  "exit_code": 0,
+  "started_at_utc": "2026-09-09T19:20:44.949456+00:00",
+  "finished_at_utc": "2026-09-09T19:23:09.380671+00:00",
+  "input": "Simulated keyboard via XSendEvent to owned _NET_WM_PID window",
+  "physical_gamepad_tested": false,
+  "physical_mouse_tested": false,
+  "audio_listening_performed": false,
+  "expected_states_are_assertions": false,
+  "asset_root": "/home/willams/borrow-fighters/assets",
+  "asset_source": "review harness repository",
+  "asset_environment_override": true,
+  "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55) \n[GCC 9.4.0]",
+  "x11_errors": [],
+  "captures": [
+    {
+      "name": "01-initial-fight",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/01-initial-fight.png",
+      "expected_state": "Initial Rust vs Duke fight or entry, with energy meters",
+      "validation": "manual visual review required",
+      "sha256": "a2f511b472b4df6fad928553332f6aa9537e81c7f5f3f1212201cf6d9f1ca93e",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "02-pause",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/02-pause.png",
+      "expected_state": "Pause overlay: Continue, Restart, Change characters, Menu",
+      "validation": "manual visual review required",
+      "sha256": "7bfa6945f2a35a514fb26aa98fa8cd417845283aba4ce8d837b87ef7e9d81c91",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "03-pause-held",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/03-pause-held.png",
+      "expected_state": "Same fighter poses and health as 02; UI may animate",
+      "validation": "manual visual review required",
+      "sha256": "83d676fbbef7d760ba28b3456a8bbd3be9ab5fa752dfd675238843b00b36eea7",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "04-resumed",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/04-resumed.png",
+      "expected_state": "Pause closed and initial fight resumes",
+      "validation": "manual visual review required",
+      "sha256": "3347ae130b8579bc489ce88b021976202022058ac23bbb0890a6df5875df3cf1",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "05-restart-highlight",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/05-restart-highlight.png",
+      "expected_state": "Pause with Restart selected",
+      "validation": "manual visual review required",
+      "sha256": "20e57ab9b6abf1808808f7b8bc25d66d18eafd0c4022226303286ab86a958060",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "06-restarted-entry",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/06-restarted-entry.png",
+      "expected_state": "New entry with full health and energy reset",
+      "validation": "manual visual review required",
+      "sha256": "742d89cac1bda34010c882b1f582153b44aff8112fcc93a4b3397ebacac48b28",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "07-roster",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/07-roster.png",
+      "expected_state": "Linker roster with animated Rust and Duke previews",
+      "validation": "manual visual review required",
+      "sha256": "50271a2426c32dafc42fbe60c80da9e89e0d729dcb33d3cf6359723131a004e6",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "08-future-slot",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/08-future-slot.png",
+      "expected_state": "P1 future slot with question mark highlighted",
+      "validation": "manual visual review required",
+      "sha256": "b596fc8174e49059dde7b45d77fb89f3641224c521a8ce5299939c42ee302220",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "09-future-rejected",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/09-future-rejected.png",
+      "expected_state": "Future slot remains unconfirmed and cannot start a match",
+      "validation": "manual visual review required",
+      "sha256": "21337da3311c7c154bc1e50932e656832e7045cebc3130871cb2460f662a09ba",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "10-random-preview",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/10-random-preview.png",
+      "expected_state": "P1 Random preview before confirmation",
+      "validation": "manual visual review required",
+      "sha256": "0ec0635542db74424c002f21a2938d17d02f28edb06c858ffa473304821827db",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "11-random-confirmed",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/11-random-confirmed.png",
+      "expected_state": "P1 resolves one stable character and P2 becomes active",
+      "validation": "manual visual review required",
+      "sha256": "4eac7af84aa9091864f605e12f664163225fefa590df850273a66e5fde3c017e",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "12-random-stable",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/12-random-stable.png",
+      "expected_state": "Same P1 identity as 11 while idle animation continues",
+      "validation": "manual visual review required",
+      "sha256": "f2b182230e4defae4ef923e8eb1a3a973bfabb948167d44e85be8d1cf860f567",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "13-both-confirmed",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/13-both-confirmed.png",
+      "expected_state": "Both sides confirmed and launch enabled",
+      "validation": "manual visual review required",
+      "sha256": "7bc99a22defd1fa23c019a8a78fab212126a192d0535376db044473b627db08f",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "14-local-mode",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/14-local-mode.png",
+      "expected_state": "Separate P1/P2 controls and confirmations reset",
+      "validation": "manual visual review required",
+      "sha256": "959e6a5f6d28c6161fdf325f32b468604ece18db74f71767d24b8490edd8f23f",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "15-local-both-confirmed",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/15-local-both-confirmed.png",
+      "expected_state": "Local F and Enter each confirmed its own player",
+      "validation": "manual visual review required",
+      "sha256": "46480b21381b4a84ceff890dcda07c28dca87e7dcc545657eafbedfd45795700",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "16-demo-ready",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/16-demo-ready.png",
+      "expected_state": "Watch Demo mode, new arena and both players confirmed",
+      "validation": "manual visual review required",
+      "sha256": "a4d76eaad692f300b449b6961918b2008d57fa6f3670d5deeaf8664e72b25c61",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "17-demo-entry",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/17-demo-entry.png",
+      "expected_state": "Real match entry from the roster",
+      "validation": "manual visual review required",
+      "sha256": "b91daea7a732fe70926278fa72d24b28c90536565379f01ee2e9809113889d50",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "18-match-1-pause",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/18-match-1-pause.png",
+      "expected_state": "Pause overlay within this match; combat stays frozen",
+      "validation": "manual visual review required",
+      "sha256": "8ba9595956b24e9c1c5d5be28f8979b47fbf08aa07f1a4ecd6d7a27b188daad3",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "18-match-1-resumed",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/18-match-1-resumed.png",
+      "expected_state": "Same match resumed with pause closed and no restart",
+      "validation": "manual visual review required",
+      "sha256": "8fb7c17cdefae31bc610545221dadb8e4ce1b0dcb24be97cdb95dc9abd2c90c4",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "18-match-1-mid",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/18-match-1-mid.png",
+      "expected_state": "CPU match or completed result; inspect energy and rendering",
+      "validation": "manual visual review required",
+      "sha256": "5f6cb830289fd6a351777c5bff628b64f54f93807da3e95e5e7e3572a71c9f38",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "19-match-1-result-candidate",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/19-match-1-result-candidate.png",
+      "expected_state": "Expected result with Rematch / Change characters / Menu; verify visually",
+      "validation": "manual visual review required",
+      "sha256": "4476247ad15a3f3ba969faa324fd3a1552c3da627167d38fdede51e77a5df5e6",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "20-rematch-1-entry",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/20-rematch-1-entry.png",
+      "expected_state": "Expected entry with SAME fighters and arena; verify visually",
+      "validation": "manual visual review required",
+      "sha256": "b91daea7a732fe70926278fa72d24b28c90536565379f01ee2e9809113889d50",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "18-match-2-pause",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/18-match-2-pause.png",
+      "expected_state": "Pause overlay within this match; combat stays frozen",
+      "validation": "manual visual review required",
+      "sha256": "4075295720afe21816f5f82cf46f3298158506fd6c0208868f3887ae3b9a2b43",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "18-match-2-resumed",
+      "path": "/tmp/borrow-fighters-native-app-flow/screenshots/18-match-2-resumed.png",
+      "expected_state": "Same match resumed with pause closed and no restart",
+      "validation": "manual visual review required",
+      "sha256": "8300247b6bf2b2cc0170de24438c0b3ead5d1ea45729f99a3f78cb4136ed32a6",
+      "width": 1280,
+      "height": 720
+    }
+  ]
+}

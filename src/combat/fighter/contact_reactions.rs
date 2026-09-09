@@ -1,4 +1,4 @@
-//! Describes contact-specific reaction drawings for the Python/C++ animation pilot.
+//! Describes contact-specific reaction drawings for the complete playable roster.
 //!
 //! System: Fighter presentation state. Profiles and visual recovery clocks do not
 //! change damage, stun, physical movement, hitboxes or hurtboxes.
@@ -36,14 +36,22 @@ impl ContactReactionState {
 }
 
 impl Fighter {
-    /// Whether this fighter participates in the Python/C++ authored reaction pilot.
+    /// Whether this fighter has a complete set of authored contact reactions.
     pub fn uses_contact_reactions(&self) -> bool {
-        self.move_ids.contains(&MoveId::PythonEventHorizon)
-            || self.move_ids.contains(&MoveId::CppTemplateSingularity)
+        [
+            MoveId::RustOwnershipEclipse,
+            MoveId::DukeJvmOverdrive,
+            MoveId::CKernelPanic,
+            MoveId::GoMillionGoroutines,
+            MoveId::PythonEventHorizon,
+            MoveId::CppTemplateSingularity,
+        ]
+        .iter()
+        .any(|move_id| self.move_ids.contains(move_id))
     }
 
     /// Returns the precise impact, flight, fall or rise phase for the current contact.
-    /// Other fighters continue using the existing `ReactionVisualState` contract.
+    /// Unregistered movesets retain the existing `ReactionVisualState` contract.
     pub fn contact_reaction_state(&self) -> Option<ContactReactionState> {
         if !self.uses_contact_reactions() || !self.is_reacting() {
             return None;

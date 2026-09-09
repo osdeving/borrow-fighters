@@ -9,16 +9,21 @@ use std::{f32::consts::TAU, ffi::CString};
 
 mod authored_actors;
 mod authored_supers;
+mod character_select;
 mod cinematic_effects;
 mod combat_lab;
+mod match_flow;
 mod move_showcase;
 mod onboarding;
+pub(crate) mod presentation;
 mod python_super;
 mod signature_effects;
 mod sprite_viewer;
 mod stage_life;
 
+pub use character_select::draw_character_select;
 pub use combat_lab::draw_combat_lab;
+pub use match_flow::draw_match_flow;
 pub use move_showcase::draw_move_showcase;
 pub use sprite_viewer::{draw_sprite_viewer, draw_sprite_viewer_error};
 
@@ -200,7 +205,7 @@ pub fn draw_fight(
     }
 
     if let Some(label) = world.countdown_label() {
-        draw_countdown(draw, label, assets);
+        draw_countdown(draw, label, world.countdown_elapsed_seconds(), assets);
     }
 
     if flags.enabled(FeatureFlag::ShowControlsHelp) {
@@ -3147,6 +3152,8 @@ fn draw_hud(
 
     draw_health_bar(draw, font, &world.player_one, false);
     draw_health_bar(draw, font, &world.player_two, true);
+    draw_energy_bar(draw, world, PlayerSlot::One, assets);
+    draw_energy_bar(draw, world, PlayerSlot::Two, assets);
     let center_x = WINDOW_WIDTH / 2;
     draw.draw_rectangle(
         center_x - screen_px(29),
@@ -3168,7 +3175,9 @@ fn draw_hud(
         draw_hud_debug_status(draw, flags, gamepad_status);
     }
 
-    if let Some(outcome) = world.outcome {
+    if let Some(outcome) = world.outcome
+        && world.outcome_elapsed_seconds() < 1.8
+    {
         let (title, message, accent) = match outcome {
             MatchOutcome::Winner(PlayerSlot::One) => {
                 ("VITÓRIA", world.player_one.name, MENU_ACCENT)
@@ -3197,7 +3206,7 @@ fn draw_hud(
         draw_centered_menu_text(
             draw,
             font,
-            "R / START  revanche     •     ESC  menu",
+            "CONFLITO RESOLVIDO",
             center_x,
             screen_px(198),
             12.0,
@@ -3291,7 +3300,52 @@ fn draw_countdown_text(draw: &mut impl DrawTarget, label: &str) {
     draw.draw_text(label, x, y, font_size, UI_TEXT);
 }
 
-fn draw_countdown(draw: &mut impl DrawTarget, label: &str, assets: &GameAssets) {
+fn draw_countdown(draw: &mut impl DrawTarget, label: &str, elapsed: f32, assets: &GameAssets) {
+    let beat = elapsed.fract();
+    let accent = if label == "Fight!" {
+        presentation::GOLD
+    } else {
+        presentation::CYAN
+    };
+    let expansion = 145.0 + beat * 85.0;
+    let alpha = ((1.0 - beat) * 100.0) as u8;
+    draw.draw_circle_lines(
+        640,
+        337,
+        expansion,
+        Color::new(accent.r, accent.g, accent.b, alpha),
+    );
+    for side in [-1, 1] {
+        let inner = 640 + side * (180.0 + beat * 180.0) as i32;
+        let outer = 640 + side * 600;
+        draw.draw_line(
+            inner,
+            338,
+            outer,
+            338,
+            Color::new(accent.r, accent.g, accent.b, alpha),
+        );
+        draw.draw_line(
+            inner,
+            343,
+            outer,
+            343,
+            Color::new(accent.r, accent.g, accent.b, alpha / 3),
+        );
+    }
+    presentation::centered(
+        draw,
+        assets,
+        if label == "Fight!" {
+            "EXECUTE COMBAT();"
+        } else {
+            "LINKER // SINCRONIZANDO LUTADORES"
+        },
+        640,
+        464,
+        13.0,
+        accent,
+    );
     let texture = match label {
         "11" => assets.countdown_11.as_ref(),
         "10" => assets.countdown_10.as_ref(),
@@ -3355,7 +3409,7 @@ fn draw_help(draw: &mut impl DrawTarget, font: Option<&Font>) {
     draw_menu_text(
         draw,
         font,
-        "P2: teclado/controle 2; assinatura \\ ou RT  |  R/Start revanche; F9/F10 grava; Esc menu",
+        "P2: teclado/controle 2; assinatura \\ ou RT  |  R reinicia; Esc/Start pausa; F9/F10 grava",
         screen_px(24),
         WINDOW_HEIGHT - screen_px(28),
         15.0,
@@ -3387,6 +3441,85 @@ fn truncate_middle(text: &str, max_chars: usize) -> String {
         .rev()
         .collect::<String>();
     format!("{start}...{end}")
+}
+
+fn draw_energy_bar(
+    draw: &mut impl DrawTarget,
+    world: &World,
+    slot: PlayerSlot,
+    assets: &GameAssets,
+) {
+    use crate::game::energy::EnergyPolicy;
+    let mirrored = slot == PlayerSlot::Two;
+    let x = if mirrored { 738 } else { 32 };
+    let width = 510;
+    let y = 138;
+    let meter = world.energy(slot);
+    let unlimited = world.energy_policy() == EnergyPolicy::Unlimited;
+    let ready = world.cinematic_ready(slot);
+    let accent = if mirrored {
+        presentation::GOLD
+    } else {
+        presentation::CYAN
+    };
+    let fill = if unlimited {
+        width
+    } else {
+        (width as f32 * meter.fraction()).round() as i32
+    };
+    draw.draw_rectangle(x - 2, y - 2, width + 4, 12, Color::new(3, 9, 17, 230));
+    draw.draw_rectangle(x, y, width, 8, Color::new(31, 46, 61, 255));
+    if fill > 0 {
+        let fill_x = if mirrored { x + width - fill } else { x };
+        draw.draw_rectangle_gradient_h(
+            fill_x,
+            y,
+            fill,
+            8,
+            Color::new(accent.r / 3, accent.g / 3, accent.b / 3, 255),
+            accent,
+        );
+    }
+    for segment in 1..10 {
+        draw.draw_rectangle(
+            x + width * segment / 10,
+            y,
+            2,
+            8,
+            Color::new(4, 12, 22, 175),
+        );
+    }
+    if ready {
+        let pulse = ((world.elapsed_seconds * 5.0).sin() * 0.5 + 0.5) * 100.0;
+        draw.draw_rectangle_lines(
+            x - 3,
+            y - 3,
+            width + 6,
+            14,
+            Color::new(accent.r, accent.g, accent.b, (80.0 + pulse) as u8),
+        );
+    }
+    let shortcut = if mirrored { "] / LB+RT" } else { "Y / LB+RT" };
+    let text = if unlimited {
+        format!("ENERGIA LIVRE  //  {shortcut}")
+    } else if ready {
+        format!("CINEMÁTICO PRONTO  //  {shortcut}")
+    } else {
+        format!(
+            "ENERGIA  {:03}/100  //  ACERTE OU DEFENDA PARA CARREGAR",
+            meter.amount()
+        )
+    };
+    draw.draw_rectangle(x - 2, y + 13, width + 4, 22, Color::new(5, 13, 23, 225));
+    presentation::label(
+        draw,
+        assets,
+        &text,
+        x,
+        y + 16,
+        13.0,
+        if ready { accent } else { presentation::MUTED },
+    );
 }
 
 fn draw_health_bar(
@@ -3481,25 +3614,6 @@ fn draw_health_bar(
     let slot_width = menu_text_width(font, slot, 9.0, 1.0);
     let slot_x = if mirrored { x + width - slot_width } else { x };
     draw_menu_text(draw, font, slot, slot_x, screen_px(87), 9.0, accent);
-    let special = if mirrored {
-        "] / LB+RT   CINEMÁTICO"
-    } else {
-        "Y / LB+RT   CINEMÁTICO"
-    };
-    let special_width = menu_text_width(font, special, 10.0, 1.0);
-    let special_x = if mirrored {
-        x
-    } else {
-        x + width - special_width
-    };
-    draw.draw_rectangle(
-        special_x - screen_px(4),
-        screen_px(85),
-        special_width + screen_px(8),
-        screen_px(16),
-        Color::new(3, 9, 20, 176),
-    );
-    draw_menu_text(draw, font, special, special_x, screen_px(87), 10.0, UI_TEXT);
 }
 
 fn draw_projectiles(

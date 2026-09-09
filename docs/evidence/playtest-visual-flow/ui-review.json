@@ -1,0 +1,44 @@
+{
+  "commit": "4f1631fad02fdf24184e8117c0a05332da843690",
+  "source": "capture_roster_flow_review + Raylib renderer",
+  "size": [
+    1280,
+    720
+  ],
+  "selection_video": {
+    "frames": 150,
+    "fps": 60,
+    "interpolation": false,
+    "audio": false
+  },
+  "renderer_log": [
+    "INFO:     > Vendor:   Microsoft Corporation",
+    "INFO:     > Renderer: D3D12 (NVIDIA GeForce RTX 4070 Laptop GPU)",
+    "INFO:     > Version:  3.3 (Core Profile) Mesa 21.2.6"
+  ],
+  "checks": {
+    "public_previews_and_portraits": true,
+    "duke_face_visible": true,
+    "preview_scale_and_pivot_regression": "passed for five real manifests, both orientations",
+    "random_confirmed_identity_stable": true,
+    "energy_ready_earned_from_contacts": 100,
+    "energy_after_accepted_cinematic": 0,
+    "cinematic_title_clear_of_energy": true,
+    "pause_options_readable": true,
+    "result_preserves_fighter_visibility": true
+  },
+  "files": {
+    "roster-rust-java.png": "12a548dcea12599ec265b986bd627f4e4e069723c959770569fd67e0aad62e46",
+    "roster-old-c-python.png": "694eb54c43b68cdedccfc654e71929ea8b3904ca5ddc673ae5f425686170dcf3",
+    "roster-python-cpp.png": "37b22668b178407bf644b0d2d77553b1354cc4b4694472cb2d1e98617a62cdc2",
+    "selection-state-005.png": "bd091db0dff2a31c6a31f16e262fa3cfc940ada6aef8d57b24251856d62b2614",
+    "selection-state-065.png": "45e61896d50ab279fde5c2f0abf1059d972b76f1a36e638e3e215e8b0c3cdd3c",
+    "selection-state-120.png": "af13f491dd7f15c0b149756e539b3ebb744fe1ac8abc1940d9b4a9c90a534f92",
+    "fight-pause.png": "b18f263197f0eb7e3da7d428aa398f3444459fc6ed3540bda22c926e8f0ddba5",
+    "fight-energy.png": "181c22629566311db76663cd0c5625e704e08745c1f43d798f3f6656690a8b0f",
+    "fight-result.png": "c1f076b41833d3995d780988f2afc60d8bdcaa628ef7237062778a12ae2c6cea",
+    "energy-ready.png": "4e3dc1ad36b02430e0e13004d0fcb859da0b31b38ec7114ece9965b4a2c7ff10",
+    "energy-spent.png": "951a183d2ad31c6d2a23c63c856aadb75744e8bd7c681dee996f8de44a3696ae",
+    "roster-motion.mp4": "83e4a492435e75aa24712a9bf7ce471cee8b250e5cee2500f10db37b7b767e4c"
+  }
+}

@@ -217,11 +217,7 @@ fn contact_interrupts_attacks_and_projectiles_and_uses_all_authored_hit_keys_bef
             character.audio_key()
         ))
         .unwrap();
-        let hit_clip = if matches!(character, CharacterId::Python | CharacterId::Cpp) {
-            "reaction_body"
-        } else {
-            "hit"
-        };
+        let hit_clip = "reaction_body";
         let expected_frames: BTreeSet<_> = manifest
             .clip_named(hit_clip)
             .unwrap()
@@ -373,6 +369,7 @@ fn lethal_super_lands_and_holds_each_characters_prone_drawing_without_getting_up
             manifest.clip_named("knockdown").is_some(),
         );
         if character == CharacterId::Go {
+            // Preserve the procedural fallback when optional contact art is absent.
             assert!(pose.rotation_degrees.abs() > 80.0);
             // A lethal grounded sweep has no flight clock to advance before KO.
             let mut grounded_victim = world.player_two.clone();

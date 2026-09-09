@@ -35,6 +35,8 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Visão e produto
 
+- [`docs/26-playtest-visual-completion.md`](docs/26-playtest-visual-completion.md): seleção visual, pausa/revanche, energia e conclusão das reações do elenco.
+
 - [`docs/25-python-cpp-contact-reactions.md`](docs/25-python-cpp-contact-reactions.md): piloto de reações próprias e sincronizadas entre Python e C++.
 
 - [`docs/24-reactions-and-transformations.md`](docs/24-reactions-and-transformations.md): reações dos seis lutadores, Python gigante, notebook/BIOS de C++ e mutação persistente de arena.
@@ -89,6 +91,8 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Decisões registradas
 
+- [`docs/adr/0020-match-flow-selection-and-energy.md`](docs/adr/0020-match-flow-selection-and-energy.md): limites entre seleção, fluxo de partida, apresentação e energia.
+
 - [`docs/adr/0018-contact-reaction-profiles.md`](docs/adr/0018-contact-reaction-profiles.md): perfil e janela visual de cada contato, separados do stun físico.
 
 - [`docs/adr/0017-reaction-clocks-and-arena-mutation.md`](docs/adr/0017-reaction-clocks-and-arena-mutation.md): relógios de reação e arena efetiva no World.
@@ -125,6 +129,12 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ## Amostra atual
 
+[![Seleção Linker com Rust e Java](docs/evidence/playtest-visual-flow/roster-rust-java.png)](docs/evidence/playtest-visual-flow/roster-motion.mp4)
+
+_Seleção com retratos, personagens animados, random e vagas futuras.
+[Vídeo e revisão da interface, energia e pausa](docs/evidence/playtest-visual-flow/README.md).
+[Reações de Rust, Java, Old C e Go](docs/evidence/roster-contact-reactions/README.md)._
+
 [![Python reage ao chute da rajada de C++](docs/evidence/python-cpp-reactions/cpp-barrage-impact.png)](assets/showcase/python-cpp-reactions-2026-09-09.mp4)
 
 _Clique para ver Python e C++ atacando e reagindo: 12 golpes e quatro situações
@@ -133,8 +143,9 @@ de defesa para cada personagem, em 86,3 segundos com áudio.
 [evidências por contato](docs/evidence/python-cpp-reactions/README.md)._
 
 A [amostra anterior de reações e transformações](assets/showcase/reactions-transformations-2026-09-09.mp4)
-preserva os cinco supers, incluindo Rust/Sirius. O piloto atual substitui a
-apresentação de reações de Python/C++; os demais personagens ficam para outra rodada.
+preserva os cinco supers, incluindo Rust/Sirius. O piloto de Python/C++ agora
+se estende a Rust, Java, Old C e Go, com 128 poses novas nos oito perfis de contato.
+[Escopo e verificação desta rodada](docs/26-playtest-visual-completion.md).
 
 A [amostra dos quatro supers da rodada anterior](assets/showcase/authored-supers-2026-09-09.mp4)
 preserva a primeira versão de Duke, Rust, Old C e C++, junto ao
@@ -156,8 +167,9 @@ As fontes e a arte têm procedência em [assets/fonts](assets/fonts/README.md) e
 Cada um dos seis personagens também tem um especial cinematográfico adicional:
 `Y` para P1, `]` para P2, ou `LB` segurado + `RT` no controle. Rust, Duke, Old C, Python e C++
 agora executam sequências de 5–10,5 segundos: a música pausa, os atores são capturados
-e o roteiro assume a luta até a conclusão. Por enquanto são fáceis de acionar,
-inclusive à distância, para testar animação. Segurar defesa na entrada reduz o
+e o roteiro assume a luta até a conclusão. Na luta, exigem 100 de energia;
+Combat Lab e Move Showcase mantêm o uso livre. A captura funciona inclusive à
+distância. Segurar defesa na entrada reduz o
 dano para chip e não deixa morrer por chip. Go mantém contato local.
 Para inspecionar:
 
@@ -174,8 +186,9 @@ provoca #GP, tela azul e BIOS. C++ digita código com ponteiro nulo no notebook,
 atira no pé, aplica a rajada e termina herdando o crash de C. Python se transforma
 em cobra gigante, devora o adversário, volta à forma humana, pula e faz sinal de paz.
 Todos os defensores têm reações animadas com relógio próprio, incluindo queda e
-recuperação ampliadas nos supers. Rust, Old C, Go e C++ receberam vozes de fontes
-diferentes; Duke/Python foram preservados. [Créditos de áudio](assets/audio/ATTRIBUTION.md).
+recuperação ampliadas nos supers. Old C compartilha temporariamente a voz de Rust,
+como autorizado para o playtest; as vozes dos demais personagens foram preservadas.
+[Créditos de áudio](assets/audio/ATTRIBUTION.md).
 
 O [vídeo do acabamento de 8 de setembro](assets/showcase/presentation-polish-2026-09-08.mp4)
 e suas [capturas/verificação](docs/evidence/presentation-polish/README.md)
@@ -214,7 +227,7 @@ As regras propostas estão em [`docs/05-governance.md`](docs/05-governance.md).
 
 ## Rodando o protótipo greybox
 
-O código jogável atual implementa um greybox local para validar o básico: menu principal com submenus de versus, treino, lore/roster e opções, arenas brasileiras em rotação começando pelo Sirius e trocando apenas no início da próxima luta, seleção manual de arena, livro de história carregado de JSON, intro cinematográfica com contagem `11` / `10` / `01` / `Fight!`, personagens com atlas de ações revisadas e placeholders preservados, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, varredura, overhead, anti-air com lançamento, arremesso com troca de lados, ataques aéreos, fireball, cinco especiais de assinatura, seis especiais cinematográficos adicionais, queda com recuperação protegida, primeira identidade mecânica de Rust, Duke/Java, Go, C, Python e C++ por frame data, demo pública ciclando Rust, Duke/Java, C, Python e C++ sem Go no menu, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, stun, pushback, whiff recovery, hitspark, block pulse, trail de projétil, luz de chão em hitstun/blockstun, scanline/glow e animações leves de fundo por arena, vida, vitória e restart.
+O código jogável atual implementa um greybox local para validar o básico: menu principal, seleção visual Linker, treino, lore/roster e opções, arenas brasileiras selecionáveis, pausa e revanche na mesma arena, livro de história carregado de JSON, intro cinematográfica com contagem `11` / `10` / `01` / `Fight!`, personagens com atlas de ações revisadas e placeholders preservados, movimento, pulo diagonal, abaixar, defesa, soco fraco, soco forte, chute, varredura, overhead, anti-air com lançamento, arremesso com troca de lados, ataques aéreos, fireball, cinco especiais de assinatura, seis especiais cinematográficos adicionais, queda com recuperação protegida, primeira identidade mecânica de Rust, Duke/Java, Go, C, Python e C++ por frame data, elenco público com Rust, Duke/Java, C, Python e C++, sem Go no menu, CPU de playtest para um ou dois jogadores, colisão corpo-corpo, hitbox/hurtbox opcional, dano, stun, pushback, whiff recovery, hitspark, block pulse, trail de projétil, luz de chão em hitstun/blockstun, scanline/glow e animações leves de fundo por arena, vida, vitória e restart.
 
 O runtime também já está preparado para áudio por eventos. O manifesto fica em [`assets/audio/audio_manifest.json`](assets/audio/audio_manifest.json), e o guia técnico fica em [`docs/14-audio-pipeline.md`](docs/14-audio-pipeline.md). O pacote inicial inclui SFX/UI/vozes de anúncio, contagem pré-luta, vozes de golpe por personagem com cobertura específica para Rust e Duke/Java, e músicas de menu, Combat Lab e arenas com fontes CC0 registradas em [`assets/audio/ATTRIBUTION.md`](assets/audio/ATTRIBUTION.md). O volume global da música pode ser ajustado em `Options`.
 
@@ -234,20 +247,24 @@ cargo run -- --fight --p1 python --p2 duke
 cargo run -- --fight --p1 cpp --p2 c
 ```
 
-Na primeira abertura, o jogo mostra `Como jogar`; depois abre no menu principal. Use `Setas` ou `W/S` para navegar, `Enter` ou `Espaço` para confirmar, `A/D` ou `←`/`→` para trocar personagem, arena, capítulo, ficha de roster e volume em linhas ajustáveis, e `Esc` para voltar de submenus, luta, Move Showcase, Combat Lab ou Sprite Viewer. O mouse também navega pelos menus: passe sobre uma linha para selecioná-la, clique com o botão esquerdo para confirmar, alternar uma opção ou avançar um valor, e use o botão direito para voltar valores de personagem, arena, capítulo e volume. O cursor nativo permanece visível e livre para sair da janela; em WSL, o cursor `Linker` acompanha o mouse apenas enquanto a janela está em foco e o ponteiro está dentro dela. `Esc` não fecha mais a janela; para sair, use `Exit` ou o botão de fechar da janela.
+Na primeira abertura, o jogo mostra `Como jogar`; depois abre no menu principal. Use `Setas` ou `W/S` para navegar e `Enter` ou `Espaço` para confirmar. O mouse também navega: passe sobre uma opção e clique para confirmar. `Esc` volta das páginas e ferramentas; durante a luta, `Esc` ou `Start` abre a pausa com Continuar, Reiniciar, Trocar personagens e Menu. Para sair do jogo, use `Exit` ou feche a janela. O cursor permanece livre para sair da janela; em WSL, o cursor Linker acompanha o ponteiro apenas enquanto a janela está em foco.
+
+A seleção Linker mostra retratos, os personagens animados em pé e confirmações P1/P2. No modo contra CPU, escolha os dois lados com `WASD`/setas e `Enter`/`A`. No duelo local, P1 usa `WASD` + `F`, P2 usa setas + `Enter`, ou cada jogador usa seu controle; `Espaço` confirma o lado ativo. O mouse permite clicar nos retratos e alternar o lado clicando no painel do jogador. `Tab` troca modo e `Q/E` troca arena; no controle de P1, `Select`/`Back` troca modo e `LB/RB` troca arena. `Random` sorteia uma escolha ao confirmar e as vagas com interrogação ficam reservadas para o futuro. Com ambos confirmados, `Enter`, `Start` ou o botão Lutar inicia a luta. `Esc`/`B` desfaz a confirmação antes de voltar ao menu.
 
 O menu principal mantém a primeira tela simples:
 
-- `Quick Fight`: inicia a luta com a configuração atual.
+- `Quick Fight`: abre a seleção com a configuração atual.
 - `Como jogar`: reabre controles e escolha de modo.
-- `Versus Setup`: escolhe Player 1, Player 2 e arena.
+- `Versus Setup`: abre a seleção visual de personagens, arena e modo.
 - `Training`: abre `Move Showcase`, `Combat Lab` ou `Sprite Viewer`.
 - `Lore / Roster`: abre um livro de programação com capítulos da história e fichas dos personagens.
 - `Options`: liga/desliga gravação local e feature flags de protótipo.
 
-Ao iniciar uma luta, o jogo roda a entrada dos personagens e depois bloqueia input durante a contagem central `11`, `10`, `01`, `Fight!`. A arena só avança para a próxima rotação quando uma nova luta é iniciada depois de uma vitória, para preservar a pose final no mesmo cenário.
+Ao iniciar uma luta, o jogo roda a entrada dos personagens e depois bloqueia input durante a contagem central `11`, `10`, `01`, `Fight!`. A revanche preserva personagens e arena. O resultado oferece Revanche, Trocar personagens e Menu; `R` também reinicia uma luta em andamento.
 
-Por padrão, a luta normal inicia `rust.rs` contra `duke.java` no `Sirius Light Ring` em Campinas, SP. O submenu `Versus Setup` permite ciclar Player 1 e Player 2 entre rust.rs, duke.java, old.c, python.py e cpp.cpp, e escolher a arena pelo nome/contexto/local. Go/Gopher continua no repositório, no CLI, no Combat Lab e no Sprite Viewer, mas saiu da seleção pública da demo por enquanto. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` ou `cpp.cpp`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pelo menu. Rust, Duke/Java, Go, C, Python e C++ já possuem vida, loadout, frame data, voz de ataque e projectile próprios; C joga como fundamentos de alcance/risco, Python como punisher ágil de dano moderado e C++ como herdeira técnica entre alcance de C e ritmo de Python.
+Cada jogador começa com 50 de energia, até o máximo de 100. Acertar ou defender carrega a barra; o cinematográfico consome 100 ao iniciar. Ataques no vazio e o próprio cinematográfico não carregam energia. A assinatura continua independente dessa barra. Combat Lab e Move Showcase mantêm energia livre para revisão; os valores da luta são provisórios, com balanceamento fino em uma rodada posterior.
+
+Por padrão, a luta normal inicia `rust.rs` contra `duke.java` no `Sirius Light Ring` em Campinas, SP. A seleção Linker reúne rust.rs, duke.java, old.c, python.py e cpp.cpp, com retratos derivados da arte atual e escolha de arena pelo nome/local. Go/Gopher continua no repositório, no CLI, no Combat Lab e no Sprite Viewer, mas saiu da seleção pública da demo por enquanto. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` ou `cpp.cpp`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pelo menu. Rust, Duke/Java, Go, C, Python e C++ já possuem vida, loadout, frame data e projectile próprios; Old C compartilha temporariamente a voz de Rust. C joga como fundamentos de alcance/risco, Python como punisher ágil de dano moderado e C++ como herdeira técnica entre alcance de C e ritmo de Python.
 
 O submenu `Lore / Roster` lê [`assets/lore/story.json`](assets/lore/story.json) em runtime. Edite esse arquivo para alterar capítulos, perfis, objetivos ou notas de personagem sem recompilar o jogo; reinicie o processo para recarregar o JSON. Com `CHAPTER` ou `CHARACTER` selecionado, use a roda do mouse ou `PageUp` / `PageDown` para rolar textos longos no capítulo ou na ficha. Os retratos atuais do roster são cards placeholder derivados dos sprites jogáveis.
 
@@ -312,7 +329,7 @@ pnpm tauri dev
 
 Ele usa Tauri 1.8 + React, edita `*.sprite.json` por UI propria, possui file picker nativo, menu desktop, timeline, paineis colapsaveis, tutorial visual, autosave/backup, snap, guias de escala, presets de combat boxes, validacao do runtime e export de review. Detalhes e pre-requisitos ficam em [`docs/18-sprite-studio.md`](docs/18-sprite-studio.md).
 
-Configurações disponíveis em `Versus Setup` e `Options`:
+Configurações disponíveis na seleção Linker e em `Options`:
 
 | Preferência | Padrão | Efeito |
 |---|---|---|

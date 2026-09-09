@@ -1,0 +1,237 @@
+{
+  "reviewed_at_utc": "2026-09-09T19:43:41.540129+00:00",
+  "run_id": 34394289582,
+  "artifact_id": 10121652772,
+  "source_commit": "4f1631fad02fdf24184e8117c0a05332da843690",
+  "artifact_archive_sha256": "11fb7486883b38a05506a83a3f95646601676b013ef463e228ed085074e8138a",
+  "executable_sha256": "42f8eb6afd6709d0db68e9eb23660333c897b49a14d56d2adff951919d7738d8",
+  "method": "Direct visual inspection of all 31 original framebuffer PNGs; roster 07–17 independently reviewed by delegated agent; byte hashes and PNG decoding verified.",
+  "visual_sequence_passed": true,
+  "visually_verified_results": 3,
+  "visually_verified_rematches": 2,
+  "limitations": [
+    "Synthetic keyboard input via XSendEvent; no physical mouse or gamepad validation.",
+    "Runner reported audio disabled because ALSA device was unavailable; no audio listening validation.",
+    "Snapshots verify observed states, not every intermediate input frame or continuous audio timing.",
+    "CI source commit 4f1631f; later source changes require separate equivalence assessment."
+  ],
+  "captures": [
+    {
+      "name": "01-initial-fight",
+      "path": "screenshots/01-initial-fight.png",
+      "sha256": "ab6c29c6f17ee1cf5c494e1b0511704721cb17d62823da0930620d9a6377fabf",
+      "elapsed_seconds": 10.757,
+      "observed_state": "Rust vs Java in Sirius; full health; energy 50/100 each."
+    },
+    {
+      "name": "02-pause",
+      "path": "screenshots/02-pause.png",
+      "sha256": "9a8b45f191b139299723e087feeaae45209ceb89489b7e5de2fedcca427a2a52",
+      "elapsed_seconds": 11.979,
+      "observed_state": "Pause with Continue selected; Rust/Java fight behind overlay."
+    },
+    {
+      "name": "03-pause-held",
+      "path": "screenshots/03-pause-held.png",
+      "sha256": "ddfdbc71fde4b4297ce6e3b4354f70775a3ddca04f48f8ebcdaaceb613b17ba3",
+      "elapsed_seconds": 14.718,
+      "observed_state": "Continue remains selected after wait; visible fighter poses and HUD match prior pause."
+    },
+    {
+      "name": "04-resumed",
+      "path": "screenshots/04-resumed.png",
+      "sha256": "1c0c0fa36f90199307d3fc6b1fba3fa3ae0377659d3e5fc897bbdae193cf7a08",
+      "elapsed_seconds": 15.939,
+      "observed_state": "Pause closed; Rust/Java continue in Sirius; Java pose and position have advanced."
+    },
+    {
+      "name": "05-restart-highlight",
+      "path": "screenshots/05-restart-highlight.png",
+      "sha256": "255be19f798cce0f005c98b3763e87c30478246a1e9b38d4c84968e5af2766bd",
+      "elapsed_seconds": 17.648,
+      "observed_state": "Pause with Restart selected; Rust health 90/100 and energy 58/100."
+    },
+    {
+      "name": "06-restarted-entry",
+      "path": "screenshots/06-restarted-entry.png",
+      "sha256": "b24f59226e1d25b165a59483cf0481b70da681f4041bee56cecd0cb62ac2e5ce",
+      "elapsed_seconds": 18.868,
+      "observed_state": "Rust/Java new entry; full health 100/100 and 112/112; energy 50/100 each."
+    },
+    {
+      "name": "07-roster",
+      "path": "screenshots/07-roster.png",
+      "sha256": "61581f733e03c9ef978b22bb42f54fd912634b325335ca91b16c77b6293bcc68",
+      "elapsed_seconds": 21.993,
+      "observed_state": "Rust/Duke roster; five available fighters, Random and two future slots."
+    },
+    {
+      "name": "08-future-slot",
+      "path": "screenshots/08-future-slot.png",
+      "sha256": "9cfa174daa929f9b613081ddb3a9adbe39335b05909f75e95cbe4679f0d1dda1",
+      "elapsed_seconds": 24.185,
+      "observed_state": "P1 future slot highlighted; unavailable placeholder; no confirmation."
+    },
+    {
+      "name": "09-future-rejected",
+      "path": "screenshots/09-future-rejected.png",
+      "sha256": "a4299e2c076cb1df13bc281bb6a72068191e687fd48ba8b411cb9fa736b2f6be",
+      "elapsed_seconds": 25.402,
+      "observed_state": "P1 future slot still unavailable and unconfirmed after Enter; no match launched."
+    },
+    {
+      "name": "10-random-preview",
+      "path": "screenshots/10-random-preview.png",
+      "sha256": "de90a85879776645ef7081dc324578af93f073a16149454ec5cc4cb133e6634f",
+      "elapsed_seconds": 26.625,
+      "observed_state": "Random cursor selected; Old C preview."
+    },
+    {
+      "name": "11-random-confirmed",
+      "path": "screenshots/11-random-confirmed.png",
+      "sha256": "aeeeaae53afe0989ea012433f50c90944033d89d4245ba225d8e5c5f740f4cbf",
+      "elapsed_seconds": 27.842,
+      "observed_state": "P1 Random resolved to Duke and confirmed; P2 active."
+    },
+    {
+      "name": "12-random-stable",
+      "path": "screenshots/12-random-stable.png",
+      "sha256": "611fbdd102fea324b7dc9dde866eab85d3a57b6719c25c6771d8fcdca9dd2add",
+      "elapsed_seconds": 29.577,
+      "observed_state": "P1 still Duke and confirmed after wait; idle pose changes."
+    },
+    {
+      "name": "13-both-confirmed",
+      "path": "screenshots/13-both-confirmed.png",
+      "sha256": "ae53a2eeeb811a078a8ea739e715d8b251ee19c0dd4d6f37354854f0cf14752b",
+      "elapsed_seconds": 31.284,
+      "observed_state": "Duke vs Old C; both confirmed and launch enabled."
+    },
+    {
+      "name": "14-local-mode",
+      "path": "screenshots/14-local-mode.png",
+      "sha256": "26a113bba7e301b61fb9e2c07b46c4a4c74d678a2205b44f083269317b58dbbf",
+      "elapsed_seconds": 32.506,
+      "observed_state": "Local Duel mode; both confirmations reset."
+    },
+    {
+      "name": "15-local-both-confirmed",
+      "path": "screenshots/15-local-both-confirmed.png",
+      "sha256": "b94e313b7095635734834f95c804fa8072700bbee59df7c1d2478eae59fcbff2",
+      "elapsed_seconds": 34.212,
+      "observed_state": "Local Duel; C++ vs Old C both confirmed after F then Enter."
+    },
+    {
+      "name": "16-demo-ready",
+      "path": "screenshots/16-demo-ready.png",
+      "sha256": "787649e2674435e51ed7e2fc7bf8f747acbc09634b0e95cb02bfaeccc8237398",
+      "elapsed_seconds": 36.885,
+      "observed_state": "CPU vs CPU; Rust vs Old C both confirmed; Tech Coast Beacon/Fortaleza."
+    },
+    {
+      "name": "17-demo-entry",
+      "path": "screenshots/17-demo-entry.png",
+      "sha256": "1083204aba44a6c02d8dbd4f0182c707767b57ac2f99654659e88e9eec2ebabf",
+      "elapsed_seconds": 37.859,
+      "observed_state": "Rust vs Old C entry in Tech Coast Beacon; full health and energy 50; reveal covers HUD edges temporarily."
+    },
+    {
+      "name": "18-match-1-pause",
+      "path": "screenshots/18-match-1-pause.png",
+      "sha256": "dc7141f23ffe115177101de9583b246caf836ea994973441eddd7880c9fc6bb7",
+      "elapsed_seconds": 43.078,
+      "observed_state": "Pause with Continue selected, Rust/Old C in Tech Coast Beacon; full health and energy 50."
+    },
+    {
+      "name": "18-match-1-resumed",
+      "path": "screenshots/18-match-1-resumed.png",
+      "sha256": "75006923e571d9e65d9efdd3cc268662646f79df23da3707d57cc4f8c37b868b",
+      "elapsed_seconds": 45.297,
+      "observed_state": "Pause closed, Fight countdown completes; same Rust/Old C matchup and arena, full viewport/HUD."
+    },
+    {
+      "name": "18-match-1-mid",
+      "path": "screenshots/18-match-1-mid.png",
+      "sha256": "ad190319aba62d28d3e9ed790e5b8ee667411084c4199a0e35688e8e54fe7947",
+      "elapsed_seconds": 79.534,
+      "observed_state": "Result already visible: Rust won, 95/100 health; Old C 0/104; energy-ready indicators; three result actions."
+    },
+    {
+      "name": "19-match-1-result-candidate",
+      "path": "screenshots/19-match-1-result-candidate.png",
+      "sha256": "9c486a1c1d649197687a1ea55e6226b618ce3c5360184a4fa830ed2bffca0cba",
+      "elapsed_seconds": 117.772,
+      "observed_state": "Actual result: Rust won, 95/100 health; Old C 0/104; Rematch selected; same arena."
+    },
+    {
+      "name": "20-rematch-1-entry",
+      "path": "screenshots/20-rematch-1-entry.png",
+      "sha256": "f29c6d60a21b300b6589ede3cebcc1a0e6d5afdf4c44614314c4b89eca497a15",
+      "elapsed_seconds": 118.744,
+      "observed_state": "New Rust/Old C entry in same Tech Coast Beacon arena; health reset 100/100 and 104/104, energy 50/100 each; reveal briefly covers edges."
+    },
+    {
+      "name": "18-match-2-pause",
+      "path": "screenshots/18-match-2-pause.png",
+      "sha256": "ea9dc825122f9ed86230ab01841043ed780ab776013e19054d56abc5e3c77f62",
+      "elapsed_seconds": 123.966,
+      "observed_state": "Pause with Continue selected, Rust/Old C in Tech Coast Beacon; full health and energy 50."
+    },
+    {
+      "name": "18-match-2-resumed",
+      "path": "screenshots/18-match-2-resumed.png",
+      "sha256": "2f585fe9bf586904fdcfcb9df29354e09385972797debb9481efdab5c11837e6",
+      "elapsed_seconds": 126.189,
+      "observed_state": "Pause closed, Fight countdown completes; same Rust/Old C matchup and arena, full viewport/HUD."
+    },
+    {
+      "name": "18-match-2-mid",
+      "path": "screenshots/18-match-2-mid.png",
+      "sha256": "b9c80f17b789ada8e4c237d6128cba51657ba826abbda617d4be870e3da2f759",
+      "elapsed_seconds": 160.424,
+      "observed_state": "Result already visible: Rust won, 95/100 health; Old C 0/104; energy-ready indicators; three result actions."
+    },
+    {
+      "name": "19-match-2-result-candidate",
+      "path": "screenshots/19-match-2-result-candidate.png",
+      "sha256": "888d51db6f150633231e0a07ae0272a827598b7e99d738902d7ef6644a52cd16",
+      "elapsed_seconds": 198.664,
+      "observed_state": "Actual result: Rust won, 95/100 health; Old C 0/104; Rematch selected; same arena."
+    },
+    {
+      "name": "20-rematch-2-entry",
+      "path": "screenshots/20-rematch-2-entry.png",
+      "sha256": "74d98e798779c4f81326dfb78219da9e34fa2f3b7a4718d3d6d0a72dc78f367e",
+      "elapsed_seconds": 199.634,
+      "observed_state": "New Rust/Old C entry in same Tech Coast Beacon arena; health reset 100/100 and 104/104, energy 50/100 each; reveal briefly covers edges."
+    },
+    {
+      "name": "18-match-3-pause",
+      "path": "screenshots/18-match-3-pause.png",
+      "sha256": "078b85c5133c448f41936e46c2b1ccc12e49f781c44c8329d877be723c12f0b2",
+      "elapsed_seconds": 204.853,
+      "observed_state": "Pause with Continue selected, Rust/Old C in Tech Coast Beacon; full health and energy 50."
+    },
+    {
+      "name": "18-match-3-resumed",
+      "path": "screenshots/18-match-3-resumed.png",
+      "sha256": "0a5d74145ff025e1ef9c81db9b5150ef035f68a61512bf03172ffed5cfcb3124",
+      "elapsed_seconds": 207.076,
+      "observed_state": "Pause closed, Fight countdown completes; same Rust/Old C matchup and arena, full viewport/HUD."
+    },
+    {
+      "name": "18-match-3-mid",
+      "path": "screenshots/18-match-3-mid.png",
+      "sha256": "c4355b03f29b46128c19c2dff509a2926a299612f23842d0ff306c10cc0488e1",
+      "elapsed_seconds": 241.317,
+      "observed_state": "Result already visible: Rust won, 95/100 health; Old C 0/104; energy-ready indicators; three result actions."
+    },
+    {
+      "name": "19-match-3-result-candidate",
+      "path": "screenshots/19-match-3-result-candidate.png",
+      "sha256": "19bb57b6dc2b707d411d59f2006a93489910bc339ccf99764ad624689432eed5",
+      "elapsed_seconds": 279.553,
+      "observed_state": "Actual result: Rust won, 95/100 health; Old C 0/104; Rematch selected; same arena."
+    }
+  ]
+}
