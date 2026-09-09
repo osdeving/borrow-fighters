@@ -8,7 +8,7 @@ use std::{fs, path::PathBuf, process::Command};
 use borrow_fighters::{
     audio::AudioBank,
     characters::{CHARACTER_BODY_METRICS_PATH, CharacterBodyMetricsCatalog},
-    engine::{audio::AUDIO_MANIFEST_PATH, sprites::SpriteManifest},
+    engine::{assets::ARENA_SIRIUS_PATH, audio::AUDIO_MANIFEST_PATH, sprites::SpriteManifest},
     lore::{LORE_BOOK_PATH, LoreBook},
     runtime_paths::{asset_path, capture_dir, data_dir},
 };
@@ -25,7 +25,7 @@ fn bundled_resources_load_after_relocation_and_launch_from_another_directory() {
             .unwrap()
             .as_nanos()
     ));
-    let bundle = temporary.join("portable game");
+    let bundle = temporary.join("Jogo ação çãõ 日本語");
     let bin = bundle.join("bin");
     let launch_directory = temporary.join("unrelated launch folder");
     fs::create_dir_all(&bin).unwrap();
@@ -35,6 +35,8 @@ fn bundled_resources_load_after_relocation_and_launch_from_another_directory() {
         LORE_BOOK_PATH,
         CHARACTER_BODY_METRICS_PATH,
         "assets/placeholder/rust-fighter.sprite.json",
+        ARENA_SIRIUS_PATH,
+        "assets/placeholder/fighter-greybox-spritesheet.png",
     ] {
         let target = bundle.join(relative);
         fs::create_dir_all(target.parent().unwrap()).unwrap();
@@ -87,6 +89,19 @@ fn relocated_resource_probe() {
     let sprite = SpriteManifest::load(&sprite_path).unwrap();
     assert!(sprite.image_path(&sprite_path).starts_with(&root));
     SpriteManifest::load("custom.sprite.json").unwrap();
+
+    // Rust's JSON/file APIs already handle Unicode on Windows. Decode through
+    // Raylib too: its C file loader used to reject the exact same resolved paths.
+    // Loading into CPU memory requires neither an OpenGL window nor a display.
+    for relative in [
+        ARENA_SIRIUS_PATH,
+        "assets/placeholder/fighter-greybox-spritesheet.png",
+    ] {
+        let path = asset_path(relative);
+        let image = raylib::prelude::Image::load_image(&path.to_string_lossy())
+            .unwrap_or_else(|error| panic!("Raylib could not decode {}: {error}", path.display()));
+        assert!(image.width > 0 && image.height > 0);
+    }
 
     assert_eq!(data_dir(), root.parent().unwrap().join("user data"));
     assert!(

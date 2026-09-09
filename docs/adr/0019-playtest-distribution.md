@@ -2,7 +2,8 @@
 
 ## Status
 
-Aceita para `v0.1.0-prototype.1`.
+Aceita para `v0.1.0-prototype.1`; complementada em `v0.1.0-prototype.2`
+para caminhos Unicode no Windows.
 
 ## Contexto
 
@@ -45,7 +46,32 @@ para qualquer distribuição, arquitetura ou versão antiga da libc.
 
 Sem macOS, autoatualizador, servidor online, AppImage, remapeamento de input
 ou mudanças de combate neste corte. As limitações e a verificação por
-plataforma ficam nas [notas da versão](../releases/v0.1.0-prototype.1.md).
+plataforma ficam nas [notas atuais](../releases/v0.1.0-prototype.2.md);
+as [notas iniciais](../releases/v0.1.0-prototype.1.md) permanecem como histórico.
+
+## Complemento — Caminhos Unicode no Windows
+
+O playtest de `v0.1.0-prototype.1` revelou que uma pasta como `Jogo ação çãõ`
+era lida corretamente por Rust, mas as APIs C de imagem e áudio interpretavam
+os caminhos UTF-8 na página de código local do Windows. O fallback preservava
+a luta com blocos e linhas do cenário, escondendo a falha de carregamento.
+
+O executável passa a incorporar [`packaging/windows/app.manifest`](../../packaging/windows/app.manifest),
+com `activeCodePage=UTF-8`, pelo [`build.rs`](../../build.rs).
+A configuração vale para o processo do jogo, sem pedir alteração da
+localidade do sistema. Windows 10 versão 1903+ ou Windows 11 passam a ser a
+base mínima: [a documentação da Microsoft](https://learn.microsoft.com/en-us/windows/apps/design/globalizing/use-utf8-code-page)
+define o suporte à página de código UTF-8 por manifesto a partir dessa versão.
+O requisito gráfico continua OpenGL 3.3; Linux mantém glibc 2.35+, X11/XWayland
+e driver OpenGL 3.3.
+
+A regressão em [`tests/runtime_paths.rs`](../../tests/runtime_paths.rs) atravessa
+a API nativa `Image::load_image` do Raylib em caminhos com espaços e acentos,
+sem precisar de uma janela ou GPU. Testar só existência de arquivo ou JSON por
+`std::fs` não cobre esta falha. No teste nativo do pacote em `Jogo ação çãõ`,
+a aplicação do manifesto restaurou 58 texturas, 86 sons e oito músicas.
+Essa evidência complementa os testes de instalação e a inspeção visual da luta.
+Cada novo pacote deve preservar o manifesto no executável e a regressão nativa.
 
 ## Alternativas consideradas
 

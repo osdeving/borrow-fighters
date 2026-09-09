@@ -106,21 +106,45 @@ jobs:
         env:
           RELEASE_VERSION: ${{ steps.version.outputs.version }}
         run: python tools/release/package.py windows --stage dist/stage --version $env:RELEASE_VERSION --output dist
-      - name: Verify Windows installation and executable loading
+      - name: Verify Windows installer and ZIP in accented paths
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
+          $mt = Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin\*\x64\mt.exe" | Sort-Object FullName -Descending | Select-Object -First 1
+          if (!$mt) { throw 'Windows SDK mt.exe is required to inspect the embedded application manifest' }
+          $expectedHash = (Get-FileHash 'dist/stage/borrow-fighters.exe' -Algorithm SHA256).Hash
+          function Assert-PackagedExecutable([string] $executable, [string] $label) {
+            if ((Get-FileHash -LiteralPath $executable -Algorithm SHA256).Hash -ne $expectedHash) {
+              throw "$label executable differs from the staged build"
+            }
+            $manifestPath = Join-Path $env:RUNNER_TEMP "$label-app.manifest"
+            & $mt.FullName '-nologo' "-inputresource:$executable;#1" "-out:$manifestPath"
+            if ($LASTEXITCODE -ne 0) { throw "Could not extract $label application manifest" }
+            [xml] $manifest = Get-Content -LiteralPath $manifestPath -Raw
+            $codePage = $manifest.SelectSingleNode("//*[local-name()='activeCodePage' and namespace-uri()='http://schemas.microsoft.com/SMI/2019/WindowsSettings']")
+            if (!$codePage -or $codePage.InnerText.Trim() -ne 'UTF-8') {
+              throw "$label executable must embed activeCodePage=UTF-8 for accented asset paths"
+            }
+            python tools/release/package.py verify --stage (Split-Path -Parent $executable)
+            if ($LASTEXITCODE -ne 0) { throw "$label packaged asset verification failed" }
+            # --help checks process loading without requiring a graphics context.
+            $game = Start-Process $executable -ArgumentList '--help' -WorkingDirectory $env:RUNNER_TEMP -Wait -PassThru
+            if ($game.ExitCode -ne 2) { throw "$label executable failed to load: $($game.ExitCode)" }
+          }
           $installer = (Get-ChildItem dist/*-setup.exe).FullName
-          $installDir = Join-Path $env:RUNNER_TEMP 'Borrow Fighters Installed'
+          $installDir = Join-Path $env:RUNNER_TEMP 'Jogo ação instalado'
           $install = Start-Process $installer -ArgumentList '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', "/DIR=`"$installDir`"" -Wait -PassThru
           if ($install.ExitCode -ne 0) { throw "Installer failed: $($install.ExitCode)" }
-          if (!(Test-Path "$installDir/assets/lore/story.json")) { throw 'Installed assets missing' }
-          # The parser exits 2 for --help, before requesting a graphical context.
-          # This verifies loader/runtime dependencies on the Windows runner.
-          $game = Start-Process "$installDir/borrow-fighters.exe" -ArgumentList '--help' -WorkingDirectory $env:RUNNER_TEMP -Wait -PassThru
-          if ($game.ExitCode -ne 2) { throw "Executable failed to load: $($game.ExitCode)" }
+          Assert-PackagedExecutable "$installDir/borrow-fighters.exe" 'installed'
           $uninstall = Start-Process "$installDir/unins000.exe" -ArgumentList '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART' -Wait -PassThru
           if ($uninstall.ExitCode -ne 0) { throw "Uninstaller failed: $($uninstall.ExitCode)" }
+          $portableDir = Join-Path $env:RUNNER_TEMP 'Jogo ação portátil'
+          $portableZip = @(Get-ChildItem dist/*windows-x86_64.zip)
+          if ($portableZip.Count -ne 1) { throw 'Expected exactly one portable Windows ZIP' }
+          Expand-Archive -LiteralPath $portableZip[0].FullName -DestinationPath $portableDir
+          $portableExe = @(Get-ChildItem -LiteralPath $portableDir -Filter 'borrow-fighters.exe' -Recurse)
+          if ($portableExe.Count -ne 1) { throw 'Expected exactly one extracted game executable' }
+          Assert-PackagedExecutable $portableExe[0].FullName 'portable'
       - name: Stage Linux files
         if: runner.os == 'Linux'
         env:

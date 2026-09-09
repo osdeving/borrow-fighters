@@ -6,7 +6,7 @@ Você não precisa instalar Rust, Cargo ou ferramentas de desenvolvimento.
 
 ## Abrir o jogo
 
-- **Windows 10/11, 64 bits:** execute o instalador `-setup.exe`. Ele instala
+- **Windows 10 (versão 1903+) ou Windows 11, 64 bits:** execute o instalador `-setup.exe`. Ele instala
   somente para seu usuário e cria atalhos. Se preferir o ZIP portátil, extraia
   **toda a pasta** e abra `borrow-fighters.exe` dentro dela.
 - **Ubuntu 22.04+, Debian 12+ e derivados, 64 bits:** instale o `.deb` com
@@ -21,6 +21,10 @@ Linux precisa de desktop com X11 ou XWayland, glibc 2.35+ e driver com OpenGL
 o cliente também funciona com a compatibilidade PulseAudio do PipeWire. Drivers gráficos,
 servidor de áudio e componentes do sistema continuam pertencendo ao sistema.
 Windows também precisa de driver com OpenGL 3.3.
+
+A versão `v0.1.0-prototype.2` corrige imagens e áudio ao instalar ou extrair
+o jogo em pastas com acentos. Se a primeira versão mostrou lutadores em blocos
+ou cenários sem imagens, baixe o pacote atualizado e extraia toda a pasta.
 
 Os executáveis ainda não têm assinatura digital; o Windows pode mostrar um
 aviso de editor desconhecido. Baixe somente da página oficial de releases.

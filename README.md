@@ -6,11 +6,14 @@ Status: **Prototype 0.1 / Greybox jogável / Vertical slice em evolução**
 
 ## Baixar e jogar (sem instalar Rust)
 
-A primeira versão distribuível é **v0.1.0-prototype.1**, uma pré-release para
-playtest. [Abra os downloads e as instruções da release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.1):
-instalador/ZIP para Windows 10/11, DEB para Debian/Ubuntu, RPM para Fedora e
+A versão do playtest é **v0.1.0-prototype.2**, com correção do carregamento de
+imagens e áudio em pastas com acentos no Windows.
+[Abra os downloads e as instruções da release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.2):
+instalador/ZIP para Windows 10 (1903+) ou 11, DEB para Debian/Ubuntu, RPM para Fedora e
 arquivo portátil para Linux, todos em x86_64. Extraia a pasta inteira se escolher
 a versão portátil. Os arquivos necessários do jogo acompanham os pacotes.
+Todos precisam de driver com OpenGL 3.3. No Linux, a base é glibc 2.35+
+e desktop com X11 ou XWayland.
 
 Na primeira abertura, **Como jogar** apresenta os controles e permite escolher
 CPU, duelo local ou assistir à demo. O guia pode ser reaberto pelo menu.
@@ -18,7 +21,7 @@ A entrada normal deixa P1 manual contra CPU; `Quick Fight` usa a configuração
 atual. O código e as ferramentas de desenvolvimento continuam descritos abaixo.
 
 Jogue por dez minutos e [conte o que funcionou e o que ficou confuso](https://github.com/osdeving/borrow-fighters/issues/new/choose).
-[Notas do playtest](docs/releases/v0.1.0-prototype.1.md) ·
+[Notas do playtest](docs/releases/v0.1.0-prototype.2.md) ·
 [Como gerar os pacotes](docs/06-release-process.md) ·
 [Decisão de distribuição](docs/adr/0019-playtest-distribution.md).
 

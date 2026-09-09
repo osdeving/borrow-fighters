@@ -27,6 +27,13 @@ Aponte também `CMAKE_TOOLCHAIN_FILE` para o caminho absoluto de
 o mesmo runtime estático `/MT` (a política CMP0091 do CMake separa essa escolha
 das flags do Rust). O workflow configura as duas opções.
 
+O executável também incorpora `activeCodePage=UTF-8` no manifesto do Windows
+para que o Raylib abra imagens e áudio quando a pasta contém acentos. Esse
+recurso exige **Windows 10 versão 1903 (build 18362) ou posterior, incluindo
+Windows 11**, tanto no instalador quanto no ZIP portátil. O instalador verifica
+essa versão mínima. A [documentação da Microsoft](https://learn.microsoft.com/en-us/windows/apps/design/globalizing/use-utf8-code-page)
+descreve a configuração por processo; o pacote não altera a localidade do sistema.
+
 Artefatos gerados, usando `0.1.0-prototype.1` como exemplo:
 
 | Plataforma | Arquivo |
@@ -48,7 +55,8 @@ no diretório pessoal controlado pelo runtime.
 ## Requisitos do ambiente de build
 
 O Windows precisa de Rust MSVC, Visual Studio Build Tools, CMake, LLVM/libclang
-e Inno Setup 6. No Ubuntu 22.04, além das dependências Rust/Raylib do CI, o
+e Inno Setup 6. O CI também usa `mt.exe`, do Windows SDK, para extrair e conferir
+o manifesto incorporado ao executável entregue. No Ubuntu 22.04, além das dependências Rust/Raylib do CI, o
 empacotamento usa `rpm`, `dpkg-deb`, `readelf`, `ldd`, `ldconfig`, `apt-get`,
 `libx11-xcb1`, `libxxf86vm1`, `libxrender1`, `libxext6`, `libasound2-data` e
 `libpulse0`.
@@ -102,5 +110,10 @@ separado.
 as bibliotecas incorporadas. O workflow também testa instalação/desinstalação,
 abertura Linux sob Xvfb e instalação do RPM em Fedora. O teste de carga
 `--help` termina com código 2 conforme o parser atual e não abre uma janela.
+No Windows, o instalador e o ZIP são abertos em pastas com espaços e acentos
+(`Jogo ação instalado` e `Jogo ação portátil`): o CI confere os assets e seus
+hashes, compara o executável com o staging e exige `activeCodePage=UTF-8` no
+manifesto extraído de cada cópia. Essa verificação recusa o executável sem a
+configuração responsável pelo carregamento de arquivos nesses caminhos.
 Teste visual nativo de controles, GPU, áudio e primeira abertura continua
 fazendo parte do [processo de release](../docs/06-release-process.md).

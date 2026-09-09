@@ -2,21 +2,25 @@
 
 ## Estado atual
 
-O primeiro pacote para playtest é `v0.1.0-prototype.1`, estabilizado em
-`release/v0.1.0-prototype.1`. A [ADR 0019](adr/0019-playtest-distribution.md)
+O corte atual é `v0.1.0-prototype.2`: corrige imagens e áudio ausentes ao abrir
+o jogo em pastas com acentos no Windows. A estabilização continua na branch
+`release/v0.1.0-prototype.1`, pelo PR #18. A [ADR 0019](adr/0019-playtest-distribution.md)
 registra as decisões de plataforma, bibliotecas, assets e primeira abertura.
-As [notas da versão](releases/v0.1.0-prototype.1.md) explicam a entrega ao jogador.
+As [notas da versão](releases/v0.1.0-prototype.2.md) explicam a entrega ao jogador;
+as [notas do primeiro pacote](releases/v0.1.0-prototype.1.md) ficam como histórico.
 
 ## Downloads
 
 | Plataforma | Pacotes | Base de compatibilidade |
 |---|---|---|
-| Windows x86_64 | Instalador Inno Setup e ZIP portátil | Windows 10/11, driver OpenGL 3.3 |
+| Windows x86_64 | Instalador Inno Setup e ZIP portátil | Windows 10 1903+ ou Windows 11, driver OpenGL 3.3 |
 | Debian/Ubuntu x86_64 | DEB | Debian 12+, Ubuntu 22.04+ e derivados |
 | Fedora x86_64 | RPM | Fedora 44 como ambiente de verificação |
 | Linux x86_64 | tar.gz portátil | glibc 2.35+, X11/XWayland e driver OpenGL 3.3 |
 
 Windows usa Raylib e CRT estáticos, com instalação por usuário e desinstalador.
+O executável incorpora um manifesto com `activeCodePage=UTF-8`, para as APIs
+nativas abrirem imagens e áudio em caminhos como `Jogos/ação çãõ`.
 Linux inclui bibliotecas redistribuíveis de X11/áudio; libc e drivers gráficos
 permanecem no sistema. Os pacotes incluem os assets usados pelo runtime e suas
 referências transitivas, sem vídeos de revisão e materiais de produção.
@@ -31,10 +35,13 @@ Os textos `LICENSE-MIT`/`LICENSE-APACHE` formalizam a escolha já declarada no
 Manter a versão idêntica em `Cargo.toml`, `Cargo.lock` e tag, por exemplo:
 
 ```text
-0.1.0-prototype.1
-v0.1.0-prototype.1
+0.1.0-prototype.2
+v0.1.0-prototype.2
 release/v0.1.0-prototype.1
 ```
+
+A tag e o pacote avançam para cada correção publicada; a branch de estabilização
+pode continuar com o nome do corte inicial até o merge do PR.
 
 Conventional Commits continuam sendo usados. A branch de release recebe apenas
 empacotamento, instruções, correções e estabilização do corte jogável. O retorno
@@ -58,6 +65,9 @@ O job de publicação recebe `contents: write`; builds usam apenas leitura.
 Uma release já publicada não é sobrescrita pelo workflow. Correções posteriores
 recebem nova versão/tag; um rascunho de tentativa interrompida pode ser retomado.
 Os smoke tests automatizados não substituem playtest humano com GPU e gamepads.
+No Windows, validar também o carregamento nativo de PNG em caminhos com espaços
+e acentos: conferir apenas `std::fs`, JSON ou existência de arquivos não detecta
+a diferença de codificação nas chamadas C usadas pelo Raylib.
 
 ## Preparar e publicar
 
@@ -74,8 +84,8 @@ Os smoke tests automatizados não substituem playtest humano com GPU e gamepads.
 Exemplo de publicação após os checks:
 
 ```sh
-git tag -a v0.1.0-prototype.1 -m 'release: first downloadable playtest'
-git push origin v0.1.0-prototype.1
+git tag -a v0.1.0-prototype.2 -m 'release: fix Windows Unicode asset paths'
+git push origin v0.1.0-prototype.2
 ```
 
 A solicitação explícita do responsável por publicar a release autoriza esse
@@ -101,6 +111,7 @@ correspondente em `SHA256SUMS.txt`.
 - Versão e escopo registrados; changelog e notas coerentes com o código.
 - Builds, testes e empacotamento aprovados em ambas as plataformas.
 - Executável abre fora do checkout, com assets completos e dados graváveis.
+- No Windows, PNG e áudio carregam em uma pasta com espaços e acentos.
 - Guia inicial explica como assumir um jogador, reiniciar e sair.
 - Créditos e limitações conhecidos acompanham o download.
 - Cinco pacotes e checksums disponíveis na mesma GitHub pré-release.

@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.1.0-prototype.2 — Assets em pastas com acentos no Windows
+
+- Corrige imagens e áudio ausentes quando a pasta de instalação ou de usuário
+  contém acentos. Antes, a luta podia mostrar lutadores em blocos e apenas
+  linhas do cenário, embora os arquivos estivessem no pacote.
+- Incorpora `activeCodePage=UTF-8` ao executável Windows e adiciona regressão
+  do carregamento nativo de imagem em caminhos Unicode. Requer Windows 10
+  1903+ ou Windows 11.
+- Mantém o conteúdo do playtest; [instruções e downloads da correção](docs/releases/v0.1.0-prototype.2.md).
+
 ## v0.1.0-prototype.1 — Distribuição para playtest
 
 - Instalador por usuário e ZIP para Windows x86_64; DEB, RPM e tar.gz para Linux.
