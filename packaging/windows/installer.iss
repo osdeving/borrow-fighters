@@ -38,7 +38,7 @@ Source: "{#StageDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs c
 
 [Icons]
 Name: "{group}\Borrow Fighters"; Filename: "{app}\borrow-fighters.exe"; WorkingDir: "{app}"
-Name: "{group}\Como jogar"; Filename: "{app}\JOGUE-PRIMEIRO.md"
+Name: "{group}\Como jogar"; Filename: "{sys}\notepad.exe"; Parameters: """{app}\JOGUE-PRIMEIRO.md"""
 Name: "{userdesktop}\Borrow Fighters"; Filename: "{app}\borrow-fighters.exe"; WorkingDir: "{app}"; Tasks: desktopicon
 
 [Run]

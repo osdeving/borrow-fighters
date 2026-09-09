@@ -212,6 +212,11 @@ jobs:
           python3 - <<'PY'
           import hashlib, pathlib
           root = pathlib.Path('dist')
+          # Keep prerelease ordering inside DEB/RPM metadata, while using simple
+          # download names that GitHub will preserve verbatim for the checksums.
+          for path in root.iterdir():
+              if '~' in path.name:
+                  path.rename(path.with_name(path.name.replace('~', '-')))
           for suffix in ('.zip', '-setup.exe', '.tar.gz', '.deb', '.rpm'):
               matches = list(root.glob('*' + suffix))
               if len(matches) != 1:

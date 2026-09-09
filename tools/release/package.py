@@ -413,7 +413,10 @@ def windows_packages(args):
     validate_assets(stage)
     output.mkdir(parents=True, exist_ok=True)
     stem = f"borrow-fighters-{args.version}-windows-x86_64"
-    with zipfile.ZipFile(output / f"{stem}.zip", "w", zipfile.ZIP_DEFLATED) as archive:
+    # Cargo source archives can use reproducible timestamps older than 1980.
+    # ZIP clamps only the date; the original license bytes remain unchanged.
+    with zipfile.ZipFile(output / f"{stem}.zip", "w", zipfile.ZIP_DEFLATED,
+                         strict_timestamps=False) as archive:
         for file in sorted(stage.rglob("*")):
             if file.is_file():
                 archive.write(file, f"{stem}/{file.relative_to(stage).as_posix()}")
