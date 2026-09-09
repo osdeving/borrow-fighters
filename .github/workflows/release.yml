@@ -88,12 +88,30 @@ jobs:
         run: cargo build --locked --release --bin borrow-fighters
       - name: Capture roster and match flow for manual visual review
         if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch'
-        run: xvfb-run -a cargo run --locked --example capture_roster_flow_review -- dist/visual-review
+        run: |
+          cargo build --locked --example capture_roster_flow_review --example capture_roster_contacts
+          xvfb-run -a target/$CARGO_BUILD_TARGET/debug/examples/capture_roster_flow_review dist/visual-review
+          mkdir -p dist/review-tools
+          cp target/$CARGO_BUILD_TARGET/debug/examples/capture_roster_flow_review dist/review-tools/
+          cp target/$CARGO_BUILD_TARGET/debug/examples/capture_roster_contacts dist/review-tools/
+          for binary in target/$CARGO_BUILD_TARGET/debug/deps/borrow_fighters-*; do
+            if [ -f "$binary" ] && [ -x "$binary" ]; then
+              cp "$binary" dist/review-tools/
+            fi
+          done
+          strip --strip-debug dist/review-tools/*
       - uses: actions/upload-artifact@v4
         if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch'
         with:
           name: visual-review-linux
           path: dist/visual-review/*.png
+          if-no-files-found: error
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch'
+        with:
+          name: native-review-tools-linux
+          path: dist/review-tools/*
           if-no-files-found: error
           retention-days: 14
       - name: Verify Windows imports do not require Visual C++ Redistributable

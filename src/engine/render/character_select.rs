@@ -271,9 +271,10 @@ fn draw_preview(
             id,
             Rectangle::new((bounds.x + 26) as f32, 247.0, 246.0, 272.0),
             selection.elapsed,
-            false,
-            owner == 1,
-            selection.focus_elapsed[owner],
+            CharacterArtView::Standing {
+                mirrored: owner == 1,
+                focus_time: selection.focus_elapsed[owner],
+            },
         );
     }
     if selection.focus_elapsed[owner] < 0.35 {
@@ -360,9 +361,7 @@ fn draw_cell(
             character,
             Rectangle::new((b.x + 3) as f32, (b.y + 3) as f32, (b.w - 6) as f32, 109.0),
             0.0,
-            true,
-            false,
-            1.0,
+            CharacterArtView::Portrait,
         );
         draw.draw_rectangle(b.x + 1, b.y + 111, b.w - 2, 28, Color::new(7, 15, 25, 245));
         centered(
@@ -433,16 +432,26 @@ fn draw_cell(
     }
 }
 
+enum CharacterArtView {
+    Portrait,
+    Standing { mirrored: bool, focus_time: f32 },
+}
+
 fn draw_character_art(
     draw: &mut impl DrawTarget,
     assets: &GameAssets,
     id: CharacterId,
     dest: Rectangle,
     time: f32,
-    portrait: bool,
-    mirrored: bool,
-    focus_time: f32,
+    view: CharacterArtView,
 ) {
+    let (portrait, mirrored, focus_time) = match view {
+        CharacterArtView::Portrait => (true, false, 1.0),
+        CharacterArtView::Standing {
+            mirrored,
+            focus_time,
+        } => (false, mirrored, focus_time),
+    };
     let Some(atlas) = character_visuals(id, assets).fight_atlas else {
         return;
     };

@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-09",
+  "tool": "Built-in image_gen.imagegen",
+  "sources": {
+    "upper": {
+      "original_generated_file": "/home/willams/.codex/generated_images/01a08607-c3e1-7773-91b7-86136cc48104/exec-2cf541e9-d743-4b51-a3f5-2fd306945ddf.png",
+      "accepted": true
+    },
+    "upper-alpha": {
+      "original_generated_file": "/home/willams/.codex/generated_images/01a08607-c3e1-7773-91b7-86136cc48104/exec-f7f8e832-ce02-4812-8a3c-9e5d7109fa27.png",
+      "accepted": true
+    },
+    "lower": {
+      "original_generated_file": "/home/willams/.codex/generated_images/01a08607-c3e1-7773-91b7-86136cc48104/exec-6f997faa-f531-4b1a-add7-094307eb7c7c.png",
+      "accepted": true
+    },
+    "lower-alpha": {
+      "original_generated_file": "/home/willams/.codex/generated_images/01a08607-c3e1-7773-91b7-86136cc48104/exec-bd970ed5-b8a0-4698-9bed-c0b61045ff31.png",
+      "accepted": true
+    }
+  }
+}

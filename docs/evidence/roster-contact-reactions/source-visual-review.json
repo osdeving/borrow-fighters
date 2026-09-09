@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-09",
+  "scope": "Inspeção visual das quatro pranchas autorais com 32 desenhos cada, fundo claro/escuro e linha de apoio; auditoria de pixels separada em asset-review.json.",
+  "source": "Pranchas exportadas pelo agente de arte, vistas pela ferramenta de imagem.",
+  "runtime_contact_status": "Ainda não verificado nesta etapa: depende da compilação e capturas reais do World. Não constitui aprovação de fluidez em movimento.",
+  "findings": "As poses mostram articulação corporal, além de alterações de posição global. Sem cortes evidentes em mãos, pés, cabelo ou acessórios nas pranchas examinadas.",
+  "characters": [
+    {
+      "character": "rust",
+      "image": "assets/production/rust/reactions-own-2026-09-09/review-game-scale.png",
+      "sha256": "3a81614273a7895a4238f44d6e10ed07857323ff1be4d31572e8847f51018483",
+      "reviewed_drawings": 32,
+      "observations": "Cabeça recua e retorna; tronco dobra com mudança dos braços, joelhos e apoio. Guardas comprimem a postura. Voo recolhe as pernas, queda se acomoda e recuperação progride de apoio do braço ao joelho e postura em pé."
+    },
+    {
+      "character": "duke",
+      "image": "assets/production/duke/reactions-own-2026-09-09/review-game-scale.png",
+      "sha256": "a94a1563e16d237a329a9e5617af09c480c837562bd8d915cbb189ceaab48680",
+      "reviewed_drawings": 32,
+      "observations": "Cone e tronco flexionam sem perder o nariz vermelho ou a marca do personagem; mãos cobrem o rosto na guarda alta. Pernas e braços mudam no voo e na recuperação. A fumaça permanece inteira na prancha."
+    },
+    {
+      "character": "c",
+      "image": "assets/production/c/reactions-own-2026-09-09/review-game-scale.png",
+      "sha256": "88289e894b4ffc2bd76b93808c2baf30ebc6edbc46770520d5d84eee48ba73b9",
+      "reviewed_drawings": 32,
+      "observations": "Livro e cabelo permanecem completos, inclusive nas poses de lançamento recortadas por componentes. Impactos mudam pescoço, tronco e pernas; a guarda alta usa o livro e a baixa mantém o corpo agachado. A recuperação progride do cotovelo para joelho e pé."
+    },
+    {
+      "character": "go",
+      "image": "assets/production/go/reactions-own-2026-09-09/review-game-scale.png",
+      "sha256": "7f5928aab8544c9df1dfc1254c166759f27f9dc875218fa9e3f781f4d53aeb04",
+      "reviewed_drawings": 32,
+      "observations": "O corpo, braços e joelhos mudam individualmente entre impacto e recuperação; guardas altas/baixas têm compressões distintas. As poses de voo recolhem os membros e a queda mantém corpo e patas inteiros."
+    }
+  ]
+}

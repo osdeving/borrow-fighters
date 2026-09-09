@@ -151,12 +151,13 @@ impl CharacterSelect {
         }
         let mut action = SelectAction::Stay;
         let shared_owner = self.active;
-        if let Some(index) = input.hover.filter(|&i| i < SLOT_COUNT) {
-            if !self.ready[shared_owner] && self.cursors[shared_owner] != index {
-                self.cursors[shared_owner] = index;
-                self.focus_elapsed[shared_owner] = 0.0;
-                action = SelectAction::Move;
-            }
+        if let Some(index) = input.hover.filter(|&i| i < SLOT_COUNT)
+            && !self.ready[shared_owner]
+            && self.cursors[shared_owner] != index
+        {
+            self.cursors[shared_owner] = index;
+            self.focus_elapsed[shared_owner] = 0.0;
+            action = SelectAction::Move;
         }
         let mut shared = input.shared;
         shared.confirm |= input.click && input.hover.is_some();

@@ -79,3 +79,5 @@ energia, pausa e resultado com Raylib/Xvfb no Linux. Os PNGs ficam no artefato
 O exemplo `capture_roster_flow_review` também aceita `--frames` para inspecionar
 a transição e animação quadro a quadro. Captura de pixels não substitui testar
 a navegação e o áudio na janela real.
+O artefato `native-review-tools-linux` contém os dois exemplos e os executáveis
+de testes para revisão local de GPU/áudio usando a mesma compilação do CI.

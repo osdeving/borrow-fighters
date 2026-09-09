@@ -1,0 +1,1 @@
+Extract all the characters onto a transparent background. Preserve their positions and colors. Transparent PNG.

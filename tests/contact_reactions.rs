@@ -1,4 +1,4 @@
-//! Checks the Python/C++ reaction pilot at each contact and across recovery phases.
+//! Checks authored contact clocks, including the original Python/C++ pilot.
 //!
 //! System: Combat regression. These tests keep visual cadence independent of stun,
 //! damage and geometry, and exercise the same World used by matches and tools.
@@ -460,7 +460,7 @@ fn lethal_pilot_supers_hold_the_final_fall_pose_and_reset_clears_contact_state()
 }
 
 #[test]
-fn pilot_contract_is_absent_for_other_fighters_and_outside_the_barrage() {
+fn contact_profiles_cover_the_extended_roster_and_barrage_bounds_remain_exclusive() {
     for character in [
         CharacterId::Rust,
         CharacterId::Duke,
@@ -468,11 +468,21 @@ fn pilot_contract_is_absent_for_other_fighters_and_outside_the_barrage() {
         CharacterId::C,
     ] {
         let mut world = World::new_with_characters(CharacterId::Cpp, character);
+        assert!(world.player_two.uses_contact_reactions());
+        assert!(world.player_two.contact_reaction_state().is_none());
         world.update(DT, special(), FighterInput::default());
+        let mut reactions = 0;
         for _ in 0..CPP_FINISHER_TICK + 60 {
             tick(&mut world);
-            assert!(world.player_two.contact_reaction_state().is_none());
+            if let Some(state) = world.player_two.contact_reaction_state() {
+                reactions += 1;
+                assert!(state.duration_seconds > 0.0);
+            }
         }
+        assert!(
+            reactions > 0,
+            "{character:?} never reacted to the real barrage"
+        );
     }
     assert_eq!(cpp_barrage_reaction_profile(CPP_BARRAGE_START - 1), None);
     assert_eq!(cpp_barrage_reaction_profile(CPP_FINISHER_TICK), None);

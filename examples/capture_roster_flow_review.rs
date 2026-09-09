@@ -5,7 +5,7 @@
 use borrow_fighters::{
     characters::CharacterId,
     combat::fighter::{FighterInput, PlayerSlot},
-    config::{WINDOW_HEIGHT, WINDOW_WIDTH},
+    config::{FIXED_TIMESTEP, WINDOW_HEIGHT, WINDOW_WIDTH, world_px},
     engine::{
         assets::GameAssets,
         render::{self, GamepadStatus},
@@ -13,7 +13,7 @@ use borrow_fighters::{
     game::{
         arena::ArenaId,
         energy::EnergyPolicy,
-        feature_flags::FeatureFlags,
+        feature_flags::{FeatureFlag, FeatureFlags},
         world::{MatchOutcome, World},
     },
     scenes::{
@@ -143,6 +143,63 @@ fn main() -> Result<(), Box<dyn Error>> {
             }
         }
         export(&target, &output.join(format!("fight-{name}.png")))?;
+    }
+    // Charge through accepted melee contacts so the HUD review uses actual energy.
+    let mut world = World::new_with_characters(CharacterId::C, CharacterId::Rust);
+    world.set_energy_policy(EnergyPolicy::Metered);
+    let mut protected = flags;
+    protected.set(FeatureFlag::PlayerOneTakesDamage, false);
+    protected.set(FeatureFlag::PlayerTwoTakesDamage, false);
+    for _ in 0..5 {
+        world.player_one.position.x = world_px(300.0);
+        world.player_two.position.x = world.player_one.body_rect().right() + world_px(10.0);
+        for tick in 0..120 {
+            world.update_with_flags(
+                FIXED_TIMESTEP,
+                FighterInput {
+                    light_punch: tick == 0,
+                    ..Default::default()
+                },
+                FighterInput::default(),
+                protected,
+            );
+        }
+    }
+    assert_eq!(world.energy(PlayerSlot::One).amount(), 100);
+    for spent in [false, true] {
+        if spent {
+            world.player_two.position.x = world.player_one.body_rect().right() + world_px(10.0);
+            world.update_with_flags(
+                FIXED_TIMESTEP,
+                FighterInput {
+                    cinematic_special: true,
+                    ..Default::default()
+                },
+                FighterInput::default(),
+                protected,
+            );
+            assert_eq!(world.energy(PlayerSlot::One).amount(), 0);
+        }
+        {
+            let mut draw = raylib.begin_texture_mode(&thread, &mut target);
+            render::draw_fight(
+                &mut draw,
+                &world,
+                ArenaId::Sirius,
+                7.0,
+                protected,
+                GamepadStatus::default(),
+                &assets,
+            );
+        }
+        export(
+            &target,
+            &output.join(if spent {
+                "energy-spent.png"
+            } else {
+                "energy-ready.png"
+            }),
+        )?;
     }
     println!("Roster and flow review: {}", output.display());
     Ok(())

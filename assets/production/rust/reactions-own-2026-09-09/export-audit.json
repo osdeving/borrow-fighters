@@ -1,0 +1,1043 @@
+{
+  "method": "Imagegen art and alpha; rectangular crops, uniform strip resize and RGBA packing only.",
+  "cell": [
+    448,
+    352
+  ],
+  "pivot": [
+    224,
+    310
+  ],
+  "baseline_sha256": "f9b91b13843590ecb5f339207c2a0fbaeca5d61b0086e9b7a19bfad854c26d57",
+  "atlas_sha256": "80134486ff22122a7c873332b92ecf1d7e8570d553c4c14c43672cd022898a33",
+  "frames": [
+    {
+      "name": "reaction_head_00",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          0,
+          0,
+          335,
+          334
+        ]
+      ],
+      "source_crop": [
+        54,
+        14,
+        310,
+        325
+      ],
+      "source_pivot": [
+        184.5,
+        320
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        97,
+        13
+      ],
+      "size": [
+        248,
+        302
+      ],
+      "pixels_sha256": "6da0513f684b503b54748be97a16a5198939ea1c25a5b37c8d8f87cac470acaa"
+    },
+    {
+      "name": "reaction_head_01",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          335,
+          0,
+          640,
+          334
+        ]
+      ],
+      "source_crop": [
+        347,
+        36,
+        614,
+        325
+      ],
+      "source_pivot": [
+        487.5,
+        320
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        88,
+        35
+      ],
+      "size": [
+        259,
+        280
+      ],
+      "pixels_sha256": "f6922f03fba67fad99f53c45f3ce6cabd6dc3758fa1690e5fb39053bf5f13a03"
+    },
+    {
+      "name": "reaction_head_02",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          640,
+          0,
+          945,
+          334
+        ]
+      ],
+      "source_crop": [
+        672,
+        41,
+        888,
+        325
+      ],
+      "source_pivot": [
+        783.0,
+        320
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        116,
+        39
+      ],
+      "size": [
+        210,
+        275
+      ],
+      "pixels_sha256": "5b4e6f0a00c7ff84b9d06dba43da8a801c0459780b28737974abda6334ede208"
+    },
+    {
+      "name": "reaction_head_03",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          945,
+          0,
+          1254,
+          334
+        ]
+      ],
+      "source_crop": [
+        993,
+        39,
+        1220,
+        325
+      ],
+      "source_pivot": [
+        1114.5,
+        320
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        106,
+        37
+      ],
+      "size": [
+        220,
+        277
+      ],
+      "pixels_sha256": "3b9ace87db2690d918da028736f5f84b4cdc67b6d4959a19ba448a93c81734e9"
+    },
+    {
+      "name": "reaction_body_00",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          0,
+          334,
+          335,
+          625
+        ]
+      ],
+      "source_crop": [
+        65,
+        341,
+        284,
+        625
+      ],
+      "source_pivot": [
+        183.5,
+        620
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        109,
+        39
+      ],
+      "size": [
+        212,
+        275
+      ],
+      "pixels_sha256": "3004d873732999b103f4da5388826fdcae58d2c62d3d02053a48640858eeca11"
+    },
+    {
+      "name": "reaction_body_01",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          335,
+          334,
+          640,
+          625
+        ]
+      ],
+      "source_crop": [
+        367,
+        381,
+        596,
+        625
+      ],
+      "source_pivot": [
+        502.0,
+        619
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        93,
+        79
+      ],
+      "size": [
+        222,
+        237
+      ],
+      "pixels_sha256": "99706c21c6a7211f6d0516a754c5e8426924c940593be0a16d3c9e0e0e4a6936"
+    },
+    {
+      "name": "reaction_body_02",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          640,
+          334,
+          945,
+          625
+        ]
+      ],
+      "source_crop": [
+        668,
+        354,
+        944,
+        625
+      ],
+      "source_pivot": [
+        785.0,
+        620
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        111,
+        52
+      ],
+      "size": [
+        268,
+        263
+      ],
+      "pixels_sha256": "3f70594d6af3dc140e9151b047679e284dcc2fb69e997bb0e5687fe450a8c9b6"
+    },
+    {
+      "name": "reaction_body_03",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          945,
+          334,
+          1254,
+          625
+        ]
+      ],
+      "source_crop": [
+        995,
+        340,
+        1227,
+        625
+      ],
+      "source_pivot": [
+        1112.0,
+        620
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        111,
+        38
+      ],
+      "size": [
+        225,
+        276
+      ],
+      "pixels_sha256": "5cc52f62e107419d7ee8593bd0bc4577bbf51e6b167c52f3e4bb9209551d7d9f"
+    },
+    {
+      "name": "reaction_low_00",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          0,
+          625,
+          335,
+          940
+        ]
+      ],
+      "source_crop": [
+        41,
+        625,
+        302,
+        936
+      ],
+      "source_pivot": [
+        170.0,
+        931
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        99,
+        13
+      ],
+      "size": [
+        253,
+        302
+      ],
+      "pixels_sha256": "66294edd4b131d8248380190ad6f5e83b1789fb431d03e7dc8b8fbe12167c8ff"
+    },
+    {
+      "name": "reaction_low_01",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          335,
+          625,
+          640,
+          940
+        ]
+      ],
+      "source_crop": [
+        380,
+        630,
+        563,
+        933
+      ],
+      "source_pivot": [
+        518.5,
+        927
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        90,
+        22
+      ],
+      "size": [
+        178,
+        294
+      ],
+      "pixels_sha256": "b98a3f1047e2842e9a057a1febadccf48be2b85feb1f5c497ad7a361d8cabd0b"
+    },
+    {
+      "name": "reaction_low_02",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          640,
+          625,
+          945,
+          940
+        ]
+      ],
+      "source_crop": [
+        686,
+        672,
+        943,
+        936
+      ],
+      "source_pivot": [
+        801.0,
+        931
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        112,
+        59
+      ],
+      "size": [
+        249,
+        256
+      ],
+      "pixels_sha256": "a145f512a718afc655c66ede500e993279b426a9307619618940d84ac1c39834"
+    },
+    {
+      "name": "reaction_low_03",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          945,
+          625,
+          1254,
+          940
+        ]
+      ],
+      "source_crop": [
+        1008,
+        675,
+        1223,
+        936
+      ],
+      "source_pivot": [
+        1127.0,
+        931
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        109,
+        62
+      ],
+      "size": [
+        209,
+        253
+      ],
+      "pixels_sha256": "f457455e2c78dbde7704e7048c6e81dd61568fafc5ef75bd08c10013ffbf6795"
+    },
+    {
+      "name": "reaction_guard_high_00",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          0,
+          940,
+          335,
+          1254
+        ]
+      ],
+      "source_crop": [
+        90,
+        947,
+        319,
+        1238
+      ],
+      "source_pivot": [
+        210.5,
+        1233
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        107,
+        33
+      ],
+      "size": [
+        222,
+        282
+      ],
+      "pixels_sha256": "ed98fec6ce26b75d50e72c0d0b1f4c721a0d3548a393d80853dd5f41ccf553d1"
+    },
+    {
+      "name": "reaction_guard_high_01",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          335,
+          940,
+          640,
+          1254
+        ]
+      ],
+      "source_crop": [
+        360,
+        959,
+        635,
+        1236
+      ],
+      "source_pivot": [
+        514.5,
+        1231
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        74,
+        46
+      ],
+      "size": [
+        267,
+        269
+      ],
+      "pixels_sha256": "a4b421002e7f5ac1861c84a4c4340b46995d39bca3377d0ac928e087948533d6"
+    },
+    {
+      "name": "reaction_guard_high_02",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          640,
+          940,
+          945,
+          1254
+        ]
+      ],
+      "source_crop": [
+        714,
+        942,
+        927,
+        1238
+      ],
+      "source_pivot": [
+        824.0,
+        1233
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        117,
+        28
+      ],
+      "size": [
+        207,
+        287
+      ],
+      "pixels_sha256": "988dff2253448aed2be82e1038b5eccd4ac4cf897f104a0646a1d661d59908d7"
+    },
+    {
+      "name": "reaction_guard_high_03",
+      "source": "upper-alpha.png",
+      "source_rectangles": [
+        [
+          945,
+          940,
+          1254,
+          1254
+        ]
+      ],
+      "source_crop": [
+        1009,
+        943,
+        1233,
+        1238
+      ],
+      "source_pivot": [
+        1125.0,
+        1233
+      ],
+      "uniform_strip_scale": 0.97,
+      "offset": [
+        111,
+        29
+      ],
+      "size": [
+        217,
+        286
+      ],
+      "pixels_sha256": "29961be06b58ec2229e47b539afa5e5332195b7103f5488e9733f7d21727f171"
+    },
+    {
+      "name": "reaction_guard_low_00",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          0,
+          0,
+          335,
+          365
+        ]
+      ],
+      "source_crop": [
+        38,
+        79,
+        293,
+        359
+      ],
+      "source_pivot": [
+        179.0,
+        354
+      ],
+      "uniform_strip_scale": 0.83,
+      "offset": [
+        107,
+        82
+      ],
+      "size": [
+        212,
+        232
+      ],
+      "pixels_sha256": "900d0c7e17c04f8cca5fc158628932df54512710617e1e06edc977c8649de566"
+    },
+    {
+      "name": "reaction_guard_low_01",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          335,
+          0,
+          650,
+          365
+        ]
+      ],
+      "source_crop": [
+        357,
+        119,
+        590,
+        359
+      ],
+      "source_pivot": [
+        481.0,
+        354
+      ],
+      "uniform_strip_scale": 0.83,
+      "offset": [
+        121,
+        115
+      ],
+      "size": [
+        193,
+        199
+      ],
+      "pixels_sha256": "e3c1c2bc77f1363941720a42b1c0b7e87626831f9ee9fe0022a0af8b15d45171"
+    },
+    {
+      "name": "reaction_guard_low_02",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          650,
+          0,
+          940,
+          365
+        ]
+      ],
+      "source_crop": [
+        655,
+        69,
+        910,
+        359
+      ],
+      "source_pivot": [
+        793.5,
+        354
+      ],
+      "uniform_strip_scale": 0.83,
+      "offset": [
+        109,
+        73
+      ],
+      "size": [
+        212,
+        241
+      ],
+      "pixels_sha256": "cfb4e838825bad4978f85365bcf7fec648060c88729aa57757b71e68c3304dcd"
+    },
+    {
+      "name": "reaction_guard_low_03",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          940,
+          0,
+          1254,
+          365
+        ]
+      ],
+      "source_crop": [
+        969,
+        77,
+        1223,
+        359
+      ],
+      "source_pivot": [
+        1113.5,
+        354
+      ],
+      "uniform_strip_scale": 0.83,
+      "offset": [
+        104,
+        80
+      ],
+      "size": [
+        211,
+        234
+      ],
+      "pixels_sha256": "60dc2276b1772e39e2571ee0ed770425d99970789a49ba7f4b1ddbaf3c709b0e"
+    },
+    {
+      "name": "reaction_launch_00",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          0,
+          365,
+          335,
+          718
+        ]
+      ],
+      "source_crop": [
+        25,
+        369,
+        327,
+        711
+      ],
+      "source_pivot": [
+        176.0,
+        706
+      ],
+      "uniform_strip_scale": 0.907,
+      "offset": [
+        87,
+        4
+      ],
+      "size": [
+        274,
+        310
+      ],
+      "pixels_sha256": "e6e37baca0e6fbe09a57133666e1bb8067125fbc22858f4e5e5a85bc25a592ac"
+    },
+    {
+      "name": "reaction_launch_01",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          335,
+          365,
+          650,
+          718
+        ]
+      ],
+      "source_crop": [
+        347,
+        385,
+        645,
+        683
+      ],
+      "source_pivot": [
+        496.0,
+        706
+      ],
+      "uniform_strip_scale": 0.907,
+      "offset": [
+        89,
+        19
+      ],
+      "size": [
+        270,
+        270
+      ],
+      "pixels_sha256": "ebd9557201ddd54e05d3b7a7417cb92c77291f2dc8d19b0a8a54faa80e95f9e3"
+    },
+    {
+      "name": "reaction_launch_02",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          650,
+          365,
+          940,
+          718
+        ]
+      ],
+      "source_crop": [
+        696,
+        384,
+        935,
+        667
+      ],
+      "source_pivot": [
+        815.5,
+        706
+      ],
+      "uniform_strip_scale": 0.907,
+      "offset": [
+        116,
+        18
+      ],
+      "size": [
+        217,
+        257
+      ],
+      "pixels_sha256": "e64dc375342f5625a692278d3cbdc5c54c7f7e96f6b6ca5038e0f761f90b4d3f"
+    },
+    {
+      "name": "reaction_launch_03",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          940,
+          365,
+          1254,
+          718
+        ]
+      ],
+      "source_crop": [
+        940,
+        406,
+        1248,
+        718
+      ],
+      "source_pivot": [
+        1094.0,
+        706
+      ],
+      "uniform_strip_scale": 0.907,
+      "offset": [
+        84,
+        38
+      ],
+      "size": [
+        279,
+        283
+      ],
+      "pixels_sha256": "e16deea38bf561119f331ff04e3d1ff8f1430d58c5750738d17b2c42ce722b73"
+    },
+    {
+      "name": "reaction_fall_00",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          0,
+          718,
+          336,
+          913
+        ]
+      ],
+      "source_crop": [
+        14,
+        785,
+        336,
+        913
+      ],
+      "source_pivot": [
+        175.0,
+        912
+      ],
+      "uniform_strip_scale": 0.907,
+      "offset": [
+        78,
+        195
+      ],
+      "size": [
+        292,
+        116
+      ],
+      "pixels_sha256": "c2db68ed468b10772472ed71aaecd5db7d20a00fabf6eca534df93d556089382"
+    },
+    {
+      "name": "reaction_fall_01",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          336,
+          718,
+          623,
+          913
+        ]
+      ],
+      "source_crop": [
+        336,
+        719,
+        623,
+        909
+      ],
+      "source_pivot": [
+        479.5,
+        903
+      ],
+      "uniform_strip_scale": 0.907,
+      "offset": [
+        94,
+        143
+      ],
+      "size": [
+        260,
+        172
+      ],
+      "pixels_sha256": "db0a34c896f2ac6d26a48ee54f906bb3d76ee0274f4e87ec0fb1cf002c2b0612"
+    },
+    {
+      "name": "reaction_fall_02",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          623,
+          718,
+          928,
+          913
+        ]
+      ],
+      "source_crop": [
+        623,
+        786,
+        927,
+        908
+      ],
+      "source_pivot": [
+        775.0,
+        903
+      ],
+      "uniform_strip_scale": 0.907,
+      "offset": [
+        86,
+        204
+      ],
+      "size": [
+        276,
+        111
+      ],
+      "pixels_sha256": "e0811f9f926b61c0c6357808fe04ae8f8c27021f5cb18a66477d7c4767952228"
+    },
+    {
+      "name": "reaction_fall_03",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          928,
+          718,
+          1254,
+          907
+        ]
+      ],
+      "source_crop": [
+        928,
+        797,
+        1252,
+        907
+      ],
+      "source_pivot": [
+        1090.0,
+        906
+      ],
+      "uniform_strip_scale": 0.907,
+      "offset": [
+        77,
+        211
+      ],
+      "size": [
+        294,
+        100
+      ],
+      "pixels_sha256": "008d9695ff3cecf2487ad9235b2070715203e0d225071badb0cf097421217ff5"
+    },
+    {
+      "name": "reaction_rise_00",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          0,
+          913,
+          344,
+          1254
+        ]
+      ],
+      "source_crop": [
+        37,
+        1036,
+        339,
+        1215
+      ],
+      "source_pivot": [
+        188.0,
+        1210
+      ],
+      "uniform_strip_scale": 0.907,
+      "offset": [
+        87,
+        152
+      ],
+      "size": [
+        274,
+        162
+      ],
+      "pixels_sha256": "ff283f6e0078b78c89fd693e0a36753f44978f2b44c20c2799fc7ffa77eb0cad"
+    },
+    {
+      "name": "reaction_rise_01",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          344,
+          913,
+          640,
+          1254
+        ]
+      ],
+      "source_crop": [
+        349,
+        1011,
+        624,
+        1215
+      ],
+      "source_pivot": [
+        486.5,
+        1209
+      ],
+      "uniform_strip_scale": 0.907,
+      "offset": [
+        99,
+        130
+      ],
+      "size": [
+        249,
+        185
+      ],
+      "pixels_sha256": "3b80a26c2046a64c35bf23e34a7dc4a7c356711018ddbff3c56f3a72999c82a2"
+    },
+    {
+      "name": "reaction_rise_02",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          640,
+          913,
+          943,
+          1254
+        ]
+      ],
+      "source_crop": [
+        656,
+        967,
+        901,
+        1215
+      ],
+      "source_pivot": [
+        791.0,
+        1210
+      ],
+      "uniform_strip_scale": 0.907,
+      "offset": [
+        102,
+        90
+      ],
+      "size": [
+        222,
+        225
+      ],
+      "pixels_sha256": "d3e37432045aa3ec1147c05c6e33b1e7a3d459c98b800d299f144db09bbb490a"
+    },
+    {
+      "name": "reaction_rise_03",
+      "source": "lower-alpha.png",
+      "source_rectangles": [
+        [
+          943,
+          907,
+          1254,
+          1254
+        ]
+      ],
+      "source_crop": [
+        979,
+        907,
+        1201,
+        1217
+      ],
+      "source_pivot": [
+        1098.5,
+        1212
+      ],
+      "uniform_strip_scale": 0.907,
+      "offset": [
+        116,
+        33
+      ],
+      "size": [
+        201,
+        281
+      ],
+      "pixels_sha256": "3ff27c314e2d38df864b2b7cc5e6ea342209a71e12b88895f12cd6ed92bfcb07"
+    }
+  ],
+  "source_sha256": {
+    "upper-alpha.png": "75a1bf3672932fb46473aeff2163af37c0dfbe4e14e742c027868c320ba54ec0",
+    "lower-alpha.png": "f3989e982dc6046d5ff5cf0e23043fcab46a95ee7cd42e75165d41008a993b9d"
+  }
+}
