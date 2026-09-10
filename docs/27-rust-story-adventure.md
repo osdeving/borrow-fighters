@@ -1,228 +1,170 @@
-# 27 — Proposta: aventura de Rust e os ecos do Linker
+# 27 — Aventura de Rust: prólogo e primeiro encontro
 
-## Estado e intenção
+## Estado e autorização
 
-Proposta exploratória de 10 de setembro de 2026, após o Prototype 3. O pedido
-atual é explorar uma aventura 2D single-player protagonizada por Rust, com
-animações expressivas, prólogo mostrando Ada e Assembly e texto digitado em
-terminal antes da aventura. O [backlog](03-backlog.md) registra essa frente e
-preserva as tarefas e os bugs do playtest de luta.
+Experimento de implementação autorizado em 10 de setembro de 2026, na branch
+`feature/rust-adventure-prologue`. O pedido substitui o recorte anterior de
+Vínculo/Sirius por um episódio curto: Ada trabalhando, mensagem misteriosa,
+despertar de Assembly, salto temporal, manhã de Rust, ataque de uma errática
+e vitória com pesar.
 
-Esta rodada documenta a direção e o menor teste jogável recomendado. Mecânicas,
-diálogos, título de capítulo e acontecimentos novos abaixo são propostas, não
-cânone aprovado nem implementação entregue. A versão distribuída continua
-descrita nas [notas do Prototype 3](releases/v0.1.0-prototype.3.md).
+A [ADR 0021](adr/0021-isolated-adventure-experiment.md) registra o isolamento
+entre aventura e luta. O [diário de implementação](worklogs/rust-adventure-prologue.md)
+registra o que foi realizado, verificado e o que falta. Este documento define
+escopo e aceite; não declara a implementação concluída. O [backlog](03-backlog.md)
+continua sendo a fonte de verdade das frentes ativas. A versão distribuída de
+luta permanece o [Prototype 3](releases/v0.1.0-prototype.3.md).
 
-## Recomendação
+## Intenção do experimento
 
-Uma aventura de ação lateral por capítulos, com ambientes conectados, pequenos
-desvios para descobertas, travessia, encontros de combate e cenas autorais.
-Rust é o protagonista jogável. A progressão vem de alcançar lugares, compreender
-o que aconteceu e aprender a usar o Linker para proteger pessoas e entidades.
+Uma aventura de ação lateral, solo, protagonizada por Rust, com animações 2D
+expressivas e mistério. O primeiro episódio deve fazer o jogador se importar
+com ele através de algo pequeno e concreto: uma manhã comum interrompida por
+uma ameaça, uma luta que o jogador precisa vencer e uma reação que revela
+quem Rust é.
 
-Promessa proposta: **conduzir Rust por um Brasil onde abstrações ganham corpo,
-conter rupturas e descobrir por que a primeira entidade reconhece sua assinatura.**
+O combate serve ao acontecimento. A cena final não é o resultado de uma partida
+com placar, seleção de adversário e revanche; é a consequência do encontro.
+A relação entre movimento, ameaça e resposta deve funcionar durante o controle
+manual, e a passagem entre narrativa e gameplay precisa ser clara.
 
-| Formato considerado | O que favorece | Custo ou limite para esta intenção |
+A ambição de exploração por capítulos continua como horizonte. Este primeiro
+experimento valida personagem, controle e encenação antes de ampliar o mundo.
+
+## Lore aceita para esta rodada
+
+O [worldbuilding](12-worldbuilding.md) e o [livro do jogo](../assets/lore/story.json)
+foram sincronizados a partir das definições do usuário:
+
+- **EPs são pessoas criadas e místicas**, não exatamente humanas. Têm emoções,
+  vontade própria e diversidade moral. Há humanos e EPs nobres, cruéis,
+  cuidadosos, confusos ou ambíguos; origem não determina caráter.
+- **Rust é a última e mais recente EP pura conhecida** no presente da aventura.
+  É justo, nobre e capaz de mais humanidade que muitos humanos. Defende
+  coexistência, liberdade, cuidado e responsabilidade. “Pura” descreve sua
+  origem como EP, sem declarar superioridade moral sobre híbridos ou humanos.
+- **Ada começa como humana comum.** É a primeira usuária humana do Linker e
+  torna-se híbrida humana e EP ao se aprofundar nessa força.
+- **Assembly é a primeira EP a despertar**, após Ada aprender sobre o Linker
+  e receber uma mensagem misteriosa. A autoria da mensagem, sua intenção e a
+  relação exata entre a transformação de Ada e esse despertar ficam em aberto.
+- **Frontenzos não invocam erráticas deliberadamente.** O mau uso do Linker cria
+  condições cósmicas para o surgimento involuntário dessas entidades. Isso não
+  torna todo humano responsável por toda ameaça. O episódio não precisa
+  atribuir a errática a um frontenzo específico.
+
+O Linker é uma força antiga; o prólogo mostra seu primeiro acesso humano e o
+primeiro despertar de uma EP, sem explicar a origem da própria força. Naruto
+e Fullmetal Alchemist são analogias de tom emocional e místico, sem importar
+personagens, acontecimentos ou cosmologias dessas obras.
+
+## Sequência autorizada
+
+| Trecho | O que acontece | Intenção e limite |
 |---|---|---|
-| Campanha de duelos com cenas entre lutas | Aproveita diretamente as partidas atuais | A exploração e a descoberta ficam concentradas em cenas e texto |
-| Beat 'em up de progressão lateral | Movimento pela fase e encontros com vários inimigos | Exige combate de grupos e pode repetir corredores de combate |
-| Aventura lateral por capítulos — recomendada | Alterna descoberta, travessia, personagens e ação; permite dirigir cada cena | Precisa de espaços exploráveis, câmera, interações e inimigos próprios |
-| Metroidvania amplo | Exploração não linear e retorno com novas habilidades | Mapa, progressão, revisitas e testes crescem juntos; avaliar após o capítulo piloto |
+| Ada no trabalho | Ada aparece humana, envolvida em uma atividade cotidiana de estudo/trabalho | Torná-la reconhecível como pessoa antes do acontecimento extraordinário |
+| A mensagem | Após aprender sobre o Linker, ela recebe uma mensagem misteriosa | Texto curto e reação de Ada; não revelar remetente, plano ou mecanismo cósmico |
+| Assembly desperta | A primeira EP ganha presença diante do acontecimento | Animação com peso e estranheza; o despertar acontece sem explicação completa |
+| Muito tempo depois | Texto digitado em terminal conduz ao salto temporal | Indicar passagem de tempo sem fixar uma cronologia nova desnecessária |
+| A manhã de Rust | Rust acorda como em uma manhã comum | Respiração, despertar e atenção; apresentar sua pessoa antes do ataque |
+| A ameaça | Uma errática tenta matar Rust e o controle manual sustenta o encontro | O jogador se move, lê ataques e reage; o resultado depende de jogar |
+| A consequência | Rust vence e balança a cabeça com pesar pelo que precisou fazer | Um gesto curto de necessidade, sem celebração triunfal; fim do episódio |
 
-Como referências de intenção, [Ori and the Blind Forest](https://www.orithegame.com/blind-forest/)
-associa aventura de plataforma, atuação animada e história emocional;
-[Prince of Persia: The Lost Crown](https://news.ubisoft.com/en-us/article/e1SD5gR3TWqk5GPAjWHSz)
-combina combate, plataforma e exploração. A proposta aproveita essas relações
-entre ação e narrativa como inspiração, sem assumir o volume de conteúdo ou a
-direção visual desses jogos.
+O jogador pode revelar o texto completo, avançar e pular o prólogo. Derrota
+reinicia o encontro, sem reapresentar obrigatoriamente toda a abertura. Uma
+nova execução permite rever a sequência. O gesto final deve ocorrer depois
+da vitória efetiva, nunca substituí-la por um resultado automático.
 
-## História através das ações
+O terminal é parte da encenação: contraste legível, poucas linhas por bloco
+e palavras originais do universo do Linker. Nenhum texto explica toda a lore
+ou exige conhecimento de programação para entender a ameaça e a reação de Rust.
 
-O [worldbuilding](12-worldbuilding.md) estabelece a convivência como conflito
-central. Rust protege entidades estáveis e contém as erráticas; Duke negociou
-sua permanência entre humanos; Assembly quer devolver as abstrações aos
-circuitos e impedir o acesso humano ao Linker.
+## Menor gameplay completo
 
-O ciclo proposto é: **avistar uma anomalia → explorar e entender sua causa →
-atravessar ou conter usando o Linker → observar uma consequência → descobrir
-uma pista que conduz ao próximo lugar.**
+- Rust se move num pequeno espaço lateral com chão e limites legíveis.
+- Uma errática possui aproximação, antecipação, ataque e recuperação próprios;
+  ataca Rust e pode vencê-lo se ele não responder.
+- Rust dispõe de movimento e ataque suficientes para evitar e punir a ameaça.
+  Alcance, contato, dano e reação precisam corresponder ao que se vê.
+- O encontro possui vitória, derrota, pausa e nova tentativa. A progressão
+  narrativa depende do estado do encontro, sem regras de rounds ou energia
+  herdadas implicitamente do jogo de luta.
+- O encerramento mostra a reação de Rust e oferece uma forma clara de rever
+  ou encerrar o experimento.
 
-O ambiente deve mostrar a vida afetada pela ruptura: uma passagem desaparece,
-uma entidade estável tenta manter um equipamento funcionando, um registro
-apresenta a mesma assinatura encontrada numa máquina antiga. Ajudar essa entidade
-e restabelecer a passagem torna a posição de Rust compreensível através do jogo.
+O primeiro teste tem uma ameaça, um espaço e uma consequência. Ele não precisa
+de vários inimigos, árvore de habilidades, combos extensos, inventário ou
+exploração de uma cidade inteira para cumprir essa história.
 
-Os terminais oferecem pistas curtas, imagens e conversas. A rota principal
-continua compreensível para quem lê pouco e para quem nunca programou. Um desvio
-opcional deve revelar algo específico sobre Ada ou o lugar visitado, em vez de
-servir apenas para acumular objetos. Narrativa ramificada e sistema de moralidade
-ficam para avaliação posterior.
+## Animação e produção visual
 
-## Uma habilidade para testar: Vínculo
+O alvo é atuação expressiva, como a ambição demonstrada pelos especiais do
+Prototype 3, aplicada também aos gestos cotidianos. As poses e os efeitos
+existentes de Rust podem servir como base; a adequação à aventura precisa ser
+conferida em movimento. Cenas compostas com camadas e arte provisória são úteis
+para revisar ritmo, sem equivaler a animação corporal final.
 
-Nome provisório. Rust estabiliza uma forma que está perdendo sua presença física.
-É uma metáfora de vínculo e responsabilidade, não uma simulação do compilador.
-
-- **Travessia:** uma plataforma intermitente permanece sólida enquanto vinculada.
-- **Combate:** uma criatura fora de fase torna-se atingível enquanto vinculada;
-  ela continua andando e atacando. A habilidade não congela qualquer adversário.
-- **Escolha:** Rust mantém apenas um vínculo por vez. Vincular outro alvo devolve
-  o anterior ao seu comportamento normal, com antecipação visual legível.
-
-No primeiro teste, o comando alterna o vínculo no alvo elegível à frente, dentro
-de um alcance visível. Marcadores indicam qual alvo será afetado. Não há mira
-livre, física de cordas, árvore de poderes ou medidor adicional. A ligação é
-mostrada por contorno, símbolo e movimento, além da cor.
-
-Primeiro aprende-se com uma plataforma sobre piso seguro. Depois, com uma
-criatura isolada. Só então uma sala combina travessia e combate: manter um
-caminho sólido ou tornar a ameaça vulnerável. A troca jamais deve produzir
-queda inevitável sem aviso; erros devolvem Rust a um ponto seguro próximo.
-
-Esse poder é a hipótese principal de diversão. O menor teste deve descobrir
-se escolher e trocar o vínculo cria decisões interessantes. Se virar apenas
-um botão obrigatório antes de todo ataque, precisa ser revisto.
-
-## Abertura proposta: Ada, Assembly e o terminal
-
-O pedido atual coloca Ada em cena, expandindo a apresentação indireta sugerida
-nos documentos anteriores. Ela mantém presença intelectual e misteriosa. O
-prólogo mostra um acontecimento decisivo e guarda suas causas completas para
-a aventura.
-
-Base provisória: conforme o worldbuilding, **o Linker já existia; Ada foi a
-primeira humana conhecida a acessá-lo e libertou Assembly**. A ficção pertence
-ao universo do jogo, sem pretensão de reconstituição histórica.
-
-Há uma divergência editorial a resolver antes do roteiro final: o prólogo de
-[story.json](../assets/lore/story.json) descreve o surgimento do Linker de outra
-forma e o capítulo de Ada contém uma frase ambígua sobre a emergência de
-Assembly. Esta proposta usa o worldbuilding como referência provisória; o texto
-do menu não foi reescrito nesta rodada.
-
-Alvo de duração: 45–60 segundos de cena, seguidos de 10–15 segundos de terminal.
-O jogador pode revelar o texto inteiro, avançar e pular o prólogo; repetição após
-morte começa no checkpoint da aventura. A sequência pode ser revista no menu.
-
-| Momento | Imagem e movimento | Função narrativa |
-|---|---|---|
-| 1. A intenção | Close de Ada escrevendo; símbolos se alinham com movimentos de uma máquina | Mostrar alguém compreendendo uma ligação impossível |
-| 2. A resposta | Fios de luz percorrem papel, metal e espaço; Ada percebe que a máquina respondeu além do esperado | Introduzir o Linker através de uma ação |
-| 3. A travessia | Assembly emerge incompleto, alternando matéria e lacunas; Ada e a entidade se observam | Dar presença e estranheza à primeira entidade |
-| 4. A interrupção | Assembly toca um símbolo; som e movimento cessam, deixando um sinal isolado | Sugerir sua filosofia e manter uma pergunta aberta |
-| 5. O presente | O sinal reaparece como cursor num terminal em Sirius | Ligar o prólogo ao lugar onde Rust começa |
-
-Rascunho de texto original, digitado em blocos curtos. O ritmo de um terminal
-que parece responder ao observador é a referência pedida; palavras, grafismo e
-encenação terão identidade própria do Linker.
-
-```text
-> recuperando um registro sem origem...
-
-Antes que símbolos ganhassem corpo,
-Ada ouviu uma resposta.
-
-A primeira entidade atravessou.
-Depois, quis fechar a passagem.
-
-> sinal localizado: SIRIUS / CAMPINAS
-> entidade em campo: RUST
-> há alguém do outro lado.
-```
-
-A câmera se afasta do terminal e revela Rust no mesmo espaço. Um ruído além de
-uma porta indica o primeiro objetivo; o controle passa ao jogador. Esse corte
-conecta a história diretamente à exploração.
-
-## Primeiro capítulo: O sinal que não devia existir
-
-Título provisório. Um setor fictício inspirado no Sirius sofre uma ruptura;
-Rust procura uma entidade presa e encontra um registro que reconhece sua
-assinatura. O capítulo deve entregar uma pequena história completa: chegar,
-compreender a ameaça, ajudar, conter a ruptura e sair com uma nova pergunta.
-
-Alvo de experiência: **10–15 minutos**, validado em playtest, incluindo a abertura.
-
-| Trecho | Ação do jogador | Descoberta ou recompensa |
-|---|---|---|
-| Entrada e observação | Andar, saltar e seguir o sinal por um espaço seguro | O laboratório abriga algo vivo além das máquinas |
-| Passagem em falha | Estabilizar a primeira plataforma e liberar a travessia | O Vínculo muda fisicamente o mundo |
-| Encontro e desvio | Ajudar uma entidade estável; explorar uma pequena sala opcional | Uma pista de Ada dá sentido ao sinal do prólogo |
-| Contenção | Enfrentar uma criatura fora de fase; depois combinar vínculo e travessia | A habilidade tem utilidade e limites compartilhados |
-| Núcleo da ruptura | Enfrentar uma versão maior da mesma ameaça, com padrão legível | Rust contém o núcleo numa animação autoral curta |
-| Consequência | Atravessar o espaço agora estabilizado e recuperar o registro | A assinatura de Assembly reconhece Rust; surge a próxima pista |
-
-Assembly aparece como presença ou assinatura neste capítulo. Sua luta final
-permanece uma possibilidade de arco futuro. Duke, Old C e Python podem guiar
-capítulos posteriores em seus lugares de origem; esse horizonte não implica
-produzir todas as cidades ou tornar o elenco inteiro jogável agora.
-
-## Animação como parte da aventura
-
-A ambição é ter atuação e movimento expressivos durante toda a experiência.
-Priorizar aceleração e parada de Rust, aterrissagem, gesto de vínculo, reação ao
-ambiente, olhar e interação; esses movimentos serão vistos muitas vezes.
-Reservar encenações mais longas para revelações e encerramentos de capítulo.
-
-Os especiais existentes demonstram uma linguagem de poses, efeitos e áudio que
-pode informar as novas cenas. Sequências de dois lutadores numa arena precisam
-de adaptação para funcionar em travessia, combate com inimigos e câmera móvel.
-
-O prólogo pode combinar desenhos em camadas, câmera, luz e poses animadas, com
-movimento mais elaborado no gesto de Ada e na aparição de Assembly. Um animatic
-serve para revisar duração e continuidade antes da produção dos desenhos.
-
-| Grupo de produção | Limite inicial proposto |
+| Grupo | Produção limitada ao episódio |
 |---|---|
-| Protagonista | Rust; avaliar reaproveitamento de andar, salto, golpes e reações; acrescentar vínculo e interação |
-| Cenário | Um setor de Sirius com três salas principais, um pequeno desvio e elementos de travessia |
-| Encontros | Um tipo de inimigo e uma variação maior para o núcleo; no máximo dois inimigos simultâneos no piloto |
-| Personagem de apoio | Uma entidade estável com animação curta de presença/interação |
-| Prólogo | Quatro composições principais e a transição pelo terminal; Ada e Assembly com atuação limitada à cena |
-| Momento de espetáculo | Uma contenção final de 3–5 segundos, acionada após sucesso do jogador |
+| Ada | Trabalho, percepção da mensagem e reação; origem humana visível |
+| Assembly | Aparição/despertar com presença e mistério |
+| Rust | Despertar, movimento, ação/reação do encontro e balanço de cabeça com pesar |
+| Errática | Presença, aproximação, ataque legível, dano e derrota |
+| Ambiente | Composição de trabalho de Ada e pequeno espaço da manhã de Rust |
+| Interface | Terminal, indicação de comandos, pausa e tentativa/encerramento |
 
-As arenas bitmap existentes são referências e possíveis bases de composição;
-não representam fases extensas prontas. Desenhar camadas, chão e plataformas
-exploráveis será trabalho adicional. O mesmo vale para inimigos, câmera e
-retorno ao checkpoint: reaproveitamento precisa ser verificado, não presumido.
+A [direção de arte](07-art-direction.md) orienta o tom. Silhuetas e movimento
+precisam continuar legíveis durante efeitos; cenário, terminal e câmera não
+podem esconder o contato do combate. Uma demonstração gravada deve incluir a
+passagem de controle e o gesto final, além dos quadros mais vistosos.
 
-## Ordem de trabalho sugerida
+## Isolamento de implementação
 
-1. **Fechar o tratamento curto:** conciliar a origem com o texto do menu,
-   desenhar a sequência de abertura e o percurso do capítulo. Registrar decisões
-   criativas aceitas; uma mudança consolidada de direção pede ADR e atualização
-   de visão, Mini-GDD, escopo e arte.
-2. **Provar três minutos de jogo:** após pedido de implementação, montar uma
-   sala simples com Rust, plataforma instável, criatura e Vínculo. Testar movimento,
-   legibilidade e uma decisão de troca. Usar poses existentes e formas provisórias.
-3. **Revisar o animatic em paralelo ao teste de gameplay:** conferir Ada,
-   Assembly, terminal e passagem de controle com quadros provisórios.
-4. **Produzir o capítulo de 10–15 minutos:** depois de validar a habilidade,
-   acrescentar o desvio, personagem de apoio, checkpoint e contenção final;
-   investir animação nas ações mais vistas e nos dois momentos narrativos.
-5. **Playtestar o capítulo:** observar entendimento, fluidez e vontade de
-   continuar; usar o resultado para decidir a expansão da aventura.
+Aventura e luta têm features Cargo e binários próprios. O primeiro núcleo
+compartilhado contém utilidades como `math` e `runtime_paths`; narrativa,
+movimento, inimigo e regras de progressão da aventura pertencem ao experimento.
+A [ADR 0021](adr/0021-isolated-adventure-experiment.md) e a
+[arquitetura](08-code-architecture.md) detalham os limites efetivos.
 
-O teste de três minutos valida gameplay. O capítulo piloto valida a combinação
-de história, exploração, ação e apresentação. Nenhum deles assume campanha
-completa, mapa aberto, crafting, inventário de equipamentos ou múltiplos heróis.
+Não introduzir regras da aventura no estado das partidas para aproveitar
+seleção, rounds ou cinematográficos de dois lutadores. Recursos visuais podem
+ser reaproveitados quando cabem na cena, sem assumir que os sistemas de luta
+sejam o modelo da aventura. O diário registra comandos, organização e revisão
+real do binário, em vez de tratar a existência dos arquivos como entrega.
 
-## Critérios de avaliação e riscos
+## Critérios de aceite
 
-- O jogador explica o efeito e a limitação do Vínculo sem precisar saber Rust.
-- A mesma habilidade resolve uma travessia e um encontro, com decisão visível
-  sobre qual alvo manter estável.
-- O jogador entende quem está ajudando e por que continuar até o núcleo.
-- A descoberta opcional acrescenta contexto, sem bloquear quem a ignorar.
-- O movimento de Rust é agradável antes das cenas de espetáculo.
-- Morrer permite retomar rapidamente; texto digitado e prólogo não impõem espera
-  em novas tentativas. Nenhum efeito visual esconde o alvo ou a plataforma.
-- No playtest, registrar onde as pessoas se perdem, pulam texto, repetem uma
-  ação sem entender e demonstram interesse espontâneo pelo próximo trecho.
+1. A execução percorre Ada, mensagem, Assembly, salto temporal, manhã de Rust,
+   encontro controlado pelo jogador e reação final, na ordem autorizada.
+2. Ada aparece inicialmente humana; a cena não revela a autoria da mensagem
+   nem apresenta uma explicação nova para a transformação ou para o Linker.
+3. Rust parece estar começando um dia comum. Seu gesto depois da vitória
+   comunica pesar e necessidade, sem festa ou hostilidade a todas as EPs.
+4. A errática tenta atingir e matar Rust. Contato válido causa dano; ataques
+   fora de alcance não acertam. O jogador pode vencer ou perder por suas ações.
+5. Pausa congela o encontro; retomar preserva seu estado. Derrota permite
+   tentar novamente sem assistir obrigatoriamente ao prólogo.
+6. Texto digitado pode ser revelado/avançado e a abertura pode ser pulada.
+   Entradas de confirmação não se tornam ataques involuntários na transição.
+7. Features/binários preservam o jogo de luta, e regras de aventura têm testes
+   independentes. Formatação, Clippy e testes apropriados passam; limitações de
+   execução são registradas com precisão no diário.
+8. Capturas ou vídeo do renderer mostram a sequência e o contato real; revisão
+   de estados sozinha não recebe status de aprovação humana da animação.
+9. Em playtest humano posterior, registrar entendimento da ameaça, clareza dos
+   comandos, leitura do pesar de Rust e vontade de continuar. Diversão e
+   interesse do público continuam hipóteses até essa observação.
 
-Os principais riscos são concentrar a produção na abertura e deixar pouco jogo,
-transformar o Vínculo numa tarefa repetitiva e ampliar cidades/inimigos antes de
-validar uma sala. O teste pequeno e o orçamento de animações respondem a esses
-riscos. A proposta é candidata a experimento posterior ao corte de luta 0.1;
-diversão, duração final e interesse do público ainda precisam ser demonstrados.
+## Ideias estacionadas
+
+A proposta anterior sugeria **Vínculo**, plataformas instáveis, um capítulo em
+**Sirius**, uma entidade de apoio, um desvio com pista de Ada e um núcleo de
+ruptura. Essas ideias estão preservadas como possibilidades posteriores; não
+integram a implementação autorizada deste episódio. Também ficam para depois
+campanha de 10–15 minutos, múltiplos heróis, mapa aberto e confronto final com
+Assembly. Retomá-las exige reavaliar escopo a partir do primeiro encontro.
+
+O principal risco desta rodada é produzir uma abertura vistosa com pouco
+controle interessante, ou perder a humanidade de Rust atrás dos efeitos.
+A revisão precisa considerar o encontro e o gesto final com o mesmo cuidado
+que Ada e Assembly.

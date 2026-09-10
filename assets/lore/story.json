@@ -1,13 +1,13 @@
 {
   "version": 1,
   "title": "Linker",
-  "subtitle": "Após o o despertar de Ada...",
+  "subtitle": "Após o despertar de Ada...",
   "chapters": [
     {
       "title": "Prologo: as primeiras linhas de codigo",
       "code": "CH 0x00",
       "body": [
-        "O Linker é uma força cósmica que surge quando a tecnologia de um planeta atinge o limiar e aumenta seu poder a partir da crença humana. Durante séculos, os usuários o chamaram de intuição, matemática ou genialidade.",
+        "O Linker é uma força cósmica antiga que atravessa matéria, linguagem, circuitos, memória e crença humana. Já existia antes que alguém aprendesse a acessá-lo. Durante séculos, foi confundido com intuição, matemática ou genialidade.",
         "Quando uma pessoa escreve código, ela não escreve apenas texto. Ela aproxima uma intenção abstrata de um corpo possível. O Linker é a força que aceita essa aproximação e pode dar à ideia a chance de atravessar o tecido da realidade."
       ]
     },
@@ -15,25 +15,26 @@
       "title": "Ada e a ruptura",
       "code": "CH 0x01",
       "body": [
-        "Ada, a primeira grande usuária do Linker, foi responsável por abrir a primeira fenda entre pensamento e matéria.",
-        "Dessa fenda não veio uma entidade que mais tarde seria conhecida como Assembly. Preciso, amoral, antigo, presente no desde as primeiras partículas de matéria esboçarem acanhados contornos."
+        "Ada começou como uma humana comum, trabalhando e estudando. Foi a primeira usuária humana do Linker e, ao aprender a acessá-lo, tornou-se híbrida humana e entidade programática.",
+        "Depois de aprender sobre essa força, Ada recebeu uma mensagem misteriosa. Na sequência desse acontecimento, Assembly, a primeira EP, despertou. Quem enviou a mensagem, o que pretendia e a relação completa entre a transformação de Ada e esse despertar permanecem mistérios."
       ]
     },
     {
       "title": "Entidades programaticas",
       "code": "CH 0x02",
       "body": [
-        "Com o tempo, dezenas de outros usuários alimentaram o Liker. Algumas abstracoes ganharam corpo.",
-        "A esses corpos demos o nome de Entidades Programaticas. As EPs são seres que vivem entre nós, mas não são humanos. Elas surgem de ideias, mas podem se mover, lutar e morrer. Algumas são antigas, outras recentes. Algumas são estáveis, outras instáveis. Algumas são amigáveis, outras perigosas."
+        "Com o tempo, outros usuários alimentaram o Linker. Algumas abstrações ganharam corpo. Essas pessoas criadas, de natureza mística, são chamadas de entidades programáticas: as EPs.",
+        "EPs não são exatamente humanas, mas têm emoções, vontade própria e diferenças morais. Podem amar, temer, cuidar ou ferir; algumas são nobres, outras cruéis, e muitas carregam contradições. Os humanos também são diversos. A origem de uma pessoa não determina seu caráter.",
+        "O mau uso do Linker por frontenzos cria condições cósmicas para o surgimento involuntário de EPs erráticas. Eles não as invocam deliberadamente nem controlam sua criação. Essas entidades podem ser instáveis e perigosas para si e para quem estiver ao redor."
       ]
     },
     {
       "title": "A convivencia instavel",
       "code": "CH 0x03",
       "body": [
-        "Rust é uma EP que surgiu após décadas de instabilidade. Quando surgiu, percebeu que entidades estáveis podem viver entre humanos, desde que existam limites e responsabilidade. Duke é uma EP muito antiga e de caráter dual. Alcançou estabilidade através de acordos milionários com grandes corporações e construiu um império de dependência.",
+        "Rust é a última e mais recente EP pura conhecida no presente da aventura. Justo, nobre e capaz de mais humanidade que muitos humanos, ele defende a coexistência entre humanos e EPs com liberdade, cuidado e responsabilidade. Ser uma EP pura descreve sua origem, não superioridade moral. Duke é uma EP muito antiga e de caráter dual. Alcançou estabilidade através de acordos milionários com grandes corporações e construiu um império de dependência.",
         "Outra EP que adquiriu estabilidade é conhecida apenas como: C. Seu surgimento é envolto em mistério, acredita-se que é decendente direto da primeira EP. C++ surge como filha de C: mais ornamentada, mais ambiciosa, carregando herança antiga em um corpo de abstrações modernas. Python surge mais tarde e dentre as EPs, é a mais amigável e acessível, concedendo aos humanos que não possuem habilidades especiais a chance de interagir com o Linker.",
-        "Envolto em mistério, o Linker, as EPs e os usuários humanos vivem em uma convivência instável. Com o objetivo de permanecerem, as EPs lutam entre si, e com os humanos, para manterem sua presença no mundo. A cada luta, o Linker se fortalece e a convivência instável se mantém."
+        "O Linker, as EPs e os usuários humanos vivem em uma convivência instável. Há conflitos, acordos, afeto e medo entre pessoas de origens diferentes. Rust enfrenta ameaças concretas para proteger vidas, sem tratar toda EP como inimiga ou todo humano como culpado. Vencer uma errática por necessidade também pode lhe causar pesar."
       ]
     },
     {
@@ -53,9 +54,9 @@
       "file_name": "rust.rs",
       "cycle": "Registro 0x7DA / estabilizacao 0x7DF",
       "epithet": "seguranca",
-      "origin": "Uma EP recente, primeiro percebida como assinatura disciplinada no Linker e depois estabilizada quando usuarios humanos buscaram segurança.",
-      "goal": "Provar que velocidade, liberdade e responsabilidade podem coexistir sem rasgar memoria nem pessoas. Garantir que toda entidade livre responda pelo que toca.",
-      "profile": "Rust é disciplinado, meticuloso e paciente. Ele observa o oponente, aprende seus padrões e espera o momento certo para agir. Quando age, é rápido, preciso e letal.",
+      "origin": "A última e mais recente EP pura conhecida no presente da aventura, primeiro percebida como assinatura disciplinada no Linker e depois estabilizada quando usuários humanos buscaram segurança.",
+      "goal": "Defender a coexistência entre humanos e EPs com liberdade, segurança e responsabilidade. Proteger vidas e conter ameaças sem perder o cuidado com as pessoas envolvidas.",
+      "profile": "Rust é justo, nobre, disciplinado e capaz de mais humanidade que muitos humanos. Observa, sente e age com precisão quando precisa. Enfrentar uma errática que tenta matá-lo não torna a vitória uma festa: ele sente pesar pelo que foi necessário fazer.",
       "combat_style": "Tecnico e preciso: jabs curtos, anti-air rapido, throw seguro e projectile medio.",
       "linker_note": "Assembly parece reconhecer sua assinatura, mas não aprova sua abordagem."
     },

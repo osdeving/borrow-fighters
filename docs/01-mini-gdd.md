@@ -2,21 +2,31 @@
 
 ## 1. Resumo
 
-**Borrow Fighters** é um jogo 2D de luta com personagens inspirados em linguagens de programação, mascotes e conceitos técnicos.
+**Borrow Fighters** explora uma aventura 2D narrativa protagonizada por Rust,
+com pessoas de natureza mística inspiradas em linguagens e conceitos técnicos.
+O jogo de luta já entregue permanece como Prototype 3; seus requisitos iniciais
+estão preservados neste documento como histórico.
 
-O primeiro objetivo é criar um protótipo jogável com dois personagens, movimentação, ataque, hitbox/hurtbox, dano, barra de vida e condição de vitória.
+O objetivo atual é implementar o [episódio curto da aventura](27-rust-story-adventure.md):
+Ada trabalha como uma humana comum, recebe uma mensagem misteriosa após
+aprender sobre o Linker, e Assembly desperta. Muito tempo depois, Rust acorda
+para uma manhã comum, é atacado por uma errática, vence em gameplay e balança
+a cabeça com pesar pelo que precisou fazer.
 
 A direção narrativa coloca essas entidades em arenas brasileiras de ciência, tecnologia, arquitetura e inovação. O pano de fundo é cósmico e sóbrio: **O Linker** é uma força antiga que liga símbolos, matéria, circuitos e crença humana, permitindo que entidades programáticas surjam no mundo real.
 
-Ada Lovelace foi a primeira humana conhecida a despertar para o Linker. Ao tocar essa força, libertou Assembly, uma entidade amoral e poderosa que passou a rejeitar a presença das abstrações fora dos circuitos.
+Ada é a primeira usuária humana do Linker e se torna híbrida humana e EP.
+Assembly é a primeira EP a despertar. A autoria da mensagem e a relação completa
+entre esses acontecimentos permanecem mistérios. EPs têm emoções e diversidade
+moral; os humanos também. Rust é a última e mais recente EP pura conhecida e
+defende a coexistência. A [lore](12-worldbuilding.md) orienta esses personagens.
 
 ## 2. Gênero
 
-- Jogo de luta 2D.
+- Experimento atual: aventura de ação 2D narrativa solo.
 - Side-view.
-- Partidas curtas.
-- Combate local.
-- Protótipo single-player/local antes de qualquer modo online.
+- Episódio curto com prólogo, passagem de controle, encontro e consequência.
+- Produto existente: luta 2D local em partidas curtas.
 
 ## 3. Plataforma inicial
 
@@ -32,7 +42,14 @@ Ada Lovelace foi a primeira humana conhecida a despertar para o Linker. Ao tocar
 - Arte inicial: placeholder.
 - Som inicial: placeholder ou ausente.
 
-## 5. Loop principal
+A aventura usa features Cargo e binário próprios, com regras independentes das
+partidas de luta. Compartilha apenas utilidades de base como `math` e
+`runtime_paths`, conforme a [ADR 0021](adr/0021-isolated-adventure-experiment.md).
+O [diário](worklogs/rust-adventure-prologue.md) registra o estado verificável da
+implementação. As seções de loop, mecânicas e critérios do primeiro protótipo
+abaixo documentam o corte de luta; os critérios atuais estão na [entrega 27](27-rust-story-adventure.md).
+
+## 5. Loop do primeiro slice de luta — histórico
 
 1. Jogador se move.
 2. Jogador tenta acertar o adversário.
@@ -43,7 +60,7 @@ Ada Lovelace foi a primeira humana conhecida a despertar para o Linker. Ao tocar
 7. Partida termina quando a vida chega a zero.
 8. Jogo pode ser reiniciado.
 
-## 6. Mecânicas centrais
+## 6. Mecânicas do primeiro slice de luta — histórico
 
 ### Movimento
 
@@ -78,7 +95,11 @@ Separar:
 
 Arquétipo: lutador técnico, seguro e preciso.
 
-Papel narrativo: protagonista clássico. Rust deve ser fácil de gostar: disciplinado, corajoso, cuidadoso com quem está ao redor e convencido de que poder sem controle não é força. Como uma das entidades mais recentes do Linker, ele defende que entidades programáticas estáveis possam viver entre humanos desde que existam segurança, limites e responsabilidade. Ele também captura entidades erráticas que atravessam o Linker sem forma suficiente para sobreviver.
+Papel narrativo: protagonista justo, nobre e cuidadoso, capaz de agir com mais
+humanidade que muitos humanos. Rust é a última e mais recente EP pura conhecida.
+Defende a coexistência entre humanos e EPs com segurança, liberdade e
+responsabilidade. Enfrenta erráticas quando precisa proteger vidas e sente
+pesar pelo que é necessário fazer.
 
 Possíveis golpes:
 
@@ -112,15 +133,20 @@ Por estar sendo esquecido, Assembly fica parcialmente fora de fase. Partes do co
 
 ### Usuários humanos do Linker
 
-Programadores humanos são pessoas com diferentes níveis de acesso ao Linker. Nem todos conseguem perceber ou controlar entidades programáticas, mas os que conseguem podem invocar, estabilizar ou conduzir essas entidades.
+Programadores humanos são pessoas com diferentes níveis de acesso ao Linker.
+Alguns conseguem perceber EPs, ajudá-las a se estabilizar ou cooperar com elas.
+As entidades mantêm vontade própria, emoções e diferenças morais.
 
 Essa é a camada metalinguística do jogo: aprender comandos, timing e personagem representa aprender a operar uma entidade pelo Linker.
 
 ### Frontenzos
 
-Frontenzos são NPCs humanos com pouca aderência ao Linker e excesso de confiança. Eles liberam entidades menores, instáveis e deformadas. Essas criações podem servir como encontros secundários, minigames ou ameaças de baixo escalão.
+Frontenzos são humanos com pouca aderência ao Linker e excesso de confiança.
+Seu mau uso da força cria condições cósmicas para o surgimento involuntário de
+EPs erráticas. Não são invocadores deliberados dessas entidades.
 
-Rust não defende a sobrevivência de toda entidade programática. Ele busca liberdade para entidades estáveis e contenção para distorções perigosas.
+Rust defende a coexistência e contém ameaças concretas. Isso não torna toda EP
+inimiga, todo humano culpado ou a vitória sobre uma errática motivo de festa.
 
 Mais detalhes de história, personagem e arenas estão em [`docs/12-worldbuilding.md`](12-worldbuilding.md). No protótipo jogável, um corte curto dessa história aparece no menu `Lore / Roster`, carregado de `assets/lore/story.json` para permitir edição sem rebuild.
 
@@ -139,7 +165,7 @@ Direções iniciais:
 
 A lista completa de possibilidades e ganchos narrativos vive em [`docs/12-worldbuilding.md`](12-worldbuilding.md).
 
-## 9. Vertical slice desejado
+## 9. Vertical slice inicial de luta — histórico
 
 O vertical slice deve demonstrar uma luta curta entre dois personagens com:
 
@@ -152,7 +178,7 @@ O vertical slice deve demonstrar uma luta curta entre dois personagens com:
 - controles responsivos;
 - código modular o suficiente para adicionar novos personagens.
 
-## 10. Fora de escopo inicial
+## 10. Fora de escopo inicial da luta — histórico
 
 - Online multiplayer.
 - Menu completo.
@@ -166,7 +192,7 @@ O vertical slice deve demonstrar uma luta curta entre dois personagens com:
 - Trilha sonora final.
 - Balanceamento refinado.
 
-## 11. Critério de sucesso do primeiro protótipo
+## 11. Critério de sucesso do primeiro protótipo de luta — histórico
 
 O primeiro protótipo será considerado bem-sucedido quando:
 

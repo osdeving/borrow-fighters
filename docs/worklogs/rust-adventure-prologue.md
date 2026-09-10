@@ -48,7 +48,7 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 
 - [x] Criar branch e preservar documentação anterior.
 - [x] Registrar ADR e instruções de retomada.
-- [ ] Sincronizar lore e roteiro.
+- [x] Sincronizar lore e roteiro.
 - [ ] Implementar features/binários e domínio puro.
 - [ ] Produzir/revisar arte de Ada, manhã, ambiente e errática.
 - [ ] Integrar animação, input, áudio, combate e desfecho na janela real.
@@ -58,6 +58,11 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 - [ ] Fechar docs, diário e commits de entrega.
 
 ## Checkpoints
+
+- 2026-09-10: `523e212` registra isolamento e diário. Lore revisada nos docs e no
+  livro JSON; proposta antiga substituída pelo episódio pedido. Domínio puro tem
+  11 testes aprovados em harness isolado. Arte de Ada e ambientes disponível;
+  manhã de Rust está em revisão de transparência. Matriz Cargo ainda pendente.
 
 - 2026-09-10: branch criada; `ac49bae` preserva trabalho anterior. ADR e diário
   preparados antes da implementação. Nenhuma validação do novo jogo concluída.

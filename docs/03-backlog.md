@@ -5,13 +5,17 @@
 Este documento é a fonte de verdade para **o que vem agora**, com filas separadas
 de **to-do** (investigações e melhorias) e **bugfix** (defeitos observados).
 
-Prioridade atual, em 10 de setembro de 2026: explorar uma **aventura 2D narrativa
-solo protagonizada por Rust**, partindo da lore de Ada, Assembly e do Linker.
-A [proposta de aventura](27-rust-story-adventure.md) reúne direção, abertura e
-recorte de validação. A frente atual é de proposta e documentação; implementação
-da aventura ainda não foi solicitada. As pendências do Prototype 3 permanecem
-registradas abaixo. Estar no backlog, mesmo com prioridade alta, **não significa
-execução ativa**.
+Prioridade atual, em 10 de setembro de 2026: implementar um **experimento de
+aventura 2D narrativa solo protagonizada por Rust**, na branch
+`feature/rust-adventure-prologue`. O [episódio autorizado](27-rust-story-adventure.md)
+mostra Ada, a mensagem misteriosa e Assembly; muito tempo depois, Rust acorda,
+enfrenta uma errática e reage com pesar à vitória. A lore aceita foi sincronizada
+entre [worldbuilding](12-worldbuilding.md) e [livro do jogo](../assets/lore/story.json).
+A [ADR 0021](adr/0021-isolated-adventure-experiment.md) registra features/binários
+separados e a base compartilhada de `math`/`runtime_paths`; o
+[diário](worklogs/rust-adventure-prologue.md) acompanha execução e evidências.
+As pendências do Prototype 3 permanecem registradas abaixo. Estar no backlog,
+mesmo com prioridade alta, **não significa execução ativa**.
 
 Rodada entregue: [apresentação e fluxo do playtest](26-playtest-visual-completion.md),
 com reações de todo o elenco, seleção Linker, pausa/revanche, energia,
@@ -75,15 +79,16 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Próxima ação |
 |---|---|---|---|---|
-| Agora | Direção de aventura 2D narrativa com Rust | Proposta documentada para discussão; sem implementação | [Proposta 27](27-rust-story-adventure.md) | Avaliar o ciclo de exploração, ação e descoberta da lore, a abertura e o menor recorte jogável antes de decidir a mudança de produto. |
-| Próximo | Validar a proposta de aventura | A definir após discussão | [Proposta 27](27-rust-story-adventure.md), TODO-011 | Conciliar as fontes de lore antes do roteiro final e fechar hipótese, escopo e critérios de um primeiro experimento; registrar decisões estruturais antes de implementar. |
+| Agora | Experimento de aventura: prólogo e primeiro encontro | Implementação autorizada em andamento; TODO-012 | [Entrega 27](27-rust-story-adventure.md), [ADR 0021](adr/0021-isolated-adventure-experiment.md), [diário](worklogs/rust-adventure-prologue.md) | Implementar a sequência Ada → mensagem → Assembly → manhã de Rust → combate → pesar, com regras próprias e revisão no renderer. |
+| Próximo | Avaliar o episódio jogável | Após completar o experimento | [Critérios da entrega 27](27-rust-story-adventure.md#critérios-de-aceite) | Observar controle, leitura da ameaça, entendimento do pesar de Rust e vontade de continuar; decidir expansão a partir da evidência. |
 | Depois | Pendências do Prototype 3 | Backlog; sem execução ativa | [To-do](#backlog-de-to-do), [bugfix](#backlog-de-bugfix) | Retomar itens por prioridade e evidência, em entregas pequenas, quando esta frente for reaberta. |
 
 ## Backlog de to-do
 
 Prioridade ordena o trabalho quando a respectiva frente for retomada; não
-antecipa o **Agora**. Todos os itens abaixo estão **abertos no backlog**. IDs
-permanecem estáveis ao mudar prioridade ou vincular issue/PR.
+antecipa o **Agora**. TODO-001 a TODO-010 estão **abertos no backlog**;
+TODO-011 está **concluído** e TODO-012 está **em andamento**. IDs permanecem
+estáveis ao mudar prioridade ou vincular issue/PR.
 
 | ID | Item | Prioridade | Critério de conclusão / evidência esperada |
 |---|---|---|---|
@@ -97,7 +102,8 @@ permanecem estáveis ao mudar prioridade ou vincular issue/PR.
 | TODO-008 | Opções de janela e resolução | Média | Definir modos suportados; permitir ajustar janela/resolução, preservar preferências e conferir legibilidade do HUD, menus, personagens e navegação nos modos escolhidos. Melhoria futura de uso. |
 | TODO-009 | Voz própria de Old C | Baixa | Selecionar voz redistribuível, registrar procedência/licença e obter avaliação humana de identidade e consistência. O [fallback de Rust](../assets/audio/review/old-c-fallback-2026-09-09/README.md) é provisório e autorizado; substituí-lo não deve alterar as vozes dos demais. |
 | TODO-010 | Ferramenta visual clicável | Baixa, condicionada à necessidade | Retomar o [roadmap do viewer](16-sprite-combat-viewer-roadmap.md) somente se atalhos e texto forem insuficientes; registrar o problema de uso antes de avaliar `raygui`. Pendência anterior preservada. |
-| TODO-011 | Conciliar prólogo e fontes da lore para a aventura | Alta, antes do roteiro final | Comparar [worldbuilding](12-worldbuilding.md) e [livro do jogo](../assets/lore/story.json): Linker sempre presente versus surgimento no limiar tecnológico; Assembly emergindo da fenda versus a formulação negativa de CH 0x01. Registrar a decisão de cânone e sincronizar as fontes antes de finalizar o prólogo. A revisão editorial também deve corrigir grafia/gramática como `Liker` e `presente no desde`, sem tratá-las como decisão de cosmologia. Nesta rodada, o worldbuilding é apenas a base provisória da [proposta 27](27-rust-story-adventure.md); o JSON não foi alterado. |
+| TODO-011 | Conciliar prólogo e fontes da lore para a aventura — concluído | Concluído em 10/09/2026 | [Worldbuilding](12-worldbuilding.md), [livro do jogo](../assets/lore/story.json) e [entrega 27](27-rust-story-adventure.md) sincronizados e revisados: EPs como pessoas, Rust como mais recente EP pura, Ada humana/híbrida, mensagem misteriosa antes de Assembly e origem involuntária das erráticas. JSON válido; grafias `Liker` e `presente no desde` removidas dos textos. A autoria da mensagem e a relação completa entre os acontecimentos permanecem em aberto. |
+| TODO-012 | Implementar prólogo e primeiro encontro da aventura — em andamento | Alta, frente atual | Cumprir a [sequência e os critérios autorizados](27-rust-story-adventure.md), com features/binários separados, gameplay próprio e validação de estado e renderer. Registrar resultados e limites no [diário](worklogs/rust-adventure-prologue.md); só concluir após a revisão da entrega. Vínculo/Sirius e expansão da campanha ficam estacionados. |
 
 ## Backlog de bugfix
 
