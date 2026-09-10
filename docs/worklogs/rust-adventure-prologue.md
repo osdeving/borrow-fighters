@@ -2,6 +2,14 @@
 
 ## Estado atual
 
+- Rodada 2 em andamento: [textos editáveis, encaixe na cama e apresentação](../28-adventure-texts-and-opening.md).
+  Base desta continuação: `0046312`. A apresentação entra após o combate/pesar,
+  conforme escolha do usuário. F5 recarrega JSON; C++ ganha passado de
+  profissional do sexo e despertar heroico, Python professora ensina sobre EPs.
+  Pendentes: catálogo/reload, calibração visual, arte/roteiro, sequência/áudio,
+  validação gráfica, testes, docs e commits. Root integra; frentes independentes
+  cuidam da manhã, arte de abertura e lore. Preservar alterações desses arquivos.
+
 - Entrega concluída: duas cenas animadas e primeiro combate de aventura, lore
   corrigida, isolamento de implementação/testes/assets e validação gráfica.
 - Branch: `feature/rust-adventure-prologue`.
