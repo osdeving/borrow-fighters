@@ -94,6 +94,13 @@ Nenhum mood está aprovado como direção final. Propostas devem comparar pelo m
 
 ## Estado visual atual do protótipo
 
+O menu principal da [rodada 3 da aventura](29-story-terminal-menu.md) adota
+INK, papel creme, dourado e verde-água do título final, com a mesma Barlow
+Condensed. Moldura de terminal, cursor bloco piscante e revelação binária
+aproximam as duas entradas. Esta direção se aplica somente ao menu principal;
+seleção, lutas, submenus e livro de lore conservam sua apresentação.
+Go fica fora da montagem de abertura por pedido do usuário, sem apagar seus assets.
+
 Os seis lutadores têm atlas de ações revisadas em `assets/candidates/`, escolhidos por padrão; `BORROW_FIGHTERS_SPRITE_CANDIDATES=0` permite comparar o baseline preservado. A produção por ação e a validação específica estão na [matriz atual](19-sprite-production-coverage.md). Arenas, retratos e demais elementos fora dessa rodada mantêm seu estado anterior.
 
 Em 7 de setembro de 2026, o usuário rejeitou o Go caricatural e pediu outra versão com mais realismo. O [novo master](../assets/production/go/reference/master.png) fixa um gopher adulto atlético, pelagem azul-ardósia com volume, olhos animais pequenos, focinho natural, calça carvão, faixa e wraps escuros. As 20 ações usam essa identidade; o conjunto antigo está [arquivado](../assets/production/go-cartoon-archive/ARCHIVE.md). Essa substituição visual conserva corpo físico, velocidade, golpes e projétil separados.

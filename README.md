@@ -17,7 +17,7 @@ e desktop com X11 ou XWayland.
 
 Na primeira abertura, **Como jogar** apresenta os controles e permite escolher
 CPU, duelo local ou assistir à demo. O guia pode ser reaberto pelo menu.
-A entrada normal deixa P1 manual contra CPU; `Quick Fight` abre a seleção com
+Na release, a entrada normal deixa P1 manual contra CPU; `Quick Fight` abre a seleção com
 a configuração atual. Durante a luta, `Esc`/`Start` abre a pausa; o resultado
 oferece revanche na mesma arena. O código e as ferramentas de desenvolvimento
 continuam descritos abaixo.
@@ -34,7 +34,26 @@ Ada, uma mensagem sem remetente, o despertar de Assembly e, muito tempo depois,
 a manhã de Rust interrompida por uma entidade errática. As regras e os assets
 da aventura são próprios; o jogo de luta continua sendo a entrada padrão.
 Depois do combate e do pesar de Rust, a apresentação reúne manchetes, a origem
-de C++, Python como professora, os seis personagens e o logo com subtítulo.
+de C++, Python como professora, cinco personagens e o logo com subtítulo. Go
+fica fora da apresentação. A entrada conjunta leva ao menu na mesma janela:
+
+```sh
+# Sequência completa: Ada → Rust → combate → apresentação → menu principal.
+cargo run --features adventure --bin borrow-story
+
+# Apresentação → menu, para rever a junção.
+cargo run --features adventure --bin borrow-story -- --start opening
+
+# Direto ao menu principal renovado.
+cargo run --features adventure --bin borrow-story -- --menu
+```
+
+O menu usa a identidade do título final, moldura de terminal, cursor de bloco
+piscante e números que formam as opções. **Modo História** fica sem ação por
+enquanto; **Versus Setup** abre a seleção. As demais entradas mantêm os destinos.
+[Escopo e verificação da junção](docs/29-story-terminal-menu.md).
+
+Os dois modos também continuam disponíveis isoladamente:
 
 ```sh
 # Aventura, sem compilar os módulos de luta.
@@ -51,7 +70,8 @@ Na aventura: `A/D` ou setas movem, `Espaço/W` pula, `J/F` ataca, `K/H` dá um g
 forte e `Q/L` defende. `Enter` pula cenas, `Tab` revela a mensagem e `Esc` pausa.
 Após derrota, `R` tenta novamente no encontro. No controle: direcional, `A` para
 pular, `X/Y` para ataques, `LB` para defesa e `Start` para pausa.
-Na conclusão, `T/X` repete a apresentação.
+No executável isolado, `T/X` repete a apresentação na conclusão. Em `borrow-story`,
+a conclusão segue ao menu principal; `Esc` e depois `Backspace` sai durante a aventura.
 
 **Textos sem recompilar:** edite [assets/adventure/texts/pt-BR.json](assets/adventure/texts/pt-BR.json),
 salve e pressione **F5**. Legendas, terminal, manchetes, biografias, menus, logo
@@ -72,6 +92,8 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 ## Índice central
 
 ### Visão e produto
+
+- [`docs/29-story-terminal-menu.md`](docs/29-story-terminal-menu.md): apresentação seguida do menu de terminal, com os modos independentes.
 
 - [`docs/28-adventure-texts-and-opening.md`](docs/28-adventure-texts-and-opening.md): textos editáveis, encaixe na cama e apresentação com manchetes, C++/Python e logo.
 
@@ -132,6 +154,8 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`.claude/skills/`](.claude/skills): skills de projeto para Claude Code.
 
 ### Decisões registradas
+
+- [`docs/adr/0023-story-to-terminal-menu.md`](docs/adr/0023-story-to-terminal-menu.md): composição externa e janela compartilhada, sem dependências entre os domínios.
 
 - [`docs/adr/0022-adventure-external-copy-and-opening.md`](docs/adr/0022-adventure-external-copy-and-opening.md): catálogo externo com recarga e apresentação após o encontro.
 
@@ -297,14 +321,16 @@ Na primeira abertura, o jogo mostra `Como jogar`; depois abre no menu principal.
 
 A seleção Linker mostra retratos, os personagens animados em pé e confirmações P1/P2. No modo contra CPU, escolha os dois lados com `WASD`/setas e `Enter`/`A`. No duelo local, P1 usa `WASD` + `F`, P2 usa setas + `Enter`, ou cada jogador usa seu controle; `Espaço` confirma o lado ativo. O mouse permite clicar nos retratos e alternar o lado clicando no painel do jogador. `Tab` troca modo e `Q/E` troca arena; no controle de P1, `Select`/`Back` troca modo e `LB/RB` troca arena. `Random` sorteia uma escolha ao confirmar e as vagas com interrogação ficam reservadas para o futuro. Com ambos confirmados, `Enter`, `Start` ou o botão Lutar inicia a luta. `Esc`/`B` desfaz a confirmação antes de voltar ao menu.
 
-O menu principal mantém a primeira tela simples:
+O menu principal desta branch usa uma janela de terminal com cursor de bloco
+e revelação binária; a marca acompanha o título final da aventura:
 
-- `Quick Fight`: abre a seleção com a configuração atual.
-- `Como jogar`: reabre controles e escolha de modo.
+- `Modo História`: reservado para a continuação da aventura; sem ação por enquanto.
 - `Versus Setup`: abre a seleção visual de personagens, arena e modo.
 - `Training`: abre `Move Showcase`, `Combat Lab` ou `Sprite Viewer`.
 - `Lore / Roster`: abre um livro de programação com capítulos da história e fichas dos personagens.
 - `Options`: liga/desliga gravação local e feature flags de protótipo.
+- `Como jogar`: reabre controles e escolha de modo.
+- `Exit`: fecha o jogo.
 
 Ao iniciar uma luta, o jogo roda a entrada dos personagens e depois bloqueia input durante a contagem central `11`, `10`, `01`, `Fight!`. A revanche preserva personagens e arena. O resultado oferece Revanche, Trocar personagens e Menu; `R` também reinicia uma luta em andamento.
 

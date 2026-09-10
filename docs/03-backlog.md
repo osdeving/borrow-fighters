@@ -83,7 +83,7 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Próxima ação |
 |---|---|---|---|---|
-| Agora | Avaliar o episódio jogável e a apresentação | Implementação entregue na branch; playtest humano pendente, TODO-013 | [Entrega 28](28-adventure-texts-and-opening.md), [vídeo e verificações](evidence/adventure-opening/README.md), [diário](worklogs/rust-adventure-prologue.md) | Observar controle, manhã corrigida, pesar e ritmo das manchetes/personagens; editar textos conforme feedback. |
+| Agora | Avaliar episódio, apresentação e menu integrado | Junção entregue na branch; playtest humano pendente, TODO-013 | [Entrega 29](29-story-terminal-menu.md), [vídeo e verificações](evidence/story-terminal-menu/README.md), [diário](worklogs/rust-adventure-prologue.md) | Jogar desde Ada até o menu; avaliar continuidade visual e navegação. Modo História fica reservado para a continuação. |
 | Próximo | Definir continuidade da aventura | Aguardando avaliação do episódio | [Critérios da entrega 27](27-rust-story-adventure.md#critérios-de-aceite) | Decidir ajustes ou expansão a partir do playtest; ideias de Vínculo/Sirius continuam estacionadas. |
 | Depois | Pendências do Prototype 3 | Backlog; sem execução ativa | [To-do](#backlog-de-to-do), [bugfix](#backlog-de-bugfix) | Retomar itens por prioridade e evidência, em entregas pequenas, quando esta frente for reaberta. |
 
@@ -91,8 +91,8 @@ Regra operacional:
 
 Prioridade ordena o trabalho quando a respectiva frente for retomada; não
 antecipa o **Agora**. TODO-001 a TODO-010 estão **abertos no backlog**;
-TODO-011, TODO-012, TODO-014 e TODO-015 estão **concluídos**;
-TODO-013 está **aberto**. IDs permanecem
+TODO-011, TODO-012, TODO-014, TODO-015 e TODO-017 estão **concluídos**;
+TODO-013 e TODO-016 estão **abertos**. IDs permanecem
 estáveis ao mudar prioridade ou vincular issue/PR.
 
 | ID | Item | Prioridade | Critério de conclusão / evidência esperada |
@@ -113,7 +113,7 @@ estáveis ao mudar prioridade ou vincular issue/PR.
 | TODO-014 | Textos da aventura editáveis sem recompilar — concluído | Concluído em 10/09/2026 | JSON externo, `--texts`, F5 transacional e mensagens de recarga. [Prova no mesmo binário](evidence/adventure-opening/native/native-checks.json): texto alterado, JSON inválido conserva revisão/pixels e restauração funciona, sem mudar o catálogo original. [Guia](../assets/adventure/texts/README.md). |
 | TODO-015 | Apresentação após o primeiro combate — concluído | Concluído em 10/09/2026 | [Vídeo](evidence/adventure-opening/opening.mp4): 48 s com jornais, biografias C++/Python, seis personagens e logo/subtítulo. Trilha própria, entrada direta, pausa, skip e replay verificados. [Entrega 28](28-adventure-texts-and-opening.md). |
 | TODO-016 | Atualizar a lore as-is no menu Lore / Roster | Média, backlog; não executar nesta rodada | Conciliar livro, imagens e fichas com o que a aventura já apresenta: Ada/Assembly, Rust, origem de C++ e Python professora, respeitando os mistérios ainda abertos. Incorporar ilustrações pertinentes e conferir leitura no menu. A junção atual preserva o livro como está; revisão editorial e visual será uma entrega própria. |
-| TODO-017 | Unir apresentação ao menu principal de terminal | Em andamento | [Entrega 29](29-story-terminal-menu.md): retirar Go da apresentação, abrir menu na mesma janela, preservar isolamento e demais fluxos; Modo História sem ação, logo coerente, moldura, cursor bloco e revelação binária. |
+| TODO-017 | Unir apresentação ao menu principal de terminal — concluído | Concluído em 10/09/2026 | [Entrega 29](29-story-terminal-menu.md): Go fora da apresentação, menu na mesma janela, isolamento e demais destinos preservados; Modo História sem ação, logo coerente, moldura, cursor bloco e revelação binária. [Evidências](evidence/story-terminal-menu/README.md): 421 testes com ambos, matriz separada e 14 checks nativos; gráficos preparados antes do prólogo evitam espera escura no final. |
 
 ## Backlog de bugfix
 

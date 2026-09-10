@@ -1,0 +1,67 @@
+{"event": "started", "elapsed": 1.275, "name": "transition", "command": ["stdbuf", "-oL", "-eL", "/home/willams/borrow-fighters/target/debug/borrow-story", "--start", "opening", "--capture", "/tmp/borrow-story-menu-native/adventure"], "pid": 588989, "window": 6291463}
+{"event": "awaiting_title", "elapsed": 1.381, "stage_ticks": null}
+{"event": "awaiting_title", "elapsed": 16.433, "stage_ticks": 576}
+{"event": "awaiting_title", "elapsed": 31.458, "stage_ticks": 1479}
+{"event": "awaiting_title", "elapsed": 46.488, "stage_ticks": 2380}
+{"event": "screenshot", "elapsed": 50.907, "file": "screenshots/01-final-title.png", "expected": "Five characters behind BORROW FIGHTERS before main menu", "window": 6291463, "sha256": "47ebc55a3f55d4cbcf596ecb469add7574f82f26048cfd65a8a5b758212ba3ff", "validation": "visual review pending"}
+{"event": "menu_framebuffer_ready", "elapsed": 57.143, "pid": 588989, "window": 6291463}
+{"event": "check", "elapsed": 57.144, "name": "opening_completed_before_menu", "passed": true, "events": [{"enemy_hp": 96, "frame": 0, "player_hp": 100, "seconds": 0.01666666753590107, "stage": "Opening"}, {"enemy_hp": 96, "frame": 2305, "player_hp": 100, "seconds": 48.02833938598633, "stage": "Complete"}]}
+{"event": "check", "elapsed": 57.145, "name": "same_native_window_after_story", "passed": true, "original_window": 6291463, "current_window": 6291463}
+{"event": "check", "elapsed": 57.145, "name": "host_did_not_write_onboarding_marker", "passed": true}
+{"event": "screenshot", "elapsed": 57.213, "file": "screenshots/02-main-menu.png", "expected": "Main terminal menu; Modo História selected; no completion menu or onboarding", "window": 6291463, "sha256": "753e9df8231ccd97f49b28d8286e0a88d57d065c6cbfb9edf2d1ef83f70341c1", "validation": "visual review pending"}
+{"event": "input", "elapsed": 57.213, "key": "Return", "pid": 588989, "window": 6291463}
+{"event": "screenshot", "elapsed": 57.867, "file": "screenshots/03-story-enter-inert.png", "expected": "Same main menu after Enter on Modo História", "window": 6291463, "sha256": "2360affdfcc7121a2af25b8e82d4be8713038251e554f6adad721e5668591178", "validation": "visual review pending"}
+{"event": "input", "elapsed": 57.867, "key": "space", "pid": 588989, "window": 6291463}
+{"event": "screenshot", "elapsed": 58.529, "file": "screenshots/04-story-space-inert.png", "expected": "Same main menu after Space on Modo História", "window": 6291463, "sha256": "c4f1c68d6fe4883f5acba77d6c548bb19312b4e69e5b028ba2b5943b28d431ed", "validation": "visual review pending"}
+{"event": "input", "elapsed": 58.529, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 59.116, "key": "Return", "pid": 588989, "window": 6291463}
+{"event": "screenshot", "elapsed": 60.813, "file": "screenshots/05-versus-roster.png", "expected": "Existing Linker character selection", "window": 6291463, "sha256": "c65e26852f677eda67bc86f82d658aeb9bcd2aa83b598f3b274b63337bf8742a", "validation": "visual review pending"}
+{"event": "input", "elapsed": 60.814, "key": "Escape", "pid": 588989, "window": 6291463}
+{"event": "screenshot", "elapsed": 62.493, "file": "screenshots/06-roster-back-menu.png", "expected": "Returned to main menu", "window": 6291463, "sha256": "1270c6d8a9ddbc2d8b6479b7ee61015c9edf2fc15c08c8e62f0184ca7bf410ae", "validation": "visual review pending"}
+{"event": "input", "elapsed": 62.493, "key": "Up", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 63.089, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 63.68, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 64.282, "key": "Return", "pid": 588989, "window": 6291463}
+{"event": "screenshot", "elapsed": 65.99, "file": "screenshots/08-training.png", "expected": "Existing training menu content", "window": 6291463, "sha256": "751726fbeef1f29fb722372dfe8fe54f169015018db8028ce83113f728afab26", "validation": "visual review pending"}
+{"event": "input", "elapsed": 65.99, "key": "Escape", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 67.39, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 67.992, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 68.578, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 69.167, "key": "Return", "pid": 588989, "window": 6291463}
+{"event": "screenshot", "elapsed": 70.862, "file": "screenshots/09-lore.png", "expected": "Existing lore menu content", "window": 6291463, "sha256": "16b8a5858d9d6728e0d020cf323c478a379dc5ad35c399a57f1962d76e811fa1", "validation": "visual review pending"}
+{"event": "input", "elapsed": 70.862, "key": "Escape", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 72.261, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 72.855, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 73.456, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 74.044, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 74.631, "key": "Return", "pid": 588989, "window": 6291463}
+{"event": "screenshot", "elapsed": 76.319, "file": "screenshots/10-options.png", "expected": "Existing options menu content", "window": 6291463, "sha256": "35e3c34bfa0ec6a0adac80d243fd4dc842e9fa2abfac98f07e20bbb8f858fc0d", "validation": "visual review pending"}
+{"event": "input", "elapsed": 76.319, "key": "Escape", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 77.715, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 78.303, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 78.898, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 79.486, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 80.081, "key": "Down", "pid": 588989, "window": 6291463}
+{"event": "input", "elapsed": 80.689, "key": "Return", "pid": 588989, "window": 6291463}
+{"event": "screenshot", "elapsed": 82.384, "file": "screenshots/11-how-to-play.png", "expected": "Existing how-to-play menu content", "window": 6291463, "sha256": "a76d5a1cfa0b630b90e6e7c9fee39ae03a1f47fdcf99ab99ba0433675d69edeb", "validation": "visual review pending"}
+{"event": "input", "elapsed": 82.384, "key": "Escape", "pid": 588989, "window": 6291463}
+{"event": "screenshot", "elapsed": 83.852, "file": "screenshots/12-final-main.png", "expected": "Main menu after visiting preserved submenus", "window": 6291463, "sha256": "0aa4c339bd37f82e13cd4f8e5b5add3d7393c9bcb8c19067e895eae43ae59d10", "validation": "visual review pending"}
+{"event": "check", "elapsed": 83.852, "name": "explicit_guide_visit_records_only_test_userdata", "passed": true}
+{"event": "check", "elapsed": 83.916, "name": "native_window_video_encoded", "passed": true, "frames": 354, "fps": 10}
+{"event": "check", "elapsed": 84.182, "name": "main_session_clean_exit", "passed": true}
+{"event": "check", "elapsed": 84.182, "name": "audio_devices_handoff_without_crash", "passed": true}
+{"event": "started", "elapsed": 85.459, "name": "close-in-adventure", "command": ["stdbuf", "-oL", "-eL", "/home/willams/borrow-fighters/target/debug/borrow-story", "--start", "opening"], "pid": 594830, "window": 6291463}
+{"event": "input", "elapsed": 91.759, "key": "Escape", "pid": 594830, "window": 6291463}
+{"event": "screenshot", "elapsed": 92.423, "file": "screenshots/13-adventure-paused.png", "expected": "Paused adventure before Backspace exits the whole host", "window": 6291463, "sha256": "f875be8f82270bc9dc1b64a5951998ed940b16f9047f3265684f8376b76de976", "validation": "visual review pending"}
+{"event": "check", "elapsed": 92.638, "name": "closing_adventure_never_opens_menu", "passed": true, "exit_code": 0}
+{"event": "started", "elapsed": 93.722, "name": "frame-limit", "command": ["stdbuf", "-oL", "-eL", "/home/willams/borrow-fighters/target/debug/borrow-story", "--start", "opening", "--frames", "90"], "pid": 595371, "window": 6291463}
+{"event": "check", "elapsed": 100.961, "name": "frame_limit_never_opens_menu", "passed": true, "exit_code": 0}
+{"event": "started", "elapsed": 102.2, "name": "hidden-to-visible", "command": ["stdbuf", "-oL", "-eL", "/home/willams/borrow-fighters/target/debug/borrow-story", "--hidden", "--start", "opening"], "pid": 595693, "window": 6291463}
+{"event": "check", "elapsed": 108.189, "name": "requested_hidden_window_starts_unmapped", "passed": true}
+{"event": "input", "elapsed": 108.189, "key": "Return", "pid": 595693, "window": 6291463}
+{"event": "menu_framebuffer_ready", "elapsed": 110.502, "pid": 595693, "window": 6291463}
+{"event": "check", "elapsed": 110.506, "name": "menu_maps_previously_hidden_window", "passed": true}
+{"event": "screenshot", "elapsed": 110.582, "file": "screenshots/14-hidden-now-visible-menu.png", "expected": "Visible main menu after hidden story completed", "window": 6291463, "sha256": "18b9e1f285955a676652af2f082b5aaa85db1c59037b32f450f6137771221cee", "validation": "visual review pending"}
+{"event": "check", "elapsed": 110.897, "name": "user_catalog_unchanged", "passed": true}
+{"event": "check", "elapsed": 110.914, "name": "binary_unchanged_during_review", "passed": true}
+{"event": "check", "elapsed": 110.915, "name": "no_x11_errors", "passed": true, "errors": []}

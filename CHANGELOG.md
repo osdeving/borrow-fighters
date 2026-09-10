@@ -92,6 +92,13 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 
 ### Experimento de aventura
 
+- Entrada conjunta `borrow-story`: apresentação seguida do menu na mesma janela,
+  preservando os dois executáveis e domínios independentes.
+- Menu principal com identidade do título final, moldura terminal, cursor bloco
+  piscante e revelação binária; `Modo História` substitui Quick Fight e fica
+  sem ação. Versus Setup e os outros destinos mantêm seu funcionamento.
+- Go retirado dos retratos e silhuetas da apresentação, mantendo seus 48 segundos.
+- Revisão futura de imagens e conteúdo da Lore / Roster registrada no TODO-016.
 - Som da manhã substituído por notas suaves, removendo ruído contínuo e pássaros
   agudos após relato de chiado; o WAV externo dispensa recompilação.
 - Textos em JSON editável com F5 e `--texts`, incluindo terminal, legendas,

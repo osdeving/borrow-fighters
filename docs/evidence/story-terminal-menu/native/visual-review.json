@@ -1,0 +1,97 @@
+{
+  "passed": true,
+  "review": "Images inspected directly; pixel files untouched",
+  "captures": [
+    "screenshots/01-final-title.png",
+    "screenshots/02-main-menu.png",
+    "screenshots/03-story-enter-inert.png",
+    "screenshots/04-story-space-inert.png",
+    "screenshots/05-versus-roster.png",
+    "screenshots/06-roster-back-menu.png",
+    "screenshots/08-training.png",
+    "screenshots/09-lore.png",
+    "screenshots/10-options.png",
+    "screenshots/11-how-to-play.png",
+    "screenshots/12-final-main.png",
+    "screenshots/13-adventure-paused.png",
+    "screenshots/14-hidden-now-visible-menu.png"
+  ],
+  "findings": [
+    "Five portraits behind final title; Go absent",
+    "Main terminal menu appears instead of Complete/onboarding",
+    "Modo História stays selected after Enter and Space; blinking block cursor visible in alternating samples",
+    "Versus opens existing Linker character selection; Escape returns to Main",
+    "Training, Lore, Options and Como jogar retain existing content",
+    "Adventure pause shown before Backspace cleanly closes host",
+    "Hidden story window maps visibly on menu handoff"
+  ],
+  "timing": {
+    "first_complete_window_frame": {
+      "frame": 76,
+      "elapsed": 54.724910780001665,
+      "stage": "Complete",
+      "stage_ticks": 0,
+      "menu_header_visible": false,
+      "header_bgr": [
+        [
+          20,
+          18,
+          16
+        ],
+        [
+          23,
+          19,
+          12
+        ],
+        [
+          20,
+          18,
+          16
+        ]
+      ]
+    },
+    "first_readable_menu_window_frame": {
+      "frame": 88,
+      "elapsed": 55.95082725300017,
+      "stage": "Complete",
+      "stage_ticks": 0,
+      "menu_header_visible": true,
+      "header_bgr": [
+        [
+          44,
+          38,
+          26
+        ],
+        [
+          44,
+          38,
+          26
+        ],
+        [
+          44,
+          38,
+          26
+        ]
+      ]
+    },
+    "delta_seconds": 1.225916472998506,
+    "sampling_interval_seconds": 0.1,
+    "method": "Three terminal header pixels within 8 levels of final color; this detects a readable menu during its fade, not its first mathematically nonzero pixel"
+  },
+  "limits": [
+    "Synthetic keyboard only; Start uses unit-test coverage, not physical gamepad",
+    "No human audio approval; native video is silent and device lifecycle appears in game.log"
+  ],
+  "video": {
+    "file": "title-to-menu-native.mp4",
+    "sha256": "270cb3e3522397866b95d76ed5b1d7eb38043d3147f8f4c58eff61591fec4f6f",
+    "codec": "h264",
+    "width": 1280,
+    "height": 720,
+    "frames": 354,
+    "fps": 10,
+    "duration_seconds": 35.4,
+    "audio_stream": false,
+    "timing_note": "Wall-clock transition measurement uses window-frames.jsonl; screenshot subprocesses can create gaps in the 10 fps review recording."
+  }
+}

@@ -2,11 +2,19 @@
 
 ## Estado atual
 
-- Rodada 3 em andamento: [junção com menu de terminal](../29-story-terminal-menu.md)
-  e [ADR 0023](../adr/0023-story-to-terminal-menu.md). Goal ativo: remover Go da
-  apresentação; ligar conclusão ao menu na mesma janela; primeira opção Modo
-  História inerte; cursor bloco, moldura, título coerente e revelação binária.
-  Pendentes: implementação, matriz de features, revisão visual/input e commits.
+- Rodada 3 concluída: [junção com menu de terminal](../29-story-terminal-menu.md)
+  e [ADR 0023](../adr/0023-story-to-terminal-menu.md). Go saiu da apresentação;
+  conclusão abre o menu na mesma janela; Modo História inerte, cursor bloco,
+  moldura, título coerente e revelação binária implementados.
+- Para executar tudo: `cargo run --features adventure --bin borrow-story`.
+  `--start opening` revê apresentação → menu; `--menu` abre diretamente o menu.
+- Checkpoints: `67d6441` (escopo), `5ea92d4` (junção/menu), `0574347` (antecipar
+  gráficos para retirar espera escura no final). Evidências e fechamento no
+  commit seguinte. Lore / Roster não foi alterado: revisão futura no TODO-016.
+- Verificação da rodada 3: 421 testes ambos, 395 luta, 27 aventura/core e 3 core;
+  Fmt, Clippy, 54 fixtures de fronteira e 14 checks nativos aprovados. Mesmo PID
+  e janela; transição em aproximadamente 1,23 s com fades; saídas e janela antes
+  oculta verificadas. [Capturas e vídeo](../evidence/story-terminal-menu/README.md).
 - Edições do usuário em `assets/adventure/texts/pt-BR.json` continuam preservadas
   fora dos commits. Não reformatar nem restaurar o arquivo.
 - Rodada 2 concluída: [textos editáveis, encaixe na cama e apresentação](../28-adventure-texts-and-opening.md).
@@ -20,20 +28,22 @@
   combate/pesar; `--start opening` abre diretamente e `T/X` repete na conclusão.
 - Lore: C++ tem passado de profissional do sexo e torna-se heroína após acessar
   o Linker; Python é professora universitária e ensina humanos sobre EPs.
-- Verificação atual: 417 testes ambos, 393 luta, 27 aventura/core e 3 core;
+- Verificação da rodada 2: 417 testes ambos, 393 luta, 27 aventura/core e 3 core;
   Fmt/Clippy, fronteiras e 26 checks nativos aprovados. Isolamento de 30 assets,
   cinco músicas/quatro efeitos, vídeos e recarga no mesmo binário verificados.
-- Sem etapa técnica pendente. Avaliação humana continua no TODO-013.
+- Sem etapa técnica pendente. Avaliação humana continua no TODO-013. Contagens
+  e vídeos da rodada 2 abaixo são históricos; a rodada 3 está nos links acima.
 - Durante o fechamento apareceram edições externas em `assets/adventure/texts/pt-BR.json`.
   O JSON e suas chaves foram conferidos; alterações preservadas no working tree,
   fora dos commits do agente. Não restaurar esse arquivo a partir das capturas:
   os vídeos representam o texto de `6f911ec`, anterior a essas edições.
-- [Vídeos, relatórios e reprodução atuais](../evidence/adventure-opening/README.md).
+- [Vídeos, relatórios e reprodução da rodada 2](../evidence/adventure-opening/README.md).
   A [rodada inicial](../evidence/adventure-prologue/README.md) permanece histórica.
 
 ## Retomar após queda do WSL
 
-1. Ler este arquivo, [continuação](../28-adventure-texts-and-opening.md),
+1. Ler este arquivo, [junção atual](../29-story-terminal-menu.md),
+   [ADR 0023](../adr/0023-story-to-terminal-menu.md), [continuação](../28-adventure-texts-and-opening.md),
    [ADR 0021](../adr/0021-isolated-adventure-experiment.md) e
    [ADR 0022](../adr/0022-adventure-external-copy-and-opening.md).
 2. Rodar `git status --short`, `git branch --show-current`, `git log -8 --oneline`.
@@ -80,6 +90,15 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 - [x] Fechar docs, diário e commits de entrega.
 
 ## Checkpoints
+
+- 2026-09-10, rodada 3 verificada: `0574347` antecipa texturas da luta, sem
+  compartilhar recursos com a aventura. Captura final teve 14 checks aprovados,
+  duas sessões de áudio limpas, mesmo PID/janela e 1,226 s do Complete até o
+  cabeçalho do menu. Enter/Espaço inertes, Versus/Training/Lore/Options/guia e
+  retornos revisados. Close, frame cap e hidden → visible passaram. Todos os
+  testes da matriz foram repetidos após o ajuste; Fmt/Clippy/fronteiras limpos.
+  Catálogo do usuário, livro de lore e manhã sem alterações. Evidências na
+  pasta `docs/evidence/story-terminal-menu/`; TODO-017 concluído, TODO-016 aberto.
 
 - 2026-09-10, revisão da transição: `5ea92d4` registra a implementação. A primeira
   captura revelou 5–7 s de carregamento de atlas depois do fade final; antecipar

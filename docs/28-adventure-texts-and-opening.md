@@ -1,5 +1,9 @@
 # 28 — Textos editáveis, manhã e apresentação do universo
 
+Registro da rodada 2. A [rodada 3](29-story-terminal-menu.md) retira Go da
+apresentação e acrescenta a entrada que segue ao menu principal de terminal.
+Vídeos e contagens desta página preservam a entrega anterior.
+
 Continuação autorizada na branch `feature/rust-adventure-prologue`, em 10 de
 setembro de 2026. O usuário pediu editar o texto exibido sem recompilar, corrigir
 o encaixe de Rust na cama e criar uma apresentação empolgante com manchetes,
