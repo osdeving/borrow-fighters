@@ -1,0 +1,149 @@
+{
+  "mode": "native isolated PulseAudio sink monitor",
+  "output": {
+    "file": "street-evacuation.mp4",
+    "sha256": "c607d2e4fe812311c82d2581f28fc65689e0b87bf842cf676018620e9c198ad6",
+    "duration_seconds": 13.733333,
+    "frames": 412,
+    "fps": 30
+  },
+  "inputs": {
+    "video": {
+      "path": ".git/street-chaos-review/preview/adventure-silent.mp4",
+      "sha256": "a0e335039dc68f9b0944d531c4a1498101d257af588f0b5c377c6b54d6f4a722"
+    },
+    "audio": {
+      "path": ".git/street-chaos-review/preview-audio.mka",
+      "sha256": "fb909c4da3e54ad0f66a52491a3b64b60bc272395477137e10974459db2c3434"
+    },
+    "telemetry": {
+      "path": ".git/street-chaos-review/preview/telemetry.jsonl",
+      "sha256": "f3c301ac14c6ba08812f6cc1dbfe98f623a58a40b47602378922a364f3296988"
+    }
+  },
+  "processing": {
+    "video_copied_without_reencoding": true,
+    "compressed_video_sha256": "SHA256=c7496b215b85e3ca58bf46b692c903b3debc937ebdbd523ddf15a73d871fe9bf",
+    "source": "Actual game output only; no desktop audio.",
+    "audio_filter": "asetpts=N/SR/TB,atrim=start=2.9524362087249756:duration=13.733333,asetpts=PTS-STARTPTS",
+    "audio_codec": "AAC stereo 192k",
+    "synthesized_replacement": false,
+    "mix_reconstruction": false,
+    "gain_adjustment": false,
+    "time_stretching": false,
+    "cuts": 0
+  },
+  "alignment": {
+    "inferred_video_origin_wall_seconds": 1789049858.0574362,
+    "first_audio_packet_wall_seconds": 1789049855.105,
+    "audio_preroll_trim_seconds": 2.9524362087249756,
+    "native_latency_preserved": true,
+    "telemetry_origin_spread_ms": 0.6017684936523438
+  },
+  "captured_cues": [
+    {
+      "cue": "traffic_escape",
+      "reaction_tick": 0,
+      "video_seconds": 5.754942893981934,
+      "pcm_onset_seconds": 8.717641723356008,
+      "muxed_audio_onset_seconds": 5.765205514631033,
+      "latency_ms": 10.262620649099219,
+      "correlation": 0.78967387238608,
+      "reference_sha256": "3f59307c5eab912a8685c0a8d5d6c39b311f409d91b28bce80ead3ff4935bf22"
+    },
+    {
+      "cue": "car_horn",
+      "reaction_tick": 38,
+      "video_seconds": 6.391458034515381,
+      "pcm_onset_seconds": 9.358412698412698,
+      "muxed_audio_onset_seconds": 6.405976489687722,
+      "latency_ms": 14.518455172341405,
+      "correlation": 0.965847554083607,
+      "reference_sha256": "960aac61e2848202262b44273ba731875b25bf72c991793bd58c0995f68dea11"
+    },
+    {
+      "cue": "bicycle_fall",
+      "reaction_tick": 70,
+      "video_seconds": 6.927579402923584,
+      "pcm_onset_seconds": 9.890204081632653,
+      "muxed_audio_onset_seconds": 6.937767872907678,
+      "latency_ms": 10.188469984093729,
+      "correlation": 0.8709863630615752,
+      "reference_sha256": "17d3997091131ef8baa07e2742b4aacb53368991dc1a410a1c8cb1048da8e0d2",
+      "match_analysis": {
+        "method": "Normalized cross-correlation of the native PCM with the original bicycle_fall WAV at 22050 Hz.",
+        "template_seconds": 0.18,
+        "bandpass_hz": [
+          570,
+          730
+        ],
+        "filter": "Fourth-order Butterworth causal second-order sections; the identical filter is applied to the full recording and full reference before taking the template.",
+        "search_radius_seconds": 0.4,
+        "analysis_only": true,
+        "recording_or_mux_modified": false,
+        "manual_timing_shift": false,
+        "reason_for_refinement": "The original 80 ms template overlaps the louder horn for approximately 67 ms. It selected a spurious later peak. The longer template includes three distinct bicycle contacts; the 570–730 Hz band isolates the original 647 Hz metal tone.",
+        "independent_cross_checks": [
+          {
+            "filter": "raw",
+            "template_seconds": 0.18,
+            "latency_ms": 10.233821458015768,
+            "correlation": 0.20819052740674465
+          },
+          {
+            "filter": "band_1550_1830",
+            "template_seconds": 0.18,
+            "latency_ms": 10.188469984093729,
+            "correlation": 0.6534441202261635
+          }
+        ],
+        "original_short_template_result": {
+          "template_seconds": 0.08,
+          "pcm_onset_seconds": 9.956235827664399,
+          "muxed_audio_onset_seconds": 7.003799618939423,
+          "latency_ms": 76.22021601583917,
+          "correlation": 0.21887856480726417
+        },
+        "script": ".git/street-chaos-review/analyze_bicycle_audio.py",
+        "detailed_results": ".git/street-chaos-review/bicycle-audio-analysis.json"
+      }
+    },
+    {
+      "cue": "car_skid",
+      "reaction_tick": 78,
+      "video_seconds": 7.061861038208008,
+      "pcm_onset_seconds": 10.029569160997733,
+      "muxed_audio_onset_seconds": 7.077132952272757,
+      "latency_ms": 15.271914064749481,
+      "correlation": 0.8936101642767669,
+      "reference_sha256": "f6ac3619f38517b236ac0827f1fcb4ebfc814ef8aec5df0c3150497653031815"
+    },
+    {
+      "cue": "car_crash",
+      "reaction_tick": 112,
+      "video_seconds": 7.631624221801758,
+      "pcm_onset_seconds": 10.59922902494331,
+      "muxed_audio_onset_seconds": 7.646792816218335,
+      "latency_ms": 15.168594416577363,
+      "correlation": 0.9404067760605073,
+      "reference_sha256": "5ea6153cada30256692f4b824980886eca8c29e6a7fa8597fca0f9ffdb3102fc"
+    }
+  ],
+  "levels": {
+    "aligned_source_peak": 0.25543212890625,
+    "encoded_peak": 0.25517910718917847,
+    "clipped_samples": 0
+  },
+  "telemetry": {
+    "rows": 790,
+    "paused_rows": 0,
+    "end_accident_ticks": 480,
+    "end_visible_cars": 0,
+    "end_visible_cyclists": 0
+  },
+  "limitations": [
+    "Correlation confirms original cues in native output; subjective audio quality and physical speakers were not evaluated.",
+    "MKA wallclock timestamps have millisecond precision. Continuous decoded PCM clock is used after removing preroll.",
+    "Video is sampled at30fps; audio preserves native device latency."
+  ]
+}

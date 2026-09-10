@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "method": "real package.py stage and verify CLI; existing Linux binary; Cargo offline; no native window",
+  "target": "linux-x86_64",
+  "cargo_binary": "borrow-story",
+  "asset_count": 240,
+  "street_files": [
+    "catalog.json",
+    "scene.json",
+    "vehicles.png",
+    "props.png",
+    "cyclist-escape.png"
+  ],
+  "elapsed_seconds": 5.382,
+  "temporary_stage_removed_after_check": true,
+  "windows": "No borrow-story.exe in target; prior Windows fixture staging/verification passed in test_package.py"
+}

@@ -68,6 +68,7 @@ cotidianos distintos, ônibus, ponto e o Bar e Mercearia Casa Nossa. Toda a rua
 reage à EP: ciclistas largam as bicicletas, pessoas fogem e veículos aceleram
 para fora, sem reaparecer durante a luta. As peças podem ser trocadas pelo
 [catálogo de assets](assets/adventure/street/README.md), com a composição separada.
+[Prévia da rua com evacuação e som nativo](docs/evidence/brazilian-street-evacuation/street-evacuation.mp4).
 [Escopo das melhorias](docs/30-prologue-scene-improvements.md)
 e [diário do experimento](docs/worklogs/prologue-scene-improvements.md).
 

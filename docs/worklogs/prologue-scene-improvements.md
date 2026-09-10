@@ -164,18 +164,36 @@ o experimento separado da main e da tag até pedido de integração/publicação
 ### Etapa implementada e verificada
 
 - 22/22 checks nativos em `.git/street-chaos-review/native-1`: 1219 amostras
-  sem wrap/respawn, fases completas dos dois ciclistas, via vazia do tick361
-  ao1397, câmera direita, pausa, derrota/retry, skip e restart.
+  sem wrap/respawn, fases completas dos dois ciclistas, via vazia do tick 361
+  ao 1397, câmera direita, pausa, derrota/retry, skip e restart.
 - Matriz em `.git/street-chaos-review/validation/verification.json`: Fmt e
-  Clippy estrito passaram;450 testes conjuntos,56 aventura,395 luta e3 core.
-  Dois testes preexistentes de dispositivo de áudio ignorados.56 fixtures
-  de fronteira e40 testes do mixer aprovados. Python3.8 não executa o checker;
-  a tentativa com Python3.13 passou. Fontes permaneceram estáveis na matriz.
-- 14 testes de empacotamento; staging Linux real com240 assets aprovado.
+  Clippy estrito passaram; 450 testes conjuntos, 56 aventura, 395 luta e 3 core.
+  Dois testes preexistentes de dispositivo de áudio ignorados. 56 fixtures
+  de fronteira e 40 testes do mixer aprovados. Python 3.8 não executa o checker;
+  a tentativa com Python 3.13 passou. Fontes permaneceram estáveis na matriz.
+- 14 testes de empacotamento; staging Linux real com 240 assets aprovado.
   Windows coberto por fixtures, sem executável Windows local disponível.
   Troca de PNG/reuso confirmados em árvore temporária, composição preservada.
 - Prévia contínua gravada com áudio do próprio jogo em sink Pulse dedicado:
-  `.git/street-chaos-review/preview`,13,73 segundos/412 frames. Exportação e
+  `.git/street-chaos-review/preview`, 13,73 segundos/412 frames. Exportação e
   relatório do áudio em revisão final; sem cortes ou substituição de conteúdo.
 - Código e assets prontos para commit desta etapa; resta finalizar documentação
   das evidências, checar links e registrar o fechamento.
+
+### Goal concluído
+
+- `65d826b` commita implementação, arte, contrato de catálogo/composição,
+  evacuação, áudio e ferramentas. O retorno solicitado continua `c2dbbe4`.
+- [Entrega com prévia e evidências](../evidence/brazilian-street-evacuation/README.md):
+  vídeo contínuo de 13,73 segundos, som real do jogo, 22 checks nativos e
+  matriz completa. Cinco cues confirmados no PCM; latência de 10–16 ms,
+  sem clipping. A queda foi analisada em banda porque a buzina se sobrepõe
+  aos primeiros 67 ms; nenhum filtro foi aplicado ao som entregue.
+- Validação documental final: 19 YAMLs e 1430 links Markdown locais;
+  `git diff --check` aprovado. CLI antigo encaminha à revisão atual;
+  compilação Python e ajuda dos dois comandos aprovadas.
+- Nenhuma etapa de implementação pendente neste goal. Avaliação do ritmo
+  pelo usuário poderá orientar ajustes posteriores. Main e tag preservadas.
+- Recuperação: usar esta branch e conferir `git status`/`git log` antes de
+  novas alterações. Para comparação, abrir `c2dbbe4` numa branch própria;
+  não fazer reset que descarte trabalho posterior.

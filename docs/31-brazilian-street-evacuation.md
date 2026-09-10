@@ -4,8 +4,8 @@ Goal solicitado após a segunda rodada do prólogo, em 10 de setembro de 2026.
 Branch: `feature/prologue-scene-improvements`. Ponto de retorno aprovado:
 `c2dbbe4` (`feat: add prologue traffic and pole accident`).
 
-**Estado:** implementação integrada na branch, em validação. A captura nativa
-e as verificações completas desta rodada ainda estão sendo produzidas.
+**Estado:** implementado e verificado na branch. Código/assets em `65d826b`;
+[evidências e prévia com som nativo](evidence/brazilian-street-evacuation/README.md).
 
 ## Pedido
 
@@ -62,6 +62,14 @@ consumidos pelo runtime. Recortes e apoios são dados; as poses de ciclista
 preservam escala corporal e direção própria ao espelhar a arte.
 
 ## Verificação e entrega
+
+Concluída: 22 checks nativos, 450 testes conjuntos e matriz de isolamento,
+Fmt/Clippy, fronteiras, mixer e empacotamento. A captura confirmou rua vazia
+ao tick 361 e ainda vazia no 1397, sem retorno de figurantes. Troca de PNG
+e duas instâncias da mesma peça foram verificadas sem alterar a composição.
+O relatório detalhado acompanha as evidências acima.
+
+Critérios usados:
 
 - Testar troca de PNG/recorte e reutilização da mesma peça em duas instâncias.
 - Testar continuidade no susto, aceleração, abandono, fuga e ausência de novos
