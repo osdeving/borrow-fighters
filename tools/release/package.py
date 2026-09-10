@@ -80,7 +80,7 @@ def string_values(value):
 
 
 def adventure_assets():
-    """Expand the adventure loaders' local names and opening portrait images."""
+    """Expand adventure loaders, opening portraits and every street-piece frame."""
     files = set()
     base = ROOT / "assets/adventure"
     # These adapters prepend their own directory to literal file names. Keep
@@ -106,9 +106,25 @@ def adventure_assets():
         if not within(portrait, roster.parent):
             raise ValueError(f"Opening portrait outside adventure opening/: {name}")
         files.add(portrait)
+    catalog = asset_file(base / "street/catalog.json")
+    files.update((catalog, asset_file(base / "street/scene.json")))
+    pieces = json.loads(catalog.read_text(encoding="utf-8"))["pieces"]
+    for piece in pieces.values():
+        for frame in piece["frames"]:
+            # Frames may share an atlas or use separate PNGs. Follow only their
+            # image fields, keeping every resolved path inside the adventure.
+            name = frame["image"]
+            if (not isinstance(name, str) or not name.endswith(".png")
+                    or "\\" in name or ":" in name
+                    or any(part in ("", ".", "..") for part in name.split("/"))):
+                raise ValueError(f"Street piece must use a relative local PNG: {name}")
+            image = asset_file(base / name)
+            if not within(image, base):
+                raise ValueError(f"Street piece outside assets/adventure/: {name}")
+            files.add(image)
     for name in ("fonts/BARLOW-OFL.txt", "fonts/LORA-OFL.txt", "fonts/README.md",
                  "audio/README.md", "texts/README.md", "ART-PROVENANCE.md",
-                 "opening/ART-PROVENANCE.md"):
+                 "opening/ART-PROVENANCE.md", "street/README.md"):
         files.add(asset_file(base / name))
     return files
 

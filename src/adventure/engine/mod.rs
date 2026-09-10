@@ -7,6 +7,7 @@ pub mod assets;
 pub mod audio;
 pub mod morning;
 pub mod opening;
+pub mod pieces;
 pub mod render;
 pub mod street;
 pub mod traffic;

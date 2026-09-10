@@ -1,0 +1,691 @@
+{
+  "version": 1,
+  "pieces": {
+    "cyclist.ride": {
+      "width": 101.44092,
+      "frame_ticks": 7,
+      "frames": [
+        {
+          "image": "street-life.png",
+          "source": [
+            35,
+            10,
+            352,
+            347
+          ],
+          "anchor": [
+            176.0,
+            347
+          ],
+          "wheels": [
+            [
+              72.86399999999999,
+              275,
+              42
+            ],
+            [
+              280.896,
+              275,
+              42
+            ]
+          ]
+        },
+        {
+          "image": "street-life.png",
+          "source": [
+            405,
+            10,
+            352,
+            347
+          ],
+          "anchor": [
+            176.0,
+            347
+          ],
+          "wheels": [
+            [
+              72.86399999999999,
+              275,
+              42
+            ],
+            [
+              280.896,
+              275,
+              42
+            ]
+          ]
+        },
+        {
+          "image": "street-life.png",
+          "source": [
+            780,
+            9,
+            354,
+            349
+          ],
+          "anchor": [
+            177.0,
+            349
+          ],
+          "wheels": [
+            [
+              73.27799999999999,
+              277,
+              42
+            ],
+            [
+              282.492,
+              277,
+              42
+            ]
+          ]
+        },
+        {
+          "image": "street-life.png",
+          "source": [
+            1155,
+            9,
+            357,
+            349
+          ],
+          "anchor": [
+            178.5,
+            349
+          ],
+          "wheels": [
+            [
+              73.899,
+              277,
+              42
+            ],
+            [
+              284.886,
+              277,
+              42
+            ]
+          ]
+        }
+      ]
+    },
+    "kid.play": {
+      "width": 49.44343,
+      "frame_ticks": 38,
+      "frames": [
+        {
+          "image": "street-life.png",
+          "source": [
+            96,
+            367,
+            188,
+            327
+          ],
+          "anchor": [
+            94.0,
+            327
+          ]
+        },
+        {
+          "image": "street-life.png",
+          "source": [
+            478,
+            372,
+            225,
+            321
+          ],
+          "anchor": [
+            112.5,
+            321
+          ]
+        }
+      ]
+    },
+    "kid.startled": {
+      "width": 48.12844,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street-life.png",
+          "source": [
+            875,
+            381,
+            183,
+            314
+          ],
+          "anchor": [
+            91.5,
+            314
+          ]
+        }
+      ]
+    },
+    "kid.release": {
+      "width": 54.70336,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street-life.png",
+          "source": [
+            1232,
+            376,
+            208,
+            315
+          ],
+          "anchor": [
+            104.0,
+            315
+          ]
+        }
+      ]
+    },
+    "kid.run": {
+      "width": 78.63609,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street-life.png",
+          "source": [
+            66,
+            700,
+            299,
+            279
+          ],
+          "anchor": [
+            149.5,
+            279
+          ]
+        },
+        {
+          "image": "street-life.png",
+          "source": [
+            495,
+            700,
+            157,
+            291
+          ],
+          "anchor": [
+            78.5,
+            291
+          ]
+        },
+        {
+          "image": "street-life.png",
+          "source": [
+            819,
+            703,
+            284,
+            275
+          ],
+          "anchor": [
+            142.0,
+            275
+          ]
+        },
+        {
+          "image": "street-life.png",
+          "source": [
+            1246,
+            700,
+            163,
+            292
+          ],
+          "anchor": [
+            81.5,
+            292
+          ]
+        }
+      ]
+    },
+    "incident.intact": {
+      "width": 160.0,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street-traffic.png",
+          "source": [
+            21,
+            198,
+            599,
+            304
+          ],
+          "anchor": [
+            299.5,
+            304
+          ],
+          "wheels": [
+            [
+              94,
+              247,
+              23
+            ],
+            [
+              498,
+              247,
+              23
+            ]
+          ]
+        }
+      ]
+    },
+    "incident.crashed": {
+      "width": 156.79466,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street-traffic.png",
+          "source": [
+            648,
+            198,
+            587,
+            303
+          ],
+          "anchor": [
+            293.5,
+            303
+          ],
+          "wheels": [
+            [
+              94,
+              247,
+              23
+            ],
+            [
+              499,
+              247,
+              23
+            ]
+          ]
+        }
+      ]
+    },
+    "vehicle.hatch": {
+      "width": 147,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/vehicles.png",
+          "source": [
+            38,
+            167,
+            535,
+            241
+          ],
+          "anchor": [
+            267.5,
+            239
+          ],
+          "wheels": [
+            [
+              78,
+              192,
+              22
+            ],
+            [
+              426,
+              192,
+              22
+            ]
+          ]
+        }
+      ]
+    },
+    "vehicle.sedan": {
+      "width": 172,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/vehicles.png",
+          "source": [
+            617,
+            197,
+            620,
+            212
+          ],
+          "anchor": [
+            310.0,
+            210
+          ],
+          "wheels": [
+            [
+              132,
+              163,
+              22
+            ],
+            [
+              502,
+              163,
+              22
+            ]
+          ]
+        }
+      ]
+    },
+    "vehicle.pickup": {
+      "width": 169,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/vehicles.png",
+          "source": [
+            18,
+            538,
+            617,
+            261
+          ],
+          "anchor": [
+            308.5,
+            259
+          ],
+          "wheels": [
+            [
+              122,
+              206,
+              22
+            ],
+            [
+              520,
+              205,
+              22
+            ]
+          ]
+        }
+      ]
+    },
+    "vehicle.suv": {
+      "width": 160,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/vehicles.png",
+          "source": [
+            666,
+            527,
+            571,
+            276
+          ],
+          "anchor": [
+            285.5,
+            274
+          ],
+          "wheels": [
+            [
+              100,
+              219,
+              22
+            ],
+            [
+              452,
+              219,
+              22
+            ]
+          ]
+        }
+      ]
+    },
+    "vehicle.bus": {
+      "width": 280,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/vehicles.png",
+          "source": [
+            32,
+            920,
+            742,
+            218
+          ],
+          "anchor": [
+            371.0,
+            216
+          ],
+          "wheels": [
+            [
+              161,
+              177,
+              22
+            ],
+            [
+              548,
+              179,
+              22
+            ]
+          ]
+        }
+      ]
+    },
+    "vehicle.van": {
+      "width": 149,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/vehicles.png",
+          "source": [
+            809,
+            933,
+            415,
+            218
+          ],
+          "anchor": [
+            207.5,
+            216
+          ],
+          "wheels": [
+            [
+              71,
+              180,
+              22
+            ],
+            [
+              341,
+              181,
+              22
+            ]
+          ]
+        }
+      ]
+    },
+    "cyclist.brake": {
+      "width": 100.27778,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/cyclist-escape.png",
+          "source": [
+            20,
+            104,
+            361,
+            360
+          ],
+          "anchor": [
+            180.5,
+            345
+          ]
+        }
+      ]
+    },
+    "cyclist.dismount": {
+      "width": 100.55556,
+      "frame_ticks": 15,
+      "frames": [
+        {
+          "image": "street/cyclist-escape.png",
+          "source": [
+            398,
+            93,
+            362,
+            370
+          ],
+          "anchor": [
+            181,
+            356
+          ]
+        },
+        {
+          "image": "street/cyclist-escape.png",
+          "source": [
+            791,
+            101,
+            361,
+            359
+          ],
+          "anchor": [
+            190.5,
+            348
+          ]
+        }
+      ]
+    },
+    "bike.upright": {
+      "width": 98.88889,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/cyclist-escape.png",
+          "source": [
+            1164,
+            232,
+            356,
+            219
+          ],
+          "anchor": [
+            178,
+            217
+          ]
+        }
+      ]
+    },
+    "cyclist.run": {
+      "width": 88.88889,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street/cyclist-escape.png",
+          "source": [
+            46,
+            577,
+            320,
+            363
+          ],
+          "anchor": [
+            147,
+            359
+          ]
+        },
+        {
+          "image": "street/cyclist-escape.png",
+          "source": [
+            505,
+            577,
+            168,
+            363
+          ],
+          "anchor": [
+            86,
+            359
+          ]
+        },
+        {
+          "image": "street/cyclist-escape.png",
+          "source": [
+            798,
+            577,
+            337,
+            363
+          ],
+          "anchor": [
+            163,
+            359
+          ]
+        },
+        {
+          "image": "street/cyclist-escape.png",
+          "source": [
+            1268,
+            577,
+            199,
+            363
+          ],
+          "anchor": [
+            112,
+            359
+          ]
+        }
+      ]
+    },
+    "prop.bar": {
+      "width": 330,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/props.png",
+          "source": [
+            32,
+            58,
+            731,
+            480
+          ],
+          "anchor": [
+            365.5,
+            478
+          ]
+        }
+      ]
+    },
+    "prop.bus_stop": {
+      "width": 242,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/props.png",
+          "source": [
+            790,
+            106,
+            731,
+            446
+          ],
+          "anchor": [
+            365.5,
+            444
+          ]
+        }
+      ]
+    },
+    "bike.fallen": {
+      "width": 107,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/props.png",
+          "source": [
+            49,
+            596,
+            746,
+            331
+          ],
+          "anchor": [
+            373.0,
+            329
+          ]
+        }
+      ]
+    },
+    "prop.corner": {
+      "width": 76,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/props.png",
+          "source": [
+            893,
+            633,
+            564,
+            319
+          ],
+          "anchor": [
+            282.0,
+            317
+          ]
+        }
+      ]
+    }
+  }
+}

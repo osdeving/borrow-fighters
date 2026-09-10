@@ -5,9 +5,12 @@
 
 use raylib::prelude::*;
 
-use super::assets::Assets;
+use super::{assets::Assets, pieces::PiecePose};
 use crate::adventure::{
-    ambient::{AmbientState, KID_FLOOR_Y, KID_ORIGIN_X, KidPhase},
+    ambient::{
+        AmbientState, BICYCLE_FALL_TICK, CYCLIST_DISMOUNT_TICKS, CYCLIST_RUN_TICK, CyclistPhase,
+        KID_FLOOR_Y, KID_ORIGIN_X, KidPhase,
+    },
     combat::Facing,
 };
 
@@ -56,67 +59,114 @@ pub fn background(d: &mut impl RaylibDraw, a: &Assets, camera: f32) {
 pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &Assets, camera: f32) {
     let offset = camera * PARALLAX;
     cycle_lane(d, offset);
+    props(d, a, offset);
     kite(d, ambient, offset);
     child(d, ambient, a, offset);
     super::traffic::draw(d, ambient, a, offset);
 
-    // Far lane first: cyclists never share the child's sidewalk or Rust's plane.
-    for cyclist in ambient.cyclists().iter().rev() {
-        let frame = (cyclist.animation_ticks / 7 % 4) as usize;
-        let feet = Vector2::new(cyclist.position.x - offset, cyclist.position.y);
-        let near = cyclist.facing == Facing::Right;
-        let scale = if near { 100.0 } else { 92.0 } / a.street_life_bounds[0].height;
-        let tint = if near {
+    // Bicycles become separate objects as riders step away and run.
+    for bicycle in ambient.abandoned_bicycles().into_iter().rev().flatten() {
+        if bicycle.drop_ticks < CYCLIST_DISMOUNT_TICKS {
+            continue;
+        }
+        let age = bicycle.drop_ticks - CYCLIST_DISMOUNT_TICKS;
+        let mut pose = PiecePose::at(Vector2::new(
+            bicycle.position.x - offset,
+            bicycle.position.y,
+        ));
+        pose.flip = bicycle.facing == Facing::Left;
+        pose.scale = if bicycle.id == 0 { 1.0 } else { 0.92 };
+        if age < BICYCLE_FALL_TICK - CYCLIST_RUN_TICK {
+            pose.rotation = age as f32 * 2.3 * if pose.flip { -1.0 } else { 1.0 };
+            a.street.draw(d, "bike.upright", 0, &pose);
+        } else {
+            a.street.draw(d, "bike.fallen", 0, &pose);
+        }
+    }
+    for cyclist in ambient
+        .cyclists()
+        .iter()
+        .rev()
+        .filter(|actor| actor.visible)
+    {
+        let (id, flip, ticks) = match cyclist.phase {
+            CyclistPhase::Riding => (
+                "cyclist.ride",
+                cyclist.facing == Facing::Left,
+                cyclist.animation_ticks,
+            ),
+            CyclistPhase::Braking => (
+                "cyclist.brake",
+                cyclist.facing == Facing::Left,
+                cyclist.phase_ticks,
+            ),
+            CyclistPhase::Dismounting => ("cyclist.dismount", cyclist.id == 1, cyclist.phase_ticks),
+            CyclistPhase::Running => (
+                "cyclist.run",
+                cyclist.facing == Facing::Right,
+                cyclist.phase_ticks,
+            ),
+            CyclistPhase::Gone => continue,
+        };
+        let mut pose = PiecePose::at(Vector2::new(
+            cyclist.position.x - offset,
+            cyclist.position.y,
+        ));
+        pose.flip = flip;
+        pose.scale = if cyclist.id == 0 { 1.0 } else { 0.92 };
+        pose.tint = if cyclist.id == 0 {
             Color::new(241, 228, 209, 255)
         } else {
             Color::new(204, 215, 207, 255)
         };
+        let running = cyclist.phase == CyclistPhase::Running;
         d.draw_ellipse(
-            feet.x as i32,
-            feet.y as i32 + 1,
-            54.0,
+            pose.position.x as i32,
+            pose.position.y as i32 + 1,
+            if running { 18.0 } else { 48.0 },
             3.0,
-            Color::new(48, 43, 34, 35),
+            Color::new(48, 43, 34, 40),
         );
-        sprite(d, a, frame, feet, scale, !near, tint);
-        wheel_spokes(
-            d,
-            a.street_life_bounds[frame],
-            feet,
-            scale,
-            cyclist.animation_ticks,
-            !near,
-        );
+        a.street.draw(d, id, ticks, &pose);
+        if cyclist.phase == CyclistPhase::Riding {
+            a.street.wheels(d, id, ticks, &pose);
+        }
+        if cyclist.phase == CyclistPhase::Braking {
+            for n in 0..3 {
+                let x = pose.position.x + 16.0 + n as f32 * 6.0;
+                d.draw_line_ex(
+                    Vector2::new(x, pose.position.y - 90.0),
+                    Vector2::new(x + 2.0, pose.position.y - 101.0),
+                    1.8,
+                    PAPER,
+                );
+            }
+        }
     }
 }
 
-fn wheel_spokes(
-    d: &mut impl RaylibDraw,
-    bounds: Rectangle,
-    feet: Vector2,
-    scale: f32,
-    ticks: u32,
-    flip: bool,
-) {
-    // Measured wheel landmarks in the cycling row; only thin spokes rotate.
-    let radius = 67.0 * scale;
-    let rotation = ticks as f32 * 2.1 / radius * if flip { -1.0 } else { 1.0 };
-    for fraction in [0.207, 0.798] {
-        let local_x = (fraction - 0.5) * bounds.width * scale;
-        let center = Vector2::new(
-            feet.x + local_x * if flip { -1.0 } else { 1.0 },
-            feet.y - 72.0 * scale,
-        );
-        for spoke in 0..4 {
-            let angle = rotation + spoke as f32 * std::f32::consts::FRAC_PI_2;
-            d.draw_line_ex(
-                center,
+fn props(d: &mut impl RaylibDraw, a: &Assets, offset: f32) {
+    for prop in &a.street.layout.props {
+        let mut pose = PiecePose::at(Vector2::new(prop.position[0] - offset, prop.position[1]));
+        pose.scale = prop.scale;
+        a.street.draw(d, &prop.piece, 0, &pose);
+        for label in &prop.labels {
+            super::typography::centered(
+                d,
+                &a.body,
+                a.text.get(&label.text_key),
                 Vector2::new(
-                    center.x + angle.cos() * radius * 0.88,
-                    center.y + angle.sin() * radius * 0.88,
+                    pose.position.x + label.offset[0] * prop.scale,
+                    pose.position.y + label.offset[1] * prop.scale,
                 ),
-                0.7,
-                Color::new(228, 220, 195, 120),
+                label.width * prop.scale,
+                label.font_size * prop.scale,
+                Color::new(
+                    label.color[0],
+                    label.color[1],
+                    label.color[2],
+                    label.color[3],
+                ),
             );
         }
     }
@@ -150,16 +200,17 @@ fn cycle_lane(d: &mut impl RaylibDraw, offset: f32) {
 }
 
 fn child(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &Assets, offset: f32) {
-    let frame = match ambient.kid_phase() {
-        KidPhase::Playing => 4 + (ambient.kid_phase_ticks() / 38 % 2) as usize,
-        KidPhase::Startled => 6,
-        KidPhase::Releasing => 7,
-        KidPhase::Running => 8 + (ambient.kid_phase_ticks() / 6 % 4) as usize,
+    let id = match ambient.kid_phase() {
+        KidPhase::Playing => "kid.play",
+        KidPhase::Startled => "kid.startled",
+        KidPhase::Releasing => "kid.release",
+        KidPhase::Running => "kid.run",
         KidPhase::Gone => return,
     };
     let position = ambient.kid_position();
     let feet = Vector2::new(position.x - offset, position.y);
-    let scale = 86.0 / a.street_life_bounds[4].height;
+    let mut pose = PiecePose::at(feet);
+    pose.tint = Color::new(247, 236, 217, 255);
     d.draw_ellipse(
         feet.x as i32,
         feet.y as i32 + 1,
@@ -167,15 +218,7 @@ fn child(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &Assets, offset: f3
         2.5,
         Color::new(48, 43, 34, 50),
     );
-    sprite(
-        d,
-        a,
-        frame,
-        feet,
-        scale,
-        false,
-        Color::new(247, 236, 217, 255),
-    );
+    a.street.draw(d, id, ambient.kid_phase_ticks(), &pose);
 
     if ambient.kid_phase() == KidPhase::Startled {
         // A short hand-drawn attention gesture, local to the child's silhouette.
@@ -272,31 +315,4 @@ fn kite(d: &mut impl RaylibDraw, ambient: &AmbientState, offset: f32) {
         d.draw_line_ex(previous, point, 1.0, Color::new(240, 224, 190, 195));
         previous = point;
     }
-}
-
-fn sprite(
-    d: &mut impl RaylibDraw,
-    a: &Assets,
-    frame: usize,
-    feet: Vector2,
-    scale: f32,
-    flip: bool,
-    tint: Color,
-) {
-    let bounds = a.street_life_bounds[frame];
-    let width = bounds.width * scale;
-    let height = bounds.height * scale;
-    d.draw_texture_pro(
-        &a.street_life,
-        Rectangle::new(
-            bounds.x,
-            bounds.y,
-            if flip { -bounds.width } else { bounds.width },
-            bounds.height,
-        ),
-        Rectangle::new(feet.x, feet.y, width, height),
-        Vector2::new(width * 0.5, height),
-        0.0,
-        tint,
-    );
 }

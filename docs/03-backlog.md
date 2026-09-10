@@ -9,7 +9,9 @@ Prioridade atual, em 10 de setembro de 2026: experimentar melhorias das cenas
 do prólogo na branch `feature/prologue-scene-improvements`, a partir da
 **release `v0.1.0-prototype.4`**. O TODO-018 começa pelo quarto tecnológico de
 Rust e pela rua com ciclistas e garoto soltando pipa. A segunda rodada acrescenta
-automóveis e acidente no poste ao despertar da EP. [Escopo das rodadas](30-prologue-scene-improvements.md),
+automóveis e acidente no poste ao despertar da EP. A terceira traz rua brasileira
+com catálogo de peças reutilizáveis, ônibus, boteco e evacuação coletiva
+sem retorno de trânsito durante a luta. [Escopo 31](31-brazilian-street-evacuation.md). [Escopo das rodadas](30-prologue-scene-improvements.md),
 [ADR 0024](adr/0024-prologue-background-life.md) e
 [diário](worklogs/prologue-scene-improvements.md). As demais cenas podem receber
 rodadas próprias nessa branch; esta rodada não publica outra release.
@@ -98,7 +100,7 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Próxima ação |
 |---|---|---|---|---|
-| Agora | Melhorias das cenas do prólogo: quarto e rua de Rust | TODO-018 em experimentação na branch `feature/prologue-scene-improvements` | [Entrega 30](30-prologue-scene-improvements.md), [ADR 0024](adr/0024-prologue-background-life.md), [diário](worklogs/prologue-scene-improvements.md) | Conferir trânsito, buzina/frenagem, carro amassado e permanência do acidente; preservar quarto, ciclovia e fuga da pipa antes de ampliar para outras cenas. |
+| Agora | Melhorias das cenas do prólogo: quarto e rua de Rust | TODO-018 em experimentação na branch `feature/prologue-scene-improvements` | [Entrega 30](30-prologue-scene-improvements.md), [ADR 0024](adr/0024-prologue-background-life.md), [diário](worklogs/prologue-scene-improvements.md) | Conferir diversidade de veículos, ponto/boteco, substituição de peças, evacuação coletiva e persistência de bicicletas/carro batido sem tráfego novo; preservar as rodadas anteriores. |
 | Próximo | Avaliar episódio e definir continuidade da aventura | Playtest humano pendente no TODO-013 | [Entrega 29](29-story-terminal-menu.md), [critérios do episódio](27-rust-story-adventure.md#critérios-de-aceite) | Jogar de Ada até o menu, avaliar ritmo e navegação e decidir ajustes por evidência; ideias de Vínculo/Sirius continuam estacionadas. |
 | Depois | Pendências do Prototype 3 | Backlog; sem execução ativa | [To-do](#backlog-de-to-do), [bugfix](#backlog-de-bugfix) | Retomar itens por prioridade e evidência, em entregas pequenas, quando esta frente for reaberta. |
 
@@ -129,7 +131,7 @@ estáveis ao mudar prioridade ou vincular issue/PR.
 | TODO-015 | Apresentação após o primeiro combate — concluído | Concluído em 10/09/2026 | [Vídeo](evidence/adventure-opening/opening.mp4): 48 s com jornais, biografias C++/Python, elenco e logo/subtítulo; a entrega 29 remove Go da apresentação e mantém cinco personagens. Trilha própria, entrada direta, pausa, skip e replay verificados. [Entrega 28](28-adventure-texts-and-opening.md). |
 | TODO-016 | Atualizar a lore as-is no menu Lore / Roster | Média, backlog; não executar nesta rodada | Conciliar livro, imagens e fichas com o que a aventura já apresenta: Ada/Assembly, Rust, origem de C++ e Python professora, respeitando os mistérios ainda abertos. Incorporar ilustrações pertinentes e conferir leitura no menu. A junção atual preserva o livro como está; revisão editorial e visual será uma entrega própria. |
 | TODO-017 | Unir apresentação ao menu principal de terminal — concluído | Concluído em 10/09/2026 | [Entrega 29](29-story-terminal-menu.md): Go fora da apresentação, menu na mesma janela, isolamento e demais destinos preservados; Modo História sem ação, logo coerente, moldura, cursor bloco e revelação binária. [Evidências](evidence/story-terminal-menu/README.md): revisão de navegação com 432 testes com ambos, matriz separada, 81 checks da entrada conjunta e seis da aventura isolada; avanço por trecho, skip total e confirmação final. `cargo run` inicia a sequência conjunta. Gráficos preparados antes do prólogo evitam espera escura no final. |
-| TODO-018 | Melhorar cenas do prólogo, começando pela manhã de Rust | Alta, experimento em andamento | [Entrega 30](30-prologue-scene-improvements.md) na branch `feature/prologue-scene-improvements`: quarto com setup e pôsteres Rust; ciclistas em ciclovia inacessível ao jogador; garoto que larga a pipa e foge ao despertar da errática; automóveis e sequência de buzina/frenagem/batida no poste, com carro amassado persistente. Conferir animação, áudio, câmera, pausa, retry/restart e ausência de interferência no combate. [Diário e verificações](worklogs/prologue-scene-improvements.md). Avaliar as duas rodadas antes de escolher as demais cenas; publicação não faz parte deste pedido. |
+| TODO-018 | Melhorar cenas do prólogo, começando pela manhã de Rust | Alta, experimento em andamento | [Entrega 30](30-prologue-scene-improvements.md) na branch `feature/prologue-scene-improvements`: quarto com setup e pôsteres Rust; ciclistas em ciclovia inacessível ao jogador; garoto que larga a pipa e foge ao despertar da errática; automóveis e sequência de buzina/frenagem/batida no poste, com carro amassado persistente. Conferir animação, áudio, câmera, pausa, retry/restart e ausência de interferência no combate. [Diário e verificações](worklogs/prologue-scene-improvements.md). Terceira rodada: [rua brasileira modular e evacuação](31-brazilian-street-evacuation.md), com ônibus, ponto, boteco e bicicletas abandonadas. Avaliar as três rodadas antes de escolher as demais cenas; publicação não faz parte deste pedido. |
 
 ## Backlog de bugfix
 

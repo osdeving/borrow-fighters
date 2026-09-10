@@ -123,9 +123,59 @@ Checkpoint final:
   procurar arte gerada já salva antes de repetir gerações. Não reverter para
   `c2dbbe4` sem novo pedido: ele é a referência de comparação e retorno.
 
+Retomada após limite de uso:
+
+- `096c5fc` registra o escopo antes da implementação. A versão de retorno
+  `c2dbbe4` permanece íntegra.
+- Estado puro de evacuação concluído: cinco veículos aceleram sem wrap;
+  dois ciclistas freiam/desmontam/correm; bicicletas permanecem; ninguém
+  retorna após seis segundos. 19 testes direcionados aprovados pelo agente.
+- Veículos novos salvos em `assets/adventure/street/vehicles.*` com procedência.
+  Props e ciclistas tiveram gerações RGBA válidas; última tentativa de corrigir
+  espaçamento voltou RGB com xadrez e deve ser rejeitada. Fontes preservadas
+  em `~/.codex/generated_images/01a08b8b-1def-74e1-baf1-7f46de868f95/`.
+- `scenery.rs` e `engine/pieces.rs` implementam catálogo/composição separados;
+  renderers já consomem peças e filtram atores evacuados. `cargo check` passa.
+- Integração ainda pendente: completar arquivos de catálogo/cena e props,
+  metadados/placas, telemetria/harness, empacotamento e mixer do novo áudio;
+  depois validar/capturar e commitar as etapas.
+
 ### Continuidade posterior
 
 Experimentar a primeira rodada e escolher a próxima cena nesta mesma branch.
 Ada, Assembly e apresentação poderão receber propostas próprias; não há
 implementação desses próximos ajustes pendente nesta solicitação. Manter
 o experimento separado da main e da tag até pedido de integração/publicação.
+
+### Integração após retomada
+
+- Catálogo e cena externos integrados com todos os PNGs finais: seis veículos
+  disponíveis, cinco no trânsito; poses de desmontagem/corrida; fachada, ponto,
+  bicicletas e canto de mercearia. Duas instâncias reaproveitam `prop.corner`.
+- Geração textual final do ciclista resolveu espaçamento e preservou alpha real.
+  Metadados e procedência completos acompanham cada atlas; sem edição de pixels.
+- Primeira inspeção nativa: `.git/street-chaos-review/inspect-1`, capturas de
+  calma, aproximação, desmontagem, corrida e rua vazia. Sem faltas de assets;
+  bicicleta e destroço persistem. Ajuste de áudio: queda soa no contato ao tick70.
+- `cargo build --bin borrow-adventure` passou. Empacotamento:14 testes passaram,
+  inclusive descoberta de PNGs por todos os frames e rejeição de caminho externo.
+- Pendente: verificação nativa completa/áudio, matriz final, evidências e commits.
+
+### Etapa implementada e verificada
+
+- 22/22 checks nativos em `.git/street-chaos-review/native-1`: 1219 amostras
+  sem wrap/respawn, fases completas dos dois ciclistas, via vazia do tick361
+  ao1397, câmera direita, pausa, derrota/retry, skip e restart.
+- Matriz em `.git/street-chaos-review/validation/verification.json`: Fmt e
+  Clippy estrito passaram;450 testes conjuntos,56 aventura,395 luta e3 core.
+  Dois testes preexistentes de dispositivo de áudio ignorados.56 fixtures
+  de fronteira e40 testes do mixer aprovados. Python3.8 não executa o checker;
+  a tentativa com Python3.13 passou. Fontes permaneceram estáveis na matriz.
+- 14 testes de empacotamento; staging Linux real com240 assets aprovado.
+  Windows coberto por fixtures, sem executável Windows local disponível.
+  Troca de PNG/reuso confirmados em árvore temporária, composição preservada.
+- Prévia contínua gravada com áudio do próprio jogo em sink Pulse dedicado:
+  `.git/street-chaos-review/preview`,13,73 segundos/412 frames. Exportação e
+  relatório do áudio em revisão final; sem cortes ou substituição de conteúdo.
+- Código e assets prontos para commit desta etapa; resta finalizar documentação
+  das evidências, checar links e registrar o fechamento.

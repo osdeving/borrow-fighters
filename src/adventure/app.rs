@@ -392,12 +392,20 @@ fn run_session(
                 "kite_release_ticks": story.ambient.kite_release_ticks(),
                 "cyclists": story.ambient.cyclists().map(|actor| serde_json::json!({
                     "x": actor.position.x, "y": actor.position.y,
-                    "facing": format!("{:?}", actor.facing), "animation_ticks": actor.animation_ticks
+                    "facing": format!("{:?}", actor.facing), "animation_ticks": actor.animation_ticks,
+                    "id": actor.id, "phase": format!("{:?}", actor.phase),
+                    "phase_ticks": actor.phase_ticks, "visible": actor.visible,
+                    "bicycle_position": {"x":actor.bicycle_position.x,"y":actor.bicycle_position.y}
                 })),
+                "abandoned_bicycles": story.ambient.abandoned_bicycles().map(|bicycle| bicycle.map(|bike| serde_json::json!({
+                    "id": bike.id, "x": bike.position.x, "y": bike.position.y,
+                    "facing": format!("{:?}",bike.facing), "drop_ticks": bike.drop_ticks
+                }))),
                 "accident_ticks": story.ambient.accident_ticks(),
                 "traffic_cars": story.ambient.traffic_cars().map(|car| serde_json::json!({
                     "x": car.position.x, "y": car.position.y, "style": car.style,
-                    "facing": format!("{:?}", car.facing), "animation_ticks": car.animation_ticks
+                    "facing": format!("{:?}", car.facing), "animation_ticks": car.animation_ticks,
+                    "visible": car.visible, "fleeing": car.fleeing
                 })),
                 "incident_car": story.ambient.incident_car().map(|car| serde_json::json!({
                     "x": car.position.x, "y": car.position.y,

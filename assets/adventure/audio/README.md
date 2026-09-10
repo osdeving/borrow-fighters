@@ -8,7 +8,10 @@ e exportação `wave`. A apresentação musical de 48 segundos tem gerador próp
 [`generate_opening_audio.py`](generate_opening_audio.py), sem alterar o gerador
 ou os oito WAVs anteriores. Os três efeitos de trânsito têm gerador separado,
 [`generate_traffic_audio.py`](generate_traffic_audio.py), também com síntese
-original e ruído determinístico, sem gravações externas. Aplicam-se as licenças
+original e ruído determinístico, sem gravações externas. A fuga coletiva usa
+[`generate_evacuation_audio.py`](generate_evacuation_audio.py) para criar motores
+acelerando e bicicletas caindo, com o mesmo formato e sem alterar os sons do
+acidente. Aplicam-se as licenças
 do repositório.
 
 | Arquivo | Uso | Duração |
@@ -22,6 +25,8 @@ do repositório.
 | `block.wav` | Defesa frontal bem-sucedida | 0,28 s |
 | `hurt.wav` | Rust atingido | 0,36 s |
 | `transition.wav` | Mudança de cena ou surgimento da ameaça | 0,80 s |
+| `traffic_escape.wav` | Motores aceleram e se afastam ao surgir a EP | 1,40 s |
+| `bicycle_fall.wav` | Tubos leves e peças das bicicletas batem no piso | 0,90 s |
 | `car_horn.wav` | Buzina urgente de dois tons quando o carro percebe a EP | 0,60 s |
 | `car_skid.wav` | Pneus freando até o contato com o poste | 0,567 s |
 | `car_crash.wav` | Colisão grave, lataria amassando e cauda de metal | 1,35 s |
@@ -54,12 +59,21 @@ anterior. O avanço por trecho descarta os efeitos abandonados. O adaptador
 detecta marcos cruzados entre renders, para não perder ou repetir a buzina,
 frenagem ou batida se o número de updates por imagem variar.
 
+A fuga coletiva começa com `traffic_escape.wav` no tick **0** da reação;
+`bicycle_fall.wav` toca uma única vez no **70**, quando as bicicletas terminam
+de tombar no piso. O abandono começa no **24**; os ciclistas passam a correr no
+**54**, e as bicicletas tombam durante os 16 ticks seguintes. Os picos são
+0,58 e 0,50, abaixo da colisão no
+poste. Ambos seguem as mesmas regras de pausa, retry e descarte por avanço de
+cena. São efeitos curtos, sem repetição depois que a rua esvazia.
+
 Para regenerar exatamente os arquivos desta pasta:
 
 ```sh
 python3 assets/adventure/audio/generate_audio.py
 python3 assets/adventure/audio/generate_opening_audio.py
 python3 assets/adventure/audio/generate_traffic_audio.py
+python3 assets/adventure/audio/generate_evacuation_audio.py
 ```
 
 Dispositivo de áudio ou WAV ausente não impede a aventura. Este conjunto não

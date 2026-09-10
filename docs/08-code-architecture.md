@@ -50,6 +50,22 @@ Pausa preserva sons em curso, retry rearma o acidente e skip descarta seus cues.
 Telemetria de revisão inclui veículos, idade do acidente e sincronização de áudio
 após skip; relógio de parede permite alinhar gravação nativa de som e vídeo.
 
+A [ADR 0025](adr/0025-replaceable-street-pieces.md) separa arte e composição:
+[`adventure/scenery.rs`](../src/adventure/scenery.rs) valida o catálogo de peças
+e as instâncias; [`engine/pieces.rs`](../src/adventure/engine/pieces.rs) carrega
+cada PNG uma vez e desenha recortes com apoio e escala próprios.
+[`catalog.json`](../assets/adventure/street/catalog.json) pode apontar para
+PNGs individuais ou atlas, enquanto [`scene.json`](../assets/adventure/street/scene.json)
+mantém posições e textos dos adereços.
+
+Ao despertar a EP, `AmbientState` preserva as posições anteriores e inicia
+aceleração dos veículos e frenagem/desmontagem/fuga dos ciclistas. O caminho
+de evacuação não aplica wrap: em até seis segundos todos saíram, deixando
+bicicletas e carro acidentado. Pausa, retry e restart seguem o relógio da história.
+Os marcos de áudio incluem fuga e contato das bicicletas com o chão; nenhum
+ator decorativo entra nas regras do combate.
+[Escopo e verificação](31-brazilian-street-evacuation.md).
+
 ## Objetivo
 
 Criar uma base simples, testável e extensível para o protótipo 0.1 sem transformar o projeto em uma engine antes de provar o combate.

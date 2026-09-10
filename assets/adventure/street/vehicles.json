@@ -1,0 +1,285 @@
+{
+  "image": "vehicles.png",
+  "image_size": [
+    1254,
+    1254
+  ],
+  "frames": [
+    {
+      "key": "vehicle.hatch",
+      "label": "red contemporary compact hatchback",
+      "file": "vehicles.png",
+      "source": [
+        38,
+        167,
+        535,
+        241
+      ],
+      "pivot": [
+        267.5,
+        239
+      ],
+      "world_width": 147,
+      "facing": "right",
+      "wheel_centers": [
+        [
+          78,
+          192
+        ],
+        [
+          426,
+          192
+        ]
+      ],
+      "wheel_centers_source": [
+        [
+          116,
+          359
+        ],
+        [
+          464,
+          359
+        ]
+      ]
+    },
+    {
+      "key": "vehicle.sedan",
+      "label": "silver midsize sedan",
+      "file": "vehicles.png",
+      "source": [
+        617,
+        197,
+        620,
+        212
+      ],
+      "pivot": [
+        310.0,
+        210
+      ],
+      "world_width": 172,
+      "facing": "right",
+      "wheel_centers": [
+        [
+          132,
+          163
+        ],
+        [
+          502,
+          163
+        ]
+      ],
+      "wheel_centers_source": [
+        [
+          749,
+          360
+        ],
+        [
+          1119,
+          360
+        ]
+      ]
+    },
+    {
+      "key": "vehicle.pickup",
+      "label": "white small double-cab pickup",
+      "file": "vehicles.png",
+      "source": [
+        18,
+        538,
+        617,
+        261
+      ],
+      "pivot": [
+        308.5,
+        259
+      ],
+      "world_width": 169,
+      "facing": "right",
+      "wheel_centers": [
+        [
+          122,
+          206
+        ],
+        [
+          520,
+          205
+        ]
+      ],
+      "wheel_centers_source": [
+        [
+          140,
+          744
+        ],
+        [
+          538,
+          743
+        ]
+      ]
+    },
+    {
+      "key": "vehicle.suv",
+      "label": "graphite compact SUV",
+      "file": "vehicles.png",
+      "source": [
+        666,
+        527,
+        571,
+        276
+      ],
+      "pivot": [
+        285.5,
+        274
+      ],
+      "world_width": 160,
+      "facing": "right",
+      "wheel_centers": [
+        [
+          100,
+          219
+        ],
+        [
+          452,
+          219
+        ]
+      ],
+      "wheel_centers_source": [
+        [
+          766,
+          746
+        ],
+        [
+          1118,
+          746
+        ]
+      ]
+    },
+    {
+      "key": "vehicle.bus",
+      "label": "blue white yellow municipal bus",
+      "file": "vehicles.png",
+      "source": [
+        32,
+        920,
+        742,
+        218
+      ],
+      "pivot": [
+        371.0,
+        216
+      ],
+      "world_width": 280,
+      "facing": "right",
+      "wheel_centers": [
+        [
+          161,
+          177
+        ],
+        [
+          548,
+          179
+        ]
+      ],
+      "wheel_centers_source": [
+        [
+          193,
+          1097
+        ],
+        [
+          580,
+          1099
+        ]
+      ]
+    },
+    {
+      "key": "vehicle.van",
+      "label": "white compact delivery van",
+      "file": "vehicles.png",
+      "source": [
+        809,
+        933,
+        415,
+        218
+      ],
+      "pivot": [
+        207.5,
+        216
+      ],
+      "world_width": 149,
+      "facing": "right",
+      "wheel_centers": [
+        [
+          71,
+          180
+        ],
+        [
+          341,
+          181
+        ]
+      ],
+      "wheel_centers_source": [
+        [
+          880,
+          1113
+        ],
+        [
+          1150,
+          1114
+        ]
+      ]
+    }
+  ],
+  "measurement": {
+    "alpha_threshold_exclusive": 3,
+    "padding_pixels": 2,
+    "image_pixels_unchanged": true,
+    "source_units": "pixels in complete PNG",
+    "pivot_and_wheels_units": "pixels relative to source rectangle upper-left",
+    "wheel_centers_method": "alpha tire contour sampling and visual inspection; approximate hubs",
+    "inspection_windows": [
+      [
+        0,
+        0,
+        600,
+        470
+      ],
+      [
+        600,
+        0,
+        1254,
+        470
+      ],
+      [
+        0,
+        470,
+        650,
+        860
+      ],
+      [
+        650,
+        470,
+        1254,
+        860
+      ],
+      [
+        0,
+        860,
+        792,
+        1254
+      ],
+      [
+        792,
+        860,
+        1254,
+        1254
+      ]
+    ]
+  },
+  "source_sha256": "cd00c1af32f8a2e2e7d98221c98680b12a2247eab9fa39640ed8224eca4cea7c",
+  "alpha_counts": {
+    "zero": 957396,
+    "intermediate": 613630,
+    "opaque": 1490
+  },
+  "generated_with": "built-in image_gen",
+  "selected_prompt": "prompts/vehicles.txt"
+}

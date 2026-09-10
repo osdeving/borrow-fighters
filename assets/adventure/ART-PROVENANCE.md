@@ -325,3 +325,11 @@ acentuou o encurtamento, mas produziu RGB com xadrez pintado
 (`exec-dd20aa85-ceff-41e0-920a-92a08025ef78.png`); foi rejeitada. A fonte
 selecionada é cópia byte a byte do primeiro resultado. O script de inspeção
 apenas leu o alpha e escreveu JSON, sem recortar, pintar ou regravar o PNG.
+
+## Terceira rodada — rua brasileira modular
+
+Os novos atlas transparentes ficam em `street/`, separados da base pintada.
+[Veículos](street/VEHICLES.md) registra seis silhuetas e referências visuais.
+[Adereços e fuga dos ciclistas](street/PROPS.md) registra os prompts completos,
+fontes, hashes, alpha e recortes. Catálogo e composição independentes estão
+no [guia de substituição e reuso](street/README.md).

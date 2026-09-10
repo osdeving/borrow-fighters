@@ -16,8 +16,9 @@ class RepositoryAssetsTests(unittest.TestCase):
         assets = {p.relative_to(package.ROOT).as_posix() for p in package.runtime_assets()}
         required = {
             "ada-prologue.png", "prologue-environments.png", "rust-morning.png",
-            "street-life.png", "street-life.json", "street-traffic.png",
-            "street-traffic.json",
+            "street-life.png", "street-traffic.png", "street/catalog.json",
+            "street/scene.json", "street/vehicles.png", "street/props.png",
+            "street/cyclist-escape.png", "street/README.md",
             "rust-actions.png", "erratic.png", "rust-morning-poses.json",
             "rust-actions-poses.json", "erratic-poses.json", "texts/pt-BR.json",
             "texts/README.md", "opening/roster.json", "opening/cpp-origin.png",
@@ -27,7 +28,8 @@ class RepositoryAssetsTests(unittest.TestCase):
         }
         required.update(f"audio/{name}.wav" for name in (
             "ada", "morning", "threat", "remorse", "opening", "strike",
-            "block", "hurt", "transition", "car_horn", "car_skid", "car_crash"))
+            "block", "hurt", "transition", "car_horn", "car_skid", "car_crash",
+            "traffic_escape", "bicycle_fall"))
         required.update(f"opening/roster/{name}.png" for name in (
             "rust", "duke", "c", "cpp", "python"))
         self.assertFalse({f"assets/adventure/{name}" for name in required} - assets)
@@ -36,6 +38,7 @@ class RepositoryAssetsTests(unittest.TestCase):
         self.assertFalse(any("prompts" in Path(name).parts for name in assets))
         self.assertNotIn("assets/adventure/audio/generate_audio.py", assets)
         self.assertNotIn("assets/adventure/audio/generate_traffic_audio.py", assets)
+        self.assertNotIn("assets/adventure/audio/generate_evacuation_audio.py", assets)
 
 
 class AdventureReferencesTests(unittest.TestCase):
@@ -53,9 +56,15 @@ class AdventureReferencesTests(unittest.TestCase):
         for name in ("scene.png", "opening/intro.png", "audio/music.wav",
                      "opening/roster/portrait.png", "fonts/BARLOW-OFL.txt",
                      "fonts/LORA-OFL.txt", "fonts/README.md", "audio/README.md",
-                     "texts/README.md", "ART-PROVENANCE.md", "opening/ART-PROVENANCE.md"):
+                     "texts/README.md", "ART-PROVENANCE.md", "opening/ART-PROVENANCE.md",
+                     "street/car.png", "street/poses.png", "street/prop.png",
+                     "street/README.md"):
             self.write(f"assets/adventure/{name}", "fixture")
         self.roster("roster/portrait.png")
+        self.street_catalog("street/car.png", "street/poses.png")
+        self.write("assets/adventure/street/scene.json", json.dumps({
+            "version": 1, "props": [],
+        }))
 
     def write(self, name, content):
         path = self.root / name
@@ -66,6 +75,23 @@ class AdventureReferencesTests(unittest.TestCase):
         self.write("assets/adventure/opening/roster.json", json.dumps({
             "characters": [{"image": image,
                             "source": "assets/production/unused-missing.png"}],
+        }))
+
+    def street_catalog(self, *images):
+        self.write("assets/adventure/street/catalog.json", json.dumps({
+            "version": 1,
+            "pieces": {
+                "vehicle.test": {
+                    "width": 160, "frame_ticks": 6,
+                    "frames": [{"image": image, "source": [0, 0, 400, 200],
+                                "anchor": [200, 200]} for image in images],
+                },
+                "prop.test": {
+                    "width": 80, "frame_ticks": 1,
+                    "frames": [{"image": "street/prop.png", "source": [0, 0, 80, 100],
+                                "anchor": [40, 100]}],
+                },
+            },
         }))
 
     def test_follows_dynamic_loader_names_and_image_without_provenance(self):
@@ -83,6 +109,42 @@ class AdventureReferencesTests(unittest.TestCase):
     def test_missing_transitive_portrait_stops_packaging(self):
         (self.base / "opening/roster/portrait.png").unlink()
         with self.assertRaisesRegex(ValueError, "Missing runtime asset"):
+            package.adventure_assets()
+
+    def test_follows_all_street_pieces_frames_and_shared_images_only_once(self):
+        self.street_catalog("street/car.png", "street/poses.png", "street/car.png")
+        self.write("assets/adventure/street/unused.png", "unused source art")
+        assets = package.adventure_assets()
+        expected = {self.base / name for name in (
+            "street/catalog.json", "street/scene.json", "street/car.png",
+            "street/poses.png", "street/prop.png", "street/README.md")}
+        self.assertTrue(expected <= assets)
+        self.assertEqual(sum(path == self.base / "street/car.png" for path in assets), 1)
+        self.assertNotIn(self.base / "street/unused.png", assets)
+
+    def test_missing_later_street_frame_stops_packaging(self):
+        (self.base / "street/poses.png").unlink()
+        with self.assertRaisesRegex(ValueError, "Missing runtime asset"):
+            package.adventure_assets()
+
+    def test_street_frame_paths_are_local_pngs_on_either_platform(self):
+        for image in ("../outside.png", "/scene.png", "C:/scene.png",
+                      "..\\scene.png", "street//car.png", "street/./car.png",
+                      "street/car.jpg", "https://example.com/car.png", "", None):
+            with self.subTest(image=image):
+                self.street_catalog(image)
+                with self.assertRaisesRegex(ValueError, "relative local PNG"):
+                    package.adventure_assets()
+
+    def test_street_image_symlink_cannot_point_into_fighting_assets(self):
+        self.write("assets/candidates/car.png", "other domain")
+        link = self.base / "street/link.png"
+        try:
+            link.symlink_to(self.root / "assets/candidates/car.png")
+        except (OSError, NotImplementedError) as error:
+            self.skipTest(f"Symlinks unavailable: {error}")
+        self.street_catalog("street/link.png")
+        with self.assertRaisesRegex(ValueError, "outside assets/adventure"):
             package.adventure_assets()
 
     def test_roster_cannot_escape_its_asset_directory_on_either_platform(self):

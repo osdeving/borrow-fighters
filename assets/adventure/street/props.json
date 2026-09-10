@@ -1,0 +1,129 @@
+{
+  "image": "props.png",
+  "image_size": [
+    1536,
+    1024
+  ],
+  "rects": [
+    [
+      32,
+      58,
+      731,
+      480
+    ],
+    [
+      790,
+      106,
+      731,
+      446
+    ],
+    [
+      49,
+      596,
+      746,
+      331
+    ],
+    [
+      893,
+      633,
+      564,
+      319
+    ]
+  ],
+  "labels": [
+    "storefront-casa-nossa",
+    "bus-stop-shelter",
+    "abandoned-bicycle-lying",
+    "grocery-corner-props"
+  ],
+  "pivots": [
+    [
+      365.5,
+      478
+    ],
+    [
+      365.5,
+      444
+    ],
+    [
+      373.0,
+      329
+    ],
+    [
+      282.0,
+      317
+    ]
+  ],
+  "pivot_space": "pixels relative to rect top-left",
+  "text_areas": [
+    {
+      "piece": "storefront-casa-nossa",
+      "source_rect": [
+        150,
+        108,
+        480,
+        48
+      ],
+      "relative_rect": [
+        118,
+        50,
+        480,
+        48
+      ]
+    },
+    {
+      "piece": "bus-stop-shelter",
+      "source_rect": [
+        1449,
+        232,
+        33,
+        69
+      ],
+      "relative_rect": [
+        659,
+        126,
+        33,
+        69
+      ]
+    }
+  ],
+  "measurement": {
+    "alpha_threshold_exclusive": 3,
+    "padding_pixels": 2,
+    "image_pixels_unchanged": true,
+    "inspection_windows": [
+      [
+        0,
+        0,
+        780,
+        560
+      ],
+      [
+        780,
+        0,
+        1536,
+        560
+      ],
+      [
+        0,
+        560,
+        835,
+        1024
+      ],
+      [
+        835,
+        560,
+        1536,
+        1024
+      ]
+    ]
+  },
+  "source_sha256": "e9bc7ed2d014516afb554e0a40814d0ab5e0b18546fbaf09c5f46a02ed781564",
+  "alpha_counts": {
+    "zero": 858222,
+    "intermediate": 714642,
+    "opaque": 0
+  },
+  "generated_with": "built-in image_gen",
+  "selected_prompt": "prompts/props.txt"
+}

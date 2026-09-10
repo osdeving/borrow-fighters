@@ -21,14 +21,8 @@ pub struct Assets {
     pub morning: Texture2D,
     /// Bedroom and street, arranged vertically.
     pub environments: Texture2D,
-    /// Cyclist and kite-child poses, separate from every physical actor.
-    pub street_life: Texture2D,
-    /// Twelve independently bounded decorative poses.
-    pub street_life_bounds: Vec<Rectangle>,
-    /// Passing vehicles and the incident car before/after its impact.
-    pub street_traffic: Texture2D,
-    /// Four alpha-bounded vehicle poses in the traffic atlas.
-    pub street_traffic_bounds: Vec<Rectangle>,
+    /// Replaceable actors and props, with a separate scene composition.
+    pub street: super::pieces::StreetPieces,
     /// Eight poses of the original erratic creature.
     pub erratic: Texture2D,
     /// Transparent-pixel bounds within each waking pose.
@@ -72,10 +66,7 @@ impl Assets {
             ada: texture(rl, thread, "ada-prologue.png")?,
             morning: texture(rl, thread, "rust-morning.png")?,
             environments: texture(rl, thread, "prologue-environments.png")?,
-            street_life: texture(rl, thread, "street-life.png")?,
-            street_life_bounds: pose_bounds("street-life.json", 12)?,
-            street_traffic: texture(rl, thread, "street-traffic.png")?,
-            street_traffic_bounds: pose_bounds("street-traffic.json", 4)?,
+            street: super::pieces::StreetPieces::load(rl, thread)?,
             erratic: texture(rl, thread, "erratic.png")?,
             morning_bounds: pose_bounds("rust-morning-poses.json", 12)?,
             erratic_bounds: pose_bounds("erratic-poses.json", 8)?,

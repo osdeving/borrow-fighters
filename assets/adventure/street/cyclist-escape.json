@@ -1,0 +1,176 @@
+{
+  "image": "cyclist-escape.png",
+  "image_size": [
+    1536,
+    1024
+  ],
+  "rects": [
+    [
+      20,
+      104,
+      361,
+      360
+    ],
+    [
+      398,
+      93,
+      362,
+      370
+    ],
+    [
+      791,
+      101,
+      361,
+      359
+    ],
+    [
+      1164,
+      232,
+      356,
+      219
+    ],
+    [
+      46,
+      577,
+      320,
+      363
+    ],
+    [
+      505,
+      577,
+      168,
+      363
+    ],
+    [
+      798,
+      577,
+      337,
+      363
+    ],
+    [
+      1268,
+      577,
+      199,
+      363
+    ]
+  ],
+  "labels": [
+    "cyclist-brake-right",
+    "cyclist-dismount-right",
+    "cyclist-release-right",
+    "bicycle-upright-right",
+    "cyclist-run-left-0",
+    "cyclist-run-left-1",
+    "cyclist-run-left-2",
+    "cyclist-run-left-3"
+  ],
+  "pivots": [
+    [
+      180.5,
+      345
+    ],
+    [
+      181,
+      356
+    ],
+    [
+      190.5,
+      348
+    ],
+    [
+      178,
+      217
+    ],
+    [
+      147,
+      359
+    ],
+    [
+      86,
+      359
+    ],
+    [
+      163,
+      359
+    ],
+    [
+      112,
+      359
+    ]
+  ],
+  "visual_feet_pivots": [
+    [
+      180.5,
+      356
+    ],
+    [
+      181,
+      366
+    ],
+    [
+      190.5,
+      355
+    ],
+    [
+      178,
+      217
+    ],
+    [
+      147,
+      359
+    ],
+    [
+      86,
+      359
+    ],
+    [
+      163,
+      359
+    ],
+    [
+      112,
+      359
+    ]
+  ],
+  "pivot_space": "pixels relative to rect top-left",
+  "pivot_notes": "Frames0-3 anchor bicycle wheel midpoint on source y449; frames4-7 anchor runner hips horizontally and a shared source ground y936. Dismount feet project up to11 source pixels below the bicycle ground.",
+  "authored_facing": [
+    "right",
+    "right",
+    "right",
+    "right",
+    "left",
+    "left",
+    "left",
+    "left"
+  ],
+  "measurement": {
+    "alpha_threshold_exclusive": 3,
+    "padding_pixels": 2,
+    "running_rect_top": 577,
+    "running_rect_bottom": 940,
+    "running_ground_y": 936,
+    "image_pixels_unchanged": true,
+    "inspection_column_edges": [
+      0,
+      384,
+      768,
+      1152,
+      1536
+    ],
+    "inspection_row_edges": [
+      0,
+      512,
+      1024
+    ],
+    "nonzero_alpha_above_threshold_on_cell_vertical_edges": 0
+  },
+  "source_sha256": "a3c4a4bfcc88339a2e486742c2e21b89a686ff3353f46e2f2fa9d6bfe7ad889f",
+  "alpha_counts": {
+    "zero": 1168122,
+    "intermediate": 404742,
+    "opaque": 0
+  },
+  "generated_with": "built-in image_gen",
+  "selected_prompt": "prompts/cyclist-escape-clean-cells.txt"
+}

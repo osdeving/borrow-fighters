@@ -75,6 +75,28 @@ Os efeitos se concentram na área do acidente, preservando a silhueta dos
 personagens e a continuidade da fuga do garoto. A arte íntegra/amassada usa
 a mesma escala e rodas ancoradas nos pontos medidos do atlas.
 
+A [rua modular e sua evacuação](31-brazilian-street-evacuation.md) preservam
+essa separação em peças substituíveis. O catálogo oferece seis silhuetas de
+veículos do cotidiano: hatch, sedã, picape, SUV, ônibus e van. A cena usa as
+cinco primeiras no trânsito; a van permanece disponível para composição.
+As diferenças precisam aparecer em carroceria, proporção e rodas, além da cor.
+
+Bar e Mercearia Casa Nossa, abrigo de ônibus e objetos da calçada têm alpha
+e ficam sobrepostos ao bairro, com recortes e apoios próprios. As placas dos
+PNGs ficam sem palavras: o runtime desenha os textos editáveis sobre elas.
+Catálogo de peças e instâncias da cena são arquivos separados, permitindo
+trocar a arte ou reutilizar um objeto sem repintar o fundo.
+
+Quando a EP aparece, a vida cotidiana se transforma em evacuação: carros e
+ônibus aceleram para fora; ciclistas freiam, descem, soltam a bicicleta e
+correm. A fuga mostra mudanças de apoio, mãos e pernas, além do deslocamento
+horizontal. A bicicleta cai e permanece no chão; a rua não recebe novas
+voltas de figurantes durante o mesmo encontro. Garoto, pipa e acidente
+mantêm suas consequências. Conferir a continuidade das poses e a escala
+uniforme do ciclista vestido de vermelho-tijolo, inclusive ao mostrar sua
+bicicleta vazia. [Adereços e apoios](../assets/adventure/street/PROPS.md) e
+[veículos](../assets/adventure/street/VEHICLES.md) registram origem e seleção.
+
 A apresentação após o pesar usa jornais, quadros biográficos e montagem de
 personagens. C++ aparece adulta no cotidiano noturno e no despertar heroico;
 Python ensina humanos sobre EPs numa universidade. As manchetes representam

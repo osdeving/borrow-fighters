@@ -1,0 +1,20 @@
+TRANSPARENT BACKGROUND. Create an RGBA PNG sprite atlas of EIGHT isolated full-body cutouts with real alpha transparency for a 2D side-scrolling adventure game. Empty space between sprites is transparent alpha, never a checkerboard or colored background.
+
+Use case: illustration-story. Warm painted anime game sprites, clean restrained dark-brown outlines, readable facial emotion, human adult proportions. The SAME adult male cyclist in every occupied cell: warm medium-brown skin, short dark hair, small dark beard/stubble, GRAY vented bicycle helmet with dark chin strap, plain BRICK-RED T-shirt, NAVY knee-length shorts, white ankle socks, NAVY sneakers with WHITE soles. His ordinary bicycle is dark TEAL with a diamond city-bike frame, straight handlebars, small black saddle, thin dark tires and silver circular rims. Friendly everyday Brazilian neighbor, startled by a threat on his RIGHT. Maintain the exact same head, body and clothing sizes and the same teal bicycle design throughout.
+
+Exactly FOUR COLUMNS and TWO ROWS with generous transparent margins, suggested canvas1536x1024. Eight distinct sprites centered in their individual equal cells, same physical scale, complete helmet, hands, feet and wheels. The first three cells show a continuous believable dismount of a bicycle initially facing RIGHT. Bottom row is the same man escaping LEFT ON FOOT, without a bicycle.
+
+TOP ROW left to right:
+1. The man startled and braking on the RIGHT-facing teal bicycle. Both hands on handlebars, torso leans back sharply, elbows bent, eyes wide looking RIGHT, one sneaker moving down toward ground, bicycle still upright. Clearly a braking pose rather than relaxed pedaling.
+2. The same man dismounting the stationary RIGHT-facing bicycle: standing over and beside the low frame with BOTH feet planted on the same ground baseline, weight visibly off the saddle, hands still steadying handlebars, shoulders turning LEFT to leave.
+3. The same man releasing the bike and stepping away LEFT: both hands visibly lifted FREE of handlebars, torso rotated LEFT, left foot takes first step away, right foot pushes off. The complete RIGHT-facing bike stands immediately behind him, only slightly leaning. Make his entire body and bicycle readable with some air between his hands and handlebars.
+4. The SAME empty TEAL city bicycle upright, strict side profile facing RIGHT, NO person.
+
+BOTTOM ROW left to right, the same helmeted adult RUNNING LEFT in four genuinely distinct sequential phases:
+5. Long leftward stride: leading leg stretches forward LEFT, trailing leg stretches backward RIGHT, opposite arm swings forward.
+6. Passing/compression pose: one foot directly under hips on ground, other knee bent and swinging forward, arms pass by torso; body lowered slightly.
+7. Opposite long stride: reverse which leg leads and reverse arm swing, both feet widely apart and knees visibly changed from pose5.
+8. Opposite passing/push-off pose: other planted foot under hips, rear heel lifting and opposite knee driving forward, arms reversed from pose6.
+All running torsos lean LEFT with alert worried faces; animate actual alternating leg and arm articulation rather than copying one pose. Running figures have NO bicycle and no objects.
+
+No ground, floor, cast shadows, scene, lettering, speed lines, effects, labels, numbers, cell borders or grid lines. Eight isolated cutouts only on a genuinely transparent canvas.

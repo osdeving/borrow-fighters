@@ -5,7 +5,7 @@
 
 use raylib::prelude::*;
 
-use super::assets::Assets;
+use super::{assets::Assets, pieces::PiecePose};
 use crate::adventure::{
     ambient::{
         AmbientState, CAR_HORN_TICK, CAR_IMPACT_TICK, CAR_SKID_START_X, CRASH_POLE_X, IncidentPhase,
@@ -71,18 +71,39 @@ pub fn road(d: &mut impl RaylibDraw, offset: f32) {
 
 /// Draws far traffic, then the incident in the near lane and its persistent pole.
 pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &Assets, offset: f32) {
-    for car in ambient.traffic_cars() {
-        let frame = [2, 3, 0][car.style];
-        vehicle(
-            d,
-            a,
-            frame,
-            Vector2::new(car.position.x - offset, car.position.y),
-            147.0,
-            car.facing == Facing::Left,
-            car.animation_ticks,
-            Color::new(218, 225, 210, 255),
+    for car in ambient.traffic_cars().iter().filter(|car| car.visible) {
+        let id = [
+            "vehicle.hatch",
+            "vehicle.sedan",
+            "vehicle.pickup",
+            "vehicle.suv",
+            "vehicle.bus",
+        ][car.style];
+        let mut pose = PiecePose::at(Vector2::new(car.position.x - offset, car.position.y));
+        pose.flip = car.facing == Facing::Left;
+        pose.tint = Color::new(229, 232, 220, 255);
+        let width = a.street.size(id, 0).x;
+        d.draw_ellipse(
+            pose.position.x as i32,
+            pose.position.y as i32,
+            width * 0.46,
+            3.0,
+            Color::new(35, 40, 37, 70),
         );
+        a.street.draw(d, id, car.animation_ticks, &pose);
+        a.street.wheels(d, id, car.animation_ticks, &pose);
+        if car.fleeing {
+            for n in 0..2 {
+                let x = pose.position.x + width * 0.5 + 6.0;
+                let y = pose.position.y - 12.0 - n as f32 * 10.0;
+                d.draw_line_ex(
+                    Vector2::new(x, y),
+                    Vector2::new(x + 22.0, y),
+                    1.0,
+                    Color::new(217, 208, 176, 130),
+                );
+            }
+        }
     }
 
     let age = ambient
@@ -96,22 +117,24 @@ pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &Assets, offset:
         match car.phase {
             IncidentPhase::Crashed => {
                 let impact_age = car.phase_ticks;
-                let bounds = a.street_traffic_bounds[1];
+                let width = a.street.size("incident.crashed", 0).x;
                 // Retain the original uniform scale, pressing the shortened nose
                 // against the pole while the rear rolls forward during crumpling.
-                let scale = 160.0 / a.street_traffic_bounds[0].width;
-                let width = bounds.width * scale;
                 let shake = (impact_age as f32 * 2.8).sin()
                     * (1.0 - impact_age as f32 / 20.0).max(0.0)
                     * 3.0;
                 let center =
                     Vector2::new(CRASH_POLE_X - offset - width * 0.5 + shake, feet.y + 1.5);
-                vehicle(d, a, 1, center, width, false, 0, Color::WHITE);
+                let mut pose = PiecePose::at(center);
+                pose.position.y = feet.y + 1.5;
+                a.street.draw(d, "incident.crashed", 0, &pose);
                 aftermath(d, impact_age, offset);
             }
             IncidentPhase::Approaching | IncidentPhase::Braking => {
                 let ticks = ambient.accident_ticks().unwrap_or(0);
-                vehicle(d, a, 0, feet, 160.0, false, ticks * 3, Color::WHITE);
+                let pose = PiecePose::at(feet);
+                a.street.draw(d, "incident.intact", ticks * 3, &pose);
+                a.street.wheels(d, "incident.intact", ticks * 3, &pose);
                 if car.phase == IncidentPhase::Braking {
                     // Tail lamps and tire haze precede the metal impact.
                     d.draw_circle_v(
@@ -142,67 +165,6 @@ pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &Assets, offset:
         }
     }
     pole(d, age, offset);
-}
-
-#[allow(clippy::too_many_arguments)]
-fn vehicle(
-    d: &mut impl RaylibDraw,
-    a: &Assets,
-    frame: usize,
-    feet: Vector2,
-    width: f32,
-    flip: bool,
-    ticks: u32,
-    tint: Color,
-) {
-    if feet.x + width < 0.0 || feet.x - width > 1280.0 {
-        return;
-    }
-    let bounds = a.street_traffic_bounds[frame];
-    let height = bounds.height / bounds.width * width;
-    d.draw_ellipse(
-        feet.x as i32,
-        feet.y as i32,
-        width * 0.48,
-        3.0,
-        Color::new(35, 40, 37, 80),
-    );
-    d.draw_texture_pro(
-        &a.street_traffic,
-        Rectangle::new(
-            bounds.x,
-            bounds.y,
-            if flip { -bounds.width } else { bounds.width },
-            bounds.height,
-        ),
-        Rectangle::new(feet.x - width * 0.5, feet.y - height, width, height),
-        Vector2::zero(),
-        0.0,
-        tint,
-    );
-    if frame != 1 {
-        // Tiny moving hub glints retain painted tires instead of replacing them.
-        let angle = ticks as f32 * 0.32 * if flip { -1.0 } else { 1.0 };
-        // Source-image landmarks measured in street-traffic.json.
-        let wheels = [
-            [(115.0, 445.0), (519.0, 445.0)],
-            [(742.0, 445.0), (1147.0, 445.0)],
-            [(136.0, 1044.0), (510.0, 1044.0)],
-            [(735.0, 1047.0), (1137.0, 1047.0)],
-        ];
-        for (source_x, source_y) in wheels[frame] {
-            let fraction = (source_x - bounds.x) / bounds.width;
-            let wheel_x = feet.x + (fraction - 0.5) * width * if flip { -1.0 } else { 1.0 };
-            let wheel_y = feet.y - height + (source_y - bounds.y) / bounds.height * height;
-            let r = height * 0.073;
-            d.draw_line_ex(
-                Vector2::new(wheel_x - angle.cos() * r, wheel_y - angle.sin() * r),
-                Vector2::new(wheel_x + angle.cos() * r, wheel_y + angle.sin() * r),
-                0.8,
-                Color::new(217, 214, 190, 145),
-            );
-        }
-    }
 }
 
 fn skid_marks(d: &mut impl RaylibDraw, feet: Vector2, offset: f32) {

@@ -17,6 +17,15 @@ manhã de Rust. [Escopo](docs/30-prologue-scene-improvements.md) e
   frenagem e batida de um carro num poste, com capô amassado, poeira, pequenos
   fragmentos, fumaça leve e sons próprios. A consequência permanece no encontro;
   pausa conserva a sequência e o áudio, retry rearma e skip descarta os efeitos.
+- Rua com catálogo de peças e composição em JSON separados: pessoas, veículos,
+  fachada, ponto de ônibus e objetos podem ser trocados ou reutilizados sem
+  repintar o bairro. Bar e Mercearia Casa Nossa e placas usam textos editáveis.
+- Seis silhuetas de veículos disponíveis; hatch, sedã, picape, SUV e ônibus
+  circulam nesta cena, enquanto a van fica disponível no catálogo.
+- A EP provoca evacuação: carros e ônibus aceleram para fora, ciclistas freiam,
+  abandonam as bicicletas e correm a pé. Bicicletas ficam no chão e figurantes
+  não voltam após a fuga; o acidente e a saída do garoto continuam preservados.
+  [Escopo da rua modular e evacuação](docs/31-brazilian-street-evacuation.md).
 - Quatro textos editáveis em `morning.poster.*` e `morning.setup.*`, com
   recarga por F5. As entradas `--start morning` e `--start encounter` permitem
   rever diretamente os trechos desta rodada.

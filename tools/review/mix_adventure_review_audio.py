@@ -39,7 +39,8 @@ RATE = 22050
 VOLUME = 0.3
 TRACKS = ("ada", "morning", "threat", "remorse", "opening")
 NON_LOOPING_TRACKS = {"opening"}
-TRAFFIC_MILESTONES = ((38, "car_horn"), (78, "car_skid"), (112, "car_crash"))
+TRAFFIC_MILESTONES = ((0, "traffic_escape"), (38, "car_horn"),
+                      (70, "bicycle_fall"), (78, "car_skid"), (112, "car_crash"))
 TRAFFIC_CUES = tuple(cue for _, cue in TRAFFIC_MILESTONES)
 CUES = ("strike", "block", "hurt", "transition") + TRAFFIC_CUES
 STAGES = {"AdaPrologue", "RustMorning", "Encounter", "Aftermath", "Opening", "Complete"}

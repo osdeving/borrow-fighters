@@ -259,7 +259,7 @@ impl Story {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::adventure::ambient::{IncidentPhase, KidPhase};
+    use crate::adventure::ambient::{CyclistPhase, IncidentPhase, KidPhase};
 
     #[test]
     fn background_reaction_continues_through_victory_and_stops_after_the_street() {
@@ -278,6 +278,13 @@ mod tests {
             story.tick(CombatInput::default());
         }
         assert_eq!(story.ambient.kid_phase(), KidPhase::Running);
+        assert!(
+            story
+                .ambient
+                .cyclists()
+                .iter()
+                .all(|cyclist| cyclist.phase == CyclistPhase::Running)
+        );
         let before_victory = story.ambient.clone();
         story.combat.outcome = Outcome::Victory;
         story.combat.enemy.hp = 0;
@@ -290,6 +297,23 @@ mod tests {
             story.tick(CombatInput::default());
         }
         assert_eq!(story.ambient.kid_phase(), KidPhase::Gone);
+        assert!(
+            story
+                .ambient
+                .cyclists()
+                .iter()
+                .all(|cyclist| cyclist.phase == CyclistPhase::Gone && !cyclist.visible)
+        );
+        assert!(story.ambient.traffic_cars().iter().all(|car| !car.visible));
+        assert_eq!(
+            story
+                .ambient
+                .abandoned_bicycles()
+                .map(|bike| bike.unwrap().position),
+            before_victory
+                .abandoned_bicycles()
+                .map(|bike| bike.unwrap().position)
+        );
         let wreck = story.ambient.incident_car().unwrap();
         assert_eq!(wreck.phase, IncidentPhase::Crashed);
         story.tick(CombatInput::default());
@@ -316,6 +340,21 @@ mod tests {
             story.tick(CombatInput::default());
         }
         assert_eq!(story.ambient.kid_phase(), KidPhase::Gone);
+        assert!(story.ambient.traffic_cars().iter().all(|car| !car.visible));
+        assert!(
+            story
+                .ambient
+                .cyclists()
+                .iter()
+                .all(|cyclist| !cyclist.visible)
+        );
+        assert!(
+            story
+                .ambient
+                .abandoned_bicycles()
+                .iter()
+                .all(Option::is_some)
+        );
         assert_eq!(
             story.ambient.incident_car().unwrap().phase,
             IncidentPhase::Crashed
@@ -328,6 +367,21 @@ mod tests {
         assert_eq!(story.ambient.kid_phase_ticks(), 0);
         assert_eq!(story.ambient.kite_release_ticks(), None);
         assert_eq!(story.ambient.accident_ticks(), Some(0));
+        assert!(
+            story
+                .ambient
+                .traffic_cars()
+                .iter()
+                .all(|car| car.visible && car.fleeing)
+        );
+        assert!(
+            story
+                .ambient
+                .cyclists()
+                .iter()
+                .all(|cyclist| cyclist.visible && cyclist.phase == CyclistPhase::Braking)
+        );
+        assert_eq!(story.ambient.abandoned_bicycles(), [None, None]);
         assert_eq!(
             story.ambient.incident_car().unwrap().phase,
             IncidentPhase::Approaching
@@ -344,6 +398,21 @@ mod tests {
         story.advance_scene();
         assert_eq!(story.ambient, AmbientState::default());
         assert_eq!(story.ambient.incident_car(), None);
+        assert!(
+            story
+                .ambient
+                .traffic_cars()
+                .iter()
+                .all(|car| car.visible && !car.fleeing)
+        );
+        assert!(
+            story
+                .ambient
+                .cyclists()
+                .iter()
+                .all(|cyclist| cyclist.visible && cyclist.phase == CyclistPhase::Riding)
+        );
+        assert_eq!(story.ambient.abandoned_bicycles(), [None, None]);
         assert!(!story.combat.enemy_awake);
     }
 

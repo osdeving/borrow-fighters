@@ -1,4 +1,4 @@
-//! Animates street traffic, its scripted accident and the kite child's escape.
+//! Animates ordinary street life and its one-way evacuation after the EP appears.
 //!
 //! System: Adventure scenery. These fixed-update clocks and visual positions
 //! consume the encounter's awakening signal without owning bodies or contacts.
@@ -24,6 +24,26 @@ pub const CAR_HORN_TICK: u32 = 38;
 pub const CAR_SKID_TICK: u32 = 78;
 /// Reaction age at which the car hits the pole and stays wrecked.
 pub const CAR_IMPACT_TICK: u32 = 112;
+/// Updates spent slowing a bicycle before its rider gets off.
+pub const CYCLIST_BRAKE_TICKS: u32 = 24;
+/// Updates spent stepping off and abandoning the bicycle.
+pub const CYCLIST_DISMOUNT_TICKS: u32 = 30;
+/// Reaction age when bicycles first become independently abandoned objects.
+pub const BICYCLE_DROP_TICK: u32 = CYCLIST_BRAKE_TICKS;
+/// Reaction age when both former cyclists start escaping on foot.
+pub const CYCLIST_RUN_TICK: u32 = CYCLIST_BRAKE_TICKS + CYCLIST_DISMOUNT_TICKS;
+/// Reaction age when the released bicycles finish tipping onto the pavement.
+pub const BICYCLE_FALL_TICK: u32 = CYCLIST_RUN_TICK + 16;
+/// Updates over which ordinary vehicles accelerate to their escape speed.
+pub const TRAFFIC_ACCELERATION_TICKS: u32 = 120;
+/// Conservative age after which all moving background people and traffic are gone.
+pub const STREET_EVACUATED_TICK: u32 = 6 * TICKS_PER_SECOND;
+
+const TRAFFIC_MARGIN: f32 = 260.0;
+const TRAFFIC_CRUISE_SPEED: f32 = 4.0;
+const TRAFFIC_ESCAPE_SPEED: f32 = 11.0;
+const CYCLIST_RUN_SPEED: f32 = 430.0 / TICKS_PER_SECOND as f32;
+const RUNNER_EXIT_MARGIN: f32 = 160.0;
 
 const INCIDENT_START_X: f32 = -160.0;
 const INCIDENT_STOP_X: f32 = CRASH_POLE_X - 80.0;
@@ -60,15 +80,53 @@ pub enum KidPhase {
     Gone,
 }
 
+/// Ordered actions of a cyclist who abandons the bicycle and escapes on foot.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum CyclistPhase {
+    /// Ordinary cycling before the threat appears.
+    Riding,
+    /// Slowing continuously from the position occupied at the first alarm.
+    Braking,
+    /// Leaving the stopped bicycle and turning toward the nearest street exit.
+    Dismounting,
+    /// Running away from the abandoned bicycle.
+    Running,
+    /// Beyond the street boundary, without respawning during this encounter.
+    Gone,
+}
+
 /// A purely visual sample of one cyclist's current pass.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Cyclist {
-    /// Center between the wheels at ground level, in world coordinates.
+    /// Stable actor index, retaining its visual identity after dismounting.
+    pub id: usize,
+    /// Rider feet or wheel center before dismounting, in world coordinates.
     pub position: Vec2,
-    /// Travel direction, also used to mirror the cycling frames.
+    /// Rider orientation; running may turn away from the original cycling direction.
     pub facing: Facing,
     /// Pedaling clock, with independent phase for the second cyclist.
     pub animation_ticks: u32,
+    /// Cycling, abandonment or escape action.
+    pub phase: CyclistPhase,
+    /// Elapsed updates within the current action.
+    pub phase_ticks: u32,
+    /// Bicycle's wheel center, fixed permanently once braking finishes.
+    pub bicycle_position: Vec2,
+    /// Whether the rider remains in the scene; abandoned bicycles are separate.
+    pub visible: bool,
+}
+
+/// One abandoned bicycle, remaining where the rider finished braking.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct AbandonedBicycle {
+    /// Stable index of the original cyclist and its bicycle.
+    pub id: usize,
+    /// Wheel center at the final stopping location.
+    pub position: Vec2,
+    /// Original cycling direction, retained while the rider may run the other way.
+    pub facing: Facing,
+    /// Updates since dismounting began, useful for settling the fallen bicycle.
+    pub drop_ticks: u32,
 }
 
 /// A purely visual car travelling through the far road lane.
@@ -80,8 +138,12 @@ pub struct TrafficCar {
     pub facing: Facing,
     /// Wheel animation clock with a stable offset for each vehicle.
     pub animation_ticks: u32,
-    /// Stable appearance index from zero through two.
+    /// Stable silhouette: zero hatch, one sedan, two pickup, three SUV, four bus.
     pub style: usize,
+    /// Whether this vehicle is accelerating away from the threat.
+    pub fleeing: bool,
+    /// Whether it has yet to leave the stage; escaped vehicles never respawn.
+    pub visible: bool,
 }
 
 /// Ordered phases of the approaching driver's response to the erratic entity.
@@ -111,6 +173,7 @@ pub struct IncidentCar {
 pub struct AmbientState {
     ticks: u32,
     reaction_ticks: Option<u32>,
+    reaction_origin_ticks: u32,
 }
 
 impl Default for AmbientState {
@@ -125,11 +188,17 @@ impl AmbientState {
         Self {
             ticks: 0,
             reaction_ticks: enemy_awake.then_some(0),
+            reaction_origin_ticks: 0,
         }
     }
 
     /// Advances once while the street is active; pause omits this call entirely.
     pub fn tick(&mut self, enemy_awake: bool) {
+        if self.reaction_ticks.is_none() && enemy_awake {
+            // Capture the exact pre-alarm positions, including on a potential
+            // wrapping update. Every subsequent path uses this frozen origin.
+            self.reaction_origin_ticks = self.ticks;
+        }
         self.ticks = self.ticks.saturating_add(1);
         self.reaction_ticks = match self.reaction_ticks {
             Some(ticks) => Some(ticks.saturating_add(1)),
@@ -187,23 +256,25 @@ impl AmbientState {
         self.reaction_ticks
     }
 
-    /// Three evenly spaced cars wrap beyond both camera limits in the far lane.
+    /// Five spaced silhouettes cruise normally, then accelerate away without wrapping.
     ///
-    /// Their paths never change when the entity wakes. The dedicated accident
-    /// uses the empty near lane, so passing traffic cannot cross through a wreck.
-    pub fn traffic_cars(&self) -> [TrafficCar; 3] {
-        let span = f64::from(LEVEL_WIDTH) + 320.0;
-        std::array::from_fn(|style| TrafficCar {
-            position: Vec2::new(
-                (span
-                    - 160.0
-                    - (f64::from(self.ticks) * 4.0 + 240.0 + style as f64 * span / 3.0) % span)
-                    as f32,
-                FAR_ROAD_FLOOR_Y,
-            ),
-            facing: Facing::Left,
-            animation_ticks: self.ticks.saturating_add(style as u32 * 8),
-            style,
+    /// The first alarm captures every current position, even after a long wait.
+    /// All vehicles retain their far lane, separated from the permanent wreck.
+    pub fn traffic_cars(&self) -> [TrafficCar; 5] {
+        let origin_ticks = self
+            .reaction_ticks
+            .map_or(self.ticks, |_| self.reaction_origin_ticks);
+        let travelled = self.reaction_ticks.map_or(0.0, traffic_escape_distance);
+        std::array::from_fn(|style| {
+            let x = (calm_car_x(origin_ticks, style) - travelled).max(-TRAFFIC_MARGIN);
+            TrafficCar {
+                position: Vec2::new(x, FAR_ROAD_FLOOR_Y),
+                facing: Facing::Left,
+                animation_ticks: self.ticks.saturating_add(style as u32 * 8),
+                style,
+                fleeing: self.reaction_ticks.is_some(),
+                visible: self.reaction_ticks.is_none() || x > -TRAFFIC_MARGIN,
+            }
         })
     }
 
@@ -243,29 +314,122 @@ impl AmbientState {
         })
     }
 
-    /// Two cycling passes at different speeds and depths, wrapping offscreen.
+    /// Two cycling passes that brake, abandon their bicycles and leave on foot.
     pub fn cyclists(&self) -> [Cyclist; 2] {
-        let span = f64::from(LEVEL_WIDTH) + 320.0;
-        let ticks = f64::from(self.ticks);
-        [
-            Cyclist {
-                position: Vec2::new(
-                    ((ticks * 2.35 + 520.0) % span - 160.0) as f32,
-                    CYCLE_LANE_FLOOR_Y,
-                ),
-                facing: Facing::Right,
-                animation_ticks: self.ticks,
-            },
-            Cyclist {
-                position: Vec2::new(
-                    (span - 160.0 - (ticks * 1.85 + 720.0) % span) as f32,
-                    CYCLE_LANE_FLOOR_Y - 13.0,
-                ),
-                facing: Facing::Left,
-                animation_ticks: self.ticks.saturating_add(10),
-            },
-        ]
+        std::array::from_fn(|id| self.cyclist(id))
     }
+
+    /// Bicycles left at the stopping positions, persisting after their owners escape.
+    pub fn abandoned_bicycles(&self) -> [Option<AbandonedBicycle>; 2] {
+        let drop_ticks = self
+            .reaction_ticks
+            .and_then(|ticks| ticks.checked_sub(BICYCLE_DROP_TICK));
+        std::array::from_fn(|id| {
+            drop_ticks.map(|drop_ticks| AbandonedBicycle {
+                id,
+                position: self.cyclist(id).bicycle_position,
+                facing: cycle_facing(id),
+                drop_ticks,
+            })
+        })
+    }
+
+    fn cyclist(&self, id: usize) -> Cyclist {
+        let origin_ticks = self
+            .reaction_ticks
+            .map_or(self.ticks, |_| self.reaction_origin_ticks);
+        let origin = calm_cycle_position(origin_ticks, id);
+        let mut cyclist = Cyclist {
+            id,
+            position: origin,
+            facing: cycle_facing(id),
+            animation_ticks: self.ticks.saturating_add(id as u32 * 10),
+            phase: CyclistPhase::Riding,
+            phase_ticks: self.ticks,
+            bicycle_position: origin,
+            visible: true,
+        };
+        let Some(age) = self.reaction_ticks else {
+            return cyclist;
+        };
+        let braking_ticks = age.min(CYCLIST_BRAKE_TICKS) as f32;
+        let brake_distance = cycle_speed(id)
+            * (braking_ticks - braking_ticks * braking_ticks / (2.0 * CYCLIST_BRAKE_TICKS as f32));
+        cyclist.bicycle_position.x += brake_distance * cyclist.facing.sign();
+        cyclist.position = cyclist.bicycle_position;
+        if age < CYCLIST_BRAKE_TICKS {
+            cyclist.phase = CyclistPhase::Braking;
+            cyclist.phase_ticks = age;
+            return cyclist;
+        }
+        // Turn while stepping off; no position changes until the first running update.
+        cyclist.facing = if cyclist.bicycle_position.x < LEVEL_WIDTH * 0.5 {
+            Facing::Left
+        } else {
+            Facing::Right
+        };
+        if age < CYCLIST_RUN_TICK {
+            cyclist.phase = CyclistPhase::Dismounting;
+            cyclist.phase_ticks = age - CYCLIST_BRAKE_TICKS;
+            return cyclist;
+        }
+        let run_ticks = age - CYCLIST_RUN_TICK;
+        let exit = if cyclist.facing == Facing::Left {
+            -RUNNER_EXIT_MARGIN
+        } else {
+            LEVEL_WIDTH + RUNNER_EXIT_MARGIN
+        };
+        let distance = ((exit - cyclist.bicycle_position.x) * cyclist.facing.sign()).max(0.0);
+        let travelled = (run_ticks as f32 * CYCLIST_RUN_SPEED).min(distance);
+        cyclist.position.x += travelled * cyclist.facing.sign();
+        cyclist.visible = travelled < distance;
+        cyclist.phase = if cyclist.visible {
+            CyclistPhase::Running
+        } else {
+            CyclistPhase::Gone
+        };
+        cyclist.phase_ticks = if cyclist.visible {
+            run_ticks
+        } else {
+            run_ticks.saturating_sub((distance / CYCLIST_RUN_SPEED).ceil() as u32)
+        };
+        cyclist
+    }
+}
+
+fn calm_car_x(ticks: u32, style: usize) -> f32 {
+    let span = f64::from(LEVEL_WIDTH + TRAFFIC_MARGIN * 2.0);
+    (span
+        - f64::from(TRAFFIC_MARGIN)
+        - (f64::from(ticks) * f64::from(TRAFFIC_CRUISE_SPEED) + 240.0 + style as f64 * span / 5.0)
+            % span) as f32
+}
+
+fn traffic_escape_distance(age: u32) -> f32 {
+    let accelerated_ticks = age.min(TRAFFIC_ACCELERATION_TICKS) as f32;
+    let acceleration =
+        (TRAFFIC_ESCAPE_SPEED - TRAFFIC_CRUISE_SPEED) / TRAFFIC_ACCELERATION_TICKS as f32;
+    TRAFFIC_CRUISE_SPEED * accelerated_ticks
+        + acceleration * accelerated_ticks * accelerated_ticks * 0.5
+        + age.saturating_sub(TRAFFIC_ACCELERATION_TICKS) as f32 * TRAFFIC_ESCAPE_SPEED
+}
+
+fn calm_cycle_position(ticks: u32, id: usize) -> Vec2 {
+    let span = f64::from(LEVEL_WIDTH) + 320.0;
+    let x = if id == 0 {
+        (f64::from(ticks) * 2.35 + 520.0) % span - 160.0
+    } else {
+        span - 160.0 - (f64::from(ticks) * 1.85 + 720.0) % span
+    };
+    Vec2::new(x as f32, CYCLE_LANE_FLOOR_Y - id as f32 * 13.0)
+}
+
+fn cycle_facing(id: usize) -> Facing {
+    if id == 0 { Facing::Right } else { Facing::Left }
+}
+
+fn cycle_speed(id: usize) -> f32 {
+    if id == 0 { 2.35 } else { 1.85 }
 }
 
 #[cfg(test)]
@@ -275,28 +439,157 @@ mod tests {
     #[test]
     fn traffic_stays_continuous_and_never_crashes_before_the_threat() {
         let mut quiet = AmbientState::default();
-        let mut threatened = AmbientState::new(true);
-        let span = LEVEL_WIDTH + 320.0;
+        let span = LEVEL_WIDTH + TRAFFIC_MARGIN * 2.0;
         let mut previous = quiet.traffic_cars();
         for _ in 0..3000 {
             quiet.tick(false);
-            threatened.tick(true);
             assert_eq!(quiet.incident_car(), None);
             assert_eq!(quiet.accident_ticks(), None);
-            assert_eq!(quiet.traffic_cars(), threatened.traffic_cars());
             let current = quiet.traffic_cars();
             for (before, after) in previous.iter().zip(current) {
                 assert_eq!(after.facing, Facing::Left);
                 assert_eq!(after.position.y, FAR_ROAD_FLOOR_Y);
+                assert!(!after.fleeing);
+                assert!(after.visible);
                 let travelled = (before.position.x - after.position.x).rem_euclid(span);
                 assert!((travelled - 4.0).abs() < 0.001);
-                assert!((-160.0..=LEVEL_WIDTH + 160.0).contains(&after.position.x));
+                assert!(
+                    (-TRAFFIC_MARGIN..=LEVEL_WIDTH + TRAFFIC_MARGIN).contains(&after.position.x)
+                );
                 if after.position.x > before.position.x {
-                    assert!(before.position.x < -150.0);
-                    assert!(after.position.x > LEVEL_WIDTH + 150.0);
+                    assert!(before.position.x < -TRAFFIC_MARGIN + 10.0);
+                    assert!(after.position.x > LEVEL_WIDTH + TRAFFIC_MARGIN - 10.0);
                 }
             }
+            assert_eq!(current.map(|car| car.style), [0, 1, 2, 3, 4]);
+            for pair in current.windows(2) {
+                let spacing = (pair[0].position.x - pair[1].position.x).rem_euclid(span);
+                assert!(spacing > 500.0, "The bus needs room between silhouettes");
+            }
             previous = current;
+        }
+    }
+
+    #[test]
+    fn late_alarms_capture_exact_positions_then_clear_the_street_without_respawning() {
+        for delay in [0, 517, 629, 680, 1661, 12001, u32::MAX - 5] {
+            let mut ambient = AmbientState {
+                ticks: delay,
+                ..AmbientState::default()
+            };
+            let before_cars = ambient.traffic_cars();
+            let before_cyclists = ambient.cyclists();
+            ambient.tick(true);
+            for (before, after) in before_cars.iter().zip(ambient.traffic_cars()) {
+                assert_eq!(before.position, after.position);
+                assert!(after.fleeing);
+            }
+            for (before, after) in before_cyclists.iter().zip(ambient.cyclists()) {
+                assert_eq!(before.position, after.position);
+                assert_eq!(before.bicycle_position, after.bicycle_position);
+                assert_eq!(after.phase, CyclistPhase::Braking);
+            }
+
+            let mut previous_cars = ambient.traffic_cars();
+            let mut previous_travel = [0.0; 5];
+            for age in 1..=STREET_EVACUATED_TICK {
+                ambient.tick(false);
+                let current = ambient.traffic_cars();
+                for (id, (before, after)) in previous_cars.iter().zip(current).enumerate() {
+                    assert!(
+                        after.position.x <= before.position.x,
+                        "Escaping traffic must never wrap"
+                    );
+                    if !before.visible {
+                        assert!(!after.visible);
+                        assert_eq!(after.position, before.position);
+                    }
+                    let travel = before.position.x - after.position.x;
+                    if after.visible && age < TRAFFIC_ACCELERATION_TICKS {
+                        assert!(travel > previous_travel[id]);
+                    }
+                    previous_travel[id] = travel;
+                }
+                previous_cars = current;
+            }
+            let bicycles = ambient
+                .abandoned_bicycles()
+                .map(|bike| bike.unwrap().position);
+            let escaped_cars = ambient.traffic_cars().map(|car| car.position);
+            let escaped_people = ambient.cyclists().map(|cyclist| cyclist.position);
+            for tick in 0..3000 {
+                ambient.tick(tick % 2 == 0);
+                assert!(ambient.traffic_cars().iter().all(|car| !car.visible));
+                assert!(
+                    ambient
+                        .cyclists()
+                        .iter()
+                        .all(|cyclist| !cyclist.visible && cyclist.phase == CyclistPhase::Gone)
+                );
+                assert_eq!(ambient.traffic_cars().map(|car| car.position), escaped_cars);
+                assert_eq!(
+                    ambient.cyclists().map(|cyclist| cyclist.position),
+                    escaped_people
+                );
+                assert_eq!(
+                    ambient
+                        .abandoned_bicycles()
+                        .map(|bike| bike.unwrap().position),
+                    bicycles
+                );
+                assert_eq!(ambient.kid_phase(), KidPhase::Gone);
+                assert_eq!(
+                    ambient.incident_car().unwrap().phase,
+                    IncidentPhase::Crashed
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn both_cyclists_brake_then_leave_their_bicycles_and_run_to_an_exit() {
+        let mut ambient = AmbientState {
+            ticks: 500,
+            ..AmbientState::default()
+        };
+        let original = ambient.cyclists();
+        ambient.tick(true);
+        let mut previous = original;
+        let mut previous_speed = [f32::MAX; 2];
+        for age in 1..=CYCLIST_BRAKE_TICKS {
+            ambient.tick(false);
+            let current = ambient.cyclists();
+            for (id, (before, after)) in previous.iter().zip(current).enumerate() {
+                let speed = (after.position.x - before.position.x).abs();
+                assert!(speed > 0.0 && speed < previous_speed[id]);
+                assert_eq!(after.bicycle_position, after.position);
+                previous_speed[id] = speed;
+            }
+            if age < BICYCLE_DROP_TICK {
+                assert_eq!(ambient.abandoned_bicycles(), [None, None]);
+            }
+            previous = current;
+        }
+        let bicycles = ambient.abandoned_bicycles().map(Option::unwrap);
+        for (id, bicycle) in bicycles.iter().enumerate() {
+            assert_eq!(bicycle.id, original[id].id);
+            assert_eq!(bicycle.facing, original[id].facing);
+            assert_eq!(bicycle.drop_ticks, 0);
+            assert_eq!(ambient.cyclists()[id].phase, CyclistPhase::Dismounting);
+        }
+        for _ in 0..CYCLIST_DISMOUNT_TICKS {
+            ambient.tick(false);
+        }
+        let runners = ambient.cyclists();
+        for (runner, bicycle) in runners.iter().zip(bicycles) {
+            assert_eq!(runner.phase, CyclistPhase::Running);
+            assert_eq!(runner.phase_ticks, 0);
+            assert_eq!(runner.position, bicycle.position);
+        }
+        ambient.tick(false);
+        for (before, after) in runners.iter().zip(ambient.cyclists()) {
+            assert!((after.position.x - before.position.x) * after.facing.sign() > 0.0);
+            assert_eq!(after.bicycle_position, before.bicycle_position);
         }
     }
 

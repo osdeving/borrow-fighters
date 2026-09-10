@@ -80,6 +80,10 @@
     "navigation.pause_menu": "Backspace / View  pular tudo e ir ao menu     B  sair",
     "navigation.pause": "Backspace / View  pular tudo     B  sair",
     "navigation.continue": "Aperte qualquer tecla para continuar",
-    "navigation.continue_detail": "Uma tecla, clique ou botão do controle abre o menu principal."
+    "navigation.continue_detail": "Uma tecla, clique ou botão do controle abre o menu principal.",
+    "street.bar.kind": "BAR E MERCEARIA",
+    "street.bar.name": "CASA NOSSA",
+    "street.stop.title": "PONTO DE ÔNIBUS",
+    "street.stop.route": "010\nCENTRO"
   }
 }

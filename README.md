@@ -63,7 +63,11 @@ setup e pôsteres de Rust ao quarto, ciclistas numa ciclovia ao fundo e um garot
 que larga a pipa e foge ao perceber a errática. A encenação acompanha a pausa
 e o reinício do encontro. A segunda rodada acrescenta automóveis numa rua
 separada da ciclovia: ao surgir a EP, um motorista buzina, freia e bate num
-poste; o carro amassado permanece no cenário.
+poste; o carro amassado permanece no cenário. A terceira rodada traz carros
+cotidianos distintos, ônibus, ponto e o Bar e Mercearia Casa Nossa. Toda a rua
+reage à EP: ciclistas largam as bicicletas, pessoas fogem e veículos aceleram
+para fora, sem reaparecer durante a luta. As peças podem ser trocadas pelo
+[catálogo de assets](assets/adventure/street/README.md), com a composição separada.
 [Escopo das melhorias](docs/30-prologue-scene-improvements.md)
 e [diário do experimento](docs/worklogs/prologue-scene-improvements.md).
 
@@ -120,6 +124,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Visão e produto
 
+- [`docs/31-brazilian-street-evacuation.md`](docs/31-brazilian-street-evacuation.md): rua brasileira com peças substituíveis e evacuação coletiva após a EP.
 - [`docs/30-prologue-scene-improvements.md`](docs/30-prologue-scene-improvements.md): experimento de melhorias das cenas do prólogo, começando pelo quarto e pela rua de Rust.
 
 - [`docs/29-story-terminal-menu.md`](docs/29-story-terminal-menu.md): apresentação seguida do menu de terminal, com os modos independentes.

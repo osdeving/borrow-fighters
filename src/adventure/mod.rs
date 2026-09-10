@@ -7,5 +7,6 @@ pub mod ambient;
 pub mod app;
 pub mod combat;
 pub mod engine;
+pub mod scenery;
 pub mod story;
 pub mod text;

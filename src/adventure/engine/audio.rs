@@ -6,7 +6,7 @@
 use raylib::prelude::{Music, RaylibAudio, Sound};
 
 use crate::adventure::{
-    ambient::{CAR_HORN_TICK, CAR_IMPACT_TICK, CAR_SKID_TICK},
+    ambient::{BICYCLE_FALL_TICK, CAR_HORN_TICK, CAR_IMPACT_TICK, CAR_SKID_TICK},
     combat::{ActorKind, Outcome},
     story::{Stage, Story},
 };
@@ -53,17 +53,21 @@ enum Cue {
     Block,
     Hurt,
     Transition,
+    TrafficEscape,
+    BicycleFall,
     CarHorn,
     CarSkid,
     CarCrash,
 }
 
 impl Cue {
-    const ALL: [Self; 7] = [
+    const ALL: [Self; 9] = [
         Self::Strike,
         Self::Block,
         Self::Hurt,
         Self::Transition,
+        Self::TrafficEscape,
+        Self::BicycleFall,
         Self::CarHorn,
         Self::CarSkid,
         Self::CarCrash,
@@ -75,6 +79,8 @@ impl Cue {
             Self::Block => "block.wav",
             Self::Hurt => "hurt.wav",
             Self::Transition => "transition.wav",
+            Self::TrafficEscape => "traffic_escape.wav",
+            Self::BicycleFall => "bicycle_fall.wav",
             Self::CarHorn => "car_horn.wav",
             Self::CarSkid => "car_skid.wav",
             Self::CarCrash => "car_crash.wav",
@@ -82,7 +88,14 @@ impl Cue {
     }
 
     fn is_traffic(self) -> bool {
-        matches!(self, Self::CarHorn | Self::CarSkid | Self::CarCrash)
+        matches!(
+            self,
+            Self::TrafficEscape
+                | Self::BicycleFall
+                | Self::CarHorn
+                | Self::CarSkid
+                | Self::CarCrash
+        )
     }
 }
 
@@ -284,7 +297,7 @@ impl ObservedAudio {
     }
 
     fn observe(&mut self, story: &Story) -> Vec<Cue> {
-        let mut cues = Vec::with_capacity(5);
+        let mut cues = Vec::with_capacity(7);
         let reset = self.timeline_restarted(story);
         if reset {
             self.hit_tick = None;
@@ -314,7 +327,9 @@ impl ObservedAudio {
             // Render frames can span several fixed updates. Crossing a milestone
             // emits once even if no render sampled the exact simulation tick.
             for (at, cue) in [
+                (0, Cue::TrafficEscape),
                 (CAR_HORN_TICK, Cue::CarHorn),
+                (BICYCLE_FALL_TICK, Cue::BicycleFall),
                 (CAR_SKID_TICK, Cue::CarSkid),
                 (CAR_IMPACT_TICK, Cue::CarCrash),
             ] {
@@ -359,6 +374,7 @@ mod tests {
         let mut observed = ObservedAudio::at_story(&story);
         for (at, cue) in [
             (CAR_HORN_TICK, Cue::CarHorn),
+            (BICYCLE_FALL_TICK, Cue::BicycleFall),
             (CAR_SKID_TICK, Cue::CarSkid),
             (CAR_IMPACT_TICK, Cue::CarCrash),
         ] {
@@ -375,11 +391,46 @@ mod tests {
     #[test]
     fn one_late_render_retains_all_crossed_traffic_milestones_in_order() {
         let mut story = awake_street();
-        let mut observed = ObservedAudio::at_story(&story);
+        let mut observed = ObservedAudio::default();
         advance_accident_to(&mut story, CAR_IMPACT_TICK + 10);
         assert_eq!(
             observed.observe(&story),
-            [Cue::CarHorn, Cue::CarSkid, Cue::CarCrash]
+            [
+                Cue::Transition,
+                Cue::TrafficEscape,
+                Cue::CarHorn,
+                Cue::BicycleFall,
+                Cue::CarSkid,
+                Cue::CarCrash
+            ]
+        );
+        assert!(observed.observe(&story).is_empty());
+    }
+
+    #[test]
+    fn collective_escape_starts_once_at_zero_and_does_not_loop_after_the_street_empties() {
+        let mut story = awake_street();
+        let mut observed = ObservedAudio::default();
+        assert_eq!(story.ambient.accident_ticks(), Some(0));
+        assert_eq!(
+            observed.observe(&story),
+            [Cue::Transition, Cue::TrafficEscape]
+        );
+        assert!(observed.observe(&story).is_empty());
+        advance_accident_to(&mut story, BICYCLE_FALL_TICK);
+        assert_eq!(observed.observe(&story), [Cue::CarHorn, Cue::BicycleFall]);
+        advance_accident_to(&mut story, crate::adventure::ambient::STREET_EVACUATED_TICK);
+        assert_eq!(observed.observe(&story), [Cue::CarSkid, Cue::CarCrash]);
+        for _ in 0..3000 {
+            story.ambient.tick(true);
+            assert!(observed.observe(&story).is_empty());
+        }
+        story.combat.outcome = Outcome::Defeat;
+        story.retry();
+        assert_eq!(story.ambient.accident_ticks(), Some(0));
+        assert_eq!(
+            observed.observe(&story),
+            [Cue::Transition, Cue::TrafficEscape]
         );
         assert!(observed.observe(&story).is_empty());
     }
@@ -420,18 +471,22 @@ mod tests {
         audio.update(&story, false);
         audio.update(&story, true);
         audio.suspended_sounds.push(Cue::CarCrash);
+        audio.suspended_sounds.push(Cue::TrafficEscape);
+        audio.suspended_sounds.push(Cue::BicycleFall);
         story.combat.outcome = Outcome::Defeat;
         story.retry();
         assert_eq!(story.ambient.accident_ticks(), Some(0));
         audio.update(&story, true);
         assert!(audio.suspended_sounds.is_empty());
         audio.update(&story, false);
+        assert_eq!(audio.observed.accident_ticks, Some(0));
+        assert!(audio.observed.observe(&story).is_empty());
         advance_accident_to(&mut story, CAR_HORN_TICK);
         assert_eq!(audio.observed.observe(&story), [Cue::CarHorn]);
         advance_accident_to(&mut story, CAR_IMPACT_TICK);
         assert_eq!(
             audio.observed.observe(&story),
-            [Cue::CarSkid, Cue::CarCrash]
+            [Cue::BicycleFall, Cue::CarSkid, Cue::CarCrash]
         );
         story.restart();
         assert_eq!(audio.observed.observe(&story), [Cue::Transition]);

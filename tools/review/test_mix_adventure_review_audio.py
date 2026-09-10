@@ -46,8 +46,13 @@ def clips(default=0, length=20):
 class ReconstructionTests(unittest.TestCase):
     def test_traffic_milestones_stay_aligned_with_runtime_constants(self):
         source = (Path(__file__).resolve().parents[2] / "src/adventure/ambient.rs").read_text()
-        names = ("CAR_HORN_TICK", "CAR_SKID_TICK", "CAR_IMPACT_TICK")
-        timings = [int(re.search(rf"pub const {name}: u32 = (\d+);", source).group(1)) for name in names]
+        def constant(name):
+            return int(re.search(rf"pub const {name}: u32 = (\d+);", source).group(1))
+        self.assertIn("pub const CYCLIST_RUN_TICK: u32 = CYCLIST_BRAKE_TICKS + CYCLIST_DISMOUNT_TICKS;", source)
+        self.assertIn("pub const BICYCLE_FALL_TICK: u32 = CYCLIST_RUN_TICK + 16;", source)
+        fall_tick = constant("CYCLIST_BRAKE_TICKS") + constant("CYCLIST_DISMOUNT_TICKS") + 16
+        timings = [0, constant("CAR_HORN_TICK"), fall_tick,
+                   constant("CAR_SKID_TICK"), constant("CAR_IMPACT_TICK")]
         self.assertEqual(timings, [tick for tick, _ in TRAFFIC_MILESTONES])
 
     def test_traffic_crossings_play_once_after_uneven_renders(self):
@@ -56,14 +61,14 @@ class ReconstructionTests(unittest.TestCase):
         _, report = reconstruct(timeline, clips(), .7, rate=10)
         traffic = [event for event in report["events"] if event["cue"] in TRAFFIC_CUES]
         self.assertEqual([event["cue"] for event in traffic], list(TRAFFIC_CUES))
-        self.assertEqual([event["seconds"] for event in traffic], [.1, .3, .4])
-        self.assertEqual([event["milestone_tick"] for event in traffic], [38, 78, 112])
+        self.assertEqual([event["seconds"] for event in traffic], [0, .1, .3, .3, .4])
+        self.assertEqual([event["milestone_tick"] for event in traffic], [0, 38, 70, 78, 112])
 
     def test_late_render_retains_every_crossed_traffic_cue(self):
         _, report = reconstruct([street_row(0, 0), street_row(.1, 118), street_row(.2, 118)], clips(), .3, rate=10)
         traffic = [event for event in report["events"] if event["cue"] in TRAFFIC_CUES]
         self.assertEqual([event["cue"] for event in traffic], list(TRAFFIC_CUES))
-        self.assertEqual([event["seconds"] for event in traffic], [.1, .1, .1])
+        self.assertEqual([event["seconds"] for event in traffic], [0, .1, .1, .1, .1])
 
     def test_pause_freezes_active_horn_and_defers_pending_skid(self):
         sounds = clips()
@@ -73,7 +78,7 @@ class ReconstructionTests(unittest.TestCase):
                     street_row(.4, 78, paused=True), street_row(.5, 78)]
         pcm, report = reconstruct(timeline, sounds, .8, rate=10)
         self.assertEqual(list(pcm), [300, 600, 0, 0, 0, 930, 1260, 0])
-        traffic = [event for event in report["events"] if event["cue"] in TRAFFIC_CUES]
+        traffic = [event for event in report["events"] if event["cue"].startswith("car_")]
         self.assertEqual([event["cue"] for event in traffic], ["car_horn", "car_skid"])
         self.assertEqual(traffic[0]["end_seconds"], .7)
         self.assertEqual(traffic[1]["seconds"], .5)
@@ -93,6 +98,9 @@ class ReconstructionTests(unittest.TestCase):
         horns = [event for event in report["events"] if event["cue"] == "car_horn"]
         self.assertEqual([event["epoch"] for event in horns], [0, 1])
         self.assertEqual([event["seconds"] for event in horns], [0, .4])
+        escapes = [event for event in report["events"] if event["cue"] == "traffic_escape"]
+        self.assertEqual([event["epoch"] for event in escapes], [0, 1])
+        self.assertEqual([event["seconds"] for event in escapes], [0, .3])
 
     def test_explicit_skip_discards_voices_and_pending_milestones_while_paused(self):
         sounds = clips()
@@ -102,7 +110,7 @@ class ReconstructionTests(unittest.TestCase):
                     street_row(.3, 112)]
         pcm, report = reconstruct(timeline, sounds, .5, rate=10)
         self.assertEqual(list(pcm), [300, 0, 0, 0, 0])
-        traffic = [event for event in report["events"] if event["cue"] in TRAFFIC_CUES]
+        traffic = [event for event in report["events"] if event["cue"].startswith("car_")]
         self.assertEqual([event["cue"] for event in traffic], ["car_horn"])
         self.assertEqual(traffic[0]["interrupted_by"], "scene_skip")
         self.assertEqual(traffic[0]["end_seconds"], .2)
@@ -114,7 +122,8 @@ class ReconstructionTests(unittest.TestCase):
                     street_row(.1, 78, stage="Opening", stage_ticks=12, synced_after_skip=True)]
         pcm, report = reconstruct(timeline, sounds, .5, rate=10)
         self.assertEqual(list(pcm), [0, 90, 120, 150, 0])
-        self.assertEqual(report["event_counts"], {"transition": 1, "car_horn": 1})
+        self.assertEqual(report["event_counts"], {"transition": 1, "traffic_escape": 1,
+                                                "car_horn": 1})
         self.assertEqual(report["music_seeks"], [{"seconds": .1, "track": "opening", "source_cursor_seconds": .2}])
 
     def test_aftermath_retains_crash_tail_but_leaving_street_stops_it(self):
@@ -132,6 +141,33 @@ class ReconstructionTests(unittest.TestCase):
         _, report = reconstruct([row(0, awake=True), row(.2, ticks=400, awake=True)], clips(), .5, rate=10)
         self.assertFalse(any(event["cue"] in TRAFFIC_CUES for event in report["events"]))
         self.assertFalse(report["time_alignment"]["traffic_clock_present_in_all_samples"])
+
+    def test_collective_cues_pause_resume_and_never_loop_after_evacuation(self):
+        sounds = clips(length=2)
+        sounds["traffic_escape"] = array("h", [1000, 2000, 3000])
+        sounds["bicycle_fall"] = array("h", [100, 200])
+        timeline = [street_row(0, 0), street_row(.1, 70, paused=True),
+                    street_row(.3, 70, paused=True), street_row(.4, 70),
+                    street_row(.8, 112), street_row(1.0, 360), street_row(1.5, 3600)]
+        pcm, report = reconstruct(timeline, sounds, 2.0, rate=10)
+        self.assertEqual(list(pcm[:7]), [300, 0, 0, 0, 630, 960, 0])
+        traffic = [event for event in report["events"] if event["cue"] in TRAFFIC_CUES]
+        self.assertEqual([event["cue"] for event in traffic], list(TRAFFIC_CUES))
+        self.assertEqual([traffic[0]["seconds"], traffic[2]["seconds"]], [0, .4])
+        self.assertEqual(traffic[0]["end_seconds"], .6)
+        self.assertTrue(all(value == 0 for value in pcm[10:]))
+
+    def test_skip_discards_collective_escape_and_unreached_bicycle_clatter(self):
+        sounds = clips()
+        sounds["traffic_escape"] = array("h", [1000] * 20)
+        timeline = [street_row(0, 0), street_row(.1, 10, paused=True),
+                    street_row(.2, 10, stage="Opening", paused=True, synced_after_skip=True),
+                    street_row(.3, 10, stage="Opening")]
+        pcm, report = reconstruct(timeline, sounds, .6, rate=10)
+        traffic = [event for event in report["events"] if event["cue"] in TRAFFIC_CUES]
+        self.assertEqual([event["cue"] for event in traffic], ["traffic_escape"])
+        self.assertEqual(traffic[0]["interrupted_by"], "scene_skip")
+        self.assertEqual(list(pcm), [300, 0, 0, 0, 0, 0])
 
     def test_background_selection_matches_runtime(self):
         cases = [
