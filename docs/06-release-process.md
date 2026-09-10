@@ -142,7 +142,8 @@ correspondente em `SHA256SUMS.txt`.
   e confirmação final; `Como jogar` explica como assumir um jogador, reiniciar e sair.
 - Créditos e limitações conhecidos acompanham o download.
 - Cinco pacotes e checksums disponíveis na mesma GitHub pré-release.
-- PR de retorno para `main` aberto, com evidência do que foi verificado.
+- PR de retorno para `main` aprovado e integrado, com evidência do que foi
+  verificado antes da publicação.
 
 A configuração [release.yml](../.github/release.yml) preserva categorias para
 notas técnicas geradas pelo GitHub. As notas públicas deste playtest são

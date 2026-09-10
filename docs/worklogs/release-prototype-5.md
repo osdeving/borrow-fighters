@@ -61,10 +61,15 @@ Checks locais do corte aprovados:
 - Tag anotada `v0.1.0-prototype.5` enviada, apontando para `8feb045`.
 - [Workflow da tag](https://github.com/osdeving/borrow-fighters/actions/runs/34511931462)
   aprovado: Windows, Linux e publicação concluídos.
-- [Rust da main](https://github.com/osdeving/borrow-fighters/actions/runs/34511911285)
-  e [Docs da main](https://github.com/osdeving/borrow-fighters/actions/runs/34511911270)
-  também aprovados. Os testes da tag registraram 496 aprovados e dois ignorados
-  em cada plataforma.
+- A matriz de features isoladas e fronteiras foi comprovada pelo
+  [Rust Check da main, run 34511911285](https://github.com/osdeving/borrow-fighters/actions/runs/34511911285),
+  executado em Ubuntu para `8feb045`. Esse workflow não roda por push de tag.
+  O [Docs Check da main](https://github.com/osdeving/borrow-fighters/actions/runs/34511911270)
+  também passou.
+- Separadamente, o workflow Playtest Release da tag executou testes com as
+  features padrão, Clippy com todas as features e os smokes de pacote em
+  Windows/Linux. Esses testes registraram 496 aprovados e dois ignorados em
+  cada plataforma; a tag não executou a matriz de features isoladas.
 - [Pré-release pública](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.5)
   publicada em 10/09/2026 às 18:13:38 UTC, com cinco pacotes e `SHA256SUMS.txt`.
 - Fechamento documental na branch `docs/prototype-5-published`; somente registro
