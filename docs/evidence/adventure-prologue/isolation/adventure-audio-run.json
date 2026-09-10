@@ -1,0 +1,19 @@
+{
+  "command": [
+    "strace",
+    "-f",
+    "-e",
+    "trace=%file",
+    "-o",
+    "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-audio-files.strace",
+    "/home/willams/borrow-fighters/target/debug/borrow-adventure",
+    "--frames",
+    "60",
+    "--hidden"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 4.679906757999561,
+  "asset_root": "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets",
+  "working_directory": "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd",
+  "human_listening": false
+}

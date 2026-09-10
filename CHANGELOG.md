@@ -90,6 +90,20 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 
 ## [Unreleased]
 
+### Experimento de aventura
+
+- Binário optativo `borrow-adventure`, com features e regras próprias; luta
+  continua padrão e ambos podem ser compilados sem os módulos do outro.
+- Prólogo ilustrado e animado de Ada, mensagem digitada, despertar de Assembly,
+  salto temporal e manhã cotidiana de Rust antes do primeiro combate manual.
+- Encontro com errática, movimento, salto, defesa, ataques, dano, derrota/retry,
+  pausa e gesto de pesar após vencer, com assets e áudio próprios da aventura.
+- Lore sincronizada: Ada humana que se torna híbrida, Assembly primeira EP,
+  Rust EP mais recente e convivência como valor; erráticas surgem involuntariamente
+  das condições criadas pelo mau uso de Linker.
+- Diário de retomada e checkpoints por commit; CI verifica fronteiras de domínio
+  e as combinações de features. [Escopo do episódio](docs/27-rust-story-adventure.md).
+
 ### Documentação
 
 - Backlog separado em to-do e bugfix, preservando pendências e hipóteses de

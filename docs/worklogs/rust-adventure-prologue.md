@@ -2,13 +2,14 @@
 
 ## Estado atual
 
-- Goal ativo: duas animações e primeiro combate de aventura, lore corrigida,
-  isolamento de implementação/testes/assets e validação gráfica.
+- Entrega concluída: duas cenas animadas e primeiro combate de aventura, lore
+  corrigida, isolamento de implementação/testes/assets e validação gráfica.
 - Branch: `feature/rust-adventure-prologue`.
 - Base: `ca63b25` (`v0.1.0-prototype.3`).
 - Primeiro checkpoint: `ac49bae`, backlog e proposta anterior à correção de lore.
-- Etapa: implementação e revisão gráfica concluídas; encerrando evidências,
-  smoke tests de assets isolados e documentação.
+- Etapa: implementação, evidências e verificações concluídas. Playtest humano
+  é acompanhamento no TODO-013, sem expansão de campanha iniciada.
+- [Vídeo, relatórios e reprodução](../evidence/adventure-prologue/README.md).
 
 ## Retomar após queda do WSL
 
@@ -53,11 +54,22 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 - [x] Produzir/revisar arte de Ada, manhã, ambiente e errática.
 - [x] Integrar animação, input, áudio, combate e desfecho na janela real.
 - [x] Verificar derrota/retry, pausa, pular cenas e controles.
-- [ ] Passar fmt, Clippy, matriz de testes e checks de documentação.
-- [ ] Registrar capturas/vídeo e smoke tests de isolamento.
-- [ ] Fechar docs, diário e commits de entrega.
+- [x] Passar fmt, Clippy, matriz de testes e checks de documentação.
+- [x] Registrar capturas/vídeo e smoke tests de isolamento.
+- [x] Fechar docs, diário e commits de entrega.
 
 ## Checkpoints
+
+- 2026-09-10, encerramento: `bda28d7` preserva ferramentas de revisão e seus
+  testes. Evidências selecionadas copiadas para `docs/evidence/adventure-prologue/`,
+  incluindo vídeos, capturas, telemetria comprimida e relatórios. Smoke de assets
+  isolados aprovado: aventura pelo binário, luta pelo example `capture_ui_review`,
+  ambos compilados com feature exclusiva e sem acessos cruzados observados.
+  Aventura com áudio inicializou quatro streams/quatro efeitos e encerrou limpa.
+  Links Markdown (103 arquivos) e 19 YAMLs aprovados; `git diff --check` limpo.
+  README/entrega/backlog/CHANGELOG atualizados. TODO-012 concluído; TODO-013
+  guarda avaliação humana de animação, controle, áudio, emoção e continuidade.
+  Sem push, merge ou publicação de release nesta rodada.
 
 - 2026-09-10: `3985a4b` registra as ações próprias de Rust e a correção do
   gravador. Revisão completa válida em `/tmp/borrow-adventure-review-02`:
@@ -98,7 +110,7 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 - 2026-09-10: branch criada; `ac49bae` preserva trabalho anterior. ADR e diário
   preparados antes da implementação. Nenhuma validação do novo jogo concluída.
 
-## Verificação planejada
+## Verificação executada
 
 ```sh
 cargo fmt --check
@@ -110,4 +122,16 @@ cargo test --lib --no-default-features
 git diff --check
 ```
 
-Ainda não executada nesta rodada. Registrar resultados aqui conforme terminarem.
+Todos os comandos passaram. Resultados: ambos 412, luta 393, aventura/core 22,
+core 3. Também passaram checker de fronteiras (34 fixtures), mixer (24 testes),
+14 verificações pela janela e smoke tests de assets/dispositivo de áudio.
+Detalhes e limites estão nas evidências versionadas; os diretórios `/tmp`
+nos checkpoints anteriores são intermediários e não são necessários à retomada.
+
+## Continuidade
+
+A implementação pedida não tem etapa técnica pendente. Para jogar, usar o
+comando da aventura no README; para revisar, abrir o vídeo versionado.
+Uma próxima sessão deve partir do feedback do TODO-013. Manter as fronteiras
+da ADR 0021 e preservar os itens do backlog da luta ao decidir seguir, descartar
+ou desenvolver a aventura em paralelo.

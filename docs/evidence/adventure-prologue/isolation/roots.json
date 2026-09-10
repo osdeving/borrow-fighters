@@ -1,0 +1,20 @@
+{
+  "adventure_asset_root": "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets",
+  "adventure_children": [
+    "adventure"
+  ],
+  "fighting_asset_root": "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets",
+  "fighting_children": [
+    "audio",
+    "candidates",
+    "fonts",
+    "lore",
+    "placeholder",
+    "private",
+    "production",
+    "references",
+    "showcase",
+    "tuning"
+  ],
+  "excluded": "adventure"
+}

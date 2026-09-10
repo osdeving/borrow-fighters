@@ -1,0 +1,336 @@
+INFO: Initializing raylib 6.0
+INFO: Platform backend: DESKTOP (GLFW)
+INFO: Supported raylib modules:
+INFO:     > rcore:..... loaded (mandatory)
+INFO:     > rlgl:...... loaded (mandatory)
+INFO:     > rshapes:... loaded (optional)
+INFO:     > rtextures:. loaded (optional)
+INFO:     > rtext:..... loaded (optional)
+INFO:     > rmodels:... loaded (optional)
+INFO:     > raudio:.... loaded (optional)
+INFO: DISPLAY: Trying to enable MSAA x4
+INFO: DISPLAY: Device initialized successfully 
+INFO:     > Display size: 1440 x 900
+INFO:     > Screen size:  1280 x 720
+INFO:     > Render size:  1280 x 720
+INFO:     > Viewport offsets: 0, 0
+INFO: GLAD: OpenGL extensions loaded successfully
+INFO: GL: Supported extensions count: 131
+INFO: GL: OpenGL device information:
+INFO:     > Vendor:   Microsoft Corporation
+INFO:     > Renderer: D3D12 (NVIDIA GeForce RTX 4070 Laptop GPU)
+INFO:     > Version:  3.3 (Core Profile) Mesa 21.2.6
+INFO:     > GLSL:     3.30
+INFO: GL: VAO extension detected, VAO functions loaded successfully
+INFO: GL: NPOT textures extension detected, full NPOT textures supported
+INFO: GL: DXT compressed textures supported
+INFO: GL: ETC2/EAC compressed textures supported
+INFO: PLATFORM: DESKTOP (GLFW - X11): Initialized successfully
+INFO: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 1] Default texture loaded successfully
+INFO: SHADER: [ID 1] Vertex shader compiled successfully
+INFO: SHADER: [ID 2] Fragment shader compiled successfully
+INFO: SHADER: [ID 3] Program shader loaded successfully
+INFO: SHADER: [ID 3] Default shader loaded successfully
+INFO: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+INFO: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+INFO: RLGL: Default OpenGL state initialized successfully
+INFO: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Default font loaded successfully (224 glyphs)
+INFO: SYSTEM: Working Directory: /tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/cpp/laptop.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 3] Texture loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 3] Mipmaps generated automatically, total: 11
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/python/transform.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1448x1086 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 4] Texture loaded successfully (1448x1086 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 4] Mipmaps generated automatically, total: 11
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/python/serpent.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1448x1086 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 5] Texture loaded successfully (1448x1086 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 5] Mipmaps generated automatically, total: 11
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/python/revert.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1448x1086 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 6] Texture loaded successfully (1448x1086 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 6] Mipmaps generated automatically, total: 11
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/python/celebrate.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1448x1086 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 7] Texture loaded successfully (1448x1086 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 7] Mipmaps generated automatically, total: 11
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/duke/collector-poses.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 8] Texture loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 8] Mipmaps generated automatically, total: 11
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/cpp/footgun-comedy.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 9] Texture loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 9] Mipmaps generated automatically, total: 11
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/cpp/footgun-barrage.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 10] Texture loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 10] Mipmaps generated automatically, total: 11
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/trash/garbage-items.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (2172x724 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 11] Texture loaded successfully (2172x724 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 11] Mipmaps generated automatically, total: 12
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/stage-life/arena-sirius-clean.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1672x941 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 12] Texture loaded successfully (1672x941 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 12] Mipmaps generated automatically, total: 11
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/arena-fortaleza.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (960x540 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 13] Texture loaded successfully (960x540 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 13] Mipmaps generated automatically, total: 10
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/arena-java-street.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (960x540 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 14] Texture loaded successfully (960x540 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 14] Mipmaps generated automatically, total: 10
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/arena-biotic.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (960x540 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 15] Texture loaded successfully (960x540 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 15] Mipmaps generated automatically, total: 10
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/arena-porto-digital.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (960x540 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 16] Texture loaded successfully (960x540 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 16] Mipmaps generated automatically, total: 10
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/arena-vale-pinhao.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (960x540 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 17] Texture loaded successfully (960x540 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 17] Mipmaps generated automatically, total: 10
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/stage-life/caramelo-run.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (2172x724 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 18] Texture loaded successfully (2172x724 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 18] Mipmaps generated automatically, total: 12
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/stage-life/jessica-gesture.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 19] Texture loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 19] Mipmaps generated automatically, total: 11
+INFO: TEXTURE: [ID 20] Texture loaded successfully (1024x1024 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Data loaded successfully (96 pixel size | 198 glyphs)
+INFO: TEXTURE: [ID 20] Mipmaps generated automatically, total: 11
+INFO: TEXTURE: [ID 21] Texture loaded successfully (2048x1024 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Data loaded successfully (96 pixel size | 198 glyphs)
+INFO: TEXTURE: [ID 21] Mipmaps generated automatically, total: 12
+INFO: TEXTURE: [ID 22] Texture loaded successfully (1024x1024 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Data loaded successfully (96 pixel size | 198 glyphs)
+INFO: TEXTURE: [ID 22] Mipmaps generated automatically, total: 11
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/menu-title-borrow-fighters.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (980x250 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 23] Texture loaded successfully (980x250 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 23] Mipmaps generated automatically, total: 10
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/roster-rust.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (240x240 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 24] Texture loaded successfully (240x240 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 24] Mipmaps generated automatically, total: 8
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/roster-duke.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (240x240 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 25] Texture loaded successfully (240x240 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 25] Mipmaps generated automatically, total: 8
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/roster-c.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (240x240 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 26] Texture loaded successfully (240x240 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 26] Mipmaps generated automatically, total: 8
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/roster-python.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (240x240 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 27] Texture loaded successfully (240x240 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 27] Mipmaps generated automatically, total: 8
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/roster-cpp.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (240x240 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 28] Texture loaded successfully (240x240 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 28] Mipmaps generated automatically, total: 8
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/fighter-greybox-spritesheet.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (768x128 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 29] Texture loaded successfully (768x128 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/rust/rust-fighter-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (4356x4401 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 30] Texture loaded successfully (4356x4401 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/rust/rust-contact-reactions-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1792x2816 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 31] Texture loaded successfully (1792x2816 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/rust-start-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (2560x1280 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 32] Texture loaded successfully (2560x1280 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/duke/duke-fighter-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (3839x3472 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 33] Texture loaded successfully (3839x3472 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/duke/duke-contact-reactions-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1792x2816 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 34] Texture loaded successfully (1792x2816 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/duke-start-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (3072x960 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 35] Texture loaded successfully (3072x960 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/go/go-fighter-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (2709x2674 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 36] Texture loaded successfully (2709x2674 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/go/go-contact-reactions-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1792x2816 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 37] Texture loaded successfully (1792x2816 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/go-start-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 38] Texture loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/c/c-fighter-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (3924x3680 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 39] Texture loaded successfully (3924x3680 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/c/c-contact-reactions-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1792x2816 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 40] Texture loaded successfully (1792x2816 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/c-start-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1536x512 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 41] Texture loaded successfully (1536x512 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/python/python-fighter-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (4312x3688 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 42] Texture loaded successfully (4312x3688 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/python/python-reactions-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1792x2816 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 43] Texture loaded successfully (1792x2816 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/python-start-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (2048x960 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 44] Texture loaded successfully (2048x960 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/cpp/cpp-fighter-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (3950x3816 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 45] Texture loaded successfully (3950x3816 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/cpp/cpp-reactions-own-2026-09-09.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1536x3072 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 46] Texture loaded successfully (1536x3072 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/rust/rust-signature-fx.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 47] Texture loaded successfully (1536x1024 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/duke/duke-signature-fx.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (588x358 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 48] Texture loaded successfully (588x358 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/c/c-signature-fx.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (798x634 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 49] Texture loaded successfully (798x634 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/python/python-signature-fx-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (924x922 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 50] Texture loaded successfully (924x922 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/cpp/cpp-signature-fx-atlas.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1068x564 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 51] Texture loaded successfully (1068x564 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/rust/rust-projectile.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (237x116 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 52] Texture loaded successfully (237x116 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/duke/duke-projectile.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (158x132 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 53] Texture loaded successfully (158x132 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/go-channel-projectile.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (256x128 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 54] Texture loaded successfully (256x128 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/c-bitstream-projectile.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (307x93 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 55] Texture loaded successfully (307x93 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/python/python-projectile.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (144x68 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 56] Texture loaded successfully (144x68 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/cpp-plusplus-projectile.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (256x128 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 57] Texture loaded successfully (256x128 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/countdown-11.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (866x288 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 58] Texture loaded successfully (866x288 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 58] Mipmaps generated automatically, total: 10
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/countdown-10.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (864x289 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 59] Texture loaded successfully (864x289 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 59] Mipmaps generated automatically, total: 10
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/countdown-01.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (866x288 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 60] Texture loaded successfully (866x288 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 60] Mipmaps generated automatically, total: 10
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/countdown-fight.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (866x288 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 61] Texture loaded successfully (866x288 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 61] Mipmaps generated automatically, total: 10
+INFO: TEXTURE: [ID 62] Texture loaded successfully (1280x720 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 1] Depth renderbuffer loaded successfully (32 bits)
+INFO: FBO: [ID 1] Framebuffer object created successfully
+INFO: TEXTURE: [ID 62] Pixel data retrieved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/main.png] File saved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/main.png] Image exported successfully
+INFO: TEXTURE: [ID 62] Pixel data retrieved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/versus.png] File saved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/versus.png] Image exported successfully
+INFO: TEXTURE: [ID 62] Pixel data retrieved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/training.png] File saved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/training.png] Image exported successfully
+INFO: TEXTURE: [ID 62] Pixel data retrieved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/lore.png] File saved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/lore.png] Image exported successfully
+INFO: TEXTURE: [ID 62] Pixel data retrieved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/options.png] File saved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/options.png] Image exported successfully
+INFO: TEXTURE: [ID 62] Pixel data retrieved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/hud.png] File saved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/hud.png] Image exported successfully
+INFO: TEXTURE: [ID 62] Pixel data retrieved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/controls.png] File saved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/controls.png] Image exported successfully
+INFO: TEXTURE: [ID 62] Pixel data retrieved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/victory.png] File saved successfully
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/victory.png] Image exported successfully
+UI review written to /tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output
+INFO: FBO: [ID 1] Unloaded framebuffer from VRAM (GPU)
+INFO: TEXTURE: [ID 12] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 13] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 14] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 15] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 16] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 17] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 8] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 3] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 4] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 5] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 6] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 7] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 9] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 10] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 11] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 18] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 19] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 20] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 21] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 22] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 23] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 24] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 25] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 26] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 27] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 28] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 29] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 30] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 31] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 32] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 33] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 34] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 35] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 36] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 37] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 38] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 39] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 40] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 41] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 42] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 43] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 44] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 45] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 46] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 47] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 48] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 49] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 50] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 51] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 52] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 53] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 54] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 55] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 56] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 57] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 58] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 59] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 60] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 61] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 2] Unloaded texture data from VRAM (GPU)
+INFO: SHADER: [ID 3] Default shader unloaded successfully
+INFO: TEXTURE: [ID 1] Default texture unloaded successfully
+INFO: Window closed successfully

@@ -1,8 +1,9 @@
 # Arte do experimento de aventura — prólogo de Ada e manhã de Rust
 
 Assets candidatos gerados em 10 de setembro de 2026 para a branch
-`feature/rust-adventure-prologue`. Servem ao experimento jogável; ainda dependem
-de revisão na aplicação e de aprovação humana de continuidade e fluidez.
+`feature/rust-adventure-prologue`. Integrados e revisados no renderer do
+[experimento jogável](../../docs/evidence/adventure-prologue/README.md).
+Avaliação humana de continuidade e fluidez permanece parte do playtest.
 
 ## Ferramenta e referências
 
@@ -177,8 +178,10 @@ Os JSONs guardam somente coordenadas e etiquetas para o renderer.
 As transparências foram conferidas numericamente e as folhas completas foram
 inspecionadas visualmente. O alpha intermediário inclui os corpos com valores
 próximos de 250, além de bordas suaves; não significa que os corpos estejam
-quase invisíveis. A revisão da arte isolada não aprova automaticamente pivôs,
-ritmo, continuidade entre poses ou composição com cama e chão na aplicação.
+quase invisíveis. A revisão posterior na aplicação conferiu enquadramento,
+apoio na cama/chão, contato, defesa e pesar. O renderer usa altura aproximada
+de 335 pixels na manhã (plano próximo), 174 no Rust da rua e 187 na errática;
+os valores sugeridos acima foram pontos de partida da produção.
 
 | Tentativa não selecionada | Resultado e motivo |
 |---|---|

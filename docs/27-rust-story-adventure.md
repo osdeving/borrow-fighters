@@ -10,10 +10,29 @@ e vitória com pesar.
 
 A [ADR 0021](adr/0021-isolated-adventure-experiment.md) registra o isolamento
 entre aventura e luta. O [diário de implementação](worklogs/rust-adventure-prologue.md)
-registra o que foi realizado, verificado e o que falta. Este documento define
-escopo e aceite; não declara a implementação concluída. O [backlog](03-backlog.md)
+registra o que foi realizado e verificado. O episódio está implementado e
+verificado na branch, com [vídeo e evidências](evidence/adventure-prologue/README.md).
+Este documento preserva o escopo e os critérios da entrega. O [backlog](03-backlog.md)
 continua sendo a fonte de verdade das frentes ativas. A versão distribuída de
 luta permanece o [Prototype 3](releases/v0.1.0-prototype.3.md).
+
+## Entrega jogável
+
+```sh
+cargo run --no-default-features --features adventure --bin borrow-adventure
+```
+
+Ada recebe a mensagem, Assembly desperta e o mistério fica em aberto. Muito
+tempo depois, Rust acorda, sai para a rua e enfrenta uma errática sob controle
+do jogador. Vitória leva ao olhar abaixado e balanço de cabeça, com a frase
+“Não precisava ser assim.” Derrota permite tentar novamente no encontro.
+
+As cenas combinam quadros ilustrados, poses, câmera, transições e efeitos;
+o primeiro corte não é animação corporal contínua em todos os quadros. Há
+movimento, salto, ataques leve/forte, defesa, pausa, replay e áudio próprio.
+Arte e regras de ação pertencem à aventura. `cargo run` mantém a luta como
+padrão. A [evidência](evidence/adventure-prologue/README.md) registra 412 testes
+com ambos os modos, execução pela janela e limites do playtest automatizado.
 
 ## Intenção do experimento
 

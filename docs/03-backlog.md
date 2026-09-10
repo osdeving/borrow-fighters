@@ -5,8 +5,8 @@
 Este documento é a fonte de verdade para **o que vem agora**, com filas separadas
 de **to-do** (investigações e melhorias) e **bugfix** (defeitos observados).
 
-Prioridade atual, em 10 de setembro de 2026: implementar um **experimento de
-aventura 2D narrativa solo protagonizada por Rust**, na branch
+Prioridade atual, em 10 de setembro de 2026: avaliar o **experimento de
+aventura 2D narrativa solo protagonizada por Rust**, implementado na branch
 `feature/rust-adventure-prologue`. O [episódio autorizado](27-rust-story-adventure.md)
 mostra Ada, a mensagem misteriosa e Assembly; muito tempo depois, Rust acorda,
 enfrenta uma errática e reage com pesar à vitória. A lore aceita foi sincronizada
@@ -14,6 +14,7 @@ entre [worldbuilding](12-worldbuilding.md) e [livro do jogo](../assets/lore/stor
 A [ADR 0021](adr/0021-isolated-adventure-experiment.md) registra features/binários
 separados e a base compartilhada de `math`/`runtime_paths`; o
 [diário](worklogs/rust-adventure-prologue.md) acompanha execução e evidências.
+[Vídeo e validação da entrega](evidence/adventure-prologue/README.md).
 As pendências do Prototype 3 permanecem registradas abaixo. Estar no backlog,
 mesmo com prioridade alta, **não significa execução ativa**.
 
@@ -79,15 +80,15 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Próxima ação |
 |---|---|---|---|---|
-| Agora | Experimento de aventura: prólogo e primeiro encontro | Implementação autorizada em andamento; TODO-012 | [Entrega 27](27-rust-story-adventure.md), [ADR 0021](adr/0021-isolated-adventure-experiment.md), [diário](worklogs/rust-adventure-prologue.md) | Implementar a sequência Ada → mensagem → Assembly → manhã de Rust → combate → pesar, com regras próprias e revisão no renderer. |
-| Próximo | Avaliar o episódio jogável | Após completar o experimento | [Critérios da entrega 27](27-rust-story-adventure.md#critérios-de-aceite) | Observar controle, leitura da ameaça, entendimento do pesar de Rust e vontade de continuar; decidir expansão a partir da evidência. |
+| Agora | Avaliar o episódio jogável | Implementação entregue na branch; playtest humano pendente, TODO-013 | [Entrega 27](27-rust-story-adventure.md), [vídeo e verificações](evidence/adventure-prologue/README.md), [diário](worklogs/rust-adventure-prologue.md) | Observar controle, leitura da ameaça, entendimento do pesar de Rust e vontade de continuar. |
+| Próximo | Definir continuidade da aventura | Aguardando avaliação do episódio | [Critérios da entrega 27](27-rust-story-adventure.md#critérios-de-aceite) | Decidir ajustes ou expansão a partir do playtest; ideias de Vínculo/Sirius continuam estacionadas. |
 | Depois | Pendências do Prototype 3 | Backlog; sem execução ativa | [To-do](#backlog-de-to-do), [bugfix](#backlog-de-bugfix) | Retomar itens por prioridade e evidência, em entregas pequenas, quando esta frente for reaberta. |
 
 ## Backlog de to-do
 
 Prioridade ordena o trabalho quando a respectiva frente for retomada; não
 antecipa o **Agora**. TODO-001 a TODO-010 estão **abertos no backlog**;
-TODO-011 está **concluído** e TODO-012 está **em andamento**. IDs permanecem
+TODO-011 e TODO-012 estão **concluídos**; TODO-013 está **aberto**. IDs permanecem
 estáveis ao mudar prioridade ou vincular issue/PR.
 
 | ID | Item | Prioridade | Critério de conclusão / evidência esperada |
@@ -103,7 +104,8 @@ estáveis ao mudar prioridade ou vincular issue/PR.
 | TODO-009 | Voz própria de Old C | Baixa | Selecionar voz redistribuível, registrar procedência/licença e obter avaliação humana de identidade e consistência. O [fallback de Rust](../assets/audio/review/old-c-fallback-2026-09-09/README.md) é provisório e autorizado; substituí-lo não deve alterar as vozes dos demais. |
 | TODO-010 | Ferramenta visual clicável | Baixa, condicionada à necessidade | Retomar o [roadmap do viewer](16-sprite-combat-viewer-roadmap.md) somente se atalhos e texto forem insuficientes; registrar o problema de uso antes de avaliar `raygui`. Pendência anterior preservada. |
 | TODO-011 | Conciliar prólogo e fontes da lore para a aventura — concluído | Concluído em 10/09/2026 | [Worldbuilding](12-worldbuilding.md), [livro do jogo](../assets/lore/story.json) e [entrega 27](27-rust-story-adventure.md) sincronizados e revisados: EPs como pessoas, Rust como mais recente EP pura, Ada humana/híbrida, mensagem misteriosa antes de Assembly e origem involuntária das erráticas. JSON válido; grafias `Liker` e `presente no desde` removidas dos textos. A autoria da mensagem e a relação completa entre os acontecimentos permanecem em aberto. |
-| TODO-012 | Implementar prólogo e primeiro encontro da aventura — em andamento | Alta, frente atual | Cumprir a [sequência e os critérios autorizados](27-rust-story-adventure.md), com features/binários separados, gameplay próprio e validação de estado e renderer. Registrar resultados e limites no [diário](worklogs/rust-adventure-prologue.md); só concluir após a revisão da entrega. Vínculo/Sirius e expansão da campanha ficam estacionados. |
+| TODO-012 | Implementar prólogo e primeiro encontro da aventura — concluído | Concluído em 10/09/2026 | [Episódio](27-rust-story-adventure.md) implementado na branch própria: cenas, gameplay, derrota/retry e pesar; features, binários, assets e regras próprios. [Evidências](evidence/adventure-prologue/README.md): vídeo completo, 14 checks na janela, 412 testes com ambos os modos e matriz de isolamento. A avaliação humana segue no TODO-013. |
+| TODO-013 | Playtest humano do primeiro episódio de aventura | Alta, próxima avaliação | Jogar a sequência e registrar compreensão do mistério de Ada/Assembly, continuidade e fluidez das poses, leitura da errática, comandos, contato e pesar de Rust, além de vontade de continuar. Ouvir áudio ao vivo e testar gamepad físico. Registrar defeitos reproduzíveis em bugfix e hipóteses em to-do; decidir ajustes/expansão a partir da observação. [Vídeo e limites atuais](evidence/adventure-prologue/README.md). |
 
 ## Backlog de bugfix
 
@@ -131,6 +133,7 @@ execução nem aprovação humana das pendências listadas acima.
 
 | Janela | Frente | Status | Registro | Proxima acao |
 |---|---|---|---|---|
+| Concluído | Aventura: prólogo de Ada e primeiro encontro de Rust | Implementado e verificado na branch `feature/rust-adventure-prologue`; TODO-012 | [Entrega 27](27-rust-story-adventure.md), [ADR 0021](adr/0021-isolated-adventure-experiment.md), [evidências](evidence/adventure-prologue/README.md) | Avaliação humana no TODO-013; regras específicas isoladas da luta, 412 testes e sequência completa gravada. |
 | Concluído | Apresentação e fluxo do playtest | Integrado à main; PR #19 | [Entrega 26](26-playtest-visual-completion.md), [ADR 0020](adr/0020-match-flow-selection-and-energy.md), [UI e fluxo](evidence/playtest-visual-flow/README.md), [reações](evidence/roster-contact-reactions/README.md) | 128 desenhos, 120 cenários renderizados, três partidas e duas revanches, 393 testes, Windows/Linux verificados. Próximo: playtest humano e balanceamento fino. |
 | Concluído | Reações próprias Python × C++ | Implementado e verificado | [Entrega 25](25-python-cpp-contact-reactions.md), [evidências](evidence/python-cpp-reactions/README.md), [ADR 0018](adr/0018-contact-reaction-profiles.md) | 64 desenhos novos, reação individual à rajada, 64 cenários nos dois sentidos e vídeo do par. |
 | Concluído | Reações e transformações | Cinco supers autorais e reações dos seis defensores integrados e verificados | [Plano 24](24-reactions-and-transformations.md), [ADR 0017](adr/0017-reaction-clocks-and-arena-mutation.md), [evidências](evidence/reactions-transformations/README.md) | Playtest humano das animações e dos sons. 335 testes, Clippy estrito, formatação e teste separado de áudio ao vivo aprovados; custo, raridade e vantagens por arena ficam para outra rodada. |

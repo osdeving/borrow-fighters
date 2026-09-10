@@ -1,0 +1,23 @@
+{
+  "command": [
+    "strace",
+    "-f",
+    "-e",
+    "trace=%file",
+    "-o",
+    "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-files.strace",
+    "/home/willams/borrow-fighters/target/debug/borrow-adventure",
+    "--capture",
+    "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-output",
+    "--start",
+    "encounter",
+    "--frames",
+    "120",
+    "--mute",
+    "--hidden"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 6.486073388000477,
+  "asset_root": "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets",
+  "working_directory": "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd"
+}
