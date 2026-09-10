@@ -127,16 +127,16 @@ fn pointer_click_is_suppressed_on_scene_entry_and_does_not_repeat_across_pages()
 }
 
 #[test]
-fn mouse_can_start_fights_and_open_each_training_tool() {
+fn mouse_can_open_versus_and_each_training_tool() {
     let mut flags = FeatureFlags::default();
     let mut menu = PreferencesMenu::default();
     menu.update(PreferencesInput::default(), &mut flags);
     assert_eq!(
         menu.update(
-            pointer_on_row(&menu, PreferencesMenu::MAIN_START_ROW, true),
+            pointer_on_row(&menu, PreferencesMenu::MAIN_VERSUS_ROW, true),
             &mut flags
         ),
-        PreferencesAction::StartFight
+        PreferencesAction::OpenCharacterSelect
     );
     menu.update(
         pointer_on_row(&menu, PreferencesMenu::MAIN_TRAINING_ROW, true),
@@ -161,6 +161,74 @@ fn mouse_can_start_fights_and_open_each_training_tool() {
             action
         );
     }
+}
+
+#[test]
+fn story_placeholder_is_inert_for_mouse_keyboard_and_controller_commands() {
+    for input_kind in 0..6 {
+        let mut flags = FeatureFlags::default();
+        let original_flags = flags;
+        let mut menu = PreferencesMenu::default();
+        menu.update(PreferencesInput::default(), &mut flags);
+        let input = match input_kind {
+            0 => pointer_on_row(&menu, PreferencesMenu::MAIN_STORY_ROW, true),
+            1 => PreferencesInput {
+                // Keyboard Enter and gamepad A map to this same command.
+                activate: true,
+                ..PreferencesInput::default()
+            },
+            2 => PreferencesInput {
+                start: true,
+                ..PreferencesInput::default()
+            },
+            3 => PreferencesInput {
+                right: true,
+                ..PreferencesInput::default()
+            },
+            4 => PreferencesInput {
+                left: true,
+                ..PreferencesInput::default()
+            },
+            _ => {
+                let mut input = pointer_on_row(&menu, PreferencesMenu::MAIN_STORY_ROW, false);
+                input.pointer.previous = true;
+                input
+            }
+        };
+        assert_eq!(menu.update(input, &mut flags), PreferencesAction::Stay);
+        assert_eq!(menu.page(), MenuPage::Main);
+        assert_eq!(menu.selected(), PreferencesMenu::MAIN_STORY_ROW);
+        assert_eq!(flags, original_flags);
+    }
+}
+
+#[test]
+fn main_menu_replays_its_entry_reveal_when_returning_without_mutating_flags() {
+    let mut flags = FeatureFlags::default();
+    let original_flags = flags;
+    let mut menu = PreferencesMenu::default();
+    assert_eq!(menu.main_entry_frames(), 0);
+    assert!(menu.main_entry_pulse_frames() > 0);
+    menu.update(PreferencesInput::default(), &mut flags);
+    for _ in 0..60 {
+        menu.tick_visuals();
+    }
+    assert_eq!(menu.main_entry_pulse_frames(), 0);
+
+    menu.update(
+        pointer_on_row(&menu, PreferencesMenu::MAIN_TRAINING_ROW, true),
+        &mut flags,
+    );
+    assert!(menu.back());
+    assert_eq!(menu.main_entry_frames(), 0);
+    assert!(menu.main_entry_pulse_frames() > 0);
+    for _ in 0..60 {
+        menu.tick_visuals();
+    }
+    menu.ignore_next_input();
+    assert_eq!(menu.main_entry_frames(), 0);
+    assert!(menu.main_entry_pulse_frames() > 0);
+    assert_eq!(flags, original_flags);
 }
 
 #[test]
@@ -516,14 +584,18 @@ fn preferences_menu_adjusts_music_volume_row() {
 }
 
 #[test]
-fn preferences_menu_start_row_enters_fight() {
+fn preferences_menu_preserves_start_shortcut_on_versus() {
     let mut flags = FeatureFlags::default();
     let mut menu = PreferencesMenu::default();
 
     menu.update(PreferencesInput::default(), &mut flags);
+    menu.update(
+        pointer_on_row(&menu, PreferencesMenu::MAIN_VERSUS_ROW, false),
+        &mut flags,
+    );
     let action = menu.update(
         PreferencesInput {
-            activate: true,
+            start: true,
             ..PreferencesInput::default()
         },
         &mut flags,

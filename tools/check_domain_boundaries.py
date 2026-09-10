@@ -4,7 +4,8 @@
 This is a small source scanner, not a Rust compiler: it expands use trees and
 resolves crate/self/super paths and import aliases, ignoring comments and string
 contents. Cargo's separate feature builds remain the check for macro expansion
-and type resolution. Keep the rules specific to the package's two domains.
+and type resolution. Keep the rules specific to the package's two domains and
+their opt-in composition root; presentation is never shared core.
 
 Requires Python 3.11+ for stdlib tomllib. In the development environment run:
 python3.13 tools/check_domain_boundaries.py
@@ -25,6 +26,9 @@ except ModuleNotFoundError:
 
 CORE = {"math", "runtime_paths"}
 DOMAINS = {"fighting", "adventure"}
+PRESENTATION = "src/presentation.rs"
+STORY_BINARY = "src/bin/borrow-story.rs"
+PRESENTATION_APIS = {"app", "cli", "config"}
 IDENT = re.compile(r"(?:r#)?[A-Za-z_][A-Za-z_0-9]*")
 
 
@@ -265,6 +269,10 @@ def source_paths(source: str, path: Path) -> tuple[list[tuple[tuple[str, ...], i
 def domain_for(path: Path) -> str:
     if path.as_posix() == "src/lib.rs":
         return "library"
+    if path.as_posix() == PRESENTATION or path.parts[:2] == ("src", "presentation"):
+        return "presentation"
+    if path.as_posix() == STORY_BINARY:
+        return "presentation entrypoint"
     if path.parts[0] == "src":
         top = module_context(path)
         if top and top[0] in CORE:
@@ -284,6 +292,8 @@ def check_source(source: str, path: Path, domain: str) -> list[str]:
             return domain
         if not context or context[0] in CORE:
             return "core"
+        if context[0] == "presentation":
+            return "presentation"
         return "adventure" if context[0] == "adventure" else "fighting"
 
     for parts, line, context in paths:
@@ -291,18 +301,32 @@ def check_source(source: str, path: Path, domain: str) -> list[str]:
         top = parts[0] if parts else "<crate-root>"
         allowed = top in CORE or top == "<local-target>" or (owner == "adventure" and top == "adventure")
         if owner == "fighting":
-            allowed = top not in {"adventure", "*", "<crate-root>", "<escaped-crate>"}
+            allowed = top not in {"adventure", "presentation", "*", "<crate-root>", "<escaped-crate>"}
+        elif owner == "presentation":
+            allowed = top in CORE | PRESENTATION_APIS | {"presentation"} or parts[:2] == ("adventure", "app")
+        elif owner == "presentation entrypoint":
+            allowed = top in CORE | {"presentation", "<local-target>"}
         if not allowed:
             errors.append(f"{path}:{line}: {owner} cannot depend on {'::'.join(parts) or 'the entire crate'}")
     scope = contexts(items, module_context(path))
+    for index, (token, context) in enumerate(zip(items, scope)):
+        if scoped_domain(context) not in {"presentation", "presentation entrypoint"}:
+            continue
+        following = [item.value for item in items[index:index + 3]]
+        external_module = token.value == "mod" and len(following) == 3 and following[2] == ";"
+        if external_module or following == ["#", "[", "path"] or following[:2] == ["include", "!"]:
+            errors.append(f"{path}:{token.line}: presentation must keep composition explicit in {PRESENTATION}; no external modules or include!")
     for token, context in zip(items, scope):
-        if token.kind != "string" or scoped_domain(context) != "adventure":
+        owner = scoped_domain(context)
+        if token.kind != "string" or owner not in {"adventure", "presentation", "presentation entrypoint"}:
             continue
         literal = token.value.replace("\\", "/")
         match = re.search(r"(?:^|/)assets(?:/|$)", literal)
         if match:
             asset = posixpath.normpath("assets/" + literal[match.end():])
-            if asset != "assets/adventure" and not asset.startswith("assets/adventure/"):
+            if owner != "adventure":
+                errors.append(f"{path}:{token.line}: {owner} must leave asset loading to each app: {token.value}")
+            elif asset != "assets/adventure" and not asset.startswith("assets/adventure/"):
                 errors.append(f"{path}:{token.line}: adventure asset must be under assets/adventure: {token.value}")
     return list(dict.fromkeys(errors))
 
@@ -337,13 +361,21 @@ def check_lib(source: str) -> list[str]:
             expected = None if name in CORE else "adventure" if name == "adventure" else "fighting"
             cfgs = [attribute for attribute in attributes if attribute and attribute[0] in {"cfg", "cfg_attr"}]
             needed = ["cfg", "(", "feature", "=", expected, ")"]
-            if (expected is None and cfgs) or (expected is not None and cfgs != [needed]):
+            if name == "presentation":
+                # Accept either ordering, but no any/test/cfg_attr escape hatch.
+                gates = [
+                    ["cfg", "(", "all", "(", "feature", "=", first, ",", "feature", "=", second, ")", ")"]
+                    for first, second in (("adventure", "fighting"), ("fighting", "adventure"))
+                ]
+                if cfgs not in [[gate] for gate in gates]:
+                    errors.append(f'src/lib.rs:{items[index].line}: module presentation must have exactly #[cfg(all(feature = "adventure", feature = "fighting"))]')
+            elif (expected is None and cfgs) or (expected is not None and cfgs != [needed]):
                 errors.append(f"src/lib.rs:{items[index].line}: module {name} must {'be ungated core' if expected is None else 'have exactly #[cfg(feature = ' + repr(expected) + ')]'}")
             attributes = []
         elif items[index].value in {";", "}"}:
             attributes = []
         index += 1
-    for name in CORE | {"adventure"}:
+    for name in CORE | {"adventure", "presentation"}:
         if name not in declared:
             errors.append(f"src/lib.rs: missing domain/core module {name}")
     return errors
@@ -356,6 +388,8 @@ def check_repository(root: Path) -> list[str]:
     except (OSError, tomllib.TOMLDecodeError) as error:
         return [f"Cargo.toml: {error}"]
     package = manifest.get("package", {})
+    if package.get("default-run") != "borrow-fighters":
+        errors.append('Cargo.toml: package.default-run must remain "borrow-fighters"')
     for discovery in ("autotests", "autoexamples"):
         if package.get(discovery) is not False:
             errors.append(f"Cargo.toml: package.{discovery} must be false; explicitly register every target")
@@ -393,8 +427,9 @@ def check_repository(root: Path) -> list[str]:
                 errors.append(f"Cargo.toml: {kind} target missing on disk: {path}")
             expected = domain_for(path)
             required = target.get("required-features", [])
-            if required != ([] if expected == "core" else [expected]):
-                errors.append(f"Cargo.toml: {path} required-features must be {[] if expected == 'core' else [expected]}")
+            needed = sorted(DOMAINS) if expected == "presentation entrypoint" else [] if expected == "core" else [expected]
+            if sorted(required) != needed:
+                errors.append(f"Cargo.toml: {path} required-features must be {needed}")
             paths_to_check.add(path)
         for actual in (root / directory).glob("*.rs"):
             relative = actual.relative_to(root)
@@ -404,6 +439,8 @@ def check_repository(root: Path) -> list[str]:
             for binary, feature in (("borrow-fighters", "fighting"), ("borrow-adventure", "adventure")):
                 if not any(target.get("name") == binary and target.get("required-features") == [feature] for target in listed.values()):
                     errors.append(f"Cargo.toml: missing {binary} binary gated by {feature}")
+            if not any(target.get("name") == "borrow-story" and path.as_posix() == STORY_BINARY and sorted(target.get("required-features", [])) == sorted(DOMAINS) for path, target in listed.items()):
+                errors.append(f"Cargo.toml: missing borrow-story binary at {STORY_BINARY} gated by both adventure and fighting")
 
     lib = root / "src/lib.rs"
     if lib.is_file():

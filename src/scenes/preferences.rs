@@ -96,12 +96,13 @@ pub struct PreferencesMenu {
     lore_character_scroll: usize,
     accepting_input: bool,
     selection_pulse_frames: u16,
+    main_entry_frames: u16,
 }
 
 const LORE_SCROLL_STEP_LINES: usize = 3;
 
 impl PreferencesMenu {
-    pub const MAIN_START_ROW: usize = 0;
+    pub const MAIN_STORY_ROW: usize = 0;
     pub const MAIN_VERSUS_ROW: usize = 1;
     pub const MAIN_TRAINING_ROW: usize = 2;
     pub const MAIN_LORE_ROW: usize = 3;
@@ -168,14 +169,32 @@ impl PreferencesMenu {
         self.selection_pulse_frames
     }
 
+    /// Rendered frames since entering the main menu, for its fade and text reveal.
+    pub const fn main_entry_frames(&self) -> u16 {
+        self.main_entry_frames
+    }
+
+    /// Keeps the opening binary text visible while the main menu fades in.
+    pub fn main_entry_pulse_frames(&self) -> u16 {
+        (DEFAULT_BINARY_REVEAL_FRAMES + 12)
+            .saturating_sub(self.main_entry_frames)
+            .min(DEFAULT_BINARY_REVEAL_FRAMES)
+    }
+
     /// Advances non-gameplay menu visuals by one rendered frame.
     pub fn tick_visuals(&mut self) {
         self.selection_pulse_frames = self.selection_pulse_frames.saturating_sub(1);
+        if self.page == MenuPage::Main {
+            self.main_entry_frames = self.main_entry_frames.saturating_add(1);
+        }
     }
 
     /// Ignores the next frame of input after entering the preferences scene.
     pub fn ignore_next_input(&mut self) {
         self.accepting_input = false;
+        if self.page == MenuPage::Main {
+            self.main_entry_frames = 0;
+        }
     }
 
     /// Opens the same guide used on first launch and from the main menu.
@@ -257,6 +276,9 @@ impl PreferencesMenu {
         }
 
         if input.start {
+            if self.page == MenuPage::Main && self.selected == Self::MAIN_STORY_ROW {
+                return PreferencesAction::Stay;
+            }
             return if self.page == MenuPage::HowToPlay {
                 self.activate_selected(flags)
             } else {
@@ -324,7 +346,7 @@ impl PreferencesMenu {
     fn activate_selected(&mut self, flags: &mut FeatureFlags) -> PreferencesAction {
         match self.page {
             MenuPage::Main => match self.selected {
-                Self::MAIN_START_ROW => PreferencesAction::StartFight,
+                Self::MAIN_STORY_ROW => PreferencesAction::Stay,
                 Self::MAIN_VERSUS_ROW => PreferencesAction::OpenCharacterSelect,
                 Self::MAIN_TRAINING_ROW => {
                     self.enter_page(MenuPage::Training);
@@ -417,6 +439,9 @@ impl PreferencesMenu {
     fn enter_page(&mut self, page: MenuPage) {
         self.page = page;
         self.selected = 0;
+        if page == MenuPage::Main {
+            self.main_entry_frames = 0;
+        }
         if page == MenuPage::Lore {
             self.lore_chapter_scroll = 0;
             self.lore_character_scroll = 0;

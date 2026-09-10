@@ -110,6 +110,16 @@ impl App {
         Self::with_onboarding_marker(options, data_dir().join("onboarding-v1.seen"))
     }
 
+    /// Opens the main menu directly when a host has already shown its introduction.
+    ///
+    /// This does not mark the controls guide as read; it remains available in-menu.
+    pub fn at_main_menu() -> Self {
+        Self {
+            preferences_menu: PreferencesMenu::default(),
+            ..Self::default()
+        }
+    }
+
     fn with_onboarding_marker(options: LaunchOptions, marker: PathBuf) -> Self {
         let onboarding_marker = (!marker.is_file()).then_some(marker);
         let mut preferences_menu = PreferencesMenu::default();

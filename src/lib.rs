@@ -24,6 +24,8 @@ pub mod game;
 #[cfg(feature = "fighting")]
 pub mod lore;
 pub mod math;
+#[cfg(all(feature = "adventure", feature = "fighting"))]
+pub mod presentation;
 pub mod runtime_paths;
 #[cfg(feature = "fighting")]
 pub mod scenes;

@@ -1,12 +1,13 @@
-//! Runs the independent adventure window, fixed simulation and review capture.
+//! Runs an independent adventure session, fixed simulation and review capture.
 //!
 //! System: Adventure application boundary. This loop owns Raylib, translates
 //! physical input and pauses both simulation and audio without touching fighting.
+//! A host may lend its window and receive an explicit completion/exit result.
 
 use crate::{
     adventure::{
         combat::{Action, CombatInput, Outcome},
-        engine::{assets::Assets, audio::AdventureAudio, render},
+        engine::{assets::Assets, audio::AdventureAudio, opening, render},
         story::{Stage, Story},
         text::TextCatalog,
     },
@@ -23,7 +24,7 @@ use std::{
 
 /// Launch configuration local to the adventure executable.
 #[derive(Default)]
-struct Options {
+pub struct Options {
     review: Option<PathBuf>,
     capture: Option<PathBuf>,
     start: Option<String>,
@@ -34,7 +35,8 @@ struct Options {
 }
 
 impl Options {
-    fn parse(args: impl IntoIterator<Item = String>) -> Result<Option<Self>, Box<dyn Error>> {
+    /// Parses adventure arguments before either standalone or hosted window creation.
+    pub fn parse(args: impl IntoIterator<Item = String>) -> Result<Option<Self>, Box<dyn Error>> {
         let mut options = Self::default();
         let mut args = args.into_iter().skip(1);
         while let Some(arg) = args.next() {
@@ -91,6 +93,22 @@ impl Options {
         }
         Ok(Some(options))
     }
+
+    /// Whether capture review or the explicit flag requests a hidden window.
+    pub fn hidden_window(&self) -> bool {
+        self.hidden || self.review.is_some()
+    }
+}
+
+/// Why a hosted session returned control, without exposing gameplay state.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum SessionExit {
+    /// The presentation finished or was explicitly skipped.
+    Completed,
+    /// The player closed the window or chose to leave the adventure.
+    Closed,
+    /// A developer frame limit ended this run, before any continuation.
+    FrameLimit,
 }
 
 /// Initializes the optional adventure and runs until window close or an explicit exit.
@@ -116,6 +134,35 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
     }
     let (mut rl, thread) = builder.build();
     rl.set_exit_key(None);
+    run_session(&mut rl, &thread, options, text, false).map(|_| ())
+}
+
+/// Runs in a host-owned window and returns after the final presentation fades out.
+///
+/// All adventure textures, audio and capture resources are released before return.
+/// Closing or truncating a session never reports a completed presentation.
+pub fn run_in_window(
+    rl: &mut RaylibHandle,
+    thread: &RaylibThread,
+    options: Options,
+) -> Result<SessionExit, Box<dyn Error>> {
+    let text = TextCatalog::load(
+        options
+            .texts
+            .clone()
+            .unwrap_or_else(|| runtime_paths::asset_path("assets/adventure/texts/pt-BR.json")),
+    )?;
+    rl.set_window_title(thread, text.get("window.title"));
+    run_session(rl, thread, options, text, true)
+}
+
+fn run_session(
+    rl: &mut RaylibHandle,
+    thread: &RaylibThread,
+    options: Options,
+    text: TextCatalog,
+    return_on_complete: bool,
+) -> Result<SessionExit, Box<dyn Error>> {
     if options.review.is_none() {
         rl.set_target_fps(60);
     }
@@ -125,9 +172,8 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
         RaylibAudio::init_audio_device().ok()
     };
     let mut audio = AdventureAudio::new(audio_device.as_ref());
-    let mut assets = Assets::load(&mut rl, &thread, text)?;
-    let mut target =
-        rl.load_render_texture(&thread, render::WIDTH as u32, render::HEIGHT as u32)?;
+    let mut assets = Assets::load(rl, thread, text)?;
+    let mut target = rl.load_render_texture(thread, render::WIDTH as u32, render::HEIGHT as u32)?;
     let mut story = Story::new();
     match options.start.as_deref() {
         Some("opening") => story = Story::presentation(),
@@ -158,6 +204,8 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
     let mut capture_accumulator = 0.0f32;
     let mut capture_seconds = 0.0f32;
     let mut previous_frame_time = std::time::Instant::now();
+    let mut exit = SessionExit::Closed;
+    let mut completion_frames = 0u32;
     while !rl.window_should_close() {
         let now = std::time::Instant::now();
         let frame_time = if frame == 0 {
@@ -167,7 +215,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
         };
         previous_frame_time = now;
         let mut suppress = false;
-        if !reviewing {
+        if !reviewing && !(return_on_complete && story.stage == Stage::Complete) {
             if rl.is_key_pressed(KeyboardKey::KEY_F5) {
                 let result = assets.text.reload();
                 let ok = result.is_ok();
@@ -176,7 +224,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
                 }
                 if ok {
                     text_revision += 1;
-                    rl.set_window_title(&thread, assets.text.get("window.title"));
+                    rl.set_window_title(thread, assets.text.get("window.title"));
                 }
                 reload_notice = Some((ok, 4.0));
             }
@@ -252,7 +300,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
             }
             review.frames += 1;
         } else if !paused && !suppress {
-            let input = input(&rl);
+            let input = input(rl);
             pending.movement = input.movement;
             pending.blocking = input.blocking;
             pending.jump_pressed |= input.jump_pressed;
@@ -288,8 +336,20 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
             )?;
         }
         {
-            let mut draw = rl.begin_texture_mode(&thread, &mut target);
-            render::draw(&mut draw, &story, &assets, paused, debug, reveal_text);
+            let mut draw = rl.begin_texture_mode(thread, &mut target);
+            if return_on_complete && story.stage == Stage::Complete {
+                opening::draw(&mut draw, &story, &assets);
+                completion_frames += 1;
+                draw.draw_rectangle(
+                    0,
+                    0,
+                    render::WIDTH,
+                    render::HEIGHT,
+                    Color::new(14, 19, 26, (255 * completion_frames.min(24) / 24) as u8),
+                );
+            } else {
+                render::draw(&mut draw, &story, &assets, paused, debug, reveal_text);
+            }
             if let Some((ok, _)) = reload_notice {
                 render::reload_notice(&mut draw, &assets, ok);
             }
@@ -321,7 +381,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
             let width = rl.get_screen_width() as f32;
             let height = rl.get_screen_height() as f32;
             let scale = (width / render::WIDTH as f32).min(height / render::HEIGHT as f32);
-            let mut draw = rl.begin_drawing(&thread);
+            let mut draw = rl.begin_drawing(thread);
             draw.clear_background(Color::BLACK);
             draw.draw_texture_pro(
                 target.texture(),
@@ -345,6 +405,11 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
         }
         frame += 1;
         if options.max_frames.is_some_and(|limit| frame >= limit) {
+            exit = SessionExit::FrameLimit;
+            break;
+        }
+        if return_on_complete && completion_frames >= 24 {
+            exit = SessionExit::Completed;
             break;
         }
         if reviewing && story.stage == Stage::Complete {
@@ -369,7 +434,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
             );
         }
     }
-    Ok(())
+    Ok(exit)
 }
 
 fn input(rl: &RaylibHandle) -> CombatInput {

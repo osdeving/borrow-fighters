@@ -24,6 +24,11 @@ name = "borrow-adventure"
 path = "src/bin/borrow-adventure.rs"
 required-features = ["adventure"]
 
+[[bin]]
+name = "borrow-story"
+path = "src/bin/borrow-story.rs"
+required-features = ["fighting", "adventure"]
+
 [dependencies]
 raylib = "6.0.0"
 serde = { version = "1.0", features = ["derive"] }

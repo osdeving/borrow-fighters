@@ -190,43 +190,6 @@
       },
       "alpha_zero_pixels": 186365,
       "maximum_frame_height": 276
-    },
-    {
-      "id": "go",
-      "image": "roster/go.png",
-      "image_size": [
-        633,
-        282
-      ],
-      "rects": [
-        [
-          33,
-          12,
-          145,
-          269
-        ],
-        [
-          236,
-          12,
-          147,
-          269
-        ],
-        [
-          440,
-          13,
-          147,
-          269
-        ]
-      ],
-      "source": "assets/production/go/idle/prepared.png",
-      "sha256": "5b745bf997463ad92ded6baf1ea995775885f93aed0f09bb30a1b38259e673b8",
-      "measurement": {
-        "alpha_threshold_exclusive": 3,
-        "padding_pixels": 2,
-        "image_pixels_unchanged": true
-      },
-      "alpha_zero_pixels": 121441,
-      "maximum_frame_height": 269
     }
   ]
 }

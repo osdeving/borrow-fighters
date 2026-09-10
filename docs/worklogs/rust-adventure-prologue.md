@@ -81,6 +81,15 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 
 ## Checkpoints
 
+- 2026-09-10, rodada 3 integrada: `67d6441` fixa escopo. `borrow-story` recebe
+  conclusão explícita da aventura e abre o menu na mesma janela; sair/limitar
+  frames não dispara outro modo. Recursos de áudio/GPU encerram entre sessões.
+  Menu de terminal e corte do Go implementados e capturados separadamente.
+  Matriz aprovada: 421 ambos, 395 luta, 27 aventura/core, 3 core; 54 fixtures de
+  fronteira, Fmt e Clippy aprovados. Revisão encontrou menu invisível depois de
+  `--hidden`/`--review`; corrigido mostrando a janela no handoff. Falta conferir
+  essa correção e a sequência pela janela, arquivar evidências e fechar docs.
+
 - 2026-09-10, rodada 3 iniciada: goal criado na mesma branch. ADR 0023 registra
   composição externa `borrow-story` e APIs que compartilham a janela sem
   compartilhar regras. Frentes independentes: menu principal, corte do Go e

@@ -15,6 +15,7 @@ MANIFEST = '''[package]
 name = "borrow-fighters"
 version = "0.1.0"
 edition = "2024"
+default-run = "borrow-fighters"
 autotests = false
 autoexamples = false
 
@@ -32,6 +33,11 @@ required-features = ["fighting"]
 name = "borrow-adventure"
 path = "src/bin/borrow-adventure.rs"
 required-features = ["adventure"]
+
+[[bin]]
+name = "borrow-story"
+path = "src/bin/borrow-story.rs"
+required-features = ["fighting", "adventure"]
 
 [[test]]
 name = "runtime_paths"
@@ -54,6 +60,8 @@ LIB = '''//! Minimal isolated fixture.
 pub mod game;
 #[cfg(feature = "adventure")]
 pub mod adventure;
+#[cfg(all(feature = "adventure", feature = "fighting"))]
+pub mod presentation;
 pub mod math;
 pub mod runtime_paths;
 '''
@@ -69,6 +77,8 @@ class DomainBoundaryTests(unittest.TestCase):
             "src/lib.rs": LIB,
             "src/main.rs": "use borrow_fighters::game; fn main() {}",
             "src/bin/borrow-adventure.rs": "use borrow_fighters::adventure; fn main() {}",
+            "src/bin/borrow-story.rs": "use borrow_fighters::presentation; fn main() { presentation::run(); }",
+            "src/presentation.rs": "use crate::{app::App, adventure::app as story, cli, config}; fn run() { story::run(); }",
             "src/game/mod.rs": "use crate::math;",
             "src/adventure/mod.rs": "pub mod combat;",
             "src/adventure/combat.rs": "use crate::math;",
@@ -249,6 +259,125 @@ const ABSOLUTE: &str = "/assets/adventure/art.png";
     def test_default_feature_alias_cannot_enable_adventure_transitively(self):
         self.write("Cargo.toml", MANIFEST.replace('default = ["fighting"]', 'default = ["fighting", "surprise"]\nsurprise = ["adventure"]'))
         self.assert_violation("default must not enable adventure transitively")
+
+    def test_composition_can_only_use_app_boundaries_and_neutral_utilities(self):
+        self.write("src/presentation.rs", '''
+use crate::{adventure::app::{self as story, AppExit}, app::App, cli::LaunchOptions, config::WINDOW_WIDTH, math, runtime_paths};
+use std::path::Path;
+use raylib::prelude::*;
+fn run() { story::run(); crate::app::App::new(); }
+mod tests { use super::*; }
+''')
+        self.assertEqual(self.errors(), [])
+
+    def test_composition_cannot_depend_on_gameplay_or_render_internals(self):
+        for internal in ("combat::Fighter", "game::World", "characters::CharacterId", "scenes::Scene", "engine::render", "audio::AudioEvent", "lore::Book", "ui::menu_layout", "adventure::combat::Actor", "adventure::engine::render", "adventure::story::Stage", "adventure"):
+            with self.subTest(internal=internal):
+                self.write("src/presentation.rs", f"use crate::{internal};")
+                self.assert_violation(f"presentation cannot depend on {internal}")
+
+    def test_composition_alias_cannot_hide_a_gameplay_import(self):
+        self.write("src/presentation.rs", "use crate::adventure as story; use story::combat::Actor; fn tick() { Actor::new(); }")
+        self.assert_violation("presentation cannot depend on adventure::combat::Actor")
+
+    def test_composition_cannot_glob_the_crate_or_adventure(self):
+        for source in ("use crate::*;", "use crate as all;", "use crate::adventure::*;"):
+            with self.subTest(source=source):
+                self.write("src/presentation.rs", source)
+                self.assert_violation("presentation cannot depend on")
+
+    def test_composition_cannot_access_gameplay_in_an_expression(self):
+        self.write("src/presentation.rs", "fn tick() { crate::adventure::combat::Actor::new(); }")
+        self.assert_violation("presentation cannot depend on adventure::combat::Actor::new")
+
+    def test_domains_and_core_cannot_depend_on_composition(self):
+        for path, owner in (("src/game/mod.rs", "fighting"), ("src/adventure/combat.rs", "adventure"), ("src/math/vec2.rs", "core"), ("src/runtime_paths.rs", "core")):
+            with self.subTest(path=path):
+                original = (self.root / path).read_text()
+                self.write(path, "use crate::presentation as app; fn run() { app::run(); }")
+                self.assert_violation(f"{owner} cannot depend on presentation")
+                self.write(path, original)
+
+    def test_standalone_binaries_cannot_call_composition(self):
+        for path, owner in (("src/main.rs", "fighting"), ("src/bin/borrow-adventure.rs", "adventure")):
+            with self.subTest(path=path):
+                original = (self.root / path).read_text()
+                self.write(path, "use borrow_fighters::presentation; fn main() { presentation::run(); }")
+                self.assert_violation(f"{owner} cannot depend on presentation")
+                self.write(path, original)
+
+    def test_story_entrypoint_only_calls_composition(self):
+        for internal in ("app::App", "adventure::app", "game::World", "adventure::combat::Actor", "*"):
+            with self.subTest(internal=internal):
+                self.write("src/bin/borrow-story.rs", f"use borrow_fighters::{internal}; fn main() {{}}")
+                self.assert_violation(f"presentation entrypoint cannot depend on {internal}")
+
+    def test_another_binary_cannot_gain_composition_privileges(self):
+        self.write("Cargo.toml", MANIFEST + '\n[[bin]]\nname = "another-story"\npath = "src/bin/another-story.rs"\nrequired-features = ["fighting", "adventure"]\n')
+        self.write("src/bin/another-story.rs", "use borrow_fighters::presentation; fn main() {}")
+        self.assert_violation("fighting cannot depend on presentation")
+        self.assert_violation("src/bin/another-story.rs required-features must be ['fighting']")
+
+    def test_composition_child_file_cannot_be_classified_as_a_game_domain(self):
+        for filename in ("combat.rs", "adventure.rs", "mod.rs"):
+            with self.subTest(filename=filename):
+                path = f"src/presentation/{filename}"
+                self.write(path, "use crate::game::World; use crate::adventure::combat::Actor;")
+                self.assert_violation("presentation cannot depend on game::World")
+                self.assert_violation("presentation cannot depend on adventure::combat::Actor")
+                (self.root / path).unlink()
+
+    def test_composition_cannot_import_source_with_module_or_include(self):
+        for path in ("src/presentation.rs", "src/bin/borrow-story.rs"):
+            for source in ('mod combat;', '#[path = "game/mod.rs"] mod hidden;', 'include!("game/mod.rs");'):
+                with self.subTest(path=path, source=source):
+                    self.write(path, source)
+                    self.assert_violation("presentation must keep composition explicit")
+
+    def test_composition_must_delegate_asset_loading_to_apps(self):
+        for path in ("src/presentation.rs", "src/bin/borrow-story.rs"):
+            for asset in ("assets/adventure/audio/ada.wav", "assets/placeholder/rust.png"):
+                with self.subTest(path=path, asset=asset):
+                    self.write(path, f'const ASSET: &str = "{asset}";')
+                    self.assert_violation("must leave asset loading to each app")
+
+    def test_library_composition_requires_exact_both_feature_gate(self):
+        for gate in ('cfg(feature = "fighting")', 'cfg(feature = "adventure")', 'cfg(any(feature = "adventure", feature = "fighting"))', 'cfg(any(test, all(feature = "adventure", feature = "fighting")))', 'cfg(all(test, feature = "adventure", feature = "fighting"))'):
+            with self.subTest(gate=gate):
+                self.write("src/lib.rs", LIB.replace('cfg(all(feature = "adventure", feature = "fighting"))', gate))
+                self.assert_violation("module presentation must have exactly")
+
+    def test_library_composition_gate_accepts_either_feature_order(self):
+        self.write("src/lib.rs", LIB.replace('all(feature = "adventure", feature = "fighting")', 'all(feature = "fighting", feature = "adventure")'))
+        self.assertEqual(self.errors(), [])
+
+    def test_library_composition_cannot_be_ungated_or_missing(self):
+        self.write("src/lib.rs", LIB.replace('#[cfg(all(feature = "adventure", feature = "fighting"))]\n', ""))
+        self.assert_violation("module presentation must have exactly")
+        self.write("src/lib.rs", LIB.replace('#[cfg(all(feature = "adventure", feature = "fighting"))]\npub mod presentation;\n', ""))
+        self.assert_violation("missing domain/core module presentation")
+
+    def test_inline_composition_does_not_bypass_restricted_imports(self):
+        self.write("src/lib.rs", LIB.replace("pub mod presentation;", "pub mod presentation { use crate::game::World; }"))
+        self.assert_violation("presentation cannot depend on game::World")
+
+    def test_story_binary_requires_both_features_only(self):
+        for features in ('["adventure"]', '["fighting"]', '[]', '["adventure", "fighting", "extra"]', '["adventure", "fighting", "fighting"]'):
+            with self.subTest(features=features):
+                self.write("Cargo.toml", MANIFEST.replace('required-features = ["fighting", "adventure"]', f"required-features = {features}"))
+                self.assert_violation("src/bin/borrow-story.rs required-features must be ['adventure', 'fighting']")
+
+    def test_story_binary_accepts_either_feature_order(self):
+        self.write("Cargo.toml", MANIFEST.replace('required-features = ["fighting", "adventure"]', 'required-features = ["adventure", "fighting"]'))
+        self.assertEqual(self.errors(), [])
+
+    def test_story_binary_registration_cannot_be_removed(self):
+        self.write("Cargo.toml", MANIFEST.replace('[[bin]]\nname = "borrow-story"\npath = "src/bin/borrow-story.rs"\nrequired-features = ["fighting", "adventure"]\n', ""))
+        self.assert_violation("missing borrow-story binary")
+
+    def test_default_run_must_preserve_standalone_fighting(self):
+        self.write("Cargo.toml", MANIFEST.replace('default-run = "borrow-fighters"', 'default-run = "borrow-story"'))
+        self.assert_violation('package.default-run must remain "borrow-fighters"')
 
 
 if __name__ == "__main__":

@@ -23,6 +23,7 @@ const INK: Color = Color::new(14, 19, 26, 255);
 const PAPER: Color = Color::new(239, 224, 192, 255);
 const GOLD: Color = Color::new(248, 177, 64, 255);
 const TEAL: Color = Color::new(83, 199, 182, 255);
+const TITLE_ROSTER: [&str; 5] = ["c", "duke", "cpp", "python", "rust"];
 
 struct Portrait {
     id: String,
@@ -89,12 +90,12 @@ impl OpeningAssets {
                 height,
             });
         }
-        if roster.len() != 6
-            || ["rust", "duke", "c", "go", "python", "cpp"]
+        if roster.len() != TITLE_ROSTER.len()
+            || TITLE_ROSTER
                 .iter()
                 .any(|id| roster.iter().filter(|p| p.id == *id).count() != 1)
         {
-            return Err("opening requires the six unique character portraits".into());
+            return Err("opening requires the five unique character portraits".into());
         }
         let mut glyphs: String = (32..=591).filter_map(char::from_u32).collect();
         glyphs.push_str("—–“”‘’…");
@@ -286,10 +287,11 @@ fn history(d: &mut impl RaylibDraw, a: &Assets, id: &str, t: f32) {
 }
 
 fn character(d: &mut impl RaylibDraw, a: &Assets, t: f32) {
-    let index = ((t / 3.0) as usize).min(3);
-    let id = ["duke", "c", "go", "rust"][index];
-    let accent = [GOLD, Color::new(231, 111, 80, 255), TEAL, GOLD][index];
-    let local = t % 3.0;
+    // Keep the twelve-second montage and the score's title cue at 41 seconds.
+    let index = ((t / 4.0) as usize).min(2);
+    let id = ["duke", "c", "rust"][index];
+    let accent = [GOLD, Color::new(231, 111, 80, 255), GOLD][index];
+    let local = t % 4.0;
     for i in 0..8 {
         let x = -250.0 + i as f32 * 250.0 - local * 35.0;
         d.draw_rectangle_pro(
@@ -332,16 +334,14 @@ fn character(d: &mut impl RaylibDraw, a: &Assets, t: f32) {
 }
 
 fn title(d: &mut impl RaylibDraw, a: &Assets, t: f32) {
-    for (i, id) in ["c", "duke", "cpp", "python", "go", "rust"]
-        .iter()
-        .enumerate()
-    {
-        let x = 107.0 + i as f32 * 213.0;
+    let column_width = 1280.0 / TITLE_ROSTER.len() as f32;
+    for (i, id) in TITLE_ROSTER.iter().enumerate() {
+        let x = (i as f32 + 0.5) * column_width;
         let slide = (1.0 - (t * 1.4 - i as f32 * 0.08).clamp(0.0, 1.0)) * 200.0;
         d.draw_rectangle(
-            i as i32 * 213,
+            (i as f32 * column_width) as i32,
             28,
-            212,
+            column_width as i32 - 1,
             636,
             tint(if i % 2 == 0 { GOLD } else { TEAL }, 0.08),
         );
