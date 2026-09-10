@@ -1,0 +1,145 @@
+{
+  "mode": "native_isolated_pulseaudio_monitor",
+  "verified": true,
+  "recording": "<workspace>/.git/story-chapter-review/native-preview/recording.json",
+  "output": {
+    "path": "<workspace>/docs/evidence/after-the-silence/chapter-01.mp4",
+    "sha256": "7e64baad6f4580db83ae6a99718b90b50a719428c3f8a5c797a0152a59ec05ba",
+    "video_duration_seconds": 93.666667,
+    "frames": 2810,
+    "fps": 30,
+    "audio_codec": "aac",
+    "audio_sample_rate": 48000,
+    "audio_channels": 2
+  },
+  "inputs": {
+    "video": {
+      "path": "<workspace>/.git/story-chapter-review/native-preview/capture/adventure-silent.mp4",
+      "sha256": "fb6573c9f8a1c64cfd55ef7e3f4335c817e3a87bb8fb5117275c28e84697e889"
+    },
+    "native_pcm": {
+      "path": "<workspace>/.git/story-chapter-review/native-preview/native-audio.mka",
+      "sha256": "fae6d0fdfe23ad7e69f57e66ada492353000f213a1bb6704b0068a3a5a027d63"
+    },
+    "telemetry": {
+      "path": "<workspace>/.git/story-chapter-review/native-preview/capture/telemetry.jsonl",
+      "sha256": "9a16152f024cd1a1c5cbd5931407646324c439953f78d8fa5d58cd04a733f70e"
+    },
+    "native_checks": {
+      "path": "<workspace>/.git/story-chapter-review/native-preview/capture/native-checks.json",
+      "sha256": "80eda9b73d12e3c18c6d7657a2a6fe3b55c2392abe409292acb9beba9cc3001c"
+    }
+  },
+  "processing": {
+    "audio_filter": "asetpts=N/SR/TB,atrim=start=4.334467173:duration=93.666667000,asetpts=PTS-STARTPTS",
+    "video_copied_without_reencoding": true,
+    "source_compressed_video_sha256": "373b2f058df2f6663fd086a564e88138466a3f0637ebb901a714f3d1211c2c7a",
+    "output_compressed_video_sha256": "373b2f058df2f6663fd086a564e88138466a3f0637ebb901a714f3d1211c2c7a",
+    "cuts": 0,
+    "synthesized_replacement": false,
+    "mix_reconstruction": false,
+    "gain_adjustment": false,
+    "time_stretching": false,
+    "correlation_used_to_shift_audio": false,
+    "analysis_filters_applied_to_output": false
+  },
+  "alignment": {
+    "video_origin_wall_seconds": 1789061275.220467,
+    "audio_first_packet_wall_seconds": 1789061270.886,
+    "audio_preroll_trim_seconds": 4.334467172622681,
+    "telemetry_origin_spread_ms": 51.96380615234375,
+    "packet_wallclock_minus_pcm_clock_range_ms": [
+      0.0,
+      571.6876754760749
+    ],
+    "packet_pcm_seconds": 98.42552083332338,
+    "native_latency_preserved": true,
+    "timestamp_precision_note": "MKA PTS are millisecond precision; decoded PCM advances on its sample clock.",
+    "video_sampling_uncertainty_ms": 33.333333333333336
+  },
+  "captured_phone_cues": [
+    {
+      "cue": "phone_send",
+      "phone_tick": 210,
+      "observed_phone_tick": 210,
+      "frame": 2791,
+      "video_seconds": 49.106082916259766,
+      "reference": "<workspace>/assets/adventure/chapter/audio/phone_send.wav",
+      "reference_sha256": "e7c36e8d4f1dcf173f3b06e274ff13ed14d1d7609362c6ee211937ca5bbcde39",
+      "match": {
+        "pcm_onset_seconds": 53.45047619047619,
+        "expected_pcm_seconds": 53.440550088882446,
+        "latency_ms": 9.926101593741521,
+        "correlation": 0.9100673780610602,
+        "template_seconds": 0.18,
+        "search_radius_seconds": 0.4,
+        "analysis_band_hz": null,
+        "muxed_onset_seconds": 49.11600901785351
+      }
+    },
+    {
+      "cue": "phone_receive",
+      "phone_tick": 510,
+      "observed_phone_tick": 510,
+      "frame": 3069,
+      "video_seconds": 54.10963821411133,
+      "reference": "<workspace>/assets/adventure/chapter/audio/phone_receive.wav",
+      "reference_sha256": "15156ebaab8c29009d06273423788e79f1d0b24984b859c06d2dd6b7948d3bef",
+      "match": {
+        "pcm_onset_seconds": 58.44784580498866,
+        "expected_pcm_seconds": 58.44410538673401,
+        "latency_ms": 3.74041825465099,
+        "correlation": 0.9739681597202741,
+        "template_seconds": 0.18,
+        "search_radius_seconds": 0.4,
+        "analysis_band_hz": null,
+        "muxed_onset_seconds": 54.11337863236598
+      }
+    },
+    {
+      "cue": "phone_send",
+      "phone_tick": 720,
+      "observed_phone_tick": 720,
+      "frame": 3265,
+      "video_seconds": 57.612213134765625,
+      "reference": "<workspace>/assets/adventure/chapter/audio/phone_send.wav",
+      "reference_sha256": "e7c36e8d4f1dcf173f3b06e274ff13ed14d1d7609362c6ee211937ca5bbcde39",
+      "match": {
+        "pcm_onset_seconds": 61.95591836734694,
+        "expected_pcm_seconds": 61.946680307388306,
+        "latency_ms": 9.238059958633471,
+        "correlation": 0.9248484334470665,
+        "template_seconds": 0.18,
+        "search_radius_seconds": 0.4,
+        "analysis_band_hz": null,
+        "muxed_onset_seconds": 57.62145119472426
+      }
+    }
+  ],
+  "levels": {
+    "aligned_native_pcm": {
+      "peak_normalized": 0.09881591796875,
+      "rms_normalized": 0.005699881625559578,
+      "samples_at_or_beyond_full_scale": 0
+    },
+    "decoded_aac": {
+      "peak_normalized": 0.09837248176336288,
+      "rms_normalized": 0.005687470868079546,
+      "samples_at_or_beyond_full_scale": 0
+    }
+  },
+  "telemetry": {
+    "rows": 5078,
+    "first_phase": "Intro",
+    "last_phase": "Complete",
+    "paused_rows": 0,
+    "combat_retries": 0
+  },
+  "raw_audio_retained": false,
+  "limitations": [
+    "Cue matching identifies local source signals in actual native output; it does not assess timbre or speakers.",
+    "Only timestamp-derived preroll is removed. Native buffering latency remains audible and is measured, not corrected.",
+    "Frame sampling, millisecond packet timestamps and the recorded telemetry clock spread limit sync precision.",
+    "Source assets are original synthesized effects; the exported soundtrack is the actual game recording."
+  ]
+}

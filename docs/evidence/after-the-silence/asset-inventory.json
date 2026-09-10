@@ -1,0 +1,86 @@
+{
+  "runtime_commit": "2a33f13",
+  "collector": "tools/release/package.py:runtime_assets",
+  "status": "passed",
+  "assets_count": 263,
+  "runtime_bytes": 166410794,
+  "chapter_assets": [
+    {
+      "path": "assets/adventure/chapter/DRIVER.md",
+      "bytes": 3068,
+      "sha256": "dd775da2d344062c9957c7c449e6e8626f4173c8a31c2e1bd9f0441b481a26e4"
+    },
+    {
+      "path": "assets/adventure/chapter/README.md",
+      "bytes": 8541,
+      "sha256": "17f36910fc6ed42e6c346487f45d3076d2867f84a0043b771a1f1aa166cbadd6"
+    },
+    {
+      "path": "assets/adventure/chapter/audio/README.md",
+      "bytes": 2981,
+      "sha256": "e7b96c3b7a274edb3c24d3121bfb48b19ba76e97eb9a73b8ade9672c75fc9b67"
+    },
+    {
+      "path": "assets/adventure/chapter/audio/footstep.wav",
+      "bytes": 6218,
+      "sha256": "e6e4eefdfb97b5ef3073aa9839b8cb716a1e67b07e7e9abc3ec1fee3946fdb75"
+    },
+    {
+      "path": "assets/adventure/chapter/audio/phone_pocket.wav",
+      "bytes": 14156,
+      "sha256": "7a30aff658f82fc750cadd74e4730f3c0cdedf2731ab73d1b798402e01f30dd8"
+    },
+    {
+      "path": "assets/adventure/chapter/audio/phone_receive.wav",
+      "bytes": 13274,
+      "sha256": "15156ebaab8c29009d06273423788e79f1d0b24984b859c06d2dd6b7948d3bef"
+    },
+    {
+      "path": "assets/adventure/chapter/audio/phone_send.wav",
+      "bytes": 7982,
+      "sha256": "e7c36e8d4f1dcf173f3b06e274ff13ed14d1d7609362c6ee211937ca5bbcde39"
+    },
+    {
+      "path": "assets/adventure/chapter/audio/phone_tap.wav",
+      "bytes": 3132,
+      "sha256": "c47dc32ae89fcf1a4485d8c617f26673c5d2ce216fa230eac649d0f36c23ba13"
+    },
+    {
+      "path": "assets/adventure/chapter/catalog.json",
+      "bytes": 6988,
+      "sha256": "c7f0a603c3fb83817e18aa686e0ad87e26368c41624be432048acd319e4e53f0"
+    },
+    {
+      "path": "assets/adventure/chapter/chapter-texts.json",
+      "bytes": 2847,
+      "sha256": "f9d27455c51ff3aac3c0aea7e20a15f34ad0255ef1cd7a5941bd20b56231f059"
+    },
+    {
+      "path": "assets/adventure/chapter/driver.png",
+      "bytes": 878782,
+      "sha256": "10aef02391b50458663be7d23c6cde79d5bb43bf63fd522e4b8a6d5e70e5a38e"
+    },
+    {
+      "path": "assets/adventure/chapter/lane.png",
+      "bytes": 2884832,
+      "sha256": "d8173ad8e2d256308a3f5fd1db063f95328bfb5fac647f11acb32d672bb23c18"
+    },
+    {
+      "path": "assets/adventure/chapter/phone-style.json",
+      "bytes": 251,
+      "sha256": "f628cb53478ae539fe1eec7dc12a0d200f2cc37373e8e4d2409a2d5ccc4d1108"
+    },
+    {
+      "path": "assets/adventure/chapter/rust-narrative.png",
+      "bytes": 2261685,
+      "sha256": "60a424907da69377a8bc856dc7a48a4fcca00e96a5e0cbac68aac1c60fce5368"
+    },
+    {
+      "path": "assets/adventure/chapter/world.json",
+      "bytes": 3371,
+      "sha256": "aa5831c630be3063d46239f3429427b8131e84a7b983774c80941eebb25000fc"
+    }
+  ],
+  "chapter_bytes": 6098108,
+  "verification": "Every collected path resolved to an existing file and was hashed; no duplicate staging tree or installer was built. Package dependency and staging fixtures passed 19 tests."
+}

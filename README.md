@@ -89,6 +89,7 @@ O submenu oferece continuar, recomeçar e rever o prólogo. Depois de visto ou
 pulado, o prólogo deixa de abrir automaticamente; as entradas explícitas
 `--start` continuam disponíveis. **Versus Setup** mantém a seleção livre.
 [Capítulo e estratégia de animação](docs/33-after-the-silence.md).
+[Prévia do capítulo com som nativo](docs/evidence/after-the-silence/chapter-01.mp4).
 [Escopo e verificação da junção](docs/29-story-terminal-menu.md).
 
 Os dois modos também continuam disponíveis isoladamente:

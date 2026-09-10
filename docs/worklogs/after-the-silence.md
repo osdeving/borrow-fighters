@@ -66,3 +66,27 @@ repetir geração, build ou captura. Não fazer merge/tag/publicação.
   reais da seleção Versus. Não foram falhas de gameplay; ver logs native-host-*.
 - Próximos passos: matriz por features/rebuild final; host com cliques no
   submenu; prévia contínua sem F12 com áudio nativo; evidências e commits finais.
+
+
+## Entrega final
+
+- Runtime e assets commitados em **`2a33f13`**. O código anterior permanece em
+  **`81c50e6`**; a base documental desta rodada é `8d4311f`.
+- Matriz: all-features 494 / 2 ignorados; adventure 100/0; fighting 394/2; core 3/0.
+  Os dois ignorados de áudio já existiam. Um Enter herdado no replay foi
+  corrigido omitindo comandos no frame 0: oito testes focais, Clippy e rebuild passaram.
+- Host final: `native-host-6`,21/21 checks, dez screenshots revisadas,61,319 s,
+  exit 0, nenhum erro X11. Cliques de História/Iniciar/Continuar e replay desde
+  o primeiro trecho de Ada comprovados; Versus preserva o checkpoint.
+- Prévia final: `native-preview`,93,666667 s, 2.810 frames, do Intro ao Complete,
+  sem pausa/retry/F12 e com aproximação da travessa corrigida. Três cues
+  confirmados por waveform, latência 3,7–9,9 ms, sem clipping. Vídeo copiado
+  integralmente; removido somente preroll de áudio. PCM temporário removido.
+- [Evidências finais](../evidence/after-the-silence/README.md) incluem vídeo,
+  capturas, testes, inventário de 263 assets e relatório sanitizado de limpeza no Windows.
+- Binários finais: adventure `525c6ca71a25463b48ba9cf66edf7737a270a76765c5bd737671e44cae29904d`;
+  story `83f508afffc42d91fde52f7c98e5918a9c03f199885f89d42b058a87c6abaeb8`.
+- Para retomar: `cargo run -- --menu` → Modo História ou `--start chapter`.
+  Não repetir geração/limpeza. Recuperação usa checkpoint em
+  `adventure/campaign-v1.json`; comparação anterior em branch separada de 81c50e6.
+  Nenhum merge/tag/push/publicação foi solicitado ou realizado.

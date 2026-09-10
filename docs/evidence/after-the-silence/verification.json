@@ -1,0 +1,286 @@
+{
+  "started_utc": "2026-09-10T17:25:32.738325+00:00",
+  "working_directory": "<workspace>",
+  "status": "passed",
+  "draft": false,
+  "cargo_target_directory": "<workspace>/target",
+  "environment": {
+    "CARGO_TARGET_DIR": "<workspace>/target",
+    "CARGO_NET_OFFLINE": "true",
+    "CARGO_TERM_COLOR": "never"
+  },
+  "git_head": "8d4311fc904a63a048fc284a842ad70f914f3d67",
+  "checks": [
+    {
+      "name": "all-features",
+      "command": [
+        "cargo",
+        "test",
+        "--all-features"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "log": ".git/story-chapter-review/final-all-features.log",
+      "elapsed_seconds": 10.326,
+      "rust_tests": {
+        "passed": 494,
+        "failed": 0,
+        "ignored": 2,
+        "measured": 0,
+        "filtered_out": 0,
+        "target_summaries": 39
+      },
+      "ignored_test_lines": [
+        "test engine::audio::live_review::live_match_pause_preserves_music_cursor_and_resumes_only_suspended_sounds ... ignored, requires an audio device; run manually with --ignored --nocapture",
+        "test engine::audio::live_review::live_music_pause_resume_and_cancel_preserve_stream_position ... ignored, requires an audio device; run manually with --ignored --nocapture"
+      ]
+    },
+    {
+      "name": "adventure-only",
+      "command": [
+        "cargo",
+        "test",
+        "--no-default-features",
+        "--features",
+        "adventure"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "log": ".git/story-chapter-review/final-adventure-only.log",
+      "elapsed_seconds": 3.202,
+      "rust_tests": {
+        "passed": 100,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered_out": 0,
+        "target_summaries": 3
+      },
+      "ignored_test_lines": []
+    },
+    {
+      "name": "fighting-only",
+      "command": [
+        "cargo",
+        "test",
+        "--no-default-features",
+        "--features",
+        "fighting"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "log": ".git/story-chapter-review/final-fighting-only.log",
+      "elapsed_seconds": 9.42,
+      "rust_tests": {
+        "passed": 394,
+        "failed": 0,
+        "ignored": 2,
+        "measured": 0,
+        "filtered_out": 0,
+        "target_summaries": 37
+      },
+      "ignored_test_lines": [
+        "test engine::audio::live_review::live_match_pause_preserves_music_cursor_and_resumes_only_suspended_sounds ... ignored, requires an audio device; run manually with --ignored --nocapture",
+        "test engine::audio::live_review::live_music_pause_resume_and_cancel_preserve_stream_position ... ignored, requires an audio device; run manually with --ignored --nocapture"
+      ]
+    },
+    {
+      "name": "core-only",
+      "command": [
+        "cargo",
+        "test",
+        "--no-default-features"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "log": ".git/story-chapter-review/final-core-only.log",
+      "elapsed_seconds": 0.169,
+      "rust_tests": {
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered_out": 0,
+        "target_summaries": 2
+      },
+      "ignored_test_lines": []
+    },
+    {
+      "name": "native-final-build",
+      "command": [
+        "cargo",
+        "build",
+        "--locked",
+        "--bin",
+        "borrow-adventure",
+        "--bin",
+        "borrow-story"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "log": ".git/story-chapter-review/final-native-final-build.log",
+      "elapsed_seconds": 1.586
+    },
+    {
+      "name": "post-frame0-app",
+      "command": [
+        "cargo",
+        "test",
+        "--lib",
+        "adventure::app"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "log": ".git/story-chapter-review/final-post-frame0-app.log",
+      "elapsed_seconds": 1.523,
+      "rust_tests": {
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered_out": 153,
+        "target_summaries": 1
+      }
+    },
+    {
+      "name": "post-frame0-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "log": ".git/story-chapter-review/final-post-frame0-clippy.log",
+      "elapsed_seconds": 2.647
+    },
+    {
+      "name": "post-frame0-build",
+      "command": [
+        "cargo",
+        "build",
+        "--locked",
+        "--bin",
+        "borrow-adventure",
+        "--bin",
+        "borrow-story"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "log": ".git/story-chapter-review/final-post-frame0-build.log",
+      "elapsed_seconds": 0.074
+    }
+  ],
+  "previous_checks_reported_by_parent": [
+    {
+      "name": "cargo_fmt_check",
+      "status": "reported_passed",
+      "rerun": false
+    },
+    {
+      "name": "cargo_clippy_all_targets_all_features_warnings_denied",
+      "status": "reported_passed",
+      "rerun": false
+    },
+    {
+      "name": "package_tests",
+      "passed": 19,
+      "status": "reported_passed",
+      "rerun": false,
+      "log": ".git/story-chapter-review/package-final.log"
+    },
+    {
+      "name": "boundary_tests",
+      "passed": 56,
+      "status": "reported_passed",
+      "rerun": false,
+      "log": ".git/story-chapter-review/boundary-tests.log"
+    },
+    {
+      "name": "chapter_audio_tests",
+      "passed": 12,
+      "status": "reported_passed",
+      "rerun": false,
+      "log": ".git/story-chapter-review/chapter-audio-tests.log"
+    }
+  ],
+  "native_windows_launched": false,
+  "staging_performed": false,
+  "source_changes_during_matrix": [
+    "src/adventure/app.rs"
+  ],
+  "binaries": {
+    "borrow-adventure": {
+      "path": "target/debug/borrow-adventure",
+      "bytes": 25771488,
+      "sha256": "525c6ca71a25463b48ba9cf66edf7737a270a76765c5bd737671e44cae29904d"
+    },
+    "borrow-story": {
+      "path": "target/debug/borrow-story",
+      "bytes": 28871408,
+      "sha256": "83f508afffc42d91fde52f7c98e5918a9c03f199885f89d42b058a87c6abaeb8"
+    }
+  },
+  "source_assets_manifest": {
+    "path": ".git/story-chapter-review/source-assets-sha256.json",
+    "sha256": "ca70b534898168e56526c74cc2ddc983ac752ec720da950a1b4fca9908984cb5",
+    "source_files": 171,
+    "asset_files": 4290,
+    "asset_bytes": 2284608262
+  },
+  "finished_utc": "2026-09-10T17:27:12.110703+00:00",
+  "post_matrix_change": {
+    "path": "src/adventure/app.rs",
+    "reason": "Parent fixed inherited Enter in first prologue frame after chapter replay. Requested focal test, Clippy and rebuild without repeating the full matrix.",
+    "source_sha256_before_followup": "7fdd217a9096a98ee09885443d0ea9ba81091227e32a496ce99a69a9d2605e19",
+    "changed_sources_during_followup": [],
+    "source_sha256_after_followup": "7fdd217a9096a98ee09885443d0ea9ba81091227e32a496ce99a69a9d2605e19",
+    "validated_by": [
+      "post-frame0-app",
+      "post-frame0-clippy",
+      "post-frame0-build"
+    ]
+  },
+  "git_head_at_completion": "2a33f13c0eb31cbda84805eada80702e4c0deaa7",
+  "runtime_commit": "2a33f13",
+  "additional_checks": [
+    {
+      "command": "cargo fmt --check",
+      "status": "passed"
+    },
+    {
+      "command": "python3.13 tools/check_domain_boundaries.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3.13 -m unittest discover -s tools -p test_check_domain_boundaries.py",
+      "passed": 56,
+      "failed": 0
+    },
+    {
+      "command": "python3.13 -m unittest discover -s tools/release -p test_package.py",
+      "passed": 19,
+      "failed": 0
+    },
+    {
+      "command": "ruby .git/traffic-review/validate_docs.rb",
+      "status": "passed",
+      "yaml_files": 19,
+      "markdown_links_at_checkpoint": 1579
+    }
+  ],
+  "native_scope": "X11 owned windows; native audio preview uses an exclusive Pulse sink. No physical controller or Windows game binary test was performed.",
+  "delivery_check": {
+    "source_assets_unchanged_after_tests": 171,
+    "runtime_commit": "2a33f13",
+    "final_local_markdown_links": 1605,
+    "yaml_files": 19,
+    "host_checks": 21,
+    "native_preview_frames": 2810,
+    "native_preview_seconds": 93.666667
+  }
+}

@@ -59,3 +59,12 @@ assets, saves ou checkpoints; não parar WSL/Codex para compactar discos virtuai
 
 [ADR 0027](adr/0027-chapter-spatial-direction.md) ·
 [Diário](worklogs/after-the-silence.md).
+
+
+## Entrega
+
+Implementado em **`2a33f13`**. [Prévia, capturas e verificações](evidence/after-the-silence/README.md).
+O capítulo inicia pelo Modo História; `--start chapter` serve à entrada direta.
+Os testes finais cobrem cada feature isolada, fluxo do host, interação, telefone,
+checkpoint e contato. A limpeza recuperou 517,65 MiB de temporários do Windows.
+Não há nova release publicada por esta entrega.

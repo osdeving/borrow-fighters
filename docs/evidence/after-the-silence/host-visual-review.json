@@ -1,0 +1,83 @@
+{
+  "executable_sha256": "83f508afffc42d91fde52f7c98e5918a9c03f199885f89d42b058a87c6abaeb8",
+  "inspection": "Visual inspection of all ten original XGetImage PNGs; pixels unchanged.",
+  "captures": [
+    {
+      "file": "screenshots/01-first-launch-ada.png",
+      "sha256": "028cde78e81db9bdc248380ce0cc312df946f483e5c581f9b125c97af462fc47",
+      "passed": true,
+      "notes": "Ada escreve no primeiro trecho; somente o primeiro marcador está dourado."
+    },
+    {
+      "file": "screenshots/02-returning-main-menu.png",
+      "sha256": "52ec3dd929955fbadd39bf0cba0e049b7237b86c332b17266a13b5876cfd9ea1",
+      "passed": true,
+      "notes": "Segundo lançamento sem argumentos abre o menu principal; Modo História está disponível."
+    },
+    {
+      "file": "screenshots/03-campaign-submenu.png",
+      "sha256": "93eba6ee1b64d9ef1ca4296ce0ed674d3625889875879617af574880e7fbeaed",
+      "passed": true,
+      "notes": "Submenu oferece Iniciar capítulo, Rever prólogo e Voltar; rodapé Setas / direcional está legível."
+    },
+    {
+      "file": "screenshots/04-new-chapter-arrival.png",
+      "sha256": "60178077cfcb23d7dc303e7eac534d91285cbeceb7b3ed9526db0dcf0bfc2a11",
+      "passed": true,
+      "notes": "Introdução mostra carro acidentado, motorista e Rust; mantém as consequências da rua."
+    },
+    {
+      "file": "screenshots/05-driver-checked.png",
+      "sha256": "182d2feca7555c05ae2d671a9de1588757f959238911f46d77f6d9c85c017cbe",
+      "passed": true,
+      "notes": "Rust voltou ao plano jogável; objetivo mudou para Converse com o lojista."
+    },
+    {
+      "file": "screenshots/06-continue-submenu.png",
+      "sha256": "c397fbeb5376ebb871a4344de50c9aa7ad1b1880aa0bca8eb2ee708455997794",
+      "passed": true,
+      "notes": "Continuar capítulo aparece sobre o estado salvo após o motorista."
+    },
+    {
+      "file": "screenshots/07-resumed-shop-complete.png",
+      "sha256": "f5d2ccef5e5c48124b331bebc03001935279f3a1bf4a0d8aaa0a08cc761cb181",
+      "passed": true,
+      "notes": "Após Continuar e interação com o lojista, Rust está no plano jogável e o objetivo é Ouça a moradora."
+    },
+    {
+      "file": "screenshots/08-explicit-prologue-replay.png",
+      "sha256": "455d33e76a302aa2f04996407885e401c3fdd757ffc6dbacb091a43e7daa8a5e",
+      "passed": true,
+      "notes": "Replay retorna ao primeiro trecho de Ada; somente o primeiro marcador dourado, sem reaproveitar Enter."
+    },
+    {
+      "file": "screenshots/09-versus-selection.png",
+      "sha256": "fb191c099a337eebff2b28c8f170dcad2f91ddb5bcd7995fac26a2cef8d51701",
+      "passed": true,
+      "notes": "Tela de seleção Versus mostra Rust, Duke, Old C, Python e C++, com seleções P1/P2 e arena."
+    },
+    {
+      "file": "screenshots/10-final-main-menu.png",
+      "sha256": "6dca6fd4bbd0d78bc1e1a78f79457bc43da06624fdc4a756d342b6f8e7bed7f8",
+      "passed": true,
+      "notes": "Escape retorna ao menu principal; Versus Setup continua selecionado."
+    }
+  ],
+  "native_checks": "21/21 passed",
+  "save_provenance": {
+    "version": 1,
+    "prologue_seen": true,
+    "prologue_played_victory": false,
+    "street_wake_tick": null,
+    "checkpoint": {
+      "version": 1,
+      "stage": "shop_checked",
+      "prologue_played_victory": false
+    }
+  },
+  "limitations": [
+    "No physical gamepad test.",
+    "No audio listening assessment.",
+    "This host test covers startup, menu routing and checkpoints; full combat belongs to the separate chapter harness."
+  ]
+}

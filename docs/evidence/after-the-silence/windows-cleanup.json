@@ -1,0 +1,23 @@
+{
+  "status": "completed",
+  "scope": "Physical Windows C: temporary files only; no WSL cleanup counted as Windows recovery.",
+  "inspection": "Only names, sizes, timestamps, executable/version/signature metadata and exclusive-open availability were inspected; no personal file content was read.",
+  "started_utc": "2026-09-10T16:51:57.5212575Z",
+  "finished_utc": "2026-09-10T16:51:58.9694617Z",
+  "c_free_bytes_before": 4995858432,
+  "c_free_bytes_after": 5538652160,
+  "c_observed_free_bytes_increase": 542793728,
+  "d_free_bytes_before": 11825057792,
+  "d_free_bytes_after": 11825057792,
+  "removed_logical_bytes": 540824879,
+  "removed_categories": {
+    "owned_windows_test_directories": 7,
+    "completed_unused_vscode_installer": 1
+  },
+  "preserved": [
+    "Personal files and saves",
+    "Codex profile/conversations",
+    "Windows Update cache",
+    "Active WSL swap.vhdx files"
+  ]
+}
