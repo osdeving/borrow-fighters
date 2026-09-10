@@ -2,12 +2,19 @@
 
 ## Estado atual
 
-O corte em preparação é **v0.1.0-prototype.5 — Depois do silêncio**, aprovado
-para publicação: primeiro capítulo de Rust, checkpoints, conversa por celular,
-rua brasileira, evacuação e chegada cinematográfica.
+O corte **v0.1.0-prototype.5 — Depois do silêncio** foi integrado à `main` pelo
+[PR #23](https://github.com/osdeving/borrow-fighters/pull/23), no commit
+`8feb045ca4d34d1ea05d81b7ecb67967cd5115b7`: primeiro capítulo de Rust,
+checkpoints, conversa por celular, rua brasileira, evacuação e chegada
+cinematográfica. A tag anotada aponta para essa revisão. A
+[pré-release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.5)
+foi publicada em 10 de setembro de 2026, às 18:13 UTC, com cinco pacotes e
+`SHA256SUMS.txt`. Os builds Windows/Linux e a publicação passaram no
+[workflow da tag](https://github.com/osdeving/borrow-fighters/actions/runs/34511931462).
 [Notas da versão](releases/v0.1.0-prototype.5.md) e
 [diário da release](worklogs/release-prototype-5.md) acompanham integração,
-builds, pacotes e verificação dos downloads.
+builds, pacotes e verificação dos downloads. Os cinco arquivos públicos
+conferiram com os checksums; os dois portáteis incluem os 263 assets esperados.
 
 A versão publicada anterior é a
 [prototype.4](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.4),
@@ -63,8 +70,8 @@ O workflow [Playtest Release](../.github/workflows/release.yml) faz:
 
 1. Validar versão e presença de notas em `docs/releases/vVERSAO.md`.
 2. Compilar/testar a entrada conjunta em Ubuntu 22.04 e Windows 2022 com `Cargo.lock`.
-3. Executar fmt, testes e Clippy em ambas as plataformas; verificar também
-   as combinações isoladas de features e suas fronteiras.
+3. Executar fmt, testes com as features padrão, Clippy com todas as features
+   e testes do empacotador em ambas as plataformas.
 4. Selecionar assets, empacotar dependências e preparar os cinco downloads.
 5. Verificar instalação/desinstalação no Windows e carregamento do executável;
    verificar DEB com inicialização gráfica por Xvfb e instalação RPM no Fedora,
@@ -72,6 +79,11 @@ O workflow [Playtest Release](../.github/workflows/release.yml) faz:
 6. Em push de `release/*`, disponibilizar os pacotes como artefatos do Actions.
 7. Em push de tag, criar release inicialmente em rascunho, anexar todos os
    downloads e `SHA256SUMS.txt`, e então publicar como pré-release.
+
+O workflow [Rust Check](../.github/workflows/rust-check.yml), executado em Ubuntu
+nos PRs e na `main`, verifica também as features isoladas de aventura, luta e
+núcleo compartilhado, além das fronteiras entre os domínios. Essa matriz
+complementar não roda no job Windows do Playtest Release.
 
 O job de publicação recebe `contents: write`; builds usam apenas leitura.
 Uma release já publicada não é sobrescrita pelo workflow. Correções posteriores
