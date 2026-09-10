@@ -5,10 +5,11 @@
 Este documento é a fonte de verdade para **o que vem agora**, com filas separadas
 de **to-do** (investigações e melhorias) e **bugfix** (defeitos observados).
 
-Prioridade atual, em 10 de setembro de 2026: preparar a **release
-`v0.1.0-prototype.4`**, integrar o trabalho à `main` e distribuir aventura,
-apresentação e menu na mesma execução. O episódio de aventura 2D narrativa
-solo protagonizada por Rust foi implementado na branch
+Prioridade atual, em 10 de setembro de 2026: avaliar o episódio, a apresentação
+e o menu integrado da **release `v0.1.0-prototype.4`**, publicada com aventura
+e luta na mesma execução. O playtest humano continua no TODO-013; a publicação
+concluiu a frente de distribuição. O episódio de aventura 2D narrativa solo
+protagonizada por Rust foi implementado na branch
 `feature/rust-adventure-prologue`. O [episódio autorizado](27-rust-story-adventure.md)
 mostra Ada, a mensagem misteriosa e Assembly; muito tempo depois, Rust acorda,
 enfrenta uma errática e reage com pesar à vitória. A lore aceita foi sincronizada
@@ -22,7 +23,9 @@ externo com F5, corrige o apoio na cama e apresenta o universo após o pesar.
 [Vídeos atuais e prova da recarga](evidence/adventure-opening/README.md).
 A [junção e navegação](29-story-terminal-menu.md) passa a ser padrão em
 `cargo run` e nos pacotes; [notas da prototype.4](releases/v0.1.0-prototype.4.md).
-Publicação e integração ainda são acompanhadas no diário.
+A entrega foi integrada à `main` pelo [PR #21](https://github.com/osdeving/borrow-fighters/pull/21)
+e publicada como [pré-release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.4),
+com cinco downloads e checksums. [Registro da release](worklogs/release-prototype-4.md).
 As pendências do Prototype 3 permanecem registradas abaixo. Estar no backlog,
 mesmo com prioridade alta, **não significa execução ativa**.
 
@@ -87,9 +90,8 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Próxima ação |
 |---|---|---|---|---|
-| Agora | Publicar prototype.4 e integrar à main | Corte em preparação; builds e publicação pendentes | [Processo](06-release-process.md), [notas](releases/v0.1.0-prototype.4.md), [diário](worklogs/rust-adventure-prologue.md) | Verificar pacotes com aventura/menu, integrar, criar tag e conferir os cinco downloads. |
-| Próximo | Avaliar episódio, apresentação e menu integrado | Junção entregue; playtest humano pendente, TODO-013 | [Entrega 29](29-story-terminal-menu.md), [vídeo e verificações](evidence/story-terminal-menu/README.md), [diário](worklogs/rust-adventure-prologue.md) | Jogar desde Ada até o menu; avaliar continuidade visual e navegação. Modo História fica reservado para a continuação. |
-| Depois | Definir continuidade da aventura | Aguardando avaliação do episódio | [Critérios da entrega 27](27-rust-story-adventure.md#critérios-de-aceite) | Decidir ajustes ou expansão a partir do playtest; ideias de Vínculo/Sirius continuam estacionadas. |
+| Agora | Avaliar episódio, apresentação e menu integrado | Prototype.4 publicada; playtest humano pendente, TODO-013 | [Entrega 29](29-story-terminal-menu.md), [vídeo e verificações](evidence/story-terminal-menu/README.md), [diário](worklogs/rust-adventure-prologue.md) | Jogar desde Ada até o menu; avaliar continuidade visual e navegação. Modo História fica reservado para a continuação. |
+| Próximo | Definir continuidade da aventura | Aguardando avaliação do episódio | [Critérios da entrega 27](27-rust-story-adventure.md#critérios-de-aceite) | Decidir ajustes ou expansão a partir do playtest; ideias de Vínculo/Sirius continuam estacionadas. |
 | Depois | Pendências do Prototype 3 | Backlog; sem execução ativa | [To-do](#backlog-de-to-do), [bugfix](#backlog-de-bugfix) | Retomar itens por prioridade e evidência, em entregas pequenas, quando esta frente for reaberta. |
 
 ## Backlog de to-do
@@ -150,6 +152,7 @@ execução nem aprovação humana das pendências listadas acima.
 
 | Janela | Frente | Status | Registro | Proxima acao |
 |---|---|---|---|---|
+| Concluído | Release prototype.4: aventura, apresentação e menu | Publicada em 10/09/2026; integrada à main pelo PR #21, tag em `20ef404` | [Downloads](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.4), [notas](releases/v0.1.0-prototype.4.md), [diário e checks](worklogs/release-prototype-4.md) | Cinco pacotes Windows/Linux e SHA256SUMS disponíveis; builds/publicação e checks Rust/Docs aprovados. Playtest humano permanece nos TODO-002/013. |
 | Concluído | Textos editáveis, manhã e apresentação da aventura | Implementado na branch; TODO-014/015 e BUG-005 | [Entrega 28](28-adventure-texts-and-opening.md), [ADR 0022](adr/0022-adventure-external-copy-and-opening.md), [evidências](evidence/adventure-opening/README.md) | 417 testes e 26 checks nativos; avaliação humana no TODO-013. |
 | Concluído | Aventura: prólogo de Ada e primeiro encontro de Rust | Implementado e verificado na branch `feature/rust-adventure-prologue`; TODO-012 | [Entrega 27](27-rust-story-adventure.md), [ADR 0021](adr/0021-isolated-adventure-experiment.md), [evidências](evidence/adventure-prologue/README.md) | Avaliação humana no TODO-013; regras específicas isoladas da luta, 412 testes e sequência completa gravada. |
 | Concluído | Apresentação e fluxo do playtest | Integrado à main; PR #19 | [Entrega 26](26-playtest-visual-completion.md), [ADR 0020](adr/0020-match-flow-selection-and-energy.md), [UI e fluxo](evidence/playtest-visual-flow/README.md), [reações](evidence/roster-contact-reactions/README.md) | 128 desenhos, 120 cenários renderizados, três partidas e duas revanches, 393 testes, Windows/Linux verificados. Próximo: playtest humano e balanceamento fino. |

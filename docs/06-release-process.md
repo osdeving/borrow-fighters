@@ -2,11 +2,16 @@
 
 ## Estado atual
 
-O corte em preparação é `v0.1.0-prototype.4`: aventura de Ada/Rust,
+O corte publicado é `v0.1.0-prototype.4`: aventura de Ada/Rust,
 primeiro encontro, apresentação, skip e menu de terminal na mesma execução.
-A solicitação desta release inclui commit de todo o trabalho e integração à
-`main`. Build, publicação e resultado serão registrados no
-[diário](worklogs/rust-adventure-prologue.md).
+A [pré-release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.4)
+foi publicada em 10 de setembro de 2026, com cinco downloads e `SHA256SUMS.txt`.
+O [PR #21](https://github.com/osdeving/borrow-fighters/pull/21) integrou todo o trabalho à
+`main`; a tag anotada aponta para `20ef404ec4e3e44cc2dd9277cd10a9180d80d319`.
+Builds Windows/Linux e publicação passaram no
+[workflow da tag](https://github.com/osdeving/borrow-fighters/actions/runs/34477806614).
+Os checks Rust e Docs da `main` também passaram; detalhes e limites estão no
+[diário da release](worklogs/release-prototype-4.md).
 A [ADR 0019](adr/0019-playtest-distribution.md) registra plataformas e distribuição;
 a [ADR 0023](adr/0023-story-to-terminal-menu.md) registra a entrada conjunta.
 As [notas da versão](releases/v0.1.0-prototype.4.md) explicam a entrega ao jogador.
