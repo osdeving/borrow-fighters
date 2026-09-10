@@ -6,7 +6,7 @@ Status: **Prototype 0.1 / Greybox jogável / Vertical slice em evolução**
 
 ## Baixar e jogar (sem instalar Rust)
 
-A versão **v0.1.0-prototype.4** está em preparação, com aventura de Ada/Rust,
+A versão do playtest é **v0.1.0-prototype.4**, com aventura de Ada/Rust,
 apresentação do universo e menu de terminal na mesma execução.
 [Downloads e instruções da release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.4):
 instalador/ZIP para Windows 10 (1903+) ou 11, DEB para Debian/Ubuntu, RPM para Fedora e

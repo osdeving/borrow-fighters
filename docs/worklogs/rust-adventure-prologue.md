@@ -2,9 +2,11 @@
 
 ## Estado atual
 
-- Fechamento autorizado de `v0.1.0-prototype.4`: todos os arquivos, incluindo
-  as edições narrativas do usuário, serão commitados e integrados à `main`.
-  O estado da publicação está no [diário da release](release-prototype-4.md).
+- `v0.1.0-prototype.4` [publicada](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.4)
+  em 10/09/2026. Todo o trabalho, incluindo as edições narrativas do usuário,
+  foi commitado e integrado à `main` pelo [PR #21](https://github.com/osdeving/borrow-fighters/pull/21),
+  commit `20ef404ec4e3e44cc2dd9277cd10a9180d80d319`. A tag aponta para esse commit.
+  Builds, checks e fechamento estão no [diário da release](release-prototype-4.md).
 - Entrada conjunta oficial por pedido do usuário: `cargo run` executa
   `borrow-story`, com `fighting` e `adventure` habilitadas por padrão.
   `cargo run -- --menu` entra no menu e `cargo run -- --start opening` revê
@@ -27,7 +29,8 @@
   tecla segurada, skip direto e revisão automática verificados. Capturas,
   vídeo e resultados em [evidências da navegação](../evidence/story-terminal-menu/navigation/README.md).
   Sem etapa técnica pendente. Controle físico e avaliação auditiva não realizados.
-  Trabalho local sobre `f90304b`; alterações não commitadas preservadas.
+  A retomada partiu de `f90304b`; as alterações preservadas foram
+  posteriormente incluídas na release prototype.4.
 - Rodada 3 concluída: [junção com menu de terminal](../29-story-terminal-menu.md)
   e [ADR 0023](../adr/0023-story-to-terminal-menu.md). Go saiu da apresentação;
   conclusão abre o menu na mesma janela; Modo História inerte, cursor bloco,
@@ -41,10 +44,12 @@
   Fmt, Clippy, 54 fixtures de fronteira e 14 checks nativos aprovados. Mesmo PID
   e janela; transição em aproximadamente 1,23 s com fades; saídas e janela antes
   oculta verificadas. [Capturas e vídeo](../evidence/story-terminal-menu/README.md).
-- Edições do usuário em `assets/adventure/texts/pt-BR.json` continuam preservadas
-  fora dos commits. Não reformatar nem restaurar o arquivo.
+- Edições do usuário em `assets/adventure/texts/pt-BR.json` foram preservadas
+  e incluídas nos commits da release. Não restaurar o arquivo a partir das
+  capturas anteriores.
 - Rodada 2 concluída: [textos editáveis, encaixe na cama e apresentação](../28-adventure-texts-and-opening.md).
-- Branch: `feature/rust-adventure-prologue`.
+- Branch original da aventura: `feature/rust-adventure-prologue`; trabalho
+  integrado à `main` na release prototype.4.
 - Base inicial: `ca63b25` (`v0.1.0-prototype.3`); base da continuação: `0046312`.
 - Checkpoints da continuação: `7ca6cc8` (escopo), `6f911ec` (implementação/arte),
   `1352fe2` (prova de F5 e controles). O commit seguinte fecha docs/evidências.
@@ -60,8 +65,9 @@
 - Sem etapa técnica pendente. Avaliação humana continua no TODO-013. Contagens
   e vídeos da rodada 2 abaixo são históricos; a rodada 3 está nos links acima.
 - Durante o fechamento apareceram edições externas em `assets/adventure/texts/pt-BR.json`.
-  O JSON e suas chaves foram conferidos; alterações preservadas no working tree,
-  fora dos commits do agente. Não restaurar esse arquivo a partir das capturas:
+  O JSON e suas chaves foram conferidos; naquela rodada, as alterações foram
+  preservadas no working tree e fora dos commits do agente. A release prototype.4
+  incluiu essas edições por autorização do usuário. Não restaurar esse arquivo a partir das capturas:
   os vídeos representam o texto de `6f911ec`, anterior a essas edições.
 - [Vídeos, relatórios e reprodução da rodada 2](../evidence/adventure-opening/README.md).
   A [rodada inicial](../evidence/adventure-prologue/README.md) permanece histórica.

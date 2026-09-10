@@ -2,8 +2,10 @@
 
 ## v0.1.0-prototype.4 — Aventura, apresentação e menu integrado
 
-Corte em preparação; publicação e pacotes acompanhados no
-[processo de release](docs/06-release-process.md).
+Publicado em 10 de setembro de 2026, com cinco pacotes e `SHA256SUMS.txt`
+na [pré-release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.4).
+Integrado à `main` pelo [PR #21](https://github.com/osdeving/borrow-fighters/pull/21);
+[verificações e registro da publicação](docs/worklogs/release-prototype-4.md).
 
 - `cargo run` e os pacotes iniciam a aventura, a apresentação e o menu na mesma
   janela. `borrow-story` é a entrada padrão, com `adventure` e `fighting`
