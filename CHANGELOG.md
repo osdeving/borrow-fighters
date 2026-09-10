@@ -92,6 +92,8 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 
 ### Experimento de aventura
 
+- Som da manhã substituído por notas suaves, removendo ruído contínuo e pássaros
+  agudos após relato de chiado; o WAV externo dispensa recompilação.
 - Textos em JSON editável com F5 e `--texts`, incluindo terminal, legendas,
   interface, manchetes e subtítulo; reload inválido preserva a última versão.
 - Encaixe da manhã corrigido por apoios anatômicos no colchão e no chão.

@@ -54,15 +54,24 @@ def ada(t, rng):
     return pad * (0.85 + 0.15 * cos(TAU * t / 12)) + mechanism + memory
 
 
-def morning(t, rng):
-    bed = sum(sin(TAU * f * t) for f in (130.81, 196, 261.63)) * 0.045
-    wind = rng.uniform(-1, 1) * 0.006
-    birds = 0.0
-    for start in (1.2, 1.47, 4.8, 5.09, 8.2, 10.4):
-        age = t - start
-        if 0 <= age <= 0.18:
-            birds += 0.065 * sin(pi * age / 0.18) ** 2 * sin(TAU * (1800 * age + 2500 * age * age))
-    return bed + wind + birds
+def morning(t, _rng):
+    """Quiet electric-piano-like notes with soft attacks and no noise layer."""
+    phrase = ((0.15, 261.63), (1.5, 329.63), (3.0, 392.0),
+              (4.8, 523.25), (6.7, 392.0), (8.3, 329.63), (10.0, 293.66))
+    melody = 0.0
+    for start, frequency in phrase:
+        # Include the previous phrase's tails so the loop's harmony connects.
+        for previous_loop in (0.0, -12.0):
+            age = t - start - previous_loop
+            if age < 0.0:
+                continue
+            soft_attack = (1.0 - exp(-age / 0.06)) ** 2
+            decay = exp(-age / 1.25)
+            tone = (sin(TAU * frequency * age)
+                    + 0.16 * exp(-age * 0.8) * sin(TAU * frequency * 2 * age)
+                    + 0.035 * exp(-age * 0.9) * sin(TAU * frequency * 3 * age))
+            melody += 0.20 * soft_attack * decay * tone
+    return melody
 
 
 def threat(t, rng):
@@ -101,7 +110,7 @@ def transition(t, rng):
 def main():
     for name, duration, sampler, peak in (
         ('ada.wav', 12.0, ada, 0.48),
-        ('morning.wav', 12.0, morning, 0.42),
+        ('morning.wav', 12.0, morning, 0.28),
         ('threat.wav', 12.0, threat, 0.48),
         ('remorse.wav', 12.0, remorse, 0.40),
         ('strike.wav', 0.22, strike, 0.74),

@@ -74,6 +74,14 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 
 ## Checkpoints
 
+- 2026-09-10, ajuste pontual de áudio: usuário relatou ruído na manhã. A faixa
+  antiga continha vento aleatório e pássaros agudos; `morning.wav` foi substituída
+  por notas suaves sem essas camadas, com gerador sincronizado. PCM16 mono/22050,
+  12 s, pico -11,06 dBFS, zero clipping e junção do loop em zero. Binário existente
+  abriu a manhã com áudio e encerrou com código 0. Hashes confirmam preservação
+  dos outros oito WAVs e das edições do usuário no JSON. BUG-006 concluído.
+  Não houve alteração Rust nem necessidade de recompilar; reabrir carrega o WAV.
+
 - 2026-09-10, rodada 2 verificada: `6f911ec` registra implementação, arte,
   catálogo e trilha. 26 checks nativos passaram, incluindo F5 válido/inválido,
   prova visual de texto preservado, hashes do mesmo binário, combate e

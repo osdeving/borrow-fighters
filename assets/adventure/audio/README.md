@@ -11,7 +11,7 @@ ou os oito WAVs anteriores. Aplicam-se as licenças do repositório.
 | Arquivo | Uso | Duração |
 |---|---|---|
 | `ada.wav` | Acordes discretos, pequenos mecanismos e sinos na descoberta de Ada | 12 s, loop |
-| `morning.wav` | Acorde leve, ar e pássaros sintetizados na manhã de Rust | 12 s, loop |
+| `morning.wav` | Notas suaves de timbre semelhante a piano elétrico na manhã de Rust | 12 s, loop |
 | `threat.wav` | Pulso grave e tensão durante a ameaça | 12 s, loop |
 | `remorse.wav` | Notas descendentes suaves durante o gesto de pesar | 12 s, loop |
 | `opening.wav` | Apresentação com notícias, heroínas, elenco e chegada musical do logo | 48 s, sem loop |
@@ -24,6 +24,11 @@ Os WAVs usam PCM mono de 16 bits a 22.050 Hz, com envelopes nas extremidades e
 pico limitado antes da conversão. São áudio original de piloto; a qualidade e o
 equilíbrio ainda devem ser julgados por audição humana. O adaptador de aventura
 usa volume base de 0,3 e mantém o ponto de reprodução quando o jogo é pausado.
+
+A revisão de `morning.wav` remove o ruído aleatório de vento, os pássaros agudos
+e o acorde grave contínuo, após relato de chiado pelo usuário. A nova versão usa
+somente notas com ataque suave, harmônicos discretos e pico de 0,28. Foi
+substituído o WAV externo; reabrir o jogo carrega a mudança sem recompilar.
 
 `opening.wav` é uma composição original a 120 BPM, com baixo pulsado,
 percussão sintetizada, arpejos, melodias próprias e crescimento de intensidade.

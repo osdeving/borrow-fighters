@@ -120,7 +120,8 @@ visuais observados na [revisão dos contatos](evidence/roster-contact-reactions/
 também registrados na [entrega 26](26-playtest-visual-completion.md#estado-da-entrega).
 Os testes mecânicos existentes não comprovam que estes problemas de apresentação
 foram resolvidos.
-BUG-005 foi relatado pelo usuário na aventura e corrigido na entrega 28.
+BUG-005 foi corrigido na entrega 28; BUG-006 substitui o som da manhã após
+relato de ruído pelo usuário.
 
 | ID | Defeito observado | Prioridade | Critério de conclusão / evidência esperada |
 |---|---|---|---|
@@ -129,6 +130,7 @@ BUG-005 foi relatado pelo usuário na aventura e corrigido na entrega 28.
 | BUG-003 | Go mantém as mãos altas na guarda em pé quando o soco atinge o abdômen | Baixa | Revisar a pose/contato documentado e conferir a defesa nos dois sentidos, preservando as regras de bloqueio. Registrar comparação no renderer. Go está fora da seleção pública; esta correção não prevê incluí-lo no menu. |
 | BUG-004 | Focinho/volume facial de Go varia nos desenhos iniciais da recuperação | Baixa | Uniformizar a identidade facial entre os desenhos afetados e conferir a transição de recuperação em movimento nos dois sentidos, com evidência visual. Go permanece fora da seleção pública. |
 | BUG-005 | Rust deitado na beirada e sentado acima da cama — corrigido | Concluído em 10/09/2026 | Apoios por pose alinham antebraço/quadril ao colchão, assento à borda e bota ao chão; respiração mantém o apoio. [Manhã corrigida](evidence/adventure-opening/morning.mp4) e quadros revisados na entrega 28. |
+| BUG-006 | Ruído incômodo na faixa da manhã — corrigido | Concluído em 10/09/2026 | Removidos vento aleatório, pássaros agudos e acorde contínuo; [morning.wav](../assets/adventure/audio/morning.wav) usa notas suaves, pico menor, sem clipping e junção do loop em zero. Carregamento no binário existente verificado; demais WAVs preservados. [Gerador e revisão](../assets/adventure/audio/README.md). |
 
 Uma observação nova só entra como bug confirmado com situação reproduzível ou
 evidência identificada. Questões de ritmo, balanceamento e preferência visual
