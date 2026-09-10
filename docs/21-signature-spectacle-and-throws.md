@@ -25,7 +25,7 @@ As reações separam impacto leve, impacto pesado, lançamento por gancho/anti-a
 ## Controles e showcase
 
 ```sh
-cargo run -- --showcase --character rust --move signature_special --repeat
+cargo run --bin borrow-fighters -- --showcase --character rust --move signature_special --repeat
 ```
 
 Troque `rust` por `duke`, `c`, `python` ou `cpp`. `Tab`/`Shift+Tab` mudam a situação, `PgUp`/`PgDown` mudam o personagem, `X` inverte os lados, `Enter` repete, `Space` pausa e `.` avança um frame. Use `--move throw` ou `--move anti_air` para inspecionar arremessos e ganchos diretamente.

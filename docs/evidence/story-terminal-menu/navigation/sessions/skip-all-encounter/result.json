@@ -1,0 +1,20 @@
+{
+  "enemy_hp": 96,
+  "events": [
+    {
+      "enemy_hp": 96,
+      "frame": 0,
+      "player_hp": 100,
+      "seconds": 0.01666666753590107,
+      "stage": "Encounter"
+    }
+  ],
+  "exit_reason": "Skipped",
+  "final_stage": "Encounter",
+  "frames": 31,
+  "limitations": "Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest.",
+  "mode": "window_input_capture",
+  "outcome": "Ongoing",
+  "paused_frames": 0,
+  "player_hp": 100
+}

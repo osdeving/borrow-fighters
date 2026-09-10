@@ -1,0 +1,16 @@
+{
+  "command": [
+    "strace",
+    "-f",
+    "-e",
+    "trace=%file",
+    "-o",
+    "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-files.strace",
+    "/home/willams/borrow-fighters/target/debug/examples/capture_ui_review",
+    "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 10.695073272000627,
+  "asset_root": "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets",
+  "working_directory": "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd"
+}

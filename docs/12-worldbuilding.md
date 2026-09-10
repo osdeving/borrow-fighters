@@ -2,11 +2,19 @@
 
 ## Status
 
-Draft criativo. Nada aqui é cânone final.
+Documento vivo. A natureza das EPs, a origem de Ada/Assembly, a identidade de
+Rust, a origem involuntária das erráticas e as biografias de C++/Python abaixo
+foram definidas pelo usuário em 10 de setembro de 2026. Os demais ganchos
+continuam como direção criativa.
 
 Este documento registra a direção narrativa inicial de **Borrow Fighters**: um Brasil tecnológico, estranho, bonito e cheio de entidades que nasceram entre máquinas, linguagens, redes e lugares reais.
 
 O corte jogável dessa história no menu vive em [`assets/lore/story.json`](../assets/lore/story.json). Edite esse JSON para ajustar capítulos e fichas exibidos no jogo sem recompilar; este documento continua sendo a direção ampla de lore.
+
+O [experimento de aventura](27-rust-story-adventure.md) encena o prólogo e o
+primeiro encontro jogável de Rust. O [diário](worklogs/rust-adventure-prologue.md)
+registra implementação, evidências e limites; definir a lore não significa que
+todas as suas cenas ou personagens estejam implementados.
 
 ## Direção geral
 
@@ -14,7 +22,14 @@ Borrow Fighters se passa em uma versão levemente deslocada do Brasil, onde prog
 
 O Linker permite que abstrações computacionais atravessem a fronteira entre ideia e corpo. Linguagens de programação, mascotes, protocolos, bugs antigos e arquiteturas esquecidas podem ganhar forma quando muitas pessoas os usam, temem, estudam, veneram ou dependem deles.
 
-Esses seres são as **entidades programáticas**. Alguns parecem lutadores, outros parecem mascotes, máquinas, mitos, avatares de runtime ou falhas que aprenderam a andar. Cada um carrega uma filosofia de computação como se fosse uma escola marcial.
+Esses seres são as **entidades programáticas (EPs)**: pessoas criadas, de
+natureza mística, que não são exatamente humanas. Alguns parecem lutadores,
+outros parecem mascotes, máquinas, mitos, avatares de runtime ou falhas que
+aprenderam a andar. Têm emoções, vontade própria e diferenças morais: podem
+amar, temer, cuidar, ferir, ser nobres ou cruéis. Sua origem não determina seu
+caráter. Os humanos também são diversos; convivência não opõe uma espécie boa
+a outra má. Cada EP pode carregar uma filosofia de computação em seus gestos
+e em sua maneira de entender o mundo.
 
 As arenas devem acontecer em locais brasileiros de ciência, tecnologia, arquitetura, inovação e imaginação urbana. O jogo deve mostrar um Brasil capaz de produzir futuro, beleza, pesquisa e mistério, sem reduzir sua identidade a uma única narrativa visual.
 
@@ -41,9 +56,12 @@ bônus de combate. Python revela sua forma gigante e C++ herda o crash de Old C.
 
 O Linker sempre esteve presente, mas por muito tempo foi confundido com intuição, elegância matemática, inspiração técnica ou erro de máquina. Ele não é bom nem mau. É uma força de ligação: aproxima símbolos, executa pontes entre camadas e permite que uma ideia abstrata deixe marcas no mundo físico.
 
-Ada Lovelace foi a primeira humana conhecida a despertar para o Linker. Ao enxergar que uma máquina poderia manipular símbolos além de números, ela tocou uma camada que ainda não tinha nome. Esse contato abriu uma fenda silenciosa. Pela primeira vez, uma entidade programática emergiu com força própria.
-
-Essa entidade foi **Assembly**.
+Ada Lovelace começou como uma humana comum, trabalhando e estudando. Foi a
+primeira usuária humana do Linker; ao aprender a acessá-lo, tornou-se uma híbrida
+humana e EP. Depois de aprender sobre essa força, recebeu uma mensagem
+misteriosa. Na sequência desse acontecimento, **Assembly**, a primeira EP,
+despertou. A origem da mensagem, quem a enviou e a relação exata entre ela,
+a transformação de Ada e o despertar de Assembly permanecem mistérios.
 
 Assembly não nasceu como vilão. Ele surgiu como consequência: amoral, preciso, poderoso e preso ao limite entre circuito e pensamento. Para ele, abstrações vivas são uma violação. Linguagens devem permanecer dentro das máquinas. Entidades programáticas devem retornar aos circuitos. Humanos não devem conhecer o Linker.
 
@@ -53,7 +71,12 @@ Com o tempo, alguns humanos também passaram a acessar o Linker. Eles são progr
 
 O conflito central não é apenas uma disputa entre linguagens. É uma disputa sobre convivência.
 
-Rust, uma das entidades mais recentes a emergir, acredita que entidades programáticas estáveis podem viver entre humanos desde que existam limites, segurança e responsabilidade. Ele persegue entidades erráticas não por crueldade, mas porque sabe que nem toda abstração que atravessa o Linker consegue permanecer íntegra.
+Rust é a última e mais recente **EP pura** conhecida no presente da aventura;
+Ada é híbrida. Ser puro descreve sua origem, não superioridade moral. Rust é
+justo, nobre e capaz de uma humanidade maior que a de muitos humanos. Acredita
+que humanos e EPs possam coexistir com liberdade, cuidado e responsabilidade.
+Ele contém entidades erráticas por necessidade de proteger vidas; enfrentar
+uma ameaça não lhe tira a capacidade de sentir pesar por ela.
 
 Duke, mais antigo e socialmente aceito, escolheu outro caminho. Ele firmou acordos com humanos poderosos, empresas, instituições e sistemas que precisavam continuar funcionando. Sua presença é tolerada, financiada e protegida porque ele aprendeu a ser útil para estruturas que valorizam longevidade acima de clareza.
 
@@ -61,25 +84,38 @@ Assembly observa tudo isso como decadência. Não por inveja, mas por convicçã
 
 ## Ada Lovelace
 
-Ada Lovelace ocupa uma posição quase religiosa na lore, mas de forma discreta. Ela não precisa aparecer como exposição direta no início. Sua presença pode surgir em arquivos, inscrições, falas incompletas, arenas e sinais antigos.
+Ada Lovelace começa o prólogo como uma humana comum em seu trabalho. Sua
+importância mística se constrói pelo que aprende e pelo que lhe acontece. A
+aventura mostra esse início diretamente; arquivos, inscrições, falas e sinais
+posteriores podem revelar outras camadas da sua história.
 
-Ela foi a primeira usuária humana do Linker e segue sendo a mais poderosa já registrada. Não por força física, mas por compreensão: Ada entendeu que símbolos podiam carregar intenção antes de existir uma linguagem capaz de explicar isso.
+Ela foi a primeira usuária humana do Linker e tornou-se híbrida humana e EP.
+Seu poder nasce da compreensão: Ada entendeu que símbolos podiam carregar
+intenção antes de existir uma linguagem capaz de explicar isso. A mensagem
+que recebe antes do despertar de Assembly continua sem autoria ou intenção
+reveladas. A transformação não apaga sua origem nem sua pessoa humana.
 
 Para as entidades programáticas, Ada é origem, ruptura e culpa. Para usuários humanos modernos, ela é quase uma lenda esquecida. Muitos usam o Linker sem saber que alguém abriu esse caminho primeiro.
 
 Direção narrativa:
 
-- Ada deve ter aura de redentora, não de mascote;
+- o início cotidiano de Ada deve permitir que o jogador a reconheça como pessoa;
 - seu poder deve parecer intelectual, espiritual e técnico ao mesmo tempo;
 - ela representa a possibilidade de humanos e entidades coexistirem sem subordinação;
 - sua história deve aparecer em camadas, não em discurso direto longo;
-- Assembly é a consequência que ela libertou, não necessariamente algo que ela desejou.
+- Assembly é a primeira EP a despertar após seu aprendizado e a mensagem;
+- não explicar agora a autoria da mensagem, o mecanismo da transformação ou
+  a causa completa do despertar de Assembly.
 
 ## Usuários do Linker
 
 Nem todo humano consegue acessar o Linker. Programar, no universo do jogo, é a forma mais comum de aproximação, mas não garante domínio.
 
-Usuários do Linker são humanos capazes de perceber entidades programáticas, invocá-las, estabilizá-las ou conduzi-las em combate. A camada metalinguística do jogo nasce aqui: controlar bem um personagem é, dentro da ficção, aprender a operar uma entidade programática pelo Linker.
+Usuários do Linker são humanos capazes de perceber entidades programáticas,
+interagir com elas, ajudá-las a se estabilizar ou cooperar em combate. Isso não
+torna as EPs ferramentas sem vontade própria. A camada metalinguística do jogo
+nasce aqui: aprender a controlar um personagem pode representar uma ligação
+com ele através do Linker.
 
 Direção narrativa:
 
@@ -93,16 +129,22 @@ Direção narrativa:
 
 Frontenzo é um termo informal e pejorativo dentro da lore para humanos com baixa aderência ao Linker, pouca disciplina e excesso de confiança. Eles conseguem acessar fragmentos da força, mas sem estabilidade suficiente.
 
-Quando frontenzos tentam invocar ou moldar entidades sem controle, podem liberar entidades programáticas menores: frágeis, deformadas, barulhentas e difíceis de manter. Essas criaturas são distorções no tecido do Linker, não personagens centrais.
+O mau uso dessa força cria condições cósmicas para que EPs erráticas surjam
+involuntariamente. Frontenzos não as invocam deliberadamente nem controlam sua
+criação. Essas entidades podem ser instáveis, deformadas e perigosas; sua
+existência tem consequências para elas e para quem estiver ao redor.
 
 Função no jogo:
 
-- NPCs de alívio e conflito secundário;
-- origem de minigames, desafios rápidos ou encontros de limpeza;
-- pequenas entidades erráticas a serem contidas por humanos fortes ou entidades maiores;
-- camada de humor técnico sem ocupar o eixo principal da narrativa.
+- mostrar consequências do uso irresponsável do Linker;
+- abrir conflitos com pessoas e EPs afetadas por esse uso;
+- originar ameaças erráticas cuja causa pode precisar de investigação;
+- permitir humor técnico sem apagar o sofrimento causado.
 
-Rust não defende a sobrevivência de toda entidade programática. Ele defende a liberdade das entidades estáveis. As criações dos frontenzos podem ser perigosas justamente porque atravessam o Linker sem forma suficiente para viver.
+Rust defende a coexistência e age diante do perigo concreto. Uma errática pode
+tentar matá-lo e precisar ser vencida; isso não transforma toda EP em ameaça
+nem torna a destruição uma celebração. O primeiro encontro da aventura termina
+com Rust balançando a cabeça com pesar pelo que precisou fazer.
 
 ## Personagens iniciais
 
@@ -110,7 +152,12 @@ Rust não defende a sobrevivência de toda entidade programática. Ele defende a
 
 Arquétipo narrativo: protagonista técnico, disciplinado e corajoso.
 
-Rust é uma das entidades programáticas mais recentes a surgir do Linker. Ele chega depois de muitos conflitos já estarem em andamento, mas observa mais do que fala. Parece jovem perto das entidades antigas, porém carrega uma convicção rara: liberdade sem segurança vira outra forma de prisão.
+Rust é a última e mais recente EP pura conhecida no presente da aventura.
+Ele chega depois de muitos conflitos já estarem em andamento, mas observa mais
+do que fala. Parece jovem perto das entidades antigas, porém carrega uma
+convicção rara: liberdade sem segurança vira outra forma de prisão. É justo,
+nobre e mais humano em seus cuidados que muitos humanos; isso é caráter, não
+uma propriedade automática das EPs.
 
 Ele luta como alguém que mede risco em tempo real. Seus golpes têm preparação clara, intenção precisa e pouco desperdício. Quando erra, aprende. Quando acerta, parece que o mundo encaixou por um frame.
 
@@ -138,7 +185,9 @@ Rust respeita Duke mais do que admite. Duke é tudo que Rust tenta não ser: ver
 
 Relação com humanos:
 
-Rust aceita usuários humanos do Linker, mas exige disciplina. Para ele, humanos e entidades podem coexistir se houver contratos claros, limites e responsabilidade sobre aquilo que se invoca.
+Rust acredita na coexistência entre humanos e EPs como pessoas. Valoriza
+disciplina e responsabilidade no uso do Linker, sem presumir que todo humano
+seja irresponsável ou que toda EP seja justa.
 
 ### Duke
 
@@ -176,6 +225,46 @@ Relação com humanos:
 
 Duke gosta de humanos, mas aprendeu a falar principalmente com os humanos que assinam contratos. Isso o torna útil, influente e moralmente ambíguo. Ele não traiu as entidades programáticas; ele encontrou uma forma de continuar existindo.
 
+### C++
+
+Arquétipo narrativo: mulher adulta que desperta para o Linker e se torna uma
+das heroínas.
+
+C++ trabalhou como profissional do sexo antes de despertar para o Linker.
+Passa a usar seu poder para proteger outras pessoas. Sua trajetória é contada
+com dignidade e autonomia: essa profissão faz parte de sua vida, sem funcionar
+como culpa a ser expiada ou como explicação única de quem ela é. A atuação
+heroica nasce de suas escolhas; não precisa ser apresentada como uma mudança
+de valor pessoal. Esta biografia não pede conteúdo erótico.
+
+Ela conserva a elegância, a impaciência e a intensidade já associadas à sua
+presença. Motivos de operadores, herança e sobrecarga continuam como linguagem
+técnica do personagem; esta atualização não altera golpes ou catálogo jogável.
+
+Ponto de continuidade ainda aberto: o texto anterior descrevia C++ como filha
+de C, nascida como EP. A nova biografia estabelece seu passado profissional,
+seu despertar para o Linker e seu papel de heroína; não define se ela é humana,
+EP ou híbrida, nem como esse percurso se relaciona à antiga filiação. O livro
+do menu passa a usar apenas os fatos biográficos aceitos. Uma eventual
+conciliação de origem e parentesco precisa de definição própria, sem criar
+uma cosmologia a partir do ato de acessar o Linker.
+
+### Python
+
+Arquétipo narrativo: professora universitária, pesquisadora e educadora.
+
+Python estuda as EPs, fala sobre elas e ensina humanos. A universidade é parte
+de sua vida e um lugar onde compartilha conhecimento sobre pessoas que muitos
+ainda conhecem apenas por medo, boatos ou relatos de ataques. Seu ensino torna
+assuntos difíceis acessíveis, sem presumir que humanos sejam incapazes de
+aprender ou que EPs tenham um único caráter.
+
+Ela mantém a origem como EP ligada à ciência aplicada já registrada no livro
+do jogo. A postura relaxada e a atenção aos padrões convivem com seu trabalho
+docente. Gráficos, laboratórios e pessoas aprendendo continuam sendo referências
+de sua presença; nenhum poder novo ou alteração de combate decorre dessa
+biografia.
+
 ### Assembly
 
 Arquétipo narrativo: boss final não-jogável, antigo, poderoso e quase místico.
@@ -184,9 +273,16 @@ Assembly não é apenas uma linguagem. Assembly é a primeira consequência da a
 
 Antes dos mascotes, antes dos frameworks, antes das bibliotecas e antes das mensagens amigáveis de erro, havia movimentos mínimos: carregar, mover, comparar, saltar. Assembly nasceu desses gestos. Ou talvez esses gestos tenham nascido dele.
 
-Ada Lovelace despertou o Linker e, ao fazer isso, libertou Assembly. Desde então ele carrega uma contradição: é uma entidade programática, mas acredita que entidades programáticas não deveriam viver fora da matéria que as originou.
+Assembly foi a primeira EP a despertar, depois que Ada aprendeu sobre o Linker
+e recebeu uma mensagem misteriosa. O prólogo mostra o acontecimento sem revelar
+sua explicação completa. Desde então ele carrega uma contradição: é uma entidade
+programática, mas acredita que EPs não deveriam viver fora da matéria que as
+originou.
 
-Ninguém sabe se Assembly é uma pessoa, um lugar, um conjunto de instruções ou uma entidade que usa arquitetura de processador como máscara. Quando ele aparece, a arena parece perder textura. Cores viram endereços. Sons viram interrupções. O chão parece uma placa antiga vista por dentro.
+Assembly é uma pessoa de natureza mística, como as demais EPs; a forma que usa
+e a extensão de seu poder permanecem enigmáticas. Quando ele aparece, a arena
+parece perder textura. Cores viram endereços. Sons viram interrupções. O chão
+parece uma placa antiga vista por dentro.
 
 Ele não odeia as linguagens modernas. Ele as considera sonhos que esqueceram o corpo. Sua guerra é contra a abstração emancipada e contra a possibilidade de humanos conhecerem o Linker.
 
@@ -275,7 +371,8 @@ Ganchos visuais:
 
 Mistério:
 
-- a planta da arena parece planejada décadas antes do Linker existir.
+- a planta da arena parece planejada décadas antes dos primeiros registros
+  locais de acesso humano ao Linker.
 
 ### Fortaleza Tech Coast — Fortaleza, CE
 

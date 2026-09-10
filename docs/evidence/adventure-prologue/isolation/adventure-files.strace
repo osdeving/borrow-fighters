@@ -1,0 +1,619 @@
+273276 execve("/home/willams/borrow-fighters/target/debug/borrow-adventure", ["/home/willams/borrow-fighters/ta"..., "--capture", "/tmp/borrow-runtime-isolation-20"..., "--start", "encounter", "--frames", "120", "--mute", "--hidden"], 0x7ffd05837f98 /* 72 vars */) = 0
+273276 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/proc/self/maps", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache", O_RDONLY) = 3
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libX11.so.6", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb.so.1", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXau.so.6", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXdmcp.so.6", O_RDONLY|O_CLOEXEC) = 3
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libbsd.so.0", O_RDONLY|O_CLOEXEC) = 3
+273276 access("/home/willams/.Xauthority", R_OK) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXxf86vm.so.1", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXext.so.6", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXi.so.6", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXrandr.so.2", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXrender.so.1", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXcursor.so.1", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXfixes.so.3", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXinerama.so.1", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libX11-xcb.so.1", O_RDONLY|O_CLOEXEC) = 6
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/share/X11/locale/locale.alias", O_RDONLY) = 6
+273276 openat(AT_FDCWD, "/usr/share/X11/locale/locale.dir", O_RDONLY) = 6
+273276 access("/usr/share/X11/locale/en_US.UTF-8/XLC_LOCALE", R_OK) = 0
+273276 openat(AT_FDCWD, "/usr/share/X11/locale/en_US.UTF-8/XLC_LOCALE", O_RDONLY) = 6
+273276 openat(AT_FDCWD, "/usr/share/X11/locale/compose.dir", O_RDONLY) = 6
+273276 access("/usr/share/X11/locale/en_US.UTF-8/Compose", R_OK) = 0
+273276 openat(AT_FDCWD, "/usr/share/X11/locale/en_US.UTF-8/Compose", O_RDONLY) = 6
+273276 openat(AT_FDCWD, "/home/willams/.XCompose", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/share/X11/locale/compose.dir", O_RDONLY) = 6
+273276 access("/usr/share/X11/locale/en_US.UTF-8/Compose", R_OK) = 0
+273276 stat("/usr/share/X11/locale/en_US.UTF-8/Compose", {st_mode=S_IFREG|0644, st_size=573945, ...}) = 0
+273276 stat("/var/cache/libx11/compose/", 0x7ffc1f19f8b0) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/share/X11/locale/en_US.UTF-8/Compose", {st_mode=S_IFREG|0644, st_size=573945, ...}) = 0
+273276 stat("/home/willams/.compose-cache/", 0x7ffc1f19f8b0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/share/X11/locale/en_US.UTF-8/Compose", O_RDONLY) = 6
+273276 openat(AT_FDCWD, "/usr/share/X11/XKeysymDB", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/share/X11/locale/compose.dir", O_RDONLY) = 6
+273276 access("/usr/share/X11/locale/en_US.UTF-8/Compose", R_OK) = 0
+273276 openat(AT_FDCWD, "/usr/share/X11/locale/en_US.UTF-8/Compose", O_RDONLY) = 6
+273276 openat(AT_FDCWD, "/home/willams/.XCompose", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/share/X11/locale/compose.dir", O_RDONLY) = 6
+273276 access("/usr/share/X11/locale/en_US.UTF-8/Compose", R_OK) = 0
+273276 stat("/usr/share/X11/locale/en_US.UTF-8/Compose", {st_mode=S_IFREG|0644, st_size=573945, ...}) = 0
+273276 stat("/var/cache/libx11/compose/", 0x7ffc1f19f850) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/share/X11/locale/en_US.UTF-8/Compose", {st_mode=S_IFREG|0644, st_size=573945, ...}) = 0
+273276 stat("/home/willams/.compose-cache/", 0x7ffc1f19f850) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/share/X11/locale/en_US.UTF-8/Compose", O_RDONLY) = 6
+273276 inotify_add_watch(6, "/dev/input", IN_ATTRIB|IN_CREATE|IN_DELETE) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/dev/input", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libGLX.so.0", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libGLdispatch.so.0", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libGLX_mesa.so.0", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libglapi.so.0", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdrm.so.2", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-glx.so.0", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-dri2.so.0", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-shm.so.0", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libexpat.so.1", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-dri3.so.0", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-present.so.0", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-sync.so.1", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxshmfence.so.1", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-xfixes.so.0", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/dri/tls/swrast_dri.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libLLVM-12.so.1", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libz.so.1", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libzstd.so.1", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsensors.so.5", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdrm_radeon.so.1", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libelf.so.1", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdrm_amdgpu.so.1", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdrm_nouveau.so.2", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libvulkan.so.1", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/tls/haswell/x86_64/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/../lib/tls/haswell/x86_64", 0x7ffc1f19d230) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/tls/haswell/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/../lib/tls/haswell", 0x7ffc1f19d230) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/tls/x86_64/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/../lib/tls/x86_64", 0x7ffc1f19d230) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/tls/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/../lib/tls", 0x7ffc1f19d230) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/haswell/x86_64/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/../lib/haswell/x86_64", 0x7ffc1f19d230) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/haswell/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/../lib/haswell", 0x7ffc1f19d230) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/x86_64/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/../lib/x86_64", 0x7ffc1f19d230) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/../lib", 0x7ffc1f19d230) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libffi.so.7", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libedit.so.2", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/librt.so.1", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libtinfo.so.6", O_RDONLY|O_CLOEXEC) = 7
+273276 lstat("/proc", {st_mode=S_IFDIR|0555, st_size=0, ...}) = 0
+273276 lstat("/proc/self", {st_mode=S_IFLNK|0777, st_size=0, ...}) = 0
+273276 readlink("/proc/self", "273276", 4095) = 6
+273276 lstat("/proc/273276", {st_mode=S_IFDIR|0555, st_size=0, ...}) = 0
+273276 lstat("/proc/273276/exe", {st_mode=S_IFLNK|0777, st_size=0, ...}) = 0
+273276 readlink("/proc/273276/exe", "/home/willams/borrow-fighters/ta"..., 4095) = 59
+273276 lstat("/home", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+273276 lstat("/home/willams", {st_mode=S_IFDIR|0755, st_size=12288, ...}) = 0
+273276 lstat("/home/willams/borrow-fighters", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+273276 lstat("/home/willams/borrow-fighters/target", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+273276 lstat("/home/willams/borrow-fighters/target/debug", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+273276 lstat("/home/willams/borrow-fighters/target/debug/borrow-adventure", {st_mode=S_IFREG|0755, st_size=14638496, ...}) = 0
+273276 openat(AT_FDCWD, "/usr/share/drirc.d", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 7
+273276 openat(AT_FDCWD, "/usr/share/drirc.d/00-mesa-defaults.conf", O_RDONLY) = 7
+273276 openat(AT_FDCWD, "/etc/drirc", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.drirc", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/share/drirc.d", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 7
+273276 openat(AT_FDCWD, "/usr/share/drirc.d/00-mesa-defaults.conf", O_RDONLY) = 7
+273276 openat(AT_FDCWD, "/etc/drirc", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/home/willams/.drirc", O_RDONLY) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/sys/devices/system/cpu", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 7
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/usr/lib/wsl/lib/libdxcore.so", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/dev/dxg", O_RDONLY|O_CLOEXEC) = 7
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 8
+273276 openat(AT_FDCWD, "/usr/lib/wsl/lib/libd3d12.so", O_RDONLY|O_CLOEXEC) = 8
+273276 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/tls/haswell/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/tls/haswell/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/tls/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/tls/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/haswell/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/haswell/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/wsl/lib/tls/haswell/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/wsl/lib/tls/haswell/x86_64", 0x7ffc1f19dd50) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/wsl/lib/tls/haswell/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/wsl/lib/tls/haswell", 0x7ffc1f19dd50) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/wsl/lib/tls/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/wsl/lib/tls/x86_64", 0x7ffc1f19dd50) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/wsl/lib/tls/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/wsl/lib/tls", 0x7ffc1f19dd50) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/wsl/lib/haswell/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/wsl/lib/haswell/x86_64", 0x7ffc1f19dd50) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/wsl/lib/haswell/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/wsl/lib/haswell", 0x7ffc1f19dd50) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/wsl/lib/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/wsl/lib/x86_64", 0x7ffc1f19dd50) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/wsl/lib/libd3d12core.so", O_RDONLY|O_CLOEXEC) = 8
+273276 openat(AT_FDCWD, "/usr/lib/wsl/drivers/nvsm.inf_amd64_ee485ba6e3aa020d/libnvwgf2umx.so", O_RDONLY|O_CLOEXEC) = 8
+273276 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 8
+273276 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 8
+273276 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 260) = 52
+273514 execve("/bin/sh", ["sh", "-c", "cat /proc/273276/cmdline"], 0x7ffc1f1a3018 /* 72 vars */) = 0
+273514 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+273514 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+273514 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+273514 stat("/home/willams/borrow-fighters", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+273514 stat(".", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+273514 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 4096) = 52
+273514 stat("/home/willams/go/bin/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/home/willams/.local/bin/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/home/willams/.cargo/bin/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/home/willams/.codex/tmp/arg0/codex-arg06mJwwl/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/home/willams/.vscode-server/bin/645f29cc3176500b4b5762ba887cf2a7f0ffdf2c/bin/remote-cli/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/home/willams/go/bin/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/home/willams/.sdkman/candidates/java/current/bin/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/home/willams/.local/share/pnpm/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/home/willams/.local/bin/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/home/willams/.cargo/bin/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/home/willams/.cargo/bin/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/usr/local/sbin/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/usr/local/bin/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/usr/sbin/cat", 0x7ffc685ca610) = -1 ENOENT (No such file or directory)
+273514 stat("/usr/bin/cat", {st_mode=S_IFREG|0755, st_size=43416, ...}) = 0
+273515 execve("/usr/bin/cat", ["cat", "/proc/273276/cmdline"], 0x63e720e28228 /* 72 vars */) = 0
+273515 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+273515 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache", O_RDONLY) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_NAME", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_PAPER", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MESSAGES/SYS_LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_TIME", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = 3
+273515 openat(AT_FDCWD, "/proc/273276/cmdline", O_RDONLY) = 3
+273515 +++ exited with 0 +++
+273514 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=273515, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+273514 +++ exited with 0 +++
+273276 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=273514, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+273276 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 260) = 52
+273276 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 260) = 52
+273276 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 260) = 52
+273276 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 43
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 43
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/tls/haswell/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/tls/haswell", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/tls/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/tls", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/haswell/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/haswell", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64-linux-gnu", {st_mode=S_IFDIR|0755, st_size=81920, ...}) = 0
+273276 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/x86_64-linux-gnu/tls/haswell/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/x86_64-linux-gnu/tls/haswell", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/x86_64-linux-gnu/tls/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/x86_64-linux-gnu/tls", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/x86_64-linux-gnu/haswell/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/x86_64-linux-gnu/haswell", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/x86_64-linux-gnu/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/x86_64-linux-gnu", {st_mode=S_IFDIR|0755, st_size=81920, ...}) = 0
+273276 openat(AT_FDCWD, "/lib/tls/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/tls/haswell/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/tls/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/tls/haswell", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/tls/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/tls/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/tls/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/tls", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/haswell/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/haswell", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+273276 openat(AT_FDCWD, "/usr/lib/tls/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/tls/haswell/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/tls/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/tls/haswell", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/tls/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/tls/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/tls/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/tls", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/haswell/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/haswell", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib/x86_64", 0x7ffc1f19e7a0) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 stat("/usr/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+273276 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 43
+273276 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/dxcompiler.dll", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/dxcompiler.dll", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/lib/dxcompiler.dll", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 openat(AT_FDCWD, "/usr/lib/dxcompiler.dll", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273276 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 4095) = 52
+273276 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 4095) = 52
+273276 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/fonts/Barlow-Regular.ttf", O_RDONLY) = 44
+273276 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/fonts/Lora-Variable.ttf", O_RDONLY) = 44
+273276 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/ada-prologue.png", O_RDONLY) = 44
+273276 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/rust-morning.png", O_RDONLY) = 44
+273276 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/adventure-environments.png", O_RDONLY) = 44
+273276 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/erratic.png", O_RDONLY) = 44
+273276 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/rust-morning-poses.json", O_RDONLY|O_CLOEXEC) = 44
+273276 statx(44, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=1167, ...}) = 0
+273276 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/erratic-poses.json", O_RDONLY|O_CLOEXEC) = 44
+273276 statx(44, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=842, ...}) = 0
+273276 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/rust-actions.png", O_RDONLY) = 44
+273276 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/rust-actions-poses.json", O_RDONLY|O_CLOEXEC) = 44
+273276 statx(44, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=1482, ...}) = 0
+273276 mkdir("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-output", 0777) = -1 EEXIST (File exists)
+273276 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-output", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=4096, ...}) = 0
+273276 openat(AT_FDCWD, "/dev/null", O_WRONLY|O_CLOEXEC) = 46
+273567 execve("/home/willams/go/bin/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/home/willams/.local/bin/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/home/willams/.cargo/bin/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/home/willams/.codex/tmp/arg0/codex-arg06mJwwl/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/home/willams/.vscode-server/bin/645f29cc3176500b4b5762ba887cf2a7f0ffdf2c/bin/remote-cli/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/home/willams/go/bin/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/home/willams/.sdkman/candidates/java/current/bin/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/home/willams/.local/share/pnpm/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/home/willams/.local/bin/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/home/willams/.cargo/bin/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/home/willams/.cargo/bin/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/usr/local/sbin/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/usr/local/bin/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/usr/sbin/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = -1 ENOENT (No such file or directory)
+273567 execve("/usr/bin/ffmpeg", ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pixel_format", "rgba", "-video_size", "1280x720", "-framerate", "30", "-i", "-", "-vf", "vflip", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", "/tmp/borrow-runtime-isolation-20"...], 0x7ffc1f1a3018 /* 72 vars */) = 0
+273567 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+273567 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC <unfinished ...>
+273276 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-output/telemetry.jsonl", O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC, 0666 <unfinished ...>
+273567 <... openat resumed>)            = 3
+273276 <... openat resumed>)            = 44
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libavdevice.so.58", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libavfilter.so.7", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libavformat.so.58", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libavcodec.so.58", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libavresample.so.4", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpostproc.so.55", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libswresample.so.3", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libswscale.so.5", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libavutil.so.56", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libraw1394.so.11", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libavc1394.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/librom1394.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libiec61883.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libjack.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdrm.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libopenal.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-shm.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-shape.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-xfixes.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libcdio_paranoia.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libcdio_cdda.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdc1394.so.22", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libasound.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libcaca.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libGL.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpulse.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libSDL2-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsndio.so.7.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXv.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libX11.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXext.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libbs2b.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/liblilv-0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/librubberband.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libmysofa.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libflite_cmu_us_awb.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libflite_cmu_us_kal.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libflite_cmu_us_kal16.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libflite_cmu_us_rms.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libflite_cmu_us_slt.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libflite.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libfribidi.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libass.so.9", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libva.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libvidstab.so.1.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libzmq.so.5", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libOpenCL.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libfontconfig.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libfreetype.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxml2.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libbz2.so.1.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgme.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libopenmpt.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libchromaprint.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libbluray.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libz.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgnutls.so.30", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libssh-gcrypt.so.4", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libvpx.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libwebpmux.so.3", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libwebp.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/liblzma.so.5", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/librsvg-2.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgobject-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libglib-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libcairo.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libzvbi.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsnappy.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libaom.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libcodec2.so.0.9", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgsm.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libmp3lame.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libopenjp2.so.7", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libopus.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libshine.so.3", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libspeex.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libtheoraenc.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libtheoradec.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libtwolame.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libvorbis.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libvorbisenc.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libwavpack.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libx264.so.155", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libx265.so.179", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxvidcore.so.4", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsoxr.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libva-drm.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libva-x11.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libvdpau.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdb-5.3.so", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/librt.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXau.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXdmcp.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libcdio.so.18", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libusb-1.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libslang.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libncursesw.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libtinfo.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libGLdispatch.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libGLX.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/pulseaudio/tls/haswell/x86_64/libpulsecommon-13.99.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273567 stat("/usr/lib/x86_64-linux-gnu/pulseaudio/tls/haswell/x86_64", 0x7ffdf24d3890) = -1 ENOENT (No such file or directory)
+273567 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/pulseaudio/tls/haswell/libpulsecommon-13.99.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273567 stat("/usr/lib/x86_64-linux-gnu/pulseaudio/tls/haswell", 0x7ffdf24d3890) = -1 ENOENT (No such file or directory)
+273567 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/pulseaudio/tls/x86_64/libpulsecommon-13.99.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273567 stat("/usr/lib/x86_64-linux-gnu/pulseaudio/tls/x86_64", 0x7ffdf24d3890) = -1 ENOENT (No such file or directory)
+273567 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/pulseaudio/tls/libpulsecommon-13.99.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273567 stat("/usr/lib/x86_64-linux-gnu/pulseaudio/tls", 0x7ffdf24d3890) = -1 ENOENT (No such file or directory)
+273567 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/pulseaudio/haswell/x86_64/libpulsecommon-13.99.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273567 stat("/usr/lib/x86_64-linux-gnu/pulseaudio/haswell/x86_64", 0x7ffdf24d3890) = -1 ENOENT (No such file or directory)
+273567 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/pulseaudio/haswell/libpulsecommon-13.99.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273567 stat("/usr/lib/x86_64-linux-gnu/pulseaudio/haswell", 0x7ffdf24d3890) = -1 ENOENT (No such file or directory)
+273567 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/pulseaudio/x86_64/libpulsecommon-13.99.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273567 stat("/usr/lib/x86_64-linux-gnu/pulseaudio/x86_64", 0x7ffdf24d3890) = -1 ENOENT (No such file or directory)
+273567 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-13.99.so", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/pulseaudio/libdbus-1.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdbus-1.so.3", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXcursor.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXinerama.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXi.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXrandr.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXss.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXxf86vm.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libwayland-egl.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libwayland-client.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libwayland-cursor.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxkbcommon.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libbsd.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libserd-0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsord-0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsratom-0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsamplerate.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libfftw3.so.3", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libflite_usenglish.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libflite_cmulex.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libharfbuzz.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgomp.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsodium.so.23", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpgm-5.2.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libnorm.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgssapi_krb5.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libexpat.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libuuid.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpng16.so.16", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libicuuc.so.66", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libmpg123.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libvorbisfile.so.3", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libp11-kit.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libidn2.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libunistring.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libtasn1.so.6", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libnettle.so.7", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libhogweed.so.5", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgmp.so.10", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgcrypt.so.20", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgpg-error.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libcairo-gobject.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgio-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpango-1.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libffi.so.7", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpcre.so.3", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpixman-1.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-render.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXrender.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libogg.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libnuma.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXfixes.so.3", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libudev.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsystemd.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libwrap.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsndfile.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libasyncns.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libapparmor.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgraphite2.so.3", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libkrb5.so.3", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libk5crypto.so.3", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libcom_err.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libkrb5support.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libicudata.so.66", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgmodule-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libmount.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libresolv.so.2", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpangoft2-1.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libthai.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/liblz4.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libnsl.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libFLAC.so.8", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libkeyutils.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libblkid.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdatrie.so.1", O_RDONLY|O_CLOEXEC) = 3
+273567 statfs("/sys/fs/selinux", {f_type=SYSFS_MAGIC, f_bsize=4096, f_blocks=0, f_bfree=0, f_bavail=0, f_files=0, f_ffree=0, f_fsid={val=[4288906484, 1405902452]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_NOSUID|ST_NODEV|ST_NOEXEC|ST_NOATIME}) = 0
+273567 statfs("/selinux", 0x7ffdf24d52d0) = -1 ENOENT (No such file or directory)
+273567 openat(AT_FDCWD, "/proc/filesystems", O_RDONLY|O_CLOEXEC) = 3
+273567 openat(AT_FDCWD, "/proc/mounts", O_RDONLY|O_CLOEXEC) = 3
+273567 access("/etc/selinux/config", F_OK) = -1 ENOENT (No such file or directory)
+273567 openat(AT_FDCWD, "/proc/self/status", O_RDONLY) = 3
+273567 openat(AT_FDCWD, "/sys/devices/system/node", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+273567 openat(AT_FDCWD, "/sys/devices/system/node/node0/meminfo", O_RDONLY) = 4
+273567 openat(AT_FDCWD, "/sys/devices/system/cpu", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+273567 openat(AT_FDCWD, "/proc/self/status", O_RDONLY) = 3
+273567 openat(AT_FDCWD, "/sys/devices/system/cpu", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+273567 access("/etc/gcrypt/fips_enabled", F_OK) = -1 ENOENT (No such file or directory)
+273567 openat(AT_FDCWD, "/etc/gcrypt/hwf.deny", O_RDONLY) = -1 ENOENT (No such file or directory)
+273567 stat("/etc/gnutls/config", 0x7ffdf24d52e0) = -1 ENOENT (No such file or directory)
+273567 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-output/adventure-silent.mp4", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3
+273276 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 43
+273567 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 4
+273276 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 43
+273276 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 43
+273634 +++ exited with 0 +++
+273585 +++ exited with 0 +++
+273586 +++ exited with 0 +++
+273587 +++ exited with 0 +++
+273588 +++ exited with 0 +++
+273589 +++ exited with 0 +++
+273590 +++ exited with 0 +++
+273591 +++ exited with 0 +++
+273592 +++ exited with 0 +++
+273593 +++ exited with 0 +++
+273594 +++ exited with 0 +++
+273595 +++ exited with 0 +++
+273596 +++ exited with 0 +++
+273597 +++ exited with 0 +++
+273598 +++ exited with 0 +++
+273599 +++ exited with 0 +++
+273600 +++ exited with 0 +++
+273601 +++ exited with 0 +++
+273602 +++ exited with 0 +++
+273603 +++ exited with 0 +++
+273604 +++ exited with 0 +++
+273605 +++ exited with 0 +++
+273606 +++ exited with 0 +++
+273627 +++ exited with 0 +++
+273620 +++ exited with 0 +++
+273616 +++ exited with 0 +++
+273614 +++ exited with 0 +++
+273613 +++ exited with 0 +++
+273611 +++ exited with 0 +++
+273609 +++ exited with 0 +++
+273607 +++ exited with 0 +++
+273626 +++ exited with 0 +++
+273623 +++ exited with 0 +++
+273628 +++ exited with 0 +++
+273625 +++ exited with 0 +++
+273624 +++ exited with 0 +++
+273622 +++ exited with 0 +++
+273621 +++ exited with 0 +++
+273619 +++ exited with 0 +++
+273618 +++ exited with 0 +++
+273617 +++ exited with 0 +++
+273615 +++ exited with 0 +++
+273612 +++ exited with 0 +++
+273608 +++ exited with 0 +++
+273610 +++ exited with 0 +++
+273633 +++ exited with 0 +++
+273632 +++ exited with 0 +++
+273631 +++ exited with 0 +++
+273629 +++ exited with 0 +++
+273630 +++ exited with 0 +++
+273567 +++ exited with 0 +++
+273276 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=273567, si_uid=1000, si_status=0, si_utime=46, si_stime=92} ---
+273276 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-output/result.json", O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC, 0666) = 43
+273518 +++ exited with 0 +++
+273520 +++ exited with 0 +++
+273519 +++ exited with 0 +++
+273516 +++ exited with 0 +++
+273513 +++ exited with 0 +++
+273517 +++ exited with 0 +++
+273276 +++ exited with 0 +++

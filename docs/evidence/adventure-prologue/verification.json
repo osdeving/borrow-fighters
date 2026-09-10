@@ -1,0 +1,168 @@
+{
+  "date": "2026-09-10",
+  "branch": "feature/rust-adventure-prologue",
+  "runtime_commit": "3985a4b",
+  "current": {
+    "fmt": {
+      "command": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "rust_tests": 0
+    },
+    "clippy": {
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "rust_tests": 0
+    },
+    "all-features": {
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets",
+        "--all-features"
+      ],
+      "exit_code": 0,
+      "rust_tests": 412
+    },
+    "adventure": {
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets",
+        "--no-default-features",
+        "--features",
+        "adventure"
+      ],
+      "exit_code": 0,
+      "rust_tests": 22
+    },
+    "boundaries": {
+      "command": [
+        "python3.13",
+        "tools/check_domain_boundaries.py"
+      ],
+      "exit_code": 0,
+      "rust_tests": 0
+    },
+    "boundary-tests": {
+      "command": [
+        "python3.13",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_check_domain_boundaries.py"
+      ],
+      "exit_code": 0,
+      "rust_tests": 0
+    },
+    "audio-review-tests": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/review",
+        "-p",
+        "test_mix_adventure_review_audio.py"
+      ],
+      "exit_code": 0,
+      "rust_tests": 0
+    }
+  },
+  "previous_feature_matrix": [
+    {
+      "check": "fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4,
+      "passed": 0
+    },
+    {
+      "check": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 3.05,
+      "passed": 0
+    },
+    {
+      "check": "both",
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets",
+        "--all-features"
+      ],
+      "exit_code": 0,
+      "seconds": 12.31,
+      "passed": 411
+    },
+    {
+      "check": "fighting",
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets",
+        "--no-default-features",
+        "--features",
+        "fighting"
+      ],
+      "exit_code": 0,
+      "seconds": 15.52,
+      "passed": 393
+    },
+    {
+      "check": "adventure",
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets",
+        "--no-default-features",
+        "--features",
+        "adventure"
+      ],
+      "exit_code": 0,
+      "seconds": 0.63,
+      "passed": 21
+    },
+    {
+      "check": "core",
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets",
+        "--no-default-features"
+      ],
+      "exit_code": 0,
+      "seconds": 0.71,
+      "passed": 3
+    }
+  ],
+  "notes": "Final matrix follows encoder slice regression; fighting/core unchanged since previous matrix. Native checks use synthetic X11 input. Review audio reconstructed offline."
+}

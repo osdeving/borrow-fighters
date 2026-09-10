@@ -214,7 +214,7 @@ cargo test --all-targets
 5. Teste manualmente:
 
 ```bash
-cargo run
+cargo run --bin borrow-fighters
 ```
 
 Clips opcionais não quebram o jogo se o arquivo não existir. Os assets atuais já existem no repositório e são validados por teste.

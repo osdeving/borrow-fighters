@@ -1,0 +1,52 @@
+{
+  "opening": {
+    "source": "full-sequence.mp4",
+    "start_seconds": 71.46666666666667,
+    "duration_requested": 48,
+    "probe": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 720,
+          "avg_frame_rate": "30/1",
+          "nb_frames": "1440"
+        },
+        {
+          "codec_name": "aac",
+          "avg_frame_rate": "0/0",
+          "nb_frames": "1035"
+        }
+      ],
+      "format": {
+        "duration": "48.047000"
+      }
+    }
+  },
+  "morning": {
+    "source": "full-sequence.mp4",
+    "start_seconds": 39.983333333333334,
+    "duration_requested": 14,
+    "probe": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 720,
+          "avg_frame_rate": "30/1",
+          "nb_frames": "420"
+        },
+        {
+          "codec_name": "aac",
+          "avg_frame_rate": "0/0",
+          "nb_frames": "303"
+        }
+      ],
+      "format": {
+        "duration": "14.047000"
+      }
+    }
+  }
+}

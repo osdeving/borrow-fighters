@@ -151,8 +151,8 @@ As fontes por acao ficam em `assets/production/<personagem>/`; o exportador gera
 Para revisar um conjunto completo em luta ou Combat Lab:
 
 ```bash
-BORROW_FIGHTERS_SPRITE_CANDIDATES=1 cargo run -- --fight --p1 rust --p2 duke
-BORROW_FIGHTERS_SPRITE_CANDIDATES=1 cargo run -- --lab combat --character rust --pose defeat
+BORROW_FIGHTERS_SPRITE_CANDIDATES=1 cargo run --bin borrow-fighters -- --fight --p1 rust --p2 duke
+BORROW_FIGHTERS_SPRITE_CANDIDATES=1 cargo run --bin borrow-fighters -- --lab combat --character rust --pose defeat
 ```
 
 O loader verifica o candidato de cada personagem (`rust`, `duke`, `go`, `c`, `python`, `cpp`) e exige os 20 clips listados acima. Arquivo ausente, invalido, textura ausente ou conjunto incompleto mantem o placeholder daquele personagem; clips faltantes produzem aviso no terminal. Essa verificacao cobre nomes e estrutura, nao aprova os desenhos. Um conjunto parcial deve ser aberto diretamente no Sprite Viewer/Studio, sem mascarar golpes ausentes com `idle` na luta.
@@ -246,9 +246,9 @@ O viewer Raylib embutido no jogo continua disponivel temporariamente ate a limpe
 Abrir o viewer:
 
 ```bash
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip special --character c --move projectile
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip special --character c --move projectile
 ```
 
 Atalhos:

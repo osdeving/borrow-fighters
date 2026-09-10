@@ -47,9 +47,9 @@ Controles: `Y` para P1, `]` para P2 e `LB` segurado + `RT` no controle.
 `T`, `\\` e `RT` sozinho mantêm os especiais de assinatura anteriores.
 
 ```sh
-cargo run -- --showcase --character rust --move cinematic_special --repeat
-cargo run -- --showcase --character python --move cinematic_special --repeat --reverse
-cargo run -- --lab combat --character go --move cinematic_special
+cargo run --bin borrow-fighters -- --showcase --character rust --move cinematic_special --repeat
+cargo run --bin borrow-fighters -- --showcase --character python --move cinematic_special --repeat --reverse
+cargo run --bin borrow-fighters -- --lab combat --character go --move cinematic_special
 ```
 
 O showcase permite repetir, pausar, avançar quadro e espelhar. Os novos

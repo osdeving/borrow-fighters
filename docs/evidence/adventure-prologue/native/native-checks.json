@@ -1,0 +1,330 @@
+{
+  "created_utc": "2026-09-10T09:28:40.877043+00:00",
+  "success": true,
+  "failure": null,
+  "elapsed_seconds": 43.635,
+  "owned_pid": 255110,
+  "owned_window": 6291463,
+  "process_exit_code": 0,
+  "display": ":0",
+  "input_method": "XSendEvent addressed to _NET_WM_PID-owned window",
+  "limitations": "Synthetic window keyboard input; no physical gamepad, focus changes, desktop capture, audio listening or human visual approval.",
+  "checks": [
+    {
+      "name": "morning_runs_before_control",
+      "passed": true,
+      "stage_ticks": 46,
+      "combat_ticks": 0
+    },
+    {
+      "name": "pause_freezes_story_combat_and_health",
+      "passed": true,
+      "stage_tick_delta": 0,
+      "combat_tick_delta": 0,
+      "observed_seconds": 0.6
+    },
+    {
+      "name": "enter_resumes_without_skipping_morning",
+      "passed": true,
+      "stage": "RustMorning",
+      "stage_ticks": 67
+    },
+    {
+      "name": "separate_enter_enters_playable_scene",
+      "passed": true,
+      "stage": "Encounter",
+      "x": 340.0
+    },
+    {
+      "name": "keyboard_moves_rust",
+      "passed": true,
+      "displacement": 80.41665649414062
+    },
+    {
+      "name": "keyboard_jump_leaves_floor",
+      "passed": true,
+      "height_above_floor": 37.9444580078125
+    },
+    {
+      "name": "enemy_can_defeat_unprotected_player",
+      "passed": true,
+      "player_hp": 0,
+      "enemy_hp": 96
+    },
+    {
+      "name": "retry_resets_health_without_prologue",
+      "passed": true,
+      "stage": "Encounter",
+      "player_hp": 100,
+      "enemy_hp": 96
+    },
+    {
+      "name": "light_and_heavy_keys_reach_the_simulation",
+      "passed": true,
+      "observed_attack_actions": [
+        "HeavyAttack",
+        "LightAttack"
+      ]
+    },
+    {
+      "name": "native_keyboard_wins_through_melee_contact",
+      "passed": true,
+      "outcome": "Victory",
+      "enemy_hp": 0,
+      "player_hp": 100,
+      "distinct_player_contacts": 6,
+      "distinct_guard_contacts": 6
+    },
+    {
+      "name": "keyboard_guard_blocks_real_enemy_contacts",
+      "passed": true,
+      "distinct_guard_contacts": 6
+    },
+    {
+      "name": "victory_reaches_compassionate_gesture",
+      "passed": true,
+      "player_hp": 100,
+      "enemy_hp": 0,
+      "action": "Remorse"
+    },
+    {
+      "name": "story_completes_only_after_real_victory",
+      "passed": true,
+      "stage": "Complete",
+      "outcome": "Victory"
+    },
+    {
+      "name": "recorded_mp4_has_frames_and_preserves_elapsed_time",
+      "passed": true,
+      "codec": "h264",
+      "width": 1280,
+      "height": 720,
+      "frame_rate": "30/1",
+      "frames": 1226,
+      "duration_seconds": 40.867,
+      "telemetry_seconds": 40.89661407470703,
+      "absolute_duration_error": 0.02961407470703392
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/01-morning.png",
+      "observed": {
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 48,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 2.070566177368164,
+        "stage": "RustMorning",
+        "stage_ticks": 64,
+        "ticks": 0
+      }
+    },
+    {
+      "file": "screenshots/02-morning-paused.png",
+      "observed": {
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 92,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": true,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 3.5810365676879883,
+        "stage": "RustMorning",
+        "stage_ticks": 64,
+        "ticks": 0
+      }
+    },
+    {
+      "file": "screenshots/03-native-jump.png",
+      "observed": {
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 140,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Jump",
+          "facing": "Right",
+          "hp": 100,
+          "x": 520.1666870117188,
+          "y": 465.0833740234375
+        },
+        "seconds": 5.60637092590332,
+        "stage": "Encounter",
+        "stage_ticks": 44,
+        "ticks": 44
+      }
+    },
+    {
+      "file": "screenshots/04-native-defeat.png",
+      "observed": {
+        "enemy": {
+          "action": "Lunge",
+          "hp": 96,
+          "x": 755.2288818359375,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1029,
+        "hit": null,
+        "outcome": "Defeat",
+        "paused": false,
+        "player": {
+          "action": "Defeated",
+          "facing": "Right",
+          "hp": 0,
+          "x": 658.0628662109375,
+          "y": 580.0
+        },
+        "seconds": 21.80793571472168,
+        "stage": "Encounter",
+        "stage_ticks": 955,
+        "ticks": 955
+      }
+    },
+    {
+      "file": "screenshots/05-native-retry.png",
+      "observed": {
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1443.165771484375,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1038,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1100.0,
+          "y": 580.0
+        },
+        "seconds": 23.19696617126465,
+        "stage": "Encounter",
+        "stage_ticks": 22,
+        "ticks": 22
+      }
+    },
+    {
+      "file": "screenshots/06-native-victory.png",
+      "observed": {
+        "enemy": {
+          "action": "Defeated",
+          "hp": 0,
+          "x": 1044.3070068359375,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1477,
+        "hit": null,
+        "outcome": "Victory",
+        "paused": false,
+        "player": {
+          "action": "Remorse",
+          "facing": "Right",
+          "hp": 100,
+          "x": 945.4267578125,
+          "y": 580.0
+        },
+        "seconds": 31.952699661254883,
+        "stage": "Aftermath",
+        "stage_ticks": 19,
+        "ticks": 485
+      }
+    },
+    {
+      "file": "screenshots/07-native-remorse.png",
+      "observed": {
+        "enemy": {
+          "action": "Defeated",
+          "hp": 0,
+          "x": 1046.1710205078125,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1574,
+        "hit": null,
+        "outcome": "Victory",
+        "paused": false,
+        "player": {
+          "action": "Remorse",
+          "facing": "Right",
+          "hp": 100,
+          "x": 945.4267578125,
+          "y": 580.0
+        },
+        "seconds": 34.945953369140625,
+        "stage": "Aftermath",
+        "stage_ticks": 137,
+        "ticks": 603
+      }
+    },
+    {
+      "file": "screenshots/08-native-complete.png",
+      "observed": {
+        "enemy": {
+          "action": "Defeated",
+          "hp": 0,
+          "x": 1046.1710205078125,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1851,
+        "hit": null,
+        "outcome": "Victory",
+        "paused": false,
+        "player": {
+          "action": "Remorse",
+          "facing": "Right",
+          "hp": 100,
+          "x": 945.4267578125,
+          "y": 580.0
+        },
+        "seconds": 40.89661407470703,
+        "stage": "Complete",
+        "stage_ticks": 0,
+        "ticks": 886
+      }
+    }
+  ],
+  "telemetry_records": 1852,
+  "video": "adventure-silent.mp4",
+  "x11_errors": []
+}

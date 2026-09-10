@@ -1,0 +1,50 @@
+[
+  {
+    "name": "both",
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--all-features"
+    ],
+    "exit_code": 0,
+    "passed": 421
+  },
+  {
+    "name": "fighting",
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--no-default-features",
+      "--features",
+      "fighting"
+    ],
+    "exit_code": 0,
+    "passed": 395
+  },
+  {
+    "name": "adventure",
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--no-default-features",
+      "--features",
+      "adventure"
+    ],
+    "exit_code": 0,
+    "passed": 27
+  },
+  {
+    "name": "core",
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--no-default-features"
+    ],
+    "exit_code": 0,
+    "passed": 3
+  }
+]

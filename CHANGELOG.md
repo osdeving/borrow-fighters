@@ -1,5 +1,46 @@
 # Changelog
 
+## v0.1.0-prototype.4 — Aventura, apresentação e menu integrado
+
+Corte em preparação; publicação e pacotes acompanhados no
+[processo de release](docs/06-release-process.md).
+
+- `cargo run` e os pacotes iniciam a aventura, a apresentação e o menu na mesma
+  janela. `borrow-story` é a entrada padrão, com `adventure` e `fighting`
+  habilitadas; `--menu` abre diretamente o menu. Os modos isolados continuam disponíveis.
+- Prólogo ilustrado e animado de Ada, mensagem digitada, despertar de Assembly,
+  salto temporal e manhã cotidiana de Rust antes do primeiro combate manual.
+- Encontro com errática, movimento, salto, defesa, ataques, dano, derrota/retry,
+  pausa e gesto de pesar após vencer, com assets e áudio próprios da aventura.
+- `Enter`/`RB` avança ao próximo trecho; `Backspace`/`View` pula tudo para o menu,
+  inclusive durante combate ou pausa. Pular o encontro não registra vitória.
+  No fim normal, **Aperte qualquer tecla para continuar** exige nova entrada;
+  manter a tecla anterior pressionada conserva a espera.
+- Apresentação de 48 s após combate/pesar: jornais, histórias ilustradas de C++
+  e Python, cinco personagens, logo e subtítulo. Go fica fora da apresentação
+  e da seleção pública. Entrada direta `--start opening`; replay `T/X` na aventura isolada.
+- Menu com identidade do título final, moldura de terminal, cursor de bloco
+  piscante e revelação binária. `Modo História` substitui Quick Fight e fica
+  reservado, sem ação; Versus Setup e os demais destinos permanecem disponíveis.
+- Textos em JSON editável com F5 e `--texts`, incluindo terminal, legendas,
+  interface, manchetes e subtítulo; reload inválido preserva a última versão.
+  Os textos editados pelo usuário foram preservados na retomada.
+- Apoios da manhã corrigidos no colchão e no chão. Som da manhã substituído
+  por notas suaves após relato de chiado; o WAV externo dispensa recompilação.
+- Lore do episódio: Ada humana que se torna híbrida, Assembly primeira EP,
+  Rust EP mais recente, origem involuntária das erráticas e convivência como valor.
+  C++ escolhe usar o Linker como heroína; Python é professora universitária.
+  A revisão editorial e visual de Lore / Roster permanece no TODO-016.
+- Assets da aventura incluídos nos cinco pacotes Windows/Linux, mantendo
+  a correção de caminhos com acentos, seleção, reações, pausa/revanche e energia.
+- Backlog separado em to-do e bugfix, diário de retomada e verificação em CI
+  das fronteiras de domínio e combinações de features. As ideias de Vínculo
+  e capítulo em Sirius seguem em avaliação, fora deste episódio.
+- [Novidades, controles e downloads](docs/releases/v0.1.0-prototype.4.md),
+  [episódio](docs/27-rust-story-adventure.md),
+  [textos e apresentação](docs/28-adventure-texts-and-opening.md) e
+  [transição e navegação](docs/29-story-terminal-menu.md).
+
 ## v0.1.0-prototype.3 — Seleção, reações e fluxo de partida
 
 - Seleção visual Linker com retratos, personagens animados, confirmação P1/P2,

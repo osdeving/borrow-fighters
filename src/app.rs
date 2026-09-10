@@ -98,6 +98,22 @@ pub struct App {
     visual_time_seconds: f32,
 }
 
+/// Owns a ready main menu and its graphics while a host presents an introduction.
+///
+/// Preparation does not open an audio device, accept input or advance gameplay.
+/// The host must keep the Raylib window alive until this value is run or dropped.
+pub struct PreparedMenu {
+    app: App,
+    assets: GameAssets,
+}
+
+impl PreparedMenu {
+    /// Starts the prepared menu, initializing its audio only at this handoff.
+    pub fn run(self, raylib: &mut RaylibHandle, thread: &RaylibThread) {
+        self.app.run_with_assets(raylib, thread, self.assets);
+    }
+}
+
 impl Default for App {
     fn default() -> Self {
         Self::new(LaunchOptions::default())
@@ -108,6 +124,24 @@ impl App {
     /// Creates app state for the selected startup mode.
     pub fn new(options: LaunchOptions) -> Self {
         Self::with_onboarding_marker(options, data_dir().join("onboarding-v1.seen"))
+    }
+
+    /// Opens the main menu directly when a host has already shown its introduction.
+    ///
+    /// This does not mark the controls guide as read; it remains available in-menu.
+    pub fn at_main_menu() -> Self {
+        Self {
+            preferences_menu: PreferencesMenu::default(),
+            ..Self::default()
+        }
+    }
+
+    /// Loads fighting graphics before the host begins an unrelated introduction.
+    pub fn prepare_main_menu(raylib: &mut RaylibHandle, thread: &RaylibThread) -> PreparedMenu {
+        PreparedMenu {
+            app: Self::at_main_menu(),
+            assets: GameAssets::load(raylib, thread),
+        }
     }
 
     fn with_onboarding_marker(options: LaunchOptions, marker: PathBuf) -> Self {
@@ -207,6 +241,16 @@ impl App {
         }
 
         let assets = GameAssets::load(raylib, thread);
+        self.run_with_assets(raylib, thread, assets);
+    }
+
+    fn run_with_assets(
+        mut self,
+        raylib: &mut RaylibHandle,
+        thread: &RaylibThread,
+        assets: GameAssets,
+    ) {
+        raylib.set_target_fps(TARGET_FPS);
         self.sync_world_sprite_combat(&assets);
         self.combat_lab
             .set_combat_manifest(fighter_manifest_for_character(

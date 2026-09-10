@@ -58,17 +58,29 @@ Para executar a partir do código-fonte, os requisitos são:
 - Rust estável.
 - Dependências nativas exigidas por Raylib/raylib-rs no seu sistema operacional.
 
-Comando:
+`cargo run` inicia a aventura, a apresentação e o menu na mesma janela.
+`Backspace`/`View` pula tudo direto ao menu. Para começar pelo menu, use
+`cargo run -- --menu`; para rever a apresentação, use `cargo run -- --start opening`.
+As features `adventure` e `fighting` vêm habilitadas por padrão.
+
+Comandos:
 
 ```bash
 cargo run
-cargo run -- --fight --p1 go --p2 duke
-cargo run -- --fight --p1 c --p2 rust
-cargo run -- --fight --p1 python --p2 duke
-cargo run -- --fight --p1 cpp --p2 c
+cargo run --bin borrow-fighters -- --fight --p1 go --p2 duke
+cargo run --bin borrow-fighters -- --fight --p1 c --p2 rust
+cargo run --bin borrow-fighters -- --fight --p1 python --p2 duke
+cargo run --bin borrow-fighters -- --fight --p1 cpp --p2 c
 ```
 
-Use `--p1`/`--player-one` e `--p2`/`--player-two` para iniciar matchups específicos sem tela de seleção. Valores aceitos: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` e `cpp.cpp`. Use `--fight` ou `--skip-menu` para abrir diretamente na luta. A seleção visual oferece Rust, Duke/Java, C, Python e C++, além de uma opção aleatória entre esses cinco; os espaços futuros não podem ser confirmados. Go/Gopher fica disponível por CLI e ferramentas enquanto permanece fora da seleção pública.
+Para compilar e executar apenas um dos modos:
+
+```bash
+cargo run --no-default-features --features fighting --bin borrow-fighters
+cargo run --no-default-features --features adventure --bin borrow-adventure
+```
+
+No executável `borrow-fighters`, use `--p1`/`--player-one` e `--p2`/`--player-two` para definir matchups específicos. Valores aceitos: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` e `cpp.cpp`. Use `--fight` ou `--skip-menu` para abrir diretamente na luta. A seleção visual oferece Rust, Duke/Java, C, Python e C++, além de uma opção aleatória entre esses cinco; os espaços futuros não podem ser confirmados. Go/Gopher fica disponível por CLI e ferramentas enquanto permanece fora da seleção pública.
 
 Checks úteis:
 
@@ -85,13 +97,13 @@ O GitHub também roda `Rust Check` no PR para validar formatação, testes e cli
 Abra pelo menu `Training > Move Showcase`. A cena usa o Player 1 da configuração de luta confirmada, a arena atual e um adversário do mesmo elenco. Também abre diretamente por CLI:
 
 ```bash
-cargo run -- --showcase --character rust --move anti_air --repeat
-cargo run -- --showcase --character duke --move throw --repeat
-cargo run -- --showcase --character c --move sweep --reverse
-cargo run -- --showcase --character python --move signature_special --repeat
-cargo run -- --showcase --character cpp --move signature_special --repeat --reverse
-cargo run -- --showcase --character rust --move cinematic_special --repeat
-cargo run -- --showcase --character go --move cinematic_special --repeat
+cargo run --bin borrow-fighters -- --showcase --character rust --move anti_air --repeat
+cargo run --bin borrow-fighters -- --showcase --character duke --move throw --repeat
+cargo run --bin borrow-fighters -- --showcase --character c --move sweep --reverse
+cargo run --bin borrow-fighters -- --showcase --character python --move signature_special --repeat
+cargo run --bin borrow-fighters -- --showcase --character cpp --move signature_special --repeat --reverse
+cargo run --bin borrow-fighters -- --showcase --character rust --move cinematic_special --repeat
+cargo run --bin borrow-fighters -- --showcase --character go --move cinematic_special --repeat
 ```
 
 Cada personagem da demo tem 16 situações: 12 ataques, contando projétil, assinatura e cinematográfico, e quatro demonstrações de defesa. A aproximação é real: o oponente anda em direção ao jab, salta em direção ao anti-air e ao Template Arc, protege o tronco contra a rasteira ou agacha contra o overhead. O agarrão pega um oponente próximo em guarda. Os ataques aéreos acontecem durante um salto real do atacante. As quatro defesas mostram guarda em pé contra jab, guarda em pé contra overhead, guarda baixa contra rasteira e bloqueio de projétil.
@@ -116,25 +128,25 @@ Dano e resultado vêm das colisões do `World`, incluindo blockstun, hitstun e q
 Para abrir uma cena limpa de inspeção de golpe:
 
 ```bash
-cargo run -- --lab combat --character rust --move light_punch
-cargo run -- --lab combat --character duke --move projectile
-cargo run -- --lab combat --character rust --move sweep
-cargo run -- --lab combat --character duke --move anti-air
-cargo run -- --lab combat --character go --move kick
-cargo run -- --lab combat --character c --move projectile
-cargo run -- --lab combat --character python --move heavy_punch
-cargo run -- --lab combat --character cpp --move overhead
-cargo run -- --lab combat --character python --move signature_special
+cargo run --bin borrow-fighters -- --lab combat --character rust --move light_punch
+cargo run --bin borrow-fighters -- --lab combat --character duke --move projectile
+cargo run --bin borrow-fighters -- --lab combat --character rust --move sweep
+cargo run --bin borrow-fighters -- --lab combat --character duke --move anti-air
+cargo run --bin borrow-fighters -- --lab combat --character go --move kick
+cargo run --bin borrow-fighters -- --lab combat --character c --move projectile
+cargo run --bin borrow-fighters -- --lab combat --character python --move heavy_punch
+cargo run --bin borrow-fighters -- --lab combat --character cpp --move overhead
+cargo run --bin borrow-fighters -- --lab combat --character python --move signature_special
 ```
 
 Para abrir uma pose estática:
 
 ```bash
-cargo run -- --lab combat --character rust --pose crouch
-cargo run -- --lab combat --character duke --pose victory
-cargo run -- --lab combat --character go --pose jump
-cargo run -- --lab combat --character c --pose idle
-cargo run -- --lab combat --character python --pose hit
+cargo run --bin borrow-fighters -- --lab combat --character rust --pose crouch
+cargo run --bin borrow-fighters -- --lab combat --character duke --pose victory
+cargo run --bin borrow-fighters -- --lab combat --character go --pose jump
+cargo run --bin borrow-fighters -- --lab combat --character c --pose idle
+cargo run --bin borrow-fighters -- --lab combat --character python --pose hit
 ```
 
 No Combat Lab, `Tab` / `Shift+Tab` alterna golpes, `PageDown` / `PageUp` alterna poses, `Enter` reinicia, `Espaço` pausa, `.` avança um frame quando pausado, `Home` volta ao frame 0, `H` alterna hurtbox, `B` alterna hitbox, `P` alterna pivot/eixos, `D` alterna dummy, `A` alterna o fundo de arena e `Esc` volta ao menu quando o lab foi aberto por `Training`.
@@ -143,12 +155,14 @@ O Combat Lab abre com o fundo `Sirius` ligado para validar contraste de golpe/sp
 
 ## Menu Principal
 
-Na primeira abertura, o guia **Como jogar** mostra controles de teclado e gamepad,
+Na entrada conjunta de `cargo run`, concluir ou pular a apresentação abre o menu
+principal; **Como jogar** fica disponível como opção. No executável isolado
+`borrow-fighters`, a primeira abertura exibe esse guia com controles de teclado e gamepad,
 defesa, condição de vitória e três modos: **Jogar contra CPU** (você é P1),
 **Duelo local** (P1 e P2 manuais) e **Assistir demo** (CPU contra CPU). Escolher um
 modo abre a seleção de personagens com essa configuração. Confirme P1, confirme
 P2 e então escolha **Lutar** para começar. **Ir ao menu principal** abre as outras
-opções antes de jogar. O jogo volta ao menu principal nas próximas aberturas, sempre
+opções antes de jogar. O executável isolado volta ao menu principal nas próximas aberturas, sempre
 começando com P1 manual contra P2 CPU. A escolha do modo vale para a sessão.
 
 O guia pode ser reaberto em **Como jogar** no menu. Sair dele por uma opção ou
@@ -328,12 +342,12 @@ Hitboxes, hurtboxes, retângulos de reação/guarda, limites da arena, labels de
 Para testar um golpe sem iniciar a luta completa:
 
 ```bash
-cargo run -- --lab combat --character rust --move light_punch
-cargo run -- --lab combat --character duke --move projectile
-cargo run -- --lab combat --character rust --move overhead
-cargo run -- --lab combat --character duke --move throw
-cargo run -- --lab combat --character go --move light_punch
-cargo run -- --lab combat --character c --move projectile
+cargo run --bin borrow-fighters -- --lab combat --character rust --move light_punch
+cargo run --bin borrow-fighters -- --lab combat --character duke --move projectile
+cargo run --bin borrow-fighters -- --lab combat --character rust --move overhead
+cargo run --bin borrow-fighters -- --lab combat --character duke --move throw
+cargo run --bin borrow-fighters -- --lab combat --character go --move light_punch
+cargo run --bin borrow-fighters -- --lab combat --character c --move projectile
 ```
 
 Use o Combat Lab para verificar:

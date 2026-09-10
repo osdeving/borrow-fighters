@@ -1,0 +1,48 @@
+{
+  "enemy_hp": 96,
+  "events": [
+    {
+      "enemy_hp": 96,
+      "frame": 0,
+      "player_hp": 100,
+      "seconds": 0.01666666753590107,
+      "stage": "AdaPrologue"
+    },
+    {
+      "enemy_hp": 96,
+      "frame": 202,
+      "player_hp": 100,
+      "seconds": 3.62372088432312,
+      "stage": "RustMorning"
+    },
+    {
+      "enemy_hp": 96,
+      "frame": 407,
+      "player_hp": 100,
+      "seconds": 7.170380592346191,
+      "stage": "Encounter"
+    },
+    {
+      "enemy_hp": 96,
+      "frame": 437,
+      "player_hp": 100,
+      "seconds": 7.758155822753906,
+      "stage": "Opening"
+    },
+    {
+      "enemy_hp": 96,
+      "frame": 1031,
+      "player_hp": 100,
+      "seconds": 20.7020263671875,
+      "stage": "Complete"
+    }
+  ],
+  "exit_reason": "Completed",
+  "final_stage": "Complete",
+  "frames": 1188,
+  "limitations": "Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest.",
+  "mode": "window_input_capture",
+  "outcome": "Ongoing",
+  "paused_frames": 0,
+  "player_hp": 100
+}

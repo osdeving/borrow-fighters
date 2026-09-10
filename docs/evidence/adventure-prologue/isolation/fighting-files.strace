@@ -1,0 +1,441 @@
+274197 execve("/home/willams/borrow-fighters/target/debug/examples/capture_ui_review", ["/home/willams/borrow-fighters/ta"..., "/tmp/borrow-runtime-isolation-20"...], 0x7ffeabc33310 /* 72 vars */) = 0
+274197 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/proc/self/maps", O_RDONLY|O_CLOEXEC) = 3
+274197 mkdir("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output", 0777) = -1 EEXIST (File exists)
+274197 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=4096, ...}) = 0
+274197 openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache", O_RDONLY) = 3
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libX11.so.6", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb.so.1", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXau.so.6", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXdmcp.so.6", O_RDONLY|O_CLOEXEC) = 3
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libbsd.so.0", O_RDONLY|O_CLOEXEC) = 3
+274197 access("/home/willams/.Xauthority", R_OK) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXxf86vm.so.1", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXext.so.6", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXi.so.6", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXrandr.so.2", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXrender.so.1", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXcursor.so.1", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXfixes.so.3", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libXinerama.so.1", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libX11-xcb.so.1", O_RDONLY|O_CLOEXEC) = 6
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.Xdefaults-galaxy-book", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/share/X11/locale/locale.alias", O_RDONLY) = 6
+274197 openat(AT_FDCWD, "/usr/share/X11/locale/locale.dir", O_RDONLY) = 6
+274197 access("/usr/share/X11/locale/en_US.UTF-8/XLC_LOCALE", R_OK) = 0
+274197 openat(AT_FDCWD, "/usr/share/X11/locale/en_US.UTF-8/XLC_LOCALE", O_RDONLY) = 6
+274197 openat(AT_FDCWD, "/usr/share/X11/locale/compose.dir", O_RDONLY) = 6
+274197 access("/usr/share/X11/locale/en_US.UTF-8/Compose", R_OK) = 0
+274197 openat(AT_FDCWD, "/usr/share/X11/locale/en_US.UTF-8/Compose", O_RDONLY) = 6
+274197 openat(AT_FDCWD, "/home/willams/.XCompose", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/share/X11/locale/compose.dir", O_RDONLY) = 6
+274197 access("/usr/share/X11/locale/en_US.UTF-8/Compose", R_OK) = 0
+274197 stat("/usr/share/X11/locale/en_US.UTF-8/Compose", {st_mode=S_IFREG|0644, st_size=573945, ...}) = 0
+274197 stat("/var/cache/libx11/compose/", 0x7ffddeab4920) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/share/X11/locale/en_US.UTF-8/Compose", {st_mode=S_IFREG|0644, st_size=573945, ...}) = 0
+274197 stat("/home/willams/.compose-cache/", 0x7ffddeab4920) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/share/X11/locale/en_US.UTF-8/Compose", O_RDONLY) = 6
+274197 openat(AT_FDCWD, "/usr/share/X11/XKeysymDB", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/share/X11/locale/compose.dir", O_RDONLY) = 6
+274197 access("/usr/share/X11/locale/en_US.UTF-8/Compose", R_OK) = 0
+274197 openat(AT_FDCWD, "/usr/share/X11/locale/en_US.UTF-8/Compose", O_RDONLY) = 6
+274197 openat(AT_FDCWD, "/home/willams/.XCompose", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/share/X11/locale/compose.dir", O_RDONLY) = 6
+274197 access("/usr/share/X11/locale/en_US.UTF-8/Compose", R_OK) = 0
+274197 stat("/usr/share/X11/locale/en_US.UTF-8/Compose", {st_mode=S_IFREG|0644, st_size=573945, ...}) = 0
+274197 stat("/var/cache/libx11/compose/", 0x7ffddeab48c0) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/share/X11/locale/en_US.UTF-8/Compose", {st_mode=S_IFREG|0644, st_size=573945, ...}) = 0
+274197 stat("/home/willams/.compose-cache/", 0x7ffddeab48c0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/share/X11/locale/en_US.UTF-8/Compose", O_RDONLY) = 6
+274197 inotify_add_watch(6, "/dev/input", IN_ATTRIB|IN_CREATE|IN_DELETE) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/dev/input", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libGLX.so.0", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libGLdispatch.so.0", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libGLX_mesa.so.0", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libglapi.so.0", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdrm.so.2", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-glx.so.0", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-dri2.so.0", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-shm.so.0", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libexpat.so.1", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-dri3.so.0", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-present.so.0", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-sync.so.1", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxshmfence.so.1", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libxcb-xfixes.so.0", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/dri/tls/swrast_dri.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libLLVM-12.so.1", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libz.so.1", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libzstd.so.1", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libsensors.so.5", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdrm_radeon.so.1", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libelf.so.1", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdrm_amdgpu.so.1", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdrm_nouveau.so.2", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libvulkan.so.1", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/tls/haswell/x86_64/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/../lib/tls/haswell/x86_64", 0x7ffddeab22a0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/tls/haswell/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/../lib/tls/haswell", 0x7ffddeab22a0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/tls/x86_64/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/../lib/tls/x86_64", 0x7ffddeab22a0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/tls/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/../lib/tls", 0x7ffddeab22a0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/haswell/x86_64/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/../lib/haswell/x86_64", 0x7ffddeab22a0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/haswell/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/../lib/haswell", 0x7ffddeab22a0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/x86_64/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/../lib/x86_64", 0x7ffddeab22a0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/../lib/libffi.so.7", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/../lib", 0x7ffddeab22a0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libffi.so.7", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libedit.so.2", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/librt.so.1", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libtinfo.so.6", O_RDONLY|O_CLOEXEC) = 7
+274197 lstat("/proc", {st_mode=S_IFDIR|0555, st_size=0, ...}) = 0
+274197 lstat("/proc/self", {st_mode=S_IFLNK|0777, st_size=0, ...}) = 0
+274197 readlink("/proc/self", "274197", 4095) = 6
+274197 lstat("/proc/274197", {st_mode=S_IFDIR|0555, st_size=0, ...}) = 0
+274197 lstat("/proc/274197/exe", {st_mode=S_IFLNK|0777, st_size=0, ...}) = 0
+274197 readlink("/proc/274197/exe", "/home/willams/borrow-fighters/ta"..., 4095) = 69
+274197 lstat("/home", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+274197 lstat("/home/willams", {st_mode=S_IFDIR|0755, st_size=12288, ...}) = 0
+274197 lstat("/home/willams/borrow-fighters", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+274197 lstat("/home/willams/borrow-fighters/target", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+274197 lstat("/home/willams/borrow-fighters/target/debug", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+274197 lstat("/home/willams/borrow-fighters/target/debug/examples", {st_mode=S_IFDIR|0755, st_size=69632, ...}) = 0
+274197 lstat("/home/willams/borrow-fighters/target/debug/examples/capture_ui_review", {st_mode=S_IFREG|0755, st_size=19310992, ...}) = 0
+274197 openat(AT_FDCWD, "/usr/share/drirc.d", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 7
+274197 openat(AT_FDCWD, "/usr/share/drirc.d/00-mesa-defaults.conf", O_RDONLY) = 7
+274197 openat(AT_FDCWD, "/etc/drirc", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.drirc", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/share/drirc.d", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 7
+274197 openat(AT_FDCWD, "/usr/share/drirc.d/00-mesa-defaults.conf", O_RDONLY) = 7
+274197 openat(AT_FDCWD, "/etc/drirc", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/home/willams/.drirc", O_RDONLY) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/sys/devices/system/cpu", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 7
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/usr/lib/wsl/lib/libdxcore.so", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/dev/dxg", O_RDONLY|O_CLOEXEC) = 7
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 8
+274197 openat(AT_FDCWD, "/usr/lib/wsl/lib/libd3d12.so", O_RDONLY|O_CLOEXEC) = 8
+274197 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/tls/haswell/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/tls/haswell/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/tls/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/tls/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/haswell/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/haswell/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "$$$/usr/lib/wsl/lib/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/wsl/lib/tls/haswell/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/wsl/lib/tls/haswell/x86_64", 0x7ffddeab2dc0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/wsl/lib/tls/haswell/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/wsl/lib/tls/haswell", 0x7ffddeab2dc0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/wsl/lib/tls/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/wsl/lib/tls/x86_64", 0x7ffddeab2dc0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/wsl/lib/tls/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/wsl/lib/tls", 0x7ffddeab2dc0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/wsl/lib/haswell/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/wsl/lib/haswell/x86_64", 0x7ffddeab2dc0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/wsl/lib/haswell/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/wsl/lib/haswell", 0x7ffddeab2dc0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/wsl/lib/x86_64/libd3d12core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/wsl/lib/x86_64", 0x7ffddeab2dc0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/wsl/lib/libd3d12core.so", O_RDONLY|O_CLOEXEC) = 8
+274197 openat(AT_FDCWD, "/usr/lib/wsl/drivers/nvsm.inf_amd64_ee485ba6e3aa020d/libnvwgf2umx.so", O_RDONLY|O_CLOEXEC) = 8
+274197 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 8
+274197 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 8
+274197 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 8
+274197 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 260) = 52
+274400 execve("/bin/sh", ["sh", "-c", "cat /proc/274197/cmdline"], 0x7ffddeab7720 /* 72 vars */) = 0
+274400 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+274400 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+274400 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+274400 stat("/home/willams/borrow-fighters", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+274400 stat(".", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+274400 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 4096) = 52
+274400 stat("/home/willams/go/bin/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/home/willams/.local/bin/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/home/willams/.cargo/bin/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/home/willams/.codex/tmp/arg0/codex-arg06mJwwl/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/home/willams/.vscode-server/bin/645f29cc3176500b4b5762ba887cf2a7f0ffdf2c/bin/remote-cli/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/home/willams/go/bin/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/home/willams/.sdkman/candidates/java/current/bin/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/home/willams/.local/share/pnpm/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/home/willams/.local/bin/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/home/willams/.cargo/bin/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/home/willams/.cargo/bin/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/usr/local/sbin/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/usr/local/bin/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/usr/sbin/cat", 0x7fff7c0db4c0) = -1 ENOENT (No such file or directory)
+274400 stat("/usr/bin/cat", {st_mode=S_IFREG|0755, st_size=43416, ...}) = 0
+274401 execve("/usr/bin/cat", ["cat", "/proc/274197/cmdline"], 0x5b1da5929228 /* 72 vars */) = 0
+274401 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+274401 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache", O_RDONLY) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_NAME", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_PAPER", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MESSAGES/SYS_LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_TIME", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = 3
+274401 openat(AT_FDCWD, "/proc/274197/cmdline", O_RDONLY) = 3
+274401 +++ exited with 0 +++
+274400 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=274401, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+274400 +++ exited with 0 +++
+274197 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=274400, si_uid=1000, si_status=0, si_utime=0, si_stime=1} ---
+274197 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 260) = 52
+274197 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 260) = 52
+274197 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 260) = 52
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 43
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/tls/haswell/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/tls/haswell", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/tls/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/tls", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/haswell/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/haswell", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64-linux-gnu", {st_mode=S_IFDIR|0755, st_size=81920, ...}) = 0
+274197 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/x86_64-linux-gnu/tls/haswell/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/x86_64-linux-gnu/tls/haswell", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/x86_64-linux-gnu/tls/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/x86_64-linux-gnu/tls", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/x86_64-linux-gnu/haswell/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/x86_64-linux-gnu/haswell", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/x86_64-linux-gnu/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/x86_64-linux-gnu", {st_mode=S_IFDIR|0755, st_size=81920, ...}) = 0
+274197 openat(AT_FDCWD, "/lib/tls/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/tls/haswell/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/tls/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/tls/haswell", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/tls/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/tls/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/tls/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/tls", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/haswell/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/haswell", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+274197 openat(AT_FDCWD, "/usr/lib/tls/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/tls/haswell/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/tls/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/tls/haswell", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/tls/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/tls/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/tls/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/tls", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/haswell/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/haswell/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/haswell/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/haswell", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/x86_64/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib/x86_64", 0x7ffddeab3810) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/libdxil.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 stat("/usr/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+274197 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 43
+274197 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/dxcompiler.dll", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/dxcompiler.dll", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/lib/dxcompiler.dll", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/usr/lib/dxcompiler.dll", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 43
+274197 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 4095) = 52
+274197 getcwd("/tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd", 4095) = 52
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/cpp/laptop.png", O_RDONLY) = 44
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/python/transform.png", O_RDONLY) = 44
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/python/serpent.png", O_RDONLY) = 44
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/python/revert.png", O_RDONLY) = 44
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/python/celebrate.png", O_RDONLY) = 44
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/duke/collector-poses.png", O_RDONLY) = 44
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/cpp/footgun-comedy.png", O_RDONLY) = 44
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/cpp/footgun-barrage.png", O_RDONLY) = 44
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/super-sequences/trash/garbage-items.png", O_RDONLY) = 44
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/stage-life/arena-sirius-clean.png", O_RDONLY) = 44
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/arena-fortaleza.png", O_RDONLY) = 44
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/arena-java-street.png", O_RDONLY) = 44
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/arena-biotic.png", O_RDONLY) = 44
+274197 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 44
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/arena-porto-digital.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/arena-vale-pinhao.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/stage-life/caramelo-run.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/production/stage-life/jessica-gesture.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/lore/story.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=8824, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/menu-title-borrow-fighters.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/roster-rust.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/roster-duke.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/roster-c.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/roster-python.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/roster-cpp.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/fighter-greybox-spritesheet.png", O_RDONLY) = 45
+274197 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/rust/rust-fighter.sprite.json", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=54395, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/rust-fighter.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=23940, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/rust/rust-fighter.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=54395, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/rust/rust-fighter-atlas.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/rust/rust-contact-reactions-atlas.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/rust-start.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=9627, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/rust-start-atlas.png", O_RDONLY) = 45
+274197 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/duke/duke-fighter.sprite.json", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=51592, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/duke-fighter.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=22945, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/duke/duke-fighter.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=51592, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/duke/duke-fighter-atlas.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/duke/duke-contact-reactions-atlas.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/duke-start.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=9172, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/duke-start-atlas.png", O_RDONLY) = 45
+274197 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/go/go-fighter.sprite.json", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=39729, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/go-fighter.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=17141, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/go/go-fighter.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=39729, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/go/go-fighter-atlas.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/go/go-contact-reactions-atlas.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/go-start.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=4829, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/go-start-atlas.png", O_RDONLY) = 45
+274197 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/c/c-fighter.sprite.json", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=51777, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/c-fighter.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=52625, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/c/c-fighter.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=51777, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/c/c-fighter-atlas.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/c/c-contact-reactions-atlas.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/c-start.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=3924, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/c-start-atlas.png", O_RDONLY) = 45
+274197 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/python/python-fighter.sprite.json", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=50859, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/python-fighter.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=56279, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/python/python-fighter.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=50859, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/python/python-fighter-atlas.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/python/python-reactions-atlas.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/python-start.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=6725, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/python-start-atlas.png", O_RDONLY) = 45
+274197 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/cpp/cpp-fighter.sprite.json", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=51140, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/cpp-fighter.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=58504, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/cpp/cpp-fighter.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=51140, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/cpp/cpp-fighter-atlas.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/cpp/cpp-reactions-own-2026-09-09.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/rust/rust-signature-fx.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=2395, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/rust/rust-signature-fx.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/duke/duke-signature-fx.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=3119, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/duke/duke-signature-fx.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/c/c-signature-fx.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=3096, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/c/c-signature-fx.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/python/python-signature-fx.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=3234, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/python/python-signature-fx-atlas.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/cpp/cpp-signature-fx.sprite.json", O_RDONLY|O_CLOEXEC) = 45
+274197 statx(45, "", AT_STATX_SYNC_AS_STAT|AT_EMPTY_PATH, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=3455, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/cpp/cpp-signature-fx-atlas.png", O_RDONLY) = 45
+274197 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/rust/rust-projectile.png", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=36482, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/rust/rust-projectile.png", O_RDONLY) = 45
+274197 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/duke/duke-projectile.png", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=13685, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/duke/duke-projectile.png", O_RDONLY) = 45
+274197 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/go/go-projectile.png", AT_STATX_SYNC_AS_STAT, STATX_ALL, 0x7ffddeab34b0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/go-channel-projectile.png", O_RDONLY) = 45
+274197 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/c/c-projectile.png", AT_STATX_SYNC_AS_STAT, STATX_ALL, 0x7ffddeab34b0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/c-bitstream-projectile.png", O_RDONLY) = 45
+274197 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/python/python-projectile.png", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=8789, ...}) = 0
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/python/python-projectile.png", O_RDONLY) = 45
+274197 statx(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/candidates/cpp/cpp-projectile.png", AT_STATX_SYNC_AS_STAT, STATX_ALL, 0x7ffddeab34b0) = -1 ENOENT (No such file or directory)
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/cpp-plusplus-projectile.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/countdown-11.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/countdown-10.png", O_RDONLY) = 45
+274197 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 45
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/countdown-01.png", O_RDONLY) = 46
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-assets/placeholder/countdown-fight.png", O_RDONLY) = 46
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/main.png", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 43
+274197 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 43
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/versus.png", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 43
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/training.png", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 43
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/lore.png", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 43
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/options.png", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 43
+274197 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 43
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/hud.png", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 43
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/controls.png", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 43
+274197 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 43
+274197 openat(AT_FDCWD, "/tmp/borrow-runtime-isolation-20260910-nap5ftq1/fighting-output/victory.png", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 43
+274406 +++ exited with 0 +++
+274405 +++ exited with 0 +++
+274404 +++ exited with 0 +++
+274403 +++ exited with 0 +++
+274402 +++ exited with 0 +++
+274399 +++ exited with 0 +++
+274197 +++ exited with 0 +++

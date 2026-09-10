@@ -1,0 +1,26 @@
+{
+  "enemy_hp": 96,
+  "events": [
+    {
+      "enemy_hp": 96,
+      "frame": 0,
+      "player_hp": 100,
+      "seconds": 0.01666666753590107,
+      "stage": "Opening"
+    },
+    {
+      "enemy_hp": 96,
+      "frame": 2305,
+      "player_hp": 100,
+      "seconds": 48.02833938598633,
+      "stage": "Complete"
+    }
+  ],
+  "final_stage": "Complete",
+  "frames": 2329,
+  "limitations": "Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest.",
+  "mode": "window_input_capture",
+  "outcome": "Ongoing",
+  "paused_frames": 0,
+  "player_hp": 100
+}

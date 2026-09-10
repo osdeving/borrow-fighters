@@ -48,7 +48,7 @@ Referencias:
 Comando:
 
 ```bash
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
 ```
 
 Responsabilidades atuais:

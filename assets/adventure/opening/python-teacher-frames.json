@@ -1,0 +1,27 @@
+{
+  "image": "python-teacher.png",
+  "image_size": [
+    1182,
+    1330
+  ],
+  "rects": [
+    [
+      0,
+      0,
+      1182,
+      665
+    ],
+    [
+      0,
+      665,
+      1182,
+      665
+    ]
+  ],
+  "labels": [
+    "university-classroom",
+    "linker-teaching-model"
+  ],
+  "sha256": "0a9e933088235ce9b411fefaaae264e1997b02288ef5eacff1aa7a4eba8c76de",
+  "image_pixels_unchanged": true
+}

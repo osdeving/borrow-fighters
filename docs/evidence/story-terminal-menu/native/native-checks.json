@@ -1,0 +1,183 @@
+{
+  "success": true,
+  "checks": [
+    {
+      "name": "opening_completed_before_menu",
+      "passed": true,
+      "events": [
+        {
+          "enemy_hp": 96,
+          "frame": 0,
+          "player_hp": 100,
+          "seconds": 0.01666666753590107,
+          "stage": "Opening"
+        },
+        {
+          "enemy_hp": 96,
+          "frame": 2305,
+          "player_hp": 100,
+          "seconds": 48.02833938598633,
+          "stage": "Complete"
+        }
+      ]
+    },
+    {
+      "name": "same_native_window_after_story",
+      "passed": true,
+      "original_window": 6291463,
+      "current_window": 6291463
+    },
+    {
+      "name": "host_did_not_write_onboarding_marker",
+      "passed": true
+    },
+    {
+      "name": "explicit_guide_visit_records_only_test_userdata",
+      "passed": true
+    },
+    {
+      "name": "native_window_video_encoded",
+      "passed": true,
+      "frames": 354,
+      "fps": 10
+    },
+    {
+      "name": "main_session_clean_exit",
+      "passed": true
+    },
+    {
+      "name": "audio_devices_handoff_without_crash",
+      "passed": true
+    },
+    {
+      "name": "closing_adventure_never_opens_menu",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "frame_limit_never_opens_menu",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "requested_hidden_window_starts_unmapped",
+      "passed": true
+    },
+    {
+      "name": "menu_maps_previously_hidden_window",
+      "passed": true
+    },
+    {
+      "name": "user_catalog_unchanged",
+      "passed": true
+    },
+    {
+      "name": "binary_unchanged_during_review",
+      "passed": true
+    },
+    {
+      "name": "no_x11_errors",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "captures": [
+    {
+      "file": "screenshots/01-final-title.png",
+      "expected": "Five characters behind BORROW FIGHTERS before main menu",
+      "window": 6291463,
+      "sha256": "47ebc55a3f55d4cbcf596ecb469add7574f82f26048cfd65a8a5b758212ba3ff",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/02-main-menu.png",
+      "expected": "Main terminal menu; Modo História selected; no completion menu or onboarding",
+      "window": 6291463,
+      "sha256": "753e9df8231ccd97f49b28d8286e0a88d57d065c6cbfb9edf2d1ef83f70341c1",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/03-story-enter-inert.png",
+      "expected": "Same main menu after Enter on Modo História",
+      "window": 6291463,
+      "sha256": "2360affdfcc7121a2af25b8e82d4be8713038251e554f6adad721e5668591178",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/04-story-space-inert.png",
+      "expected": "Same main menu after Space on Modo História",
+      "window": 6291463,
+      "sha256": "c4f1c68d6fe4883f5acba77d6c548bb19312b4e69e5b028ba2b5943b28d431ed",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/05-versus-roster.png",
+      "expected": "Existing Linker character selection",
+      "window": 6291463,
+      "sha256": "c65e26852f677eda67bc86f82d658aeb9bcd2aa83b598f3b274b63337bf8742a",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/06-roster-back-menu.png",
+      "expected": "Returned to main menu",
+      "window": 6291463,
+      "sha256": "1270c6d8a9ddbc2d8b6479b7ee61015c9edf2fc15c08c8e62f0184ca7bf410ae",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/08-training.png",
+      "expected": "Existing training menu content",
+      "window": 6291463,
+      "sha256": "751726fbeef1f29fb722372dfe8fe54f169015018db8028ce83113f728afab26",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/09-lore.png",
+      "expected": "Existing lore menu content",
+      "window": 6291463,
+      "sha256": "16b8a5858d9d6728e0d020cf323c478a379dc5ad35c399a57f1962d76e811fa1",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/10-options.png",
+      "expected": "Existing options menu content",
+      "window": 6291463,
+      "sha256": "35e3c34bfa0ec6a0adac80d243fd4dc842e9fa2abfac98f07e20bbb8f858fc0d",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/11-how-to-play.png",
+      "expected": "Existing how-to-play menu content",
+      "window": 6291463,
+      "sha256": "a76d5a1cfa0b630b90e6e7c9fee39ae03a1f47fdcf99ab99ba0433675d69edeb",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/12-final-main.png",
+      "expected": "Main menu after visiting preserved submenus",
+      "window": 6291463,
+      "sha256": "0aa4c339bd37f82e13cd4f8e5b5add3d7393c9bcb8c19067e895eae43ae59d10",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/13-adventure-paused.png",
+      "expected": "Paused adventure before Backspace exits the whole host",
+      "window": 6291463,
+      "sha256": "f875be8f82270bc9dc1b64a5951998ed940b16f9047f3265684f8376b76de976",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/14-hidden-now-visible-menu.png",
+      "expected": "Visible main menu after hidden story completed",
+      "window": 6291463,
+      "sha256": "18b9e1f285955a676652af2f082b5aaa85db1c59037b32f450f6137771221cee",
+      "validation": "visual review pending"
+    }
+  ],
+  "executable_sha256": "fa069660e273a601c57d92fa6e71d08923cc1d473f152de67fd813c35d5f63ff",
+  "catalog_sha256": "718b30e99c4516d66f9badeeb12643ed78ce39986f96b9fb174cc86a54c4bc86",
+  "physical_gamepad_tested": false,
+  "audio_listening_performed": false,
+  "input": "XSendEvent directed to owned PID/window",
+  "capture": "XGetImage of that window, unchanged source pixels"
+}

@@ -91,8 +91,9 @@ jobs:
           cargo fmt --check
           cargo test --locked --all-targets
           cargo clippy --locked --all-targets --all-features -- -D warnings
+          python -m unittest discover -s tools/release -p 'test_*.py'
       - name: Build optimized game
-        run: cargo build --locked --release --bin borrow-fighters
+        run: cargo build --locked --release --bin borrow-story --bin borrow-fighters
       - name: Capture roster and match flow for manual visual review
         if: runner.os == 'Linux' && github.event_name == 'workflow_dispatch'
         run: |
@@ -179,7 +180,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          $imports = & 'C:\Program Files\LLVM\bin\llvm-readobj.exe' --coff-imports target/x86_64-pc-windows-msvc/release/borrow-fighters.exe
+          $imports = & 'C:\Program Files\LLVM\bin\llvm-readobj.exe' --coff-imports target/x86_64-pc-windows-msvc/release/borrow-story.exe
           if ($LASTEXITCODE -ne 0) { throw 'Could not inspect executable imports' }
           $imports | Select-String 'Name:'
           if ($imports -match '(?i)Name:.*(vcruntime|msvcp|ucrtbase|api-ms-win-crt)') {
@@ -189,7 +190,7 @@ jobs:
         if: runner.os == 'Windows'
         env:
           RELEASE_VERSION: ${{ steps.version.outputs.version }}
-        run: python tools/release/package.py stage --target windows-x86_64 --version $env:RELEASE_VERSION --binary target/x86_64-pc-windows-msvc/release/borrow-fighters.exe --output dist/stage
+        run: python tools/release/package.py stage --target windows-x86_64 --version $env:RELEASE_VERSION --binary target/x86_64-pc-windows-msvc/release/borrow-story.exe --output dist/stage
       - name: Create Windows installer and portable ZIP
         if: runner.os == 'Windows'
         env:
@@ -218,7 +219,7 @@ jobs:
             if ($LASTEXITCODE -ne 0) { throw "$label packaged asset verification failed" }
             # --help checks process loading without requiring a graphics context.
             $game = Start-Process $executable -ArgumentList '--help' -WorkingDirectory $env:RUNNER_TEMP -Wait -PassThru
-            if ($game.ExitCode -ne 2) { throw "$label executable failed to load: $($game.ExitCode)" }
+            if ($game.ExitCode -ne 0) { throw "$label executable failed to load: $($game.ExitCode)" }
           }
           $installer = (Get-ChildItem dist/*-setup.exe).FullName
           $installDir = Join-Path $env:RUNNER_TEMP 'Jogo ação instalado'
@@ -238,7 +239,7 @@ jobs:
         if: runner.os == 'Linux'
         env:
           RELEASE_VERSION: ${{ steps.version.outputs.version }}
-        run: python tools/release/package.py stage --target linux-x86_64 --version "$RELEASE_VERSION" --binary target/x86_64-unknown-linux-gnu/release/borrow-fighters --output dist/stage
+        run: python tools/release/package.py stage --target linux-x86_64 --version "$RELEASE_VERSION" --binary target/x86_64-unknown-linux-gnu/release/borrow-story --output dist/stage
       - name: Synchronize bundled libraries with available source packages
         if: runner.os == 'Linux'
         run: |
@@ -258,8 +259,17 @@ jobs:
           game=/usr/bin/borrow-fighters
           cd /tmp
           export BORROW_FIGHTERS_DATA_DIR="$RUNNER_TEMP/playtest-user"
+          timeout 45s xvfb-run -a "$game" --mute --frames 3 --capture "$RUNNER_TEMP/packaged-story" > "$RUNNER_TEMP/story-smoke.log" 2>&1
+          cat "$RUNNER_TEMP/story-smoke.log"
+          ! grep -Ei 'failed to (load|open)|could not (load|open)|panicked at|error while loading shared libraries' "$RUNNER_TEMP/story-smoke.log"
+          python - <<'PY'
+          import json, os, pathlib
+          result = json.loads((pathlib.Path(os.environ['RUNNER_TEMP']) / 'packaged-story/result.json').read_text())
+          assert result['final_stage'] == 'AdaPrologue', result
+          assert result['exit_reason'] == 'FrameLimit', result
+          PY
           set +e
-          timeout 12s xvfb-run -a "$game" > "$RUNNER_TEMP/game-smoke.log" 2>&1
+          timeout 12s xvfb-run -a "$game" --menu > "$RUNNER_TEMP/game-smoke.log" 2>&1
           status=$?
           set -e
           cat "$RUNNER_TEMP/game-smoke.log"
@@ -277,13 +287,16 @@ jobs:
             /usr/bin/borrow-fighters --help
             status=$?
             set -e
-            test "$status" -eq 2
+            test "$status" -eq 0
             test -f /usr/share/applications/borrow-fighters.desktop
             Xvfb :99 -screen 0 1280x720x24 >/tmp/xvfb.log 2>&1 &
             export DISPLAY=:99 LIBGL_ALWAYS_SOFTWARE=1
             sleep 2
+            timeout 45s /usr/bin/borrow-fighters --mute --frames 3 >/tmp/story.log 2>&1
+            cat /tmp/story.log
+            ! grep -Ei "failed to (load|open)|could not (load|open)|panicked at|error while loading shared libraries" /tmp/story.log
             set +e
-            timeout 12s /usr/bin/borrow-fighters >/tmp/game.log 2>&1
+            timeout 12s /usr/bin/borrow-fighters --menu >/tmp/game.log 2>&1
             status=$?
             set -e
             cat /tmp/game.log

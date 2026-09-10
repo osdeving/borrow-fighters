@@ -77,9 +77,9 @@ A CPU usa as novas ações e respostas defensivas de forma falível. Sessenta lu
 A revisão gráfica executou **150 cenários** (15 × 5 × 2 lados) no World/Raylib, com clips exatos, contatos e reações reais. Os testes de showcase cobrem 260 combinações, incluindo metadata baseline e fallback; outros testes verificam defesa, recuperação, interrupção, punição e efeito na altura do contato. Os [20 checks gráficos do aplicativo](evidence/mvp-runtime-controls/README.md) confirmaram navegação, teclas dos especiais, debug off/on/off e fechamento. Gamepad físico e escuta de áudio não foram ensaiados; mappings e eventos de áudio têm validação de código/testes.
 
 ```sh
-cargo run
-cargo run -- --showcase --character rust
-cargo run -- --showcase --character python --move signature_special --repeat
+cargo run -- --menu
+cargo run --bin borrow-fighters -- --showcase --character rust
+cargo run --bin borrow-fighters -- --showcase --character python --move signature_special --repeat
 ```
 
 No showcase: Tab/Shift+Tab seleciona exemplo, Enter repete, Espaço pausa, ponto avança um frame, Home reinicia, L alterna repetição, X troca os lados, PageUp/PageDown muda personagem e Esc volta ao menu. Na luta, especial de assinatura: T no P1, barra invertida no P2, RT no gamepad. O projétil conserva G no P1, Right Ctrl/KP0 no P2 e RB no gamepad.

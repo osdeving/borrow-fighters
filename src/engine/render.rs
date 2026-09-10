@@ -12,6 +12,7 @@ mod authored_supers;
 mod character_select;
 mod cinematic_effects;
 mod combat_lab;
+mod main_menu;
 mod match_flow;
 mod move_showcase;
 mod onboarding;
@@ -215,6 +216,10 @@ pub fn draw_fight(
 
 /// Draws the main menu and nested prototype setup screens.
 pub fn draw_preferences(draw: &mut impl DrawTarget, options: PreferencesDrawOptions<'_>) {
+    if options.menu.page() == MenuPage::Main {
+        main_menu::draw(draw, &options);
+        return;
+    }
     draw.clear_background(BACKGROUND);
     draw_arena(
         draw,
@@ -238,7 +243,7 @@ pub fn draw_preferences(draw: &mut impl DrawTarget, options: PreferencesDrawOpti
     draw_menu_chrome(draw, font, &options);
 
     match options.menu.page() {
-        MenuPage::Main => draw_main_menu(draw, font, &options),
+        MenuPage::Main => unreachable!("main menu uses its own terminal composition"),
         MenuPage::Versus => draw_versus_menu(draw, font, &options),
         MenuPage::Training => draw_training_menu(draw, font, &options),
         MenuPage::Lore => draw_lore_menu(draw, font, &options),
@@ -885,81 +890,6 @@ fn draw_menu_title_sprite(
         screen_px(30),
         58.0,
         UI_TEXT,
-    );
-}
-
-fn draw_main_menu(
-    draw: &mut impl DrawTarget,
-    font: Option<&Font>,
-    options: &PreferencesDrawOptions<'_>,
-) {
-    let geometry = MenuLayout::for_page(MenuPage::Main);
-    let panel = geometry.panel;
-    draw_menu_panel(draw, panel);
-    draw_menu_page_title(draw, font, panel, "ENTRE NA LUTA");
-
-    let rows = [
-        MenuLine {
-            label: "QUICK FIGHT",
-            description: "Seu próximo round começa aqui",
-            value: None,
-            checked: None,
-        },
-        MenuLine {
-            label: "VERSUS SETUP",
-            description: "Escolha lutadores e cenário",
-            value: None,
-            checked: None,
-        },
-        MenuLine {
-            label: "TRAINING",
-            description: "Domine golpes e especiais",
-            value: None,
-            checked: None,
-        },
-        MenuLine {
-            label: "LORE / ROSTER",
-            description: "Conheça quem está no ringue",
-            value: None,
-            checked: None,
-        },
-        MenuLine {
-            label: "OPTIONS",
-            description: "Áudio, controles e preferências",
-            value: None,
-            checked: None,
-        },
-        MenuLine {
-            label: "COMO JOGAR",
-            description: "Controles, duelo local e modo solo",
-            value: None,
-            checked: None,
-        },
-        MenuLine {
-            label: "EXIT",
-            description: "Até o próximo round",
-            value: None,
-            checked: None,
-        },
-    ];
-
-    draw_menu_rows(
-        draw,
-        font,
-        &rows,
-        options.menu.selected(),
-        MenuRowsLayout {
-            geometry,
-            large_labels: true,
-            show_descriptions: true,
-            selection_pulse_frames: options.menu.selection_pulse_frames(),
-        },
-    );
-    draw_menu_footer(
-        draw,
-        font,
-        panel,
-        "Mouse/Setas navegam  |  Clique/Enter confirma",
     );
 }
 

@@ -1,0 +1,195 @@
+{
+  "characters": [
+    {
+      "id": "rust",
+      "image": "roster/rust.png",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "rects": [
+        [
+          69,
+          38,
+          174,
+          282
+        ],
+        [
+          394,
+          38,
+          156,
+          283
+        ]
+      ],
+      "source": "assets/adventure/rust-actions.png",
+      "sha256": "f0a7af2a9462263963bb3a24126e4c1e3728dcd929bcb57fa21a9c2bd13e864f",
+      "measurement": {
+        "alpha_threshold_exclusive": 3,
+        "padding_pixels": 2,
+        "image_pixels_unchanged": true
+      },
+      "alpha_zero_pixels": 1072826,
+      "maximum_frame_height": 283
+    },
+    {
+      "id": "duke",
+      "image": "roster/duke.png",
+      "image_size": [
+        964,
+        320
+      ],
+      "rects": [
+        [
+          31,
+          21,
+          161,
+          259
+        ],
+        [
+          262,
+          21,
+          160,
+          261
+        ],
+        [
+          498,
+          26,
+          159,
+          256
+        ],
+        [
+          743,
+          25,
+          161,
+          257
+        ]
+      ],
+      "source": "assets/production/duke/idle/prepared.png",
+      "sha256": "e0065524d5e5e6efb33bb9e4466974c9e4c9b131b64f7f0764698b5d1705d21e",
+      "measurement": {
+        "alpha_threshold_exclusive": 3,
+        "padding_pixels": 2,
+        "image_pixels_unchanged": true
+      },
+      "alpha_zero_pixels": 229005,
+      "maximum_frame_height": 261
+    },
+    {
+      "id": "c",
+      "image": "roster/c.png",
+      "image_size": [
+        651,
+        326
+      ],
+      "rects": [
+        [
+          32,
+          24,
+          151,
+          275
+        ],
+        [
+          251,
+          31,
+          158,
+          268
+        ],
+        [
+          464,
+          30,
+          156,
+          269
+        ]
+      ],
+      "source": "assets/production/c/idle/prepared.png",
+      "sha256": "5968fb304b83c3ee6cebe8328cfcf75ba464c0dff6d1319b2f8161afd73ab8f8",
+      "measurement": {
+        "alpha_threshold_exclusive": 3,
+        "padding_pixels": 2,
+        "image_pixels_unchanged": true
+      },
+      "alpha_zero_pixels": 150962,
+      "maximum_frame_height": 275
+    },
+    {
+      "id": "python",
+      "image": "roster/python.png",
+      "image_size": [
+        884,
+        332
+      ],
+      "rects": [
+        [
+          53,
+          31,
+          115,
+          274
+        ],
+        [
+          274,
+          31,
+          116,
+          274
+        ],
+        [
+          489,
+          30,
+          124,
+          275
+        ],
+        [
+          715,
+          30,
+          115,
+          275
+        ]
+      ],
+      "source": "assets/production/python/idle/prepared.png",
+      "sha256": "b9ea64ee6bc762346f994189148c1236520cec3bd2124bcf165ce46b68a48ed5",
+      "measurement": {
+        "alpha_threshold_exclusive": 3,
+        "padding_pixels": 2,
+        "image_pixels_unchanged": true
+      },
+      "alpha_zero_pixels": 228758,
+      "maximum_frame_height": 275
+    },
+    {
+      "id": "cpp",
+      "image": "roster/cpp.png",
+      "image_size": [
+        798,
+        299
+      ],
+      "rects": [
+        [
+          71,
+          9,
+          143,
+          276
+        ],
+        [
+          336,
+          9,
+          141,
+          275
+        ],
+        [
+          603,
+          10,
+          142,
+          276
+        ]
+      ],
+      "source": "assets/production/cpp/idle/prepared.png",
+      "sha256": "23fdb1f847ea57afbe92aa80745463a3c7d3ba6d0e494dc49ad9461337106cca",
+      "measurement": {
+        "alpha_threshold_exclusive": 3,
+        "padding_pixels": 2,
+        "image_pixels_unchanged": true
+      },
+      "alpha_zero_pixels": 186365,
+      "maximum_frame_height": 276
+    }
+  ]
+}

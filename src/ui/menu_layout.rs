@@ -36,7 +36,7 @@ impl MenuLayout {
     /// Returns the layout used to both draw and click one menu page.
     pub fn for_page(page: MenuPage) -> Self {
         let (x, y, width, height, row_offset_x, row_offset_y, row_width, step, gap) = match page {
-            MenuPage::Main => (302, 154, 356, 370, 42, 58, 272, 40, 4),
+            MenuPage::Main => (500, 62, 414, 430, 22, 66, 370, 45, 4),
             MenuPage::Versus => (238, 96, 484, 432, 42, 96, 400, 56, 8),
             MenuPage::Training => (254, 126, 452, 390, 42, 106, 368, 56, 8),
             MenuPage::Lore => (54, 78, 852, 428, 46, 82, 294, 40, 8),

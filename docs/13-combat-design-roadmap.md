@@ -284,12 +284,12 @@ Objetivo:
 Entrada proposta:
 
 ```bash
-cargo run -- --fight --p1 go --p2 duke
-cargo run -- --lab combat --character rust
-cargo run -- --lab combat --character duke --move heavy_punch
-cargo run -- --lab combat --character go --move kick
-cargo run -- --lab combat --character c --move heavy_punch
-cargo run -- --lab combat --character python --move light_punch
+cargo run --bin borrow-fighters -- --fight --p1 go --p2 duke
+cargo run --bin borrow-fighters -- --lab combat --character rust
+cargo run --bin borrow-fighters -- --lab combat --character duke --move heavy_punch
+cargo run --bin borrow-fighters -- --lab combat --character go --move kick
+cargo run --bin borrow-fighters -- --lab combat --character c --move heavy_punch
+cargo run --bin borrow-fighters -- --lab combat --character python --move light_punch
 ```
 
 Atalhos propostos:
@@ -427,8 +427,8 @@ Entregáveis:
 Critério de aceite:
 
 - conseguimos alinhar mão/pé/projectile sem iniciar uma luta real.
-- Comando atual: `cargo run -- --lab combat --character rust --move light_punch`.
-- Poses atuais: `cargo run -- --lab combat --character rust --pose block`.
+- Comando atual: `cargo run --bin borrow-fighters -- --lab combat --character rust --move light_punch`.
+- Poses atuais: `cargo run --bin borrow-fighters -- --lab combat --character rust --pose block`.
 
 ### Fase 3 — MoveSpec e CharacterSpec
 

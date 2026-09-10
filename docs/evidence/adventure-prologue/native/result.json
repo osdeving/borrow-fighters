@@ -1,0 +1,40 @@
+{
+  "enemy_hp": 0,
+  "events": [
+    {
+      "enemy_hp": 96,
+      "frame": 0,
+      "player_hp": 100,
+      "seconds": 0.01666666753590107,
+      "stage": "RustMorning"
+    },
+    {
+      "enemy_hp": 96,
+      "frame": 109,
+      "player_hp": 100,
+      "seconds": 3.8660974502563477,
+      "stage": "Encounter"
+    },
+    {
+      "enemy_hp": 0,
+      "frame": 1472,
+      "player_hp": 100,
+      "seconds": 30.593217849731445,
+      "stage": "Aftermath"
+    },
+    {
+      "enemy_hp": 0,
+      "frame": 1847,
+      "player_hp": 100,
+      "seconds": 39.66311264038086,
+      "stage": "Complete"
+    }
+  ],
+  "final_stage": "Complete",
+  "frames": 1852,
+  "limitations": "Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest.",
+  "mode": "physical_input_capture",
+  "outcome": "Victory",
+  "paused_frames": 0,
+  "player_hp": 100
+}

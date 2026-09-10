@@ -1,0 +1,101 @@
+{
+  "image": "rust-morning.png",
+  "image_size": [
+    1448,
+    1086
+  ],
+  "rects": [
+    [
+      34,
+      158,
+      310,
+      148
+    ],
+    [
+      396,
+      159,
+      313,
+      147
+    ],
+    [
+      756,
+      89,
+      322,
+      222
+    ],
+    [
+      1178,
+      63,
+      199,
+      248
+    ],
+    [
+      98,
+      372,
+      181,
+      311
+    ],
+    [
+      430,
+      359,
+      226,
+      322
+    ],
+    [
+      806,
+      397,
+      219,
+      258
+    ],
+    [
+      1184,
+      338,
+      175,
+      340
+    ],
+    [
+      100,
+      690,
+      174,
+      350
+    ],
+    [
+      465,
+      691,
+      164,
+      350
+    ],
+    [
+      815,
+      691,
+      174,
+      352
+    ],
+    [
+      1181,
+      691,
+      176,
+      351
+    ]
+  ],
+  "labels": [
+    "sleep",
+    "wake-eyes",
+    "rise-torso",
+    "rub-eyes",
+    "sit",
+    "stretch",
+    "stand-up",
+    "casual",
+    "compassion-down",
+    "compassion-left",
+    "compassion-right",
+    "compassion-return"
+  ],
+  "measurement": {
+    "alpha_threshold_exclusive": 3,
+    "padding_pixels": 2,
+    "image_pixels_unchanged": true
+  },
+  "recommended_standing_height_at_1280x720": 230
+}

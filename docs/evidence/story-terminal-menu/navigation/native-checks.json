@@ -1,0 +1,787 @@
+{
+  "success": true,
+  "checks": [
+    {
+      "name": "default_entry_starts_with_ada",
+      "passed": true
+    },
+    {
+      "name": "ada_segment_6s",
+      "passed": true,
+      "stage": "AdaPrologue",
+      "stage_ticks": 395
+    },
+    {
+      "name": "ada_segment_13s",
+      "passed": true,
+      "stage": "AdaPrologue",
+      "stage_ticks": 814
+    },
+    {
+      "name": "ada_segment_21s",
+      "passed": true,
+      "stage": "AdaPrologue",
+      "stage_ticks": 1295
+    },
+    {
+      "name": "ada_segment_29s",
+      "passed": true,
+      "stage": "AdaPrologue",
+      "stage_ticks": 1774
+    },
+    {
+      "name": "ada_segment_36s",
+      "passed": true,
+      "stage": "AdaPrologue",
+      "stage_ticks": 2195
+    },
+    {
+      "name": "ada_last_segment_to_morning",
+      "passed": true,
+      "stage": "RustMorning",
+      "stage_ticks": 34
+    },
+    {
+      "name": "morning_segment_150ticks",
+      "passed": true,
+      "stage": "RustMorning",
+      "stage_ticks": 184
+    },
+    {
+      "name": "morning_segment_225ticks",
+      "passed": true,
+      "stage": "RustMorning",
+      "stage_ticks": 260
+    },
+    {
+      "name": "morning_segment_355ticks",
+      "passed": true,
+      "stage": "RustMorning",
+      "stage_ticks": 389
+    },
+    {
+      "name": "morning_segment_500ticks",
+      "passed": true,
+      "stage": "RustMorning",
+      "stage_ticks": 534
+    },
+    {
+      "name": "morning_segment_585ticks",
+      "passed": true,
+      "stage": "RustMorning",
+      "stage_ticks": 618
+    },
+    {
+      "name": "morning_last_segment_to_encounter",
+      "passed": true,
+      "stage": "Encounter",
+      "stage_ticks": 33
+    },
+    {
+      "name": "encounter_skip_to_presentation",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 34
+    },
+    {
+      "name": "encounter_skip_preserves_health_and_outcome",
+      "passed": true,
+      "before": {
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 436,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 7.734432697296143,
+        "stage": "Encounter",
+        "stage_ticks": 33,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 33,
+        "waiting_for_continue": false
+      },
+      "after": {
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 462,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 8.332560539245605,
+        "stage": "Opening",
+        "stage_ticks": 34,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 33,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "name": "skipped_encounter_does_not_invent_remorse",
+      "passed": true
+    },
+    {
+      "name": "opening_segment_3s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 214
+    },
+    {
+      "name": "opening_segment_6s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 393
+    },
+    {
+      "name": "opening_segment_9s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 573
+    },
+    {
+      "name": "opening_segment_14s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 874
+    },
+    {
+      "name": "opening_segment_19s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 1174
+    },
+    {
+      "name": "opening_segment_24s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 1475
+    },
+    {
+      "name": "opening_segment_29s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 1773
+    },
+    {
+      "name": "opening_segment_33s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 2015
+    },
+    {
+      "name": "opening_segment_37s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 2254
+    },
+    {
+      "name": "opening_segment_41s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 2494
+    },
+    {
+      "name": "natural_completion_waits_for_new_input",
+      "passed": true,
+      "stage": "Complete",
+      "frames": 1160
+    },
+    {
+      "name": "fresh_unassigned_key_continues_to_menu",
+      "passed": true,
+      "events": [
+        {
+          "enemy_hp": 96,
+          "frame": 0,
+          "player_hp": 100,
+          "seconds": 0.01666666753590107,
+          "stage": "AdaPrologue"
+        },
+        {
+          "enemy_hp": 96,
+          "frame": 202,
+          "player_hp": 100,
+          "seconds": 3.62372088432312,
+          "stage": "RustMorning"
+        },
+        {
+          "enemy_hp": 96,
+          "frame": 407,
+          "player_hp": 100,
+          "seconds": 7.170380592346191,
+          "stage": "Encounter"
+        },
+        {
+          "enemy_hp": 96,
+          "frame": 437,
+          "player_hp": 100,
+          "seconds": 7.758155822753906,
+          "stage": "Opening"
+        },
+        {
+          "enemy_hp": 96,
+          "frame": 1031,
+          "player_hp": 100,
+          "seconds": 20.7020263671875,
+          "stage": "Complete"
+        }
+      ]
+    },
+    {
+      "name": "same_native_window_after_story",
+      "passed": true,
+      "original_window": 8388615,
+      "current_window": 8388615
+    },
+    {
+      "name": "host_did_not_write_onboarding_marker",
+      "passed": true
+    },
+    {
+      "name": "explicit_guide_visit_records_only_test_userdata",
+      "passed": true
+    },
+    {
+      "name": "native_window_video_encoded",
+      "passed": true,
+      "frames": 367,
+      "fps": 10
+    },
+    {
+      "name": "main_session_clean_exit",
+      "passed": true
+    },
+    {
+      "name": "audio_devices_handoff_without_crash",
+      "passed": true
+    },
+    {
+      "name": "opening_segment_3s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 214
+    },
+    {
+      "name": "opening_segment_6s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 394
+    },
+    {
+      "name": "opening_segment_9s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 575
+    },
+    {
+      "name": "opening_segment_14s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 873
+    },
+    {
+      "name": "opening_segment_19s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 1174
+    },
+    {
+      "name": "opening_segment_24s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 1474
+    },
+    {
+      "name": "opening_segment_29s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 1773
+    },
+    {
+      "name": "opening_segment_33s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 2013
+    },
+    {
+      "name": "opening_segment_37s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 2254
+    },
+    {
+      "name": "opening_segment_41s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 2494
+    },
+    {
+      "name": "held_skip_key_cannot_accept_completion",
+      "passed": true,
+      "stage": "Complete",
+      "frames": 474
+    },
+    {
+      "name": "releasing_skip_key_cannot_accept_completion",
+      "passed": true,
+      "stage": "Complete",
+      "frames": 521
+    },
+    {
+      "name": "fresh_enter_after_release_continues",
+      "passed": true
+    },
+    {
+      "name": "opening_segment_3s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 214
+    },
+    {
+      "name": "opening_segment_6s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 394
+    },
+    {
+      "name": "opening_segment_9s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 574
+    },
+    {
+      "name": "opening_segment_14s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 874
+    },
+    {
+      "name": "opening_segment_19s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 1173
+    },
+    {
+      "name": "opening_segment_24s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 1473
+    },
+    {
+      "name": "opening_segment_29s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 1774
+    },
+    {
+      "name": "opening_segment_33s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 2014
+    },
+    {
+      "name": "opening_segment_37s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 2255
+    },
+    {
+      "name": "opening_segment_41s",
+      "passed": true,
+      "stage": "Opening",
+      "stage_ticks": 2493
+    },
+    {
+      "name": "last_segment_skip_waits_for_mouse_confirmation",
+      "passed": true,
+      "stage": "Complete",
+      "frames": 365
+    },
+    {
+      "name": "fresh_mouse_click_continues_to_menu",
+      "passed": true
+    },
+    {
+      "name": "global_skip_from_ada",
+      "passed": true,
+      "result": {
+        "enemy_hp": 96,
+        "events": [
+          {
+            "enemy_hp": 96,
+            "frame": 0,
+            "player_hp": 100,
+            "seconds": 0.01666666753590107,
+            "stage": "AdaPrologue"
+          }
+        ],
+        "exit_reason": "Skipped",
+        "final_stage": "AdaPrologue",
+        "frames": 31,
+        "limitations": "Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest.",
+        "mode": "window_input_capture",
+        "outcome": "Ongoing",
+        "paused_frames": 0,
+        "player_hp": 100
+      }
+    },
+    {
+      "name": "global_skip_from_ada_same_window",
+      "passed": true
+    },
+    {
+      "name": "global_skip_from_ada_never_waited_at_completion",
+      "passed": true
+    },
+    {
+      "name": "global_skip_encounter_starts_unpaused",
+      "passed": true
+    },
+    {
+      "name": "global_skip_from_active_encounter",
+      "passed": true,
+      "result": {
+        "enemy_hp": 96,
+        "events": [
+          {
+            "enemy_hp": 96,
+            "frame": 0,
+            "player_hp": 100,
+            "seconds": 0.01666666753590107,
+            "stage": "Encounter"
+          }
+        ],
+        "exit_reason": "Skipped",
+        "final_stage": "Encounter",
+        "frames": 31,
+        "limitations": "Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest.",
+        "mode": "window_input_capture",
+        "outcome": "Ongoing",
+        "paused_frames": 0,
+        "player_hp": 100
+      }
+    },
+    {
+      "name": "global_skip_from_active_encounter_same_window",
+      "passed": true
+    },
+    {
+      "name": "global_skip_from_active_encounter_never_waited_at_completion",
+      "passed": true
+    },
+    {
+      "name": "global_skip_from_paused_encounter",
+      "passed": true,
+      "result": {
+        "enemy_hp": 96,
+        "events": [
+          {
+            "enemy_hp": 96,
+            "frame": 0,
+            "player_hp": 100,
+            "seconds": 0.01666666753590107,
+            "stage": "Encounter"
+          }
+        ],
+        "exit_reason": "Skipped",
+        "final_stage": "Encounter",
+        "frames": 74,
+        "limitations": "Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest.",
+        "mode": "window_input_capture",
+        "outcome": "Ongoing",
+        "paused_frames": 0,
+        "player_hp": 100
+      }
+    },
+    {
+      "name": "global_skip_from_paused_encounter_same_window",
+      "passed": true
+    },
+    {
+      "name": "global_skip_from_paused_encounter_never_waited_at_completion",
+      "passed": true
+    },
+    {
+      "name": "global_skip_from_presentation",
+      "passed": true,
+      "result": {
+        "enemy_hp": 96,
+        "events": [
+          {
+            "enemy_hp": 96,
+            "frame": 0,
+            "player_hp": 100,
+            "seconds": 0.01666666753590107,
+            "stage": "Opening"
+          }
+        ],
+        "exit_reason": "Skipped",
+        "final_stage": "Opening",
+        "frames": 35,
+        "limitations": "Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest.",
+        "mode": "window_input_capture",
+        "outcome": "Ongoing",
+        "paused_frames": 0,
+        "player_hp": 100
+      }
+    },
+    {
+      "name": "global_skip_from_presentation_same_window",
+      "passed": true
+    },
+    {
+      "name": "global_skip_from_presentation_never_waited_at_completion",
+      "passed": true
+    },
+    {
+      "name": "hosted_review_finishes_confirmation_and_full_fade",
+      "passed": true,
+      "result": {
+        "enemy_hp": 96,
+        "events": [
+          {
+            "enemy_hp": 96,
+            "frame": 0,
+            "player_hp": 100,
+            "seconds": 0.01666666753590107,
+            "stage": "Opening"
+          },
+          {
+            "enemy_hp": 96,
+            "frame": 2879,
+            "player_hp": 100,
+            "seconds": 47.99943923950195,
+            "stage": "Complete"
+          }
+        ],
+        "exit_reason": "Completed",
+        "final_stage": "Complete",
+        "frames": 3083,
+        "limitations": "Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest.",
+        "mode": "deterministic_review",
+        "outcome": "Ongoing",
+        "paused_frames": 0,
+        "player_hp": 100
+      },
+      "completion_frames": 204,
+      "first_accepted_frame": 180
+    },
+    {
+      "name": "hosted_review_preserves_native_window",
+      "passed": true
+    },
+    {
+      "name": "closing_adventure_never_opens_menu",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "frame_limit_never_opens_menu",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "requested_hidden_window_starts_unmapped",
+      "passed": true
+    },
+    {
+      "name": "menu_maps_previously_hidden_window",
+      "passed": true
+    },
+    {
+      "name": "user_catalog_unchanged",
+      "passed": true
+    },
+    {
+      "name": "binary_unchanged_during_review",
+      "passed": true
+    },
+    {
+      "name": "no_x11_errors",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "captures": [
+    {
+      "file": "screenshots/01-final-title.png",
+      "expected": "Five characters behind BORROW FIGHTERS before completion",
+      "window": 8388615,
+      "sha256": "acca2ada1d8d050beca1099d42a1e12d8263c6bad1c87f63e362acbf8939fd42",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/02-any-key-prompt.png",
+      "expected": "Final title with Aperte qualquer tecla para continuar",
+      "window": 8388615,
+      "sha256": "d123490c1d3b649a472a257eb1ea9103cb1318db7f8443a41afa0277b5e51bd1",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/02-main-menu.png",
+      "expected": "Main terminal menu; Modo História selected; no completion menu or onboarding",
+      "window": 8388615,
+      "sha256": "7cfb3e9bf06b4423034fdaef2ab649b85ff65720d728434c4f8ffb58c3b5d662",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/03-story-enter-inert.png",
+      "expected": "Same main menu after Enter on Modo História",
+      "window": 8388615,
+      "sha256": "4bec2516737c685edf2c0d5c682a2c0be90d472de375c552c03d647a137f043b",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/04-story-space-inert.png",
+      "expected": "Same main menu after Space on Modo História",
+      "window": 8388615,
+      "sha256": "e3a2866af3aa7c137f49cb11bee155b59b5e8c7d09c3b300556d4f03199aacbf",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/05-versus-roster.png",
+      "expected": "Existing Linker character selection",
+      "window": 8388615,
+      "sha256": "b61ef79895c67ac0bc434fd983fb1a714c772bbfe596aa3899ed7754f87ecc15",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/06-roster-back-menu.png",
+      "expected": "Returned to main menu",
+      "window": 8388615,
+      "sha256": "004a726ac1f6398d290e9088ef866212ba7945d53153ad6e536d57bc886a71e6",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/08-training.png",
+      "expected": "Existing training menu content",
+      "window": 8388615,
+      "sha256": "fd65234bb683a89b2c6a164fea8a0f40fa384a1f8a0231c3ad1e9c00c2d64471",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/09-lore.png",
+      "expected": "Existing lore menu content",
+      "window": 8388615,
+      "sha256": "844673ce35a563984279619cd586b559afb6f68ccf7ef9473a8f676d248f74bd",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/10-options.png",
+      "expected": "Existing options menu content",
+      "window": 8388615,
+      "sha256": "d960c93a3df21439c1822271a08a89e725c9606873893db4622ff5063fb2b53d",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/11-how-to-play.png",
+      "expected": "Existing how-to-play menu content",
+      "window": 8388615,
+      "sha256": "d3200b3bdcdfaa44b17a8ffbaf192b4032498cf4bb4fc846e26d19435dd6af5a",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/12-final-main.png",
+      "expected": "Main menu after visiting preserved submenus",
+      "window": 8388615,
+      "sha256": "cd939e8faedd9f77b60cbaf4c542061deb159fd23206a7b0f1e0d402f5ed21e9",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/held-enter-completion.png",
+      "expected": "Completion prompt remains while final skip key is held",
+      "window": 8388615,
+      "sha256": "98e28de58b4be2c10c44b88acf3cd2532578219af34e1dcba987f279d24e5542",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/mouse-continued-menu.png",
+      "expected": "Main menu after a new left mouse click confirms the final prompt",
+      "window": 8388615,
+      "sha256": "229f6cdb000ab222174f6e46fe5104252f6987bd6e5cf90598671453149f0253",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/global_skip_from_ada.png",
+      "expected": "Main terminal menu after skipping the whole prologue",
+      "window": 8388615,
+      "sha256": "8450164b28316e1911ef8170014fe9ff3126186f026c41e7cc439bfcaf7a9ab7",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/global_skip_from_active_encounter.png",
+      "expected": "Main terminal menu after skipping the whole prologue",
+      "window": 8388615,
+      "sha256": "9948c77cae52baf707dfbebec02d74080a262057d0c51ad81fd4c6e652da14f6",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/paused-skip-controls.png",
+      "expected": "Paused encounter with whole-prologue skip control",
+      "window": 8388615,
+      "sha256": "2dfb68858df01d68bec9320ae5f1d207b517b471bb85ac31f02fd7c08ba7d00d",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/global_skip_from_paused_encounter.png",
+      "expected": "Main terminal menu after skipping the whole prologue",
+      "window": 8388615,
+      "sha256": "6ef5e9aa49e52c1dd04e41d1c56fde179570771484552a1846df437d98d2bc68",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/global_skip_from_presentation.png",
+      "expected": "Main terminal menu after skipping the whole prologue",
+      "window": 8388615,
+      "sha256": "c5ffdc9e008771c9a462c8b3fab6a0af26bfd29abc9144e7dbba4b21d978398c",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/hosted-review-menu.png",
+      "expected": "Visible menu after deterministic review waits at the prompt and finishes its fade",
+      "window": 8388615,
+      "sha256": "0727d1ea0b4e7df21758e2dce80ad150c91047a516f410dbe41d571bc09f6c05",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/hidden-now-visible-menu.png",
+      "expected": "Visible main menu after hidden story was globally skipped",
+      "window": 8388615,
+      "sha256": "be478a0542a83c500dcc8e707c091934830a6d4832cf90211ed34282feace1b6",
+      "validation": "visual review pending"
+    }
+  ],
+  "executable_sha256": "ba8c73f8c5bbe30dd36702ec612b6a7dc8cda52cd5d3b8bc246fb2d2d89b7707",
+  "catalog_sha256": "093b82f244ca205e7ba08121c006e0b2c263a5233ea0093fb4ee1ca4d3ecb2b4",
+  "physical_gamepad_tested": false,
+  "audio_listening_performed": false,
+  "input": "XSendEvent directed to owned PID/window",
+  "capture": "XGetImage of that window, unchanged source pixels"
+}

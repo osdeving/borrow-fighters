@@ -2,14 +2,16 @@
 
 ## Estado atual
 
-O corte atual é `v0.1.0-prototype.3`: seleção Linker, reações do elenco,
-pausa/revanche, energia e transições. A implementação foi integrada à `main`
-pelo [PR #19](https://github.com/osdeving/borrow-fighters/pull/19); a preparação
-dos pacotes usa `release/v0.1.0-prototype.3`, com retorno por PR à `main`.
-A [ADR 0019](adr/0019-playtest-distribution.md) registra as decisões de plataforma,
-bibliotecas, assets e primeira abertura. As [notas da versão](releases/v0.1.0-prototype.3.md)
-explicam a entrega ao jogador. A [correção anterior](releases/v0.1.0-prototype.2.md)
-de imagens e áudio em caminhos Windows com acentos continua incluída.
+O corte em preparação é `v0.1.0-prototype.4`: aventura de Ada/Rust,
+primeiro encontro, apresentação, skip e menu de terminal na mesma execução.
+A solicitação desta release inclui commit de todo o trabalho e integração à
+`main`. Build, publicação e resultado serão registrados no
+[diário](worklogs/rust-adventure-prologue.md).
+A [ADR 0019](adr/0019-playtest-distribution.md) registra plataformas e distribuição;
+a [ADR 0023](adr/0023-story-to-terminal-menu.md) registra a entrada conjunta.
+As [notas da versão](releases/v0.1.0-prototype.4.md) explicam a entrega ao jogador.
+O conteúdo da [prototype.3](releases/v0.1.0-prototype.3.md) e a correção anterior
+de imagens e áudio em caminhos Windows com acentos continuam incluídos.
 
 ## Downloads
 
@@ -25,7 +27,10 @@ O executável incorpora um manifesto com `activeCodePage=UTF-8`, para as APIs
 nativas abrirem imagens e áudio em caminhos como `Jogos/ação çãõ`.
 Linux inclui bibliotecas redistribuíveis de X11/áudio; libc e drivers gráficos
 permanecem no sistema. Os pacotes incluem os assets usados pelo runtime e suas
-referências transitivas, sem vídeos de revisão e materiais de produção.
+referências transitivas, incluindo cenas, sprites, áudio e textos da aventura,
+sem vídeos de revisão e materiais de produção. O jogo distribuído compõe
+`borrow-story`, com aventura e luta habilitadas, e conserva o nome público
+`borrow-fighters` (`borrow-fighters.exe` no Windows).
 FFmpeg é opcional e não acompanha a release. Sprite Studio é ferramenta separada.
 
 Créditos, textos de licença e fontes correspondentes acompanham os pacotes.
@@ -37,9 +42,9 @@ Os textos `LICENSE-MIT`/`LICENSE-APACHE` formalizam a escolha já declarada no
 Manter a versão idêntica em `Cargo.toml`, `Cargo.lock` e tag, por exemplo:
 
 ```text
-0.1.0-prototype.3
-v0.1.0-prototype.3
-release/v0.1.0-prototype.3
+0.1.0-prototype.4
+v0.1.0-prototype.4
+release/v0.1.0-prototype.4
 ```
 
 A tag e o pacote avançam para cada correção publicada; a branch de estabilização
@@ -54,8 +59,9 @@ para `main` é feito por PR; não manter uma `develop` ou um fork do jogo.
 O workflow [Playtest Release](../.github/workflows/release.yml) faz:
 
 1. Validar versão e presença de notas em `docs/releases/vVERSAO.md`.
-2. Compilar/testar em Ubuntu 22.04 e Windows 2022 com `Cargo.lock`.
-3. Executar fmt, testes e Clippy em ambas as plataformas.
+2. Compilar/testar a entrada conjunta em Ubuntu 22.04 e Windows 2022 com `Cargo.lock`.
+3. Executar fmt, testes e Clippy em ambas as plataformas; verificar também
+   as combinações isoladas de features e suas fronteiras.
 4. Selecionar assets, empacotar dependências e preparar os cinco downloads.
 5. Verificar instalação/desinstalação no Windows e carregamento do executável;
    verificar DEB com inicialização gráfica por Xvfb e instalação RPM no Fedora.
@@ -86,8 +92,8 @@ a diferença de codificação nas chamadas C usadas pelo Raylib.
 Exemplo de publicação após os checks:
 
 ```sh
-git tag -a v0.1.0-prototype.3 -m 'release: publish roster, reactions and match flow'
-git push origin v0.1.0-prototype.3
+git tag -a v0.1.0-prototype.4 -m 'release: publish adventure, opening and terminal menu'
+git push origin v0.1.0-prototype.4
 ```
 
 A solicitação explícita do responsável por publicar a release autoriza esse
@@ -114,7 +120,8 @@ correspondente em `SHA256SUMS.txt`.
 - Builds, testes e empacotamento aprovados em ambas as plataformas.
 - Executável abre fora do checkout, com assets completos e dados graváveis.
 - No Windows, PNG e áudio carregam em uma pasta com espaços e acentos.
-- Guia inicial explica como assumir um jogador, reiniciar e sair.
+- Aventura chega ao menu na mesma janela, com avanço por trecho, skip total
+  e confirmação final; `Como jogar` explica como assumir um jogador, reiniciar e sair.
 - Créditos e limitações conhecidos acompanham o download.
 - Cinco pacotes e checksums disponíveis na mesma GitHub pré-release.
 - PR de retorno para `main` aberto, com evidência do que foi verificado.

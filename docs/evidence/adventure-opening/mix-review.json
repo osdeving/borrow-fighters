@@ -1,0 +1,446 @@
+{
+  "mode": "offline_mix_reconstructed_from_execution_telemetry",
+  "limitation": "Audio reconstructed offline from telemetry and the original adventure WAVs; not captured from the host or Raylib audio device. Timing follows the recorded state samples, aligned to the first video frame. Device latency, resampling, native mixer/pan behavior and human audio approval are not verified. The review video may use simulated controls; reconstruction does not establish physical-input or real-device validation.",
+  "sample_rate": 22050,
+  "channels": 1,
+  "sample_width_bits": 16,
+  "duration_seconds": 122.46666666666667,
+  "samples": 2700390,
+  "per_track_and_cue_volume": 0.3,
+  "master_gain_to_avoid_clipping": 1.0,
+  "pre_master_peak_pcm": 7667.4,
+  "output_peak_pcm": 7667,
+  "clipped_samples": 0,
+  "time_alignment": {
+    "first_telemetry_seconds": 0.01666666753590107,
+    "mapping": "video_seconds = telemetry.seconds - first_telemetry_seconds",
+    "telemetry_end_seconds": 122.46168111078441,
+    "last_state_hold_seconds": 0.004985555882257131,
+    "stage_ticks_present_in_all_samples": true
+  },
+  "tracks": [
+    {
+      "seconds": 0.0,
+      "previous_track": null,
+      "track": "ada",
+      "stage": "AdaPrologue",
+      "enemy_awake": false,
+      "paused": false,
+      "source_cursor_seconds": 0.0,
+      "looping": true
+    },
+    {
+      "seconds": 39.982902494331064,
+      "previous_track": "ada",
+      "track": "morning",
+      "stage": "RustMorning",
+      "enemy_awake": false,
+      "paused": false,
+      "source_cursor_seconds": 0.0,
+      "looping": true
+    },
+    {
+      "seconds": 56.73265306122449,
+      "previous_track": "morning",
+      "track": "threat",
+      "stage": "Encounter",
+      "enemy_awake": true,
+      "paused": false,
+      "source_cursor_seconds": 0.0,
+      "looping": true
+    },
+    {
+      "seconds": 64.4659410430839,
+      "previous_track": "threat",
+      "track": "remorse",
+      "stage": "Aftermath",
+      "enemy_awake": true,
+      "paused": false,
+      "source_cursor_seconds": 0.0,
+      "looping": true
+    },
+    {
+      "seconds": 71.46743764172335,
+      "previous_track": "remorse",
+      "track": "opening",
+      "stage": "Opening",
+      "enemy_awake": true,
+      "paused": false,
+      "source_cursor_seconds": 0.0,
+      "looping": false
+    },
+    {
+      "seconds": 119.47773242630386,
+      "previous_track": "opening",
+      "track": "remorse",
+      "stage": "Complete",
+      "enemy_awake": true,
+      "paused": false,
+      "source_cursor_seconds": 0.0,
+      "looping": true
+    }
+  ],
+  "audible_music_spans": [
+    {
+      "track": "ada",
+      "start_seconds": 0.0,
+      "end_seconds": 39.982902494331064,
+      "source_start_seconds": 0.0,
+      "source_end_seconds": 39.982902494331064
+    },
+    {
+      "track": "morning",
+      "start_seconds": 39.982902494331064,
+      "end_seconds": 56.73265306122449,
+      "source_start_seconds": 0.0,
+      "source_end_seconds": 16.749750566893425
+    },
+    {
+      "track": "threat",
+      "start_seconds": 56.73265306122449,
+      "end_seconds": 56.7492970521542,
+      "source_start_seconds": 0.0,
+      "source_end_seconds": 0.016643990929705216
+    },
+    {
+      "track": "threat",
+      "start_seconds": 57.2492970521542,
+      "end_seconds": 64.4659410430839,
+      "source_start_seconds": 0.016643990929705216,
+      "source_end_seconds": 7.2332879818594105
+    },
+    {
+      "track": "remorse",
+      "start_seconds": 64.4659410430839,
+      "end_seconds": 71.46743764172335,
+      "source_start_seconds": 0.0,
+      "source_end_seconds": 7.001496598639456
+    },
+    {
+      "track": "opening",
+      "start_seconds": 71.46743764172335,
+      "end_seconds": 119.46743764172335,
+      "source_start_seconds": 0.0,
+      "source_end_seconds": 48.0
+    },
+    {
+      "track": "remorse",
+      "start_seconds": 119.47773242630386,
+      "end_seconds": 122.46666666666667,
+      "source_start_seconds": 0.0,
+      "source_end_seconds": 2.988934240362812
+    }
+  ],
+  "pause_intervals": [
+    {
+      "start_seconds": 56.7492970521542,
+      "end_seconds": 57.2492970521542
+    }
+  ],
+  "events": [
+    {
+      "cue": "transition",
+      "reasons": [
+        "stage_changed"
+      ],
+      "epoch": 0,
+      "seconds": 39.982902494331064,
+      "stage": "RustMorning",
+      "ticks": 0,
+      "file": "transition.wav",
+      "source_duration_seconds": 0.8,
+      "end_seconds": 40.78290249433107
+    },
+    {
+      "cue": "transition",
+      "reasons": [
+        "stage_changed"
+      ],
+      "epoch": 0,
+      "seconds": 53.982675736961454,
+      "stage": "Encounter",
+      "ticks": 0,
+      "file": "transition.wav",
+      "source_duration_seconds": 0.8,
+      "end_seconds": 54.78267573696145
+    },
+    {
+      "cue": "transition",
+      "reasons": [
+        "enemy_noticed_rust"
+      ],
+      "epoch": 0,
+      "seconds": 56.73265306122449,
+      "stage": "Encounter",
+      "ticks": 165,
+      "file": "transition.wav",
+      "source_duration_seconds": 0.8,
+      "end_seconds": 58.03265306122449
+    },
+    {
+      "cue": "block",
+      "contact_tick": 227,
+      "observed_age": 0,
+      "target": "Player",
+      "blocked": true,
+      "epoch": 0,
+      "seconds": 58.2659410430839,
+      "stage": "Encounter",
+      "ticks": 227,
+      "file": "block.wav",
+      "source_duration_seconds": 0.28,
+      "end_seconds": 58.5459410430839
+    },
+    {
+      "cue": "strike",
+      "contact_tick": 249,
+      "observed_age": 0,
+      "target": "Erratic",
+      "blocked": false,
+      "epoch": 0,
+      "seconds": 58.632607709750566,
+      "stage": "Encounter",
+      "ticks": 249,
+      "file": "strike.wav",
+      "source_duration_seconds": 0.22,
+      "end_seconds": 58.852607709750565
+    },
+    {
+      "cue": "block",
+      "contact_tick": 296,
+      "observed_age": 0,
+      "target": "Player",
+      "blocked": true,
+      "epoch": 0,
+      "seconds": 59.41591836734694,
+      "stage": "Encounter",
+      "ticks": 296,
+      "file": "block.wav",
+      "source_duration_seconds": 0.28,
+      "end_seconds": 59.69591836734694
+    },
+    {
+      "cue": "strike",
+      "contact_tick": 329,
+      "observed_age": 0,
+      "target": "Erratic",
+      "blocked": false,
+      "epoch": 0,
+      "seconds": 59.9659410430839,
+      "stage": "Encounter",
+      "ticks": 329,
+      "file": "strike.wav",
+      "source_duration_seconds": 0.22,
+      "end_seconds": 60.1859410430839
+    },
+    {
+      "cue": "block",
+      "contact_tick": 387,
+      "observed_age": 0,
+      "target": "Player",
+      "blocked": true,
+      "epoch": 0,
+      "seconds": 60.93256235827664,
+      "stage": "Encounter",
+      "ticks": 387,
+      "file": "block.wav",
+      "source_duration_seconds": 0.28,
+      "end_seconds": 61.21256235827664
+    },
+    {
+      "cue": "strike",
+      "contact_tick": 419,
+      "observed_age": 0,
+      "target": "Erratic",
+      "blocked": false,
+      "epoch": 0,
+      "seconds": 61.46589569160998,
+      "stage": "Encounter",
+      "ticks": 419,
+      "file": "strike.wav",
+      "source_duration_seconds": 0.22,
+      "end_seconds": 61.68589569160998
+    },
+    {
+      "cue": "block",
+      "contact_tick": 477,
+      "observed_age": 0,
+      "target": "Player",
+      "blocked": true,
+      "epoch": 0,
+      "seconds": 62.43256235827664,
+      "stage": "Encounter",
+      "ticks": 477,
+      "file": "block.wav",
+      "source_duration_seconds": 0.28,
+      "end_seconds": 62.71256235827664
+    },
+    {
+      "cue": "strike",
+      "contact_tick": 509,
+      "observed_age": 0,
+      "target": "Erratic",
+      "blocked": false,
+      "epoch": 0,
+      "seconds": 62.96589569160998,
+      "stage": "Encounter",
+      "ticks": 509,
+      "file": "strike.wav",
+      "source_duration_seconds": 0.22,
+      "end_seconds": 63.18589569160998
+    },
+    {
+      "cue": "block",
+      "contact_tick": 567,
+      "observed_age": 0,
+      "target": "Player",
+      "blocked": true,
+      "epoch": 0,
+      "seconds": 63.93251700680272,
+      "stage": "Encounter",
+      "ticks": 567,
+      "file": "block.wav",
+      "source_duration_seconds": 0.28,
+      "end_seconds": 64.21251700680273
+    },
+    {
+      "cue": "transition",
+      "reasons": [
+        "stage_changed"
+      ],
+      "epoch": 0,
+      "seconds": 64.4659410430839,
+      "stage": "Aftermath",
+      "ticks": 599,
+      "file": "transition.wav",
+      "source_duration_seconds": 0.8,
+      "end_seconds": 65.2659410430839
+    },
+    {
+      "cue": "strike",
+      "contact_tick": 599,
+      "observed_age": 0,
+      "target": "Erratic",
+      "blocked": false,
+      "epoch": 0,
+      "seconds": 64.4659410430839,
+      "stage": "Aftermath",
+      "ticks": 599,
+      "file": "strike.wav",
+      "source_duration_seconds": 0.22,
+      "end_seconds": 64.6859410430839
+    },
+    {
+      "cue": "transition",
+      "reasons": [
+        "stage_changed"
+      ],
+      "epoch": 0,
+      "seconds": 71.46743764172335,
+      "stage": "Opening",
+      "ticks": 1019,
+      "file": "transition.wav",
+      "source_duration_seconds": 0.8,
+      "end_seconds": 72.26743764172336
+    },
+    {
+      "cue": "transition",
+      "reasons": [
+        "stage_changed"
+      ],
+      "epoch": 0,
+      "seconds": 119.47773242630386,
+      "stage": "Complete",
+      "ticks": 1019,
+      "file": "transition.wav",
+      "source_duration_seconds": 0.8,
+      "end_seconds": 120.27773242630386
+    }
+  ],
+  "event_counts": {
+    "transition": 6,
+    "block": 5,
+    "strike": 5
+  },
+  "video": {
+    "source": "/tmp/borrow-adventure-opening-review-01/adventure-silent.mp4",
+    "duration_seconds": 122.466667,
+    "fps": 30.0,
+    "frames": "3674",
+    "copied_without_reencoding": true
+  },
+  "telemetry": {
+    "file": "/tmp/borrow-adventure-opening-review-01/telemetry.jsonl",
+    "rows": 7348,
+    "sha256": "99178381302858d5f864748b234d59a957253ca212bf4348292d67ba95f7e8e8"
+  },
+  "sources": {
+    "ada": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/ada.wav",
+      "sha256": "3dcab6ba2818ee7689b210db781ede438208b9d7b569f07c27a2c675c38e1219",
+      "samples": 264600,
+      "duration_seconds": 12.0,
+      "looping": true
+    },
+    "morning": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/morning.wav",
+      "sha256": "9978fe0828121ee879165ecda1cded9a879424b024b2690b2ed4db88f8f5a97f",
+      "samples": 264600,
+      "duration_seconds": 12.0,
+      "looping": true
+    },
+    "threat": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/threat.wav",
+      "sha256": "71acd85a29ab75191ca13ce0c92f691d951fe4b3381aaaf34ff000c11542a3b5",
+      "samples": 264600,
+      "duration_seconds": 12.0,
+      "looping": true
+    },
+    "remorse": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/remorse.wav",
+      "sha256": "c43c5d903123c8f82345e4182b4fe3c11b1d07f07f09b15be31ba426cc353771",
+      "samples": 264600,
+      "duration_seconds": 12.0,
+      "looping": true
+    },
+    "opening": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/opening.wav",
+      "sha256": "f153b1b0380cdb1713332b85a8c1d43cd1aed79dc06484b13cf28275c7ef4c50",
+      "samples": 1058400,
+      "duration_seconds": 48.0,
+      "looping": false
+    },
+    "strike": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/strike.wav",
+      "sha256": "7f532afd521bedae01ab8109e03b92b797ad9b9372162575a0e16dfe84b6ce7e",
+      "samples": 4851,
+      "duration_seconds": 0.22,
+      "looping": false
+    },
+    "block": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/block.wav",
+      "sha256": "5181f82253d68eb11115f8d6ad9b89668985273b4170d68fa1ca1e203638d30e",
+      "samples": 6174,
+      "duration_seconds": 0.28,
+      "looping": false
+    },
+    "hurt": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/hurt.wav",
+      "sha256": "9312eae2427e0b278fbcd590ae720def9f0c803d6d311f6988fe6e61fe4818ce",
+      "samples": 7938,
+      "duration_seconds": 0.36,
+      "looping": false
+    },
+    "transition": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/transition.wav",
+      "sha256": "3be6151d5ba0a0ca6b68009a37d71dc7a6ede1622f059c439565df3edecf9b4a",
+      "samples": 17640,
+      "duration_seconds": 0.8,
+      "looping": false
+    }
+  },
+  "outputs": {
+    "wav": "/tmp/borrow-adventure-opening-review-01/adventure-mix.wav",
+    "video": "/tmp/borrow-adventure-opening-review-01/adventure.mp4"
+  }
+}

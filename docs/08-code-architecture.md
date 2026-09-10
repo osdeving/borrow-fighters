@@ -4,7 +4,31 @@
 
 Implementado em corte inicial.
 
+O experimento de aventura autorizado em 10 de setembro de 2026 acrescenta
+`src/adventure/` e um binário independente, atrás da feature `adventure`.
+Os módulos atuais de luta ficam atrás de `fighting`. Ambas as features são
+ligadas por padrão, e `cargo run` executa a composição `borrow-story`.
+Compilações isoladas usam `--no-default-features` e a feature/binário escolhidos.
+Somente `math` e `runtime_paths` são core compartilhado; regras, cenas, input,
+renderização, áudio e assets específicos não cruzam entre os jogos.
+Veja a [ADR 0021](adr/0021-isolated-adventure-experiment.md) e o
+[diário de retomada](worklogs/rust-adventure-prologue.md).
+
+A [ADR 0022](adr/0022-adventure-external-copy-and-opening.md) acrescenta
+`adventure/text.rs`, catálogo externo com recarga transacional, e a etapa
+`Opening` após o pesar. `engine/morning.rs` calibra apoios anatômicos;
+`engine/opening.rs` compõe jornais, histórias e logo; `engine/typography.rs`
+ajusta texto editável ao espaço. Esses módulos e seus assets são exclusivos
+da aventura, sem ampliar o core compartilhado.
+
 Este documento descreve a arquitetura atual do protótipo Rust + Raylib e mantém algumas intenções futuras. A regra segue sendo evitar transformar o projeto em uma engine antes de provar o combate.
+
+A [ADR 0023](adr/0023-story-to-terminal-menu.md) acrescenta uma composição externa:
+`presentation.rs` e o binário `borrow-story`, habilitados somente com ambos os
+domínios. A composição possui a janela e conecta APIs de aplicação; os domínios
+não a importam nem passam a depender um do outro. A aventura devolve conclusão
+confirmada, pedido explícito de pular tudo ou saída. Confirmação/skip seguem ao
+menu principal; saída ou limite de frames encerram a sessão.
 
 ## Objetivo
 

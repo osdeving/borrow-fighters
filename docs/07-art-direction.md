@@ -10,6 +10,51 @@ Este documento orienta contribuições visuais sem fechar cedo demais a identida
 
 **Borrow Fighters** deve parecer um jogo de luta 2D estilizado, legível e engraçado, onde cultura de programação vira forma, cor, gesto e impacto. O elenco combina mascotes e humanos com volume, materiais e iluminação coerentes no tamanho de jogo.
 
+Na [aventura autorizada](27-rust-story-adventure.md), essa linguagem de animação
+passa a sustentar cenas narrativas e o movimento de Rust. EPs são pessoas de
+natureza mística: rosto, postura e pausas devem comunicar emoções e intenções.
+Humanos e EPs comportam variedade de caráter e aparência. A origem de uma EP
+não justifica atuação fria ou ausência de afeto.
+
+## Direção do prólogo e primeiro encontro
+
+- **Ada:** começar com trabalho cotidiano e humanidade visível. Seu aprendizado
+  do Linker e a mensagem misteriosa antecedem Assembly; a transição a híbrida
+  humana/EP pode ser sugerida sem explicar seu mecanismo. Evitar apresentar
+  Ada como entidade pronta desde o primeiro quadro.
+- **Assembly:** primeiro despertar com peso, precisão e presença mística;
+  preservar o mistério da mensagem e de sua relação com Ada. Sua identidade
+  visual já descrita abaixo orienta a cena.
+- **Rust:** acordar como numa manhã comum, com respiração, despertar e mudança
+  de atenção antes da ameaça. Mostrar intenção em antecipação, golpe e reação.
+  Depois da vitória, um pequeno balanço de cabeça com pesar expressa necessidade,
+  sem a pose festiva de vitória de uma partida.
+- **Errática:** ameaça com silhueta, aproximação e ataque legíveis. Sua
+  instabilidade é uma condição de existência; não equivale a provar que EPs
+  sejam incapazes de emoção ou que humanos sejam todos cruéis.
+- **Terminal:** blocos curtos digitados, contraste legível e ritmo que permita
+  revelar ou avançar texto. A referência de terminal inspira a apresentação;
+  frases, gráficos e encenação pertencem ao Linker.
+
+As referências de tom Naruto e Fullmetal Alchemist orientam apenas o peso
+emocional, o mistério e a humanidade de seres criados. Não importam personagens,
+mitologia, acontecimentos ou recursos visuais dessas obras para o cânone.
+O teste inicial pode usar desenho em camadas e poses provisórias; a evidência
+em movimento deve mostrar atuação, sem confundir aproximação de câmera com
+animação corporal pronta. A produção fica limitada ao episódio da
+[entrega 27](27-rust-story-adventure.md), com a apresentação autorizada na
+[entrega 28](28-adventure-texts-and-opening.md).
+
+Na manhã, ancorar ombro/antebraço e quadril no colchão, assento na borda e pés
+no chão, em vez de alinhar todas as poses pelo fim do recorte. A respiração
+preserva o ponto de apoio. Conferir a sequência completa ao mudar qualquer pose.
+
+A apresentação após o pesar usa jornais, quadros biográficos e montagem de
+personagens. C++ aparece adulta no cotidiano noturno e no despertar heroico;
+Python ensina humanos sobre EPs numa universidade. As manchetes representam
+imprensa da ficção. Logo, subtítulo e demais palavras são desenhados pelo jogo
+a partir do JSON editável, sem texto incorporado aos PNGs novos.
+
 ## Pilares visuais
 
 ### 1. Legibilidade antes de detalhe
@@ -48,6 +93,13 @@ As arenas principais devem se inspirar em locais brasileiros de ciência, tecnol
 Nenhum mood está aprovado como direção final. Propostas devem comparar pelo menos uma vantagem e um risco.
 
 ## Estado visual atual do protótipo
+
+O menu principal da [rodada 3 da aventura](29-story-terminal-menu.md) adota
+INK, papel creme, dourado e verde-água do título final, com a mesma Barlow
+Condensed. Moldura de terminal, cursor bloco piscante e revelação binária
+aproximam as duas entradas. Esta direção se aplica somente ao menu principal;
+seleção, lutas, submenus e livro de lore conservam sua apresentação.
+Go fica fora da montagem de abertura por pedido do usuário, sem apagar seus assets.
 
 Os seis lutadores têm atlas de ações revisadas em `assets/candidates/`, escolhidos por padrão; `BORROW_FIGHTERS_SPRITE_CANDIDATES=0` permite comparar o baseline preservado. A produção por ação e a validação específica estão na [matriz atual](19-sprite-production-coverage.md). Arenas, retratos e demais elementos fora dessa rodada mantêm seu estado anterior.
 
@@ -94,10 +146,12 @@ O Linker deve parecer uma força de ligação, não magia genérica. Ele pode ap
 
 Direções visuais:
 
-- Ada Lovelace deve aparecer de forma sutil, quase arqueológica: inscrições, diagramas, retratos parciais, notas, máquinas e sinais esquecidos;
+- Ada Lovelace aparece diretamente no prólogo; inscrições, diagramas, retratos
+  parciais e sinais esquecidos podem ampliar sua presença depois;
 - Assembly deve parecer fora de fase, com partes do corpo alternando entre matéria, ausência, `0` e `1`;
 - a instabilidade de Assembly deve ser sóbria e inquietante, não glitch cômico;
-- entidades erráticas dos frontenzos podem ter silhuetas menores, deformadas e incompletas;
+- entidades erráticas surgidas involuntariamente pelas condições criadas pelo
+  mau uso do Linker podem ter silhuetas menores, deformadas e incompletas;
 - o Linker pode ser legível por cor, símbolo ou movimento, mas nunca deve competir com hit effects e leitura de combate.
 
 ## Arenas brasileiras

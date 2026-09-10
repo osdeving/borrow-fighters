@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "standalone_skip_all_concludes_locally_without_fabricating_victory",
+    "standalone_presentation_replay_preserved",
+    "standalone_skip_all_from_pause",
+    "standalone_retry_preserved",
+    "standalone_encounter_segment_skip",
+    "clean_exit"
+  ],
+  "success": true
+}

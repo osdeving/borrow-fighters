@@ -2,19 +2,44 @@
 
 ## Objetivo
 
-Criar o menor protótipo jogável possível para provar a mecânica central de luta e orientar a produção visual inicial.
+Implementar o menor episódio jogável que conecte a lore ao controle de Rust:
+prólogo de Ada/Assembly, salto temporal, manhã cotidiana, ataque de uma errática
+e vitória com pesar. A [entrega 27](27-rust-story-adventure.md) detalha a sequência
+e seus critérios. O escopo de luta abaixo permanece como histórico do produto
+já entregue.
 
 ## Versão-alvo
 
-**Prototype 0.1 — Greybox Fighting Slice**
+**Experimento de aventura — prólogo e primeiro encontro**, na branch
+`feature/rust-adventure-prologue`. O produto distribuído permanece
+`v0.1.0-prototype.3` até novo corte explícito de release.
 
-## Status atual
+## Escopo autorizado da aventura
+
+- Ada começa como humana comum trabalhando; a mensagem misteriosa e o despertar
+  de Assembly são encenados sem explicar a origem da mensagem.
+- Texto digitado em terminal conduz ao salto de muito tempo.
+- Rust acorda numa manhã comum e o controle passa ao jogador.
+- Uma errática tenta matá-lo; movimento e combate próprios permitem vencê-la.
+- O encerramento mostra Rust balançando a cabeça com pesar e necessidade.
+- Pausa, avanço/pulo de texto e nova tentativa permitem revisar a sequência
+  sem obrigar o jogador a repetir o prólogo a cada derrota.
+- Features e binários separam aventura e luta; apenas `math` e `runtime_paths`
+  compõem a base compartilhada inicial. [ADR 0021](adr/0021-isolated-adventure-experiment.md).
+- Animações, transições e contato precisam de revisão no renderer real;
+  testes de estado não comprovam expressividade humana.
+
+Vínculo, capítulo em Sirius, plataforma instável, personagem de apoio, campanha,
+mapa aberto e múltiplos inimigos simultâneos ficam estacionados. O [diário](worklogs/rust-adventure-prologue.md)
+registra entregas e limites observados.
+
+## Status do Prototype 0.1 de luta
 
 O protótipo 0.1 já possui uma versão jogável em Rust + Raylib na `main`.
 
 O corte inicial abaixo foi ampliado por rodadas autorizadas. A
 [rodada de conclusão visual](26-playtest-visual-completion.md) acrescenta seleção
-visual, pausa/revanche e energia na branch `feature/playtest-visual-completion`.
+visual, pausa/revanche e energia, integradas e distribuídas no Prototype 3.
 
 O slice atual inclui:
 
@@ -36,9 +61,10 @@ O slice atual inclui:
 - motor inicial de áudio por eventos, incluindo música por tela/arena, impactos, UI, contagem pré-luta e vozes de golpes por personagem.
 - livro de história e fichas de roster carregados de `assets/lore/story.json` em runtime.
 
-Ainda não é uma release fechada. O objetivo agora é melhorar leitura visual, timing, feeling e documentação de contribuição para artistas.
+O corte distribuído é `v0.1.0-prototype.3`. Playtest humano, timing e acabamento
+pendentes estão no [backlog](03-backlog.md); a aventura é a frente ativa atual.
 
-## Entregáveis
+## Entregáveis do corte inicial de luta — histórico
 
 ### Obrigatórios
 
@@ -79,9 +105,11 @@ Ainda não é uma release fechada. O objetivo agora é melhorar leitura visual, 
 - ECS sofisticado.
 - Editor de fases/personagens.
 
-## Regra de ouro
+## Regra de ouro do corte de luta
 
-Se uma feature não ajuda a provar que o combate básico funciona, ela não entra no protótipo 0.1.
+Se uma feature não ajuda a provar que o combate básico funciona, ela não entra
+no corte inicial de luta. A aventura tem autorização e escopo próprios acima;
+não amplia automaticamente as regras ou os sistemas desse corte.
 
 ## Riscos
 

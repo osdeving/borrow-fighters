@@ -1,0 +1,122 @@
+INFO: Initializing raylib 6.0
+INFO: Platform backend: DESKTOP (GLFW)
+INFO: Supported raylib modules:
+INFO:     > rcore:..... loaded (mandatory)
+INFO:     > rlgl:...... loaded (mandatory)
+INFO:     > rshapes:... loaded (optional)
+INFO:     > rtextures:. loaded (optional)
+INFO:     > rtext:..... loaded (optional)
+INFO:     > rmodels:... loaded (optional)
+INFO:     > raudio:.... loaded (optional)
+INFO: DISPLAY: Trying to enable MSAA x4
+INFO: DISPLAY: Device initialized successfully
+INFO:     > Display size: 1440 x 900
+INFO:     > Screen size:  1280 x 720
+INFO:     > Render size:  1280 x 720
+INFO:     > Viewport offsets: 0, 0
+INFO: GLAD: OpenGL extensions loaded successfully
+INFO: GL: Supported extensions count: 131
+INFO: GL: OpenGL device information:
+INFO:     > Vendor:   Microsoft Corporation
+INFO:     > Renderer: D3D12 (NVIDIA GeForce RTX 4070 Laptop GPU)
+INFO:     > Version:  3.3 (Core Profile) Mesa 21.2.6
+INFO:     > GLSL:     3.30
+INFO: GL: VAO extension detected, VAO functions loaded successfully
+INFO: GL: NPOT textures extension detected, full NPOT textures supported
+INFO: GL: DXT compressed textures supported
+INFO: GL: ETC2/EAC compressed textures supported
+INFO: PLATFORM: DESKTOP (GLFW - X11): Initialized successfully
+INFO: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 1] Default texture loaded successfully
+INFO: SHADER: [ID 1] Vertex shader compiled successfully
+INFO: SHADER: [ID 2] Fragment shader compiled successfully
+INFO: SHADER: [ID 3] Program shader loaded successfully
+INFO: SHADER: [ID 3] Default shader loaded successfully
+INFO: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+INFO: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+INFO: RLGL: Default OpenGL state initialized successfully
+INFO: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Default font loaded successfully (224 glyphs)
+INFO: SYSTEM: Working Directory: /tmp/borrow-runtime-isolation-20260910-nap5ftq1/cwd
+INFO: TIMER: Target time per frame: 16.667 milliseconds
+INFO: AUDIO: Device initialized successfully
+INFO:     > Backend:       miniaudio | PulseAudio
+INFO:     > Format:        32-bit IEEE Floating Point -> 16-bit Signed Integer
+INFO:     > Channels:      2 -> 2
+INFO:     > Sample rate:   44100 -> 44100
+INFO:     > Periods size:  3304
+INFO: STREAM: Initialized successfully (22050 Hz, 16 bit, Mono)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/audio/ada.wav] Music file loaded successfully
+INFO:     > Sample rate:   22050 Hz
+INFO:     > Sample size:   16 bits
+INFO:     > Channels:      1 (Mono)
+INFO:     > Total frames:  264600
+INFO: STREAM: Initialized successfully (22050 Hz, 16 bit, Mono)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/audio/morning.wav] Music file loaded successfully
+INFO:     > Sample rate:   22050 Hz
+INFO:     > Sample size:   16 bits
+INFO:     > Channels:      1 (Mono)
+INFO:     > Total frames:  264600
+INFO: STREAM: Initialized successfully (22050 Hz, 16 bit, Mono)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/audio/threat.wav] Music file loaded successfully
+INFO:     > Sample rate:   22050 Hz
+INFO:     > Sample size:   16 bits
+INFO:     > Channels:      1 (Mono)
+INFO:     > Total frames:  264600
+INFO: STREAM: Initialized successfully (22050 Hz, 16 bit, Mono)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/audio/remorse.wav] Music file loaded successfully
+INFO:     > Sample rate:   22050 Hz
+INFO:     > Sample size:   16 bits
+INFO:     > Channels:      1 (Mono)
+INFO:     > Total frames:  264600
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/audio/strike.wav] File loaded successfully
+INFO: WAVE: Data loaded successfully (22050 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/audio/block.wav] File loaded successfully
+INFO: WAVE: Data loaded successfully (22050 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/audio/hurt.wav] File loaded successfully
+INFO: WAVE: Data loaded successfully (22050 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/audio/transition.wav] File loaded successfully
+INFO: WAVE: Data loaded successfully (22050 Hz, 16 bit, 1 channels)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/fonts/Barlow-Regular.ttf] File loaded successfully
+WARNING: FONT: Requested codepoints glyphs found: [191/224]
+INFO: TEXTURE: [ID 3] Texture loaded successfully (1024x512 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Data loaded successfully (48 pixel size | 191 glyphs)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/fonts/Lora-Variable.ttf] File loaded successfully
+WARNING: FONT: Requested codepoints glyphs found: [190/224]
+INFO: TEXTURE: [ID 4] Texture loaded successfully (1024x1024 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Data loaded successfully (64 pixel size | 190 glyphs)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/ada-prologue.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (2048x768 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 5] Texture loaded successfully (2048x768 | R8G8B8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/rust-morning.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1448x1086 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 6] Texture loaded successfully (1448x1086 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/adventure-environments.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1182x1330 | R8G8B8 | 1 mipmaps)
+INFO: TEXTURE: [ID 7] Texture loaded successfully (1182x1330 | R8G8B8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/erratic.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1774x887 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 8] Texture loaded successfully (1774x887 | R8G8B8A8 | 1 mipmaps)
+INFO: FILEIO: [/tmp/borrow-runtime-isolation-20260910-nap5ftq1/adventure-assets/adventure/rust-actions.png] File loaded successfully
+INFO: IMAGE: Data loaded successfully (1254x1254 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 9] Texture loaded successfully (1254x1254 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 10] Texture loaded successfully (1280x720 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 1] Depth renderbuffer loaded successfully (32 bits)
+INFO: FBO: [ID 1] Framebuffer object created successfully
+INFO: FBO: [ID 1] Unloaded framebuffer from VRAM (GPU)
+INFO: TEXTURE: [ID 5] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 6] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 7] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 8] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 9] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 3] Unloaded texture data from VRAM (GPU)
+INFO: TEXTURE: [ID 4] Unloaded texture data from VRAM (GPU)
+INFO: STREAM: Unloaded audio stream data from RAM
+INFO: STREAM: Unloaded audio stream data from RAM
+INFO: STREAM: Unloaded audio stream data from RAM
+INFO: STREAM: Unloaded audio stream data from RAM
+INFO: AUDIO: Device closed successfully
+INFO: TEXTURE: [ID 2] Unloaded texture data from VRAM (GPU)
+INFO: SHADER: [ID 3] Default shader unloaded successfully
+INFO: TEXTURE: [ID 1] Default texture unloaded successfully
+INFO: Window closed successfully
