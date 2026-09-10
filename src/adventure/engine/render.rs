@@ -20,10 +20,17 @@ const GOLD: Color = Color::new(232, 177, 92, 255);
 const MINT: Color = Color::new(125, 218, 190, 255);
 
 /// Draws a complete frame at the logical resolution.
-pub fn draw(d: &mut impl RaylibDraw, story: &Story, assets: &Assets, paused: bool, debug: bool) {
+pub fn draw(
+    d: &mut impl RaylibDraw,
+    story: &Story,
+    assets: &Assets,
+    paused: bool,
+    debug: bool,
+    reveal_text: bool,
+) {
     d.clear_background(INK);
     match story.stage {
-        Stage::AdaPrologue => ada(d, story, assets),
+        Stage::AdaPrologue => ada(d, story, assets, reveal_text),
         Stage::RustMorning => morning(d, story, assets),
         Stage::Encounter | Stage::Aftermath | Stage::Complete => encounter(d, story, assets, debug),
     }
@@ -38,7 +45,7 @@ pub fn draw(d: &mut impl RaylibDraw, story: &Story, assets: &Assets, paused: boo
     }
 }
 
-fn ada(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
+fn ada(d: &mut impl RaylibDraw, story: &Story, a: &Assets, reveal_text: bool) {
     let beat = story
         .prologue_beat()
         .unwrap_or(PrologueBeat::AdaOrdinaryLife);
@@ -103,7 +110,11 @@ fn ada(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
             d,
             a,
             message,
-            ((t - 0.6).max(0.0) * 23.0) as usize,
+            if reveal_text {
+                usize::MAX
+            } else {
+                ((t - 0.6).max(0.0) * 23.0) as usize
+            },
             Vector2::new(710.0, 286.0),
             23.0,
             MINT,
@@ -114,12 +125,27 @@ fn ada(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
     }
     if beat == PrologueBeat::LongYears {
         d.draw_rectangle(0, 44, WIDTH, HEIGHT - 44, alpha(INK, (t / 1.0).min(0.9)));
-        heading(d, a, "Muito tempo depois", 365.0, 288.0, 46.0, PAPER);
+        heading(
+            d,
+            a,
+            &"Muito tempo depois"
+                .chars()
+                .take((t * 16.0) as usize)
+                .collect::<String>(),
+            365.0,
+            288.0,
+            46.0,
+            PAPER,
+        );
         text(d, a, "Em uma manhã qualquer.", 492.0, 353.0, 25.0, GOLD);
     } else {
         text(d, a, subtitle, 70.0, 607.0, 28.0, PAPER);
     }
-    footer(d, a, "Enter / A  pular cena     Esc / Start  pausar");
+    footer(
+        d,
+        a,
+        "Tab / X  revelar mensagem     Enter / A  pular cena     Esc / Start  pausar",
+    );
     for i in 0..6 {
         d.draw_rectangle(
             1080 + i * 23,
@@ -288,7 +314,13 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
         } else {
             "UMA MANHÃ QUALQUER"
         };
-        text(d, a, objective, 955.0, 40.0, 19.0, INK);
+        d.draw_rectangle_rounded(
+            Rectangle::new(927.0, 26.0, 323.0, 72.0),
+            0.08,
+            8,
+            alpha(INK, 0.85),
+        );
+        text(d, a, objective, 950.0, 40.0, 19.0, PAPER);
         if c.enemy_awake {
             let x = c.enemy.position.x - camera;
             d.draw_rectangle((x - 44.0) as i32, 374, 88, 4, alpha(INK, 0.55));
@@ -311,8 +343,7 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
                 );
             }
         } else if story.stage_ticks > 80 {
-            text(d, a, "Siga pela rua", 890.0, 82.0, 24.0, INK);
-            text(d, a, ">", 1048.0, 80.0, 30.0, INK);
+            text(d, a, "Siga pela rua  >", 950.0, 68.0, 21.0, GOLD);
         }
         footer(
             d,
@@ -365,42 +396,50 @@ fn rust(d: &mut impl RaylibDraw, a: &Assets, actor: &Actor, camera: f32) {
         );
         return;
     }
-    let (clip, looping, speed) = match actor.action {
-        Action::Walk => ("walk", true, 1.55),
-        Action::Jump => ("jump", false, 1.0),
-        Action::LightAttack => ("punch_light", false, 1.3),
-        Action::HeavyAttack => ("punch_heavy", false, 0.9),
-        Action::Block => ("block", false, 1.0),
-        Action::Hurt => ("hit", false, 1.5),
-        Action::Defeated => ("defeat", false, 1.0),
-        _ => ("idle", true, 1.0),
+    let frame = match actor.action {
+        Action::Walk => 2 + (actor.action_ticks / 7 % 4) as usize,
+        Action::Jump if actor.velocity.y < 0.0 => 6,
+        Action::Jump => 7,
+        Action::LightAttack if actor.action_ticks < 5 => 8,
+        Action::LightAttack if actor.action_ticks < 10 => 9,
+        Action::LightAttack => 10,
+        Action::HeavyAttack if actor.action_ticks < 13 => 11,
+        Action::HeavyAttack if actor.action_ticks < 20 => 12,
+        Action::Block => 13,
+        Action::Hurt => 14,
+        Action::Defeated => 15,
+        _ => (actor.action_ticks / 30 % 2) as usize,
     };
-    if let Some(frame) = a
-        .rust
-        .frame(clip, actor.action_ticks as f32 / 60.0 * speed, looping)
-        && let Some(texture) = a.rust_textures.get(&frame.image)
-    {
-        let [x, y, w, h] = frame.rect;
-        let scale = 0.62;
-        let flipped = actor.facing == Facing::Left;
-        let pivot = if flipped {
-            w - frame.pivot[0]
-        } else {
-            frame.pivot[0]
-        };
-        d.draw_texture_pro(
-            texture,
-            Rectangle::new(x, y, if flipped { -w } else { w }, h),
-            Rectangle::new(
-                pos.x - pivot * scale,
-                pos.y - frame.pivot[1] * scale,
-                w * scale,
-                h * scale,
-            ),
-            Vector2::zero(),
-            0.0,
-            Color::WHITE,
+    let tallest = a
+        .action_bounds
+        .iter()
+        .take(15)
+        .map(|r| r.height)
+        .fold(1.0, f32::max);
+    pose(
+        d,
+        &a.actions,
+        a.action_bounds[frame],
+        pos,
+        174.0 / tallest,
+        actor.facing == Facing::Left,
+        Color::WHITE,
+    );
+    if actor.action == Action::HeavyAttack && (13..20).contains(&actor.action_ticks) {
+        let x = pos.x + actor.facing.sign() * 65.0;
+        let y = pos.y - 115.0;
+        let t = (actor.action_ticks - 13) as f32;
+        d.draw_circle_lines(
+            x as i32,
+            y as i32,
+            14.0 + t * 2.0,
+            alpha(GOLD, 1.0 - t / 8.0),
         );
+        for i in 0..4 {
+            let angle = i as f32 * std::f32::consts::FRAC_PI_2 + t * 0.13;
+            let p = Vector2::new(x + angle.cos() * 23.0, y + angle.sin() * 23.0);
+            d.draw_rectangle(p.x as i32 - 2, p.y as i32 - 2, 4, 4, GOLD);
+        }
     }
 }
 

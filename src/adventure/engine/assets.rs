@@ -5,59 +5,9 @@
 
 use raylib::prelude::*;
 use serde::Deserialize;
-use std::{collections::BTreeMap, error::Error, fs};
+use std::{error::Error, fs};
 
 use crate::runtime_paths::asset_path;
-
-/// One visual frame; the adventure simulation supplies all combat geometry.
-#[derive(Debug, Deserialize)]
-pub struct Frame {
-    /// Visual action key local to this catalog.
-    pub clip: String,
-    /// Local texture filename.
-    pub image: String,
-    /// Atlas rectangle in pixels.
-    pub rect: [f32; 4],
-    /// Feet anchor relative to the rectangle.
-    pub pivot: [f32; 2],
-    /// Duration of this frame.
-    pub duration_ms: u32,
-}
-
-/// Visual frames copied independently from the reviewed identity artwork.
-#[derive(Debug, Deserialize)]
-pub struct Catalog {
-    /// Frames in playback order, grouped by clip.
-    pub frames: Vec<Frame>,
-}
-
-impl Catalog {
-    /// Selects a visual frame, holding the final pose for non-looping actions.
-    pub fn frame(&self, clip: &str, seconds: f32, looping: bool) -> Option<&Frame> {
-        let duration: u32 = self
-            .frames
-            .iter()
-            .filter(|f| f.clip == clip)
-            .map(|f| f.duration_ms)
-            .sum();
-        if duration == 0 {
-            return None;
-        }
-        let elapsed = (seconds.max(0.0) * 1000.0) as u32;
-        let mut elapsed = if looping {
-            elapsed % duration
-        } else {
-            elapsed.min(duration - 1)
-        };
-        for frame in self.frames.iter().filter(|f| f.clip == clip) {
-            if elapsed < frame.duration_ms {
-                return Some(frame);
-            }
-            elapsed -= frame.duration_ms;
-        }
-        None
-    }
-}
 
 /// Assets exclusively owned by the adventure executable.
 pub struct Assets {
@@ -73,10 +23,10 @@ pub struct Assets {
     pub morning_bounds: Vec<Rectangle>,
     /// Transparent-pixel bounds within each creature pose.
     pub erratic_bounds: Vec<Rectangle>,
-    /// Independent catalog of Rust's combat visuals.
-    pub rust: Catalog,
-    /// Textures addressed by that catalog.
-    pub rust_textures: BTreeMap<String, Texture2D>,
+    /// Sixteen actions authored for this adventure, matching the morning.
+    pub actions: Texture2D,
+    /// Independently measured action poses.
+    pub action_bounds: Vec<Rectangle>,
     /// Readable Portuguese interface font.
     pub body: Font,
     /// Narrative title font.
@@ -86,16 +36,6 @@ pub struct Assets {
 impl Assets {
     /// Loads required assets, returning a useful error instead of silently substituting art.
     pub fn load(rl: &mut RaylibHandle, thread: &RaylibThread) -> Result<Self, Box<dyn Error>> {
-        let rust: Catalog = serde_json::from_str(&fs::read_to_string(asset_path(
-            "assets/adventure/rust/animation.json",
-        ))?)?;
-        let mut rust_textures = BTreeMap::new();
-        for frame in &rust.frames {
-            if !rust_textures.contains_key(&frame.image) {
-                let texture = texture(rl, thread, &format!("rust/{}", frame.image))?;
-                rust_textures.insert(frame.image.clone(), texture);
-            }
-        }
         let glyphs: String = (32..=255).filter_map(char::from_u32).collect();
         let body = rl.load_font_ex(
             thread,
@@ -116,8 +56,8 @@ impl Assets {
             erratic: texture(rl, thread, "erratic.png")?,
             morning_bounds: pose_bounds("rust-morning-poses.json", 12)?,
             erratic_bounds: pose_bounds("erratic-poses.json", 8)?,
-            rust,
-            rust_textures,
+            actions: texture(rl, thread, "rust-actions.png")?,
+            action_bounds: pose_bounds("rust-actions-poses.json", 16)?,
             body,
             title,
         })
@@ -174,27 +114,15 @@ mod tests {
     use super::*;
 
     #[test]
-    fn independent_catalog_has_required_actions_and_only_local_textures() {
-        let catalog: Catalog = serde_json::from_str(include_str!(
-            "../../../assets/adventure/rust/animation.json"
-        ))
-        .unwrap();
-        for clip in [
-            "idle",
-            "walk",
-            "jump",
-            "block",
-            "punch_light",
-            "punch_heavy",
-            "hit",
-            "defeat",
+    fn every_authored_action_has_valid_independent_pose_bounds() {
+        for (name, count) in [
+            ("rust-morning-poses.json", 12),
+            ("erratic-poses.json", 8),
+            ("rust-actions-poses.json", 16),
         ] {
-            assert!(catalog.frame(clip, 0.0, false).is_some(), "{clip}");
-        }
-        for frame in &catalog.frames {
-            assert!(frame.duration_ms > 0);
-            assert!(!frame.image.contains('/') && !frame.image.contains('\\'));
-            assert!(frame.rect[2] > 0.0 && frame.rect[3] > 0.0);
+            let frames = pose_bounds(name, count).unwrap();
+            assert_eq!(frames.len(), count);
+            assert!(frames.iter().all(|f| f.width > 0.0 && f.height > 0.0));
         }
     }
 }

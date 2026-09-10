@@ -128,6 +128,44 @@ retângulos medidos isolam ambas sem cortar os dedos nem incluir outro corpo.
 Recomenda-se começar com altura em pé de 260 pixels e escala constante
 `260 / 429`; a investida usa largura maior mantendo a mesma escala.
 
+## Rust: ações próprias da aventura
+
+A revisão na aplicação identificou diferença de proporção entre a manhã e o
+combate reutilizado. Este atlas adicional usa a manhã aprovada como única
+referência de identidade e oferece as ações necessárias ao encontro local.
+
+- Arquivo: [rust-actions.png](rust-actions.png).
+- Fonte do gerador: `exec-38757214-8470-4f72-bec1-104bbe7527b2.png`.
+- Referência: [rust-morning.png](rust-morning.png), mantendo rosto, cabelo,
+  goggles, proporção cartoon, roupa, luvas e tênis.
+- PNG RGBA, 1254 × 1254; alpha verificado: 1.072.826 pixels com alpha zero,
+  497.643 intermediários e 2.047 com alpha 255.
+- [Prompt selecionado](prompts/rust-actions-final.txt).
+- [Retângulos e ordem das 16 poses](rust-actions-poses.json).
+
+| Índices | Ação |
+|---|---|
+| 0–1 | Espera em guarda baixa, variação de respiração. |
+| 2–5 | Quatro poses de caminhada para a direita. |
+| 6–7 | Subida e descida do pulo. |
+| 8–10 | Preparação, contato e recuperação do soco rápido. |
+| 11–12 | Antecipação e contato do soco forte. |
+| 13 | Defesa com os antebraços diante da cabeça e do peito. |
+| 14 | Recuo por impacto. |
+| 15 | Queda exausta de lado. |
+
+A folha foi inspecionada com todas as poses de corpo inteiro, mãos fechadas
+nos contatos e sem efeitos de impacto incorporados. Espera, caminhada, ataques
+e defesa apontam para a direita. A derrota mostra o corpo deitado. As quatro
+poses de caminhada variam apoio e postura; sua cadência final depende do runtime.
+
+A grade nominal é 4 × 4, com faixas de inspeção `y=[0,329,641,940,1254]`.
+A mão do soco forte passa alguns pixels da coluna nominal; o retângulo da pose
+12 termina antes de `x=325` e a defesa seguinte só começa próxima de `x=394`.
+Os retângulos medidos preservam os dois desenhos sem contaminação. Para combinar
+com a manhã, começar com altura em pé de 230 pixels e escala constante baseada
+na altura máxima dos retângulos; conferir a mudança de cena no renderer.
+
 ## Medição, rejeições e limites
 
 Os retângulos foram medidos por leitura do alpha com limiar `alpha > 3` e
@@ -148,10 +186,11 @@ ritmo, continuidade entre poses ou composição com cama e chão na aplicação.
 | `exec-537edefe-5749-4eac-b423-8bb8034b22dd.png` | Remoção de fundo de Rust: repetiu RGB com xadrez. [Prompt](prompts/rust-morning-alpha-retry.txt). |
 | `exec-66e1c36d-fe94-4f1a-b85e-6d6b2bc48b6f.png` | Segunda tentativa de alpha de Rust: repetiu xadrez e redesenhou parte das poses. [Prompt](prompts/rust-morning-alpha-retry-2.txt). |
 | `exec-bb1709e9-b124-449c-8a97-8786e51e2589.png` | Ajuste da grade da errática: perdeu alpha e continuou excedendo a célula da investida. Preservado o original RGBA com metadados explícitos. [Prompt](prompts/erratic-grid-retry.txt). |
+| `exec-5e5dcc03-9ba0-4ec8-ae8e-ebc4b33997bc.png` | Ações de Rust: desenho coeso, mas PNG RGB com xadrez pintado. Nova geração como recortes transparentes produziu o arquivo selecionado. [Prompt](prompts/rust-actions-initial.txt). |
 
 As fontes da ferramenta permanecem no diretório de geração da sessão
 `/home/willams/.codex/generated_images/01a08a65-7252-7a23-b6bb-dd68c787eb2e/`.
-Os quatro arquivos selecionados também estão neste diretório do repositório.
+Os cinco arquivos selecionados também estão neste diretório do repositório.
 
 ## Integridade dos PNGs selecionados
 
@@ -161,3 +200,4 @@ Os quatro arquivos selecionados também estão neste diretório do repositório.
 | `adventure-environments.png` | `5f7352b4123bbd5c5b592c2168bcc54e2d9e77a8906aa7f5339995b1c70ed31e` |
 | `rust-morning.png` | `59c86cc14d4673be5ee99e8e7f707e40ca44779d06227ba5fabb822d2a60c12b` |
 | `erratic.png` | `eeb61a73f64dad3440209bf3f48835554a6cb130fcbfbc1a38d03a8e4309604e` |
+| `rust-actions.png` | `f0a7af2a9462263963bb3a24126e4c1e3728dcd929bcb57fa21a9c2bd13e864f` |

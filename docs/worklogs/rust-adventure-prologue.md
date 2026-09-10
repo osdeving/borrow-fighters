@@ -59,6 +59,15 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 
 ## Checkpoints
 
+- 2026-09-10: `4bfc5c6` registra jogo isolado; `4a133ac` adiciona checker de
+  fronteiras (34 testes). A matriz inicial passou: 411 testes com ambos os modos,
+  393 só luta, 21 só aventura/core e 3 só core. Rust recebeu 16 ações próprias
+  consistentes com a manhã; o catálogo copiado da luta foi removido.
+  Testes nativos de teclado, derrota/retry e pesar passaram, mas revelaram erro
+  no tamanho do buffer do encoder. Corrigido com slice RGBA explícito e regressão;
+  vídeos inválidos anteriores não são evidência de gravação aprovada.
+  Revisão atual válida em produção: `/tmp/borrow-adventure-review-02`.
+
 - 2026-09-10: `b7d6be0` fixa lore. Primeiro loop de aventura compila isolado;
   20 testes adventure/core e Clippy completo passaram. Revisão gráfica inicial
   em `/tmp/borrow-adventure-review-01` percorreu cenas e combate real até Complete.

@@ -1,0 +1,26 @@
+Use case: stylized-concept.
+Asset type: one transparent PNG sprite atlas for the Borrow Fighters adventure. TRANSPARENT BACKGROUND with real RGBA alpha, isolated character sprites ready to composite over a scene. All empty space must be transparent. No depicted grid pattern.
+Reference image: the approved Rust morning sprite sheet. Use it ONLY for this exact character's visual identity and painted cartoon proportions, especially the casual standing pose in its second row. Preserve exactly his friendly young adult face and relatively large expressive head, tousled brown hair, orange goggles on forehead, tan skin, black hoodie with orange gear/R chest motif and orange sleeve details, orange/black fingerless gloves, charcoal cargo pants, orange-trimmed black boots/sneakers, belt and small orange keychain. Do not make him thinner, more realistic, older, muscular or taller in proportions. This is the same person continuing his morning.
+Create 16 entirely new FULL BODY action poses, EXACTLY four columns by four rows, uniform square cells, square overall image 2048x2048 or higher. Each pose has generous transparent margin on all sides, 8 percent of cell width, and must fit completely within its own cell: NO overlap between neighboring poses, no detached parts or particles. Same anatomical scale and head size for every pose. The standing character occupies about 75 percent of cell height. All characters face RIGHT in the same side three-quarter view. Keep hands anatomically clear, closed fists for punches. Warm inked painted cartoon game sprites with dimensional clothing matching the reference. Maintain consistent face, hair, hoodie thickness and leg proportions across the entire atlas.
+Exact reading order, left to right then next row:
+Row 1:
+0 relaxed ready stance, knees soft, elbows lightly bent, hands in a low loose guard, right facing;
+1 next relaxed guard frame, subtle breathing/weight shift and slightly raised fists;
+2 walking contact pose with right foot forward and left arm forward;
+3 walking passing pose, feet closer and weight centered;
+Row 2:
+4 walking contact pose with left foot forward and right arm forward;
+5 walking passing pose on opposite foot, ready to return to pose2;
+6 jump rising, knees partially bent, arms balancing and body upward;
+7 jump falling, feet preparing to land, arms balancing lower;
+Row 3:
+8 quick jab anticipation, lead fist draws back slightly and shoulder turns;
+9 jab contact, lead closed fist extended toward the RIGHT at chest height, rear fist near cheek, full body and fully visible forearm/fingers;
+10 jab recovery, extended arm retracts toward loose guard;
+11 strong punch anticipation, rear fist visibly drawn back, torso coils and knees bend;
+Row 4:
+12 strong punch contact, rear closed fist extended toward RIGHT, strong shoulder/hip rotation, grounded wide stance; full hand/forearm completely visible and contained inside cell;
+13 defensive frontal guard, still facing RIGHT, both forearms raised before head and chest, braced;
+14 hit recoil, torso leans back, one hand reacts toward chest, visibly pained but no blood;
+15 defeated and exhausted, collapsed full body on his side, head at LEFT and bent legs to right, eyes closed, intact and non-gory.
+Only Rust's 16 full character drawings. No bed, floor, shadows on ground, furniture, scene, text, labels, numbers, borders, UI, strike streaks, hit flashes, magic, effects or extra characters. Preserve the same body/head scale for idle, walking and strikes; do not fill each cell by enlarging compact poses. Real transparent alpha background.

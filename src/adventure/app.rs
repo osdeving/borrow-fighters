@@ -127,16 +127,30 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
     }
     let output = options.review.as_ref().or(options.capture.as_ref());
     let mut recorder = output.map(|path| Recorder::new(path)).transpose()?;
+    let mut trace = output
+        .map(|path| fs::File::create(path.join("telemetry.jsonl")))
+        .transpose()?;
     let reviewing = options.review.is_some();
     let mut review = Review::default();
     let mut paused = false;
     let mut debug = false;
+    let mut reveal_text = false;
     let mut accumulator = 0.0f32;
     let mut pending = CombatInput::default();
     let mut frame = 0u32;
     let mut previous_stage = story.stage;
     let mut events = Vec::new();
+    let mut capture_accumulator = 0.0f32;
+    let mut capture_seconds = 0.0f32;
+    let mut previous_frame_time = std::time::Instant::now();
     while !rl.window_should_close() {
+        let now = std::time::Instant::now();
+        let frame_time = if frame == 0 {
+            1.0 / 60.0
+        } else {
+            now.duration_since(previous_frame_time).as_secs_f32()
+        };
+        previous_frame_time = now;
         let mut suppress = false;
         if !reviewing {
             let has_pad = rl.is_gamepad_available(0);
@@ -185,6 +199,13 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
             if rl.is_key_pressed(KeyboardKey::KEY_F3) {
                 debug = !debug;
             }
+            if !paused
+                && story.stage == Stage::AdaPrologue
+                && (rl.is_key_pressed(KeyboardKey::KEY_TAB)
+                    || pad_pressed(GamepadButton::GAMEPAD_BUTTON_RIGHT_FACE_LEFT))
+            {
+                reveal_text = true;
+            }
             if suppress || paused {
                 pending = CombatInput::default();
                 accumulator = 0.0;
@@ -203,7 +224,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
             pending.jump_pressed |= input.jump_pressed;
             pending.light_pressed |= input.light_pressed;
             pending.heavy_pressed |= input.heavy_pressed;
-            accumulator += rl.get_frame_time().clamp(0.0, 0.1);
+            accumulator += frame_time.clamp(0.0, 0.1);
             let mut steps = 0;
             while accumulator >= 1.0 / 60.0 && steps < 5 {
                 story.tick(pending);
@@ -218,18 +239,36 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
             }
         }
         audio.update(&story, paused);
+        capture_seconds += if reviewing { 1.0 / 60.0 } else { frame_time };
         if frame == 0 || story.stage != previous_stage {
-            events.push(serde_json::json!({"frame":frame,"stage":format!("{:?}",story.stage),"player_hp":story.combat.player.hp,"enemy_hp":story.combat.enemy.hp}));
+            events.push(serde_json::json!({"frame":frame,"seconds":capture_seconds,"stage":format!("{:?}",story.stage),"player_hp":story.combat.player.hp,"enemy_hp":story.combat.enemy.hp}));
             previous_stage = story.stage;
+        }
+        if let Some(trace) = trace.as_mut() {
+            let c = &story.combat;
+            writeln!(
+                trace,
+                "{}",
+                serde_json::json!({"frame":frame,"seconds":capture_seconds,"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"ticks":c.ticks,"enemy_awake":c.enemy_awake,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
+            )?;
         }
         {
             let mut draw = rl.begin_texture_mode(&thread, &mut target);
-            render::draw(&mut draw, &story, &assets, paused, debug);
+            render::draw(&mut draw, &story, &assets, paused, debug, reveal_text);
         }
         let screenshot = !reviewing && rl.is_key_pressed(KeyboardKey::KEY_F12);
         if let Some(recorder) = recorder.as_mut() {
-            if frame.is_multiple_of(2) {
-                recorder.frame(&target)?;
+            if reviewing {
+                if frame.is_multiple_of(2) {
+                    recorder.frame(&target)?;
+                }
+            } else {
+                capture_accumulator += frame_time;
+                let copies = (capture_accumulator * 30.0) as usize;
+                if copies > 0 {
+                    recorder.frames(&target, copies)?;
+                    capture_accumulator -= copies as f32 / 30.0;
+                }
             }
             if reviewing && let Some(name) = review.snapshot(&story, paused) {
                 export(&target, &recorder.directory.join(name))?;
@@ -448,17 +487,23 @@ impl Recorder {
         })
     }
     fn frame(&mut self, target: &RenderTexture2D) -> Result<(), Box<dyn Error>> {
+        self.frames(target, 1)
+    }
+    fn frames(&mut self, target: &RenderTexture2D, copies: usize) -> Result<(), Box<dyn Error>> {
         let image = target.texture().load_image()?;
         let colors = image.get_image_data();
-        self.pixels.clear();
-        for color in colors.iter() {
-            self.pixels
-                .extend_from_slice(&[color.r, color.g, color.b, color.a]);
+        let bytes = rgba_bytes(&colors);
+        if bytes.len() != (render::WIDTH * render::HEIGHT * 4) as usize {
+            return Err("unexpected framebuffer byte count".into());
         }
-        self.stdin
-            .as_mut()
-            .ok_or("recording input closed")?
-            .write_all(&self.pixels)?;
+        self.pixels.clear();
+        self.pixels.extend_from_slice(bytes);
+        for _ in 0..copies {
+            self.stdin
+                .as_mut()
+                .ok_or("recording input closed")?
+                .write_all(&self.pixels)?;
+        }
         Ok(())
     }
     fn finish(mut self) -> Result<(), Box<dyn Error>> {
@@ -467,6 +512,21 @@ impl Recorder {
             return Err("FFmpeg failed while recording adventure".into());
         }
         Ok(())
+    }
+}
+
+fn rgba_bytes(colors: &[raylib::ffi::Color]) -> &[u8] {
+    const {
+        assert!(std::mem::size_of::<raylib::ffi::Color>() == 4);
+    }
+    const {
+        assert!(std::mem::align_of::<raylib::ffi::Color>() == 1);
+    }
+    // SAFETY: repr(C) Color is four initialized u8 channels without padding.
+    // The argument is an actual slice, not Raylib's owning wrapper. Its byte
+    // view remains read-only and cannot outlive that slice's allocation.
+    unsafe {
+        std::slice::from_raw_parts(colors.as_ptr().cast::<u8>(), std::mem::size_of_val(colors))
     }
 }
 
@@ -483,6 +543,26 @@ fn export(target: &RenderTexture2D, path: &Path) -> Result<(), Box<dyn Error>> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn encoder_receives_all_rgba_pixels_in_channel_order() {
+        let pixels = [
+            raylib::ffi::Color {
+                r: 1,
+                g: 2,
+                b: 3,
+                a: 4,
+            },
+            raylib::ffi::Color {
+                r: 5,
+                g: 6,
+                b: 7,
+                a: 8,
+            },
+        ];
+        assert_eq!(rgba_bytes(&pixels), &[1, 2, 3, 4, 5, 6, 7, 8]);
+        assert!(rgba_bytes(&[]).is_empty());
+    }
 
     #[test]
     fn cli_rejects_invalid_or_ambiguous_capture_requests() {
