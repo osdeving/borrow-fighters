@@ -65,6 +65,10 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
     let (mut window, thread) = builder.build();
     window.set_exit_key(None);
     window.show_cursor();
+    // Prepare fighting textures before Ada starts, so the final fade never
+    // waits for the roster's large atlases. The opaque menu owns its resources;
+    // adventure cannot see them, and its audio device still runs independently.
+    let menu = App::prepare_main_menu(&mut window, &thread);
     if let Entry::Story(options) = entry
         && !opens_menu(adventure::run_in_window(&mut window, &thread, options)?)
     {
@@ -74,7 +78,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
     // the player in an invisible, live menu with no way to interact with it.
     window.clear_window_state(raylib::prelude::WindowState::default().set_window_hidden(true));
     window.set_window_title(&thread, "Borrow Fighters");
-    App::at_main_menu().run(&mut window, &thread);
+    menu.run(&mut window, &thread);
     Ok(())
 }
 

@@ -81,6 +81,13 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 
 ## Checkpoints
 
+- 2026-09-10, revisão da transição: `5ea92d4` registra a implementação. A primeira
+  captura revelou 5–7 s de carregamento de atlas depois do fade final; antecipar
+  a preparação das texturas da luta para antes do prólogo, num objeto opaco de
+  `app`, sem acesso pela aventura. Dispositivos de áudio continuam sequenciais.
+  Repetir captura e checks após a correção; tentativa inicial não vale como
+  aprovação visual. Catálogo do usuário continua intocado.
+
 - 2026-09-10, rodada 3 integrada: `67d6441` fixa escopo. `borrow-story` recebe
   conclusão explícita da aventura e abre o menu na mesma janela; sair/limitar
   frames não dispara outro modo. Recursos de áudio/GPU encerram entre sessões.

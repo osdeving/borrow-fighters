@@ -14,8 +14,11 @@ ao menu de luta na mesma janela. A independência da ADR 0021 continua necessár
 Adicionar `borrow-story`, executável que exige `fighting` e `adventure`, e
 `src/presentation.rs`, composição externa habilitada somente com ambas as features.
 Ela possui a janela e chama APIs de aplicação, sem regras, sprites ou estado de
-combate. A aventura devolve um resultado explícito ao terminar; seus recursos
-locais são liberados antes de iniciar o menu de luta. Fechar a janela ou sair
+combate. A aplicação de luta prepara suas texturas antes do prólogo e devolve
+um menu opaco à composição; a aventura não acessa esse objeto nem seus assets.
+Isso antecipa o carregamento dos atlas para evitar segundos de tela escura
+depois do título. A aventura devolve um resultado explícito ao terminar; seus recursos
+locais são liberados antes de iniciar o áudio e o loop do menu de luta. Fechar a janela ou sair
 da aventura encerra a sessão; não abre o menu por engano.
 
 `borrow-adventure` e `borrow-fighters` continuam independentes. Nenhum domínio
