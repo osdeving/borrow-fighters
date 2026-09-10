@@ -12,6 +12,13 @@ renderização, áudio e assets específicos não cruzam entre os jogos.
 Veja a [ADR 0021](adr/0021-isolated-adventure-experiment.md) e o
 [diário de retomada](worklogs/rust-adventure-prologue.md).
 
+A [ADR 0022](adr/0022-adventure-external-copy-and-opening.md) acrescenta
+`adventure/text.rs`, catálogo externo com recarga transacional, e a etapa
+`Opening` após o pesar. `engine/morning.rs` calibra apoios anatômicos;
+`engine/opening.rs` compõe jornais, histórias e logo; `engine/typography.rs`
+ajusta texto editável ao espaço. Esses módulos e seus assets são exclusivos
+da aventura, sem ampliar o core compartilhado.
+
 Este documento descreve a arquitetura atual do protótipo Rust + Raylib e mantém algumas intenções futuras. A regra segue sendo evitar transformar o projeto em uma engine antes de provar o combate.
 
 ## Objetivo

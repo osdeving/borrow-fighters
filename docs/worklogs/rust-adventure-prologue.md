@@ -2,27 +2,33 @@
 
 ## Estado atual
 
-- Rodada 2 em andamento: [textos editáveis, encaixe na cama e apresentação](../28-adventure-texts-and-opening.md).
-  Base desta continuação: `0046312`. A apresentação entra após o combate/pesar,
-  conforme escolha do usuário. F5 recarrega JSON; C++ ganha passado de
-  profissional do sexo e despertar heroico, Python professora ensina sobre EPs.
-  Pendentes: catálogo/reload, calibração visual, arte/roteiro, sequência/áudio,
-  validação gráfica, testes, docs e commits. Root integra; frentes independentes
-  cuidam da manhã, arte de abertura e lore. Preservar alterações desses arquivos.
-
-- Entrega concluída: duas cenas animadas e primeiro combate de aventura, lore
-  corrigida, isolamento de implementação/testes/assets e validação gráfica.
+- Rodada 2 concluída: [textos editáveis, encaixe na cama e apresentação](../28-adventure-texts-and-opening.md).
 - Branch: `feature/rust-adventure-prologue`.
-- Base: `ca63b25` (`v0.1.0-prototype.3`).
-- Primeiro checkpoint: `ac49bae`, backlog e proposta anterior à correção de lore.
-- Etapa: implementação, evidências e verificações concluídas. Playtest humano
-  é acompanhamento no TODO-013, sem expansão de campanha iniciada.
-- [Vídeo, relatórios e reprodução](../evidence/adventure-prologue/README.md).
+- Base inicial: `ca63b25` (`v0.1.0-prototype.3`); base da continuação: `0046312`.
+- Checkpoints da continuação: `7ca6cc8` (escopo), `6f911ec` (implementação/arte),
+  `1352fe2` (prova de F5 e controles). O commit seguinte fecha docs/evidências.
+- Texto externo: `assets/adventure/texts/pt-BR.json`; F5 recarrega sem rebuild.
+  JSON inválido mantém a versão anterior. `--texts PATH` usa catálogo alternativo.
+- Manhã corrigida por apoios anatômicos. Apresentação de 48 s entra após o
+  combate/pesar; `--start opening` abre diretamente e `T/X` repete na conclusão.
+- Lore: C++ tem passado de profissional do sexo e torna-se heroína após acessar
+  o Linker; Python é professora universitária e ensina humanos sobre EPs.
+- Verificação atual: 417 testes ambos, 393 luta, 27 aventura/core e 3 core;
+  Fmt/Clippy, fronteiras e 26 checks nativos aprovados. Isolamento de 30 assets,
+  cinco músicas/quatro efeitos, vídeos e recarga no mesmo binário verificados.
+- Sem etapa técnica pendente. Avaliação humana continua no TODO-013.
+- Durante o fechamento apareceram edições externas em `assets/adventure/texts/pt-BR.json`.
+  O JSON e suas chaves foram conferidos; alterações preservadas no working tree,
+  fora dos commits do agente. Não restaurar esse arquivo a partir das capturas:
+  os vídeos representam o texto de `6f911ec`, anterior a essas edições.
+- [Vídeos, relatórios e reprodução atuais](../evidence/adventure-opening/README.md).
+  A [rodada inicial](../evidence/adventure-prologue/README.md) permanece histórica.
 
 ## Retomar após queda do WSL
 
-1. Ler este arquivo, [episódio](../27-rust-story-adventure.md) e
-   [ADR 0021](../adr/0021-isolated-adventure-experiment.md).
+1. Ler este arquivo, [continuação](../28-adventure-texts-and-opening.md),
+   [ADR 0021](../adr/0021-isolated-adventure-experiment.md) e
+   [ADR 0022](../adr/0022-adventure-external-copy-and-opening.md).
 2. Rodar `git status --short`, `git branch --show-current`, `git log -8 --oneline`.
    Preservar alterações não commitadas: podem ser trabalho em progresso.
 3. Conferir código e assets existentes antes de regenerar/reimplementar.
@@ -141,7 +147,7 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 - 2026-09-10: branch criada; `ac49bae` preserva trabalho anterior. ADR e diário
   preparados antes da implementação. Nenhuma validação do novo jogo concluída.
 
-## Verificação executada
+## Verificação da rodada inicial
 
 ```sh
 cargo fmt --check
@@ -163,6 +169,7 @@ nos checkpoints anteriores são intermediários e não são necessários à reto
 
 A implementação pedida não tem etapa técnica pendente. Para jogar, usar o
 comando da aventura no README; para revisar, abrir o vídeo versionado.
-Uma próxima sessão deve partir do feedback do TODO-013. Manter as fronteiras
+A continuação (rodada 2) também foi implementada e verificada; os dados atuais
+estão no topo deste diário. Uma próxima sessão deve partir do feedback do TODO-013. Manter as fronteiras
 da ADR 0021 e preservar os itens do backlog da luta ao decidir seguir, descartar
 ou desenvolver a aventura em paralelo.

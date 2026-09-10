@@ -42,7 +42,18 @@ mitologia, acontecimentos ou recursos visuais dessas obras para o cânone.
 O teste inicial pode usar desenho em camadas e poses provisórias; a evidência
 em movimento deve mostrar atuação, sem confundir aproximação de câmera com
 animação corporal pronta. A produção fica limitada ao episódio da
-[entrega 27](27-rust-story-adventure.md).
+[entrega 27](27-rust-story-adventure.md), com a apresentação autorizada na
+[entrega 28](28-adventure-texts-and-opening.md).
+
+Na manhã, ancorar ombro/antebraço e quadril no colchão, assento na borda e pés
+no chão, em vez de alinhar todas as poses pelo fim do recorte. A respiração
+preserva o ponto de apoio. Conferir a sequência completa ao mudar qualquer pose.
+
+A apresentação após o pesar usa jornais, quadros biográficos e montagem de
+personagens. C++ aparece adulta no cotidiano noturno e no despertar heroico;
+Python ensina humanos sobre EPs numa universidade. As manchetes representam
+imprensa da ficção. Logo, subtítulo e demais palavras são desenhados pelo jogo
+a partir do JSON editável, sem texto incorporado aos PNGs novos.
 
 ## Pilares visuais
 

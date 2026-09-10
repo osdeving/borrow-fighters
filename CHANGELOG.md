@@ -92,6 +92,14 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 
 ### Experimento de aventura
 
+- Textos em JSON editável com F5 e `--texts`, incluindo terminal, legendas,
+  interface, manchetes e subtítulo; reload inválido preserva a última versão.
+- Encaixe da manhã corrigido por apoios anatômicos no colchão e no chão.
+- Apresentação de 48 s após o combate/pesar: jornais, histórias ilustradas de
+  C++ e Python, seis personagens, logo girando e subtítulo. Trilha própria,
+  entrada direta `--start opening` e replay `T/X`. [Entrega 28](docs/28-adventure-texts-and-opening.md).
+- C++ tem passado como profissional do sexo e escolhe usar o Linker como
+  heroína; Python é professora universitária que ensina humanos sobre EPs.
 - Binário optativo `borrow-adventure`, com features e regras próprias; luta
   continua padrão e ambos podem ser compilados sem os módulos do outro.
 - Prólogo ilustrado e animado de Ada, mensagem digitada, despertar de Assembly,

@@ -1,5 +1,8 @@
 # Aventura — Ada, a manhã de Rust e o primeiro encontro
 
+Registro histórico do primeiro corte. A [revisão posterior](../adventure-opening/README.md)
+corrige a cama, adiciona texto editável e apresenta o universo após o encontro.
+
 Experimento implementado e verificado em 10 de setembro de 2026, na branch
 `feature/rust-adventure-prologue`. [Escopo e lore](../../27-rust-story-adventure.md),
 [isolamento](../../adr/0021-isolated-adventure-experiment.md) e

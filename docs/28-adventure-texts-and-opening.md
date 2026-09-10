@@ -5,6 +5,12 @@ setembro de 2026. O usuário pediu editar o texto exibido sem recompilar, corrig
 o encaixe de Rust na cama e criar uma apresentação empolgante com manchetes,
 personagens, logo em movimento e subtítulo.
 
+**Estado:** implementado e verificado. [Vídeo da apresentação](evidence/adventure-opening/opening.mp4),
+[manhã corrigida](evidence/adventure-opening/morning.mp4) e
+[evidências completas](evidence/adventure-opening/README.md). Passaram 417 testes
+com ambos os modos e 26 checks pela janela, incluindo edição/reload no mesmo
+binário, JSON inválido preservando texto e pausa/skip/replay da apresentação.
+
 ## Sequência e conteúdo
 
 A apresentação entra **depois do primeiro combate e do pesar de Rust**, conforme

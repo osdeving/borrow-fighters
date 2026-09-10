@@ -1,0 +1,104 @@
+{
+  "fmt": {
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "rust_tests": 0
+  },
+  "clippy": {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "rust_tests": 0
+  },
+  "all-features": {
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--all-features"
+    ],
+    "exit_code": 0,
+    "rust_tests": 417
+  },
+  "fighting": {
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--no-default-features",
+      "--features",
+      "fighting"
+    ],
+    "exit_code": 0,
+    "rust_tests": 393
+  },
+  "adventure": {
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--no-default-features",
+      "--features",
+      "adventure"
+    ],
+    "exit_code": 0,
+    "rust_tests": 27
+  },
+  "core": {
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--no-default-features"
+    ],
+    "exit_code": 0,
+    "rust_tests": 3
+  },
+  "boundaries": {
+    "command": [
+      "python3.13",
+      "tools/check_domain_boundaries.py"
+    ],
+    "exit_code": 0,
+    "rust_tests": 0
+  },
+  "boundary-tests": {
+    "command": [
+      "python3.13",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools",
+      "-p",
+      "test_check_domain_boundaries.py"
+    ],
+    "exit_code": 0,
+    "rust_tests": 0
+  },
+  "audio-review-tests": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/review",
+      "-p",
+      "test_mix_adventure_review_audio.py"
+    ],
+    "exit_code": 0,
+    "rust_tests": 0
+  }
+}

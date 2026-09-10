@@ -1,0 +1,105 @@
+{
+  "command": [
+    "/home/willams/borrow-fighters/target/debug/borrow-adventure",
+    "--hidden",
+    "--start",
+    "opening",
+    "--frames",
+    "90"
+  ],
+  "trace_command": [
+    "/usr/bin/strace",
+    "-f",
+    "-e",
+    "trace=%file",
+    "-o",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/files.strace",
+    "/home/willams/borrow-fighters/target/debug/borrow-adventure",
+    "--hidden",
+    "--start",
+    "opening",
+    "--frames",
+    "90"
+  ],
+  "process_exit_code": 0,
+  "elapsed_seconds": 5.633,
+  "working_directory": "/tmp/borrow-adventure-opening-isolation-jpmqneu2/outside-workspace",
+  "asset_override": "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets",
+  "asset_root_entries": [
+    "adventure"
+  ],
+  "strace_available": true,
+  "audio_muted": false,
+  "scope": "Adventure executable starts Opening and runs 90 rendered frames with its own assets only; technical loading test without human listening.",
+  "success": true,
+  "checks": {
+    "process_exited_zero": true,
+    "external_working_directory": true,
+    "only_adventure_in_asset_root": true,
+    "all_asset_attempts_under_adventure": true,
+    "catalog_opened_successfully": true,
+    "opening_art_opened_successfully": true,
+    "five_tracks_loaded": true,
+    "four_cues_loaded": true,
+    "audio_device_initialized_and_closed": true,
+    "window_initialized_and_closed": true
+  },
+  "distinct_asset_paths": 30,
+  "successful_asset_opens": 30,
+  "asset_paths": [
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/ada-prologue.png",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/adventure-environments.png",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/ada.wav",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/block.wav",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/hurt.wav",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/morning.wav",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/opening.wav",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/remorse.wav",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/strike.wav",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/threat.wav",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/transition.wav",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/erratic-poses.json",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/erratic.png",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/fonts/Barlow-Regular.ttf",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/fonts/BarlowCondensed-SemiBold.ttf",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/fonts/Lora-Variable.ttf",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/cpp-origin.png",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/python-teacher.png",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster.json",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster/c.png",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster/cpp.png",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster/duke.png",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster/go.png",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster/python.png",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster/rust.png",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/rust-actions-poses.json",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/rust-actions.png",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/rust-morning-poses.json",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/rust-morning.png",
+    "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/texts/pt-BR.json"
+  ],
+  "foreign_asset_paths": [],
+  "music_tracks_loaded": [
+    "ada.wav",
+    "morning.wav",
+    "threat.wav",
+    "remorse.wav",
+    "opening.wav"
+  ],
+  "sound_cues_loaded": [
+    "strike.wav",
+    "block.wav",
+    "hurt.wav",
+    "transition.wav"
+  ],
+  "audio_backend": "miniaudio | PulseAudio",
+  "limitations": [
+    "Startup and 90 render frames only; no controls, combat completion, or human audio listening evaluated.",
+    "System libraries, display configuration and audio device configuration remain normal OS dependencies."
+  ],
+  "evidence": {
+    "runtime_log": "game.log",
+    "asset_trace_excerpt": "assets-only.strace",
+    "full_file_trace": "files.strace"
+  }
+}

@@ -33,6 +33,8 @@ Na branch `feature/rust-adventure-prologue`, uma aventura independente apresenta
 Ada, uma mensagem sem remetente, o despertar de Assembly e, muito tempo depois,
 a manhã de Rust interrompida por uma entidade errática. As regras e os assets
 da aventura são próprios; o jogo de luta continua sendo a entrada padrão.
+Depois do combate e do pesar de Rust, a apresentação reúne manchetes, a origem
+de C++, Python como professora, os seis personagens e o logo com subtítulo.
 
 ```sh
 # Aventura, sem compilar os módulos de luta.
@@ -40,15 +42,24 @@ cargo run --no-default-features --features adventure --bin borrow-adventure
 
 # Luta, sem compilar a aventura (também é o comportamento de cargo run).
 cargo run --no-default-features --features fighting --bin borrow-fighters
+
+# Assistir diretamente à apresentação da aventura.
+cargo run --no-default-features --features adventure --bin borrow-adventure -- --start opening
 ```
 
 Na aventura: `A/D` ou setas movem, `Espaço/W` pula, `J/F` ataca, `K/H` dá um golpe
 forte e `Q/L` defende. `Enter` pula cenas, `Tab` revela a mensagem e `Esc` pausa.
 Após derrota, `R` tenta novamente no encontro. No controle: direcional, `A` para
 pular, `X/Y` para ataques, `LB` para defesa e `Start` para pausa.
+Na conclusão, `T/X` repete a apresentação.
+
+**Textos sem recompilar:** edite [assets/adventure/texts/pt-BR.json](assets/adventure/texts/pt-BR.json),
+salve e pressione **F5**. Legendas, terminal, manchetes, biografias, menus, logo
+e subtítulo são lidos do arquivo. [Guia de edição](assets/adventure/texts/README.md).
 
 [Episódio e critérios](docs/27-rust-story-adventure.md) ·
-[Vídeo do experimento](docs/evidence/adventure-prologue/adventure.mp4) ·
+[Vídeo da apresentação](docs/evidence/adventure-opening/opening.mp4) ·
+[Manhã corrigida](docs/evidence/adventure-opening/morning.mp4) ·
 [Isolamento](docs/adr/0021-isolated-adventure-experiment.md) ·
 [Retomar após interrupção](docs/worklogs/rust-adventure-prologue.md).
 
@@ -61,6 +72,8 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 ## Índice central
 
 ### Visão e produto
+
+- [`docs/28-adventure-texts-and-opening.md`](docs/28-adventure-texts-and-opening.md): textos editáveis, encaixe na cama e apresentação com manchetes, C++/Python e logo.
 
 - [`docs/27-rust-story-adventure.md`](docs/27-rust-story-adventure.md): experimento de aventura 2D com prólogo de Ada/Assembly, manhã de Rust e primeiro encontro.
 
@@ -119,6 +132,8 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`.claude/skills/`](.claude/skills): skills de projeto para Claude Code.
 
 ### Decisões registradas
+
+- [`docs/adr/0022-adventure-external-copy-and-opening.md`](docs/adr/0022-adventure-external-copy-and-opening.md): catálogo externo com recarga e apresentação após o encontro.
 
 - [`docs/adr/0021-isolated-adventure-experiment.md`](docs/adr/0021-isolated-adventure-experiment.md): separação de aventura e luta por domínio, assets, binários e features.
 

@@ -16,6 +16,11 @@ Este documento preserva o escopo e os critérios da entrega. O [backlog](03-back
 continua sendo a fonte de verdade das frentes ativas. A versão distribuída de
 luta permanece o [Prototype 3](releases/v0.1.0-prototype.3.md).
 
+A [entrega 28](28-adventure-texts-and-opening.md) continua este episódio:
+textos externos com F5, encaixe de Rust corrigido e apresentação após o pesar.
+O [registro visual atual](evidence/adventure-opening/README.md) substitui a
+captura inicial como referência desses trechos.
+
 ## Entrega jogável
 
 ```sh

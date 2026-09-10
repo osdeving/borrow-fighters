@@ -15,6 +15,9 @@ A [ADR 0021](adr/0021-isolated-adventure-experiment.md) registra features/binár
 separados e a base compartilhada de `math`/`runtime_paths`; o
 [diário](worklogs/rust-adventure-prologue.md) acompanha execução e evidências.
 [Vídeo e validação da entrega](evidence/adventure-prologue/README.md).
+A [continuação entregue](28-adventure-texts-and-opening.md) acrescenta catálogo
+externo com F5, corrige o apoio na cama e apresenta o universo após o pesar.
+[Vídeos atuais e prova da recarga](evidence/adventure-opening/README.md).
 As pendências do Prototype 3 permanecem registradas abaixo. Estar no backlog,
 mesmo com prioridade alta, **não significa execução ativa**.
 
@@ -80,7 +83,7 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Próxima ação |
 |---|---|---|---|---|
-| Agora | Avaliar o episódio jogável | Implementação entregue na branch; playtest humano pendente, TODO-013 | [Entrega 27](27-rust-story-adventure.md), [vídeo e verificações](evidence/adventure-prologue/README.md), [diário](worklogs/rust-adventure-prologue.md) | Observar controle, leitura da ameaça, entendimento do pesar de Rust e vontade de continuar. |
+| Agora | Avaliar o episódio jogável e a apresentação | Implementação entregue na branch; playtest humano pendente, TODO-013 | [Entrega 28](28-adventure-texts-and-opening.md), [vídeo e verificações](evidence/adventure-opening/README.md), [diário](worklogs/rust-adventure-prologue.md) | Observar controle, manhã corrigida, pesar e ritmo das manchetes/personagens; editar textos conforme feedback. |
 | Próximo | Definir continuidade da aventura | Aguardando avaliação do episódio | [Critérios da entrega 27](27-rust-story-adventure.md#critérios-de-aceite) | Decidir ajustes ou expansão a partir do playtest; ideias de Vínculo/Sirius continuam estacionadas. |
 | Depois | Pendências do Prototype 3 | Backlog; sem execução ativa | [To-do](#backlog-de-to-do), [bugfix](#backlog-de-bugfix) | Retomar itens por prioridade e evidência, em entregas pequenas, quando esta frente for reaberta. |
 
@@ -88,7 +91,8 @@ Regra operacional:
 
 Prioridade ordena o trabalho quando a respectiva frente for retomada; não
 antecipa o **Agora**. TODO-001 a TODO-010 estão **abertos no backlog**;
-TODO-011 e TODO-012 estão **concluídos**; TODO-013 está **aberto**. IDs permanecem
+TODO-011, TODO-012, TODO-014 e TODO-015 estão **concluídos**;
+TODO-013 está **aberto**. IDs permanecem
 estáveis ao mudar prioridade ou vincular issue/PR.
 
 | ID | Item | Prioridade | Critério de conclusão / evidência esperada |
@@ -105,15 +109,18 @@ estáveis ao mudar prioridade ou vincular issue/PR.
 | TODO-010 | Ferramenta visual clicável | Baixa, condicionada à necessidade | Retomar o [roadmap do viewer](16-sprite-combat-viewer-roadmap.md) somente se atalhos e texto forem insuficientes; registrar o problema de uso antes de avaliar `raygui`. Pendência anterior preservada. |
 | TODO-011 | Conciliar prólogo e fontes da lore para a aventura — concluído | Concluído em 10/09/2026 | [Worldbuilding](12-worldbuilding.md), [livro do jogo](../assets/lore/story.json) e [entrega 27](27-rust-story-adventure.md) sincronizados e revisados: EPs como pessoas, Rust como mais recente EP pura, Ada humana/híbrida, mensagem misteriosa antes de Assembly e origem involuntária das erráticas. JSON válido; grafias `Liker` e `presente no desde` removidas dos textos. A autoria da mensagem e a relação completa entre os acontecimentos permanecem em aberto. |
 | TODO-012 | Implementar prólogo e primeiro encontro da aventura — concluído | Concluído em 10/09/2026 | [Episódio](27-rust-story-adventure.md) implementado na branch própria: cenas, gameplay, derrota/retry e pesar; features, binários, assets e regras próprios. [Evidências](evidence/adventure-prologue/README.md): vídeo completo, 14 checks na janela, 412 testes com ambos os modos e matriz de isolamento. A avaliação humana segue no TODO-013. |
-| TODO-013 | Playtest humano do primeiro episódio de aventura | Alta, próxima avaliação | Jogar a sequência e registrar compreensão do mistério de Ada/Assembly, continuidade e fluidez das poses, leitura da errática, comandos, contato e pesar de Rust, além de vontade de continuar. Ouvir áudio ao vivo e testar gamepad físico. Registrar defeitos reproduzíveis em bugfix e hipóteses em to-do; decidir ajustes/expansão a partir da observação. [Vídeo e limites atuais](evidence/adventure-prologue/README.md). |
+| TODO-013 | Playtest humano do episódio e apresentação | Alta, próxima avaliação | Jogar a sequência e registrar compreensão de Ada/Assembly, continuidade das poses, leitura da ameaça, comandos e pesar. Avaliar ritmo dos jornais, introdução de C++/Python/elenco e vontade de continuar. Ouvir áudio ao vivo e testar gamepad físico; usar o catálogo editável para revisões de texto. Registrar defeitos reproduzíveis em bugfix e hipóteses em to-do. [Vídeos e limites atuais](evidence/adventure-opening/README.md). |
+| TODO-014 | Textos da aventura editáveis sem recompilar — concluído | Concluído em 10/09/2026 | JSON externo, `--texts`, F5 transacional e mensagens de recarga. [Prova no mesmo binário](evidence/adventure-opening/native/native-checks.json): texto alterado, JSON inválido conserva revisão/pixels e restauração funciona, sem mudar o catálogo original. [Guia](../assets/adventure/texts/README.md). |
+| TODO-015 | Apresentação após o primeiro combate — concluído | Concluído em 10/09/2026 | [Vídeo](evidence/adventure-opening/opening.mp4): 48 s com jornais, biografias C++/Python, seis personagens e logo/subtítulo. Trilha própria, entrada direta, pausa, skip e replay verificados. [Entrega 28](28-adventure-texts-and-opening.md). |
 
 ## Backlog de bugfix
 
-Todos os itens estão **abertos no backlog**, sem correção iniciada. São limites
+BUG-001 a BUG-004 estão **abertos no backlog**, sem correção iniciada. São limites
 visuais observados na [revisão dos contatos](evidence/roster-contact-reactions/README.md#revisão-visual-e-limites),
 também registrados na [entrega 26](26-playtest-visual-completion.md#estado-da-entrega).
 Os testes mecânicos existentes não comprovam que estes problemas de apresentação
 foram resolvidos.
+BUG-005 foi relatado pelo usuário na aventura e corrigido na entrega 28.
 
 | ID | Defeito observado | Prioridade | Critério de conclusão / evidência esperada |
 |---|---|---|---|
@@ -121,6 +128,7 @@ foram resolvidos.
 | BUG-002 | Primeiro recuo de Duke na rajada deixa espaço entre cabeça e faísca | Média | Reproduzir o primeiro contato da rajada de C++ contra Duke; alinhar a reação visual ao ponto de impacto e conferir a sequência completa nos dois sentidos, com frames e vídeo antes/depois. |
 | BUG-003 | Go mantém as mãos altas na guarda em pé quando o soco atinge o abdômen | Baixa | Revisar a pose/contato documentado e conferir a defesa nos dois sentidos, preservando as regras de bloqueio. Registrar comparação no renderer. Go está fora da seleção pública; esta correção não prevê incluí-lo no menu. |
 | BUG-004 | Focinho/volume facial de Go varia nos desenhos iniciais da recuperação | Baixa | Uniformizar a identidade facial entre os desenhos afetados e conferir a transição de recuperação em movimento nos dois sentidos, com evidência visual. Go permanece fora da seleção pública. |
+| BUG-005 | Rust deitado na beirada e sentado acima da cama — corrigido | Concluído em 10/09/2026 | Apoios por pose alinham antebraço/quadril ao colchão, assento à borda e bota ao chão; respiração mantém o apoio. [Manhã corrigida](evidence/adventure-opening/morning.mp4) e quadros revisados na entrega 28. |
 
 Uma observação nova só entra como bug confirmado com situação reproduzível ou
 evidência identificada. Questões de ritmo, balanceamento e preferência visual
@@ -133,6 +141,7 @@ execução nem aprovação humana das pendências listadas acima.
 
 | Janela | Frente | Status | Registro | Proxima acao |
 |---|---|---|---|---|
+| Concluído | Textos editáveis, manhã e apresentação da aventura | Implementado na branch; TODO-014/015 e BUG-005 | [Entrega 28](28-adventure-texts-and-opening.md), [ADR 0022](adr/0022-adventure-external-copy-and-opening.md), [evidências](evidence/adventure-opening/README.md) | 417 testes e 26 checks nativos; avaliação humana no TODO-013. |
 | Concluído | Aventura: prólogo de Ada e primeiro encontro de Rust | Implementado e verificado na branch `feature/rust-adventure-prologue`; TODO-012 | [Entrega 27](27-rust-story-adventure.md), [ADR 0021](adr/0021-isolated-adventure-experiment.md), [evidências](evidence/adventure-prologue/README.md) | Avaliação humana no TODO-013; regras específicas isoladas da luta, 412 testes e sequência completa gravada. |
 | Concluído | Apresentação e fluxo do playtest | Integrado à main; PR #19 | [Entrega 26](26-playtest-visual-completion.md), [ADR 0020](adr/0020-match-flow-selection-and-energy.md), [UI e fluxo](evidence/playtest-visual-flow/README.md), [reações](evidence/roster-contact-reactions/README.md) | 128 desenhos, 120 cenários renderizados, três partidas e duas revanches, 393 testes, Windows/Linux verificados. Próximo: playtest humano e balanceamento fino. |
 | Concluído | Reações próprias Python × C++ | Implementado e verificado | [Entrega 25](25-python-cpp-contact-reactions.md), [evidências](evidence/python-cpp-reactions/README.md), [ADR 0018](adr/0018-contact-reaction-profiles.md) | 64 desenhos novos, reação individual à rajada, 64 cenários nos dois sentidos e vídeo do par. |

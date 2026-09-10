@@ -1,0 +1,39 @@
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/texts/pt-BR.json", O_RDONLY|O_CLOEXEC) = 3
+378203 statx(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/ada.wav", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=529244, ...}) = 0
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/ada.wav", O_RDONLY) = 54
+378203 statx(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/morning.wav", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=529244, ...}) = 0
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/morning.wav", O_RDONLY) = 55
+378203 statx(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/threat.wav", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=529244, ...}) = 0
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/threat.wav", O_RDONLY) = 56
+378203 statx(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/remorse.wav", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=529244, ...}) = 0
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/remorse.wav", O_RDONLY) = 57
+378203 statx(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/opening.wav", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=2116844, ...}) = 0
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/opening.wav", O_RDONLY) = 58
+378203 statx(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/strike.wav", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=9746, ...}) = 0
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/strike.wav", O_RDONLY) = 59
+378203 statx(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/block.wav", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=12392, ...}) = 0
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/block.wav", O_RDONLY) = 59
+378203 statx(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/hurt.wav", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=15920, ...}) = 0
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/hurt.wav", O_RDONLY) = 59
+378203 statx(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/transition.wav", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|0x1000, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=35324, ...}) = 0
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/audio/transition.wav", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/fonts/Barlow-Regular.ttf", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/fonts/Lora-Variable.ttf", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster.json", O_RDONLY|O_CLOEXEC) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster/rust.png", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster/duke.png", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster/c.png", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster/python.png", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster/cpp.png", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/roster/go.png", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/fonts/BarlowCondensed-SemiBold.ttf", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/cpp-origin.png", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/opening/python-teacher.png", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/ada-prologue.png", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/rust-morning.png", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/adventure-environments.png", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/erratic.png", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/rust-morning-poses.json", O_RDONLY|O_CLOEXEC) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/erratic-poses.json", O_RDONLY|O_CLOEXEC) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/rust-actions.png", O_RDONLY) = 59
+378203 openat(AT_FDCWD, "/tmp/borrow-adventure-opening-isolation-jpmqneu2/assets/adventure/rust-actions-poses.json", O_RDONLY|O_CLOEXEC) = 59
