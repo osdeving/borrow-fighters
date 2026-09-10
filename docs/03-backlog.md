@@ -5,10 +5,17 @@
 Este documento é a fonte de verdade para **o que vem agora**, com filas separadas
 de **to-do** (investigações e melhorias) e **bugfix** (defeitos observados).
 
-Prioridade atual, em 10 de setembro de 2026: avaliar o episódio, a apresentação
-e o menu integrado da **release `v0.1.0-prototype.4`**, publicada com aventura
-e luta na mesma execução. O playtest humano continua no TODO-013; a publicação
-concluiu a frente de distribuição. O episódio de aventura 2D narrativa solo
+Prioridade atual, em 10 de setembro de 2026: experimentar melhorias das cenas
+do prólogo na branch `feature/prologue-scene-improvements`, a partir da
+**release `v0.1.0-prototype.4`**. O TODO-018 começa pelo quarto tecnológico de
+Rust e pela rua com ciclistas e garoto soltando pipa. [Escopo da primeira rodada](30-prologue-scene-improvements.md),
+[ADR 0024](adr/0024-prologue-background-life.md) e
+[diário](worklogs/prologue-scene-improvements.md). As demais cenas podem receber
+rodadas próprias nessa branch; esta rodada não publica outra release.
+O playtest humano do episódio continua pendente no TODO-013.
+
+A prototype.4 foi publicada com aventura e luta na mesma execução, concluindo
+a frente de distribuição. O episódio de aventura 2D narrativa solo
 protagonizada por Rust foi implementado na branch
 `feature/rust-adventure-prologue`. O [episódio autorizado](27-rust-story-adventure.md)
 mostra Ada, a mensagem misteriosa e Assembly; muito tempo depois, Rust acorda,
@@ -90,8 +97,8 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Próxima ação |
 |---|---|---|---|---|
-| Agora | Avaliar episódio, apresentação e menu integrado | Prototype.4 publicada; playtest humano pendente, TODO-013 | [Entrega 29](29-story-terminal-menu.md), [vídeo e verificações](evidence/story-terminal-menu/README.md), [diário](worklogs/rust-adventure-prologue.md) | Jogar desde Ada até o menu; avaliar continuidade visual e navegação. Modo História fica reservado para a continuação. |
-| Próximo | Definir continuidade da aventura | Aguardando avaliação do episódio | [Critérios da entrega 27](27-rust-story-adventure.md#critérios-de-aceite) | Decidir ajustes ou expansão a partir do playtest; ideias de Vínculo/Sirius continuam estacionadas. |
+| Agora | Melhorias das cenas do prólogo: quarto e rua de Rust | TODO-018 em experimentação na branch `feature/prologue-scene-improvements` | [Entrega 30](30-prologue-scene-improvements.md), [ADR 0024](adr/0024-prologue-background-life.md), [diário](worklogs/prologue-scene-improvements.md) | Conferir setup e apoios da manhã, profundidade da ciclovia, fuga e pipa; avaliar a primeira rodada antes de ampliar para outras cenas. |
+| Próximo | Avaliar episódio e definir continuidade da aventura | Playtest humano pendente no TODO-013 | [Entrega 29](29-story-terminal-menu.md), [critérios do episódio](27-rust-story-adventure.md#critérios-de-aceite) | Jogar de Ada até o menu, avaliar ritmo e navegação e decidir ajustes por evidência; ideias de Vínculo/Sirius continuam estacionadas. |
 | Depois | Pendências do Prototype 3 | Backlog; sem execução ativa | [To-do](#backlog-de-to-do), [bugfix](#backlog-de-bugfix) | Retomar itens por prioridade e evidência, em entregas pequenas, quando esta frente for reaberta. |
 
 ## Backlog de to-do
@@ -99,7 +106,7 @@ Regra operacional:
 Prioridade ordena o trabalho quando a respectiva frente for retomada; não
 antecipa o **Agora**. TODO-001 a TODO-010 estão **abertos no backlog**;
 TODO-011, TODO-012, TODO-014, TODO-015 e TODO-017 estão **concluídos**;
-TODO-013 e TODO-016 estão **abertos**. IDs permanecem
+TODO-013 e TODO-016 estão **abertos**; TODO-018 está **em experimentação**. IDs permanecem
 estáveis ao mudar prioridade ou vincular issue/PR.
 
 | ID | Item | Prioridade | Critério de conclusão / evidência esperada |
@@ -121,6 +128,7 @@ estáveis ao mudar prioridade ou vincular issue/PR.
 | TODO-015 | Apresentação após o primeiro combate — concluído | Concluído em 10/09/2026 | [Vídeo](evidence/adventure-opening/opening.mp4): 48 s com jornais, biografias C++/Python, elenco e logo/subtítulo; a entrega 29 remove Go da apresentação e mantém cinco personagens. Trilha própria, entrada direta, pausa, skip e replay verificados. [Entrega 28](28-adventure-texts-and-opening.md). |
 | TODO-016 | Atualizar a lore as-is no menu Lore / Roster | Média, backlog; não executar nesta rodada | Conciliar livro, imagens e fichas com o que a aventura já apresenta: Ada/Assembly, Rust, origem de C++ e Python professora, respeitando os mistérios ainda abertos. Incorporar ilustrações pertinentes e conferir leitura no menu. A junção atual preserva o livro como está; revisão editorial e visual será uma entrega própria. |
 | TODO-017 | Unir apresentação ao menu principal de terminal — concluído | Concluído em 10/09/2026 | [Entrega 29](29-story-terminal-menu.md): Go fora da apresentação, menu na mesma janela, isolamento e demais destinos preservados; Modo História sem ação, logo coerente, moldura, cursor bloco e revelação binária. [Evidências](evidence/story-terminal-menu/README.md): revisão de navegação com 432 testes com ambos, matriz separada, 81 checks da entrada conjunta e seis da aventura isolada; avanço por trecho, skip total e confirmação final. `cargo run` inicia a sequência conjunta. Gráficos preparados antes do prólogo evitam espera escura no final. |
+| TODO-018 | Melhorar cenas do prólogo, começando pela manhã de Rust | Alta, experimento em andamento | [Entrega 30](30-prologue-scene-improvements.md) na branch `feature/prologue-scene-improvements`: quarto com setup e pôsteres Rust; ciclistas em ciclovia inacessível ao jogador; garoto que larga a pipa e foge ao despertar da errática. Conferir animação, apoios na cama, câmera, pausa, retry/restart e ausência de interferência no combate. [Diário e verificações](worklogs/prologue-scene-improvements.md). Avaliar a primeira rodada antes de escolher as demais cenas; publicação não faz parte deste pedido. |
 
 ## Backlog de bugfix
 

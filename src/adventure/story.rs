@@ -3,6 +3,7 @@
 //! System: Adventure domain. This explicit sequence advances at 60 Hz and accepts
 //! scene skipping without granting a combat victory. The platform owns pause.
 
+use super::ambient::AmbientState;
 use super::combat::{Action, Combat, CombatInput, Outcome, TICKS_PER_SECOND};
 
 /// Duration of Rust's automatic waking and morning sequence.
@@ -85,6 +86,8 @@ pub struct Story {
     pub stage_ticks: u32,
     /// Authoritative player, enemy and encounter state.
     pub combat: Combat,
+    /// Background animation that observes the encounter without changing combat.
+    pub ambient: AmbientState,
 }
 
 impl Default for Story {
@@ -100,6 +103,7 @@ impl Story {
             stage: Stage::AdaPrologue,
             stage_ticks: 0,
             combat: Combat::new(),
+            ambient: AmbientState::default(),
         }
     }
 
@@ -118,12 +122,14 @@ impl Story {
             }
             Stage::Encounter => {
                 self.combat.tick(input);
+                self.ambient.tick(self.combat.enemy_awake);
                 if self.combat.outcome == Outcome::Victory {
                     self.enter(Stage::Aftermath);
                 }
             }
             Stage::Aftermath => {
                 self.combat.tick_aftermath();
+                self.ambient.tick(self.combat.enemy_awake);
                 if self.stage_ticks >= AFTERMATH_TICKS && self.gesture_visible() {
                     self.enter(Stage::Opening);
                 }
@@ -244,12 +250,115 @@ impl Story {
     fn enter(&mut self, stage: Stage) {
         self.stage = stage;
         self.stage_ticks = 0;
+        if stage == Stage::Encounter {
+            self.ambient = AmbientState::new(self.combat.enemy_awake);
+        }
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::adventure::ambient::KidPhase;
+
+    #[test]
+    fn background_reaction_continues_through_victory_and_stops_after_the_street() {
+        let mut story = Story::new();
+        story.advance_scene();
+        for _ in 0..30 {
+            story.tick(CombatInput::default());
+        }
+        assert_eq!(story.ambient, AmbientState::default());
+        story.advance_scene();
+        story.combat.player.position.x = super::super::combat::ENCOUNTER_TRIGGER_X;
+        story.tick(CombatInput::default());
+        assert_eq!(story.ambient.kid_phase(), KidPhase::Startled);
+        for _ in 0..60 {
+            story.tick(CombatInput::default());
+        }
+        assert_eq!(story.ambient.kid_phase(), KidPhase::Running);
+        let before_victory = story.ambient.clone();
+        story.combat.outcome = Outcome::Victory;
+        story.combat.enemy.hp = 0;
+        story.combat.enemy.action = Action::Defeated;
+        story.tick(CombatInput::default());
+        assert_eq!(story.stage, Stage::Aftermath);
+        assert_eq!(story.ambient.ticks(), before_victory.ticks() + 1);
+        assert!(story.ambient.kid_position().x < before_victory.kid_position().x);
+        for _ in 0..300 {
+            story.tick(CombatInput::default());
+        }
+        assert_eq!(story.ambient.kid_phase(), KidPhase::Gone);
+
+        story.skip_segment();
+        assert_eq!(story.stage, Stage::Opening);
+        let before_opening = story.ambient.clone();
+        for _ in 0..60 {
+            story.tick(CombatInput::default());
+        }
+        assert_eq!(story.ambient, before_opening);
+    }
+
+    #[test]
+    fn retry_reacts_at_the_awake_checkpoint_and_restart_restores_a_quiet_street() {
+        let mut story = Story::new();
+        story.advance_scene();
+        story.advance_scene();
+        story.combat.enemy_awake = true;
+        for _ in 0..600 {
+            story.tick(CombatInput::default());
+        }
+        assert_eq!(story.ambient.kid_phase(), KidPhase::Gone);
+        story.combat.outcome = Outcome::Defeat;
+        story.retry();
+        assert!(story.combat.enemy_awake);
+        assert_eq!(story.ambient.ticks(), 0);
+        assert_eq!(story.ambient.kid_phase(), KidPhase::Startled);
+        assert_eq!(story.ambient.kid_phase_ticks(), 0);
+        assert_eq!(story.ambient.kite_release_ticks(), None);
+        story.tick(CombatInput::default());
+        assert_eq!(story.ambient.kid_phase_ticks(), 1);
+
+        let current = story.ambient.clone();
+        story.retry();
+        assert_eq!(story.ambient, current);
+        story.restart();
+        story.advance_scene();
+        story.advance_scene();
+        assert_eq!(story.ambient, AmbientState::default());
+        assert!(!story.combat.enemy_awake);
+    }
+
+    #[test]
+    fn scenery_changes_cannot_change_encounter_rules_or_progress() {
+        let mut story = Story::new();
+        story.advance_scene();
+        story.advance_scene();
+        let mut alternate = story.clone();
+        // Force entirely different decoration, leaving combat identical.
+        for _ in 0..900 {
+            alternate.ambient.tick(true);
+        }
+        assert_ne!(story.ambient, alternate.ambient);
+
+        for tick in 0..720 {
+            let input = CombatInput {
+                movement: if tick < 250 { 1.0 } else { -0.5 },
+                jump_pressed: tick % 61 == 0,
+                light_pressed: tick % 27 == 0,
+                heavy_pressed: tick % 47 == 0,
+                blocking: tick % 99 < 20,
+            };
+            story.tick(input);
+            alternate.tick(input);
+            assert_eq!(story.stage, alternate.stage);
+            assert_eq!(story.stage_ticks, alternate.stage_ticks);
+            assert_eq!(
+                format!("{:?}", story.combat),
+                format!("{:?}", alternate.combat)
+            );
+        }
+    }
 
     #[test]
     fn automatic_sequence_preserves_ada_then_morning_before_player_control() {

@@ -30,6 +30,17 @@ não a importam nem passam a depender um do outro. A aventura devolve conclusão
 confirmada, pedido explícito de pular tudo ou saída. Confirmação/skip seguem ao
 menu principal; saída ou limite de frames encerram a sessão.
 
+A [ADR 0024](adr/0024-prologue-background-life.md) acrescenta vida de fundo à
+rua do prólogo. [`adventure/ambient.rs`](../src/adventure/ambient.rs) contém o
+relógio puro, trajetórias decorativas e a reação do garoto a
+`combat.enemy_awake`; [`adventure/story.rs`](../src/adventure/story.rs) avança
+esse estado durante encontro/desfecho e o restaura em retry/restart.
+Pausa omite o update. [`adventure/engine/street.rs`](../src/adventure/engine/street.rs)
+desenha ciclovia, ciclistas, garoto e pipa em planos separados da área jogável;
+[`adventure/engine/morning.rs`](../src/adventure/engine/morning.rs) mantém os
+apoios de Rust e anima os detalhes do quarto. Esses atores não entram no
+estado de corpos, hitboxes ou contatos do combate. [Escopo e verificação](30-prologue-scene-improvements.md).
+
 ## Objetivo
 
 Criar uma base simples, testável e extensível para o protótipo 0.1 sem transformar o projeto em uma engine antes de provar o combate.

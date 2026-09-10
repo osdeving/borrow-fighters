@@ -1,0 +1,97 @@
+{
+  "success": true,
+  "checks": [
+    {
+      "name": "quiet_street_keeps_playing_and_tethered_kite",
+      "passed": true
+    },
+    {
+      "name": "first_encounter_has_complete_one_way_escape",
+      "passed": true,
+      "phases": [
+        "Playing",
+        "Startled",
+        "Releasing",
+        "Running",
+        "Gone"
+      ]
+    },
+    {
+      "name": "running_moves_left_without_returning",
+      "passed": true,
+      "positions": 249,
+      "first_x": 1000.0,
+      "last_x": -143.0
+    },
+    {
+      "name": "fixed_scene_and_combat_clocks_match_during_encounter",
+      "passed": true
+    },
+    {
+      "name": "cyclists_and_child_stay_on_background_baselines",
+      "passed": true
+    },
+    {
+      "name": "cameras_exercised_both_clamps",
+      "passed": true,
+      "min_player_x": 83.50000762939453,
+      "max_player_x": 1439.3779296875
+    }
+  ],
+  "release_frame": {
+    "file": "screenshots/street-06-release-video.png",
+    "seconds": 36.81534144083659,
+    "observed": {
+      "ambience": {
+        "cyclists": [
+          {
+            "animation_ticks": 616,
+            "facing": "Right",
+            "x": 1807.5999755859375,
+            "y": 480.0
+          },
+          {
+            "animation_ticks": 626,
+            "facing": "Left",
+            "x": 500.3999938964844,
+            "y": 467.0
+          }
+        ],
+        "kid_phase": "Releasing",
+        "kid_phase_ticks": 8,
+        "kid_position": {
+          "x": 1000.0,
+          "y": 420.0
+        },
+        "kite_release_ticks": 8,
+        "ticks": 616
+      },
+      "continue_accepted": false,
+      "enemy": {
+        "action": "Walk",
+        "hp": 96,
+        "x": 1414.7486572265625,
+        "y": 580.0
+      },
+      "enemy_awake": true,
+      "frame": 1131,
+      "hit": null,
+      "outcome": "Ongoing",
+      "paused": false,
+      "player": {
+        "action": "Idle",
+        "facing": "Right",
+        "hp": 100,
+        "x": 1123.7501220703125,
+        "y": 580.0
+      },
+      "seconds": 36.84867477416992,
+      "stage": "Encounter",
+      "stage_ticks": 616,
+      "text_reload_ok": null,
+      "text_revision": 0,
+      "ticks": 616,
+      "waiting_for_continue": false
+    }
+  }
+}

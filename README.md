@@ -45,12 +45,24 @@ após a confirmação no fim da apresentação ou pelo comando de pular tudo:
 # Sequência completa: Ada → Rust → combate → apresentação → menu principal.
 cargo run
 
+# Rever o quarto de Rust e seguir até a rua.
+cargo run -- --start morning
+
+# Explorar a rua e acompanhar a reação à errática.
+cargo run -- --start encounter
+
 # Apresentação → menu, para rever a junção.
 cargo run -- --start opening
 
 # Direto ao menu principal renovado.
 cargo run -- --menu
 ```
+
+Na branch `feature/prologue-scene-improvements`, a primeira rodada acrescenta
+setup e pôsteres de Rust ao quarto, ciclistas numa ciclovia ao fundo e um garoto
+que larga a pipa e foge ao perceber a errática. A encenação acompanha a pausa
+e o reinício do encontro. [Escopo das melhorias](docs/30-prologue-scene-improvements.md)
+e [diário do experimento](docs/worklogs/prologue-scene-improvements.md).
 
 O menu usa a identidade do título final, moldura de terminal, cursor de bloco
 piscante e números que formam as opções. **Modo História** fica sem ação por
@@ -104,6 +116,8 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 ## Índice central
 
 ### Visão e produto
+
+- [`docs/30-prologue-scene-improvements.md`](docs/30-prologue-scene-improvements.md): experimento de melhorias das cenas do prólogo, começando pelo quarto e pela rua de Rust.
 
 - [`docs/29-story-terminal-menu.md`](docs/29-story-terminal-menu.md): apresentação seguida do menu de terminal, com os modos independentes.
 
@@ -166,6 +180,8 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`.claude/skills/`](.claude/skills): skills de projeto para Claude Code.
 
 ### Decisões registradas
+
+- [`docs/adr/0024-prologue-background-life.md`](docs/adr/0024-prologue-background-life.md): ciclistas, garoto e pipa em planos de fundo, com relógio próprio e reação à ameaça.
 
 - [`docs/adr/0023-story-to-terminal-menu.md`](docs/adr/0023-story-to-terminal-menu.md): composição externa e janela compartilhada, sem dependências entre os domínios.
 

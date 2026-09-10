@@ -3,6 +3,7 @@
 //! System: Adventure. Only neutral math and runtime paths cross into this domain;
 //! no fighting-game scene, actor, tuning or presentation is reused here.
 
+pub mod ambient;
 pub mod app;
 pub mod combat;
 pub mod engine;

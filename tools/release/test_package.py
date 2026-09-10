@@ -15,7 +15,8 @@ class RepositoryAssetsTests(unittest.TestCase):
     def test_story_release_contains_every_scene_audio_pose_font_and_opening_portrait(self):
         assets = {p.relative_to(package.ROOT).as_posix() for p in package.runtime_assets()}
         required = {
-            "ada-prologue.png", "adventure-environments.png", "rust-morning.png",
+            "ada-prologue.png", "prologue-environments.png", "rust-morning.png",
+            "street-life.png", "street-life.json",
             "rust-actions.png", "erratic.png", "rust-morning-poses.json",
             "rust-actions-poses.json", "erratic-poses.json", "texts/pt-BR.json",
             "texts/README.md", "opening/roster.json", "opening/cpp-origin.png",
@@ -30,6 +31,7 @@ class RepositoryAssetsTests(unittest.TestCase):
             "rust", "duke", "c", "cpp", "python"))
         self.assertFalse({f"assets/adventure/{name}" for name in required} - assets)
         self.assertNotIn("assets/adventure/opening/roster/go.png", assets)
+        self.assertNotIn("assets/adventure/adventure-environments.png", assets)
         self.assertFalse(any("prompts" in Path(name).parts for name in assets))
         self.assertNotIn("assets/adventure/audio/generate_audio.py", assets)
 

@@ -1,5 +1,22 @@
 # Changelog
 
+## Unreleased
+
+Experimento na branch `feature/prologue-scene-improvements`, começando pela
+manhã de Rust. [Escopo](docs/30-prologue-scene-improvements.md) e
+[diário de implementação e verificação](docs/worklogs/prologue-scene-improvements.md).
+
+- Quarto com setup, pôsteres ligados a Rust, cursor de terminal e ventiladores
+  animados, preservando os apoios das poses de despertar.
+- Dois ciclistas animados numa ciclovia separada da faixa jogável. Garoto
+  brincando com pipa que se assusta, larga a linha e foge quando a errática
+  desperta; a pipa segue pelo vento e ele não retorna no mesmo encontro.
+- Relógio da encenação preservado na pausa e no desfecho, com retry/restart
+  coerentes; os atores decorativos não acrescentam colisões ao combate.
+- Quatro textos editáveis em `morning.poster.*` e `morning.setup.*`, com
+  recarga por F5. As entradas `--start morning` e `--start encounter` permitem
+  rever diretamente os trechos desta rodada.
+
 ## v0.1.0-prototype.4 — Aventura, apresentação e menu integrado
 
 Publicado em 10 de setembro de 2026, com cinco pacotes e `SHA256SUMS.txt`

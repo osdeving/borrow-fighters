@@ -204,3 +204,79 @@ Os cinco arquivos selecionados também estão neste diretório do repositório.
 | `rust-morning.png` | `59c86cc14d4673be5ee99e8e7f707e40ca44779d06227ba5fabb822d2a60c12b` |
 | `erratic.png` | `eeb61a73f64dad3440209bf3f48835554a6cb130fcbfbc1a38d03a8e4309604e` |
 | `rust-actions.png` | `f0a7af2a9462263963bb3a24126e4c1e3728dcd929bcb57fa21a9c2bd13e864f` |
+
+## Vida de rua — melhorias das cenas do prólogo
+
+Atlas candidato produzido em 10 de setembro de 2026 para a branch
+`feature/prologue-scene-improvements`, conforme a [entrega 30](../../docs/30-prologue-scene-improvements.md)
+e a [ADR 0024](../../docs/adr/0024-prologue-background-life.md).
+
+- Arquivo: [street-life.png](street-life.png), PNG RGBA de 1536 × 1024.
+- Fonte selecionada do `image_gen` integrado:
+  `exec-ecc48cc3-0bca-4080-8bf2-3a8e622efc28.png`, no diretório de geração
+  `/home/willams/.codex/generated_images/01a08b72-8090-7fb1-9f43-dca24a6a11b6/`.
+- [Prompt selecionado](prompts/street-life.txt) e [metadados das poses](street-life.json).
+- SHA-256: `4173b2e30a7da6ce2aa701edcf463ad0d229c819e17dac77e754d2e160a04518`.
+- Alpha medido: 1.052.260 pixels com alpha zero, 520.604 intermediários,
+  nenhum com alpha 255; 291.437 pixels estão entre 241 e 254.
+  Os corpos têm interior quase opaco e bordas suaves.
+
+| Índices | Conteúdo |
+|---|---|
+| 0–3 | Mesmo ciclista adulto com capacete, camiseta tijolo e bicicleta verde-água, pedalando para a direita. |
+| 4–5 | Mesmo garoto de camiseta verde-água e bermuda ocre, com o braço elevado em dois gestos de pipa. |
+| 6 | Garoto se assusta olhando para a direita. |
+| 7 | Garoto abre a mão para largar a linha. |
+| 8–11 | Garoto corre para a esquerda, com passadas e poses de passagem alternadas. |
+
+O ambiente e Rust da manhã foram inspecionados como referências de luz,
+proporção e linguagem gráfica. A primeira geração usou essas imagens como
+referência, mas entregou RGB com xadrez pintado. A segunda tentou preservar
+os personagens e retirar esse fundo, também sem alpha. A geração selecionada
+partiu da descrição textual dos mesmos figurinos e gestos, sem imagem de entrada;
+entregou transparência real. Não foram usadas referências externas ou personagens
+de franquias. Ciclista e garoto são cidadãos originais de fundo da aventura.
+
+| Tentativa não selecionada | Motivo |
+|---|---|
+| `exec-a61a8705-866b-4b6d-a69d-69e62b9e48ae.png` | RGB com xadrez pintado; [prompt inicial](prompts/street-life-initial.txt). |
+| `exec-120a6a39-f492-42c2-a88f-e097efa00570.png` | Repetiu RGB com xadrez; [prompt de correção](prompts/street-life-alpha-retry.txt). |
+
+A grade nominal é 4 × 3, mas as divisões reais ficam próximas de
+`x=[0,395,768,1144,1536]` e `y=[0,360,700,1024]`. Os retângulos no JSON
+foram medidos com `alpha > 3` e margem de dois pixels para preservar rodas,
+dedos e cabelo sem trazer a pose vizinha. O arquivo PNG é cópia byte a byte
+da fonte selecionada; a análise Python leu o alpha e escreveu somente metadados,
+sem recortar, pintar, redimensionar ou regravar a imagem.
+
+O renderer deve manter escala constante por personagem, ancorar os sprites no
+chão de fundo e usar as poses do garoto para posicionar a mão da linha. A pipa,
+linha, cauda e deslocamentos são desenhados e animados separadamente no jogo.
+Os desenhos têm gestos distintos, mas a fluidez e a separação de profundidade
+dependem da revisão em movimento na cena real. O atlas permanece candidato.
+
+
+## Melhorias do prólogo — quarto e rua (10/09/2026)
+
+Experimento da [entrega 30](../../docs/30-prologue-scene-improvements.md).
+[prologue-environments.png](prologue-environments.png) foi gerado com o
+`image_gen` integrado, usando [adventure-environments.png](adventure-environments.png)
+como alvo de edição e referência original. O atlas anterior permanece como
+baseline; o runtime desta branch seleciona o novo.
+
+- [Prompt completo](prompts/prologue-environments.txt).
+- Fonte: `exec-f8826320-c456-4b89-ab67-cd3fd121e481.png`, preservada no diretório
+  `/home/willams/.codex/generated_images/01a08b19-d818-7042-9dc2-d68a221bc77b/`.
+- SHA256: `d67b09d891556a0b98131a94589db5ebbf913e52ace32aaad338a1927857107f`.
+- Cópia byte a byte, sem edição raster por scripts. Dois painéis de quarto/rua.
+- Quarto: setup, pôsteres com engrenagem/caranguejo, torre e luz matinal.
+  Colchão, borda e tapete preservam a geometria dos apoios de Rust.
+  As palavras dos pôsteres e terminal são desenhadas a partir do JSON editável;
+  os traços minúsculos do monitor secundário fazem parte da ilustração.
+- Rua: ciclovia horizontal, calçada de fundo, canteiro e faixa de primeiro plano.
+  O renderer calibra o painel a 620 px de altura e prolonga o pavimento sob
+  o rodapé; garoto y420, ciclistas y467/480 e Rust y580 ocupam planos distintos.
+- Figurantes e pipa são camadas separadas, nunca desenhados estaticamente no
+  cenário. Não foram usadas referências externas adicionais.
+
+Arte candidata de uma branch experimental; não altera a release prototype.4.

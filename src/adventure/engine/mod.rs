@@ -8,4 +8,5 @@ pub mod audio;
 pub mod morning;
 pub mod opening;
 pub mod render;
+pub mod street;
 pub mod typography;

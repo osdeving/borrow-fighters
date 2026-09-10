@@ -267,6 +267,7 @@ fn ada(d: &mut impl RaylibDraw, story: &Story, a: &Assets, reveal_text: bool) {
 fn morning(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
     let t = story.stage_ticks as f32 / 60.0;
     background(d, &a.environments, 0, 0.0, 1.0);
+    super::morning::draw_room_details(d, story, a);
     for i in 0..26 {
         let f = i as f32;
         let x = 720.0 + (f * 18.7).sin() * 270.0 + t * 3.0;
@@ -300,7 +301,7 @@ fn morning(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
 fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
     let c = &story.combat;
     let camera = (c.player.position.x - 450.0).clamp(0.0, 920.0);
-    background(d, &a.environments, 1, -camera * 0.48, 1.35);
+    super::street::background(d, a, camera);
     d.draw_rectangle_gradient_v(
         0,
         565,
@@ -317,6 +318,7 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
         alpha(PAPER, 0.2),
     );
     let scene_time = c.ticks as f32 / 60.0;
+    super::street::draw(d, &story.ambient, a, camera);
     for i in 0..12 {
         let f = i as f32;
         let x = (f * 197.0 + scene_time * 13.0 - camera * 0.5).rem_euclid(1400.0) - 60.0;
@@ -324,8 +326,11 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
         d.draw_circle_v(Vector2::new(x, y), 1.3, alpha(GOLD, 0.35));
     }
     actor_shadow(d, &c.player, camera);
-    actor_shadow(d, &c.enemy, camera);
-    creature(d, a, &c.enemy, camera);
+    // The same awakening signal reveals the threat and startles the child.
+    if c.enemy_awake {
+        actor_shadow(d, &c.enemy, camera);
+        creature(d, a, &c.enemy, camera);
+    }
     rust(d, a, &c.player, camera);
     if let Some(hit) = c.last_hit {
         let p = Vector2::new(hit.position.x - camera, hit.position.y);

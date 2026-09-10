@@ -49,6 +49,23 @@ Na manhã, ancorar ombro/antebraço e quadril no colchão, assento na borda e p�
 no chão, em vez de alinhar todas as poses pelo fim do recorte. A respiração
 preserva o ponto de apoio. Conferir a sequência completa ao mudar qualquer pose.
 
+A [primeira rodada de melhorias do prólogo](30-prologue-scene-improvements.md)
+experimenta um quarto com identidade tecnológica de Rust: setup, pôsteres,
+terminal e luzes discretas, mantendo a manhã e o caráter de casa brasileira.
+Cursor e ventiladores dão movimento ao ambiente sem disputar atenção com o
+despertar. As palavras dos pôsteres e da tela vêm do catálogo editável.
+
+Na rua, a calçada do garoto, a ciclovia e a faixa jogável formam planos
+distintos. A separação por profundidade e pelos elementos do cenário deve
+deixar claro que Rust não entra na ciclovia. Pedais e rodas em movimento,
+gestos com a linha e a cauda da pipa sustentam a vida cotidiana. Ao aparecer a
+ameaça, o garoto se assusta, solta a linha e foge definitivamente daquele
+encontro; a pipa segue pelo vento. Conferir silhuetas e sobreposições nas duas
+extremidades da câmera, preservando a leitura da errática e dos golpes.
+A [ADR 0024](adr/0024-prologue-background-life.md) mantém esses atores fora da
+colisão; os assets e sua [procedência](../assets/adventure/ART-PROVENANCE.md)
+pertencem à aventura. A rodada permanece experimental até a avaliação visual.
+
 A apresentação após o pesar usa jornais, quadros biográficos e montagem de
 personagens. C++ aparece adulta no cotidiano noturno e no despertar heroico;
 Python ensina humanos sobre EPs numa universidade. As manchetes representam

@@ -1,0 +1,375 @@
+{
+  "created_utc": "2026-09-10T13:27:32.812564+00:00",
+  "success": true,
+  "failure": null,
+  "elapsed_seconds": 15.919,
+  "owned_pid": 290230,
+  "owned_window": 8388615,
+  "process_exit_code": 0,
+  "display": ":0",
+  "input_method": "XSendEvent addressed to _NET_WM_PID-owned window",
+  "limitations": "Synthetic window keyboard input; no physical gamepad, focus changes, desktop capture, audio listening or human visual approval.",
+  "checks": [
+    {
+      "name": "morning_90_stays_cinematic",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 92,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 2.677199363708496,
+        "stage": "RustMorning",
+        "stage_ticks": 107,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "name": "morning_390_stays_cinematic",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 378,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 8.575455665588379,
+        "stage": "RustMorning",
+        "stage_ticks": 407,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "name": "morning_650_stays_cinematic",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 616,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 13.824886322021484,
+        "stage": "RustMorning",
+        "stage_ticks": 668,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "name": "recorded_mp4_has_frames_and_preserves_elapsed_time",
+      "passed": true,
+      "codec": "h264",
+      "width": 1280,
+      "height": 720,
+      "frame_rate": "30/1",
+      "frames": 414,
+      "duration_seconds": 13.8,
+      "telemetry_seconds": 13.824886322021484,
+      "absolute_duration_error": 0.024886322021483664
+    },
+    {
+      "name": "same_binary_and_original_catalog_remain_unchanged",
+      "passed": true,
+      "binary_sha256_before": "58605cf5065dd5068693d4710480134d2edfe44e754c19b23789be268c6f7009",
+      "binary_sha256_after": "58605cf5065dd5068693d4710480134d2edfe44e754c19b23789be268c6f7009",
+      "original_catalog_sha256_before": "c45b1e176dd1f693d451fb6e4c34354800ad856ac55d3b2744762be821aafbd1",
+      "original_catalog_sha256_after": "c45b1e176dd1f693d451fb6e4c34354800ad856ac55d3b2744762be821aafbd1"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/morning-090.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 92,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 2.677199363708496,
+        "stage": "RustMorning",
+        "stage_ticks": 107,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/morning-390.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 378,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 8.575455665588379,
+        "stage": "RustMorning",
+        "stage_ticks": 407,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/morning-650.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 616,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 13.824886322021484,
+        "stage": "RustMorning",
+        "stage_ticks": 668,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    }
+  ],
+  "telemetry_records": 617,
+  "video": "adventure-silent.mp4",
+  "external_text_catalog": "texts-under-test.json",
+  "edited_valid_catalog_evidence": "texts-edited-valid.json",
+  "expected_edited_text": "MANHÃ DE AÇÃO — CORAÇÃO E CAFÉ",
+  "x11_errors": []
+}
