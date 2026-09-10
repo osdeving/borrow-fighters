@@ -5,9 +5,14 @@
 Este documento é a fonte de verdade para **o que vem agora**, com filas separadas
 de **to-do** (investigações e melhorias) e **bugfix** (defeitos observados).
 
-Prioridade atual: integrar à `main` e publicar **v0.1.0-prototype.5**, conforme
-pedido explícito após aprovação do capítulo jogável. A preparação ocorre em
-`release/v0.1.0-prototype.5`, a partir de `3ee8e93`; o checkpoint anterior ao
+**v0.1.0-prototype.5** está integrada à `main` e
+[publicada como pré-release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.5),
+com cinco pacotes e `SHA256SUMS.txt`. O
+[PR #23](https://github.com/osdeving/borrow-fighters/pull/23) integrou o corte no
+commit `8feb045ca4d34d1ea05d81b7ecb67967cd5115b7`; o
+[workflow da tag](https://github.com/osdeving/borrow-fighters/actions/runs/34511931462)
+concluiu os builds Windows/Linux e a publicação. Não há nova implementação ativa;
+o próximo passo é recolher relatos de playtest. A preparação partiu de `3ee8e93`; o checkpoint anterior ao
 capítulo, `81c50e6`, permanece no histórico. [Diário da release](worklogs/release-prototype-5.md).
 
 O capítulo **Depois do silêncio** e as quatro rodadas do prólogo estão
@@ -103,7 +108,7 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Próxima ação |
 |---|---|---|---|---|
-| Agora | Release prototype.5: Depois do silêncio | Corte aprovado; integração e publicação em andamento | [Notas](releases/v0.1.0-prototype.5.md), [diário](worklogs/release-prototype-5.md) | Validar pacotes Windows/Linux, integrar por PR, publicar tag e verificar downloads. |
+| Agora | Prototype.5: Depois do silêncio | Integrada e publicada; sem nova implementação ativa | [Notas](releases/v0.1.0-prototype.5.md), [diário](worklogs/release-prototype-5.md) | Preservar o registro do corte e encaminhar novos relatos para este backlog. |
 | Próximo | Playtest do prólogo e primeiro capítulo | TODO-002/013 abertos | [Capítulo](33-after-the-silence.md), [evidências](evidence/after-the-silence/README.md) | Avaliar ritmo, conversas, telefone, checkpoints e combate em diferentes máquinas e controles; definir continuidade com os relatos. |
 | Depois | Pendências do Prototype 3 | Backlog; sem execução ativa | [To-do](#backlog-de-to-do), [bugfix](#backlog-de-bugfix) | Retomar itens por prioridade e evidência, em entregas pequenas, quando esta frente for reaberta. |
 

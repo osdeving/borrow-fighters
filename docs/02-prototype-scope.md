@@ -8,10 +8,14 @@ e vitória com pesar. A [entrega 27](27-rust-story-adventure.md) detalha a sequ�
 e seus critérios. O escopo de luta abaixo permanece como histórico do produto
 já entregue.
 
-## Versão-alvo
+## Versão publicada
 
 **v0.1.0-prototype.5 — Depois do silêncio**, com prólogo, primeiro capítulo
-de Rust e Versus. O corte foi aprovado para integração à `main` e publicação;
+de Rust e Versus. Integrado à `main` pelo
+[PR #23](https://github.com/osdeving/borrow-fighters/pull/23), no commit
+`8feb045ca4d34d1ea05d81b7ecb67967cd5115b7`. A
+[pré-release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.5)
+foi publicada em 10/09/2026, com cinco pacotes e `SHA256SUMS.txt`;
 [notas](releases/v0.1.0-prototype.5.md) e [diário da release](worklogs/release-prototype-5.md).
 
 ## Escopo autorizado da aventura

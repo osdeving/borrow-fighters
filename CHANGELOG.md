@@ -6,8 +6,14 @@ Sem mudanças posteriores ao corte abaixo.
 
 ## v0.1.0-prototype.5 — Depois do silêncio
 
-Corte jogável aprovado para publicação, com o primeiro capítulo da campanha,
-rua brasileira e encenação in-game. [Notas para jogadores](docs/releases/v0.1.0-prototype.5.md)
+Corte jogável integrado à `main` pelo
+[PR #23](https://github.com/osdeving/borrow-fighters/pull/23), no commit `8feb045`,
+com o primeiro capítulo da campanha, rua brasileira e encenação in-game.
+Publicado em 10 de setembro de 2026, com cinco pacotes e `SHA256SUMS.txt`
+na [pré-release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.5).
+Builds Windows/Linux e publicação aprovados no
+[workflow da tag](https://github.com/osdeving/borrow-fighters/actions/runs/34511931462).
+[Notas para jogadores](docs/releases/v0.1.0-prototype.5.md)
 e [registro da release](docs/worklogs/release-prototype-5.md).
 
 - Modo História inicia **Depois do silêncio**, com Rust na rua evacuada,
