@@ -68,6 +68,16 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 
 ## Checkpoints
 
+- 2026-09-10, rodada 2 verificada: `6f911ec` registra implementação, arte,
+  catálogo e trilha. 26 checks nativos passaram, incluindo F5 válido/inválido,
+  prova visual de texto preservado, hashes do mesmo binário, combate e
+  pausa/skip/replay da apresentação. Matriz completa: 417 ambos, 393 luta,
+  27 aventura/core e 3 core; Fmt, Clippy, 34 fixtures de fronteira e 28 do mixer
+  aprovados. Vídeo completo de 122,467 s terminou em Complete; excertos de
+  apresentação (48 s) e manhã (14 s) preparados. Smoke abriu somente os 30 assets
+  da aventura, com catálogo, cinco músicas e quatro efeitos. Evidências em
+  `docs/evidence/adventure-opening/`; faltam fechamento editorial e links.
+
 - 2026-09-10, rodada 2: `7ca6cc8` registra escopo e ADR 0022. Catálogo
   `assets/adventure/texts/pt-BR.json` externo com F5 e `--texts`; reload inválido
   preserva o catálogo. Novo `morning.rs` fixa apoios anatômicos em nove capturas

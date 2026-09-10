@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 from datetime import datetime, timezone
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -22,6 +23,15 @@ import tempfile
 import time
 
 from capture_match_flow_x11 import X11
+
+
+def sha256_file(path):
+    """Hash evidence or an executable without loading the whole file at once."""
+    digest = hashlib.sha256()
+    with path.open("rb") as source:
+        for block in iter(lambda: source.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 class Telemetry:
@@ -72,6 +82,13 @@ class AdventureReview:
         self.checks = []
         self.captures = []
         self.failure = None
+        self.binary_hash_before = sha256_file(self.binary)
+        self.catalog_source = self.root / "assets/adventure/texts/pt-BR.json"
+        self.catalog_original = self.catalog_source.read_bytes()
+        self.catalog_hash_before = hashlib.sha256(self.catalog_original).hexdigest()
+        self.catalog_path = self.directory / "texts-under-test.json"
+        self.catalog_path.write_bytes(self.catalog_original)
+        self.edited_eyebrow = "MANHÃ DE AÇÃO — CORAÇÃO E CAFÉ"
 
     def log(self, event, **details):
         record = {
@@ -153,7 +170,7 @@ class AdventureReview:
                 snapshot = self.telemetry.read()
                 self.captures.append({"file": str(target.relative_to(self.directory)), "observed": snapshot})
                 self.log("screenshot", file=str(target), stage=snapshot["stage"])
-                return
+                return target
             time.sleep(0.03)
         raise TimeoutError(f"F12 did not create the requested {name} screenshot")
 
@@ -163,7 +180,8 @@ class AdventureReview:
         env["DISPLAY"] = self.args.display
         env["BORROW_FIGHTERS_DATA_DIR"] = str(self.userdata)
         env["BORROW_FIGHTERS_ASSET_DIR"] = str(self.root / "assets")
-        command = [str(self.binary), "--capture", str(self.directory), "--start", "morning", "--mute", "--hidden"]
+        command = [str(self.binary), "--capture", str(self.directory), "--start", "morning", "--mute", "--hidden",
+                   "--texts", str(self.catalog_path)]
         with (self.directory / "game.log").open("w", encoding="utf-8") as game_log:
             self.process = subprocess.Popen(command, cwd=self.directory, env=env, stdout=game_log, stderr=subprocess.STDOUT)
             self.log("started", pid=self.process.pid, command=command, display=self.args.display)
@@ -181,6 +199,7 @@ class AdventureReview:
         self.check("morning_runs_before_control", morning["ticks"] == 0 and morning["player"]["x"] == 340.0,
                    stage_ticks=morning["stage_ticks"], combat_ticks=morning["ticks"])
         self.screenshot("01-morning")
+        self.reload_edited_text()
         self.tap("Escape")
         paused = self.wait(lambda s: s["paused"], "pause")
         self.settle(0.6)
@@ -190,7 +209,8 @@ class AdventureReview:
         self.check("pause_freezes_story_combat_and_health", held["paused"] and unchanged,
                    stage_tick_delta=held["stage_ticks"] - paused["stage_ticks"],
                    combat_tick_delta=held["ticks"] - paused["ticks"], observed_seconds=0.6)
-        self.screenshot("02-morning-paused")
+        edited_paused = self.screenshot("02-morning-paused")
+        self.reject_invalid_text_and_restore(edited_paused)
         self.tap("Return")
         resumed = self.wait(lambda s: not s["paused"] and s["stage_ticks"] > held["stage_ticks"], "resumed morning")
         self.check("enter_resumes_without_skipping_morning", resumed["stage"] == "RustMorning",
@@ -230,10 +250,105 @@ class AdventureReview:
                    player_hp=remorse["player"]["hp"], enemy_hp=remorse["enemy"]["hp"], action=remorse["player"]["action"])
         self.settle(1.7)
         self.screenshot("07-native-remorse")
-        complete = self.wait(lambda s: s["stage"] == "Complete", "ending after remorse", 10.0)
+        self.review_opening()
+        complete = self.wait(lambda s: s["stage"] == "Complete", "ending after opening")
         self.check("story_completes_only_after_real_victory", complete["outcome"] == "Victory" and complete["enemy"]["hp"] == 0,
                    stage=complete["stage"], outcome=complete["outcome"])
         self.screenshot("08-native-complete")
+        self.tap("t")
+        replay = self.wait(lambda s: s["stage"] == "Opening", "T replays presentation")
+        self.check("t_replays_opening_without_restarting_combat", replay["outcome"] == "Victory"
+                   and replay["enemy"]["hp"] == 0 and replay["stage_ticks"] < 120,
+                   stage=replay["stage"], stage_ticks=replay["stage_ticks"], outcome=replay["outcome"])
+        self.screenshot("09-native-opening-replay")
+        self.tap("Return")
+        replay_end = self.wait(lambda s: s["stage"] == "Complete", "Enter skips replayed opening")
+        self.check("enter_finishes_replayed_opening", replay_end["outcome"] == "Victory",
+                   stage=replay_end["stage"], outcome=replay_end["outcome"])
+        self.screenshot("10-native-replay-complete")
+
+    def reload_edited_text(self):
+        before = self.observe()
+        catalog = json.loads(self.catalog_original)
+        catalog["text"]["morning.eyebrow"] = self.edited_eyebrow
+        edited = json.dumps(catalog, ensure_ascii=False, indent=2) + "\n"
+        self.catalog_path.write_text(edited, encoding="utf-8")
+        (self.directory / "texts-edited-valid.json").write_text(edited, encoding="utf-8")
+        self.tap("F5")
+        loaded = self.wait(lambda s: s["text_revision"] > before["text_revision"], "F5 loads accented external text")
+        self.check("f5_reloads_external_utf8_text_without_recompile",
+                   loaded["text_revision"] == before["text_revision"] + 1
+                   and loaded["text_reload_ok"] is True and loaded["stage"] == "RustMorning",
+                   revision_before=before["text_revision"], revision_after=loaded["text_revision"],
+                   expected_text=self.edited_eyebrow, catalog_sha256=sha256_file(self.catalog_path))
+        self.screenshot("01a-external-text-accented")
+
+    def eyebrow_digest(self, screenshot):
+        """Compare rendered text pixels, excluding the reload notice and menu."""
+        raw = subprocess.run([
+            "ffmpeg", "-v", "error", "-i", str(screenshot), "-vf", "crop=680:32:42:40",
+            "-frames:v", "1", "-f", "rawvideo", "-pix_fmt", "rgba", "pipe:1",
+        ], capture_output=True, check=True, timeout=8.0).stdout
+        if len(raw) != 680 * 32 * 4:
+            raise RuntimeError("Unexpected decoded size for the eyebrow comparison region")
+        return hashlib.sha256(raw).hexdigest()
+
+    def reject_invalid_text_and_restore(self, edited_paused):
+        before = self.observe()
+        invalid = '{"version": 1, "text": {"morning.eyebrow": '
+        self.catalog_path.write_text(invalid, encoding="utf-8")
+        (self.directory / "texts-invalid.json").write_text(invalid, encoding="utf-8")
+        self.tap("F5")
+        rejected = self.wait(lambda s: s["frame"] > before["frame"] and s["text_reload_ok"] is False,
+                             "F5 rejects invalid JSON")
+        self.check("invalid_json_preserves_revision_and_paused_story",
+                   rejected["text_revision"] == before["text_revision"] and rejected["paused"]
+                   and rejected["stage_ticks"] == before["stage_ticks"],
+                   revision_before=before["text_revision"], revision_after=rejected["text_revision"],
+                   text_reload_ok=rejected["text_reload_ok"])
+        invalid_shot = self.screenshot("02a-external-text-rejected")
+        valid_pixels = self.eyebrow_digest(edited_paused)
+        invalid_pixels = self.eyebrow_digest(invalid_shot)
+        self.check("invalid_json_keeps_previous_rendered_text", valid_pixels == invalid_pixels,
+                   comparison_region=[42, 40, 680, 32], valid_text_pixels_sha256=valid_pixels,
+                   rejected_text_pixels_sha256=invalid_pixels)
+        self.catalog_path.write_bytes(self.catalog_original)
+        self.tap("F5")
+        restored = self.wait(lambda s: s["text_revision"] > before["text_revision"], "F5 restores valid original text")
+        self.check("valid_catalog_recovers_after_rejected_reload",
+                   restored["text_revision"] == before["text_revision"] + 1 and restored["text_reload_ok"] is True,
+                   revision_after=restored["text_revision"], catalog_sha256=sha256_file(self.catalog_path))
+        restored_shot = self.screenshot("02b-external-text-restored")
+        restored_pixels = self.eyebrow_digest(restored_shot)
+        self.check("restored_catalog_changes_visible_text", restored_pixels != valid_pixels,
+                   edited_text_pixels_sha256=valid_pixels, restored_text_pixels_sha256=restored_pixels)
+
+    def review_opening(self):
+        opening = self.wait(lambda s: s["stage"] == "Opening", "opening follows remorse", 10.0)
+        self.check("opening_follows_victory_and_remorse", opening["outcome"] == "Victory"
+                   and opening["enemy"]["hp"] == 0 and opening["player"]["action"] == "Remorse",
+                   stage=opening["stage"], outcome=opening["outcome"], action=opening["player"]["action"])
+        self.screenshot("07a-native-opening")
+        self.tap("Escape")
+        paused = self.wait(lambda s: s["paused"], "opening pauses")
+        self.settle(0.6)
+        held = self.observe()
+        self.check("opening_pause_freezes_story_combat_and_health",
+                   held["paused"] and held["stage"] == "Opening"
+                   and (held["stage_ticks"], held["ticks"], held["player"]["hp"], held["enemy"]["hp"]) == (
+                       paused["stage_ticks"], paused["ticks"], paused["player"]["hp"], paused["enemy"]["hp"]),
+                   stage_tick_delta=held["stage_ticks"] - paused["stage_ticks"],
+                   combat_tick_delta=held["ticks"] - paused["ticks"], observed_seconds=0.6)
+        self.screenshot("07b-native-opening-paused")
+        self.tap("Return")
+        resumed = self.wait(lambda s: not s["paused"] and s["stage_ticks"] > held["stage_ticks"], "opening resumes")
+        self.check("enter_resumes_without_skipping_opening", resumed["stage"] == "Opening",
+                   stage=resumed["stage"], stage_ticks=resumed["stage_ticks"])
+        self.settle(0.2)
+        self.tap("Return")
+        skipped = self.wait(lambda s: s["stage"] == "Complete", "separate Enter skips opening")
+        self.check("separate_enter_skips_opening_to_complete", skipped["outcome"] == "Victory",
+                   stage=skipped["stage"], outcome=skipped["outcome"])
 
     def fight(self):
         self.log("keyboard_combat_started")
@@ -297,6 +412,21 @@ class AdventureReview:
         self.log("check", **video_check)
         if not video_check["passed"] and self.failure is None:
             self.failure = "The native input checks completed, but the recorded MP4 did not validate"
+        binary_hash_after = sha256_file(self.binary)
+        catalog_hash_after = sha256_file(self.catalog_source)
+        integrity = {
+            "name": "same_binary_and_original_catalog_remain_unchanged", "passed": (
+                binary_hash_after == self.binary_hash_before and catalog_hash_after == self.catalog_hash_before),
+            "binary_sha256_before": self.binary_hash_before, "binary_sha256_after": binary_hash_after,
+            "original_catalog_sha256_before": self.catalog_hash_before,
+            "original_catalog_sha256_after": catalog_hash_after,
+        }
+        self.checks.append(integrity)
+        self.log("check", **integrity)
+        if not integrity["passed"] and self.failure is None:
+            self.failure = "The binary or original catalog changed during the native verification"
+        # Always leave the temporary live catalog valid, including on failure.
+        self.catalog_path.write_bytes(self.catalog_original)
         result = {
             "created_utc": datetime.now(timezone.utc).isoformat(),
             "success": self.failure is None and bool(self.checks) and all(c["passed"] for c in self.checks),
@@ -312,6 +442,9 @@ class AdventureReview:
             "screenshots": self.captures,
             "telemetry_records": len(self.telemetry.samples),
             "video": "adventure-silent.mp4",
+            "external_text_catalog": str(self.catalog_path.relative_to(self.directory)),
+            "edited_valid_catalog_evidence": "texts-edited-valid.json",
+            "expected_edited_text": self.edited_eyebrow,
             "x11_errors": self.x11.errors if self.x11 else [],
         }
         (self.directory / "native-checks.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
