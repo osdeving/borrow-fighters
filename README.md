@@ -2,30 +2,32 @@
 
 Jogo 2D de luta com humor de programação, iniciado como um projeto **docs-first** e agora com um protótipo greybox jogável em Rust + Raylib.
 
-Status: **Prototype 0.1 / Greybox jogável / Vertical slice em evolução**
+Status: **Prototype 0.1 — prototype.5 / Primeiro capítulo e Versus jogáveis**
 
 ## Baixar e jogar (sem instalar Rust)
 
-A versão do playtest é **v0.1.0-prototype.4**, com aventura de Ada/Rust,
-apresentação do universo e menu de terminal na mesma execução.
-[Downloads e instruções da release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.4):
+A versão do playtest é **v0.1.0-prototype.5**, com o primeiro capítulo de Rust,
+**Depois do silêncio**, prólogo e Versus na mesma execução.
+[Downloads e instruções da release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.5):
 instalador/ZIP para Windows 10 (1903+) ou 11, DEB para Debian/Ubuntu, RPM para Fedora e
 arquivo portátil para Linux, todos em x86_64. Extraia a pasta inteira se escolher
 a versão portátil. Os arquivos necessários do jogo acompanham os pacotes.
 Todos precisam de driver com OpenGL 3.3. No Linux, a base é glibc 2.35+
 e desktop com X11 ou XWayland.
 
-Ao abrir, acompanhe o prólogo, o primeiro encontro de Rust e a apresentação.
+Na primeira abertura, acompanhe o prólogo, o encontro de Rust e a apresentação.
+Depois de visto ou pulado, o jogo abre no menu; é possível rever o prólogo.
 **Enter / RB** avança ao próximo trecho; **Backspace / View** pula tudo e abre
 o menu, inclusive durante combate ou pausa. No fim normal, **Aperte qualquer
 tecla para continuar** espera uma nova entrada antes de mostrar o menu.
 **Versus Setup** abre a seleção para jogar contra CPU ou em duelo local;
-**Como jogar** explica os controles. **Modo História** está reservado, sem ação.
+**Como jogar** explica os controles. **Modo História** inicia o capítulo de Rust,
+com conversas, celular, exploração e combate, ou continua do último checkpoint.
 Durante a luta, `Esc`/`Start` abre a pausa; o resultado oferece revanche.
 O código e as ferramentas de desenvolvimento continuam descritos abaixo.
 
 Jogue por dez minutos e [conte o que funcionou e o que ficou confuso](https://github.com/osdeving/borrow-fighters/issues/new/choose).
-[Notas do playtest](docs/releases/v0.1.0-prototype.4.md) ·
+[Notas do playtest](docs/releases/v0.1.0-prototype.5.md) ·
 [Como gerar os pacotes](docs/06-release-process.md) ·
 [Decisão de distribuição](docs/adr/0019-playtest-distribution.md).
 
@@ -61,7 +63,7 @@ cargo run -- --menu
 cargo run -- --start chapter
 ```
 
-Na branch `feature/prologue-scene-improvements`, a primeira rodada acrescenta
+A prototype.5 incorpora quatro rodadas de melhorias. A primeira acrescenta
 setup e pôsteres de Rust ao quarto, ciclistas numa ciclovia ao fundo e um garoto
 que larga a pipa e foge ao perceber a errática. A encenação acompanha a pausa
 e o reinício do encontro. A segunda rodada acrescenta automóveis numa rua

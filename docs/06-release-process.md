@@ -2,21 +2,19 @@
 
 ## Estado atual
 
-O corte publicado é `v0.1.0-prototype.4`: aventura de Ada/Rust,
-primeiro encontro, apresentação, skip e menu de terminal na mesma execução.
-A [pré-release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.4)
-foi publicada em 10 de setembro de 2026, com cinco downloads e `SHA256SUMS.txt`.
-O [PR #21](https://github.com/osdeving/borrow-fighters/pull/21) integrou todo o trabalho à
-`main`; a tag anotada aponta para `20ef404ec4e3e44cc2dd9277cd10a9180d80d319`.
-Builds Windows/Linux e publicação passaram no
-[workflow da tag](https://github.com/osdeving/borrow-fighters/actions/runs/34477806614).
-Os checks Rust e Docs da `main` também passaram; detalhes e limites estão no
-[diário da release](worklogs/release-prototype-4.md).
-A [ADR 0019](adr/0019-playtest-distribution.md) registra plataformas e distribuição;
-a [ADR 0023](adr/0023-story-to-terminal-menu.md) registra a entrada conjunta.
-As [notas da versão](releases/v0.1.0-prototype.4.md) explicam a entrega ao jogador.
-O conteúdo da [prototype.3](releases/v0.1.0-prototype.3.md) e a correção anterior
-de imagens e áudio em caminhos Windows com acentos continuam incluídos.
+O corte em preparação é **v0.1.0-prototype.5 — Depois do silêncio**, aprovado
+para publicação: primeiro capítulo de Rust, checkpoints, conversa por celular,
+rua brasileira, evacuação e chegada cinematográfica.
+[Notas da versão](releases/v0.1.0-prototype.5.md) e
+[diário da release](worklogs/release-prototype-5.md) acompanham integração,
+builds, pacotes e verificação dos downloads.
+
+A versão publicada anterior é a
+[prototype.4](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.4),
+com cinco pacotes e checksums. A [ADR 0019](adr/0019-playtest-distribution.md)
+registra plataformas e distribuição; a [ADR 0023](adr/0023-story-to-terminal-menu.md)
+registra a entrada conjunta. A correção de imagens e áudio em caminhos Windows
+com acentos continua incluída.
 
 ## Downloads
 
@@ -47,9 +45,9 @@ Os textos `LICENSE-MIT`/`LICENSE-APACHE` formalizam a escolha já declarada no
 Manter a versão idêntica em `Cargo.toml`, `Cargo.lock` e tag, por exemplo:
 
 ```text
-0.1.0-prototype.4
-v0.1.0-prototype.4
-release/v0.1.0-prototype.4
+0.1.0-prototype.5
+v0.1.0-prototype.5
+release/v0.1.0-prototype.5
 ```
 
 A tag e o pacote avançam para cada correção publicada; a branch de estabilização
@@ -69,7 +67,8 @@ O workflow [Playtest Release](../.github/workflows/release.yml) faz:
    as combinações isoladas de features e suas fronteiras.
 4. Selecionar assets, empacotar dependências e preparar os cinco downloads.
 5. Verificar instalação/desinstalação no Windows e carregamento do executável;
-   verificar DEB com inicialização gráfica por Xvfb e instalação RPM no Fedora.
+   verificar DEB com inicialização gráfica por Xvfb e instalação RPM no Fedora,
+   incluindo abertura do primeiro capítulo fora do checkout.
 6. Em push de `release/*`, disponibilizar os pacotes como artefatos do Actions.
 7. Em push de tag, criar release inicialmente em rascunho, anexar todos os
    downloads e `SHA256SUMS.txt`, e então publicar como pré-release.
@@ -97,8 +96,8 @@ a diferença de codificação nas chamadas C usadas pelo Raylib.
 Exemplo de publicação após os checks:
 
 ```sh
-git tag -a v0.1.0-prototype.4 -m 'release: publish adventure, opening and terminal menu'
-git push origin v0.1.0-prototype.4
+git tag -a v0.1.0-prototype.5 -m 'release: publish After the Silence story chapter'
+git push origin v0.1.0-prototype.5
 ```
 
 A solicitação explícita do responsável por publicar a release autoriza esse
@@ -125,6 +124,8 @@ correspondente em `SHA256SUMS.txt`.
 - Builds, testes e empacotamento aprovados em ambas as plataformas.
 - Executável abre fora do checkout, com assets completos e dados graváveis.
 - No Windows, PNG e áudio carregam em uma pasta com espaços e acentos.
+- Modo História abre o capítulo com assets completos; continuar/recomeçar e
+  rever prólogo permanecem disponíveis, com save no diretório de dados do usuário.
 - Aventura chega ao menu na mesma janela, com avanço por trecho, skip total
   e confirmação final; `Como jogar` explica como assumir um jogador, reiniciar e sair.
 - Créditos e limitações conhecidos acompanham o download.

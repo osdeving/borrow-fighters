@@ -2,9 +2,31 @@
 
 ## Unreleased
 
-Experimento na branch `feature/prologue-scene-improvements`, começando pela
-manhã de Rust. [Escopo](docs/30-prologue-scene-improvements.md) e
-[diário de implementação e verificação](docs/worklogs/prologue-scene-improvements.md).
+Sem mudanças posteriores ao corte abaixo.
+
+## v0.1.0-prototype.5 — Depois do silêncio
+
+Corte jogável aprovado para publicação, com o primeiro capítulo da campanha,
+rua brasileira e encenação in-game. [Notas para jogadores](docs/releases/v0.1.0-prototype.5.md)
+e [registro da release](docs/worklogs/release-prototype-5.md).
+
+- Modo História inicia **Depois do silêncio**, com Rust na rua evacuada,
+  conversas com motorista, lojista e morador, travessa e proteção da passagem.
+  Versus conserva a seleção livre de personagens.
+- Rust tira o celular e conversa com Python em um mensageiro legível ao lado
+  dele: “voltou a acontecer.”, “sim, eu senti algo...” e “Vou resolver isso.”.
+  Gestos, telefone, mensagens, câmera e moradores atuam na cena do jogo.
+- Capítulo com regiões, obstáculos e gatilhos em coordenadas de mundo;
+  cenários, atores, clips, sockets, textos e aparência do celular substituíveis,
+  com módulos próprios para simulação, direção, apresentação e persistência.
+- Checkpoints, continuar/recomeçar/rever prólogo e retorno ao menu. A primeira
+  abertura apresenta o prólogo; as seguintes vão ao menu depois de visto ou
+  pulado. Pausa, derrota e nova tentativa preservam a progressão apropriada.
+- Verificação do capítulo por controles reais no renderer, incluindo conversa,
+  telefone, combate, derrota/retry, vitória, save e retorno pelo menu;
+  [prévia e relatórios](docs/evidence/after-the-silence/README.md).
+- Pacotes incluem os 263 assets de runtime e instruções atualizadas. O smoke
+  de instalação Linux também abre o capítulo fora do checkout.
 
 - Quarto com setup, pôsteres ligados a Rust, cursor de terminal e ventiladores
   animados, preservando os apoios das poses de despertar.

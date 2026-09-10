@@ -268,6 +268,20 @@ jobs:
           assert result['final_stage'] == 'AdaPrologue', result
           assert result['exit_reason'] == 'FrameLimit', result
           PY
+          BORROW_FIGHTERS_DATA_DIR="$RUNNER_TEMP/playtest-chapter-user" timeout 45s xvfb-run -a "$game" --start chapter --mute --frames 3 --capture "$RUNNER_TEMP/packaged-chapter" > "$RUNNER_TEMP/chapter-smoke.log" 2>&1
+          cat "$RUNNER_TEMP/chapter-smoke.log"
+          ! grep -Ei 'failed to (load|open)|could not (load|open)|panicked at|error while loading shared libraries' "$RUNNER_TEMP/chapter-smoke.log"
+          python - <<'PY'
+          import json, os, pathlib
+          telemetry = pathlib.Path(os.environ['RUNNER_TEMP']) / 'packaged-chapter/telemetry.jsonl'
+          frames = [json.loads(line) for line in telemetry.read_text().splitlines()]
+          assert len(frames) == 3, frames
+          for frame in frames:
+              assert frame['stage'] == 'Chapter', frame
+              assert frame['scene'] == 'Street', frame
+              assert frame['phase'] == 'Intro', frame
+              assert frame['menu'] is None, frame
+          PY
           set +e
           timeout 12s xvfb-run -a "$game" --menu > "$RUNNER_TEMP/game-smoke.log" 2>&1
           status=$?
@@ -283,6 +297,7 @@ jobs:
             set -eu
             dnf install -y /packages/*.rpm xorg-x11-server-Xvfb xauth mesa-dri-drivers
             cd /tmp
+            export BORROW_FIGHTERS_DATA_DIR=/tmp/playtest-user
             set +e
             /usr/bin/borrow-fighters --help
             status=$?
@@ -295,6 +310,9 @@ jobs:
             timeout 45s /usr/bin/borrow-fighters --mute --frames 3 >/tmp/story.log 2>&1
             cat /tmp/story.log
             ! grep -Ei "failed to (load|open)|could not (load|open)|panicked at|error while loading shared libraries" /tmp/story.log
+            BORROW_FIGHTERS_DATA_DIR=/tmp/playtest-chapter-user timeout 45s /usr/bin/borrow-fighters --start chapter --mute --frames 3 >/tmp/chapter.log 2>&1
+            cat /tmp/chapter.log
+            ! grep -Ei "failed to (load|open)|could not (load|open)|panicked at|error while loading shared libraries" /tmp/chapter.log
             set +e
             timeout 12s /usr/bin/borrow-fighters --menu >/tmp/game.log 2>&1
             status=$?
