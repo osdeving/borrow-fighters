@@ -32,7 +32,7 @@ publicação dos pacotes conforme o [processo](../06-release-process.md).
 Checks locais do corte aprovados:
 
 - `cargo fmt --check`.
-- `cargo test --locked --all-targets`: 494 aprovados, dois ignorados por
+- `cargo test --locked --all-targets`: 496 aprovados, dois ignorados por
   exigirem dispositivo de áudio, nenhuma falha.
 - `cargo clippy --locked --all-targets --all-features -- -D warnings`.
 - 19 testes de empacotamento; fronteiras de domínio e suas 56 fixtures.
