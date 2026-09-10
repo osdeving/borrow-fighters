@@ -90,6 +90,14 @@ O formato é inspirado em Keep a Changelog, mas adaptado para o estágio de pré
 
 ## [Unreleased]
 
+### Documentação
+
+- Backlog separado em to-do e bugfix, preservando pendências e hipóteses de
+  playtest do Prototype 3; exploração narrativa de Rust passa a ser a frente atual.
+- [Proposta de aventura 2D](docs/27-rust-story-adventure.md) com prólogo de
+  Ada/Assembly, terminal, habilidade de vínculo e um capítulo piloto em Sirius.
+  Direção em discussão, sem mudança no jogo distribuído.
+
 ### Adicionado
 
 - Seis especiais cinematográficos adicionais: Ownership Eclipse, JVM Overdrive,

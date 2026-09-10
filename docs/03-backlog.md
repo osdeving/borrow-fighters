@@ -1,8 +1,17 @@
-# 03 — Backlog Inicial
+# 03 — Backlog: to-do e bugfix
 
 ## Fonte de verdade
 
-Este documento e a fonte de verdade para **o que vem agora**.
+Este documento é a fonte de verdade para **o que vem agora**, com filas separadas
+de **to-do** (investigações e melhorias) e **bugfix** (defeitos observados).
+
+Prioridade atual, em 10 de setembro de 2026: explorar uma **aventura 2D narrativa
+solo protagonizada por Rust**, partindo da lore de Ada, Assembly e do Linker.
+A [proposta de aventura](27-rust-story-adventure.md) reúne direção, abertura e
+recorte de validação. A frente atual é de proposta e documentação; implementação
+da aventura ainda não foi solicitada. As pendências do Prototype 3 permanecem
+registradas abaixo. Estar no backlog, mesmo com prioridade alta, **não significa
+execução ativa**.
 
 Rodada entregue: [apresentação e fluxo do playtest](26-playtest-visual-completion.md),
 com reações de todo o elenco, seleção Linker, pausa/revanche, energia,
@@ -11,8 +20,8 @@ transições e voz provisória de Old C. Implementação e revisão funcional em
 [PR #19](https://github.com/osdeving/borrow-fighters/pull/19).
 O corte de distribuição é `v0.1.0-prototype.3`, preparado na branch
 `release/v0.1.0-prototype.3`; [notas e instruções para jogadores](releases/v0.1.0-prototype.3.md).
-Próxima frente: playtest humano e balanceamento, conforme solicitado, incluindo
-valores de energia, risco/recompensa e feedback pontual de animação.
+Playtest humano, balanceamento e acabamento pontual aguardam retomada nas filas
+de to-do e bugfix; deixaram de ser a frente imediata a pedido do usuário.
 
 A correção do carregamento em caminhos Windows com acentos já foi publicada
 na versão `v0.1.0-prototype.2` e integrada à main pelo PR #18.
@@ -23,7 +32,7 @@ Rodada concluída: [reações próprias Python × C++](25-python-cpp-contact-rea
 64 desenhos novos e resposta sincronizada a cada contato, incluindo os oito da
 rajada. 346 testes, Fmt/Clippy e 64 cenários renderizados nos dois sentidos.
 [Vídeo e evidências](evidence/python-cpp-reactions/README.md).
-O padrão de reações dos demais personagens integra a rodada 26 atual. Custo de
+O padrão de reações dos demais personagens integra a rodada 26 entregue. Custo de
 energia recebeu seu primeiro corte funcional nessa rodada; balanceamento fino,
 contra-jogo e vantagens por arena permanecem para depois.
 
@@ -37,15 +46,15 @@ Rodada anterior concluída: [supers autorais e identidade sonora](23-authored-su
 Garbage Collector, Ownership Eclipse, General Protection Fault e Footgun
 integrados, com 321 testes Rust e 41 verificações de controles aprovados.
 [Evidência visual e sonora](evidence/authored-supers/README.md).
-Próximo corte: balancear custo/raridade,
-janela de captura e contra-jogo após o playtest destas animações.
+Pendências preservadas: balancear custo/raridade,
+janela de captura e contrajogo após o playtest destas animações.
 
 Rodada anterior concluída: [polimento da apresentação, Brasil cotidiano e seis
 especiais cinematográficos](22-presentation-and-brazilian-stage-life.md), solicitado
 em 8 de setembro de 2026. Implementação integrada; 300 testes Rust, formatação,
 Clippy estrito e links/YAML aprovados. [Evidência gráfica e controles](evidence/presentation-polish/README.md).
-Próximo corte após entrega: playtest humano e fechamento
-do checklist de release, incluindo pausa, resolução e remapeamento de controles.
+O fechamento posterior do fluxo incluiu pausa na rodada 26. Playtest humano,
+resolução e remapeamento de controles permanecem nas filas abaixo.
 
 Roadmaps especializados continuam existindo, mas devem apontar para este backlog quando uma frente virar trabalho ativo:
 
@@ -62,7 +71,57 @@ Regra operacional:
 3. toda mudanca que altera comandos, processo, formato de dados, roadmap ou contribuicao deve atualizar este backlog ou o roadmap especializado correspondente;
 4. se uma decisao criar padrao duradouro, registrar ADR.
 
-## Agora / Proximo / Depois
+## Agora / Próximo / Depois
+
+| Janela | Frente | Status | Registro | Próxima ação |
+|---|---|---|---|---|
+| Agora | Direção de aventura 2D narrativa com Rust | Proposta documentada para discussão; sem implementação | [Proposta 27](27-rust-story-adventure.md) | Avaliar o ciclo de exploração, ação e descoberta da lore, a abertura e o menor recorte jogável antes de decidir a mudança de produto. |
+| Próximo | Validar a proposta de aventura | A definir após discussão | [Proposta 27](27-rust-story-adventure.md), TODO-011 | Conciliar as fontes de lore antes do roteiro final e fechar hipótese, escopo e critérios de um primeiro experimento; registrar decisões estruturais antes de implementar. |
+| Depois | Pendências do Prototype 3 | Backlog; sem execução ativa | [To-do](#backlog-de-to-do), [bugfix](#backlog-de-bugfix) | Retomar itens por prioridade e evidência, em entregas pequenas, quando esta frente for reaberta. |
+
+## Backlog de to-do
+
+Prioridade ordena o trabalho quando a respectiva frente for retomada; não
+antecipa o **Agora**. Todos os itens abaixo estão **abertos no backlog**. IDs
+permanecem estáveis ao mudar prioridade ou vincular issue/PR.
+
+| ID | Item | Prioridade | Critério de conclusão / evidência esperada |
+|---|---|---|---|
+| TODO-001 | Roteiro e rodada de playtest humano | Alta | Preparar roteiro no [guia de playtest](10-greybox-playtest.md); observar 4–6 pessoas em três partidas por pessoa, incluindo CPU e duelo local na rodada. Registrar compreensão da seleção, defesa, energia e diferenças entre os cinco personagens, além de frustrações. Consolidar os cinco principais problemas com exemplos reproduzíveis e prioridade, vinculando-os a esta fila ou à de bugfix. |
+| TODO-002 | Controles físicos, GPU e percepção humana de áudio | Alta | Testar teclado, mouse e gamepad físicos no fluxo de seleção, partida, pausa e revanche. Registrar plataforma, GPU, dispositivo e resultado; ouvir volumes, clareza, timbres e pausa/retomada com áudio real. Manter explícitas plataformas/dispositivos não testados. A [revisão atual](26-playtest-visual-completion.md#estado-da-entrega) não oferece essas aprovações humanas. |
+| TODO-003 | Medir frequência e impacto dos cinematográficos | Alta | Medir tempo até carregar 100 de energia, usos por partida, duração de cada sequência e tempo total em que jogadores ficam sem agir; relacionar os dados à percepção de ritmo no TODO-001. O [contrato atual](10-greybox-playtest.md#defesa-e-recuperação) tem carga inicial 50, custo 100 e sequências de aproximadamente 5–10,5 segundos. Registrar uma linha de base antes de ajustar ganhos de energia e comparar a mesma situação após cada ajuste. |
+| TODO-004 | Investigar risco/recompensa e contrajogo dos cinematográficos | Média | Com os dados do TODO-003, avaliar se captura a qualquer distância e defesa exigida no instante da ativação deixam resposta compreensível e suficiente. Registrar decisão e evidência de playtest; testar uma hipótese de alcance, antecipação ou captura por vez se necessário. São regras atuais e hipóteses de design, sem defeito confirmado. Incluir vantagens da mudança de arena de Rust se afetarem os confrontos. |
+| TODO-005 | Balanceamento inicial dos cinco selecionáveis | Alta | Reproduzir situações de Rust, Duke/Java, Old C, Python e C++ no Combat Lab: punição após golpe forte bloqueado ou errado, aproximação contra projéteis e vantagens distintas de Python/C++. Usar [roadmap de combate](13-combat-design-roadmap.md) e [matriz de personagens](15-character-combat-matrix.md); registrar confronto, lado, ações e resultado antes/depois, alterando poucos parâmetros por rodada. Go continua fora da seleção pública. |
+| TODO-006 | Calibração de sprite/hitbox e hurtbox por pose | Média, condicionada ao playtest | Se surgir divergência percebida entre desenho e contato, preservar reprodução no Combat Lab com caixas visíveis e revisar apenas o caso demonstrado. Conferir os dois lados e registrar se exige arte ou caixa; os desenhos atuais preservam a referência por `combat_manifest`. Sem evidência, manter pendente em vez de alterar combate por aparência. [Pipeline](11-sprite-pipeline.md), [guia técnico](12-technical-combat-guide.md). |
+| TODO-007 | Remapeamento de controles | Média | Definir comandos remapeáveis e comportamento para conflitos/restauração; permitir configurar e persistir teclado/gamepad e conferir seleção, luta e pausa com um mapeamento alterado. Melhoria futura de uso. |
+| TODO-008 | Opções de janela e resolução | Média | Definir modos suportados; permitir ajustar janela/resolução, preservar preferências e conferir legibilidade do HUD, menus, personagens e navegação nos modos escolhidos. Melhoria futura de uso. |
+| TODO-009 | Voz própria de Old C | Baixa | Selecionar voz redistribuível, registrar procedência/licença e obter avaliação humana de identidade e consistência. O [fallback de Rust](../assets/audio/review/old-c-fallback-2026-09-09/README.md) é provisório e autorizado; substituí-lo não deve alterar as vozes dos demais. |
+| TODO-010 | Ferramenta visual clicável | Baixa, condicionada à necessidade | Retomar o [roadmap do viewer](16-sprite-combat-viewer-roadmap.md) somente se atalhos e texto forem insuficientes; registrar o problema de uso antes de avaliar `raygui`. Pendência anterior preservada. |
+| TODO-011 | Conciliar prólogo e fontes da lore para a aventura | Alta, antes do roteiro final | Comparar [worldbuilding](12-worldbuilding.md) e [livro do jogo](../assets/lore/story.json): Linker sempre presente versus surgimento no limiar tecnológico; Assembly emergindo da fenda versus a formulação negativa de CH 0x01. Registrar a decisão de cânone e sincronizar as fontes antes de finalizar o prólogo. A revisão editorial também deve corrigir grafia/gramática como `Liker` e `presente no desde`, sem tratá-las como decisão de cosmologia. Nesta rodada, o worldbuilding é apenas a base provisória da [proposta 27](27-rust-story-adventure.md); o JSON não foi alterado. |
+
+## Backlog de bugfix
+
+Todos os itens estão **abertos no backlog**, sem correção iniciada. São limites
+visuais observados na [revisão dos contatos](evidence/roster-contact-reactions/README.md#revisão-visual-e-limites),
+também registrados na [entrega 26](26-playtest-visual-completion.md#estado-da-entrega).
+Os testes mecânicos existentes não comprovam que estes problemas de apresentação
+foram resolvidos.
+
+| ID | Defeito observado | Prioridade | Critério de conclusão / evidência esperada |
+|---|---|---|---|
+| BUG-001 | HUD encobre cabeça/tronco no ápice dos arremessos | Média | Reproduzir o ápice com os dois lados; ajustar apresentação para manter o personagem legível e os indicadores essenciais do HUD disponíveis. Preservar capturas e vídeo antes/depois no renderer real. |
+| BUG-002 | Primeiro recuo de Duke na rajada deixa espaço entre cabeça e faísca | Média | Reproduzir o primeiro contato da rajada de C++ contra Duke; alinhar a reação visual ao ponto de impacto e conferir a sequência completa nos dois sentidos, com frames e vídeo antes/depois. |
+| BUG-003 | Go mantém as mãos altas na guarda em pé quando o soco atinge o abdômen | Baixa | Revisar a pose/contato documentado e conferir a defesa nos dois sentidos, preservando as regras de bloqueio. Registrar comparação no renderer. Go está fora da seleção pública; esta correção não prevê incluí-lo no menu. |
+| BUG-004 | Focinho/volume facial de Go varia nos desenhos iniciais da recuperação | Baixa | Uniformizar a identidade facial entre os desenhos afetados e conferir a transição de recuperação em movimento nos dois sentidos, com evidência visual. Go permanece fora da seleção pública. |
+
+Uma observação nova só entra como bug confirmado com situação reproduzível ou
+evidência identificada. Questões de ritmo, balanceamento e preferência visual
+ficam em to-do até a investigação demonstrar um defeito.
+
+## Histórico de entregas
+
+As verificações abaixo pertencem às respectivas rodadas; não são uma nova
+execução nem aprovação humana das pendências listadas acima.
 
 | Janela | Frente | Status | Registro | Proxima acao |
 |---|---|---|---|---|
@@ -75,23 +134,20 @@ Regra operacional:
 | Concluído | MVP: showcase contextual, especiais e coerência de combate/arte | Cinco selecionáveis verificados; sem conteúdo novo para Go | [Plano e critérios](20-mvp-combat-showcase.md) | Corrigir debug, demonstrar contato real com oponente contextual, completar ações/reações e validar balanceamento/arte. |
 | Feito local | Cursor livre e menus por mouse | Corrigido e verificado | [Playtest](10-greybox-playtest.md), [guia técnico](12-technical-combat-guide.md#mouse-e-fechamento-da-janela), [ADR 0012](adr/0012-shared-menu-pointer-layout.md) | Cursor sem centralização por quadro; hover, cliques, saída pelo menu e fechamento nativo verificados em janela isolada. 242 testes Rust aprovados. |
 | Feito local | Runtime de `frames[].combat` | Feito | [`docs/11-sprite-pipeline.md`](11-sprite-pipeline.md), [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md), [`docs/adr/0007-sprite-frame-combat-runtime.md`](adr/0007-sprite-frame-combat-runtime.md) | Runtime consome hitboxes, hurtboxes e origem de projectile do manifesto com fallback para o greybox. |
-| Proximo | Calibracao de sprite/hitbox | Revisão de gameplay separada do acabamento | [`docs/11-sprite-pipeline.md`](11-sprite-pipeline.md), [`docs/12-technical-combat-guide.md`](12-technical-combat-guide.md), [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) | A arte refinada preserva caixas, origem e regras baseline por `combat_manifest`; eventual revisão de hurtboxes por pose depende de playtest e não é necessária para justificar os desenhos. |
-| Proximo | Feeling e balanceamento | Planejado | [`docs/13-combat-design-roadmap.md`](13-combat-design-roadmap.md), [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md) | Playtestar a demo Rust x Duke x C x Python x C++ com Combat Lab, mantendo Go fora do menu publico e ajustando frame data por dados, nao por achismo. |
 | Feito local | Arte final dos seis lutadores | Acabamento e verificação concluídos | [Laudos e vídeos atuais](../assets/candidates/README.md), [cobertura](19-sprite-production-coverage.md) | 120 clips e 378 quadros, dez golpes por personagem. Go recebeu outra identidade semirrealista. Arte padrão, comparação com env=0, fontes e combate preservados. |
-| Depois | Ferramenta visual clicavel | Aberto | [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) | Avaliar `raygui` somente se atalhos e texto ficarem insuficientes. |
 | Concluído | Release Prototype 0.1 | Corte v0.1.0-prototype.3: seleção, reações, energia e fluxo de partida | [Processo](06-release-process.md), [notas da versão](releases/v0.1.0-prototype.3.md), [ADR 0019](adr/0019-playtest-distribution.md) | Cinco formatos de pacote; continuar o playtest humano de GPU, controles e áudio. A correção de caminhos Windows da prototype.2 permanece incluída. |
 
-## Ritual de manutencao
+## Ritual de manutenção
 
 Antes de abrir branch:
 
-- verificar esta tabela;
+- verificar **Agora / Próximo / Depois** e as filas de to-do e bugfix;
 - confirmar se existe issue ou PR para a frente ativa;
 - se nao existir, criar issue pequena ou atualizar este backlog.
 
 Antes de mergear PR:
 
-- atualizar este backlog se a mudanca concluiu, criou ou reordenou trabalho;
+- atualizar este backlog se a mudanca concluiu, criou ou reordenou trabalho, preservando IDs e registrando evidência ao concluir um item;
 - atualizar o roadmap especializado quando houver detalhe tecnico de uma frente;
 - registrar no [`CHANGELOG.md`](../CHANGELOG.md) mudancas relevantes.
 
@@ -142,7 +198,7 @@ Status do primeiro greybox:
 | Debug draw | M | Média | Feito | Toggle de hitbox/hurtbox |
 | Runtime de sprites | M | Média | Feito | Atlas + manifesto JSON v1 |
 | IA de playtest | M | Média | Feito | P1/P2, perfis diferentes, ataques variados |
-| Polimento de timing | M | Alta | Em andamento | Ataques, projectile, spawn e IA ainda precisam tuning |
+| Polimento de timing | M | Alta | Backlog | Ataques, projectile, spawn e IA ainda precisam tuning; acompanhar TODO-003 a TODO-005. |
 | Arte dos lutadores | L | Alta | Seis concluídos e verificados | Rust, Duke/Java, Go, C, Python e C++ revisados no runtime. Go antigo arquivado. Cenários e VFX de protótipo ficam fora deste escopo. |
 
 ## Fora do backlog inicial

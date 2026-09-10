@@ -37,6 +37,8 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Visão e produto
 
+- [`docs/27-rust-story-adventure.md`](docs/27-rust-story-adventure.md): proposta de aventura 2D com Rust, prólogo de Ada/Assembly e primeiro capítulo explorável.
+
 - [`docs/26-playtest-visual-completion.md`](docs/26-playtest-visual-completion.md): seleção visual, pausa/revanche, energia e conclusão das reações do elenco.
 
 - [`docs/25-python-cpp-contact-reactions.md`](docs/25-python-cpp-contact-reactions.md): piloto de reações próprias e sincronizadas entre Python e C++.
@@ -47,7 +49,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`docs/00-vision.md`](docs/00-vision.md): visão do jogo.
 - [`docs/01-mini-gdd.md`](docs/01-mini-gdd.md): Mini-GDD inicial.
 - [`docs/02-prototype-scope.md`](docs/02-prototype-scope.md): escopo do primeiro protótipo.
-- [`docs/03-backlog.md`](docs/03-backlog.md): backlog inicial e t-shirt sizing.
+- [`docs/03-backlog.md`](docs/03-backlog.md): prioridades, backlog de to-do e backlog de bugfix, com histórico do protótipo.
 - [`docs/04-team-briefing.md`](docs/04-team-briefing.md): briefing para reunir colaboradores.
 - [`docs/10-greybox-playtest.md`](docs/10-greybox-playtest.md): como testar o primeiro protótipo greybox.
 - [`docs/21-signature-spectacle-and-throws.md`](docs/21-signature-spectacle-and-throws.md): arremessos, reações aéreas e os cinco especiais de assinatura.
