@@ -153,7 +153,7 @@ fn props(d: &mut impl RaylibDraw, a: &Assets, offset: f32) {
         for label in &prop.labels {
             super::typography::centered(
                 d,
-                &a.body,
+                &a.signage,
                 a.text.get(&label.text_key),
                 Vector2::new(
                     pose.position.x + label.offset[0] * prop.scale,

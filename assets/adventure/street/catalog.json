@@ -422,7 +422,7 @@
       ]
     },
     "vehicle.bus": {
-      "width": 280,
+      "width": 440,
       "frame_ticks": 1,
       "frames": [
         {

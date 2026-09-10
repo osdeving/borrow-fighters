@@ -5,6 +5,7 @@
 
 pub mod ambient;
 pub mod app;
+pub mod arrival;
 pub mod combat;
 pub mod engine;
 pub mod scenery;

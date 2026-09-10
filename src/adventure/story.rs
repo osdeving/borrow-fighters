@@ -4,6 +4,7 @@
 //! scene skipping without granting a combat victory. The platform owns pause.
 
 use super::ambient::AmbientState;
+use super::arrival::ARRIVAL_TICKS;
 use super::combat::{Action, Combat, CombatInput, Outcome, TICKS_PER_SECOND};
 
 /// Duration of Rust's automatic waking and morning sequence.
@@ -22,7 +23,7 @@ pub enum Stage {
     AdaPrologue,
     /// Much later, Rust wakes and begins an otherwise ordinary morning.
     RustMorning,
-    /// The player explores, encounters the creature and fights for survival.
+    /// The camera arrives, then the player explores and fights for survival.
     Encounter,
     /// Rust approaches the fallen creature and shows compassion.
     Aftermath,
@@ -112,6 +113,7 @@ impl Story {
         if self.stage == Stage::Complete {
             return;
         }
+        let arriving = self.arrival_active();
         self.stage_ticks = self.stage_ticks.saturating_add(1);
         match self.stage {
             Stage::AdaPrologue if self.stage_ticks >= PROLOGUE_TICKS => {
@@ -121,7 +123,9 @@ impl Story {
                 self.enter(Stage::Encounter);
             }
             Stage::Encounter => {
-                self.combat.tick(input);
+                if !arriving {
+                    self.combat.tick(input);
+                }
                 self.ambient.tick(self.combat.enemy_awake);
                 if self.combat.outcome == Outcome::Victory {
                     self.enter(Stage::Aftermath);
@@ -144,6 +148,7 @@ impl Story {
         match self.stage {
             Stage::AdaPrologue => self.enter(Stage::RustMorning),
             Stage::RustMorning => self.enter(Stage::Encounter),
+            Stage::Encounter if self.arrival_active() => self.stage_ticks = ARRIVAL_TICKS,
             Stage::Aftermath if self.gesture_visible() => self.enter(Stage::Opening),
             Stage::Opening => self.enter(Stage::Complete),
             _ => {}
@@ -152,7 +157,8 @@ impl Story {
 
     /// Skips to the next authored segment instead of discarding its whole stage.
     ///
-    /// An explicit encounter skip goes directly to the presentation, preserving
+    /// An arrival skip settles the camera and releases exploration. A later
+    /// explicit encounter skip goes to the presentation, preserving
     /// combat health and outcome. It does not invent a victory or show regret for
     /// a fight the player skipped. Likewise, aftermath can be skipped before its
     /// gesture finishes; automatic progression still waits for that gesture.
@@ -171,6 +177,7 @@ impl Story {
                 // These are authored pose starts in engine/morning.rs at 60 Hz.
                 self.skip_to_next_boundary(&[150, 225, 355, 500, 585], Stage::Encounter);
             }
+            Stage::Encounter if self.arrival_active() => self.stage_ticks = ARRIVAL_TICKS,
             Stage::Encounter | Stage::Aftermath => self.enter(Stage::Opening),
             Stage::Opening => {
                 // Three headlines, both halves of each biography, three character
@@ -208,6 +215,15 @@ impl Story {
     /// Restarts the entire opening, including Ada and Rust's morning.
     pub fn restart(&mut self) {
         *self = Self::new();
+    }
+
+    /// Whether the authored camera still owns the encounter's initial view.
+    /// Awakened checkpoints resume combat directly, without another camera move.
+    pub fn arrival_active(&self) -> bool {
+        self.stage == Stage::Encounter
+            && !self.combat.enemy_awake
+            && self.combat.ticks == 0
+            && self.stage_ticks < ARRIVAL_TICKS
     }
 
     /// Returns the current prologue beat, or none after the historical sequence.
@@ -270,6 +286,7 @@ mod tests {
         }
         assert_eq!(story.ambient, AmbientState::default());
         story.advance_scene();
+        story.skip_segment(); // The camera hands control to the player.
         story.combat.player.position.x = super::super::combat::ENCOUNTER_TRIGGER_X;
         story.tick(CombatInput::default());
         assert_eq!(story.ambient.kid_phase(), KidPhase::Startled);
@@ -479,6 +496,16 @@ mod tests {
         assert_eq!(story.combat.player.position.x, 340.0);
         assert_eq!(story.combat.player.action, Action::Idle);
         assert!(!story.combat.enemy_awake);
+        for _ in 0..ARRIVAL_TICKS {
+            assert!(story.arrival_active());
+            story.tick(noisy_input);
+            assert_eq!(story.combat.ticks, 0);
+            assert_eq!(story.combat.player.position.x, 340.0);
+            assert_eq!(story.combat.player.action, Action::Idle);
+            assert!(!story.combat.enemy_awake);
+        }
+        assert!(!story.arrival_active());
+        assert_eq!(story.ambient.ticks(), ARRIVAL_TICKS);
         story.tick(CombatInput {
             movement: 1.0,
             ..CombatInput::default()
@@ -544,6 +571,7 @@ mod tests {
         assert_eq!(story.combat.player.hp, story.combat.player.max_hp);
         assert_eq!(story.combat.enemy.hp, story.combat.enemy.max_hp);
         assert!(story.combat.enemy_awake);
+        assert!(!story.arrival_active());
         assert_eq!(story.combat.ticks, 0);
         story.restart();
         assert_eq!(story.stage, Stage::AdaPrologue);
@@ -595,6 +623,33 @@ mod tests {
     }
 
     #[test]
+    fn arrival_skip_releases_control_without_skipping_combat_or_rewinding_the_street() {
+        for age in [0, 60, 240, ARRIVAL_TICKS - 1] {
+            let mut story = Story::new();
+            story.advance_scene();
+            story.advance_scene();
+            for _ in 0..age {
+                story.tick(CombatInput::default());
+            }
+            let ambient = story.ambient.clone();
+            story.skip_segment();
+            assert_eq!(story.stage, Stage::Encounter);
+            assert!(!story.arrival_active());
+            assert_eq!(story.ambient, ambient);
+            assert_eq!(story.combat.ticks, 0);
+            story.tick(CombatInput {
+                movement: 1.0,
+                ..CombatInput::default()
+            });
+            assert!(story.combat.player.position.x > 340.0);
+            assert_eq!(story.combat.player.action, Action::Walk);
+            assert_eq!(story.ambient.ticks(), age + 1);
+            story.skip_segment();
+            assert_eq!(story.stage, Stage::Opening);
+        }
+    }
+
+    #[test]
     fn opening_skip_preserves_each_headline_biography_panel_and_character() {
         let mut story = Story::presentation();
         for seconds in [3, 6, 9, 14, 19, 24, 29, 33, 37, 41] {
@@ -613,6 +668,7 @@ mod tests {
             let mut story = Story::new();
             story.advance_scene();
             story.advance_scene();
+            story.skip_segment(); // Finish the initial camera move first.
             story.combat.player.hp = if outcome == Outcome::Defeat { 0 } else { 37 };
             story.combat.enemy.hp = 54;
             story.combat.outcome = outcome;

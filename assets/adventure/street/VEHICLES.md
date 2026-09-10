@@ -16,7 +16,7 @@ individual sem redesenhar o bairro nem alterar os outros veículos.
 | `vehicle.sedan` | Sedã prata, teto baixo, entre-eixos longo e porta-malas separado. | 172 px |
 | `vehicle.pickup` | Picape compacta branca, cabine dupla e caçamba curta aberta. | 169 px |
 | `vehicle.suv` | SUV grafite, teto alto, trilhos e caixas de roda marcadas. | 160 px |
-| `vehicle.bus` | Ônibus urbano branco, azul e amarelo, duas portas e faixa ampla de janelas. | 280 px |
+| `vehicle.bus` | Ônibus urbano branco, azul e amarelo, duas portas e faixa ampla de janelas. | 440 px |
 | `vehicle.van` | Furgão branco de entregas, compartimento fechado sem janelas laterais. | 149 px |
 
 Esses valores servem à revisão em cena. O ônibus foi desenhado mais comprido
@@ -79,3 +79,7 @@ Conferidos alpha real, seis recortes sem sobreposição, limites da imagem,
 pivôs/rodas internos, consistência das coordenadas e SHA-256. A leitura de
 ônibus, picape, sedã, hatch, SUV e furgão é distinta no atlas. Escala final,
 sobreposição e evacuação devem ser avaliadas nas capturas do runtime.
+
+Na quarta rodada, a escala do ônibus passou de 280 para 440 px de largura
+(≈129 px de altura), preservando a proporção do PNG. Os carros medem 147–172 px
+de largura. A revisão anterior foi aprovada com o pedido de aumentar o ônibus.

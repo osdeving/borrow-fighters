@@ -13,6 +13,7 @@ use std::{
 
 const REQUIRED_KEYS: &[&str] = &[
     "window.title",
+    "street.arrival.controls",
     "street.bar.kind",
     "street.bar.name",
     "street.stop.title",

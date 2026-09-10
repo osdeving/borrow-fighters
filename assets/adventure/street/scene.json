@@ -14,10 +14,10 @@
           "text_key": "street.bar.kind",
           "offset": [
             -3,
-            -195
+            -197
           ],
           "width": 209,
-          "font_size": 9,
+          "font_size": 10,
           "color": [
             49,
             68,
@@ -29,10 +29,10 @@
           "text_key": "street.bar.name",
           "offset": [
             -3,
-            -185
+            -186
           ],
           "width": 209,
-          "font_size": 14,
+          "font_size": 18,
           "color": [
             49,
             68,

@@ -384,6 +384,11 @@ fn run_session(
         }
         if let Some(trace) = trace.as_mut() {
             let c = &story.combat;
+            let arrival_camera = if story.arrival_active() {
+                crate::adventure::arrival::ArrivalShot::at(story.stage_ticks)
+            } else {
+                crate::adventure::arrival::ArrivalShot::settled()
+            };
             let ambience = serde_json::json!({
                 "ticks": story.ambient.ticks(),
                 "kid_phase": format!("{:?}", story.ambient.kid_phase()),
@@ -415,7 +420,7 @@ fn run_session(
             writeln!(
                 trace,
                 "{}",
-                serde_json::json!({"frame":frame,"seconds":capture_seconds,"wall_seconds":std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).ok().map(|time| time.as_secs_f64()),"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"waiting_for_continue":return_on_complete && complete_at_start && !completion.accepted,"continue_accepted":completion.accepted,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"ambience":ambience,"audio_synced_after_skip":audio_synced_after_skip,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
+                serde_json::json!({"frame":frame,"seconds":capture_seconds,"wall_seconds":std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).ok().map(|time| time.as_secs_f64()),"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"waiting_for_continue":return_on_complete && complete_at_start && !completion.accepted,"continue_accepted":completion.accepted,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"ambience":ambience,"arrival_active":story.arrival_active(),"arrival_camera":{"x":arrival_camera.target.x,"y":arrival_camera.target.y,"zoom":arrival_camera.zoom},"audio_synced_after_skip":audio_synced_after_skip,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
             )?;
         }
         {
@@ -664,7 +669,15 @@ impl Review {
             Stage::Encounter if story.combat.enemy.action == Action::Telegraph => {
                 "encounter-warning.png".into()
             }
-            Stage::Encounter if story.stage_ticks == 1 => "encounter-explore.png".into(),
+            Stage::Encounter if story.arrival_active() && story.stage_ticks == 1 => {
+                "encounter-arrival-kite.png".into()
+            }
+            Stage::Encounter if story.arrival_active() && story.stage_ticks == 180 => {
+                "encounter-arrival-descent.png".into()
+            }
+            Stage::Encounter if story.stage_ticks == crate::adventure::arrival::ARRIVAL_TICKS => {
+                "encounter-explore.png".into()
+            }
             Stage::Aftermath if story.combat.player.action == Action::Remorse => {
                 format!("aftermath-{}.png", story.combat.player.action_ticks / 60)
             }

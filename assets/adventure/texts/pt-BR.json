@@ -84,6 +84,7 @@
     "street.bar.kind": "BAR E MERCEARIA",
     "street.bar.name": "CASA NOSSA",
     "street.stop.title": "PONTO DE ÔNIBUS",
-    "street.stop.route": "010\nCENTRO"
+    "street.stop.route": "010\nCENTRO",
+    "street.arrival.controls": "Enter / RB  começar a explorar     Esc / Start  pausar"
   }
 }

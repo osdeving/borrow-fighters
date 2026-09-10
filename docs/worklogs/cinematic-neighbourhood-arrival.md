@@ -19,3 +19,18 @@ ficam em `~/.codex/generated_images/` até seleção. Sem integração à main/t
 - Áudio: manhã, exterior, fade do trânsito e cues de cão/porta.
 - Estado da vizinhança/render próprio será delegado assim que houver slot.
 - Pendente: implementação, artes, integração, verificações, evidências e commits.
+
+## Câmera, controle e leitura
+
+- Câmera pura de 360 ticks: pipa em primeiro plano, descida, Rust e encaixe
+  exato no enquadramento jogável. Combate e ações ficam retidos; ambiente
+  avança. Avançar na tomada libera exploração; retry acordado dispensa câmera.
+- Letreiro usa Barlow Condensed SemiBold, mipmaps e filtro trilinear; nome
+  aumentado para18 px. Ônibus de440×129px, com silhueta original preservada.
+- `cargo test --lib adventure::story`:14/14; `adventure::arrival`:1/1.
+  Testes antigos ajustados para passar pela chegada antes de exercer combate.
+- Build de borrow-adventure aprovado. Captura `.git/neighbourhood-review/arrival-1`
+  inspecionada: início na pipa, descida pela mercearia, revelação de Rust,
+  entrega de controle e ônibus inteiro. Texto legível, sem salto de enquadramento.
+- Próximos passos: integrar moradores/cão/porta e áudio, validar entrada/oclusão
+  e fechamento, matriz final e vídeos com som nativo.

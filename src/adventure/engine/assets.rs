@@ -3,6 +3,7 @@
 //! System: Adventure presentation. This small catalog never reads fighting
 //! manifests, boxes, character selection or gameplay tuning.
 
+use raylib::core::{AsRawMut, text::RaylibFont};
 use raylib::prelude::*;
 use serde::Deserialize;
 use std::{error::Error, fs};
@@ -37,6 +38,8 @@ pub struct Assets {
     pub body: Font,
     /// Narrative title font.
     pub title: Font,
+    /// Heavier, filtered lettering for small signs inside the street scene.
+    pub signage: Font,
 }
 
 impl Assets {
@@ -60,6 +63,18 @@ impl Assets {
             64,
             Some(&glyphs),
         )?;
+        let mut signage = rl.load_font_ex(
+            thread,
+            &asset_path("assets/adventure/fonts/BarlowCondensed-SemiBold.ttf").to_string_lossy(),
+            64,
+            Some(&glyphs),
+        )?;
+        // SAFETY: the live font owns this texture. Raylib updates its mipmap
+        // count without changing glyph pointers or transferring ownership.
+        unsafe { raylib::ffi::GenTextureMipmaps(&mut signage.as_raw_mut().texture) };
+        signage
+            .texture()
+            .set_texture_filter(thread, TextureFilter::TEXTURE_FILTER_TRILINEAR);
         Ok(Self {
             opening: super::opening::OpeningAssets::load(rl, thread)?,
             text,
@@ -74,6 +89,7 @@ impl Assets {
             action_bounds: pose_bounds("rust-actions-poses.json", 16)?,
             body,
             title,
+            signage,
         })
     }
 }
