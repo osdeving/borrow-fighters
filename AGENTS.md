@@ -24,6 +24,16 @@
 - Use `$borrow-fighters-art-direction` for moods, characters, sprites, placeholders, and visual feedback.
 - Read only the references needed for the task; do not load every doc by default.
 
+## Experiments and resumable work
+
+- Keep adventure-specific code and assets separate from fighting-specific code;
+  share only neutral core utilities. See `docs/adr/0021-isolated-adventure-experiment.md`.
+- For sustained goals, keep a task journal under `docs/worklogs/` with branch,
+  completed work, pending steps, commands/results and recovery instructions.
+- Update the journal at meaningful checkpoints and commit coherent stages
+  frequently when authorized. After interruption, inspect status/log and the
+  journal before repeating work; preserve uncommitted changes.
+
 ## Verification
 
 - For docs-only changes, validate Markdown links and GitHub YAML when relevant.

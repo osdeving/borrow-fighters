@@ -4,6 +4,14 @@
 
 Implementado em corte inicial.
 
+O experimento de aventura autorizado em 10 de setembro de 2026 acrescenta
+`src/adventure/` e um binário independente, atrás da feature `adventure`.
+Os módulos atuais de luta ficam atrás de `fighting`, ligada por padrão.
+Somente `math` e `runtime_paths` são core compartilhado; regras, cenas, input,
+renderização, áudio e assets específicos não cruzam entre os jogos.
+Veja a [ADR 0021](adr/0021-isolated-adventure-experiment.md) e o
+[diário de retomada](worklogs/rust-adventure-prologue.md).
+
 Este documento descreve a arquitetura atual do protótipo Rust + Raylib e mantém algumas intenções futuras. A regra segue sendo evitar transformar o projeto em uma engine antes de provar o combate.
 
 ## Objetivo

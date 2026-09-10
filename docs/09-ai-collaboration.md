@@ -51,6 +51,12 @@ Use /borrow-fighters-gameplay-design para revisar esta ideia de golpe e apontar 
 
 ## Rotas de contexto
 
+Para goals longos, manter um diário em `docs/worklogs/` com branch, último
+checkpoint, tarefas concluídas/pendentes e verificações reais. Atualizar e
+commitar por etapas coerentes quando autorizado. Após interrupção, ler o diário,
+conferir `git status`/`git log` e preservar trabalho não commitado antes de retomar.
+O [experimento de aventura](worklogs/rust-adventure-prologue.md) usa esse fluxo.
+
 - Produto e escopo: `docs/00-vision.md`, `docs/01-mini-gdd.md`, `docs/02-prototype-scope.md`.
 - Governança: `docs/05-governance.md`, `CONTRIBUTING.md`.
 - Código: `docs/08-code-architecture.md`, `docs/12-technical-combat-guide.md`, `docs/11-sprite-pipeline.md`, ADRs em `docs/adr/`.
