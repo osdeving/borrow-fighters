@@ -2,11 +2,37 @@
 
 ## Estado atual
 
+- Fechamento autorizado de `v0.1.0-prototype.4`: todos os arquivos, incluindo
+  as edições narrativas do usuário, serão commitados e integrados à `main`.
+  O estado da publicação está no [diário da release](release-prototype-4.md).
+- Entrada conjunta oficial por pedido do usuário: `cargo run` executa
+  `borrow-story`, com `fighting` e `adventure` habilitadas por padrão.
+  `cargo run -- --menu` entra no menu e `cargo run -- --start opening` revê
+  a apresentação. Domínios isolados continuam disponíveis com feature/binário
+  explícitos e `--no-default-features`. ADR 0023 registra a atualização.
+  Verificado: Fmt, Clippy, 432 testes com defaults, 395 luta, 38 aventura/core,
+  3 core e 56 fixtures de fronteira. Inicialização pelo Cargo sem `--bin` nem
+  `--features` confirmou `borrow-story` e `AdaPrologue` no renderer.
+- Revisão de navegação concluída após reinício em 2026-09-10: prompt original
+  recuperado do histórico local, com confirmação no final, avanço por trechos e
+  pular tudo direto ao menu. Alterações anteriores preservadas; cópia do diff
+  inicial em `/tmp/borrow-navigation-recovered.patch` nesta sessão.
+  Integração completada com oito textos `navigation.*`, validação do catálogo e
+  correção do limite da revisão automática para permitir confirmação/fade.
+  Todos os 68 valores anteriores do catálogo do usuário continuam intactos.
+  Matriz aprovada: 432 ambos, 395 luta, 38 aventura/core e 3 core; Fmt, Clippy,
+  fronteiras e 54 fixtures. Aventura isolada: seis checks X11 aprovados para
+  skip total, pausa, replay, retry, skip do encontro e saída.
+  Entrada conjunta: 81 checks X11 aprovados; confirmação por tecla/clique,
+  tecla segurada, skip direto e revisão automática verificados. Capturas,
+  vídeo e resultados em [evidências da navegação](../evidence/story-terminal-menu/navigation/README.md).
+  Sem etapa técnica pendente. Controle físico e avaliação auditiva não realizados.
+  Trabalho local sobre `f90304b`; alterações não commitadas preservadas.
 - Rodada 3 concluída: [junção com menu de terminal](../29-story-terminal-menu.md)
   e [ADR 0023](../adr/0023-story-to-terminal-menu.md). Go saiu da apresentação;
   conclusão abre o menu na mesma janela; Modo História inerte, cursor bloco,
   moldura, título coerente e revelação binária implementados.
-- Para executar tudo: `cargo run --features adventure --bin borrow-story`.
+- Para executar tudo: `cargo run`.
   `--start opening` revê apresentação → menu; `--menu` abre diretamente o menu.
 - Checkpoints: `67d6441` (escopo), `5ea92d4` (junção/menu), `0574347` (antecipar
   gráficos para retirar espera escura no final). Evidências e fechamento no
@@ -56,6 +82,18 @@
 
 ## Pedido autoritativo
 
+Revisão de navegação recuperada do histórico local após o reinício:
+
+> quando termina toda a história prologue, não vai para o menu? teria que adicionar
+> um 'aprte qualquer tecla para continuar' e cair no menu principal... E precisa
+> também ter opção de pular tudo... não dá pro jogador ficar vendo tudo isso toda
+> hora... precisa ser possível dar skip tanto em cada parte, pra ir pulando mais
+> rapidinho e ver/rever a ceninha que ele quiser ver novamente, ou pular realmente
+> tudo e ir direto pro menu, manja? E se ele seguir normalmente, aí no final ter
+> o aperte qualquer tecla...
+
+Pedido inicial do experimento:
+
 Ada começa humana num mundo normal, aprende Linker, recebe mensagem misteriosa
 e desperta Assembly, a primeira EP. Ada torna-se híbrida humana/EP; o prólogo
 deixa suas consequências em aberto. Muito tempo depois, Rust, a EP mais recente,
@@ -90,6 +128,39 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 - [x] Fechar docs, diário e commits de entrega.
 
 ## Checkpoints
+
+- 2026-09-10, entrada conjunta promovida a padrão: Cargo, checker de fronteiras,
+  exemplos de CLI e ADRs sincronizados. Comandos de luta/ferramentas agora
+  explicitam `--bin borrow-fighters`; `cargo run` segue história → menu.
+  Matriz/defaults e isolamento aprovados, com logs em `/tmp/borrow-default-entry-checks`.
+  Smoke de janela: `cargo run -- --hidden --mute --frames 3 --capture DIR`
+  confirmou `AdaPrologue`, três frames e saída por limite em
+  `/tmp/borrow-default-run-smoke-6t60rnrm`. Help da composição passou; help da
+  luta manteve seu código 2 já existente, com exemplos novos conferidos.
+  Links locais e `git diff --check` aprovados. Alterações anteriores e textos
+  do usuário preservados; nenhuma publicação ou mudança de pacote de release.
+
+- 2026-09-10, navegação concluída: 81 checks X11 da composição e seis do modo
+  isolado aprovados. Prompt final, controles da pausa e destinos de menu
+  conferidos visualmente. Confirmação nova → cabeçalho do menu levou cerca de
+  1,13 s no host (amostragem de aproximadamente 100 ms). A captura conjunta
+  preservou o mesmo binário e catálogo; nenhuma alteração Rust depois da matriz.
+  Resultados e capturas arquivados em `docs/evidence/story-terminal-menu/navigation/`.
+  Comando para jogar: `cargo run --features adventure --bin borrow-story`;
+  `-- --start opening` começa na apresentação, `-- --menu` abre direto o menu.
+
+- 2026-09-10, retomada após reinício: integração do trabalho recuperado concluída.
+  A ausência dos textos `navigation.*` e o encerramento precoce de `--review`
+  hospedado foram corrigidos. Testes e logs em `/tmp/borrow-navigation-validation`;
+  checks isolados em `/tmp/borrow-navigation-standalone-5drvvdmp`.
+  `python3` do host é 3.8; o checker exige 3.11+, então fronteiras e suas
+  fixtures foram executados com `python3.13`, ambos aprovados. Nenhum texto
+  narrativo existente foi alterado. Captura conjunta concluída no checkpoint acima.
+
+- 2026-09-10, navegação iniciada: final deixa de avançar automaticamente;
+  Enter/RB passa por trechos, Backspace/View abre menu diretamente. O modo
+  isolado continua independente. Textos permanecem externos e skip de combate
+  não altera HP/outcome. Registrar checks e commit após integrar as frentes.
 
 - 2026-09-10, rodada 3 verificada: `0574347` antecipa texturas da luta, sem
   compartilhar recursos com a aventura. Captura final teve 14 checks aprovados,

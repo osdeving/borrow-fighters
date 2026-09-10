@@ -148,6 +148,37 @@ impl<'aud> AdventureAudio<'aud> {
         }
     }
 
+    /// Aligns music with a skipped scene without replaying abandoned effects.
+    pub fn sync_after_skip(&mut self, story: &Story) {
+        for (_, sound) in &self.sounds {
+            sound.stop();
+        }
+        self.suspended_sounds.clear();
+        self.observed = ObservedAudio {
+            stage: Some(story.stage),
+            stage_ticks: story.stage_ticks,
+            combat_ticks: story.combat.ticks,
+            enemy_awake: story.combat.enemy_awake,
+            hit_tick: story
+                .combat
+                .last_hit
+                .map(|hit| story.combat.ticks.saturating_sub(hit.age_ticks)),
+        };
+        self.update(story, self.paused);
+        if let Some(music) = self.active_music() {
+            let duration = music.get_time_length();
+            if duration > 0.0 && duration.is_finite() {
+                let elapsed = story.stage_ticks as f32 / 60.0;
+                let position = if background_for(story).looping() {
+                    elapsed.rem_euclid(duration)
+                } else {
+                    elapsed.min(duration)
+                };
+                music.seek_stream(position);
+            }
+        }
+    }
+
     fn active_music(&self) -> Option<&Music<'aud>> {
         self.music
             .iter()
@@ -323,6 +354,33 @@ mod tests {
         assert_eq!(audio.observed.stage, Some(Stage::Aftermath));
         audio.update(&story, false);
         assert_eq!(audio.observed.stage, Some(Stage::Opening));
+        assert!(audio.observed.observe(&story).is_empty());
+    }
+
+    #[test]
+    fn skip_discards_suspended_contacts_and_keeps_the_new_scene_paused() {
+        let mut audio = AdventureAudio::new(None);
+        let mut story = Story::new();
+        story.stage = Stage::Encounter;
+        story.combat.ticks = 120;
+        story.combat.last_hit = Some(HitFeedback {
+            target: ActorKind::Erratic,
+            position: Vec2::ZERO,
+            blocked: false,
+            damage: 12,
+            age_ticks: 0,
+        });
+        audio.update(&story, true);
+        audio.suspended_sounds.push(Cue::Strike);
+        story.stage = Stage::Opening;
+        story.stage_ticks = 19 * 60;
+        audio.sync_after_skip(&story);
+        assert!(audio.paused);
+        assert!(audio.suspended_sounds.is_empty());
+        assert_eq!(audio.current_track, Some(Track::Opening));
+        assert!(audio.observed.observe(&story).is_empty());
+        audio.update(&story, false);
+        assert!(!audio.paused);
         assert!(audio.observed.observe(&story).is_empty());
     }
 }

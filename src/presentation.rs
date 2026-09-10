@@ -41,7 +41,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
     if matches!(entry, Entry::Help) {
         println!(
             "Borrow Fighters — história e menu\n\n\
-             cargo run --features adventure --bin borrow-story\n\n\
+             cargo run\n\n\
              --menu                    Open the main menu directly\n\
              --start ada|morning|encounter|opening\n\
                                        Select story entry, then continue to menu\n\
@@ -83,7 +83,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
 }
 
 fn opens_menu(exit: SessionExit) -> bool {
-    exit == SessionExit::Completed
+    matches!(exit, SessionExit::Completed | SessionExit::Skipped)
 }
 
 #[cfg(test)]
@@ -95,6 +95,7 @@ mod tests {
         assert!(!opens_menu(SessionExit::Closed));
         assert!(!opens_menu(SessionExit::FrameLimit));
         assert!(opens_menu(SessionExit::Completed));
+        assert!(opens_menu(SessionExit::Skipped));
     }
 
     #[test]

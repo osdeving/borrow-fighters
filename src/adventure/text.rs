@@ -80,6 +80,14 @@ const REQUIRED_KEYS: &[&str] = &[
     "opening.logo.bottom",
     "opening.subtitle",
     "opening.tagline",
+    "navigation.controls_menu",
+    "navigation.controls",
+    "navigation.ada_controls_menu",
+    "navigation.ada_controls",
+    "navigation.pause_menu",
+    "navigation.pause",
+    "navigation.continue",
+    "navigation.continue_detail",
 ];
 
 #[derive(Deserialize)]

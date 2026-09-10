@@ -23,6 +23,7 @@ precisam de `\"`. JSON não aceita comentários ou vírgula depois do último it
 | `morning.*` | Manhã de Rust |
 | `encounter.*`, `aftermath.*` | Objetivo, comandos e pesar após a luta |
 | `ending.*`, `defeat.*`, `pause.*` | Conclusão, derrota, pausa e opções |
+| `navigation.*` | Próximo trecho, pular tudo e confirmação final da apresentação |
 | `opening.news.*` | Seção, manchete e linha de apoio dos três jornais |
 | `opening.cpp.*`, `opening.python.*` | Nomes, papéis e biografias ilustradas |
 | `opening.duke.*`, `opening.c.*`, `opening.go.*`, `opening.rust.*` | Apresentação dos demais personagens |
@@ -39,6 +40,15 @@ reticências para não cobrir a cena. Mantenha frases curtas e confira o tempo d
 leitura no jogo. O limite técnico é 2.000 caracteres por valor. Recarregar não
 reinicia a cena, a música ou o combate. Novas cenas, durações e comandos ainda
 são alterações de código.
+
+Para conferir a navegação, `Enter`/`RB` avança ao próximo trecho; `A` no controle
+também avança cenas e continua pulando no combate. Em `borrow-story`,
+`Backspace`/`View` pula tudo e abre o menu, inclusive durante combate ou pausa.
+Na conclusão normal, **Aperte qualquer tecla para continuar** espera uma nova
+tecla, clique ou botão; a entrada que avançou o último trecho e teclas mantidas
+pressionadas não confirmam. Em `borrow-adventure`, pular tudo conclui localmente.
+Para sair durante a aventura, feche a janela ou use `B` do controle na pausa.
+[Escopo da navegação](../../../docs/29-story-terminal-menu.md).
 
 Os textos do livro do jogo de luta ficam separadamente em
 [assets/lore/story.json](../../lore/story.json). A apresentação da aventura não

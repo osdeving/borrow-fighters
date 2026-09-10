@@ -5,7 +5,7 @@ This is a small source scanner, not a Rust compiler: it expands use trees and
 resolves crate/self/super paths and import aliases, ignoring comments and string
 contents. Cargo's separate feature builds remain the check for macro expansion
 and type resolution. Keep the rules specific to the package's two domains and
-their opt-in composition root; presentation is never shared core.
+their default composition root; presentation is never shared core.
 
 Requires Python 3.11+ for stdlib tomllib. In the development environment run:
 python3.13 tools/check_domain_boundaries.py
@@ -388,17 +388,17 @@ def check_repository(root: Path) -> list[str]:
     except (OSError, tomllib.TOMLDecodeError) as error:
         return [f"Cargo.toml: {error}"]
     package = manifest.get("package", {})
-    if package.get("default-run") != "borrow-fighters":
-        errors.append('Cargo.toml: package.default-run must remain "borrow-fighters"')
+    if package.get("default-run") != "borrow-story":
+        errors.append('Cargo.toml: package.default-run must be "borrow-story"')
     for discovery in ("autotests", "autoexamples"):
         if package.get(discovery) is not False:
             errors.append(f"Cargo.toml: package.{discovery} must be false; explicitly register every target")
     features = manifest.get("features", {})
     if not DOMAINS.issubset(features):
         errors.append("Cargo.toml: fighting and adventure features must exist")
-    if "fighting" not in features.get("default", []) or "adventure" in features.get("default", []):
-        errors.append("Cargo.toml: default must enable fighting and leave adventure opt-in")
-    for domain in DOMAINS | {"default"}:
+    if sorted(features.get("default", [])) != sorted(DOMAINS):
+        errors.append("Cargo.toml: default must enable exactly fighting and adventure")
+    for domain in DOMAINS:
         enabled = set()
         pending = [domain]
         while pending:
@@ -406,9 +406,7 @@ def check_repository(root: Path) -> list[str]:
             if feature not in enabled:
                 enabled.add(feature)
                 pending.extend(item for item in features.get(feature, []) if item in features)
-        if domain == "default" and "adventure" in enabled:
-            errors.append("Cargo.toml: default must not enable adventure transitively")
-        elif domain != "default" and enabled & (DOMAINS - {domain}):
+        if enabled & (DOMAINS - {domain}):
             errors.append(f"Cargo.toml: {domain} must not enable the other domain")
 
     paths_to_check = set()

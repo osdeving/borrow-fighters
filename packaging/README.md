@@ -4,20 +4,25 @@ O workflow [`release.yml`](../.github/workflows/release.yml) constrói a mesma
 revisão em Windows x86_64/MSVC e Ubuntu 22.04 x86_64. Os scripts usam a biblioteca
 padrão do Python e empacotadores nativos; não fazem commit, push ou publicação.
 
-Na raiz do repositório, depois de `cargo build --locked --release`:
+Na raiz do repositório, depois de `cargo build --locked --release --bin borrow-story`:
 
 ```sh
 python3 tools/release/package.py stage --target linux-x86_64 \
-  --version 0.1.0-prototype.1 --binary target/release/borrow-fighters \
+  --version 0.1.0-prototype.4 --binary target/release/borrow-story \
   --output dist/stage
 python3 tools/release/package.py native-packages --stage dist/stage > dist/native-packages.txt
 xargs -r sudo apt-get install --only-upgrade -y -- < dist/native-packages.txt
 python3 tools/release/package.py linux --stage dist/stage \
-  --version 0.1.0-prototype.1 --output dist
+  --version 0.1.0-prototype.4 --output dist
 python3 tools/release/package.py verify --stage dist/stage
 ```
 
 Use a versão de `Cargo.toml`, sem `v`. O diretório de staging precisa estar vazio.
+O binário de origem deve ser `borrow-story` (ou `borrow-story.exe`): compila com
+as features padrão `adventure` e `fighting` e inicia aventura → apresentação →
+menu. O staging conserva o nome público `borrow-fighters`/`borrow-fighters.exe`
+e os atalhos existentes. Passar o binário isolado de luta é recusado. Para abrir
+o menu diretamente, o jogador pode usar `borrow-fighters --menu`.
 Com `CARGO_BUILD_TARGET`, o binário fica em `target/<target>/release/`.
 No Windows, use `--target windows-x86_64`, o arquivo `.exe` em `--binary` e o
 subcomando `windows`. Compile MSVC com `RUSTFLAGS=-C target-feature=+crt-static`;
@@ -34,15 +39,15 @@ Windows 11**, tanto no instalador quanto no ZIP portátil. O instalador verifica
 essa versão mínima. A [documentação da Microsoft](https://learn.microsoft.com/en-us/windows/apps/design/globalizing/use-utf8-code-page)
 descreve a configuração por processo; o pacote não altera a localidade do sistema.
 
-Artefatos gerados, usando `0.1.0-prototype.1` como exemplo:
+Artefatos gerados, usando `0.1.0-prototype.4` como exemplo:
 
 | Plataforma | Arquivo |
 | --- | --- |
-| Windows portátil | `borrow-fighters-0.1.0-prototype.1-windows-x86_64.zip` |
-| Windows instalador | `borrow-fighters-0.1.0-prototype.1-windows-x86_64-setup.exe` |
-| Linux portátil | `borrow-fighters-0.1.0-prototype.1-linux-x86_64.tar.gz` |
-| Debian/Ubuntu | `borrow-fighters_0.1.0~prototype.1_amd64.deb` |
-| Fedora | `borrow-fighters-0.1.0~prototype.1-1.x86_64.rpm` |
+| Windows portátil | `borrow-fighters-0.1.0-prototype.4-windows-x86_64.zip` |
+| Windows instalador | `borrow-fighters-0.1.0-prototype.4-windows-x86_64-setup.exe` |
+| Linux portátil | `borrow-fighters-0.1.0-prototype.4-linux-x86_64.tar.gz` |
+| Debian/Ubuntu | `borrow-fighters_0.1.0~prototype.4_amd64.deb` |
+| Fedora | `borrow-fighters-0.1.0~prototype.4-1.x86_64.rpm` |
 
 O instalador Windows usa [Inno Setup](https://jrsoftware.org/isinfo.php), instala
 em `%LOCALAPPDATA%\Programs\Borrow Fighters` e cria atalhos. A configuração
@@ -76,16 +81,24 @@ O passo `stage` funciona sem fontes APT, `rpm` ou ambiente gráfico.
 
 O staging coleta caminhos concretos de `src/`, manifesta os seis personagens e
 segue `image` do manifesto e de cada frame, além do manifesto de áudio. Os
+carregadores da aventura acrescentam nomes locais de cenas, poses e áudio;
+`opening/roster.json` fornece somente os retratos de `characters[].image`.
+Textos externos, três fontes próprias, trilha da apresentação e imagens de
+C++/Python acompanham a sequência. O retrato de Go não usado pela apresentação
+fica fora desse conjunto. Os
 campos de procedência `source`, referências artísticas, reviews e vídeos de
 showcase não são dependências de execução. Arquivos de produção usados pelos
 especiais e pelos cenários são incluídos individualmente. Ausência de um asset
 referenciado interrompe o empacotamento.
 
 O pacote inclui [JOGUE-PRIMEIRO.md](JOGUE-PRIMEIRO.md), licenças do projeto,
-créditos de áudio, OFL das fontes, avisos e fontes exatas dos crates resolvidos
+créditos de áudio, OFL das fontes dos dois domínios, procedência da arte da
+aventura, avisos e fontes exatas dos crates resolvidos
 pelo Cargo. O arquivo de fontes dos crates preserva também os notices de
 bibliotecas C embutidos nos headers do Raylib. `BUILD-INFO.json` identifica a
-revisão e `PACKAGE-SHA256SUMS.txt` verifica o conteúdo extraído.
+revisão e o binário Cargo `borrow-story`; `PACKAGE-SHA256SUMS.txt` verifica o
+conteúdo extraído. `verify` também recusa staging de versões antigas sem a
+identificação da composição.
 
 Linux coleta dependências transitivas por `ldd` e também bibliotecas X11, ALSA
 e PulseAudio carregadas por `dlopen`, que não aparecem no `ldd` do jogo. Copia a configuração
@@ -109,7 +122,10 @@ separado.
 `verify` confere assets e hashes e, após empacotar Linux, a resolução de todas
 as bibliotecas incorporadas. O workflow também testa instalação/desinstalação,
 abertura Linux sob Xvfb e instalação do RPM em Fedora. O teste de carga
-`--help` termina com código 2 conforme o parser atual e não abre uma janela.
+`--help` termina com código 0 e não abre uma janela. Os testes do coletor e
+staging rodam com `python3 -m unittest discover -s tools/release -p 'test_*.py'`:
+cobrem assets dinâmicos, retratos transitivos, ausências, hashes, licenças e
+nome público do executável em caminhos com acentos.
 No Windows, o instalador e o ZIP são abertos em pastas com espaços e acentos
 (`Jogo ação instalado` e `Jogo ação portátil`): o CI confere os assets e seus
 hashes, compara o executável com o staging e exige `activeCodePage=UTF-8` no

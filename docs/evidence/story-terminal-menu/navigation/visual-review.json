@@ -1,0 +1,72 @@
+{
+  "method": "view_image on captured native window PNGs, no image editing",
+  "reviewed": [
+    {
+      "file": "screenshots/02-any-key-prompt.png",
+      "passed": true
+    },
+    {
+      "file": "screenshots/02-main-menu.png",
+      "passed": true
+    },
+    {
+      "file": "screenshots/01-final-title.png",
+      "passed": true
+    },
+    {
+      "file": "screenshots/03-story-enter-inert.png",
+      "passed": true
+    },
+    {
+      "file": "screenshots/04-story-space-inert.png",
+      "passed": true
+    },
+    {
+      "file": "screenshots/05-versus-roster.png",
+      "passed": true
+    },
+    {
+      "file": "screenshots/06-roster-back-menu.png",
+      "passed": true
+    },
+    {
+      "file": "screenshots/08-training.png",
+      "passed": true
+    },
+    {
+      "file": "screenshots/09-lore.png",
+      "passed": true
+    },
+    {
+      "file": "screenshots/10-options.png",
+      "passed": true
+    },
+    {
+      "file": "screenshots/11-how-to-play.png",
+      "passed": true
+    },
+    {
+      "file": "screenshots/12-final-main.png",
+      "passed": true
+    },
+    {
+      "file": "screenshots/held-enter-completion.png",
+      "passed": true
+    },
+    {
+      "file": "screenshots/paused-skip-controls.png",
+      "passed": true
+    },
+    {
+      "file": "ada-controls/screenshots/ada-skip-controls.png",
+      "passed": true
+    }
+  ],
+  "notes": [
+    "Final confirmation and skip controls are legible, with no clipping or overlap.",
+    "Main menu and preserved destinations match expected screens.",
+    "Use held-enter-completion.png as the primary title reference; the other prompt capture has a transient logo raster artifact, while its navigation text remains legible."
+  ],
+  "physical_gamepad_tested": false,
+  "audio_listening_performed": false
+}

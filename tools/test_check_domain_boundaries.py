@@ -15,12 +15,12 @@ MANIFEST = '''[package]
 name = "borrow-fighters"
 version = "0.1.0"
 edition = "2024"
-default-run = "borrow-fighters"
+default-run = "borrow-story"
 autotests = false
 autoexamples = false
 
 [features]
-default = ["fighting"]
+default = ["fighting", "adventure"]
 fighting = []
 adventure = []
 
@@ -256,9 +256,19 @@ const ABSOLUTE: &str = "/assets/adventure/art.png";
         self.write("Cargo.toml", MANIFEST.replace("adventure = []", 'adventure = ["shared_extra"]\nshared_extra = ["fighting"]'))
         self.assert_violation("adventure must not enable the other domain")
 
-    def test_default_feature_alias_cannot_enable_adventure_transitively(self):
-        self.write("Cargo.toml", MANIFEST.replace('default = ["fighting"]', 'default = ["fighting", "surprise"]\nsurprise = ["adventure"]'))
-        self.assert_violation("default must not enable adventure transitively")
+    def test_default_features_require_both_domains_only(self):
+        for features in ('["adventure"]', '["fighting"]', '[]', '["fighting", "adventure", "extra"]', '["fighting", "adventure", "adventure"]'):
+            with self.subTest(features=features):
+                self.write("Cargo.toml", MANIFEST.replace('default = ["fighting", "adventure"]', f"default = {features}"))
+                self.assert_violation("default must enable exactly fighting and adventure")
+
+    def test_default_features_accept_either_order(self):
+        self.write("Cargo.toml", MANIFEST.replace('default = ["fighting", "adventure"]', 'default = ["adventure", "fighting"]'))
+        self.assertEqual(self.errors(), [])
+
+    def test_default_feature_alias_cannot_replace_explicit_domains(self):
+        self.write("Cargo.toml", MANIFEST.replace('default = ["fighting", "adventure"]', 'default = ["fighting", "surprise"]\nsurprise = ["adventure"]'))
+        self.assert_violation("default must enable exactly fighting and adventure")
 
     def test_composition_can_only_use_app_boundaries_and_neutral_utilities(self):
         self.write("src/presentation.rs", '''
@@ -375,9 +385,9 @@ mod tests { use super::*; }
         self.write("Cargo.toml", MANIFEST.replace('[[bin]]\nname = "borrow-story"\npath = "src/bin/borrow-story.rs"\nrequired-features = ["fighting", "adventure"]\n', ""))
         self.assert_violation("missing borrow-story binary")
 
-    def test_default_run_must_preserve_standalone_fighting(self):
-        self.write("Cargo.toml", MANIFEST.replace('default-run = "borrow-fighters"', 'default-run = "borrow-story"'))
-        self.assert_violation('package.default-run must remain "borrow-fighters"')
+    def test_default_run_must_start_story(self):
+        self.write("Cargo.toml", MANIFEST.replace('default-run = "borrow-story"', 'default-run = "borrow-fighters"'))
+        self.assert_violation('package.default-run must be "borrow-story"')
 
 
 if __name__ == "__main__":

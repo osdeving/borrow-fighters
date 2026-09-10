@@ -1,0 +1,78 @@
+{
+  "success": true,
+  "checks": [
+    {
+      "name": "ada_scene_loaded",
+      "passed": true
+    },
+    {
+      "name": "ada_skip_after_controls_capture",
+      "passed": true,
+      "result": {
+        "enemy_hp": 96,
+        "events": [
+          {
+            "enemy_hp": 96,
+            "frame": 0,
+            "player_hp": 100,
+            "seconds": 0.01666666753590107,
+            "stage": "AdaPrologue"
+          }
+        ],
+        "exit_reason": "Skipped",
+        "final_stage": "AdaPrologue",
+        "frames": 44,
+        "limitations": "Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest.",
+        "mode": "window_input_capture",
+        "outcome": "Ongoing",
+        "paused_frames": 0,
+        "player_hp": 100
+      }
+    },
+    {
+      "name": "ada_skip_after_controls_capture_same_window",
+      "passed": true
+    },
+    {
+      "name": "ada_skip_after_controls_capture_never_waited_at_completion",
+      "passed": true
+    },
+    {
+      "name": "clean_exit",
+      "passed": true
+    },
+    {
+      "name": "catalog_unchanged",
+      "passed": true
+    },
+    {
+      "name": "binary_unchanged",
+      "passed": true
+    },
+    {
+      "name": "no_x11_errors",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "captures": [
+    {
+      "file": "screenshots/ada-skip-controls.png",
+      "expected": "Ada scene with Tab reveal and segment/global skip controls",
+      "window": 8388615,
+      "sha256": "b27613dc358331e7092d28048e72bca6598ae56f9bf267fb3acd585aeedcc2ba",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/ada_skip_after_controls_capture.png",
+      "expected": "Main terminal menu after skipping the whole prologue",
+      "window": 8388615,
+      "sha256": "5ad62f660893cbf0ce862c51f275e3004c64ac8f950bc2a66a02682f9c9a8d7a",
+      "validation": "visual review pending"
+    }
+  ],
+  "executable_sha256": "ba8c73f8c5bbe30dd36702ec612b6a7dc8cda52cd5d3b8bc246fb2d2d89b7707",
+  "catalog_sha256": "093b82f244ca205e7ba08121c006e0b2c263a5233ea0093fb4ee1ca4d3ecb2b4",
+  "input": "XSendEvent directed to owned PID/window",
+  "capture": "XGetImage of that window, unchanged source pixels"
+}

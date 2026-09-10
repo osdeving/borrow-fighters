@@ -4,6 +4,10 @@ Entrega na branch `feature/rust-adventure-prologue`, em 10/09/2026.
 [Escopo](../../29-story-terminal-menu.md) e
 [decisão de composição](../../adr/0023-story-to-terminal-menu.md).
 
+A [revisão de navegação após o reinício](navigation/README.md) acrescenta skip
+por trecho, skip total e confirmação no título final. Os números e a passagem
+automática descritos abaixo preservam a rodada anterior.
+
 ## Desenho
 
 - [Menu principal](terminal-menu.png): marca creme/dourada, subtítulo, moldura e primeira opção reservada.

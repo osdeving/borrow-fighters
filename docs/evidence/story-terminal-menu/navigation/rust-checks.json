@@ -1,0 +1,82 @@
+[
+  {
+    "name": "fmt",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.36,
+    "passed_tests": 0
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "seconds": 3.08,
+    "passed_tests": 0
+  },
+  {
+    "name": "both",
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--all-features"
+    ],
+    "exit_code": 0,
+    "seconds": 8.17,
+    "passed_tests": 432
+  },
+  {
+    "name": "fighting",
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--no-default-features",
+      "--features",
+      "fighting"
+    ],
+    "exit_code": 0,
+    "seconds": 3.81,
+    "passed_tests": 395
+  },
+  {
+    "name": "adventure",
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--no-default-features",
+      "--features",
+      "adventure"
+    ],
+    "exit_code": 0,
+    "seconds": 0.85,
+    "passed_tests": 38
+  },
+  {
+    "name": "core",
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--no-default-features"
+    ],
+    "exit_code": 0,
+    "seconds": 0.04,
+    "passed_tests": 3
+  }
+]

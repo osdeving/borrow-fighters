@@ -35,8 +35,9 @@ do jogador. Vitória leva ao olhar abaixado e balanço de cabeça, com a frase
 As cenas combinam quadros ilustrados, poses, câmera, transições e efeitos;
 o primeiro corte não é animação corporal contínua em todos os quadros. Há
 movimento, salto, ataques leve/forte, defesa, pausa, replay e áudio próprio.
-Arte e regras de ação pertencem à aventura. `cargo run` mantém a luta como
-padrão. A [evidência](evidence/adventure-prologue/README.md) registra 412 testes
+Arte e regras de ação pertencem à aventura. A execução isolada acima preserva
+esse recorte; `cargo run` inicia a [sequência conjunta](29-story-terminal-menu.md)
+de aventura, apresentação e menu principal. A [evidência](evidence/adventure-prologue/README.md) registra 412 testes
 com ambos os modos, execução pela janela e limites do playtest automatizado.
 
 ## Intenção do experimento

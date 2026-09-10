@@ -78,7 +78,7 @@ impl Options {
                 "--hidden" => options.hidden = true,
                 "--help" | "-h" => {
                     println!(
-                        "Borrow — primeiras linhas\n\ncargo run --no-default-features --features adventure --bin borrow-adventure\n\n--start ada|morning|encounter|opening  Developer scene entry\n--review DIR                 Deterministic renderer review + MP4\n--capture DIR                Record actual play + frame snapshots\n--texts PATH                 Editable UTF-8 JSON catalog (F5 reload)\n--frames N                   Exit after N rendered frames\n--mute                       Disable audio device\n--hidden                     Hidden window for isolated review\n\nA/D/arrows move; Space/W jump; J/F attack; K/H strong; Q/L guard.\nEnter skips cinematic scenes; Esc pauses; R retries a lost encounter.\nF3 shows collision; F12 saves a screenshot."
+                        "Borrow — primeiras linhas\n\ncargo run --no-default-features --features adventure --bin borrow-adventure\n\n--start ada|morning|encounter|opening  Developer scene entry\n--review DIR                 Deterministic renderer review + MP4\n--capture DIR                Record actual play + frame snapshots\n--texts PATH                 Editable UTF-8 JSON catalog (F5 reload)\n--frames N                   Exit after N rendered frames\n--mute                       Disable audio device\n--hidden                     Hidden window for isolated review\n\nA/D/arrows move; Space/W jump; J/F attack; K/H strong; Q/L guard.\nEnter/RB advances one segment; Backspace/View skips the entire opening.\nSkipping all opens the menu in borrow-story or the local ending in borrow-adventure.\nEsc/Start pauses; R retries a lost encounter; F3 shows collision; F12 saves a screenshot."
                     );
                     return Ok(None);
                 }
@@ -103,8 +103,10 @@ impl Options {
 /// Why a hosted session returned control, without exposing gameplay state.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum SessionExit {
-    /// The presentation finished or was explicitly skipped.
+    /// The presentation finished and the player confirmed its final prompt.
     Completed,
+    /// The player explicitly requested skipping the entire opening.
+    Skipped,
     /// The player closed the window or chose to leave the adventure.
     Closed,
     /// A developer frame limit ended this run, before any continuation.
@@ -137,9 +139,10 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
     run_session(&mut rl, &thread, options, text, false).map(|_| ())
 }
 
-/// Runs in a host-owned window and returns after the final presentation fades out.
+/// Runs in a host-owned window, waits for a fresh final confirmation and fades out.
 ///
 /// All adventure textures, audio and capture resources are released before return.
+/// Skipping the entire opening returns immediately with `SessionExit::Skipped`.
 /// Closing or truncating a session never reports a completed presentation.
 pub fn run_in_window(
     rl: &mut RaylibHandle,
@@ -205,7 +208,7 @@ fn run_session(
     let mut capture_seconds = 0.0f32;
     let mut previous_frame_time = std::time::Instant::now();
     let mut exit = SessionExit::Closed;
-    let mut completion_frames = 0u32;
+    let mut completion = ContinuePrompt::default();
     while !rl.window_should_close() {
         let now = std::time::Instant::now();
         let frame_time = if frame == 0 {
@@ -215,7 +218,34 @@ fn run_session(
         };
         previous_frame_time = now;
         let mut suppress = false;
-        if !reviewing && !(return_on_complete && story.stage == Stage::Complete) {
+        let complete_at_start = story.stage == Stage::Complete;
+        // Drain every frame: a press queued during Ada must not dismiss the
+        // final prompt minutes later. Held keys are not fresh press edges.
+        // The desktop backend queues GLFW_PRESS only, never GLFW_REPEAT. Keep
+        // the queue so a quick press/release between frames still counts.
+        let mut any_key_pressed = false;
+        while rl.get_key_pressed_number().is_some() {
+            any_key_pressed = true;
+        }
+        let any_pad_pressed = rl.get_gamepad_button_pressed().is_some_and(|button| {
+            (0..4).any(|pad| {
+                rl.is_gamepad_available(pad) && rl.is_gamepad_button_pressed(pad, button)
+            })
+        });
+        let any_mouse_pressed = [
+            MouseButton::MOUSE_BUTTON_LEFT,
+            MouseButton::MOUSE_BUTTON_RIGHT,
+            MouseButton::MOUSE_BUTTON_MIDDLE,
+            MouseButton::MOUSE_BUTTON_SIDE,
+            MouseButton::MOUSE_BUTTON_EXTRA,
+            MouseButton::MOUSE_BUTTON_FORWARD,
+            MouseButton::MOUSE_BUTTON_BACK,
+        ]
+        .into_iter()
+        .any(|button| rl.is_mouse_button_pressed(button));
+        let continue_pressed =
+            complete_at_start && (any_key_pressed || any_pad_pressed || any_mouse_pressed);
+        if !reviewing {
             if rl.is_key_pressed(KeyboardKey::KEY_F5) {
                 let result = assets.text.reload();
                 let ok = result.is_ok();
@@ -230,10 +260,28 @@ fn run_session(
             }
             let has_pad = rl.is_gamepad_available(0);
             let pad_pressed = |button| has_pad && rl.is_gamepad_button_pressed(0, button);
+            let skip_all = rl.is_key_pressed(KeyboardKey::KEY_BACKSPACE)
+                || pad_pressed(GamepadButton::GAMEPAD_BUTTON_MIDDLE_LEFT);
+            if skip_all && !completion.accepted {
+                if return_on_complete {
+                    exit = SessionExit::Skipped;
+                    break;
+                }
+                story.stage = Stage::Complete;
+                story.stage_ticks = 0;
+                paused = false;
+                suppress = true;
+            }
             let confirm = rl.is_key_pressed(KeyboardKey::KEY_ENTER);
             let pause_pressed = rl.is_key_pressed(KeyboardKey::KEY_ESCAPE)
                 || pad_pressed(GamepadButton::GAMEPAD_BUTTON_MIDDLE_RIGHT);
-            if pause_pressed {
+            let hosted_end = return_on_complete && complete_at_start;
+            if hosted_end {
+                // Every fresh button, including Escape, confirms this screen.
+                // Pause/replay commands belong to the standalone completion UI.
+                paused = false;
+                suppress = true;
+            } else if pause_pressed {
                 if story.stage == Stage::Complete {
                     break;
                 }
@@ -245,10 +293,7 @@ fn run_session(
                 paused = false;
                 suppress = true;
             }
-            if paused
-                && (rl.is_key_pressed(KeyboardKey::KEY_BACKSPACE)
-                    || pad_pressed(GamepadButton::GAMEPAD_BUTTON_RIGHT_FACE_RIGHT))
-            {
+            if paused && pad_pressed(GamepadButton::GAMEPAD_BUTTON_RIGHT_FACE_RIGHT) {
                 break;
             }
             if !paused && !suppress {
@@ -261,7 +306,8 @@ fn run_session(
                 }
                 let retry = rl.is_key_pressed(KeyboardKey::KEY_R)
                     || pad_pressed(GamepadButton::GAMEPAD_BUTTON_RIGHT_FACE_DOWN);
-                if (story.combat.outcome == Outcome::Defeat || story.stage == Stage::Complete)
+                if (story.stage == Stage::Encounter && story.combat.outcome == Outcome::Defeat
+                    || story.stage == Stage::Complete)
                     && retry
                 {
                     story.retry();
@@ -271,10 +317,14 @@ fn run_session(
                 {
                     story.restart();
                     suppress = true;
-                } else if story.stage != Stage::Encounter
-                    && (confirm || pad_pressed(GamepadButton::GAMEPAD_BUTTON_RIGHT_FACE_DOWN))
+                } else if confirm
+                    || pad_pressed(GamepadButton::GAMEPAD_BUTTON_RIGHT_TRIGGER_1)
+                    || (story.stage != Stage::Encounter
+                        && pad_pressed(GamepadButton::GAMEPAD_BUTTON_RIGHT_FACE_DOWN))
                 {
-                    story.advance_scene();
+                    story.skip_segment();
+                    audio.sync_after_skip(&story);
+                    reveal_text = false;
                     suppress = true;
                 }
             }
@@ -320,6 +370,9 @@ fn run_session(
                 accumulator = accumulator.min(1.0 / 60.0);
             }
         }
+        if return_on_complete {
+            completion.tick(story.stage == Stage::Complete, continue_pressed, reviewing);
+        }
         audio.update(&story, paused);
         capture_seconds += if reviewing { 1.0 / 60.0 } else { frame_time };
         if frame == 0 || story.stage != previous_stage {
@@ -332,23 +385,37 @@ fn run_session(
             writeln!(
                 trace,
                 "{}",
-                serde_json::json!({"frame":frame,"seconds":capture_seconds,"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
+                serde_json::json!({"frame":frame,"seconds":capture_seconds,"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"waiting_for_continue":return_on_complete && complete_at_start && !completion.accepted,"continue_accepted":completion.accepted,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
             )?;
         }
         {
             let mut draw = rl.begin_texture_mode(thread, &mut target);
             if return_on_complete && story.stage == Stage::Complete {
                 opening::draw(&mut draw, &story, &assets);
-                completion_frames += 1;
                 draw.draw_rectangle(
                     0,
                     0,
                     render::WIDTH,
                     render::HEIGHT,
-                    Color::new(14, 19, 26, (255 * completion_frames.min(24) / 24) as u8),
+                    Color::new(
+                        14,
+                        19,
+                        26,
+                        (255 * completion.fade_frames.min(24) / 24) as u8,
+                    ),
                 );
             } else {
                 render::draw(&mut draw, &story, &assets, paused, debug, reveal_text);
+            }
+            if !completion.accepted {
+                render::navigation(
+                    &mut draw,
+                    &assets,
+                    &story,
+                    return_on_complete,
+                    paused,
+                    capture_seconds,
+                );
             }
             if let Some((ok, _)) = reload_notice {
                 render::reload_notice(&mut draw, &assets, ok);
@@ -408,14 +475,14 @@ fn run_session(
             exit = SessionExit::FrameLimit;
             break;
         }
-        if return_on_complete && completion_frames >= 24 {
+        if return_on_complete && completion.fade_frames >= 24 {
             exit = SessionExit::Completed;
             break;
         }
         if reviewing && story.stage == Stage::Complete {
             review.complete_frames += 1;
         }
-        if reviewing && (review.complete_frames >= 180 || frame >= 60 * 150) {
+        if reviewing && review.capture_finished(return_on_complete) {
             break;
         }
     }
@@ -425,7 +492,7 @@ fn run_session(
         fs::write(
             directory.join("result.json"),
             serde_json::to_string_pretty(
-                &serde_json::json!({"frames":frame,"mode":if reviewing {"deterministic_review"}else{"window_input_capture"},"final_stage":format!("{:?}",story.stage),"outcome":format!("{:?}",story.combat.outcome),"player_hp":story.combat.player.hp,"enemy_hp":story.combat.enemy.hp,"events":events,"paused_frames":review.paused_frames,"limitations":"Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest."}),
+                &serde_json::json!({"frames":frame,"mode":if reviewing {"deterministic_review"}else{"window_input_capture"},"exit_reason":format!("{:?}",exit),"final_stage":format!("{:?}",story.stage),"outcome":format!("{:?}",story.combat.outcome),"player_hp":story.combat.player.hp,"enemy_hp":story.combat.enemy.hp,"events":events,"paused_frames":review.paused_frames,"limitations":"Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest."}),
             )?,
         )?;
         if reviewing && story.stage != Stage::Complete {
@@ -435,6 +502,31 @@ fn run_session(
         }
     }
     Ok(exit)
+}
+
+#[derive(Default)]
+struct ContinuePrompt {
+    shown: bool,
+    accepted: bool,
+    held_frames: u32,
+    fade_frames: u32,
+}
+
+impl ContinuePrompt {
+    fn tick(&mut self, complete: bool, fresh_press: bool, automated_review: bool) {
+        if !complete {
+            *self = Self::default();
+            return;
+        }
+        if self.shown && (fresh_press || automated_review && self.held_frames >= 180) {
+            self.accepted = true;
+        }
+        self.shown = true;
+        self.held_frames = self.held_frames.saturating_add(1);
+        if self.accepted {
+            self.fade_frames += 1;
+        }
+    }
 }
 
 fn input(rl: &RaylibHandle) -> CombatInput {
@@ -484,6 +576,12 @@ struct Review {
 }
 
 impl Review {
+    fn capture_finished(&self, hosted: bool) -> bool {
+        // The host waits for ContinuePrompt's simulated press and full fade.
+        // Only the standalone capture ends as soon as its final hold is over.
+        (!hosted && self.complete_frames >= 180) || self.frames >= 60 * 150
+    }
+
     fn should_pause(&mut self, story: &Story) -> bool {
         if story.stage == Stage::Encounter && story.combat.enemy_awake && self.paused_frames < 30 {
             self.paused_frames += 1;
@@ -657,6 +755,84 @@ fn export(target: &RenderTexture2D, path: &Path) -> Result<(), Box<dyn Error>> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn final_prompt_ignores_earlier_input_and_waits_for_a_new_press_before_fading() {
+        let mut prompt = ContinuePrompt::default();
+        prompt.tick(false, true, false);
+        prompt.tick(true, true, false);
+        assert!(!prompt.accepted);
+        assert_eq!(prompt.fade_frames, 0);
+
+        // This also models continuing to hold the final skip key: no new edge.
+        for _ in 0..600 {
+            prompt.tick(true, false, false);
+        }
+        assert!(!prompt.accepted);
+        assert_eq!(prompt.fade_frames, 0);
+
+        prompt.tick(true, true, false);
+        assert!(prompt.accepted);
+        assert_eq!(prompt.fade_frames, 1);
+        for _ in 1..24 {
+            prompt.tick(true, false, false);
+        }
+        assert!(prompt.accepted);
+        assert_eq!(prompt.fade_frames, 24);
+    }
+
+    #[test]
+    fn leaving_completion_discards_its_confirmation_and_partial_fade() {
+        let mut prompt = ContinuePrompt::default();
+        prompt.tick(true, false, false);
+        prompt.tick(true, true, false);
+        assert!(prompt.accepted);
+
+        prompt.tick(false, true, false);
+        assert!(!prompt.shown);
+        assert!(!prompt.accepted);
+        assert_eq!(prompt.held_frames, 0);
+        assert_eq!(prompt.fade_frames, 0);
+
+        prompt.tick(true, true, false);
+        assert!(!prompt.accepted);
+        assert_eq!(prompt.fade_frames, 0);
+    }
+
+    #[test]
+    fn hosted_review_survives_the_final_hold_to_confirm_and_finish_its_fade() {
+        let mut prompt = ContinuePrompt::default();
+        let mut review = Review::default();
+        for _ in 0..180 {
+            prompt.tick(true, false, true);
+            review.frames += 1;
+            review.complete_frames += 1;
+            assert!(!prompt.accepted);
+            assert!(!review.capture_finished(true));
+        }
+        assert!(review.capture_finished(false));
+        for _ in 0..24 {
+            prompt.tick(true, false, true);
+            review.frames += 1;
+            review.complete_frames += 1;
+            assert!(prompt.accepted);
+            assert!(!review.capture_finished(true));
+        }
+        assert_eq!(prompt.fade_frames, 24);
+    }
+
+    #[test]
+    fn review_keeps_a_time_limit_for_incomplete_runs_in_both_entry_points() {
+        let mut review = Review {
+            frames: 60 * 150 - 1,
+            ..Review::default()
+        };
+        assert!(!review.capture_finished(false));
+        assert!(!review.capture_finished(true));
+        review.frames += 1;
+        assert!(review.capture_finished(false));
+        assert!(review.capture_finished(true));
+    }
 
     #[test]
     fn encoder_receives_all_rgba_pixels_in_channel_order() {

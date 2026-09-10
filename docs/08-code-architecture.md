@@ -6,7 +6,9 @@ Implementado em corte inicial.
 
 O experimento de aventura autorizado em 10 de setembro de 2026 acrescenta
 `src/adventure/` e um binário independente, atrás da feature `adventure`.
-Os módulos atuais de luta ficam atrás de `fighting`, ligada por padrão.
+Os módulos atuais de luta ficam atrás de `fighting`. Ambas as features são
+ligadas por padrão, e `cargo run` executa a composição `borrow-story`.
+Compilações isoladas usam `--no-default-features` e a feature/binário escolhidos.
 Somente `math` e `runtime_paths` são core compartilhado; regras, cenas, input,
 renderização, áudio e assets específicos não cruzam entre os jogos.
 Veja a [ADR 0021](adr/0021-isolated-adventure-experiment.md) e o
@@ -25,7 +27,8 @@ A [ADR 0023](adr/0023-story-to-terminal-menu.md) acrescenta uma composição ext
 `presentation.rs` e o binário `borrow-story`, habilitados somente com ambos os
 domínios. A composição possui a janela e conecta APIs de aplicação; os domínios
 não a importam nem passam a depender um do outro. A aventura devolve conclusão
-ou saída, e só a conclusão segue automaticamente ao menu principal.
+confirmada, pedido explícito de pular tudo ou saída. Confirmação/skip seguem ao
+menu principal; saída ou limite de frames encerram a sessão.
 
 ## Objetivo
 

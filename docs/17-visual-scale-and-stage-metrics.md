@@ -93,9 +93,9 @@ Esse manifesto alimenta a luta normal e o Sprite Combat Viewer. Ele deve ser usa
 Fluxo recomendado:
 
 ```bash
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/go-fighter.sprite.json --clip idle --character go --move light_punch
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip idle --character c --move light_punch
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip idle --character python --move light_punch
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/go-fighter.sprite.json --clip idle --character go --move light_punch
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip idle --character c --move light_punch
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip idle --character python --move light_punch
 ```
 
 Para C++, confira frames dos dois atlas e valide escala e combate no jogo, Move Showcase ou Combat Lab; examinar apenas uma pagina nao cobre o personagem completo.

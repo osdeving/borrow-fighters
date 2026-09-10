@@ -5,8 +5,10 @@
 Este documento é a fonte de verdade para **o que vem agora**, com filas separadas
 de **to-do** (investigações e melhorias) e **bugfix** (defeitos observados).
 
-Prioridade atual, em 10 de setembro de 2026: avaliar o **experimento de
-aventura 2D narrativa solo protagonizada por Rust**, implementado na branch
+Prioridade atual, em 10 de setembro de 2026: preparar a **release
+`v0.1.0-prototype.4`**, integrar o trabalho à `main` e distribuir aventura,
+apresentação e menu na mesma execução. O episódio de aventura 2D narrativa
+solo protagonizada por Rust foi implementado na branch
 `feature/rust-adventure-prologue`. O [episódio autorizado](27-rust-story-adventure.md)
 mostra Ada, a mensagem misteriosa e Assembly; muito tempo depois, Rust acorda,
 enfrenta uma errática e reage com pesar à vitória. A lore aceita foi sincronizada
@@ -18,6 +20,9 @@ separados e a base compartilhada de `math`/`runtime_paths`; o
 A [continuação entregue](28-adventure-texts-and-opening.md) acrescenta catálogo
 externo com F5, corrige o apoio na cama e apresenta o universo após o pesar.
 [Vídeos atuais e prova da recarga](evidence/adventure-opening/README.md).
+A [junção e navegação](29-story-terminal-menu.md) passa a ser padrão em
+`cargo run` e nos pacotes; [notas da prototype.4](releases/v0.1.0-prototype.4.md).
+Publicação e integração ainda são acompanhadas no diário.
 As pendências do Prototype 3 permanecem registradas abaixo. Estar no backlog,
 mesmo com prioridade alta, **não significa execução ativa**.
 
@@ -26,8 +31,7 @@ com reações de todo o elenco, seleção Linker, pausa/revanche, energia,
 transições e voz provisória de Old C. Implementação e revisão funcional em
 9 de setembro de 2026, integrada à `main` pelo
 [PR #19](https://github.com/osdeving/borrow-fighters/pull/19).
-O corte de distribuição é `v0.1.0-prototype.3`, preparado na branch
-`release/v0.1.0-prototype.3`; [notas e instruções para jogadores](releases/v0.1.0-prototype.3.md).
+O corte anterior de distribuição foi `v0.1.0-prototype.3`; [notas e instruções para jogadores](releases/v0.1.0-prototype.3.md).
 Playtest humano, balanceamento e acabamento pontual aguardam retomada nas filas
 de to-do e bugfix; deixaram de ser a frente imediata a pedido do usuário.
 
@@ -83,8 +87,9 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Próxima ação |
 |---|---|---|---|---|
-| Agora | Avaliar episódio, apresentação e menu integrado | Junção entregue na branch; playtest humano pendente, TODO-013 | [Entrega 29](29-story-terminal-menu.md), [vídeo e verificações](evidence/story-terminal-menu/README.md), [diário](worklogs/rust-adventure-prologue.md) | Jogar desde Ada até o menu; avaliar continuidade visual e navegação. Modo História fica reservado para a continuação. |
-| Próximo | Definir continuidade da aventura | Aguardando avaliação do episódio | [Critérios da entrega 27](27-rust-story-adventure.md#critérios-de-aceite) | Decidir ajustes ou expansão a partir do playtest; ideias de Vínculo/Sirius continuam estacionadas. |
+| Agora | Publicar prototype.4 e integrar à main | Corte em preparação; builds e publicação pendentes | [Processo](06-release-process.md), [notas](releases/v0.1.0-prototype.4.md), [diário](worklogs/rust-adventure-prologue.md) | Verificar pacotes com aventura/menu, integrar, criar tag e conferir os cinco downloads. |
+| Próximo | Avaliar episódio, apresentação e menu integrado | Junção entregue; playtest humano pendente, TODO-013 | [Entrega 29](29-story-terminal-menu.md), [vídeo e verificações](evidence/story-terminal-menu/README.md), [diário](worklogs/rust-adventure-prologue.md) | Jogar desde Ada até o menu; avaliar continuidade visual e navegação. Modo História fica reservado para a continuação. |
+| Depois | Definir continuidade da aventura | Aguardando avaliação do episódio | [Critérios da entrega 27](27-rust-story-adventure.md#critérios-de-aceite) | Decidir ajustes ou expansão a partir do playtest; ideias de Vínculo/Sirius continuam estacionadas. |
 | Depois | Pendências do Prototype 3 | Backlog; sem execução ativa | [To-do](#backlog-de-to-do), [bugfix](#backlog-de-bugfix) | Retomar itens por prioridade e evidência, em entregas pequenas, quando esta frente for reaberta. |
 
 ## Backlog de to-do
@@ -111,9 +116,9 @@ estáveis ao mudar prioridade ou vincular issue/PR.
 | TODO-012 | Implementar prólogo e primeiro encontro da aventura — concluído | Concluído em 10/09/2026 | [Episódio](27-rust-story-adventure.md) implementado na branch própria: cenas, gameplay, derrota/retry e pesar; features, binários, assets e regras próprios. [Evidências](evidence/adventure-prologue/README.md): vídeo completo, 14 checks na janela, 412 testes com ambos os modos e matriz de isolamento. A avaliação humana segue no TODO-013. |
 | TODO-013 | Playtest humano do episódio e apresentação | Alta, próxima avaliação | Jogar a sequência e registrar compreensão de Ada/Assembly, continuidade das poses, leitura da ameaça, comandos e pesar. Avaliar ritmo dos jornais, introdução de C++/Python/elenco e vontade de continuar. Ouvir áudio ao vivo e testar gamepad físico; usar o catálogo editável para revisões de texto. Registrar defeitos reproduzíveis em bugfix e hipóteses em to-do. [Vídeos e limites atuais](evidence/adventure-opening/README.md). |
 | TODO-014 | Textos da aventura editáveis sem recompilar — concluído | Concluído em 10/09/2026 | JSON externo, `--texts`, F5 transacional e mensagens de recarga. [Prova no mesmo binário](evidence/adventure-opening/native/native-checks.json): texto alterado, JSON inválido conserva revisão/pixels e restauração funciona, sem mudar o catálogo original. [Guia](../assets/adventure/texts/README.md). |
-| TODO-015 | Apresentação após o primeiro combate — concluído | Concluído em 10/09/2026 | [Vídeo](evidence/adventure-opening/opening.mp4): 48 s com jornais, biografias C++/Python, seis personagens e logo/subtítulo. Trilha própria, entrada direta, pausa, skip e replay verificados. [Entrega 28](28-adventure-texts-and-opening.md). |
+| TODO-015 | Apresentação após o primeiro combate — concluído | Concluído em 10/09/2026 | [Vídeo](evidence/adventure-opening/opening.mp4): 48 s com jornais, biografias C++/Python, elenco e logo/subtítulo; a entrega 29 remove Go da apresentação e mantém cinco personagens. Trilha própria, entrada direta, pausa, skip e replay verificados. [Entrega 28](28-adventure-texts-and-opening.md). |
 | TODO-016 | Atualizar a lore as-is no menu Lore / Roster | Média, backlog; não executar nesta rodada | Conciliar livro, imagens e fichas com o que a aventura já apresenta: Ada/Assembly, Rust, origem de C++ e Python professora, respeitando os mistérios ainda abertos. Incorporar ilustrações pertinentes e conferir leitura no menu. A junção atual preserva o livro como está; revisão editorial e visual será uma entrega própria. |
-| TODO-017 | Unir apresentação ao menu principal de terminal — concluído | Concluído em 10/09/2026 | [Entrega 29](29-story-terminal-menu.md): Go fora da apresentação, menu na mesma janela, isolamento e demais destinos preservados; Modo História sem ação, logo coerente, moldura, cursor bloco e revelação binária. [Evidências](evidence/story-terminal-menu/README.md): 421 testes com ambos, matriz separada e 14 checks nativos; gráficos preparados antes do prólogo evitam espera escura no final. |
+| TODO-017 | Unir apresentação ao menu principal de terminal — concluído | Concluído em 10/09/2026 | [Entrega 29](29-story-terminal-menu.md): Go fora da apresentação, menu na mesma janela, isolamento e demais destinos preservados; Modo História sem ação, logo coerente, moldura, cursor bloco e revelação binária. [Evidências](evidence/story-terminal-menu/README.md): revisão de navegação com 432 testes com ambos, matriz separada, 81 checks da entrada conjunta e seis da aventura isolada; avanço por trecho, skip total e confirmação final. `cargo run` inicia a sequência conjunta. Gráficos preparados antes do prólogo evitam espera escura no final. |
 
 ## Backlog de bugfix
 

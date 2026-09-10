@@ -6,6 +6,17 @@ Este documento ajuda devs e agentes de IA a encontrar rapidamente onde o combate
 
 Sempre que um código novo alterar combate, personagens, input de combate, Combat Lab, hitbox/hurtbox, projectile, frame data ou sprites ligados a golpes, atualize este guia ou explique no PR por que não foi necessário.
 
+`cargo run` usa `borrow-story` como executável padrão, com as features `adventure`
+e `fighting` habilitadas. `cargo run -- --menu` abre diretamente o menu e
+`cargo run -- --start opening` começa pela apresentação. Os argumentos de luta
+e ferramentas pertencem a `cargo run --bin borrow-fighters -- ...`.
+
+A navegação do prólogo em `borrow-story` fica no domínio independente de aventura:
+`Enter`/`RB` avança um trecho, inclusive pulando o encontro sem registrar vitória;
+`Backspace`/`View` leva diretamente ao menu, mesmo na pausa. A conclusão natural
+aguarda uma nova tecla, clique ou botão. Código e verificação estão em
+[navegação da apresentação](29-story-terminal-menu.md).
+
 ## Sistemas
 
 | Sistema | Responsabilidade | Código principal | Testes |
@@ -62,7 +73,8 @@ O cursor nativo usa `show_cursor()`, que preserva sua posição. Não chamar `en
 
 ### Fluxo de Início de Luta
 
-O guia de primeira abertura reutiliza `MenuPage::HowToPlay` em
+O guia automático na primeira abertura do executável isolado `borrow-fighters`
+reutiliza `MenuPage::HowToPlay` em
 [`src/scenes/preferences.rs`](../src/scenes/preferences.rs) e a geometria compartilhada
 de menus. O desenho fica em [`src/engine/render/onboarding.rs`](../src/engine/render/onboarding.rs).
 `PlayMode` configura somente as duas flags CPU: contra CPU (manual/CPU), duelo local
@@ -70,6 +82,8 @@ de menus. O desenho fica em [`src/engine/render/onboarding.rs`](../src/engine/re
 de `FeatureFlags` usado pelos testes de combate continua CPU/CPU. Escolher um modo
 abre `CharacterSelect` com essas flags. Somente confirmar os dois personagens e
 iniciar a luta recria o mundo; fechar o guia retorna ao menu sem alterar o modo.
+Na entrada conjunta de `borrow-story`, a apresentação leva diretamente ao menu;
+o guia pode ser aberto por **Como jogar**.
 
 `App` grava o marcador `onboarding-v1.seen` em `runtime_paths::data_dir()` ao sair
 do guia. O marcador evita repetir a apresentação; preferências e modo não são
@@ -146,8 +160,8 @@ Use o Sprite Studio para edicao visual confortavel e validacao de runtime. O Spr
 
 ```bash
 cd tools/sprite-studio && pnpm tauri dev
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/go-fighter.sprite.json --clip idle --character go --move light_punch
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip idle --character c --move light_punch
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/go-fighter.sprite.json --clip idle --character go --move light_punch
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip idle --character c --move light_punch
 ```
 
 Atalhos de calibracao:
@@ -283,9 +297,9 @@ Go / Million Goroutines (`GoMillionGoroutines`) também paga 100 de energia nas 
 Teclado: `Y` P1 e `]` P2. `Right Shift` conserva o soco forte P2. Gamepad: segurar `LB` e pressionar `RT`; `RT` sem `LB` continua assinatura. `PendingFighterInput` preserva a borda até o próximo tick e a consome uma única vez em catch-up. A CPU continua selecionando cinematográficos ocasionalmente pela heurística de alcance local; a aceitação dos cinco supers não depende dessa distância.
 
 ```bash
-cargo run -- --showcase --character rust --move cinematic_special --repeat
-cargo run -- --showcase --character cpp --move cinematic_special --repeat --reverse
-cargo run -- --lab combat --character c --move cinematic_special
+cargo run --bin borrow-fighters -- --showcase --character rust --move cinematic_special --repeat
+cargo run --bin borrow-fighters -- --showcase --character cpp --move cinematic_special --repeat --reverse
+cargo run --bin borrow-fighters -- --lab combat --character c --move cinematic_special
 ```
 
 CLI também aceita `cinematic`, `cinematic-special` e `ultimate`. Combat Lab e Move Showcase usam `EnergyPolicy::Unlimited`, mantendo repetição livre sem acumular ou gastar energia. O Combat Lab mantém um `World` completo para os cinco supers, acessível por `super_preview_world()`, reproduz ambos os atores e disponibiliza os cues reais por `take_super_audio_events()`. Não apresenta dummy, alcance melee nem vantagem fictícia para capturas. Go mantém o dummy local. Showcase prepara o alvo à distância nos cinco supers e calcula `scenario_frames()` como 30f de preparação + duração da sessão + 90f de observação; os outros exemplos conservam 260f. Pausa e avanço por frame preservam o relógio de cada modo. Há 16 situações por personagem da demo e 15 para Go, que não possui a assinatura anterior.
@@ -390,8 +404,8 @@ A intenção de gameplay por golpe vive em [`docs/15-character-combat-matrix.md`
 O showcase abre por `Training -> Move Showcase` ou diretamente:
 
 ```bash
-cargo run -- --showcase --character rust
-cargo run -- --showcase --character cpp --move signature_special --repeat --reverse
+cargo run --bin borrow-fighters -- --showcase --character rust
+cargo run --bin borrow-fighters -- --showcase --character cpp --move signature_special --repeat --reverse
 ```
 
 [`MoveShowcase`](../src/scenes/move_showcase.rs) executa dois lutadores em um `World` real. Cada personagem da demo apresenta doze ataques (incluindo projétil, especial de assinatura e cinematográfico) e quatro exemplos de defesa. Rasteira enfrenta guarda alta; overhead enfrenta guarda baixa; anti-air recebe um salto de aproximação; agarrão precisa alcançar um alvo em guarda no chão. Dano, bloqueio, projéteis, reações e áudio vêm da resolução normal do jogo. O painel descreve a situação e confirma o contato ocorrido.
@@ -403,22 +417,22 @@ A [renderização](../src/engine/render/move_showcase.rs) mostra ambos os atores
 Abrir o laboratório:
 
 ```bash
-cargo run -- --fight --p1 go --p2 duke
-cargo run -- --fight --p1 c --p2 rust
-cargo run -- --lab combat --character rust --move light_punch
-cargo run -- --lab combat --character duke --move projectile
-cargo run -- --lab combat --character rust --move sweep
-cargo run -- --lab combat --character duke --move throw
-cargo run -- --lab combat --character go --move kick
-cargo run -- --lab combat --character go --move air_kick
-cargo run -- --lab combat --character c --move heavy_punch
-cargo run -- --lab combat --character c --move projectile
-cargo run -- --lab combat --character python --move light_punch
-cargo run -- --lab combat --character rust --pose block
-cargo run -- --lab combat --character duke --pose victory
-cargo run -- --lab combat --character rust --pose spawn
-cargo run -- --lab combat --character rust --pose defeat
-cargo run -- --lab combat --character rust --pose crouch_block
+cargo run --bin borrow-fighters -- --fight --p1 go --p2 duke
+cargo run --bin borrow-fighters -- --fight --p1 c --p2 rust
+cargo run --bin borrow-fighters -- --lab combat --character rust --move light_punch
+cargo run --bin borrow-fighters -- --lab combat --character duke --move projectile
+cargo run --bin borrow-fighters -- --lab combat --character rust --move sweep
+cargo run --bin borrow-fighters -- --lab combat --character duke --move throw
+cargo run --bin borrow-fighters -- --lab combat --character go --move kick
+cargo run --bin borrow-fighters -- --lab combat --character go --move air_kick
+cargo run --bin borrow-fighters -- --lab combat --character c --move heavy_punch
+cargo run --bin borrow-fighters -- --lab combat --character c --move projectile
+cargo run --bin borrow-fighters -- --lab combat --character python --move light_punch
+cargo run --bin borrow-fighters -- --lab combat --character rust --pose block
+cargo run --bin borrow-fighters -- --lab combat --character duke --pose victory
+cargo run --bin borrow-fighters -- --lab combat --character rust --pose spawn
+cargo run --bin borrow-fighters -- --lab combat --character rust --pose defeat
+cargo run --bin borrow-fighters -- --lab combat --character rust --pose crouch_block
 ```
 
 O mesmo laboratório também pode ser aberto pelo menu principal em `Training -> Combat Lab`. Nesse fluxo, `Esc` volta ao menu sem fechar a janela.
@@ -499,10 +513,10 @@ O Sprite Combat Viewer Raylib e ferramenta temporaria. A direcao aprovada em [`d
 Abrir a ferramenta isolada de sprites:
 
 ```bash
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip special --character c --move projectile
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip punch_light --character python --move light_punch
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip special --character c --move projectile
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip punch_light --character python --move light_punch
 ```
 
 O viewer roda fora do loop normal de luta. Pela CLI, [`src/app.rs`](../src/app.rs) desvia para esse modo antes de carregar `GameAssets` e áudio. Pelo menu, `Training -> Sprite Viewer` abre o mesmo loop com o atlas de C em `special/projectile` como ponto de partida, e `Esc` volta ao menu. O estado testável fica em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), e o desenho Raylib fica em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs).
@@ -597,7 +611,7 @@ BORROW_FIGHTERS_CAPTURE_AUDIO_SOURCE=<fonte> cargo run
 Para validar o motor de captura sem depender de automação de teclado, rode:
 
 ```bash
-BORROW_FIGHTERS_CAPTURE_SMOKE_SECONDS=8 cargo run -- --fight
+BORROW_FIGHTERS_CAPTURE_SMOKE_SECONDS=8 cargo run --bin borrow-fighters -- --fight
 ```
 
 Esse hook inicia a gravação automaticamente, para depois do número de segundos informado e usa o mesmo pipeline de `F9`/`F10`: render texture do Raylib, áudio PulseAudio e saída em `captures/` dentro dos dados do usuário.

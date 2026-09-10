@@ -1,7 +1,8 @@
 # Bora testar Borrow Fighters?
 
-Esta é uma demo em desenvolvimento: uma luta local com personagens inspirados
-em linguagens de programação, cenários brasileiros e especiais exagerados.
+Esta é uma demo em desenvolvimento: uma aventura de abertura seguida de luta
+local com personagens inspirados em linguagens de programação, cenários
+brasileiros e especiais exagerados.
 Você não precisa instalar Rust, Cargo ou ferramentas de desenvolvimento.
 
 ## Abrir o jogo
@@ -22,22 +23,41 @@ o cliente também funciona com a compatibilidade PulseAudio do PipeWire. Drivers
 servidor de áudio e componentes do sistema continuam pertencendo ao sistema.
 Windows também precisa de driver com OpenGL 3.3.
 
-A versão `v0.1.0-prototype.3` traz seleção Linker, reações mais completas,
-pausa/revanche e energia para os cinematográficos. A correção anterior de
+A versão `v0.1.0-prototype.4` abre com Ada, o despertar de Assembly, a manhã de
+Rust e seu primeiro encontro. Uma apresentação leva ao menu na mesma janela,
+com comandos para avançar trechos ou pular tudo. Seleção Linker, reações,
+pausa/revanche e energia continuam disponíveis. A correção anterior de
 imagens e áudio em pastas com acentos continua incluída. Ao atualizar pelo ZIP,
 extraia toda a pasta do novo pacote.
 
 Os executáveis ainda não têm assinatura digital; o Windows pode mostrar um
 aviso de editor desconhecido. Baixe somente da página oficial de releases.
 
+## Da aventura ao menu
+
+O jogo começa pelo prólogo. `Enter`/`RB` avança ao próximo trecho e
+`Backspace`/`View` pula tudo diretamente para o menu, inclusive no combate ou
+na pausa. Ao chegar normalmente ao título final, **Aperte qualquer tecla para
+continuar** aguarda uma nova tecla, clique ou botão do controle.
+
+No encontro, use `A/D` ou setas para andar, `Espaço/W` para pular, `J/F` para
+atacar, `K/H` para ataque forte e `Q/L` para defender. No controle: direcional,
+`A` para pular, `X/Y` para ataques e `LB` para defesa. `Esc`/`Start` pausa;
+`R` tenta novamente após derrota. Nas cenas, `Tab` revela a mensagem e `A`
+do controle avança. Para sair, feche a janela ou use `B` do controle na pausa.
+
+Para começar sempre pelo menu ao executar pelo terminal, use
+`borrow-fighters.exe --menu` no Windows ou `./borrow-fighters --menu` no Linux
+portátil. Os atalhos normais incluem a aventura.
+
 ## Sua primeira luta
 
-1. No guia de boas-vindas, escolha **Jogar contra CPU** (você é P1),
+1. No menu, abra **Como jogar** e escolha **Jogar contra CPU** (você é P1),
    **Duelo local** (duas pessoas) ou **Assistir demo** (CPU contra CPU).
-   Você pode reabrir o guia em **Como jogar**.
+   **Versus Setup** também abre a seleção com a configuração atual.
 2. Confirme o personagem de **P1**, depois o de **P2**. Com os dois prontos,
-   confirme **Lutar**. Pelo menu principal, `Quick Fight` e `Versus Setup`
-   também abrem a seleção.
+   confirme **Lutar**. **Modo História** está reservado para a continuação;
+   essa opção ainda não inicia uma partida.
 3. Na seleção, use `WASD`/setas, controle ou mouse. `Tab` muda o modo e
    `Q/E` muda a arena; você também pode clicar nessas opções. No controle de P1,
    `Select`/`Back` muda o modo e `LB/RB` muda a arena. Contra CPU ou
@@ -78,8 +98,8 @@ pode ligar a ajuda de controles durante a luta.
 Jogue algumas lutas com Rust, Duke/Java, C, Python e C++. Experimente os
 especiais e nos conte: os comandos foram claros? Algum golpe pareceu injusto?
 Você entendeu quando acertou ou bloqueou e quando a energia ficou pronta?
-Selecionar personagens, pausar e pedir revanche foi claro? Teve travamento,
-silêncio ou tela preta?
+Avançar a aventura e chegar ao menu foi claro? Selecionar personagens, pausar e
+pedir revanche funcionou? Teve travamento, silêncio ou tela preta?
 
 Abra uma issue no repositório indicado na página da release. Inclua a versão
 (também em `BUILD-INFO.json`), sistema operacional, placa de vídeo, personagens

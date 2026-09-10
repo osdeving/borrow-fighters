@@ -37,6 +37,79 @@ pub fn reload_notice(d: &mut impl RaylibDraw, a: &Assets, succeeded: bool) {
     );
 }
 
+/// Draws context-specific skip controls or the hosted title's continue prompt.
+pub fn navigation(
+    d: &mut impl RaylibDraw,
+    a: &Assets,
+    story: &Story,
+    hosted: bool,
+    paused: bool,
+    pulse_seconds: f32,
+) {
+    if paused {
+        super::typography::centered(
+            d,
+            &a.body,
+            a.text.get(if hosted {
+                "navigation.pause_menu"
+            } else {
+                "navigation.pause"
+            }),
+            Vector2::new(640.0, 365.0),
+            1100.0,
+            23.0,
+            PAPER,
+        );
+        return;
+    }
+    if story.stage == Stage::Complete {
+        if hosted {
+            d.draw_rectangle(0, 594, WIDTH, 126, INK);
+            let pulse = 0.78 + 0.22 * (pulse_seconds * 2.5).sin().mul_add(0.5, 0.5);
+            super::typography::centered(
+                d,
+                &a.body,
+                a.text.get("navigation.continue"),
+                Vector2::new(640.0, 620.0),
+                1180.0,
+                27.0,
+                alpha(GOLD, pulse),
+            );
+            super::typography::centered(
+                d,
+                &a.body,
+                a.text.get("navigation.continue_detail"),
+                Vector2::new(640.0, 663.0),
+                1180.0,
+                19.0,
+                alpha(PAPER, 0.85),
+            );
+        }
+        return;
+    }
+    let encounter = story.stage == Stage::Encounter;
+    let (top, height, baseline) = if encounter {
+        (636, 32, 643.0)
+    } else {
+        (664, 56, 683.0)
+    };
+    d.draw_rectangle(0, top, WIDTH, height, INK);
+    super::typography::centered(
+        d,
+        &a.body,
+        a.text.get(match (story.stage, hosted) {
+            (Stage::AdaPrologue, true) => "navigation.ada_controls_menu",
+            (Stage::AdaPrologue, false) => "navigation.ada_controls",
+            (_, true) => "navigation.controls_menu",
+            (_, false) => "navigation.controls",
+        }),
+        Vector2::new(640.0, baseline),
+        1200.0,
+        if encounter { 18.0 } else { 19.0 },
+        alpha(PAPER, 0.85),
+    );
+}
+
 /// Draws a complete frame at the logical resolution.
 pub fn draw(
     d: &mut impl RaylibDraw,
@@ -601,7 +674,6 @@ fn pause(d: &mut impl RaylibDraw, a: &Assets) {
     d.draw_rectangle(0, 0, WIDTH, HEIGHT, alpha(INK, 0.87));
     heading(d, a, a.text.get("pause.title"), 470.0, 213.0, 47.0, PAPER);
     text(d, a, a.text.get("pause.resume"), 446.0, 316.0, 25.0, GOLD);
-    text(d, a, a.text.get("pause.exit"), 487.0, 365.0, 23.0, PAPER);
     text(
         d,
         a,

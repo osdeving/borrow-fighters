@@ -6,46 +6,50 @@ Status: **Prototype 0.1 / Greybox jogável / Vertical slice em evolução**
 
 ## Baixar e jogar (sem instalar Rust)
 
-A versão do playtest é **v0.1.0-prototype.3**, com seleção visual Linker,
-novas reações dos lutadores, pausa, revanche e energia para os cinematográficos.
-[Abra os downloads e as instruções da release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.3):
+A versão **v0.1.0-prototype.4** está em preparação, com aventura de Ada/Rust,
+apresentação do universo e menu de terminal na mesma execução.
+[Downloads e instruções da release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.4):
 instalador/ZIP para Windows 10 (1903+) ou 11, DEB para Debian/Ubuntu, RPM para Fedora e
 arquivo portátil para Linux, todos em x86_64. Extraia a pasta inteira se escolher
 a versão portátil. Os arquivos necessários do jogo acompanham os pacotes.
 Todos precisam de driver com OpenGL 3.3. No Linux, a base é glibc 2.35+
 e desktop com X11 ou XWayland.
 
-Na primeira abertura, **Como jogar** apresenta os controles e permite escolher
-CPU, duelo local ou assistir à demo. O guia pode ser reaberto pelo menu.
-Na release, a entrada normal deixa P1 manual contra CPU; `Quick Fight` abre a seleção com
-a configuração atual. Durante a luta, `Esc`/`Start` abre a pausa; o resultado
-oferece revanche na mesma arena. O código e as ferramentas de desenvolvimento
-continuam descritos abaixo.
+Ao abrir, acompanhe o prólogo, o primeiro encontro de Rust e a apresentação.
+**Enter / RB** avança ao próximo trecho; **Backspace / View** pula tudo e abre
+o menu, inclusive durante combate ou pausa. No fim normal, **Aperte qualquer
+tecla para continuar** espera uma nova entrada antes de mostrar o menu.
+**Versus Setup** abre a seleção para jogar contra CPU ou em duelo local;
+**Como jogar** explica os controles. **Modo História** está reservado, sem ação.
+Durante a luta, `Esc`/`Start` abre a pausa; o resultado oferece revanche.
+O código e as ferramentas de desenvolvimento continuam descritos abaixo.
 
 Jogue por dez minutos e [conte o que funcionou e o que ficou confuso](https://github.com/osdeving/borrow-fighters/issues/new/choose).
-[Notas do playtest](docs/releases/v0.1.0-prototype.3.md) ·
+[Notas do playtest](docs/releases/v0.1.0-prototype.4.md) ·
 [Como gerar os pacotes](docs/06-release-process.md) ·
 [Decisão de distribuição](docs/adr/0019-playtest-distribution.md).
 
-## Experimento de aventura — primeiras linhas
+## Jogar pelo código — aventura, apresentação e menu
 
-Na branch `feature/rust-adventure-prologue`, uma aventura independente apresenta
+`cargo run` inicia a aventura que apresenta
 Ada, uma mensagem sem remetente, o despertar de Assembly e, muito tempo depois,
 a manhã de Rust interrompida por uma entidade errática. As regras e os assets
-da aventura são próprios; o jogo de luta continua sendo a entrada padrão.
+da aventura são próprios; as features `adventure` e `fighting` são habilitadas
+por padrão, e `borrow-story` é o executável principal.
 Depois do combate e do pesar de Rust, a apresentação reúne manchetes, a origem
 de C++, Python como professora, cinco personagens e o logo com subtítulo. Go
-fica fora da apresentação. A entrada conjunta leva ao menu na mesma janela:
+fica fora da apresentação. A entrada conjunta leva ao menu na mesma janela,
+após a confirmação no fim da apresentação ou pelo comando de pular tudo:
 
 ```sh
 # Sequência completa: Ada → Rust → combate → apresentação → menu principal.
-cargo run --features adventure --bin borrow-story
+cargo run
 
 # Apresentação → menu, para rever a junção.
-cargo run --features adventure --bin borrow-story -- --start opening
+cargo run -- --start opening
 
 # Direto ao menu principal renovado.
-cargo run --features adventure --bin borrow-story -- --menu
+cargo run -- --menu
 ```
 
 O menu usa a identidade do título final, moldura de terminal, cursor de bloco
@@ -59,7 +63,7 @@ Os dois modos também continuam disponíveis isoladamente:
 # Aventura, sem compilar os módulos de luta.
 cargo run --no-default-features --features adventure --bin borrow-adventure
 
-# Luta, sem compilar a aventura (também é o comportamento de cargo run).
+# Luta, sem compilar os módulos de aventura.
 cargo run --no-default-features --features fighting --bin borrow-fighters
 
 # Assistir diretamente à apresentação da aventura.
@@ -67,11 +71,19 @@ cargo run --no-default-features --features adventure --bin borrow-adventure -- -
 ```
 
 Na aventura: `A/D` ou setas movem, `Espaço/W` pula, `J/F` ataca, `K/H` dá um golpe
-forte e `Q/L` defende. `Enter` pula cenas, `Tab` revela a mensagem e `Esc` pausa.
-Após derrota, `R` tenta novamente no encontro. No controle: direcional, `A` para
-pular, `X/Y` para ataques, `LB` para defesa e `Start` para pausa.
-No executável isolado, `T/X` repete a apresentação na conclusão. Em `borrow-story`,
-a conclusão segue ao menu principal; `Esc` e depois `Backspace` sai durante a aventura.
+forte e `Q/L` defende. `Enter` avança ao próximo trecho, `Tab` revela a mensagem
+e `Esc` pausa. Após derrota, `R` tenta novamente no encontro. No controle:
+direcional, `A` para pular no combate ou avançar cenas, `X/Y` para ataques,
+`LB` para defesa, `RB` para o próximo trecho e `Start` para pausa.
+
+Em `borrow-story`, `Backspace`/`View` pula tudo e abre o menu principal, inclusive
+durante combate ou pausa. Avançar o encontro com `Enter`/`RB` segue à apresentação
+sem registrar vitória. Na conclusão normal, **Aperte qualquer tecla para continuar**
+aguarda uma nova tecla, clique ou botão: segurar uma tecla ou usar o mesmo comando
+que avançou o último trecho não dispensa a tela.
+
+No executável isolado, pular tudo conclui o trecho local; `T/X` repete a apresentação
+na conclusão. Para sair durante a aventura, feche a janela ou use `B` do controle na pausa.
 
 **Textos sem recompilar:** edite [assets/adventure/texts/pt-BR.json](assets/adventure/texts/pt-BR.json),
 salve e pressione **F5**. Legendas, terminal, manchetes, biografias, menus, logo
@@ -244,7 +256,7 @@ dano para chip e não deixa morrer por chip. Go mantém contato local.
 Para inspecionar:
 
 ```sh
-cargo run -- --showcase --character rust --move cinematic_special --repeat
+cargo run --bin borrow-fighters -- --showcase --character rust --move cinematic_special --repeat
 ```
 
 Troque `rust` por `duke`, `go`, `c`, `python` ou `cpp`. Os especiais anteriores
@@ -310,14 +322,16 @@ Comandos:
 
 ```bash
 cargo run
-cargo run -- --fight --p1 go --p2 duke
-cargo run -- --player-one rust --player-two go
-cargo run -- --fight --p1 c --p2 rust
-cargo run -- --fight --p1 python --p2 duke
-cargo run -- --fight --p1 cpp --p2 c
+cargo run --bin borrow-fighters -- --fight --p1 go --p2 duke
+cargo run --bin borrow-fighters -- --player-one rust --player-two go
+cargo run --bin borrow-fighters -- --fight --p1 c --p2 rust
+cargo run --bin borrow-fighters -- --fight --p1 python --p2 duke
+cargo run --bin borrow-fighters -- --fight --p1 cpp --p2 c
 ```
 
-Na primeira abertura, o jogo mostra `Como jogar`; depois abre no menu principal. Use `Setas` ou `W/S` para navegar e `Enter` ou `Espaço` para confirmar. O mouse também navega: passe sobre uma opção e clique para confirmar. `Esc` volta das páginas e ferramentas; durante a luta, `Esc` ou `Start` abre a pausa com Continuar, Reiniciar, Trocar personagens e Menu. Para sair do jogo, use `Exit` ou feche a janela. O cursor permanece livre para sair da janela; em WSL, o cursor Linker acompanha o ponteiro apenas enquanto a janela está em foco.
+`cargo run` apresenta o prólogo e a abertura antes do menu; `Backspace`/`View` pula diretamente ao menu. Para começar pelo menu, use `cargo run -- --menu`. Os argumentos de luta e ferramentas dos exemplos acima e abaixo pertencem ao executável `borrow-fighters`.
+
+Na primeira abertura do executável isolado `borrow-fighters`, o jogo mostra `Como jogar`; depois abre no menu principal. Na entrada conjunta, o guia pode ser aberto pelo menu. Use `Setas` ou `W/S` para navegar e `Enter` ou `Espaço` para confirmar. O mouse também navega: passe sobre uma opção e clique para confirmar. `Esc` volta das páginas e ferramentas; durante a luta, `Esc` ou `Start` abre a pausa com Continuar, Reiniciar, Trocar personagens e Menu. Para sair do jogo, use `Exit` ou feche a janela. O cursor permanece livre para sair da janela; em WSL, o cursor Linker acompanha o ponteiro apenas enquanto a janela está em foco.
 
 A seleção Linker mostra retratos, os personagens animados em pé e confirmações P1/P2. No modo contra CPU, escolha os dois lados com `WASD`/setas e `Enter`/`A`. No duelo local, P1 usa `WASD` + `F`, P2 usa setas + `Enter`, ou cada jogador usa seu controle; `Espaço` confirma o lado ativo. O mouse permite clicar nos retratos e alternar o lado clicando no painel do jogador. `Tab` troca modo e `Q/E` troca arena; no controle de P1, `Select`/`Back` troca modo e `LB/RB` troca arena. `Random` sorteia uma escolha ao confirmar e as vagas com interrogação ficam reservadas para o futuro. Com ambos confirmados, `Enter`, `Start` ou o botão Lutar inicia a luta. `Esc`/`B` desfaz a confirmação antes de voltar ao menu.
 
@@ -343,18 +357,18 @@ O submenu `Lore / Roster` lê [`assets/lore/story.json`](assets/lore/story.json)
 Para abrir o laboratório de combate direto em uma cena limpa:
 
 ```bash
-cargo run -- --lab combat --character rust --move light_punch
-cargo run -- --lab combat --character duke --move projectile
-cargo run -- --lab combat --character rust --move sweep
-cargo run -- --lab combat --character duke --move throw
-cargo run -- --lab combat --character go --move kick
-cargo run -- --lab combat --character c --move projectile
-cargo run -- --lab combat --character python --move light_punch
-cargo run -- --lab combat --character cpp --move projectile
-cargo run -- --lab combat --character rust --pose block
-cargo run -- --lab combat --character rust --pose crouch_block
-cargo run -- --lab combat --character rust --pose spawn
-cargo run -- --lab combat --character rust --pose defeat
+cargo run --bin borrow-fighters -- --lab combat --character rust --move light_punch
+cargo run --bin borrow-fighters -- --lab combat --character duke --move projectile
+cargo run --bin borrow-fighters -- --lab combat --character rust --move sweep
+cargo run --bin borrow-fighters -- --lab combat --character duke --move throw
+cargo run --bin borrow-fighters -- --lab combat --character go --move kick
+cargo run --bin borrow-fighters -- --lab combat --character c --move projectile
+cargo run --bin borrow-fighters -- --lab combat --character python --move light_punch
+cargo run --bin borrow-fighters -- --lab combat --character cpp --move projectile
+cargo run --bin borrow-fighters -- --lab combat --character rust --pose block
+cargo run --bin borrow-fighters -- --lab combat --character rust --pose crouch_block
+cargo run --bin borrow-fighters -- --lab combat --character rust --pose spawn
+cargo run --bin borrow-fighters -- --lab combat --character rust --pose defeat
 ```
 
 No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp` para alternar pose, `Enter` para repetir, `Espaço` para pausar, `.` para avançar 1 frame quando pausado, `Home` para voltar ao frame 0, `H` para hurtbox, `B` para hitbox, `P` para pivot/eixos, `D` para dummy de contato, `A` para mostrar/esconder o fundo de arena e `Esc` para voltar ao menu quando aberto pelo submenu `Training`. O overlay mostra frame data, vantagem estimada, pushback, whiff recovery e distância após pushback. Valores aceitos em `--character`: `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` ou `cpp.cpp`. Valores aceitos em `--move`: `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`, `projectile`, `signature_special` e `cinematic_special`. Valores aceitos em `--pose`: `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory`, `spawn`, `defeat` e `crouch_block`. As poses mantêm o corpo parado para inspeção e reproduzem o clip com pause, avanço por frame e reinício.
@@ -362,9 +376,9 @@ No Combat Lab, use `Tab` / `Shift+Tab` para alternar golpe, `PageDown` / `PageUp
 O `Move Showcase`, em `Training`, usa o personagem escolhido como Player 1 contra um adversário real. Cada um dos cinco personagens da demo tem 16 situações: os dez golpes anteriores, um especial de assinatura, um cinematográfico e quatro exemplos de defesa. O adversário se aproxima, salta para receber anti-air ou mantém a guarda apropriada para demonstrar rasteira, overhead e agarrão. O resultado mostra o dano ou bloqueio calculado pelo combate. As cenas incluem voo, queda e recuperação, respeitando a duração própria dos supers; o painel inferior deixa o espaço aéreo visível. Agarrões capturam e arremessam para o outro lado, e ganchos lançam a vítima. Os especiais de assinatura são Borrow Fortress, System.out.println!, Segmentation Fault, import antigravity e Undefined Bazooka, sempre disponíveis com `T`/Backslash/`RT`, sem medidor.
 
 ```bash
-cargo run -- --showcase --character rust --move anti_air --repeat
-cargo run -- --showcase --character duke --move throw
-cargo run -- --showcase --character python --move signature_special --repeat --reverse
+cargo run --bin borrow-fighters -- --showcase --character rust --move anti_air --repeat
+cargo run --bin borrow-fighters -- --showcase --character duke --move throw
+cargo run --bin borrow-fighters -- --showcase --character python --move signature_special --repeat --reverse
 ```
 
 `Tab` / `Shift+Tab` troca situação; `Enter` repete; `Espaço` pausa; `.` avança um frame; `Home` reinicia; `L` alterna repetição contínua; `X` troca lados; `PageUp` / `PageDown` troca personagem; `Esc` volta ao menu. [Guia de treino e defesa](docs/10-greybox-playtest.md#move-showcase) e [evidência de balanceamento](docs/evidence/mvp-balance/README.md).
@@ -372,9 +386,9 @@ cargo run -- --showcase --character python --move signature_special --repeat --r
 Os atlas revisados completos são a apresentação padrão; os placeholders permanecem em disco como referência e fallback. Para abrir a arte nova ou comparar a anterior:
 
 ```bash
-cargo run -- --fight --p1 rust --p2 duke
-cargo run -- --lab combat --character rust --pose victory
-BORROW_FIGHTERS_SPRITE_CANDIDATES=0 cargo run -- --fight --p1 rust --p2 duke
+cargo run --bin borrow-fighters -- --fight --p1 rust --p2 duke
+cargo run --bin borrow-fighters -- --lab combat --character rust --pose victory
+BORROW_FIGHTERS_SPRITE_CANDIDATES=0 cargo run --bin borrow-fighters -- --fight --p1 rust --p2 duke
 ```
 
 O carregador procura `assets/candidates/<personagem>/<personagem>-fighter.sprite.json` e exige os 20 clips anteriores mais `signature_special`, `knockdown`, `heavy_hit`, `launched` e `thrown` para os cinco personagens da demo; Go conserva os 20 clips anteriores; arquivo inválido, incompleto ou ausente mantém o placeholder daquele personagem. Conjuntos parciais são inspecionados diretamente no Sprite Viewer/Studio. A variável com valor `1` continua escolhendo os novos atlas explicitamente; `0` ou um valor inválido seleciona os originais. A arte revisada controla a apresentação; `combat_manifest` preserva as boxes e origens baseline dos golpes anteriores. Rasteiras usam as boxes do `MoveSpec`; especiais usam as entidades físicas de `World.signature_effects`, e ações baixas usam hurtboxes físicas agachadas, conforme a [ADR 0013](docs/adr/0013-contextual-showcase-and-mvp-combat.md). Reações, defesa, agachamento, salto e poses finais têm relógios visuais próprios. Veja [pipeline e comandos](docs/11-sprite-pipeline.md#revisao-de-candidatos-no-runtime) e [cobertura e pendências](docs/19-sprite-production-coverage.md).
@@ -382,10 +396,10 @@ O carregador procura `assets/candidates/<personagem>/<personagem>-fighter.sprite
 Para abrir o viewer de sprites direto em uma ferramenta isolada:
 
 ```bash
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip special --character c --move projectile
-cargo run -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip punch_light --character python --move light_punch
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip special --character c --move projectile
+cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip punch_light --character python --move light_punch
 ```
 
 No Sprite Combat Viewer, use o mouse para inspecionar coordenadas locais do frame, arrastar personagem/dummy e ajustar alças de `frames[].combat`. `N` gera um rascunho de metadata a partir do overlay runtime do golpe selecionado, `Tab` / `Shift+Tab` alterna clip, `Enter` sincroniza clip com golpe, `C` / `Shift+C` alterna personagem de combate, `[` / `]` alterna golpe, `.` / `,` avança ou volta frame, `Espaço` pausa, mouse wheel controla zoom, `0` reseta zoom, `=` / `-` ajusta `scale`, `Setas` ou `Shift+Setas` move o `pivot`, `Ctrl+Setas` ajusta largura/altura do corpo físico, `Ctrl+Shift+Setas` ajusta altura abaixada, `Ctrl+S` salva manifestos de tuning, `O` mostra/esconde dummy, `M` mostra/esconde boxes de combate, `T` mostra/esconde trajetória prevista do projectile, `F5` recarrega manifesto/atlas, `F12` salva screenshot em `captures/sprite-viewer-capture.png` dentro dos dados do usuário, `F9`/`F10` gravam um MP4 local, `G` alterna grade, `P` alterna pivot, `B` alterna bounds, `R` reseta posição e `Esc` volta ao menu quando aberto por `Training`. O padrão de escala fica em [`docs/17-visual-scale-and-stage-metrics.md`](docs/17-visual-scale-and-stage-metrics.md), e o roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md).

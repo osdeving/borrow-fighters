@@ -144,6 +144,39 @@ impl Story {
         }
     }
 
+    /// Skips to the next authored segment instead of discarding its whole stage.
+    ///
+    /// An explicit encounter skip goes directly to the presentation, preserving
+    /// combat health and outcome. It does not invent a victory or show regret for
+    /// a fight the player skipped. Likewise, aftermath can be skipped before its
+    /// gesture finishes; automatic progression still waits for that gesture.
+    pub fn skip_segment(&mut self) {
+        match self.stage {
+            Stage::AdaPrologue => {
+                if let Some((beat, elapsed)) = self.beat_and_ticks() {
+                    self.stage_ticks += beat.duration_ticks() - elapsed;
+                    if self.stage_ticks >= PROLOGUE_TICKS {
+                        self.enter(Stage::RustMorning);
+                    }
+                }
+            }
+            Stage::RustMorning => {
+                // Wake, lift the torso, sit at the edge, plant the foot and stand.
+                // These are authored pose starts in engine/morning.rs at 60 Hz.
+                self.skip_to_next_boundary(&[150, 225, 355, 500, 585], Stage::Encounter);
+            }
+            Stage::Encounter | Stage::Aftermath => self.enter(Stage::Opening),
+            Stage::Opening => {
+                // Three headlines, both halves of each biography, three character
+                // appearances and the final logo, matching engine/opening.rs.
+                let boundaries =
+                    [3, 6, 9, 14, 19, 24, 29, 33, 37, 41].map(|seconds| seconds * TICKS_PER_SECOND);
+                self.skip_to_next_boundary(&boundaries, Stage::Complete);
+            }
+            Stage::Complete => {}
+        }
+    }
+
     /// Begins the presentation directly for review without fabricating a combat victory.
     pub fn presentation() -> Self {
         let mut story = Self::new();
@@ -198,6 +231,14 @@ impl Story {
     fn gesture_visible(&self) -> bool {
         self.combat.player.action == Action::Remorse
             && self.combat.player.action_ticks >= MIN_REMORSE_TICKS
+    }
+
+    fn skip_to_next_boundary(&mut self, boundaries: &[u32], next_stage: Stage) {
+        if let Some(&ticks) = boundaries.iter().find(|&&ticks| ticks > self.stage_ticks) {
+            self.stage_ticks = ticks;
+        } else {
+            self.enter(next_stage);
+        }
     }
 
     fn enter(&mut self, stage: Stage) {
@@ -322,5 +363,109 @@ mod tests {
         story.retry();
         assert_eq!(story.combat.player.hp, 30);
         assert_eq!(story.stage, Stage::Encounter);
+    }
+
+    #[test]
+    fn segment_skip_reaches_each_ada_beat_from_its_middle() {
+        let mut story = Story::new();
+        for next in PrologueBeat::ALL.into_iter().skip(1) {
+            for _ in 0..30 {
+                story.tick(CombatInput::default());
+            }
+            story.skip_segment();
+            assert_eq!(story.stage, Stage::AdaPrologue);
+            assert_eq!(story.prologue_beat(), Some(next));
+            assert_eq!(story.beat_ticks(), 0);
+        }
+        story.skip_segment();
+        assert_eq!(story.stage, Stage::RustMorning);
+        assert_eq!(story.stage_ticks, 0);
+        assert_eq!(story.combat.ticks, 0);
+    }
+
+    #[test]
+    fn morning_skip_visits_waking_seated_and_standing_poses_before_encounter() {
+        let mut story = Story::new();
+        story.advance_scene();
+        for ticks in [150, 225, 355, 500, 585] {
+            story.skip_segment();
+            assert_eq!(story.stage, Stage::RustMorning);
+            assert_eq!(story.stage_ticks, ticks);
+        }
+        story.skip_segment();
+        assert_eq!(story.stage, Stage::Encounter);
+        assert_eq!(story.stage_ticks, 0);
+        assert!(!story.combat.enemy_awake);
+    }
+
+    #[test]
+    fn opening_skip_preserves_each_headline_biography_panel_and_character() {
+        let mut story = Story::presentation();
+        for seconds in [3, 6, 9, 14, 19, 24, 29, 33, 37, 41] {
+            story.tick(CombatInput::default());
+            story.skip_segment();
+            assert_eq!(story.stage, Stage::Opening);
+            assert_eq!(story.stage_ticks, seconds * TICKS_PER_SECOND);
+        }
+        story.skip_segment();
+        assert_eq!(story.stage, Stage::Complete);
+    }
+
+    #[test]
+    fn skipping_an_encounter_preserves_damage_and_outcome_without_showing_regret() {
+        for outcome in [Outcome::Ongoing, Outcome::Defeat] {
+            let mut story = Story::new();
+            story.advance_scene();
+            story.advance_scene();
+            story.combat.player.hp = if outcome == Outcome::Defeat { 0 } else { 37 };
+            story.combat.enemy.hp = 54;
+            story.combat.outcome = outcome;
+            let health = (story.combat.player.hp, story.combat.enemy.hp);
+            let combat_ticks = story.combat.ticks;
+
+            story.skip_segment();
+
+            assert_eq!(story.stage, Stage::Opening);
+            assert_eq!(story.stage_ticks, 0);
+            assert_eq!(story.combat.outcome, outcome);
+            assert_eq!(health, (story.combat.player.hp, story.combat.enemy.hp));
+            assert_eq!(story.combat.ticks, combat_ticks);
+            assert_ne!(story.combat.player.action, Action::Remorse);
+        }
+    }
+
+    #[test]
+    fn explicit_aftermath_skip_does_not_wait_for_the_automatic_remorse_gate() {
+        let mut story = Story::new();
+        story.advance_scene();
+        story.advance_scene();
+        story.combat.outcome = Outcome::Victory;
+        story.combat.enemy.hp = 0;
+        story.combat.enemy.action = Action::Defeated;
+        story.tick(CombatInput::default());
+        assert_eq!(story.stage, Stage::Aftermath);
+        assert!(!story.gesture_visible());
+
+        story.skip_segment();
+
+        assert_eq!(story.stage, Stage::Opening);
+        assert_eq!(story.combat.outcome, Outcome::Victory);
+        assert_eq!(story.combat.enemy.hp, 0);
+    }
+
+    #[test]
+    fn repeated_segment_skips_complete_the_sequence_and_stop_at_the_title() {
+        let mut story = Story::new();
+        for _ in 0..30 {
+            story.skip_segment();
+        }
+        assert_eq!(story.stage, Stage::Complete);
+        assert_eq!(story.stage_ticks, 0);
+        assert_eq!(story.combat.outcome, Outcome::Ongoing);
+        assert_eq!(story.combat.player.hp, story.combat.player.max_hp);
+        assert_eq!(story.combat.enemy.hp, story.combat.enemy.max_hp);
+        story.skip_segment();
+        assert_eq!(story.stage, Stage::Complete);
+        assert_eq!(story.stage_ticks, 0);
     }
 }

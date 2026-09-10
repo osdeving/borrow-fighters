@@ -5,6 +5,11 @@
 Aceito para o experimento em 10 de setembro de 2026, por pedido explícito do
 usuário. O corte está no [episódio inicial](../27-rust-story-adventure.md).
 
+Atualização de 10/09/2026: a [ADR 0023](0023-story-to-terminal-menu.md#entrada-padrão--atualização-de-10092026)
+promove `borrow-story` e ambas as features a padrão de `cargo run`, por pedido
+do usuário. Substitui a escolha de entrada/default descrita abaixo; mantém
+o isolamento de domínios, assets e compilações independentes desta decisão.
+
 ## Contexto
 
 O usuário quer experimentar duas animações e um combate de aventura com Rust,

@@ -20,6 +20,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 CHARACTERS = ("rust", "duke", "go", "c", "python", "cpp")
+SOURCE_BINARY = "borrow-story"
 TARGETS = {
     "windows-x86_64": "x86_64-pc-windows-msvc",
     "linux-x86_64": "x86_64-unknown-linux-gnu",
@@ -78,6 +79,40 @@ def string_values(value):
             yield from string_values(child)
 
 
+def adventure_assets():
+    """Expand the adventure loaders' local names and opening portrait images."""
+    files = set()
+    base = ROOT / "assets/adventure"
+    # These adapters prepend their own directory to literal file names. Keep
+    # that mapping explicit; a recursive copy would ship unused art and reviews.
+    for module, directory in (("assets.rs", base),
+                              ("opening.rs", base / "opening"),
+                              ("audio.rs", base / "audio")):
+        source = ROOT / "src/adventure/engine" / module
+        names = re.findall(r'"([^"/{}\n]+\.(?:png|json|ogg|wav|ttf))"',
+                           source.read_text(encoding="utf-8"))
+        files.update(asset_file(directory / name) for name in names)
+    roster = asset_file(base / "opening/roster.json")
+    files.add(roster)
+    data = json.loads(roster.read_text(encoding="utf-8"))
+    for character in data["characters"]:
+        # Mirror the runtime's local-image rule. Provenance `source` points at
+        # production artwork and is deliberately not a runtime dependency.
+        name = character["image"]
+        if (not name or "\\" in name or ":" in name
+                or any(part in ("", ".", "..") for part in name.split("/"))):
+            raise ValueError(f"Opening portrait must use a relative local image: {name}")
+        portrait = asset_file(roster.parent / name)
+        if not within(portrait, roster.parent):
+            raise ValueError(f"Opening portrait outside adventure opening/: {name}")
+        files.add(portrait)
+    for name in ("fonts/BARLOW-OFL.txt", "fonts/LORA-OFL.txt", "fonts/README.md",
+                 "audio/README.md", "texts/README.md", "ART-PROVENANCE.md",
+                 "opening/ART-PROVENANCE.md"):
+        files.add(asset_file(base / name))
+    return files
+
+
 def runtime_assets():
     """Follow runtime fields, excluding provenance/source/review directories."""
     files = set()
@@ -104,6 +139,7 @@ def runtime_assets():
             data = json.loads(manifest.read_text(encoding="utf-8"))
             files.update(asset_file(ROOT / value) for value in string_values(data)
                          if value.startswith("assets/"))
+    files.update(adventure_assets())
     # Fonts are embedded in the executable, but their notices must travel with it.
     for name in ("BARLOW-OFL.txt", "LORA-OFL.txt", "README.md"):
         files.add(asset_file(ROOT / "assets/fonts" / name))
@@ -141,10 +177,15 @@ def rust_notices(stage, target):
     notice += ["", "## Fonts and audio", "",
                "- Barlow and Lora: assets/fonts/README.md and both OFL license texts.",
                "- Music, sound effects and voices: assets/audio/ATTRIBUTION.md.",
+               "- Adventure fonts: assets/adventure/fonts/README.md and local OFL texts.",
+               "- Original adventure music and sounds: assets/adventure/audio/README.md.",
                "", "## Project and prototype artwork", "",
                "Cargo.toml declares MIT OR Apache-2.0 for the project code. The release",
                "does not assign that declaration to third-party audio, fonts or artwork.",
                "Artwork provenance remains documented in the repository's assets/ tree.",
+               "Adventure artwork notices are in assets/adventure/ART-PROVENANCE.md",
+               "and assets/adventure/opening/ART-PROVENANCE.md; production references",
+               "remain available in the source repository at the recorded revision.",
                "The source tag for this build is recorded in BUILD-INFO.json.", ""]
     (stage / "THIRD_PARTY_NOTICES.md").write_text("\n".join(notice), encoding="utf-8")
 
@@ -159,6 +200,9 @@ def checksums(stage):
 
 
 def stage_package(args):
+    source_name = SOURCE_BINARY + (".exe" if args.target == "windows-x86_64" else "")
+    if args.binary.name != source_name:
+        raise ValueError(f"Release requires the composed Cargo binary {source_name}: {args.binary}")
     stage = args.output.resolve()
     if stage.exists() and any(stage.iterdir()):
         raise ValueError(f"Stage destination must be empty: {stage}")
@@ -178,6 +222,7 @@ def stage_package(args):
     rust_notices(stage, args.target)
     (stage / "BUILD-INFO.json").write_text(json.dumps({
         "version": args.version, "target": args.target,
+        "cargo_binary": SOURCE_BINARY,
         "commit": run("git", "rev-parse", "HEAD"),
         "rustc": run("rustc", "--version"),
         "asset_count": len(runtime_assets()),
@@ -198,6 +243,8 @@ def validate_build_info(stage, target, version):
     build = json.loads((stage / "BUILD-INFO.json").read_text(encoding="utf-8"))
     if build["target"] != target or build["version"] != version:
         raise ValueError(f"Staging target/version differs from requested package: {build}")
+    if build.get("cargo_binary") != SOURCE_BINARY:
+        raise ValueError(f"Release staging must contain the {SOURCE_BINARY} composition: {build}")
 
 
 def ldd_libraries(binary, env=None):
@@ -436,7 +483,8 @@ def main():
     commands = parser.add_subparsers(dest="command", required=True)
     stage = commands.add_parser("stage", help="Copy the executable, runtime assets and notices")
     stage.add_argument("--target", choices=TARGETS, required=True)
-    stage.add_argument("--binary", type=Path, required=True)
+    stage.add_argument("--binary", type=Path, required=True,
+                       help="Cargo output borrow-story[.exe]; shipped as borrow-fighters[.exe]")
     stage.add_argument("--output", type=Path, required=True)
     stage.set_defaults(function=stage_package)
     for name, function in (("linux", linux_packages), ("windows", windows_packages)):
@@ -461,6 +509,8 @@ def main():
 
 def verify_package(args):
     stage = args.stage.resolve()
+    build = json.loads((stage / "BUILD-INFO.json").read_text(encoding="utf-8"))
+    validate_build_info(stage, build["target"], build["version"])
     validate_assets(stage)
     for line in (stage / "PACKAGE-SHA256SUMS.txt").read_text(encoding="utf-8").splitlines():
         expected, name = line.split("  ", 1)
