@@ -2,8 +2,11 @@
 
 Goal autorizado em 10/09/2026, após aprovação da rua modular. Branch:
 `feature/prologue-scene-improvements`. Referência preservada: **`bdd9ae6`**.
+Implementado em **`f90a0d1`** e **`6c513e1`**, com revisão visual nativa,
+24 verificações funcionais, matriz de testes e gravação do som do jogo.
+[Prévia e evidências](evidence/cinematic-neighbourhood/README.md).
 
-## Resultado pretendido
+## Resultado implementado
 
 - Letreiro Casa Nossa legível, com fonte adequada a tamanhos pequenos e
   filtragem correta; ônibus urbano com comprimento e altura proporcionais.
@@ -40,16 +43,25 @@ fechada. Moradores de fundo não entram em hitboxes ou regras de combate.
 fuga sem interromper de forma brusca o restante da paisagem sonora. Sons
 novos são originais e reproduzíveis, com procedência e níveis documentados.
 
-## Verificação
+## Verificação executada
 
-- Revisar letreiro em resolução nativa, dimensão do ônibus e sobreposições.
-- Capturar câmera do início à entrega de controle; testar input antecipado,
+- Revisados letreiro em resolução nativa, dimensão do ônibus e sobreposições.
+- Capturada câmera do início à entrega de controle; testados input antecipado,
   pausa, retomada, avanço de trecho, retry e restart.
-- Conferir moradores em ambas as posições, porta aberta/baixando/fechada,
+- Conferidos moradores em ambas as posições, porta aberta/baixando/fechada,
   caramelo e ausência de retorno após evacuação, inclusive EP tardia.
-- Capturar som real do quarto e exterior e conferir transição, fuga e silêncio
-  de trânsito posterior. Validar loops, fades, pausa e ausência de cues repetidos.
-- Fmt, Clippy, testes, isolamento, empacotamento e links; evidências e commits.
+- Capturado som real do quarto e exterior; conferidos transição, fuga e
+  ausência de trânsito posterior. Validados loops, fades, pausa e cues únicos.
+- Executados fmt, Clippy, testes, isolamento, empacotamento e links;
+  registradas evidências e commits.
+
+Resultado: 461 testes conjuntos aprovados, 67 de aventura isolada, 395 de
+luta e três de core; dois testes preexistentes de dispositivo de áudio
+ignorados. Fmt, Clippy estrito, 56 fixtures de fronteiras, 47 do mixer e
+14 de pacote aprovados. Captura funcional com 24/24 checks; prévia contínua
+de 30,73 s, oito cues confirmados no áudio nativo, sem clipping e com o
+trânsito ausente na janela posterior à evacuação. Detalhes e limitações nas
+[evidências](evidence/cinematic-neighbourhood/README.md).
 
 [Decisão de arquitetura](adr/0026-cinematic-arrival-and-neighbours.md).
 [Diário](worklogs/cinematic-neighbourhood-arrival.md).

@@ -73,6 +73,7 @@ A quarta rodada abre a rua com uma tomada da pipa até Rust. Moradores e
 caramelo reagem à ameaça; visitantes entram na mercearia e o lojista baixa
 a porta de enrolar. Pássaros na manhã e trânsito leve no exterior acompanham
 os lugares, cessando o trânsito após a fuga. Ônibus e letreiro foram ampliados.
+[Prévia completa do quarto à rua, com som nativo](docs/evidence/cinematic-neighbourhood/street-arrival-and-shelter.mp4).
 [Escopo da chegada](docs/32-cinematic-neighbourhood-arrival.md).
 [Escopo das melhorias](docs/30-prologue-scene-improvements.md)
 e [diário do experimento](docs/worklogs/prologue-scene-improvements.md).

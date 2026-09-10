@@ -74,3 +74,23 @@ ficam em `~/.codex/generated_images/` até seleção. Sem integração à main/t
   dedicado convertido para AAC, sem ajuste de ganho ou remontagem dos sons.
 - Revisão independente do diff não encontrou bugs materiais de integração.
 - Em andamento: consolidação das evidências, links e commits finais.
+
+## Encerramento
+
+- `6c513e1`: vizinhança, caramelo, porta, áudio, captura funcional e pacote.
+  Mantém a câmera/controle de `f90a0d1` e fecha a integração da quarta rodada.
+- [Prévia com som nativo](../evidence/cinematic-neighbourhood/street-arrival-and-shelter.mp4)
+  e [evidências completas](../evidence/cinematic-neighbourhood/README.md)
+  versionadas com os relatórios, checks e imagens selecionadas.
+- Documentação de arquitetura, arte, procedência, catálogo e uso sincronizada.
+  Verificação final: 1519 links Markdown e 19 YAMLs válidos; `git diff --check`
+  sem erros. Checks copiados, SHA-256 do MP4 e hashes dos assets do staging
+  conferidos contra os arquivos entregues.
+- Escopo implementado e revisado; sem implementação pendente. A avaliação
+  subjetiva do timbre e dos controles físicos continua sendo playtest humano.
+  Nenhum merge, publicação ou tag realizado.
+- Recuperação: base aprovada `bdd9ae6`, câmera `f90a0d1`, integração `6c513e1`.
+  `git log -1 -- docs/evidence/cinematic-neighbourhood` identifica a etapa de
+  evidências. Fontes/telemetria locais ficam em `.git/neighbourhood-review/`;
+  staging em `.git/cinematic-neighbourhood-review/`. Não regenerar assets
+  nem repetir capturas já aprovadas sem nova mudança.

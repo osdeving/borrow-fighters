@@ -98,6 +98,7 @@ apenas leu pixels e escreveu JSON, sem retoque, recorte, redimensionamento,
 remoção de fundo ou regravação raster.
 
 Conferidos alpha, SHA-256, retângulos separados, apoios internos, direção,
-identidades, presença do tirador e links locais. A escala, a corrida até a
-entrada e o contato entre mãos, porta e chão precisam da revisão em movimento
-na cena integrada.
+identidades, presença do tirador e links locais. A revisão nativa integrada
+conferiu escala, corrida até a entrada, oclusão pelo batente, espera pelo
+último visitante e contato da porta com o chão, sem fresta lateral.
+[Capturas e prévia](../../../docs/evidence/cinematic-neighbourhood/README.md).

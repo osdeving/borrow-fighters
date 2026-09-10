@@ -1,0 +1,380 @@
+{
+  "mode": "native_isolated_pulseaudio_monitor_capture",
+  "output": {
+    "file": "street-arrival-and-shelter.mp4",
+    "sha256": "d95fac652eadbfd8eb832b924e1581c2cff0c52d1c67495196ba6422c79151c9",
+    "duration_seconds": 30.733333,
+    "frames": 922,
+    "fps": 30,
+    "audio_codec": "aac",
+    "audio_sample_rate": 48000,
+    "audio_channels": 2
+  },
+  "source_inputs": {
+    "video": {
+      "local_path": ".git/neighbourhood-review/preview/adventure-silent.mp4",
+      "sha256": "a9681037f0475704fd1d59f57b7ee3150e7a7246b40e8fdc69de7cb1898363be"
+    },
+    "audio": {
+      "local_path": ".git/neighbourhood-review/preview-audio.mka",
+      "sha256": "a08a953f72a92389fd9f1c3a75caa1c2d2475d52ee019f7d3a2188bf8aa0df64"
+    },
+    "telemetry": {
+      "local_path": ".git/neighbourhood-review/preview/telemetry.jsonl",
+      "sha256": "eb3751b910226c21c133df96fd2c22441e22c5e0ce01ac2f75ef01b406a12e51"
+    }
+  },
+  "video_preservation": {
+    "copied_without_reencoding": true,
+    "cuts": 0,
+    "source_compressed_stream_sha256": "616e556faaf0c38d8cf48520bdc0dfd1e2bfe372f0577981038aa3fb645c86e4",
+    "output_compressed_stream_sha256": "616e556faaf0c38d8cf48520bdc0dfd1e2bfe372f0577981038aa3fb645c86e4"
+  },
+  "audio_processing": {
+    "source": "Actual Raylib output recorded from its dedicated PulseAudio null-sink monitor; no desktop mix.",
+    "synthesized_replacement": false,
+    "mix_reconstruction": false,
+    "gain_adjustment": false,
+    "time_stretching": false,
+    "filter": "asetpts=N/SR/TB,atrim=start=2.669914484:duration=30.733333000,asetpts=PTS-STARTPTS",
+    "audio_preroll_trim_seconds": 2.669914484024048,
+    "encoding": "AAC stereo 192k at original 48kHz; end bounded by the unchanged video duration.",
+    "analysis_filters_applied_to_output": false
+  },
+  "alignment": {
+    "origin_wall_seconds": 1789053833.7179146,
+    "audio_first_pts": 1789053831.048,
+    "trim_seconds": 2.669914484024048,
+    "telemetry_origin_spread_ms": 0.9174346923828125,
+    "decoded_audio_seconds": 33.800544217687076,
+    "native_latency_preserved": true,
+    "latency_range_ms": [
+      12.831766362094044,
+      17.498755400954025
+    ],
+    "cue_latency_spread_ms": 4.666989038859981,
+    "timestamp_precision_note": "MKA packet timestamps have millisecond precision. Continuous decoded PCM sample clock is used after removing preroll; no wallclock timewarp or resampling correction.",
+    "video_sampling_uncertainty_ms": 33.333333333333336
+  },
+  "captured_cues": [
+    {
+      "cue": "traffic_escape",
+      "reaction_tick": 0,
+      "observed_reaction_tick": 0,
+      "video_seconds": 22.761743545532227,
+      "reference_sha256": "3f59307c5eab912a8685c0a8d5d6c39b311f409d91b28bce80ead3ff4935bf22",
+      "match": {
+        "template_seconds": 0.18,
+        "reference_start_seconds": 0.0,
+        "analysis_band_hz": null,
+        "pcm_onset_seconds": 25.44448979591837,
+        "muxed_onset_seconds": 22.77457531189432,
+        "expected_video_seconds": 22.761743545532227,
+        "latency_ms": 12.831766362094044,
+        "correlation": 0.9605269788611757,
+        "estimated_gain": 0.2905054586619238
+      },
+      "unfiltered_best_match": null,
+      "method": "Normalized waveform cross-correlation, +/-400ms around the first unpaused telemetry sample crossing the milestone."
+    },
+    {
+      "cue": "dog_alert",
+      "reaction_tick": 8,
+      "observed_reaction_tick": 8,
+      "video_seconds": 22.89265251159668,
+      "reference_sha256": "22d37b3298514fcbfa282015e08965e5cdc29be61e7f59872d05f1a21edc81b3",
+      "match": {
+        "template_seconds": 0.18,
+        "reference_start_seconds": 0.0,
+        "analysis_band_hz": [
+          450,
+          650
+        ],
+        "pcm_onset_seconds": 25.57736961451247,
+        "muxed_onset_seconds": 22.907455130488422,
+        "expected_video_seconds": 22.89265251159668,
+        "latency_ms": 14.802618891742725,
+        "correlation": 0.761428211521436,
+        "estimated_gain": 0.29970528249013206
+      },
+      "unfiltered_best_match": {
+        "template_seconds": 0.18,
+        "reference_start_seconds": 0.0,
+        "analysis_band_hz": null,
+        "pcm_onset_seconds": 25.760226757369615,
+        "muxed_onset_seconds": 23.090312273345567,
+        "expected_video_seconds": 22.89265251159668,
+        "latency_ms": 197.65976174888777,
+        "correlation": 0.26018416701414765,
+        "estimated_gain": 0.2576837579835984
+      },
+      "method": "Normalized waveform cross-correlation, +/-400ms around the first unpaused telemetry sample crossing the milestone."
+    },
+    {
+      "cue": "car_horn",
+      "reaction_tick": 38,
+      "observed_reaction_tick": 38,
+      "video_seconds": 23.398691177368164,
+      "reference_sha256": "960aac61e2848202262b44273ba731875b25bf72c991793bd58c0995f68dea11",
+      "match": {
+        "template_seconds": 0.5,
+        "reference_start_seconds": 0.0,
+        "analysis_band_hz": null,
+        "pcm_onset_seconds": 26.08512471655329,
+        "muxed_onset_seconds": 23.41521023252924,
+        "expected_video_seconds": 23.398691177368164,
+        "latency_ms": 16.519055161076324,
+        "correlation": 0.9808956523960825,
+        "estimated_gain": 0.29005016804354455
+      },
+      "unfiltered_best_match": null,
+      "method": "Normalized waveform cross-correlation, +/-400ms around the first unpaused telemetry sample crossing the milestone."
+    },
+    {
+      "cue": "bicycle_fall",
+      "reaction_tick": 70,
+      "observed_reaction_tick": 71,
+      "video_seconds": 23.93854522705078,
+      "reference_sha256": "17d3997091131ef8baa07e2742b4aacb53368991dc1a410a1c8cb1048da8e0d2",
+      "match": {
+        "template_seconds": 0.18,
+        "reference_start_seconds": 0.0,
+        "analysis_band_hz": [
+          570,
+          730
+        ],
+        "pcm_onset_seconds": 26.62544217687075,
+        "muxed_onset_seconds": 23.9555276928467,
+        "expected_video_seconds": 23.93854522705078,
+        "latency_ms": 16.982465795919666,
+        "correlation": 0.8638830500795628,
+        "estimated_gain": 0.29125949119285677
+      },
+      "unfiltered_best_match": {
+        "template_seconds": 0.18,
+        "reference_start_seconds": 0.0,
+        "analysis_band_hz": null,
+        "pcm_onset_seconds": 26.623854875283445,
+        "muxed_onset_seconds": 23.953940391259398,
+        "expected_video_seconds": 23.93854522705078,
+        "latency_ms": 15.395164208616308,
+        "correlation": 0.2545890076029187,
+        "estimated_gain": 0.26929927715176233
+      },
+      "method": "Normalized waveform cross-correlation, +/-400ms around the first unpaused telemetry sample crossing the milestone."
+    },
+    {
+      "cue": "car_skid",
+      "reaction_tick": 78,
+      "observed_reaction_tick": 79,
+      "video_seconds": 24.07404899597168,
+      "reference_sha256": "f6ac3619f38517b236ac0827f1fcb4ebfc814ef8aec5df0c3150497653031815",
+      "match": {
+        "template_seconds": 0.18,
+        "reference_start_seconds": 0.0,
+        "analysis_band_hz": null,
+        "pcm_onset_seconds": 26.756916099773242,
+        "muxed_onset_seconds": 24.087001615749195,
+        "expected_video_seconds": 24.07404899597168,
+        "latency_ms": 12.95261977751494,
+        "correlation": 0.937646821560735,
+        "estimated_gain": 0.2735306279558903
+      },
+      "unfiltered_best_match": null,
+      "method": "Normalized waveform cross-correlation, +/-400ms around the first unpaused telemetry sample crossing the milestone."
+    },
+    {
+      "cue": "car_crash",
+      "reaction_tick": 112,
+      "observed_reaction_tick": 113,
+      "video_seconds": 24.64025115966797,
+      "reference_sha256": "5ea6153cada30256692f4b824980886eca8c29e6a7fa8597fca0f9ffdb3102fc",
+      "match": {
+        "template_seconds": 0.18,
+        "reference_start_seconds": 0.0,
+        "analysis_band_hz": null,
+        "pcm_onset_seconds": 27.32766439909297,
+        "muxed_onset_seconds": 24.657749915068923,
+        "expected_video_seconds": 24.64025115966797,
+        "latency_ms": 17.498755400954025,
+        "correlation": 0.9375659745310557,
+        "estimated_gain": 0.27056302013473077
+      },
+      "unfiltered_best_match": null,
+      "method": "Normalized waveform cross-correlation, +/-400ms around the first unpaused telemetry sample crossing the milestone."
+    },
+    {
+      "cue": "shutter_roll",
+      "reaction_tick": 270,
+      "observed_reaction_tick": 271,
+      "video_seconds": 27.27043914794922,
+      "reference_sha256": "768ea5212c9680e53c27867d791ace43ea4073d59e2218d02946bb21c523cd70",
+      "match": {
+        "template_seconds": 0.18,
+        "reference_start_seconds": 0.0,
+        "analysis_band_hz": null,
+        "pcm_onset_seconds": 29.95374149659864,
+        "muxed_onset_seconds": 27.28382701257459,
+        "expected_video_seconds": 27.27043914794922,
+        "latency_ms": 13.387864625372004,
+        "correlation": 0.8661326140341361,
+        "estimated_gain": 0.27595030881312466
+      },
+      "unfiltered_best_match": null,
+      "method": "Normalized waveform cross-correlation, +/-400ms around the first unpaused telemetry sample crossing the milestone."
+    },
+    {
+      "cue": "shutter_clack",
+      "reaction_tick": 330,
+      "observed_reaction_tick": 331,
+      "video_seconds": 28.271699905395508,
+      "reference_sha256": "dd866f0a898142c5533a4424f78abc597567e03e6a2009a0c31230fad0bceca8",
+      "match": {
+        "template_seconds": 0.18,
+        "reference_start_seconds": 0.0,
+        "analysis_band_hz": null,
+        "pcm_onset_seconds": 30.95718820861678,
+        "muxed_onset_seconds": 28.287273724592733,
+        "expected_video_seconds": 28.271699905395508,
+        "latency_ms": 15.573819197225447,
+        "correlation": 0.9671150887271549,
+        "estimated_gain": 0.2851515654527032
+      },
+      "unfiltered_best_match": null,
+      "method": "Normalized waveform cross-correlation, +/-400ms around the first unpaused telemetry sample crossing the milestone."
+    }
+  ],
+  "captured_ambience": {
+    "morning": [
+      {
+        "reference": "morning_ambience",
+        "reference_sha256": "beae1f74a773a6a1bedc3952f1639b955de7e89b4622de1028b288217d07b423",
+        "match": {
+          "template_seconds": 4,
+          "reference_start_seconds": 0,
+          "analysis_band_hz": null,
+          "pcm_onset_seconds": 2.6960090702947848,
+          "muxed_onset_seconds": 0.026094586270736908,
+          "expected_video_seconds": 0.01666666753590107,
+          "latency_ms": 9.427918734835838,
+          "correlation": 0.9976596506204347,
+          "estimated_gain": 0.28666196080606404
+        }
+      },
+      {
+        "reference": "morning_ambience",
+        "reference_sha256": "beae1f74a773a6a1bedc3952f1639b955de7e89b4622de1028b288217d07b423",
+        "match": {
+          "template_seconds": 0.9,
+          "reference_start_seconds": 2.2,
+          "analysis_band_hz": null,
+          "pcm_onset_seconds": 4.8960090702947845,
+          "muxed_onset_seconds": 2.2260945862707366,
+          "expected_video_seconds": 2.2166666675359012,
+          "latency_ms": 9.427918734835394,
+          "correlation": 0.9980379964037852,
+          "estimated_gain": 0.28623057284069886
+        }
+      }
+    ],
+    "morning_bird_window_note": "Reference interval 2.2–3.1s includes the two first distant bird chirps; waveform match uses actual recorded audio.",
+    "calm_street_traffic": {
+      "reference": "street_traffic",
+      "reference_sha256": "53c7111201b2b96463eaf33e31e8a89125c9c5725d13f72a279bfaf4852254e7",
+      "match": {
+        "template_seconds": 1.5,
+        "reference_start_seconds": 1.2,
+        "analysis_band_hz": null,
+        "pcm_onset_seconds": 17.886666666666667,
+        "muxed_onset_seconds": 15.216752182642619,
+        "expected_video_seconds": 15.202202033996581,
+        "latency_ms": 14.550148646037542,
+        "correlation": 0.9529875402292238,
+        "estimated_gain": 0.2851493675113912
+      }
+    },
+    "traffic_end_telemetry_seconds": 28.76096534729004,
+    "traffic_end_reaction_tick": 360,
+    "after_evacuation": {
+      "post_evacuation_air_match": {
+        "template_seconds": 0.8,
+        "reference_start_seconds": 15.3,
+        "analysis_band_hz": null,
+        "pcm_onset_seconds": 31.986666666666668,
+        "muxed_onset_seconds": 29.31675218264262,
+        "expected_video_seconds": 29.302202033996583,
+        "latency_ms": 14.550148646037542,
+        "correlation": 0.9895875307463273,
+        "estimated_gain": 0.28409266798694677
+      },
+      "linear_source_projection_windows": [
+        {
+          "label": "calm_street",
+          "video_start_seconds": 15.216752182642619,
+          "duration_seconds": 1.5,
+          "reference_start_seconds": 1.2,
+          "air_coefficient": 0.28550892724723703,
+          "traffic_coefficient": 0.2825322913512254,
+          "native_rms": 0.019198283553122492,
+          "air_reference_rms": 0.016921857378642904,
+          "traffic_reference_rms": 0.06416189935677305,
+          "residual_rms": 0.003244514469912947,
+          "explained_energy_fraction": 0.9714389199037671
+        },
+        {
+          "label": "after_evacuation",
+          "video_start_seconds": 29.31675218264262,
+          "duration_seconds": 0.8,
+          "reference_start_seconds": 15.3,
+          "air_coefficient": 0.2840879227873419,
+          "traffic_coefficient": -6.721566437315137e-05,
+          "native_rms": 0.0037971889477577134,
+          "air_reference_rms": 0.01322684904617621,
+          "traffic_reference_rms": 0.03908106007634024,
+          "residual_rms": 0.0005465319879351452,
+          "explained_energy_fraction": 0.9792839593095635
+        }
+      ],
+      "method": "Least-squares projection of unmodified native PCM onto the two original WAV references; no recording processing or reconstruction.",
+      "selection": "The post-evacuation window is after the 28.883s guard sound ends and before the next contact at 30.368s; closure clack has ended.",
+      "scope": "Projection measures these exact source components in these windows; it is not proof of absolute acoustic silence or a speaker/listening test."
+    },
+    "interpretation": "Calm exterior contains both source layers. After evacuation, native audio matches the air bed (r~0.990); fitted traffic contribution is effectively zero in the contact-free 0.8s window."
+  },
+  "levels": {
+    "source_aligned_peak_normalized": 0.2379150390625,
+    "source_aligned_rms_normalized": 0.02151083662772948,
+    "source_aligned_samples_at_or_beyond_full_scale": 0,
+    "decoded_aac_peak_normalized": 0.2379283905029297,
+    "decoded_aac_samples_at_or_beyond_full_scale": 0
+  },
+  "telemetry": {
+    "rows": 1579,
+    "paused_rows": 0,
+    "explicit_skip_rows": 0,
+    "stage_start": "RustMorning",
+    "stage_end": "Encounter",
+    "street_start_seconds": 14.002202033996582,
+    "reaction_start_seconds": 22.761743545532227,
+    "end_accident_ticks": 480,
+    "end_shutter_phase": "Closed",
+    "end_visible_residents": 0,
+    "end_visible_dog": false,
+    "end_visible_traffic_cars": 0,
+    "end_visible_cyclists": 0,
+    "end_kid_phase": "Gone"
+  },
+  "analysis": {
+    "sample_rate": 22050,
+    "filtering": "4th-order causal Butterworth SOS applied equally to recording and complete reference before extracting the 180ms templates; dog 450–650Hz, bicycle 570–730Hz. Other cues use unfiltered templates.",
+    "overlap_note": "The bark overlaps fleeing engines; the bicycle overlaps the horn/brake tails. Their unfiltered matches are retained for transparency, while the separated reference bands determine the reported onset.",
+    "source_projection": "The two source WAVs are used only as regression references against native PCM; this does not reconstruct or replace any exported audio."
+  },
+  "limitations": [
+    "Waveform correlation identifies source signals in the actual recording; it does not evaluate subjective timbre, physical speakers or headphone output.",
+    "Video is sampled at 30fps. Cue delay is measured relative to the first telemetry state crossing each milestone and includes native device/buffering latency.",
+    "Dog and bicycle matches need analysis band separation because louder simultaneous effects mask their raw waveform.",
+    "Near-zero traffic projection covers the stated post-evacuation window; it is not a claim of acoustic silence. Air and later combat feedback remain audible.",
+    "Original game sounds are synthesized assets, but this exported soundtrack is the actual native recording with no offline replacement mix."
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "result": "passed",
+  "build_command": [
+    "cargo",
+    "build",
+    "--offline",
+    "--bin",
+    "borrow-story"
+  ],
+  "build_info": {
+    "version": "0.1.0-neighbourhood.review",
+    "target": "linux-x86_64",
+    "cargo_binary": "borrow-story",
+    "commit": "f90a0d1d1d75439995ff723fe0be86870470e26e",
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "asset_count": 248
+  },
+  "binary_sha256": "87d4c51b6e5b5401dc876142798daa3e977b0defda16927af7497e139dbd516b",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "tools/release/package.py",
+        "stage",
+        "--target",
+        "linux-x86_64",
+        "--binary",
+        "target/debug/borrow-story",
+        "--output",
+        "/tmp/borrow-neighbourhood-stage-_4nbv6e2/linux",
+        "--version",
+        "0.1.0-neighbourhood.review"
+      ],
+      "exit_code": 0,
+      "stdout": "Staged linux-x86_64 in /tmp/borrow-neighbourhood-stage-_4nbv6e2/linux\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/release/package.py",
+        "verify",
+        "--stage",
+        "/tmp/borrow-neighbourhood-stage-_4nbv6e2/linux"
+      ],
+      "exit_code": 0,
+      "stdout": "Verified staged assets and checksums in /tmp/borrow-neighbourhood-stage-_4nbv6e2/linux\n",
+      "stderr": ""
+    }
+  ],
+  "new_assets_byte_equal": {
+    "street/catalog.json": {
+      "bytes": 19800,
+      "sha256": "946daef458c6187624c96442eb845dfcfb42ca4fee66c4d1807a70401fb6cc1a"
+    },
+    "street/scene.json": {
+      "bytes": 1538,
+      "sha256": "7b39da98ffb06e1e53e2c609df66967430e830ce4eeeab449cf6393c678d6a17"
+    },
+    "street/neighbours.png": {
+      "bytes": 2101837,
+      "sha256": "40bdacd3abad00a17d9cdce266c5e381345ae25ef5d7e22c69107519acc3cba2"
+    },
+    "street/shopkeeper.png": {
+      "bytes": 2058304,
+      "sha256": "00cf325015c8ddf3c52b035bbc0dbd1903be35441638d5bfaf1fdde651c6d409"
+    },
+    "street/shutter.png": {
+      "bytes": 2069679,
+      "sha256": "b11cca82fad5f8d03d135c37976e19c593c0f5ddd991c913c1069acb09e1a9e0"
+    },
+    "street/caramelo.png": {
+      "bytes": 1968288,
+      "sha256": "9fa17dcccab61b78ea6414aadcbedd41ef6aeb81d9637b8d83db8b570f48e8d3"
+    },
+    "audio/morning_ambience.wav": {
+      "bytes": 882044,
+      "sha256": "beae1f74a773a6a1bedc3952f1639b955de7e89b4622de1028b288217d07b423"
+    },
+    "audio/street_air.wav": {
+      "bytes": 882044,
+      "sha256": "2f7f98607579241cd8203fc30eecdb278ae9cd6c02b530e8bf2656b1d41a6e87"
+    },
+    "audio/street_traffic.wav": {
+      "bytes": 882044,
+      "sha256": "53c7111201b2b96463eaf33e31e8a89125c9c5725d13f72a279bfaf4852254e7"
+    },
+    "audio/dog_alert.wav": {
+      "bytes": 13274,
+      "sha256": "22d37b3298514fcbfa282015e08965e5cdc29be61e7f59872d05f1a21edc81b3"
+    },
+    "audio/shutter_roll.wav": {
+      "bytes": 44144,
+      "sha256": "768ea5212c9680e53c27867d791ace43ea4073d59e2218d02946bb21c523cd70"
+    },
+    "audio/shutter_clack.wav": {
+      "bytes": 15920,
+      "sha256": "dd866f0a898142c5533a4424f78abc597567e03e6a2009a0c31230fad0bceca8"
+    }
+  },
+  "catalog_unique_images": 9,
+  "catalog_frames_resolved": 59,
+  "required_piece_ids_documented": 30,
+  "local_markdown_links_checked": 144,
+  "package_unit_tests": 14,
+  "native_window_opened": false,
+  "native_libraries_bundled": false,
+  "note": "Real Linux stage and checksum verification with local composed debug binary rebuilt after final doorway/signage edits, cached Cargo notices and no downloads. Temporary stage removed after successful verification."
+}

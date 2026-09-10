@@ -45,5 +45,6 @@ Escopo na [entrega 32](../../../docs/32-cinematic-neighbourhood-arrival.md).
 
 Verificação: oito silhuetas completas e separadas, direção direita,
 dimensões RGBA, alpha vazio, recortes e pivôs dentro dos limites e SHA-256
-registrado no JSON. A leitura e a escala finais devem ser conferidas na
-cena em movimento.
+registrado no JSON. A revisão nativa integrada conferiu leitura, escala,
+fuga contínua pela calçada e ausência de retorno após a evacuação.
+[Capturas e prévia](../../../docs/evidence/cinematic-neighbourhood/README.md).
