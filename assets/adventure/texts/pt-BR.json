@@ -18,6 +18,10 @@
     "morning.name": "Rust",
     "morning.caption": "Tudo parecia normal como qualquer outro dia.",
     "morning.controls": "Enter / A  sair de casa     Esc / Start  pausar",
+    "morning.poster.rust": "RUST",
+    "morning.poster.slogan": "FEARLESS\nCONCURRENCY",
+    "morning.setup.command": "$ cargo run",
+    "morning.setup.status": "Finished dev profile\n0 warnings. Bom dia!",
     "encounter.name": "RUST",
     "encounter.objective": "DEFENDA-SE",
     "encounter.explore": "UMA MANHÃ QUALQUER",
@@ -76,6 +80,11 @@
     "navigation.pause_menu": "Backspace / View  pular tudo e ir ao menu     B  sair",
     "navigation.pause": "Backspace / View  pular tudo     B  sair",
     "navigation.continue": "Aperte qualquer tecla para continuar",
-    "navigation.continue_detail": "Uma tecla, clique ou botão do controle abre o menu principal."
+    "navigation.continue_detail": "Uma tecla, clique ou botão do controle abre o menu principal.",
+    "street.bar.kind": "BAR E MERCEARIA",
+    "street.bar.name": "BAR E MERCEARIA CASA NOSSA",
+    "street.stop.title": "PONTO DE ÔNIBUS",
+    "street.stop.route": "010\nCENTRO",
+    "street.arrival.controls": "Enter / RB  começar a explorar     Esc / Start  pausar"
   }
 }

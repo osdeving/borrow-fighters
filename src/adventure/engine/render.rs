@@ -3,9 +3,11 @@
 //! System: Adventure renderer. It reads domain snapshots, adds visual motion and
 //! draws its own interface; drawing never changes contact or story outcomes.
 
+use super::actors::{actor_shadow, creature, rust};
 use super::assets::Assets;
 use crate::adventure::{
-    combat::{Action, Actor, FLOOR_Y, Facing, Outcome},
+    arrival::ArrivalShot,
+    combat::{Action, FLOOR_Y, Outcome},
     story::{PrologueBeat, Stage, Story},
 };
 use raylib::prelude::*;
@@ -85,6 +87,19 @@ pub fn navigation(
                 alpha(PAPER, 0.85),
             );
         }
+        return;
+    }
+    if story.arrival_active() {
+        d.draw_rectangle(0, 670, WIDTH, 50, alpha(INK, 0.92));
+        super::typography::centered(
+            d,
+            &a.body,
+            a.text.get("street.arrival.controls"),
+            Vector2::new(640.0, 685.0),
+            1160.0,
+            18.0,
+            PAPER,
+        );
         return;
     }
     let encounter = story.stage == Stage::Encounter;
@@ -267,6 +282,7 @@ fn ada(d: &mut impl RaylibDraw, story: &Story, a: &Assets, reveal_text: bool) {
 fn morning(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
     let t = story.stage_ticks as f32 / 60.0;
     background(d, &a.environments, 0, 0.0, 1.0);
+    super::morning::draw_room_details(d, story, a);
     for i in 0..26 {
         let f = i as f32;
         let x = 720.0 + (f * 18.7).sin() * 270.0 + t * 3.0;
@@ -300,71 +316,95 @@ fn morning(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
 fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
     let c = &story.combat;
     let camera = (c.player.position.x - 450.0).clamp(0.0, 920.0);
-    background(d, &a.environments, 1, -camera * 0.48, 1.35);
-    d.draw_rectangle_gradient_v(
-        0,
-        565,
-        WIDTH,
-        155,
-        Color::BLANK,
-        Color::new(44, 42, 39, 255),
-    );
-    d.draw_line(
-        0,
-        FLOOR_Y as i32 + 3,
-        WIDTH,
-        FLOOR_Y as i32 + 3,
-        alpha(PAPER, 0.2),
-    );
-    let scene_time = c.ticks as f32 / 60.0;
-    for i in 0..12 {
-        let f = i as f32;
-        let x = (f * 197.0 + scene_time * 13.0 - camera * 0.5).rem_euclid(1400.0) - 60.0;
-        let y = 80.0 + (scene_time * 0.35 + f).sin() * 24.0 + f * 27.0;
-        d.draw_circle_v(Vector2::new(x, y), 1.3, alpha(GOLD, 0.35));
-    }
-    actor_shadow(d, &c.player, camera);
-    actor_shadow(d, &c.enemy, camera);
-    creature(d, a, &c.enemy, camera);
-    rust(d, a, &c.player, camera);
-    if let Some(hit) = c.last_hit {
-        let p = Vector2::new(hit.position.x - camera, hit.position.y);
-        let age = hit.age_ticks as f32;
-        let opacity = (1.0 - age / 16.0).max(0.0);
-        let color = if hit.blocked { MINT } else { GOLD };
-        for i in 0..9 {
-            let angle = i as f32 * std::f32::consts::TAU / 9.0;
-            let r = 7.0 + age * 2.5;
-            d.draw_line_ex(
-                Vector2::new(p.x + angle.cos() * r, p.y + angle.sin() * r),
-                Vector2::new(
-                    p.x + angle.cos() * (r + 12.0),
-                    p.y + angle.sin() * (r + 12.0),
-                ),
-                2.0,
-                alpha(color, opacity),
-            );
+    let arriving = story.arrival_active();
+    let shot = if arriving {
+        ArrivalShot::at(story.stage_ticks)
+    } else {
+        ArrivalShot::settled()
+    };
+    {
+        let mut world = d.begin_mode2D(Camera2D {
+            offset: Vector2::new(640.0, 360.0),
+            target: Vector2::new(shot.target.x, shot.target.y),
+            rotation: 0.0,
+            zoom: shot.zoom,
+        });
+        let d = &mut world;
+        super::street::background(d, a, camera);
+        d.draw_rectangle_gradient_v(
+            0,
+            565,
+            WIDTH,
+            155,
+            Color::BLANK,
+            Color::new(44, 42, 39, 255),
+        );
+        d.draw_line(
+            0,
+            FLOOR_Y as i32 + 3,
+            WIDTH,
+            FLOOR_Y as i32 + 3,
+            alpha(PAPER, 0.2),
+        );
+        let scene_time = story.ambient.ticks() as f32 / 60.0;
+        super::street::draw(d, &story.ambient, a, camera);
+        for i in 0..12 {
+            let f = i as f32;
+            let x = (f * 197.0 + scene_time * 13.0 - camera * 0.5).rem_euclid(1400.0) - 60.0;
+            let y = 80.0 + (scene_time * 0.35 + f).sin() * 24.0 + f * 27.0;
+            d.draw_circle_v(Vector2::new(x, y), 1.3, alpha(GOLD, 0.35));
         }
-        d.draw_circle_v(p, 6.0 + age, alpha(color, opacity * 0.45));
-    }
-    if debug {
-        for actor in [&c.player, &c.enemy] {
-            let b = actor.hurtbox();
-            d.draw_rectangle_lines_ex(
-                Rectangle::new(b.x - camera, b.y, b.width, b.height),
-                2.0,
-                MINT,
-            );
-            if let Some(b) = actor.attack_hitbox() {
+        actor_shadow(d, &c.player, camera);
+        // The same awakening signal reveals the threat and startles the child.
+        if c.enemy_awake {
+            actor_shadow(d, &c.enemy, camera);
+            creature(d, a, &c.enemy, camera);
+        }
+        rust(d, a, &c.player, camera);
+        if let Some(hit) = c.last_hit {
+            let p = Vector2::new(hit.position.x - camera, hit.position.y);
+            let age = hit.age_ticks as f32;
+            let opacity = (1.0 - age / 16.0).max(0.0);
+            let color = if hit.blocked { MINT } else { GOLD };
+            for i in 0..9 {
+                let angle = i as f32 * std::f32::consts::TAU / 9.0;
+                let r = 7.0 + age * 2.5;
+                d.draw_line_ex(
+                    Vector2::new(p.x + angle.cos() * r, p.y + angle.sin() * r),
+                    Vector2::new(
+                        p.x + angle.cos() * (r + 12.0),
+                        p.y + angle.sin() * (r + 12.0),
+                    ),
+                    2.0,
+                    alpha(color, opacity),
+                );
+            }
+            d.draw_circle_v(p, 6.0 + age, alpha(color, opacity * 0.45));
+        }
+        if debug {
+            for actor in [&c.player, &c.enemy] {
+                let b = actor.hurtbox();
                 d.draw_rectangle_lines_ex(
                     Rectangle::new(b.x - camera, b.y, b.width, b.height),
                     2.0,
-                    Color::RED,
+                    MINT,
                 );
+                if let Some(b) = actor.attack_hitbox() {
+                    d.draw_rectangle_lines_ex(
+                        Rectangle::new(b.x - camera, b.y, b.width, b.height),
+                        2.0,
+                        Color::RED,
+                    );
+                }
             }
         }
     }
-    if story.stage == Stage::Encounter && c.outcome == Outcome::Ongoing {
+    if arriving {
+        let border = (42.0 * shot.matte) as i32;
+        d.draw_rectangle(0, 0, WIDTH, border, alpha(INK, 0.94));
+        d.draw_rectangle(0, HEIGHT - border, WIDTH, border, alpha(INK, 0.94));
+    }
+    if story.stage == Stage::Encounter && c.outcome == Outcome::Ongoing && !arriving {
         d.draw_rectangle_rounded(
             Rectangle::new(30.0, 26.0, 292.0, 85.0),
             0.08,
@@ -440,149 +480,6 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
             );
         }
     }
-}
-
-fn actor_shadow(d: &mut impl RaylibDraw, actor: &Actor, camera: f32) {
-    d.draw_ellipse(
-        (actor.position.x - camera) as i32,
-        FLOOR_Y as i32 + 2,
-        37.0,
-        7.0,
-        alpha(INK, 0.22),
-    );
-}
-
-fn rust(d: &mut impl RaylibDraw, a: &Assets, actor: &Actor, camera: f32) {
-    let pos = Vector2::new(actor.position.x - camera, actor.position.y);
-    if actor.action == Action::Remorse {
-        let frame = match actor.action_ticks {
-            0..=29 => 8,
-            30..=59 => 9,
-            60..=89 => 10,
-            90..=119 => 9,
-            _ => 11,
-        };
-        let tallest = a
-            .morning_bounds
-            .iter()
-            .skip(6)
-            .map(|r| r.height)
-            .fold(1.0, f32::max);
-        pose(
-            d,
-            &a.morning,
-            a.morning_bounds[frame],
-            pos,
-            174.0 / tallest,
-            actor.facing == Facing::Left,
-            Color::WHITE,
-        );
-        return;
-    }
-    let frame = match actor.action {
-        Action::Walk => 2 + (actor.action_ticks / 7 % 4) as usize,
-        Action::Jump if actor.velocity.y < 0.0 => 6,
-        Action::Jump => 7,
-        Action::LightAttack if actor.action_ticks < 5 => 8,
-        Action::LightAttack if actor.action_ticks < 10 => 9,
-        Action::LightAttack => 10,
-        Action::HeavyAttack if actor.action_ticks < 13 => 11,
-        Action::HeavyAttack if actor.action_ticks < 20 => 12,
-        Action::Block => 13,
-        Action::Hurt => 14,
-        Action::Defeated => 15,
-        _ => (actor.action_ticks / 30 % 2) as usize,
-    };
-    let tallest = a
-        .action_bounds
-        .iter()
-        .take(15)
-        .map(|r| r.height)
-        .fold(1.0, f32::max);
-    pose(
-        d,
-        &a.actions,
-        a.action_bounds[frame],
-        pos,
-        174.0 / tallest,
-        actor.facing == Facing::Left,
-        Color::WHITE,
-    );
-    if actor.action == Action::HeavyAttack && (13..20).contains(&actor.action_ticks) {
-        let x = pos.x + actor.facing.sign() * 65.0;
-        let y = pos.y - 115.0;
-        let t = (actor.action_ticks - 13) as f32;
-        d.draw_circle_lines(
-            x as i32,
-            y as i32,
-            14.0 + t * 2.0,
-            alpha(GOLD, 1.0 - t / 8.0),
-        );
-        for i in 0..4 {
-            let angle = i as f32 * std::f32::consts::FRAC_PI_2 + t * 0.13;
-            let p = Vector2::new(x + angle.cos() * 23.0, y + angle.sin() * 23.0);
-            d.draw_rectangle(p.x as i32 - 2, p.y as i32 - 2, 4, 4, GOLD);
-        }
-    }
-}
-
-fn creature(d: &mut impl RaylibDraw, a: &Assets, actor: &Actor, camera: f32) {
-    let frame = match actor.action {
-        Action::Walk => 1 + (actor.action_ticks / 10 % 2) as usize,
-        Action::Telegraph => 3,
-        Action::Lunge => 4,
-        Action::Hurt => 5,
-        Action::Defeated if actor.action_ticks < 24 => 6,
-        Action::Defeated => 7,
-        _ => 0,
-    };
-    let height = a
-        .erratic_bounds
-        .iter()
-        .take(6)
-        .map(|r| r.height)
-        .fold(1.0, f32::max);
-    let tremor = if actor.hp > 0 {
-        (actor.action_ticks as f32 * 0.7).sin() * 1.2
-    } else {
-        0.0
-    };
-    pose(
-        d,
-        &a.erratic,
-        a.erratic_bounds[frame],
-        Vector2::new(actor.position.x - camera + tremor, actor.position.y),
-        187.0 / height,
-        actor.facing == Facing::Left,
-        Color::WHITE,
-    );
-}
-
-fn pose(
-    d: &mut impl RaylibDraw,
-    texture: &Texture2D,
-    source: Rectangle,
-    feet: Vector2,
-    scale: f32,
-    flip: bool,
-    tint: Color,
-) {
-    let width = source.width * scale;
-    let height = source.height * scale;
-    let src = Rectangle::new(
-        source.x,
-        source.y,
-        if flip { -source.width } else { source.width },
-        source.height,
-    );
-    d.draw_texture_pro(
-        texture,
-        src,
-        Rectangle::new(feet.x, feet.y, width, height),
-        Vector2::new(width * 0.5, height),
-        0.0,
-        tint,
-    );
 }
 
 fn background(d: &mut impl RaylibDraw, texture: &Texture2D, index: usize, x: f32, scale: f32) {

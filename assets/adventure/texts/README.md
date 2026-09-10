@@ -21,6 +21,8 @@ precisam de `\"`. JSON não aceita comentários ou vírgula depois do último it
 | `window.*` | Título da janela |
 | `ada.*` | Legendas, terminal, passagem de tempo e ajuda do prólogo |
 | `morning.*` | Manhã de Rust |
+| `morning.poster.rust`, `morning.poster.slogan` | Título e frase dos pôsteres no quarto de Rust |
+| `morning.setup.command`, `morning.setup.status` | Comando e saída do terminal no setup do quarto |
 | `encounter.*`, `aftermath.*` | Objetivo, comandos e pesar após a luta |
 | `ending.*`, `defeat.*`, `pause.*` | Conclusão, derrota, pausa e opções |
 | `navigation.*` | Próximo trecho, pular tudo e confirmação final da apresentação |
@@ -40,6 +42,11 @@ reticências para não cobrir a cena. Mantenha frases curtas e confira o tempo d
 leitura no jogo. O limite técnico é 2.000 caracteres por valor. Recarregar não
 reinicia a cena, a música ou o combate. Novas cenas, durações e comandos ainda
 são alterações de código.
+
+Para conferir os pôsteres e o setup da [rodada de melhorias do prólogo](../../../docs/30-prologue-scene-improvements.md),
+use `cargo run -- --start morning`. Os quatro valores `morning.poster.*` e
+`morning.setup.*` também recarregam com F5; mantenha frases curtas para os
+quadros e a tela do quarto.
 
 Para conferir a navegação, `Enter`/`RB` avança ao próximo trecho; `A` no controle
 também avança cenas e continua pulando no combate. Em `borrow-story`,

@@ -5,10 +5,23 @@
 Este documento é a fonte de verdade para **o que vem agora**, com filas separadas
 de **to-do** (investigações e melhorias) e **bugfix** (defeitos observados).
 
-Prioridade atual, em 10 de setembro de 2026: avaliar o episódio, a apresentação
-e o menu integrado da **release `v0.1.0-prototype.4`**, publicada com aventura
-e luta na mesma execução. O playtest humano continua no TODO-013; a publicação
-concluiu a frente de distribuição. O episódio de aventura 2D narrativa solo
+Prioridade atual: integrar à `main` e publicar **v0.1.0-prototype.5**, conforme
+pedido explícito após aprovação do capítulo jogável. A preparação ocorre em
+`release/v0.1.0-prototype.5`, a partir de `3ee8e93`; o checkpoint anterior ao
+capítulo, `81c50e6`, permanece no histórico. [Diário da release](worklogs/release-prototype-5.md).
+
+O capítulo **Depois do silêncio** e as quatro rodadas do prólogo estão
+implementados e verificados. [Capítulo](33-after-the-silence.md),
+[ADR 0027](adr/0027-chapter-spatial-direction.md), [evidências](evidence/after-the-silence/README.md)
+e [diário](worklogs/after-the-silence.md) registram o resultado. A rua brasileira
+inclui trânsito variado, ciclovia, pipa, boteco, ponto, caramelo, abrigo e evacuação;
+a câmera e o som acompanham a manhã e a chegada à rua.
+[Rodadas](30-prologue-scene-improvements.md), [rua modular](31-brazilian-street-evacuation.md)
+e [chegada cinematográfica](32-cinematic-neighbourhood-arrival.md).
+O playtest humano mais amplo do episódio continua no TODO-013.
+
+A prototype.4 foi publicada com aventura e luta na mesma execução, concluindo
+a frente de distribuição. O episódio de aventura 2D narrativa solo
 protagonizada por Rust foi implementado na branch
 `feature/rust-adventure-prologue`. O [episódio autorizado](27-rust-story-adventure.md)
 mostra Ada, a mensagem misteriosa e Assembly; muito tempo depois, Rust acorda,
@@ -90,8 +103,8 @@ Regra operacional:
 
 | Janela | Frente | Status | Registro | Próxima ação |
 |---|---|---|---|---|
-| Agora | Avaliar episódio, apresentação e menu integrado | Prototype.4 publicada; playtest humano pendente, TODO-013 | [Entrega 29](29-story-terminal-menu.md), [vídeo e verificações](evidence/story-terminal-menu/README.md), [diário](worklogs/rust-adventure-prologue.md) | Jogar desde Ada até o menu; avaliar continuidade visual e navegação. Modo História fica reservado para a continuação. |
-| Próximo | Definir continuidade da aventura | Aguardando avaliação do episódio | [Critérios da entrega 27](27-rust-story-adventure.md#critérios-de-aceite) | Decidir ajustes ou expansão a partir do playtest; ideias de Vínculo/Sirius continuam estacionadas. |
+| Agora | Release prototype.5: Depois do silêncio | Corte aprovado; integração e publicação em andamento | [Notas](releases/v0.1.0-prototype.5.md), [diário](worklogs/release-prototype-5.md) | Validar pacotes Windows/Linux, integrar por PR, publicar tag e verificar downloads. |
+| Próximo | Playtest do prólogo e primeiro capítulo | TODO-002/013 abertos | [Capítulo](33-after-the-silence.md), [evidências](evidence/after-the-silence/README.md) | Avaliar ritmo, conversas, telefone, checkpoints e combate em diferentes máquinas e controles; definir continuidade com os relatos. |
 | Depois | Pendências do Prototype 3 | Backlog; sem execução ativa | [To-do](#backlog-de-to-do), [bugfix](#backlog-de-bugfix) | Retomar itens por prioridade e evidência, em entregas pequenas, quando esta frente for reaberta. |
 
 ## Backlog de to-do
@@ -99,7 +112,7 @@ Regra operacional:
 Prioridade ordena o trabalho quando a respectiva frente for retomada; não
 antecipa o **Agora**. TODO-001 a TODO-010 estão **abertos no backlog**;
 TODO-011, TODO-012, TODO-014, TODO-015 e TODO-017 estão **concluídos**;
-TODO-013 e TODO-016 estão **abertos**. IDs permanecem
+TODO-013 e TODO-016 estão **abertos**; TODO-018 está **concluído**. IDs permanecem
 estáveis ao mudar prioridade ou vincular issue/PR.
 
 | ID | Item | Prioridade | Critério de conclusão / evidência esperada |
@@ -121,6 +134,7 @@ estáveis ao mudar prioridade ou vincular issue/PR.
 | TODO-015 | Apresentação após o primeiro combate — concluído | Concluído em 10/09/2026 | [Vídeo](evidence/adventure-opening/opening.mp4): 48 s com jornais, biografias C++/Python, elenco e logo/subtítulo; a entrega 29 remove Go da apresentação e mantém cinco personagens. Trilha própria, entrada direta, pausa, skip e replay verificados. [Entrega 28](28-adventure-texts-and-opening.md). |
 | TODO-016 | Atualizar a lore as-is no menu Lore / Roster | Média, backlog; não executar nesta rodada | Conciliar livro, imagens e fichas com o que a aventura já apresenta: Ada/Assembly, Rust, origem de C++ e Python professora, respeitando os mistérios ainda abertos. Incorporar ilustrações pertinentes e conferir leitura no menu. A junção atual preserva o livro como está; revisão editorial e visual será uma entrega própria. |
 | TODO-017 | Unir apresentação ao menu principal de terminal — concluído | Concluído em 10/09/2026 | [Entrega 29](29-story-terminal-menu.md): Go fora da apresentação, menu na mesma janela, isolamento e demais destinos preservados; Modo História sem ação, logo coerente, moldura, cursor bloco e revelação binária. [Evidências](evidence/story-terminal-menu/README.md): revisão de navegação com 432 testes com ambos, matriz separada, 81 checks da entrada conjunta e seis da aventura isolada; avanço por trecho, skip total e confirmação final. `cargo run` inicia a sequência conjunta. Gráficos preparados antes do prólogo evitam espera escura no final. |
+| TODO-018 | Melhorar cenas do prólogo — concluído | Concluído em 10/09/2026 | Quarto tecnológico, ciclovia/pipa, trânsito diverso, acidente, evacuação coletiva, boteco/ponto, moradores, caramelo, porta de enrolar, câmera e ambientação por lugar. [Rodadas 30](30-prologue-scene-improvements.md), [31](31-brazilian-street-evacuation.md), [32](32-cinematic-neighbourhood-arrival.md) e [evidência final](evidence/cinematic-neighbourhood/README.md). Rodadas aprovadas para publicação na prototype.5; ajustes posteriores por evidência de playtest. |
 
 ## Backlog de bugfix
 

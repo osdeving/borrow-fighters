@@ -1,0 +1,11 @@
+{
+  "contact": "Python",
+  "online": "online",
+  "typing": "digitando...",
+  "placeholder": "Mensagem",
+  "timestamp": "09:41",
+  "header": [30, 110, 86],
+  "background": [235, 231, 216],
+  "outgoing": [212, 240, 194],
+  "incoming": [255, 254, 247]
+}

@@ -3,6 +3,7 @@
 //! System: Adventure presentation. This small catalog never reads fighting
 //! manifests, boxes, character selection or gameplay tuning.
 
+use raylib::core::{AsRawMut, text::RaylibFont};
 use raylib::prelude::*;
 use serde::Deserialize;
 use std::{error::Error, fs};
@@ -21,6 +22,8 @@ pub struct Assets {
     pub morning: Texture2D,
     /// Bedroom and street, arranged vertically.
     pub environments: Texture2D,
+    /// Replaceable actors and props, with a separate scene composition.
+    pub street: super::pieces::StreetPieces,
     /// Eight poses of the original erratic creature.
     pub erratic: Texture2D,
     /// Transparent-pixel bounds within each waking pose.
@@ -35,6 +38,8 @@ pub struct Assets {
     pub body: Font,
     /// Narrative title font.
     pub title: Font,
+    /// Heavier, filtered lettering for small signs inside the street scene.
+    pub signage: Font,
 }
 
 impl Assets {
@@ -45,7 +50,7 @@ impl Assets {
         text: TextCatalog,
     ) -> Result<Self, Box<dyn Error>> {
         let mut glyphs: String = (32..=591).filter_map(char::from_u32).collect();
-        glyphs.push_str("—–“”‘’…");
+        glyphs.push_str("—–“”‘’…←→↑↓");
         let body = rl.load_font_ex(
             thread,
             &asset_path("assets/adventure/fonts/Barlow-Regular.ttf").to_string_lossy(),
@@ -58,12 +63,25 @@ impl Assets {
             64,
             Some(&glyphs),
         )?;
+        let mut signage = rl.load_font_ex(
+            thread,
+            &asset_path("assets/adventure/fonts/BarlowCondensed-SemiBold.ttf").to_string_lossy(),
+            64,
+            Some(&glyphs),
+        )?;
+        // SAFETY: the live font owns this texture. Raylib updates its mipmap
+        // count without changing glyph pointers or transferring ownership.
+        unsafe { raylib::ffi::GenTextureMipmaps(&mut signage.as_raw_mut().texture) };
+        signage
+            .texture()
+            .set_texture_filter(thread, TextureFilter::TEXTURE_FILTER_TRILINEAR);
         Ok(Self {
             opening: super::opening::OpeningAssets::load(rl, thread)?,
             text,
             ada: texture(rl, thread, "ada-prologue.png")?,
             morning: texture(rl, thread, "rust-morning.png")?,
-            environments: texture(rl, thread, "adventure-environments.png")?,
+            environments: texture(rl, thread, "prologue-environments.png")?,
+            street: super::pieces::StreetPieces::load(rl, thread)?,
             erratic: texture(rl, thread, "erratic.png")?,
             morning_bounds: pose_bounds("rust-morning-poses.json", 12)?,
             erratic_bounds: pose_bounds("erratic-poses.json", 8)?,
@@ -71,6 +89,7 @@ impl Assets {
             action_bounds: pose_bounds("rust-actions-poses.json", 16)?,
             body,
             title,
+            signage,
         })
     }
 }
@@ -130,6 +149,8 @@ mod tests {
             ("rust-morning-poses.json", 12),
             ("erratic-poses.json", 8),
             ("rust-actions-poses.json", 16),
+            ("street-life.json", 12),
+            ("street-traffic.json", 4),
         ] {
             let frames = pose_bounds(name, count).unwrap();
             assert_eq!(frames.len(), count);

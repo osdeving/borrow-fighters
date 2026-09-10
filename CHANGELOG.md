@@ -1,5 +1,67 @@
 # Changelog
 
+## Unreleased
+
+Sem mudanças posteriores ao corte abaixo.
+
+## v0.1.0-prototype.5 — Depois do silêncio
+
+Corte jogável aprovado para publicação, com o primeiro capítulo da campanha,
+rua brasileira e encenação in-game. [Notas para jogadores](docs/releases/v0.1.0-prototype.5.md)
+e [registro da release](docs/worklogs/release-prototype-5.md).
+
+- Modo História inicia **Depois do silêncio**, com Rust na rua evacuada,
+  conversas com motorista, lojista e morador, travessa e proteção da passagem.
+  Versus conserva a seleção livre de personagens.
+- Rust tira o celular e conversa com Python em um mensageiro legível ao lado
+  dele: “voltou a acontecer.”, “sim, eu senti algo...” e “Vou resolver isso.”.
+  Gestos, telefone, mensagens, câmera e moradores atuam na cena do jogo.
+- Capítulo com regiões, obstáculos e gatilhos em coordenadas de mundo;
+  cenários, atores, clips, sockets, textos e aparência do celular substituíveis,
+  com módulos próprios para simulação, direção, apresentação e persistência.
+- Checkpoints, continuar/recomeçar/rever prólogo e retorno ao menu. A primeira
+  abertura apresenta o prólogo; as seguintes vão ao menu depois de visto ou
+  pulado. Pausa, derrota e nova tentativa preservam a progressão apropriada.
+- Verificação do capítulo por controles reais no renderer, incluindo conversa,
+  telefone, combate, derrota/retry, vitória, save e retorno pelo menu;
+  [prévia e relatórios](docs/evidence/after-the-silence/README.md).
+- Pacotes incluem os 263 assets de runtime e instruções atualizadas. O smoke
+  de instalação Linux também abre o capítulo fora do checkout.
+
+- Quarto com setup, pôsteres ligados a Rust, cursor de terminal e ventiladores
+  animados, preservando os apoios das poses de despertar.
+- Dois ciclistas animados numa ciclovia separada da faixa jogável. Garoto
+  brincando com pipa que se assusta, larga a linha e foge quando a errática
+  desperta; a pipa segue pelo vento e ele não retorna no mesmo encontro.
+- Relógio da encenação preservado na pausa e no desfecho, com retry/restart
+  coerentes; os atores decorativos não acrescentam colisões ao combate.
+- Rua com automóveis passando atrás da ciclovia. A EP desencadeia buzina,
+  frenagem e batida de um carro num poste, com capô amassado, poeira, pequenos
+  fragmentos, fumaça leve e sons próprios. A consequência permanece no encontro;
+  pausa conserva a sequência e o áudio, retry rearma e skip descarta os efeitos.
+- Rua com catálogo de peças e composição em JSON separados: pessoas, veículos,
+  fachada, ponto de ônibus e objetos podem ser trocados ou reutilizados sem
+  repintar o bairro. Bar e Mercearia Casa Nossa e placas usam textos editáveis.
+- Seis silhuetas de veículos disponíveis; hatch, sedã, picape, SUV e ônibus
+  circulam nesta cena, enquanto a van fica disponível no catálogo.
+- A EP provoca evacuação: carros e ônibus aceleram para fora, ciclistas freiam,
+  abandonam as bicicletas e correm a pé. Bicicletas ficam no chão e figurantes
+  não voltam após a fuga; o acidente e a saída do garoto continuam preservados.
+  [Escopo da rua modular e evacuação](docs/31-brazilian-street-evacuation.md).
+- Chegada à rua com câmera na pipa e no céu, descendo e abrindo até Rust em
+  cerca de seis segundos; exploração e HUD são liberados ao fim da chegada.
+  Ônibus ampliado e letreiro da mercearia ajustado para leitura nessa escala.
+- Moradores no ponto e na mercearia correm para dentro quando a EP aparece.
+  O lojista espera todos entrarem e baixa a porta de enrolar; o cachorro
+  caramelo passa de poses calmas à fuga. A rua permanece evacuada no encontro.
+- Manhã com ar discreto e pássaros; rua com ar e trânsito em camadas próprias.
+  Os motores se afastam até cessar após a evacuação, preservando o ar externo
+  e os efeitos do acidente, do latido e da porta.
+  [Escopo da chegada e vizinhança](docs/32-cinematic-neighbourhood-arrival.md).
+- Quatro textos editáveis em `morning.poster.*` e `morning.setup.*`, com
+  recarga por F5. As entradas `--start morning` e `--start encounter` permitem
+  rever diretamente os trechos desta rodada.
+
 ## v0.1.0-prototype.4 — Aventura, apresentação e menu integrado
 
 Publicado em 10 de setembro de 2026, com cinco pacotes e `SHA256SUMS.txt`

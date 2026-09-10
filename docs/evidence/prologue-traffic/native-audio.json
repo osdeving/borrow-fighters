@@ -1,0 +1,133 @@
+{
+  "mode": "native_isolated_pulseaudio_monitor_capture",
+  "output": {
+    "file": "traffic-and-crash.mp4",
+    "sha256": "339b87af79b385dd0cf9e74a0d15faf8a7d024d942dfc2edcac33e15e0cbaaea",
+    "duration_seconds": 10.266667,
+    "frames": 308,
+    "fps": 30,
+    "audio_codec": "aac",
+    "audio_sample_rate": 48000,
+    "audio_channels": 2
+  },
+  "source_inputs": {
+    "video": {
+      "local_path": ".git/traffic-review/preview/adventure-silent.mp4",
+      "sha256": "c77aef863b132813b3e0a63e1368089f838e1225ade4d032d4f5670f30991977"
+    },
+    "audio": {
+      "local_path": ".git/traffic-review/preview-audio.mka",
+      "sha256": "f404da29a134f7ed2d964205f29cade5afdda588d7bad7727e7e8e0f8aa319a1"
+    },
+    "telemetry": {
+      "local_path": ".git/traffic-review/preview/telemetry.jsonl",
+      "sha256": "93d4d98021521f385b651bf9f82dbb8eebfead2ff6821a3deb9829e5270d5622"
+    }
+  },
+  "video_preservation": {
+    "source_compressed_stream_sha256": "cad58c289ff8acf2f625f8a996d204e15c5c96d93ddf9cb313d0d343ba931f08",
+    "output_compressed_stream_sha256": "cad58c289ff8acf2f625f8a996d204e15c5c96d93ddf9cb313d0d343ba931f08",
+    "copied_without_reencoding": true,
+    "cuts": 0
+  },
+  "audio_processing": {
+    "source": "Actual Raylib output recorded only from the game-specific PulseAudio null sink monitor.",
+    "synthesized_replacement": false,
+    "mix_reconstruction": false,
+    "gain_adjustment": false,
+    "time_stretching": false,
+    "audio_preroll_trim_seconds": 1.900486,
+    "filter": "asetpts=N/SR/TB,atrim=start=1.900486,asetpts=PTS-STARTPTS",
+    "encoding": "AAC stereo 192k; source PCM stereo 48kHz; end trimmed to video duration."
+  },
+  "alignment": {
+    "first_video_telemetry_wall_seconds": 1789048190.6661527,
+    "first_video_telemetry_seconds": 0.01666666753590107,
+    "inferred_video_origin_wall_seconds": 1789048190.649486,
+    "first_audio_packet_wall_seconds": 1789048188.749,
+    "wall_derived_trim_seconds": 1.9004859924316406,
+    "applied_trim_seconds": 1.900486,
+    "telemetry_origin_spread_ms": 0.1685619354248047,
+    "native_latency_preserved": true,
+    "latency_range_ms": [
+      22.3334020070185,
+      23.13310294513382
+    ],
+    "cue_latency_spread_ms": 0.799700938115322,
+    "timestamp_caveat": "MKA packet timestamps include buffered startup bursts. Continuous decoded PCM sample clock is used; absolute MKA format.duration is an end timestamp and must not be interpreted as clip duration."
+  },
+  "captured_cues": [
+    {
+      "cue": "car_horn",
+      "frame": 349,
+      "video_seconds": 5.885071754455566,
+      "wall_seconds": 1789048196.534569,
+      "pcm_onset_seconds": 7.807891156462585,
+      "correlation": 0.9811798425615843,
+      "pcm_minus_video_seconds": 1.9228194020070184,
+      "gain": 0.290494712322807,
+      "muxed_audio_onset_seconds": 5.907405156462585,
+      "native_audio_latency_from_telemetry_ms": 22.3334020070185,
+      "estimated_video_first_frame": 176,
+      "estimated_video_onset_seconds": 5.866666666666666,
+      "audio_minus_estimated_video_ms": 40.73848979591865,
+      "reference_file": "assets/adventure/audio/car_horn.wav",
+      "reference_sha256": "960aac61e2848202262b44273ba731875b25bf72c991793bd58c0995f68dea11"
+    },
+    {
+      "cue": "car_skid",
+      "frame": 389,
+      "video_seconds": 6.555751323699951,
+      "wall_seconds": 1789048197.2052455,
+      "pcm_onset_seconds": 8.479183673469388,
+      "correlation": 0.9313210098761607,
+      "pcm_minus_video_seconds": 1.9234323497694366,
+      "gain": 0.2836330428924738,
+      "muxed_audio_onset_seconds": 6.578697673469388,
+      "native_audio_latency_from_telemetry_ms": 22.946349769436658,
+      "estimated_video_first_frame": 196,
+      "estimated_video_onset_seconds": 6.533333333333333,
+      "audio_minus_estimated_video_ms": 45.364340136054615,
+      "reference_file": "assets/adventure/audio/car_skid.wav",
+      "reference_sha256": "f6ac3619f38517b236ac0827f1fcb4ebfc814ef8aec5df0c3150497653031815"
+    },
+    {
+      "cue": "car_crash",
+      "frame": 423,
+      "video_seconds": 7.125360488891602,
+      "wall_seconds": 1789048197.774853,
+      "pcm_onset_seconds": 9.048979591836735,
+      "correlation": 0.8967663235985028,
+      "pcm_minus_video_seconds": 1.9236191029451337,
+      "gain": 0.26502086570691935,
+      "muxed_audio_onset_seconds": 7.148493591836735,
+      "native_audio_latency_from_telemetry_ms": 23.13310294513382,
+      "estimated_video_first_frame": 213,
+      "estimated_video_onset_seconds": 7.1,
+      "audio_minus_estimated_video_ms": 48.49359183673574,
+      "reference_file": "assets/adventure/audio/car_crash.wav",
+      "reference_sha256": "5ea6153cada30256692f4b824980886eca8c29e6a7fa8597fca0f9ffdb3102fc"
+    }
+  ],
+  "levels": {
+    "source_aligned_peak_normalized": 0.242462158203125,
+    "source_aligned_rms_normalized": 0.03808903859354203,
+    "source_aligned_samples_at_or_beyond_full_scale": 0,
+    "decoded_aac_peak_normalized": 0.24181431531906128,
+    "decoded_aac_samples_at_or_beyond_full_scale": 0
+  },
+  "telemetry": {
+    "rows": 612,
+    "paused_rows": 0,
+    "stage_start": "Encounter",
+    "stage_end": "Encounter",
+    "final_incident_phase": "Crashed"
+  },
+  "limitations": [
+    "Waveform cross-correlation confirms the original cue signals in the actual device recording; it is not a human listening judgment.",
+    "Absolute wall timestamps in MKA have millisecond precision; telemetry origins vary by less than 0.2ms, and observed cue latency spread is below 1ms.",
+    "Video is sampled at 30fps. Estimated visible cue times are quantized by one frame and renderer cadence; audible effects preserve the measured native 22–24ms delay from their telemetry state.",
+    "Only the isolated game sink is captured; physical speakers, headphones and subjective sound quality are not verified.",
+    "Raw captures remain local under .git/traffic-review; this exported MP4 contains the complete preview and its actual native audio."
+  ]
+}

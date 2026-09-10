@@ -1,0 +1,1231 @@
+{
+  "created_utc": "2026-09-10T17:27:07.267936+00:00",
+  "source_sha256": {
+    "Cargo.lock": "1d0eb8cb08cdeff1476eefd3f945f6442d889224f9205da38c23ca89077c8a4c",
+    "Cargo.toml": "e12c1a46e922120375508e3618f6c08083b3bfe137c221c4a156ad79114ca2a8",
+    "examples/balance_audit.rs": "a286518fbc6167ec3a76d5684323e1f4f03e349398d1b616b42029e471a7e943",
+    "examples/capture_authored_super_review.rs": "bfbdf4a9fe45270a7725b15810907a003b00c98116491f765bc4b5971e8108f6",
+    "examples/capture_motion_review.rs": "c667fc13a669af82c22a9f8909ef822833b7853e1eda9542b899adf2431763d0",
+    "examples/capture_pair_reactions.rs": "c5ac95561afd153a9ad8c213bb6ae735d865ad7ae9fc04846d2cbbd450c8c77e",
+    "examples/capture_presentation_review.rs": "0da2305236a720d7e47c0abcb34d49847d858482268de27a1fc917a63d47fdf6",
+    "examples/capture_reaction_review.rs": "b63012f342c59ad546a434bd31001fe3863e45e47612e857caf05732efca2536",
+    "examples/capture_roster_contacts.rs": "16d8e70a5247adb2f807dc722bf4ff988e14e94ea7278d99f8c6016f94e1ad25",
+    "examples/capture_roster_flow_review.rs": "da5f79e17802b9dae26f209e1381090502a31873bff53ef0b588605b01516726",
+    "examples/capture_showcase_review.rs": "f569891c40dc8c73b5aebc938134ba27cf49532e79c5fce06844b03af6ececb5",
+    "examples/capture_sprite_review.rs": "afbecd22825f25851115287379a0d48f33d1ba46a0cc15e202edc41f2c02922d",
+    "examples/capture_stage_review.rs": "c5e879365ccce253134bea9cdc9f32104838d2c1b624b9e8767031f53ebca231",
+    "examples/capture_ui_review.rs": "1c562df1591d0fb4ed65106d0d85d0a94112d0cddd3bec71581ddeb260cc74c7",
+    "src/adventure/ambient.rs": "5014d9dae1ab068f2904b71ffc11fde151875ccaf7124f46b47bdf3de7c26edd",
+    "src/adventure/app.rs": "7fdd217a9096a98ee09885443d0ea9ba81091227e32a496ce99a69a9d2605e19",
+    "src/adventure/arrival.rs": "53a5ff821a73214e655e5ab5a32bac2b4cf83bfe6b5c0eebefc48a0b33315218",
+    "src/adventure/chapter/checkpoint.rs": "e6a978420ca7bb5ddb4b0763e72ad2ad9e28e8118937f55f8debe3dbb65ecd65",
+    "src/adventure/chapter/direction.rs": "3955c94501364a5e400a18af1a3e7583eecbc22cd9eecc66decb01e4d1f13524",
+    "src/adventure/chapter/mod.rs": "2cf00b10752f3a07ed7eb6c5f3104179f9b2dceae66d394367ceef1341288f34",
+    "src/adventure/chapter/phone.rs": "93c210510292f15abcbfaf69b0498560308ad5544a98a1519146a304d7c38911",
+    "src/adventure/chapter/progression.rs": "0fd7bd45ba7e77d60eece8a07ea868311674499be58beede9c1205d3746a033e",
+    "src/adventure/chapter/tests.rs": "72842f18dd2e83c6f0d4f02c3f256372673ce9350bf545dd5d26746663d966e5",
+    "src/adventure/chapter/texts.rs": "e7994cd4f8eb6b2b8f4f0b32926c602619225a17e02dc1e4dd9ddb43220327ca",
+    "src/adventure/chapter/world.rs": "0d5a51fac765ed66dada33fd0b628ab5fc5fc9599f2d353fc8318cac7e750dca",
+    "src/adventure/chapter_app/input.rs": "376964c3c84c898312ff2fc0e5552d67bb61ce9c1a49b10369d82de014972a2a",
+    "src/adventure/chapter_app/mod.rs": "214880849fd01cc10fb61862504ed3835373ce920c1d6c9b5cb8165d9a2d9248",
+    "src/adventure/chapter_app/review.rs": "47a2ed7642b8b4bed6545b8f940baf3f1e866394ed56cfe416f22d0705474750",
+    "src/adventure/chapter_store.rs": "2bc1af4497db90f3321231237578f03b0078d4888970c1c6c1174fab7ce6abab",
+    "src/adventure/combat.rs": "5e476a27e30da8f69149218d6cca055c419136d84f20ef5823adec7ffa45c088",
+    "src/adventure/engine/actors.rs": "a9ba27d42e4c53a4f9330c4d1ec4bac6243d487ebbf47aef7de15f925ed43cf0",
+    "src/adventure/engine/assets.rs": "0b29924842c49f6f482152d8a093a7b03297bce33340ffe3c4255c0f2cb719c6",
+    "src/adventure/engine/audio.rs": "f8986f459e3edc30dafb121475a5d6c7fbe0defa0a5a1c43bfe6f0067f066a1f",
+    "src/adventure/engine/capture.rs": "f52e51857c082b34c763378353e2c68fcb4700572843092d05dfb24e451e662f",
+    "src/adventure/engine/chapter/actors.rs": "a312eff4daee28909f30490ea55d56c0b20d9de30239a245f55866bc4b004b46",
+    "src/adventure/engine/chapter/assets.rs": "a2f3fc29a0107b20d3fa8ae2090b929021522602430d0e6b2df5e11f7238dd6a",
+    "src/adventure/engine/chapter/mod.rs": "b3ef9b579bbe0e42f3d5d360ea635cd52af7139f084fc5fde1fed8d885000576",
+    "src/adventure/engine/chapter/phone.rs": "ba6464163a101da282255adcf5b2619c583ddf88c4a0646e42e77f29fbbd7d81",
+    "src/adventure/engine/chapter/ui.rs": "beb17ebb63e7b088720232aa9cebe10d002241c1de3fa69373f8b1ae0bed7730",
+    "src/adventure/engine/chapter/world.rs": "9dac445bb15727fbea93032f33cc5d37b7da13de391f356e08031d7bdfcddae5",
+    "src/adventure/engine/chapter_audio.rs": "3f730c8d77c8bb0f3a2e73bf7bc05065493fcf5eb0e20093c0f8e0ad11e17ce4",
+    "src/adventure/engine/mod.rs": "cfe2b8e0aca44007e7eb8fe5feea99577f7ae3f44f0f184124471e614d95db6b",
+    "src/adventure/engine/morning.rs": "fa08a8279268992e5439826e54c92dfb8925732e192e6d6a88760a0b073bd807",
+    "src/adventure/engine/neighborhood.rs": "635fc09b298171909cf9158ed334908fcc15d32a6c7ab71c922bb115db3da911",
+    "src/adventure/engine/opening.rs": "7096fd5c511d9d0d0b4bf803fc0e7547eefaa41a6adf43f575189aafe6e7ac0c",
+    "src/adventure/engine/pieces.rs": "dc659d4fd3c44329a7bf580ae370ff4c82a9fc53fa3c187667fd36407723aa88",
+    "src/adventure/engine/render.rs": "a8692c95ec87e90c8997e943ec752f5ee825b61fb3b0841764e6932690d4f2bd",
+    "src/adventure/engine/street.rs": "9fb621bc8860b711f5c58c8d976a89b20288e0fec8fa9bd93a5a90c90f782ee0",
+    "src/adventure/engine/traffic.rs": "18cbad885d06da81aa37895e9292474b26e96bf8e3871595dea228ed4fc048d0",
+    "src/adventure/engine/typography.rs": "9bec8bb282d252c2add83d64fe9af9ba1a18f5a9d20315d48660df28d0a37125",
+    "src/adventure/mod.rs": "9ffebe5b83bef79e0fb88177fd396feb9f268cfb5b4f64754f659305638ac2c7",
+    "src/adventure/neighborhood.rs": "0a77deaa1b1eb598381e7a001d4f3f0d641b022bc42304dce06cbedf1773feda",
+    "src/adventure/scenery.rs": "4f8d0ec18e2d95b4b231494ac73d32913337dff2b35ee20816feb8c8e90d6e86",
+    "src/adventure/story.rs": "2a937363e30f24f936bcb62f4811500678dcd822010fb0fd10d6107ddc72ca4b",
+    "src/adventure/text.rs": "d89d01d6f97e95cf70fc1cadfab549e37271c4ae5de1c8f0e95b5570e9f13cae",
+    "src/app/hosted.rs": "2aaaf93a77b87a49bce02152ce15779002561a6f6bd547022eef62ba8db8a3c2",
+    "src/app.rs": "bb7b881124cc4b21452f648a8e3790da3594f2f4d7c938053d767d5c142eec96",
+    "src/audio/mod.rs": "10b68c58cd36fb876c5e8d159fc947312d02d10d364935be4daeae5de05e4b27",
+    "src/bin/borrow-adventure.rs": "c91a4fd4ac49a8821943c3644bad95cf881e6701ed6a8a5fb9e0b3b9dd84e0ef",
+    "src/bin/borrow-story.rs": "ea2a47ae21fdad9acd22061ce68819dca948c95650ba45ed746b33bfeb510db6",
+    "src/characters/body_metrics.rs": "efc08df4468070817b1d7c2c241c74ea1c077d594ff951f0fae0c2909eaefc15",
+    "src/characters/mod.rs": "bae636da1db127ecde42e9e4722a969df9ce58517eff09e21f3388a61d8277c6",
+    "src/cli.rs": "4e64d1c47d4ff0bbd0c5cc18d254e22565f55eaeadb10651b280f00b5e221540",
+    "src/combat/cinematic.rs": "b76fcf55ec00c8b89ac5f7ff431a0166371cc8d91979a7ea20184b596ee6532a",
+    "src/combat/collision.rs": "898f76bd2ed88d9c55c7c23a34a4968fb54173fa120a4f2b3125ce6b61652536",
+    "src/combat/fighter/contact_reactions.rs": "ff310b4565c5d05c2cf467ad9746f46c283ff17db814c59d2662067bd3c085db",
+    "src/combat/fighter/reactions.rs": "160c3ab821e639964e581922a2568383fe44342f338a04da69b314a863e6f6e9",
+    "src/combat/fighter.rs": "002a6abc0b92015a59151c42b2f2c71dca18803e06009549c88dbda05b5e5eee",
+    "src/combat/frame.rs": "82aac1239e873431e0c15203d50f843a7370bd326ffbf7007033960e4030cc46",
+    "src/combat/mod.rs": "b6a44acea0209baa7c2fb1768cb9e3170d917f50b7da3f091e7f1bb1c991ac90",
+    "src/combat/move_data.rs": "d2c2ca26c44d870b79b960f5d2ce930568dcd45ee4426c9eb5221b04467b8286",
+    "src/combat/move_set.rs": "58012cd94f7bf59005e228b9dfeda13822559d792bcb925755f4e6f1bd699036",
+    "src/combat/projectile.rs": "41c2f6d511d3f75ca2d0fde98ad8771cd3a4d1081738931740ff5c9baedab81d",
+    "src/combat/signature.rs": "6b2d3d2abd6ad5611b1116d79b2d6c0cbb81f94f77dc0f3737b306eb226b24f6",
+    "src/combat/super_sequence.rs": "9242bb66d6045f563274988b65da2ae98f1a0857e9daf3bf3177bb900c85dd19",
+    "src/config.rs": "7e104219fb1e246f6dd0d0b7fe407f0eea2ec3b290da7449c5237c7f1bd89992",
+    "src/engine/assets.rs": "0522bd1c7ec21c2ac4a44bde0ca82c968aa8970a416eb6ac67cd9842c2dfc426",
+    "src/engine/audio/live_review.rs": "0d454c0d7e9e273e8739f31e3ad9a0dad299622699f84df64c842822dc999c97",
+    "src/engine/audio.rs": "1815e5f2f913618454c50d7d81f58bdbb7ac1e609838273c398be6664cdd14b6",
+    "src/engine/gamepad.rs": "e96e4df03dedd99ffeb5c9df69e56bd015f2ea9658982f537a9c8587204d708f",
+    "src/engine/input.rs": "37f6a17ff22801f47fa5da99df145509f3abfd7eaa83bc7a2aa655711940c9b6",
+    "src/engine/mod.rs": "9a0030391b8b5295e073acd864d0f0ca2139881d7962566104b054b6fb02c7a4",
+    "src/engine/render/authored_actors.rs": "e3181416457e41b51cd39d95ecf36158207e73d6174754dd0d95f3c440c28ef0",
+    "src/engine/render/authored_supers.rs": "7c8fccb7139c5c1173234c2eb1fde5713e2f0735930dfdecf9013a6e70607e4e",
+    "src/engine/render/character_select.rs": "cf2db8d5df9d27172ab1fb5b975fd38096d2391de2bf26e5b8d210d3d3fc1a17",
+    "src/engine/render/cinematic_effects.rs": "5ffaa2110feb67826c3bd185d162c0857f995e92969604ffe171e46d1ee3b0a3",
+    "src/engine/render/combat_lab.rs": "1d5d1d1d7e45b8236ba5cb1dbc75befbf69ff327cbe946aef75cf26a0c081778",
+    "src/engine/render/main_menu.rs": "9014f3292110a171164a39cba194b9792db9c8219f5ec8e33d1be9118e20c12d",
+    "src/engine/render/match_flow.rs": "1b366674898da635cd83e0c6ac8e139db478dc7c5a7bd5922590665ca8f28eef",
+    "src/engine/render/move_showcase.rs": "3287233031b0f33828513187f6558a7ac9fafcd6acb5d7dd16d99c968300964f",
+    "src/engine/render/onboarding.rs": "9b333d3e9ed592eeef41691bd663e75948f7f27e34f39a66bcfad5f2230a0b89",
+    "src/engine/render/presentation.rs": "5902229f6705206685041dd9612724f641445f3c26c632d98c8624d7639228f6",
+    "src/engine/render/python_super.rs": "1748a28897f03f1dcbe6a03693c7d135f05089e57cf836901d712bb9695a8655",
+    "src/engine/render/signature_effects.rs": "7729840881f579ddb463e9a26b12d4ab9c7f9d3e9e0d892b3e634b123a5ede48",
+    "src/engine/render/sprite_viewer.rs": "e673635c47ada64673f16aa6ff6af6d598ac20e4b8c00c6c255ddcc2be2df4a8",
+    "src/engine/render/stage_life.rs": "bf65421d36c8a7d6c4ef874723f851187a9618a8aec8e431a3b4c99e3ae9bbd7",
+    "src/engine/render.rs": "21fdaaf6c2d121995562a84b44f51e37920cc0babf671689702221c0891956c0",
+    "src/engine/sprites/animation.rs": "d5c4709288de3815205fd15afab1d78d561b2ff390748596968aa6f052796398",
+    "src/engine/sprites/combat.rs": "33ffde8bd1085d86563a67b2fb0cb9e747ddf7b9525005dd2c0aaea3a55296c3",
+    "src/engine/sprites/draw.rs": "bf0961caade037b30366a7632c8baa89f54656eab69562f98101f9d3b469007f",
+    "src/engine/sprites/manifest.rs": "a12c4239fe060ecda42f06ca38f914585c440e2a3501ae31c39bbced462e413c",
+    "src/engine/sprites/mod.rs": "cbfcdc1b3814e37d1f0205864d5bb0787993bab028b3b6a43a6eb94bb7435706",
+    "src/engine/sprites/reaction.rs": "958fa764d7a73dfc23e483e5297f202bbdb12e41de303b01979b7f8ad3e26d57",
+    "src/engine/sprites/selection.rs": "f38e703716b5d4e18a88cc9e24a99c3b8f7924a6d991f8447bf5b647e5d2820a",
+    "src/engine/video_capture.rs": "ccd6cf11ee3c53e338366945e27d842967bb8534d334fcda372c66a172a20b95",
+    "src/game/ai.rs": "145da2d9fcd3cf5fe78db9e0ce680b8a4d9a0eb2e20a7b8e7ed41c622c8d0361",
+    "src/game/arena.rs": "a0296625494d08f74faa7d5c95a7cba463c281368e5face932e7513d8876d7c2",
+    "src/game/combat_log.rs": "e4e1f8d3ce99d62465cdbb1ab37c3f44f1ca4155d86f966706b6369852338e52",
+    "src/game/energy.rs": "71c54f10edd34b47b201e88f782b5b8bb8f04562497a01b577f788e115b0a187",
+    "src/game/feature_flags.rs": "a1b8551580fca61b05533ece9d9e996448a833d4d95f5dfcadfbd1f1cb0905ff",
+    "src/game/mod.rs": "d67c75f18489dc84e12ee59380be80ec2f4e1452bdd13e4a13a3f6bdcf175619",
+    "src/game/world/signatures.rs": "9730095198dd960abe535efb17f016166e363a22fb971e8d9c15b4e81a4e63e0",
+    "src/game/world/supers.rs": "722e597330cfd9d49254b7b4628d179f4112ab7a24d40b42a3ad580242bc31ac",
+    "src/game/world/throws.rs": "845f0c8e451509ce3f2a1176ecc42d161ced0bfab9b144bdcbbbcd54784ed310",
+    "src/game/world.rs": "beff6252e3c064ce4bfc981396f2f6c6ae2872660ef6fc634ee86779b213d910",
+    "src/lib.rs": "0b7ac97c2276eaa5161cc52e689d11d1eab3d5e178b57c6ecfc93fa151502468",
+    "src/lore/mod.rs": "c4b2c177da992259ee13444120d030eb88e10f2348c02e99b02a8dbacd6633ed",
+    "src/main.rs": "2f1d4301fcbc26367fd7ee365526e93a05248f7148557c77d086e09eab3db5cf",
+    "src/math/mod.rs": "200e7ae31e8c81534530317a1832cf49a125d7341d5bd6be4bf3db1a0ddca3ea",
+    "src/math/rect.rs": "03b39b8aec243f18473f15d7c96b5f9fb9c1783db2c2f74bd11226248d44cd65",
+    "src/math/vec2.rs": "48dd90fa22ec7f467829302b9f2899dd32ab5a39779fc179c45518a9b2c512af",
+    "src/presentation.rs": "c1c4fa77dcce8cc45a6b32ffdaf8009c4a977d82300396cf480abeaa67f86f87",
+    "src/runtime_paths.rs": "ceebad8d8cf5eaffcc13ae3d6248aa3fcd3dc21289f567a037e4879cbdb60bd9",
+    "src/scenes/character_select.rs": "96deb08c19161537b4314ceb3fba1c1342a20078d75cd80301853c0cb834a25d",
+    "src/scenes/combat_lab.rs": "f5c4a003ab0c7ad81a65d14145013ff61c3eb65e6b045f3061cfcfb4d7dfd2fe",
+    "src/scenes/combat_lab_analysis.rs": "232961f05fcdf59148276f12f7466af54920e052550a682de70fe5f81ac8f87c",
+    "src/scenes/match_flow.rs": "25fdd4a0e16b72538ead03f8629ad711618b3cefd4e5409b567953adea6c1c23",
+    "src/scenes/mod.rs": "78ea7864c182b05d8fc5f5a641b1a2f2b1653568411a83194d2948502e4baecc",
+    "src/scenes/move_showcase.rs": "4d4950b1daf33860176f0727464aeb2ed804787c963e2c277fb75a1e0ccd6cdc",
+    "src/scenes/preferences.rs": "a93e50aeb438146e5ef1a2482230f66ce60738fa40ec85fc20785cdf5e532cd3",
+    "src/scenes/sprite_viewer/combat_edit.rs": "cbd78a028377fd2e1a275693f0ed38f18cd9013eccfe8296257877f0d5f8da79",
+    "src/scenes/sprite_viewer.rs": "537503f6e937e8f98014784e1ebc2d7ad5dd97dbbd4d83dec08979d20b3860ca",
+    "src/ui/binary_text.rs": "22c262abb97390d766497b45b8e696e5a5f886b7236474e97eb50efe4e0bee58",
+    "src/ui/combat_debug.rs": "70b70f823ebce2e9d824cf573ad081a736f3d72438dd27ef1210a1b639cb3aab",
+    "src/ui/menu_layout.rs": "74b2ee705b937a0dd6403258b912a5a618ed97bc4927e1fdc42900fff486152b",
+    "src/ui/mod.rs": "763d58278c4be027b7c041e1346d519b817c9967861b576bf5bd5b9b3b35588d",
+    "src/ui/roster_layout.rs": "a256bd0471b4fee05ba211b1503a9eb7663f9f43a6ab07bf712964aedd0fa540",
+    "tests/arena_rotation.rs": "ee2dae09291c27d6a207a91bb69ce6a070051e8dc7b90c37b70e3a15763d7702",
+    "tests/attack_frame_data.rs": "49f5b0d8efb0463c848c99018b15873602992c068cffc402a540d93738d1324a",
+    "tests/audio_manifest.rs": "77b43cea28c6e6fdd187f0bab43381e2eff1bb2b5f790f741d4c04d31bc73153",
+    "tests/authored_super_sequences.rs": "cfacf19ae8cadc7d03b8cfe9c70a9de710455e86c7b8ba794d437d2f3d7194d5",
+    "tests/binary_text.rs": "487d1071fabef0b93acce7100665d84f8ea53a5e3a3d24f7f1e61b56f9963a31",
+    "tests/character_identity_tuning.rs": "6f06b0cabd7b26ccaad322519f756d16d0de8566853ce126fee0be07b5f0b250",
+    "tests/characters.rs": "ff6bad2aed84c40858123bbfc62cf45144a0b17df246418442d85c11760e63ad",
+    "tests/cinematic_specials.rs": "79928937a097d3822f3bb5fa92658d8f3bcd0a3c6fdda94f6f998d7621d6acf9",
+    "tests/cli.rs": "5ad99279f3dddd5f1bdf058cb8dee08ec3a10d1c01acaee41d7c38b2d4b19c03",
+    "tests/combat_lab.rs": "8a333596a1fa18f94f892dd624472ca1dabe04299645c7388ebb43da75f05829",
+    "tests/combat_rules.rs": "f190221fa9e2e357694a59c04ae9bf6c0fdffc7cf400c0253e591ff8babe90a1",
+    "tests/contact_reactions.rs": "07e5e0976368be46a4ab131826c0fdc51ef7167b7d9d738de53faa6e1c8fc984",
+    "tests/cpu_traditional_moves.rs": "2dd8adf3b50afcbd02d7e82311a422db02aa36ef07a1ccca9067d635ec112a5e",
+    "tests/energy.rs": "275d24f3724f9fde55df89b29ecbe742dedf56d5c2ab161c5887deffce1073df",
+    "tests/feature_flags.rs": "e54345565c7a69ba11f4f1be16546caccc74a0bdac810d76feb45e6c9db2a10c",
+    "tests/impact_positions.rs": "96ba2672bf23f54601ab7e6f625ddd7d128a5da5f7cfa3d7e0993a64fac37a4b",
+    "tests/lore_book.rs": "984e14affe83299b6bf30508dcd6106a487e6a898ec3f62066708526c108598b",
+    "tests/move_data.rs": "677b758288b34e40b4d4ff119c8ec3205a28d857bab392ea9d58fdff30f10e61",
+    "tests/move_showcase.rs": "4d698acc1463e8e4b43e14075995f64b4e0b1734671f26c4a6d082651545e9fd",
+    "tests/mvp_combat.rs": "a3785f579198131beec1df90ee9c01018a4675e6525492df6a54f61bc2c2fb52",
+    "tests/no_damage_reactions.rs": "0d1a75ebb60ff957dc102b6822bc76a39aeb46b80b74e57fbc42977e37e973cd",
+    "tests/paired_reaction_sprites.rs": "e7665d6502fd8fdfa745d2e3a8d527770e9dfc66f51d09a27f7912b18c5e9268",
+    "tests/reaction_matrix.rs": "ebd090ec45ce38c9929acd2de3c8c29cfdb4eb75919533443b6f80dda8c22001",
+    "tests/roster_contact_reactions.rs": "7729fae90aa27396989238a20ec0af098c6f1a6339eb22ee105c5ef5a86fd10d",
+    "tests/runtime_paths.rs": "7043f5f90438ac3647c87dc46b411d5929d1abb9ca3d96bfee52846916004fef",
+    "tests/signature_effects.rs": "80245d4fe4e22fffb4bc3b912dd8adf4c1c925784cc5483810b63f30733a7120",
+    "tests/sprite_candidates.rs": "cc722230a45db4c3f803b8a2bc9b2e9fea9324fb14af14916ead43db122bf338",
+    "tests/sprite_frames.rs": "c3c489fd5c3f676118ceb6f6a524cfdfefabd7468687b4426a98309d2a04c2f3",
+    "tests/sprite_manifest.rs": "01a39b713bbfd8267145fe9c20d086b5d916a4678b8bcd945336aef5661275c9",
+    "tests/sprite_playback.rs": "65ef391de8f5aba06f2f3ef43ec6b60be30a07e5134a015df1e0b6b910c6ca1b",
+    "tests/sprite_selection.rs": "8ac98004f818974076e1467968d79e7f1729c79d23e6a82178084f8720a45000",
+    "tests/sprite_viewer.rs": "3d3b9019d7dc9ec7dd7cfe27cb1d68435d9d386498b1aa5550465472bdeab2b8",
+    "tests/throws_launches.rs": "15434abf24e8c6d0ec087ac4d13914888f1aff75beddaf261280872d3a867c84",
+    "tests/traditional_moves.rs": "b8919cf8015409abf6934fe1a54776d4653668206285f03f902853f5123693dc"
+  },
+  "assets": {
+    "assets/adventure/ART-PROVENANCE.md": {
+      "bytes": 20439,
+      "sha256": "32b669071c768dd25b52a7c45f9ecd7a6a61c52c998dab5c44b4c0f5f7a09a73"
+    },
+    "assets/adventure/ada-prologue.png": {
+      "bytes": 2344692,
+      "sha256": "22bc7fd7e1c97b0350caf9b8262432cd4e470edcfe101835dd86a58f379ede22"
+    },
+    "assets/adventure/audio/README.md": {
+      "bytes": 7442,
+      "sha256": "e644cf2eece4078c09c22e04115dfd46a5dbd1f1cfde98997b8cf4d30c55ff69"
+    },
+    "assets/adventure/audio/ada.wav": {
+      "bytes": 529244,
+      "sha256": "3dcab6ba2818ee7689b210db781ede438208b9d7b569f07c27a2c675c38e1219"
+    },
+    "assets/adventure/audio/bicycle_fall.wav": {
+      "bytes": 39734,
+      "sha256": "17d3997091131ef8baa07e2742b4aacb53368991dc1a410a1c8cb1048da8e0d2"
+    },
+    "assets/adventure/audio/block.wav": {
+      "bytes": 12392,
+      "sha256": "5181f82253d68eb11115f8d6ad9b89668985273b4170d68fa1ca1e203638d30e"
+    },
+    "assets/adventure/audio/car_crash.wav": {
+      "bytes": 59580,
+      "sha256": "5ea6153cada30256692f4b824980886eca8c29e6a7fa8597fca0f9ffdb3102fc"
+    },
+    "assets/adventure/audio/car_horn.wav": {
+      "bytes": 26504,
+      "sha256": "960aac61e2848202262b44273ba731875b25bf72c991793bd58c0995f68dea11"
+    },
+    "assets/adventure/audio/car_skid.wav": {
+      "bytes": 25034,
+      "sha256": "f6ac3619f38517b236ac0827f1fcb4ebfc814ef8aec5df0c3150497653031815"
+    },
+    "assets/adventure/audio/dog_alert.wav": {
+      "bytes": 13274,
+      "sha256": "22d37b3298514fcbfa282015e08965e5cdc29be61e7f59872d05f1a21edc81b3"
+    },
+    "assets/adventure/audio/hurt.wav": {
+      "bytes": 15920,
+      "sha256": "9312eae2427e0b278fbcd590ae720def9f0c803d6d311f6988fe6e61fe4818ce"
+    },
+    "assets/adventure/audio/morning_ambience.wav": {
+      "bytes": 882044,
+      "sha256": "beae1f74a773a6a1bedc3952f1639b955de7e89b4622de1028b288217d07b423"
+    },
+    "assets/adventure/audio/opening.wav": {
+      "bytes": 2116844,
+      "sha256": "f153b1b0380cdb1713332b85a8c1d43cd1aed79dc06484b13cf28275c7ef4c50"
+    },
+    "assets/adventure/audio/remorse.wav": {
+      "bytes": 529244,
+      "sha256": "c43c5d903123c8f82345e4182b4fe3c11b1d07f07f09b15be31ba426cc353771"
+    },
+    "assets/adventure/audio/shutter_clack.wav": {
+      "bytes": 15920,
+      "sha256": "dd866f0a898142c5533a4424f78abc597567e03e6a2009a0c31230fad0bceca8"
+    },
+    "assets/adventure/audio/shutter_roll.wav": {
+      "bytes": 44144,
+      "sha256": "768ea5212c9680e53c27867d791ace43ea4073d59e2218d02946bb21c523cd70"
+    },
+    "assets/adventure/audio/street_air.wav": {
+      "bytes": 882044,
+      "sha256": "2f7f98607579241cd8203fc30eecdb278ae9cd6c02b530e8bf2656b1d41a6e87"
+    },
+    "assets/adventure/audio/street_traffic.wav": {
+      "bytes": 882044,
+      "sha256": "53c7111201b2b96463eaf33e31e8a89125c9c5725d13f72a279bfaf4852254e7"
+    },
+    "assets/adventure/audio/strike.wav": {
+      "bytes": 9746,
+      "sha256": "7f532afd521bedae01ab8109e03b92b797ad9b9372162575a0e16dfe84b6ce7e"
+    },
+    "assets/adventure/audio/traffic_escape.wav": {
+      "bytes": 61784,
+      "sha256": "3f59307c5eab912a8685c0a8d5d6c39b311f409d91b28bce80ead3ff4935bf22"
+    },
+    "assets/adventure/audio/transition.wav": {
+      "bytes": 35324,
+      "sha256": "3be6151d5ba0a0ca6b68009a37d71dc7a6ede1622f059c439565df3edecf9b4a"
+    },
+    "assets/adventure/chapter/DRIVER.md": {
+      "bytes": 3068,
+      "sha256": "dd775da2d344062c9957c7c449e6e8626f4173c8a31c2e1bd9f0441b481a26e4"
+    },
+    "assets/adventure/chapter/README.md": {
+      "bytes": 8541,
+      "sha256": "17f36910fc6ed42e6c346487f45d3076d2867f84a0043b771a1f1aa166cbadd6"
+    },
+    "assets/adventure/chapter/audio/README.md": {
+      "bytes": 2981,
+      "sha256": "e7b96c3b7a274edb3c24d3121bfb48b19ba76e97eb9a73b8ade9672c75fc9b67"
+    },
+    "assets/adventure/chapter/audio/footstep.wav": {
+      "bytes": 6218,
+      "sha256": "e6e4eefdfb97b5ef3073aa9839b8cb716a1e67b07e7e9abc3ec1fee3946fdb75"
+    },
+    "assets/adventure/chapter/audio/phone_pocket.wav": {
+      "bytes": 14156,
+      "sha256": "7a30aff658f82fc750cadd74e4730f3c0cdedf2731ab73d1b798402e01f30dd8"
+    },
+    "assets/adventure/chapter/audio/phone_receive.wav": {
+      "bytes": 13274,
+      "sha256": "15156ebaab8c29009d06273423788e79f1d0b24984b859c06d2dd6b7948d3bef"
+    },
+    "assets/adventure/chapter/audio/phone_send.wav": {
+      "bytes": 7982,
+      "sha256": "e7c36e8d4f1dcf173f3b06e274ff13ed14d1d7609362c6ee211937ca5bbcde39"
+    },
+    "assets/adventure/chapter/audio/phone_tap.wav": {
+      "bytes": 3132,
+      "sha256": "c47dc32ae89fcf1a4485d8c617f26673c5d2ce216fa230eac649d0f36c23ba13"
+    },
+    "assets/adventure/chapter/catalog.json": {
+      "bytes": 6988,
+      "sha256": "c7f0a603c3fb83817e18aa686e0ad87e26368c41624be432048acd319e4e53f0"
+    },
+    "assets/adventure/chapter/chapter-texts.json": {
+      "bytes": 2847,
+      "sha256": "f9d27455c51ff3aac3c0aea7e20a15f34ad0255ef1cd7a5941bd20b56231f059"
+    },
+    "assets/adventure/chapter/driver.png": {
+      "bytes": 878782,
+      "sha256": "10aef02391b50458663be7d23c6cde79d5bb43bf63fd522e4b8a6d5e70e5a38e"
+    },
+    "assets/adventure/chapter/lane.png": {
+      "bytes": 2884832,
+      "sha256": "d8173ad8e2d256308a3f5fd1db063f95328bfb5fac647f11acb32d672bb23c18"
+    },
+    "assets/adventure/chapter/phone-style.json": {
+      "bytes": 251,
+      "sha256": "f628cb53478ae539fe1eec7dc12a0d200f2cc37373e8e4d2409a2d5ccc4d1108"
+    },
+    "assets/adventure/chapter/rust-narrative.png": {
+      "bytes": 2261685,
+      "sha256": "60a424907da69377a8bc856dc7a48a4fcca00e96a5e0cbac68aac1c60fce5368"
+    },
+    "assets/adventure/chapter/world.json": {
+      "bytes": 3371,
+      "sha256": "aa5831c630be3063d46239f3429427b8131e84a7b983774c80941eebb25000fc"
+    },
+    "assets/adventure/erratic-poses.json": {
+      "bytes": 842,
+      "sha256": "f581ba4b179b6d0b04062dc4da5e8881421841e43d28989b4cc2e1809757c1ad"
+    },
+    "assets/adventure/erratic.png": {
+      "bytes": 1102267,
+      "sha256": "eeb61a73f64dad3440209bf3f48835554a6cb130fcbfbc1a38d03a8e4309604e"
+    },
+    "assets/adventure/fonts/BARLOW-OFL.txt": {
+      "bytes": 4376,
+      "sha256": "10b0e6bb43166a50fbe7cde2895bd7f703738a5da843acb5c97c95dc9ea26817"
+    },
+    "assets/adventure/fonts/Barlow-Regular.ttf": {
+      "bytes": 104068,
+      "sha256": "95aa02c7c43096e0dd44d787ba6216864a67157e402adab59b35572e0c1577ea"
+    },
+    "assets/adventure/fonts/BarlowCondensed-SemiBold.ttf": {
+      "bytes": 109428,
+      "sha256": "7b619d14bc2327509a9ef32b0890f709626f7ecc9ff61191c2a4314c5499d2d9"
+    },
+    "assets/adventure/fonts/LORA-OFL.txt": {
+      "bytes": 4422,
+      "sha256": "6d6bc7bbb828514925dabcaf89e4771398d12c60dd1cb2bbb90eea129535d0f4"
+    },
+    "assets/adventure/fonts/Lora-Variable.ttf": {
+      "bytes": 212196,
+      "sha256": "822a6621ccbe8d97d20ac88c1c41f5615c9c2c202eaa75f272cd452aac6475a7"
+    },
+    "assets/adventure/fonts/README.md": {
+      "bytes": 1917,
+      "sha256": "9061381527c69c28363f715aaad73b80ce8f2b4836865c7a7237e3019ee737c6"
+    },
+    "assets/adventure/opening/ART-PROVENANCE.md": {
+      "bytes": 7031,
+      "sha256": "631d4649f5501344d8db2cc9b17272281ad1ea67511044cd91c9a04f7c747d93"
+    },
+    "assets/adventure/opening/cpp-origin.png": {
+      "bytes": 2477548,
+      "sha256": "0c44b46b12151b5e484b3623044f6ba8ac958faf9158b3589eef47cff32b4e14"
+    },
+    "assets/adventure/opening/python-teacher.png": {
+      "bytes": 2186123,
+      "sha256": "0a9e933088235ce9b411fefaaae264e1997b02288ef5eacff1aa7a4eba8c76de"
+    },
+    "assets/adventure/opening/roster/c.png": {
+      "bytes": 179779,
+      "sha256": "5968fb304b83c3ee6cebe8328cfcf75ba464c0dff6d1319b2f8161afd73ab8f8"
+    },
+    "assets/adventure/opening/roster/cpp.png": {
+      "bytes": 161502,
+      "sha256": "23fdb1f847ea57afbe92aa80745463a3c7d3ba6d0e494dc49ad9461337106cca"
+    },
+    "assets/adventure/opening/roster/duke.png": {
+      "bytes": 175315,
+      "sha256": "e0065524d5e5e6efb33bb9e4466974c9e4c9b131b64f7f0764698b5d1705d21e"
+    },
+    "assets/adventure/opening/roster/python.png": {
+      "bytes": 194142,
+      "sha256": "b9ea64ee6bc762346f994189148c1236520cec3bd2124bcf165ce46b68a48ed5"
+    },
+    "assets/adventure/opening/roster/rust.png": {
+      "bytes": 1253897,
+      "sha256": "f0a7af2a9462263963bb3a24126e4c1e3728dcd929bcb57fa21a9c2bd13e864f"
+    },
+    "assets/adventure/opening/roster.json": {
+      "bytes": 3777,
+      "sha256": "fdf920a07db993baf7b8708257e09cfb546e8ce35d43dacf83c645da65db332d"
+    },
+    "assets/adventure/prologue-environments.png": {
+      "bytes": 2549445,
+      "sha256": "d67b09d891556a0b98131a94589db5ebbf913e52ace32aaad338a1927857107f"
+    },
+    "assets/adventure/rust-actions-poses.json": {
+      "bytes": 1482,
+      "sha256": "76ed9ec12bfe410c84caaab7b0df79dca0d4fbda3e5b4dee51884bdb1dc07ed6"
+    },
+    "assets/adventure/rust-actions.png": {
+      "bytes": 1253897,
+      "sha256": "f0a7af2a9462263963bb3a24126e4c1e3728dcd929bcb57fa21a9c2bd13e864f"
+    },
+    "assets/adventure/rust-morning-poses.json": {
+      "bytes": 1167,
+      "sha256": "ec8ce79ddf44b4f098d694c68b9e6465e697154b1c47dbcf54ce2b52d976e573"
+    },
+    "assets/adventure/rust-morning.png": {
+      "bytes": 1133875,
+      "sha256": "59c86cc14d4673be5ee99e8e7f707e40ca44779d06227ba5fabb822d2a60c12b"
+    },
+    "assets/adventure/street/README.md": {
+      "bytes": 11499,
+      "sha256": "ebea68e50aaa71e1bcb8a614c2f30cbba7c471a931ca25f365cc4bcc52952cbe"
+    },
+    "assets/adventure/street/caramelo.png": {
+      "bytes": 1968288,
+      "sha256": "9fa17dcccab61b78ea6414aadcbedd41ef6aeb81d9637b8d83db8b570f48e8d3"
+    },
+    "assets/adventure/street/catalog.json": {
+      "bytes": 19800,
+      "sha256": "946daef458c6187624c96442eb845dfcfb42ca4fee66c4d1807a70401fb6cc1a"
+    },
+    "assets/adventure/street/cyclist-escape.png": {
+      "bytes": 1906983,
+      "sha256": "a3c4a4bfcc88339a2e486742c2e21b89a686ff3353f46e2f2fa9d6bfe7ad889f"
+    },
+    "assets/adventure/street/neighbours.png": {
+      "bytes": 2101837,
+      "sha256": "40bdacd3abad00a17d9cdce266c5e381345ae25ef5d7e22c69107519acc3cba2"
+    },
+    "assets/adventure/street/props.png": {
+      "bytes": 2213510,
+      "sha256": "e9bc7ed2d014516afb554e0a40814d0ab5e0b18546fbaf09c5f46a02ed781564"
+    },
+    "assets/adventure/street/scene.json": {
+      "bytes": 1538,
+      "sha256": "7b39da98ffb06e1e53e2c609df66967430e830ce4eeeab449cf6393c678d6a17"
+    },
+    "assets/adventure/street/shopkeeper.png": {
+      "bytes": 2058304,
+      "sha256": "00cf325015c8ddf3c52b035bbc0dbd1903be35441638d5bfaf1fdde651c6d409"
+    },
+    "assets/adventure/street/shutter.png": {
+      "bytes": 2069679,
+      "sha256": "b11cca82fad5f8d03d135c37976e19c593c0f5ddd991c913c1069acb09e1a9e0"
+    },
+    "assets/adventure/street/vehicles.png": {
+      "bytes": 1143973,
+      "sha256": "cd00c1af32f8a2e2e7d98221c98680b12a2247eab9fa39640ed8224eca4cea7c"
+    },
+    "assets/adventure/street-life.json": {
+      "bytes": 1611,
+      "sha256": "d288e841aef38ec700fe2f3c4f1570df968c84bc65574875bc17fabe7b3e7585"
+    },
+    "assets/adventure/street-life.png": {
+      "bytes": 2073463,
+      "sha256": "4173b2e30a7da6ce2aa701edcf463ad0d229c819e17dac77e754d2e160a04518"
+    },
+    "assets/adventure/street-traffic.json": {
+      "bytes": 1707,
+      "sha256": "e01a30f88a042ce63898962b96fb3f92bb1092dc2ca8bdd9e2de89a4d6255a02"
+    },
+    "assets/adventure/street-traffic.png": {
+      "bytes": 1039836,
+      "sha256": "13d45c30f198d53dd7504601e23560feb45e21ee0cc8e57766145b9d4e5841ab"
+    },
+    "assets/adventure/texts/README.md": {
+      "bytes": 3722,
+      "sha256": "8390dca2cd20d2e6db31670e7a6d3d0f5b8844742581e6c90cf206cd08579fff"
+    },
+    "assets/adventure/texts/pt-BR.json": {
+      "bytes": 5681,
+      "sha256": "050015875d5592022cd84552c60f67010a53ae544f3c271ddde425ba9a6b8265"
+    },
+    "assets/audio/ATTRIBUTION.md": {
+      "bytes": 10375,
+      "sha256": "d1192b3d830bd89d69142ed1b0c0be6ac0e17913c0736d39305b94cb5e93e49d"
+    },
+    "assets/audio/audio_manifest.json": {
+      "bytes": 32000,
+      "sha256": "657d078579433ee050f9c7bdb34b23adb6cab0b9ec05c273e8bc004b63a55fa6"
+    },
+    "assets/audio/characters/c/voice/attack-heavy-02.ogg": {
+      "bytes": 11049,
+      "sha256": "2904b0d2cf923ca11b56433961b81f1c29a0ad00d9ac8a6094ed4fc95e137555"
+    },
+    "assets/audio/characters/c/voice/attack-pointer-jab-01.ogg": {
+      "bytes": 7630,
+      "sha256": "adb6eaec5b0655a84f62472a89073579388eece3bc3a66ca6f401cb97faebf24"
+    },
+    "assets/audio/characters/c/voice/attack-reboot-02.ogg": {
+      "bytes": 10275,
+      "sha256": "9f67d4ba4a311b0e215becd8611836c60481a5da411ce6e729d5203e93be8fcc"
+    },
+    "assets/audio/characters/c/voice/attack-unsafe-poke-01.ogg": {
+      "bytes": 9192,
+      "sha256": "1cdea07947c5fee20bbd351edd1c828b5a38bd085626956d37f5919b3abac846"
+    },
+    "assets/audio/characters/c/voice/block-01.ogg": {
+      "bytes": 6789,
+      "sha256": "d4afee90b4deb99cbed543fd2b29c88ed857b2cf715e685debe0c1d13d11c761"
+    },
+    "assets/audio/characters/c/voice/hurt-01.ogg": {
+      "bytes": 9448,
+      "sha256": "a7d14e052a979d1a4a479f43a7e3028bad4384815943809a02a779ced23f114f"
+    },
+    "assets/audio/characters/cpp/voice/attack-heavy-01.ogg": {
+      "bytes": 17062,
+      "sha256": "17594daa2681bb8fbda870fac86ad8d6e232331c79ce566ed4875d3882b568c3"
+    },
+    "assets/audio/characters/cpp/voice/attack-kick-01.ogg": {
+      "bytes": 12560,
+      "sha256": "bd003a67377fc3ef617507ba895930fbbfc0ed67aec8f8c702b35d72627193e3"
+    },
+    "assets/audio/characters/cpp/voice/attack-light-01.ogg": {
+      "bytes": 15757,
+      "sha256": "73d78289b692c1d681c1b23d139d1b957ff7ad0e6f7868a1df0854895edec492"
+    },
+    "assets/audio/characters/cpp/voice/block-01.ogg": {
+      "bytes": 8281,
+      "sha256": "20a0d7ac899984291fe46717a316cb8308cb9ada7124a574f8d2645596ac05ef"
+    },
+    "assets/audio/characters/cpp/voice/hurt-01.ogg": {
+      "bytes": 11478,
+      "sha256": "b11426a6a07e8a3afc76c2eb5fad1022e70846b20359d083cd9121429d3d816b"
+    },
+    "assets/audio/characters/cpp/voice/hurt-02.ogg": {
+      "bytes": 10252,
+      "sha256": "f984407b39f3cac72fa228312108b275cf64d6d8acd94a0b1e1ff458a6e0b2e0"
+    },
+    "assets/audio/characters/duke/sfx/projectile-cast-01.ogg": {
+      "bytes": 9834,
+      "sha256": "a27c6bb0df7da1e6af5dd5937593c98bc58b6e513f42fe6a3254cd6a6949c648"
+    },
+    "assets/audio/characters/duke/voice/attack-boilerplate-poke-01.ogg": {
+      "bytes": 4848,
+      "sha256": "d21d0f0b782445db579d11e2506b24cd1ac9d664ee33aeaf807761aa7b6fd710"
+    },
+    "assets/audio/characters/duke/voice/attack-enterprise-01.ogg": {
+      "bytes": 13758,
+      "sha256": "191448507e0241586b88445b06826ca72b846dcaa0d621913348b17d3f4e94a8"
+    },
+    "assets/audio/characters/duke/voice/attack-heavy-01.ogg": {
+      "bytes": 14034,
+      "sha256": "e775a9f6e849a988db6cbd895709584c5d3a1efbc9b7a7edf678a680c3ba167e"
+    },
+    "assets/audio/characters/duke/voice/attack-kick-01.ogg": {
+      "bytes": 5859,
+      "sha256": "692ee3a6f1821402ca649ff735bee9591dc4846c8098fc7d6a90fd15fa57c1af"
+    },
+    "assets/audio/characters/duke/voice/attack-sweep-01.ogg": {
+      "bytes": 14642,
+      "sha256": "ba78ff6c43aea635d18dc4802758c2d83b69fd7cb8680d075cce140b5a67de9b"
+    },
+    "assets/audio/characters/duke/voice/block-01.ogg": {
+      "bytes": 9023,
+      "sha256": "92d5db6bfc672d9dc1b4f390b2900504f013187fa36335472554fafefa9050b1"
+    },
+    "assets/audio/characters/duke/voice/hurt-01.ogg": {
+      "bytes": 6570,
+      "sha256": "49e7ca88743fca974bb8676ea138b751cfd8f9033b5e7af8736c2a215d6edbc1"
+    },
+    "assets/audio/characters/go/voice/attack-defer-kick-01.ogg": {
+      "bytes": 7564,
+      "sha256": "073f262a1cce1ee46d9489de513f2f2dfa2762a9547778dad63d73e77cc0ce81"
+    },
+    "assets/audio/characters/go/voice/attack-goroutine-jab-01.ogg": {
+      "bytes": 7312,
+      "sha256": "391d8ed7712c0ba238ef971056beea0257af09aedb532796fbb3e756191a847c"
+    },
+    "assets/audio/characters/go/voice/block-01.ogg": {
+      "bytes": 6202,
+      "sha256": "a9f674488792c4d1e3befeaad2c90dd8c122b7d2b0bd75a76ba1ebe4ca4313a3"
+    },
+    "assets/audio/characters/go/voice/hurt-01.ogg": {
+      "bytes": 6617,
+      "sha256": "781914ed3ea3947085e257a22c00a9f5566ee495f51e4ed664472da25eb6796f"
+    },
+    "assets/audio/characters/python/voice/attack-data-strike-01.ogg": {
+      "bytes": 6993,
+      "sha256": "c3dafb9bac0153d9231f224e3753e60c78f67fb762161fb82f9dc7ddd602781d"
+    },
+    "assets/audio/characters/python/voice/attack-heel-kick-01.ogg": {
+      "bytes": 7542,
+      "sha256": "f922daa6f8253d4a2bb1ee71beb9bc1b541a3f63e9d10312ffc909dc74582b63"
+    },
+    "assets/audio/characters/python/voice/attack-snake-bite-01.ogg": {
+      "bytes": 6318,
+      "sha256": "9add5bd4e34d30b55854ae31dce9747f471b8d9d5fdf5773807b92fe0a150ee6"
+    },
+    "assets/audio/characters/python/voice/block-01.ogg": {
+      "bytes": 7266,
+      "sha256": "92120f056f648c0b327aa4c9794a78acdb0762d6a78b0ee0ce76b8562cc9677f"
+    },
+    "assets/audio/characters/python/voice/hurt-01.ogg": {
+      "bytes": 8074,
+      "sha256": "0caaaf3f50db44285673db29bd221c6f45c082af22121d0f37afa0f254c53a4b"
+    },
+    "assets/audio/characters/rust/sfx/projectile-cast-01.ogg": {
+      "bytes": 5121,
+      "sha256": "da78c642bbd95da2c364ed0e991ebbfc5a4c0d281165d932b5819e0dd31a39d2"
+    },
+    "assets/audio/characters/rust/voice/attack-borrow-jab-01.ogg": {
+      "bytes": 7630,
+      "sha256": "adb6eaec5b0655a84f62472a89073579388eece3bc3a66ca6f401cb97faebf24"
+    },
+    "assets/audio/characters/rust/voice/attack-heavy-01.ogg": {
+      "bytes": 11049,
+      "sha256": "2904b0d2cf923ca11b56433961b81f1c29a0ad00d9ac8a6094ed4fc95e137555"
+    },
+    "assets/audio/characters/rust/voice/attack-kick-01.ogg": {
+      "bytes": 10275,
+      "sha256": "9f67d4ba4a311b0e215becd8611836c60481a5da411ce6e729d5203e93be8fcc"
+    },
+    "assets/audio/characters/rust/voice/attack-lifetime-01.ogg": {
+      "bytes": 9192,
+      "sha256": "1cdea07947c5fee20bbd351edd1c828b5a38bd085626956d37f5919b3abac846"
+    },
+    "assets/audio/characters/rust/voice/attack-ownership-01.ogg": {
+      "bytes": 14331,
+      "sha256": "1593be64b197e9ccb6f7c7ab1006d9dbde4c64e5654b4fc8c80d813f3fc34c67"
+    },
+    "assets/audio/characters/rust/voice/attack-quick-02.ogg": {
+      "bytes": 7129,
+      "sha256": "01ae442a8f095a3bb3f78413775e4ece6b8f4e6c83ac2804cde53c5044bdd3af"
+    },
+    "assets/audio/characters/rust/voice/block-01.ogg": {
+      "bytes": 6789,
+      "sha256": "d4afee90b4deb99cbed543fd2b29c88ed857b2cf715e685debe0c1d13d11c761"
+    },
+    "assets/audio/characters/rust/voice/hurt-01.ogg": {
+      "bytes": 9448,
+      "sha256": "a7d14e052a979d1a4a479f43a7e3028bad4384815943809a02a779ced23f114f"
+    },
+    "assets/audio/characters/rust/voice/hurt-02.ogg": {
+      "bytes": 10000,
+      "sha256": "ddf36308b4c680b85b176e8c0de86ae0dbbb176f0d9c913fd485fa433337a97f"
+    },
+    "assets/audio/music/combat-8bit-battle.ogg": {
+      "bytes": 880906,
+      "sha256": "3ffedb0875b311605321ce00def96d8416c4668e9331ea4ee4abb6430d74ab8b"
+    },
+    "assets/audio/music/combat-chiptune-battle.ogg": {
+      "bytes": 2724366,
+      "sha256": "fef13a566090b3f9e8492dcee58e724373a90a0ca7e53171d1d0a03190623b30"
+    },
+    "assets/audio/music/combat-console-floor.ogg": {
+      "bytes": 2195723,
+      "sha256": "eb120dd4a7704415bbfe6f604350b3d371a62664368017619f26787c6a0c0d39"
+    },
+    "assets/audio/music/combat-determined-pursuit.ogg": {
+      "bytes": 1762655,
+      "sha256": "d3a1251427314f8d0b0902860e7b8fa85a8ad8bfdf4c5671dcbca0c4bb3dea04"
+    },
+    "assets/audio/music/combat-loop.ogg": {
+      "bytes": 217082,
+      "sha256": "21f9052750000f52c17738b50f3a1a414ddf8e2cd0a28ff0b405ba2872c577d7"
+    },
+    "assets/audio/music/combat-random-encounter.ogg": {
+      "bytes": 5887471,
+      "sha256": "ec5531d21fad943d32463c3cb9fd53e868028f99676cad545fe9323f2eed14d0"
+    },
+    "assets/audio/music/combat-rins-theme.ogg": {
+      "bytes": 2244790,
+      "sha256": "7614cdb914d1bc896769bca02374b1892c94d821f0f729a0d39f870e206717b9"
+    },
+    "assets/audio/music/menu-loop.ogg": {
+      "bytes": 277132,
+      "sha256": "027c219d10b47a6c69b1bfa472987a0fcfb04c4e7e93902731daf0dfb9975171"
+    },
+    "assets/audio/sfx/combat/block-01.ogg": {
+      "bytes": 7651,
+      "sha256": "33b5e6e37c6e9d54e07bf5a89b12c76e879f40c1ea83cdd82714df1d6f9fec6d"
+    },
+    "assets/audio/sfx/combat/block-02.ogg": {
+      "bytes": 6967,
+      "sha256": "fba69c467ddd85da7b1d82e259f936b876d9ba6a3d6f1b24bdd10468e46bfe08"
+    },
+    "assets/audio/sfx/combat/hit-heavy-01.ogg": {
+      "bytes": 11617,
+      "sha256": "b33a8f14068aec24ec69ba85e5e87fdc41228975f6a1a3e44a6e7d6fc3d9f8d8"
+    },
+    "assets/audio/sfx/combat/hit-heavy-02.ogg": {
+      "bytes": 10861,
+      "sha256": "f92f5cb6ba4ff2766497292ffd90865654317eeca976f5652e0708dbdcdc0dd9"
+    },
+    "assets/audio/sfx/combat/hit-light-01.ogg": {
+      "bytes": 8800,
+      "sha256": "486988aa2d6440ffc4c62a0e8ccf3c23673ba84424bd4723378d451b7255eb5c"
+    },
+    "assets/audio/sfx/combat/hit-light-02.ogg": {
+      "bytes": 8701,
+      "sha256": "e71d23abcc3f10d9d6bc9615b2a431fff70b12333a5fcdd9964457564ace4349"
+    },
+    "assets/audio/sfx/combat/projectile-impact-01.ogg": {
+      "bytes": 7117,
+      "sha256": "a96f879fec0864a8938e0c745b6996a6c5679c16a234ce31a01cc995e8401003"
+    },
+    "assets/audio/sfx/combat/projectile-impact-02.ogg": {
+      "bytes": 6151,
+      "sha256": "e8a9eaba7c4d27422e4eeb3e6c7100d5d7dc0f83e005efc98c960adcc5265337"
+    },
+    "assets/audio/sfx/combat/whiff-01.ogg": {
+      "bytes": 8989,
+      "sha256": "5c294d2e1a6b6d07ee2d75b17105a55ad3527e5482dd60652dc49c2ea4c70096"
+    },
+    "assets/audio/sfx/combat/whiff-02.ogg": {
+      "bytes": 9319,
+      "sha256": "2b07edafc1f3f49c4813f2b0ae9481c566c1f9962a22d5f5b79da7111e058e56"
+    },
+    "assets/audio/sfx/match/countdown-01.ogg": {
+      "bytes": 15705,
+      "sha256": "232c59c88113298e4d7de15a0ad4e00efb4d040d3efec683dd5f9b1394ce0eac"
+    },
+    "assets/audio/sfx/match/countdown-10.ogg": {
+      "bytes": 13736,
+      "sha256": "95155ea07826b3c4f5fb034441f460e02e1d9e8646ee82260959f98045c86990"
+    },
+    "assets/audio/sfx/match/countdown-11.ogg": {
+      "bytes": 16480,
+      "sha256": "44ea4ef78e6cc9c871f9eb7c13398142109dcc657d33216f57b8883b767044a1"
+    },
+    "assets/audio/sfx/match/countdown-fight.ogg": {
+      "bytes": 14444,
+      "sha256": "fc16c61cd474da6c80fffe34fb3bfcee79b754fcc345bd916b0e66a826695e89"
+    },
+    "assets/audio/sfx/match/start-01.ogg": {
+      "bytes": 14444,
+      "sha256": "fc16c61cd474da6c80fffe34fb3bfcee79b754fcc345bd916b0e66a826695e89"
+    },
+    "assets/audio/sfx/match/victory-01.ogg": {
+      "bytes": 22319,
+      "sha256": "109cf00bedc2dc6579dac8096c9026c66f5946074bf3d1586bc09366b6581357"
+    },
+    "assets/audio/sfx/super/barrage-1.ogg": {
+      "bytes": 6468,
+      "sha256": "d2ee19526ae0dc284b2ffc963d458fb6a89cea2c1d692e6ba22adb58cfcb8530"
+    },
+    "assets/audio/sfx/super/barrage-2.ogg": {
+      "bytes": 6367,
+      "sha256": "0b8c2e7b68015458a77f4c2633b7e488f7140a8a007bbcadad8c5cd3cb6a3a5a"
+    },
+    "assets/audio/sfx/super/barrage-3.ogg": {
+      "bytes": 6112,
+      "sha256": "e285a69b48c6effaba6f2e3a9ac6cb577f9519e15b0a9e27d565a6d724a519c6"
+    },
+    "assets/audio/sfx/super/boot-post.ogg": {
+      "bytes": 7625,
+      "sha256": "600e2e17808e36e053ba95cd9f43ca0a98f2862540d4a5d44c69243512f6d891"
+    },
+    "assets/audio/sfx/super/collect-1.ogg": {
+      "bytes": 5570,
+      "sha256": "c90f4ba737c15f7f4c01d4fa7f9d0f228e722181cb71618ed1b392a83e0e6e7d"
+    },
+    "assets/audio/sfx/super/collect-2.ogg": {
+      "bytes": 5269,
+      "sha256": "8c3299ae2e5e313fd36b5dbb65126c32dd1b8f91144737b7ac514cad013d48f7"
+    },
+    "assets/audio/sfx/super/collect-3.ogg": {
+      "bytes": 6449,
+      "sha256": "d4cf45a57e979767fd0d3772e9842b6a1dc32d3d53468d8566e17e050d07a2f8"
+    },
+    "assets/audio/sfx/super/cpp-enter.ogg": {
+      "bytes": 8782,
+      "sha256": "2156f6ae2a2c694272898d3a482a3f7a1abc6e2212791e3321dc545f5a208757"
+    },
+    "assets/audio/sfx/super/cpp-typing.ogg": {
+      "bytes": 10523,
+      "sha256": "041a9538c9cc9217e0441fb4625f61d3c957dd0b68740ddde21f41e12f0b2d3e"
+    },
+    "assets/audio/sfx/super/end.ogg": {
+      "bytes": 6071,
+      "sha256": "bcea2d97e45fc3107aeb2df451e4555b755de3d557dc93492004bce1e7db3e30"
+    },
+    "assets/audio/sfx/super/error-cascade.ogg": {
+      "bytes": 9316,
+      "sha256": "da7790f0969dbb52301eb7c53e5d645b7dc0b4aec0a266070d0b5f5346db41e6"
+    },
+    "assets/audio/sfx/super/footshot.ogg": {
+      "bytes": 9611,
+      "sha256": "fc8eb62029a58f31944b004fad067167eaa8f2ed7713b81fa80fee7bb75dca28"
+    },
+    "assets/audio/sfx/super/giant-drop.ogg": {
+      "bytes": 9164,
+      "sha256": "d4efe0afa04d675518120ff0bf77c9ee37508c0a39ab838f5add88ea8d0a08ff"
+    },
+    "assets/audio/sfx/super/mutation-1.ogg": {
+      "bytes": 15242,
+      "sha256": "3d058ca371de2ca1c6c06a8069cb0e74853614077ba63c2abda06a4dd187a3c4"
+    },
+    "assets/audio/sfx/super/mutation-2.ogg": {
+      "bytes": 9798,
+      "sha256": "bfbbb57a40a99c748e2fc187e450dc90dadffe7c43d71c716338681bcfe41966"
+    },
+    "assets/audio/sfx/super/python-celebrate.ogg": {
+      "bytes": 10752,
+      "sha256": "c8c2cc7e6a579b3764325bf645c193bad5631d9e282d1dbeee984edbc8349589"
+    },
+    "assets/audio/sfx/super/python-grow.ogg": {
+      "bytes": 12390,
+      "sha256": "ba725e75d4cce89be1e17147322e60d9cdcb6ab4d8fc1f7b7989aa4ad546a462"
+    },
+    "assets/audio/sfx/super/python-lunge.ogg": {
+      "bytes": 10947,
+      "sha256": "b985331c9ab0cfbd2f5bc4dc529440f876d2d071b8222ca67b6ee1c5892444c1"
+    },
+    "assets/audio/sfx/super/python-morph.ogg": {
+      "bytes": 9522,
+      "sha256": "91abbd70934cc93b48c93f2b29ea4ec4a49d6a3ae8f30b642388a08bbcef802e"
+    },
+    "assets/audio/sfx/super/python-peace.ogg": {
+      "bytes": 6706,
+      "sha256": "7f34a011967f407e9835c972be84fdecf916c2e3d35ae46a4e2ce06eab5ce0b7"
+    },
+    "assets/audio/sfx/super/python-revert.ogg": {
+      "bytes": 9238,
+      "sha256": "9310cec71033ff94259c6292ca143669446c5829a9a3088b5665c6e9ab6625b2"
+    },
+    "assets/audio/sfx/super/python-swallow.ogg": {
+      "bytes": 9553,
+      "sha256": "ae5a3056d69ba32716aff2ba3b2bfa7f727136c16d9dc31aff2b28c755d64186"
+    },
+    "assets/audio/sfx/super/start-c.ogg": {
+      "bytes": 11745,
+      "sha256": "e379092d6ad9c751e60ecfcbe33c2ef1f519b32d6e11b0185f49616f3b317212"
+    },
+    "assets/audio/sfx/super/start-cpp.ogg": {
+      "bytes": 13015,
+      "sha256": "3158d9916e655cd7d54de23c6436ed9114c100c822c60dd0394f3e967f6ad73f"
+    },
+    "assets/audio/sfx/super/start-duke.ogg": {
+      "bytes": 10607,
+      "sha256": "e541c38a0057d035f6531794460230c3b36e8137b8c28ef763b131a3f227a056"
+    },
+    "assets/audio/sfx/super/start-python.ogg": {
+      "bytes": 9905,
+      "sha256": "f06c8d95047490f948276919191495986b61bd88ef902982b48a86a7f56737f9"
+    },
+    "assets/audio/sfx/super/start-rust.ogg": {
+      "bytes": 11251,
+      "sha256": "047723de8c0dc44278c458dab2290fa7dd49b0e6feaf69ff3faa7b0718e05d4a"
+    },
+    "assets/audio/sfx/super/trash-rain.ogg": {
+      "bytes": 16401,
+      "sha256": "4ca80450e79697e7a2183e3e7bb13610d3716e2936dca775a86d10a5dcb7e861"
+    },
+    "assets/audio/sfx/ui/back-01.ogg": {
+      "bytes": 6997,
+      "sha256": "07db973f79f6ae0f2edc34561e7592e24d0577455919fb602cb8ecc0da991dcf"
+    },
+    "assets/audio/sfx/ui/confirm-01.ogg": {
+      "bytes": 8968,
+      "sha256": "063564703b6094d70718a3e787a55cc9141611e4ecd6b6637f8828f79b4a8c3a"
+    },
+    "assets/audio/sfx/ui/navigate-01.ogg": {
+      "bytes": 5468,
+      "sha256": "aec0c31ea934a35936ae0d2ab8fac8123c93aa5647f935853a58dbaf90278b7a"
+    },
+    "assets/candidates/c/c-contact-reactions-atlas.png": {
+      "bytes": 2658590,
+      "sha256": "49aa1d2d8bd2a0c397dc583c3bd59b236b49f2f66bb375d409b5c3489a8c3886"
+    },
+    "assets/candidates/c/c-fighter-atlas.png": {
+      "bytes": 5838995,
+      "sha256": "a1efa9e3170118676b97efef79defdd244dfc5d8e326c408d0d8a9449b453a3c"
+    },
+    "assets/candidates/c/c-fighter.sprite.json": {
+      "bytes": 51777,
+      "sha256": "f75875aed172aa3cf14dac9037d812b59cb720839b0a8a0be1ae50f7446e27eb"
+    },
+    "assets/candidates/c/c-signature-fx.png": {
+      "bytes": 230353,
+      "sha256": "2ea34ed8787e65b8aa5ecbf946210d01fcbf060f98face110ab6dce260bacc0f"
+    },
+    "assets/candidates/c/c-signature-fx.sprite.json": {
+      "bytes": 3096,
+      "sha256": "38799e7939a43a87e01dd500bda7e1e78e4c567989a716cc577a0c177bdfcae7"
+    },
+    "assets/candidates/cpp/cpp-fighter-atlas.png": {
+      "bytes": 5070393,
+      "sha256": "95dde5b46cd1b51223bd60fbb3b64c9f7f30a798f06545e1c0aa843fbfd270dc"
+    },
+    "assets/candidates/cpp/cpp-fighter.sprite.json": {
+      "bytes": 51140,
+      "sha256": "c39a4159ce32416d36f6aed3f397d32c47ce47f101b0b9fdc3f958b5db87a3ca"
+    },
+    "assets/candidates/cpp/cpp-reactions-own-2026-09-09.png": {
+      "bytes": 2433511,
+      "sha256": "27acda5d25ffba0e208cc474dd6475624518edce0eab45165aa3f5a1b9e55c38"
+    },
+    "assets/candidates/cpp/cpp-signature-fx-atlas.png": {
+      "bytes": 379055,
+      "sha256": "a2f838e8daa0fbf855a3bab66f9022603effd4c63d354224598d496ac8bb4ad6"
+    },
+    "assets/candidates/cpp/cpp-signature-fx.sprite.json": {
+      "bytes": 3455,
+      "sha256": "20e00f5cbd797d63d50be6b99ed401f0e98510230c4d97219e115e8063254cd4"
+    },
+    "assets/candidates/duke/duke-contact-reactions-atlas.png": {
+      "bytes": 1928025,
+      "sha256": "3f8357163dfa9d55b299028c506e76a15abd9db800c82040b39e38e5c16c52e0"
+    },
+    "assets/candidates/duke/duke-fighter-atlas.png": {
+      "bytes": 4574687,
+      "sha256": "d013474eea2f82fae04da2456622bb4379e086569facceef97f88d26703c3ca8"
+    },
+    "assets/candidates/duke/duke-fighter.sprite.json": {
+      "bytes": 51592,
+      "sha256": "8ce1126f685e6ea8677b566569f391db234066e78c24c640def3b0fe7e002697"
+    },
+    "assets/candidates/duke/duke-projectile.png": {
+      "bytes": 13685,
+      "sha256": "8cfaa86bd3c56c8bbfc6cce8d03769a62e06a3a58766b9492edd68f4c4ee199c"
+    },
+    "assets/candidates/duke/duke-signature-fx.png": {
+      "bytes": 188043,
+      "sha256": "a20b25ec7cd849bd9a1df999f2dd4ef60a5880e0309b1ca180a57570dc2b3dcd"
+    },
+    "assets/candidates/duke/duke-signature-fx.sprite.json": {
+      "bytes": 3119,
+      "sha256": "919fd1242647d5c93d11d67795bd8ff1b3ff51b4d542c7fc946a41bd39b3ea2f"
+    },
+    "assets/candidates/go/go-contact-reactions-atlas.png": {
+      "bytes": 2511464,
+      "sha256": "f2d0cec56ec28425fde85dee0cbaa2f8989c333f946e3b1f17dadc1d89fdb8bc"
+    },
+    "assets/candidates/go/go-fighter-atlas.png": {
+      "bytes": 3187286,
+      "sha256": "60f5e1b428e851146072fc7e8d5a672b479fb62bb6fbba91308519d4d8efd028"
+    },
+    "assets/candidates/go/go-fighter.sprite.json": {
+      "bytes": 39729,
+      "sha256": "cd170b2dfc2fb9eddfeff33d2f075ce661f0ae2d082239b13826190070d057ec"
+    },
+    "assets/candidates/python/python-fighter-atlas.png": {
+      "bytes": 4780158,
+      "sha256": "1f795ae31b4b5e5cd5e7c1104375ee1f9abb8d822e2e9c6a7ea8ad5d937465b2"
+    },
+    "assets/candidates/python/python-fighter.sprite.json": {
+      "bytes": 50859,
+      "sha256": "d0bcdbd5b33ade9d4e780e72b0b153d7dad09b263f487b6fbbd6a569f3aa9ed4"
+    },
+    "assets/candidates/python/python-projectile.png": {
+      "bytes": 8789,
+      "sha256": "833f2fde2327b781f6dddd0ff0d5470adba3c935cfa8a2e5e77a8b17ab9e8c13"
+    },
+    "assets/candidates/python/python-reactions-atlas.png": {
+      "bytes": 1903419,
+      "sha256": "368c6fba0c6d352b73e7b759f0f949d9baab9b87dc666c688f192da1a5080fc2"
+    },
+    "assets/candidates/python/python-signature-fx-atlas.png": {
+      "bytes": 836488,
+      "sha256": "2eef20e49ab191ba660e4e2f46327b72d33ec6834f717b2a517e433a550ead5f"
+    },
+    "assets/candidates/python/python-signature-fx.sprite.json": {
+      "bytes": 3234,
+      "sha256": "79449835473611a88cf316f87f1a602cf12e7bf5a89fd681ed6e89024caccfba"
+    },
+    "assets/candidates/rust/rust-contact-reactions-atlas.png": {
+      "bytes": 2747342,
+      "sha256": "80134486ff22122a7c873332b92ecf1d7e8570d553c4c14c43672cd022898a33"
+    },
+    "assets/candidates/rust/rust-fighter-atlas.png": {
+      "bytes": 7268867,
+      "sha256": "eed867ea07c3743e76d87c73dfdf50e8baceada31c4ff305e9a14e99dcd29e26"
+    },
+    "assets/candidates/rust/rust-fighter.sprite.json": {
+      "bytes": 54395,
+      "sha256": "77ff9e48de1c3c1799be963a2fd981cd667e93dc3c059cdd01d16959085dd7e5"
+    },
+    "assets/candidates/rust/rust-projectile.png": {
+      "bytes": 36482,
+      "sha256": "287c7d34f1f76bb5a228592a0a2b95001f88eae7a858988109f0a947c108d836"
+    },
+    "assets/candidates/rust/rust-signature-fx.png": {
+      "bytes": 1260036,
+      "sha256": "b1ba6e55d5b3e737eaf9fe75b0a10b187192b234e7eb4231d12ee8cbe3457ff8"
+    },
+    "assets/candidates/rust/rust-signature-fx.sprite.json": {
+      "bytes": 2395,
+      "sha256": "61d9ad3c071d11dc6831e0aa879a5856b6a832e94fb7a624675aec568c1c4b70"
+    },
+    "assets/fonts/BARLOW-OFL.txt": {
+      "bytes": 4377,
+      "sha256": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f"
+    },
+    "assets/fonts/LORA-OFL.txt": {
+      "bytes": 4423,
+      "sha256": "1d9a970809ac804b582a6ce7f0ebc4e7fefcbfd7ff6299cad35ee656a21be716"
+    },
+    "assets/fonts/README.md": {
+      "bytes": 1774,
+      "sha256": "024fa5acdb86eb2fdb6a7d78f2a820a7704bc2d1262476670d4cb3054fca110b"
+    },
+    "assets/lore/story.json": {
+      "bytes": 8807,
+      "sha256": "abb5399f3721c27e4ad1ec5409b2fdf529326e625c27408f251575a1c3fdbd69"
+    },
+    "assets/placeholder/arena-biotic.png": {
+      "bytes": 831960,
+      "sha256": "bf2ca21d432b8bbb0829c4904ac1278c166e336a3f4cc5acf0e63d8eeef9daaa"
+    },
+    "assets/placeholder/arena-fortaleza.png": {
+      "bytes": 912805,
+      "sha256": "cd4d77a69aac2a368a477db93ba66aa0cf2acb242eb414d734773db8bc5a16a2"
+    },
+    "assets/placeholder/arena-java-street.png": {
+      "bytes": 920668,
+      "sha256": "75e82b4d3735a95309bae26e0c3ca3a7f85c96c03d5247fbc4ff46b6f572fb7c"
+    },
+    "assets/placeholder/arena-porto-digital.png": {
+      "bytes": 855108,
+      "sha256": "d8bbfcca1d30fffbd7c79c34faa57216dd4f3a0a80c68b88a70d46b7d321cf9b"
+    },
+    "assets/placeholder/arena-vale-pinhao.png": {
+      "bytes": 860725,
+      "sha256": "ccfca98ecf76d1a4fa4d763bef00fc442627613cc564ba7983f7a2e388fb386f"
+    },
+    "assets/placeholder/c-bitstream-projectile.png": {
+      "bytes": 7409,
+      "sha256": "566b1c4b0322f186b2784560308c2f36cbcad50d979864a8c6f2da4786271493"
+    },
+    "assets/placeholder/c-fighter-atlas.png": {
+      "bytes": 3790934,
+      "sha256": "bd156e9bcf0245b5188c9122af6e4911bf1efb61c647f4f0574b6c1b654b8c1e"
+    },
+    "assets/placeholder/c-fighter.sprite.json": {
+      "bytes": 52625,
+      "sha256": "c1cb97c8b4cf1e5f55179a79a8c136537191835c4fde2ea4eb15791fbb3ce19b"
+    },
+    "assets/placeholder/c-start-atlas.png": {
+      "bytes": 318842,
+      "sha256": "487cb078609cbbad2de8c82ecf7795ba0c0093df7726b1c8892ee253b042c952"
+    },
+    "assets/placeholder/c-start.sprite.json": {
+      "bytes": 3924,
+      "sha256": "e2a59d3973afbf71cd8e5d5922b74b070485c941db558f11dd9fe32ac0dc1caa"
+    },
+    "assets/placeholder/countdown-01.png": {
+      "bytes": 423181,
+      "sha256": "581d97ba997b086b122822f4aa7a881ee17b9a780dfcd7aa613dea7509be27ed"
+    },
+    "assets/placeholder/countdown-10.png": {
+      "bytes": 422008,
+      "sha256": "7eef8d620ed92287a2ee171cd592d08786c991fd4231c3197a04b39e8fe2b0e4"
+    },
+    "assets/placeholder/countdown-11.png": {
+      "bytes": 418755,
+      "sha256": "18ae356fb2fb7c5095e947ce37167a5b76123b1f6671cd7c582114b8781368a6"
+    },
+    "assets/placeholder/countdown-fight.png": {
+      "bytes": 409904,
+      "sha256": "4f4344a5499973a25647a5c60291e84a1548149a61f07553a763096ca8a5df7f"
+    },
+    "assets/placeholder/cpp-fighter-atlas-a.png": {
+      "bytes": 3673459,
+      "sha256": "38a6371ee0a578e70b2d3c239a56f0c6c078bb2e3408d9a94fa340ab55e997d3"
+    },
+    "assets/placeholder/cpp-fighter-atlas-b.png": {
+      "bytes": 4177538,
+      "sha256": "a09c26d5af4c659c2846bbf1b7a9f99614f7292b6d2487a22f75dc8c5677400b"
+    },
+    "assets/placeholder/cpp-fighter.sprite.json": {
+      "bytes": 58504,
+      "sha256": "20581c2868fbbfb8a5da345ef950171ee2c5299359d04c38b7842265c7ac327e"
+    },
+    "assets/placeholder/cpp-plusplus-projectile.png": {
+      "bytes": 27626,
+      "sha256": "30a33fcaa5479cc3d997b8862ad11a83aac8542a7eeee344a55557f12f9be3a1"
+    },
+    "assets/placeholder/duke-bean-projectile.png": {
+      "bytes": 25081,
+      "sha256": "7d4d5878b12281af7775a5fea8a7e1ced87597566331d8ae69215f7d8384d318"
+    },
+    "assets/placeholder/duke-fighter-atlas.png": {
+      "bytes": 1898625,
+      "sha256": "60627a946f999e919b1d5475cfb42fabd342a84abd738f2438dfcf4c63dff262"
+    },
+    "assets/placeholder/duke-fighter.sprite.json": {
+      "bytes": 22945,
+      "sha256": "f46c78756f455d3a741bdac37ca66d88711e77b5d048fc8ff7b021ed062d847d"
+    },
+    "assets/placeholder/duke-start-atlas.png": {
+      "bytes": 1014744,
+      "sha256": "0430d2de09c6b1c3595006914565ac8f44ae07b56ff66bea361980cfa72e0f82"
+    },
+    "assets/placeholder/duke-start.sprite.json": {
+      "bytes": 9172,
+      "sha256": "35904dd1786fdcb99a09342015c275bf3f67563597c1b706b20197a10f27c8b8"
+    },
+    "assets/placeholder/fighter-greybox-spritesheet.png": {
+      "bytes": 5234,
+      "sha256": "d53074174a791834237ef4362330d79ddd70045922459cee2afecdfab5b12d04"
+    },
+    "assets/placeholder/go-channel-projectile.png": {
+      "bytes": 24574,
+      "sha256": "4257c24a9994216a5d3e032884391c1ebd02270ddaee3f44639774043252c8e5"
+    },
+    "assets/placeholder/go-fighter-atlas.png": {
+      "bytes": 2188191,
+      "sha256": "7475916488d77fb35174abbeb1a6b042613a10bc0ba12899951b3337a4870f9e"
+    },
+    "assets/placeholder/go-fighter.sprite.json": {
+      "bytes": 17141,
+      "sha256": "b03f5fdca18a7d6f87c46bfef23fae3ce23b99ad218c1abdfa182e26ec1a6027"
+    },
+    "assets/placeholder/go-start-atlas.png": {
+      "bytes": 690726,
+      "sha256": "9b344c40eb7e245a9091c10a55d5d92014c480d725516492c87cefcbd7b54670"
+    },
+    "assets/placeholder/go-start.sprite.json": {
+      "bytes": 4829,
+      "sha256": "297d402de4c946110df2d3774c6d82eb18d30feb6ccdabc4e81de38f6bf55099"
+    },
+    "assets/placeholder/menu-title-borrow-fighters.png": {
+      "bytes": 91257,
+      "sha256": "763e7e1d67010b2255eb613802e522ae15b192018bec5e50af6c21308aac664e"
+    },
+    "assets/placeholder/python-data-projectile.png": {
+      "bytes": 82203,
+      "sha256": "e70bb47f549b5b46065c00cf14278705e7837daaa979d9722aeddeb88ee78cf8"
+    },
+    "assets/placeholder/python-fighter-atlas.png": {
+      "bytes": 7853177,
+      "sha256": "8ad39937ba9f82c37ba032539f2481d42b12ed59b507671d30c4ef61043102b9"
+    },
+    "assets/placeholder/python-fighter.sprite.json": {
+      "bytes": 56279,
+      "sha256": "a593f46d43912b388a8d4d822f185d70e8489d1d180c5d5cdf051f1989385ecb"
+    },
+    "assets/placeholder/python-start-atlas.png": {
+      "bytes": 920136,
+      "sha256": "3633fb8414be85ff8d78024576d77128f67e775d7d2faa1a09003ff3eb9a1b57"
+    },
+    "assets/placeholder/python-start.sprite.json": {
+      "bytes": 6725,
+      "sha256": "b7ac8e7bce2b0b44bd8a1d9b9fba74f276f9232c7f7192cb28bb7e5e83092c15"
+    },
+    "assets/placeholder/roster-c.png": {
+      "bytes": 31832,
+      "sha256": "e0eeab19ae285945b89b5e3b86521dd8159a3dbe1b3b963c626899dc79261189"
+    },
+    "assets/placeholder/roster-cpp.png": {
+      "bytes": 27228,
+      "sha256": "4c6bb3c3db7d7d0434f3ca30f156e5c3a74bf012c5e3c246dba51cbda2d8c06b"
+    },
+    "assets/placeholder/roster-duke.png": {
+      "bytes": 33685,
+      "sha256": "db067a850f95f7c6ccc06ab0677c3f98bb3c452bbca907577cfca03c8f973a69"
+    },
+    "assets/placeholder/roster-python.png": {
+      "bytes": 28658,
+      "sha256": "dfbc6eca25de259d15ad35e8f51ce9665695981a689c664bc0d7b9e52e58347b"
+    },
+    "assets/placeholder/roster-rust.png": {
+      "bytes": 40700,
+      "sha256": "bd1ccbb49c666e3739cadfcae1d3e3dc0bbe7afdba9e2b5e5f44eeb08b9f16ee"
+    },
+    "assets/placeholder/rust-fighter-atlas.png": {
+      "bytes": 2207101,
+      "sha256": "9c2fde764c7e29fa12011e2dd8c6f9001de63dbd661b869bc68de6fcce51f91e"
+    },
+    "assets/placeholder/rust-fighter.sprite.json": {
+      "bytes": 23940,
+      "sha256": "400128e2a525a3b2c0a6a4c3ab17ffd63bf9afdd48317664fffdcc6210f36b38"
+    },
+    "assets/placeholder/rust-gear-projectile.png": {
+      "bytes": 47173,
+      "sha256": "20c2c813c02dec034e445d75411db204eab4717b5293d0115a671a2e81144fa6"
+    },
+    "assets/placeholder/rust-start-atlas.png": {
+      "bytes": 1247082,
+      "sha256": "3aae6d7080f176f8020dd9d43ce24dfea026964c9a19b863e0e24e2ec8a5f300"
+    },
+    "assets/placeholder/rust-start.sprite.json": {
+      "bytes": 9627,
+      "sha256": "91fbf4e4bad9cefa7f741648f198b19147b42c1a8a537c2aeb3e06e60b049663"
+    },
+    "assets/production/stage-life/arena-sirius-clean.png": {
+      "bytes": 2397830,
+      "sha256": "1cdc8ab7ba67ff4efc42cffe9a17640744b42dfb69ea4ef03961f192d19c89e9"
+    },
+    "assets/production/stage-life/caramelo-run.png": {
+      "bytes": 641294,
+      "sha256": "9f9b1ce90f3311a03002470564f4690b011d09debc37b0b583b6bcf7448b2bae"
+    },
+    "assets/production/stage-life/jessica-gesture.png": {
+      "bytes": 1788286,
+      "sha256": "3bf5092caee83b5bf573414785fa3ab34fce24426c181b93d31c72e0976ea5f2"
+    },
+    "assets/production/super-sequences/cpp/footgun-barrage.png": {
+      "bytes": 2187996,
+      "sha256": "6069d2f909a32d194bcfde50bfde95137b0a06d235a4bfdc347d67e165efd52b"
+    },
+    "assets/production/super-sequences/cpp/footgun-comedy.png": {
+      "bytes": 2094534,
+      "sha256": "5e94447e62c211a2d88267f483ae65f95c512dafa0dc94a30931c0d51990b08d"
+    },
+    "assets/production/super-sequences/cpp/laptop.png": {
+      "bytes": 2063432,
+      "sha256": "3cd0324209c4461c3d3625bb464dc5f8df18d16d61edab1de4ff64fcb920a9de"
+    },
+    "assets/production/super-sequences/duke/collector-poses.png": {
+      "bytes": 1729100,
+      "sha256": "a9ff32061a4b52ea61b25a830bce4ed975111460da3bdf337e0788577fc69d94"
+    },
+    "assets/production/super-sequences/python/celebrate.png": {
+      "bytes": 1370455,
+      "sha256": "8ce26d81d004370edb0a780959083f0b4f5b70932edcca2b5c32f6a325ab3562"
+    },
+    "assets/production/super-sequences/python/revert.png": {
+      "bytes": 1665378,
+      "sha256": "081eaa92ff9f1ca134abf43616649f9bb49810cece9fa4122fb6ab98f23840bc"
+    },
+    "assets/production/super-sequences/python/serpent.png": {
+      "bytes": 1526023,
+      "sha256": "05ae956f629ae0de9f74c34f6ecf9cc2e58f8d6ca93b3d7e4f89eb1ea4e75b13"
+    },
+    "assets/production/super-sequences/python/transform.png": {
+      "bytes": 1673640,
+      "sha256": "4ab04276bf2dfc02368b8aede1432484bd7154b872f5e7985421407ff29924cb"
+    },
+    "assets/production/super-sequences/trash/garbage-items.png": {
+      "bytes": 851660,
+      "sha256": "2d73cc14b28c90194d9d9f37d9ebcf495ba17d343f08fe342feb63ed83d4083c"
+    },
+    "assets/tuning/character-body-metrics.json": {
+      "bytes": 1032,
+      "sha256": "7f77453d98681adf5b6b0d8020ca8167dcbb8245ea97363425c5fc9cf309c962"
+    }
+  },
+  "scope": "All Rust source inputs and the complete shipping runtime asset closure; unused art candidates omitted from this delivery manifest."
+}

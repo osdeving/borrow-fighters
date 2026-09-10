@@ -1,0 +1,20 @@
+TRANSPARENT BACKGROUND. Generate a production PNG sprite sheet of exactly EIGHT separate character cutouts on true transparent RGBA alpha. This is not a scene: alpha zero everywhere outside the sprites, no checkerboard, no background color or texture.
+
+Canvas1536x1024, EXACTLY FOUR COLUMNS and TWO ROWS: each cell384x512 pixels. Critical packing rule: EVERY individual sprite, including its whole bicycle if present, must fit inside a centered box of MAXIMUM300 pixels wide and390 pixels high in its cell. At least42 pixels EMPTY TRANSPARENT MARGIN at BOTH sides of every cell. Never let a hand, foot or wheel touch the neighboring cell. Leave ample gaps vertically too. No gridlines or labels. Physical size of heads and bodies consistent in all eight cells; bicycle wheels keep the same diameter. It is okay if the figures appear small within the cells; clean separated cutouts are essential.
+
+Character identity: the same adult Brazilian male neighbor, medium brown skin, short dark hair, short dark beard/stubble, gray vented bicycle HELMET with chin strap, plain brick-red T-shirt, navy knee-length shorts, white ankle socks and navy sneakers with white soles. Warm hand-painted 2D anime game style, clean dark-brown outlines and subtle shaded cloth volume, friendly ordinary adult proportions and worried/startled expressive face. His ordinary dark TEAL city bicycle has a diamond frame, flat handlebars, black saddle, silver rims and thin dark round tires. Full side view. Bicycle's physical width is about230 pixels in every top cell so man plus bicycle together still fit in the max300-pixel sprite width.
+
+TOP ROW:
+CELL1: RIGHT-facing bicycle with helmeted man braking hard, torso leaning BACK, arms braced, wide worried eyes looking RIGHT, one foot stretching down off its pedal toward the ground. Complete man and complete bike.
+CELL2: same RIGHT-facing bicycle stationary, man has dismounted to straddle beside the frame with BOTH feet firmly planted on ground and torso upright, hands still on handlebars, looking LEFT over shoulder. Man and complete bike fit together in the cell.
+CELL3: same man stepping LEFT away from the same RIGHT-facing bicycle, hands released and clearly free of handlebars, one foot stepping left but tucked near the rear wheel so the WHOLE combined cutout stays under300pixels wide. Torso turns left, head glances right. Complete man and bike, with no clipping.
+CELL4: the SAME empty teal bicycle upright facing RIGHT with no person, same physical bike size and wheels as cells1–3.
+
+BOTTOM ROW:
+CELL5: the same helmeted adult running LEFT on foot, long stride with LEFT leg leading and RIGHT arm leading.
+CELL6: running LEFT, passing/compression pose with LEFT foot under hips planted, RIGHT knee coming forward and elbows passing the torso.
+CELL7: running LEFT, opposite long stride with RIGHT leg leading and LEFT arm leading. The nearer leg is different from cell5; reverse the arm swing visibly.
+CELL8: running LEFT, opposite passing/push-off pose, RIGHT foot under hips planted and LEFT knee coming forward, rear heel lifting.
+Four distinct sequential body-action frames, including visible alternating legs and arm swing. RUNNING LEFT figures have NO bicycle or other object. Maintain the gray helmet and all clothing in every pose.
+
+Warm illustrated painted sprite finish, readable at90–110px tall. No text, labels, number, floor, cast shadow, speed lines, effects, scenery or checkerboard. Exactly8 isolated complete silhouettes with real alpha and clean generous transparent gutters, preserving strict four-column bytwo-row packing.

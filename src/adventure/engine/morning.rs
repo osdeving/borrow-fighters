@@ -8,6 +8,66 @@ use raylib::prelude::*;
 use super::assets::Assets;
 use crate::adventure::story::Story;
 
+/// Adds editable Rust references and quiet monitor/fan animation to the room.
+pub fn draw_room_details(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
+    let t = story.stage_ticks as f32 / 60.0;
+    let orange = Color::new(230, 126, 65, 255);
+    let cream = Color::new(244, 225, 188, 255);
+    let mint = Color::new(130, 201, 185, 255);
+    d.draw_text_ex(
+        &a.body,
+        a.text.get("morning.poster.rust"),
+        Vector2::new(342.0, 207.0),
+        27.0,
+        2.0,
+        orange,
+    );
+    super::typography::paragraph(
+        d,
+        &a.body,
+        a.text.get("morning.poster.slogan"),
+        Rectangle::new(495.0, 193.0, 126.0, 28.0),
+        11.0,
+        Color::new(69, 64, 49, 255),
+    );
+    d.draw_rectangle(569, 232, 120, 65, Color::new(20, 30, 34, 255));
+    d.draw_text_ex(
+        &a.body,
+        a.text.get("morning.setup.command"),
+        Vector2::new(575.0, 239.0),
+        12.0,
+        0.0,
+        mint,
+    );
+    super::typography::paragraph(
+        d,
+        &a.body,
+        a.text.get("morning.setup.status"),
+        Rectangle::new(575.0, 257.0, 108.0, 31.0),
+        8.0,
+        cream,
+    );
+    if story.stage_ticks % 60 < 32 {
+        d.draw_rectangle(575, 288, 6, 2, mint);
+    }
+    // Restrained light on the tower: fixed centers, rotating thin fan blades.
+    for y in [417.0, 480.0] {
+        let center = Vector2::new(859.0, y);
+        for blade in 0..5 {
+            let angle = t * 4.5 + blade as f32 * std::f32::consts::TAU / 5.0;
+            d.draw_line_ex(
+                Vector2::new(center.x + angle.cos() * 4.0, center.y + angle.sin() * 4.0),
+                Vector2::new(
+                    center.x + (angle + 0.25).cos() * 12.0,
+                    center.y + (angle + 0.25).sin() * 12.0,
+                ),
+                1.2,
+                Color::new(236, 151, 77, 85),
+            );
+        }
+    }
+}
+
 /// Draws Rust waking on the bed and standing on the rug, without moving the room.
 pub fn draw_morning_character(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
     let index = pose_index(story.stage_ticks);

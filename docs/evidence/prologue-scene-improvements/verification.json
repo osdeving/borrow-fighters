@@ -1,0 +1,17 @@
+{
+  "default_tests": 437,
+  "adventure_tests": 43,
+  "fighting_tests": 395,
+  "core_tests": 3,
+  "boundary_fixtures": 56,
+  "package_tests": 10,
+  "native_checks": 31,
+  "runtime_assets": 227,
+  "text_values_preserved": 76,
+  "new_text_keys": 4,
+  "stage_check": "assets/checksums verified; four frames of RustMorning outside checkout",
+  "visual_status": "reviewed by agent; experimental candidate, awaiting user playtest",
+  "recording": "59.334-second native capture; silent; final two-line poster fit recorded in separate room capture",
+  "markdown_targets_checked": 1320,
+  "yaml": "passed"
+}

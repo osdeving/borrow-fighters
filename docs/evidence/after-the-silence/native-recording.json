@@ -1,0 +1,28 @@
+{
+  "mode": "native_isolated_pulseaudio_monitor",
+  "completed": true,
+  "started_wall_seconds": 1789061268.8512843,
+  "sink": "borrow_chapter_40fd461bf4ee41ee",
+  "module": 29,
+  "executable": "<workspace>/target/debug/borrow-adventure",
+  "executable_sha256": "525c6ca71a25463b48ba9cf66edf7737a270a76765c5bd737671e44cae29904d",
+  "helper": "<workspace>/tools/review/capture_chapter_x11.py",
+  "helper_sha256": "0034560395ccc000e0dab3b9acf66f07099e2073a11efba12d3e2b5e6624b8a6",
+  "raw_audio": "<workspace>/.git/story-chapter-review/native-preview/native-audio.mka",
+  "raw_byte_limit": 41943040,
+  "cleanup": [
+    {
+      "process": "pulse_recorder",
+      "pid": 824581,
+      "signal": "SIGINT"
+    },
+    {
+      "unloaded_own_module": 29
+    }
+  ],
+  "recorder_pid": 824581,
+  "capture_helper_pid": 824656,
+  "capture_helper_exit": 0,
+  "recorder_exit": 255,
+  "stopped_wall_seconds": 1789061369.3165553
+}

@@ -1,0 +1,7 @@
+Use case: precise-object-edit
+Asset type: transparent 2D game vehicle atlas.
+Input image: existing four-vehicle atlas; this is the only edit target.
+
+Change ONLY the nose and front wheel of the blue vehicle in the TOP-RIGHT quadrant. Its present crushed hood is too subtle. Compress the whole front end horizontally so the damaged vehicle is unmistakably SHORTER than the pristine top-left vehicle: the rightmost bumper must retreat left by approximately 80 source pixels, roughly 14% of its original length. Fold the blue hood into a sharp upward accordion, deeply cave the front fender and move the damaged front wheel about 55 pixels left, with the wheel visibly bent. Keep the roof, all window outlines, rear half of the car and rear wheel exactly where they currently are. Keep the front and rear wheels touching the existing ground baseline. No smoke or sparks or debris.
+
+CRITICAL INVARIANTS: preserve the original canvas size, equal 2×2 cell layout, vehicle paint colors, line work, warm lighting and every pixel of the OTHER THREE cars. The top-right car's rear wheel, rear bumper, doors, roof and cabin stay fixed. The shortened nose is intentional and must not be re-centered in its cell. Preserve actual PNG RGBA TRANSPARENCY everywhere outside the four isolated vehicles. No background, no checkerboard, no white fill, no cast shadows, no new objects or text. No people or injuries.

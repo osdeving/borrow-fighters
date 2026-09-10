@@ -1,0 +1,41 @@
+{
+  "image": "lane.png",
+  "image_size": [
+    1672,
+    941
+  ],
+  "rects": [
+    [
+      0,
+      0,
+      1672,
+      941
+    ]
+  ],
+  "labels": [
+    "residential-lane-base"
+  ],
+  "render_reference": [
+    1280,
+    720
+  ],
+  "composition": {
+    "side_view": true,
+    "opaque_base_layer": true,
+    "suggested_actor_floor_y_at_720": 580,
+    "suggested_actor_floor_source_y": 758.028,
+    "foreground_asphalt_begins_source_y_approx": 650,
+    "painted_sidewalk_base_source_y_approx": 583,
+    "note": "Architectural gates and plants are painted background only. Interactive geometry, obstacles, actors and transition regions remain separate runtime data. This is not a seamless tile; compose/crop the full backdrop per local scene."
+  },
+  "source_sha256": "d8173ad8e2d256308a3f5fd1db063f95328bfb5fac647f11acb32d672bb23c18",
+  "source_file": "/home/willams/.codex/generated_images/01a08b8b-3f76-7df3-b45e-58333ee12b57/exec-63f0ff26-6eb8-45bb-8426-1d4e67d6436f.png",
+  "mode": "RGB",
+  "measurement": {
+    "image_pixels_unchanged": true,
+    "geometry": "visual art guides only, not collision or navigation data"
+  },
+  "generated_with": "built-in image_gen",
+  "date": "2026-09-10",
+  "prompt": "prompts/lane.txt"
+}

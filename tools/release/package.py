@@ -79,8 +79,30 @@ def string_values(value):
             yield from string_values(child)
 
 
+def adventure_piece_assets(catalog):
+    """Follow every frame image in one adventure catalog, deduplicating atlases."""
+    base = ROOT / "assets/adventure"
+    catalog = asset_file(catalog)
+    files = {catalog}
+    pieces = json.loads(catalog.read_text(encoding="utf-8"))["pieces"]
+    for piece in pieces.values():
+        for frame in piece["frames"]:
+            # Catalogs may reuse another adventure's atlas. Only image fields
+            # are dependencies; source rectangles and production notes are not.
+            name = frame["image"]
+            if (not isinstance(name, str) or not name.endswith(".png")
+                    or "\\" in name or ":" in name
+                    or any(part in ("", ".", "..") for part in name.split("/"))):
+                raise ValueError(f"Adventure piece must use a relative local PNG: {name}")
+            image = asset_file(base / name)
+            if not within(image, base):
+                raise ValueError(f"Adventure piece outside assets/adventure/: {name}")
+            files.add(image)
+    return files
+
+
 def adventure_assets():
-    """Expand the adventure loaders' local names and opening portrait images."""
+    """Expand adventure loaders, opening portraits and both piece catalogs."""
     files = set()
     base = ROOT / "assets/adventure"
     # These adapters prepend their own directory to literal file names. Keep
@@ -106,9 +128,13 @@ def adventure_assets():
         if not within(portrait, roster.parent):
             raise ValueError(f"Opening portrait outside adventure opening/: {name}")
         files.add(portrait)
+    files.add(asset_file(base / "street/scene.json"))
+    for name in ("street/catalog.json", "chapter/catalog.json"):
+        files.update(adventure_piece_assets(base / name))
     for name in ("fonts/BARLOW-OFL.txt", "fonts/LORA-OFL.txt", "fonts/README.md",
                  "audio/README.md", "texts/README.md", "ART-PROVENANCE.md",
-                 "opening/ART-PROVENANCE.md"):
+                 "opening/ART-PROVENANCE.md", "street/README.md",
+                 "chapter/README.md", "chapter/DRIVER.md", "chapter/audio/README.md"):
         files.add(asset_file(base / name))
     return files
 
@@ -179,12 +205,14 @@ def rust_notices(stage, target):
                "- Music, sound effects and voices: assets/audio/ATTRIBUTION.md.",
                "- Adventure fonts: assets/adventure/fonts/README.md and local OFL texts.",
                "- Original adventure music and sounds: assets/adventure/audio/README.md.",
+               "- Original chapter Foley and phone effects: assets/adventure/chapter/audio/README.md.",
                "", "## Project and prototype artwork", "",
                "Cargo.toml declares MIT OR Apache-2.0 for the project code. The release",
                "does not assign that declaration to third-party audio, fonts or artwork.",
                "Artwork provenance remains documented in the repository's assets/ tree.",
                "Adventure artwork notices are in assets/adventure/ART-PROVENANCE.md",
-               "and assets/adventure/opening/ART-PROVENANCE.md; production references",
+               "and assets/adventure/opening/ART-PROVENANCE.md. Chapter provenance is in",
+               "assets/adventure/chapter/README.md and DRIVER.md; production references",
                "remain available in the source repository at the recorded revision.",
                "The source tag for this build is recorded in BUILD-INFO.json.", ""]
     (stage / "THIRD_PARTY_NOTICES.md").write_text("\n".join(notice), encoding="utf-8")

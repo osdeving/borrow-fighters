@@ -2,36 +2,38 @@
 
 Jogo 2D de luta com humor de programação, iniciado como um projeto **docs-first** e agora com um protótipo greybox jogável em Rust + Raylib.
 
-Status: **Prototype 0.1 / Greybox jogável / Vertical slice em evolução**
+Status: **Prototype 0.1 — prototype.5 / Primeiro capítulo e Versus jogáveis**
 
 ## Baixar e jogar (sem instalar Rust)
 
-A versão do playtest é **v0.1.0-prototype.4**, com aventura de Ada/Rust,
-apresentação do universo e menu de terminal na mesma execução.
-[Downloads e instruções da release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.4):
+A versão do playtest é **v0.1.0-prototype.5**, com o primeiro capítulo de Rust,
+**Depois do silêncio**, prólogo e Versus na mesma execução.
+[Downloads e instruções da release](https://github.com/osdeving/borrow-fighters/releases/tag/v0.1.0-prototype.5):
 instalador/ZIP para Windows 10 (1903+) ou 11, DEB para Debian/Ubuntu, RPM para Fedora e
 arquivo portátil para Linux, todos em x86_64. Extraia a pasta inteira se escolher
 a versão portátil. Os arquivos necessários do jogo acompanham os pacotes.
 Todos precisam de driver com OpenGL 3.3. No Linux, a base é glibc 2.35+
 e desktop com X11 ou XWayland.
 
-Ao abrir, acompanhe o prólogo, o primeiro encontro de Rust e a apresentação.
+Na primeira abertura, acompanhe o prólogo, o encontro de Rust e a apresentação.
+Depois de visto ou pulado, o jogo abre no menu; é possível rever o prólogo.
 **Enter / RB** avança ao próximo trecho; **Backspace / View** pula tudo e abre
 o menu, inclusive durante combate ou pausa. No fim normal, **Aperte qualquer
 tecla para continuar** espera uma nova entrada antes de mostrar o menu.
 **Versus Setup** abre a seleção para jogar contra CPU ou em duelo local;
-**Como jogar** explica os controles. **Modo História** está reservado, sem ação.
+**Como jogar** explica os controles. **Modo História** inicia o capítulo de Rust,
+com conversas, celular, exploração e combate, ou continua do último checkpoint.
 Durante a luta, `Esc`/`Start` abre a pausa; o resultado oferece revanche.
 O código e as ferramentas de desenvolvimento continuam descritos abaixo.
 
 Jogue por dez minutos e [conte o que funcionou e o que ficou confuso](https://github.com/osdeving/borrow-fighters/issues/new/choose).
-[Notas do playtest](docs/releases/v0.1.0-prototype.4.md) ·
+[Notas do playtest](docs/releases/v0.1.0-prototype.5.md) ·
 [Como gerar os pacotes](docs/06-release-process.md) ·
 [Decisão de distribuição](docs/adr/0019-playtest-distribution.md).
 
 ## Jogar pelo código — aventura, apresentação e menu
 
-`cargo run` inicia a aventura que apresenta
+Na primeira execução, `cargo run` inicia a aventura que apresenta
 Ada, uma mensagem sem remetente, o despertar de Assembly e, muito tempo depois,
 a manhã de Rust interrompida por uma entidade errática. As regras e os assets
 da aventura são próprios; as features `adventure` e `fighting` são habilitadas
@@ -45,16 +47,51 @@ após a confirmação no fim da apresentação ou pelo comando de pular tudo:
 # Sequência completa: Ada → Rust → combate → apresentação → menu principal.
 cargo run
 
+# Rever o quarto de Rust e seguir até a rua.
+cargo run -- --start morning
+
+# Chegada cinematográfica à rua, exploração e reação à errática.
+cargo run -- --start encounter
+
 # Apresentação → menu, para rever a junção.
 cargo run -- --start opening
 
 # Direto ao menu principal renovado.
 cargo run -- --menu
+
+# Primeiro capítulo da campanha (retoma o checkpoint, se houver).
+cargo run -- --start chapter
 ```
 
+A prototype.5 incorpora quatro rodadas de melhorias. A primeira acrescenta
+setup e pôsteres de Rust ao quarto, ciclistas numa ciclovia ao fundo e um garoto
+que larga a pipa e foge ao perceber a errática. A encenação acompanha a pausa
+e o reinício do encontro. A segunda rodada acrescenta automóveis numa rua
+separada da ciclovia: ao surgir a EP, um motorista buzina, freia e bate num
+poste; o carro amassado permanece no cenário. A terceira rodada traz carros
+cotidianos distintos, ônibus, ponto e o Bar e Mercearia Casa Nossa. Toda a rua
+reage à EP: ciclistas largam as bicicletas, pessoas fogem e veículos aceleram
+para fora, sem reaparecer durante a luta. As peças podem ser trocadas pelo
+[catálogo de assets](assets/adventure/street/README.md), com a composição separada.
+[Prévia da rua com evacuação e som nativo](docs/evidence/brazilian-street-evacuation/street-evacuation.mp4).
+A quarta rodada abre a rua com uma tomada da pipa até Rust. Moradores e
+caramelo reagem à ameaça; visitantes entram na mercearia e o lojista baixa
+a porta de enrolar. Pássaros na manhã e trânsito leve no exterior acompanham
+os lugares, cessando o trânsito após a fuga. Ônibus e letreiro foram ampliados.
+[Prévia completa do quarto à rua, com som nativo](docs/evidence/cinematic-neighbourhood/street-arrival-and-shelter.mp4).
+[Escopo da chegada](docs/32-cinematic-neighbourhood-arrival.md).
+[Escopo das melhorias](docs/30-prologue-scene-improvements.md)
+e [diário do experimento](docs/worklogs/prologue-scene-improvements.md).
+
 O menu usa a identidade do título final, moldura de terminal, cursor de bloco
-piscante e números que formam as opções. **Modo História** fica sem ação por
-enquanto; **Versus Setup** abre a seleção. As demais entradas mantêm os destinos.
+piscante e números que formam as opções. Na execução conjunta, **Modo História**
+abre **Depois do silêncio**, primeiro capítulo com Rust: retorno à rua evacuada,
+conversas com moradores, contato com Python pelo celular, travessa e passagem.
+O submenu oferece continuar, recomeçar e rever o prólogo. Depois de visto ou
+pulado, o prólogo deixa de abrir automaticamente; as entradas explícitas
+`--start` continuam disponíveis. **Versus Setup** mantém a seleção livre.
+[Capítulo e estratégia de animação](docs/33-after-the-silence.md).
+[Prévia do capítulo com som nativo](docs/evidence/after-the-silence/chapter-01.mp4).
 [Escopo e verificação da junção](docs/29-story-terminal-menu.md).
 
 Os dois modos também continuam disponíveis isoladamente:
@@ -72,11 +109,12 @@ cargo run --no-default-features --features adventure --bin borrow-adventure -- -
 
 Na aventura: `A/D` ou setas movem, `Espaço/W` pula, `J/F` ataca, `K/H` dá um golpe
 forte e `Q/L` defende. `Enter` avança ao próximo trecho, `Tab` revela a mensagem
-e `Esc` pausa. Após derrota, `R` tenta novamente no encontro. No controle:
+e `Esc` pausa. Durante a chegada à rua, `Enter`/`RB` termina a tomada e libera exploração.
+Após derrota, `R` tenta novamente no encontro, sem repetir a câmera de chegada. No controle:
 direcional, `A` para pular no combate ou avançar cenas, `X/Y` para ataques,
 `LB` para defesa, `RB` para o próximo trecho e `Start` para pausa.
 
-Em `borrow-story`, `Backspace`/`View` pula tudo e abre o menu principal, inclusive
+No prólogo de `borrow-story`, `Backspace`/`View` pula tudo e abre o menu principal, inclusive
 durante combate ou pausa. Avançar o encontro com `Enter`/`RB` segue à apresentação
 sem registrar vitória. Na conclusão normal, **Aperte qualquer tecla para continuar**
 aguarda uma nova tecla, clique ou botão: segurar uma tecla ou usar o mesmo comando
@@ -84,6 +122,13 @@ que avançou o último trecho não dispensa a tela.
 
 No executável isolado, pular tudo conclui o trecho local; `T/X` repete a apresentação
 na conclusão. Para sair durante a aventura, feche a janela ou use `B` do controle na pausa.
+
+No capítulo: **E / A** interage, **Espaço / B** pula, **Enter / RB** avança
+conversa, **Backspace / View** conclui a atuação atual e **Esc / Start** abre
+pausa com retorno ao menu. **R / A** retoma uma derrota no checkpoint local.
+O progresso fica em `adventure/campaign-v1.json` no diretório de dados do usuário.
+**F3** mostra posições, regiões e rotas; **F5** recarrega os textos do capítulo
+e a aparência do mensageiro. [Assets, clips e sockets](assets/adventure/chapter/README.md).
 
 **Textos sem recompilar:** edite [assets/adventure/texts/pt-BR.json](assets/adventure/texts/pt-BR.json),
 salve e pressione **F5**. Legendas, terminal, manchetes, biografias, menus, logo
@@ -104,6 +149,11 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 ## Índice central
 
 ### Visão e produto
+
+- [`docs/33-after-the-silence.md`](docs/33-after-the-silence.md): primeiro capítulo, telefone in-game, geometria e checkpoints.
+- [`docs/32-cinematic-neighbourhood-arrival.md`](docs/32-cinematic-neighbourhood-arrival.md): chegada cinematográfica, moradores, caramelo, porta de enrolar e ambientação sonora.
+- [`docs/31-brazilian-street-evacuation.md`](docs/31-brazilian-street-evacuation.md): rua brasileira com peças substituíveis e evacuação coletiva após a EP.
+- [`docs/30-prologue-scene-improvements.md`](docs/30-prologue-scene-improvements.md): experimento de melhorias das cenas do prólogo, começando pelo quarto e pela rua de Rust.
 
 - [`docs/29-story-terminal-menu.md`](docs/29-story-terminal-menu.md): apresentação seguida do menu de terminal, com os modos independentes.
 
@@ -166,6 +216,9 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`.claude/skills/`](.claude/skills): skills de projeto para Claude Code.
 
 ### Decisões registradas
+
+- [`docs/adr/0027-chapter-spatial-direction.md`](docs/adr/0027-chapter-spatial-direction.md): capítulo modular, geometria e animação com sockets.
+- [`docs/adr/0024-prologue-background-life.md`](docs/adr/0024-prologue-background-life.md): ciclistas, garoto e pipa em planos de fundo, com relógio próprio e reação à ameaça.
 
 - [`docs/adr/0023-story-to-terminal-menu.md`](docs/adr/0023-story-to-terminal-menu.md): composição externa e janela compartilhada, sem dependências entre os domínios.
 
@@ -338,7 +391,7 @@ A seleção Linker mostra retratos, os personagens animados em pé e confirmaç�
 O menu principal desta branch usa uma janela de terminal com cursor de bloco
 e revelação binária; a marca acompanha o título final da aventura:
 
-- `Modo História`: reservado para a continuação da aventura; sem ação por enquanto.
+- `Modo História`: no executável conjunto, abre o capítulo de Rust com checkpoints; na execução isolada de luta, permanece indisponível.
 - `Versus Setup`: abre a seleção visual de personagens, arena e modo.
 - `Training`: abre `Move Showcase`, `Combat Lab` ou `Sprite Viewer`.
 - `Lore / Roster`: abre um livro de programação com capítulos da história e fichas dos personagens.

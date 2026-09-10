@@ -1,0 +1,302 @@
+{
+  "image": "caramelo.png",
+  "image_size": [
+    1024,
+    1536
+  ],
+  "rects": [
+    [
+      33,
+      21,
+      430,
+      345
+    ],
+    [
+      571,
+      21,
+      340,
+      349
+    ],
+    [
+      67,
+      392,
+      409,
+      365
+    ],
+    [
+      567,
+      443,
+      409,
+      304
+    ],
+    [
+      23,
+      815,
+      441,
+      290
+    ],
+    [
+      512,
+      811,
+      483,
+      291
+    ],
+    [
+      17,
+      1152,
+      449,
+      302
+    ],
+    [
+      523,
+      1152,
+      469,
+      298
+    ]
+  ],
+  "labels": [
+    "caramelo-idle-right",
+    "caramelo-sit-right",
+    "caramelo-alert-right",
+    "caramelo-sniff-right",
+    "caramelo-run-right-0",
+    "caramelo-run-right-1",
+    "caramelo-run-right-2",
+    "caramelo-run-right-3"
+  ],
+  "pivots": [
+    [
+      215,
+      341
+    ],
+    [
+      197,
+      344
+    ],
+    [
+      189,
+      361
+    ],
+    [
+      201,
+      296
+    ],
+    [
+      231,
+      285
+    ],
+    [
+      268,
+      289
+    ],
+    [
+      227,
+      296
+    ],
+    [
+      257,
+      296
+    ]
+  ],
+  "pivot_space": "pixels relative to rect top-left; horizontal trunk center and virtual ground",
+  "authored_facing": "right",
+  "recommended_uniform_scale": "target idle standing silhouette height / 341; use unchanged for every pose",
+  "reference_standing_height_pixels": 341,
+  "animation": {
+    "idle": [
+      0
+    ],
+    "sitting": [
+      1
+    ],
+    "alert": [
+      2
+    ],
+    "sniff": [
+      3
+    ],
+    "run": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "run_frame_seconds": 0.09
+  },
+  "registration": {
+    "source_anchors": [
+      [
+        248,
+        362
+      ],
+      [
+        768,
+        365
+      ],
+      [
+        256,
+        753
+      ],
+      [
+        768,
+        739
+      ],
+      [
+        254,
+        1100
+      ],
+      [
+        780,
+        1100
+      ],
+      [
+        244,
+        1448
+      ],
+      [
+        780,
+        1448
+      ]
+    ],
+    "running_ground_source_y": [
+      1100,
+      1100,
+      1448,
+      1448
+    ],
+    "body_reference": "Trunk center is measured visually; frames 4 and 5 share the same row ground, as do frames 6 and 7. Airborne frame 5 preserves its gap above ground.",
+    "notes": "Keep one scale for the entire character; never normalize each pose by its crop height. Runtime may mirror each right-facing pose about the pivot."
+  },
+  "measurement": {
+    "alpha_threshold_exclusive": 3,
+    "padding_pixels": 2,
+    "image_pixels_unchanged": true,
+    "inspection_windows": [
+      [
+        0,
+        0,
+        512,
+        384
+      ],
+      [
+        512,
+        0,
+        1024,
+        384
+      ],
+      [
+        0,
+        384,
+        512,
+        768
+      ],
+      [
+        512,
+        384,
+        1024,
+        768
+      ],
+      [
+        0,
+        768,
+        512,
+        1152
+      ],
+      [
+        512,
+        768,
+        1024,
+        1152
+      ],
+      [
+        0,
+        1152,
+        512,
+        1536
+      ],
+      [
+        512,
+        1152,
+        1024,
+        1536
+      ]
+    ],
+    "visible_alpha_bounds": [
+      [
+        35,
+        23,
+        461,
+        364
+      ],
+      [
+        573,
+        23,
+        909,
+        368
+      ],
+      [
+        69,
+        394,
+        474,
+        755
+      ],
+      [
+        569,
+        445,
+        974,
+        745
+      ],
+      [
+        25,
+        817,
+        462,
+        1103
+      ],
+      [
+        513,
+        813,
+        993,
+        1055
+      ],
+      [
+        19,
+        1153,
+        464,
+        1452
+      ],
+      [
+        525,
+        1152,
+        990,
+        1447
+      ]
+    ],
+    "vertical_cell_edge_max_alpha": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0
+    ]
+  },
+  "source_sha256": "9fa17dcccab61b78ea6414aadcbedd41ef6aeb81d9637b8d83db8b570f48e8d3",
+  "alpha_counts": {
+    "zero": 1103253,
+    "intermediate": 469611,
+    "opaque": 0
+  },
+  "generated_with": "built-in image_gen",
+  "generated_date": "2026-09-10",
+  "selected_prompt": "prompts/caramelo.txt"
+}

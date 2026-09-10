@@ -1,0 +1,1394 @@
+{
+  "created_utc": "2026-09-10T17:18:26.408951+00:00",
+  "success": true,
+  "failure": null,
+  "elapsed_seconds": 141.968,
+  "owned_pid": 786703,
+  "owned_window": 8388615,
+  "process_exit_code": 0,
+  "display": ":0",
+  "input_method": "XSendEvent addressed to _NET_WM_PID-owned window",
+  "limitations": "Synthetic window keyboard input; no physical gamepad, focus changes, desktop capture, audio listening or human visual approval.",
+  "checks": [
+    {
+      "name": "fresh_isolated_campaign_directory",
+      "passed": true,
+      "data_directory": "<workspace>/.git/story-chapter-review/native-functional/userdata",
+      "environment_variable": "BORROW_FIGHTERS_DATA_DIR"
+    },
+    {
+      "name": "fresh_chapter_starts_in_intro",
+      "passed": true,
+      "observed": {
+        "camera": {
+          "x": 1290.0,
+          "y": 340.0,
+          "zoom": 1.5
+        },
+        "capture_seconds": 0.0,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "street_start",
+          "version": 1
+        },
+        "controls_active": false,
+        "dialogue": "chapter.intro",
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0
+        },
+        "frame": 0,
+        "interaction": null,
+        "line": 0,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "Intro",
+        "phase_ticks": 0,
+        "phone": null,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 1070.0,
+          "y": 580.0
+        },
+        "scene": "Street",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 0,
+        "wall_seconds": 1789060568.4497902
+      }
+    },
+    {
+      "name": "intro_plays_600_ticks_without_advance",
+      "passed": true,
+      "ticks": 600,
+      "controls_active": true
+    },
+    {
+      "name": "driver_requires_reaching_its_region",
+      "passed": true,
+      "interaction": "driver",
+      "player": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 1288.5,
+        "y": 580.0
+      }
+    },
+    {
+      "name": "driver_approach_releases_no_exploration_input",
+      "passed": true,
+      "player": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 0.7199999690055847,
+        "x": 1205.0,
+        "y": 430.0
+      },
+      "phase": "DriverDialogue"
+    },
+    {
+      "name": "driver_walks_to_authored_path_endpoint",
+      "passed": true,
+      "actual": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 0.7199999690055847,
+        "x": 1205.0,
+        "y": 430.0
+      },
+      "endpoint": {
+        "x": 1205,
+        "y": 430
+      }
+    },
+    {
+      "name": "driver_conversation_completed_in_order",
+      "passed": true,
+      "checkpoint": {
+        "prologue_played_victory": false,
+        "stage": "driver_checked",
+        "version": 1
+      },
+      "player": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 1288.5,
+        "y": 580.0
+      }
+    },
+    {
+      "name": "shop_requires_reaching_its_region",
+      "passed": true,
+      "interaction": "shop",
+      "player": {
+        "action": "Idle",
+        "facing": "Left",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 576.0000610351562,
+        "y": 580.0
+      }
+    },
+    {
+      "name": "shop_approach_releases_no_exploration_input",
+      "passed": true,
+      "player": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 0.5799999833106995,
+        "x": 548.0,
+        "y": 355.0
+      },
+      "phase": "ShopDialogue"
+    },
+    {
+      "name": "shop_walks_to_authored_path_endpoint",
+      "passed": true,
+      "actual": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 0.5799999833106995,
+        "x": 548.0,
+        "y": 355.0
+      },
+      "endpoint": {
+        "x": 548,
+        "y": 355
+      }
+    },
+    {
+      "name": "shop_conversation_completed_in_order",
+      "passed": true,
+      "checkpoint": {
+        "prologue_played_victory": false,
+        "stage": "shop_checked",
+        "version": 1
+      },
+      "player": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 576.0000610351562,
+        "y": 580.0
+      }
+    },
+    {
+      "name": "neighbour_requires_reaching_its_region",
+      "passed": true,
+      "interaction": "neighbour",
+      "player": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 799.2500610351562,
+        "y": 580.0
+      }
+    },
+    {
+      "name": "neighbour_approach_releases_no_exploration_input",
+      "passed": true,
+      "player": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 0.5799999833106995,
+        "x": 725.0,
+        "y": 355.0
+      },
+      "phase": "NeighbourDialogue"
+    },
+    {
+      "name": "neighbour_walks_to_authored_path_endpoint",
+      "passed": true,
+      "actual": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 0.5799999833106995,
+        "x": 725.0,
+        "y": 355.0
+      },
+      "endpoint": {
+        "x": 725,
+        "y": 355
+      }
+    },
+    {
+      "name": "neighbour_conversation_completed_in_order",
+      "passed": true,
+      "checkpoint": {
+        "prologue_played_victory": false,
+        "stage": "contact_ready",
+        "version": 1
+      },
+      "player": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 799.2500610351562,
+        "y": 580.0
+      }
+    },
+    {
+      "name": "phone_typing_retains_position_and_ignores_gameplay_keys",
+      "passed": true,
+      "before": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 799.2500610351562,
+        "y": 580.0
+      },
+      "after": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 799.2500610351562,
+        "y": 580.0
+      }
+    },
+    {
+      "name": "pause_freezes_phone_world_and_camera",
+      "passed": true,
+      "phone": {
+        "device": true,
+        "messages": 0,
+        "panel": true,
+        "phase": "TypingFirst",
+        "ticks": 152,
+        "typing": false
+      },
+      "ticks": 2961
+    },
+    {
+      "name": "resume_confirm_does_not_skip_phone",
+      "passed": true,
+      "paused": {
+        "device": true,
+        "messages": 0,
+        "panel": true,
+        "phase": "TypingFirst",
+        "ticks": 152,
+        "typing": false
+      },
+      "resumed": {
+        "device": true,
+        "messages": 0,
+        "panel": true,
+        "phase": "TypingFirst",
+        "ticks": 154,
+        "typing": false
+      }
+    },
+    {
+      "name": "phone_message_1_visible_in_order",
+      "passed": true,
+      "phone": {
+        "device": true,
+        "messages": 1,
+        "panel": true,
+        "phase": "FirstSent",
+        "ticks": 230,
+        "typing": false
+      }
+    },
+    {
+      "name": "phone_message_2_visible_in_order",
+      "passed": true,
+      "phone": {
+        "device": true,
+        "messages": 2,
+        "panel": true,
+        "phase": "ReadingReply",
+        "ticks": 541,
+        "typing": false
+      }
+    },
+    {
+      "name": "phone_message_3_visible_in_order",
+      "passed": true,
+      "phone": {
+        "device": true,
+        "messages": 3,
+        "panel": true,
+        "phase": "LastSent",
+        "ticks": 750,
+        "typing": false
+      }
+    },
+    {
+      "name": "phone_returns_control_without_queued_movement_or_attack",
+      "passed": true,
+      "player": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 799.2500610351562,
+        "y": 580.0
+      },
+      "checkpoint": {
+        "prologue_played_victory": false,
+        "stage": "phone_done",
+        "version": 1
+      }
+    },
+    {
+      "name": "street_exit_reached_by_walking",
+      "passed": true,
+      "next_phase": "LaneExplore",
+      "authored_exit": {
+        "x": 1630,
+        "y": 545,
+        "width": 80,
+        "height": 55
+      }
+    },
+    {
+      "name": "lane_obstacle_blocks_grounded_walking",
+      "passed": true,
+      "obstacle": {
+        "x": 700,
+        "y": 520,
+        "width": 120,
+        "height": 60
+      },
+      "player": {
+        "action": "Walk",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 670.0,
+        "y": 580.0
+      }
+    },
+    {
+      "name": "lane_jump_clears_solid_and_lands_on_floor",
+      "passed": true,
+      "airborne": {
+        "action": "Jump",
+        "facing": "Right",
+        "grounded": false,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 623.5,
+        "y": 505.25006103515625
+      },
+      "landed": {
+        "action": "Jump",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 927.1944580078125,
+        "y": 580.0
+      }
+    },
+    {
+      "name": "lane_resident_requires_reaching_its_region",
+      "passed": true,
+      "interaction": "lane_resident",
+      "player": {
+        "action": "Idle",
+        "facing": "Right",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 1203.02783203125,
+        "y": 580.0
+      }
+    },
+    {
+      "name": "lane_resident_approach_releases_no_exploration_input",
+      "passed": true,
+      "player": {
+        "action": "Idle",
+        "facing": "Left",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 1203.02783203125,
+        "y": 580.0
+      },
+      "phase": "LaneDialogue"
+    },
+    {
+      "name": "lane_resident_conversation_completed_in_order",
+      "passed": true,
+      "checkpoint": {
+        "prologue_played_victory": false,
+        "stage": "lane_cleared",
+        "version": 1
+      },
+      "player": {
+        "action": "Idle",
+        "facing": "Left",
+        "grounded": true,
+        "hp": 100,
+        "scale": 1.0,
+        "x": 1203.02783203125,
+        "y": 580.0
+      }
+    },
+    {
+      "name": "lane_exit_reached_by_walking",
+      "passed": true,
+      "next_phase": "PassageExplore",
+      "authored_exit": {
+        "x": 1650,
+        "y": 545,
+        "width": 120,
+        "height": 55
+      }
+    },
+    {
+      "name": "unguarded_enemy_contacts_cause_real_defeat",
+      "passed": true,
+      "observed_health": [
+        0,
+        2,
+        16,
+        30,
+        44,
+        58,
+        72,
+        86,
+        100
+      ],
+      "enemy_hp": 96
+    },
+    {
+      "name": "defeat_retry_1_restores_only_passage",
+      "passed": true,
+      "observed": {
+        "camera": {
+          "x": 660.0,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "capture_seconds": 117.62845611572266,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "passage_fight",
+          "version": 1
+        },
+        "controls_active": true,
+        "dialogue": null,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1044.833251953125
+        },
+        "frame": 4276,
+        "interaction": null,
+        "line": null,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "PassageCombat",
+        "phase_ticks": 2,
+        "phone": null,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 660.0,
+          "y": 580.0
+        },
+        "scene": "Passage",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 2,
+        "wall_seconds": 1789060686.0783014
+      }
+    },
+    {
+      "name": "defeat_retry_1_does_not_replay_earlier_scenes",
+      "passed": true,
+      "records": 8
+    },
+    {
+      "name": "passage_cleared_through_real_light_heavy_guard_and_health",
+      "passed": true,
+      "actions": [
+        "Block",
+        "HeavyAttack",
+        "Idle",
+        "LightAttack",
+        "Walk"
+      ],
+      "attacks_sent": 6,
+      "retries": 1,
+      "player_hp": 100,
+      "enemy_hp": 0
+    },
+    {
+      "name": "passage_exit_reached_by_walking",
+      "passed": true,
+      "next_phase": "Departure",
+      "authored_exit": {
+        "x": 1650,
+        "y": 545,
+        "width": 120,
+        "height": 55
+      }
+    },
+    {
+      "name": "chapter_completes_and_persists_inside_isolated_data",
+      "passed": true,
+      "save": "userdata/adventure/campaign-v1.json",
+      "progress": {
+        "version": 1,
+        "prologue_seen": true,
+        "prologue_played_victory": false,
+        "street_wake_tick": null,
+        "checkpoint": {
+          "version": 1,
+          "stage": "complete",
+          "prologue_played_victory": false
+        }
+      }
+    },
+    {
+      "name": "recorded_mp4_has_frames_and_preserves_elapsed_time",
+      "passed": true,
+      "codec": "h264",
+      "width": 1280,
+      "height": 720,
+      "frame_rate": "30/1",
+      "frames": 4129,
+      "duration_seconds": 137.634,
+      "telemetry_seconds": 137.59295654296875,
+      "absolute_duration_error": 0.04104345703123613
+    },
+    {
+      "name": "same_binary_and_original_catalog_remain_unchanged",
+      "passed": true,
+      "binary_sha256_before": "a554ff317db760a50941bae7b0f409a578caa9de09b737e9f6a0311b5d502cad",
+      "binary_sha256_after": "a554ff317db760a50941bae7b0f409a578caa9de09b737e9f6a0311b5d502cad",
+      "original_catalog_sha256_before": "050015875d5592022cd84552c60f67010a53ae544f3c271ddde425ba9a6b8265",
+      "original_catalog_sha256_after": "050015875d5592022cd84552c60f67010a53ae544f3c271ddde425ba9a6b8265"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/01-street-aftermath.png",
+      "observed": {
+        "camera": {
+          "x": 1214.5548095703125,
+          "y": 346.858642578125,
+          "zoom": 1.3285337686538696
+        },
+        "capture_seconds": 6.131988525390625,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "street_start",
+          "version": 1
+        },
+        "controls_active": false,
+        "dialogue": "chapter.intro",
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0
+        },
+        "frame": 297,
+        "interaction": null,
+        "line": 0,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "Intro",
+        "phase_ticks": 319,
+        "phone": null,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 1070.0,
+          "y": 580.0
+        },
+        "scene": "Street",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 319,
+        "wall_seconds": 1789060574.583569
+      }
+    },
+    {
+      "file": "screenshots/02-driver.png",
+      "observed": {
+        "camera": {
+          "x": 1146.1796875,
+          "y": 360.0,
+          "zoom": 1.0999983549118042
+        },
+        "capture_seconds": 20.32709312438965,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "street_start",
+          "version": 1
+        },
+        "controls_active": false,
+        "dialogue": "driver.1",
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0
+        },
+        "frame": 886,
+        "interaction": null,
+        "line": 1,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "DriverDialogue",
+        "phase_ticks": 170,
+        "phone": null,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 0.7199999690055847,
+          "x": 1205.0,
+          "y": 430.0
+        },
+        "scene": "Street",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 1040,
+        "wall_seconds": 1789060588.7926755
+      }
+    },
+    {
+      "file": "screenshots/03-shop.png",
+      "observed": {
+        "camera": {
+          "x": 581.819580078125,
+          "y": 360.0,
+          "zoom": 1.0999983549118042
+        },
+        "capture_seconds": 36.187068939208984,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "driver_checked",
+          "version": 1
+        },
+        "controls_active": false,
+        "dialogue": "shop.1",
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0
+        },
+        "frame": 1464,
+        "interaction": null,
+        "line": 1,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "ShopDialogue",
+        "phase_ticks": 169,
+        "phone": null,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 0.5799999833106995,
+          "x": 548.0,
+          "y": 355.0
+        },
+        "scene": "Street",
+        "shutter": 0.0,
+        "stage": "Chapter",
+        "ticks": 1824,
+        "wall_seconds": 1789060604.7254066
+      }
+    },
+    {
+      "file": "screenshots/04-neighbour.png",
+      "observed": {
+        "camera": {
+          "x": 724.9993896484375,
+          "y": 360.0,
+          "zoom": 1.0999983549118042
+        },
+        "capture_seconds": 51.612178802490234,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "shop_checked",
+          "version": 1
+        },
+        "controls_active": false,
+        "dialogue": "neighbour.1",
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0
+        },
+        "frame": 2025,
+        "interaction": null,
+        "line": 1,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "NeighbourDialogue",
+        "phase_ticks": 170,
+        "phone": null,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 0.5799999833106995,
+          "x": 725.0,
+          "y": 355.0
+        },
+        "scene": "Street",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 2575,
+        "wall_seconds": 1789060620.0796797
+      }
+    },
+    {
+      "file": "screenshots/05-phone-paused.png",
+      "observed": {
+        "camera": {
+          "x": 799.2312622070312,
+          "y": 360.0,
+          "zoom": 1.0995957851409912
+        },
+        "capture_seconds": 61.088844299316406,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "contact_ready",
+          "version": 1
+        },
+        "controls_active": false,
+        "dialogue": null,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0
+        },
+        "frame": 2349,
+        "interaction": null,
+        "line": null,
+        "menu": "Pause",
+        "outcome": "Ongoing",
+        "paused": true,
+        "phase": "Phone",
+        "phase_ticks": 152,
+        "phone": {
+          "device": true,
+          "messages": 0,
+          "panel": true,
+          "phase": "TypingFirst",
+          "ticks": 152,
+          "typing": false
+        },
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 799.2500610351562,
+          "y": 580.0
+        },
+        "scene": "Street",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 2961,
+        "wall_seconds": 1789060629.611432
+      }
+    },
+    {
+      "file": "screenshots/06-phone-message-1.png",
+      "observed": {
+        "camera": {
+          "x": 799.24951171875,
+          "y": 360.0,
+          "zoom": 1.0999877452850342
+        },
+        "capture_seconds": 63.89304733276367,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "contact_ready",
+          "version": 1
+        },
+        "controls_active": false,
+        "dialogue": null,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0
+        },
+        "frame": 2409,
+        "interaction": null,
+        "line": null,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "Phone",
+        "phase_ticks": 250,
+        "phone": {
+          "device": true,
+          "messages": 1,
+          "panel": true,
+          "phase": "FirstSent",
+          "ticks": 250,
+          "typing": false
+        },
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 799.2500610351562,
+          "y": 580.0
+        },
+        "scene": "Street",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 3059,
+        "wall_seconds": 1789060632.3622394
+      }
+    },
+    {
+      "file": "screenshots/07-phone-message-2.png",
+      "observed": {
+        "camera": {
+          "x": 799.24951171875,
+          "y": 360.0,
+          "zoom": 1.0999983549118042
+        },
+        "capture_seconds": 70.78902435302734,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "contact_ready",
+          "version": 1
+        },
+        "controls_active": false,
+        "dialogue": null,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0
+        },
+        "frame": 2626,
+        "interaction": null,
+        "line": null,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "Phone",
+        "phase_ticks": 561,
+        "phone": {
+          "device": true,
+          "messages": 2,
+          "panel": true,
+          "phase": "ReadingReply",
+          "ticks": 561,
+          "typing": false
+        },
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 799.2500610351562,
+          "y": 580.0
+        },
+        "scene": "Street",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 3370,
+        "wall_seconds": 1789060639.2557726
+      }
+    },
+    {
+      "file": "screenshots/08-phone-message-3.png",
+      "observed": {
+        "camera": {
+          "x": 799.24951171875,
+          "y": 360.0,
+          "zoom": 1.0999983549118042
+        },
+        "capture_seconds": 75.62744903564453,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "contact_ready",
+          "version": 1
+        },
+        "controls_active": false,
+        "dialogue": null,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0
+        },
+        "frame": 2764,
+        "interaction": null,
+        "line": null,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "Phone",
+        "phase_ticks": 770,
+        "phone": {
+          "device": true,
+          "messages": 3,
+          "panel": true,
+          "phase": "LastSent",
+          "ticks": 770,
+          "typing": false
+        },
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 799.2500610351562,
+          "y": 580.0
+        },
+        "scene": "Street",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 3579,
+        "wall_seconds": 1789060644.0944073
+      }
+    },
+    {
+      "file": "screenshots/09-phone-stowing.png",
+      "observed": {
+        "camera": {
+          "x": 799.24951171875,
+          "y": 360.0,
+          "zoom": 1.0999983549118042
+        },
+        "capture_seconds": 78.0478286743164,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "contact_ready",
+          "version": 1
+        },
+        "controls_active": false,
+        "dialogue": null,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0
+        },
+        "frame": 2801,
+        "interaction": null,
+        "line": null,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "Phone",
+        "phase_ticks": 831,
+        "phone": {
+          "device": true,
+          "messages": 3,
+          "panel": false,
+          "phase": "Stowing",
+          "ticks": 831,
+          "typing": false
+        },
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 799.2500610351562,
+          "y": 580.0
+        },
+        "scene": "Street",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 3640,
+        "wall_seconds": 1789060646.5237758
+      }
+    },
+    {
+      "file": "screenshots/10-lane-obstacle.png",
+      "observed": {
+        "camera": {
+          "x": 668.7283325195312,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "capture_seconds": 86.5007553100586,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "lane_start",
+          "version": 1
+        },
+        "controls_active": true,
+        "dialogue": null,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0
+        },
+        "frame": 3109,
+        "interaction": null,
+        "line": null,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "LaneExplore",
+        "phase_ticks": 189,
+        "phone": null,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 670.0,
+          "y": 580.0
+        },
+        "scene": "Lane",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 4046,
+        "wall_seconds": 1789060655.0610068
+      }
+    },
+    {
+      "file": "screenshots/11-lane-jump.png",
+      "observed": {
+        "camera": {
+          "x": 672.2476806640625,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "capture_seconds": 88.37613677978516,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "lane_start",
+          "version": 1
+        },
+        "controls_active": true,
+        "dialogue": null,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0
+        },
+        "frame": 3139,
+        "interaction": null,
+        "line": null,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "LaneExplore",
+        "phase_ticks": 243,
+        "phone": null,
+        "player": {
+          "action": "Jump",
+          "facing": "Right",
+          "grounded": false,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 722.9444580078125,
+          "y": 479.5833740234375
+        },
+        "scene": "Lane",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 4100,
+        "wall_seconds": 1789060656.848605
+      }
+    },
+    {
+      "file": "screenshots/12-lane-resident.png",
+      "observed": {
+        "camera": {
+          "x": 1159.998779296875,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "capture_seconds": 97.08267211914062,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "lane_start",
+          "version": 1
+        },
+        "controls_active": false,
+        "dialogue": "lane.1",
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0
+        },
+        "frame": 3460,
+        "interaction": null,
+        "line": 1,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "LaneDialogue",
+        "phase_ticks": 170,
+        "phone": null,
+        "player": {
+          "action": "Idle",
+          "facing": "Left",
+          "grounded": true,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 1203.02783203125,
+          "y": 580.0
+        },
+        "scene": "Lane",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 4527,
+        "wall_seconds": 1789060665.6346734
+      }
+    },
+    {
+      "file": "screenshots/13-passage-defeat-1.png",
+      "observed": {
+        "camera": {
+          "x": 640.0006103515625,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "capture_seconds": 117.36896514892578,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "passage_fight",
+          "version": 1
+        },
+        "controls_active": false,
+        "dialogue": null,
+        "enemy": {
+          "action": "Lunge",
+          "hp": 96,
+          "x": 436.7708740234375
+        },
+        "frame": 4272,
+        "interaction": null,
+        "line": null,
+        "menu": null,
+        "outcome": "Defeat",
+        "paused": false,
+        "phase": "PassageCombat",
+        "phase_ticks": 708,
+        "phone": null,
+        "player": {
+          "action": "Defeated",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 0,
+          "scale": 1.0,
+          "x": 341.03265380859375,
+          "y": 580.0
+        },
+        "scene": "Passage",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 5579,
+        "wall_seconds": 1789060685.9696605
+      }
+    },
+    {
+      "file": "screenshots/13-passage-combat.png",
+      "observed": {
+        "camera": {
+          "x": 761.4064331054688,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "capture_seconds": 120.33763122558594,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "passage_fight",
+          "version": 1
+        },
+        "controls_active": true,
+        "dialogue": null,
+        "enemy": {
+          "action": "Telegraph",
+          "hp": 84,
+          "x": 845.0315551757812
+        },
+        "frame": 4354,
+        "interaction": null,
+        "line": null,
+        "menu": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "phase": "PassageCombat",
+        "phase_ticks": 112,
+        "phone": null,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 762.181884765625,
+          "y": 580.0
+        },
+        "scene": "Passage",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 112,
+        "wall_seconds": 1789060688.80883
+      }
+    },
+    {
+      "file": "screenshots/14-passage-clear.png",
+      "observed": {
+        "camera": {
+          "x": 640.0006103515625,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "capture_seconds": 127.90010070800781,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "passage_cleared",
+          "version": 1
+        },
+        "controls_active": true,
+        "dialogue": null,
+        "enemy": {
+          "action": "Defeated",
+          "hp": 0,
+          "x": 567.770751953125
+        },
+        "frame": 4650,
+        "interaction": null,
+        "line": null,
+        "menu": null,
+        "outcome": "Victory",
+        "paused": false,
+        "phase": "PassageClear",
+        "phase_ticks": 24,
+        "phone": null,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 499.7643127441406,
+          "y": 580.0
+        },
+        "scene": "Passage",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 491,
+        "wall_seconds": 1789060696.4444404
+      }
+    },
+    {
+      "file": "screenshots/15-chapter-complete.png",
+      "observed": {
+        "camera": {
+          "x": 1159.998779296875,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "capture_seconds": 137.45603942871094,
+        "checkpoint": {
+          "prologue_played_victory": false,
+          "stage": "complete",
+          "version": 1
+        },
+        "controls_active": false,
+        "dialogue": null,
+        "enemy": {
+          "action": "Defeated",
+          "hp": 0,
+          "x": 567.770751953125
+        },
+        "frame": 4990,
+        "interaction": null,
+        "line": null,
+        "menu": null,
+        "outcome": "Victory",
+        "paused": false,
+        "phase": "Complete",
+        "phase_ticks": 0,
+        "phone": null,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "grounded": true,
+          "hp": 100,
+          "scale": 1.0,
+          "x": 1653.6810302734375,
+          "y": 580.0
+        },
+        "scene": "Passage",
+        "shutter": 1.0,
+        "stage": "Chapter",
+        "ticks": 919,
+        "wall_seconds": 1789060706.0260694
+      }
+    }
+  ],
+  "telemetry_records": 4992,
+  "video": "adventure-silent.mp4",
+  "x11_errors": [],
+  "review": "chapter 01 through real native keyboard input",
+  "native_audio_enabled": true,
+  "audio_capture": "External recorder required; the built-in MP4 contains video only.",
+  "data_directory": "userdata",
+  "state_injection": false,
+  "combat_retries": 1,
+  "mode": "functional",
+  "dialogue_ticks_per_line": 150
+}

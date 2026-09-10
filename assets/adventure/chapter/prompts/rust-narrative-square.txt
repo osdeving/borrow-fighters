@@ -1,0 +1,12 @@
+Create a transparent-background PNG sprite sheet for a 2D videogame: exactly EIGHT full-body narrative poses of Rust, in four columns and two rows on a square canvas. Export actual RGBA transparency around each sprite, with opaque character interiors. Isolated sprites only.
+The supplied image is a CHARACTER IDENTITY reference, not a target to reproduce: use exactly this young Rust's face, spiky brown hair, amber goggles resting on his forehead, compact anime proportions, black hoodie with orange gear/R chest emblem and sleeve graphics, orange details, fingerless black gloves, cargo trousers, orange crab charm and black/orange sneakers. Same clean painterly cartoon outlines and shading. Every pose faces screen RIGHT and has identical scale, foot positions and sole baseline within its cell. Keep visible transparent margins between all eight figures.
+Read left to right across the top then bottom row:
+1. Gentle forward lean to check on a person, concerned face looking right/down, open offered hand.
+2. Calm conversation, relaxed upright stance, one open palm extended right/up.
+3. Looking down, reaching into trouser pocket.
+4. Raising EMPTY hand to lower-chest height, fingers naturally curved to grip a separate upright phone later.
+5. Looking down and reading an imaginary phone, same EMPTY curved hand held ahead of lower chest.
+6. Same empty grip position as5, other thumb extended toward it in a small typing gesture.
+7. Lowering EMPTY hand toward waist, head starts looking right again.
+8. Stowing gesture at trouser pocket, relaxed face looking right.
+There must be NO PHONE or other held object in the drawing. Hands remain empty because the game adds a separate phone later. No floor, scene, shadows, backdrop, labels or captions. Make every transparent space a real alpha channel, not a painted background. Preserve Rust's identity and costume from the reference without adding details.

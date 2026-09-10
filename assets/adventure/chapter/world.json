@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "scenes": [
+    {
+      "id": "street",
+      "width": 1728,
+      "floor_y": 580,
+      "walk_min": 40,
+      "walk_max": 1688,
+      "spawn": {
+        "x": 1070,
+        "y": 580
+      },
+      "points": [
+        {
+          "id": "driver",
+          "position": {
+            "x": 1290,
+            "y": 430
+          },
+          "region": {
+            "x": 1180,
+            "y": 550,
+            "width": 170,
+            "height": 45
+          },
+          "path": [
+            {
+              "x": 1235,
+              "y": 580
+            },
+            {
+              "x": 1215,
+              "y": 485
+            },
+            {
+              "x": 1205,
+              "y": 430
+            }
+          ]
+        },
+        {
+          "id": "shop",
+          "position": {
+            "x": 603,
+            "y": 355
+          },
+          "region": {
+            "x": 525,
+            "y": 550,
+            "width": 150,
+            "height": 45
+          },
+          "path": [
+            {
+              "x": 550,
+              "y": 580
+            },
+            {
+              "x": 545,
+              "y": 455
+            },
+            {
+              "x": 548,
+              "y": 355
+            }
+          ]
+        },
+        {
+          "id": "neighbour",
+          "position": {
+            "x": 780,
+            "y": 355
+          },
+          "region": {
+            "x": 700,
+            "y": 550,
+            "width": 160,
+            "height": 45
+          },
+          "path": [
+            {
+              "x": 725,
+              "y": 580
+            },
+            {
+              "x": 720,
+              "y": 455
+            },
+            {
+              "x": 725,
+              "y": 355
+            }
+          ]
+        }
+      ],
+      "obstacles": [],
+      "exit": {
+        "x": 1630,
+        "y": 545,
+        "width": 80,
+        "height": 55
+      }
+    },
+    {
+      "id": "lane",
+      "width": 1800,
+      "floor_y": 580,
+      "walk_min": 40,
+      "walk_max": 1760,
+      "spawn": {
+        "x": 100,
+        "y": 580
+      },
+      "points": [
+        {
+          "id": "lane_resident",
+          "position": {
+            "x": 1200,
+            "y": 580
+          },
+          "region": {
+            "x": 1100,
+            "y": 545,
+            "width": 175,
+            "height": 50
+          },
+          "path": [
+            {
+              "x": 1100,
+              "y": 580
+            }
+          ]
+        }
+      ],
+      "obstacles": [
+        {
+          "x": 700,
+          "y": 520,
+          "width": 120,
+          "height": 60
+        }
+      ],
+      "exit": {
+        "x": 1650,
+        "y": 545,
+        "width": 120,
+        "height": 55
+      }
+    },
+    {
+      "id": "passage",
+      "width": 1800,
+      "floor_y": 580,
+      "walk_min": 40,
+      "walk_max": 1760,
+      "spawn": {
+        "x": 240,
+        "y": 580
+      },
+      "points": [
+        {
+          "id": "enemy",
+          "position": {
+            "x": 1050,
+            "y": 580
+          },
+          "region": {
+            "x": 580,
+            "y": 300,
+            "width": 160,
+            "height": 300
+          },
+          "path": []
+        }
+      ],
+      "obstacles": [],
+      "exit": {
+        "x": 1650,
+        "y": 545,
+        "width": 120,
+        "height": 55
+      }
+    }
+  ]
+}

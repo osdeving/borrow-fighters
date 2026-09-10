@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Implementar o menor episódio jogável que conecte a lore ao controle de Rust:
+O episódio jogável conecta a lore ao controle de Rust:
 prólogo de Ada/Assembly, salto temporal, manhã cotidiana, ataque de uma errática
 e vitória com pesar. A [entrega 27](27-rust-story-adventure.md) detalha a sequência
 e seus critérios. O escopo de luta abaixo permanece como histórico do produto
@@ -10,9 +10,9 @@ já entregue.
 
 ## Versão-alvo
 
-**Experimento de aventura — prólogo e primeiro encontro**, na branch
-`feature/rust-adventure-prologue`. O produto distribuído permanece
-`v0.1.0-prototype.3` até novo corte explícito de release.
+**v0.1.0-prototype.5 — Depois do silêncio**, com prólogo, primeiro capítulo
+de Rust e Versus. O corte foi aprovado para integração à `main` e publicação;
+[notas](releases/v0.1.0-prototype.5.md) e [diário da release](worklogs/release-prototype-5.md).
 
 ## Escopo autorizado da aventura
 
@@ -29,8 +29,13 @@ já entregue.
 - Animações, transições e contato precisam de revisão no renderer real;
   testes de estado não comprovam expressividade humana.
 
-Vínculo, capítulo em Sirius, plataforma instável, personagem de apoio, campanha,
-mapa aberto e múltiplos inimigos simultâneos ficam estacionados. O [diário](worklogs/rust-adventure-prologue.md)
+A [entrega 33](33-after-the-silence.md), autorizada em 10/09/2026, amplia o escopo
+com um capítulo de Rust após o prólogo: rua evacuada, contatos presenciais,
+telefone com Python, dois trechos conectados e proteção da passagem. Atores e
+geometria são modulares; o menu oferece continuar/recomeçar/rever o prólogo.
+
+Vínculo, capítulo em Sirius, plataforma instável, personagem de apoio, campanha
+com seleção livre, mapa aberto e múltiplos inimigos simultâneos ficam estacionados. O [diário](worklogs/rust-adventure-prologue.md)
 registra entregas e limites observados.
 
 ## Status do Prototype 0.1 de luta
@@ -61,8 +66,8 @@ O slice atual inclui:
 - motor inicial de áudio por eventos, incluindo música por tela/arena, impactos, UI, contagem pré-luta e vozes de golpes por personagem.
 - livro de história e fichas de roster carregados de `assets/lore/story.json` em runtime.
 
-O corte distribuído é `v0.1.0-prototype.3`. Playtest humano, timing e acabamento
-pendentes estão no [backlog](03-backlog.md); a aventura é a frente ativa atual.
+O conteúdo da luta acompanha a `v0.1.0-prototype.5`. Playtest humano, timing
+e acabamento pendentes estão no [backlog](03-backlog.md).
 
 ## Entregáveis do corte inicial de luta — histórico
 

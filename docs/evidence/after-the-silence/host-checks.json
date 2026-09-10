@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "failure": null,
+  "checks": [
+    {
+      "name": "first_launch_shows_ada_without_a_fabricated_profile",
+      "passed": true
+    },
+    {
+      "name": "first_launch_starts_with_adas_research",
+      "passed": true,
+      "progress_marks_bgr": [
+        [
+          92,
+          177,
+          232
+        ],
+        [
+          54,
+          56,
+          55
+        ],
+        [
+          54,
+          56,
+          55
+        ],
+        [
+          54,
+          56,
+          54
+        ],
+        [
+          54,
+          56,
+          55
+        ],
+        [
+          54,
+          56,
+          56
+        ]
+      ]
+    },
+    {
+      "name": "skipping_records_seen_without_a_played_victory",
+      "passed": true,
+      "profile": {
+        "version": 1,
+        "prologue_seen": true,
+        "prologue_played_victory": false,
+        "street_wake_tick": null,
+        "checkpoint": null
+      }
+    },
+    {
+      "name": "first_host_closes_normally",
+      "passed": true
+    },
+    {
+      "name": "returning_launch_reaches_the_menu_without_replaying_ada",
+      "passed": true
+    },
+    {
+      "name": "returning_host_closes_normally",
+      "passed": true
+    },
+    {
+      "name": "explicit_menu_entry_preserves_the_existing_profile",
+      "passed": true
+    },
+    {
+      "name": "owned_pointer_notifications_preserve_server_focus",
+      "passed": true,
+      "server_focus": 12582919
+    },
+    {
+      "name": "pointer_click_opens_the_campaign_submenu",
+      "passed": true
+    },
+    {
+      "name": "owned_pointer_notifications_preserve_server_focus",
+      "passed": true,
+      "server_focus": 12582919
+    },
+    {
+      "name": "pointer_click_starts_the_new_chapter",
+      "passed": true
+    },
+    {
+      "name": "driver_interaction_creates_a_real_safe_checkpoint",
+      "passed": true,
+      "profile": {
+        "version": 1,
+        "prologue_seen": true,
+        "prologue_played_victory": false,
+        "street_wake_tick": null,
+        "checkpoint": {
+          "version": 1,
+          "stage": "driver_checked",
+          "prologue_played_victory": false
+        }
+      }
+    },
+    {
+      "name": "pause_returns_to_the_same_host_and_preserves_the_checkpoint",
+      "passed": true
+    },
+    {
+      "name": "owned_pointer_notifications_preserve_server_focus",
+      "passed": true,
+      "server_focus": 12582919
+    },
+    {
+      "name": "continue_resumes_control_and_progress_without_a_new_intro",
+      "passed": true,
+      "profile": {
+        "version": 1,
+        "prologue_seen": true,
+        "prologue_played_victory": false,
+        "street_wake_tick": null,
+        "checkpoint": {
+          "version": 1,
+          "stage": "shop_checked",
+          "prologue_played_victory": false
+        }
+      }
+    },
+    {
+      "name": "replay_starts_with_adas_research_without_reusing_confirm",
+      "passed": true,
+      "progress_marks_bgr": [
+        [
+          92,
+          177,
+          232
+        ],
+        [
+          54,
+          56,
+          55
+        ],
+        [
+          55,
+          57,
+          56
+        ],
+        [
+          54,
+          56,
+          56
+        ],
+        [
+          54,
+          56,
+          55
+        ],
+        [
+          54,
+          57,
+          57
+        ]
+      ]
+    },
+    {
+      "name": "explicit_replay_and_skip_preserve_the_existing_campaign",
+      "passed": true
+    },
+    {
+      "name": "versus_roster_has_both_native_selection_borders",
+      "passed": true,
+      "border_bgr": [
+        [
+          228,
+          231,
+          76
+        ],
+        [
+          228,
+          231,
+          76
+        ],
+        [
+          228,
+          231,
+          76
+        ],
+        [
+          96,
+          190,
+          255
+        ],
+        [
+          96,
+          190,
+          255
+        ],
+        [
+          96,
+          190,
+          255
+        ]
+      ],
+      "changed_sample_fraction": 0.13409554920375663,
+      "exact_screen_validation": "inspect screenshot"
+    },
+    {
+      "name": "versus_visit_preserves_the_campaign_save",
+      "passed": true
+    },
+    {
+      "name": "binary_and_text_catalog_unchanged",
+      "passed": true
+    },
+    {
+      "name": "no_x11_errors",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "captures": [
+    {
+      "file": "screenshots/01-first-launch-ada.png",
+      "expected": "Ada on first launch",
+      "window": 12582919,
+      "sha256": "028cde78e81db9bdc248380ce0cc312df946f483e5c581f9b125c97af462fc47",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/02-returning-main-menu.png",
+      "expected": "Saved startup goes directly to the terminal menu",
+      "window": 12582919,
+      "sha256": "52ec3dd929955fbadd39bf0cba0e049b7237b86c332b17266a13b5876cfd9ea1",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/03-campaign-submenu.png",
+      "expected": "Modo História offers Iniciar capítulo, Rever prólogo and Voltar",
+      "window": 12582919,
+      "sha256": "93eba6ee1b64d9ef1ca4296ce0ed674d3625889875879617af574880e7fbeaed",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/04-new-chapter-arrival.png",
+      "expected": "Canonical aftermath starts with its own introduction",
+      "window": 12582919,
+      "sha256": "60178077cfcb23d7dc303e7eac534d91285cbeceb7b3ed9526db0dcf0bfc2a11",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/05-driver-checked.png",
+      "expected": "Driver conversation completed; objective points to the shop",
+      "window": 12582919,
+      "sha256": "182d2feca7555c05ae2d671a9de1588757f959238911f46d77f6d9c85c017cbe",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/06-continue-submenu.png",
+      "expected": "Continuar capítulo appears for the saved driver checkpoint",
+      "window": 12582919,
+      "sha256": "c397fbeb5376ebb871a4344de50c9aa7ad1b1880aa0bca8eb2ee708455997794",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/07-resumed-shop-complete.png",
+      "expected": "Shop conversation completed after Continue",
+      "window": 12582919,
+      "sha256": "f5d2ccef5e5c48124b331bebc03001935279f3a1bf4a0d8aaa0a08cc761cb181",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/08-explicit-prologue-replay.png",
+      "expected": "Rever prólogo explicitly returns to Ada",
+      "window": 12582919,
+      "sha256": "455d33e76a302aa2f04996407885e401c3fdd757ffc6dbacb091a43e7daa8a5e",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/09-versus-selection.png",
+      "expected": "Existing Versus character selection remains reachable",
+      "window": 12582919,
+      "sha256": "fb191c099a337eebff2b28c8f170dcad2f91ddb5bcd7995fac26a2cef8d51701",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/10-final-main-menu.png",
+      "expected": "Main menu after returning from Versus",
+      "window": 12582919,
+      "sha256": "6dca6fd4bbd0d78bc1e1a78f79457bc43da06624fdc4a756d342b6f8e7bed7f8",
+      "validation": "visual review pending"
+    }
+  ],
+  "sessions": [
+    {
+      "case": "01-first-launch",
+      "pid": 824662,
+      "window": 12582919
+    },
+    {
+      "case": "02-returning-launch",
+      "pid": 825105,
+      "window": 12582919
+    },
+    {
+      "case": "03-explicit-menu",
+      "pid": 825391,
+      "window": 12582919
+    }
+  ],
+  "profile": {
+    "version": 1,
+    "prologue_seen": true,
+    "prologue_played_victory": false,
+    "street_wake_tick": null,
+    "checkpoint": {
+      "version": 1,
+      "stage": "shop_checked",
+      "prologue_played_victory": false
+    }
+  },
+  "elapsed_seconds": 61.319,
+  "executable_sha256": "83f508afffc42d91fde52f7c98e5918a9c03f199885f89d42b058a87c6abaeb8",
+  "process_exit_code": 0,
+  "input": "XSendEvent addressed to the owned PID/window; no global pointer movement",
+  "capture": "XGetImage of the owned window; unchanged source pixels",
+  "save_edits_by_harness": false,
+  "physical_gamepad_tested": false,
+  "audio_listening_performed": false
+}

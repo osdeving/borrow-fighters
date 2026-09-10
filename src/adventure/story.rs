@@ -3,6 +3,8 @@
 //! System: Adventure domain. This explicit sequence advances at 60 Hz and accepts
 //! scene skipping without granting a combat victory. The platform owns pause.
 
+use super::ambient::AmbientState;
+use super::arrival::ARRIVAL_TICKS;
 use super::combat::{Action, Combat, CombatInput, Outcome, TICKS_PER_SECOND};
 
 /// Duration of Rust's automatic waking and morning sequence.
@@ -21,7 +23,7 @@ pub enum Stage {
     AdaPrologue,
     /// Much later, Rust wakes and begins an otherwise ordinary morning.
     RustMorning,
-    /// The player explores, encounters the creature and fights for survival.
+    /// The camera arrives, then the player explores and fights for survival.
     Encounter,
     /// Rust approaches the fallen creature and shows compassion.
     Aftermath,
@@ -85,6 +87,8 @@ pub struct Story {
     pub stage_ticks: u32,
     /// Authoritative player, enemy and encounter state.
     pub combat: Combat,
+    /// Background animation that observes the encounter without changing combat.
+    pub ambient: AmbientState,
 }
 
 impl Default for Story {
@@ -100,6 +104,7 @@ impl Story {
             stage: Stage::AdaPrologue,
             stage_ticks: 0,
             combat: Combat::new(),
+            ambient: AmbientState::default(),
         }
     }
 
@@ -108,6 +113,7 @@ impl Story {
         if self.stage == Stage::Complete {
             return;
         }
+        let arriving = self.arrival_active();
         self.stage_ticks = self.stage_ticks.saturating_add(1);
         match self.stage {
             Stage::AdaPrologue if self.stage_ticks >= PROLOGUE_TICKS => {
@@ -117,13 +123,17 @@ impl Story {
                 self.enter(Stage::Encounter);
             }
             Stage::Encounter => {
-                self.combat.tick(input);
+                if !arriving {
+                    self.combat.tick(input);
+                }
+                self.ambient.tick(self.combat.enemy_awake);
                 if self.combat.outcome == Outcome::Victory {
                     self.enter(Stage::Aftermath);
                 }
             }
             Stage::Aftermath => {
                 self.combat.tick_aftermath();
+                self.ambient.tick(self.combat.enemy_awake);
                 if self.stage_ticks >= AFTERMATH_TICKS && self.gesture_visible() {
                     self.enter(Stage::Opening);
                 }
@@ -138,6 +148,7 @@ impl Story {
         match self.stage {
             Stage::AdaPrologue => self.enter(Stage::RustMorning),
             Stage::RustMorning => self.enter(Stage::Encounter),
+            Stage::Encounter if self.arrival_active() => self.stage_ticks = ARRIVAL_TICKS,
             Stage::Aftermath if self.gesture_visible() => self.enter(Stage::Opening),
             Stage::Opening => self.enter(Stage::Complete),
             _ => {}
@@ -146,7 +157,8 @@ impl Story {
 
     /// Skips to the next authored segment instead of discarding its whole stage.
     ///
-    /// An explicit encounter skip goes directly to the presentation, preserving
+    /// An arrival skip settles the camera and releases exploration. A later
+    /// explicit encounter skip goes to the presentation, preserving
     /// combat health and outcome. It does not invent a victory or show regret for
     /// a fight the player skipped. Likewise, aftermath can be skipped before its
     /// gesture finishes; automatic progression still waits for that gesture.
@@ -165,6 +177,7 @@ impl Story {
                 // These are authored pose starts in engine/morning.rs at 60 Hz.
                 self.skip_to_next_boundary(&[150, 225, 355, 500, 585], Stage::Encounter);
             }
+            Stage::Encounter if self.arrival_active() => self.stage_ticks = ARRIVAL_TICKS,
             Stage::Encounter | Stage::Aftermath => self.enter(Stage::Opening),
             Stage::Opening => {
                 // Three headlines, both halves of each biography, three character
@@ -202,6 +215,15 @@ impl Story {
     /// Restarts the entire opening, including Ada and Rust's morning.
     pub fn restart(&mut self) {
         *self = Self::new();
+    }
+
+    /// Whether the authored camera still owns the encounter's initial view.
+    /// Awakened checkpoints resume combat directly, without another camera move.
+    pub fn arrival_active(&self) -> bool {
+        self.stage == Stage::Encounter
+            && !self.combat.enemy_awake
+            && self.combat.ticks == 0
+            && self.stage_ticks < ARRIVAL_TICKS
     }
 
     /// Returns the current prologue beat, or none after the historical sequence.
@@ -244,12 +266,203 @@ impl Story {
     fn enter(&mut self, stage: Stage) {
         self.stage = stage;
         self.stage_ticks = 0;
+        if stage == Stage::Encounter {
+            self.ambient = AmbientState::new(self.combat.enemy_awake);
+        }
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::adventure::ambient::{CyclistPhase, IncidentPhase, KidPhase};
+
+    #[test]
+    fn background_reaction_continues_through_victory_and_stops_after_the_street() {
+        let mut story = Story::new();
+        story.advance_scene();
+        for _ in 0..30 {
+            story.tick(CombatInput::default());
+        }
+        assert_eq!(story.ambient, AmbientState::default());
+        story.advance_scene();
+        story.skip_segment(); // The camera hands control to the player.
+        story.combat.player.position.x = super::super::combat::ENCOUNTER_TRIGGER_X;
+        story.tick(CombatInput::default());
+        assert_eq!(story.ambient.kid_phase(), KidPhase::Startled);
+        assert_eq!(story.ambient.accident_ticks(), Some(0));
+        for _ in 0..60 {
+            story.tick(CombatInput::default());
+        }
+        assert_eq!(story.ambient.kid_phase(), KidPhase::Running);
+        assert!(
+            story
+                .ambient
+                .cyclists()
+                .iter()
+                .all(|cyclist| cyclist.phase == CyclistPhase::Running)
+        );
+        let before_victory = story.ambient.clone();
+        story.combat.outcome = Outcome::Victory;
+        story.combat.enemy.hp = 0;
+        story.combat.enemy.action = Action::Defeated;
+        story.tick(CombatInput::default());
+        assert_eq!(story.stage, Stage::Aftermath);
+        assert_eq!(story.ambient.ticks(), before_victory.ticks() + 1);
+        assert!(story.ambient.kid_position().x < before_victory.kid_position().x);
+        for _ in 0..300 {
+            story.tick(CombatInput::default());
+        }
+        assert_eq!(story.ambient.kid_phase(), KidPhase::Gone);
+        assert!(
+            story
+                .ambient
+                .cyclists()
+                .iter()
+                .all(|cyclist| cyclist.phase == CyclistPhase::Gone && !cyclist.visible)
+        );
+        assert!(story.ambient.traffic_cars().iter().all(|car| !car.visible));
+        assert_eq!(
+            story
+                .ambient
+                .abandoned_bicycles()
+                .map(|bike| bike.unwrap().position),
+            before_victory
+                .abandoned_bicycles()
+                .map(|bike| bike.unwrap().position)
+        );
+        let wreck = story.ambient.incident_car().unwrap();
+        assert_eq!(wreck.phase, IncidentPhase::Crashed);
+        story.tick(CombatInput::default());
+        let later_wreck = story.ambient.incident_car().unwrap();
+        assert_eq!(later_wreck.position, wreck.position);
+        assert_eq!(later_wreck.phase_ticks, wreck.phase_ticks + 1);
+
+        story.skip_segment();
+        assert_eq!(story.stage, Stage::Opening);
+        let before_opening = story.ambient.clone();
+        for _ in 0..60 {
+            story.tick(CombatInput::default());
+        }
+        assert_eq!(story.ambient, before_opening);
+    }
+
+    #[test]
+    fn retry_reacts_at_the_awake_checkpoint_and_restart_restores_a_quiet_street() {
+        let mut story = Story::new();
+        story.advance_scene();
+        story.advance_scene();
+        story.combat.enemy_awake = true;
+        for _ in 0..600 {
+            story.tick(CombatInput::default());
+        }
+        assert_eq!(story.ambient.kid_phase(), KidPhase::Gone);
+        assert!(story.ambient.traffic_cars().iter().all(|car| !car.visible));
+        assert!(
+            story
+                .ambient
+                .cyclists()
+                .iter()
+                .all(|cyclist| !cyclist.visible)
+        );
+        assert!(
+            story
+                .ambient
+                .abandoned_bicycles()
+                .iter()
+                .all(Option::is_some)
+        );
+        assert_eq!(
+            story.ambient.incident_car().unwrap().phase,
+            IncidentPhase::Crashed
+        );
+        story.combat.outcome = Outcome::Defeat;
+        story.retry();
+        assert!(story.combat.enemy_awake);
+        assert_eq!(story.ambient.ticks(), 0);
+        assert_eq!(story.ambient.kid_phase(), KidPhase::Startled);
+        assert_eq!(story.ambient.kid_phase_ticks(), 0);
+        assert_eq!(story.ambient.kite_release_ticks(), None);
+        assert_eq!(story.ambient.accident_ticks(), Some(0));
+        assert!(
+            story
+                .ambient
+                .traffic_cars()
+                .iter()
+                .all(|car| car.visible && car.fleeing)
+        );
+        assert!(
+            story
+                .ambient
+                .cyclists()
+                .iter()
+                .all(|cyclist| cyclist.visible && cyclist.phase == CyclistPhase::Braking)
+        );
+        assert_eq!(story.ambient.abandoned_bicycles(), [None, None]);
+        assert_eq!(
+            story.ambient.incident_car().unwrap().phase,
+            IncidentPhase::Approaching
+        );
+        story.tick(CombatInput::default());
+        assert_eq!(story.ambient.kid_phase_ticks(), 1);
+        assert_eq!(story.ambient.accident_ticks(), Some(1));
+
+        let current = story.ambient.clone();
+        story.retry();
+        assert_eq!(story.ambient, current);
+        story.restart();
+        story.advance_scene();
+        story.advance_scene();
+        assert_eq!(story.ambient, AmbientState::default());
+        assert_eq!(story.ambient.incident_car(), None);
+        assert!(
+            story
+                .ambient
+                .traffic_cars()
+                .iter()
+                .all(|car| car.visible && !car.fleeing)
+        );
+        assert!(
+            story
+                .ambient
+                .cyclists()
+                .iter()
+                .all(|cyclist| cyclist.visible && cyclist.phase == CyclistPhase::Riding)
+        );
+        assert_eq!(story.ambient.abandoned_bicycles(), [None, None]);
+        assert!(!story.combat.enemy_awake);
+    }
+
+    #[test]
+    fn scenery_changes_cannot_change_encounter_rules_or_progress() {
+        let mut story = Story::new();
+        story.advance_scene();
+        story.advance_scene();
+        let mut alternate = story.clone();
+        // Force entirely different decoration, leaving combat identical.
+        for _ in 0..900 {
+            alternate.ambient.tick(true);
+        }
+        assert_ne!(story.ambient, alternate.ambient);
+
+        for tick in 0..720 {
+            let input = CombatInput {
+                movement: if tick < 250 { 1.0 } else { -0.5 },
+                jump_pressed: tick % 61 == 0,
+                light_pressed: tick % 27 == 0,
+                heavy_pressed: tick % 47 == 0,
+                blocking: tick % 99 < 20,
+            };
+            story.tick(input);
+            alternate.tick(input);
+            assert_eq!(story.stage, alternate.stage);
+            assert_eq!(story.stage_ticks, alternate.stage_ticks);
+            assert_eq!(
+                format!("{:?}", story.combat),
+                format!("{:?}", alternate.combat)
+            );
+        }
+    }
 
     #[test]
     fn automatic_sequence_preserves_ada_then_morning_before_player_control() {
@@ -283,6 +496,16 @@ mod tests {
         assert_eq!(story.combat.player.position.x, 340.0);
         assert_eq!(story.combat.player.action, Action::Idle);
         assert!(!story.combat.enemy_awake);
+        for _ in 0..ARRIVAL_TICKS {
+            assert!(story.arrival_active());
+            story.tick(noisy_input);
+            assert_eq!(story.combat.ticks, 0);
+            assert_eq!(story.combat.player.position.x, 340.0);
+            assert_eq!(story.combat.player.action, Action::Idle);
+            assert!(!story.combat.enemy_awake);
+        }
+        assert!(!story.arrival_active());
+        assert_eq!(story.ambient.ticks(), ARRIVAL_TICKS);
         story.tick(CombatInput {
             movement: 1.0,
             ..CombatInput::default()
@@ -348,6 +571,7 @@ mod tests {
         assert_eq!(story.combat.player.hp, story.combat.player.max_hp);
         assert_eq!(story.combat.enemy.hp, story.combat.enemy.max_hp);
         assert!(story.combat.enemy_awake);
+        assert!(!story.arrival_active());
         assert_eq!(story.combat.ticks, 0);
         story.restart();
         assert_eq!(story.stage, Stage::AdaPrologue);
@@ -399,6 +623,33 @@ mod tests {
     }
 
     #[test]
+    fn arrival_skip_releases_control_without_skipping_combat_or_rewinding_the_street() {
+        for age in [0, 60, 240, ARRIVAL_TICKS - 1] {
+            let mut story = Story::new();
+            story.advance_scene();
+            story.advance_scene();
+            for _ in 0..age {
+                story.tick(CombatInput::default());
+            }
+            let ambient = story.ambient.clone();
+            story.skip_segment();
+            assert_eq!(story.stage, Stage::Encounter);
+            assert!(!story.arrival_active());
+            assert_eq!(story.ambient, ambient);
+            assert_eq!(story.combat.ticks, 0);
+            story.tick(CombatInput {
+                movement: 1.0,
+                ..CombatInput::default()
+            });
+            assert!(story.combat.player.position.x > 340.0);
+            assert_eq!(story.combat.player.action, Action::Walk);
+            assert_eq!(story.ambient.ticks(), age + 1);
+            story.skip_segment();
+            assert_eq!(story.stage, Stage::Opening);
+        }
+    }
+
+    #[test]
     fn opening_skip_preserves_each_headline_biography_panel_and_character() {
         let mut story = Story::presentation();
         for seconds in [3, 6, 9, 14, 19, 24, 29, 33, 37, 41] {
@@ -417,6 +668,7 @@ mod tests {
             let mut story = Story::new();
             story.advance_scene();
             story.advance_scene();
+            story.skip_segment(); // Finish the initial camera move first.
             story.combat.player.hp = if outcome == Outcome::Defeat { 0 } else { 37 };
             story.combat.enemy.hp = 54;
             story.combat.outcome = outcome;

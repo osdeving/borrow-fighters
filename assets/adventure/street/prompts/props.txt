@@ -1,0 +1,13 @@
+TRANSPARENT BACKGROUND. Create an RGBA PNG sticker atlas containing four isolated painted game props on a genuinely transparent canvas. Empty space is alpha zero, not a checkerboard illustration, solid matte, studio backdrop or ground. Intended for a layered 2D Brazilian neighborhood adventure game; these objects will be composited separately over an existing street.
+
+Use case: stylized-concept. Warm hand-painted anime game illustration with restrained dark brown outlines, sunlit ochre plaster, terracotta tile, muted teal and faded cream, realistic human-scale proportions, clear readable silhouettes at small game sizes. Straight-on side-scrolling elevation with only subtle depth. Exactly TWO COLUMNS and TWO ROWS, four separate objects, one centered inside each equal cell, complete silhouettes with generous transparent padding. Suggested canvas 1536 by 1024.
+
+TOP LEFT: standalone full front facade of a tiny Brazilian neighborhood boteco and grocery, a single-story shop about twice as wide as tall. Weathered warm cream plaster, terracotta tiled short eave, broad dark teal striped awning, shallow open door and compact display window. Above the awning a wide flat blank cream signboard reserved for runtime text. No writing, no letters, no logos. Facade only: no attached sidewalk, street, neighbor houses, sky, trees or people.
+
+TOP RIGHT: modest open Brazilian bus-stop shelter, broad shallow flat curved teal metal roof on thin dark metal supports, simple bench, transparent/open back and sides. A single small blank rectangular sign on one pole. Complete freestanding shelter, no road surface or ground platform, no people, no words or pictograms.
+
+BOTTOM LEFT: one ordinary teal city bicycle abandoned lying on its left side on an invisible ground plane, front wheel facing RIGHT. Dark tires, silver rims, straight handlebar, small dark saddle. Clear low flattened silhouette with both wheels slightly foreshortened as it lies down, not an upright parked bicycle. No rider, no extra items, no ground shadow.
+
+BOTTOM RIGHT: one small grocery corner arrangement: three stacked empty faded red and teal plastic crates, a single off-white plastic chair and a small closed green trash bin. Compact believable still-life of those objects only; no person, labels, background, floor or cast shadow.
+
+Do not draw borders, panels, grids, numbers, lettering, scenery or cast shadows. Preserve true empty alpha around and between all four props. Each prop fits entirely within its own cell without touching other objects.

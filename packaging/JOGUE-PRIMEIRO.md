@@ -1,8 +1,8 @@
 # Bora testar Borrow Fighters?
 
-Esta é uma demo em desenvolvimento: uma aventura de abertura seguida de luta
-local com personagens inspirados em linguagens de programação, cenários
-brasileiros e especiais exagerados.
+Esta é uma demo em desenvolvimento com prólogo, primeiro capítulo jogável
+de Rust e luta local. Os personagens são inspirados em linguagens de
+programação, com cenários brasileiros e especiais exagerados.
 Você não precisa instalar Rust, Cargo ou ferramentas de desenvolvimento.
 
 ## Abrir o jogo
@@ -23,10 +23,11 @@ o cliente também funciona com a compatibilidade PulseAudio do PipeWire. Drivers
 servidor de áudio e componentes do sistema continuam pertencendo ao sistema.
 Windows também precisa de driver com OpenGL 3.3.
 
-A versão `v0.1.0-prototype.4` abre com Ada, o despertar de Assembly, a manhã de
-Rust e seu primeiro encontro. Uma apresentação leva ao menu na mesma janela,
-com comandos para avançar trechos ou pular tudo. Seleção Linker, reações,
-pausa/revanche e energia continuam disponíveis. A correção anterior de
+A versão `v0.1.0-prototype.5` abre com Ada, o despertar de Assembly, a manhã de
+Rust e seu primeiro encontro. Depois, o **Modo História** continua com o
+Capítulo 01 — **Depois do silêncio**: moradores, contato com Python pelo
+celular, percurso pelo bairro e combate para proteger a passagem da vila.
+O Versus mantém seleção livre, pausa/revanche e energia. A correção anterior de
 imagens e áudio em pastas com acentos continua incluída. Ao atualizar pelo ZIP,
 extraia toda a pasta do novo pacote.
 
@@ -35,10 +36,12 @@ aviso de editor desconhecido. Baixe somente da página oficial de releases.
 
 ## Da aventura ao menu
 
-O jogo começa pelo prólogo. `Enter`/`RB` avança ao próximo trecho e
+Na primeira abertura, o jogo começa pelo prólogo. `Enter`/`RB` avança ao próximo trecho e
 `Backspace`/`View` pula tudo diretamente para o menu, inclusive no combate ou
 na pausa. Ao chegar normalmente ao título final, **Aperte qualquer tecla para
-continuar** aguarda uma nova tecla, clique ou botão do controle.
+continuar** aguarda uma nova tecla, clique ou botão do controle. Depois de
+assistir ou pular o prólogo, as próximas aberturas chegam ao menu. Pular o
+primeiro encontro não registra uma vitória jogada.
 
 No encontro, use `A/D` ou setas para andar, `Espaço/W` para pular, `J/F` para
 atacar, `K/H` para ataque forte e `Q/L` para defender. No controle: direcional,
@@ -48,7 +51,40 @@ do controle avança. Para sair, feche a janela ou use `B` do controle na pausa.
 
 Para começar sempre pelo menu ao executar pelo terminal, use
 `borrow-fighters.exe --menu` no Windows ou `./borrow-fighters --menu` no Linux
-portátil. Os atalhos normais incluem a aventura.
+portátil. **Modo História → Rever prólogo** permite assistir à abertura de novo.
+
+## Seu primeiro capítulo
+
+1. Abra **Modo História → Iniciar capítulo**. **Depois do silêncio** acompanha
+   Rust depois do primeiro encontro com a EP. A seleção livre de personagens
+   continua disponível no Versus.
+2. Espere a câmera apresentar a rua e siga o objetivo no alto da tela.
+   Aproxime-se do motorista e dos moradores e use `E`/`A` para interagir.
+   `Enter`/`RB` avança as falas. Rust se aproxima das pessoas, conversa e
+   pega o celular para falar com Python; a tela ampliada aparece ao lado dele.
+3. Depois da conversa, siga pela travessa, salte o obstáculo e ajude quem
+   espera na passagem. Ataque com `J/F`, golpe forte com `K/H` e defenda com
+   `Q/L`. No controle, use `X/Y` e `LB`.
+4. O jogo salva nos checkpoints. Você pode sair e usar **Continuar capítulo**
+   depois; **Recomeçar capítulo** inicia novamente. `Esc`/`Start` abre a pausa,
+   com **Retomar checkpoint** e **Voltar ao menu**. Após uma derrota,
+   `R`/`A` tenta o encontro novamente sem repetir todas as conversas.
+
+| Ação na História | Teclado | Controle Xbox |
+|---|---|---|
+| Mover | `A/D` ou setas | Direcional ou analógico |
+| Interagir | `E` | `A` |
+| Pular | `Espaço`, `W` ou seta para cima | `B` |
+| Ataque / golpe forte | `J/F` / `K/H` | `X` / `Y` |
+| Defender | `Q/L` | `LB` |
+| Avançar fala ou trecho | `Enter` | `RB` |
+| Concluir a encenação atual | `Backspace` | `View` / `Back` |
+| Pausar | `Esc` | `Start` |
+| Tentar novamente após derrota | `R` | `A` |
+
+No capítulo, `Backspace` conclui a encenação atual; para sair ao menu, use
+a pausa. No prólogo, esse comando pula toda a abertura. O botão de pulo
+também muda: **B no capítulo**, **A no encontro do prólogo e no Versus**.
 
 ## Sua primeira luta
 
@@ -56,8 +92,7 @@ portátil. Os atalhos normais incluem a aventura.
    **Duelo local** (duas pessoas) ou **Assistir demo** (CPU contra CPU).
    **Versus Setup** também abre a seleção com a configuração atual.
 2. Confirme o personagem de **P1**, depois o de **P2**. Com os dois prontos,
-   confirme **Lutar**. **Modo História** está reservado para a continuação;
-   essa opção ainda não inicia uma partida.
+   confirme **Lutar**.
 3. Na seleção, use `WASD`/setas, controle ou mouse. `Tab` muda o modo e
    `Q/E` muda a arena; você também pode clicar nessas opções. No controle de P1,
    `Select`/`Back` muda o modo e `LB/RB` muda a arena. Contra CPU ou
@@ -95,7 +130,11 @@ pode ligar a ajuda de controles durante a luta.
 
 ## O que testar e contar para a gente
 
-Jogue algumas lutas com Rust, Duke/Java, C, Python e C++. Experimente os
+Jogue o capítulo de Rust e teste sair e voltar por **Continuar capítulo**.
+Os objetivos e a conversa no celular ficaram claros? Deu para interagir,
+saltar e liberar a passagem? A rua, os moradores e o som reagiram à EP?
+
+Depois, jogue algumas lutas com Rust, Duke/Java, C, Python e C++. Experimente os
 especiais e nos conte: os comandos foram claros? Algum golpe pareceu injusto?
 Você entendeu quando acertou ou bloqueou e quando a energia ficou pronta?
 Avançar a aventura e chegar ao menu foi claro? Selecionar personagens, pausar e
@@ -105,6 +144,8 @@ Abra uma issue no repositório indicado na página da release. Inclua a versão
 (também em `BUILD-INFO.json`), sistema operacional, placa de vídeo, personagens
 e os passos para repetir. Um print ou vídeo curto ajuda bastante.
 
+O Modo História contém o prólogo e este primeiro capítulo; a campanha
+completa e capítulos de outros protagonistas ainda não estão disponíveis.
 É uma demo local: não há multiplayer online. Go continua como personagem
 experimental fora da seleção pública. Arte, balanceamento e acabamento estão
 em evolução; suas observações ajudam a escolher os próximos ajustes.

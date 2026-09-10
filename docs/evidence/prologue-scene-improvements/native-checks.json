@@ -1,0 +1,1977 @@
+{
+  "created_utc": "2026-09-10T13:22:55.953618+00:00",
+  "success": true,
+  "failure": null,
+  "elapsed_seconds": 62.65,
+  "owned_pid": 268928,
+  "owned_window": 8388615,
+  "process_exit_code": 0,
+  "display": ":0",
+  "input_method": "XSendEvent addressed to _NET_WM_PID-owned window",
+  "limitations": "Synthetic window keyboard input; no physical gamepad, focus changes, desktop capture, audio listening or human visual approval.",
+  "checks": [
+    {
+      "name": "morning_pause_freezes_simulation",
+      "passed": true,
+      "before": {
+        "stage_ticks": 667,
+        "ticks": 0,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        }
+      },
+      "after": {
+        "stage_ticks": 667,
+        "ticks": 0,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        }
+      }
+    },
+    {
+      "name": "morning_skip_enters_exploration",
+      "passed": true
+    },
+    {
+      "name": "street-calm_pause_freezes_simulation",
+      "passed": true,
+      "before": {
+        "stage_ticks": 274,
+        "ticks": 274,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 274,
+              "facing": "Right",
+              "x": 1003.9000244140625,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 284,
+              "facing": "Left",
+              "x": 1133.0999755859375,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 274,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 274
+        }
+      },
+      "after": {
+        "stage_ticks": 274,
+        "ticks": 274,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 274,
+              "facing": "Right",
+              "x": 1003.9000244140625,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 284,
+              "facing": "Left",
+              "x": 1133.0999755859375,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 274,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 274
+        }
+      }
+    },
+    {
+      "name": "approach_still_calm",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 534,
+              "facing": "Right",
+              "x": 1614.9000244140625,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 544,
+              "facing": "Left",
+              "x": 652.0999755859375,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 534,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 534
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 1072,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Walk",
+          "facing": "Right",
+          "hp": 100,
+          "x": 952.4166870117188,
+          "y": 580.0
+        },
+        "seconds": 32.64856719970703,
+        "stage": "Encounter",
+        "stage_ticks": 534,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 534,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "name": "EP_awakens_during_approach",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 584,
+              "facing": "Right",
+              "x": 1732.4000244140625,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 594,
+              "facing": "Left",
+              "x": 559.5999755859375,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Startled",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 584
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1497.4166259765625,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1105,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Walk",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1109.166748046875,
+          "y": 580.0
+        },
+        "seconds": 34.36854934692383,
+        "stage": "Encounter",
+        "stage_ticks": 584,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 584,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "name": "release_pose_is_visible_before_running",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 608,
+              "facing": "Right",
+              "x": 1788.800048828125,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 618,
+              "facing": "Left",
+              "x": 515.2000122070312,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Releasing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": 0,
+          "ticks": 608
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1435.4156494140625,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1119,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": true,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1123.7501220703125,
+          "y": 580.0
+        },
+        "seconds": 35.70770263671875,
+        "stage": "Encounter",
+        "stage_ticks": 608,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 608,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "name": "street-flight_pause_freezes_simulation",
+      "passed": true,
+      "before": {
+        "stage_ticks": 700,
+        "ticks": 700,
+        "player": {
+          "action": "Hurt",
+          "facing": "Right",
+          "hp": 86,
+          "x": 1107.62646484375,
+          "y": 580.0
+        },
+        "enemy": {
+          "action": "Recovery",
+          "hp": 96,
+          "x": 1199.7476806640625,
+          "y": 580.0
+        },
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 700,
+              "facing": "Right",
+              "x": 2005.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 710,
+              "facing": "Left",
+              "x": 345.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Running",
+          "kid_phase_ticks": 68,
+          "kid_position": {
+            "x": 694.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": 92,
+          "ticks": 700
+        }
+      },
+      "after": {
+        "stage_ticks": 700,
+        "ticks": 700,
+        "player": {
+          "action": "Hurt",
+          "facing": "Right",
+          "hp": 86,
+          "x": 1107.62646484375,
+          "y": 580.0
+        },
+        "enemy": {
+          "action": "Recovery",
+          "hp": 96,
+          "x": 1199.7476806640625,
+          "y": 580.0
+        },
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 700,
+              "facing": "Right",
+              "x": 2005.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 710,
+              "facing": "Left",
+              "x": 345.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Running",
+          "kid_phase_ticks": 68,
+          "kid_position": {
+            "x": 694.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": 92,
+          "ticks": 700
+        }
+      }
+    },
+    {
+      "name": "real_defeat_before_retry",
+      "passed": true
+    },
+    {
+      "name": "retry_resets_combat_at_awake_checkpoint",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 3,
+              "facing": "Right",
+              "x": 367.04998779296875,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 13,
+              "facing": "Left",
+              "x": 1634.449951171875,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Startled",
+          "kid_phase_ticks": 3,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 3
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1492.2498779296875,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1756,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1100.0,
+          "y": 580.0
+        },
+        "seconds": 52.74568176269531,
+        "stage": "Encounter",
+        "stage_ticks": 3,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 3,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "name": "right_camera_clamp_reached",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 225,
+              "facing": "Right",
+              "x": 888.75,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 235,
+              "facing": "Left",
+              "x": 1223.75,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Running",
+          "kid_phase_ticks": 177,
+          "kid_position": {
+            "x": 203.5,
+            "y": 420.0
+          },
+          "kite_release_ticks": 201,
+          "ticks": 225
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Telegraph",
+          "hp": 96,
+          "x": 1500.0863037109375,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1943,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Walk",
+          "facing": "Right",
+          "hp": 72,
+          "x": 1432.0863037109375,
+          "y": 580.0
+        },
+        "seconds": 57.292842864990234,
+        "stage": "Encounter",
+        "stage_ticks": 225,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 225,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "name": "encounter_skip_preserves_outcome",
+      "passed": true
+    },
+    {
+      "name": "full_skip_from_pause_completes_without_victory",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 241,
+              "facing": "Right",
+              "x": 926.3499755859375,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 251,
+              "facing": "Left",
+              "x": 1194.1500244140625,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Running",
+          "kid_phase_ticks": 193,
+          "kid_position": {
+            "x": 131.5,
+            "y": 420.0
+          },
+          "kite_release_ticks": 217,
+          "ticks": 241
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Telegraph",
+          "hp": 96,
+          "x": 1507.3779296875,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1959,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 72,
+          "x": 1439.3779296875,
+          "y": 580.0
+        },
+        "seconds": 58.66981506347656,
+        "stage": "Complete",
+        "stage_ticks": 0,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 241,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "name": "restart_restores_calm_world",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 1967,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 59.35326385498047,
+        "stage": "AdaPrologue",
+        "stage_ticks": 3,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "name": "recorded_mp4_has_frames_and_preserves_elapsed_time",
+      "passed": true,
+      "codec": "h264",
+      "width": 1280,
+      "height": 720,
+      "frame_rate": "30/1",
+      "frames": 1780,
+      "duration_seconds": 59.334,
+      "telemetry_seconds": 59.35326385498047,
+      "absolute_duration_error": 0.019263854980465567
+    },
+    {
+      "name": "same_binary_and_original_catalog_remain_unchanged",
+      "passed": true,
+      "binary_sha256_before": "1215142406f97e39490312ce5f01273bc96d6fccc4847054a167e78f053fe946",
+      "binary_sha256_after": "1215142406f97e39490312ce5f01273bc96d6fccc4847054a167e78f053fe946",
+      "original_catalog_sha256_before": "c45b1e176dd1f693d451fb6e4c34354800ad856ac55d3b2744762be821aafbd1",
+      "original_catalog_sha256_after": "c45b1e176dd1f693d451fb6e4c34354800ad856ac55d3b2744762be821aafbd1"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/morning-090.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 88,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 2.599160671234131,
+        "stage": "RustMorning",
+        "stage_ticks": 107,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/morning-180.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 166,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 4.942366123199463,
+        "stage": "RustMorning",
+        "stage_ticks": 198,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/morning-250.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 222,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 6.905584335327148,
+        "stage": "RustMorning",
+        "stage_ticks": 267,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/morning-320.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 280,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 8.896512031555176,
+        "stage": "RustMorning",
+        "stage_ticks": 338,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/morning-390.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 337,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 10.917732238769531,
+        "stage": "RustMorning",
+        "stage_ticks": 408,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/morning-470.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 398,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 13.080510139465332,
+        "stage": "RustMorning",
+        "stage_ticks": 487,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/morning-545.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 453,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 15.166553497314453,
+        "stage": "RustMorning",
+        "stage_ticks": 562,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/morning-650.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 536,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 17.763946533203125,
+        "stage": "RustMorning",
+        "stage_ticks": 667,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/morning-paused.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 0,
+              "facing": "Right",
+              "x": 360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 10,
+              "facing": "Left",
+              "x": 1640.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 0
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 581,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": true,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 19.35784339904785,
+        "stage": "RustMorning",
+        "stage_ticks": 667,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 0,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/street-01-calm.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 107,
+              "facing": "Right",
+              "x": 611.4500122070312,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 117,
+              "facing": "Left",
+              "x": 1442.050048828125,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 107,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 107
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 669,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 22.095802307128906,
+        "stage": "Encounter",
+        "stage_ticks": 107,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 107,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/street-02-calm-later.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 274,
+              "facing": "Right",
+              "x": 1003.9000244140625,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 284,
+              "facing": "Left",
+              "x": 1133.0999755859375,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 274,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 274
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 806,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 25.70277214050293,
+        "stage": "Encounter",
+        "stage_ticks": 274,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 274,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/street-calm-paused.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 274,
+              "facing": "Right",
+              "x": 1003.9000244140625,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 284,
+              "facing": "Left",
+              "x": 1133.0999755859375,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 274,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 274
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 852,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": true,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 27.45587730407715,
+        "stage": "Encounter",
+        "stage_ticks": 274,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 274,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/street-03-left-edge.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 348,
+              "facing": "Right",
+              "x": 1177.800048828125,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 358,
+              "facing": "Left",
+              "x": 996.2000122070312,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 348,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 348
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 908,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Left",
+          "hp": 100,
+          "x": 83.50000762939453,
+          "y": 580.0
+        },
+        "seconds": 29.560699462890625,
+        "stage": "Encounter",
+        "stage_ticks": 348,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 348,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/street-04-before-ep.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 551,
+              "facing": "Right",
+              "x": 1654.8499755859375,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 561,
+              "facing": "Left",
+              "x": 620.6500244140625,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 551,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 551
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 1076,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 967.0,
+          "y": 580.0
+        },
+        "seconds": 33.81963348388672,
+        "stage": "Encounter",
+        "stage_ticks": 551,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 551,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/street-05-boy-startle.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 601,
+              "facing": "Right",
+              "x": 1772.3499755859375,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 611,
+              "facing": "Left",
+              "x": 528.1500244140625,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Startled",
+          "kid_phase_ticks": 17,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 601
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1453.499267578125,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1109,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1123.7501220703125,
+          "y": 580.0
+        },
+        "seconds": 35.52096176147461,
+        "stage": "Encounter",
+        "stage_ticks": 601,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 601,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/street-06-release-paused.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 608,
+              "facing": "Right",
+              "x": 1788.800048828125,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 618,
+              "facing": "Left",
+              "x": 515.2000122070312,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Releasing",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": 0,
+          "ticks": 608
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1435.4156494140625,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1123,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": true,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1123.7501220703125,
+          "y": 580.0
+        },
+        "seconds": 36.68244934082031,
+        "stage": "Encounter",
+        "stage_ticks": 608,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 608,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/street-06-run.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 700,
+              "facing": "Right",
+              "x": 2005.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 710,
+              "facing": "Left",
+              "x": 345.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Running",
+          "kid_phase_ticks": 68,
+          "kid_position": {
+            "x": 694.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": 92,
+          "ticks": 700
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Recovery",
+          "hp": 96,
+          "x": 1199.7476806640625,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1196,
+        "hit": {
+          "age": 8,
+          "blocked": false,
+          "target": "Player"
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Hurt",
+          "facing": "Right",
+          "hp": 86,
+          "x": 1107.62646484375,
+          "y": 580.0
+        },
+        "seconds": 39.119178771972656,
+        "stage": "Encounter",
+        "stage_ticks": 700,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 700,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/street-flight-paused.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 700,
+              "facing": "Right",
+              "x": 2005.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 710,
+              "facing": "Left",
+              "x": 345.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Running",
+          "kid_phase_ticks": 68,
+          "kid_position": {
+            "x": 694.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": 92,
+          "ticks": 700
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Recovery",
+          "hp": 96,
+          "x": 1199.7476806640625,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1242,
+        "hit": {
+          "age": 8,
+          "blocked": false,
+          "target": "Player"
+        },
+        "outcome": "Ongoing",
+        "paused": true,
+        "player": {
+          "action": "Hurt",
+          "facing": "Right",
+          "hp": 86,
+          "x": 1107.62646484375,
+          "y": 580.0
+        },
+        "seconds": 40.92338943481445,
+        "stage": "Encounter",
+        "stage_ticks": 700,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 700,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/street-06-run-later.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 811,
+              "facing": "Right",
+              "x": 2265.85009765625,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 821,
+              "facing": "Left",
+              "x": 139.64999389648438,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Running",
+          "kid_phase_ticks": 179,
+          "kid_position": {
+            "x": 194.5,
+            "y": 420.0
+          },
+          "kite_release_ticks": 203,
+          "ticks": 811
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Recovery",
+          "hp": 96,
+          "x": 1115.161865234375,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1327,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 72,
+          "x": 1044.563232421875,
+          "y": 580.0
+        },
+        "seconds": 43.68099594116211,
+        "stage": "Encounter",
+        "stage_ticks": 811,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 811,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/street-06-empty.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 1022,
+              "facing": "Right",
+              "x": 241.6999969482422,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 1032,
+              "facing": "Left",
+              "x": 2269.300048828125,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Gone",
+          "kid_phase_ticks": 134,
+          "kid_position": {
+            "x": -152.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": 414,
+          "ticks": 1022
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Telegraph",
+          "hp": 96,
+          "x": 972.275390625,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1505,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 44,
+          "x": 901.6766967773438,
+          "y": 580.0
+        },
+        "seconds": 48.022865295410156,
+        "stage": "Encounter",
+        "stage_ticks": 1022,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 1022,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/street-08-retry.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 20,
+              "facing": "Right",
+              "x": 407.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 30,
+              "facing": "Left",
+              "x": 1603.0,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Startled",
+          "kid_phase_ticks": 20,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 420.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 20
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1448.33251953125,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1760,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1100.0,
+          "y": 580.0
+        },
+        "seconds": 53.8873176574707,
+        "stage": "Encounter",
+        "stage_ticks": 20,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 20,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/street-09-right-camera-clamp.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 241,
+              "facing": "Right",
+              "x": 926.3499755859375,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 251,
+              "facing": "Left",
+              "x": 1194.1500244140625,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Running",
+          "kid_phase_ticks": 193,
+          "kid_position": {
+            "x": 131.5,
+            "y": 420.0
+          },
+          "kite_release_ticks": 217,
+          "ticks": 241
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Telegraph",
+          "hp": 96,
+          "x": 1507.3779296875,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1947,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 72,
+          "x": 1439.3779296875,
+          "y": 580.0
+        },
+        "seconds": 58.406272888183594,
+        "stage": "Encounter",
+        "stage_ticks": 241,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 241,
+        "waiting_for_continue": false
+      }
+    },
+    {
+      "file": "screenshots/skip-complete.png",
+      "observed": {
+        "ambience": {
+          "cyclists": [
+            {
+              "animation_ticks": 241,
+              "facing": "Right",
+              "x": 926.3499755859375,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 251,
+              "facing": "Left",
+              "x": 1194.1500244140625,
+              "y": 467.0
+            }
+          ],
+          "kid_phase": "Running",
+          "kid_phase_ticks": 193,
+          "kid_position": {
+            "x": 131.5,
+            "y": 420.0
+          },
+          "kite_release_ticks": 217,
+          "ticks": 241
+        },
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Telegraph",
+          "hp": 96,
+          "x": 1507.3779296875,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1963,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 72,
+          "x": 1439.3779296875,
+          "y": 580.0
+        },
+        "seconds": 59.273292541503906,
+        "stage": "Complete",
+        "stage_ticks": 0,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 241,
+        "waiting_for_continue": false
+      }
+    }
+  ],
+  "telemetry_records": 1968,
+  "video": "adventure-silent.mp4",
+  "external_text_catalog": "texts-under-test.json",
+  "edited_valid_catalog_evidence": "texts-edited-valid.json",
+  "expected_edited_text": "MANHÃ DE AÇÃO — CORAÇÃO E CAFÉ",
+  "x11_errors": []
+}

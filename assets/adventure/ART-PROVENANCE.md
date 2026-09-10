@@ -204,3 +204,151 @@ Os cinco arquivos selecionados também estão neste diretório do repositório.
 | `rust-morning.png` | `59c86cc14d4673be5ee99e8e7f707e40ca44779d06227ba5fabb822d2a60c12b` |
 | `erratic.png` | `eeb61a73f64dad3440209bf3f48835554a6cb130fcbfbc1a38d03a8e4309604e` |
 | `rust-actions.png` | `f0a7af2a9462263963bb3a24126e4c1e3728dcd929bcb57fa21a9c2bd13e864f` |
+
+## Vida de rua — melhorias das cenas do prólogo
+
+Atlas candidato produzido em 10 de setembro de 2026 para a branch
+`feature/prologue-scene-improvements`, conforme a [entrega 30](../../docs/30-prologue-scene-improvements.md)
+e a [ADR 0024](../../docs/adr/0024-prologue-background-life.md).
+
+- Arquivo: [street-life.png](street-life.png), PNG RGBA de 1536 × 1024.
+- Fonte selecionada do `image_gen` integrado:
+  `exec-ecc48cc3-0bca-4080-8bf2-3a8e622efc28.png`, no diretório de geração
+  `/home/willams/.codex/generated_images/01a08b72-8090-7fb1-9f43-dca24a6a11b6/`.
+- [Prompt selecionado](prompts/street-life.txt) e [metadados das poses](street-life.json).
+- SHA-256: `4173b2e30a7da6ce2aa701edcf463ad0d229c819e17dac77e754d2e160a04518`.
+- Alpha medido: 1.052.260 pixels com alpha zero, 520.604 intermediários,
+  nenhum com alpha 255; 291.437 pixels estão entre 241 e 254.
+  Os corpos têm interior quase opaco e bordas suaves.
+
+| Índices | Conteúdo |
+|---|---|
+| 0–3 | Mesmo ciclista adulto com capacete, camiseta tijolo e bicicleta verde-água, pedalando para a direita. |
+| 4–5 | Mesmo garoto de camiseta verde-água e bermuda ocre, com o braço elevado em dois gestos de pipa. |
+| 6 | Garoto se assusta olhando para a direita. |
+| 7 | Garoto abre a mão para largar a linha. |
+| 8–11 | Garoto corre para a esquerda, com passadas e poses de passagem alternadas. |
+
+O ambiente e Rust da manhã foram inspecionados como referências de luz,
+proporção e linguagem gráfica. A primeira geração usou essas imagens como
+referência, mas entregou RGB com xadrez pintado. A segunda tentou preservar
+os personagens e retirar esse fundo, também sem alpha. A geração selecionada
+partiu da descrição textual dos mesmos figurinos e gestos, sem imagem de entrada;
+entregou transparência real. Não foram usadas referências externas ou personagens
+de franquias. Ciclista e garoto são cidadãos originais de fundo da aventura.
+
+| Tentativa não selecionada | Motivo |
+|---|---|
+| `exec-a61a8705-866b-4b6d-a69d-69e62b9e48ae.png` | RGB com xadrez pintado; [prompt inicial](prompts/street-life-initial.txt). |
+| `exec-120a6a39-f492-42c2-a88f-e097efa00570.png` | Repetiu RGB com xadrez; [prompt de correção](prompts/street-life-alpha-retry.txt). |
+
+A grade nominal é 4 × 3, mas as divisões reais ficam próximas de
+`x=[0,395,768,1144,1536]` e `y=[0,360,700,1024]`. Os retângulos no JSON
+foram medidos com `alpha > 3` e margem de dois pixels para preservar rodas,
+dedos e cabelo sem trazer a pose vizinha. O arquivo PNG é cópia byte a byte
+da fonte selecionada; a análise Python leu o alpha e escreveu somente metadados,
+sem recortar, pintar, redimensionar ou regravar a imagem.
+
+O renderer deve manter escala constante por personagem, ancorar os sprites no
+chão de fundo e usar as poses do garoto para posicionar a mão da linha. A pipa,
+linha, cauda e deslocamentos são desenhados e animados separadamente no jogo.
+Os desenhos têm gestos distintos, mas a fluidez e a separação de profundidade
+dependem da revisão em movimento na cena real. O atlas permanece candidato.
+
+
+## Melhorias do prólogo — quarto e rua (10/09/2026)
+
+Experimento da [entrega 30](../../docs/30-prologue-scene-improvements.md).
+[prologue-environments.png](prologue-environments.png) foi gerado com o
+`image_gen` integrado, usando [adventure-environments.png](adventure-environments.png)
+como alvo de edição e referência original. O atlas anterior permanece como
+baseline; o runtime desta branch seleciona o novo.
+
+- [Prompt completo](prompts/prologue-environments.txt).
+- Fonte: `exec-f8826320-c456-4b89-ab67-cd3fd121e481.png`, preservada no diretório
+  `/home/willams/.codex/generated_images/01a08b19-d818-7042-9dc2-d68a221bc77b/`.
+- SHA256: `d67b09d891556a0b98131a94589db5ebbf913e52ace32aaad338a1927857107f`.
+- Cópia byte a byte, sem edição raster por scripts. Dois painéis de quarto/rua.
+- Quarto: setup, pôsteres com engrenagem/caranguejo, torre e luz matinal.
+  Colchão, borda e tapete preservam a geometria dos apoios de Rust.
+  As palavras dos pôsteres e terminal são desenhadas a partir do JSON editável;
+  os traços minúsculos do monitor secundário fazem parte da ilustração.
+- Rua: ciclovia horizontal, calçada de fundo, canteiro e faixa de primeiro plano.
+  O renderer calibra o painel a 620 px de altura e prolonga o pavimento sob
+  o rodapé; garoto y420, ciclistas y467/480 e Rust y580 ocupam planos distintos.
+- Figurantes e pipa são camadas separadas, nunca desenhados estaticamente no
+  cenário. Não foram usadas referências externas adicionais.
+
+Arte candidata de uma branch experimental; não altera a release prototype.4.
+
+## Trânsito e acidente do prólogo — 10/09/2026
+
+Atlas candidato da segunda rodada da [entrega 30](../../docs/30-prologue-scene-improvements.md),
+conforme a [ADR 0024](../../docs/adr/0024-prologue-background-life.md).
+Os automóveis pertencem à encenação de fundo da aventura.
+
+- Arquivo selecionado: [street-traffic.png](street-traffic.png), PNG RGBA de
+  1254 × 1254, com quatro células iguais em grade 2 × 2.
+- [Prompt selecionado](prompts/street-traffic.txt) e
+  [metadados dos recortes e rodas](street-traffic.json).
+- Fonte gerada pelo `image_gen` integrado:
+  `exec-4dcf0758-1828-4dc6-96c3-457755e2e6e8.png`, preservada em
+  `/home/willams/.codex/generated_images/01a08b8b-3f76-7df3-b45e-58333ee12b57/`.
+- SHA-256: `13d45c30f198d53dd7504601e23560feb45e21ee0cc8e57766145b9d4e5841ab`.
+- Alpha medido: 1.059.031 pixels com alpha zero, 512.753 intermediários e
+  732 opacos. Fundo realmente transparente, sem xadrez pintado.
+
+| Índice | Conteúdo |
+|---|---|
+| 0 | Hatchback azul íntegro, perfil para a direita. |
+| 1 | Mesmo hatchback, com capô dobrado, para-lama amassado, farol quebrado e roda dianteira deformada. |
+| 2 | Sedã ocre íntegro, perfil para a direita. |
+| 3 | Hatchback familiar verde-água íntegro, perfil para a direita. |
+
+A captura da rua da primeira rodada foi inspecionada para orientar a paleta,
+luz matinal e contornos, sem ser passada como imagem de entrada. A geração
+selecionada usou somente o prompt textual. Os veículos são genéricos, sem
+marcas, pessoas ou referências externas adicionais. A cabine permanece intacta.
+Poste, via, movimento, poeira e fumaça são camadas do renderer.
+
+Os retângulos foram medidos com `alpha > 3` e margem de dois pixels; os marcos
+de roda são aproximações obtidas por inspeção visual em coordenadas da imagem.
+Nos dois carros azuis, o centro da roda traseira fica em `(94, 247)` dentro
+do respectivo recorte. A escala deve permanecer constante na troca de pose;
+normalizar ambas as imagens pela largura total produziria uma expansão
+indevida da cabine no impacto. O capô torna o dano legível, mas o encurtamento
+total da versão selecionada é discreto, aproximadamente 2%. Rever o resultado
+no tamanho de jogo junto do balanço, contato e efeitos da encenação.
+
+Uma [tentativa de edição pontual](prompts/street-traffic-crumple-retry.txt)
+acentuou o encurtamento, mas produziu RGB com xadrez pintado
+(`exec-dd20aa85-ceff-41e0-920a-92a08025ef78.png`); foi rejeitada. A fonte
+selecionada é cópia byte a byte do primeiro resultado. O script de inspeção
+apenas leu o alpha e escreveu JSON, sem recortar, pintar ou regravar o PNG.
+
+## Terceira rodada — rua brasileira modular
+
+Os novos atlas transparentes ficam em `street/`, separados da base pintada.
+[Veículos](street/VEHICLES.md) registra seis silhuetas e referências visuais.
+[Adereços e fuga dos ciclistas](street/PROPS.md) registra os prompts completos,
+fontes, hashes, alpha e recortes. Catálogo e composição independentes estão
+no [guia de substituição e reuso](street/README.md).
+
+## Quarta rodada — chegada, moradores e caramelo
+
+A [entrega 32](../../docs/32-cinematic-neighbourhood-arrival.md) acrescenta
+quatro PNGs com transparência real, separados da fachada e da base pintada:
+[neighbours.png](street/neighbours.png), [shopkeeper.png](street/shopkeeper.png),
+[shutter.png](street/shutter.png) e [caramelo.png](street/caramelo.png).
+[Moradores e porta](street/NEIGHBOURS.md) e [caramelo](street/CARAMELO.md)
+registram os prompts completos, fontes geradas, hashes, alpha, recortes e
+apoios. Os arquivos selecionados foram preservados byte a byte; a análise
+por scripts produziu somente metadados, sem editar pixels.
+
+As duas identidades de clientes, o lojista e o cão mantêm poses calmas e
+reações próprias. A encenação reutiliza a cliente em duas posições; a porta
+metálica é revelada por recorte, conservando a proporção da chapa. Câmera,
+trajetórias, oclusão da entrada e fechamento pertencem ao runtime. O ônibus
+maior reutiliza o atlas da terceira rodada; os letreiros usam o arquivo
+Barlow Condensed SemiBold existente com carregamento próprio para tamanhos
+pequenos, descrito no [guia de fontes](fonts/README.md).

@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "props": [
+    {
+      "id": "bar_casa_nossa",
+      "piece": "prop.bar",
+      "position": [
+        666,
+        355
+      ],
+      "scale": 1,
+      "labels": [
+        {
+          "text_key": "street.bar.name",
+          "offset": [
+            -3,
+            -193
+          ],
+          "width": 209,
+          "font_size": 18,
+          "color": [
+            36,
+            58,
+            50,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bus_stop",
+      "piece": "prop.bus_stop",
+      "position": [
+        1442,
+        354
+      ],
+      "scale": 1,
+      "labels": [
+        {
+          "text_key": "street.stop.title",
+          "offset": [
+            0,
+            -125
+          ],
+          "width": 180,
+          "font_size": 11,
+          "color": [
+            234,
+            221,
+            189,
+            255
+          ]
+        },
+        {
+          "text_key": "street.stop.route",
+          "offset": [
+            102,
+            -103
+          ],
+          "width": 12,
+          "font_size": 5,
+          "color": [
+            49,
+            68,
+            63,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bar_corner",
+      "piece": "prop.corner",
+      "position": [
+        869,
+        355
+      ],
+      "scale": 1,
+      "labels": []
+    },
+    {
+      "id": "neighbour_corner",
+      "piece": "prop.corner",
+      "position": [
+        385,
+        355
+      ],
+      "scale": 0.65,
+      "labels": []
+    }
+  ]
+}

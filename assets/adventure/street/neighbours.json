@@ -1,0 +1,334 @@
+{
+  "image": "neighbours.png",
+  "image_size": [
+    1536,
+    1024
+  ],
+  "rects": [
+    [
+      40,
+      33,
+      191,
+      441
+    ],
+    [
+      264,
+      59,
+      330,
+      415
+    ],
+    [
+      616,
+      71,
+      249,
+      403
+    ],
+    [
+      879,
+      65,
+      352,
+      409
+    ],
+    [
+      1253,
+      61,
+      280,
+      413
+    ],
+    [
+      51,
+      524,
+      157,
+      454
+    ],
+    [
+      258,
+      560,
+      341,
+      418
+    ],
+    [
+      634,
+      570,
+      196,
+      408
+    ],
+    [
+      879,
+      561,
+      356,
+      417
+    ],
+    [
+      1249,
+      558,
+      270,
+      420
+    ]
+  ],
+  "labels": [
+    "shopper-idle",
+    "shopper-run-left-0",
+    "shopper-run-left-1",
+    "shopper-run-left-2",
+    "shopper-run-left-3",
+    "backpack-idle",
+    "backpack-run-left-0",
+    "backpack-run-left-1",
+    "backpack-run-left-2",
+    "backpack-run-left-3"
+  ],
+  "pivots": [
+    [
+      93,
+      439
+    ],
+    [
+      157,
+      413
+    ],
+    [
+      114,
+      401
+    ],
+    [
+      173,
+      407
+    ],
+    [
+      131,
+      411
+    ],
+    [
+      81,
+      452
+    ],
+    [
+      162,
+      416
+    ],
+    [
+      104,
+      406
+    ],
+    [
+      169,
+      415
+    ],
+    [
+      125,
+      418
+    ]
+  ],
+  "pivot_space": "pixels relative to rect top-left; pelvis center and virtual ground by visual inspection",
+  "groups": {
+    "resident.0.idle": [
+      0
+    ],
+    "resident.0.run": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "resident.1.idle": [
+      5
+    ],
+    "resident.1.run": [
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "reference_standing_heights_pixels": {
+    "resident.0": 437,
+    "resident.1": 448
+  },
+  "registration": {
+    "source_anchors": [
+      [
+        133,
+        472
+      ],
+      [
+        421,
+        472
+      ],
+      [
+        730,
+        472
+      ],
+      [
+        1052,
+        472
+      ],
+      [
+        1384,
+        472
+      ],
+      [
+        132,
+        976
+      ],
+      [
+        420,
+        976
+      ],
+      [
+        738,
+        976
+      ],
+      [
+        1048,
+        976
+      ],
+      [
+        1374,
+        976
+      ]
+    ],
+    "note": "Keep uniform pixelscale per identity using its idle standing height; lower transparent margins preserve airborne gaps and bent postures."
+  },
+  "measurement": {
+    "alpha_threshold_exclusive": 3,
+    "padding_pixels": 2,
+    "image_pixels_unchanged": true,
+    "inspection_windows": [
+      [
+        0,
+        0,
+        248,
+        500
+      ],
+      [
+        248,
+        0,
+        610,
+        500
+      ],
+      [
+        610,
+        0,
+        877,
+        500
+      ],
+      [
+        877,
+        0,
+        1240,
+        500
+      ],
+      [
+        1240,
+        0,
+        1536,
+        500
+      ],
+      [
+        0,
+        500,
+        248,
+        1024
+      ],
+      [
+        248,
+        500,
+        610,
+        1024
+      ],
+      [
+        610,
+        500,
+        877,
+        1024
+      ],
+      [
+        877,
+        500,
+        1240,
+        1024
+      ],
+      [
+        1240,
+        500,
+        1536,
+        1024
+      ]
+    ],
+    "visible_alpha_bounds": [
+      [
+        42,
+        35,
+        229,
+        472
+      ],
+      [
+        266,
+        61,
+        592,
+        464
+      ],
+      [
+        618,
+        73,
+        863,
+        461
+      ],
+      [
+        881,
+        67,
+        1229,
+        462
+      ],
+      [
+        1255,
+        63,
+        1531,
+        434
+      ],
+      [
+        53,
+        526,
+        206,
+        974
+      ],
+      [
+        260,
+        562,
+        597,
+        961
+      ],
+      [
+        636,
+        572,
+        828,
+        960
+      ],
+      [
+        881,
+        563,
+        1233,
+        961
+      ],
+      [
+        1251,
+        560,
+        1517,
+        959
+      ]
+    ],
+    "rectangles_include_virtual_ground": true
+  },
+  "source_sha256": "40bdacd3abad00a17d9cdce266c5e381345ae25ef5d7e22c69107519acc3cba2",
+  "alpha_counts": {
+    "zero": 1075914,
+    "intermediate": 496950,
+    "opaque": 0
+  },
+  "generated_with": "built-in image_gen",
+  "generated_date": "2026-09-10",
+  "selected_prompt": "prompts/neighbours.txt",
+  "authored_facing": "left; idles slightly three-quarter",
+  "run_frame_seconds": 0.1
+}

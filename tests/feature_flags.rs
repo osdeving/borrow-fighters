@@ -203,6 +203,34 @@ fn story_placeholder_is_inert_for_mouse_keyboard_and_controller_commands() {
 }
 
 #[test]
+fn hosted_story_entry_routes_fresh_activation_without_changing_versus_flags() {
+    for kind in 0..3 {
+        let mut flags = FeatureFlags::default();
+        let original = flags;
+        let mut menu = PreferencesMenu::default();
+        menu.set_story_available(true);
+        menu.update(PreferencesInput::default(), &mut flags);
+        let input = match kind {
+            0 => pointer_on_row(&menu, PreferencesMenu::MAIN_STORY_ROW, true),
+            1 => PreferencesInput {
+                activate: true,
+                ..PreferencesInput::default()
+            },
+            _ => PreferencesInput {
+                start: true,
+                ..PreferencesInput::default()
+            },
+        };
+        assert_eq!(menu.update(input, &mut flags), PreferencesAction::OpenStory);
+        assert_eq!(flags, original);
+        menu.ignore_next_input();
+        assert_eq!(menu.update(input, &mut flags), PreferencesAction::Stay);
+        menu.set_story_available(false);
+        assert_eq!(menu.update(input, &mut flags), PreferencesAction::Stay);
+    }
+}
+
+#[test]
 fn main_menu_replays_its_entry_reveal_when_returning_without_mutating_flags() {
     let mut flags = FeatureFlags::default();
     let original_flags = flags;

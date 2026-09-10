@@ -8,12 +8,12 @@ Na raiz do repositório, depois de `cargo build --locked --release --bin borrow-
 
 ```sh
 python3 tools/release/package.py stage --target linux-x86_64 \
-  --version 0.1.0-prototype.4 --binary target/release/borrow-story \
+  --version 0.1.0-prototype.5 --binary target/release/borrow-story \
   --output dist/stage
 python3 tools/release/package.py native-packages --stage dist/stage > dist/native-packages.txt
 xargs -r sudo apt-get install --only-upgrade -y -- < dist/native-packages.txt
 python3 tools/release/package.py linux --stage dist/stage \
-  --version 0.1.0-prototype.4 --output dist
+  --version 0.1.0-prototype.5 --output dist
 python3 tools/release/package.py verify --stage dist/stage
 ```
 
@@ -39,15 +39,15 @@ Windows 11**, tanto no instalador quanto no ZIP portátil. O instalador verifica
 essa versão mínima. A [documentação da Microsoft](https://learn.microsoft.com/en-us/windows/apps/design/globalizing/use-utf8-code-page)
 descreve a configuração por processo; o pacote não altera a localidade do sistema.
 
-Artefatos gerados, usando `0.1.0-prototype.4` como exemplo:
+Artefatos gerados, usando `0.1.0-prototype.5` como exemplo:
 
 | Plataforma | Arquivo |
 | --- | --- |
-| Windows portátil | `borrow-fighters-0.1.0-prototype.4-windows-x86_64.zip` |
-| Windows instalador | `borrow-fighters-0.1.0-prototype.4-windows-x86_64-setup.exe` |
-| Linux portátil | `borrow-fighters-0.1.0-prototype.4-linux-x86_64.tar.gz` |
-| Debian/Ubuntu | `borrow-fighters_0.1.0~prototype.4_amd64.deb` |
-| Fedora | `borrow-fighters-0.1.0~prototype.4-1.x86_64.rpm` |
+| Windows portátil | `borrow-fighters-0.1.0-prototype.5-windows-x86_64.zip` |
+| Windows instalador | `borrow-fighters-0.1.0-prototype.5-windows-x86_64-setup.exe` |
+| Linux portátil | `borrow-fighters-0.1.0-prototype.5-linux-x86_64.tar.gz` |
+| Debian/Ubuntu | `borrow-fighters_0.1.0~prototype.5_amd64.deb` |
+| Fedora | `borrow-fighters-0.1.0~prototype.5-1.x86_64.rpm` |
 
 O instalador Windows usa [Inno Setup](https://jrsoftware.org/isinfo.php), instala
 em `%LOCALAPPDATA%\Programs\Borrow Fighters` e cria atalhos. A configuração
@@ -83,6 +83,11 @@ O staging coleta caminhos concretos de `src/`, manifesta os seis personagens e
 segue `image` do manifesto e de cada frame, além do manifesto de áudio. Os
 carregadores da aventura acrescentam nomes locais de cenas, poses e áudio;
 `opening/roster.json` fornece somente os retratos de `characters[].image`.
+Os catálogos `street/catalog.json` e `chapter/catalog.json` acrescentam o PNG
+de cada frame, inclusive poses posteriores e imagens compartilhadas. Cada
+atlas é copiado uma vez. O capítulo inclui também mundo, textos, estilo do
+celular, cenário do beco e efeitos de áudio referenciados pelo runtime; os
+JSONs de produção, prompts e geradores permanecem no repositório.
 Textos externos, três fontes próprias, trilha da apresentação e imagens de
 C++/Python acompanham a sequência. O retrato de Go não usado pela apresentação
 fica fora desse conjunto. Os
@@ -124,7 +129,7 @@ as bibliotecas incorporadas. O workflow também testa instalação/desinstalaç�
 abertura Linux sob Xvfb e instalação do RPM em Fedora. O teste de carga
 `--help` termina com código 0 e não abre uma janela. Os testes do coletor e
 staging rodam com `python3 -m unittest discover -s tools/release -p 'test_*.py'`:
-cobrem assets dinâmicos, retratos transitivos, ausências, hashes, licenças e
+Cobrem assets dinâmicos, retratos e poses transitivas, ausências, hashes, licenças e
 nome público do executável em caminhos com acentos.
 No Windows, o instalador e o ZIP são abertos em pastas com espaços e acentos
 (`Jogo ação instalado` e `Jogo ação portátil`): o CI confere os assets e seus

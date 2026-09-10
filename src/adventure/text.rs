@@ -13,6 +13,11 @@ use std::{
 
 const REQUIRED_KEYS: &[&str] = &[
     "window.title",
+    "street.arrival.controls",
+    "street.bar.kind",
+    "street.bar.name",
+    "street.stop.title",
+    "street.stop.route",
     "ada.eyebrow",
     "ada.caption.ordinary",
     "ada.caption.message",
@@ -29,6 +34,10 @@ const REQUIRED_KEYS: &[&str] = &[
     "morning.name",
     "morning.caption",
     "morning.controls",
+    "morning.poster.rust",
+    "morning.poster.slogan",
+    "morning.setup.command",
+    "morning.setup.status",
     "encounter.name",
     "encounter.objective",
     "encounter.explore",

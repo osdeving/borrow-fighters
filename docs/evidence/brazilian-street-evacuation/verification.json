@@ -1,0 +1,249 @@
+{
+  "started_utc": "2026-09-10T14:17:33.259599+00:00",
+  "working_directory": "/home/willams/borrow-fighters",
+  "cargo_target_directory": "/home/willams/borrow-fighters/.git/street-chaos-review/validation/cargo-target",
+  "runtime_binary_before_sha256": "5e504adedeeb68ad1bc8ae23dd12568d42472d5ed4812fb049dc143cf9e4a8bf",
+  "checks": [
+    {
+      "name": "fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "log": ".git/street-chaos-review/validation/fmt.log",
+      "started_utc": "2026-09-10T14:17:33.267190+00:00",
+      "elapsed_seconds": 0.364,
+      "exit_code": 0,
+      "status": "passed",
+      "changed_inputs_during_check": []
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "log": ".git/street-chaos-review/validation/clippy.log",
+      "started_utc": "2026-09-10T14:17:33.647447+00:00",
+      "elapsed_seconds": 37.133,
+      "exit_code": 0,
+      "status": "passed",
+      "changed_inputs_during_check": []
+    },
+    {
+      "name": "all-features",
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets",
+        "--all-features"
+      ],
+      "log": ".git/street-chaos-review/validation/all-features.log",
+      "started_utc": "2026-09-10T14:18:10.798576+00:00",
+      "elapsed_seconds": 38.974,
+      "exit_code": 0,
+      "status": "passed",
+      "changed_inputs_during_check": [],
+      "rust_tests": {
+        "passed": 450,
+        "failed": 0,
+        "ignored": 2,
+        "measured": 0,
+        "filtered_out": 0,
+        "target_summaries": 50
+      },
+      "ignored_tests": [
+        "test engine::audio::live_review::live_match_pause_preserves_music_cursor_and_resumes_only_suspended_sounds ... ignored, requires an audio device; run manually with --ignored --nocapture",
+        "test engine::audio::live_review::live_music_pause_resume_and_cancel_preserve_stream_position ... ignored, requires an audio device; run manually with --ignored --nocapture"
+      ]
+    },
+    {
+      "name": "fighting",
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets",
+        "--no-default-features",
+        "--features",
+        "fighting"
+      ],
+      "log": ".git/street-chaos-review/validation/fighting.log",
+      "started_utc": "2026-09-10T14:18:49.797686+00:00",
+      "elapsed_seconds": 10.884,
+      "exit_code": 0,
+      "status": "passed",
+      "changed_inputs_during_check": [],
+      "rust_tests": {
+        "passed": 395,
+        "failed": 0,
+        "ignored": 2,
+        "measured": 0,
+        "filtered_out": 0,
+        "target_summaries": 48
+      },
+      "ignored_tests": [
+        "test engine::audio::live_review::live_match_pause_preserves_music_cursor_and_resumes_only_suspended_sounds ... ignored, requires an audio device; run manually with --ignored --nocapture",
+        "test engine::audio::live_review::live_music_pause_resume_and_cancel_preserve_stream_position ... ignored, requires an audio device; run manually with --ignored --nocapture"
+      ]
+    },
+    {
+      "name": "adventure",
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets",
+        "--no-default-features",
+        "--features",
+        "adventure"
+      ],
+      "log": ".git/street-chaos-review/validation/adventure.log",
+      "started_utc": "2026-09-10T14:19:00.699767+00:00",
+      "elapsed_seconds": 2.451,
+      "exit_code": 0,
+      "status": "passed",
+      "changed_inputs_during_check": [],
+      "rust_tests": {
+        "passed": 56,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered_out": 0,
+        "target_summaries": 2
+      }
+    },
+    {
+      "name": "core",
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets",
+        "--no-default-features"
+      ],
+      "log": ".git/street-chaos-review/validation/core.log",
+      "started_utc": "2026-09-10T14:19:03.167332+00:00",
+      "elapsed_seconds": 0.646,
+      "exit_code": 0,
+      "status": "passed",
+      "changed_inputs_during_check": [],
+      "rust_tests": {
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered_out": 0,
+        "target_summaries": 1
+      }
+    },
+    {
+      "name": "boundaries",
+      "command": [
+        "python3.13",
+        "tools/check_domain_boundaries.py"
+      ],
+      "log": ".git/street-chaos-review/validation/boundaries-python313.log",
+      "started_utc": "2026-09-10T14:19:25.387013+00:00",
+      "elapsed_seconds": 1.007,
+      "exit_code": 0,
+      "status": "passed",
+      "changed_inputs_during_check": []
+    },
+    {
+      "name": "boundary-tests",
+      "command": [
+        "python3.13",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_check_domain_boundaries.py"
+      ],
+      "log": ".git/street-chaos-review/validation/boundary-tests-python313.log",
+      "started_utc": "2026-09-10T14:19:25.766214+00:00",
+      "elapsed_seconds": 0.379,
+      "exit_code": 0,
+      "status": "passed",
+      "changed_inputs_during_check": [],
+      "python_tests": 56
+    },
+    {
+      "name": "mixer-tests",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/review",
+        "-p",
+        "test_mix_adventure_review_audio.py"
+      ],
+      "log": ".git/street-chaos-review/validation/mixer-tests.log",
+      "started_utc": "2026-09-10T14:19:03.965146+00:00",
+      "elapsed_seconds": 0.08,
+      "exit_code": 0,
+      "status": "passed",
+      "changed_inputs_during_check": [],
+      "python_tests": 40
+    }
+  ],
+  "status": "passed",
+  "finished_utc": "2026-09-10T14:19:25.767775+00:00",
+  "runtime_binary_after_sha256": "5e504adedeeb68ad1bc8ae23dd12568d42472d5ed4812fb049dc143cf9e4a8bf",
+  "runtime_binary_unchanged": true,
+  "changed_inputs_entire_run": [],
+  "recovered_attempts": [
+    {
+      "name": "boundaries",
+      "command": [
+        "python3",
+        "tools/check_domain_boundaries.py"
+      ],
+      "log": ".git/street-chaos-review/validation/boundaries.log",
+      "started_utc": "2026-09-10T14:19:03.829455+00:00",
+      "elapsed_seconds": 0.03,
+      "exit_code": 1,
+      "status": "failed",
+      "changed_inputs_during_check": [],
+      "recovery_reason": "Host python3 is Python3.8; boundary checker requires3.11+, so reran with installed python3.13."
+    },
+    {
+      "name": "boundary-tests",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_check_domain_boundaries.py"
+      ],
+      "log": ".git/street-chaos-review/validation/boundary-tests.log",
+      "started_utc": "2026-09-10T14:19:03.876379+00:00",
+      "elapsed_seconds": 0.072,
+      "exit_code": 1,
+      "status": "failed",
+      "changed_inputs_during_check": [],
+      "python_tests": 1,
+      "recovery_reason": "Host python3 is Python3.8; boundary checker requires3.11+, so reran with installed python3.13."
+    }
+  ],
+  "additional_checks": {
+    "packaging_tests_passed": 14,
+    "native_checks_passed": 22,
+    "yaml_files_valid": 19,
+    "local_markdown_links_valid": 1430,
+    "git_diff_check": "passed",
+    "staging_linux": "street-linux-stage-check.json",
+    "modularity": "street-modularity-check.json",
+    "windows_staging": "fixtures only; no Windows executable available locally"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "rust": {
+    "all": {
+      "passed": 445,
+      "failed": false
+    },
+    "adventure": {
+      "passed": 51,
+      "failed": false
+    },
+    "fighting": {
+      "passed": 395,
+      "failed": false
+    },
+    "core": {
+      "passed": 3,
+      "failed": false
+    }
+  },
+  "fmt": "passed",
+  "clippy": "all-targets all-features -D warnings passed",
+  "domain_boundary_fixtures": 56,
+  "audio_mixer_tests": 38,
+  "packaging_tests": 10,
+  "native_checks": 20,
+  "native_review": "native-checks.json",
+  "branch": "feature/prologue-scene-improvements",
+  "base_commit": "3f6d9da",
+  "generated_at_utc": "2026-09-10",
+  "markdown_and_yaml": "passed",
+  "native_preview": "traffic-and-crash.mp4",
+  "native_audio": "native-audio.json"
+}

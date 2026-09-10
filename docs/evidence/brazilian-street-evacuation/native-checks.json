@@ -1,0 +1,3341 @@
+{
+  "created_utc": "2026-09-10T14:17:14.016421+00:00",
+  "success": true,
+  "failure": null,
+  "elapsed_seconds": 59.769,
+  "owned_pid": 404716,
+  "owned_window": 8388615,
+  "process_exit_code": 0,
+  "display": ":0",
+  "input_method": "XSendEvent addressed to _NET_WM_PID-owned window",
+  "limitations": "Synthetic window keyboard input; no physical gamepad, focus changes, desktop capture, audio listening or human visual approval.",
+  "checks": [
+    {
+      "name": "calm_street_contains_five_vehicle_types_and_two_riders",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": null,
+          "cyclists": [
+            {
+              "animation_ticks": 60,
+              "bicycle_position": {
+                "x": 501.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Riding",
+              "phase_ticks": 60,
+              "visible": true,
+              "x": 501.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 70,
+              "bicycle_position": {
+                "x": 1529.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Riding",
+              "phase_ticks": 60,
+              "visible": true,
+              "x": 1529.0,
+              "y": 467.0
+            }
+          ],
+          "incident_car": null,
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 60,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 60,
+          "traffic_cars": [
+            {
+              "animation_ticks": 60,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 0,
+              "visible": true,
+              "x": 1980.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 68,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 1,
+              "visible": true,
+              "x": 1436.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 76,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 2,
+              "visible": true,
+              "x": 892.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 84,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 3,
+              "visible": true,
+              "x": 348.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 92,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 4,
+              "visible": true,
+              "x": -196.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 58,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 1.0140526294708252,
+        "stage": "Encounter",
+        "stage_ticks": 60,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 60,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049778.4553185
+      }
+    },
+    {
+      "name": "traffic_moves_before_the_threat",
+      "passed": true
+    },
+    {
+      "name": "all_actors_remain_calm_before_the_EP",
+      "passed": true
+    },
+    {
+      "name": "EP_reacts_in_all_vehicle_and_cyclist_states",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": 0,
+          "cyclists": [
+            {
+              "animation_ticks": 489,
+              "bicycle_position": {
+                "x": 1506.800048828125,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Braking",
+              "phase_ticks": 0,
+              "visible": true,
+              "x": 1506.800048828125,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 499,
+              "bicycle_position": {
+                "x": 737.2000122070312,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Braking",
+              "phase_ticks": 0,
+              "visible": true,
+              "x": 737.2000122070312,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 0,
+            "x": -160.0,
+            "y": 430.0
+          },
+          "kid_phase": "Startled",
+          "kid_phase_ticks": 0,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 489,
+          "traffic_cars": [
+            {
+              "animation_ticks": 489,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 268.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 497,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": 2444.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 505,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": 1900.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 513,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 1356.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 521,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": 812.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1497.4166259765625,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 446,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Walk",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1109.166748046875,
+          "y": 580.0
+        },
+        "seconds": 10.564254760742188,
+        "stage": "Encounter",
+        "stage_ticks": 489,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 489,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049788.005583
+      }
+    },
+    {
+      "name": "both_cyclists_dismount_before_running",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 1,
+              "facing": "Right",
+              "id": 0,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 1,
+              "facing": "Left",
+              "id": 1,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 25,
+          "cyclists": [
+            {
+              "animation_ticks": 514,
+              "bicycle_position": {
+                "x": 1535.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Dismounting",
+              "phase_ticks": 1,
+              "visible": true,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 524,
+              "bicycle_position": {
+                "x": 715.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Dismounting",
+              "phase_ticks": 1,
+              "visible": true,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 25,
+            "x": 193.15789794921875,
+            "y": 430.0
+          },
+          "kid_phase": "Releasing",
+          "kid_phase_ticks": 1,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": 1,
+          "ticks": 514,
+          "traffic_cars": [
+            {
+              "animation_ticks": 514,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 149.7708282470703,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 522,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": 2325.770751953125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 530,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": 1781.7708740234375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 538,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 1237.7708740234375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 546,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": 693.7708129882812,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1432.832275390625,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 475,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": true,
+        "player": {
+          "action": "Block",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1116.29150390625,
+          "y": 580.0
+        },
+        "seconds": 11.075427055358887,
+        "stage": "Encounter",
+        "stage_ticks": 514,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 514,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049788.516704
+      }
+    },
+    {
+      "name": "pause_freezes_every_evacuation_actor_and_clock",
+      "passed": true,
+      "before": {
+        "abandoned_bicycles": [
+          {
+            "drop_ticks": 1,
+            "facing": "Right",
+            "id": 0,
+            "x": 1535.0,
+            "y": 480.0
+          },
+          {
+            "drop_ticks": 1,
+            "facing": "Left",
+            "id": 1,
+            "x": 715.0,
+            "y": 467.0
+          }
+        ],
+        "accident_ticks": 25,
+        "cyclists": [
+          {
+            "animation_ticks": 514,
+            "bicycle_position": {
+              "x": 1535.0,
+              "y": 480.0
+            },
+            "facing": "Right",
+            "id": 0,
+            "phase": "Dismounting",
+            "phase_ticks": 1,
+            "visible": true,
+            "x": 1535.0,
+            "y": 480.0
+          },
+          {
+            "animation_ticks": 524,
+            "bicycle_position": {
+              "x": 715.0,
+              "y": 467.0
+            },
+            "facing": "Left",
+            "id": 1,
+            "phase": "Dismounting",
+            "phase_ticks": 1,
+            "visible": true,
+            "x": 715.0,
+            "y": 467.0
+          }
+        ],
+        "incident_car": {
+          "phase": "Approaching",
+          "phase_ticks": 25,
+          "x": 193.15789794921875,
+          "y": 430.0
+        },
+        "kid_phase": "Releasing",
+        "kid_phase_ticks": 1,
+        "kid_position": {
+          "x": 1000.0,
+          "y": 350.0
+        },
+        "kite_release_ticks": 1,
+        "ticks": 514,
+        "traffic_cars": [
+          {
+            "animation_ticks": 514,
+            "facing": "Left",
+            "fleeing": true,
+            "style": 0,
+            "visible": true,
+            "x": 149.7708282470703,
+            "y": 393.0
+          },
+          {
+            "animation_ticks": 522,
+            "facing": "Left",
+            "fleeing": true,
+            "style": 1,
+            "visible": true,
+            "x": 2325.770751953125,
+            "y": 393.0
+          },
+          {
+            "animation_ticks": 530,
+            "facing": "Left",
+            "fleeing": true,
+            "style": 2,
+            "visible": true,
+            "x": 1781.7708740234375,
+            "y": 393.0
+          },
+          {
+            "animation_ticks": 538,
+            "facing": "Left",
+            "fleeing": true,
+            "style": 3,
+            "visible": true,
+            "x": 1237.7708740234375,
+            "y": 393.0
+          },
+          {
+            "animation_ticks": 546,
+            "facing": "Left",
+            "fleeing": true,
+            "style": 4,
+            "visible": true,
+            "x": 693.7708129882812,
+            "y": 393.0
+          }
+        ]
+      },
+      "after": {
+        "abandoned_bicycles": [
+          {
+            "drop_ticks": 1,
+            "facing": "Right",
+            "id": 0,
+            "x": 1535.0,
+            "y": 480.0
+          },
+          {
+            "drop_ticks": 1,
+            "facing": "Left",
+            "id": 1,
+            "x": 715.0,
+            "y": 467.0
+          }
+        ],
+        "accident_ticks": 25,
+        "cyclists": [
+          {
+            "animation_ticks": 514,
+            "bicycle_position": {
+              "x": 1535.0,
+              "y": 480.0
+            },
+            "facing": "Right",
+            "id": 0,
+            "phase": "Dismounting",
+            "phase_ticks": 1,
+            "visible": true,
+            "x": 1535.0,
+            "y": 480.0
+          },
+          {
+            "animation_ticks": 524,
+            "bicycle_position": {
+              "x": 715.0,
+              "y": 467.0
+            },
+            "facing": "Left",
+            "id": 1,
+            "phase": "Dismounting",
+            "phase_ticks": 1,
+            "visible": true,
+            "x": 715.0,
+            "y": 467.0
+          }
+        ],
+        "incident_car": {
+          "phase": "Approaching",
+          "phase_ticks": 25,
+          "x": 193.15789794921875,
+          "y": 430.0
+        },
+        "kid_phase": "Releasing",
+        "kid_phase_ticks": 1,
+        "kid_position": {
+          "x": 1000.0,
+          "y": 350.0
+        },
+        "kite_release_ticks": 1,
+        "ticks": 514,
+        "traffic_cars": [
+          {
+            "animation_ticks": 514,
+            "facing": "Left",
+            "fleeing": true,
+            "style": 0,
+            "visible": true,
+            "x": 149.7708282470703,
+            "y": 393.0
+          },
+          {
+            "animation_ticks": 522,
+            "facing": "Left",
+            "fleeing": true,
+            "style": 1,
+            "visible": true,
+            "x": 2325.770751953125,
+            "y": 393.0
+          },
+          {
+            "animation_ticks": 530,
+            "facing": "Left",
+            "fleeing": true,
+            "style": 2,
+            "visible": true,
+            "x": 1781.7708740234375,
+            "y": 393.0
+          },
+          {
+            "animation_ticks": 538,
+            "facing": "Left",
+            "fleeing": true,
+            "style": 3,
+            "visible": true,
+            "x": 1237.7708740234375,
+            "y": 393.0
+          },
+          {
+            "animation_ticks": 546,
+            "facing": "Left",
+            "fleeing": true,
+            "style": 4,
+            "visible": true,
+            "x": 693.7708129882812,
+            "y": 393.0
+          }
+        ]
+      }
+    },
+    {
+      "name": "resume_retains_the_original_evacuation",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 4,
+              "facing": "Right",
+              "id": 0,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 4,
+              "facing": "Left",
+              "id": 1,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 28,
+          "cyclists": [
+            {
+              "animation_ticks": 517,
+              "bicycle_position": {
+                "x": 1535.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Dismounting",
+              "phase_ticks": 4,
+              "visible": true,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 527,
+              "bicycle_position": {
+                "x": 715.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Dismounting",
+              "phase_ticks": 4,
+              "visible": true,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 28,
+            "x": 235.536865234375,
+            "y": 430.0
+          },
+          "kid_phase": "Releasing",
+          "kid_phase_ticks": 4,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": 4,
+          "ticks": 517,
+          "traffic_cars": [
+            {
+              "animation_ticks": 517,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 133.13333129882812,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 525,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": 2309.13330078125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 533,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": 1765.13330078125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 541,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 1221.13330078125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 549,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": 677.13330078125,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1425.0821533203125,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 520,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Block",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1116.29150390625,
+          "y": 580.0
+        },
+        "seconds": 12.816692352294922,
+        "stage": "Encounter",
+        "stage_ticks": 517,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 517,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049790.257975
+      }
+    },
+    {
+      "name": "both_cyclists_run_and_leave_two_bicycles",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 36,
+              "facing": "Right",
+              "id": 0,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 36,
+              "facing": "Left",
+              "id": 1,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 60,
+          "cyclists": [
+            {
+              "animation_ticks": 549,
+              "bicycle_position": {
+                "x": 1535.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Running",
+              "phase_ticks": 6,
+              "visible": true,
+              "x": 1578.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 559,
+              "bicycle_position": {
+                "x": 715.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Running",
+              "phase_ticks": 6,
+              "visible": true,
+              "x": 672.0,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 60,
+            "x": 687.5789794921875,
+            "y": 430.0
+          },
+          "kid_phase": "Running",
+          "kid_phase_ticks": 12,
+          "kid_position": {
+            "x": 946.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": 36,
+          "ticks": 549,
+          "traffic_cars": [
+            {
+              "animation_ticks": 549,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": -77.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 557,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": 2099.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 565,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": 1555.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 573,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 1011.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 581,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": 467.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1342.4141845703125,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 536,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Block",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1116.29150390625,
+          "y": 580.0
+        },
+        "seconds": 14.193737030029297,
+        "stage": "Encounter",
+        "stage_ticks": 549,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 549,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049791.6350253
+      }
+    },
+    {
+      "name": "all_moving_background_actors_leave_by_six_seconds",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 337,
+              "facing": "Right",
+              "id": 0,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 337,
+              "facing": "Left",
+              "id": 1,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 361,
+          "cyclists": [
+            {
+              "animation_ticks": 850,
+              "bicycle_position": {
+                "x": 1535.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Gone",
+              "phase_ticks": 191,
+              "visible": false,
+              "x": 2360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 860,
+              "bicycle_position": {
+                "x": 715.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Gone",
+              "phase_ticks": 184,
+              "visible": false,
+              "x": -160.0,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Crashed",
+            "phase_ticks": 249,
+            "x": 1250.0,
+            "y": 430.0
+          },
+          "kid_phase": "Gone",
+          "kid_phase_ticks": 57,
+          "kid_position": {
+            "x": -152.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": 337,
+          "ticks": 850,
+          "traffic_cars": [
+            {
+              "animation_ticks": 850,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 858,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 866,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 874,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 882,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Telegraph",
+          "hp": 96,
+          "x": 1064.12646484375,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 773,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Block",
+          "facing": "Right",
+          "hp": 100,
+          "x": 996.1216430664062,
+          "y": 580.0
+        },
+        "seconds": 20.905757904052734,
+        "stage": "Encounter",
+        "stage_ticks": 850,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 850,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049798.3470583
+      }
+    },
+    {
+      "name": "right_camera_contains_debris_without_new_traffic",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 1355,
+              "facing": "Right",
+              "id": 0,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 1355,
+              "facing": "Left",
+              "id": 1,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 1379,
+          "cyclists": [
+            {
+              "animation_ticks": 1868,
+              "bicycle_position": {
+                "x": 1535.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Gone",
+              "phase_ticks": 1209,
+              "visible": false,
+              "x": 2360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 1878,
+              "bicycle_position": {
+                "x": 715.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Gone",
+              "phase_ticks": 1202,
+              "visible": false,
+              "x": -160.0,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Crashed",
+            "phase_ticks": 1267,
+            "x": 1250.0,
+            "y": 430.0
+          },
+          "kid_phase": "Gone",
+          "kid_phase_ticks": 1075,
+          "kid_position": {
+            "x": -152.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": 1355,
+          "ticks": 1868,
+          "traffic_cars": [
+            {
+              "animation_ticks": 1868,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1876,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1884,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1892,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1900,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Recovery",
+          "hp": 96,
+          "x": 1498.79931640625,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1628,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Walk",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1430.79931640625,
+          "y": 580.0
+        },
+        "seconds": 38.739532470703125,
+        "stage": "Encounter",
+        "stage_ticks": 1868,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 1868,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049816.1808429
+      }
+    },
+    {
+      "name": "street_stays_empty_after_twenty_seconds",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 1373,
+              "facing": "Right",
+              "id": 0,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 1373,
+              "facing": "Left",
+              "id": 1,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 1397,
+          "cyclists": [
+            {
+              "animation_ticks": 1886,
+              "bicycle_position": {
+                "x": 1535.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Gone",
+              "phase_ticks": 1227,
+              "visible": false,
+              "x": 2360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 1896,
+              "bicycle_position": {
+                "x": 715.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Gone",
+              "phase_ticks": 1220,
+              "visible": false,
+              "x": -160.0,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Crashed",
+            "phase_ticks": 1285,
+            "x": 1250.0,
+            "y": 430.0
+          },
+          "kid_phase": "Gone",
+          "kid_phase_ticks": 1093,
+          "kid_position": {
+            "x": -152.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": 1373,
+          "ticks": 1886,
+          "traffic_cars": [
+            {
+              "animation_ticks": 1886,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1894,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1902,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1910,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1918,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Telegraph",
+          "hp": 96,
+          "x": 1502.361328125,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1632,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Block",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1434.361328125,
+          "y": 580.0
+        },
+        "seconds": 39.8778190612793,
+        "stage": "Encounter",
+        "stage_ticks": 1886,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 1886,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049817.3192112
+      }
+    },
+    {
+      "name": "traffic_cars_positions_remain_fixed_after_evacuation",
+      "passed": true
+    },
+    {
+      "name": "cyclists_positions_remain_fixed_after_evacuation",
+      "passed": true
+    },
+    {
+      "name": "abandoned_bicycles_positions_remain_fixed_after_evacuation",
+      "passed": true
+    },
+    {
+      "name": "evacuation_positions_are_continuous_and_never_wrap_or_respawn",
+      "passed": true,
+      "examined_samples": 1219,
+      "failures": []
+    },
+    {
+      "name": "both_cyclists_complete_every_reaction_phase",
+      "passed": true,
+      "phases": {
+        "0": [
+          "Braking",
+          "Dismounting",
+          "Gone",
+          "Running"
+        ],
+        "1": [
+          "Braking",
+          "Dismounting",
+          "Gone",
+          "Running"
+        ]
+      }
+    },
+    {
+      "name": "retry_rearms_all_actors_and_removes_abandoned_bikes",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": 3,
+          "cyclists": [
+            {
+              "animation_ticks": 3,
+              "bicycle_position": {
+                "x": 366.609375,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Braking",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 366.609375,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 13,
+              "bicycle_position": {
+                "x": 1634.796875,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Braking",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 1634.796875,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 3,
+            "x": -117.62104797363281,
+            "y": 430.0
+          },
+          "kid_phase": "Startled",
+          "kid_phase_ticks": 3,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 3,
+          "traffic_cars": [
+            {
+              "animation_ticks": 3,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 2207.737548828125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 11,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": 1663.737548828125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 19,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": 1119.737548828125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 27,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 575.7374877929688,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 35,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": 31.737499237060547,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1492.2498779296875,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 2174,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1100.0,
+          "y": 580.0
+        },
+        "seconds": 51.524383544921875,
+        "stage": "Encounter",
+        "stage_ticks": 3,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 3,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049828.965766
+      }
+    },
+    {
+      "name": "skip_freezes_the_abandoned_evacuation_without_victory",
+      "passed": true
+    },
+    {
+      "name": "full_skip_finishes_without_a_combat_victory",
+      "passed": true
+    },
+    {
+      "name": "restart_restores_everyday_traffic_and_clears_all_debris",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": null,
+          "cyclists": [
+            {
+              "animation_ticks": 3,
+              "bicycle_position": {
+                "x": 367.04998779296875,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Riding",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 367.04998779296875,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 13,
+              "bicycle_position": {
+                "x": 1634.449951171875,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Riding",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 1634.449951171875,
+              "y": 467.0
+            }
+          ],
+          "incident_car": null,
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 3,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 3,
+          "traffic_cars": [
+            {
+              "animation_ticks": 3,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 0,
+              "visible": true,
+              "x": 2208.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 11,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 1,
+              "visible": true,
+              "x": 1664.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 19,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 2,
+              "visible": true,
+              "x": 1120.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 27,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 3,
+              "visible": true,
+              "x": 576.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 35,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 4,
+              "visible": true,
+              "x": 32.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 2299,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 55.11298751831055,
+        "stage": "Encounter",
+        "stage_ticks": 3,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 3,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049832.5543766
+      }
+    },
+    {
+      "name": "recorded_mp4_has_frames_and_preserves_elapsed_time",
+      "passed": true,
+      "codec": "h264",
+      "width": 1280,
+      "height": 720,
+      "frame_rate": "30/1",
+      "frames": 1687,
+      "duration_seconds": 56.234,
+      "telemetry_seconds": 56.24196243286133,
+      "absolute_duration_error": 0.007962432861326363
+    },
+    {
+      "name": "same_binary_and_original_catalog_remain_unchanged",
+      "passed": true,
+      "binary_sha256_before": "1cf1a9a34a85088124596c62eae5691ef97016c53a7f97bc77f84eba69ad0e5a",
+      "binary_sha256_after": "1cf1a9a34a85088124596c62eae5691ef97016c53a7f97bc77f84eba69ad0e5a",
+      "original_catalog_sha256_before": "7c20e508c6014ace0064f8b4a0606d4aed402526acc52df798c563a770e8200d",
+      "original_catalog_sha256_after": "7c20e508c6014ace0064f8b4a0606d4aed402526acc52df798c563a770e8200d"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/evacuation-01-calm.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": null,
+          "cyclists": [
+            {
+              "animation_ticks": 77,
+              "bicycle_position": {
+                "x": 540.9500122070312,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Riding",
+              "phase_ticks": 77,
+              "visible": true,
+              "x": 540.9500122070312,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 87,
+              "bicycle_position": {
+                "x": 1497.550048828125,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Riding",
+              "phase_ticks": 77,
+              "visible": true,
+              "x": 1497.550048828125,
+              "y": 467.0
+            }
+          ],
+          "incident_car": null,
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 77,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 77,
+          "traffic_cars": [
+            {
+              "animation_ticks": 77,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 0,
+              "visible": true,
+              "x": 1912.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 85,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 1,
+              "visible": true,
+              "x": 1368.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 93,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 2,
+              "visible": true,
+              "x": 824.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 101,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 3,
+              "visible": true,
+              "x": 280.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 109,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 4,
+              "visible": true,
+              "x": 2456.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 62,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 2.131648302078247,
+        "stage": "Encounter",
+        "stage_ticks": 77,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 77,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049779.5729337
+      }
+    },
+    {
+      "file": "screenshots/evacuation-02-left-camera.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": null,
+          "cyclists": [
+            {
+              "animation_ticks": 252,
+              "bicycle_position": {
+                "x": 952.2000122070312,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Riding",
+              "phase_ticks": 252,
+              "visible": true,
+              "x": 952.2000122070312,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 262,
+              "bicycle_position": {
+                "x": 1173.800048828125,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Riding",
+              "phase_ticks": 252,
+              "visible": true,
+              "x": 1173.800048828125,
+              "y": 467.0
+            }
+          ],
+          "incident_car": null,
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 252,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 252,
+          "traffic_cars": [
+            {
+              "animation_ticks": 252,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 0,
+              "visible": true,
+              "x": 1212.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 260,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 1,
+              "visible": true,
+              "x": 668.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 268,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 2,
+              "visible": true,
+              "x": 124.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 276,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 3,
+              "visible": true,
+              "x": 2300.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 284,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 4,
+              "visible": true,
+              "x": 1756.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 223,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Left",
+          "hp": 100,
+          "x": 78.75000762939453,
+          "y": 580.0
+        },
+        "seconds": 5.777609825134277,
+        "stage": "Encounter",
+        "stage_ticks": 252,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 252,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049783.2188904
+      }
+    },
+    {
+      "file": "screenshots/evacuation-03-before-EP.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": null,
+          "cyclists": [
+            {
+              "animation_ticks": 456,
+              "bicycle_position": {
+                "x": 1431.5999755859375,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Riding",
+              "phase_ticks": 456,
+              "visible": true,
+              "x": 1431.5999755859375,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 466,
+              "bicycle_position": {
+                "x": 796.4000244140625,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Riding",
+              "phase_ticks": 456,
+              "visible": true,
+              "x": 796.4000244140625,
+              "y": 467.0
+            }
+          ],
+          "incident_car": null,
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 456,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 456,
+          "traffic_cars": [
+            {
+              "animation_ticks": 456,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 0,
+              "visible": true,
+              "x": 396.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 464,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 1,
+              "visible": true,
+              "x": -148.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 472,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 2,
+              "visible": true,
+              "x": 2028.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 480,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 3,
+              "visible": true,
+              "x": 1484.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 488,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 4,
+              "visible": true,
+              "x": 940.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 414,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 967.0,
+          "y": 580.0
+        },
+        "seconds": 10.010900497436523,
+        "stage": "Encounter",
+        "stage_ticks": 456,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 456,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049787.4521868
+      }
+    },
+    {
+      "file": "screenshots/evacuation-04-dismount-paused.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 1,
+              "facing": "Right",
+              "id": 0,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 1,
+              "facing": "Left",
+              "id": 1,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 25,
+          "cyclists": [
+            {
+              "animation_ticks": 514,
+              "bicycle_position": {
+                "x": 1535.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Dismounting",
+              "phase_ticks": 1,
+              "visible": true,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 524,
+              "bicycle_position": {
+                "x": 715.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Dismounting",
+              "phase_ticks": 1,
+              "visible": true,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 25,
+            "x": 193.15789794921875,
+            "y": 430.0
+          },
+          "kid_phase": "Releasing",
+          "kid_phase_ticks": 1,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": 1,
+          "ticks": 514,
+          "traffic_cars": [
+            {
+              "animation_ticks": 514,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 149.7708282470703,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 522,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": 2325.770751953125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 530,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": 1781.7708740234375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 538,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 1237.7708740234375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 546,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": 693.7708129882812,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1432.832275390625,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 516,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": true,
+        "player": {
+          "action": "Block",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1116.29150390625,
+          "y": 580.0
+        },
+        "seconds": 12.74138355255127,
+        "stage": "Encounter",
+        "stage_ticks": 514,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 514,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049790.182699
+      }
+    },
+    {
+      "file": "screenshots/evacuation-05-dismount-resumed.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 21,
+              "facing": "Right",
+              "id": 0,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 21,
+              "facing": "Left",
+              "id": 1,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 45,
+          "cyclists": [
+            {
+              "animation_ticks": 534,
+              "bicycle_position": {
+                "x": 1535.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Dismounting",
+              "phase_ticks": 21,
+              "visible": true,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 544,
+              "bicycle_position": {
+                "x": 715.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Dismounting",
+              "phase_ticks": 21,
+              "visible": true,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 45,
+            "x": 475.6842041015625,
+            "y": 430.0
+          },
+          "kid_phase": "Releasing",
+          "kid_phase_ticks": 21,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": 21,
+          "ticks": 534,
+          "traffic_cars": [
+            {
+              "animation_ticks": 534,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 28.9375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 542,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": 2204.9375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 550,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": 1660.9375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 558,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 1116.9375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 566,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": 572.9375,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1381.164794921875,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 524,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Block",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1116.29150390625,
+          "y": 580.0
+        },
+        "seconds": 13.954495429992676,
+        "stage": "Encounter",
+        "stage_ticks": 534,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 534,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049791.3958209
+      }
+    },
+    {
+      "file": "screenshots/evacuation-06-running-and-falling-bikes.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 53,
+              "facing": "Right",
+              "id": 0,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 53,
+              "facing": "Left",
+              "id": 1,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 77,
+          "cyclists": [
+            {
+              "animation_ticks": 566,
+              "bicycle_position": {
+                "x": 1535.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Running",
+              "phase_ticks": 23,
+              "visible": true,
+              "x": 1699.8333740234375,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 576,
+              "bicycle_position": {
+                "x": 715.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Running",
+              "phase_ticks": 23,
+              "visible": true,
+              "x": 550.1666870117188,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 77,
+            "x": 927.726318359375,
+            "y": 430.0
+          },
+          "kid_phase": "Running",
+          "kid_phase_ticks": 29,
+          "kid_position": {
+            "x": 869.5,
+            "y": 350.0
+          },
+          "kite_release_ticks": 53,
+          "ticks": 566,
+          "traffic_cars": [
+            {
+              "animation_ticks": 566,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": -212.92916870117188,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 574,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": 1963.07080078125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 582,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": 1419.07080078125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 590,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 875.07080078125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 598,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": 331.0708312988281,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Telegraph",
+          "hp": 96,
+          "x": 1313.9970703125,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 540,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Block",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1116.29150390625,
+          "y": 580.0
+        },
+        "seconds": 15.347630500793457,
+        "stage": "Encounter",
+        "stage_ticks": 566,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 566,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049792.7889223
+      }
+    },
+    {
+      "file": "screenshots/evacuation-07-car-impact.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 108,
+              "facing": "Right",
+              "id": 0,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 108,
+              "facing": "Left",
+              "id": 1,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 132,
+          "cyclists": [
+            {
+              "animation_ticks": 621,
+              "bicycle_position": {
+                "x": 1535.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Running",
+              "phase_ticks": 78,
+              "visible": true,
+              "x": 2094.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 631,
+              "bicycle_position": {
+                "x": 715.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Running",
+              "phase_ticks": 78,
+              "visible": true,
+              "x": 156.0,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Crashed",
+            "phase_ticks": 20,
+            "x": 1250.0,
+            "y": 430.0
+          },
+          "kid_phase": "Running",
+          "kid_phase_ticks": 84,
+          "kid_position": {
+            "x": 622.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": 108,
+          "ticks": 621,
+          "traffic_cars": [
+            {
+              "animation_ticks": 621,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 629,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": 1412.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 637,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": 868.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 645,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 324.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 653,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": -220.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Recovery",
+          "hp": 96,
+          "x": 1191.99755859375,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 576,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Block",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1114.9442138671875,
+          "y": 580.0
+        },
+        "seconds": 17.07553482055664,
+        "stage": "Encounter",
+        "stage_ticks": 621,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 621,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049794.5168269
+      }
+    },
+    {
+      "file": "screenshots/evacuation-08-empty-street.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 355,
+              "facing": "Right",
+              "id": 0,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 355,
+              "facing": "Left",
+              "id": 1,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 379,
+          "cyclists": [
+            {
+              "animation_ticks": 868,
+              "bicycle_position": {
+                "x": 1535.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Gone",
+              "phase_ticks": 209,
+              "visible": false,
+              "x": 2360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 878,
+              "bicycle_position": {
+                "x": 715.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Gone",
+              "phase_ticks": 202,
+              "visible": false,
+              "x": -160.0,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Crashed",
+            "phase_ticks": 267,
+            "x": 1250.0,
+            "y": 430.0
+          },
+          "kid_phase": "Gone",
+          "kid_phase_ticks": 75,
+          "kid_position": {
+            "x": -152.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": 355,
+          "ticks": 868,
+          "traffic_cars": [
+            {
+              "animation_ticks": 868,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 876,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 884,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 892,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 900,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Lunge",
+          "hp": 96,
+          "x": 1002.4530029296875,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 777,
+        "hit": {
+          "age": 11,
+          "blocked": true,
+          "target": "Player"
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Block",
+          "facing": "Right",
+          "hp": 100,
+          "x": 934.4530029296875,
+          "y": 580.0
+        },
+        "seconds": 22.076873779296875,
+        "stage": "Encounter",
+        "stage_ticks": 868,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 868,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049799.5182185
+      }
+    },
+    {
+      "file": "screenshots/evacuation-09-empty-right-camera.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 1373,
+              "facing": "Right",
+              "id": 0,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 1373,
+              "facing": "Left",
+              "id": 1,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 1397,
+          "cyclists": [
+            {
+              "animation_ticks": 1886,
+              "bicycle_position": {
+                "x": 1535.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Gone",
+              "phase_ticks": 1227,
+              "visible": false,
+              "x": 2360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 1896,
+              "bicycle_position": {
+                "x": 715.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Gone",
+              "phase_ticks": 1220,
+              "visible": false,
+              "x": -160.0,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Crashed",
+            "phase_ticks": 1285,
+            "x": 1250.0,
+            "y": 430.0
+          },
+          "kid_phase": "Gone",
+          "kid_phase_ticks": 1093,
+          "kid_position": {
+            "x": -152.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": 1373,
+          "ticks": 1886,
+          "traffic_cars": [
+            {
+              "animation_ticks": 1886,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1894,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1902,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1910,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1918,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Telegraph",
+          "hp": 96,
+          "x": 1502.361328125,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1632,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Block",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1434.361328125,
+          "y": 580.0
+        },
+        "seconds": 39.8778190612793,
+        "stage": "Encounter",
+        "stage_ticks": 1886,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 1886,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049817.3192112
+      }
+    },
+    {
+      "file": "screenshots/evacuation-10-persistent-empty-street.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 1390,
+              "facing": "Right",
+              "id": 0,
+              "x": 1535.0,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 1390,
+              "facing": "Left",
+              "id": 1,
+              "x": 715.0,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 1414,
+          "cyclists": [
+            {
+              "animation_ticks": 1903,
+              "bicycle_position": {
+                "x": 1535.0,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Gone",
+              "phase_ticks": 1244,
+              "visible": false,
+              "x": 2360.0,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 1913,
+              "bicycle_position": {
+                "x": 715.0,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Gone",
+              "phase_ticks": 1237,
+              "visible": false,
+              "x": -160.0,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Crashed",
+            "phase_ticks": 1302,
+            "x": 1250.0,
+            "y": 430.0
+          },
+          "kid_phase": "Gone",
+          "kid_phase_ticks": 1110,
+          "kid_position": {
+            "x": -152.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": 1390,
+          "ticks": 1903,
+          "traffic_cars": [
+            {
+              "animation_ticks": 1903,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1911,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1919,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1927,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 1935,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": false,
+              "x": -260.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Telegraph",
+          "hp": 96,
+          "x": 1502.361572265625,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 1636,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Block",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1434.361572265625,
+          "y": 580.0
+        },
+        "seconds": 41.01713943481445,
+        "stage": "Encounter",
+        "stage_ticks": 1903,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 1903,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049818.458472
+      }
+    },
+    {
+      "file": "screenshots/evacuation-11-retry.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": 20,
+          "cyclists": [
+            {
+              "animation_ticks": 20,
+              "bicycle_position": {
+                "x": 387.4166564941406,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Braking",
+              "phase_ticks": 20,
+              "visible": true,
+              "x": 387.4166564941406,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 30,
+              "bicycle_position": {
+                "x": 1618.4166259765625,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Braking",
+              "phase_ticks": 20,
+              "visible": true,
+              "x": 1618.4166259765625,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 20,
+            "x": 122.52630615234375,
+            "y": 430.0
+          },
+          "kid_phase": "Startled",
+          "kid_phase_ticks": 20,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 20,
+          "traffic_cars": [
+            {
+              "animation_ticks": 20,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 2128.333251953125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 28,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": 1584.3333740234375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 36,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": 1040.3333740234375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 44,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 496.3333435058594,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 52,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": -47.666664123535156,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 1448.33251953125,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "frame": 2178,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Block",
+          "facing": "Right",
+          "hp": 100,
+          "x": 1100.0,
+          "y": 580.0
+        },
+        "seconds": 52.65068817138672,
+        "stage": "Encounter",
+        "stage_ticks": 20,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 20,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049830.0920382
+      }
+    },
+    {
+      "file": "screenshots/evacuation-12-restarted-calm.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": null,
+          "cyclists": [
+            {
+              "animation_ticks": 22,
+              "bicycle_position": {
+                "x": 411.70001220703125,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Riding",
+              "phase_ticks": 22,
+              "visible": true,
+              "x": 411.70001220703125,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 32,
+              "bicycle_position": {
+                "x": 1599.300048828125,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Riding",
+              "phase_ticks": 22,
+              "visible": true,
+              "x": 1599.300048828125,
+              "y": 467.0
+            }
+          ],
+          "incident_car": null,
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 22,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 22,
+          "traffic_cars": [
+            {
+              "animation_ticks": 22,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 0,
+              "visible": true,
+              "x": 2132.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 30,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 1,
+              "visible": true,
+              "x": 1588.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 38,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 2,
+              "visible": true,
+              "x": 1044.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 46,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 3,
+              "visible": true,
+              "x": 500.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 54,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 4,
+              "visible": true,
+              "x": -44.0,
+              "y": 393.0
+            }
+          ]
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 1500.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "frame": 2304,
+        "hit": null,
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 340.0,
+          "y": 580.0
+        },
+        "seconds": 56.24196243286133,
+        "stage": "Encounter",
+        "stage_ticks": 22,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 22,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789049833.6833544
+      }
+    }
+  ],
+  "telemetry_records": 2305,
+  "video": "adventure-silent.mp4",
+  "external_text_catalog": "texts-under-test.json",
+  "x11_errors": [],
+  "review": "collective street evacuation and persistent abandoned objects",
+  "native_audio_enabled": true,
+  "audio_capture": "External recorder required; the built-in MP4 contains video only."
+}

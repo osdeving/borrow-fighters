@@ -1,0 +1,121 @@
+{
+  "image": "street-life.png",
+  "image_size": [
+    1536,
+    1024
+  ],
+  "rects": [
+    [
+      35,
+      10,
+      352,
+      347
+    ],
+    [
+      405,
+      10,
+      352,
+      347
+    ],
+    [
+      780,
+      9,
+      354,
+      349
+    ],
+    [
+      1155,
+      9,
+      357,
+      349
+    ],
+    [
+      96,
+      367,
+      188,
+      327
+    ],
+    [
+      478,
+      372,
+      225,
+      321
+    ],
+    [
+      875,
+      381,
+      183,
+      314
+    ],
+    [
+      1232,
+      376,
+      208,
+      315
+    ],
+    [
+      66,
+      700,
+      299,
+      279
+    ],
+    [
+      495,
+      700,
+      157,
+      291
+    ],
+    [
+      819,
+      703,
+      284,
+      275
+    ],
+    [
+      1246,
+      700,
+      163,
+      292
+    ]
+  ],
+  "labels": [
+    "cyclist-pedal-0",
+    "cyclist-pedal-1",
+    "cyclist-pedal-2",
+    "cyclist-pedal-3",
+    "boy-kite-hold",
+    "boy-kite-arm-out",
+    "boy-startled-right",
+    "boy-release-line",
+    "boy-run-left-0",
+    "boy-run-left-1",
+    "boy-run-left-2",
+    "boy-run-left-3"
+  ],
+  "measurement": {
+    "alpha_threshold_exclusive": 3,
+    "padding_pixels": 2,
+    "image_pixels_unchanged": true,
+    "inspection_column_edges": [
+      0,
+      395,
+      768,
+      1144,
+      1536
+    ],
+    "inspection_row_edges": [
+      0,
+      360,
+      700,
+      1024
+    ]
+  },
+  "source_sha256": "4173b2e30a7da6ce2aa701edcf463ad0d229c819e17dac77e754d2e160a04518",
+  "alpha_counts": {
+    "zero": 1052260,
+    "intermediate": 520604,
+    "opaque": 0
+  },
+  "generated_with": "built-in image_gen",
+  "selected_prompt": "prompts/street-life.txt"
+}

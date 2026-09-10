@@ -7,31 +7,32 @@
 use crate::{
     adventure::{
         combat::{Action, CombatInput, Outcome},
-        engine::{assets::Assets, audio::AdventureAudio, opening, render},
+        engine::{
+            assets::Assets,
+            audio::AdventureAudio,
+            capture::{Recorder, export},
+            opening, render,
+        },
         story::{Stage, Story},
         text::TextCatalog,
     },
     runtime_paths,
 };
 use raylib::prelude::*;
-use std::{
-    error::Error,
-    fs,
-    io::Write,
-    path::{Path, PathBuf},
-    process::{Child, ChildStdin, Command, Stdio},
-};
+use std::{error::Error, fs, io::Write, path::PathBuf};
+
+pub use super::chapter_app::{CampaignExit, run_in_window as run_campaign_in_window};
 
 /// Launch configuration local to the adventure executable.
-#[derive(Default)]
+#[derive(Clone, Default)]
 pub struct Options {
-    review: Option<PathBuf>,
-    capture: Option<PathBuf>,
-    start: Option<String>,
-    texts: Option<PathBuf>,
-    max_frames: Option<u32>,
-    muted: bool,
-    hidden: bool,
+    pub(super) review: Option<PathBuf>,
+    pub(super) capture: Option<PathBuf>,
+    pub(super) start: Option<String>,
+    pub(super) texts: Option<PathBuf>,
+    pub(super) max_frames: Option<u32>,
+    pub(super) muted: bool,
+    pub(super) hidden: bool,
 }
 
 impl Options {
@@ -61,8 +62,10 @@ impl Options {
                 "--start" => {
                     let stage = args
                         .next()
-                        .ok_or("--start requires ada, morning, encounter or opening")?;
-                    if !["ada", "morning", "encounter", "opening"].contains(&stage.as_str()) {
+                        .ok_or("--start requires ada, morning, encounter, opening or chapter")?;
+                    if !["ada", "morning", "encounter", "opening", "chapter"]
+                        .contains(&stage.as_str())
+                    {
                         return Err(format!("unknown start scene: {stage}").into());
                     }
                     options.start = Some(stage);
@@ -78,7 +81,7 @@ impl Options {
                 "--hidden" => options.hidden = true,
                 "--help" | "-h" => {
                     println!(
-                        "Borrow — primeiras linhas\n\ncargo run --no-default-features --features adventure --bin borrow-adventure\n\n--start ada|morning|encounter|opening  Developer scene entry\n--review DIR                 Deterministic renderer review + MP4\n--capture DIR                Record actual play + frame snapshots\n--texts PATH                 Editable UTF-8 JSON catalog (F5 reload)\n--frames N                   Exit after N rendered frames\n--mute                       Disable audio device\n--hidden                     Hidden window for isolated review\n\nA/D/arrows move; Space/W jump; J/F attack; K/H strong; Q/L guard.\nEnter/RB advances one segment; Backspace/View skips the entire opening.\nSkipping all opens the menu in borrow-story or the local ending in borrow-adventure.\nEsc/Start pauses; R retries a lost encounter; F3 shows collision; F12 saves a screenshot."
+                        "Borrow — primeiras linhas\n\ncargo run --no-default-features --features adventure --bin borrow-adventure\n\n--start ada|morning|encounter|opening|chapter  Developer scene entry\n--review DIR                 Deterministic renderer review + MP4\n--capture DIR                Record actual play + frame snapshots\n--texts PATH                 Editable UTF-8 JSON catalog\n--frames N                   Exit after N rendered frames\n--mute                       Disable audio device\n--hidden                     Hidden window for isolated review\n\nA/D/arrows move; Space/W jump; J/F attack; K/H strong; Q/L guard.\nChapter: E/A interacts; Space/B jumps; Enter/RB advances dialogue.\nOpening: Enter/RB advances one segment; Backspace/View skips to the menu.\nEsc/Start pauses; R retries a lost encounter; F3 shows collision; F12 saves a screenshot."
                     );
                     return Ok(None);
                 }
@@ -98,6 +101,32 @@ impl Options {
     pub fn hidden_window(&self) -> bool {
         self.hidden || self.review.is_some()
     }
+
+    /// Explicit developer entry that resumes a chapter checkpoint or starts its intro.
+    pub fn chapter() -> Self {
+        Self {
+            start: Some("chapter".into()),
+            ..Self::default()
+        }
+    }
+
+    /// Explicitly replays Ada and Rust even when the profile has already seen them.
+    pub fn prologue() -> Self {
+        Self {
+            start: Some("ada".into()),
+            ..Self::default()
+        }
+    }
+
+    /// Distinguishes a direct chapter CLI from the hosted campaign submenu.
+    pub fn is_chapter(&self) -> bool {
+        self.start.as_deref() == Some("chapter")
+    }
+}
+
+/// Reads only the startup decision, keeping save details behind the adventure API.
+pub fn prologue_seen() -> Result<bool, Box<dyn Error>> {
+    Ok(super::chapter_store::load(&super::chapter_store::path())?.prologue_seen)
 }
 
 /// Why a hosted session returned control, without exposing gameplay state.
@@ -118,6 +147,25 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
     let Some(options) = Options::parse(args)? else {
         return Ok(());
     };
+    if options.is_chapter() {
+        let mut builder = raylib::init();
+        builder
+            .size(render::WIDTH, render::HEIGHT)
+            .title("Borrow Fighters — Depois do silêncio")
+            .msaa_4x()
+            .resizable();
+        if options.hidden_window() {
+            builder.hidden();
+        }
+        let (mut window, thread) = builder.build();
+        window.set_exit_key(None);
+        return match run_campaign_in_window(&mut window, &thread, options)? {
+            CampaignExit::ReplayPrologue => {
+                run_in_window(&mut window, &thread, Options::prologue()).map(|_| ())
+            }
+            _ => Ok(()),
+        };
+    }
     let text = TextCatalog::load(
         options
             .texts
@@ -149,6 +197,14 @@ pub fn run_in_window(
     thread: &RaylibThread,
     options: Options,
 ) -> Result<SessionExit, Box<dyn Error>> {
+    if options.is_chapter() {
+        return match run_campaign_in_window(rl, thread, options)? {
+            CampaignExit::Menu => Ok(SessionExit::Completed),
+            CampaignExit::Closed => Ok(SessionExit::Closed),
+            CampaignExit::FrameLimit => Ok(SessionExit::FrameLimit),
+            CampaignExit::ReplayPrologue => run_in_window(rl, thread, Options::prologue()),
+        };
+    }
     let text = TextCatalog::load(
         options
             .texts
@@ -217,7 +273,9 @@ fn run_session(
             now.duration_since(previous_frame_time).as_secs_f32()
         };
         previous_frame_time = now;
-        let mut suppress = false;
+        // A host menu confirmation still belongs to the preceding frame.
+        let mut suppress = frame == 0;
+        let mut audio_synced_after_skip = false;
         let complete_at_start = story.stage == Stage::Complete;
         // Drain every frame: a press queued during Ada must not dismiss the
         // final prompt minutes later. Held keys are not fresh press edges.
@@ -245,7 +303,7 @@ fn run_session(
         .any(|button| rl.is_mouse_button_pressed(button));
         let continue_pressed =
             complete_at_start && (any_key_pressed || any_pad_pressed || any_mouse_pressed);
-        if !reviewing {
+        if !reviewing && frame > 0 {
             if rl.is_key_pressed(KeyboardKey::KEY_F5) {
                 let result = assets.text.reload();
                 let ok = result.is_ok();
@@ -324,6 +382,7 @@ fn run_session(
                 {
                     story.skip_segment();
                     audio.sync_after_skip(&story);
+                    audio_synced_after_skip = true;
                     reveal_text = false;
                     suppress = true;
                 }
@@ -377,15 +436,61 @@ fn run_session(
         capture_seconds += if reviewing { 1.0 / 60.0 } else { frame_time };
         if frame == 0 || story.stage != previous_stage {
             reveal_text = false;
-            events.push(serde_json::json!({"frame":frame,"seconds":capture_seconds,"stage":format!("{:?}",story.stage),"player_hp":story.combat.player.hp,"enemy_hp":story.combat.enemy.hp}));
+            events.push(serde_json::json!({"frame":frame,"seconds":capture_seconds,"wall_seconds":std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).ok().map(|time| time.as_secs_f64()),"stage":format!("{:?}",story.stage),"player_hp":story.combat.player.hp,"enemy_hp":story.combat.enemy.hp}));
             previous_stage = story.stage;
         }
         if let Some(trace) = trace.as_mut() {
             let c = &story.combat;
+            let arrival_camera = if story.arrival_active() {
+                crate::adventure::arrival::ArrivalShot::at(story.stage_ticks)
+            } else {
+                crate::adventure::arrival::ArrivalShot::settled()
+            };
+            let neighborhood = crate::adventure::neighborhood::Neighborhood::sample(&story.ambient);
+            let neighbors = serde_json::json!({
+                "residents": neighborhood.residents.map(|actor|serde_json::json!({
+                    "id":actor.id,"x":actor.position.x,"y":actor.position.y,
+                    "phase":format!("{:?}",actor.phase),"phase_ticks":actor.phase_ticks,
+                    "visible":actor.visible,"facing":format!("{:?}",actor.facing)
+                })),
+                "dog":{"x":neighborhood.dog.position.x,"y":neighborhood.dog.position.y,
+                    "phase":format!("{:?}",neighborhood.dog.phase),"phase_ticks":neighborhood.dog.phase_ticks,
+                    "visible":neighborhood.dog.visible,"facing":format!("{:?}",neighborhood.dog.facing)},
+                "shutter":{"phase":format!("{:?}",neighborhood.shutter.phase),
+                    "phase_ticks":neighborhood.shutter.phase_ticks,"progress":neighborhood.shutter.progress}
+            });
+            let ambience = serde_json::json!({
+                "ticks": story.ambient.ticks(),
+                "kid_phase": format!("{:?}", story.ambient.kid_phase()),
+                "kid_phase_ticks": story.ambient.kid_phase_ticks(),
+                "kid_position": {"x": story.ambient.kid_position().x, "y": story.ambient.kid_position().y},
+                "kite_release_ticks": story.ambient.kite_release_ticks(),
+                "cyclists": story.ambient.cyclists().map(|actor| serde_json::json!({
+                    "x": actor.position.x, "y": actor.position.y,
+                    "facing": format!("{:?}", actor.facing), "animation_ticks": actor.animation_ticks,
+                    "id": actor.id, "phase": format!("{:?}", actor.phase),
+                    "phase_ticks": actor.phase_ticks, "visible": actor.visible,
+                    "bicycle_position": {"x":actor.bicycle_position.x,"y":actor.bicycle_position.y}
+                })),
+                "abandoned_bicycles": story.ambient.abandoned_bicycles().map(|bicycle| bicycle.map(|bike| serde_json::json!({
+                    "id": bike.id, "x": bike.position.x, "y": bike.position.y,
+                    "facing": format!("{:?}",bike.facing), "drop_ticks": bike.drop_ticks
+                }))),
+                "accident_ticks": story.ambient.accident_ticks(),
+                "traffic_cars": story.ambient.traffic_cars().map(|car| serde_json::json!({
+                    "x": car.position.x, "y": car.position.y, "style": car.style,
+                    "facing": format!("{:?}", car.facing), "animation_ticks": car.animation_ticks,
+                    "visible": car.visible, "fleeing": car.fleeing
+                })),
+                "incident_car": story.ambient.incident_car().map(|car| serde_json::json!({
+                    "x": car.position.x, "y": car.position.y,
+                    "phase": format!("{:?}", car.phase), "phase_ticks": car.phase_ticks
+                }))
+            });
             writeln!(
                 trace,
                 "{}",
-                serde_json::json!({"frame":frame,"seconds":capture_seconds,"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"waiting_for_continue":return_on_complete && complete_at_start && !completion.accepted,"continue_accepted":completion.accepted,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
+                serde_json::json!({"frame":frame,"seconds":capture_seconds,"wall_seconds":std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).ok().map(|time| time.as_secs_f64()),"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"waiting_for_continue":return_on_complete && complete_at_start && !completion.accepted,"continue_accepted":completion.accepted,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"ambience":ambience,"neighborhood":neighbors,"arrival_active":story.arrival_active(),"arrival_camera":{"x":arrival_camera.target.x,"y":arrival_camera.target.y,"zoom":arrival_camera.zoom},"audio_synced_after_skip":audio_synced_after_skip,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
             )?;
         }
         {
@@ -501,7 +606,17 @@ fn run_session(
             );
         }
     }
+    if !reviewing && records_prologue(exit) {
+        super::chapter_store::remember_prologue(
+            story.combat.outcome == Outcome::Victory,
+            story.ambient.reaction_origin(),
+        )?;
+    }
     Ok(exit)
+}
+
+fn records_prologue(exit: SessionExit) -> bool {
+    matches!(exit, SessionExit::Completed | SessionExit::Skipped)
 }
 
 #[derive(Default)]
@@ -634,7 +749,15 @@ impl Review {
             Stage::Encounter if story.combat.enemy.action == Action::Telegraph => {
                 "encounter-warning.png".into()
             }
-            Stage::Encounter if story.stage_ticks == 1 => "encounter-explore.png".into(),
+            Stage::Encounter if story.arrival_active() && story.stage_ticks == 1 => {
+                "encounter-arrival-kite.png".into()
+            }
+            Stage::Encounter if story.arrival_active() && story.stage_ticks == 180 => {
+                "encounter-arrival-descent.png".into()
+            }
+            Stage::Encounter if story.stage_ticks == crate::adventure::arrival::ARRIVAL_TICKS => {
+                "encounter-explore.png".into()
+            }
             Stage::Aftermath if story.combat.player.action == Action::Remorse => {
                 format!("aftermath-{}.png", story.combat.player.action_ticks / 60)
             }
@@ -648,108 +771,6 @@ impl Review {
             .insert(candidate.clone())
             .then_some(candidate)
     }
-}
-
-struct Recorder {
-    directory: PathBuf,
-    process: Child,
-    stdin: Option<ChildStdin>,
-    pixels: Vec<u8>,
-}
-
-impl Recorder {
-    fn new(directory: &Path) -> Result<Self, Box<dyn Error>> {
-        fs::create_dir_all(directory)?;
-        let mut process = Command::new("ffmpeg")
-            .args([
-                "-y",
-                "-loglevel",
-                "error",
-                "-f",
-                "rawvideo",
-                "-pixel_format",
-                "rgba",
-                "-video_size",
-                "1280x720",
-                "-framerate",
-                "30",
-                "-i",
-                "-",
-                "-vf",
-                "vflip",
-                "-c:v",
-                "libx264",
-                "-preset",
-                "veryfast",
-                "-crf",
-                "22",
-                "-pix_fmt",
-                "yuv420p",
-            ])
-            .arg(directory.join("adventure-silent.mp4"))
-            .stdin(Stdio::piped())
-            .stdout(Stdio::null())
-            .spawn()?;
-        let stdin = process.stdin.take();
-        Ok(Self {
-            directory: directory.into(),
-            process,
-            stdin,
-            pixels: Vec::with_capacity((render::WIDTH * render::HEIGHT * 4) as usize),
-        })
-    }
-    fn frame(&mut self, target: &RenderTexture2D) -> Result<(), Box<dyn Error>> {
-        self.frames(target, 1)
-    }
-    fn frames(&mut self, target: &RenderTexture2D, copies: usize) -> Result<(), Box<dyn Error>> {
-        let image = target.texture().load_image()?;
-        let colors = image.get_image_data();
-        let bytes = rgba_bytes(&colors);
-        if bytes.len() != (render::WIDTH * render::HEIGHT * 4) as usize {
-            return Err("unexpected framebuffer byte count".into());
-        }
-        self.pixels.clear();
-        self.pixels.extend_from_slice(bytes);
-        for _ in 0..copies {
-            self.stdin
-                .as_mut()
-                .ok_or("recording input closed")?
-                .write_all(&self.pixels)?;
-        }
-        Ok(())
-    }
-    fn finish(mut self) -> Result<(), Box<dyn Error>> {
-        self.stdin.take();
-        if !self.process.wait()?.success() {
-            return Err("FFmpeg failed while recording adventure".into());
-        }
-        Ok(())
-    }
-}
-
-fn rgba_bytes(colors: &[raylib::ffi::Color]) -> &[u8] {
-    const {
-        assert!(std::mem::size_of::<raylib::ffi::Color>() == 4);
-    }
-    const {
-        assert!(std::mem::align_of::<raylib::ffi::Color>() == 1);
-    }
-    // SAFETY: repr(C) Color is four initialized u8 channels without padding.
-    // The argument is an actual slice, not Raylib's owning wrapper. Its byte
-    // view remains read-only and cannot outlive that slice's allocation.
-    unsafe {
-        std::slice::from_raw_parts(colors.as_ptr().cast::<u8>(), std::mem::size_of_val(colors))
-    }
-}
-
-fn export(target: &RenderTexture2D, path: &Path) -> Result<(), Box<dyn Error>> {
-    let mut image = target.texture().load_image()?;
-    image.flip_vertical();
-    image.export_image(&path.to_string_lossy());
-    if !path.is_file() {
-        return Err(format!("could not export {}", path.display()).into());
-    }
-    Ok(())
 }
 
 #[cfg(test)]
@@ -835,26 +856,6 @@ mod tests {
     }
 
     #[test]
-    fn encoder_receives_all_rgba_pixels_in_channel_order() {
-        let pixels = [
-            raylib::ffi::Color {
-                r: 1,
-                g: 2,
-                b: 3,
-                a: 4,
-            },
-            raylib::ffi::Color {
-                r: 5,
-                g: 6,
-                b: 7,
-                a: 8,
-            },
-        ];
-        assert_eq!(rgba_bytes(&pixels), &[1, 2, 3, 4, 5, 6, 7, 8]);
-        assert!(rgba_bytes(&[]).is_empty());
-    }
-
-    #[test]
     fn cli_rejects_invalid_or_ambiguous_capture_requests() {
         for args in [
             vec!["game", "--start", "fight"],
@@ -864,6 +865,52 @@ mod tests {
         ] {
             assert!(Options::parse(args.into_iter().map(str::to_owned)).is_err());
         }
+    }
+
+    #[test]
+    fn chapter_entry_preserves_capture_flags_and_does_not_replace_the_campaign_menu() {
+        let options = Options::parse(
+            [
+                "game",
+                "--start",
+                "chapter",
+                "--capture",
+                "chapter-capture",
+                "--frames",
+                "120",
+                "--mute",
+                "--hidden",
+            ]
+            .map(str::to_owned),
+        )
+        .unwrap()
+        .unwrap();
+        assert!(options.is_chapter());
+        assert_eq!(options.capture, Some(PathBuf::from("chapter-capture")));
+        assert_eq!(options.max_frames, Some(120));
+        assert!(options.muted && options.hidden_window());
+        assert!(
+            !Options::default().is_chapter(),
+            "a normal campaign request must open its submenu"
+        );
+        assert!(Options::chapter().is_chapter());
+        assert_eq!(Options::prologue().start.as_deref(), Some("ada"));
+    }
+
+    #[test]
+    fn only_finished_or_explicitly_skipped_prologues_update_the_profile() {
+        assert!(records_prologue(SessionExit::Completed));
+        assert!(records_prologue(SessionExit::Skipped));
+        assert!(!records_prologue(SessionExit::Closed));
+        assert!(!records_prologue(SessionExit::FrameLimit));
+        let mut story = Story::new();
+        story.advance_scene();
+        story.advance_scene();
+        story.skip_segment(); // Settle the arrival.
+        story.skip_segment(); // Skip the encounter, preserving its real outcome.
+        assert_eq!(story.stage, Stage::Opening);
+        assert_eq!(story.combat.outcome, Outcome::Ongoing);
+        assert_eq!(story.ambient.reaction_origin(), None);
     }
 
     #[test]

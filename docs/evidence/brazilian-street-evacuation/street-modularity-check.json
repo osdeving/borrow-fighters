@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "method": "temporary copy of real adventure runtime assets/catalog/scene; only vehicle.hatch frame.image changed",
+  "replacement": "street/replacements/hatch-new.png",
+  "replacement_sha256": "cd00c1af32f8a2e2e7d98221c98680b12a2247eab9fa39640ed8224eca4cea7c",
+  "png_pixels_and_bytes_unchanged": true,
+  "source_anchor_wheels_unchanged": true,
+  "scene_bytes_unchanged": true,
+  "reused_piece": "prop.corner",
+  "instance_ids": [
+    "bar_corner",
+    "neighbour_corner"
+  ],
+  "positions": [
+    [
+      869,
+      355
+    ],
+    [
+      385,
+      355
+    ]
+  ],
+  "scales": [
+    1,
+    0.65
+  ],
+  "collector_includes_replacement": true,
+  "shared_prop_png_collected_once": true,
+  "asset_count_before": 47,
+  "asset_count_after": 48
+}
