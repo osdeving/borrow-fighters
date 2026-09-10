@@ -1,0 +1,633 @@
+//! Composes Ada's illustrated awakening, Rust's morning and the playable encounter.
+//!
+//! System: Adventure renderer. It reads domain snapshots, adds visual motion and
+//! draws its own interface; drawing never changes contact or story outcomes.
+
+use super::assets::Assets;
+use crate::adventure::{
+    combat::{Action, Actor, FLOOR_Y, Facing, Outcome},
+    story::{PrologueBeat, Stage, Story},
+};
+use raylib::prelude::*;
+
+/// Logical width shared by the adventure's renderer and letterboxed window.
+pub const WIDTH: i32 = 1280;
+/// Logical height; resizing changes presentation only.
+pub const HEIGHT: i32 = 720;
+const INK: Color = Color::new(16, 23, 28, 255);
+const PAPER: Color = Color::new(247, 235, 213, 255);
+const GOLD: Color = Color::new(232, 177, 92, 255);
+const MINT: Color = Color::new(125, 218, 190, 255);
+
+/// Draws a complete frame at the logical resolution.
+pub fn draw(d: &mut impl RaylibDraw, story: &Story, assets: &Assets, paused: bool, debug: bool) {
+    d.clear_background(INK);
+    match story.stage {
+        Stage::AdaPrologue => ada(d, story, assets),
+        Stage::RustMorning => morning(d, story, assets),
+        Stage::Encounter | Stage::Aftermath | Stage::Complete => encounter(d, story, assets, debug),
+    }
+    if story.stage == Stage::Complete {
+        ending(d, assets);
+    }
+    if story.combat.outcome == Outcome::Defeat {
+        defeat(d, assets);
+    }
+    if paused {
+        pause(d, assets);
+    }
+}
+
+fn ada(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
+    let beat = story
+        .prologue_beat()
+        .unwrap_or(PrologueBeat::AdaOrdinaryLife);
+    let index = PrologueBeat::ALL
+        .iter()
+        .position(|b| *b == beat)
+        .unwrap_or(0);
+    let t = story.beat_ticks() as f32 / 60.0;
+    let duration = beat.duration_ticks() as f32 / 60.0;
+    let source = cell(&a.ada, 3, 2, index);
+    cinematic_panel(d, &a.ada, source, t / duration, Color::WHITE);
+    if index > 0 && t < 0.65 {
+        cinematic_panel(
+            d,
+            &a.ada,
+            cell(&a.ada, 3, 2, index - 1),
+            1.0,
+            alpha(Color::WHITE, 1.0 - t / 0.65),
+        );
+    }
+    if (2..=4).contains(&index) {
+        for i in 0..26 {
+            let f = i as f32;
+            let x = 710.0 + (f * 19.13 + t * 0.26).sin() * 290.0;
+            let y = 340.0 + (f * 7.7 - t * 0.32).cos() * 230.0;
+            let pulse = ((t * 1.7 + f).sin() + 1.0) * 0.35;
+            d.draw_circle_v(Vector2::new(x, y), 1.5 + pulse, alpha(MINT, pulse));
+        }
+    }
+    d.draw_rectangle_gradient_v(0, 460, WIDTH, 260, Color::BLANK, alpha(INK, 0.97));
+    d.draw_rectangle(0, 0, WIDTH, 44, alpha(INK, 0.9));
+    text(d, a, "BORROW  /  ORIGENS", 42.0, 13.0, 17.0, GOLD);
+    let subtitle = match beat {
+        PrologueBeat::AdaOrdinaryLife => "Antes de tudo mudar, havia uma mulher e suas perguntas.",
+        PrologueBeat::StrangeMessage => "Naquela noite, a resposta não estava nas instruções.",
+        PrologueBeat::FollowingTheSignal => "Ada seguiu a ligação entre os símbolos.",
+        PrologueBeat::AssemblyAwakens => "E alguma coisa atravessou.",
+        PrologueBeat::AfterTheContact => "O silêncio voltou. Nada era como antes.",
+        PrologueBeat::LongYears => "",
+    };
+    if beat == PrologueBeat::StrangeMessage {
+        let opacity = (t / 0.7).min(1.0);
+        d.draw_rectangle_rounded(
+            Rectangle::new(685.0, 216.0, 545.0, 243.0),
+            0.04,
+            8,
+            alpha(INK, opacity * 0.94),
+        );
+        d.draw_rectangle(706, 238, 3, 22, alpha(MINT, opacity));
+        text(
+            d,
+            a,
+            "SEM REMETENTE",
+            722.0,
+            238.0,
+            17.0,
+            alpha(GOLD, opacity),
+        );
+        let message =
+            "> Ada, você consegue me ouvir?\n\n> Há algo entre uma linha e outra.\n> Continue.";
+        type_text(
+            d,
+            a,
+            message,
+            ((t - 0.6).max(0.0) * 23.0) as usize,
+            Vector2::new(710.0, 286.0),
+            23.0,
+            MINT,
+        );
+        if (t * 2.0) as i32 % 2 == 0 {
+            text(d, a, "_", 712.0, 417.0, 24.0, MINT);
+        }
+    }
+    if beat == PrologueBeat::LongYears {
+        d.draw_rectangle(0, 44, WIDTH, HEIGHT - 44, alpha(INK, (t / 1.0).min(0.9)));
+        heading(d, a, "Muito tempo depois", 365.0, 288.0, 46.0, PAPER);
+        text(d, a, "Em uma manhã qualquer.", 492.0, 353.0, 25.0, GOLD);
+    } else {
+        text(d, a, subtitle, 70.0, 607.0, 28.0, PAPER);
+    }
+    footer(d, a, "Enter / A  pular cena     Esc / Start  pausar");
+    for i in 0..6 {
+        d.draw_rectangle(
+            1080 + i * 23,
+            26,
+            16,
+            3,
+            if i as usize <= index {
+                GOLD
+            } else {
+                alpha(PAPER, 0.25)
+            },
+        );
+    }
+}
+
+fn morning(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
+    let t = story.stage_ticks as f32 / 60.0;
+    background(d, &a.environments, 0, 0.0, 1.0);
+    for i in 0..26 {
+        let f = i as f32;
+        let x = 720.0 + (f * 18.7).sin() * 270.0 + t * 3.0;
+        let y = 80.0 + (f * 47.0 + t * 11.0) % 440.0;
+        d.draw_circle_v(Vector2::new(x, y), 1.7, alpha(GOLD, 0.3));
+    }
+    let index = match story.stage_ticks {
+        0..=149 => 0,
+        150..=224 => 1,
+        225..=289 => 2,
+        290..=354 => 3,
+        355..=424 => 4,
+        425..=499 => 5,
+        500..=584 => 6,
+        _ => 7,
+    };
+    let standing = index >= 6;
+    let x = if standing {
+        545.0 + ((t - 9.7).max(0.0) * 13.0).min(60.0)
+    } else {
+        383.0
+    };
+    let floor = if standing { 624.0 } else { 468.0 };
+    let max_height = a
+        .morning_bounds
+        .iter()
+        .take(8)
+        .map(|r| r.height)
+        .fold(1.0, f32::max);
+    let breathing = (t * 1.7).sin() * 1.8;
+    pose(
+        d,
+        &a.morning,
+        a.morning_bounds[index],
+        Vector2::new(x, floor + breathing),
+        335.0 / max_height,
+        false,
+        Color::WHITE,
+    );
+    d.draw_rectangle_gradient_v(0, 530, WIDTH, 190, Color::BLANK, alpha(INK, 0.93));
+    text(d, a, "UMA MANHÃ QUALQUER", 49.0, 47.0, 18.0, INK);
+    if t > 9.5 {
+        heading(d, a, "Rust", 65.0, 576.0, 48.0, PAPER);
+        text(
+            d,
+            a,
+            "O mundo parecia o mesmo de ontem.",
+            205.0,
+            597.0,
+            26.0,
+            PAPER,
+        );
+    }
+    if t < 1.0 {
+        d.draw_rectangle(0, 0, WIDTH, HEIGHT, alpha(INK, 1.0 - t));
+    }
+    if t > 13.25 {
+        d.draw_rectangle(0, 0, WIDTH, HEIGHT, alpha(INK, (t - 13.25) / 0.75));
+    }
+    footer(d, a, "Enter / A  sair de casa     Esc / Start  pausar");
+}
+
+fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
+    let c = &story.combat;
+    let camera = (c.player.position.x - 450.0).clamp(0.0, 920.0);
+    background(d, &a.environments, 1, -camera * 0.48, 1.35);
+    d.draw_rectangle_gradient_v(
+        0,
+        565,
+        WIDTH,
+        155,
+        Color::BLANK,
+        Color::new(44, 42, 39, 255),
+    );
+    d.draw_line(
+        0,
+        FLOOR_Y as i32 + 3,
+        WIDTH,
+        FLOOR_Y as i32 + 3,
+        alpha(PAPER, 0.2),
+    );
+    let scene_time = c.ticks as f32 / 60.0;
+    for i in 0..12 {
+        let f = i as f32;
+        let x = (f * 197.0 + scene_time * 13.0 - camera * 0.5).rem_euclid(1400.0) - 60.0;
+        let y = 80.0 + (scene_time * 0.35 + f).sin() * 24.0 + f * 27.0;
+        d.draw_circle_v(Vector2::new(x, y), 1.3, alpha(GOLD, 0.35));
+    }
+    actor_shadow(d, &c.player, camera);
+    actor_shadow(d, &c.enemy, camera);
+    creature(d, a, &c.enemy, camera);
+    rust(d, a, &c.player, camera);
+    if let Some(hit) = c.last_hit {
+        let p = Vector2::new(hit.position.x - camera, hit.position.y);
+        let age = hit.age_ticks as f32;
+        let opacity = (1.0 - age / 16.0).max(0.0);
+        let color = if hit.blocked { MINT } else { GOLD };
+        for i in 0..9 {
+            let angle = i as f32 * std::f32::consts::TAU / 9.0;
+            let r = 7.0 + age * 2.5;
+            d.draw_line_ex(
+                Vector2::new(p.x + angle.cos() * r, p.y + angle.sin() * r),
+                Vector2::new(
+                    p.x + angle.cos() * (r + 12.0),
+                    p.y + angle.sin() * (r + 12.0),
+                ),
+                2.0,
+                alpha(color, opacity),
+            );
+        }
+        d.draw_circle_v(p, 6.0 + age, alpha(color, opacity * 0.45));
+    }
+    if debug {
+        for actor in [&c.player, &c.enemy] {
+            let b = actor.hurtbox();
+            d.draw_rectangle_lines_ex(
+                Rectangle::new(b.x - camera, b.y, b.width, b.height),
+                2.0,
+                MINT,
+            );
+            if let Some(b) = actor.attack_hitbox() {
+                d.draw_rectangle_lines_ex(
+                    Rectangle::new(b.x - camera, b.y, b.width, b.height),
+                    2.0,
+                    Color::RED,
+                );
+            }
+        }
+    }
+    if story.stage == Stage::Encounter && c.outcome == Outcome::Ongoing {
+        d.draw_rectangle_rounded(
+            Rectangle::new(30.0, 26.0, 292.0, 85.0),
+            0.08,
+            8,
+            alpha(INK, 0.87),
+        );
+        text(d, a, "RUST", 50.0, 38.0, 21.0, PAPER);
+        d.draw_rectangle(50, 76, 247, 7, alpha(PAPER, 0.2));
+        d.draw_rectangle(
+            50,
+            76,
+            (247.0 * c.player.hp as f32 / c.player.max_hp as f32) as i32,
+            7,
+            GOLD,
+        );
+        let objective = if c.enemy_awake {
+            "DEFENDA-SE"
+        } else {
+            "UMA MANHÃ QUALQUER"
+        };
+        text(d, a, objective, 955.0, 40.0, 19.0, INK);
+        if c.enemy_awake {
+            let x = c.enemy.position.x - camera;
+            d.draw_rectangle((x - 44.0) as i32, 374, 88, 4, alpha(INK, 0.55));
+            d.draw_rectangle(
+                (x - 44.0) as i32,
+                374,
+                (88.0 * c.enemy.hp as f32 / c.enemy.max_hp as f32) as i32,
+                4,
+                Color::new(183, 80, 81, 255),
+            );
+            if c.enemy.action == Action::Telegraph {
+                text(
+                    d,
+                    a,
+                    "!",
+                    x - 6.0,
+                    336.0,
+                    31.0,
+                    Color::new(191, 66, 52, 255),
+                );
+            }
+        } else if story.stage_ticks > 80 {
+            text(d, a, "Siga pela rua", 890.0, 82.0, 24.0, INK);
+            text(d, a, ">", 1048.0, 80.0, 30.0, INK);
+        }
+        footer(
+            d,
+            a,
+            "A D / setas  mover     Espaço  pular     J / F  atacar     K / H  forte     Q / L  defender     Esc  pausar",
+        );
+    }
+    if story.stage == Stage::Aftermath {
+        d.draw_rectangle_gradient_v(0, 500, WIDTH, 220, Color::BLANK, alpha(INK, 0.9));
+        if c.player.action == Action::Remorse {
+            heading(d, a, "Não precisava ser assim.", 69.0, 606.0, 31.0, PAPER);
+        }
+    }
+}
+
+fn actor_shadow(d: &mut impl RaylibDraw, actor: &Actor, camera: f32) {
+    d.draw_ellipse(
+        (actor.position.x - camera) as i32,
+        FLOOR_Y as i32 + 2,
+        37.0,
+        7.0,
+        alpha(INK, 0.22),
+    );
+}
+
+fn rust(d: &mut impl RaylibDraw, a: &Assets, actor: &Actor, camera: f32) {
+    let pos = Vector2::new(actor.position.x - camera, actor.position.y);
+    if actor.action == Action::Remorse {
+        let frame = match actor.action_ticks {
+            0..=29 => 8,
+            30..=59 => 9,
+            60..=89 => 10,
+            90..=119 => 9,
+            _ => 11,
+        };
+        let tallest = a
+            .morning_bounds
+            .iter()
+            .skip(6)
+            .map(|r| r.height)
+            .fold(1.0, f32::max);
+        pose(
+            d,
+            &a.morning,
+            a.morning_bounds[frame],
+            pos,
+            174.0 / tallest,
+            actor.facing == Facing::Left,
+            Color::WHITE,
+        );
+        return;
+    }
+    let (clip, looping, speed) = match actor.action {
+        Action::Walk => ("walk", true, 1.55),
+        Action::Jump => ("jump", false, 1.0),
+        Action::LightAttack => ("punch_light", false, 1.3),
+        Action::HeavyAttack => ("punch_heavy", false, 0.9),
+        Action::Block => ("block", false, 1.0),
+        Action::Hurt => ("hit", false, 1.5),
+        Action::Defeated => ("defeat", false, 1.0),
+        _ => ("idle", true, 1.0),
+    };
+    if let Some(frame) = a
+        .rust
+        .frame(clip, actor.action_ticks as f32 / 60.0 * speed, looping)
+        && let Some(texture) = a.rust_textures.get(&frame.image)
+    {
+        let [x, y, w, h] = frame.rect;
+        let scale = 0.62;
+        let flipped = actor.facing == Facing::Left;
+        let pivot = if flipped {
+            w - frame.pivot[0]
+        } else {
+            frame.pivot[0]
+        };
+        d.draw_texture_pro(
+            texture,
+            Rectangle::new(x, y, if flipped { -w } else { w }, h),
+            Rectangle::new(
+                pos.x - pivot * scale,
+                pos.y - frame.pivot[1] * scale,
+                w * scale,
+                h * scale,
+            ),
+            Vector2::zero(),
+            0.0,
+            Color::WHITE,
+        );
+    }
+}
+
+fn creature(d: &mut impl RaylibDraw, a: &Assets, actor: &Actor, camera: f32) {
+    let frame = match actor.action {
+        Action::Walk => 1 + (actor.action_ticks / 10 % 2) as usize,
+        Action::Telegraph => 3,
+        Action::Lunge => 4,
+        Action::Hurt => 5,
+        Action::Defeated if actor.action_ticks < 24 => 6,
+        Action::Defeated => 7,
+        _ => 0,
+    };
+    let height = a
+        .erratic_bounds
+        .iter()
+        .take(6)
+        .map(|r| r.height)
+        .fold(1.0, f32::max);
+    let tremor = if actor.hp > 0 {
+        (actor.action_ticks as f32 * 0.7).sin() * 1.2
+    } else {
+        0.0
+    };
+    pose(
+        d,
+        &a.erratic,
+        a.erratic_bounds[frame],
+        Vector2::new(actor.position.x - camera + tremor, actor.position.y),
+        187.0 / height,
+        actor.facing == Facing::Left,
+        Color::WHITE,
+    );
+}
+
+fn pose(
+    d: &mut impl RaylibDraw,
+    texture: &Texture2D,
+    source: Rectangle,
+    feet: Vector2,
+    scale: f32,
+    flip: bool,
+    tint: Color,
+) {
+    let width = source.width * scale;
+    let height = source.height * scale;
+    let src = Rectangle::new(
+        source.x,
+        source.y,
+        if flip { -source.width } else { source.width },
+        source.height,
+    );
+    d.draw_texture_pro(
+        texture,
+        src,
+        Rectangle::new(feet.x, feet.y, width, height),
+        Vector2::new(width * 0.5, height),
+        0.0,
+        tint,
+    );
+}
+
+fn background(d: &mut impl RaylibDraw, texture: &Texture2D, index: usize, x: f32, scale: f32) {
+    d.draw_texture_pro(
+        texture,
+        cell(texture, 1, 2, index),
+        Rectangle::new(x, 0.0, WIDTH as f32 * scale, HEIGHT as f32),
+        Vector2::zero(),
+        0.0,
+        Color::WHITE,
+    );
+    // The street's wide crop ends beyond the furthest camera position.
+}
+
+fn cinematic_panel(
+    d: &mut impl RaylibDraw,
+    texture: &Texture2D,
+    source: Rectangle,
+    progress: f32,
+    tint: Color,
+) {
+    let zoom = 1.0 + progress.clamp(0.0, 1.0) * 0.035;
+    let width = source.width / zoom;
+    let height = source.height / zoom;
+    let crop = Rectangle::new(
+        source.x + (source.width - width) * 0.5,
+        source.y + (source.height - height) * 0.4,
+        width,
+        height,
+    );
+    d.draw_texture_pro(
+        texture,
+        crop,
+        Rectangle::new(0.0, 0.0, WIDTH as f32, HEIGHT as f32),
+        Vector2::zero(),
+        0.0,
+        tint,
+    );
+}
+
+fn cell(texture: &Texture2D, columns: usize, rows: usize, index: usize) -> Rectangle {
+    let w = texture.width() as f32 / columns as f32;
+    let h = texture.height() as f32 / rows as f32;
+    Rectangle::new(
+        (index % columns) as f32 * w,
+        (index / columns) as f32 * h,
+        w,
+        h,
+    )
+}
+
+fn ending(d: &mut impl RaylibDraw, a: &Assets) {
+    d.draw_rectangle_gradient_v(0, 380, WIDTH, 340, Color::BLANK, alpha(INK, 0.97));
+    heading(d, a, "Ainda há um caminho.", 65.0, 488.0, 43.0, PAPER);
+    text(
+        d,
+        a,
+        "Rust desejava uma manhã comum. E um mundo onde isso fosse possível.",
+        67.0,
+        548.0,
+        24.0,
+        PAPER,
+    );
+    text(d, a, "Fim deste primeiro encontro", 67.0, 590.0, 19.0, GOLD);
+    footer(
+        d,
+        a,
+        "R / A  repetir encontro     Enter / Y  rever abertura     Esc  sair",
+    );
+}
+
+fn defeat(d: &mut impl RaylibDraw, a: &Assets) {
+    d.draw_rectangle(0, 0, WIDTH, HEIGHT, alpha(INK, 0.7));
+    heading(d, a, "Respire. Tente outra vez.", 324.0, 256.0, 41.0, PAPER);
+    text(
+        d,
+        a,
+        "Observe a preparação do ataque. Defenda ou crie distância.",
+        327.0,
+        330.0,
+        24.0,
+        PAPER,
+    );
+    text(
+        d,
+        a,
+        "R / A  voltar ao encontro     Esc  pausar",
+        396.0,
+        414.0,
+        24.0,
+        GOLD,
+    );
+}
+
+fn pause(d: &mut impl RaylibDraw, a: &Assets) {
+    d.draw_rectangle(0, 0, WIDTH, HEIGHT, alpha(INK, 0.87));
+    heading(d, a, "Um instante.", 470.0, 213.0, 47.0, PAPER);
+    text(
+        d,
+        a,
+        "Esc / Start / Enter  continuar",
+        446.0,
+        316.0,
+        25.0,
+        GOLD,
+    );
+    text(d, a, "Backspace / B  sair", 487.0, 365.0, 23.0, PAPER);
+    text(
+        d,
+        a,
+        "Controle: direcional mover · A pular · X atacar · Y forte · LB defender",
+        275.0,
+        455.0,
+        21.0,
+        PAPER,
+    );
+}
+
+fn footer(d: &mut impl RaylibDraw, a: &Assets, value: &str) {
+    d.draw_rectangle(0, 668, WIDTH, 52, alpha(INK, 0.93));
+    text(d, a, value, 36.0, 684.0, 19.0, alpha(PAPER, 0.85));
+}
+
+fn text(d: &mut impl RaylibDraw, a: &Assets, value: &str, x: f32, y: f32, size: f32, color: Color) {
+    d.draw_text_ex(&a.body, value, Vector2::new(x, y), size, 0.2, color);
+}
+
+fn heading(
+    d: &mut impl RaylibDraw,
+    a: &Assets,
+    value: &str,
+    x: f32,
+    y: f32,
+    size: f32,
+    color: Color,
+) {
+    d.draw_text_ex(&a.title, value, Vector2::new(x, y), size, 0.2, color);
+}
+
+fn type_text(
+    d: &mut impl RaylibDraw,
+    a: &Assets,
+    value: &str,
+    characters: usize,
+    position: Vector2,
+    size: f32,
+    color: Color,
+) {
+    let visible: String = value.chars().take(characters).collect();
+    for (line, value) in visible.lines().enumerate() {
+        text(
+            d,
+            a,
+            value,
+            position.x,
+            position.y + line as f32 * (size + 9.0),
+            size,
+            color,
+        );
+    }
+}
+
+fn alpha(color: Color, value: f32) -> Color {
+    Color::new(
+        color.r,
+        color.g,
+        color.b,
+        (255.0 * value.clamp(0.0, 1.0)) as u8,
+    )
+}

@@ -1,0 +1,73 @@
+{
+  "image": "erratic.png",
+  "image_size": [
+    1774,
+    887
+  ],
+  "rects": [
+    [
+      103,
+      11,
+      250,
+      429
+    ],
+    [
+      514,
+      11,
+      290,
+      425
+    ],
+    [
+      955,
+      11,
+      305,
+      426
+    ],
+    [
+      1363,
+      71,
+      346,
+      369
+    ],
+    [
+      9,
+      523,
+      521,
+      312
+    ],
+    [
+      540,
+      466,
+      318,
+      383
+    ],
+    [
+      925,
+      594,
+      351,
+      261
+    ],
+    [
+      1343,
+      686,
+      417,
+      139
+    ]
+  ],
+  "labels": [
+    "idle",
+    "walk-left",
+    "walk-right",
+    "telegraph",
+    "lunge",
+    "recoil",
+    "falling",
+    "collapsed"
+  ],
+  "measurement": {
+    "alpha_threshold_exclusive": 3,
+    "padding_pixels": 2,
+    "image_pixels_unchanged": true
+  },
+  "recommended_standing_height_at_1280x720": 260
+}

@@ -5,8 +5,256 @@ edition = "2024"
 description = "Greybox prototype for a docs-first 2D fighting game with programming humor."
 license = "MIT OR Apache-2.0"
 publish = false
+default-run = "borrow-fighters"
+autotests = false
+autoexamples = false
+
+[features]
+default = ["fighting"]
+fighting = []
+adventure = []
+
+[[bin]]
+name = "borrow-fighters"
+path = "src/main.rs"
+required-features = ["fighting"]
+
+[[bin]]
+name = "borrow-adventure"
+path = "src/bin/borrow-adventure.rs"
+required-features = ["adventure"]
 
 [dependencies]
 raylib = "6.0.0"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+
+[[test]]
+name = "arena_rotation"
+path = "tests/arena_rotation.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "attack_frame_data"
+path = "tests/attack_frame_data.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "audio_manifest"
+path = "tests/audio_manifest.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "authored_super_sequences"
+path = "tests/authored_super_sequences.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "binary_text"
+path = "tests/binary_text.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "character_identity_tuning"
+path = "tests/character_identity_tuning.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "characters"
+path = "tests/characters.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "cinematic_specials"
+path = "tests/cinematic_specials.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "cli"
+path = "tests/cli.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "combat_lab"
+path = "tests/combat_lab.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "combat_rules"
+path = "tests/combat_rules.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "contact_reactions"
+path = "tests/contact_reactions.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "cpu_traditional_moves"
+path = "tests/cpu_traditional_moves.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "energy"
+path = "tests/energy.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "feature_flags"
+path = "tests/feature_flags.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "impact_positions"
+path = "tests/impact_positions.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "lore_book"
+path = "tests/lore_book.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "move_data"
+path = "tests/move_data.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "move_showcase"
+path = "tests/move_showcase.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "mvp_combat"
+path = "tests/mvp_combat.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "no_damage_reactions"
+path = "tests/no_damage_reactions.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "paired_reaction_sprites"
+path = "tests/paired_reaction_sprites.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "reaction_matrix"
+path = "tests/reaction_matrix.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "roster_contact_reactions"
+path = "tests/roster_contact_reactions.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "runtime_paths"
+path = "tests/runtime_paths.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "signature_effects"
+path = "tests/signature_effects.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "sprite_candidates"
+path = "tests/sprite_candidates.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "sprite_frames"
+path = "tests/sprite_frames.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "sprite_manifest"
+path = "tests/sprite_manifest.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "sprite_playback"
+path = "tests/sprite_playback.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "sprite_selection"
+path = "tests/sprite_selection.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "sprite_viewer"
+path = "tests/sprite_viewer.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "throws_launches"
+path = "tests/throws_launches.rs"
+required-features = ["fighting"]
+
+[[test]]
+name = "traditional_moves"
+path = "tests/traditional_moves.rs"
+required-features = ["fighting"]
+
+[[example]]
+name = "balance_audit"
+path = "examples/balance_audit.rs"
+required-features = ["fighting"]
+
+[[example]]
+name = "capture_authored_super_review"
+path = "examples/capture_authored_super_review.rs"
+required-features = ["fighting"]
+
+[[example]]
+name = "capture_motion_review"
+path = "examples/capture_motion_review.rs"
+required-features = ["fighting"]
+
+[[example]]
+name = "capture_pair_reactions"
+path = "examples/capture_pair_reactions.rs"
+required-features = ["fighting"]
+
+[[example]]
+name = "capture_presentation_review"
+path = "examples/capture_presentation_review.rs"
+required-features = ["fighting"]
+
+[[example]]
+name = "capture_reaction_review"
+path = "examples/capture_reaction_review.rs"
+required-features = ["fighting"]
+
+[[example]]
+name = "capture_roster_contacts"
+path = "examples/capture_roster_contacts.rs"
+required-features = ["fighting"]
+
+[[example]]
+name = "capture_roster_flow_review"
+path = "examples/capture_roster_flow_review.rs"
+required-features = ["fighting"]
+
+[[example]]
+name = "capture_showcase_review"
+path = "examples/capture_showcase_review.rs"
+required-features = ["fighting"]
+
+[[example]]
+name = "capture_sprite_review"
+path = "examples/capture_sprite_review.rs"
+required-features = ["fighting"]
+
+[[example]]
+name = "capture_stage_review"
+path = "examples/capture_stage_review.rs"
+required-features = ["fighting"]
+
+[[example]]
+name = "capture_ui_review"
+path = "examples/capture_ui_review.rs"
+required-features = ["fighting"]

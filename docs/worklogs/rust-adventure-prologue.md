@@ -49,15 +49,24 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 - [x] Criar branch e preservar documentação anterior.
 - [x] Registrar ADR e instruções de retomada.
 - [x] Sincronizar lore e roteiro.
-- [ ] Implementar features/binários e domínio puro.
-- [ ] Produzir/revisar arte de Ada, manhã, ambiente e errática.
-- [ ] Integrar animação, input, áudio, combate e desfecho na janela real.
+- [x] Implementar features/binários e domínio puro.
+- [x] Produzir/revisar arte de Ada, manhã, ambiente e errática.
+- [x] Integrar animação, input, áudio, combate e desfecho na janela real.
 - [ ] Verificar derrota/retry, pausa, pular cenas e controles.
 - [ ] Passar fmt, Clippy, matriz de testes e checks de documentação.
 - [ ] Registrar capturas/vídeo e smoke tests de isolamento.
 - [ ] Fechar docs, diário e commits de entrega.
 
 ## Checkpoints
+
+- 2026-09-10: `b7d6be0` fixa lore. Primeiro loop de aventura compila isolado;
+  20 testes adventure/core e Clippy completo passaram. Revisão gráfica inicial
+  em `/tmp/borrow-adventure-review-01` percorreu cenas e combate real até Complete.
+  Arte com alpha verdadeiro integrada via retângulos revisados. Encontrados e
+  corrigidos pausa que reutilizava confirmação e relógio de derrota congelado.
+  Revisão pendente: uniformizar Rust entre manhã e combate, contraste do objetivo,
+  validar controles enviados à janela, captura com áudio e matriz final. Arte
+  adicional `rust-actions.png` em produção para manter a identidade da manhã.
 
 - 2026-09-10: `523e212` registra isolamento e diário. Lore revisada nos docs e no
   livro JSON; proposta antiga substituída pelo episódio pedido. Domínio puro tem
