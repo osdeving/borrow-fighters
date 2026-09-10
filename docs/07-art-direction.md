@@ -97,6 +97,31 @@ uniforme do ciclista vestido de vermelho-tijolo, inclusive ao mostrar sua
 bicicleta vazia. [Adereços e apoios](../assets/adventure/street/PROPS.md) e
 [veículos](../assets/adventure/street/VEHICLES.md) registram origem e seleção.
 
+A [quarta rodada, de chegada e vizinhança](32-cinematic-neighbourhood-arrival.md),
+abre a rua pela pipa contra o céu. A câmera desce e amplia o enquadramento ao
+longo de cerca de seis segundos até apresentar Rust; exploração e HUD ficam
+disponíveis ao fim desse movimento. A vida cotidiana continua durante a
+chegada. O ônibus ocupa uma largura maior que a dos automóveis. O letreiro
+completo `BAR E MERCEARIA CASA NOSSA` usa uma única linha, com tamanho uniforme
+e fonte encorpada e filtrada para continuar legível.
+
+Clientes esperam no ponto e conversam junto à mercearia; o lojista permanece
+na entrada, enquanto um cachorro caramelo descansa, fareja e observa a rua.
+Quando a EP aparece, os clientes correm para dentro da loja. O lojista espera
+o último entrar e puxa a porta corrugada até o chão; o cão foge para fora em
+segurança. O contato com a entrada, a oclusão das pessoas e o tirador da porta
+devem comunicar abrigo e fechamento contínuos. Conservar a escala corporal
+entre poses, distinguindo mulher com sacola, jovem de mochila e lojista de
+avental. [Moradores e porta](../assets/adventure/street/NEIGHBOURS.md) e
+[caramelo](../assets/adventure/street/CARAMELO.md) documentam a arte separada.
+
+O som acompanha essa manhã: ar discreto e poucos pássaros no quarto, ar e
+passagens espaçadas de motores na rua. A evacuação reduz o trânsito até
+silenciá-lo, enquanto o ar externo permanece. Latido breve, rolo metálico e
+contato da porta acompanham ações específicas, preservando o peso do acidente.
+O [guia de áudio](../assets/adventure/audio/README.md) registra síntese e níveis;
+a revisão humana em movimento deve avaliar o equilíbrio desses sons.
+
 A apresentação após o pesar usa jornais, quadros biográficos e montagem de
 personagens. C++ aparece adulta no cotidiano noturno e no despertar heroico;
 Python ensina humanos sobre EPs numa universidade. As manchetes representam

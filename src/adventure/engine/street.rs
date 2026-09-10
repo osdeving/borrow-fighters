@@ -60,6 +60,7 @@ pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &Assets, camera:
     let offset = camera * PARALLAX;
     cycle_lane(d, offset);
     props(d, a, offset);
+    super::neighborhood::draw(d, ambient, a, offset);
     kite(d, ambient, offset);
     child(d, ambient, a, offset);
     super::traffic::draw(d, ambient, a, offset);

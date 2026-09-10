@@ -1,0 +1,17 @@
+Use case: stylized-concept
+Asset type: production transparent PNG sprite atlas for a side-scrolling 2D game.
+Primary request: Eight isolated animation poses of ONE friendly Brazilian caramelo mongrel dog, all facing RIGHT, arranged in exactly 2 columns and 4 rows in a portrait 1024 x 1536 canvas. Every pose is fully inside its own equal cell, with ample transparent gutters. The dog is the only subject in every cell.
+Subject identity: medium adult dog with natural lean canine proportions, warm caramel short coat, lighter cream lower muzzle and chest, dark small nose, dark expressive eyes, asymmetrical ears (near ear folded halfway, far ear upright), ordinary slim tail. No collar or accessories. Friendly grounded character, not a mascot, not a puppy, no huge head, no human traits. Keep muzzle length, torso length, leg length and head size exactly consistent across poses.
+Style/medium: polished hand-painted 2D game sprite with clean dark brown silhouette line, warm natural morning highlights, softly shaded volumes, restrained fine fur texture. Matches an illustrated Brazilian street with cream plaster, terracotta roofs and muted teal shop awnings. Natural animal anatomy, clear animation silhouette at small screen scale.
+Layout reading order, LEFT then RIGHT across each row:
+Row 1 left: idle standing right, relaxed four-legged stance, head at natural height.
+Row 1 right: sitting right, rump on ground, straight front paws, relaxed ears.
+Row 2 left: alert standing right, head slightly lifted and ears attentive, tail slightly raised, all four paws planted.
+Row 2 right: soft sniff right, head dipping slightly toward ground, hindquarters remain standing, gentle inquisitive pose.
+Row 3 left: RUN RIGHT pose 0, gathered/compression phase with hind feet under hips and forefeet beginning to push forward.
+Row 3 right: RUN RIGHT pose 1, extended airborne suspension, front legs extending forward and hind legs extending backward, clear air under all four paws.
+Row 4 left: RUN RIGHT pose 2, forepaw landing phase, one front paw reaches ground beneath the chest, other front leg flexed, hind legs swinging forward under the belly.
+Row 4 right: RUN RIGHT pose 3, passing/push-off phase, hind paw pushes from the ground, front legs fold and recover beneath the chest. Must be visibly different from pose 0, and cycle naturally into it.
+Registration: same orthographic side camera, every dog facing exactly right, identical pixels-per-centimeter in every frame. Keep body length about 285 pixels excluding tail and muzzle, ordinary standing height about 235 pixels. The four running dogs must keep the same torso size, do not stretch or rescale the dog to fill cells. Common horizontal ground line within every cell approximately 345 pixels below its top. Airborne pose paws stay above that ground line. Center the torso in each cell; preserve room for tail and fully extended limbs. Eight independent complete silhouettes with no overlapping cells and no cropped paws, tails or ears.
+Scene/backdrop: real transparent RGBA alpha background, empty pixels transparent including every gutter and all outside silhouettes. No painted background, no white matte, no colored matte, no checkerboard pattern.
+Constraints: exactly eight dogs, four static poses and four distinct natural quadruped running poses. No floor, no ground shadows, no cast shadows, no dust, no speed streaks, no scenery, no text, no captions, no cell borders, no numbers, no watermark. Dogs only on actual transparent background.

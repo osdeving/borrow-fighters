@@ -26,6 +26,16 @@ manhã de Rust. [Escopo](docs/30-prologue-scene-improvements.md) e
   abandonam as bicicletas e correm a pé. Bicicletas ficam no chão e figurantes
   não voltam após a fuga; o acidente e a saída do garoto continuam preservados.
   [Escopo da rua modular e evacuação](docs/31-brazilian-street-evacuation.md).
+- Chegada à rua com câmera na pipa e no céu, descendo e abrindo até Rust em
+  cerca de seis segundos; exploração e HUD são liberados ao fim da chegada.
+  Ônibus ampliado e letreiro da mercearia ajustado para leitura nessa escala.
+- Moradores no ponto e na mercearia correm para dentro quando a EP aparece.
+  O lojista espera todos entrarem e baixa a porta de enrolar; o cachorro
+  caramelo passa de poses calmas à fuga. A rua permanece evacuada no encontro.
+- Manhã com ar discreto e pássaros; rua com ar e trânsito em camadas próprias.
+  Os motores se afastam até cessar após a evacuação, preservando o ar externo
+  e os efeitos do acidente, do latido e da porta.
+  [Escopo da chegada e vizinhança](docs/32-cinematic-neighbourhood-arrival.md).
 - Quatro textos editáveis em `morning.poster.*` e `morning.setup.*`, com
   recarga por F5. As entradas `--start morning` e `--start encounter` permitem
   rever diretamente os trechos desta rodada.

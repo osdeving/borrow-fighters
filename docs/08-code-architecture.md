@@ -66,6 +66,22 @@ Os marcos de áudio incluem fuga e contato das bicicletas com o chão; nenhum
 ator decorativo entra nas regras do combate.
 [Escopo e verificação](31-brazilian-street-evacuation.md).
 
+A [ADR 0026](adr/0026-cinematic-arrival-and-neighbours.md) acrescenta uma
+chegada de seis segundos dentro do encontro. `Story::arrival_active()` retém
+o avanço do combate enquanto o ambiente segue vivo; `arrival.rs` descreve
+alvo/zoom puros. O renderer transforma o mundo com `Camera2D`, preservando
+HUD e comandos em coordenadas de tela. A transformação final é a identidade;
+retry acordado dispensa a tomada e avanço de trecho entrega a exploração.
+
+[`adventure/neighborhood.rs`](../src/adventure/neighborhood.rs) deriva pessoas,
+cão e porta do mesmo relógio ambiente. [`engine/neighborhood.rs`](../src/adventure/engine/neighborhood.rs)
+compõe moradores e porta usando recortes geométricos que acompanham a câmera.
+A entrada da fachada é uma abertura de 97×122 pixels, centrada em x603 e no
+chão y355; a porta espera os visitantes entrarem e cobre o lojista ao baixar.
+Áudio separa ar e tráfego, apaga somente os motores na evacuação e compartilha
+os marcos de latido e fechamento com esse estado puro.
+[Escopo e validação](32-cinematic-neighbourhood-arrival.md).
+
 ## Objetivo
 
 Criar uma base simples, testável e extensível para o protótipo 0.1 sem transformar o projeto em uma engine antes de provar o combate.

@@ -13,7 +13,9 @@ The state observer mirrors src/adventure/engine/audio.rs: volume 0.3, looping
 ambience, the non-looping opening score, frozen playback cursors during pause,
 silence while paused, one active voice
 per cue, contact deduplication, transition cues and the street accident's shared
-milestones. Explicit skip telemetry discards cue voices and seeks the score.
+milestones. Street air and passing traffic are independent loops: the traffic
+fades with the evacuation clock and stops when the street empties. Explicit
+skip telemetry discards cue voices and seeks the score and street layers.
 Legacy telemetry without street clocks never invents traffic effects.
 FFmpeg copies the recorded
 video unchanged and encodes the reconstructed mono mix as AAC.
@@ -37,10 +39,13 @@ import wave
 ROOT = Path(__file__).resolve().parents[2]
 RATE = 22050
 VOLUME = 0.3
-TRACKS = ("ada", "morning", "threat", "remorse", "opening")
+TRACKS = ("ada", "morning_ambience", "street_air", "remorse", "opening")
+LAYERS = ("street_traffic",)
 NON_LOOPING_TRACKS = {"opening"}
-TRAFFIC_MILESTONES = ((0, "traffic_escape"), (38, "car_horn"),
-                      (70, "bicycle_fall"), (78, "car_skid"), (112, "car_crash"))
+STREET_EVACUATED_TICK = 360
+TRAFFIC_MILESTONES = ((0, "traffic_escape"), (8, "dog_alert"), (38, "car_horn"),
+                      (70, "bicycle_fall"), (78, "car_skid"), (112, "car_crash"),
+                      (270, "shutter_roll"), (330, "shutter_clack"))
 TRAFFIC_CUES = tuple(cue for _, cue in TRAFFIC_MILESTONES)
 CUES = ("strike", "block", "hurt", "transition") + TRAFFIC_CUES
 STAGES = {"AdaPrologue", "RustMorning", "Encounter", "Aftermath", "Opening", "Complete"}
@@ -107,7 +112,7 @@ def read_telemetry(path: Path) -> list[dict]:
 def load_wavs(directory: Path) -> tuple[dict[str, array], dict]:
     clips = {}
     metadata = {}
-    for name in TRACKS + CUES:
+    for name in TRACKS + LAYERS + CUES:
         path = directory / f"{name}.wav"
         with wave.open(str(path), "rb") as sound:
             if (sound.getnchannels(), sound.getsampwidth(), sound.getframerate(), sound.getcomptype()) != (1, 2, RATE, "NONE"):
@@ -124,7 +129,7 @@ def load_wavs(directory: Path) -> tuple[dict[str, array], dict]:
             "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
             "samples": len(pcm),
             "duration_seconds": len(pcm) / RATE,
-            "looping": name in TRACKS and name not in NON_LOOPING_TRACKS,
+            "looping": name in TRACKS + LAYERS and name not in NON_LOOPING_TRACKS,
         }
     return clips, metadata
 
@@ -150,17 +155,26 @@ def background_for(row: dict) -> str:
     if stage == "AdaPrologue":
         return "ada"
     if stage == "RustMorning":
-        return "morning"
+        return "morning_ambience"
     if stage == "Encounter":
-        hp = row.get("player", {}).get("hp", row.get("player_hp"))
-        if row.get("outcome") == "Defeat" or (hp is not None and hp <= 0):
-            return "remorse"
-        return "threat" if row["enemy_awake"] else "morning"
+        return "street_air"
     if stage in {"Aftermath", "Complete"}:
         return "remorse"
     if stage == "Opening":
         return "opening"
     raise ValueError(f"Unknown stage: {stage}")
+
+
+def traffic_gain(row: dict) -> float:
+    if row["stage"] not in {"Encounter", "Aftermath"}:
+        return 0.0
+    age = row.get("ambience", {}).get("accident_ticks")
+    if age is not None:
+        return max(0.0, min(1.0, 1.0 - age / STREET_EVACUATED_TICK)) ** 2
+    # Legacy awake telemetry cannot establish an evacuation age. Do not invent
+    # audible cars that might already have left the street.
+    known_calm = "accident_ticks" in row.get("ambience", {}) or not row["enemy_awake"]
+    return 1.0 if row["stage"] == "Encounter" and known_calm else 0.0
 
 
 class Observer:
@@ -239,12 +253,14 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
     if not rows or not math.isfinite(duration) or duration <= 0:
         raise ValueError("A nonempty timeline and positive finite duration are required")
     count = round(duration * rate)
-    if count <= 0 or any(not clips.get(name) for name in TRACKS + CUES):
+    if count <= 0 or any(not clips.get(name) for name in TRACKS + LAYERS + CUES):
         raise ValueError("All original tracks/cues and at least one output sample are required")
     mix = array("i", [0]) * count
     origin = rows[0]["seconds"]
     position = 0
     music_cursor = 0
+    traffic_cursor = 0
+    traffic_volume = 0.0
     track = None
     paused = False
     pause_start = None
@@ -254,10 +270,13 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
     spans = []
     pauses = []
     seeks = []
+    traffic_changes = []
+    traffic_spans = []
+    traffic_seeks = []
     observer = Observer()
 
     def advance(target):
-        nonlocal position, music_cursor
+        nonlocal position, music_cursor, traffic_cursor
         target = min(count, max(position, target))
         length = target - position
         if length <= 0:
@@ -279,6 +298,21 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
                     "source_start_sample": music_cursor, "source_end_sample": music_cursor + audible,
                 })
             music_cursor += audible
+        if traffic_volume > 0:
+            pcm = clips["street_traffic"]
+            for offset in range(length):
+                mix[position + offset] += round(pcm[(traffic_cursor + offset) % len(pcm)] * traffic_volume)
+            if (traffic_spans and traffic_spans[-1]["end_sample"] == position
+                    and traffic_spans[-1]["source_end_sample"] == traffic_cursor
+                    and traffic_spans[-1]["gain"] == traffic_volume):
+                traffic_spans[-1]["end_sample"] = target
+                traffic_spans[-1]["source_end_sample"] = traffic_cursor + length
+            else:
+                traffic_spans.append({
+                    "start_sample": position, "end_sample": target, "gain": traffic_volume,
+                    "source_start_sample": traffic_cursor, "source_end_sample": traffic_cursor + length,
+                })
+            traffic_cursor += length
         for cue, (cursor, event_index) in list(voices.items()):
             pcm = clips[cue]
             audible = min(length, len(pcm) - cursor)
@@ -304,13 +338,22 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
             break
         advance(event_sample)
         synced_after_skip = row.get("audio_synced_after_skip", False)
+        reset = observer.timeline_restarted(row) and not synced_after_skip
         if synced_after_skip:
             stop_voices(CUES, "scene_skip")
             observer.align(row)
-        elif observer.timeline_restarted(row):
+        elif reset:
             stop_voices(TRAFFIC_CUES, "execution_reset")
         elif row["stage"] not in {"Encounter", "Aftermath"}:
             stop_voices(TRAFFIC_CUES, "street_left")
+        next_traffic_volume = traffic_gain(row)
+        if reset or (traffic_volume == 0 and next_traffic_volume > 0):
+            traffic_cursor = 0
+        if reset or next_traffic_volume != traffic_volume:
+            traffic_changes.append({"seconds": position / rate, "gain": next_traffic_volume,
+                                    "active": next_traffic_volume > 0, "paused": row["paused"],
+                                    "source_cursor_seconds": traffic_cursor / rate})
+        traffic_volume = next_traffic_volume
         next_track = background_for(row)
         if next_track != track:
             changes.append({
@@ -322,13 +365,17 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
             track = next_track
             music_cursor = 0
         if synced_after_skip:
-            elapsed = round(row.get("stage_ticks", 0) / 60 * rate)
+            ticks = row.get("ambience", {}).get("ticks", 0) if track == "street_air" else row.get("stage_ticks", 0)
+            elapsed = round(ticks / 60 * rate)
             music_cursor = (min(elapsed, len(clips[track])) if track in NON_LOOPING_TRACKS
                             else elapsed % len(clips[track]))
             seeks.append({"seconds": position / rate, "track": track,
                           "source_cursor_seconds": music_cursor / rate})
             if changes[-1]["seconds"] == position / rate:
                 changes[-1]["source_cursor_seconds"] = music_cursor / rate
+            if traffic_volume > 0:
+                traffic_cursor = round(row.get("ambience", {}).get("ticks", 0) / 60 * rate) % len(clips["street_traffic"])
+                traffic_seeks.append({"seconds": position / rate, "source_cursor_seconds": traffic_cursor / rate})
         if row["paused"] != paused:
             if row["paused"]:
                 pause_start = position
@@ -360,7 +407,7 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
     raw_peak = max(abs(value) for value in mix) * VOLUME
     master_gain = min(1.0, 32760 / raw_peak) if raw_peak else 1.0
     pcm = array("h", (round(value * VOLUME * master_gain) for value in mix))
-    for span in spans:
+    for span in spans + traffic_spans:
         for field in ("start", "end", "source_start", "source_end"):
             span[f"{field}_seconds"] = span.pop(f"{field}_sample") / rate
     report = {
@@ -383,6 +430,9 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
             "explicit_skip_marker_present_in_all_samples": all("audio_synced_after_skip" in row for row in rows),
         },
         "tracks": changes, "audible_music_spans": spans,
+        "traffic_layer": {"file": "street_traffic.wav", "changes": traffic_changes,
+                          "audible_spans": traffic_spans, "seeks": traffic_seeks,
+                          "fade_end_tick": STREET_EVACUATED_TICK},
         "pause_intervals": pauses, "music_seeks": seeks,
         "events": events, "event_counts": dict(Counter(event["cue"] for event in events)),
     }

@@ -389,6 +389,19 @@ fn run_session(
             } else {
                 crate::adventure::arrival::ArrivalShot::settled()
             };
+            let neighborhood = crate::adventure::neighborhood::Neighborhood::sample(&story.ambient);
+            let neighbors = serde_json::json!({
+                "residents": neighborhood.residents.map(|actor|serde_json::json!({
+                    "id":actor.id,"x":actor.position.x,"y":actor.position.y,
+                    "phase":format!("{:?}",actor.phase),"phase_ticks":actor.phase_ticks,
+                    "visible":actor.visible,"facing":format!("{:?}",actor.facing)
+                })),
+                "dog":{"x":neighborhood.dog.position.x,"y":neighborhood.dog.position.y,
+                    "phase":format!("{:?}",neighborhood.dog.phase),"phase_ticks":neighborhood.dog.phase_ticks,
+                    "visible":neighborhood.dog.visible,"facing":format!("{:?}",neighborhood.dog.facing)},
+                "shutter":{"phase":format!("{:?}",neighborhood.shutter.phase),
+                    "phase_ticks":neighborhood.shutter.phase_ticks,"progress":neighborhood.shutter.progress}
+            });
             let ambience = serde_json::json!({
                 "ticks": story.ambient.ticks(),
                 "kid_phase": format!("{:?}", story.ambient.kid_phase()),
@@ -420,7 +433,7 @@ fn run_session(
             writeln!(
                 trace,
                 "{}",
-                serde_json::json!({"frame":frame,"seconds":capture_seconds,"wall_seconds":std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).ok().map(|time| time.as_secs_f64()),"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"waiting_for_continue":return_on_complete && complete_at_start && !completion.accepted,"continue_accepted":completion.accepted,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"ambience":ambience,"arrival_active":story.arrival_active(),"arrival_camera":{"x":arrival_camera.target.x,"y":arrival_camera.target.y,"zoom":arrival_camera.zoom},"audio_synced_after_skip":audio_synced_after_skip,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
+                serde_json::json!({"frame":frame,"seconds":capture_seconds,"wall_seconds":std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).ok().map(|time| time.as_secs_f64()),"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"waiting_for_continue":return_on_complete && complete_at_start && !completion.accepted,"continue_accepted":completion.accepted,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"ambience":ambience,"neighborhood":neighbors,"arrival_active":story.arrival_active(),"arrival_camera":{"x":arrival_camera.target.x,"y":arrival_camera.target.y,"zoom":arrival_camera.zoom},"audio_synced_after_skip":audio_synced_after_skip,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
             )?;
         }
         {

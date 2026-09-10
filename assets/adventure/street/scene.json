@@ -11,32 +11,17 @@
       "scale": 1,
       "labels": [
         {
-          "text_key": "street.bar.kind",
-          "offset": [
-            -3,
-            -197
-          ],
-          "width": 209,
-          "font_size": 10,
-          "color": [
-            49,
-            68,
-            63,
-            255
-          ]
-        },
-        {
           "text_key": "street.bar.name",
           "offset": [
             -3,
-            -186
+            -193
           ],
           "width": 209,
           "font_size": 18,
           "color": [
-            49,
-            68,
-            63,
+            36,
+            58,
+            50,
             255
           ]
         }

@@ -19,6 +19,7 @@ class RepositoryAssetsTests(unittest.TestCase):
             "street-life.png", "street-traffic.png", "street/catalog.json",
             "street/scene.json", "street/vehicles.png", "street/props.png",
             "street/cyclist-escape.png", "street/README.md",
+            "street/neighbours.png", "street/shopkeeper.png", "street/shutter.png", "street/caramelo.png",
             "rust-actions.png", "erratic.png", "rust-morning-poses.json",
             "rust-actions-poses.json", "erratic-poses.json", "texts/pt-BR.json",
             "texts/README.md", "opening/roster.json", "opening/cpp-origin.png",
@@ -27,9 +28,9 @@ class RepositoryAssetsTests(unittest.TestCase):
             "fonts/BARLOW-OFL.txt", "fonts/LORA-OFL.txt", "audio/README.md",
         }
         required.update(f"audio/{name}.wav" for name in (
-            "ada", "morning", "threat", "remorse", "opening", "strike",
+            "ada", "morning_ambience", "street_air", "street_traffic", "remorse", "opening", "strike",
             "block", "hurt", "transition", "car_horn", "car_skid", "car_crash",
-            "traffic_escape", "bicycle_fall"))
+            "traffic_escape", "bicycle_fall", "dog_alert", "shutter_roll", "shutter_clack"))
         required.update(f"opening/roster/{name}.png" for name in (
             "rust", "duke", "c", "cpp", "python"))
         self.assertFalse({f"assets/adventure/{name}" for name in required} - assets)
@@ -39,6 +40,9 @@ class RepositoryAssetsTests(unittest.TestCase):
         self.assertNotIn("assets/adventure/audio/generate_audio.py", assets)
         self.assertNotIn("assets/adventure/audio/generate_traffic_audio.py", assets)
         self.assertNotIn("assets/adventure/audio/generate_evacuation_audio.py", assets)
+        self.assertNotIn("assets/adventure/audio/generate_neighbourhood_audio.py", assets)
+        self.assertNotIn("assets/adventure/audio/morning.wav", assets)
+        self.assertNotIn("assets/adventure/audio/threat.wav", assets)
 
 
 class AdventureReferencesTests(unittest.TestCase):

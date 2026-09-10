@@ -6,6 +6,7 @@
 pub mod assets;
 pub mod audio;
 pub mod morning;
+pub mod neighborhood;
 pub mod opening;
 pub mod pieces;
 pub mod render;

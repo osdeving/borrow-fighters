@@ -48,7 +48,7 @@ cargo run
 # Rever o quarto de Rust e seguir até a rua.
 cargo run -- --start morning
 
-# Explorar a rua e acompanhar a reação à errática.
+# Chegada cinematográfica à rua, exploração e reação à errática.
 cargo run -- --start encounter
 
 # Apresentação → menu, para rever a junção.
@@ -69,6 +69,11 @@ reage à EP: ciclistas largam as bicicletas, pessoas fogem e veículos aceleram
 para fora, sem reaparecer durante a luta. As peças podem ser trocadas pelo
 [catálogo de assets](assets/adventure/street/README.md), com a composição separada.
 [Prévia da rua com evacuação e som nativo](docs/evidence/brazilian-street-evacuation/street-evacuation.mp4).
+A quarta rodada abre a rua com uma tomada da pipa até Rust. Moradores e
+caramelo reagem à ameaça; visitantes entram na mercearia e o lojista baixa
+a porta de enrolar. Pássaros na manhã e trânsito leve no exterior acompanham
+os lugares, cessando o trânsito após a fuga. Ônibus e letreiro foram ampliados.
+[Escopo da chegada](docs/32-cinematic-neighbourhood-arrival.md).
 [Escopo das melhorias](docs/30-prologue-scene-improvements.md)
 e [diário do experimento](docs/worklogs/prologue-scene-improvements.md).
 
@@ -92,7 +97,8 @@ cargo run --no-default-features --features adventure --bin borrow-adventure -- -
 
 Na aventura: `A/D` ou setas movem, `Espaço/W` pula, `J/F` ataca, `K/H` dá um golpe
 forte e `Q/L` defende. `Enter` avança ao próximo trecho, `Tab` revela a mensagem
-e `Esc` pausa. Após derrota, `R` tenta novamente no encontro. No controle:
+e `Esc` pausa. Durante a chegada à rua, `Enter`/`RB` termina a tomada e libera exploração.
+Após derrota, `R` tenta novamente no encontro, sem repetir a câmera de chegada. No controle:
 direcional, `A` para pular no combate ou avançar cenas, `X/Y` para ataques,
 `LB` para defesa, `RB` para o próximo trecho e `Start` para pausa.
 
@@ -125,6 +131,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Visão e produto
 
+- [`docs/32-cinematic-neighbourhood-arrival.md`](docs/32-cinematic-neighbourhood-arrival.md): chegada cinematográfica, moradores, caramelo, porta de enrolar e ambientação sonora.
 - [`docs/31-brazilian-street-evacuation.md`](docs/31-brazilian-street-evacuation.md): rua brasileira com peças substituíveis e evacuação coletiva após a EP.
 - [`docs/30-prologue-scene-improvements.md`](docs/30-prologue-scene-improvements.md): experimento de melhorias das cenas do prólogo, começando pelo quarto e pela rua de Rust.
 

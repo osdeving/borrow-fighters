@@ -686,6 +686,441 @@
           ]
         }
       ]
+    },
+    "resident.0.idle": {
+      "width": 41.95881,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street/neighbours.png",
+          "source": [
+            40,
+            33,
+            191,
+            441
+          ],
+          "anchor": [
+            93,
+            439
+          ]
+        }
+      ]
+    },
+    "resident.0.run": {
+      "width": 72.49428,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street/neighbours.png",
+          "source": [
+            264,
+            59,
+            330,
+            415
+          ],
+          "anchor": [
+            157,
+            413
+          ]
+        },
+        {
+          "image": "street/neighbours.png",
+          "source": [
+            616,
+            71,
+            249,
+            403
+          ],
+          "anchor": [
+            114,
+            401
+          ]
+        },
+        {
+          "image": "street/neighbours.png",
+          "source": [
+            879,
+            65,
+            352,
+            409
+          ],
+          "anchor": [
+            173,
+            407
+          ]
+        },
+        {
+          "image": "street/neighbours.png",
+          "source": [
+            1253,
+            61,
+            280,
+            413
+          ],
+          "anchor": [
+            131,
+            411
+          ]
+        }
+      ]
+    },
+    "resident.1.idle": {
+      "width": 33.64286,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street/neighbours.png",
+          "source": [
+            51,
+            524,
+            157,
+            454
+          ],
+          "anchor": [
+            81,
+            452
+          ]
+        }
+      ]
+    },
+    "resident.1.run": {
+      "width": 73.07143,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street/neighbours.png",
+          "source": [
+            258,
+            560,
+            341,
+            418
+          ],
+          "anchor": [
+            162,
+            416
+          ]
+        },
+        {
+          "image": "street/neighbours.png",
+          "source": [
+            634,
+            570,
+            196,
+            408
+          ],
+          "anchor": [
+            104,
+            406
+          ]
+        },
+        {
+          "image": "street/neighbours.png",
+          "source": [
+            879,
+            561,
+            356,
+            417
+          ],
+          "anchor": [
+            169,
+            415
+          ]
+        },
+        {
+          "image": "street/neighbours.png",
+          "source": [
+            1249,
+            558,
+            270,
+            420
+          ],
+          "anchor": [
+            125,
+            418
+          ]
+        }
+      ]
+    },
+    "shopkeeper.idle": {
+      "width": 43.65474,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street/shopkeeper.png",
+          "source": [
+            105,
+            46,
+            216,
+            481
+          ],
+          "anchor": [
+            113,
+            479
+          ]
+        }
+      ]
+    },
+    "shopkeeper.alert": {
+      "width": 46.88842,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street/shopkeeper.png",
+          "source": [
+            486,
+            53,
+            232,
+            474
+          ],
+          "anchor": [
+            111,
+            472
+          ]
+        }
+      ]
+    },
+    "shopkeeper.pull": {
+      "width": 47.09053,
+      "frame_ticks": 30,
+      "frames": [
+        {
+          "image": "street/shopkeeper.png",
+          "source": [
+            853,
+            14,
+            233,
+            513
+          ],
+          "anchor": [
+            122,
+            511
+          ]
+        },
+        {
+          "image": "street/shopkeeper.png",
+          "source": [
+            1234,
+            112,
+            245,
+            415
+          ],
+          "anchor": [
+            127,
+            413
+          ]
+        }
+      ]
+    },
+    "shopkeeper.run": {
+      "width": 70.53474,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street/shopkeeper.png",
+          "source": [
+            40,
+            555,
+            349,
+            427
+          ],
+          "anchor": [
+            176,
+            425
+          ]
+        },
+        {
+          "image": "street/shopkeeper.png",
+          "source": [
+            462,
+            574,
+            264,
+            408
+          ],
+          "anchor": [
+            138,
+            406
+          ]
+        },
+        {
+          "image": "street/shopkeeper.png",
+          "source": [
+            800,
+            575,
+            375,
+            407
+          ],
+          "anchor": [
+            199,
+            405
+          ]
+        },
+        {
+          "image": "street/shopkeeper.png",
+          "source": [
+            1208,
+            555,
+            303,
+            427
+          ],
+          "anchor": [
+            174,
+            425
+          ]
+        }
+      ]
+    },
+    "dog.idle": {
+      "width": 63.04985,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street/caramelo.png",
+          "source": [
+            33,
+            21,
+            430,
+            345
+          ],
+          "anchor": [
+            215,
+            341
+          ]
+        }
+      ]
+    },
+    "dog.sit": {
+      "width": 49.85337,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street/caramelo.png",
+          "source": [
+            571,
+            21,
+            340,
+            349
+          ],
+          "anchor": [
+            197,
+            344
+          ]
+        }
+      ]
+    },
+    "dog.alert": {
+      "width": 59.97067,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street/caramelo.png",
+          "source": [
+            67,
+            392,
+            409,
+            365
+          ],
+          "anchor": [
+            189,
+            361
+          ]
+        }
+      ]
+    },
+    "dog.sniff": {
+      "width": 59.97067,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street/caramelo.png",
+          "source": [
+            567,
+            443,
+            409,
+            304
+          ],
+          "anchor": [
+            201,
+            296
+          ]
+        }
+      ]
+    },
+    "dog.run": {
+      "width": 64.66276,
+      "frame_ticks": 6,
+      "frames": [
+        {
+          "image": "street/caramelo.png",
+          "source": [
+            23,
+            815,
+            441,
+            290
+          ],
+          "anchor": [
+            231,
+            285
+          ]
+        },
+        {
+          "image": "street/caramelo.png",
+          "source": [
+            512,
+            811,
+            483,
+            291
+          ],
+          "anchor": [
+            268,
+            289
+          ]
+        },
+        {
+          "image": "street/caramelo.png",
+          "source": [
+            17,
+            1152,
+            449,
+            302
+          ],
+          "anchor": [
+            227,
+            296
+          ]
+        },
+        {
+          "image": "street/caramelo.png",
+          "source": [
+            523,
+            1152,
+            469,
+            298
+          ],
+          "anchor": [
+            257,
+            296
+          ]
+        }
+      ]
+    },
+    "shop.shutter": {
+      "width": 97,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/shutter.png",
+          "source": [
+            80,
+            81,
+            876,
+            1357
+          ],
+          "anchor": [
+            438.0,
+            1355
+          ]
+        }
+      ]
     }
   }
 }

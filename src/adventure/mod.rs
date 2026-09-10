@@ -8,6 +8,7 @@ pub mod app;
 pub mod arrival;
 pub mod combat;
 pub mod engine;
+pub mod neighborhood;
 pub mod scenery;
 pub mod story;
 pub mod text;

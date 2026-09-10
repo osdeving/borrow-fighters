@@ -333,3 +333,22 @@ Os novos atlas transparentes ficam em `street/`, separados da base pintada.
 [Adereços e fuga dos ciclistas](street/PROPS.md) registra os prompts completos,
 fontes, hashes, alpha e recortes. Catálogo e composição independentes estão
 no [guia de substituição e reuso](street/README.md).
+
+## Quarta rodada — chegada, moradores e caramelo
+
+A [entrega 32](../../docs/32-cinematic-neighbourhood-arrival.md) acrescenta
+quatro PNGs com transparência real, separados da fachada e da base pintada:
+[neighbours.png](street/neighbours.png), [shopkeeper.png](street/shopkeeper.png),
+[shutter.png](street/shutter.png) e [caramelo.png](street/caramelo.png).
+[Moradores e porta](street/NEIGHBOURS.md) e [caramelo](street/CARAMELO.md)
+registram os prompts completos, fontes geradas, hashes, alpha, recortes e
+apoios. Os arquivos selecionados foram preservados byte a byte; a análise
+por scripts produziu somente metadados, sem editar pixels.
+
+As duas identidades de clientes, o lojista e o cão mantêm poses calmas e
+reações próprias. A encenação reutiliza a cliente em duas posições; a porta
+metálica é revelada por recorte, conservando a proporção da chapa. Câmera,
+trajetórias, oclusão da entrada e fechamento pertencem ao runtime. O ônibus
+maior reutiliza o atlas da terceira rodada; os letreiros usam o arquivo
+Barlow Condensed SemiBold existente com carregamento próprio para tamanhos
+pequenos, descrito no [guia de fontes](fonts/README.md).

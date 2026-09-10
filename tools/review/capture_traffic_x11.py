@@ -28,7 +28,8 @@ class TrafficReview(AdventureReview):
         env["BORROW_FIGHTERS_DATA_DIR"] = str(self.userdata)
         env["BORROW_FIGHTERS_ASSET_DIR"] = str(self.root / "assets")
         command = [str(self.binary), "--capture", str(self.directory),
-                   "--start", "encounter", "--hidden", "--texts", str(self.catalog_path)]
+                   "--start", getattr(self, "start_stage", "encounter"),
+                   "--hidden", "--texts", str(self.catalog_path)]
         if self.args.mute:
             command.append("--mute")
         with (self.directory / "game.log").open("w", encoding="utf-8") as game_log:

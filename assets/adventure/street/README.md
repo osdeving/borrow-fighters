@@ -7,7 +7,8 @@ resolução muda. Feche e abra o jogo para carregar alterações de imagens,
 catálogo e composição.
 
 O bairro pintado continua como camada de base. Garoto, ciclistas, bicicletas,
-veículos e adereços são sobrepostos; não fazem parte desse bitmap. Os atlas
+veículos, moradores, cachorro, porta e adereços são sobrepostos; não fazem
+parte desse bitmap. Os atlas
 anteriores do garoto/ciclista e do carro do acidente continuam isolados e
 podem ser referenciados pelo mesmo catálogo. A organização permite reutilizar
 peças dentro da aventura, sem importar assets ou regras do jogo de luta.
@@ -24,7 +25,7 @@ podem compartilhar um PNG sem carregar cópias adicionais.
 | [catalog.json](catalog.json) | `PieceCatalog`: associa IDs a tamanho, animação e geometria dos PNGs. |
 | [scene.json](scene.json) | `StreetLayout`: lista instâncias de adereços, posições, escala e letreiros. |
 | [pt-BR.json](../texts/pt-BR.json) | Guarda as palavras mostradas nos letreiros e na interface. |
-| [vehicles.json](vehicles.json), [props.json](props.json) | Metadados de produção que ajudam a importar os recortes; o runtime usa o catálogo. |
+| [vehicles.json](vehicles.json), [props.json](props.json), [neighbours.json](neighbours.json), [shopkeeper.json](shopkeeper.json), [caramelo.json](caramelo.json), [shutter.json](shutter.json) | Metadados de produção que ajudam a importar os recortes; o runtime usa o catálogo. |
 
 Os dois primeiros documentos usam `"version": 1`. O catálogo possui o objeto
 `pieces`; a composição possui a lista `props`. A ordem de `props` é a ordem
@@ -123,28 +124,59 @@ câmera. `scale` multiplica o tamanho da peça e deve ser maior que zero e no
 máximo 4. A posição horizontal permite acompanhar o objeto ao mover a câmera.
 Mantenha os adereços na calçada e confira sobreposição com pedestres e veículos.
 
-As peças de cenário desta rodada incluem `prop.bar`, `prop.bus_stop` e
-`prop.corner`. As instâncias principais são `bar_casa_nossa`, `bus_stop` e
-`bar_corner`. A bicicleta abandonada usa `bike.fallen` e sua posição é
-controlada pela encenação de fuga.
+As peças de cenário incluem `prop.bar`, `prop.bus_stop` e `prop.corner`.
+As instâncias principais são `bar_casa_nossa`, `bus_stop`, `bar_corner` e
+`neighbour_corner`; as duas últimas reutilizam a mesma peça. A bicicleta
+abandonada usa `bike.fallen` e sua posição é controlada pela encenação de fuga.
+
+## Preservar a entrada da mercearia
+
+A fachada `bar_casa_nossa` está apoiada em `(666, 355)`, com escala 1 e largura
+de catálogo de 330. A entrada usada pelos moradores tem centro inferior em
+`(603, 355)`, largura **97** e altura **122**, em coordenadas do mundo. Isso
+corresponde ao retângulo `x = 554,5–651,5`, `y = 233–355`. O painel
+`shop.shutter` usa a mesma largura; o fechamento revela sua parte inferior
+até cobrir a abertura, conservando a escala da chapa e o tirador junto à
+borda que desce.
+
+Esses valores pertencem à encenação em
+[neighborhood.rs](../../../src/adventure/neighborhood.rs), nas constantes
+`DOOR_CENTER_X`, `NEIGHBOR_FLOOR_Y`, `DOOR_WIDTH` e `DOOR_HEIGHT`. Mover ou
+escalar a fachada em `scene.json` **não move automaticamente a entrada nem
+as rotas de abrigo**. Ao substituir a arte, preserve o alinhamento da abertura
+com esse retângulo; ao reposicionar a mercearia, ajuste também essas constantes
+e confira a trajetória dos moradores, o contato das mãos e a oclusão dentro
+da porta. A entrada fechada precisa ocultar pessoas e prateleiras sem frestas.
+
+Os moradores usam duas identidades de clientes: a mulher aparece no ponto e
+perto da mercearia, enquanto o jovem de mochila aguarda no ponto. O lojista é
+a terceira identidade. Os clientes correm para a esquerda; o lojista espera
+os três entrarem e baixa a porta. O cachorro caramelo alterna poses calmas e
+foge para a esquerda ao perceber a EP, espelhando as poses autorais. As
+instâncias e trajetórias desses atores pertencem à encenação, enquanto
+imagens, recortes, apoios e poses pertencem ao
+catálogo. A escala atual corresponde a 96 px de altura de referência para
+adultos e 50 px para o cão; preserve a escala entre as poses de cada identidade.
 
 ## Editar letreiros
 
 Cada instância pode ter `labels`. Uma etiqueta aponta para `text_key` no
 objeto `text` de [pt-BR.json](../texts/pt-BR.json); as palavras ficam fora dos
-PNGs. As chaves desta rodada são `street.bar.name`, `street.bar.kind`,
-`street.stop.title` e `street.stop.route`.
+PNGs. As chaves usadas atualmente são `street.bar.name`, `street.stop.title`
+e `street.stop.route`. A chave anterior `street.bar.kind` permanece no JSON
+para comparação, mas não possui etiqueta na composição atual.
 
-Para mudar o nome da mercearia, edite o valor de `street.bar.name`. Para mover
-ou redimensionar o letreiro, edite sua etiqueta em `scene.json`:
+Para mudar o letreiro inteiro da mercearia, edite `street.bar.name`, atualmente
+`BAR E MERCEARIA CASA NOSSA`. Ele ocupa uma única linha com tamanho uniforme.
+Para mover ou redimensionar o letreiro, edite sua etiqueta em `scene.json`:
 
 ```json
 {
   "text_key": "street.bar.name",
-  "offset": [0, -120],
-  "width": 220,
-  "font_size": 22,
-  "color": [243, 226, 189, 255]
+  "offset": [-3, -193],
+  "width": 209,
+  "font_size": 18,
+  "color": [49, 68, 63, 255]
 }
 ```
 
@@ -152,6 +184,11 @@ ou redimensionar o letreiro, edite sua etiqueta em `scene.json`:
 espaço e tamanho máximo do texto. A escala da instância também escala esses
 valores. `color` usa vermelho, verde, azul e alpha, de 0 a 255. Mantenha frases
 curtas e confira o resultado com o objeto inteiro visível.
+
+O letreiro completo da mercearia usa tamanho máximo 18. O carregador usa o papel
+`Signage`, com Barlow Condensed SemiBold rasterizada separadamente a 64 px e
+filtrada para leitura em tamanhos pequenos; o mesmo arquivo de fonte também
+serve à apresentação. Consulte o [guia de fontes](../fonts/README.md).
 
 **F5 recarrega somente os textos.** Alterações no PNG, catálogo, posição ou
 geometria dos letreiros exigem reiniciar o aplicativo. O
@@ -168,16 +205,25 @@ O carregador exige estes IDs usados pela encenação:
 | Bicicleta | `bike.upright`, `bike.fallen` |
 | Trânsito | `vehicle.hatch`, `vehicle.sedan`, `vehicle.pickup`, `vehicle.suv`, `vehicle.bus` |
 | Acidente | `incident.intact`, `incident.crashed` |
+| Clientes | `resident.0.idle`, `resident.0.run`, `resident.1.idle`, `resident.1.run` |
+| Lojista e porta | `shopkeeper.idle`, `shopkeeper.alert`, `shopkeeper.pull`, `shop.shutter` |
+| Caramelo | `dog.idle`, `dog.sit`, `dog.sniff`, `dog.alert`, `dog.run` |
 
 Outras peças, como `vehicle.van` e adereços, podem coexistir. Toda referência
 de `scene.json` deve existir no catálogo, e IDs de instâncias não se repetem.
 
 Depois de editar, reinicie com `cargo run -- --start encounter`. Confira
 escala, apoio no chão, rodas, letreiros, sobreposições e os dois extremos da
-câmera. Aproxime Rust da EP para conferir a troca de poses, a saída dos
-veículos e as bicicletas abandonadas. Arte e composição são decorativas;
-não alteram vida, hitboxes ou resultado do combate.
+câmera. A chegada começa pela pipa e abre o enquadramento até Rust em cerca de
+seis segundos; ao terminar, libera exploração e HUD. O ônibus usa largura 440
+para manter proporção distinta dos automóveis. Aproxime Rust da EP para
+conferir a troca de poses, a saída dos veículos, as bicicletas abandonadas,
+o abrigo dos moradores, a porta fechada e a fuga do caramelo. Arte e composição
+são decorativas; não alteram vida, hitboxes ou resultado do combate.
 
 [Procedência dos veículos](VEHICLES.md) ·
-[Escopo da rodada](../../../docs/31-brazilian-street-evacuation.md) ·
-[Decisão de arquitetura](../../../docs/adr/0025-replaceable-street-pieces.md)
+[Moradores e porta](NEIGHBOURS.md) · [Caramelo](CARAMELO.md) ·
+[Escopo da rua modular](../../../docs/31-brazilian-street-evacuation.md) ·
+[Chegada e vizinhança](../../../docs/32-cinematic-neighbourhood-arrival.md) ·
+[Decisão do catálogo](../../../docs/adr/0025-replaceable-street-pieces.md) ·
+[Decisão da chegada](../../../docs/adr/0026-cinematic-arrival-and-neighbours.md)

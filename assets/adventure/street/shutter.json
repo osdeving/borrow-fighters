@@ -1,0 +1,76 @@
+{
+  "image": "shutter.png",
+  "image_size": [
+    1036,
+    1519
+  ],
+  "rects": [
+    [
+      80,
+      81,
+      876,
+      1357
+    ]
+  ],
+  "labels": [
+    "teal-corrugated-roller-shutter"
+  ],
+  "pivots": [
+    [
+      438.0,
+      1355
+    ]
+  ],
+  "pivot_space": "pixels relative to rect top-left; bottom center",
+  "groups": {
+    "shop.shutter": [
+      0
+    ]
+  },
+  "handle_center_source": [
+    515,
+    1396
+  ],
+  "handle_center_relative": [
+    435,
+    1315
+  ],
+  "handle_grip_span_source": [
+    [
+      371,
+      1396
+    ],
+    [
+      657,
+      1396
+    ]
+  ],
+  "presentation": {
+    "view": "front",
+    "roll_direction": "down",
+    "reveal_source": "bottom strip so the handle stays at moving lower edge",
+    "keep_uniform_scale": true,
+    "source_aspect_ratio": 0.645542,
+    "note": "At83px width fullsourceheight is about129px; clip the source bottom strip to the doorway height rather than stretching the metal."
+  },
+  "measurement": {
+    "alpha_threshold_exclusive": 3,
+    "padding_pixels": 2,
+    "image_pixels_unchanged": true,
+    "visible_alpha_bounds": [
+      82,
+      83,
+      954,
+      1436
+    ]
+  },
+  "source_sha256": "b11cca82fad5f8d03d135c37976e19c593c0f5ddd991c913c1069acb09e1a9e0",
+  "alpha_counts": {
+    "zero": 389585,
+    "intermediate": 1183963,
+    "opaque": 136
+  },
+  "generated_with": "built-in image_gen",
+  "generated_date": "2026-09-10",
+  "selected_prompt": "prompts/shutter.txt"
+}

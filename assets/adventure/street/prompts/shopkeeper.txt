@@ -1,0 +1,23 @@
+Use case: stylized-concept
+Asset type: transparent 2D game shopkeeper animation atlas.
+Create exactly EIGHT isolated full-body sprites of the SAME original Brazilian elderly male grocery shopkeeper, arranged in a FOUR-COLUMN × TWO-ROW atlas. Actual transparent PNG RGBA alpha outside all figures, no scenery or shadows.
+
+Identity: warm medium-brown skin, around sixty years old, short thin gray hair, neat gray mustache, kindly weathered face, average sturdy build. Pale mint short-sleeve collared shirt under a dark moss-green practical grocery apron ending at mid-thigh, brown trousers, comfortable dark brown shoes. No hat, no logos, no lettering. Same face, age, body size and clothing in every frame. Friendly relaxed demeanor before danger, focused concern during response.
+
+TOP ROW:
+Cell 1: calm idle, standing in the doorway with weight relaxed on both feet, FRONT VIEW with slight turn left, hands resting naturally low near apron pockets.
+Cell 2: alarmed reaction, FRONT VIEW slight turn left, shoulders tense, eyes looking toward the right, hands raised near chest, still planted feet.
+Cell 3: pulling a roll-up metal shutter down, FRONT VIEW, both arms raised above his head with both hands gripping an IMAGINARY horizontal handle. Elbows slightly bent, fingers curled to grip, feet firmly planted apart. Do NOT draw the shutter or handle: those are a separate game layer. Hands clearly readable.
+Cell 4: continuing to pull the shutter down, FRONT VIEW, torso leaning forward a little, both hands gripping an IMAGINARY horizontal bar at waist height, elbows bending outward, knees slightly flexed. Do NOT draw a bar or door.
+
+BOTTOM ROW — four distinct running poses all facing and travelling LEFT:
+Cell 1: long stride, near leg forward and far leg back, opposite arm swing, apron folds trail toward the RIGHT.
+Cell 2: passing/compression phase, front leg planted bent under body, rear knee pulling forward, arms in transition.
+Cell 3: opposite long stride, far leg forward and near leg back, opposite arm swing from bottom cell 1, apron follows naturally.
+Cell 4: complementary airborne/pass phase, feet lifted briefly, knees bent in distinct positions, body still same scale and direction.
+
+Style: painterly outlined semi-realistic 2D animation. Restrained dark contours, subtle brush texture on fabric, soft warm morning lighting from upper left, clean readable natural anatomy. Match a sunlit Brazilian residential neighborhood and a small cream-plaster grocery with worn teal paint and terracotta roof. The character should read at approximately 90–105 pixels tall in a game. Avoid tiny decorative detail. Show convincing human expressions and practical body motion.
+
+Layout: landscape 1536×1024, equal 4×2 cells, generous fully transparent gutters. Each complete figure must fit inside its cell with no touching neighboring sprites. Same feet baseline across each row and same body scale throughout. Raised hands fit without shrinking the character; leave extra room above every head. Keep torso/pelvis center horizontally registered near cell center. Full shoes visible in every pose. Only the running airborne frame may float slightly above the common ground line.
+
+Critical constraints: PNG with genuine transparent alpha, never white background or painted checkerboard; eight isolated figures only. No floor lines or cast shadows, no objects, door, handle, text, labels, grids, bubbles, tools, weapons, extra limbs or extra people. No other identities. The four bottom-row running silhouettes must be genuinely different phases and all point LEFT.

@@ -1,0 +1,308 @@
+{
+  "image": "shopkeeper.png",
+  "image_size": [
+    1536,
+    1024
+  ],
+  "rects": [
+    [
+      105,
+      46,
+      216,
+      481
+    ],
+    [
+      486,
+      53,
+      232,
+      474
+    ],
+    [
+      853,
+      14,
+      233,
+      513
+    ],
+    [
+      1234,
+      112,
+      245,
+      415
+    ],
+    [
+      40,
+      555,
+      349,
+      427
+    ],
+    [
+      462,
+      574,
+      264,
+      408
+    ],
+    [
+      800,
+      575,
+      375,
+      407
+    ],
+    [
+      1208,
+      555,
+      303,
+      427
+    ]
+  ],
+  "labels": [
+    "shopkeeper-idle",
+    "shopkeeper-alert",
+    "shopkeeper-pull-high",
+    "shopkeeper-pull-low",
+    "shopkeeper-run-left-0",
+    "shopkeeper-run-left-1",
+    "shopkeeper-run-left-2",
+    "shopkeeper-run-left-3"
+  ],
+  "pivots": [
+    [
+      113,
+      479
+    ],
+    [
+      111,
+      472
+    ],
+    [
+      122,
+      511
+    ],
+    [
+      127,
+      413
+    ],
+    [
+      176,
+      425
+    ],
+    [
+      138,
+      406
+    ],
+    [
+      199,
+      405
+    ],
+    [
+      174,
+      425
+    ]
+  ],
+  "pivot_space": "pixels relative to rect top-left; pelvis center and virtual ground by visual inspection",
+  "groups": {
+    "shopkeeper.idle": [
+      0
+    ],
+    "shopkeeper.alert": [
+      1
+    ],
+    "shopkeeper.pull": [
+      2,
+      3
+    ],
+    "shopkeeper.run": [
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "reference_standing_heights_pixels": {
+    "shopkeeper": 475
+  },
+  "registration": {
+    "source_anchors": [
+      [
+        218,
+        525
+      ],
+      [
+        597,
+        525
+      ],
+      [
+        975,
+        525
+      ],
+      [
+        1361,
+        525
+      ],
+      [
+        216,
+        980
+      ],
+      [
+        600,
+        980
+      ],
+      [
+        999,
+        980
+      ],
+      [
+        1382,
+        980
+      ]
+    ],
+    "note": "Keep uniform pixelscale per identity using its idle standing height; lower transparent margins preserve airborne gaps and bent postures."
+  },
+  "measurement": {
+    "alpha_threshold_exclusive": 3,
+    "padding_pixels": 2,
+    "image_pixels_unchanged": true,
+    "inspection_windows": [
+      [
+        0,
+        0,
+        384,
+        540
+      ],
+      [
+        384,
+        0,
+        768,
+        540
+      ],
+      [
+        768,
+        0,
+        1152,
+        540
+      ],
+      [
+        1152,
+        0,
+        1536,
+        540
+      ],
+      [
+        0,
+        540,
+        398,
+        1024
+      ],
+      [
+        398,
+        540,
+        785,
+        1024
+      ],
+      [
+        785,
+        540,
+        1190,
+        1024
+      ],
+      [
+        1190,
+        540,
+        1536,
+        1024
+      ]
+    ],
+    "visible_alpha_bounds": [
+      [
+        107,
+        48,
+        319,
+        523
+      ],
+      [
+        488,
+        55,
+        716,
+        523
+      ],
+      [
+        855,
+        16,
+        1084,
+        524
+      ],
+      [
+        1236,
+        114,
+        1477,
+        524
+      ],
+      [
+        42,
+        557,
+        387,
+        975
+      ],
+      [
+        464,
+        576,
+        724,
+        974
+      ],
+      [
+        802,
+        577,
+        1173,
+        978
+      ],
+      [
+        1210,
+        557,
+        1509,
+        921
+      ]
+    ],
+    "rectangles_include_virtual_ground": true
+  },
+  "source_sha256": "00cf325015c8ddf3c52b035bbc0dbd1903be35441638d5bfaf1fdde651c6d409",
+  "alpha_counts": {
+    "zero": 1052236,
+    "intermediate": 520628,
+    "opaque": 0
+  },
+  "generated_with": "built-in image_gen",
+  "generated_date": "2026-09-10",
+  "selected_prompt": "prompts/shopkeeper.txt",
+  "authored_facing": [
+    "front-left",
+    "front-right",
+    "front",
+    "front",
+    "left",
+    "left",
+    "left",
+    "left"
+  ],
+  "hand_grips_source": {
+    "2": [
+      [
+        918,
+        36
+      ],
+      [
+        1030,
+        36
+      ]
+    ],
+    "3": [
+      [
+        1298,
+        307
+      ],
+      [
+        1424,
+        307
+      ]
+    ]
+  },
+  "run_frame_seconds": 0.1
+}

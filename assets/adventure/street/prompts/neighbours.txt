@@ -1,0 +1,20 @@
+Use case: stylized-concept
+Asset type: transparent 2D narrative-game neighbour animation atlas.
+Primary request: ten full-body character cutouts on one PNG with actual transparent RGBA alpha. Exactly TWO ROWS × FIVE COLUMNS. Top row is always the same middle-aged grocery shopper woman. Bottom row is always the same young adult backpack commuter man. Each row has one calm standing pose then FOUR distinct LEFT-FACING running poses. No backgrounds or shadows.
+
+TOP ROW IDENTITY — original Brazilian middle-aged woman, brown skin, average healthy build, dark curly hair in a compact bun, mustard-yellow short-sleeve blouse, dark navy ankle-length trousers, practical cream sneakers, a beige reusable cloth grocery bag held in one hand. Friendly face in calm pose, concerned focused expression during escape; ordinary person, no caricature.
+BOTTOM ROW IDENTITY — original Brazilian young adult man, medium tan skin, slim average build, short curly black hair, muted purple T-shirt, sage-green knee-length shorts, cream sneakers and a small navy backpack with both straps on his shoulders. Relaxed face in calm pose, concerned focused expression during escape; ordinary person.
+
+Each identity MUST stay identical across its row: same clothing, colors, body scale, face, hair and accessories. Grocery bag and backpack remain attached correctly through motion; bags may swing, no extra limbs.
+
+COLUMN 1 — calm idle standing, full body visible, facing slightly LEFT, weight comfortably on both feet, natural relaxed arms. Shopper holds bag at her side. Backpack man stands waiting casually.
+COLUMN 2 — running LEFT, left leg planted far forward and right leg extended back, forward lean, opposite arm swing; silhouette clearly running toward the LEFT edge.
+COLUMN 3 — running LEFT, passing/compression pose: leading knee bent over ground contact, rear knee brought under hips, arms transition.
+COLUMN 4 — running LEFT, opposite long-stride pose: right leg far forward, left leg stretched behind, opposite arm swing from column 2.
+COLUMN 5 — running LEFT, airborne/passing pose: both feet briefly off the common ground baseline, knees bent in distinct positions and arms transitioning; body stays the same size. This must be a real complementary run-cycle frame, not another copy of long-stride pose.
+
+Style: hand-painted 2D animation character sprites with restrained dark ink contours, gentle warm morning highlights, muted natural material colors and subtle brush texture. Semi-realistic human proportions, approachable faces, believable anatomy. Match a painterly Brazilian neighborhood with cream masonry, terracotta roofs, green tropical foliage and a small teal-fronted grocery store. Readable at 80–100 pixels tall in a game, so clean bold silhouettes matter more than small decorative details.
+
+Layout: landscape canvas approximately 1536×1024. Exact equal 5-column × 2-row grid, one full-body pose per cell. Generous transparent gutters; no limb, bag or hair may touch another cell or the image border. Standing people approximately 330 source pixels tall. All poses in a row have the SAME character scale and the same nominal floor baseline. Keep hip center horizontally registered near the center of each cell; running poses may be wider than idle but must fit entirely. Enough space above and below every pose.
+
+CRITICAL: fully transparent actual PNG RGBA background outside every figure; no white or black backdrop and no painted checkerboard. No floor, cast shadows, scenery, props detached from people, speech bubbles, text, lettering, labels, labels on bags, grid lines, numbers, logos, brands, weapons or extra characters. TEN isolated figures only. Do not make them all the same pose. Every running body must visibly point and travel LEFT.
