@@ -183,6 +183,21 @@ impl Default for AmbientState {
 }
 
 impl AmbientState {
+    /// Recreates persistent street consequences using the prologue's exact alarm origin.
+    pub fn settled_after_reaction(origin_ticks: u32, elapsed: u32) -> Self {
+        let elapsed = elapsed.max(600);
+        Self {
+            ticks: origin_ticks.saturating_add(1).saturating_add(elapsed),
+            reaction_ticks: Some(elapsed),
+            reaction_origin_ticks: origin_ticks,
+        }
+    }
+
+    /// Original calm clock at the alarm; enough to preserve abandoned-bike locations.
+    pub fn reaction_origin(&self) -> Option<u32> {
+        self.reaction_ticks.map(|_| self.reaction_origin_ticks)
+    }
+
     /// Starts a fresh street scene, reacting immediately at an awake checkpoint.
     pub fn new(enemy_awake: bool) -> Self {
         Self {
@@ -435,6 +450,38 @@ fn cycle_speed(id: usize) -> f32 {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn reconstructed_consequences_match_the_played_street_at_different_alarm_origins() {
+        for origin in [0, 179, 680, 12619] {
+            let mut live = AmbientState::default();
+            for _ in 0..origin {
+                live.tick(false);
+            }
+            live.tick(true);
+            assert_eq!(live.reaction_origin(), Some(origin));
+            for _ in 0..600 {
+                live.tick(true);
+            }
+            let restored = AmbientState::settled_after_reaction(origin, 600);
+            assert_eq!(restored, live);
+            assert_eq!(restored.abandoned_bicycles(), live.abandoned_bicycles());
+            assert_eq!(restored.incident_car(), live.incident_car());
+            assert_eq!(restored.traffic_cars(), live.traffic_cars());
+            assert_eq!(restored.cyclists(), live.cyclists());
+            assert_eq!(restored.kid_phase(), KidPhase::Gone);
+            assert!(restored.traffic_cars().iter().all(|car| !car.visible));
+            assert_eq!(
+                AmbientState::settled_after_reaction(origin, 1),
+                restored,
+                "Canonical aftermath cannot restart an unfinished evacuation"
+            );
+            for _ in 0..173 {
+                live.tick(true);
+            }
+            assert_eq!(AmbientState::settled_after_reaction(origin, 773), live);
+        }
+    }
 
     #[test]
     fn traffic_stays_continuous_and_never_crashes_before_the_threat() {

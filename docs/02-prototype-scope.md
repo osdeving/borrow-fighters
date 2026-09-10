@@ -29,8 +29,13 @@ já entregue.
 - Animações, transições e contato precisam de revisão no renderer real;
   testes de estado não comprovam expressividade humana.
 
-Vínculo, capítulo em Sirius, plataforma instável, personagem de apoio, campanha,
-mapa aberto e múltiplos inimigos simultâneos ficam estacionados. O [diário](worklogs/rust-adventure-prologue.md)
+A [entrega33](33-after-the-silence.md), autorizada em10/09/2026, amplia o escopo
+com um capítulo de Rust após o prólogo: rua evacuada, contatos presenciais,
+telefone com Python, dois trechos conectados e proteção da passagem. Atores e
+geometria são modulares; o menu oferece continuar/recomeçar/rever o prólogo.
+
+Vínculo, capítulo em Sirius, plataforma instável, personagem de apoio, campanha
+com seleção livre, mapa aberto e múltiplos inimigos simultâneos ficam estacionados. O [diário](worklogs/rust-adventure-prologue.md)
 registra entregas e limites observados.
 
 ## Status do Prototype 0.1 de luta

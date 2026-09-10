@@ -98,21 +98,8 @@ pub struct App {
     visual_time_seconds: f32,
 }
 
-/// Owns a ready main menu and its graphics while a host presents an introduction.
-///
-/// Preparation does not open an audio device, accept input or advance gameplay.
-/// The host must keep the Raylib window alive until this value is run or dropped.
-pub struct PreparedMenu {
-    app: App,
-    assets: GameAssets,
-}
-
-impl PreparedMenu {
-    /// Starts the prepared menu, initializing its audio only at this handoff.
-    pub fn run(self, raylib: &mut RaylibHandle, thread: &RaylibThread) {
-        self.app.run_with_assets(raylib, thread, self.assets);
-    }
-}
+mod hosted;
+pub use hosted::{MenuExit, PreparedMenu};
 
 impl Default for App {
     fn default() -> Self {
@@ -138,10 +125,7 @@ impl App {
 
     /// Loads fighting graphics before the host begins an unrelated introduction.
     pub fn prepare_main_menu(raylib: &mut RaylibHandle, thread: &RaylibThread) -> PreparedMenu {
-        PreparedMenu {
-            app: Self::at_main_menu(),
-            assets: GameAssets::load(raylib, thread),
-        }
+        PreparedMenu::new(raylib, thread)
     }
 
     fn with_onboarding_marker(options: LaunchOptions, marker: PathBuf) -> Self {
@@ -241,23 +225,23 @@ impl App {
         }
 
         let assets = GameAssets::load(raylib, thread);
-        self.run_with_assets(raylib, thread, assets);
+        self.run_with_assets(raylib, thread, &assets);
     }
 
     fn run_with_assets(
-        mut self,
+        &mut self,
         raylib: &mut RaylibHandle,
         thread: &RaylibThread,
-        assets: GameAssets,
-    ) {
+        assets: &GameAssets,
+    ) -> MenuExit {
         raylib.set_target_fps(TARGET_FPS);
-        self.sync_world_sprite_combat(&assets);
+        self.sync_world_sprite_combat(assets);
         self.combat_lab
             .set_combat_manifest(fighter_manifest_for_character(
                 self.combat_lab.character(),
-                &assets,
+                assets,
             ));
-        self.sync_showcase_sprite_combat(&assets);
+        self.sync_showcase_sprite_combat(assets);
         let software_cursor_requested = software_cursor_enabled_for_env();
         let audio_device = RaylibAudio::init_audio_device();
         let mut audio_player = match &audio_device {
@@ -318,7 +302,7 @@ impl App {
                             self.match_options.player_two = characters[1];
                             self.current_arena = self.character_select.arena;
                             self.character_select.mode.apply(&mut self.feature_flags);
-                            self.restart_match(&assets);
+                            self.restart_match(assets);
                             self.scene = AppScene::Fight;
                             audio_player.play(&AudioEvent::ui_confirm());
                             audio_player.play_music(music_track_for_arena(self.current_arena));
@@ -330,7 +314,7 @@ impl App {
                     }
                     {
                         let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
-                        render::draw_character_select(&mut draw, &self.character_select, &assets);
+                        render::draw_character_select(&mut draw, &self.character_select, assets);
                         render::draw_video_capture_overlay(
                             &mut draw,
                             self.video_capture.is_recording(),
@@ -346,7 +330,7 @@ impl App {
                             software_cursor_enabled,
                             mouse_position,
                             self.visual_time_seconds,
-                            &assets,
+                            assets,
                         ),
                     );
                 }
@@ -374,7 +358,7 @@ impl App {
                                     flags: self.feature_flags,
                                     gamepad_status,
                                     recording: self.video_capture.is_recording(),
-                                    assets: &assets,
+                                    assets,
                                 },
                             );
                             render::draw_video_capture_overlay(
@@ -388,7 +372,7 @@ impl App {
 
                         {
                             let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
-                            render::draw_combat_lab(&mut draw, &self.combat_lab, &assets);
+                            render::draw_combat_lab(&mut draw, &self.combat_lab, assets);
                             if !self
                                 .combat_lab
                                 .super_preview_world()
@@ -417,7 +401,7 @@ impl App {
                                 ),
                             mouse_position,
                             self.visual_time_seconds,
-                            &assets,
+                            assets,
                         ),
                     );
                 }
@@ -444,7 +428,7 @@ impl App {
                                     flags: self.feature_flags,
                                     gamepad_status,
                                     recording: self.video_capture.is_recording(),
-                                    assets: &assets,
+                                    assets,
                                 },
                             );
                             render::draw_video_capture_overlay(
@@ -465,11 +449,11 @@ impl App {
                         if input.combat_lab.next_pose {
                             audio_player.cancel_cinematic();
                             self.cycle_showcase_character(CycleDirection::Next);
-                            self.sync_showcase_sprite_combat(&assets);
+                            self.sync_showcase_sprite_combat(assets);
                         } else if input.combat_lab.previous_pose {
                             audio_player.cancel_cinematic();
                             self.cycle_showcase_character(CycleDirection::Previous);
-                            self.sync_showcase_sprite_combat(&assets);
+                            self.sync_showcase_sprite_combat(assets);
                         }
                         self.update_move_showcase(frame_time, input.combat_lab, &mut audio_player);
 
@@ -481,7 +465,7 @@ impl App {
                                 self.current_arena,
                                 self.visual_time_seconds,
                                 self.feature_flags,
-                                &assets,
+                                assets,
                             );
                             if !authored_frame_replaced(self.move_showcase.world()) {
                                 render::draw_video_capture_overlay(
@@ -507,7 +491,7 @@ impl App {
                                 ),
                             mouse_position,
                             self.visual_time_seconds,
-                            &assets,
+                            assets,
                         ),
                     );
                 }
@@ -536,6 +520,7 @@ impl App {
                             .update(preferences_input, &mut self.feature_flags);
                         match preferences_action {
                             PreferencesAction::Stay => {}
+                            PreferencesAction::OpenStory => return MenuExit::Story,
                             PreferencesAction::CloseGuide => self.finish_onboarding(),
                             PreferencesAction::CyclePlayerOne(direction) => {
                                 self.match_options.player_one =
@@ -576,7 +561,7 @@ impl App {
                                 self.combat_lab.set_combat_manifest(
                                     fighter_manifest_for_character(
                                         self.combat_lab.character(),
-                                        &assets,
+                                        assets,
                                     ),
                                 );
                                 self.scene = AppScene::CombatLab;
@@ -588,7 +573,7 @@ impl App {
                                 self.move_showcase = MoveShowcase::new(MoveShowcaseOptions {
                                     character: self.match_options.player_one,
                                 });
-                                self.sync_showcase_sprite_combat(&assets);
+                                self.sync_showcase_sprite_combat(assets);
                                 self.pending_showcase_input = CombatLabInput::default();
                                 self.scene = AppScene::MoveShowcase;
                                 self.accumulator = 0.0;
@@ -597,7 +582,7 @@ impl App {
                             PreferencesAction::OpenSpriteViewer => {
                                 run_sprite_viewer(raylib, thread, default_sprite_viewer_options());
                                 if raylib.window_should_close() {
-                                    return;
+                                    return MenuExit::Closed;
                                 }
                                 self.preferences_menu.ignore_next_input();
                                 audio_player.play_music(MusicTrack::Menu);
@@ -612,7 +597,7 @@ impl App {
                                 self.open_character_select();
                                 audio_player.play_music(MusicTrack::Menu);
                             }
-                            PreferencesAction::Exit => return,
+                            PreferencesAction::Exit => return MenuExit::Closed,
                         }
                     }
                     {
@@ -629,7 +614,7 @@ impl App {
                                 flags: self.feature_flags,
                                 gamepad_status,
                                 recording: self.video_capture.is_recording(),
-                                assets: &assets,
+                                assets,
                             },
                         );
                         render::draw_video_capture_overlay(
@@ -654,7 +639,7 @@ impl App {
                                 ),
                             mouse_position,
                             self.visual_time_seconds,
-                            &assets,
+                            assets,
                         ),
                     );
                 }
@@ -694,7 +679,7 @@ impl App {
                         match action {
                             MatchFlowAction::Resume => {}
                             MatchFlowAction::Restart => {
-                                self.restart_match(&assets);
+                                self.restart_match(assets);
                             }
                             MatchFlowAction::CharacterSelect => {
                                 self.open_character_select();
@@ -716,7 +701,7 @@ impl App {
                     if self.scene == AppScene::Fight && !paused && action.is_none() {
                         if input.restart && self.match_flow.is_none() {
                             audio_player.cancel_cinematic();
-                            self.restart_match(&assets);
+                            self.restart_match(assets);
                         }
                         if input.toggle_cpu && self.match_flow.is_none() {
                             self.feature_flags.toggle(FeatureFlag::PlayerTwoCpu);
@@ -742,7 +727,7 @@ impl App {
                             self.fight_visual_seconds,
                             self.feature_flags,
                             gamepad_status,
-                            &assets,
+                            assets,
                         );
                         if let Some(flow) = &self.match_flow {
                             render::draw_match_flow(
@@ -750,7 +735,7 @@ impl App {
                                 flow,
                                 &self.world,
                                 self.visual_time_seconds,
-                                &assets,
+                                assets,
                             );
                         }
                         render::presentation::transition(&mut draw, self.fight_entry_elapsed);
@@ -772,13 +757,14 @@ impl App {
                                 && (!authored_frame_replaced(&self.world) || paused),
                             mouse_position,
                             self.visual_time_seconds,
-                            &assets,
+                            assets,
                         ),
                     );
                 }
                 AppScene::SpriteViewer => unreachable!("sprite viewer has a separate app loop"),
             }
         }
+        MenuExit::Closed
     }
 
     fn finish_onboarding(&mut self) {

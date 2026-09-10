@@ -6,6 +6,9 @@
 pub mod ambient;
 pub mod app;
 pub mod arrival;
+pub mod chapter;
+pub mod chapter_app;
+pub mod chapter_store;
 pub mod combat;
 pub mod engine;
 pub mod neighborhood;

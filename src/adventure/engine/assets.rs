@@ -50,7 +50,7 @@ impl Assets {
         text: TextCatalog,
     ) -> Result<Self, Box<dyn Error>> {
         let mut glyphs: String = (32..=591).filter_map(char::from_u32).collect();
-        glyphs.push_str("—–“”‘’…");
+        glyphs.push_str("—–“”‘’…←→↑↓");
         let body = rl.load_font_ex(
             thread,
             &asset_path("assets/adventure/fonts/Barlow-Regular.ttf").to_string_lossy(),

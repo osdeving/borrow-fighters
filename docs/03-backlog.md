@@ -5,7 +5,12 @@
 Este documento é a fonte de verdade para **o que vem agora**, com filas separadas
 de **to-do** (investigações e melhorias) e **bugfix** (defeitos observados).
 
-Prioridade atual, em 10 de setembro de 2026: experimentar melhorias das cenas
+Prioridade atual: entregar e revisar o primeiro capítulo **Depois do silêncio**,
+autorizado em10/09/2026 na mesma branch, preservando `81c50e6` para retorno.
+[Escopo33](33-after-the-silence.md), [ADR0027](adr/0027-chapter-spatial-direction.md)
+e [diário](worklogs/after-the-silence.md) acompanham execução e evidência.
+
+Rodada anterior, em 10 de setembro de 2026: experimentar melhorias das cenas
 do prólogo na branch `feature/prologue-scene-improvements`, a partir da
 **release `v0.1.0-prototype.4`**. O TODO-018 começa pelo quarto tecnológico de
 Rust e pela rua com ciclistas e garoto soltando pipa. A segunda rodada acrescenta

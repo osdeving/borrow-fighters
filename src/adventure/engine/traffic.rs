@@ -21,14 +21,14 @@ pub fn road(d: &mut impl RaylibDraw, offset: f32) {
     d.draw_rectangle_gradient_v(
         0,
         366,
-        1280,
+        1728,
         72,
         Color::new(90, 95, 88, 255),
         Color::new(111, 109, 97, 255),
     );
     // Low-contrast aggregate follows the scenery, never the simulation clock.
-    for i in 0..310 {
-        let x = (i as f32 * 67.31 - offset).rem_euclid(1340.0) - 30.0;
+    for i in 0..420 {
+        let x = (i as f32 * 67.31 - offset).rem_euclid(1788.0) - 30.0;
         let y = 371.0 + (i as f32 * 19.73).rem_euclid(63.0);
         d.draw_line_ex(
             Vector2::new(x, y),
@@ -37,10 +37,10 @@ pub fn road(d: &mut impl RaylibDraw, offset: f32) {
             Color::new(216, 197, 161, 28),
         );
     }
-    d.draw_rectangle(0, 364, 1280, 5, CONCRETE);
+    d.draw_rectangle(0, 364, 1728, 5, CONCRETE);
     d.draw_line_ex(
         Vector2::new(0.0, 369.0),
-        Vector2::new(1280.0, 369.0),
+        Vector2::new(1728.0, 369.0),
         2.0,
         Color::new(47, 54, 49, 170),
     );
@@ -60,10 +60,10 @@ pub fn road(d: &mut impl RaylibDraw, offset: f32) {
         );
     }
     // Raised separator makes the cycle lane inaccessible to the cars.
-    d.draw_rectangle(0, 435, 1280, 5, Color::new(201, 189, 155, 255));
+    d.draw_rectangle(0, 435, 1728, 5, Color::new(201, 189, 155, 255));
     d.draw_line_ex(
         Vector2::new(0.0, 439.0),
-        Vector2::new(1280.0, 439.0),
+        Vector2::new(1728.0, 439.0),
         1.5,
         INK,
     );

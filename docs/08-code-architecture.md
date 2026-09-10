@@ -104,6 +104,24 @@ borrow-fighters/
 │   ├── main.rs                 # Binário fino: inicializa janela, cria App e roda loop
 │   ├── lib.rs                  # Módulos testáveis e API interna do jogo
 │   ├── app.rs                  # Orquestra estado global, loop e transições de alto nível
+│   ├── app/hosted.rs           # Menu preparado e pedidos opacos ao dono da janela
+│   ├── presentation.rs        # Host opcional conecta prólogo, menu e capítulo
+│   ├── adventure/
+│   │   ├── app.rs             # API de sessões e loop do prólogo
+│   │   ├── chapter/           # Modelo puro do capítulo, sem Raylib ou acesso a disco
+│   │   │   ├── mod.rs         # Estado, comandos e fases
+│   │   │   ├── world.rs       # Geometria validada, obstáculos, POIs e rotas
+│   │   │   ├── progression.rs # Exploração, contatos e transições
+│   │   │   ├── direction.rs   # Caminhos, moradores, diálogo e câmera
+│   │   │   ├── phone.rs       # Relógio único dos gestos e mensagens
+│   │   │   ├── checkpoint.rs  # Marcos versionados e restauração segura
+│   │   │   └── texts.rs       # Contrato do texto externo
+│   │   ├── chapter_store.rs   # Perfil em disco e substituição de save completo
+│   │   ├── chapter_app/       # Loop fixo, menus, tradução de input e revisão
+│   │   └── engine/
+│   │       ├── chapter/       # Assets, mundo, atores, sockets e painel do celular
+│   │       ├── chapter_audio.rs # Ar, passos, telefone, porta e contatos
+│   │       └── capture.rs     # Framebuffer e captura usados pelas duas sessões
 │   ├── cli.rs                  # Parser pequeno de argumentos de inicialização
 │   ├── config.rs               # Constantes de janela, arena, escala e timestep
 │   ├── audio/
@@ -229,6 +247,35 @@ Deve expor os módulos internos para testes e exemplos. Regras puras de jogo dev
 `src/engine/video_capture.rs` tambem segue essa fronteira: ele pode conhecer ferramentas do host (`ffmpeg` e PulseAudio) e Raylib para leitura de framebuffer, mas gameplay e cenas só enxergam start/stop/status e envio do frame renderizado.
 
 `src/engine/sprites/combat.rs` tambem fica em `engine` porque depende do formato de sprite, clip, pivot e escala visual. Ele nao depende de Raylib; apenas projeta metadata local do atlas para `Rect`/`Vec2` em coordenadas de mundo para que `game::World` possa usar com fallback.
+
+### Capítulo da aventura e composição
+
+O [capítulo Depois do silêncio](33-after-the-silence.md) segue a
+[ADR 0027](adr/0027-chapter-spatial-direction.md). A divisão de responsabilidades
+permite alterar geometria, encenação ou arte sem ampliar o `Story` do prólogo:
+
+| Fronteira | Responsabilidade |
+| --- | --- |
+| [`adventure/chapter/`](../src/adventure/chapter/mod.rs) | Estado puro em ticks de 60 Hz. Geometria, caminhos, obstáculos e regiões de interação alimentam exploração, câmera e snapshots dos atores. Fases determinam diálogo, telefone e checkpoints; não carregam texturas nem gravam arquivos. |
+| [`adventure/chapter_store.rs`](../src/adventure/chapter_store.rs) | Lê o perfil versionado em `runtime_paths::data_dir()/adventure/campaign-v1.json`. Valida antes de escrever, sincroniza um temporário na mesma pasta e substitui o destino; erros de leitura ou formato são devolvidos ao host. Vitória jogada no prólogo é um fato separado do estado canônico do capítulo. |
+| [`adventure/chapter_app/`](../src/adventure/chapter_app/mod.rs) | Recebe a janela emprestada, possui recursos da sessão, traduz controles e dirige o loop fixo. Menus suspendem a simulação e descartam comandos pendentes. Mudanças de checkpoint acionam persistência; skip, retry e continue sincronizam o observador de áudio. A revisão usa comandos públicos e registra o estado observado. |
+| [`adventure/engine/chapter/`](../src/adventure/engine/chapter/mod.rs) | Carrega arte e dados externos, aplica a câmera uma vez ao mundo e mantém legendas e mensageiro em coordenadas de tela. O catálogo fornece recortes, apoios e sockets; o aparelho é desenhado separado do corpo. Textos e aparência do mensageiro recarregam juntos após validação. |
+| [`adventure/engine/chapter_audio.rs`](../src/adventure/engine/chapter_audio.rs) | Observa o mesmo relógio de gestos, porta, passos e contatos. Pausa suspende sons em curso; sincronização abandona efeitos antigos. Reutiliza ar e efeitos da aventura, sem carregar trânsito ou música no capítulo evacuado. |
+
+Os dados próprios ficam em [`assets/adventure/chapter/`](../assets/adventure/chapter/README.md):
+`world.json`, `chapter-texts.json`, `phone-style.json`, `catalog.json`, PNGs e
+efeitos. O renderer reutiliza peças da rua por meio do catálogo validado;
+imagens e metadata de produção não definem triggers. O empacotador segue os
+PNGs de todos os frames dos catálogos e os caminhos concretos do runtime.
+
+[`presentation.rs`](../src/presentation.rs) possui a janela e mantém
+[`PreparedMenu`](../src/app/hosted.rs) entre visitas à aventura. O menu devolve
+`MenuExit::Story`; somente o host interpreta o pedido e chama
+`adventure::app::run_campaign_in_window`. A aventura devolve `CampaignExit`
+para menu, revisão do prólogo, saída ou limite de frames. Essas APIs transportam
+intenções de navegação, sem expor estado narrativo ao domínio de luta.
+`fighting` continua compilável sem `adventure`, e o core compartilhado permanece
+restrito a `math` e `runtime_paths`.
 
 ### `tools/sprite-studio`
 

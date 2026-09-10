@@ -128,6 +128,14 @@ Python ensina humanos sobre EPs numa universidade. As manchetes representam
 imprensa da ficção. Logo, subtítulo e demais palavras são desenhados pelo jogo
 a partir do JSON editável, sem texto incorporado aos PNGs novos.
 
+O capítulo [Depois do silêncio](33-after-the-silence.md) continua a atuação
+dentro do jogo, com [poses e cenário reutilizáveis](../assets/adventure/chapter/README.md).
+Clips agrupam as poses e controlam sua duração e repetição; gestos sem repetição
+mantêm a última pose. Apoios preservam pés e escala entre os frames. Sockets
+marcam o contato das mãos para que o celular permaneça uma peça independente,
+acompanhando o corpo e a câmera. Conferir esse contato na troca de poses,
+mantendo Rust e o bairro visíveis enquanto o painel amplia a conversa.
+
 ## Pilares visuais
 
 ### 1. Legibilidade antes de detalhe

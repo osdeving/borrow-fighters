@@ -272,6 +272,14 @@ impl Combat {
         combat
     }
 
+    /// Advances Rust alone while a chapter owns its geometry and progression.
+    /// No enemy intent, encounter trigger, contact or victory is evaluated.
+    pub fn tick_exploration(&mut self, input: CombatInput) {
+        self.tick_clocks();
+        self.update_player(input);
+        integrate(&mut self.player);
+    }
+
     /// Advances movement, enemy intent and contact by one sixtieth of a second.
     pub fn tick(&mut self, input: CombatInput) {
         if self.outcome == Outcome::Defeat {

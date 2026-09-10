@@ -1,0 +1,360 @@
+{
+  "version": 1,
+  "pieces": {
+    "rust.inspect": {
+      "width": 116.0,
+      "frame_ticks": 30,
+      "looping": false,
+      "frames": [
+        {
+          "image": "chapter/rust-narrative.png",
+          "source": [
+            34,
+            6,
+            336,
+            502
+          ],
+          "anchor": [
+            127,
+            499
+          ],
+          "sockets": {},
+          "duration_ticks": 60
+        }
+      ]
+    },
+    "rust.talk": {
+      "width": 107.36904761904762,
+      "frame_ticks": 30,
+      "looping": true,
+      "frames": [
+        {
+          "image": "chapter/rust-narrative.png",
+          "source": [
+            448,
+            0,
+            311,
+            508
+          ],
+          "anchor": [
+            127,
+            505
+          ],
+          "sockets": {},
+          "duration_ticks": 100
+        },
+        {
+          "image": "chapter/rust-narrative.png",
+          "source": [
+            34,
+            6,
+            336,
+            502
+          ],
+          "anchor": [
+            127,
+            499
+          ],
+          "sockets": {},
+          "duration_ticks": 30
+        },
+        {
+          "image": "chapter/rust-narrative.png",
+          "source": [
+            448,
+            0,
+            311,
+            508
+          ],
+          "anchor": [
+            127,
+            505
+          ],
+          "sockets": {},
+          "duration_ticks": 120
+        }
+      ]
+    },
+    "rust.listen": {
+      "width": 116.0,
+      "frame_ticks": 30,
+      "looping": false,
+      "frames": [
+        {
+          "image": "chapter/rust-narrative.png",
+          "source": [
+            34,
+            6,
+            336,
+            502
+          ],
+          "anchor": [
+            127,
+            499
+          ],
+          "sockets": {},
+          "duration_ticks": 120
+        }
+      ]
+    },
+    "rust.phone.draw": {
+      "width": 83.89285714285714,
+      "frame_ticks": 30,
+      "looping": false,
+      "frames": [
+        {
+          "image": "chapter/rust-narrative.png",
+          "source": [
+            833,
+            6,
+            243,
+            502
+          ],
+          "anchor": [
+            126,
+            499
+          ],
+          "sockets": {},
+          "duration_ticks": 30
+        },
+        {
+          "image": "chapter/rust-narrative.png",
+          "source": [
+            1224,
+            2,
+            255,
+            506
+          ],
+          "anchor": [
+            123,
+            503
+          ],
+          "sockets": {
+            "phone": [
+              230,
+              207
+            ],
+            "phone_tip": [
+              221.68353236728962,
+              167.87409597064777
+            ]
+          },
+          "duration_ticks": 30
+        },
+        {
+          "image": "chapter/rust-narrative.png",
+          "source": [
+            63,
+            510,
+            246,
+            505
+          ],
+          "anchor": [
+            122,
+            504
+          ],
+          "sockets": {
+            "phone": [
+              218,
+              229
+            ],
+            "phone_tip": [
+              209.68353236728962,
+              189.87409597064777
+            ]
+          },
+          "duration_ticks": 30
+        }
+      ]
+    },
+    "rust.phone.read": {
+      "width": 84.92857142857143,
+      "frame_ticks": 30,
+      "looping": false,
+      "frames": [
+        {
+          "image": "chapter/rust-narrative.png",
+          "source": [
+            63,
+            510,
+            246,
+            505
+          ],
+          "anchor": [
+            122,
+            504
+          ],
+          "sockets": {
+            "phone": [
+              218,
+              229
+            ],
+            "phone_tip": [
+              209.68353236728962,
+              189.87409597064777
+            ]
+          },
+          "duration_ticks": 120
+        }
+      ]
+    },
+    "rust.phone.type": {
+      "width": 84.92857142857143,
+      "frame_ticks": 30,
+      "looping": true,
+      "frames": [
+        {
+          "image": "chapter/rust-narrative.png",
+          "source": [
+            63,
+            510,
+            246,
+            505
+          ],
+          "anchor": [
+            122,
+            504
+          ],
+          "sockets": {
+            "phone": [
+              218,
+              229
+            ],
+            "phone_tip": [
+              209.68353236728962,
+              189.87409597064777
+            ]
+          },
+          "duration_ticks": 9
+        },
+        {
+          "image": "chapter/rust-narrative.png",
+          "source": [
+            454,
+            510,
+            244,
+            506
+          ],
+          "anchor": [
+            121,
+            504
+          ],
+          "sockets": {
+            "phone": [
+              214,
+              229
+            ],
+            "phone_tip": [
+              205.68353236728962,
+              189.87409597064777
+            ]
+          },
+          "duration_ticks": 9
+        }
+      ]
+    },
+    "rust.phone.stow": {
+      "width": 84.23809523809524,
+      "frame_ticks": 30,
+      "looping": false,
+      "frames": [
+        {
+          "image": "chapter/rust-narrative.png",
+          "source": [
+            844,
+            511,
+            244,
+            505
+          ],
+          "anchor": [
+            120,
+            503
+          ],
+          "sockets": {
+            "phone": [
+              173,
+              296
+            ],
+            "phone_tip": [
+              167.43307596159738,
+              256.38927725033716
+            ]
+          },
+          "duration_ticks": 36
+        },
+        {
+          "image": "chapter/rust-narrative.png",
+          "source": [
+            1235,
+            510,
+            246,
+            507
+          ],
+          "anchor": [
+            125,
+            504
+          ],
+          "sockets": {},
+          "duration_ticks": 24
+        }
+      ]
+    },
+    "driver.talk": {
+      "width": 70.66787003610108,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "chapter/driver.png",
+          "source": [
+            78,
+            74,
+            450,
+            1113
+          ],
+          "anchor": [
+            326,
+            1111
+          ]
+        }
+      ]
+    },
+    "driver.idle": {
+      "width": 47.268953068592054,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "chapter/driver.png",
+          "source": [
+            784,
+            83,
+            301,
+            1104
+          ],
+          "anchor": [
+            180,
+            1102
+          ]
+        }
+      ]
+    },
+    "prop.crate": {
+      "width": 120,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/props.png",
+          "source": [
+            898,
+            662,
+            206,
+            103
+          ],
+          "anchor": [
+            103,
+            103
+          ]
+        }
+      ]
+    }
+  }
+}

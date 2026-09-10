@@ -1,0 +1,320 @@
+{
+  "image": "rust-narrative.png",
+  "image_size": [
+    1536,
+    1024
+  ],
+  "rects": [
+    [
+      34,
+      6,
+      336,
+      502
+    ],
+    [
+      448,
+      0,
+      311,
+      508
+    ],
+    [
+      833,
+      6,
+      243,
+      502
+    ],
+    [
+      1224,
+      2,
+      255,
+      506
+    ],
+    [
+      63,
+      510,
+      246,
+      505
+    ],
+    [
+      454,
+      510,
+      244,
+      506
+    ],
+    [
+      844,
+      511,
+      244,
+      505
+    ],
+    [
+      1235,
+      510,
+      246,
+      507
+    ]
+  ],
+  "labels": [
+    "check-driver",
+    "conversation",
+    "reach-pocket",
+    "raise-phone-hand",
+    "read-phone",
+    "type-phone",
+    "lower-phone-hand",
+    "stow-phone"
+  ],
+  "pivots": [
+    [
+      127,
+      499
+    ],
+    [
+      127,
+      505
+    ],
+    [
+      126,
+      499
+    ],
+    [
+      123,
+      503
+    ],
+    [
+      122,
+      504
+    ],
+    [
+      121,
+      504
+    ],
+    [
+      120,
+      503
+    ],
+    [
+      125,
+      504
+    ]
+  ],
+  "sockets": [
+    {
+      "hand": [
+        303,
+        323
+      ],
+      "phone_grip": [
+        303,
+        323
+      ],
+      "phone_angle_degrees": 0,
+      "phone_visible": false
+    },
+    {
+      "hand": [
+        274,
+        208
+      ],
+      "phone_grip": [
+        274,
+        208
+      ],
+      "phone_angle_degrees": 0,
+      "phone_visible": false
+    },
+    {
+      "hand": [
+        82,
+        299
+      ],
+      "phone_grip": [
+        82,
+        299
+      ],
+      "phone_angle_degrees": 0,
+      "phone_visible": false
+    },
+    {
+      "hand": [
+        230,
+        207
+      ],
+      "phone_grip": [
+        230,
+        207
+      ],
+      "phone_angle_degrees": -12,
+      "phone_visible": true
+    },
+    {
+      "hand": [
+        218,
+        229
+      ],
+      "phone_grip": [
+        218,
+        229
+      ],
+      "phone_angle_degrees": -12,
+      "phone_visible": true
+    },
+    {
+      "hand": [
+        214,
+        229
+      ],
+      "phone_grip": [
+        214,
+        229
+      ],
+      "phone_angle_degrees": -12,
+      "phone_visible": true
+    },
+    {
+      "hand": [
+        173,
+        296
+      ],
+      "phone_grip": [
+        173,
+        296
+      ],
+      "phone_angle_degrees": -8,
+      "phone_visible": true
+    },
+    {
+      "hand": [
+        74,
+        299
+      ],
+      "phone_grip": [
+        74,
+        299
+      ],
+      "phone_angle_degrees": 0,
+      "phone_visible": false
+    }
+  ],
+  "reference_standing_height_pixels": 504,
+  "recommended_standing_height_at_1280x720": 230,
+  "facing": "right",
+  "groups": {
+    "check": [
+      0
+    ],
+    "talk": [
+      1
+    ],
+    "take-phone": [
+      2,
+      3
+    ],
+    "read-phone": [
+      4
+    ],
+    "type-phone": [
+      4,
+      5
+    ],
+    "put-away-phone": [
+      6,
+      7
+    ]
+  },
+  "registration": {
+    "coordinate_system": "rects use absolute image pixels; pivots and sockets use pixels relative to each rect",
+    "pivot_role": "midpoint of planted shoe contacts on a shared row baseline, not bounding-box center",
+    "ground_baselines_source_y": [
+      505,
+      1014
+    ],
+    "source_ground_pivots": [
+      [
+        161,
+        505
+      ],
+      [
+        575,
+        505
+      ],
+      [
+        959,
+        505
+      ],
+      [
+        1347,
+        505
+      ],
+      [
+        185,
+        1014
+      ],
+      [
+        575,
+        1014
+      ],
+      [
+        964,
+        1014
+      ],
+      [
+        1360,
+        1014
+      ]
+    ],
+    "source_hand_sockets": [
+      [
+        337,
+        329
+      ],
+      [
+        722,
+        208
+      ],
+      [
+        915,
+        305
+      ],
+      [
+        1454,
+        209
+      ],
+      [
+        281,
+        739
+      ],
+      [
+        668,
+        739
+      ],
+      [
+        1017,
+        807
+      ],
+      [
+        1309,
+        809
+      ]
+    ],
+    "scale_rule": "Use desired standing height / 504 for every pose. Do not independently normalize frames by cropped height or width.",
+    "phone_rule": "Phone artwork is separate. phone_grip is an approximate palm contact; render body behind the illustrated fingers, preserve hand occlusion, and verify contact in-engine. Camera/world transform applies to socket and actor together.",
+    "phone_registration": "Suggested phone rectangle around 28x62 source pixels; grip at [0.5,0.86] of phone size; angles are initial art guidance, not runtime behavior. The pocket/stow poses keep the phone hidden."
+  },
+  "measurement": {
+    "alpha_threshold_exclusive": 3,
+    "padding_pixels": 2,
+    "image_pixels_unchanged": true,
+    "hand_landmarks": "approximate visual measurements; no skeleton or raster edits"
+  },
+  "alpha_counts": {
+    "zero": 868262,
+    "intermediate": 704602,
+    "opaque": 0
+  },
+  "source_sha256": "60a424907da69377a8bc856dc7a48a4fcca00e96a5e0cbac68aac1c60fce5368",
+  "source_file": "/home/willams/.codex/generated_images/01a08b8b-3f76-7df3-b45e-58333ee12b57/exec-f804f2e7-0080-4eb3-99dc-26cf897b2133.png",
+  "generated_with": "built-in image_gen",
+  "date": "2026-09-10",
+  "prompt": "prompts/rust-narrative-compact.txt"
+}

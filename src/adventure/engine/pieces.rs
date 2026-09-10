@@ -88,6 +88,29 @@ impl StreetPieces {
                 return Err(format!("missing street piece: {id}").into());
             }
         }
+        Self::from_catalog(rl, thread, catalog, layout)
+    }
+
+    /// Loads another validated piece catalog, placed by its own world model.
+    pub fn load_catalog(
+        rl: &mut RaylibHandle,
+        thread: &RaylibThread,
+        path: &str,
+    ) -> Result<Self, Box<dyn Error>> {
+        Self::from_catalog(
+            rl,
+            thread,
+            PieceCatalog::load(&asset_path(path))?,
+            StreetLayout::empty(),
+        )
+    }
+
+    fn from_catalog(
+        rl: &mut RaylibHandle,
+        thread: &RaylibThread,
+        catalog: PieceCatalog,
+        layout: StreetLayout,
+    ) -> Result<Self, Box<dyn Error>> {
         let mut textures = BTreeMap::new();
         for piece in catalog.pieces.values() {
             for frame in &piece.frames {
@@ -162,6 +185,18 @@ impl StreetPieces {
         }
     }
 
+    /// Resolves an attachment through the same anchor, mirror, scale and rotation as its art.
+    pub fn socket(&self, id: &str, ticks: u32, pose: &PiecePose, name: &str) -> Option<Vector2> {
+        let (frame, scale) = self.catalog.pieces[id].sample(ticks);
+        let point = *frame.sockets.get(name)?;
+        Some(socket_geometry(
+            point,
+            frame.anchor,
+            scale * pose.scale,
+            pose,
+        ))
+    }
+
     /// Rotating highlights use each authored frame's own wheel landmarks.
     pub fn wheels(&self, d: &mut impl RaylibDraw, id: &str, ticks: u32, pose: &PiecePose) {
         let (frame, scale) = self.catalog.pieces[id].sample(ticks);
@@ -194,6 +229,17 @@ impl StreetPieces {
         let (frame, scale) = self.catalog.pieces[id].sample(ticks);
         Vector2::new(frame.source[2] * scale, frame.source[3] * scale)
     }
+}
+
+fn socket_geometry(point: [f32; 2], anchor: [f32; 2], scale: f32, pose: &PiecePose) -> Vector2 {
+    let direction = if pose.flip { -1.0 } else { 1.0 };
+    let x = (point[0] - anchor[0]) * scale * direction;
+    let y = (point[1] - anchor[1]) * scale;
+    let angle = pose.rotation.to_radians();
+    Vector2::new(
+        pose.position.x + x * angle.cos() - y * angle.sin(),
+        pose.position.y + x * angle.sin() + y * angle.cos(),
+    )
 }
 
 fn clipped_geometry(
@@ -247,6 +293,16 @@ fn clipped_geometry(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn hand_socket_follows_anchor_scale_mirroring_and_rotation() {
+        let mut pose = PiecePose::at(Vector2::new(500.0, 580.0));
+        pose.flip = true;
+        pose.rotation = 90.0;
+        let point = socket_geometry([70.0, 100.0], [40.0, 200.0], 0.5, &pose);
+        assert!((point.x - 550.0).abs() < 0.001);
+        assert!((point.y - 565.0).abs() < 0.001);
+    }
 
     #[test]
     fn doorway_crop_preserves_the_selected_pixels_with_a_mirrored_anchor() {

@@ -31,7 +31,7 @@ Jogue por dez minutos e [conte o que funcionou e o que ficou confuso](https://gi
 
 ## Jogar pelo código — aventura, apresentação e menu
 
-`cargo run` inicia a aventura que apresenta
+Na primeira execução, `cargo run` inicia a aventura que apresenta
 Ada, uma mensagem sem remetente, o despertar de Assembly e, muito tempo depois,
 a manhã de Rust interrompida por uma entidade errática. As regras e os assets
 da aventura são próprios; as features `adventure` e `fighting` são habilitadas
@@ -56,6 +56,9 @@ cargo run -- --start opening
 
 # Direto ao menu principal renovado.
 cargo run -- --menu
+
+# Primeiro capítulo da campanha (retoma o checkpoint, se houver).
+cargo run -- --start chapter
 ```
 
 Na branch `feature/prologue-scene-improvements`, a primeira rodada acrescenta
@@ -79,8 +82,13 @@ os lugares, cessando o trânsito após a fuga. Ônibus e letreiro foram ampliado
 e [diário do experimento](docs/worklogs/prologue-scene-improvements.md).
 
 O menu usa a identidade do título final, moldura de terminal, cursor de bloco
-piscante e números que formam as opções. **Modo História** fica sem ação por
-enquanto; **Versus Setup** abre a seleção. As demais entradas mantêm os destinos.
+piscante e números que formam as opções. Na execução conjunta, **Modo História**
+abre **Depois do silêncio**, primeiro capítulo com Rust: retorno à rua evacuada,
+conversas com moradores, contato com Python pelo celular, travessa e passagem.
+O submenu oferece continuar, recomeçar e rever o prólogo. Depois de visto ou
+pulado, o prólogo deixa de abrir automaticamente; as entradas explícitas
+`--start` continuam disponíveis. **Versus Setup** mantém a seleção livre.
+[Capítulo e estratégia de animação](docs/33-after-the-silence.md).
 [Escopo e verificação da junção](docs/29-story-terminal-menu.md).
 
 Os dois modos também continuam disponíveis isoladamente:
@@ -103,7 +111,7 @@ Após derrota, `R` tenta novamente no encontro, sem repetir a câmera de chegada
 direcional, `A` para pular no combate ou avançar cenas, `X/Y` para ataques,
 `LB` para defesa, `RB` para o próximo trecho e `Start` para pausa.
 
-Em `borrow-story`, `Backspace`/`View` pula tudo e abre o menu principal, inclusive
+No prólogo de `borrow-story`, `Backspace`/`View` pula tudo e abre o menu principal, inclusive
 durante combate ou pausa. Avançar o encontro com `Enter`/`RB` segue à apresentação
 sem registrar vitória. Na conclusão normal, **Aperte qualquer tecla para continuar**
 aguarda uma nova tecla, clique ou botão: segurar uma tecla ou usar o mesmo comando
@@ -111,6 +119,13 @@ que avançou o último trecho não dispensa a tela.
 
 No executável isolado, pular tudo conclui o trecho local; `T/X` repete a apresentação
 na conclusão. Para sair durante a aventura, feche a janela ou use `B` do controle na pausa.
+
+No capítulo: **E / A** interage, **Espaço / B** pula, **Enter / RB** avança
+conversa, **Backspace / View** conclui a atuação atual e **Esc / Start** abre
+pausa com retorno ao menu. **R / A** retoma uma derrota no checkpoint local.
+O progresso fica em `adventure/campaign-v1.json` no diretório de dados do usuário.
+**F3** mostra posições, regiões e rotas; **F5** recarrega os textos do capítulo
+e a aparência do mensageiro. [Assets, clips e sockets](assets/adventure/chapter/README.md).
 
 **Textos sem recompilar:** edite [assets/adventure/texts/pt-BR.json](assets/adventure/texts/pt-BR.json),
 salve e pressione **F5**. Legendas, terminal, manchetes, biografias, menus, logo
@@ -132,6 +147,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Visão e produto
 
+- [`docs/33-after-the-silence.md`](docs/33-after-the-silence.md): primeiro capítulo, telefone in-game, geometria e checkpoints.
 - [`docs/32-cinematic-neighbourhood-arrival.md`](docs/32-cinematic-neighbourhood-arrival.md): chegada cinematográfica, moradores, caramelo, porta de enrolar e ambientação sonora.
 - [`docs/31-brazilian-street-evacuation.md`](docs/31-brazilian-street-evacuation.md): rua brasileira com peças substituíveis e evacuação coletiva após a EP.
 - [`docs/30-prologue-scene-improvements.md`](docs/30-prologue-scene-improvements.md): experimento de melhorias das cenas do prólogo, começando pelo quarto e pela rua de Rust.
@@ -198,6 +214,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Decisões registradas
 
+- [`docs/adr/0027-chapter-spatial-direction.md`](docs/adr/0027-chapter-spatial-direction.md): capítulo modular, geometria e animação com sockets.
 - [`docs/adr/0024-prologue-background-life.md`](docs/adr/0024-prologue-background-life.md): ciclistas, garoto e pipa em planos de fundo, com relógio próprio e reação à ameaça.
 
 - [`docs/adr/0023-story-to-terminal-menu.md`](docs/adr/0023-story-to-terminal-menu.md): composição externa e janela compartilhada, sem dependências entre os domínios.
@@ -371,7 +388,7 @@ A seleção Linker mostra retratos, os personagens animados em pé e confirmaç�
 O menu principal desta branch usa uma janela de terminal com cursor de bloco
 e revelação binária; a marca acompanha o título final da aventura:
 
-- `Modo História`: reservado para a continuação da aventura; sem ação por enquanto.
+- `Modo História`: no executável conjunto, abre o capítulo de Rust com checkpoints; na execução isolada de luta, permanece indisponível.
 - `Versus Setup`: abre a seleção visual de personagens, arena e modo.
 - `Training`: abre `Move Showcase`, `Combat Lab` ou `Sprite Viewer`.
 - `Lore / Roster`: abre um livro de programação com capítulos da história e fichas dos personagens.

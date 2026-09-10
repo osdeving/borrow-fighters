@@ -235,7 +235,7 @@ fn terminal(draw: &mut impl DrawTarget, options: &PreferencesDrawOptions<'_>) {
             10.0,
             MUTED,
         );
-        if index == PreferencesMenu::MAIN_STORY_ROW {
+        if index == PreferencesMenu::MAIN_STORY_ROW && !options.menu.story_available() {
             let label = "EM BREVE";
             let width = menu_text_width(font, label, 10.0, 1.0);
             draw_menu_text(

@@ -68,6 +68,8 @@ pub enum CycleDirection {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum PreferencesAction {
     Stay,
+    /// Requests the host's story application without importing that domain.
+    OpenStory,
     StartFight,
     StartWithMode(PlayMode),
     OpenCharacterSelect,
@@ -97,11 +99,22 @@ pub struct PreferencesMenu {
     accepting_input: bool,
     selection_pulse_frames: u16,
     main_entry_frames: u16,
+    story_available: bool,
 }
 
 const LORE_SCROLL_STEP_LINES: usize = 3;
 
 impl PreferencesMenu {
+    /// Enables the optional story handoff only when a host can service it.
+    pub fn set_story_available(&mut self, available: bool) {
+        self.story_available = available;
+    }
+
+    /// Whether the menu's host supplies a story continuation.
+    pub fn story_available(&self) -> bool {
+        self.story_available
+    }
+
     pub const MAIN_STORY_ROW: usize = 0;
     pub const MAIN_VERSUS_ROW: usize = 1;
     pub const MAIN_TRAINING_ROW: usize = 2;
@@ -277,7 +290,7 @@ impl PreferencesMenu {
 
         if input.start {
             if self.page == MenuPage::Main && self.selected == Self::MAIN_STORY_ROW {
-                return PreferencesAction::Stay;
+                return self.activate_selected(flags);
             }
             return if self.page == MenuPage::HowToPlay {
                 self.activate_selected(flags)
@@ -346,6 +359,7 @@ impl PreferencesMenu {
     fn activate_selected(&mut self, flags: &mut FeatureFlags) -> PreferencesAction {
         match self.page {
             MenuPage::Main => match self.selected {
+                Self::MAIN_STORY_ROW if self.story_available => PreferencesAction::OpenStory,
                 Self::MAIN_STORY_ROW => PreferencesAction::Stay,
                 Self::MAIN_VERSUS_ROW => PreferencesAction::OpenCharacterSelect,
                 Self::MAIN_TRAINING_ROW => {

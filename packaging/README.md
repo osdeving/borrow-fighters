@@ -83,6 +83,11 @@ O staging coleta caminhos concretos de `src/`, manifesta os seis personagens e
 segue `image` do manifesto e de cada frame, além do manifesto de áudio. Os
 carregadores da aventura acrescentam nomes locais de cenas, poses e áudio;
 `opening/roster.json` fornece somente os retratos de `characters[].image`.
+Os catálogos `street/catalog.json` e `chapter/catalog.json` acrescentam o PNG
+de cada frame, inclusive poses posteriores e imagens compartilhadas. Cada
+atlas é copiado uma vez. O capítulo inclui também mundo, textos, estilo do
+celular, cenário do beco e efeitos de áudio referenciados pelo runtime; os
+JSONs de produção, prompts e geradores permanecem no repositório.
 Textos externos, três fontes próprias, trilha da apresentação e imagens de
 C++/Python acompanham a sequência. O retrato de Go não usado pela apresentação
 fica fora desse conjunto. Os
@@ -124,7 +129,7 @@ as bibliotecas incorporadas. O workflow também testa instalação/desinstalaç�
 abertura Linux sob Xvfb e instalação do RPM em Fedora. O teste de carga
 `--help` termina com código 0 e não abre uma janela. Os testes do coletor e
 staging rodam com `python3 -m unittest discover -s tools/release -p 'test_*.py'`:
-cobrem assets dinâmicos, retratos transitivos, ausências, hashes, licenças e
+Cobrem assets dinâmicos, retratos e poses transitivas, ausências, hashes, licenças e
 nome público do executável em caminhos com acentos.
 No Windows, o instalador e o ZIP são abertos em pastas com espaços e acentos
 (`Jogo ação instalado` e `Jogo ação portátil`): o CI confere os assets e seus

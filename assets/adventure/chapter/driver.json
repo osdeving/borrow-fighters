@@ -1,0 +1,128 @@
+{
+  "image": "driver.png",
+  "image_size": [
+    1254,
+    1254
+  ],
+  "image_mode": "RGBA",
+  "rects": [
+    [
+      78,
+      74,
+      450,
+      1113
+    ],
+    [
+      784,
+      83,
+      301,
+      1104
+    ]
+  ],
+  "labels": [
+    "driver-speaking",
+    "driver-grateful"
+  ],
+  "pivots": [
+    [
+      326,
+      1111
+    ],
+    [
+      180,
+      1102
+    ]
+  ],
+  "pivot_space": "pixels relative to rect top-left; pelvis center and shared foot baseline by visual inspection",
+  "groups": {
+    "driver.speaking": [
+      0
+    ],
+    "driver.grateful": [
+      1
+    ]
+  },
+  "reference_standing_heights_pixels": {
+    "driver": 1108
+  },
+  "authored_facing": [
+    "left",
+    "left"
+  ],
+  "registration": {
+    "source_anchors": [
+      [
+        404,
+        1185
+      ],
+      [
+        964,
+        1185
+      ]
+    ],
+    "note": "Use one scale for both poses, based on the first pose standing height of 1108 px. Shared source ground y=1185 keeps feet stable; slight head lowering in grateful pose is authored."
+  },
+  "measurement": {
+    "alpha_threshold_exclusive": 3,
+    "padding_pixels": 2,
+    "image_pixels_unchanged": true,
+    "inspection_windows": [
+      [
+        0,
+        0,
+        627,
+        1254
+      ],
+      [
+        627,
+        0,
+        1254,
+        1254
+      ]
+    ],
+    "visible_alpha_bounds": [
+      [
+        80,
+        76,
+        526,
+        1184
+      ],
+      [
+        786,
+        85,
+        1083,
+        1185
+      ]
+    ],
+    "bounds_format": "[left, top, right-exclusive, bottom-exclusive]",
+    "rectangles_include_virtual_ground": true,
+    "source_alpha_1_to_3_pixels": 11824,
+    "note": "Very faint source alpha 1-3 is retained byte for byte. Bounds use alpha > 3 only for metadata, with no image thresholding or masking."
+  },
+  "source_sha256": "10aef02391b50458663be7d23c6cde79d5bb43bf63fd522e4b8a6d5e70e5a38e",
+  "source_alpha_sha256": "2241ad8321655f08d5fce981b62585fb34066d928be1a2fce3d4afbf223dbfea",
+  "alpha_counts": {
+    "zero": 1116630,
+    "intermediate": 454659,
+    "opaque": 1227
+  },
+  "generated_with": "built-in image_gen",
+  "generated_date": "2026-09-10",
+  "generation_mode": "new image; prompt only; project references visually inspected before generation",
+  "generated_source": "/home/willams/.codex/generated_images/01a08c38-e933-72d1-a884-aeb4f0c99241/exec-086263ff-ba7e-4100-82e6-18f0efadd84c.png",
+  "selected_prompt": "prompts/driver.txt",
+  "selected_prompt_sha256": "2f6c6bf1a44caa50e1a3cd0974f0a94a4e175514c7582227ed26a798cb8bb3ec",
+  "references": [
+    {
+      "path": "../street/neighbours.png",
+      "role": "visual inspection only; civilian linework and painted materials",
+      "sha256": "40bdacd3abad00a17d9cdce266c5e381345ae25ef5d7e22c69107519acc3cba2"
+    },
+    {
+      "path": "../street/shopkeeper.png",
+      "role": "visual inspection only; civilian proportions and restrained acting",
+      "sha256": "00cf325015c8ddf3c52b035bbc0dbd1903be35441638d5bfaf1fdde651c6d409"
+    }
+  ],
+  "status": "candidate; native scene review and runtime placement owned by chapter integration"
+}
