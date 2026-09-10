@@ -53,6 +53,7 @@ movimento, pulo, derrota, retry, golpes leve/forte, defesa, vitória e pesar.
 O MP4 H.264 tem 1280×720, 30 fps e 40,867 s, com diferença de 0,030 s em relação
 à telemetria. [Resultado](native/result.json),
 [telemetria](native/telemetry.jsonl.gz) e [log gráfico](native/game.log).
+Os logs versionados removem somente espaços ao final das linhas.
 
 Ambiente: Linux/WSL, X11, OpenGL 3.3, renderer D3D12 sobre NVIDIA GeForce RTX
 4070 Laptop GPU. O script enviou eventos sintéticos exclusivamente à janela do

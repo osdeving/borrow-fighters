@@ -9,7 +9,7 @@ INFO:     > rtext:..... loaded (optional)
 INFO:     > rmodels:... loaded (optional)
 INFO:     > raudio:.... loaded (optional)
 INFO: DISPLAY: Trying to enable MSAA x4
-INFO: DISPLAY: Device initialized successfully 
+INFO: DISPLAY: Device initialized successfully
 INFO:     > Display size: 1440 x 900
 INFO:     > Screen size:  1280 x 720
 INFO:     > Render size:  1280 x 720

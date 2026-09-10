@@ -70,6 +70,8 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
   README/entrega/backlog/CHANGELOG atualizados. TODO-012 concluído; TODO-013
   guarda avaliação humana de animação, controle, áudio, emoção e continuidade.
   Sem push, merge ou publicação de release nesta rodada.
+  `82bd16a` registra a entrega e as evidências; uma revisão final normaliza
+  espaços finais dos logs capturados, preservando seu conteúdo.
 
 - 2026-09-10: `3985a4b` registra as ações próprias de Rust e a correção do
   gravador. Revisão completa válida em `/tmp/borrow-adventure-review-02`:
