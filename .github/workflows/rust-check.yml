@@ -11,6 +11,8 @@ on:
       - "assets/adventure/**"
       - "tools/check_domain_boundaries.py"
       - "tools/test_check_domain_boundaries.py"
+      - "tools/review/mix_adventure_review_audio.py"
+      - "tools/review/test_mix_adventure_review_audio.py"
       - ".github/workflows/rust-check.yml"
   push:
     branches:
@@ -24,6 +26,8 @@ on:
       - "assets/adventure/**"
       - "tools/check_domain_boundaries.py"
       - "tools/test_check_domain_boundaries.py"
+      - "tools/review/mix_adventure_review_audio.py"
+      - "tools/review/test_mix_adventure_review_audio.py"
       - ".github/workflows/rust-check.yml"
 
 permissions:
@@ -46,6 +50,9 @@ jobs:
         run: |
           python3 tools/check_domain_boundaries.py
           python3 -m unittest discover -s tools -p 'test_check_domain_boundaries.py'
+
+      - name: Test adventure review audio reconstruction
+        run: python3 -m unittest discover -s tools/review -p 'test_mix_adventure_review_audio.py'
 
       - name: Install native dependencies
         run: |

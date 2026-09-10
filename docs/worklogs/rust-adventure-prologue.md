@@ -7,8 +7,8 @@
 - Branch: `feature/rust-adventure-prologue`.
 - Base: `ca63b25` (`v0.1.0-prototype.3`).
 - Primeiro checkpoint: `ac49bae`, backlog e proposta anterior à correção de lore.
-- Etapa: contrato registrado; implementação e produção visual em andamento.
-- Entrega ainda não validada. Compilar não basta para concluir o goal.
+- Etapa: implementação e revisão gráfica concluídas; encerrando evidências,
+  smoke tests de assets isolados e documentação.
 
 ## Retomar após queda do WSL
 
@@ -52,12 +52,25 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 - [x] Implementar features/binários e domínio puro.
 - [x] Produzir/revisar arte de Ada, manhã, ambiente e errática.
 - [x] Integrar animação, input, áudio, combate e desfecho na janela real.
-- [ ] Verificar derrota/retry, pausa, pular cenas e controles.
+- [x] Verificar derrota/retry, pausa, pular cenas e controles.
 - [ ] Passar fmt, Clippy, matriz de testes e checks de documentação.
 - [ ] Registrar capturas/vídeo e smoke tests de isolamento.
 - [ ] Fechar docs, diário e commits de entrega.
 
 ## Checkpoints
+
+- 2026-09-10: `3985a4b` registra as ações próprias de Rust e a correção do
+  gravador. Revisão completa válida em `/tmp/borrow-adventure-review-02`:
+  74,467 s, Ada → manhã → encontro → pesar → Complete. Áudio do vídeo
+  reconstruído da telemetria com os WAVs originais, sem gravação do dispositivo.
+  Rodada nativa E (`/tmp/borrow-adventure-native-20260910-e`) passou 14 checks
+  via teclado sintético dirigido à janela: movimento, pulo, pausa, derrota/retry,
+  J/K, defesa, vitória e pesar. MP4 válido 1280×720/30 fps, 40,867 s.
+  Matriz final em `/tmp/borrow-adventure-checks-final`: Fmt/Clippy, 412 testes
+  com ambos, 22 aventura/core, 34 fixtures de isolamento e 24 testes do mixer.
+  Luta (393) e core (3) permanecem aprovados na matriz anterior, sem mudanças
+  nesses domínios desde a execução. Pendente: copiar evidências ao repo,
+  registrar smoke tests de assets e fechar docs/links.
 
 - 2026-09-10: `4bfc5c6` registra jogo isolado; `4a133ac` adiciona checker de
   fronteiras (34 testes). A matriz inicial passou: 411 testes com ambos os modos,
