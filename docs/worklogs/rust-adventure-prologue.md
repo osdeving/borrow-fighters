@@ -68,6 +68,17 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 
 ## Checkpoints
 
+- 2026-09-10, rodada 2: `7ca6cc8` registra escopo e ADR 0022. Catálogo
+  `assets/adventure/texts/pt-BR.json` externo com F5 e `--texts`; reload inválido
+  preserva o catálogo. Novo `morning.rs` fixa apoios anatômicos em nove capturas
+  revisadas (`/tmp/borrow-morning-integrated-chxve2tm`). Stage `Opening` entra
+  após pesar, com 48 s de jornais, C++/Python, elenco e logo. PNGs próprios,
+  cópias visuais independentes do elenco e trilha original integrados.
+  27 testes aventura/core, Clippy completo e checker de fronteiras passaram.
+  Revisão completa gravando em `/tmp/borrow-adventure-opening-review-01`;
+  harness nativo em atualização para provar F5 sem rebuild e skip/replay da
+  apresentação. Pendentes: revisão final, matriz restante, evidências/docs.
+
 - 2026-09-10, encerramento: `bda28d7` preserva ferramentas de revisão e seus
   testes. Evidências selecionadas copiadas para `docs/evidence/adventure-prologue/`,
   incluindo vídeos, capturas, telemetria comprimida e relatórios. Smoke de assets

@@ -19,10 +19,17 @@ enum Track {
     Morning,
     Threat,
     Remorse,
+    Opening,
 }
 
 impl Track {
-    const ALL: [Self; 4] = [Self::Ada, Self::Morning, Self::Threat, Self::Remorse];
+    const ALL: [Self; 5] = [
+        Self::Ada,
+        Self::Morning,
+        Self::Threat,
+        Self::Remorse,
+        Self::Opening,
+    ];
 
     fn file(self) -> &'static str {
         match self {
@@ -30,7 +37,12 @@ impl Track {
             Self::Morning => "morning.wav",
             Self::Threat => "threat.wav",
             Self::Remorse => "remorse.wav",
+            Self::Opening => "opening.wav",
         }
+    }
+
+    fn looping(self) -> bool {
+        self != Self::Opening
     }
 }
 
@@ -87,7 +99,7 @@ impl<'aud> AdventureAudio<'aud> {
             if path.is_file()
                 && let Ok(mut music) = device.new_music(&path.to_string_lossy())
             {
-                music.set_looping(true);
+                music.set_looping(track.looping());
                 music.set_volume(VOLUME);
                 player.music.push((track, music));
             }
@@ -181,6 +193,7 @@ fn background_for(story: &Story) -> Track {
         Stage::Encounter if story.combat.enemy_awake => Track::Threat,
         Stage::Encounter => Track::Morning,
         Stage::Aftermath | Stage::Complete => Track::Remorse,
+        Stage::Opening => Track::Opening,
     }
 }
 
@@ -283,5 +296,33 @@ mod tests {
         assert_eq!(background_for(&story), Track::Threat);
         story.stage = Stage::Aftermath;
         assert_eq!(background_for(&story), Track::Remorse);
+    }
+
+    #[test]
+    fn opening_has_its_own_score_without_looping_or_replacing_aftermath() {
+        let mut story = Story::new();
+        story.stage = Stage::Aftermath;
+        assert_eq!(background_for(&story), Track::Remorse);
+        story.stage = Stage::Opening;
+        assert_eq!(background_for(&story), Track::Opening);
+        assert!(!Track::Opening.looping());
+        assert!(Track::Remorse.looping());
+        story.stage = Stage::Complete;
+        assert_eq!(background_for(&story), Track::Remorse);
+    }
+
+    #[test]
+    fn paused_opening_keeps_transition_pending_until_resume() {
+        let mut audio = AdventureAudio::new(None);
+        let mut story = Story::new();
+        story.stage = Stage::Aftermath;
+        audio.update(&story, false);
+        story.stage = Stage::Opening;
+        audio.update(&story, true);
+        assert_eq!(audio.current_track, Some(Track::Opening));
+        assert_eq!(audio.observed.stage, Some(Stage::Aftermath));
+        audio.update(&story, false);
+        assert_eq!(audio.observed.stage, Some(Stage::Opening));
+        assert!(audio.observed.observe(&story).is_empty());
     }
 }

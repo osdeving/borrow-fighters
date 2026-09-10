@@ -7,10 +7,14 @@ use raylib::prelude::*;
 use serde::Deserialize;
 use std::{error::Error, fs};
 
-use crate::runtime_paths::asset_path;
+use crate::{adventure::text::TextCatalog, runtime_paths::asset_path};
 
 /// Assets exclusively owned by the adventure executable.
 pub struct Assets {
+    /// Independent imagery for the newspaper/character/title presentation.
+    pub opening: super::opening::OpeningAssets,
+    /// Editable on-disk narrative and interface copy.
+    pub text: TextCatalog,
     /// Six chronological illustrations of Ada's first contact.
     pub ada: Texture2D,
     /// Twelve waking and compassionate poses of Rust.
@@ -35,8 +39,13 @@ pub struct Assets {
 
 impl Assets {
     /// Loads required assets, returning a useful error instead of silently substituting art.
-    pub fn load(rl: &mut RaylibHandle, thread: &RaylibThread) -> Result<Self, Box<dyn Error>> {
-        let glyphs: String = (32..=255).filter_map(char::from_u32).collect();
+    pub fn load(
+        rl: &mut RaylibHandle,
+        thread: &RaylibThread,
+        text: TextCatalog,
+    ) -> Result<Self, Box<dyn Error>> {
+        let mut glyphs: String = (32..=591).filter_map(char::from_u32).collect();
+        glyphs.push_str("—–“”‘’…");
         let body = rl.load_font_ex(
             thread,
             &asset_path("assets/adventure/fonts/Barlow-Regular.ttf").to_string_lossy(),
@@ -50,6 +59,8 @@ impl Assets {
             Some(&glyphs),
         )?;
         Ok(Self {
+            opening: super::opening::OpeningAssets::load(rl, thread)?,
+            text,
             ada: texture(rl, thread, "ada-prologue.png")?,
             morning: texture(rl, thread, "rust-morning.png")?,
             environments: texture(rl, thread, "adventure-environments.png")?,

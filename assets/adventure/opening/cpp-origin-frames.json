@@ -1,0 +1,27 @@
+{
+  "image": "cpp-origin.png",
+  "image_size": [
+    1182,
+    1330
+  ],
+  "rects": [
+    [
+      0,
+      0,
+      1182,
+      665
+    ],
+    [
+      0,
+      665,
+      1182,
+      665
+    ]
+  ],
+  "labels": [
+    "night-before-awakening",
+    "linker-heroine"
+  ],
+  "sha256": "0c44b46b12151b5e484b3623044f6ba8ac958faf9158b3589eef47cff32b4e14",
+  "image_pixels_unchanged": true
+}

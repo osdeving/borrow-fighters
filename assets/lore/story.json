@@ -33,7 +33,7 @@
       "code": "CH 0x03",
       "body": [
         "Rust é a última e mais recente EP pura conhecida no presente da aventura. Justo, nobre e capaz de mais humanidade que muitos humanos, ele defende a coexistência entre humanos e EPs com liberdade, cuidado e responsabilidade. Ser uma EP pura descreve sua origem, não superioridade moral. Duke é uma EP muito antiga e de caráter dual. Alcançou estabilidade através de acordos milionários com grandes corporações e construiu um império de dependência.",
-        "Outra EP que adquiriu estabilidade é conhecida apenas como: C. Seu surgimento é envolto em mistério, acredita-se que é decendente direto da primeira EP. C++ surge como filha de C: mais ornamentada, mais ambiciosa, carregando herança antiga em um corpo de abstrações modernas. Python surge mais tarde e dentre as EPs, é a mais amigável e acessível, concedendo aos humanos que não possuem habilidades especiais a chance de interagir com o Linker.",
+        "Outra EP que adquiriu estabilidade é conhecida apenas como: C. Seu surgimento é envolto em mistério, acredita-se que é decendente direto da primeira EP. C++ é uma mulher adulta que trabalhou como profissional do sexo antes de despertar para o Linker e se tornar uma das heroínas. Python é professora universitária: estuda as EPs, fala sobre elas e ensina humanos, tornando esse conhecimento acessível.",
         "O Linker, as EPs e os usuários humanos vivem em uma convivência instável. Há conflitos, acordos, afeto e medo entre pessoas de origens diferentes. Rust enfrenta ameaças concretas para proteger vidas, sem tratar toda EP como inimiga ou todo humano como culpado. Vencer uma errática por necessidade também pode lhe causar pesar."
       ]
     },
@@ -90,9 +90,9 @@
       "file_name": "python.py",
       "cycle": "Registro 0x7C7",
       "epithet": "o veneno da simplicidade",
-      "origin": "Uma EP que atravessou o Linker como improviso disciplinado e ciencia aplicada por usuarios que queriam transformar ideias em prototipos.",
-      "goal": "Ler padroes humanos e fornecer a eles habilidades que outras EPs escondem.",
-      "profile": "Python parece relaxada ate o oponente repetir um erro. Entao ela aparece no espaco certo, no frame certo, para punir com veneno letal.",
+      "origin": "Uma EP que atravessou o Linker como improviso disciplinado e ciencia aplicada por usuarios que queriam transformar ideias em prototipos. Hoje atua como professora universitária.",
+      "goal": "Estudar as EPs e compartilhar esse conhecimento com humanos através do ensino e do diálogo.",
+      "profile": "Python é professora universitária: estuda e fala sobre EPs, ensina humanos e transforma assuntos difíceis em algo acessível. Parece relaxada, mas observa padrões com atenção.",
       "combat_style": "Punisher agil: startups leves, dano moderado, golpes de leitura e projectile rapido de dados.",
       "linker_note": "A assinatura dela fica mais forte perto de graficos, laboratorios e usuarios humanos aprendendo algo pela primeira vez."
     },
@@ -102,11 +102,11 @@
       "file_name": "cpp.cpp",
       "cycle": "Registro 0x7C5 / heranca 0x2B2B",
       "epithet": "herdeira do operador",
-      "origin": "Filha de C, nasceu quando usuarios tentaram manter o poder cru da memoria e acrescentar classes, templates e operadores capazes de dobrar a forma do proprio codigo.",
-      "goal": "Provar que heranca nao e prisao: ela quer superar C sem negar a assinatura antiga que a trouxe ao mundo.",
-      "profile": "C++ e elegante, impaciente e perigosa quando ganha espaco. Ela mistura postura de elite com explosoes tecnicas, como se cada movimento tivesse uma sobrecarga escondida.",
+      "origin": "Uma mulher adulta que trabalhou como profissional do sexo antes de despertar para o Linker.",
+      "goal": "Usar seu domínio do Linker para proteger pessoas e enfrentar ameaças, decidindo por si mesma o que fazer com esse poder.",
+      "profile": "Elegante, impaciente e decidida, C++ tornou-se uma das heroínas. Seu poder aparece em explosões técnicas, como se cada movimento tivesse uma sobrecarga escondida.",
       "combat_style": "Punisher tecnico: jab de referencia, template strike, operator kick, sweep de vetor, anti-air de excecao e projectile rapido de operadores.",
-      "linker_note": "Quando C++ entra na arena, o Linker registra parentescos, conversoes implicitas e pequenos riscos que parecem escolhas sofisticadas."
+      "linker_note": "Sua assinatura reúne operadores, conversões implícitas e pequenos riscos que parecem escolhas sofisticadas."
     }
   ]
 }

@@ -10,7 +10,8 @@ explicitly reconstructed mix from the execution's observed states, not evidence
 of the actual Raylib audio-device output or a human listening approval.
 
 The state observer mirrors src/adventure/engine/audio.rs: volume 0.3, looping
-ambience, silence and frozen playback cursors during pause, one active voice
+ambience, the non-looping opening score, frozen playback cursors during pause,
+silence while paused, one active voice
 per cue, contact deduplication and transition cues. FFmpeg copies the recorded
 video unchanged and encodes the reconstructed mono mix as AAC.
 """
@@ -33,9 +34,10 @@ import wave
 ROOT = Path(__file__).resolve().parents[2]
 RATE = 22050
 VOLUME = 0.3
-TRACKS = ("ada", "morning", "threat", "remorse")
+TRACKS = ("ada", "morning", "threat", "remorse", "opening")
+NON_LOOPING_TRACKS = {"opening"}
 CUES = ("strike", "block", "hurt", "transition")
-STAGES = {"AdaPrologue", "RustMorning", "Encounter", "Aftermath", "Complete"}
+STAGES = {"AdaPrologue", "RustMorning", "Encounter", "Aftermath", "Opening", "Complete"}
 LIMITATION = (
     "Audio reconstructed offline from telemetry and the original adventure WAVs; "
     "not captured from the host or Raylib audio device. Timing follows the recorded "
@@ -104,6 +106,7 @@ def load_wavs(directory: Path) -> tuple[dict[str, array], dict]:
             "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
             "samples": len(pcm),
             "duration_seconds": len(pcm) / RATE,
+            "looping": name in TRACKS and name not in NON_LOOPING_TRACKS,
         }
     return clips, metadata
 
@@ -137,6 +140,8 @@ def background_for(row: dict) -> str:
         return "threat" if row["enemy_awake"] else "morning"
     if stage in {"Aftermath", "Complete"}:
         return "remorse"
+    if stage == "Opening":
+        return "opening"
     raise ValueError(f"Unknown stage: {stage}")
 
 
@@ -218,17 +223,18 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
             return
         if track:
             pcm = clips[track]
-            for offset in range(length):
+            audible = min(length, max(0, len(pcm) - music_cursor)) if track in NON_LOOPING_TRACKS else length
+            for offset in range(audible):
                 mix[position + offset] += pcm[(music_cursor + offset) % len(pcm)]
-            if spans and spans[-1]["track"] == track and spans[-1]["end_sample"] == position and spans[-1]["source_end_sample"] == music_cursor:
-                spans[-1]["end_sample"] = target
-                spans[-1]["source_end_sample"] = music_cursor + length
-            else:
+            if audible and spans and spans[-1]["track"] == track and spans[-1]["end_sample"] == position and spans[-1]["source_end_sample"] == music_cursor:
+                spans[-1]["end_sample"] = position + audible
+                spans[-1]["source_end_sample"] = music_cursor + audible
+            elif audible:
                 spans.append({
-                    "track": track, "start_sample": position, "end_sample": target,
-                    "source_start_sample": music_cursor, "source_end_sample": music_cursor + length,
+                    "track": track, "start_sample": position, "end_sample": position + audible,
+                    "source_start_sample": music_cursor, "source_end_sample": music_cursor + audible,
                 })
-            music_cursor += length
+            music_cursor += audible
         for cue, (cursor, event_index) in list(voices.items()):
             pcm = clips[cue]
             audible = min(length, len(pcm) - cursor)
@@ -252,6 +258,7 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
                 "seconds": position / rate, "previous_track": track, "track": next_track,
                 "stage": row["stage"], "enemy_awake": row["enemy_awake"],
                 "paused": row["paused"], "source_cursor_seconds": 0.0,
+                "looping": next_track not in NON_LOOPING_TRACKS,
             })
             track = next_track
             music_cursor = 0

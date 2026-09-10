@@ -7,3 +7,4 @@ pub mod app;
 pub mod combat;
 pub mod engine;
 pub mod story;
+pub mod text;

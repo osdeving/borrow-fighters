@@ -7,6 +7,8 @@ use super::combat::{Action, Combat, CombatInput, Outcome, TICKS_PER_SECOND};
 
 /// Duration of Rust's automatic waking and morning sequence.
 pub const MORNING_TICKS: u32 = 14 * TICKS_PER_SECOND;
+/// Duration of the newspaper, character and title presentation.
+pub const OPENING_TICKS: u32 = 48 * TICKS_PER_SECOND;
 /// Duration reserved for approaching the creature and showing regret.
 pub const AFTERMATH_TICKS: u32 = 7 * TICKS_PER_SECOND;
 /// Minimum visible regret before an explicit scene advance may complete the slice.
@@ -23,7 +25,9 @@ pub enum Stage {
     Encounter,
     /// Rust approaches the fallen creature and shows compassion.
     Aftermath,
-    /// The playable opening has completed its final gesture.
+    /// Newspapers, character histories and the title after Rust shows compassion.
+    Opening,
+    /// The playable opening has completed its final gesture and presentation.
     Complete,
 }
 
@@ -121,9 +125,10 @@ impl Story {
             Stage::Aftermath => {
                 self.combat.tick_aftermath();
                 if self.stage_ticks >= AFTERMATH_TICKS && self.gesture_visible() {
-                    self.enter(Stage::Complete);
+                    self.enter(Stage::Opening);
                 }
             }
+            Stage::Opening if self.stage_ticks >= OPENING_TICKS => self.enter(Stage::Complete),
             _ => {}
         }
     }
@@ -133,8 +138,23 @@ impl Story {
         match self.stage {
             Stage::AdaPrologue => self.enter(Stage::RustMorning),
             Stage::RustMorning => self.enter(Stage::Encounter),
-            Stage::Aftermath if self.gesture_visible() => self.enter(Stage::Complete),
+            Stage::Aftermath if self.gesture_visible() => self.enter(Stage::Opening),
+            Stage::Opening => self.enter(Stage::Complete),
             _ => {}
+        }
+    }
+
+    /// Begins the presentation directly for review without fabricating a combat victory.
+    pub fn presentation() -> Self {
+        let mut story = Self::new();
+        story.enter(Stage::Opening);
+        story
+    }
+
+    /// Replays the presentation after completing the slice, keeping encounter health intact.
+    pub fn replay_presentation(&mut self) {
+        if self.stage == Stage::Complete {
+            self.enter(Stage::Opening);
         }
     }
 
@@ -253,6 +273,22 @@ mod tests {
             story.tick(CombatInput::default());
         }
         assert_eq!(story.combat.player.action, Action::Remorse);
+        assert_eq!(story.stage, Stage::Opening);
+        let health = (story.combat.player.hp, story.combat.enemy.hp);
+        let combat_ticks = story.combat.ticks;
+        for _ in 0..OPENING_TICKS {
+            story.tick(CombatInput {
+                light_pressed: true,
+                movement: 1.0,
+                ..CombatInput::default()
+            });
+        }
+        assert_eq!(story.stage, Stage::Complete);
+        assert_eq!(health, (story.combat.player.hp, story.combat.enemy.hp));
+        assert_eq!(combat_ticks, story.combat.ticks);
+        story.replay_presentation();
+        assert_eq!(story.stage, Stage::Opening);
+        story.advance_scene();
         assert_eq!(story.stage, Stage::Complete);
     }
 

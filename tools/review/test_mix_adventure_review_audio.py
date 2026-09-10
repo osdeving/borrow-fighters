@@ -40,6 +40,7 @@ class ReconstructionTests(unittest.TestCase):
             (row(0, awake=True, outcome="Defeat"), "remorse"),
             (row(0, awake=True, hp=0), "remorse"),
             (row(0, "Aftermath"), "remorse"),
+            (row(0, "Opening"), "opening"),
             (row(0, "Complete"), "remorse"),
         ]
         for state, expected in cases:
@@ -122,6 +123,38 @@ class ReconstructionTests(unittest.TestCase):
         self.assertEqual(list(pcm), [30, 60, 90, 120, 150])
         self.assertEqual(len(report["tracks"]), 1)
         self.assertEqual(len(report["audible_music_spans"]), 1)
+
+    def test_opening_does_not_loop_after_its_authored_ending(self):
+        sounds = clips()
+        sounds["opening"] = array("h", [100, 200])
+        pcm, report = reconstruct([
+            row(0, "Opening"), row(.1, "Opening", stage_ticks=1),
+        ], sounds, .5, rate=10)
+        self.assertEqual(list(pcm), [30, 60, 0, 0, 0])
+        self.assertFalse(report["tracks"][0]["looping"])
+        self.assertEqual(report["audible_music_spans"][0]["end_seconds"], .2)
+        self.assertEqual(report["audible_music_spans"][0]["source_end_seconds"], .2)
+
+    def test_opening_pause_preserves_the_score_position(self):
+        sounds = clips()
+        sounds["opening"] = array("h", [100, 200, 300, 400])
+        pcm, report = reconstruct([
+            row(0, "Opening"), row(.2, "Opening", paused=True),
+            row(.4, "Opening"),
+        ], sounds, .7, rate=10)
+        self.assertEqual(list(pcm), [30, 60, 0, 0, 90, 120, 0])
+        self.assertEqual(report["audible_music_spans"][1]["source_start_seconds"], .2)
+
+    def test_legacy_telemetry_without_opening_keeps_existing_tracks(self):
+        _, report = reconstruct([
+            row(0, "AdaPrologue"), row(.1, "RustMorning"), row(.2, "Encounter", awake=True),
+            row(.3, "Aftermath"), row(.4, "Complete"),
+        ], clips(), .5, rate=10)
+        self.assertEqual([change["track"] for change in report["tracks"]], ["ada", "morning", "threat", "remorse"])
+
+    def test_complete_leaves_the_opening_track(self):
+        _, report = reconstruct([row(0, "Opening"), row(.2, "Complete")], clips(), .5, rate=10)
+        self.assertEqual([change["track"] for change in report["tracks"]], ["opening", "remorse"])
 
     def test_block_hurt_and_strike_use_the_correct_clips(self):
         timeline = [row(0, ticks=1, hit=hit()), row(.1, ticks=2, hit=hit(target="Player", blocked=True)), row(.2, ticks=3, hit=hit(target="Player"))]

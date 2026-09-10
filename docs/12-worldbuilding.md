@@ -3,8 +3,9 @@
 ## Status
 
 Documento vivo. A natureza das EPs, a origem de Ada/Assembly, a identidade de
-Rust e a origem involuntária das erráticas abaixo foram definidas pelo usuário
-em 10 de setembro de 2026. Os demais ganchos continuam como direção criativa.
+Rust, a origem involuntária das erráticas e as biografias de C++/Python abaixo
+foram definidas pelo usuário em 10 de setembro de 2026. Os demais ganchos
+continuam como direção criativa.
 
 Este documento registra a direção narrativa inicial de **Borrow Fighters**: um Brasil tecnológico, estranho, bonito e cheio de entidades que nasceram entre máquinas, linguagens, redes e lugares reais.
 
@@ -223,6 +224,46 @@ Duke provoca Rust para ver se ele quebra. Quando Rust não quebra, Duke começa 
 Relação com humanos:
 
 Duke gosta de humanos, mas aprendeu a falar principalmente com os humanos que assinam contratos. Isso o torna útil, influente e moralmente ambíguo. Ele não traiu as entidades programáticas; ele encontrou uma forma de continuar existindo.
+
+### C++
+
+Arquétipo narrativo: mulher adulta que desperta para o Linker e se torna uma
+das heroínas.
+
+C++ trabalhou como profissional do sexo antes de despertar para o Linker.
+Passa a usar seu poder para proteger outras pessoas. Sua trajetória é contada
+com dignidade e autonomia: essa profissão faz parte de sua vida, sem funcionar
+como culpa a ser expiada ou como explicação única de quem ela é. A atuação
+heroica nasce de suas escolhas; não precisa ser apresentada como uma mudança
+de valor pessoal. Esta biografia não pede conteúdo erótico.
+
+Ela conserva a elegância, a impaciência e a intensidade já associadas à sua
+presença. Motivos de operadores, herança e sobrecarga continuam como linguagem
+técnica do personagem; esta atualização não altera golpes ou catálogo jogável.
+
+Ponto de continuidade ainda aberto: o texto anterior descrevia C++ como filha
+de C, nascida como EP. A nova biografia estabelece seu passado profissional,
+seu despertar para o Linker e seu papel de heroína; não define se ela é humana,
+EP ou híbrida, nem como esse percurso se relaciona à antiga filiação. O livro
+do menu passa a usar apenas os fatos biográficos aceitos. Uma eventual
+conciliação de origem e parentesco precisa de definição própria, sem criar
+uma cosmologia a partir do ato de acessar o Linker.
+
+### Python
+
+Arquétipo narrativo: professora universitária, pesquisadora e educadora.
+
+Python estuda as EPs, fala sobre elas e ensina humanos. A universidade é parte
+de sua vida e um lugar onde compartilha conhecimento sobre pessoas que muitos
+ainda conhecem apenas por medo, boatos ou relatos de ataques. Seu ensino torna
+assuntos difíceis acessíveis, sem presumir que humanos sejam incapazes de
+aprender ou que EPs tenham um único caráter.
+
+Ela mantém a origem como EP ligada à ciência aplicada já registrada no livro
+do jogo. A postura relaxada e a atenção aos padrões convivem com seu trabalho
+docente. Gráficos, laboratórios e pessoas aprendendo continuam sendo referências
+de sua presença; nenhum poder novo ou alteração de combate decorre dessa
+biografia.
 
 ### Assembly
 

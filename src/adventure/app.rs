@@ -8,6 +8,7 @@ use crate::{
         combat::{Action, CombatInput, Outcome},
         engine::{assets::Assets, audio::AdventureAudio, render},
         story::{Stage, Story},
+        text::TextCatalog,
     },
     runtime_paths,
 };
@@ -26,6 +27,7 @@ struct Options {
     review: Option<PathBuf>,
     capture: Option<PathBuf>,
     start: Option<String>,
+    texts: Option<PathBuf>,
     max_frames: Option<u32>,
     muted: bool,
     hidden: bool,
@@ -51,11 +53,14 @@ impl Options {
                             .into(),
                     )
                 }
+                "--texts" => {
+                    options.texts = Some(args.next().ok_or("--texts requires a JSON file")?.into())
+                }
                 "--start" => {
                     let stage = args
                         .next()
-                        .ok_or("--start requires ada, morning or encounter")?;
-                    if !["ada", "morning", "encounter"].contains(&stage.as_str()) {
+                        .ok_or("--start requires ada, morning, encounter or opening")?;
+                    if !["ada", "morning", "encounter", "opening"].contains(&stage.as_str()) {
                         return Err(format!("unknown start scene: {stage}").into());
                     }
                     options.start = Some(stage);
@@ -71,7 +76,7 @@ impl Options {
                 "--hidden" => options.hidden = true,
                 "--help" | "-h" => {
                     println!(
-                        "Borrow — primeiras linhas\n\ncargo run --no-default-features --features adventure --bin borrow-adventure\n\n--start ada|morning|encounter  Developer scene entry\n--review DIR                 Deterministic renderer review + MP4\n--capture DIR                Record actual play + frame snapshots\n--frames N                   Exit after N rendered frames\n--mute                       Disable audio device\n--hidden                     Hidden window for isolated review\n\nA/D/arrows move; Space/W jump; J/F attack; K/H strong; Q/L guard.\nEnter skips cinematic scenes; Esc pauses; R retries a lost encounter.\nF3 shows collision; F12 saves a screenshot."
+                        "Borrow — primeiras linhas\n\ncargo run --no-default-features --features adventure --bin borrow-adventure\n\n--start ada|morning|encounter|opening  Developer scene entry\n--review DIR                 Deterministic renderer review + MP4\n--capture DIR                Record actual play + frame snapshots\n--texts PATH                 Editable UTF-8 JSON catalog (F5 reload)\n--frames N                   Exit after N rendered frames\n--mute                       Disable audio device\n--hidden                     Hidden window for isolated review\n\nA/D/arrows move; Space/W jump; J/F attack; K/H strong; Q/L guard.\nEnter skips cinematic scenes; Esc pauses; R retries a lost encounter.\nF3 shows collision; F12 saves a screenshot."
                     );
                     return Ok(None);
                 }
@@ -93,10 +98,17 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
     let Some(options) = Options::parse(args)? else {
         return Ok(());
     };
+    let text = TextCatalog::load(
+        options
+            .texts
+            .as_ref()
+            .cloned()
+            .unwrap_or_else(|| runtime_paths::asset_path("assets/adventure/texts/pt-BR.json")),
+    )?;
     let mut builder = raylib::init();
     builder
         .size(render::WIDTH, render::HEIGHT)
-        .title("Borrow — primeiras linhas")
+        .title(text.get("window.title"))
         .msaa_4x()
         .resizable();
     if options.hidden || options.review.is_some() {
@@ -113,11 +125,12 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
         RaylibAudio::init_audio_device().ok()
     };
     let mut audio = AdventureAudio::new(audio_device.as_ref());
-    let assets = Assets::load(&mut rl, &thread)?;
+    let mut assets = Assets::load(&mut rl, &thread, text)?;
     let mut target =
         rl.load_render_texture(&thread, render::WIDTH as u32, render::HEIGHT as u32)?;
     let mut story = Story::new();
     match options.start.as_deref() {
+        Some("opening") => story = Story::presentation(),
         Some("morning") => story.advance_scene(),
         Some("encounter") => {
             story.advance_scene();
@@ -135,6 +148,8 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
     let mut paused = false;
     let mut debug = false;
     let mut reveal_text = false;
+    let mut reload_notice: Option<(bool, f32)> = None;
+    let mut text_revision = 0u32;
     let mut accumulator = 0.0f32;
     let mut pending = CombatInput::default();
     let mut frame = 0u32;
@@ -153,6 +168,18 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
         previous_frame_time = now;
         let mut suppress = false;
         if !reviewing {
+            if rl.is_key_pressed(KeyboardKey::KEY_F5) {
+                let result = assets.text.reload();
+                let ok = result.is_ok();
+                if let Err(error) = result {
+                    eprintln!("{error}");
+                }
+                if ok {
+                    text_revision += 1;
+                    rl.set_window_title(&thread, assets.text.get("window.title"));
+                }
+                reload_notice = Some((ok, 4.0));
+            }
             let has_pad = rl.is_gamepad_available(0);
             let pad_pressed = |button| has_pad && rl.is_gamepad_button_pressed(0, button);
             let confirm = rl.is_key_pressed(KeyboardKey::KEY_ENTER);
@@ -177,6 +204,13 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
                 break;
             }
             if !paused && !suppress {
+                if story.stage == Stage::Complete
+                    && (rl.is_key_pressed(KeyboardKey::KEY_T)
+                        || pad_pressed(GamepadButton::GAMEPAD_BUTTON_RIGHT_FACE_LEFT))
+                {
+                    story.replay_presentation();
+                    suppress = true;
+                }
                 let retry = rl.is_key_pressed(KeyboardKey::KEY_R)
                     || pad_pressed(GamepadButton::GAMEPAD_BUTTON_RIGHT_FACE_DOWN);
                 if (story.combat.outcome == Outcome::Defeat || story.stage == Stage::Complete)
@@ -241,6 +275,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
         audio.update(&story, paused);
         capture_seconds += if reviewing { 1.0 / 60.0 } else { frame_time };
         if frame == 0 || story.stage != previous_stage {
+            reveal_text = false;
             events.push(serde_json::json!({"frame":frame,"seconds":capture_seconds,"stage":format!("{:?}",story.stage),"player_hp":story.combat.player.hp,"enemy_hp":story.combat.enemy.hp}));
             previous_stage = story.stage;
         }
@@ -249,12 +284,15 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
             writeln!(
                 trace,
                 "{}",
-                serde_json::json!({"frame":frame,"seconds":capture_seconds,"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"ticks":c.ticks,"enemy_awake":c.enemy_awake,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
+                serde_json::json!({"frame":frame,"seconds":capture_seconds,"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
             )?;
         }
         {
             let mut draw = rl.begin_texture_mode(&thread, &mut target);
             render::draw(&mut draw, &story, &assets, paused, debug, reveal_text);
+            if let Some((ok, _)) = reload_notice {
+                render::reload_notice(&mut draw, &assets, ok);
+            }
         }
         let screenshot = !reviewing && rl.is_key_pressed(KeyboardKey::KEY_F12);
         if let Some(recorder) = recorder.as_mut() {
@@ -299,6 +337,12 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
                 Color::WHITE,
             );
         }
+        if let Some((_, remaining)) = reload_notice.as_mut() {
+            *remaining -= frame_time;
+            if *remaining <= 0.0 {
+                reload_notice = None;
+            }
+        }
         frame += 1;
         if options.max_frames.is_some_and(|limit| frame >= limit) {
             break;
@@ -316,7 +360,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
         fs::write(
             directory.join("result.json"),
             serde_json::to_string_pretty(
-                &serde_json::json!({"frames":frame,"mode":if reviewing {"deterministic_review"}else{"physical_input_capture"},"final_stage":format!("{:?}",story.stage),"outcome":format!("{:?}",story.combat.outcome),"player_hp":story.combat.player.hp,"enemy_hp":story.combat.enemy.hp,"events":events,"paused_frames":review.paused_frames,"limitations":"Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest."}),
+                &serde_json::json!({"frames":frame,"mode":if reviewing {"deterministic_review"}else{"window_input_capture"},"final_stage":format!("{:?}",story.stage),"outcome":format!("{:?}",story.combat.outcome),"player_hp":story.combat.player.hp,"enemy_hp":story.combat.enemy.hp,"events":events,"paused_frames":review.paused_frames,"limitations":"Review uses simulated commands; physical gamepad and subjective animation/audio approval require human playtest."}),
             )?,
         )?;
         if reviewing && story.stage != Stage::Complete {
@@ -410,7 +454,9 @@ impl Review {
             Stage::AdaPrologue if story.beat_ticks() == 180 => {
                 format!("ada-{:?}.png", story.prologue_beat()?)
             }
-            Stage::RustMorning if [90, 320, 470, 700].contains(&story.stage_ticks) => {
+            Stage::RustMorning
+                if [90, 180, 250, 320, 390, 470, 545, 650, 700].contains(&story.stage_ticks) =>
+            {
                 format!("morning-{}.png", story.stage_ticks)
             }
             Stage::Encounter if paused => "encounter-pause.png".into(),
@@ -428,6 +474,9 @@ impl Review {
             Stage::Encounter if story.stage_ticks == 1 => "encounter-explore.png".into(),
             Stage::Aftermath if story.combat.player.action == Action::Remorse => {
                 format!("aftermath-{}.png", story.combat.player.action_ticks / 60)
+            }
+            Stage::Opening if story.stage_ticks % 60 == 30 => {
+                format!("opening-{:02}.png", story.stage_ticks / 60)
             }
             Stage::Complete => "complete.png".into(),
             _ => return None,

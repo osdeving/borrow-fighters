@@ -19,6 +19,24 @@ const PAPER: Color = Color::new(247, 235, 213, 255);
 const GOLD: Color = Color::new(232, 177, 92, 255);
 const MINT: Color = Color::new(125, 218, 190, 255);
 
+/// Brief feedback for an explicit author-initiated text reload.
+pub fn reload_notice(d: &mut impl RaylibDraw, a: &Assets, succeeded: bool) {
+    d.draw_rectangle(25, 116, 1230, 48, alpha(INK, 0.96));
+    text(
+        d,
+        a,
+        a.text.get(if succeeded {
+            "editor.reloaded"
+        } else {
+            "editor.failed"
+        }),
+        42.0,
+        130.0,
+        23.0,
+        if succeeded { MINT } else { GOLD },
+    );
+}
+
 /// Draws a complete frame at the logical resolution.
 pub fn draw(
     d: &mut impl RaylibDraw,
@@ -32,7 +50,8 @@ pub fn draw(
     match story.stage {
         Stage::AdaPrologue => ada(d, story, assets, reveal_text),
         Stage::RustMorning => morning(d, story, assets),
-        Stage::Encounter | Stage::Aftermath | Stage::Complete => encounter(d, story, assets, debug),
+        Stage::Opening | Stage::Complete => super::opening::draw(d, story, assets),
+        Stage::Encounter | Stage::Aftermath => encounter(d, story, assets, debug),
     }
     if story.stage == Stage::Complete {
         ending(d, assets);
@@ -77,13 +96,13 @@ fn ada(d: &mut impl RaylibDraw, story: &Story, a: &Assets, reveal_text: bool) {
     }
     d.draw_rectangle_gradient_v(0, 460, WIDTH, 260, Color::BLANK, alpha(INK, 0.97));
     d.draw_rectangle(0, 0, WIDTH, 44, alpha(INK, 0.9));
-    text(d, a, "BORROW  /  ORIGENS", 42.0, 13.0, 17.0, GOLD);
+    text(d, a, a.text.get("ada.eyebrow"), 42.0, 13.0, 17.0, GOLD);
     let subtitle = match beat {
-        PrologueBeat::AdaOrdinaryLife => "Antes de tudo mudar, havia uma mulher e suas perguntas.",
-        PrologueBeat::StrangeMessage => "Naquela noite, a resposta não estava nas instruções.",
-        PrologueBeat::FollowingTheSignal => "Ada seguiu a ligação entre os símbolos.",
-        PrologueBeat::AssemblyAwakens => "E alguma coisa atravessou.",
-        PrologueBeat::AfterTheContact => "O silêncio voltou. Nada era como antes.",
+        PrologueBeat::AdaOrdinaryLife => a.text.get("ada.caption.ordinary"),
+        PrologueBeat::StrangeMessage => a.text.get("ada.caption.message"),
+        PrologueBeat::FollowingTheSignal => a.text.get("ada.caption.signal"),
+        PrologueBeat::AssemblyAwakens => a.text.get("ada.caption.assembly"),
+        PrologueBeat::AfterTheContact => a.text.get("ada.caption.after"),
         PrologueBeat::LongYears => "",
     };
     if beat == PrologueBeat::StrangeMessage {
@@ -98,14 +117,13 @@ fn ada(d: &mut impl RaylibDraw, story: &Story, a: &Assets, reveal_text: bool) {
         text(
             d,
             a,
-            "SEM REMETENTE",
+            a.text.get("ada.sender"),
             722.0,
             238.0,
             17.0,
             alpha(GOLD, opacity),
         );
-        let message =
-            "> Ada, você consegue me ouvir?\n\n> Há algo entre uma linha e outra.\n> Continue.";
+        let message = a.text.get("ada.message");
         type_text(
             d,
             a,
@@ -120,7 +138,7 @@ fn ada(d: &mut impl RaylibDraw, story: &Story, a: &Assets, reveal_text: bool) {
             MINT,
         );
         if (t * 2.0) as i32 % 2 == 0 {
-            text(d, a, "_", 712.0, 417.0, 24.0, MINT);
+            text(d, a, a.text.get("ada.cursor"), 712.0, 417.0, 24.0, MINT);
         }
     }
     if beat == PrologueBeat::LongYears {
@@ -128,7 +146,8 @@ fn ada(d: &mut impl RaylibDraw, story: &Story, a: &Assets, reveal_text: bool) {
         heading(
             d,
             a,
-            &"Muito tempo depois"
+            &a.text
+                .get("ada.years")
                 .chars()
                 .take((t * 16.0) as usize)
                 .collect::<String>(),
@@ -137,15 +156,26 @@ fn ada(d: &mut impl RaylibDraw, story: &Story, a: &Assets, reveal_text: bool) {
             46.0,
             PAPER,
         );
-        text(d, a, "Em uma manhã qualquer.", 492.0, 353.0, 25.0, GOLD);
+        text(
+            d,
+            a,
+            a.text.get("ada.years_detail"),
+            492.0,
+            353.0,
+            25.0,
+            GOLD,
+        );
     } else {
-        text(d, a, subtitle, 70.0, 607.0, 28.0, PAPER);
+        super::typography::paragraph(
+            d,
+            &a.body,
+            subtitle,
+            Rectangle::new(70.0, 585.0, 1140.0, 74.0),
+            28.0,
+            PAPER,
+        );
     }
-    footer(
-        d,
-        a,
-        "Tab / X  revelar mensagem     Enter / A  pular cena     Esc / Start  pausar",
-    );
+    footer(d, a, a.text.get("ada.controls"));
     for i in 0..6 {
         d.draw_rectangle(
             1080 + i * 23,
@@ -170,47 +200,15 @@ fn morning(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
         let y = 80.0 + (f * 47.0 + t * 11.0) % 440.0;
         d.draw_circle_v(Vector2::new(x, y), 1.7, alpha(GOLD, 0.3));
     }
-    let index = match story.stage_ticks {
-        0..=149 => 0,
-        150..=224 => 1,
-        225..=289 => 2,
-        290..=354 => 3,
-        355..=424 => 4,
-        425..=499 => 5,
-        500..=584 => 6,
-        _ => 7,
-    };
-    let standing = index >= 6;
-    let x = if standing {
-        545.0 + ((t - 9.7).max(0.0) * 13.0).min(60.0)
-    } else {
-        383.0
-    };
-    let floor = if standing { 624.0 } else { 468.0 };
-    let max_height = a
-        .morning_bounds
-        .iter()
-        .take(8)
-        .map(|r| r.height)
-        .fold(1.0, f32::max);
-    let breathing = (t * 1.7).sin() * 1.8;
-    pose(
-        d,
-        &a.morning,
-        a.morning_bounds[index],
-        Vector2::new(x, floor + breathing),
-        335.0 / max_height,
-        false,
-        Color::WHITE,
-    );
+    super::morning::draw_morning_character(d, story, a);
     d.draw_rectangle_gradient_v(0, 530, WIDTH, 190, Color::BLANK, alpha(INK, 0.93));
-    text(d, a, "UMA MANHÃ QUALQUER", 49.0, 47.0, 18.0, INK);
+    text(d, a, a.text.get("morning.eyebrow"), 49.0, 47.0, 18.0, INK);
     if t > 9.5 {
-        heading(d, a, "Rust", 65.0, 576.0, 48.0, PAPER);
+        heading(d, a, a.text.get("morning.name"), 65.0, 576.0, 48.0, PAPER);
         text(
             d,
             a,
-            "O mundo parecia o mesmo de ontem.",
+            a.text.get("morning.caption"),
             205.0,
             597.0,
             26.0,
@@ -223,7 +221,7 @@ fn morning(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
     if t > 13.25 {
         d.draw_rectangle(0, 0, WIDTH, HEIGHT, alpha(INK, (t - 13.25) / 0.75));
     }
-    footer(d, a, "Enter / A  sair de casa     Esc / Start  pausar");
+    footer(d, a, a.text.get("morning.controls"));
 }
 
 fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
@@ -300,7 +298,7 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
             8,
             alpha(INK, 0.87),
         );
-        text(d, a, "RUST", 50.0, 38.0, 21.0, PAPER);
+        text(d, a, a.text.get("encounter.name"), 50.0, 38.0, 21.0, PAPER);
         d.draw_rectangle(50, 76, 247, 7, alpha(PAPER, 0.2));
         d.draw_rectangle(
             50,
@@ -310,9 +308,9 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
             GOLD,
         );
         let objective = if c.enemy_awake {
-            "DEFENDA-SE"
+            a.text.get("encounter.objective")
         } else {
-            "UMA MANHÃ QUALQUER"
+            a.text.get("encounter.explore")
         };
         d.draw_rectangle_rounded(
             Rectangle::new(927.0, 26.0, 323.0, 72.0),
@@ -335,7 +333,7 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
                 text(
                     d,
                     a,
-                    "!",
+                    a.text.get("encounter.alert"),
                     x - 6.0,
                     336.0,
                     31.0,
@@ -343,18 +341,30 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
                 );
             }
         } else if story.stage_ticks > 80 {
-            text(d, a, "Siga pela rua  >", 950.0, 68.0, 21.0, GOLD);
+            text(
+                d,
+                a,
+                a.text.get("encounter.direction"),
+                950.0,
+                68.0,
+                21.0,
+                GOLD,
+            );
         }
-        footer(
-            d,
-            a,
-            "A D / setas  mover     Espaço  pular     J / F  atacar     K / H  forte     Q / L  defender     Esc  pausar",
-        );
+        footer(d, a, a.text.get("encounter.controls"));
     }
     if story.stage == Stage::Aftermath {
         d.draw_rectangle_gradient_v(0, 500, WIDTH, 220, Color::BLANK, alpha(INK, 0.9));
         if c.player.action == Action::Remorse {
-            heading(d, a, "Não precisava ser assim.", 69.0, 606.0, 31.0, PAPER);
+            heading(
+                d,
+                a,
+                a.text.get("aftermath.caption"),
+                69.0,
+                606.0,
+                31.0,
+                PAPER,
+            );
         }
     }
 }
@@ -552,32 +562,25 @@ fn cell(texture: &Texture2D, columns: usize, rows: usize, index: usize) -> Recta
 }
 
 fn ending(d: &mut impl RaylibDraw, a: &Assets) {
-    d.draw_rectangle_gradient_v(0, 380, WIDTH, 340, Color::BLANK, alpha(INK, 0.97));
-    heading(d, a, "Ainda há um caminho.", 65.0, 488.0, 43.0, PAPER);
-    text(
+    super::typography::centered(
         d,
-        a,
-        "Rust desejava uma manhã comum. E um mundo onde isso fosse possível.",
-        67.0,
-        548.0,
+        &a.body,
+        a.text.get("ending.title"),
+        Vector2::new(640.0, 610.0),
+        1180.0,
         24.0,
         PAPER,
     );
-    text(d, a, "Fim deste primeiro encontro", 67.0, 590.0, 19.0, GOLD);
-    footer(
-        d,
-        a,
-        "R / A  repetir encontro     Enter / Y  rever abertura     Esc  sair",
-    );
+    footer(d, a, a.text.get("ending.controls"));
 }
 
 fn defeat(d: &mut impl RaylibDraw, a: &Assets) {
     d.draw_rectangle(0, 0, WIDTH, HEIGHT, alpha(INK, 0.7));
-    heading(d, a, "Respire. Tente outra vez.", 324.0, 256.0, 41.0, PAPER);
+    heading(d, a, a.text.get("defeat.title"), 324.0, 256.0, 41.0, PAPER);
     text(
         d,
         a,
-        "Observe a preparação do ataque. Defenda ou crie distância.",
+        a.text.get("defeat.caption"),
         327.0,
         330.0,
         24.0,
@@ -586,7 +589,7 @@ fn defeat(d: &mut impl RaylibDraw, a: &Assets) {
     text(
         d,
         a,
-        "R / A  voltar ao encontro     Esc  pausar",
+        a.text.get("defeat.controls"),
         396.0,
         414.0,
         24.0,
@@ -596,21 +599,13 @@ fn defeat(d: &mut impl RaylibDraw, a: &Assets) {
 
 fn pause(d: &mut impl RaylibDraw, a: &Assets) {
     d.draw_rectangle(0, 0, WIDTH, HEIGHT, alpha(INK, 0.87));
-    heading(d, a, "Um instante.", 470.0, 213.0, 47.0, PAPER);
+    heading(d, a, a.text.get("pause.title"), 470.0, 213.0, 47.0, PAPER);
+    text(d, a, a.text.get("pause.resume"), 446.0, 316.0, 25.0, GOLD);
+    text(d, a, a.text.get("pause.exit"), 487.0, 365.0, 23.0, PAPER);
     text(
         d,
         a,
-        "Esc / Start / Enter  continuar",
-        446.0,
-        316.0,
-        25.0,
-        GOLD,
-    );
-    text(d, a, "Backspace / B  sair", 487.0, 365.0, 23.0, PAPER);
-    text(
-        d,
-        a,
-        "Controle: direcional mover · A pular · X atacar · Y forte · LB defender",
+        a.text.get("pause.controls"),
         275.0,
         455.0,
         21.0,
@@ -624,7 +619,9 @@ fn footer(d: &mut impl RaylibDraw, a: &Assets, value: &str) {
 }
 
 fn text(d: &mut impl RaylibDraw, a: &Assets, value: &str, x: f32, y: f32, size: f32, color: Color) {
-    d.draw_text_ex(&a.body, value, Vector2::new(x, y), size, 0.2, color);
+    let measured = a.body.measure_text(value, size, 0.2).x.max(1.0);
+    let fitted = size * ((WIDTH as f32 - x - 30.0) / measured).min(1.0);
+    d.draw_text_ex(&a.body, value, Vector2::new(x, y), fitted, 0.2, color);
 }
 
 fn heading(
@@ -636,7 +633,9 @@ fn heading(
     size: f32,
     color: Color,
 ) {
-    d.draw_text_ex(&a.title, value, Vector2::new(x, y), size, 0.2, color);
+    let measured = a.title.measure_text(value, size, 0.2).x.max(1.0);
+    let fitted = size * ((WIDTH as f32 - x - 30.0) / measured).min(1.0);
+    d.draw_text_ex(&a.title, value, Vector2::new(x, y), fitted, 0.2, color);
 }
 
 fn type_text(
@@ -649,17 +648,14 @@ fn type_text(
     color: Color,
 ) {
     let visible: String = value.chars().take(characters).collect();
-    for (line, value) in visible.lines().enumerate() {
-        text(
-            d,
-            a,
-            value,
-            position.x,
-            position.y + line as f32 * (size + 9.0),
-            size,
-            color,
-        );
-    }
+    super::typography::paragraph(
+        d,
+        &a.body,
+        &visible,
+        Rectangle::new(position.x, position.y, 492.0, 157.0),
+        size,
+        color,
+    );
 }
 
 fn alpha(color: Color, value: f32) -> Color {

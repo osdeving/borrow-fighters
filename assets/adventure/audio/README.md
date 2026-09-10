@@ -4,7 +4,9 @@ Sons procedurais criados para a abertura de Rust em 10 de setembro de 2026.
 Não contêm samples externos, música licenciada nem locução. A autoria técnica
 está no gerador determinístico [`generate_audio.py`](generate_audio.py), que usa
 somente a biblioteca padrão do Python: senoides, envelopes, ruído com seed fixa
-e exportação `wave`. Aplicam-se as licenças do repositório.
+e exportação `wave`. A apresentação musical de 48 segundos tem gerador próprio,
+[`generate_opening_audio.py`](generate_opening_audio.py), sem alterar o gerador
+ou os oito WAVs anteriores. Aplicam-se as licenças do repositório.
 
 | Arquivo | Uso | Duração |
 |---|---|---|
@@ -12,6 +14,7 @@ e exportação `wave`. Aplicam-se as licenças do repositório.
 | `morning.wav` | Acorde leve, ar e pássaros sintetizados na manhã de Rust | 12 s, loop |
 | `threat.wav` | Pulso grave e tensão durante a ameaça | 12 s, loop |
 | `remorse.wav` | Notas descendentes suaves durante o gesto de pesar | 12 s, loop |
+| `opening.wav` | Apresentação com notícias, heroínas, elenco e chegada musical do logo | 48 s, sem loop |
 | `strike.wav` | Contato de Rust com a criatura | 0,22 s |
 | `block.wav` | Defesa frontal bem-sucedida | 0,28 s |
 | `hurt.wav` | Rust atingido | 0,36 s |
@@ -22,10 +25,20 @@ pico limitado antes da conversão. São áudio original de piloto; a qualidade e
 equilíbrio ainda devem ser julgados por audição humana. O adaptador de aventura
 usa volume base de 0,3 e mantém o ponto de reprodução quando o jogo é pausado.
 
+`opening.wav` é uma composição original a 120 BPM, com baixo pulsado,
+percussão sintetizada, arpejos, melodias próprias e crescimento de intensidade.
+Os trechos acompanham o relógio de `Stage::Opening`: notícias de 0–9 s, C++ de
+9–19 s, Python de 19–29 s e os quatro cartões do elenco de 29–41 s. Aos **41 s**,
+um ataque forte e a chegada em ré maior conduzem ao logo e à resolução até
+48 s. A faixa toca uma vez, exclusivamente nessa etapa; pausar preserva sua
+fase, inclusive o alinhamento com o logo. A intensidade e a resolução musical
+devem ser avaliadas por audição humana junto à montagem.
+
 Para regenerar exatamente os arquivos desta pasta:
 
 ```sh
 python3 assets/adventure/audio/generate_audio.py
+python3 assets/adventure/audio/generate_opening_audio.py
 ```
 
 Dispositivo de áudio ou WAV ausente não impede a aventura. Este conjunto não
