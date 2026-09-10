@@ -41,6 +41,15 @@ desenha ciclovia, ciclistas, garoto e pipa em planos separados da área jogável
 apoios de Rust e anima os detalhes do quarto. Esses atores não entram no
 estado de corpos, hitboxes ou contatos do combate. [Escopo e verificação](30-prologue-scene-improvements.md).
 
+A extensão de trânsito usa o mesmo `AmbientState` para carros, aproximação,
+frenagem e batida no poste. [`engine/traffic.rs`](../src/adventure/engine/traffic.rs)
+desenha asfalto, veículos e efeitos locais; o observador de áudio da aventura
+consome os marcos compartilhados da buzina, frenagem e impacto uma vez por
+passagem, incluindo renderizações que atravessem mais de um update.
+Pausa preserva sons em curso, retry rearma o acidente e skip descarta seus cues.
+Telemetria de revisão inclui veículos, idade do acidente e sincronização de áudio
+após skip; relógio de parede permite alinhar gravação nativa de som e vídeo.
+
 ## Objetivo
 
 Criar uma base simples, testável e extensível para o protótipo 0.1 sem transformar o projeto em uma engine antes de provar o combate.

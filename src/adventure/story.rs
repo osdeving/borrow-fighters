@@ -259,7 +259,7 @@ impl Story {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::adventure::ambient::KidPhase;
+    use crate::adventure::ambient::{IncidentPhase, KidPhase};
 
     #[test]
     fn background_reaction_continues_through_victory_and_stops_after_the_street() {
@@ -273,6 +273,7 @@ mod tests {
         story.combat.player.position.x = super::super::combat::ENCOUNTER_TRIGGER_X;
         story.tick(CombatInput::default());
         assert_eq!(story.ambient.kid_phase(), KidPhase::Startled);
+        assert_eq!(story.ambient.accident_ticks(), Some(0));
         for _ in 0..60 {
             story.tick(CombatInput::default());
         }
@@ -289,6 +290,12 @@ mod tests {
             story.tick(CombatInput::default());
         }
         assert_eq!(story.ambient.kid_phase(), KidPhase::Gone);
+        let wreck = story.ambient.incident_car().unwrap();
+        assert_eq!(wreck.phase, IncidentPhase::Crashed);
+        story.tick(CombatInput::default());
+        let later_wreck = story.ambient.incident_car().unwrap();
+        assert_eq!(later_wreck.position, wreck.position);
+        assert_eq!(later_wreck.phase_ticks, wreck.phase_ticks + 1);
 
         story.skip_segment();
         assert_eq!(story.stage, Stage::Opening);
@@ -309,6 +316,10 @@ mod tests {
             story.tick(CombatInput::default());
         }
         assert_eq!(story.ambient.kid_phase(), KidPhase::Gone);
+        assert_eq!(
+            story.ambient.incident_car().unwrap().phase,
+            IncidentPhase::Crashed
+        );
         story.combat.outcome = Outcome::Defeat;
         story.retry();
         assert!(story.combat.enemy_awake);
@@ -316,8 +327,14 @@ mod tests {
         assert_eq!(story.ambient.kid_phase(), KidPhase::Startled);
         assert_eq!(story.ambient.kid_phase_ticks(), 0);
         assert_eq!(story.ambient.kite_release_ticks(), None);
+        assert_eq!(story.ambient.accident_ticks(), Some(0));
+        assert_eq!(
+            story.ambient.incident_car().unwrap().phase,
+            IncidentPhase::Approaching
+        );
         story.tick(CombatInput::default());
         assert_eq!(story.ambient.kid_phase_ticks(), 1);
+        assert_eq!(story.ambient.accident_ticks(), Some(1));
 
         let current = story.ambient.clone();
         story.retry();
@@ -326,6 +343,7 @@ mod tests {
         story.advance_scene();
         story.advance_scene();
         assert_eq!(story.ambient, AmbientState::default());
+        assert_eq!(story.ambient.incident_car(), None);
         assert!(!story.combat.enemy_awake);
     }
 

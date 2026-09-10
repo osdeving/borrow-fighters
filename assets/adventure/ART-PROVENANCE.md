@@ -280,3 +280,48 @@ baseline; o runtime desta branch seleciona o novo.
   cenário. Não foram usadas referências externas adicionais.
 
 Arte candidata de uma branch experimental; não altera a release prototype.4.
+
+## Trânsito e acidente do prólogo — 10/09/2026
+
+Atlas candidato da segunda rodada da [entrega 30](../../docs/30-prologue-scene-improvements.md),
+conforme a [ADR 0024](../../docs/adr/0024-prologue-background-life.md).
+Os automóveis pertencem à encenação de fundo da aventura.
+
+- Arquivo selecionado: [street-traffic.png](street-traffic.png), PNG RGBA de
+  1254 × 1254, com quatro células iguais em grade 2 × 2.
+- [Prompt selecionado](prompts/street-traffic.txt) e
+  [metadados dos recortes e rodas](street-traffic.json).
+- Fonte gerada pelo `image_gen` integrado:
+  `exec-4dcf0758-1828-4dc6-96c3-457755e2e6e8.png`, preservada em
+  `/home/willams/.codex/generated_images/01a08b8b-3f76-7df3-b45e-58333ee12b57/`.
+- SHA-256: `13d45c30f198d53dd7504601e23560feb45e21ee0cc8e57766145b9d4e5841ab`.
+- Alpha medido: 1.059.031 pixels com alpha zero, 512.753 intermediários e
+  732 opacos. Fundo realmente transparente, sem xadrez pintado.
+
+| Índice | Conteúdo |
+|---|---|
+| 0 | Hatchback azul íntegro, perfil para a direita. |
+| 1 | Mesmo hatchback, com capô dobrado, para-lama amassado, farol quebrado e roda dianteira deformada. |
+| 2 | Sedã ocre íntegro, perfil para a direita. |
+| 3 | Hatchback familiar verde-água íntegro, perfil para a direita. |
+
+A captura da rua da primeira rodada foi inspecionada para orientar a paleta,
+luz matinal e contornos, sem ser passada como imagem de entrada. A geração
+selecionada usou somente o prompt textual. Os veículos são genéricos, sem
+marcas, pessoas ou referências externas adicionais. A cabine permanece intacta.
+Poste, via, movimento, poeira e fumaça são camadas do renderer.
+
+Os retângulos foram medidos com `alpha > 3` e margem de dois pixels; os marcos
+de roda são aproximações obtidas por inspeção visual em coordenadas da imagem.
+Nos dois carros azuis, o centro da roda traseira fica em `(94, 247)` dentro
+do respectivo recorte. A escala deve permanecer constante na troca de pose;
+normalizar ambas as imagens pela largura total produziria uma expansão
+indevida da cabine no impacto. O capô torna o dano legível, mas o encurtamento
+total da versão selecionada é discreto, aproximadamente 2%. Rever o resultado
+no tamanho de jogo junto do balanço, contato e efeitos da encenação.
+
+Uma [tentativa de edição pontual](prompts/street-traffic-crumple-retry.txt)
+acentuou o encurtamento, mas produziu RGB com xadrez pintado
+(`exec-dd20aa85-ceff-41e0-920a-92a08025ef78.png`); foi rejeitada. A fonte
+selecionada é cópia byte a byte do primeiro resultado. O script de inspeção
+apenas leu o alpha e escreveu JSON, sem recortar, pintar ou regravar o PNG.

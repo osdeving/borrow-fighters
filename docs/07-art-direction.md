@@ -66,6 +66,15 @@ A [ADR 0024](adr/0024-prologue-background-life.md) mantém esses atores fora da
 colisão; os assets e sua [procedência](../assets/adventure/ART-PROVENANCE.md)
 pertencem à aventura. A rodada permanece experimental até a avaliação visual.
 
+A segunda rodada acrescenta asfalto entre calçada e ciclovia. Automóveis
+ilustrados passam no plano distante; um carro azul entra na faixa próxima ao
+surgir a EP, buzina, freia e atinge um poste. Capô dobrado, farol quebrado,
+oscilação breve do poste e poeira localizada comunicam o impacto; carro
+amassado, fragmentos no chão e fumaça discreta mantêm sua consequência.
+Os efeitos se concentram na área do acidente, preservando a silhueta dos
+personagens e a continuidade da fuga do garoto. A arte íntegra/amassada usa
+a mesma escala e rodas ancoradas nos pontos medidos do atlas.
+
 A apresentação após o pesar usa jornais, quadros biográficos e montagem de
 personagens. C++ aparece adulta no cotidiano noturno e no despertar heroico;
 Python ensina humanos sobre EPs numa universidade. As manchetes representam

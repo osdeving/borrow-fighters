@@ -61,7 +61,10 @@ cargo run -- --menu
 Na branch `feature/prologue-scene-improvements`, a primeira rodada acrescenta
 setup e pôsteres de Rust ao quarto, ciclistas numa ciclovia ao fundo e um garoto
 que larga a pipa e foge ao perceber a errática. A encenação acompanha a pausa
-e o reinício do encontro. [Escopo das melhorias](docs/30-prologue-scene-improvements.md)
+e o reinício do encontro. A segunda rodada acrescenta automóveis numa rua
+separada da ciclovia: ao surgir a EP, um motorista buzina, freia e bate num
+poste; o carro amassado permanece no cenário.
+[Escopo das melhorias](docs/30-prologue-scene-improvements.md)
 e [diário do experimento](docs/worklogs/prologue-scene-improvements.md).
 
 O menu usa a identidade do título final, moldura de terminal, cursor de bloco

@@ -13,6 +13,10 @@ manhã de Rust. [Escopo](docs/30-prologue-scene-improvements.md) e
   desperta; a pipa segue pelo vento e ele não retorna no mesmo encontro.
 - Relógio da encenação preservado na pausa e no desfecho, com retry/restart
   coerentes; os atores decorativos não acrescentam colisões ao combate.
+- Rua com automóveis passando atrás da ciclovia. A EP desencadeia buzina,
+  frenagem e batida de um carro num poste, com capô amassado, poeira, pequenos
+  fragmentos, fumaça leve e sons próprios. A consequência permanece no encontro;
+  pausa conserva a sequência e o áudio, retry rearma e skip descarta os efeitos.
 - Quatro textos editáveis em `morning.poster.*` e `morning.setup.*`, com
   recarga por F5. As entradas `--start morning` e `--start encounter` permitem
   rever diretamente os trechos desta rodada.

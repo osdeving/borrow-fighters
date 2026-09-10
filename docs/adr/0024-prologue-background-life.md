@@ -34,3 +34,13 @@ posições, sem ECS, eventos genéricos ou física de NPCs. A camada de fundo
 deve ser conferida com a câmera nas duas extremidades e durante o combate.
 
 Implementação e evidência: [entrega 30](../30-prologue-scene-improvements.md).
+
+## Extensão — automóveis e acidente
+
+O pedido adicional de trânsito e acidente usa a mesma fronteira: trajetória,
+frenagem e impacto são estado decorativo puro em `adventure/ambient`, com
+renderização e áudio locais à aventura. O mesmo sinal da EP inicia a fuga
+do garoto e o acidente. Cues de buzina, pneus e metal derivam da passagem
+pelos marcos da sequência, sem física veicular nem contatos de combate.
+O carro amassado permanece até reinício; a via de automóveis ocupa um plano
+distinto da ciclovia e da calçada. Pausa e descarte por skip incluem o som.

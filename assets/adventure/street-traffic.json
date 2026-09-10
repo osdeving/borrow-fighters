@@ -1,0 +1,119 @@
+{
+  "image": "street-traffic.png",
+  "image_size": [
+    1254,
+    1254
+  ],
+  "rects": [
+    [
+      21,
+      198,
+      599,
+      304
+    ],
+    [
+      648,
+      198,
+      587,
+      303
+    ],
+    [
+      16,
+      836,
+      604,
+      263
+    ],
+    [
+      637,
+      795,
+      603,
+      307
+    ]
+  ],
+  "labels": [
+    "blue-hatchback-intact",
+    "blue-hatchback-crumpled",
+    "ochre-sedan",
+    "teal-family-hatchback"
+  ],
+  "measurement": {
+    "alpha_threshold_exclusive": 3,
+    "padding_pixels": 2,
+    "image_pixels_unchanged": true,
+    "inspection_column_edges": [
+      0,
+      627,
+      1254
+    ],
+    "inspection_row_edges": [
+      0,
+      627,
+      1254
+    ]
+  },
+  "landmarks": {
+    "coordinate_space": "source image pixels; approximate wheel centers by visual inspection",
+    "rear_wheel_centers": [
+      [
+        115,
+        445
+      ],
+      [
+        742,
+        445
+      ],
+      [
+        136,
+        1044
+      ],
+      [
+        735,
+        1047
+      ]
+    ],
+    "front_wheel_centers": [
+      [
+        519,
+        445
+      ],
+      [
+        1147,
+        445
+      ],
+      [
+        510,
+        1044
+      ],
+      [
+        1137,
+        1047
+      ]
+    ],
+    "rear_ground_contacts": [
+      [
+        115,
+        499
+      ],
+      [
+        742,
+        498
+      ],
+      [
+        136,
+        1096
+      ],
+      [
+        735,
+        1099
+      ]
+    ]
+  },
+  "source_sha256": "13d45c30f198d53dd7504601e23560feb45e21ee0cc8e57766145b9d4e5841ab",
+  "alpha_counts": {
+    "zero": 1059031,
+    "intermediate": 512753,
+    "opaque": 732
+  },
+  "generated_with": "built-in image_gen",
+  "selected_prompt": "prompts/street-traffic.txt"
+}

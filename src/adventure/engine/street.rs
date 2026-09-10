@@ -1,4 +1,4 @@
-//! Draws the protected cycling lane, passersby and the child's escaping kite.
+//! Draws the street's separated sidewalks, cycling lane and escaping kite.
 //!
 //! System: Adventure presentation. Every sprite follows the background camera
 //! and a fixed story clock; none creates a physical body or combat contact.
@@ -21,14 +21,25 @@ pub fn background(d: &mut impl RaylibDraw, a: &Assets, camera: f32) {
     let source_width = a.environments.width() as f32;
     let x = -camera * PARALLAX;
     let width = 1280.0 * 1.35;
-    d.draw_texture_pro(
-        &a.environments,
-        Rectangle::new(0.0, source_height, source_width, source_height),
-        Rectangle::new(x, 0.0, width, 620.0),
-        Vector2::zero(),
-        0.0,
-        Color::WHITE,
-    );
+    // Raise the neighborhood and its sidewalk to make room for a motor lane.
+    // Preserve the original cycling lane, planter and all playable-floor pixels.
+    for (from, height, to, drawn_height) in [(0.0, 438.0, 0.0, 368.0), (438.0, 182.0, 438.0, 182.0)]
+    {
+        d.draw_texture_pro(
+            &a.environments,
+            Rectangle::new(
+                0.0,
+                source_height + from / 620.0 * source_height,
+                source_width,
+                height / 620.0 * source_height,
+            ),
+            Rectangle::new(x, to, width, drawn_height),
+            Vector2::zero(),
+            0.0,
+            Color::WHITE,
+        );
+    }
+    super::traffic::road(d, camera * PARALLAX);
     // Continue only the foreground paving under the lower cinematic gradient.
     // Rust remains on y580; the cycling lane and planter sit entirely behind him.
     d.draw_texture_pro(
@@ -47,6 +58,7 @@ pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &Assets, camera:
     cycle_lane(d, offset);
     kite(d, ambient, offset);
     child(d, ambient, a, offset);
+    super::traffic::draw(d, ambient, a, offset);
 
     // Far lane first: cyclists never share the child's sidewalk or Rust's plane.
     for cyclist in ambient.cyclists().iter().rev() {

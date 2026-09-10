@@ -16,7 +16,8 @@ class RepositoryAssetsTests(unittest.TestCase):
         assets = {p.relative_to(package.ROOT).as_posix() for p in package.runtime_assets()}
         required = {
             "ada-prologue.png", "prologue-environments.png", "rust-morning.png",
-            "street-life.png", "street-life.json",
+            "street-life.png", "street-life.json", "street-traffic.png",
+            "street-traffic.json",
             "rust-actions.png", "erratic.png", "rust-morning-poses.json",
             "rust-actions-poses.json", "erratic-poses.json", "texts/pt-BR.json",
             "texts/README.md", "opening/roster.json", "opening/cpp-origin.png",
@@ -26,7 +27,7 @@ class RepositoryAssetsTests(unittest.TestCase):
         }
         required.update(f"audio/{name}.wav" for name in (
             "ada", "morning", "threat", "remorse", "opening", "strike",
-            "block", "hurt", "transition"))
+            "block", "hurt", "transition", "car_horn", "car_skid", "car_crash"))
         required.update(f"opening/roster/{name}.png" for name in (
             "rust", "duke", "c", "cpp", "python"))
         self.assertFalse({f"assets/adventure/{name}" for name in required} - assets)
@@ -34,6 +35,7 @@ class RepositoryAssetsTests(unittest.TestCase):
         self.assertNotIn("assets/adventure/adventure-environments.png", assets)
         self.assertFalse(any("prompts" in Path(name).parts for name in assets))
         self.assertNotIn("assets/adventure/audio/generate_audio.py", assets)
+        self.assertNotIn("assets/adventure/audio/generate_traffic_audio.py", assets)
 
 
 class AdventureReferencesTests(unittest.TestCase):

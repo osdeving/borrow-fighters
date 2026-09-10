@@ -25,6 +25,10 @@ pub struct Assets {
     pub street_life: Texture2D,
     /// Twelve independently bounded decorative poses.
     pub street_life_bounds: Vec<Rectangle>,
+    /// Passing vehicles and the incident car before/after its impact.
+    pub street_traffic: Texture2D,
+    /// Four alpha-bounded vehicle poses in the traffic atlas.
+    pub street_traffic_bounds: Vec<Rectangle>,
     /// Eight poses of the original erratic creature.
     pub erratic: Texture2D,
     /// Transparent-pixel bounds within each waking pose.
@@ -70,6 +74,8 @@ impl Assets {
             environments: texture(rl, thread, "prologue-environments.png")?,
             street_life: texture(rl, thread, "street-life.png")?,
             street_life_bounds: pose_bounds("street-life.json", 12)?,
+            street_traffic: texture(rl, thread, "street-traffic.png")?,
+            street_traffic_bounds: pose_bounds("street-traffic.json", 4)?,
             erratic: texture(rl, thread, "erratic.png")?,
             morning_bounds: pose_bounds("rust-morning-poses.json", 12)?,
             erratic_bounds: pose_bounds("erratic-poses.json", 8)?,
@@ -137,6 +143,7 @@ mod tests {
             ("erratic-poses.json", 8),
             ("rust-actions-poses.json", 16),
             ("street-life.json", 12),
+            ("street-traffic.json", 4),
         ] {
             let frames = pose_bounds(name, count).unwrap();
             assert_eq!(frames.len(), count);

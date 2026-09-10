@@ -6,7 +6,10 @@ está no gerador determinístico [`generate_audio.py`](generate_audio.py), que u
 somente a biblioteca padrão do Python: senoides, envelopes, ruído com seed fixa
 e exportação `wave`. A apresentação musical de 48 segundos tem gerador próprio,
 [`generate_opening_audio.py`](generate_opening_audio.py), sem alterar o gerador
-ou os oito WAVs anteriores. Aplicam-se as licenças do repositório.
+ou os oito WAVs anteriores. Os três efeitos de trânsito têm gerador separado,
+[`generate_traffic_audio.py`](generate_traffic_audio.py), também com síntese
+original e ruído determinístico, sem gravações externas. Aplicam-se as licenças
+do repositório.
 
 | Arquivo | Uso | Duração |
 |---|---|---|
@@ -19,6 +22,9 @@ ou os oito WAVs anteriores. Aplicam-se as licenças do repositório.
 | `block.wav` | Defesa frontal bem-sucedida | 0,28 s |
 | `hurt.wav` | Rust atingido | 0,36 s |
 | `transition.wav` | Mudança de cena ou surgimento da ameaça | 0,80 s |
+| `car_horn.wav` | Buzina urgente de dois tons quando o carro percebe a EP | 0,60 s |
+| `car_skid.wav` | Pneus freando até o contato com o poste | 0,567 s |
+| `car_crash.wav` | Colisão grave, lataria amassando e cauda de metal | 1,35 s |
 
 Os WAVs usam PCM mono de 16 bits a 22.050 Hz, com envelopes nas extremidades e
 pico limitado antes da conversão. São áudio original de piloto; a qualidade e o
@@ -39,11 +45,21 @@ um ataque forte e a chegada em ré maior conduzem ao logo e à resolução até
 fase, inclusive o alinhamento com o logo. A intensidade e a resolução musical
 devem ser avaliadas por audição humana junto à montagem.
 
+O acidente usa o relógio fixo de `adventure/ambient.rs`: buzina no tick **38**,
+frenagem no **78** e impacto no **112**, contados desde o despertar da EP.
+O efeito de pneus dura 34/60 s e termina no impacto. Os picos dos três WAVs
+são 0,82, 0,73 e 0,94, antes do volume de reprodução de 0,3. Pausa suspende
+os sons em execução; retry rearma os marcos e descarta a cauda do acidente
+anterior. O avanço por trecho descarta os efeitos abandonados. O adaptador
+detecta marcos cruzados entre renders, para não perder ou repetir a buzina,
+frenagem ou batida se o número de updates por imagem variar.
+
 Para regenerar exatamente os arquivos desta pasta:
 
 ```sh
 python3 assets/adventure/audio/generate_audio.py
 python3 assets/adventure/audio/generate_opening_audio.py
+python3 assets/adventure/audio/generate_traffic_audio.py
 ```
 
 Dispositivo de áudio ou WAV ausente não impede a aventura. Este conjunto não

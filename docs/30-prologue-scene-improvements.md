@@ -5,10 +5,11 @@ Experimento autorizado em 10 de setembro de 2026 na branch
 A branch reúne melhorias das cenas do prólogo; esta primeira rodada trata
 do quarto de Rust e da rua durante a manhã, conforme pedido do usuário.
 
-**Estado:** primeira rodada implementada e verificada na branch. São 437 testes
-conjuntos e 31 verificações nativas/de encenação, com matriz isolada, Fmt, Clippy,
-fronteiras e empacotamento aprovados. [Vídeo, imagens e resultados](evidence/prologue-scene-improvements/README.md).
-O próximo passo é experimentar no jogo e escolher os ajustes das próximas cenas.
+**Estado:** duas rodadas implementadas e verificadas na branch. A segunda tem
+445 testes conjuntos e 20 checks nativos, com matriz isolada, Fmt, Clippy,
+fronteiras, áudio e empacotamento aprovados.
+[Quarto/ciclovia/pipa](evidence/prologue-scene-improvements/README.md) e
+[trânsito/acidente com som](evidence/prologue-traffic/README.md).
 
 ## Primeira rodada
 
@@ -30,7 +31,27 @@ separado em profundidade; não se cria navegação, física ou colisão de NPCs.
 Melhorias de Ada, Assembly e demais cenas poderão continuar nesta branch
 em rodadas próprias. Esta solicitação não publica outra release.
 
-## Verificação
+## Segunda rodada — trânsito e acidente
+
+Pedido adicional: intensificar a vida da rua com automóveis e a reação à EP
+com buzina, frenagem, colisão em um poste e deformação visível do carro.
+
+- Abrir uma faixa de asfalto ao fundo, mantendo ciclovia, calçada do garoto
+  e piso jogável claramente separados. Carros circulam antes da ameaça.
+- Quando `enemy_awake` disparar, encenar uma única aproximação com buzina,
+  frenagem e impacto no poste. O capô amassado, uma breve nuvem de poeira e
+  fumaça leve sustentam a consequência visual no restante do encontro.
+- Compartilhar o relógio da encenação entre imagem e cues de áudio. Pausa,
+  retry/restart e skip devem congelar, restaurar ou descartar a sequência
+  de forma coerente, sem repetir sons por frame renderizado.
+- A colisão é encenação de fundo: não altera vida, hitboxes, movimento ou
+  resultado do combate. Preservar quarto, ciclistas e fuga da pipa.
+
+Estado: implementada. Tráfego contínuo, contato com o poste, carro amassado
+persistente, câmera, pausa e fluxo conferidos na execução nativa.
+Prévia e provas na [revisão da segunda rodada](evidence/prologue-traffic/README.md).
+
+## Verificação das rodadas
 
 Conferir os apoios de Rust nas poses da manhã, ciclistas em posições distintas,
 garoto antes da ameaça e a sequência de soltar a pipa e fugir. Testar pausa,

@@ -56,6 +56,58 @@ desta rodada.
 
 ## Continuação
 
+### Segunda rodada concluída — automóveis e acidente
+
+- Pedido: mais movimento na rua e, na entrada da EP, buzina e automóvel
+  batendo/amassando no poste junto da fuga do garoto.
+- Base conferida: `3f6d9da`, branch limpa antes desta rodada.
+- Decisão: ampliar a encenação da ADR 0024 com faixa de asfalto, tráfego,
+  sequência única de frenagem/impacto e cues de áudio próprios da aventura.
+- Arte dos carros, estado, integração de áudio/render, testes e revisão
+  nativa concluídos. Não integrar/publicar sem novo pedido.
+
+Checkpoint de implementação:
+
+- Arte e áudio integrados; estado puro contém carros contínuos e acidente
+  nos ticks 38/78/112 da reação à EP. Renderer conserva ciclovia e chão,
+  abre asfalto e desenha carro amassado, poste e efeitos locais.
+- `cargo fmt`, Clippy estrito e matriz Rust passaram: 445 testes conjuntos,
+  51 aventura, 395 luta, 3 core. Fronteiras: 56 fixtures; mixer de revisão:
+  38 testes; empacotamento: dez testes, incluindo novos assets.
+- Primeira captura nativa confirmou rua, frenagem/pausa, contato e permanência;
+  a automação morreu ao atravessar a EP antes de atingir a câmera direita.
+  Ajustar somente os comandos da revisão para completar câmera/retry/skip.
+  Capturas e logs ficam em `.git/traffic-review/native-1`; testes no diretório
+  pai. Áudio capturado em sink PulseAudio exclusivo, sem som do desktop.
+
+Checkpoint final:
+
+- `native-2/native-checks.json`: 20/20 checks nativos aprovados, incluindo
+  extremo direito, derrota/retry, pulo durante frenagem e restart sem destroços.
+  A revisão usou defesa durante as capturas e avanço nos intervalos de
+  recuperação da EP; regras/saúde do jogo não foram alteradas.
+- Prévia contínua separada em `.git/traffic-review/preview`, sem F12 ou pausas
+  durante a cena, com som real gravado em `preview-audio.mka`. A captura
+  funcional conserva seu vídeo e telemetria próprios em `native-2`.
+- [Evidências selecionadas](../evidence/prologue-traffic/README.md) incluem
+  vídeo com som, imagens, verificações e procedência. Atlas e prompts em
+  `assets/adventure/street-traffic.*` e `assets/adventure/prompts/street-traffic*`;
+  WAVs originais e gerador em `assets/adventure/audio/`.
+- Comandos de verificação: `cargo fmt --check`,
+  `cargo clippy --all-targets --all-features -- -D warnings`,
+  `cargo test --all-targets --all-features` e as três combinações isoladas
+  de features. Python: `tools/check_domain_boundaries.py` e unittest discovery
+  de `test_check_domain_boundaries.py`, `test_mix_adventure_review_audio.py`
+  e `test_package.py`. Logs Rust em `.git/traffic-review/`.
+- Rodada em alterações locais revisáveis nesta branch; base continua
+  `3f6d9da`. Ao retomar, preservar o trabalho local antes de qualquer checkout.
+- Prévia final: 10,27 segundos/308 frames, vídeo original preservado e áudio
+  nativo alinhado. Buzina, pneus e batida confirmados por correlação com a
+  captura; sem clipping. Validação final: 19 YAMLs e 1351 links Markdown
+  locais aprovados, além de `git diff --check` e compilação do harness Python.
+
+### Após as rodadas
+
 Experimentar a primeira rodada e escolher a próxima cena nesta mesma branch.
 Ada, Assembly e apresentação poderão receber propostas próprias; não há
 implementação desses próximos ajustes pendente nesta solicitação. Manter

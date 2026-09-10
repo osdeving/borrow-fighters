@@ -12,7 +12,10 @@ of the actual Raylib audio-device output or a human listening approval.
 The state observer mirrors src/adventure/engine/audio.rs: volume 0.3, looping
 ambience, the non-looping opening score, frozen playback cursors during pause,
 silence while paused, one active voice
-per cue, contact deduplication and transition cues. FFmpeg copies the recorded
+per cue, contact deduplication, transition cues and the street accident's shared
+milestones. Explicit skip telemetry discards cue voices and seeks the score.
+Legacy telemetry without street clocks never invents traffic effects.
+FFmpeg copies the recorded
 video unchanged and encodes the reconstructed mono mix as AAC.
 """
 
@@ -36,7 +39,9 @@ RATE = 22050
 VOLUME = 0.3
 TRACKS = ("ada", "morning", "threat", "remorse", "opening")
 NON_LOOPING_TRACKS = {"opening"}
-CUES = ("strike", "block", "hurt", "transition")
+TRAFFIC_MILESTONES = ((38, "car_horn"), (78, "car_skid"), (112, "car_crash"))
+TRAFFIC_CUES = tuple(cue for _, cue in TRAFFIC_MILESTONES)
+CUES = ("strike", "block", "hurt", "transition") + TRAFFIC_CUES
 STAGES = {"AdaPrologue", "RustMorning", "Encounter", "Aftermath", "Opening", "Complete"}
 LIMITATION = (
     "Audio reconstructed offline from telemetry and the original adventure WAVs; "
@@ -70,6 +75,18 @@ def read_telemetry(path: Path) -> list[dict]:
                     raise ValueError("ticks must be a nonnegative integer")
                 if "stage_ticks" in row and (not isinstance(row["stage_ticks"], int) or row["stage_ticks"] < 0):
                     raise ValueError("stage_ticks must be a nonnegative integer")
+                if not isinstance(row.get("audio_synced_after_skip", False), bool):
+                    raise ValueError("audio_synced_after_skip must be a boolean")
+                if "ambience" in row:
+                    ambience = row["ambience"]
+                    if not isinstance(ambience, dict):
+                        raise ValueError("ambience must be an object")
+                    for key in ("ticks", "accident_ticks"):
+                        value = ambience.get(key)
+                        if key == "ticks" and key in ambience and value is None:
+                            raise ValueError("ambience.ticks must be a nonnegative integer")
+                        if value is not None and (type(value) is not int or value < 0):
+                            raise ValueError(f"ambience.{key} must be a nonnegative integer or null")
                 hit = row.get("hit")
                 if hit is not None:
                     if hit["target"] not in {"Player", "Erratic"}:
@@ -152,17 +169,35 @@ class Observer:
         self.stage = None
         self.stage_ticks = 0
         self.combat_ticks = 0
+        self.ambient_ticks = 0
+        self.accident_ticks = None
         self.enemy_awake = False
         self.hit_tick = None
         self.epoch = 0
 
+    def timeline_restarted(self, row: dict) -> bool:
+        return (row["ticks"] < self.combat_ticks
+                or row.get("ambience", {}).get("ticks", 0) < self.ambient_ticks
+                or (self.stage == row["stage"]
+                    and row.get("stage_ticks", 0) < self.stage_ticks))
+
+    def align(self, row: dict):
+        """Snapshot skipped state without emitting its abandoned effects."""
+        self.stage = row["stage"]
+        self.stage_ticks = row.get("stage_ticks", 0)
+        self.combat_ticks = row["ticks"]
+        self.ambient_ticks = row.get("ambience", {}).get("ticks", 0)
+        self.accident_ticks = row.get("ambience", {}).get("accident_ticks")
+        self.enemy_awake = row["enemy_awake"]
+        hit = row.get("hit")
+        self.hit_tick = max(0, row["ticks"] - hit["age"]) if hit is not None else None
+
     def observe(self, row: dict) -> list[dict]:
-        stage_ticks = row.get("stage_ticks", 0)
-        reset = row["ticks"] < self.combat_ticks or (
-            self.stage == row["stage"] and stage_ticks < self.stage_ticks
-        )
+        reset = self.timeline_restarted(row)
+        accident_ticks = row.get("ambience", {}).get("accident_ticks")
         if reset:
             self.hit_tick = None
+            self.accident_ticks = None
             self.epoch += 1
         reasons = []
         if self.stage is not None and self.stage != row["stage"]:
@@ -184,9 +219,16 @@ class Observer:
                     "target": hit["target"], "blocked": hit["blocked"], "epoch": self.epoch,
                 })
                 self.hit_tick = tick
+        if row["stage"] in {"Encounter", "Aftermath"} and accident_ticks is not None:
+            for at, cue in TRAFFIC_MILESTONES:
+                if accident_ticks >= at and (self.accident_ticks is None or self.accident_ticks < at):
+                    events.append({"cue": cue, "milestone_tick": at,
+                                   "observed_accident_tick": accident_ticks, "epoch": self.epoch})
         self.stage = row["stage"]
-        self.stage_ticks = stage_ticks
+        self.stage_ticks = row.get("stage_ticks", 0)
         self.combat_ticks = row["ticks"]
+        self.ambient_ticks = row.get("ambience", {}).get("ticks", 0)
+        self.accident_ticks = accident_ticks
         self.enemy_awake = row["enemy_awake"]
         return events
 
@@ -210,6 +252,7 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
     changes = []
     spans = []
     pauses = []
+    seeks = []
     observer = Observer()
 
     def advance(target):
@@ -247,11 +290,26 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
                 voices[cue] = (cursor + audible, event_index)
         position = target
 
+    def stop_voices(cues, reason):
+        for cue in cues:
+            if cue in voices:
+                _, event_index = voices.pop(cue)
+                events[event_index]["end_seconds"] = position / rate
+                events[event_index]["interrupted_by"] = reason
+
     for row in rows:
         event_sample = round((row["seconds"] - origin) * rate)
         if event_sample >= count:
             break
         advance(event_sample)
+        synced_after_skip = row.get("audio_synced_after_skip", False)
+        if synced_after_skip:
+            stop_voices(CUES, "scene_skip")
+            observer.align(row)
+        elif observer.timeline_restarted(row):
+            stop_voices(TRAFFIC_CUES, "execution_reset")
+        elif row["stage"] not in {"Encounter", "Aftermath"}:
+            stop_voices(TRAFFIC_CUES, "street_left")
         next_track = background_for(row)
         if next_track != track:
             changes.append({
@@ -262,6 +320,14 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
             })
             track = next_track
             music_cursor = 0
+        if synced_after_skip:
+            elapsed = round(row.get("stage_ticks", 0) / 60 * rate)
+            music_cursor = (min(elapsed, len(clips[track])) if track in NON_LOOPING_TRACKS
+                            else elapsed % len(clips[track]))
+            seeks.append({"seconds": position / rate, "track": track,
+                          "source_cursor_seconds": music_cursor / rate})
+            if changes[-1]["seconds"] == position / rate:
+                changes[-1]["source_cursor_seconds"] = music_cursor / rate
         if row["paused"] != paused:
             if row["paused"]:
                 pause_start = position
@@ -312,9 +378,11 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
             "telemetry_end_seconds": rows[-1]["seconds"] - origin,
             "last_state_hold_seconds": max(0, count / rate - (rows[-1]["seconds"] - origin)),
             "stage_ticks_present_in_all_samples": all("stage_ticks" in row for row in rows),
+            "traffic_clock_present_in_all_samples": all("accident_ticks" in row.get("ambience", {}) for row in rows),
+            "explicit_skip_marker_present_in_all_samples": all("audio_synced_after_skip" in row for row in rows),
         },
         "tracks": changes, "audible_music_spans": spans,
-        "pause_intervals": pauses,
+        "pause_intervals": pauses, "music_seeks": seeks,
         "events": events, "event_counts": dict(Counter(event["cue"] for event in events)),
     }
     return pcm, report

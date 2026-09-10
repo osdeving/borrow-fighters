@@ -6,6 +6,7 @@
 use raylib::prelude::{Music, RaylibAudio, Sound};
 
 use crate::adventure::{
+    ambient::{CAR_HORN_TICK, CAR_IMPACT_TICK, CAR_SKID_TICK},
     combat::{ActorKind, Outcome},
     story::{Stage, Story},
 };
@@ -52,10 +53,21 @@ enum Cue {
     Block,
     Hurt,
     Transition,
+    CarHorn,
+    CarSkid,
+    CarCrash,
 }
 
 impl Cue {
-    const ALL: [Self; 4] = [Self::Strike, Self::Block, Self::Hurt, Self::Transition];
+    const ALL: [Self; 7] = [
+        Self::Strike,
+        Self::Block,
+        Self::Hurt,
+        Self::Transition,
+        Self::CarHorn,
+        Self::CarSkid,
+        Self::CarCrash,
+    ];
 
     fn file(self) -> &'static str {
         match self {
@@ -63,7 +75,14 @@ impl Cue {
             Self::Block => "block.wav",
             Self::Hurt => "hurt.wav",
             Self::Transition => "transition.wav",
+            Self::CarHorn => "car_horn.wav",
+            Self::CarSkid => "car_skid.wav",
+            Self::CarCrash => "car_crash.wav",
         }
+    }
+
+    fn is_traffic(self) -> bool {
+        matches!(self, Self::CarHorn | Self::CarSkid | Self::CarCrash)
     }
 }
 
@@ -116,8 +135,20 @@ impl<'aud> AdventureAudio<'aud> {
         player
     }
 
-    /// Updates the selected ambience and emits each new contact only once.
+    /// Updates ambience and emits each contact or street milestone only once.
     pub fn update(&mut self, story: &Story, paused: bool) {
+        // A retry abandons the old crash even if its ringing metal was paused.
+        // Natural aftermath keeps the same street clock and the impact tail.
+        if self.observed.timeline_restarted(story)
+            || !matches!(story.stage, Stage::Encounter | Stage::Aftermath)
+        {
+            for (cue, sound) in &self.sounds {
+                if cue.is_traffic() {
+                    sound.stop();
+                }
+            }
+            self.suspended_sounds.retain(|cue| !cue.is_traffic());
+        }
         let next_track = background_for(story);
         if self.current_track != Some(next_track) {
             if let Some(current) = self.active_music() {
@@ -154,16 +185,7 @@ impl<'aud> AdventureAudio<'aud> {
             sound.stop();
         }
         self.suspended_sounds.clear();
-        self.observed = ObservedAudio {
-            stage: Some(story.stage),
-            stage_ticks: story.stage_ticks,
-            combat_ticks: story.combat.ticks,
-            enemy_awake: story.combat.enemy_awake,
-            hit_tick: story
-                .combat
-                .last_hit
-                .map(|hit| story.combat.ticks.saturating_sub(hit.age_ticks)),
-        };
+        self.observed = ObservedAudio::at_story(story);
         self.update(story, self.paused);
         if let Some(music) = self.active_music() {
             let duration = music.get_time_length();
@@ -233,17 +255,40 @@ struct ObservedAudio {
     stage: Option<Stage>,
     stage_ticks: u32,
     combat_ticks: u32,
+    ambient_ticks: u32,
+    accident_ticks: Option<u32>,
     enemy_awake: bool,
     hit_tick: Option<u32>,
 }
 
 impl ObservedAudio {
+    fn at_story(story: &Story) -> Self {
+        Self {
+            stage: Some(story.stage),
+            stage_ticks: story.stage_ticks,
+            combat_ticks: story.combat.ticks,
+            ambient_ticks: story.ambient.ticks(),
+            accident_ticks: story.ambient.accident_ticks(),
+            enemy_awake: story.combat.enemy_awake,
+            hit_tick: story
+                .combat
+                .last_hit
+                .map(|hit| story.combat.ticks.saturating_sub(hit.age_ticks)),
+        }
+    }
+
+    fn timeline_restarted(&self, story: &Story) -> bool {
+        story.combat.ticks < self.combat_ticks
+            || story.ambient.ticks() < self.ambient_ticks
+            || (self.stage == Some(story.stage) && story.stage_ticks < self.stage_ticks)
+    }
+
     fn observe(&mut self, story: &Story) -> Vec<Cue> {
-        let mut cues = Vec::with_capacity(2);
-        let reset = story.combat.ticks < self.combat_ticks
-            || (self.stage == Some(story.stage) && story.stage_ticks < self.stage_ticks);
+        let mut cues = Vec::with_capacity(5);
+        let reset = self.timeline_restarted(story);
         if reset {
             self.hit_tick = None;
+            self.accident_ticks = None;
         }
         let changed_stage = self.stage.is_some() && self.stage != Some(story.stage);
         let noticed_rust = story.combat.enemy_awake && !self.enemy_awake;
@@ -263,9 +308,26 @@ impl ObservedAudio {
                 self.hit_tick = Some(contact_tick);
             }
         }
+        if matches!(story.stage, Stage::Encounter | Stage::Aftermath)
+            && let Some(ticks) = story.ambient.accident_ticks()
+        {
+            // Render frames can span several fixed updates. Crossing a milestone
+            // emits once even if no render sampled the exact simulation tick.
+            for (at, cue) in [
+                (CAR_HORN_TICK, Cue::CarHorn),
+                (CAR_SKID_TICK, Cue::CarSkid),
+                (CAR_IMPACT_TICK, Cue::CarCrash),
+            ] {
+                if ticks >= at && self.accident_ticks.is_none_or(|previous| previous < at) {
+                    cues.push(cue);
+                }
+            }
+        }
         self.stage = Some(story.stage);
         self.stage_ticks = story.stage_ticks;
         self.combat_ticks = story.combat.ticks;
+        self.ambient_ticks = story.ambient.ticks();
+        self.accident_ticks = story.ambient.accident_ticks();
         self.enemy_awake = story.combat.enemy_awake;
         cues
     }
@@ -275,6 +337,125 @@ impl ObservedAudio {
 mod tests {
     use super::*;
     use crate::{adventure::combat::HitFeedback, math::vec2::Vec2};
+
+    fn awake_street() -> Story {
+        let mut story = Story::new();
+        story.advance_scene();
+        story.advance_scene();
+        story.combat.enemy_awake = true;
+        story.ambient.tick(true);
+        story
+    }
+
+    fn advance_accident_to(story: &mut Story, target: u32) {
+        while story.ambient.accident_ticks().unwrap() < target {
+            story.ambient.tick(true);
+        }
+    }
+
+    #[test]
+    fn traffic_cues_follow_milestones_once_across_uneven_render_updates() {
+        let mut story = awake_street();
+        let mut observed = ObservedAudio::at_story(&story);
+        for (at, cue) in [
+            (CAR_HORN_TICK, Cue::CarHorn),
+            (CAR_SKID_TICK, Cue::CarSkid),
+            (CAR_IMPACT_TICK, Cue::CarCrash),
+        ] {
+            advance_accident_to(&mut story, at - 1);
+            assert!(observed.observe(&story).is_empty());
+            advance_accident_to(&mut story, at + 3);
+            assert_eq!(observed.observe(&story), [cue]);
+            assert!(observed.observe(&story).is_empty());
+        }
+        advance_accident_to(&mut story, CAR_IMPACT_TICK + 1000);
+        assert!(observed.observe(&story).is_empty());
+    }
+
+    #[test]
+    fn one_late_render_retains_all_crossed_traffic_milestones_in_order() {
+        let mut story = awake_street();
+        let mut observed = ObservedAudio::at_story(&story);
+        advance_accident_to(&mut story, CAR_IMPACT_TICK + 10);
+        assert_eq!(
+            observed.observe(&story),
+            [Cue::CarHorn, Cue::CarSkid, Cue::CarCrash]
+        );
+        assert!(observed.observe(&story).is_empty());
+    }
+
+    #[test]
+    fn aftermath_keeps_the_pending_impact_without_replaying_the_horn() {
+        let mut story = awake_street();
+        advance_accident_to(&mut story, CAR_SKID_TICK);
+        let mut observed = ObservedAudio::at_story(&story);
+        story.stage = Stage::Aftermath;
+        story.stage_ticks = 0;
+        advance_accident_to(&mut story, CAR_IMPACT_TICK);
+        assert_eq!(observed.observe(&story), [Cue::Transition, Cue::CarCrash]);
+        assert!(observed.observe(&story).is_empty());
+    }
+
+    #[test]
+    fn pause_preserves_pending_traffic_cues_until_resumed() {
+        let mut audio = AdventureAudio::new(None);
+        let mut story = awake_street();
+        advance_accident_to(&mut story, CAR_HORN_TICK - 1);
+        audio.update(&story, false);
+        advance_accident_to(&mut story, CAR_HORN_TICK);
+        for _ in 0..20 {
+            audio.update(&story, true);
+            assert_eq!(audio.observed.accident_ticks, Some(CAR_HORN_TICK - 1));
+        }
+        audio.update(&story, false);
+        assert_eq!(audio.observed.accident_ticks, Some(CAR_HORN_TICK));
+        assert!(audio.observed.observe(&story).is_empty());
+    }
+
+    #[test]
+    fn retry_rearms_the_accident_and_discards_suspended_wreck_audio() {
+        let mut audio = AdventureAudio::new(None);
+        let mut story = awake_street();
+        advance_accident_to(&mut story, CAR_IMPACT_TICK + 20);
+        audio.update(&story, false);
+        audio.update(&story, true);
+        audio.suspended_sounds.push(Cue::CarCrash);
+        story.combat.outcome = Outcome::Defeat;
+        story.retry();
+        assert_eq!(story.ambient.accident_ticks(), Some(0));
+        audio.update(&story, true);
+        assert!(audio.suspended_sounds.is_empty());
+        audio.update(&story, false);
+        advance_accident_to(&mut story, CAR_HORN_TICK);
+        assert_eq!(audio.observed.observe(&story), [Cue::CarHorn]);
+        advance_accident_to(&mut story, CAR_IMPACT_TICK);
+        assert_eq!(
+            audio.observed.observe(&story),
+            [Cue::CarSkid, Cue::CarCrash]
+        );
+        story.restart();
+        assert_eq!(audio.observed.observe(&story), [Cue::Transition]);
+        assert_eq!(audio.observed.accident_ticks, None);
+    }
+
+    #[test]
+    fn skip_abandons_pending_traffic_cues_and_suspended_sound() {
+        let mut audio = AdventureAudio::new(None);
+        let mut story = awake_street();
+        advance_accident_to(&mut story, CAR_HORN_TICK);
+        audio.update(&story, false);
+        audio.update(&story, true);
+        audio.suspended_sounds.push(Cue::CarHorn);
+        advance_accident_to(&mut story, CAR_IMPACT_TICK);
+        story.skip_segment();
+        audio.sync_after_skip(&story);
+        assert!(audio.paused);
+        assert!(audio.suspended_sounds.is_empty());
+        assert_eq!(audio.current_track, Some(Track::Opening));
+        assert!(audio.observed.observe(&story).is_empty());
+        audio.update(&story, false);
+        assert!(audio.observed.observe(&story).is_empty());
+    }
 
     #[test]
     fn repeated_render_updates_do_not_repeat_the_same_contact() {

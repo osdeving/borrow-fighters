@@ -3,23 +3,36 @@
 from array import array
 import json
 from pathlib import Path
+import re
 import tempfile
 import unittest
 from unittest.mock import patch
 import wave
 
 from mix_adventure_review_audio import (
-    CUES, RATE, TRACKS, background_for, load_wavs, probe_video,
+    CUES, RATE, TRACKS, TRAFFIC_CUES, TRAFFIC_MILESTONES, background_for, load_wavs, probe_video,
     read_telemetry, reconstruct, write_wav,
 )
 
 
-def row(seconds, stage="Encounter", *, ticks=0, stage_ticks=0, paused=False, awake=False, hit=None, outcome="Active", hp=100):
-    return {
+def row(seconds, stage="Encounter", *, ticks=0, stage_ticks=0, paused=False, awake=False, hit=None, outcome="Active", hp=100, ambience=None, synced_after_skip=False):
+    state = {
         "seconds": seconds, "stage": stage, "ticks": ticks, "stage_ticks": stage_ticks,
         "paused": paused, "enemy_awake": awake, "hit": hit, "outcome": outcome,
         "player": {"hp": hp},
     }
+    if ambience is not None:
+        state["ambience"] = ambience
+    if synced_after_skip:
+        state["audio_synced_after_skip"] = True
+    return state
+
+
+def street_row(seconds, accident_ticks, *, ambient_ticks=None, **values):
+    return row(seconds, awake=True, ambience={
+        "ticks": accident_ticks if ambient_ticks is None else ambient_ticks,
+        "accident_ticks": accident_ticks,
+    }, **values)
 
 
 def hit(age=0, target="Erratic", blocked=False):
@@ -31,6 +44,95 @@ def clips(default=0, length=20):
 
 
 class ReconstructionTests(unittest.TestCase):
+    def test_traffic_milestones_stay_aligned_with_runtime_constants(self):
+        source = (Path(__file__).resolve().parents[2] / "src/adventure/ambient.rs").read_text()
+        names = ("CAR_HORN_TICK", "CAR_SKID_TICK", "CAR_IMPACT_TICK")
+        timings = [int(re.search(rf"pub const {name}: u32 = (\d+);", source).group(1)) for name in names]
+        self.assertEqual(timings, [tick for tick, _ in TRAFFIC_MILESTONES])
+
+    def test_traffic_crossings_play_once_after_uneven_renders(self):
+        timeline = [street_row(0, 37), street_row(.1, 40), street_row(.2, 40),
+                    street_row(.3, 82), street_row(.4, 116), street_row(.5, 116)]
+        _, report = reconstruct(timeline, clips(), .7, rate=10)
+        traffic = [event for event in report["events"] if event["cue"] in TRAFFIC_CUES]
+        self.assertEqual([event["cue"] for event in traffic], list(TRAFFIC_CUES))
+        self.assertEqual([event["seconds"] for event in traffic], [.1, .3, .4])
+        self.assertEqual([event["milestone_tick"] for event in traffic], [38, 78, 112])
+
+    def test_late_render_retains_every_crossed_traffic_cue(self):
+        _, report = reconstruct([street_row(0, 0), street_row(.1, 118), street_row(.2, 118)], clips(), .3, rate=10)
+        traffic = [event for event in report["events"] if event["cue"] in TRAFFIC_CUES]
+        self.assertEqual([event["cue"] for event in traffic], list(TRAFFIC_CUES))
+        self.assertEqual([event["seconds"] for event in traffic], [.1, .1, .1])
+
+    def test_pause_freezes_active_horn_and_defers_pending_skid(self):
+        sounds = clips()
+        sounds["car_horn"] = array("h", [1000, 2000, 3000, 4000])
+        sounds["car_skid"] = array("h", [100, 200])
+        timeline = [street_row(0, 38), street_row(.2, 78, paused=True),
+                    street_row(.4, 78, paused=True), street_row(.5, 78)]
+        pcm, report = reconstruct(timeline, sounds, .8, rate=10)
+        self.assertEqual(list(pcm), [300, 600, 0, 0, 0, 930, 1260, 0])
+        traffic = [event for event in report["events"] if event["cue"] in TRAFFIC_CUES]
+        self.assertEqual([event["cue"] for event in traffic], ["car_horn", "car_skid"])
+        self.assertEqual(traffic[0]["end_seconds"], .7)
+        self.assertEqual(traffic[1]["seconds"], .5)
+
+    def test_retry_discards_suspended_crash_and_rearms_traffic(self):
+        sounds = clips()
+        sounds["car_crash"] = array("h", [1000] * 10)
+        timeline = [street_row(0, 112), street_row(.1, 112, paused=True),
+                    street_row(.2, 0, paused=True), street_row(.3, 0),
+                    street_row(.4, 38)]
+        pcm, report = reconstruct(timeline, sounds, .6, rate=10)
+        self.assertEqual(list(pcm), [300, 0, 0, 0, 0, 0])
+        crashes = [event for event in report["events"] if event["cue"] == "car_crash"]
+        self.assertEqual(len(crashes), 1)
+        self.assertEqual(crashes[0]["end_seconds"], .2)
+        self.assertEqual(crashes[0]["interrupted_by"], "execution_reset")
+        horns = [event for event in report["events"] if event["cue"] == "car_horn"]
+        self.assertEqual([event["epoch"] for event in horns], [0, 1])
+        self.assertEqual([event["seconds"] for event in horns], [0, .4])
+
+    def test_explicit_skip_discards_voices_and_pending_milestones_while_paused(self):
+        sounds = clips()
+        sounds["car_horn"] = array("h", [1000] * 10)
+        timeline = [street_row(0, 38), street_row(.1, 38, paused=True),
+                    street_row(.2, 112, paused=True, synced_after_skip=True),
+                    street_row(.3, 112)]
+        pcm, report = reconstruct(timeline, sounds, .5, rate=10)
+        self.assertEqual(list(pcm), [300, 0, 0, 0, 0])
+        traffic = [event for event in report["events"] if event["cue"] in TRAFFIC_CUES]
+        self.assertEqual([event["cue"] for event in traffic], ["car_horn"])
+        self.assertEqual(traffic[0]["interrupted_by"], "scene_skip")
+        self.assertEqual(traffic[0]["end_seconds"], .2)
+
+    def test_skip_into_opening_seeks_score_without_replaying_transition(self):
+        sounds = clips()
+        sounds["opening"] = array("h", [100, 200, 300, 400, 500])
+        timeline = [street_row(0, 38),
+                    street_row(.1, 78, stage="Opening", stage_ticks=12, synced_after_skip=True)]
+        pcm, report = reconstruct(timeline, sounds, .5, rate=10)
+        self.assertEqual(list(pcm), [0, 90, 120, 150, 0])
+        self.assertEqual(report["event_counts"], {"transition": 1, "car_horn": 1})
+        self.assertEqual(report["music_seeks"], [{"seconds": .1, "track": "opening", "source_cursor_seconds": .2}])
+
+    def test_aftermath_retains_crash_tail_but_leaving_street_stops_it(self):
+        sounds = clips()
+        sounds["car_crash"] = array("h", [1000, 2000, 3000, 4000])
+        timeline = [street_row(0, 112), street_row(.1, 118, stage="Aftermath"),
+                    street_row(.2, 118, stage="Complete")]
+        pcm, report = reconstruct(timeline, sounds, .4, rate=10)
+        self.assertEqual(list(pcm), [300, 600, 0, 0])
+        crashes = [event for event in report["events"] if event["cue"] == "car_crash"]
+        self.assertEqual(crashes[0]["end_seconds"], .2)
+        self.assertEqual(crashes[0]["interrupted_by"], "street_left")
+
+    def test_legacy_telemetry_without_street_clock_invents_no_traffic(self):
+        _, report = reconstruct([row(0, awake=True), row(.2, ticks=400, awake=True)], clips(), .5, rate=10)
+        self.assertFalse(any(event["cue"] in TRAFFIC_CUES for event in report["events"]))
+        self.assertFalse(report["time_alignment"]["traffic_clock_present_in_all_samples"])
+
     def test_background_selection_matches_runtime(self):
         cases = [
             (row(0, "AdaPrologue"), "ada"),
@@ -224,6 +326,18 @@ class FileTests(unittest.TestCase):
         path.write_text(json.dumps(row(0, "Unknown")))
         with self.assertRaisesRegex(ValueError, "unknown stage"):
             read_telemetry(path)
+
+    def test_invalid_traffic_clock_or_skip_marker_is_rejected(self):
+        path = self.directory / "telemetry.jsonl"
+        for invalid in ({"ambience": {"ticks": None}},
+                        {"ambience": {"accident_ticks": -1}},
+                        {"ambience": {"accident_ticks": True}},
+                        {"ambience": []},
+                        {"audio_synced_after_skip": "yes"}):
+            with self.subTest(invalid=invalid):
+                path.write_text(json.dumps({**row(0), **invalid}))
+                with self.assertRaisesRegex(ValueError, "invalid telemetry"):
+                    read_telemetry(path)
 
     def test_wav_round_trip_preserves_original_pcm(self):
         pcm = array("h", [-32760, -50, 0, 50, 32760])

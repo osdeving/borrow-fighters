@@ -218,6 +218,7 @@ fn run_session(
         };
         previous_frame_time = now;
         let mut suppress = false;
+        let mut audio_synced_after_skip = false;
         let complete_at_start = story.stage == Stage::Complete;
         // Drain every frame: a press queued during Ada must not dismiss the
         // final prompt minutes later. Held keys are not fresh press edges.
@@ -324,6 +325,7 @@ fn run_session(
                 {
                     story.skip_segment();
                     audio.sync_after_skip(&story);
+                    audio_synced_after_skip = true;
                     reveal_text = false;
                     suppress = true;
                 }
@@ -377,15 +379,35 @@ fn run_session(
         capture_seconds += if reviewing { 1.0 / 60.0 } else { frame_time };
         if frame == 0 || story.stage != previous_stage {
             reveal_text = false;
-            events.push(serde_json::json!({"frame":frame,"seconds":capture_seconds,"stage":format!("{:?}",story.stage),"player_hp":story.combat.player.hp,"enemy_hp":story.combat.enemy.hp}));
+            events.push(serde_json::json!({"frame":frame,"seconds":capture_seconds,"wall_seconds":std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).ok().map(|time| time.as_secs_f64()),"stage":format!("{:?}",story.stage),"player_hp":story.combat.player.hp,"enemy_hp":story.combat.enemy.hp}));
             previous_stage = story.stage;
         }
         if let Some(trace) = trace.as_mut() {
             let c = &story.combat;
+            let ambience = serde_json::json!({
+                "ticks": story.ambient.ticks(),
+                "kid_phase": format!("{:?}", story.ambient.kid_phase()),
+                "kid_phase_ticks": story.ambient.kid_phase_ticks(),
+                "kid_position": {"x": story.ambient.kid_position().x, "y": story.ambient.kid_position().y},
+                "kite_release_ticks": story.ambient.kite_release_ticks(),
+                "cyclists": story.ambient.cyclists().map(|actor| serde_json::json!({
+                    "x": actor.position.x, "y": actor.position.y,
+                    "facing": format!("{:?}", actor.facing), "animation_ticks": actor.animation_ticks
+                })),
+                "accident_ticks": story.ambient.accident_ticks(),
+                "traffic_cars": story.ambient.traffic_cars().map(|car| serde_json::json!({
+                    "x": car.position.x, "y": car.position.y, "style": car.style,
+                    "facing": format!("{:?}", car.facing), "animation_ticks": car.animation_ticks
+                })),
+                "incident_car": story.ambient.incident_car().map(|car| serde_json::json!({
+                    "x": car.position.x, "y": car.position.y,
+                    "phase": format!("{:?}", car.phase), "phase_ticks": car.phase_ticks
+                }))
+            });
             writeln!(
                 trace,
                 "{}",
-                serde_json::json!({"frame":frame,"seconds":capture_seconds,"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"waiting_for_continue":return_on_complete && complete_at_start && !completion.accepted,"continue_accepted":completion.accepted,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"ambience":{"ticks":story.ambient.ticks(),"kid_phase":format!("{:?}",story.ambient.kid_phase()),"kid_phase_ticks":story.ambient.kid_phase_ticks(),"kid_position":{"x":story.ambient.kid_position().x,"y":story.ambient.kid_position().y},"kite_release_ticks":story.ambient.kite_release_ticks(),"cyclists":story.ambient.cyclists().map(|actor| serde_json::json!({"x":actor.position.x,"y":actor.position.y,"facing":format!("{:?}",actor.facing),"animation_ticks":actor.animation_ticks}))},"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
+                serde_json::json!({"frame":frame,"seconds":capture_seconds,"wall_seconds":std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).ok().map(|time| time.as_secs_f64()),"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"waiting_for_continue":return_on_complete && complete_at_start && !completion.accepted,"continue_accepted":completion.accepted,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"ambience":ambience,"audio_synced_after_skip":audio_synced_after_skip,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
             )?;
         }
         {
