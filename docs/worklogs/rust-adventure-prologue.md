@@ -2,6 +2,13 @@
 
 ## Estado atual
 
+- Rodada 3 em andamento: [junção com menu de terminal](../29-story-terminal-menu.md)
+  e [ADR 0023](../adr/0023-story-to-terminal-menu.md). Goal ativo: remover Go da
+  apresentação; ligar conclusão ao menu na mesma janela; primeira opção Modo
+  História inerte; cursor bloco, moldura, título coerente e revelação binária.
+  Pendentes: implementação, matriz de features, revisão visual/input e commits.
+- Edições do usuário em `assets/adventure/texts/pt-BR.json` continuam preservadas
+  fora dos commits. Não reformatar nem restaurar o arquivo.
 - Rodada 2 concluída: [textos editáveis, encaixe na cama e apresentação](../28-adventure-texts-and-opening.md).
 - Branch: `feature/rust-adventure-prologue`.
 - Base inicial: `ca63b25` (`v0.1.0-prototype.3`); base da continuação: `0046312`.
@@ -73,6 +80,11 @@ plataformas e capítulo em Sirius da proposta anterior ficam fora deste corte.
 - [x] Fechar docs, diário e commits de entrega.
 
 ## Checkpoints
+
+- 2026-09-10, rodada 3 iniciada: goal criado na mesma branch. ADR 0023 registra
+  composição externa `borrow-story` e APIs que compartilham a janela sem
+  compartilhar regras. Frentes independentes: menu principal, corte do Go e
+  checker de fronteiras. Root cuida transição, backlog, docs e integração.
 
 - 2026-09-10, ajuste pontual de áudio: usuário relatou ruído na manhã. A faixa
   antiga continha vento aleatório e pássaros agudos; `morning.wav` foi substituída

@@ -21,6 +21,12 @@ da aventura, sem ampliar o core compartilhado.
 
 Este documento descreve a arquitetura atual do protótipo Rust + Raylib e mantém algumas intenções futuras. A regra segue sendo evitar transformar o projeto em uma engine antes de provar o combate.
 
+A [ADR 0023](adr/0023-story-to-terminal-menu.md) acrescenta uma composição externa:
+`presentation.rs` e o binário `borrow-story`, habilitados somente com ambos os
+domínios. A composição possui a janela e conecta APIs de aplicação; os domínios
+não a importam nem passam a depender um do outro. A aventura devolve conclusão
+ou saída, e só a conclusão segue automaticamente ao menu principal.
+
 ## Objetivo
 
 Criar uma base simples, testável e extensível para o protótipo 0.1 sem transformar o projeto em uma engine antes de provar o combate.
