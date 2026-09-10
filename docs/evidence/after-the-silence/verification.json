@@ -275,12 +275,13 @@
   ],
   "native_scope": "X11 owned windows; native audio preview uses an exclusive Pulse sink. No physical controller or Windows game binary test was performed.",
   "delivery_check": {
-    "source_assets_unchanged_after_tests": 171,
     "runtime_commit": "2a33f13",
     "final_local_markdown_links": 1605,
     "yaml_files": 19,
     "host_checks": 21,
     "native_preview_frames": 2810,
-    "native_preview_seconds": 93.666667
+    "native_preview_seconds": 93.666667,
+    "source_files_unchanged_after_tests": 171,
+    "runtime_assets_unchanged_after_tests": 263
   }
 }

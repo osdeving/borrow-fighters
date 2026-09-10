@@ -90,3 +90,8 @@ repetir geração, build ou captura. Não fazer merge/tag/publicação.
   Não repetir geração/limpeza. Recuperação usa checkpoint em
   `adventure/campaign-v1.json`; comparação anterior em branch separada de 81c50e6.
   Nenhum merge/tag/push/publicação foi solicitado ou realizado.
+- Evidências e harnesses commitados em `763511b`; manifesto público limitado
+  aos 171 arquivos de fonte e 263 assets de runtime, todos conferidos contra
+  os hashes da verificação final. Candidatos de arte não usados ficam fora
+  desse manifesto. Removidos 97,8 MB do render automático preliminar no WSL,
+  separadamente dos 517,65 MiB recuperados no Windows.
