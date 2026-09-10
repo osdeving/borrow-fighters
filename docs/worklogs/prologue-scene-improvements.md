@@ -108,6 +108,23 @@ Checkpoint final:
 
 ### Após as rodadas
 
+### Goal ativo — rua brasileira e evacuação completa
+
+- Pedido: assets substituíveis/reutilizáveis, carros cotidianos diferentes,
+  ônibus, ponto de ônibus, placas/boteco e reação coletiva à EP, sem trânsito
+  reaparecendo depois da fuga.
+- Ponto de retorno commitado antes da ampliação: **`c2dbbe4`**. O goal foi
+  criado explicitamente, sem limite de tokens solicitado.
+- [Escopo 31](../31-brazilian-street-evacuation.md) e
+  [ADR 0025](../adr/0025-replaceable-street-pieces.md) registrados docs-first.
+- Pendente: catálogo e composição separados; arte e props; estado de
+  evacuação e áudio; integração/revisão; evidências e commits finais.
+- Recuperação: conferir status/log e este diário, manter mudanças locais e
+  procurar arte gerada já salva antes de repetir gerações. Não reverter para
+  `c2dbbe4` sem novo pedido: ele é a referência de comparação e retorno.
+
+### Continuidade posterior
+
 Experimentar a primeira rodada e escolher a próxima cena nesta mesma branch.
 Ada, Assembly e apresentação poderão receber propostas próprias; não há
 implementação desses próximos ajustes pendente nesta solicitação. Manter
