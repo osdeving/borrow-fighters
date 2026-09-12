@@ -1,0 +1,12 @@
+{
+  "duration_seconds": 18.0,
+  "exit": "complete",
+  "frames": 1080,
+  "outcome": "Victory",
+  "pose_sheets": 40,
+  "schema_version": 1,
+  "simulation_ticks": 1080,
+  "video": "lab-simulation-60fps.mp4",
+  "video_fps": 60,
+  "zoom_sheets": 6
+}

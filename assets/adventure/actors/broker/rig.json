@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "character_id": "broker",
+  "method": "frames",
+  "height": 194,
+  "attachments": {
+    "idle": {
+      "image": "sprites/idle.png",
+      "source": [
+        0,
+        0,
+        224,
+        340
+      ],
+      "anchor": [
+        94,
+        332
+      ],
+      "size": [
+        133.30061349693253,
+        202.33128834355827
+      ]
+    },
+    "threaten": {
+      "image": "sprites/threaten.png",
+      "source": [
+        0,
+        0,
+        320,
+        340
+      ],
+      "anchor": [
+        117,
+        333
+      ],
+      "size": [
+        190.42944785276075,
+        202.33128834355827
+      ]
+    },
+    "flee": {
+      "image": "sprites/flee.png",
+      "source": [
+        0,
+        0,
+        308,
+        340
+      ],
+      "anchor": [
+        257,
+        320
+      ],
+      "size": [
+        183.2883435582822,
+        202.33128834355827
+      ]
+    }
+  },
+  "skeleton": null,
+  "views": []
+}

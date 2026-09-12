@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "cpp",
+  "name_key": "actor.cpp.name",
+  "combat": "combat.json",
+  "rig": "rig.json",
+  "clips": "clips.json",
+  "hp": 160,
+  "body_width": 44,
+  "hurtboxes": [
+    [
+      -26.4,
+      -196,
+      52.8,
+      196
+    ]
+  ],
+  "movement": {
+    "run_speed": 360,
+    "acceleration": 2200,
+    "braking": 2800,
+    "turn_acceleration": 3000,
+    "jump_speed": 620,
+    "gravity": 1750
+  },
+  "guard": {
+    "parry_ticks": 6,
+    "parry_cooldown": 24,
+    "blockstun": 12,
+    "parry_stun": 38
+  },
+  "loadout": {
+    "light": [
+      "cpp.light-1",
+      "cpp.light-2",
+      "cpp.light-3"
+    ],
+    "kick": "cpp.kick",
+    "spin": "cpp.spin",
+    "linker": "cpp.linker"
+  },
+  "ai": null
+}

@@ -1,0 +1,823 @@
+{
+  "version": 1,
+  "algorithm": "explicit-crop-magenta-unmix-v1",
+  "imagemagick": "Version: ImageMagick 6.9.10-23 Q16 x86_64 20190101 https://imagemagick.org",
+  "recipe_sha256": "b1d109713ef4ddb6b97ec0cd64426c3679c86040e1fbd55239dfe719ecf0214d",
+  "keying": "magenta",
+  "sources": {
+    "torso": {
+      "path": "source/torso-parts.png",
+      "sha256": "f77eb61f8a558f925b8ebba6893f668fdac32604c0a6d972b333c61866ef3401",
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "limbs": {
+      "path": "source/limb-parts.png",
+      "sha256": "2008a904c34c19b9f0dadeb328f7e4f5d5be5cc4dca0a6075822df25f915a0ae",
+      "size": [
+        1536,
+        1024
+      ]
+    }
+  },
+  "exports": [
+    {
+      "id": "body-quarter",
+      "source": "torso",
+      "output": "sprites/body-quarter.png",
+      "crop": [
+        0,
+        144,
+        390,
+        704
+      ],
+      "size": [
+        390,
+        704
+      ],
+      "sha256": "d07c0c2d87f5e835a7abfb73c031bdc654ff8dd63a64eae023d26f56420036e0",
+      "landmarks_source": {
+        "pelvis": [
+          235,
+          760
+        ],
+        "shoulder_near": [
+          98,
+          423
+        ],
+        "shoulder_far": [
+          310,
+          408
+        ],
+        "hip_near": [
+          310,
+          784
+        ],
+        "hip_far": [
+          171,
+          784
+        ],
+        "neck": [
+          228,
+          337
+        ],
+        "bag": [
+          135,
+          699
+        ]
+      },
+      "landmarks_local": {
+        "pelvis": [
+          235,
+          616
+        ],
+        "shoulder_near": [
+          98,
+          279
+        ],
+        "shoulder_far": [
+          310,
+          264
+        ],
+        "hip_near": [
+          310,
+          640
+        ],
+        "hip_far": [
+          171,
+          640
+        ],
+        "neck": [
+          228,
+          193
+        ],
+        "bag": [
+          135,
+          555
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 162725,
+        "partial_pixels": 15242,
+        "transparent_pixels": 96593,
+        "visible_bounds": [
+          6,
+          12,
+          386,
+          686
+        ]
+      }
+    },
+    {
+      "id": "body-profile",
+      "source": "torso",
+      "output": "sprites/body-profile.png",
+      "crop": [
+        390,
+        144,
+        346,
+        704
+      ],
+      "size": [
+        346,
+        704
+      ],
+      "sha256": "60c130e7f82894efcdb2b8ac786b7f512d51691e6f7c646352b6949a2dd9fb65",
+      "landmarks_source": {
+        "pelvis": [
+          598,
+          760
+        ],
+        "shoulder_near": [
+          559,
+          425
+        ],
+        "shoulder_far": [
+          643,
+          410
+        ],
+        "hip_near": [
+          611,
+          784
+        ],
+        "hip_far": [
+          552,
+          784
+        ],
+        "neck": [
+          608,
+          337
+        ],
+        "bag": [
+          605,
+          699
+        ]
+      },
+      "landmarks_local": {
+        "pelvis": [
+          208,
+          616
+        ],
+        "shoulder_near": [
+          169,
+          281
+        ],
+        "shoulder_far": [
+          253,
+          266
+        ],
+        "hip_near": [
+          221,
+          640
+        ],
+        "hip_far": [
+          162,
+          640
+        ],
+        "neck": [
+          218,
+          193
+        ],
+        "bag": [
+          215,
+          555
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 134314,
+        "partial_pixels": 11668,
+        "transparent_pixels": 97602,
+        "visible_bounds": [
+          1,
+          14,
+          330,
+          687
+        ]
+      }
+    },
+    {
+      "id": "body-rear-quarter",
+      "source": "torso",
+      "output": "sprites/body-rear-quarter.png",
+      "crop": [
+        740,
+        144,
+        376,
+        704
+      ],
+      "size": [
+        376,
+        704
+      ],
+      "sha256": "9a849dd8c972477fcfd5e6309dc68918aee84bc188cf467b19c41b84fca5ff62",
+      "landmarks_source": {
+        "pelvis": [
+          961,
+          760
+        ],
+        "shoulder_near": [
+          1059,
+          433
+        ],
+        "shoulder_far": [
+          860,
+          423
+        ],
+        "hip_near": [
+          1021,
+          784
+        ],
+        "hip_far": [
+          902,
+          784
+        ],
+        "neck": [
+          996,
+          337
+        ],
+        "bag": [
+          1023,
+          699
+        ]
+      },
+      "landmarks_local": {
+        "pelvis": [
+          221,
+          616
+        ],
+        "shoulder_near": [
+          319,
+          289
+        ],
+        "shoulder_far": [
+          120,
+          279
+        ],
+        "hip_near": [
+          281,
+          640
+        ],
+        "hip_far": [
+          162,
+          640
+        ],
+        "neck": [
+          256,
+          193
+        ],
+        "bag": [
+          283,
+          555
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 153776,
+        "partial_pixels": 11077,
+        "transparent_pixels": 99851,
+        "visible_bounds": [
+          10,
+          15,
+          358,
+          687
+        ]
+      }
+    },
+    {
+      "id": "body-back",
+      "source": "torso",
+      "output": "sprites/body-back.png",
+      "crop": [
+        1144,
+        144,
+        380,
+        704
+      ],
+      "size": [
+        380,
+        704
+      ],
+      "sha256": "911b3b88024a44013008475fdfb7927f6eba8a1daea39c04f17e6bc5a35f90cc",
+      "landmarks_source": {
+        "pelvis": [
+          1336,
+          760
+        ],
+        "shoulder_near": [
+          1477,
+          441
+        ],
+        "shoulder_far": [
+          1184,
+          441
+        ],
+        "hip_near": [
+          1412,
+          784
+        ],
+        "hip_far": [
+          1255,
+          784
+        ],
+        "neck": [
+          1340,
+          337
+        ],
+        "bag": [
+          1454,
+          699
+        ]
+      },
+      "landmarks_local": {
+        "pelvis": [
+          192,
+          616
+        ],
+        "shoulder_near": [
+          333,
+          297
+        ],
+        "shoulder_far": [
+          40,
+          297
+        ],
+        "hip_near": [
+          268,
+          640
+        ],
+        "hip_far": [
+          111,
+          640
+        ],
+        "neck": [
+          196,
+          193
+        ],
+        "bag": [
+          310,
+          555
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 156973,
+        "partial_pixels": 9750,
+        "transparent_pixels": 100797,
+        "visible_bounds": [
+          16,
+          14,
+          357,
+          686
+        ]
+      }
+    },
+    {
+      "id": "leg-front",
+      "source": "limbs",
+      "output": "sprites/leg-front.png",
+      "crop": [
+        104,
+        12,
+        192,
+        560
+      ],
+      "size": [
+        192,
+        560
+      ],
+      "sha256": "a0cd3dde14b47790e9926c3dd92ba7f8a4c0c9ce4ac4670f566100e3b4507517",
+      "landmarks_source": {
+        "hip": [
+          224,
+          64
+        ],
+        "knee": [
+          189,
+          313
+        ],
+        "ankle": [
+          159,
+          542
+        ]
+      },
+      "landmarks_local": {
+        "hip": [
+          120,
+          52
+        ],
+        "knee": [
+          85,
+          301
+        ],
+        "ankle": [
+          55,
+          530
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 50543,
+        "partial_pixels": 2798,
+        "transparent_pixels": 54179,
+        "visible_bounds": [
+          12,
+          14,
+          177,
+          549
+        ]
+      }
+    },
+    {
+      "id": "leg-profile",
+      "source": "limbs",
+      "output": "sprites/leg-profile.png",
+      "crop": [
+        492,
+        12,
+        168,
+        560
+      ],
+      "size": [
+        168,
+        560
+      ],
+      "sha256": "a780d3482293308c3240bbb1e2936badd9f32d557fbfae082c23b17fdc2d1a61",
+      "landmarks_source": {
+        "hip": [
+          575,
+          57
+        ],
+        "knee": [
+          581,
+          307
+        ],
+        "ankle": [
+          568,
+          542
+        ]
+      },
+      "landmarks_local": {
+        "hip": [
+          83,
+          45
+        ],
+        "knee": [
+          89,
+          295
+        ],
+        "ankle": [
+          76,
+          530
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 49127,
+        "partial_pixels": 2974,
+        "transparent_pixels": 41979,
+        "visible_bounds": [
+          12,
+          10,
+          151,
+          549
+        ]
+      }
+    },
+    {
+      "id": "upper-arm",
+      "source": "limbs",
+      "output": "sprites/upper-arm.png",
+      "crop": [
+        846,
+        58,
+        192,
+        460
+      ],
+      "size": [
+        192,
+        460
+      ],
+      "sha256": "76c9c52d4fe332908dd0d2e82b6dfa82e363b2b56d4d2f6f3c7ab895c4df0243",
+      "landmarks_source": {
+        "shoulder": [
+          955,
+          123
+        ],
+        "elbow": [
+          949,
+          467
+        ]
+      },
+      "landmarks_local": {
+        "shoulder": [
+          109,
+          65
+        ],
+        "elbow": [
+          103,
+          409
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 54352,
+        "partial_pixels": 2019,
+        "transparent_pixels": 31949,
+        "visible_bounds": [
+          12,
+          12,
+          180,
+          447
+        ]
+      }
+    },
+    {
+      "id": "forearm",
+      "source": "limbs",
+      "output": "sprites/forearm.png",
+      "crop": [
+        1274,
+        64,
+        148,
+        468
+      ],
+      "size": [
+        148,
+        468
+      ],
+      "sha256": "f7882abdc1be67d12076a51197ea3206b8510f70aa59c4cdab9acec775c2302c",
+      "landmarks_source": {
+        "elbow": [
+          1338,
+          101
+        ],
+        "wrist": [
+          1348,
+          353
+        ],
+        "grip": [
+          1350,
+          452
+        ]
+      },
+      "landmarks_local": {
+        "elbow": [
+          64,
+          37
+        ],
+        "wrist": [
+          74,
+          289
+        ],
+        "grip": [
+          76,
+          388
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 36296,
+        "partial_pixels": 2067,
+        "transparent_pixels": 30901,
+        "visible_bounds": [
+          12,
+          11,
+          134,
+          456
+        ]
+      }
+    },
+    {
+      "id": "boot-profile",
+      "source": "limbs",
+      "output": "sprites/boot-profile.png",
+      "crop": [
+        58,
+        612,
+        324,
+        332
+      ],
+      "size": [
+        324,
+        332
+      ],
+      "sha256": "b50eb0c7fb12e1efdec78610cd21e3d9566a826f98490d9c0c77a18b2e1fff43",
+      "landmarks_source": {
+        "ankle": [
+          149,
+          685
+        ],
+        "heel": [
+          101,
+          907
+        ],
+        "toe": [
+          328,
+          907
+        ],
+        "sole": [
+          221,
+          925
+        ]
+      },
+      "landmarks_local": {
+        "ankle": [
+          91,
+          73
+        ],
+        "heel": [
+          43,
+          295
+        ],
+        "toe": [
+          270,
+          295
+        ],
+        "sole": [
+          163,
+          313
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 46981,
+        "partial_pixels": 3481,
+        "transparent_pixels": 57106,
+        "visible_bounds": [
+          12,
+          13,
+          310,
+          316
+        ]
+      }
+    },
+    {
+      "id": "boot-front",
+      "source": "limbs",
+      "output": "sprites/boot-front.png",
+      "crop": [
+        487,
+        598,
+        172,
+        356
+      ],
+      "size": [
+        172,
+        356
+      ],
+      "sha256": "dee5b7a6165b839a572144a9be0d18cbedcc2ae4a0e07d7814b1fb94c1311cc4",
+      "landmarks_source": {
+        "ankle": [
+          571,
+          662
+        ],
+        "heel": [
+          541,
+          930
+        ],
+        "toe": [
+          602,
+          930
+        ],
+        "sole": [
+          573,
+          938
+        ]
+      },
+      "landmarks_local": {
+        "ankle": [
+          84,
+          64
+        ],
+        "heel": [
+          54,
+          332
+        ],
+        "toe": [
+          115,
+          332
+        ],
+        "sole": [
+          86,
+          340
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 33523,
+        "partial_pixels": 2486,
+        "transparent_pixels": 25223,
+        "visible_bounds": [
+          12,
+          12,
+          159,
+          341
+        ]
+      }
+    },
+    {
+      "id": "boot-back",
+      "source": "limbs",
+      "output": "sprites/boot-back.png",
+      "crop": [
+        860,
+        595,
+        168,
+        360
+      ],
+      "size": [
+        168,
+        360
+      ],
+      "sha256": "0654e8f6e2568e613cbfd04e96465b223ded79079d0c0d4785da053f853d3d20",
+      "landmarks_source": {
+        "ankle": [
+          946,
+          663
+        ],
+        "heel": [
+          915,
+          932
+        ],
+        "toe": [
+          981,
+          932
+        ],
+        "sole": [
+          946,
+          940
+        ]
+      },
+      "landmarks_local": {
+        "ankle": [
+          86,
+          68
+        ],
+        "heel": [
+          55,
+          337
+        ],
+        "toe": [
+          121,
+          337
+        ],
+        "sole": [
+          86,
+          345
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 34280,
+        "partial_pixels": 2046,
+        "transparent_pixels": 24154,
+        "visible_bounds": [
+          12,
+          12,
+          156,
+          346
+        ]
+      }
+    },
+    {
+      "id": "bag",
+      "source": "limbs",
+      "output": "sprites/bag.png",
+      "crop": [
+        1211,
+        580,
+        256,
+        380
+      ],
+      "size": [
+        256,
+        380
+      ],
+      "sha256": "8b3a63c80d6ca8e22c2c209a447eb06ff5d8b6c3635120e0ae19e84d9a014496",
+      "landmarks_source": {
+        "strap": [
+          1352,
+          614
+        ],
+        "center": [
+          1339,
+          820
+        ]
+      },
+      "landmarks_local": {
+        "strap": [
+          141,
+          34
+        ],
+        "center": [
+          128,
+          240
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 48402,
+        "partial_pixels": 3173,
+        "transparent_pixels": 45705,
+        "visible_bounds": [
+          12,
+          12,
+          244,
+          367
+        ]
+      }
+    }
+  ]
+}

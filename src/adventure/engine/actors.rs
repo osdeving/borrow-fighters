@@ -3,7 +3,7 @@
 //! System: Adventure actors. Prologue and chapter reuse the same body animation;
 //! narrative attachments and world triggers remain outside this drawing module.
 
-use super::assets::Assets;
+use super::assets::{Assets, SharedAssets};
 use crate::adventure::combat::{Action, Actor, FLOOR_Y, Facing};
 use raylib::prelude::*;
 const INK: Color = Color::new(16, 23, 28, 255);
@@ -24,16 +24,6 @@ pub fn actor_shadow(d: &mut impl RaylibDraw, actor: &Actor, camera: f32) {
 }
 
 pub fn rust(d: &mut impl RaylibDraw, a: &Assets, actor: &Actor, camera: f32) {
-    rust_scaled(d, a, actor, camera, 1.0);
-}
-
-/// Draws existing locomotion at the depth selected by a chapter approach path.
-pub fn rust_scaled(d: &mut impl RaylibDraw, a: &Assets, actor: &Actor, camera: f32, depth: f32) {
-    let pos = Vector2::new(actor.position.x - camera, actor.position.y);
-    if matches!(actor.action, Action::Walk | Action::Kick) {
-        a.locomotion.draw(d, actor, camera, depth);
-        return;
-    }
     if actor.action == Action::Remorse {
         let frame = match actor.action_ticks {
             0..=29 => 8,
@@ -52,11 +42,27 @@ pub fn rust_scaled(d: &mut impl RaylibDraw, a: &Assets, actor: &Actor, camera: f
             d,
             &a.morning,
             a.morning_bounds[frame],
-            pos,
-            174.0 / tallest * depth,
+            Vector2::new(actor.position.x - camera, actor.position.y),
+            174.0 / tallest,
             actor.facing == Facing::Left,
             Color::WHITE,
         );
+    } else {
+        rust_scaled(d, &a.common, actor, camera, 1.0);
+    }
+}
+
+/// Draws existing locomotion at the depth selected by a chapter approach path.
+pub fn rust_scaled(
+    d: &mut impl RaylibDraw,
+    a: &SharedAssets,
+    actor: &Actor,
+    camera: f32,
+    depth: f32,
+) {
+    let pos = Vector2::new(actor.position.x - camera, actor.position.y);
+    if matches!(actor.action, Action::Walk | Action::Kick) {
+        a.locomotion.draw(d, actor, camera, depth);
         return;
     }
     let frame = match actor.action {
@@ -105,7 +111,7 @@ pub fn rust_scaled(d: &mut impl RaylibDraw, a: &Assets, actor: &Actor, camera: f
     }
 }
 
-pub fn creature(d: &mut impl RaylibDraw, a: &Assets, actor: &Actor, camera: f32) {
+pub fn creature(d: &mut impl RaylibDraw, a: &SharedAssets, actor: &Actor, camera: f32) {
     let frame = match actor.action {
         Action::Walk => 1 + (actor.action_ticks / 10 % 2) as usize,
         Action::Telegraph => 3,

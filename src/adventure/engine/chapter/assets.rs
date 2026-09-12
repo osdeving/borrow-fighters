@@ -7,7 +7,7 @@ use super::phone::PhoneSkin;
 use crate::{
     adventure::{
         chapter::{ChapterTexts, World},
-        engine::{assets::Assets, pieces::StreetPieces},
+        engine::{assets::SharedAssets, pieces::StreetPieces},
         text::TextCatalog,
     },
     runtime_paths::asset_path,
@@ -17,7 +17,7 @@ use std::{error::Error, fs};
 
 /// Complete visual resources for one chapter session, released when it returns.
 pub struct ChapterAssets {
-    pub common: Assets,
+    pub common: SharedAssets,
     pub pieces: StreetPieces,
     pub skin: PhoneSkin,
     pub texts: ChapterTexts,
@@ -25,7 +25,7 @@ pub struct ChapterAssets {
 
 impl ChapterAssets {
     pub fn load(rl: &mut RaylibHandle, thread: &RaylibThread) -> Result<Self, Box<dyn Error>> {
-        let common = Assets::load(
+        let common = SharedAssets::load(
             rl,
             thread,
             TextCatalog::load(asset_path("assets/adventure/texts/pt-BR.json"))?,

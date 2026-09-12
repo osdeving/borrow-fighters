@@ -4,7 +4,7 @@
 //! gestures; its editable skin contains no network client or application branding.
 
 use crate::adventure::chapter::phone::{PhonePhase, PhoneView};
-use crate::adventure::engine::{assets::Assets, typography};
+use crate::adventure::engine::{assets::SharedAssets, typography};
 use raylib::prelude::*;
 use serde::Deserialize;
 
@@ -47,7 +47,7 @@ pub fn handset(d: &mut impl RaylibDraw, hand: Vector2, scale: f32, angle: f32) {
 /// Keeps the world visible beside a panel anchored to Rust's on-screen position.
 pub fn draw(
     d: &mut impl RaylibDraw,
-    a: &Assets,
+    a: &SharedAssets,
     skin: &PhoneSkin,
     view: PhoneView,
     messages: [&str; 3],

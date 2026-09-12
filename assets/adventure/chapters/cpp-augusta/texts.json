@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "strings": {
+    "chapter.title": "Rua Augusta",
+    "chapter.summary": "C++ intervém quando Julia é impedida de ir embora. Uma ameaça inesperada transforma o encontro.",
+    "objective.approach": "Aproxime-se de Julia e descubra o que está acontecendo.",
+    "objective.guards": "Afaste os seguranças. Julia precisa de espaço para sair.",
+    "objective.erratics": "Duas erráticas cercaram C++. Enfrente a ameaça.",
+    "objective.rescue": "Encontre Julia junto à entrada iluminada.",
+    "objective.exit": "Acompanhe Julia até a saída da rua.",
+    "arrival.guards": "Os seguranças fecham a passagem.",
+    "arrival.erratics": "O ar se rompe dos dois lados.",
+    "broker.escape": "O cafetão aproveita a confusão e foge.",
+    "chapter.complete": "Julia está em segurança. O caminho dela continua por escolha própria.",
+    "controls": "A/D: mover · Espaço: pular · J: golpe · V: chute · K: giro · L: Linker · Q: defender · E: conversar",
+    "dialogue.next": "Enter / A: continuar",
+    "defeat": "C++ precisa tentar outra vez. R / A: retomar o encontro",
+    "pause": "Pausa",
+    "resume": "Continuar",
+    "retry": "Retomar checkpoint",
+    "menu": "Voltar à seleção de capítulos",
+    "editor.reloaded": "Conteúdo recarregado. Encontro reiniciado no último marco.",
+    "editor.failed": "A alteração não pôde ser carregada. A versão anterior foi preservada.",
+    "arrival.title": "BAIXO AUGUSTA",
+    "chapter.complete_title": "Rua Augusta — capítulo concluído",
+    "chapter.return": "Enter / A: voltar à seleção de capítulos",
+    "defeat.title": "Tente novamente",
+    "objective.after_guards": "Garanta que Julia possa sair em segurança."
+  },
+  "speakers": {
+    "cpp": {
+      "name": "C++",
+      "age": null
+    },
+    "julia": {
+      "name": "Julia",
+      "age": 22
+    },
+    "broker": {
+      "name": "Cafetão",
+      "age": null
+    },
+    "security": {
+      "name": "Segurança",
+      "age": null
+    }
+  },
+  "dialogues": {
+    "confrontation": [
+      {
+        "speaker": "julia",
+        "text": "Eu já disse que vou embora. Sai da minha frente."
+      },
+      {
+        "speaker": "broker",
+        "text": "Você não vai a lugar nenhum antes de acertar comigo."
+      },
+      {
+        "speaker": "cpp",
+        "text": "Ela disse que quer sair. Você ouviu."
+      },
+      {
+        "speaker": "broker",
+        "text": "Não se mete. Isso não é problema seu."
+      },
+      {
+        "speaker": "cpp",
+        "text": "Impedir alguém de ir embora virou problema meu. Julia, fique atrás de mim."
+      },
+      {
+        "speaker": "julia",
+        "text": "Tem uma entrada iluminada ali. Eu consigo chegar até ela se você abrir caminho."
+      },
+      {
+        "speaker": "cpp",
+        "text": "Então é para lá que você vai. Eu seguro a passagem."
+      },
+      {
+        "speaker": "broker",
+        "text": "Seguranças! Tirem essa mulher daqui!"
+      }
+    ],
+    "after_guards": [
+      {
+        "speaker": "cpp",
+        "text": "Agora você vai respeitar a decisão dela. Julia vai embora."
+      },
+      {
+        "speaker": "julia",
+        "text": "Cheguei! Estou aqui, junto à porta!"
+      },
+      {
+        "speaker": "cpp",
+        "text": "Fique aí. Tem alguma coisa errada nesse ar..."
+      }
+    ],
+    "rescue": [
+      {
+        "speaker": "cpp",
+        "text": "Julia? Já passou. Você se machucou?"
+      },
+      {
+        "speaker": "julia",
+        "text": "Estou bem. Assustada, mas bem. Ele fugiu?"
+      },
+      {
+        "speaker": "cpp",
+        "text": "Fugiu. Agora vamos cuidar de você. Tem alguém com quem queira falar?"
+      },
+      {
+        "speaker": "julia",
+        "text": "Uma amiga pode me receber. Eu quero ligar para ela."
+      },
+      {
+        "speaker": "cpp",
+        "text": "Ligue. Eu fico aqui enquanto você combina tudo."
+      },
+      {
+        "speaker": "julia",
+        "text": "Obrigada por me ouvir. Eu só queria poder decidir a minha própria vida."
+      },
+      {
+        "speaker": "cpp",
+        "text": "E pode. O que aconteceu aqui não muda quem você é."
+      },
+      {
+        "speaker": "julia",
+        "text": "Ela está me esperando na esquina. Pode ir comigo até lá?"
+      },
+      {
+        "speaker": "cpp",
+        "text": "Claro. Vamos juntas."
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "metadata": "import-manifest.json",
+  "keying": "magenta-flat",
+  "sources": {
+    "sheet": {
+      "path": "source/npcs.png",
+      "sha256": "bb82767d423fd0722d482ca959292f47f7b47e9211adfca3937f4f055c0a9605"
+    }
+  },
+  "exports": [
+    {
+      "id": "idle",
+      "source": "sheet",
+      "crop": [
+        80,
+        682,
+        304,
+        342
+      ],
+      "output": "sprites/idle.png",
+      "landmarks": {
+        "feet": [
+          228,
+          1011
+        ]
+      }
+    },
+    {
+      "id": "punch",
+      "source": "sheet",
+      "crop": [
+        560,
+        682,
+        392,
+        342
+      ],
+      "output": "sprites/punch.png",
+      "landmarks": {
+        "feet": [
+          730,
+          1011
+        ]
+      }
+    },
+    {
+      "id": "down",
+      "source": "sheet",
+      "crop": [
+        1096,
+        770,
+        400,
+        254
+      ],
+      "output": "sprites/down.png",
+      "landmarks": {
+        "feet": [
+          1297,
+          1005
+        ]
+      }
+    }
+  ]
+}

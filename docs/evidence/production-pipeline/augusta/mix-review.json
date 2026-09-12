@@ -1,0 +1,11 @@
+{
+  "duration": 100.334,
+  "cue_counts": {
+    "swish": 27,
+    "projectile": 2,
+    "impact": 21,
+    "landing": 1
+  },
+  "source": "original production samples and observed fixed-update cues",
+  "limitation": "Reconstructed audio; not captured from the Raylib device. Device latency and listening approval are not verified."
+}

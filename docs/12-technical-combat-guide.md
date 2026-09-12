@@ -1,5 +1,8 @@
 # 12 — Guia Técnico de Combate
 
+Este guia descreve o domínio de luta. O combate e o laboratório da aventura
+C++ usam contratos separados, documentados na [pipeline da aventura](38-cpp-augusta-production.md).
+
 ## Objetivo
 
 Este documento ajuda devs e agentes de IA a encontrar rapidamente onde o combate vive no código, como testar golpes isolados e quais docs atualizar quando o sistema mudar.

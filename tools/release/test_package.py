@@ -12,6 +12,28 @@ import package
 
 
 class RepositoryAssetsTests(unittest.TestCase):
+    def test_production_closure_ships_runtime_art_and_audio_without_sources_or_unused_pngs(self):
+        assets = {p.relative_to(package.ROOT).as_posix() for p in package.runtime_assets()}
+        base = "assets/adventure/"
+        required = {"campaign.json", "production-lab.json",
+                    "chapters/cpp-augusta/chapter.json", "chapters/cpp-augusta/world.json",
+                    "chapters/cpp-augusta/texts.json", "chapters/cpp-augusta/world-art.json",
+                    "audio/production/catalog.json"}
+        for actor in ("cpp", "julia", "broker", "security", "erratic"):
+            required.update(f"actors/{actor}/{name}.json" for name in ("character", "rig", "combat", "clips"))
+        required.update(f"chapters/cpp-augusta/sprites/{name}.png" for name in (
+            "facade-residential", "facade-bar", "facade-mural", "skyline", "ground"))
+        required.update(f"audio/production/{name}.wav" for name in (
+            "street-loop", "swish", "impact", "parry", "projectile", "landing"))
+        self.assertFalse({base + name for name in required} - assets)
+        production = {name for name in assets if name.startswith((base + "actors/", base + "chapters/"))}
+        self.assertFalse(any({"source", "sources", "reviews", "prompts"} & set(Path(name).parts)
+                             for name in production))
+        self.assertFalse(any("import" in Path(name).name for name in production))
+        for name in ("actors/cpp/sprites/body-profile.png", "actors/julia/sprites/talk.png",
+                     "actors/erratic/sprites/poses.png"):
+            self.assertIn(base + name, production)
+
     def test_story_release_contains_every_scene_audio_pose_font_and_opening_portrait(self):
         assets = {p.relative_to(package.ROOT).as_posix() for p in package.runtime_assets()}
         required = {
@@ -255,6 +277,122 @@ class AdventureReferencesTests(unittest.TestCase):
                     package.adventure_assets()
 
 
+class ProductionReferencesTests(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory(prefix="production closure ")
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name).resolve()
+        self.base = self.root / "assets/adventure"
+        self.contexts = ExitStack()
+        self.addCleanup(self.contexts.close)
+        self.contexts.enter_context(patch.object(package, "ROOT", self.root))
+        self.write("campaign.json", {"chapters": [{"id": "rust"}, {"id": "cpp-test"}]})
+        self.write("production-lab.json", {"title": "Independent production tool"})
+        self.make_actor("cpp")
+        self.make_actor("npc")
+        self.chapter = "chapters/cpp-test/"
+        self.write(self.chapter + "chapter.json", {"world": "world.json", "texts": "texts.json", "art": "art.json"})
+        self.write(self.chapter + "world.json", {"pieces": [{"piece": "wall"}]})
+        self.write(self.chapter + "texts.json", {"line": "original text"})
+        self.art = {"actors": {"cpp": "actors/cpp/character.json", "npc": "actors/npc/character.json"},
+                    "pieces": {"wall": {"image": "sprites/wall.png"}, "wall-again": {"image": "sprites/wall.png"}},
+                    "source": "source/missing-generation.png"}
+        self.write(self.chapter + "art.json", self.art)
+        self.write(self.chapter + "sprites/wall.png", "art")
+        self.audio = {"ambience": {"file": "street.wav"}, "effects": {"hit": {"file": "hit.wav"}},
+                      "provenance": "source/unshipped.wav"}
+        self.write("audio/production/catalog.json", self.audio)
+        self.write("audio/production/street.wav", "ambience")
+        self.write("audio/production/hit.wav", "hit")
+
+    def write(self, name, content):
+        path = self.base / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(content) if isinstance(content, dict) else content, encoding="utf-8")
+
+    def make_actor(self, identifier):
+        directory = f"actors/{identifier}/"
+        self.write(directory + "character.json", {"combat": "moves.json", "rig": "rig.json", "clips": "clips.json"})
+        self.write(directory + "moves.json", {"moves": []})
+        self.write(directory + "clips.json", {"clips": {}})
+        self.write(directory + "rig.json", {"attachments": {
+            "first": {"image": "sprites/body.png"}, "reuse": {"image": "sprites/body.png"},
+            "last": {"image": "sprites/late.png"}}, "source": "source/missing-retake.png"})
+        for name in ("body", "late", "unused"):
+            self.write(directory + f"sprites/{name}.png", name)
+        self.write(directory + "source/generation.png", "unshipped source")
+        self.write(directory + "import-manifest.json", {"source": "source/generation.png"})
+
+    def test_closure_includes_all_actor_attachments_once_and_ignores_authoring_fields(self):
+        assets = package.production_assets()
+        self.assertIn(self.base / "actors/npc/sprites/late.png", assets)
+        self.assertIn(self.base / "actors/cpp/moves.json", assets)
+        self.assertEqual(sum(p == self.base / "actors/cpp/sprites/body.png" for p in assets), 1)
+        self.assertEqual(sum(p == self.base / self.chapter / "sprites/wall.png" for p in assets), 1)
+        self.assertFalse(any("source" in p.parts or p.name.startswith("import") or p.name == "unused.png" for p in assets))
+
+    def test_unregistered_actor_or_chapter_is_not_collected(self):
+        self.make_actor("unused")
+        self.write("chapters/unregistered/source.png", "not playable")
+        assets = package.production_assets()
+        self.assertFalse(any("unused" in p.parts or "unregistered" in p.parts for p in assets))
+
+    def test_missing_dependency_at_every_level_aborts_collection(self):
+        for name in ("production-lab.json", "actors/npc/moves.json", "actors/npc/clips.json",
+                     "actors/npc/rig.json", "actors/npc/sprites/late.png", self.chapter + "chapter.json",
+                     self.chapter + "world.json", self.chapter + "texts.json", self.chapter + "art.json",
+                     self.chapter + "sprites/wall.png", "audio/production/hit.wav"):
+            path = self.base / name
+            content = path.read_bytes()
+            path.unlink()
+            try:
+                with self.subTest(name=name), self.assertRaisesRegex(ValueError, "Missing runtime asset"):
+                    package.production_assets()
+            finally:
+                path.write_bytes(content)
+
+    def test_actor_images_cannot_escape_package_or_use_authoring_material(self):
+        for name in ("../body.png", "/body.png", "C:/body.png", "..\\body.png",
+                     "sprites//body.png", "sprites/./body.png", "sprites/body.jpg", "source/generation.png"):
+            self.write("actors/cpp/rig.json", {"attachments": {"body": {"image": name}}})
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "Production"):
+                package.production_assets()
+
+    def test_world_and_audio_references_are_contained(self):
+        self.art["pieces"]["wall"]["image"] = "../outside.png"
+        self.write(self.chapter + "art.json", self.art)
+        with self.assertRaisesRegex(ValueError, "relative local"):
+            package.production_assets()
+        self.art["pieces"]["wall"]["image"] = "sprites/wall.png"
+        self.write(self.chapter + "art.json", self.art)
+        self.audio["effects"]["hit"]["file"] = "../../outside.wav"
+        self.write("audio/production/catalog.json", self.audio)
+        with self.assertRaisesRegex(ValueError, "relative local"):
+            package.production_assets()
+
+    def test_actor_image_symlink_cannot_cross_into_another_package(self):
+        link = self.base / "actors/cpp/sprites/body.png"
+        link.unlink()
+        try:
+            link.symlink_to(self.base / "actors/npc/sprites/body.png")
+        except (OSError, NotImplementedError) as error:
+            self.skipTest(f"Symlinks unavailable: {error}")
+        with self.assertRaisesRegex(ValueError, "outside its package"):
+            package.production_assets()
+
+    def test_registry_ids_cannot_be_paths(self):
+        for identifier in ("../cpp", "cpp/test", "/cpp", "C:/cpp", None):
+            self.write("campaign.json", {"chapters": [{"id": identifier}]})
+            with self.subTest(identifier=identifier), self.assertRaisesRegex(ValueError, "chapter id"):
+                package.production_assets()
+
+    def test_standalone_lab_default_stays_available_without_a_production_chapter(self):
+        self.write("campaign.json", {"chapters": [{"id": "rust"}]})
+        assets = package.production_assets()
+        self.assertIn(self.base / "actors/cpp/sprites/late.png", assets)
+        self.assertNotIn(self.base / "actors/npc/character.json", assets)
+
+
 class StagingTests(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory(prefix="release ação ")
@@ -272,17 +410,60 @@ class StagingTests(unittest.TestCase):
         packaging = self.root / "packaging"
         (packaging / "linux").mkdir(parents=True)
         (packaging / "linux/borrow-fighters").write_text("#!/bin/sh\n", encoding="utf-8")
+        (packaging / "linux/borrow-actor-lab").write_text("#!/bin/sh\n", encoding="utf-8")
         (packaging / "JOGUE-PRIMEIRO.md").write_text("Jogue", encoding="utf-8")
         (self.root / "LICENSE-MIT").write_text("license fixture", encoding="utf-8")
 
-    def stage(self, target):
+    def stage(self, target, include_lab=False):
         suffix = ".exe" if target == "windows-x86_64" else ""
         binary = self.root / f"borrow-story{suffix}"
         binary.write_bytes(b"composed executable fixture")
         args = argparse.Namespace(target=target, binary=binary,
                                   output=self.root / target, version="0.1.0-prototype.4")
+        if include_lab:
+            args.lab_binary = self.root / f"borrow-actor-lab{suffix}"
+            args.lab_binary.write_bytes(b"production lab executable fixture")
         package.stage_package(args)
         return args.output
+
+    def test_optional_lab_is_staged_and_checksummed_on_both_platforms(self):
+        for target, executable in (("windows-x86_64", "borrow-actor-lab.exe"),
+                                   ("linux-x86_64", "bin/borrow-actor-lab")):
+            with self.subTest(target=target):
+                stage = self.stage(target, include_lab=True)
+                self.assertEqual((stage / executable).read_bytes(), b"production lab executable fixture")
+                info = json.loads((stage / "BUILD-INFO.json").read_text())
+                self.assertEqual(info["tools"], [{"cargo_binary": "borrow-actor-lab", "path": executable}])
+                package.verify_package(argparse.Namespace(stage=stage))
+                (stage / executable).write_bytes(b"changed tool")
+                with self.assertRaisesRegex(ValueError, "Checksum mismatch"):
+                    package.verify_package(argparse.Namespace(stage=stage))
+                (stage / executable).unlink()
+                with self.assertRaisesRegex(ValueError, "Missing production lab executable"):
+                    package.verify_package(argparse.Namespace(stage=stage))
+
+    def test_player_package_does_not_implicitly_include_a_sibling_lab(self):
+        (self.root / "borrow-actor-lab").write_bytes(b"should not be copied")
+        stage = self.stage("linux-x86_64")
+        self.assertFalse((stage / "bin/borrow-actor-lab").exists())
+        self.assertFalse((stage / "borrow-actor-lab").exists())
+        self.assertEqual(json.loads((stage / "BUILD-INFO.json").read_text())["tools"], [])
+
+    def test_wrong_optional_lab_binary_is_rejected_before_staging(self):
+        args = argparse.Namespace(target="linux-x86_64", binary=self.root / "borrow-story",
+                                  lab_binary=self.root / "borrow-fighters", output=self.root / "rejected",
+                                  version="0.1.0-prototype.4")
+        with self.assertRaisesRegex(ValueError, "Production lab requires Cargo binary"):
+            package.stage_package(args)
+        self.assertFalse(args.output.exists())
+
+    def test_optional_lab_participates_in_native_dependency_and_glibc_validation(self):
+        stage = self.stage("linux-x86_64", include_lab=True)
+        with patch.object(package, "ldd_libraries", return_value={}) as ldd:
+            with patch.object(package, "run", return_value="GLIBC_2.35"):
+                package.validate_linux_libraries(stage)
+            self.assertEqual({call.args[0] for call in ldd.call_args_list},
+                             {stage / "bin/borrow-fighters", stage / "bin/borrow-actor-lab"})
 
     def test_composition_keeps_public_name_and_licenses_in_unicode_paths(self):
         for target, executable in (("windows-x86_64", "borrow-fighters.exe"),

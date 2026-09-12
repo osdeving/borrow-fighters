@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "actors": {
+    "cpp": "actors/cpp/character.json",
+    "security": "actors/security/character.json",
+    "erratic": "actors/erratic/character.json",
+    "julia": "actors/julia/character.json",
+    "broker": "actors/broker/character.json"
+  },
+  "pieces": {
+    "facade-residential": {
+      "image": "sprites/facade-residential.png",
+      "source": [
+        0,
+        0,
+        536,
+        968
+      ],
+      "anchor": [
+        268,
+        956
+      ],
+      "size": [
+        482.40000000000003,
+        871.2
+      ]
+    },
+    "facade-bar": {
+      "image": "sprites/facade-bar.png",
+      "source": [
+        0,
+        0,
+        493,
+        708
+      ],
+      "anchor": [
+        246,
+        696
+      ],
+      "size": [
+        443.7,
+        637.2
+      ]
+    },
+    "facade-mural": {
+      "image": "sprites/facade-mural.png",
+      "source": [
+        0,
+        0,
+        507,
+        628
+      ],
+      "anchor": [
+        253,
+        616
+      ],
+      "size": [
+        456.3,
+        565.2
+      ]
+    },
+    "skyline": {
+      "image": "sprites/skyline.png",
+      "source": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "size": [
+        1536,
+        720
+      ]
+    },
+    "ground": {
+      "image": "sprites/ground.png",
+      "source": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "size": [
+        640,
+        230
+      ]
+    },
+    "junction": {
+      "image": "sprites/facade-residential.png",
+      "source": [
+        27,
+        194,
+        26,
+        760
+      ],
+      "anchor": [
+        13,
+        760
+      ],
+      "size": [
+        22,
+        340
+      ]
+    }
+  },
+  "background": "skyline",
+  "ground": "ground",
+  "parallax": 0.94,
+  "facade_baseline": 500,
+  "signs": [
+    {
+      "text": "RUA AUGUSTA",
+      "position": [
+        245,
+        290
+      ],
+      "size": 20,
+      "color": [
+        235,
+        222,
+        185
+      ]
+    },
+    {
+      "text": "ESQUINA / SOM AO VIVO",
+      "position": [
+        656,
+        198
+      ],
+      "size": 15,
+      "color": [
+        243,
+        209,
+        153
+      ]
+    },
+    {
+      "text": "LIMIAR",
+      "position": [
+        1523,
+        198
+      ],
+      "size": 24,
+      "color": [
+        246,
+        200,
+        164
+      ]
+    },
+    {
+      "text": "DISCOS & IDEIAS",
+      "position": [
+        2838,
+        245
+      ],
+      "size": 18,
+      "color": [
+        225,
+        203,
+        222
+      ]
+    }
+  ],
+  "mirror_ground_tiles": true
+}

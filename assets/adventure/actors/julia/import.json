@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "metadata": "import-manifest.json",
+  "keying": "magenta-flat",
+  "sources": {
+    "sheet": {
+      "path": "source/npcs.png",
+      "sha256": "bb82767d423fd0722d482ca959292f47f7b47e9211adfca3937f4f055c0a9605"
+    }
+  },
+  "exports": [
+    {
+      "id": "idle",
+      "source": "sheet",
+      "crop": [
+        164,
+        0,
+        156,
+        340
+      ],
+      "output": "sprites/idle.png",
+      "landmarks": {
+        "feet": [
+          245,
+          333
+        ]
+      }
+    },
+    {
+      "id": "run",
+      "source": "sheet",
+      "crop": [
+        608,
+        0,
+        280,
+        340
+      ],
+      "output": "sprites/run.png",
+      "landmarks": {
+        "feet": [
+          841,
+          330
+        ]
+      }
+    },
+    {
+      "id": "talk",
+      "source": "sheet",
+      "crop": [
+        1192,
+        0,
+        208,
+        340
+      ],
+      "output": "sprites/talk.png",
+      "landmarks": {
+        "feet": [
+          1298,
+          333
+        ]
+      }
+    }
+  ]
+}

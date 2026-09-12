@@ -5,7 +5,7 @@
 
 use raylib::prelude::*;
 
-use super::{assets::Assets, pieces::PiecePose};
+use super::{assets::SharedAssets, pieces::PiecePose};
 use crate::adventure::{
     ambient::AmbientState,
     combat::Facing,
@@ -16,7 +16,7 @@ use crate::adventure::{
 };
 
 /// Draws the shop's occupants and sidewalk neighbours after props, before cars.
-pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, assets: &Assets, offset: f32) {
+pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, assets: &SharedAssets, offset: f32) {
     let neighborhood = Neighborhood::sample(ambient);
     let door = Rectangle::new(
         DOOR_CENTER_X - DOOR_WIDTH * 0.5 - offset,

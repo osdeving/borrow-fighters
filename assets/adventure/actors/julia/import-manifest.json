@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "algorithm": "explicit-crop-magenta-unmix-v1",
+  "imagemagick": "Version: ImageMagick 6.9.10-23 Q16 x86_64 20190101 https://imagemagick.org",
+  "recipe_sha256": "b0df29adea1510aaec17ae060dcd879745c23c45d470a56b3b4b1ebf5d67937c",
+  "keying": "magenta-flat",
+  "sources": {
+    "sheet": {
+      "path": "source/npcs.png",
+      "sha256": "bb82767d423fd0722d482ca959292f47f7b47e9211adfca3937f4f055c0a9605",
+      "size": [
+        1536,
+        1024
+      ]
+    }
+  },
+  "exports": [
+    {
+      "id": "idle",
+      "source": "sheet",
+      "output": "sprites/idle.png",
+      "crop": [
+        164,
+        0,
+        156,
+        340
+      ],
+      "size": [
+        156,
+        340
+      ],
+      "sha256": "62ac6db8be61e63e7820dc964cfcbce4b107cf8213c9ad7e64cd18aab389cf89",
+      "landmarks_source": {
+        "feet": [
+          245,
+          333
+        ]
+      },
+      "landmarks_local": {
+        "feet": [
+          81,
+          333
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 22147,
+        "partial_pixels": 1723,
+        "transparent_pixels": 29170,
+        "visible_bounds": [
+          16,
+          9,
+          139,
+          334
+        ]
+      }
+    },
+    {
+      "id": "run",
+      "source": "sheet",
+      "output": "sprites/run.png",
+      "crop": [
+        608,
+        0,
+        280,
+        340
+      ],
+      "size": [
+        280,
+        340
+      ],
+      "sha256": "eec1e7441bbc359aedee05a93f6e68bfadd2577b76facadc7eb9b6388af3a570",
+      "landmarks_source": {
+        "feet": [
+          841,
+          330
+        ]
+      },
+      "landmarks_local": {
+        "feet": [
+          233,
+          330
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 26568,
+        "partial_pixels": 2329,
+        "transparent_pixels": 66303,
+        "visible_bounds": [
+          13,
+          9,
+          265,
+          332
+        ]
+      }
+    },
+    {
+      "id": "talk",
+      "source": "sheet",
+      "output": "sprites/talk.png",
+      "crop": [
+        1192,
+        0,
+        208,
+        340
+      ],
+      "size": [
+        208,
+        340
+      ],
+      "sha256": "33d4c9d64a1be4fba54822c6d450a7f672c6caf0a799fc35a69c324b222db7d2",
+      "landmarks_source": {
+        "feet": [
+          1298,
+          333
+        ]
+      },
+      "landmarks_local": {
+        "feet": [
+          106,
+          333
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 23675,
+        "partial_pixels": 1966,
+        "transparent_pixels": 45079,
+        "visible_bounds": [
+          13,
+          9,
+          196,
+          334
+        ]
+      }
+    }
+  ]
+}

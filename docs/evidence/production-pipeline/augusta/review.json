@@ -1,0 +1,301 @@
+{
+  "review_kind": "Native Raylib execution with ordinary deterministic input; no forced health or victories",
+  "status": "Accepted native evidence after final hip alpha blend, short recovery yaw and mirrored ground finish.",
+  "command": [
+    "target/debug/borrow-adventure",
+    "--start",
+    "augusta",
+    "--review",
+    "/tmp/cpp-chapter-finish-final",
+    "--frames",
+    "24000",
+    "--mute",
+    "--hidden"
+  ],
+  "isolated_data_directory": "/tmp/cpp-finish-final-isolated-data",
+  "last_phase": "Complete",
+  "player_hp_final": 96,
+  "rendered_frames": 6020,
+  "phases": {
+    "Introduction": 0.0,
+    "Approach": 3.0000001564621925,
+    "Confrontation": 6.416667001321912,
+    "GuardsArrival": 33.600001752376556,
+    "GuardsFight": 35.26666850596666,
+    "AfterGuards": 42.0833355281502,
+    "Regroup": 51.4333360157907,
+    "ErraticsArrival": 52.600002743303776,
+    "ErraticsFight": 53.76666947081685,
+    "BrokerEscape": 61.05000318400562,
+    "FindJulia": 63.55000331439078,
+    "RescueDialogue": 66.10000344738364,
+    "Exit": 95.60000498592854,
+    "Complete": 97.33333840966225
+  },
+  "audio_cues": {
+    "swish": 27,
+    "projectile": 2,
+    "impact": 21,
+    "landing": 1
+  },
+  "audio_origin": "Reconstructed from observed cue names and original local WAV files, not recorded from the Raylib audio device.",
+  "audio_device_listening_tested": false,
+  "physical_gamepad_tested": false,
+  "native_menu_input": "Process-owned XSendEvent keyboard/pointer; no profile writes by harness. Both checkpoints created by the game in isolated userdata.",
+  "menu_checks_passed": true,
+  "loaded_characters": [
+    "broker",
+    "cpp",
+    "erratic",
+    "julia",
+    "security"
+  ],
+  "texture_count": 27,
+  "decoded_texture_bytes": 33959752,
+  "executable_sha256": "593f26834f365a719ce0d7fd1e887f117aca62caa8d07e42ba9c567e349d10c4",
+  "source_video_sha256": "f09bd19d89488b193e85d9b15ef02a5f3228b5dc47a3c4ca1977d67272cece04",
+  "mixed_wav_sha256": "b41afd149ce6c737110ca3d920e39b5eec8e6b3cb69e41ef7047a8e64098900e",
+  "video_probes": {
+    "adventure.mp4": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "30/1",
+          "duration": "100.333333",
+          "nb_read_frames": "3010"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "r_frame_rate": "0/0",
+          "duration": "100.263991",
+          "nb_read_frames": "2159"
+        }
+      ],
+      "format": {
+        "duration": "100.334000"
+      }
+    },
+    "ep-arrival.mp4": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "30/1",
+          "duration": "2.600000",
+          "nb_read_frames": "78"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "r_frame_rate": "0/0",
+          "duration": "2.600000",
+          "nb_read_frames": "56"
+        }
+      ],
+      "format": {
+        "duration": "2.647000"
+      }
+    },
+    "ep-combat.mp4": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "30/1",
+          "duration": "2.000000",
+          "nb_read_frames": "60"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "r_frame_rate": "0/0",
+          "duration": "2.000000",
+          "nb_read_frames": "44"
+        }
+      ],
+      "format": {
+        "duration": "2.047000"
+      }
+    }
+  },
+  "complete_decode_passed": true,
+  "screenshots": {
+    "01-confrontation.png": {
+      "seconds": 6.7666670013219115,
+      "review": "Viewed: readable actors and text; expected phase is visible; no material floor clipping."
+    },
+    "02-guards-combat.png": {
+      "seconds": 36.60000190883875,
+      "review": "Viewed: readable actors and text; expected phase is visible; no material floor clipping."
+    },
+    "03-after-guards.png": {
+      "seconds": 42.4333355281502,
+      "review": "Viewed: readable actors and text; expected phase is visible; no material floor clipping."
+    },
+    "04-ep-descent.png": {
+      "seconds": 53.40000274330377,
+      "review": "Viewed: readable actors and text; expected phase is visible; no material floor clipping."
+    },
+    "05-ep-impact.png": {
+      "seconds": 53.640002743303775,
+      "review": "Viewed: readable actors and text; expected phase is visible; no material floor clipping."
+    },
+    "06-rescue.png": {
+      "seconds": 82.63333762474358,
+      "review": "Viewed: readable actors and text; expected phase is visible; no material floor clipping."
+    },
+    "07-complete.png": {
+      "seconds": 98.33333840966225,
+      "review": "Viewed: readable actors and text; expected phase is visible; no material floor clipping."
+    }
+  },
+  "resource_sha256": {
+    "assets/adventure/actors/broker/sprites/flee.png": "ffa7a55c84e198386c50ed93ce03db017c9349d43f4b9c2fd5de475ec7c7ef5f",
+    "assets/adventure/actors/broker/sprites/idle.png": "a0deddbd150580e1a1d045c183e86ef25f6f2d7558879a8065d2c5eb3e5df89b",
+    "assets/adventure/actors/broker/sprites/threaten.png": "811bff1549fbcf5f0e4bf4070340062c08d464345d599c0b073e223c299d357e",
+    "assets/adventure/actors/cpp/sprites/bag.png": "8b3a63c80d6ca8e22c2c209a447eb06ff5d8b6c3635120e0ae19e84d9a014496",
+    "assets/adventure/actors/cpp/sprites/body-back.png": "911b3b88024a44013008475fdfb7927f6eba8a1daea39c04f17e6bc5a35f90cc",
+    "assets/adventure/actors/cpp/sprites/body-profile.png": "60c130e7f82894efcdb2b8ac786b7f512d51691e6f7c646352b6949a2dd9fb65",
+    "assets/adventure/actors/cpp/sprites/body-quarter.png": "d07c0c2d87f5e835a7abfb73c031bdc654ff8dd63a64eae023d26f56420036e0",
+    "assets/adventure/actors/cpp/sprites/body-rear-quarter.png": "9a849dd8c972477fcfd5e6309dc68918aee84bc188cf467b19c41b84fca5ff62",
+    "assets/adventure/actors/cpp/sprites/boot-back.png": "0654e8f6e2568e613cbfd04e96465b223ded79079d0c0d4785da053f853d3d20",
+    "assets/adventure/actors/cpp/sprites/boot-front.png": "dee5b7a6165b839a572144a9be0d18cbedcc2ae4a0e07d7814b1fb94c1311cc4",
+    "assets/adventure/actors/cpp/sprites/boot-profile.png": "b50eb0c7fb12e1efdec78610cd21e3d9566a826f98490d9c0c77a18b2e1fff43",
+    "assets/adventure/actors/cpp/sprites/forearm.png": "f7882abdc1be67d12076a51197ea3206b8510f70aa59c4cdab9acec775c2302c",
+    "assets/adventure/actors/cpp/sprites/leg-front.png": "a0cd3dde14b47790e9926c3dd92ba7f8a4c0c9ce4ac4670f566100e3b4507517",
+    "assets/adventure/actors/cpp/sprites/leg-profile.png": "a780d3482293308c3240bbb1e2936badd9f32d557fbfae082c23b17fdc2d1a61",
+    "assets/adventure/actors/cpp/sprites/upper-arm.png": "76c9c52d4fe332908dd0d2e82b6dfa82e363b2b56d4d2f6f3c7ab895c4df0243",
+    "assets/adventure/actors/erratic/sprites/poses.png": "eeb61a73f64dad3440209bf3f48835554a6cb130fcbfbc1a38d03a8e4309604e",
+    "assets/adventure/actors/julia/sprites/idle.png": "62ac6db8be61e63e7820dc964cfcbce4b107cf8213c9ad7e64cd18aab389cf89",
+    "assets/adventure/actors/julia/sprites/run.png": "eec1e7441bbc359aedee05a93f6e68bfadd2577b76facadc7eb9b6388af3a570",
+    "assets/adventure/actors/julia/sprites/talk.png": "33d4c9d64a1be4fba54822c6d450a7f672c6caf0a799fc35a69c324b222db7d2",
+    "assets/adventure/actors/security/sprites/down.png": "61aad51928d0c963d97842738e75ccd8c1cfde6e8c1d528a18f0c9ffb88b56f1",
+    "assets/adventure/actors/security/sprites/idle.png": "434607ff133ffbd90d56a3c1a9edf1bcd9c3259f9517db78ff658f11c8779554",
+    "assets/adventure/actors/security/sprites/punch.png": "fa99468ce7b948631523954be2c1fee0469d87af66d966c862973ac0d8b95873",
+    "assets/adventure/chapters/cpp-augusta/sprites/facade-bar.png": "2950466752aee2cbddcb8f2399b3285d2c7fe897b71d6cfedd076d5677fd6ee1",
+    "assets/adventure/chapters/cpp-augusta/sprites/facade-mural.png": "7098501dbe30b2dc8a07703265e633d5ea40a56904e44b02a05c2c41c2add9af",
+    "assets/adventure/chapters/cpp-augusta/sprites/facade-residential.png": "164ca40324aab894624a6ccdef1ea1fc43e01c3913d276e521227fede523e0e2",
+    "assets/adventure/chapters/cpp-augusta/sprites/ground.png": "5d54e0dd17c3de803aafe3e3d6080e7017fe2c08d2b4ea8aabc0992f4c78108a",
+    "assets/adventure/chapters/cpp-augusta/sprites/skyline.png": "74410740c68172241557c51f0dabffc42508a212fcdc944507e1b1ab58b44ae8"
+  },
+  "audio_sample_sha256": {
+    "assets/adventure/audio/production/impact.wav": "2c3646c5841d09d0a16d92efcfdc0925d8296c97f9e9155f8a276d2e5b7b861a",
+    "assets/adventure/audio/production/landing.wav": "bfd972e30dc20b100fa39d2599af0a62a9f8d8129035f12e4d4804cc98ce900e",
+    "assets/adventure/audio/production/parry.wav": "c0137fe796c78c47caa972702b3441892d6e0d8469244ee34836aca8da40f90f",
+    "assets/adventure/audio/production/projectile.wav": "994e104cc29288b3801d4f3eaf4c68feab5bdb91cfc9914310ec6c792b749c03",
+    "assets/adventure/audio/production/street-loop.wav": "c24bbd91f4583843b39c0589afd9b18c32594767b3e6a0e98fe014c9e6a2ae95",
+    "assets/adventure/audio/production/swish.wav": "f02661325f61091776f29ca481a9dabb3b6be5c223c16e543f8bb62e46c75539"
+  },
+  "content_sha256": {
+    "assets/adventure/actors/broker/character.json": "84f0852bc2db0c13567ba786b45b16db38791e621a76924cd7c77d4d1333f1ec",
+    "assets/adventure/actors/broker/clips.json": "2f9ae001768dad7a11bdcb4dc5d92df9311aa15de64a1a1ac9a38b4608c36dce",
+    "assets/adventure/actors/broker/combat.json": "d661c64bb0d90fa2c09cb19e554cc710a5493f530836a7800f9cb64d7c077cde",
+    "assets/adventure/actors/broker/import-manifest.json": "cc04da6a663874cc2dccc68a5af2a22ac5adda65cf0a1782d6292bc44f016794",
+    "assets/adventure/actors/broker/import.json": "fa480042f2c1a8427006f28d0a2f5ddae07591bf2f56e805f988781bb6a22252",
+    "assets/adventure/actors/broker/rig.json": "e3119a7d254682b00fdd5a9f2d5f829c48d424874abab03d01ce1bd6c76cbb37",
+    "assets/adventure/actors/cpp/character.json": "1c5d66ef9e8e5678e043f3955e8c600a9159ecc1747b64d1f92d9868a81538b2",
+    "assets/adventure/actors/cpp/clips.json": "2fb6431c350b8a7f6178fa1d9e0a7886f8cf0c5083b5d904918a52331caf62e5",
+    "assets/adventure/actors/cpp/combat.json": "9a34792024b9e04fdd70d8c22082efc77a5e3631d9f0dd11ccf9f1673b8915da",
+    "assets/adventure/actors/cpp/import-manifest.json": "90f18ba31a44c08a58e43c83b16a1b1d2e755f761d02fb955a02edfb364e2c12",
+    "assets/adventure/actors/cpp/import.json": "b1d109713ef4ddb6b97ec0cd64426c3679c86040e1fbd55239dfe719ecf0214d",
+    "assets/adventure/actors/cpp/rig.json": "cd9040ae787fc44523109fd3a4a3cd95ce34e88f23753e71f352e926508c3cc0",
+    "assets/adventure/actors/erratic/character.json": "bb9f1cb20a03d510f32c5615aa699ca340f97be3c695d89cc384d19872b25b7d",
+    "assets/adventure/actors/erratic/clips.json": "e98197f068ffe133e17fe36e6a8ea998c6ca9da78b5270fd811ba3e1b950b2d8",
+    "assets/adventure/actors/erratic/combat.json": "8dbecaf4b31be8a781bd8c5bc63fd90275361bd8f294617e4841b09d3f9ddec1",
+    "assets/adventure/actors/erratic/rig.json": "7888195e9b8a0071e2e1b00b2ef39d3658997a48fd31ca5d58fecefcb9a7a7e6",
+    "assets/adventure/actors/julia/character.json": "63713449809bd44c0d93237cf6346cef0365586f8e513433770b3aa8e8d057cb",
+    "assets/adventure/actors/julia/clips.json": "8621f539d4282d6a2cca906624b121a109981c851b62b302824e4d78d12af7d4",
+    "assets/adventure/actors/julia/combat.json": "aeabbd915cce81592cbb4aaa1fa79c8a7bbef43c9574aee6fa41ed9c7d2cab11",
+    "assets/adventure/actors/julia/import-manifest.json": "3b693d3c36ca5edf059ce67481f39e743a21c4c9582cef5b897d4148c98dfcad",
+    "assets/adventure/actors/julia/import.json": "b0df29adea1510aaec17ae060dcd879745c23c45d470a56b3b4b1ebf5d67937c",
+    "assets/adventure/actors/julia/rig.json": "bc3a3a846c01540c2a0f579351910f22442b826fb38e604289e9d28017769196",
+    "assets/adventure/actors/security/character.json": "f7917136f8f537a71f78e5abad4ef0e131c5c1c527d6f75c6df02938a99fd544",
+    "assets/adventure/actors/security/clips.json": "22da5b01861eff5f93534702f03a7ffdb633c1c0840700860bf8480044f4c062",
+    "assets/adventure/actors/security/combat.json": "d3113513d8bcdd1506f720831559ac64994d9f24aafaccfa06aee90753bfef04",
+    "assets/adventure/actors/security/import-manifest.json": "26d41d659f14aac8814a27b8b547b5358e7fd1c0d99f8d1df43fca2ba71196d5",
+    "assets/adventure/actors/security/import.json": "d408431d45b1b59be53c58b39b413e908cf731ca6cc3a85d0eef81800fbe7a61",
+    "assets/adventure/actors/security/rig.json": "dfdc79d02c6e811a3dfd5d51f002efb501e8a5f991f171da6afdc1a7ffc4f37f",
+    "assets/adventure/audio/production/catalog.json": "611949bfb9f0b4bfbb7c12653a15bcd69cee32224a73c10bdc3e13908962f3a5",
+    "assets/adventure/campaign.json": "d1ff86298ae76fb51525da75bf7aa0f1340a05257d17cb6a6c391d137d8218db",
+    "assets/adventure/chapters/cpp-augusta/art-import-manifest.json": "dd167b36fb4caa715ffb45d29efd4881d983dde9f059478092cf61b0dc54ae0e",
+    "assets/adventure/chapters/cpp-augusta/art-import.json": "5c8c44cba9987c6a77a48fe98687607af245b98f1c2b62f8f6008acc6a863d26",
+    "assets/adventure/chapters/cpp-augusta/chapter.json": "e5370a00bdc34fe67619c7a01f2a99a2deea2f7425f2c86664ca08996314ba1d",
+    "assets/adventure/chapters/cpp-augusta/texts.json": "43e01a082e5d18e7be0ca8753b035e1402ab809f9fc1a05ced7e3422431fe6ec",
+    "assets/adventure/chapters/cpp-augusta/world-art.json": "f1129bc4f0949490eaa9b6a34e3b64049e613ecd0534f23fa32aff53564fc2e6",
+    "assets/adventure/chapters/cpp-augusta/world.json": "d3d3e964632962aceabdb1481827a13191b57a2ff629a96260e9a026ebd8938f",
+    "src/adventure/engine/production/actors.rs": "4a089c717b51ef883eb31ba2a8d713a88cfe544975c767d8f381147aa38b1416",
+    "src/adventure/engine/production/world.rs": "565661b2e39c4096acec070e2367a72720dea3421fa3ed3bf2d2057ee6b715ed",
+    "src/adventure/production/animation.rs": "416100a8a7ebcb8850c2857c6055ef66c0f6a904f0a5bf955c9b8915311f9c2b",
+    "src/adventure/engine/production/assets.rs": "1de4dac8354e646faad322a355221fcfe39bc084a857c78f1fe96d4dd63d6f1a"
+  },
+  "artifacts_sha256": {
+    "01-confrontation.png": "ef58e19d56ab9c7c52131e7f79e78068cd500b8f33cabd55daaed1d7de054163",
+    "02-guards-combat.png": "0f1289a3112940a87735e656677d4fcafbaa5ced94ce2de9bed355f1289bb429",
+    "03-after-guards.png": "6da9f195450ea54acc5271e6d31faa43584ede17dd1816c469c711bad807ad31",
+    "04-ep-descent.png": "aa1cad0b8e3e22888345715947b6dd71b06fc808fad1411bd3adefb239c9d37e",
+    "05-ep-impact.png": "79c6cf306aded708130e48b5f78d0b95538628852e11ba70f2fbec90d4e9e308",
+    "06-rescue.png": "02505d283cbf4588d6a9125583f3e9dfefc70656cd8f06104db776149a850767",
+    "07-complete.png": "44fde0e1e6096930d3a3d284dc54670cada00fe254811810faa9a29a5e45ba59",
+    "08-protagonists.png": "efb5fd64ef01081d0914d850b5397dfccba908d2e62e6c7b1dc410fd001614f8",
+    "09-cpp-continue.png": "0ee96e8121cb0a3406b24c2f90d6f8d20569103f9da6fd895ecab951ff5bc96f",
+    "10-rust-continue.png": "b42233f21a4f9e2d5a730f82498e158b62513edb09a43d98b1bc34e811d2aed0",
+    "README.md": "6cfe27ac6aa3536c26f0099dfac3f12d05d9cba857afac30173af3c65be45b5b",
+    "adventure.mp4": "4d12e2d50f30b9f3abf50fbae27c1d71d42b9976ddf25bf2ce616744324b2ad4",
+    "cpp-augusta-v1.json": "628edd5528c0c16ab8e0d2a1a94acbd48a37e65c27e4038ef5434640a4d2a076",
+    "ep-arrival.mp4": "a54d5128df5d7297eed1f6696bcee241e61184618a1fc9259cd437393dd24b69",
+    "ep-combat.mp4": "1d83671adcd436d13f029f061489a4c0756a5b3c367a90fca6470e23553d8607",
+    "load-report.json": "7d06c8e1c6b1c9bc2036c6c644860a18bd5e97fdf056e1008bb17c5dbd7e97fa",
+    "menu-checks.json": "67562cfffb8a568a9fc9b3462710630fc4d6ea26e8fb0beb40064e9f7d4ce125",
+    "menu-cpp-progress.json": "47f807f0550d07ff3634ac4beab603f8c8691de707fd52967e9d9250f4db0acc",
+    "menu-rust-progress.json": "05b6a5fd2ca39c4045d38823b3d44e134ffbb752dc8e73cd0e516212fa6e2877",
+    "mix-review.json": "7edffbd3ea46b0780220f5d58fbca7b5cd3568e212410d774d120d551a690a49",
+    "telemetry.jsonl": "952d72c86cf0609a04473f6497684acd0950b1ddbccc50b6724f841d1dd766b6"
+  },
+  "finishing_review": {
+    "hip_result": "Viewed six sequential spin frames: the painted hip follows the articulated thighs without the previous fixed point.",
+    "spin_seconds": [
+      56.20000293105841,
+      56.333336271345615,
+      56.40000294148922,
+      56.466669611632824,
+      56.53333628177643,
+      56.60000295192003
+    ],
+    "body_leg_blend": [
+      -10,
+      12
+    ],
+    "leg_alpha_half_width": 0.35,
+    "ground_result": "Viewed descent and impact screenshots: adjacent mirrored ground tiles share lighting at their borders; previous strong vertical illumination jumps are absent.",
+    "mirror_ground_tiles": true
+  },
+  "recovery_review": {
+    "result": "Viewed sequential native frames: Linker and kick recover toward the target without unintended back/side reversal.",
+    "linker_seconds": [
+      35.61667,
+      35.75,
+      35.88333,
+      36.01667
+    ],
+    "kick_seconds": [
+      36.75,
+      36.83333,
+      36.91667,
+      37.03333
+    ]
+  },
+  "audio_cues_not_exercised": [
+    "parry"
+  ]
+}

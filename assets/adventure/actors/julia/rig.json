@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "character_id": "julia",
+  "method": "frames",
+  "height": 184,
+  "attachments": {
+    "idle": {
+      "image": "sprites/idle.png",
+      "source": [
+        0,
+        0,
+        156,
+        340
+      ],
+      "anchor": [
+        81,
+        333
+      ],
+      "size": [
+        88.04907975460122,
+        191.90184049079753
+      ]
+    },
+    "run": {
+      "image": "sprites/run.png",
+      "source": [
+        0,
+        0,
+        280,
+        340
+      ],
+      "anchor": [
+        233,
+        330
+      ],
+      "size": [
+        158.0368098159509,
+        191.90184049079753
+      ]
+    },
+    "talk": {
+      "image": "sprites/talk.png",
+      "source": [
+        0,
+        0,
+        208,
+        340
+      ],
+      "anchor": [
+        106,
+        333
+      ],
+      "size": [
+        117.39877300613496,
+        191.90184049079753
+      ]
+    }
+  },
+  "skeleton": null,
+  "views": []
+}

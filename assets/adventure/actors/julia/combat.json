@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "tick_hz": 60,
+  "moves": [
+    {
+      "id": "julia.gesture",
+      "animation_id": "light-1",
+      "startup": 22,
+      "active": 5,
+      "recovery": 25,
+      "damage": 1,
+      "hitstun": 18,
+      "knockback": 110,
+      "hitstop": 3,
+      "hitboxes": [
+        {
+          "start": 22,
+          "end": 27,
+          "rect": [
+            12,
+            -137,
+            76,
+            72
+          ]
+        }
+      ],
+      "hurtboxes": [],
+      "combo_next": null,
+      "combo_window": null,
+      "projectile": null
+    }
+  ]
+}

@@ -32,6 +32,15 @@ Aponte também `CMAKE_TOOLCHAIN_FILE` para o caminho absoluto de
 o mesmo runtime estático `/MT` (a política CMP0091 do CMake separa essa escolha
 das flags do Rust). O workflow configura as duas opções.
 
+Para distribuir também a ferramenta externa de produção, compile
+`cargo build --locked --release --bin borrow-story --bin borrow-actor-lab` e
+acrescente `--lab-binary target/release/borrow-actor-lab` ao comando `stage`
+(`.exe` no Windows). Esse perfil opcional inclui o laboratório, seu launcher
+Linux, hashes e identificação em `BUILD-INFO.json`. O pacote de jogadores
+continua sem a ferramenta por padrão, mesmo se o binário existir ao lado do
+jogo no diretório de build. O laboratório usa os mesmos assets runtime do
+capítulo; novas fontes de arte e receitas permanecem no checkout de produção.
+
 O executável também incorpora `activeCodePage=UTF-8` no manifesto do Windows
 para que o Raylib abra imagens e áudio quando a pasta contém acentos. Esse
 recurso exige **Windows 10 versão 1903 (build 18362) ou posterior, incluindo
@@ -96,6 +105,16 @@ showcase não são dependências de execução. Arquivos de produção usados pe
 especiais e pelos cenários são incluídos individualmente. Ausência de um asset
 referenciado interrompe o empacotamento.
 
+O coletor da nova produção segue `campaign.json` para os pacotes
+`chapters/<id>/chapter.json`, mantendo Rust no coletor legado. Cada capítulo
+fornece `world`, `texts` e `art`; o descritor de arte fornece seus PNGs e os
+personagens. Cada `character.json` fornece `combat`, `rig` e `clips`, e as
+`attachments` do rig fornecem seus PNGs. `audio/production/catalog.json`
+fornece apenas `ambience.file` e `effects.*.file`. `production-lab.json` e o
+personagem padrão da ferramenta também acompanham o conjunto. O coletor
+valida caminhos relativos e contenção de symlinks em cada pacote; não copia
+pastas inteiras de personagens, receitas de importação ou fontes de geração.
+
 O pacote inclui [JOGUE-PRIMEIRO.md](JOGUE-PRIMEIRO.md), licenças do projeto,
 créditos de áudio, OFL das fontes dos dois domínios, procedência da arte da
 aventura, avisos e fontes exatas dos crates resolvidos
@@ -111,6 +130,8 @@ ALSA e registra versões, licenças e fontes em `NATIVE-LIBRARIES.json`, `licens
 e `THIRD_PARTY_SOURCES/`. O runtime GCC conserva a licença e sua exceção de
 linkagem; não é necessário carregar o fonte do compilador dentro do jogo.
 As bibliotecas permanecem dinâmicas e substituíveis em `lib/`.
+Quando o laboratório é incluído, sua resolução de bibliotecas e requisito de
+glibc também entram na coleta e na verificação.
 
 glibc, loader, OpenGL e drivers permanecem no sistema. O launcher usa
 `LD_LIBRARY_PATH` apenas no processo do jogo. A validação recusa dependências

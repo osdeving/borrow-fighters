@@ -1,0 +1,1380 @@
+{
+  "schema_version": 1,
+  "tick_hz": 60,
+  "clips": {
+    "idle": {
+      "duration_ticks": 60,
+      "looping": true,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "0"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "0"
+        }
+      ]
+    },
+    "start": {
+      "duration_ticks": 60,
+      "looping": false,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "1"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "1"
+        }
+      ]
+    },
+    "run": {
+      "duration_ticks": 60,
+      "looping": true,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "1"
+        },
+        {
+          "time": 0.5,
+          "pose": {
+            "pelvis": [
+              0,
+              -98
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "2"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "1"
+        }
+      ]
+    },
+    "stop": {
+      "duration_ticks": 60,
+      "looping": false,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "0"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "0"
+        }
+      ]
+    },
+    "turn": {
+      "duration_ticks": 60,
+      "looping": false,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "0"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "0"
+        }
+      ]
+    },
+    "jump": {
+      "duration_ticks": 60,
+      "looping": false,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "2"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "2"
+        }
+      ]
+    },
+    "fall": {
+      "duration_ticks": 60,
+      "looping": false,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "6"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "6"
+        }
+      ]
+    },
+    "land": {
+      "duration_ticks": 60,
+      "looping": false,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "6"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "6"
+        }
+      ]
+    },
+    "guard": {
+      "duration_ticks": 60,
+      "looping": true,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "0"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "0"
+        }
+      ]
+    },
+    "parry": {
+      "duration_ticks": 60,
+      "looping": false,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "5"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "5"
+        }
+      ]
+    },
+    "hurt": {
+      "duration_ticks": 60,
+      "looping": false,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "5"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "5"
+        }
+      ]
+    },
+    "knockout": {
+      "duration_ticks": 60,
+      "looping": false,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "7"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "7"
+        }
+      ]
+    },
+    "arrival": {
+      "duration_ticks": 60,
+      "looping": false,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "6"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "6"
+        }
+      ]
+    },
+    "interact": {
+      "duration_ticks": 60,
+      "looping": false,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "0"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "0"
+        }
+      ]
+    },
+    "light-1": {
+      "duration_ticks": 49,
+      "looping": false,
+      "blend_ticks": 0,
+      "stride_pixels": null,
+      "keys": [
+        {
+          "time": 0,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "3"
+        },
+        {
+          "time": 0.32653061224489793,
+          "pose": {
+            "pelvis": [
+              4,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "4"
+        },
+        {
+          "time": 0.46938775510204084,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "0"
+        },
+        {
+          "time": 1,
+          "pose": {
+            "pelvis": [
+              0,
+              -96
+            ],
+            "body_angle": 0,
+            "yaw": 330,
+            "feet": [
+              [
+                18,
+                0
+              ],
+              [
+                -18,
+                0
+              ]
+            ],
+            "hands": [
+              [
+                28,
+                -148
+              ],
+              [
+                -24,
+                -139
+              ]
+            ],
+            "foot_angles": [
+              0,
+              0
+            ],
+            "bag_angle": 0
+          },
+          "curve": "smooth",
+          "frame": "0"
+        }
+      ]
+    }
+  }
+}

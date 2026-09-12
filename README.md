@@ -1,8 +1,8 @@
 # Borrow Fighters
 
-Jogo 2D de luta com humor de programação, iniciado como um projeto **docs-first** e agora com um protótipo greybox jogável em Rust + Raylib.
+Aventura de ação 2D cinematográfica e modo de luta Versus, com personagens inspirados em linguagens de programação e cenários brasileiros. Desenvolvido em Rust + Raylib.
 
-Status: **Prototype 0.1 — prototype.5 / Primeiro capítulo e Versus jogáveis**
+Status: **Prototype 0.1 — prototype.5 publicada; no código, capítulos Rust/C++ e laboratório externo de personagens.**
 
 ## Baixar e jogar (sem instalar Rust)
 
@@ -59,8 +59,14 @@ cargo run -- --start opening
 # Direto ao menu principal renovado.
 cargo run -- --menu
 
-# Primeiro capítulo da campanha (retoma o checkpoint, se houver).
+# Primeiro capítulo de Rust (retoma seu checkpoint, se houver).
 cargo run -- --start chapter
+
+# História paralela da C++ na Rua Augusta.
+cargo run -- --start augusta
+
+# Animação e combate fora da campanha, com os mesmos artefatos.
+cargo run --bin borrow-actor-lab
 ```
 
 A prototype.5 incorpora quatro rodadas de melhorias. A primeira acrescenta
@@ -85,12 +91,14 @@ e [diário do experimento](docs/worklogs/prologue-scene-improvements.md).
 
 O menu usa a identidade do título final, moldura de terminal, cursor de bloco
 piscante e números que formam as opções. Na execução conjunta, **Modo História**
-abre **Depois do silêncio**, primeiro capítulo com Rust: retorno à rua evacuada,
+abre a seleção de protagonistas com progresso independente. **Rua Augusta**
+acompanha C++ no resgate de Julia; **Depois do silêncio** segue Rust: retorno à rua evacuada,
 conversas com moradores, contato com Python pelo celular, travessa e passagem.
 O submenu oferece continuar, recomeçar e rever o prólogo. Depois de visto ou
 pulado, o prólogo deixa de abrir automaticamente; as entradas explícitas
 `--start` continuam disponíveis. **Versus Setup** mantém a seleção livre.
-[Capítulo e estratégia de animação](docs/33-after-the-silence.md).
+[Capítulo e estratégia de animação de Rust](docs/33-after-the-silence.md).
+[Pipeline de personagens, laboratório e capítulo C++](docs/38-cpp-augusta-production.md).
 [Prévia do capítulo com som nativo](docs/evidence/after-the-silence/chapter-01.mp4).
 [Escopo e verificação da junção](docs/29-story-terminal-menu.md).
 
@@ -123,12 +131,20 @@ que avançou o último trecho não dispensa a tela.
 No executável isolado, pular tudo conclui o trecho local; `T/X` repete a apresentação
 na conclusão. Para sair durante a aventura, feche a janela ou use `B` do controle na pausa.
 
-No capítulo: **E / A** interage, **Espaço / B** pula, **Enter / RB** avança
+No capítulo de Rust: **E / A** interage, **Espaço / B** pula, **Enter / RB** avança
 conversa, **Backspace / View** conclui a atuação atual e **Esc / Start** abre
 pausa com retorno ao menu. **R / A** retoma uma derrota no checkpoint local.
 O progresso fica em `adventure/campaign-v1.json` no diretório de dados do usuário.
 **F3** mostra posições, regiões e rotas; **F5** recarrega os textos do capítulo,
 a aparência do mensageiro e as animações de Rust. [Assets, clips e sockets](assets/adventure/chapter/README.md).
+
+No capítulo da C++: **A/D** move, **Espaço / B** pula, **J / X** encadeia golpes,
+**V / RT** chuta, **K / Y** gira, **L / LT** dispara Linker e **Q / LB** defende
+ou apara no início da guarda. **E / A** interage, **Enter / RB** avança falas,
+**Esc / Start** pausa e **R / A** retoma após derrota. **F3** mostra geometria;
+**F5** recarrega o pacote validado e retoma o checkpoint. O progresso próprio
+fica em `adventure/cpp-augusta-v1.json`. O laboratório permite revisar os mesmos
+movimentos diretamente, sem passar pelo capítulo.
 
 **Textos sem recompilar:** edite [assets/adventure/texts/pt-BR.json](assets/adventure/texts/pt-BR.json),
 salve e pressione **F5**. Legendas, terminal, manchetes, biografias, menus, logo

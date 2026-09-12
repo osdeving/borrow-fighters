@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "character_id": "security",
+  "method": "frames",
+  "height": 200,
+  "attachments": {
+    "idle": {
+      "image": "sprites/idle.png",
+      "source": [
+        0,
+        0,
+        304,
+        342
+      ],
+      "anchor": [
+        148,
+        329
+      ],
+      "size": [
+        184.24242424242425,
+        207.27272727272728
+      ]
+    },
+    "punch": {
+      "image": "sprites/punch.png",
+      "source": [
+        0,
+        0,
+        392,
+        342
+      ],
+      "anchor": [
+        170,
+        329
+      ],
+      "size": [
+        237.5757575757576,
+        207.27272727272728
+      ]
+    },
+    "down": {
+      "image": "sprites/down.png",
+      "source": [
+        0,
+        0,
+        400,
+        254
+      ],
+      "anchor": [
+        201,
+        235
+      ],
+      "size": [
+        242.42424242424244,
+        153.93939393939394
+      ]
+    }
+  },
+  "skeleton": null,
+  "views": []
+}

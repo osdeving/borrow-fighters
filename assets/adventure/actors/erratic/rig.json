@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "character_id": "erratic",
+  "method": "frames",
+  "height": 210,
+  "attachments": {
+    "0": {
+      "image": "sprites/poses.png",
+      "source": [
+        0.0,
+        0.0,
+        443.5,
+        443.5
+      ],
+      "anchor": [
+        221.75,
+        425.5
+      ],
+      "size": [
+        217.315,
+        217.315
+      ]
+    },
+    "1": {
+      "image": "sprites/poses.png",
+      "source": [
+        443.5,
+        0.0,
+        443.5,
+        443.5
+      ],
+      "anchor": [
+        221.75,
+        425.5
+      ],
+      "size": [
+        217.315,
+        217.315
+      ]
+    },
+    "2": {
+      "image": "sprites/poses.png",
+      "source": [
+        887.0,
+        0.0,
+        443.5,
+        443.5
+      ],
+      "anchor": [
+        221.75,
+        425.5
+      ],
+      "size": [
+        217.315,
+        217.315
+      ]
+    },
+    "3": {
+      "image": "sprites/poses.png",
+      "source": [
+        1330.5,
+        0.0,
+        443.5,
+        443.5
+      ],
+      "anchor": [
+        221.75,
+        425.5
+      ],
+      "size": [
+        217.315,
+        217.315
+      ]
+    },
+    "4": {
+      "image": "sprites/poses.png",
+      "source": [
+        0.0,
+        443.5,
+        443.5,
+        443.5
+      ],
+      "anchor": [
+        221.75,
+        425.5
+      ],
+      "size": [
+        217.315,
+        217.315
+      ]
+    },
+    "5": {
+      "image": "sprites/poses.png",
+      "source": [
+        443.5,
+        443.5,
+        443.5,
+        443.5
+      ],
+      "anchor": [
+        221.75,
+        425.5
+      ],
+      "size": [
+        217.315,
+        217.315
+      ]
+    },
+    "6": {
+      "image": "sprites/poses.png",
+      "source": [
+        887.0,
+        443.5,
+        443.5,
+        443.5
+      ],
+      "anchor": [
+        221.75,
+        425.5
+      ],
+      "size": [
+        217.315,
+        217.315
+      ]
+    },
+    "7": {
+      "image": "sprites/poses.png",
+      "source": [
+        1330.5,
+        443.5,
+        443.5,
+        443.5
+      ],
+      "anchor": [
+        221.75,
+        425.5
+      ],
+      "size": [
+        217.315,
+        217.315
+      ]
+    }
+  },
+  "skeleton": null,
+  "views": []
+}

@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "algorithm": "explicit-crop-magenta-unmix-v1",
+  "imagemagick": "Version: ImageMagick 6.9.10-23 Q16 x86_64 20190101 https://imagemagick.org",
+  "recipe_sha256": "5c8c44cba9987c6a77a48fe98687607af245b98f1c2b62f8f6008acc6a863d26",
+  "keying": "magenta-flat",
+  "sources": {
+    "sheet": {
+      "path": "source/facades.png",
+      "sha256": "b67042c1f37a4aa91d615572889e197703a2a7b46a4e101c3730efdc4b9c80f2",
+      "size": [
+        1536,
+        1024
+      ]
+    }
+  },
+  "exports": [
+    {
+      "id": "facade-residential",
+      "source": "sheet",
+      "output": "sprites/facade-residential.png",
+      "crop": [
+        0,
+        12,
+        536,
+        968
+      ],
+      "size": [
+        536,
+        968
+      ],
+      "sha256": "164ca40324aab894624a6ccdef1ea1fc43e01c3913d276e521227fede523e0e2",
+      "landmarks_source": {
+        "ground": [
+          268,
+          968
+        ],
+        "door": [
+          176,
+          963
+        ]
+      },
+      "landmarks_local": {
+        "ground": [
+          268,
+          956
+        ],
+        "door": [
+          176,
+          951
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 449301,
+        "partial_pixels": 3315,
+        "transparent_pixels": 66232,
+        "visible_bounds": [
+          21,
+          11,
+          532,
+          956
+        ]
+      }
+    },
+    {
+      "id": "facade-bar",
+      "source": "sheet",
+      "output": "sprites/facade-bar.png",
+      "crop": [
+        536,
+        272,
+        493,
+        708
+      ],
+      "size": [
+        493,
+        708
+      ],
+      "sha256": "2950466752aee2cbddcb8f2399b3285d2c7fe897b71d6cfedd076d5677fd6ee1",
+      "landmarks_source": {
+        "ground": [
+          782,
+          968
+        ],
+        "door": [
+          807,
+          963
+        ]
+      },
+      "landmarks_local": {
+        "ground": [
+          246,
+          696
+        ],
+        "door": [
+          271,
+          691
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 299303,
+        "partial_pixels": 2962,
+        "transparent_pixels": 46779,
+        "visible_bounds": [
+          8,
+          11,
+          489,
+          696
+        ]
+      }
+    },
+    {
+      "id": "facade-mural",
+      "source": "sheet",
+      "output": "sprites/facade-mural.png",
+      "crop": [
+        1029,
+        352,
+        507,
+        628
+      ],
+      "size": [
+        507,
+        628
+      ],
+      "sha256": "7098501dbe30b2dc8a07703265e633d5ea40a56904e44b02a05c2c41c2add9af",
+      "landmarks_source": {
+        "ground": [
+          1282,
+          968
+        ],
+        "door": [
+          1370,
+          963
+        ]
+      },
+      "landmarks_local": {
+        "ground": [
+          253,
+          616
+        ],
+        "door": [
+          341,
+          611
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 255770,
+        "partial_pixels": 3012,
+        "transparent_pixels": 59614,
+        "visible_bounds": [
+          11,
+          15,
+          493,
+          616
+        ]
+      }
+    }
+  ]
+}

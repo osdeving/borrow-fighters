@@ -216,6 +216,16 @@ const ABSOLUTE: &str = "/assets/adventure/art.png";
         self.write("Cargo.toml", MANIFEST.replace('path = "tests/adventure_flow.rs"\nrequired-features = ["adventure"]', 'path = "tests/adventure_flow.rs"\nrequired-features = ["fighting"]'))
         self.assert_violation("tests/adventure_flow.rs required-features must be ['adventure']")
 
+    def test_actor_lab_is_an_adventure_entrypoint_not_a_second_composition_root(self):
+        target = '\n[[bin]]\nname = "borrow-actor-lab"\npath = "src/bin/borrow-actor-lab.rs"\nrequired-features = ["adventure"]\n'
+        self.write("Cargo.toml", MANIFEST + target)
+        self.write("src/bin/borrow-actor-lab.rs", "fn main() { borrow_fighters::adventure::run(); }")
+        self.assertEqual(self.errors(), [])
+        self.write("src/bin/borrow-actor-lab.rs", "fn main() { borrow_fighters::game::run(); }")
+        self.assert_violation("adventure cannot depend on game")
+        self.write("Cargo.toml", MANIFEST + target.replace('["adventure"]', '["fighting", "adventure"]'))
+        self.assert_violation("src/bin/borrow-actor-lab.rs required-features must be ['adventure']")
+
     def test_deleted_registered_target_is_rejected(self):
         (self.root / "tests/adventure_flow.rs").unlink()
         self.assert_violation("test target missing on disk: tests/adventure_flow.rs")

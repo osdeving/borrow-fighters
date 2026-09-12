@@ -28,6 +28,7 @@ CORE = {"math", "runtime_paths"}
 DOMAINS = {"fighting", "adventure"}
 PRESENTATION = "src/presentation.rs"
 STORY_BINARY = "src/bin/borrow-story.rs"
+ACTOR_LAB_BINARY = "src/bin/borrow-actor-lab.rs"
 PRESENTATION_APIS = {"app", "cli", "config"}
 IDENT = re.compile(r"(?:r#)?[A-Za-z_][A-Za-z_0-9]*")
 
@@ -273,6 +274,8 @@ def domain_for(path: Path) -> str:
         return "presentation"
     if path.as_posix() == STORY_BINARY:
         return "presentation entrypoint"
+    if path.as_posix() == ACTOR_LAB_BINARY:
+        return "adventure"
     if path.parts[0] == "src":
         top = module_context(path)
         if top and top[0] in CORE:

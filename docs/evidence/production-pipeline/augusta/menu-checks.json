@@ -1,0 +1,129 @@
+{
+  "success": true,
+  "failure": null,
+  "checks": [
+    {
+      "name": "fresh_isolated_profiles_are_absent",
+      "passed": true
+    },
+    {
+      "name": "owned_pointer_notifications_preserve_server_focus",
+      "passed": true,
+      "server_focus": 12582919
+    },
+    {
+      "name": "owned_pointer_notifications_preserve_server_focus",
+      "passed": true,
+      "server_focus": 12582919
+    },
+    {
+      "name": "owned_pointer_notifications_preserve_server_focus",
+      "passed": true,
+      "server_focus": 12582919
+    },
+    {
+      "name": "cpp_started_without_creating_a_rust_profile",
+      "passed": true
+    },
+    {
+      "name": "owned_pointer_notifications_preserve_server_focus",
+      "passed": true,
+      "server_focus": 12582919
+    },
+    {
+      "name": "owned_pointer_notifications_preserve_server_focus",
+      "passed": true,
+      "server_focus": 12582919
+    },
+    {
+      "name": "rust_start_preserves_cpp_checkpoint",
+      "passed": true
+    },
+    {
+      "name": "owned_pointer_notifications_preserve_server_focus",
+      "passed": true,
+      "server_focus": 12582919
+    },
+    {
+      "name": "owned_pointer_notifications_preserve_server_focus",
+      "passed": true,
+      "server_focus": 12582919
+    },
+    {
+      "name": "returning_to_cpp_preserves_both_profiles",
+      "passed": true
+    },
+    {
+      "name": "profiles_have_distinct_checkpoint_schemas",
+      "passed": true
+    },
+    {
+      "name": "binary_and_text_catalog_unchanged",
+      "passed": true
+    },
+    {
+      "name": "no_x11_errors",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "captures": [
+    {
+      "file": "08-protagonists.png",
+      "expected": "Only Rust and C++ have playable chapter entries",
+      "window": 12582919,
+      "sha256": "efb5fd64ef01081d0914d850b5397dfccba908d2e62e6c7b1dc410fd001614f8",
+      "validation": "Viewed: requested menu and chapter identity are present; text fits and both Continue entries are visible."
+    },
+    {
+      "file": "10-rust-continue.png",
+      "expected": "Rust offers Continue after creating its own checkpoint",
+      "window": 12582919,
+      "sha256": "b42233f21a4f9e2d5a730f82498e158b62513edb09a43d98b1bc34e811d2aed0",
+      "validation": "Viewed: requested menu and chapter identity are present; text fits and both Continue entries are visible."
+    },
+    {
+      "file": "09-cpp-continue.png",
+      "expected": "C++ separately offers Continue after visiting Rust",
+      "window": 12582919,
+      "sha256": "0ee96e8121cb0a3406b24c2f90d6f8d20569103f9da6fd895ecab951ff5bc96f",
+      "validation": "Viewed: requested menu and chapter identity are present; text fits and both Continue entries are visible."
+    }
+  ],
+  "sessions": [
+    {
+      "case": "native-menu",
+      "pid": 723050,
+      "window": 12582919
+    }
+  ],
+  "profile": {
+    "version": 1,
+    "prologue_seen": true,
+    "prologue_played_victory": false,
+    "street_wake_tick": null,
+    "checkpoint": {
+      "version": 1,
+      "stage": "street_start",
+      "prologue_played_victory": false
+    }
+  },
+  "elapsed_seconds": 31.311,
+  "executable_sha256": "c745910ec51eed29e07c99f2793404c803a2a2d75a21c49c78d6c929516c71c8",
+  "process_exit_code": 0,
+  "input": "XSendEvent addressed to the owned PID/window; no global pointer movement",
+  "capture": "XGetImage of the owned window; unchanged source pixels",
+  "save_edits_by_harness": false,
+  "physical_gamepad_tested": false,
+  "audio_listening_performed": false,
+  "cpp_profile": {
+    "version": 1,
+    "chapter": "cpp-augusta",
+    "protagonist": "cpp",
+    "checkpoint": {
+      "version": 1,
+      "stage": "arrival"
+    }
+  },
+  "scope": "Native pointer and keyboard navigation; both saves created by the game in isolated userdata."
+}

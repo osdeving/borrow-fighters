@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "width": 3600,
+  "ground_y": 550,
+  "walk_bounds": [
+    80,
+    3520
+  ],
+  "player_spawn_x": 200,
+  "confrontation_x": 1500,
+  "guards_arena": [
+    1000,
+    2300
+  ],
+  "guards_spawn_x": [
+    1100,
+    2100,
+    2260
+  ],
+  "erratic_center_x": 1800,
+  "erratic_landings_x": [
+    1450,
+    2150
+  ],
+  "julia_initial_x": 1590,
+  "julia_x": 2850,
+  "broker_x": 1680,
+  "exit_x": 3350,
+  "pieces": [
+    {
+      "id": "frontage-0",
+      "piece": "facade-residential",
+      "position": [
+        211.20000000000002,
+        500
+      ],
+      "scale": 1,
+      "layer": 10
+    },
+    {
+      "id": "frontage-1",
+      "piece": "facade-bar",
+      "position": [
+        654.25,
+        500
+      ],
+      "scale": 1,
+      "layer": 10
+    },
+    {
+      "id": "joint-1",
+      "piece": "junction",
+      "position": [
+        442.40000000000003,
+        500
+      ],
+      "scale": 1,
+      "layer": 15
+    },
+    {
+      "id": "frontage-2",
+      "piece": "facade-mural",
+      "position": [
+        1084.25,
+        500
+      ],
+      "scale": 1,
+      "layer": 10
+    },
+    {
+      "id": "joint-2",
+      "piece": "junction",
+      "position": [
+        866.1,
+        500
+      ],
+      "scale": 1,
+      "layer": 15
+    },
+    {
+      "id": "frontage-3",
+      "piece": "facade-bar",
+      "position": [
+        1514.25,
+        500
+      ],
+      "scale": 1,
+      "layer": 10
+    },
+    {
+      "id": "joint-3",
+      "piece": "junction",
+      "position": [
+        1302.4,
+        500
+      ],
+      "scale": 1,
+      "layer": 15
+    },
+    {
+      "id": "frontage-4",
+      "piece": "facade-residential",
+      "position": [
+        1957.3000000000002,
+        500
+      ],
+      "scale": 1,
+      "layer": 10
+    },
+    {
+      "id": "joint-4",
+      "piece": "junction",
+      "position": [
+        1726.1000000000001,
+        500
+      ],
+      "scale": 1,
+      "layer": 15
+    },
+    {
+      "id": "frontage-5",
+      "piece": "facade-mural",
+      "position": [
+        2406.65,
+        500
+      ],
+      "scale": 1,
+      "layer": 10
+    },
+    {
+      "id": "joint-5",
+      "piece": "junction",
+      "position": [
+        2188.5,
+        500
+      ],
+      "scale": 1,
+      "layer": 15
+    },
+    {
+      "id": "frontage-6",
+      "piece": "facade-bar",
+      "position": [
+        2836.65,
+        500
+      ],
+      "scale": 1,
+      "layer": 10
+    },
+    {
+      "id": "joint-6",
+      "piece": "junction",
+      "position": [
+        2624.8,
+        500
+      ],
+      "scale": 1,
+      "layer": 15
+    },
+    {
+      "id": "frontage-7",
+      "piece": "facade-mural",
+      "position": [
+        3266.65,
+        500
+      ],
+      "scale": 1,
+      "layer": 10
+    },
+    {
+      "id": "joint-7",
+      "piece": "junction",
+      "position": [
+        3048.5,
+        500
+      ],
+      "scale": 1,
+      "layer": 15
+    },
+    {
+      "id": "frontage-8",
+      "piece": "facade-residential",
+      "position": [
+        3716.0,
+        500
+      ],
+      "scale": 1,
+      "layer": 10
+    },
+    {
+      "id": "joint-8",
+      "piece": "junction",
+      "position": [
+        3484.8,
+        500
+      ],
+      "scale": 1,
+      "layer": 15
+    }
+  ]
+}

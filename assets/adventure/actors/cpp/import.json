@@ -1,0 +1,386 @@
+{
+  "version": 1,
+  "metadata": "import-manifest.json",
+  "keying": "magenta",
+  "notes": "Explicit crops preserve sheet coordinates; landmarks are editable authored registration points, not inferred pose animation. No automatic trim or resizing. Magenta extraction is intended only for art without genuine purple pigment.",
+  "sources": {
+    "torso": {
+      "path": "source/torso-parts.png",
+      "sha256": "f77eb61f8a558f925b8ebba6893f668fdac32604c0a6d972b333c61866ef3401"
+    },
+    "limbs": {
+      "path": "source/limb-parts.png",
+      "sha256": "2008a904c34c19b9f0dadeb328f7e4f5d5be5cc4dca0a6075822df25f915a0ae"
+    }
+  },
+  "exports": [
+    {
+      "id": "body-quarter",
+      "source": "torso",
+      "crop": [
+        0,
+        144,
+        390,
+        704
+      ],
+      "output": "sprites/body-quarter.png",
+      "landmarks": {
+        "pelvis": [
+          235,
+          760
+        ],
+        "shoulder_near": [
+          98,
+          423
+        ],
+        "shoulder_far": [
+          310,
+          408
+        ],
+        "hip_near": [
+          310,
+          784
+        ],
+        "hip_far": [
+          171,
+          784
+        ],
+        "neck": [
+          228,
+          337
+        ],
+        "bag": [
+          135,
+          699
+        ]
+      }
+    },
+    {
+      "id": "body-profile",
+      "source": "torso",
+      "crop": [
+        390,
+        144,
+        346,
+        704
+      ],
+      "output": "sprites/body-profile.png",
+      "landmarks": {
+        "pelvis": [
+          598,
+          760
+        ],
+        "shoulder_near": [
+          559,
+          425
+        ],
+        "shoulder_far": [
+          643,
+          410
+        ],
+        "hip_near": [
+          611,
+          784
+        ],
+        "hip_far": [
+          552,
+          784
+        ],
+        "neck": [
+          608,
+          337
+        ],
+        "bag": [
+          605,
+          699
+        ]
+      }
+    },
+    {
+      "id": "body-rear-quarter",
+      "source": "torso",
+      "crop": [
+        740,
+        144,
+        376,
+        704
+      ],
+      "output": "sprites/body-rear-quarter.png",
+      "landmarks": {
+        "pelvis": [
+          961,
+          760
+        ],
+        "shoulder_near": [
+          1059,
+          433
+        ],
+        "shoulder_far": [
+          860,
+          423
+        ],
+        "hip_near": [
+          1021,
+          784
+        ],
+        "hip_far": [
+          902,
+          784
+        ],
+        "neck": [
+          996,
+          337
+        ],
+        "bag": [
+          1023,
+          699
+        ]
+      }
+    },
+    {
+      "id": "body-back",
+      "source": "torso",
+      "crop": [
+        1144,
+        144,
+        380,
+        704
+      ],
+      "output": "sprites/body-back.png",
+      "landmarks": {
+        "pelvis": [
+          1336,
+          760
+        ],
+        "shoulder_near": [
+          1477,
+          441
+        ],
+        "shoulder_far": [
+          1184,
+          441
+        ],
+        "hip_near": [
+          1412,
+          784
+        ],
+        "hip_far": [
+          1255,
+          784
+        ],
+        "neck": [
+          1340,
+          337
+        ],
+        "bag": [
+          1454,
+          699
+        ]
+      }
+    },
+    {
+      "id": "leg-front",
+      "source": "limbs",
+      "crop": [
+        104,
+        12,
+        192,
+        560
+      ],
+      "output": "sprites/leg-front.png",
+      "landmarks": {
+        "hip": [
+          224,
+          64
+        ],
+        "knee": [
+          189,
+          313
+        ],
+        "ankle": [
+          159,
+          542
+        ]
+      }
+    },
+    {
+      "id": "leg-profile",
+      "source": "limbs",
+      "crop": [
+        492,
+        12,
+        168,
+        560
+      ],
+      "output": "sprites/leg-profile.png",
+      "landmarks": {
+        "hip": [
+          575,
+          57
+        ],
+        "knee": [
+          581,
+          307
+        ],
+        "ankle": [
+          568,
+          542
+        ]
+      }
+    },
+    {
+      "id": "upper-arm",
+      "source": "limbs",
+      "crop": [
+        846,
+        58,
+        192,
+        460
+      ],
+      "output": "sprites/upper-arm.png",
+      "landmarks": {
+        "shoulder": [
+          955,
+          123
+        ],
+        "elbow": [
+          949,
+          467
+        ]
+      }
+    },
+    {
+      "id": "forearm",
+      "source": "limbs",
+      "crop": [
+        1274,
+        64,
+        148,
+        468
+      ],
+      "output": "sprites/forearm.png",
+      "landmarks": {
+        "elbow": [
+          1338,
+          101
+        ],
+        "wrist": [
+          1348,
+          353
+        ],
+        "grip": [
+          1350,
+          452
+        ]
+      }
+    },
+    {
+      "id": "boot-profile",
+      "source": "limbs",
+      "crop": [
+        58,
+        612,
+        324,
+        332
+      ],
+      "output": "sprites/boot-profile.png",
+      "landmarks": {
+        "ankle": [
+          149,
+          685
+        ],
+        "heel": [
+          101,
+          907
+        ],
+        "toe": [
+          328,
+          907
+        ],
+        "sole": [
+          221,
+          925
+        ]
+      }
+    },
+    {
+      "id": "boot-front",
+      "source": "limbs",
+      "crop": [
+        487,
+        598,
+        172,
+        356
+      ],
+      "output": "sprites/boot-front.png",
+      "landmarks": {
+        "ankle": [
+          571,
+          662
+        ],
+        "heel": [
+          541,
+          930
+        ],
+        "toe": [
+          602,
+          930
+        ],
+        "sole": [
+          573,
+          938
+        ]
+      }
+    },
+    {
+      "id": "boot-back",
+      "source": "limbs",
+      "crop": [
+        860,
+        595,
+        168,
+        360
+      ],
+      "output": "sprites/boot-back.png",
+      "landmarks": {
+        "ankle": [
+          946,
+          663
+        ],
+        "heel": [
+          915,
+          932
+        ],
+        "toe": [
+          981,
+          932
+        ],
+        "sole": [
+          946,
+          940
+        ]
+      }
+    },
+    {
+      "id": "bag",
+      "source": "limbs",
+      "crop": [
+        1211,
+        580,
+        256,
+        380
+      ],
+      "output": "sprites/bag.png",
+      "landmarks": {
+        "strap": [
+          1352,
+          614
+        ],
+        "center": [
+          1339,
+          820
+        ]
+      }
+    }
+  ]
+}

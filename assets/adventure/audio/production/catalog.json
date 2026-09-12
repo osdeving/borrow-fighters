@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "provenance": "Original deterministic synthesis; tools/audio/generate_production_audio.py",
+  "ambience": {
+    "file": "street-loop.wav",
+    "volume": 0.45
+  },
+  "effects": {
+    "swish": {
+      "file": "swish.wav",
+      "volume": 0.35
+    },
+    "impact": {
+      "file": "impact.wav",
+      "volume": 0.58
+    },
+    "parry": {
+      "file": "parry.wav",
+      "volume": 0.45
+    },
+    "projectile": {
+      "file": "projectile.wav",
+      "volume": 0.5
+    },
+    "landing": {
+      "file": "landing.wav",
+      "volume": 0.7
+    }
+  }
+}

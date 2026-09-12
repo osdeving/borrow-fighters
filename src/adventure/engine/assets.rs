@@ -1,4 +1,4 @@
-//! Loads the adventure's illustrations, typography and visual-only Rust atlas.
+//! Loads shared adventure resources separately from prologue-only illustrations.
 //!
 //! System: Adventure presentation. This small catalog never reads fighting
 //! manifests, boxes, character selection or gameplay tuning.
@@ -6,32 +6,27 @@
 use raylib::core::{AsRawMut, text::RaylibFont};
 use raylib::prelude::*;
 use serde::Deserialize;
-use std::{error::Error, fs};
+use std::{
+    error::Error,
+    fs,
+    ops::{Deref, DerefMut},
+};
 
 use crate::{adventure::text::TextCatalog, runtime_paths::asset_path};
 
-/// Assets exclusively owned by the adventure executable.
-pub struct Assets {
+/// Resources used by both Rust's playable chapter and the prologue street.
+/// This package has no dependency on Ada, the bedroom or opening biographies.
+pub struct SharedAssets {
     /// Modular facades and distant parallax with external world composition.
     pub landscape: super::landscape::LandscapeAssets,
     /// Shared walking and kick clips with editable stride and support anchors.
     pub locomotion: super::locomotion::LocomotionAssets,
-    /// Independent imagery for the newspaper/character/title presentation.
-    pub opening: super::opening::OpeningAssets,
     /// Editable on-disk narrative and interface copy.
     pub text: TextCatalog,
-    /// Six chronological illustrations of Ada's first contact.
-    pub ada: Texture2D,
-    /// Twelve waking and compassionate poses of Rust.
-    pub morning: Texture2D,
-    /// Bedroom and street, arranged vertically.
-    pub environments: Texture2D,
     /// Replaceable actors and props, with a separate scene composition.
     pub street: super::pieces::StreetPieces,
     /// Eight poses of the original erratic creature.
     pub erratic: Texture2D,
-    /// Transparent-pixel bounds within each waking pose.
-    pub morning_bounds: Vec<Rectangle>,
     /// Transparent-pixel bounds within each creature pose.
     pub erratic_bounds: Vec<Rectangle>,
     /// Sixteen actions authored for this adventure, matching the morning.
@@ -46,7 +41,7 @@ pub struct Assets {
     pub signage: Font,
 }
 
-impl Assets {
+impl SharedAssets {
     /// Loads required assets, returning a useful error instead of silently substituting art.
     pub fn load(
         rl: &mut RaylibHandle,
@@ -82,14 +77,9 @@ impl Assets {
         Ok(Self {
             landscape: super::landscape::LandscapeAssets::load(rl, thread)?,
             locomotion: super::locomotion::LocomotionAssets::load(rl, thread)?,
-            opening: super::opening::OpeningAssets::load(rl, thread, &text)?,
             text,
-            ada: texture(rl, thread, "ada-prologue.png")?,
-            morning: texture(rl, thread, "rust-morning.png")?,
-            environments: texture(rl, thread, "prologue-environments.png")?,
             street: super::pieces::StreetPieces::load(rl, thread)?,
             erratic: texture(rl, thread, "erratic.png")?,
-            morning_bounds: pose_bounds("rust-morning-poses.json", 12)?,
             erratic_bounds: pose_bounds("erratic-poses.json", 8)?,
             actions: texture(rl, thread, "rust-actions.png")?,
             action_bounds: pose_bounds("rust-actions-poses.json", 16)?,
@@ -97,6 +87,56 @@ impl Assets {
             title,
             signage,
         })
+    }
+}
+
+/// Full prologue session. The chapter owns only `SharedAssets`, so entering it
+/// cannot load the bedroom, Ada or the opening montage through this constructor.
+pub struct Assets {
+    pub common: SharedAssets,
+    /// Independent imagery for the newspaper/character/title presentation.
+    pub opening: super::opening::OpeningAssets,
+    /// Six chronological illustrations of Ada's first contact.
+    pub ada: Texture2D,
+    /// Twelve waking and compassionate poses, used only by the prologue.
+    pub morning: Texture2D,
+    /// Bedroom and original street, arranged vertically.
+    pub environments: Texture2D,
+    /// Transparent-pixel bounds within each waking and compassionate pose.
+    pub morning_bounds: Vec<Rectangle>,
+}
+
+impl Assets {
+    /// Loads the shared street resources plus the complete prologue presentation.
+    pub fn load(
+        rl: &mut RaylibHandle,
+        thread: &RaylibThread,
+        text: TextCatalog,
+    ) -> Result<Self, Box<dyn Error>> {
+        let common = SharedAssets::load(rl, thread, text)?;
+        let opening = super::opening::OpeningAssets::load(rl, thread, &common.text)?;
+        Ok(Self {
+            common,
+            opening,
+            ada: texture(rl, thread, "ada-prologue.png")?,
+            morning: texture(rl, thread, "rust-morning.png")?,
+            environments: texture(rl, thread, "prologue-environments.png")?,
+            morning_bounds: pose_bounds("rust-morning-poses.json", 12)?,
+        })
+    }
+}
+
+// Compatibility for existing prologue renderers. New shared consumers accept
+// SharedAssets explicitly; this does not make prologue resources optional.
+impl Deref for Assets {
+    type Target = SharedAssets;
+    fn deref(&self) -> &Self::Target {
+        &self.common
+    }
+}
+impl DerefMut for Assets {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.common
     }
 }
 

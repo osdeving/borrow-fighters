@@ -5,7 +5,7 @@
 
 use raylib::prelude::*;
 
-use super::{assets::Assets, pieces::PiecePose};
+use super::{assets::SharedAssets, pieces::PiecePose};
 use crate::adventure::{
     ambient::{
         AmbientState, BICYCLE_FALL_TICK, CYCLIST_DISMOUNT_TICKS, CYCLIST_RUN_TICK, CyclistPhase,
@@ -18,7 +18,7 @@ const PAPER: Color = Color::new(243, 226, 189, 255);
 const INK: Color = Color::new(46, 61, 56, 255);
 
 /// Composes scenery behind Rust and the erratic, with separated feet baselines.
-pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &Assets, camera: f32) {
+pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &SharedAssets, camera: f32) {
     draw_layers(d, ambient, a, camera, true);
 }
 
@@ -26,7 +26,7 @@ pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &Assets, camera:
 pub fn draw_without_neighbours(
     d: &mut impl RaylibDraw,
     ambient: &AmbientState,
-    a: &Assets,
+    a: &SharedAssets,
     camera: f32,
 ) {
     draw_layers(d, ambient, a, camera, false);
@@ -35,7 +35,7 @@ pub fn draw_without_neighbours(
 fn draw_layers(
     d: &mut impl RaylibDraw,
     ambient: &AmbientState,
-    a: &Assets,
+    a: &SharedAssets,
     camera: f32,
     neighbours: bool,
 ) {
@@ -129,7 +129,7 @@ fn draw_layers(
     }
 }
 
-fn props(d: &mut impl RaylibDraw, a: &Assets, offset: f32) {
+fn props(d: &mut impl RaylibDraw, a: &SharedAssets, offset: f32) {
     for prop in &a.street.layout.props {
         let mut pose = PiecePose::at(Vector2::new(prop.position[0] - offset, prop.position[1]));
         pose.scale = prop.scale;
@@ -156,7 +156,7 @@ fn props(d: &mut impl RaylibDraw, a: &Assets, offset: f32) {
     }
 }
 
-fn child(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &Assets, offset: f32) {
+fn child(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &SharedAssets, offset: f32) {
     let id = match ambient.kid_phase() {
         KidPhase::Playing => "kid.play",
         KidPhase::Startled => "kid.startled",

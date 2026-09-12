@@ -21,6 +21,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[2]
 CHARACTERS = ("rust", "duke", "go", "c", "python", "cpp")
 SOURCE_BINARY = "borrow-story"
+LAB_BINARY = "borrow-actor-lab"
 TARGETS = {
     "windows-x86_64": "x86_64-pc-windows-msvc",
     "linux-x86_64": "x86_64-unknown-linux-gnu",
@@ -137,12 +138,92 @@ def adventure_assets():
                                source.read_text(encoding="utf-8")):
             catalogs.add(ROOT / name)
     for catalog in catalogs:
+        if catalog == base / "audio/production/catalog.json":
+            # This catalog contains sound samples; the production closure below
+            # follows its file fields rather than treating it as a sprite atlas.
+            continue
         files.update(adventure_piece_assets(catalog))
     for name in ("fonts/BARLOW-OFL.txt", "fonts/LORA-OFL.txt", "fonts/README.md",
                  "audio/README.md", "texts/README.md", "ART-PROVENANCE.md",
                  "opening/ART-PROVENANCE.md", "street/README.md",
                  "chapter/README.md", "chapter/DRIVER.md", "chapter/audio/README.md"):
         files.add(asset_file(base / name))
+    return files
+
+
+def production_file(directory, name, suffix):
+    """Mirror production package containment without collecting authoring data."""
+    if (not isinstance(name, str) or not name.endswith(suffix)
+            or "\\" in name or ":" in name
+            or any(part in ("", ".", "..") for part in name.split("/"))):
+        raise ValueError(f"Production resource must use a relative local {suffix}: {name}")
+    if {"source", "sources", "review", "reviews", "prompts"} & set(name.split("/")):
+        raise ValueError(f"Production runtime reference points to authoring material: {name}")
+    file = asset_file(directory / name)
+    if not within(file, directory.resolve()):
+        raise ValueError(f"Production resource outside its package: {name}")
+    return file
+
+
+def production_assets():
+    """Follow campaign/chapter/actor/audio fields, never whole asset directories.
+
+    Rust retains its legacy loader. Independent chapter ids name their package
+    directory; the campaign's typed routes remain the runtime authority. The
+    external lab defaults to C++, while custom --actor paths are user content.
+    """
+    base = ROOT / "assets/adventure"
+    files = set()
+
+    def document(path):
+        files.add(path)
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as error:
+            raise ValueError(f"Invalid production JSON {path}: {error}") from error
+        if not isinstance(data, dict):
+            raise ValueError(f"Production JSON must be an object: {path}")
+        return data
+
+    def attachments(directory, entries):
+        for attachment in entries.values():
+            files.add(production_file(directory, attachment["image"], ".png"))
+
+    def actor(path):
+        if path in files:
+            return
+        spec = document(path)
+        directory = path.parent
+        document(production_file(directory, spec["combat"], ".json"))
+        document(production_file(directory, spec["clips"], ".json"))
+        rig = document(production_file(directory, spec["rig"], ".json"))
+        attachments(directory, rig["attachments"])
+
+    try:
+        registry = document(production_file(base, "campaign.json", ".json"))
+        document(production_file(base, "production-lab.json", ".json"))
+        actor(production_file(base, "actors/cpp/character.json", ".json"))
+        for entry in registry["chapters"]:
+            identifier = entry["id"]
+            if identifier == "rust":
+                continue
+            if not isinstance(identifier, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identifier):
+                raise ValueError(f"Invalid production chapter id: {identifier}")
+            path = production_file(base, f"chapters/{identifier}/chapter.json", ".json")
+            spec = document(path)
+            directory = path.parent
+            document(production_file(directory, spec["world"], ".json"))
+            document(production_file(directory, spec["texts"], ".json"))
+            art = document(production_file(directory, spec["art"], ".json"))
+            attachments(directory, art["pieces"])
+            for name in art["actors"].values():
+                actor(production_file(base, name, ".json"))
+        audio_path = production_file(base, "audio/production/catalog.json", ".json")
+        audio = document(audio_path)
+        for sample in [audio["ambience"], *audio["effects"].values()]:
+            files.add(production_file(audio_path.parent, sample["file"], ".wav"))
+    except (KeyError, TypeError, AttributeError) as error:
+        raise ValueError(f"Malformed production dependency descriptor: {error}") from error
     return files
 
 
@@ -173,6 +254,7 @@ def runtime_assets():
             files.update(asset_file(ROOT / value) for value in string_values(data)
                          if value.startswith("assets/"))
     files.update(adventure_assets())
+    files.update(production_assets())
     # Fonts are embedded in the executable, but their notices must travel with it.
     for name in ("BARLOW-OFL.txt", "LORA-OFL.txt", "README.md"):
         files.add(asset_file(ROOT / "assets/fonts" / name))
@@ -238,14 +320,24 @@ def stage_package(args):
     source_name = SOURCE_BINARY + (".exe" if args.target == "windows-x86_64" else "")
     if args.binary.name != source_name:
         raise ValueError(f"Release requires the composed Cargo binary {source_name}: {args.binary}")
+    lab_binary = getattr(args, "lab_binary", None)
+    lab_executable = LAB_BINARY + ".exe" if args.target == "windows-x86_64" else "bin/" + LAB_BINARY
+    if lab_binary is not None:
+        expected_lab = LAB_BINARY + (".exe" if args.target == "windows-x86_64" else "")
+        if lab_binary.name != expected_lab:
+            raise ValueError(f"Production lab requires Cargo binary {expected_lab}: {lab_binary}")
+        lab_binary = lab_binary.resolve(strict=True)
+    assets = runtime_assets()
     stage = args.output.resolve()
     if stage.exists() and any(stage.iterdir()):
         raise ValueError(f"Stage destination must be empty: {stage}")
     stage.mkdir(parents=True, exist_ok=True)
     executable = "borrow-fighters.exe" if args.target == "windows-x86_64" else "bin/borrow-fighters"
     copy(args.binary.resolve(strict=True), stage / executable)
-    for source in runtime_assets():
+    for source in assets:
         copy(source, stage / source.relative_to(ROOT))
+    if lab_binary is not None:
+        copy(lab_binary, stage / lab_executable)
     copy(ROOT / "packaging/JOGUE-PRIMEIRO.md", stage / "JOGUE-PRIMEIRO.md")
     for license_file in ROOT.glob("LICENSE*"):
         if license_file.is_file():
@@ -254,13 +346,19 @@ def stage_package(args):
         copy(ROOT / "packaging/linux/borrow-fighters", stage / "borrow-fighters")
         (stage / "borrow-fighters").chmod(0o755)
         (stage / executable).chmod(0o755)
+        if lab_binary is not None:
+            copy(ROOT / "packaging/linux/borrow-actor-lab", stage / LAB_BINARY)
+            (stage / LAB_BINARY).chmod(0o755)
+            (stage / lab_executable).chmod(0o755)
     rust_notices(stage, args.target)
     (stage / "BUILD-INFO.json").write_text(json.dumps({
         "version": args.version, "target": args.target,
         "cargo_binary": SOURCE_BINARY,
+        "tools": ([{"cargo_binary": LAB_BINARY, "path": lab_executable}]
+                  if lab_binary is not None else []),
         "commit": run("git", "rev-parse", "HEAD"),
         "rustc": run("rustc", "--version"),
-        "asset_count": len(runtime_assets()),
+        "asset_count": len(assets),
     }, indent=2) + "\n", encoding="utf-8")
     checksums(stage)
     validate_assets(stage)
@@ -280,6 +378,12 @@ def validate_build_info(stage, target, version):
         raise ValueError(f"Staging target/version differs from requested package: {build}")
     if build.get("cargo_binary") != SOURCE_BINARY:
         raise ValueError(f"Release staging must contain the {SOURCE_BINARY} composition: {build}")
+    for tool in build.get("tools", []):
+        expected = LAB_BINARY + ".exe" if target == "windows-x86_64" else "bin/" + LAB_BINARY
+        if tool != {"cargo_binary": LAB_BINARY, "path": expected}:
+            raise ValueError(f"Invalid staged production tool: {tool}")
+        if not (stage / expected).is_file():
+            raise ValueError(f"Missing production lab executable: {expected}")
 
 
 def ldd_libraries(binary, env=None):
@@ -359,10 +463,20 @@ def native_notices(stage, libraries, data_files=()):
                    "Libraries are dynamically linked and may be replaced in lib/.\n")
 
 
+def linux_executables(stage):
+    executables = [stage / "bin/borrow-fighters"]
+    lab = stage / "bin" / LAB_BINARY
+    if lab.is_file():
+        executables.append(lab)
+    return executables
+
+
 def linux_runtime_files(stage):
     """Resolve host runtime dependencies without copying or changing anything."""
     cache = run("ldconfig", "-p")
-    libraries = ldd_libraries(stage / "bin/borrow-fighters")
+    libraries = {}
+    for executable in linux_executables(stage):
+        libraries.update(ldd_libraries(executable))
     for soname in DLOPEN_LIBRARIES:
         found = re.search(rf"^\s*{re.escape(soname)} \(libc6,x86-64[^)]*\) => (\S+)$",
                           cache, re.MULTILINE)
@@ -416,7 +530,7 @@ def bundle_linux(stage):
 
 def validate_linux_libraries(stage):
     env = dict(os.environ, LD_LIBRARY_PATH=str(stage / "lib"))
-    for file in [stage / "bin/borrow-fighters", *sorted((stage / "lib").glob("*.so*"))]:
+    for file in [*linux_executables(stage), *sorted((stage / "lib").glob("*.so*"))]:
         for soname, resolved in ldd_libraries(file, env).items():
             if not SYSTEM_LIBRARY.match(soname) and not within(resolved, stage / "lib"):
                 raise ValueError(f"Unbundled dependency {soname} for {file}: {resolved}")
@@ -431,6 +545,10 @@ def install_tree(stage, directory):
     command.parent.mkdir(parents=True)
     command.write_text('#!/bin/sh\nexec /opt/borrow-fighters/borrow-fighters "$@"\n', encoding="utf-8")
     command.chmod(0o755)
+    if (stage / LAB_BINARY).is_file():
+        lab_command = directory / "usr/bin" / LAB_BINARY
+        lab_command.write_text('#!/bin/sh\nexec /opt/borrow-fighters/borrow-actor-lab "$@"\n', encoding="utf-8")
+        lab_command.chmod(0o755)
     copy(ROOT / "packaging/linux/borrow-fighters.desktop",
          directory / "usr/share/applications/borrow-fighters.desktop")
     copy(ROOT / "packaging/linux/borrow-fighters.svg",
@@ -520,6 +638,8 @@ def main():
     stage.add_argument("--target", choices=TARGETS, required=True)
     stage.add_argument("--binary", type=Path, required=True,
                        help="Cargo output borrow-story[.exe]; shipped as borrow-fighters[.exe]")
+    stage.add_argument("--lab-binary", type=Path,
+                       help="Optionally include the separate borrow-actor-lab[.exe] production tool")
     stage.add_argument("--output", type=Path, required=True)
     stage.set_defaults(function=stage_package)
     for name, function in (("linux", linux_packages), ("windows", windows_packages)):

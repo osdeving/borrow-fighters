@@ -103,6 +103,16 @@ para garantir perspectiva e iluminação coerentes. O mundo jogável mantém as
 peças independentes. O trilho inicial da pipa também é externo e seu corte
 entre vizinhança e Rust ocorre somente sob preto completo.
 
+A [ADR 0032](adr/0032-character-production-and-independent-chapters.md) acrescenta
+`adventure/production` com contratos de personagem, clips e combate independentes
+de Raylib, `engine/production` com carregamento/renderização comuns ao laboratório
+e capítulo, e `lab_app`/`borrow-actor-lab` para produção fora da campanha.
+`augusta` dirige a história C++ com checkpoints próprios; `campaign` oferece
+rotas implementadas sem acoplar seus saves. `SharedAssets` separa os recursos
+Rust reutilizáveis das imagens exclusivas do prólogo; C++ usa outro pacote e
+não carrega esse conjunto. A composição carrega o menu de luta sob demanda.
+[Formatos, fontes e workflow](38-cpp-augusta-production.md).
+
 ## Objetivo
 
 A [ADR 0028](adr/0028-editable-cinematic-tracks-and-destructibles.md) amplia

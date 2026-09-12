@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "algorithm": "explicit-crop-magenta-unmix-v1",
+  "imagemagick": "Version: ImageMagick 6.9.10-23 Q16 x86_64 20190101 https://imagemagick.org",
+  "recipe_sha256": "fa480042f2c1a8427006f28d0a2f5ddae07591bf2f56e805f988781bb6a22252",
+  "keying": "magenta-flat",
+  "sources": {
+    "sheet": {
+      "path": "source/npcs.png",
+      "sha256": "bb82767d423fd0722d482ca959292f47f7b47e9211adfca3937f4f055c0a9605",
+      "size": [
+        1536,
+        1024
+      ]
+    }
+  },
+  "exports": [
+    {
+      "id": "idle",
+      "source": "sheet",
+      "output": "sprites/idle.png",
+      "crop": [
+        136,
+        341,
+        224,
+        340
+      ],
+      "size": [
+        224,
+        340
+      ],
+      "sha256": "a0deddbd150580e1a1d045c183e86ef25f6f2d7558879a8065d2c5eb3e5df89b",
+      "landmarks_source": {
+        "feet": [
+          230,
+          673
+        ]
+      },
+      "landmarks_local": {
+        "feet": [
+          94,
+          332
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 26981,
+        "partial_pixels": 1658,
+        "transparent_pixels": 47521,
+        "visible_bounds": [
+          13,
+          3,
+          207,
+          334
+        ]
+      }
+    },
+    {
+      "id": "threaten",
+      "source": "sheet",
+      "output": "sprites/threaten.png",
+      "crop": [
+        628,
+        341,
+        320,
+        340
+      ],
+      "size": [
+        320,
+        340
+      ],
+      "sha256": "811bff1549fbcf5f0e4bf4070340062c08d464345d599c0b073e223c299d357e",
+      "landmarks_source": {
+        "feet": [
+          745,
+          674
+        ]
+      },
+      "landmarks_local": {
+        "feet": [
+          117,
+          333
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 31234,
+        "partial_pixels": 2097,
+        "transparent_pixels": 75469,
+        "visible_bounds": [
+          14,
+          3,
+          305,
+          334
+        ]
+      }
+    },
+    {
+      "id": "flee",
+      "source": "sheet",
+      "output": "sprites/flee.png",
+      "crop": [
+        1140,
+        341,
+        308,
+        340
+      ],
+      "size": [
+        308,
+        340
+      ],
+      "sha256": "ffa7a55c84e198386c50ed93ce03db017c9349d43f4b9c2fd5de475ec7c7ef5f",
+      "landmarks_source": {
+        "feet": [
+          1397,
+          661
+        ]
+      },
+      "landmarks_local": {
+        "feet": [
+          257,
+          320
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 30274,
+        "partial_pixels": 2072,
+        "transparent_pixels": 72374,
+        "visible_bounds": [
+          12,
+          3,
+          292,
+          331
+        ]
+      }
+    }
+  ]
+}

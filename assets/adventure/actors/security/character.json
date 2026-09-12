@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "security",
+  "name_key": "actor.security.name",
+  "combat": "combat.json",
+  "rig": "rig.json",
+  "clips": "clips.json",
+  "hp": 65,
+  "body_width": 48,
+  "hurtboxes": [
+    [
+      -28.799999999999997,
+      -170,
+      57.599999999999994,
+      170
+    ]
+  ],
+  "movement": {
+    "run_speed": 145,
+    "acceleration": 900,
+    "braking": 1400,
+    "turn_acceleration": 1600,
+    "jump_speed": 620,
+    "gravity": 1750
+  },
+  "guard": {
+    "parry_ticks": 6,
+    "parry_cooldown": 24,
+    "blockstun": 12,
+    "parry_stun": 38
+  },
+  "loadout": {
+    "light": [
+      "security.light-1"
+    ],
+    "kick": null,
+    "spin": null,
+    "linker": null
+  },
+  "ai": {
+    "attack_range": 76,
+    "cooldown_ticks": 76,
+    "initial_delay": 24
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "title": "Modo História",
+  "prompt": "Escolha uma história. O progresso de cada protagonista é independente.",
+  "start_label": "Iniciar capítulo",
+  "continue_label": "Continuar capítulo",
+  "restart_label": "Recomeçar capítulo",
+  "completed_label": "Concluído",
+  "back_label": "Voltar",
+  "prologue_label": "Rever prólogo",
+  "chapters": [
+    {
+      "id": "rust",
+      "protagonist": "Rust",
+      "title": "Depois do silêncio",
+      "summary": "Rust atravessa o bairro depois da chegada da errática e encontra pistas para sua investigação."
+    },
+    {
+      "id": "cpp-augusta",
+      "protagonist": "C++",
+      "title": "Rua Augusta",
+      "summary": "C++ protege Julia de uma ameaça humana e enfrenta duas erráticas na noite paulistana."
+    }
+  ]
+}

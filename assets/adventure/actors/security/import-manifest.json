@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "algorithm": "explicit-crop-magenta-unmix-v1",
+  "imagemagick": "Version: ImageMagick 6.9.10-23 Q16 x86_64 20190101 https://imagemagick.org",
+  "recipe_sha256": "d408431d45b1b59be53c58b39b413e908cf731ca6cc3a85d0eef81800fbe7a61",
+  "keying": "magenta-flat",
+  "sources": {
+    "sheet": {
+      "path": "source/npcs.png",
+      "sha256": "bb82767d423fd0722d482ca959292f47f7b47e9211adfca3937f4f055c0a9605",
+      "size": [
+        1536,
+        1024
+      ]
+    }
+  },
+  "exports": [
+    {
+      "id": "idle",
+      "source": "sheet",
+      "output": "sprites/idle.png",
+      "crop": [
+        80,
+        682,
+        304,
+        342
+      ],
+      "size": [
+        304,
+        342
+      ],
+      "sha256": "434607ff133ffbd90d56a3c1a9edf1bcd9c3259f9517db78ff658f11c8779554",
+      "landmarks_source": {
+        "feet": [
+          228,
+          1011
+        ]
+      },
+      "landmarks_local": {
+        "feet": [
+          148,
+          329
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 32217,
+        "partial_pixels": 1617,
+        "transparent_pixels": 70134,
+        "visible_bounds": [
+          16,
+          2,
+          287,
+          330
+        ]
+      }
+    },
+    {
+      "id": "punch",
+      "source": "sheet",
+      "output": "sprites/punch.png",
+      "crop": [
+        560,
+        682,
+        392,
+        342
+      ],
+      "size": [
+        392,
+        342
+      ],
+      "sha256": "fa99468ce7b948631523954be2c1fee0469d87af66d966c862973ac0d8b95873",
+      "landmarks_source": {
+        "feet": [
+          730,
+          1011
+        ]
+      },
+      "landmarks_local": {
+        "feet": [
+          170,
+          329
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 35534,
+        "partial_pixels": 1808,
+        "transparent_pixels": 96722,
+        "visible_bounds": [
+          16,
+          3,
+          375,
+          330
+        ]
+      }
+    },
+    {
+      "id": "down",
+      "source": "sheet",
+      "output": "sprites/down.png",
+      "crop": [
+        1096,
+        770,
+        400,
+        254
+      ],
+      "size": [
+        400,
+        254
+      ],
+      "sha256": "61aad51928d0c963d97842738e75ccd8c1cfde6e8c1d528a18f0c9ffb88b56f1",
+      "landmarks_source": {
+        "feet": [
+          1297,
+          1005
+        ]
+      },
+      "landmarks_local": {
+        "feet": [
+          201,
+          235
+        ]
+      },
+      "alpha": {
+        "opaque_pixels": 38652,
+        "partial_pixels": 1618,
+        "transparent_pixels": 61330,
+        "visible_bounds": [
+          12,
+          14,
+          387,
+          239
+        ]
+      }
+    }
+  ]
+}

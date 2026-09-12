@@ -1,0 +1,13 @@
+{
+  "actor": "/home/willams/borrow-fighters/assets/adventure/actors/cpp/character.json",
+  "clip": "idle",
+  "enemy": null,
+  "phase": 0.0,
+  "renderer": "engine::production::actors::draw_actor",
+  "requested_frames": 1080,
+  "schema_version": 1,
+  "script": "idle60/run90/stop60/reverse120/stop60/jump60/arena",
+  "simulation_hz": 60,
+  "source_snapshot": "source/player/character.json",
+  "video_fps": 60
+}

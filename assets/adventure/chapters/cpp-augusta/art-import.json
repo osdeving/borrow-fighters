@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "metadata": "art-import-manifest.json",
+  "keying": "magenta-flat",
+  "sources": {
+    "sheet": {
+      "path": "source/facades.png",
+      "sha256": "b67042c1f37a4aa91d615572889e197703a2a7b46a4e101c3730efdc4b9c80f2"
+    }
+  },
+  "exports": [
+    {
+      "id": "facade-residential",
+      "source": "sheet",
+      "crop": [
+        0,
+        12,
+        536,
+        968
+      ],
+      "output": "sprites/facade-residential.png",
+      "landmarks": {
+        "ground": [
+          268,
+          968
+        ],
+        "door": [
+          176,
+          963
+        ]
+      }
+    },
+    {
+      "id": "facade-bar",
+      "source": "sheet",
+      "crop": [
+        536,
+        272,
+        493,
+        708
+      ],
+      "output": "sprites/facade-bar.png",
+      "landmarks": {
+        "ground": [
+          782,
+          968
+        ],
+        "door": [
+          807,
+          963
+        ]
+      }
+    },
+    {
+      "id": "facade-mural",
+      "source": "sheet",
+      "crop": [
+        1029,
+        352,
+        507,
+        628
+      ],
+      "output": "sprites/facade-mural.png",
+      "landmarks": {
+        "ground": [
+          1282,
+          968
+        ],
+        "door": [
+          1370,
+          963
+        ]
+      }
+    }
+  ]
+}

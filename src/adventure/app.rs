@@ -21,7 +21,8 @@ use crate::{
 use raylib::prelude::*;
 use std::{error::Error, fs, io::Write, path::PathBuf};
 
-pub use super::chapter_app::{CampaignExit, run_in_window as run_campaign_in_window};
+pub use super::campaign_app::run_in_window as run_campaign_in_window;
+pub use super::chapter_app::CampaignExit;
 
 /// Launch configuration local to the adventure executable.
 #[derive(Clone, Default)]
@@ -60,11 +61,18 @@ impl Options {
                     options.texts = Some(args.next().ok_or("--texts requires a JSON file")?.into())
                 }
                 "--start" => {
-                    let stage = args
-                        .next()
-                        .ok_or("--start requires ada, morning, encounter, opening or chapter")?;
-                    if !["ada", "morning", "encounter", "opening", "chapter"]
-                        .contains(&stage.as_str())
+                    let stage = args.next().ok_or(
+                        "--start requires ada, morning, encounter, opening, chapter or augusta",
+                    )?;
+                    if ![
+                        "ada",
+                        "morning",
+                        "encounter",
+                        "opening",
+                        "chapter",
+                        "augusta",
+                    ]
+                    .contains(&stage.as_str())
                     {
                         return Err(format!("unknown start scene: {stage}").into());
                     }
@@ -81,7 +89,7 @@ impl Options {
                 "--hidden" => options.hidden = true,
                 "--help" | "-h" => {
                     println!(
-                        "Borrow — primeiras linhas\n\ncargo run --no-default-features --features adventure --bin borrow-adventure\n\n--start ada|morning|encounter|opening|chapter  Developer scene entry\n--review DIR                 Deterministic renderer review + MP4\n--capture DIR                Record actual play + frame snapshots\n--texts PATH                 Editable UTF-8 JSON catalog\n--frames N                   Exit after N rendered frames\n--mute                       Disable audio device\n--hidden                     Hidden window for isolated review\n\nA/D/arrows move; Space/W jump; J/F attack; K/H strong; V/RT kick; Q/L guard.\nChapter: E/A interacts; Space/B jumps; Enter/RB advances dialogue.\nOpening: Enter/RB advances one segment; Backspace/View skips to the menu.\nEsc/Start pauses; R retries a lost encounter; F3 shows collision; F12 saves a screenshot."
+                        "Borrow — primeiras linhas\n\ncargo run --no-default-features --features adventure --bin borrow-adventure\n\n--start ada|morning|encounter|opening|chapter|augusta  Developer scene entry\n--review DIR                 Deterministic renderer review + MP4\n--capture DIR                Record actual play + frame snapshots\n--texts PATH                 Editable UTF-8 JSON catalog\n--frames N                   Exit after N rendered frames\n--mute                       Disable audio device\n--hidden                     Hidden window for isolated review\n\nA/D/arrows move; Space/W jump; J/F attack; K/H strong; V/RT kick; Q/L guard.\nChapter: E/A interacts; Space/B jumps; Enter/RB advances dialogue.\nAugusta: J light; V kick; K spin; L Linker; Q/LB guard.\nOpening: Enter/RB advances one segment; Backspace/View skips to the menu.\nEsc/Start pauses; R retries a lost encounter; F3 shows collision; F12 saves a screenshot."
                     );
                     return Ok(None);
                 }
@@ -120,7 +128,7 @@ impl Options {
 
     /// Distinguishes a direct chapter CLI from the hosted campaign submenu.
     pub fn is_chapter(&self) -> bool {
-        self.start.as_deref() == Some("chapter")
+        matches!(self.start.as_deref(), Some("chapter" | "augusta"))
     }
 }
 
@@ -309,7 +317,11 @@ fn run_session(
             if rl.is_key_pressed(KeyboardKey::KEY_F5) {
                 let result = assets.text.reload();
                 let ep_result = story.ep_arrival.reload();
-                let biography_result = assets.opening.biographies.reload(rl, thread, &assets.text);
+                let biography_result =
+                    assets
+                        .opening
+                        .biographies
+                        .reload(rl, thread, &assets.common.text);
                 let motion_result = assets.locomotion.reload(rl, thread);
                 let ok = result.is_ok()
                     && ep_result.is_ok()
@@ -944,6 +956,11 @@ mod tests {
             "a normal campaign request must open its submenu"
         );
         assert!(Options::chapter().is_chapter());
+        let augusta = Options::parse(["game", "--start", "augusta", "--hidden"].map(str::to_owned))
+            .unwrap()
+            .unwrap();
+        assert!(augusta.is_chapter() && augusta.hidden_window());
+        assert_eq!(augusta.start.as_deref(), Some("augusta"));
         assert_eq!(Options::prologue().start.as_deref(), Some("ada"));
     }
 

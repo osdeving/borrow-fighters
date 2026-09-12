@@ -46,7 +46,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
             "Borrow Fighters — história e menu\n\n\
              cargo run\n\n\
              --menu                    Open the main menu directly\n\
-             --start ada|morning|encounter|opening|chapter\n\
+             --start ada|morning|encounter|opening|chapter|augusta\n\
                                        Explicit scene or chapter checkpoint entry\n\
              --texts PATH              Editable adventure text (F5 reload)\n\
              --capture DIR / --review DIR\n\
@@ -70,10 +70,9 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
     let (mut window, thread) = builder.build();
     window.set_exit_key(None);
     window.show_cursor();
-    // Prepare fighting textures before Ada starts, so the final fade never
-    // waits for the roster's large atlases. The opaque menu owns its resources;
-    // adventure cannot see them, and its audio device still runs independently.
-    let mut menu = App::prepare_main_menu(&mut window, &thread);
+    // Direct chapter entry loads only its own production content. Fighting's
+    // roster is acquired lazily when the player actually opens the main menu.
+    let mut menu = None;
     let seen = if matches!(entry, Entry::Automatic(_)) {
         match adventure::prologue_seen() {
             Ok(seen) => seen,
@@ -97,8 +96,15 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
         flow = match flow {
             Flow::Menu => {
                 show_window(&mut window, &thread);
-                match menu.run_hosted(&mut window, &thread) {
-                    MenuExit::Story => Flow::Campaign(Options::default()),
+                let hosted_menu =
+                    menu.get_or_insert_with(|| App::prepare_main_menu(&mut window, &thread));
+                match hosted_menu.run_hosted(&mut window, &thread) {
+                    MenuExit::Story => {
+                        // Fighting's retained atlases are unnecessary while a
+                        // selected protagonist owns the chapter window.
+                        menu = None;
+                        Flow::Campaign(Options::default())
+                    }
                     MenuExit::Closed => break,
                 }
             }
@@ -264,8 +270,10 @@ mod tests {
                 let explicit = Entry::parse(arguments.into_iter().map(str::to_owned)).unwrap();
                 assert!(matches!(initial_flow(explicit, seen), Flow::Prologue(_)));
             }
-            let chapter = Entry::parse(["story", "--start", "chapter"].map(str::to_owned)).unwrap();
-            assert!(matches!(initial_flow(chapter, seen), Flow::Campaign(_)));
+            for id in ["chapter", "augusta"] {
+                let chapter = Entry::parse(["story", "--start", id].map(str::to_owned)).unwrap();
+                assert!(matches!(initial_flow(chapter, seen), Flow::Campaign(_)));
+            }
         }
     }
 }

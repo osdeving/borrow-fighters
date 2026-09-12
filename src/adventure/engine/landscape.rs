@@ -4,7 +4,7 @@
 //! physical map length never changes a texture's scale or a facade's ground socket.
 
 use super::{
-    assets::Assets,
+    assets::SharedAssets,
     pieces::{PiecePose, StreetPieces},
 };
 use crate::{adventure::landscape::Landscape, runtime_paths::asset_path};
@@ -81,7 +81,7 @@ pub struct View {
 }
 
 /// Draws road, pavement, distant hills and individually grounded building pieces.
-pub fn draw(d: &mut impl RaylibDraw, a: &Assets, scene: &str, width: f32, view: View) {
+pub fn draw(d: &mut impl RaylibDraw, a: &SharedAssets, scene: &str, width: f32, view: View) {
     let art = &a.landscape;
     let source = Rectangle::new(
         0.0,

@@ -25,6 +25,11 @@ path = "src/bin/borrow-adventure.rs"
 required-features = ["adventure"]
 
 [[bin]]
+name = "borrow-actor-lab"
+path = "src/bin/borrow-actor-lab.rs"
+required-features = ["adventure"]
+
+[[bin]]
 name = "borrow-story"
 path = "src/bin/borrow-story.rs"
 required-features = ["fighting", "adventure"]

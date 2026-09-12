@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "tick_hz": 60,
+  "moves": [
+    {
+      "id": "cpp.light-1",
+      "animation_id": "light-1",
+      "startup": 6,
+      "active": 4,
+      "recovery": 14,
+      "damage": 12,
+      "hitstun": 18,
+      "knockback": 90,
+      "hitstop": 3,
+      "hitboxes": [
+        {
+          "start": 6,
+          "end": 10,
+          "rect": [
+            16,
+            -136,
+            70,
+            70
+          ]
+        }
+      ],
+      "hurtboxes": [],
+      "combo_next": "cpp.light-2",
+      "combo_window": [
+        10,
+        24
+      ],
+      "projectile": null
+    },
+    {
+      "id": "cpp.light-2",
+      "animation_id": "light-2",
+      "startup": 7,
+      "active": 4,
+      "recovery": 15,
+      "damage": 14,
+      "hitstun": 20,
+      "knockback": 100,
+      "hitstop": 3,
+      "hitboxes": [
+        {
+          "start": 7,
+          "end": 11,
+          "rect": [
+            18,
+            -142,
+            78,
+            74
+          ]
+        }
+      ],
+      "hurtboxes": [],
+      "combo_next": "cpp.light-3",
+      "combo_window": [
+        11,
+        26
+      ],
+      "projectile": null
+    },
+    {
+      "id": "cpp.light-3",
+      "animation_id": "light-3",
+      "startup": 9,
+      "active": 5,
+      "recovery": 20,
+      "damage": 22,
+      "hitstun": 28,
+      "knockback": 180,
+      "hitstop": 4,
+      "hitboxes": [
+        {
+          "start": 9,
+          "end": 14,
+          "rect": [
+            16,
+            -146,
+            90,
+            82
+          ]
+        }
+      ],
+      "hurtboxes": [],
+      "combo_next": null,
+      "combo_window": null,
+      "projectile": null
+    },
+    {
+      "id": "cpp.kick",
+      "animation_id": "kick",
+      "startup": 9,
+      "active": 6,
+      "recovery": 20,
+      "damage": 22,
+      "hitstun": 25,
+      "knockback": 190,
+      "hitstop": 4,
+      "hitboxes": [
+        {
+          "start": 9,
+          "end": 15,
+          "rect": [
+            18,
+            -126,
+            104,
+            70
+          ]
+        }
+      ],
+      "hurtboxes": [],
+      "combo_next": null,
+      "combo_window": null,
+      "projectile": null
+    },
+    {
+      "id": "cpp.spin",
+      "animation_id": "spin",
+      "startup": 12,
+      "active": 8,
+      "recovery": 26,
+      "damage": 24,
+      "hitstun": 28,
+      "knockback": 160,
+      "hitstop": 4,
+      "hitboxes": [
+        {
+          "start": 12,
+          "end": 20,
+          "rect": [
+            -110,
+            -140,
+            220,
+            90
+          ]
+        }
+      ],
+      "hurtboxes": [],
+      "combo_next": null,
+      "combo_window": null,
+      "projectile": null
+    },
+    {
+      "id": "cpp.linker",
+      "animation_id": "linker",
+      "startup": 16,
+      "active": 1,
+      "recovery": 23,
+      "damage": 18,
+      "hitstun": 20,
+      "knockback": 100,
+      "hitstop": 3,
+      "hitboxes": [],
+      "hurtboxes": [],
+      "combo_next": null,
+      "combo_window": null,
+      "projectile": {
+        "spawn_tick": 16,
+        "offset": [
+          50,
+          -110
+        ],
+        "velocity": [
+          650,
+          0
+        ],
+        "rect": [
+          -12,
+          -10,
+          24,
+          20
+        ],
+        "life_ticks": 120,
+        "visual_id": "linker"
+      }
+    }
+  ]
+}

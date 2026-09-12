@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "tick_hz": 60,
+  "moves": [
+    {
+      "id": "erratic.light-1",
+      "animation_id": "light-1",
+      "startup": 16,
+      "active": 7,
+      "recovery": 26,
+      "damage": 16,
+      "hitstun": 25,
+      "knockback": 145,
+      "hitstop": 3,
+      "hitboxes": [
+        {
+          "start": 16,
+          "end": 23,
+          "rect": [
+            10,
+            -148,
+            92,
+            88
+          ]
+        }
+      ],
+      "hurtboxes": [],
+      "combo_next": null,
+      "combo_window": null,
+      "projectile": null
+    }
+  ]
+}

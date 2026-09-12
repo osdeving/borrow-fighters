@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "id": "cpp-augusta",
+  "protagonist": "cpp",
+  "title_key": "chapter.title",
+  "summary_key": "chapter.summary",
+  "world": "world.json",
+  "texts": "texts.json",
+  "art": "world-art.json",
+  "timing": {
+    "introduction_ticks": 180,
+    "guards_arrival_ticks": 100,
+    "erratics_arrival_ticks": 70,
+    "broker_escape_ticks": 150
+  }
+}

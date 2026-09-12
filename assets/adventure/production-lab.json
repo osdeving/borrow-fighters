@@ -1,0 +1,18 @@
+{
+  "title": "Borrow Fighters · Laboratório de personagens",
+  "preview": "Inspeção de animação",
+  "arena": "Arena de teste",
+  "paused": "PAUSADO",
+  "playing": "EM EXECUÇÃO",
+  "tools": "Espaço: pausar/reproduzir · Tab: próximo clipe · Enter: arena · F3: caixas · F5: recarregar · R: reiniciar",
+  "controls": "Revisão: comandos reais a 60 ticks/s",
+  "preview_controls": "Setas: avançar pose · Arraste a barra para examinar a fase · F: mudar direção",
+  "arena_controls": "A/D: mover · W: pular · J: combo · V: chute · K: giro · L: Linker · Q: defesa/parry · I: ataque do oponente",
+  "reloaded": "Pacote recarregado · fase preservada",
+  "reload_failed": "Recarga recusada; pacote anterior preservado",
+  "pose": "Clipe",
+  "boxes": "Caixas de colisão",
+  "source": "Fonte",
+  "dummy": "Cópia de treino",
+  "reloaded_arena": "Pacote recarregado · arena reiniciada"
+}

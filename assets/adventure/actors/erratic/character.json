@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "erratic",
+  "name_key": "actor.erratic.name",
+  "combat": "combat.json",
+  "rig": "rig.json",
+  "clips": "clips.json",
+  "hp": 105,
+  "body_width": 50,
+  "hurtboxes": [
+    [
+      -30.0,
+      -184,
+      60.0,
+      184
+    ]
+  ],
+  "movement": {
+    "run_speed": 205,
+    "acceleration": 1400,
+    "braking": 1900,
+    "turn_acceleration": 2000,
+    "jump_speed": 620,
+    "gravity": 1750
+  },
+  "guard": {
+    "parry_ticks": 6,
+    "parry_cooldown": 24,
+    "blockstun": 12,
+    "parry_stun": 38
+  },
+  "loadout": {
+    "light": [
+      "erratic.light-1"
+    ],
+    "kick": null,
+    "spin": null,
+    "linker": null
+  },
+  "ai": {
+    "attack_range": 88,
+    "cooldown_ticks": 64,
+    "initial_delay": 12
+  }
+}

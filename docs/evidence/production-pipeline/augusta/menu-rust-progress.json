@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "prologue_seen": true,
+  "prologue_played_victory": false,
+  "street_wake_tick": null,
+  "checkpoint": {
+    "version": 1,
+    "stage": "street_start",
+    "prologue_played_victory": false
+  }
+}

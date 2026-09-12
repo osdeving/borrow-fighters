@@ -5,7 +5,7 @@
 
 use raylib::prelude::*;
 
-use super::{assets::Assets, pieces::PiecePose};
+use super::{assets::SharedAssets, pieces::PiecePose};
 use crate::adventure::{
     ambient::{
         AmbientState, CAR_HORN_TICK, CAR_IMPACT_TICK, CAR_SKID_START_X, CRASH_POLE_X, IncidentPhase,
@@ -70,7 +70,7 @@ pub fn road(d: &mut impl RaylibDraw, offset: f32) {
 }
 
 /// Draws far traffic, then the incident in the near lane and its persistent pole.
-pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &Assets, offset: f32) {
+pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &SharedAssets, offset: f32) {
     for car in ambient.traffic_cars().iter().filter(|car| car.visible) {
         let id = [
             "vehicle.hatch",
