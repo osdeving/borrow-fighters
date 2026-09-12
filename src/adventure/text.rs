@@ -14,6 +14,7 @@ use std::{
 const REQUIRED_KEYS: &[&str] = &[
     "window.title",
     "street.arrival.controls",
+    "street.ep_arrival.controls",
     "street.bar.kind",
     "street.bar.name",
     "street.stop.title",
@@ -79,8 +80,18 @@ const REQUIRED_KEYS: &[&str] = &[
     "opening.python.after",
     "opening.duke.name",
     "opening.duke.role",
+    "opening.duke.before",
+    "opening.duke.after",
     "opening.c.name",
     "opening.c.role",
+    "opening.c.before",
+    "opening.c.after",
+    "opening.c.book.kr",
+    "opening.c.book.language",
+    "opening.c.book.algorithms",
+    "opening.c.book.architecture",
+    "opening.c.terminal.compile",
+    "opening.c.terminal.result",
     "opening.go.name",
     "opening.go.role",
     "opening.rust.name",
@@ -153,7 +164,12 @@ impl TextCatalog {
         Ok(())
     }
 
-    /// Returns a validated entry; an unknown developer key stays visible for diagnosis.
+    /// Checks dynamic scene references against this catalog, including --texts overrides.
+    pub fn contains_key(&self, key: &str) -> bool {
+        self.document.text.contains_key(key)
+    }
+
+    /// Returns editable copy, with a visible diagnostic for a missing key.
     pub fn get(&self, key: &str) -> &str {
         self.document
             .text

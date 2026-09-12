@@ -133,20 +133,194 @@
           ]
         }
       ],
-      "obstacles": [
-        {
-          "x": 700,
-          "y": 520,
-          "width": 120,
-          "height": 60
-        }
-      ],
+      "obstacles": [],
       "exit": {
         "x": 1650,
         "y": 545,
         "width": 120,
         "height": 55
-      }
+      },
+      "debris": [
+        {
+          "id": "cargo.0.0",
+          "piece": "prop.crate",
+          "fragment": "prop.crate_fragment",
+          "region": {
+            "x": 700,
+            "y": 528,
+            "width": 108,
+            "height": 52
+          },
+          "hp": 36,
+          "rotation": -1.8
+        },
+        {
+          "id": "cargo.0.1",
+          "piece": "prop.crate_teal",
+          "fragment": "prop.crate_fragment",
+          "region": {
+            "x": 700,
+            "y": 476,
+            "width": 108,
+            "height": 52
+          },
+          "hp": 24,
+          "rotation": 3
+        },
+        {
+          "id": "cargo.0.2",
+          "piece": "prop.crate",
+          "fragment": "prop.crate_fragment",
+          "region": {
+            "x": 700,
+            "y": 424,
+            "width": 108,
+            "height": 52
+          },
+          "hp": 24,
+          "rotation": -3.8
+        },
+        {
+          "id": "cargo.1.0",
+          "piece": "prop.crate_teal",
+          "fragment": "prop.crate_fragment",
+          "region": {
+            "x": 816,
+            "y": 528,
+            "width": 108,
+            "height": 52
+          },
+          "hp": 36,
+          "rotation": 2
+        },
+        {
+          "id": "cargo.1.1",
+          "piece": "prop.crate",
+          "fragment": "prop.crate_fragment",
+          "region": {
+            "x": 816,
+            "y": 476,
+            "width": 108,
+            "height": 52
+          },
+          "hp": 24,
+          "rotation": -4
+        },
+        {
+          "id": "cargo.1.2",
+          "piece": "prop.crate",
+          "fragment": "prop.crate_fragment",
+          "region": {
+            "x": 816,
+            "y": 424,
+            "width": 108,
+            "height": 52
+          },
+          "hp": 24,
+          "rotation": 4
+        },
+        {
+          "id": "cargo.2.0",
+          "piece": "prop.crate",
+          "fragment": "prop.crate_fragment",
+          "region": {
+            "x": 932,
+            "y": 528,
+            "width": 108,
+            "height": 52
+          },
+          "hp": 36,
+          "rotation": 1.6
+        },
+        {
+          "id": "cargo.2.1",
+          "piece": "prop.crate_teal",
+          "fragment": "prop.crate_fragment",
+          "region": {
+            "x": 932,
+            "y": 476,
+            "width": 108,
+            "height": 52
+          },
+          "hp": 24,
+          "rotation": 3.4
+        },
+        {
+          "id": "cargo.2.2",
+          "piece": "prop.crate",
+          "fragment": "prop.crate_fragment",
+          "region": {
+            "x": 932,
+            "y": 424,
+            "width": 108,
+            "height": 52
+          },
+          "hp": 24,
+          "rotation": -2
+        }
+      ],
+      "loose_props": [
+        {
+          "id": "scatter.0",
+          "piece": "prop.loose_board",
+          "position": {
+            "x": 657,
+            "y": 586
+          },
+          "scale": 0.7,
+          "rotation": -12
+        },
+        {
+          "id": "scatter.1",
+          "piece": "prop.crate_fragment",
+          "position": {
+            "x": 728,
+            "y": 593
+          },
+          "scale": 0.8,
+          "rotation": 22
+        },
+        {
+          "id": "scatter.2",
+          "piece": "prop.loose_board",
+          "position": {
+            "x": 815,
+            "y": 594
+          },
+          "scale": 1,
+          "rotation": -8
+        },
+        {
+          "id": "scatter.3",
+          "piece": "prop.crate_fragment",
+          "position": {
+            "x": 931,
+            "y": 590
+          },
+          "scale": 0.8,
+          "rotation": 19
+        },
+        {
+          "id": "scatter.4",
+          "piece": "prop.loose_board",
+          "position": {
+            "x": 1012,
+            "y": 591
+          },
+          "scale": 0.74,
+          "rotation": 8
+        },
+        {
+          "id": "scatter.5",
+          "piece": "prop.crate_fragment",
+          "position": {
+            "x": 1090,
+            "y": 585
+          },
+          "scale": 0.76,
+          "rotation": -21
+        }
+      ]
     },
     {
       "id": "passage",
@@ -180,7 +354,37 @@
         "y": 545,
         "width": 120,
         "height": 55
-      }
+      },
+      "enemies": [
+        {
+          "id": "erratic.front",
+          "position": {
+            "x": 1030,
+            "y": 580
+          },
+          "tuning": {
+            "hp": 120,
+            "speed": 175,
+            "telegraph_ticks": 30,
+            "recovery_ticks": 40,
+            "damage": 15
+          }
+        },
+        {
+          "id": "erratic.rear",
+          "position": {
+            "x": 1260,
+            "y": 580
+          },
+          "tuning": {
+            "hp": 112,
+            "speed": 165,
+            "telegraph_ticks": 34,
+            "recovery_ticks": 42,
+            "damage": 15
+          }
+        }
+      ]
     }
   ]
 }

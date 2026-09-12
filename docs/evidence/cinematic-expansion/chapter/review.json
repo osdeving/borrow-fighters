@@ -1,0 +1,171 @@
+{
+  "command": "cargo run --bin borrow-story -- --start chapter --review /tmp/borrow-chapter-cargo-review --frames 10790",
+  "capture": "native renderer / automated public input / silent review",
+  "completed_ticks": 6575,
+  "final_checkpoint": {
+    "prologue_played_victory": false,
+    "stage": "complete",
+    "version": 1
+  },
+  "final_hp": 100,
+  "final_enemies": [
+    {
+      "action": "Defeated",
+      "hp": 0,
+      "x": 448.3779296875
+    },
+    {
+      "action": "Defeated",
+      "hp": 0,
+      "x": 158.25253295898438
+    }
+  ],
+  "cargo_damage_contacts": 14,
+  "phases": [
+    {
+      "frame": 0,
+      "phase": "Intro",
+      "scene": "Street",
+      "ticks": 0
+    },
+    {
+      "frame": 600,
+      "phase": "ExploreDriver",
+      "scene": "Street",
+      "ticks": 600
+    },
+    {
+      "frame": 628,
+      "phase": "DriverApproach",
+      "scene": "Street",
+      "ticks": 628
+    },
+    {
+      "frame": 683,
+      "phase": "DriverDialogue",
+      "scene": "Street",
+      "ticks": 683
+    },
+    {
+      "frame": 1136,
+      "phase": "DriverReturn",
+      "scene": "Street",
+      "ticks": 1136
+    },
+    {
+      "frame": 1191,
+      "phase": "ExploreShop",
+      "scene": "Street",
+      "ticks": 1191
+    },
+    {
+      "frame": 1303,
+      "phase": "ShopApproach",
+      "scene": "Street",
+      "ticks": 1303
+    },
+    {
+      "frame": 1396,
+      "phase": "ShopDialogue",
+      "scene": "Street",
+      "ticks": 1396
+    },
+    {
+      "frame": 1849,
+      "phase": "ShopReturn",
+      "scene": "Street",
+      "ticks": 1849
+    },
+    {
+      "frame": 1987,
+      "phase": "ExploreNeighbour",
+      "scene": "Street",
+      "ticks": 1987
+    },
+    {
+      "frame": 1998,
+      "phase": "NeighbourApproach",
+      "scene": "Street",
+      "ticks": 1998
+    },
+    {
+      "frame": 2064,
+      "phase": "NeighbourDialogue",
+      "scene": "Street",
+      "ticks": 2064
+    },
+    {
+      "frame": 2517,
+      "phase": "NeighbourReturn",
+      "scene": "Street",
+      "ticks": 2517
+    },
+    {
+      "frame": 2583,
+      "phase": "Phone",
+      "scene": "Street",
+      "ticks": 2583
+    },
+    {
+      "frame": 3453,
+      "phase": "LeaveStreet",
+      "scene": "Street",
+      "ticks": 3453
+    },
+    {
+      "frame": 3652,
+      "phase": "LaneExplore",
+      "scene": "Lane",
+      "ticks": 3652
+    },
+    {
+      "frame": 4407,
+      "phase": "LaneApproach",
+      "scene": "Lane",
+      "ticks": 4407
+    },
+    {
+      "frame": 4408,
+      "phase": "LaneDialogue",
+      "scene": "Lane",
+      "ticks": 4408
+    },
+    {
+      "frame": 4861,
+      "phase": "LaneExit",
+      "scene": "Lane",
+      "ticks": 4861
+    },
+    {
+      "frame": 4980,
+      "phase": "PassageExplore",
+      "scene": "Passage",
+      "ticks": 4980
+    },
+    {
+      "frame": 5055,
+      "phase": "PassageCombat",
+      "scene": "Passage",
+      "ticks": 5055
+    },
+    {
+      "frame": 6092,
+      "phase": "PassageClear",
+      "scene": "Passage",
+      "ticks": 6092
+    },
+    {
+      "frame": 6424,
+      "phase": "Departure",
+      "scene": "Passage",
+      "ticks": 6424
+    },
+    {
+      "frame": 6575,
+      "phase": "Complete",
+      "scene": "Passage",
+      "ticks": 6575
+    }
+  ],
+  "visual_tuning_after_full_review": "mixed red/teal crates, authored tilt and loose board pieces; focused native snapshots rerun on final data"
+}

@@ -112,12 +112,17 @@ pub fn run_in_window(
                 debug = !debug;
             }
             if rl.is_key_pressed(KeyboardKey::KEY_F5) {
+                let copy_result = assets.reload_copy();
+                let motion_result = assets.common.locomotion.reload(rl, thread);
+                if motion_result.is_ok() {
+                    audio.reload_stride(assets.common.locomotion.motion.stride_pixels, &chapter);
+                }
                 notice = Some((
-                    match assets.reload_copy() {
-                        Ok(()) => "Textos e aparência atualizados".into(),
+                    match copy_result.and(motion_result) {
+                        Ok(()) => assets.common.text.get("editor.reloaded").into(),
                         Err(e) => {
                             eprintln!("{e}");
-                            "Não foi possível atualizar os textos".into()
+                            assets.common.text.get("editor.failed").into()
                         }
                     },
                     240,

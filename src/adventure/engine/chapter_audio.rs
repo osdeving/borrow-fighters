@@ -20,8 +20,6 @@ use crate::{
 };
 
 const VOLUME: f32 = 0.3;
-// Existing Rust walk animation: four poses of seven ticks, two foot contacts.
-const STEP_TICKS: u32 = 14;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum Cue {
@@ -89,6 +87,7 @@ pub struct ChapterAudio<'aud> {
     paused: bool,
     suspended: Vec<Cue>,
     observed: Observed,
+    step_pixels: f32,
 }
 
 impl<'aud> ChapterAudio<'aud> {
@@ -101,6 +100,11 @@ impl<'aud> ChapterAudio<'aud> {
             paused: false,
             suspended: Vec::new(),
             observed: Observed::default(),
+            step_pixels: crate::adventure::locomotion::Motion::load(&asset_path(
+                "assets/adventure/locomotion/motion.json",
+            ))
+            .map(|motion| motion.stride_pixels * 0.5)
+            .unwrap_or(64.0),
         };
         let Some(device) = device else { return audio };
         let path = asset_path("assets/adventure/audio/street_air.wav");
@@ -130,7 +134,7 @@ impl<'aud> ChapterAudio<'aud> {
 
     /// Observes a rendered state; repeated renders never repeat an event.
     pub fn update(&mut self, chapter: &Chapter, paused: bool) {
-        self.update_frame(Frame::from(chapter), paused);
+        self.update_frame(Frame::at(chapter, self.step_pixels), paused);
     }
 
     /// Discards abandoned effects after skip, retry or loading a checkpoint.
@@ -139,7 +143,13 @@ impl<'aud> ChapterAudio<'aud> {
     /// state. Ordinary phase transitions use `update`, so their cues still play.
     /// Pause remains active; only future milestones can sound after resuming.
     pub fn synchronize(&mut self, chapter: &Chapter) {
-        self.synchronize_frame(Frame::from(chapter));
+        self.synchronize_frame(Frame::at(chapter, self.step_pixels));
+    }
+
+    /// Uses the newly validated visual stride after F5 without replaying old contacts.
+    pub fn reload_stride(&mut self, stride_pixels: f32, chapter: &Chapter) {
+        self.step_pixels = stride_pixels * 0.5;
+        self.synchronize(chapter);
     }
 
     fn update_frame(&mut self, frame: Frame, paused: bool) {
@@ -231,21 +241,21 @@ struct Frame {
     phase: Phase,
     phase_ticks: u32,
     phone_ticks: Option<u32>,
-    walk_ticks: Option<u32>,
+    step_index: Option<u32>,
     position: Vec2,
     contact: Option<(u32, Cue)>,
 }
 
-impl From<&Chapter> for Frame {
-    fn from(chapter: &Chapter) -> Self {
+impl Frame {
+    fn at(chapter: &Chapter, step_pixels: f32) -> Self {
         let player = &chapter.combat.player;
         Self {
             ticks: chapter.ticks,
             phase: chapter.phase,
             phase_ticks: chapter.phase_ticks,
             phone_ticks: chapter.phone().map(|phone| phone.ticks),
-            walk_ticks: (player.action == Action::Walk && player.grounded)
-                .then_some(player.action_ticks),
+            step_index: (player.action == Action::Walk && player.grounded)
+                .then_some((player.stride_distance / step_pixels).floor() as u32),
             position: player.position,
             contact: chapter
                 .combat
@@ -329,14 +339,12 @@ impl Observed {
             // Explicit skips synchronize first, discarding this transition.
             cues.push(Cue::ShutterClack);
         }
-        if let Some(walk_ticks) = frame.walk_ticks
+        if let Some(step_index) = frame.step_index
             && let Some(previous) = self.previous
             && (frame.position.x - previous.position.x).abs()
                 + (frame.position.y - previous.position.y).abs()
                 > 0.1
-            && previous.walk_ticks.is_none_or(|ticks| {
-                walk_ticks < ticks || walk_ticks / STEP_TICKS > ticks / STEP_TICKS
-            })
+            && previous.step_index.is_none_or(|ticks| step_index != ticks)
         {
             // Coalesce missed foot contacts into one audible step, avoiding
             // stacked footsteps after a slow render; stationary actors stay quiet.
@@ -363,7 +371,7 @@ mod tests {
             phase,
             phase_ticks,
             phone_ticks: None,
-            walk_ticks: None,
+            step_index: None,
             position: Vec2::ZERO,
             contact: None,
         }
@@ -533,14 +541,14 @@ mod tests {
     fn natural_shutter_contact_survives_the_same_tick_phase_transition() {
         use crate::adventure::chapter::ChapterInput;
         let mut chapter = returning_from_shop();
-        let mut observed = Observed::at(Frame::from(&chapter));
+        let mut observed = Observed::at(Frame::at(&chapter, 64.0));
         let mut shutter = Vec::new();
         for _ in 0..SHOP_EXIT_CLEARANCE_TICKS + SHOP_SHUTTER_TICKS {
             assert_eq!(chapter.phase, Phase::ShopReturn);
             chapter.tick(ChapterInput::default());
             shutter.extend(
                 observed
-                    .observe(Frame::from(&chapter))
+                    .observe(Frame::at(&chapter, 64.0))
                     .into_iter()
                     .filter(|cue| matches!(cue, Cue::ShutterRoll | Cue::ShutterClack)),
             );
@@ -548,7 +556,7 @@ mod tests {
         assert_eq!(chapter.phase, Phase::ExploreNeighbour);
         assert_eq!(chapter.phase_ticks, 0);
         assert_eq!(shutter, [Cue::ShutterRoll, Cue::ShutterClack]);
-        assert!(observed.observe(Frame::from(&chapter)).is_empty());
+        assert!(observed.observe(Frame::at(&chapter, 64.0)).is_empty());
     }
 
     #[test]
@@ -573,7 +581,7 @@ mod tests {
             assert_eq!(chapter.phase, Phase::ExploreNeighbour);
             audio.synchronize(&chapter);
             assert!(audio.suspended.is_empty());
-            assert!(audio.observed.observe(Frame::from(&chapter)).is_empty());
+            assert!(audio.observed.observe(Frame::at(&chapter, 64.0)).is_empty());
         }
     }
 
@@ -581,19 +589,19 @@ mod tests {
     fn footfalls_follow_motion_and_stride_without_stacking_after_a_slow_render() {
         let mut state = frame(Phase::ExploreDriver, 0);
         let mut observed = Observed::at(state);
-        state.walk_ticks = Some(1);
+        state.step_index = Some(1);
         state.position.x = 2.0;
         assert_eq!(observed.observe(state), [Cue::Step]);
         assert!(observed.observe(state).is_empty());
-        state.walk_ticks = Some(STEP_TICKS * 5);
+        state.step_index = Some(5);
         assert!(
             observed.observe(state).is_empty(),
             "walking into a wall stays quiet"
         );
-        state.walk_ticks = Some(STEP_TICKS * 9);
+        state.step_index = Some(9);
         state.position.x = 60.0;
         assert_eq!(observed.observe(state), [Cue::Step]);
-        state.walk_ticks = None;
+        state.step_index = None;
         state.position.y -= 20.0;
         assert!(
             observed.observe(state).is_empty(),

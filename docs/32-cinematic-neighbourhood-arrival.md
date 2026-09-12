@@ -65,3 +65,32 @@ trânsito ausente na janela posterior à evacuação. Detalhes e limitações na
 
 [Decisão de arquitetura](adr/0026-cinematic-arrival-and-neighbours.md).
 [Diário](worklogs/cinematic-neighbourhood-arrival.md).
+
+## EP — tomada aérea e impacto no chão
+
+A revisão autorizada em 12/09/2026 conserva a introdução da pipa e acrescenta
+outra tomada ao encontro. Quando Rust alcança a ameaça, a câmera busca o céu;
+a EP entra pelo alto, desce e continua no mesmo trajeto enquanto a câmera
+volta ao plano jogável. Aos 180 ticks o enquadramento já é o normal, mas a EP
+ainda está caindo. O contato acontece no tick 218, com joelho e mão no chão,
+compressão breve, poeira, fragmentos e um tremor curto. **Esse contato causa
+o tumulto:** fuga, buzina, ciclistas e moradores partem do mesmo marco.
+
+O corpo usa poses separadas do atlas da errática: antecipação aérea, apoio
+no chão e recuperação. O cenário permanece reutilizável. A posição usa
+interpolação cúbica com tangentes, sem reiniciar a queda na volta da câmera.
+O controle fica suspenso até terminar a recuperação; a EP não causa dano
+durante a encenação. Pausa congela corpo, câmera, ambiente e efeitos. Enter/RB
+conclui apenas a aterrissagem; um novo avanço pode seguir à apresentação.
+Retry acordado omite ambas as tomadas, enquanto reiniciar a história as restaura.
+
+Tempos, tangentes, zoom, enquadramento, índices de pose e parâmetros de poeira
+ficam em [`ep-arrival.json`](../assets/adventure/street/ep-arrival.json), validados
+antes de uso. F5 recarrega uma revisão válida sem recompilar; se a tomada estiver
+em andamento, a revisão aguarda a próxima entrada na rua para preservar o
+contato já programado. O arquivo pode ser alterado sem regenerar qualquer imagem.
+Os dois sons originais têm [gerador independente](../assets/adventure/audio/generate_ep_arrival_audio.py).
+
+O roteiro nativo [`capture_ep_arrival_x11.py`](../tools/review/capture_ep_arrival_x11.py)
+registra o céu, a abertura da câmera, queda no plano jogável, contato e recuperação.
+Também confere comandos antecipados, pausa, trajetória, retry e avanço local.

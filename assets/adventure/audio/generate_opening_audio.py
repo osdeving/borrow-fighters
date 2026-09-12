@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Compose the original 48-second adventure opening with Python stdlib only.
+"""Compose the original 64-second adventure opening with Python stdlib only.
 
 The score uses newly written melodic/rhythmic patterns and synthesized voices;
 there are no recordings, external samples or borrowed melodies. Sections follow
-the opening's authored clock: news 0-9, C++ 9-19, Python 19-29, cast 29-41,
-logo 41-48 seconds. A D-major arrival at 41 seconds resolves the D-minor build.
+the opening's authored clock: news 0-9, C++ 9-19, Python 19-29, Duke 29-41,
+Old C 41-53, Rust 53-57, logo 57-64. D major resolves the minor build at 57 s.
 This generator writes opening.wav only; the eight earlier WAVs remain intact.
 """
 
@@ -16,7 +16,7 @@ import sys
 import wave
 
 RATE = 22050
-DURATION = 48.0
+DURATION = 64.0
 TEMPO = 120
 TAU = 2 * pi
 OUTPUT = Path(__file__).with_name("opening.wav")
@@ -24,8 +24,10 @@ SECTIONS = (
     ("news", 0.0, 9.0),
     ("cpp", 9.0, 19.0),
     ("python", 19.0, 29.0),
-    ("cast", 29.0, 41.0),
-    ("logo", 41.0, 48.0),
+    ("duke", 29.0, 41.0),
+    ("old_c", 41.0, 53.0),
+    ("rust", 53.0, 57.0),
+    ("logo", 57.0, 64.0),
 )
 
 
@@ -186,31 +188,43 @@ def compose():
     for at, note in python_melody:
         score.note(at, .8, note, .14, "bell")
 
-    # Four cast cards share a twelve-second crescendo toward the title arrival.
+    # Duke: measured low pulse, restrained plucks and a confident lower motif.
+    # The same instruments/palette bridge the limousine and the meeting room.
     rhythmic_section(score, 29, 41, (38, 34, 41, 36, 31, 33),
-                     ((50, 53, 57), (46, 50, 53), (53, 57, 60), (48, 52, 55), (43, 46, 50), (45, 49, 52)), 1.2)
-    for card in range(4):
-        onset = 29 + card * 3
-        score.percussion(onset, "crash", .18 + card * .025)
-        motif = (74, 77, 79, 81) if card < 2 else (77, 79, 81, 85)
-        for step, note in enumerate(motif):
-            score.note(onset + step * .5, .62, note, .12 + card * .012, "lead")
-    score.percussion(39, "rise", .29, 2)
-    for index in range(8):
-        score.percussion(40 + index * .125, "snare", .10 + index * .025)
+                     ((50, 53, 57), (46, 50, 53), (53, 57, 60), (48, 52, 55), (43, 46, 50), (45, 49, 52)), .72)
+    score.percussion(29, "crash", .15)
+    for at, note, length in ((29.5, 62, .9), (31, 65, .9), (32.5, 69, 1.15),
+                             (35, 67, 1.1), (37, 65, .9), (39, 61, 1.3)):
+        score.note(at, length, note, .105, "lead")
 
-    # Logo at exactly 41 s: a new major third, strong low arrival and a long tail.
-    score.percussion(41, "kick", .68)
-    score.percussion(41, "crash", .40, 2.8)
-    score.note(41, 2.8, 26, .24, "bass")
-    score.chord(41, 6.8, (50, 54, 57, 62, 69), .33)
-    for at, note, duration in ((41, 74, 1.0), (41.5, 78, 1.0), (42, 81, 1.5), (43, 86, 2.8), (44, 74, 3.5)):
+    # Old C: a quieter, deliberate arpeggio and low bell answers over familiar
+    # harmony. This leaves room for the intellectual desk/setup composition.
+    rhythmic_section(score, 41, 53, (38, 34, 36, 38, 31, 33),
+                     ((50, 53, 57), (46, 50, 53), (48, 52, 55), (50, 53, 57), (43, 46, 50), (45, 49, 52)), .54)
+    for at, note in ((41.5, 62), (43, 69), (45, 65), (47.5, 67), (49, 64), (51, 61)):
+        score.note(at, 1.2, note, .10, "bell")
+
+    # Rust supplies the short final lift; the title keeps its original resolution.
+    rhythmic_section(score, 53, 57, (38, 33), ((50, 53, 57), (45, 49, 52)), 1.15)
+    score.percussion(53, "crash", .23)
+    for step, note in enumerate((74, 77, 79, 81, 77, 79, 81, 85)):
+        score.note(53 + step * .5, .62, note, .135, "lead")
+    score.percussion(55, "rise", .29, 2)
+    for index in range(8):
+        score.percussion(56 + index * .125, "snare", .10 + index * .025)
+
+    # Logo at exactly 57 s: a new major third, strong low arrival and a long tail.
+    score.percussion(57, "kick", .68)
+    score.percussion(57, "crash", .40, 2.8)
+    score.note(57, 2.8, 26, .24, "bass")
+    score.chord(57, 6.8, (50, 54, 57, 62, 69), .33)
+    for at, note, duration in ((57, 74, 1.0), (57.5, 78, 1.0), (58, 81, 1.5), (59, 86, 2.8), (60, 74, 3.5)):
         score.note(at, duration, note, .14, "lead")
-    for at in (42, 43):
+    for at in (58, 59):
         score.percussion(at, "kick", .32)
         score.percussion(at + .5, "snare", .19)
-    score.percussion(44, "kick", .35)
-    score.chord(44, 4, (62, 66, 69, 74), .15, "bell")
+    score.percussion(60, "kick", .35)
+    score.chord(60, 4, (62, 66, 69, 74), .15, "bell")
     return score.finish()
 
 
@@ -227,7 +241,7 @@ def main():
         sound.setframerate(RATE)
         sound.writeframes(output.tobytes())
     print(f"{OUTPUT.name}: {len(pcm) / RATE:.3f}s, PCM16 mono/{RATE}Hz, {TEMPO} BPM, peak={peak}, rms={rms:.4f}")
-    print("Original score; title arrival at 41.000s; non-looping resolution through 48.000s.")
+    print("Original score; title arrival at 57.000s; non-looping resolution through 64.000s.")
 
 
 if __name__ == "__main__":

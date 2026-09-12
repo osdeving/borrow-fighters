@@ -12,6 +12,8 @@ use crate::{adventure::text::TextCatalog, runtime_paths::asset_path};
 
 /// Assets exclusively owned by the adventure executable.
 pub struct Assets {
+    /// Shared walking and kick clips with editable stride and support anchors.
+    pub locomotion: super::locomotion::LocomotionAssets,
     /// Independent imagery for the newspaper/character/title presentation.
     pub opening: super::opening::OpeningAssets,
     /// Editable on-disk narrative and interface copy.
@@ -76,7 +78,8 @@ impl Assets {
             .texture()
             .set_texture_filter(thread, TextureFilter::TEXTURE_FILTER_TRILINEAR);
         Ok(Self {
-            opening: super::opening::OpeningAssets::load(rl, thread)?,
+            locomotion: super::locomotion::LocomotionAssets::load(rl, thread)?,
+            opening: super::opening::OpeningAssets::load(rl, thread, &text)?,
             text,
             ada: texture(rl, thread, "ada-prologue.png")?,
             morning: texture(rl, thread, "rust-morning.png")?,

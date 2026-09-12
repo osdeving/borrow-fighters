@@ -1,0 +1,40 @@
+{
+  "rust": {
+    "tests": {
+      "passed": 515,
+      "failed": 0,
+      "ignored": 2
+    },
+    "adventure": {
+      "passed": 119,
+      "failed": 0,
+      "ignored": 0
+    },
+    "fighting": {
+      "passed": 396,
+      "failed": 0,
+      "ignored": 2
+    },
+    "core": {
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "fmt": "passed",
+  "clippy_all_targets_all_features": "passed -D warnings",
+  "domain_boundaries": "passed",
+  "boundary_fixtures": 56,
+  "packaging_tests": 20,
+  "mixer_tests": 48,
+  "notes": [
+    "Two preexisting audio-device tests ignored; physical gamepad and audio latency were not measured.",
+    "Full feature matrix passed; after final stride/collision corrections, isolated adventure and all-features suites plus strict Clippy passed again.",
+    "Biographies are layered held poses and interpolated transforms, not a skeletal animation system."
+  ],
+  "final_adventure_after_contact_and_stride_fixes": {
+    "passed": 119,
+    "failed": 0,
+    "clippy": "all-targets all-features -D warnings passed"
+  }
+}

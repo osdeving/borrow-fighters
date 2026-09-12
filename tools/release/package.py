@@ -102,7 +102,7 @@ def adventure_piece_assets(catalog):
 
 
 def adventure_assets():
-    """Expand adventure loaders, opening portraits and both piece catalogs."""
+    """Expand adventure loaders, opening portraits and declared piece catalogs."""
     files = set()
     base = ROOT / "assets/adventure"
     # These adapters prepend their own directory to literal file names. Keep
@@ -129,8 +129,15 @@ def adventure_assets():
             raise ValueError(f"Opening portrait outside adventure opening/: {name}")
         files.add(portrait)
     files.add(asset_file(base / "street/scene.json"))
-    for name in ("street/catalog.json", "chapter/catalog.json"):
-        files.update(adventure_piece_assets(base / name))
+    catalogs = {base / "street/catalog.json", base / "chapter/catalog.json"}
+    # Each declared catalog owns its transitive PNG dependencies. New scene or
+    # animation catalogs therefore ship without copying unused production art.
+    for source in (ROOT / "src/adventure").rglob("*.rs"):
+        for name in re.findall(r'"(assets/adventure/[^"\n{}]+/catalog\.json)"',
+                               source.read_text(encoding="utf-8")):
+            catalogs.add(ROOT / name)
+    for catalog in catalogs:
+        files.update(adventure_piece_assets(catalog))
     for name in ("fonts/BARLOW-OFL.txt", "fonts/LORA-OFL.txt", "fonts/README.md",
                  "audio/README.md", "texts/README.md", "ART-PROVENANCE.md",
                  "opening/ART-PROVENANCE.md", "street/README.md",

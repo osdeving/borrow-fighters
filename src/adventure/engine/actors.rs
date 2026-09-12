@@ -30,6 +30,10 @@ pub fn rust(d: &mut impl RaylibDraw, a: &Assets, actor: &Actor, camera: f32) {
 /// Draws existing locomotion at the depth selected by a chapter approach path.
 pub fn rust_scaled(d: &mut impl RaylibDraw, a: &Assets, actor: &Actor, camera: f32, depth: f32) {
     let pos = Vector2::new(actor.position.x - camera, actor.position.y);
+    if matches!(actor.action, Action::Walk | Action::Kick) {
+        a.locomotion.draw(d, actor, camera, depth);
+        return;
+    }
     if actor.action == Action::Remorse {
         let frame = match actor.action_ticks {
             0..=29 => 8,
@@ -56,7 +60,6 @@ pub fn rust_scaled(d: &mut impl RaylibDraw, a: &Assets, actor: &Actor, camera: f
         return;
     }
     let frame = match actor.action {
-        Action::Walk => 2 + (actor.action_ticks / 7 % 4) as usize,
         Action::Jump if actor.velocity.y < 0.0 => 6,
         Action::Jump => 7,
         Action::LightAttack if actor.action_ticks < 5 => 8,

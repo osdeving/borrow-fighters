@@ -81,7 +81,7 @@ impl Options {
                 "--hidden" => options.hidden = true,
                 "--help" | "-h" => {
                     println!(
-                        "Borrow — primeiras linhas\n\ncargo run --no-default-features --features adventure --bin borrow-adventure\n\n--start ada|morning|encounter|opening|chapter  Developer scene entry\n--review DIR                 Deterministic renderer review + MP4\n--capture DIR                Record actual play + frame snapshots\n--texts PATH                 Editable UTF-8 JSON catalog\n--frames N                   Exit after N rendered frames\n--mute                       Disable audio device\n--hidden                     Hidden window for isolated review\n\nA/D/arrows move; Space/W jump; J/F attack; K/H strong; Q/L guard.\nChapter: E/A interacts; Space/B jumps; Enter/RB advances dialogue.\nOpening: Enter/RB advances one segment; Backspace/View skips to the menu.\nEsc/Start pauses; R retries a lost encounter; F3 shows collision; F12 saves a screenshot."
+                        "Borrow — primeiras linhas\n\ncargo run --no-default-features --features adventure --bin borrow-adventure\n\n--start ada|morning|encounter|opening|chapter  Developer scene entry\n--review DIR                 Deterministic renderer review + MP4\n--capture DIR                Record actual play + frame snapshots\n--texts PATH                 Editable UTF-8 JSON catalog\n--frames N                   Exit after N rendered frames\n--mute                       Disable audio device\n--hidden                     Hidden window for isolated review\n\nA/D/arrows move; Space/W jump; J/F attack; K/H strong; V/RT kick; Q/L guard.\nChapter: E/A interacts; Space/B jumps; Enter/RB advances dialogue.\nOpening: Enter/RB advances one segment; Backspace/View skips to the menu.\nEsc/Start pauses; R retries a lost encounter; F3 shows collision; F12 saves a screenshot."
                     );
                     return Ok(None);
                 }
@@ -306,9 +306,24 @@ fn run_session(
         if !reviewing && frame > 0 {
             if rl.is_key_pressed(KeyboardKey::KEY_F5) {
                 let result = assets.text.reload();
-                let ok = result.is_ok();
+                let ep_result = story.ep_arrival.reload();
+                let biography_result = assets.opening.biographies.reload(rl, thread, &assets.text);
+                let motion_result = assets.locomotion.reload(rl, thread);
+                let ok = result.is_ok()
+                    && ep_result.is_ok()
+                    && biography_result.is_ok()
+                    && motion_result.is_ok();
                 if let Err(error) = result {
                     eprintln!("{error}");
+                }
+                if let Err(error) = ep_result {
+                    eprintln!("EP arrival reload: {error}");
+                }
+                if let Err(error) = biography_result {
+                    eprintln!("Biography reload: {error}");
+                }
+                if let Err(error) = motion_result {
+                    eprintln!("Rust animation reload: {error}");
                 }
                 if ok {
                     text_revision += 1;
@@ -415,6 +430,7 @@ fn run_session(
             pending.jump_pressed |= input.jump_pressed;
             pending.light_pressed |= input.light_pressed;
             pending.heavy_pressed |= input.heavy_pressed;
+            pending.kick_pressed |= input.kick_pressed;
             accumulator += frame_time.clamp(0.0, 0.1);
             let mut steps = 0;
             while accumulator >= 1.0 / 60.0 && steps < 5 {
@@ -422,6 +438,7 @@ fn run_session(
                 pending.jump_pressed = false;
                 pending.light_pressed = false;
                 pending.heavy_pressed = false;
+                pending.kick_pressed = false;
                 accumulator -= 1.0 / 60.0;
                 steps += 1;
             }
@@ -441,11 +458,26 @@ fn run_session(
         }
         if let Some(trace) = trace.as_mut() {
             let c = &story.combat;
+            let ep_sample = story
+                .ep_arrival
+                .sample(c.enemy.position.x - (c.player.position.x - 450.0).clamp(0.0, 920.0));
             let arrival_camera = if story.arrival_active() {
                 crate::adventure::arrival::ArrivalShot::at(story.stage_ticks)
+            } else if story.ep_arrival_active() {
+                ep_sample.map_or_else(crate::adventure::arrival::ArrivalShot::settled, |sample| {
+                    sample.shot
+                })
             } else {
                 crate::adventure::arrival::ArrivalShot::settled()
             };
+            let ep_arrival = serde_json::json!({
+                "active":story.ep_arrival_active(),"ticks":story.ep_arrival.ticks(),
+                "impact_tick":story.ep_arrival.spec.impact_tick(),
+                "gameplay_tick":story.ep_arrival.spec.gameplay_tick,
+                "feet_y":ep_sample.map(|sample|sample.feet_y),
+                "pose":ep_sample.map(|sample|sample.pose),
+                "impact_age":ep_sample.and_then(|sample|sample.impact_age)
+            });
             let neighborhood = crate::adventure::neighborhood::Neighborhood::sample(&story.ambient);
             let neighbors = serde_json::json!({
                 "residents": neighborhood.residents.map(|actor|serde_json::json!({
@@ -490,7 +522,7 @@ fn run_session(
             writeln!(
                 trace,
                 "{}",
-                serde_json::json!({"frame":frame,"seconds":capture_seconds,"wall_seconds":std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).ok().map(|time| time.as_secs_f64()),"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"waiting_for_continue":return_on_complete && complete_at_start && !completion.accepted,"continue_accepted":completion.accepted,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"ambience":ambience,"neighborhood":neighbors,"arrival_active":story.arrival_active(),"arrival_camera":{"x":arrival_camera.target.x,"y":arrival_camera.target.y,"zoom":arrival_camera.zoom},"audio_synced_after_skip":audio_synced_after_skip,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
+                serde_json::json!({"frame":frame,"seconds":capture_seconds,"wall_seconds":std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).ok().map(|time| time.as_secs_f64()),"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"waiting_for_continue":return_on_complete && complete_at_start && !completion.accepted,"continue_accepted":completion.accepted,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"ambience":ambience,"neighborhood":neighbors,"ep_arrival":ep_arrival,"arrival_active":story.arrival_active(),"arrival_camera":{"x":arrival_camera.target.x,"y":arrival_camera.target.y,"zoom":arrival_camera.zoom},"audio_synced_after_skip":audio_synced_after_skip,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
             )?;
         }
         {
@@ -673,6 +705,8 @@ fn input(rl: &RaylibHandle) -> CombatInput {
         light_pressed: rl.is_key_pressed(KeyboardKey::KEY_J)
             || rl.is_key_pressed(KeyboardKey::KEY_F)
             || pressed(GamepadButton::GAMEPAD_BUTTON_RIGHT_FACE_LEFT),
+        kick_pressed: rl.is_key_pressed(KeyboardKey::KEY_V)
+            || pressed(GamepadButton::GAMEPAD_BUTTON_RIGHT_TRIGGER_2),
         heavy_pressed: rl.is_key_pressed(KeyboardKey::KEY_K)
             || rl.is_key_pressed(KeyboardKey::KEY_H)
             || pressed(GamepadButton::GAMEPAD_BUTTON_RIGHT_FACE_UP),
@@ -690,11 +724,17 @@ struct Review {
     snapshots: std::collections::BTreeSet<String>,
 }
 
+// Leave room for real combat/recovery independently from authored scene lengths.
+const REVIEW_FRAME_LIMIT: u32 = super::story::PROLOGUE_TICKS
+    + super::story::MORNING_TICKS
+    + super::story::OPENING_TICKS
+    + 60 * 90;
+
 impl Review {
     fn capture_finished(&self, hosted: bool) -> bool {
         // The host waits for ContinuePrompt's simulated press and full fade.
         // Only the standalone capture ends as soon as its final hold is over.
-        (!hosted && self.complete_frames >= 180) || self.frames >= 60 * 150
+        (!hosted && self.complete_frames >= 180) || self.frames >= REVIEW_FRAME_LIMIT
     }
 
     fn should_pause(&mut self, story: &Story) -> bool {
@@ -751,6 +791,14 @@ impl Review {
             }
             Stage::Encounter if story.arrival_active() && story.stage_ticks == 1 => {
                 "encounter-arrival-kite.png".into()
+            }
+            Stage::Encounter
+                if story.ep_arrival_active()
+                    && story.ep_arrival.ticks().is_some_and(|ticks| {
+                        [30, 70, 150, 180, 217, 222, 250, 290].contains(&ticks)
+                    }) =>
+            {
+                format!("encounter-ep-arrival-{}.png", story.ep_arrival.ticks()?)
             }
             Stage::Encounter if story.arrival_active() && story.stage_ticks == 180 => {
                 "encounter-arrival-descent.png".into()
@@ -845,7 +893,7 @@ mod tests {
     #[test]
     fn review_keeps_a_time_limit_for_incomplete_runs_in_both_entry_points() {
         let mut review = Review {
-            frames: 60 * 150 - 1,
+            frames: REVIEW_FRAME_LIMIT - 1,
             ..Review::default()
         };
         assert!(!review.capture_finished(false));
@@ -919,7 +967,7 @@ mod tests {
         story.advance_scene();
         story.advance_scene();
         let review = Review::default();
-        for _ in 0..60 * 90 {
+        for _ in 0..super::super::story::OPENING_TICKS + 60 * 70 {
             story.tick(review.input(&story));
             if story.stage == Stage::Complete {
                 break;

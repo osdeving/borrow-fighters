@@ -141,7 +141,11 @@ pub fn draw(
         prompt(d, a, a.texts.get(interaction.prompt_key));
     } else if chapter.controls_active() {
         let hint = if chapter.phase == Phase::PassageCombat {
-            "J / X  golpe   K / Y  forte   Q / LB  defender   Espaço / B  pular"
+            a.texts.get("controls.combat")
+        } else if chapter.scene == crate::adventure::chapter::Scene::Lane
+            && chapter.debris.iter().any(|piece| piece.hp > 0)
+        {
+            a.texts.get("controls.debris")
         } else {
             a.texts.get("controls.explore")
         };

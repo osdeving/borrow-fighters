@@ -24,9 +24,9 @@
     "phone.first": "voltou a acontecer.",
     "phone.python": "sim, eu senti algo...",
     "phone.last": "Vou resolver isso.",
-    "lane.0": "O caminho da travessa ficou obstruído. Você conseguiu passar?",
+    "lane.0": "Você abriu caminho pelos destroços. Achei que ninguém fosse conseguir.",
     "lane.1": "Sim. Quem ainda está do outro lado?",
-    "lane.2": "Tem gente esperando na passagem. Alguma coisa não deixa ninguém cruzar.",
+    "lane.2": "Tem gente esperando na passagem. São duas EPs. Elas não deixam ninguém cruzar.",
     "departure.0": "Podem passar. Eu vou seguir em frente.",
     "departure.1": "E entender o que está acontecendo.",
     "objective.driver": "Veja como está o motorista",
@@ -34,10 +34,10 @@
     "objective.neighbour": "Ouça a moradora",
     "objective.phone": "Fale com Python",
     "objective.leave_street": "Siga pela rua até a travessa",
-    "objective.lane": "Atravesse o obstáculo e fale com a moradora",
+    "objective.lane": "A passagem abriu. Fale com a moradora",
     "objective.lane_exit": "Siga até a passagem",
     "objective.passage": "Veja por que as pessoas não conseguem passar",
-    "objective.protect": "Proteja a passagem",
+    "objective.protect": "Proteja a passagem das duas EPs",
     "objective.clear": "A passagem está livre. Continue",
     "objective.complete": "Capítulo concluído",
     "interaction.driver": "E / A  verificar motorista",
@@ -48,6 +48,12 @@
     "controls.dialogue": "Enter / RB  continuar",
     "controls.phone": "Enter / RB  concluir conversa",
     "controls.retry": "R / A  tentar de novo no checkpoint",
-    "controls.complete": "Enter / A  voltar ao menu"
+    "controls.complete": "Enter / A  voltar ao menu",
+    "objective.debris": "Abra caminho: quebre as caixas e os destroços",
+    "controls.debris": "J / X  soco   K / Y  soco forte   V / RT  chute   A D  mover",
+    "controls.combat": "J / X  soco   K / Y  forte   V / RT  chute   Q / LB  defender   Espaço / B  pular",
+    "hud.rust": "RUST",
+    "hud.enemy_one": "EP 01",
+    "hud.enemy_two": "EP 02"
   }
 }

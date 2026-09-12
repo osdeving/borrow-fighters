@@ -123,3 +123,10 @@ referência por papel: identidade de personagem e estilo de pintura.
 Esta verificação não aprova automaticamente o ritmo do trailer, enquadramento
 após zoom, legibilidade de manchetes, mixagem, transições ou logo animado.
 Esses elementos precisam ser revisados na abertura executada pela aplicação.
+
+## Biografias por peças — 12/09/2026
+
+Duke e Old C agora têm [catálogo, tomadas e procedência próprios](scenes/README.md).
+Os retratos existentes do logo e as ilustrações de C++/Python foram preservados.
+Os novos ambientes, atores e objetos são editáveis independentemente, com
+trajetórias e legendas carregadas dos arquivos do jogo.

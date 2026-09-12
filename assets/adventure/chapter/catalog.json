@@ -347,11 +347,68 @@
             898,
             662,
             206,
-            103
+            98
           ],
           "anchor": [
             103,
-            103
+            98
+          ]
+        }
+      ]
+    },
+    "prop.crate_fragment": {
+      "width": 36,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/props.png",
+          "source": [
+            900,
+            674,
+            76,
+            23
+          ],
+          "anchor": [
+            38,
+            12
+          ]
+        }
+      ]
+    },
+    "prop.crate_teal": {
+      "width": 120,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/props.png",
+          "source": [
+            898,
+            758,
+            206,
+            94
+          ],
+          "anchor": [
+            103,
+            94
+          ]
+        }
+      ]
+    },
+    "prop.loose_board": {
+      "width": 105,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "street/props.png",
+          "source": [
+            924,
+            422,
+            292,
+            14
+          ],
+          "anchor": [
+            146,
+            7
           ]
         }
       ]

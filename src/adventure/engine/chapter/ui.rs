@@ -39,27 +39,33 @@ pub(super) fn objective(d: &mut impl RaylibDraw, a: &ChapterAssets, chapter: &Ch
         PAPER,
     );
     if chapter.phase == Phase::PassageCombat {
-        for (x, hp, max, label) in [
-            (48, chapter.player().hp, chapter.player().max_hp, "RUST"),
-            (
-                958,
-                chapter.combat.enemy.hp,
-                chapter.combat.enemy.max_hp,
-                "ERRÁTICO",
-            ),
-        ] {
-            d.draw_rectangle(x, 125, 250, 8, INK);
+        let bars = std::iter::once((48, 105, chapter.player(), "hud.rust")).chain(
+            chapter.combat.enemies().enumerate().map(|(i, actor)| {
+                (
+                    958,
+                    105 + i as i32 * 42,
+                    actor,
+                    if i == 0 {
+                        "hud.enemy_one"
+                    } else {
+                        "hud.enemy_two"
+                    },
+                )
+            }),
+        );
+        for (x, y, actor, label) in bars {
+            d.draw_rectangle(x, y + 20, 250, 8, INK);
             d.draw_rectangle(
                 x,
-                125,
-                (250.0 * (hp as f32 / max as f32).clamp(0.0, 1.0)) as i32,
+                y + 20,
+                (250.0 * actor.hp as f32 / actor.max_hp as f32) as i32,
                 8,
                 GOLD,
             );
             d.draw_text_ex(
                 &a.common.signage,
-                label,
-                Vector2::new(x as f32, 105.0),
+                a.texts.get(label),
+                Vector2::new(x as f32, y as f32),
                 16.0,
                 1.0,
                 INK,

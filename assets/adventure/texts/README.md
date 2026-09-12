@@ -28,7 +28,8 @@ precisam de `\"`. JSON não aceita comentários ou vírgula depois do último it
 | `navigation.*` | Próximo trecho, pular tudo e confirmação final da apresentação |
 | `opening.news.*` | Seção, manchete e linha de apoio dos três jornais |
 | `opening.cpp.*`, `opening.python.*` | Nomes, papéis e biografias ilustradas |
-| `opening.duke.*`, `opening.c.*`, `opening.go.*`, `opening.rust.*` | Apresentação dos demais personagens |
+| `opening.duke.*`, `opening.c.*` | Biografias por peças, livros e terminal editáveis |
+| `opening.go.*`, `opening.rust.*` | Textos preservados do elenco e aparição de Rust |
 | `opening.logo.*`, `opening.subtitle`, `opening.tagline` | Logo, subtítulo e frase final |
 | `editor.*` | Avisos de recarga |
 

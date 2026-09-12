@@ -34,6 +34,7 @@ impl ChapterAssets {
         let pieces =
             StreetPieces::load_catalog(rl, thread, "assets/adventure/chapter/catalog.json")?;
         validate_clips(&pieces.catalog)?;
+        validate_world_pieces(&load_world()?, &pieces.catalog)?;
         let lane = rl.load_texture(
             thread,
             &asset_path("assets/adventure/chapter/lane.png").to_string_lossy(),
@@ -75,6 +76,33 @@ pub fn load_world() -> Result<World, Box<dyn Error>> {
     Ok(World::from_json(&fs::read_to_string(asset_path(
         "assets/adventure/chapter/world.json",
     ))?)?)
+}
+
+fn validate_world_pieces(
+    world: &World,
+    catalog: &crate::adventure::scenery::PieceCatalog,
+) -> Result<(), Box<dyn Error>> {
+    for scene in &world.scenes {
+        for prop in &scene.loose_props {
+            if !catalog.pieces.contains_key(&prop.piece) {
+                return Err(format!(
+                    "loose prop {} references missing piece {}",
+                    prop.id, prop.piece
+                )
+                .into());
+            }
+        }
+        for prop in &scene.debris {
+            for id in [&prop.piece, &prop.fragment] {
+                if !catalog.pieces.contains_key(id) {
+                    return Err(
+                        format!("destructible {} references missing piece {id}", prop.id).into(),
+                    );
+                }
+            }
+        }
+    }
+    Ok(())
 }
 
 fn validate_clips(catalog: &crate::adventure::scenery::PieceCatalog) -> Result<(), Box<dyn Error>> {

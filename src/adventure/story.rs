@@ -4,13 +4,13 @@
 //! scene skipping without granting a combat victory. The platform owns pause.
 
 use super::ambient::AmbientState;
-use super::arrival::ARRIVAL_TICKS;
-use super::combat::{Action, Combat, CombatInput, Outcome, TICKS_PER_SECOND};
+use super::arrival::{ARRIVAL_TICKS, EpArrival};
+use super::combat::{Action, Combat, CombatInput, ENCOUNTER_TRIGGER_X, Outcome, TICKS_PER_SECOND};
 
 /// Duration of Rust's automatic waking and morning sequence.
 pub const MORNING_TICKS: u32 = 14 * TICKS_PER_SECOND;
 /// Duration of the newspaper, character and title presentation.
-pub const OPENING_TICKS: u32 = 48 * TICKS_PER_SECOND;
+pub const OPENING_TICKS: u32 = 64 * TICKS_PER_SECOND;
 /// Duration reserved for approaching the creature and showing regret.
 pub const AFTERMATH_TICKS: u32 = 7 * TICKS_PER_SECOND;
 /// Minimum visible regret before an explicit scene advance may complete the slice.
@@ -89,6 +89,8 @@ pub struct Story {
     pub combat: Combat,
     /// Background animation that observes the encounter without changing combat.
     pub ambient: AmbientState,
+    /// Independently authored descent whose ground contact starts the turmoil.
+    pub ep_arrival: EpArrival,
 }
 
 impl Default for Story {
@@ -105,6 +107,7 @@ impl Story {
             stage_ticks: 0,
             combat: Combat::new(),
             ambient: AmbientState::default(),
+            ep_arrival: EpArrival::default(),
         }
     }
 
@@ -124,7 +127,7 @@ impl Story {
             }
             Stage::Encounter => {
                 if !arriving {
-                    self.combat.tick(input);
+                    self.tick_encounter(input);
                 }
                 self.ambient.tick(self.combat.enemy_awake);
                 if self.combat.outcome == Outcome::Victory {
@@ -133,6 +136,7 @@ impl Story {
             }
             Stage::Aftermath => {
                 self.combat.tick_aftermath();
+                self.ep_arrival.tick();
                 self.ambient.tick(self.combat.enemy_awake);
                 if self.stage_ticks >= AFTERMATH_TICKS && self.gesture_visible() {
                     self.enter(Stage::Opening);
@@ -149,6 +153,7 @@ impl Story {
             Stage::AdaPrologue => self.enter(Stage::RustMorning),
             Stage::RustMorning => self.enter(Stage::Encounter),
             Stage::Encounter if self.arrival_active() => self.stage_ticks = ARRIVAL_TICKS,
+            Stage::Encounter if self.ep_arrival_active() => self.finish_ep_arrival(),
             Stage::Aftermath if self.gesture_visible() => self.enter(Stage::Opening),
             Stage::Opening => self.enter(Stage::Complete),
             _ => {}
@@ -178,12 +183,13 @@ impl Story {
                 self.skip_to_next_boundary(&[150, 225, 355, 500, 585], Stage::Encounter);
             }
             Stage::Encounter if self.arrival_active() => self.stage_ticks = ARRIVAL_TICKS,
+            Stage::Encounter if self.ep_arrival_active() => self.finish_ep_arrival(),
             Stage::Encounter | Stage::Aftermath => self.enter(Stage::Opening),
             Stage::Opening => {
                 // Three headlines, both halves of each biography, three character
                 // appearances and the final logo, matching engine/opening.rs.
-                let boundaries =
-                    [3, 6, 9, 14, 19, 24, 29, 33, 37, 41].map(|seconds| seconds * TICKS_PER_SECOND);
+                let boundaries = [3, 6, 9, 14, 19, 24, 29, 35, 41, 47, 53, 57]
+                    .map(|seconds| seconds * TICKS_PER_SECOND);
                 self.skip_to_next_boundary(&boundaries, Stage::Complete);
             }
             Stage::Complete => {}
@@ -224,6 +230,44 @@ impl Story {
             && !self.combat.enemy_awake
             && self.combat.ticks == 0
             && self.stage_ticks < ARRIVAL_TICKS
+    }
+
+    /// Whether the EP descent/recovery currently holds combat input.
+    pub fn ep_arrival_active(&self) -> bool {
+        self.stage == Stage::Encounter && self.ep_arrival.active()
+    }
+
+    fn tick_encounter(&mut self, input: CombatInput) {
+        if self.ep_arrival.active() {
+            self.ep_arrival.tick();
+            self.combat.player.action_ticks = self.combat.player.action_ticks.saturating_add(1);
+            if self.ep_arrival.impacted() {
+                self.combat.enemy_awake = true;
+            }
+        } else if !self.combat.enemy_awake && self.combat.outcome == Outcome::Ongoing {
+            // The prologue owns this appearance. Standalone encounter rules and
+            // chapter encounters retain their own activation policies.
+            self.combat.tick_exploration(input);
+            if self.combat.player.position.x >= ENCOUNTER_TRIGGER_X && self.combat.player.grounded {
+                self.ep_arrival.start();
+                self.combat.player.action = Action::Idle;
+                self.combat.player.action_ticks = 0;
+                self.combat.player.velocity.x = 0.0;
+            }
+        } else {
+            self.ep_arrival.tick();
+            self.combat.tick(input);
+        }
+    }
+
+    fn finish_ep_arrival(&mut self) {
+        self.ep_arrival.finish();
+        self.combat.enemy_awake = true;
+        // A local scene skip lands safely and starts evacuation at its origin;
+        // it cannot grant victory or replay an already-started street reaction.
+        if self.ambient.accident_ticks().is_none() {
+            self.ambient.tick(true);
+        }
     }
 
     /// Returns the current prologue beat, or none after the historical sequence.
@@ -268,6 +312,7 @@ impl Story {
         self.stage_ticks = 0;
         if stage == Stage::Encounter {
             self.ambient = AmbientState::new(self.combat.enemy_awake);
+            self.ep_arrival.reset(self.combat.enemy_awake);
         }
     }
 }
@@ -289,6 +334,10 @@ mod tests {
         story.skip_segment(); // The camera hands control to the player.
         story.combat.player.position.x = super::super::combat::ENCOUNTER_TRIGGER_X;
         story.tick(CombatInput::default());
+        while !story.ep_arrival.impacted() {
+            assert_eq!(story.ambient.accident_ticks(), None);
+            story.tick(CombatInput::default());
+        }
         assert_eq!(story.ambient.kid_phase(), KidPhase::Startled);
         assert_eq!(story.ambient.accident_ticks(), Some(0));
         for _ in 0..60 {
@@ -451,6 +500,7 @@ mod tests {
                 jump_pressed: tick % 61 == 0,
                 light_pressed: tick % 27 == 0,
                 heavy_pressed: tick % 47 == 0,
+                kick_pressed: false,
                 blocking: tick % 99 < 20,
             };
             story.tick(input);
@@ -572,10 +622,83 @@ mod tests {
         assert_eq!(story.combat.enemy.hp, story.combat.enemy.max_hp);
         assert!(story.combat.enemy_awake);
         assert!(!story.arrival_active());
+        assert!(!story.ep_arrival_active());
         assert_eq!(story.combat.ticks, 0);
         story.restart();
         assert_eq!(story.stage, Stage::AdaPrologue);
         assert!(!story.combat.enemy_awake);
+    }
+
+    #[test]
+    fn ep_landing_holds_combat_and_starts_turmoil_only_at_ground_contact() {
+        let mut story = Story::new();
+        story.advance_scene();
+        story.advance_scene();
+        story.skip_segment();
+        story.combat.player.position.x = ENCOUNTER_TRIGGER_X;
+        story.tick(CombatInput::default());
+        let position = story.combat.player.position;
+        let ticks = story.combat.ticks;
+        let impact = story.ep_arrival.spec.impact_tick();
+        assert!(story.ep_arrival_active());
+        assert!(!story.combat.enemy_awake);
+        let noisy = CombatInput {
+            movement: 1.0,
+            jump_pressed: true,
+            light_pressed: true,
+            heavy_pressed: true,
+            kick_pressed: true,
+            blocking: true,
+        };
+        for age in 1..impact {
+            story.tick(noisy);
+            assert_eq!(story.ep_arrival.ticks(), Some(age));
+            assert_eq!(story.combat.player.position, position);
+            assert_eq!(story.combat.ticks, ticks);
+            assert!(!story.combat.enemy_awake);
+            assert_eq!(story.ambient.accident_ticks(), None);
+        }
+        story.tick(noisy);
+        assert!(story.combat.enemy_awake);
+        assert_eq!(story.ambient.accident_ticks(), Some(0));
+        while story.ep_arrival_active() {
+            story.tick(noisy);
+            assert_eq!(story.combat.player.position, position);
+            assert_eq!(story.combat.player.hp, 100);
+            assert_eq!(story.combat.enemy.hp, 96);
+        }
+        story.tick(CombatInput {
+            movement: 1.0,
+            ..CombatInput::default()
+        });
+        assert!(story.combat.player.position.x > position.x);
+        assert_eq!(story.combat.ticks, ticks + 1);
+    }
+
+    #[test]
+    fn skipping_ep_descent_or_recovery_releases_combat_without_victory() {
+        for age in [0, 90, 180, 230, 280] {
+            let mut story = Story::new();
+            story.advance_scene();
+            story.advance_scene();
+            story.skip_segment();
+            story.combat.player.position.x = ENCOUNTER_TRIGGER_X;
+            story.tick(CombatInput::default());
+            for _ in 0..age {
+                story.tick(CombatInput::default());
+            }
+            let reaction_before = story.ambient.accident_ticks();
+            story.skip_segment();
+            assert_eq!(story.stage, Stage::Encounter);
+            assert_eq!(story.combat.outcome, Outcome::Ongoing);
+            assert_eq!(story.combat.player.hp, 100);
+            assert_eq!(story.combat.enemy.hp, 96);
+            assert!(story.combat.enemy_awake);
+            assert!(!story.ep_arrival_active());
+            assert_eq!(story.ambient.accident_ticks(), reaction_before.or(Some(0)));
+            story.skip_segment();
+            assert_eq!(story.stage, Stage::Opening);
+        }
     }
 
     #[test]
@@ -652,7 +775,7 @@ mod tests {
     #[test]
     fn opening_skip_preserves_each_headline_biography_panel_and_character() {
         let mut story = Story::presentation();
-        for seconds in [3, 6, 9, 14, 19, 24, 29, 33, 37, 41] {
+        for seconds in [3, 6, 9, 14, 19, 24, 29, 35, 41, 47, 53, 57] {
             story.tick(CombatInput::default());
             story.skip_segment();
             assert_eq!(story.stage, Stage::Opening);

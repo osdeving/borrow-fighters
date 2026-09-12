@@ -3,6 +3,8 @@
 //! System: Adventure chapter. The same world coordinates feed physics, authored
 //! approaches, interaction prompts and debug drawing; images never define triggers.
 
+use super::debris::DebrisSpec;
+use crate::adventure::combat::EnemyTuning;
 use crate::math::{rect::Rect, vec2::Vec2};
 use serde::{Deserialize, Serialize};
 
@@ -75,6 +77,34 @@ pub struct InterestPoint {
     pub path: Vec<Point>,
 }
 
+/// One chapter enemy with independent placement and reviewed difficulty.
+#[derive(Clone, Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct EnemySpawn {
+    /// Stable identity within the local encounter.
+    pub id: String,
+    /// Safe feet position before the encounter becomes visible.
+    pub position: Point,
+    /// Explicit difficulty parameters, independent of rendering.
+    pub tuning: EnemyTuning,
+}
+
+/// An independently replaceable, nonblocking piece of loose foreground debris.
+#[derive(Clone, Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct LooseProp {
+    /// Stable instance identity.
+    pub id: String,
+    /// Sprite reference from the chapter catalog.
+    pub piece: String,
+    /// Feet/anchor in chapter world coordinates.
+    pub position: Point,
+    /// Uniform size multiplier.
+    pub scale: f32,
+    /// Rotation in degrees around the catalog anchor.
+    pub rotation: f32,
+}
+
 /// Geometry of a single bounded chapter scene.
 #[derive(Clone, Debug, Deserialize)]
 pub struct SceneGeometry {
@@ -94,6 +124,15 @@ pub struct SceneGeometry {
     pub points: Vec<InterestPoint>,
     /// Solid rectangles; the current lane contains one low obstruction.
     pub obstacles: Vec<Region>,
+    /// Independent breakable cargo pieces.
+    #[serde(default)]
+    pub debris: Vec<DebrisSpec>,
+    /// Loose boards and small fragments, never included in body collision.
+    #[serde(default)]
+    pub loose_props: Vec<LooseProp>,
+    /// Explicit encounter roster, empty outside the passage.
+    #[serde(default)]
+    pub enemies: Vec<EnemySpawn>,
     /// Foreground region leading to the next authored stretch.
     pub exit: Region,
 }
@@ -206,6 +245,64 @@ impl World {
                     || obstacle.contains(scene.spawn.vec())
                 {
                     return Err(format!("Unreachable or unsupported obstruction in {id:?}"));
+                }
+            }
+            for (index, piece) in scene.debris.iter().enumerate() {
+                if piece.id.is_empty()
+                    || piece.piece.is_empty()
+                    || piece.fragment.is_empty()
+                    || scene.debris[..index].iter().any(|p| p.id == piece.id)
+                    || !piece.rotation.is_finite()
+                    || piece.rotation.abs() > 12.0
+                    || !(12..=96).contains(&piece.hp)
+                    || !region_valid(piece.region)
+                    || piece.region.y + piece.region.height > scene.floor_y
+                    || piece.region.height > 120.0
+                    || piece.region.width > 150.0
+                    || piece.region.rect().intersects(scene.exit.rect())
+                    || piece.region.contains(scene.spawn.vec())
+                    || scene
+                        .points
+                        .iter()
+                        .any(|p| piece.region.rect().intersects(p.region.rect()))
+                    || scene.debris[..index]
+                        .iter()
+                        .any(|p| p.region.rect().intersects(piece.region.rect()))
+                {
+                    return Err(format!("Invalid destructible {} in {id:?}", piece.id));
+                }
+            }
+            for (index, prop) in scene.loose_props.iter().enumerate() {
+                if prop.id.is_empty()
+                    || prop.piece.is_empty()
+                    || scene.loose_props[..index].iter().any(|p| p.id == prop.id)
+                    || !prop.position.x.is_finite()
+                    || !prop.position.y.is_finite()
+                    || !(scene.walk_min..=scene.walk_max).contains(&prop.position.x)
+                    || !(0.0..=scene.floor_y + 30.0).contains(&prop.position.y)
+                    || !prop.scale.is_finite()
+                    || !(0.1..=2.0).contains(&prop.scale)
+                    || !prop.rotation.is_finite()
+                    || prop.rotation.abs() > 90.0
+                {
+                    return Err(format!("Invalid loose prop {} in {id:?}", prop.id));
+                }
+            }
+            if (id == Scene::Passage && scene.enemies.len() != 2)
+                || (id != Scene::Passage && !scene.enemies.is_empty())
+            {
+                return Err("The passage requires exactly two opponents".into());
+            }
+            for (index, enemy) in scene.enemies.iter().enumerate() {
+                if enemy.id.is_empty()
+                    || !point_valid(enemy.position)
+                    || enemy.position.y != scene.floor_y
+                    || !enemy.tuning.is_valid()
+                    || scene.enemies[..index]
+                        .iter()
+                        .any(|e| e.id == enemy.id || (e.position.x - enemy.position.x).abs() < 90.0)
+                {
+                    return Err(format!("Invalid opponent {} in {id:?}", enemy.id));
                 }
             }
             let required: &[&str] = match id {

@@ -10,9 +10,8 @@ Seu [atlas anterior](roster/go.png) permanece como histórico, fora do manifesto
 e do carregamento. Os assets, o elenco e as regras do jogo de luta não são
 alterados por esse corte.
 
-O intervalo de personagens mantém 12 segundos: Duke de 29 a 33 s, Old C de
-33 a 37 s e Rust de 37 a 41 s. C++ e Python continuam nas cenas biográficas
-anteriores. O logo reúne os cinco retratos em colunas iguais; sua chegada
-permanece aos 41 s, preservando o sincronismo com a trilha e os 48 s totais.
-Os textos antigos de Go continuam disponíveis no catálogo editável, sem uso
-na apresentação atual.
+A expansão de 12/09 acrescenta biografias por peças: Duke chega de limousine
+à Paulista e preside uma reunião; Old C aparece no setup com livros e CRT.
+Duke ocupa 29–41 s, Old C 41–53 s e Rust 53–57 s. O logo chega aos 57 s e a apresentação
+termina aos 64 s, com a trilha original ajustada. [Catálogo e edição](scenes/README.md).
+C++/Python e os retratos do logo permanecem disponíveis com a arte anterior.

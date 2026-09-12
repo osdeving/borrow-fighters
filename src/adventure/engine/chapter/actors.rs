@@ -32,8 +32,10 @@ pub(super) fn draw(d: &mut impl RaylibDraw, a: &ChapterAssets, chapter: &Chapter
         rust(d, a, chapter, debug);
     }
     if chapter.scene == Scene::Passage {
-        actors::actor_shadow(d, &chapter.combat.enemy, 0.0);
-        actors::creature(d, &a.common, &chapter.combat.enemy, 0.0);
+        for enemy in chapter.combat.enemies() {
+            actors::actor_shadow(d, enemy, 0.0);
+            actors::creature(d, &a.common, enemy, 0.0);
+        }
     }
 }
 

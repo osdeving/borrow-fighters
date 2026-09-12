@@ -248,6 +248,7 @@ impl Chapter {
                 };
             }
             if distance <= remaining {
+                self.combat.player.stride_distance += distance / self.player_scale();
                 self.combat.player.position = target;
                 self.route_index += 1;
                 remaining -= distance;
@@ -255,6 +256,7 @@ impl Chapter {
                     break;
                 }
             } else {
+                self.combat.player.stride_distance += remaining / self.player_scale();
                 self.combat.player.position.x += delta.x / distance * remaining;
                 self.combat.player.position.y += delta.y / distance * remaining;
                 break;

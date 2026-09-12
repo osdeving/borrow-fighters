@@ -141,3 +141,39 @@ Trocar imagem/recorte/duração não exige repintar fundo ou demais personagens.
 Mudanças de catálogo/geometria entram na próxima sessão; F3 permite conferir
 rotas, limites e contatos. O capítulo usa câmera/translação interpoladas e
 clips de poses, sem engine adicional, rig esquelético ou vídeo pré-renderizado.
+
+## Carga quebrável e encontro com duas EPs
+
+`world.json` separa as nove instâncias de carga de seus desenhos: `debris[].id`
+é a identidade da caixa; `piece` e `fragment` referenciam o catálogo; `region`
+define o volume físico e `hp` a resistência. As caixas intactas reutilizam
+`prop.crate` e `prop.crate_teal`; lascas usam `prop.crate_fragment`, um recorte
+independente do material da caixa. Troque essas referências para substituir uma peça sem recriar o fundo.
+Os recortes reaproveitam `street/props.png` sem regravar pixels. `rotation`
+aplica pequenas inclinações autorais; `loose_props[]` posiciona tábuas e lascas
+independentes no chão sem criar colisões ocultas.
+
+Cada soco ou chute acerta uma única peça uma vez. Trincas, poeira e fragmentos
+seguem o relógio do contato; a peça deixa de colidir ao quebrar. Caixas acima
+caem por gravidade e se apoiam nas que restam, sem flutuar no local antigo.
+O chute da aventura usa **V / RT**, alcança mais longe que o soco e mantém o
+pulo do capítulo em **Espaço / B**. Soco leve, forte e chute causam respectivamente
+12, 24 e 18 pontos; caixas têm 24 ou 36 pontos de resistência.
+
+A passagem lê `enemies[]` do mesmo `world.json`: identidade, posição, vida,
+velocidade, preparação, recuperação e dano de cada EP são editáveis. As duas
+instâncias compartilham o sprite de EP, mantendo corpos, ataques, vida e barras
+independentes. Vitória exige derrotar ambas. A configuração revisada usa
+120/112 PV, velocidade 175/165, preparação de 30/34 ticks e dano 15, preservando
+as oportunidades de defesa e interrupção do prólogo.
+
+O carregamento rejeita identidades duplicadas, regiões inválidas, resistência
+fora dos limites, EPs sobrepostas e referências de sprites inexistentes.
+Alterações de geometria, resistência, elenco ou catálogo entram na próxima
+sessão; os textos e instruções continuam recarregáveis por **F5**.
+
+Checkpoint guarda marcos seguros: retomar `lane_start` repõe a carga inicial;
+`lane_cleared` mantém a travessa livre. Derrota na passagem restaura as duas EPs
+e Rust no encontro local, sem repetir a demolição nem as conversas.
+A revisão automática usa um save próprio e registra todos os objetos e inimigos
+em `telemetry.jsonl`.

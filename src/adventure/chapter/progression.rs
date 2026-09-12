@@ -118,7 +118,9 @@ impl Chapter {
             }
             return;
         }
+        super::debris::settle(&mut self.debris, self.world.scene(self.scene).floor_y);
         self.explore_motion(input);
+        self.hit_debris();
         let geometry = self.world.scene(self.scene);
         if self.phase == Phase::PassageExplore
             && geometry
@@ -147,12 +149,17 @@ impl Chapter {
 
     fn explore_motion(&mut self, input: ChapterInput) {
         let previous = self.player().position;
+        let stride_before = self.player().stride_distance;
         self.combat.tick_exploration(input.combat());
         let geometry = self.world.scene(self.scene);
         let actor = &mut self.combat.player;
         let half_width = actor.hurtbox().width * 0.5;
-        for obstacle in &geometry.obstacles {
-            let solid = obstacle.rect();
+        for solid in geometry
+            .obstacles
+            .iter()
+            .map(|r| r.rect())
+            .chain(self.debris.iter().filter(|p| p.hp > 0).map(|p| p.rect()))
+        {
             if !actor.hurtbox().intersects(solid) {
                 continue;
             }
@@ -178,21 +185,65 @@ impl Chapter {
             }
         }
         if actor.grounded && actor.position.y < geometry.floor_y {
-            let supported = geometry.obstacles.iter().any(|r| {
-                (actor.position.y - r.y).abs() < 0.01
-                    && actor.position.x + half_width > r.x
-                    && actor.position.x - half_width < r.x + r.width
-            });
+            let supported = geometry
+                .obstacles
+                .iter()
+                .map(|r| r.rect())
+                .chain(self.debris.iter().filter(|p| p.hp > 0).map(|p| p.rect()))
+                .any(|r| {
+                    (actor.position.y - r.y).abs() < 0.01
+                        && actor.position.x + half_width > r.x
+                        && actor.position.x - half_width < r.x + r.width
+                });
             if !supported {
                 actor.grounded = false;
             }
         }
         self.clamp_bodies();
+        if self.player().grounded && self.player().action == Action::Walk {
+            self.combat.player.stride_distance =
+                stride_before + (self.player().position.x - previous.x).abs();
+        }
+    }
+
+    fn hit_debris(&mut self) {
+        let Some(hitbox) = self.player().attack_hitbox() else {
+            return;
+        };
+        let x = self.player().position.x;
+        let index = self
+            .debris
+            .iter()
+            .enumerate()
+            .filter(|(_, piece)| piece.hp > 0 && piece.rect().intersects(hitbox))
+            .min_by(|(_, a), (_, b)| {
+                (a.rect().center_x() - x)
+                    .abs()
+                    .total_cmp(&(b.rect().center_x() - x).abs())
+            })
+            .map(|(index, _)| index);
+        if let Some(index) = index {
+            let damage = self.player().strike_damage();
+            let direction = self.player().facing.sign();
+            let damage = self.debris[index].hit(damage, self.ticks, direction);
+            self.combat.player.register_scenery_hit();
+            // Reuses the contact sound/effect observer without introducing phantom damage.
+            self.combat.last_hit = Some(crate::adventure::combat::HitFeedback {
+                target: crate::adventure::combat::ActorKind::Erratic,
+                position: Vec2::new(self.debris[index].rect().center_x(), hitbox.center().y),
+                blocked: false,
+                damage,
+                age_ticks: 0,
+            });
+        }
     }
 
     fn clamp_bodies(&mut self) {
         let geometry = self.world.scene(self.scene);
-        for actor in [&mut self.combat.player, &mut self.combat.enemy] {
+        for actor in std::iter::once(&mut self.combat.player)
+            .chain(std::iter::once(&mut self.combat.enemy))
+            .chain(self.combat.extra_enemies.iter_mut())
+        {
             let clamped = actor.position.x.clamp(geometry.walk_min, geometry.walk_max);
             if clamped != actor.position.x {
                 actor.velocity.x = 0.0;

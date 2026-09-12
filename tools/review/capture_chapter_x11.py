@@ -3,7 +3,7 @@
 
 Uses --start chapter --capture, never the application's automated --review
 policy. Fresh evidence-local user data isolates campaign saves. Telemetry is
-read-only: navigation, conversations, jumping, combat and retry all use keys.
+read-only: navigation, conversations, demolition, combat and retry all use keys.
 The hidden game records its own render target; desktop focus is untouched.
 """
 from __future__ import annotations
@@ -188,39 +188,58 @@ class ChapterReview(TrafficReview):
 
     def lane_obstacle(self):
         scene = self.scenes["lane"]
-        obstacle = scene["obstacles"][0]
-        self.walk_to(obstacle["x"] - 80, "LaneExplore")
+        specs = {piece["id"]: piece for piece in scene["debris"]}
+        first_x = min(piece["region"]["x"] for piece in specs.values())
+        self.walk_to(first_x - 80, "LaneExplore")
+        self.screenshot("10-lane-cargo")
+        first = self.observe()
         if self.args.mode == "functional":
             self.hold("d", True)
             try:
-                self.ticks(35, "walking reaches obstacle")
+                self.ticks(35, "walking reaches cargo")
                 blocked = self.observe()
-                later = self.ticks(15, "solid obstacle retains walking player")
+                self.tap("space")
+                self.ticks(90, "intact pile stops the former jump")
+                later = self.observe()
             finally:
                 self.hold("d", False)
-            self.check("lane_obstacle_blocks_grounded_walking",
-                       later["player"]["grounded"]
-                       and later["player"]["x"] == blocked["player"]["x"]
-                       and later["player"]["x"] < obstacle["x"],
-                       obstacle=obstacle, player=later["player"])
-            self.screenshot("10-lane-obstacle")
-            self.walk_to(obstacle["x"] - 80, "LaneExplore")
-        self.hold("d", True)
+            self.check("intact_cargo_blocks_walking_and_the_former_jump",
+                       later["player"]["x"] <= first_x - 29
+                       and all(piece["hp"] == specs[piece["id"]]["hp"] for piece in later["debris"]),
+                       blocked=blocked["player"], after_jump=later["player"])
+        attacks = 0
+        picture = False
+        deadline = time.monotonic() + 90.0
         try:
-            self.tap("space")
-            airborne = self.wait(lambda s: not s["player"]["grounded"]
-                                and s["player"]["y"] < obstacle["y"] - 10,
-                                "jump rises above obstacle")
-            self.screenshot("11-lane-jump")
-            landed = self.wait(lambda s: s["player"]["x"] > obstacle["x"] + obstacle["width"] + 30
-                              and s["player"]["grounded"]
-                              and abs(s["player"]["y"] - scene["floor_y"]) < 1,
-                              "jump clears obstacle and lands", 12.0)
+            while time.monotonic() < deadline:
+                sample = self.observe()
+                remaining = [piece for piece in sample["debris"] if piece["hp"] > 0]
+                if not remaining:
+                    break
+                piece = min(remaining, key=lambda piece: specs[piece["id"]]["region"]["x"])
+                distance = specs[piece["id"]]["region"]["x"] - sample["player"]["x"]
+                self.hold("d", distance > 62)
+                ready = sample["player"]["action"] in ("Idle", "Walk")
+                if distance <= 76 and ready:
+                    self.tap(("j", "v", "k")[attacks % 3])
+                    attacks += 1
+                elif sample["player"]["action"] == "Kick" and not picture:
+                    self.screenshot("11-lane-kick")
+                    picture = True
+                else:
+                    time.sleep(0.02)
+            else:
+                raise TimeoutError(f"Cargo did not clear: {self.observe()}")
         finally:
-            self.hold("d", False)
-        self.check("lane_jump_clears_solid_and_lands_on_floor",
-                   landed["player"]["x"] > obstacle["x"] + obstacle["width"],
-                   airborne=airborne["player"], landed=landed["player"])
+            self.release_all()
+        after = self.observe()
+        records = [s for s in self.telemetry.samples if s["frame"] >= first["frame"]]
+        actions = {s["player"]["action"] for s in records}
+        self.check("cargo_breaks_progressively_through_native_punches_and_kicks",
+                   all(piece["hp"] == 0 for piece in after["debris"])
+                   and attacks >= 9 and {"LightAttack", "Kick", "HeavyAttack"}.issubset(actions),
+                   attacks_sent=attacks, actions=sorted(actions), pieces=after["debris"])
+        self.screenshot("11-lane-open")
 
     def retry_combat(self, defeated):
         self.release_all()
@@ -231,7 +250,8 @@ class ChapterReview(TrafficReview):
                             and s["outcome"] == "Ongoing", "local combat retry")
         self.check(f"defeat_retry_{self.retries}_restores_only_passage",
                    retried["scene"] == "Passage" and retried["player"]["hp"] > 0
-                   and retried["enemy"]["hp"] > 0
+                   and len(retried["enemies"]) == 2
+                   and all(enemy["hp"] > 0 for enemy in retried["enemies"])
                    and retried["checkpoint"] == defeated["checkpoint"]
                    and retried["checkpoint"]["stage"] == "passage_fight"
                    and retried["phone"] is None and retried["dialogue"] is None,
@@ -288,8 +308,10 @@ class ChapterReview(TrafficReview):
                         raise AssertionError("Real combat exhausted its retry allowance")
                     self.retry_combat(sample)
                     continue
-                delta = sample["enemy"]["x"] - sample["player"]["x"]
-                warning = sample["enemy"]["action"] in ("Telegraph", "Lunge")
+                enemy = min((enemy for enemy in sample["enemies"] if enemy["hp"] > 0),
+                            key=lambda enemy: abs(enemy["x"] - sample["player"]["x"]))
+                delta = enemy["x"] - sample["player"]["x"]
+                warning = enemy["action"] in ("Telegraph", "Lunge")
                 facing = "Right" if delta >= 0 else "Left"
                 approach = not warning and (abs(delta) > 90 or sample["player"]["facing"] != facing)
                 self.hold("d", approach and delta >= 0)
@@ -301,7 +323,7 @@ class ChapterReview(TrafficReview):
                     continue
                 ready = sample["player"]["action"] in ("Idle", "Walk", "Block")
                 if ready and not warning and abs(delta) <= 104 and time.monotonic() - last_attack >= 0.22:
-                    self.tap("j" if attacks % 2 == 0 else "k")
+                    self.tap(("j", "v", "k")[attacks % 3])
                     attacks += 1
                     last_attack = time.monotonic()
                 else:
@@ -314,9 +336,9 @@ class ChapterReview(TrafficReview):
         records = [s for s in self.telemetry.samples if s["frame"] >= first["frame"]]
         actions = sorted({s["player"]["action"] for s in records})
         self.check("passage_cleared_through_real_light_heavy_guard_and_health",
-                   after["outcome"] == "Victory" and after["enemy"]["hp"] == 0
+                   after["outcome"] == "Victory" and all(enemy["hp"] == 0 for enemy in after["enemies"])
                    and after["player"]["hp"] > 0
-                   and {"LightAttack", "HeavyAttack", "Block"}.issubset(actions),
+                   and {"LightAttack", "HeavyAttack", "Kick", "Block"}.issubset(actions),
                    actions=actions, attacks_sent=attacks, retries=self.retries,
                    player_hp=after["player"]["hp"], enemy_hp=after["enemy"]["hp"])
         self.screenshot("14-passage-clear")

@@ -4,6 +4,7 @@
 //! actions remain pure; the app omits ticks during pause and owns all I/O.
 
 mod checkpoint;
+pub mod debris;
 mod direction;
 pub mod phone;
 mod progression;
@@ -58,7 +59,7 @@ pub enum Phase {
     Phone,
     /// Leave the street through its exit region.
     LeaveStreet,
-    /// Jump over the lane obstruction and reach its resident.
+    /// Break the collapsed cargo and reach the lane resident.
     LaneExplore,
     /// Walk clear of the resident before speaking at the same depth.
     LaneApproach,
@@ -89,6 +90,8 @@ pub struct ChapterInput {
     pub light: bool,
     /// Fresh heavy attack press.
     pub heavy: bool,
+    /// Fresh forward kick press.
+    pub kick: bool,
     /// Held guard.
     pub block: bool,
     /// Fresh interaction press, distinct from jumping and dialogue advance.
@@ -108,6 +111,7 @@ impl ChapterInput {
             jump_pressed: self.jump,
             light_pressed: self.light,
             heavy_pressed: self.heavy,
+            kick_pressed: self.kick,
             blocking: self.block,
         }
     }
@@ -178,6 +182,8 @@ pub struct Chapter {
     pub combat: Combat,
     /// Validated scene geometry used by both model and presentation.
     pub world: World,
+    /// Independent breakable props and their local contact clocks.
+    pub debris: Vec<debris::Debris>,
     pub(super) camera: ChapterCamera,
     pub(super) saved: Checkpoint,
     pub(super) route: Vec<Vec2>,
@@ -210,6 +216,7 @@ impl Chapter {
             ticks: 0,
             combat,
             world,
+            debris: Vec::new(),
             camera: initial_camera,
             saved: Checkpoint::new(prologue_played_victory),
             route: Vec::new(),
@@ -296,6 +303,9 @@ impl Chapter {
             | Phase::NeighbourReturn => "objective.neighbour",
             Phase::Phone => "objective.phone",
             Phase::LeaveStreet => "objective.leave_street",
+            Phase::LaneExplore if self.debris.iter().any(|piece| piece.hp > 0) => {
+                "objective.debris"
+            }
             Phase::LaneExplore | Phase::LaneApproach | Phase::LaneDialogue => "objective.lane",
             Phase::LaneExit => "objective.lane_exit",
             Phase::PassageExplore => "objective.passage",

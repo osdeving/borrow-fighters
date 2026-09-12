@@ -89,12 +89,16 @@ pub fn navigation(
         }
         return;
     }
-    if story.arrival_active() {
+    if story.arrival_active() || story.ep_arrival_active() {
         d.draw_rectangle(0, 670, WIDTH, 50, alpha(INK, 0.92));
         super::typography::centered(
             d,
             &a.body,
-            a.text.get("street.arrival.controls"),
+            a.text.get(if story.ep_arrival_active() {
+                "street.ep_arrival.controls"
+            } else {
+                "street.arrival.controls"
+            }),
             Vector2::new(640.0, 685.0),
             1160.0,
             18.0,
@@ -317,8 +321,12 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
     let c = &story.combat;
     let camera = (c.player.position.x - 450.0).clamp(0.0, 920.0);
     let arriving = story.arrival_active();
+    let ep_arriving = story.ep_arrival_active();
+    let ep_sample = story.ep_arrival.sample(c.enemy.position.x - camera);
     let shot = if arriving {
         ArrivalShot::at(story.stage_ticks)
+    } else if ep_arriving {
+        ep_sample.map_or_else(ArrivalShot::settled, |sample| sample.shot)
     } else {
         ArrivalShot::settled()
     };
@@ -355,12 +363,16 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
             d.draw_circle_v(Vector2::new(x, y), 1.3, alpha(GOLD, 0.35));
         }
         actor_shadow(d, &c.player, camera);
-        // The same awakening signal reveals the threat and startles the child.
-        if c.enemy_awake {
+        if ep_arriving {
+            if let Some(sample) = ep_sample {
+                super::ep_arrival::body(d, a, &c.enemy, camera, sample);
+            }
+        } else if c.enemy_awake {
             actor_shadow(d, &c.enemy, camera);
             creature(d, a, &c.enemy, camera);
         }
         rust(d, a, &c.player, camera);
+        super::ep_arrival::impact(d, &story.ep_arrival, c.enemy.position.x - camera);
         if let Some(hit) = c.last_hit {
             let p = Vector2::new(hit.position.x - camera, hit.position.y);
             let age = hit.age_ticks as f32;
@@ -383,6 +395,11 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
         }
         if debug {
             for actor in [&c.player, &c.enemy] {
+                if actor.kind == crate::adventure::combat::ActorKind::Erratic
+                    && (!c.enemy_awake || ep_arriving)
+                {
+                    continue;
+                }
                 let b = actor.hurtbox();
                 d.draw_rectangle_lines_ex(
                     Rectangle::new(b.x - camera, b.y, b.width, b.height),
@@ -399,12 +416,13 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
             }
         }
     }
-    if arriving {
+    if arriving || ep_arriving {
         let border = (42.0 * shot.matte) as i32;
         d.draw_rectangle(0, 0, WIDTH, border, alpha(INK, 0.94));
         d.draw_rectangle(0, HEIGHT - border, WIDTH, border, alpha(INK, 0.94));
     }
-    if story.stage == Stage::Encounter && c.outcome == Outcome::Ongoing && !arriving {
+    if story.stage == Stage::Encounter && c.outcome == Outcome::Ongoing && !arriving && !ep_arriving
+    {
         d.draw_rectangle_rounded(
             Rectangle::new(30.0, 26.0, 292.0, 85.0),
             0.08,

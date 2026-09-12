@@ -49,6 +49,7 @@ pub(super) fn read(rl: &RaylibHandle) -> Controls {
             movement,
             jump: pressed(&[KEY_SPACE, KEY_W, KEY_UP]) || pad(GAMEPAD_BUTTON_RIGHT_FACE_RIGHT),
             light: pressed(&[KEY_J, KEY_F]) || pad(GAMEPAD_BUTTON_RIGHT_FACE_LEFT),
+            kick: pressed(&[KEY_V]) || pad(GAMEPAD_BUTTON_RIGHT_TRIGGER_2),
             heavy: pressed(&[KEY_K, KEY_H]) || pad(GAMEPAD_BUTTON_RIGHT_FACE_UP),
             block: down(&[KEY_Q, KEY_L]) || held(GAMEPAD_BUTTON_LEFT_TRIGGER_1),
             interact: pressed(&[KEY_E]) || pad(GAMEPAD_BUTTON_RIGHT_FACE_DOWN),
@@ -70,6 +71,7 @@ pub(super) fn merge(pending: &mut ChapterInput, next: ChapterInput) {
     pending.jump |= next.jump;
     pending.light |= next.light;
     pending.heavy |= next.heavy;
+    pending.kick |= next.kick;
     pending.interact |= next.interact;
     pending.advance |= next.advance;
     pending.skip |= next.skip;

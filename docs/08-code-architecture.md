@@ -84,6 +84,13 @@ os marcos de latido e fechamento com esse estado puro.
 
 ## Objetivo
 
+A [ADR 0028](adr/0028-editable-cinematic-tracks-and-destructibles.md) amplia
+os catálogos existentes com `adventure/biography.rs` (tomadas e keyframes),
+`adventure/locomotion.rs` (distância/apoios) e `chapter/debris.rs` (dano e queda
+de peças espaciais). Seus adaptadores Raylib permanecem em `engine`. A chegada
+da EP em `arrival.rs` compartilha o relógio físico com impacto e evacuação.
+[Mapa de arquivos editáveis](34-cinematic-expansion.md).
+
 Criar uma base simples, testável e extensível para o protótipo 0.1 sem transformar o projeto em uma engine antes de provar o combate.
 
 ## Referências de base

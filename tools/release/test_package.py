@@ -165,6 +165,23 @@ class AdventureReferencesTests(unittest.TestCase):
         self.assertEqual(sum(path == self.base / "chapter/rust.png" for path in assets), 1)
         self.assertNotIn(self.base / "chapter/production-unused.png", assets)
 
+    def test_new_declared_catalogs_ship_images_without_copying_unused_art(self):
+        self.write("src/adventure/engine/locomotion.rs",
+                   'load_catalog("assets/adventure/locomotion/catalog.json")')
+        self.write("assets/adventure/locomotion/catalog.json", json.dumps({
+            "version": 1, "pieces": {"rust.kick": {"frames": [
+                {"image": "locomotion/kick.png"}, {"image": "chapter/rust.png"}]}},
+        }))
+        self.write("assets/adventure/locomotion/kick.png", "runtime art")
+        self.write("assets/adventure/locomotion/unused.png", "unused source")
+        assets = package.adventure_assets()
+        self.assertIn(self.base / "locomotion/catalog.json", assets)
+        self.assertIn(self.base / "locomotion/kick.png", assets)
+        self.assertNotIn(self.base / "locomotion/unused.png", assets)
+        (self.base / "locomotion/kick.png").unlink()
+        with self.assertRaisesRegex(ValueError, "Missing runtime asset"):
+            package.adventure_assets()
+
     def test_missing_later_chapter_frame_stops_packaging(self):
         (self.base / "chapter/driver.png").unlink()
         with self.assertRaisesRegex(ValueError, "Missing runtime asset"):

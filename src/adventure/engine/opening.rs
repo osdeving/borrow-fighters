@@ -34,6 +34,8 @@ struct Portrait {
 
 /// Images and display font belonging exclusively to the presentation montage.
 pub struct OpeningAssets {
+    /// Editable layered corporate and old-school biographies.
+    pub biographies: super::biography::BiographyAssets,
     cpp: Texture2D,
     python: Texture2D,
     roster: Vec<Portrait>,
@@ -42,7 +44,11 @@ pub struct OpeningAssets {
 
 impl OpeningAssets {
     /// Loads checked local artwork independently from any fighting-game manifest.
-    pub fn load(rl: &mut RaylibHandle, thread: &RaylibThread) -> Result<Self, Box<dyn Error>> {
+    pub fn load(
+        rl: &mut RaylibHandle,
+        thread: &RaylibThread,
+        text: &crate::adventure::text::TextCatalog,
+    ) -> Result<Self, Box<dyn Error>> {
         #[derive(Deserialize)]
         struct Entry {
             id: String,
@@ -106,6 +112,7 @@ impl OpeningAssets {
             Some(&glyphs),
         )?;
         Ok(Self {
+            biographies: super::biography::BiographyAssets::load(rl, thread, text)?,
             cpp: texture(rl, thread, "cpp-origin.png")?,
             python: texture(rl, thread, "python-teacher.png")?,
             roster,
@@ -127,8 +134,10 @@ pub fn draw(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
         t if t < 9.0 => newspaper(d, a, t),
         t if t < 19.0 => history(d, a, "cpp", t - 9.0),
         t if t < 29.0 => history(d, a, "python", t - 19.0),
-        t if t < 41.0 => character(d, a, t - 29.0),
-        _ => title(d, a, t - 41.0),
+        t if t < 41.0 => super::biography::draw(d, a, "duke", ticks.saturating_sub(29 * 60)),
+        t if t < 53.0 => super::biography::draw(d, a, "c", ticks.saturating_sub(41 * 60)),
+        t if t < 57.0 => character(d, a, t - 53.0),
+        _ => title(d, a, t - 57.0),
     }
     // Film cadence: warm dust, restrained scan lines and letterboxing.
     for i in 0..24 {
@@ -287,10 +296,8 @@ fn history(d: &mut impl RaylibDraw, a: &Assets, id: &str, t: f32) {
 }
 
 fn character(d: &mut impl RaylibDraw, a: &Assets, t: f32) {
-    // Keep the twelve-second montage and the score's title cue at 41 seconds.
-    let index = ((t / 4.0) as usize).min(2);
-    let id = ["duke", "c", "rust"][index];
-    let accent = [GOLD, Color::new(231, 111, 80, 255), GOLD][index];
+    let id = "rust";
+    let accent = GOLD;
     let local = t % 4.0;
     for i in 0..8 {
         let x = -250.0 + i as f32 * 250.0 - local * 35.0;

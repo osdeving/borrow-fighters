@@ -108,7 +108,7 @@ cargo run --no-default-features --features adventure --bin borrow-adventure -- -
 ```
 
 Na aventura: `A/D` ou setas movem, `Espaço/W` pula, `J/F` ataca, `K/H` dá um golpe
-forte e `Q/L` defende. `Enter` avança ao próximo trecho, `Tab` revela a mensagem
+forte, `V / RT` chuta e `Q/L` defende. `Enter` avança ao próximo trecho, `Tab` revela a mensagem
 e `Esc` pausa. Durante a chegada à rua, `Enter`/`RB` termina a tomada e libera exploração.
 Após derrota, `R` tenta novamente no encontro, sem repetir a câmera de chegada. No controle:
 direcional, `A` para pular no combate ou avançar cenas, `X/Y` para ataques,
@@ -127,8 +127,8 @@ No capítulo: **E / A** interage, **Espaço / B** pula, **Enter / RB** avança
 conversa, **Backspace / View** conclui a atuação atual e **Esc / Start** abre
 pausa com retorno ao menu. **R / A** retoma uma derrota no checkpoint local.
 O progresso fica em `adventure/campaign-v1.json` no diretório de dados do usuário.
-**F3** mostra posições, regiões e rotas; **F5** recarrega os textos do capítulo
-e a aparência do mensageiro. [Assets, clips e sockets](assets/adventure/chapter/README.md).
+**F3** mostra posições, regiões e rotas; **F5** recarrega os textos do capítulo,
+a aparência do mensageiro e as animações de Rust. [Assets, clips e sockets](assets/adventure/chapter/README.md).
 
 **Textos sem recompilar:** edite [assets/adventure/texts/pt-BR.json](assets/adventure/texts/pt-BR.json),
 salve e pressione **F5**. Legendas, terminal, manchetes, biografias, menus, logo
@@ -149,6 +149,8 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 ## Índice central
 
 ### Visão e produto
+
+- [Expansão cinematográfica e passagem destrutível](docs/34-cinematic-expansion.md): chegada da EP, caminhada, biografias de Duke/Old C e duas erráticas.
 
 - [`docs/33-after-the-silence.md`](docs/33-after-the-silence.md): primeiro capítulo, telefone in-game, geometria e checkpoints.
 - [`docs/32-cinematic-neighbourhood-arrival.md`](docs/32-cinematic-neighbourhood-arrival.md): chegada cinematográfica, moradores, caramelo, porta de enrolar e ambientação sonora.

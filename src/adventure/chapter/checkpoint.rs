@@ -88,6 +88,7 @@ impl Chapter {
             C::Complete => (Scene::Passage, Phase::Complete, None),
         };
         chapter.scene = scene;
+        chapter.reset_scene_content();
         chapter.enter(phase);
         let geometry = chapter.world.scene(scene);
         chapter.combat.player.position = point
@@ -100,20 +101,22 @@ impl Chapter {
             })
             .unwrap_or(geometry.spawn.vec());
         if scene == Scene::Passage {
-            chapter.combat.enemy.position = geometry
-                .poi("enemy")
-                .expect("validated enemy")
-                .position
-                .vec();
             chapter.combat.enemy_awake = phase == Phase::PassageCombat;
             if matches!(phase, Phase::PassageClear | Phase::Complete) {
-                chapter.combat.enemy.hp = 0;
-                chapter.combat.enemy.action = Action::Defeated;
+                for enemy in chapter.combat.enemies_mut() {
+                    enemy.hp = 0;
+                    enemy.action = Action::Defeated;
+                }
                 chapter.combat.outcome = Outcome::Victory;
                 chapter.residents_escape_ticks = Some(300);
             }
             if phase == Phase::Complete {
                 chapter.combat.player.position.x = geometry.exit.x;
+            }
+        }
+        if checkpoint.stage == C::LaneCleared {
+            for piece in &mut chapter.debris {
+                piece.hp = 0;
             }
         }
         if !matches!(checkpoint.stage, C::StreetStart | C::DriverChecked) {
@@ -137,15 +140,7 @@ impl Chapter {
         self.scene = scene;
         self.combat = Combat::new();
         self.combat.player.position = self.world.scene(scene).spawn.vec();
-        if scene == Scene::Passage {
-            self.combat.enemy.position = self
-                .world
-                .scene(scene)
-                .poi("enemy")
-                .expect("validated enemy")
-                .position
-                .vec();
-        }
+        self.reset_scene_content();
         self.enter(phase);
         self.save_at(stage);
         self.camera.target = Vec2::new(
@@ -156,6 +151,25 @@ impl Chapter {
             360.0,
         );
         self.camera.zoom = 1.0;
+    }
+
+    pub(super) fn reset_scene_content(&mut self) {
+        let geometry = self.world.scene(self.scene);
+        self.debris = geometry
+            .debris
+            .iter()
+            .cloned()
+            .map(super::debris::Debris::new)
+            .collect();
+        if !geometry.enemies.is_empty() {
+            self.combat.configure_enemies(
+                &geometry
+                    .enemies
+                    .iter()
+                    .map(|entry| (entry.position.vec(), entry.tuning))
+                    .collect::<Vec<_>>(),
+            );
+        }
     }
 
     /// Restores only a genuine local defeat, leaving live combat health unchanged.

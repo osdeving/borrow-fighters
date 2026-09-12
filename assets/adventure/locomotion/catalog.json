@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "pieces": {
+    "rust.walk": {
+      "width": 184,
+      "frame_ticks": 1,
+      "looping": true,
+      "frames": [
+        {
+          "image": "locomotion/frames/pose-00.png",
+          "source": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "anchor": [
+            172,
+            353
+          ],
+          "sockets": {
+            "pelvis": [
+              172,
+              202
+            ]
+          }
+        },
+        {
+          "image": "locomotion/frames/pose-01.png",
+          "source": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "anchor": [
+            173,
+            353
+          ],
+          "sockets": {
+            "pelvis": [
+              173,
+              202
+            ]
+          }
+        },
+        {
+          "image": "locomotion/frames/pose-02.png",
+          "source": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "anchor": [
+            176,
+            353
+          ],
+          "sockets": {
+            "pelvis": [
+              176,
+              202
+            ]
+          }
+        },
+        {
+          "image": "locomotion/frames/pose-03.png",
+          "source": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "anchor": [
+            174,
+            353
+          ],
+          "sockets": {
+            "pelvis": [
+              174,
+              202
+            ]
+          }
+        },
+        {
+          "image": "locomotion/frames/pose-04.png",
+          "source": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "anchor": [
+            173,
+            346
+          ],
+          "sockets": {
+            "pelvis": [
+              173,
+              194
+            ]
+          }
+        },
+        {
+          "image": "locomotion/frames/pose-05.png",
+          "source": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "anchor": [
+            173,
+            346
+          ],
+          "sockets": {
+            "pelvis": [
+              173,
+              194
+            ]
+          }
+        },
+        {
+          "image": "locomotion/frames/pose-06.png",
+          "source": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "anchor": [
+            182,
+            346
+          ],
+          "sockets": {
+            "pelvis": [
+              182,
+              194
+            ]
+          }
+        },
+        {
+          "image": "locomotion/frames/pose-07.png",
+          "source": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "anchor": [
+            190,
+            346
+          ],
+          "sockets": {
+            "pelvis": [
+              190,
+              194
+            ]
+          }
+        }
+      ]
+    },
+    "rust.kick": {
+      "width": 184,
+      "frame_ticks": 1,
+      "looping": false,
+      "frames": [
+        {
+          "image": "locomotion/frames/pose-08.png",
+          "source": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "anchor": [
+            167,
+            345
+          ],
+          "duration_ticks": 10
+        },
+        {
+          "image": "locomotion/frames/pose-09.png",
+          "source": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "anchor": [
+            141,
+            345
+          ],
+          "duration_ticks": 7
+        },
+        {
+          "image": "locomotion/frames/pose-10.png",
+          "source": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "anchor": [
+            174,
+            345
+          ],
+          "duration_ticks": 8
+        },
+        {
+          "image": "locomotion/frames/pose-11.png",
+          "source": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "anchor": [
+            186,
+            338
+          ],
+          "duration_ticks": 9
+        }
+      ]
+    }
+  }
+}

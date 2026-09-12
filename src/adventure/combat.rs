@@ -61,6 +61,8 @@ pub enum Action {
     LightAttack,
     /// Slower, stronger melee strike.
     HeavyAttack,
+    /// Forward kick with longer reach and committed recovery.
+    Kick,
     /// Guarding against attacks arriving from the front.
     Block,
     /// Enemy preparing a visible, committed attack.
@@ -88,6 +90,8 @@ pub struct CombatInput {
     pub light_pressed: bool,
     /// Edge-triggered strong attack request.
     pub heavy_pressed: bool,
+    /// Edge-triggered forward kick request.
+    pub kick_pressed: bool,
     /// Held guard request, effective when standing and facing the attacker.
     pub blocking: bool,
 }
@@ -111,11 +115,14 @@ pub struct Actor {
     pub action: Action,
     /// Number of fixed updates elapsed in the current action.
     pub action_ticks: u32,
+    /// Ground travel at reference body scale; authored depth paths normalize each step.
+    pub stride_distance: f32,
     /// Whether the feet are touching the floor.
     pub grounded: bool,
     hit_registered: bool,
     invulnerable_ticks: u32,
     stun_ticks: u32,
+    tuning: EnemyTuning,
 }
 
 impl Actor {
@@ -130,10 +137,12 @@ impl Actor {
             facing,
             action: Action::Idle,
             action_ticks: 0,
+            stride_distance: 0.0,
             grounded: true,
             hit_registered: false,
             invulnerable_ticks: 0,
             stun_ticks: 0,
+            tuning: EnemyTuning::default(),
         }
     }
 
@@ -162,6 +171,7 @@ impl Actor {
         let (start, end, reach, height, above_feet) = match self.action {
             Action::LightAttack => (5, 10, 66.0, 68.0, 120.0),
             Action::HeavyAttack => (13, 19, 92.0, 78.0, 120.0),
+            Action::Kick => (10, 17, 112.0, 84.0, 128.0),
             Action::Lunge => (0, 12, 62.0, 80.0, 125.0),
             _ => return None,
         };
@@ -175,6 +185,22 @@ impl Actor {
             edge - reach
         };
         Some(Rect::new(x, self.position.y - above_feet, reach, height))
+    }
+
+    /// Damage applied by this action to bodies and breakable scenery alike.
+    pub fn strike_damage(&self) -> u32 {
+        match self.action {
+            Action::LightAttack => 12,
+            Action::HeavyAttack => 24,
+            Action::Kick => 18,
+            Action::Lunge => self.tuning.damage,
+            _ => 0,
+        }
+    }
+
+    /// Consumes the active strike after a scenery collision.
+    pub fn register_scenery_hit(&mut self) {
+        self.hit_registered = true;
     }
 
     fn enter(&mut self, action: Action) {
@@ -194,11 +220,52 @@ impl Actor {
         let duration = match self.action {
             Action::LightAttack => 25,
             Action::HeavyAttack => 42,
+            Action::Kick => 34,
             Action::Hurt => self.stun_ticks,
             Action::Defeated | Action::Remorse => return true,
             _ => return false,
         };
         self.action_ticks < duration
+    }
+}
+
+/// Reviewed enemy tuning loaded from scene data for chapter encounters.
+#[derive(Clone, Copy, Debug, serde::Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct EnemyTuning {
+    /// Maximum and starting health.
+    pub hp: u32,
+    /// Approach speed in world pixels per second.
+    pub speed: f32,
+    /// Explicit warning before a committed attack.
+    pub telegraph_ticks: u32,
+    /// Vulnerable recovery after a lunge.
+    pub recovery_ticks: u32,
+    /// Damage of an unguarded lunge.
+    pub damage: u32,
+}
+
+impl Default for EnemyTuning {
+    fn default() -> Self {
+        Self {
+            hp: 96,
+            speed: 155.0,
+            telegraph_ticks: TELEGRAPH_TICKS,
+            recovery_ticks: 44,
+            damage: 14,
+        }
+    }
+}
+
+impl EnemyTuning {
+    /// Rejects nonfinite or unreadable encounter parameters before loading.
+    pub fn is_valid(self) -> bool {
+        (24..=300).contains(&self.hp)
+            && self.speed.is_finite()
+            && (80.0..=240.0).contains(&self.speed)
+            && (24..=90).contains(&self.telegraph_ticks)
+            && (30..=90).contains(&self.recovery_ticks)
+            && (1..=25).contains(&self.damage)
     }
 }
 
@@ -235,6 +302,8 @@ pub struct Combat {
     pub player: Actor,
     /// The erratic entity's physical and animation state.
     pub enemy: Actor,
+    /// Additional opponents, empty during the original prologue.
+    pub extra_enemies: Vec<Actor>,
     /// Outcome established only through contact and health.
     pub outcome: Outcome,
     /// Whether the creature has noticed Rust and begun attacking.
@@ -257,11 +326,39 @@ impl Combat {
         Self {
             player: Actor::new(ActorKind::Player, 340.0, Facing::Right),
             enemy: Actor::new(ActorKind::Erratic, 1500.0, Facing::Left),
+            extra_enemies: Vec::new(),
             outcome: Outcome::Ongoing,
             enemy_awake: false,
             ticks: 0,
             last_hit: None,
         }
+    }
+
+    /// Replaces the encounter roster while preserving Rust's current state.
+    pub fn configure_enemies(&mut self, entries: &[(Vec2, EnemyTuning)]) {
+        assert!(!entries.is_empty(), "encounter requires an opponent");
+        let mut actors = entries.iter().map(|(position, tuning)| {
+            let mut actor = Actor::new(ActorKind::Erratic, position.x, Facing::Left);
+            actor.position = *position;
+            actor.hp = tuning.hp;
+            actor.max_hp = tuning.hp;
+            actor.tuning = *tuning;
+            actor
+        });
+        self.enemy = actors.next().expect("nonempty roster");
+        self.extra_enemies = actors.collect();
+        self.enemy_awake = false;
+        self.outcome = Outcome::Ongoing;
+    }
+
+    /// Every opponent, including defeated bodies retained for scene continuity.
+    pub fn enemies(&self) -> impl Iterator<Item = &Actor> {
+        std::iter::once(&self.enemy).chain(self.extra_enemies.iter())
+    }
+
+    /// Every mutable opponent, used by chapter geometry and safe restoration.
+    pub fn enemies_mut(&mut self) -> impl Iterator<Item = &mut Actor> {
+        std::iter::once(&mut self.enemy).chain(self.extra_enemies.iter_mut())
     }
 
     /// Restores both actors near the encounter without replaying the morning.
@@ -278,6 +375,9 @@ impl Combat {
         self.tick_clocks();
         self.update_player(input);
         integrate(&mut self.player);
+        for enemy in self.enemies_mut().filter(|enemy| enemy.hp == 0) {
+            integrate(enemy);
+        }
     }
 
     /// Advances movement, enemy intent and contact by one sixtieth of a second.
@@ -297,10 +397,21 @@ impl Combat {
         if self.player.position.x >= ENCOUNTER_TRIGGER_X {
             self.enemy_awake = true;
         }
-        self.update_enemy();
+        update_enemy(&mut self.enemy, self.player.position, self.enemy_awake);
+        for enemy in &mut self.extra_enemies {
+            update_enemy(enemy, self.player.position, self.enemy_awake);
+        }
         integrate(&mut self.player);
         integrate(&mut self.enemy);
-        self.separate_bodies();
+        separate_bodies(&mut self.player, &mut self.enemy);
+        for enemy in &mut self.extra_enemies {
+            integrate(enemy);
+            separate_bodies(&mut self.player, enemy);
+        }
+        // Keep the two silhouettes distinct while both approach on the same side.
+        for enemy in &mut self.extra_enemies {
+            separate_bodies(&mut self.enemy, enemy);
+        }
 
         if let Some(hit) = contact(&mut self.player, &mut self.enemy) {
             self.last_hit = Some(hit);
@@ -310,9 +421,18 @@ impl Combat {
         if let Some(hit) = contact(&mut self.enemy, &mut self.player) {
             self.last_hit = Some(hit);
         }
+        for enemy in &mut self.extra_enemies {
+            if let Some(hit) = contact(&mut self.player, enemy) {
+                self.last_hit = Some(hit);
+                self.enemy_awake = true;
+            }
+            if let Some(hit) = contact(enemy, &mut self.player) {
+                self.last_hit = Some(hit);
+            }
+        }
         if self.player.hp == 0 {
             self.outcome = Outcome::Defeat;
-        } else if self.enemy.hp == 0 {
+        } else if self.enemies().all(|enemy| enemy.hp == 0) {
             self.outcome = Outcome::Victory;
         }
     }
@@ -341,6 +461,9 @@ impl Combat {
         self.ticks = self.ticks.saturating_add(1);
         self.player.tick_clock();
         self.enemy.tick_clock();
+        for enemy in &mut self.extra_enemies {
+            enemy.tick_clock();
+        }
         if let Some(hit) = &mut self.last_hit {
             hit.age_ticks += 1;
             if hit.age_ticks > 18 {
@@ -367,8 +490,10 @@ impl Combat {
             self.player.velocity.x *= 0.6;
             return;
         }
-        if input.heavy_pressed || input.light_pressed {
-            self.player.enter(if input.heavy_pressed {
+        if input.heavy_pressed || input.light_pressed || input.kick_pressed {
+            self.player.enter(if input.kick_pressed {
+                Action::Kick
+            } else if input.heavy_pressed {
                 Action::HeavyAttack
             } else {
                 Action::LightAttack
@@ -395,60 +520,60 @@ impl Combat {
             Action::Idle
         });
     }
+}
 
-    fn update_enemy(&mut self) {
-        if self.enemy.hp == 0 || !self.enemy_awake {
-            return;
-        }
-        match self.enemy.action {
-            Action::Hurt if self.enemy.locked() => {
-                self.enemy.velocity.x *= 0.84;
-                return;
-            }
-            Action::Telegraph if self.enemy.action_ticks < TELEGRAPH_TICKS => {
-                self.enemy.velocity.x = 0.0;
-                return;
-            }
-            Action::Telegraph => {
-                self.enemy.enter(Action::Lunge);
-                self.enemy.velocity.x = self.enemy.facing.sign() * 610.0;
-                return;
-            }
-            Action::Lunge if self.enemy.action_ticks < 12 => return,
-            Action::Lunge => {
-                self.enemy.enter(Action::Recovery);
-                self.enemy.velocity.x = 0.0;
-                return;
-            }
-            Action::Recovery if self.enemy.action_ticks < 44 => return,
-            _ => {}
-        }
-        let distance = self.player.position.x - self.enemy.position.x;
-        self.enemy.facing = facing_towards(distance);
-        if distance.abs() <= 198.0 {
-            self.enemy.enter(Action::Telegraph);
-            self.enemy.velocity.x = 0.0;
-        } else {
-            self.enemy.enter(Action::Walk);
-            self.enemy.velocity.x = distance.signum() * 155.0;
-        }
+fn update_enemy(enemy: &mut Actor, player_position: Vec2, awake: bool) {
+    if enemy.hp == 0 || !awake {
+        return;
     }
-
-    fn separate_bodies(&mut self) {
-        if !self.player.hurtbox().intersects(self.enemy.hurtbox()) {
+    match enemy.action {
+        Action::Hurt if enemy.locked() => {
+            enemy.velocity.x *= 0.84;
             return;
         }
-        let distance = self.enemy.position.x - self.player.position.x;
-        let spacing = (self.player.hurtbox().width + self.enemy.hurtbox().width) * 0.5;
-        let push = (spacing - distance.abs()).max(0.0) * 0.5;
-        let direction = if distance >= 0.0 { 1.0 } else { -1.0 };
-        self.player.position.x =
-            (self.player.position.x - direction * push).clamp(32.0, LEVEL_WIDTH - 32.0);
-        self.enemy.position.x =
-            (self.enemy.position.x + direction * push).clamp(40.0, LEVEL_WIDTH - 40.0);
+        Action::Telegraph if enemy.action_ticks < enemy.tuning.telegraph_ticks => {
+            enemy.velocity.x = 0.0;
+            return;
+        }
+        Action::Telegraph => {
+            enemy.enter(Action::Lunge);
+            enemy.velocity.x = enemy.facing.sign() * 610.0;
+            return;
+        }
+        Action::Lunge if enemy.action_ticks < 12 => return,
+        Action::Lunge => {
+            enemy.enter(Action::Recovery);
+            enemy.velocity.x = 0.0;
+            return;
+        }
+        Action::Recovery if enemy.action_ticks < enemy.tuning.recovery_ticks => return,
+        _ => {}
+    }
+    let distance = player_position.x - enemy.position.x;
+    enemy.facing = facing_towards(distance);
+    if distance.abs() <= 198.0 {
+        enemy.enter(Action::Telegraph);
+        enemy.velocity.x = 0.0;
+    } else {
+        enemy.enter(Action::Walk);
+        enemy.velocity.x = distance.signum() * enemy.tuning.speed;
     }
 }
 
+fn separate_bodies(player: &mut Actor, enemy: &mut Actor) {
+    if player.hp == 0 || enemy.hp == 0 {
+        return;
+    }
+    if !player.hurtbox().intersects(enemy.hurtbox()) {
+        return;
+    }
+    let distance = enemy.position.x - player.position.x;
+    let spacing = (player.hurtbox().width + enemy.hurtbox().width) * 0.5;
+    let push = (spacing - distance.abs()).max(0.0) * 0.5;
+    let direction = if distance >= 0.0 { 1.0 } else { -1.0 };
+    player.position.x = (player.position.x - direction * push).clamp(32.0, LEVEL_WIDTH - 32.0);
+    enemy.position.x = (enemy.position.x + direction * push).clamp(40.0, LEVEL_WIDTH - 40.0);
+}
 fn facing_towards(distance: f32) -> Facing {
     if distance < 0.0 {
         Facing::Left
@@ -458,7 +583,11 @@ fn facing_towards(distance: f32) -> Facing {
 }
 
 fn integrate(actor: &mut Actor) {
+    let previous_x = actor.position.x;
     actor.position.x = (actor.position.x + actor.velocity.x * DT).clamp(40.0, LEVEL_WIDTH - 40.0);
+    if actor.grounded && actor.action == Action::Walk {
+        actor.stride_distance += (actor.position.x - previous_x).abs();
+    }
     if !actor.grounded {
         actor.velocity.y += GRAVITY * DT;
         actor.position.y += actor.velocity.y * DT;
@@ -479,12 +608,14 @@ fn contact(attacker: &mut Actor, target: &mut Actor) -> Option<HitFeedback> {
         return None;
     }
     attacker.hit_registered = true;
-    let (damage, knockback, stun) = match attacker.action {
-        Action::LightAttack => (12, 185.0, 15),
-        Action::HeavyAttack => (24, 275.0, 26),
-        Action::Lunge => (14, 245.0, 22),
+    let (knockback, stun) = match attacker.action {
+        Action::LightAttack => (185.0, 15),
+        Action::HeavyAttack => (275.0, 26),
+        Action::Kick => (300.0, 22),
+        Action::Lunge => (245.0, 22),
         _ => return None,
     };
+    let damage = attacker.strike_damage();
     let from_front = (attacker.position.x - target.position.x) * target.facing.sign() > 0.0;
     let blocked = target.action == Action::Block && target.grounded && from_front;
     target.velocity.x = attacker.facing.sign() * knockback * if blocked { 0.22 } else { 1.0 };
@@ -679,5 +810,48 @@ mod tests {
         assert_eq!(combat.enemy.hp, enemy_health);
         assert_eq!(combat.outcome, Outcome::Defeat);
         assert!(combat.last_hit.is_none());
+    }
+
+    #[test]
+    fn kick_uses_its_authored_active_window_and_outreaches_the_light_punch() {
+        let mut player = Actor::new(ActorKind::Player, 500.0, Facing::Right);
+        let mut enemy = Actor::new(ActorKind::Erratic, 648.0, Facing::Left);
+        player.enter(Action::LightAttack);
+        player.action_ticks = 5;
+        assert!(contact(&mut player, &mut enemy).is_none());
+        player.enter(Action::Kick);
+        player.action_ticks = 9;
+        assert!(contact(&mut player, &mut enemy).is_none());
+        player.action_ticks = 10;
+        assert_eq!(contact(&mut player, &mut enemy).unwrap().damage, 18);
+        enemy.invulnerable_ticks = 0;
+        assert!(contact(&mut player, &mut enemy).is_none());
+        player.hit_registered = false;
+        player.action_ticks = 17;
+        assert!(player.attack_hitbox().is_none());
+    }
+
+    #[test]
+    fn two_enemy_victory_waits_for_the_remaining_body_and_fallen_enemies_do_not_block() {
+        let mut combat = Combat::new();
+        combat.configure_enemies(&[
+            (Vec2::new(580.0, FLOOR_Y), EnemyTuning::default()),
+            (Vec2::new(660.0, FLOOR_Y), EnemyTuning::default()),
+        ]);
+        combat.player.position.x = 580.0;
+        combat.enemy.hp = 0;
+        combat.enemy.action = Action::Defeated;
+        combat.extra_enemies[0].hp = 18;
+        combat.tick(CombatInput::default());
+        assert_eq!(combat.outcome, Outcome::Ongoing);
+        assert_eq!(
+            combat.player.position.x, 580.0,
+            "the fallen primary opponent is no longer solid"
+        );
+        combat.player.enter(Action::Kick);
+        combat.player.action_ticks = 9;
+        combat.tick(CombatInput::default());
+        assert_eq!(combat.extra_enemies[0].hp, 0);
+        assert_eq!(combat.outcome, Outcome::Victory);
     }
 }

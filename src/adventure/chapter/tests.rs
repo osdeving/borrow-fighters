@@ -101,7 +101,7 @@ fn geometry_rejects_unreachable_regions_and_unclear_jump_obstacles() {
     value["scenes"][0]["points"][0]["region"]["y"] = serde_json::json!(100);
     assert!(World::from_json(&value.to_string()).is_err());
     let mut value: serde_json::Value = serde_json::from_str(source).unwrap();
-    value["scenes"][1]["obstacles"][0]["width"] = serde_json::json!(800);
+    value["scenes"][1]["debris"][0]["region"]["width"] = serde_json::json!(800);
     assert!(World::from_json(&value.to_string()).is_err());
     let mut value: serde_json::Value = serde_json::from_str(source).unwrap();
     value["scenes"][1]["id"] = serde_json::json!("street");
@@ -264,7 +264,7 @@ fn skip_and_saved_boundaries_do_not_fabricate_victories_or_half_pocketed_phones(
 }
 
 #[test]
-fn lane_obstruction_stops_the_body_and_a_real_jump_reaches_the_resident() {
+fn lane_pile_requires_repeated_real_hits_and_then_opens_the_route() {
     let mut chapter = resumed(CheckpointStage::LaneStart);
     for _ in 0..220 {
         chapter.tick(ChapterInput {
@@ -274,30 +274,78 @@ fn lane_obstruction_stops_the_body_and_a_real_jump_reaches_the_resident() {
     }
     assert_eq!(chapter.player().position.x, 670.0);
     assert_eq!(chapter.player().position.y, 580.0);
+    let planted_stride = chapter.player().stride_distance;
+    for _ in 0..90 {
+        chapter.tick(ChapterInput {
+            movement: 1.0,
+            ..Default::default()
+        });
+    }
+    assert_eq!(
+        chapter.player().stride_distance,
+        planted_stride,
+        "blocked feet do not keep walking"
+    );
+    // The former easy jump no longer passes the intact cargo pile.
     chapter.tick(ChapterInput {
         movement: 1.0,
         jump: true,
         ..Default::default()
     });
-    for _ in 0..65 {
+    for _ in 0..90 {
         chapter.tick(ChapterInput {
             movement: 1.0,
             ..Default::default()
         });
-        assert_eq!(
-            chapter.player_scale(),
-            1.0,
-            "jumping is not a change of depth"
-        );
-        assert!(
-            !chapter
-                .player()
-                .hurtbox()
-                .intersects(chapter.world.scene(Scene::Lane).obstacles[0].rect())
-        );
     }
-    assert!(chapter.player().position.x > 824.0);
-    assert_eq!(chapter.player().position.y, 580.0);
+    assert!(chapter.player().position.x <= 680.01);
+    assert!(chapter.debris.iter().all(|p| p.hp == p.spec.hp));
+    for tick in 0..400u32 {
+        chapter.tick(ChapterInput {
+            movement: 1.0,
+            jump: tick.is_multiple_of(50),
+            ..Default::default()
+        });
+    }
+    assert!(
+        chapter.player().position.x <= 670.01,
+        "repeated jumps cannot climb phantom ledges"
+    );
+    walk_to(&mut chapter, 630.0);
+    for _ in 0..60 {
+        chapter.tick(ChapterInput::default());
+    }
+    // Clear with real movement/attacks, consuming each swing at most once.
+    let mut hits = 0;
+    let mut previous_tick = None;
+    for tick in 0..3600 {
+        if chapter.debris.iter().all(|p| p.hp == 0) {
+            break;
+        }
+        let piece = chapter.debris.iter().find(|p| p.hp > 0).unwrap();
+        let close = piece.rect().x - chapter.player().position.x <= 62.0;
+        chapter.tick(ChapterInput {
+            movement: if close { 0.0 } else { 1.0 },
+            kick: close && (tick as u32).is_multiple_of(2),
+            light: close && tick % 2 == 1,
+            ..Default::default()
+        });
+        let latest = chapter.debris.iter().filter_map(|p| p.hit_tick).max();
+        if latest != previous_tick {
+            hits += 1;
+            previous_tick = latest;
+        }
+    }
+    assert!(
+        chapter.debris.iter().all(|p| p.hp == 0),
+        "unbroken: {:?}",
+        chapter
+            .debris
+            .iter()
+            .map(|p| (&p.spec.id, p.hp, p.y))
+            .collect::<Vec<_>>()
+    );
+    assert!(hits >= 12, "the pile must take several distinct strikes");
     walk_to(&mut chapter, 1160.0);
     chapter.tick(ChapterInput {
         interact: true,
@@ -378,7 +426,9 @@ fn passage_loss_retry_and_clear_depend_on_played_contact() {
     });
     assert_eq!(chapter.phase, Phase::PassageCombat);
     assert_eq!(chapter.player().hp, 100);
-    assert_eq!(chapter.combat.enemy.hp, 96);
+    assert_eq!(chapter.combat.enemy.hp, 120);
+    assert_eq!(chapter.combat.extra_enemies.len(), 1);
+    assert_eq!(chapter.combat.extra_enemies[0].hp, 112);
     assert_eq!(chapter.phone(), None);
     chapter.tick(ChapterInput {
         skip: true,
@@ -390,11 +440,18 @@ fn passage_loss_retry_and_clear_depend_on_played_contact() {
         if chapter.phase == Phase::PassageClear {
             break;
         }
-        let distance = chapter.combat.enemy.position.x - chapter.player().position.x;
-        let danger = matches!(
-            chapter.combat.enemy.action,
-            Action::Telegraph | Action::Lunge
-        );
+        let enemy = chapter
+            .combat
+            .enemies()
+            .filter(|enemy| enemy.hp > 0)
+            .min_by(|a, b| {
+                (a.position.x - chapter.player().position.x)
+                    .abs()
+                    .total_cmp(&(b.position.x - chapter.player().position.x).abs())
+            })
+            .unwrap();
+        let distance = enemy.position.x - chapter.player().position.x;
+        let danger = matches!(enemy.action, Action::Telegraph | Action::Lunge);
         chapter.tick(ChapterInput {
             movement: if distance.abs() > 100.0 {
                 distance.signum()
@@ -407,7 +464,7 @@ fn passage_loss_retry_and_clear_depend_on_played_contact() {
         });
     }
     assert_eq!(chapter.phase, Phase::PassageClear);
-    assert_eq!(chapter.combat.enemy.hp, 0);
+    assert!(chapter.combat.enemies().all(|enemy| enemy.hp == 0));
     assert_eq!(chapter.checkpoint().stage, CheckpointStage::PassageCleared);
     assert!(!chapter.checkpoint().prologue_played_victory);
     for _ in 0..1000 {
@@ -420,6 +477,78 @@ fn passage_loss_retry_and_clear_depend_on_played_contact() {
         });
     }
     assert_eq!(chapter.phase, Phase::Departure);
+    assert!(
+        chapter
+            .combat
+            .enemies()
+            .all(|enemy| enemy.grounded && enemy.position.y == 580.0)
+    );
     until(&mut chapter, Phase::Complete, 181);
     assert_eq!(chapter.checkpoint().stage, CheckpointStage::Complete);
+}
+
+#[test]
+fn destroyed_crates_settle_their_supports_and_do_not_take_repeated_swing_damage() {
+    let mut chapter = resumed(CheckpointStage::LaneStart);
+    chapter.combat.player.position.x = 670.0;
+    chapter.tick(ChapterInput {
+        kick: true,
+        ..Default::default()
+    });
+    for _ in 0..10 {
+        chapter.tick(ChapterInput::default());
+    }
+    let after = chapter.debris.iter().map(|p| p.hp).collect::<Vec<_>>();
+    assert_eq!(
+        after.iter().sum::<u32>(),
+        chapter.debris.iter().map(|p| p.spec.hp).sum::<u32>() - 18
+    );
+    for _ in 0..7 {
+        chapter.tick(ChapterInput::default());
+    }
+    assert_eq!(
+        after,
+        chapter.debris.iter().map(|p| p.hp).collect::<Vec<_>>()
+    );
+    let top_before = chapter.debris[1].y;
+    chapter.debris[0].hp = 0;
+    chapter.tick(ChapterInput::default());
+    assert!(chapter.debris[1].y > top_before && chapter.debris[1].y < top_before + 2.0);
+    for _ in 0..90 {
+        chapter.tick(ChapterInput::default());
+    }
+    assert_eq!(chapter.debris[1].rect().bottom(), 580.0);
+}
+
+#[test]
+fn chapter_data_rejects_bad_enemy_tuning_duplicate_props_and_missing_roster() {
+    let source = include_str!("../../../assets/adventure/chapter/world.json");
+    for mutate in 0..4 {
+        let mut value: serde_json::Value = serde_json::from_str(source).unwrap();
+        match mutate {
+            0 => {
+                value["scenes"][2]["enemies"][0]["tuning"]["telegraph_ticks"] = serde_json::json!(1)
+            }
+            1 => {
+                value["scenes"][1]["debris"][1]["id"] =
+                    value["scenes"][1]["debris"][0]["id"].clone()
+            }
+            2 => value["scenes"][2]["enemies"] = serde_json::json!([]),
+            _ => value["scenes"][1]["debris"][0]["hp"] = serde_json::json!(0),
+        }
+        assert!(World::from_json(&value.to_string()).is_err());
+    }
+}
+
+#[test]
+fn safe_checkpoints_restore_the_correct_cargo_and_two_enemy_outcome() {
+    let fresh_lane = resumed(CheckpointStage::LaneStart);
+    assert!(fresh_lane.debris.iter().all(|p| p.hp == p.spec.hp));
+    let cleared_lane = resumed(CheckpointStage::LaneCleared);
+    assert!(cleared_lane.debris.iter().all(|p| p.hp == 0));
+    let fight = resumed(CheckpointStage::PassageFight);
+    assert!(fight.combat.enemies().all(|enemy| enemy.hp > 96));
+    let cleared = resumed(CheckpointStage::PassageCleared);
+    assert!(cleared.combat.enemies().all(|enemy| enemy.hp == 0));
+    assert_eq!(cleared.combat.outcome, Outcome::Victory);
 }

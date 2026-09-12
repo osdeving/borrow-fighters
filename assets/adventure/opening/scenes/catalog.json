@@ -1,0 +1,290 @@
+{
+  "version": 1,
+  "pieces": {
+    "paulista": {
+      "width": 1280,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/environments.png",
+          "source": [
+            0,
+            0,
+            966,
+            542
+          ],
+          "anchor": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "boardroom": {
+      "width": 1280,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/environments.png",
+          "source": [
+            0,
+            543,
+            966,
+            542
+          ],
+          "anchor": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "workshop": {
+      "width": 1280,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/environments.png",
+          "source": [
+            0,
+            1086,
+            966,
+            542
+          ],
+          "anchor": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "limousine": {
+      "width": 900,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/actors-props.png",
+          "source": [
+            8,
+            161,
+            586,
+            162
+          ],
+          "anchor": [
+            293.0,
+            162
+          ]
+        }
+      ]
+    },
+    "duke.standing": {
+      "width": 245,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/actors-props.png",
+          "source": [
+            592,
+            42,
+            323,
+            318
+          ],
+          "anchor": [
+            161.5,
+            318
+          ]
+        }
+      ]
+    },
+    "duke.seated": {
+      "width": 230,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/actors-props.png",
+          "source": [
+            935,
+            53,
+            309,
+            240
+          ],
+          "anchor": [
+            154.5,
+            240
+          ]
+        }
+      ]
+    },
+    "meeting.table": {
+      "width": 520,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/actors-props.png",
+          "source": [
+            3,
+            445,
+            451,
+            384
+          ],
+          "anchor": [
+            225.5,
+            384
+          ]
+        }
+      ]
+    },
+    "executive.left": {
+      "width": 220,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/actors-props.png",
+          "source": [
+            449,
+            410,
+            248,
+            392
+          ],
+          "anchor": [
+            124.0,
+            392
+          ]
+        }
+      ]
+    },
+    "executive.right": {
+      "width": 220,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/actors-props.png",
+          "source": [
+            672,
+            428,
+            240,
+            389
+          ],
+          "anchor": [
+            120.0,
+            389
+          ]
+        }
+      ]
+    },
+    "oldc.seated": {
+      "width": 310,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/actors-props.png",
+          "source": [
+            917,
+            398,
+            333,
+            405
+          ],
+          "anchor": [
+            166.5,
+            405
+          ]
+        }
+      ]
+    },
+    "desk": {
+      "width": 900,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/actors-props.png",
+          "source": [
+            4,
+            915,
+            527,
+            287
+          ],
+          "anchor": [
+            263.5,
+            287
+          ]
+        }
+      ]
+    },
+    "computer": {
+      "width": 236.328125,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/actors-props.png",
+          "source": [
+            531,
+            880,
+            363,
+            314
+          ],
+          "anchor": [
+            171,
+            314
+          ]
+        }
+      ]
+    },
+    "book.kr": {
+      "width": 92,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/actors-props.png",
+          "source": [
+            916,
+            904,
+            145,
+            170
+          ],
+          "anchor": [
+            72.5,
+            170
+          ]
+        }
+      ]
+    },
+    "book.stack": {
+      "width": 160,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/actors-props.png",
+          "source": [
+            1014,
+            990,
+            237,
+            93
+          ],
+          "anchor": [
+            118.5,
+            93
+          ]
+        }
+      ]
+    },
+    "book.open": {
+      "width": 230,
+      "frame_ticks": 60,
+      "frames": [
+        {
+          "image": "opening/scenes/actors-props.png",
+          "source": [
+            898,
+            1083,
+            354,
+            112
+          ],
+          "anchor": [
+            177.0,
+            112
+          ]
+        }
+      ]
+    }
+  }
+}

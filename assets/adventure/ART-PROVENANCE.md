@@ -352,3 +352,13 @@ trajetórias, oclusão da entrada e fechamento pertencem ao runtime. O ônibus
 maior reutiliza o atlas da terceira rodada; os letreiros usam o arquivo
 Barlow Condensed SemiBold existente com carregamento próprio para tamanhos
 pequenos, descrito no [guia de fontes](fonts/README.md).
+
+## Expansão de 12/09/2026
+
+A [locomoção de Rust](locomotion/README.md) registra os oito apoios, quatro
+poses de chute, prompts, fonte e extração determinística por célula. As
+[biografias de Duke e Old C](opening/scenes/README.md) registram ambientes,
+atores/objetos transparentes, prompts, hashes e composição editável. Arte
+produzida pelo `image_gen` integrado, preservando as referências locais de
+identidade. A chegada da EP reutiliza o atlas existente, com nova direção
+por dados e efeitos locais; os dois sons originais estão no guia de áudio.

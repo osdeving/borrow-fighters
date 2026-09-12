@@ -6,9 +6,12 @@
 pub mod actors;
 pub mod assets;
 pub mod audio;
+pub mod biography;
 pub mod capture;
 pub mod chapter;
 pub mod chapter_audio;
+pub mod ep_arrival;
+pub mod locomotion;
 pub mod morning;
 pub mod neighborhood;
 pub mod opening;

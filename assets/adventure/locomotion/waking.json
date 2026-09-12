@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "poses": [
+    {
+      "start_tick": 0,
+      "source": 0,
+      "anchor": [
+        220,
+        134
+      ],
+      "support": [
+        408,
+        410
+      ],
+      "scale": 1,
+      "settle_degrees": 0
+    },
+    {
+      "start_tick": 150,
+      "source": 1,
+      "anchor": [
+        221,
+        133
+      ],
+      "support": [
+        408,
+        410
+      ],
+      "scale": 1,
+      "settle_degrees": 0
+    },
+    {
+      "start_tick": 225,
+      "source": 2,
+      "anchor": [
+        78,
+        207
+      ],
+      "support": [
+        264,
+        409
+      ],
+      "scale": 1,
+      "settle_degrees": 3
+    },
+    {
+      "start_tick": 290,
+      "source": 3,
+      "anchor": [
+        99,
+        241
+      ],
+      "support": [
+        406,
+        416
+      ],
+      "scale": 0.9,
+      "settle_degrees": -2
+    },
+    {
+      "start_tick": 355,
+      "source": 4,
+      "anchor": [
+        90,
+        199
+      ],
+      "support": [
+        413,
+        426
+      ],
+      "scale": 1,
+      "settle_degrees": 2
+    },
+    {
+      "start_tick": 425,
+      "source": 5,
+      "anchor": [
+        132,
+        218
+      ],
+      "support": [
+        413,
+        426
+      ],
+      "scale": 1,
+      "settle_degrees": -2
+    },
+    {
+      "start_tick": 500,
+      "source": 6,
+      "anchor": [
+        60,
+        254
+      ],
+      "support": [
+        438,
+        552
+      ],
+      "scale": 1,
+      "settle_degrees": 3
+    },
+    {
+      "start_tick": 585,
+      "source": 7,
+      "anchor": [
+        54,
+        337
+      ],
+      "support": [
+        438,
+        552
+      ],
+      "scale": 1,
+      "settle_degrees": -1.2
+    }
+  ],
+  "exit_start_tick": 660,
+  "exit_duration_ticks": 180,
+  "exit_depth": 1.97,
+  "exit_path": [
+    [
+      482,
+      552
+    ],
+    [
+      736,
+      578
+    ],
+    [
+      990,
+      536
+    ]
+  ]
+}

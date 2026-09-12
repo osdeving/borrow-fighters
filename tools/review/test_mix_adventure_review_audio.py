@@ -44,6 +44,20 @@ def clips(default=0, length=20):
 
 
 class ReconstructionTests(unittest.TestCase):
+    def test_ep_air_and_impact_follow_the_actor_clock_once_across_pause_and_skip(self):
+        def ep(seconds, tick, **kwargs):
+            return {**row(seconds, **kwargs), "ep_arrival": {
+                "ticks": tick, "impact_tick": 218, "active": True,
+            }}
+        timeline = [row(0), ep(.1, 0), ep(.2, 150), ep(.3, 150, paused=True),
+                    ep(.4, 150, paused=True), ep(.5, 220), ep(.6, 221),
+                    {**ep(.7, 350, synced_after_skip=True), "ep_arrival": {
+                        "ticks": 350, "impact_tick": 218, "active": False}}]
+        _, report = reconstruct(timeline, clips(), .8, rate=10)
+        effects = [(event["cue"], event["seconds"]) for event in report["events"]
+                   if event["cue"].startswith("ep_")]
+        self.assertEqual(effects, [("ep_descent", .1), ("ep_impact", .5)])
+
     def test_traffic_milestones_stay_aligned_with_runtime_constants(self):
         source = (Path(__file__).resolve().parents[2] / "src/adventure/ambient.rs").read_text()
         source += (Path(__file__).resolve().parents[2] / "src/adventure/neighborhood.rs").read_text()

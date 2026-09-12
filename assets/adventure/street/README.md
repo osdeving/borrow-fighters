@@ -227,3 +227,19 @@ são decorativas; não alteram vida, hitboxes ou resultado do combate.
 [Chegada e vizinhança](../../../docs/32-cinematic-neighbourhood-arrival.md) ·
 [Decisão do catálogo](../../../docs/adr/0025-replaceable-street-pieces.md) ·
 [Decisão da chegada](../../../docs/adr/0026-cinematic-arrival-and-neighbours.md)
+
+### Trajetória e impacto da primeira EP
+
+[`ep-arrival.json`](ep-arrival.json) separa a animação de chegada da composição
+estática. Cada ponto contém tick, altura dos pés, tangente vertical e câmera;
+a imagem do corpo continua no atlas independente `erratic.png`. A câmera abre
+para o jogo antes de terminar a queda. A última altura é o piso real (580), e
+esse ponto inicia simultaneamente poeira, som grave e evacuação. Os índices de
+pose são `airborne_pose`, `landing_pose` e `rising_pose`; as dimensões do efeito
+ficam em `dust_radius`, `dust_ticks` e `shake_pixels`.
+
+F5 valida a revisão completa antes de adotá-la. Durante uma queda em andamento,
+a revisão fica aguardando a próxima entrada na rua, para não repetir o impacto
+ou mover o momento de reação dos moradores. Uma revisão inválida conserva os
+dados anteriores. O roteiro, a câmera e a poeira podem mudar sem regenerar o
+fundo ou o personagem; substituir uma pose não exige refazer a trajetória.

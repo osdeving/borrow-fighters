@@ -64,10 +64,12 @@ enum Cue {
     DogAlert,
     ShutterRoll,
     ShutterClack,
+    EpDescent,
+    EpImpact,
 }
 
 impl Cue {
-    const ALL: [Self; 12] = [
+    const ALL: [Self; 14] = [
         Self::Strike,
         Self::Block,
         Self::Hurt,
@@ -80,6 +82,8 @@ impl Cue {
         Self::DogAlert,
         Self::ShutterRoll,
         Self::ShutterClack,
+        Self::EpDescent,
+        Self::EpImpact,
     ];
 
     fn file(self) -> &'static str {
@@ -96,6 +100,8 @@ impl Cue {
             Self::DogAlert => "dog_alert.wav",
             Self::ShutterRoll => "shutter_roll.wav",
             Self::ShutterClack => "shutter_clack.wav",
+            Self::EpDescent => "ep_descent.wav",
+            Self::EpImpact => "ep_impact.wav",
         }
     }
 
@@ -110,6 +116,8 @@ impl Cue {
                 | Self::DogAlert
                 | Self::ShutterRoll
                 | Self::ShutterClack
+                | Self::EpDescent
+                | Self::EpImpact
         )
     }
 }
@@ -364,6 +372,7 @@ struct ObservedAudio {
     ambient_ticks: u32,
     accident_ticks: Option<u32>,
     enemy_awake: bool,
+    ep_ticks: Option<u32>,
     hit_tick: Option<u32>,
 }
 
@@ -376,6 +385,7 @@ impl ObservedAudio {
             ambient_ticks: story.ambient.ticks(),
             accident_ticks: story.ambient.accident_ticks(),
             enemy_awake: story.combat.enemy_awake,
+            ep_ticks: story.ep_arrival.ticks(),
             hit_tick: story
                 .combat
                 .last_hit
@@ -395,11 +405,23 @@ impl ObservedAudio {
         if reset {
             self.hit_tick = None;
             self.accident_ticks = None;
+            self.ep_ticks = None;
         }
         let changed_stage = self.stage.is_some() && self.stage != Some(story.stage);
         let noticed_rust = story.combat.enemy_awake && !self.enemy_awake;
         if changed_stage || noticed_rust || reset {
             cues.push(Cue::Transition);
+        }
+        if story.ep_arrival_active()
+            && let Some(ticks) = story.ep_arrival.ticks()
+        {
+            if self.ep_ticks.is_none() && !story.ep_arrival.impacted() {
+                cues.push(Cue::EpDescent);
+            }
+            let impact = story.ep_arrival.spec.impact_tick();
+            if ticks >= impact && self.ep_ticks.is_none_or(|previous| previous < impact) {
+                cues.push(Cue::EpImpact);
+            }
         }
         if let Some(hit) = story.combat.last_hit {
             let contact_tick = story.combat.ticks.saturating_sub(hit.age_ticks);
@@ -440,6 +462,7 @@ impl ObservedAudio {
         self.ambient_ticks = story.ambient.ticks();
         self.accident_ticks = story.ambient.accident_ticks();
         self.enemy_awake = story.combat.enemy_awake;
+        self.ep_ticks = story.ep_arrival.ticks();
         cues
     }
 }
@@ -459,6 +482,36 @@ mod tests {
         story.combat.enemy_awake = true;
         story.ambient.tick(true);
         story
+    }
+
+    #[test]
+    fn ep_air_and_ground_cues_fire_once_and_panic_waits_for_the_impact() {
+        let mut story = Story::new();
+        story.advance_scene();
+        story.advance_scene();
+        story.skip_segment();
+        let mut observed = ObservedAudio::at_story(&story);
+        story.combat.player.position.x = crate::adventure::combat::ENCOUNTER_TRIGGER_X;
+        story.tick(CombatInput::default());
+        let cues = observed.observe(&story);
+        assert!(cues.contains(&Cue::EpDescent));
+        assert!(!cues.contains(&Cue::TrafficEscape));
+        assert!(!cues.contains(&Cue::EpImpact));
+        assert!(observed.observe(&story).is_empty());
+        while !story.ep_arrival.impacted() {
+            story.tick(CombatInput::default());
+        }
+        let cues = observed.observe(&story);
+        assert!(cues.contains(&Cue::EpImpact));
+        assert!(cues.contains(&Cue::TrafficEscape));
+        assert!(!cues.contains(&Cue::EpDescent));
+        assert!(observed.observe(&story).is_empty());
+        story.skip_segment();
+        observed = ObservedAudio::at_story(&story);
+        assert!(observed.observe(&story).is_empty());
+        story.combat.outcome = Outcome::Defeat;
+        story.retry();
+        assert!(!observed.observe(&story).contains(&Cue::EpImpact));
     }
 
     fn advance_accident_to(story: &mut Story, target: u32) {

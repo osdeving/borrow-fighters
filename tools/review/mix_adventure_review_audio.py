@@ -47,7 +47,8 @@ TRAFFIC_MILESTONES = ((0, "traffic_escape"), (8, "dog_alert"), (38, "car_horn"),
                       (70, "bicycle_fall"), (78, "car_skid"), (112, "car_crash"),
                       (270, "shutter_roll"), (330, "shutter_clack"))
 TRAFFIC_CUES = tuple(cue for _, cue in TRAFFIC_MILESTONES)
-CUES = ("strike", "block", "hurt", "transition") + TRAFFIC_CUES
+EP_CUES = ("ep_descent", "ep_impact")
+CUES = ("strike", "block", "hurt", "transition") + TRAFFIC_CUES + EP_CUES
 STAGES = {"AdaPrologue", "RustMorning", "Encounter", "Aftermath", "Opening", "Complete"}
 LIMITATION = (
     "Audio reconstructed offline from telemetry and the original adventure WAVs; "
@@ -94,6 +95,16 @@ def read_telemetry(path: Path) -> list[dict]:
                         if value is not None and (type(value) is not int or value < 0):
                             raise ValueError(f"ambience.{key} must be a nonnegative integer or null")
                 hit = row.get("hit")
+                if "ep_arrival" in row:
+                    ep = row["ep_arrival"]
+                    if not isinstance(ep, dict) or not isinstance(ep.get("active"), bool):
+                        raise ValueError("invalid EP arrival state")
+                    for key in ("ticks", "impact_tick"):
+                        value = ep.get(key)
+                        if value is None and key == "ticks":
+                            continue
+                        if type(value) is not int or value < 0:
+                            raise ValueError(f"invalid EP arrival {key}")
                 if hit is not None:
                     if hit["target"] not in {"Player", "Erratic"}:
                         raise ValueError("unknown hit target")
@@ -187,6 +198,7 @@ class Observer:
         self.ambient_ticks = 0
         self.accident_ticks = None
         self.enemy_awake = False
+        self.ep_ticks = None
         self.hit_tick = None
         self.epoch = 0
 
@@ -204,6 +216,7 @@ class Observer:
         self.ambient_ticks = row.get("ambience", {}).get("ticks", 0)
         self.accident_ticks = row.get("ambience", {}).get("accident_ticks")
         self.enemy_awake = row["enemy_awake"]
+        self.ep_ticks = row.get("ep_arrival", {}).get("ticks")
         hit = row.get("hit")
         self.hit_tick = max(0, row["ticks"] - hit["age"]) if hit is not None else None
 
@@ -213,6 +226,7 @@ class Observer:
         if reset:
             self.hit_tick = None
             self.accident_ticks = None
+            self.ep_ticks = None
             self.epoch += 1
         reasons = []
         if self.stage is not None and self.stage != row["stage"]:
@@ -224,6 +238,13 @@ class Observer:
         events = []
         if reasons:
             events.append({"cue": "transition", "reasons": reasons, "epoch": self.epoch})
+        ep = row.get("ep_arrival", {})
+        if row["stage"] == "Encounter" and ep.get("active") and ep.get("ticks") is not None:
+            ticks, impact = ep["ticks"], ep["impact_tick"]
+            if self.ep_ticks is None and ticks < impact:
+                events.append({"cue": "ep_descent", "milestone_tick": 0, "epoch": self.epoch})
+            if ticks >= impact and (self.ep_ticks is None or self.ep_ticks < impact):
+                events.append({"cue": "ep_impact", "milestone_tick": impact, "epoch": self.epoch})
         hit = row.get("hit")
         if hit is not None:
             tick = max(0, row["ticks"] - hit["age"])
@@ -245,6 +266,7 @@ class Observer:
         self.ambient_ticks = row.get("ambience", {}).get("ticks", 0)
         self.accident_ticks = accident_ticks
         self.enemy_awake = row["enemy_awake"]
+        self.ep_ticks = ep.get("ticks")
         return events
 
 
@@ -343,9 +365,9 @@ def reconstruct(rows: list[dict], clips: dict[str, array], duration: float, rate
             stop_voices(CUES, "scene_skip")
             observer.align(row)
         elif reset:
-            stop_voices(TRAFFIC_CUES, "execution_reset")
+            stop_voices(TRAFFIC_CUES + EP_CUES, "execution_reset")
         elif row["stage"] not in {"Encounter", "Aftermath"}:
-            stop_voices(TRAFFIC_CUES, "street_left")
+            stop_voices(TRAFFIC_CUES + EP_CUES, "street_left")
         next_traffic_volume = traffic_gain(row)
         if reset or (traffic_volume == 0 and next_traffic_volume > 0):
             traffic_cursor = 0
