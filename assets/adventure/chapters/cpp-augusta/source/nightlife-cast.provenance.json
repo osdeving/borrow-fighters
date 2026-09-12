@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "tool": "built-in image_gen.imagegen",
+  "source_references": [
+    "assets/adventure/chapters/cpp-augusta/sprites/restrained-pair-chroma.png"
+  ],
+  "catalog": "nightlife-cast.json",
+  "dimensions": [
+    1254,
+    1254
+  ],
+  "alpha_strategy": "The original RGB PNGs are preserved byte-for-byte. The native painted crowd shader removes the uniform chroma green and suppresses edge spill. Source polygon masks isolate the body and articulated limb samples.",
+  "outputs": [
+    {
+      "asset": "sprites/nightlife-cast-a.png",
+      "wardrobes": [
+        "leather",
+        "plum_dress",
+        "amber_jacket",
+        "denim"
+      ],
+      "prompt": "Use case: stylized-concept, identity-consistent style reference. Asset type: production-ready painted 2D adventure game CHARACTER SHEET for native skeletal animation. Reference image is ONLY a finish/style benchmark; invent NEW DISTINCT adults, never clone the reference faces or clothing. Match its crisp drawn anatomy, detailed expressive faces, painted cloth folds, subtle warm amber edge light, colored anime/graphic-novel linework and polished shading. DELIVER A LARGE SQUARE SHEET ideally 2048x2048 or 2560x2560, 2 rows × 2 columns, FOUR isolated FULL-BODY ADULTS each at least about 800px high if possible. Each person stays wholly inside their own cell, with 10% clean margin, equal feet baseline within its row. Background ENTIRELY flat uniform chroma green RGB(0,255,0), including all gaps between limbs. NO checkerboard, no alpha visualization, no cast shadows, no floor, no props, no labels, no text. Every person faces SCREEN RIGHT in a neutral relaxed THREE-QUARTER FRONT VIEW. Arms relaxed downward with gentle elbow bend, visibly held AWAY from torso so green gaps separate the sleeves/forearms from the body; exactly two arms with both hands fully visible near outer upper thighs, no crossed arms or hands in pockets. Legs visibly APART, two knees and two separate shoes fully visible, same standing ground plane. Consistent adult anatomy, NOT chibi, NOT dolls, NOT flat geometrical people. No bags covering joints, no handheld objects, no limbs cropped. This is a Brazilian nightlife street ensemble with ordinary stylish adult clothing, respectful nonsexualized full-body framing. Strong character silhouettes and true variation of face and body shape. Sheet A ORDER IS CRITICAL: TOP LEFT: LEATHER, a broad-shouldered Afro-Brazilian man age35, deep brown skin, short close fade black hair, neat short beard, worn BLACK LEATHER biker jacket over charcoal T-shirt, dark blue straight jeans, black ankle boots. Easygoing confident face looking right. TOP RIGHT: PLUM DRESS, a medium-brown-skinned Brazilian woman age32, oval face, neatly tied long black braid falling BEHIND her torso, tailored muted PLUM short-sleeve straight dress ending just above knees, small gold stud earrings, black block-heel ankle boots; both arms bare below sleeves and separated from waist. Distinct face, alert calm gaze to right. BOTTOM LEFT: AMBER JACKET, a slim light-skinned adult man age28 with auburn wavy short hair and light mustache, AMBER OCHRE bomber jacket over cream T-shirt, black straight jeans, gray casual sneakers, relaxed curious rightward gaze. BOTTOM RIGHT: DENIM, a light freckled Brazilian woman age26 with a short copper-red pixie haircut, BLUE DENIM jacket over rust-orange modest top, charcoal fitted jeans, white low-top sneakers; direct self-assured gaze right. Keep all FOUR adults distinct and complete.",
+      "sha256": "d223b300bc07b58e1e565fa3ac593405e7274d60bde04b3d8feb31a6b3104353"
+    },
+    {
+      "asset": "sprites/nightlife-cast-b.png",
+      "wardrobes": [
+        "teal_dress",
+        "white_shirt",
+        "red_blouse",
+        "long_coat"
+      ],
+      "prompt": "Use case: stylized-concept, identity-consistent style reference. Asset type: production-ready painted 2D adventure game CHARACTER SHEET for native skeletal animation. Reference image is ONLY a finish/style benchmark; invent NEW DISTINCT adults, never clone the reference faces or clothing. Match its crisp drawn anatomy, detailed expressive faces, painted cloth folds, subtle warm amber edge light, colored anime/graphic-novel linework and polished shading. DELIVER A LARGE SQUARE SHEET ideally 2048x2048 or 2560x2560, 2 rows × 2 columns, FOUR isolated FULL-BODY ADULTS each at least about 800px high if possible. Each person stays wholly inside their own cell, with 10% clean margin, equal feet baseline within its row. Background ENTIRELY flat uniform chroma green RGB(0,255,0), including all gaps between limbs. NO checkerboard, no alpha visualization, no cast shadows, no floor, no props, no labels, no text. Every person faces SCREEN RIGHT in a neutral relaxed THREE-QUARTER FRONT VIEW. Arms relaxed downward with gentle elbow bend, visibly held AWAY from torso so green gaps separate the sleeves/forearms from the body; exactly two arms with both hands fully visible near outer upper thighs, no crossed arms or hands in pockets. Legs visibly APART, two knees and two separate shoes fully visible, same standing ground plane. Consistent adult anatomy, NOT chibi, NOT dolls, NOT flat geometrical people. No bags covering joints, no handheld objects, no limbs cropped. This is a Brazilian nightlife street ensemble with ordinary stylish adult clothing, respectful nonsexualized full-body framing. Strong character silhouettes and true variation of face and body shape. Sheet B ORDER IS CRITICAL: TOP LEFT: TEAL DRESS, a deep-brown-skinned Afro-Brazilian woman age38 with rounded natural afro hair, a tailored dark TEAL three-quarter-sleeve straight dress ending just above knees, medium gold hoop earrings, black low-heel ankle boots; curvy adult build and warm sharp-eyed face looking right. TOP RIGHT: WHITE SHIRT, a lean Japanese-Brazilian adult man age33, warm light-medium skin, neat short straight black hair with side part, detailed angular adult face, WHITE BUTTON-DOWN SHIRT with sleeves rolled to elbows, charcoal trousers, brown leather casual shoes; thoughtful rightward expression. BOTTOM LEFT: RED BLOUSE, a medium-tan Brazilian woman age29 with long straight dark brown hair behind shoulders, expressive face with arched eyebrows, deep RED silk-like blouse with rolled sleeves and modest neckline, charcoal straight trousers, dark brown block-heel boots, small gold earrings; confident rightward gaze. BOTTOM RIGHT: LONG COAT, an older adult Brazilian man age57, warm light skin, short swept-back silver-gray hair, trim gray beard, weathered distinct face and average sturdy build, charcoal LONG COAT to mid-thigh worn open over muted burgundy shirt, dark trousers and brown boots; composed rightward gaze. Coat front must leave legs clearly separated and hip landmarks visible. Keep all FOUR adults distinct and complete.",
+      "sha256": "d28409a3c7840d7310ff673fd1498cedef3b97b9f25f6ead9131636d21ff489f"
+    }
+  ],
+  "registration_notes": [
+    "All actors are new, distinct adults. The paired restraint reference controls finish and painted lighting, not identity.",
+    "The tool returned 1254×1254 sheets. Each painted person is approximately 590–620 source pixels tall, adequate for the chapter's observed display scale; no artificial upscaling or bitmap post-processing was applied.",
+    "The runtime catalog stores crop-local landmarks and body masks. Front denotes the left side of the source painting; back denotes the right.",
+    "Some sheet row bounds overlap by a few pixels. Body and limb masks, not rectangular crop bounds alone, must isolate each adult.",
+    "Each of the eight cast members has four manually registered limb_polygons. These isolate arms/hands and legs/shoes from neighboring parts before deformation. Dress leg masks begin below the painted hem; the body mask preserves the skirt. All masks use the original pixels without modifying source PNGs."
+  ]
+}

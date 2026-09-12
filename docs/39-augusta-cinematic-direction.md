@@ -44,12 +44,17 @@ saída e mantém o punho preso; o shader retira o fundo verde da fonte em runtim
 As passadas dos NPCs articulam recortes das pinturas existentes, com pernas,
 apoios e contrapasso, sem redesenhar o rosto e a roupa a cada quadro.
 
-Há 22 adultos decorativos, roupas/cabelos/bolsas variados, grupos conversando,
+Há 22 adultos decorativos, oito figurinos pintados, grupos conversando,
 pessoas nas mesas, mulheres na vida noturna, telefone, vasos e cinco veículos,
-incluindo táxi e entrega de moto. São desenhos geométricos de fundo, com
-membros articulados; não substituem a arte pintada dos protagonistas.
-O mesmo relógio os mantém em posição entre cortes. Ao surgir a ameaça,
-fogem sem reaparecer durante o encontro.
+incluindo táxi e entrega de moto. Rostos, roupas e proporções dos figurantes
+seguem o acabamento ilustrado do elenco principal. Máscaras da própria pintura
+formam malhas contínuas nos braços e pernas; o tecido acompanha as coxas e as
+solas mantêm o apoio. Caminhada e fuga usam pinturas próprias de perfil, com
+peito, quadril e sapatos voltados para o deslocamento. Os oito figurinos têm
+16 registros; conversas, mesas e telefone mantêm as vistas frontais.
+O mesmo relógio os mantém em posição entre cortes.
+Ao surgir a ameaça, fogem sem reaparecer durante o encontro. Móveis e veículos
+completam o ambiente com desenhos locais do renderer.
 
 Porta, passos, ruptura e pânico têm Foley original sintetizado, sem vozes.
 O tráfego se apaga nos seis primeiros segundos da ameaça; o ar continua.
@@ -68,6 +73,10 @@ A pausa suspende os sons e a retomada não repete cues abandonados.
 | [production/cinema.rs](../src/adventure/engine/production/cinema.rs) | Palco e projeção 3D |
 | [production/restraint.rs](../src/adventure/engine/production/restraint.rs) | Atuação pareada com contato |
 | [production/nightlife.rs](../src/adventure/engine/production/nightlife.rs) | Figurantes, móveis e veículos |
+| [production/painted_crowd.rs](../src/adventure/engine/production/painted_crowd.rs) | Recortes pintados e articulação dos figurantes |
+| [nightlife-cast.json](../assets/adventure/chapters/cpp-augusta/nightlife-cast.json) | Registros de corpo e membros dos oito figurinos |
+| [Proveniência dos figurantes](../assets/adventure/chapters/cpp-augusta/source/nightlife-cast.provenance.json) | Prompts, referências e hashes das pinturas imagegen |
+| [Proveniência dos perfis](../assets/adventure/chapters/cpp-augusta/source/nightlife-profile.provenance.json) | Vistas laterais para caminhada e fuga, preservando os oito figurinos |
 | [production/frame_motion.rs](../src/adventure/engine/production/frame_motion.rs) | Passadas dos NPCs com a pintura existente |
 | [clips.json](../assets/adventure/actors/cpp/clips.json) | Duas mãos legíveis em repouso e recuperações |
 
@@ -77,10 +86,12 @@ registra a decisão, e o [diário](worklogs/augusta-cinematic-direction.md) mant
 comandos, revisões e instruções de recuperação.
 
 ```sh
-cargo run -- --start augusta
+cargo run --release -- --start augusta
 # Captura reproduzível, com perfil próprio no diretório da revisão:
-cargo run -- --start augusta --hidden --review /tmp/augusta-film --frames 24000
+cargo run --release -- --start augusta --hidden --review /tmp/augusta-film --frames 24000
 python3 tools/review/mix_augusta_review_audio.py /tmp/augusta-film
+# 900 frames das cinco atuações, com oito figurinos nos dois sentidos:
+python3 tools/review/capture_augusta_crowd.py /tmp/augusta-crowd-frames
 ```
 
 O modo de revisão atravessa o capítulo com controles normais, sem forçar dano

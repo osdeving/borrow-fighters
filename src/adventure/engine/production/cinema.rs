@@ -235,7 +235,7 @@ pub fn draw_stage(
         let mut m = scene.rl_push_matrix();
         m.rl_translatef(0., 500., -120.);
         m.rl_scalef(1., -1., 1.);
-        nightlife::draw(&mut *m, &night, 640., nightlife::Layer::Sidewalk);
+        nightlife::draw(&mut *m, a, &night, 640., nightlife::Layer::Sidewalk);
     }
     for npc in c.npcs() {
         if !npc.visible || c.restraint_contact().is_some() {
@@ -343,13 +343,13 @@ pub fn draw_stage(
         let mut m = scene.rl_push_matrix();
         m.rl_translatef(0., 650., 600.);
         m.rl_scalef(1., -1., 1.);
-        nightlife::draw(&mut *m, &night, 640., nightlife::Layer::Traffic);
+        nightlife::draw(&mut *m, a, &night, 640., nightlife::Layer::Traffic);
     }
     {
         let mut m = scene.rl_push_matrix();
         m.rl_translatef(0., 676., 720.);
         m.rl_scalef(1., -1., 1.);
-        nightlife::draw(&mut *m, &night, 640., nightlife::Layer::Foreground);
+        nightlife::draw(&mut *m, a, &night, 640., nightlife::Layer::Foreground);
     }
     // Commit transparent primitives before restoring the state for the next pass.
     unsafe {

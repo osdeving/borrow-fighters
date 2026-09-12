@@ -201,7 +201,7 @@ pub fn draw_chapter(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Cha
     let mut night = Nightlife::sample(chapter.ticks(), threat_age(chapter));
     night.people.retain(|p| (p.x - camera).abs() < 760.);
     night.vehicles.retain(|v| (v.x - camera).abs() < 920.);
-    super::nightlife::draw(d, &night, camera, super::nightlife::Layer::Sidewalk);
+    super::nightlife::draw(d, a, &night, camera, super::nightlife::Layer::Sidewalk);
     let sim = chapter.simulation();
     if let Some(age) = chapter.landing_age() {
         for x in chapter.world.erratic_landings_x {
@@ -410,8 +410,8 @@ pub fn draw_chapter(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Cha
             );
         }
     }
-    super::nightlife::draw(d, &night, camera, super::nightlife::Layer::Traffic);
-    super::nightlife::draw(d, &night, camera, super::nightlife::Layer::Foreground);
+    super::nightlife::draw(d, a, &night, camera, super::nightlife::Layer::Traffic);
+    super::nightlife::draw(d, a, &night, camera, super::nightlife::Layer::Foreground);
     ui(d, a, chapter);
     let fade = cinema::handoff_fade(chapter);
     if fade > 0. {

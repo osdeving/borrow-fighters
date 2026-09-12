@@ -216,6 +216,10 @@ def production_assets():
             document(production_file(directory, spec["texts"], ".json"))
             art = document(production_file(directory, spec["art"], ".json"))
             attachments(directory, art["pieces"])
+            if "nightlife_cast" in art:
+                # Crowd rigs reference world piece ids, so their PNGs already
+                # belong to the art closure. Ship the authored registration too.
+                document(production_file(directory, art["nightlife_cast"], ".json"))
             for name in art["actors"].values():
                 actor(production_file(base, name, ".json"))
         audio_path = production_file(base, "audio/production/catalog.json", ".json")

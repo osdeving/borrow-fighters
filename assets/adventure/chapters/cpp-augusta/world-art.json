@@ -126,6 +126,278 @@
         211.728,
         211.728
       ]
+    },
+    "crowd-leather": {
+      "image": "sprites/nightlife-cast-a.png",
+      "source": [
+        188,
+        6,
+        346,
+        632
+      ],
+      "anchor": [
+        163.0,
+        627
+      ],
+      "size": [
+        107.7065,
+        196.7355
+      ]
+    },
+    "crowd-plum-dress": {
+      "image": "sprites/nightlife-cast-a.png",
+      "source": [
+        780,
+        33,
+        286,
+        601
+      ],
+      "anchor": [
+        120.0,
+        599
+      ],
+      "size": [
+        86.6667,
+        182.1212
+      ]
+    },
+    "crowd-amber-jacket": {
+      "image": "sprites/nightlife-cast-a.png",
+      "source": [
+        208,
+        615,
+        330,
+        627
+      ],
+      "anchor": [
+        146.5,
+        620
+      ],
+      "size": [
+        100.2941,
+        190.5588
+      ]
+    },
+    "crowd-denim": {
+      "image": "sprites/nightlife-cast-a.png",
+      "source": [
+        766,
+        632,
+        321,
+        608
+      ],
+      "anchor": [
+        125.0,
+        598
+      ],
+      "size": [
+        94.5707,
+        179.1246
+      ]
+    },
+    "crowd-teal-dress": {
+      "image": "sprites/nightlife-cast-b.png",
+      "source": [
+        230,
+        6,
+        321,
+        621
+      ],
+      "anchor": [
+        138.5,
+        617
+      ],
+      "size": [
+        94.7814,
+        183.3622
+      ]
+    },
+    "crowd-white-shirt": {
+      "image": "sprites/nightlife-cast-b.png",
+      "source": [
+        755,
+        6,
+        314,
+        616
+      ],
+      "anchor": [
+        146.5,
+        615
+      ],
+      "size": [
+        96.7348,
+        189.7727
+      ]
+    },
+    "crowd-red-blouse": {
+      "image": "sprites/nightlife-cast-b.png",
+      "source": [
+        257,
+        623,
+        316,
+        614
+      ],
+      "anchor": [
+        116.5,
+        602
+      ],
+      "size": [
+        93.3154,
+        181.3154
+      ]
+    },
+    "crowd-long-coat": {
+      "image": "sprites/nightlife-cast-b.png",
+      "source": [
+        748,
+        615,
+        332,
+        622
+      ],
+      "anchor": [
+        153.5,
+        610
+      ],
+      "size": [
+        104.9868,
+        196.6921
+      ]
+    },
+    "crowd-profile-leather": {
+      "image": "sprites/nightlife-profile-a.png",
+      "source": [
+        150,
+        6,
+        375,
+        625
+      ],
+      "anchor": [
+        218.0,
+        622
+      ],
+      "size": [
+        117.4919,
+        195.8198
+      ]
+    },
+    "crowd-profile-plum-dress": {
+      "image": "sprites/nightlife-profile-a.png",
+      "source": [
+        693,
+        29,
+        323,
+        606
+      ],
+      "anchor": [
+        187.0,
+        604
+      ],
+      "size": [
+        97.0618,
+        182.1035
+      ]
+    },
+    "crowd-profile-amber-jacket": {
+      "image": "sprites/nightlife-profile-a.png",
+      "source": [
+        163,
+        625,
+        371,
+        606
+      ],
+      "anchor": [
+        206.5,
+        601
+      ],
+      "size": [
+        115.7819,
+        189.1208
+      ]
+    },
+    "crowd-profile-denim": {
+      "image": "sprites/nightlife-profile-a.png",
+      "source": [
+        694,
+        639,
+        349,
+        595
+      ],
+      "anchor": [
+        194.0,
+        585
+      ],
+      "size": [
+        105.6661,
+        180.1471
+      ]
+    },
+    "crowd-profile-teal-dress": {
+      "image": "sprites/nightlife-profile-b.png",
+      "source": [
+        198,
+        6,
+        329,
+        616
+      ],
+      "anchor": [
+        192.5,
+        611
+      ],
+      "size": [
+        98.4281,
+        184.2909
+      ]
+    },
+    "crowd-profile-white-shirt": {
+      "image": "sprites/nightlife-profile-b.png",
+      "source": [
+        738,
+        6,
+        307,
+        616
+      ],
+      "anchor": [
+        173.5,
+        611
+      ],
+      "size": [
+        94.8909,
+        190.4
+      ]
+    },
+    "crowd-profile-red-blouse": {
+      "image": "sprites/nightlife-profile-b.png",
+      "source": [
+        194,
+        623,
+        361,
+        608
+      ],
+      "anchor": [
+        195.5,
+        602
+      ],
+      "size": [
+        106.4255,
+        179.2429
+      ]
+    },
+    "crowd-profile-long-coat": {
+      "image": "sprites/nightlife-profile-b.png",
+      "source": [
+        725,
+        622,
+        350,
+        609
+      ],
+      "anchor": [
+        198.5,
+        603
+      ],
+      "size": [
+        111.7893,
+        194.5134
+      ]
     }
   },
   "background": "skyline",
@@ -186,5 +458,6 @@
       ]
     }
   ],
-  "mirror_ground_tiles": true
+  "mirror_ground_tiles": true,
+  "nightlife_cast": "nightlife-cast.json"
 }

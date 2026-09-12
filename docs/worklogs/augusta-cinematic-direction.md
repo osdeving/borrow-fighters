@@ -147,3 +147,34 @@ commit das etapas coerentes e relatório final com limites reais.
 - Responsabilidades: cpp_arm PNGs/máscaras/perfis/proveniência; ambient seleção,
   slots e revisão de perfil; root cache, integração, verificação e commits;
   staging mediu performance e repetirá pacote quando o perfil estiver fechado.
+
+## Checkpoint — perfis integrados e revisão final
+
+- As quatro folhas estão registradas: oito frontais para atos parados e oito
+  perfis para caminhar/fugir. Os perfis preservam cabelo, roupa, proporções e
+  definição; tronco, quadril e ambos os sapatos apontam para o deslocamento.
+- Preview nativo `/tmp/augusta-preview-profiles`: 20 quadros de cinco atuações.
+  Root inspecionou 0000, 0002, 0016 e 0018, incluindo fases opostas e os dois
+  sentidos; orientação aprovada. Ambient revisa os demais e cpp_arm os recortes.
+- Os registros frontais foram conservados. Proveniência dos perfis separada em
+  `source/nightlife-profile.provenance.json`, com prompts, referências e hashes.
+- `cargo build --bin borrow-story --release`, fmt e diffcheck aprovados.
+  Preflight do pacote: 35 testes aprovados, closure com 394 assets, oito peças
+  de perfil distintas e 1.738 links locais válidos em 151 arquivos Markdown.
+- Recuperação: aguardar benchmark/smoke isolados de staging; rodar controles
+  nativos com release; depois captura completa e galeria de 900 quadros. Usar
+  diretórios novos, fontes congeladas e rever trechos reais antes de publicar.
+
+- Máscara de Plum corrigida: `body_polygon` não captura mais pele estática
+  atrás do ombro; PNG e trança preservados. Preview focal aprovado pelo autor
+  e root. Catálogo e folhas congelados.
+- Subdivisão do corpo preserva triângulos grandes apenas em regiões afins;
+  cruzamentos de clamps e tecido continuam finos. Membros inalterados.
+  Sete testes focais incluem conservação da transformação; comparação de
+  20 quadros: delta RGB médio 0,001325/255, sem mudança anatômica perceptível.
+- Matriz final do código: **608 testes aprovados, 0 falhas, 2 ignorados já
+  existentes**. fmt e Clippy estrito aprovados; fronteiras e builds isolados
+  adventure/fighting aprovados nesta etapa. Logs `/tmp/augusta-profile-final-*`.
+- Commit seguinte preserva arte, registros, renderer e ferramentas de revisão.
+  Ainda pendentes: captura integral, galeria 900, controles nativos e evidência
+  portátil com o último release; não concluir o goal antes desses resultados.

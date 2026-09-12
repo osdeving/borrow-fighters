@@ -121,6 +121,8 @@ A [ADR 0033](adr/0033-augusta-cinematic-stage.md) acrescenta câmera pura em
 capítulo; `restraint.rs` compõe a atuação pareada, e `nightlife.rs` apresenta
 figurantes em ambos os enquadramentos. Fases, contato, trajetórias e relógio
 de evacuação continuam no domínio Augusta. [Escopo](39-augusta-cinematic-direction.md).
+`painted_crowd.rs` aplica as poses aos recortes pintados, com registros externos
+em `nightlife-cast.json` carregados junto ao world-art do capítulo.
 
 A [ADR 0028](adr/0028-editable-cinematic-tracks-and-destructibles.md) amplia
 os catálogos existentes com `adventure/biography.rs` (tomadas e keyframes),

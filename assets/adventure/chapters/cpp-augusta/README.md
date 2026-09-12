@@ -3,6 +3,20 @@
 Entrada: `chapter.json`. Física/instâncias: `world.json`. Elenco e desenho:
 `world-art.json`. Falas e interface: `texts.json`.
 [Guia e decisões](../../../../docs/38-cpp-augusta-production.md).
+[Encenação cinematográfica](../../../../docs/39-augusta-cinematic-direction.md).
+
+`nightlife-cast.json`, referenciado pelo world-art, registra os recortes e membros
+dos oito figurinos pintados em `sprites/nightlife-cast-a.png` e
+`sprites/nightlife-cast-b.png`, com vistas de perfil em
+`sprites/nightlife-profile-a.png` e `sprites/nightlife-profile-b.png`.
+São oito identidades e 16 registros: durante caminhada e fuga, peito, quadril
+e pés apontam para o deslocamento; as poses frontais atendem momentos parados.
+A vida noturna aplica esses desenhos a 22 adultos
+com identidades e trajetórias estáveis. O mesmo elenco aparece nas cinemáticas e
+no gameplay; a chave verde das fontes é retirada pelo shader durante o desenho.
+As pinturas foram geradas pela ferramenta imagegen integrada, usando o elenco
+principal como referência de estilo. Os prompts e registros da geração ficam
+em `source/`, junto da proveniência da pintura pareada de Julia/cafetão.
 
 O módulo da fachada usa o landmark `ground` como apoio e escala 0,9; piso e
 atores compartilham o mapa. As juntas são recortes de alvenaria do mesmo

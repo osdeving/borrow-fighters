@@ -18,11 +18,14 @@ class RepositoryAssetsTests(unittest.TestCase):
         required = {"campaign.json", "production-lab.json",
                     "chapters/cpp-augusta/chapter.json", "chapters/cpp-augusta/world.json",
                     "chapters/cpp-augusta/texts.json", "chapters/cpp-augusta/world-art.json",
+                    "chapters/cpp-augusta/nightlife-cast.json",
                     "audio/production/catalog.json"}
         for actor in ("cpp", "julia", "broker", "security", "erratic"):
             required.update(f"actors/{actor}/{name}.json" for name in ("character", "rig", "combat", "clips"))
         required.update(f"chapters/cpp-augusta/sprites/{name}.png" for name in (
-            "facade-residential", "facade-bar", "facade-mural", "skyline", "ground"))
+            "facade-residential", "facade-bar", "facade-mural", "skyline", "ground",
+            "restrained-pair-chroma", "nightlife-cast-a", "nightlife-cast-b",
+            "nightlife-profile-a", "nightlife-profile-b"))
         required.update(f"audio/production/{name}.wav" for name in (
             "street-loop", "night-air", "bar-door", "guard-step", "ep-rupture", "panic",
             "swish", "impact", "parry", "projectile", "landing"))
@@ -337,6 +340,23 @@ class ProductionReferencesTests(unittest.TestCase):
         self.write("chapters/unregistered/source.png", "not playable")
         assets = package.production_assets()
         self.assertFalse(any("unused" in p.parts or "unregistered" in p.parts for p in assets))
+
+    def test_crowd_registration_is_shipped_and_missing_registration_aborts(self):
+        self.art["nightlife_cast"] = "nightlife-cast.json"
+        self.write(self.chapter + "art.json", self.art)
+        name = self.chapter + "nightlife-cast.json"
+        self.write(name, {"schema_version": 1, "entries": {}})
+        self.assertIn(self.base / name, package.production_assets())
+        (self.base / name).unlink()
+        with self.assertRaisesRegex(ValueError, "Missing runtime asset"):
+            package.production_assets()
+
+    def test_crowd_registration_is_contained_and_excludes_authoring_material(self):
+        for name in ("../cast.json", "source/cast.json"):
+            self.art["nightlife_cast"] = name
+            self.write(self.chapter + "art.json", self.art)
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "Production"):
+                package.production_assets()
 
     def test_missing_dependency_at_every_level_aborts_collection(self):
         for name in ("production-lab.json", "actors/npc/moves.json", "actors/npc/clips.json",

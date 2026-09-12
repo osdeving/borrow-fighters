@@ -23,6 +23,13 @@ desenha os mesmos assets e habitantes tanto no palco quanto no gameplay.
 Combate fica retido durante atuação e passa ao jogador com inimigos apoiados
 nas posições físicas finais. Skip conclui a encenação, sem conceder vitória.
 
+O elenco decorativo usa pinturas com registros de corpo e membros em um
+catálogo local, referenciado pelo mesmo world-art. O renderer aplica as poses
+da vida noturna a esses recortes em ambas as câmeras. A validação do catálogo
+ocorre antes da troca dos recursos; a distribuição inclui o registro e somente
+as imagens efetivamente referenciadas. Isso permite acabamento suficiente para
+closes mantendo a autoria e as trajetórias determinísticas existentes.
+
 ## Consequências
 
 Há perspectiva e profundidade 3D reais, com personagens ilustrados em planos:

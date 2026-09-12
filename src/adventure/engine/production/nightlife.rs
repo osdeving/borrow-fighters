@@ -3,14 +3,12 @@
 //! System: Adventure production scenery. Both gameplay and cinematic layers use
 //! the same world positions, articulated silhouettes, clothing and light accents.
 
-use crate::adventure::augusta::ambient::{
-    Activity, Nightlife, PERSON_WIDTH_RATIO, Pedestrian, Vehicle, VehicleKind, Wardrobe,
-};
+use super::{assets::ProductionAssets, painted_crowd};
+use crate::adventure::augusta::ambient::{Nightlife, Pedestrian, Vehicle, VehicleKind};
 use raylib::prelude::*;
 
 const INK: Color = Color::new(18, 22, 30, 255);
 const METAL: Color = Color::new(51, 59, 66, 255);
-const AMBER: Color = Color::new(229, 173, 92, 255);
 
 /// Physically separate decorations for the cinematic diorama and normal camera.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -85,51 +83,6 @@ fn tint(color: Color, factor: f32) -> Color {
     )
 }
 
-fn skin(index: usize) -> Color {
-    [
-        Color::new(171, 111, 78, 255),
-        Color::new(217, 160, 116, 255),
-        Color::new(111, 73, 59, 255),
-        Color::new(195, 132, 96, 255),
-    ][index % 4]
-}
-
-fn coat(wardrobe: Wardrobe) -> Color {
-    match wardrobe {
-        Wardrobe::Leather => Color::new(49, 46, 64, 255),
-        Wardrobe::PlumDress => Color::new(133, 57, 101, 255),
-        Wardrobe::AmberJacket => Color::new(161, 111, 63, 255),
-        Wardrobe::Denim => Color::new(59, 88, 111, 255),
-        Wardrobe::TealDress => Color::new(40, 109, 112, 255),
-        Wardrobe::WhiteShirt => Color::new(174, 175, 162, 255),
-        Wardrobe::RedBlouse => Color::new(155, 60, 57, 255),
-        Wardrobe::LongCoat => Color::new(74, 88, 80, 255),
-    }
-}
-
-fn dress(wardrobe: Wardrobe) -> bool {
-    matches!(wardrobe, Wardrobe::PlumDress | Wardrobe::TealDress)
-}
-
-fn long_hair(wardrobe: Wardrobe) -> bool {
-    matches!(
-        wardrobe,
-        Wardrobe::PlumDress | Wardrobe::TealDress | Wardrobe::RedBlouse | Wardrobe::Leather
-    )
-}
-
-fn joint(a: [f32; 2], b: [f32; 2], upper: f32, lower: f32, bend: f32) -> [f32; 2] {
-    let dx = b[0] - a[0];
-    let dy = b[1] - a[1];
-    let distance = dx.hypot(dy).clamp(0.1, upper + lower - 0.1);
-    let along = (upper * upper - lower * lower + distance * distance) / (2.0 * distance);
-    let height = (upper * upper - along * along).max(0.0).sqrt() * bend;
-    [
-        a[0] + dx / distance * along - dy / distance * height,
-        a[1] + dy / distance * along + dx / distance * height,
-    ]
-}
-
 fn limb(d: &mut impl RaylibDraw, s: Space, points: [[f32; 2]; 3], widths: [f32; 2], color: Color) {
     for part in 0..2 {
         s.line(d, points[part], points[part + 1], widths[part] + 1.8, INK);
@@ -139,286 +92,14 @@ fn limb(d: &mut impl RaylibDraw, s: Space, points: [[f32; 2]; 3], widths: [f32; 
     }
 }
 
-/// Draws one adult at the same position and pose under every camera.
-pub fn draw_person(d: &mut impl RaylibDraw, person: &Pedestrian, camera_x: f32) {
-    let s = Space {
-        x: person.x - camera_x + 640.0,
-        y: person.ground_y,
-        scale: person.scale,
-        width_ratio: PERSON_WIDTH_RATIO,
-        facing: person.facing,
-    };
-    let pose = person.pose;
-    let body_y = pose.bob + pose.seated * 14.0;
-    let hip = [pose.lean * 0.28, -46.0 + body_y];
-    let shoulder = [pose.lean, -72.0 + body_y];
-    let face = [shoulder[0] + 2.0, shoulder[1] - 13.0];
-    let cloth = coat(person.wardrobe);
-    let flesh = skin(person.skin);
-    let hair = [
-        Color::new(33, 28, 33, 255),
-        Color::new(86, 48, 34, 255),
-        Color::new(43, 31, 24, 255),
-        Color::new(150, 107, 57, 255),
-    ][person.hair];
-    let pants = if dress(person.wardrobe) {
-        tint(flesh, 0.73)
-    } else {
-        Color::new(37, 46, 59, 255)
-    };
-    s.ellipse(d, [0.0, 1.0], 23.0, 4.0, Color::new(5, 9, 17, 96));
-
-    // Rear limbs remain visible around the silhouette, including conversation.
-    for side in [0, 1] {
-        let mut foot = pose.feet[side];
-        let hip_joint = [hip[0] + if side == 0 { -4.0 } else { 4.0 }, hip[1]];
-        if pose.seated > 0.0 {
-            foot[0] += 10.0 * pose.seated;
-        }
-        let knee = if pose.seated > 0.5 {
-            [hip[0] + 23.0, -25.0]
-        } else {
-            joint(hip_joint, foot, 25.0, 24.0, -1.0)
-        };
-        let color = if side == 0 { tint(pants, 0.76) } else { pants };
-        limb(d, s, [hip_joint, knee, foot], [8.5, 6.3], color);
-        let shoe_y = foot[1] - 1.4;
-        s.line(
-            d,
-            [foot[0] - 2.0, shoe_y],
-            [foot[0] + 7.0, shoe_y],
-            5.2,
-            INK,
-        );
-        s.line(
-            d,
-            [foot[0] - 2.0, shoe_y + 2.0],
-            [foot[0] + 7.0, shoe_y + 2.0],
-            1.0,
-            Color::new(122, 124, 125, 255),
-        );
-    }
-
-    let rear_shoulder = [shoulder[0] - 7.0, shoulder[1] + 4.0];
-    let rear_hand = [pose.hands[0][0] + pose.lean, pose.hands[0][1] + body_y];
-    let rear_elbow = joint(rear_shoulder, rear_hand, 16.0, 15.0, 1.0);
-    limb(
-        d,
-        s,
-        [rear_shoulder, rear_elbow, rear_hand],
-        [6.0, 4.5],
-        tint(cloth, 0.67),
-    );
-    s.disk(d, rear_hand, 3.0, tint(flesh, 0.72));
-
-    if long_hair(person.wardrobe) {
-        s.ellipse(
-            d,
-            [face[0] - 4.0, face[1] + 7.0],
-            9.0,
-            17.0,
-            tint(hair, 0.8),
-        );
-    }
-    let hem = if dress(person.wardrobe) || person.wardrobe == Wardrobe::LongCoat {
-        15.0
-    } else {
-        0.0
-    };
-    s.polygon(
-        d,
-        &[
-            [shoulder[0] - 10.0, shoulder[1] + 1.0],
-            [shoulder[0] + 8.0, shoulder[1]],
-            [hip[0] + 10.0, hip[1] + hem],
-            [hip[0] - 12.0, hip[1] + hem],
-        ],
-        INK,
-    );
-    s.polygon(
-        d,
-        &[
-            [shoulder[0] - 8.5, shoulder[1] + 2.0],
-            [shoulder[0] + 7.0, shoulder[1] + 1.5],
-            [hip[0] + 8.0, hip[1] + hem - 1.0],
-            [hip[0] - 10.0, hip[1] + hem - 1.0],
-        ],
-        cloth,
-    );
-    s.polygon(
-        d,
-        &[
-            [shoulder[0] - 7.0, shoulder[1] + 4.0],
-            [shoulder[0] - 1.5, shoulder[1] + 4.0],
-            [hip[0] - 2.0, hip[1] + hem - 2.0],
-            [hip[0] - 8.0, hip[1] + hem - 2.0],
-        ],
-        tint(cloth, 0.75),
-    );
-    s.line(
-        d,
-        [shoulder[0] + 5.0, shoulder[1] + 7.0],
-        [hip[0] + 6.0, hip[1] + hem - 5.0],
-        1.2,
-        tint(cloth, 1.3),
-    );
-
-    // Neckline, jacket lapels, belt and seams distinguish outfits at street scale.
-    s.line(
-        d,
-        [shoulder[0], shoulder[1] - 5.0],
-        [shoulder[0], shoulder[1] + 4.0],
-        6.0,
-        flesh,
-    );
-    if matches!(
-        person.wardrobe,
-        Wardrobe::Leather | Wardrobe::AmberJacket | Wardrobe::LongCoat | Wardrobe::Denim
-    ) {
-        s.polygon(
-            d,
-            &[
-                [shoulder[0] - 3.0, shoulder[1] + 1.0],
-                [shoulder[0] + 5.0, shoulder[1] + 1.0],
-                [hip[0] + 3.0, hip[1] - 1.0],
-                [hip[0] - 3.0, hip[1] - 1.0],
-            ],
-            Color::new(151, 151, 137, 255),
-        );
-        s.line(
-            d,
-            [shoulder[0] - 6.0, shoulder[1] + 2.0],
-            [shoulder[0] - 1.0, shoulder[1] + 13.0],
-            2.0,
-            tint(cloth, 1.4),
-        );
-        s.line(
-            d,
-            [shoulder[0] + 7.0, shoulder[1] + 3.0],
-            [shoulder[0] + 2.0, shoulder[1] + 14.0],
-            2.0,
-            tint(cloth, 1.4),
-        );
-    }
-    s.line(
-        d,
-        [hip[0] - 9.0, hip[1] - 1.0],
-        [hip[0] + 8.0, hip[1] - 1.0],
-        2.0,
-        INK,
-    );
-    s.disk(d, [hip[0] + 2.0, hip[1] - 1.0], 1.5, AMBER);
-
-    s.ellipse(d, face, 6.4, 8.4, INK);
-    s.ellipse(d, [face[0] + 0.6, face[1] + 0.5], 5.6, 7.5, flesh);
-    s.ellipse(d, [face[0] - 2.0, face[1] - 5.5], 6.2, 5.2, hair);
-    s.line(
-        d,
-        [face[0] - 6.0, face[1] - 5.0],
-        [face[0] - 6.1, face[1] + 4.0],
-        3.0,
-        hair,
-    );
-    s.disk(d, [face[0] + 3.5, face[1] - 0.8], 0.9, INK);
-    s.polygon(
-        d,
-        &[
-            [face[0] + 5.1, face[1]],
-            [face[0] + 8.2, face[1] + 2.4],
-            [face[0] + 5.0, face[1] + 3.4],
-        ],
-        flesh,
-    );
-    s.line(
-        d,
-        [face[0] + 2.6, face[1] + 5.5],
-        [face[0] + 5.5, face[1] + 5.3],
-        0.7,
-        tint(flesh, 0.53),
-    );
-    s.line(
-        d,
-        [face[0] - 4.0, face[1] - 6.0],
-        [face[0] + 1.5, face[1] - 8.0],
-        1.1,
-        tint(hair, 1.4),
-    );
-    if long_hair(person.wardrobe) {
-        s.disk(d, [face[0] - 3.0, face[1] + 5.5], 1.5, AMBER);
-    }
-
-    let front_shoulder = [shoulder[0] + 7.0, shoulder[1] + 4.0];
-    let hand = [pose.hands[1][0] + pose.lean, pose.hands[1][1] + body_y];
-    let conversational = matches!(person.activity, Activity::Conversation | Activity::Seated)
-        && !person.fleeing
-        && pose.alarm == 0.0;
-    let elbow = joint(
-        front_shoulder,
-        hand,
-        16.0,
-        15.0,
-        if conversational { 1.0 } else { -1.0 },
-    );
-    limb(
-        d,
-        s,
-        [front_shoulder, elbow, hand],
-        [6.4, 4.5],
-        if dress(person.wardrobe) { flesh } else { cloth },
-    );
-    s.line(
-        d,
-        [front_shoulder[0] + 1.0, front_shoulder[1]],
-        [elbow[0] + 0.7, elbow[1]],
-        1.1,
-        tint(cloth, 1.32),
-    );
-    s.disk(d, hand, 3.0, flesh);
-    if person.activity == Activity::Phone && !person.fleeing && pose.alarm == 0.0 {
-        s.polygon(
-            d,
-            &[
-                [hand[0] - 2.0, hand[1] - 7.0],
-                [hand[0] + 3.0, hand[1] - 7.0],
-                [hand[0] + 3.0, hand[1] + 1.0],
-                [hand[0] - 2.0, hand[1] + 1.0],
-            ],
-            INK,
-        );
-        s.line(
-            d,
-            [hand[0], hand[1] - 5.5],
-            [hand[0], hand[1] - 0.5],
-            2.7,
-            Color::new(101, 174, 179, 255),
-        );
-    }
-    if matches!(
-        person.wardrobe,
-        Wardrobe::PlumDress | Wardrobe::Leather | Wardrobe::RedBlouse
-    ) {
-        s.line(
-            d,
-            [shoulder[0] - 5.0, shoulder[1] + 3.0],
-            [hip[0] + 10.0, hip[1] + 4.0],
-            1.8,
-            Color::new(86, 65, 53, 255),
-        );
-        s.ellipse(
-            d,
-            [hip[0] + 12.0, hip[1] + 7.0],
-            6.0,
-            8.0,
-            Color::new(73, 44, 43, 255),
-        );
-        s.line(
-            d,
-            [hip[0] + 8.0, hip[1] + 4.0],
-            [hip[0] + 16.0, hip[1] + 4.0],
-            1.0,
-            AMBER,
-        );
-    }
+/// Draws a registered painted adult with the existing deterministic pose.
+pub fn draw_person(
+    d: &mut impl RaylibDraw,
+    assets: &ProductionAssets,
+    person: &Pedestrian,
+    camera_x: f32,
+) {
+    painted_crowd::draw_person(d, assets, person, camera_x);
 }
 
 fn wheel(d: &mut impl RaylibDraw, s: Space, at: [f32; 2], radius: f32, angle: f32) {
@@ -762,12 +443,18 @@ fn furniture(d: &mut impl RaylibDraw, camera_x: f32, front: bool, ticks: u64) {
 ///
 /// Pass `camera_x = 640` when an outer 2D/3D transform already projects world
 /// coordinates. Individual people and vehicles are also exposed for depth sort.
-pub fn draw(d: &mut impl RaylibDraw, frame: &Nightlife, camera_x: f32, layer: Layer) {
+pub fn draw(
+    d: &mut impl RaylibDraw,
+    assets: &ProductionAssets,
+    frame: &Nightlife,
+    camera_x: f32,
+    layer: Layer,
+) {
     match layer {
         Layer::Sidewalk => {
             furniture(d, camera_x, false, frame.ticks);
             for person in &frame.people {
-                draw_person(d, person, camera_x);
+                draw_person(d, assets, person, camera_x);
             }
             furniture(d, camera_x, true, frame.ticks);
         }

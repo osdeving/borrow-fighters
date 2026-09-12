@@ -229,6 +229,8 @@ pub struct WorldArt {
     pub pieces: BTreeMap<String, Attachment>,
     pub background: String,
     pub ground: String,
+    /// Source registrations for the chapter's complete painted adult crowd.
+    pub nightlife_cast: String,
     /// Mirror alternating floor modules when their painted edges are not periodic.
     #[serde(default)]
     pub mirror_ground_tiles: bool,
@@ -267,6 +269,7 @@ pub struct ProductionAssets {
     pub font: Font,
     pub report: LoadReport,
     pub restraint: super::restraint::RestraintArt,
+    pub crowd: super::painted_crowd::PaintedCrowd,
     pub animations: RefCell<BTreeMap<u32, crate::adventure::production::animation::Animator>>,
 }
 
@@ -325,6 +328,10 @@ impl ProductionAssets {
             effects: BTreeMap::new(),
         }
         .validate()?;
+        let crowd_catalog = super::painted_crowd::CastCatalog::load(
+            &contained(root, &art.nightlife_cast)?,
+            &art.pieces,
+        )?;
         for piece in &world.pieces {
             if !art.pieces.contains_key(&piece.piece) {
                 return Err(format!("missing world piece {}", piece.piece).into());
@@ -393,6 +400,7 @@ impl ProductionAssets {
             font,
             report,
             restraint: super::restraint::RestraintArt::load(rl, thread)?,
+            crowd: super::painted_crowd::PaintedCrowd::new(rl, thread, crowd_catalog)?,
             animations: RefCell::new(BTreeMap::new()),
         })
     }

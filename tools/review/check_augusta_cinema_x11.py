@@ -31,6 +31,22 @@ class AugustaCinemaReview(ChapterHostReview):
         row = self.state()
         return row is not None and row["phase"] == phase
 
+    def tap(self, key):
+        # A fixed 180ms pulse can fall entirely between two expensive capture
+        # frames. Keep each edge across actual event polls, as the adventure
+        # interaction harness does, so renderer speed cannot erase the input.
+        self.log("input", key=key, pid=self.process.pid, window=self.window)
+        initial = self.state()["frame"]
+        self.x11.send_key(self.process, self.window, key, True)
+        try:
+            self.await_condition(lambda: self.state()["frame"] >= initial + 2,
+                                 f"{key} press polled", 10)
+        finally:
+            release = self.state()["frame"]
+            self.x11.send_key(self.process, self.window, key, False)
+        self.await_condition(lambda: self.state()["frame"] >= release + 2,
+                             f"{key} release polled", 10)
+
     def pause_check(self, name):
         self.tap("Escape")
         self.await_condition(lambda: self.state()["paused"], "cinematic pause")
