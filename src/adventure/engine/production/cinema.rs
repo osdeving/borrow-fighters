@@ -339,11 +339,17 @@ pub fn draw_stage(
             super::world::dust(&mut *m, p.x, c.world.ground_y, age);
         }
     }
-    {
+    // Each traffic lane has its own ground contact and fixed depth. Scaling a
+    // vehicle must enlarge its silhouette, never sink its wheels below the road.
+    night
+        .vehicles
+        .sort_by(|a, b| a.ground_y.total_cmp(&b.ground_y));
+    for vehicle in &night.vehicles {
         let mut m = scene.rl_push_matrix();
-        m.rl_translatef(0., 650., 600.);
+        let depth = if vehicle.facing > 0.0 { 600. } else { 500. };
+        m.rl_translatef(0., vehicle.ground_y, depth);
         m.rl_scalef(1., -1., 1.);
-        nightlife::draw(&mut *m, a, &night, 640., nightlife::Layer::Traffic);
+        nightlife::draw_vehicle(&mut *m, vehicle, 640.);
     }
     {
         let mut m = scene.rl_push_matrix();

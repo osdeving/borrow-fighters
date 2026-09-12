@@ -178,3 +178,30 @@ commit das etapas coerentes e relatório final com limites reais.
 - Commit seguinte preserva arte, registros, renderer e ferramentas de revisão.
   Ainda pendentes: captura integral, galeria 900, controles nativos e evidência
   portátil com o último release; não concluir o goal antes desses resultados.
+
+## Checkpoint — veículos na escala da rua
+
+- `964087b` preserva a correção dos figurantes. A galeria 900 em
+  `/tmp/augusta-profile-crowd-v5` terminou com hashes válidos; cpp_arm revisou
+  28 quadros sequenciais, oito figurinos e dois sentidos, sem novos defeitos.
+- Native v5: 12 checks passaram em 13,34s. Pacote final dos perfis: 15 checks,
+  394 assets e 32 texturas. Relatórios foram copiados para a pasta de evidências.
+- Usuário apontou carro minúsculo durante a gravação. Confirmado: proporção
+  anterior de aproximadamente 140px de comprimento vs. pessoas de 180px.
+  Filme v5 interrompido e marcado draft. A nova direção mantém carro de cerca
+  de 440px, moto com piloto de 170px, escala por tipo igual nos dois sentidos,
+  duas faixas baixas no gameplay e rodas sincronizadas pelo raio físico.
+- Cinema usa contato no chão de cada veículo e profundidades fixas das faixas,
+  evitando que a escala nova enterre as rodas. Pedestres, poses e assets ficaram
+  inalterados. Seis testes focais de trânsito passaram.
+- Refazer captura completa e smoke com a versão dos veículos; a galeria nova
+  deve conservar os pixels das pessoas e registrar os hashes atualizados.
+- Veículos v6 aprovados por root/ambient no travelling da rua, exterior Limiar
+  e gameplay nativo. Carros ficam proporcionais; faixa próxima corta na borda
+  inferior do quadro sem esconder os atores principais.
+- Matriz dos veículos: **610 testes aprovados, 0 falhas, 2 ignorados**; fmt e
+  Clippy estrito aprovados. Native v6: 12 checks em 13,428s, exit 0.
+- Galeria `/tmp/augusta-profile-crowd-v6` concluída: 900/900 PNGs têm SHA-256
+  idêntico ao v5, comprovando que a correção do tráfego não alterou os ciclos.
+  Vídeo, 14 quadros selecionados, índices e revisão foram copiados para
+  `docs/evidence/augusta-cinematic-revision/crowd/`.

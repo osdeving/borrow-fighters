@@ -10,6 +10,8 @@ pub const STREET_WIDTH: f32 = 3600.0;
 /// Adult profile width relative to the articulated body's vertical scale.
 pub const PERSON_WIDTH_RATIO: f32 = 0.82;
 const OFFSCREEN_MARGIN: f32 = 220.0;
+// Whole cars must clear the street before wrapping or disappearing in escape.
+const VEHICLE_MARGIN: f32 = 320.0;
 
 /// Adult wardrobe and silhouette variants, separate from narrative characters.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -66,6 +68,24 @@ pub enum VehicleKind {
     Hatch,
     Taxi,
     DeliveryScooter,
+}
+
+impl VehicleKind {
+    fn scale(self) -> f32 {
+        match self {
+            Self::Hatch => 2.55,
+            Self::Taxi => 2.35,
+            Self::DeliveryScooter => 2.15,
+        }
+    }
+
+    fn wheel_radius(self) -> f32 {
+        if self == Self::DeliveryScooter {
+            9.0
+        } else {
+            11.0
+        }
+    }
 }
 
 /// A vehicle's position and wheel rotation share the same traveled distance.
@@ -425,27 +445,37 @@ impl Nightlife {
         let vehicles = (0..5)
             .filter_map(|id| {
                 let facing = if id % 2 == 0 { 1.0 } else { -1.0 };
-                let speed = 100.0 + id as f32 * 13.0;
-                let start = wrap(230.0 + id as f32 * 780.0 + origin as f32 / 60.0 * speed * facing);
+                let speed = 270.0 + id as f32 * 25.0;
+                let kind = match id % 3 {
+                    0 => VehicleKind::Hatch,
+                    1 => VehicleKind::Taxi,
+                    _ => VehicleKind::DeliveryScooter,
+                };
+                let scale = kind.scale();
+                let traveled = origin as f32 / 60.0 * speed;
+                let start = (230.0 + id as f32 * 780.0 + traveled * facing + VEHICLE_MARGIN)
+                    .rem_euclid(STREET_WIDTH + VEHICLE_MARGIN * 2.0)
+                    - VEHICLE_MARGIN;
                 let escape = threat_age.map_or(0.0, |age| {
                     let seconds = age as f32 / 60.0;
                     speed * seconds + escape_distance(seconds, 390.0)
                 });
                 let x = start + escape * facing;
-                on_street(x).then_some(Vehicle {
-                    id,
-                    kind: match id % 3 {
-                        0 => VehicleKind::Hatch,
-                        1 => VehicleKind::Taxi,
-                        _ => VehicleKind::DeliveryScooter,
-                    },
-                    x,
-                    ground_y: if facing > 0.0 { 644.0 } else { 614.0 },
-                    facing,
-                    wheel_angle: (origin as f32 / 60.0 * speed + escape) / 10.0,
-                    scale: if facing > 0.0 { 0.9 } else { 0.78 },
-                    fleeing: threat_age.is_some(),
-                })
+                (-VEHICLE_MARGIN..=STREET_WIDTH + VEHICLE_MARGIN)
+                    .contains(&x)
+                    .then_some(Vehicle {
+                        id,
+                        kind,
+                        x,
+                        ground_y: if facing > 0.0 { 738.0 } else { 712.0 },
+                        facing,
+                        // Space mirrors the wheel together with the vehicle. The
+                        // local angle therefore uses positive travel; its world
+                        // angular direction gains the same facing sign as X.
+                        wheel_angle: (traveled + escape) / (kind.wheel_radius() * scale),
+                        scale,
+                        fleeing: threat_age.is_some(),
+                    })
             })
             .collect();
         Self {
@@ -527,6 +557,54 @@ mod tests {
             assert_eq!(foot_a[1], 0.0);
             assert_eq!(foot_b[1], 0.0);
             assert!(gait_foot(0.8, running)[1] < -5.0);
+        }
+    }
+
+    #[test]
+    fn traffic_has_adult_world_proportions_and_ground_clearance() {
+        let scene = Nightlife::sample(0, None);
+        for vehicle in &scene.vehicles {
+            let (width, height, body_height) = match vehicle.kind {
+                VehicleKind::Hatch => (172.0, 63.0, 63.0),
+                VehicleKind::Taxi => (187.0, 72.0, 63.0),
+                VehicleKind::DeliveryScooter => (76.0, 79.0, 79.0),
+            };
+            let actual_height = height * vehicle.scale;
+            if vehicle.kind == VehicleKind::DeliveryScooter {
+                assert!((160.0..=180.0).contains(&actual_height));
+            } else {
+                assert!((420.0..=470.0).contains(&(width * vehicle.scale)));
+                assert!((150.0..=170.0).contains(&actual_height));
+                assert!(vehicle.ground_y - body_height * vehicle.scale >= 550.0);
+            }
+            assert!(VEHICLE_MARGIN > width * vehicle.scale * 0.5);
+            assert_eq!(vehicle.scale, vehicle.kind.scale());
+        }
+        let taxis: Vec<_> = scene
+            .vehicles
+            .iter()
+            .filter(|v| v.kind == VehicleKind::Taxi)
+            .collect();
+        assert_ne!(taxis[0].facing, taxis[1].facing);
+        assert_eq!(taxis[0].scale, taxis[1].scale);
+    }
+
+    #[test]
+    fn scaled_wheels_roll_the_world_distance_in_both_directions() {
+        for onset in [0, 300] {
+            for fleeing in [false, true] {
+                let a = Nightlife::sample(onset, fleeing.then_some(0));
+                let b = Nightlife::sample(onset + 1, fleeing.then_some(1));
+                for current in &b.vehicles {
+                    let previous = a.vehicles.iter().find(|v| v.id == current.id).unwrap();
+                    let displacement = current.x - previous.x;
+                    let rolled = (current.wheel_angle - previous.wheel_angle)
+                        * current.kind.wheel_radius()
+                        * current.scale
+                        * current.facing;
+                    assert!((displacement - rolled).abs() < 0.005);
+                }
+            }
         }
     }
 

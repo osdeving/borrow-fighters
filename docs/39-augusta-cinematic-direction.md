@@ -56,6 +56,12 @@ O mesmo relógio os mantém em posição entre cortes.
 Ao surgir a ameaça, fogem sem reaparecer durante o encontro. Móveis e veículos
 completam o ambiente com desenhos locais do renderer.
 
+Os carros têm aproximadamente 440px de comprimento, proporcionais aos adultos
+de 167–194px, e a moto com piloto mede 170px de altura. As duas faixas mantêm
+o mesmo tamanho físico por veículo; a perspectiva 3D fornece a diferença de
+profundidade. Rodas usam distância/raio para acompanhar o deslocamento, e as
+passagens na câmera jogável ficam abaixo da área principal do combate.
+
 Porta, passos, ruptura e pânico têm Foley original sintetizado, sem vozes.
 O tráfego se apaga nos seis primeiros segundos da ameaça; o ar continua.
 A pausa suspende os sons e a retomada não repete cues abandonados.
