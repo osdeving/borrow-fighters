@@ -1,0 +1,33 @@
+{"event": "started", "elapsed": 2.151, "name": "native", "command": ["stdbuf", "-oL", "-eL", "/home/willams/borrow-fighters/target/release/borrow-story", "--start", "augusta", "--mute", "--capture", "/tmp/augusta-profile-native-v6/capture"], "pid": 998843, "window": 8388615}
+{"event": "input", "elapsed": 3.483, "key": "Escape", "pid": 998843, "window": 8388615}
+{"event": "check", "elapsed": 4.399, "name": "opening_camera_and_cast_freeze", "passed": true}
+{"event": "input", "elapsed": 4.399, "key": "Escape", "pid": 998843, "window": 8388615}
+{"event": "check", "elapsed": 4.504, "name": "opening_camera_and_cast_freeze_resumes", "passed": true}
+{"event": "input", "elapsed": 4.504, "key": "BackSpace", "pid": 998843, "window": 8388615}
+{"event": "check", "elapsed": 8.06, "name": "attempt_precedes_dialogue", "passed": true}
+{"event": "screenshot", "elapsed": 8.19, "file": "screenshots/01-julia-attempt.png", "expected": "Julia attempts to leave before conversation", "window": 8388615, "sha256": "d7b46884ac04be45e514cad755cdb4088ca76dd0d74975efb26dd96b96c225b1", "validation": "visual review pending"}
+{"event": "input", "elapsed": 8.19, "key": "BackSpace", "pid": 998843, "window": 8388615}
+{"event": "input", "elapsed": 8.296, "key": "Return", "pid": 998843, "window": 8388615}
+{"event": "input", "elapsed": 8.403, "key": "Return", "pid": 998843, "window": 8388615}
+{"event": "input", "elapsed": 8.51, "key": "Return", "pid": 998843, "window": 8388615}
+{"event": "input", "elapsed": 8.616, "key": "Return", "pid": 998843, "window": 8388615}
+{"event": "input", "elapsed": 8.721, "key": "Return", "pid": 998843, "window": 8388615}
+{"event": "input", "elapsed": 8.828, "key": "Return", "pid": 998843, "window": 8388615}
+{"event": "input", "elapsed": 8.934, "key": "Return", "pid": 998843, "window": 8388615}
+{"event": "input", "elapsed": 9.04, "key": "Return", "pid": 998843, "window": 8388615}
+{"event": "input", "elapsed": 10.547, "key": "Escape", "pid": 998843, "window": 8388615}
+{"event": "check", "elapsed": 11.46, "name": "door_and_guards_freeze", "passed": true}
+{"event": "input", "elapsed": 11.461, "key": "Escape", "pid": 998843, "window": 8388615}
+{"event": "check", "elapsed": 11.568, "name": "door_and_guards_freeze_resumes", "passed": true}
+{"event": "check", "elapsed": 11.568, "name": "guards_cannot_attack_during_film", "passed": true}
+{"event": "screenshot", "elapsed": 11.696, "file": "screenshots/02-guards-emerge.png", "expected": "Inactive guards emerge through the registered bar door", "window": 8388615, "sha256": "851fd5c5cbc103ac85e6bb07a8f2093bf78a51f1917c142c99a769b317de0ea2", "validation": "visual review pending"}
+{"event": "input", "elapsed": 11.696, "key": "BackSpace", "pid": 998843, "window": 8388615}
+{"event": "check", "elapsed": 11.803, "name": "skip_hands_over_live_enemies", "passed": true}
+{"event": "input", "elapsed": 11.804, "key": "BackSpace", "pid": 998843, "window": 8388615}
+{"event": "check", "elapsed": 11.964, "name": "skip_does_not_win_combat", "passed": true}
+{"event": "input", "elapsed": 11.964, "key": "F5", "pid": 998843, "window": 8388615}
+{"event": "check", "elapsed": 13.057, "name": "reload_retains_encounter", "passed": true}
+{"event": "screenshot", "elapsed": 13.209, "file": "screenshots/03-combat-handoff.png", "expected": "Gameplay remains live after skip and reload", "window": 8388615, "sha256": "d302e6830b66d21175da5e12ecb33b9223702d5fbba0094e3554231965b85c5a", "validation": "visual review pending"}
+{"event": "check", "elapsed": 13.21, "name": "rust_profile_was_not_created", "passed": true}
+{"event": "check", "elapsed": 13.214, "name": "binary_and_text_catalog_unchanged", "passed": true}
+{"event": "check", "elapsed": 13.214, "name": "no_x11_errors", "passed": true, "errors": []}

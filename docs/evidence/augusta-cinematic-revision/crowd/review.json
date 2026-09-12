@@ -1,0 +1,32 @@
+{
+  "frames": 900,
+  "fps": 30,
+  "seconds": 30,
+  "motions": [
+    "walking",
+    "conversation",
+    "seated",
+    "phone",
+    "running"
+  ],
+  "wardrobes": 8,
+  "facings": [
+    1,
+    -1
+  ],
+  "sources_sha256": {
+    "assets/adventure/chapters/cpp-augusta/nightlife-cast.json": "05871171591da8f2eed0406c9d78d31a37a91830df05b38192866e8bd76f8b2f",
+    "assets/adventure/chapters/cpp-augusta/world-art.json": "1b2c7c205eaf9d02a1d81168e13369ff704330d1fc34e435b548e9240ebb2125",
+    "assets/adventure/chapters/cpp-augusta/sprites/nightlife-cast-a.png": "d223b300bc07b58e1e565fa3ac593405e7274d60bde04b3d8feb31a6b3104353",
+    "assets/adventure/chapters/cpp-augusta/sprites/nightlife-cast-b.png": "d28409a3c7840d7310ff673fd1498cedef3b97b9f25f6ead9131636d21ff489f",
+    "assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-a.png": "987940b2adf0e6547f71092bf4de4b4ec5afc1e6b7325e5f12b80055d4d73360",
+    "assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-b.png": "f490d15dc02ba16c3e5b7ce34769ab917ae659b795bf617747e56c4b5e58deda",
+    "src/adventure/engine/production/painted_crowd.rs": "2997be91ef083f7168218ef213d1f1c7ef5bdccaabfeac05e04bbb3ad3d1c575",
+    "src/adventure/engine/production/nightlife.rs": "36a9c16c4d55dc369cf477807d39c422334f78b347e61859189de5fd583a0946",
+    "src/adventure/engine/production/assets.rs": "24d89c7e927723a39f513b180b833b2085277bf9dd13f13c3d473975e102aa09",
+    "src/adventure/augusta/ambient.rs": "146d60d1f2e2ac7f1191cff8017c3a6b7fb0070bce59d972c1fb1d9e187f231e",
+    "tools/review/capture_augusta_crowd.py": "cdd9a7c5c26b00c1941f0a9e4aa44b5bf1088b24e6caaab32b1c5b0ab9c196bf",
+    "tools/review/review_augusta_crowd.rs": "e7af097d1625406aff49644881988e9604a56489fe968302f1c9ed24eaa2cf0b"
+  },
+  "scope": "Native articulation gallery; visual inspection remains required. World positions are replaced by fixed gallery slots, with uninterrupted story poses."
+}

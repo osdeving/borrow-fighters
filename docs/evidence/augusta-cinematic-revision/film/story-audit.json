@@ -1,0 +1,70 @@
+{
+  "success": true,
+  "frames": 8238,
+  "seconds": 137.3000071598838,
+  "final_phase": "Complete",
+  "final_health": 96,
+  "phases": [
+    "Introduction",
+    "Approach",
+    "JuliaAttempt",
+    "Confrontation",
+    "GuardsArrival",
+    "GuardsFight",
+    "AfterGuards",
+    "Regroup",
+    "ErraticsArrival",
+    "ErraticsFight",
+    "FindJulia",
+    "RescueDialogue",
+    "Exit",
+    "Complete"
+  ],
+  "shots": [
+    "augusta-crane",
+    "nightlife-tracking",
+    "limiar-exterior",
+    "julia-held",
+    "cpp-reveal",
+    "julia-recognizes-cpp",
+    "wrist-restraint",
+    "cpp-intervenes",
+    "julia-dialogue",
+    "broker-dialogue",
+    "cpp-dialogue",
+    "bar-door-opens",
+    "guards-emerge",
+    "guards-surround",
+    "uneasy-silence",
+    "sky-rupture",
+    "broker-panics",
+    "erratics-descend"
+  ],
+  "guard_door_origins": {
+    "2": [
+      1536.0,
+      500.0
+    ],
+    "3": [
+      1536.0,
+      500.0
+    ],
+    "4": [
+      1536.0,
+      500.0
+    ]
+  },
+  "broker_first_running_frame": 5099,
+  "erratics_combat_frame": 5495,
+  "audio_cues": {
+    "bar-door": 1,
+    "guard-step": 23,
+    "swish": 27,
+    "projectile": 2,
+    "impact": 21,
+    "ep-rupture": 1,
+    "panic": 1,
+    "landing": 1
+  },
+  "scope": "Runtime state and timing; anatomy, lighting and cuts require separate visual inspection."
+}

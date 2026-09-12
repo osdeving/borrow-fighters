@@ -1,0 +1,15 @@
+{
+  "duration": 137.3,
+  "cue_counts": {
+    "bar-door": 1,
+    "guard-step": 23,
+    "swish": 27,
+    "projectile": 2,
+    "impact": 21,
+    "ep-rupture": 1,
+    "panic": 1,
+    "landing": 1
+  },
+  "source": "original production samples and observed fixed-update cues",
+  "limitation": "Reconstructed audio; not captured from the Raylib device. Device latency and listening approval are not verified."
+}

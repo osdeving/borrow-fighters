@@ -1,0 +1,89 @@
+{
+  "success": true,
+  "checks": {
+    "all_texture_paths_within_package": true,
+    "all_loaded_textures_exist": true,
+    "all_loaded_textures_match_repository": true,
+    "all_four_painted_sheets_loaded": true,
+    "eight_front_registrations": true,
+    "eight_profile_registrations": true,
+    "sixteen_distinct_registration_pieces": true,
+    "all_registration_pieces_resolve_to_loaded_textures": true,
+    "catalog_matches_repository": true,
+    "binary_matches_validated_release": true,
+    "ninety_telemetry_rows": true,
+    "continuous_frame_numbers": true,
+    "normal_window_close": true,
+    "no_error_lines": true,
+    "video_45_frames_at_30fps": true
+  },
+  "scope": "Release staged tree after vehicle-scale correction, with four painted crowd sheets and 16 registrations; opening and asset loading only. Native dependencies use this host; no installer or cross-machine validation.",
+  "command": [
+    "/tmp/augusta-vehicles-portable/borrow-fighters",
+    "--start",
+    "augusta",
+    "--hidden",
+    "--review",
+    "/tmp/augusta-vehicles-portable-smoke",
+    "--frames",
+    "90"
+  ],
+  "launch_working_directory": "/tmp",
+  "asset_override_unset": true,
+  "isolated_data_directory": "/tmp/augusta-vehicles-portable-smoke/userdata",
+  "exit_code": 0,
+  "stage_asset_count": 394,
+  "texture_count": 32,
+  "decoded_rgba_bytes": 65410072,
+  "telemetry_rows": 90,
+  "phases": [
+    "Introduction"
+  ],
+  "world_art_path": "/tmp/augusta-vehicles-portable/assets/adventure/chapters/cpp-augusta/world-art.json",
+  "cast_catalog_path": "/tmp/augusta-vehicles-portable/assets/adventure/chapters/cpp-augusta/nightlife-cast.json",
+  "front_registrations": [
+    "amber_jacket",
+    "denim",
+    "leather",
+    "long_coat",
+    "plum_dress",
+    "red_blouse",
+    "teal_dress",
+    "white_shirt"
+  ],
+  "profile_registrations": [
+    "amber_jacket",
+    "denim",
+    "leather",
+    "long_coat",
+    "plum_dress",
+    "red_blouse",
+    "teal_dress",
+    "white_shirt"
+  ],
+  "video": {
+    "programs": [],
+    "streams": [
+      {
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "30/1",
+        "nb_frames": "45"
+      }
+    ],
+    "format": {
+      "duration": "1.500000"
+    }
+  },
+  "hashes": {
+    "/tmp/augusta-vehicles-portable/bin/borrow-fighters": "ea0ef4b3e679f48d8c534f89c014ee026598f5adb42aa23312a70fe609bc7436",
+    "/tmp/augusta-vehicles-portable/assets/adventure/chapters/cpp-augusta/nightlife-cast.json": "05871171591da8f2eed0406c9d78d31a37a91830df05b38192866e8bd76f8b2f",
+    "/tmp/augusta-vehicles-portable/assets/adventure/chapters/cpp-augusta/world-art.json": "1b2c7c205eaf9d02a1d81168e13369ff704330d1fc34e435b548e9240ebb2125",
+    "/tmp/augusta-vehicles-portable/assets/adventure/chapters/cpp-augusta/sprites/nightlife-cast-a.png": "d223b300bc07b58e1e565fa3ac593405e7274d60bde04b3d8feb31a6b3104353",
+    "/tmp/augusta-vehicles-portable/assets/adventure/chapters/cpp-augusta/sprites/nightlife-cast-b.png": "d28409a3c7840d7310ff673fd1498cedef3b97b9f25f6ead9131636d21ff489f",
+    "/tmp/augusta-vehicles-portable/assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-a.png": "987940b2adf0e6547f71092bf4de4b4ec5afc1e6b7325e5f12b80055d4d73360",
+    "/tmp/augusta-vehicles-portable/assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-b.png": "f490d15dc02ba16c3e5b7ce34769ab917ae659b795bf617747e56c4b5e58deda",
+    "/tmp/augusta-vehicles-portable-smoke/load-report.json": "1303cb9dddc6270d4f83d801d6468f5b5ec4597f7b6c4c9b5681861678309812",
+    "/tmp/augusta-vehicles-portable-smoke/telemetry.jsonl": "9bcef470f3a4f4bc6bcdc5ce5ba8cb478d9a99a3b596841eec6bc965ad97ac38"
+  }
+}

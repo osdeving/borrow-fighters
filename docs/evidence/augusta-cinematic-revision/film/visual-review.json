@@ -1,0 +1,91 @@
+{
+  "capture_source": "/tmp/augusta-profile-film-v6",
+  "source_commit": "40c6294",
+  "binary": "target/release/borrow-story",
+  "binary_sha256": "ea0ef4b3e679f48d8c534f89c014ee026598f5adb42aa23312a70fe609bc7436",
+  "sources_sha256": {
+    "src/adventure/augusta/ambient.rs": "146d60d1f2e2ac7f1191cff8017c3a6b7fb0070bce59d972c1fb1d9e187f231e",
+    "src/adventure/augusta/cinema.rs": "14bf432205deafa86c02fc1d89241312f86661d0a954d136d3f0a60031c84199",
+    "src/adventure/augusta/chapter.rs": "8c2ba841a8397903c5b844138ca8cb870f608a7b0a684f0c2802612ec2635677",
+    "src/adventure/engine/production/cinema.rs": "90033af11a38644b8ec0a35075f1ee4c3117dbf156ad582cc3f0dfa16d64a1e1",
+    "src/adventure/engine/production/painted_crowd.rs": "2997be91ef083f7168218ef213d1f1c7ef5bdccaabfeac05e04bbb3ad3d1c575",
+    "assets/adventure/chapters/cpp-augusta/nightlife-cast.json": "05871171591da8f2eed0406c9d78d31a37a91830df05b38192866e8bd76f8b2f",
+    "assets/adventure/chapters/cpp-augusta/world-art.json": "1b2c7c205eaf9d02a1d81168e13369ff704330d1fc34e435b548e9240ebb2125"
+  },
+  "visual_review": "Root inspected the establishing shots, street traffic, Julia wrist contact, both guard exit shots, broker panic/run, EP descent, and gameplay handoffs. Camera keeps the same door, facade arrangement and staging axis. Vehicles are proportional and pass below the main gameplay action. This is sampled visual inspection, not a manual review of every frame.",
+  "audio": "Video unchanged; audio reconstructed from observed runtime cues and original local PCM, not recorded from the device.",
+  "files": {
+    "adventure.mp4": {
+      "source": "/tmp/augusta-profile-film-v6/adventure.mp4",
+      "sha256": "ab5694f457419e67809b2936b600fde9ffb4cbcabed4863c96cceff5208ae562"
+    },
+    "telemetry.jsonl": {
+      "source": "/tmp/augusta-profile-film-v6/telemetry.jsonl",
+      "sha256": "c2e4b5475d34aacc41c3b6119b170857f33b5920d1a7b558fddb29d0673c90c5"
+    },
+    "story-audit.json": {
+      "source": "/tmp/augusta-profile-film-v6/story-audit.json",
+      "sha256": "bbea28a331e361e048efb93fdc821cf78895743b77ac66824e5ebbc74a11f9c8"
+    },
+    "load-report.json": {
+      "source": "/tmp/augusta-profile-film-v6/load-report.json",
+      "sha256": "d37a0762dbdded94bb6da9e7645054c8c8797f677a892318a7919d44ae472d84"
+    },
+    "mix-review.json": {
+      "source": "/tmp/augusta-profile-film-v6/mix-review.json",
+      "sha256": "9d050b900aebf73650db450e1875d7a78afc1356857e3679ca891ce8d9108c4c"
+    },
+    "000276-Introduction-0-nightlife-tracking.png": {
+      "source": "/tmp/augusta-profile-film-v6/000276-Introduction-0-nightlife-tracking.png",
+      "sha256": "9750cd231739a8c4b1c209eda119eafc04bc57ba6c3bbe4d66276bb3022c80af"
+    },
+    "000516-Introduction-0-limiar-exterior.png": {
+      "source": "/tmp/augusta-profile-film-v6/000516-Introduction-0-limiar-exterior.png",
+      "sha256": "2f42d09cfa3ffa205abe56867237218825a19302efdd2bc9eeb48bb57fc6d1d2"
+    },
+    "001519-JuliaAttempt-0-wrist-restraint.png": {
+      "source": "/tmp/augusta-profile-film-v6/001519-JuliaAttempt-0-wrist-restraint.png",
+      "sha256": "e8476e38bf36944f11ff7123650164d322b7ca0681e7bd6ad3b5f5b5d3291cbe"
+    },
+    "003581-GuardsArrival-0-guards-emerge.png": {
+      "source": "/tmp/augusta-profile-film-v6/003581-GuardsArrival-0-guards-emerge.png",
+      "sha256": "d0dfd064bfca941911ba6912f66955b7120a7947d5c55bc1ebcdadfa1fb34085"
+    },
+    "003803-GuardsArrival-0-guards-surround.png": {
+      "source": "/tmp/augusta-profile-film-v6/003803-GuardsArrival-0-guards-surround.png",
+      "sha256": "cbe9df8298b62117f79702d701a8f853f3474473605ceebcb97dbf4a3da931cf"
+    },
+    "006239-RescueDialogue-1-julia-dialogue.png": {
+      "source": "/tmp/augusta-profile-film-v6/006239-RescueDialogue-1-julia-dialogue.png",
+      "sha256": "2b797ae67777230824026de2865e69879cd184b3f9904f2600d3dacb22c433b4"
+    },
+    "0090-crane.png": {
+      "source": "/tmp/augusta-profile-detail-v6/0090-crane.png",
+      "sha256": "28c01edfe4394fcdb61a4ff284f0a05d7f139d925e982f2f7a6ade573626876f"
+    },
+    "0210-street-traffic.png": {
+      "source": "/tmp/augusta-profile-detail-v6/0210-street-traffic.png",
+      "sha256": "a66e8155f22019c1c9f9e84f14b012b6728044f74d4d3320ed5735fd978e54ff"
+    },
+    "2010-guards-handoff.png": {
+      "source": "/tmp/augusta-profile-detail-v6/2010-guards-handoff.png",
+      "sha256": "0585185746a941aadaa0a04e60b7d1e0342f09207af16933e3697f6bd5966692"
+    },
+    "2565-broker-running.png": {
+      "source": "/tmp/augusta-profile-detail-v6/2565-broker-running.png",
+      "sha256": "2e7fcc9c33a7b012ef07bc91b6aafa170282cf16586a3a1eaf7c46f1fb9d355a"
+    },
+    "2670-ep-descent.png": {
+      "source": "/tmp/augusta-profile-detail-v6/2670-ep-descent.png",
+      "sha256": "47c6aa1d2e453f6e5b5970cb96ea22bff7d94e245d56cf74d84b54b4f8100485"
+    },
+    "2770-ep-handoff.png": {
+      "source": "/tmp/augusta-profile-detail-v6/2770-ep-handoff.png",
+      "sha256": "afcd7669f5f17e4b6f624162835e8174cf29b13ed01258cfb37242727a1d8d53"
+    },
+    "4005-exit.png": {
+      "source": "/tmp/augusta-profile-detail-v6/4005-exit.png",
+      "sha256": "38bfc6d55edef0a8319732eb09f828aa164f2d9b02cc3c6edb0d4f1b5ed05042"
+    }
+  }
+}

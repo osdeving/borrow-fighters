@@ -1,0 +1,34 @@
+{
+  "command": [
+    "/home/willams/borrow-fighters/target/release/borrow-story",
+    "--start",
+    "augusta",
+    "--hidden",
+    "--frames",
+    "300"
+  ],
+  "cwd": "/home/willams/borrow-fighters",
+  "frames_requested": 300,
+  "wall_seconds": 7.912026312002126,
+  "cpu_user_seconds": 3.07558,
+  "cpu_system_seconds": 0.751872,
+  "overall_frames_per_second_including_startup": 37.91696187169092,
+  "exit_code": 0,
+  "normal_close": true,
+  "target_60fps": true,
+  "sources_sha256": {
+    "/home/willams/borrow-fighters/target/release/borrow-story": "21e4f093765b567eb4a8f441bc4812abc799086c593fdc82aac7a9c460baa66a",
+    "/home/willams/borrow-fighters/assets/adventure/chapters/cpp-augusta/nightlife-cast.json": "05871171591da8f2eed0406c9d78d31a37a91830df05b38192866e8bd76f8b2f",
+    "/home/willams/borrow-fighters/assets/adventure/chapters/cpp-augusta/world-art.json": "1b2c7c205eaf9d02a1d81168e13369ff704330d1fc34e435b548e9240ebb2125",
+    "/home/willams/borrow-fighters/assets/adventure/chapters/cpp-augusta/sprites/nightlife-cast-a.png": "d223b300bc07b58e1e565fa3ac593405e7274d60bde04b3d8feb31a6b3104353",
+    "/home/willams/borrow-fighters/assets/adventure/chapters/cpp-augusta/sprites/nightlife-cast-b.png": "d28409a3c7840d7310ff673fd1498cedef3b97b9f25f6ead9131636d21ff489f",
+    "/home/willams/borrow-fighters/assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-a.png": "987940b2adf0e6547f71092bf4de4b4ec5afc1e6b7325e5f12b80055d4d73360",
+    "/home/willams/borrow-fighters/assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-b.png": "f490d15dc02ba16c3e5b7ce34769ab917ae659b795bf617747e56c4b5e58deda"
+  },
+  "sources_unchanged": true,
+  "competing_processes_observed": [],
+  "capture": false,
+  "review": false,
+  "muted": false,
+  "limits": "One isolated 300-frame run, hidden WSL/X11 with MSAA4x and normal 60 FPS cap. Includes startup/shutdown; no new baseline or per-frame timing. Compare raw wall/CPU with prior release report, not with debug to isolate optimization."
+}

@@ -205,3 +205,30 @@ commit das etapas coerentes e relatório final com limites reais.
   idêntico ao v5, comprovando que a correção do tráfego não alterou os ciclos.
   Vídeo, 14 quadros selecionados, índices e revisão foram copiados para
   `docs/evidence/augusta-cinematic-revision/crowd/`.
+
+## Conclusão e recuperação da versão entregue
+
+- `40c6294` preserva a escala física do tráfego. A captura integral v6 terminou
+  com exit 0 e auditoria aprovada: 8.238 ticks, 137,3s, 18 tomadas, `Complete`
+  e C++ com 96 HP. Os três seguranças surgem da soleira `[1536,500]`; cafetão
+  corre no frame 5.099, com EPs vivas, e já saiu antes do combate no 5.495.
+- Root inspecionou abertura, passagem dos veículos, punho de Julia, dois planos
+  da saída dos seguranças, pânico/fuga, descida das EPs, entregas ao gameplay,
+  resgate e saída. Isso complementa a revisão sequencial dos figurantes;
+  não significa inspeção manual dos 8.238 ticks ou de todos os 900 PNGs.
+- Filme de 137,3s com áudio reconstruído dos cues do runtime, sem recodificar
+  o vídeo, em `docs/evidence/augusta-cinematic-revision/film/adventure.mp4`.
+  O áudio não é captura do dispositivo e não houve aprovação por escuta.
+- Novo stage `/tmp/augusta-vehicles-portable`: verify antes/depois e 15 checks
+  passaram; 394 assets, 32 texturas, 65.410.072 bytes RGBA. Native v6 passou
+  12 checks em 13,43s. Binário release de ambos e do filme:
+  `ea0ef4b3e679f48d8c534f89c014ee026598f5adb42aa23312a70fe609bc7436`.
+- Evidências versionadas incluem relatórios, hashes, vídeo e quadros escolhidos;
+  não incluem executáveis nem saves. A galeria completa pode ser regenerada
+  pelo comando de `docs/39-augusta-cinematic-direction.md` em diretório vazio.
+- Para jogar: `cargo run --release -- --start augusta`. A cinemática tem palco
+  e perspectiva 3D, com elenco ilustrado articulado; não são modelos humanos
+  3D completos. Câmeras compartilham mapa, porta, fachadas e posições.
+- Verificação final: 610 testes Rust, fmt e Clippy estrito aprovados; 35 testes
+  do pacote, isolamento adventure/fighting e fronteiras aprovados. Nenhum push
+  foi solicitado ou realizado. O commit seguinte reúne esta evidência final.

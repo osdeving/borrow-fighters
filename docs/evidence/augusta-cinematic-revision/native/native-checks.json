@@ -1,0 +1,94 @@
+{
+  "success": true,
+  "failure": null,
+  "checks": [
+    {
+      "name": "opening_camera_and_cast_freeze",
+      "passed": true
+    },
+    {
+      "name": "opening_camera_and_cast_freeze_resumes",
+      "passed": true
+    },
+    {
+      "name": "attempt_precedes_dialogue",
+      "passed": true
+    },
+    {
+      "name": "door_and_guards_freeze",
+      "passed": true
+    },
+    {
+      "name": "door_and_guards_freeze_resumes",
+      "passed": true
+    },
+    {
+      "name": "guards_cannot_attack_during_film",
+      "passed": true
+    },
+    {
+      "name": "skip_hands_over_live_enemies",
+      "passed": true
+    },
+    {
+      "name": "skip_does_not_win_combat",
+      "passed": true
+    },
+    {
+      "name": "reload_retains_encounter",
+      "passed": true
+    },
+    {
+      "name": "rust_profile_was_not_created",
+      "passed": true
+    },
+    {
+      "name": "binary_and_text_catalog_unchanged",
+      "passed": true
+    },
+    {
+      "name": "no_x11_errors",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "captures": [
+    {
+      "file": "screenshots/01-julia-attempt.png",
+      "expected": "Julia attempts to leave before conversation",
+      "window": 8388615,
+      "sha256": "d7b46884ac04be45e514cad755cdb4088ca76dd0d74975efb26dd96b96c225b1",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/02-guards-emerge.png",
+      "expected": "Inactive guards emerge through the registered bar door",
+      "window": 8388615,
+      "sha256": "851fd5c5cbc103ac85e6bb07a8f2093bf78a51f1917c142c99a769b317de0ea2",
+      "validation": "visual review pending"
+    },
+    {
+      "file": "screenshots/03-combat-handoff.png",
+      "expected": "Gameplay remains live after skip and reload",
+      "window": 8388615,
+      "sha256": "d302e6830b66d21175da5e12ecb33b9223702d5fbba0094e3554231965b85c5a",
+      "validation": "visual review pending"
+    }
+  ],
+  "sessions": [
+    {
+      "case": "native",
+      "pid": 998843,
+      "window": 8388615
+    }
+  ],
+  "profile": null,
+  "elapsed_seconds": 13.428,
+  "executable_sha256": "ea0ef4b3e679f48d8c534f89c014ee026598f5adb42aa23312a70fe609bc7436",
+  "process_exit_code": 0,
+  "input": "XSendEvent addressed to the owned PID/window; no global pointer movement",
+  "capture": "XGetImage of the owned window; unchanged source pixels",
+  "save_edits_by_harness": false,
+  "physical_gamepad_tested": false,
+  "audio_listening_performed": false
+}

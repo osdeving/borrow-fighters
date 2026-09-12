@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-09-12",
+  "scope": "Verified native controls, portable assets, complete chapter capture and sampled visual inspection of a 900-frame crowd gallery after the vehicle-scale correction. Historical performance reports retain their own build identity. No executables or save/profile files are copied.",
+  "native_visual_review": {
+    "status": "approved",
+    "reviewer": "Codex root agent",
+    "timing": "After native v6 completed; original automatic visual-review-pending fields remain unchanged.",
+    "observations": [
+      "Julia remains behind the broker with wrist contact.",
+      "Guards emerge from the bar before gameplay control.",
+      "C++ has two visible arms and combat remains readable with the enlarged foreground vehicle."
+    ]
+  },
+  "files": [
+    {
+      "source": "/tmp/augusta-vehicles-portable-smoke/load-report.json",
+      "file": "portable/load-report.json",
+      "bytes": 3167,
+      "source_sha256": "1303cb9dddc6270d4f83d801d6468f5b5ec4597f7b6c4c9b5681861678309812",
+      "copied_sha256": "1303cb9dddc6270d4f83d801d6468f5b5ec4597f7b6c4c9b5681861678309812",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/augusta-vehicles-portable-smoke/portable-checks.json",
+      "file": "portable/portable-checks.json",
+      "bytes": 3634,
+      "source_sha256": "e27f38bf711898243b699b40b0a7e0b75716a785fd21d1bf77f1b765f6b460e6",
+      "copied_sha256": "e27f38bf711898243b699b40b0a7e0b75716a785fd21d1bf77f1b765f6b460e6",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/augusta-vehicles-portable-smoke/telemetry.jsonl",
+      "file": "portable/telemetry.jsonl",
+      "bytes": 70747,
+      "source_sha256": "9bcef470f3a4f4bc6bcdc5ce5ba8cb478d9a99a3b596841eec6bc965ad97ac38",
+      "copied_sha256": "9bcef470f3a4f4bc6bcdc5ce5ba8cb478d9a99a3b596841eec6bc965ad97ac38",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/augusta-vehicles-portable/BUILD-INFO.json",
+      "file": "portable/BUILD-INFO.json",
+      "bytes": 242,
+      "source_sha256": "d725f1b32926bd0659e529e178b2268e7b2ce146ab8b2a26ae60ad154c8e2e4d",
+      "copied_sha256": "d725f1b32926bd0659e529e178b2268e7b2ce146ab8b2a26ae60ad154c8e2e4d",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/augusta-profile-native-v6/native-checks.json",
+      "file": "native/native-checks.json",
+      "bytes": 2438,
+      "source_sha256": "675ebbdfc8384bea22f5d54a4f9626fc6e4f0fd22238a6909eee967ab74849e4",
+      "copied_sha256": "675ebbdfc8384bea22f5d54a4f9626fc6e4f0fd22238a6909eee967ab74849e4",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/augusta-profile-native-v6/capture/load-report.json",
+      "file": "native/load-report.json",
+      "bytes": 3135,
+      "source_sha256": "d37a0762dbdded94bb6da9e7645054c8c8797f677a892318a7919d44ae472d84",
+      "copied_sha256": "d37a0762dbdded94bb6da9e7645054c8c8797f677a892318a7919d44ae472d84",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/augusta-profile-native-v6/capture/telemetry.jsonl",
+      "file": "native/telemetry.jsonl",
+      "bytes": 457497,
+      "source_sha256": "e1f4da985aee43887919584534d0e25fedcc2e8b67e5cb0bb87a18e51341f21d",
+      "copied_sha256": "e1f4da985aee43887919584534d0e25fedcc2e8b67e5cb0bb87a18e51341f21d",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/augusta-profile-native-v6/events.jsonl",
+      "file": "native/events.jsonl",
+      "bytes": 3765,
+      "source_sha256": "f3c5f3e1bb173f80796aeda88255171a23b0663dd49548434ff955cc1a7371b7",
+      "copied_sha256": "f3c5f3e1bb173f80796aeda88255171a23b0663dd49548434ff955cc1a7371b7",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/augusta-profile-native-v6/screenshots/01-julia-attempt.png",
+      "file": "native/screenshots/01-julia-attempt.png",
+      "bytes": 1626102,
+      "source_sha256": "d7b46884ac04be45e514cad755cdb4088ca76dd0d74975efb26dd96b96c225b1",
+      "copied_sha256": "d7b46884ac04be45e514cad755cdb4088ca76dd0d74975efb26dd96b96c225b1",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/augusta-profile-native-v6/screenshots/02-guards-emerge.png",
+      "file": "native/screenshots/02-guards-emerge.png",
+      "bytes": 1796544,
+      "source_sha256": "851fd5c5cbc103ac85e6bb07a8f2093bf78a51f1917c142c99a769b317de0ea2",
+      "copied_sha256": "851fd5c5cbc103ac85e6bb07a8f2093bf78a51f1917c142c99a769b317de0ea2",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/augusta-profile-native-v6/screenshots/03-combat-handoff.png",
+      "file": "native/screenshots/03-combat-handoff.png",
+      "bytes": 1633984,
+      "source_sha256": "d302e6830b66d21175da5e12ecb33b9223702d5fbba0094e3554231965b85c5a",
+      "copied_sha256": "d302e6830b66d21175da5e12ecb33b9223702d5fbba0094e3554231965b85c5a",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/augusta-release-optimized-performance-20260912/performance.json",
+      "file": "performance/final-release.json",
+      "bytes": 2008,
+      "source_sha256": "43ae962d0f09622e48df4a9d30d757c67d287ce572bbf5929a6195d70e9a5859",
+      "copied_sha256": "43ae962d0f09622e48df4a9d30d757c67d287ce572bbf5929a6195d70e9a5859",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/augusta-release-performance-20260912/performance.json",
+      "file": "performance/previous-release.json",
+      "bytes": 6019,
+      "source_sha256": "17705c3c5fbc4e773570a6f651cbf5a65af86bcff3594019f9002bf2b7fb4285",
+      "copied_sha256": "17705c3c5fbc4e773570a6f651cbf5a65af86bcff3594019f9002bf2b7fb4285",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/augusta-portable-performance-20260912/performance.json",
+      "file": "performance/previous-debug.json",
+      "bytes": 2231,
+      "source_sha256": "591a15664904d5c5f78a69e6f8f8daa875b437e4f7d6f0dc6f5ad7ebb3bf916b",
+      "copied_sha256": "591a15664904d5c5f78a69e6f8f8daa875b437e4f7d6f0dc6f5ad7ebb3bf916b",
+      "byte_identical": true
+    }
+  ],
+  "tested_release_sha256": "ea0ef4b3e679f48d8c534f89c014ee026598f5adb42aa23312a70fe609bc7436",
+  "revision_note": "Native, portable and complete film use the vehicle-scale revision; all 900 gallery PNGs match the previously inspected profile revision. Performance reports are from earlier builds.",
+  "performance_release_sha256": "21e4f093765b567eb4a8f441bc4812abc799086c593fdc82aac7a9c460baa66a",
+  "film_visual_review": {
+    "file": "film/visual-review.json",
+    "sha256": "39001ad398fe7a7338a3110122bfa9d5ce9b63e7c8b07dcb86bf974831064469"
+  },
+  "crowd_visual_review": {
+    "file": "crowd/visual-review.json",
+    "sha256": "1044e9ff9ddf347dbac23483fec555946cd86ac0478b70c8d34cff55ff885346"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0-prototype.5",
+  "target": "linux-x86_64",
+  "cargo_binary": "borrow-story",
+  "tools": [],
+  "commit": "964087b30662784fb60f134325602391a44d314b",
+  "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "asset_count": 394
+}

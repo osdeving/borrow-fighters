@@ -1,0 +1,150 @@
+{
+  "binary": "/home/willams/borrow-fighters/target/release/borrow-story",
+  "binary_sha256": "1499e32063e4daf4ddaf9974e14f2b3cd423100bc1e4947b1bfc24d1a84f20fd",
+  "sources_sha256": {
+    "/home/willams/borrow-fighters/target/release/borrow-story": "1499e32063e4daf4ddaf9974e14f2b3cd423100bc1e4947b1bfc24d1a84f20fd",
+    "/home/willams/borrow-fighters/src/adventure/engine/production/painted_crowd.rs": "7b670223c0ceab623ff95b70ecfadd703da9b23d53fb1234d16fa317a5c9aab0",
+    "/home/willams/borrow-fighters/src/adventure/augusta/ambient.rs": "57f4add8fdea1b758a64bf513a702b05e149264c5901bd7aeb97aa259aec0dc2",
+    "/home/willams/borrow-fighters/assets/adventure/chapters/cpp-augusta/nightlife-cast.json": "324393e20e235f726b7bc150cbefff75c3f108568deab5365e60e23ae06a54f0",
+    "/home/willams/borrow-fighters/assets/adventure/chapters/cpp-augusta/world-art.json": "1b2c7c205eaf9d02a1d81168e13369ff704330d1fc34e435b548e9240ebb2125",
+    "/home/willams/borrow-fighters/assets/adventure/chapters/cpp-augusta/sprites/nightlife-cast-a.png": "d223b300bc07b58e1e565fa3ac593405e7274d60bde04b3d8feb31a6b3104353",
+    "/home/willams/borrow-fighters/assets/adventure/chapters/cpp-augusta/sprites/nightlife-cast-b.png": "d28409a3c7840d7310ff673fd1498cedef3b97b9f25f6ead9131636d21ff489f",
+    "/home/willams/borrow-fighters/assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-a.png": "987940b2adf0e6547f71092bf4de4b4ec5afc1e6b7325e5f12b80055d4d73360",
+    "/home/willams/borrow-fighters/assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-b.png": "f490d15dc02ba16c3e5b7ce34769ab917ae659b795bf617747e56c4b5e58deda"
+  },
+  "sources_unchanged": true,
+  "cwd": "/home/willams/borrow-fighters",
+  "asset_override_unset": true,
+  "capture": false,
+  "review": false,
+  "muted": false,
+  "build": "release",
+  "frame_cap": 60,
+  "runs": [
+    {
+      "pair": 1,
+      "frames_requested": 1,
+      "command": [
+        "/home/willams/borrow-fighters/target/release/borrow-story",
+        "--start",
+        "augusta",
+        "--hidden",
+        "--frames",
+        "1"
+      ],
+      "wall_seconds": 2.967173303000891,
+      "cpu_user_seconds": 0.825475,
+      "cpu_system_seconds": 0.252691,
+      "exit_code": 0,
+      "competing_game_recorders_observed": [],
+      "normal_close": true,
+      "target_60fps": true
+    },
+    {
+      "pair": 1,
+      "frames_requested": 300,
+      "command": [
+        "/home/willams/borrow-fighters/target/release/borrow-story",
+        "--start",
+        "augusta",
+        "--hidden",
+        "--frames",
+        "300"
+      ],
+      "wall_seconds": 6.464090445999318,
+      "cpu_user_seconds": 3.641262,
+      "cpu_system_seconds": 0.643681,
+      "exit_code": 0,
+      "competing_game_recorders_observed": [],
+      "normal_close": true,
+      "target_60fps": true,
+      "startup_adjusted_fps_estimate": 85.50388464269497,
+      "incremental_cpu_ms_per_frame": 10.72500668896321,
+      "startup_adjusted_estimate_valid_within_frame_cap": false
+    },
+    {
+      "pair": 2,
+      "frames_requested": 1,
+      "command": [
+        "/home/willams/borrow-fighters/target/release/borrow-story",
+        "--start",
+        "augusta",
+        "--hidden",
+        "--frames",
+        "1"
+      ],
+      "wall_seconds": 1.4302223900012905,
+      "cpu_user_seconds": 0.835845,
+      "cpu_system_seconds": 0.24694800000000017,
+      "exit_code": 0,
+      "competing_game_recorders_observed": [],
+      "normal_close": true,
+      "target_60fps": true
+    },
+    {
+      "pair": 2,
+      "frames_requested": 300,
+      "command": [
+        "/home/willams/borrow-fighters/target/release/borrow-story",
+        "--start",
+        "augusta",
+        "--hidden",
+        "--frames",
+        "300"
+      ],
+      "wall_seconds": 10.686531398001534,
+      "cpu_user_seconds": 4.4065129999999995,
+      "cpu_system_seconds": 0.7036279999999997,
+      "exit_code": 0,
+      "competing_game_recorders_observed": [],
+      "normal_close": true,
+      "target_60fps": true,
+      "startup_adjusted_fps_estimate": 32.302292386908626,
+      "incremental_cpu_ms_per_frame": 13.46939130434782,
+      "startup_adjusted_estimate_valid_within_frame_cap": true
+    },
+    {
+      "pair": 3,
+      "frames_requested": 1,
+      "command": [
+        "/home/willams/borrow-fighters/target/release/borrow-story",
+        "--start",
+        "augusta",
+        "--hidden",
+        "--frames",
+        "1"
+      ],
+      "wall_seconds": 2.2439806160000444,
+      "cpu_user_seconds": 0.9646470000000011,
+      "cpu_system_seconds": 0.19610300000000036,
+      "exit_code": 0,
+      "competing_game_recorders_observed": [],
+      "normal_close": true,
+      "target_60fps": true
+    },
+    {
+      "pair": 3,
+      "frames_requested": 300,
+      "command": [
+        "/home/willams/borrow-fighters/target/release/borrow-story",
+        "--start",
+        "augusta",
+        "--hidden",
+        "--frames",
+        "300"
+      ],
+      "wall_seconds": 10.79399561199898,
+      "cpu_user_seconds": 4.415875999999999,
+      "cpu_system_seconds": 0.6163489999999996,
+      "exit_code": 0,
+      "competing_game_recorders_observed": [],
+      "normal_close": true,
+      "target_60fps": true,
+      "startup_adjusted_fps_estimate": 34.97069889817971,
+      "incremental_cpu_ms_per_frame": 12.948076923076913,
+      "startup_adjusted_estimate_valid_within_frame_cap": true
+    }
+  ],
+  "limits": "First 300 displayed frames on hidden WSL/X11 window, MSAA4x; wall time includes initialization and teardown. Paired one-frame runs estimate fixed costs; no per-frame timing instrumentation or uncapped throughput.",
+  "interpretation": "300-frame wall times were 6.464s, 10.687s and 10.794s. Paired startup subtraction gives roughly 32-35 FPS in runs 2/3; run 1 gives an impossible >60 FPS because its cold startup baseline (2.967s) was slower than later startup runs, so that FPS estimate is invalid. This is a combined release/profile/cache comparison with an earlier debug build, not an isolated optimization benchmark."
+}

@@ -1,0 +1,70 @@
+{
+  "binary": "/tmp/augusta-painted-portable/bin/borrow-fighters",
+  "binary_sha256": "f533817d0fea8ca1d7f04ab12777e5bfac03c54311b03a035fba7a7a78ac8875",
+  "binary_unchanged": true,
+  "cwd": "/tmp",
+  "asset_override_unset": true,
+  "capture": false,
+  "review": false,
+  "muted": false,
+  "frame_cap": 60,
+  "runs": [
+    {
+      "label": "startup",
+      "frames_requested": 1,
+      "command": [
+        "/tmp/augusta-painted-portable/borrow-fighters",
+        "--start",
+        "augusta",
+        "--hidden",
+        "--frames",
+        "1"
+      ],
+      "wall_seconds": 3.9948648379977385,
+      "cpu_user_seconds": 1.466796,
+      "cpu_system_seconds": 0.207506,
+      "exit_code": 0,
+      "competing_game_recorders_observed": [],
+      "overall_frames_per_second_including_startup": 0.2503213601842932
+    },
+    {
+      "label": "normal-a",
+      "frames_requested": 300,
+      "command": [
+        "/tmp/augusta-painted-portable/borrow-fighters",
+        "--start",
+        "augusta",
+        "--hidden",
+        "--frames",
+        "300"
+      ],
+      "wall_seconds": 17.38058914800058,
+      "cpu_user_seconds": 12.916917999999999,
+      "cpu_system_seconds": 0.650774,
+      "exit_code": 0,
+      "competing_game_recorders_observed": [],
+      "overall_frames_per_second_including_startup": 17.260634691115246,
+      "startup_adjusted_frames_per_second_estimate": 22.33722980358741
+    },
+    {
+      "label": "normal-b",
+      "frames_requested": 300,
+      "command": [
+        "/tmp/augusta-painted-portable/borrow-fighters",
+        "--start",
+        "augusta",
+        "--hidden",
+        "--frames",
+        "300"
+      ],
+      "wall_seconds": 19.281870974999038,
+      "cpu_user_seconds": 12.352795000000002,
+      "cpu_system_seconds": 0.7060470000000001,
+      "exit_code": 0,
+      "competing_game_recorders_observed": [],
+      "overall_frames_per_second_including_startup": 15.558656127767962,
+      "startup_adjusted_frames_per_second_estimate": 19.55909465335322
+    }
+  ],
+  "limitations": "Wall time includes startup/shutdown and polling up to 200ms; no frame-time instrumentation. Existing normal loop caps at 60 FPS. Hidden WSL/X11 host result, debug binary, first 300 presented frames only."
+}
