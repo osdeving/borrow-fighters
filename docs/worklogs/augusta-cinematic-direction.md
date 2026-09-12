@@ -93,3 +93,57 @@ commit das etapas coerentes e relatório final com limites reais.
   revisa closes/gameplay e repete checks afetados antes de nova captura.
 - Skills desta etapa: imagegen, além de art-direction e rust-gamedev. Prompts,
   referências e arquivos selecionados devem ficar no repositório.
+
+## Checkpoint — figurantes pintados integrados
+
+- `c32c56b` preserva a encenação validada antes da troca dos figurantes.
+- Duas folhas imagegen `sprites/nightlife-cast-{a,b}.png` aprovadas como fontes:
+  oito adultos distintos, cada pintura com aproximadamente 600px de altura.
+  `nightlife-cast.json` registra recortes; world-art aponta para esse catálogo.
+- `painted_crowd.rs` substitui os humanos geométricos nas duas câmeras, mantendo
+  poses e evacuação do modelo. O carregador valida o elenco antes de alocar GPU.
+- Empacotamento inclui o novo catálogo e somente as folhas referenciadas.
+  Todos os 35 testes Python do pacote passaram; 266 links locais válidos.
+- Build da integração passou. `/tmp/augusta-painted-candidate` contém uma
+  abertura de 1.250 frames com estilo aprovado nos planos gerais.
+- **Ainda não concluir:** painel ampliado `/tmp/painted-crowd-review/frame000.png`
+  revelou braços ocultos, ombros abertos e pequenos recortes na cintura. Agentes
+  `augusta_ambient` e `cpp_arm` ajustam os recortes/ordem antes da captura final.
+- Root aguarda rig revisado para matriz Rust, captura completa e controles;
+  `augusta_staging` repetirá stage/verify/smoke portátil com o binário estável.
+- Usuário reforçou que braços não podem entrar no corpo e pediu inspeção dos
+  frames. `tools/review/capture_augusta_crowd.py` compila uma galeria nativa
+  (`review_augusta_crowd.rs`) com 900 frames: cinco atuações contínuas, oito
+  pinturas e ambos os sentidos; vídeo de 30 segundos e hashes dos recursos.
+  Sem fallback que congele o ciclo de figurantes saindo da rua. Usar esta galeria
+  além da captura do capítulo e conservar quadros sequenciais da revisão aceita.
+
+## Checkpoint — ciclos íntegros, orientação do tronco em correção
+
+- As bandas de membros foram substituídas por uma malha contínua por máscara,
+  com ombros conectados, cotovelos baixos e tecido acompanhando as coxas.
+  Galeria `/tmp/augusta-crowd-frames-final`: 900 PNGs e MP4, cinco atuações,
+  oito figurinos, ambos os sentidos; revisão de sequências aprovou anatomia.
+- Matriz dessa revisão: 606 testes passaram, 0 falharam, 2 ignorados; fmt,
+  Clippy estrito e fronteiras aprovados. Pacote com 392 assets/30 texturas
+  passou stage, verify e smoke em `/tmp/augusta-painted-portable`.
+- **Nova correção obrigatória do usuário:** andar lateralmente conservava
+  o peito voltado à câmera. Toda evidência acima passa a ser preliminar para
+  orientação. Frontais ficam parados; caminhada/fuga passam a oito pinturas
+  de perfil real, produzidas por `cpp_arm`, preservando identidade e roupa.
+- `augusta_ambient` acrescentou `profile_entries` obrigatório, seleção por
+  atividade e slots explícitos de membros. Código compila; load/testes de
+  catálogo aguardam os perfis e seus registros. Não tentar entregar esse
+  estado intermediário sem completar o JSON.
+- Root acrescentou cache de eixos das juntas, altura de barra, posição de
+  uniform e projeção de vértices, eliminando operações repetidas sem mudar
+  a autoria da atuação. Checklib passa; aguardar dados para matriz completa.
+- Native input da revisão pintada falhou ao perder um toque curto de pausa
+  durante capturas concorrentes. Medição posterior sem captura revelou também
+  ~20–22 FPS no debug antigo deste host WSL. Comparar o cache/perfis em execução
+  isolada; não reportar como simples interferência entre ferramentas.
+- `/tmp/augusta-painted-film-final` foi interrompida por root após a correção
+  do usuário; é draft. Regravar o capítulo, galeria e controles na versão final.
+- Responsabilidades: cpp_arm PNGs/máscaras/perfis/proveniência; ambient seleção,
+  slots e revisão de perfil; root cache, integração, verificação e commits;
+  staging mediu performance e repetirá pacote quando o perfil estiver fechado.
