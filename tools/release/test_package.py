@@ -24,7 +24,8 @@ class RepositoryAssetsTests(unittest.TestCase):
         required.update(f"chapters/cpp-augusta/sprites/{name}.png" for name in (
             "facade-residential", "facade-bar", "facade-mural", "skyline", "ground"))
         required.update(f"audio/production/{name}.wav" for name in (
-            "street-loop", "swish", "impact", "parry", "projectile", "landing"))
+            "street-loop", "night-air", "bar-door", "guard-step", "ep-rupture", "panic",
+            "swish", "impact", "parry", "projectile", "landing"))
         self.assertFalse({base + name for name in required} - assets)
         production = {name for name in assets if name.startswith((base + "actors/", base + "chapters/"))}
         self.assertFalse(any({"source", "sources", "reviews", "prompts"} & set(Path(name).parts)

@@ -46,17 +46,27 @@ def mix(rows, duration, catalog, sample_root=SAMPLES):
         previous = seconds
     ambience, channels = read_sample(sample_root / catalog["ambience"]["file"])
     loops = len(ambience) // channels
+    air_spec = catalog.get("air")
+    air, air_channels = read_sample(sample_root / air_spec["file"]) if air_spec else (array("h", [0, 0]), 2)
+    air_frames = len(air) // air_channels
     effects = {key: read_sample(sample_root / spec["file"]) for key, spec in catalog["effects"].items()}
     result = array("h")
     voices = {}
     road_cursor = 0
     row_index = 0
     paused = True
+    threat_age = None
     counts = Counter()
     for frame in range(round(duration * RATE)):
         while row_index < len(rows) and round(rows[row_index]["seconds"] * RATE) <= frame:
             row = rows[row_index]
             paused = row["paused"]
+            # Same persistent clock and six-second traffic fade as runtime.
+            # Older recordings have neither this field nor the cinematic cues.
+            if "threat_age" in row:
+                threat_age = row["threat_age"]
+                if threat_age is not None and (type(threat_age) is not int or threat_age < 0):
+                    raise ValueError("invalid threat age")
             if row.get("audio_reset", False):
                 voices.clear()
             if not paused:
@@ -68,8 +78,13 @@ def mix(rows, duration, catalog, sample_root=SAMPLES):
             result.extend((0, 0))
             continue
         position = (road_cursor % loops) * channels
-        left = ambience[position] * catalog["ambience"]["volume"]
-        right = ambience[position + channels - 1] * catalog["ambience"]["volume"]
+        traffic_gain = 1.0 if threat_age is None else max(0.0, 1.0 - threat_age / 360.0)
+        left = ambience[position] * catalog["ambience"]["volume"] * traffic_gain
+        right = ambience[position + channels - 1] * catalog["ambience"]["volume"] * traffic_gain
+        air_position = (road_cursor % air_frames) * air_channels
+        air_volume = air_spec["volume"] if air_spec else 0.0
+        left += air[air_position] * air_volume
+        right += air[air_position + air_channels - 1] * air_volume
         road_cursor += 1
         completed = []
         for key, cursor in voices.items():

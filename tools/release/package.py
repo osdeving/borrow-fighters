@@ -220,7 +220,8 @@ def production_assets():
                 actor(production_file(base, name, ".json"))
         audio_path = production_file(base, "audio/production/catalog.json", ".json")
         audio = document(audio_path)
-        for sample in [audio["ambience"], *audio["effects"].values()]:
+        loops = [audio[key] for key in ("ambience", "air") if key in audio]
+        for sample in [*loops, *audio["effects"].values()]:
             files.add(production_file(audio_path.parent, sample["file"], ".wav"))
     except (KeyError, TypeError, AttributeError) as error:
         raise ValueError(f"Malformed production dependency descriptor: {error}") from error
