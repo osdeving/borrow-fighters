@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "method": "Blender GLB reimport and evaluated skin",
+  "models": {
+    "hatchback": {
+      "file": "assets/adventure/models/vehicles/hatch.glb",
+      "sha256": "765155f7c97ae3b5f8eb93fb4213c53642a59dae1e0ad301bd0621805028d2b0",
+      "blender_version": "4.5.4 LTS",
+      "evaluated_frames": [
+        0,
+        15,
+        60
+      ],
+      "vertices": 28662,
+      "bones": 5,
+      "body_motion_max_m": 0.0,
+      "wheel_motion_max_m": 0.4426491716534789,
+      "wheel_axial_motion_max_m": 1.7881393432617188e-07,
+      "loop_error_max_m": 6.664001874625056e-08,
+      "status": "pass"
+    },
+    "taxi": {
+      "file": "assets/adventure/models/vehicles/taxi.glb",
+      "sha256": "5319e0b9645ff9fec476f45d0a9f38c18ecde27b186c022bb09d9e1043102b98",
+      "blender_version": "4.5.4 LTS",
+      "evaluated_frames": [
+        0,
+        15,
+        60
+      ],
+      "vertices": 28975,
+      "bones": 5,
+      "body_motion_max_m": 0.0,
+      "wheel_motion_max_m": 0.4426494241303362,
+      "wheel_axial_motion_max_m": 1.1920928955078125e-07,
+      "loop_error_max_m": 5.960464477539063e-08,
+      "status": "pass"
+    },
+    "scooter": {
+      "file": "assets/adventure/models/vehicles/delivery-scooter.glb",
+      "sha256": "4f4282d20b6f225ff03ca2c453c36afae1dc2f06e5fe1b94b54ec73e7e6f9100",
+      "blender_version": "4.5.4 LTS",
+      "evaluated_frames": [
+        0,
+        15,
+        60
+      ],
+      "vertices": 15513,
+      "bones": 3,
+      "body_motion_max_m": 0.0,
+      "wheel_motion_max_m": 0.3436540827445638,
+      "wheel_axial_motion_max_m": 4.284083843231201e-08,
+      "loop_error_max_m": 3.1828894262453654e-08,
+      "status": "pass"
+    }
+  }
+}

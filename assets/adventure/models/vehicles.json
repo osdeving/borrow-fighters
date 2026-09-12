@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "hatchback": {
+      "file": "vehicles/hatch.glb",
+      "height_m": 1.4895000460091978,
+      "length_m": 4.133999824523926,
+      "animation_fps": 60,
+      "clips": {
+        "drive": "drive"
+      },
+      "paint_material": 1
+    },
+    "taxi": {
+      "file": "vehicles/taxi.glb",
+      "height_m": 1.6600000860635191,
+      "length_m": 4.434000015258789,
+      "animation_fps": 60,
+      "clips": {
+        "drive": "drive"
+      },
+      "paint_material": 1
+    },
+    "scooter": {
+      "file": "vehicles/delivery-scooter.glb",
+      "height_m": 1.7,
+      "length_m": 1.9279999732971191,
+      "animation_fps": 60,
+      "clips": {
+        "drive": "drive"
+      },
+      "paint_material": 5
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "models": {
+    "hatchback": {
+      "file": "assets/adventure/models/vehicles/hatch.glb",
+      "sha256": "765155f7c97ae3b5f8eb93fb4213c53642a59dae1e0ad301bd0621805028d2b0",
+      "bytes": 1749684,
+      "vertices_exported": 28662,
+      "triangles": 39382,
+      "materials": 13,
+      "joints": [
+        "root",
+        "wheel_front_left",
+        "wheel_rear_left",
+        "wheel_front_right",
+        "wheel_rear_right"
+      ],
+      "bounds_gltf_m": {
+        "min": [
+          -1.0750000476837158,
+          -2.3283064365386963e-10,
+          -2.066999912261963
+        ],
+        "max": [
+          1.0750000476837158,
+          1.4895000457763672,
+          2.066999912261963
+        ]
+      },
+      "drive_seconds": 1,
+      "drive_samples": 61,
+      "checks": {
+        "self_contained": true,
+        "finite_vertices_and_unit_normals": true,
+        "one_rigid_joint_per_vertex": true,
+        "ground_contact": true,
+        "wheel_loop_closes": true,
+        "no_root_motion": true,
+        "paint_material_index": true
+      }
+    },
+    "taxi": {
+      "file": "assets/adventure/models/vehicles/taxi.glb",
+      "sha256": "5319e0b9645ff9fec476f45d0a9f38c18ecde27b186c022bb09d9e1043102b98",
+      "bytes": 1772852,
+      "vertices_exported": 28975,
+      "triangles": 40314,
+      "materials": 14,
+      "joints": [
+        "root",
+        "wheel_front_left",
+        "wheel_rear_left",
+        "wheel_front_right",
+        "wheel_rear_right"
+      ],
+      "bounds_gltf_m": {
+        "min": [
+          -1.0750000476837158,
+          -2.3283064365386963e-10,
+          -2.2170000076293945
+        ],
+        "max": [
+          1.0750000476837158,
+          1.6600000858306885,
+          2.2170000076293945
+        ]
+      },
+      "drive_seconds": 1,
+      "drive_samples": 61,
+      "checks": {
+        "self_contained": true,
+        "finite_vertices_and_unit_normals": true,
+        "one_rigid_joint_per_vertex": true,
+        "ground_contact": true,
+        "wheel_loop_closes": true,
+        "no_root_motion": true,
+        "paint_material_index": true
+      }
+    },
+    "scooter": {
+      "file": "assets/adventure/models/vehicles/delivery-scooter.glb",
+      "sha256": "4f4282d20b6f225ff03ca2c453c36afae1dc2f06e5fe1b94b54ec73e7e6f9100",
+      "bytes": 970352,
+      "vertices_exported": 15513,
+      "triangles": 23256,
+      "materials": 15,
+      "joints": [
+        "root",
+        "wheel_front",
+        "wheel_rear"
+      ],
+      "bounds_gltf_m": {
+        "min": [
+          -0.4269999563694,
+          0.0009999999310821295,
+          -0.9490000009536743
+        ],
+        "max": [
+          0.4269999861717224,
+          1.3229999542236328,
+          0.9789999723434448
+        ]
+      },
+      "drive_seconds": 1,
+      "drive_samples": 61,
+      "checks": {
+        "self_contained": true,
+        "finite_vertices_and_unit_normals": true,
+        "one_rigid_joint_per_vertex": true,
+        "ground_contact": true,
+        "wheel_loop_closes": true,
+        "no_root_motion": true,
+        "paint_material_index": true
+      }
+    }
+  }
+}

@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "authorship": "Original procedural modeling by Codex in Blender; no external models or textures.",
+  "identity_source": "src/adventure/engine/production/nightlife.rs: existing Hatch, Taxi and DeliveryScooter",
+  "coordinates": "Metres; Blender Z up/-Y forward; glTF Y up/+Z forward; wheel contact at ground origin.",
+  "paint_material_contract": "Runtime catalog paint_material uses Raylib GLTF material index = glTF index + 1.",
+  "models": {
+    "hatch": {
+      "source_blend": "assets/adventure/production-3d/vehicles/hatch.blend",
+      "runtime_glb": "assets/adventure/models/vehicles/hatch.glb",
+      "mesh_vertices": 21119,
+      "mesh_triangles": 39382,
+      "bounds_blender_m": {
+        "min": [
+          -1.0750000476837158,
+          -2.066999912261963,
+          -2.3283064365386963e-10
+        ],
+        "max": [
+          1.0750000476837158,
+          2.066999912261963,
+          1.4895000457763672
+        ]
+      },
+      "sockets_blender_m": {
+        "driver_hip": [
+          -0.4,
+          -0.14,
+          0.7
+        ],
+        "driver_hand_left": [
+          -0.54,
+          -0.69,
+          1.04
+        ],
+        "driver_hand_right": [
+          -0.26,
+          -0.69,
+          1.04
+        ],
+        "driver_foot_left": [
+          -0.52,
+          -0.84,
+          0.4
+        ],
+        "driver_foot_right": [
+          -0.27,
+          -0.88,
+          0.4
+        ]
+      },
+      "sockets_gltf_m": {
+        "driver_hip": [
+          -0.4,
+          0.7,
+          0.14
+        ],
+        "driver_hand_left": [
+          -0.54,
+          1.04,
+          0.69
+        ],
+        "driver_hand_right": [
+          -0.26,
+          1.04,
+          0.69
+        ],
+        "driver_foot_left": [
+          -0.52,
+          0.4,
+          0.84
+        ],
+        "driver_foot_right": [
+          -0.27,
+          0.4,
+          0.88
+        ]
+      },
+      "wheel_bones": [
+        {
+          "name": "wheel_front_left",
+          "center_blender_m": [
+            -0.79,
+            -1.27,
+            0.313
+          ],
+          "radius_m": 0.31
+        },
+        {
+          "name": "wheel_rear_left",
+          "center_blender_m": [
+            -0.79,
+            1.23,
+            0.313
+          ],
+          "radius_m": 0.31
+        },
+        {
+          "name": "wheel_front_right",
+          "center_blender_m": [
+            0.79,
+            -1.27,
+            0.313
+          ],
+          "radius_m": 0.31
+        },
+        {
+          "name": "wheel_rear_right",
+          "center_blender_m": [
+            0.79,
+            1.23,
+            0.313
+          ],
+          "radius_m": 0.31
+        }
+      ],
+      "drive_animation": "One positive axle revolution in 1 second, 60Hz; no root motion.",
+      "paint_gltf_material": 0,
+      "paint_raylib_material": 1,
+      "source_blend_sha256": "54fa3a9685719dd3c2de65a7460e3f3454584744cd2edf4f2a5581ee4fe3b0b5",
+      "runtime_glb_sha256": "765155f7c97ae3b5f8eb93fb4213c53642a59dae1e0ad301bd0621805028d2b0"
+    },
+    "taxi": {
+      "source_blend": "assets/adventure/production-3d/vehicles/taxi.blend",
+      "runtime_glb": "assets/adventure/models/vehicles/taxi.glb",
+      "mesh_vertices": 21601,
+      "mesh_triangles": 40314,
+      "bounds_blender_m": {
+        "min": [
+          -1.0750000476837158,
+          -2.2170000076293945,
+          -2.3283064365386963e-10
+        ],
+        "max": [
+          1.0750000476837158,
+          2.2170000076293945,
+          1.6600000858306885
+        ]
+      },
+      "sockets_blender_m": {
+        "driver_hip": [
+          -0.4,
+          -0.14,
+          0.7
+        ],
+        "driver_hand_left": [
+          -0.54,
+          -0.69,
+          1.04
+        ],
+        "driver_hand_right": [
+          -0.26,
+          -0.69,
+          1.04
+        ],
+        "driver_foot_left": [
+          -0.52,
+          -0.84,
+          0.4
+        ],
+        "driver_foot_right": [
+          -0.27,
+          -0.88,
+          0.4
+        ]
+      },
+      "sockets_gltf_m": {
+        "driver_hip": [
+          -0.4,
+          0.7,
+          0.14
+        ],
+        "driver_hand_left": [
+          -0.54,
+          1.04,
+          0.69
+        ],
+        "driver_hand_right": [
+          -0.26,
+          1.04,
+          0.69
+        ],
+        "driver_foot_left": [
+          -0.52,
+          0.4,
+          0.84
+        ],
+        "driver_foot_right": [
+          -0.27,
+          0.4,
+          0.88
+        ]
+      },
+      "wheel_bones": [
+        {
+          "name": "wheel_front_left",
+          "center_blender_m": [
+            -0.79,
+            -1.38,
+            0.313
+          ],
+          "radius_m": 0.31
+        },
+        {
+          "name": "wheel_rear_left",
+          "center_blender_m": [
+            -0.79,
+            1.31,
+            0.313
+          ],
+          "radius_m": 0.31
+        },
+        {
+          "name": "wheel_front_right",
+          "center_blender_m": [
+            0.79,
+            -1.38,
+            0.313
+          ],
+          "radius_m": 0.31
+        },
+        {
+          "name": "wheel_rear_right",
+          "center_blender_m": [
+            0.79,
+            1.31,
+            0.313
+          ],
+          "radius_m": 0.31
+        }
+      ],
+      "drive_animation": "One positive axle revolution in 1 second, 60Hz; no root motion.",
+      "paint_gltf_material": 0,
+      "paint_raylib_material": 1,
+      "source_blend_sha256": "72108aea63f7a4e025cb67bef99e9c3132f2b8fe5afdd6908c8d4f1276535df5",
+      "runtime_glb_sha256": "5319e0b9645ff9fec476f45d0a9f38c18ecde27b186c022bb09d9e1043102b98"
+    },
+    "delivery-scooter": {
+      "source_blend": "assets/adventure/production-3d/vehicles/delivery-scooter.blend",
+      "runtime_glb": "assets/adventure/models/vehicles/delivery-scooter.glb",
+      "mesh_vertices": 12472,
+      "mesh_triangles": 23256,
+      "bounds_blender_m": {
+        "min": [
+          -0.4269999563694,
+          -0.9789999723434448,
+          0.0009999999310821295
+        ],
+        "max": [
+          0.4269999861717224,
+          0.9490000009536743,
+          1.3229999542236328
+        ]
+      },
+      "sockets_blender_m": {
+        "rider_hip": [
+          0,
+          0.1,
+          0.95
+        ],
+        "rider_hand_left": [
+          -0.27,
+          -0.44,
+          1.06
+        ],
+        "rider_hand_right": [
+          0.27,
+          -0.44,
+          1.06
+        ],
+        "rider_foot_left": [
+          -0.15,
+          -0.05,
+          0.42
+        ],
+        "rider_foot_right": [
+          0.15,
+          -0.05,
+          0.42
+        ],
+        "rider_helmet_top": [
+          0,
+          -0.08,
+          1.7
+        ]
+      },
+      "sockets_gltf_m": {
+        "rider_hip": [
+          0,
+          0.95,
+          -0.1
+        ],
+        "rider_hand_left": [
+          -0.27,
+          1.06,
+          0.44
+        ],
+        "rider_hand_right": [
+          0.27,
+          1.06,
+          0.44
+        ],
+        "rider_foot_left": [
+          -0.15,
+          0.42,
+          0.05
+        ],
+        "rider_foot_right": [
+          0.15,
+          0.42,
+          0.05
+        ],
+        "rider_helmet_top": [
+          0,
+          1.7,
+          0.08
+        ]
+      },
+      "wheel_bones": [
+        {
+          "name": "wheel_front",
+          "center_blender_m": [
+            0,
+            -0.69,
+            0.244
+          ],
+          "radius_m": 0.24
+        },
+        {
+          "name": "wheel_rear",
+          "center_blender_m": [
+            0,
+            0.66,
+            0.244
+          ],
+          "radius_m": 0.24
+        }
+      ],
+      "drive_animation": "One positive axle revolution in 1 second, 60Hz; no root motion.",
+      "paint_gltf_material": 4,
+      "paint_raylib_material": 5,
+      "source_blend_sha256": "5cda99761792ae00eb8a0eccb840724e533691f1d5715a52f8a703eca7051e19",
+      "runtime_glb_sha256": "4f4282d20b6f225ff03ca2c453c36afae1dc2f06e5fe1b94b54ec73e7e6f9100"
+    }
+  },
+  "blender_version": "4.5.4 LTS",
+  "generator": "tools/blender/vehicles.py",
+  "generator_sha256": "870188ce1eff4d17f34679cb5a475d0d4a4f872a27476abe9d39df75d038e180"
+}

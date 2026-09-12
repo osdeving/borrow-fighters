@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "reviewer": "Codex visual inspection of Blender Cycles renders",
+  "scope": "Mechanical vehicles only; separate human occupants reviewed in their own production source.",
+  "views": [
+    "front",
+    "rear",
+    "side"
+  ],
+  "models": {
+    "hatch": {
+      "glb_sha256": "765155f7c97ae3b5f8eb93fb4213c53642a59dae1e0ad301bd0621805028d2b0",
+      "images": [
+        {
+          "file": "previews/hatch-front.png",
+          "sha256": "09edc2862a2dddb3385d4b3a4a647f4d0c1154f4bc9d59bf4e3d6c9db4ec026b"
+        },
+        {
+          "file": "previews/hatch-rear.png",
+          "sha256": "932208f88e0408909b1ab85364cfc86b32de77cf3746eb8ee8cd5b8736a2bdb8"
+        },
+        {
+          "file": "previews/hatch-side.png",
+          "sha256": "ce41e64a23c6192167419fe280ddad51a2aa6c0075fe8716f0a2765e7cf98915"
+        }
+      ]
+    },
+    "taxi": {
+      "glb_sha256": "5319e0b9645ff9fec476f45d0a9f38c18ecde27b186c022bb09d9e1043102b98",
+      "images": [
+        {
+          "file": "previews/taxi-front.png",
+          "sha256": "822792cddfe11dcd5f3ab741f4c0f89d7db567d2e6953ffcd04b0759418a5eb1"
+        },
+        {
+          "file": "previews/taxi-rear.png",
+          "sha256": "5b574b7e8580b7f7a4b4c79c0813ea598cc70d9d944391dab2d50ef034696ae3"
+        },
+        {
+          "file": "previews/taxi-side.png",
+          "sha256": "3b4046cafe90fde303e3841df29facfc76c88fb4dce0fa64b769bb75202281a5"
+        }
+      ]
+    },
+    "delivery-scooter": {
+      "glb_sha256": "4f4282d20b6f225ff03ca2c453c36afae1dc2f06e5fe1b94b54ec73e7e6f9100",
+      "images": [
+        {
+          "file": "previews/delivery-scooter-front.png",
+          "sha256": "cfa8d304da7607dff01189086fae7b6ed7cdac5191541736106bdf6b3bf6f8b8"
+        },
+        {
+          "file": "previews/delivery-scooter-rear.png",
+          "sha256": "11a21a7ec20cc476e0a1e09f84edf2ad42889507de372ad2faa0ab3740acc38e"
+        },
+        {
+          "file": "previews/delivery-scooter-side.png",
+          "sha256": "85eea46fa758d325bfbd876197ea7106a4fc8d05a9044f8edf5b5bb4e8d6daa9"
+        }
+      ]
+    }
+  },
+  "notes": [
+    "The hatch retains blue/burgundy body paint; the taxi retains cream paint, amber roof sign and the two door stripes.",
+    "Window bases and wipers follow the body/glass surfaces; seats and mirror stay within the cabin.",
+    "Scooter retains rust body, burgundy delivery box and amber cargo stripe; the rear lamp has a physical housing and support.",
+    "The three exported wheel rigs passed independent GLB-buffer checks and Blender reimport/evaluated-skin checks.",
+    "No geography, camera, route or gameplay changes are included in these assets."
+  ]
+}
