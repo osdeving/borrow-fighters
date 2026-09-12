@@ -150,6 +150,9 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Visão e produto
 
+- [Reconstrução da corrida](docs/37-run-cycle-rebuild.md): referências de produção, roupa contínua, proporções e revisão completa da passada de Rust.
+- [Acabamento do prólogo e continuidade da rua](docs/36-cinematic-polish.md): quadros completos de Duke/Old C, ritmo da pipa, proporções de Rust e junções das fachadas.
+- [Corrida e mundo modular](docs/35-modular-running-world.md): ruas extensíveis, fachadas independentes, EP veloz e revisão de Duke/Old C.
 - [Expansão cinematográfica e passagem destrutível](docs/34-cinematic-expansion.md): chegada da EP, caminhada, biografias de Duke/Old C e duas erráticas.
 
 - [`docs/33-after-the-silence.md`](docs/33-after-the-silence.md): primeiro capítulo, telefone in-game, geometria e checkpoints.

@@ -155,6 +155,7 @@ impl Chapter {
 
     pub(super) fn reset_scene_content(&mut self) {
         let geometry = self.world.scene(self.scene);
+        self.combat.set_bounds(geometry.walk_min, geometry.walk_max);
         self.debris = geometry
             .debris
             .iter()

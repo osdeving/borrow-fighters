@@ -22,11 +22,14 @@ class EpArrivalReview(TrafficReview):
                          and s["ep_arrival"]["ticks"] >= age, f"EP age {age}")
 
     def sequence(self):
+        if self.args.preview_only:
+            self.preview()
+            return
         self.wait(lambda s: s["stage"] == "Encounter" and s["arrival_active"], "kite shot")
         self.tap("Return")
         self.wait(lambda s: not s["arrival_active"], "kite hands off")
         self.hold("d", True)
-        first = self.wait(lambda s: s["ep_arrival"]["active"], "EP enters from above")
+        first = self.wait(lambda s: s["ep_arrival"]["active"], "EP enters from above", 24.0)
         self.hold("d", False)
         first_frame = first["frame"]
         self.check("EP_descent_starts_before_panic_or_combat",
@@ -34,7 +37,7 @@ class EpArrivalReview(TrafficReview):
                    and first["arrival_camera"]["zoom"] > 2.0, observed=first)
         for key in ("d", "j", "v", "space"):
             self.hold(key, True)
-        sky = self.ep_age(65)
+        sky = self.ep_age(12)
         self.release_all()
         self.check("cinematic_input_cannot_move_jump_or_damage",
                    sky["player"]["x"] == first["player"]["x"]
@@ -52,7 +55,7 @@ class EpArrivalReview(TrafficReview):
         self.screenshot("ep-02-paused-in-flight")
         self.tap("Return")
         self.wait(lambda s: not s["paused"], "resume EP descent")
-        self.ep_age(145)
+        self.ep_age(30)
         self.screenshot("ep-03-opening-camera")
         wide = self.ep_age(first["ep_arrival"]["gameplay_tick"])
         self.check("gameplay_view_returns_while_the_same_EP_is_still_airborne",
@@ -78,7 +81,7 @@ class EpArrivalReview(TrafficReview):
         for before, after in zip(rows, rows[1:]):
             dt = after["ep_arrival"]["ticks"] - before["ep_arrival"]["ticks"]
             dy = after["ep_arrival"]["feet_y"] - before["ep_arrival"]["feet_y"]
-            if not -.001 <= dy <= dt * 8.0 + .001:
+            if not -.001 <= dy <= dt * 14.0 + .001:
                 failures.append(after["frame"])
             if after["ep_arrival"]["ticks"] < impact_tick and after["enemy_awake"]:
                 failures.append(after["frame"])
@@ -105,7 +108,7 @@ class EpArrivalReview(TrafficReview):
         self.wait(lambda s: s["stage"] == "Encounter", "street restarted")
         self.tap("Return")
         self.hold("d", True)
-        self.wait(lambda s: s["ep_arrival"]["active"], "EP replay restored after restart")
+        self.wait(lambda s: s["ep_arrival"]["active"], "EP replay restored after restart", 24.0)
         self.hold("d", False)
         self.tap("Return")
         skipped = self.wait(lambda s: not s["ep_arrival"]["active"], "skip only EP landing")
@@ -115,6 +118,23 @@ class EpArrivalReview(TrafficReview):
                    and skipped["player"]["hp"] == 100, observed=skipped)
         self.tap("Return")
         self.wait(lambda s: s["stage"] == "Opening", "subsequent advance reaches opening")
+
+    def preview(self):
+        """Keep the fast fall's real cadence free of screenshot or pause stalls."""
+        self.wait(lambda s: s["stage"] == "Encounter" and s["arrival_active"], "kite shot")
+        self.tap("Return")
+        self.wait(lambda s: not s["arrival_active"], "kite hands off")
+        self.hold("d", True)
+        first = self.wait(lambda s: s["ep_arrival"]["active"], "fast EP approach", 24.0)
+        self.hold("d", False)
+        contact = self.wait(lambda s: s["enemy_awake"], "fast EP ground contact")
+        elapsed = contact["seconds"] - first["seconds"]
+        expected = (contact["ep_arrival"]["ticks"] - first["ep_arrival"]["ticks"]) / 60.0
+        self.check("uninterrupted_fall_keeps_its_actual_fast_cadence",
+                   abs(elapsed - expected) < .16 and expected < 1.1,
+                   elapsed_seconds=elapsed, simulation_seconds=expected)
+        self.wait(lambda s: s["ambience"]["accident_ticks"] is not None
+                  and s["ambience"]["accident_ticks"] >= 165, "impact settles into combat")
 
     def cleanup(self):
         super().cleanup()
@@ -131,6 +151,7 @@ def main():
     parser.add_argument("--display", default=":0")
     parser.add_argument("--timeout", type=float, default=180.0)
     parser.add_argument("--mute", action="store_true")
+    parser.add_argument("--preview-only", action="store_true", help="record an uninterrupted fall without pause/screenshot checks")
     review = EpArrivalReview(parser.parse_args())
     try:
         review.run()

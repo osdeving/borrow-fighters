@@ -1,0 +1,73 @@
+{
+  "all": {
+    "command": "cargo test --all-targets --all-features",
+    "passed": 529,
+    "failed": 0,
+    "ignored": 2
+  },
+  "adventure": {
+    "command": "cargo test --no-default-features --features adventure",
+    "passed": 133,
+    "failed": 0,
+    "ignored": 0
+  },
+  "fighting": {
+    "command": "cargo test --no-default-features --features fighting",
+    "passed": 394,
+    "failed": 0,
+    "ignored": 2
+  },
+  "core": {
+    "command": "cargo test --no-default-features",
+    "passed": 3,
+    "failed": 0,
+    "ignored": 0
+  },
+  "fmt": {
+    "command": "cargo fmt --check",
+    "result": "passed"
+  },
+  "clippy": {
+    "command": "cargo clippy --all-targets --all-features -- -D warnings",
+    "result": "passed"
+  },
+  "boundaries": {
+    "command": "python3.13 tools/check_domain_boundaries.py",
+    "result": "passed",
+    "fixtures_passed": 56
+  },
+  "package": {
+    "command": "python3.13 -m unittest discover -s tools/release -p test_package.py",
+    "passed": 20
+  },
+  "mixer": {
+    "command": "python3.13 -m unittest discover -s tools/review -p test_mix_adventure_review_audio.py",
+    "passed": 48
+  },
+  "native_ep_full": {
+    "passed": 11,
+    "result": "world/native-checks-full.json"
+  },
+  "native_ep_preview": {
+    "passed": 3,
+    "result": "world/native-checks.json"
+  },
+  "native_chapter": {
+    "phase": "Complete",
+    "outcome": "Victory",
+    "frames": 6814,
+    "debris_destroyed": 9,
+    "enemies_defeated": 2,
+    "result": "chapter/summary.json"
+  },
+  "biographies": {
+    "seconds": 24,
+    "frames": 720,
+    "result": "biographies/README.md"
+  },
+  "markdown_links": {
+    "files": 20,
+    "local_links": 374,
+    "broken": []
+  }
+}

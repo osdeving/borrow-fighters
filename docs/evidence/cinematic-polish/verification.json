@@ -1,0 +1,49 @@
+{
+  "base_commit": "6740d6d",
+  "binary_sha256": "dd60110209e4565e64723380c61405326b118a9bd4cd7e4fc86f3f86f013e6bd",
+  "cargo_tests": {
+    "suites": 50,
+    "passed": 529,
+    "failed": 0,
+    "ignored": 2
+  },
+  "fmt": "passed",
+  "clippy_all_targets_all_features": "passed",
+  "package_tests": 20,
+  "domain_boundary_tests": 56,
+  "ep_native_checks": 11,
+  "kite_preview_checks": 6,
+  "kite_functional_checks": 9,
+  "videos": {
+    "biographies/biographies-native.mp4": {
+      "width": 1280,
+      "height": 720,
+      "duration": "24.000000",
+      "nb_frames": "720"
+    },
+    "gait/crossing-native.mp4": {
+      "width": 1280,
+      "height": 720,
+      "duration": "18.733333",
+      "nb_frames": "562"
+    },
+    "kite/kite-establishment.mp4": {
+      "width": 1280,
+      "height": 720,
+      "duration": "18.600000",
+      "nb_frames": "558"
+    }
+  },
+  "art_sha256": {
+    "assets/adventure/opening/scenes/duke-boardroom-painted.png": "afabaabf9a4f1c1782bc7d6f3e1820fc4b0007bf3d62892bb0ad39346c9370a8",
+    "assets/adventure/opening/scenes/duke-paulista-painted.png": "18f321469d47a7e18226fdc7ec9dec7cf76fa458f09df4d50cb9cc0b0fb67e40",
+    "assets/adventure/opening/scenes/old-c-foundations-painted.png": "76d2a7f75f6e9b83e66c8743289216b68122c3a0299271d31162e9a7192803eb",
+    "assets/adventure/opening/scenes/old-c-workshop-painted.png": "6561b03e0bee7559951bf9516541ac71b2c304c5faa42e09b72fddcd2db88384",
+    "assets/adventure/world/boundary-pillar.png": "10dd8d755441495a1819d34286be00dfdd4336a98a22a12961a962e8a3f96cfc"
+  },
+  "markdown": {
+    "files": 31,
+    "local_links": 504,
+    "broken": []
+  }
+}

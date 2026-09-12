@@ -1,0 +1,2722 @@
+{
+  "created_utc": "2026-09-12T09:45:16.421097+00:00",
+  "success": true,
+  "failure": null,
+  "elapsed_seconds": 39.24,
+  "owned_pid": 383838,
+  "owned_window": 10485767,
+  "process_exit_code": 0,
+  "display": ":0",
+  "input_method": "XSendEvent addressed to _NET_WM_PID-owned window",
+  "limitations": "Synthetic window keyboard input; no physical gamepad, focus changes, desktop capture, audio listening or human visual approval.",
+  "checks": [
+    {
+      "name": "EP_descent_starts_before_panic_or_combat",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": null,
+          "cyclists": [
+            {
+              "animation_ticks": 405,
+              "bicycle_position": {
+                "x": -736.25,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Riding",
+              "phase_ticks": 405,
+              "visible": true,
+              "x": -736.25,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 415,
+              "bicycle_position": {
+                "x": 1250.75,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Riding",
+              "phase_ticks": 405,
+              "visible": true,
+              "x": 1250.75,
+              "y": 467.0
+            }
+          ],
+          "incident_car": null,
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 405,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 405,
+          "traffic_cars": [
+            {
+              "animation_ticks": 405,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 0,
+              "visible": true,
+              "x": 960.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 413,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 1,
+              "visible": true,
+              "x": -65.5999984741211,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 421,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 2,
+              "visible": true,
+              "x": -1091.199951171875,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 429,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 3,
+              "visible": true,
+              "x": -2116.800048828125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 437,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 4,
+              "visible": true,
+              "x": 1985.5999755859375,
+              "y": 393.0
+            }
+          ]
+        },
+        "arrival_active": false,
+        "arrival_camera": {
+          "x": 847.50732421875,
+          "y": 150.0,
+          "zoom": 2.799999952316284
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 3548.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "ep_arrival": {
+          "active": true,
+          "feet_y": 50.0,
+          "gameplay_tick": 40,
+          "impact_age": null,
+          "impact_tick": 58,
+          "pose": 3,
+          "ticks": 0
+        },
+        "frame": 298,
+        "hit": null,
+        "neighborhood": {
+          "dog": {
+            "facing": "Right",
+            "phase": "Sitting",
+            "phase_ticks": 45,
+            "visible": true,
+            "x": 845.0,
+            "y": 358.0
+          },
+          "residents": [
+            {
+              "facing": "Left",
+              "id": 0,
+              "phase": "Idle",
+              "phase_ticks": 405,
+              "visible": true,
+              "x": 1390.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 1,
+              "phase": "Idle",
+              "phase_ticks": 405,
+              "visible": true,
+              "x": 1470.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 2,
+              "phase": "Idle",
+              "phase_ticks": 405,
+              "visible": true,
+              "x": 685.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Right",
+              "id": 3,
+              "phase": "Idle",
+              "phase_ticks": 405,
+              "visible": true,
+              "x": 603.0,
+              "y": 355.0
+            }
+          ],
+          "shutter": {
+            "phase": "Open",
+            "phase_ticks": 0,
+            "progress": 0.0
+          }
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 3150.49267578125,
+          "y": 580.0
+        },
+        "seconds": 6.914346694946289,
+        "stage": "Encounter",
+        "stage_ticks": 1485,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 405,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789206283.749447,
+        "world": {
+          "arrival_x": 3148.0,
+          "camera_left": 2700.49267578125,
+          "hub_origin": 2048.0,
+          "width": 4608.0
+        }
+      }
+    },
+    {
+      "name": "cinematic_input_cannot_move_jump_or_damage",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": null,
+          "cyclists": [
+            {
+              "animation_ticks": 417,
+              "bicycle_position": {
+                "x": -708.0499877929688,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Riding",
+              "phase_ticks": 417,
+              "visible": true,
+              "x": -708.0499877929688,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 427,
+              "bicycle_position": {
+                "x": 1228.550048828125,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Riding",
+              "phase_ticks": 417,
+              "visible": true,
+              "x": 1228.550048828125,
+              "y": 467.0
+            }
+          ],
+          "incident_car": null,
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 417,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 417,
+          "traffic_cars": [
+            {
+              "animation_ticks": 417,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 0,
+              "visible": true,
+              "x": 912.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 425,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 1,
+              "visible": true,
+              "x": -113.5999984741211,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 433,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 2,
+              "visible": true,
+              "x": -1139.199951171875,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 441,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 3,
+              "visible": true,
+              "x": -2164.800048828125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 449,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 4,
+              "visible": true,
+              "x": 1937.5999755859375,
+              "y": 393.0
+            }
+          ]
+        },
+        "arrival_active": false,
+        "arrival_camera": {
+          "x": 847.50732421875,
+          "y": 163.6511993408203,
+          "zoom": 2.799999952316284
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 3548.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "ep_arrival": {
+          "active": true,
+          "feet_y": 123.44590759277344,
+          "gameplay_tick": 40,
+          "impact_age": null,
+          "impact_tick": 58,
+          "pose": 3,
+          "ticks": 12
+        },
+        "frame": 307,
+        "hit": null,
+        "neighborhood": {
+          "dog": {
+            "facing": "Right",
+            "phase": "Sitting",
+            "phase_ticks": 57,
+            "visible": true,
+            "x": 845.0,
+            "y": 358.0
+          },
+          "residents": [
+            {
+              "facing": "Left",
+              "id": 0,
+              "phase": "Idle",
+              "phase_ticks": 417,
+              "visible": true,
+              "x": 1390.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 1,
+              "phase": "Idle",
+              "phase_ticks": 417,
+              "visible": true,
+              "x": 1470.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 2,
+              "phase": "Idle",
+              "phase_ticks": 417,
+              "visible": true,
+              "x": 685.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Right",
+              "id": 3,
+              "phase": "Idle",
+              "phase_ticks": 417,
+              "visible": true,
+              "x": 603.0,
+              "y": 355.0
+            }
+          ],
+          "shutter": {
+            "phase": "Open",
+            "phase_ticks": 0,
+            "progress": 0.0
+          }
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 3150.49267578125,
+          "y": 580.0
+        },
+        "seconds": 7.1139116287231445,
+        "stage": "Encounter",
+        "stage_ticks": 1497,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 405,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789206283.9491026,
+        "world": {
+          "arrival_x": 3148.0,
+          "camera_left": 2700.49267578125,
+          "hub_origin": 2048.0,
+          "width": 4608.0
+        }
+      }
+    },
+    {
+      "name": "pause_freezes_the_EP_camera_street_and_body",
+      "passed": true
+    },
+    {
+      "name": "gameplay_view_returns_while_the_same_EP_is_still_airborne",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": null,
+          "cyclists": [
+            {
+              "animation_ticks": 458,
+              "bicycle_position": {
+                "x": -611.7000122070312,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Riding",
+              "phase_ticks": 458,
+              "visible": true,
+              "x": -611.7000122070312,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 468,
+              "bicycle_position": {
+                "x": 1152.699951171875,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Riding",
+              "phase_ticks": 458,
+              "visible": true,
+              "x": 1152.699951171875,
+              "y": 467.0
+            }
+          ],
+          "incident_car": null,
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 458,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 458,
+          "traffic_cars": [
+            {
+              "animation_ticks": 458,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 0,
+              "visible": true,
+              "x": 748.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 466,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 1,
+              "visible": true,
+              "x": -277.6000061035156,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 474,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 2,
+              "visible": true,
+              "x": -1303.199951171875,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 482,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 3,
+              "visible": true,
+              "x": 2799.199951171875,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 490,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 4,
+              "visible": true,
+              "x": 1773.5999755859375,
+              "y": 393.0
+            }
+          ]
+        },
+        "arrival_active": false,
+        "arrival_camera": {
+          "x": 640.0,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 3548.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "ep_arrival": {
+          "active": true,
+          "feet_y": 516.92724609375,
+          "gameplay_tick": 40,
+          "impact_age": null,
+          "impact_tick": 58,
+          "pose": 3,
+          "ticks": 53
+        },
+        "frame": 356,
+        "hit": null,
+        "neighborhood": {
+          "dog": {
+            "facing": "Right",
+            "phase": "Sitting",
+            "phase_ticks": 98,
+            "visible": true,
+            "x": 845.0,
+            "y": 358.0
+          },
+          "residents": [
+            {
+              "facing": "Left",
+              "id": 0,
+              "phase": "Idle",
+              "phase_ticks": 458,
+              "visible": true,
+              "x": 1390.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 1,
+              "phase": "Idle",
+              "phase_ticks": 458,
+              "visible": true,
+              "x": 1470.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 2,
+              "phase": "Idle",
+              "phase_ticks": 458,
+              "visible": true,
+              "x": 685.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Right",
+              "id": 3,
+              "phase": "Idle",
+              "phase_ticks": 458,
+              "visible": true,
+              "x": 603.0,
+              "y": 355.0
+            }
+          ],
+          "shutter": {
+            "phase": "Open",
+            "phase_ticks": 0,
+            "progress": 0.0
+          }
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 3150.49267578125,
+          "y": 580.0
+        },
+        "seconds": 11.471633911132812,
+        "stage": "Encounter",
+        "stage_ticks": 1538,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 405,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789206291.611035,
+        "world": {
+          "arrival_x": 3148.0,
+          "camera_left": 2700.49267578125,
+          "hub_origin": 2048.0,
+          "width": 4608.0
+        }
+      }
+    },
+    {
+      "name": "physical_ground_contact_starts_the_panic_and_kneeling_pose",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": 13,
+          "cyclists": [
+            {
+              "animation_ticks": 476,
+              "bicycle_position": {
+                "x": -580.02392578125,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Braking",
+              "phase_ticks": 13,
+              "visible": true,
+              "x": -580.02392578125,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 486,
+              "bicycle_position": {
+                "x": 1127.7635498046875,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Braking",
+              "phase_ticks": 13,
+              "visible": true,
+              "x": 1127.7635498046875,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 13,
+            "x": 23.642105102539062,
+            "y": 430.0
+          },
+          "kid_phase": "Startled",
+          "kid_phase_ticks": 13,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 476,
+          "traffic_cars": [
+            {
+              "animation_ticks": 476,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 675.07080078125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 484,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": -350.5291748046875,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 492,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": -1376.129150390625,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 500,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 2726.270751953125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 508,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": 1700.6707763671875,
+              "y": 393.0
+            }
+          ]
+        },
+        "arrival_active": false,
+        "arrival_camera": {
+          "x": 638.49609375,
+          "y": 359.533447265625,
+          "zoom": 1.0
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 3548.0,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "ep_arrival": {
+          "active": true,
+          "feet_y": 580.0,
+          "gameplay_tick": 40,
+          "impact_age": 13,
+          "impact_tick": 58,
+          "pose": 6,
+          "ticks": 71
+        },
+        "frame": 360,
+        "hit": null,
+        "neighborhood": {
+          "dog": {
+            "facing": "Right",
+            "phase": "Startled",
+            "phase_ticks": 13,
+            "visible": true,
+            "x": 845.0,
+            "y": 358.0
+          },
+          "residents": [
+            {
+              "facing": "Left",
+              "id": 0,
+              "phase": "Running",
+              "phase_ticks": 1,
+              "visible": true,
+              "x": 1385.6666259765625,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 1,
+              "phase": "Startled",
+              "phase_ticks": 13,
+              "visible": true,
+              "x": 1470.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 2,
+              "phase": "Startled",
+              "phase_ticks": 13,
+              "visible": true,
+              "x": 685.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Right",
+              "id": 3,
+              "phase": "Waiting",
+              "phase_ticks": 13,
+              "visible": true,
+              "x": 603.0,
+              "y": 355.0
+            }
+          ],
+          "shutter": {
+            "phase": "Open",
+            "phase_ticks": 13,
+            "progress": 0.0
+          }
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 3150.49267578125,
+          "y": 580.0
+        },
+        "seconds": 12.770833969116211,
+        "stage": "Encounter",
+        "stage_ticks": 1556,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 405,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789206292.9102347,
+        "world": {
+          "arrival_x": 3148.0,
+          "camera_left": 2700.49267578125,
+          "hub_origin": 2048.0,
+          "width": 4608.0
+        }
+      }
+    },
+    {
+      "name": "landing_hands_back_a_healthy_encounter",
+      "passed": true
+    },
+    {
+      "name": "one_continuous_body_path_crosses_the_camera_handoff",
+      "passed": true,
+      "examined_samples": 87,
+      "failures": []
+    },
+    {
+      "name": "retry_omits_both_cinematics_and_restores_health",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": 3,
+          "cyclists": [
+            {
+              "animation_ticks": 3,
+              "bicycle_position": {
+                "x": -1681.390625,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Braking",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": -1681.390625,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 13,
+              "bicycle_position": {
+                "x": 1994.796875,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Braking",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 1994.796875,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 3,
+            "x": -117.62104797363281,
+            "y": 430.0
+          },
+          "kid_phase": "Startled",
+          "kid_phase_ticks": 3,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 3,
+          "traffic_cars": [
+            {
+              "animation_ticks": 3,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 2567.737548828125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 11,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": 1542.1375732421875,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 19,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": 516.5374755859375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 27,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": -509.0625,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 35,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": -1534.6624755859375,
+              "y": 393.0
+            }
+          ]
+        },
+        "arrival_active": false,
+        "arrival_camera": {
+          "x": 640.0,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 3540.250244140625,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "ep_arrival": {
+          "active": false,
+          "feet_y": 580.0,
+          "gameplay_tick": 40,
+          "impact_age": 108,
+          "impact_tick": 58,
+          "pose": 0,
+          "ticks": 166
+        },
+        "frame": 933,
+        "hit": null,
+        "neighborhood": {
+          "dog": {
+            "facing": "Right",
+            "phase": "Startled",
+            "phase_ticks": 3,
+            "visible": true,
+            "x": 805.0,
+            "y": 358.0
+          },
+          "residents": [
+            {
+              "facing": "Left",
+              "id": 0,
+              "phase": "Startled",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 1390.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 1,
+              "phase": "Startled",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 1470.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 2,
+              "phase": "Startled",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 685.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Right",
+              "id": 3,
+              "phase": "Waiting",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 603.0,
+              "y": 355.0
+            }
+          ],
+          "shutter": {
+            "phase": "Open",
+            "phase_ticks": 3,
+            "progress": 0.0
+          }
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 3148.0,
+          "y": 580.0
+        },
+        "seconds": 26.998750686645508,
+        "stage": "Encounter",
+        "stage_ticks": 3,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 3,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789206307.1381416,
+        "world": {
+          "arrival_x": 3148.0,
+          "camera_left": 2698.0,
+          "hub_origin": 2048.0,
+          "width": 4608.0
+        }
+      }
+    },
+    {
+      "name": "advance_during_EP_arrival_lands_safely_without_skipping_combat",
+      "passed": true,
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": 3,
+          "cyclists": [
+            {
+              "animation_ticks": 407,
+              "bicycle_position": {
+                "x": -734.3406372070312,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Braking",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": -734.3406372070312,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 417,
+              "bicycle_position": {
+                "x": 1249.246826171875,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Braking",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 1249.246826171875,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 3,
+            "x": -117.62104797363281,
+            "y": 430.0
+          },
+          "kid_phase": "Startled",
+          "kid_phase_ticks": 3,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 407,
+          "traffic_cars": [
+            {
+              "animation_ticks": 407,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 955.7374877929688,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 415,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": -69.86249542236328,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 423,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": -1095.46240234375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 431,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": -2121.0625,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 439,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": 1981.3375244140625,
+              "y": 393.0
+            }
+          ]
+        },
+        "arrival_active": false,
+        "arrival_camera": {
+          "x": 640.0,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 3540.250244140625,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "ep_arrival": {
+          "active": false,
+          "feet_y": 580.0,
+          "gameplay_tick": 40,
+          "impact_age": 108,
+          "impact_tick": 58,
+          "pose": 0,
+          "ticks": 166
+        },
+        "frame": 1334,
+        "hit": null,
+        "neighborhood": {
+          "dog": {
+            "facing": "Right",
+            "phase": "Startled",
+            "phase_ticks": 3,
+            "visible": true,
+            "x": 845.0,
+            "y": 358.0
+          },
+          "residents": [
+            {
+              "facing": "Left",
+              "id": 0,
+              "phase": "Startled",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 1390.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 1,
+              "phase": "Startled",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 1470.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 2,
+              "phase": "Startled",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 685.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Right",
+              "id": 3,
+              "phase": "Waiting",
+              "phase_ticks": 3,
+              "visible": true,
+              "x": 603.0,
+              "y": 355.0
+            }
+          ],
+          "shutter": {
+            "phase": "Open",
+            "phase_ticks": 3,
+            "progress": 0.0
+          }
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 3150.49267578125,
+          "y": 580.0
+        },
+        "seconds": 35.79936599731445,
+        "stage": "Encounter",
+        "stage_ticks": 1484,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 404,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789206315.9388933,
+        "world": {
+          "arrival_x": 3148.0,
+          "camera_left": 2700.49267578125,
+          "hub_origin": 2048.0,
+          "width": 4608.0
+        }
+      }
+    },
+    {
+      "name": "recorded_mp4_has_frames_and_preserves_elapsed_time",
+      "passed": true,
+      "codec": "h264",
+      "width": 1280,
+      "height": 720,
+      "frame_rate": "30/1",
+      "frames": 1076,
+      "duration_seconds": 35.867,
+      "telemetry_seconds": 35.88002014160156,
+      "absolute_duration_error": 0.013020141601565172
+    },
+    {
+      "name": "same_binary_and_original_catalog_remain_unchanged",
+      "passed": true,
+      "binary_sha256_before": "dd60110209e4565e64723380c61405326b118a9bd4cd7e4fc86f3f86f013e6bd",
+      "binary_sha256_after": "dd60110209e4565e64723380c61405326b118a9bd4cd7e4fc86f3f86f013e6bd",
+      "original_catalog_sha256_before": "4720ca9a96fb2aa853844b43cfb0e149563413324279e0cbe3c5075980c4cc38",
+      "original_catalog_sha256_after": "4720ca9a96fb2aa853844b43cfb0e149563413324279e0cbe3c5075980c4cc38"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/ep-01-sky-body.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": null,
+          "cyclists": [
+            {
+              "animation_ticks": 435,
+              "bicycle_position": {
+                "x": -665.75,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Riding",
+              "phase_ticks": 435,
+              "visible": true,
+              "x": -665.75,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 445,
+              "bicycle_position": {
+                "x": 1195.25,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Riding",
+              "phase_ticks": 435,
+              "visible": true,
+              "x": 1195.25,
+              "y": 467.0
+            }
+          ],
+          "incident_car": null,
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 435,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 435,
+          "traffic_cars": [
+            {
+              "animation_ticks": 435,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 0,
+              "visible": true,
+              "x": 840.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 443,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 1,
+              "visible": true,
+              "x": -185.60000610351562,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 451,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 2,
+              "visible": true,
+              "x": -1211.199951171875,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 459,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 3,
+              "visible": true,
+              "x": -2236.800048828125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 467,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 4,
+              "visible": true,
+              "x": 1865.5999755859375,
+              "y": 393.0
+            }
+          ]
+        },
+        "arrival_active": false,
+        "arrival_camera": {
+          "x": 743.753662109375,
+          "y": 265.0,
+          "zoom": 1.899999976158142
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 3548.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "ep_arrival": {
+          "active": true,
+          "feet_y": 269.036865234375,
+          "gameplay_tick": 40,
+          "impact_age": null,
+          "impact_tick": 58,
+          "pose": 3,
+          "ticks": 30
+        },
+        "frame": 311,
+        "hit": null,
+        "neighborhood": {
+          "dog": {
+            "facing": "Right",
+            "phase": "Sitting",
+            "phase_ticks": 75,
+            "visible": true,
+            "x": 845.0,
+            "y": 358.0
+          },
+          "residents": [
+            {
+              "facing": "Left",
+              "id": 0,
+              "phase": "Idle",
+              "phase_ticks": 435,
+              "visible": true,
+              "x": 1390.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 1,
+              "phase": "Idle",
+              "phase_ticks": 435,
+              "visible": true,
+              "x": 1470.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 2,
+              "phase": "Idle",
+              "phase_ticks": 435,
+              "visible": true,
+              "x": 685.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Right",
+              "id": 3,
+              "phase": "Idle",
+              "phase_ticks": 435,
+              "visible": true,
+              "x": 603.0,
+              "y": 355.0
+            }
+          ],
+          "shutter": {
+            "phase": "Open",
+            "phase_ticks": 0,
+            "progress": 0.0
+          }
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 3150.49267578125,
+          "y": 580.0
+        },
+        "seconds": 8.358485221862793,
+        "stage": "Encounter",
+        "stage_ticks": 1515,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 405,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789206285.1936555,
+        "world": {
+          "arrival_x": 3148.0,
+          "camera_left": 2700.49267578125,
+          "hub_origin": 2048.0,
+          "width": 4608.0
+        }
+      }
+    },
+    {
+      "file": "screenshots/ep-02-paused-in-flight.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": null,
+          "cyclists": [
+            {
+              "animation_ticks": 435,
+              "bicycle_position": {
+                "x": -665.75,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Riding",
+              "phase_ticks": 435,
+              "visible": true,
+              "x": -665.75,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 445,
+              "bicycle_position": {
+                "x": 1195.25,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Riding",
+              "phase_ticks": 435,
+              "visible": true,
+              "x": 1195.25,
+              "y": 467.0
+            }
+          ],
+          "incident_car": null,
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 435,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 435,
+          "traffic_cars": [
+            {
+              "animation_ticks": 435,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 0,
+              "visible": true,
+              "x": 840.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 443,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 1,
+              "visible": true,
+              "x": -185.60000610351562,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 451,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 2,
+              "visible": true,
+              "x": -1211.199951171875,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 459,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 3,
+              "visible": true,
+              "x": -2236.800048828125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 467,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 4,
+              "visible": true,
+              "x": 1865.5999755859375,
+              "y": 393.0
+            }
+          ]
+        },
+        "arrival_active": false,
+        "arrival_camera": {
+          "x": 743.753662109375,
+          "y": 265.0,
+          "zoom": 1.899999976158142
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 3548.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "ep_arrival": {
+          "active": true,
+          "feet_y": 269.036865234375,
+          "gameplay_tick": 40,
+          "impact_age": null,
+          "impact_tick": 58,
+          "pose": 3,
+          "ticks": 30
+        },
+        "frame": 347,
+        "hit": null,
+        "neighborhood": {
+          "dog": {
+            "facing": "Right",
+            "phase": "Sitting",
+            "phase_ticks": 75,
+            "visible": true,
+            "x": 845.0,
+            "y": 358.0
+          },
+          "residents": [
+            {
+              "facing": "Left",
+              "id": 0,
+              "phase": "Idle",
+              "phase_ticks": 435,
+              "visible": true,
+              "x": 1390.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 1,
+              "phase": "Idle",
+              "phase_ticks": 435,
+              "visible": true,
+              "x": 1470.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 2,
+              "phase": "Idle",
+              "phase_ticks": 435,
+              "visible": true,
+              "x": 685.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Right",
+              "id": 3,
+              "phase": "Idle",
+              "phase_ticks": 435,
+              "visible": true,
+              "x": 603.0,
+              "y": 355.0
+            }
+          ],
+          "shutter": {
+            "phase": "Open",
+            "phase_ticks": 0,
+            "progress": 0.0
+          }
+        },
+        "outcome": "Ongoing",
+        "paused": true,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 3150.49267578125,
+          "y": 580.0
+        },
+        "seconds": 10.034710884094238,
+        "stage": "Encounter",
+        "stage_ticks": 1515,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 405,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789206286.869801,
+        "world": {
+          "arrival_x": 3148.0,
+          "camera_left": 2700.49267578125,
+          "hub_origin": 2048.0,
+          "width": 4608.0
+        }
+      }
+    },
+    {
+      "file": "screenshots/ep-03-opening-camera.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": null,
+          "cyclists": [
+            {
+              "animation_ticks": 458,
+              "bicycle_position": {
+                "x": -611.7000122070312,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Riding",
+              "phase_ticks": 458,
+              "visible": true,
+              "x": -611.7000122070312,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 468,
+              "bicycle_position": {
+                "x": 1152.699951171875,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Riding",
+              "phase_ticks": 458,
+              "visible": true,
+              "x": 1152.699951171875,
+              "y": 467.0
+            }
+          ],
+          "incident_car": null,
+          "kid_phase": "Playing",
+          "kid_phase_ticks": 458,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 458,
+          "traffic_cars": [
+            {
+              "animation_ticks": 458,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 0,
+              "visible": true,
+              "x": 748.0,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 466,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 1,
+              "visible": true,
+              "x": -277.6000061035156,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 474,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 2,
+              "visible": true,
+              "x": -1303.199951171875,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 482,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 3,
+              "visible": true,
+              "x": 2799.199951171875,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 490,
+              "facing": "Left",
+              "fleeing": false,
+              "style": 4,
+              "visible": true,
+              "x": 1773.5999755859375,
+              "y": 393.0
+            }
+          ]
+        },
+        "arrival_active": false,
+        "arrival_camera": {
+          "x": 640.0,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 3548.0,
+          "y": 580.0
+        },
+        "enemy_awake": false,
+        "ep_arrival": {
+          "active": true,
+          "feet_y": 516.92724609375,
+          "gameplay_tick": 40,
+          "impact_age": null,
+          "impact_tick": 58,
+          "pose": 3,
+          "ticks": 53
+        },
+        "frame": 356,
+        "hit": null,
+        "neighborhood": {
+          "dog": {
+            "facing": "Right",
+            "phase": "Sitting",
+            "phase_ticks": 98,
+            "visible": true,
+            "x": 845.0,
+            "y": 358.0
+          },
+          "residents": [
+            {
+              "facing": "Left",
+              "id": 0,
+              "phase": "Idle",
+              "phase_ticks": 458,
+              "visible": true,
+              "x": 1390.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 1,
+              "phase": "Idle",
+              "phase_ticks": 458,
+              "visible": true,
+              "x": 1470.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 2,
+              "phase": "Idle",
+              "phase_ticks": 458,
+              "visible": true,
+              "x": 685.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Right",
+              "id": 3,
+              "phase": "Idle",
+              "phase_ticks": 458,
+              "visible": true,
+              "x": 603.0,
+              "y": 355.0
+            }
+          ],
+          "shutter": {
+            "phase": "Open",
+            "phase_ticks": 0,
+            "progress": 0.0
+          }
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 3150.49267578125,
+          "y": 580.0
+        },
+        "seconds": 11.471633911132812,
+        "stage": "Encounter",
+        "stage_ticks": 1538,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 405,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789206291.611035,
+        "world": {
+          "arrival_x": 3148.0,
+          "camera_left": 2700.49267578125,
+          "hub_origin": 2048.0,
+          "width": 4608.0
+        }
+      }
+    },
+    {
+      "file": "screenshots/ep-04-gameplay-fall.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": 13,
+          "cyclists": [
+            {
+              "animation_ticks": 476,
+              "bicycle_position": {
+                "x": -580.02392578125,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Braking",
+              "phase_ticks": 13,
+              "visible": true,
+              "x": -580.02392578125,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 486,
+              "bicycle_position": {
+                "x": 1127.7635498046875,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Braking",
+              "phase_ticks": 13,
+              "visible": true,
+              "x": 1127.7635498046875,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 13,
+            "x": 23.642105102539062,
+            "y": 430.0
+          },
+          "kid_phase": "Startled",
+          "kid_phase_ticks": 13,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 476,
+          "traffic_cars": [
+            {
+              "animation_ticks": 476,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 675.07080078125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 484,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": -350.5291748046875,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 492,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": -1376.129150390625,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 500,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 2726.270751953125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 508,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": 1700.6707763671875,
+              "y": 393.0
+            }
+          ]
+        },
+        "arrival_active": false,
+        "arrival_camera": {
+          "x": 638.49609375,
+          "y": 359.533447265625,
+          "zoom": 1.0
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 3548.0,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "ep_arrival": {
+          "active": true,
+          "feet_y": 580.0,
+          "gameplay_tick": 40,
+          "impact_age": 13,
+          "impact_tick": 58,
+          "pose": 6,
+          "ticks": 71
+        },
+        "frame": 360,
+        "hit": null,
+        "neighborhood": {
+          "dog": {
+            "facing": "Right",
+            "phase": "Startled",
+            "phase_ticks": 13,
+            "visible": true,
+            "x": 845.0,
+            "y": 358.0
+          },
+          "residents": [
+            {
+              "facing": "Left",
+              "id": 0,
+              "phase": "Running",
+              "phase_ticks": 1,
+              "visible": true,
+              "x": 1385.6666259765625,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 1,
+              "phase": "Startled",
+              "phase_ticks": 13,
+              "visible": true,
+              "x": 1470.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 2,
+              "phase": "Startled",
+              "phase_ticks": 13,
+              "visible": true,
+              "x": 685.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Right",
+              "id": 3,
+              "phase": "Waiting",
+              "phase_ticks": 13,
+              "visible": true,
+              "x": 603.0,
+              "y": 355.0
+            }
+          ],
+          "shutter": {
+            "phase": "Open",
+            "phase_ticks": 13,
+            "progress": 0.0
+          }
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 3150.49267578125,
+          "y": 580.0
+        },
+        "seconds": 12.770833969116211,
+        "stage": "Encounter",
+        "stage_ticks": 1556,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 405,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789206292.9102347,
+        "world": {
+          "arrival_x": 3148.0,
+          "camera_left": 2700.49267578125,
+          "hub_origin": 2048.0,
+          "width": 4608.0
+        }
+      }
+    },
+    {
+      "file": "screenshots/ep-05-impact-and-dust.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 7,
+              "facing": "Right",
+              "id": 0,
+              "x": -574.0999755859375,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 7,
+              "facing": "Left",
+              "id": 1,
+              "x": 1123.10009765625,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 31,
+          "cyclists": [
+            {
+              "animation_ticks": 494,
+              "bicycle_position": {
+                "x": -574.0999755859375,
+                "y": 480.0
+              },
+              "facing": "Left",
+              "id": 0,
+              "phase": "Dismounting",
+              "phase_ticks": 7,
+              "visible": true,
+              "x": -574.0999755859375,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 504,
+              "bicycle_position": {
+                "x": 1123.10009765625,
+                "y": 467.0
+              },
+              "facing": "Right",
+              "id": 1,
+              "phase": "Dismounting",
+              "phase_ticks": 7,
+              "visible": true,
+              "x": 1123.10009765625,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 31,
+            "x": 277.9158020019531,
+            "y": 430.0
+          },
+          "kid_phase": "Releasing",
+          "kid_phase_ticks": 7,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": 7,
+          "ticks": 494,
+          "traffic_cars": [
+            {
+              "animation_ticks": 494,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 579.9708251953125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 502,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": -445.6291809082031,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 510,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": -1471.2291259765625,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 518,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 2631.1708984375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 526,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": 1605.57080078125,
+              "y": 393.0
+            }
+          ]
+        },
+        "arrival_active": false,
+        "arrival_camera": {
+          "x": 640.0,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 3548.0,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "ep_arrival": {
+          "active": true,
+          "feet_y": 580.0,
+          "gameplay_tick": 40,
+          "impact_age": 31,
+          "impact_tick": 58,
+          "pose": 6,
+          "ticks": 89
+        },
+        "frame": 364,
+        "hit": null,
+        "neighborhood": {
+          "dog": {
+            "facing": "Left",
+            "phase": "Running",
+            "phase_ticks": 7,
+            "visible": true,
+            "x": 803.0,
+            "y": 358.0
+          },
+          "residents": [
+            {
+              "facing": "Left",
+              "id": 0,
+              "phase": "Running",
+              "phase_ticks": 19,
+              "visible": true,
+              "x": 1307.6666259765625,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 1,
+              "phase": "Running",
+              "phase_ticks": 5,
+              "visible": true,
+              "x": 1448.3333740234375,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 2,
+              "phase": "Running",
+              "phase_ticks": 13,
+              "visible": true,
+              "x": 628.6666870117188,
+              "y": 355.0
+            },
+            {
+              "facing": "Right",
+              "id": 3,
+              "phase": "Waiting",
+              "phase_ticks": 31,
+              "visible": true,
+              "x": 603.0,
+              "y": 355.0
+            }
+          ],
+          "shutter": {
+            "phase": "Open",
+            "phase_ticks": 31,
+            "progress": 0.0
+          }
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 3150.49267578125,
+          "y": 580.0
+        },
+        "seconds": 13.997031211853027,
+        "stage": "Encounter",
+        "stage_ticks": 1574,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 405,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789206294.1364448,
+        "world": {
+          "arrival_x": 3148.0,
+          "camera_left": 2700.49267578125,
+          "hub_origin": 2048.0,
+          "width": 4608.0
+        }
+      }
+    },
+    {
+      "file": "screenshots/ep-06-grounded-recovery.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            {
+              "drop_ticks": 25,
+              "facing": "Right",
+              "id": 0,
+              "x": -574.0999755859375,
+              "y": 480.0
+            },
+            {
+              "drop_ticks": 25,
+              "facing": "Left",
+              "id": 1,
+              "x": 1123.10009765625,
+              "y": 467.0
+            }
+          ],
+          "accident_ticks": 49,
+          "cyclists": [
+            {
+              "animation_ticks": 512,
+              "bicycle_position": {
+                "x": -574.0999755859375,
+                "y": 480.0
+              },
+              "facing": "Left",
+              "id": 0,
+              "phase": "Dismounting",
+              "phase_ticks": 25,
+              "visible": true,
+              "x": -574.0999755859375,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 522,
+              "bicycle_position": {
+                "x": 1123.10009765625,
+                "y": 467.0
+              },
+              "facing": "Right",
+              "id": 1,
+              "phase": "Dismounting",
+              "phase_ticks": 25,
+              "visible": true,
+              "x": 1123.10009765625,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 49,
+            "x": 532.1895141601562,
+            "y": 430.0
+          },
+          "kid_phase": "Running",
+          "kid_phase_ticks": 1,
+          "kid_position": {
+            "x": 995.5,
+            "y": 350.0
+          },
+          "kite_release_ticks": 25,
+          "ticks": 512,
+          "traffic_cars": [
+            {
+              "animation_ticks": 512,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 465.9708251953125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 520,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": -559.629150390625,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 528,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": -1585.2291259765625,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 536,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": 2517.1708984375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 544,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": 1491.57080078125,
+              "y": 393.0
+            }
+          ]
+        },
+        "arrival_active": false,
+        "arrival_camera": {
+          "x": 640.0,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Idle",
+          "hp": 96,
+          "x": 3548.0,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "ep_arrival": {
+          "active": true,
+          "feet_y": 580.0,
+          "gameplay_tick": 40,
+          "impact_age": 49,
+          "impact_tick": 58,
+          "pose": 3,
+          "ticks": 107
+        },
+        "frame": 368,
+        "hit": null,
+        "neighborhood": {
+          "dog": {
+            "facing": "Left",
+            "phase": "Running",
+            "phase_ticks": 25,
+            "visible": true,
+            "x": 695.0,
+            "y": 358.0
+          },
+          "residents": [
+            {
+              "facing": "Left",
+              "id": 0,
+              "phase": "Running",
+              "phase_ticks": 37,
+              "visible": true,
+              "x": 1229.6666259765625,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 1,
+              "phase": "Running",
+              "phase_ticks": 23,
+              "visible": true,
+              "x": 1370.3333740234375,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 2,
+              "phase": "Entering",
+              "phase_ticks": 12,
+              "visible": true,
+              "x": 548.75,
+              "y": 351.5
+            },
+            {
+              "facing": "Right",
+              "id": 3,
+              "phase": "Waiting",
+              "phase_ticks": 49,
+              "visible": true,
+              "x": 603.0,
+              "y": 355.0
+            }
+          ],
+          "shutter": {
+            "phase": "Open",
+            "phase_ticks": 49,
+            "progress": 0.0
+          }
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 3150.49267578125,
+          "y": 580.0
+        },
+        "seconds": 15.227543830871582,
+        "stage": "Encounter",
+        "stage_ticks": 1592,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 405,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789206295.3669465,
+        "world": {
+          "arrival_x": 3148.0,
+          "camera_left": 2700.49267578125,
+          "hub_origin": 2048.0,
+          "width": 4608.0
+        }
+      }
+    },
+    {
+      "file": "screenshots/ep-07-awake-retry.png",
+      "observed": {
+        "ambience": {
+          "abandoned_bicycles": [
+            null,
+            null
+          ],
+          "accident_ticks": 20,
+          "cyclists": [
+            {
+              "animation_ticks": 20,
+              "bicycle_position": {
+                "x": -1660.5833740234375,
+                "y": 480.0
+              },
+              "facing": "Right",
+              "id": 0,
+              "phase": "Braking",
+              "phase_ticks": 20,
+              "visible": true,
+              "x": -1660.5833740234375,
+              "y": 480.0
+            },
+            {
+              "animation_ticks": 30,
+              "bicycle_position": {
+                "x": 1978.4166259765625,
+                "y": 467.0
+              },
+              "facing": "Left",
+              "id": 1,
+              "phase": "Braking",
+              "phase_ticks": 20,
+              "visible": true,
+              "x": 1978.4166259765625,
+              "y": 467.0
+            }
+          ],
+          "incident_car": {
+            "phase": "Approaching",
+            "phase_ticks": 20,
+            "x": 122.52630615234375,
+            "y": 430.0
+          },
+          "kid_phase": "Startled",
+          "kid_phase_ticks": 20,
+          "kid_position": {
+            "x": 1000.0,
+            "y": 350.0
+          },
+          "kite_release_ticks": null,
+          "ticks": 20,
+          "traffic_cars": [
+            {
+              "animation_ticks": 20,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 0,
+              "visible": true,
+              "x": 2488.333251953125,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 28,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 1,
+              "visible": true,
+              "x": 1462.7333984375,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 36,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 2,
+              "visible": true,
+              "x": 437.1333312988281,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 44,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 3,
+              "visible": true,
+              "x": -588.4666748046875,
+              "y": 393.0
+            },
+            {
+              "animation_ticks": 52,
+              "facing": "Left",
+              "fleeing": true,
+              "style": 4,
+              "visible": true,
+              "x": -1614.066650390625,
+              "y": 393.0
+            }
+          ]
+        },
+        "arrival_active": false,
+        "arrival_camera": {
+          "x": 640.0,
+          "y": 360.0,
+          "zoom": 1.0
+        },
+        "audio_synced_after_skip": false,
+        "continue_accepted": false,
+        "enemy": {
+          "action": "Walk",
+          "hp": 96,
+          "x": 3496.3349609375,
+          "y": 580.0
+        },
+        "enemy_awake": true,
+        "ep_arrival": {
+          "active": false,
+          "feet_y": 580.0,
+          "gameplay_tick": 40,
+          "impact_age": 108,
+          "impact_tick": 58,
+          "pose": 0,
+          "ticks": 166
+        },
+        "frame": 937,
+        "hit": null,
+        "neighborhood": {
+          "dog": {
+            "facing": "Right",
+            "phase": "Startled",
+            "phase_ticks": 20,
+            "visible": true,
+            "x": 805.0,
+            "y": 358.0
+          },
+          "residents": [
+            {
+              "facing": "Left",
+              "id": 0,
+              "phase": "Running",
+              "phase_ticks": 8,
+              "visible": true,
+              "x": 1355.3333740234375,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 1,
+              "phase": "Startled",
+              "phase_ticks": 20,
+              "visible": true,
+              "x": 1470.0,
+              "y": 355.0
+            },
+            {
+              "facing": "Left",
+              "id": 2,
+              "phase": "Running",
+              "phase_ticks": 2,
+              "visible": true,
+              "x": 676.3333129882812,
+              "y": 355.0
+            },
+            {
+              "facing": "Right",
+              "id": 3,
+              "phase": "Waiting",
+              "phase_ticks": 20,
+              "visible": true,
+              "x": 603.0,
+              "y": 355.0
+            }
+          ],
+          "shutter": {
+            "phase": "Open",
+            "phase_ticks": 20,
+            "progress": 0.0
+          }
+        },
+        "outcome": "Ongoing",
+        "paused": false,
+        "player": {
+          "action": "Idle",
+          "facing": "Right",
+          "hp": 100,
+          "x": 3148.0,
+          "y": 580.0
+        },
+        "seconds": 27.926254272460938,
+        "stage": "Encounter",
+        "stage_ticks": 20,
+        "text_reload_ok": null,
+        "text_revision": 0,
+        "ticks": 20,
+        "waiting_for_continue": false,
+        "wall_seconds": 1789206308.0656888,
+        "world": {
+          "arrival_x": 3148.0,
+          "camera_left": 2698.0,
+          "hub_origin": 2048.0,
+          "width": 4608.0
+        }
+      }
+    }
+  ],
+  "telemetry_records": 1339,
+  "video": "adventure-silent.mp4",
+  "external_text_catalog": "texts-under-test.json",
+  "x11_errors": [],
+  "review": "EP aerial arrival, continuous game-view fall, impact and checkpoint recovery",
+  "native_audio_enabled": false,
+  "audio_capture": "External recorder required; the built-in MP4 contains video only."
+}

@@ -12,6 +12,8 @@ alterados por esse corte.
 
 A expansão de 12/09 acrescenta biografias por peças: Duke chega de limousine
 à Paulista e preside uma reunião; Old C aparece no setup com livros e CRT.
-Duke ocupa 29–41 s, Old C 41–53 s e Rust 53–57 s. O logo chega aos 57 s e a apresentação
-termina aos 64 s, com a trilha original ajustada. [Catálogo e edição](scenes/README.md).
+Duke ocupa 29–41 s e Old C 41–53 s. O logo chega diretamente aos 53 s e a
+apresentação termina aos 60 s, com a trilha original ajustada. Rust permanece
+no centro do elenco do logo, sem cartão de apresentação solo.
+[Catálogo e edição](scenes/README.md).
 C++/Python e os retratos do logo permanecem disponíveis com a arte anterior.

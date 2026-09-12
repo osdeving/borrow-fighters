@@ -1,0 +1,229 @@
+{
+  "mode": "offline_mix_reconstructed_from_execution_telemetry",
+  "limitation": "Audio reconstructed offline from telemetry and the original adventure WAVs; not captured from the host or Raylib audio device. Timing follows the recorded state samples, aligned to the first video frame. Device latency, resampling, native mixer/pan behavior and human audio approval are not verified. The review video may use simulated controls; reconstruction does not establish physical-input or real-device validation.",
+  "sample_rate": 22050,
+  "channels": 1,
+  "sample_width_bits": 16,
+  "duration_seconds": 18.6,
+  "samples": 410130,
+  "per_track_and_cue_volume": 0.3,
+  "master_gain_to_avoid_clipping": 1.0,
+  "pre_master_peak_pcm": 2599.2,
+  "output_peak_pcm": 2599,
+  "clipped_samples": 0,
+  "time_alignment": {
+    "first_telemetry_seconds": 0.01666666753590107,
+    "mapping": "video_seconds = telemetry.seconds - first_telemetry_seconds",
+    "telemetry_end_seconds": 18.61667607538402,
+    "last_state_hold_seconds": 0,
+    "stage_ticks_present_in_all_samples": true,
+    "traffic_clock_present_in_all_samples": true,
+    "explicit_skip_marker_present_in_all_samples": true
+  },
+  "tracks": [
+    {
+      "seconds": 0.0,
+      "previous_track": null,
+      "track": "street_air",
+      "stage": "Encounter",
+      "enemy_awake": false,
+      "paused": false,
+      "source_cursor_seconds": 0.0,
+      "looping": true
+    }
+  ],
+  "audible_music_spans": [
+    {
+      "track": "street_air",
+      "start_seconds": 0.0,
+      "end_seconds": 18.6,
+      "source_start_seconds": 0.0,
+      "source_end_seconds": 18.6
+    }
+  ],
+  "traffic_layer": {
+    "file": "street_traffic.wav",
+    "changes": [
+      {
+        "seconds": 0.0,
+        "gain": 1.0,
+        "active": true,
+        "paused": false,
+        "source_cursor_seconds": 0.0
+      }
+    ],
+    "audible_spans": [
+      {
+        "gain": 1.0,
+        "start_seconds": 0.0,
+        "end_seconds": 18.6,
+        "source_start_seconds": 0.0,
+        "source_end_seconds": 18.6
+      }
+    ],
+    "seeks": [],
+    "fade_end_tick": 360
+  },
+  "pause_intervals": [],
+  "music_seeks": [],
+  "events": [],
+  "event_counts": {},
+  "video": {
+    "source": "/tmp/borrow-kite-preview/adventure-silent.mp4",
+    "duration_seconds": 18.6,
+    "fps": 30.0,
+    "frames": "558",
+    "copied_without_reencoding": true
+  },
+  "telemetry": {
+    "file": "/tmp/borrow-kite-preview/telemetry.jsonl",
+    "rows": 988,
+    "sha256": "0e0ca93c13ade9e12fb55830464d2b39cc1f118ceb7e5cfe67dbdabfc524a290"
+  },
+  "sources": {
+    "ada": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/ada.wav",
+      "sha256": "3dcab6ba2818ee7689b210db781ede438208b9d7b569f07c27a2c675c38e1219",
+      "samples": 264600,
+      "duration_seconds": 12.0,
+      "looping": true
+    },
+    "morning_ambience": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/morning_ambience.wav",
+      "sha256": "beae1f74a773a6a1bedc3952f1639b955de7e89b4622de1028b288217d07b423",
+      "samples": 441000,
+      "duration_seconds": 20.0,
+      "looping": true
+    },
+    "street_air": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/street_air.wav",
+      "sha256": "2f7f98607579241cd8203fc30eecdb278ae9cd6c02b530e8bf2656b1d41a6e87",
+      "samples": 441000,
+      "duration_seconds": 20.0,
+      "looping": true
+    },
+    "remorse": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/remorse.wav",
+      "sha256": "c43c5d903123c8f82345e4182b4fe3c11b1d07f07f09b15be31ba426cc353771",
+      "samples": 264600,
+      "duration_seconds": 12.0,
+      "looping": true
+    },
+    "opening": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/opening.wav",
+      "sha256": "53d3ed0d9b8c39565b626506cb2039796493e50c4f754949ef2676f34c3fa99a",
+      "samples": 1323000,
+      "duration_seconds": 60.0,
+      "looping": false
+    },
+    "street_traffic": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/street_traffic.wav",
+      "sha256": "53c7111201b2b96463eaf33e31e8a89125c9c5725d13f72a279bfaf4852254e7",
+      "samples": 441000,
+      "duration_seconds": 20.0,
+      "looping": true
+    },
+    "strike": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/strike.wav",
+      "sha256": "7f532afd521bedae01ab8109e03b92b797ad9b9372162575a0e16dfe84b6ce7e",
+      "samples": 4851,
+      "duration_seconds": 0.22,
+      "looping": false
+    },
+    "block": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/block.wav",
+      "sha256": "5181f82253d68eb11115f8d6ad9b89668985273b4170d68fa1ca1e203638d30e",
+      "samples": 6174,
+      "duration_seconds": 0.28,
+      "looping": false
+    },
+    "hurt": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/hurt.wav",
+      "sha256": "9312eae2427e0b278fbcd590ae720def9f0c803d6d311f6988fe6e61fe4818ce",
+      "samples": 7938,
+      "duration_seconds": 0.36,
+      "looping": false
+    },
+    "transition": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/transition.wav",
+      "sha256": "3be6151d5ba0a0ca6b68009a37d71dc7a6ede1622f059c439565df3edecf9b4a",
+      "samples": 17640,
+      "duration_seconds": 0.8,
+      "looping": false
+    },
+    "traffic_escape": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/traffic_escape.wav",
+      "sha256": "3f59307c5eab912a8685c0a8d5d6c39b311f409d91b28bce80ead3ff4935bf22",
+      "samples": 30870,
+      "duration_seconds": 1.4,
+      "looping": false
+    },
+    "dog_alert": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/dog_alert.wav",
+      "sha256": "22d37b3298514fcbfa282015e08965e5cdc29be61e7f59872d05f1a21edc81b3",
+      "samples": 6615,
+      "duration_seconds": 0.3,
+      "looping": false
+    },
+    "car_horn": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/car_horn.wav",
+      "sha256": "960aac61e2848202262b44273ba731875b25bf72c991793bd58c0995f68dea11",
+      "samples": 13230,
+      "duration_seconds": 0.6,
+      "looping": false
+    },
+    "bicycle_fall": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/bicycle_fall.wav",
+      "sha256": "17d3997091131ef8baa07e2742b4aacb53368991dc1a410a1c8cb1048da8e0d2",
+      "samples": 19845,
+      "duration_seconds": 0.9,
+      "looping": false
+    },
+    "car_skid": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/car_skid.wav",
+      "sha256": "f6ac3619f38517b236ac0827f1fcb4ebfc814ef8aec5df0c3150497653031815",
+      "samples": 12495,
+      "duration_seconds": 0.5666666666666667,
+      "looping": false
+    },
+    "car_crash": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/car_crash.wav",
+      "sha256": "5ea6153cada30256692f4b824980886eca8c29e6a7fa8597fca0f9ffdb3102fc",
+      "samples": 29768,
+      "duration_seconds": 1.3500226757369616,
+      "looping": false
+    },
+    "shutter_roll": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/shutter_roll.wav",
+      "sha256": "768ea5212c9680e53c27867d791ace43ea4073d59e2218d02946bb21c523cd70",
+      "samples": 22050,
+      "duration_seconds": 1.0,
+      "looping": false
+    },
+    "shutter_clack": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/shutter_clack.wav",
+      "sha256": "dd866f0a898142c5533a4424f78abc597567e03e6a2009a0c31230fad0bceca8",
+      "samples": 7938,
+      "duration_seconds": 0.36,
+      "looping": false
+    },
+    "ep_descent": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/ep_descent.wav",
+      "sha256": "6f57ec9a9c4d74b7b0f353ed6fac1d54eeb069c5f8ba2a5899408428603e0fb5",
+      "samples": 21315,
+      "duration_seconds": 0.9666666666666667,
+      "looping": false
+    },
+    "ep_impact": {
+      "file": "/home/willams/borrow-fighters/assets/adventure/audio/ep_impact.wav",
+      "sha256": "a1766bfa31940066cf89f78b22404cabcd08232b3264dfe87170ff4fd8fd0b81",
+      "samples": 38588,
+      "duration_seconds": 1.7500226757369615,
+      "looping": false
+    }
+  },
+  "outputs": {
+    "wav": "/tmp/borrow-kite-preview/adventure-mix.wav",
+    "video": "/tmp/borrow-kite-preview/adventure.mp4"
+  }
+}

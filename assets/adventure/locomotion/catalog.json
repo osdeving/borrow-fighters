@@ -222,6 +222,398 @@
           "duration_ticks": 9
         }
       ]
+    },
+    "rust.run.body": {
+      "width": 78.4,
+      "frame_ticks": 1,
+      "looping": false,
+      "frames": [
+        {
+          "image": "locomotion/run/body.png",
+          "source": [
+            0,
+            0,
+            320,
+            455
+          ],
+          "anchor": [
+            116,
+            410
+          ],
+          "sockets": {
+            "near_shoulder": [
+              38,
+              250
+            ],
+            "far_shoulder": [
+              246,
+              253
+            ]
+          }
+        }
+      ]
+    },
+    "rust.run.near-arm": {
+      "width": 55.125,
+      "frame_ticks": 1,
+      "looping": false,
+      "frames": [
+        {
+          "image": "locomotion/run/near-arm.png",
+          "source": [
+            0,
+            0,
+            315,
+            262
+          ],
+          "anchor": [
+            82,
+            43
+          ],
+          "sockets": {}
+        }
+      ]
+    },
+    "rust.run.far-arm": {
+      "width": 55.125,
+      "frame_ticks": 1,
+      "looping": false,
+      "frames": [
+        {
+          "image": "locomotion/run/far-arm.png",
+          "source": [
+            0,
+            0,
+            315,
+            260
+          ],
+          "anchor": [
+            72,
+            42
+          ],
+          "sockets": {}
+        }
+      ]
+    },
+    "rust.run.near-boot": {
+      "width": 38.0742,
+      "frame_ticks": 1,
+      "looping": false,
+      "frames": [
+        {
+          "image": "locomotion/run/near-boot.png",
+          "source": [
+            0,
+            0,
+            267,
+            192
+          ],
+          "anchor": [
+            113.709677,
+            59.483871
+          ],
+          "sockets": {
+            "sole": [
+              225,
+              174
+            ]
+          }
+        }
+      ]
+    },
+    "rust.run.far-boot": {
+      "width": 40.2132,
+      "frame_ticks": 1,
+      "looping": false,
+      "frames": [
+        {
+          "image": "locomotion/run/far-boot.png",
+          "source": [
+            0,
+            0,
+            282,
+            200
+          ],
+          "anchor": [
+            115.645161,
+            65.451613
+          ],
+          "sockets": {
+            "sole": [
+              235,
+              184
+            ]
+          }
+        }
+      ]
+    },
+    "rust.walk.back": {
+      "frames": [
+        {
+          "image": "locomotion/crossing/back-00.png",
+          "source": [
+            0,
+            0,
+            300,
+            304
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/back-01.png",
+          "source": [
+            0,
+            0,
+            300,
+            304
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/back-02.png",
+          "source": [
+            0,
+            0,
+            300,
+            304
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/back-03.png",
+          "source": [
+            0,
+            0,
+            300,
+            304
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/back-04.png",
+          "source": [
+            0,
+            0,
+            300,
+            304
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/back-05.png",
+          "source": [
+            0,
+            0,
+            300,
+            304
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/back-06.png",
+          "source": [
+            0,
+            0,
+            300,
+            304
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/back-07.png",
+          "source": [
+            0,
+            0,
+            300,
+            304
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        }
+      ],
+      "width": 174,
+      "frame_ticks": 1,
+      "looping": true
+    },
+    "rust.walk.front": {
+      "frames": [
+        {
+          "image": "locomotion/crossing/front-00.png",
+          "source": [
+            0,
+            0,
+            300,
+            304
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/front-01.png",
+          "source": [
+            0,
+            0,
+            300,
+            304
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/front-02.png",
+          "source": [
+            0,
+            0,
+            300,
+            304
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/front-03.png",
+          "source": [
+            0,
+            0,
+            300,
+            304
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/front-04.png",
+          "source": [
+            0,
+            0,
+            300,
+            308
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/front-05.png",
+          "source": [
+            0,
+            0,
+            300,
+            308
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/front-06.png",
+          "source": [
+            0,
+            0,
+            300,
+            308
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        },
+        {
+          "image": "locomotion/crossing/front-07.png",
+          "source": [
+            0,
+            0,
+            300,
+            308
+          ],
+          "anchor": [
+            144,
+            299
+          ],
+          "sockets": {}
+        }
+      ],
+      "width": 174,
+      "frame_ticks": 1,
+      "looping": true
+    },
+    "rust.run.leg": {
+      "width": 25.232,
+      "frame_ticks": 1,
+      "looping": false,
+      "frames": [
+        {
+          "image": "locomotion/run-mesh/leg.png",
+          "source": [
+            0,
+            0,
+            332,
+            1156
+          ],
+          "anchor": [
+            166,
+            110
+          ],
+          "sockets": {
+            "knee": [
+              166,
+              610
+            ],
+            "ankle": [
+              166,
+              1120
+            ]
+          }
+        }
+      ]
     }
   }
 }

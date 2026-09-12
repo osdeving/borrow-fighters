@@ -6,15 +6,62 @@
 use serde::Deserialize;
 use std::{error::Error, fs, path::Path};
 
-/// External tuning for the shared walk and kick clips.
+pub mod mesh;
+pub mod run;
+
+/// Explicit locomotion intent, independent from physical attack/airborne state.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum Gait {
+    /// Deliberate small movements during authored approaches and in the bedroom.
+    #[default]
+    Walk,
+    /// Default agile traversal while the player holds a horizontal direction.
+    Run,
+}
+
+/// Camera-relative view of deliberate movement through scene depth.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum TravelView {
+    /// The usual lateral gameplay silhouette.
+    #[default]
+    Side,
+    /// Moving away toward the far pavement.
+    Back,
+    /// Returning toward the near pavement.
+    Front,
+}
+
+impl TravelView {
+    /// Sideways route segments keep the ordinary silhouette; crossing the road
+    /// shows the back on the way away and the front on the return.
+    pub fn from_delta(dx: f32, dy: f32) -> Self {
+        if dy.abs() < 0.01 || !dx.is_finite() || !dy.is_finite() {
+            Self::Side
+        } else if dy < 0.0 {
+            Self::Back
+        } else {
+            Self::Front
+        }
+    }
+}
+
+/// External tuning for the shared walk, run and kick clips.
 #[derive(Clone, Debug, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Motion {
     version: u32,
     /// Distance for one complete pair of alternating steps at full character size.
     pub stride_pixels: f32,
+    /// Ground distance of a complete running cycle, including both flight phases.
+    pub run_stride_pixels: f32,
     /// Catalog entry for the looping walk.
     pub walk_clip: String,
+    /// Authored walking away from the viewer while crossing the road.
+    pub back_walk_clip: String,
+    /// Authored walking toward the viewer on the reverse route.
+    pub front_walk_clip: String,
+    /// Composite clip defined by the independent rig and its anatomical pieces.
+    pub run_clip: String,
     /// Catalog entry for the finite kick.
     pub kick_clip: String,
 }
@@ -31,7 +78,12 @@ impl Motion {
         if motion.version != 1
             || !motion.stride_pixels.is_finite()
             || !(64.0..=240.0).contains(&motion.stride_pixels)
+            || !motion.run_stride_pixels.is_finite()
+            || !(180.0..=360.0).contains(&motion.run_stride_pixels)
             || motion.walk_clip.trim().is_empty()
+            || motion.back_walk_clip.trim().is_empty()
+            || motion.front_walk_clip.trim().is_empty()
+            || motion.run_clip.trim().is_empty()
             || motion.kick_clip.trim().is_empty()
         {
             return Err("invalid Rust locomotion tuning".into());
@@ -60,6 +112,22 @@ impl Motion {
             return 0;
         }
         (distance.max(0.0) / (self.stride_pixels * depth * 0.5)).floor() as u32
+    }
+
+    /// Distance between repeated contacts of the same foot for this gait.
+    pub fn stride_for(&self, gait: Gait) -> f32 {
+        match gait {
+            Gait::Walk => self.stride_pixels,
+            Gait::Run => self.run_stride_pixels,
+        }
+    }
+
+    /// Stable normalized cursor shared by the rig and the step observer.
+    pub fn phase_for(&self, gait: Gait, distance: f32) -> f32 {
+        if !distance.is_finite() {
+            return 0.0;
+        }
+        (distance / self.stride_for(gait)).rem_euclid(1.0)
     }
 }
 
@@ -210,9 +278,12 @@ mod tests {
         assert_eq!(motion.footfall(motion.stride_pixels * 0.51, 1.0), 1);
         assert_eq!(motion.footfall(motion.stride_pixels, 1.0), 2);
         for length in [0, 63, 241] {
-            assert!(Motion::from_json(&format!(
-                "{{\"version\":1,\"stride_pixels\":{length},\"walk_clip\":\"walk\",\"kick_clip\":\"kick\"}}"
-            )).is_err());
+            let mut edited: serde_json::Value = serde_json::from_str(include_str!(
+                "../../assets/adventure/locomotion/motion.json"
+            ))
+            .unwrap();
+            edited["stride_pixels"] = length.into();
+            assert!(Motion::from_json(&edited.to_string()).is_err());
         }
         for distance in [f32::NAN, f32::INFINITY] {
             assert_eq!(motion.walk_cursor(distance, 1.0, 8), 0);

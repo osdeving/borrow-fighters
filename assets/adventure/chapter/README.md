@@ -9,7 +9,7 @@ acidente e porta continuam disponíveis nos arquivos existentes da aventura.
 |---|---|
 | [rust-narrative.png](rust-narrative.png) e [metadados](rust-narrative.json) | Oito poses de Rust para verificar o motorista, conversar e usar um celular separado. |
 | [driver.png](driver.png) e [metadados](driver.json) | Motorista em duas poses, conversa e agradecimento, para a esquerda. |
-| [lane.png](lane.png) e [metadados](lane.json) | Fundo pintado da travessa, reutilizável em dois trechos com composições de objetos diferentes. |
+| [lane.png](lane.png) e [metadados](lane.json) | Referência histórica de pintura; substituída no runtime por [fachadas e chão modulares](../world/README.md). |
 
 Os JSONs registram medidas de produção. Não decidem triggers, progressão,
 colisão, trajetórias ou câmera. Os retângulos usam pixels absolutos do PNG;
@@ -95,7 +95,7 @@ continuidade com os sprites anteriores no tamanho de jogo.
 
 A travessa usa o [prompt completo](prompts/lane.txt) e o painel externo de
 [prologue-environments.png](../prologue-environments.png) como referência de
-pintura e luz. É um novo fundo de nível vazio, sem atores ou palavras.
+pintura e luz. Foi o fundo de nível vazio da primeira entrega; permanece como referência, sem ser esticado ou carregado pelo capítulo atual.
 Não foram usadas referências de imagens externas adicionais.
 
 ### Tentativas não integradas

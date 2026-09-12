@@ -19,7 +19,6 @@ use std::{error::Error, fs};
 pub struct ChapterAssets {
     pub common: Assets,
     pub pieces: StreetPieces,
-    pub lane: Texture2D,
     pub skin: PhoneSkin,
     pub texts: ChapterTexts,
 }
@@ -35,15 +34,9 @@ impl ChapterAssets {
             StreetPieces::load_catalog(rl, thread, "assets/adventure/chapter/catalog.json")?;
         validate_clips(&pieces.catalog)?;
         validate_world_pieces(&load_world()?, &pieces.catalog)?;
-        let lane = rl.load_texture(
-            thread,
-            &asset_path("assets/adventure/chapter/lane.png").to_string_lossy(),
-        )?;
-        lane.set_texture_filter(thread, TextureFilter::TEXTURE_FILTER_BILINEAR);
         Ok(Self {
             common,
             pieces,
-            lane,
             skin: load_skin()?,
             texts: load_texts()?,
         })

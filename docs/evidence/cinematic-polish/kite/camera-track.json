@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "keys": [
+    {
+      "tick": 0,
+      "anchor": "hub",
+      "target": [
+        1108,
+        127
+      ],
+      "zoom": 3.8,
+      "matte": 1,
+      "blackout": 0
+    },
+    {
+      "tick": 210,
+      "anchor": "hub",
+      "target": [
+        1108,
+        127
+      ],
+      "zoom": 3.8,
+      "matte": 1,
+      "blackout": 0
+    },
+    {
+      "tick": 360,
+      "anchor": "hub",
+      "target": [
+        1060,
+        285
+      ],
+      "zoom": 2.05,
+      "matte": 1,
+      "blackout": 0
+    },
+    {
+      "tick": 570,
+      "anchor": "hub",
+      "target": [
+        780,
+        330
+      ],
+      "zoom": 1.5,
+      "matte": 1,
+      "blackout": 0
+    },
+    {
+      "tick": 780,
+      "anchor": "hub",
+      "target": [
+        650,
+        335
+      ],
+      "zoom": 1.5,
+      "matte": 1,
+      "blackout": 0
+    },
+    {
+      "tick": 840,
+      "anchor": "hub",
+      "target": [
+        650,
+        335
+      ],
+      "zoom": 1.5,
+      "matte": 1,
+      "blackout": 1
+    },
+    {
+      "tick": 841,
+      "anchor": "gameplay",
+      "target": [
+        480,
+        345
+      ],
+      "zoom": 1.18,
+      "matte": 1,
+      "blackout": 1
+    },
+    {
+      "tick": 900,
+      "anchor": "gameplay",
+      "target": [
+        480,
+        345
+      ],
+      "zoom": 1.18,
+      "matte": 1,
+      "blackout": 0
+    },
+    {
+      "tick": 990,
+      "anchor": "gameplay",
+      "target": [
+        540,
+        350
+      ],
+      "zoom": 1.1,
+      "matte": 1,
+      "blackout": 0
+    },
+    {
+      "tick": 1080,
+      "anchor": "gameplay",
+      "target": [
+        640,
+        360
+      ],
+      "zoom": 1,
+      "matte": 0,
+      "blackout": 0
+    }
+  ]
+}

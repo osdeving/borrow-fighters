@@ -7,8 +7,11 @@ use crate::math::vec2::Vec2;
 use serde::Deserialize;
 use std::{error::Error, fs};
 
-/// Six seconds to linger on the kite, descend to Rust and settle into play.
-pub const ARRIVAL_TICKS: u32 = 360;
+/// Default eighteen-second street establishment; runtime uses the loaded track's end.
+pub const ARRIVAL_TICKS: u32 = 18 * 60;
+
+/// Editable camera beats, including the fully covered cut back to Rust.
+pub const STREET_ARRIVAL_PATH: &str = "assets/adventure/street/arrival-camera.json";
 
 /// World framing and cinematic border opacity at one fixed update.
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -30,44 +33,141 @@ impl ArrivalShot {
             matte: 0.0,
         }
     }
+}
 
-    /// Samples one continuous shot with zero velocity at each authored join.
-    pub fn at(ticks: u32) -> Self {
-        if ticks >= ARRIVAL_TICKS {
-            return Self::settled();
+/// Coordinate system of one shot; changing anchors requires a fully covered cut.
+#[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+enum StreetAnchor {
+    Hub,
+    Gameplay,
+}
+
+#[derive(Clone, Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct StreetCameraKey {
+    tick: u32,
+    anchor: StreetAnchor,
+    target: [f32; 2],
+    zoom: f32,
+    matte: f32,
+    blackout: f32,
+}
+
+/// Slow observation of ordinary street life, followed by a covered cut to Rust.
+#[derive(Clone, Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct StreetArrivalSpec {
+    version: u32,
+    keys: Vec<StreetCameraKey>,
+}
+
+impl Default for StreetArrivalSpec {
+    fn default() -> Self {
+        Self::load().unwrap_or_else(|error| {
+            eprintln!("Street arrival: {error}; using bundled camera track");
+            Self::bundled()
+        })
+    }
+}
+
+impl StreetArrivalSpec {
+    /// Reads an independently replaceable camera track before a new story begins.
+    pub fn load() -> Result<Self, Box<dyn Error>> {
+        Self::parse(&fs::read_to_string(crate::runtime_paths::asset_path(
+            STREET_ARRIVAL_PATH,
+        ))?)
+    }
+
+    /// Deterministic reference used by pure tests and recovery from invalid edits.
+    pub fn bundled() -> Self {
+        Self::parse(include_str!(
+            "../../assets/adventure/street/arrival-camera.json"
+        ))
+        .expect("bundled street camera must validate")
+    }
+
+    fn parse(source: &str) -> Result<Self, Box<dyn Error>> {
+        let spec: Self = serde_json::from_str(source)?;
+        if spec.version != 1
+            || spec.keys.len() < 2
+            || spec.keys.first().is_none_or(|key| {
+                key.tick != 0 || key.anchor != StreetAnchor::Hub || key.blackout != 0.0
+            })
+            || spec.keys.windows(2).any(|pair| {
+                pair[0].tick >= pair[1].tick
+                    || (pair[0].anchor != pair[1].anchor
+                        && (pair[0].blackout != 1.0 || pair[1].blackout != 1.0))
+            })
+            || spec.keys.iter().any(|key| {
+                ![
+                    key.target[0],
+                    key.target[1],
+                    key.zoom,
+                    key.matte,
+                    key.blackout,
+                ]
+                .iter()
+                .all(|value| value.is_finite())
+                    || !(1.0..=5.0).contains(&key.zoom)
+                    || !(0.0..=1.0).contains(&key.matte)
+                    || !(0.0..=1.0).contains(&key.blackout)
+                    || key.target[1] - 360.0 / key.zoom < 0.0
+                    || key.target[1] + 360.0 / key.zoom > 720.001
+            })
+            || spec.keys.last().is_none_or(|key| {
+                !(600..=3600).contains(&key.tick)
+                    || key.anchor != StreetAnchor::Gameplay
+                    || key.target != [640.0, 360.0]
+                    || key.zoom != 1.0
+                    || key.matte != 0.0
+                    || key.blackout != 0.0
+            })
+        {
+            return Err("invalid street camera: ordered keys, covered anchor cuts and exact gameplay handoff required".into());
         }
-        if ticks < 60 {
-            return Self {
-                target: Vec2::new(1108.0, 127.0),
-                zoom: 3.8,
-                matte: 1.0,
-            };
-        }
-        let (from, to, a, b, start, length) = if ticks < 300 {
-            (
-                Vec2::new(1108.0, 127.0),
-                Vec2::new(570.0, 370.0),
-                3.8,
-                1.15,
-                60,
-                240,
-            )
-        } else {
-            (
-                Vec2::new(570.0, 370.0),
-                Vec2::new(640.0, 360.0),
-                1.15,
-                1.0,
-                300,
-                60,
-            )
+        Ok(spec)
+    }
+
+    /// Last authored update, shared by camera sampling, input ownership and skip.
+    pub fn duration_ticks(&self) -> u32 {
+        self.keys.last().expect("validated camera keys").tick
+    }
+
+    /// The blackout belongs to the same fixed clock, so pause cannot uncover a cut.
+    pub fn blackout(&self, ticks: u32) -> f32 {
+        self.segment(ticks).map_or(0.0, |(from, to, blend)| {
+            from.blackout + (to.blackout - from.blackout) * blend
+        })
+    }
+
+    /// Samples visible motion in local map coordinates, clamping every viewport.
+    pub fn sample(&self, ticks: u32, hub: f32, camera_left: f32, world_width: f32) -> ArrivalShot {
+        let Some((from, to, blend)) = self.segment(ticks) else {
+            return ArrivalShot::settled();
         };
-        let t = smooth((ticks - start) as f32 / length as f32);
-        Self {
-            target: Vec2::new(from.x + (to.x - from.x) * t, from.y + (to.y - from.y) * t),
-            zoom: a + (b - a) * t,
-            matte: if ticks < 300 { 1.0 } else { 1.0 - t },
+        let lerp = |a: f32, b: f32| a + (b - a) * blend;
+        let zoom = lerp(from.zoom, to.zoom);
+        let offset = match from.anchor {
+            StreetAnchor::Hub => hub - camera_left,
+            StreetAnchor::Gameplay => 0.0,
+        };
+        let center_x = lerp(from.target[0], to.target[0]) + offset + camera_left;
+        let half_width = 640.0 / zoom;
+        ArrivalShot {
+            target: Vec2::new(
+                center_x.clamp(half_width, world_width - half_width) - camera_left,
+                lerp(from.target[1], to.target[1]),
+            ),
+            zoom,
+            matte: lerp(from.matte, to.matte),
         }
+    }
+
+    fn segment(&self, ticks: u32) -> Option<(&StreetCameraKey, &StreetCameraKey, f32)> {
+        let pair = self.keys.windows(2).find(|pair| ticks < pair[1].tick)?;
+        let progress = (ticks - pair[0].tick) as f32 / (pair[1].tick - pair[0].tick) as f32;
+        Some((&pair[0], &pair[1], smooth(progress)))
     }
 }
 
@@ -96,6 +196,8 @@ pub struct DescentKey {
     pub tracking: f32,
     /// Cinematic border opacity.
     pub matte: f32,
+    /// Perspective size: the distant body grows continuously into its play scale.
+    pub body_scale: f32,
 }
 
 /// Data for a single reusable landing, separate from the scene background.
@@ -148,6 +250,7 @@ impl EpArrivalSpec {
                     key.zoom,
                     key.tracking,
                     key.matte,
+                    key.body_scale,
                 ]
                 .iter()
                 .all(|value| value.is_finite())
@@ -158,6 +261,7 @@ impl EpArrivalSpec {
                     || key.camera_y + 360.0 / key.zoom > 720.001
                     || key.feet_y > super::combat::FLOOR_Y
                     || key.speed_y < 0.0
+                    || !(0.1..=1.2).contains(&key.body_scale)
             })
             || spec.descent.last().is_none_or(|key| {
                 key.feet_y != super::combat::FLOOR_Y
@@ -166,6 +270,7 @@ impl EpArrivalSpec {
                     || key.matte != 0.0
                     || key.camera_y != 360.0
                     || key.tick > 1200
+                    || key.body_scale != 1.0
             })
             || spec.gameplay_tick >= spec.impact_tick()
             || !spec
@@ -200,6 +305,8 @@ impl EpArrivalSpec {
 pub struct EpArrivalSample {
     /// Actor feet, independent of camera framing.
     pub feet_y: f32,
+    /// Actual derivative of the authored fall, driving streak length and blur.
+    pub speed_y: f32,
     /// World framing, including the short ground impact shake.
     pub shot: ArrivalShot,
     /// Sprite frame in the existing erratic atlas.
@@ -331,9 +438,10 @@ impl EpArrival {
             }
             return Some(EpArrivalSample {
                 feet_y: super::combat::FLOOR_Y,
+                speed_y: 0.0,
                 shot,
                 pose,
-                scale: Vec2::new(1.0 + compression * 0.08, 1.0 - compression * 0.12),
+                scale: Vec2::new(1.0 + compression * 0.12, 1.0 - compression * 0.18),
                 impact_age: Some(age),
             });
         }
@@ -353,19 +461,29 @@ impl EpArrival {
             + (t3 - 2.0 * t2 + t) * from.speed_y * span / 60.0
             + (-2.0 * t3 + 3.0 * t2) * to.feet_y
             + (t3 - t2) * to.speed_y * span / 60.0;
+        let speed_y = ((6.0 * t2 - 6.0 * t) * from.feet_y
+            + (3.0 * t2 - 4.0 * t + 1.0) * from.speed_y * span / 60.0
+            + (-6.0 * t2 + 6.0 * t) * to.feet_y
+            + (3.0 * t2 - 2.0 * t) * to.speed_y * span / 60.0)
+            * 60.0
+            / span;
         let zoom = lerp(from.zoom, to.zoom);
         let tracking = lerp(from.tracking, to.tracking);
         let target_x = (640.0 + (enemy_screen_x - 640.0) * tracking)
-            .clamp(640.0 / zoom, 1728.0 - 640.0 / zoom);
+            .clamp(640.0 / zoom, 1280.0 - 640.0 / zoom);
         Some(EpArrivalSample {
             feet_y,
+            speed_y,
             shot: ArrivalShot {
                 target: Vec2::new(target_x, lerp(from.camera_y, to.camera_y)),
                 zoom,
                 matte: lerp(from.matte, to.matte),
             },
             pose: self.spec.airborne_pose,
-            scale: Vec2::new(1.0, 1.0),
+            scale: Vec2::new(
+                lerp(from.body_scale, to.body_scale),
+                lerp(from.body_scale, to.body_scale),
+            ),
             impact_age: None,
         })
     }
@@ -377,19 +495,52 @@ mod tests {
 
     #[test]
     fn shot_stays_inside_the_painted_world_and_hands_off_without_a_jump() {
-        let mut previous = ArrivalShot::at(0);
+        let track = StreetArrivalSpec::bundled();
+        assert_eq!(track.duration_ticks(), ARRIVAL_TICKS);
+        let mut previous = track.sample(0, 2048.0, 0.0, 4608.0);
         for tick in 1..=ARRIVAL_TICKS {
-            let shot = ArrivalShot::at(tick);
+            let shot = track.sample(tick, 2048.0, 0.0, 4608.0);
             assert!(shot.target.x - 640.0 / shot.zoom >= -0.001);
             assert!(shot.target.y - 360.0 / shot.zoom >= -0.001);
-            assert!(shot.target.x + 640.0 / shot.zoom <= 1728.0);
+            assert!(shot.target.x + 640.0 / shot.zoom <= 4608.001);
             assert!(shot.target.y + 360.0 / shot.zoom <= 720.001);
-            assert!((shot.target.x - previous.target.x).abs() < 5.0);
-            assert!((shot.zoom - previous.zoom).abs() < 0.03);
+            if track.blackout(tick) < 1.0 || track.blackout(tick - 1) < 1.0 {
+                assert!((shot.target.x - previous.target.x).abs() < 5.0);
+                assert!((shot.target.y - previous.target.y).abs() < 3.0);
+                assert!((shot.zoom - previous.zoom).abs() < 0.03);
+            }
+            assert!((track.blackout(tick) - track.blackout(tick - 1)).abs() < 0.04);
             previous = shot;
         }
         assert_eq!(previous, ArrivalShot::settled());
-        assert_eq!(ArrivalShot::at(u32::MAX), previous);
+        assert_eq!(track.sample(u32::MAX, 2048.0, 0.0, 4608.0), previous);
+        assert_eq!(track.blackout(ARRIVAL_TICKS), 0.0);
+    }
+
+    #[test]
+    fn external_street_timing_owns_handoff_and_rejects_uncovered_cuts() {
+        use crate::adventure::story::Story;
+        let source = include_str!("../../assets/adventure/street/arrival-camera.json");
+        let mut value: serde_json::Value = serde_json::from_str(source).unwrap();
+        value["keys"][6]["blackout"] = serde_json::json!(0);
+        assert!(StreetArrivalSpec::parse(&value.to_string()).is_err());
+        let mut value: serde_json::Value = serde_json::from_str(source).unwrap();
+        value["keys"][9]["target"] = serde_json::json!([600, 360]);
+        assert!(StreetArrivalSpec::parse(&value.to_string()).is_err());
+        let mut value: serde_json::Value = serde_json::from_str(source).unwrap();
+        value["keys"][9]["tick"] = serde_json::json!(1200);
+        let mut story = Story::new();
+        story.street_arrival = StreetArrivalSpec::parse(&value.to_string()).unwrap();
+        story.advance_scene();
+        story.advance_scene();
+        story.stage_ticks = ARRIVAL_TICKS;
+        assert!(story.arrival_active());
+        story.skip_segment();
+        assert_eq!(story.stage_ticks, 1200);
+        assert!(!story.arrival_active());
+        assert_eq!(story.initial_shot(), ArrivalShot::settled());
+        assert_eq!(story.initial_blackout(), 0.0);
+        assert!(!story.combat.enemy_awake);
     }
 
     #[test]
@@ -401,12 +552,14 @@ mod tests {
             arrival.tick();
             let sample = arrival.sample(845.0).unwrap();
             assert!(sample.feet_y >= previous.feet_y, "upward jump at {tick}");
-            assert!((sample.feet_y - previous.feet_y).abs() < 8.0);
+            assert!((sample.feet_y - previous.feet_y).abs() < 14.0);
+            assert!(sample.speed_y > previous.speed_y);
+            assert!(sample.scale.y >= previous.scale.y);
             assert!(sample.feet_y < super::super::combat::FLOOR_Y);
             assert!(sample.impact_age.is_none());
             assert!(sample.shot.target.y - 360.0 / sample.shot.zoom >= -0.01);
             assert!(sample.shot.target.y + 360.0 / sample.shot.zoom <= 720.01);
-            assert!((sample.shot.zoom - previous.shot.zoom).abs() < 0.04);
+            assert!((sample.shot.zoom - previous.shot.zoom).abs() < 0.18);
             if tick >= arrival.spec.gameplay_tick {
                 assert_eq!(sample.shot, ArrivalShot::settled());
             }
@@ -418,6 +571,11 @@ mod tests {
         assert_eq!(impact.feet_y, super::super::combat::FLOOR_Y);
         assert_eq!(impact.impact_age, Some(0));
         assert_eq!(impact.pose, arrival.spec.landing_pose);
+        assert!(
+            arrival.spec.impact_tick() < 60,
+            "fall must stay fast, without hovering"
+        );
+        assert!(previous.speed_y > 750.0);
         assert!(arrival.active());
         for _ in 0..arrival.spec.recovery_ticks {
             arrival.tick();
@@ -430,8 +588,8 @@ mod tests {
     fn authored_ep_track_rejects_backward_time_bad_camera_and_missing_ground_contact() {
         let source = include_str!("../../assets/adventure/street/ep-arrival.json");
         for broken in [
-            source.replacen("\"tick\": 54", "\"tick\": 0", 1),
-            source.replacen("\"camera_y\": 150.0", "\"camera_y\": 5.0", 1),
+            source.replacen("\"tick\": 20", "\"tick\": 0", 1),
+            source.replacen("\"camera_y\": 150", "\"camera_y\": 5", 1),
             source.replacen("\"feet_y\": 580.0", "\"feet_y\": 590.0", 1),
             source.replacen("\"landing_pose\": 6", "\"landing_pose\": 8", 1),
         ] {

@@ -319,12 +319,13 @@ fn morning(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
 
 fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
     let c = &story.combat;
-    let camera = (c.player.position.x - 450.0).clamp(0.0, 920.0);
+    let camera = story.camera_left();
+    let hub = story.hub_origin;
     let arriving = story.arrival_active();
     let ep_arriving = story.ep_arrival_active();
     let ep_sample = story.ep_arrival.sample(c.enemy.position.x - camera);
     let shot = if arriving {
-        ArrivalShot::at(story.stage_ticks)
+        story.initial_shot()
     } else if ep_arriving {
         ep_sample.map_or_else(ArrivalShot::settled, |sample| sample.shot)
     } else {
@@ -338,7 +339,17 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
             zoom: shot.zoom,
         });
         let d = &mut world;
-        super::street::background(d, a, camera);
+        super::landscape::draw(
+            d,
+            a,
+            "street",
+            story.map.width,
+            super::landscape::View {
+                left: camera + shot.target.x - 640.0 / shot.zoom,
+                width: 1280.0 / shot.zoom,
+                origin: -camera,
+            },
+        );
         d.draw_rectangle_gradient_v(
             0,
             565,
@@ -355,7 +366,7 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
             alpha(PAPER, 0.2),
         );
         let scene_time = story.ambient.ticks() as f32 / 60.0;
-        super::street::draw(d, &story.ambient, a, camera);
+        super::street::draw(d, &story.ambient, a, camera - hub);
         for i in 0..12 {
             let f = i as f32;
             let x = (f * 197.0 + scene_time * 13.0 - camera * 0.5).rem_euclid(1400.0) - 60.0;
@@ -415,6 +426,15 @@ fn encounter(d: &mut impl RaylibDraw, story: &Story, a: &Assets, debug: bool) {
                 }
             }
         }
+    }
+    if arriving {
+        d.draw_rectangle(
+            0,
+            0,
+            WIDTH,
+            HEIGHT,
+            alpha(Color::BLACK, story.initial_blackout()),
+        );
     }
     if arriving || ep_arriving {
         let border = (42.0 * shot.matte) as i32;

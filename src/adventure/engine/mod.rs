@@ -11,6 +11,7 @@ pub mod capture;
 pub mod chapter;
 pub mod chapter_audio;
 pub mod ep_arrival;
+pub mod landscape;
 pub mod locomotion;
 pub mod morning;
 pub mod neighborhood;

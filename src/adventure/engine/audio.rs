@@ -491,7 +491,7 @@ mod tests {
         story.advance_scene();
         story.skip_segment();
         let mut observed = ObservedAudio::at_story(&story);
-        story.combat.player.position.x = crate::adventure::combat::ENCOUNTER_TRIGGER_X;
+        story.combat.player.position.x = story.map.arrival_x;
         story.tick(CombatInput::default());
         let cues = observed.observe(&story);
         assert!(cues.contains(&Cue::EpDescent));

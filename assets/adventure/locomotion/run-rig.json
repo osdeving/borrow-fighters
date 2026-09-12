@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "clip": "rust.run",
+  "body_piece": "rust.run.body",
+  "near_arm_piece": "rust.run.near-arm",
+  "far_arm_piece": "rust.run.far-arm",
+  "near": {
+    "boot": "rust.run.near-boot",
+    "hip_offset": [
+      -5,
+      0
+    ],
+    "thigh_length": 38,
+    "shin_length": 35,
+    "foot_offset": 0
+  },
+  "far": {
+    "boot": "rust.run.far-boot",
+    "hip_offset": [
+      5,
+      0
+    ],
+    "thigh_length": 38,
+    "shin_length": 35,
+    "foot_offset": 10
+  },
+  "hip_x": -3,
+  "contact_x": 34,
+  "stance_end": 0.26,
+  "toe_degrees": 22,
+  "arms": [
+    36,
+    -28
+  ],
+  "body_keys": [
+    {
+      "phase": 0,
+      "height": -82,
+      "lean": 2
+    },
+    {
+      "phase": 0.2,
+      "height": -79,
+      "lean": 4
+    },
+    {
+      "phase": 0.52,
+      "height": -82.5,
+      "lean": 0
+    },
+    {
+      "phase": 0.76,
+      "height": -85,
+      "lean": -1
+    },
+    {
+      "phase": 1,
+      "height": -82,
+      "lean": 2
+    }
+  ],
+  "flight_keys": [
+    {
+      "phase": 0.42,
+      "position": [
+        -45,
+        -22
+      ],
+      "rotation": 36
+    },
+    {
+      "phase": 0.6,
+      "position": [
+        -40,
+        -35
+      ],
+      "rotation": 8
+    },
+    {
+      "phase": 0.77,
+      "position": [
+        21,
+        -25
+      ],
+      "rotation": -8
+    },
+    {
+      "phase": 0.93,
+      "position": [
+        39,
+        -7
+      ],
+      "rotation": -3
+    }
+  ],
+  "air_ankle": {
+    "follow_in": [
+      0.28,
+      0.42
+    ],
+    "follow_out": [
+      0.8,
+      0.97
+    ],
+    "flexion": 0
+  }
+}

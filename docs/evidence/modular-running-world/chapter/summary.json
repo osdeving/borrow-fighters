@@ -1,0 +1,374 @@
+{
+  "mode": "deterministic native Raylib review; simulated public inputs; no physical keyboard/gamepad; muted",
+  "frames": 6814,
+  "simulation_seconds": 113.55977630615234,
+  "final_phase": "Complete",
+  "final_hp": 100,
+  "final_enemies": [
+    {
+      "action": "Defeated",
+      "hp": 0,
+      "x": 2068.140869140625
+    },
+    {
+      "action": "Defeated",
+      "hp": 0,
+      "x": 1823.9781494140625
+    }
+  ],
+  "scenes": {
+    "street": {
+      "width": 4608,
+      "frames": 3633,
+      "player_x_range": [
+        2593.016845703125,
+        4457.998046875
+      ],
+      "camera_left_min": 1963.1522049383304,
+      "camera_right_max": 4602.779099004484
+    },
+    "lane": {
+      "width": 4096,
+      "frames": 1478,
+      "player_x_range": [
+        100.0,
+        3938.737060546875
+      ],
+      "camera_left_min": 0.0,
+      "camera_right_max": 4090.696405876252
+    },
+    "passage": {
+      "width": 3840,
+      "frames": 1703,
+      "player_x_range": [
+        240.0,
+        3694.574951171875
+      ],
+      "camera_left_min": 0.0,
+      "camera_right_max": 3839.99755859375
+    }
+  },
+  "debris": {
+    "count": 9,
+    "first_damage_frame": 3902,
+    "first_broken_frame": 3939,
+    "all_broken_frame": 4401,
+    "final": [
+      {
+        "hit_tick": 3939,
+        "hp": 0,
+        "id": "cargo.0.0",
+        "y": 528.0
+      },
+      {
+        "hit_tick": 3981,
+        "hp": 0,
+        "id": "cargo.0.1",
+        "y": 528.0
+      },
+      {
+        "hit_tick": 4023,
+        "hp": 0,
+        "id": "cargo.0.2",
+        "y": 528.0
+      },
+      {
+        "hit_tick": 4140,
+        "hp": 0,
+        "id": "cargo.1.0",
+        "y": 528.0
+      },
+      {
+        "hit_tick": 4182,
+        "hp": 0,
+        "id": "cargo.1.1",
+        "y": 528.0
+      },
+      {
+        "hit_tick": 4224,
+        "hp": 0,
+        "id": "cargo.1.2",
+        "y": 528.0
+      },
+      {
+        "hit_tick": 4317,
+        "hp": 0,
+        "id": "cargo.2.0",
+        "y": 528.0
+      },
+      {
+        "hit_tick": 4359,
+        "hp": 0,
+        "id": "cargo.2.1",
+        "y": 528.0
+      },
+      {
+        "hit_tick": 4401,
+        "hp": 0,
+        "id": "cargo.2.2",
+        "y": 528.0
+      }
+    ]
+  },
+  "combat": {
+    "first_frame": 5371,
+    "victory_frame": 6398,
+    "enemies_at_start": [
+      {
+        "action": "Idle",
+        "hp": 120,
+        "x": 2630.0
+      },
+      {
+        "action": "Idle",
+        "hp": 112,
+        "x": 2860.0
+      }
+    ],
+    "enemies_at_victory": [
+      {
+        "action": "Defeated",
+        "hp": 0,
+        "x": 2068.140869140625
+      },
+      {
+        "action": "Defeated",
+        "hp": 0,
+        "x": 1788.263916015625
+      }
+    ]
+  },
+  "phase_transitions": [
+    {
+      "frame": 0,
+      "scene": "Street",
+      "phase": "Intro",
+      "line": 0,
+      "capture_seconds": 0.0
+    },
+    {
+      "frame": 600,
+      "scene": "Street",
+      "phase": "ExploreDriver",
+      "line": null,
+      "capture_seconds": 10.000019073486328
+    },
+    {
+      "frame": 620,
+      "scene": "Street",
+      "phase": "DriverApproach",
+      "line": null,
+      "capture_seconds": 10.33334732055664
+    },
+    {
+      "frame": 674,
+      "scene": "Street",
+      "phase": "DriverDialogue",
+      "line": 0,
+      "capture_seconds": 11.233333587646484
+    },
+    {
+      "frame": 825,
+      "scene": "Street",
+      "phase": "DriverDialogue",
+      "line": 1,
+      "capture_seconds": 13.749961853027344
+    },
+    {
+      "frame": 976,
+      "scene": "Street",
+      "phase": "DriverDialogue",
+      "line": 2,
+      "capture_seconds": 16.266590118408203
+    },
+    {
+      "frame": 1127,
+      "scene": "Street",
+      "phase": "DriverReturn",
+      "line": null,
+      "capture_seconds": 18.783218383789062
+    },
+    {
+      "frame": 1181,
+      "scene": "Street",
+      "phase": "ExploreShop",
+      "line": null,
+      "capture_seconds": 19.683204650878906
+    },
+    {
+      "frame": 1254,
+      "scene": "Street",
+      "phase": "ShopApproach",
+      "line": null,
+      "capture_seconds": 20.899852752685547
+    },
+    {
+      "frame": 1346,
+      "scene": "Street",
+      "phase": "ShopDialogue",
+      "line": 0,
+      "capture_seconds": 22.433162689208984
+    },
+    {
+      "frame": 1497,
+      "scene": "Street",
+      "phase": "ShopDialogue",
+      "line": 1,
+      "capture_seconds": 24.949790954589844
+    },
+    {
+      "frame": 1648,
+      "scene": "Street",
+      "phase": "ShopDialogue",
+      "line": 2,
+      "capture_seconds": 27.466419219970703
+    },
+    {
+      "frame": 1799,
+      "scene": "Street",
+      "phase": "ShopReturn",
+      "line": null,
+      "capture_seconds": 29.983047485351562
+    },
+    {
+      "frame": 1937,
+      "scene": "Street",
+      "phase": "ExploreNeighbour",
+      "line": null,
+      "capture_seconds": 32.28301239013672
+    },
+    {
+      "frame": 1946,
+      "scene": "Street",
+      "phase": "NeighbourApproach",
+      "line": null,
+      "capture_seconds": 32.43301010131836
+    },
+    {
+      "frame": 2013,
+      "scene": "Street",
+      "phase": "NeighbourDialogue",
+      "line": 0,
+      "capture_seconds": 33.549659729003906
+    },
+    {
+      "frame": 2164,
+      "scene": "Street",
+      "phase": "NeighbourDialogue",
+      "line": 1,
+      "capture_seconds": 36.066287994384766
+    },
+    {
+      "frame": 2315,
+      "scene": "Street",
+      "phase": "NeighbourDialogue",
+      "line": 2,
+      "capture_seconds": 38.582916259765625
+    },
+    {
+      "frame": 2466,
+      "scene": "Street",
+      "phase": "NeighbourReturn",
+      "line": null,
+      "capture_seconds": 41.099544525146484
+    },
+    {
+      "frame": 2533,
+      "scene": "Street",
+      "phase": "Phone",
+      "line": null,
+      "capture_seconds": 42.21619415283203
+    },
+    {
+      "frame": 3403,
+      "scene": "Street",
+      "phase": "LeaveStreet",
+      "line": null,
+      "capture_seconds": 56.715972900390625
+    },
+    {
+      "frame": 3633,
+      "scene": "Lane",
+      "phase": "LaneExplore",
+      "line": null,
+      "capture_seconds": 60.54924774169922
+    },
+    {
+      "frame": 4489,
+      "scene": "Lane",
+      "phase": "LaneApproach",
+      "line": null,
+      "capture_seconds": 74.81816864013672
+    },
+    {
+      "frame": 4490,
+      "scene": "Lane",
+      "phase": "LaneDialogue",
+      "line": 0,
+      "capture_seconds": 74.8348388671875
+    },
+    {
+      "frame": 4641,
+      "scene": "Lane",
+      "phase": "LaneDialogue",
+      "line": 1,
+      "capture_seconds": 77.35204315185547
+    },
+    {
+      "frame": 4792,
+      "scene": "Lane",
+      "phase": "LaneDialogue",
+      "line": 2,
+      "capture_seconds": 79.86924743652344
+    },
+    {
+      "frame": 4943,
+      "scene": "Lane",
+      "phase": "LaneExit",
+      "line": null,
+      "capture_seconds": 82.3864517211914
+    },
+    {
+      "frame": 5111,
+      "scene": "Passage",
+      "phase": "PassageExplore",
+      "line": null,
+      "capture_seconds": 85.18704986572266
+    },
+    {
+      "frame": 5371,
+      "scene": "Passage",
+      "phase": "PassageCombat",
+      "line": null,
+      "capture_seconds": 89.52130889892578
+    },
+    {
+      "frame": 6398,
+      "scene": "Passage",
+      "phase": "PassageClear",
+      "line": null,
+      "capture_seconds": 106.64163208007812
+    },
+    {
+      "frame": 6662,
+      "scene": "Passage",
+      "phase": "Departure",
+      "line": 0,
+      "capture_seconds": 111.04257202148438
+    },
+    {
+      "frame": 6752,
+      "scene": "Passage",
+      "phase": "Departure",
+      "line": 1,
+      "capture_seconds": 112.54289245605469
+    },
+    {
+      "frame": 6813,
+      "scene": "Passage",
+      "phase": "Complete",
+      "line": null,
+      "capture_seconds": 113.55977630615234
+    }
+  ]
+}

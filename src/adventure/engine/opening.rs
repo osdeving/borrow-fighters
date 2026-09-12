@@ -23,7 +23,7 @@ const INK: Color = Color::new(14, 19, 26, 255);
 const PAPER: Color = Color::new(239, 224, 192, 255);
 const GOLD: Color = Color::new(248, 177, 64, 255);
 const TEAL: Color = Color::new(83, 199, 182, 255);
-const TITLE_ROSTER: [&str; 5] = ["c", "duke", "cpp", "python", "rust"];
+const TITLE_ROSTER: [&str; 5] = ["c", "duke", "rust", "python", "cpp"];
 
 struct Portrait {
     id: String,
@@ -136,8 +136,7 @@ pub fn draw(d: &mut impl RaylibDraw, story: &Story, a: &Assets) {
         t if t < 29.0 => history(d, a, "python", t - 19.0),
         t if t < 41.0 => super::biography::draw(d, a, "duke", ticks.saturating_sub(29 * 60)),
         t if t < 53.0 => super::biography::draw(d, a, "c", ticks.saturating_sub(41 * 60)),
-        t if t < 57.0 => character(d, a, t - 53.0),
-        _ => title(d, a, t - 57.0),
+        _ => title(d, a, t - 53.0),
     }
     // Film cadence: warm dust, restrained scan lines and letterboxing.
     for i in 0..24 {
@@ -292,51 +291,6 @@ fn history(d: &mut impl RaylibDraw, a: &Assets, id: &str, t: f32) {
     let transition = (local / 0.28).min(1.0);
     if transition < 1.0 {
         d.draw_rectangle(0, 28, 1280, 636, tint(INK, 1.0 - transition));
-    }
-}
-
-fn character(d: &mut impl RaylibDraw, a: &Assets, t: f32) {
-    let id = "rust";
-    let accent = GOLD;
-    let local = t % 4.0;
-    for i in 0..8 {
-        let x = -250.0 + i as f32 * 250.0 - local * 35.0;
-        d.draw_rectangle_pro(
-            Rectangle::new(x, 390.0, 105.0, 1000.0),
-            Vector2::new(52.0, 500.0),
-            27.0,
-            tint(accent, 0.06),
-        );
-    }
-    let entrance = 1.0 - (1.0 - (local / 0.5).min(1.0)).powi(3);
-    avatar(
-        d,
-        a,
-        id,
-        Vector2::new(860.0 + (1.0 - entrance) * 380.0, 650.0),
-        530.0,
-        local,
-        Color::WHITE,
-    );
-    paragraph(
-        d,
-        &a.opening.display,
-        a.text.get(&format!("opening.{id}.name")),
-        Rectangle::new(65.0, 254.0, 645.0, 134.0),
-        102.0,
-        PAPER,
-    );
-    d.draw_rectangle(68, 404, (540.0 * entrance) as i32, 5, accent);
-    paragraph(
-        d,
-        &a.body,
-        a.text.get(&format!("opening.{id}.role")),
-        Rectangle::new(70.0, 438.0, 600.0, 95.0),
-        30.0,
-        accent,
-    );
-    if local < 0.15 {
-        d.draw_rectangle(0, 28, 1280, 636, tint(PAPER, (1.0 - local / 0.15) * 0.4));
     }
 }
 

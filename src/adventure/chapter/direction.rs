@@ -231,8 +231,24 @@ impl Chapter {
         self.enter(phase);
     }
 
+    /// Chooses an actual back/front view from the next authored route segment.
+    pub fn travel_view(&self) -> crate::adventure::locomotion::TravelView {
+        use crate::adventure::locomotion::TravelView;
+        if self.player().action != Action::Walk || self.route_index >= self.route.len() {
+            return TravelView::Side;
+        }
+        let target = self.route[self.route_index];
+        TravelView::from_delta(
+            target.x - self.player().position.x,
+            target.y - self.player().position.y,
+        )
+    }
+
     /// Constant speed along authored segments, without relocating at a phase join.
     pub(super) fn step_route(&mut self) -> bool {
+        self.combat
+            .player
+            .set_gait(crate::adventure::locomotion::Gait::Walk);
         let mut remaining: f32 = 225.0 / 60.0;
         while let Some(target) = self.route.get(self.route_index).copied() {
             let delta = Vec2::new(
@@ -332,6 +348,40 @@ mod tests {
     use crate::adventure::chapter::{ChapterInput, Checkpoint, CheckpointStage, World};
 
     #[test]
+    fn crossing_shows_the_back_going_to_the_shop_and_front_on_the_same_return_route() {
+        use crate::adventure::locomotion::TravelView;
+        let mut chapter = Chapter::new(World::bundled(), false);
+        let shop = chapter.world.scene(Scene::Street).poi("shop").unwrap();
+        chapter.combat.player.position = shop.path[0].vec();
+        let start = chapter.player().position;
+        chapter.begin_approach("shop", Phase::ShopApproach);
+        let mut saw_back = false;
+        while !chapter.step_route() {
+            let view = chapter.travel_view();
+            saw_back |= view == TravelView::Back;
+            assert_ne!(view, TravelView::Front);
+        }
+        assert!(saw_back);
+        assert_eq!(
+            chapter.travel_view(),
+            TravelView::Side,
+            "dialogue uses its authored body"
+        );
+        chapter.begin_return(Phase::ShopReturn);
+        let mut saw_front = false;
+        while !chapter.step_route() {
+            let view = chapter.travel_view();
+            saw_front |= view == TravelView::Front;
+            assert_ne!(view, TravelView::Back);
+        }
+        assert!(saw_front);
+        assert_eq!(chapter.player().position, start);
+        assert_eq!(chapter.travel_view(), TravelView::Side);
+        assert_eq!(TravelView::from_delta(50.0, 0.0), TravelView::Side);
+        assert_eq!(TravelView::from_delta(-50.0, 0.0), TravelView::Side);
+    }
+
+    #[test]
     fn closing_shutter_waits_until_the_neighbours_full_pose_clears_the_jamb() {
         let mut chapter = Chapter::from_checkpoint(
             World::bundled(),
@@ -342,7 +392,9 @@ mod tests {
             },
         )
         .unwrap();
-        chapter.combat.player.position = Vec2::new(550.0, 580.0);
+        let shop = chapter.world.scene(Scene::Street).poi("shop").unwrap();
+        let doorway_x = shop.position.x;
+        chapter.combat.player.position = shop.path[0].vec();
         chapter.tick(ChapterInput {
             interact: true,
             ..Default::default()
@@ -367,7 +419,7 @@ mod tests {
                     .find(|person| person.id == "neighbour")
                     .unwrap();
                 assert!(
-                    neighbour.position.x - 40.0 > 603.0 + 97.0 * 0.5,
+                    neighbour.position.x - 40.0 > doorway_x + 97.0 * 0.5,
                     "The full running sprite must leave the opening before it closes"
                 );
             } else {

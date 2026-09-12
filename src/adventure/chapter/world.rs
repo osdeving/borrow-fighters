@@ -185,7 +185,7 @@ impl World {
             }
             let scene = self.scene(id);
             if !scene.width.is_finite()
-                || !(1280.0..=2200.0).contains(&scene.width)
+                || !(1280.0..=32768.0).contains(&scene.width)
                 || scene.floor_y != 580.0
                 || !scene.walk_min.is_finite()
                 || !scene.walk_max.is_finite()

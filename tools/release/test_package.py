@@ -27,9 +27,14 @@ class RepositoryAssetsTests(unittest.TestCase):
             "fonts/Lora-Variable.ttf", "fonts/BarlowCondensed-SemiBold.ttf",
             "fonts/BARLOW-OFL.txt", "fonts/LORA-OFL.txt", "audio/README.md",
             "chapter/world.json", "chapter/chapter-texts.json", "chapter/phone-style.json",
-            "chapter/catalog.json", "chapter/lane.png", "chapter/rust-narrative.png",
+            "chapter/catalog.json", "chapter/rust-narrative.png",
             "chapter/driver.png", "chapter/README.md", "chapter/DRIVER.md",
             "chapter/audio/README.md",
+            "world/map.json", "world/catalog.json", "world/distance.png",
+            "world/pavement.png", "world/planter.png", "world/boundary-pillar.png",
+            "street/arrival-camera.json",
+            "locomotion/catalog.json", "locomotion/run-rig.json",
+            "locomotion/run-mesh.json", "locomotion/run-mesh/leg.png",
         }
         required.update(f"audio/{name}.wav" for name in (
             "ada", "morning_ambience", "street_air", "street_traffic", "remorse", "opening", "strike",
@@ -39,7 +44,18 @@ class RepositoryAssetsTests(unittest.TestCase):
             "rust", "duke", "c", "cpp", "python"))
         required.update(f"chapter/audio/{name}.wav" for name in (
             "phone_pocket", "phone_tap", "phone_send", "phone_receive", "footstep"))
+        required.update(f"world/{name}.png" for name in (
+            "house-cream", "house-balcony", "house-teal", "shop-restaurant",
+            "shop-cafe", "wall-gate"))
+        required.update(f"locomotion/run/{name}.png" for name in (
+            "body", "near-arm", "far-arm", "near-boot", "far-boot"))
+        required.update(f"locomotion/crossing/{view}-{frame:02}.png"
+                        for view in ("back", "front") for frame in range(8))
+        required.update(f"opening/scenes/{name}-painted.png" for name in (
+            "duke-paulista", "duke-boardroom", "old-c-workshop", "old-c-foundations"))
         self.assertFalse({f"assets/adventure/{name}" for name in required} - assets)
+        self.assertFalse({f"assets/adventure/locomotion/run/{side}-{limb}.png"
+                          for side in ("near", "far") for limb in ("thigh", "shin")} & assets)
         self.assertNotIn("assets/adventure/opening/roster/go.png", assets)
         self.assertNotIn("assets/adventure/adventure-environments.png", assets)
         self.assertFalse(any("prompts" in Path(name).parts for name in assets))
@@ -49,8 +65,11 @@ class RepositoryAssetsTests(unittest.TestCase):
         self.assertNotIn("assets/adventure/audio/generate_neighbourhood_audio.py", assets)
         self.assertNotIn("assets/adventure/audio/morning.wav", assets)
         self.assertNotIn("assets/adventure/audio/threat.wav", assets)
-        for name in ("lane.json", "driver.json", "rust-narrative.json", "audio/generate_audio.py"):
+        for name in ("lane.png", "lane.json", "driver.json", "rust-narrative.json", "audio/generate_audio.py"):
             self.assertNotIn(f"assets/adventure/chapter/{name}", assets)
+        for name in ("world/sources/facades-keyed.png", "world/prompts.md",
+                     "locomotion/source/run-rig.png", "locomotion/source/rust-walk-kick.png"):
+            self.assertNotIn(f"assets/adventure/{name}", assets)
 
 
 class AdventureReferencesTests(unittest.TestCase):

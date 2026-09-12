@@ -243,6 +243,8 @@ fn run_session(
         }
         _ => {}
     }
+    story.hub_origin = assets.landscape.map.scene("street").hub_origin;
+    story.configure_map(assets.landscape.map.prologue.clone());
     let output = options.review.as_ref().or(options.capture.as_ref());
     let mut recorder = output.map(|path| Recorder::new(path)).transpose()?;
     let mut trace = output
@@ -460,9 +462,9 @@ fn run_session(
             let c = &story.combat;
             let ep_sample = story
                 .ep_arrival
-                .sample(c.enemy.position.x - (c.player.position.x - 450.0).clamp(0.0, 920.0));
+                .sample(c.enemy.position.x - story.camera_left());
             let arrival_camera = if story.arrival_active() {
-                crate::adventure::arrival::ArrivalShot::at(story.stage_ticks)
+                story.initial_shot()
             } else if story.ep_arrival_active() {
                 ep_sample.map_or_else(crate::adventure::arrival::ArrivalShot::settled, |sample| {
                     sample.shot
@@ -522,7 +524,7 @@ fn run_session(
             writeln!(
                 trace,
                 "{}",
-                serde_json::json!({"frame":frame,"seconds":capture_seconds,"wall_seconds":std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).ok().map(|time| time.as_secs_f64()),"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"waiting_for_continue":return_on_complete && complete_at_start && !completion.accepted,"continue_accepted":completion.accepted,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"ambience":ambience,"neighborhood":neighbors,"ep_arrival":ep_arrival,"arrival_active":story.arrival_active(),"arrival_camera":{"x":arrival_camera.target.x,"y":arrival_camera.target.y,"zoom":arrival_camera.zoom},"audio_synced_after_skip":audio_synced_after_skip,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
+                serde_json::json!({"frame":frame,"seconds":capture_seconds,"wall_seconds":std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).ok().map(|time| time.as_secs_f64()),"stage":format!("{:?}",story.stage),"stage_ticks":story.stage_ticks,"paused":paused,"waiting_for_continue":return_on_complete && complete_at_start && !completion.accepted,"continue_accepted":completion.accepted,"text_revision":text_revision,"text_reload_ok":reload_notice.map(|v|v.0),"ticks":c.ticks,"enemy_awake":c.enemy_awake,"ambience":ambience,"neighborhood":neighbors,"ep_arrival":ep_arrival,"world":{"width":story.map.width,"camera_left":story.camera_left(),"arrival_x":story.map.arrival_x,"hub_origin":assets.landscape.map.scene("street").hub_origin},"arrival_active":story.arrival_active(),"arrival_camera":{"x":arrival_camera.target.x,"y":arrival_camera.target.y,"zoom":arrival_camera.zoom},"audio_synced_after_skip":audio_synced_after_skip,"outcome":format!("{:?}",c.outcome),"player":{"x":c.player.position.x,"y":c.player.position.y,"hp":c.player.hp,"action":format!("{:?}",c.player.action),"facing":format!("{:?}",c.player.facing)},"enemy":{"x":c.enemy.position.x,"y":c.enemy.position.y,"hp":c.enemy.hp,"action":format!("{:?}",c.enemy.action)},"hit":c.last_hit.map(|h| serde_json::json!({"target":format!("{:?}",h.target),"age":h.age_ticks,"blocked":h.blocked}))})
             )?;
         }
         {
@@ -795,12 +797,12 @@ impl Review {
             Stage::Encounter
                 if story.ep_arrival_active()
                     && story.ep_arrival.ticks().is_some_and(|ticks| {
-                        [30, 70, 150, 180, 217, 222, 250, 290].contains(&ticks)
+                        [10, 20, 30, 40, 57, 61, 78, 110].contains(&ticks)
                     }) =>
             {
                 format!("encounter-ep-arrival-{}.png", story.ep_arrival.ticks()?)
             }
-            Stage::Encounter if story.arrival_active() && story.stage_ticks == 180 => {
+            Stage::Encounter if story.arrival_active() && story.stage_ticks == 570 => {
                 "encounter-arrival-descent.png".into()
             }
             Stage::Encounter if story.stage_ticks == crate::adventure::arrival::ARRIVAL_TICKS => {

@@ -201,6 +201,7 @@ impl Chapter {
         let mut combat = Combat::new();
         combat.player.position = spawn;
         let geometry = world.scene(Scene::Street);
+        combat.set_bounds(geometry.walk_min, geometry.walk_max);
         let detail_x = geometry.poi("driver").expect("validated driver").position.x;
         let initial_camera = ChapterCamera {
             target: Vec2::new(

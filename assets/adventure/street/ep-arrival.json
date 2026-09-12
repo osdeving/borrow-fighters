@@ -1,18 +1,53 @@
 {
   "descent": [
-    {"tick": 0, "feet_y": -30.0, "speed_y": 400.0, "camera_y": 150.0, "zoom": 2.8, "tracking": 1.0, "matte": 1.0},
-    {"tick": 54, "feet_y": 230.0, "speed_y": 50.0, "camera_y": 155.0, "zoom": 2.8, "tracking": 1.0, "matte": 1.0},
-    {"tick": 105, "feet_y": 275.0, "speed_y": 160.0, "camera_y": 220.0, "zoom": 2.35, "tracking": 1.0, "matte": 1.0},
-    {"tick": 180, "feet_y": 452.0, "speed_y": 270.0, "camera_y": 360.0, "zoom": 1.0, "tracking": 0.0, "matte": 0.0},
-    {"tick": 218, "feet_y": 580.0, "speed_y": 420.0, "camera_y": 360.0, "zoom": 1.0, "tracking": 0.0, "matte": 0.0}
+    {
+      "tick": 0,
+      "feet_y": 50.0,
+      "speed_y": 320.0,
+      "camera_y": 150,
+      "zoom": 2.8,
+      "tracking": 1,
+      "matte": 1,
+      "body_scale": 0.22
+    },
+    {
+      "tick": 20,
+      "feet_y": 182.905272,
+      "speed_y": 477.431629,
+      "camera_y": 170,
+      "zoom": 2.8,
+      "tracking": 1,
+      "matte": 1,
+      "body_scale": 0.66
+    },
+    {
+      "tick": 40,
+      "feet_y": 368.287753,
+      "speed_y": 634.863258,
+      "camera_y": 360,
+      "zoom": 1,
+      "tracking": 0,
+      "matte": 0,
+      "body_scale": 1
+    },
+    {
+      "tick": 58,
+      "feet_y": 580.0,
+      "speed_y": 776.551724,
+      "camera_y": 360,
+      "zoom": 1,
+      "tracking": 0,
+      "matte": 0,
+      "body_scale": 1
+    }
   ],
-  "gameplay_tick": 180,
-  "kneel_ticks": 52,
-  "recovery_ticks": 90,
+  "gameplay_tick": 40,
+  "kneel_ticks": 40,
+  "recovery_ticks": 70,
   "airborne_pose": 3,
   "landing_pose": 6,
   "rising_pose": 3,
-  "dust_radius": 148.0,
-  "dust_ticks": 132,
-  "shake_pixels": 5.5
+  "dust_radius": 190.0,
+  "dust_ticks": 108,
+  "shake_pixels": 9.0
 }

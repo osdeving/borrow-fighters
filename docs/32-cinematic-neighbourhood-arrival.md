@@ -22,7 +22,7 @@ Implementado em **`f90a0d1`** e **`6c513e1`**, com revisão visual nativa,
 
 ## Corte e continuidade
 
-A chegada dura cerca de seis segundos, em `Stage::Encounter`, com relógio
+A chegada atual dura dezoito segundos, em `Stage::Encounter`, com relógio
 fixo e ambiente vivo. Durante esse intervalo o combate e os comandos de ação
 não avançam. Retry no checkpoint acordado não repete a chegada; restart da
 história a reproduz. Avançar trecho durante a chegada libera a exploração,
@@ -32,6 +32,23 @@ Câmera aplica uma transformação ao mundo e conserva a interface em tela.
 Enquadramento final coincide exatamente com o início da câmera jogável.
 A rua usa os assets e a composição já aprovados, com moradores/cão/porta
 separados e substituíveis pelo catálogo. Não criar editor, ECS ou pipeline.
+
+Na revisão de 12/09/2026, a rua ampliada ganhou tempo para mostrar sua rotina:
+3,5 s na pipa, descida até o menino e a calçada, observação lenta do trânsito
+e dos moradores junto à mercearia até 13 s. Um fade de um segundo cobre a
+troca para Rust; ele aparece entre 14 e 15 s, e o enquadramento assenta
+gradualmente até entregar controle aos 18 s. A câmera não atravessa os
+três mil pixels entre o bairro e Rust durante uma panorâmica acelerada.
+O ambiente continua no mesmo relógio durante o corte, sem reiniciar carros,
+ciclistas, moradores ou a pipa.
+
+O trilho está em [`arrival-camera.json`](../assets/adventure/street/arrival-camera.json).
+Cada keyframe informa tick, alvo, zoom, barras, opacidade do fade e âncora
+(`hub` ou `gameplay`). A interpolação tem velocidade zero nas junções;
+a troca de âncora exige preto completo nos dois lados. O último ponto
+define tanto a duração quanto a liberação de comandos e precisa coincidir
+com a câmera jogável. Alterações válidas são lidas ao iniciar/reiniciar a
+história, sem regenerar sprites ou recompilar o jogo.
 
 O estado dos moradores deriva do relógio de `AmbientState`. Posições calmas
 são preservadas ao susto; cada pessoa tem tempo suficiente para alcançar
@@ -71,14 +88,18 @@ trânsito ausente na janela posterior à evacuação. Detalhes e limitações na
 A revisão autorizada em 12/09/2026 conserva a introdução da pipa e acrescenta
 outra tomada ao encontro. Quando Rust alcança a ameaça, a câmera busca o céu;
 a EP entra pelo alto, desce e continua no mesmo trajeto enquanto a câmera
-volta ao plano jogável. Aos 180 ticks o enquadramento já é o normal, mas a EP
-ainda está caindo. O contato acontece no tick 218, com joelho e mão no chão,
+volta ao plano jogável. Após revisão do peso da queda, a EP vem pequena e distante,
+cresce na aproximação e acelera continuamente de 320 a 777 px/s. Aos 40 ticks
+o enquadramento já é o normal; os últimos 212 px caem em 18 ticks. O contato
+acontece no tick 58 (0,97 s), com joelho e mão no chão,
 compressão breve, poeira, fragmentos e um tremor curto. **Esse contato causa
 o tumulto:** fuga, buzina, ciclistas e moradores partem do mesmo marco.
 
 O corpo usa poses separadas do atlas da errática: antecipação aérea, apoio
 no chão e recuperação. O cenário permanece reutilizável. A posição usa
-interpolação cúbica com tangentes, sem reiniciar a queda na volta da câmera.
+interpolação cúbica com tangentes balísticas, sem desacelerar para sustentar
+poses no ar. Rastros e linhas de velocidade seguem a derivada real da trajetória,
+sem reiniciar a queda na volta da câmera.
 O controle fica suspenso até terminar a recuperação; a EP não causa dano
 durante a encenação. Pausa congela corpo, câmera, ambiente e efeitos. Enter/RB
 conclui apenas a aterrissagem; um novo avanço pode seguir à apresentação.

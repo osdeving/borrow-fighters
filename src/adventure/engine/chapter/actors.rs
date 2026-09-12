@@ -105,7 +105,7 @@ fn resident(d: &mut impl RaylibDraw, a: &ChapterAssets, chapter: &Chapter, p: Re
         pose.rotation = 0.0;
         a.common
             .street
-            .draw_clipped(d, id, ticks, &pose, world::door());
+            .draw_clipped(d, id, ticks, &pose, world::door(chapter));
     } else if custom {
         a.pieces.draw(d, id, ticks, &pose);
     } else {
@@ -149,6 +149,12 @@ fn rust(d: &mut impl RaylibDraw, a: &ChapterAssets, chapter: &Chapter, debug: bo
         None
     };
     let Some((id, ticks)) = selected else {
+        if chapter.travel_view() != crate::adventure::locomotion::TravelView::Side {
+            a.common
+                .locomotion
+                .draw_crossing(d, actor, chapter.travel_view(), scale);
+            return;
+        }
         actors::rust_scaled(d, &a.common, actor, 0.0, scale);
         return;
     };

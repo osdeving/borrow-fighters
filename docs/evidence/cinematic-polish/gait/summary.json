@@ -1,0 +1,152 @@
+{
+  "frames": 562,
+  "fps": 30,
+  "seconds": 18.733333333333334,
+  "views": {
+    "Side": 402,
+    "Back": 80,
+    "Front": 80
+  },
+  "max_world_displacement_per_frame": 15.166600000000017,
+  "wrong_depth_orientation_frames": 0,
+  "route_transitions": [
+    {
+      "frame": 9,
+      "phase": "DriverApproach",
+      "view": "Side",
+      "x": 3234.4158,
+      "y": 580
+    },
+    {
+      "frame": 16,
+      "phase": "DriverApproach",
+      "view": "Back",
+      "x": 3282.1934,
+      "y": 576.1682
+    },
+    {
+      "frame": 36,
+      "phase": "DriverDialogue",
+      "view": "Side",
+      "x": 3253,
+      "y": 430
+    },
+    {
+      "frame": 128,
+      "phase": "DriverReturn",
+      "view": "Front",
+      "x": 3253.671,
+      "y": 433.6895
+    },
+    {
+      "frame": 148,
+      "phase": "DriverReturn",
+      "view": "Side",
+      "x": 3282.2341,
+      "y": 580
+    },
+    {
+      "frame": 155,
+      "phase": "ExploreShop",
+      "view": "Side",
+      "x": 3233.499,
+      "y": 580
+    },
+    {
+      "frame": 191,
+      "phase": "ShopApproach",
+      "view": "Side",
+      "x": 2716.0876,
+      "y": 580
+    },
+    {
+      "frame": 207,
+      "phase": "ShopApproach",
+      "view": "Back",
+      "x": 2597.9236,
+      "y": 578.0892
+    },
+    {
+      "frame": 237,
+      "phase": "ShopDialogue",
+      "view": "Side",
+      "x": 2596,
+      "y": 355
+    },
+    {
+      "frame": 329,
+      "phase": "ShopReturn",
+      "view": "Front",
+      "x": 2595.8875,
+      "y": 358.74832
+    },
+    {
+      "frame": 359,
+      "phase": "ShopReturn",
+      "view": "Side",
+      "x": 2601.6055,
+      "y": 580
+    },
+    {
+      "frame": 398,
+      "phase": "ExploreNeighbour",
+      "view": "Side",
+      "x": 2717.0044,
+      "y": 580
+    },
+    {
+      "frame": 402,
+      "phase": "NeighbourApproach",
+      "view": "Side",
+      "x": 2749.0876,
+      "y": 580
+    },
+    {
+      "frame": 406,
+      "phase": "NeighbourApproach",
+      "view": "Back",
+      "x": 2772.7566,
+      "y": 573.91724
+    },
+    {
+      "frame": 436,
+      "phase": "NeighbourDialogue",
+      "view": "Side",
+      "x": 2773,
+      "y": 355
+    },
+    {
+      "frame": 527,
+      "phase": "NeighbourReturn",
+      "view": "Side",
+      "x": 2773,
+      "y": 355
+    },
+    {
+      "frame": 528,
+      "phase": "NeighbourReturn",
+      "view": "Front",
+      "x": 2772.6255,
+      "y": 362.49066
+    },
+    {
+      "frame": 558,
+      "phase": "NeighbourReturn",
+      "view": "Side",
+      "x": 2765.7244,
+      "y": 580
+    },
+    {
+      "frame": 561,
+      "phase": "Phone",
+      "view": "Side",
+      "x": 2749.0876,
+      "y": 580
+    }
+  ],
+  "unchanged_run_speed": 455,
+  "thigh_width": 1.28,
+  "shin_width": 1.25,
+  "boot_scale_change": 1.16,
+  "geometry_sha256": "df907e556220b5d18c3c547f89af0804d79b1308555ac538270ab719ef7e9fda"
+}

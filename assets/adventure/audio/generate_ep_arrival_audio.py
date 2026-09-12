@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from array import array
+import json
 import math
 from pathlib import Path
 import random
@@ -25,7 +26,8 @@ def main():
     samples = []
     noise = 0.0
     phase = 0.0
-    duration = 3.63
+    trajectory = json.loads((ROOT.parent / "street/ep-arrival.json").read_text())
+    duration = trajectory["descent"][-1]["tick"] / 60.0
     for i in range(round(duration * RATE)):
         t = i / RATE
         progress = t / duration
@@ -35,6 +37,8 @@ def main():
         envelope = edge * (0.2 + 0.8 * progress ** 2)
         samples.append(envelope * (noise * 0.75 + math.sin(phase) * 0.065))
     write("ep_descent.wav", samples, 0.39)
+    # Independent noise keeps trajectory edits from changing the impact timbre.
+    rng = random.Random(20260913)
     samples = []
     low_noise = 0.0
     phase = 0.0

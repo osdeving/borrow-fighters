@@ -27,7 +27,7 @@
     "encounter.explore": "UMA MANHÃ QUALQUER",
     "encounter.direction": "Siga pela rua  >",
     "encounter.alert": "!",
-    "encounter.controls": "A D / setas  mover     Espaço  pular     J / F  atacar     K / H  forte     Q / L  defender     Esc  pausar",
+    "encounter.controls": "A D  correr   Espaço  pular   J / F  soco   K / H  forte   V / RT  chute   Q / L  defender",
     "aftermath.caption": "Droga, não precisava ser assim.",
     "ending.title": "Ainda há esperança.",
     "ending.caption": "Rust desejava não precisar lutar. Um mundo onde esses erros não acontecessem.",
@@ -39,7 +39,7 @@
     "pause.title": "Um instante.",
     "pause.resume": "Esc / Start / Enter  continuar",
     "pause.exit": "Backspace / B  sair",
-    "pause.controls": "Controle: direcional mover · A pular · X atacar · Y forte · LB defender",
+    "pause.controls": "Controle: direcional correr · A pular · X soco · Y forte · RT chute · LB defender",
     "editor.reloaded": "Conteúdo recarregado.",
     "editor.failed": "Não foi possível recarregar todo o conteúdo. Confira os arquivos editados.",
     "opening.controls": "Enter / A  pular apresentação     Esc / Start  pausar",
@@ -90,12 +90,6 @@
     "opening.duke.before": "Na Avenida Paulista, portas se abrem antes mesmo de Duke sair da limousine.",
     "opening.duke.after": "Na cabeceira da mesa, ele decide o rumo de um império corporativo.",
     "opening.c.before": "O mundo mudou. Old C ainda prefere entender cada byte que atravessa sua máquina.",
-    "opening.c.after": "Entre K&R e livros de ciência da computação, ele confia no que conhece por dentro.",
-    "opening.c.book.kr": "K&R",
-    "opening.c.book.language": "THE C LANGUAGE",
-    "opening.c.book.algorithms": "ALGORITMOS",
-    "opening.c.book.architecture": "ARQUITETURA DE COMPUTADORES",
-    "opening.c.terminal.compile": "$ cc -Wall main.c",
-    "opening.c.terminal.result": "0 warnings. 0 errors."
+    "opening.c.after": "Entre K&R e livros de ciência da computação, ele confia no que conhece por dentro."
   }
 }

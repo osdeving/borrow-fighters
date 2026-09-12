@@ -1,0 +1,61 @@
+{
+  "created_utc": "2026-09-12T09:36:37.163112+00:00",
+  "success": true,
+  "failure": null,
+  "elapsed_seconds": 23.687,
+  "owned_pid": 353490,
+  "owned_window": 8388615,
+  "process_exit_code": 0,
+  "display": ":0",
+  "input_method": "XSendEvent addressed to _NET_WM_PID-owned window",
+  "limitations": "Synthetic window keyboard input; no physical gamepad, focus changes, desktop capture, audio listening or human visual approval.",
+  "checks": [
+    {
+      "name": "starts_with_the_kite_and_a_calm_occupied_street",
+      "passed": true
+    },
+    {
+      "name": "uninterrupted_establishment_preserves_authored_cadence",
+      "passed": true,
+      "observed_seconds": 18.048942310735583,
+      "simulation_seconds": 18.0
+    },
+    {
+      "name": "ordinary_life_continues_while_combat_remains_suspended",
+      "passed": true,
+      "observed_samples": 959
+    },
+    {
+      "name": "handoff_matches_the_exact_gameplay_camera",
+      "passed": true
+    },
+    {
+      "name": "recorded_mp4_has_frames_and_preserves_elapsed_time",
+      "passed": true,
+      "codec": "h264",
+      "width": 1280,
+      "height": 720,
+      "frame_rate": "30/1",
+      "frames": 558,
+      "duration_seconds": 18.6,
+      "telemetry_seconds": 18.633342742919922,
+      "absolute_duration_error": 0.033342742919920454
+    },
+    {
+      "name": "same_binary_and_original_catalog_remain_unchanged",
+      "passed": true,
+      "binary_sha256_before": "0e6c0f1495423d52fc59b53ec737502d82a1fd1d67986477970237daf2331869",
+      "binary_sha256_after": "0e6c0f1495423d52fc59b53ec737502d82a1fd1d67986477970237daf2331869",
+      "original_catalog_sha256_before": "4720ca9a96fb2aa853844b43cfb0e149563413324279e0cbe3c5075980c4cc38",
+      "original_catalog_sha256_after": "4720ca9a96fb2aa853844b43cfb0e149563413324279e0cbe3c5075980c4cc38"
+    }
+  ],
+  "screenshots": [],
+  "telemetry_records": 988,
+  "video": "adventure-silent.mp4",
+  "external_text_catalog": "texts-under-test.json",
+  "x11_errors": [],
+  "review": "slow kite, child and neighbourhood establishment; covered cut to Rust",
+  "native_audio_enabled": false,
+  "audio_capture": "External recorder required; the built-in MP4 contains video only."
+}

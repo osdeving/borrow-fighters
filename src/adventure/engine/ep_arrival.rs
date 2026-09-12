@@ -43,14 +43,34 @@ pub fn body(
     let width = source.width * scale * sample.scale.x;
     let height = source.height * scale * sample.scale.y;
     let flip = actor.facing == Facing::Left;
+    let sprite_source = Rectangle::new(
+        source.x,
+        source.y,
+        if flip { -source.width } else { source.width },
+        source.height,
+    );
+    if sample.impact_age.is_none() {
+        // Two faint samples trail the same fast-moving sprite. Their distance
+        // follows physical velocity, so changing the shot clock cannot float it.
+        for (lag, opacity) in [(0.055, 0.08), (0.028, 0.13)] {
+            d.draw_texture_pro(
+                &assets.erratic,
+                sprite_source,
+                Rectangle::new(
+                    x,
+                    sample.feet_y - sample.speed_y * lag,
+                    width * 0.97,
+                    height * 1.05,
+                ),
+                Vector2::new(width * 0.97 * 0.5, height * 1.05),
+                0.0,
+                tint(Color::new(154, 216, 210, 255), opacity),
+            );
+        }
+    }
     d.draw_texture_pro(
         &assets.erratic,
-        Rectangle::new(
-            source.x,
-            source.y,
-            if flip { -source.width } else { source.width },
-            source.height,
-        ),
+        sprite_source,
         Rectangle::new(x, sample.feet_y, width, height),
         Vector2::new(width * 0.5, height),
         0.0,
@@ -58,19 +78,23 @@ pub fn body(
     );
 
     if sample.impact_age.is_none() {
-        // Small air streaks follow this actor, never the camera or background.
-        let speed = (sample.feet_y / FLOOR_Y).clamp(0.0, 1.0);
-        for i in 0..4 {
+        // Long, directional air streaks make the last fast fall readable even
+        // after the camera has already returned to the wide gameplay framing.
+        let speed = (sample.speed_y / 900.0).clamp(0.0, 1.0);
+        for i in 0..10 {
             let side = if i % 2 == 0 { -1.0 } else { 1.0 };
             let p = Vector2::new(
-                x + side * (32.0 + (i / 2) as f32 * 14.0),
-                sample.feet_y - 95.0 - i as f32 * 12.0,
+                x + side * (width * 0.44 + 8.0 + (i / 2) as f32 * 8.0),
+                sample.feet_y - height * 0.2 - (i % 3) as f32 * 13.0,
             );
             d.draw_line_ex(
                 p,
-                Vector2::new(p.x + side * 7.0, p.y - 12.0 - speed * 26.0),
-                1.4,
-                tint(Color::new(163, 216, 207, 255), 0.08 + speed * 0.2),
+                Vector2::new(p.x + side * 5.0, p.y - 24.0 - speed * 86.0),
+                if i < 4 { 2.0 } else { 1.0 },
+                tint(
+                    Color::new(188, 232, 224, 255),
+                    (0.10 + speed * 0.28) * (1.0 - i as f32 * 0.055),
+                ),
             );
         }
     }
@@ -88,9 +112,21 @@ pub fn impact(d: &mut impl RaylibDraw, arrival: &EpArrival, x: f32) {
         return;
     }
     let t = age as f32 / arrival.spec.dust_ticks as f32;
-    let spread = 1.0 - (1.0 - t).powi(3);
+    let spread = 1.0 - (1.0 - (age as f32 / 25.0).min(1.0)).powi(3);
     let fade = (1.0 - t).powi(2);
     let radius = arrival.spec.dust_radius;
+    if age < 6 {
+        d.draw_ellipse(
+            x as i32,
+            FLOOR_Y as i32 + 2,
+            45.0 + age as f32 * 9.0,
+            8.0 + age as f32,
+            tint(
+                Color::new(235, 215, 177, 255),
+                (1.0 - age as f32 / 6.0) * 0.45,
+            ),
+        );
+    }
     if age < 24 {
         let ring = age as f32 / 24.0;
         d.draw_ellipse_lines(
@@ -127,8 +163,8 @@ pub fn impact(d: &mut impl RaylibDraw, arrival: &EpArrival, x: f32) {
         let f = i as f32;
         let side = if i % 2 == 0 { -1.0 } else { 1.0 };
         let seconds = age as f32 / 60.0;
-        let height = (seconds * (75.0 + f * 5.0) - 150.0 * seconds * seconds).max(0.0);
-        let px = x + side * (10.0 + seconds.min(0.95) * (28.0 + f * 7.0));
+        let height = (seconds * (110.0 + f * 8.0) - 220.0 * seconds * seconds).max(0.0);
+        let px = x + side * (10.0 + seconds.min(0.95) * (46.0 + f * 12.0));
         let py = FLOOR_Y - height;
         d.draw_rectangle_pro(
             Rectangle::new(px, py, 3.0 + (i % 3) as f32, 2.0),

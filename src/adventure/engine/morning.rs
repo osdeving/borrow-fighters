@@ -79,6 +79,7 @@ pub fn draw_morning_character(d: &mut impl RaylibDraw, story: &Story, a: &Assets
     if let Some(([x, y], distance)) = a.locomotion.waking.exit(story.stage_ticks) {
         let mut actor = story.combat.player.clone();
         actor.action = Action::Walk;
+        actor.gait = crate::adventure::locomotion::Gait::Walk;
         actor.position = Vec2::new(x, y);
         actor.facing = Facing::Right;
         let depth = a.locomotion.waking.exit_depth;

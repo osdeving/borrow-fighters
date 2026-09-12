@@ -82,6 +82,27 @@ chão y355; a porta espera os visitantes entrarem e cobre o lojista ao baixar.
 os marcos de latido e fechamento com esse estado puro.
 [Escopo e validação](32-cinematic-neighbourhood-arrival.md).
 
+A [ADR 0029](adr/0029-modular-running-world.md) acrescenta
+`adventure/landscape.rs`, dados do mundo do prólogo e composições por instância,
+e `engine/landscape.rs`, renderização por faixa visível, peças de chão repetidas
+e parallax distante. `Combat::set_bounds` recebe a extensão física de cada
+cena. A corrida em `locomotion/run.rs` usa poses e apoios interpolados por
+distância; não acrescenta uma engine ou ECS.
+[Arquivos editáveis e distâncias](35-modular-running-world.md).
+
+A [ADR 0031](adr/0031-continuous-run-leg-mesh.md) substitui os recortes
+sobrepostos de coxa/canela por tecido contínuo. `locomotion/mesh.rs` calcula
+vértices, pesos e correção de volume sem Raylib; `engine/locomotion.rs` aplica
+as poses e `engine/pieces.rs` desenha os triângulos texturizados. Botas e braços
+continuam rígidos. JSONs separam landmarks, proporções e alvos da arte.
+[Pesquisa e protocolo visual](37-run-cycle-rebuild.md).
+
+A [ADR 0030](adr/0030-painted-biography-shots.md) preserva os trilhos e textos
+externos das biografias, usando uma pintura completa por tomada de Duke/Old C
+para garantir perspectiva e iluminação coerentes. O mundo jogável mantém as
+peças independentes. O trilho inicial da pipa também é externo e seu corte
+entre vizinhança e Rust ocorre somente sob preto completo.
+
 ## Objetivo
 
 A [ADR 0028](adr/0028-editable-cinematic-tracks-and-destructibles.md) amplia

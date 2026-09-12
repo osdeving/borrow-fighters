@@ -1,0 +1,16 @@
+{
+  "binary_sha256": "9157ae3cd1efe68dcd354ab9dbdfbac301917a8a0c9a522536df4e995939a69b",
+  "world_sha256": "df907e556220b5d18c3c547f89af0804d79b1308555ac538270ab719ef7e9fda",
+  "started_utc": "2026-09-12T08:55:01.853185+00:00",
+  "command": [
+    "/tmp/borrow-modular-chapter-final/borrow-adventure-review",
+    "--start",
+    "chapter",
+    "--review",
+    "/tmp/borrow-modular-chapter-final/capture",
+    "--frames",
+    "10000",
+    "--hidden",
+    "--mute"
+  ]
+}

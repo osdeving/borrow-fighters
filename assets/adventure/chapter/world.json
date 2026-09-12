@@ -3,38 +3,38 @@
   "scenes": [
     {
       "id": "street",
-      "width": 1728,
+      "width": 4608,
       "floor_y": 580,
       "walk_min": 40,
-      "walk_max": 1688,
+      "walk_max": 4568,
       "spawn": {
-        "x": 1070,
+        "x": 3118,
         "y": 580
       },
       "points": [
         {
           "id": "driver",
           "position": {
-            "x": 1290,
+            "x": 3338,
             "y": 430
           },
           "region": {
-            "x": 1180,
+            "x": 3228,
             "y": 550,
             "width": 170,
             "height": 45
           },
           "path": [
             {
-              "x": 1235,
+              "x": 3283,
               "y": 580
             },
             {
-              "x": 1215,
+              "x": 3263,
               "y": 485
             },
             {
-              "x": 1205,
+              "x": 3253,
               "y": 430
             }
           ]
@@ -42,26 +42,26 @@
         {
           "id": "shop",
           "position": {
-            "x": 603,
+            "x": 2651,
             "y": 355
           },
           "region": {
-            "x": 525,
+            "x": 2573,
             "y": 550,
             "width": 150,
             "height": 45
           },
           "path": [
             {
-              "x": 550,
+              "x": 2598,
               "y": 580
             },
             {
-              "x": 545,
+              "x": 2593,
               "y": 455
             },
             {
-              "x": 548,
+              "x": 2596,
               "y": 355
             }
           ]
@@ -69,26 +69,26 @@
         {
           "id": "neighbour",
           "position": {
-            "x": 780,
+            "x": 2828,
             "y": 355
           },
           "region": {
-            "x": 700,
+            "x": 2748,
             "y": 550,
             "width": 160,
             "height": 45
           },
           "path": [
             {
-              "x": 725,
+              "x": 2773,
               "y": 580
             },
             {
-              "x": 720,
+              "x": 2768,
               "y": 455
             },
             {
-              "x": 725,
+              "x": 2773,
               "y": 355
             }
           ]
@@ -96,7 +96,7 @@
       ],
       "obstacles": [],
       "exit": {
-        "x": 1630,
+        "x": 4458,
         "y": 545,
         "width": 80,
         "height": 55
@@ -104,10 +104,10 @@
     },
     {
       "id": "lane",
-      "width": 1800,
+      "width": 4096,
       "floor_y": 580,
       "walk_min": 40,
-      "walk_max": 1760,
+      "walk_max": 4056,
       "spawn": {
         "x": 100,
         "y": 580
@@ -116,18 +116,18 @@
         {
           "id": "lane_resident",
           "position": {
-            "x": 1200,
+            "x": 2800,
             "y": 580
           },
           "region": {
-            "x": 1100,
+            "x": 2700,
             "y": 545,
             "width": 175,
             "height": 50
           },
           "path": [
             {
-              "x": 1100,
+              "x": 2700,
               "y": 580
             }
           ]
@@ -135,7 +135,7 @@
       ],
       "obstacles": [],
       "exit": {
-        "x": 1650,
+        "x": 3946,
         "y": 545,
         "width": 120,
         "height": 55
@@ -146,7 +146,7 @@
           "piece": "prop.crate",
           "fragment": "prop.crate_fragment",
           "region": {
-            "x": 700,
+            "x": 2100,
             "y": 528,
             "width": 108,
             "height": 52
@@ -159,7 +159,7 @@
           "piece": "prop.crate_teal",
           "fragment": "prop.crate_fragment",
           "region": {
-            "x": 700,
+            "x": 2100,
             "y": 476,
             "width": 108,
             "height": 52
@@ -172,7 +172,7 @@
           "piece": "prop.crate",
           "fragment": "prop.crate_fragment",
           "region": {
-            "x": 700,
+            "x": 2100,
             "y": 424,
             "width": 108,
             "height": 52
@@ -185,7 +185,7 @@
           "piece": "prop.crate_teal",
           "fragment": "prop.crate_fragment",
           "region": {
-            "x": 816,
+            "x": 2216,
             "y": 528,
             "width": 108,
             "height": 52
@@ -198,7 +198,7 @@
           "piece": "prop.crate",
           "fragment": "prop.crate_fragment",
           "region": {
-            "x": 816,
+            "x": 2216,
             "y": 476,
             "width": 108,
             "height": 52
@@ -211,7 +211,7 @@
           "piece": "prop.crate",
           "fragment": "prop.crate_fragment",
           "region": {
-            "x": 816,
+            "x": 2216,
             "y": 424,
             "width": 108,
             "height": 52
@@ -224,7 +224,7 @@
           "piece": "prop.crate",
           "fragment": "prop.crate_fragment",
           "region": {
-            "x": 932,
+            "x": 2332,
             "y": 528,
             "width": 108,
             "height": 52
@@ -237,7 +237,7 @@
           "piece": "prop.crate_teal",
           "fragment": "prop.crate_fragment",
           "region": {
-            "x": 932,
+            "x": 2332,
             "y": 476,
             "width": 108,
             "height": 52
@@ -250,7 +250,7 @@
           "piece": "prop.crate",
           "fragment": "prop.crate_fragment",
           "region": {
-            "x": 932,
+            "x": 2332,
             "y": 424,
             "width": 108,
             "height": 52
@@ -264,7 +264,7 @@
           "id": "scatter.0",
           "piece": "prop.loose_board",
           "position": {
-            "x": 657,
+            "x": 2057,
             "y": 586
           },
           "scale": 0.7,
@@ -274,7 +274,7 @@
           "id": "scatter.1",
           "piece": "prop.crate_fragment",
           "position": {
-            "x": 728,
+            "x": 2128,
             "y": 593
           },
           "scale": 0.8,
@@ -284,7 +284,7 @@
           "id": "scatter.2",
           "piece": "prop.loose_board",
           "position": {
-            "x": 815,
+            "x": 2215,
             "y": 594
           },
           "scale": 1,
@@ -294,7 +294,7 @@
           "id": "scatter.3",
           "piece": "prop.crate_fragment",
           "position": {
-            "x": 931,
+            "x": 2331,
             "y": 590
           },
           "scale": 0.8,
@@ -304,7 +304,7 @@
           "id": "scatter.4",
           "piece": "prop.loose_board",
           "position": {
-            "x": 1012,
+            "x": 2412,
             "y": 591
           },
           "scale": 0.74,
@@ -314,7 +314,7 @@
           "id": "scatter.5",
           "piece": "prop.crate_fragment",
           "position": {
-            "x": 1090,
+            "x": 2490,
             "y": 585
           },
           "scale": 0.76,
@@ -324,10 +324,10 @@
     },
     {
       "id": "passage",
-      "width": 1800,
+      "width": 3840,
       "floor_y": 580,
       "walk_min": 40,
-      "walk_max": 1760,
+      "walk_max": 3800,
       "spawn": {
         "x": 240,
         "y": 580
@@ -336,11 +336,11 @@
         {
           "id": "enemy",
           "position": {
-            "x": 1050,
+            "x": 2650,
             "y": 580
           },
           "region": {
-            "x": 580,
+            "x": 2180,
             "y": 300,
             "width": 160,
             "height": 300
@@ -350,7 +350,7 @@
       ],
       "obstacles": [],
       "exit": {
-        "x": 1650,
+        "x": 3690,
         "y": 545,
         "width": 120,
         "height": 55
@@ -359,7 +359,7 @@
         {
           "id": "erratic.front",
           "position": {
-            "x": 1030,
+            "x": 2630,
             "y": 580
           },
           "tuning": {
@@ -373,7 +373,7 @@
         {
           "id": "erratic.rear",
           "position": {
-            "x": 1260,
+            "x": 2860,
             "y": 580
           },
           "tuning": {

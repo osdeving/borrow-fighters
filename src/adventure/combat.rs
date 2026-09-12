@@ -3,6 +3,7 @@
 //! System: Adventure domain. Movement, contact, enemy intent and defeat belong
 //! here; this module has no dependency on arena fighting rules or rendering.
 
+use super::locomotion::Gait;
 use crate::math::{rect::Rect, vec2::Vec2};
 
 /// Simulation updates per second, independent from display frame rate.
@@ -17,7 +18,8 @@ pub const ENCOUNTER_TRIGGER_X: f32 = 1100.0;
 pub const TELEGRAPH_TICKS: u32 = 32;
 
 const DT: f32 = 1.0 / TICKS_PER_SECOND as f32;
-const PLAYER_SPEED: f32 = 285.0;
+/// Default player traversal speed; authored approaches keep their own deliberate pace.
+pub const PLAYER_RUN_SPEED: f32 = 455.0;
 const GRAVITY: f32 = 1700.0;
 
 /// Actor identity used by animation and contact feedback.
@@ -117,6 +119,8 @@ pub struct Actor {
     pub action_ticks: u32,
     /// Ground travel at reference body scale; authored depth paths normalize each step.
     pub stride_distance: f32,
+    /// Explicit authored walk or player-controlled run intent.
+    pub gait: Gait,
     /// Whether the feet are touching the floor.
     pub grounded: bool,
     hit_registered: bool,
@@ -138,6 +142,7 @@ impl Actor {
             action: Action::Idle,
             action_ticks: 0,
             stride_distance: 0.0,
+            gait: Gait::Walk,
             grounded: true,
             hit_registered: false,
             invulnerable_ticks: 0,
@@ -161,6 +166,14 @@ impl Actor {
             width,
             height,
         )
+    }
+
+    /// Begins another gait at a grounded contact without reusing the old stride's phase.
+    pub fn set_gait(&mut self, gait: Gait) {
+        if self.gait != gait {
+            self.gait = gait;
+            self.stride_distance = 0.0;
+        }
     }
 
     /// Returns the active melee volume; a resolved strike cannot hit again.
@@ -298,6 +311,8 @@ pub struct HitFeedback {
 /// Self-contained exploration and melee encounter state.
 #[derive(Clone, Debug)]
 pub struct Combat {
+    /// Reachable horizontal feet interval supplied by the owning map.
+    pub bounds: [f32; 2],
     /// Rust's physical and animation state.
     pub player: Actor,
     /// The erratic entity's physical and animation state.
@@ -324,6 +339,7 @@ impl Combat {
     /// Starts the explorable morning stretch before the creature notices Rust.
     pub fn new() -> Self {
         Self {
+            bounds: [40.0, LEVEL_WIDTH - 40.0],
             player: Actor::new(ActorKind::Player, 340.0, Facing::Right),
             enemy: Actor::new(ActorKind::Erratic, 1500.0, Facing::Left),
             extra_enemies: Vec::new(),
@@ -332,6 +348,12 @@ impl Combat {
             ticks: 0,
             last_hit: None,
         }
+    }
+
+    /// Applies validated scene limits without tying physics to the viewport.
+    pub fn set_bounds(&mut self, min: f32, max: f32) {
+        assert!(min.is_finite() && max.is_finite() && min < max);
+        self.bounds = [min, max];
     }
 
     /// Replaces the encounter roster while preserving Rust's current state.
@@ -374,9 +396,10 @@ impl Combat {
     pub fn tick_exploration(&mut self, input: CombatInput) {
         self.tick_clocks();
         self.update_player(input);
-        integrate(&mut self.player);
+        integrate(&mut self.player, self.bounds);
+        let bounds = self.bounds;
         for enemy in self.enemies_mut().filter(|enemy| enemy.hp == 0) {
-            integrate(enemy);
+            integrate(enemy, bounds);
         }
     }
 
@@ -386,7 +409,7 @@ impl Combat {
             // The loss is final, but Rust's fall and defeat animation still play.
             // Neither input nor the enemy can produce further combat contacts.
             self.tick_clocks();
-            integrate(&mut self.player);
+            integrate(&mut self.player, self.bounds);
             return;
         }
         if self.outcome != Outcome::Ongoing {
@@ -401,11 +424,12 @@ impl Combat {
         for enemy in &mut self.extra_enemies {
             update_enemy(enemy, self.player.position, self.enemy_awake);
         }
-        integrate(&mut self.player);
-        integrate(&mut self.enemy);
+        integrate(&mut self.player, self.bounds);
+        integrate(&mut self.enemy, self.bounds);
         separate_bodies(&mut self.player, &mut self.enemy);
+        let bounds = self.bounds;
         for enemy in &mut self.extra_enemies {
-            integrate(enemy);
+            integrate(enemy, bounds);
             separate_bodies(&mut self.player, enemy);
         }
         // Keep the two silhouettes distinct while both approach on the same side.
@@ -430,6 +454,11 @@ impl Combat {
                 self.last_hit = Some(hit);
             }
         }
+        self.player.position.x = self.player.position.x.clamp(self.bounds[0], self.bounds[1]);
+        let bounds = self.bounds;
+        for enemy in self.enemies_mut() {
+            enemy.position.x = enemy.position.x.clamp(bounds[0], bounds[1]);
+        }
         if self.player.hp == 0 {
             self.outcome = Outcome::Defeat;
         } else if self.enemies().all(|enemy| enemy.hp == 0) {
@@ -445,6 +474,7 @@ impl Combat {
         self.tick_clocks();
         let distance = self.enemy.position.x - self.player.position.x;
         if self.player.action != Action::Remorse && distance.abs() > 102.0 {
+            self.player.set_gait(Gait::Walk);
             self.player.facing = facing_towards(distance);
             self.player.enter(Action::Walk);
             self.player.velocity.x = distance.signum() * 100.0;
@@ -453,8 +483,8 @@ impl Combat {
             self.player.enter(Action::Remorse);
             self.player.velocity.x = 0.0;
         }
-        integrate(&mut self.player);
-        integrate(&mut self.enemy);
+        integrate(&mut self.player, self.bounds);
+        integrate(&mut self.enemy, self.bounds);
     }
 
     fn tick_clocks(&mut self) {
@@ -508,10 +538,23 @@ impl Combat {
             self.player.velocity.y = -640.0;
             self.player.grounded = false;
         }
-        let desired = movement * PLAYER_SPEED;
-        let acceleration = if self.player.grounded { 2400.0 } else { 1600.0 };
+        self.player.set_gait(Gait::Run);
+        let desired = movement * PLAYER_RUN_SPEED;
+        let braking = movement.abs() <= 0.05 || desired * self.player.velocity.x < 0.0;
+        let acceleration = if !self.player.grounded {
+            1900.0
+        } else if braking {
+            3800.0
+        } else {
+            3300.0
+        };
         self.player.velocity.x +=
             (desired - self.player.velocity.x).clamp(-acceleration * DT, acceleration * DT);
+        // During a reversal the planted boot still follows actual travel until
+        // braking reaches zero; turning on input would drag that support.
+        if self.player.velocity.x.abs() > 8.0 {
+            self.player.facing = facing_towards(self.player.velocity.x);
+        }
         self.player.enter(if !self.player.grounded {
             Action::Jump
         } else if self.player.velocity.x.abs() > 8.0 {
@@ -571,8 +614,8 @@ fn separate_bodies(player: &mut Actor, enemy: &mut Actor) {
     let spacing = (player.hurtbox().width + enemy.hurtbox().width) * 0.5;
     let push = (spacing - distance.abs()).max(0.0) * 0.5;
     let direction = if distance >= 0.0 { 1.0 } else { -1.0 };
-    player.position.x = (player.position.x - direction * push).clamp(32.0, LEVEL_WIDTH - 32.0);
-    enemy.position.x = (enemy.position.x + direction * push).clamp(40.0, LEVEL_WIDTH - 40.0);
+    player.position.x -= direction * push;
+    enemy.position.x += direction * push;
 }
 fn facing_towards(distance: f32) -> Facing {
     if distance < 0.0 {
@@ -582,9 +625,9 @@ fn facing_towards(distance: f32) -> Facing {
     }
 }
 
-fn integrate(actor: &mut Actor) {
+fn integrate(actor: &mut Actor, bounds: [f32; 2]) {
     let previous_x = actor.position.x;
-    actor.position.x = (actor.position.x + actor.velocity.x * DT).clamp(40.0, LEVEL_WIDTH - 40.0);
+    actor.position.x = (actor.position.x + actor.velocity.x * DT).clamp(bounds[0], bounds[1]);
     if actor.grounded && actor.action == Action::Walk {
         actor.stride_distance += (actor.position.x - previous_x).abs();
     }
@@ -651,6 +694,57 @@ fn contact(attacker: &mut Actor, target: &mut Actor) -> Option<HitFeedback> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn default_run_accelerates_brakes_and_reverses_without_dragging_a_backwards_boot() {
+        let mut combat = Combat::new();
+        combat.player.position.x = 500.0;
+        let right = CombatInput {
+            movement: 1.0,
+            ..Default::default()
+        };
+        for _ in 0..9 {
+            combat.tick_exploration(right);
+        }
+        assert_eq!(combat.player.gait, Gait::Run);
+        assert_eq!(combat.player.velocity.x, PLAYER_RUN_SPEED);
+        let brake_at = combat.player.position.x;
+        for _ in 0..8 {
+            combat.tick_exploration(CombatInput::default());
+        }
+        assert_eq!(combat.player.action, Action::Idle);
+        assert_eq!(combat.player.velocity.x, 0.0);
+        assert!(combat.player.position.x - brake_at < 30.0);
+        for _ in 0..9 {
+            combat.tick_exploration(right);
+        }
+        for _ in 0..16 {
+            combat.tick_exploration(CombatInput {
+                movement: -1.0,
+                ..Default::default()
+            });
+            if combat.player.velocity.x.abs() > 8.0 {
+                assert_eq!(
+                    combat.player.facing.sign(),
+                    combat.player.velocity.x.signum()
+                );
+            }
+        }
+        assert_eq!(combat.player.velocity.x, -PLAYER_RUN_SPEED);
+    }
+
+    #[test]
+    fn changing_gait_starts_on_a_contact_but_repeated_intent_preserves_distance() {
+        let mut player = Actor::new(ActorKind::Player, 500.0, Facing::Right);
+        player.stride_distance = 52.0;
+        player.set_gait(Gait::Run);
+        assert_eq!(player.stride_distance, 0.0);
+        player.stride_distance = 93.0;
+        player.set_gait(Gait::Run);
+        assert_eq!(player.stride_distance, 93.0);
+        player.set_gait(Gait::Walk);
+        assert_eq!(player.stride_distance, 0.0);
+    }
 
     fn ready_strike(facing: Facing, target_x: f32) -> (Actor, Actor) {
         let mut player = Actor::new(ActorKind::Player, 500.0, facing);

@@ -5,7 +5,7 @@
 
 use super::phone::*;
 use super::*;
-use crate::adventure::combat::{Action, Outcome};
+use crate::adventure::combat::{Action, Outcome, PLAYER_RUN_SPEED};
 
 fn fresh() -> Chapter {
     Chapter::new(World::bundled(), false)
@@ -30,6 +30,27 @@ fn until(chapter: &mut Chapter, phase: Phase, limit: usize) {
     }
     assert_eq!(chapter.phase, phase);
 }
+fn interaction_x(chapter: &Chapter, id: &str) -> f32 {
+    chapter
+        .world
+        .scene(chapter.scene)
+        .poi(id)
+        .unwrap()
+        .region
+        .rect()
+        .center_x()
+}
+fn travel_ticks(chapter: &Chapter, x: f32) -> usize {
+    ((x - chapter.player().position.x).abs() / PLAYER_RUN_SPEED * 60.0).ceil() as usize + 120
+}
+fn pile_front(chapter: &Chapter) -> f32 {
+    chapter
+        .debris
+        .iter()
+        .map(|piece| piece.rect().x)
+        .min_by(f32::total_cmp)
+        .unwrap()
+}
 fn walk_to(chapter: &mut Chapter, x: f32) {
     for _ in 0..1500 {
         let distance = x - chapter.player().position.x;
@@ -47,8 +68,10 @@ fn walk_to(chapter: &mut Chapter, x: f32) {
         chapter.player().position
     );
 }
-fn talk(chapter: &mut Chapter, x: f32, dialogue: Phase, next: Phase) {
+fn talk(chapter: &mut Chapter, id: &str, dialogue: Phase, next: Phase) {
+    let x = interaction_x(chapter, id);
     walk_to(chapter, x);
+    assert_eq!(chapter.nearby_interaction().map(|point| point.id), Some(id));
     let origin = chapter.player().position;
     chapter.tick(ChapterInput {
         interact: true,
@@ -146,7 +169,8 @@ fn introduction_blocks_input_and_camera_hands_off_inside_the_world() {
 #[test]
 fn conversations_require_their_regions_and_return_continuously_to_control() {
     let mut chapter = resumed(CheckpointStage::StreetStart);
-    walk_to(&mut chapter, 600.0);
+    let shop_x = interaction_x(&chapter, "shop");
+    walk_to(&mut chapter, shop_x);
     chapter.tick(ChapterInput {
         interact: true,
         ..Default::default()
@@ -158,19 +182,24 @@ fn conversations_require_their_regions_and_return_continuously_to_control() {
     );
     talk(
         &mut chapter,
-        1250.0,
+        "driver",
         Phase::DriverDialogue,
         Phase::ExploreShop,
     );
     assert_eq!(chapter.checkpoint().stage, CheckpointStage::DriverChecked);
     talk(
         &mut chapter,
-        580.0,
+        "shop",
         Phase::ShopDialogue,
         Phase::ExploreNeighbour,
     );
     assert_eq!(chapter.shutter_progress(), 1.0);
-    talk(&mut chapter, 760.0, Phase::NeighbourDialogue, Phase::Phone);
+    talk(
+        &mut chapter,
+        "neighbour",
+        Phase::NeighbourDialogue,
+        Phase::Phone,
+    );
     assert_eq!(chapter.checkpoint().stage, CheckpointStage::ContactReady);
 }
 
@@ -266,13 +295,14 @@ fn skip_and_saved_boundaries_do_not_fabricate_victories_or_half_pocketed_phones(
 #[test]
 fn lane_pile_requires_repeated_real_hits_and_then_opens_the_route() {
     let mut chapter = resumed(CheckpointStage::LaneStart);
-    for _ in 0..220 {
+    let blocked_x = pile_front(&chapter) - chapter.player().hurtbox().width * 0.5;
+    for _ in 0..travel_ticks(&chapter, blocked_x) {
         chapter.tick(ChapterInput {
             movement: 1.0,
             ..Default::default()
         });
     }
-    assert_eq!(chapter.player().position.x, 670.0);
+    assert_eq!(chapter.player().position.x, blocked_x);
     assert_eq!(chapter.player().position.y, 580.0);
     let planted_stride = chapter.player().stride_distance;
     for _ in 0..90 {
@@ -298,7 +328,7 @@ fn lane_pile_requires_repeated_real_hits_and_then_opens_the_route() {
             ..Default::default()
         });
     }
-    assert!(chapter.player().position.x <= 680.01);
+    assert!(chapter.player().position.x <= blocked_x + 10.01);
     assert!(chapter.debris.iter().all(|p| p.hp == p.spec.hp));
     for tick in 0..400u32 {
         chapter.tick(ChapterInput {
@@ -308,10 +338,10 @@ fn lane_pile_requires_repeated_real_hits_and_then_opens_the_route() {
         });
     }
     assert!(
-        chapter.player().position.x <= 670.01,
+        chapter.player().position.x <= blocked_x + 0.01,
         "repeated jumps cannot climb phantom ledges"
     );
-    walk_to(&mut chapter, 630.0);
+    walk_to(&mut chapter, blocked_x - 40.0);
     for _ in 0..60 {
         chapter.tick(ChapterInput::default());
     }
@@ -346,7 +376,8 @@ fn lane_pile_requires_repeated_real_hits_and_then_opens_the_route() {
             .collect::<Vec<_>>()
     );
     assert!(hits >= 12, "the pile must take several distinct strikes");
-    walk_to(&mut chapter, 1160.0);
+    let resident_x = interaction_x(&chapter, "lane_resident");
+    walk_to(&mut chapter, resident_x);
     chapter.tick(ChapterInput {
         interact: true,
         ..Default::default()
@@ -377,7 +408,8 @@ fn lane_pile_requires_repeated_real_hits_and_then_opens_the_route() {
         });
     }
     assert_eq!(chapter.phase, Phase::LaneExit);
-    for _ in 0..200 {
+    let exit_x = chapter.world.scene(Scene::Lane).exit.rect().center_x();
+    for _ in 0..travel_ticks(&chapter, exit_x) {
         if chapter.scene == Scene::Passage {
             break;
         }
@@ -392,7 +424,8 @@ fn lane_pile_requires_repeated_real_hits_and_then_opens_the_route() {
 #[test]
 fn passage_loss_retry_and_clear_depend_on_played_contact() {
     let mut chapter = resumed(CheckpointStage::PassageStart);
-    for _ in 0..150 {
+    let threat_x = interaction_x(&chapter, "enemy");
+    for _ in 0..travel_ticks(&chapter, threat_x) {
         if chapter.phase == Phase::PassageCombat {
             break;
         }
@@ -490,7 +523,8 @@ fn passage_loss_retry_and_clear_depend_on_played_contact() {
 #[test]
 fn destroyed_crates_settle_their_supports_and_do_not_take_repeated_swing_damage() {
     let mut chapter = resumed(CheckpointStage::LaneStart);
-    chapter.combat.player.position.x = 670.0;
+    chapter.combat.player.position.x =
+        pile_front(&chapter) - chapter.player().hurtbox().width * 0.5;
     chapter.tick(ChapterInput {
         kick: true,
         ..Default::default()

@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "pieces": {
+    "house.cream": {
+      "width": 320,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "world/house-cream.png",
+          "source": [
+            0,
+            0,
+            510,
+            385
+          ],
+          "anchor": [
+            255.0,
+            385
+          ]
+        }
+      ]
+    },
+    "house.balcony": {
+      "width": 320,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "world/house-balcony.png",
+          "source": [
+            0,
+            0,
+            443,
+            494
+          ],
+          "anchor": [
+            221.5,
+            494
+          ]
+        }
+      ]
+    },
+    "shop.restaurant": {
+      "width": 320,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "world/shop-restaurant.png",
+          "source": [
+            0,
+            0,
+            503,
+            407
+          ],
+          "anchor": [
+            251.5,
+            407
+          ]
+        }
+      ]
+    },
+    "house.teal": {
+      "width": 320,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "world/house-teal.png",
+          "source": [
+            0,
+            0,
+            486,
+            375
+          ],
+          "anchor": [
+            243.0,
+            375
+          ]
+        }
+      ]
+    },
+    "wall.gate": {
+      "width": 320,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "world/wall-gate.png",
+          "source": [
+            0,
+            0,
+            493,
+            353
+          ],
+          "anchor": [
+            246.5,
+            353
+          ]
+        }
+      ]
+    },
+    "shop.cafe": {
+      "width": 320,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "world/shop-cafe.png",
+          "source": [
+            0,
+            0,
+            478,
+            406
+          ],
+          "anchor": [
+            239.0,
+            406
+          ]
+        }
+      ]
+    },
+    "wall.pillar": {
+      "width": 42,
+      "frame_ticks": 1,
+      "frames": [
+        {
+          "image": "world/boundary-pillar.png",
+          "source": [
+            420,
+            98,
+            220,
+            1304
+          ],
+          "anchor": [
+            110,
+            1304
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "mode": "native hidden Raylib window, X11 keyboard inputs, muted",
+  "world_width": 4608,
+  "player_spawn": 160.0,
+  "arrival_player_x": 3150.49267578125,
+  "ep_x": 3548.0,
+  "first_ep_seconds": 6.80403470993042,
+  "impact_seconds": 7.828763008117676,
+  "speed_px_s": 455,
+  "ep_ticks": 58,
+  "preview_seconds": 10.526309967041016,
+  "preview_checks_passed": 3,
+  "complete_keyboard_checks_passed": 11
+}

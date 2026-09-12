@@ -1,6 +1,10 @@
 {
   "version": 1,
   "stride_pixels": 128,
+  "run_stride_pixels": 272,
   "walk_clip": "rust.walk",
-  "kick_clip": "rust.kick"
+  "run_clip": "rust.run",
+  "kick_clip": "rust.kick",
+  "back_walk_clip": "rust.walk.back",
+  "front_walk_clip": "rust.walk.front"
 }

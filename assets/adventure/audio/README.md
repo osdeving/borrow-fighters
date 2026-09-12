@@ -4,7 +4,7 @@ Sons procedurais criados para a abertura de Rust em 10 de setembro de 2026.
 Não contêm samples externos, música licenciada nem locução. A autoria técnica
 está no gerador determinístico [`generate_audio.py`](generate_audio.py), que usa
 somente a biblioteca padrão do Python: senoides, envelopes, ruído com seed fixa
-e exportação `wave`. A apresentação musical de 64 segundos tem gerador próprio,
+e exportação `wave`. A apresentação musical de 60 segundos tem gerador próprio,
 [`generate_opening_audio.py`](generate_opening_audio.py), sem alterar o gerador
 ou os oito WAVs anteriores. Os três efeitos de trânsito têm gerador separado,
 [`generate_traffic_audio.py`](generate_traffic_audio.py), também com síntese
@@ -26,7 +26,7 @@ do repositório.
 | `street_air.wav` | Ar contínuo da rua, inclusive durante o combate; sem motores | 20 s, loop |
 | `street_traffic.wav` | Motores distantes e pneus em passagens espaçadas, sem buzinas | 20 s, loop independente |
 | `remorse.wav` | Notas descendentes suaves durante o gesto de pesar | 12 s, loop |
-| `opening.wav` | Notícias, C++, Python, Duke, Old C, Rust e chegada musical do logo | 64 s, sem loop |
+| `opening.wav` | Notícias, C++, Python, Duke, Old C e chegada musical do logo | 60 s, sem loop |
 | `strike.wav` | Contato de Rust com a criatura | 0,22 s |
 | `block.wav` | Defesa frontal bem-sucedida | 0,28 s |
 | `hurt.wav` | Rust atingido | 0,36 s |
@@ -39,7 +39,7 @@ do repositório.
 | `dog_alert.wav` | Um latido curto do caramelo ao perceber a EP | 0,30 s |
 | `shutter_roll.wav` | Chapa corrugada descendo pelos trilhos | 1,00 s |
 | `shutter_clack.wav` | Contato final da porta com o piso | 0,36 s |
-| `ep_descent.wav` | Ar crescente durante a aproximação aérea da EP | 3,63 s |
+| `ep_descent.wav` | Ar crescente durante a aproximação rápida da EP | 0,97 s |
 | `ep_impact.wav` | Contato grave com o chão, quebra e fragmentos | 1,75 s |
 
 Os WAVs usam PCM mono de 16 bits a 22.050 Hz, com envelopes nas extremidades e
@@ -78,11 +78,12 @@ documentam o sinal, sem substituir julgamento humano do timbre e do equilíbrio.
 `opening.wav` é uma composição original a 120 BPM, com baixo pulsado,
 percussão sintetizada, arpejos, melodias próprias e crescimento de intensidade.
 Os trechos acompanham o relógio de `Stage::Opening`: notícias de 0–9 s, C++ de
-9–19 s, Python de 19–29 s, Duke de 29–41 s, Old C de 41–53 s e Rust de 53–57 s.
+9–19 s, Python de 19–29 s, Duke de 29–41 s e Old C de 41–53 s.
 Duke usa pulso grave e frase contida; Old C recebe arpejos mais discretos e
-respostas de sino no registro baixo. Rust retoma o crescimento. Aos **57 s**,
+respostas de sino no registro baixo. A seção musical do antigo cartão solo de
+Rust foi retirada. Uma passagem curta conduz diretamente ao logo aos **53 s**;
 um ataque forte e a chegada em ré maior conduzem ao logo e à resolução até
-64 s. A faixa toca uma vez, exclusivamente nessa etapa; pausar preserva sua
+60 s. A faixa toca uma vez, exclusivamente nessa etapa; pausar preserva sua
 fase, inclusive o alinhamento com o logo. A intensidade e a resolução musical
 devem ser avaliadas por audição humana junto à montagem.
 
@@ -125,7 +126,8 @@ Dispositivo de áudio ou WAV ausente não impede a aventura. Este conjunto não
 depende dos manifestos, sons ou músicas do protótipo de luta.
 
 A chegada aérea da EP usa [`generate_ep_arrival_audio.py`](generate_ep_arrival_audio.py),
-original e determinístico. O ar começa no primeiro tick da tomada; o impacto
+original e determinístico. A duração do ar é lida da trajetória, correspondendo
+aos 58 ticks atuais da queda rápida. O ar começa no primeiro tick da tomada; o impacto
 segue o último ponto da trajetória em `street/ep-arrival.json`, no mesmo tick
 que inicia a evacuação. O observador detecta o cruzamento mesmo quando vários
 updates ocorrem entre imagens e toca cada cue uma vez. Pausa suspende os sons,

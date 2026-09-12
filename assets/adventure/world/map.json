@@ -1,0 +1,790 @@
+{
+  "version": 1,
+  "prologue": {
+    "width": 4608,
+    "bounds": [
+      40,
+      4568
+    ],
+    "spawn_x": 160,
+    "arrival_x": 3148,
+    "enemy_x": 3548
+  },
+  "scenes": [
+    {
+      "id": "street",
+      "hub_origin": 2048,
+      "instances": [
+        {
+          "id": "joint.0",
+          "piece": "wall.pillar",
+          "position": [
+            0,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.1",
+          "piece": "wall.pillar",
+          "position": [
+            320,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.2",
+          "piece": "wall.pillar",
+          "position": [
+            640,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.3",
+          "piece": "wall.pillar",
+          "position": [
+            960,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.4",
+          "piece": "wall.pillar",
+          "position": [
+            1280,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.5",
+          "piece": "wall.pillar",
+          "position": [
+            1600,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.6",
+          "piece": "wall.pillar",
+          "position": [
+            1920,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.7",
+          "piece": "wall.pillar",
+          "position": [
+            2240,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.8",
+          "piece": "wall.pillar",
+          "position": [
+            2560,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.9",
+          "piece": "wall.pillar",
+          "position": [
+            2880,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.10",
+          "piece": "wall.pillar",
+          "position": [
+            3200,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.11",
+          "piece": "wall.pillar",
+          "position": [
+            3520,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.12",
+          "piece": "wall.pillar",
+          "position": [
+            3840,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.13",
+          "piece": "wall.pillar",
+          "position": [
+            4160,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.14",
+          "piece": "wall.pillar",
+          "position": [
+            4480,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.0",
+          "piece": "house.cream",
+          "position": [
+            160,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.1",
+          "piece": "house.balcony",
+          "position": [
+            480,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.2",
+          "piece": "shop.restaurant",
+          "position": [
+            800,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.3",
+          "piece": "house.teal",
+          "position": [
+            1120,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.4",
+          "piece": "wall.gate",
+          "position": [
+            1440,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.5",
+          "piece": "shop.cafe",
+          "position": [
+            1760,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.6",
+          "piece": "house.cream",
+          "position": [
+            2080,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.7",
+          "piece": "house.balcony",
+          "position": [
+            2400,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.9",
+          "piece": "house.teal",
+          "position": [
+            3040,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.10",
+          "piece": "wall.gate",
+          "position": [
+            3360,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.11",
+          "piece": "shop.cafe",
+          "position": [
+            3680,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.12",
+          "piece": "house.cream",
+          "position": [
+            4000,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.13",
+          "piece": "house.balcony",
+          "position": [
+            4320,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.14",
+          "piece": "shop.restaurant",
+          "position": [
+            4640,
+            355
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "lane",
+      "hub_origin": 0,
+      "instances": [
+        {
+          "id": "joint.0",
+          "piece": "wall.pillar",
+          "position": [
+            0,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.1",
+          "piece": "wall.pillar",
+          "position": [
+            320,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.2",
+          "piece": "wall.pillar",
+          "position": [
+            640,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.3",
+          "piece": "wall.pillar",
+          "position": [
+            960,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.4",
+          "piece": "wall.pillar",
+          "position": [
+            1280,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.5",
+          "piece": "wall.pillar",
+          "position": [
+            1600,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.6",
+          "piece": "wall.pillar",
+          "position": [
+            1920,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.7",
+          "piece": "wall.pillar",
+          "position": [
+            2240,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.8",
+          "piece": "wall.pillar",
+          "position": [
+            2560,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.9",
+          "piece": "wall.pillar",
+          "position": [
+            2880,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.10",
+          "piece": "wall.pillar",
+          "position": [
+            3200,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.11",
+          "piece": "wall.pillar",
+          "position": [
+            3520,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.12",
+          "piece": "wall.pillar",
+          "position": [
+            3840,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.0",
+          "piece": "shop.restaurant",
+          "position": [
+            160,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.1",
+          "piece": "house.teal",
+          "position": [
+            480,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.2",
+          "piece": "wall.gate",
+          "position": [
+            800,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.3",
+          "piece": "shop.cafe",
+          "position": [
+            1120,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.4",
+          "piece": "house.cream",
+          "position": [
+            1440,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.5",
+          "piece": "house.balcony",
+          "position": [
+            1760,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.6",
+          "piece": "shop.restaurant",
+          "position": [
+            2080,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.7",
+          "piece": "house.teal",
+          "position": [
+            2400,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.8",
+          "piece": "wall.gate",
+          "position": [
+            2720,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.9",
+          "piece": "shop.cafe",
+          "position": [
+            3040,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.10",
+          "piece": "house.cream",
+          "position": [
+            3360,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.11",
+          "piece": "house.balcony",
+          "position": [
+            3680,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.12",
+          "piece": "shop.restaurant",
+          "position": [
+            4000,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "bus-stop",
+          "piece": "prop.bus_stop",
+          "position": [
+            1450,
+            354
+          ],
+          "scale": 1
+        },
+        {
+          "id": "corner",
+          "piece": "prop.corner",
+          "position": [
+            1100,
+            355
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "passage",
+      "hub_origin": 0,
+      "instances": [
+        {
+          "id": "joint.0",
+          "piece": "wall.pillar",
+          "position": [
+            0,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.1",
+          "piece": "wall.pillar",
+          "position": [
+            320,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.2",
+          "piece": "wall.pillar",
+          "position": [
+            640,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.3",
+          "piece": "wall.pillar",
+          "position": [
+            960,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.4",
+          "piece": "wall.pillar",
+          "position": [
+            1280,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.5",
+          "piece": "wall.pillar",
+          "position": [
+            1600,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.6",
+          "piece": "wall.pillar",
+          "position": [
+            1920,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.7",
+          "piece": "wall.pillar",
+          "position": [
+            2240,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.8",
+          "piece": "wall.pillar",
+          "position": [
+            2560,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.9",
+          "piece": "wall.pillar",
+          "position": [
+            2880,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.10",
+          "piece": "wall.pillar",
+          "position": [
+            3200,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.11",
+          "piece": "wall.pillar",
+          "position": [
+            3520,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "joint.12",
+          "piece": "wall.pillar",
+          "position": [
+            3840,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.0",
+          "piece": "shop.restaurant",
+          "position": [
+            160,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.1",
+          "piece": "house.teal",
+          "position": [
+            480,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.2",
+          "piece": "wall.gate",
+          "position": [
+            800,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.3",
+          "piece": "shop.cafe",
+          "position": [
+            1120,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.4",
+          "piece": "house.cream",
+          "position": [
+            1440,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.5",
+          "piece": "house.balcony",
+          "position": [
+            1760,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.6",
+          "piece": "shop.restaurant",
+          "position": [
+            2080,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.7",
+          "piece": "house.teal",
+          "position": [
+            2400,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.8",
+          "piece": "wall.gate",
+          "position": [
+            2720,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.9",
+          "piece": "shop.cafe",
+          "position": [
+            3040,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.10",
+          "piece": "house.cream",
+          "position": [
+            3360,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "facade.11",
+          "piece": "house.balcony",
+          "position": [
+            3680,
+            355
+          ],
+          "scale": 1
+        },
+        {
+          "id": "bus-stop",
+          "piece": "prop.bus_stop",
+          "position": [
+            1450,
+            354
+          ],
+          "scale": 1
+        },
+        {
+          "id": "corner",
+          "piece": "prop.corner",
+          "position": [
+            1100,
+            355
+          ],
+          "scale": 1
+        }
+      ]
+    }
+  ],
+  "distance_scroll": 0.9
+}

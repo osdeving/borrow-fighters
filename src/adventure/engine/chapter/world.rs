@@ -7,79 +7,44 @@ use super::assets::ChapterAssets;
 use crate::adventure::{
     ambient::AmbientState,
     chapter::{Chapter, Scene},
-    engine::{pieces::PiecePose, street, typography},
-    neighborhood::{DOOR_CENTER_X, DOOR_HEIGHT, DOOR_WIDTH, NEIGHBOR_FLOOR_Y},
+    engine::{pieces::PiecePose, street},
+    neighborhood::{DOOR_HEIGHT, DOOR_WIDTH, NEIGHBOR_FLOOR_Y},
 };
 use raylib::prelude::*;
 
 pub(super) fn draw(d: &mut impl RaylibDraw, a: &ChapterAssets, chapter: &Chapter, wake_tick: u32) {
+    let geometry = chapter.world.scene(chapter.scene);
+    let id = match chapter.scene {
+        Scene::Street => "street",
+        Scene::Lane => "lane",
+        Scene::Passage => "passage",
+    };
+    let camera = chapter.camera();
+    crate::adventure::engine::landscape::draw(
+        d,
+        &a.common,
+        id,
+        geometry.width,
+        crate::adventure::engine::landscape::View {
+            left: camera.target.x - 640.0 / camera.zoom,
+            width: 1280.0 / camera.zoom,
+            origin: 0.0,
+        },
+    );
     if chapter.scene == Scene::Street {
-        street::background(d, &a.common, 0.0);
+        let hub = a.common.landscape.map.scene("street").hub_origin;
         street::draw_without_neighbours(
             d,
-            &AmbientState::settled_after_reaction(wake_tick, 600 + chapter.ticks),
+            &AmbientState::settled_after_reaction_in_bounds(
+                wake_tick,
+                600 + chapter.ticks,
+                [-hub, geometry.width - hub],
+            ),
             &a.common,
-            0.0,
+            -hub,
         );
-        d.draw_rectangle_rec(door(), Color::new(14, 24, 20, 160));
+        d.draw_rectangle_rec(door(chapter), Color::new(14, 24, 20, 160));
         return;
-    }
-    let geometry = chapter.world.scene(chapter.scene);
-    d.draw_texture_pro(
-        &a.lane,
-        Rectangle::new(0.0, 0.0, a.lane.width as f32, a.lane.height as f32),
-        Rectangle::new(0.0, 0.0, geometry.width, 720.0),
-        Vector2::zero(),
-        0.0,
-        if chapter.scene == Scene::Passage {
-            Color::new(228, 235, 225, 255)
-        } else {
-            Color::WHITE
-        },
-    );
-    let mut corner = PiecePose::at(Vector2::new(
-        if chapter.scene == Scene::Lane {
-            355.0
-        } else {
-            1470.0
-        },
-        464.0,
-    ));
-    corner.scale = 1.45;
-    a.common.street.draw(d, "prop.corner", 0, &corner);
-    // Lettering is a separate, editable wall sign, with drawn arrow and bolts.
-    let panel = Rectangle::new(1400.0, 358.0, 245.0, 42.0);
-    d.draw_rectangle_rec(
-        Rectangle::new(panel.x + 2.0, panel.y + 3.0, panel.width, panel.height),
-        Color::new(31, 42, 31, 60),
-    );
-    d.draw_rectangle_rec(panel, Color::new(223, 213, 174, 255));
-    d.draw_rectangle_lines_ex(panel, 2.0, Color::new(99, 111, 84, 255));
-    typography::centered(
-        d,
-        &a.common.signage,
-        if chapter.scene == Scene::Lane {
-            "TRAVESSA DO SOL"
-        } else {
-            "PASSAGEM DA VILA"
-        },
-        Vector2::new(panel.x + 108.0, panel.y + 10.0),
-        188.0,
-        22.0,
-        Color::new(43, 69, 60, 255),
-    );
-    let arrow = Vector2::new(panel.x + 220.0, panel.y + 21.0);
-    for end in [
-        Vector2::new(arrow.x - 16.0, arrow.y),
-        Vector2::new(arrow.x - 6.0, arrow.y - 6.0),
-        Vector2::new(arrow.x - 6.0, arrow.y + 6.0),
-    ] {
-        d.draw_line_ex(arrow, end, 2.0, Color::new(43, 69, 60, 255));
-    }
-    for x in [panel.x + 5.0, panel.x + panel.width - 5.0] {
-        for y in [panel.y + 5.0, panel.y + panel.height - 5.0] {
-            d.draw_circle_v(Vector2::new(x, y), 1.2, Color::new(78, 91, 70, 255));
-        }
     }
     debris(d, a, chapter);
     for solid in &geometry.obstacles {
@@ -184,9 +149,16 @@ fn debris(d: &mut impl RaylibDraw, a: &ChapterAssets, chapter: &Chapter) {
     }
 }
 
-pub(super) fn door() -> Rectangle {
+pub(super) fn door(chapter: &Chapter) -> Rectangle {
+    let center = chapter
+        .world
+        .scene(Scene::Street)
+        .poi("shop")
+        .expect("validated shop")
+        .position
+        .x;
     Rectangle::new(
-        DOOR_CENTER_X - DOOR_WIDTH * 0.5,
+        center - DOOR_WIDTH * 0.5,
         NEIGHBOR_FLOOR_Y - DOOR_HEIGHT,
         DOOR_WIDTH,
         DOOR_HEIGHT,
@@ -197,13 +169,13 @@ pub(super) fn shutter(d: &mut impl RaylibDraw, a: &ChapterAssets, chapter: &Chap
     if chapter.scene != Scene::Street {
         return;
     }
-    let r = door();
+    let r = door(chapter);
     let bottom = r.y + r.height * chapter.shutter_progress();
     a.common.street.draw_clipped(
         d,
         "shop.shutter",
         0,
-        &PiecePose::at(Vector2::new(DOOR_CENTER_X, bottom)),
+        &PiecePose::at(Vector2::new(r.x + r.width * 0.5, bottom)),
         r,
     );
     d.draw_line_ex(

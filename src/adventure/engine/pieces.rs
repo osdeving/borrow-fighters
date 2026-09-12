@@ -10,6 +10,13 @@ use crate::{
 use raylib::prelude::*;
 use std::{collections::BTreeMap, error::Error};
 
+/// Vertex for a small textured surface; UV coordinates address the catalog crop.
+#[derive(Clone, Copy)]
+pub struct TexturePoint {
+    pub position: Vector2,
+    pub uv: Vector2,
+}
+
 /// Per-instance transform; replacing the image keeps this pose unchanged.
 pub struct PiecePose {
     /// Anchor position in screen coordinates.
@@ -47,6 +54,47 @@ pub struct StreetPieces {
 }
 
 impl StreetPieces {
+    /// Draws bounded textured triangles using Raylib's safe immediate-mode API.
+    /// Positions are already in the caller's scene space; consistent winding
+    /// keeps mirrored actors visible under the same active world camera.
+    pub fn draw_triangles(
+        &self,
+        d: &mut impl RaylibDraw,
+        id: &str,
+        triangles: &[[TexturePoint; 3]],
+        tint: Color,
+    ) {
+        if triangles.iter().flatten().any(|v| {
+            !v.position.x.is_finite()
+                || !v.position.y.is_finite()
+                || !(0.0..=1.0).contains(&v.uv.x)
+                || !(0.0..=1.0).contains(&v.uv.y)
+        }) {
+            return;
+        }
+        let frame = self.catalog.pieces[id].sample(0).0;
+        let texture = &self.textures[&frame.image];
+        d.rl_set_texture(texture);
+        d.rl_draw(DrawMode::Triangles, |draw| {
+            draw.normal3f(0.0, 0.0, 1.0);
+            draw.color4ub(tint);
+            for triangle in triangles {
+                let [a, b, c] = *triangle;
+                let cross = (b.position.x - a.position.x) * (c.position.y - a.position.y)
+                    - (b.position.y - a.position.y) * (c.position.x - a.position.x);
+                let ordered = if cross > 0.0 { [a, c, b] } else { [a, b, c] };
+                for vertex in ordered {
+                    draw.texcoord2f(
+                        (frame.source[0] + vertex.uv.x * frame.source[2]) / texture.width as f32,
+                        (frame.source[1] + vertex.uv.y * frame.source[3]) / texture.height as f32,
+                    );
+                    draw.vertex2f(vertex.position.x, vertex.position.y);
+                }
+            }
+        });
+        d.rl_disable_texture();
+    }
+
     /// Validates every reference and image extent before accepting the catalog.
     pub fn load(rl: &mut RaylibHandle, thread: &RaylibThread) -> Result<Self, Box<dyn Error>> {
         let catalog = PieceCatalog::load(&asset_path("assets/adventure/street/catalog.json"))?;
@@ -120,6 +168,8 @@ impl StreetPieces {
                         &asset_path(format!("assets/adventure/{}", frame.image)).to_string_lossy(),
                     )?;
                     image.set_texture_filter(thread, TextureFilter::TEXTURE_FILTER_BILINEAR);
+                    // Standalone sprites must not sample the opposite edge at fractional zoom.
+                    image.set_texture_wrap(thread, TextureWrap::TEXTURE_WRAP_CLAMP);
                     textures.insert(frame.image.clone(), image);
                 }
                 let image = &textures[&frame.image];
@@ -139,6 +189,19 @@ impl StreetPieces {
 
     /// Draws an authored frame, keeping later poses at the first frame's scale.
     pub fn draw(&self, d: &mut impl RaylibDraw, id: &str, ticks: u32, pose: &PiecePose) {
+        self.draw_stretched(d, id, ticks, pose, Vector2::new(1.0, 1.0));
+    }
+
+    /// Changes local cloth volume independently from length while retaining the
+    /// exact authored pivot. Callers place attachments using the same stretch.
+    pub fn draw_stretched(
+        &self,
+        d: &mut impl RaylibDraw,
+        id: &str,
+        ticks: u32,
+        pose: &PiecePose,
+        stretch: Vector2,
+    ) {
         let (frame, scale) = self.catalog.pieces[id].sample(ticks);
         let scale = scale * pose.scale;
         let [x, y, w, h] = frame.source;
@@ -150,8 +213,16 @@ impl StreetPieces {
         d.draw_texture_pro(
             &self.textures[&frame.image],
             Rectangle::new(x, y, if pose.flip { -w } else { w }, h),
-            Rectangle::new(pose.position.x, pose.position.y, w * scale, h * scale),
-            Vector2::new(anchor_x * scale, frame.anchor[1] * scale),
+            Rectangle::new(
+                pose.position.x,
+                pose.position.y,
+                w * scale * stretch.x,
+                h * scale * stretch.y,
+            ),
+            Vector2::new(
+                anchor_x * scale * stretch.x,
+                frame.anchor[1] * scale * stretch.y,
+            ),
             pose.rotation,
             pose.tint,
         );

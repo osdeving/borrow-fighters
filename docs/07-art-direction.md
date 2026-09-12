@@ -98,10 +98,11 @@ bicicleta vazia. [Adereços e apoios](../assets/adventure/street/PROPS.md) e
 [veículos](../assets/adventure/street/VEHICLES.md) registram origem e seleção.
 
 A [quarta rodada, de chegada e vizinhança](32-cinematic-neighbourhood-arrival.md),
-abre a rua pela pipa contra o céu. A câmera desce e amplia o enquadramento ao
-longo de cerca de seis segundos até apresentar Rust; exploração e HUD ficam
-disponíveis ao fim desse movimento. A vida cotidiana continua durante a
-chegada. O ônibus ocupa uma largura maior que a dos automóveis. O letreiro
+abre a rua pela pipa contra o céu. Na revisão de acabamento, a tomada observa
+pipa, menino, comércio e trânsito durante 18 segundos e usa um corte coberto
+por fade para apresentar Rust. Exploração e HUD ficam disponíveis ao fim da
+sequência. A vida cotidiana continua durante a chegada. O ônibus ocupa uma
+largura maior que a dos automóveis. O letreiro
 completo `BAR E MERCEARIA CASA NOSSA` usa uma única linha, com tamanho uniforme
 e fonte encorpada e filtrada para continuar legível.
 
@@ -127,6 +128,14 @@ personagens. C++ aparece adulta no cotidiano noturno e no despertar heroico;
 Python ensina humanos sobre EPs numa universidade. As manchetes representam
 imprensa da ficção. Logo, subtítulo e demais palavras são desenhados pelo jogo
 a partir do JSON editável, sem texto incorporado aos PNGs novos.
+
+Duke e Old C usam duas pinturas completas por personagem, com perspectiva e
+luz integradas, conforme a [ADR 0030](adr/0030-painted-biography-shots.md).
+A chegada de Duke mostra a limousine estacionada junto à guia; sua reunião
+preserva escala humana e mesa em perspectiva natural. Old C trabalha no
+monitor atual e depois estuda em outro enquadramento, cercado de livros,
+café e vestígios de uma longa sessão de programação. Conferir capturas do
+jogo com legendas antes de considerar a composição pronta.
 
 O capítulo [Depois do silêncio](33-after-the-silence.md) continua a atuação
 dentro do jogo, com [poses e cenário reutilizáveis](../assets/adventure/chapter/README.md).

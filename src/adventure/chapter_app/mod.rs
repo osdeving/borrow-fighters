@@ -115,7 +115,7 @@ pub fn run_in_window(
                 let copy_result = assets.reload_copy();
                 let motion_result = assets.common.locomotion.reload(rl, thread);
                 if motion_result.is_ok() {
-                    audio.reload_stride(assets.common.locomotion.motion.stride_pixels, &chapter);
+                    audio.reload_motion(&assets.common.locomotion.motion, &chapter);
                 }
                 notice = Some((
                     match copy_result.and(motion_result) {

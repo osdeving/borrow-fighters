@@ -4,13 +4,15 @@
 //! scene skipping without granting a combat victory. The platform owns pause.
 
 use super::ambient::AmbientState;
-use super::arrival::{ARRIVAL_TICKS, EpArrival};
-use super::combat::{Action, Combat, CombatInput, ENCOUNTER_TRIGGER_X, Outcome, TICKS_PER_SECOND};
+#[cfg(test)]
+use super::arrival::ARRIVAL_TICKS;
+use super::arrival::{ArrivalShot, EpArrival, StreetArrivalSpec};
+use super::combat::{Action, Combat, CombatInput, Outcome, TICKS_PER_SECOND};
 
 /// Duration of Rust's automatic waking and morning sequence.
 pub const MORNING_TICKS: u32 = 14 * TICKS_PER_SECOND;
 /// Duration of the newspaper, character and title presentation.
-pub const OPENING_TICKS: u32 = 64 * TICKS_PER_SECOND;
+pub const OPENING_TICKS: u32 = 60 * TICKS_PER_SECOND;
 /// Duration reserved for approaching the creature and showing regret.
 pub const AFTERMATH_TICKS: u32 = 7 * TICKS_PER_SECOND;
 /// Minimum visible regret before an explicit scene advance may complete the slice.
@@ -81,6 +83,10 @@ pub const PROLOGUE_TICKS: u32 = 40 * TICKS_PER_SECOND;
 /// Story progress and the independent encounter it owns.
 #[derive(Clone, Debug)]
 pub struct Story {
+    /// World translation of the original neighborhood and its ambient actors.
+    pub hub_origin: f32,
+    /// Physical street bounds and event locations, independent of presentation.
+    pub map: super::landscape::PrologueMap,
     /// Current stage, directly available to the renderer.
     pub stage: Stage,
     /// Fixed updates elapsed since the current stage began.
@@ -91,6 +97,8 @@ pub struct Story {
     pub ambient: AmbientState,
     /// Independently authored descent whose ground contact starts the turmoil.
     pub ep_arrival: EpArrival,
+    /// Replaceable calm-street camera track, frozen for this story instance.
+    pub street_arrival: StreetArrivalSpec,
 }
 
 impl Default for Story {
@@ -102,13 +110,62 @@ impl Default for Story {
 impl Story {
     /// Begins with Ada before the mysterious message.
     pub fn new() -> Self {
+        let landscape = super::landscape::Landscape::bundled();
+        let hub_origin = landscape.scene("street").hub_origin;
+        let map = landscape.prologue;
+        let mut combat = Combat::new();
+        combat.set_bounds(map.bounds[0], map.bounds[1]);
+        combat.player.position.x = map.spawn_x;
+        combat.enemy.position.x = map.enemy_x;
         Self {
+            hub_origin,
+            map,
             stage: Stage::AdaPrologue,
             stage_ticks: 0,
-            combat: Combat::new(),
+            combat,
             ambient: AmbientState::default(),
             ep_arrival: EpArrival::default(),
+            street_arrival: StreetArrivalSpec::default(),
         }
+    }
+
+    /// Applies a validated runtime map before the street is first entered.
+    pub fn configure_map(&mut self, map: super::landscape::PrologueMap) {
+        self.combat.set_bounds(map.bounds[0], map.bounds[1]);
+        self.combat.player.position.x = map.spawn_x;
+        self.combat.enemy.position.x = map.enemy_x;
+        self.map = map;
+        if self.stage == Stage::Encounter {
+            self.ambient = AmbientState::new_in_bounds(
+                self.combat.enemy_awake,
+                [-self.hub_origin, self.map.width - self.hub_origin],
+            );
+        }
+    }
+
+    /// Left edge of the gameplay viewport within the physical map.
+    pub fn camera_left(&self) -> f32 {
+        (self.combat.player.position.x - 450.0).clamp(0.0, self.map.width - 1280.0)
+    }
+
+    /// Initial camera in the same viewport coordinates used by drawing and traces.
+    pub fn initial_shot(&self) -> ArrivalShot {
+        self.street_arrival.sample(
+            self.stage_ticks,
+            self.hub_origin,
+            self.camera_left(),
+            self.map.width,
+        )
+    }
+
+    /// Fade opacity that covers the authored cut from neighbours back to Rust.
+    pub fn initial_blackout(&self) -> f32 {
+        self.street_arrival.blackout(self.stage_ticks)
+    }
+
+    /// Data-owned end of the street establishment and its input lock.
+    pub fn arrival_duration(&self) -> u32 {
+        self.street_arrival.duration_ticks()
     }
 
     /// Advances one fixed update; the caller must omit this call while paused.
@@ -152,7 +209,7 @@ impl Story {
         match self.stage {
             Stage::AdaPrologue => self.enter(Stage::RustMorning),
             Stage::RustMorning => self.enter(Stage::Encounter),
-            Stage::Encounter if self.arrival_active() => self.stage_ticks = ARRIVAL_TICKS,
+            Stage::Encounter if self.arrival_active() => self.stage_ticks = self.arrival_duration(),
             Stage::Encounter if self.ep_arrival_active() => self.finish_ep_arrival(),
             Stage::Aftermath if self.gesture_visible() => self.enter(Stage::Opening),
             Stage::Opening => self.enter(Stage::Complete),
@@ -182,13 +239,13 @@ impl Story {
                 // These are authored pose starts in engine/morning.rs at 60 Hz.
                 self.skip_to_next_boundary(&[150, 225, 355, 500, 585], Stage::Encounter);
             }
-            Stage::Encounter if self.arrival_active() => self.stage_ticks = ARRIVAL_TICKS,
+            Stage::Encounter if self.arrival_active() => self.stage_ticks = self.arrival_duration(),
             Stage::Encounter if self.ep_arrival_active() => self.finish_ep_arrival(),
             Stage::Encounter | Stage::Aftermath => self.enter(Stage::Opening),
             Stage::Opening => {
-                // Three headlines, both halves of each biography, three character
-                // appearances and the final logo, matching engine/opening.rs.
-                let boundaries = [3, 6, 9, 14, 19, 24, 29, 35, 41, 47, 53, 57]
+                // Three headlines, both halves of each biography and the final
+                // logo. Rust remains in the title without a separate cast card.
+                let boundaries = [3, 6, 9, 14, 19, 24, 29, 35, 41, 47, 53]
                     .map(|seconds| seconds * TICKS_PER_SECOND);
                 self.skip_to_next_boundary(&boundaries, Stage::Complete);
             }
@@ -214,13 +271,21 @@ impl Story {
     pub fn retry(&mut self) {
         if self.combat.outcome == Outcome::Defeat || self.stage == Stage::Complete {
             self.combat = Combat::at_checkpoint();
+            self.combat
+                .set_bounds(self.map.bounds[0], self.map.bounds[1]);
+            self.combat.player.position.x = self.map.arrival_x;
+            self.combat.enemy.position.x = self.map.enemy_x;
             self.enter(Stage::Encounter);
         }
     }
 
     /// Restarts the entire opening, including Ada and Rust's morning.
     pub fn restart(&mut self) {
+        let map = self.map.clone();
+        let hub = self.hub_origin;
         *self = Self::new();
+        self.hub_origin = hub;
+        self.configure_map(map);
     }
 
     /// Whether the authored camera still owns the encounter's initial view.
@@ -229,7 +294,7 @@ impl Story {
         self.stage == Stage::Encounter
             && !self.combat.enemy_awake
             && self.combat.ticks == 0
-            && self.stage_ticks < ARRIVAL_TICKS
+            && self.stage_ticks < self.arrival_duration()
     }
 
     /// Whether the EP descent/recovery currently holds combat input.
@@ -248,7 +313,7 @@ impl Story {
             // The prologue owns this appearance. Standalone encounter rules and
             // chapter encounters retain their own activation policies.
             self.combat.tick_exploration(input);
-            if self.combat.player.position.x >= ENCOUNTER_TRIGGER_X && self.combat.player.grounded {
+            if self.combat.player.position.x >= self.map.arrival_x && self.combat.player.grounded {
                 self.ep_arrival.start();
                 self.combat.player.action = Action::Idle;
                 self.combat.player.action_ticks = 0;
@@ -311,7 +376,10 @@ impl Story {
         self.stage = stage;
         self.stage_ticks = 0;
         if stage == Stage::Encounter {
-            self.ambient = AmbientState::new(self.combat.enemy_awake);
+            self.ambient = AmbientState::new_in_bounds(
+                self.combat.enemy_awake,
+                [-self.hub_origin, self.map.width - self.hub_origin],
+            );
             self.ep_arrival.reset(self.combat.enemy_awake);
         }
     }
@@ -332,7 +400,7 @@ mod tests {
         assert_eq!(story.ambient, AmbientState::default());
         story.advance_scene();
         story.skip_segment(); // The camera hands control to the player.
-        story.combat.player.position.x = super::super::combat::ENCOUNTER_TRIGGER_X;
+        story.combat.player.position.x = story.map.arrival_x;
         story.tick(CombatInput::default());
         while !story.ep_arrival.impacted() {
             assert_eq!(story.ambient.accident_ticks(), None);
@@ -360,17 +428,34 @@ mod tests {
         assert_eq!(story.ambient.ticks(), before_victory.ticks() + 1);
         assert!(story.ambient.kid_position().x < before_victory.kid_position().x);
         for _ in 0..300 {
+            let previous_x = story.ambient.kid_position().x;
+            let previous_ticks = story.ambient.ticks();
             story.tick(CombatInput::default());
-        }
-        assert_eq!(story.ambient.kid_phase(), KidPhase::Gone);
-        assert!(
-            story
+            assert_eq!(story.ambient.ticks(), previous_ticks + 1);
+            let travelled = previous_x - story.ambient.kid_position().x;
+            assert!((0.0..=4.501).contains(&travelled));
+            if story.ambient.kid_phase() == KidPhase::Gone {
+                assert!(story.ambient.kid_position().x + story.hub_origin < 0.0);
+            }
+            for cyclist in story
                 .ambient
                 .cyclists()
                 .iter()
-                .all(|cyclist| cyclist.phase == CyclistPhase::Gone && !cyclist.visible)
-        );
-        assert!(story.ambient.traffic_cars().iter().all(|car| !car.visible));
+                .filter(|actor| !actor.visible)
+            {
+                let x = cyclist.position.x + story.hub_origin;
+                assert!(x < 0.0 || x > story.map.width);
+                assert_eq!(cyclist.phase, CyclistPhase::Gone);
+            }
+            for car in story
+                .ambient
+                .traffic_cars()
+                .iter()
+                .filter(|actor| !actor.visible)
+            {
+                assert!(car.position.x + story.hub_origin < 0.0);
+            }
+        }
         assert_eq!(
             story
                 .ambient
@@ -402,11 +487,28 @@ mod tests {
         story.advance_scene();
         story.advance_scene();
         story.combat.enemy_awake = true;
-        for _ in 0..600 {
+        story.tick(CombatInput::default());
+        let bounds = [-story.hub_origin, story.map.width - story.hub_origin];
+        let evacuated = AmbientState::settled_after_reaction_in_bounds(
+            story.ambient.reaction_origin().unwrap(),
+            0,
+            bounds,
+        );
+        // Wait for the configured street's full escape, then compare the played
+        // positions and clocks with the chapter's reconstruction of that alarm.
+        for _ in 0..evacuated.accident_ticks().unwrap() {
+            let previous_x = story.ambient.kid_position().x;
             story.tick(CombatInput::default());
+            let travelled = previous_x - story.ambient.kid_position().x;
+            assert!((0.0..=4.501).contains(&travelled));
         }
+        assert_eq!(story.ambient, evacuated);
         assert_eq!(story.ambient.kid_phase(), KidPhase::Gone);
+        assert!(story.ambient.kid_position().x + story.hub_origin < 0.0);
         assert!(story.ambient.traffic_cars().iter().all(|car| !car.visible));
+        for car in story.ambient.traffic_cars() {
+            assert!(car.position.x + story.hub_origin < 0.0);
+        }
         assert!(
             story
                 .ambient
@@ -414,6 +516,10 @@ mod tests {
                 .iter()
                 .all(|cyclist| !cyclist.visible)
         );
+        for cyclist in story.ambient.cyclists() {
+            let x = cyclist.position.x + story.hub_origin;
+            assert!(x < 0.0 || x > story.map.width);
+        }
         assert!(
             story
                 .ambient
@@ -462,7 +568,7 @@ mod tests {
         story.restart();
         story.advance_scene();
         story.advance_scene();
-        assert_eq!(story.ambient, AmbientState::default());
+        assert_eq!(story.ambient, AmbientState::new_in_bounds(false, bounds));
         assert_eq!(story.ambient.incident_car(), None);
         assert!(
             story
@@ -543,14 +649,14 @@ mod tests {
             story.tick(noisy_input);
         }
         assert_eq!(story.stage, Stage::Encounter);
-        assert_eq!(story.combat.player.position.x, 340.0);
+        assert_eq!(story.combat.player.position.x, story.map.spawn_x);
         assert_eq!(story.combat.player.action, Action::Idle);
         assert!(!story.combat.enemy_awake);
         for _ in 0..ARRIVAL_TICKS {
             assert!(story.arrival_active());
             story.tick(noisy_input);
             assert_eq!(story.combat.ticks, 0);
-            assert_eq!(story.combat.player.position.x, 340.0);
+            assert_eq!(story.combat.player.position.x, story.map.spawn_x);
             assert_eq!(story.combat.player.action, Action::Idle);
             assert!(!story.combat.enemy_awake);
         }
@@ -560,7 +666,7 @@ mod tests {
             movement: 1.0,
             ..CombatInput::default()
         });
-        assert!(story.combat.player.position.x > 340.0);
+        assert!(story.combat.player.position.x > story.map.spawn_x);
     }
 
     #[test]
@@ -635,7 +741,7 @@ mod tests {
         story.advance_scene();
         story.advance_scene();
         story.skip_segment();
-        story.combat.player.position.x = ENCOUNTER_TRIGGER_X;
+        story.combat.player.position.x = story.map.arrival_x;
         story.tick(CombatInput::default());
         let position = story.combat.player.position;
         let ticks = story.combat.ticks;
@@ -677,12 +783,12 @@ mod tests {
 
     #[test]
     fn skipping_ep_descent_or_recovery_releases_combat_without_victory() {
-        for age in [0, 90, 180, 230, 280] {
+        for age in [0, 20, 40, 65, 100] {
             let mut story = Story::new();
             story.advance_scene();
             story.advance_scene();
             story.skip_segment();
-            story.combat.player.position.x = ENCOUNTER_TRIGGER_X;
+            story.combat.player.position.x = story.map.arrival_x;
             story.tick(CombatInput::default());
             for _ in 0..age {
                 story.tick(CombatInput::default());
@@ -747,7 +853,7 @@ mod tests {
 
     #[test]
     fn arrival_skip_releases_control_without_skipping_combat_or_rewinding_the_street() {
-        for age in [0, 60, 240, ARRIVAL_TICKS - 1] {
+        for age in [0, 60, 360, 780, 840, 841, 900, ARRIVAL_TICKS - 1] {
             let mut story = Story::new();
             story.advance_scene();
             story.advance_scene();
@@ -756,6 +862,7 @@ mod tests {
             }
             let ambient = story.ambient.clone();
             story.skip_segment();
+            assert_eq!(story.initial_blackout(), 0.0);
             assert_eq!(story.stage, Stage::Encounter);
             assert!(!story.arrival_active());
             assert_eq!(story.ambient, ambient);
@@ -764,7 +871,7 @@ mod tests {
                 movement: 1.0,
                 ..CombatInput::default()
             });
-            assert!(story.combat.player.position.x > 340.0);
+            assert!(story.combat.player.position.x > story.map.spawn_x);
             assert_eq!(story.combat.player.action, Action::Walk);
             assert_eq!(story.ambient.ticks(), age + 1);
             story.skip_segment();
@@ -775,7 +882,7 @@ mod tests {
     #[test]
     fn opening_skip_preserves_each_headline_biography_panel_and_character() {
         let mut story = Story::presentation();
-        for seconds in [3, 6, 9, 14, 19, 24, 29, 35, 41, 47, 53, 57] {
+        for seconds in [3, 6, 9, 14, 19, 24, 29, 35, 41, 47, 53] {
             story.tick(CombatInput::default());
             story.skip_segment();
             assert_eq!(story.stage, Stage::Opening);

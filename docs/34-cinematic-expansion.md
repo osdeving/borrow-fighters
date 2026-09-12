@@ -11,12 +11,15 @@ identidade e os cenários existentes; amplia os conteúdos exclusivos da aventur
   Os apoios do despertar são editáveis e Rust caminha até a saída do quarto.
 - Duke chega de limousine a uma torre espelhada na Paulista e preside a
   reunião na cabeceira da mesa. Sua forma de mascote permanece reconhecível.
-- Old C trabalha num setup rústico atual, com computador antigo, livros K&R
-  e de ciência da computação, preservando sua identidade grisalha e jeans.
+- Old C trabalha num setup rústico atual, com monitor moderno voltado para ele, café, pizza
+  e livros sem texto sobreposto, preservando sua identidade grisalha e jeans.
 - Na travessa, caixas e destroços bloqueiam a passagem. Socos e o novo chute
   causam dano por contato; peças racham, caem e se fragmentam. Depois da
   abertura e travessia, duas EPs com tuning individual guardam a passagem.
   Vitória exige derrotar ambas; retry restaura o encontro inteiro.
+
+A [revisão 35](35-modular-running-world.md) substitui a locomoção de gameplay
+por corrida, amplia as ruas com composição modular e refina essas apresentações.
 
 ## Controles e edição
 
@@ -32,15 +35,17 @@ combate; o comando de pular tudo mantém seu comportamento.
 | Passada e apoios da manhã | [Movimento](../assets/adventure/locomotion/motion.json), [despertar](../assets/adventure/locomotion/waking.json) |
 | Peças de Duke/Old C | [Catálogo visual](../assets/adventure/opening/scenes/catalog.json) |
 | Composição e trajetórias das biografias | [Cenas](../assets/adventure/opening/scenes/scenes.json) |
-| Textos das cenas/livros/terminal | [Português](../assets/adventure/texts/pt-BR.json) |
+| Falas, legendas e comandos das cenas | [Português](../assets/adventure/texts/pt-BR.json) |
 | Posições, resistência e inimigos do capítulo | [Mundo](../assets/adventure/chapter/world.json) |
 | Instruções e falas do capítulo | [Textos do capítulo](../assets/adventure/chapter/chapter-texts.json) |
 
 O catálogo compartilhado aceita PNGs avulsos e recortes de atlas; as instâncias
 não dependem da disposição física dos arquivos. Novas peças e mudanças locais
 não exigem regenerar o cenário. Biografias usam câmera e transforms interpolados,
-com textos presos aos objetos. A apresentação dura 64 segundos e a trilha
-original acompanha os novos cortes. [Guia das biografias](../assets/adventure/opening/scenes/README.md).
+com textos presos aos objetos. Após retirar o cartão solo de Rust, a apresentação
+dura 60 segundos e chega diretamente de Old C ao logo aos 53 segundos. Rust
+permanece central no elenco do logo. A trilha original acompanha os cortes.
+[Guia das biografias](../assets/adventure/opening/scenes/README.md).
 
 **F5** recarrega textos e conteúdo visual editável durante a sessão, sem zerar
 a história. Geometria e resistência do mundo são carregadas ao iniciar o

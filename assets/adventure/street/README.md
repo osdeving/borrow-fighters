@@ -214,12 +214,21 @@ de `scene.json` deve existir no catálogo, e IDs de instâncias não se repetem.
 
 Depois de editar, reinicie com `cargo run -- --start encounter`. Confira
 escala, apoio no chão, rodas, letreiros, sobreposições e os dois extremos da
-câmera. A chegada começa pela pipa e abre o enquadramento até Rust em cerca de
-seis segundos; ao terminar, libera exploração e HUD. O ônibus usa largura 440
+câmera. A chegada observa pipa, menino, trânsito e mercearia durante treze
+segundos; um fade cobre a mudança para Rust, e a câmera libera exploração e
+HUD aos dezoito segundos. O ônibus usa largura 440
 para manter proporção distinta dos automóveis. Aproxime Rust da EP para
 conferir a troca de poses, a saída dos veículos, as bicicletas abandonadas,
 o abrigo dos moradores, a porta fechada e a fuga do caramelo. Arte e composição
 são decorativas; não alteram vida, hitboxes ou resultado do combate.
+
+O trilho [`arrival-camera.json`](arrival-camera.json) mantém enquadramentos e
+cadência separados das imagens: `tick`, `target`, `zoom`, `matte`, `blackout`
+e `anchor` (`hub` para a vizinhança ou `gameplay` para Rust). A mudança de
+âncora precisa ocorrer sob blackout 1 nos dois keyframes; o último tick define
+a duração e exige a câmera jogável `[640, 360]`, zoom 1 e nenhum fade/barra.
+Iniciar ou reiniciar a história lê o arquivo; correções de timing não exigem
+regerar arte nem recompilar. A queda veloz da EP continua em seu próprio trilho.
 
 [Procedência dos veículos](VEHICLES.md) ·
 [Moradores e porta](NEIGHBOURS.md) · [Caramelo](CARAMELO.md) ·
@@ -231,12 +240,15 @@ são decorativas; não alteram vida, hitboxes ou resultado do combate.
 ### Trajetória e impacto da primeira EP
 
 [`ep-arrival.json`](ep-arrival.json) separa a animação de chegada da composição
-estática. Cada ponto contém tick, altura dos pés, tangente vertical e câmera;
+estática. Cada ponto contém tick, altura dos pés, tangente vertical, `body_scale`
+e câmera; o corpo cresce de 0,22 à escala jogável durante a aproximação distante.
 a imagem do corpo continua no atlas independente `erratic.png`. A câmera abre
 para o jogo antes de terminar a queda. A última altura é o piso real (580), e
 esse ponto inicia simultaneamente poeira, som grave e evacuação. Os índices de
 pose são `airborne_pose`, `landing_pose` e `rising_pose`; as dimensões do efeito
-ficam em `dust_radius`, `dust_ticks` e `shake_pixels`.
+ficam em `dust_radius`, `dust_ticks` e `shake_pixels`. A queda atual dura 58 ticks,
+com velocidade sempre crescente. A câmera abre no tick 40; o contato no 58
+dispara a reação. O comprimento dos rastros acompanha a velocidade da queda.
 
 F5 valida a revisão completa antes de adotá-la. Durante uma queda em andamento,
 a revisão fica aguardando a próxima entrada na rua, para não repetir o impacto

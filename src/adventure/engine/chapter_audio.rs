@@ -14,6 +14,7 @@ use crate::{
             },
         },
         combat::{Action, ActorKind},
+        locomotion::{Gait, Motion},
     },
     math::vec2::Vec2,
     runtime_paths::asset_path,
@@ -87,7 +88,7 @@ pub struct ChapterAudio<'aud> {
     paused: bool,
     suspended: Vec<Cue>,
     observed: Observed,
-    step_pixels: f32,
+    steps: StepLengths,
 }
 
 impl<'aud> ChapterAudio<'aud> {
@@ -100,11 +101,9 @@ impl<'aud> ChapterAudio<'aud> {
             paused: false,
             suspended: Vec::new(),
             observed: Observed::default(),
-            step_pixels: crate::adventure::locomotion::Motion::load(&asset_path(
-                "assets/adventure/locomotion/motion.json",
-            ))
-            .map(|motion| motion.stride_pixels * 0.5)
-            .unwrap_or(64.0),
+            steps: Motion::load(&asset_path("assets/adventure/locomotion/motion.json"))
+                .map(|motion| StepLengths::from(&motion))
+                .unwrap_or_default(),
         };
         let Some(device) = device else { return audio };
         let path = asset_path("assets/adventure/audio/street_air.wav");
@@ -134,7 +133,7 @@ impl<'aud> ChapterAudio<'aud> {
 
     /// Observes a rendered state; repeated renders never repeat an event.
     pub fn update(&mut self, chapter: &Chapter, paused: bool) {
-        self.update_frame(Frame::at(chapter, self.step_pixels), paused);
+        self.update_frame(Frame::at(chapter, self.steps), paused);
     }
 
     /// Discards abandoned effects after skip, retry or loading a checkpoint.
@@ -143,12 +142,12 @@ impl<'aud> ChapterAudio<'aud> {
     /// state. Ordinary phase transitions use `update`, so their cues still play.
     /// Pause remains active; only future milestones can sound after resuming.
     pub fn synchronize(&mut self, chapter: &Chapter) {
-        self.synchronize_frame(Frame::at(chapter, self.step_pixels));
+        self.synchronize_frame(Frame::at(chapter, self.steps));
     }
 
     /// Uses the newly validated visual stride after F5 without replaying old contacts.
-    pub fn reload_stride(&mut self, stride_pixels: f32, chapter: &Chapter) {
-        self.step_pixels = stride_pixels * 0.5;
+    pub fn reload_motion(&mut self, motion: &Motion, chapter: &Chapter) {
+        self.steps = StepLengths::from(motion);
         self.synchronize(chapter);
     }
 
@@ -236,26 +235,58 @@ impl<'aud> ChapterAudio<'aud> {
 }
 
 #[derive(Clone, Copy)]
+struct StepLengths {
+    walk: f32,
+    run: f32,
+}
+
+impl Default for StepLengths {
+    fn default() -> Self {
+        Self {
+            walk: 64.0,
+            run: 136.0,
+        }
+    }
+}
+
+impl From<&Motion> for StepLengths {
+    fn from(motion: &Motion) -> Self {
+        Self {
+            walk: motion.stride_for(Gait::Walk) * 0.5,
+            run: motion.stride_for(Gait::Run) * 0.5,
+        }
+    }
+}
+
+#[derive(Clone, Copy)]
 struct Frame {
     ticks: u32,
     phase: Phase,
     phase_ticks: u32,
     phone_ticks: Option<u32>,
-    step_index: Option<u32>,
+    step_index: Option<(Gait, u32)>,
     position: Vec2,
     contact: Option<(u32, Cue)>,
 }
 
 impl Frame {
-    fn at(chapter: &Chapter, step_pixels: f32) -> Self {
+    fn at(chapter: &Chapter, steps: StepLengths) -> Self {
         let player = &chapter.combat.player;
+        let step_pixels = match player.gait {
+            Gait::Walk => steps.walk,
+            Gait::Run => steps.run,
+        };
         Self {
             ticks: chapter.ticks,
             phase: chapter.phase,
             phase_ticks: chapter.phase_ticks,
             phone_ticks: chapter.phone().map(|phone| phone.ticks),
-            step_index: (player.action == Action::Walk && player.grounded)
-                .then_some((player.stride_distance / step_pixels).floor() as u32),
+            // Keep the contact counter while idle. Resuming halfway through
+            // suspension must wait for the next landing rather than sound now.
+            step_index: (player.grounded && player.action != Action::Defeated).then_some((
+                player.gait,
+                (player.stride_distance / step_pixels).floor() as u32,
+            )),
             position: player.position,
             contact: chapter
                 .combat
@@ -518,7 +549,8 @@ mod tests {
         let mut checkpoint = Checkpoint::new(false);
         checkpoint.stage = CheckpointStage::DriverChecked;
         let mut chapter = Chapter::from_checkpoint(World::bundled(), checkpoint).unwrap();
-        chapter.combat.player.position = Vec2::new(550.0, 580.0);
+        let shop = chapter.world.scene(chapter.scene).poi("shop").unwrap();
+        chapter.combat.player.position = shop.path[0].vec();
         chapter.tick(ChapterInput {
             interact: true,
             ..Default::default()
@@ -541,14 +573,14 @@ mod tests {
     fn natural_shutter_contact_survives_the_same_tick_phase_transition() {
         use crate::adventure::chapter::ChapterInput;
         let mut chapter = returning_from_shop();
-        let mut observed = Observed::at(Frame::at(&chapter, 64.0));
+        let mut observed = Observed::at(Frame::at(&chapter, StepLengths::default()));
         let mut shutter = Vec::new();
         for _ in 0..SHOP_EXIT_CLEARANCE_TICKS + SHOP_SHUTTER_TICKS {
             assert_eq!(chapter.phase, Phase::ShopReturn);
             chapter.tick(ChapterInput::default());
             shutter.extend(
                 observed
-                    .observe(Frame::at(&chapter, 64.0))
+                    .observe(Frame::at(&chapter, StepLengths::default()))
                     .into_iter()
                     .filter(|cue| matches!(cue, Cue::ShutterRoll | Cue::ShutterClack)),
             );
@@ -556,7 +588,11 @@ mod tests {
         assert_eq!(chapter.phase, Phase::ExploreNeighbour);
         assert_eq!(chapter.phase_ticks, 0);
         assert_eq!(shutter, [Cue::ShutterRoll, Cue::ShutterClack]);
-        assert!(observed.observe(Frame::at(&chapter, 64.0)).is_empty());
+        assert!(
+            observed
+                .observe(Frame::at(&chapter, StepLengths::default()))
+                .is_empty()
+        );
     }
 
     #[test]
@@ -581,7 +617,12 @@ mod tests {
             assert_eq!(chapter.phase, Phase::ExploreNeighbour);
             audio.synchronize(&chapter);
             assert!(audio.suspended.is_empty());
-            assert!(audio.observed.observe(Frame::at(&chapter, 64.0)).is_empty());
+            assert!(
+                audio
+                    .observed
+                    .observe(Frame::at(&chapter, StepLengths::default()))
+                    .is_empty()
+            );
         }
     }
 
@@ -589,16 +630,16 @@ mod tests {
     fn footfalls_follow_motion_and_stride_without_stacking_after_a_slow_render() {
         let mut state = frame(Phase::ExploreDriver, 0);
         let mut observed = Observed::at(state);
-        state.step_index = Some(1);
+        state.step_index = Some((Gait::Walk, 1));
         state.position.x = 2.0;
         assert_eq!(observed.observe(state), [Cue::Step]);
         assert!(observed.observe(state).is_empty());
-        state.step_index = Some(5);
+        state.step_index = Some((Gait::Walk, 5));
         assert!(
             observed.observe(state).is_empty(),
             "walking into a wall stays quiet"
         );
-        state.step_index = Some(9);
+        state.step_index = Some((Gait::Walk, 9));
         state.position.x = 60.0;
         assert_eq!(observed.observe(state), [Cue::Step]);
         state.step_index = None;
@@ -607,6 +648,30 @@ mod tests {
             observed.observe(state).is_empty(),
             "airborne movement makes no footfall"
         );
+    }
+
+    #[test]
+    fn running_footfalls_use_the_longer_cycle_and_do_not_restart_during_flight() {
+        use crate::adventure::chapter::World;
+        let mut chapter = Chapter::new(World::bundled(), false);
+        chapter.phase = Phase::ExploreDriver;
+        chapter.combat.player.set_gait(Gait::Run);
+        chapter.combat.player.stride_distance = 120.0;
+        let steps = StepLengths::default();
+        let mut observed = Observed::at(Frame::at(&chapter, steps));
+        chapter.combat.player.action = Action::Walk;
+        chapter.combat.player.stride_distance = 130.0;
+        chapter.combat.player.position.x += 10.0;
+        assert!(observed.observe(Frame::at(&chapter, steps)).is_empty());
+        chapter.combat.player.stride_distance = 137.0;
+        chapter.combat.player.position.x += 7.0;
+        assert_eq!(observed.observe(Frame::at(&chapter, steps)), [Cue::Step]);
+        chapter.combat.player.set_gait(Gait::Walk);
+        chapter.combat.player.stride_distance = 60.0;
+        observed = Observed::at(Frame::at(&chapter, steps));
+        chapter.combat.player.stride_distance = 65.0;
+        chapter.combat.player.position.x += 5.0;
+        assert_eq!(observed.observe(Frame::at(&chapter, steps)), [Cue::Step]);
     }
 
     #[test]

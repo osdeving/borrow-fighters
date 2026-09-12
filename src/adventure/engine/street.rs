@@ -1,7 +1,7 @@
-//! Draws the street's separated sidewalks, cycling lane and escaping kite.
+//! Draws the neighborhood group, traffic, cyclists and escaping kite.
 //!
 //! System: Adventure presentation. Every sprite follows the background camera
-//! and a fixed story clock; none creates a physical body or combat contact.
+//! and a fixed story clock; ground and distant scenery belong to landscape.
 
 use raylib::prelude::*;
 
@@ -14,46 +14,8 @@ use crate::adventure::{
     combat::Facing,
 };
 
-const PARALLAX: f32 = 0.48;
 const PAPER: Color = Color::new(243, 226, 189, 255);
 const INK: Color = Color::new(46, 61, 56, 255);
-
-/// Aligns the painted sidewalk/lane/planter above the existing playable floor.
-pub fn background(d: &mut impl RaylibDraw, a: &Assets, camera: f32) {
-    let source_height = a.environments.height() as f32 * 0.5;
-    let source_width = a.environments.width() as f32;
-    let x = -camera * PARALLAX;
-    let width = 1280.0 * 1.35;
-    // Raise the neighborhood and its sidewalk to make room for a motor lane.
-    // Preserve the original cycling lane, planter and all playable-floor pixels.
-    for (from, height, to, drawn_height) in [(0.0, 438.0, 0.0, 368.0), (438.0, 182.0, 438.0, 182.0)]
-    {
-        d.draw_texture_pro(
-            &a.environments,
-            Rectangle::new(
-                0.0,
-                source_height + from / 620.0 * source_height,
-                source_width,
-                height / 620.0 * source_height,
-            ),
-            Rectangle::new(x, to, width, drawn_height),
-            Vector2::zero(),
-            0.0,
-            Color::WHITE,
-        );
-    }
-    super::traffic::road(d, camera * PARALLAX);
-    // Continue only the foreground paving under the lower cinematic gradient.
-    // Rust remains on y580; the cycling lane and planter sit entirely behind him.
-    d.draw_texture_pro(
-        &a.environments,
-        Rectangle::new(0.0, source_height * 2.0 - 55.0, source_width, 55.0),
-        Rectangle::new(x, 620.0, width, 100.0),
-        Vector2::zero(),
-        0.0,
-        Color::WHITE,
-    );
-}
 
 /// Composes scenery behind Rust and the erratic, with separated feet baselines.
 pub fn draw(d: &mut impl RaylibDraw, ambient: &AmbientState, a: &Assets, camera: f32) {
@@ -77,8 +39,7 @@ fn draw_layers(
     camera: f32,
     neighbours: bool,
 ) {
-    let offset = camera * PARALLAX;
-    cycle_lane(d, offset);
+    let offset = camera;
     props(d, a, offset);
     if neighbours {
         super::neighborhood::draw(d, ambient, a, offset);
@@ -192,33 +153,6 @@ fn props(d: &mut impl RaylibDraw, a: &Assets, offset: f32) {
                 ),
             );
         }
-    }
-}
-
-fn cycle_lane(d: &mut impl RaylibDraw, offset: f32) {
-    // These small markings reinforce the painted parallel lane, well above
-    // the playable floor at y580. The curb belongs entirely to the background.
-    d.draw_rectangle(0, 440, 1728, 46, Color::new(150, 79, 63, 32));
-    d.draw_line_ex(
-        Vector2::new(0.0, 441.0),
-        Vector2::new(1728.0, 441.0),
-        2.0,
-        Color::new(245, 224, 184, 165),
-    );
-    d.draw_line_ex(
-        Vector2::new(0.0, 488.0),
-        Vector2::new(1728.0, 488.0),
-        3.0,
-        Color::new(245, 224, 184, 185),
-    );
-    for i in -1..10 {
-        let x = i as f32 * 182.0 - offset.rem_euclid(182.0);
-        d.draw_line_ex(
-            Vector2::new(x, 463.0),
-            Vector2::new(x + 51.0, 463.0),
-            2.0,
-            Color::new(245, 224, 184, 150),
-        );
     }
 }
 
