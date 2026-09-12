@@ -8,9 +8,10 @@
   "texts": "texts.json",
   "art": "world-art.json",
   "timing": {
-    "introduction_ticks": 180,
-    "guards_arrival_ticks": 100,
-    "erratics_arrival_ticks": 70,
-    "broker_escape_ticks": 150
+    "introduction_ticks": 1200,
+    "julia_attempt_ticks": 420,
+    "guards_arrival_ticks": 540,
+    "erratics_arrival_ticks": 480,
+    "broker_escape_ticks": 240
   }
 }

@@ -41,6 +41,7 @@ fn chapter_requires_real_two_wave_victories_and_respects_julias_choice() {
     let mut defeats = 0;
     let mut guard_knockouts = 0;
     let mut erratic_knockouts = 0;
+    let mut previous_threat_age = None;
     for _ in 0..24000 {
         let phase = chapter.phase();
         if phases.last() != Some(&phase) {
@@ -61,6 +62,10 @@ fn chapter_requires_real_two_wave_victories_and_respects_julias_choice() {
                 }
             }
         }
+        if let Some(age) = previous_threat_age {
+            assert_eq!(chapter.threat_age(), Some(age + 1));
+        }
+        previous_threat_age = chapter.threat_age();
         if chapter.complete() {
             break;
         }
@@ -77,7 +82,9 @@ fn chapter_requires_real_two_wave_victories_and_respects_julias_choice() {
     );
     assert_eq!(guard_knockouts, 3);
     assert_eq!(erratic_knockouts, 2);
+    assert!(phases.contains(&Phase::JuliaAttempt));
     assert!(phases.contains(&Phase::ErraticsArrival));
+    assert!(!phases.contains(&Phase::BrokerEscape));
     assert!(phases.contains(&Phase::RescueDialogue));
     assert_eq!(chapter.checkpoint().stage, CheckpointStage::Complete);
     assert_eq!(chapter.texts.speakers["julia"].age, Some(22));
@@ -107,6 +114,7 @@ fn skip_cannot_win_encounters_and_checkpoint_recreates_both_flanks() {
         .collect();
     assert_eq!(enemies.len(), 2);
     assert!(enemies[0].position.x < x && enemies[1].position.x > x);
+    assert!(chapter.npcs().iter().all(|npc| npc.character != "broker"));
     for _ in 0..30 {
         chapter
             .tick(ChapterInput {
@@ -255,7 +263,7 @@ fn approaching_during_a_jump_lands_before_dialogue_takes_control() {
             crossed_in_air = true;
             assert_eq!(chapter.phase(), Phase::Approach);
         }
-        if chapter.phase() == Phase::Confrontation {
+        if chapter.phase() == Phase::JuliaAttempt {
             break;
         }
         chapter
@@ -269,7 +277,7 @@ fn approaching_during_a_jump_lands_before_dialogue_takes_control() {
             .unwrap();
     }
     assert!(crossed_in_air);
-    assert_eq!(chapter.phase(), Phase::Confrontation);
+    assert_eq!(chapter.phase(), Phase::JuliaAttempt);
     assert!(chapter.simulation().player().grounded);
     let x = chapter.simulation().player().position.x;
     for _ in 0..20 {
@@ -288,6 +296,13 @@ fn approaching_during_a_jump_lands_before_dialogue_takes_control() {
     assert_eq!(chapter.simulation().player().position.x, x);
     assert_eq!(chapter.simulation().player().clip_id(), "idle");
     assert!(chapter.simulation().player().action_ticks >= 20);
+    chapter
+        .tick(ChapterInput {
+            skip: true,
+            ..ChapterInput::default()
+        })
+        .unwrap();
+    assert_eq!(chapter.phase(), Phase::Confrontation);
 }
 
 #[test]
@@ -345,4 +360,232 @@ fn reload_candidate_rebuilds_current_checkpoint_without_mutating_the_live_chapte
         ),
         original
     );
+}
+
+#[test]
+fn julia_attempt_preserves_the_pair_axis_and_short_contact_on_both_approaches() {
+    for approach_x in [1400.0, 1900.0] {
+        let mut chapter = chapter();
+        chapter.enter(Phase::Approach);
+        chapter
+            .simulation
+            .stage_player(approach_x, Facing::Right)
+            .unwrap();
+        chapter.tick(ChapterInput::default()).unwrap();
+        assert_eq!(chapter.phase(), Phase::JuliaAttempt);
+        let player_x = chapter.simulation().player().position.x;
+        let mut max_tension = 0.0_f32;
+        let mut nearest_julia_x = chapter.world.julia_initial_x;
+        for _ in 0..chapter.spec.timing.julia_attempt_ticks {
+            let poses = chapter.npcs();
+            let julia = poses.iter().find(|npc| npc.character == "julia").unwrap();
+            let broker = poses.iter().find(|npc| npc.character == "broker").unwrap();
+            assert!(player_x < broker.position.x && broker.position.x < julia.position.x);
+            assert_eq!(julia.facing, Facing::Left);
+            assert!(julia.depth > broker.depth);
+            let contact = chapter.restraint_contact().unwrap();
+            for (a, b) in [
+                (contact.broker_shoulder, contact.broker_elbow),
+                (contact.broker_elbow, contact.julia_wrist),
+                (contact.julia_wrist, contact.julia_shoulder),
+            ] {
+                assert!((a.x - b.x).hypot(a.y - b.y) < 45.0);
+            }
+            assert_eq!(contact.julia_wrist.x, julia.position.x - 24.0);
+            max_tension = max_tension.max(contact.tension);
+            nearest_julia_x = nearest_julia_x.min(julia.position.x);
+            chapter
+                .tick(ChapterInput {
+                    combat: Input {
+                        movement: 1.0,
+                        jump: true,
+                        light: true,
+                        ..Input::default()
+                    },
+                    ..ChapterInput::default()
+                })
+                .unwrap();
+            assert_eq!(chapter.simulation().player().position.x, player_x);
+        }
+        assert_eq!(chapter.phase(), Phase::Confrontation);
+        assert!(max_tension > 0.99);
+        assert!(nearest_julia_x < chapter.world.julia_initial_x - 20.0);
+        assert_eq!(chapter.npcs()[0].position.x, chapter.world.julia_initial_x);
+        chapter.start_wave(false, true).unwrap();
+        assert!(chapter.restraint_contact().is_none());
+    }
+}
+
+#[test]
+fn guards_exit_one_threshold_in_order_and_match_both_combat_handoffs() {
+    for player_x in [1250.0, 2200.0] {
+        let mut chapter = chapter();
+        chapter
+            .simulation
+            .stage_player(player_x, Facing::Right)
+            .unwrap();
+        chapter.start_wave(false, true).unwrap();
+        let ids = chapter.staged_enemies.clone();
+        let mut first_visible = vec![None; ids.len()];
+        let mut bypassed_player = false;
+        let hp = chapter.simulation().player().hp;
+        for tick in 0..chapter.spec.timing.guards_arrival_ticks {
+            for (index, id) in ids.iter().enumerate() {
+                let actor = chapter.simulation().actor(*id).unwrap();
+                let pose = chapter.arrival_pose(*id).unwrap();
+                assert!(!actor.active);
+                assert!(pose.position.y >= chapter.world.bar_door[1]);
+                assert!(pose.position.y <= chapter.world.ground_y + 25.0);
+                assert_eq!(pose.depth, chapter.world.ground_y - pose.position.y);
+                if index == 0 && (pose.position.x - player_x).abs() < 10.0 {
+                    assert_eq!(pose.depth, -25.0);
+                    bypassed_player = true;
+                }
+                if pose.visible && first_visible[index].is_none() {
+                    first_visible[index] = Some(tick);
+                    assert_eq!(
+                        pose.position,
+                        Vec2::new(chapter.world.bar_door[0], chapter.world.bar_door[1])
+                    );
+                }
+                if tick >= chapter.spec.timing.guards_arrival_ticks * 9 / 10 {
+                    assert_eq!(pose.position, actor.position);
+                    assert_eq!(pose.facing, actor.facing);
+                    assert_eq!(pose.depth, 0.0);
+                }
+            }
+            chapter
+                .tick(ChapterInput {
+                    combat: Input {
+                        movement: -1.0,
+                        light: true,
+                        ..Input::default()
+                    },
+                    ..ChapterInput::default()
+                })
+                .unwrap();
+        }
+        assert_eq!(chapter.phase(), Phase::GuardsFight);
+        assert_eq!(chapter.simulation().player().position.x, player_x);
+        assert_eq!(chapter.simulation().player().hp, hp);
+        assert!(first_visible.iter().all(Option::is_some));
+        assert!(first_visible.windows(2).all(|pair| pair[0] < pair[1]));
+        if player_x < chapter.world.bar_door[0] {
+            assert!(bypassed_player);
+        }
+        for id in ids {
+            assert!(chapter.simulation().actor(id).unwrap().active);
+            assert!(chapter.arrival_pose(id).is_none());
+        }
+    }
+}
+
+#[test]
+fn broker_panics_and_runs_during_arrival_and_skip_and_retry_keep_him_gone() {
+    for skip in [false, true] {
+        let mut chapter = chapter();
+        chapter
+            .simulation
+            .stage_player(chapter.world.erratic_center_x, Facing::Right)
+            .unwrap();
+        chapter.start_wave(true, true).unwrap();
+        assert_eq!(chapter.broker_escape_age(), None);
+        let panic_at = chapter.spec.timing.erratics_arrival_ticks / 8;
+        for _ in 0..panic_at {
+            chapter.tick(ChapterInput::default()).unwrap();
+        }
+        assert_eq!(chapter.broker_escape_age(), Some(0));
+        assert_eq!(chapter.npcs().last().unwrap().clip, "guard");
+        for _ in 0..60 {
+            chapter.tick(ChapterInput::default()).unwrap();
+        }
+        let broker = chapter
+            .npcs()
+            .into_iter()
+            .find(|npc| npc.character == "broker")
+            .unwrap();
+        assert_eq!(chapter.phase(), Phase::ErraticsArrival);
+        assert_eq!(broker.clip, "run");
+        assert_eq!(broker.facing, Facing::Left);
+        assert!(broker.position.x < chapter.world.broker_x - 100.0);
+        if skip {
+            chapter
+                .tick(ChapterInput {
+                    skip: true,
+                    ..ChapterInput::default()
+                })
+                .unwrap();
+        } else {
+            while chapter.phase() == Phase::ErraticsArrival {
+                chapter.tick(ChapterInput::default()).unwrap();
+            }
+        }
+        assert_eq!(chapter.phase(), Phase::ErraticsFight);
+        assert_eq!(
+            chapter.threat_age(),
+            Some(u64::from(chapter.spec.timing.erratics_arrival_ticks))
+        );
+        assert!(chapter.npcs().iter().all(|npc| npc.character != "broker"));
+        assert!(
+            chapter
+                .simulation()
+                .actors()
+                .iter()
+                .all(|actor| actor.hp == actor.max_hp)
+        );
+        chapter.retry().unwrap();
+        assert!(chapter.threat_age().is_some_and(|age| age >= 600));
+        assert!(chapter.npcs().iter().all(|npc| npc.character != "broker"));
+        assert_eq!(chapter.phase(), Phase::ErraticsFight);
+    }
+}
+
+#[test]
+fn skipping_each_cinematic_reconstructs_its_safe_endpoint() {
+    let mut chapter = chapter();
+    let skip = ChapterInput {
+        skip: true,
+        ..ChapterInput::default()
+    };
+    chapter.tick(skip).unwrap();
+    assert_eq!(chapter.phase(), Phase::Approach);
+    chapter
+        .simulation
+        .stage_player(chapter.world.confrontation_x, Facing::Right)
+        .unwrap();
+    chapter.tick(ChapterInput::default()).unwrap();
+    chapter.tick(skip).unwrap();
+    assert_eq!(chapter.phase(), Phase::Confrontation);
+    assert_eq!(chapter.npcs()[0].position.x, chapter.world.julia_initial_x);
+    chapter.start_wave(false, true).unwrap();
+    chapter.tick(skip).unwrap();
+    assert_eq!(chapter.phase(), Phase::GuardsFight);
+    assert!(
+        chapter
+            .simulation()
+            .actors()
+            .iter()
+            .all(|actor| actor.active)
+    );
+    assert!(chapter.restraint_contact().is_none());
+    for stage in [
+        "arrival",
+        "guards_fight",
+        "erratics_fight",
+        "rescue",
+        "complete",
+    ] {
+        let checkpoint: Checkpoint =
+            serde_json::from_value(serde_json::json!({"version": 1, "stage": stage})).unwrap();
+        checkpoint.validate().unwrap();
+        chapter.checkpoint = checkpoint;
+        chapter.retry().unwrap();
+        assert_eq!(chapter.checkpoint(), checkpoint);
+        if matches!(
+            checkpoint.stage,
+            CheckpointStage::ErraticsFight | CheckpointStage::Rescue | CheckpointStage::Complete
+        ) {
+            assert!(chapter.npcs().iter().all(|npc| npc.character != "broker"));
+        }
+    }
 }

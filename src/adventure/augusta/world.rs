@@ -29,6 +29,8 @@ pub struct World {
     pub confrontation_x: f32,
     pub guards_arena: [f32; 2],
     pub guards_spawn_x: Vec<f32>,
+    /// One physical threshold under LIMIAR; every guard exits this opening.
+    pub bar_door: [f32; 2],
     pub erratic_center_x: f32,
     pub erratic_landings_x: [f32; 2],
     pub julia_initial_x: f32,
@@ -84,6 +86,9 @@ impl World {
             || world.erratic_landings_x[0] >= world.erratic_center_x - 120.0
             || world.erratic_landings_x[1] <= world.erratic_center_x + 120.0
             || world.player_spawn_x >= world.confrontation_x
+            || !inside(world.bar_door[0])
+            || !(world.ground_y - 100.0..=world.ground_y).contains(&world.bar_door[1])
+            || !(44.0..=100.0).contains(&(world.julia_initial_x - world.broker_x))
             || world.julia_x <= world.guards_arena[1]
             || world.exit_x <= world.julia_x
         {
@@ -115,6 +120,7 @@ impl World {
 #[serde(deny_unknown_fields)]
 pub struct Timing {
     pub introduction_ticks: u32,
+    pub julia_attempt_ticks: u32,
     pub guards_arrival_ticks: u32,
     pub erratics_arrival_ticks: u32,
     pub broker_escape_ticks: u32,
@@ -153,10 +159,12 @@ impl ChapterSpec {
             || !local_file(&spec.world)
             || !local_file(&spec.texts)
             || !local_file(&spec.art)
-            || !(60..=1200).contains(&spec.timing.introduction_ticks)
-            || !(30..=600).contains(&spec.timing.guards_arrival_ticks)
-            || !(30..=180).contains(&spec.timing.erratics_arrival_ticks)
+            || !(60..=3600).contains(&spec.timing.introduction_ticks)
+            || !(120..=1200).contains(&spec.timing.julia_attempt_ticks)
+            || !(120..=1800).contains(&spec.timing.guards_arrival_ticks)
+            || !(120..=1200).contains(&spec.timing.erratics_arrival_ticks)
             || !(30..=600).contains(&spec.timing.broker_escape_ticks)
+            || spec.timing.broker_escape_ticks > spec.timing.erratics_arrival_ticks * 7 / 8
         {
             return Err("invalid C++ chapter entry or timing".into());
         }

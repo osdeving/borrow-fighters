@@ -20,6 +20,7 @@ mod tests;
 pub enum Phase {
     Introduction,
     Approach,
+    JuliaAttempt,
     Confrontation,
     GuardsArrival,
     GuardsFight,
@@ -51,12 +52,30 @@ pub struct NpcPose {
     pub facing: Facing,
     pub clip: &'static str,
     pub ticks: u32,
+    /// Positive depth places an actor behind the gameplay lane; y includes it.
+    pub depth: f32,
+    pub visible: bool,
+}
+
+/// Authored, short arm chain shared by both views of the restrained pair.
+#[derive(Clone, Copy, Debug)]
+pub struct RestraintContact {
+    pub broker_shoulder: Vec2,
+    pub broker_elbow: Vec2,
+    pub julia_wrist: Vec2,
+    pub julia_shoulder: Vec2,
+    pub depth: f32,
+    /// Zero at rest, one when Julia pulls away against the grip.
+    pub tension: f32,
 }
 
 /// A staging override for an existing, inactive combat actor with a stable ID.
 #[derive(Clone, Copy, Debug)]
 pub struct ArrivalPose {
     pub position: Vec2,
+    pub facing: Facing,
+    pub depth: f32,
+    pub visible: bool,
     pub scale: f32,
     pub clip: &'static str,
     pub ticks: u32,
@@ -75,7 +94,8 @@ pub struct Chapter {
     line_ticks: u32,
     checkpoint: Checkpoint,
     staged_enemies: Vec<ActorId>,
-    escape_origin: f32,
+    broker_flee_ticks: Option<u32>,
+    threat_ticks: Option<u64>,
     julia_escape_ticks: u32,
     landing_tick: Option<u64>,
 }
@@ -107,7 +127,8 @@ impl Chapter {
             world.player_spawn_x,
         )?;
         Ok(Self {
-            escape_origin: world.broker_x,
+            broker_flee_ticks: None,
+            threat_ticks: None,
             spec,
             world,
             texts,
@@ -166,6 +187,14 @@ impl Chapter {
     pub fn dialogue_ticks(&self) -> u32 {
         self.line_ticks
     }
+    /// Panic and running start during EP arrival and remain completed on retry.
+    pub fn broker_escape_age(&self) -> Option<u32> {
+        self.broker_flee_ticks
+    }
+    /// One evacuation clock spans the descent, combat and rescue camera cuts.
+    pub fn threat_age(&self) -> Option<u64> {
+        self.threat_ticks
+    }
     /// The physical contact clock survives the camera handoff into live combat.
     pub fn landing_age(&self) -> Option<u32> {
         self.landing_tick
@@ -197,6 +226,7 @@ impl Chapter {
     pub fn objective_key(&self) -> &'static str {
         match self.phase {
             Phase::Introduction | Phase::Approach | Phase::Confrontation => "objective.approach",
+            Phase::JuliaAttempt => "julia.attempt",
             Phase::GuardsArrival => "arrival.guards",
             Phase::GuardsFight => "objective.guards",
             Phase::AfterGuards => "objective.after_guards",
@@ -243,6 +273,14 @@ impl Chapter {
             .set_bounds(Self::bounds(&self.world, true))?;
         self.simulation.clear_encounter();
         self.staged_enemies.clear();
+        if erratics {
+            self.threat_ticks = Some(if staged { 0 } else { 600 });
+            self.broker_flee_ticks = if staged {
+                None
+            } else {
+                Some(self.spec.timing.broker_escape_ticks)
+            };
+        }
         for spawn in self.enemies(erratics) {
             self.staged_enemies
                 .push(self.simulation.spawn_enemy(&spawn, !staged)?);
@@ -268,6 +306,14 @@ impl Chapter {
             .set_bounds(Self::bounds(&self.world, false))?;
         self.staged_enemies.clear();
         self.julia_escape_ticks = 600;
+        self.broker_flee_ticks = match self.checkpoint.stage {
+            CheckpointStage::Arrival | CheckpointStage::GuardsFight => None,
+            _ => Some(self.spec.timing.broker_escape_ticks),
+        };
+        self.threat_ticks = match self.checkpoint.stage {
+            CheckpointStage::Arrival | CheckpointStage::GuardsFight => None,
+            _ => Some(600),
+        };
         match self.checkpoint.stage {
             CheckpointStage::Arrival => {
                 self.simulation.reset_player(self.world.player_spawn_x)?;
@@ -305,6 +351,12 @@ impl Chapter {
         }
         self.ticks += 1;
         self.phase_ticks += 1;
+        if let Some(age) = &mut self.broker_flee_ticks {
+            *age = age.saturating_add(1);
+        }
+        if let Some(age) = &mut self.threat_ticks {
+            *age = age.saturating_add(1);
+        }
         if self.checkpoint.stage != CheckpointStage::Arrival {
             self.julia_escape_ticks = self.julia_escape_ticks.saturating_add(1);
         }
@@ -340,6 +392,12 @@ impl Chapter {
                     self.enter(Phase::Approach);
                 }
             }
+            Phase::JuliaAttempt => {
+                events = self.simulation.tick(Input::default());
+                if input.skip || self.phase_ticks >= self.spec.timing.julia_attempt_ticks {
+                    self.enter(Phase::Confrontation);
+                }
+            }
             Phase::Approach | Phase::FindJulia | Phase::Exit => {
                 events = self.simulation.tick(input.combat);
                 let x = self.simulation.player().position.x;
@@ -348,9 +406,11 @@ impl Chapter {
                         if x >= self.world.confrontation_x - 100.0
                             && self.simulation.player().grounded =>
                     {
-                        self.simulation
-                            .stage_player(x, facing_toward(x, self.world.broker_x))?;
-                        self.enter(Phase::Confrontation);
+                        // An overshooting jump must land before staging; preserve
+                        // the established C++ -> broker -> Julia screen direction.
+                        let x = x.min(self.world.broker_x - 150.0);
+                        self.simulation.stage_player(x, Facing::Right)?;
+                        self.enter(Phase::JuliaAttempt);
                     }
                     Phase::FindJulia
                         if input.interact
@@ -372,6 +432,12 @@ impl Chapter {
             Phase::GuardsArrival | Phase::ErraticsArrival => {
                 events = self.simulation.tick(Input::default());
                 if self.phase == Phase::ErraticsArrival
+                    && self.broker_flee_ticks.is_none()
+                    && self.phase_ticks >= self.spec.timing.erratics_arrival_ticks / 8
+                {
+                    self.broker_flee_ticks = Some(0);
+                }
+                if self.phase == Phase::ErraticsArrival
                     && self.landing_tick.is_none()
                     && self.phase_ticks >= self.spec.timing.erratics_arrival_ticks * 3 / 4
                 {
@@ -383,6 +449,14 @@ impl Chapter {
                     self.spec.timing.erratics_arrival_ticks
                 };
                 if input.skip || self.phase_ticks >= duration {
+                    if self.phase == Phase::ErraticsArrival {
+                        self.broker_flee_ticks = Some(self.spec.timing.broker_escape_ticks);
+                        if input.skip {
+                            self.threat_ticks = Some(u64::from(duration));
+                        }
+                    } else {
+                        self.julia_escape_ticks = self.julia_escape_ticks.max(230);
+                    }
                     for id in &self.staged_enemies {
                         self.simulation.set_actor_active(*id, true)?;
                     }
@@ -407,9 +481,8 @@ impl Chapter {
                     } else {
                         self.simulation
                             .set_bounds(Self::bounds(&self.world, false))?;
-                        self.escape_origin = self.world.broker_x;
                         self.checkpoint.stage = CheckpointStage::Rescue;
-                        self.enter(Phase::BrokerEscape);
+                        self.enter(Phase::FindJulia);
                     }
                 }
             }
@@ -437,9 +510,22 @@ impl Chapter {
         Ok(events)
     }
 
+    fn attempt_tension(&self) -> f32 {
+        if self.phase != Phase::JuliaAttempt {
+            return 0.0;
+        }
+        let p = self.phase_ticks as f32 / self.spec.timing.julia_attempt_ticks as f32;
+        // She takes a step, meets the grip, then regains her footing. Both
+        // endpoints equal the idle staging, so skip never leaves an offset.
+        let reach = smooth((p - 0.12) / 0.27);
+        let recover = smooth((p - 0.52) / 0.32);
+        reach * (1.0 - recover)
+    }
+
     pub fn npcs(&self) -> Vec<NpcPose> {
         let mut result = vec![];
         let escaped = self.checkpoint.stage != CheckpointStage::Arrival;
+        let tension = self.attempt_tension();
         let (julia_x, clip) = if matches!(self.phase, Phase::Exit | Phase::Complete) {
             (
                 (self.simulation.player().position.x - 78.0).max(self.world.julia_x),
@@ -458,11 +544,19 @@ impl Chapter {
                 if p < 1.0 { "run" } else { "idle" },
             )
         } else {
-            (self.world.julia_initial_x, "idle")
+            (
+                self.world.julia_initial_x - tension * 22.0,
+                if tension > 0.04 { "run" } else { "idle" },
+            )
+        };
+        let julia_depth = if escaped {
+            16.0 * (1.0 - self.julia_escape_ticks as f32 / 90.0).clamp(0.0, 1.0)
+        } else {
+            16.0
         };
         result.push(NpcPose {
             character: "julia",
-            position: Vec2::new(julia_x, self.world.ground_y),
+            position: Vec2::new(julia_x, self.world.ground_y - julia_depth),
             facing: if matches!(self.phase, Phase::Confrontation | Phase::RescueDialogue) {
                 facing_toward(julia_x, self.simulation.player().position.x)
             } else if !escaped
@@ -476,30 +570,72 @@ impl Chapter {
             },
             clip,
             ticks: self.ticks as u32,
+            depth: julia_depth,
+            visible: true,
         });
-        if !matches!(
-            self.phase,
-            Phase::FindJulia | Phase::RescueDialogue | Phase::Exit | Phase::Complete
-        ) {
-            let escaping = self.phase == Phase::BrokerEscape;
-            let x = if escaping {
-                self.escape_origin - self.phase_ticks as f32 * 6.0
+        let flee_duration = self.spec.timing.broker_escape_ticks;
+        let gone = self
+            .broker_flee_ticks
+            .is_some_and(|age| age >= flee_duration)
+            || matches!(
+                self.phase,
+                Phase::FindJulia | Phase::RescueDialogue | Phase::Exit | Phase::Complete
+            );
+        if !gone {
+            let age = self.broker_flee_ticks.unwrap_or(0);
+            let running = self.broker_flee_ticks.is_some() && age >= 24;
+            let p = age.saturating_sub(24) as f32 / (flee_duration - 24) as f32;
+            let x = if running {
+                self.world.broker_x
+                    + (self.world.walk_bounds[0] - 240.0 - self.world.broker_x) * smooth(p)
             } else {
                 self.world.broker_x
             };
             result.push(NpcPose {
                 character: "broker",
                 position: Vec2::new(x, self.world.ground_y),
-                facing: if escaping {
+                facing: if self.broker_flee_ticks.is_some() {
                     Facing::Left
                 } else {
                     facing_toward(x, self.simulation.player().position.x)
                 },
-                clip: if escaping { "run" } else { "idle" },
-                ticks: self.ticks as u32,
+                clip: if running {
+                    "run"
+                } else if self.broker_flee_ticks.is_some() {
+                    "guard"
+                } else {
+                    "idle"
+                },
+                ticks: if self.broker_flee_ticks.is_some() {
+                    age
+                } else {
+                    self.ticks as u32
+                },
+                depth: 0.0,
+                visible: true,
             });
         }
         result
+    }
+
+    /// Holds Julia's forearm behind the broker until C++ opens the escape route.
+    /// World sockets are stable across camera angles and stay within arm reach.
+    pub fn restraint_contact(&self) -> Option<RestraintContact> {
+        if self.checkpoint.stage != CheckpointStage::Arrival {
+            return None;
+        }
+        let tension = self.attempt_tension();
+        let julia_x = self.world.julia_initial_x - tension * 22.0;
+        let shoulder = Vec2::new(self.world.broker_x + 13.0, self.world.ground_y - 151.0);
+        let wrist = Vec2::new(julia_x - 24.0, self.world.ground_y - 132.0);
+        Some(RestraintContact {
+            broker_shoulder: shoulder,
+            broker_elbow: Vec2::new((shoulder.x + wrist.x) * 0.5 + 4.0, wrist.y + 10.0),
+            julia_wrist: wrist,
+            julia_shoulder: Vec2::new(julia_x - 10.0, self.world.ground_y - 145.0),
+            depth: 8.0,
+            tension,
+        })
     }
 
     pub fn arrival_pose(&self, id: ActorId) -> Option<ArrivalPose> {
@@ -508,16 +644,50 @@ impl Chapter {
         }
         let actor = self.simulation.actor(id)?;
         if self.phase == Phase::GuardsArrival {
-            let p =
-                (self.phase_ticks as f32 / self.spec.timing.guards_arrival_ticks as f32).min(1.0);
+            let index = self
+                .staged_enemies
+                .iter()
+                .position(|staged| *staged == id)? as u32;
+            let duration = self.spec.timing.guards_arrival_ticks;
+            let start = duration / 10 + index * duration * 3 / 20;
+            let finish = duration * 9 / 10;
+            let age = self.phase_ticks.saturating_sub(start);
+            let travel_ticks = finish - start;
+            let emerge_ticks = travel_ticks.min(duration / 9);
+            let toward_exit = facing_toward(self.world.bar_door[0], actor.position.x);
+            let emerge = smooth(age as f32 / emerge_ticks as f32);
+            let walk = (age.saturating_sub(emerge_ticks) as f32
+                / (travel_ticks - emerge_ticks) as f32)
+                .clamp(0.0, 1.0);
+            let threshold_x = self.world.bar_door[0] + toward_exit.sign() * 32.0;
+            let x = if age < emerge_ticks {
+                self.world.bar_door[0] + toward_exit.sign() * 32.0 * emerge
+            } else {
+                threshold_x + (actor.position.x - threshold_x) * walk
+            };
+            // The first guard passes in front of C++ before taking the left
+            // flank. A short depth detour avoids walking through her body;
+            // both the door and final combat position remain exact endpoints.
+            let bypass = if index == 0 && walk > 0.0 && walk < 1.0 {
+                25.0 * smooth(walk / 0.18) * (1.0 - smooth((walk - 0.72) / 0.28))
+            } else {
+                0.0
+            };
+            let y = self.world.bar_door[1]
+                + (self.world.ground_y - self.world.bar_door[1]) * emerge
+                + bypass;
             return Some(ArrivalPose {
-                position: Vec2::new(
-                    actor.position.x - actor.facing.sign() * (1.0 - p) * 150.0,
-                    actor.position.y,
-                ),
+                position: Vec2::new(x, y),
+                facing: if walk >= 1.0 {
+                    actor.facing
+                } else {
+                    toward_exit
+                },
+                depth: self.world.ground_y - y,
+                visible: self.phase_ticks >= start,
                 scale: 1.0,
-                clip: "run",
-                ticks: self.phase_ticks,
+                clip: if walk >= 1.0 { "idle" } else { "run" },
+                ticks: age,
                 impact_age: None,
             });
         }
@@ -532,13 +702,20 @@ impl Chapter {
                 actor.position.x - actor.facing.sign() * (1.0 - descent) * 260.0,
                 actor.position.y - (1.0 - descent) * 1350.0,
             ),
+            facing: actor.facing,
+            depth: 0.0,
+            visible: true,
             scale: 0.32 + 0.68 * descent,
             clip: if self.phase_ticks >= impact {
                 "land"
             } else {
                 "arrival"
             },
-            ticks: self.phase_ticks.saturating_sub(impact),
+            ticks: if self.phase_ticks >= impact {
+                self.phase_ticks - impact
+            } else {
+                self.phase_ticks
+            },
             impact_age: (self.phase_ticks >= impact).then(|| self.phase_ticks - impact),
         })
     }
@@ -550,4 +727,9 @@ fn facing_toward(x: f32, target: f32) -> Facing {
     } else {
         Facing::Right
     }
+}
+
+fn smooth(value: f32) -> f32 {
+    let p = value.clamp(0.0, 1.0);
+    p * p * (3.0 - 2.0 * p)
 }

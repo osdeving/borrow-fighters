@@ -22,7 +22,7 @@
     1450,
     2150
   ],
-  "julia_initial_x": 1590,
+  "julia_initial_x": 1748,
   "julia_x": 2850,
   "broker_x": 1680,
   "exit_x": 3350,
@@ -197,5 +197,9 @@
       "scale": 1,
       "layer": 15
     }
+  ],
+  "bar_door": [
+    1536,
+    500
   ]
 }

@@ -8,9 +8,9 @@
     "objective.erratics": "Duas erráticas cercaram C++. Enfrente a ameaça.",
     "objective.rescue": "Encontre Julia junto à entrada iluminada.",
     "objective.exit": "Acompanhe Julia até a saída da rua.",
-    "arrival.guards": "Os seguranças fecham a passagem.",
+    "arrival.guards": "Os seguranças saem do Limiar e fecham a passagem.",
     "arrival.erratics": "O ar se rompe dos dois lados.",
-    "broker.escape": "O cafetão aproveita a confusão e foge.",
+    "broker.escape": "Ao ver as erráticas, o cafetão entra em pânico e foge.",
     "chapter.complete": "Julia está em segurança. O caminho dela continua por escolha própria.",
     "controls": "A/D: mover · Espaço: pular · J: golpe · V: chute · K: giro · L: Linker · Q: defender · E: conversar",
     "dialogue.next": "Enter / A: continuar",
@@ -25,7 +25,12 @@
     "chapter.complete_title": "Rua Augusta — capítulo concluído",
     "chapter.return": "Enter / A: voltar à seleção de capítulos",
     "defeat.title": "Tente novamente",
-    "objective.after_guards": "Garanta que Julia possa sair em segurança."
+    "objective.after_guards": "Garanta que Julia possa sair em segurança.",
+    "julia.attempt": "Julia tenta sair. Ele aperta o braço dela.",
+    "cinema.skip": "Backspace / View: pular cena",
+    "cinema.place": "São Paulo · Depois da meia-noite",
+    "cinema.julia": "C++! Eu quero ir embora.",
+    "cinema.panic": "O que é isso?! Sai da frente!"
   },
   "speakers": {
     "cpp": {
@@ -65,7 +70,7 @@
       },
       {
         "speaker": "cpp",
-        "text": "Impedir alguém de ir embora virou problema meu. Julia, fique atrás de mim."
+        "text": "Impedir alguém de ir embora virou problema meu. Solta o braço dela."
       },
       {
         "speaker": "julia",
@@ -105,7 +110,7 @@
       },
       {
         "speaker": "cpp",
-        "text": "Fugiu. Agora vamos cuidar de você. Tem alguém com quem queira falar?"
+        "text": "Fugiu quando viu as erráticas chegando. Agora vamos cuidar de você. Tem alguém com quem queira falar?"
       },
       {
         "speaker": "julia",
