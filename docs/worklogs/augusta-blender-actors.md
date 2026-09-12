@@ -42,10 +42,37 @@ Arquivo e checksums em `/tmp/borrow-blender-install`. Instalação local em
 - Baseline de continuidade: `docs/evidence/augusta-3d-pilot/baseline.json`
   registra SHA-256 de onze arquivos de cenário, história e câmera.
 
+## Checkpoint — piloto nativo e animação
+
+- C++ e os três tipos de veículo carregaram como GLB no próprio Raylib;
+  piloto ativado por `BORROW_AUGUSTA_MODELS_3D=1`. A pintura anterior continua
+  disponível como referência enquanto o elenco é ampliado.
+- Captura nativa de 720 quadros em `/tmp/augusta-cpp3d-opening-v5`; comparação
+  com o filme anterior confirmou os onze hashes fixos e todos os campos
+  originais da telemetria nos 720 quadros. Isso verifica continuidade de
+  estado/cenário, não aprova a qualidade dos modelos.
+- Laboratório nativo `/tmp/augusta-cpp3d-lab-v5`: 120 quadros, 40 folhas e seis
+  ampliações; mostrou necessidade de corrigir botas/cadarços e braços na corrida.
+- `tools/blender/actor_motion.py` resolve braços/pernas sobre o esqueleto real,
+  conserva durações da C++, exporta 60 quadros/s e separa movimento local da
+  orientação/rota já existente. Apoios usam a distância percorrida no runtime.
+- Medição de 65 fases por ação em doze ações: alvos de mãos e tornozelos
+  alcançados com erro abaixo de 0,000001m. Revisão visual continua necessária
+  para roupa, cabelo, contato e interpenetração. Corrida e dedos em refinamento.
+- `tools/blender/render_motion.py` permite renderizar somente ação/fases
+  escolhidas no Blender, sem executar campanha nem exportar todos os modelos.
+- Empacotador passa a seguir catálogos GLB, exigir texturas/buffers embutidos e
+  excluir `.blend` da distribuição. Doze testes de referências passaram.
+- Integração Rust teve build release, fmt, Clippy focado e três testes de
+  catálogo/tempo/IK aprovados pelo agente; validação final aguarda elenco completo.
+- Fontes humanas: base/rig MPFB e roupas CC0 selecionadas, com URLs/hashes em
+  `assets/adventure/production-3d/humans/provenance.json`; ferramenta externa
+  em `/tmp/borrow-fighters-mpfb2`, pacotes em `/tmp/borrow-fighters-mh-assets`.
+
 ## Próximos marcos
 
-1. Confirmar execução Blender e render do piloto com identidade revisável.
-2. Reproduzir C++ 3D num enquadramento atual, sem alterar o cenário.
+1. Concluir correções de roupa/cabelo/botas e movimentos da C++ no piloto.
+2. Comparar close e corrida nativos usando a exportação atualizada.
 3. Completar humanos/carros, poses/contatos e reprodução no gameplay.
 4. Rever quadros consecutivos e tomadas equivalentes; validar fontes e pacote.
 5. Executar fmt, Clippy e testes pertinentes à integração, registrar resultados

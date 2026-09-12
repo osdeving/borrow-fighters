@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 import re
 import shutil
+import struct
 import subprocess
 import tarfile
 import tempfile
@@ -165,6 +166,28 @@ def production_file(directory, name, suffix):
     return file
 
 
+def production_model(directory, name):
+    """Require a self-contained GLB so staged models cannot lose their textures."""
+    file = production_file(directory, name, ".glb")
+    try:
+        with file.open("rb") as handle:
+            magic, version, size = struct.unpack("<4sII", handle.read(12))
+            if magic != b"glTF" or version != 2 or size != file.stat().st_size:
+                raise ValueError("invalid GLB header or truncated file")
+            length, kind = struct.unpack("<I4s", handle.read(8))
+            if kind != b"JSON" or length > size - 20:
+                raise ValueError("missing GLB JSON chunk")
+            content = json.loads(handle.read(length))
+        for resource in [*content.get("buffers", []), *content.get("images", [])]:
+            uri = resource.get("uri")
+            if uri is not None and (not isinstance(uri, str) or not uri.startswith("data:")):
+                raise ValueError("GLB must embed all buffers and textures")
+    except (OSError, struct.error, json.JSONDecodeError, ValueError,
+            TypeError, AttributeError) as error:
+        raise ValueError(f"Invalid production model {file}: {error}") from error
+    return file
+
+
 def production_assets():
     """Follow campaign/chapter/actor/audio fields, never whole asset directories.
 
@@ -220,6 +243,13 @@ def production_assets():
                 # Crowd rigs reference world piece ids, so their PNGs already
                 # belong to the art closure. Ship the authored registration too.
                 document(production_file(directory, art["nightlife_cast"], ".json"))
+            for name in art.get("models_3d", {}).values():
+                catalog_path = production_file(base, name, ".json")
+                models = document(catalog_path)
+                if models.get("schema_version") != 1:
+                    raise ValueError(f"Unsupported 3D model catalog: {catalog_path}")
+                for model in models["entries"].values():
+                    files.add(production_model(catalog_path.parent, model["file"]))
             for name in art["actors"].values():
                 actor(production_file(base, name, ".json"))
         audio_path = production_file(base, "audio/production/catalog.json", ".json")

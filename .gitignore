@@ -177,6 +177,12 @@ compile_commands.json
 # Game/dev generated output
 ###############################################################################
 
+# Blender backups are local recovery files; editable .blend sources stay tracked.
+*.blend[0-9]
+*.blend[0-9][0-9]
+# Wavefront meshes here are art sources, not native object-code artifacts.
+!assets/adventure/production-3d/**/*.obj
+
 captures/
 screenshots/
 recordings/

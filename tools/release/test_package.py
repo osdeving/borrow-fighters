@@ -3,6 +3,7 @@
 import argparse
 from contextlib import ExitStack
 import json
+import struct
 from pathlib import Path
 import tempfile
 import unittest
@@ -357,6 +358,36 @@ class ProductionReferencesTests(unittest.TestCase):
             self.write(self.chapter + "art.json", self.art)
             with self.subTest(name=name), self.assertRaisesRegex(ValueError, "Production"):
                 package.production_assets()
+
+    def make_models(self, gltf=None):
+        self.art["models_3d"] = {"humans": "models/humans.json"}
+        self.write(self.chapter + "art.json", self.art)
+        self.write("models/humans.json", {"schema_version": 1, "entries": {
+            "cpp": {"file": "cpp.glb", "source": "source/cpp.blend"}}})
+        self.write("models/source/cpp.blend", "editable production source")
+        body = json.dumps(gltf or {"asset": {"version": "2.0"}}).encode()
+        body += b" " * (-len(body) % 4)
+        model = self.base / "models/cpp.glb"
+        model.write_bytes(struct.pack("<4sII", b"glTF", 2, 20 + len(body))
+                          + struct.pack("<I4s", len(body), b"JSON") + body)
+        return model
+
+    def test_model_closure_ships_declared_glbs_and_requires_them_without_shipping_blends(self):
+        model = self.make_models()
+        assets = package.production_assets()
+        self.assertIn(model, assets)
+        self.assertIn(self.base / "models/humans.json", assets)
+        self.assertNotIn(self.base / "models/source/cpp.blend", assets)
+        model.unlink()
+        with self.assertRaisesRegex(ValueError, "Missing runtime asset"):
+            package.production_assets()
+
+    def test_glb_external_images_and_buffers_cannot_be_lost_during_packaging(self):
+        for kind, uri in (("images", "skin.png"), ("buffers", "body.bin")):
+            with self.subTest(kind=kind):
+                self.make_models({"asset": {"version": "2.0"}, kind: [{"uri": uri}]})
+                with self.assertRaisesRegex(ValueError, "embed all buffers and textures"):
+                    package.production_assets()
 
     def test_missing_dependency_at_every_level_aborts_collection(self):
         for name in ("production-lab.json", "actors/npc/moves.json", "actors/npc/clips.json",
