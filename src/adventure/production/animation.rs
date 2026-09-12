@@ -659,6 +659,35 @@ mod tests {
     }
 
     #[test]
+    fn idle_rear_wrist_clears_the_torso_and_both_hands_stay_distinct() {
+        let (rig, clips) = cpp_animation();
+        let skeleton = rig.skeleton.as_ref().unwrap();
+        let clip = &clips.clips["idle"];
+        for step in 0..=1024 {
+            let ticks = step as f32 / 1024.0 * clip.duration_ticks as f32;
+            let pose = clips.sample("idle", ticks, 0.0).pose;
+            let view = rig.view(pose.yaw).unwrap();
+            let body = &rig.attachments[&view.body];
+            let shoulders = view.shoulders.unwrap_or(skeleton.shoulders);
+            let arms =
+                shoulders.map(|shoulder| add(pose.pelvis, rotate(shoulder, pose.body_angle)));
+            let wrists = std::array::from_fn::<_, 2, _>(|i| {
+                solve_arm(arms[i], pose.hands[i], skeleton.upper_arm, skeleton.forearm).tip
+            });
+            // The rear arm is painted before the torso. Its wrist needs to
+            // protrude beyond even the torso image bounds, in either facing.
+            let front_edge =
+                pose.pelvis[0] + (body.source[2] - body.anchor[0]) * body.size[0] / body.source[2];
+            let clearance = wrists[1][0] - front_edge;
+            assert!(clearance > 8.0, "rear wrist hidden at tick {ticks}");
+            assert!(length(sub(wrists[0], wrists[1])) > 18.0);
+            for i in 0..2 {
+                assert!(length(sub(wrists[i], pose.hands[i])) < 0.01);
+            }
+        }
+    }
+
+    #[test]
     fn hip_fabric_moves_without_deforming_the_upper_body_or_losing_vertices() {
         let (rig, clips) = cpp_animation();
         let skeleton = rig.skeleton.as_ref().unwrap();
