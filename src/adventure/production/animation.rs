@@ -681,8 +681,8 @@ mod tests {
             let clearance = wrists[1][0] - front_edge;
             assert!(clearance > 8.0, "rear wrist hidden at tick {ticks}");
             assert!(length(sub(wrists[0], wrists[1])) > 18.0);
-            for i in 0..2 {
-                assert!(length(sub(wrists[i], pose.hands[i])) < 0.01);
+            for (i, wrist) in wrists.iter().enumerate() {
+                assert!(length(sub(*wrist, pose.hands[i])) < 0.01);
             }
         }
     }

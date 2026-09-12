@@ -1020,7 +1020,7 @@
             "bag_angle": 0
           },
           "curve": "smooth",
-          "frame": "idle"
+          "frame": "flee"
         },
         {
           "time": 0.5,
@@ -1058,7 +1058,7 @@
             "bag_angle": 0
           },
           "curve": "smooth",
-          "frame": "idle"
+          "frame": "flee"
         },
         {
           "time": 1,
@@ -1096,7 +1096,7 @@
             "bag_angle": 0
           },
           "curve": "smooth",
-          "frame": "idle"
+          "frame": "flee"
         }
       ]
     },

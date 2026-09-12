@@ -120,5 +120,8 @@ pub(super) fn telemetry(
     serde_json::json!({"frame":frame,"seconds":seconds,"audio_cues":audio_cues,"audio_reset":audio_reset,"ticks":chapter.ticks(),"phase":format!("{:?}", chapter.phase()),
         "phase_ticks":chapter.phase_ticks(),"paused":paused,"checkpoint":chapter.checkpoint(),"camera_x":chapter.camera_x(),
         "actors":sim.actors().iter().map(|a| serde_json::json!({"id":a.id.0,"character":a.character,"x":a.position.x,"y":a.position.y,"hp":a.hp,"active":a.active,"clip":a.clip_id(),"action_ticks":a.action_ticks})).collect::<Vec<_>>(),
+        "npcs":chapter.npcs().iter().map(|p| serde_json::json!({"character":p.character,"x":p.position.x,"y":p.position.y,"depth":p.depth,"clip":p.clip,"visible":p.visible})).collect::<Vec<_>>(),
+        "arrivals":sim.actors().iter().filter_map(|a| chapter.arrival_pose(a.id).map(|p| serde_json::json!({"id":a.id.0,"x":p.position.x,"y":p.position.y,"depth":p.depth,"visible":p.visible}))).collect::<Vec<_>>(),
+        "shot":crate::adventure::augusta::cinema::shot(chapter),"broker_escape_age":chapter.broker_escape_age(),"threat_age":chapter.threat_age(),
         "outcome":format!("{:?}",sim.outcome()),"dialogue":chapter.dialogue()})
 }

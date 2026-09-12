@@ -109,6 +109,23 @@
         22,
         340
       ]
+    },
+    "restrained-pair": {
+      "image": "sprites/restrained-pair-chroma.png",
+      "source": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "anchor": [
+        418,
+        1194
+      ],
+      "size": [
+        211.728,
+        211.728
+      ]
     }
   },
   "background": "skyline",

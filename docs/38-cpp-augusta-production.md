@@ -2,6 +2,11 @@
 
 ## O piloto
 
+A [revisão cinematográfica](39-augusta-cinematic-direction.md) acrescenta
+perspectiva 3D com o mesmo mapa e arte ilustrada, tentativa de Julia, saída
+dos seguranças pelo bar e fuga do cafetão durante a chegada das EPs. O texto
+abaixo documenta a base de produção compartilhada com o laboratório.
+
 O capítulo **Rua Augusta** acompanha C++ em uma história paralela a Rust e
 Python. Julia, sua amiga adulta de 22 anos, quer ir embora e é impedida pelo
 cafetão. C++ enfrenta três seguranças; depois, duas erráticas descem dos lados

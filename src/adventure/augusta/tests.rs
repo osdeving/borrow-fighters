@@ -391,7 +391,7 @@ fn julia_attempt_preserves_the_pair_axis_and_short_contact_on_both_approaches() 
             ] {
                 assert!((a.x - b.x).hypot(a.y - b.y) < 45.0);
             }
-            assert_eq!(contact.julia_wrist.x, julia.position.x - 24.0);
+            assert_eq!(contact.julia_wrist.x, julia.position.x - 40.0);
             max_tension = max_tension.max(contact.tension);
             nearest_julia_x = nearest_julia_x.min(julia.position.x);
             chapter
@@ -587,5 +587,30 @@ fn skipping_each_cinematic_reconstructs_its_safe_endpoint() {
         ) {
             assert!(chapter.npcs().iter().all(|npc| npc.character != "broker"));
         }
+    }
+}
+
+#[test]
+fn reload_rejects_missing_or_empty_cinematic_copy() {
+    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("assets/adventure/chapters/cpp-augusta/texts.json");
+    let source: serde_json::Value =
+        serde_json::from_str(&fs::read_to_string(path).unwrap()).unwrap();
+    for key in [
+        "julia.attempt",
+        "cinema.skip",
+        "cinema.place",
+        "cinema.julia",
+        "cinema.panic",
+    ] {
+        let mut missing = source.clone();
+        missing["strings"].as_object_mut().unwrap().remove(key);
+        assert!(
+            Texts::from_json(&missing.to_string()).is_err(),
+            "missing {key}"
+        );
+        let mut empty = source.clone();
+        empty["strings"][key] = serde_json::Value::String("  ".into());
+        assert!(Texts::from_json(&empty.to_string()).is_err(), "empty {key}");
     }
 }

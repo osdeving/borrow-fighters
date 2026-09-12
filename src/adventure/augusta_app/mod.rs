@@ -306,9 +306,10 @@ pub fn run_in_window(
                 recorder.frames(&target, copies)?;
             }
             let label = format!(
-                "{:?}-{}",
+                "{:?}-{}-{}",
                 chapter.phase(),
-                chapter.dialogue().map_or(0, |(_, line)| line)
+                chapter.dialogue().map_or(0, |(_, line)| line),
+                augusta::cinema::shot(&chapter).map_or("gameplay", |s| s.name)
             );
             if reviewing && previous_image != label {
                 export(

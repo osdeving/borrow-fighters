@@ -6,4 +6,7 @@
 pub mod actors;
 pub mod assets;
 pub mod audio;
+pub mod cinema;
+pub mod nightlife;
+pub mod restraint;
 pub mod world;

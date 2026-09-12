@@ -99,6 +99,9 @@ pulado, o prólogo deixa de abrir automaticamente; as entradas explícitas
 `--start` continuam disponíveis. **Versus Setup** mantém a seleção livre.
 [Capítulo e estratégia de animação de Rust](docs/33-after-the-silence.md).
 [Pipeline de personagens, laboratório e capítulo C++](docs/38-cpp-augusta-production.md).
+[Direção cinematográfica da Augusta](docs/39-augusta-cinematic-direction.md):
+palco em perspectiva 3D, vida noturna, tentativa de Julia, seguranças saindo do
+Limiar e fuga do cafetão durante a chegada das EPs.
 [Prévia do capítulo com som nativo](docs/evidence/after-the-silence/chapter-01.mp4).
 [Escopo e verificação da junção](docs/29-story-terminal-menu.md).
 
@@ -166,6 +169,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 ### Visão e produto
 
+- [Augusta: encenação e câmera cinematográfica](docs/39-augusta-cinematic-direction.md): continuidade espacial, atuação, vida noturna e entrega ao combate.
 - [Reconstrução da corrida](docs/37-run-cycle-rebuild.md): referências de produção, roupa contínua, proporções e revisão completa da passada de Rust.
 - [Acabamento do prólogo e continuidade da rua](docs/36-cinematic-polish.md): quadros completos de Duke/Old C, ritmo da pipa, proporções de Rust e junções das fachadas.
 - [Corrida e mundo modular](docs/35-modular-running-world.md): ruas extensíveis, fachadas independentes, EP veloz e revisão de Duke/Old C.

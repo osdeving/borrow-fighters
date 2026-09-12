@@ -1,0 +1,24 @@
+[
+  {
+    "pose": "rest",
+    "background": "blue",
+    "dimensions": [
+      1280,
+      720
+    ],
+    "view_scale": 3.1,
+    "green_excess_max_255": 9,
+    "pixels_green_excess_above_9": 0
+  },
+  {
+    "pose": "pull",
+    "background": "orange",
+    "dimensions": [
+      1280,
+      720
+    ],
+    "view_scale": 3.1,
+    "green_excess_max_255": 7,
+    "pixels_green_excess_above_9": 0
+  }
+]

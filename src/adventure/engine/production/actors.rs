@@ -10,6 +10,9 @@ use crate::adventure::production::{
 };
 use raylib::prelude::*;
 
+#[path = "frame_motion.rs"]
+mod frame_motion;
+
 #[derive(Clone, Copy)]
 struct Transform {
     at: Point,
@@ -219,6 +222,16 @@ pub fn draw_projectile(
     }
 }
 
+/// Maps a signed world distance to the painted NPC's support clock. Scene
+/// callers use this for traveling run/start poses; stationary lab previews keep
+/// their ordinary timeline. Other clips and skeletal actors return `None`.
+pub fn frame_stride_ticks(assets: &ActorAssets, clip: &str, signed_distance: f32) -> Option<f32> {
+    if assets.rig.method != Method::Frames || !matches!(clip, "run" | "start") {
+        return None;
+    }
+    frame_motion::stride_ticks(assets, signed_distance)
+}
+
 /// Presentation-only draw. Tick/distance and the pose are supplied by the shared model.
 #[allow(clippy::too_many_arguments)]
 pub fn draw_actor(
@@ -238,6 +251,11 @@ pub fn draw_actor(
         scale,
     };
     if assets.rig.method == Method::Frames {
+        if matches!(clip, "run" | "start")
+            && frame_motion::draw(d, assets, ticks, position, facing, scale, debug)
+        {
+            return;
+        }
         let sample = assets.clips.sample(clip, ticks, ticks * 3.0);
         if let Some(frame) = sample.frame {
             let offset = a::add(pose.pelvis, [0.0, 96.0]);

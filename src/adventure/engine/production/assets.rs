@@ -266,6 +266,7 @@ pub struct ProductionAssets {
     pub textures: BTreeMap<String, Texture2D>,
     pub font: Font,
     pub report: LoadReport,
+    pub restraint: super::restraint::RestraintArt,
     pub animations: RefCell<BTreeMap<u32, crate::adventure::production::animation::Animator>>,
 }
 
@@ -302,6 +303,7 @@ impl ProductionAssets {
             || !art.facade_baseline.is_finite()
             || !art.pieces.contains_key(&art.background)
             || !art.pieces.contains_key(&art.ground)
+            || !art.pieces.contains_key("restrained-pair")
             || art.signs.iter().any(|s| {
                 s.text.is_empty()
                     || !s.size.is_finite()
@@ -390,6 +392,7 @@ impl ProductionAssets {
             textures,
             font,
             report,
+            restraint: super::restraint::RestraintArt::load(rl, thread)?,
             animations: RefCell::new(BTreeMap::new()),
         })
     }

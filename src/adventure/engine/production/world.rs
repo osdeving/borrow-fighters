@@ -4,11 +4,11 @@
 //! of reference; only distant scenery receives the authored parallax factor.
 
 use super::{
-    actors::{attachment, draw_actor},
+    actors::{attachment, draw_actor, frame_stride_ticks},
     assets::ProductionAssets,
 };
 use crate::adventure::{
-    augusta::{Chapter, Phase},
+    augusta::{Chapter, Phase, ambient::Nightlife, cinema},
     production::{Action, Team},
 };
 use raylib::prelude::*;
@@ -145,7 +145,7 @@ fn shadow(d: &mut impl RaylibDraw, x: f32, y: f32, width: f32, height: f32) {
     d.draw_ellipse(x as i32, y as i32, width, height, Color::new(4, 8, 13, 115));
 }
 
-fn dust(d: &mut impl RaylibDraw, x: f32, y: f32, age: u32) {
+pub(super) fn dust(d: &mut impl RaylibDraw, x: f32, y: f32, age: u32) {
     let t = age as f32 / 60.0;
     if t > 1.6 {
         return;
@@ -174,6 +174,20 @@ fn dust(d: &mut impl RaylibDraw, x: f32, y: f32, age: u32) {
 /// Draws into a 1280×720 target, also used unchanged by the chapter review capture.
 pub fn draw_chapter(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Chapter, debug: bool) {
     d.clear_background(Color::new(8, 14, 26, 255));
+    if let Some(shot) = cinema::shot(chapter) {
+        super::cinema::draw_stage(d, a, chapter, shot, debug);
+        ui(d, a, chapter);
+        if shot.fade > 0. {
+            d.draw_rectangle(
+                0,
+                0,
+                1280,
+                720,
+                Color::new(3, 7, 13, (shot.fade * 255.) as u8),
+            );
+        }
+        return;
+    }
     let shake = chapter
         .landing_age()
         .filter(|age| *age < 9)
@@ -183,6 +197,11 @@ pub fn draw_chapter(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Cha
         });
     let camera = chapter.camera_x() + shake;
     backdrop(d, a, camera);
+    super::cinema::draw_door_flat(d, chapter, camera);
+    let mut night = Nightlife::sample(chapter.ticks(), threat_age(chapter));
+    night.people.retain(|p| (p.x - camera).abs() < 760.);
+    night.vehicles.retain(|v| (v.x - camera).abs() < 920.);
+    super::nightlife::draw(d, &night, camera, super::nightlife::Layer::Sidewalk);
     let sim = chapter.simulation();
     if let Some(age) = chapter.landing_age() {
         for x in chapter.world.erratic_landings_x {
@@ -190,29 +209,35 @@ pub fn draw_chapter(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Cha
         }
     }
     for npc in chapter.npcs() {
+        if !npc.visible || chapter.restraint_contact().is_some() {
+            continue;
+        }
         let x = npc.position.x - camera + 640.0;
         let assets = &a.actors[npc.character];
-        let pose = assets
-            .clips
-            .sample(npc.clip, npc.ticks as f32, npc.ticks as f32 * 3.0)
-            .pose;
+        let ticks = frame_stride_ticks(assets, npc.clip, npc.position.x * npc.facing.sign())
+            .unwrap_or(npc.ticks as f32);
+        let pose = assets.clips.sample(npc.clip, ticks, ticks * 3.).pose;
         shadow(d, x, npc.position.y, 27.0, 7.0);
         draw_actor(
             d,
             assets,
             pose,
             npc.clip,
-            npc.ticks as f32,
+            ticks,
             [x, npc.position.y],
             npc.facing,
             1.0,
             false,
         );
     }
+    super::restraint::draw(d, a, chapter, camera);
     let states = a.animations.borrow();
     for actor in sim.actors() {
         let assets = &a.actors[&actor.character];
         let arrival = chapter.arrival_pose(actor.id);
+        if arrival.is_some_and(|p| !p.visible) {
+            continue;
+        }
         let (position, scale, clip, ticks) = if let Some(p) = arrival {
             (
                 [p.position.x - camera + 640.0, p.position.y],
@@ -228,6 +253,9 @@ pub fn draw_chapter(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Cha
                 actor.action_ticks as f32,
             )
         };
+        let facing = arrival.map_or(actor.facing, |p| p.facing);
+        let world_x = position[0] + camera - 640.;
+        let ticks = frame_stride_ticks(assets, clip, world_x * facing.sign()).unwrap_or(ticks);
         let pose = if arrival.is_some() {
             assets.clips.sample(clip, ticks, 0.0).pose
         } else {
@@ -256,7 +284,7 @@ pub fn draw_chapter(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Cha
             clip,
             ticks,
             position,
-            actor.facing,
+            arrival.map_or(actor.facing, |p| p.facing),
             scale,
             debug,
         );
@@ -382,39 +410,67 @@ pub fn draw_chapter(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Cha
             );
         }
     }
+    super::nightlife::draw(d, &night, camera, super::nightlife::Layer::Traffic);
+    super::nightlife::draw(d, &night, camera, super::nightlife::Layer::Foreground);
     ui(d, a, chapter);
+    let fade = cinema::handoff_fade(chapter);
+    if fade > 0. {
+        d.draw_rectangle(0, 0, 1280, 720, Color::new(3, 7, 13, (fade * 255.) as u8));
+    }
+}
+
+/// The EP clock is shared across camera cuts; retries reconstruct an empty street.
+pub(super) fn threat_age(c: &Chapter) -> Option<u64> {
+    c.threat_age()
 }
 
 fn ui(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Chapter) {
     let player = chapter.simulation().player();
-    d.draw_rectangle(0, 0, 1280, 76, Color::new(5, 11, 20, 220));
-    text(d, a, "C++", 30.0, 15.0, 24.0, GOLD);
-    text(
-        d,
-        a,
-        a.texts.get(&a.spec.title_key),
-        430.0,
-        15.0,
-        21.0,
-        PAPER,
-    );
-    d.draw_rectangle(30, 49, 260, 8, Color::new(49, 51, 60, 255));
-    d.draw_rectangle(
-        30,
-        49,
-        (260.0 * player.hp as f32 / player.max_hp as f32) as i32,
-        8,
-        GOLD,
-    );
-    text(
-        d,
-        a,
-        a.texts.get(chapter.objective_key()),
-        430.0,
-        43.0,
-        17.0,
-        Color::new(174, 191, 206, 255),
-    );
+    let cinematic = cinema::shot(chapter).is_some();
+    if cinematic {
+        d.draw_rectangle(0, 0, 1280, 62, Color::new(3, 7, 13, 255));
+        d.draw_rectangle(0, 658, 1280, 62, Color::new(3, 7, 13, 255));
+        if chapter.dialogue().is_none() {
+            text(
+                d,
+                a,
+                a.texts.get("cinema.skip"),
+                966.,
+                688.,
+                14.,
+                Color::new(151, 165, 178, 255),
+            );
+        }
+    } else {
+        d.draw_rectangle(0, 0, 1280, 76, Color::new(5, 11, 20, 220));
+        text(d, a, "C++", 30.0, 15.0, 24.0, GOLD);
+        text(
+            d,
+            a,
+            a.texts.get(&a.spec.title_key),
+            430.0,
+            15.0,
+            21.0,
+            PAPER,
+        );
+        d.draw_rectangle(30, 49, 260, 8, Color::new(49, 51, 60, 255));
+        d.draw_rectangle(
+            30,
+            49,
+            (260.0 * player.hp as f32 / player.max_hp as f32) as i32,
+            8,
+            GOLD,
+        );
+        text(
+            d,
+            a,
+            a.texts.get(chapter.objective_key()),
+            430.0,
+            43.0,
+            17.0,
+            Color::new(174, 191, 206, 255),
+        );
+    }
     if chapter.defeated() {
         d.draw_rectangle(280, 228, 720, 228, INK);
         text(d, a, a.texts.get("defeat.title"), 320.0, 258.0, 34.0, GOLD);
@@ -476,7 +532,7 @@ fn ui(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Chapter) {
             19.0,
             Color::new(185, 194, 206, 255),
         );
-    } else {
+    } else if !cinematic {
         d.draw_rectangle(0, 680, 1280, 40, Color::new(4, 9, 16, 235));
         text(
             d,
@@ -488,12 +544,22 @@ fn ui(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Chapter) {
             Color::new(185, 194, 206, 255),
         );
     }
+    if chapter.phase() == Phase::JuliaAttempt && chapter.phase_ticks() < 130 {
+        d.draw_rectangle(180, 591, 920, 50, INK);
+        text(d, a, a.texts.get("cinema.julia"), 210., 605., 23., PAPER);
+    }
+    if chapter.phase() == Phase::ErraticsArrival
+        && chapter.broker_escape_age().is_some_and(|age| age < 115)
+    {
+        d.draw_rectangle(260, 591, 760, 50, INK);
+        text(d, a, a.texts.get("cinema.panic"), 292., 605., 23., PAPER);
+    }
     if chapter.phase() == Phase::Introduction {
-        let duration = chapter.spec.timing.introduction_ticks as f32;
-        let alpha = (1.0 - chapter.phase_ticks() as f32 / duration).clamp(0.0, 1.0);
+        let t = chapter.phase_ticks() as f32;
+        let alpha = (t / 60.).min(1.) * ((260. - t) / 60.).clamp(0., 1.);
         d.draw_rectangle(
             0,
-            80,
+            450,
             1280,
             170,
             Color::new(7, 14, 25, (190.0 * alpha) as u8),
@@ -503,9 +569,18 @@ fn ui(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Chapter) {
             a,
             a.texts.get("arrival.title"),
             48.0,
-            111.0,
+            481.0,
             44.0,
             Color::new(242, 222, 181, (255.0 * alpha) as u8),
+        );
+        text(
+            d,
+            a,
+            a.texts.get("cinema.place"),
+            51.,
+            537.,
+            21.,
+            Color::new(218, 221, 227, (alpha * 255.) as u8),
         );
     }
 }

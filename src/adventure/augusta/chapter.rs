@@ -589,7 +589,7 @@ impl Chapter {
                 self.world.broker_x
                     + (self.world.walk_bounds[0] - 240.0 - self.world.broker_x) * smooth(p)
             } else {
-                self.world.broker_x
+                self.world.broker_x - tension * 12.0
             };
             result.push(NpcPose {
                 character: "broker",
@@ -626,11 +626,14 @@ impl Chapter {
         }
         let tension = self.attempt_tension();
         let julia_x = self.world.julia_initial_x - tension * 22.0;
-        let shoulder = Vec2::new(self.world.broker_x + 13.0, self.world.ground_y - 151.0);
-        let wrist = Vec2::new(julia_x - 24.0, self.world.ground_y - 132.0);
+        let shoulder = Vec2::new(
+            self.world.broker_x + 13.0 - tension * 12.0,
+            self.world.ground_y - 151.0,
+        );
+        let wrist = Vec2::new(julia_x - 40.0, self.world.ground_y - 122.0);
         Some(RestraintContact {
             broker_shoulder: shoulder,
-            broker_elbow: Vec2::new((shoulder.x + wrist.x) * 0.5 + 4.0, wrist.y + 10.0),
+            broker_elbow: Vec2::new((shoulder.x + wrist.x) * 0.5 + 4.0, wrist.y - 10.0),
             julia_wrist: wrist,
             julia_shoulder: Vec2::new(julia_x - 10.0, self.world.ground_y - 145.0),
             depth: 8.0,

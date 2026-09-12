@@ -22,11 +22,31 @@
     1450,
     2150
   ],
-  "julia_initial_x": 1748,
+  "julia_initial_x": 1770,
   "julia_x": 2850,
   "broker_x": 1680,
   "exit_x": 3350,
   "pieces": [
+    {
+      "id": "frontage-west-continuation",
+      "piece": "facade-bar",
+      "position": [
+        -232.3,
+        500
+      ],
+      "scale": 1,
+      "layer": 10
+    },
+    {
+      "id": "joint-west-continuation",
+      "piece": "junction",
+      "position": [
+        -20,
+        500
+      ],
+      "scale": 1,
+      "layer": 15
+    },
     {
       "id": "frontage-0",
       "piece": "facade-residential",

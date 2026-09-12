@@ -115,6 +115,13 @@ não carrega esse conjunto. A composição carrega o menu de luta sob demanda.
 
 ## Objetivo
 
+A [ADR 0033](adr/0033-augusta-cinematic-stage.md) acrescenta câmera pura em
+`augusta/cinema.rs` e vida noturna em `augusta/ambient.rs`. O adaptador
+`engine/production/cinema.rs` usa perspectiva 3D e os mesmos assets/mapa do
+capítulo; `restraint.rs` compõe a atuação pareada, e `nightlife.rs` apresenta
+figurantes em ambos os enquadramentos. Fases, contato, trajetórias e relógio
+de evacuação continuam no domínio Augusta. [Escopo](39-augusta-cinematic-direction.md).
+
 A [ADR 0028](adr/0028-editable-cinematic-tracks-and-destructibles.md) amplia
 os catálogos existentes com `adventure/biography.rs` (tomadas e keyframes),
 `adventure/locomotion.rs` (distância/apoios) e `chapter/debris.rs` (dano e queda

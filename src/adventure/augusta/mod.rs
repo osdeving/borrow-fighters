@@ -3,8 +3,10 @@
 //! System: Adventure chapter. Content and fixed-step direction depend on the
 //! production actor contract; resource lifetimes and files belong to the app.
 
+pub mod ambient;
 pub mod chapter;
 pub mod checkpoint;
+pub mod cinema;
 pub mod store;
 pub mod texts;
 pub mod world;

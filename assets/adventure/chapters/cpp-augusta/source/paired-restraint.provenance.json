@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "tool": "built-in image_gen.imagegen",
+  "asset": "sprites/restrained-pair-chroma.png",
+  "sha256": "ebf0fe654d04ce040ea79efba6e85aee3853ec2a14b8e599e5aebe38d141fe39",
+  "dimensions": [
+    1254,
+    1254
+  ],
+  "source_references": [
+    "assets/adventure/actors/broker/sprites/idle.png",
+    "assets/adventure/actors/julia/sprites/idle.png"
+  ],
+  "source_registration": {
+    "broker_feet": [
+      418,
+      1194
+    ],
+    "julia_feet": [
+      951,
+      1178
+    ],
+    "shared_grip": [
+      700,
+      505
+    ],
+    "source_height": 1149,
+    "world_broker_height": 194,
+    "world_julia_height_approx": 174,
+    "world_initial_separation": 90
+  },
+  "alpha_strategy": "The selected RGB painting is preserved byte-for-byte. A native OpenGL 3.3 draw shader removes green and suppresses green spill in filtered edge pixels. Earlier transparent requests produced painted checkerboards and were rejected.",
+  "initial_prompt": "Use case: identity-preserve. Asset type: transparent 2D adventure game paired character sprite, NOT a poster. The two reference images define the exact identities and painted anime/cartoon style: Image 1 the adult antagonist, black slicked hair, charcoal suit, dark red open-collar shirt, black shoes. Image 2 Julia, adult woman age 22, short dark wavy hair, lavender rolled-sleeve jacket, black top, charcoal jeans, white sneakers, cream shoulder bag. Produce ONE full-body paired composition on genuinely transparent background with clean alpha and no floor shadow, no text. Keep exact clothing, faces, proportions and colored ink/paint treatment. Antagonist stands on LEFT facing screen LEFT toward someone off-screen. Julia stands clearly BEHIND him on RIGHT, also looking LEFT, her body leaning slightly to screen LEFT trying to get past him. His REAR arm extends backward to screen RIGHT and his hand firmly grips Julia's near wrist/forearm, visibly preventing her leaving. Anatomically explicit readable continuous chain: his shoulder -> upper arm -> elbow -> forearm -> hand clasping her forearm -> her elbow -> her shoulder. His OTHER hand is open at waist in front of his body. Julia's free arm raises near her own collar with clenched fingers. Her held arm reaches toward him to the left. Both have EXACTLY TWO arms and TWO legs. No added limbs, no hidden contact, no violence/injuries, no sexualized framing. Read as concerned frightened Julia blocked by controlling antagonist, not dancing or romance. Ground contact feet aligned on same baseline; leave ~8% alpha margin around full silhouettes. Julia is 95% of his height, same scale as references. Compact pair, no overlapping faces, only arm contact overlaps. Camera level, three quarter view consistent with provided game sprites. Image around 1200x1200 or similar so both people have good detail. Preserve identity over photorealism.",
+  "final_edit_prompt": "Use case: precise-object-edit. This is a game sprite prep edit. Keep the TWO characters, every limb, face, clothing, shoes, wrist grip and exact pose unchanged. Replace ONLY all checkerboard background with a perfectly UNIFORM SOLID CHROMA GREEN color RGB(0,255,0), hex #00FF00. Green must fill the full backdrop, all transparent-looking/checkerboard spaces and gaps between limbs. No checkerboard pattern, no texture, no gradient, no shadows, no ground, no rim light or green tint on the characters. Do not change clothing colors or proportions. Retain dark clean character outlines. This is chroma key production footage, so give actual solid bright green, NOT alpha and NOT a visualization of transparency. Keep complete full body and shoes, same framing and margins.",
+  "notes": "The renderer uses one connected painting for both characters. World and cinematic cameras call the same draw function and shared grip. Julia approaches 22px against the grip; the broker follows 12px to preserve forearm volume. These presentation offsets return to zero at both endpoints."
+}
