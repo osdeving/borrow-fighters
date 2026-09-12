@@ -1,0 +1,17 @@
+{
+  "base_commit": "27ca4bb",
+  "purpose": "Fixed scene, story, camera, trajectories and scenery before replacing humans/vehicles with 3D models.",
+  "sha256": {
+    "src/adventure/augusta/cinema.rs": "14bf432205deafa86c02fc1d89241312f86661d0a954d136d3f0a60031c84199",
+    "src/adventure/augusta/ambient.rs": "146d60d1f2e2ac7f1191cff8017c3a6b7fb0070bce59d972c1fb1d9e187f231e",
+    "src/adventure/augusta/chapter.rs": "8c2ba841a8397903c5b844138ca8cb870f608a7b0a684f0c2802612ec2635677",
+    "assets/adventure/chapters/cpp-augusta/chapter.json": "85f46dbe37a88963512134549569369970c27e33317da7a81707a439e80bf8b5",
+    "assets/adventure/chapters/cpp-augusta/world.json": "4d0445da888e142d52a86a195bcc390d60979fa929ba8b852cadd8b73dd48e67",
+    "assets/adventure/chapters/cpp-augusta/texts.json": "be26eaac0386d2692c6f6189ed0ebfd0d4c934da34079e5777d49671d9a51daa",
+    "assets/adventure/chapters/cpp-augusta/sprites/facade-mural.png": "7098501dbe30b2dc8a07703265e633d5ea40a56904e44b02a05c2c41c2add9af",
+    "assets/adventure/chapters/cpp-augusta/sprites/facade-bar.png": "2950466752aee2cbddcb8f2399b3285d2c7fe897b71d6cfedd076d5677fd6ee1",
+    "assets/adventure/chapters/cpp-augusta/sprites/facade-residential.png": "164ca40324aab894624a6ccdef1ea1fc43e01c3913d276e521227fede523e0e2",
+    "assets/adventure/chapters/cpp-augusta/sprites/skyline.png": "74410740c68172241557c51f0dabffc42508a212fcdc944507e1b1ab58b44ae8",
+    "assets/adventure/chapters/cpp-augusta/sprites/ground.png": "5d54e0dd17c3de803aafe3e3d6080e7017fe2c08d2b4ea8aabc0992f4c78108a"
+  }
+}
