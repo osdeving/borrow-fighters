@@ -345,7 +345,7 @@ fn chair(d: &mut impl RaylibDraw, s: Space, x: f32) {
     );
 }
 
-fn furniture(d: &mut impl RaylibDraw, camera_x: f32, front: bool, ticks: u64) {
+pub(super) fn furniture(d: &mut impl RaylibDraw, camera_x: f32, front: bool, ticks: u64) {
     for world_x in [615.0, 2791.0] {
         let s = Space {
             x: world_x - camera_x + 640.0,

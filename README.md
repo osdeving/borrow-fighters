@@ -102,6 +102,8 @@ pulado, o prólogo deixa de abrir automaticamente; as entradas explícitas
 [Direção cinematográfica da Augusta](docs/39-augusta-cinematic-direction.md):
 palco em perspectiva 3D, vida noturna, tentativa de Julia, seguranças saindo do
 Limiar e fuga do cafetão durante a chegada das EPs.
+[Conversão de humanos e veículos no Blender](docs/40-augusta-blender-actors.md):
+fontes editáveis, modelos GLB e revisão isolada de movimentos na mesma cena.
 [Prévia do capítulo com som nativo](docs/evidence/after-the-silence/chapter-01.mp4).
 [Escopo e verificação da junção](docs/29-story-terminal-menu.md).
 

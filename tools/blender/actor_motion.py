@@ -120,7 +120,10 @@ class Performer:
         if action in ('seated', 'scooter'):
             target.y -= (0.34 if action == 'seated' else 0.22) * u
         if action == 'riding':
-            target = Vector((sign * 0.15, -0.05, 0.42))
+            # The vehicle's .42m foot socket describes the sole contact, while
+            # this solver targets the ankle. The fitted boot sole is 8.875cm
+            # below that joint; .509m keeps it on the .4215m traction surface.
+            target = Vector((sign * 0.15, -0.05, 0.509))
         if action in ('jump', 'fall', 'arrival'):
             target.y += sign * 0.07 * u
             target.z += 0.13 * u * math.sin(math.pi * phase)
@@ -180,7 +183,9 @@ class Performer:
             elif bone.name == 'pelvis' and action == 'riding':
                 base = rotate_at(base, (1, 0, 0), 28.0)
             elif bone.name == 'head':
-                base = rotate_at(base, (1, 0, 0), -pitch * 0.35)
+                # Counter the seated pelvis/torso lean so the rider looks along
+                # the road. Other actors retain their existing head motion.
+                base = rotate_at(base, (1, 0, 0), -28.0 if action == 'riding' else -pitch * 0.35)
                 if action in ('conversation', 'talk', 'phone'):
                     base = rotate_at(base, (0, 0, 1), 3.0 * math.sin(cycle))
             overrides[bone.name] = base
@@ -207,7 +212,10 @@ class Performer:
             thigh, calf, foot = (self.bones[f'{name}_{side}'] for name in ('thigh', 'calf', 'foot'))
             hip = body[thigh.name].translation
             target, foot_pitch = foot_targets[index]
-            knee, ankle = solve_chain(hip, target, thigh.length, calf.length, Vector((sign * 0.04, -1.0, 0.0)))
+            # The seated rider opens the knees around the scooter's leg shield;
+            # the feet still share its narrow floorboard. Walking is unchanged.
+            knee_pole = Vector((sign * (0.75 if action == 'riding' else 0.04), -1.0, 0.0))
+            knee, ankle = solve_chain(hip, target, thigh.length, calf.length, knee_pole)
             overrides[thigh.name] = aimed(thigh, hip, knee)
             overrides[calf.name] = aimed(calf, knee, ankle)
             overrides[foot.name] = Matrix.Translation(ankle) @ (Quaternion((1, 0, 0), math.radians(foot_pitch)) @ foot.matrix_local.to_quaternion()).to_matrix().to_4x4()
@@ -230,17 +238,23 @@ class Performer:
                 wrist.y = shoulder.y - (0.23 + 0.035 * math.sin(cycle)) * u
                 wrist.z = shoulder.z - (0.22 + 0.04 * math.cos(cycle)) * u
             if action == 'phone' and side == 'r':
-                wrist = body['head'].translation + Vector((-0.10 * u, -0.045 * u, 0.015 * u))
+                # The hand extends above the wrist: place the wrist at the jaw
+                # so the palm/phone reaches the ear instead of the crown.
+                wrist = body['head'].translation + Vector((-0.11 * u, -0.015 * u, -0.065 * u))
             if action == 'seated':
-                wrist = Vector((sign * 0.13 * u, shoulder.y - 0.24 * u, hip.z + 0.12 * u))
+                wrist = Vector((sign * 0.13 * u, shoulder.y - 0.24 * u, hip.z + 0.15 * u))
             if action == 'scooter':
                 wrist = Vector((sign * 0.27 * u, shoulder.y - 0.46 * u, hip.z + 0.23 * u))
             if action == 'riding':
-                wrist = Vector((sign * 0.27, -0.44, 1.06))
+                # The grip socket is the palm center, ahead of the wrist along
+                # the forearm. Putting the wrist on the bar leaves fingers in air.
+                wrist = Vector((sign * 0.27, -0.375, 1.09))
             if action in ('guard', 'parry'):
                 wrist = Vector((shoulder.x * 0.90, shoulder.y - 0.22 * u, shoulder.z + 0.06 * u))
             if action in ('restrain', 'restrained', 'pull'):
-                if (action == 'restrain' and side == 'l') or (action != 'restrain' and side == 'r'):
+                # The adjacent arms are broker right / Julia left when both
+                # face C++ and Julia stands farther into the existing stage.
+                if (action == 'restrain' and side == 'r') or (action != 'restrain' and side == 'l'):
                     wrist = Vector((sign * 0.18 * u, (0.39 if action == 'restrain' else -0.39) * u,
                                     shoulder.z - 0.23 * u))
             if action == 'light-1' and not authored and side == 'l':
@@ -256,6 +270,8 @@ class Performer:
             pole = Vector((sign * 0.25, 0.80, -0.80 if running else -0.30))
             if action in ('guard', 'parry'):
                 pole = Vector((sign * 0.18, 0.20, -1.0))
+            if action == 'phone' and side == 'r':
+                pole = Vector((-0.25, -0.15, -1.0))
             elbow, end = solve_chain(shoulder, wrist, upper.length, lower.length, pole)
             overrides[upper.name] = aimed(upper, shoulder, elbow)
             overrides[lower.name] = aimed(lower, elbow, end)
@@ -264,6 +280,10 @@ class Performer:
             direction = (end - elbow).normalized().lerp(Vector((0, 0, -1)), 0.12)
             if action == 'phone' and side == 'r':
                 direction = Vector((0, 0, 1))
+            if action == 'seated':
+                # Rest the fingers along the thighs; following the descending
+                # forearm would drive the fingertips through the lap/garment.
+                direction = Vector((0, -1, -0.10))
             overrides[hand.name] = aimed(hand, end, end + direction)
         result = self.children(overrides)
         self.curl_fingers(result, action, phase)

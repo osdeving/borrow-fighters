@@ -201,7 +201,19 @@ pub fn draw_chapter(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Cha
     let mut night = Nightlife::sample(chapter.ticks(), threat_age(chapter));
     night.people.retain(|p| (p.x - camera).abs() < 760.);
     night.vehicles.retain(|v| (v.x - camera).abs() < 920.);
-    super::nightlife::draw(d, a, &night, camera, super::nightlife::Layer::Sidewalk);
+    if let Some(models) = &a.models {
+        super::nightlife::furniture(d, camera, false, night.ticks);
+        for person in &night.people {
+            let mut sample = super::models3d::person_sample(person, night.ticks);
+            sample.at[0] += 640. - camera;
+            if !models.draw_screen(d, sample) {
+                super::nightlife::draw_person(d, a, person, camera);
+            }
+        }
+        super::nightlife::furniture(d, camera, true, night.ticks);
+    } else {
+        super::nightlife::draw(d, a, &night, camera, super::nightlife::Layer::Sidewalk);
+    }
     let sim = chapter.simulation();
     if let Some(age) = chapter.landing_age() {
         for x in chapter.world.erratic_landings_x {
@@ -218,19 +230,38 @@ pub fn draw_chapter(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Cha
             .unwrap_or(npc.ticks as f32);
         let pose = assets.clips.sample(npc.clip, ticks, ticks * 3.).pose;
         shadow(d, x, npc.position.y, 27.0, 7.0);
-        draw_actor(
-            d,
-            assets,
-            pose,
-            npc.clip,
-            ticks,
-            [x, npc.position.y],
-            npc.facing,
-            1.0,
-            false,
-        );
+        let drawn = a.models.as_ref().is_some_and(|models| {
+            models.draw_screen(
+                d,
+                super::models3d::actor_sample(
+                    assets,
+                    npc.clip,
+                    ticks,
+                    [x, npc.position.y, -npc.depth * 3.],
+                    npc.facing.sign(),
+                    pose.yaw,
+                    1.,
+                )
+                .traveled(npc.position.x * npc.facing.sign()),
+            )
+        });
+        if !drawn {
+            draw_actor(
+                d,
+                assets,
+                pose,
+                npc.clip,
+                ticks,
+                [x, npc.position.y],
+                npc.facing,
+                1.0,
+                false,
+            );
+        }
     }
-    super::restraint::draw(d, a, chapter, camera);
+    if !super::models3d_pair::draw_screen(d, a, chapter, camera) {
+        super::restraint::draw(d, a, chapter, camera);
+    }
     let states = a.animations.borrow();
     for actor in sim.actors() {
         let assets = &a.actors[&actor.character];
@@ -277,17 +308,38 @@ pub fn draw_chapter(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Cha
                 );
             }
         }
-        draw_actor(
-            d,
-            assets,
-            pose,
-            clip,
-            ticks,
-            position,
-            arrival.map_or(actor.facing, |p| p.facing),
-            scale,
-            debug,
-        );
+        let drawn = a.models.as_ref().is_some_and(|models| {
+            models.draw_screen(
+                d,
+                super::models3d::actor_sample(
+                    assets,
+                    clip,
+                    ticks,
+                    [
+                        position[0],
+                        position[1],
+                        -arrival.map_or(0., |p| p.depth) * 3.,
+                    ],
+                    facing.sign(),
+                    pose.yaw,
+                    scale,
+                )
+                .traveled(world_x * facing.sign()),
+            )
+        });
+        if !drawn {
+            draw_actor(
+                d,
+                assets,
+                pose,
+                clip,
+                ticks,
+                position,
+                arrival.map_or(actor.facing, |p| p.facing),
+                scale,
+                debug,
+            );
+        }
         if actor.action == Action::Parry {
             d.draw_circle_lines_v(
                 Vector2::new(
@@ -410,7 +462,20 @@ pub fn draw_chapter(d: &mut impl RaylibDraw, a: &ProductionAssets, chapter: &Cha
             );
         }
     }
-    super::nightlife::draw(d, a, &night, camera, super::nightlife::Layer::Traffic);
+    if let Some(models) = &a.models {
+        night
+            .vehicles
+            .sort_by(|a, b| a.ground_y.total_cmp(&b.ground_y));
+        for vehicle in &night.vehicles {
+            let mut sample = super::models3d::vehicle_sample(vehicle);
+            sample.at[0] += 640. - camera;
+            if !models.draw_screen(d, sample) {
+                super::nightlife::draw_vehicle(d, vehicle, camera);
+            }
+        }
+    } else {
+        super::nightlife::draw(d, a, &night, camera, super::nightlife::Layer::Traffic);
+    }
     super::nightlife::draw(d, a, &night, camera, super::nightlife::Layer::Foreground);
     ui(d, a, chapter);
     let fade = cinema::handoff_fade(chapter);

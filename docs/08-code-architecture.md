@@ -124,6 +124,14 @@ de evacuação continuam no domínio Augusta. [Escopo](39-augusta-cinematic-dire
 `painted_crowd.rs` aplica as poses aos recortes pintados, com registros externos
 em `nightlife-cast.json` carregados junto ao world-art do capítulo.
 
+A [ADR 0034](adr/0034-augusta-blender-actors.md) acrescenta o candidato de
+humanos e veículos produzidos no Blender. `engine/production/models3d.rs`
+possui modelos, animações, texturas e iluminação; `models3d_pair.rs` aplica
+o contato existente ao par de esqueletos. Catálogos GLB são referenciados pelo
+world-art e seguem a recarga transacional do pacote. A autoria fica em
+`tools/blender` e `assets/adventure/production-3d`; o domínio Augusta conserva
+câmeras, relógios e trajetórias. [Arquivos e uso](40-augusta-blender-actors.md).
+
 A [ADR 0028](adr/0028-editable-cinematic-tracks-and-destructibles.md) amplia
 os catálogos existentes com `adventure/biography.rs` (tomadas e keyframes),
 `adventure/locomotion.rs` (distância/apoios) e `chapter/debris.rs` (dano e queda

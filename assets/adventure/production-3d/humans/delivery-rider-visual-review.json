@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "scope": "Isolated Blender source renders, with exported GLB contact/loop check recorded separately",
+  "runtime_glb": "assets/adventure/models/delivery-rider.glb",
+  "runtime_glb_sha256": "5da8a38eb5bb3af245f4ee4ee6e8ef380ba690ef1a3e4326ad9018d6519d97b5",
+  "source_blend_sha256": "73c19846bf207ea3f9facc1fd79542ae6adfb4b152bb0bdaa2f2fcd3f3591df1",
+  "previews": {
+    "front": {
+      "file": "previews/delivery-rider/rider-scooter-front.png",
+      "sha256": "074a85bf987f34da3f8fc7672a868b4db6e485366e4f1ea00788403572b30b49"
+    },
+    "side": {
+      "file": "previews/delivery-rider/rider-scooter-side.png",
+      "sha256": "5dc01a6445fabd49824838de9a462770d7b4ce5c40830ce51faca964f51d10ba"
+    },
+    "rear": {
+      "file": "previews/delivery-rider/rider-scooter-rear.png",
+      "sha256": "2533f39d87d54152674478b7c2401077747a6b568ba3501d1757d30e6003c96c"
+    }
+  },
+  "observations": [
+    "Full anatomical human body, face and hands; olive jacket and dark blue trousers preserve delivery identity.",
+    "Both palms meet the scooter grips, elbows bent, fingers follow the controls.",
+    "Boot soles rest on the footboard; knees remain outside the leg shield.",
+    "Pelvis and thighs sit on the saddle; head looks along the road.",
+    "Front, side and rear retain the same geometry; visor and helmet remain attached."
+  ],
+  "export_check": "delivery-rider-validation.json",
+  "runtime_review": "Chapter captures are reviewed separately; these images are Blender renders."
+}

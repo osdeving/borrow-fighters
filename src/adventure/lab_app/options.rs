@@ -9,6 +9,7 @@ use std::path::PathBuf;
 pub(super) struct Options {
     pub actor: PathBuf,
     pub enemy: Option<PathBuf>,
+    pub models: Option<PathBuf>,
     pub clip: String,
     pub phase: f32,
     pub frames: Option<u32>,
@@ -25,6 +26,7 @@ impl Options {
         let mut options = Self {
             actor: asset_path("assets/adventure/actors/cpp/character.json"),
             enemy: None,
+            models: None,
             clip: "idle".into(),
             phase: 0.0,
             frames: None,
@@ -42,6 +44,11 @@ impl Options {
                 "--enemy" => {
                     options.enemy = Some(PathBuf::from(
                         args.next().ok_or("--enemy requires a manifest path")?,
+                    ))
+                }
+                "--models" => {
+                    options.models = Some(PathBuf::from(
+                        args.next().ok_or("--models requires a GLB catalog path")?,
                     ))
                 }
                 "--clip" => options.clip = args.next().ok_or("--clip requires a clip ID")?,
@@ -105,6 +112,8 @@ mod tests {
             "/tmp/python/character.json",
             "--clip",
             "spin",
+            "--models",
+            "/tmp/python/humans.json",
             "--phase",
             "0.5",
             "--review",
@@ -114,6 +123,7 @@ mod tests {
         .unwrap();
         assert_eq!(o.actor, PathBuf::from("/tmp/python/character.json"));
         assert_eq!(o.clip, "spin");
+        assert_eq!(o.models, Some(PathBuf::from("/tmp/python/humans.json")));
         assert_eq!(o.frames, Some(1080));
         assert_eq!(o.phase, 0.5);
     }
@@ -125,6 +135,7 @@ mod tests {
             &["--frames", "0"],
             &["--frames", "36001"],
             &["--actor"],
+            &["--models"],
             &["--hidden"],
             &["--typo"],
         ] {

@@ -1,0 +1,860 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "scope": "Anatomical wrist bands in guard and run; security left cargo flap; other source meshes and baked actions unchanged",
+  "models": {
+    "cpp": {
+      "actor": "cpp",
+      "source_input": "assets/adventure/production-3d/humans/cpp-pilot.blend",
+      "source_input_sha256": "e910300af4e505385b8a5c6bc1aa779e9a90c1fe7ebf1f9f57bb761ae50c2f92",
+      "source_output_sha256": "2b63371483b584773e0c652493bc1369882d72d0fe37b2d9bf0b206d4e00f536",
+      "model_output_sha256": "cbd614e09e60c05c3ce7c4e3120e9fda25426d96b7fd021d0ca8607b62917f3d",
+      "actions_unchanged_sha256": "de9754e9ab78bad9ca2a514dcfd105d15634e68a21541410be553fccf517c0da",
+      "other_geometry_unchanged": {
+        "C++ anatomical skin": "2ba8bf0d981cdd67a802227c8b393deb9556e87aa8baf815dd14a54e1e7a4ef0",
+        "C++ anatomical skin.high-poly": "87516f9638542791b0e9c0f522a3e76a6b22bfd664b2db623dcacf77a3ddb7bc",
+        "C++ anatomical skin.eyebrow003": "16ad56e9da35b0807db3be569de7c3fc6a9d09b78c8e1a0f126e29de5f8625ef",
+        "C++ anatomical skin.eyelashes01": "03b9cc2397b3a903c52abf856910c7df36ed1671b0577b1a1fde4a4d128f7ac1",
+        "C++ anatomical skin.male_casualsuit03": "76d32945934d2dda0081c85b9b4fc232ec0cdacdbfaa0729e4f8c3f30b756909",
+        "C++ anatomical skin.shoes03": "318047655abccf1d935ecb54d37f6079ef5dc676d4193441912064fdfeaca731",
+        "Rolled cuff l0": "4b4f56181996b54188204a2d33c591c5a8d8f5ab6cf755c75d326d922b253d93",
+        "Rolled cuff l1": "9e4192c55c4fc9b77c9f764d6913c43212a79a6e61da2bece18d5579a9a71a7c",
+        "Rolled cuff l2": "2716523e916e4200ab797c64af8cb0f1b4a68a1097bddd56d6a6d9cd105b6e85",
+        "Rolled cuff r0": "11230877d88873d26d1e589c109e7d31610ef1c12754fecf64605097917b241e",
+        "Rolled cuff r1": "962a20affad7084b8bef31bc8fe5ea6a1d4c11759e1c35125183773945ea3300",
+        "Rolled cuff r2": "fd0d5879fb528125159d253ea33a4be72b8ead35e2e8effa961f61024ba86d8b",
+        "C++ parted copper crown": "f3101caefa7924d8e89121d4fa8df2a2b4854579f282a2dc822c901e277bf86b",
+        "C++ flowing waved hair mantle": "1b38f4f6b52fc4b6f55174653e98a2509da3e9d4509edf9b6e9b6201240d6d6b",
+        "Swept hair strand 00": "c95c5233a5ea455cf59915fa11dcabb06a99b2d4dec927c653f3aec8bce4413b",
+        "Swept hair strand 01": "c6b95d662712488dff9c635a6e0f52ca2d1d36b76c86f5fe8afc37bbf14ac158",
+        "Swept hair strand 02": "6d6a0f94bd40537bbe8aa1db2a5cd382b6026e85f5dc815bce796b2119ced14f",
+        "Swept hair strand 03": "9dabba4f08cf77b732dbdd4e519c0f2ddeea8ccd94e45fd023edf3456625d947",
+        "Swept hair strand 04": "cf9309cd4becf139bd70965ad672e3cf8549e4130d52db187b720956b7f428ef",
+        "Swept hair strand 05": "c555919e46615948da0a674fe62e0ac28bd66da803bca63eaf43cb750bc5ea93",
+        "Swept hair strand 06": "2152bedbc50dec2726ebb030dc4df9e6553373371143b66d72313735eb5a43a5",
+        "Swept hair strand 07": "7186b18d8c2d7a7f444a4443b59009c9da5ca43ef79f814bdb1da5a4d93ee136",
+        "Swept hair strand 08": "c6d00af5e72ebd755bc8f969b0ef1710320f24bd1e0ca305825e5624bae4871d",
+        "Swept hair strand 09": "c7b9abaa8c0339b507fff6f9812222dc34a3d07b74060ce8276141ae05964925",
+        "Swept hair strand 10": "5e2ac04142a0973a6b0c05cffa46c849cfadec6c7105b546080b05309d25a88c",
+        "Swept hair strand 11": "e429acf56b70165fd0656889ae573a33755fb4d5ac611ecb9b6b1bf82546856b",
+        "Swept hair strand 12": "436cd78cd560d3db4b304ae41ef522bbf368b4e9900d997c6ef475ca85490fdf",
+        "Swept hair strand 13": "45c8d8d48dab769605f6e309976fe78dad37a7eb047a07a8d6df367ea22bebcb",
+        "Swept hair strand 14": "910cfcc91beca7ddceb6bc248cd77f0708edc82bd279143e4802c05b36430912",
+        "Swept hair strand 15": "8d1f67a413709618cb5256ad79720c867ff6d41d61425645a6952cb958de5adb",
+        "Swept hair strand 16": "41e41d6db925b2382a278164e330d2f1ae1c82f333791a826093282bd8c68e19",
+        "Swept hair strand 17": "c6632834da303683d07e059e660aa7964ce0bbc8bcfa68aa9b3ea63d3a4b0306",
+        "Swept hair strand 18": "b7a051653ece03f4a49a2cf0e1d0b76c3d83f71f34617ee57813f3cd2165f04f",
+        "Swept hair strand 19": "d1b6adb529ea980127b0f439fba805b7200e37ff5802c70f75b623a7cfcf4150",
+        "Swept hair strand 20": "0d6edda41e3427cca2b653e369f248feb64c42b26e1f03532454568e4ee3edab",
+        "Swept hair strand 21": "f3bf4a433159750dd988acf3e05f6bb64307f6931c5eea91b38f1bd87b06909d",
+        "Swept hair strand 22": "512243d088ef3a6fe62c95c8b3a548df57b6786092bc85318bd7677e88217426",
+        "Swept hair strand 23": "9c67575146215ad5a122f0034cd3717c85a57454641f56b1739d6938fe328534",
+        "Swept hair strand 24": "dfdcbab3579ce5c425236e79e50d31fba674faa88bc8cf39b9ae80cb07e85c9b",
+        "Swept hair strand 25": "de667dfe3ea552a3a53440d932f6c035f239a81bb9e11b3bb6272ed37247b26d",
+        "Swept hair strand 26": "a2c4ad292080ee80940472add6fe6d314c6b49492dc80ea4abd6c0749796d13f",
+        "Swept hair strand 27": "5cbbe061b489a980776a063a98633c7d7f660064a6bcb6c17e70b5ffec4f8a68",
+        "Swept hair strand 28": "84c6619c6584ea53693ce0080a5314b6b6841f94a6d51c12f074cef93efcd065",
+        "Swept hair strand 29": "ea7e9f4262b560b61ee3d7aa6d551ec27af6fa86b1a66e2b3aa363544b02179a",
+        "Swept hair strand 30": "d90cdea3267d8d25399dcd9358840dfaa3d135dfaca65ba6e85a3b029db5b47a",
+        "Loose copper curl 00": "6dd42d425a034ea372274f51023afd4237bc5505efaeef77c10c8dd902a6438b",
+        "Loose copper curl 01": "ebbd0ca2c55fe8d13e1318cef796632449411bf3879c8a582288dc76587ae6cd",
+        "Loose copper curl 02": "71bdbabfbeabd1de2b2f905ba79877713baeb865bb2fcb0312a19bf904b953f7",
+        "Loose copper curl 03": "5f9f218921437beab8b69a7bc39a2baa9bfdc63067b67e5c6c69bd67f1127c1e",
+        "Loose copper curl 04": "0473959ad17c75bbc3ebaf8d705075553a10d016332e983055be498e3be22a02",
+        "Loose copper curl 05": "2ea581fe63036349468ae4cd495269c0cf2d2a9a23da618172656484d78f2ade",
+        "Loose copper curl 06": "f1107411f910ad38fd8ac4534292ab8bf29d53f0cb3f368137bd98b70a197347",
+        "Loose copper curl 07": "ac44523b9e02cf40976696d863a5dd300cf06f46fd84ef1f220d90a50248ccb6",
+        "Loose copper curl 08": "50ffc262ce32ea81b6b85e09ec5b8e47a1317be19018f044da53d52f0d286f12",
+        "Loose copper curl 09": "6f497610174c31bb8108a9466f25b1f726163f39f8562ea74eadfcb5a24094c4",
+        "Loose copper curl 10": "dba82a3a69157c42636a249e9132667d3e61fefc3685b9dbfd42b675adb2fb59",
+        "Loose copper curl 11": "854dbe18eda4055df78b80e884e847a566405f05b9f2f74e00704bf08d28e2c4",
+        "Loose copper curl 12": "0ab6a2beec13a278361813c7ff7f27fe15305416a36923fc702966c8911f4dec",
+        "Loose copper curl 13": "db2cfbd137271be23bbdc49af38e80394955bc765c3d9df71d57017102918ef6",
+        "Loose copper curl 14": "21bb3eea8d0b69ca04e971009297e6cb4fd4176e2a5ecb8de199b2082961dd41",
+        "Loose copper curl 15": "1309b1dfdf2cc6b9f36776e52806e598acd3d63b9e08fecf94c7f45b5f539d07",
+        "Loose copper curl 16": "30683bdb5d1d87df460e8403904e9c87d4296599d977cf51ff7d2a5a22753151",
+        "Loose copper curl 17": "8ae46ca9ece4cdbc874b6f98b88006d0136ca67ee8a0e97fc6df0f30c4fd0a44",
+        "Loose copper curl 18": "d5c6e7826d130fa14a52a614c9ff4ff98391fba83c16294812061df936c0135d",
+        "Loose copper curl 19": "2aedea365a306daca26c470078a92c7ccf5773f2f89c14206bd24944046c93a9",
+        "Loose copper curl 20": "a39ac91db9e0d60b4937f0bf97667d1e024a5787c49afb8f3e4a964d34ddf064",
+        "Loose copper curl 21": "bcb9d6c3b44de8431f45ef641ef3e7d894f415c39bb300d48468788755937a87",
+        "Loose copper curl 22": "25289218111611dc56e011aa6a5fff81c35b4979362f630904c808398f0b75e9",
+        "Loose copper curl 23": "e032da5b00784e4e18d2bcc2b72d4240efeec87315070eee23a336a9f5f37d15",
+        "Loose copper curl 24": "7655e159ea47e40dfe342fecef56b6f3f7c07533e821dabf25b866d29e5c1fa5",
+        "Loose copper curl 25": "232853794d2e67e31bd2f354d075fc9ac701282c315b7ff4eff723b2a6c28629",
+        "Loose copper curl 26": "83e9e4aea48084b5ed998c33255013475f645d59b2abde96df3d8b61b59c31f6",
+        "Loose copper curl 27": "0c572c0bf4b2e02e9044b68b23e9386fd8912432c099851ab23aa439490d7e1c",
+        "Front copper sweep -1 0": "6dee29e88bda6b21e75899371938a92b1ee73d5c1db0d811d7706a52eeabb87b",
+        "Front copper sweep -1 1": "e9b7eaff3b4f783adc450d7e13224e0d6be8ac39b60784f98e55bfdb5662a728",
+        "Front copper sweep -1 2": "18f93ecaa34b7329335d6b603dd54c182705d93202114bafc8054ea51ad75933",
+        "Front copper sweep -1 3": "50a617d0ea5b6818dc1bbbb50831519cca2b8cf08ce9a3b1916b0840417a299b",
+        "Front copper sweep -1 4": "e15e245f2457e6f3645c9d2f5e8b325065bbd65ecf771e1acb57d7b293ad75d2",
+        "Front copper sweep -1 5": "699829aca3d339bea4cf93def445de0e84edc10119ff4c8f970a36e77d2209ab",
+        "Front copper sweep -1 6": "00e8d89b4ff77490389035987bcea84f27fd915a65e9e8859bc13e64702a5c61",
+        "Front copper sweep -1 7": "6503ffeef35032a95cb899a7ef416127f50da52694932b95feb8a3798542c9e4",
+        "Front copper sweep 1 0": "925508600cf138a53d9c8c2a35706d9b5c012b63f7ec73f6f0825e5b8969a55e",
+        "Front copper sweep 1 1": "674feec039e3e2363be844db3f3ad86747203026591f31cf10ba53f3c72b850f",
+        "Front copper sweep 1 2": "7033e3b2c200e857b1018ad7fc2c4ee1d5ab9e9518ade3c13ebc83ac11a2c328",
+        "Front copper sweep 1 3": "a9922083cfef8f1196de17a81079d57595d64a4aa8c8ab66b2c671fcbfa5a9a4",
+        "Front copper sweep 1 4": "ae0e1b68cb0811de42982d571601fd3281db5568e3b2bad33aa42b7d2bfe584b",
+        "Front copper sweep 1 5": "ed39c1a5af576a7e5ed94e38d05ceb3af28ac8ecc58b25d75e2407221b9e49be",
+        "Front copper sweep 1 6": "bbf9d3cdee9ee525fd4808aacd32f650455c0c0a0fff83ed098036d6638ff45a",
+        "Front copper sweep 1 7": "bdb8e328bf72d11f337dde86d64edc0224ef03ad4cdd4d2bfb7cb1cf97d33325",
+        "C++ fingerless gloves": "4f8169d1eb0a9b7b2ad6d82b6599e2a59aeab8047628bc23964f8ed1add8661a",
+        "Brass glove rivet": "31ba81095094208d76fe944b0dda8fa4eb0f169133e6c4e510c42f6f34b7e708",
+        "Brass glove rivet.001": "ccd2f706764a7c175eee130590113fa47d416447dcce4a0116410888ed8b6ff4",
+        "Brass glove rivet.002": "dcc1fa63196e6353d567e4277236e07cac6bf6dea1365afc0a42ca0b890b8062",
+        "Brass glove rivet.003": "9f32829b182bf411232dd53bfb641d7883e1a30b63e4e7f0d04ef1f3a2f491b2",
+        "Brass glove rivet.004": "cafa1a6fd230430dd787bda77819898731576a726b4a6a1c27210b5295c29ffb",
+        "Brass glove rivet.005": "bfee19bf37eda6416cfe659ffe31969b9d8a3c173f15028d976cf880e8444a41",
+        "Brass glove rivet.006": "5730ccaf34070c4c8604c96a628e89dad0e65d80b1461474639dc2928599e6eb",
+        "Brass glove rivet.007": "261e673d503cc2392a14965a962c4f67d8675fc8b9fae23cdc02c1887d719dc8",
+        "C++ high waist leather belt": "017ca730960537c372c326176e78f44ca0558d0d30e65c9ca44f4f43ba8100b5",
+        "Brass belt buckle": "8cb42b8b37d8a7439d52c9caa9a7109b378bea237efbaad5d610251a8486242e",
+        "C++ circular inheritance satchel": "968bcd342af6186b5a69aa0f722a21d4d0c0a2fbd06463080e3a53b853602b6f",
+        "Satchel brass piping": "fe963a8dc41596da3caba171772b07bea6ffce860215b349a06770fe45d8159c",
+        "Satchel brass piping.001": "432fb9b0d779652d870568f5791d7a9a5c75f4744b59ab0fe1821f215edfeb06",
+        "Inheritance cross arm": "8b54425ef099f88bcadc07599923d0b10772f64c3fe4eef032ce7ab37e209cb2",
+        "Inheritance cross arm.001": "0bb56196d7ec5091ed01f4d8e3943c32c17d4e7d3d986b1c03fd1af63d730309",
+        "Inheritance cross arm.002": "0af702f41c038f96930dd76ec2f3e61c15453259a7b0815324c9d3fe8dd5d9db",
+        "Inheritance cross arm.003": "a294c0f9c55666abc2f3b2be1f7eb4de087c193ab364b855b64b1a03ac7fc988",
+        "C++ continuous satchel strap": "dc46b8c2a508f1353f5b6fd5cf2ad0eb2e09778e077993fae639f68a58efb7f9",
+        "Golden boot lace": "6f9ab5cdec0a8e2b4f105935f410fa165d59812ff591f9000aa8c0d0249ff355",
+        "Golden boot lace.001": "a09dfb7deed2c8b2566fdd34072e02fb9c200c4d948b8fc25276bf77d9bb9daf",
+        "Boot brass eyelet": "b534302cb398f0bf91cb31475e093d6c0808c224103bd775b098de66818cbafd",
+        "Boot brass eyelet.001": "3ff7990ba191fcef28a86948e0f5b55a9c3beedc2c139708862ba624fd0ceac6",
+        "Golden boot lace.002": "e4ec8fb18469d3ef63d8caa68227d8a4967bc245ed6e564d4e5cf47f44b485b7",
+        "Golden boot lace.003": "a82a4d6388c076749407a554d4ea7b137b1ed843123a358c0f5c52924a1dd05d",
+        "Boot brass eyelet.002": "9c936b91375977f3d0782079a4e07ed1028be19d7c070f4365064534393d4aa6",
+        "Boot brass eyelet.003": "6ea5f9ffa0f6e94b0d60a5f05e82a9b4ac3af91114c1c7791e759a33f927fc9f",
+        "Golden boot lace.004": "d29ca1a2aa1958fec5f489825df9c3f3fb33a38f111ac4add51b3fc929e1b5f6",
+        "Golden boot lace.005": "acb62982383dfeb01e3a5725e224d8c1fc1402cca362c326324cce48689fac07",
+        "Boot brass eyelet.004": "1d2fc7ac7b9e678335755383f12f63b7238bf544b3186a520f30ab2f2ddef1bb",
+        "Boot brass eyelet.005": "e33e1ccc7ec60aeaed47ff8a7ff77adee9e577e1fa79adf0364e4e7136c19997",
+        "Golden boot lace.006": "5d204adae06d8b7ba6e651b59df4d2ad2cd7979342e1c5c2bcc8079f5dc0bba9",
+        "Golden boot lace.007": "b6b6a7703573a9b9c0d66fce2bde80b6e0536311e7177cf36a5978bfe6dbe3ce",
+        "Boot brass eyelet.006": "0847dd3aa6771c44838def8db5b476c018f36528a3062d6fcf31fe113ad27e85",
+        "Boot brass eyelet.007": "57361c47cec0e48af1ebfb72152faa5a0f784424e6c03253a43067adfe1a2c12",
+        "Golden boot lace.008": "5a93f801a49dea5c052018996cd4bcd780508bdb158c19021f546f781730135f",
+        "Golden boot lace.009": "28c7b9363d09e9ca23965903fd491de96e91d57f9cdeeff1f67d2191ec20560f",
+        "Boot brass eyelet.008": "548a3b75cb0c715dd033022c499155a7b6ec6db7bf2315b6a7d5c582ed424257",
+        "Boot brass eyelet.009": "ced8a67c05bdc8747124082050ff38f06ec11885e161d0ebfe1880df6ea0af95",
+        "Golden boot lace.010": "93ac4d0ba84fa0cdbb41fc7324cb540b6c6c1805088c3ce7f2a4a9b25cf8fe5c",
+        "Golden boot lace.011": "9f68a51e8ec63e83c0f1b1ccdfcec93dd74b03362d3c44954b1e52cb2abcac43",
+        "Boot brass eyelet.010": "3926ca2114768fc3d8e640d13e440767af13e7cdd1d5b3ff4b211665de3d0baa",
+        "Boot brass eyelet.011": "233b8e6b2f60521b17b0fd421041b3048cbe803f5f1c2aad3343cb5468de5f53",
+        "Golden boot lace.012": "50aa671a0a6220f24246d216078030f421061ceddffb9e49c8debec35cb8a267",
+        "Golden boot lace.013": "d77c3589e59933e2923b68928c9a0af098b166893a3245bc5028489e1f0fe9ad",
+        "Boot brass eyelet.012": "6df08c95d9c69eddf68fa488ab2179bd9296cb48c17b5fcef1e0e23a35130a74",
+        "Boot brass eyelet.013": "3592c5656cfd0df1590980e84e483e2082e8d9f2195f555be9f684e220889d6b",
+        "Golden boot lace.014": "414000d7bf78a7d750bc37268a415d434d067c2ac7d13df65eca10c24cb11c75",
+        "Golden boot lace.015": "5326e9de71a9246df514264c05af07bfb11788dda3b97c9d74ce6f39c5941dc3",
+        "Boot brass eyelet.014": "775a3030e2a741208f6af57616828961abb97a20f9bb8a121b60763de3d526f8",
+        "Boot brass eyelet.015": "179e43dd5854f09b80aa3b77df3182f238bc806356e21f867a979ed60d4c2fc9",
+        "Golden boot lace.016": "6d811577c7fb0a4a5a917be03f0e05314c53c49a374c83b43d5807c5dd4612cb",
+        "Golden boot lace.017": "59a884b7d80fc0c652d352541e30d42549efaf47448bbecda06114bb787d90d5",
+        "Boot brass eyelet.016": "f19825431cfee820c005b186d0fd40af96d54bc01e9603f5d9470669d3688695",
+        "Boot brass eyelet.017": "366108966b450c92d0ac9e01a9b4ff58019deb97a38fb7acff7152ec2e3cbd1f",
+        "Golden boot lace.018": "7800590d4dccd344ad8496f89ecdc8af0560b356ec1cff86ee2fcb5095d4d8cf",
+        "Golden boot lace.019": "1a5aad904b44eed3b509ee40dcf4c5df045db21ef83bebe4892ee09e7e101223",
+        "Boot brass eyelet.018": "bb8e74e7635a22e28311040d2a836b811acc1254f54cd8d00d7fd97245209427",
+        "Boot brass eyelet.019": "4b3bce12fe867cbf1cbd2bc58ef1b7a0f649bafddf7d155598a81d13c03ab695",
+        "Golden boot lace.020": "edeb0485ec5c56cdeaea3a447954c6a3234f7100af43dbf01110e3ee1fb7f619",
+        "Golden boot lace.021": "eb0b300258c31ce3789f7cdce1e55e99e2963a823477472dc0288c092bd8ed8f",
+        "Boot brass eyelet.020": "11fa22cb63373e41618cbacfff726db66cbd10d81cfe0f1f1653277910dc7a9c",
+        "Boot brass eyelet.021": "b9b66c6db02ae847629ca09079dddfd4c8337e89d1894bb82d502df64ecab909",
+        "Golden boot lace.022": "c3676ed8557a300c6a891ba6581b7f7fbaad8e05dd2c445f994a11316d12b9bc",
+        "Golden boot lace.023": "6ec8947a48879dabe175585d41887f9195a584a33ddca50ba51bb5ea1b4d932e",
+        "Boot brass eyelet.022": "5d19a6e9cba91cc655c53d3f815747ae6571c69311f49b2fcda12b1e8745a916",
+        "Boot brass eyelet.023": "e60d100ca2913d1fe9a45b10cd9dcb316db7ca853192555661523afadd02e446",
+        "Golden boot lace.024": "95953d07a13234603e9f0a6eb87f9b97eab3f1e5a6711fe9dbf6e28dd25e1b13",
+        "Golden boot lace.025": "0a7a289d373eaa392334e65c3c47aa9ae84a30ccb0cb3a93227086bea8c73e08",
+        "Boot brass eyelet.024": "32e2dac84f5945db4f46edd6e838061ac67e51f39b6bbd007d916d7ae00ec3c3",
+        "Boot brass eyelet.025": "88c08158f762460e3f06eb6fc27cdc6b30103b98044648cdb60b711cda4d18e4",
+        "Golden boot lace.026": "a4d39eac9df9eb88d08b558d164b10157486db4f18b2330b05475852ed6ebab7",
+        "Golden boot lace.027": "49a95b07a72c5916e793e69a3a778b7b697047abdc166ba8b698b9beec9280ec",
+        "Boot brass eyelet.026": "835e1c236645bf4464bc4a93c76ab9682f9972574a61a0e382982f8c3c734502",
+        "Boot brass eyelet.027": "5b517335268840c8b572e671d9a72194782525d84393f58fcf68c2e13f49be19",
+        "C++ flower petal": "22b5b04fbdc19dee222978eb3d13723101136cb45ccafaf8766e11bf5b5a2078",
+        "C++ flower petal.001": "8a822ea9635167d3df065ef05d47cec7e0cb10a20d2a60802041d110c139e00e",
+        "C++ flower petal.002": "2b5cc5ead7c90fb26a03829ae51f1bd72456768178ec4d91368e0c99b865a231",
+        "C++ flower petal.003": "1580997238557f9c3e50612d32f6c63fcb3bb371da769c454d06f6fffbaf31b7",
+        "C++ flower petal.004": "af9d2868c80a37046e1a9c644ca9c5f14815a94e974429fe117dcf92d75a4fd9",
+        "C++ flower center": "a1be2c15c84ffb587f0884f172cc53f69f4233993379ec06647f7040a2013921"
+      },
+      "samples": [
+        {
+          "action": "guard",
+          "phase": 0.2,
+          "bands": {
+            "Glove cuff l0": {
+              "minimum_skin_distance_m": -2.932922589593545e-05,
+              "maximum_skin_distance_m": 0.013494577317032963,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l1": {
+              "minimum_skin_distance_m": -6.291128255497824e-05,
+              "maximum_skin_distance_m": 0.013598619785625488,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l2": {
+              "minimum_skin_distance_m": -0.00011723980128408584,
+              "maximum_skin_distance_m": 0.014249733823817223,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging l": {
+              "minimum_skin_distance_m": 0.010697323523345403,
+              "maximum_skin_distance_m": 0.016485982792801224,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r0": {
+              "minimum_skin_distance_m": -4.4450208861235296e-05,
+              "maximum_skin_distance_m": 0.013487393967807293,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r1": {
+              "minimum_skin_distance_m": -8.026181177456237e-05,
+              "maximum_skin_distance_m": 0.01359498786041513,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r2": {
+              "minimum_skin_distance_m": -0.00011540991113179189,
+              "maximum_skin_distance_m": 0.014248945808503777,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging r": {
+              "minimum_skin_distance_m": 0.010701329811126925,
+              "maximum_skin_distance_m": 0.016480754682561383,
+              "fraction_inside_skin": 0.0
+            }
+          }
+        },
+        {
+          "action": "run",
+          "phase": 0,
+          "bands": {
+            "Glove cuff l0": {
+              "minimum_skin_distance_m": -4.6538142015606354e-05,
+              "maximum_skin_distance_m": 0.01341265463270247,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l1": {
+              "minimum_skin_distance_m": 0.0002082455387153459,
+              "maximum_skin_distance_m": 0.013348587090149522,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l2": {
+              "minimum_skin_distance_m": 0.0007623507099197013,
+              "maximum_skin_distance_m": 0.01308731862809509,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging l": {
+              "minimum_skin_distance_m": 0.010911695891991258,
+              "maximum_skin_distance_m": 0.016378833446651697,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r0": {
+              "minimum_skin_distance_m": 4.227294959946448e-05,
+              "maximum_skin_distance_m": 0.013451643928419799,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r1": {
+              "minimum_skin_distance_m": 0.0002227844965125847,
+              "maximum_skin_distance_m": 0.01340185577282682,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r2": {
+              "minimum_skin_distance_m": 0.00058903252647724,
+              "maximum_skin_distance_m": 0.013152952655218542,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging r": {
+              "minimum_skin_distance_m": 0.010877437022827507,
+              "maximum_skin_distance_m": 0.016423144668806344,
+              "fraction_inside_skin": 0.0
+            }
+          }
+        },
+        {
+          "action": "run",
+          "phase": 0.25,
+          "bands": {
+            "Glove cuff l0": {
+              "minimum_skin_distance_m": 3.7526598738679695e-05,
+              "maximum_skin_distance_m": 0.013462026305205654,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l1": {
+              "minimum_skin_distance_m": 0.00019000673967184412,
+              "maximum_skin_distance_m": 0.01341309268900659,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l2": {
+              "minimum_skin_distance_m": 0.0005351609133867896,
+              "maximum_skin_distance_m": 0.013166162301786244,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging l": {
+              "minimum_skin_distance_m": 0.010858277870283928,
+              "maximum_skin_distance_m": 0.016432787757366896,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r0": {
+              "minimum_skin_distance_m": 4.5556794248113874e-05,
+              "maximum_skin_distance_m": 0.013452312326990068,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r1": {
+              "minimum_skin_distance_m": 0.00021722070752340505,
+              "maximum_skin_distance_m": 0.0134029517066665,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r2": {
+              "minimum_skin_distance_m": 0.0005828770317748422,
+              "maximum_skin_distance_m": 0.013154747197404504,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging r": {
+              "minimum_skin_distance_m": 0.010910734767094254,
+              "maximum_skin_distance_m": 0.016423779947217554,
+              "fraction_inside_skin": 0.0
+            }
+          }
+        },
+        {
+          "action": "run",
+          "phase": 0.5,
+          "bands": {
+            "Glove cuff l0": {
+              "minimum_skin_distance_m": 3.643398213171167e-05,
+              "maximum_skin_distance_m": 0.013457487395498902,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l1": {
+              "minimum_skin_distance_m": 0.0002405377712224599,
+              "maximum_skin_distance_m": 0.013404143217485398,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l2": {
+              "minimum_skin_distance_m": 0.0005889481417398201,
+              "maximum_skin_distance_m": 0.013150348095223308,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging l": {
+              "minimum_skin_distance_m": 0.010917793088083272,
+              "maximum_skin_distance_m": 0.01642660249490291,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r0": {
+              "minimum_skin_distance_m": -3.9658527470010085e-05,
+              "maximum_skin_distance_m": 0.013407308608293533,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r1": {
+              "minimum_skin_distance_m": 0.00021204445420153206,
+              "maximum_skin_distance_m": 0.01334661291912198,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r2": {
+              "minimum_skin_distance_m": 0.0007644889101356966,
+              "maximum_skin_distance_m": 0.0130898974603042,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging r": {
+              "minimum_skin_distance_m": 0.01090767327696085,
+              "maximum_skin_distance_m": 0.016375744715332985,
+              "fraction_inside_skin": 0.0
+            }
+          }
+        },
+        {
+          "action": "run",
+          "phase": 0.75,
+          "bands": {
+            "Glove cuff l0": {
+              "minimum_skin_distance_m": 3.978747224664403e-05,
+              "maximum_skin_distance_m": 0.013458202360197902,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l1": {
+              "minimum_skin_distance_m": 0.00023516056231187576,
+              "maximum_skin_distance_m": 0.013405289559159428,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l2": {
+              "minimum_skin_distance_m": 0.0005831825619679876,
+              "maximum_skin_distance_m": 0.013152064988389611,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging l": {
+              "minimum_skin_distance_m": 0.0109113134085419,
+              "maximum_skin_distance_m": 0.016427378985099494,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r0": {
+              "minimum_skin_distance_m": 1.1860339000691056e-05,
+              "maximum_skin_distance_m": 0.013456040273013059,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r1": {
+              "minimum_skin_distance_m": 0.00016986497527682332,
+              "maximum_skin_distance_m": 0.013410712068434805,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r2": {
+              "minimum_skin_distance_m": 0.0005349565381038701,
+              "maximum_skin_distance_m": 0.013168807374313474,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging r": {
+              "minimum_skin_distance_m": 0.010847753710550023,
+              "maximum_skin_distance_m": 0.016429236071417108,
+              "fraction_inside_skin": 0.0
+            }
+          }
+        }
+      ],
+      "status": "pass",
+      "source_blend": "cpp-pilot.blend",
+      "runtime_glb": "../../models/cpp.glb",
+      "previews": [
+        {
+          "file": "previews/wrist-cuffs/cpp/guard-profile.png",
+          "sha256": "b5e0896b14d1e80f55656479ff6cdc3363456b0800c886ef336115c291160d3c"
+        },
+        {
+          "file": "previews/wrist-cuffs/cpp/guard-quarter.png",
+          "sha256": "41d5b4097023e15499df15ee68131e74ca1d896449cd5628a461c3a6a9111daf"
+        },
+        {
+          "file": "previews/wrist-cuffs/cpp/run-0-profile.png",
+          "sha256": "b384c34895c77d6e1c82848602fabf523adc7d296212e4067c7c4acbc7ae760f"
+        },
+        {
+          "file": "previews/wrist-cuffs/cpp/run-half-profile.png",
+          "sha256": "33f4d0e7e833eccfea6c1f59dfda782394c36f1a2031ed64bacedad6842da4f5"
+        }
+      ],
+      "validation": {
+        "file": "assets/adventure/models/cpp.glb",
+        "sha256": "cbd614e09e60c05c3ce7c4e3120e9fda25426d96b7fd021d0ca8607b62917f3d",
+        "bytes": 26134796,
+        "vertices_exported": 118573,
+        "triangles": 220596,
+        "materials": 18,
+        "bones": 53,
+        "maximum_weight_sum_error": 1.2665987014770508e-07,
+        "bounds_gltf_m": {
+          "min": [
+            -0.5316601395606995,
+            -0.020061494782567024,
+            -0.2186552733182907
+          ],
+          "max": [
+            0.5316600799560547,
+            1.7831618785858154,
+            0.3203355669975281
+          ]
+        },
+        "duration_seconds": {
+          "idle": 2.0,
+          "run": 0.5666666626930237,
+          "start": 0.13333334028720856,
+          "stop": 0.1666666716337204,
+          "turn": 0.1666666716337204,
+          "jump": 0.30000001192092896,
+          "fall": 0.3333333432674408,
+          "land": 0.13333334028720856,
+          "guard": 1.0,
+          "parry": 0.30000001192092896,
+          "hurt": 0.3333333432674408,
+          "knockout": 0.6666666865348816,
+          "arrival": 1.1666666269302368,
+          "interact": 2.0,
+          "light-1": 0.4000000059604645,
+          "light-2": 0.4333333373069763,
+          "light-3": 0.5666666626930237,
+          "kick": 0.5833333134651184,
+          "spin": 0.7666666507720947,
+          "linker": 0.6666666865348816,
+          "walk": 1.2000000476837158,
+          "conversation": 2.5,
+          "talk": 2.5,
+          "seated": 2.5,
+          "phone": 2.5,
+          "scooter": 2.0,
+          "riding": 2.0,
+          "restrain": 2.0,
+          "restrained": 2.0,
+          "pull": 2.0
+        },
+        "status": "pass",
+        "visual_review_required": true,
+        "animation_comparison_max_error": 0,
+        "animation_comparison_source_sha256": "7173b2df286c16b766c78d286cd9f68224d37485585842abc9baae1fa231ad7d"
+      }
+    },
+    "security": {
+      "actor": "security",
+      "source_input": "assets/adventure/production-3d/humans/security.blend",
+      "source_input_sha256": "15f604f02951db1b4bd10f428fbc245637d5b517d543c1630bf9adcf6bee90b2",
+      "source_output_sha256": "a35cb9248e174a3a74a7eeb529c55c6fb228f0158f9f097dd728f40e73b92f4e",
+      "model_output_sha256": "0c0956cbcb1a65afa6f417f3b7c5b79fa8394103e75ad3bc86bd48bc13100d0b",
+      "actions_unchanged_sha256": "dfec6ab55dbc925cc975d6a2326355f3916f9245de86562678261aa392757049",
+      "other_geometry_unchanged": {
+        "security anatomical skin": "8942c3fa2b479ecdbbc4a7e52bb84473a7307fda820ab991267fd887d1b8ce42",
+        "security anatomical skin.high-poly": "f253ddd0a242b8327f9502b55a067dfa079825129f876c042d32517b8513da28",
+        "security anatomical skin.eyebrow003": "8e4adac1f9a74201f73c15336e12858cd3a042f0408a7886cf3374cbc8726843",
+        "security anatomical skin.eyelashes01": "e2ec2437cb1e54f807db48b85baa4545f8e8d729bc0d44064fabb35557bb1b02",
+        "security anatomical skin.namuhekam_male_polo_shirt": "784de0970f7b308f63d5855693151aabfc1e7453faebed0ed834f3498eb28fc5",
+        "security anatomical skin.cortu_cargo_pants": "c4ec03c87a2b7cec24b1bcb2fd1366342fe9d7f319c66526583dd6311244eb4a",
+        "security anatomical skin.shoes03": "45f3cfdf3e5594d216f0aa12dd3d43734efb7eb78611b01f778b415964bcd6f7",
+        "security anatomical skin.culturalibre_faun_beard": "a8a38671fdee86038bfb3402c7af35cd1333e951b35f9e1f87f53fb815c169e9",
+        "Security fingerless gloves": "f5cee28f50f06c406c2f39203153653cd324aa34bbfe1e23f185736ba0c6ae22",
+        "Brass glove rivet": "e5d32ccc216d310bb4179ab30c99193e6a1d5c714216657fd961a0335ee5aa4e",
+        "Brass glove rivet.001": "5c69fdccd608edaeda31536bfb92796672226ba0abb7c337fcaad5feac71b7e6",
+        "Brass glove rivet.002": "71a744b80a17853876767f7b1b8e30e7d0ba00dac43d4460ca4274d86d0004db",
+        "Brass glove rivet.003": "6cf938884bf74c85f6975958da6704c6509dd89e02dc735c8fae5effb4620ea4",
+        "Brass glove rivet.004": "aa42b1f91347d2a8de0169c6088c952350fd92ff1119bd23b15f802980466144",
+        "Brass glove rivet.005": "4c97ec09914c768e1c1479556fb74d9b5b972059801398154e6b8ecc40736871",
+        "Brass glove rivet.006": "37672906268cc26eca9ca0c0e030d9e1f0480885ab7b94f57e16227ea7fa8389",
+        "Brass glove rivet.007": "eea4a78af5e1beebda3287021a71f8bc3068e6227002ef1c61b67fe7b3328b5a",
+        "Security plain badge": "bdd45872bd934fa6460e4c63126338d20026ec69f595d1f48211d957a2ea6916",
+        "Security dark belt front": "ed5ccc44f95978b1d56c148ab980b06d4978230052e02930486c242a12271759",
+        "Security rectangular belt buckle": "3d97edf9e4016492e2a1da5adc0fcf20e1206657fc7f8e0c49b7bbc87974c736",
+        "Security boot lace l0": "1111ea2cd81daf167f3069e3b6fc28878b844043c0d8407000e8a69d75f4519f",
+        "Security boot lace l1": "911ca6b937716a5c75003653998a3e82f0726781b0589e2f506c2299020e379a",
+        "Security boot lace l2": "2925085bfb167c9c11e2fc3825940fb97f3ace7202e549359b61c38686c7eeca",
+        "Security boot lace l3": "406d7e98042059160497967efbe33696f02f680775e58e6b30f9c19a2d2bc567",
+        "Security boot lace l4": "6c9c183eed8f5ec5ed95f338f9cc4dc2ddba9e841830b27cf6026db8c2f8d7a2",
+        "Security boot lace l5": "c23fcad38fc08c2e63f3c109e673be86ab2677084316ba48e1dbbe41b781bdea",
+        "Security boot lace l6": "1701f0eeed67e9a76d61a432249902d5b7e424004b98f6f137250cdcb19ea6d5",
+        "Security cargo pocket r": "7803b41c058a4a005f3d982ac26593068e6a7a11766b53b40bf737d41a2eb70e",
+        "Security boot lace r0": "4914883f894b060a34ec7b722f4dc42ee32b85b6f579d3d2b5425fab104bb9c0",
+        "Security boot lace r1": "bdf9f7a2ff6785da335635f55038984456d3f76a308a37874f2b0b1a8b5f30a4",
+        "Security boot lace r2": "dfd38269e042ff4ba06f91e73c70f235d4a658e5990d9e5956c69c26a3dd8b10",
+        "Security boot lace r3": "815597e3ff4e5ad1f57a17e17d0675d1b818e87ed1254e1c0098f066c546aeba",
+        "Security boot lace r4": "34a7c5b051fa6c8608fddfed26df1dc45326aa9880d4a49bb52440f3ccfcb4dd",
+        "Security boot lace r5": "f346d9aa620333dde1d314468dfacd3286d09b834b27e94b0f258fc8c42461ea",
+        "Security boot lace r6": "50c5b3c7fc289f6756915bd19173d54b059ba6e91ec90d1b0da45485ee7d40f2"
+      },
+      "samples": [
+        {
+          "action": "guard",
+          "phase": 0.2,
+          "bands": {
+            "Glove cuff l0": {
+              "minimum_skin_distance_m": 0.00022366539383256168,
+              "maximum_skin_distance_m": 0.013591620638180757,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l1": {
+              "minimum_skin_distance_m": 0.0001290343640505398,
+              "maximum_skin_distance_m": 0.014065653434954584,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l2": {
+              "minimum_skin_distance_m": 4.822696308792729e-05,
+              "maximum_skin_distance_m": 0.01484637928660959,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging l": {
+              "minimum_skin_distance_m": 0.010988011345034465,
+              "maximum_skin_distance_m": 0.016631586837320356,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r0": {
+              "minimum_skin_distance_m": 0.0001791721799691004,
+              "maximum_skin_distance_m": 0.01358542433445109,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r1": {
+              "minimum_skin_distance_m": 0.00011702692529524938,
+              "maximum_skin_distance_m": 0.014065721654333174,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r2": {
+              "minimum_skin_distance_m": 3.876130395497057e-05,
+              "maximum_skin_distance_m": 0.014848771854303777,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging r": {
+              "minimum_skin_distance_m": 0.010956524551147595,
+              "maximum_skin_distance_m": 0.016628776444122195,
+              "fraction_inside_skin": 0.0
+            }
+          },
+          "left_cargo_flap_minimum_clearance_m": -0.0006511447209049948
+        },
+        {
+          "action": "run",
+          "phase": 0,
+          "bands": {
+            "Glove cuff l0": {
+              "minimum_skin_distance_m": 0.000134240177430911,
+              "maximum_skin_distance_m": 0.013549941941164434,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l1": {
+              "minimum_skin_distance_m": 0.00015693114421821974,
+              "maximum_skin_distance_m": 0.013508670905139297,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l2": {
+              "minimum_skin_distance_m": 0.0003413787976569438,
+              "maximum_skin_distance_m": 0.013414805987849832,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging l": {
+              "minimum_skin_distance_m": 0.010546217180490203,
+              "maximum_skin_distance_m": 0.016581703384872526,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r0": {
+              "minimum_skin_distance_m": -8.508772361892625e-05,
+              "maximum_skin_distance_m": 0.013581670045823557,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r1": {
+              "minimum_skin_distance_m": 0.00013924926594377496,
+              "maximum_skin_distance_m": 0.0135420201550005,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r2": {
+              "minimum_skin_distance_m": 0.0005095078310546342,
+              "maximum_skin_distance_m": 0.013468203964293934,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging r": {
+              "minimum_skin_distance_m": 0.010876892412852612,
+              "maximum_skin_distance_m": 0.016608626480774547,
+              "fraction_inside_skin": 0.0
+            }
+          },
+          "left_cargo_flap_minimum_clearance_m": -0.0006107983426772989
+        },
+        {
+          "action": "run",
+          "phase": 0.25,
+          "bands": {
+            "Glove cuff l0": {
+              "minimum_skin_distance_m": -3.078661211475264e-05,
+              "maximum_skin_distance_m": 0.013571257411967963,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l1": {
+              "minimum_skin_distance_m": 0.00015956479916745536,
+              "maximum_skin_distance_m": 0.013568062207923504,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l2": {
+              "minimum_skin_distance_m": 0.0005178338286668804,
+              "maximum_skin_distance_m": 0.013467088690958917,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging l": {
+              "minimum_skin_distance_m": 0.010875602374653681,
+              "maximum_skin_distance_m": 0.01661012661543282,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r0": {
+              "minimum_skin_distance_m": -8.690845135106429e-06,
+              "maximum_skin_distance_m": 0.013567525427788496,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r1": {
+              "minimum_skin_distance_m": 0.00025333674403782425,
+              "maximum_skin_distance_m": 0.013545403257012367,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r2": {
+              "minimum_skin_distance_m": 0.0006223382006282918,
+              "maximum_skin_distance_m": 0.013458762550726533,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging r": {
+              "minimum_skin_distance_m": 0.010756358637721064,
+              "maximum_skin_distance_m": 0.0166083647927735,
+              "fraction_inside_skin": 0.0
+            }
+          },
+          "left_cargo_flap_minimum_clearance_m": -0.0006166537841636455
+        },
+        {
+          "action": "run",
+          "phase": 0.5,
+          "bands": {
+            "Glove cuff l0": {
+              "minimum_skin_distance_m": -3.1315435194301244e-05,
+              "maximum_skin_distance_m": 0.013588503279606812,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l1": {
+              "minimum_skin_distance_m": 0.00015830049315823658,
+              "maximum_skin_distance_m": 0.013545926951337606,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l2": {
+              "minimum_skin_distance_m": 0.0005168178655594602,
+              "maximum_skin_distance_m": 0.013466787786455825,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging l": {
+              "minimum_skin_distance_m": 0.01087696594549925,
+              "maximum_skin_distance_m": 0.016609196587069164,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r0": {
+              "minimum_skin_distance_m": 0.00014054689745535143,
+              "maximum_skin_distance_m": 0.013546624511945993,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r1": {
+              "minimum_skin_distance_m": 0.00015659743985452224,
+              "maximum_skin_distance_m": 0.013508449890650809,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r2": {
+              "minimum_skin_distance_m": 0.0003423206931074674,
+              "maximum_skin_distance_m": 0.01341594336554408,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging r": {
+              "minimum_skin_distance_m": 0.010545977865149325,
+              "maximum_skin_distance_m": 0.01658097206382081,
+              "fraction_inside_skin": 0.0
+            }
+          },
+          "left_cargo_flap_minimum_clearance_m": -0.0007389657766907476
+        },
+        {
+          "action": "run",
+          "phase": 0.75,
+          "bands": {
+            "Glove cuff l0": {
+              "minimum_skin_distance_m": 4.420773666424793e-05,
+              "maximum_skin_distance_m": 0.013575109478551894,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l1": {
+              "minimum_skin_distance_m": 0.00026746798130261595,
+              "maximum_skin_distance_m": 0.013548204966355115,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff l2": {
+              "minimum_skin_distance_m": 0.0006266564646466577,
+              "maximum_skin_distance_m": 0.01345740701071918,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging l": {
+              "minimum_skin_distance_m": 0.010756535408248169,
+              "maximum_skin_distance_m": 0.016609138750936836,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r0": {
+              "minimum_skin_distance_m": -8.454532189716701e-05,
+              "maximum_skin_distance_m": 0.013582219431555131,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r1": {
+              "minimum_skin_distance_m": 0.00014061098434603458,
+              "maximum_skin_distance_m": 0.013542463537305593,
+              "fraction_inside_skin": 0.0
+            },
+            "Glove cuff r2": {
+              "minimum_skin_distance_m": 0.0005105283040620634,
+              "maximum_skin_distance_m": 0.01346840086625889,
+              "fraction_inside_skin": 0.0
+            },
+            "Brass wrist edging r": {
+              "minimum_skin_distance_m": 0.010875489668251248,
+              "maximum_skin_distance_m": 0.01660951481289885,
+              "fraction_inside_skin": 0.0
+            }
+          },
+          "left_cargo_flap_minimum_clearance_m": -0.0008301623820443638
+        }
+      ],
+      "status": "pass",
+      "source_blend": "security.blend",
+      "runtime_glb": "../../models/security.glb",
+      "previews": [
+        {
+          "file": "previews/wrist-cuffs/security/guard-profile.png",
+          "sha256": "7f4474232f9c2948e5510349d1adc4f2391acc293a23d96ecfbd77985c02fa1d"
+        },
+        {
+          "file": "previews/wrist-cuffs/security/guard-quarter.png",
+          "sha256": "d2865350f5e2d631d4cbfbd0a6ff2d7d0528bdff130c3dd4bc99f44f5328c75f"
+        },
+        {
+          "file": "previews/wrist-cuffs/security/run-0-profile.png",
+          "sha256": "6b72ab1c614b39d98514ea38c8f4186e31f50273d3ad061e7acdb34f3ac31c0d"
+        },
+        {
+          "file": "previews/wrist-cuffs/security/run-half-profile.png",
+          "sha256": "908b2141cc89f0a47b49e0037b2c5afc1fd86134a0cd485701b6b26c248a41b7"
+        }
+      ],
+      "validation": {
+        "file": "assets/adventure/models/security.glb",
+        "sha256": "0c0956cbcb1a65afa6f417f3b7c5b79fa8394103e75ad3bc86bd48bc13100d0b",
+        "bytes": 24146368,
+        "vertices_exported": 69599,
+        "triangles": 130488,
+        "materials": 14,
+        "bones": 53,
+        "maximum_weight_sum_error": 1.2852251529693604e-07,
+        "bounds_gltf_m": {
+          "min": [
+            -0.6692522764205933,
+            0.0009622157085686922,
+            -0.12745478749275208
+          ],
+          "max": [
+            0.6692522764205933,
+            1.879065990447998,
+            0.40473055839538574
+          ]
+        },
+        "duration_seconds": {
+          "idle": 2.0,
+          "start": 2.0,
+          "run": 0.800000011920929,
+          "stop": 2.0,
+          "turn": 2.0,
+          "jump": 2.0,
+          "fall": 2.0,
+          "land": 2.0,
+          "guard": 2.0,
+          "parry": 2.0,
+          "hurt": 2.0,
+          "knockout": 2.0,
+          "arrival": 2.0,
+          "interact": 2.0,
+          "light-1": 0.8666666746139526,
+          "walk": 1.2000000476837158,
+          "conversation": 2.5,
+          "talk": 2.5,
+          "seated": 2.5,
+          "phone": 2.5,
+          "scooter": 2.0,
+          "riding": 2.0,
+          "restrain": 2.0,
+          "restrained": 2.0,
+          "pull": 2.0
+        },
+        "status": "pass",
+        "visual_review_required": true,
+        "animation_comparison_max_error": 0,
+        "animation_comparison_source_sha256": "f2bca3a4db89c6f2389ec604c2b12a8772a2e1425b2980116c1fb519b17f00f6"
+      }
+    }
+  },
+  "notes": [
+    "Skin-distance samples include the full tube surface; maximum observed band penetration is under0.12mm, below the1mm inspection tolerance.",
+    "Cargo measurement includes the solid flap underside, which can overlap cloth thickness; the visible front surface is continuous in the reviewed guard/run profiles.",
+    "Native Blender renders were opened at guard quarter/profile and run phases0/.5 for both actors.",
+    "Source meshes outside the eight bands and the left security cargo flap preserve their geometry/weights hashes. Exported animation buffers compare exactly with the preceding GLBs."
+  ]
+}

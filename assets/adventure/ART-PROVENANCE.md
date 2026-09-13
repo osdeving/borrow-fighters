@@ -362,3 +362,18 @@ atores/objetos transparentes, prompts, hashes e composição editável. Arte
 produzida pelo `image_gen` integrado, preservando as referências locais de
 identidade. A chegada da EP reutiliza o atlas existente, com nova direção
 por dados e efeitos locais; os dois sons originais estão no guia de áudio.
+
+## Augusta — adaptação humana e veículos em Blender
+
+O [candidato 3D](../../docs/40-augusta-blender-actors.md) preserva o cenário
+pintado e as identidades existentes. Anatomia, pesos e roupas dos humanos
+partem de dados CC0 selecionados do MakeHuman Community; as adaptações de
+figurino, cabelo, adereços e animação foram feitas em Blender para este projeto.
+[Fontes humanas e procedência](production-3d/humans/README.md) registram
+autores, URLs, revisão, hashes e alterações. A licença GPL da ferramenta MPFB
+é registrada separadamente da licença CC0 dos dados utilizados.
+
+Os [veículos](production-3d/vehicles/README.md) foram modelados por geometria
+original, sem modelo comercial externo. Fontes `.blend` permanecem em
+`production-3d/`; modelos articulados e texturas embutidas usados no jogo
+ficam em `models/`. Os [créditos 3D](models/NOTICES.md) acompanham o pacote.

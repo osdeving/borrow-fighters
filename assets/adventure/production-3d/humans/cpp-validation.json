@@ -1,0 +1,62 @@
+{
+  "status": "pass",
+  "scope": "Exported geometry and animation data; wrist visual review in wrist-cuff-validation.json",
+  "models": {
+    "cpp": {
+      "file": "assets/adventure/models/cpp.glb",
+      "sha256": "cbd614e09e60c05c3ce7c4e3120e9fda25426d96b7fd021d0ca8607b62917f3d",
+      "bytes": 26134796,
+      "vertices_exported": 118573,
+      "triangles": 220596,
+      "materials": 18,
+      "bones": 53,
+      "maximum_weight_sum_error": 1.2665987014770508e-07,
+      "bounds_gltf_m": {
+        "min": [
+          -0.5316601395606995,
+          -0.020061494782567024,
+          -0.2186552733182907
+        ],
+        "max": [
+          0.5316600799560547,
+          1.7831618785858154,
+          0.3203355669975281
+        ]
+      },
+      "duration_seconds": {
+        "idle": 2.0,
+        "run": 0.5666666626930237,
+        "start": 0.13333334028720856,
+        "stop": 0.1666666716337204,
+        "turn": 0.1666666716337204,
+        "jump": 0.30000001192092896,
+        "fall": 0.3333333432674408,
+        "land": 0.13333334028720856,
+        "guard": 1.0,
+        "parry": 0.30000001192092896,
+        "hurt": 0.3333333432674408,
+        "knockout": 0.6666666865348816,
+        "arrival": 1.1666666269302368,
+        "interact": 2.0,
+        "light-1": 0.4000000059604645,
+        "light-2": 0.4333333373069763,
+        "light-3": 0.5666666626930237,
+        "kick": 0.5833333134651184,
+        "spin": 0.7666666507720947,
+        "linker": 0.6666666865348816,
+        "walk": 1.2000000476837158,
+        "conversation": 2.5,
+        "talk": 2.5,
+        "seated": 2.5,
+        "phone": 2.5,
+        "scooter": 2.0,
+        "riding": 2.0,
+        "restrain": 2.0,
+        "restrained": 2.0,
+        "pull": 2.0
+      },
+      "status": "pass",
+      "visual_review_required": true
+    }
+  }
+}

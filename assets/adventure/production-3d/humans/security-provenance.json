@@ -1,0 +1,196 @@
+{
+  "reference": "../../actors/security/sprites/idle.png",
+  "license": "CC0-1.0 source garments; original adaptation in security.py",
+  "authors": [
+    "Namuhekam (polo)",
+    "Cortu Johnstone (cargo trousers)",
+    "culturalibre (beard)",
+    "MakeHuman community (shoe/sock base, anatomy, skin)"
+  ],
+  "blender": "4.5.4 LTS",
+  "generator_sha256": "0c7b8692df6e01ff46fe2178208f1141fd0fd9b3cdb8e9384ed9c23a34bb20b4",
+  "model_sha256": "0c0956cbcb1a65afa6f417f3b7c5b79fa8394103e75ad3bc86bd48bc13100d0b",
+  "packages": [
+    {
+      "name": "bodyparts05",
+      "url": "https://files.makehumancommunity.org/asset_packs/bodyparts05/bodyparts05_cc0.zip",
+      "license": "CC0",
+      "sha256": "262bba42246f85b2a91f493dd920296b258a3b4544eb495c91c4d08e57c528fd",
+      "bytes": 6616507,
+      "archive_entries": 36,
+      "license_evidence": [
+        {
+          "file": "clothes/rehmanpolanski_moustache_viking/rehmanpolanski_moustache_viking.mhclo",
+          "lines": [
+            "# license CC0"
+          ]
+        },
+        {
+          "file": "clothes/grinsegold_beard_sigmund_wip/grinsegold_beard_sigmund_wip.mhclo",
+          "lines": [
+            "# license AGPL3 (see also http://www.makehuman.org/doc/node/external_tools_license.html)"
+          ]
+        },
+        {
+          "file": "clothes/wdg_scruffy_beard/wdg_scruffy_beard.mhclo",
+          "lines": [
+            "# license AGPL3 (see also http://www.makehuman.org/doc/node/external_tools_license.html)"
+          ]
+        },
+        {
+          "file": "clothes/culturalibre_faun_beard/culturalibre_faun_beard.mhclo",
+          "lines": [
+            "# license CC-0"
+          ]
+        },
+        {
+          "file": "clothes/rehmanpolanski_beard_viking/rehmanpolanski_beard_viking.mhclo",
+          "lines": [
+            "# license CC0"
+          ]
+        }
+      ],
+      "license_basis": "Official archive filename uses _cc0.zip; inspect asset headers as well.",
+      "asset_header_conflicts": [
+        {
+          "file": "clothes/grinsegold_beard_sigmund_wip/grinsegold_beard_sigmund_wip.mhclo",
+          "lines": [
+            "# license AGPL3 (see also http://www.makehuman.org/doc/node/external_tools_license.html)"
+          ]
+        },
+        {
+          "file": "clothes/wdg_scruffy_beard/wdg_scruffy_beard.mhclo",
+          "lines": [
+            "# license AGPL3 (see also http://www.makehuman.org/doc/node/external_tools_license.html)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "makehuman_system_assets",
+      "url": "https://files.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip",
+      "license": "CC0",
+      "sha256": "b542127a8e25547c7c29c19f2d1d2adb9a664c80396ecd694095dbc8028a0107",
+      "bytes": 280737770
+    },
+    {
+      "name": "pants01",
+      "url": "https://files.makehumancommunity.org/asset_packs/pants01/pants01_cc0.zip",
+      "license": "CC0",
+      "sha256": "e4e0ec60db34f279be291a83cfd7b342a7c5cf09bb7676682a5f39f4f6ac4ad9",
+      "bytes": 21908723
+    },
+    {
+      "name": "shirts01",
+      "url": "https://files.makehumancommunity.org/asset_packs/shirts01/shirts01_cc0.zip",
+      "license": "CC0",
+      "sha256": "a5a723b0e84a109bb190fcfeac7f1de4138d875da3e30fe5b3340eac9f38bcd3",
+      "bytes": 24479483
+    }
+  ],
+  "source_files": [
+    {
+      "file": "source/shirts01/clothes/namuhekam_male_polo_shirt/Polo_Base_Color.png",
+      "sha256": "d8e74dbcc3e79227dd7f6d8b1e0ed6c614eb11d4dc3cfeb935222783c23ae64b"
+    },
+    {
+      "file": "source/shirts01/clothes/namuhekam_male_polo_shirt/Polo_Height.png",
+      "sha256": "f69d99fab6b30ad1972ac27e260f6e59129f7e3dcb988ed4c75d64cca29c386e"
+    },
+    {
+      "file": "source/shirts01/clothes/namuhekam_male_polo_shirt/Polo_Normal_OpenGL.png",
+      "sha256": "1428ecac615cf45d409f42167b3d4cba70ea77a14a0c4f06ff5d01b75e7a8b5c"
+    },
+    {
+      "file": "source/shirts01/clothes/namuhekam_male_polo_shirt/Polo_Roughness.png",
+      "sha256": "b7205361068df100f8f63256a265d052dfa4bbec96d826e7999b23fcf17c95c2"
+    },
+    {
+      "file": "source/shirts01/clothes/namuhekam_male_polo_shirt/Polo_t-shirt.mhmat",
+      "sha256": "fb47735dab1f3aacf39b9aea7e9c8343ea47c39f8a13fab559ba505b7c28356c"
+    },
+    {
+      "file": "source/shirts01/clothes/namuhekam_male_polo_shirt/Polo_t-shirt.obj",
+      "sha256": "aaee5f49077a8bacb8b1077910e4b9cc7946d587c75e367273f4ecaf94abd627"
+    },
+    {
+      "file": "source/shirts01/clothes/namuhekam_male_polo_shirt/namuhekam_male_polo_shirt.mhclo",
+      "sha256": "1639239b0d6d16ef2ca98f1f5af1af447d1e9e6950cd0fad9ecf774fa597434b"
+    },
+    {
+      "file": "source/shirts01/clothes/namuhekam_male_polo_shirt/namuhekam_male_polo_shirt.thumb",
+      "sha256": "c5343f1f6282963d05d4f16ed2799b8441d75f676ad3045b5f329c21bf0fa8ed"
+    },
+    {
+      "file": "source/pants01/clothes/cortu_cargo_pants/cargo_pants.mhmat",
+      "sha256": "f0718c17a792c56d947525d0fb49ad3b7f9bb33b27acb8353dd94827096f497e"
+    },
+    {
+      "file": "source/pants01/clothes/cortu_cargo_pants/cargo_pants.obj",
+      "sha256": "705467843e1136ca9bc91736efe9601a9cd7243abdeaa9752d69ea53f0974089"
+    },
+    {
+      "file": "source/pants01/clothes/cortu_cargo_pants/cargo_pants_diff.png",
+      "sha256": "b091229d558aed8ad41f31235265e98164a2f709158f4113d0ce0e072f680197"
+    },
+    {
+      "file": "source/pants01/clothes/cortu_cargo_pants/cargo_pants_norm.png",
+      "sha256": "0851011ad2fd36f6ad2bd1bdd6202bad32fb555b7d6cdb6b474811ba5a5fe7a6"
+    },
+    {
+      "file": "source/pants01/clothes/cortu_cargo_pants/cortu_cargo_pants.mhclo",
+      "sha256": "5bc0c7282a5a2694d55b6df2ed5642a382d89d0b77bd98703dac7e110e51fada"
+    },
+    {
+      "file": "source/pants01/clothes/cortu_cargo_pants/cortu_cargo_pants.thumb",
+      "sha256": "8974f0ee1b057c4bb11b44d98816aa0f3b9260c845ee27e79c40caee7ecaddde"
+    },
+    {
+      "file": "source/makehuman_system_assets/clothes/shoes03/shoes03.mhclo",
+      "sha256": "5a388e18e6759db99bcc8c7d062a2b3bed02eecd32705731ba90063a6e35265b"
+    },
+    {
+      "file": "source/makehuman_system_assets/clothes/shoes03/shoes03.mhmat",
+      "sha256": "0104a8ecf68aa81bca878c12f909aca45a59e265f8b49cf4e4d5e2667773776e"
+    },
+    {
+      "file": "source/makehuman_system_assets/clothes/shoes03/shoes03.mhw",
+      "sha256": "5ea7e817c2db05da540a0d4a71c3fadb422b3560857b8b73873df39ad3e49b5f"
+    },
+    {
+      "file": "source/makehuman_system_assets/clothes/shoes03/shoes03.obj",
+      "sha256": "b03f46c0b5cdc38e4472e4747ba267f101e1e8ae88656180b1334986646108b2"
+    },
+    {
+      "file": "source/makehuman_system_assets/clothes/shoes03/shoes03.thumb",
+      "sha256": "ac461bf40bb9e125526198c6c827c0f5cfa5538ac86f25dd3efbff7d5aaf5a3c"
+    },
+    {
+      "file": "source/makehuman_system_assets/clothes/shoes03/shoes03_diffuse.png",
+      "sha256": "fe8216fbd0c34ecd3ac0e1a01970a4ccf844417be5fd1d72c527c9209256db93"
+    },
+    {
+      "file": "source/bodyparts05/clothes/culturalibre_faun_beard/brown.png",
+      "sha256": "74e9328fc5dc5149c3cb3b0deac362a6cc15738bd81fd9a053f14debcaa28543"
+    },
+    {
+      "file": "source/bodyparts05/clothes/culturalibre_faun_beard/culturalibre_faun_beard.mhclo",
+      "sha256": "a13f5810f1dbf6c18146a1107758bb6b4fd10b9cac1c8106afea43bd384bca0a"
+    },
+    {
+      "file": "source/bodyparts05/clothes/culturalibre_faun_beard/culturalibre_faun_beard.thumb",
+      "sha256": "f8159bf042380b029748c8e80962511b01b8640b463a71ea51536b6ba7b4f00f"
+    },
+    {
+      "file": "source/bodyparts05/clothes/culturalibre_faun_beard/faun_beard.mhmat",
+      "sha256": "c070de4e8bcc0bcdbdcca35d9503d1d7378bf9aeeef69b67a9c7d7878027bba4"
+    },
+    {
+      "file": "source/bodyparts05/clothes/culturalibre_faun_beard/faun_beard.obj",
+      "sha256": "a4724d225b813d31aa98846541cff8002e7c4d311ecd6abcc83ef4fcc3141084"
+    }
+  ],
+  "source_blend_sha256": "a35cb9248e174a3a74a7eeb529c55c6fb228f0158f9f097dd728f40e73b92f4e",
+  "wrist_fit_review": "wrist-cuff-validation.json",
+  "patch_scope": "Anatomical lowerarm cuff sections and left cargo flap moved2mm outward; original fitted anatomy/clothes/actions preserved."
+}

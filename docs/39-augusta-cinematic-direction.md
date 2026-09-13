@@ -5,6 +5,10 @@ perspectiva 3D real, mantendo o combate lateral e a identidade ilustrada.
 O cenário é o mesmo mapa: letreiro Limiar, porta, fachadas vizinhas e posições
 dos personagens não mudam de lugar quando a câmera corta.
 
+A [conversão de humanos e veículos no Blender](40-augusta-blender-actors.md)
+é uma etapa posterior em revisão, que preserva esta direção de cena.
+O texto abaixo registra a versão ilustrada usada como referência.
+
 ## Sequência
 
 1. **Bairro, 20 segundos:** grua sobre as fachadas, travelling pela vida noturna,

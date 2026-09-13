@@ -1,0 +1,12 @@
+# MakeHuman Material definition
+
+name material.001Material
+
+// Color shading attributes
+diffuseColor  0.64 0.64 0.64
+specularColor  0.1 0.1 0.1
+shininess 1
+opacity 1
+
+// Textures and properties
+diffuseTexture brown.png

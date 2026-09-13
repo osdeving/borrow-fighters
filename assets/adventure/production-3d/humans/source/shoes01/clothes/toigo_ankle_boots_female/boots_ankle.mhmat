@@ -1,0 +1,25 @@
+# MakeHuman Material definition
+
+name anklebootsMaterial
+
+// Color shading attributes
+diffuseColor  0.64 0.64 0.64
+specularColor  0.2 0.2 0.2
+shininess 1
+opacity 1
+
+// Textures and properties
+diffuseTexture BootsAnkle.png
+normalmapTexture BootsAnkle-norm.png
+specularmapTexture BootsAnkle-spec.png
+
+// Shader programme
+shader data/shaders/glsl/phong
+
+// Configure built-in shader defines
+shaderConfig diffuse true
+shaderConfig bump false
+shaderConfig normal true
+shaderConfig displacement  false
+shaderConfig spec true
+shaderConfig vertexColors false

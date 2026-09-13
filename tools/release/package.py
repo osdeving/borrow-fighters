@@ -294,6 +294,7 @@ def runtime_assets():
     for name in ("BARLOW-OFL.txt", "LORA-OFL.txt", "README.md"):
         files.add(asset_file(ROOT / "assets/fonts" / name))
     files.add(asset_file(ROOT / "assets/audio/ATTRIBUTION.md"))
+    files.add(asset_file(ROOT / "assets/adventure/models/NOTICES.md"))
     return sorted(files)
 
 
@@ -338,6 +339,7 @@ def rust_notices(stage, target):
                "and assets/adventure/opening/ART-PROVENANCE.md. Chapter provenance is in",
                "assets/adventure/chapter/README.md and DRIVER.md; production references",
                "remain available in the source repository at the recorded revision.",
+               "Augusta 3D human asset credits: assets/adventure/models/NOTICES.md.",
                "The source tag for this build is recorded in BUILD-INFO.json.", ""]
     (stage / "THIRD_PARTY_NOTICES.md").write_text("\n".join(notice), encoding="utf-8")
 

@@ -8,7 +8,13 @@ use super::{
     label,
 };
 use crate::adventure::{
-    engine::{capture::export, production::actors::draw_actor},
+    engine::{
+        capture::export,
+        production::{
+            actors::draw_actor,
+            models3d::{self, Catalog, Models3d},
+        },
+    },
     production::{Action, Team},
 };
 use raylib::prelude::*;
@@ -47,13 +53,35 @@ impl Recorder {
         if let (Some(path), Some(assets)) = (&options.enemy, &session.enemy_assets) {
             preserve_sources(path, assets, &directory.join("source/enemy"))?;
         }
+        let model_snapshot = session
+            .model_catalog
+            .as_ref()
+            .map(|catalog| {
+                preserve_models(catalog, &directory.join("source/models"))
+                    .map(|name| format!("source/models/{name}"))
+            })
+            .transpose()?;
+        let rendered_models: Vec<_> = session
+            .model_actors
+            .iter()
+            .filter(|id| {
+                session
+                    .models
+                    .as_ref()
+                    .is_some_and(|models| models.contains(id))
+            })
+            .collect();
         fs::write(
             directory.join("invocation.json"),
             serde_json::to_vec_pretty(&serde_json::json!({
                 "schema_version":1,"actor":options.actor,"enemy":options.enemy,"clip":options.clip,
                 "phase":options.phase,"requested_frames":options.frames,"simulation_hz":60,"video_fps":60,
                 "script":"idle60/run90/stop60/reverse120/stop60/jump60/arena",
-                "source_snapshot":"source/player/character.json","renderer":"engine::production::actors::draw_actor"
+                "source_snapshot":"source/player/character.json",
+                "models_3d":!rendered_models.is_empty(),
+                "model_actors":rendered_models,
+                "model_catalog_snapshot":model_snapshot,
+                "renderer":if rendered_models.is_empty() {"engine::production::actors::draw_actor"} else {"engine::production::models3d"}
             }))?,
         )?;
         let mut process = Command::new("ffmpeg")
@@ -199,10 +227,29 @@ fn preserve_sources(
     Ok(())
 }
 
+/// Copy declared GLB paths so the standalone --models catalog remains replayable.
+fn preserve_models(path: &Path, output: &Path) -> Result<String, Box<dyn Error>> {
+    let root = path.parent().ok_or("model catalog has no directory")?;
+    let name = path
+        .file_name()
+        .and_then(|value| value.to_str())
+        .ok_or("invalid catalog filename")?;
+    let catalog = Catalog::load(path)?;
+    fs::create_dir_all(output)?;
+    fs::copy(path, output.join(name))?;
+    for entry in catalog.entries.values() {
+        let target = output.join(&entry.file);
+        fs::create_dir_all(target.parent().ok_or("model snapshot has no parent")?)?;
+        fs::copy(root.join(&entry.file), target)?;
+    }
+    Ok(name.into())
+}
+
 pub(super) fn sheets(
     rl: &mut RaylibHandle,
     thread: &RaylibThread,
     assets: &ActorAssets,
+    models: Option<&Models3d>,
     font: &Font,
     out: &Path,
 ) -> Result<(), Box<dyn Error>> {
@@ -254,17 +301,34 @@ pub(super) fn sheets(
                         (y + 296.0) as i32,
                         Color::GRAY,
                     );
-                    draw_actor(
-                        &mut d,
-                        assets,
-                        sample.pose,
-                        id,
-                        ticks,
-                        [x + 160.0, y + 296.0],
-                        facing,
-                        scale,
-                        false,
-                    );
+                    let drawn = models.is_some_and(|models| {
+                        models.draw_viewport(
+                            &mut d,
+                            models3d::actor_sample(
+                                assets,
+                                id,
+                                ticks,
+                                [x + 160., y + 296., 0.],
+                                facing.sign(),
+                                sample.pose.yaw,
+                                scale,
+                            ),
+                            [1280., 960.],
+                        )
+                    });
+                    if !drawn {
+                        draw_actor(
+                            &mut d,
+                            assets,
+                            sample.pose,
+                            id,
+                            ticks,
+                            [x + 160.0, y + 296.0],
+                            facing,
+                            scale,
+                            false,
+                        );
+                    }
                 }
             }
             let direction = if facing == Facing::Right {
@@ -281,17 +345,19 @@ pub(super) fn sheets(
     for id in ["idle", "run", "spin"] {
         if assets.clips.clips.contains_key(id) {
             for facing in [Facing::Right, Facing::Left] {
-                zoom_sheet(rl, thread, assets, font, out, id, facing)?;
+                zoom_sheet(rl, thread, assets, models, font, out, id, facing)?;
             }
         }
     }
     Ok(())
 }
 
+#[allow(clippy::too_many_arguments)]
 fn zoom_sheet(
     rl: &mut RaylibHandle,
     thread: &RaylibThread,
     assets: &ActorAssets,
+    models: Option<&Models3d>,
     font: &Font,
     out: &Path,
     id: &str,
@@ -328,17 +394,34 @@ fn zoom_sheet(
                 (y + 458.0) as i32,
                 Color::GRAY,
             );
-            draw_actor(
-                &mut d,
-                assets,
-                sample.pose,
-                id,
-                ticks,
-                [x + 192.0, y + 458.0],
-                facing,
-                scale,
-                false,
-            );
+            let drawn = models.is_some_and(|models| {
+                models.draw_viewport(
+                    &mut d,
+                    models3d::actor_sample(
+                        assets,
+                        id,
+                        ticks,
+                        [x + 192., y + 458., 0.],
+                        facing.sign(),
+                        sample.pose.yaw,
+                        scale,
+                    ),
+                    [1536., 960.],
+                )
+            });
+            if !drawn {
+                draw_actor(
+                    &mut d,
+                    assets,
+                    sample.pose,
+                    id,
+                    ticks,
+                    [x + 192.0, y + 458.0],
+                    facing,
+                    scale,
+                    false,
+                );
+            }
         }
     }
     let direction = if facing == Facing::Right {
@@ -429,5 +512,30 @@ pub(super) fn input(sim: &Simulation, frame: u32) -> Input {
         kick,
         spin,
         ..Input::default()
+    }
+}
+
+#[cfg(test)]
+mod model_snapshot_tests {
+    use super::*;
+
+    #[test]
+    fn preserved_catalog_and_nested_model_survive_removal_of_original_sources() {
+        let root =
+            std::env::temp_dir().join(format!("borrow-model-snapshot-{}", std::process::id()));
+        let source = root.join("original");
+        let snapshot = root.join("review/source/models");
+        fs::create_dir_all(source.join("cast")).unwrap();
+        let catalog = source.join("humans.json");
+        fs::write(&catalog, r#"{"schema_version":1,"entries":{"cpp":{"file":"cast/cpp.glb","height_m":1.764,"animation_fps":60,"clips":{"idle":"idle"}}}}"#).unwrap();
+        fs::write(source.join("cast/cpp.glb"), b"preserved GLB bytes").unwrap();
+        assert_eq!(preserve_models(&catalog, &snapshot).unwrap(), "humans.json");
+        fs::remove_dir_all(&source).unwrap();
+        let copied = Catalog::load(&snapshot.join("humans.json")).unwrap();
+        assert_eq!(
+            fs::read(snapshot.join(&copied.entries["cpp"].file)).unwrap(),
+            b"preserved GLB bytes"
+        );
+        fs::remove_dir_all(root).unwrap();
     }
 }

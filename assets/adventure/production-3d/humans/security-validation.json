@@ -1,0 +1,57 @@
+{
+  "status": "pass",
+  "scope": "Exported geometry and animation data; wrist visual review in wrist-cuff-validation.json",
+  "models": {
+    "security": {
+      "file": "assets/adventure/models/security.glb",
+      "sha256": "0c0956cbcb1a65afa6f417f3b7c5b79fa8394103e75ad3bc86bd48bc13100d0b",
+      "bytes": 24146368,
+      "vertices_exported": 69599,
+      "triangles": 130488,
+      "materials": 14,
+      "bones": 53,
+      "maximum_weight_sum_error": 1.2852251529693604e-07,
+      "bounds_gltf_m": {
+        "min": [
+          -0.6692522764205933,
+          0.0009622157085686922,
+          -0.12745478749275208
+        ],
+        "max": [
+          0.6692522764205933,
+          1.879065990447998,
+          0.40473055839538574
+        ]
+      },
+      "duration_seconds": {
+        "idle": 2.0,
+        "start": 2.0,
+        "run": 0.800000011920929,
+        "stop": 2.0,
+        "turn": 2.0,
+        "jump": 2.0,
+        "fall": 2.0,
+        "land": 2.0,
+        "guard": 2.0,
+        "parry": 2.0,
+        "hurt": 2.0,
+        "knockout": 2.0,
+        "arrival": 2.0,
+        "interact": 2.0,
+        "light-1": 0.8666666746139526,
+        "walk": 1.2000000476837158,
+        "conversation": 2.5,
+        "talk": 2.5,
+        "seated": 2.5,
+        "phone": 2.5,
+        "scooter": 2.0,
+        "riding": 2.0,
+        "restrain": 2.0,
+        "restrained": 2.0,
+        "pull": 2.0
+      },
+      "status": "pass",
+      "visual_review_required": true
+    }
+  }
+}

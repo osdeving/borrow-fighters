@@ -12,7 +12,8 @@ use crate::{
     adventure::{
         engine::production::{
             actors::{draw_actor, draw_projectile},
-            assets::{ActorAssets, ActorContent},
+            assets::{ActorAssets, ActorContent, WorldArt},
+            models3d::{self, Models3d},
         },
         production::{
             ActorId, Bounds, CombatCatalog, EnemySpawn, Event, Facing, Input, Simulation, Team,
@@ -23,7 +24,14 @@ use crate::{
 };
 use options::Options;
 use raylib::prelude::*;
-use std::{collections::BTreeMap, error::Error, fs, path::Path, sync::Arc, time::Instant};
+use std::{
+    collections::{BTreeMap, BTreeSet},
+    error::Error,
+    fs,
+    path::{Path, PathBuf},
+    sync::Arc,
+    time::Instant,
+};
 
 const WIDTH: i32 = 1280;
 const HEIGHT: i32 = 720;
@@ -31,6 +39,56 @@ const FLOOR: f32 = 565.0;
 const BACK: Color = Color::new(29, 35, 45, 255);
 const INK: Color = Color::new(232, 236, 240, 255);
 const MUTED: Color = Color::new(162, 178, 195, 255);
+
+fn registered_manifest(path: &Path, registration: &Path) -> bool {
+    path.canonicalize()
+        .ok()
+        .zip(registration.canonicalize().ok())
+        .is_some_and(|(selected, shipped)| selected == shipped)
+}
+
+fn model_selection(
+    options: &Options,
+    manifests: &[(&PathBuf, &String)],
+) -> Result<(Option<PathBuf>, BTreeSet<String>), Box<dyn Error>> {
+    if let Some(path) = &options.models {
+        return Ok((
+            Some(path.canonicalize()?),
+            manifests.iter().map(|(_, id)| (*id).clone()).collect(),
+        ));
+    }
+    if std::env::var("BORROW_AUGUSTA_MODELS_3D").as_deref() != Ok("1") {
+        return Ok((None, BTreeSet::new()));
+    }
+    let art: WorldArt = serde_json::from_str(&fs::read_to_string(asset_path(
+        "assets/adventure/chapters/cpp-augusta/world-art.json",
+    ))?)?;
+    let root = asset_path("assets/adventure");
+    let ids: BTreeSet<_> = manifests
+        .iter()
+        .filter(|(path, id)| {
+            art.actors
+                .get(id.as_str())
+                .is_some_and(|relative| registered_manifest(path, &root.join(relative)))
+        })
+        .map(|(_, id)| (*id).clone())
+        .collect();
+    if ids.is_empty() {
+        return Ok((None, ids));
+    }
+    let paths = art
+        .models_3d
+        .ok_or("3D candidate requires models_3d catalogs in world-art")?;
+    if !crate::adventure::production::animation::safe_relative(&paths.humans) {
+        return Err("invalid relative 3D human catalog path".into());
+    }
+    let root = root.canonicalize()?;
+    let catalog = root.join(paths.humans).canonicalize()?;
+    if !catalog.starts_with(&root) {
+        return Err("3D human catalog escapes content package".into());
+    }
+    Ok((Some(catalog), ids))
+}
 
 struct Labels(BTreeMap<String, String>);
 impl Labels {
@@ -78,6 +136,9 @@ struct Session {
     arena: bool,
     paused: bool,
     debug: bool,
+    models: Option<Models3d>,
+    model_catalog: Option<PathBuf>,
+    model_actors: BTreeSet<String>,
 }
 
 impl Session {
@@ -118,6 +179,20 @@ impl Session {
             500.0,
         )?;
         let preview_ticks = options.phase * assets.clips.clips[clip].duration_ticks as f32;
+        let manifests: Vec<_> = std::iter::once((&options.actor, &assets.pack.character.id))
+            .chain(
+                options
+                    .enemy
+                    .as_ref()
+                    .zip(enemy_assets.as_ref())
+                    .map(|(path, asset)| (path, &asset.pack.character.id)),
+            )
+            .collect();
+        let (model_catalog, model_actors) = model_selection(options, &manifests)?;
+        let models = model_catalog
+            .as_ref()
+            .map(|path| Models3d::load_catalog(rl, thread, path))
+            .transpose()?;
         Ok(Self {
             assets,
             enemy_assets,
@@ -129,6 +204,15 @@ impl Session {
             arena: false,
             paused: true,
             debug: false,
+            models,
+            model_catalog,
+            model_actors,
+        })
+    }
+    fn models_for(&self, actor: &ActorAssets) -> Option<&Models3d> {
+        self.models.as_ref().filter(|models| {
+            self.model_actors.contains(&actor.pack.character.id)
+                && models.contains(&actor.pack.character.id)
         })
     }
     fn character_assets(&self, id: &str) -> &ActorAssets {
@@ -221,7 +305,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
     let options = Options::parse(args)?;
     if options.help {
         println!(
-            "borrow-actor-lab [--actor character.json] [--enemy character.json] [--clip ID] [--phase 0..1] [--frames N] [--hidden] [--review NEW_DIRECTORY] [--validate]\nSpace pauses; Tab selects clip; Left/Right step preview; Enter switches arena; F3 boxes; F5 reloads; R resets. Arena: A/D move, W jump, J light, V kick, K spin, L Linker, Q guard, I opponent attack."
+            "borrow-actor-lab [--actor character.json] [--enemy character.json] [--models humans.json] [--clip ID] [--phase 0..1] [--frames N] [--hidden] [--review NEW_DIRECTORY] [--validate]\nSpace pauses; Tab selects clip; Left/Right step preview; Enter switches arena; F3 boxes; F5 reloads; R resets. Arena: A/D move, W jump, J light, V kick, K spin, L Linker, Q guard, I opponent attack."
         );
         return Ok(());
     }
@@ -246,6 +330,24 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
                 "--enemy must have a distinct character ID; omit it to use a training copy".into(),
             );
         }
+        let manifests: Vec<_> = std::iter::once((&options.actor, &content.pack.character.id))
+            .chain(
+                options
+                    .enemy
+                    .as_ref()
+                    .zip(enemy.as_ref())
+                    .map(|(path, content)| (path, &content.pack.character.id)),
+            )
+            .collect();
+        let (model_catalog, _) = model_selection(&options, &manifests)?;
+        let model_info = model_catalog
+            .map(|path| {
+                models3d::Catalog::load(&path).map(|catalog| serde_json::json!({
+                "catalog":path,"entries":catalog.entries.keys().collect::<Vec<_>>(),
+                "check":"catalog-and-contained-files; GLB import is checked by the native renderer"
+            }))
+            })
+            .transpose()?;
         let mut packs = vec![content.pack.clone()];
         if let Some(enemy) = &enemy {
             packs.push(enemy.pack.clone());
@@ -254,7 +356,7 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
         println!(
             "{}",
             serde_json::to_string_pretty(
-                &serde_json::json!({"schema_version":1,"tick_hz":60,"character":content.pack.character.id,"method":content.rig.method,"height":content.rig.height,"clips":content.clips.clips.keys().collect::<Vec<_>>(),"moves":content.pack.combat.moves.iter().map(|m|&m.id).collect::<Vec<_>>(),"image_extents":content.image_extents,"enemy":enemy.map(|e|e.pack.character.id)})
+                &serde_json::json!({"schema_version":1,"tick_hz":60,"character":content.pack.character.id,"method":content.rig.method,"height":content.rig.height,"clips":content.clips.clips.keys().collect::<Vec<_>>(),"moves":content.pack.combat.moves.iter().map(|m|&m.id).collect::<Vec<_>>(),"image_extents":content.image_extents,"enemy":enemy.map(|e|e.pack.character.id),"models":model_info})
             )?
         );
         return Ok(());
@@ -284,7 +386,14 @@ pub fn run(args: impl IntoIterator<Item = String>) -> Result<(), Box<dyn Error>>
     let mut target = rl.load_render_texture(&thread, WIDTH as u32, HEIGHT as u32)?;
     let mut recorder = if let Some(directory) = &options.review {
         let recorder = review::Recorder::new(directory, &options, &session)?;
-        review::sheets(&mut rl, &thread, &session.assets, &font, directory)?;
+        review::sheets(
+            &mut rl,
+            &thread,
+            &session.assets,
+            session.models_for(&session.assets),
+            &font,
+            directory,
+        )?;
         Some(recorder)
     } else {
         None
@@ -578,17 +687,34 @@ fn draw(
                 |a| a.pose,
             );
             let at = [actor.position.x - camera, actor.position.y];
-            draw_actor(
-                d,
-                assets,
-                pose,
-                actor.clip_id(),
-                actor.action_ticks as f32,
-                at,
-                actor.facing,
-                1.0,
-                s.debug,
-            );
+            let drawn = s.models_for(assets).is_some_and(|models| {
+                models.draw_screen(
+                    d,
+                    models3d::actor_sample(
+                        assets,
+                        actor.clip_id(),
+                        actor.action_ticks as f32,
+                        [at[0], at[1], 0.],
+                        actor.facing.sign(),
+                        pose.yaw,
+                        1.,
+                    )
+                    .traveled(actor.stride_distance),
+                )
+            });
+            if !drawn {
+                draw_actor(
+                    d,
+                    assets,
+                    pose,
+                    actor.clip_id(),
+                    actor.action_ticks as f32,
+                    at,
+                    actor.facing,
+                    1.0,
+                    s.debug,
+                );
+            }
             label(
                 d,
                 font,
@@ -654,29 +780,61 @@ fn draw(
         let c = &s.assets.clips.clips[&s.clip];
         let distance = c.stride_pixels.unwrap_or(0.0) * s.preview_ticks / c.duration_ticks as f32;
         let sample = s.assets.clips.sample(&s.clip, s.preview_ticks, distance);
-        draw_actor(
-            d,
-            &s.assets,
-            sample.pose,
-            &s.clip,
-            s.preview_ticks,
-            [400.0, FLOOR],
-            s.facing,
-            1.0,
-            s.debug,
-        );
+        let drawn = s.models_for(&s.assets).is_some_and(|models| {
+            models.draw_screen(
+                d,
+                models3d::actor_sample(
+                    &s.assets,
+                    &s.clip,
+                    s.preview_ticks,
+                    [400., FLOOR, 0.],
+                    s.facing.sign(),
+                    sample.pose.yaw,
+                    1.,
+                ),
+            )
+        });
+        if !drawn {
+            draw_actor(
+                d,
+                &s.assets,
+                sample.pose,
+                &s.clip,
+                s.preview_ticks,
+                [400.0, FLOOR],
+                s.facing,
+                1.0,
+                s.debug,
+            );
+        }
         let large = (380.0 / s.assets.rig.height).min(2.0);
-        draw_actor(
-            d,
-            &s.assets,
-            sample.pose,
-            &s.clip,
-            s.preview_ticks,
-            [880.0, FLOOR],
-            s.facing,
-            large,
-            s.debug,
-        );
+        let drawn = s.models_for(&s.assets).is_some_and(|models| {
+            models.draw_screen(
+                d,
+                models3d::actor_sample(
+                    &s.assets,
+                    &s.clip,
+                    s.preview_ticks,
+                    [880., FLOOR, 0.],
+                    s.facing.sign(),
+                    sample.pose.yaw,
+                    large,
+                ),
+            )
+        });
+        if !drawn {
+            draw_actor(
+                d,
+                &s.assets,
+                sample.pose,
+                &s.clip,
+                s.preview_ticks,
+                [880.0, FLOOR],
+                s.facing,
+                large,
+                s.debug,
+            );
+        }
         label(
             d,
             font,

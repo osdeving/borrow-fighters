@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "identity": "Augusta delivery rider: olive jacket, blue trousers, dark helmet and blue visor",
+  "human_source": "CC0 MakeHuman/MPFB anatomy and fitted garments; authored helmet and visor",
+  "sources": [
+    "assets/adventure/production-3d/humans/source/makehuman_system_assets/clothes/male_casualsuit05",
+    "assets/adventure/production-3d/humans/source/shoes01/clothes/toigo_ankle_boots_male"
+  ],
+  "source_packages": [
+    {
+      "name": "makehuman_system_assets",
+      "url": "https://files.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip",
+      "license": "CC0",
+      "sha256": "b542127a8e25547c7c29c19f2d1d2adb9a664c80396ecd694095dbc8028a0107",
+      "bytes": 280737770
+    },
+    {
+      "name": "shoes01",
+      "url": "https://files.makehumancommunity.org/asset_packs/shoes01/shoes01_cc0.zip",
+      "license": "CC0",
+      "sha256": "ded3f70428505eabbf1f6d7b5f61196a7366ef20757103d276ad0ed336c35ada",
+      "bytes": 82953569
+    }
+  ],
+  "authoring_helpers_sha256": {
+    "tools/blender/human_base.py": "cb8b4d90a0b7da614e2ff666d90cbc57d9eb5287e6bc0a7957bf22ca04faab3a",
+    "tools/blender/humans.py": "efc186839cda0f5d05ca2a4d7aba7b6f948d14a4ba69c689f5090e77d242db11",
+    "tools/blender/actor_motion.py": "3d961376282f0129036eb586d5a4438dab18923358507f0645d1387b3633d342"
+  },
+  "generator": "tools/blender/delivery_rider.py",
+  "generator_sha256": "08410211ee5c493ad2aefda2f11390277dd3ea74af43246ba393bb79e9905d25",
+  "model": {
+    "file": "delivery-rider.glb",
+    "height_m": 1.7824859470129013,
+    "animation_fps": 60,
+    "clips": {
+      "walk": "walk",
+      "conversation": "conversation",
+      "talk": "talk",
+      "seated": "seated",
+      "phone": "phone",
+      "scooter": "scooter",
+      "riding": "riding",
+      "restrain": "restrain",
+      "restrained": "restrained",
+      "pull": "pull",
+      "idle": "idle",
+      "run": "run",
+      "start": "start",
+      "stop": "stop",
+      "turn": "turn",
+      "jump": "jump",
+      "fall": "fall",
+      "land": "land",
+      "guard": "guard",
+      "parry": "parry",
+      "hurt": "hurt",
+      "knockout": "knockout",
+      "arrival": "arrival",
+      "interact": "interact",
+      "light-1": "light-1"
+    },
+    "strides_m": {
+      "walk": 1.1818581690362686,
+      "run": 2.2159840669430033
+    },
+    "durations": {
+      "walk": 72,
+      "conversation": 150,
+      "talk": 150,
+      "seated": 150,
+      "phone": 150,
+      "scooter": 120,
+      "riding": 120,
+      "restrain": 120,
+      "restrained": 120,
+      "pull": 120,
+      "idle": 120,
+      "run": 42,
+      "start": 12,
+      "stop": 12,
+      "turn": 16,
+      "jump": 24,
+      "fall": 24,
+      "land": 12,
+      "guard": 90,
+      "parry": 18,
+      "hurt": 24,
+      "knockout": 50,
+      "arrival": 80,
+      "interact": 120,
+      "light-1": 52
+    }
+  },
+  "anatomy": {
+    "head_bounds_blender_m": {
+      "min": [
+        -0.08863384276628494,
+        -0.17580202221870422,
+        1.4906293153762817
+      ],
+      "max": [
+        0.08863384276628494,
+        0.04819650948047638,
+        1.7399998903274536
+      ]
+    },
+    "helmet_center_blender_m": [
+      0.0,
+      -0.06380275636911392,
+      1.6213146448135376
+    ],
+    "helmet_radii_m": [
+      0.10563383996486664,
+      0.13599926233291626,
+      0.14515382051467896
+    ]
+  },
+  "source_blend": "assets/adventure/production-3d/humans/delivery-rider.blend",
+  "runtime_glb": "assets/adventure/models/delivery-rider.glb",
+  "contact_contract": {
+    "sole_target_z_m": 0.4215,
+    "ankle_target_z_m": 0.509,
+    "grip_center_blender_m": [
+      "\u00b10.27",
+      -0.44,
+      1.06
+    ],
+    "wrist_target_blender_m": [
+      "\u00b10.27",
+      -0.375,
+      1.09
+    ]
+  },
+  "source_blend_sha256": "73c19846bf207ea3f9facc1fd79542ae6adfb4b152bb0bdaa2f2fcd3f3591df1",
+  "runtime_glb_sha256": "5da8a38eb5bb3af245f4ee4ee6e8ef380ba690ef1a3e4326ad9018d6519d97b5",
+  "post_export_audit": {
+    "credits_document": "delivery-rider.md",
+    "validation": "delivery-rider-validation.json",
+    "visual_review": "delivery-rider-visual-review.json",
+    "note": "Generator/helper hashes above identify the actual completed export; this audit adds attribution without rewriting that export.",
+    "attribution_sources": [
+      {
+        "file": "source/makehuman_system_assets/clothes/male_casualsuit05/male_casualsuit05.mhclo",
+        "sha256": "df41c9fba3da054e35b964706ad2f8d189e65cc00a45f4a34f65235946f647f0",
+        "license": "CC0",
+        "authors": [
+          "Data Collection AB",
+          "Joel Palmius",
+          "Jonas Hauquier"
+        ]
+      },
+      {
+        "file": "source/shoes01/clothes/toigo_ankle_boots_male/toigo_ankle_boots_male.mhclo",
+        "sha256": "0143dbcfdac444a42af339bcc65352af8ad6d8d2519457aa1aff89a639dd554a",
+        "license": "CC0",
+        "authors": [
+          "MRT"
+        ]
+      }
+    ]
+  }
+}

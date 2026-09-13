@@ -1,0 +1,38 @@
+# Cortu Johnstone - CC0
+
+name cargo_pants
+tag pants
+ambientColor 1.0 1.0 1.0
+diffuseColor 1.0 1.0 1.0
+specularColor 0.0274509803922 0.0274509803922 0.0274509803922
+shininess 0.1961
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull True
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture cargo_pants_diff.png
+normalmapTexture cargo_pants_norm.png
+normalmapIntensity 1.0
+
+shader data/shaders/glsl/litsphere
+shaderParam litsphereTexture data/litspheres/lit_matte.png
+
+shaderConfig ambientOcclusion True
+shaderConfig normal True
+shaderConfig bump False
+shaderConfig displacement False
+shaderConfig vertexColors True
+shaderConfig spec False
+shaderConfig transparency True
+shaderConfig diffuse True

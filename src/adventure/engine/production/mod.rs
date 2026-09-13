@@ -7,6 +7,8 @@ pub mod actors;
 pub mod assets;
 pub mod audio;
 pub mod cinema;
+pub mod models3d;
+mod models3d_pair;
 pub mod nightlife;
 pub mod painted_crowd;
 pub mod restraint;

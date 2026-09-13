@@ -18,9 +18,9 @@ sequência, movimentos e identidade visual devem permanecer os mesmos. O objetiv
 
 ## Trabalho em andamento
 
-- Root: instalação Blender, continuidade da cena, docs, pacote e revisão visual.
+- Root: instalação Blender, continuidade, animação, docs/pacote e modelo security.
 - `cpp_arm`: fontes Blender, geometria/rig/identidade dos humanos; piloto C++.
-- `augusta_staging`: fontes Blender e modelos dos veículos existentes.
+- `augusta_staging`: veículos concluídos; entregador humano sobre a scooter.
 - `augusta_ambient`: carregamento/renderização de GLB nas câmeras existentes.
 
 Modelos usam metros; Blender Z para cima e frente -Y, exportados em glTF com
@@ -69,6 +69,32 @@ Arquivo e checksums em `/tmp/borrow-blender-install`. Instalação local em
   `assets/adventure/production-3d/humans/provenance.json`; ferramenta externa
   em `/tmp/borrow-fighters-mpfb2`, pacotes em `/tmp/borrow-fighters-mh-assets`.
 
+## Checkpoint — modelos e export isolado
+
+- Commits: `6825f7b` (decisão/baseline), `190124c` (movimento/export/pacote),
+  `188ea36` (veículos Blender e validação).
+- CPP geometria v6 + movimento v6 exportados com trinta ações estáveis,
+  mãos fechadas, cotovelos baixos na guarda e contrapasso na corrida.
+  Laboratório `/tmp/augusta-cpp3d-lab-v6` aprovado para integração do par.
+- `export_actions.py` reexporta apenas movimentos de uma fonte `.blend`
+  pronta. Fonte salva com compressão nativa: C++ reduziu de 106 MiB para
+  26 MiB sem remover geometria, texturas ou ações. `.blend1` é backup local;
+  `.obj` de produção tem exceção explícita ao ignore de objetos nativos.
+- `validate_humans.py` examina buffers/ossos/pesos/ações a 60 Hz sem Blender
+  ou jogo. CPP: 116551 vértices, 217364 triângulos; Julia e broker drafts
+  também passaram. Aprovação geométrica não substitui revisão de figurino.
+- Veículos finalizados: três fontes, três GLBs, nove ângulos; checagem GLB
+  e reimportação/skin Blender aprovadas. Corpo permanece imóvel e as rodas
+  fecham o ciclo com erro inferior a 0,000001m. Fontes/reports junto aos veículos.
+- Julia/broker em ajuste de roupa antes de liberar captura da pegada.
+  Oito figurinos com cpp_arm; security com root; rider com staging.
+- Entregador tem pernas e assento conferidos; staging ajusta apenas mãos e
+  direção da cabeça no ramo `riding` de `actor_motion.py`, coordenado com root.
+- Telefone 3D acompanha `hand_r` só nos dois figurantes que telefonam;
+  cinco testes focais e Clippy passaram. Próximo build incorpora essa mudança.
+- Revalidar e capturar a cena completa somente depois de estabilizar elenco,
+  contato e materiais. Fontes fixas do cenário/domínio continuam sem alteração.
+
 ## Próximos marcos
 
 1. Concluir correções de roupa/cabelo/botas e movimentos da C++ no piloto.
@@ -78,3 +104,37 @@ Arquivo e checksums em `/tmp/borrow-blender-install`. Instalação local em
 5. Executar fmt, Clippy e testes pertinentes à integração, registrar resultados
    e commitar etapas coerentes. Não confundir uma renderização bonita isolada
    com o resultado dentro do jogo.
+
+## Checkpoint — elenco completo e contato
+
+- Catálogo humano agora contém treze entradas: C++, Julia, broker, security,
+  oito figurinos e entregador. GLBs somam aproximadamente 255 MiB com os três
+  veículos; fontes `.blend` e texturas selecionadas ficam fora do pacote.
+- Piloto nativo de 1900 quadros em `/tmp/augusta-3d-pair-pilot-v7` preservou
+  os onze hashes e todos os campos originais de telemetria. A pegada falhou
+  visualmente: os braços externos não alcançavam o contato sem esticar.
+- Corrigidos para os braços internos (broker direito/Julia esquerdo), com
+  deslocamento anatômico da palma. Dezoito quadros focais nativos em
+  `/tmp/augusta-3d-grip-internal-v1`, incluindo 744–746 e 1519–1521, mostraram
+  contato contínuo e telemetria idêntica. Não foram movidos atores ou câmera.
+- Os carros cobrem parcialmente `cpp-intervenes` em 27,9 e 29,4 segundos;
+  a mesma passagem já existe no filme pintado. Câmera/faixas foram mantidas
+  conforme a exigência de continuidade.
+- Entregador: glTF reimportado em cinco fases, palmas a cerca de 21 mm dos
+  centros das manoplas (raio 24 mm), solas a 0,255 mm do apoio. Animação
+  fecha sem deslocamento do veículo; relatório junto à fonte do entregador.
+- Revisão isolada encontrou mão acima da cabeça em `phone` e dedos dentro
+  da saia em `seated`. `actor_motion.py` agora coloca o punho na mandíbula,
+  cotovelo baixo e dedos sobre as coxas. Renders em
+  `/tmp/augusta-crowd-motion-v2`; sete crowd em reexportação de ações apenas.
+- CPP/security: aros circulares atravessavam punhos. Staging ajusta aros à
+  seção anatômica existente, preservando curvas e demais malhas por hashes;
+  ajusta também aba cargo esquerda em 2 mm. LongCoat recebe máscara de pele
+  sob a manga no cotovelo. CPP/Julia recebem ajuste isolado de raiz de cabelo.
+- Laboratório aceita `--models`, preserva fase ao ampliar e guarda catálogo
+  e GLBs em snapshot portátil. Teste de reabertura removeu as fontes originais.
+- `python3 -m unittest discover -s tools/release -p test_package.py`: 37 testes
+  passaram. Créditos MakeHuman selecionados acompanham o pacote em
+  `assets/adventure/models/NOTICES.md`.
+- Próximo: congelar correções pontuais, validar os treze GLBs finais, rever
+  crowd nativo e filmar os 8238 quadros. Rust final e pacote portátil pendentes.

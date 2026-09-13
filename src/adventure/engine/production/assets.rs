@@ -37,7 +37,7 @@ fn text(path: &Path) -> Result<String, String> {
 }
 
 /// Resolves a contained relative resource, including a symlink containment check.
-fn contained(root: &Path, value: &str) -> Result<PathBuf, String> {
+pub(super) fn contained(root: &Path, value: &str) -> Result<PathBuf, String> {
     if !safe_relative(value) {
         return Err(format!("invalid relative content path {value}"));
     }
@@ -231,6 +231,8 @@ pub struct WorldArt {
     pub ground: String,
     /// Source registrations for the chapter's complete painted adult crowd.
     pub nightlife_cast: String,
+    #[serde(default)]
+    pub models_3d: Option<super::models3d::CatalogPaths>,
     /// Mirror alternating floor modules when their painted edges are not periodic.
     #[serde(default)]
     pub mirror_ground_tiles: bool,
@@ -270,6 +272,7 @@ pub struct ProductionAssets {
     pub report: LoadReport,
     pub restraint: super::restraint::RestraintArt,
     pub crowd: super::painted_crowd::PaintedCrowd,
+    pub models: Option<super::models3d::Models3d>,
     pub animations: RefCell<BTreeMap<u32, crate::adventure::production::animation::Animator>>,
 }
 
@@ -389,6 +392,13 @@ impl ProductionAssets {
             48,
             Some(&glyphs),
         )?;
+        let models = super::models3d::Models3d::load_candidate(rl, thread, art.models_3d.as_ref())?;
+        if let Some(models) = &models {
+            report.resources.extend(models.resources.iter().cloned());
+            let (count, bytes) = models.texture_footprint();
+            report.texture_count += count;
+            report.decoded_rgba_bytes += bytes;
+        }
         Ok(Self {
             spec,
             world,
@@ -401,6 +411,7 @@ impl ProductionAssets {
             report,
             restraint: super::restraint::RestraintArt::load(rl, thread)?,
             crowd: super::painted_crowd::PaintedCrowd::new(rl, thread, crowd_catalog)?,
+            models,
             animations: RefCell::new(BTreeMap::new()),
         })
     }

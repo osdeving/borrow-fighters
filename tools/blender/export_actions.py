@@ -37,6 +37,7 @@ def main():
     rig.animation_data.action = None
     for bone in rig.pose.bones:
         bone.matrix_basis = Matrix.Identity(4)
+    bpy.context.view_layer.update()
     meshes = [obj for obj in bpy.context.scene.objects if obj.type == 'MESH']
     if not meshes:
         raise ValueError('Actor has no mesh')

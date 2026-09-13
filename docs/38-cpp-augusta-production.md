@@ -53,6 +53,13 @@ No laboratório: **Tab** escolhe clip, **Espaço** pausa, **←/→** avança qu
 combate com o novo pacote. Só um candidato completamente válido substitui o
 anterior. [Protocolo e comandos completos](evidence/production-pipeline/lab/README.md).
 
+O [candidato Blender/GLB](40-augusta-blender-actors.md) acrescenta modelos
+humanos à mesma prévia e arena. `--models caminho/humans.json` seleciona um
+catálogo explicitamente, inclusive num snapshot portátil. O modo experimental
+da Augusta não substitui pelo ID a arte de um `--actor` externo. A captura
+registra `model_catalog_snapshot` em `invocation.json` para reproduzir a fonte
+3D preservada junto ao manifesto do ator.
+
 ## Artefatos equivalentes a um projeto de editor
 
 | Arquivo | Responsabilidade | Alteração isolada |

@@ -1,5 +1,9 @@
 {
   "version": 1,
+  "models_3d": {
+    "humans": "models/humans.json",
+    "vehicles": "models/vehicles.json"
+  },
   "actors": {
     "cpp": "actors/cpp/character.json",
     "security": "actors/security/character.json",

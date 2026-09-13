@@ -231,7 +231,28 @@ pub fn draw_stage(
     night
         .vehicles
         .retain(|v| shot.eye[2] > 660. && (v.x - shot.target[0]).abs() < half_width + 340.);
-    {
+    if let Some(models) = &a.models {
+        {
+            let mut m = scene.rl_push_matrix();
+            m.rl_translatef(0., 500., -120.);
+            m.rl_scalef(1., -1., 1.);
+            nightlife::furniture(&mut *m, 640., false, night.ticks);
+        }
+        for person in &night.people {
+            let mut sample = super::models3d::person_sample(person, night.ticks);
+            sample.at[1] = 500. - person.ground_y;
+            if !models.draw(&mut scene, sample) {
+                let mut m = scene.rl_push_matrix();
+                m.rl_translatef(0., 500., -120.);
+                m.rl_scalef(1., -1., 1.);
+                nightlife::draw_person(&mut *m, a, person, 640.);
+            }
+        }
+        let mut m = scene.rl_push_matrix();
+        m.rl_translatef(0., 500., -120.);
+        m.rl_scalef(1., -1., 1.);
+        nightlife::furniture(&mut *m, 640., true, night.ticks);
+    } else {
         let mut m = scene.rl_push_matrix();
         m.rl_translatef(0., 500., -120.);
         m.rl_scalef(1., -1., 1.);
@@ -243,25 +264,46 @@ pub fn draw_stage(
         }
         let assets = &a.actors[npc.character];
         shadow(&mut scene, npc.position.x, -npc.depth * 3., 27.);
-        let mut m = scene.rl_push_matrix();
-        m.rl_translatef(0., c.world.ground_y - npc.depth, -npc.depth * 3.);
-        m.rl_scalef(1., -1., 1.);
         let ticks = frame_stride_ticks(assets, npc.clip, npc.position.x * npc.facing.sign())
             .unwrap_or(npc.ticks as f32);
         let pose = assets.clips.sample(npc.clip, ticks, ticks * 3.).pose;
-        draw_actor(
-            &mut *m,
-            assets,
-            pose,
-            npc.clip,
-            ticks,
-            [npc.position.x, npc.position.y],
-            npc.facing,
-            1.,
-            debug,
-        );
+        let drawn = a.models.as_ref().is_some_and(|models| {
+            models.draw(
+                &mut scene,
+                super::models3d::actor_sample(
+                    assets,
+                    npc.clip,
+                    ticks,
+                    [
+                        npc.position.x,
+                        c.world.ground_y - npc.depth - npc.position.y,
+                        -npc.depth * 3.,
+                    ],
+                    npc.facing.sign(),
+                    pose.yaw,
+                    1.,
+                )
+                .traveled(npc.position.x * npc.facing.sign()),
+            )
+        });
+        if !drawn {
+            let mut m = scene.rl_push_matrix();
+            m.rl_translatef(0., c.world.ground_y - npc.depth, -npc.depth * 3.);
+            m.rl_scalef(1., -1., 1.);
+            draw_actor(
+                &mut *m,
+                assets,
+                pose,
+                npc.clip,
+                ticks,
+                [npc.position.x, npc.position.y],
+                npc.facing,
+                1.,
+                debug,
+            );
+        }
     }
-    {
+    if !super::models3d_pair::draw_stage(&mut scene, a, c) {
         let mut m = scene.rl_push_matrix();
         m.rl_translatef(0., c.world.ground_y - 8., -24.);
         m.rl_scalef(1., -1., 1.);
@@ -304,6 +346,21 @@ pub fn draw_stage(
             )
         };
         shadow(&mut scene, p.x, -depth * 3., 30. * scale);
+        let drawn = a.models.as_ref().is_some_and(|models| {
+            models.draw(
+                &mut scene,
+                super::models3d::actor_sample(
+                    assets,
+                    clip,
+                    ticks,
+                    [p.x, c.world.ground_y - depth - p.y, -depth * 3.],
+                    facing.sign(),
+                    pose.yaw,
+                    scale,
+                )
+                .traveled(p.x * facing.sign()),
+            )
+        });
         let mut m = scene.rl_push_matrix();
         m.rl_translatef(0., c.world.ground_y - depth, -depth * 3.);
         m.rl_scalef(1., -1., 1.);
@@ -324,17 +381,19 @@ pub fn draw_stage(
                 m.draw_line_ex(mid, top, 1.5, Color::new(91, 181, 230, 130));
             }
         }
-        draw_actor(
-            &mut *m,
-            assets,
-            pose,
-            clip,
-            ticks,
-            [p.x, p.y],
-            facing,
-            scale,
-            debug,
-        );
+        if !drawn {
+            draw_actor(
+                &mut *m,
+                assets,
+                pose,
+                clip,
+                ticks,
+                [p.x, p.y],
+                facing,
+                scale,
+                debug,
+            );
+        }
         if let Some(age) = arrival.and_then(|p| p.impact_age) {
             super::world::dust(&mut *m, p.x, c.world.ground_y, age);
         }
@@ -345,8 +404,15 @@ pub fn draw_stage(
         .vehicles
         .sort_by(|a, b| a.ground_y.total_cmp(&b.ground_y));
     for vehicle in &night.vehicles {
-        let mut m = scene.rl_push_matrix();
         let depth = if vehicle.facing > 0.0 { 600. } else { 500. };
+        if let Some(models) = &a.models {
+            let mut sample = super::models3d::vehicle_sample(vehicle);
+            sample.at[1] = 0.;
+            if models.draw(&mut scene, sample) {
+                continue;
+            }
+        }
+        let mut m = scene.rl_push_matrix();
         m.rl_translatef(0., vehicle.ground_y, depth);
         m.rl_scalef(1., -1., 1.);
         nightlife::draw_vehicle(&mut *m, vehicle, 640.);

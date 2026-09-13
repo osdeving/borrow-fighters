@@ -57,6 +57,36 @@ impl Drop for Package {
 }
 
 #[test]
+fn a_custom_manifest_with_the_same_id_does_not_inherit_the_installed_glb() {
+    let package = Package::copy();
+    let installed =
+        Path::new(env!("CARGO_MANIFEST_DIR")).join("assets/adventure/actors/cpp/character.json");
+    let custom = ActorContent::load(&package.manifest()).unwrap();
+    assert_eq!(custom.pack.character.id, "cpp");
+    assert!(!super::registered_manifest(&package.manifest(), &installed));
+    assert!(super::registered_manifest(&installed, &installed));
+}
+
+#[test]
+fn explicit_model_catalog_belongs_to_the_custom_package() {
+    let package = Package::copy();
+    let catalog = package.0.join("humans.json");
+    fs::write(&catalog, "{}").unwrap();
+    let options = super::Options::parse([
+        "lab".to_string(),
+        "--actor".into(),
+        package.manifest().display().to_string(),
+        "--models".into(),
+        catalog.display().to_string(),
+    ])
+    .unwrap();
+    let id = "cpp".to_string();
+    let (selected, actors) = super::model_selection(&options, &[(&options.actor, &id)]).unwrap();
+    assert_eq!(selected, Some(catalog.canonicalize().unwrap()));
+    assert!(actors.contains("cpp"));
+}
+
+#[test]
 fn a_portable_actor_can_change_identity_without_lab_or_campaign_changes() {
     let package = Package::copy();
     package.mutate("character.json", |j| j["id"] = "external-actor".into());
