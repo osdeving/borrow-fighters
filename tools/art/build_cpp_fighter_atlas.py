@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Builds the high-resolution C++ fighter runtime atlases.
+"""Historical placeholder authoring; current production uses art.py recipes.
+
+Builds the high-resolution C++ fighter runtime atlases.
 
 The source sheet is a generated raster pose sheet with chroma-keyed full-body
 poses. This builder repacks those painted poses into two runtime atlases and

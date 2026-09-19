@@ -1,31 +1,24 @@
 ---
 name: borrow-fighters-repo-atlas
-description: Orient in the Borrow Fighters repository before broad edits, documentation routing, architecture work, issue triage, PR planning, or when an agent needs to find the smallest relevant context instead of reading the whole repo.
+description: Locate the smallest relevant Borrow Fighters context before broad navigation, triage, documentation or cross-module work.
 ---
 
-# Borrow Fighters Repo Atlas
+# Repo Atlas
 
-## Workflow
+Read the README index once, then choose one route. Search symbols before
+reading files; don't load every linked doc or repeat available context.
 
-1. Start with `README.md` to understand the current index.
-2. Read `references/repo-map.md` for the shortest route to the right files.
-3. Load only the docs needed for the task.
-4. If the task changes process, architecture, art direction, release, or contributor rules, check whether an ADR or governance doc update is required.
-5. Report the files you used when handing off a plan or summary.
+| Task | Start here |
+| --- | --- |
+| Combat | `src/combat/`, relevant tests, doc 12 technical guide |
+| Fighting sprites | `src/engine/sprites/`, doc 11, `tools/sprite-studio/` |
+| Adventure | `src/adventure/`, chapter doc; ADR 0021 for boundaries only |
+| Augusta | doc 39, `src/adventure/augusta/`, `engine/production/` |
+| Actor assets | doc 38, `assets/adventure/actors/`, `tools/art/README.md` |
+| Host/menu | `src/presentation.rs`, `src/app/` |
+| Rust structure | relevant section of doc 08 |
+| Art / scope | relevant section of doc 07 / docs 00–02 |
+| Workflow / release | doc 09 / doc 06 |
 
-## Routing Rules
-
-- Product/vision: `docs/00-vision.md`, `docs/01-mini-gdd.md`.
-- Prototype scope: `docs/02-prototype-scope.md`, `docs/03-backlog.md`.
-- Contribution/process: `CONTRIBUTING.md`, `docs/05-governance.md`.
-- Release: `docs/06-release-process.md`, `CHANGELOG.md`.
-- Art/mood/characters: `docs/07-art-direction.md`.
-- Code architecture: `docs/08-code-architecture.md`, `docs/adr/0003-code-architecture-rust-raylib.md`.
-- AI collaboration: `AGENTS.md`, `CLAUDE.md`, `docs/09-ai-collaboration.md`.
-
-## Guardrails
-
-- Do not read every file by default.
-- Do not create code when the user asks only for architecture or planning.
-- Prefer updating the index when adding a new durable doc.
-- Prefer issues/ADR for open decisions instead of hiding them in prose.
+`./dev --help` lists commands. Follow AGENTS.md for verification and doc scope.
+Read historical docs only when tracing a decision.

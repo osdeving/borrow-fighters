@@ -398,7 +398,7 @@ fn load_fighter_atlas_optional(
                 return Some(candidate);
             }
             eprintln!(
-                "warning: sprite candidate {candidate_path} is incomplete (missing {}); using {baseline_path}. Review partial candidates in Sprite Viewer.",
+                "warning: sprite candidate {candidate_path} is incomplete (missing {}); using {baseline_path}. Review partial candidates in Sprite Studio.",
                 missing.join(", ")
             );
         }

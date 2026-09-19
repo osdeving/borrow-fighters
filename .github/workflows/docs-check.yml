@@ -17,26 +17,5 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate GitHub YAML files
-        run: |
-          ruby -e 'require "yaml"; Dir[".github/**/*.yml", ".github/**/*.yaml", ".agents/**/*.yaml", ".claude/**/*.yaml"].sort.each { |f| YAML.load_file(f); puts "ok #{f}" }'
-
-      - name: Validate local Markdown links
-        run: |
-          ruby -e '
-            bad = []
-            Dir["{README.md,CONTRIBUTING.md,CHANGELOG.md,AGENTS.md,CLAUDE.md,docs/**/*.md,.agents/**/*.md,.claude/**/*.md}"].each do |file|
-              text = File.read(file)
-              text.scan(/\[[^\]]+\]\(([^)#]+)(?:#[^)]+)?\)/).flatten.each do |link|
-                next if link =~ %r{^[a-z]+://}
-                path = File.expand_path(link, File.dirname(file))
-                bad << "#{file}: #{link}" unless File.exist?(path)
-              end
-            end
-            if bad.empty?
-              puts "markdown links ok"
-            else
-              warn bad.join("\n")
-              exit 1
-            end
-          '
+      - name: Validate Markdown links and GitHub YAML
+        run: ./dev check docs

@@ -1,0 +1,320 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Generated from src/engine/sprites/manifest.rs by tools/generate_sprite_schema.py; do not edit.",
+  "title": "borrow-fighters.sprite.v1",
+  "$ref": "#/$defs/SpriteManifest",
+  "$defs": {
+    "SpriteManifest": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "borrow-fighters.sprite.v1"
+        },
+        "image": {
+          "type": "string"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cell": {
+          "$ref": "#/$defs/SpriteSize"
+        },
+        "default_pivot": {
+          "$ref": "#/$defs/SpritePivot"
+        },
+        "scale": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "frames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SpriteFrame"
+          }
+        },
+        "clips": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SpriteClip"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "schema",
+        "image",
+        "cell",
+        "default_pivot",
+        "frames",
+        "clips"
+      ]
+    },
+    "SpriteSize": {
+      "type": "object",
+      "properties": {
+        "w": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "h": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "w",
+        "h"
+      ]
+    },
+    "SpritePivot": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "y": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
+    },
+    "SpriteRect": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "y": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "w": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "h": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "w",
+        "h"
+      ]
+    },
+    "SpriteFrameCombat": {
+      "type": "object",
+      "properties": {
+        "hurtboxes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SpriteCombatBox"
+          }
+        },
+        "hitboxes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SpriteCombatBox"
+          }
+        },
+        "projectile_origin": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SpriteCombatPoint"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "SpriteCombatBox": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "y": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "w": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "h": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "w",
+        "h"
+      ]
+    },
+    "SpriteCombatPoint": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "y": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
+    },
+    "SpriteFrame": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "clip": {
+          "type": "string"
+        },
+        "image": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "pivot": {
+          "$ref": "#/$defs/SpritePivot"
+        },
+        "source_crop": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SpriteRect"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "trimmed_bounds": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SpriteRect"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "frame": {
+          "$ref": "#/$defs/SpriteRect"
+        },
+        "combat": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SpriteFrameCombat"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "clip",
+        "duration_ms",
+        "pivot",
+        "frame"
+      ]
+    },
+    "SpriteClip": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "loop": {
+          "type": "boolean"
+        },
+        "frames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "loop",
+        "frames"
+      ]
+    }
+  }
+}

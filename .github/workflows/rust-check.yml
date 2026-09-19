@@ -8,7 +8,11 @@ on:
       - "src/**"
       - "tests/**"
       - "examples/**"
-      - "assets/adventure/**"
+      - "assets/**"
+      - "schemas/**"
+      - "tools/art/**"
+      - "tools/generate_sprite_schema.py"
+      - "dev"
       - "tools/check_domain_boundaries.py"
       - "tools/test_check_domain_boundaries.py"
       - "tools/review/mix_adventure_review_audio.py"
@@ -23,7 +27,11 @@ on:
       - "src/**"
       - "tests/**"
       - "examples/**"
-      - "assets/adventure/**"
+      - "assets/**"
+      - "schemas/**"
+      - "tools/art/**"
+      - "tools/generate_sprite_schema.py"
+      - "dev"
       - "tools/check_domain_boundaries.py"
       - "tools/test_check_domain_boundaries.py"
       - "tools/review/mix_adventure_review_audio.py"
@@ -45,6 +53,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+
+      - name: Check sprite contract and asset recipes
+        run: |
+          python3 -m pip install Pillow
+          ./dev schema check
+          ./dev art validate --all
+          python3 -m unittest discover -s tools/art -p 'test_*.py'
 
       - name: Check domain boundaries and explicit targets
         run: |

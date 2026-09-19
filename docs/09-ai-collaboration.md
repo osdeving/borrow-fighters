@@ -1,72 +1,58 @@
-# 09 — Colaboração com IA
+# 09 — Workflow de desenvolvimento
 
-## Status
+O fluxo normal usa contexto e verificações proporcionais à mudança.
+[AGENTS.md](../AGENTS.md) é a regra comum para Codex e Claude. Skills são rotas
+curtas, carregadas por necessidade. CI e release conservam a validação ampla.
 
-Em uso.
+## Uma entrada operacional
 
-Este projeto usa instruções leves e skills repo-local para ajudar Codex, Claude Code e outros agentes a trabalharem com menos contexto desperdiçado.
+Execute `./dev --help`. Argumentos seguem para a ferramenta correspondente;
+nenhum comando instala dependências automaticamente.
 
-## Arquivos de instrução
+| Comando | Uso |
+| --- | --- |
+| `./dev story --start augusta` | Capítulo 2D da Augusta |
+| `./dev game` | Versus |
+| `./dev lab` | Laboratório de atores da aventura |
+| `./dev studio` | Sprite Studio, editor de manifestos de luta |
+| `./dev check` | Compilação rápida, sem executar testes |
+| `./dev check fast adventure` | Compilação rápida do domínio |
+| `./dev test adventure filtro` | Teste diretamente afetado |
+| `./dev check adventure` | Fmt, Clippy e testes desse domínio |
+| `./dev check fighting` | Fmt, Clippy e testes desse domínio |
+| `./dev check docs arquivo.md` | Links/YAML dos arquivos indicados |
+| `./dev check full` | Matriz Rust, contratos, docs e testes de ferramentas |
+| `./dev art --help` | Builder: receitas, validação e publicação |
+| `./dev schema check` | Conferir derivados do contrato Rust |
+| `./dev schema build` | Atualizar schema/tipos derivados |
 
-| Arquivo | Ferramenta | Uso |
-|---|---|---|
-| `AGENTS.md` | Codex | Regras persistentes do repositório |
-| `CLAUDE.md` | Claude Code | Memória/instruções persistentes do projeto |
-| `.agents/skills/*/SKILL.md` | Codex | Skills repo-local com carregamento sob demanda |
-| `.claude/skills/*/SKILL.md` | Claude Code | Skills de projeto invocáveis por `/skill-name` |
+Duração depende de cache/máquina. `full` não publica nem cria pacotes;
+[release](06-release-process.md) acrescenta stage/verify, smoke e distribuição.
 
-## Princípios
+## Trabalho necessário
 
-- Instruções globais devem ser curtas.
-- Procedimentos repetíveis viram skills.
-- Referências detalhadas ficam em `references/` dentro da skill.
-- O agente deve ler o menor conjunto de docs que resolve a tarefa.
-- Código novo deve ter descrição de módulo no topo.
-- Decisões estruturais devem virar ADR.
+1. Localize problema, arquivos e invariantes; leia somente a seção útil.
+2. Altere o menor conjunto e rode a checagem afetada durante a iteração.
+3. Integre e confira o domínio uma vez. Arte pede revisão curta em movimento;
+   não filme o capítulo inteiro para cada ajuste de sprite.
+4. Entregue comportamento, resultados dos checks e limitações concretas.
 
-## Skills iniciais
+Não criar ADR, relatório, suíte ou ferramenta para toda tarefa. ADRs ficam para
+decisões duradouras difíceis de desfazer. Docs mudam quando alguém precisa
+conhecer novo comportamento/comando/contrato. Goals interrompíveis mantêm um
+único diário curto, sem transcrever logs/conversas.
 
-| Skill | Quando usar |
-|---|---|
-| `borrow-fighters-repo-atlas` | Antes de navegar o repo, escolher docs ou localizar área de mudança |
-| `borrow-fighters-rust-gamedev` | Ao planejar ou implementar código Rust/Raylib |
-| `borrow-fighters-gameplay-design` | Ao propor ou revisar mecânicas de luta |
-| `borrow-fighters-art-direction` | Ao propor ou revisar mood, personagem, sprite ou asset |
+## Arte: fonte e alterações localizadas
 
-## Como pedir trabalho para IA
+- Autoria: referência canônica, imagens e receita. Novos conjuntos usam
+  `assets-src/`; fontes legadas permanecem até uma migração ser necessária.
+- Build: `./dev art` produz intermediários em `assets-generated/`.
+- Runtime: somente a seleção aceita é publicada em `assets/`. Rebuild não
+  substitui silenciosamente arte aceita pelo jogo.
+- Sprite Studio calibra manifestos de luta; Actor Lab revisa atores da aventura.
+  O antigo Sprite Viewer Raylib foi retirado.
+- Preserve timing físico, hitboxes e regras ao trocar aparência. Corrija a
+  fonte/receita afetada, evitando scripts por personagem e remendos anatômicos
+  no jogo. Confira poucas poses no tamanho real antes de ampliar o lote.
 
-Exemplos:
-
-```text
-Use $borrow-fighters-repo-atlas e me diga quais docs devo alterar para uma proposta de personagem.
-```
-
-```text
-Use $borrow-fighters-rust-gamedev para planejar o scaffold do Prototype 0.1 sem criar código ainda.
-```
-
-```text
-Use /borrow-fighters-gameplay-design para revisar esta ideia de golpe e apontar riscos de escopo.
-```
-
-## Rotas de contexto
-
-Para goals longos, manter um diário em `docs/worklogs/` com branch, último
-checkpoint, tarefas concluídas/pendentes e verificações reais. Atualizar e
-commitar por etapas coerentes quando autorizado. Após interrupção, ler o diário,
-conferir `git status`/`git log` e preservar trabalho não commitado antes de retomar.
-O [experimento de aventura](worklogs/rust-adventure-prologue.md) usa esse fluxo.
-
-- Produto e escopo: `docs/00-vision.md`, `docs/01-mini-gdd.md`, `docs/02-prototype-scope.md`.
-- Governança: `docs/05-governance.md`, `CONTRIBUTING.md`.
-- Código: `docs/08-code-architecture.md`, `docs/12-technical-combat-guide.md`, `docs/11-sprite-pipeline.md`, ADRs em `docs/adr/`.
-- Arte: `docs/07-art-direction.md`, `assets/references/`, `assets/placeholder/`.
-- Release: `docs/06-release-process.md`, `CHANGELOG.md`.
-
-## Fontes usadas para o formato
-
-- [Codex — Custom instructions with AGENTS.md](https://developers.openai.com/codex/guides/agents-md): `AGENTS.md` para orientação persistente de repositório.
-- [Codex — Agent Skills](https://developers.openai.com/codex/skills): `.agents/skills/` para skills repo-local e carregamento progressivo.
-- [Codex — Customization](https://developers.openai.com/codex/concepts/customization): `AGENTS.md`, skills, memórias, MCP e subagents como camadas complementares.
-- [Claude Code — Skills](https://docs.anthropic.com/en/docs/claude-code/skills): `.claude/skills/*/SKILL.md` para skills de projeto.
-- [Claude Code SDK overview](https://docs.anthropic.com/en/docs/claude-code/sdk): `CLAUDE.md` e `.claude/skills/` como configuração filesystem-based.
+[Builder](../tools/art/README.md) · [Sprite Studio e contrato](18-sprite-studio.md).

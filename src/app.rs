@@ -19,7 +19,6 @@ use crate::engine::{
     audio::{AUDIO_MANIFEST_PATH, AudioPlayer},
     input::LocalInput,
     render::{self, GamepadStatus},
-    sprites::C_FIGHTER_MANIFEST_PATH,
     video_capture::VideoCapture,
 };
 use crate::game::ai::BasicCpu;
@@ -35,7 +34,6 @@ use crate::scenes::{
     match_flow::{MatchFlow, MatchFlowAction, MatchFlowInput, MatchFlowKind},
     move_showcase::{MoveShowcase, MoveShowcaseOptions},
     preferences::{CycleDirection, MenuPage, PlayMode, PreferencesAction, PreferencesMenu},
-    sprite_viewer::{SpriteViewer, SpriteViewerInput, SpriteViewerOptions, ViewerPoint},
 };
 
 const CAPTURE_SMOKE_SECONDS_ENV: &str = "BORROW_FIGHTERS_CAPTURE_SMOKE_SECONDS";
@@ -77,7 +75,6 @@ pub struct App {
     player_two_cpu: BasicCpu,
     feature_flags: FeatureFlags,
     scene: AppScene,
-    sprite_viewer_options: Option<SpriteViewerOptions>,
     preferences_menu: PreferencesMenu,
     character_select: CharacterSelect,
     match_flow: Option<MatchFlow>,
@@ -141,7 +138,7 @@ impl App {
         PlayMode::AgainstCpu.apply(&mut feature_flags);
         let match_options = options.match_options;
         let mut move_showcase = MoveShowcase::default();
-        let (scene, combat_lab, sprite_viewer_options) = match options.mode {
+        let (scene, combat_lab) = match options.mode {
             LaunchMode::Game => (
                 if options.start_fight {
                     AppScene::Fight
@@ -149,9 +146,8 @@ impl App {
                     AppScene::Preferences
                 },
                 CombatLab::default(),
-                None,
             ),
-            LaunchMode::CombatLab(options) => (AppScene::CombatLab, CombatLab::new(options), None),
+            LaunchMode::CombatLab(options) => (AppScene::CombatLab, CombatLab::new(options)),
             LaunchMode::MoveShowcase(options) => {
                 move_showcase = MoveShowcase::new(MoveShowcaseOptions {
                     character: options.character,
@@ -163,10 +159,7 @@ impl App {
                 if options.sides_reversed {
                     move_showcase.switch_sides();
                 }
-                (AppScene::MoveShowcase, CombatLab::default(), None)
-            }
-            LaunchMode::SpriteViewer(options) => {
-                (AppScene::SpriteViewer, CombatLab::default(), Some(options))
+                (AppScene::MoveShowcase, CombatLab::default())
             }
         };
         let character_body_metrics =
@@ -189,7 +182,6 @@ impl App {
             player_two_cpu: BasicCpu::for_slot(PlayerSlot::Two),
             feature_flags,
             scene,
-            sprite_viewer_options,
             preferences_menu,
             character_select: CharacterSelect::new(
                 [match_options.player_one, match_options.player_two],
@@ -219,11 +211,6 @@ impl App {
     /// Runs the Raylib-backed game loop until the window closes.
     pub fn run(mut self, raylib: &mut RaylibHandle, thread: &RaylibThread) {
         raylib.set_target_fps(TARGET_FPS);
-        if let Some(options) = self.sprite_viewer_options.take() {
-            run_sprite_viewer(raylib, thread, options);
-            return;
-        }
-
         let assets = GameAssets::load(raylib, thread);
         self.run_with_assets(raylib, thread, &assets);
     }
@@ -579,14 +566,6 @@ impl App {
                                 self.accumulator = 0.0;
                                 audio_player.play_music(MusicTrack::CombatDeterminedPursuit);
                             }
-                            PreferencesAction::OpenSpriteViewer => {
-                                run_sprite_viewer(raylib, thread, default_sprite_viewer_options());
-                                if raylib.window_should_close() {
-                                    return MenuExit::Closed;
-                                }
-                                self.preferences_menu.ignore_next_input();
-                                audio_player.play_music(MusicTrack::Menu);
-                            }
                             PreferencesAction::StartFight
                             | PreferencesAction::StartWithMode(_)
                             | PreferencesAction::OpenCharacterSelect => {
@@ -761,7 +740,6 @@ impl App {
                         ),
                     );
                 }
-                AppScene::SpriteViewer => unreachable!("sprite viewer has a separate app loop"),
             }
         }
         MenuExit::Closed
@@ -1237,7 +1215,6 @@ const fn music_track_for_scene(scene: AppScene, arena: ArenaId) -> MusicTrack {
         AppScene::Fight => music_track_for_arena(arena),
         AppScene::CombatLab => MusicTrack::CombatDeterminedPursuit,
         AppScene::MoveShowcase => MusicTrack::CombatDeterminedPursuit,
-        AppScene::SpriteViewer => MusicTrack::Menu,
     }
 }
 
@@ -1249,86 +1226,6 @@ const fn music_track_for_arena(arena: ArenaId) -> MusicTrack {
         ArenaId::BioTic => MusicTrack::CombatRinsTheme,
         ArenaId::PortoDigital => MusicTrack::CombatChiptuneBattle,
         ArenaId::ValeDoPinhao => MusicTrack::CombatEightBitBattle,
-    }
-}
-
-fn run_sprite_viewer(
-    raylib: &mut RaylibHandle,
-    thread: &RaylibThread,
-    options: SpriteViewerOptions,
-) {
-    sync_system_cursor(raylib);
-    let mut viewer = match SpriteViewer::load(options) {
-        Ok(viewer) => viewer,
-        Err(error) => {
-            let message = error.to_string();
-            while !raylib.window_should_close() {
-                if raylib.is_key_pressed(KeyboardKey::KEY_ESCAPE) {
-                    break;
-                }
-                let mut draw = raylib.begin_drawing(thread);
-                render::draw_sprite_viewer_error(&mut draw, &message);
-            }
-            return;
-        }
-    };
-
-    let mut texture = load_sprite_viewer_texture(raylib, thread, &mut viewer);
-    let mut video_capture = VideoCapture::default();
-    let mut frame_target = load_frame_target(raylib, thread);
-
-    while !raylib.window_should_close() {
-        if raylib.is_key_pressed(KeyboardKey::KEY_ESCAPE) {
-            break;
-        }
-        update_video_capture_status(&mut video_capture);
-        handle_video_capture_shortcuts(
-            &mut video_capture,
-            raylib.is_key_pressed(KeyboardKey::KEY_F9),
-            raylib.is_key_pressed(KeyboardKey::KEY_F10),
-        );
-        let input = read_sprite_viewer_input(raylib);
-        if input.reload_manifest {
-            match viewer.reload_manifest() {
-                Ok(_) => {
-                    texture = load_sprite_viewer_texture(raylib, thread, &mut viewer);
-                }
-                Err(error) => viewer.set_texture_error(error.to_string()),
-            }
-        }
-        let screenshot_requested = input.screenshot_requested;
-        viewer.update(input, raylib.get_frame_time().min(MAX_FRAME_TIME));
-
-        {
-            let mut draw = raylib.begin_texture_mode(thread, &mut frame_target);
-            render::draw_sprite_viewer(&mut draw, &viewer, texture.as_ref());
-            render::draw_video_capture_overlay(
-                &mut draw,
-                video_capture.is_recording(),
-                video_capture.last_message(),
-            );
-        }
-        finish_frame(raylib, thread, &frame_target, &mut video_capture, None);
-
-        if screenshot_requested {
-            let directory = data_dir().join("captures");
-            let path = directory.join("sprite-viewer-capture.png");
-            if let Err(error) = std::fs::create_dir_all(directory) {
-                viewer.set_texture_error(format!("could not create capture directory: {error}"));
-            } else {
-                raylib.take_screenshot(thread, &path.to_string_lossy());
-                viewer.set_status_message(format!("Screenshot salvo em {}.", path.display()));
-            }
-        }
-    }
-}
-
-fn default_sprite_viewer_options() -> SpriteViewerOptions {
-    SpriteViewerOptions {
-        manifest_path: asset_path(C_FIGHTER_MANIFEST_PATH),
-        initial_clip: Some("special".to_owned()),
-        character: Some(CharacterId::C),
-        selected_move: CombatLabMove::Projectile,
     }
 }
 
@@ -1450,98 +1347,6 @@ impl CaptureSmokeTest {
             }
             self.finished = true;
         }
-    }
-}
-
-fn load_sprite_viewer_texture(
-    raylib: &mut RaylibHandle,
-    thread: &RaylibThread,
-    viewer: &mut SpriteViewer,
-) -> Option<Texture2D> {
-    let texture_path = viewer.image_path().to_string_lossy().to_string();
-    match raylib.load_texture(thread, &texture_path) {
-        Ok(texture) => {
-            viewer.set_status_message(format!("Atlas carregado: {texture_path}"));
-            Some(texture)
-        }
-        Err(error) => {
-            viewer.set_texture_error(format!("could not load texture {texture_path}: {error:?}"));
-            None
-        }
-    }
-}
-
-fn read_sprite_viewer_input(raylib: &RaylibHandle) -> SpriteViewerInput {
-    let tab_pressed = raylib.is_key_pressed(KeyboardKey::KEY_TAB);
-    let shift_down = raylib.is_key_down(KeyboardKey::KEY_LEFT_SHIFT)
-        || raylib.is_key_down(KeyboardKey::KEY_RIGHT_SHIFT);
-    let control_down = raylib.is_key_down(KeyboardKey::KEY_LEFT_CONTROL)
-        || raylib.is_key_down(KeyboardKey::KEY_RIGHT_CONTROL);
-    let pivot_step = if shift_down { 8 } else { 1 };
-    let arrow_x = raylib.is_key_pressed(KeyboardKey::KEY_RIGHT) as i32
-        - raylib.is_key_pressed(KeyboardKey::KEY_LEFT) as i32;
-    let arrow_y = raylib.is_key_pressed(KeyboardKey::KEY_DOWN) as i32
-        - raylib.is_key_pressed(KeyboardKey::KEY_UP) as i32;
-    let mouse = raylib.get_mouse_position();
-
-    SpriteViewerInput {
-        next_clip: tab_pressed && !shift_down,
-        previous_clip: tab_pressed && shift_down,
-        next_character: raylib.is_key_pressed(KeyboardKey::KEY_C) && !shift_down,
-        previous_character: raylib.is_key_pressed(KeyboardKey::KEY_C) && shift_down,
-        next_move: raylib.is_key_pressed(KeyboardKey::KEY_RIGHT_BRACKET),
-        previous_move: raylib.is_key_pressed(KeyboardKey::KEY_LEFT_BRACKET),
-        sync_clip_to_move: raylib.is_key_pressed(KeyboardKey::KEY_ENTER),
-        next_frame: raylib.is_key_pressed(KeyboardKey::KEY_PERIOD),
-        previous_frame: raylib.is_key_pressed(KeyboardKey::KEY_COMMA),
-        toggle_playback: raylib.is_key_pressed(KeyboardKey::KEY_SPACE),
-        toggle_grid: raylib.is_key_pressed(KeyboardKey::KEY_G),
-        toggle_pivot: raylib.is_key_pressed(KeyboardKey::KEY_P),
-        toggle_bounds: raylib.is_key_pressed(KeyboardKey::KEY_B),
-        toggle_dummy: raylib.is_key_pressed(KeyboardKey::KEY_O),
-        toggle_combat_overlay: raylib.is_key_pressed(KeyboardKey::KEY_M),
-        toggle_projectile_trajectory: raylib.is_key_pressed(KeyboardKey::KEY_T),
-        reload_manifest: raylib.is_key_pressed(KeyboardKey::KEY_F5),
-        save_manifest: control_down && raylib.is_key_pressed(KeyboardKey::KEY_S),
-        seed_frame_combat: raylib.is_key_pressed(KeyboardKey::KEY_N),
-        add_frame_hurtbox: !shift_down && raylib.is_key_pressed(KeyboardKey::KEY_H),
-        add_frame_hitbox: !shift_down && raylib.is_key_pressed(KeyboardKey::KEY_J),
-        delete_frame_combat: raylib.is_key_pressed(KeyboardKey::KEY_DELETE),
-        increase_manifest_scale: raylib.is_key_pressed(KeyboardKey::KEY_EQUAL),
-        decrease_manifest_scale: raylib.is_key_pressed(KeyboardKey::KEY_MINUS),
-        reset_zoom: raylib.is_key_pressed(KeyboardKey::KEY_ZERO),
-        screenshot_requested: raylib.is_key_pressed(KeyboardKey::KEY_F12),
-        zoom_delta: raylib.get_mouse_wheel_move(),
-        nudge_pivot_x: if control_down {
-            0
-        } else {
-            arrow_x * pivot_step
-        },
-        nudge_pivot_y: if control_down {
-            0
-        } else {
-            arrow_y * pivot_step
-        },
-        nudge_body_width: if control_down && !shift_down {
-            arrow_x * pivot_step
-        } else {
-            0
-        },
-        nudge_standing_height: if control_down && !shift_down {
-            -arrow_y * pivot_step
-        } else {
-            0
-        },
-        nudge_crouch_height: if control_down && shift_down {
-            -arrow_y * pivot_step
-        } else {
-            0
-        },
-        reset_position: raylib.is_key_pressed(KeyboardKey::KEY_R),
-        mouse_position: ViewerPoint::new(mouse.x, mouse.y),
-        mouse_pressed: raylib.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_LEFT),
-        mouse_down: raylib.is_mouse_button_down(MouseButton::MOUSE_BUTTON_LEFT),
-        mouse_released: raylib.is_mouse_button_released(MouseButton::MOUSE_BUTTON_LEFT),
     }
 }
 

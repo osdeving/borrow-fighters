@@ -1,0 +1,6 @@
+{
+  "schema": "borrow-fighters.art-recipe.v1",
+  "production": "../../../assets/production/python/production.json",
+  "generated": "../../../assets-generated/characters/python",
+  "runtime": "../../../assets/candidates/python/python-fighter.sprite.json"
+}

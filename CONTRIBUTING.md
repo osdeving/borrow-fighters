@@ -1,131 +1,21 @@
 # Contributing
 
-## Fase atual
+Borrow Fighters possui aventura e Versus jogáveis. Comece pelo pedido/issue
+e pelo índice do [README](README.md); leia somente o guia da área afetada.
+[AGENTS.md](AGENTS.md) e [workflow](docs/09-ai-collaboration.md) definem o fluxo
+comum e os níveis de verificação.
 
-Dia 0 / pré-produção.
+1. Preserve trabalho existente e use uma branch curta. Issue é útil para
+   propostas abertas; não é pré-requisito de uma correção já autorizada.
+2. Implemente uma intenção clara. Mantenha aventura/luta independentes e
+   gameplay separado da apresentação. Reutilize ferramentas existentes.
+3. Confira o que mudou. Ao concluir Rust, use `./dev check adventure` ou
+   `fighting`. Arte precisa de validação do asset e revisão em movimento.
+4. Atualize docs somente quando comportamento, comando ou contrato mudou.
+   ADR para decisão duradoura difícil de reverter; journal para trabalho longo.
+5. Abra PR com problema, resultado e validação. Use Conventional Commits
+   (`fix:`, `feat:`, `refactor:`, `docs:`, `art:`) e prefira squash merge.
 
-O foco atual é documentação, escopo e validação da ideia.
-
-## Antes de contribuir
-
-Leia:
-
-1. [`README.md`](README.md)
-2. [`docs/00-vision.md`](docs/00-vision.md)
-3. [`docs/01-mini-gdd.md`](docs/01-mini-gdd.md)
-4. [`docs/03-backlog.md`](docs/03-backlog.md)
-5. [`docs/05-governance.md`](docs/05-governance.md)
-6. [`docs/07-art-direction.md`](docs/07-art-direction.md), se a contribuição envolver arte, mood ou personagem.
-7. [`docs/08-code-architecture.md`](docs/08-code-architecture.md), se a contribuição envolver código.
-
-[`docs/03-backlog.md`](docs/03-backlog.md) e a fonte de verdade para **Agora / Proximo / Depois**. Antes de abrir uma branch, confira esse documento e a issue/PR ligada a frente ativa.
-
-## Contribuições úteis agora
-
-- Abra issues pequenas.
-- Sugira cortes de escopo.
-- Proponha personagens com mecânica associada.
-- Proponha moodboards ou direção visual com riscos claros.
-- Para código, siga o esboço de arquitetura antes de criar módulos novos.
-- Evite sugerir sistemas grandes antes do protótipo 0.1.
-- Discuta decisões técnicas via ADR.
-
-## Fluxo recomendado
-
-1. Abra uma issue usando o template mais próximo.
-2. Espere triagem quando a mudança afetar escopo, arte, processo ou stack.
-3. Confirme se a frente aparece em [`docs/03-backlog.md`](docs/03-backlog.md); se nao aparecer, proponha ou atualize o backlog.
-4. Crie uma branch curta a partir de `main`.
-5. Preencha o template de PR.
-6. Atualize docs ou ADR se a mudança alterar direção do projeto.
-
-## Modelo de branches
-
-Seguimos **Trunk-Based Development adaptado**:
-
-- `main` é o trunk e deve ficar protegida;
-- todo trabalho entra por PR pequeno;
-- branches devem durar pouco e voltar para `main` rapidamente;
-- `release/*` existe apenas quando uma versão precisar de estabilização;
-- não usamos GitFlow clássico com branches long-lived como `develop`.
-
-Prefixos sugeridos:
-
-| Prefixo | Uso |
-|---|---|
-| `docs/*` | documentação, processo, ADRs |
-| `proposal/*` | exploração ainda aberta |
-| `feature/*` | gameplay, ferramenta ou funcionalidade |
-| `art/*` | arte, mood, referência ou asset |
-| `release/*` | estabilização de versão |
-| `hotfix/*` | correção urgente depois de release |
-
-## Conventional Commits
-
-Commits devem seguir **Conventional Commits**:
-
-```text
-tipo(escopo opcional): descrição curta no imperativo
-```
-
-Exemplos:
-
-```text
-docs(governance): define trunk-based development
-docs(art): add mood proposal template
-feat(gameplay): add basic attack state
-fix(input): prevent jump buffering regression
-chore(github): add issue templates
-```
-
-Tipos iniciais:
-
-| Tipo | Uso |
-|---|---|
-| `docs` | documentação, GDD, ADRs, README |
-| `feat` | funcionalidade nova |
-| `fix` | correção de bug |
-| `chore` | manutenção sem mudança de produto |
-| `refactor` | mudança interna sem comportamento novo |
-| `test` | testes |
-| `build` | build, dependências, empacotamento |
-| `ci` | automações e GitHub Actions |
-| `art` | assets, moodboards e direção visual |
-| `release` | preparação de versão |
-
-Commits com quebra de compatibilidade ou direção devem usar `!` ou rodapé `BREAKING CHANGE:`.
-
-## Regras de PR
-
-- Um PR deve resolver uma intenção clara.
-- PR grande deve ser quebrado antes de revisão.
-- Mudança estrutural precisa de ADR ou issue de decisão.
-- Arte deve indicar fonte, licença ou status de placeholder.
-- O merge recomendado é squash merge.
-- O título do PR deve poder virar um commit Conventional Commit no squash.
-
-## Moldes úteis
-
-- [`docs/templates/mood-proposal.md`](docs/templates/mood-proposal.md)
-- [`docs/templates/character-concept.md`](docs/templates/character-concept.md)
-- [`docs/templates/adr-template.md`](docs/templates/adr-template.md)
-- [`docs/templates/release-checklist.md`](docs/templates/release-checklist.md)
-
-## Padrão simples de issue
-
-```md
-## Ideia
-
-## Por que isso ajuda o protótipo?
-
-## Escopo mínimo
-
-## Riscos
-```
-
-## O que evitar agora
-
-- Sistemas grandes antes de validar o combate básico.
-- Arte final antes de validar silhueta, legibilidade e mood.
-- Discussões sem proposta testável.
-- PR sem relação clara com visão, backlog, arte, ADR ou release.
+CI/merge conserva a matriz completa; [release](docs/06-release-process.md)
+acrescenta empacotamento e distribuição. Preserve testes úteis e indique origem
+e licença dos assets. `main` continua protegida; publicar exige autorização.

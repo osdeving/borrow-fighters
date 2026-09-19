@@ -117,12 +117,12 @@ fn pointer_click_is_suppressed_on_scene_entry_and_does_not_repeat_across_pages()
     held.pointer.moved = false;
     assert_eq!(menu.update(held, &mut flags), PreferencesAction::Stay);
     menu.ignore_next_input();
-    let click = pointer_on_row(&menu, PreferencesMenu::TRAINING_SPRITE_VIEWER_ROW, true);
+    let click = pointer_on_row(&menu, PreferencesMenu::TRAINING_MOVE_SHOWCASE_ROW, true);
     assert_eq!(menu.update(click, &mut flags), PreferencesAction::Stay);
     assert_eq!(menu.selected(), PreferencesMenu::TRAINING_COMBAT_LAB_ROW);
     assert_eq!(
         menu.update(click, &mut flags),
-        PreferencesAction::OpenSpriteViewer
+        PreferencesAction::OpenMoveShowcase
     );
 }
 
@@ -150,10 +150,6 @@ fn mouse_can_open_versus_and_each_training_tool() {
         (
             PreferencesMenu::TRAINING_MOVE_SHOWCASE_ROW,
             PreferencesAction::OpenMoveShowcase,
-        ),
-        (
-            PreferencesMenu::TRAINING_SPRITE_VIEWER_ROW,
-            PreferencesAction::OpenSpriteViewer,
         ),
     ] {
         assert_eq!(
@@ -337,7 +333,7 @@ fn menu_hit_testing_excludes_padding_gaps_and_edges_on_every_page() {
     for (page, rows) in [
         (MenuPage::Main, 7),
         (MenuPage::Versus, 5),
-        (MenuPage::Training, 4),
+        (MenuPage::Training, 3),
         (MenuPage::Lore, 3),
         (MenuPage::Options, PREFERENCE_FLAGS.len() + 3),
         (MenuPage::HowToPlay, 4),
@@ -738,8 +734,9 @@ fn preferences_menu_opens_training_tools() {
             },
             &mut flags,
         ),
-        PreferencesAction::OpenSpriteViewer
+        PreferencesAction::Stay
     );
+    assert_eq!(menu.page(), MenuPage::Main);
 }
 
 #[test]

@@ -31,6 +31,13 @@ Jogue por dez minutos e [conte o que funcionou e o que ficou confuso](https://gi
 [Como gerar os pacotes](docs/06-release-process.md) ·
 [Decisão de distribuição](docs/adr/0019-playtest-distribution.md).
 
+## Desenvolvimento
+
+Use `./dev --help` para os comandos: `./dev story --start augusta`, `./dev game`,
+`./dev studio`, `./dev check` (rápido) e `./dev check adventure|fighting` (domínio).
+Leituras, documentação e testes são proporcionais à mudança; a CI conserva a
+matriz completa. [Workflow](docs/09-ai-collaboration.md).
+
 ## Jogar pelo código — aventura, apresentação e menu
 
 Na primeira execução, `cargo run` inicia a aventura que apresenta
@@ -214,7 +221,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 
 - [`docs/07-art-direction.md`](docs/07-art-direction.md): direção de arte inicial, moods e critérios visuais.
 - [`docs/11-sprite-pipeline.md`](docs/11-sprite-pipeline.md): formato candidato para atlas, animações, pivots e metadata de sprites.
-- [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md): roadmap do viewer para artistas conferirem atlas, pivot, grade e boxes.
+- [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md): historico do viewer substituido pelo Sprite Studio.
 - [`docs/17-visual-scale-and-stage-metrics.md`](docs/17-visual-scale-and-stage-metrics.md): escala visual alvo de personagens, arena e workflow de calibracao.
 - [`docs/18-sprite-studio.md`](docs/18-sprite-studio.md): ferramenta Tauri + React para editar manifestos e atlas fora do loop do jogo.
 - [`docs/19-sprite-production-coverage.md`](docs/19-sprite-production-coverage.md): matriz de ações, referências, candidatos e verificações da produção de sprites.
@@ -231,7 +238,7 @@ A ideia continua sendo evoluir com decisões explícitas, escopo controlado e co
 - [`docs/13-combat-design-roadmap.md`](docs/13-combat-design-roadmap.md): plano técnico para golpes, balanceamento e Combat Lab.
 - [`docs/14-audio-pipeline.md`](docs/14-audio-pipeline.md): motor de áudio por eventos, manifesto JSON e convenções de clips.
 - [`docs/15-character-combat-matrix.md`](docs/15-character-combat-matrix.md): matriz de identidade mecânica e tuning inicial de Rust, Duke, Go, C, Python e C++.
-- [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md): ferramenta isolada para inspecionar sprites e preparar hitbox/hurtbox data-driven.
+- [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md): historico do viewer substituido pelo Sprite Studio externo.
 - [`docs/17-visual-scale-and-stage-metrics.md`](docs/17-visual-scale-and-stage-metrics.md): padrao tecnico de tamanho em tela, escala de sprite e largura de arena.
 - [`docs/18-sprite-studio.md`](docs/18-sprite-studio.md): app desktop externo para artistas editarem `*.sprite.json` com UI propria.
 - [`docs/09-ai-collaboration.md`](docs/09-ai-collaboration.md): como Codex, Claude e skills devem navegar o projeto.
@@ -418,7 +425,7 @@ e revelação binária; a marca acompanha o título final da aventura:
 
 - `Modo História`: no executável conjunto, abre o capítulo de Rust com checkpoints; na execução isolada de luta, permanece indisponível.
 - `Versus Setup`: abre a seleção visual de personagens, arena e modo.
-- `Training`: abre `Move Showcase`, `Combat Lab` ou `Sprite Viewer`.
+- `Training`: abre `Move Showcase` ou `Combat Lab`.
 - `Lore / Roster`: abre um livro de programação com capítulos da história e fichas dos personagens.
 - `Options`: liga/desliga gravação local e feature flags de protótipo.
 - `Como jogar`: reabre controles e escolha de modo.
@@ -428,7 +435,7 @@ Ao iniciar uma luta, o jogo roda a entrada dos personagens e depois bloqueia inp
 
 Cada jogador começa com 50 de energia, até o máximo de 100. Acertar ou defender carrega a barra; o cinematográfico consome 100 ao iniciar. Ataques no vazio e o próprio cinematográfico não carregam energia. A assinatura continua independente dessa barra. Combat Lab e Move Showcase mantêm energia livre para revisão; os valores da luta são provisórios, com balanceamento fino em uma rodada posterior.
 
-Por padrão, a luta normal inicia `rust.rs` contra `duke.java` no `Sirius Light Ring` em Campinas, SP. A seleção Linker reúne rust.rs, duke.java, old.c, python.py e cpp.cpp, com retratos derivados da arte atual e escolha de arena pelo nome/local. Go/Gopher continua no repositório, no CLI, no Combat Lab e no Sprite Viewer, mas saiu da seleção pública da demo por enquanto. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` ou `cpp.cpp`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pelo menu. Rust, Duke/Java, Go, C, Python e C++ já possuem vida, loadout, frame data e projectile próprios; Old C compartilha temporariamente a voz de Rust. C joga como fundamentos de alcance/risco, Python como punisher ágil de dano moderado e C++ como herdeira técnica entre alcance de C e ritmo de Python.
+Por padrão, a luta normal inicia `rust.rs` contra `duke.java` no `Sirius Light Ring` em Campinas, SP. A seleção Linker reúne rust.rs, duke.java, old.c, python.py e cpp.cpp, com retratos derivados da arte atual e escolha de arena pelo nome/local. Go/Gopher continua no repositório, no CLI e no Combat Lab, mas saiu da seleção pública da demo por enquanto. Para testar matchups direto por CLI, use `--p1`/`--player-one` e `--p2`/`--player-two` com `rust`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx` ou `cpp.cpp`. Adicione `--fight` ou `--skip-menu` para entrar direto na luta sem passar pelo menu. Rust, Duke/Java, Go, C, Python e C++ já possuem vida, loadout, frame data e projectile próprios; Old C compartilha temporariamente a voz de Rust. C joga como fundamentos de alcance/risco, Python como punisher ágil de dano moderado e C++ como herdeira técnica entre alcance de C e ritmo de Python.
 
 O submenu `Lore / Roster` lê [`assets/lore/story.json`](assets/lore/story.json) em runtime. Edite esse arquivo para alterar capítulos, perfis, objetivos ou notas de personagem sem recompilar o jogo; reinicie o processo para recarregar o JSON. Com `CHAPTER` ou `CHARACTER` selecionado, use a roda do mouse ou `PageUp` / `PageDown` para rolar textos longos no capítulo ou na ficha. Os retratos atuais do roster são cards placeholder derivados dos sprites jogáveis.
 
@@ -469,20 +476,11 @@ cargo run --bin borrow-fighters -- --lab combat --character rust --pose victory
 BORROW_FIGHTERS_SPRITE_CANDIDATES=0 cargo run --bin borrow-fighters -- --fight --p1 rust --p2 duke
 ```
 
-O carregador procura `assets/candidates/<personagem>/<personagem>-fighter.sprite.json` e exige os 20 clips anteriores mais `signature_special`, `knockdown`, `heavy_hit`, `launched` e `thrown` para os cinco personagens da demo; Go conserva os 20 clips anteriores; arquivo inválido, incompleto ou ausente mantém o placeholder daquele personagem. Conjuntos parciais são inspecionados diretamente no Sprite Viewer/Studio. A variável com valor `1` continua escolhendo os novos atlas explicitamente; `0` ou um valor inválido seleciona os originais. A arte revisada controla a apresentação; `combat_manifest` preserva as boxes e origens baseline dos golpes anteriores. Rasteiras usam as boxes do `MoveSpec`; especiais usam as entidades físicas de `World.signature_effects`, e ações baixas usam hurtboxes físicas agachadas, conforme a [ADR 0013](docs/adr/0013-contextual-showcase-and-mvp-combat.md). Reações, defesa, agachamento, salto e poses finais têm relógios visuais próprios. Veja [pipeline e comandos](docs/11-sprite-pipeline.md#revisao-de-candidatos-no-runtime) e [cobertura e pendências](docs/19-sprite-production-coverage.md).
+O carregador procura `assets/candidates/<personagem>/<personagem>-fighter.sprite.json` e exige os 20 clips anteriores mais `signature_special`, `knockdown`, `heavy_hit`, `launched` e `thrown` para os cinco personagens da demo; Go conserva os 20 clips anteriores; arquivo inválido, incompleto ou ausente mantém o placeholder daquele personagem. Conjuntos parciais são inspecionados diretamente no Sprite Studio. A variável com valor `1` continua escolhendo os novos atlas explicitamente; `0` ou um valor inválido seleciona os originais. A arte revisada controla a apresentação; `combat_manifest` preserva as boxes e origens baseline dos golpes anteriores. Rasteiras usam as boxes do `MoveSpec`; especiais usam as entidades físicas de `World.signature_effects`, e ações baixas usam hurtboxes físicas agachadas, conforme a [ADR 0013](docs/adr/0013-contextual-showcase-and-mvp-combat.md). Reações, defesa, agachamento, salto e poses finais têm relógios visuais próprios. Veja [pipeline e comandos](docs/11-sprite-pipeline.md#revisao-de-candidatos-no-runtime) e [cobertura e pendências](docs/19-sprite-production-coverage.md).
 
-Para abrir o viewer de sprites direto em uma ferramenta isolada:
-
-```bash
-cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
-cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
-cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip special --character c --move projectile
-cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip punch_light --character python --move light_punch
-```
-
-No Sprite Combat Viewer, use o mouse para inspecionar coordenadas locais do frame, arrastar personagem/dummy e ajustar alças de `frames[].combat`. `N` gera um rascunho de metadata a partir do overlay runtime do golpe selecionado, `Tab` / `Shift+Tab` alterna clip, `Enter` sincroniza clip com golpe, `C` / `Shift+C` alterna personagem de combate, `[` / `]` alterna golpe, `.` / `,` avança ou volta frame, `Espaço` pausa, mouse wheel controla zoom, `0` reseta zoom, `=` / `-` ajusta `scale`, `Setas` ou `Shift+Setas` move o `pivot`, `Ctrl+Setas` ajusta largura/altura do corpo físico, `Ctrl+Shift+Setas` ajusta altura abaixada, `Ctrl+S` salva manifestos de tuning, `O` mostra/esconde dummy, `M` mostra/esconde boxes de combate, `T` mostra/esconde trajetória prevista do projectile, `F5` recarrega manifesto/atlas, `F12` salva screenshot em `captures/sprite-viewer-capture.png` dentro dos dados do usuário, `F9`/`F10` gravam um MP4 local, `G` alterna grade, `P` alterna pivot, `B` alterna bounds, `R` reseta posição e `Esc` volta ao menu quando aberto por `Training`. O padrão de escala fica em [`docs/17-visual-scale-and-stage-metrics.md`](docs/17-visual-scale-and-stage-metrics.md), e o roadmap completo fica em [`docs/16-sprite-combat-viewer-roadmap.md`](docs/16-sprite-combat-viewer-roadmap.md).
-
-O novo Sprite Studio externo vive em `tools/sprite-studio` e deve substituir o viewer Raylib em uma limpeza propria:
+O Sprite Studio externo em `tools/sprite-studio` substitui o viewer Raylib
+removido. Use-o para editar atlas, pivots e boxes; confira escala e resultado
+no jogo com o [guia de medidas](docs/17-visual-scale-and-stage-metrics.md).
 
 ```bash
 cd tools/sprite-studio

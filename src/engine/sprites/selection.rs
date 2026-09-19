@@ -44,7 +44,7 @@ impl FighterSpriteClip {
     /// Clips required before a candidate can replace a complete fighter atlas.
     ///
     /// Legacy atlases may still use visual aliases; partial production belongs
-    /// in the Sprite Viewer until each implemented action has its own clip.
+    /// in Sprite Studio until each implemented action has its own clip.
     pub const REQUIRED: [Self; 20] = [
         Self::Spawn,
         Self::Idle,

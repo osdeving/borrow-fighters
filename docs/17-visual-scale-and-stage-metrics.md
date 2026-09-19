@@ -74,9 +74,9 @@ O schema `borrow-fighters.sprite.v1` usa:
 - `frames[].combat.hitboxes[]`: metadata de combate opcional para hitbox por frame;
 - `frames[].combat.projectile_origin`: ponto local opcional de origem de projectile.
 
-O renderer e o Sprite Combat Viewer consomem `scale` e `pivot` do manifesto aberto. Para aparecer na luta, esse manifesto precisa ser o selecionado pelo loader e o processo precisa recarregar os assets; salvar no viewer nao troca um jogo ja aberto automaticamente.
+O renderer e o Sprite Studio consomem `scale` e `pivot` do manifesto aberto. Para aparecer na luta, esse manifesto precisa ser o selecionado pelo loader e o processo precisa recarregar os assets; salvar no Studio nao troca um jogo ja aberto automaticamente.
 
-Durante a revisao, `BORROW_FIGHTERS_SPRITE_CANDIDATES=1` seleciona `assets/candidates/<personagem>/<personagem>-fighter.sprite.json` somente quando o conjunto tem os 20 clips exigidos e as texturas carregam. Candidatos parciais ficam no Viewer/Studio; luta e Combat Lab preservam o placeholder do personagem. O [pipeline de sprites](11-sprite-pipeline.md#revisao-de-candidatos-no-runtime) descreve os fallbacks e comandos.
+Durante a revisao, `BORROW_FIGHTERS_SPRITE_CANDIDATES=1` seleciona `assets/candidates/<personagem>/<personagem>-fighter.sprite.json` somente quando o conjunto tem os 20 clips exigidos e as texturas carregam. Candidatos parciais ficam no Sprite Studio; luta e Combat Lab preservam o placeholder do personagem. O [pipeline de sprites](11-sprite-pipeline.md#revisao-de-candidatos-no-runtime) descreve os fallbacks e comandos.
 
 O candidato controla apenas o desenho: `SpriteAtlasAsset.combat_manifest` mantem escala, pivôs, boxes e origem do projectile do manifesto baseline para a resolucao de combate e o overlay da luta. Alterar `scale`/`pivot` no candidato pode corrigir alinhamento visual, mas nao desloca a colisao. Use as boxes baseline como referencia para avaliar o novo desenho, registre desalinhamentos e trate qualquer mudanca de combate em uma revisao propria. `frames[].combat` nos placeholders ativos continua sendo dado de gameplay; nao o ajuste como se fosse apenas anotacao.
 
@@ -88,29 +88,16 @@ O corpo fisico de personagem usa outro manifesto:
 - schema: `borrow-fighters.character-body-metrics.v1`;
 - campos por personagem: `width`, `standing_height`, `crouch_height`.
 
-Esse manifesto alimenta a luta normal e o Sprite Combat Viewer. Ele deve ser usado quando a silhueta visual exige corpo diferente por gameplay, nao como primeira resposta para um sprite mal proporcionado. Hitboxes de golpes e origem de projectile continuam em dados de golpe ou `frames[].combat`; corpo fisico nao deve virar substituto para alcance de ataque.
+Esse manifesto alimenta a luta normal e o Sprite Studio. Ele deve ser usado quando a silhueta visual exige corpo diferente por gameplay, nao como primeira resposta para um sprite mal proporcionado. Hitboxes de golpes e origem de projectile continuam em dados de golpe ou `frames[].combat`; corpo fisico nao deve virar substituto para alcance de ataque.
 
 Fluxo recomendado:
 
-```bash
-cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/go-fighter.sprite.json --clip idle --character go --move light_punch
-cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip idle --character c --move light_punch
-cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip idle --character python --move light_punch
-```
-
-Para C++, confira frames dos dois atlas e valide escala e combate no jogo, Move Showcase ou Combat Lab; examinar apenas uma pagina nao cobre o personagem completo.
-
-No viewer:
-
-- `=` aumenta `scale` do manifesto;
-- `-` diminui `scale` do manifesto;
-- `Setas` movem o `pivot` do frame atual em 1 px;
-- `Shift+Setas` movem o `pivot` em 8 px;
-- `Ctrl+Setas` ajustam `width` e `standing_height` do corpo fisico;
-- `Ctrl+Shift+Setas` ajustam `crouch_height`;
-- `Ctrl+S` salva os manifestos alterados;
-- `F5` recarrega manifesto e atlas;
-- mouse sobre o sprite mostra coordenada local/atlas para preencher dados de box.
+1. Abra o manifesto no [Sprite Studio](18-sprite-studio.md#como-rodar).
+2. Compare idle e demais poses com a guia de escala; ajuste `scale` e `pivot`.
+3. Confira `width`, `standing_height`, `crouch_height` e as boxes somente
+   quando a revisao incluir mudancas de gameplay.
+4. Salve os artefatos e confira as duas orientacoes no jogo, Move Showcase ou
+   Combat Lab. Para C++, revise frames dos dois atlas.
 
 ## Correcoes Aplicadas No Go
 
@@ -122,7 +109,7 @@ A correcao histórica comprime `assets/placeholder/go-fighter-atlas.png` e `asse
 
 Rust e Duke/Java usam `scale = 1.3333` nos manifestos de luta porque esse e o antigo tamanho efetivo `1.0` migrado pela escala `4/3`. As intros de spawn de Rust/Duke usam `scale = 1.2267`, preservando o ajuste relativo anterior de `0.92`.
 
-O C entrou com corpo fisico humanoide padrao (`101,3 x 224 / crouch 128`) e `assets/placeholder/c-fighter.sprite.json` com `scale = 1.5467`, equivalente ao antigo `1.16` migrado por `4/3`. Esse valor e provisorio: se a silhueta parecer maior ou menor que Rust/Duke em idle, ajuste primeiro `scale` e `pivot` pelo Sprite Combat Viewer antes de mexer em hitbox ou gameplay.
+O C entrou com corpo fisico humanoide padrao (`101,3 x 224 / crouch 128`) e `assets/placeholder/c-fighter.sprite.json` com `scale = 1.5467`, equivalente ao antigo `1.16` migrado por `4/3`. Esse valor e provisorio: se a silhueta parecer maior ou menor que Rust/Duke em idle, ajuste primeiro `scale` e `pivot` pelo Sprite Studio antes de mexer em hitbox ou gameplay.
 
 Python entrou com corpo fisico humanoide padrao (`101,3 x 224 / crouch 128`) em `assets/tuning/character-body-metrics.json`. A cobra, cabelo e efeitos podem sair do corpo fisico, mas a parte vulneravel principal deve continuar coerente com a silhueta da personagem.
 

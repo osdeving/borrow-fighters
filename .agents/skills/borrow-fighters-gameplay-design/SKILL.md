@@ -7,8 +7,8 @@ description: Propose, scope, or review Borrow Fighters gameplay mechanics for th
 
 ## Workflow
 
-1. Read `docs/00-vision.md` for pillars.
-2. Read `docs/01-mini-gdd.md` and `docs/02-prototype-scope.md` for current scope.
+1. Read the relevant vision section only when the proposal changes it.
+2. Use the active chapter/combat doc; docs 00–02 include historical scope.
 3. Use `references/prototype-combat.md` when judging a mechanic or character idea.
 4. Prefer the smallest playable test over a complete system.
 5. Call out whether the idea belongs in Prototype 0.1, later, or parked.

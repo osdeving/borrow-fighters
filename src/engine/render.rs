@@ -19,14 +19,12 @@ mod onboarding;
 pub(crate) mod presentation;
 mod python_super;
 mod signature_effects;
-mod sprite_viewer;
 mod stage_life;
 
 pub use character_select::draw_character_select;
 pub use combat_lab::draw_combat_lab;
 pub use match_flow::draw_match_flow;
 pub use move_showcase::draw_move_showcase;
-pub use sprite_viewer::{draw_sprite_viewer, draw_sprite_viewer_error};
 
 use crate::characters::CharacterId;
 use crate::combat::fighter::{AttackPhase, Facing, Fighter, PlayerSlot};
@@ -73,8 +71,6 @@ const UI_MUTED: Color = Color::new(165, 172, 185, 255);
 const HEALTH_BACK: Color = Color::new(60, 62, 70, 255);
 const HEALTH_FILL: Color = Color::new(76, 217, 100, 255);
 const HEALTH_DANGER: Color = Color::new(255, 82, 82, 255);
-const PANEL: Color = Color::new(12, 14, 20, 218);
-const PANEL_BORDER: Color = Color::new(122, 132, 150, 255);
 const SELECTED_ROW: Color = Color::new(42, 49, 64, 230);
 const RECORDING: Color = Color::new(255, 55, 72, 255);
 const MENU_PANEL_STRONG: Color = Color::new(8, 14, 28, 238);
@@ -1090,12 +1086,6 @@ fn draw_training_menu(
         MenuLine {
             label: "MOVE SHOWCASE",
             description: "Veja golpes e defesa em combate real.",
-            value: None,
-            checked: None,
-        },
-        MenuLine {
-            label: "SPRITE VIEWER",
-            description: "Inspecione atlas, pivot, boxes e projetil.",
             value: None,
             checked: None,
         },

@@ -118,6 +118,8 @@ function App() {
     () => (manifest ? JSON.stringify(manifest, null, 2) : ""),
     [manifest],
   );
+  const activeImage = activeFrame?.image ?? manifest?.image;
+  const activeAtlas = activeImage ? document?.atlases[activeImage] : undefined;
   const validationIssues = useMemo(
     () => validateManifest(manifest),
     [manifest],
@@ -135,8 +137,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    drawFrame(document?.atlas_data_url, activeFrame, zoom, canvasRef.current);
-  }, [document?.atlas_data_url, activeFrame, zoom]);
+    return drawFrame(activeAtlas?.data_url, activeFrame, zoom, canvasRef.current);
+  }, [activeAtlas?.data_url, activeFrame, zoom]);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -322,7 +324,7 @@ function App() {
         schema: "borrow-fighters.sprite-studio-review.v1",
         created_by: "Borrow Fighters Sprite Studio",
         manifest_path: document.manifest_path,
-        atlas_path: document.atlas_path,
+        atlas_path: activeAtlas?.path,
         clip: selectedClip,
         frame: activeFrame.name,
         frame_data: activeFrame,
@@ -791,12 +793,12 @@ function App() {
   }
 
   async function exportReviewImage() {
-    if (!document?.atlas_data_url || !activeFrame) {
+    if (!activeAtlas || !activeFrame) {
       return;
     }
     try {
       const dataUrl = await makeReviewImage(
-        document.atlas_data_url,
+        activeAtlas.data_url,
         activeFrame,
         zoom,
         showBounds,
@@ -972,11 +974,11 @@ function App() {
             </div>
             <dl className="metadata">
               <dt>Atlas</dt>
-              <dd>{document?.atlas_path ?? "-"}</dd>
+              <dd>{activeAtlas?.path ?? "-"}</dd>
               <dt>Schema</dt>
               <dd>{manifest?.schema ?? "-"}</dd>
               <dt>Image</dt>
-              <dd>{manifest?.image ?? "-"}</dd>
+              <dd>{activeImage ?? "-"}</dd>
             </dl>
           </section>
 
@@ -1825,7 +1827,7 @@ function renderEditableRect(
   );
 }
 
-function renderRect(rect: SpriteRect | undefined, className: string) {
+function renderRect(rect: SpriteRect | null | undefined, className: string) {
   if (!rect) {
     return null;
   }
@@ -1920,6 +1922,7 @@ function drawFrame(
     );
   };
   image.src = atlasDataUrl;
+  return () => { image.onload = null; };
 }
 
 function makeReviewImage(
@@ -2007,7 +2010,7 @@ function drawReviewOverlay(
 
 function strokeRect(
   context: CanvasRenderingContext2D,
-  rect: SpriteRect | undefined,
+  rect: SpriteRect | null | undefined,
   strokeStyle: string,
   dash: number[],
 ) {

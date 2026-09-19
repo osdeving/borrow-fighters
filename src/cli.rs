@@ -6,16 +6,10 @@
 //! The CLI stays deliberately small until the prototype needs a real command
 //! framework.
 
-use std::{
-    fmt::{Display, Formatter},
-    path::PathBuf,
-};
+use std::fmt::{Display, Formatter};
 
 use crate::characters::CharacterId;
-use crate::scenes::{
-    combat_lab::{CombatLabMove, CombatLabOptions, CombatLabPose},
-    sprite_viewer::SpriteViewerOptions,
-};
+use crate::scenes::combat_lab::{CombatLabMove, CombatLabOptions, CombatLabPose};
 
 /// Startup mode selected from command-line arguments.
 #[derive(Clone, Debug, Default, PartialEq, Eq)]
@@ -24,7 +18,6 @@ pub enum LaunchMode {
     Game,
     CombatLab(CombatLabOptions),
     MoveShowcase(ShowcaseLaunchOptions),
-    SpriteViewer(SpriteViewerOptions),
 }
 
 /// Selects a contextual demonstration and optional fixed replay at startup.
@@ -75,10 +68,6 @@ impl LaunchOptions {
         let mut lab = CombatLabOptions::default();
         let mut match_options = MatchOptions::default();
         let mut start_fight = false;
-        let mut sprite_viewer_requested = false;
-        let mut sprite_viewer_manifest = None;
-        let mut sprite_viewer_clip = None;
-        let mut sprite_viewer_character_requested = false;
         let mut showcase_requested = false;
         let mut repeat_current = false;
         let mut sides_reversed = false;
@@ -92,9 +81,6 @@ impl LaunchOptions {
                     start_fight = true;
                 }
                 "--lab" => {
-                    if sprite_viewer_requested {
-                        return Err(CliError::new("cannot combine --lab with sprite viewer"));
-                    }
                     let Some(kind) = args.next() else {
                         return Err(CliError::new("--lab requires a value"));
                     };
@@ -109,7 +95,6 @@ impl LaunchOptions {
                     };
                     lab.character = CharacterId::from_cli(&value)
                         .ok_or_else(|| CliError::new(format!("unknown character '{value}'")))?;
-                    sprite_viewer_character_requested = true;
                     if matches!(mode, LaunchMode::CombatLab(_)) {
                         mode = LaunchMode::CombatLab(lab);
                     }
@@ -150,40 +135,6 @@ impl LaunchOptions {
                         mode = LaunchMode::CombatLab(lab);
                     }
                 }
-                "--tool" => {
-                    let Some(value) = args.next() else {
-                        return Err(CliError::new("--tool requires a value"));
-                    };
-                    if value != "sprite-viewer" {
-                        return Err(CliError::new(format!("unsupported tool '{value}'")));
-                    }
-                    if matches!(mode, LaunchMode::CombatLab(_)) {
-                        return Err(CliError::new(
-                            "cannot combine --tool sprite-viewer with --lab",
-                        ));
-                    }
-                    sprite_viewer_requested = true;
-                }
-                "--manifest" => {
-                    let Some(value) = args.next() else {
-                        return Err(CliError::new("--manifest requires a value"));
-                    };
-                    if matches!(mode, LaunchMode::CombatLab(_)) {
-                        return Err(CliError::new("cannot combine --manifest with --lab"));
-                    }
-                    sprite_viewer_requested = true;
-                    sprite_viewer_manifest = Some(PathBuf::from(value));
-                }
-                "--clip" => {
-                    let Some(value) = args.next() else {
-                        return Err(CliError::new("--clip requires a value"));
-                    };
-                    if matches!(mode, LaunchMode::CombatLab(_)) {
-                        return Err(CliError::new("cannot combine --clip with --lab"));
-                    }
-                    sprite_viewer_requested = true;
-                    sprite_viewer_clip = Some(value);
-                }
                 "--help" | "-h" => {
                     return Err(CliError::new(usage()));
                 }
@@ -192,9 +143,9 @@ impl LaunchOptions {
         }
 
         if showcase_requested {
-            if sprite_viewer_requested || matches!(mode, LaunchMode::CombatLab(_)) || start_fight {
+            if matches!(mode, LaunchMode::CombatLab(_)) || start_fight {
                 return Err(CliError::new(
-                    "cannot combine --showcase with --fight, --lab or sprite viewer",
+                    "cannot combine --showcase with --fight or --lab",
                 ));
             }
             if lab.pose != CombatLabPose::Move {
@@ -219,25 +170,6 @@ impl LaunchOptions {
             return Err(CliError::new(
                 "Go has no signature special in this roster update",
             ));
-        }
-
-        if sprite_viewer_requested {
-            let Some(manifest_path) = sprite_viewer_manifest else {
-                return Err(CliError::new(
-                    "--tool sprite-viewer requires --manifest <path>",
-                ));
-            };
-            let character = if sprite_viewer_character_requested {
-                Some(lab.character)
-            } else {
-                infer_sprite_viewer_character(&manifest_path)
-            };
-            mode = LaunchMode::SpriteViewer(SpriteViewerOptions {
-                manifest_path,
-                initial_clip: sprite_viewer_clip,
-                character,
-                selected_move: lab.selected_move,
-            });
         }
 
         Ok(Self {
@@ -269,24 +201,5 @@ impl Display for CliError {
 impl std::error::Error for CliError {}
 
 fn usage() -> &'static str {
-    "Usage:\n  cargo run --bin borrow-fighters\n  cargo run --bin borrow-fighters -- --showcase --character rust --move cinematic_special --repeat --reverse\n  cargo run --bin borrow-fighters -- --fight --p1 cpp --p2 python\n  cargo run --bin borrow-fighters -- --lab combat --character rust --move light_punch\n  cargo run --bin borrow-fighters -- --lab combat --character duke --pose block\n  cargo run --bin borrow-fighters -- --lab combat --character cpp --move kick\n  cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip idle --character python --move projectile"
-}
-
-fn infer_sprite_viewer_character(path: &std::path::Path) -> Option<CharacterId> {
-    let raw = path.to_string_lossy().to_ascii_lowercase();
-    if raw.contains("rust") {
-        Some(CharacterId::Rust)
-    } else if raw.contains("duke") || raw.contains("java") {
-        Some(CharacterId::Duke)
-    } else if raw.contains("go") || raw.contains("gopher") || raw.contains("golang") {
-        Some(CharacterId::Go)
-    } else if raw.contains("langc") || raw.contains("c-fighter") || raw.contains("/c-") {
-        Some(CharacterId::C)
-    } else if raw.contains("python") || raw.contains("/py-") {
-        Some(CharacterId::Python)
-    } else if raw.contains("cpp") || raw.contains("c++") || raw.contains("cplusplus") {
-        Some(CharacterId::Cpp)
-    } else {
-        None
-    }
+    "Usage:\n  cargo run --bin borrow-fighters\n  cargo run --bin borrow-fighters -- --showcase --character rust --move cinematic_special --repeat --reverse\n  cargo run --bin borrow-fighters -- --fight --p1 cpp --p2 python\n  cargo run --bin borrow-fighters -- --lab combat --character rust --move light_punch\n  cargo run --bin borrow-fighters -- --lab combat --character duke --pose block\n  cargo run --bin borrow-fighters -- --lab combat --character cpp --move kick"
 }

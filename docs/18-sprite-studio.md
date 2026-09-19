@@ -4,9 +4,10 @@
 
 Corte funcional implementado e validado em `tools/sprite-studio`.
 
-O Sprite Studio e a ferramenta desktop externa para revisar e editar artefatos de sprite do Borrow Fighters. Ele substituira o Sprite Combat Viewer embutido no jogo quando atingir paridade operacional.
-
-O corte atual cobre a paridade operacional necessaria para abrir, ajustar, validar e revisar manifestos de sprite fora do game loop. A remocao do viewer Raylib deve acontecer em um passo separado, para reduzir risco e manter o historico limpo.
+O Sprite Studio e a ferramenta desktop externa para revisar e editar artefatos
+de sprite do Borrow Fighters. Apos a paridade operacional documentada, o Sprite
+Combat Viewer Raylib foi removido do jogo, menu e CLI. Combat Lab e Actor Lab
+continuam disponiveis para seus respectivos fluxos de verificacao no jogo.
 
 ## Decisao
 
@@ -58,8 +59,8 @@ O primeiro corte ja permite:
 
 - abrir manifestos por caminho relativo ao repo ou file picker nativo;
 - usar presets de Rust, Duke, Go, C e Python;
-- inferir `cpp` para body metrics quando um manifest da C++ for aberto manualmente; paridade visual completa com `frames[].image` ainda fica como pendencia de multi-atlas;
-- carregar o atlas PNG referenciado pelo manifesto;
+- inferir `cpp` para body metrics quando um manifest da C++ for aberto manualmente;
+- carregar os atlas PNG referenciados pelo manifesto e por `frames[].image`, incluindo preview e export de review PNG/JSON;
 - navegar por clips e frames com lista lateral e timeline horizontal;
 - usar barra de menu desktop (`File`, `Edit`, `View`, `Help`) e toolbar de acoes frequentes;
 - esconder/mostrar browser lateral, inspector e timeline para abrir espaco no canvas;
@@ -124,42 +125,37 @@ Essas pastas ficam dentro de `target/` e nao devem ser versionadas.
 
 ## Regra De Isolamento
 
-O Sprite Studio replica tipos de manifesto em TypeScript e comandos de arquivo em Rust dentro de `tools/sprite-studio`. Ele nao importa structs, crates, modulos ou testes do jogo.
+Os structs em [`src/engine/sprites/manifest.rs`](../src/engine/sprites/manifest.rs)
+sao a fonte do formato de sprites. O gerador publica
+[`schemas/sprite.schema.json`](../schemas/sprite.schema.json) e
+[`sprite.generated.ts`](../tools/sprite-studio/src/sprite.generated.ts), sem
+importar o crate do jogo no Studio. A validacao semantica de nomes, clips e
+geometria permanece no Rust; o schema formaliza o formato dos artefatos.
 
-Se o schema `borrow-fighters.sprite.v1` mudar, atualize:
+Ao mudar o formato, atualize os structs e regenere os contratos:
 
-- [`docs/11-sprite-pipeline.md`](11-sprite-pipeline.md);
-- os testes do jogo que validam manifestos;
-- os tipos locais do Sprite Studio;
-- pelo menos um manifesto real usado como exemplo.
+```sh
+./dev schema build
+./dev schema check
+```
 
-## Criterio Para Remover O Viewer Do Jogo
+Revise tambem este pipeline, os testes de manifesto pertinentes e um manifesto
+real quando o formato exigir migracao. Backend de arquivos, UI e runtime
+continuam separados; o contrato gerado evita editar tipos duplicados a mao.
 
-O Sprite Combat Viewer dentro do jogo deve continuar disponivel enquanto o Sprite Studio nao fizer tudo que o fluxo atual precisa.
+## Remocao Do Viewer Do Jogo
 
-Remover o viewer Raylib somente quando o Sprite Studio conseguir:
+A paridade e o smoke test desktop ja estavam registrados antes da remocao.
+O Sprite Studio oferece edicao de escala, pivot, boxes, origem de projectile
+e metricas fisicas, guia de escala, review e salvamento dos manifestos.
 
-- abrir e salvar os manifestos atuais;
-- editar scale, pivot, origem de projectile, hitbox e hurtbox por frame;
-- editar as metricas fisicas `width`, `standing_height` e `crouch_height`;
-- comparar frames contra escala alvo de personagem;
-- suportar fluxo de review de artista sem depender do game loop;
-- gerar JSON que `cargo test --all-targets` aceita.
-
-Quando isso acontecer, remover:
-
-- `src/scenes/sprite_viewer.rs`;
-- `src/scenes/sprite_viewer/`;
-- `src/engine/render/sprite_viewer.rs`;
-- rotas `--tool sprite-viewer`;
-- entrada de menu `Training -> Sprite Viewer`;
-- testes dedicados ao viewer Raylib que deixarem de fazer sentido.
-
-Estado atual: a paridade de features e o smoke test desktop foram validados. O proximo passo e remover o viewer Raylib em uma mudanca propria.
+Foram removidos os modulos `src/scenes/sprite_viewer*` e
+`src/engine/render/sprite_viewer.rs`, a rota `--tool sprite-viewer`, a entrada
+`Training -> Sprite Viewer` e os testes exclusivos do viewer Raylib. O formato
+de sprites e os testes de assets usados pelo combate continuam no jogo.
 
 ## Proximos Incrementos
 
-- Remover o Sprite Combat Viewer Raylib do jogo, menu e CLI.
 - Adicionar comparacao lado a lado com um personagem de referencia real, se a guia de escala nao for suficiente.
 - Criar presets mais especificos por personagem/golpe quando a identidade de combate estabilizar.
 - Permitir exportar um pacote de review com PNG + JSON juntos.

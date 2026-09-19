@@ -199,8 +199,7 @@ borrow-fighters/
 │   │   │   ├── signature_effects.rs # Atlas de efeitos nas posições físicas
 │   │   │   ├── authored_supers.rs # Eclipse, mutação, terminais, tela azul e BIOS
 │   │   │   ├── authored_actors.rs # Clones, lixo, notebook e Footgun
-│   │   │   ├── python_super.rs  # Transformação/deglutição e poses de celebração
-│   │   │   └── sprite_viewer.rs # Desenho da ferramenta isolada de sprites
+│   │   │   └── python_super.rs  # Transformação/deglutição e poses de celebração
 │   │   └── sprites/
 │   │       ├── animation.rs    # Seleção de frame por duração
 │   │       ├── combat.rs       # Projeção de frames[].combat para coordenadas de mundo
@@ -226,10 +225,7 @@ borrow-fighters/
 │   │   ├── mod.rs              # Estados de tela
 │   │   ├── combat_lab.rs       # Laboratório isolado para timing e boxes
 │   │   ├── move_showcase.rs    # Cenários testáveis com dois atores no World
-│   │   ├── preferences.rs      # Cursor e navegação do menu principal/submenus
-│   │   ├── sprite_viewer.rs    # Viewer testável de atlas, pivot e frame bounds
-│   │   └── sprite_viewer/
-│   │       └── combat_edit.rs  # Helpers puros para editar boxes do viewer
+│   │   └── preferences.rs      # Cursor e navegação do menu principal/submenus
 │   ├── ui/
 │   │   ├── mod.rs              # API dos overlays de UI/debug
 │   │   ├── menu_layout.rs      # Retângulos compartilhados pelo desenho e cliques dos menus
@@ -387,7 +383,7 @@ Responsabilidades:
 
 Usar cenas simples para separar fluxo de tela sem criar framework pesado.
 
-Ferramentas temporárias e plugáveis também podem entrar em `scenes/*` quando tiverem estado testável sem Raylib. O corte atual é `src/scenes/sprite_viewer.rs`, acionado por `--tool sprite-viewer`, enquanto o desenho fica em `src/engine/render/sprite_viewer.rs`. Esse modo não deve carregar `World`, áudio ou loop de luta normal.
+O Sprite Viewer Raylib foi removido após a paridade operacional do Sprite Studio. A edição de sprites fica na ferramenta externa, conforme a [ADR 0008](adr/0008-external-sprite-studio-tooling.md); Combat Lab e Move Showcase mantêm a inspeção de gameplay dentro do jogo.
 
 O `MoveShowcase` é uma cena de treino com dois atores no `World` real. Ele controla apenas preparação, entradas e repetição; as regras de combate e o log determinam o resultado. A [ADR 0013](adr/0013-contextual-showcase-and-mvp-combat.md) registra a base do showcase. A evolução na [ADR 0014](adr/0014-throws-launches-and-signature-effects.md) adiciona captura pareada, reações aéreas e entidades físicas dos especiais. `World` mantém a autoridade sobre trajetória, contato e KO; o renderer apenas anima os atlas separados no mesmo ponto. O resultado do showcase soma todos os pulsos, incluindo as três folhas de Java.
 

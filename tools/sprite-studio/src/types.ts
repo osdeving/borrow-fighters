@@ -1,61 +1,24 @@
-export type SpritePoint = {
-  x: number;
-  y: number;
-};
+import type { SpritePivot as SpritePoint, SpriteCombatBox as SpriteRect } from "./sprite.generated";
 
-export type SpriteRect = {
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-  label?: string;
-};
+export type {
+  SpritePivot as SpritePoint,
+  SpriteCombatBox as SpriteRect,
+  SpriteFrameCombat as FrameCombat,
+  SpriteFrame,
+  SpriteClip,
+  SpriteManifest,
+} from "./sprite.generated";
 
-export type FrameCombat = {
-  hurtboxes?: SpriteRect[];
-  hitboxes?: SpriteRect[];
-  projectile_origin?: SpritePoint;
-};
-
-export type SpriteFrame = {
-  name: string;
-  clip: string;
-  image?: string;
-  duration_ms: number;
-  pivot: SpritePoint;
-  frame: SpriteRect;
-  trimmed_bounds?: SpriteRect;
-  source_crop?: SpriteRect;
-  combat?: FrameCombat;
-};
-
-export type SpriteClip = {
-  name: string;
-  frames: string[];
-  loop: boolean;
-};
-
-export type SpriteManifest = {
-  schema: string;
-  image: string;
-  source?: string;
-  cell: {
-    w: number;
-    h: number;
-  };
-  default_pivot: SpritePoint;
-  scale?: number | null;
-  notes?: string[];
-  frames: SpriteFrame[];
-  clips: SpriteClip[];
+export type SpriteAtlas = {
+  path: string;
+  data_url: string;
 };
 
 export type SpriteDocument = {
   repo_root: string;
   manifest_path: string;
-  atlas_path: string;
   manifest_json: string;
-  atlas_data_url: string;
+  atlases: Record<string, SpriteAtlas>;
 };
 
 export type SaveResult = {

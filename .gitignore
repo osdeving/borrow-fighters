@@ -117,6 +117,7 @@ service-account*.json
 ###############################################################################
 
 /target/
+/assets-generated/
 **/target/
 
 # Cargo.lock deve subir para aplicacoes e jogos. Repos de biblioteca podem
@@ -129,6 +130,7 @@ service-account*.json
 
 # rustfmt backups
 *.rs.bk
+*.blend[0-9]
 
 # Rust coverage/profiling
 tarpaulin-report.html

@@ -7,11 +7,13 @@ description: Propose, review, or refine Borrow Fighters art direction, moodboard
 
 ## Workflow
 
-1. Read `docs/07-art-direction.md`.
+1. Read only the relevant section of `docs/07-art-direction.md`, once.
 2. Use `references/art-review.md` for review criteria.
 3. For character proposals, check `docs/templates/character-concept.md`.
 4. For mood proposals, check `docs/templates/mood-proposal.md`.
-5. Prefer placeholder-testable visual direction over final art.
+5. Validate a short motion in the real scene before expanding the asset batch.
+   Reuse approved references and correct defective frames locally. Asset tuning
+   does not require an ADR, full chapter capture or Rust test matrix.
 
 ## Review Bias
 

@@ -37,10 +37,5 @@ When changing combat code, update `docs/12-technical-combat-guide.md` if command
 
 ## Verification
 
-When code exists:
-
-```text
-cargo fmt
-cargo clippy --all-targets --all-features
-cargo test --all-targets
-```
+Follow the fast/domain/full levels in AGENTS.md. At handoff use `./dev check
+adventure` or `fighting` once. Assets-only edits need focused visual validation.

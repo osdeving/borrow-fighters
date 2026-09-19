@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# Small entry point; the underlying tools remain usable directly.
+set -euo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")"
+dev_python=${BORROW_PYTHON:-}
+if [[ -z "$dev_python" ]]; then
+  if command -v python3.13 >/dev/null 2>&1; then dev_python=python3.13; else dev_python=python3; fi
+fi
+
+usage() {
+  cat <<'HELP'
+Usage: ./dev <command> [arguments]
+  story [args]                   Story/menu; --start augusta opens the 2D chapter
+  game [args]                    Fighting game
+  lab [args]                     Adventure actor lab
+  studio [args]                  Sprite Studio desktop (dependencies already installed)
+  check [fast [adventure|fighting]]  Compile lib/binaries, without running tests
+  check adventure|fighting       Format, Clippy and tests for one domain
+  check docs [files...]          Local Markdown links and YAML (all if omitted)
+  check full                    Full local CI checks; no packaging/publication
+  test adventure|fighting [args] Focused cargo test; accepts filter or --test name
+  art [args]                    Recipe asset builder (use art --help)
+  schema build|check             Generate/check schema and Studio types from Rust
+HELP
+}
+
+command=${1:---help}
+if (($#)); then shift; fi
+case "$command" in
+  story) exec cargo run --release --bin borrow-story -- "$@" ;;
+  game) exec cargo run --bin borrow-fighters -- "$@" ;;
+  lab) exec cargo run --release --no-default-features --features adventure --bin borrow-actor-lab -- "$@" ;;
+  studio) exec pnpm --dir tools/sprite-studio tauri dev "$@" ;;
+  art) exec "$dev_python" tools/art/art.py "$@" ;;
+  schema)
+    case "${1:-check}" in
+      build) exec "$dev_python" tools/generate_sprite_schema.py ;;
+      check) exec "$dev_python" tools/generate_sprite_schema.py --check ;;
+      *) usage >&2; exit 2 ;;
+    esac ;;
+  test)
+    domain=${1:-}
+    case "$domain" in adventure|fighting) shift ;; *) usage >&2; exit 2 ;; esac
+    exec cargo test --no-default-features --features "$domain" "$@" ;;
+  check)
+    level=${1:-fast}
+    if (($#)); then shift; fi
+    case "$level" in
+      fast)
+        case "${1:-}" in
+          '') exec cargo check --lib --bins ;;
+          adventure|fighting) exec cargo check --lib --bins --no-default-features --features "$1" ;;
+          *) usage >&2; exit 2 ;;
+        esac ;;
+      adventure|fighting)
+        cargo fmt --check
+        cargo clippy --all-targets --no-default-features --features "$level" -- -D warnings
+        cargo test --all-targets --no-default-features --features "$level" ;;
+      docs) exec ruby tools/check_docs.rb "$@" ;;
+      full)
+        cargo fmt --check
+        cargo clippy --all-targets --all-features -- -D warnings
+        cargo test --all-targets --all-features
+        for domain in fighting adventure; do
+          cargo test --all-targets --no-default-features --features "$domain"
+        done
+        cargo test --all-targets --no-default-features
+        "$dev_python" tools/check_domain_boundaries.py
+        "$dev_python" -m unittest discover -s tools -p 'test_check_domain_boundaries.py'
+        "$dev_python" -m unittest discover -s tools/review -p 'test_mix_adventure_review_audio.py'
+        "$dev_python" -m unittest discover -s tools/release -p 'test_package.py'
+        "$dev_python" -m unittest discover -s tools/art -p 'test_*.py'
+        "$dev_python" tools/generate_sprite_schema.py --check
+        "$dev_python" tools/art/art.py validate --all
+        ruby tools/check_docs.rb ;;
+      *) usage >&2; exit 2 ;;
+    esac ;;
+  -h|--help|help) usage ;;
+  *) usage >&2; exit 2 ;;
+esac

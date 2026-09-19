@@ -1,0 +1,6 @@
+{
+  "schema": "borrow-fighters.art-recipe.v1",
+  "production": "../../../assets/production/cpp/production.json",
+  "generated": "../../../assets-generated/characters/cpp",
+  "runtime": "../../../assets/candidates/cpp/cpp-fighter.sprite.json"
+}

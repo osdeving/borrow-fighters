@@ -76,7 +76,6 @@ pub enum PreferencesAction {
     CloseGuide,
     OpenCombatLab,
     OpenMoveShowcase,
-    OpenSpriteViewer,
     CycleLoreChapter(CycleDirection),
     CycleLoreCharacter(CycleDirection),
     CyclePlayerOne(CycleDirection),
@@ -133,8 +132,7 @@ impl PreferencesMenu {
     pub const VERSUS_BACK_ROW: usize = 4;
     pub const TRAINING_COMBAT_LAB_ROW: usize = 0;
     pub const TRAINING_MOVE_SHOWCASE_ROW: usize = 1;
-    pub const TRAINING_SPRITE_VIEWER_ROW: usize = 2;
-    pub const TRAINING_BACK_ROW: usize = 3;
+    pub const TRAINING_BACK_ROW: usize = 2;
     pub const LORE_CHAPTER_ROW: usize = 0;
     pub const LORE_CHARACTER_ROW: usize = 1;
     pub const LORE_BACK_ROW: usize = 2;
@@ -399,7 +397,6 @@ impl PreferencesMenu {
             MenuPage::Training => match self.selected {
                 Self::TRAINING_COMBAT_LAB_ROW => PreferencesAction::OpenCombatLab,
                 Self::TRAINING_MOVE_SHOWCASE_ROW => PreferencesAction::OpenMoveShowcase,
-                Self::TRAINING_SPRITE_VIEWER_ROW => PreferencesAction::OpenSpriteViewer,
                 Self::TRAINING_BACK_ROW => {
                     self.enter_page(MenuPage::Main);
                     PreferencesAction::Stay
@@ -486,7 +483,7 @@ impl PreferencesMenu {
         match self.page {
             MenuPage::Main => 7,
             MenuPage::Versus => 5,
-            MenuPage::Training => 4,
+            MenuPage::Training => 3,
             MenuPage::Lore => 3,
             MenuPage::Options => PREFERENCE_FLAGS.len() + Self::OPTIONS_FIRST_FLAG_ROW + 1,
             MenuPage::HowToPlay => 4,

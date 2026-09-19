@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Builds the Python fighter atlas candidate from an AI-generated source sheet."""
+"""Historical placeholder authoring; current production uses art.py recipes.
+
+Builds the Python fighter atlas candidate from an AI-generated source sheet."""
 
 from __future__ import annotations
 

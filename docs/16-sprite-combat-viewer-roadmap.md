@@ -2,9 +2,14 @@
 
 ## Status
 
-Implementado como ferramenta Raylib temporaria. O sucessor e o Sprite Studio externo em Tauri + React, documentado em [`docs/18-sprite-studio.md`](18-sprite-studio.md) e decidido em [`docs/adr/0008-external-sprite-studio-tooling.md`](adr/0008-external-sprite-studio-tooling.md).
+Historico encerrado: o viewer Raylib foi removido do jogo, menu e CLI apos
+a paridade operacional do [Sprite Studio externo](18-sprite-studio.md).
+Combat Lab e Move Showcase permanecem no jogo; a edicao de sprites fica no Studio.
+A [ADR 0008](adr/0008-external-sprite-studio-tooling.md) registra essa separacao.
 
-O Sprite Studio ja possui paridade operacional para abrir, editar, validar e exportar review de manifestos. O viewer Raylib deve ser removido em uma mudanca propria.
+As secoes abaixo preservam o roadmap e os atalhos da implementacao antiga.
+Comandos `--tool sprite-viewer` e caminhos do viewer sao referencias historicas,
+ja indisponiveis na versao atual.
 
 Issue de rastreio: [#15](https://github.com/osdeving/borrow-fighters/issues/15).
 
@@ -109,12 +114,12 @@ Atalhos:
 
 Codigo principal:
 
-- [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs): estado testavel, manifesto, frame atual, playback e drag.
-- [`src/scenes/sprite_viewer/combat_edit.rs`](../src/scenes/sprite_viewer/combat_edit.rs): helpers puros para criar, redimensionar e limpar boxes de combate do frame.
-- [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs): desenho Raylib da ferramenta e feedback de manifesto sujo.
+- `src/scenes/sprite_viewer.rs`: estado testavel, manifesto, frame atual, playback e drag.
+- `src/scenes/sprite_viewer/combat_edit.rs`: helpers puros para criar, redimensionar e limpar boxes de combate do frame.
+- `src/engine/render/sprite_viewer.rs`: desenho Raylib da ferramenta e feedback de manifesto sujo.
 - [`src/cli.rs`](../src/cli.rs): modo `--tool sprite-viewer`.
 - [`src/app.rs`](../src/app.rs): desvio para o loop isolado da ferramenta.
-- [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs): testes do estado sem abrir janela.
+- `tests/sprite_viewer.rs`: testes do estado sem abrir janela.
 
 ## Roadmap
 
@@ -179,8 +184,8 @@ Ja existe:
 - origem de projectile calibrada no primeiro frame do clip `special` de Rust, Duke, Go, C, Python e C++;
 - hitboxes iniciais do Rust `Borrow Jab`, heavy punch e kick, ainda equivalentes ao alcance greybox atual;
 - validacao em [`src/engine/sprites/manifest.rs`](../src/engine/sprites/manifest.rs);
-- projecao testavel em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs);
-- desenho no viewer em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs);
+- projecao testavel em `src/scenes/sprite_viewer.rs`;
+- desenho no viewer em `src/engine/render/sprite_viewer.rs`;
 - timeline inferior com coloracao aproximada por fase de golpe.
 - alternancia runtime de personagem/golpe com `C`/`Shift+C` e `[`/`]`;
 - preview simples de trajetoria de projectile com `T`.

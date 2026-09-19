@@ -4,6 +4,7 @@
 //! the game crate and only reads or writes artifact files on disk.
 
 use std::{
+    collections::BTreeMap,
     env, fs, io,
     path::{Path, PathBuf},
     process::Command,
@@ -18,9 +19,14 @@ use serde_json::Value;
 struct SpriteDocument {
     repo_root: String,
     manifest_path: String,
-    atlas_path: String,
     manifest_json: String,
-    atlas_data_url: String,
+    atlases: BTreeMap<String, SpriteAtlas>,
+}
+
+#[derive(Debug, Serialize)]
+struct SpriteAtlas {
+    path: String,
+    data_url: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -202,29 +208,45 @@ fn load_sprite_manifest(path: String) -> Result<SpriteDocument, StudioError> {
         .ok_or_else(|| StudioError {
             message: "Manifest is missing string field `image`".to_string(),
         })?;
-    let atlas_path = manifest_path
-        .parent()
-        .ok_or_else(|| StudioError {
-            message: "Manifest path has no parent directory".to_string(),
-        })?
-        .join(image_name)
-        .canonicalize()
-        .map_err(|error| StudioError {
-            message: format!("Could not resolve atlas `{image_name}`: {error}"),
-        })?;
     let root = repo_root()?;
-    if !atlas_path.starts_with(&root) {
-        return Err(StudioError {
-            message: format!("Atlas `{image_name}` is outside the repository"),
-        });
+    let parent = manifest_path.parent().ok_or_else(|| StudioError {
+        message: "Manifest path has no parent directory".to_string(),
+    })?;
+    let frame_images = manifest
+        .get("frames")
+        .and_then(Value::as_array)
+        .into_iter()
+        .flatten()
+        .filter_map(|frame| frame.get("image").and_then(Value::as_str));
+    let mut atlases = BTreeMap::new();
+    for image in std::iter::once(image_name).chain(frame_images) {
+        if atlases.contains_key(image) {
+            continue;
+        }
+        let atlas_path = parent
+            .join(image)
+            .canonicalize()
+            .map_err(|error| StudioError {
+                message: format!("Could not resolve atlas `{image}`: {error}"),
+            })?;
+        if !atlas_path.starts_with(&root) {
+            return Err(StudioError {
+                message: format!("Atlas `{image}` is outside the repository"),
+            });
+        }
+        atlases.insert(
+            image.to_string(),
+            SpriteAtlas {
+                path: display_repo_path(&atlas_path)?,
+                data_url: image_data_url(&atlas_path)?,
+            },
+        );
     }
-
     Ok(SpriteDocument {
         repo_root: root.to_string_lossy().to_string(),
         manifest_path: display_repo_path(&manifest_path)?,
-        atlas_path: display_repo_path(&atlas_path)?,
         manifest_json,
-        atlas_data_url: image_data_url(&atlas_path)?,
+        atlases,
     })
 }
 
@@ -335,6 +357,20 @@ pub fn run() {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn loads_cpp_frames_from_both_atlases() {
+        let document = load_sprite_manifest("assets/placeholder/cpp-fighter.sprite.json".into())
+            .expect("C++ multi-atlas manifest should open in Studio");
+        let manifest: Value = serde_json::from_str(&document.manifest_json).unwrap();
+        let default_image = manifest["image"].as_str().unwrap();
+        let alternate = &document.atlases["cpp-fighter-atlas-b.png"];
+
+        assert_eq!(document.atlases.len(), 2);
+        assert!(alternate.path.ends_with("cpp-fighter-atlas-b.png"));
+        assert!(alternate.data_url.starts_with("data:image/png;base64,"));
+        assert_ne!(alternate.data_url, document.atlases[default_image].data_url);
+    }
 
     #[test]
     fn write_path_allows_new_files_inside_repo() {

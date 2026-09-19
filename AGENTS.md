@@ -1,41 +1,47 @@
 # AGENTS.md
 
-## Repository Contract
+## Working contract
 
-- Work docs-first: read `README.md` and the relevant docs before changing behavior, process, art direction, or architecture.
-- Use `docs/08-code-architecture.md` before creating Rust code.
-- Use ADRs for structural decisions that affect more than one module, workflow, or contributor.
-- Keep Prototype 0.1 small: two placeholders, local combat, hitbox/hurtbox, health, win condition, restart.
-- Prefer small PRs with Conventional Commit titles.
+- Start from the task and Git state; preserve unrelated work.
+- Read the README index and the smallest relevant section once. Use
+  `$borrow-fighters-repo-atlas` as a router, not a request to load every doc.
+- Rust/Raylib: use `$borrow-fighters-rust-gamedev` and the relevant section of
+  doc 08. Use gameplay/art skills only for those decisions.
+- Implement when requested. Keep changes small; use Conventional Commit titles.
+- Keep adventure and fighting independent; share only neutral utilities.
+- New Rust modules start with a short `//!` responsibility. Keep `main.rs` thin,
+  gameplay testable and Raylib near the app/engine boundary.
+- Reuse existing code/tools. Avoid speculative frameworks, parallel editors,
+  compatibility layers or a workspace migration.
 
-## Rust/Raylib Rules
+## Context and documentation budget
 
-- Do not create code until the requested task explicitly asks for implementation.
-- When creating Rust files, start each module with `//!` explaining the file responsibility in one or two short paragraphs.
-- Keep `src/main.rs` thin; put testable gameplay logic under `src/lib.rs` modules.
-- Keep Raylib details near `engine/*` and the app boundary. Combat rules should stay as Raylib-independent as practical.
-- Avoid ECS, plugin systems, scripting, editor tooling, and asset pipelines until a real need appears.
+- Search filenames/symbols with `rg`; read focused sections. Do not reread
+  unchanged docs or paste large logs. Reuse findings from the conversation.
+- Routine fixes need code/assets and relevant verification. Update docs only
+  for changed behavior, commands or contracts; do not create a doc per task.
+- ADRs are for durable, costly-to-reverse decisions. Reversible art experiments
+  and local refactors do not require ADRs, issues or backlog entries.
+- Sustained work uses ONE short journal in `docs/worklogs/`: branch/base,
+  checkpoint, next steps and commands/results. Replace stale status rather
+  than duplicating conversation/logs. Commit coherent stages when authorized.
+- Delegate bounded independent tasks with file ownership and minimal context.
+  Root consolidates checks and commits; do not duplicate agents' inspections.
 
-## AI Workflow
+## Verification levels
 
-- Use `$borrow-fighters-repo-atlas` before broad repo navigation.
-- Use `$borrow-fighters-rust-gamedev` for Rust/Raylib architecture or implementation.
-- Use `$borrow-fighters-gameplay-design` for combat mechanics and prototype scope.
-- Use `$borrow-fighters-art-direction` for moods, characters, sprites, placeholders, and visual feedback.
-- Read only the references needed for the task; do not load every doc by default.
+- Iteration: `./dev check` or `./dev check fast adventure|fighting`, plus only
+  directly affected tests. Assets-only edits need asset validation and a short
+  visual check, not an automatic Rust rebuild or test matrix.
+- Rust handoff: fmt, Clippy and tests of the affected domain via
+  `./dev check adventure` or `./dev check fighting`, once after integration.
+  Cross-domain changes also need a combined build.
+- Full matrix, repository-wide docs/YAML, packaging and broad captures belong
+  to CI/merge/release (`./dev check full`), or changes that actually affect them.
+- Add regression tests for real behavioral risks, not wording, file presence,
+  constants or reversible visual tuning. Keep useful tests; remove tests of
+  removed features with their code.
+- After checks pass, do not repeat/broaden them without a new change or concern.
+  Report concrete results/limitations. A build does not approve an animation.
 
-## Experiments and resumable work
-
-- Keep adventure-specific code and assets separate from fighting-specific code;
-  share only neutral core utilities. See `docs/adr/0021-isolated-adventure-experiment.md`.
-- For sustained goals, keep a task journal under `docs/worklogs/` with branch,
-  completed work, pending steps, commands/results and recovery instructions.
-- Update the journal at meaningful checkpoints and commit coherent stages
-  frequently when authorized. After interruption, inspect status/log and the
-  journal before repeating work; preserve uncommitted changes.
-
-## Verification
-
-- For docs-only changes, validate Markdown links and GitHub YAML when relevant.
-- For future Rust changes, run `cargo fmt`, `cargo clippy`, and `cargo test` when the project has a `Cargo.toml`.
-- If verification cannot run, state why in the final response.
+Commands and asset ownership: [workflow](docs/09-ai-collaboration.md).

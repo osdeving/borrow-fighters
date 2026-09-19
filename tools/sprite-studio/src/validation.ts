@@ -156,7 +156,7 @@ function validateBox(
       message: `${label} must stay inside the frame.`,
     });
   }
-  if (box.label !== undefined && box.label.trim() === "") {
+  if (box.label != null && box.label.trim() === "") {
     issues.push({
       severity: "error",
       frameName: frame.name,

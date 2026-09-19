@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Builds the high-resolution Python fighter atlas from a raster pose sheet.
+"""Historical placeholder authoring; current production uses art.py recipes.
+
+Builds the high-resolution Python fighter atlas from a raster pose sheet.
 
 The source sheet is a prototype-only generated bitmap with one full-body pose per
 cell. This script removes the chroma key, repacks those painted poses into the

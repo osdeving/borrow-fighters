@@ -2,7 +2,7 @@
 name = "borrow-fighters"
 version = "0.1.0-prototype.5"
 edition = "2024"
-description = "Greybox prototype for a docs-first 2D fighting game with programming humor."
+description = "2D action adventure and local fighting game with programming-inspired characters."
 license = "MIT OR Apache-2.0"
 publish = false
 default-run = "borrow-story"
@@ -192,11 +192,6 @@ required-features = ["fighting"]
 [[test]]
 name = "sprite_selection"
 path = "tests/sprite_selection.rs"
-required-features = ["fighting"]
-
-[[test]]
-name = "sprite_viewer"
-path = "tests/sprite_viewer.rs"
 required-features = ["fighting"]
 
 [[test]]

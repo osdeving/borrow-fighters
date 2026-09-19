@@ -46,7 +46,6 @@ aguarda uma nova tecla, clique ou botão. Código e verificação estão em
 | Combat Lab render | Orquestra Raylib da cena isolada, sprites, grid e projéteis | [`src/engine/render/combat_lab.rs`](../src/engine/render/combat_lab.rs) | Teste manual via Combat Lab |
 | Move Showcase | Demonstrações contextuais de todos os golpes e defesas contra um adversário no World real | [`src/scenes/move_showcase.rs`](../src/scenes/move_showcase.rs), [`src/engine/render/move_showcase.rs`](../src/engine/render/move_showcase.rs) | [`tests/move_showcase.rs`](../tests/move_showcase.rs), teste manual via `Training -> Move Showcase` |
 | Combat debug UI | Boxes, pivot, dummy, overlay e texto de timing do laboratório | [`src/ui/combat_debug.rs`](../src/ui/combat_debug.rs) | Teste manual via Combat Lab |
-| Sprite Combat Viewer | Ferramenta isolada para carregar atlas em runtime, ver grid, pivot, bounds e preparar boxes data-driven | [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), [`src/scenes/sprite_viewer/combat_edit.rs`](../src/scenes/sprite_viewer/combat_edit.rs), [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs) | [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs), teste manual via `--tool sprite-viewer` |
 | Sprite Studio | App externo Tauri 1.8 + React para editar manifestos sem depender de Raylib | [`tools/sprite-studio`](../tools/sprite-studio) | `pnpm build`; `pnpm tauri build --debug`; desktop requer pre-requisitos Tauri |
 | Input | Teclado/gamepad para luta e ferramentas; mouse, teclado e gamepad para menus | [`src/engine/input.rs`](../src/engine/input.rs), [`src/engine/gamepad.rs`](../src/engine/gamepad.rs) | [`tests/cli.rs`](../tests/cli.rs), [`tests/feature_flags.rs`](../tests/feature_flags.rs) |
 | Sprite runtime | Manifest JSON, seleção de clips, relógios visuais e projeção de metadata baseline | [`src/engine/sprites/`](../src/engine/sprites), [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) | [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs), [`tests/sprite_selection.rs`](../tests/sprite_selection.rs), [`tests/sprite_playback.rs`](../tests/sprite_playback.rs) |
@@ -62,9 +61,8 @@ O loop principal em [`src/app.rs`](../src/app.rs) usa `AppScene` de [`src/scenes
 - `Fight`: luta normal com fixed timestep, IA, audio events e renderer de arena;
 - `CombatLab`: cena isolada para testar golpes e frame data;
 - `MoveShowcase`: cena de treino com dois atores, situações contextuais, golpes e defesas reais;
-- `SpriteViewer`: ferramenta de sprite em loop proprio, fora do fluxo normal de luta.
 
-Transicoes novas devem passar por esse enum em vez de espalhar flags soltas no loop. Se a nova tela for ferramenta temporaria, prefira loop isolado como o Sprite Viewer; se fizer parte do jogo, trate como cena normal. `Esc` volta em menus e ferramentas e abre pausa durante a luta; o bootstrap em [`src/main.rs`](../src/main.rs) desativa a tecla padrão de fechamento do Raylib com `set_exit_key(None)`.
+Transicoes novas devem passar por esse enum em vez de espalhar flags soltas no loop. A edicao de sprites fica no Sprite Studio externo; telas que fazem parte do jogo usam cenas normais. `Esc` volta em menus e ferramentas e abre pausa durante a luta; o bootstrap em [`src/main.rs`](../src/main.rs) desativa a tecla padrão de fechamento do Raylib com `set_exit_key(None)`.
 
 ### Mouse e Fechamento da Janela
 
@@ -128,11 +126,11 @@ Hitboxes:
 
 Essa técnica foi escolhida porque é legível, testável sem Raylib e suficiente para o Prototype 0.1. Quando o frame do manifesto baseline declara `frames[].combat`, o runtime projeta esses dados para coordenadas de mundo em [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs). A resolução da luta usa `frames[].combat.hitboxes[]` e `frames[].combat.hurtboxes[]` quando essas listas existem; rasteiras usam o `MoveSpec` revisado e especiais de assinatura usam entidades físicas `SignatureEffect`, e ações baixas usam as hurtboxes físicas para preservar sua postura (ver [ADR 0013](adr/0013-contextual-showcase-and-mvp-combat.md)); se estiverem ausentes ou vazias, volta para `MoveSpec.hitbox` e `Fighter::hurtboxes()`. A decisão inicial está em [`ADR 0007`](adr/0007-sprite-frame-combat-runtime.md); a separação entre arte candidata e metadata baseline está em [`ADR 0010`](adr/0010-reviewed-action-sprite-production.md).
 
-Rust, Duke, Go, C, Python e C++ ja possuem `combat.projectile_origin` no primeiro frame do clip `special`. Esse ponto e projetado por [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) e usado por [`src/game/world.rs`](../src/game/world.rs) ao criar o projectile, para evitar que o poder nasca desalinhado da mao. Os manifests baseline de luta tambem declaram clips runtime para os nove golpes proximos (`punch_light`, `punch_heavy`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`) e para `hit` durante hitstun. Rust `Borrow Jab`, heavy punch e kick ja possuem hitboxes de frame; os valores ainda reproduzem o alcance do `MoveSpec` para migrar com baixo risco. Python e C++ raster high-res ainda usam fallback de `MoveSpec` para hitboxes dos golpes proximos ate uma calibracao propria no Sprite Studio. Hitboxes/hurtboxes restantes devem ser calibradas no Sprite Studio, com o Sprite Combat Viewer Raylib apenas como ferramenta temporaria ate a limpeza dedicada.
+Rust, Duke, Go, C, Python e C++ ja possuem `combat.projectile_origin` no primeiro frame do clip `special`. Esse ponto e projetado por [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs) e usado por [`src/game/world.rs`](../src/game/world.rs) ao criar o projectile, para evitar que o poder nasca desalinhado da mao. Os manifests baseline de luta tambem declaram clips runtime para os nove golpes proximos (`punch_light`, `punch_heavy`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`) e para `hit` durante hitstun. Rust `Borrow Jab`, heavy punch e kick ja possuem hitboxes de frame; os valores ainda reproduzem o alcance do `MoveSpec` para migrar com baixo risco. Python e C++ raster high-res ainda usam fallback de `MoveSpec` para hitboxes dos golpes proximos ate uma calibracao propria no Sprite Studio. Hitboxes/hurtboxes restantes devem ser calibradas no Sprite Studio.
 
 ### Escala Visual e Pivot
 
-A configuração padrão procura `assets/candidates/<key>/<key>-fighter.sprite.json`, com `key` igual a `rust`, `duke`, `go`, `c`, `python` ou `cpp`. Apenas conjuntos válidos e completos, com texturas carregáveis e 25 clips nos cinco personagens do MVP (20 em Go), substituem o desenho em luta, Move Showcase e Combat Lab. `BORROW_FIGHTERS_SPRITE_CANDIDATES=0` permite comparar o baseline preservado; `1` seleciona explicitamente a arte revisada. Ausencia/falha/incompletude mantem o baseline do personagem; a lista de clips faltantes aparece no terminal. Conjuntos parciais sao revisados diretamente no Viewer/Studio. A lista e os comandos estao no [pipeline de sprites](11-sprite-pipeline.md#revisao-de-candidatos-no-runtime).
+A configuração padrão procura `assets/candidates/<key>/<key>-fighter.sprite.json`, com `key` igual a `rust`, `duke`, `go`, `c`, `python` ou `cpp`. Apenas conjuntos válidos e completos, com texturas carregáveis e 25 clips nos cinco personagens do MVP (20 em Go), substituem o desenho em luta, Move Showcase e Combat Lab. `BORROW_FIGHTERS_SPRITE_CANDIDATES=0` permite comparar o baseline preservado; `1` seleciona explicitamente a arte revisada. Ausencia/falha/incompletude mantem o baseline do personagem; a lista de clips faltantes aparece no terminal. Conjuntos parciais sao revisados diretamente no Sprite Studio. A lista e os comandos estao no [pipeline de sprites](11-sprite-pipeline.md#revisao-de-candidatos-no-runtime).
 
 O loader mantem `SpriteAtlasAsset.manifest` para desenho e `combat_manifest` para as boxes e a origem de projectile existentes. `App::sync_world_sprite_combat` usa o segundo, assim como o overlay da luta. Nenhum campo experimental de combate no candidato e promovido por ligar a variavel de ambiente.
 
@@ -159,23 +157,16 @@ O padrao de tamanho em tela fica em [`docs/17-visual-scale-and-stage-metrics.md`
 - personagens nao-humanos, como Go, devem mirar a mesma faixa principal quando a diferenca de tamanho nao for parte do gameplay;
 - a arena atual tem `1194,7 px` jogaveis, cerca de `11,8` larguras de corpo padrao.
 
-Use o Sprite Studio para edicao visual confortavel e validacao de runtime. O Sprite Combat Viewer embutido continua disponivel apenas ate a limpeza dedicada:
+Use o [Sprite Studio](18-sprite-studio.md) para editar escala, pivot e boxes:
 
-```bash
-cd tools/sprite-studio && pnpm tauri dev
-cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/go-fighter.sprite.json --clip idle --character go --move light_punch
-cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip idle --character c --move light_punch
+```sh
+./dev studio
 ```
 
-Atalhos de calibracao:
-
-- `=` / `-`: ajusta `scale` do manifesto;
-- `Setas`: move `pivot` do frame atual em 1 px;
-- `Shift+Setas`: move `pivot` em 8 px;
-- `Ctrl+Setas`: ajusta `width` e `standing_height` do corpo fisico;
-- `Ctrl+Shift+Setas`: ajusta `crouch_height`;
-- `Ctrl+S`: salva manifestos de tuning alterados;
-- `F5`: recarrega manifesto e atlas.
+Abra o manifesto desejado e ajuste os campos no inspector. Confira os pontos
+de apoio e a guia de escala antes de alterar metricas fisicas. Salve os artefatos
+e valide o resultado no Combat Lab ou Move Showcase; o Studio nao altera uma
+partida ja aberta.
 
 ### Frame Data
 
@@ -398,7 +389,7 @@ Hoje `Rust` usa `RustBorrowJab`, `RustLifetimeAntiAir` e `RustOwnershipThrow` pa
 
 Os especiais de projectile ficam em [`src/combat/projectile.rs`](../src/combat/projectile.rs) como `RUST_PROJECTILE_SPEC`, `DUKE_PROJECTILE_SPEC`, `GO_PROJECTILE_SPEC`, `C_PROJECTILE_SPEC` e `PYTHON_PROJECTILE_SPEC`. `Fighter::projectile_spec` alimenta `Projectile::from_fighter`, o Combat Lab e o overlay técnico, então alterar um spec muda luta real e lab no mesmo caminho.
 
-`World::new_with_characters` e `World::new_greybox_with_intro_for_characters` aceitam qualquer `CharacterId`; a luta padrão ainda instancia Rust x Duke. A cena de seleção pública oferece Rust, Duke/Java, C, Python e C++, confirma P1/P2 separadamente e permite escolher modo e arena. Go/Gopher continua testável por `--p1`/`--p2`, Combat Lab e Sprite Viewer, mas fica fora do menu público por enquanto.
+`World::new_with_characters` e `World::new_greybox_with_intro_for_characters` aceitam qualquer `CharacterId`; a luta padrão ainda instancia Rust x Duke. A cena de seleção pública oferece Rust, Duke/Java, C, Python e C++, confirma P1/P2 separadamente e permite escolher modo e arena. Go/Gopher continua testável por `--p1`/`--p2`, Combat Lab, mas fica fora do menu público por enquanto.
 
 A intenção de gameplay por golpe vive em [`docs/15-character-combat-matrix.md`](15-character-combat-matrix.md). Atualize essa matriz quando alterar frame data, alcance, dano, guard rule, projectile ou loadout de personagem.
 
@@ -452,9 +443,6 @@ Valores aceitos:
 | `--character` | `rust`, `rustacean`, `duke`, `java`, `go`, `golang`, `gopher`, `c`, `langc`, `c-lang`, `clang`, `python`, `py`, `python.py`, `cpp`, `c++`, `cplusplus`, `c-plus-plus`, `cxx`, `cpp.cpp` |
 | `--move` | `light_punch`, `heavy_punch`, `kick`, `sweep`, `overhead`, `anti_air`, `air_punch`, `air_kick`, `throw`, `projectile` |
 | `--pose` | `move`, `idle`, `crouch`, `jump`, `block`, `hit`, `victory`, `spawn`, `defeat`, `crouch_block` |
-| `--tool` | `sprite-viewer` |
-| `--manifest` | caminho para um JSON `borrow-fighters.sprite.v1` |
-| `--clip` | nome de clip presente no manifesto |
 
 `--pose move` é o modo padrão e reproduz o golpe selecionado por `--move`. As outras poses fixam o estado físico e reproduzem o clip para inspecionar desenho, pivot e hurtbox sem depender de uma luta real. Pause, frame step e reinício também funcionam nessas poses.
 
@@ -509,24 +497,20 @@ Poses atuais:
 - `defeat`: força `defeat`, com fallback para `hit`/`idle`;
 - `crouch_block`: aplica defesa e agachamento e força o clip correspondente, com fallback para `block`/`idle`.
 
-### Sprite Combat Viewer
+### Sprite Studio
 
-O Sprite Combat Viewer Raylib e ferramenta temporaria. A direcao aprovada em [`docs/adr/0008-external-sprite-studio-tooling.md`](adr/0008-external-sprite-studio-tooling.md) e mover a edicao rica para [`tools/sprite-studio`](../tools/sprite-studio). A paridade operacional ja existe; o viewer embutido deve ser removido em uma mudanca propria.
+O [Sprite Studio](18-sprite-studio.md) e a ferramenta externa para editar e
+revisar manifestos. O viewer Raylib foi removido do jogo, menu e CLI apos a
+paridade operacional, conforme a [ADR 0008](adr/0008-external-sprite-studio-tooling.md).
+O [roadmap antigo](16-sprite-combat-viewer-roadmap.md) permanece como historico.
 
-Abrir a ferramenta isolada de sprites:
+Abra com `./dev studio`, escolha o manifesto e navegue pelos clips e frames.
+O inspector edita escala, pivot, hurtboxes, hitboxes e origem de projectile;
+o canvas oferece alcas e snap. Exportacoes PNG/JSON registram o frame e o atlas
+ativo, inclusive em manifestos com `frames[].image`.
 
-```bash
-cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/rust-fighter.sprite.json --clip idle
-cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/duke-fighter.sprite.json --clip special --character duke --move projectile
-cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/c-fighter.sprite.json --clip special --character c --move projectile
-cargo run --bin borrow-fighters -- --tool sprite-viewer --manifest assets/placeholder/python-fighter.sprite.json --clip punch_light --character python --move light_punch
-```
-
-O viewer roda fora do loop normal de luta. Pela CLI, [`src/app.rs`](../src/app.rs) desvia para esse modo antes de carregar `GameAssets` e áudio. Pelo menu, `Training -> Sprite Viewer` abre o mesmo loop com o atlas de C em `special/projectile` como ponto de partida, e `Esc` volta ao menu. O estado testável fica em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), e o desenho Raylib fica em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs).
-
-`--character` e `--move` ativam a camada runtime de combate no viewer. Sem `--character`, o viewer tenta inferir Rust, Duke, Go, C ou Python pelo nome do manifesto. Essa camada usa `CharacterSpec`, `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, então ela reflete os dados de combate atuais.
-
-O viewer tambem entende metadata opcional `frames[].combat` no manifesto. Essa metadata e projetada para tela em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs), desenhada em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs), e validada em [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs). As coordenadas ficam em pixels locais do frame do atlas:
+A metadata opcional `frames[].combat` usa pixels locais do frame do atlas.
+O contrato e validado em [`tests/sprite_manifest.rs`](../tests/sprite_manifest.rs):
 
 ```json
 "combat": {
@@ -538,52 +522,11 @@ O viewer tambem entende metadata opcional `frames[].combat` no manifesto. Essa m
 
 `frames[].combat` do manifesto baseline ja alimenta a luta real de forma incremental. Quando um frame possui `hitboxes`, elas substituem a hitbox ofensiva de `MoveSpec`, exceto nas rasteiras e nos especiais de assinatura. Hurtboxes de metadata substituem as compostas de `Fighter`, exceto nas ações baixas revisadas. A geometria autoritativa dessas exceções é descrita nas ADRs 0013 e 0014. Quando o clip `special` possui `projectile_origin`, o projectile nasce desse ponto projetado para o mundo. Campos ausentes mantem fallback para `MoveSpec`, `Fighter::hurtboxes` e `ProjectileSpec`, entao personagens sem metadata continuam jogaveis. Metadata editada em um arquivo candidato continua apenas nesse arquivo; ativar o desenho candidato nao substitui `combat_manifest`.
 
-Teclas:
 
-| Ação | Tecla |
-|---|---|
-| Inspecionar coordenada local/atlas | Mouse sobre o sprite |
-| Arrastar personagem | Mouse esquerdo |
-| Próximo clip | `Tab` |
-| Clip anterior | `Shift+Tab` |
-| Sincronizar clip com golpe | `Enter` |
-| Próximo personagem de combate | `C` |
-| Personagem de combate anterior | `Shift+C` |
-| Próximo golpe | `]` |
-| Golpe anterior | `[` |
-| Próximo frame | `.` |
-| Frame anterior | `,` |
-| Pausar/continuar | `Espaço` |
-| Zoom | Mouse wheel |
-| Resetar zoom | `0` |
-| Aumentar `scale` do manifesto | `=` |
-| Diminuir `scale` do manifesto | `-` |
-| Mover `pivot` do frame atual | `Setas` ou `Shift+Setas` |
-| Ajustar largura/altura do corpo físico | `Ctrl+Setas` |
-| Ajustar altura abaixada do corpo físico | `Ctrl+Shift+Setas` |
-| Gerar rascunho de `frames[].combat` pelo overlay runtime | `N` |
-| Adicionar hurtbox no frame atual | `H` |
-| Adicionar hitbox no frame atual | `J` |
-| Remover box/origem sob o mouse ou último item | `Delete` |
-| Mover hurtbox/hitbox/origem de projectile do frame | Mouse esquerdo nas boxes/alças |
-| Redimensionar hurtbox/hitbox do frame | Mouse esquerdo nos cantos da box |
-| Salvar manifestos de tuning | `Ctrl+S` |
-| Mostrar/esconder dummy | `O` |
-| Mostrar/esconder boxes de combate | `M` |
-| Mostrar/esconder trajetória de projectile | `T` |
-| Recarregar manifesto e atlas | `F5` |
-| Salvar screenshot | `F12` |
-| Alternar grade | `G` |
-| Alternar pivot | `P` |
-| Alternar bounds | `B` |
-| Resetar posição | `R` |
-| Voltar ao menu quando aberto por `Training` | `Esc` |
-
-O corte atual mostra atlas, pivot, frame bounds, dummy espelhado, distância entre anchors, coordenada local/atlas do cursor, `trimmed_bounds`, `source_crop`, hurtbox atual do corpo, hitbox do golpe selecionado, origem/caixa de projectile, trajetória prevista de projectile, metadata `frames[].combat` e timeline inferior com fase aproximada de startup/active/recovery quando `--character` e `--move` estao presentes. A coordenada do cursor é a referência prática para preencher `frames[].combat`: `local x,y` entra no JSON do frame; `atlas x,y` serve para conferir a posição no PNG.
-
-O viewer já possui edição visual para essa metadata: `N` substitui a metadata do frame atual por um rascunho vindo do overlay runtime, o mouse move boxes/origem, cantos das boxes redimensionam hurtboxes/hitboxes, e `Ctrl+S` persiste o manifesto. Essa edição fica em [`src/scenes/sprite_viewer.rs`](../src/scenes/sprite_viewer.rs) e é coberta por [`tests/sprite_viewer.rs`](../tests/sprite_viewer.rs). A projeção runtime fica em [`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs), a resolução de hits fica em [`src/game/world.rs`](../src/game/world.rs), e a renderização das alças fica em [`src/engine/render/sprite_viewer.rs`](../src/engine/render/sprite_viewer.rs).
-
-O personagem e o golpe podem ser trocados em runtime com `C`/`Shift+C` e `[`/`]`, sem reabrir o comando. `Enter` tenta selecionar o clip mais provável para o golpe atual. `F5` recarrega manifesto e atlas para iteração com ferramenta externa aberta; `F12` salva screenshot em `captures/sprite-viewer-capture.png` dentro dos dados do usuário para anexar em PR/issue. A evolução restante está rastreada em [`docs/16-sprite-combat-viewer-roadmap.md`](16-sprite-combat-viewer-roadmap.md) e na issue [#15](https://github.com/osdeving/borrow-fighters/issues/15).
+A projecao para o mundo fica em
+[`src/engine/sprites/combat.rs`](../src/engine/sprites/combat.rs), e a resolucao
+de hits em [`src/game/world.rs`](../src/game/world.rs). Confira as alteracoes
+no Combat Lab ou Move Showcase para avaliar contato, alcance e timing no jogo.
 
 ## Captura de Gameplay
 
@@ -601,7 +544,7 @@ Atalhos globais:
 
 O código fica em [`src/engine/video_capture.rs`](../src/engine/video_capture.rs). A técnica usada é manter a captura fora do gameplay: `App` só detecta os atalhos, desenha a cena normalmente e, quando há gravação ativa, envia o framebuffer renderizado pelo Raylib para `ffmpeg` como `rawvideo`. O áudio vem do PulseAudio e o MP4 é finalizado ao fechar o pipe de vídeo.
 
-O overlay global de REC fica em [`src/engine/render.rs`](../src/engine/render.rs), enquanto os atalhos vêm de [`src/engine/input.rs`](../src/engine/input.rs). No Sprite Combat Viewer, os mesmos atalhos são lidos no loop isolado de [`src/app.rs`](../src/app.rs) para permitir gravar revisão de atlas, pivot, hitbox, hurtbox e projectile origin.
+O overlay global de REC fica em [`src/engine/render.rs`](../src/engine/render.rs), enquanto os atalhos vêm de [`src/engine/input.rs`](../src/engine/input.rs). Para revisao de sprites fora do jogo, o Studio exporta PNG e JSON pelo proprio menu.
 
 No WSLg, `x11grab` pode produzir vídeo preto em janelas aceleradas. Por isso a captura usa frames internos do Raylib em vez de capturar a janela pelo desktop.
 
