@@ -16,7 +16,7 @@
   builder 7 testes e comparação de 176 recortes passaram. Schema, fronteiras,
   skills e links/YAML passaram. Log: `/tmp/borrow-workflow-fighting.log`.
 
-## Augusta implementada — revisão integrada em andamento
+## Augusta concluída — `ff23ee1`
 
 - 82 quadros inteiros da multidão (5 caminhadas e 8 corridas), mais 18 quadros
   de Julia/cafetão/seguranças. Originais em `assets-src/adventure/augusta/`.
@@ -35,11 +35,15 @@
   `assets-generated/reviews/{julia,broker,security}-run/` revisados.
 - Docs 38/39 atualizados; validação dos dois documentos passou.
 
-## Retomada / fechamento
+## Revisão final / retomada
 
-Captura única da cena em andamento em
-`assets-generated/reviews/augusta-scene-final/`. Conferir telemetria e imagens
-finais antes de marcar o goal completo; não repetir a matriz já aprovada.
-Comando: `./dev story --start augusta --hidden --review assets-generated/reviews/augusta-scene-final --frames 24000`.
-Para jogar: `./dev story --start augusta`.
-Preservar alterações; consultar status/log e este checkpoint após interrupção.
+- Captura nativa única terminou sem erro: 8.238 amostras, estado Complete no
+  frame 8.058, checkpoint complete no final 8.237. Vídeo 1280×720/30 fps,
+  137,3 segundos e 41 snapshots; corrida dos três NPCs registrada.
+- Evidências locais em `assets-generated/reviews/augusta-scene-final/` e na
+  galeria acima. Fontes e runtime versionados; capturas/intermediários ficam
+  locais para evitar adicionar relatórios e vídeos a cada ajuste de arte.
+- Comando usado: `./dev story --start augusta --hidden --review assets-generated/reviews/augusta-scene-final --frames 24000`.
+- Para jogar: `./dev story --start augusta`.
+- Não houve push, merge ou publicação. Ao retomar, consultar status/log e este
+  checkpoint; não repetir verificações aprovadas sem outra alteração relevante.
