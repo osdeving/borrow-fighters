@@ -1,0 +1,30 @@
+{
+  "schema": "borrow-fighters.generated-art.v1",
+  "character": "leather",
+  "action": "run",
+  "tool": "built-in image_gen",
+  "reference": "assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-a.png",
+  "generation_id": "exec-f76e33ac-c280-4d1d-bf99-05ee0e2ac201",
+  "source": "leather-run.png",
+  "sha256": "8deef967c28714d019ed0aa20d7a251a43ea078ffb186ef14a18c8d90bd703e8",
+  "size": [
+    1536,
+    1024
+  ],
+  "layout": {
+    "columns": 3,
+    "rows": 2,
+    "order": "row-major"
+  },
+  "review": "Complete bodies, transparent edges, consistent scale and pivots inspected in the native locomotion gallery, both facings. Whole frames selected by distance; no limb warping.",
+  "phases": [
+    "near_contact",
+    "near_support",
+    "far_flight",
+    "far_contact",
+    "far_support",
+    "near_flight"
+  ],
+  "status": "integrated after source and native renderer phase review",
+  "native_review": "assets-generated/reviews/augusta-sprites-review/crowd-motion.mp4"
+}

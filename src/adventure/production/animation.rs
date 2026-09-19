@@ -350,7 +350,6 @@ impl Clips {
                 || c.keys[0].time != 0.0
                 || c.keys.last().is_none_or(|k| k.time != 1.0)
                 || c.stride_pixels.is_some_and(|s| !s.is_finite() || s <= 0.0)
-                || (rig.method == Method::Frames && c.stride_pixels.is_some())
                 || c.keys.windows(2).any(|p| p[0].time >= p[1].time)
                 || c.keys.iter().any(|k| {
                     !(0.0..=1.0).contains(&k.time)
@@ -644,6 +643,27 @@ fn lerp(a: Point, b: Point, t: f32) -> Point {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn whole_frame_cycles_follow_distance_and_reject_invalid_stride() {
+        let rig = Rig::from_json(include_str!(
+            "../../../assets/adventure/actors/julia/rig.json"
+        ))
+        .unwrap();
+        let mut clips = Clips::from_json(
+            include_str!("../../../assets/adventure/actors/julia/clips.json"),
+            &rig,
+        )
+        .unwrap();
+        let stride = clips.clips["run"].stride_pixels.unwrap();
+        assert_eq!(clips.sample("run", 999.0, 0.0).frame, Some("run_00"));
+        assert_eq!(clips.sample("run", 0.0, stride * 0.5).frame, Some("run_03"));
+        assert_eq!(clips.sample("run", 0.0, stride).frame, Some("run_00"));
+        for invalid in [0.0, -1.0, f32::NAN, f32::INFINITY] {
+            clips.clips.get_mut("run").unwrap().stride_pixels = Some(invalid);
+            assert!(clips.validate(&rig).is_err());
+        }
+    }
 
     fn cpp_animation() -> (Rig, Clips) {
         let rig = Rig::from_json(include_str!(

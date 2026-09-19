@@ -1,0 +1,30 @@
+{
+  "schema": "borrow-fighters.generated-art.v1",
+  "character": "denim",
+  "action": "run",
+  "tool": "built-in image_gen",
+  "reference": "assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-a.png",
+  "generation_id": "exec-515821b4-4c32-41fe-bab4-9f95ddd9eb99",
+  "source": "denim-run.png",
+  "sha256": "3a4bbfa41f97ef4534eef58e60f3b5f01fde41290dccaabcc6c180792ebd2534",
+  "size": [
+    1536,
+    1024
+  ],
+  "layout": {
+    "columns": 3,
+    "rows": 2,
+    "order": "row-major"
+  },
+  "review": "Complete bodies, transparent edges, consistent scale and pivots inspected in the native locomotion gallery, both facings. Whole frames selected by distance; no limb warping.",
+  "phases": [
+    "near_contact",
+    "near_support",
+    "far_flight",
+    "far_contact",
+    "far_support",
+    "near_flight"
+  ],
+  "status": "integrated after source and native renderer phase review",
+  "native_review": "assets-generated/reviews/augusta-sprites-review/crowd-motion.mp4"
+}

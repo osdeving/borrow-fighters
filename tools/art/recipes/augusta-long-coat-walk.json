@@ -1,0 +1,103 @@
+{
+  "schema": "borrow-fighters.art-recipe.v1",
+  "format": "adventure",
+  "character": "crowd-long-coat",
+  "display_height": 96,
+  "source_height": 481,
+  "generated": "../../../assets-generated/adventure/augusta/crowd/long-coat-walk",
+  "runtime": "../../../assets/adventure/chapters/cpp-augusta/world-art.json",
+  "actions": {
+    "walk": {
+      "sheet": "../../../assets-src/adventure/augusta/crowd/long-coat-walk.png",
+      "reviewed": true,
+      "loop": true,
+      "stride_pixels": 68,
+      "frames": [
+        {
+          "name": "walk-00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 512,
+            "h": 512
+          },
+          "pivot": {
+            "x": 266,
+            "y": 497
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "walk-01",
+          "source_rect": {
+            "x": 512,
+            "y": 0,
+            "w": 512,
+            "h": 512
+          },
+          "pivot": {
+            "x": 214,
+            "y": 496
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "walk-02",
+          "source_rect": {
+            "x": 1024,
+            "y": 0,
+            "w": 512,
+            "h": 512
+          },
+          "pivot": {
+            "x": 215,
+            "y": 497
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "walk-03",
+          "source_rect": {
+            "x": 0,
+            "y": 512,
+            "w": 512,
+            "h": 512
+          },
+          "pivot": {
+            "x": 256,
+            "y": 488
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "walk-04",
+          "source_rect": {
+            "x": 512,
+            "y": 512,
+            "w": 512,
+            "h": 512
+          },
+          "pivot": {
+            "x": 234,
+            "y": 493
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "walk-05",
+          "source_rect": {
+            "x": 1024,
+            "y": 512,
+            "w": 512,
+            "h": 512
+          },
+          "pivot": {
+            "x": 234,
+            "y": 491
+          },
+          "duration_ms": 100
+        }
+      ]
+    }
+  }
+}

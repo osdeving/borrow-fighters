@@ -1,0 +1,21 @@
+{
+  "schema": "borrow-fighters.generated-art.v1",
+  "character": "denim",
+  "action": "walk",
+  "tool": "built-in image_gen",
+  "reference": "assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-a.png",
+  "source": "denim-walk.png",
+  "size": [
+    1774,
+    887
+  ],
+  "layout": {
+    "columns": 4,
+    "rows": 2,
+    "order": "row-major"
+  },
+  "status": "integrated after source and native renderer phase review",
+  "review": "Complete bodies, transparent edges, consistent scale and pivots inspected in the native locomotion gallery, both facings. Whole frames selected by distance; no limb warping.",
+  "prompt": "Use case: stylized-concept. Create a production 2D WALK CYCLE sprite sheet. The attached image is ONLY an appearance reference: use the adult short red-haired woman in its lower-right corner, denim jacket rolled sleeves, orange shirt, charcoal cropped pants, white sneakers. Same adult proportions, face, clothes and semi-realistic painted style.\nNEW LANDSCAPE sheet, exactly FOUR columns by TWO rows, eight distinct COMPLETE body drawings. Actual transparent PNG background, clean edges with no colored fringe, no text, labels, ground, shadows, checkerboard, panel borders, or green. Each figure fits INSIDE its own equal rectangular cell with generous empty margin on every side: crown at 15% cell height, support sole at 88%, at least10% empty width on both sides. Consistent size and right-facing side-profile camera. Do not let any head, hand, foot or hair touch cell borders or overlap another cell.\nThe eight drawings MUST show clearly different phases of ONE WALK CYCLE, read left to right then next row. Upper row: (1) near leg straight FORWARD heel touching ground, far leg behind on toes, far arm forward; (2) near leg supports bent slightly, rear heel lifts; (3) PASSING: near leg vertical supporting, far knee bent swinging directly beneath hip, feet CLOSE TOGETHER; (4) far leg moving forward bent knee, near supporting ankle rises onto toes. Lower row: (5) far leg straight FORWARD heel contacting, near leg behind, near arm forward; (6) far leg supports weight with bent knee, near heel lifts; (7) PASSING: far leg vertical supporting, near knee bent moving under hip, feet CLOSE TOGETHER; (8) near knee swings forward, far supporting ankle up on toes. Thus frames1/5 wide contact silhouettes, frames3/7 narrow silhouettes; swap visible near/far leg and arm phases after four frames. Smooth natural small arm swing opposite legs, elbows relaxed, slight vertical head bob. Paint whole anatomy and clothes in each pose, no detached pieces, no rig joints, exactly two legs/two arms. Keep identity and face consistent. This is eight frames of locomotion, NOT eight variations of the same long-stride pose. Requested canvas2048x1024.",
+  "native_review": "assets-generated/reviews/augusta-sprites-review/crowd-motion.mp4"
+}

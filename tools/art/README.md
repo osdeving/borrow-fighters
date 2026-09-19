@@ -16,6 +16,9 @@ as mesmas validações e gera atlas, manifesto `borrow-fighters.sprite.v1`,
 proveniência com hashes, recortes e uma prévia com pivots. A prévia serve para
 inspeção estática; a aprovação da animação acontece em movimento no jogo/lab.
 
+`--all` inclui as receitas registradas em `tools/art/recipes/*.json` e as
+receitas canônicas `assets-src/**/recipe.json`, sem repetir caminhos resolvidos.
+
 Para trabalho novo, usar `assets-src/<domínio>/<ator>/` para fontes e receita,
 `assets-generated/<domínio>/<ator>/` para resultados reproduzíveis e
 `assets/<domínio>/...` para arquivos aceitos. O campo `runtime` da receita
@@ -62,6 +65,26 @@ de um grid usam `frames` explícitos com `name`, `source_rect: {x,y,w,h}`,
 `pivot: {x,y}` e `duration_ms`, no formato já existente de `production.json`.
 O builder rejeita cortes inválidos, frames vazios/opacos e metadata de combate
 fora do recorte; não cria combate quando ele não foi fornecido.
+
+## Saída para a aventura sem reempacotar
+
+`format: "adventure"` usa as mesmas `actions`/`frames`/`grid`, com
+`display_height` e `source_height` positivos e uma `stride_pixels` por ação.
+Uma única razão `display_height / source_height` define `size` em todos os
+frames: não se redimensionam pixels nem se estica cada pose para a mesma altura.
+`source_height` é a altura anatômica de referência do ator, não o tamanho da célula.
+
+```sh
+./dev art validate augusta-denim
+./dev art build augusta-denim
+```
+
+O exemplo [Denim](recipes/augusta-denim.json) conserva a folha de dimensões
+ímpares com recortes explícitos, sem repack. A saída `attachments.json` traz
+`attachments` no contrato da aventura (`image`, `source`, `anchor`, `size`),
+`clips` com IDs e passada, durações e hashes das fontes. Os PNGs em `sprites/`
+são copiados byte a byte. A integração copia peças/clips para os catálogos
+existentes após revisar o candidato; não existe importação do runtime de luta.
 
 ## Compatibilidade e histórico
 

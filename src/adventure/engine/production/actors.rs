@@ -10,9 +10,6 @@ use crate::adventure::production::{
 };
 use raylib::prelude::*;
 
-#[path = "frame_motion.rs"]
-mod frame_motion;
-
 #[derive(Clone, Copy)]
 struct Transform {
     at: Point,
@@ -229,7 +226,12 @@ pub fn frame_stride_ticks(assets: &ActorAssets, clip: &str, signed_distance: f32
     if assets.rig.method != Method::Frames || !matches!(clip, "run" | "start") {
         return None;
     }
-    frame_motion::stride_ticks(assets, signed_distance)
+    let animation = assets.clips.clips.get(clip)?;
+    let stride = animation.stride_pixels?;
+    if !animation.looping || !signed_distance.is_finite() {
+        return None;
+    }
+    Some(signed_distance * animation.duration_ticks as f32 / stride)
 }
 
 /// Presentation-only draw. Tick/distance and the pose are supplied by the shared model.
@@ -251,12 +253,16 @@ pub fn draw_actor(
         scale,
     };
     if assets.rig.method == Method::Frames {
-        if matches!(clip, "run" | "start")
-            && frame_motion::draw(d, assets, ticks, position, facing, scale, debug)
-        {
-            return;
-        }
-        let sample = assets.clips.sample(clip, ticks, ticks * 3.0);
+        let animation = &assets.clips.clips[clip];
+        let distance = animation.stride_pixels.map_or(0.0, |stride| {
+            ticks * stride / animation.duration_ticks as f32
+        });
+        let sample = assets.clips.sample(clip, ticks, distance);
+        let pose = if animation.stride_pixels.is_some() {
+            sample.pose
+        } else {
+            pose
+        };
         if let Some(frame) = sample.frame {
             let offset = a::add(pose.pelvis, [0.0, 96.0]);
             piece(

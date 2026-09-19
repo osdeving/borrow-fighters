@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Capture 900 actual-renderer crowd frames, five motions and both facings.
+"""Capture 360 actual-renderer locomotion frames, walking/running and both facings.
 
 Uses the repository Rust build and local FFmpeg. The gallery alters only the
 display positions/wardrobe/facing of continuously sampled decorative people;
@@ -68,7 +68,7 @@ def main():
         subprocess.run(command, cwd=ROOT, check=True)
         subprocess.run([str(executable), str(output)], cwd=ROOT, check=True)
     frames = json.loads((output / "frames.json").read_text())
-    assert len(frames) == 900
+    assert len(frames) == 360
     lossless = output / "crowd-lossless.mkv"
     subprocess.run([
         "ffmpeg", "-y", "-loglevel", "error", "-i", str(lossless),
@@ -77,18 +77,18 @@ def main():
         "-preset", "veryfast", "-crf", "19", "-pix_fmt", "yuv420p",
         str(output / "crowd-motion.mp4"),
     ], check=True)
-    assert len(list(output.glob("frame[0-9][0-9][0-9][0-9].png"))) == 900
+    assert len(list(output.glob("frame[0-9][0-9][0-9][0-9].png"))) == 360
     lossless.unlink()
     if hashes != {str(path.relative_to(ROOT)): digest(path) for path in sources}:
         raise RuntimeError("source changed during capture; repeat with a stable revision")
     (output / "review.json").write_text(json.dumps({
-        "frames": 900, "fps": 30, "seconds": 30,
+        "frames": 360, "fps": 30, "seconds": 12,
         "motions": list(dict.fromkeys(frame["motion"] for frame in frames)),
         "wardrobes": 8, "facings": [1, -1],
         "sources_sha256": hashes,
-        "scope": "Native articulation gallery; visual inspection remains required. World positions are replaced by fixed gallery slots, with uninterrupted story poses.",
+        "scope": "Native full-frame locomotion gallery; visual inspection remains required. World positions are replaced by fixed gallery slots, with uninterrupted story poses.",
     }, indent=2) + "\n")
-    print(f"Captured 900 frames and crowd-motion.mp4 in {output}")
+    print(f"Captured 360 frames and crowd-motion.mp4 in {output}")
 
 
 if __name__ == "__main__":

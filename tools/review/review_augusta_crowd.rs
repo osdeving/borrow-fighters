@@ -1,7 +1,7 @@
-//! Captures continuous painted crowd performances using the actual runtime renderer.
+//! Captures complete walking/running sprites using the actual runtime renderer.
 //!
-//! Each motion reuses one uninterrupted story pose sequence across all eight
-//! paintings and both facings, so source extraction defects remain easy to compare.
+//! Both facings reuse the same continuous distance clock. Only wardrobes that
+//! walk in the real chapter appear in the walking section.
 
 use borrow_fighters::adventure::{
     augusta::ambient::{Nightlife, Wardrobe},
@@ -18,6 +18,7 @@ use std::{
 
 fn main() -> Result<(), Box<dyn Error>> {
     let output = PathBuf::from(std::env::args().nth(1).ok_or("expected output directory")?);
+    let selected = std::env::var("BORROW_CROWD_REVIEW").unwrap_or_default();
     fs::create_dir_all(&output)?;
     let mut encoder = Command::new("ffmpeg")
         .args([
@@ -71,16 +72,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         (Wardrobe::LongCoat, "Coat"),
     ];
     let mut manifest = vec![];
-    for (section, (motion, id)) in [
-        ("walking", 0),
-        ("conversation", 1),
-        ("seated", 3),
-        ("phone", 8),
-        ("running", 10),
-    ]
-    .into_iter()
-    .enumerate()
-    {
+    for (section, (motion, id)) in [("walking", 0), ("running", 10)].into_iter().enumerate() {
         for frame in 0..180_u64 {
             let age = 30 + frame * 2;
             let sample = if motion == "running" {
@@ -116,11 +108,22 @@ fn main() -> Result<(), Box<dyn Error>> {
                         Color::RAYWHITE,
                     );
                     for (index, (wardrobe, label)) in cast.iter().enumerate() {
+                        if !selected.is_empty() && !selected.split(',').any(|s| s == *label) {
+                            continue;
+                        }
+                        if motion == "walking"
+                            && matches!(
+                                wardrobe,
+                                Wardrobe::Leather | Wardrobe::PlumDress | Wardrobe::TealDress
+                            )
+                        {
+                            continue;
+                        }
                         let mut person = source;
                         person.wardrobe = *wardrobe;
                         person.x = 78. + index as f32 * 159.;
                         person.ground_y = baseline;
-                        person.scale = 2.2;
+                        person.scale = 1.7;
                         person.facing = if row == 0 { 1. } else { -1. };
                         nightlife::draw_person(&mut d, &assets, &person, 640.);
                         d.draw_text(
@@ -149,7 +152,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                 "frame": number, "motion": motion, "motion_frame": frame,
                 "source_id": id, "ticks": sample.ticks,
                 "threat_age": sample.threat_age,
-                "feet": source.pose.feet, "hands": source.pose.hands,
+                "stride_distance": source.stride_distance,
                 "facings": [1, -1], "file": format!("frame{number:04}.png"),
             }));
         }

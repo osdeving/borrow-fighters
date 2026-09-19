@@ -398,6 +398,1400 @@
         111.7893,
         194.5134
       ]
+    },
+    "crowd-denim-walk-00": {
+      "image": "sprites/denim-walk.png",
+      "source": [
+        0,
+        0,
+        443,
+        443
+      ],
+      "anchor": [
+        239,
+        439
+      ],
+      "size": [
+        100.30188679245283,
+        100.30188679245283
+      ]
+    },
+    "crowd-denim-walk-01": {
+      "image": "sprites/denim-walk.png",
+      "source": [
+        443,
+        0,
+        444,
+        443
+      ],
+      "anchor": [
+        229,
+        438
+      ],
+      "size": [
+        100.52830188679245,
+        100.30188679245283
+      ]
+    },
+    "crowd-denim-walk-02": {
+      "image": "sprites/denim-walk.png",
+      "source": [
+        887,
+        0,
+        443,
+        443
+      ],
+      "anchor": [
+        207,
+        442
+      ],
+      "size": [
+        100.30188679245283,
+        100.30188679245283
+      ]
+    },
+    "crowd-denim-walk-03": {
+      "image": "sprites/denim-walk.png",
+      "source": [
+        1330,
+        0,
+        444,
+        443
+      ],
+      "anchor": [
+        212,
+        437
+      ],
+      "size": [
+        100.52830188679245,
+        100.30188679245283
+      ]
+    },
+    "crowd-denim-walk-04": {
+      "image": "sprites/denim-walk.png",
+      "source": [
+        0,
+        443,
+        443,
+        444
+      ],
+      "anchor": [
+        217,
+        427
+      ],
+      "size": [
+        100.30188679245283,
+        100.52830188679245
+      ]
+    },
+    "crowd-denim-walk-05": {
+      "image": "sprites/denim-walk.png",
+      "source": [
+        443,
+        443,
+        444,
+        444
+      ],
+      "anchor": [
+        222,
+        425
+      ],
+      "size": [
+        100.52830188679245,
+        100.52830188679245
+      ]
+    },
+    "crowd-denim-walk-06": {
+      "image": "sprites/denim-walk.png",
+      "source": [
+        887,
+        443,
+        443,
+        444
+      ],
+      "anchor": [
+        212,
+        428
+      ],
+      "size": [
+        100.30188679245283,
+        100.52830188679245
+      ]
+    },
+    "crowd-denim-walk-07": {
+      "image": "sprites/denim-walk.png",
+      "source": [
+        1330,
+        443,
+        444,
+        444
+      ],
+      "anchor": [
+        205,
+        425
+      ],
+      "size": [
+        100.52830188679245,
+        100.52830188679245
+      ]
+    },
+    "crowd-teal-dress-run-00": {
+      "image": "sprites/teal-dress-run.png",
+      "source": [
+        0,
+        0,
+        396,
+        496
+      ],
+      "anchor": [
+        218,
+        487
+      ],
+      "size": [
+        81.23076923076923,
+        101.74358974358974
+      ]
+    },
+    "crowd-teal-dress-run-01": {
+      "image": "sprites/teal-dress-run.png",
+      "source": [
+        396,
+        0,
+        397,
+        496
+      ],
+      "anchor": [
+        250,
+        487
+      ],
+      "size": [
+        81.43589743589743,
+        101.74358974358974
+      ]
+    },
+    "crowd-teal-dress-run-02": {
+      "image": "sprites/teal-dress-run.png",
+      "source": [
+        793,
+        0,
+        396,
+        496
+      ],
+      "anchor": [
+        226,
+        487
+      ],
+      "size": [
+        81.23076923076923,
+        101.74358974358974
+      ]
+    },
+    "crowd-teal-dress-run-03": {
+      "image": "sprites/teal-dress-run.png",
+      "source": [
+        1189,
+        0,
+        397,
+        496
+      ],
+      "anchor": [
+        231,
+        487
+      ],
+      "size": [
+        81.43589743589743,
+        101.74358974358974
+      ]
+    },
+    "crowd-teal-dress-run-04": {
+      "image": "sprites/teal-dress-run.png",
+      "source": [
+        0,
+        496,
+        396,
+        496
+      ],
+      "anchor": [
+        214,
+        487
+      ],
+      "size": [
+        81.23076923076923,
+        101.74358974358974
+      ]
+    },
+    "crowd-teal-dress-run-05": {
+      "image": "sprites/teal-dress-run.png",
+      "source": [
+        396,
+        496,
+        397,
+        496
+      ],
+      "anchor": [
+        224,
+        487
+      ],
+      "size": [
+        81.43589743589743,
+        101.74358974358974
+      ]
+    },
+    "crowd-teal-dress-run-06": {
+      "image": "sprites/teal-dress-run.png",
+      "source": [
+        793,
+        496,
+        396,
+        496
+      ],
+      "anchor": [
+        214,
+        487
+      ],
+      "size": [
+        81.23076923076923,
+        101.74358974358974
+      ]
+    },
+    "crowd-teal-dress-run-07": {
+      "image": "sprites/teal-dress-run.png",
+      "source": [
+        1189,
+        496,
+        397,
+        496
+      ],
+      "anchor": [
+        208,
+        487
+      ],
+      "size": [
+        81.43589743589743,
+        101.74358974358974
+      ]
+    },
+    "crowd-long-coat-run-00": {
+      "image": "sprites/long-coat-run.png",
+      "source": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        265,
+        490
+      ],
+      "size": [
+        108.02637362637363,
+        108.02637362637363
+      ]
+    },
+    "crowd-long-coat-run-01": {
+      "image": "sprites/long-coat-run.png",
+      "source": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        235,
+        490
+      ],
+      "size": [
+        108.02637362637363,
+        108.02637362637363
+      ]
+    },
+    "crowd-long-coat-run-02": {
+      "image": "sprites/long-coat-run.png",
+      "source": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        249,
+        490
+      ],
+      "size": [
+        108.02637362637363,
+        108.02637362637363
+      ]
+    },
+    "crowd-long-coat-run-03": {
+      "image": "sprites/long-coat-run.png",
+      "source": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        264,
+        473
+      ],
+      "size": [
+        108.02637362637363,
+        108.02637362637363
+      ]
+    },
+    "crowd-long-coat-run-04": {
+      "image": "sprites/long-coat-run.png",
+      "source": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        234,
+        473
+      ],
+      "size": [
+        108.02637362637363,
+        108.02637362637363
+      ]
+    },
+    "crowd-long-coat-run-05": {
+      "image": "sprites/long-coat-run.png",
+      "source": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        270,
+        473
+      ],
+      "size": [
+        108.02637362637363,
+        108.02637362637363
+      ]
+    },
+    "crowd-long-coat-walk-00": {
+      "image": "sprites/long-coat-walk.png",
+      "source": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        266,
+        497
+      ],
+      "size": [
+        102.18711018711019,
+        102.18711018711019
+      ]
+    },
+    "crowd-long-coat-walk-01": {
+      "image": "sprites/long-coat-walk.png",
+      "source": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        214,
+        496
+      ],
+      "size": [
+        102.18711018711019,
+        102.18711018711019
+      ]
+    },
+    "crowd-long-coat-walk-02": {
+      "image": "sprites/long-coat-walk.png",
+      "source": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        215,
+        497
+      ],
+      "size": [
+        102.18711018711019,
+        102.18711018711019
+      ]
+    },
+    "crowd-long-coat-walk-03": {
+      "image": "sprites/long-coat-walk.png",
+      "source": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        256,
+        488
+      ],
+      "size": [
+        102.18711018711019,
+        102.18711018711019
+      ]
+    },
+    "crowd-long-coat-walk-04": {
+      "image": "sprites/long-coat-walk.png",
+      "source": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        234,
+        493
+      ],
+      "size": [
+        102.18711018711019,
+        102.18711018711019
+      ]
+    },
+    "crowd-long-coat-walk-05": {
+      "image": "sprites/long-coat-walk.png",
+      "source": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        234,
+        491
+      ],
+      "size": [
+        102.18711018711019,
+        102.18711018711019
+      ]
+    },
+    "crowd-red-blouse-run-00": {
+      "image": "sprites/red-blouse-run.png",
+      "source": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        273,
+        492
+      ],
+      "size": [
+        108.7433628318584,
+        108.7433628318584
+      ]
+    },
+    "crowd-red-blouse-run-01": {
+      "image": "sprites/red-blouse-run.png",
+      "source": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        213,
+        492
+      ],
+      "size": [
+        108.7433628318584,
+        108.7433628318584
+      ]
+    },
+    "crowd-red-blouse-run-02": {
+      "image": "sprites/red-blouse-run.png",
+      "source": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        220,
+        492
+      ],
+      "size": [
+        108.7433628318584,
+        108.7433628318584
+      ]
+    },
+    "crowd-red-blouse-run-03": {
+      "image": "sprites/red-blouse-run.png",
+      "source": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        270,
+        480
+      ],
+      "size": [
+        108.7433628318584,
+        108.7433628318584
+      ]
+    },
+    "crowd-red-blouse-run-04": {
+      "image": "sprites/red-blouse-run.png",
+      "source": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        222,
+        480
+      ],
+      "size": [
+        108.7433628318584,
+        108.7433628318584
+      ]
+    },
+    "crowd-red-blouse-run-05": {
+      "image": "sprites/red-blouse-run.png",
+      "source": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        233,
+        480
+      ],
+      "size": [
+        108.7433628318584,
+        108.7433628318584
+      ]
+    },
+    "crowd-red-blouse-walk-00": {
+      "image": "sprites/red-blouse-walk.png",
+      "source": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        274,
+        494
+      ],
+      "size": [
+        103.04402515723271,
+        103.04402515723271
+      ]
+    },
+    "crowd-red-blouse-walk-01": {
+      "image": "sprites/red-blouse-walk.png",
+      "source": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        235,
+        495
+      ],
+      "size": [
+        103.04402515723271,
+        103.04402515723271
+      ]
+    },
+    "crowd-red-blouse-walk-02": {
+      "image": "sprites/red-blouse-walk.png",
+      "source": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        221,
+        492
+      ],
+      "size": [
+        103.04402515723271,
+        103.04402515723271
+      ]
+    },
+    "crowd-red-blouse-walk-03": {
+      "image": "sprites/red-blouse-walk.png",
+      "source": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        276,
+        494
+      ],
+      "size": [
+        103.04402515723271,
+        103.04402515723271
+      ]
+    },
+    "crowd-red-blouse-walk-04": {
+      "image": "sprites/red-blouse-walk.png",
+      "source": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        237,
+        490
+      ],
+      "size": [
+        103.04402515723271,
+        103.04402515723271
+      ]
+    },
+    "crowd-red-blouse-walk-05": {
+      "image": "sprites/red-blouse-walk.png",
+      "source": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        224,
+        491
+      ],
+      "size": [
+        103.04402515723271,
+        103.04402515723271
+      ]
+    },
+    "crowd-white-shirt-run-00": {
+      "image": "sprites/white-shirt-run.png",
+      "source": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        247,
+        498
+      ],
+      "size": [
+        102.82845188284519,
+        102.82845188284519
+      ]
+    },
+    "crowd-white-shirt-run-01": {
+      "image": "sprites/white-shirt-run.png",
+      "source": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        210,
+        498
+      ],
+      "size": [
+        102.82845188284519,
+        102.82845188284519
+      ]
+    },
+    "crowd-white-shirt-run-02": {
+      "image": "sprites/white-shirt-run.png",
+      "source": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        225,
+        498
+      ],
+      "size": [
+        102.82845188284519,
+        102.82845188284519
+      ]
+    },
+    "crowd-white-shirt-run-03": {
+      "image": "sprites/white-shirt-run.png",
+      "source": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        258,
+        495
+      ],
+      "size": [
+        102.82845188284519,
+        102.82845188284519
+      ]
+    },
+    "crowd-white-shirt-run-04": {
+      "image": "sprites/white-shirt-run.png",
+      "source": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        211,
+        495
+      ],
+      "size": [
+        102.82845188284519,
+        102.82845188284519
+      ]
+    },
+    "crowd-white-shirt-run-05": {
+      "image": "sprites/white-shirt-run.png",
+      "source": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        251,
+        495
+      ],
+      "size": [
+        102.82845188284519,
+        102.82845188284519
+      ]
+    },
+    "crowd-white-shirt-walk-00": {
+      "image": "sprites/white-shirt-walk.png",
+      "source": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        309,
+        496
+      ],
+      "size": [
+        103.69620253164557,
+        103.69620253164557
+      ]
+    },
+    "crowd-white-shirt-walk-01": {
+      "image": "sprites/white-shirt-walk.png",
+      "source": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        242,
+        500
+      ],
+      "size": [
+        103.69620253164557,
+        103.69620253164557
+      ]
+    },
+    "crowd-white-shirt-walk-02": {
+      "image": "sprites/white-shirt-walk.png",
+      "source": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        232,
+        498
+      ],
+      "size": [
+        103.69620253164557,
+        103.69620253164557
+      ]
+    },
+    "crowd-white-shirt-walk-03": {
+      "image": "sprites/white-shirt-walk.png",
+      "source": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        306,
+        478
+      ],
+      "size": [
+        103.69620253164557,
+        103.69620253164557
+      ]
+    },
+    "crowd-white-shirt-walk-04": {
+      "image": "sprites/white-shirt-walk.png",
+      "source": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        234,
+        477
+      ],
+      "size": [
+        103.69620253164557,
+        103.69620253164557
+      ]
+    },
+    "crowd-white-shirt-walk-05": {
+      "image": "sprites/white-shirt-walk.png",
+      "source": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        221,
+        478
+      ],
+      "size": [
+        103.69620253164557,
+        103.69620253164557
+      ]
+    },
+    "crowd-amber-jacket-walk-00": {
+      "image": "sprites/amber-jacket-walk.png",
+      "source": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        312,
+        498
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-amber-jacket-walk-01": {
+      "image": "sprites/amber-jacket-walk.png",
+      "source": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        257,
+        498
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-amber-jacket-walk-02": {
+      "image": "sprites/amber-jacket-walk.png",
+      "source": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        226,
+        500
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-amber-jacket-walk-03": {
+      "image": "sprites/amber-jacket-walk.png",
+      "source": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        311,
+        483
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-amber-jacket-walk-04": {
+      "image": "sprites/amber-jacket-walk.png",
+      "source": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        258,
+        483
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-amber-jacket-walk-05": {
+      "image": "sprites/amber-jacket-walk.png",
+      "source": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        230,
+        482
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-amber-jacket-run-00": {
+      "image": "sprites/amber-jacket-run.png",
+      "source": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        284,
+        491
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-amber-jacket-run-01": {
+      "image": "sprites/amber-jacket-run.png",
+      "source": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        254,
+        491
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-amber-jacket-run-02": {
+      "image": "sprites/amber-jacket-run.png",
+      "source": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        268,
+        491
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-amber-jacket-run-03": {
+      "image": "sprites/amber-jacket-run.png",
+      "source": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        273,
+        480
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-amber-jacket-run-04": {
+      "image": "sprites/amber-jacket-run.png",
+      "source": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        244,
+        480
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-amber-jacket-run-05": {
+      "image": "sprites/amber-jacket-run.png",
+      "source": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        276,
+        480
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-denim-run-00": {
+      "image": "sprites/denim-run.png",
+      "source": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        299,
+        493
+      ],
+      "size": [
+        104.57872340425531,
+        104.57872340425531
+      ]
+    },
+    "crowd-denim-run-01": {
+      "image": "sprites/denim-run.png",
+      "source": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        244,
+        493
+      ],
+      "size": [
+        104.57872340425531,
+        104.57872340425531
+      ]
+    },
+    "crowd-denim-run-02": {
+      "image": "sprites/denim-run.png",
+      "source": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        264,
+        493
+      ],
+      "size": [
+        104.57872340425531,
+        104.57872340425531
+      ]
+    },
+    "crowd-denim-run-03": {
+      "image": "sprites/denim-run.png",
+      "source": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        276,
+        470
+      ],
+      "size": [
+        104.57872340425531,
+        104.57872340425531
+      ]
+    },
+    "crowd-denim-run-04": {
+      "image": "sprites/denim-run.png",
+      "source": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        246,
+        470
+      ],
+      "size": [
+        104.57872340425531,
+        104.57872340425531
+      ]
+    },
+    "crowd-denim-run-05": {
+      "image": "sprites/denim-run.png",
+      "source": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        258,
+        470
+      ],
+      "size": [
+        104.57872340425531,
+        104.57872340425531
+      ]
+    },
+    "crowd-leather-run-00": {
+      "image": "sprites/leather-run.png",
+      "source": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        260,
+        491
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-leather-run-01": {
+      "image": "sprites/leather-run.png",
+      "source": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        228,
+        487
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-leather-run-02": {
+      "image": "sprites/leather-run.png",
+      "source": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        250,
+        491
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-leather-run-03": {
+      "image": "sprites/leather-run.png",
+      "source": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        264,
+        484
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-leather-run-04": {
+      "image": "sprites/leather-run.png",
+      "source": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        234,
+        484
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-leather-run-05": {
+      "image": "sprites/leather-run.png",
+      "source": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        271,
+        484
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-plum-dress-run-00": {
+      "image": "sprites/plum-dress-run.png",
+      "source": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        282,
+        508
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-plum-dress-run-01": {
+      "image": "sprites/plum-dress-run.png",
+      "source": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        251,
+        508
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-plum-dress-run-02": {
+      "image": "sprites/plum-dress-run.png",
+      "source": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "anchor": [
+        239,
+        508
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-plum-dress-run-03": {
+      "image": "sprites/plum-dress-run.png",
+      "source": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        294,
+        485
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-plum-dress-run-04": {
+      "image": "sprites/plum-dress-run.png",
+      "source": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        261,
+        485
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
+    },
+    "crowd-plum-dress-run-05": {
+      "image": "sprites/plum-dress-run.png",
+      "source": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "anchor": [
+        255,
+        485
+      ],
+      "size": [
+        102.4,
+        102.4
+      ]
     }
   },
   "background": "skyline",

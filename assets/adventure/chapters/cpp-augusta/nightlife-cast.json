@@ -7963,5 +7963,170 @@
         ]
       }
     }
+  },
+  "motion_entries": {
+    "leather": {
+      "run": {
+        "frames": [
+          "crowd-leather-run-00",
+          "crowd-leather-run-01",
+          "crowd-leather-run-02",
+          "crowd-leather-run-03",
+          "crowd-leather-run-04",
+          "crowd-leather-run-05"
+        ],
+        "stride_pixels": 112
+      }
+    },
+    "plum_dress": {
+      "run": {
+        "frames": [
+          "crowd-plum-dress-run-00",
+          "crowd-plum-dress-run-01",
+          "crowd-plum-dress-run-02",
+          "crowd-plum-dress-run-03",
+          "crowd-plum-dress-run-04",
+          "crowd-plum-dress-run-05"
+        ],
+        "stride_pixels": 112
+      }
+    },
+    "amber_jacket": {
+      "run": {
+        "frames": [
+          "crowd-amber-jacket-run-00",
+          "crowd-amber-jacket-run-01",
+          "crowd-amber-jacket-run-02",
+          "crowd-amber-jacket-run-03",
+          "crowd-amber-jacket-run-04",
+          "crowd-amber-jacket-run-05"
+        ],
+        "stride_pixels": 112
+      },
+      "walk": {
+        "frames": [
+          "crowd-amber-jacket-walk-00",
+          "crowd-amber-jacket-walk-01",
+          "crowd-amber-jacket-walk-02",
+          "crowd-amber-jacket-walk-03",
+          "crowd-amber-jacket-walk-04",
+          "crowd-amber-jacket-walk-05"
+        ],
+        "stride_pixels": 66
+      }
+    },
+    "denim": {
+      "run": {
+        "frames": [
+          "crowd-denim-run-00",
+          "crowd-denim-run-01",
+          "crowd-denim-run-02",
+          "crowd-denim-run-03",
+          "crowd-denim-run-04",
+          "crowd-denim-run-05"
+        ],
+        "stride_pixels": 112
+      },
+      "walk": {
+        "frames": [
+          "crowd-denim-walk-00",
+          "crowd-denim-walk-01",
+          "crowd-denim-walk-02",
+          "crowd-denim-walk-03",
+          "crowd-denim-walk-04",
+          "crowd-denim-walk-05",
+          "crowd-denim-walk-06",
+          "crowd-denim-walk-07"
+        ],
+        "stride_pixels": 66
+      }
+    },
+    "teal_dress": {
+      "run": {
+        "frames": [
+          "crowd-teal-dress-run-00",
+          "crowd-teal-dress-run-01",
+          "crowd-teal-dress-run-02",
+          "crowd-teal-dress-run-03",
+          "crowd-teal-dress-run-04",
+          "crowd-teal-dress-run-05",
+          "crowd-teal-dress-run-06",
+          "crowd-teal-dress-run-07"
+        ],
+        "stride_pixels": 112
+      }
+    },
+    "white_shirt": {
+      "run": {
+        "frames": [
+          "crowd-white-shirt-run-00",
+          "crowd-white-shirt-run-01",
+          "crowd-white-shirt-run-02",
+          "crowd-white-shirt-run-03",
+          "crowd-white-shirt-run-04",
+          "crowd-white-shirt-run-05"
+        ],
+        "stride_pixels": 118
+      },
+      "walk": {
+        "frames": [
+          "crowd-white-shirt-walk-00",
+          "crowd-white-shirt-walk-01",
+          "crowd-white-shirt-walk-02",
+          "crowd-white-shirt-walk-03",
+          "crowd-white-shirt-walk-04",
+          "crowd-white-shirt-walk-05"
+        ],
+        "stride_pixels": 70
+      }
+    },
+    "red_blouse": {
+      "run": {
+        "frames": [
+          "crowd-red-blouse-run-00",
+          "crowd-red-blouse-run-01",
+          "crowd-red-blouse-run-02",
+          "crowd-red-blouse-run-03",
+          "crowd-red-blouse-run-04",
+          "crowd-red-blouse-run-05"
+        ],
+        "stride_pixels": 112
+      },
+      "walk": {
+        "frames": [
+          "crowd-red-blouse-walk-00",
+          "crowd-red-blouse-walk-01",
+          "crowd-red-blouse-walk-02",
+          "crowd-red-blouse-walk-03",
+          "crowd-red-blouse-walk-04",
+          "crowd-red-blouse-walk-05"
+        ],
+        "stride_pixels": 68
+      }
+    },
+    "long_coat": {
+      "run": {
+        "frames": [
+          "crowd-long-coat-run-00",
+          "crowd-long-coat-run-01",
+          "crowd-long-coat-run-02",
+          "crowd-long-coat-run-03",
+          "crowd-long-coat-run-04",
+          "crowd-long-coat-run-05"
+        ],
+        "stride_pixels": 116
+      },
+      "walk": {
+        "frames": [
+          "crowd-long-coat-walk-00",
+          "crowd-long-coat-walk-01",
+          "crowd-long-coat-walk-02",
+          "crowd-long-coat-walk-03",
+          "crowd-long-coat-walk-04",
+          "crowd-long-coat-walk-05"
+        ],
+        "stride_pixels": 68
+      }
+    }
   }
 }

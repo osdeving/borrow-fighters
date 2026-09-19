@@ -1,0 +1,131 @@
+{
+  "schema": "borrow-fighters.art-recipe.v1",
+  "format": "adventure",
+  "character": "crowd-teal-dress",
+  "display_height": 96,
+  "source_height": 468,
+  "generated": "../../../assets-generated/adventure/augusta/crowd/teal-dress",
+  "runtime": "../../../assets/adventure/chapters/cpp-augusta/world-art.json",
+  "actions": {
+    "run": {
+      "sheet": "../../../assets-src/adventure/augusta/crowd/teal-dress-run.png",
+      "reviewed": true,
+      "loop": true,
+      "stride_pixels": 112,
+      "frames": [
+        {
+          "name": "run-00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 396,
+            "h": 496
+          },
+          "pivot": {
+            "x": 218,
+            "y": 487
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "run-01",
+          "source_rect": {
+            "x": 396,
+            "y": 0,
+            "w": 397,
+            "h": 496
+          },
+          "pivot": {
+            "x": 250,
+            "y": 487
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "run-02",
+          "source_rect": {
+            "x": 793,
+            "y": 0,
+            "w": 396,
+            "h": 496
+          },
+          "pivot": {
+            "x": 226,
+            "y": 487
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "run-03",
+          "source_rect": {
+            "x": 1189,
+            "y": 0,
+            "w": 397,
+            "h": 496
+          },
+          "pivot": {
+            "x": 231,
+            "y": 487
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "run-04",
+          "source_rect": {
+            "x": 0,
+            "y": 496,
+            "w": 396,
+            "h": 496
+          },
+          "pivot": {
+            "x": 214,
+            "y": 487
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "run-05",
+          "source_rect": {
+            "x": 396,
+            "y": 496,
+            "w": 397,
+            "h": 496
+          },
+          "pivot": {
+            "x": 224,
+            "y": 487
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "run-06",
+          "source_rect": {
+            "x": 793,
+            "y": 496,
+            "w": 396,
+            "h": 496
+          },
+          "pivot": {
+            "x": 214,
+            "y": 487
+          },
+          "duration_ms": 100
+        },
+        {
+          "name": "run-07",
+          "source_rect": {
+            "x": 1189,
+            "y": 496,
+            "w": 397,
+            "h": 496
+          },
+          "pivot": {
+            "x": 208,
+            "y": 487
+          },
+          "duration_ms": 100
+        }
+      ]
+    }
+  }
+}

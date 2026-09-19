@@ -1,7 +1,7 @@
-//! Articulates Augusta's painted adult cast from registered source landmarks.
+//! Draws Augusta's intact walking/running sprites and registered stationary poses.
 //!
-//! System: Adventure production renderer. The same textured limb meshes follow
-//! the deterministic pedestrians in gameplay and cinematic perspective shots.
+//! System: Adventure production renderer. Distance selects complete locomotion
+//! frames for both gameplay and cinematic planes; stationary gestures retain art.
 
 use super::assets::ProductionAssets;
 use crate::adventure::{
@@ -131,6 +131,30 @@ pub struct CastCatalog {
     schema_version: u32,
     entries: BTreeMap<String, CastMember>,
     profile_entries: BTreeMap<String, CastMember>,
+    motion_entries: BTreeMap<String, MotionWardrobe>,
+}
+
+#[derive(Clone, Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct MotionWardrobe {
+    walk: Option<MotionClip>,
+    run: MotionClip,
+}
+
+#[derive(Clone, Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct MotionClip {
+    frames: Vec<String>,
+    stride_pixels: f32,
+}
+
+impl MotionClip {
+    fn frame(&self, person: &Pedestrian) -> &str {
+        let phase = (person.stride_distance / self.stride_pixels + person.id as f32 * 0.173)
+            .rem_euclid(1.0);
+        let index = (phase * self.frames.len() as f32) as usize;
+        &self.frames[index.min(self.frames.len() - 1)]
+    }
 }
 
 fn cross(a: Point, b: Point, c: Point) -> f32 {
@@ -264,6 +288,37 @@ impl CastCatalog {
     fn validate(&mut self, pieces: &BTreeMap<String, Attachment>) -> Result<(), String> {
         if self.schema_version != 1 {
             return Err("painted crowd requires schema version 1".into());
+        }
+        if self.motion_entries.len() != WARDROBES.len() {
+            return Err("painted crowd requires locomotion for all eight wardrobes".into());
+        }
+        for id in WARDROBES {
+            let wardrobe = self
+                .motion_entries
+                .get(id)
+                .ok_or_else(|| format!("painted crowd missing motion wardrobe {id}"))?;
+            if matches!(
+                id,
+                "amber_jacket" | "denim" | "white_shirt" | "red_blouse" | "long_coat"
+            ) && wardrobe.walk.is_none()
+            {
+                return Err(format!("painted crowd {id} requires a walking cycle"));
+            }
+            for (name, clip) in [
+                ("walk", wardrobe.walk.as_ref()),
+                ("run", Some(&wardrobe.run)),
+            ] {
+                let Some(clip) = clip else { continue };
+                if clip.frames.len() < 2
+                    || !clip.stride_pixels.is_finite()
+                    || clip.stride_pixels <= 0.0
+                    || clip.frames.iter().any(|frame| !pieces.contains_key(frame))
+                {
+                    return Err(format!(
+                        "painted crowd {id}/{name} has invalid sprite motion"
+                    ));
+                }
+            }
         }
         for (view, members) in [
             ("front", &mut self.entries),
@@ -799,13 +854,64 @@ impl<'a> Deform<'a> {
     }
 }
 
-/// Draws a painted, articulated adult; no geometric human fallback is used.
+/// Draws an unchanged painted frame at the pedestrian's authored ground contact.
+fn draw_motion(
+    d: &mut impl RaylibDraw,
+    assets: &ProductionAssets,
+    person: &Pedestrian,
+    camera_x: f32,
+) {
+    let wardrobe = &assets.crowd.catalog.motion_entries[wardrobe_key(person.wardrobe)];
+    let clip = if person.fleeing {
+        Some(&wardrobe.run)
+    } else {
+        wardrobe.walk.as_ref()
+    };
+    // These three non-walking wardrobes have no invented gallery walk fallback.
+    let Some(clip) = clip else { return };
+    let sprite = &assets.art.pieces[clip.frame(person)];
+    let texture = &assets.textures[&sprite.image];
+    let [x, y, w, h] = sprite.source;
+    let width = sprite.size[0] * person.scale * PERSON_WIDTH_RATIO;
+    let height = sprite.size[1] * person.scale;
+    let flip = person.facing < 0.0;
+    let screen_x = person.x - camera_x + 640.0;
+    d.draw_ellipse(
+        screen_x as i32,
+        person.ground_y as i32,
+        23.0 * person.scale * PERSON_WIDTH_RATIO,
+        4.0 * person.scale,
+        Color::new(5, 9, 17, 96),
+    );
+    d.draw_texture_pro(
+        texture,
+        Rectangle::new(x, y, if flip { -w } else { w }, h),
+        Rectangle::new(screen_x, person.ground_y, width, height),
+        Vector2::new(
+            (if flip {
+                w - sprite.anchor[0]
+            } else {
+                sprite.anchor[0]
+            }) / w
+                * width,
+            sprite.anchor[1] / h * height,
+        ),
+        0.0,
+        Color::WHITE,
+    );
+}
+
+/// Locomotion uses whole frames; phone, seated and conversation gestures keep their poses.
 pub fn draw_person(
     d: &mut impl RaylibDraw,
     assets: &ProductionAssets,
     person: &Pedestrian,
     camera_x: f32,
 ) {
+    if person.fleeing || person.activity == Activity::Walking {
+        draw_motion(d, assets, person, camera_x);
+        return;
+    }
     let member = assets.crowd.catalog.member(person);
     let piece = &assets.art.pieces[&member.piece];
     let texture = &assets.textures[&piece.image];
@@ -906,6 +1012,32 @@ pub fn draw_person(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn complete_sprite_cycle_keeps_its_phase_across_street_wrap_and_facing() {
+        use crate::adventure::augusta::ambient::Nightlife;
+        let person = |ticks| {
+            Nightlife::sample(ticks, None)
+                .people
+                .into_iter()
+                .find(|person| person.id == 0)
+                .unwrap()
+        };
+        let before = person(7853);
+        let mut after = person(7854);
+        assert!(before.x > 3800.0 && after.x < 0.0);
+        assert!((0.0..1.0).contains(&(after.stride_distance - before.stride_distance)));
+        let clip = MotionClip {
+            frames: ["contact", "passing", "opposite_contact", "opposite_passing"]
+                .map(str::to_owned)
+                .to_vec(),
+            stride_pixels: 66.0,
+        };
+        let frame = clip.frame(&after);
+        after.facing *= -1.0;
+        after.stride_distance += clip.stride_pixels;
+        assert_eq!(clip.frame(&after), frame);
+    }
 
     #[test]
     fn actual_painted_catalog_covers_every_adult_and_rejects_bad_registration() {

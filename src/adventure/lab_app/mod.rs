@@ -11,7 +11,7 @@ mod tests;
 use crate::{
     adventure::{
         engine::production::{
-            actors::{draw_actor, draw_projectile},
+            actors::{draw_actor, draw_projectile, frame_stride_ticks},
             assets::{ActorAssets, ActorContent},
         },
         production::{
@@ -578,12 +578,14 @@ fn draw(
                 |a| a.pose,
             );
             let at = [actor.position.x - camera, actor.position.y];
+            let ticks = frame_stride_ticks(assets, actor.clip_id(), actor.stride_distance)
+                .unwrap_or(actor.action_ticks as f32);
             draw_actor(
                 d,
                 assets,
                 pose,
                 actor.clip_id(),
-                actor.action_ticks as f32,
+                ticks,
                 at,
                 actor.facing,
                 1.0,

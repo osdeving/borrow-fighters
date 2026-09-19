@@ -26,19 +26,19 @@ explica o recorte. O rig e o capítulo antigos de Rust não foram migrados.
 
 ```sh
 # Inspecionar C++ diretamente, com timeline e controle de poses.
-cargo run --bin borrow-actor-lab
+./dev lab
 
 # Validar um pacote sem janela ou texturas na GPU.
-cargo run --bin borrow-actor-lab -- --actor assets/adventure/actors/cpp/character.json --validate
+./dev lab -- --actor assets/adventure/actors/cpp/character.json --validate
 
 # Testar os mesmos golpes contra uma errática, fora do mapa/campanha.
-cargo run --bin borrow-actor-lab -- --enemy assets/adventure/actors/erratic/character.json
+./dev lab -- --enemy assets/adventure/actors/erratic/character.json
 
 # Exportar para um diretório novo: poses, vídeo, telemetria e fonte portátil.
-cargo run --bin borrow-actor-lab -- --enemy assets/adventure/actors/security/character.json --review /tmp/cpp-review
+./dev lab -- --enemy assets/adventure/actors/security/character.json --review /tmp/cpp-review
 
 # Entrar diretamente no capítulo integrado.
-cargo run -- --start augusta
+./dev story --start augusta
 ```
 
 Para compilar somente a aventura, acrescentar `--no-default-features --features
@@ -103,9 +103,21 @@ O giro percorre vistas pintadas de perfil, três quartos e costas, com ângulo
 contínuo no arquivo. O campo `yaw_interpolation` usa `shortest` por padrão:
 330°→0° cruza zero pelo arco de 30°. O clip de giro declara `unwrapped` para
 preservar o percurso completo de 330°→720°. É uma rotação encenada de um
-personagem 2D; não há câmera 3D livre ou síntese automática de qualquer vista. Animação por quadros também
-é aceita no mesmo contrato, usada nos NPCs e na EP neste piloto. Esses clips
-por quadros usam relógio e não o modo de stride da malha.
+personagem 2D; não há câmera 3D livre ou síntese automática de qualquer vista.
+Animação por quadros também é aceita no mesmo contrato, usada nos NPCs e na EP.
+Julia, o cafetão e os seguranças usam seis desenhos completos para corrida,
+sem deformar braços, pernas ou roupa no renderer. `stride_pixels` avança o
+ciclo pela distância percorrida, inclusive com `method: frames`; no laboratório,
+a prévia estacionária percorre a duração do clip. Partida e demais ações
+continuam respeitando suas durações e condições de repetição.
+
+As novas fontes, prompts e receitas dos NPCs ficam em
+[`assets-src/adventure/augusta/`](../assets-src/adventure/augusta); as receitas
+dos figurantes ficam em [`tools/art/recipes/`](../tools/art/recipes).
+O [builder único](../tools/art/README.md) recorta pixels sem deformação ou
+redesenho, gera candidatos em `assets-generated/` e mantém o runtime em `assets/`.
+Esta troca de locomoção preserva a câmera e a pintura pareada do contato
+Julia/cafetão; o rig da C++ permanece próprio.
 
 Já há combo leve de três golpes, chute, giro, guarda, parry e projétil Linker.
 Startup, janelas de contato, hitstop, knockback, buffer e recuperação pertencem

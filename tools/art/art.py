@@ -16,6 +16,7 @@ import math
 import os
 from pathlib import Path
 import re
+import shutil
 from typing import Any
 
 from PIL import Image, ImageDraw
@@ -298,6 +299,62 @@ def legacy_main() -> None:
         parser.exit(1, f"error: {error}\n")
 
 
+def build_adventure(path: Path, recipe: dict, output_dir: Path, validate_only: bool) -> Path:
+    """Emit the adventure's existing Attachment data and copy original PNG bytes."""
+    require("production" not in recipe, "adventure recipes use inline actions")
+    display_height, source_height = recipe.get("display_height"), recipe.get("source_height")
+    for name, value in (("display_height", display_height), ("source_height", source_height)):
+        require(type(value) in (int, float) and math.isfinite(value) and value > 0,
+                f"{name} must be finite and positive")
+    scale = display_height / source_height
+    # One validation path checks authored rectangles, alpha, pivots and durations.
+    production = {**recipe, "schema": PRODUCTION_SCHEMA, "scale": scale}
+    build(path, output_dir, validate_only=True, production_data=production)
+    character = recipe["character"]
+    attachments, clips, durations, sources = {}, {}, {}, {}
+    for action_name, action in recipe["actions"].items():
+        sheet_path = (path.parent / action["sheet"]).resolve()
+        image_name = f"sprites/{sheet_path.name}"
+        require(image_name not in sources or sources[image_name] == sheet_path,
+                f"different source images share filename {sheet_path.name}; use distinct names")
+        sources[image_name] = sheet_path
+        require("stride_pixels" in action, f"{action_name}.stride_pixels is required")
+        stride = action["stride_pixels"]
+        require(type(stride) in (int, float) and math.isfinite(stride) and stride > 0,
+                f"{action_name}.stride_pixels must be finite and positive")
+        ids = []
+        with Image.open(sheet_path) as sheet:
+            for frame in action_frames(action_name, action, sheet):
+                name = f"{character}-{frame['name']}"
+                ids.append(name)
+                rect, pivot = frame["source_rect"], frame["pivot"]
+                attachments[name] = {
+                    "image": image_name,
+                    "source": [rect[k] for k in ("x", "y", "w", "h")],
+                    "anchor": [pivot["x"], pivot["y"]],
+                    "size": [rect["w"] * scale, rect["h"] * scale],
+                }
+                durations[name] = frame["duration_ms"]
+        clips[action_name] = {"frames": ids, "stride_pixels": stride}
+    manifest = output_dir / "attachments.json"
+    destinations = {manifest, *(output_dir / image for image in sources)}
+    require(not {path, *sources.values()} & {p.resolve() for p in destinations},
+            "adventure export would overwrite an original source file")
+    if validate_only:
+        return manifest
+    (output_dir / "sprites").mkdir(parents=True, exist_ok=True)
+    for image_name, source in sources.items():
+        shutil.copyfile(source, output_dir / image_name)
+    write_json(manifest, {
+        "schema_version": 1, "character_id": character,
+        "attachments": attachments, "clips": clips, "durations_ms": durations,
+        "source_height": source_height, "display_height": display_height,
+        "sources": [{"source": relative(source, output_dir), "image": name,
+                     "sha256": file_hash(source)} for name, source in sources.items()],
+    })
+    return manifest
+
+
 def run_recipe(path: Path, validate_only: bool = False) -> Path:
     path = path.resolve()
     recipe = json.loads(path.read_text())
@@ -312,6 +369,9 @@ def run_recipe(path: Path, validate_only: bool = False) -> Path:
         runtime_path = (path.parent / runtime).resolve()
         require(runtime_path != output_dir and output_dir not in runtime_path.parents,
                 "generated must be separate from accepted runtime assets")
+    if recipe.get("format") == "adventure":
+        return build_adventure(path, recipe, output_dir, validate_only)
+    require(recipe.get("format", "sprite") == "sprite", "format must be sprite or adventure")
     if "production" in recipe:
         require("actions" not in recipe, "choose production path or inline actions")
         production_path = (path.parent / recipe["production"]).resolve()
@@ -329,11 +389,13 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build or validate authored sprites without deforming pixels.")
     parser.add_argument("command", choices=("build", "validate"))
     parser.add_argument("recipe", nargs="?", help="recipe name under tools/art/recipes, or JSON path")
-    parser.add_argument("--all", action="store_true", help="all registered recipes")
+    parser.add_argument("--all", action="store_true", help="all registered and assets-src recipes")
     args = parser.parse_args()
     if bool(args.recipe) == args.all:
         parser.error("supply one recipe or --all")
-    paths = sorted(RECIPES.glob("*.json")) if args.all else [
+    paths = sorted({path.resolve() for path in [
+        *RECIPES.glob("*.json"), *(ROOT / "assets-src").rglob("recipe.json")
+    ]}) if args.all else [
         Path(args.recipe) if Path(args.recipe).is_file() else RECIPES / f"{args.recipe}.json"]
     try:
         require(bool(paths), "no registered recipes")

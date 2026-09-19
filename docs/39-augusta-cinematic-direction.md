@@ -31,8 +31,8 @@ Derrota e retomada das EPs conservam a rua evacuada e o cafetão ausente.
 ## Continuidade e estilo
 
 O palco usa fachadas pintadas sobre volumes rasos, chão texturizado, calçada
-e meio-fio em profundidade. Os atores conservam as pinturas e os rigs usados
-no gameplay. A câmera faz grua, travelling, aproximação e arcos oblíquos na
+e meio-fio em profundidade. C++ conserva seu rig; NPCs e figurantes usam
+quadros completos na locomoção, compartilhados com o gameplay. A câmera faz grua, travelling, aproximação e arcos oblíquos na
 frente da rua. Personagens continuam ilustrados em planos; esta etapa não
 cria modelos humanos 3D completos nem uma câmera livre de 360 graus.
 
@@ -41,18 +41,21 @@ e os retornos agora deixam as duas mãos visíveis. As imagens originais foram
 preservadas. O contato de Julia tem uma pintura conjunta própria, compartilhada
 pelos planos da cinemática e pelo gameplay. Uma malha acompanha a tentativa de
 saída e mantém o punho preso; o shader retira o fundo verde da fonte em runtime.
-As passadas dos NPCs articulam recortes das pinturas existentes, com pernas,
-apoios e contrapasso, sem redesenhar o rosto e a roupa a cada quadro.
+A corrida de Julia, do cafetão e dos seguranças usa seis sprites completos por
+personagem, com alpha real e aparência baseada nas pinturas originais.
+`stride_pixels` seleciona os quadros pela distância percorrida; o renderer não
+recorta ou deforma membros para fabricar a passada. A câmera, os tempos de
+encenação e a pose pareada do contato permanecem os anteriores.
 
 Há 22 adultos decorativos, oito figurinos pintados, grupos conversando,
 pessoas nas mesas, mulheres na vida noturna, telefone, vasos e cinco veículos,
 incluindo táxi e entrega de moto. Rostos, roupas e proporções dos figurantes
-seguem o acabamento ilustrado do elenco principal. Máscaras da própria pintura
-formam malhas contínuas nos braços e pernas; o tecido acompanha as coxas e as
-solas mantêm o apoio. Caminhada e fuga usam pinturas próprias de perfil, com
-peito, quadril e sapatos voltados para o deslocamento. Os oito figurinos têm
-16 registros; conversas, mesas e telefone mantêm as vistas frontais.
-O mesmo relógio os mantém em posição entre cortes.
+seguem o acabamento ilustrado do elenco principal. Caminhada e fuga usam
+listas de sprites inteiros de perfil, selecionados por distância em
+`motion_entries`, com pivots e escala declarados. Cada figurino referencia seus
+quadros de caminhada quando aplicável e de corrida. Conversas, mesas e telefone
+mantêm os registros e gestos anteriores. O relógio da cena conserva as posições
+entre cortes; a nova pintura não altera trajetórias ou o momento da evacuação.
 Ao surgir a ameaça, fogem sem reaparecer durante o encontro. Móveis e veículos
 completam o ambiente com desenhos locais do renderer.
 
@@ -79,11 +82,13 @@ A pausa suspende os sons e a retomada não repete cues abandonados.
 | [production/cinema.rs](../src/adventure/engine/production/cinema.rs) | Palco e projeção 3D |
 | [production/restraint.rs](../src/adventure/engine/production/restraint.rs) | Atuação pareada com contato |
 | [production/nightlife.rs](../src/adventure/engine/production/nightlife.rs) | Figurantes, móveis e veículos |
-| [production/painted_crowd.rs](../src/adventure/engine/production/painted_crowd.rs) | Recortes pintados e articulação dos figurantes |
-| [nightlife-cast.json](../assets/adventure/chapters/cpp-augusta/nightlife-cast.json) | Registros de corpo e membros dos oito figurinos |
+| [production/painted_crowd.rs](../src/adventure/engine/production/painted_crowd.rs) | Quadros completos de locomoção e gestos estacionários dos figurantes |
+| [nightlife-cast.json](../assets/adventure/chapters/cpp-augusta/nightlife-cast.json) | Registros estacionários e listas de quadros/stride dos oito figurinos |
 | [Proveniência dos figurantes](../assets/adventure/chapters/cpp-augusta/source/nightlife-cast.provenance.json) | Prompts, referências e hashes das pinturas imagegen |
 | [Proveniência dos perfis](../assets/adventure/chapters/cpp-augusta/source/nightlife-profile.provenance.json) | Vistas laterais para caminhada e fuga, preservando os oito figurinos |
-| [production/frame_motion.rs](../src/adventure/engine/production/frame_motion.rs) | Passadas dos NPCs com a pintura existente |
+| [production/actors.rs](../src/adventure/engine/production/actors.rs) | Sprites inteiros dos NPCs e rig preservado da C++ |
+| [Fontes Augusta](../assets-src/adventure/augusta) | Sheets transparentes, referências, prompts e receitas dos NPCs |
+| [Receitas de arte](../tools/art/recipes) | Recortes e metadados reproduzíveis dos figurantes, sem deformação |
 | [clips.json](../assets/adventure/actors/cpp/clips.json) | Duas mãos legíveis em repouso e recuperações |
 
 A câmera é autoria Rust localizada; alterar trilhos requer recompilar. Os
@@ -92,11 +97,11 @@ registra a decisão, e o [diário](worklogs/augusta-cinematic-direction.md) mant
 comandos, revisões e instruções de recuperação.
 
 ```sh
-cargo run --release -- --start augusta
+./dev story --start augusta
 # Captura reproduzível, com perfil próprio no diretório da revisão:
-cargo run --release -- --start augusta --hidden --review /tmp/augusta-film --frames 24000
+./dev story --start augusta --hidden --review /tmp/augusta-film --frames 24000
 python3 tools/review/mix_augusta_review_audio.py /tmp/augusta-film
-# 900 frames das cinco atuações, com oito figurinos nos dois sentidos:
+# Revisão focal: 360 quadros / 12 segundos, caminhada e corrida nos dois sentidos:
 python3 tools/review/capture_augusta_crowd.py /tmp/augusta-crowd-frames
 ```
 

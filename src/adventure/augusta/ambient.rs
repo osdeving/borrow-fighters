@@ -60,6 +60,8 @@ pub struct Pedestrian {
     pub hair: usize,
     pub pose: PersonPose,
     pub fleeing: bool,
+    /// Unwrapped travel in local 96px figure units, used by authored sprite cycles.
+    pub stride_distance: f32,
 }
 
 /// Traffic silhouettes differ in shape as well as paint.
@@ -438,6 +440,7 @@ impl Nightlife {
                     seconds.map_or(0.0, |age| (age * 7.0).min(1.0)),
                 ),
                 fleeing,
+                stride_distance: traveled / (scale * PERSON_WIDTH_RATIO),
             });
         }
         // Depth ordering stays stable when a pedestrian walks past a table.

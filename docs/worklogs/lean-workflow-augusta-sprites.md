@@ -5,25 +5,41 @@
 - Pedido: primeiro reduzir workflow conforme anexo; depois corrigir caminhada
   e corrida dos NPCs com sprites completos, preservando a cena 2D.
 
-## Checkpoint — workflow concluído
+## Workflow concluído — `08bcf9f`
 
-- Regras/skills encurtadas, docs só quando necessárias, fast/domínio/full via
-  `./dev`; CI ampla preservada. Viewer retirado; Studio multi-atlas corrigido.
+- Regras/skills encurtadas; docs só quando necessárias; fast/domínio/full via
+  `./dev`. CI ampla preservada. Viewer retirado; Studio multi-atlas corrigido.
 - Builder existente consolidado em `tools/art/art.py`, receitas Python/C++,
-  fontes preservadas; candidatos em assets-generated, publicação explícita.
+  fontes preservadas; candidatos em assets-generated, integração explícita.
 - Contrato Rust gera schema/TS; sem novas dependências do jogo.
-- `./dev check fighting`: fmt, Clippy e testes passaram (log local
-  `/tmp/borrow-workflow-fighting.log`). Testes focais Viewer 93; Studio build,
-  Clippy e 3 testes; builder 7 testes e comparação de 176 recortes passaram.
-- `./dev schema check`, `./dev art validate --all`, fronteiras (Python3.13),
-  validação das 4 skills e links/YAML passaram. Nenhuma matriz repetida.
+- Check fighting passou (368 testes, 2 ignorados); Studio build/Clippy/3 testes;
+  builder 7 testes e comparação de 176 recortes passaram. Schema, fronteiras,
+  skills e links/YAML passaram. Log: `/tmp/borrow-workflow-fighting.log`.
 
-## Próximo — Augusta 2D
+## Augusta implementada — revisão integrada em andamento
 
-Substituir deformação de locomoção em painted_crowd::draw_person (8 figurinos,
-5 caminhadas/8 corridas) e interceptação frame_motion em actors.rs (Julia,
-broker, security). Sprites inteiros compartilham cinema/lateral, sem mexer
-câmera/cenário/trajetórias/carros. C++ tem rig próprio e fica fora desta correção
-específica dos NPCs. Gerar/revisar lote pequeno antes de ampliar o elenco.
+- 82 quadros inteiros da multidão (5 caminhadas e 8 corridas), mais 18 quadros
+  de Julia/cafetão/seguranças. Originais em `assets-src/adventure/augusta/`.
+- `motion_entries` seleciona sprites por distância; `frame_motion.rs` removido.
+  Nenhum `draft-motion-*` permanece. Pivots/escala fixos, sem deformar membros.
+- Câmera, carros, cenário, trajetórias e diálogo preservados. C++ conserva seu
+  rig e as atuações estacionárias/contato mantêm os assets anteriores.
+- `./dev check adventure`: fmt, Clippy e 213 testes passaram; log local
+  `/tmp/borrow-augusta-adventure.log`. Builder: 7 testes; 17 receitas validadas.
+- Galeria nativa concluída: 360 quadros/12 s, oito figurinos nos dois sentidos;
+  inspecionados escala, alpha, apoios e fases. Vídeo local:
+  `assets-generated/reviews/augusta-sprites-review/crowd-motion.mp4`.
+  O primeiro enquadramento da galeria cortava os pés nas bordas; somente sua
+  escala de apresentação foi corrigida, sem mudar os sprites do jogo.
+- NPCs: folhas de poses e pilotos de 120 quadros em
+  `assets-generated/reviews/{julia,broker,security}-run/` revisados.
+- Docs 38/39 atualizados; validação dos dois documentos passou.
 
-Retomada: status/log + este checkpoint; preservar alterações dos agentes.
+## Retomada / fechamento
+
+Captura única da cena em andamento em
+`assets-generated/reviews/augusta-scene-final/`. Conferir telemetria e imagens
+finais antes de marcar o goal completo; não repetir a matriz já aprovada.
+Comando: `./dev story --start augusta --hidden --review assets-generated/reviews/augusta-scene-final --frames 24000`.
+Para jogar: `./dev story --start augusta`.
+Preservar alterações; consultar status/log e este checkpoint após interrupção.

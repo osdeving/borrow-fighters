@@ -1,0 +1,101 @@
+{
+  "schema": "borrow-fighters.art-recipe.v1",
+  "character": "broker",
+  "scale": 0.4041666666666667,
+  "generated": "../../../../assets-generated/adventure/augusta/broker",
+  "runtime": "../../../../assets/adventure/actors/broker/rig.json",
+  "output_stem": "broker-run",
+  "actions": {
+    "run": {
+      "sheet": "run-sheet.png",
+      "reviewed": true,
+      "loop": true,
+      "frames": [
+        {
+          "name": "run_00",
+          "source_rect": {
+            "x": 0,
+            "y": 0,
+            "w": 512,
+            "h": 512
+          },
+          "pivot": {
+            "x": 255,
+            "y": 500
+          },
+          "duration_ms": 133
+        },
+        {
+          "name": "run_01",
+          "source_rect": {
+            "x": 512,
+            "y": 0,
+            "w": 512,
+            "h": 512
+          },
+          "pivot": {
+            "x": 248,
+            "y": 500
+          },
+          "duration_ms": 133
+        },
+        {
+          "name": "run_02",
+          "source_rect": {
+            "x": 1024,
+            "y": 0,
+            "w": 512,
+            "h": 512
+          },
+          "pivot": {
+            "x": 250,
+            "y": 500
+          },
+          "duration_ms": 133
+        },
+        {
+          "name": "run_03",
+          "source_rect": {
+            "x": 0,
+            "y": 512,
+            "w": 512,
+            "h": 512
+          },
+          "pivot": {
+            "x": 253,
+            "y": 488
+          },
+          "duration_ms": 133
+        },
+        {
+          "name": "run_04",
+          "source_rect": {
+            "x": 512,
+            "y": 512,
+            "w": 512,
+            "h": 512
+          },
+          "pivot": {
+            "x": 250,
+            "y": 488
+          },
+          "duration_ms": 133
+        },
+        {
+          "name": "run_05",
+          "source_rect": {
+            "x": 1024,
+            "y": 512,
+            "w": 512,
+            "h": 512
+          },
+          "pivot": {
+            "x": 257,
+            "y": 488
+          },
+          "duration_ms": 133
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "generator": "image_gen",
+  "source_file": "exec-399d6668-9ffd-413b-89e6-3c5a6bcdd803.png",
+  "reference": "assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-b.png",
+  "sha256": "188a586d3e4117d20093f76299c1fb84b1f4704600606f7c00af4203a6ef3e71",
+  "request_summary": "Six complete successive right-profile walk keyframes, original wardrobe, 3 columns by 2 rows, real transparent background. Fixed anatomy and separate poses, no skeletal deformation.",
+  "review": "Complete bodies, transparent edges, consistent scale and pivots inspected in the native locomotion gallery, both facings. Whole frames selected by distance; no limb warping.",
+  "processing": "Original PNG copied unchanged. Cropping and pivots only in recipe.",
+  "status": "integrated after source and native renderer phase review",
+  "native_review": "assets-generated/reviews/augusta-sprites-review/crowd-motion.mp4"
+}

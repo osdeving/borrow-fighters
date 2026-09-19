@@ -1,0 +1,9 @@
+{
+  "tool": "image_gen",
+  "source": "exec-7c7fe319-0eed-4ceb-836e-34c13e1e8619.png",
+  "reference": "assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-b.png",
+  "status": "integrated after source and native renderer phase review",
+  "request": "Eight full-body right-facing run phases, preserve teal-dress woman appearance, transparent4x2sheet, no deformation.",
+  "native_review": "assets-generated/reviews/augusta-sprites-review/crowd-motion.mp4",
+  "review": "Complete bodies, transparent edges, consistent scale and pivots inspected in the native locomotion gallery, both facings. Whole frames selected by distance; no limb warping."
+}

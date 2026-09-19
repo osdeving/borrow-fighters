@@ -1,0 +1,30 @@
+{
+  "schema": "borrow-fighters.generated-art.v1",
+  "character": "amber-jacket",
+  "action": "walk",
+  "tool": "built-in image_gen",
+  "reference": "assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-a.png",
+  "generation_id": "exec-9e6d2d54-fd5b-4c21-a8cc-ad69d4a1211f",
+  "source": "amber-jacket-walk.png",
+  "sha256": "02c785cd64395cef38f41340dbba9f287fb1109bd63cddf03df36421b1a5114c",
+  "size": [
+    1536,
+    1024
+  ],
+  "layout": {
+    "columns": 3,
+    "rows": 2,
+    "order": "row-major"
+  },
+  "review": "Complete bodies, transparent edges, consistent scale and pivots inspected in the native locomotion gallery, both facings. Whole frames selected by distance; no limb warping.",
+  "phases": [
+    "near_contact",
+    "near_down",
+    "far_passing",
+    "far_contact",
+    "far_down",
+    "near_passing"
+  ],
+  "status": "integrated after source and native renderer phase review",
+  "native_review": "assets-generated/reviews/augusta-sprites-review/crowd-motion.mp4"
+}

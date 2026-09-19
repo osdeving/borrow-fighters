@@ -1,0 +1,30 @@
+{
+  "schema": "borrow-fighters.generated-art.v1",
+  "character": "plum-dress",
+  "action": "run",
+  "tool": "built-in image_gen",
+  "reference": "assets/adventure/chapters/cpp-augusta/sprites/nightlife-profile-a.png",
+  "generation_id": "exec-48535ddd-c43d-4c3c-97c2-f692e4be7e5b",
+  "source": "plum-dress-run.png",
+  "sha256": "6642f5b8ad047f2cec0f392aa9ee30ea841e33b6ccf1edfa18cf1a0cb35c9480",
+  "size": [
+    1536,
+    1024
+  ],
+  "layout": {
+    "columns": 3,
+    "rows": 2,
+    "order": "row-major"
+  },
+  "review": "Complete bodies, transparent edges, consistent scale and pivots inspected in the native locomotion gallery, both facings. Whole frames selected by distance; no limb warping.",
+  "phases": [
+    "near_contact",
+    "near_support",
+    "far_flight",
+    "far_contact",
+    "far_support",
+    "near_flight"
+  ],
+  "status": "integrated after source and native renderer phase review",
+  "native_review": "assets-generated/reviews/augusta-sprites-review/crowd-motion.mp4"
+}
